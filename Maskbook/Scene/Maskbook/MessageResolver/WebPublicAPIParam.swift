@@ -151,6 +151,18 @@ struct DeleteRelationParam: Decodable {
     let profileIdentifier: String
 }
 
+struct QueryAvatarParam: Decodable {
+    let identifier: String
+}
+
+struct StoreAvatarParam: Decodable {
+    struct StoreAvatarParamOptions: Decodable {
+        let identifier: String?
+        let avatar: String?
+    }
+    let options: StoreAvatarParamOptions?
+}
+
 // MARK: - Plugins
 struct NotifyRedpacketParam: Decodable {
     let redpacketPayload: String

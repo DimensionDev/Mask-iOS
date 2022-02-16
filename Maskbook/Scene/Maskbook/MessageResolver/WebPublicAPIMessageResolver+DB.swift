@@ -10,6 +10,7 @@ import CoreData
 import CoreDataStack
 import Foundation
 import SwiftyJSON
+import Kingfisher
 
 extension Persona {
     init?(fromRecord personaRecord: PersonaRecord) {
@@ -149,7 +150,11 @@ extension WebPublicApiMessageResolver {
         else {
             return false
         }
-        let profiles = ProfileRepository.queryProfile(identifier: request.params?.options?.profileIdentifier,
+        var identifiers = [String]()
+        if let identifier = request.params?.options?.profileIdentifier {
+            identifiers.append(identifier)
+        }
+        let profiles = ProfileRepository.queryProfiles(identifiers: identifiers,
                                                       network: nil,
                                                       nameContains: request.params?.options?.nameContains,
                                                       pageOption: request.params?.options?.pageOptions)
@@ -223,7 +228,11 @@ extension WebPublicApiMessageResolver {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryProfileParam>.self, from: messageData) else {
             return false
         }
-        let profileRecords = ProfileRepository.queryProfile(identifier: request.params?.options?.identifier,
+        var identifiers = [String]()
+        if let identifier = request.params?.options?.identifier {
+            identifiers.append(identifier)
+        }
+        let profileRecords = ProfileRepository.queryProfiles(identifiers: identifiers,
                                                             network: request.params?.options?.network,
                                                             nameContains: request.params?.options?.nameContains,
                                                             pageOption: request.params?.options?.pageOptions)
@@ -387,5 +396,63 @@ extension WebPublicApiMessageResolver {
         RelationRepository.updateRelation(newRelation: newRelation)
         sendResponseToWebView(response: true, id: request.id)
         return true
+    }
+    
+    @discardableResult
+    func queryAvatar(messageData: Data) -> Bool {
+        guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryAvatarParam>.self,
+                                                from: messageData)
+        else {
+            return false
+        }
+        guard let identifier = request.params?.identifier else { return false }
+        if let profileRecord = ProfileRepository.queryProfile(identifier: identifier) {
+            if let avatar = profileRecord.avatar {
+                self.getImageFromKingfisher(url: avatar, requestId: request.id)
+                return true
+            }
+        }
+        if let personarecord = PersonaRepository.queryPersona(identifier: identifier) {
+            if let avatar = personarecord.avatar {
+                self.getImageFromKingfisher(url: avatar, requestId: request.id)
+                return true
+            }
+        }
+        return false
+    }
+    
+    @discardableResult
+    func storeAvatar(messageData: Data) -> Bool {
+        guard let request = try? decoder.decode(WebPublicApiMessageRequest<StoreAvatarParam>.self,
+                                                from: messageData)
+        else {
+            return false
+        }
+        guard let identifier = request.params?.options?.identifier else { return false }
+        guard let avatar = request.params?.options?.avatar else { return false }
+        if ProfileRepository.queryProfile(identifier: identifier) != nil {
+            ProfileRepository.updateProfileAvatar(identifier: identifier, avatar: avatar)
+            return true
+        }
+        if PersonaRepository.queryPersona(identifier: identifier) != nil {
+            PersonaRepository.updatePersonaAvatar(identifier: identifier, avatar: avatar)
+            return true
+        }
+        return false
+    }
+    
+    func getImageFromKingfisher(url: String, requestId: String) {
+        KingfisherManager.shared.retrieveImage(with: URL(string: url)!,
+                                               options: nil,
+                                               progressBlock: nil,
+                                               downloadTaskUpdated: nil) { [weak self] result in
+            switch result {
+            case .success(let value):
+                self?.sendResponseToWebView(response: value.image.convertImageToBase64String(), id: requestId)
+                
+            case .failure(let error):
+                log.debug("\(error)")
+            }
+        }
     }
 }

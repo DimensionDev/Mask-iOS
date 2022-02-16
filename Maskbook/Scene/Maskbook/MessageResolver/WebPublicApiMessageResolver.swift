@@ -37,6 +37,9 @@ class WebPublicApiMessageResolver: MaskMessageResolver {
         case query_relations
         case update_relation
         
+        case query_avatar
+        case store_avatar
+        
         case notifyRedpacket
         case claimOrRefundRedpacket
     }
@@ -178,6 +181,12 @@ class WebPublicApiMessageResolver: MaskMessageResolver {
             
         case .update_relation:
             parseSuccess = updateRelation(messageData: messageData)
+            
+        case .query_avatar:
+            parseSuccess = queryAvatar(messageData: messageData)
+            
+        case .store_avatar:
+            parseSuccess = storeAvatar(messageData: messageData)
             
         case .notifyRedpacket:
             parseSuccess = notifyRedpacket(messageData: messageData)
