@@ -160,9 +160,7 @@ extension SocialViewController: UICollectionViewDataSource {
                 withReuseIdentifier: String(describing: SocialAccountCollectionCell.self),
                 for: indexPath) as! SocialAccountCollectionCell
             let profileRecord = personaManager.currentProfiles.value[indexPath.row - 1]
-            if let profile = Profile(fromRecord: profileRecord) {
-                cell.configWith(profile: profile)
-            }
+            cell.configWith(profile: profileRecord)
             cell.setEditMode(isEditing: collectionView.isEditing)
             cell.delegate = self
             return cell
@@ -171,8 +169,8 @@ extension SocialViewController: UICollectionViewDataSource {
 }
 
 extension SocialViewController: SocialAccountCollectionCellDelegate {
-    func deleteAction(profile: Profile) {
-        disConnectAction(profile: profile)
+    func deleteAction(profileIdentifier: String) {
+        disConnectAction(profileIdentifier: profileIdentifier)
     }
 }
 
@@ -197,7 +195,8 @@ extension SocialViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension SocialViewController {
-    func disConnectAction(profile: Profile) {
+    func disConnectAction(profileIdentifier: String) {
+        guard let profile = ProfileRepository.queryProfile(identifier: profileIdentifier) else { return }
         let alertController = AlertController(
             title: "",
             message: L10n.Common.Alert.DisconnectProfile.description,
@@ -209,7 +208,7 @@ extension SocialViewController {
                 // toggle edit mode
                 self.collectionView.isEditing = false
                 self.editButton.isSelected = false
-                ProfileRepository.detachProfile(identifier: profile.identifier)
+                ProfileRepository.detachProfile(identifier: profile.nonOptionalIdentifier)
             },
             cancelButtonClicked: nil)
         let keywords: String = {

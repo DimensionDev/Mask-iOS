@@ -587,6 +587,7 @@
 		5D72F3C7265E3FE50073F6B9 /* KeyboardResponderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D72F3C6265E3FE50073F6B9 /* KeyboardResponderService.swift */; };
 		5D7F5A5127B6531E00A007C5 /* PersonaCreateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7F5A5027B6531E00A007C5 /* PersonaCreateHandler.swift */; };
 		5D7F5A5327B66C5600A007C5 /* PersonaKeyInfoPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7F5A5227B66C5600A007C5 /* PersonaKeyInfoPreview.swift */; };
+		5D7FE83827BD32D80066CF23 /* ProfileRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7FE83727BD32D80066CF23 /* ProfileRecord.swift */; };
 		5D84DC4D27B12B810009025E /* WebViewScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D84DC4C27B12B810009025E /* WebViewScrollViewDelegate.swift */; };
 		5D93DF9E267B2B5000A175BF /* MaskTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D93DF9D267B2B5000A175BF /* MaskTextField.swift */; };
 		5D93DFA2267B3F2E00A175BF /* Persona.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D93DFA1267B3F2E00A175BF /* Persona.swift */; };
@@ -1272,6 +1273,7 @@
 		5D72F3C6265E3FE50073F6B9 /* KeyboardResponderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponderService.swift; sourceTree = "<group>"; };
 		5D7F5A5027B6531E00A007C5 /* PersonaCreateHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaCreateHandler.swift; sourceTree = "<group>"; };
 		5D7F5A5227B66C5600A007C5 /* PersonaKeyInfoPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaKeyInfoPreview.swift; sourceTree = "<group>"; };
+		5D7FE83727BD32D80066CF23 /* ProfileRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRecord.swift; sourceTree = "<group>"; };
 		5D84DC4C27B12B810009025E /* WebViewScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewScrollViewDelegate.swift; sourceTree = "<group>"; };
 		5D93DF9D267B2B5000A175BF /* MaskTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskTextField.swift; sourceTree = "<group>"; };
 		5D93DFA1267B3F2E00A175BF /* Persona.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persona.swift; sourceTree = "<group>"; };
@@ -3206,6 +3208,8 @@
 				2DC5D89E272574FA00E351D3 /* LocalStorage+extension.swift */,
 				2DC5D89F272574FA00E351D3 /* BlobStorage+extension.swift */,
 				5D114FE427B256790092BEDC /* PersonaRecord+Extension.swift */,
+				5D114FE427B256790092BEDC /* PersonaRecord+Identifier.swift */,
+				5D7FE83727BD32D80066CF23 /* ProfileRecord.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -4202,6 +4206,7 @@
 				2A6ABB912720053B00CC3AED /* ValidationCodeParameters.swift in Sources */,
 				2A6ABB822720053B00CC3AED /* SetPasswordViewController.swift in Sources */,
 				2A6ABBB62720053B00CC3AED /* RemoteBackupActionsView.swift in Sources */,
+				5D7FE83827BD32D80066CF23 /* ProfileRecord.swift in Sources */,
 				4156689327A53BA70051E0E7 /* ShareLinkGenerator.swift in Sources */,
 				1F721096279E90DC00B8BF76 /* RedPacket.swift in Sources */,
 				2AF88533271EE9310004565A /* DerivationPathHeaderView.swift in Sources */,

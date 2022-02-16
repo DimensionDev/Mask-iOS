@@ -15,6 +15,11 @@ class AvatarView: UIView {
         return view
     }()
     
+    lazy var imageView: UIImageView = {
+        let imageView = UIImageView()
+        return imageView
+    }()
+    
     var title: String? {
         set {
             if let first = newValue?.uppercased().first {
@@ -30,18 +35,33 @@ class AvatarView: UIView {
         }
     }
     
+    func setNetworkURL(url:String?) {
+        if let url = url {
+            imageView.setNetworkImage(url: url)
+        }
+    }
+    
     init(title: String?) {
         super.init(frame: .zero)
-        
-        self.backgroundColor = Asset.Colors.Public.blue.color
-        self.addSubview(label)
-        
         self.title = title
         
+    }
+    
+    func setupSubviews() {
+        self.backgroundColor = Asset.Colors.Public.blue.color
+        self.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             label.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             label.centerXAnchor.constraint(equalTo: self.centerXAnchor)
+        ])
+        
+        addSubview(imageView)
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: topAnchor),
+            imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            imageView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
     
