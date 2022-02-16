@@ -156,11 +156,8 @@ struct QueryAvatarParam: Decodable {
 }
 
 struct StoreAvatarParam: Decodable {
-    struct StoreAvatarParamOptions: Decodable {
-        let identifier: String?
-        let avatar: String?
-    }
-    let options: StoreAvatarParamOptions?
+    let identifier: String?
+    let avatar: String?
 }
 
 // MARK: - Plugins

@@ -389,7 +389,7 @@ extension WebPublicApiMessageResolver {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<UpdateRelationParam>.self,
                                                 from: messageData) else {
             return false
-        }
+         }
         guard let newRelation = request.params?.relation else {
             return false
         }
@@ -428,8 +428,8 @@ extension WebPublicApiMessageResolver {
         else {
             return false
         }
-        guard let identifier = request.params?.options?.identifier else { return false }
-        guard let avatar = request.params?.options?.avatar else { return false }
+        guard let identifier = request.params?.identifier else { return false }
+        guard let avatar = request.params?.avatar else { return false }
         if ProfileRepository.queryProfile(identifier: identifier) != nil {
             ProfileRepository.updateProfileAvatar(identifier: identifier, avatar: avatar)
             return true

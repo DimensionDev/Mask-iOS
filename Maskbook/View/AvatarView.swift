@@ -31,32 +31,37 @@ class AvatarView: UIView {
         }
         
         get {
-            return label.text
+            label.text
         }
     }
     
-    func setNetworkURL(url:String?) {
+    func setNetworkURL(url: String?) {
         if let url = url {
             imageView.setNetworkImage(url: url)
         }
     }
     
+    init() {
+        super.init(frame: .zero)
+        setupSubviews()
+    }
+    
     init(title: String?) {
         super.init(frame: .zero)
+        setupSubviews()
         self.title = title
-        
     }
     
     func setupSubviews() {
-        self.backgroundColor = Asset.Colors.Public.blue.color
-        self.addSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = Asset.Colors.Public.blue.color
+        withSubViews {
+            label
+            imageView
+        }
         NSLayoutConstraint.activate([
-            label.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            label.centerXAnchor.constraint(equalTo: self.centerXAnchor)
+            label.centerYAnchor.constraint(equalTo: centerYAnchor),
+            label.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
-        
-        addSubview(imageView)
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: topAnchor),
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -65,13 +70,14 @@ class AvatarView: UIView {
         ])
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.label.font = .systemFont(ofSize: floor(self.frame.height * 0.5), weight: .semibold)
+        label.font = .systemFont(ofSize: floor(frame.height * 0.5), weight: .semibold)
     }
 }
 
