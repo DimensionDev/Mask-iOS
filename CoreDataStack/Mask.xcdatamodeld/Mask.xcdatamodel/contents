@@ -136,6 +136,23 @@
         <attribute name="totalValue" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="account" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="portfolios" inverseEntity="Account"/>
     </entity>
+    <entity name="PostRecord" representedClassName=".PostRecord" syncable="YES">
+        <attribute name="encryptBy" optional="YES" attributeType="String"/>
+        <attribute name="foundAt" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="identifier" attributeType="String"/>
+        <attribute name="interestedMetaRaw" optional="YES" attributeType="Binary" valueTransformerName="ArrayTransformer" customClassName=".NSArray"/>
+        <attribute name="postCryptoKeyRaw" optional="YES" attributeType="Binary" valueTransformerName="JsonWebKeyTransformer" customClassName=".JsonWebKey"/>
+        <attribute name="postNetwork" attributeType="String"/>
+        <attribute name="postUserId" attributeType="String"/>
+        <attribute name="recipientsRaw" attributeType="Binary" valueTransformerName="DictionaryTransformer" customClassName=".NSDictionary"/>
+        <attribute name="summary" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="identifier"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
     <entity name="ProfileRecord" representedClassName=".ProfileRecord" syncable="YES">
         <attribute name="avatar" optional="YES" attributeType="String"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -221,5 +238,6 @@
         <element name="StoredKey" positionX="90" positionY="144" width="128" height="179"/>
         <element name="Token" positionX="-63" positionY="-18" width="128" height="254"/>
         <element name="WalletConnectSession" positionX="90" positionY="144" width="128" height="89"/>
+        <element name="PostRecord" positionX="90" positionY="144" width="128" height="179"/>
     </elements>
 </model>

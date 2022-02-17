@@ -580,6 +580,10 @@
 		41E5004E27A11AFF00A73117 /* WebPublicApiMessageResolver+Plugins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E5004D27A11AFF00A73117 /* WebPublicApiMessageResolver+Plugins.swift */; };
 		5D069E0B27A16E2800054B4A /* TertiaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D069E0A27A16E2800054B4A /* TertiaryButton.swift */; };
 		5D114FE527B256790092BEDC /* PersonaRecord+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D114FE427B256790092BEDC /* PersonaRecord+Extension.swift */; };
+		5D114FE527B256790092BEDC /* PersonaRecord+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D114FE427B256790092BEDC /* PersonaRecord+Identifier.swift */; };
+		5D3E364727BE2D0200FDCFDD /* PostRecord+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3E364527BE2D0200FDCFDD /* PostRecord+CoreDataClass.swift */; };
+		5D3E364827BE2D0200FDCFDD /* PostRecord+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3E364627BE2D0200FDCFDD /* PostRecord+CoreDataProperties.swift */; };
+		5D3E364A27BE310C00FDCFDD /* PostRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3E364927BE310C00FDCFDD /* PostRecord.swift */; };
 		5D3F361A27A1524B007FDD8C /* RedPackageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3F361927A1524B007FDD8C /* RedPackageView.swift */; };
 		5D4AD18926560B02002D5380 /* HitTestExpandedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4AD18826560B02002D5380 /* HitTestExpandedButton.swift */; };
 		5D554EC6279FE58100D40848 /* OpenRedPackageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D554EC5279FE58100D40848 /* OpenRedPackageViewController.swift */; };
@@ -1266,6 +1270,10 @@
 		544E28E62A824CEE315F61DF /* Pods-Maskbook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maskbook.release.xcconfig"; path = "Target Support Files/Pods-Maskbook/Pods-Maskbook.release.xcconfig"; sourceTree = "<group>"; };
 		5D069E0A27A16E2800054B4A /* TertiaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TertiaryButton.swift; sourceTree = "<group>"; };
 		5D114FE427B256790092BEDC /* PersonaRecord+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonaRecord+Extension.swift"; sourceTree = "<group>"; };
+		5D114FE427B256790092BEDC /* PersonaRecord+Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonaRecord+Identifier.swift"; sourceTree = "<group>"; };
+		5D3E364527BE2D0200FDCFDD /* PostRecord+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostRecord+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5D3E364627BE2D0200FDCFDD /* PostRecord+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostRecord+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5D3E364927BE310C00FDCFDD /* PostRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRecord.swift; sourceTree = "<group>"; };
 		5D3F361927A1524B007FDD8C /* RedPackageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPackageView.swift; sourceTree = "<group>"; };
 		5D4AD18826560B02002D5380 /* HitTestExpandedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HitTestExpandedButton.swift; sourceTree = "<group>"; };
 		5D554EC5279FE58100D40848 /* OpenRedPackageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenRedPackageViewController.swift; sourceTree = "<group>"; };
@@ -1503,6 +1511,8 @@
 		0FBC5AB1266759BC00328693 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				5D3E364527BE2D0200FDCFDD /* PostRecord+CoreDataClass.swift */,
+				5D3E364627BE2D0200FDCFDD /* PostRecord+CoreDataProperties.swift */,
 				41E50037279946E400A73117 /* PersonaRecord+CoreDataClass.swift */,
 				41E50038279946E400A73117 /* PersonaRecord+CoreDataProperties.swift */,
 				41E50039279946E400A73117 /* ProfileRecord+CoreDataClass.swift */,
@@ -3210,6 +3220,7 @@
 				5D114FE427B256790092BEDC /* PersonaRecord+Extension.swift */,
 				5D114FE427B256790092BEDC /* PersonaRecord+Identifier.swift */,
 				5D7FE83727BD32D80066CF23 /* ProfileRecord.swift */,
+				5D3E364927BE310C00FDCFDD /* PostRecord.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -3808,6 +3819,7 @@
 				0FBC5AE42667614500328693 /* Managed.swift in Sources */,
 				0FBC5ADD26675B6F00328693 /* CoreDataStack.swift in Sources */,
 				1FE54D49269947640041C742 /* NSManagedContext+extension.swift in Sources */,
+				5D3E364727BE2D0200FDCFDD /* PostRecord+CoreDataClass.swift in Sources */,
 				2DC651F7271E6CAB00BABA9C /* BlobStorage+CoreDataProperties.swift in Sources */,
 				41E500342799315B00A73117 /* RelationRecord+Managed.swift in Sources */,
 				41E5000B2791CA9B00A73117 /* ProfileRecord+Managed.swift in Sources */,
@@ -3820,6 +3832,7 @@
 				2DEDDEA82761ED7000D37A76 /* WalletConnectSession+CoreDataClass.swift in Sources */,
 				0F07028926AFE77C00C04F77 /* DeletedDerivationPath+CoreDataProperties.swift in Sources */,
 				0F93936F26A7AE9400F7F608 /* StoredKey+CoreDataClass.swift in Sources */,
+				5D3E364827BE2D0200FDCFDD /* PostRecord+CoreDataProperties.swift in Sources */,
 				0F93937426A7AE9400F7F608 /* Account+CoreDataProperties.swift in Sources */,
 				0FBC5AE12667611300328693 /* NSManagedObjectContext.swift in Sources */,
 				41E50042279946E400A73117 /* RelationRecord+CoreDataProperties.swift in Sources */,
@@ -4035,6 +4048,7 @@
 				2AF8851F271EE9310004565A /* TokenCardView.swift in Sources */,
 				2A6ABBB82720053B00CC3AED /* RemoteBackupActionsViewController.swift in Sources */,
 				2DA3FAB4273CDFBA0013A784 /* ChainInfo.swift in Sources */,
+				5D3E364A27BE310C00FDCFDD /* PostRecord.swift in Sources */,
 				2D6677FA27688FBE00528F4D /* WCRequestsHandler.swift in Sources */,
 				0F2051B3265E3B2F00602A0C /* DerivationPath.swift in Sources */,
 				2A6ABB932720053B00CC3AED /* RestorePreviewResult.swift in Sources */,
