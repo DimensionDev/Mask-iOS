@@ -59,6 +59,7 @@ lane :load_asc_api_key do
   key_id: ENV["ASC_KEY_ID"],
   issuer_id: ENV["ASC_ISSUER_ID"],
   key_content: ENV["ASC_KEY"],
+  is_key_content_base64: true,
   in_house: false # detecting this via ASC private key not currently supported
   )
 end
