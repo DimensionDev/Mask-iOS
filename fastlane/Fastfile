@@ -89,7 +89,7 @@ lane :prepare_signing do |options|
   app_id = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
   api_key = lane_context[SharedValues::APP_STORE_CONNECT_API_KEY]
   
-  profile_name = "Mask Network" # replace with the name of your existing profile, or define a name for the profile that fastlane will create if it’s not found
+  profile_name = "Mask Network iOS" # replace with the name of your existing profile, or define a name for the profile that fastlane will create if it’s not found
   
   cert(
   api_key: api_key,
@@ -109,7 +109,7 @@ desc "Build the iOS app for release"
 lane :build_release do |options|
   app_identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
   
-  profile_name = "Mask Network" # the name of the profile to use for the build
+  profile_name = "Mask Network iOS" # the name of the profile to use for the build
   output_name = "mask-iOS.ipa" # specify the name of the .ipa file to generate
   export_method = "app-store" # specify the export method
   compile_bitcode = true # specify whether to enable bitcode
