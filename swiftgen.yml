@@ -1,0 +1,10 @@
+xcassets:
+  inputs: Maskbook/Resources/Assets.xcassets
+  outputs:
+    templateName: swift5
+    output: Maskbook/Generated/Assets.swift
+strings:
+  inputs: Maskbook/Resources/en.lproj/Localizable.strings
+  outputs:
+      templatePath: Localization/bundle-change-swift5.stencil
+      output: Maskbook/Generated/Strings.swift

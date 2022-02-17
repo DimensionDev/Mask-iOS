@@ -1,0 +1,5 @@
+files:
+  - source: /Localization/app.json
+    translation: /Localization/%file_name%-%locale_with_underscore%.json
+  - source: /Localization/ios-infoPlist.json
+    translation: /Localization/%file_name%-%locale_with_underscore%.json
