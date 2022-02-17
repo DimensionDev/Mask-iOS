@@ -30,6 +30,9 @@ jobs:
         uses: maxim-lobanov/setup-cocoapods@v1
         with:
           version: latest
+
+      - name: Install Dependencies
+        run: pod install --repo-update
     
       - name: Build & upload iOS binary
         run: bundle exec fastlane build_upload_testflight
