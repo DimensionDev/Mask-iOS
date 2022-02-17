@@ -110,7 +110,7 @@ lane :build_release do |options|
   app_identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
   
   profile_name = "Mask Network" # the name of the profile to use for the build
-  output_name = "mask-iOS" # specify the name of the .ipa file to generate
+  output_name = "mask-iOS.ipa" # specify the name of the .ipa file to generate
   export_method = "app-store" # specify the export method
   compile_bitcode = true # specify whether to enable bitcode
   
@@ -132,7 +132,7 @@ lane :build_release do |options|
   export_options: {
   method: export_method,
   provisioningProfiles: {
-  app_identifier => app_profile_name
+  app_identifier => SIGH_NAME
 },
 compileBitcode: compile_bitcode
 }
