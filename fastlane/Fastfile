@@ -125,6 +125,7 @@ lane :build_release do |options|
   )
   
   # build the app
+  cocoapods()
   gym(
   scheme: "Maskbook", # replace with name of your project’s scheme
   output_name: output_name,
