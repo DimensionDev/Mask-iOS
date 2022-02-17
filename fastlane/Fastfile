@@ -132,7 +132,7 @@ lane :build_release do |options|
   export_options: {
   method: export_method,
   provisioningProfiles: {
-  app_identifier => SIGH_NAME
+  app_identifier => profile_name
 },
 compileBitcode: compile_bitcode
 }
