@@ -17,7 +17,7 @@ target 'Maskbook' do
   
   # private pod
 #  pod 'WebExtension-Shim', '~> 0.5.6'
-  pod 'WebExtension-Shim', :git => 'git@github.com:DimensionDev/WebExtension-Shim-iOS.git', :branch => 'dev/2.0'
+  pod 'WebExtension-Shim', :git => 'https://github.com/DimensionDev/WebExtension-Shim-iOS.git', :branch => 'dev/2.0'
 
   pod 'SwiftGen', '~> 6.4.0'
   pod 'KMPageControl', '~> 0.0.2'
