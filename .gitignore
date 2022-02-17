@@ -103,6 +103,8 @@ iOSInjectionProject/
 
 # End of https://www.gitignore.io/api/xcode,cocoapods,swift
 
+vendor/
+
 .DS_Store
 Maskbook/Generated/Assets.swift
 
