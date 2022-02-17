@@ -1,0 +1,16 @@
+PODS:
+  - MaskLog (0.1.0)
+
+DEPENDENCIES:
+  - MaskLog (from `../`)
+
+EXTERNAL SOURCES:
+  MaskLog:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  MaskLog: 9497fdf85dc1128e2660e4a7fee3066bf0419b38
+
+PODFILE CHECKSUM: fed065f89a582a60d3d938a327dba9312c8290f0
+
+COCOAPODS: 1.11.2

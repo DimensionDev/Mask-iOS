@@ -1,0 +1,6 @@
+{
+    "NSCameraUsageDescription": "Mask Network 는 QR 코드 스캔하기 위해 카메라 이용하고자 합니다",
+    "NSPhotoLibraryAddUsageDescription": "Mask Network 는 암호화된 이미지 페이로드를 저장하기 위해 앨범에 접근하고자 합니다.",
+    "NSPhotoLibraryUsageDescription": "Mask Network 는 암호화된 이미지 페이로드를 저장하기 위해 앨범에 접근하고자 합니다.",
+    "NSFaceIDUsageDescription": "월렛을 보호하기 위해 Mask Network가 FaceID 필요합니다"
+}

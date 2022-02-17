@@ -1,0 +1,4 @@
+"NSCameraUsageDescription" = "Mask Network 需要相机扫描二维码";
+"NSFaceIDUsageDescription" = "Mask Network 需要面容 ID 来保护您的钱包";
+"NSPhotoLibraryAddUsageDescription" = "Mask Network 需要相机权限保存加密相片";
+"NSPhotoLibraryUsageDescription" = "Mask Network 需要相机权限保存加密相片";

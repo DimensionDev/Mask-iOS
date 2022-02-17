@@ -1,0 +1,4 @@
+"NSCameraUsageDescription" = "Mask Network needs use camera to scan QR code";
+"NSFaceIDUsageDescription" = "Mask Network needs Face ID to protect your wallet";
+"NSPhotoLibraryAddUsageDescription" = "Mask Network needs to access the photo library to save the encrypted image payload";
+"NSPhotoLibraryUsageDescription" = "Mask Network needs to access the photo library to save the encrypted image payload";

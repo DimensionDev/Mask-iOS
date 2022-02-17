@@ -1,0 +1,6 @@
+use_frameworks!
+target 'MaskWalletCore_Tests' do
+  pod 'MaskWalletCore', :path => '../'
+  
+  
+end

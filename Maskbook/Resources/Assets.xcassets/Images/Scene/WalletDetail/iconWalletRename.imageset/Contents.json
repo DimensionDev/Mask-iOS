@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "icon_wallet_rename.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

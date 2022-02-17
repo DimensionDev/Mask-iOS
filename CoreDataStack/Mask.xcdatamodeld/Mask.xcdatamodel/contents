@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Account" representedClassName=".Account" syncable="YES">
+        <attribute name="address" attributeType="String"/>
+        <attribute name="chainId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="derivationPath" attributeType="String"/>
+        <attribute name="ensName" optional="YES" attributeType="String"/>
+        <attribute name="extendedPublicKey" attributeType="String"/>
+        <attribute name="lastModifiedDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="sessionData" optional="YES" attributeType="Binary"/>
+        <relationship name="collectibles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Collectible" inverseName="account" inverseEntity="Collectible"/>
+        <relationship name="ownedByStoredKey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StoredKey" inverseName="accounts" inverseEntity="StoredKey"/>
+        <relationship name="portfolios" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Portfolio" inverseName="account" inverseEntity="Portfolio"/>
+        <relationship name="tokens" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Token" inverseName="account" inverseEntity="Token"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="address"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="BlobStorage" representedClassName=".BlobStorage" syncable="YES">
+        <attribute name="blob" attributeType="Binary"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="lastModifiedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="type" attributeType="String"/>
+        <attribute name="url" attributeType="String"/>
+        <attribute name="uuid" attributeType="String"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="uuid"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Collectible" representedClassName=".Collectible" syncable="YES">
+        <attribute name="address" optional="YES" attributeType="String"/>
+        <attribute name="animationUrl" optional="YES" attributeType="URI"/>
+        <attribute name="chainId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="collectionImage" optional="YES" attributeType="String"/>
+        <attribute name="collectionName" optional="YES" attributeType="String"/>
+        <attribute name="collectionSlug" optional="YES" attributeType="String"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="creator" optional="YES" attributeType="String"/>
+        <attribute name="creatorAddress" optional="YES" attributeType="String"/>
+        <attribute name="creatorProfileUrl" optional="YES" attributeType="URI"/>
+        <attribute name="enabled" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="externalLink" optional="YES" attributeType="URI"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="identifier" optional="YES" attributeType="String"/>
+        <attribute name="imageUrl" optional="YES" attributeType="URI"/>
+        <attribute name="lastModifiedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="logoUrl" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="networkId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="nftAssetsModelDescription" optional="YES" attributeType="String"/>
+        <attribute name="permalink" optional="YES" attributeType="URI"/>
+        <attribute name="previewUrl" optional="YES" attributeType="URI"/>
+        <attribute name="thumbnailUrl" optional="YES" attributeType="URI"/>
+        <attribute name="tokenId" optional="YES" attributeType="String"/>
+        <attribute name="tokenName" optional="YES" attributeType="String"/>
+        <attribute name="tokenSymbol" optional="YES" attributeType="String"/>
+        <relationship name="account" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="collectibles" inverseEntity="Account"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="identifier"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Contact" representedClassName=".Contact" syncable="YES">
+        <attribute name="address" optional="YES" attributeType="String"/>
+        <attribute name="chainId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="ensName" optional="YES" attributeType="String"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="lastModifedDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="networkId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="address"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="DeletedDerivationPath" representedClassName=".DeletedDerivationPath" syncable="YES">
+        <attribute name="path" optional="YES" attributeType="String"/>
+        <relationship name="storedKey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StoredKey" inverseName="deletedDerivationPaths" inverseEntity="StoredKey"/>
+    </entity>
+    <entity name="LocalStorage" representedClassName=".LocalStorage" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="extensionID" attributeType="String"/>
+        <attribute name="key" optional="YES" attributeType="String"/>
+        <attribute name="lastModifiedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="value" attributeType="Binary"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="key"/>
+                <constraint value="extensionID"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="PersonaRecord" representedClassName=".PersonaRecord" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="hasLogout" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="identifier" attributeType="String"/>
+        <attribute name="initialized" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="localKey" optional="YES" attributeType="String"/>
+        <attribute name="mnemonic" optional="YES" attributeType="String"/>
+        <attribute name="nickname" optional="YES" attributeType="String"/>
+        <attribute name="path" optional="YES" attributeType="String"/>
+        <attribute name="privateKey" optional="YES" attributeType="String"/>
+        <attribute name="publicKey" optional="YES" attributeType="String"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="withPassword" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <relationship name="linkedProfiles" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="ProfileRecord" inverseName="linkedPersona" inverseEntity="ProfileRecord"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="identifier"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Portfolio" representedClassName=".Portfolio" syncable="YES">
+        <attribute name="absoluteChange24h" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="assetsValue" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="borrowedValue" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="chainId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="currency" optional="YES" attributeType="String"/>
+        <attribute name="depositedValue" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="lastModifiedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="lockedValue" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="networkId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="relativeChange24h" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="stakedValue" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="totalValue" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="account" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="portfolios" inverseEntity="Account"/>
+    </entity>
+    <entity name="ProfileRecord" representedClassName=".ProfileRecord" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="identifier" attributeType="String"/>
+        <attribute name="network" attributeType="String"/>
+        <attribute name="nickname" optional="YES" attributeType="String"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="linkedPersona" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="PersonaRecord" inverseName="linkedProfiles" inverseEntity="PersonaRecord"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="identifier"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="RelationRecord" representedClassName=".RelationRecord" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="favor" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="personaIdentifier" attributeType="String"/>
+        <attribute name="profileIdentifier" attributeType="String"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="StoredKey" representedClassName=".StoredKey" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="data" attributeType="Binary"/>
+        <attribute name="hashString" attributeType="String"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="isDefault" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="isImported" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="lastModifiedDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="type" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="accounts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Account" inverseName="ownedByStoredKey" inverseEntity="Account"/>
+        <relationship name="deletedDerivationPaths" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DeletedDerivationPath" inverseName="storedKey" inverseEntity="DeletedDerivationPath"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="hashString"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Token" representedClassName=".Token" syncable="YES">
+        <attribute name="chainId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="contractAddress" optional="YES" attributeType="String"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="currency" optional="YES" attributeType="String"/>
+        <attribute name="decimal" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String"/>
+        <attribute name="lastModifiedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="logoUrl" optional="YES" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="networkId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="price" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="quantity" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="symbol" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="account" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="tokens" inverseEntity="Account"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="identifier"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="WalletConnectSession" representedClassName=".WalletConnectSession" syncable="YES">
+        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="lastModifiedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="sessionRaw" optional="YES" attributeType="Binary"/>
+        <attribute name="topic" attributeType="String"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="topic"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <elements>
+        <element name="Account" positionX="99" positionY="153" width="128" height="224"/>
+        <element name="BlobStorage" positionX="99" positionY="153" width="128" height="119"/>
+        <element name="Collectible" positionX="99" positionY="153" width="128" height="434"/>
+        <element name="Contact" positionX="250.05859375" positionY="93.7265625" width="128" height="149"/>
+        <element name="DeletedDerivationPath" positionX="90" positionY="144" width="128" height="59"/>
+        <element name="LocalStorage" positionX="90" positionY="144" width="128" height="104"/>
+        <element name="PersonaRecord" positionX="90" positionY="144" width="128" height="224"/>
+        <element name="Portfolio" positionX="90" positionY="144" width="128" height="239"/>
+        <element name="ProfileRecord" positionX="99" positionY="153" width="128" height="119"/>
+        <element name="StoredKey" positionX="90" positionY="144" width="128" height="179"/>
+        <element name="Token" positionX="-63" positionY="-18" width="128" height="254"/>
+        <element name="WalletConnectSession" positionX="90" positionY="144" width="128" height="89"/>
+        <element name="RelationRecord" positionX="108" positionY="162" width="128" height="104"/>
+    </elements>
+</model>

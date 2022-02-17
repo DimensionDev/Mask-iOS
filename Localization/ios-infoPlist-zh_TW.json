@@ -1,0 +1,5 @@
+{
+    "NSCameraUsageDescription": "Mask Network需要使用相機以掃描二維碼",
+    "NSPhotoLibraryUsageDescription": "Mask Network需獲得進入相簿的許可以存儲經過解密的圖片",
+    "NSFaceIDUsageDescription": "Mask Network需要Face ID以保護你的錢包"
+}

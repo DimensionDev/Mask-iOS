@@ -1,0 +1,816 @@
+{
+    "tab": {
+        "personas": "페르소나",
+        "wallet": "월렛",
+        "labs": "",
+        "setting": "설정"
+    },
+    "common": {
+        "alert": {
+            "biometry_id_activate": {
+                "title": "활성화 성공",
+                "description": "%s 성공적으로 활성화되었습니다."
+            },
+            "face_id_activate_fail": {
+                "title": "활성화 실패",
+                "description": "Face id 활성화 실패."
+            },
+            "keychain_auth_prompt": {
+                "title": "인증하여 스크릿을 이용하세요"
+            },
+            "recovery_key": {
+                "title": "복구 키를 잘 보관하세요",
+                "description": "복구 키는 지정된 단어가 무작위로 구성되는 것입니다. 순서에 따라 단어들을 작어 두세요."
+            },
+            "recovery_key_warning": {
+                "title": "주의",
+                "description": "캡처만 하면 안전하지 않습니다."
+            },
+            "recovery_key_tips": {
+                "title": "북구 키 안전하게 저장",
+                "description": "복구 키는 지정된 단어가 무작위로 구성되는 것입니다. 순서에 따라 단어들을 작어 두세요."
+            },
+            "wallet_create_success": {
+                "title": "좋아요!",
+                "description": "자산을 보호하기 위해 안전한 곳에 복구 키를 저장하세요."
+            },
+            "wallet_derive_success": {
+                "title": "",
+                "description": ""
+            },
+            "wallet_import": {
+                "alert_title_success": "불러오기 완료!",
+                "alert_title_fail": "오류!"
+            },
+            "signout": {
+                "title": "확인하시겠습니까?",
+                "description": "Mask Network는 유저의 데이터를 저장하지 않습니다. 로그아웃하기 전에 비밀번호를 잘 저장하거나 데이터를 백업하세요."
+            },
+            "set_password": {
+                "title": "",
+                "description": ""
+            },
+            "change_password": {
+                "title": "비밀번호가 성공적으로 변경되었습니다!",
+                "description": ""
+            },
+            "change_password_failed": {
+                "title": "비밀번호 변경이 실패되었습니다!"
+            },
+            "setup_backup_password": {
+                "title": "비밀번호 백업 설정 성공!",
+                "description": ""
+            },
+            "setup_backup_password_failed": {
+                "title": "비밀번호 백업 설정 실패!"
+            },
+            "change_backup_password": {
+                "title": "백업 비밀번호가 성공적으로 변경되었습니다.",
+                "description": "백업 비밀번호가 성공적으로 변경되었습니다."
+            },
+            "change_backup_password_failed": {
+                "title": "백업 비밀번호 변경 실패"
+            },
+            "wallet_backup": {
+                "title": "복사됨"
+            },
+            "identity_phrase": {
+                "title": "아이덴티티 문구",
+                "description": "아이덴티티 문구는 지정된 단어가 무작위로 구성되는 것입니다. 순서에 따라 단어들을 작어 두세요."
+            },
+            "identify_code_screenshot_warning": {
+                "title": "주의",
+                "description": "캡처만 하면 안전하지 않습니다."
+            },
+            "identity_create": {
+                "title": "아이덴티티가 생성되었습니다.",
+                "description": "아이덴티티 코드를 잊지 마세요. 아이덴티티 코드는 유저 아이디의 유일한 증명이며 암호화하거나 해독하기에 유일한 근거이다. "
+            },
+            "persona_logout": {
+                "title": "로그아웃하시겠습니까?",
+                "description": "로그아웃 후, 연결된 소셜 계정은 과거의 암호화된 메시지를 더 이상 해독할 수 없습니다."
+            },
+            "persona_name_duplicated": {
+                "title": "이미 존재된 유저 이름입니다."
+            },
+            "local_backup": {
+                "backup_completed": "백업 완료",
+                "backup_failed": "백업 실패"
+            },
+            "setting": {
+                "warning_backup_data_titile": " 백업 전에 비밀번호 설정하세요",
+                "warning_backup_data_description": "백업 비밀번호나 지불 미밀번호가 설정되지 않는 겁니다. 백업하기 전에 백업 비밀번호나 지불 비밀번호를 미리 설정하세요."
+            },
+            "disconnect_profile": {
+                "title": "",
+                "description": ""
+            },
+            "bind_remote_info": {
+                "title": "",
+                "detail": ""
+            },
+            "export_private_key": {
+                "title": "",
+                "description": ""
+            },
+            "backup_tips_no_backup_password": {
+                "title": "",
+                "description": ""
+            },
+            "scan_failed": {
+                "title": "",
+                "description": ""
+            },
+            "scan_persona_success": {
+                "title": "",
+                "description": ""
+            },
+            "scan_persona_exist": {
+                "title": "",
+                "description": ""
+            }
+        },
+        "controls": {
+            "create_wallet": "월렛 만들기",
+            "import_wallet": "월렛 불러오기",
+            "accept": "동의",
+            "enable": "활성화",
+            "no_thanks": "아니요",
+            "done": "완료",
+            "ok": "확인",
+            "i_understand": "알겠습니다",
+            "verify": "인증",
+            "confirm": "확인",
+            "sending": "전송 중...",
+            "sent": "전송됨",
+            "clear": "지우기",
+            "next": "다음",
+            "signout": "로그아웃",
+            "cancel": "취소",
+            "change": "변경",
+            "invite": "초대",
+            "try_again": "다시 시도",
+            "retry": "다시 시도",
+            "webview_go_back": "뒤로",
+            "merge_and_back_up": "",
+            "merge_to_local_data": "",
+            "back_up_to_cloud": "",
+            "back_up_locally": "",
+            "back_up": "",
+            "resend": "",
+            "edit": ""
+        },
+        "loading": "로딩 중"
+    },
+    "scene": {
+        "terms_of_service": {
+            "title": "법적 고지",
+            "description": "Mask Network의 개인정보처리방침과 서비스 약관을 확인하시길 바랍니다.",
+            "service_agreement": "이용약관"
+        },
+        "create_wallet": {
+            "wallet_name": "월렛 이름",
+            "wallet_name_placeholder": "월렛 이름 만들기",
+            "enter_password": "비밀번호 입력",
+            "password_error": "잘못된 비밀번호.",
+            "select_network": "네트워크 선택",
+            "multichain_wallet_title": "",
+            "multichain_wallet_description": ""
+        },
+        "biometry_recognition": {
+            "face_id": {
+                "title": "Face ID로 잠금 해제",
+                "description": "안면 인식 설정을 통해 Mask Network 잠금 해제 속도가 향상될 수 있습니다."
+            },
+            "touch_id": {
+                "title": "Touch ID로 잠금 해제",
+                "description": "Touch ID로 Mask 짐금 해제"
+            }
+        },
+        "biometry_id": {
+            "face_id": "Face ID",
+            "touch_id": "Touch ID",
+            "face_id_reason": "월렛을 보호하기 위해 Mask Network가 FaceID 필요합니다",
+            "touch_id_reason": "월렛을 보호하기 위해 Mask Network가 TouchID 필요합니다",
+            "passcode_notSet": "패스코드가 이 디바이스에 설정되지 않기 때문에 인증을 시작할 수 없습니다.",
+            "biometry_not_enrolled": "%s 에 등록된 아이디가 없기 때문에 인증할 수 없습니다.",
+            "biometry_lockout": "%s 실패된 시도가 많고 %s 이미 락되었기 때문에 인증이 성공하지 않았습니다. %s 언락하기 위해 패스코드가 필요합니다.",
+            "biometry_not_available": "Mask는 %s의 인증이 필요합니다. 설정 -> Mask Network에서 시작하세요.",
+            "biometry_has_changed": "%s 이미 변경되어서 %s 닫힐 겁니다"
+        },
+        "wallet_detail": {
+            "wallet_items_rename": "월렛 이름 바꾸기",
+            "wallet_items_backup": "백업",
+            "wallet_items_delete": "삭제",
+            "wallet_title_change": "변경",
+            "wallet_items_history": "거래 기록"
+        },
+        "wallet_list": {
+            "title": "지갑 변경",
+            "wallets_items_create": "새로운 월렛 만들기",
+            "wallets_items_import": "월렛 불러오기",
+            "wallets_items_add": "월렛 추가",
+            "wallets_list_import": "불러오기"
+        },
+        "mnemonic_word": {
+            "title": "니모닉 단어",
+            "description": "단어를 전부 적어 두세요."
+        },
+        "mnemonic_verify": {
+            "title": "문구 검증",
+            "description": "각 단어를 정확한 순서로 탭해주세요.",
+            "words_title": "각 단어를 정확한 순서로 탭해주세요.",
+            "mnemonic_error": "잘못된 니모닉",
+            "mnemonic_prompt": "가운데를 눌러 단어를 바꾸세요."
+        },
+        "select_network": {},
+        "wallets_list_add": {
+            "wallets_items_add": "새로운 월렛 만들기",
+            "wallets_list_import": "월렛 불러오기"
+        },
+        "wallet_rename": {
+            "name_title": "월렛 이름",
+            "placeholder": "월렛 이름 만들기",
+            "rename_button": "이름 바꾸기"
+        },
+        "wallet_delete": {
+            "title": "월렛 삭제",
+            "content": "이 월렛을 삭제하시겠습니까? 시드 문구가 없으면 월렛을 복구할 수 없습니다.",
+            "password": "비밀번호",
+            "placeholder": "비밀번호",
+            "btn_cancel": "취소",
+            "btn_delete": "삭제"
+        },
+        "wallet_backup": {
+            "title": "월렛 백업",
+            "tab_keystore": "키스토어",
+            "tab_private_key": "개인 키",
+            "keystore_tips": "",
+            "private_key_tips": "개인 키로 월렛 계정을 직접 복구할 수 있습니다. 다른 사람에세 개인 키를 유출하지 마세요.",
+            "btn_cancel": "취소",
+            "btn_copy": "복사"
+        },
+        "wallet_edit": {
+            "item_rename": "월렛 이름 바꾸기",
+            "item_delete": "월렛 삭제"
+        },
+        "wallet_import": {
+            "title": "월렛 불러오기",
+            "item_mnemonic_words": "니모닉 단어",
+            "item_mnemonic_words_desc": "니모닉는 단어로 구성되어 있고 빈간으로 분리되어 있습니다",
+            "item_private_key": "개인 키",
+            "item_private_key_desc": "일반 텍스트 개인 키",
+            "item_keystore": "키스토어",
+            "item_keystore_desc": "암호화된 개인 키 JSON 콘텐츠"
+        },
+        "wallet_derivation_path": {
+            "title": "도출 경로",
+            "header_address": "주소",
+            "header_balance": "잔액 (%@)",
+            "header_operation": "조작",
+            "operation_add": "추가",
+            "operation_added": "추가됨"
+        },
+        "wallet_mnemonic": {
+            "title": "니모닉",
+            "btn_confirm": "확인",
+            "placeholder": "빈간으로 분리하여 니모닉 단어를 입력하세요."
+        },
+        "wallet_private_key": {
+            "title": "개인 키",
+            "btn_confirm": "확인",
+            "placeholder": "개인 키를 입력"
+        },
+        "wallet_keystore": {
+            "title": "키스토어",
+            "btn_confirm": "확인",
+            "password_placeholder": "월렛 비밀번호",
+            "keystore_placeholder": "키스토어 콘텐츠"
+        },
+        "setting": {
+            "general": {
+                "title": "일반",
+                "language": "언어",
+                "appearance": "화면",
+                "data_source": "데이터 소스",
+                "sync_with_plug": "플러그인과 동기화",
+                "setup_payment_password": "결재 비밀번호",
+                "change_payment_password": "결제 비밀번호 변경",
+                "unlock_wallet_with_face_id": "Face ID로 월렛 언락",
+                "unlock_wallet_with_touch_id": "Touch ID로 월렛 언락"
+            },
+            "backup_recovery": {
+                "title": "백업 맟 복원",
+                "restore_data": "데이터 복원",
+                "back_up_data": "데이터 백업",
+                "back_up_password": "비밀번호 백업",
+                "back_up_password_empty": "",
+                "change_backup_password": "백업 비밀번호 변경"
+            },
+            "profile": {
+                "title": "프로필",
+                "email": "이메일",
+                "email_empty": "",
+                "phone_number": "전화번호",
+                "phone_number_empty": "",
+                "log_out": "로그아웃"
+            },
+            "detail": {
+                "automatic": "자동모드",
+                "light": "라이트",
+                "dark": "다크"
+            },
+            "backup_data": {
+                "title": "",
+                "no_backup_title": "",
+                "subtitle": "",
+                "backup_icloud": "iCloud로 전체 백업",
+                "backup_manually": "수동 백업"
+            },
+            "recovery": {
+                "title": "백업 복구",
+                "backup_icloud": "클라우드 백업 복구",
+                "backup_manually": "iPhone 백업 복구"
+            },
+            "local_backup": {
+                "title": "로컬 백업",
+                "local_wallet": "로컬 월렛",
+                "loading_text": "백업 중…"
+            },
+            "remote_backup": {
+                "title": ""
+            },
+            "bind_phone_number": {
+                "title": "",
+                "sub_title": ""
+            },
+            "change_phone_number": {
+                "title": "",
+                "sub_title": "",
+                "tips": ""
+            },
+            "bind_email": {
+                "title": "",
+                "sub_title": ""
+            },
+            "change_email": {
+                "title": "",
+                "sub_title": "",
+                "tips": ""
+            },
+            "bind_remote_info": {
+                "setup_email_title": "",
+                "change_email_title": "",
+                "setup_phone_number_title": "",
+                "change_phone_number_title": "",
+                "setup_email_detail": "",
+                "change_email_detail": "",
+                "setup_phone_number_detail": "",
+                "change_phone_number_detail": ""
+            },
+            "validation_code": "",
+            "validation_code_mismatch": "",
+            "validation_code_via_email": "",
+            "validation_code_via_mobile_phone": ""
+        },
+        "backup_password_verify": {
+            "title": "비밀번호 백업"
+        },
+        "set_backup_password": {
+            "title": "백업 비밀번호 설정",
+            "backup_password": "백업 비밀번호",
+            "confirm_backup_password": "백업 비밀번호 인증",
+            "tips": "백업 암호는 8자에서 20자 사이여야 하며 숫자, 대문자, 소문자 및 특수 문자를 포함해야 합니다.",
+            "error_inconsistent_password": "두 비밀번호는 불일치합니다."
+        },
+        "change_backup_password": {
+            "title": "백업 비밀번호 변경",
+            "sub_title": "",
+            "backup_password": "백업 비밀번호",
+            "new_backup_password": "새로운 백업 비밀번호",
+            "confirm_backup_password": "",
+            "tips": "백업 암호는 8자에서 20자 사이여야 하며 숫자, 대문자, 소문자 및 특수 문자를 포함해야 합니다.",
+            "error_incorrect_password": "잘못된 백업 비밀번호.",
+            "error_inconsistent_password": "두 비밀번호는 불일치합니다."
+        },
+        "NFT_Detail": {
+            "list_price": "",
+            "last_sale_Price": "",
+            "floor_price": ""
+        },
+        "sendTransaction": {
+            "send": {
+                "placeholder_address": "Ens 나 주소(0x...)",
+                "Label_To": "받는 사람",
+                "label_Amount": "금액",
+                "btn_max": "최대",
+                "btn_send": "발송",
+                "btn_Next": "다음",
+                "Label_Password": "비밀번호",
+                "btn_withoutPassword": "누른 상태로 보내기",
+                "amount_error": "잔액 부족",
+                "password_error": "잘못된 지불 비밀번호."
+            },
+            "addContact": {
+                "btn_add": "연락처 추가",
+                "placeholder_name": "이름"
+            },
+            "tokenList": {
+                "title": "토큰 검색",
+                "placeholder": "토큰 이름이나 컨트렉트 주소"
+            },
+            "gasPrice": {
+                "title": "가스 가격 편집",
+                "standard": "표준",
+                "fast": "빠름",
+                "custom": "커스텀",
+                "btn_confirm": "확인",
+                "fee": "요금",
+                "arrives": "받는 주소",
+                "gasPrice": "가스 가격(Gwei)",
+                "gasLimit": "가스 한도(gas)",
+                "maxPriorityFee": "최대 우선 가스비(Gwei)",
+                "maxFee": "최대 요금(Gwei)",
+                "costFee": "코스트:",
+                "advancedBtn": "고급 옵션",
+                "gasLimit_error": "",
+                "maxPriorityFee_error_low": "네트워크 컨디션에 대한 최대 우선 가스비는 매우 낮습니다.",
+                "maxPriorityFee_error_high": "현재 네트워크 컨디션에서 최대 가스비가 너무 낮습니다.",
+                "maxFee_error_low": "최대 기스비는 최대 우선 가스비보다 낮을 수 없습니다",
+                "maxFee_error_high": "최대 가스비는 필요한 것보다 높습니다."
+            },
+            "sendConfirmPop": {
+                "gasFee": "기스비",
+                "total": "전체",
+                "edit": "편집",
+                "gasFeeLow": "30초 정도 걸릴 수 있습니다.",
+                "gasFeeMedium": "30초 이내 걸릴 수 있습니다",
+                "gasFeeHigh": "15초 이내 걸릴 수 있습니다"
+            }
+        },
+        "set_password": {
+            "title": "결제 비밀번호 설정",
+            "payment_password": "결재 비밀번호",
+            "repeat_payment_password": "결제 비밀번호 재확인",
+            "password_invalid": "결제 암호는 8-20자 사이여야 하여 숫자, 문자 및 특수 문자 중 2 범주가 포함되어야 합니다.",
+            "confirm_payment_password": "",
+            "input_payment_password": "",
+            "failed_updating_password": ""
+        },
+        "change_password": {
+            "title": "",
+            "sub_title": "",
+            "failed_loading_password": "",
+            "password": "",
+            "new_password": "",
+            "confirm_Password": "",
+            "incorrect_password": "잘못된 비밀번호.",
+            "password_not_match": "두 비밀번호는 불일치합니다.",
+            "password_demand": "결제 암호는 8-20자 사이여야 하여 숫자, 문자 및 특수 문자 중 2 범주가 포함되어야 합니다."
+        },
+        "personas": {
+            "personas": "페르소나",
+            "tabs": {
+                "social": "소셜",
+                "post": "게시물",
+                "contacts": "연락처",
+                "group": "그룹"
+            },
+            "action": {
+                "change_add_persona": "페르소나 추가 및 변경",
+                "rename": "이름 바꾸기",
+                "export_private_key": "개인 키 수출",
+                "backup": "백업",
+                "recovery": "복구",
+                "log_out": "로그아웃",
+                "delete": "삭제"
+            },
+            "create": {
+                "persona": "페르소나",
+                "create_persona": "페르소나 만들기",
+                "input_persona_name": "페르소나 이름 입력"
+            },
+            "delete": "페르소나 삭제 확인\n",
+            "delete_tip": "백업하지 않으면 설정에서 백업하거나 복구하세요",
+            "add_persona": "페르소나 추가"
+        },
+        "persona_welcome": {
+            "title": "환영합니다",
+            "description": "페르소나를 만들고 소셜 계정을 연결하세요",
+            "persona": "페르소나"
+        },
+        "persona_export_private_key": {
+            "title": "개인 키 수출",
+            "tips": "개인키만 수출이 가능합니다. 다른 데이터 수출할 수 없습니다. 더 많은 데이터를 확인하려면 설정으로 들어가세요: ",
+            "backup_recovery": "백업 및 복원"
+        },
+        "persona_contacts": {
+            "empty_contacts_tips": "암호 친구 아직 없습니다.\n친구를 초대하여 Mask Network를 다운받으세요.",
+            "delete": "삭제 확인 ",
+            "contact": "연락처"
+        },
+        "persona_social": {
+            "twitter": "트위터",
+            "facebook": "페이스북",
+            "instagram": "인스타그램",
+            "minds": "마인드스",
+            "disconnect": "연결 끊기",
+            "connect_social_accounts": "",
+            "accounts": "계정",
+            "connect_tips": "",
+            "add": ""
+        },
+        "wallet_balance": {
+            "btn_swap": "스왑",
+            "btn_Send": "발송",
+            "btn_receive": "받기",
+            "header_title_collectibles": "수집품",
+            "date_today": "오늘",
+            "date_yestoday": "어제",
+            "date_thisMonth": "이번 달",
+            "date_lastMonth": "지난 달",
+            "transaction_received": "획득됨",
+            "transaction_approve": "승인",
+            "transaction_send": "발송",
+            "transaction_swap": "스왑",
+            "transaction_deposit": "예치",
+            "transaction_cancel": "취소",
+            "transaction_action_title": "on %s",
+            "transaction_action_view": "%s 에서 보기",
+            "balance_expand_all": "",
+            "balance_expand_less": "",
+            "header_title_tokens": "",
+            "empty_token": "",
+            "empty_collectibles": ""
+        },
+        "token_detail": {
+            "switch_network": "",
+            "walletconnect_switch_network_alert": ""
+        },
+        "transaction_history": {
+            "no_transaction": ""
+        },
+        "wallet_receive": {
+            "btn_share": "공유",
+            "your_address": "%@ 주소"
+        },
+        "wallet_unlock": {
+            "title": "월렛 언락",
+            "button": "언락"
+        },
+        "identity_empty": {
+            "title": "",
+            "create_an_identity": "",
+            "recovery_sign_in": ""
+        },
+        "identity_create": {
+            "title": "아이덴티티 확인 코드",
+            "description": "단어를 전부 적어 두세요."
+        },
+        "identify_verify": {
+            "title": "아이덴티티 확인 코드",
+            "description": "각 단어를 정확한 순서로 탭해주세요.",
+            "identity_error": "잘못된 아이덴티티 코드"
+        },
+        "identity_recovery": {
+            "title": "복구 또는 로그인",
+            "identity_button": "",
+            "identity_button_description": "",
+            "private_key_button": "개인 키",
+            "private_key_button_description": "",
+            "local_backup_recovery_button": "로컬 백업 복구",
+            "local_backup_recovery_button_description": "",
+            "cloud_backup_recovery_button_title": "글라우드 백업 복구",
+            "cloud_backup_recovery_button_description": ""
+        },
+        "identity_mnemonic_import": {
+            "title": "아이덴티티",
+            "description": "",
+            "placeholder": "12 니모닉 단어를 입력하세요.\n빈간으로 분리하기"
+        },
+        "identity_privatekey_import": {
+            "title": "개인 키",
+            "description": "",
+            "placeholder": "개인 키 입력하기"
+        },
+        "Identity_restore_signin_success": {
+            "title": "복구 및 로그인 완료!"
+        },
+        "app": {
+            "title": {
+                "labs": "",
+                "plugins_setting": "",
+                "red_packet_share": ""
+            },
+            "red_packet_claimed": "",
+            "good_luck_next_time": "",
+            "market_trend_source": "마켓 트렌드 소스",
+            "wallet_address": "지갑 주소",
+            "riskwarning": "유저님, \n\nMask Network의 월렛 관련된 플러그인을 사용하기 전에 다음의 이용 라스크를 확인하시길 바랍니다: \n\nMask Network는 비상업적 무료 서비스를 제공합니다. 플러그인은 커뮤니티 멤버들과 다른 제3자 DApp 팀이 제공하는 것입니다. 탈중앙화 네트워크의 자율성과 다른 기타 불확실한 리스크 요소때문에 사용자는 니모닉 단어, 개인키와 같은 중요한 정보를 적절히 보호해야 합니다. 블록체인 컨트렉트와 상호작용할 때 조심하시길 바랍니다. 제3자 DApp(플러그인) 으로 인한 리스크는 제3자 DApp 자체가 책임집니다. \n\n확인 버튼을 클릭하면 위의 가능한 리스크를 감수하는 데 동의함을 의미합니다.",
+            "riskwarning_title": "리스크 경고",
+            "swap_option_source": "스왑 소스",
+            "swap_network_source": {
+                "eth": "ETH 네트워크",
+                "poly": "Polygon/Matic 네트워크",
+                "bsc": "BSC 네트워크"
+            },
+            "plugins": {
+                "file_service": "",
+                "ito": "",
+                "lucy_drop": "",
+                "swap": "",
+                "transaction": "",
+                "market_trend": "",
+                "snapshot": "",
+                "collectibles": "",
+                "gitcoin": "",
+                "valuables": "",
+                "dhedge": ""
+            },
+            "plugin_introduction": {
+                "transak": "",
+                "ito": "",
+                "luckyDrop": "",
+                "swap": "",
+                "file_service": ""
+            },
+            "plugin_tip": ""
+        },
+        "social": {
+            "login_in_to_continue": "로그인하여 계속하기",
+            "login_in_notify": "트위터에 로그인하고 Mask Network 연결을 안내하겠습니다.",
+            "i_understand": "이해합니다",
+            "title": "홈",
+            "connect_button_title": "연결",
+            "profile_select_title": "유저이름 선택",
+            "connected": "연결됨",
+            "connect_hint1": "로그인하세요 ",
+            "connect_hint2": " mask Network에 연결하기.",
+            "connect_hint_logged_in": "다른 계정을 연결하기 위해 다른 계정을 로그아웃하고 로그인하세요.",
+            "connect_to_mask_network": "Mask Network에 연결하기",
+            "account_already_connected": "계정은 이미 연결되었습니다",
+            "connect_stop": "",
+            "error": {
+                "fail_to_connect": "프로필 연결 실패"
+            }
+        },
+        "share": {
+            "shareLink": "Mask Network 링크 공유하기:"
+        },
+        "restore": {
+            "titles": {
+                "restore_buckup": "백업 복원",
+                "restore_remote_backup": "클라우드 백업 복원",
+                "recovery_with_email": "이메일로 복원",
+                "recovery_with_mobile": "전화번호로 복원",
+                "restore_succeed": "",
+                "restore_failed": "복원 실패",
+                "native_wallets": "",
+                "unsupport_restore_data": "지원하지 않는 데이터 백업",
+                "loading_failed": "로딩 실패",
+                "verify_wallet_password": ""
+            },
+            "buttonTitles": {
+                "backup": "백업 복원",
+                "restore": "복원",
+                "next": "다음",
+                "confirm": "확인",
+                "resend": "다시 보내기",
+                "email": "모바일로 복원",
+                "mobile": "이메일로 복원"
+            },
+            "succeed_detail": "복구 및 로그인 완료.",
+            "completion": "복원 완료",
+            "failed_detail": "복원이 실패되었습니다. 해당 백업을 복구할 수 없습니다.",
+            "input_placeholder": {
+                "email": "이메일 주소 입력"
+            },
+            "check_unsupport_data": "데이터 백업을 검사하세요.",
+            "restore_created_date": "백업 시간",
+            "restored_post": "암호화된 게시물",
+            "restored_account": "관련 계정",
+            "restored_persona": "페르소나",
+            "restored_files": "파일",
+            "restored_contacts": "연락처",
+            "restored_relations": "",
+            "wallet_existed": "",
+            "input_title": {
+                "remote_backup_password": "클라우드 백업 비밀번호",
+                "email": "이메일",
+                "validationcode": "인증 코드",
+                "mobile": "전화번호",
+                "payment_password": ""
+            },
+            "tip": {
+                "data_failed_to_fetch": "데이터 로드 다시 시도하세요.",
+                "failed_to_download_file": "라모트 파일 다운로드 실패",
+                "incorrect_backup_password": "잘못된 클라우드 백업 비밀번호",
+                "invalid_email_address": "잘못된 이메일 주소",
+                "invalid_mobile_number": "잘못된 전화번호",
+                "email_validationcode": "인증코드가 이메일로 발송되었습니다",
+                "mobile_validationcode": "인증코드가 SMS로 발송되었습니다.",
+                "incorrect_validationcode": "인증 코드가 잘못되었습니다",
+                "invalid_validationcode": "인증 코드가 무효합니다",
+                "validationcode_five_minutes": "인증 코드가 정확하지 않습니다. 5 분 후 다시 시도하세요.",
+                "validationcode_ten_minutes": "인증 코드가 정확하지 않습니다. 10 분 후 다시 시도하세요.",
+                "validationcode_thirty_minutes": "인증 코드가 정확하지 않습니다. 30 분 후 다시 시도하세요.",
+                "validationcode_one_hour": "인증 코드가 정확하지 않습니다. 1 시간 후 다시 시도하세요.",
+                "validationcode_twentyfour_hours": "인증 코드가 정확하지 않습니다. 24 시간 후 다시 시도하세요.",
+                "failed_loading_remotefile": "복구 파일 다운로드 실패, 다시 시도하세요",
+                "remote_restore_succeed": "클라우드 비밀번호 인증이 통과했습니다. 백업은 다운로드 중입니다. ",
+                "remote_restore_syncing_password": "클라우드 비밀번호와 로컬 비밀번호를 동기화하시겠습니까?",
+                "cloud_backup_password_hint": ""
+            }
+        },
+        "wallet_connect": {
+            "wallet_connect": "월렛 연결",
+            "select_wallet": "월렛 선택",
+            "scan_q_r_code": "QR 코드 스캔",
+            "qr_code_tips": "WalletConnect와 호환성이 있는 월렛을 사용하여 QR 코드 스캔하세요.",
+            "tap_to_copy": "탭하여 텍스트를 클립보드로 복사",
+            "connecting": "연결 중…",
+            "connect_success": "월렛은 Mask Network에 성공적으로 연결되었습니다",
+            "scan": "QR코드 스캔",
+            "disconnect": "연결 끊기",
+            "connection_fail": "연결 실패.",
+            "could_not_switch_blockchain_network_title": "WalletConnect가 지원하는 네트워크로 바꾸세요",
+            "could_not_switch_blockchain_network_message": "네이티브 월렛을 시고하고 네트워크를 다시 바꿔 보세요",
+            "network_not_match": "",
+            "network_not_support": "",
+            "address_exist": "",
+            "replace_wallet_connect_wallet": ""
+        },
+        "wallet_connect_server": {
+            "want_to_connect": "",
+            "connected_apps": "",
+            "connect": "",
+            "wallet_connect_notification": "",
+            "switch_wallet": ""
+        },
+        "backup": {
+            "remote_backup_actions_view": {
+                "tips": ""
+            },
+            "merge_to_local": {
+                "title": ""
+            },
+            "validation_code": "",
+            "with_phone": "",
+            "with_email": "",
+            "tips_phone": "",
+            "tips_email": "",
+            "backup_verify_field_email": "",
+            "backup_verify_field_phone": "",
+            "backup_verify_title_email": "",
+            "backup_verify_title_phone": "",
+            "restore_created_date": "",
+            "restored_post": "",
+            "restored_account": "",
+            "restored_persona": "",
+            "restored_files": "",
+            "restored_contacts": "",
+            "restored_relations": ""
+        },
+        "open_red_package": {
+            "title": "",
+            "wallet": "",
+            "claim": "",
+            "claiming": "",
+            "switch_network": "",
+            "confirm_risk_warning": "",
+            "wrong_network": "",
+            "total": "",
+            "ends": "",
+            "from": "",
+            "shares": "",
+            "on_going": "",
+            "expired": "",
+            "claimed": "",
+            "refunded": "",
+            "refund": "",
+            "empty": "",
+            "share_message_official": "",
+            "share_message_unsupport_platform": ""
+        }
+    },
+    "chain": {
+        "short_name": {
+            "eth": "ETH",
+            "bsc": "BSC",
+            "dot": "DOT",
+            "polygon": "Polygon",
+            "arbitrum": "",
+            "xdai": "",
+            "optimism": ""
+        },
+        "name": {
+            "eth": "Ethereum",
+            "bsc": "Binance smart chain",
+            "dot": "Polkadot",
+            "polygon": "Polygon/Matic Network",
+            "arbitrum": "",
+            "xdai": "",
+            "optimism": ""
+        }
+    }
+}

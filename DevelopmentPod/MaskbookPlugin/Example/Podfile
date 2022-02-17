@@ -1,0 +1,6 @@
+use_frameworks!
+target 'MaskbookPlugin_Tests' do
+  pod 'MaskbookPlugin', :path => '../'
+  
+  
+end

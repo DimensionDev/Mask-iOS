@@ -1,0 +1,54 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+$target_name = 'Maskbook'
+$PROJECT = "./#{$target_name}.xcodeproj"
+
+default_platform(:ios)
+
+desc "Ensure cocoapods keep newest version"
+lane :cocoapod_check do
+  puts("check if need update cocoapods")
+  cocoapods(
+    clean_install: false,
+    podfile: "./Podfile"
+  )
+end
+
+desc "Auto lint code use swiftLint"
+lane :lint_code do
+  puts("Lint code using SwfitLint")
+  swiftlint(
+    mode: :lint,
+    executable: "./Pods/SwiftLint/swiftlint",
+    config_file: './.swiftlint.yml',
+    raise_if_swiftlint_error: true)
+end
+
+desc "Auto formate code use swiftLint"
+lane :format_code do
+  puts("Formate code using SwfitLint")
+  swiftlint(
+    mode: :fix,
+    executable: "./Pods/SwiftLint/swiftlint",
+    config_file: './.swiftlint.yml',
+    raise_if_swiftlint_error: true)
+end
+
+desc "Auto sort files"
+lane :sort_files do
+  puts("Sort the files for the Xcode project")
+  sh "../scripts/projectfilesSort.pl ../#{$target_name}.xcodeproj"
+end

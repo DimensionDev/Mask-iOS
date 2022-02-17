@@ -1,0 +1,2 @@
+Intl.ListFormat||(Intl.ListFormat=class{constructor(locales,options){this.locales=locales}format(string){const locale="string"==typeof this.locales?this.locales:navigator.language;return locale.startsWith("zh")||locale.startsWith("ja")?string.join("、"):string.join(", ")}});
+;null;
