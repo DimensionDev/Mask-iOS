@@ -111,3 +111,5 @@ Maskbook/Resources/Secrets.swift
 
 ### API Keys
 Maskbook/Resources/APIKey.swift
+
+GoogleService-Info.plist
