@@ -195,8 +195,8 @@ DEPENDENCIES:
   - "UITextField+Shake (~> 1.2)"
   - UStack (~> 2.2.1)
   - WalletConnectSwift (from `https://github.com/DimensionDev/WalletConnectSwift.git`)
-  - web3swift (from `https://github.com/Sujitech/web3swift.git`)
-  - "WebExtension-Shim (from `git@github.com:SujiTech/WebExtension-Shim-iOS.git`, branch `dev/2.0`)"
+  - web3swift (from `https://github.com/DimensionDev/web3swift.git`)
+  - "WebExtension-Shim (from `git@github.com:DimensionDev/WebExtension-Shim-iOS.git`, branch `dev/2.0`)"
   - ZIPFoundation (~> 0.9)
 
 SPEC REPOS:
@@ -256,10 +256,10 @@ EXTERNAL SOURCES:
   WalletConnectSwift:
     :git: https://github.com/DimensionDev/WalletConnectSwift.git
   web3swift:
-    :git: https://github.com/Sujitech/web3swift.git
+    :git: https://github.com/DimensionDev/web3swift.git
   WebExtension-Shim:
     :branch: dev/2.0
-    :git: "git@github.com:SujiTech/WebExtension-Shim-iOS.git"
+    :git: "git@github.com:DimensionDev/WebExtension-Shim-iOS.git"
 
 CHECKOUT OPTIONS:
   SwiftMsgPack:
@@ -269,11 +269,11 @@ CHECKOUT OPTIONS:
     :commit: 36fb19f07ea979bcbe169d19afdb690fdc5524b5
     :git: https://github.com/DimensionDev/WalletConnectSwift.git
   web3swift:
-    :commit: d944e2f6e72870a7220d9c84a93f52b93e3d8b65
-    :git: https://github.com/Sujitech/web3swift.git
+    :commit: 229489fe14ef57c48a51c6205d39f8820f5e3f6a
+    :git: https://github.com/DimensionDev/web3swift.git
   WebExtension-Shim:
     :commit: 3a7edff4decdef34dcdcd9d0457e7cf830759d63
-    :git: "git@github.com:SujiTech/WebExtension-Shim-iOS.git"
+    :git: "git@github.com:DimensionDev/WebExtension-Shim-iOS.git"
 
 SPEC CHECKSUMS:
   Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
@@ -324,6 +324,6 @@ SPEC CHECKSUMS:
   WebExtension-Shim: 11b071466c53f42097291eb176cf9bcc5fb9b050
   ZIPFoundation: ae5b4b813d216d3bf0a148773267fff14bd51d37
 
-PODFILE CHECKSUM: 3f81bde9df601cb2e3b1507fcb79cf05b5857d93
+PODFILE CHECKSUM: 962a5365bc0fa7d931b71131e8edce2917fa21b4
 
 COCOAPODS: 1.11.2

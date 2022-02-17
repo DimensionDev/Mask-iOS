@@ -1,4 +1,3 @@
-source 'https://github.com/SujiTech/Specs.git'
 source 'https://cdn.cocoapods.org/'
 
 platform :ios, '13.0'
@@ -18,7 +17,7 @@ target 'Maskbook' do
   
   # private pod
 #  pod 'WebExtension-Shim', '~> 0.5.6'
-  pod 'WebExtension-Shim', :git => 'git@github.com:SujiTech/WebExtension-Shim-iOS.git', :branch => 'dev/2.0'
+  pod 'WebExtension-Shim', :git => 'git@github.com:DimensionDev/WebExtension-Shim-iOS.git', :branch => 'dev/2.0'
 
   pod 'SwiftGen', '~> 6.4.0'
   pod 'KMPageControl', '~> 0.0.2'
@@ -47,7 +46,7 @@ target 'Maskbook' do
   
   # Web3
   pod 'BigInt', '~> 5.2'
-  pod 'web3swift', :git => 'https://github.com/Sujitech/web3swift.git'
+  pod 'web3swift', :git => 'https://github.com/DimensionDev/web3swift.git'
   #UI
   pod 'SnapKit', '~> 5.0.0'
   #debug
