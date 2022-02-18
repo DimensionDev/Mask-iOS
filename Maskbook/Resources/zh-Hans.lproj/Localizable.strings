@@ -103,8 +103,8 @@
 "Scene.App.GoodLuckNextTime" = "祝您下次好运";
 "Scene.App.MarketTrendSource" = "市场趋势信息源";
 "Scene.App.PluginIntroduction.FileService" = "为用户提供去中心化文档存储功能。";
-"Scene.App.PluginIntroduction.Ito" = "允许用户在Twitter上直接购买令牌。";
-"Scene.App.PluginIntroduction.Luckydrop" = "使用 Token/NFT 的红包让你的加密好友感到惊喜。";
+"Scene.App.PluginIntroduction.Ito" = "允许用户在Twitter上直接购买代币。";
+"Scene.App.PluginIntroduction.Luckydrop" = "发送红包(Token/NFT)，给加密好友带来惊喜。";
 "Scene.App.PluginIntroduction.Swap" = "通过Dex购买代币，无需额外费用和限制。";
 "Scene.App.PluginIntroduction.Transak" = "Transak可支持在60多个国家内购买代币。";
 "Scene.App.PluginTip" = "如果您关闭了一个插件，当浏览社交媒体时，插件功能将无法在时间线上生效。";
