@@ -161,8 +161,22 @@ struct StoreAvatarParam: Decodable {
 }
 
 struct CreatePostParam: Decodable {
-    let identifier: String?
-    let avatar: String?
+    let post: Post
+}
+
+struct QueryPostParam: Decodable {
+    let encryptBy: String?
+    let userIds: [String]?
+    let network: String?
+    let pageOption: PageOption?
+}
+
+struct UpdatePostParam: Decodable {
+    struct UpdatePostParamOptions: Decodable {
+        let mode: PostRepository.Mode
+    }
+    let post: Post
+    let options: UpdatePostParamOptions
 }
 
 // MARK: - Plugins

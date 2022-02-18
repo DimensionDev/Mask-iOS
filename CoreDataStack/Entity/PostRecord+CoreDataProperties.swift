@@ -2,7 +2,7 @@
 //  PostRecord+CoreDataProperties.swift
 //  CoreDataStack
 //
-//  Created by xiaojian sun on 2022/2/17.
+//  Created by xiaojian sun on 2022/2/18.
 //  Copyright © 2022 dimension. All rights reserved.
 //
 //
@@ -27,6 +27,8 @@ extension PostRecord {
     @NSManaged public var foundAt: Date?
     @NSManaged public var recipientsRaw: Data?
     @NSManaged public var interestedMetaRaw: Data?
+    @NSManaged public var createdAt: Date?
+    @NSManaged public var updatedAt: Date?
 
 }
 

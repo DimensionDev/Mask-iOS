@@ -12,7 +12,20 @@ import Foundation
 import SwiftyJSON
 
 extension PostRecord {
+    var nonOptionalIdentifier: String {
+        guard let identifier = identifier else {
+            log.debug("PersonaRecord's identifier is nil", source: "persona")
+            fatalError("PersonaRecord's identifier is nil")
+        }
+        return identifier
+    }
+
     var postCryptoKey: JsonWebKey? {
+        get {
+            postCryptoKeyRaw.flatMap {
+                try? JSONDecoder().decode(JsonWebKey.self, from: $0)
+            }
+        }
         set {
             guard let jsonWenKey = newValue else {
                 postCryptoKeyRaw = nil
@@ -20,11 +33,6 @@ extension PostRecord {
             }
             let data = try? JSONEncoder().encode(jsonWenKey)
             postCryptoKeyRaw = data
-        }
-        get {
-            postCryptoKeyRaw.flatMap {
-                try? JSONDecoder().decode(JsonWebKey.self, from: $0)
-            }
         }
     }
 }

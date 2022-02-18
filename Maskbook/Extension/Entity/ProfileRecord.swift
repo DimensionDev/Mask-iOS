@@ -6,11 +6,10 @@
 //  Copyright © 2022 dimension. All rights reserved.
 //
 
-import Foundation
 import CoreDataStack
+import Foundation
 
 extension ProfileRecord {
-    
     var nonOptionalIdentifier: String {
         guard let identifier = identifier else {
             log.debug("PersonaRecord's identifier is nil", source: "persona")
@@ -29,17 +28,15 @@ extension ProfileRecord {
     }
     
     var socialPlatform: ProfileSocialPlatform {
-        for profileSocialPlatform in ProfileSocialPlatform.allCases.enumerated() {
-            if self.nonOptionalIdentifier.contains(profileSocialPlatform.element.url) {
-                return profileSocialPlatform.element.self
-            }
-        }
-        return .twitter
+        return Self.getSocialPlatformFromIdentifier(nonOptionalIdentifier) ?? .twitter
     }
     
     static func getSocialPlatformFromIdentifier(_ identifier: String) -> ProfileSocialPlatform? {
+        guard let platformString = identifier.components(separatedBy: "/").first else {
+            return nil
+        }
         for profileSocialPlatform in ProfileSocialPlatform.allCases.enumerated() {
-            if identifier.contains(profileSocialPlatform.element.url) {
+            if platformString.contains(profileSocialPlatform.element.url) {
                 return profileSocialPlatform.element.self
             }
         }

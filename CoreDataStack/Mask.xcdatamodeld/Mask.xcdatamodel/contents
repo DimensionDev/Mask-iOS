@@ -137,6 +137,7 @@
         <relationship name="account" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="portfolios" inverseEntity="Account"/>
     </entity>
     <entity name="PostRecord" representedClassName=".PostRecord" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="encryptBy" optional="YES" attributeType="String"/>
         <attribute name="foundAt" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="identifier" attributeType="String"/>
@@ -146,6 +147,7 @@
         <attribute name="postUserId" attributeType="String"/>
         <attribute name="recipientsRaw" attributeType="Binary" valueTransformerName="DictionaryTransformer" customClassName=".NSDictionary"/>
         <attribute name="summary" optional="YES" attributeType="String"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="url" optional="YES" attributeType="String"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
@@ -238,6 +240,6 @@
         <element name="StoredKey" positionX="90" positionY="144" width="128" height="179"/>
         <element name="Token" positionX="-63" positionY="-18" width="128" height="254"/>
         <element name="WalletConnectSession" positionX="90" positionY="144" width="128" height="89"/>
-        <element name="PostRecord" positionX="90" positionY="144" width="128" height="179"/>
+        <element name="PostRecord" positionX="90" positionY="144" width="128" height="209"/>
     </elements>
 </model>
