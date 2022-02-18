@@ -81,6 +81,8 @@
 "Common.Controls.Confirm" = "确定";
 "Common.Controls.CreateWallet" = "创建钱包";
 "Common.Controls.Done" = "完成";
+"Common.Controls.Download" = "下载";
+"Common.Controls.DownloadNext" = "我已下载，下一步";
 "Common.Controls.Edit" = "编辑";
 "Common.Controls.Enable" = "开启";
 "Common.Controls.IUnderstand" = "我已理解";
@@ -96,6 +98,7 @@
 "Common.Controls.Sending" = "发送中...";
 "Common.Controls.Sent" = "发送";
 "Common.Controls.Signout" = "退出登录";
+"Common.Controls.Skip" = "跳过，稍后下载";
 "Common.Controls.TryAgain" = "重试";
 "Common.Controls.Verify" = "验证";
 "Common.Controls.WebviewGoBack" = "后退";
@@ -103,10 +106,10 @@
 "Scene.App.GoodLuckNextTime" = "祝您下次好运";
 "Scene.App.MarketTrendSource" = "市场趋势信息源";
 "Scene.App.PluginIntroduction.FileService" = "为用户提供去中心化文档存储功能。";
-"Scene.App.PluginIntroduction.Ito" = "允许用户在Twitter上直接购买代币。";
+"Scene.App.PluginIntroduction.Ito" = "允许用户在Twitter上直接购买令牌。";
 "Scene.App.PluginIntroduction.Luckydrop" = "发送红包(Token/NFT)，给加密好友带来惊喜。";
 "Scene.App.PluginIntroduction.Swap" = "通过Dex购买代币，无需额外费用和限制。";
-"Scene.App.PluginIntroduction.Transak" = "Transak可支持在60多个国家内购买代币。";
+"Scene.App.PluginIntroduction.Transak" = "使用 Transak购买加密货币，支持60多种货币。";
 "Scene.App.PluginTip" = "如果您关闭了一个插件，当浏览社交媒体时，插件功能将无法在时间线上生效。";
 "Scene.App.Plugins.Collectibles" = "Collectibles";
 "Scene.App.Plugins.Dhedge" = "DHEDGE";
@@ -140,6 +143,7 @@ Clicking the confirm button means that you agree to bear the above possible risk
 "Scene.Backup.BackupVerifyFieldPhone" = "手机号码";
 "Scene.Backup.BackupVerifyTitleEmail" = "通过电子邮件地址备份";
 "Scene.Backup.BackupVerifyTitlePhone" = "通过手机号码备份";
+"Scene.Backup.MergeToLocal.MergeFailedMessage" = "合并云端备份失败！";
 "Scene.Backup.MergeToLocal.Title" = "合并后备份";
 "Scene.Backup.RemoteBackupActionsView.Tips" = "已存在云端备份， 您可以选择在备份之前先合并这个云备份到您的本地数据，或者直接备份。";
 "Scene.Backup.RestoreCreatedDate" = "创建时间";
@@ -195,8 +199,9 @@ Clicking the confirm button means that you agree to bear the above possible risk
 "Scene.IdentifyVerify.Description" = "请按照正确的顺序依次点击每个单词。";
 "Scene.IdentifyVerify.IdentityError" = "输入的身份助记词错误";
 "Scene.IdentifyVerify.Title" = "验证身份助记词";
-"Scene.IdentityCreate.Description" = "请写下每一个单词。";
-"Scene.IdentityCreate.Title" = "验证身份助记词";
+"Scene.IdentityCreate.Description" = "下载您的身份代码。";
+"Scene.IdentityCreate.IdentityTips" = "身份代码用于生成您的身份。";
+"Scene.IdentityCreate.Title" = "创建身份";
 "Scene.IdentityEmpty.CreateAnIdentity" = "创建角色";
 "Scene.IdentityEmpty.RecoverySignIn" = "恢复角色";
 "Scene.IdentityEmpty.Title" = "角色";
@@ -249,6 +254,11 @@ Clicking the confirm button means that you agree to bear the above possible risk
 "Scene.PersonaContacts.Delete" = "确认删除";
 "Scene.PersonaContacts.EmptyContactsTips" = "您还没有联系人。 
 邀请好友下载 Mask Network。";
+"Scene.PersonaDownload.DownloadTips" = "这个二维码包含您的身份信息，请安全保存。您可以使用Mask APP 扫描二维码登录身份。";
+"Scene.PersonaDownload.IdentityId" = "身份 ID";
+"Scene.PersonaDownload.MaskId" = "MASK ID";
+"Scene.PersonaDownload.Persona" = "身份:";
+"Scene.PersonaDownload.PrivateKey" = "私钥";
 "Scene.PersonaExportPrivateKey.BackupRecovery" = "备份与恢复设置";
 "Scene.PersonaExportPrivateKey.Tips" = "此导出仅用于导出私钥。我们不导出任何其他数据。如果您需要导入更多数据，请前往设置： ";
 "Scene.PersonaExportPrivateKey.Title" = "导出私钥";
@@ -267,9 +277,9 @@ Clicking the confirm button means that you agree to bear the above possible risk
 "Scene.Personas.Action.Backup" = "备份";
 "Scene.Personas.Action.ChangeAddPersona" = "更改或添加角色";
 "Scene.Personas.Action.Delete" = "删除";
+"Scene.Personas.Action.Download" = "下载助记词";
 "Scene.Personas.Action.ExportPrivateKey" = "导出私钥";
 "Scene.Personas.Action.LogOut" = "退出登录";
-"Scene.Personas.Action.Recovery" = "恢复";
 "Scene.Personas.Action.Rename" = "重命名";
 "Scene.Personas.AddPersona" = "创建新角色";
 "Scene.Personas.Create.CreatePersona" = "创建角色";
@@ -393,9 +403,11 @@ Clicking the confirm button means that you agree to bear the above possible risk
 "Scene.Setting.BackupRecovery.BackUpData" = "备份数据";
 "Scene.Setting.BackupRecovery.BackUpPassword" = "备份密码";
 "Scene.Setting.BackupRecovery.BackUpPasswordEmpty" = "请设置备份密码";
+"Scene.Setting.BackupRecovery.BackUpPasswordValidationTip" = "请输入您在加密备份文件时使用的备份密码。 ";
 "Scene.Setting.BackupRecovery.ChangeBackupPassword" = "修改备份密码";
 "Scene.Setting.BackupRecovery.RestoreData" = "恢复数据";
 "Scene.Setting.BackupRecovery.Title" = "备份与恢复设置";
+"Scene.Setting.BackupRecovery.WrongPassword" = "密码错误";
 "Scene.Setting.BindEmail.SubTitle" = "电子邮件地址";
 "Scene.Setting.BindEmail.Title" = "绑定电子邮件地址";
 "Scene.Setting.BindPhoneNumber.SubTitle" = "手机号码";
@@ -446,9 +458,9 @@ Clicking the confirm button means that you agree to bear the above possible risk
 "Scene.Share.Sharelink" = "分享 Mask Network 连接：";
 "Scene.Social.AccountAlreadyConnected" = "账户已连接";
 "Scene.Social.ConnectButtonTitle" = "连接";
-"Scene.Social.ConnectHint1" = "请先登录 ";
-"Scene.Social.ConnectHint2" = " 以连接到 Mask Network";
-"Scene.Social.ConnectHintLoggedIn" = "如果您想要连接另一个账户，请注销并登录另一个账户。";
+"Scene.Social.ConnectHint" = "登录到 %@ 以连接";
+"Scene.Social.ConnectHintLoggedIn" = "%@ 已连接。
+切换账户以连接另一个账户。";
 "Scene.Social.ConnectStop" = "";
 "Scene.Social.ConnectToMaskNetwork" = "连接到 Mask Network";
 "Scene.Social.Connected" = "已连接";
