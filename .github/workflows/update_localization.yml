@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  update_localization:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
