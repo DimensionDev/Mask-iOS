@@ -158,7 +158,10 @@
             "back_up_locally": "",
             "back_up": "",
             "resend": "",
-            "edit": ""
+            "edit": "",
+            "download": "",
+            "skip": "",
+            "download_next": ""
         },
         "loading": ""
     },
@@ -305,7 +308,9 @@
                 "back_up_data": "",
                 "back_up_password": "",
                 "back_up_password_empty": "",
-                "change_backup_password": ""
+                "change_backup_password": "",
+                "back_up_password_validation_tip": "",
+                "wrong_password": ""
             },
             "profile": {
                 "title": "",
@@ -480,8 +485,8 @@
                 "change_add_persona": "",
                 "rename": "",
                 "export_private_key": "",
+                "download": "",
                 "backup": "",
-                "recovery": "",
                 "log_out": "",
                 "delete": ""
             },
@@ -519,6 +524,13 @@
             "accounts": "",
             "connect_tips": "",
             "add": ""
+        },
+        "persona_download": {
+            "persona": "",
+            "mask_id": "",
+            "private_key": "",
+            "identity_id": "",
+            "download_tips": ""
         },
         "wallet_balance": {
             "btn_swap": "",
@@ -565,7 +577,8 @@
         },
         "identity_create": {
             "title": "",
-            "description": ""
+            "description": "",
+            "identity_tips": ""
         },
         "identify_verify": {
             "title": "",
@@ -644,8 +657,7 @@
             "connect_button_title": "",
             "profile_select_title": "",
             "connected": "",
-            "connect_hint1": "",
-            "connect_hint2": "",
+            "connect_hint": "",
             "connect_hint_logged_in": "",
             "connect_to_mask_network": "",
             "account_already_connected": "",
@@ -752,7 +764,8 @@
                 "tips": ""
             },
             "merge_to_local": {
-                "title": ""
+                "title": "",
+                "merge_failed_message": ""
             },
             "validation_code": "",
             "with_phone": "",
