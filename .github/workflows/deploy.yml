@@ -34,11 +34,11 @@ jobs:
       - name: Install Dependencies
         run: pod install --repo-update
 
-      - name: Restore Secrects
+      - name: Restore Secrets
         env: 
           GOOGLE_SERVICE_PLIST: ${{ secrets.GOOGLE_SERVICE_PLIST }}
-          SECRECT_SWIFT: ${{ secrects.SECRECT_SWIFT }}
-          API_KEY_SWIFT: ${{ secrects.API_KEY_SWIFT }}
+          SECRECT_SWIFT: ${{ secrets.SECRECT_SWIFT }}
+          API_KEY_SWIFT: ${{ secrets.API_KEY_SWIFT }}
         run: |
           echo $GOOGLE_SERVICE_PLIST | base64 --decode > GoogleService-Info.plist
           cd Maskbook/Resources
