@@ -6,8 +6,8 @@
 //  Copyright © 2022 dimension. All rights reserved.
 //
 
-import Foundation
 import CoreDataStack
+import Foundation
 
 extension PersonaRecord {
     var nonOptionalIdentifier: String {
@@ -16,5 +16,9 @@ extension PersonaRecord {
             fatalError()
         }
         return identifier
+    }
+
+    var isDownloadable: Bool {
+        self.mnemonic != nil
     }
 }
