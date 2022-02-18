@@ -641,7 +641,7 @@
                 "dhedge": "DHEDGE"
             },
             "plugin_introduction": {
-                "transak": "使用 Transak购买加密货币，支持60多种货币。",
+                "transak": "Transak 支持通过60多种货币购买代币。",
                 "ito": "允许用户在Twitter上直接购买令牌。",
                 "luckyDrop": "发送红包(Token/NFT)，给加密好友带来惊喜。",
                 "swap": "通过Dex购买代币，无需额外费用和限制。",
