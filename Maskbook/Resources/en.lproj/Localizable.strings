@@ -109,7 +109,7 @@
 "Scene.App.PluginIntroduction.Ito" = "Enable users to buy tokens directly on Twitter.";
 "Scene.App.PluginIntroduction.Luckydrop" = "Surprise your encrypted friends with Token/NFT Lucky Drops.";
 "Scene.App.PluginIntroduction.Swap" = "Purchase tokens through dex without additional fees.";
-"Scene.App.PluginIntroduction.Transak" = "Buy crypto in 60+ countries with Transak support.";
+"Scene.App.PluginIntroduction.Transak" = "Buy crypto with Transak, support 60+ currencies.";
 "Scene.App.PluginTip" = "If you turn off a plugin, the plugin function can no longer be rendered on timeline when browsing social media.";
 "Scene.App.Plugins.Collectibles" = "Collectibles";
 "Scene.App.Plugins.Dhedge" = "DHEDGE";
