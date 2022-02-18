@@ -33,6 +33,17 @@ jobs:
 
       - name: Install Dependencies
         run: pod install --repo-update
+
+      - name: Restore Secrects
+        env: 
+          GOOGLE_SERVICE_PLIST: ${{ secrets.GOOGLE_SERVICE_PLIST }}
+          SECRECT_SWIFT: ${{ secrects.SECRECT_SWIFT }}
+          API_KEY_SWIFT: ${{ secrects.API_KEY_SWIFT }}
+        run: |
+          echo $GOOGLE_SERVICE_PLIST | base64 --decode > GoogleService-Info.plist
+          cd Maskbook/Resources
+          echo $SECRECT_SWIFT | base64 --decode > Secrets.swift
+          echo $API_KEY_SWIFT | base64 --decode > APIKey.swift
     
       - name: Build & upload iOS binary
         run: bundle exec fastlane build_upload_testflight
