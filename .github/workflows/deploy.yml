@@ -2,7 +2,7 @@ name: iOS binary build & publish to TestFlight
 
 on:
   push:
-    branches: [ releases/** ]
+    branches: [ release/** ]
 
   workflow_dispatch:
 
