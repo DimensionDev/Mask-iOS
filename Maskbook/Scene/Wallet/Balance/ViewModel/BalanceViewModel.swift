@@ -234,6 +234,7 @@ extension BalanceViewModel: NSFetchedResultsControllerDelegate {
             
             switch currentTab.value {
             case .tokens:
+                guard controller == fetchedResultsController else { return }
                 guard let tokens = fetchedResultsController.fetchedObjects else {
                     assertionFailure("Data source does not fetch Tokens")
                     return
@@ -249,6 +250,7 @@ extension BalanceViewModel: NSFetchedResultsControllerDelegate {
                 }
                 
             case .collectibles:
+                guard controller == nftFetchedResultsController else { return }
                 newSnapshot.appendSections([.collectibles])
                 if let ensAssets = nftFetchedResultsController.fetchedObjects, !ensAssets.isEmpty {
                     let groupedAssets = Dictionary(grouping: ensAssets) { item in

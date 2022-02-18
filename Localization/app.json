@@ -158,7 +158,10 @@
             "back_up_locally": "Back up locally",
             "back_up": "Back up",
             "resend": "Resend",
-            "edit": "Edit"
+            "edit": "Edit",
+            "download": "download",
+            "skip": "Skip, download later",
+            "download_next": "I downloaded, next"
         },
         "loading": "Loading..."
     },
@@ -306,7 +309,9 @@
                 "back_up_data": "Back Up Data",
                 "back_up_password": "Backup Password",
                 "back_up_password_empty": "Please set up backup password",
-                "change_backup_password": "Change Backup Password"
+                "change_backup_password": "Change Backup Password",
+                "back_up_password_validation_tip": "Please enter the backup password that you used when you encrypt the backup file. ",
+                "wrong_password": "Wrong Password"
             },
             "profile": {
                 "title": "Profile",
@@ -481,8 +486,8 @@
                 "change_add_persona": "Change or Add Persona",
                 "rename": "Rename",
                 "export_private_key": "Export Private Key",
+                "download": "Download Mnemonic",
                 "backup": "Back Up",
-                "recovery": "Recovery",
                 "log_out": "Log Out",
                 "delete": "Delete"
             },
@@ -520,6 +525,13 @@
             "accounts": "Accounts",
             "connect_tips": "Select the social account to connect your persona. Enjoy a web 3.0 social expereince.",
             "add": "add"
+        },
+        "persona_download": {
+            "persona": "Persona:",
+            "mask_id": "MASK ID",
+            "private_key": "Private Key",
+            "identity_id": "Identity ID",
+            "download_tips": "This QR saves your identity code, please keep it safely. You can use Mask APP to scan QR to login persona. "
         },
         "wallet_balance": {
             "btn_swap": "Swap",
@@ -565,8 +577,9 @@
             "recovery_sign_in": "Recover Persona"
         },
         "identity_create": {
-            "title": "Verify identity code",
-            "description": "Write down each word."
+            "title": "Create a Persona",
+            "description": "Download your identity code.",
+            "identity_tips": "Identity code is used to generate your persona."
         },
         "identify_verify": {
             "title": "Verify identity code",
@@ -629,7 +642,7 @@
                "dhedge": "DHEDGE"
             },
             "plugin_introduction": {
-                "transak": "Buy crypto in 60+ countries with Transak support.",
+                "transak": "Buy crypto with Transak, support 60+ currencies.",
                 "ito": "Enable users to buy tokens directly on Twitter.",
                 "luckyDrop": "Surprise your encrypted friends with Token/NFT Lucky Drops.",
                 "swap": "Purchase tokens through dex without additional fees.",
@@ -752,7 +765,8 @@
                 "tips": "There is already a cloud backup, you can either first merge this cloud backup to your local data before you back up, or back up directly."
             },
             "merge_to_local": {
-                "title": "Merge cloud backup"
+                "title": "Merge cloud backup",
+                "merge_failed_message": "Merge cloud backup failed!"
             },
             "validation_code":  "Verification Code",
             "with_phone": "Back up with Phone",

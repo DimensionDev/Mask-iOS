@@ -159,8 +159,10 @@ final class RestoreDataPreviewController: BaseViewController {
     }
 
     private func login() {
-        self.coordinator.present(scene: .persona,
-                            transition: .replaceCurrentNavigation(tab: .personas, animated: true))
+        self.coordinator.present(
+            scene: .persona,
+            transition: .replaceCurrentNavigation(tab: .personas)
+        )
     }
 
     private func syncPasswordAndLogin() {
@@ -237,13 +239,10 @@ final class RestoreDataPreviewController: BaseViewController {
                         title: L10n.Common.Controls.done,
                         action: { [weak self] in
                             guard let self = self else { return }
-                            if case .root = self.destination {
-                                self.coordinator.present(scene: .persona,
-                                                    transition: .replaceCurrentNavigation(tab: .personas, animated: true))
-                            }
-                            
-                            if case .setting = self.destination {
-                                self.navigationController?.popViewController(animated: true)
+                            switch self.destination {
+                            case .root: self.login()
+                            case .setting: self.navigationController?.popViewController(animated: true)
+                            default: break
                             }
                         }
                     )

@@ -170,7 +170,7 @@ class BalanceCollectiblesCell: UITableViewCell {
         }
         
         if let assetImageURLString = firstAsset.collectionImage {
-            tokenIconImageView.setImageUrl(assetImageURLString)
+            tokenIconImageView.setImageUrl(assetImageURLString, downsamplingSize: CGSize(width: 38, height: 38))
             tokenIconImageView.isHidden = false
         } else {
             tokenIconImageView.isHidden = true

@@ -12,13 +12,13 @@ import UIKit
 import WebKit
 import SnapKit
 
-class CollectibleIconImageView: UIView, WKScriptMessageHandler {
+class CollectibleIconImageView: UIView {
     static let webProgressMessage: String = "postProgress"
     
     enum TokenImageType {
         case placeholder
         case normalImage(UIImage)
-        case normalUrl(String)
+        case normalUrl(String, CGSize? = nil)
         case svgUrl(String)
         case supports3d(imageUrl: String, animationUrl: String)
         case supportsVideo(imageUrl: String, animationUrl: String)
@@ -40,7 +40,7 @@ class CollectibleIconImageView: UIView, WKScriptMessageHandler {
         }
     }
     
-    private var imageView: UIImageView = {
+    lazy private var imageView: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.contentMode = .scaleAspectFill
@@ -114,31 +114,33 @@ class CollectibleIconImageView: UIView, WKScriptMessageHandler {
         addSubview(imageView)
         addSubview(svgWebView)
         addSubview(videoPlayerView)
-        
+
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             imageView.topAnchor.constraint(equalTo: topAnchor),
             imageView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
-        
+
         NSLayoutConstraint.activate([
             svgWebView.leadingAnchor.constraint(equalTo: leadingAnchor),
             svgWebView.trailingAnchor.constraint(equalTo: trailingAnchor),
             svgWebView.topAnchor.constraint(equalTo: topAnchor),
             svgWebView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
-        
-        svgWebView.configuration.userContentController.add(self, name: CollectibleIconImageView.webProgressMessage)
-        
+
+        svgWebView.configuration.userContentController.add(
+            ColletibleIconContentControllerHandler(imageView),
+            name: CollectibleIconImageView.webProgressMessage)
+
         videoPlayerView.snp.makeConstraints {
             $0.top.left.right.bottom.equalTo(self)
         }
-        
+
         videoPlayerView.delegate = self
     }
     
-    func setImageUrl(_ url: String?, _ animationUrl: String? = nil) {
+    func setImageUrl(_ url: String?, downsamplingSize: CGSize? = nil, _ animationUrl: String? = nil) {
         guard let validUrl = url else {
             showPlaceholder()
             return
@@ -148,7 +150,10 @@ class CollectibleIconImageView: UIView, WKScriptMessageHandler {
             if validUrl.hasSuffix(".svg") {
                 tokenImageType = .svgUrl(validUrl)
             } else {
-                tokenImageType = .normalUrl(validUrl)
+                let size = CGSize(
+                    width: (downsamplingSize?.width ?? 80) * UIScreen.main.scale,
+                    height: (downsamplingSize?.height ?? 80) * UIScreen.main.scale)
+                tokenImageType = .normalUrl(validUrl, size)
             }
             return
         }
@@ -169,9 +174,9 @@ class CollectibleIconImageView: UIView, WKScriptMessageHandler {
         case .placeholder:
             showPlaceholder()
             
-        case .normalUrl(let url):
+        case .normalUrl(let url, let downsamplingSize):
             imageView.isHidden = false
-            imageView.setNetworkImage(url: url) { [weak self] result in
+            imageView.setNetworkImage(url: url, downsamplingSize: downsamplingSize) { [weak self] result in
                 guard case .failure = result else {
                     self?.hidePlaceholder()
                     return
@@ -256,26 +261,24 @@ class CollectibleIconImageView: UIView, WKScriptMessageHandler {
         }
     }
 
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        if message.name == CollectibleIconImageView.webProgressMessage,
-           let progress: NSNumber = message.body as? NSNumber,
-           progress.intValue == 1 {
-            imageView.isHidden = true
-        }
-    }
-    
     private func reset() {
         imageView.isHidden = true
         videoPlayerView.isHidden = true
         svgWebView.isHidden = true
         svgWebView.isUserInteractionEnabled = false
+        svgWebView.stopLoading()
         placeholder.placeHolderCustomView?.isHidden = true
         imageView.kf.cancelDownloadTask()
         videoPlayerView.pause()
     }
     
     deinit {
-        svgWebView.configuration.userContentController.removeScriptMessageHandler(forName: CollectibleIconImageView.webProgressMessage)
+        svgWebView.configuration
+            .userContentController
+            .removeScriptMessageHandler(
+                forName: CollectibleIconImageView.webProgressMessage
+            )
+        log.debug("deinit", source: "collection-image-deinit")
     }
 }
 

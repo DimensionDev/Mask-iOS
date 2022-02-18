@@ -40,7 +40,7 @@ struct SheetAdaptiveContainer<Content: View>: View {
     @State
     private var showing = false
 
-    private let contentBuilder: () -> Content
+    private var contentBuilder: () -> Content
     private let dismissAction: () -> Void
     private let gestureInteractor: SheetGestureInteractor
     private let embedWithInput: Bool
@@ -48,7 +48,7 @@ struct SheetAdaptiveContainer<Content: View>: View {
     init(
         gestureInteractor: SheetGestureInteractor = .default,
         embedWithInput: Bool = true,
-        content contentBuilder: @escaping () -> Content,
+        @ViewBuilder content contentBuilder: @escaping () -> Content,
         onDismiss: @escaping () -> Void
     ) {
         self.gestureInteractor = gestureInteractor

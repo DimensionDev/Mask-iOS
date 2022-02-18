@@ -10,10 +10,8 @@ import Combine
 import Foundation
 import UIKit
 import UStack
-import WebExtension_Shim
 
 class PersonaWelcomeViewController: BaseViewController {
-    var words: [String] = []
 
     private var disposeBag = Set<AnyCancellable>()
 
@@ -22,8 +20,8 @@ class PersonaWelcomeViewController: BaseViewController {
     
     @InjectedProvider(\.mainCoordinator)
     private var coordinator
-
-    private lazy var indicatorView = MaskLoadingIndicator()
+    
+    private lazy var personaCreateHandler = PersonaCreateHandler()
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -98,15 +96,6 @@ class PersonaWelcomeViewController: BaseViewController {
             $0.trailing.equalTo(view.snp.trailing)
             $0.bottom.equalTo(view.readableContentGuide)
         }
-
-        view.withSubViews {
-            indicatorView
-        }
-        indicatorView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().offset(-15)
-            $0.size.equalTo(27)
-        }
     }
 
     override func buildEvent() {
@@ -146,53 +135,10 @@ class PersonaWelcomeViewController: BaseViewController {
             assertionFailure()
             return
         }
-        let names = personaManager.personaRecordsSubject.value.map(\.nickname)
-        if names.contains(text) {
-            personaNicknameDuplicated()
-            return
-        }
+        personaManager.temporaryPersonaName = text
         nameTextField.resignFirstResponder()
-        indicatorView.startAnimation()
-
-        PersonaManager.createPersona(nickname: text, mnemonic: words.joined(separator: " "))
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { _ in
-            }) { [weak self] result in
-                self?.indicatorView.stopAnimation()
-                if result.isSuccess {
-                    self?.createPersonaSuccess()
-                } else {
-                    self?.createPersonaFailed(result: result)
-                }
-            }
-            .store(in: &disposeBag)
-    }
-
-    func personaNicknameDuplicated() {
-        let alertController = AlertController(
-            title: L10n.Common.Alert.PersonaNameDuplicated.title,
-            message: "",
-            confirmButtonText: L10n.Common.Controls.done,
-            imageType: .error)
-        coordinator.present(
-            scene: .alertController(alertController: alertController),
-            transition: .alertController(completion: nil))
-    }
-
-    func createPersonaSuccess() {
-        DispatchQueue.main.async {
-            self.coordinator.present(scene: .persona, transition: .replaceCurrentNavigation(tab: .personas, animated: true))
-        }
-    }
-
-    func createPersonaFailed(result: MaskWebMessageResult) {
-        if let errorMessage = result.error?.message {
-            let alertController = AlertController(title: errorMessage, message: "",
-                                                  confirmButtonText: L10n.Common.Controls.done,
-                                                  imageType: .error)
-            coordinator.present(scene: .alertController(alertController: alertController),
-                                transition: .alertController(completion: nil))
-        }
+        coordinator.present(scene: .identityCreate,
+                            transition: .detail(animated: true))
     }
 }
 

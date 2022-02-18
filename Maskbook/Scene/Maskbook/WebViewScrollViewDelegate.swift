@@ -12,7 +12,6 @@ import UIKit
 class WebViewScrollViewDelegate: NSObject {
     weak var navigationController: UINavigationController?
 
-    let animationDuration = 0.3
     init(navigationController: UINavigationController?) {
         self.navigationController = navigationController
     }
@@ -21,11 +20,11 @@ class WebViewScrollViewDelegate: NSObject {
 extension WebViewScrollViewDelegate: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
-            UIView.animate(withDuration: animationDuration,
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            UIView.animate(withDuration: 0.15,
                            delay: 0,
                            options: .curveLinear,
                            animations: {
-                               self.navigationController?.setNavigationBarHidden(true, animated: true)
                                self.navigationController?.navigationBar.isTranslucent = true
                                self.navigationController?.navigationBar.alpha = 0
                            }, completion: nil)
@@ -34,14 +33,15 @@ extension WebViewScrollViewDelegate: UIScrollViewDelegate {
 
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
         if scrollView.panGestureRecognizer.translation(in: scrollView).y > 0 {
-            UIView.animate(withDuration: animationDuration,
-                           delay: 0,
-                           options: .curveLinear,
-                           animations: {
-                               self.navigationController?.setNavigationBarHidden(false, animated: true)
-                               self.navigationController?.navigationBar.isTranslucent = false
-                               self.navigationController?.navigationBar.alpha = 1
-                           }, completion: nil)
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+            self.navigationController?.navigationBar.alpha = 0
+                UIView.animate(withDuration: 0.2,
+                               delay: 0.1,
+                               options: .curveLinear,
+                               animations: {
+                                   self.navigationController?.navigationBar.isTranslucent = false
+                                   self.navigationController?.navigationBar.alpha = 1
+                               }, completion: nil)
         }
     }
 }

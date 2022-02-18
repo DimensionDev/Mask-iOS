@@ -18,6 +18,14 @@ extension View {
             Spacer()
         }
     }
+
+    func horizontallyCenterred() -> some View {
+        HStack(spacing: 0) {
+            Spacer()
+            self
+            Spacer()
+        }
+    }
 }
 
 @resultBuilder

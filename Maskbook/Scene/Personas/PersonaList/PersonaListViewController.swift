@@ -95,21 +95,6 @@ extension PersonaListViewController {
             transition: .panModel(animated: true)
         )
     }
-
-    func createPersonaSuccess() {}
-    
-    func createPersonaFailed(result: MaskWebMessageResult) {
-        if let errorMessage = result.error?.message {
-            let alertController = AlertController(
-                title: errorMessage,
-                message: "",
-                confirmButtonText: L10n.Common.Controls.done,
-                imageType: .error)
-            Coordinator.main.present(
-                scene: .alertController(alertController: alertController),
-                transition: .alertController(completion: nil))
-        }
-    }
     
     func personaNicknameDuplicated() {
         let alertController = AlertController(

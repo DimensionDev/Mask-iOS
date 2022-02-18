@@ -23,6 +23,8 @@ final class PersonasActionViewModel {
 
     @InjectedProvider(\.vault)
     private var vault
+    
+    var personaDownloadHandler: PersonaDownloadHandler?
 
     private var disposeBag = Set<AnyCancellable>()
 
@@ -30,6 +32,16 @@ final class PersonasActionViewModel {
 
     var title: String? {
         personaManager.currentPersona.value?.nickname
+    }
+    
+    var actions: [PersonasActionViewModel.Action] {
+        guard let persona = personaManager.currentPersona.value else { return [] }
+        
+        var actions = PersonasActionViewModel.Action.allCases
+        if !persona.isDownloadable {
+            actions.removeAll { $0 == .download }
+        }
+        return actions
     }
 
     var actionTitles: [String] {
@@ -106,6 +118,11 @@ final class PersonasActionViewModel {
                 )
             }), transition: .panModel(animated: true))
 
+        case .download:
+            guard let identifier = personaManager.currentPersona.value?.identifier else { return }
+            personaDownloadHandler = PersonaDownloadHandler(personaIdentifier: identifier)
+            personaDownloadHandler?.downloadAction()
+            
         case .backUp:
             showBackupData(cell: cell)
 
@@ -223,6 +240,7 @@ extension PersonasActionViewModel {
         case changeOrAddPersona = 0
         case rename
         case exportPrivateKey
+        case download
         case backUp
         case logout
 
@@ -237,6 +255,9 @@ extension PersonasActionViewModel {
             case .exportPrivateKey:
                 return L10n.Scene.Personas.Action.exportPrivateKey
 
+            case .download:
+                return L10n.Scene.Personas.Action.download
+                
             case .backUp:
                 return L10n.Scene.Personas.Action.backup
 
@@ -256,6 +277,9 @@ extension PersonasActionViewModel {
             case .exportPrivateKey:
                 return Asset.Images.Scene.Personas.exportPrivateKey.name
 
+            case .download:
+                return Asset.Images.Scene.Personas.download.name
+                
             case .backUp:
                 return Asset.Images.Scene.Personas.backup.name
 

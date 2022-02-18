@@ -267,8 +267,8 @@ extension Collectible: Managed {
     public class func createIdentifier(
         chainId: Int64,
         networkId: Int64,
-        tokenId: String) -> String {
-        return "\(chainId)-\(networkId)-\(tokenId)"
+        id: String) -> String {
+        return "\(chainId)-\(networkId)-\(id)"
     }
 
     public static func predicate(notInIdentifiers identifiers: [String]) -> NSPredicate {

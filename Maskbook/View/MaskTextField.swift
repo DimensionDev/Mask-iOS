@@ -29,8 +29,8 @@ final class MaskTextField: UITextField {
     
     private lazy var rightEyeButton: HitTestExpandedButton = {
         let button = HitTestExpandedButton(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
-        button.setImage(Asset.Images.Scene.WalletImport.openEyes.image, for: .normal)
-        button.setImage(Asset.Images.Scene.WalletImport.closeEyes.image, for: .selected)
+        button.setImage(Asset.Icon.insecureEye.image, for: .normal)
+        button.setImage(Asset.Icon.secureEye.image, for: .selected)
         button.addTarget(self, action: #selector(rightEyeButtonAction), for: .touchUpInside)
         return button
     }()

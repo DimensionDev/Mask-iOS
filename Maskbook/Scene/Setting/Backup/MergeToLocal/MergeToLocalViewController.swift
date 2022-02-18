@@ -67,21 +67,21 @@ final class MergeToLocalViewController: SheetViewController {
                         transition: .detail())
                 }
                 
-            case .failure(error: let error):
+            case .failure:
                 self?.loadingController.view.isHidden = true
-                self?.showError(error)
+                self?.showError(L10n.Scene.Backup.MergeToLocal.mergeFailedMessage)
             }
         }
         .store(in: &disposeBag)
     }
     
-    func showError(_ error: Error) {
+    func showError(_ errorMessage: String) {
         Alert(items: {
             AlertItem.image(.error)
             AlertItem.tipWith(
                 title: "",
                 detail: NSAttributedString(
-                    string: error.localizedDescription,
+                    string: errorMessage,
                     attributes: [
                         .font: FontStyles.BH4,
                         .foregroundColor: Asset.Colors.Text.dark.color

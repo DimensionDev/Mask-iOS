@@ -23,9 +23,9 @@ extension View {
             .cornerRadius(radius)
     }
 
-    func sheetStyleWithPaddingAndBackground() -> some View {
+    func sheetStyleWithPaddingAndBackground(bottomPadding: CGFloat = 24) -> some View {
         self.padding(.horizontal, 22.5)
-            .padding(.bottom, 24)
+            .padding(.bottom, bottomPadding)
             .background(Asset.Colors.Background.normal.asColor())
     }
 

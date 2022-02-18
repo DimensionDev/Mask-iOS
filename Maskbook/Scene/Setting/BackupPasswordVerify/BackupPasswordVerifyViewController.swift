@@ -31,11 +31,7 @@ class BackupPasswordVerifyViewController: UIViewController {
     }()
     
     lazy var passwordFormItem: PasswordFormItemView = {
-        var autoVerify = true
-        if case .inputBackupPasswordOnly = self.destination {
-            autoVerify = false
-        }
-        let form = PasswordFormItemFactory.createBackupFormItem(autoVerify: autoVerify)
+        let form = PasswordFormItemFactory.createBackupFormItem(autoVerify: true)
         form.passwordTitleLabel.text = L10n.Scene.BackupPasswordVerify.title
         return form
     }()
@@ -53,6 +49,8 @@ class BackupPasswordVerifyViewController: UIViewController {
     // MARK: - Data
     var disposeBag = Set<AnyCancellable>()
 
+    private var cancelableStorage: Set<AnyCancellable> = []
+
     private let destination: Destination
     
     init(destination: Destination) {
@@ -67,7 +65,6 @@ class BackupPasswordVerifyViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupUI()
         bindAction()
         bindViewModel()
@@ -91,11 +88,10 @@ private extension BackupPasswordVerifyViewController {
         nextButton.addTarget(self, action: #selector(onUnlockClicked), for: .touchUpInside)
         
         if case .verifyPassedCompletion = self.destination {
-            passwordFormItem.viewModel.passwordError.map { state in
-                state.isVerifyed
-            }
-            .assign(to: \.isEnabled, on: nextButton)
-            .store(in: &disposeBag)
+            passwordFormItem.viewModel.passwordError
+                .map(\.isVerifyed)
+                .assign(to: \.isEnabled, on: nextButton)
+                .store(in: &disposeBag)
         }
     }
     
@@ -120,11 +116,6 @@ private extension BackupPasswordVerifyViewController {
     @objc
     func onUnlockClicked() {    
         switch self.destination {
-        case let .inputBackupPasswordOnly(completion):
-            dismiss(animated: true) {
-                completion(self.passwordFormItem.passwordTextField.text)
-            }
-            
         case let .verifyPassedCompletion(completion):
             self.passwordFormItem.verify {
                 self.dismiss(animated: true) {
@@ -137,7 +128,6 @@ private extension BackupPasswordVerifyViewController {
 
 extension BackupPasswordVerifyViewController {
     enum Destination {
-        case inputBackupPasswordOnly(completion: (String?) -> Void)
         case verifyPassedCompletion(completion: () -> Void)
     }
 }
@@ -147,9 +137,10 @@ extension BackupPasswordVerifyViewController: KeyboardHandlerContent {
         _ sender: KeyboardHandlerViewController,
         scrollView: UIScrollView,
         keyboardFrame: CGRect,
-        firstResponder: UIView?) {
-            scrollView.scrollToBottom()
-        }
+        firstResponder: UIView?
+    ) {
+        scrollView.scrollToBottom()
+    }
 }
 
 #if canImport(SwiftUI) && DEBUG
@@ -157,7 +148,9 @@ import SwiftUI
 @available(iOS 13.0, *)
 struct BackupPasswordViewControllerPreview: PreviewProvider {
     static var previews: some SwiftUI.View {
-        let vc = BackupPasswordVerifyViewController(destination: .inputBackupPasswordOnly(completion: { _ in }))
+        let vc = BackupPasswordVerifyViewController(
+            destination: .verifyPassedCompletion(completion: {})
+        )
         let height: CGFloat = 237
         Group {
             UIViewPreview {

@@ -98,14 +98,15 @@ final class RestoreDataPickerController: UIDocumentPickerViewController {
     }
 
     private func enctyptedDataNavigation(use fileURL: URL) {
+        let destination = self.destination
         dismiss(animated: true) {
             self.coordinator.present(
-                scene: .inputBackupPassword(completion: { password in
+                scene: .verifyBackupFileEncryptSeed(completion: { data in
                     self.coordinator.present(
-                        scene: .localRestoreEncryptBackup(fileURL, decryptSeed: password, destination: self.destination),
+                        scene: .localRestoreEncryptBackup(data, destination: destination),
                         transition: .detail())
-                }),
-                transition: .panModel(animated: true)
+                }, fileURL: fileURL),
+                transition: .modal()
             )
         }
     }

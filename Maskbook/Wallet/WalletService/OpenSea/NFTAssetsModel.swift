@@ -187,7 +187,7 @@ extension Collectible {
         self.identifier = Collectible.createIdentifier(
             chainId: self.chainId,
             networkId: self.networkId,
-            tokenId: self.tokenId ?? "")
+            id: self.id ?? "")
         self.tokenName = assetModel.assetContract?.name
         self.tokenSymbol = assetModel.assetContract?.symbol
         self.collectionName = assetModel.collection?.name

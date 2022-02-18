@@ -16,6 +16,7 @@ final class RestoreFilePreviewViewModel: ObservableObject {
     var restoreFile: RestorePreviewResult
 
     private var cancelableStorage: Set<AnyCancellable> = []
+    private var fileHandlerStorage: Set<AnyCancellable> = []
     private(set) var stateSignal = PassthroughSubject<State, Never>()
 
     private let fileSource: RestoreFileSource
@@ -69,6 +70,7 @@ final class RestoreFilePreviewViewModel: ObservableObject {
                 }
                 .store(in: &cancelableStorage)
             } else {
+                // this case maybe never be excuted, for data would have been decrtypted when validating decrtypt seed
                 decrtyptData(at: url)
             }
 
@@ -80,29 +82,36 @@ final class RestoreFilePreviewViewModel: ObservableObject {
         guard let seed = decryptSeed else {
             return
         }
-        let url = fileURL
-        LazyFuture<Data, Error> { promise in
-            do {
-            let content = try Data(contentsOf: url)
-                promise(.success(content))
-            } catch {
-                promise(.failure(error))
+
+        fileHandlerStorage.removeAll()
+        let fileLoadingPublisher = fileURL
+            .asDataInBackupFile(with: seed)
+            .share()
+
+        fileLoadingPublisher
+            .compactMap {
+                if case .failure = $0 {
+                    return .failedLoadingData
+                } else {
+                    return nil
+                }
             }
-        }
-        .receive(on: DispatchQueue.global())
-        .flatMap { data -> AnyPublisher<Data, Error> in
-            return Crypto.decryptBackupToDataPublisher(password: seed, account: "", content: data)
-        }
-        .receive(on: RunLoop.main)
-        .sink(receiveCompletion: { [weak self] completion in
-            if case .failure = completion {
-                self?.stateSignal.send(.failedLoadingData)
+            .bind(to: \.stateSignal, on: self)
+            .store(in: &fileHandlerStorage)
+
+        fileLoadingPublisher
+            .compactMap { result -> Data? in
+                if case let .success(data) = result {
+                    return data
+                } else {
+                    return nil
+                }
             }
-        }, receiveValue: { [weak self] decryptedData in
-            self?.decryptedData = decryptedData
-            self?.parsingData()
-        })
-        .store(in: &cancelableStorage)
+            .sink { [weak self] decryptedData in
+                self?.decryptedData = decryptedData
+                self?.parsingData()
+            }
+            .store(in: &fileHandlerStorage)
     }
 
     private func parsingData() {
@@ -188,3 +197,28 @@ enum RestoreFileSource {
     }
 }
 // swiftlint:enable array_init
+
+extension URL {
+    func asDataInBackupFile(with decyptSeed: String) -> AnyPublisher<Result<Data, Error>, Never> {
+        LazyFuture<Data, Error> { promise in
+            do {
+            let content = try Data(contentsOf: self)
+                promise(.success(content))
+            } catch {
+                promise(.failure(error))
+            }
+        }
+        .receive(on: DispatchQueue.global())
+        .flatMap {
+            Crypto.decryptBackupToDataPublisher(password: decyptSeed, account: "", content: $0)
+        }
+        .map { data -> Result<Data, Error> in
+            .success(data)
+        }
+        .catch { error in
+            Just(.failure(error))
+        }
+        .receive(on: RunLoop.main)
+        .eraseToAnyPublisher()
+    }
+}

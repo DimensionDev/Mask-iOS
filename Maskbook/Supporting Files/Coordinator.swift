@@ -9,10 +9,10 @@ import BigInt
 import CoreDataStack
 import PanModal
 import PromiseKit
-import UIKit
-import web3swift
-import WalletConnectSwift
 import SwiftUI
+import UIKit
+import WalletConnectSwift
+import web3swift
 
 // swiftlint:disable file_length
 class Coordinator {
@@ -40,28 +40,28 @@ class Coordinator {
         case presentActivity(animated: Bool, from: UIView? = nil, completion: (() -> Void)? = nil)
     }
 
-    indirect enum Scene {
+    enum Scene {
         enum WalletContactParam {
             case address(address: String)
             case ensName(ensName: String)
-            
+
             var displayText: String {
                 switch self {
                 case .address(let address):
                     return address
-                    
+
                 case .ensName(let ensName):
                     return ensName
                 }
             }
         }
-        
+
         enum SendTransactionParam {
             case token(id: String)
             case collectible(collectible: Collectible)
         }
-        
-        case root(window: UIWindow, scene: Scene)
+
+        indirect case root(window: UIWindow, scene: Scene)
         case welcome
         case mainTab(selectedTab: MainTabBarController.Tab)
         case persona
@@ -115,7 +115,7 @@ class Coordinator {
         case rename(viewModel: RenameViewModel)
         case personaAction(viewModel: PersonasActionViewModel)
         case personaList
-        case personaWelcome(words: [String])
+        case personaWelcome
         case personaExportPrivateKey(personaIdentifier: String)
         case tokenDetail(token: MaskToken)
         case nftDetail(nftToken: Collectible)
@@ -128,7 +128,6 @@ class Coordinator {
         case emptyWallet
         case emptyIdentity
         case identityCreate
-        case identityVerify(words: [String])
         case identityRecovery(from: IdentityRecoveryViewController.From)
         case identityMnemonicImport
         case identityPrivateKeyImport
@@ -150,14 +149,13 @@ class Coordinator {
         case setBackupPassword
         case changeBackupPasswordStep1
         case changeBackupPasswordStep2
-        case inputBackupPassword(completion: (String?) -> Void)
+        case verifyBackupFileEncryptSeed(completion: (Data) -> Void, fileURL: URL)
         case pickLocalRestoreDataInInit(sender: UIView?)
         case pickLocalRestoreDataInSetting(sender: UIView?)
         case pickRemoteDataAndLogin(CloudVerifyResult)
         case remoteResotreVerify
         case localRestoreEncryptBackup(
-            _ url: URL,
-            decryptSeed: String?,
+            _ backup: Data,
             destination: RestoreDataPreviewController.Destination)
         case localRestore(
             _ url: URL,
@@ -189,7 +187,7 @@ class Coordinator {
         )
         case debug
     }
-    
+
     func setup(window: UIWindow) {
         let maskSocialVC = MaskSocialViewController(socialPlatform: settings.currentProfileSocialPlatform)
         let naviVC = UINavigationController(rootViewController: maskSocialVC)
@@ -496,9 +494,8 @@ extension Coordinator {
         case .personaList:
             return PersonaListViewController()
 
-        case let .personaWelcome(words):
+        case let .personaWelcome:
             let viewController = PersonaWelcomeViewController()
-            viewController.words = words
             return viewController
 
         case let .personaExportPrivateKey(personaIdentifier):
@@ -557,11 +554,6 @@ extension Coordinator {
             let viewController = IdentityCreateViewController()
             return viewController
 
-        case let .identityVerify(words):
-            let viewController = IdentityVerifyViewController()
-            viewController.viewModel.words = words
-            return viewController
-
         case let .identityRecovery(from):
             let viewController = IdentityRecoveryViewController(from: from)
             return viewController
@@ -605,8 +597,8 @@ extension Coordinator {
         case .remoteResotreVerify:
             return RemoteRestoreVerifyController()
 
-        case let .localRestoreEncryptBackup(url, decryptSeed, destination):
-            return RestoreDataPreviewController(url, destination: destination, decryptSeed: decryptSeed)
+        case let .localRestoreEncryptBackup(data, destination):
+            return RestoreDataPreviewController(data, destination: destination)
             
         case let .localRestore(url, destination):
             return RestoreDataPreviewController(url, destination: destination)
@@ -638,9 +630,11 @@ extension Coordinator {
             let vc = ChangeBackupPasswordStep2ViewController()
             return KeyboardHandlerViewController(content: vc)
 
-        case let .inputBackupPassword(completion):
-            let vc = BackupPasswordVerifyViewController(destination: .inputBackupPasswordOnly(completion: completion))
-            return KeyboardHandlerViewController(content: vc)
+        case let .verifyBackupFileEncryptSeed(completion, fileURL):
+            return RestoreLocalFileValidationController(
+                fileURL: fileURL,
+                completion: completion
+            )
 
         case let .remoteRestore(data, strategy):
             return RestoreDataPreviewController(data, destination: .remoteRestoreAndLogin(strategy: strategy))

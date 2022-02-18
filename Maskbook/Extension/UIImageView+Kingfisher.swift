@@ -6,40 +6,51 @@
 //  Copyright © 2021 dimension. All rights reserved.
 //
 
+import Foundation
 import Kingfisher
 
 extension UIImageView {
     func setNetworkImage(
         url: String?,
         placeholder: UIImage? = Asset.Images.Scene.Balance.tokenIconPlaceholder.image,
+        downsamplingSize: CGSize? = nil,
         completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) {
-        guard let urlString = url, let url = URL(string: urlString) else {
-            self.kf.cancelDownloadTask()
-            self.image = placeholder
-            return
+            guard let urlString = url, let url = URL(string: urlString) else {
+                self.kf.cancelDownloadTask()
+                self.image = placeholder
+                return
+            }
+            let processor = GifRoundCornerImageProcessor(cornerRadius: 20, targetSize: downsamplingSize)
+            self.kf.indicatorType = .none
+            self.kf.setImage(
+                with: url,
+                placeholder: placeholder,
+                options: [
+                    .processor(processor),
+                    .cacheSerializer(FormatIndicatedCacheSerializer.gif),
+                    .scaleFactor(UIScreen.main.scale),
+                    .transition(.fade(1))
+                ])
         }
-        let processor = GifRoundCornerImageProcessor(cornerRadius: 20)
-        self.kf.indicatorType = .none
-        self.kf.setImage(
-            with: url,
-            placeholder: placeholder,
-            options: [
-                .processor(processor),
-                .cacheSerializer(FormatIndicatedCacheSerializer.gif),
-                .scaleFactor(UIScreen.main.scale),
-                .transition(.fade(1))
-            ],
-            completionHandler: completionHandler
-        )
-    }
 }
 
+private var imageTaskKey: Void?
+
+func getAssociatedObject<T>(_ object: Any, _ key: UnsafeRawPointer) -> T? {
+    return objc_getAssociatedObject(object, key) as? T
+}
+
+func setRetainedAssociatedObject<T>(_ object: Any, _ key: UnsafeRawPointer, _ value: T) {
+    objc_setAssociatedObject(object, key, value, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+}
+
+typealias DownSamplingLevel = DBImageDecoder.DownSamplingLevel
 // A subclass of `RoundCornerImageProcessor` to:
 // 1.crop a round corner to non-gif images
 // 2.leave original gif image untouched
-public struct GifRoundCornerImageProcessor: ImageProcessor {
+struct GifRoundCornerImageProcessor: ImageProcessor {
     /// Represents a radius specified in a `RoundCornerImageProcessor`.
-    public enum Radius {
+    enum Radius {
         /// The radius should be calculated as a fraction of the image width. Typically the associated value should be
         /// between 0 and 0.5, where 0 represents no radius and 0.5 represents using half of the image width.
         case widthFraction(CGFloat)
@@ -63,23 +74,25 @@ public struct GifRoundCornerImageProcessor: ImageProcessor {
 
     /// Identifier of the processor.
     /// - Note: See documentation of `ImageProcessor` protocol for more.
-    public let identifier: String
+    let identifier: String
 
     /// The radius will be applied in processing. Specify a certain point value with `.point`, or a fraction of the
     /// target image with `.widthFraction`. or `.heightFraction`. For example, given a square image with width and
     /// height equals,  `.widthFraction(0.5)` means use half of the length of size and makes the final image a round one.
-    public let radius: Radius
+    let radius: Radius
     
     /// The target corners which will be applied rounding.
-    public let roundingCorners: RectCorner
+    let roundingCorners: RectCorner
     
     /// Target size of output image should be. If `nil`, the image will keep its original size after processing.
-    public let targetSize: CGSize?
+    let targetSize: CGSize?
+    
+    let downsamplingLevel: DownSamplingLevel
 
     /// Background color of the output image. If `nil`, it will use a transparent background.
-    public let backgroundColor: KFCrossPlatformColor?
+    let backgroundColor: KFCrossPlatformColor?
 
-    public init(
+    init(
         cornerRadius: CGFloat,
         targetSize: CGSize? = nil,
         roundingCorners corners: RectCorner = .all,
@@ -89,31 +102,25 @@ public struct GifRoundCornerImageProcessor: ImageProcessor {
         self.init(radius: radius, targetSize: targetSize, roundingCorners: corners, backgroundColor: backgroundColor)
     }
 
-    public init(
+    init(
         radius: Radius,
         targetSize: CGSize? = nil,
         roundingCorners corners: RectCorner = .all,
-        backgroundColor: KFCrossPlatformColor? = nil
+        backgroundColor: KFCrossPlatformColor? = nil,
+        downsamplingLevel: DownSamplingLevel = .level3
     ) {
         self.radius = radius
         self.targetSize = targetSize
         self.roundingCorners = corners
         self.backgroundColor = backgroundColor
-
+        self.downsamplingLevel = downsamplingLevel
         self.identifier = {
-            var identifier = ""
-
-            if let size = targetSize {
-                identifier = "com.dimension.MaskNetwork.RoundCornerImageProcessor" +
-                             "(\(radius.radiusIdentifier)_\(size)\(corners.rawValue))"
-            } else {
-                identifier = "com.dimension.MaskNetwork.RoundCornerImageProcessor" +
-                             "(\(radius.radiusIdentifier)\(corners.rawValue))"
-            }
+            var identifier = "com.dimension.MaskNetwork.RoundCornerImageProcessor" +
+            "(\(radius.radiusIdentifier)_\(targetSize ?? .zero)_\(corners.rawValue)_\(downsamplingLevel.rawValue))"
             if let backgroundColor = backgroundColor {
                 identifier += "_\(backgroundColor)"
             }
-
+            
             return identifier
         }()
     }
@@ -126,7 +133,7 @@ public struct GifRoundCornerImageProcessor: ImageProcessor {
     /// - Returns: The processed image.
     ///
     /// - Note: See documentation of `ImageProcessor` protocol for more.
-    public func process(item: ImageProcessItem, options: KingfisherParsedOptionsInfo) -> KFCrossPlatformImage? {
+    func process(item: ImageProcessItem, options: KingfisherParsedOptionsInfo) -> KFCrossPlatformImage? {
         switch item {
         case .image(let image):
             let size = targetSize ?? image.kf.base.size
@@ -135,6 +142,7 @@ public struct GifRoundCornerImageProcessor: ImageProcessor {
             switch radius {
             case .point(let point):
                 cornerRadius = point
+                
             case .widthFraction(let widthFraction):
                 cornerRadius = size.width * widthFraction
                 
@@ -142,19 +150,46 @@ public struct GifRoundCornerImageProcessor: ImageProcessor {
                 cornerRadius = size.height * heightFraction
             }
             
-            if image.kf.gifRepresentation() == nil {
-                return image.kf.scaled(to: options.scaleFactor)
-                            .kf.image(
-                                withRoundRadius: cornerRadius,
-                                fit: size,
-                                roundingCorners: roundingCorners,
-                                backgroundColor: backgroundColor)
+            log.debug("kingfisher size \(image.kf.base.size)", source: "collection-image")
+            if let gifData = image.kf.gifRepresentation() {
+                log.debug("process gif image", source: "collection-image")
+                // download image -> processor -> cache 
+                let decoder = DBImageDecoder(downsamplingLevel: downsamplingLevel, maxSize: targetSize)
+                decoder.setData(gifData, allDataReceived: true)
+                guard let processedData = decoder.data else {
+                    return image
+                }
+                guard let prcessedImage = KingfisherWrapper.animatedImage(
+                    data: processedData, options: options.imageCreatingOptions
+                ) else {
+                    return image
+                }
+                log.debug(
+                    "process gif image, original size: \(gifData.count) processed size: \(processedData.count)",
+                    source: "collection-image"
+                )
+                return prcessedImage
             } else {
                 return image.kf.scaled(to: options.scaleFactor)
+                    .kf.image(
+                        withRoundRadius: cornerRadius,
+                        fit: size,
+                        roundingCorners: roundingCorners,
+                        backgroundColor: backgroundColor)
             }
             
         case .data:
             return (DefaultImageProcessor.default |> self).process(item: item, options: options)
         }
+    }
+}
+
+extension KingfisherParsedOptionsInfo {
+    var imageCreatingOptions: ImageCreatingOptions {
+        return ImageCreatingOptions(
+            scale: scaleFactor,
+            duration: 0.0,
+            preloadAll: preloadAllAnimationData,
+            onlyFirstFrame: onlyLoadFirstFrame)
     }
 }

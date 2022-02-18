@@ -11,7 +11,7 @@ import LocalAuthentication
 import UIKit
 
 // swiftlint:disable line_length
-class LAErrorHandler {
+enum LAErrorHandler {
     static func handleError(error: Error?) {
         guard let nserror = error as? LAError else { return }
         print(nserror)
@@ -31,7 +31,10 @@ class LAErrorHandler {
             case .biometryNotAvailable:
                 maskUserDefaults.enableBiometryID = false
                 alertController = AlertController(title: L10n.Scene.BiometryId.biometryNotAvailable(biometryNameName), message: "", confirmButtonText: L10n.Common.Controls.done, imageType: .error, confirmButtonClicked: { _ in
-                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+                    guard let url = URL(string: UIApplication.openSettingsURLString) else {
+                        return
+                    }
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 })
 
             default:

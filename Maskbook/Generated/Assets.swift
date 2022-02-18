@@ -75,6 +75,10 @@ internal enum Asset {
         internal static let placeholderColor = ColorAsset(name: "Colors/Control/TextView/placeholderColor")
       }
     }
+    internal enum Gradient {
+      internal static let blue1 = ColorAsset(name: "Colors/Gradient/blue1")
+      internal static let blue2 = ColorAsset(name: "Colors/Gradient/blue2")
+    }
     internal enum RedPackage {
       internal static let background = ColorAsset(name: "Colors/RedPackage/background")
       internal static let border = ColorAsset(name: "Colors/RedPackage/border")
@@ -88,6 +92,7 @@ internal enum Asset {
       internal static let connectHintText = ColorAsset(name: "Colors/Social/connectHintText")
     }
     internal enum Text {
+      internal static let black = ColorAsset(name: "Colors/Text/black")
       internal static let dark = ColorAsset(name: "Colors/Text/dark")
       internal static let darklight = ColorAsset(name: "Colors/Text/darklight")
       internal static let light = ColorAsset(name: "Colors/Text/light")
@@ -151,6 +156,8 @@ internal enum Asset {
       internal static let mask = ImageAsset(name: "Icon/Logo/mask")
     }
     internal static let close = ImageAsset(name: "Icon/close")
+    internal static let insecureEye = ImageAsset(name: "Icon/insecureEye")
+    internal static let secureEye = ImageAsset(name: "Icon/secureEye")
   }
   internal enum Images {
     internal enum Scene {
@@ -223,6 +230,7 @@ internal enum Asset {
         internal static let backup = ImageAsset(name: "Images/Scene/Personas/backup")
         internal static let changeOrAdd = ImageAsset(name: "Images/Scene/Personas/changeOrAdd")
         internal static let delete = ImageAsset(name: "Images/Scene/Personas/delete")
+        internal static let download = ImageAsset(name: "Images/Scene/Personas/download")
         internal static let emptyContact = ImageAsset(name: "Images/Scene/Personas/emptyContact")
         internal static let emptyPersona = ImageAsset(name: "Images/Scene/Personas/emptyPersona")
         internal static let exportPrivateKey = ImageAsset(name: "Images/Scene/Personas/exportPrivateKey")
@@ -233,6 +241,7 @@ internal enum Asset {
         internal static let recovery = ImageAsset(name: "Images/Scene/Personas/recovery")
         internal static let rename = ImageAsset(name: "Images/Scene/Personas/rename")
         internal static let twitter = ImageAsset(name: "Images/Scene/Personas/twitter")
+        internal static let watermark = ImageAsset(name: "Images/Scene/Personas/watermark")
       }
       internal enum RedPackage {
         internal static let closeSquare = ImageAsset(name: "Images/Scene/RedPackage/closeSquare")

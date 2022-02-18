@@ -48,6 +48,10 @@ class NFTCollectionViewCell: UICollectionViewCell {
             emptyView.update(name: collectible.tokenName, id: collectible.tokenId)
         }
     }
+    
+    deinit {
+        log.debug("deinit", source: "collection-image-deinit")
+    }
 }
 
 extension NFTCollectionViewCell {

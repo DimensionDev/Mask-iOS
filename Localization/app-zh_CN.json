@@ -629,8 +629,8 @@
             },
             "plugin_introduction": {
                 "transak": "Transak可支持在60多个国家内购买代币。",
-                "ito": "允许用户在Twitter上直接购买令牌。",
-                "luckyDrop": "使用 Token/NFT 的红包让你的加密好友感到惊喜。",
+                "ito": "允许用户在Twitter上直接购买代币。",
+                "luckyDrop": "发送红包(Token/NFT)，给加密好友带来惊喜。",
                 "swap": "通过Dex购买代币，无需额外费用和限制。",
                 "file_service": "为用户提供去中心化文档存储功能。"
             },

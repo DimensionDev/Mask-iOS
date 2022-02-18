@@ -30,8 +30,8 @@ struct RestoreWalletPasswordVertifyView: View {
 
                     Image(
                         uiImage: secureText
-                        ? Asset.Images.Scene.WalletImport.closeEyes.image
-                        : Asset.Images.Scene.WalletImport.openEyes.image
+                        ? Asset.Icon.secureEye.image
+                        : Asset.Icon.insecureEye.image
                     )
                     .onTapGesture { secureText.toggle() }
                 }

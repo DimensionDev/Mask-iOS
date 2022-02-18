@@ -187,18 +187,6 @@ extension PersonasViewController {
         )
     }
 
-    func createPersonaSuccess() { }
-
-    func createPersonaFailed(result: MaskWebMessageResult) {
-        if let errorMessage = result.error?.message {
-            let alertController = AlertController(title: errorMessage, message: "", confirmButtonText: L10n.Common.Controls.done, imageType: .error)
-            coordinator.present(
-                scene: .alertController(alertController: alertController),
-                transition: .alertController(completion: nil)
-            )
-        }
-    }
-
     func titleViewClicked() {
         coordinator.present(
             scene: .personaAction(viewModel: PersonasActionViewModel()),

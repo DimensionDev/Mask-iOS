@@ -44,6 +44,17 @@ class ContactProfileTableViewCell: UITableViewCell {
         return imageView
     }()
     
+    private let maskIcon: UIImageView = {
+        let imageView = UIImageView()
+        NSLayoutConstraint.activate([
+            imageView.heightAnchor.constraint(equalToConstant: 20),
+            imageView.widthAnchor.constraint(equalToConstant: 20)
+        ])
+        imageView.image = Asset.Icon.Logo.littleMask.image
+        imageView.applyRadius(radius: 10)
+        return imageView
+    }()
+    
     private lazy var headerView: UIView = {
         let view = UIView()
         view.withSubViews {
@@ -108,39 +119,27 @@ class ContactProfileTableViewCell: UITableViewCell {
         if profile.linkedPersona != nil {
             inviteButton.isHidden = true
             platformIcon.isHidden = false
-            nicknameLabel.attributedText = attributeMaskIconString(string: profile.nickname
-                ?? profile.socialID,
-                needMaskLogo: true)
+            nicknameLabel.text = profile.nickname
+                ?? profile.socialID
+            maskIcon.isHidden = false
         } else {
             inviteButton.isHidden = false
             platformIcon.isHidden = true
-            nicknameLabel.attributedText = attributeMaskIconString(string: profile.nickname
-                ?? profile.socialID,
-                needMaskLogo: false)
+            nicknameLabel.text = profile.nickname
+                ?? profile.socialID
+            maskIcon.isHidden = true
         }
-    }
-    
-    func attributeMaskIconString(string: String, needMaskLogo: Bool) -> NSAttributedString {
-        let attachment = NSTextAttachment(
-            image: Asset.Icon.Logo.littleMask.image
-        )
-        attachment.bounds = CGRect(origin: CGPoint(x: 0, y: -4), size: CGSize(width: 20, height: 20))
-        let attributeString = NSMutableAttributedString(string: string, attributes: [
-            .font: FontStyles.BH5,
-            .foregroundColor: Asset.Colors.Text.dark.color
-        ])
-        if needMaskLogo {
-            attributeString.append(NSAttributedString(string: "  "))
-            attributeString.append(NSAttributedString(attachment: attachment))
-        }
-        return attributeString
     }
 
     private func setupUI() {
         backgroundColor = .clear
         selectionStyle = .none
         let vStack = VStackView(spacing: 4) {
-            nicknameLabel
+            HStackView(spacing: 4) {
+                nicknameLabel
+                maskIcon
+                Spacer()
+            }
             socialIDLabel
         }
         

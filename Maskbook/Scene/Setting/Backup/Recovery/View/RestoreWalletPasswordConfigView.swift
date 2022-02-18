@@ -67,8 +67,8 @@ struct RestoreWalletPasswordConfigView: View {
 
                 Image(
                     uiImage: passwordSecureText
-                    ? Asset.Images.Scene.WalletImport.closeEyes.image
-                    : Asset.Images.Scene.WalletImport.openEyes.image
+                    ? Asset.Icon.secureEye.image
+                    : Asset.Icon.insecureEye.image
                 )
                 .onTapGesture { passwordSecureText.toggle() }
             }
@@ -98,8 +98,8 @@ struct RestoreWalletPasswordConfigView: View {
 
                 Image(
                     uiImage: repeatPasswordSecureText
-                    ? Asset.Images.Scene.WalletImport.closeEyes.image
-                    : Asset.Images.Scene.WalletImport.openEyes.image
+                    ? Asset.Icon.secureEye.image
+                    : Asset.Icon.insecureEye.image
                 )
                 .onTapGesture { repeatPasswordSecureText.toggle() }
             }

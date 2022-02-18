@@ -53,7 +53,7 @@ final class IdentityEmptyViewController: BaseViewController {
         super.viewDidLoad()
         title = L10n.Scene.IdentityEmpty.title
         navigationItem.leftBarButtonItems = [.fixedSpace(14),
-                                              UIBarButtonItem(customView: scanButton)]
+                                             UIBarButtonItem(customView: scanButton)]
         navigationItem.largeTitleDisplayMode = .never
     }
 
@@ -94,7 +94,7 @@ final class IdentityEmptyViewController: BaseViewController {
     override func buildEvent() {
         createButton.cv.tap()
             .sink { [weak self] _ in
-                self?.coordinator.present(scene: .identityCreate,
+                self?.coordinator.present(scene: .personaWelcome,
                                           transition: .detail(animated: true))
             }
             .store(in: &subscriptionSet)

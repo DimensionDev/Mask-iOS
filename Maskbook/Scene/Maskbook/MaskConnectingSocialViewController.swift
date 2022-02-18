@@ -102,10 +102,11 @@ class MaskConnectingSocialViewController: BaseViewController {
         
         @objc
         private func closeButtonDidClicked() {
-            if let topConstraint = socialViewController?.containerViewTopConstraint,
-                let containerView = socialViewController?.containerView {
+            if let viewController = socialViewController,
+                let topConstraint = viewController.containerViewTopConstraint,
+               let containerView = viewController.containerView {
                 NSLayoutConstraint.deactivate([topConstraint])
-                let newTopConstraint = containerView.topAnchor.constraint(equalTo: containerView.superview!.topAnchor)
+                let newTopConstraint = containerView.topAnchor.constraint(equalTo: viewController.view!.safeAreaLayoutGuide.topAnchor)
                 socialViewController?.containerViewTopConstraint = newTopConstraint
                 NSLayoutConstraint.activate([
                     newTopConstraint
@@ -222,7 +223,7 @@ extension MaskConnectingSocialViewController {
         if let banner = connectViewModel.hintBannerView {
             containerViewTopConstraint = maskbookTab.containerView.topAnchor.constraint(equalTo: banner.bottomAnchor)
         } else {
-            containerViewTopConstraint = maskbookTab.containerView.topAnchor.constraint(equalTo: view.topAnchor)
+            containerViewTopConstraint = maskbookTab.containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         }
         
         NSLayoutConstraint.activate([

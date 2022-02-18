@@ -64,8 +64,15 @@ class PersonaActionViewController: BaseViewController {
             .store(in: &disposeBag)
         
         personaManager.currentPersona
-            .map { $0?.nickname }
-            .assign(to: \.title, on: self)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] persona in
+                guard let self = self else { return }
+                guard let persona = persona else {
+                    return
+                }
+                self.title = persona.nickname
+                self.tableView.reloadData()
+            })
             .store(in: &disposeBag)
     }
     private func setupTableView() {

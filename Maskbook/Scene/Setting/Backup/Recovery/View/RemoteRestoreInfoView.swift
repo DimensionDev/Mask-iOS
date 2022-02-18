@@ -118,7 +118,7 @@ struct RemoteRestoreInfoView: View {
                     .font(FontStyles.bh5.font)
                     .foregroundColor(Asset.Colors.Text.dark.asColor())
                     .frame(height: 52)
-                    .padding([.leading, .trailing], 12)
+                    .padding(.horizontal, 12)
                     .background(Asset.Colors.Background.dark.asColor())
                     .cornerRadius(8)
             } else {
@@ -126,7 +126,7 @@ struct RemoteRestoreInfoView: View {
                     .font(FontStyles.bh5.font)
                     .foregroundColor(Asset.Colors.Text.dark.asColor())
                     .frame(height: 52)
-                    .padding([.leading, .trailing], 12)
+                    .padding(.horizontal, 12)
                     .background(Asset.Colors.Background.dark.asColor())
                     .cornerRadius(8)
             }
@@ -136,10 +136,10 @@ struct RemoteRestoreInfoView: View {
                     viewModel.showPassword.toggle()
                 } label: {
                     viewModel.showPassword
-                    ? Image(uiImage: Asset.Images.Scene.WalletImport.openEyes.image)
-                    : Image(uiImage: Asset.Images.Scene.WalletImport.closeEyes.image)
+                    ? Image(uiImage: Asset.Icon.insecureEye.image)
+                    : Image(uiImage: Asset.Icon.secureEye.image)
                 }
-                .padding([.leading, .trailing], 12)
+                .padding(.horizontal, 12)
             }
         }
     }

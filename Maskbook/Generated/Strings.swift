@@ -455,6 +455,14 @@ enum L10n {
       static var done: String {
         return L10n.tr("Localizable", "Common.Controls.Done")
       }
+      /// download
+      static var download: String {
+        return L10n.tr("Localizable", "Common.Controls.Download")
+      }
+      /// I downloaded, next
+      static var downloadNext: String {
+        return L10n.tr("Localizable", "Common.Controls.DownloadNext")
+      }
       /// Edit
       static var edit: String {
         return L10n.tr("Localizable", "Common.Controls.Edit")
@@ -514,6 +522,10 @@ enum L10n {
       /// Sign Out
       static var signout: String {
         return L10n.tr("Localizable", "Common.Controls.Signout")
+      }
+      /// Skip, download later
+      static var skip: String {
+        return L10n.tr("Localizable", "Common.Controls.Skip")
       }
       /// Try Again
       static var tryAgain: String {
@@ -734,6 +746,10 @@ enum L10n {
       }
 
       enum MergeToLocal {
+        /// Merge cloud backup failed!
+        static var mergeFailedMessage: String {
+          return L10n.tr("Localizable", "Scene.Backup.MergeToLocal.MergeFailedMessage")
+        }
         /// Merge cloud backup
         static var title: String {
           return L10n.tr("Localizable", "Scene.Backup.MergeToLocal.Title")
@@ -940,11 +956,15 @@ enum L10n {
     }
 
     enum IdentityCreate {
-      /// Write down each word.
+      /// Download your identity code.
       static var description: String {
         return L10n.tr("Localizable", "Scene.IdentityCreate.Description")
       }
-      /// Verify identity code
+      /// Identity code is used to generate your persona.
+      static var identityTips: String {
+        return L10n.tr("Localizable", "Scene.IdentityCreate.IdentityTips")
+      }
+      /// Create a Persona
       static var title: String {
         return L10n.tr("Localizable", "Scene.IdentityCreate.Title")
       }
@@ -1184,6 +1204,29 @@ enum L10n {
       }
     }
 
+    enum PersonaDownload {
+      /// This QR saves your identity code, please keep it safely. You can use Mask APP to scan QR to login persona. 
+      static var downloadTips: String {
+        return L10n.tr("Localizable", "Scene.PersonaDownload.DownloadTips")
+      }
+      /// Identity ID
+      static var identityId: String {
+        return L10n.tr("Localizable", "Scene.PersonaDownload.IdentityId")
+      }
+      /// MASK ID
+      static var maskId: String {
+        return L10n.tr("Localizable", "Scene.PersonaDownload.MaskId")
+      }
+      /// Persona:
+      static var persona: String {
+        return L10n.tr("Localizable", "Scene.PersonaDownload.Persona")
+      }
+      /// Private Key
+      static var privateKey: String {
+        return L10n.tr("Localizable", "Scene.PersonaDownload.PrivateKey")
+      }
+    }
+
     enum PersonaExportPrivateKey {
       /// Backup and Recovery
       static var backupRecovery: String {
@@ -1284,6 +1327,10 @@ enum L10n {
         static var delete: String {
           return L10n.tr("Localizable", "Scene.Personas.Action.Delete")
         }
+        /// Download Mnemonic
+        static var download: String {
+          return L10n.tr("Localizable", "Scene.Personas.Action.Download")
+        }
         /// Export Private Key
         static var exportPrivateKey: String {
           return L10n.tr("Localizable", "Scene.Personas.Action.ExportPrivateKey")
@@ -1291,10 +1338,6 @@ enum L10n {
         /// Log Out
         static var logOut: String {
           return L10n.tr("Localizable", "Scene.Personas.Action.LogOut")
-        }
-        /// Recovery
-        static var recovery: String {
-          return L10n.tr("Localizable", "Scene.Personas.Action.Recovery")
         }
         /// Rename
         static var rename: String {
@@ -1845,6 +1888,10 @@ enum L10n {
         static var backUpPasswordEmpty: String {
           return L10n.tr("Localizable", "Scene.Setting.BackupRecovery.BackUpPasswordEmpty")
         }
+        /// Please enter the backup password that you used when you encrypt the backup file. 
+        static var backUpPasswordValidationTip: String {
+          return L10n.tr("Localizable", "Scene.Setting.BackupRecovery.BackUpPasswordValidationTip")
+        }
         /// Change Backup Password
         static var changeBackupPassword: String {
           return L10n.tr("Localizable", "Scene.Setting.BackupRecovery.ChangeBackupPassword")
@@ -1856,6 +1903,10 @@ enum L10n {
         /// Backup & Recovery
         static var title: String {
           return L10n.tr("Localizable", "Scene.Setting.BackupRecovery.Title")
+        }
+        /// Wrong Password
+        static var wrongPassword: String {
+          return L10n.tr("Localizable", "Scene.Setting.BackupRecovery.WrongPassword")
         }
       }
 

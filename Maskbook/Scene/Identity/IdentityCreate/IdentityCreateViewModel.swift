@@ -9,10 +9,17 @@
 import Combine
 import Foundation
 
-final class IdentityCreateViewModel {
+final class IdentityCreateViewModel: NSObject {
     var identity = CurrentValueSubject<[String], Never>([])
     
     var errorNotifier = PassthroughSubject<Error, Never>()
+    
+    lazy var personaCreateHandler = PersonaCreateHandler()
+    
+    var personaDownloadHandler: PersonaDownloadHandler?
+    
+    @InjectedProvider(\.personaManager)
+    var personaManager
     
     func generateIdentityCode() {
         let result = WalletCoreHelper.generateMnemonic()
@@ -25,10 +32,10 @@ final class IdentityCreateViewModel {
                 return
             }
             // make sure mnemonic is unique
-            self.identity.send(Array(mnemonic.components(separatedBy: " ")))
+            identity.send(Array(mnemonic.components(separatedBy: " ")))
 
         case let .failure(error):
-            self.errorNotifier.send(error)
+            errorNotifier.send(error)
         }
     }
 }
