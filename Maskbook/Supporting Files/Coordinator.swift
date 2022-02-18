@@ -311,9 +311,7 @@ class Coordinator {
             }
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let window = UIApplication.shared.windows.first { window in
-                window.isKeyWindow == true
-            }
+            let window = UIApplication.shared.windows.first(where: \.isKeyWindow)
             window?.bringSubviewToFront(self.maskBrowser.browser.tabs.backgroundTab.webView)
         }
         
