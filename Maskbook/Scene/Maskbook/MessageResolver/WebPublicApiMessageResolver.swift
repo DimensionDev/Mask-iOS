@@ -40,6 +40,8 @@ class WebPublicApiMessageResolver: MaskMessageResolver {
         case query_avatar
         case store_avatar
         
+        case create_post
+        
         case notifyRedpacket
         case claimOrRefundRedpacket
     }
@@ -187,6 +189,9 @@ class WebPublicApiMessageResolver: MaskMessageResolver {
             
         case .store_avatar:
             parseSuccess = storeAvatar(messageData: messageData)
+            
+        case .create_post:
+            parseSuccess = createPost(messageData: messageData)
             
         case .notifyRedpacket:
             parseSuccess = notifyRedpacket(messageData: messageData)

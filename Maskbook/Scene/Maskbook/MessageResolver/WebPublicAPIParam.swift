@@ -160,6 +160,11 @@ struct StoreAvatarParam: Decodable {
     let avatar: String?
 }
 
+struct CreatePostParam: Decodable {
+    let identifier: String?
+    let avatar: String?
+}
+
 // MARK: - Plugins
 struct NotifyRedpacketParam: Decodable {
     let redpacketPayload: String

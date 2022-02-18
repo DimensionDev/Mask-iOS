@@ -6,13 +6,25 @@
 //  Copyright © 2022 dimension. All rights reserved.
 //
 
-import Foundation
+import CoreData
 import CoreDataStack
+import Foundation
+import SwiftyJSON
 
 extension PostRecord {
     var postCryptoKey: JsonWebKey? {
-        postCryptoKeyRaw.flatMap {
-            try? JSONDecoder().decode(JsonWebKey.self, from: $0)
+        set {
+            guard let jsonWenKey = newValue else {
+                postCryptoKeyRaw = nil
+                return
+            }
+            let data = try? JSONEncoder().encode(jsonWenKey)
+            postCryptoKeyRaw = data
+        }
+        get {
+            postCryptoKeyRaw.flatMap {
+                try? JSONDecoder().decode(JsonWebKey.self, from: $0)
+            }
         }
     }
 }

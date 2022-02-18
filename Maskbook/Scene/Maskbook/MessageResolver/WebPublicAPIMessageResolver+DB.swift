@@ -441,6 +441,19 @@ extension WebPublicApiMessageResolver {
         return false
     }
     
+    @discardableResult
+    func createPost(messageData: Data) -> Bool {
+        guard let request = try? decoder.decode(WebPublicApiMessageRequest<JSON>.self,
+                                                from: messageData)
+        else {
+            return false
+        }
+        guard let json = request.params else { return false }
+        PostRepository.createPost(json: json)
+        
+        return false
+    }
+    
     func getImageFromKingfisher(url: String, requestId: String) {
         KingfisherManager.shared.retrieveImage(with: URL(string: url)!,
                                                options: nil,
