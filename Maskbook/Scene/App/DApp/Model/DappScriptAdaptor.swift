@@ -2,45 +2,76 @@ import Combine
 import WebKit
 
 // swiftlint:disable implicitly_unwrapped_optional
-final class DappScriptAdaptor<T: DecentralisedApplicationResolver>: NSObject, WKNavigationDelegate, WKScriptMessageHandler {
-    private(set) weak var webView: WKWebView?
-    private var observingHandler: NSKeyValueObservation?
-
-    private(set) var cancelableStorage: Set<AnyCancellable> = []
-
-    // use exactly the same name match Bridge.name in web3swift
-    // to make sure co-response to js script
-    private var scriptMessageHandlerName: String {
-        resolver.scriptMessageHandlerName
-    }
+final class DappScriptAdaptor<T: DecentralisedApplicationResolver>: NSObject, WKNavigationDelegate {
+    private var cancelableStorage: Set<AnyCancellable> = []
 
     private(set) var loadingSignal = CurrentValueSubject<LoadingState, Never>(.loading)
 
     private(set) var resolver: T
 
-    func cleanup() {
-        webView?.configuration.userContentController.removeScriptMessageHandler(forName: scriptMessageHandlerName)
-        observingHandler?.invalidate()
-    }
+    @WKScriptMessageHandled(handlerName: T.scriptMessageHandlerName)
+    private(set) var webView: WKWebView?
 
     init(resolver: T) {
         self.resolver = resolver
         super.init()
     }
 
-    func bind(to webView: WKWebView) {
-        cleanup()
-        self.webView = webView
-        webView.configuration.userContentController.add(self, name: scriptMessageHandlerName)
+    private var bundle: Bundle { Bundle(for: Self.self) }
 
-        observingHandler = webView.configuration.observe(
-            \.userContentController,
-            options: [.new, .old]
-        ) { [weak self] _, updateValue in
-            guard let self = self else { return }
-            updateValue.oldValue?.removeScriptMessageHandler(forName: self.scriptMessageHandlerName)
-            updateValue.newValue?.add(self, name: self.scriptMessageHandlerName)
+    private var ethereumScript: WKUserScript {
+        let rpcUrl = Web3ProviderFactory.provider?.provider.url.absoluteString ?? ""
+        let source =
+                """
+                (function() {
+                    var config = {
+                        chainId: \(maskUserDefaults.network.networkId),
+                        rpcUrl: "\(rpcUrl)",
+                        isDebug: true
+                    };
+                    window.ethereum = new web3Channel.Provider(config);
+                    window.web3 = new web3Channel.Web3(window.ethereum);
+                })();
+                """
+        return WKUserScript(source: source, injectionTime: .atDocumentStart, forMainFrameOnly: false)
+    }
+
+    private var jsContent: String? {
+        if let filepath = bundle.path(forResource: "mask-min", ofType: "js") {
+            do {
+                let js = try String(contentsOfFile: filepath)
+                return js
+            } catch {
+                NSLog("Failed to load web.js")
+                return nil
+            }
+        } else {
+            NSLog("web3.js not found in bundle")
+            return nil
         }
+    }
+
+    func bind(to webView: WKWebView) {
+        if let js = jsContent {
+            let web3EnventScript = WKUserScript(source: js, injectionTime: .atDocumentStart, forMainFrameOnly: false)
+            webView.configuration.userContentController.addUserScript(web3EnventScript)
+            webView.configuration.userContentController.addUserScript(ethereumScript)
+        }
+        // for propertyWrapper don't support lazy initialization
+        // we need this setter to trigger WKScriptMessageHandled work as expected
+        self.webView = webView
+
+        cancelableStorage.removeAll()
+        $webView
+            .asDriver()
+            .sink { [weak self] message in
+                guard let self = self,
+                      let webView = self.webView else {
+                    return
+                }
+                self.resolver.resolve(message, from: webView)
+            }
+            .store(in: &cancelableStorage)
     }
 
     // MARK: WKNavigationDelegate
@@ -54,15 +85,6 @@ final class DappScriptAdaptor<T: DecentralisedApplicationResolver>: NSObject, WK
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {}
 
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {}
-
-    // MARK: WKScriptMessageHandler
-    
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        guard let webView = self.webView else {
-            return
-        }
-        resolver.resolve(message, from: webView)
-    }
 }
 
 extension DappScriptAdaptor {

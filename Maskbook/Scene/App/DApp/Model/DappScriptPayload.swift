@@ -2,8 +2,8 @@ import Foundation
 import SwiftyJSON
 
 struct DappScriptPayload<T: Codable>: Decodable {
-    private(set) var callback: Int?
-    
+    private(set) var callbackId: Int?
+
     @BooleanConverted
     private var print: Bool?
 

@@ -3,11 +3,33 @@ import UIKit
 import web3swift
 import WebKit
 
-final class LabsBrowserController<T: DecentralisedApplicationResolver>: BrowserViewController {
+final class LabsBrowserController<T: DecentralisedApplicationResolver>: BaseViewController {
     private var wkAdaptor: DappScriptAdaptor<T>
+
     private(set) lazy var cancelableStorage: Set<AnyCancellable> = []
 
     private var loading = LoadingIndicatorController()
+
+    private lazy var webView: WKWebView = {
+        let websiteDataTypes: Set<String> = [WKWebsiteDataTypeDiskCache, WKWebsiteDataTypeMemoryCache]
+        let date = Date(timeIntervalSince1970: 0)
+
+        WKWebsiteDataStore.default().removeData(
+            ofTypes: websiteDataTypes,
+            modifiedSince: date,
+            completionHandler: {}
+        )
+
+        let webView = WKWebView(
+            frame: .zero,
+            configuration: WKWebViewConfiguration()
+        )
+        webView.allowsBackForwardNavigationGestures = true
+        webView.scrollView.isScrollEnabled = true
+//        webView.navigationDelegate = self
+        webView.configuration.preferences.setValue(true, forKey: "developerExtrasEnabled")
+        return webView
+    }()
 
     init(dappResolver: T) {
         self.wkAdaptor = DappScriptAdaptor(resolver: dappResolver)
@@ -19,16 +41,8 @@ final class LabsBrowserController<T: DecentralisedApplicationResolver>: BrowserV
         fatalError("init(coder:) has not been implemented")
     }
 
-    deinit {
-        // plz do remember to call this function
-        // otherwise there will be memory leak
-        wkAdaptor.cleanup()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        buildUIContent()
-        buildEvent()
         prepareScriptInjection()
         prepareloadingDApp()
     }
@@ -42,12 +56,13 @@ final class LabsBrowserController<T: DecentralisedApplicationResolver>: BrowserV
     }
 
     private func prepareScriptInjection() {
-        wkAdaptor.bind(to: self.webView)
+        wkAdaptor.bind(to: webView)
     }
 
-    private func buildUIContent() {
-        self.view.addSubview(self.webView)
-        self.webView.snp.makeConstraints { make in
+    override func buildContent() {
+        super.buildContent()
+        self.view.addSubview(webView)
+        webView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
         }
@@ -56,7 +71,8 @@ final class LabsBrowserController<T: DecentralisedApplicationResolver>: BrowserV
         loading.view.snp.makeConstraints { $0.edges.equalToSuperview() }
     }
 
-    private func buildEvent() {
+    override func buildEvent() {
+        super.buildEvent()
         webView.publisher(for: \.isLoading)
             .dropFirst()
             .asDriver()

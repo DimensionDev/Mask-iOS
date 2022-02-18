@@ -79,6 +79,7 @@
 		1F036397277ABB99001E8A88 /* LabsBrowserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F036396277ABB99001E8A88 /* LabsBrowserController.swift */; };
 		1F036399277B287A001E8A88 /* DappScriptAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F036398277B287A001E8A88 /* DappScriptAdaptor.swift */; };
 		1F1CCF5E2736162F004E8835 /* WalletRestorePipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CCF5D2736162F004E8835 /* WalletRestorePipeline.swift */; };
+		1F35CA0D27BF90E300E329AF /* mask-min.js in Resources */ = {isa = PBXBuildFile; fileRef = 1F35CA0C27BF90E300E329AF /* mask-min.js */; };
 		1F37DF2027BDF715008F8ABE /* RestoreLocalFileValidationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37DF1F27BDF715008F8ABE /* RestoreLocalFileValidationController.swift */; };
 		1F37DF2227BDF94F008F8ABE /* RestoreLocalFileValidationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37DF2127BDF94F008F8ABE /* RestoreLocalFileValidationView.swift */; };
 		1F37DF2427BDFA3D008F8ABE /* RestoreLocalFileValidationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37DF2327BDFA3D008F8ABE /* RestoreLocalFileValidationViewModel.swift */; };
@@ -765,6 +766,7 @@
 		1F036396277ABB99001E8A88 /* LabsBrowserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabsBrowserController.swift; sourceTree = "<group>"; };
 		1F036398277B287A001E8A88 /* DappScriptAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappScriptAdaptor.swift; sourceTree = "<group>"; };
 		1F1CCF5D2736162F004E8835 /* WalletRestorePipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletRestorePipeline.swift; sourceTree = "<group>"; };
+		1F35CA0C27BF90E300E329AF /* mask-min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "mask-min.js"; sourceTree = "<group>"; };
 		1F37DF1F27BDF715008F8ABE /* RestoreLocalFileValidationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreLocalFileValidationController.swift; sourceTree = "<group>"; };
 		1F37DF2127BDF94F008F8ABE /* RestoreLocalFileValidationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreLocalFileValidationView.swift; sourceTree = "<group>"; };
 		1F37DF2327BDFA3D008F8ABE /* RestoreLocalFileValidationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreLocalFileValidationViewModel.swift; sourceTree = "<group>"; };
@@ -1630,6 +1632,7 @@
 				1FEE1E98277D8FC500697F81 /* DappRPCResponse.swift */,
 				1FEE1E9A277D8FDD00697F81 /* DappError.swift */,
 				1FEE1E9C277D902500697F81 /* DappScriptMethod.swift */,
+				1F35CA0C27BF90E300E329AF /* mask-min.js */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3633,6 +3636,7 @@
 				1F8D692F2721549E001084D6 /* wallets.json in Resources */,
 				DBAAF49F22C35A7100017594 /* LaunchScreen.storyboard in Resources */,
 				2A96348F27A26A5C0019C4CA /* red-packet.json in Resources */,
+				1F35CA0D27BF90E300E329AF /* mask-min.js in Resources */,
 				2A96349427A26ACE0019C4CA /* HappyRedPacketV4.json in Resources */,
 				DBAAF49C22C35A7100017594 /* Assets.xcassets in Resources */,
 				DBAAF49A22C35A7100017594 /* Main.storyboard in Resources */,

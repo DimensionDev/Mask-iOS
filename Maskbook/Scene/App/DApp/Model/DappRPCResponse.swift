@@ -1,7 +1,13 @@
 import Foundation
 
 struct DappRPCResponse<T: Codable>: Codable {
-    init(id: Int, result: T?, error: DappRPCResponse<T>.ErrorMessage?, message: String?, jsonrpc: String = "2.0") {
+    init(
+        id: Int,
+        result: T?,
+        error: DappRPCResponse<T>.ErrorMessage? = nil,
+        message: String? = nil,
+        jsonrpc: String = "2.0"
+    ) {
         self.id = id
         self.jsonrpc = jsonrpc
         self.result = result
@@ -23,4 +29,14 @@ struct DappRPCResponse<T: Codable>: Codable {
     let result: T?
     let error: ErrorMessage?
     let message: String?
+}
+
+extension DappRPCResponse {
+    func asReponseString() -> String? {
+        guard let data = try? JSONEncoder().encode(self) else {
+            return nil
+        }
+
+        return String(data: data, encoding: .utf8)
+    }
 }

@@ -71,16 +71,13 @@ final class WKScriptMessageHandled {
             .eraseToAnyPublisher()
     }
 
-    deinit { cleanup() }
-
     init(handlerNames: Set<String>, wrappedValue defaultValue: WKWebView? = nil) {
-        self.webView = defaultValue
-        self.messageHandlerNames = handlerNames
-        if defaultValue == nil {
-            return
-        }
+        webView = defaultValue
+        messageHandlerNames = handlerNames
         startObserving()
     }
+
+    deinit { cleanup() }
 
     private func cleanup() {
         removeMessageHandlers(for: self.webView?.configuration.userContentController)
@@ -88,21 +85,27 @@ final class WKScriptMessageHandled {
     }
 
     private func removeMessageHandlers(for userContentController: WKUserContentController?) {
-        for name in self.messageHandlerNames {
-            userContentController?.removeScriptMessageHandler(forName: name)
+        guard let controller = userContentController else {
+            return
+        }
+        for name in messageHandlerNames {
+            controller.removeScriptMessageHandler(forName: name)
         }
     }
 
     private func startObserving() {
-        self.bindProxy(for: webView?.configuration.userContentController)
+        bindProxy(for: webView?.configuration.userContentController)
         observingHandler = webView?.configuration.observe(\.userContentController, options: [.new, .old]) { [weak self] _, updateValue in
-            guard let self = self else { return }
-            self.removeMessageHandlers(for: updateValue.oldValue)
-            self.bindProxy(for: updateValue.newValue)
+            self?.removeMessageHandlers(for: updateValue.oldValue)
+            self?.bindProxy(for: updateValue.newValue)
         }
     }
 
     private func bindProxy(for userContentController: WKUserContentController?) {
+        guard let controller = userContentController else {
+            return
+        }
+
         let proxy = WeakProxy()
 
         proxy
@@ -110,8 +113,8 @@ final class WKScriptMessageHandled {
             .bind(to: \.messageSubject, on: self)
             .store(in: &proxy.cancelableStorage)
 
-        for name in self.messageHandlerNames {
-            userContentController?.add(proxy, name: name)
+        for name in messageHandlerNames {
+            controller.add(proxy, name: name)
         }
     }
 }

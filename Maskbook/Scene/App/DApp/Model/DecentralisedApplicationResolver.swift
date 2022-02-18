@@ -17,10 +17,8 @@ protocol DecentralisedApplicationResolver {
     var web3: web3? { get }
     // script payload decoder
     var decoder: JSONDecoder { get }
-    // callBackEventName used in js
-    var callBackEventName: String { get }
     // script injection identifier
-    var scriptMessageHandlerName: String { get }
+    static var scriptMessageHandlerName: String { get }
 
     func provideRPCURL(with payload: DappScriptPayload<Parameters>, w3Provider: web3) async -> DappScriptResult?
     func provideCoinbaseAddress(with payload: DappScriptPayload<Parameters>, w3Provider: web3) async -> DappScriptResult?
@@ -34,44 +32,37 @@ protocol DecentralisedApplicationResolver {
 }
 
 extension DecentralisedApplicationResolver {
-    var callBackEventName: String { "PacificDidReceiveNativeCallback" }
-    var scriptMessageHandlerName: String { "pacific" }
+    static var scriptMessageHandlerName: String { "web3Channel" }
     var decoder: JSONDecoder { .init() }
     var web3: web3? { Web3ProviderFactory.provider }
 }
 
 extension DecentralisedApplicationResolver {
-    func dispatchBirdgedEvent(
-        _ eventName: String,
+    func dispatchResponse(
+        of method: DappScriptMethod,
         on webView: WKWebView,
-        parameters: [String: Any],
+        by id: Int,
         result: Result<[String: Any], DappError>
     ) {
-        var eventDetail: [String: Any] = parameters
-        switch result {
-        case let .failure(error):
-            eventDetail["error"] = ["code": error.code, "description": error.description]
-            
-        case let .success(callbackParameters):
-            eventDetail["parameters"] = callbackParameters
-        }
-
-        let eventBody: [String: Any] = ["detail": eventDetail]
         let jsString: String
+        switch result {
+        case let .success(json):
+            var json = json
+            json["id"] = id
+            json["jsonrpc"] = "2.0"
+            json["method"] = method.rawValue
 
-        // swiftlint:disable line_length
-        if let data = try? JSONSerialization.data(withJSONObject: eventBody, options: JSONSerialization.WritingOptions()),
-           let eventString = String(data: data, encoding: .utf8) {
-            jsString = "(function() { var event = new CustomEvent('\(eventName)', \(eventString)); document.dispatchEvent(event)}());"
-        } else {
-            // When JSON Not Serializable, Invoke with Default Parameters
-            switch result {
-            case .success:
-                jsString = "(function() { var event = new CustomEvent('\(eventName)', {'detail': {'parameters': {}}}); document.dispatchEvent(event)}());"
+            let resultString: String = {
+                guard let data = try? JSONSerialization.data(withJSONObject: json, options: []),
+                      let string = String(data: data, encoding: .utf8) else {
+                          return ""
+                }
+                return string
+            }()
+            jsString = "window.ethereum.sendResponse(\(resultString));"
 
-            case let .failure(error):
-                jsString = "(function() { var event = new CustomEvent('\(eventName)', {'detail': {'error': {'code': \(error.code), 'description': '\(error.description)'}}}); document.dispatchEvent(event)}());"
-            }
+        case let .failure(error):
+            jsString = "window.ethereum.sendError(\(id), \(error.description));"
         }
         // swiftlint:enable line_length
 
@@ -93,7 +84,7 @@ extension DecentralisedApplicationResolver {
                     print(payload)
                 }
                 #endif
-                
+
                 guard let method = payload.action else {
                     return
                 }
@@ -101,10 +92,12 @@ extension DecentralisedApplicationResolver {
                 guard let excuteResult = await handle(method.rawValue, with: payload, on: webView) else {
                     return
                 }
-                guard let id = payload.callback else { return }
+                guard let id = payload.callbackId else {
+                    return
+                }
                 // ensure called on main queue
                 await MainActor.run {
-                    self.dispatchBirdgedEvent(callBackEventName, on: webView, parameters: ["id": id], result: excuteResult)
+                    self.dispatchResponse(of: method, on: webView, by: id, result: excuteResult)
                 }
             } catch {
                 #if DEBUG
@@ -134,9 +127,15 @@ extension DecentralisedApplicationResolver {
         switch scriptMethod {
         case .getRPCurl: return await provideRPCURL(with: payload, w3Provider: w3Provider)
         case .ethCoinbase: return await provideCoinbaseAddress(with: payload, w3Provider: w3Provider)
-        case .ethGetAccounts, .ethAccounts: return await provideEthAccount(with: payload, w3Provider: w3Provider)
+
+        case .ethGetAccounts,
+             .ethAccounts,
+             .ethRequestAccounts:
+            return await provideEthAccount(with: payload, w3Provider: w3Provider)
+
         case .ethSignTransaction: return await self.signTransaction(with: payload, w3Provider: w3Provider)
         case .ethSign: return await self.signMessage(for: payload)
+        case .ethChainId: return nil
         case let .custom(functionName): return await customRPC(for: payload, functionName: functionName)
         }
     }
@@ -144,19 +143,21 @@ extension DecentralisedApplicationResolver {
 
 extension DecentralisedApplicationResolver {
     func provideRPCURL(with payload: DappScriptPayload<Parameters>, w3Provider: web3) async -> DappScriptResult? {
-        let respParam = ["rpcURL": w3Provider.provider.url.absoluteString]
-        return .success(respParam)
+        .success([
+            "result": w3Provider.provider.url.absoluteString
+        ])
     }
 
     func provideCoinbaseAddress(with payload: DappScriptPayload<Parameters>, w3Provider: web3) async -> DappScriptResult? {
-        let respParam = ["coinbase": maskUserDefaults.defaultAccountAddress ?? ""]
-        return .success(respParam)
+        .success([
+            "result": maskUserDefaults.defaultAccountAddress ?? ""
+        ])
     }
 
     func provideEthAccount(with payload: DappScriptPayload<Parameters>, w3Provider: web3) async -> DappScriptResult? {
-        let allAccounts = maskUserDefaults.defaultAccountAddress.flatMap { [$0] } ?? []
-        let respParam = ["accounts": allAccounts]
-        return .success(respParam)
+        .success([
+            "result": maskUserDefaults.defaultAccountAddress.flatMap { [$0] } ?? []
+        ])
     }
 
     func signTransaction(
@@ -188,7 +189,7 @@ extension DecentralisedApplicationResolver {
                 password: password
             )
             let signedContent = transaction.encode(forSignature: false, chainID: nil)?.hexStringWithPrefix() ?? ""
-            return .success(["signedTransaction": signedContent])
+            return .success(["result": signedContent])
         } catch {
             return nil
         }
@@ -209,7 +210,7 @@ extension DecentralisedApplicationResolver {
             WalletCoreHelper.signMessage(message: personalMessage, fromAddress: account) { result in
                 switch result {
                 case let .success(signature):
-                    let json = ["signedMessage": signature]
+                    let json = ["result": signature]
                     continuation.resume(returning: .success(json))
 
                 case let .failure(error):
