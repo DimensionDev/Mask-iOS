@@ -158,7 +158,10 @@
             "back_up_locally": "备份到本地",
             "back_up": "备份",
             "resend": "重新发送",
-            "edit": "编辑"
+            "edit": "编辑",
+            "download": "下载",
+            "skip": "跳过，稍后下载",
+            "download_next": "我已下载，下一步"
         },
         "loading": "加载中..."
     },
@@ -305,7 +308,9 @@
                 "back_up_data": "备份数据",
                 "back_up_password": "备份密码",
                 "back_up_password_empty": "请设置备份密码",
-                "change_backup_password": "修改备份密码"
+                "change_backup_password": "修改备份密码",
+                "back_up_password_validation_tip": "请输入您在加密备份文件时使用的备份密码。 ",
+                "wrong_password": "密码错误"
             },
             "profile": {
                 "title": "个人信息",
@@ -480,8 +485,8 @@
                 "change_add_persona": "更改或添加角色",
                 "rename": "重命名",
                 "export_private_key": "导出私钥",
+                "download": "下载助记词",
                 "backup": "备份",
-                "recovery": "恢复",
                 "log_out": "退出登录",
                 "delete": "删除"
             },
@@ -519,6 +524,13 @@
             "accounts": "账户",
             "connect_tips": "选择要连接您角色的社交账户。享受 web 3.0 的社交体验。",
             "add": "添加"
+        },
+        "persona_download": {
+            "persona": "",
+            "mask_id": "",
+            "private_key": "",
+            "identity_id": "",
+            "download_tips": ""
         },
         "wallet_balance": {
             "btn_swap": "兑换",
@@ -564,8 +576,9 @@
             "recovery_sign_in": "恢复角色"
         },
         "identity_create": {
-            "title": "验证身份助记词",
-            "description": "请写下每一个单词。"
+            "title": "",
+            "description": "",
+            "identity_tips": ""
         },
         "identify_verify": {
             "title": "验证身份助记词",
@@ -628,8 +641,8 @@
                 "dhedge": "DHEDGE"
             },
             "plugin_introduction": {
-                "transak": "Transak可支持在60多个国家内购买代币。",
-                "ito": "允许用户在Twitter上直接购买代币。",
+                "transak": "",
+                "ito": "允许用户在Twitter上直接购买令牌。",
                 "luckyDrop": "发送红包(Token/NFT)，给加密好友带来惊喜。",
                 "swap": "通过Dex购买代币，无需额外费用和限制。",
                 "file_service": "为用户提供去中心化文档存储功能。"
@@ -644,9 +657,8 @@
             "connect_button_title": "连接",
             "profile_select_title": "选择用户名",
             "connected": "已连接",
-            "connect_hint1": "请先登录 ",
-            "connect_hint2": " 以连接到 Mask Network",
-            "connect_hint_logged_in": "如果您想要连接另一个账户，请注销并登录另一个账户。",
+            "connect_hint": "",
+            "connect_hint_logged_in": "",
             "connect_to_mask_network": "连接到 Mask Network",
             "account_already_connected": "账户已连接",
             "connect_stop": "",
@@ -752,7 +764,8 @@
                 "tips": "已存在云端备份， 您可以选择在备份之前先合并这个云备份到您的本地数据，或者直接备份。"
             },
             "merge_to_local": {
-                "title": "合并后备份"
+                "title": "合并后备份",
+                "merge_failed_message": "合并云端备份失败！"
             },
             "validation_code": "验证码",
             "with_phone": "使用手机号码备份",
