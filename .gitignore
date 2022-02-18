@@ -106,7 +106,7 @@ iOSInjectionProject/
 vendor/
 
 .DS_Store
-Maskbook/Generated/Assets.swift
+# Maskbook/Generated/Assets.swift
 
 ### Key used to encrypt secrets in UserDefaults
 Maskbook/Resources/Secrets.swift
