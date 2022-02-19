@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-SRCROOT=`pwd`
+SRCROOT=$(pwd)
 PODS_ROOT='Pods'
 
 echo ${SRCROOT}
@@ -10,17 +10,15 @@ sh ./scripts/build.sh
 
 # task2 copy strings file /Localization/StringsConvertor/output to /Maskbook/Resources
 
-cp -r ${SRCROOT}/Localization/StringsConvertor/output/  ${SRCROOT}/Maskbook/Resources/
-
+cp -r ${SRCROOT}/Localization/StringsConvertor/output/ ${SRCROOT}/Maskbook/Resources/
 
 # task3 swiftgen
 cd ${SRCROOT}
 echo "${PODS_ROOT}/SwiftGen/bin/swiftgen"
-if [[ -f "${PODS_ROOT}/SwiftGen/bin/swiftgen" ]]
-then 
-   "${PODS_ROOT}/SwiftGen/bin/swiftgen"
+if [[ -f "${PODS_ROOT}/SwiftGen/bin/swiftgen" ]]; then
+    "${PODS_ROOT}/SwiftGen/bin/swiftgen"
 else
-	echo "Run 'pod install' or update your CocoaPods installation."
+    echo "Run 'pod install' or update your CocoaPods installation."
 fi
 
 #task4 clean temp file

@@ -2,9 +2,7 @@ name: iOS binary build & publish to TestFlight
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches: [ release/** ]
 
   workflow_dispatch:
 
@@ -44,6 +42,9 @@ jobs:
           cd Maskbook/Resources
           echo $SECRECT_SWIFT | base64 --decode > Secrets.swift
           echo $API_KEY_SWIFT | base64 --decode > APIKey.swift
+
+      - name: Update Localization
+        run: ./update_localization.sh
     
       - name: Build & upload iOS binary
         run: bundle exec fastlane build_upload_testflight

@@ -595,7 +595,7 @@ enum L10n {
         static var swap: String {
           return L10n.tr("Localizable", "Scene.App.PluginIntroduction.Swap")
         }
-        /// Buy crypto in 60+ countries with Transak support.
+        /// Buy crypto with Transak, support 60+ currencies.
         static var transak: String {
           return L10n.tr("Localizable", "Scene.App.PluginIntroduction.Transak")
         }
