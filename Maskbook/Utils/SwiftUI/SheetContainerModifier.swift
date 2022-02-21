@@ -30,6 +30,19 @@ private struct InputModifier: ViewModifier {
     }
 }
 
+/// usage:
+///         declare this keyboard flag in an ObservedObject
+///         @Published
+///         var focusKeyBoard: Bool?
+///
+///         SheetAdaptiveContainer {
+///             content: {
+///                 Text("some text")
+///                     .focusKeyboardInAdaptiveSheet(focusKeyBoard)
+///             },
+///             onDismiss: {}
+///         }
+///
 struct SheetAdaptiveContainer<Content: View>: View {
     @State
     private var contentSize = CGSize.zero
@@ -144,7 +157,7 @@ extension View {
 
 struct FocusKeyboardKey: PreferenceKey {
     static func reduce(value: inout Bool?, nextValue: () -> Bool?) {
-        value = value ?? nextValue()
+        value = nextValue() ?? value
     }
 }
 
