@@ -68,18 +68,17 @@ extension Persona {
     var packedData: Data? {
         var data = Data()
         guard let privateKey = privateKey else { return nil }
-        try? data.pack(["y": privateKey.y,
-                        "x": privateKey.x,
+        try? data.pack(["y": privateKey.y ?? "",
+                        "x": privateKey.x ?? "",
                         "key_ops": privateKey.key_ops ?? "",
-                        "kty": privateKey.kty,
+                        "kty": privateKey.kty ?? "",
                         "ext": true,
-                        "crv": privateKey.crv,
-                        "d": privateKey.d]
+                        "crv": privateKey.crv ?? "",
+                        "d": privateKey.d ?? ""]
         )
         return data
     }
 }
-
 
 extension Persona: Equatable {
     public static func == (lhs: Persona, rhs: Persona) -> Bool {

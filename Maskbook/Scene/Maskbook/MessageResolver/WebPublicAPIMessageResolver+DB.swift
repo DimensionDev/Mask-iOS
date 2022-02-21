@@ -495,6 +495,7 @@ extension WebPublicApiMessageResolver {
         }
         guard let para = request.params else { return false }
         PostRepository.createPost(post: para.post)
+        sendResponseToWebView(response: para.post, id: request.id)
         return true
     }
     
