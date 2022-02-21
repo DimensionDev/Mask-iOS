@@ -520,6 +520,7 @@ Switch account to access another.";
 "Scene.WalletConnect.Disconnect" = "Disconnect";
 "Scene.WalletConnect.NetworkNotMatch" = "The current network %@ is different from the connecting network %@. Do you want to switch your current network to %@?";
 "Scene.WalletConnect.NetworkNotSupport" = "The wallet network %@ is currently not supported by Mask Network. We can’t connect your wallet. Please switch your wallet network manually.";
+"Scene.WalletConnect.NoWallets" = "You haven’t installed any available %@ wallets for walletConnect";
 "Scene.WalletConnect.QrCodeTips" = "Use a WalletConnect compatiable wallet
 to scan the QR Code";
 "Scene.WalletConnect.ReplaceWalletConnectWallet" = "This wallet address was connected with WalletConnect. Importing this wallet address automatically dis-connects the walletConnect account.";
