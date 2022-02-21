@@ -165,6 +165,17 @@ enum L10n {
         }
       }
 
+      enum DownloadIdentityCode {
+        /// Please set up your %@ before you download identity code. 
+        static func description(_ p1: String) -> String {
+          return L10n.tr("Localizable", "Common.Alert.DownloadIdentityCode.Description", p1)
+        }
+        /// Set up backup password 
+        static var title: String {
+          return L10n.tr("Localizable", "Common.Alert.DownloadIdentityCode.Title")
+        }
+      }
+
       enum ExportPrivateKey {
         /// Please set up your %@ before you export private key. 
         static func description(_ p1: String) -> String {
@@ -1327,7 +1338,7 @@ enum L10n {
         static var delete: String {
           return L10n.tr("Localizable", "Scene.Personas.Action.Delete")
         }
-        /// Download Mnemonic
+        /// Download Identity Code
         static var download: String {
           return L10n.tr("Localizable", "Scene.Personas.Action.Download")
         }
