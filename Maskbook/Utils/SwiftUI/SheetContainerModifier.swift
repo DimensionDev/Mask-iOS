@@ -11,7 +11,7 @@ private struct CornerShape: Shape {
         let cgPath = UIBezierPath(
             roundedRect: rect,
             byRoundingCorners: [.topLeft, .topRight],
-            cornerRadii: CGSize(width: 20, height: 20)
+            cornerRadii: CGSize(width: radius, height: radius)
         ).cgPath
         return Path(cgPath)
     }
@@ -121,8 +121,30 @@ struct SheetAdaptiveContainer<Content: View>: View {
                     },
                 including: .all
             )
+            .onKeyboardFocusedInAdaptiveSheet {
+                focusOnKeyboard = $0
+            }
         }
-        .modifier(InputModifier(embedWithInput: embedWithInput))
+        .modifier(InputModifier(embedWithInput: focusOnKeyboard ?? embedWithInput))
+    }
+
+    @State
+    private var focusOnKeyboard: Bool?
+}
+
+extension View {
+    func focusKeyboardInAdaptiveSheet(_ focused: Bool?) -> some View {
+        preference(key: FocusKeyboardKey.self, value: focused)
+    }
+
+    func onKeyboardFocusedInAdaptiveSheet(_ action: @escaping (Bool?) -> Void) -> some View {
+        onPreferenceChange(FocusKeyboardKey.self) { action($0) }
+    }
+}
+
+struct FocusKeyboardKey: PreferenceKey {
+    static func reduce(value: inout Bool?, nextValue: () -> Bool?) {
+        value = value ?? nextValue()
     }
 }
 
