@@ -2380,6 +2380,10 @@ enum L10n {
       static func networkNotSupport(_ p1: String) -> String {
         return L10n.tr("Localizable", "Scene.WalletConnect.NetworkNotSupport", p1)
       }
+      /// You haven’t installed any available %@ wallets for walletConnect
+      static func noWallets(_ p1: String) -> String {
+        return L10n.tr("Localizable", "Scene.WalletConnect.NoWallets", p1)
+      }
       /// Use a WalletConnect compatiable wallet\nto scan the QR Code
       static var qrCodeTips: String {
         return L10n.tr("Localizable", "Scene.WalletConnect.QrCodeTips")

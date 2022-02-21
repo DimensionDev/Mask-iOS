@@ -745,6 +745,7 @@
             "scan_q_r_code": "Scan QR Code",
             "qr_code_tips": "Use a WalletConnect compatiable wallet\nto scan the QR Code",
             "tap_to_copy": "Tap to copy to clipboard",
+            "no_wallets": "You haven’t installed any available %s wallets for walletConnect",
             "connecting": "Connecting...",
             "connect_success": "Wallet Successfully Connected to Mask Network",
             "scan": "Scan the QR code",
