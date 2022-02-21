@@ -333,6 +333,9 @@ extension UserDefaultSettings {
     func changeNetwork(network: BlockChainNetwork, address: String?) {
         defaultAccountAddress = address
         self.network = network
+        if self.walletDisplayBlockchain != .all {
+            self.walletDisplayBlockchain = .blockchain(network)
+        }
     }
 
     var networkPubisher: AnyPublisher<BlockChainNetwork, Never> {

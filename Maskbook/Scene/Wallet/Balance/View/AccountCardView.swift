@@ -355,6 +355,13 @@ class AccountCardView: UIView {
         let selectedBlockChain = WalletDisplayBlockChainType.supportDisplayBlockChainTypes[Int(senderIndex)]
         
         userSetting.walletDisplayBlockchain = selectedBlockChain
+        switch selectedBlockChain {
+        case .all:
+            break
+            
+        case .blockchain(let network):
+            userSetting.network = network
+        }
     }
     
     private func addAction() {
