@@ -287,7 +287,7 @@ extension BalanceViewModel: UITableViewDelegate {
             
         case .tokens,
                 .collectibles:
-            return 40
+            return 50
         }
     }
     

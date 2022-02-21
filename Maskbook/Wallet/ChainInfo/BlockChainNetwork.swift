@@ -149,34 +149,31 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
         }
     }
     
-    var themeColors: [UIColor] {
+    var tokenCardBgColor: UIColor? {
         switch rawValue {
         case .eth:
-            return [Asset.Colors.AccountCard.Chains.eth1.color,
-                    Asset.Colors.AccountCard.Chains.eth2.color]
+            return Asset.Colors.TokenDetail.Chains.eth.color
             
         case .bsc:
-            return [Asset.Colors.AccountCard.Chains.bsc1.color,
-                    Asset.Colors.AccountCard.Chains.bsc2.color]
+            return Asset.Colors.TokenDetail.Chains.bsc.color
             
         case .polygon:
-            return [Asset.Colors.AccountCard.Chains.matic1.color,
-                    Asset.Colors.AccountCard.Chains.matic2.color]
+            return Asset.Colors.TokenDetail.Chains.matic.color
             
         case .arbitrum:
-            return [Asset.Colors.AccountCard.Chains.arbitrum1.color,
-                    Asset.Colors.AccountCard.Chains.arbitrum2.color]
+            return Asset.Colors.TokenDetail.Chains.arbitrum.color
             
         case .xdai:
-            return [Asset.Colors.AccountCard.Chains.xdai1.color,
-                    Asset.Colors.AccountCard.Chains.xdai2.color]
+            return Asset.Colors.TokenDetail.Chains.xdai.color
             
         case .optimism:
-            return [Asset.Colors.AccountCard.Chains.optimism1.color,
-                    Asset.Colors.AccountCard.Chains.optimism2.color]
+            return Asset.Colors.TokenDetail.Chains.optimism.color
+            
+        case .polkd:
+            return nil
             
         default:
-            return []
+            return nil
         }
     }
 
