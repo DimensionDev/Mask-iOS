@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SizePreferenceKey: PreferenceKey {
     static func reduce(value: inout CGSize?, nextValue: () -> CGSize?) {
-        value = value ?? nextValue()
+        value = nextValue() ?? value
     }
 }
 
