@@ -19,3 +19,21 @@ extension SwiftUI.Color {
         self.init(assets.name)
     }
 }
+
+extension ImageAsset {
+    func asImage() -> SwiftUI.Image {
+        SwiftUI.Image(self.name)
+    }
+}
+
+extension SwiftUI.Image {
+    init(_ asset: ImageAsset) {
+        self.init(asset.name)
+    }
+}
+
+extension UIImage {
+    func asImage() -> SwiftUI.Image {
+        SwiftUI.Image(uiImage: self)
+    }
+}

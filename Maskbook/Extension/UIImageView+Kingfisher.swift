@@ -150,7 +150,7 @@ struct GifRoundCornerImageProcessor: ImageProcessor {
                 cornerRadius = size.height * heightFraction
             }
             
-            log.debug("kingfisher size \(image.kf.base.size)", source: "collection-image")
+            log.debug("original size: \(image.kf.base.size) fit size: \(size)", source: "collection-image")
             if let gifData = image.kf.gifRepresentation() {
                 log.debug("process gif image", source: "collection-image")
                 // download image -> processor -> cache 
@@ -170,8 +170,7 @@ struct GifRoundCornerImageProcessor: ImageProcessor {
                 )
                 return prcessedImage
             } else {
-                return image.kf.scaled(to: options.scaleFactor)
-                    .kf.image(
+                return image.kf.image(
                         withRoundRadius: cornerRadius,
                         fit: size,
                         roundingCorners: roundingCorners,

@@ -42,6 +42,17 @@ extension InjectValues {
     }
 }
 
+private struct UserSettingKey: EnvironmentKey {
+    static let defaultValue = UserDefaultSettings.shared
+}
+
+extension EnvironmentValues {
+    var userSetting: UserDefaultSettings {
+        get { self[UserSettingKey.self] }
+        set { self[UserSettingKey.self] = newValue }
+    }
+}
+
 final class UserDefaultSettings {
     static let shared = UserDefaultSettings()
 

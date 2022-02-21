@@ -10,11 +10,11 @@ final class DBImageDecoder {
         }
         
         static var `default`: DecodingOptions {
-            DecodingOptions(mode: .asynchronous, sizeForDrawing: nil)
+            DecodingOptions(mode: .asynchronous, fitSize: nil)
         }
         
         var mode: Mode
-        var sizeForDrawing: CGSize?
+        var fitSize: CGSize?
     }
     
     enum DownSamplingLevel: Int, Hashable {
@@ -120,6 +120,7 @@ final class DBImageDecoder {
         
         let image: CGImage?
         let options: CFDictionary
+        let scale = UIScreen.main.scale
         
         switch decodingOptions.mode {
         case .asynchronous:
@@ -128,10 +129,11 @@ final class DBImageDecoder {
                 return nil
             }
             
-            if let sizeForDrawing = decodingOptions.sizeForDrawing {
+            if let fitSize = decodingOptions.fitSize {
+                let pixelSize = CGSize(width: fitSize.width * scale, height: fitSize.height * scale)
                 // Choose the smaller one.
-                if sizeForDrawing.width * sizeForDrawing.height < size.width * size.height {
-                    size = sizeForDrawing
+                if  pixelSize.width * pixelSize.height < size.width * size.height {
+                    size = pixelSize
                 }
             }
             

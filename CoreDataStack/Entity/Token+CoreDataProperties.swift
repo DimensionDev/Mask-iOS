@@ -36,5 +36,4 @@ extension Token {
 }
 
 extension Token : Identifiable {
-
 }

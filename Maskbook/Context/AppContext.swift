@@ -25,3 +25,14 @@ class AppContext {
         webExtensionCoreDataStackBridge = WebExtensionCoreDataStackBridge(context: coreDataStack.persistentContainer.viewContext)
     }
 }
+
+
+enum AppContextKey: InjectValueKey {
+    static var defaultInjectValue = AppContext.shared
+}
+
+extension InjectValues {
+    var appContext: AppContext {
+        Self[AppContextKey.self]
+    }
+}
