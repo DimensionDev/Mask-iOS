@@ -35,13 +35,7 @@ final class PersonasActionViewModel {
     }
 
     var actions: [PersonasActionViewModel.Action] {
-        guard let persona = personaManager.currentPersona.value else { return [] }
-
-        var actions = PersonasActionViewModel.Action.allCases
-        if !persona.isDownloadable {
-            actions.removeAll { $0 == .download }
-        }
-        return actions
+        PersonasActionViewModel.Action.allCases
     }
 
     var actionTitles: [String] {

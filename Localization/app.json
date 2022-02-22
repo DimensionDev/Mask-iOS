@@ -115,7 +115,7 @@
             },
             "download_identity_code": {
                 "title": "Set up backup password ",
-                "description": "Please set up your %s before you download identity code. "
+                "description": "Please set up your %s before you download persona QR code. "
             },
             "backup_tips_no_backup_password": {
                 "title": " Set up backup password",
@@ -490,7 +490,7 @@
                 "change_add_persona": "Change or Add Persona",
                 "rename": "Rename",
                 "export_private_key": "Export Private Key",
-                "download": "Download Identity Code",
+                "download": "Download Persona QR Code",
                 "backup": "Back Up",
                 "log_out": "Log Out",
                 "delete": "Delete"
