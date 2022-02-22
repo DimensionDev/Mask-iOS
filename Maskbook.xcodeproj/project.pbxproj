@@ -146,6 +146,7 @@
 		2A18E7FB266C9D210045BC88 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A18E7FA266C9D210045BC88 /* AvatarView.swift */; };
 		2A23A64C27C499E800CC5AD9 /* Shape+Fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A23A64A27C499E800CC5AD9 /* Shape+Fill.swift */; };
 		2A23A64D27C499E800CC5AD9 /* KFImage+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A23A64B27C499E800CC5AD9 /* KFImage+Network.swift */; };
+		2A23A65027C4B67D00CC5AD9 /* SwiftUI+Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A23A64F27C4B67D00CC5AD9 /* SwiftUI+Asset.swift */; };
 		2A3050C526A01B370003EECC /* OpenSeaProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3050C326A01B370003EECC /* OpenSeaProvider.swift */; };
 		2A3050C626A01B370003EECC /* NFTAssetsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3050C426A01B370003EECC /* NFTAssetsModel.swift */; };
 		2A35603E265D008100FB1D3B /* FontStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A35603D265D008100FB1D3B /* FontStyles.swift */; };
@@ -835,6 +836,7 @@
 		2A18E7FA266C9D210045BC88 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		2A23A64A27C499E800CC5AD9 /* Shape+Fill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shape+Fill.swift"; sourceTree = "<group>"; };
 		2A23A64B27C499E800CC5AD9 /* KFImage+Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KFImage+Network.swift"; sourceTree = "<group>"; };
+		2A23A64F27C4B67D00CC5AD9 /* SwiftUI+Asset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Asset.swift"; sourceTree = "<group>"; };
 		2A3050C326A01B370003EECC /* OpenSeaProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenSeaProvider.swift; sourceTree = "<group>"; };
 		2A3050C426A01B370003EECC /* NFTAssetsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFTAssetsModel.swift; sourceTree = "<group>"; };
 		2A35603D265D008100FB1D3B /* FontStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyles.swift; sourceTree = "<group>"; };
@@ -1735,6 +1737,16 @@
 				2A23A64B27C499E800CC5AD9 /* KFImage+Network.swift */,
 			);
 			path = Expand;
+			sourceTree = "<group>";
+		};
+		2A23A64E27C4B66B00CC5AD9 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				2AF8861A271EEDF80004565A /* SwiftUI+Text.swift */,
+				2A23A64F27C4B67D00CC5AD9 /* SwiftUI+Asset.swift */,
+				2AF88627271EEDF80004565A /* SwiftUI+Color.swift */,
+			);
+			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 		2A3050C226A01B370003EECC /* OpenSea */ = {
@@ -3069,11 +3081,11 @@
 		2AF88618271EEDF80004565A /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				2A23A64E27C4B66B00CC5AD9 /* SwiftUI */,
 				2DC5D89C272574FA00E351D3 /* Entity */,
 				2AF88619271EEDF80004565A /* UIApplication+extension.swift */,
 				2D1FDD852769EC05002E5C91 /* Managed+extension.swift */,
 				2D2ED7B3272FEBC7004B7408 /* NSMutableAttributedString+extension.swift */,
-				2AF8861A271EEDF80004565A /* SwiftUI+Text.swift */,
 				2AF8861B271EEDF80004565A /* Array+Safety.swift */,
 				2AF8861C271EEDF80004565A /* Publisher+extension.swift */,
 				2AF8861D271EEDF80004565A /* NSLayoutConstraint.swift */,
@@ -3086,7 +3098,6 @@
 				2AF88624271EEDF80004565A /* UIViewController+SocialBack.swift */,
 				2AF88625271EEDF80004565A /* UICollectionView+extension.swift */,
 				2AF88626271EEDF80004565A /* Date+Compare.swift */,
-				2AF88627271EEDF80004565A /* SwiftUI+Color.swift */,
 				2AF88628271EEDF80004565A /* UserDefaults+extension.swift */,
 				2AF88629271EEDF80004565A /* EthUtil.swift */,
 				2AF8862A271EEDF80004565A /* Result+extension.swift */,
@@ -4195,6 +4206,7 @@
 				2D00A5FE27953F2D0082E693 /* DebugEntryView.swift in Sources */,
 				2AF884CE271EE9300004565A /* MaskWebMessage+Persona+Backup.swift in Sources */,
 				2AF8856A271EE9310004565A /* CreateWalletWithNameViewController.swift in Sources */,
+				2A23A65027C4B67D00CC5AD9 /* SwiftUI+Asset.swift in Sources */,
 				5D7F5A5327B66C5600A007C5 /* PersonaKeyInfoPreview.swift in Sources */,
 				2AF884EC271EE9310004565A /* SizeMeasureModifier.swift in Sources */,
 				2A96349027A26A5C0019C4CA /* HappyRedPacketV4.swift in Sources */,
