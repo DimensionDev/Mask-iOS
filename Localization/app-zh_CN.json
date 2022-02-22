@@ -113,6 +113,10 @@
                 "title": "设置备份密码 ",
                 "description": "请在导出私钥之前设置您的 %s。 "
             },
+            "download_identity_code": {
+                "title": "",
+                "description": ""
+            },
             "backup_tips_no_backup_password": {
                 "title": " 设置备份密码",
                 "description": "请在备份前设置您的 %s。"
@@ -485,7 +489,7 @@
                 "change_add_persona": "更改或添加角色",
                 "rename": "重命名",
                 "export_private_key": "导出私钥",
-                "download": "下载助记词",
+                "download": "",
                 "backup": "备份",
                 "log_out": "退出登录",
                 "delete": "删除"
@@ -641,8 +645,8 @@
                 "dhedge": "DHEDGE"
             },
             "plugin_introduction": {
-                "transak": "使用 Transak购买加密货币，支持60多种货币。",
-                "ito": "允许用户在Twitter上直接购买令牌。",
+                "transak": "Transak 支持通过60多种货币购买代币",
+                "ito": "允许用户在Twitter上直接购买代币。",
                 "luckyDrop": "发送红包(Token/NFT)，给加密好友带来惊喜。",
                 "swap": "通过Dex购买代币，无需额外费用和限制。",
                 "file_service": "为用户提供去中心化文档存储功能。"
@@ -740,6 +744,7 @@
             "scan_q_r_code": "扫描二维码",
             "qr_code_tips": "使用支持 WalletConnect 的钱包扫码下面的二维码",
             "tap_to_copy": "点击复制到剪贴板",
+            "no_wallets": "",
             "connecting": "正在连接…",
             "connect_success": "钱包成功连接到 Mask Network",
             "scan": "扫描二维码",
