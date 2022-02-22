@@ -27,7 +27,7 @@
 "Common.Alert.DisconnectProfile.Description" = "Are you sure you want to disconnect it? This account will not be able to decrypt and encrypt any information with Mask Network.";
 "Common.Alert.DisconnectProfile.Title" = "Disconnect Social Account 
  %@";
-"Common.Alert.DownloadIdentityCode.Description" = "Please set up your %@ before you download identity code. ";
+"Common.Alert.DownloadIdentityCode.Description" = "Please set up your %@ before you download persona QR code. ";
 "Common.Alert.DownloadIdentityCode.Title" = "Set up backup password ";
 "Common.Alert.ExportPrivateKey.Description" = "Please set up your %@ before you export private key. ";
 "Common.Alert.ExportPrivateKey.Title" = "Set up backup password ";
@@ -283,7 +283,7 @@ Invite friends to download Mask Network.";
 "Scene.Personas.Action.Backup" = "Back Up";
 "Scene.Personas.Action.ChangeAddPersona" = "Change or Add Persona";
 "Scene.Personas.Action.Delete" = "Delete";
-"Scene.Personas.Action.Download" = "Download Identity Code";
+"Scene.Personas.Action.Download" = "Download Persona QR Code";
 "Scene.Personas.Action.ExportPrivateKey" = "Export Private Key";
 "Scene.Personas.Action.LogOut" = "Log Out";
 "Scene.Personas.Action.Rename" = "Rename";

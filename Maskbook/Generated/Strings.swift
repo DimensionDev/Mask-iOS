@@ -166,7 +166,7 @@ enum L10n {
       }
 
       enum DownloadIdentityCode {
-        /// Please set up your %@ before you download identity code. 
+        /// Please set up your %@ before you download persona QR code. 
         static func description(_ p1: String) -> String {
           return L10n.tr("Localizable", "Common.Alert.DownloadIdentityCode.Description", p1)
         }
@@ -1338,7 +1338,7 @@ enum L10n {
         static var delete: String {
           return L10n.tr("Localizable", "Scene.Personas.Action.Delete")
         }
-        /// Download Identity Code
+        /// Download Persona QR Code
         static var download: String {
           return L10n.tr("Localizable", "Scene.Personas.Action.Download")
         }
