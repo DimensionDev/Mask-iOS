@@ -1,10 +1,3 @@
-//
-//  Shape+Fill.swift
-//  Test
-//
-//  Created by Hugo L on 2022/2/18.
-//
-
 import Foundation
 import SwiftUI
 
