@@ -60,6 +60,7 @@ internal enum Asset {
       internal static let selected = ColorAsset(name: "Colors/Background/selected")
       internal static let twitterMask = ColorAsset(name: "Colors/Background/twitterMask")
       internal static let walletConnect = ColorAsset(name: "Colors/Background/walletConnect")
+      internal static let warningsBg = ColorAsset(name: "Colors/Background/warnings-bg")
       internal static let yellow = ColorAsset(name: "Colors/Background/yellow")
     }
     internal enum Balances {

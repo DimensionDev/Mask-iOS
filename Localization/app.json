@@ -415,7 +415,8 @@
         	    "Label_Password":"Password",
                 "btn_withoutPassword":"Hold to Send",
                 "amount_error":"Insufficient amount.",
-                "password_error":"Incorrect payment password."
+                "password_error":"Incorrect payment password.",
+                "gasFee_error": "Insufficient gas balance."
         	},
         	"addContact":{
         		"btn_add":"Add Contact",
@@ -810,20 +811,20 @@
     "chain": {
         "short_name": {
             "eth": "ETH",
-            "bsc": "BSC",
+            "bsc": "BNB",
             "dot": "DOT",
             "polygon": "Polygon",
             "arbitrum": "Arbitrum",
-            "xdai": "xDai",
+            "xdai": "Gnosis",
             "optimism": "Optimism"
         },
         "name": {
             "eth": "Ethereum",
-            "bsc": "Binance smart chain",
+            "bsc": "BNB Chain",
             "dot": "Polkadot",
             "polygon": "Polygon/Matic Network",
             "arbitrum": "Arbitrum",
-            "xdai": "xDai",
+            "xdai": "Gnosis",
             "optimism": "Optimism"
         }
     }

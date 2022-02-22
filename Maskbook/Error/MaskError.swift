@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import web3swift
 
 enum MaskError: Error {
     case invalidPassword
@@ -43,6 +44,7 @@ enum WalletSendError: Error {
     case cancelled
 }
 
+// swiftlint:disable force_cast
 extension WalletSendError: LocalizedError {
     public var errorDescription: String? {
         // TODO: i18n
@@ -57,7 +59,8 @@ extension WalletSendError: LocalizedError {
             return "Invalid address"
             
         case .ethereumError(let error):
-            return error.localizedDescription
+            let web3error = error as! Web3Error
+            return web3error.errorDescription
             
         case .walletConnectError:
             return "Fail to connect with WalletConnect"
@@ -73,3 +76,4 @@ extension WalletSendError: LocalizedError {
         }
     }
 }
+// swiftlint:enable force_cast
