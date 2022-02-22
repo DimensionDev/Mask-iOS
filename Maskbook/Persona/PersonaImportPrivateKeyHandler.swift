@@ -79,6 +79,9 @@ class PersonaImportPrivateKeyHandler {
             .sink(receiveCompletion: { _ in
             }) { [weak self] result in
                 if result.isSuccess {
+                    if let identifier = result.result?.dictionaryValue["identifier"]?.stringValue {
+                        self?.userSetting.currentPesonaIdentifier = identifier
+                    }
                     self?.showRestoreSuccessAlert()
                 } else {
                     self?.showRestoreFailedAlert(errorMessage: result.error?.message)
@@ -104,6 +107,9 @@ class PersonaImportPrivateKeyHandler {
                 .sink(receiveCompletion: { _ in
                 }) { [weak self] result in
                     if result.isSuccess {
+                        if let identifier = result.result?.dictionaryValue["identifier"]?.stringValue {
+                            self?.userSetting.currentPesonaIdentifier = identifier
+                        }
                         self?.showRestoreSuccessAlert()
                     } else {
                         self?.showRestoreFailedAlert(errorMessage: result.error?.message)

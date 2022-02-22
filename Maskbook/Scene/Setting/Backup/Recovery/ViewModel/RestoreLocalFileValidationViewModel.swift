@@ -15,7 +15,9 @@ final class RestoreLocalFileValidationViewModel: ObservableObject {
                 return
             }
 
-            validationState = .active
+            if decryptSeed != oldValue {
+                validationState = .active
+            }
         }
     }
 

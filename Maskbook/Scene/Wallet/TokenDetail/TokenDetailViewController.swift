@@ -36,7 +36,7 @@ class TokenDetailViewController: BaseViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
+    
     lazy var dataSource: UITableViewDiffableDataSource<Section, Item> = {
         UITableViewDiffableDataSource<Section, Item>(tableView: tableView) { [weak self] tableView, indexPath, item in
             switch item {
@@ -46,7 +46,7 @@ class TokenDetailViewController: BaseViewController {
                     cell.setToken(token)
                 }
                 return cell
-
+                
             case .transaction(let transaction):
                 let cell: TransactionCell = tableView.dequeCell(at: indexPath)
                 cell.setup(transaction: transaction, displayTokenSymbol: false)
@@ -55,32 +55,42 @@ class TokenDetailViewController: BaseViewController {
         }
     }()
     
-    let sendButton: PrimeryButton = {
+    let sendButton: UIButton = {
         let button = PrimeryButton(title: L10n.Scene.Sendtransaction.Send.btnSend)
-        button.tintColor = Asset.Colors.AccountCard.nameText.color
+        button.tintColor = Asset.Colors.Public.warnings.color
         button.setImage(Asset.Images.Scene.SendTransaction.upload.image, for: .normal)
+        button.setBackgroundImage(UIImage.placeholder(color: Asset.Colors.Public.warnings.color),
+                                  for: .normal)
         button.setInsets(forContentPadding: .zero, imageTitlePadding: 10)
         button.addTarget(self, action: #selector(sendTransaction(_:)), for: .touchUpInside)
         return button
     }()
     
-    let receiveButton: SecondaryButton = {
-        let button = SecondaryButton(title: L10n.Scene.WalletBalance.btnReceive)
-        button.setTitleColor(Asset.Colors.Text.link.color, for: .normal)
-        button.setImage(Asset.Images.Scene.Balance.receiveButtonBlue.image, for: .normal)
+    let receiveButton: UIButton = {
+        let button = PrimeryButton(title: L10n.Scene.WalletBalance.btnReceive)
+        button.tintColor = Asset.Colors.Public.blue.color
+        button.setImage(Asset.Images.Scene.SendTransaction.receive.image, for: .normal)
         button.setInsets(forContentPadding: .zero, imageTitlePadding: 10)
         button.addTarget(self, action: #selector(receiveBtnClicked(_:)), for: .touchUpInside)
         return button
     }()
     
+    lazy var buttonContainerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = Asset.Colors.Background.blur.color
+        return view
+    }()
+    
     lazy var buttonStackView: UIStackView = {
         let view = UIStackView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.axis = .horizontal
         view.alignment = .center
         view.distribution = .fillEqually
         view.isLayoutMarginsRelativeArrangement = true
         view.layoutMargins = UIEdgeInsets(top: 0, left: 22, bottom: 0, right: 22)
-        view.spacing = 20
+        view.spacing = 12
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         receiveButton.translatesAutoresizingMaskIntoConstraints = false
         view.addArrangedSubview(sendButton)
@@ -118,15 +128,23 @@ class TokenDetailViewController: BaseViewController {
     
     private func setupSubviews() {
         view.addSubview(tableView)
-
+        view.addSubview(buttonContainerView)
+        buttonContainerView.addSubview(buttonStackView)
+        
         tableView.dataSource = dataSource
         tableView.delegate = viewModel
         
-        view.addSubview(buttonStackView)
-        buttonStackView.translatesAutoresizingMaskIntoConstraints = false
-
         NSLayoutConstraint.activate([
-            buttonStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            buttonContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            buttonContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                                                     constant: -80),
+            buttonContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            buttonContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            buttonStackView.topAnchor.constraint(equalTo: buttonContainerView.topAnchor,
+                                                 constant: 8),
             buttonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             buttonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             buttonStackView.heightAnchor.constraint(equalToConstant: 48)
@@ -134,7 +152,7 @@ class TokenDetailViewController: BaseViewController {
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: buttonStackView.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: buttonContainerView.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
@@ -260,5 +278,5 @@ extension TokenDetailViewController {
         Coordinator.main.present(scene: .alertController(alertController:
                                                             alertController),
                                  transition: .alertController(completion: nil))
-   }
+    }
 }

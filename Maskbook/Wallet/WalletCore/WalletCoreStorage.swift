@@ -204,6 +204,7 @@ extension WalletCoreStorage {
     }
     
     class func setCurrentNetwork(network: BlockChainNetwork) {
-        maskUserDefaults.network = network
+        UserDefaultSettings.shared.changeNetwork(network: network,
+                                                 address: UserDefaultSettings.shared.defaultAccountAddress)
     }
 }
