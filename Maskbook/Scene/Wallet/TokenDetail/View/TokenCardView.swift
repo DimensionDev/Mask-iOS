@@ -16,26 +16,7 @@ class TokenCardView: UIView {
     
     private var disposeBag = Set<AnyCancellable>()
     
-    private let cornerRadiusValue: CGFloat = 20
-    
-    private var backgroundLayer: CAGradientLayer = {
-        let layer1 = CAGradientLayer()
-        layer1.locations = [0, 1]
-        layer1.startPoint = CGPoint(x: 0, y: 0.5)
-        layer1.endPoint = CGPoint(x: 1, y: 0.5)
-        layer1.cornerRadius = 20
-        layer1.masksToBounds = true
-        return layer1
-    }()
-    
-    private var maskView1: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 20
-        view.layer.masksToBounds = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor.black.withAlphaComponent(0.3)
-        return view
-    }()
+    private let cornerRadiusValue: CGFloat = 16
     
     private var maskLargeCircleView: UIImageView = {
         let view = UIImageView()
@@ -55,7 +36,7 @@ class TokenCardView: UIView {
     
     private var nameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .semibold)
+        label.font = .systemFont(ofSize: 20, weight: .bold)
         label.textColor = Asset.Colors.AccountCard.nameText.color
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -70,7 +51,7 @@ class TokenCardView: UIView {
     
     private var amountLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.font = .systemFont(ofSize: 14)
         label.textAlignment = .right
         label.textColor = Asset.Colors.AccountCard.nameText.color
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -79,7 +60,7 @@ class TokenCardView: UIView {
     
     private var balanceLabel: UILabel = {
         let label = UILabel()
-        label.font = FontStyles.BH3
+        label.font = FontStyles.BH4
         label.textAlignment = .right
         label.textColor = Asset.Colors.AccountCard.nameText.color
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -96,29 +77,19 @@ class TokenCardView: UIView {
     }
     
     private func setup() {
-        // 1. Apply corder radius
         applyCornerRadius(radius: cornerRadiusValue)
-        // 2. Apply shadow
-        applyShadow(color: Asset.Colors.TokenDetail.shadow.color, alpha: 1, x: 0, y: 4, blur: 14, cornerRadius: cornerRadiusValue, spread: 0)
         
-        directionalLayoutMargins = NSDirectionalEdgeInsets(top: 16, leading: 15, bottom: 16, trailing: 15)
+        directionalLayoutMargins = NSDirectionalEdgeInsets(top: 16,
+                                                           leading: 15,
+                                                           bottom: 16,
+                                                           trailing: 15)
         
-        layer.addSublayer(backgroundLayer)
-        
-        addSubview(maskView1)
         addSubview(maskLargeCircleView)
         addSubview(maskSmallCircleView)
         addSubview(tokenIcon)
         addSubview(nameLabel)
         addSubview(amountLabel)
         addSubview(balanceLabel)
-        
-        NSLayoutConstraint.activate([
-            maskView1.leadingAnchor.constraint(equalTo: leadingAnchor),
-            maskView1.topAnchor.constraint(equalTo: topAnchor),
-            maskView1.trailingAnchor.constraint(equalTo: trailingAnchor),
-            maskView1.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
         
         NSLayoutConstraint.activate([
             maskLargeCircleView.topAnchor.constraint(equalTo: topAnchor),
@@ -164,11 +135,6 @@ class TokenCardView: UIView {
         ])
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        backgroundLayer.frame = bounds
-    }
-    
     func updateInfo(token: MaskToken) {
         nameLabel.text = token.name
         guard let address = maskUserDefaults.defaultAccountAddress else {
@@ -192,6 +158,6 @@ class TokenCardView: UIView {
         amountLabel.text = "\(fetchToken?.displayQuantity.stringValue.currency ?? "0") \(token.symbol)"
         balanceLabel.text = "\(maskUserDefaults.currency.symbol)\(fetchToken?.displayBalance.stringValue.currency ?? "0")"
         
-        backgroundLayer.colors = blockchain.themeColors.map(\.cgColor)
+        backgroundColor = blockchain.tokenCardBgColor
     }
 }

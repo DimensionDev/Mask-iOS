@@ -32,19 +32,28 @@ class NFTDetailViewController: BaseViewController {
         return view
     }()
     
-    let sendButton: PrimeryButton =  {
+    lazy var buttonContainerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = Asset.Colors.Background.blur.color
+        return view
+    }()
+    
+    let sendButton: UIButton = {
         let button = PrimeryButton(title: L10n.Scene.Sendtransaction.Send.btnSend)
-        button.tintColor = Asset.Colors.AccountCard.nameText.color
+        button.tintColor = Asset.Colors.Public.warnings.color
         button.setImage(Asset.Images.Scene.SendTransaction.upload.image, for: .normal)
+        button.setBackgroundImage(UIImage.placeholder(color: Asset.Colors.Public.warnings.color),
+                                  for: .normal)
         button.setInsets(forContentPadding: .zero, imageTitlePadding: 10)
         button.addTarget(self, action: #selector(sendTransaction(_:)), for: .touchUpInside)
         return button
     }()
     
-    let receiveButton: SecondaryButton =  {
-        let button = SecondaryButton(title: L10n.Scene.WalletBalance.btnReceive)
-        button.setTitleColor(Asset.Colors.Text.link.color, for: .normal)
-        button.setImage(Asset.Images.Scene.Balance.receiveButtonBlue.image, for: .normal)
+    let receiveButton: UIButton = {
+        let button = PrimeryButton(title: L10n.Scene.WalletBalance.btnReceive)
+        button.tintColor = Asset.Colors.Public.blue.color
+        button.setImage(Asset.Images.Scene.SendTransaction.receive.image, for: .normal)
         button.setInsets(forContentPadding: .zero, imageTitlePadding: 10)
         button.addTarget(self, action: #selector(receiveBtnClicked(_:)), for: .touchUpInside)
         return button
@@ -52,12 +61,13 @@ class NFTDetailViewController: BaseViewController {
     
     lazy var buttonStackView: UIStackView = {
         let view = UIStackView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.axis = .horizontal
         view.alignment = .center
         view.distribution = .fillEqually
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: 0, left: 22, bottom: 24, right: 22)
-        view.spacing = 20
+        view.layoutMargins = UIEdgeInsets(top: 0, left: 22, bottom: 0, right: 22)
+        view.spacing = 12
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         receiveButton.translatesAutoresizingMaskIntoConstraints = false
         view.addArrangedSubview(sendButton)
@@ -125,22 +135,31 @@ class NFTDetailViewController: BaseViewController {
     
     private func setupSubviews() {
         view.addSubview(tableView)
+        view.addSubview(buttonContainerView)
+        buttonContainerView.addSubview(buttonStackView)
+        buttonStackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+            buttonContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            buttonContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                                                     constant: -80),
+            buttonContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            buttonContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
-        view.addSubview(buttonStackView)
-        buttonStackView.translatesAutoresizingMaskIntoConstraints = false
-
         NSLayoutConstraint.activate([
-            buttonStackView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-            buttonStackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            buttonStackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            buttonStackView.topAnchor.constraint(equalTo: buttonContainerView.topAnchor,
+                                                 constant: 8),
+            buttonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            buttonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             buttonStackView.heightAnchor.constraint(equalToConstant: 48)
+        ])
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: buttonContainerView.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
         tableView.dataSource = dataSource

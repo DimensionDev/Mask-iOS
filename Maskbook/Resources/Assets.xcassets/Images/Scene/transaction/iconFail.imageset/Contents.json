@@ -1,17 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Approve.pdf",
-      "idiom" : "universal"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
-      "filename" : "Approve-1.pdf",
+      "filename" : "Upload1.pdf",
       "idiom" : "universal"
     }
   ],

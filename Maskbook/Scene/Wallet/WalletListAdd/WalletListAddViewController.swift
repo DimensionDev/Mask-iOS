@@ -36,7 +36,7 @@ class WalletListAddViewController: UIViewController {
             switch item {
             case .createWallet(let title):
                 cell.titleLabel.text = title
-                cell.iconView.image = Asset.Images.Scene.WalletAdd.add.image
+                cell.iconView.image = Asset.Images.Scene.WalletDetail.iconWalletCreate.image
 
             case .importWallet(let title):
                 cell.titleLabel.text = title
