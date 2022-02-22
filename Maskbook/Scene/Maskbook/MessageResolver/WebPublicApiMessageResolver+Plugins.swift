@@ -14,13 +14,13 @@ typealias RedPacketInteractiveRequest = WebPublicApiMessageRequest<RedPacketInte
 
 extension WebPublicApiMessageResolver {
     @discardableResult
-    func notifyRedpacket(messageData: Data) -> Bool {
+    func notifyRedpacket(messageData: Data) -> WebPublicApiResponse<Bool> {
         guard let request = try? decoder.decode(RedPacketInteractiveRequest.self, from: messageData),
               let payload = request.params else {
-            return false
+                  return WebPublicApiResponse(response: false)
         }
         guard let address = WalletCoreService.shared.getCurrentAccount()?.address else {
-            return false
+            return WebPublicApiResponse(response: false)
         }
         let network = WalletCoreStorage.getCurrentNetwork()
         let status = payload.parseStatus(accountAddress: address, network: network)
@@ -29,28 +29,28 @@ extension WebPublicApiMessageResolver {
            !status.isEmpty {
             if let fromController = UIApplication.getTopViewController(),
                fromController.isKind(of: OpenRedPackageViewController.self) {
-                return false
+                return WebPublicApiResponse(response: false)
             }
             coordinator.present(scene: .openRedPackage(payload: payload,
                                                        delegate: self,
                                                        requestId: request.id),
                                 transition: .panModel(animated: true))
         }
-        return true
+        return WebPublicApiResponse(response: true)
     }
     
     @discardableResult
-    func claimOrRefundRedpacket(messageData: Data) -> Bool {
+    func claimOrRefundRedpacket(messageData: Data) -> WebPublicApiResponse<Bool> {
         guard let request = try? decoder.decode(RedPacketInteractiveRequest.self, from: messageData),
               let payload = request.params else {
-                  return false
+                  return WebPublicApiResponse(response: false)
               }
         coordinator.present(scene: .openRedPackage(payload: payload,
                                                    delegate: self,
                                                    requestId: request.id),
                             transition: .panModel(animated: true))
         
-        return true
+        return WebPublicApiResponse(response: true)
     }
 }
 

@@ -22,7 +22,7 @@ __webpack_unused_export__ = event_iterator_1.EventIterator;
 
 /***/ }),
 
-/***/ 11139:
+/***/ 79247:
 /***/ ((__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 
 
@@ -44,11 +44,11 @@ __webpack_require__.d(worker_implementation_subscribe_namespaceObject, {
 });
 
 // EXTERNAL MODULE: ./src/network/gun/gun-worker.patch.ts + 1 modules
-var gun_worker_patch = __webpack_require__(40479);
+var gun_worker_patch = __webpack_require__(46224);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/async-call-rpc@6.0.1/node_modules/async-call-rpc/out/full.mjs
 var full = __webpack_require__(73302);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/async-call-rpc@6.0.1/node_modules/async-call-rpc/utils/web/worker.js
-var worker = __webpack_require__(62840);
+var worker = __webpack_require__(22741);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/typeson@6.1.0/node_modules/typeson/dist/typeson.js
 var typeson = __webpack_require__(72421);
 var typeson_default = /*#__PURE__*/__webpack_require__.n(typeson);
@@ -75,9 +75,9 @@ var imagebitmap_default = /*#__PURE__*/__webpack_require__.n(imagebitmap);
 var special_numbers = __webpack_require__(82689);
 var special_numbers_default = /*#__PURE__*/__webpack_require__.n(special_numbers);
 // EXTERNAL MODULE: ../shared-base/src/Identifier/IdentifierMap.ts
-var IdentifierMap = __webpack_require__(47164);
+var IdentifierMap = __webpack_require__(55518);
 // EXTERNAL MODULE: ../shared-base/src/Identifier/type.ts
-var type = __webpack_require__(11924);
+var type = __webpack_require__(24366);
 ;// CONCATENATED MODULE: ../shared-base/src/serializer/index.ts
 /// <reference path="./typeson.d.ts" />
 
@@ -258,21 +258,21 @@ class ObservableSet extends Set {
 }
 
 // EXTERNAL MODULE: ../shared-base/src/MaskPayload/index.ts
-var MaskPayload = __webpack_require__(42774);
+var MaskPayload = __webpack_require__(40764);
 // EXTERNAL MODULE: ../shared-base/src/i18n/fallbackRule.ts
-var fallbackRule = __webpack_require__(58231);
+var fallbackRule = __webpack_require__(87092);
 ;// CONCATENATED MODULE: ../shared-base/src/i18n/index.ts
 
 
 
 // EXTERNAL MODULE: ../shared-base/src/TypedMessage/index.ts
-var TypedMessage = __webpack_require__(94150);
+var TypedMessage = __webpack_require__(73535);
 // EXTERNAL MODULE: ../shared-base/src/utils/getLocalImplementation.tsx
-var getLocalImplementation = __webpack_require__(47835);
+var getLocalImplementation = __webpack_require__(3602);
 // EXTERNAL MODULE: ../shared-base/src/utils/parseURL.ts
-var parseURL = __webpack_require__(18911);
+var parseURL = __webpack_require__(40068);
 // EXTERNAL MODULE: ../shared-base/src/utils/sessionStorageCache.ts
-var sessionStorageCache = __webpack_require__(20727);
+var sessionStorageCache = __webpack_require__(73864);
 ;// CONCATENATED MODULE: ../shared-base/src/utils/index.ts
 
 
@@ -287,19 +287,19 @@ var sessionStorageCache = __webpack_require__(20727);
 
 
 // EXTERNAL MODULE: ../shared-base/src/kv-storage/index.ts
-var kv_storage = __webpack_require__(95391);
+var kv_storage = __webpack_require__(26899);
 // EXTERNAL MODULE: ../shared-base/src/crypto/index.ts + 1 modules
-var src_crypto = __webpack_require__(17335);
+var src_crypto = __webpack_require__(64339);
 // EXTERNAL MODULE: ../shared-base/src/Persona/type.ts
-var Persona_type = __webpack_require__(98297);
+var Persona_type = __webpack_require__(53365);
 // EXTERNAL MODULE: ../shared-base/src/Routes/PopupRoutes.ts
-var PopupRoutes = __webpack_require__(69906);
+var PopupRoutes = __webpack_require__(74393);
 // EXTERNAL MODULE: ../shared-base/src/Routes/DashboardRoutes.ts
-var DashboardRoutes = __webpack_require__(36978);
+var DashboardRoutes = __webpack_require__(66092);
 // EXTERNAL MODULE: ../shared-base/src/Results/index.ts + 2 modules
-var Results = __webpack_require__(27752);
+var Results = __webpack_require__(17018);
 // EXTERNAL MODULE: ../shared-base/src/convert/index.ts
-var convert = __webpack_require__(32704);
+var convert = __webpack_require__(70954);
 ;// CONCATENATED MODULE: ../shared-base/src/index.ts
 
 
@@ -326,7 +326,7 @@ var browser_default = /*#__PURE__*/__webpack_require__.n(browser);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/gun@0.2020.1234/node_modules/gun/lib/then.js
 var then = __webpack_require__(40922);
 // EXTERNAL MODULE: ./src/network/gun/version.2/gun.patch.ts
-var gun_patch = __webpack_require__(56102);
+var gun_patch = __webpack_require__(77429);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/gun@0.2020.1234/node_modules/gun/sea.js
 var sea = __webpack_require__(23646);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/gun@0.2020.1234/node_modules/gun/lib/radix.js
@@ -338,10 +338,10 @@ var store = __webpack_require__(47322);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/gun@0.2020.1234/node_modules/gun/lib/rindexed.js
 var rindexed = __webpack_require__(76721);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/gun@0.2020.1234/node_modules/gun/gun.js
-var gun = __webpack_require__(87933);
+var gun = __webpack_require__(79979);
 var gun_default = /*#__PURE__*/__webpack_require__.n(gun);
 // EXTERNAL MODULE: ./src/network/gun-servers.ts
-var gun_servers = __webpack_require__(91406);
+var gun_servers = __webpack_require__(71757);
 ;// CONCATENATED MODULE: ./src/network/gun/version.2/gun2.ts
 
 
@@ -355,7 +355,7 @@ gun2.opt({
 });
 
 // EXTERNAL MODULE: ./utils-pure/index.ts + 3 modules
-var utils_pure = __webpack_require__(49613);
+var utils_pure = __webpack_require__(99990);
 ;// CONCATENATED MODULE: ./src/network/gun/version.2/hash.ts
 
 
@@ -526,10 +526,10 @@ const options = {
 
 /***/ }),
 
-/***/ 14381:
+/***/ 84176:
 /***/ ((__unused_webpack___webpack_module__, __unused_webpack___webpack_exports__, __webpack_require__) => {
 
-/* harmony import */ var _blob_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(86505);
+/* harmony import */ var _blob_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(44311);
 
 
 
@@ -993,7 +993,7 @@ var Result;
 /******/ 	__webpack_require__.x = () => {
 /******/ 		// Load entry module and return exports
 /******/ 		// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 		var __webpack_exports__ = __webpack_require__.O(undefined, [2698,3147,3693,9227,1440,2162,3832,71,8000,3638,8393,4477,8091,1002], () => (__webpack_require__(11139)))
+/******/ 		var __webpack_exports__ = __webpack_require__.O(undefined, [2698,3147,3693,9227,1440,2162,3832,71,8000,3638,8393,4477,665,9224], () => (__webpack_require__(79247)))
 /******/ 		__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 		return __webpack_exports__;
 /******/ 	};
@@ -1003,6 +1003,7 @@ var Result;
 /******/ 	(() => {
 /******/ 		var webpackThen = typeof Symbol === "function" ? Symbol("webpack then") : "__webpack_then__";
 /******/ 		var webpackExports = typeof Symbol === "function" ? Symbol("webpack exports") : "__webpack_exports__";
+/******/ 		var webpackError = typeof Symbol === "function" ? Symbol("webpack error") : "__webpack_error__";
 /******/ 		var completeQueue = (queue) => {
 /******/ 			if(queue) {
 /******/ 				queue.forEach((fn) => (fn.r--));
@@ -1020,16 +1021,20 @@ var Result;
 /******/ 						obj[webpackExports] = r;
 /******/ 						completeQueue(queue);
 /******/ 						queue = 0;
+/******/ 					}, (e) => {
+/******/ 						obj[webpackError] = e;
+/******/ 						completeQueue(queue);
+/******/ 						queue = 0;
 /******/ 					});
 /******/ 					var obj = {};
-/******/ 												obj[webpackThen] = (fn, reject) => (queueFunction(queue, fn), dep['catch'](reject));
+/******/ 					obj[webpackThen] = (fn, reject) => (queueFunction(queue, fn), dep['catch'](reject));
 /******/ 					return obj;
 /******/ 				}
 /******/ 			}
 /******/ 			var ret = {};
-/******/ 								ret[webpackThen] = (fn) => (completeFunction(fn));
-/******/ 								ret[webpackExports] = dep;
-/******/ 								return ret;
+/******/ 			ret[webpackThen] = (fn) => (completeFunction(fn));
+/******/ 			ret[webpackExports] = dep;
+/******/ 			return ret;
 /******/ 		}));
 /******/ 		__webpack_require__.a = (module, body, hasAwait) => {
 /******/ 			var queue = hasAwait && [];
@@ -1059,16 +1064,19 @@ var Result;
 /******/ 			};
 /******/ 			module.exports = promise;
 /******/ 			body((deps) => {
-/******/ 				if(!deps) return outerResolve();
 /******/ 				currentDeps = wrapDeps(deps);
-/******/ 				var fn, result;
+/******/ 				var fn;
+/******/ 				var getResult = () => (currentDeps.map((d) => {
+/******/ 					if(d[webpackError]) throw d[webpackError];
+/******/ 					return d[webpackExports];
+/******/ 				}))
 /******/ 				var promise = new Promise((resolve, reject) => {
-/******/ 					fn = () => (resolve(result = currentDeps.map((d) => (d[webpackExports]))));
+/******/ 					fn = () => (resolve(getResult));
 /******/ 					fn.r = 0;
 /******/ 					whenAll(currentDeps, fn, reject);
 /******/ 				});
-/******/ 				return fn.r ? promise : result;
-/******/ 			}).then(outerResolve, reject);
+/******/ 				return fn.r ? promise : getResult();
+/******/ 			}, (err) => (err && reject(promise[webpackError] = err), outerResolve()));
 /******/ 			isEvaluating = false;
 /******/ 		};
 /******/ 	})();
@@ -1149,7 +1157,7 @@ var Result;
 /******/ 			// return url for filenames not based on template
 /******/ 			if (chunkId === 3143) return "js/chunk.3143.js";
 /******/ 			if (chunkId === 4477) return "js/chunk.npm.gun.js";
-/******/ 			if (chunkId === 1002) return "js/chunk.1002.js";
+/******/ 			if (chunkId === 9224) return "js/chunk.9224.js";
 /******/ 			// return url for filenames based on template
 /******/ 			return "js/" + ({"71":"npm.typeson","1440":"npm.validator","2162":"npm.z-schema","2698":"npm.lodash-es","3147":"npm.bignumber.js","3638":"npm.anchorme","3693":"npm.async-call-rpc","3832":"npm.typeson-registry","8000":"npm.lodash.isequal","8393":"npm.lodash.get","9227":"npm.buffer"}[chunkId] || chunkId) + ".js";
 /******/ 		};
@@ -1288,7 +1296,7 @@ var Result;
 /******/ 	(() => {
 /******/ 		var next = __webpack_require__.x;
 /******/ 		__webpack_require__.x = () => {
-/******/ 			return Promise.all([2698,3147,3693,9227,1440,2162,3832,71,8000,3638,8393,4477,8091,1002].map(__webpack_require__.e, __webpack_require__)).then(next);
+/******/ 			return Promise.all([2698,3147,3693,9227,1440,2162,3832,71,8000,3638,8393,4477,665,9224].map(__webpack_require__.e, __webpack_require__)).then(next);
 /******/ 		};
 /******/ 	})();
 /******/ 	

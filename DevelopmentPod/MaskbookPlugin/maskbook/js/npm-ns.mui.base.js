@@ -1,7 +1,7 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[2486],{
 
-/***/ 86197:
+/***/ 22915:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -9,20 +9,20 @@
 /* harmony export */ });
 /* unused harmony export createFilterOptions */
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(37879);
+	/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(97538);
 }
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(21720);
+	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2453);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(99220);
+	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(10474);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(71324);
+	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(45486);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(15555);
+	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(75178);
 }
 
 
@@ -127,6 +127,7 @@ function useAutocomplete(props) {
     open: openProp,
     openOnFocus = false,
     options,
+    readOnly = false,
     selectOnFocus = !props.freeSolo,
     value: valueProp
   } = props;
@@ -219,7 +220,7 @@ function useAutocomplete(props) {
   });
   const [inputPristine, setInputPristine] = react__WEBPACK_IMPORTED_MODULE_0__.useState(true);
   const inputValueIsSelectedValue = !multiple && value != null && inputValue === getOptionLabel(value);
-  const popupOpen = open;
+  const popupOpen = open && !readOnly;
   const filteredOptions = popupOpen ? filterOptions(options.filter(option => {
     if (filterSelectedOptions && (multiple ? value : [value]).some(value2 => value2 !== null && isOptionEqualToValue(option, value2))) {
       return false;
@@ -232,7 +233,7 @@ function useAutocomplete(props) {
     inputValue: inputValueIsSelectedValue && inputPristine ? '' : inputValue,
     getOptionLabel
   }) : [];
-  const listboxAvailable = open && filteredOptions.length > 0;
+  const listboxAvailable = open && filteredOptions.length > 0 && !readOnly;
 
   if (false) {}
 
@@ -522,7 +523,11 @@ function useAutocomplete(props) {
   };
 
   const handleValue = (event, newValue, reason, details) => {
-    if (value === newValue) {
+    if (Array.isArray(value)) {
+      if (value.length === newValue.length && value.every((val, i) => val === newValue[i])) {
+        return;
+      }
+    } else if (value === newValue) {
       return;
     }
 
@@ -777,7 +782,7 @@ function useAutocomplete(props) {
           break;
 
         case 'Backspace':
-          if (multiple && inputValue === '' && value.length > 0) {
+          if (multiple && !readOnly && inputValue === '' && value.length > 0) {
             const index = focusedTag === -1 ? value.length - 1 : focusedTag;
             const newValue = value.slice();
             newValue.splice(index, 1);
@@ -959,7 +964,7 @@ function useAutocomplete(props) {
       // only have an opinion about this when closed
       'aria-activedescendant': popupOpen ? '' : null,
       'aria-autocomplete': autoComplete ? 'both' : 'list',
-      'aria-controls': listboxAvailable ? `${id}-listbox` : null,
+      'aria-controls': listboxAvailable ? `${id}-listbox` : undefined,
       // Disable browser's suggestion that might overlap with the popup.
       // Handle autocomplete but not autofill.
       autoComplete: 'off',
@@ -977,10 +982,11 @@ function useAutocomplete(props) {
     }),
     getTagProps: ({
       index
-    }) => ({
+    }) => (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)({
       key: index,
       'data-tag-index': index,
-      tabIndex: -1,
+      tabIndex: -1
+    }, !readOnly && {
       onDelete: handleTagDelete(index)
     }),
     getListboxProps: () => ({
@@ -1027,30 +1033,30 @@ function useAutocomplete(props) {
 
 /***/ }),
 
-/***/ 17392:
+/***/ 96188:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(37879);
+	/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(97538);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(93817);
+	/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(93086);
 }
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
 if (4554 != __webpack_require__.j) {
 	/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(25789);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _composeClasses__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(85186);
+	/* harmony import */ var _composeClasses__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(99572);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _utils_isHostComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(90109);
+	/* harmony import */ var _utils_isHostComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(6509);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _backdropUnstyledClasses__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(85709);
+	/* harmony import */ var _backdropUnstyledClasses__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(62442);
 }
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(74750);
 
@@ -1114,15 +1120,15 @@ const BackdropUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or s
 
 /***/ }),
 
-/***/ 85709:
+/***/ 62442:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "s": () => (/* binding */ getBackdropUtilityClass)
 /* harmony export */ });
-/* harmony import */ var _generateUtilityClasses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(38926);
+/* harmony import */ var _generateUtilityClasses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(82298);
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1830);
+	/* harmony import */ var _generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74707);
 }
 
 
@@ -1134,41 +1140,42 @@ const backdropUnstyledClasses = (0,_generateUtilityClasses__WEBPACK_IMPORTED_MOD
 
 /***/ }),
 
-/***/ 81276:
+/***/ 473:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(37879);
+	/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(97538);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(93817);
+	/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(93086);
 }
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
 if (4554 != __webpack_require__.j) {
 	/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(25789);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(41949);
+	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(91148);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(39859);
+	/* harmony import */ var _composeClasses__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(99572);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _composeClasses__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(85186);
+	/* harmony import */ var _utils_appendOwnerState__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(91503);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _utils_appendOwnerState__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(70545);
+	/* harmony import */ var _useBadge__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(10375);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _badgeUnstyledClasses__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(47794);
+	/* harmony import */ var _badgeUnstyledClasses__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(79457);
 }
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(74750);
 
 
-const _excluded = (/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (["anchorOrigin", "classes", "badgeContent", "component", "children", "className", "components", "componentsProps", "invisible", "max", "overlap", "showZero", "variant", "theme"]) : null);
+const _excluded = (/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (["anchorOrigin", "classes", "badgeContent", "component", "children", "className", "components", "componentsProps", "invisible", "max", "showZero", "variant"]) : null);
+
 
 
 
@@ -1183,13 +1190,12 @@ const useUtilityClasses = ownerState => {
   const {
     variant,
     anchorOrigin,
-    overlap,
     invisible,
     classes
   } = ownerState;
   const slots = {
     root: ['root'],
-    badge: ['badge', variant, `anchorOrigin${(0,_mui_utils__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(anchorOrigin.vertical)}${(0,_mui_utils__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(anchorOrigin.horizontal)}${(0,_mui_utils__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(overlap)}`, invisible && 'invisible']
+    badge: ['badge', variant, `anchorOrigin${(0,_mui_utils__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(anchorOrigin.vertical)}${(0,_mui_utils__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(anchorOrigin.horizontal)}`, invisible && 'invisible']
   };
   return (0,_composeClasses__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z)(slots, _badgeUnstyledClasses__WEBPACK_IMPORTED_MODULE_4__/* .getBadgeUtilityClass */ .I, classes);
 };
@@ -1201,40 +1207,29 @@ const BadgeUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or supe
       horizontal: 'right'
     },
     classes: classesProp,
-    badgeContent: badgeContentProp,
     component,
     children,
     className,
     components = {},
     componentsProps = {},
-    invisible: invisibleProp,
     max: maxProp = 99,
-    overlap: overlapProp = 'rectangular',
     showZero = false,
     variant: variantProp = 'standard'
   } = props,
         other = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)(props, _excluded);
 
-  const prevProps = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z)({
-    anchorOrigin: anchorOriginProp,
-    badgeContent: badgeContentProp,
-    max: maxProp,
-    overlap: overlapProp,
-    variant: variantProp
-  });
-  let invisible = invisibleProp;
-
-  if (invisibleProp == null && (badgeContentProp === 0 && !showZero || badgeContentProp == null && variantProp !== 'dot')) {
-    invisible = true;
-  }
-
   const {
-    anchorOrigin = anchorOriginProp,
+    anchorOrigin,
     badgeContent,
-    max = maxProp,
-    overlap = overlapProp,
-    variant = variantProp
-  } = invisible ? prevProps : props;
+    max,
+    variant,
+    displayValue,
+    invisible
+  } = (0,_useBadge__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z)((0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)({}, props, {
+    anchorOrigin: anchorOriginProp,
+    max: maxProp,
+    variant: variantProp
+  }));
 
   const ownerState = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)({}, props, {
     anchorOrigin,
@@ -1242,15 +1237,9 @@ const BadgeUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or supe
     classes: classesProp,
     invisible,
     max,
-    overlap,
-    variant
+    variant,
+    showZero
   });
-
-  let displayValue = '';
-
-  if (variant !== 'dot') {
-    displayValue = badgeContent > max ? `${max}+` : badgeContent;
-  }
 
   const classes = useUtilityClasses(ownerState);
   const Root = component || components.Root || 'span';
@@ -1272,37 +1261,95 @@ const BadgeUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or supe
 
 /***/ }),
 
-/***/ 47794:
+/***/ 79457:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "I": () => (/* binding */ getBadgeUtilityClass),
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _generateUtilityClasses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(38926);
+/* harmony import */ var _generateUtilityClasses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(82298);
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1830);
+	/* harmony import */ var _generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74707);
 }
 
 
 function getBadgeUtilityClass(slot) {
   return (0,_generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)('MuiBadge', slot);
 }
-const badgeUnstyledClasses = (0,_generateUtilityClasses__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)('MuiBadge', ['root', 'badge', 'dot', 'standard', 'anchorOriginTopLeftCircular', 'anchorOriginTopLeftRectangular', 'anchorOriginTopRightCircular', 'anchorOriginTopRightRectangular', 'anchorOriginBottomLeftCircular', 'anchorOriginBottomLeftRectangular', 'anchorOriginBottomRightCircular', 'anchorOriginBottomRightRectangular', 'invisible']);
+const badgeUnstyledClasses = (0,_generateUtilityClasses__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)('MuiBadge', ['root', 'badge', 'dot', 'standard', 'anchorOriginTopLeft', 'anchorOriginTopRight', 'anchorOriginBottomLeft', 'anchorOriginBottomRight', 'invisible']);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (badgeUnstyledClasses) : null));
 
 /***/ }),
 
-/***/ 36299:
+/***/ 10375:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ useBadge)
+/* harmony export */ });
+if (4554 != __webpack_require__.j) {
+	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(65217);
+}
+
+function useBadge(props) {
+  const {
+    anchorOrigin: anchorOriginProp = {
+      vertical: 'top',
+      horizontal: 'right'
+    },
+    badgeContent: badgeContentProp,
+    invisible: invisibleProp = false,
+    max: maxProp = 99,
+    showZero = false,
+    variant: variantProp = 'standard'
+  } = props;
+  const prevProps = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)({
+    anchorOrigin: anchorOriginProp,
+    badgeContent: badgeContentProp,
+    max: maxProp,
+    variant: variantProp
+  });
+  let invisible = invisibleProp;
+
+  if (invisibleProp === false && (badgeContentProp === 0 && !showZero || badgeContentProp == null && variantProp !== 'dot')) {
+    invisible = true;
+  }
+
+  const {
+    anchorOrigin = anchorOriginProp,
+    badgeContent,
+    max = maxProp,
+    variant = variantProp
+  } = invisible ? prevProps : props;
+  let displayValue = '';
+
+  if (variant !== 'dot') {
+    displayValue = badgeContent && Number(badgeContent) > max ? `${max}+` : badgeContent;
+  }
+
+  return {
+    anchorOrigin,
+    badgeContent,
+    invisible,
+    max,
+    variant,
+    displayValue
+  };
+}
+
+/***/ }),
+
+/***/ 53942:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5213);
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(71324);
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(81749);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(19372);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(45486);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(83401);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(74750);
 
 
@@ -1461,7 +1508,7 @@ if (false) {}
 
 /***/ }),
 
-/***/ 60623:
+/***/ 32107:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 
@@ -1470,33 +1517,33 @@ __webpack_require__.d(__webpack_exports__, {
   "Z": () => (/* binding */ ModalUnstyled_ModalUnstyled)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.16.5/node_modules/@babel/runtime/helpers/esm/extends.js
-var esm_extends = __webpack_require__(37879);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.16.5/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
-var objectWithoutPropertiesLoose = __webpack_require__(93817);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.17.2/node_modules/@babel/runtime/helpers/esm/extends.js
+var esm_extends = __webpack_require__(97538);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.17.2/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
+var objectWithoutPropertiesLoose = __webpack_require__(93086);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
 var react = __webpack_require__(76342);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/clsx@1.1.1/node_modules/clsx/dist/clsx.m.js
 var clsx_m = __webpack_require__(25789);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.2.3_react@18.0.0-rc.0/node_modules/@mui/utils/esm/useForkRef.js
-var useForkRef = __webpack_require__(5213);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.2.3_react@18.0.0-rc.0/node_modules/@mui/utils/esm/ownerDocument.js
-var ownerDocument = __webpack_require__(81749);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.2.3_react@18.0.0-rc.0/node_modules/@mui/utils/esm/useEventCallback.js
-var useEventCallback = __webpack_require__(71324);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.2.3_react@18.0.0-rc.0/node_modules/@mui/utils/esm/createChainedFunction.js
-var createChainedFunction = __webpack_require__(78751);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.61_2f50eb45a1501445764b3dbbd8573d7c/node_modules/@mui/base/composeClasses/composeClasses.js
-var composeClasses = __webpack_require__(85186);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.61_2f50eb45a1501445764b3dbbd8573d7c/node_modules/@mui/base/utils/isHostComponent.js
-var isHostComponent = __webpack_require__(90109);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.61_2f50eb45a1501445764b3dbbd8573d7c/node_modules/@mui/base/Portal/Portal.js
-var Portal = __webpack_require__(31634);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.2.3_react@18.0.0-rc.0/node_modules/@mui/utils/esm/ownerWindow.js
-var ownerWindow = __webpack_require__(23342);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.2.3_react@18.0.0-rc.0/node_modules/@mui/utils/esm/getScrollbarSize.js
-var getScrollbarSize = __webpack_require__(23049);
-;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.61_2f50eb45a1501445764b3dbbd8573d7c/node_modules/@mui/base/ModalUnstyled/ModalManager.js
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.2_react@18.0.0-rc.0/node_modules/@mui/utils/esm/useForkRef.js
+var useForkRef = __webpack_require__(19372);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.2_react@18.0.0-rc.0/node_modules/@mui/utils/esm/ownerDocument.js
+var ownerDocument = __webpack_require__(83401);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.2_react@18.0.0-rc.0/node_modules/@mui/utils/esm/useEventCallback.js
+var useEventCallback = __webpack_require__(45486);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.2_react@18.0.0-rc.0/node_modules/@mui/utils/esm/createChainedFunction.js
+var createChainedFunction = __webpack_require__(46181);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.69_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/composeClasses/composeClasses.js
+var composeClasses = __webpack_require__(99572);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.69_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/utils/isHostComponent.js
+var isHostComponent = __webpack_require__(6509);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.69_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/Portal/Portal.js
+var Portal = __webpack_require__(89902);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.2_react@18.0.0-rc.0/node_modules/@mui/utils/esm/ownerWindow.js
+var ownerWindow = __webpack_require__(83551);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.2_react@18.0.0-rc.0/node_modules/@mui/utils/esm/getScrollbarSize.js
+var getScrollbarSize = __webpack_require__(23909);
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.69_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/ModalUnstyled/ModalManager.js
 
 
 // Is a vertical scrollbar displayed?
@@ -1722,13 +1769,13 @@ class ModalManager {
   }
 
 }
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.61_2f50eb45a1501445764b3dbbd8573d7c/node_modules/@mui/base/Unstable_TrapFocus/Unstable_TrapFocus.js
-var Unstable_TrapFocus = __webpack_require__(67055);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.61_2f50eb45a1501445764b3dbbd8573d7c/node_modules/@mui/base/ModalUnstyled/modalUnstyledClasses.js
-var modalUnstyledClasses = __webpack_require__(39904);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.69_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/Unstable_TrapFocus/Unstable_TrapFocus.js
+var Unstable_TrapFocus = __webpack_require__(94249);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.69_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/ModalUnstyled/modalUnstyledClasses.js
+var modalUnstyledClasses = __webpack_require__(2627);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
 var jsx_runtime = __webpack_require__(74750);
-;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.61_2f50eb45a1501445764b3dbbd8573d7c/node_modules/@mui/base/ModalUnstyled/ModalUnstyled.js
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.69_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/ModalUnstyled/ModalUnstyled.js
 
 
 const _excluded = ["BackdropComponent", "BackdropProps", "children", "classes", "className", "closeAfterTransition", "component", "components", "componentsProps", "container", "disableAutoFocus", "disableEnforceFocus", "disableEscapeKeyDown", "disablePortal", "disableRestoreFocus", "disableScrollLock", "hideBackdrop", "keepMounted", "manager", "onBackdropClick", "onClose", "onKeyDown", "open", "theme", "onTransitionEnter", "onTransitionExited"];
@@ -2004,15 +2051,15 @@ const ModalUnstyled = /*#__PURE__*/react.forwardRef(function ModalUnstyled(props
 
 /***/ }),
 
-/***/ 39904:
+/***/ 2627:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "x": () => (/* binding */ getModalUtilityClass)
 /* harmony export */ });
-/* harmony import */ var _generateUtilityClasses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(38926);
+/* harmony import */ var _generateUtilityClasses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(82298);
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1830);
+	/* harmony import */ var _generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74707);
 }
 
 
@@ -2024,38 +2071,38 @@ const modalUnstyledClasses = (0,_generateUtilityClasses__WEBPACK_IMPORTED_MODULE
 
 /***/ }),
 
-/***/ 59190:
+/***/ 87397:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(37879);
+	/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(97538);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(93817);
+	/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(93086);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5213);
+	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(19372);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(23471);
+	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(17630);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(81749);
+	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(83401);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _popperjs_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(4324);
+	/* harmony import */ var _popperjs_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(39416);
 }
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _Portal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(31634);
+	/* harmony import */ var _Portal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(89902);
 }
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(74750);
 
 
-const _excluded = (/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (["anchorEl", "children", "direction", "disablePortal", "modifiers", "open", "placement", "popperOptions", "popperRef", "TransitionProps"]) : null),
+const _excluded = (/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (["anchorEl", "children", "direction", "disablePortal", "modifiers", "open", "ownerState", "placement", "popperOptions", "popperRef", "TransitionProps"]) : null),
       _excluded2 = (/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (["anchorEl", "children", "container", "direction", "disablePortal", "keepMounted", "modifiers", "open", "placement", "popperOptions", "popperRef", "style", "transition"]) : null);
 
 
@@ -2276,7 +2323,7 @@ const PopperUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or sup
 
 /***/ }),
 
-/***/ 31634:
+/***/ 89902:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -2285,13 +2332,13 @@ const PopperUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or sup
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15621);
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5213);
+	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(19372);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(23471);
+	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(17630);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(15555);
+	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(75178);
 }
 
 
@@ -2351,59 +2398,44 @@ if (false) {}
 
 /***/ }),
 
-/***/ 8722:
+/***/ 19378:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(37879);
+	/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(97538);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(93817);
+	/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(93086);
 }
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(25789);
+	/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(25789);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(81749);
+	/* harmony import */ var _utils_appendOwnerState__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(91503);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(99220);
+	/* harmony import */ var _utils_isHostComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(6509);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(18248);
+	/* harmony import */ var _composeClasses__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(99572);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(5213);
+	/* harmony import */ var _sliderUnstyledClasses__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(67032);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(71324);
+	/* harmony import */ var _SliderValueLabelUnstyled__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(31117);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(23471);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(20254);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _utils_isHostComponent__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(90109);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _composeClasses__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(85186);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _sliderUnstyledClasses__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3798);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _SliderValueLabelUnstyled__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(29303);
+	/* harmony import */ var _useSlider__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(13206);
 }
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(74750);
 
 
-const _excluded = (/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (["aria-label", "aria-labelledby", "aria-valuetext", "className", "component", "classes", "defaultValue", "disableSwap", "disabled", "getAriaLabel", "getAriaValueText", "marks", "max", "min", "name", "onChange", "onChangeCommitted", "onMouseDown", "orientation", "scale", "step", "tabIndex", "track", "value", "valueLabelDisplay", "valueLabelFormat", "isRtl", "components", "componentsProps"]) : null);
+const _excluded = (/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (["aria-label", "aria-valuetext", "className", "component", "classes", "disableSwap", "disabled", "getAriaLabel", "getAriaValueText", "marks", "max", "min", "name", "onChange", "onChangeCommitted", "onMouseDown", "orientation", "scale", "step", "tabIndex", "track", "value", "valueLabelDisplay", "valueLabelFormat", "isRtl", "components", "componentsProps"]) : null);
 
 
 
@@ -2414,164 +2446,10 @@ const _excluded = (/* runtime-dependent pure expression or super */ 4554 != __we
 
 
 
-const INTENTIONAL_DRAG_COUNT_THRESHOLD = 2;
-
-function asc(a, b) {
-  return a - b;
-}
-
-function clamp(value, min, max) {
-  if (value == null) {
-    return min;
-  }
-
-  return Math.min(Math.max(min, value), max);
-}
-
-function findClosest(values, currentValue) {
-  const {
-    index: closestIndex
-  } = values.reduce((acc, value, index) => {
-    const distance = Math.abs(currentValue - value);
-
-    if (acc === null || distance < acc.distance || distance === acc.distance) {
-      return {
-        distance,
-        index
-      };
-    }
-
-    return acc;
-  }, null);
-  return closestIndex;
-}
-
-function trackFinger(event, touchId) {
-  if (touchId.current !== undefined && event.changedTouches) {
-    for (let i = 0; i < event.changedTouches.length; i += 1) {
-      const touch = event.changedTouches[i];
-
-      if (touch.identifier === touchId.current) {
-        return {
-          x: touch.clientX,
-          y: touch.clientY
-        };
-      }
-    }
-
-    return false;
-  }
-
-  return {
-    x: event.clientX,
-    y: event.clientY
-  };
-}
-
-function valueToPercent(value, min, max) {
-  return (value - min) * 100 / (max - min);
-}
-
-function percentToValue(percent, min, max) {
-  return (max - min) * percent + min;
-}
-
-function getDecimalPrecision(num) {
-  // This handles the case when num is very small (0.00000001), js will turn this into 1e-8.
-  // When num is bigger than 1 or less than -1 it won't get converted to this notation so it's fine.
-  if (Math.abs(num) < 1) {
-    const parts = num.toExponential().split('e-');
-    const matissaDecimalPart = parts[0].split('.')[1];
-    return (matissaDecimalPart ? matissaDecimalPart.length : 0) + parseInt(parts[1], 10);
-  }
-
-  const decimalPart = num.toString().split('.')[1];
-  return decimalPart ? decimalPart.length : 0;
-}
-
-function roundValueToStep(value, step, min) {
-  const nearest = Math.round((value - min) / step) * step + min;
-  return Number(nearest.toFixed(getDecimalPrecision(step)));
-}
-
-function setValueIndex({
-  values,
-  newValue,
-  index
-}) {
-  const output = values.slice();
-  output[index] = newValue;
-  return output.sort(asc);
-}
-
-function focusThumb({
-  sliderRef,
-  activeIndex,
-  setActive
-}) {
-  const doc = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(sliderRef.current);
-
-  if (!sliderRef.current.contains(doc.activeElement) || Number(doc.activeElement.getAttribute('data-index')) !== activeIndex) {
-    sliderRef.current.querySelector(`[type="range"][data-index="${activeIndex}"]`).focus();
-  }
-
-  if (setActive) {
-    setActive(activeIndex);
-  }
-}
-
-const axisProps = {
-  horizontal: {
-    offset: percent => ({
-      left: `${percent}%`
-    }),
-    leap: percent => ({
-      width: `${percent}%`
-    })
-  },
-  'horizontal-reverse': {
-    offset: percent => ({
-      right: `${percent}%`
-    }),
-    leap: percent => ({
-      width: `${percent}%`
-    })
-  },
-  vertical: {
-    offset: percent => ({
-      bottom: `${percent}%`
-    }),
-    leap: percent => ({
-      height: `${percent}%`
-    })
-  }
-};
-
-const Identity = x => x; // TODO: remove support for Safari < 13.
-// https://caniuse.com/#search=touch-action
-//
-// Safari, on iOS, supports touch action since v13.
-// Over 80% of the iOS phones are compatible
-// in August 2020.
-// Utilizing the CSS.supports method to check if touch-action is supported.
-// Since CSS.supports is supported on all but Edge@12 and IE and touch-action
-// is supported on both Edge@12 and IE if CSS.supports is not available that means that
-// touch-action will be supported
 
 
-let cachedSupportsTouchActionNone;
 
-function doesSupportTouchActionNone() {
-  if (cachedSupportsTouchActionNone === undefined) {
-    if (typeof CSS !== 'undefined' && typeof CSS.supports === 'function') {
-      cachedSupportsTouchActionNone = CSS.supports('touch-action', 'none');
-    } else {
-      cachedSupportsTouchActionNone = true;
-    }
-  }
-
-  return cachedSupportsTouchActionNone;
-}
+const Identity = x => x;
 
 const useUtilityClasses = ownerState => {
   const {
@@ -2596,7 +2474,7 @@ const useUtilityClasses = ownerState => {
     disabled: ['disabled'],
     focusVisible: ['focusVisible']
   };
-  return (0,_composeClasses__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z)(slots, _sliderUnstyledClasses__WEBPACK_IMPORTED_MODULE_4__/* .getSliderUtilityClass */ .k, classes);
+  return (0,_composeClasses__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(slots, _sliderUnstyledClasses__WEBPACK_IMPORTED_MODULE_3__/* .getSliderUtilityClass */ .k, classes);
 };
 
 const Forward = ({
@@ -2604,14 +2482,14 @@ const Forward = ({
 }) => children;
 
 const SliderUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(function SliderUnstyled(props, ref) {
+  var _ref, _components$Rail, _components$Track, _components$Thumb, _components$ValueLabe, _components$Mark, _components$MarkLabel;
+
   const {
     'aria-label': ariaLabel,
-    'aria-labelledby': ariaLabelledby,
     'aria-valuetext': ariaValuetext,
     className,
-    component = 'span',
+    component,
     classes: classesProp,
-    defaultValue,
     disableSwap = false,
     disabled = false,
     getAriaLabel,
@@ -2619,442 +2497,26 @@ const SliderUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or sup
     marks: marksProp = false,
     max = 100,
     min = 0,
-    name,
-    onChange,
-    onChangeCommitted,
     onMouseDown,
     orientation = 'horizontal',
     scale = Identity,
     step = 1,
-    tabIndex,
     track = 'normal',
-    value: valueProp,
     valueLabelDisplay = 'off',
     valueLabelFormat = Identity,
     isRtl = false,
     components = {},
     componentsProps = {}
   } = props,
-        other = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)(props, _excluded);
-
-  const touchId = react__WEBPACK_IMPORTED_MODULE_0__.useRef(); // We can't use the :active browser pseudo-classes.
-  // - The active state isn't triggered when clicking on the rail.
-  // - The active state isn't transferred when inversing a range slider.
-
-  const [active, setActive] = react__WEBPACK_IMPORTED_MODULE_0__.useState(-1);
-  const [open, setOpen] = react__WEBPACK_IMPORTED_MODULE_0__.useState(-1);
-  const [dragging, setDragging] = react__WEBPACK_IMPORTED_MODULE_0__.useState(false);
-  const moveCount = react__WEBPACK_IMPORTED_MODULE_0__.useRef(0);
-  const [valueDerived, setValueState] = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z)({
-    controlled: valueProp,
-    default: defaultValue != null ? defaultValue : min,
-    name: 'Slider'
-  });
-
-  const handleChange = onChange && ((event, value, thumbIndex) => {
-    // Redefine target to allow name and value to be read.
-    // This allows seamless integration with the most popular form libraries.
-    // https://github.com/mui-org/material-ui/issues/13485#issuecomment-676048492
-    // Clone the event to not override `target` of the original event.
-    const nativeEvent = event.nativeEvent || event;
-    const clonedEvent = new nativeEvent.constructor(nativeEvent.type, nativeEvent);
-    Object.defineProperty(clonedEvent, 'target', {
-      writable: true,
-      value: {
-        value,
-        name
-      }
-    });
-    onChange(clonedEvent, value, thumbIndex);
-  });
-
-  const range = Array.isArray(valueDerived);
-  let values = range ? valueDerived.slice().sort(asc) : [valueDerived];
-  values = values.map(value => clamp(value, min, max));
-  const marks = marksProp === true && step !== null ? [...Array(Math.floor((max - min) / step) + 1)].map((_, index) => ({
-    value: min + step * index
-  })) : marksProp || [];
-  const {
-    isFocusVisibleRef,
-    onBlur: handleBlurVisible,
-    onFocus: handleFocusVisible,
-    ref: focusVisibleRef
-  } = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)();
-  const [focusVisible, setFocusVisible] = react__WEBPACK_IMPORTED_MODULE_0__.useState(-1);
-  const sliderRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef();
-  const handleFocusRef = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z)(focusVisibleRef, sliderRef);
-  const handleRef = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z)(ref, handleFocusRef);
-
-  const handleFocus = event => {
-    const index = Number(event.currentTarget.getAttribute('data-index'));
-    handleFocusVisible(event);
-
-    if (isFocusVisibleRef.current === true) {
-      setFocusVisible(index);
-    }
-
-    setOpen(index);
-  };
-
-  const handleBlur = event => {
-    handleBlurVisible(event);
-
-    if (isFocusVisibleRef.current === false) {
-      setFocusVisible(-1);
-    }
-
-    setOpen(-1);
-  };
-
-  const handleMouseOver = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z)(event => {
-    const index = Number(event.currentTarget.getAttribute('data-index'));
-    setOpen(index);
-  });
-  const handleMouseLeave = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z)(() => {
-    setOpen(-1);
-  });
-  (0,_mui_utils__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z)(() => {
-    if (disabled && sliderRef.current.contains(document.activeElement)) {
-      // This is necessary because Firefox and Safari will keep focus
-      // on a disabled element:
-      // https://codesandbox.io/s/mui-pr-22247-forked-h151h?file=/src/App.js
-      document.activeElement.blur();
-    }
-  }, [disabled]);
-
-  if (disabled && active !== -1) {
-    setActive(-1);
-  }
-
-  if (disabled && focusVisible !== -1) {
-    setFocusVisible(-1);
-  }
-
-  const handleHiddenInputChange = event => {
-    const index = Number(event.currentTarget.getAttribute('data-index'));
-    const value = values[index];
-    const marksValues = marks.map(mark => mark.value);
-    const marksIndex = marksValues.indexOf(value);
-    let newValue = event.target.valueAsNumber;
-
-    if (marks && step == null) {
-      newValue = newValue < value ? marksValues[marksIndex - 1] : marksValues[marksIndex + 1];
-    }
-
-    newValue = clamp(newValue, min, max);
-
-    if (marks && step == null) {
-      const markValues = marks.map(mark => mark.value);
-      const currentMarkIndex = markValues.indexOf(values[index]);
-      newValue = newValue < values[index] ? markValues[currentMarkIndex - 1] : markValues[currentMarkIndex + 1];
-    }
-
-    if (range) {
-      // Bound the new value to the thumb's neighbours.
-      if (disableSwap) {
-        newValue = clamp(newValue, values[index - 1] || -Infinity, values[index + 1] || Infinity);
-      }
-
-      const previousValue = newValue;
-      newValue = setValueIndex({
-        values,
-        newValue,
-        index
-      });
-      let activeIndex = index; // Potentially swap the index if needed.
-
-      if (!disableSwap) {
-        activeIndex = newValue.indexOf(previousValue);
-      }
-
-      focusThumb({
-        sliderRef,
-        activeIndex
-      });
-    }
-
-    setValueState(newValue);
-    setFocusVisible(index);
-
-    if (handleChange) {
-      handleChange(event, newValue, index);
-    }
-
-    if (onChangeCommitted) {
-      onChangeCommitted(event, newValue);
-    }
-  };
-
-  const previousIndex = react__WEBPACK_IMPORTED_MODULE_0__.useRef();
-  let axis = orientation;
-
-  if (isRtl && orientation !== "vertical") {
-    axis += '-reverse';
-  }
-
-  const getFingerNewValue = ({
-    finger,
-    move = false,
-    values: values2
-  }) => {
-    const {
-      current: slider
-    } = sliderRef;
-    const {
-      width,
-      height,
-      bottom,
-      left
-    } = slider.getBoundingClientRect();
-    let percent;
-
-    if (axis.indexOf('vertical') === 0) {
-      percent = (bottom - finger.y) / height;
-    } else {
-      percent = (finger.x - left) / width;
-    }
-
-    if (axis.indexOf('-reverse') !== -1) {
-      percent = 1 - percent;
-    }
-
-    let newValue;
-    newValue = percentToValue(percent, min, max);
-
-    if (step) {
-      newValue = roundValueToStep(newValue, step, min);
-    } else {
-      const marksValues = marks.map(mark => mark.value);
-      const closestIndex = findClosest(marksValues, newValue);
-      newValue = marksValues[closestIndex];
-    }
-
-    newValue = clamp(newValue, min, max);
-    let activeIndex = 0;
-
-    if (range) {
-      if (!move) {
-        activeIndex = findClosest(values2, newValue);
-      } else {
-        activeIndex = previousIndex.current;
-      } // Bound the new value to the thumb's neighbours.
-
-
-      if (disableSwap) {
-        newValue = clamp(newValue, values2[activeIndex - 1] || -Infinity, values2[activeIndex + 1] || Infinity);
-      }
-
-      const previousValue = newValue;
-      newValue = setValueIndex({
-        values: values2,
-        newValue,
-        index: activeIndex
-      }); // Potentially swap the index if needed.
-
-      if (!(disableSwap && move)) {
-        activeIndex = newValue.indexOf(previousValue);
-        previousIndex.current = activeIndex;
-      }
-    }
-
-    return {
-      newValue,
-      activeIndex
-    };
-  };
-
-  const handleTouchMove = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z)(nativeEvent => {
-    const finger = trackFinger(nativeEvent, touchId);
-
-    if (!finger) {
-      return;
-    }
-
-    moveCount.current += 1; // Cancel move in case some other element consumed a mouseup event and it was not fired.
-
-    if (nativeEvent.type === 'mousemove' && nativeEvent.buttons === 0) {
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      handleTouchEnd(nativeEvent);
-      return;
-    }
-
-    const {
-      newValue,
-      activeIndex
-    } = getFingerNewValue({
-      finger,
-      move: true,
-      values
-    });
-    focusThumb({
-      sliderRef,
-      activeIndex,
-      setActive
-    });
-    setValueState(newValue);
-
-    if (!dragging && moveCount.current > INTENTIONAL_DRAG_COUNT_THRESHOLD) {
-      setDragging(true);
-    }
-
-    if (handleChange) {
-      handleChange(nativeEvent, newValue, activeIndex);
-    }
-  });
-  const handleTouchEnd = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z)(nativeEvent => {
-    const finger = trackFinger(nativeEvent, touchId);
-    setDragging(false);
-
-    if (!finger) {
-      return;
-    }
-
-    const {
-      newValue
-    } = getFingerNewValue({
-      finger,
-      values
-    });
-    setActive(-1);
-
-    if (nativeEvent.type === 'touchend') {
-      setOpen(-1);
-    }
-
-    if (onChangeCommitted) {
-      onChangeCommitted(nativeEvent, newValue);
-    }
-
-    touchId.current = undefined; // eslint-disable-next-line @typescript-eslint/no-use-before-define
-
-    stopListening();
-  });
-  const handleTouchStart = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z)(nativeEvent => {
-    // If touch-action: none; is not supported we need to prevent the scroll manually.
-    if (!doesSupportTouchActionNone()) {
-      nativeEvent.preventDefault();
-    }
-
-    const touch = nativeEvent.changedTouches[0];
-
-    if (touch != null) {
-      // A number that uniquely identifies the current finger in the touch session.
-      touchId.current = touch.identifier;
-    }
-
-    const finger = trackFinger(nativeEvent, touchId);
-    const {
-      newValue,
-      activeIndex
-    } = getFingerNewValue({
-      finger,
-      values
-    });
-    focusThumb({
-      sliderRef,
-      activeIndex,
-      setActive
-    });
-    setValueState(newValue);
-
-    if (handleChange) {
-      handleChange(nativeEvent, newValue, activeIndex);
-    }
-
-    moveCount.current = 0;
-    const doc = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(sliderRef.current);
-    doc.addEventListener('touchmove', handleTouchMove);
-    doc.addEventListener('touchend', handleTouchEnd);
-  });
-  const stopListening = react__WEBPACK_IMPORTED_MODULE_0__.useCallback(() => {
-    const doc = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(sliderRef.current);
-    doc.removeEventListener('mousemove', handleTouchMove);
-    doc.removeEventListener('mouseup', handleTouchEnd);
-    doc.removeEventListener('touchmove', handleTouchMove);
-    doc.removeEventListener('touchend', handleTouchEnd);
-  }, [handleTouchEnd, handleTouchMove]);
-  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-    const {
-      current: slider
-    } = sliderRef;
-    slider.addEventListener('touchstart', handleTouchStart, {
-      passive: doesSupportTouchActionNone()
-    });
-    return () => {
-      slider.removeEventListener('touchstart', handleTouchStart, {
-        passive: doesSupportTouchActionNone()
-      });
-      stopListening();
-    };
-  }, [stopListening, handleTouchStart]);
-  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-    if (disabled) {
-      stopListening();
-    }
-  }, [disabled, stopListening]);
-  const handleMouseDown = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z)(event => {
-    if (onMouseDown) {
-      onMouseDown(event);
-    } // Only handle left clicks
-
-
-    if (event.button !== 0) {
-      return;
-    } // Avoid text selection
-
-
-    event.preventDefault();
-    const finger = trackFinger(event, touchId);
-    const {
-      newValue,
-      activeIndex
-    } = getFingerNewValue({
-      finger,
-      values
-    });
-    focusThumb({
-      sliderRef,
-      activeIndex,
-      setActive
-    });
-    setValueState(newValue);
-
-    if (handleChange) {
-      handleChange(event, newValue, activeIndex);
-    }
-
-    moveCount.current = 0;
-    const doc = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(sliderRef.current);
-    doc.addEventListener('mousemove', handleTouchMove);
-    doc.addEventListener('mouseup', handleTouchEnd);
-  });
-  const trackOffset = valueToPercent(range ? values[0] : min, min, max);
-  const trackLeap = valueToPercent(values[values.length - 1], min, max) - trackOffset;
-
-  const trackStyle = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, axisProps[axis].offset(trackOffset), axisProps[axis].leap(trackLeap));
-
-  const Root = components.Root || component;
-  const rootProps = componentsProps.root || {};
-  const Rail = components.Rail || 'span';
-  const railProps = componentsProps.rail || {};
-  const Track = components.Track || 'span';
-  const trackProps = componentsProps.track || {};
-  const Thumb = components.Thumb || 'span';
-  const thumbProps = componentsProps.thumb || {};
-  const ValueLabel = components.ValueLabel || _SliderValueLabelUnstyled__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z;
-  const valueLabelProps = componentsProps.valueLabel || {};
-  const Mark = components.Mark || 'span';
-  const markProps = componentsProps.mark || {};
-  const MarkLabel = components.MarkLabel || 'span';
-  const markLabelProps = componentsProps.markLabel || {}; // all props with defaults
+        other = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z)(props, _excluded); // all props with defaults
   // consider extracting to hook an reusing the lint rule for the varints
 
-  const ownerState = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, props, {
+
+  const ownerState = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)({}, props, {
+    mark: marksProp,
     classes: classesProp,
     disabled,
-    dragging,
     isRtl,
-    marked: marks.length > 0 && marks.some(mark => mark.label),
     max,
     min,
     orientation,
@@ -3065,26 +2527,58 @@ const SliderUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or sup
     valueLabelFormat
   });
 
+  const {
+    axisProps,
+    getRootProps,
+    getHiddenInputProps,
+    getThumbProps,
+    open,
+    active,
+    axis,
+    range,
+    focusVisible,
+    dragging,
+    marks,
+    values,
+    trackOffset,
+    trackLeap
+  } = (0,_useSlider__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .ZP)((0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)({}, ownerState, {
+    ref
+  }));
+  ownerState.marked = marks.length > 0 && marks.some(mark => mark.label);
+  ownerState.dragging = dragging;
+  const Root = (_ref = component != null ? component : components.Root) != null ? _ref : 'span';
+  const rootProps = (0,_utils_appendOwnerState__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)(Root, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)({}, other, componentsProps.root), ownerState);
+  const Rail = (_components$Rail = components.Rail) != null ? _components$Rail : 'span';
+  const railProps = (0,_utils_appendOwnerState__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)(Rail, componentsProps.rail, ownerState);
+  const Track = (_components$Track = components.Track) != null ? _components$Track : 'span';
+  const trackProps = (0,_utils_appendOwnerState__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)(Track, componentsProps.track, ownerState);
+
+  const trackStyle = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)({}, axisProps[axis].offset(trackOffset), axisProps[axis].leap(trackLeap));
+
+  const Thumb = (_components$Thumb = components.Thumb) != null ? _components$Thumb : 'span';
+  const thumbProps = (0,_utils_appendOwnerState__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)(Thumb, componentsProps.thumb, ownerState);
+  const ValueLabel = (_components$ValueLabe = components.ValueLabel) != null ? _components$ValueLabe : _SliderValueLabelUnstyled__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z;
+  const valueLabelProps = (0,_utils_appendOwnerState__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)(ValueLabel, componentsProps.valueLabel, ownerState);
+  const Mark = (_components$Mark = components.Mark) != null ? _components$Mark : 'span';
+  const markProps = (0,_utils_appendOwnerState__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)(Mark, componentsProps.mark, ownerState);
+  const MarkLabel = (_components$MarkLabel = components.MarkLabel) != null ? _components$MarkLabel : 'span';
+  const markLabelProps = (0,_utils_appendOwnerState__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)(MarkLabel, componentsProps.markLabel, ownerState);
+  const Input = components.Input || 'input';
+  const inputProps = (0,_utils_appendOwnerState__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)(Input, componentsProps.input, ownerState);
+  const hiddenInputProps = getHiddenInputProps();
   const classes = useUtilityClasses(ownerState);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(Root, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({
-    ref: handleRef,
-    onMouseDown: handleMouseDown
-  }, rootProps, !(0,_utils_isHostComponent__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z)(Root) && {
-    as: component,
-    ownerState: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, ownerState, rootProps.ownerState)
-  }, other, {
-    className: (0,clsx__WEBPACK_IMPORTED_MODULE_14__["default"])(classes.root, rootProps.className, className),
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Rail, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, railProps, !(0,_utils_isHostComponent__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z)(Rail) && {
-      ownerState: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, ownerState, railProps.ownerState)
-    }, {
-      className: (0,clsx__WEBPACK_IMPORTED_MODULE_14__["default"])(classes.rail, railProps.className)
-    })), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Track, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, trackProps, !(0,_utils_isHostComponent__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z)(Track) && {
-      ownerState: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, ownerState, trackProps.ownerState)
-    }, {
-      className: (0,clsx__WEBPACK_IMPORTED_MODULE_14__["default"])(classes.track, trackProps.className),
-      style: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, trackStyle, trackProps.style)
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(Root, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)({}, rootProps, getRootProps({
+    onMouseDown
+  }), {
+    className: (0,clsx__WEBPACK_IMPORTED_MODULE_9__["default"])(classes.root, rootProps.className, className),
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Rail, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)({}, railProps, {
+      className: (0,clsx__WEBPACK_IMPORTED_MODULE_9__["default"])(classes.rail, railProps.className)
+    })), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Track, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)({}, trackProps, {
+      className: (0,clsx__WEBPACK_IMPORTED_MODULE_9__["default"])(classes.track, trackProps.className),
+      style: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)({}, trackStyle, trackProps.style)
     })), marks.map((mark, index) => {
-      const percent = valueToPercent(mark.value, min, max);
+      const percent = (0,_useSlider__WEBPACK_IMPORTED_MODULE_6__/* .valueToPercent */ .Rg)(mark.value, min, max);
       const style = axisProps[axis].offset(percent);
       let markActive;
 
@@ -3095,82 +2589,59 @@ const SliderUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or sup
       }
 
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Mark, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Mark, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)({
           "data-index": index
-        }, markProps, !(0,_utils_isHostComponent__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z)(Mark) && {
-          ownerState: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, ownerState, markProps.ownerState),
+        }, markProps, !(0,_utils_isHostComponent__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z)(Mark) && {
           markActive
         }, {
-          style: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, style, markProps.style),
-          className: (0,clsx__WEBPACK_IMPORTED_MODULE_14__["default"])(classes.mark, markProps.className, markActive && classes.markActive)
-        })), mark.label != null ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(MarkLabel, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({
+          style: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)({}, style, markProps.style),
+          className: (0,clsx__WEBPACK_IMPORTED_MODULE_9__["default"])(classes.mark, markProps.className, markActive && classes.markActive)
+        })), mark.label != null ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(MarkLabel, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)({
           "aria-hidden": true,
           "data-index": index
-        }, markLabelProps, !(0,_utils_isHostComponent__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z)(MarkLabel) && {
-          ownerState: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, ownerState, markLabelProps.ownerState)
+        }, markLabelProps, !(0,_utils_isHostComponent__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z)(MarkLabel) && {
+          markLabelActive: markActive
         }, {
-          markLabelActive: markActive,
-          style: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, style, markLabelProps.style),
-          className: (0,clsx__WEBPACK_IMPORTED_MODULE_14__["default"])(classes.markLabel, markLabelProps.className, markActive && classes.markLabelActive),
+          style: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)({}, style, markLabelProps.style),
+          className: (0,clsx__WEBPACK_IMPORTED_MODULE_9__["default"])(classes.markLabel, markLabelProps.className, markActive && classes.markLabelActive),
           children: mark.label
         })) : null]
       }, mark.value);
     }), values.map((value, index) => {
-      const percent = valueToPercent(value, min, max);
+      const percent = (0,_useSlider__WEBPACK_IMPORTED_MODULE_6__/* .valueToPercent */ .Rg)(value, min, max);
       const style = axisProps[axis].offset(percent);
       const ValueLabelComponent = valueLabelDisplay === 'off' ? Forward : ValueLabel;
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ValueLabelComponent, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({
-          valueLabelFormat: valueLabelFormat,
-          valueLabelDisplay: valueLabelDisplay,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ValueLabelComponent, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)({}, !(0,_utils_isHostComponent__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z)(ValueLabelComponent) && {
+          valueLabelFormat,
+          valueLabelDisplay,
           value: typeof valueLabelFormat === 'function' ? valueLabelFormat(scale(value), index) : valueLabelFormat,
-          index: index,
+          index,
           open: open === index || active === index || valueLabelDisplay === 'on',
-          disabled: disabled
+          disabled
         }, valueLabelProps, {
-          className: (0,clsx__WEBPACK_IMPORTED_MODULE_14__["default"])(classes.valueLabel, valueLabelProps.className)
-        }, !(0,_utils_isHostComponent__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z)(ValueLabel) && {
-          ownerState: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, ownerState, valueLabelProps.ownerState)
-        }, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Thumb, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({
-            "data-index": index,
-            onMouseOver: handleMouseOver,
-            onMouseLeave: handleMouseLeave
-          }, thumbProps, {
-            className: (0,clsx__WEBPACK_IMPORTED_MODULE_14__["default"])(classes.thumb, thumbProps.className, active === index && classes.active, focusVisible === index && classes.focusVisible)
-          }, !(0,_utils_isHostComponent__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z)(Thumb) && {
-            ownerState: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, ownerState, thumbProps.ownerState)
+          className: (0,clsx__WEBPACK_IMPORTED_MODULE_9__["default"])(classes.valueLabel, valueLabelProps.className),
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Thumb, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)({
+            "data-index": index
+          }, thumbProps, getThumbProps(), {
+            className: (0,clsx__WEBPACK_IMPORTED_MODULE_9__["default"])(classes.thumb, thumbProps.className, active === index && classes.active, focusVisible === index && classes.focusVisible)
+          }, !(0,_utils_isHostComponent__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z)(Thumb) && {
+            ownerState: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)({}, ownerState, thumbProps.ownerState)
           }, {
-            style: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, style, {
+            style: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)({}, style, {
               pointerEvents: disableSwap && active !== index ? 'none' : undefined
             }, thumbProps.style),
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
-              tabIndex: tabIndex,
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Input, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)({}, hiddenInputProps, {
               "data-index": index,
               "aria-label": getAriaLabel ? getAriaLabel(index) : ariaLabel,
-              "aria-labelledby": ariaLabelledby,
-              "aria-orientation": orientation,
-              "aria-valuemax": scale(max),
-              "aria-valuemin": scale(min),
               "aria-valuenow": scale(value),
               "aria-valuetext": getAriaValueText ? getAriaValueText(scale(value), index) : ariaValuetext,
-              onFocus: handleFocus,
-              onBlur: handleBlur,
-              name: name,
-              type: "range",
-              min: props.min,
-              max: props.max,
-              step: props.step,
-              disabled: disabled,
-              value: values[index],
-              onChange: handleHiddenInputChange,
-              style: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, _mui_utils__WEBPACK_IMPORTED_MODULE_15__/* ["default"] */ .Z, {
-                direction: isRtl ? 'rtl' : 'ltr',
-                // So that VoiceOver's focus indicator matches the thumb's dimensions
-                width: '100%',
-                height: '100%'
-              })
-            })
+              value: values[index]
+            }, !(0,_utils_isHostComponent__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z)(Input) && {
+              ownerState: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)({}, ownerState, inputProps.ownerState)
+            }, inputProps, {
+              style: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)({}, hiddenInputProps.style, inputProps.style)
+            }))
           }))
         }))
       }, index);
@@ -3182,7 +2653,7 @@ const SliderUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or sup
 
 /***/ }),
 
-/***/ 29303:
+/***/ 31117:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -3193,7 +2664,7 @@ if (4554 != __webpack_require__.j) {
 	/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(25789);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _sliderUnstyledClasses__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3798);
+	/* harmony import */ var _sliderUnstyledClasses__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(67032);
 }
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(74750);
 
@@ -3250,16 +2721,16 @@ function SliderValueLabelUnstyled(props) {
 
 /***/ }),
 
-/***/ 3798:
+/***/ 67032:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "k": () => (/* binding */ getSliderUtilityClass),
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _generateUtilityClasses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(38926);
+/* harmony import */ var _generateUtilityClasses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(82298);
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1830);
+	/* harmony import */ var _generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74707);
 }
 
 
@@ -3271,30 +2742,755 @@ const sliderUnstyledClasses = (0,_generateUtilityClasses__WEBPACK_IMPORTED_MODUL
 
 /***/ }),
 
-/***/ 48091:
+/***/ 13206:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Rg": () => (/* binding */ valueToPercent),
+/* harmony export */   "ZP": () => (/* binding */ useSlider)
+/* harmony export */ });
+/* unused harmony export Identity */
+if (4554 != __webpack_require__.j) {
+	/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(97538);
+}
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
+if (4554 != __webpack_require__.j) {
+	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(83401);
+}
+if (4554 != __webpack_require__.j) {
+	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(10474);
+}
+if (4554 != __webpack_require__.j) {
+	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(72287);
+}
+if (4554 != __webpack_require__.j) {
+	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(19372);
+}
+if (4554 != __webpack_require__.j) {
+	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(17630);
+}
+if (4554 != __webpack_require__.j) {
+	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(45486);
+}
+if (4554 != __webpack_require__.j) {
+	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(21496);
+}
+
+
+
+const INTENTIONAL_DRAG_COUNT_THRESHOLD = 2;
+
+function asc(a, b) {
+  return a - b;
+}
+
+function clamp(value, min, max) {
+  if (value == null) {
+    return min;
+  }
+
+  return Math.min(Math.max(min, value), max);
+}
+
+function findClosest(values, currentValue) {
+  var _values$reduce;
+
+  const {
+    index: closestIndex
+  } = (_values$reduce = values.reduce((acc, value, index) => {
+    const distance = Math.abs(currentValue - value);
+
+    if (acc === null || distance < acc.distance || distance === acc.distance) {
+      return {
+        distance,
+        index
+      };
+    }
+
+    return acc;
+  }, null)) != null ? _values$reduce : {};
+  return closestIndex;
+}
+
+function trackFinger(event, touchId) {
+  // The event is TouchEvent
+  if (touchId.current !== undefined && event.changedTouches) {
+    const touchEvent = event;
+
+    for (let i = 0; i < touchEvent.changedTouches.length; i += 1) {
+      const touch = touchEvent.changedTouches[i];
+
+      if (touch.identifier === touchId.current) {
+        return {
+          x: touch.clientX,
+          y: touch.clientY
+        };
+      }
+    }
+
+    return false;
+  } // The event is MouseEvent
+
+
+  return {
+    x: event.clientX,
+    y: event.clientY
+  };
+}
+
+function valueToPercent(value, min, max) {
+  return (value - min) * 100 / (max - min);
+}
+
+function percentToValue(percent, min, max) {
+  return (max - min) * percent + min;
+}
+
+function getDecimalPrecision(num) {
+  // This handles the case when num is very small (0.00000001), js will turn this into 1e-8.
+  // When num is bigger than 1 or less than -1 it won't get converted to this notation so it's fine.
+  if (Math.abs(num) < 1) {
+    const parts = num.toExponential().split('e-');
+    const matissaDecimalPart = parts[0].split('.')[1];
+    return (matissaDecimalPart ? matissaDecimalPart.length : 0) + parseInt(parts[1], 10);
+  }
+
+  const decimalPart = num.toString().split('.')[1];
+  return decimalPart ? decimalPart.length : 0;
+}
+
+function roundValueToStep(value, step, min) {
+  const nearest = Math.round((value - min) / step) * step + min;
+  return Number(nearest.toFixed(getDecimalPrecision(step)));
+}
+
+function setValueIndex({
+  values,
+  newValue,
+  index
+}) {
+  const output = values.slice();
+  output[index] = newValue;
+  return output.sort(asc);
+}
+
+function focusThumb({
+  sliderRef,
+  activeIndex,
+  setActive
+}) {
+  var _sliderRef$current, _doc$activeElement;
+
+  const doc = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)(sliderRef.current);
+
+  if (!((_sliderRef$current = sliderRef.current) != null && _sliderRef$current.contains(doc.activeElement)) || Number(doc == null ? void 0 : (_doc$activeElement = doc.activeElement) == null ? void 0 : _doc$activeElement.getAttribute('data-index')) !== activeIndex) {
+    var _sliderRef$current2;
+
+    (_sliderRef$current2 = sliderRef.current) == null ? void 0 : _sliderRef$current2.querySelector(`[type="range"][data-index="${activeIndex}"]`).focus();
+  }
+
+  if (setActive) {
+    setActive(activeIndex);
+  }
+}
+
+const axisProps = {
+  horizontal: {
+    offset: percent => ({
+      left: `${percent}%`
+    }),
+    leap: percent => ({
+      width: `${percent}%`
+    })
+  },
+  'horizontal-reverse': {
+    offset: percent => ({
+      right: `${percent}%`
+    }),
+    leap: percent => ({
+      width: `${percent}%`
+    })
+  },
+  vertical: {
+    offset: percent => ({
+      bottom: `${percent}%`
+    }),
+    leap: percent => ({
+      height: `${percent}%`
+    })
+  }
+};
+const Identity = x => x; // TODO: remove support for Safari < 13.
+// https://caniuse.com/#search=touch-action
+//
+// Safari, on iOS, supports touch action since v13.
+// Over 80% of the iOS phones are compatible
+// in August 2020.
+// Utilizing the CSS.supports method to check if touch-action is supported.
+// Since CSS.supports is supported on all but Edge@12 and IE and touch-action
+// is supported on both Edge@12 and IE if CSS.supports is not available that means that
+// touch-action will be supported
+
+let cachedSupportsTouchActionNone;
+
+function doesSupportTouchActionNone() {
+  if (cachedSupportsTouchActionNone === undefined) {
+    if (typeof CSS !== 'undefined' && typeof CSS.supports === 'function') {
+      cachedSupportsTouchActionNone = CSS.supports('touch-action', 'none');
+    } else {
+      cachedSupportsTouchActionNone = true;
+    }
+  }
+
+  return cachedSupportsTouchActionNone;
+}
+
+function useSlider(props) {
+  const {
+    ref,
+    'aria-labelledby': ariaLabelledby,
+    defaultValue,
+    disableSwap = false,
+    disabled = false,
+    marks: marksProp = false,
+    max = 100,
+    min = 0,
+    name,
+    onChange,
+    onChangeCommitted,
+    orientation = 'horizontal',
+    scale = Identity,
+    step = 1,
+    tabIndex,
+    value: valueProp,
+    isRtl = false
+  } = props;
+  const touchId = react__WEBPACK_IMPORTED_MODULE_0__.useRef(); // We can't use the :active browser pseudo-classes.
+  // - The active state isn't triggered when clicking on the rail.
+  // - The active state isn't transferred when inversing a range slider.
+
+  const [active, setActive] = react__WEBPACK_IMPORTED_MODULE_0__.useState(-1);
+  const [open, setOpen] = react__WEBPACK_IMPORTED_MODULE_0__.useState(-1);
+  const [dragging, setDragging] = react__WEBPACK_IMPORTED_MODULE_0__.useState(false);
+  const moveCount = react__WEBPACK_IMPORTED_MODULE_0__.useRef(0);
+  const [valueDerived, setValueState] = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)({
+    controlled: valueProp,
+    default: defaultValue != null ? defaultValue : min,
+    name: 'Slider'
+  });
+
+  const handleChange = onChange && ((event, value, thumbIndex) => {
+    // Redefine target to allow name and value to be read.
+    // This allows seamless integration with the most popular form libraries.
+    // https://github.com/mui/material-ui/issues/13485#issuecomment-676048492
+    // Clone the event to not override `target` of the original event.
+    const nativeEvent = event.nativeEvent || event; // @ts-ignore The nativeEvent is function, not object
+
+    const clonedEvent = new nativeEvent.constructor(nativeEvent.type, nativeEvent);
+    Object.defineProperty(clonedEvent, 'target', {
+      writable: true,
+      value: {
+        value,
+        name
+      }
+    });
+    onChange(clonedEvent, value, thumbIndex);
+  });
+
+  const range = Array.isArray(valueDerived);
+  let values = range ? valueDerived.slice().sort(asc) : [valueDerived];
+  values = values.map(value => clamp(value, min, max));
+  const marks = marksProp === true && step !== null ? [...Array(Math.floor((max - min) / step) + 1)].map((_, index) => ({
+    value: min + step * index
+  })) : marksProp || [];
+  const marksValues = marks.map(mark => mark.value);
+  const {
+    isFocusVisibleRef,
+    onBlur: handleBlurVisible,
+    onFocus: handleFocusVisible,
+    ref: focusVisibleRef
+  } = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z)();
+  const [focusVisible, setFocusVisible] = react__WEBPACK_IMPORTED_MODULE_0__.useState(-1);
+  const sliderRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef();
+  const handleFocusRef = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z)(focusVisibleRef, sliderRef);
+  const handleRef = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z)(ref, handleFocusRef);
+
+  const createHandleHiddenInputFocus = otherHandlers => event => {
+    var _otherHandlers$onFocu;
+
+    const index = Number(event.currentTarget.getAttribute('data-index'));
+    handleFocusVisible(event);
+
+    if (isFocusVisibleRef.current === true) {
+      setFocusVisible(index);
+    }
+
+    setOpen(index);
+    otherHandlers == null ? void 0 : (_otherHandlers$onFocu = otherHandlers.onFocus) == null ? void 0 : _otherHandlers$onFocu.call(otherHandlers, event);
+  };
+
+  const createHandleHiddenInputBlur = otherHandlers => event => {
+    var _otherHandlers$onBlur;
+
+    handleBlurVisible(event);
+
+    if (isFocusVisibleRef.current === false) {
+      setFocusVisible(-1);
+    }
+
+    setOpen(-1);
+    otherHandlers == null ? void 0 : (_otherHandlers$onBlur = otherHandlers.onBlur) == null ? void 0 : _otherHandlers$onBlur.call(otherHandlers, event);
+  };
+
+  (0,_mui_utils__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)(() => {
+    if (disabled && sliderRef.current.contains(document.activeElement)) {
+      var _document$activeEleme;
+
+      // This is necessary because Firefox and Safari will keep focus
+      // on a disabled element:
+      // https://codesandbox.io/s/mui-pr-22247-forked-h151h?file=/src/App.js
+      // @ts-ignore
+      (_document$activeEleme = document.activeElement) == null ? void 0 : _document$activeEleme.blur();
+    }
+  }, [disabled]);
+
+  if (disabled && active !== -1) {
+    setActive(-1);
+  }
+
+  if (disabled && focusVisible !== -1) {
+    setFocusVisible(-1);
+  }
+
+  const createHandleHiddenInputChange = otherHandlers => event => {
+    var _otherHandlers$onChan;
+
+    (_otherHandlers$onChan = otherHandlers.onChange) == null ? void 0 : _otherHandlers$onChan.call(otherHandlers, event);
+    const index = Number(event.currentTarget.getAttribute('data-index'));
+    const value = values[index];
+    const marksIndex = marksValues.indexOf(value); // @ts-ignore
+
+    let newValue = event.target.valueAsNumber;
+
+    if (marks && step == null) {
+      newValue = newValue < value ? marksValues[marksIndex - 1] : marksValues[marksIndex + 1];
+    }
+
+    newValue = clamp(newValue, min, max);
+
+    if (marks && step == null) {
+      const currentMarkIndex = marksValues.indexOf(values[index]);
+      newValue = newValue < values[index] ? marksValues[currentMarkIndex - 1] : marksValues[currentMarkIndex + 1];
+    }
+
+    if (range) {
+      // Bound the new value to the thumb's neighbours.
+      if (disableSwap) {
+        newValue = clamp(newValue, values[index - 1] || -Infinity, values[index + 1] || Infinity);
+      }
+
+      const previousValue = newValue;
+      newValue = setValueIndex({
+        values,
+        newValue,
+        index
+      });
+      let activeIndex = index; // Potentially swap the index if needed.
+
+      if (!disableSwap) {
+        activeIndex = newValue.indexOf(previousValue);
+      }
+
+      focusThumb({
+        sliderRef,
+        activeIndex
+      });
+    }
+
+    setValueState(newValue);
+    setFocusVisible(index);
+
+    if (handleChange) {
+      handleChange(event, newValue, index);
+    }
+
+    if (onChangeCommitted) {
+      onChangeCommitted(event, newValue);
+    }
+  };
+
+  const previousIndex = react__WEBPACK_IMPORTED_MODULE_0__.useRef();
+  let axis = orientation;
+
+  if (isRtl && orientation === 'horizontal') {
+    axis += '-reverse';
+  }
+
+  const getFingerNewValue = ({
+    finger,
+    move = false,
+    values: values2
+  }) => {
+    const {
+      current: slider
+    } = sliderRef;
+    const {
+      width,
+      height,
+      bottom,
+      left
+    } = slider.getBoundingClientRect();
+    let percent;
+
+    if (axis.indexOf('vertical') === 0) {
+      percent = (bottom - finger.y) / height;
+    } else {
+      percent = (finger.x - left) / width;
+    }
+
+    if (axis.indexOf('-reverse') !== -1) {
+      percent = 1 - percent;
+    }
+
+    let newValue;
+    newValue = percentToValue(percent, min, max);
+
+    if (step) {
+      newValue = roundValueToStep(newValue, step, min);
+    } else {
+      const closestIndex = findClosest(marksValues, newValue);
+      newValue = marksValues[closestIndex];
+    }
+
+    newValue = clamp(newValue, min, max);
+    let activeIndex = 0;
+
+    if (range) {
+      if (!move) {
+        activeIndex = findClosest(values2, newValue);
+      } else {
+        activeIndex = previousIndex.current;
+      } // Bound the new value to the thumb's neighbours.
+
+
+      if (disableSwap) {
+        newValue = clamp(newValue, values2[activeIndex - 1] || -Infinity, values2[activeIndex + 1] || Infinity);
+      }
+
+      const previousValue = newValue;
+      newValue = setValueIndex({
+        values: values2,
+        newValue,
+        index: activeIndex
+      }); // Potentially swap the index if needed.
+
+      if (!(disableSwap && move)) {
+        activeIndex = newValue.indexOf(previousValue);
+        previousIndex.current = activeIndex;
+      }
+    }
+
+    return {
+      newValue,
+      activeIndex
+    };
+  };
+
+  const handleTouchMove = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z)(nativeEvent => {
+    const finger = trackFinger(nativeEvent, touchId);
+
+    if (!finger) {
+      return;
+    }
+
+    moveCount.current += 1; // Cancel move in case some other element consumed a mouseup event and it was not fired.
+    // @ts-ignore buttons doesn't not exists on touch event
+
+    if (nativeEvent.type === 'mousemove' && nativeEvent.buttons === 0) {
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      handleTouchEnd(nativeEvent);
+      return;
+    }
+
+    const {
+      newValue,
+      activeIndex
+    } = getFingerNewValue({
+      finger,
+      move: true,
+      values
+    });
+    focusThumb({
+      sliderRef,
+      activeIndex,
+      setActive
+    });
+    setValueState(newValue);
+
+    if (!dragging && moveCount.current > INTENTIONAL_DRAG_COUNT_THRESHOLD) {
+      setDragging(true);
+    }
+
+    if (handleChange) {
+      handleChange(nativeEvent, newValue, activeIndex);
+    }
+  });
+  const handleTouchEnd = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z)(nativeEvent => {
+    const finger = trackFinger(nativeEvent, touchId);
+    setDragging(false);
+
+    if (!finger) {
+      return;
+    }
+
+    const {
+      newValue
+    } = getFingerNewValue({
+      finger,
+      values
+    });
+    setActive(-1);
+
+    if (nativeEvent.type === 'touchend') {
+      setOpen(-1);
+    }
+
+    if (onChangeCommitted) {
+      onChangeCommitted(nativeEvent, newValue);
+    }
+
+    touchId.current = undefined; // eslint-disable-next-line @typescript-eslint/no-use-before-define
+
+    stopListening();
+  });
+  const handleTouchStart = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z)(nativeEvent => {
+    // If touch-action: none; is not supported we need to prevent the scroll manually.
+    if (!doesSupportTouchActionNone()) {
+      nativeEvent.preventDefault();
+    }
+
+    const touch = nativeEvent.changedTouches[0];
+
+    if (touch != null) {
+      // A number that uniquely identifies the current finger in the touch session.
+      touchId.current = touch.identifier;
+    }
+
+    const finger = trackFinger(nativeEvent, touchId);
+
+    if (finger !== false) {
+      const {
+        newValue,
+        activeIndex
+      } = getFingerNewValue({
+        finger,
+        values
+      });
+      focusThumb({
+        sliderRef,
+        activeIndex,
+        setActive
+      });
+      setValueState(newValue);
+
+      if (handleChange) {
+        handleChange(nativeEvent, newValue, activeIndex);
+      }
+    }
+
+    moveCount.current = 0;
+    const doc = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)(sliderRef.current);
+    doc.addEventListener('touchmove', handleTouchMove);
+    doc.addEventListener('touchend', handleTouchEnd);
+  });
+  const stopListening = react__WEBPACK_IMPORTED_MODULE_0__.useCallback(() => {
+    const doc = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)(sliderRef.current);
+    doc.removeEventListener('mousemove', handleTouchMove);
+    doc.removeEventListener('mouseup', handleTouchEnd);
+    doc.removeEventListener('touchmove', handleTouchMove);
+    doc.removeEventListener('touchend', handleTouchEnd);
+  }, [handleTouchEnd, handleTouchMove]);
+  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
+    const {
+      current: slider
+    } = sliderRef;
+    slider.addEventListener('touchstart', handleTouchStart, {
+      passive: doesSupportTouchActionNone()
+    });
+    return () => {
+      // @ts-ignore
+      slider.removeEventListener('touchstart', handleTouchStart, {
+        passive: doesSupportTouchActionNone()
+      });
+      stopListening();
+    };
+  }, [stopListening, handleTouchStart]);
+  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
+    if (disabled) {
+      stopListening();
+    }
+  }, [disabled, stopListening]);
+
+  const createHandleMouseDown = otherHandlers => event => {
+    var _otherHandlers$onMous;
+
+    (_otherHandlers$onMous = otherHandlers.onMouseDown) == null ? void 0 : _otherHandlers$onMous.call(otherHandlers, event);
+
+    if (event.defaultPrevented) {
+      return;
+    } // Only handle left clicks
+
+
+    if (event.button !== 0) {
+      return;
+    } // Avoid text selection
+
+
+    event.preventDefault();
+    const finger = trackFinger(event, touchId);
+
+    if (finger !== false) {
+      const {
+        newValue,
+        activeIndex
+      } = getFingerNewValue({
+        finger,
+        values
+      });
+      focusThumb({
+        sliderRef,
+        activeIndex,
+        setActive
+      });
+      setValueState(newValue);
+
+      if (handleChange) {
+        handleChange(event, newValue, activeIndex);
+      }
+    }
+
+    moveCount.current = 0;
+    const doc = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)(sliderRef.current);
+    doc.addEventListener('mousemove', handleTouchMove);
+    doc.addEventListener('mouseup', handleTouchEnd);
+  };
+
+  const trackOffset = valueToPercent(range ? values[0] : min, min, max);
+  const trackLeap = valueToPercent(values[values.length - 1], min, max) - trackOffset;
+
+  const getRootProps = otherHandlers => {
+    const ownEventHandlers = {
+      onMouseDown: createHandleMouseDown(otherHandlers || {})
+    };
+
+    const mergedEventHandlers = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)({}, otherHandlers, ownEventHandlers);
+
+    return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)({
+      ref: handleRef
+    }, mergedEventHandlers);
+  };
+
+  const createHandleMouseOver = otherHandlers => event => {
+    var _otherHandlers$onMous2;
+
+    (_otherHandlers$onMous2 = otherHandlers.onMouseOver) == null ? void 0 : _otherHandlers$onMous2.call(otherHandlers, event);
+    const index = Number(event.currentTarget.getAttribute('data-index'));
+    setOpen(index);
+  };
+
+  const createHandleMouseLeave = otherHandlers => event => {
+    var _otherHandlers$onMous3;
+
+    (_otherHandlers$onMous3 = otherHandlers.onMouseLeave) == null ? void 0 : _otherHandlers$onMous3.call(otherHandlers, event);
+    setOpen(-1);
+  };
+
+  const getThumbProps = otherHandlers => {
+    const ownEventHandlers = {
+      onMouseOver: createHandleMouseOver(otherHandlers || {}),
+      onMouseLeave: createHandleMouseLeave(otherHandlers || {})
+    };
+
+    const mergedEventHandlers = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)({}, otherHandlers, ownEventHandlers);
+
+    return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)({}, mergedEventHandlers);
+  };
+
+  const getHiddenInputProps = otherHandlers => {
+    const ownEventHandlers = {
+      onChange: createHandleHiddenInputChange(otherHandlers || {}),
+      onFocus: createHandleHiddenInputFocus(otherHandlers || {}),
+      onBlur: createHandleHiddenInputBlur(otherHandlers || {})
+    };
+
+    const mergedEventHandlers = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)({}, otherHandlers, ownEventHandlers);
+
+    return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)({
+      tabIndex,
+      'aria-labelledby': ariaLabelledby,
+      'aria-orientation': orientation,
+      'aria-valuemax': scale(max),
+      'aria-valuemin': scale(min),
+      name,
+      type: 'range',
+      min: props.min,
+      max: props.max,
+      step: props.step,
+      disabled
+    }, mergedEventHandlers, {
+      style: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)({}, _mui_utils__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z, {
+        direction: isRtl ? 'rtl' : 'ltr',
+        // So that VoiceOver's focus indicator matches the thumb's dimensions
+        width: '100%',
+        height: '100%'
+      })
+    });
+  };
+
+  return {
+    axis,
+    axisProps,
+    getRootProps,
+    getHiddenInputProps,
+    getThumbProps,
+    dragging,
+    marks,
+    values,
+    active,
+    focusVisible,
+    open,
+    range,
+    trackOffset,
+    trackLeap
+  };
+}
+
+/***/ }),
+
+/***/ 94458:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(37879);
+	/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(97538);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(93817);
+	/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(93086);
 }
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5213);
+	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(19372);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(23342);
+	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(83551);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(79138);
+	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(60565);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(23471);
+	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(17630);
 }
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(74750);
 
@@ -3474,7 +3670,7 @@ const TextareaAutosize = /*#__PURE__*/(/* runtime-dependent pure expression or s
 
 /***/ }),
 
-/***/ 67055:
+/***/ 94249:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -3482,10 +3678,10 @@ const TextareaAutosize = /*#__PURE__*/(/* runtime-dependent pure expression or s
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5213);
+	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(19372);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(81749);
+	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(83401);
 }
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(74750);
 /* eslint-disable @typescript-eslint/naming-convention, consistent-return, jsx-a11y/no-noninteractive-tabindex */
@@ -3789,7 +3985,7 @@ if (false) {}
 
 /***/ }),
 
-/***/ 85186:
+/***/ 99572:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -3817,7 +4013,7 @@ function composeClasses(slots, getUtilityClass, classes) {
 
 /***/ }),
 
-/***/ 6336:
+/***/ 50103:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -3848,13 +4044,13 @@ const ClassNameGenerator = createClassNameGenerator();
 
 /***/ }),
 
-/***/ 1830:
+/***/ 74707:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (/* binding */ generateUtilityClass)
 /* harmony export */ });
-/* harmony import */ var _ClassNameGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6336);
+/* harmony import */ var _ClassNameGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(50103);
 
 const globalStateClassesMapping = {
   active: 'Mui-active',
@@ -3875,13 +4071,13 @@ function generateUtilityClass(componentName, slot) {
 
 /***/ }),
 
-/***/ 38926:
+/***/ 82298:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (/* binding */ generateUtilityClasses)
 /* harmony export */ });
-/* harmony import */ var _generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1830);
+/* harmony import */ var _generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74707);
 
 function generateUtilityClasses(componentName, slots) {
   const result = {};
@@ -3893,17 +4089,17 @@ function generateUtilityClasses(componentName, slots) {
 
 /***/ }),
 
-/***/ 70545:
+/***/ 91503:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (/* binding */ appendOwnerState)
 /* harmony export */ });
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(37879);
+	/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(97538);
 }
 if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _isHostComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(90109);
+	/* harmony import */ var _isHostComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6509);
 }
 
 
@@ -3927,7 +4123,7 @@ function appendOwnerState(elementType, existingProps = {}, ownerState) {
 
 /***/ }),
 
-/***/ 90109:
+/***/ 6509:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {

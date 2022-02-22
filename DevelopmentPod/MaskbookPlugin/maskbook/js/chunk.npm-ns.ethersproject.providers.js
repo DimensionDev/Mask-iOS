@@ -51,7 +51,7 @@ var bech32_default = /*#__PURE__*/__webpack_require__.n(bech32);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+address@5.4.0/node_modules/@ethersproject/address/lib.esm/index.js + 1 modules
 var address_lib_esm = __webpack_require__(99747);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+constants@5.4.0/node_modules/@ethersproject/constants/lib.esm/addresses.js
-var addresses = __webpack_require__(26367);
+var addresses = __webpack_require__(32704);
 ;// CONCATENATED MODULE: ../../node_modules/.pnpm/@ethersproject+providers@5.4.2/node_modules/@ethersproject/providers/lib.esm/formatter.js
 
 

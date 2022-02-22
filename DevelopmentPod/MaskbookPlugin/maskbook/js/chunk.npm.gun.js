@@ -3,11 +3,11 @@
 /***/ 32246:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__(87933)
+module.exports = __webpack_require__(79979)
 
 /***/ }),
 
-/***/ 87933:
+/***/ 79979:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /* module decorator */ module = __webpack_require__.nmd(module);
@@ -2828,7 +2828,7 @@ module.exports = __webpack_require__(87933)
 	  var Radix = window.Radix;
 	  window.Radisk = Radisk;
 	} else { 
-	  var Gun = __webpack_require__(87933);
+	  var Gun = __webpack_require__(79979);
 		var Radix = __webpack_require__(43945);
 		//var Radix = require('./radix2'); Radisk = require('./radisk2');
 		try{ module.exports = Radisk }catch(e){}
@@ -3069,7 +3069,7 @@ if (navigator.storage && navigator.storage.estimate) {
   }
 
   try{
-    var Gun = Store.window.Gun || __webpack_require__(87933);
+    var Gun = Store.window.Gun || __webpack_require__(79979);
     Gun.on('create', function(root){
       this.to.next(root);
       root.opt.store = root.opt.store || Store(root.opt);
@@ -3083,7 +3083,7 @@ if (navigator.storage && navigator.storage.estimate) {
 /***/ 47322:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-var Gun = (typeof window !== "undefined")? window.Gun : __webpack_require__(87933);
+var Gun = (typeof window !== "undefined")? window.Gun : __webpack_require__(79979);
 
 Gun.on('create', function(root){
     if(Gun.TESTING){ root.opt.file = 'radatatest' }
@@ -3237,7 +3237,7 @@ Gun.on('create', function(root){
 /***/ 40922:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-var Gun = (typeof window !== "undefined")? window.Gun : __webpack_require__(87933);
+var Gun = (typeof window !== "undefined")? window.Gun : __webpack_require__(79979);
 
 // Returns a gun reference in a promise and then calls a callback if specified
 Gun.chain.promise = function(cb) {

@@ -1,6 +1,6 @@
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[8019],{
 
-/***/ 10592:
+/***/ 69906:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var Web3 = __webpack_require__(24373);
@@ -6416,7 +6416,7 @@ module.exports = IsSyncing;
  */
 
 var Iban = __webpack_require__(29995);
-var exchangeAbi = __webpack_require__(92805);
+var exchangeAbi = __webpack_require__(37327);
 
 /**
  * Should be used to make Iban transfer
@@ -6579,7 +6579,7 @@ module.exports = JSON.parse('[{"constant":true,"inputs":[{"name":"_name","type":
 
 /***/ }),
 
-/***/ 92805:
+/***/ 37327:
 /***/ ((module) => {
 
 "use strict";

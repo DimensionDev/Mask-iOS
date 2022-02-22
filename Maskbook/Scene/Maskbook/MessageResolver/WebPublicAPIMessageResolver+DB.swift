@@ -11,6 +11,10 @@ import CoreDataStack
 import Foundation
 import SwiftyJSON
 
+struct WebPublicApiResponse<R: Encodable> {
+    let response: R
+}
+
 extension Persona {
     init?(fromRecord personaRecord: PersonaRecord) {
         guard let recordIdentifier = personaRecord.identifier else {
@@ -90,22 +94,19 @@ extension Relation {
 
 // MARK: - Persona methods handler
 extension WebPublicApiMessageResolver {
-    @discardableResult
-    func createPersona(messageData: Data) -> Bool {
+    func createPersona(messageData: Data) -> WebPublicApiResponse<Persona?> {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<CreatePersonaParam>.self, from: messageData),
               let newPersona = request.params?.persona else {
-                  return false
+                  return WebPublicApiResponse(response: nil)
               }
         PersonaRepository.createPersona(persona: newPersona,
                                         context: PersonaRepository.viewContext)
-        sendResponseToWebView(response: newPersona, id: request.id)
-        return true
+        return WebPublicApiResponse(response: newPersona)
     }
     
-    @discardableResult
-    func queryPersona(messageData: Data) -> Bool {
+    func queryPersona(messageData: Data) -> WebPublicApiResponse<Persona?> {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryPersonaParam>.self, from: messageData) else {
-            return false
+            return WebPublicApiResponse(response: nil)
         }
         let persona: Persona? = {
             if let identifier = request.params?.identifier,
@@ -118,16 +119,14 @@ extension WebPublicApiMessageResolver {
             }
             return nil
         }()
-        sendResponseToWebView(response: persona, id: request.id)
-        return true
+        return WebPublicApiResponse(response: persona)
     }
     
-    @discardableResult
-    func queryPersonas(messageData: Data) -> Bool {
+    func queryPersonas(messageData: Data) -> WebPublicApiResponse<[Persona]> {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryPersonasParam>.self,
                                                 from: messageData)
         else {
-            return false
+            return WebPublicApiResponse(response: [])
         }
         let personaRecords = PersonaRepository.queryPersonas(identifiers: request.params?.identifiers,
                                                              hasPrivateKey: request.params?.hasPrivateKey,
@@ -138,16 +137,15 @@ extension WebPublicApiMessageResolver {
         let personas = personaRecords.compactMap {
             Persona(fromRecord: $0)
         }
-        sendResponseToWebView(response: personas, id: request.id)
-        return true
+        return WebPublicApiResponse(response: personas)
     }
     
     @discardableResult
-    func queryPersonaByProfile(messageData: Data) -> Bool {
+    func queryPersonaByProfile(messageData: Data) -> WebPublicApiResponse<Persona?> {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryPersonaByProfileParam>.self,
                                                 from: messageData)
         else {
-            return false
+            return WebPublicApiResponse(response: nil)
         }
         let profiles = ProfileRepository.queryProfile(identifier: request.params?.options?.profileIdentifier,
                                                       network: nil,
@@ -160,19 +158,17 @@ extension WebPublicApiMessageResolver {
                 return nil
             }
         }()
-        sendResponseToWebView(response: persona, id: request.id)
-        return true
+        return WebPublicApiResponse(response: persona)
     }
     
-    @discardableResult
-    func updatePersona(messageData: Data) -> Bool {
+    func updatePersona(messageData: Data) -> WebPublicApiResponse<Bool> {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<UpdatePersonaParam>.self,
                                                 from: messageData)
         else {
-            return false
+            return WebPublicApiResponse(response: false)
         }
         guard let newPersona = request.params?.persona else {
-            return false
+            return WebPublicApiResponse(response: false)
         }
         let mergePolicy = request.params?.options?.linkedProfileMergePolicy ?? .replace
         let deleteUndefinedFields = request.params?.options?.deleteUndefinedFields ?? false
@@ -183,45 +179,39 @@ extension WebPublicApiMessageResolver {
                                         deleteUndefinedFields: deleteUndefinedFields,
                                         protectPrivateKey: protectPk,
                                         createWhenNotExist: createWhenNotExist)
-        sendResponseToWebView(response: true, id: request.id)
-        return true
+        return WebPublicApiResponse(response: true)
     }
     
-    @discardableResult
-    func deletePersona(messageData: Data) -> Bool {
+    func deletePersona(messageData: Data) -> WebPublicApiResponse<Bool> {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<DeletePersonaParam>.self,
                                                 from: messageData)
         else {
-            return false
+            return WebPublicApiResponse(response: false)
         }
         guard let toDeleteIdentifier = request.params?.identifier else {
-            return false
+            return WebPublicApiResponse(response: false)
         }
         PersonaRepository.deletePersona(identifier: toDeleteIdentifier,
                                         safeDelete: request.params?.options?.safeDelete)
-        sendResponseToWebView(response: true, id: request.id)
-        return true
+        return WebPublicApiResponse(response: true)
     }
 }
 
 // MARK: - Profile methods handler
 extension WebPublicApiMessageResolver {
-    @discardableResult
-    func createProfile(messageData: Data) -> Bool {
+    func createProfile(messageData: Data) -> WebPublicApiResponse<Profile?> {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<CreateProfileParam>.self, from: messageData),
               let newProfile = request.params?.profile else {
-                  return false
+                  return WebPublicApiResponse(response: nil)
               }
         ProfileRepository.createProfile(profile: newProfile,
                                         context: ProfileRepository.viewContext)
-        sendResponseToWebView(response: true, id: request.id)
-        return true
+        return WebPublicApiResponse(response: newProfile)
     }
     
-    @discardableResult
-    func queryProfile(messageData: Data) -> Bool {
+    func queryProfile(messageData: Data) -> WebPublicApiResponse<Profile?> {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryProfileParam>.self, from: messageData) else {
-            return false
+            return WebPublicApiResponse(response: nil)
         }
         let profileRecords = ProfileRepository.queryProfile(identifier: request.params?.options?.identifier,
                                                             network: request.params?.options?.network,
@@ -234,15 +224,13 @@ extension WebPublicApiMessageResolver {
                 return nil
             }
         }()
-        sendResponseToWebView(response: profile, id: request.id)
-        return true
+        return WebPublicApiResponse(response: profile)
     }
     
-    @discardableResult
-    func queryProfiles(messageData: Data) -> Bool {
+    func queryProfiles(messageData: Data) -> WebPublicApiResponse<[Profile]> {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryProfilesParam>.self,
                                                 from: messageData) else {
-            return false
+            return WebPublicApiResponse(response: [])
         }
         let profileRecords = ProfileRepository.queryProfiles(identifiers: request.params?.identifiers,
                                                              network: request.params?.network,
@@ -251,93 +239,81 @@ extension WebPublicApiMessageResolver {
         let profiles = profileRecords.compactMap {
             Profile(fromRecord: $0)
         }
-        sendResponseToWebView(response: profiles, id: request.id)
-        return true
+        return WebPublicApiResponse(response: profiles)
     }
     
-    @discardableResult
-    func deleteProfile(messageData: Data) -> Bool {
+    func deleteProfile(messageData: Data) -> WebPublicApiResponse<Bool> {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<DeleteProfileParam>.self,
                                                 from: messageData) else {
-            return false
+            return WebPublicApiResponse(response: false)
         }
         guard let identifier = request.params?.identifier else {
-            return false
+            return WebPublicApiResponse(response: false)
         }
         ProfileRepository.removeProfile(identifier: identifier)
-        sendResponseToWebView(response: true, id: request.id)
-        return true
+        return WebPublicApiResponse(response: true)
     }
     
-    @discardableResult
-    func updateProfile(messageData: Data) -> Bool {
+    func updateProfile(messageData: Data) -> WebPublicApiResponse<Bool> {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<UpdateProfileParam>.self,
                                                 from: messageData) else {
-            return false
+            return WebPublicApiResponse(response: false)
         }
         guard let newProfile = request.params?.profile else {
-            return false
+            return WebPublicApiResponse(response: false)
         }
         ProfileRepository.updateProfile(newProfile: newProfile,
                                         createWhenNotExist: request.params?.options?.createWhenNotExist)
-        sendResponseToWebView(response: true, id: request.id)
-        return true
+        return WebPublicApiResponse(response: true)
     }
     
-    @discardableResult
-    func attachProfile(messageData: Data) -> Bool {
+    func attachProfile(messageData: Data) -> WebPublicApiResponse<Bool> {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<AttachProfileParam>.self,
                                                 from: messageData) else {
-            return false
+            return WebPublicApiResponse(response: false)
         }
         guard let profileIdentifier = request.params?.profileIdentifier,
               let personaIdentifier = request.params?.personaIdentifier else {
-                  return false
+                  return WebPublicApiResponse(response: false)
               }
         PersonaManager.attachProfile(personaIdentifier: personaIdentifier,
                                      profileIdentifier: profileIdentifier)
-        sendResponseToWebView(response: true, id: request.id)
-        return true
+        return WebPublicApiResponse(response: true)
     }
     
-    @discardableResult
-    func detachProfile(messageData: Data) -> Bool {
+    func detachProfile(messageData: Data) -> WebPublicApiResponse<Bool> {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<DetachProfileParam>.self,
                                                 from: messageData) else {
-            return false
+            return WebPublicApiResponse(response: false)
         }
         guard let profileIdentifier = request.params?.identifier else {
-            return false
+            return WebPublicApiResponse(response: false)
         }
         PersonaManager.detachProfile(identifier: profileIdentifier)
-        sendResponseToWebView(response: true, id: request.id)
-        return true
+        return WebPublicApiResponse(response: true)
     }
 }
 
 // MARK: - Relation methods handler
 extension WebPublicApiMessageResolver {
-    @discardableResult
-    func createRelation(messageData: Data) -> Bool {
+    func createRelation(messageData: Data) -> WebPublicApiResponse<Relation?> {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<CreateRelationParam>.self,
                                                 from: messageData) else {
-            return false
+            return WebPublicApiResponse(response: nil)
         }
         guard let newRelation = request.params?.relation else {
-            return false
+            return WebPublicApiResponse(response: nil)
         }
         RelationRepository.createRelation(relation: newRelation, context: RelationRepository.viewContext)
-        sendResponseToWebView(response: newRelation, id: request.id)
-        return true
+        return WebPublicApiResponse(response: newRelation)
     }
     
-    @discardableResult
-    func queryRelation(messageData: Data) -> Bool {
+    func queryRelation(messageData: Data) -> WebPublicApiResponse<[Relation]> {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryRelationParam>.self,
                                                 from: messageData) else {
-            return false
+            return WebPublicApiResponse(response: [])
         }
-        guard let param = request.params else { return false }
+        guard let param = request.params else { return WebPublicApiResponse(response: []) }
         let relations: [Relation] = {
             if let personaIdentifier = param.personaIdentifier,
                let profileIdentifier = param.profileIdentifier {
@@ -352,15 +328,13 @@ extension WebPublicApiMessageResolver {
             }
             return []
         }()
-        sendResponseToWebView(response: relations, id: request.id)
-        return true
+        return WebPublicApiResponse(response: relations)
     }
     
-    @discardableResult
-    func queryRelations(messageData: Data) -> Bool {
+    func queryRelations(messageData: Data) -> WebPublicApiResponse<[Relation]> {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryRelationsParam>.self,
                                                 from: messageData) else {
-            return false
+            return WebPublicApiResponse(response: [])
         }
         // TODO: Favor from JS should not be String type
         let relationRecords = RelationRepository.queryRelations(personaIdentifier: request.params?.options?.personaIdentifier,
@@ -371,21 +345,30 @@ extension WebPublicApiMessageResolver {
         let relations = relationRecords.compactMap {
             Relation(from: $0)
         }
-        sendResponseToWebView(response: relations, id: request.id)
-        return true
+        return WebPublicApiResponse(response: relations)
     }
     
-    @discardableResult
-    func updateRelation(messageData: Data) -> Bool {
+    func updateRelation(messageData: Data) -> WebPublicApiResponse<Bool> {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<UpdateRelationParam>.self,
                                                 from: messageData) else {
-            return false
+            return WebPublicApiResponse(response: false)
         }
         guard let newRelation = request.params?.relation else {
-            return false
+            return WebPublicApiResponse(response: false)
         }
         RelationRepository.updateRelation(newRelation: newRelation)
-        sendResponseToWebView(response: true, id: request.id)
+        return WebPublicApiResponse(response: true)
+    }
+    
+    func profileDetected(messageData: Data) -> Bool {
+        struct WebPublicAPIMessage<T: Decodable>: Decodable {
+            let jsonrpc: String
+            let method: String
+            let params: T
+        }
+        guard let request = try? decoder.decode(WebPublicAPIMessage<String>.self, from: messageData) else {
+            return false
+        }
         return true
     }
 }

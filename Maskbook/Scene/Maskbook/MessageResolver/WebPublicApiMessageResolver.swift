@@ -39,6 +39,8 @@ class WebPublicApiMessageResolver: MaskMessageResolver {
         
         case notifyRedpacket
         case claimOrRefundRedpacket
+        
+        case notify_visible_detected_profile_changed
     }
     
     @InjectedProvider(\.mainCoordinator)
@@ -81,7 +83,7 @@ class WebPublicApiMessageResolver: MaskMessageResolver {
         guard let messageData = messageBodyString.data(using: .utf8) else {
             return false
         }
-        var parseSuccess = false
+        var parseResponse: WebPublicApiResponse<>
         let requestId = messageBody["id"] as? String ?? ""
         switch resolvedMethod {
         case .misc_openDashboardView:
@@ -129,66 +131,67 @@ class WebPublicApiMessageResolver: MaskMessageResolver {
             return true
             
         case .create_persona:
-            parseSuccess = createPersona(messageData: messageData)
+            parseResponse = createPersona(messageData: messageData)
             
         case .query_persona:
-            parseSuccess = queryPersona(messageData: messageData)
+            parseResponse = queryPersona(messageData: messageData)
             
         case .query_personas:
-            parseSuccess = queryPersonas(messageData: messageData)
+            parseResponse = queryPersonas(messageData: messageData)
             
         case .query_persona_by_profile:
-            parseSuccess = queryPersonaByProfile(messageData: messageData)
+            parseResponse = queryPersonaByProfile(messageData: messageData)
             
         case .update_persona:
-            parseSuccess = updatePersona(messageData: messageData)
+            parseResponse = updatePersona(messageData: messageData)
             
         case .delete_persona:
-            parseSuccess = deletePersona(messageData: messageData)
+            parseResponse = deletePersona(messageData: messageData)
             
         case .create_profile:
-            parseSuccess = createProfile(messageData: messageData)
+            parseResponse = createProfile(messageData: messageData)
             
         case .query_profile:
-            parseSuccess = queryProfile(messageData: messageData)
+            parseResponse = queryProfile(messageData: messageData)
             
         case .query_profiles:
-            parseSuccess = queryProfiles(messageData: messageData)
+            parseResponse = queryProfiles(messageData: messageData)
             
         case .delete_profile:
-            parseSuccess = deleteProfile(messageData: messageData)
+            parseResponse = deleteProfile(messageData: messageData)
             
         case .update_profile:
-            parseSuccess = updateProfile(messageData: messageData)
+            parseResponse = updateProfile(messageData: messageData)
             
         case .attach_profile:
-            parseSuccess = attachProfile(messageData: messageData)
+            parseResponse = attachProfile(messageData: messageData)
             
         case .detach_profile:
-            parseSuccess = detachProfile(messageData: messageData)
+            parseResponse = detachProfile(messageData: messageData)
             
         case .create_relation:
-            parseSuccess = createRelation(messageData: messageData)
+            parseResponse = createRelation(messageData: messageData)
             
         case .query_relation:
-            parseSuccess = queryRelation(messageData: messageData)
+            parseResponse = queryRelation(messageData: messageData)
             
         case .query_relations:
-            parseSuccess = queryRelations(messageData: messageData)
+            parseResponse = queryRelations(messageData: messageData)
             
         case .update_relation:
-            parseSuccess = updateRelation(messageData: messageData)
+            parseResponse = updateRelation(messageData: messageData)
             
         case .notifyRedpacket:
-            parseSuccess = notifyRedpacket(messageData: messageData)
+            parseResponse = notifyRedpacket(messageData: messageData)
             
         case .claimOrRefundRedpacket:
-            parseSuccess = claimOrRefundRedpacket(messageData: messageData)
+            parseResponse = claimOrRefundRedpacket(messageData: messageData)
+            
+        case .notify_visible_detected_profile_changed:
+            profileDetected(messageData: messageData)
         }
-        if !parseSuccess {
-            sendResponseToWebView(response: false, id: requestId)
-        }
-        return parseSuccess
+        sendResponseToWebView(response: parseResponse.response, id: requestId)
+        return true
     }
     // swiftlint:enable cyclomatic_complexity
 }

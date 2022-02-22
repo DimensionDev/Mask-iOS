@@ -1,9 +1,9 @@
 {
-    "BUILD_DATE": "2022-02-14T06:01:22.267Z",
-    "VERSION": "v1.29.12-1931-g638baffa2",
+    "BUILD_DATE": "2022-02-21T13:15:05.806Z",
+    "VERSION": "v1.29.12-1955-gcd2bf59a7",
     "TAG_NAME": "v2.1.0",
-    "COMMIT_HASH": "638baffa2",
-    "COMMIT_DATE": "2022-02-14T05:55:46.000Z",
+    "COMMIT_HASH": "cd2bf59a7",
+    "COMMIT_DATE": "2022-02-21T13:09:14.000Z",
     "REMOTE_URL": "https://github.com/DimensionDev/Maskbook",
     "BRANCH_NAME": "HEAD",
     "DIRTY": false,
