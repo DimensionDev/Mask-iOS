@@ -15,7 +15,7 @@ struct BalanceTokenRowView: View {
     
     var body: some View {
         HStack {
-            BalanceTokenView(viewModel: viewModel)
+            BalanceTokenView(tokenImageURL: viewModel.logoUrl, chain: viewModel.chain)
             Spacer().frame(width: 16)
             VStack {
                 HStack {
@@ -50,33 +50,15 @@ struct BalanceTokenRowView: View {
 }
 
 struct BalanceTokenView: View {
-    @ObservedObject var viewModel: BalanceTokenRowViewModel
-    
-    var token: Token {
-        viewModel.token
-    }
-    
-    var chain: BlockChainNetwork? {
-        viewModel.chain
-    }
+    var tokenImageURL: String?
+    var chain: BlockChainNetwork?
     
     var borderColor: Color {
         Asset.Colors.Background.dark.asColor()
     }
     
-    var defaultTokenImage: Image {
-        Asset.Images.Scene.Balance.tokenIconPlaceholder.asImage()
-    }
-    
     var body: some View {
-        let url = token.logoUrl
-        let processor = GifRoundCornerImageProcessor(cornerRadius: 19, targetSize: CGSize(width: 38, height: 38))
-        let tokenImage = KFImage.url(URL(string: url ?? ""))
-            .scaleFactor(UIScreen.main.scale)
-            .setProcessor(processor)
-            .serialize(by: FormatIndicatedCacheSerializer.gif)
-            .placeholder({ defaultTokenImage })
-            .resizable()
+        let tokenImage = KFImage.url(tokenImageURL, cornerRadius: 19, fitSize: CGSize(width: 38, height: 38))
             .frame(width: 38, height: 38)
             .cornerRadius(19)
         

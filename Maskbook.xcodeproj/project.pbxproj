@@ -144,6 +144,8 @@
 		1FEE1EAC27845E1F00697F81 /* Web3+signTX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE1EAB27845E1F00697F81 /* Web3+signTX.swift */; };
 		2A0C16AF2666713D0085524E /* StoredKeyImportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0C16AE2666713D0085524E /* StoredKeyImportType.swift */; };
 		2A18E7FB266C9D210045BC88 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A18E7FA266C9D210045BC88 /* AvatarView.swift */; };
+		2A23A64627C4789B00CC5AD9 /* BalanceCollectibleRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A23A64527C4789B00CC5AD9 /* BalanceCollectibleRowView.swift */; };
+		2A23A64827C478AF00CC5AD9 /* BalanceCollectibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A23A64727C478AF00CC5AD9 /* BalanceCollectibleView.swift */; };
 		2A3050C526A01B370003EECC /* OpenSeaProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3050C326A01B370003EECC /* OpenSeaProvider.swift */; };
 		2A3050C626A01B370003EECC /* NFTAssetsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3050C426A01B370003EECC /* NFTAssetsModel.swift */; };
 		2A35603E265D008100FB1D3B /* FontStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A35603D265D008100FB1D3B /* FontStyles.swift */; };
@@ -839,6 +841,8 @@
 		1FEE1EAB27845E1F00697F81 /* Web3+signTX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Web3+signTX.swift"; sourceTree = "<group>"; };
 		2A0C16AE2666713D0085524E /* StoredKeyImportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredKeyImportType.swift; sourceTree = "<group>"; };
 		2A18E7FA266C9D210045BC88 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
+		2A23A64527C4789B00CC5AD9 /* BalanceCollectibleRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceCollectibleRowView.swift; sourceTree = "<group>"; };
+		2A23A64727C478AF00CC5AD9 /* BalanceCollectibleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceCollectibleView.swift; sourceTree = "<group>"; };
 		2A3050C326A01B370003EECC /* OpenSeaProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenSeaProvider.swift; sourceTree = "<group>"; };
 		2A3050C426A01B370003EECC /* NFTAssetsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFTAssetsModel.swift; sourceTree = "<group>"; };
 		2A35603D265D008100FB1D3B /* FontStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyles.swift; sourceTree = "<group>"; };
@@ -2079,6 +2083,8 @@
 				2AB6557427C327EF0061A0F0 /* BalanceTokenListView.swift */,
 				2AB6557327C327EF0061A0F0 /* BalanceTokenRowView.swift */,
 				2AB6557027C327D70061A0F0 /* BalanceV2View.swift */,
+				2A23A64527C4789B00CC5AD9 /* BalanceCollectibleRowView.swift */,
+				2A23A64727C478AF00CC5AD9 /* BalanceCollectibleView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4266,6 +4272,7 @@
 				2AF8863E271EEDF80004565A /* UIImageView+Kingfisher.swift in Sources */,
 				2AF8864B271EEDF80004565A /* UIImage.swift in Sources */,
 				2AF88602271EED7D0004565A /* SheetPresenter.swift in Sources */,
+				2A23A64827C478AF00CC5AD9 /* BalanceCollectibleView.swift in Sources */,
 				2AF884F8271EE9310004565A /* WalletConnectStartViewController.swift in Sources */,
 				2A6ABB912720053B00CC3AED /* ValidationCodeParameters.swift in Sources */,
 				2A6ABB822720053B00CC3AED /* SetPasswordViewController.swift in Sources */,
@@ -4287,6 +4294,7 @@
 				1FCBEDF02738DA2E001C3637 /* RestoreWalletInfoController.swift.swift in Sources */,
 				2AF88638271EEDF80004565A /* UIApplication+extension.swift in Sources */,
 				6F07ABE5279697450039D69D /* NFTCollectionDetailTableViewCell.swift in Sources */,
+				2A23A64627C4789B00CC5AD9 /* BalanceCollectibleRowView.swift in Sources */,
 				2AF88555271EE9310004565A /* SendNFTTokenViewController.swift in Sources */,
 				2DBD0BA22788346F0065A2B1 /* ConnectableSocialListViewController.swift in Sources */,
 				0F5810912733CDFB0040B4EC /* MaskWebMessage+IndexDB.swift in Sources */,

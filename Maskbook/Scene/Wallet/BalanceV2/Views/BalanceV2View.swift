@@ -13,20 +13,28 @@ struct BalanceV2View: View {
     @ObservedObject var viewModel = BalanceV2ViewModel()
     
     var body: some View {
+        renderScrollViewWithHeader {
+            BalanceTokenListView(tokens: viewModel.mainTokens)
+            if viewModel.showExpandHeader {
+                BalanceExpandableHeaderView(state: viewModel.expandState, balance: viewModel.expandAmount) {
+                    withAnimation {
+                        viewModel.isTokenExpanded.toggle()
+                    }
+                }
+            }
+            if viewModel.isTokenExpanded {
+                BalanceTokenListView(tokens: viewModel.expandTokens)
+            }
+        }
+    }
+    
+    private func renderScrollViewWithHeader<Content: View>(
+        @ViewBuilder tokenContent: () -> Content
+    ) -> some View {
         ScrollView {
             LazyVStack(pinnedViews: [.sectionHeaders]) {
                 Section(header: BalanceSwichHeaderView()) {
-                    BalanceTokenListView(tokens: viewModel.mainTokens)
-                    if viewModel.showExpandHeader {
-                        BalanceExpandableHeaderView(state: viewModel.expandState, balance: viewModel.expandAmount) {
-                            withAnimation {
-                                viewModel.isTokenExpanded.toggle()
-                            }
-                        }
-                    }
-                    if viewModel.isTokenExpanded {
-                        BalanceTokenListView(tokens: viewModel.expandTokens)
-                    }
+                    tokenContent()
                 }
             }
         }

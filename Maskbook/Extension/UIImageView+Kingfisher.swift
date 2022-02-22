@@ -93,12 +93,12 @@ struct GifRoundCornerImageProcessor: ImageProcessor {
     let backgroundColor: KFCrossPlatformColor?
 
     init(
-        cornerRadius: CGFloat,
+        cornerRadius: CGFloat?,
         targetSize: CGSize? = nil,
         roundingCorners corners: RectCorner = .all,
         backgroundColor: KFCrossPlatformColor? = nil
     ) {
-        let radius = Radius.point(cornerRadius)
+        let radius = Radius.point(cornerRadius ?? 0)
         self.init(radius: radius, targetSize: targetSize, roundingCorners: corners, backgroundColor: backgroundColor)
     }
 

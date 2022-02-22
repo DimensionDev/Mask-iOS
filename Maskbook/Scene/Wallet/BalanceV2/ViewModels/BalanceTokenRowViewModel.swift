@@ -30,6 +30,10 @@ class BalanceTokenRowViewModel: ObservableObject {
         "\(currency?.symbol ?? "")\(token.displayBalance.stringValue.currency)"
     }
     
+    var logoUrl: String? {
+        token.logoUrl
+    }
+    
     init(token: Token) {
         self.token = token
         
