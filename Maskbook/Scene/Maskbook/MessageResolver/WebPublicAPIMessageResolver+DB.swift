@@ -12,6 +12,7 @@ import Foundation
 import Kingfisher
 import SwiftyJSON
 
+// swiftlint:disable file_length
 extension Persona {
     init?(fromRecord personaRecord: PersonaRecord) {
         guard let recordIdentifier = personaRecord.identifier else {
@@ -506,6 +507,22 @@ extension WebPublicApiMessageResolver {
         else {
             return false
         }
+        guard let identifier = request.params?.identifier else { return false }
+        let post = PostRepository.queryPost(identifier: identifier)
+            .flatMap {
+                Post(fromRecord: $0)
+            }
+        sendResponseToWebView(response: post, id: request.id)
+        return true
+    }
+    
+    @discardableResult
+    func queryPosts(messageData: Data) -> Bool {
+        guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryPostParam>.self,
+                                                from: messageData)
+        else {
+            return false
+        }
         guard let queryParams = request.params else { return false }
         let postRecords = PostRepository.queryPosts(encryptBy: queryParams.encryptBy,
                                                     userIds: queryParams.userIds,
@@ -525,7 +542,8 @@ extension WebPublicApiMessageResolver {
         }
         guard let updateParams = request.params else { return false }
         if let postRecord = PostRepository.updatePost(post: updateParams.post,
-                                                      mode: updateParams.options.mode) {
+                                                      mode: updateParams.options.mode)
+        {
             let post = Post(fromRecord: postRecord)
             sendResponseToWebView(response: post, id: request.id)
             return true

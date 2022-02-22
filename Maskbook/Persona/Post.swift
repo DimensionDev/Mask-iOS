@@ -12,11 +12,11 @@ import SwiftyJSON
 struct Post: Codable {
     var identifier: String
     var encryptBy: String?
-    var postBy: String
+    var postBy: String?
     var postCryptoKey: JSON?
     var url: String?
     var summary: String?
-    var foundAt: Double
-    var recipients: JSON
+    var foundAt: Double?
+    var recipients: JSON?
     var interestedMeta: JSON?
 }

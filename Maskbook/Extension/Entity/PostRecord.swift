@@ -36,3 +36,20 @@ extension PostRecord {
         }
     }
 }
+
+extension PostRecord {
+    struct PostRecipientsReason: Codable {
+        let at: Double
+        let type: String
+    }
+
+    struct PostRecipientsDetail: Codable {
+        let reason: [PostRecipientsReason]
+    }
+
+    var recipients: [String: PostRecipientsDetail]? {
+        recipientsRaw.flatMap {
+            try? JSONDecoder().decode([String: PostRecipientsDetail].self, from: $0)
+        }
+    }
+}

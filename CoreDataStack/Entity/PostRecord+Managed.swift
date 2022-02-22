@@ -9,28 +9,29 @@
 import Foundation
 extension PostRecord: Managed {
     public static var defaultSortDescriptors: [NSSortDescriptor] {
-        return [NSSortDescriptor(keyPath: \PostRecord.updatedAt, ascending: false)]
+        [NSSortDescriptor(keyPath: \PostRecord.updatedAt, ascending: false)]
     }
     
     public static func predicate(identifier: String) -> NSPredicate {
-        return NSPredicate(format: "%K == %@", #keyPath(PostRecord.identifier), identifier)
+        NSPredicate(format: "%K == %@", #keyPath(PostRecord.identifier), identifier)
     }
     
     public static func predicate(encryptBy: String) -> NSPredicate {
-        return NSPredicate(format: "%K == %@", #keyPath(PostRecord.encryptBy), encryptBy)
+        NSPredicate(format: "%K == %@", #keyPath(PostRecord.encryptBy), encryptBy)
     }
     
     public static func predicate(userIds: [String]) -> NSPredicate {
-        return NSPredicate(format: "%K IN %@", #keyPath(PostRecord.postUserId), userIds)
+        NSPredicate(format: "%K IN %@", #keyPath(PostRecord.postUserId), userIds)
     }
     
     public static func predicate(network: String) -> NSPredicate {
-        return NSPredicate(format: "%K == %@", #keyPath(PostRecord.postNetwork), network)
+        NSPredicate(format: "%K == %@", #keyPath(PostRecord.postNetwork), network)
     }
     
     public static func predicate(encryptBy: String?,
                                  userIds: [String]?,
-                                 network: String?) -> NSPredicate? {
+                                 network: String?) -> NSPredicate?
+    {
         var predicates = [NSPredicate]()
         if let encryptBy = encryptBy {
             predicates.append(Self.predicate(encryptBy: encryptBy))

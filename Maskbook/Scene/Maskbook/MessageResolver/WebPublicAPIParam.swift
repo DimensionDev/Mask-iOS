@@ -165,6 +165,7 @@ struct CreatePostParam: Decodable {
 }
 
 struct QueryPostParam: Decodable {
+    let identifier: String?
     let encryptBy: String?
     let userIds: [String]?
     let network: String?

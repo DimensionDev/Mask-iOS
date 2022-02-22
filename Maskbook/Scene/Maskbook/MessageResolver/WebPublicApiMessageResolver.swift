@@ -42,6 +42,7 @@ class WebPublicApiMessageResolver: MaskMessageResolver {
         
         case create_post
         case query_post
+        case query_posts
         case update_post
         
         case notifyRedpacket
@@ -197,6 +198,9 @@ class WebPublicApiMessageResolver: MaskMessageResolver {
             
         case .query_post:
             parseSuccess = queryPost(messageData: messageData)
+        
+        case .query_posts:
+            parseSuccess = queryPosts(messageData: messageData)
             
         case .update_post:
             parseSuccess = updatePost(messageData: messageData)

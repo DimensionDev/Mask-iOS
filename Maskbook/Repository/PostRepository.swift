@@ -28,15 +28,23 @@ enum PostRepository {
             postRecord.identifier = post.identifier
             postRecord.encryptBy = post.encryptBy
             
-            postRecord.postNetwork = ProfileRecord.getSocialPlatformFromIdentifier(post.postBy)?.url
-            postRecord.postUserId = post.postBy.components(separatedBy: "/").last
+            if let postBy = post.postBy {
+                postRecord.postNetwork = ProfileRecord.getSocialPlatformFromIdentifier(postBy)?.url
+                postRecord.postUserId = postBy.components(separatedBy: "/").last
+            } else {
+                log.debug("no postBy in creating post", source: "Persona")
+            }
             
             postRecord.postCryptoKeyRaw = try? post.postCryptoKey?.rawData()
             postRecord.url = post.url
             postRecord.summary = post.summary
             
-            postRecord.foundAt = Date(timeIntervalSince1970: post.foundAt / 1_000)
-            postRecord.recipientsRaw = try? post.recipients.rawData()
+            if let foundAt = post.foundAt {
+                postRecord.foundAt = Date(timeIntervalSince1970: foundAt / 1_000)
+            } else {
+                log.debug("no foundAt in creating post", source: "Persona")
+            }
+            postRecord.recipientsRaw = try? post.recipients?.rawData()
             postRecord.interestedMetaRaw = try? post.interestedMeta?.rawData()
             postRecord.createdAt = Date()
             postRecord.updatedAt = Date()
@@ -48,8 +56,10 @@ enum PostRepository {
         if let postBy = post.encryptBy {
             postRecord.encryptBy = postBy
         }
-        postRecord.postNetwork = ProfileRecord.getSocialPlatformFromIdentifier(post.postBy)?.url
-        postRecord.postUserId = post.postBy.components(separatedBy: "/").last
+        if let postBy = post.postBy {
+            postRecord.postNetwork = ProfileRecord.getSocialPlatformFromIdentifier(postBy)?.url
+            postRecord.postUserId = postBy.components(separatedBy: "/").last
+        }
         if let postCryptoKeyData = try? post.postCryptoKey?.rawData() {
             postRecord.postCryptoKeyRaw = postCryptoKeyData
         }
@@ -59,8 +69,9 @@ enum PostRepository {
         if let summary = post.summary {
             postRecord.summary = summary
         }
-        
-        postRecord.foundAt = Date(timeIntervalSince1970: post.foundAt / 1_000)
+        if let foundAt = post.foundAt {
+            postRecord.foundAt = Date(timeIntervalSince1970: foundAt / 1_000)
+        }
         if let interestedMetaData = try? post.interestedMeta?.rawData() {
             postRecord.interestedMetaRaw = interestedMetaData
         }
@@ -110,17 +121,20 @@ enum PostRepository {
             Self.updatePostRecordWithPartialPost(post: post, postRecord: postRecord)
             switch mode {
             case .append:
-                // TODO: need test for this merge
                 if let recipientsRaw = postRecord.recipientsRaw,
                    let json = try? JSON(data: recipientsRaw)
                 {
                     var mJson = json
-                    try? mJson.merge(with: post.recipients)
-                    postRecord.recipientsRaw = try? mJson.rawData()
+                    if let recipients = post.recipients {
+                        try? mJson.merge(with: recipients)
+                        postRecord.recipientsRaw = try? mJson.rawData()
+                    }
                 }
                 
             case .override:
-                postRecord.recipientsRaw = try? post.recipients.rawData()
+                if let recipients = post.recipients {
+                    postRecord.recipientsRaw = try? recipients.rawData()
+                }
             }
             postRecord.updatedAt = Date()
             try? viewContext.saveOrRollback()
