@@ -44,8 +44,9 @@ class NFTCollectionDetailTableViewCell: UITableViewCell {
     
     private var moreButton: UIButton = {
         let button = UIButton(type: .system)
-        button.tintColor = Asset.Colors.AccountCard.nameText.color
-        button.setImage(Asset.Images.Scene.Balance.moreButton.image, for: .normal)
+        button.tintColor = Asset.Colors.Text.dark.color
+        button.setImage(Asset.Images.Scene.Nft.more.image, for: .normal)
+        button.addTarget(self, action: #selector(moreButtonDidClick(sender:)), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -127,10 +128,10 @@ class NFTCollectionDetailTableViewCell: UITableViewCell {
         
         backView.addSubview(moreButton)
         moreButton.snp.makeConstraints {
-            $0.right.equalTo(-18)
+            $0.right.equalTo(-12)
             $0.top.equalTo(28)
-            $0.height.equalTo(32)
-            $0.width.equalTo(32)
+            $0.height.equalTo(24)
+            $0.width.equalTo(24)
         }
         
         backView.addSubview(collectionLabel)
@@ -169,6 +170,11 @@ class NFTCollectionDetailTableViewCell: UITableViewCell {
             $0.right.equalTo(floorPriceLabel)
             $0.top.equalTo(priceETHLabel)
         }
+    }
+    
+    @objc
+    private func moreButtonDidClick(sender: UIButton) {
+        
     }
     
     func setCollectionStauts(floor: NFTCollectionStatusModel, collection: NFTAssetPriceModel, token: Collectible){
