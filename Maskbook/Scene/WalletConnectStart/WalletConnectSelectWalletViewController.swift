@@ -62,7 +62,7 @@ class WalletConnectSelectWalletViewController: UIViewController {
     
     private lazy var emptyImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = Asset.Images.Scene.Empty.emptyBox.image
+        imageView.image = Asset.Images.Scene.Balance.emptyToken.image
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
