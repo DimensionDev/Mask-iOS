@@ -604,6 +604,7 @@
 		5D9988EC2653E2610070ED17 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9988EB2653E2610070ED17 /* Strings.swift */; };
 		5D99DEC926788A7A006E345D /* MaskSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D99DEC826788A7A006E345D /* MaskSegmentControl.swift */; };
 		5D9A88DC27BB4AE200879068 /* PersonaDownloadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A88DB27BB4AE200879068 /* PersonaDownloadHandler.swift */; };
+		5DAC90B727C5D0B100BAFB23 /* UIView+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAC90B627C5D0B100BAFB23 /* UIView+Shake.swift */; };
 		5DB39E2B278694460025337C /* JSDocumentResourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2A278694460025337C /* JSDocumentResourceManager.swift */; };
 		5DB39E2E27869F6C0025337C /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2D27869F6C0025337C /* DebugView.swift */; };
 		5DB39E302786A4E40025337C /* JSResourceSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2F2786A4E40025337C /* JSResourceSelectView.swift */; };
@@ -1300,6 +1301,7 @@
 		5D9988EB2653E2610070ED17 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		5D99DEC826788A7A006E345D /* MaskSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskSegmentControl.swift; sourceTree = "<group>"; };
 		5D9A88DB27BB4AE200879068 /* PersonaDownloadHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaDownloadHandler.swift; sourceTree = "<group>"; };
+		5DAC90B627C5D0B100BAFB23 /* UIView+Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shake.swift"; sourceTree = "<group>"; };
 		5DB39E2A278694460025337C /* JSDocumentResourceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSDocumentResourceManager.swift; sourceTree = "<group>"; };
 		5DB39E2D27869F6C0025337C /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		5DB39E2F2786A4E40025337C /* JSResourceSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSResourceSelectView.swift; sourceTree = "<group>"; };
@@ -3104,6 +3106,7 @@
 				2A23A64E27C4B66B00CC5AD9 /* SwiftUI */,
 				2DC5D89C272574FA00E351D3 /* Entity */,
 				2AF88619271EEDF80004565A /* UIApplication+extension.swift */,
+				5DAC90B627C5D0B100BAFB23 /* UIView+Shake.swift */,
 				2D1FDD852769EC05002E5C91 /* Managed+extension.swift */,
 				2D2ED7B3272FEBC7004B7408 /* NSMutableAttributedString+extension.swift */,
 				2AF8861B271EEDF80004565A /* Array+Safety.swift */,
@@ -4334,6 +4337,7 @@
 				0F41A088260B39EF000037B2 /* WalletAssetObserver.swift in Sources */,
 				2AF88579271EE9310004565A /* WalletListViewController+WalletListWalletTableViewCellDelegate.swift in Sources */,
 				2A6ABB992720053B00CC3AED /* RemoteRestoreVerifyView.swift in Sources */,
+				5DAC90B727C5D0B100BAFB23 /* UIView+Shake.swift in Sources */,
 				2AF8851C271EE9310004565A /* TokenDetailTokenCell.swift in Sources */,
 				1F8D6919272115F1001084D6 /* RemoteInfoBindingViewController.swift in Sources */,
 				DBAAF49522C35A7100017594 /* AppDelegate.swift in Sources */,
