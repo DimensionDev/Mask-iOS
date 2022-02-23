@@ -113,6 +113,10 @@
                 "title": "设置备份密码 ",
                 "description": "请在导出私钥之前设置您的 %s。 "
             },
+            "download_identity_code": {
+                "title": "设置备份密码 ",
+                "description": "请在下载身份二维码之前设置您的 %s。 "
+            },
             "backup_tips_no_backup_password": {
                 "title": " 设置备份密码",
                 "description": "请在备份前设置您的 %s。"
@@ -158,7 +162,10 @@
             "back_up_locally": "备份到本地",
             "back_up": "备份",
             "resend": "重新发送",
-            "edit": "编辑"
+            "edit": "编辑",
+            "download": "下载",
+            "skip": "跳过，稍后下载",
+            "download_next": "我已下载，下一步"
         },
         "loading": "加载中..."
     },
@@ -305,7 +312,9 @@
                 "back_up_data": "备份数据",
                 "back_up_password": "备份密码",
                 "back_up_password_empty": "请设置备份密码",
-                "change_backup_password": "修改备份密码"
+                "change_backup_password": "修改备份密码",
+                "back_up_password_validation_tip": "请输入您在加密备份文件时使用的备份密码。 ",
+                "wrong_password": "密码错误"
             },
             "profile": {
                 "title": "个人信息",
@@ -480,8 +489,8 @@
                 "change_add_persona": "更改或添加角色",
                 "rename": "重命名",
                 "export_private_key": "导出私钥",
+                "download": "下载身份二维码",
                 "backup": "备份",
-                "recovery": "恢复",
                 "log_out": "退出登录",
                 "delete": "删除"
             },
@@ -519,6 +528,13 @@
             "accounts": "账户",
             "connect_tips": "选择要连接您角色的社交账户。享受 web 3.0 的社交体验。",
             "add": "添加"
+        },
+        "persona_download": {
+            "persona": "身份:",
+            "mask_id": "MASK ID",
+            "private_key": "私钥",
+            "identity_id": "身份 ID",
+            "download_tips": "这个二维码包含您的身份信息，请安全保存。您可以使用Mask APP 扫描二维码登录身份。"
         },
         "wallet_balance": {
             "btn_swap": "兑换",
@@ -564,8 +580,9 @@
             "recovery_sign_in": "恢复角色"
         },
         "identity_create": {
-            "title": "验证身份助记词",
-            "description": "请写下每一个单词。"
+            "title": "创建身份",
+            "description": "下载您的身份代码。",
+            "identity_tips": "身份代码用于生成您的身份。"
         },
         "identify_verify": {
             "title": "验证身份助记词",
@@ -628,7 +645,7 @@
                 "dhedge": "DHEDGE"
             },
             "plugin_introduction": {
-                "transak": "Transak可支持在60多个国家内购买代币。",
+                "transak": "Transak 支持通过60多种货币购买代币",
                 "ito": "允许用户在Twitter上直接购买代币。",
                 "luckyDrop": "发送红包(Token/NFT)，给加密好友带来惊喜。",
                 "swap": "通过Dex购买代币，无需额外费用和限制。",
@@ -644,9 +661,8 @@
             "connect_button_title": "连接",
             "profile_select_title": "选择用户名",
             "connected": "已连接",
-            "connect_hint1": "请先登录 ",
-            "connect_hint2": " 以连接到 Mask Network",
-            "connect_hint_logged_in": "如果您想要连接另一个账户，请注销并登录另一个账户。",
+            "connect_hint": "登录到 %s 以连接",
+            "connect_hint_logged_in": "%s 已连接。\n切换账户以连接另一个账户。",
             "connect_to_mask_network": "连接到 Mask Network",
             "account_already_connected": "账户已连接",
             "connect_stop": "",
@@ -728,6 +744,7 @@
             "scan_q_r_code": "扫描二维码",
             "qr_code_tips": "使用支持 WalletConnect 的钱包扫码下面的二维码",
             "tap_to_copy": "点击复制到剪贴板",
+            "no_wallets": "您还没有安装任何可用的 %s 钱包用于 walletConnect",
             "connecting": "正在连接…",
             "connect_success": "钱包成功连接到 Mask Network",
             "scan": "扫描二维码",
@@ -752,7 +769,8 @@
                 "tips": "已存在云端备份， 您可以选择在备份之前先合并这个云备份到您的本地数据，或者直接备份。"
             },
             "merge_to_local": {
-                "title": "合并后备份"
+                "title": "合并后备份",
+                "merge_failed_message": "合并云端备份失败！"
             },
             "validation_code": "验证码",
             "with_phone": "使用手机号码备份",

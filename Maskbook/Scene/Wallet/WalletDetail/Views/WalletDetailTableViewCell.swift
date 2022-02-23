@@ -33,8 +33,8 @@ class WalletDetailTableViewCell: UITableViewCell {
     
     lazy var subtitleLabel: UILabel = {
         let label = UILabel()
-        label.font = FontStyles.MH6
-        label.textColor = Asset.Colors.Public.blue.color
+        label.font = FontStyles.BH5
+        label.textColor = Asset.Colors.Text.dark.color
         return label
     }()
     

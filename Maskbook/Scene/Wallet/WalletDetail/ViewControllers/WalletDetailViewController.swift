@@ -23,6 +23,8 @@ class WalletDetailViewController: UIViewController {
     
     lazy var navigationBar: UINavigationBar = {
         let view = UINavigationBar()
+        view.titleTextAttributes = [.font: FontStyles.BH4,
+                                    .foregroundColor: Asset.Colors.Text.dark.color]
         view.tintColor = Asset.Colors.Public.blue.color
         view.setBackgroundImage(UIImage(), for: .default)
         view.shadowImage = UIImage()
@@ -125,11 +127,6 @@ class WalletDetailViewController: UIViewController {
     
     private func setupNavigationBar() {
         let navigationItem = UINavigationItem(title: self.title ?? "")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .done,
-            target: self,
-            action: #selector(onDoneDidClick)
-        )
         navigationBar.items = [navigationItem]
     }
     

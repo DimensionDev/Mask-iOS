@@ -27,6 +27,8 @@
 "Common.Alert.DisconnectProfile.Description" = "Are you sure you want to disconnect it? This account will not be able to decrypt and encrypt any information with Mask Network.";
 "Common.Alert.DisconnectProfile.Title" = "Disconnect Social Account 
  %@";
+"Common.Alert.DownloadIdentityCode.Description" = "Please set up your %@ before you download persona QR code. ";
+"Common.Alert.DownloadIdentityCode.Title" = "Set up backup password ";
 "Common.Alert.ExportPrivateKey.Description" = "Please set up your %@ before you export private key. ";
 "Common.Alert.ExportPrivateKey.Title" = "Set up backup password ";
 "Common.Alert.FaceIdActivateFail.Description" = "Fail to enable Face id.";
@@ -109,7 +111,7 @@
 "Scene.App.PluginIntroduction.Ito" = "Enable users to buy tokens directly on Twitter.";
 "Scene.App.PluginIntroduction.Luckydrop" = "Surprise your encrypted friends with Token/NFT Lucky Drops.";
 "Scene.App.PluginIntroduction.Swap" = "Purchase tokens through dex without additional fees.";
-"Scene.App.PluginIntroduction.Transak" = "Buy crypto in 60+ countries with Transak support.";
+"Scene.App.PluginIntroduction.Transak" = "Buy crypto with Transak, support 60+ currencies.";
 "Scene.App.PluginTip" = "If you turn off a plugin, the plugin function can no longer be rendered on timeline when browsing social media.";
 "Scene.App.Plugins.Collectibles" = "Collectibles";
 "Scene.App.Plugins.Dhedge" = "DHEDGE";
@@ -281,7 +283,7 @@ Invite friends to download Mask Network.";
 "Scene.Personas.Action.Backup" = "Back Up";
 "Scene.Personas.Action.ChangeAddPersona" = "Change or Add Persona";
 "Scene.Personas.Action.Delete" = "Delete";
-"Scene.Personas.Action.Download" = "Download Mnemonic";
+"Scene.Personas.Action.Download" = "Download Persona QR Code";
 "Scene.Personas.Action.ExportPrivateKey" = "Export Private Key";
 "Scene.Personas.Action.LogOut" = "Log Out";
 "Scene.Personas.Action.Rename" = "Rename";
@@ -518,6 +520,7 @@ Switch account to access another.";
 "Scene.WalletConnect.Disconnect" = "Disconnect";
 "Scene.WalletConnect.NetworkNotMatch" = "The current network %@ is different from the connecting network %@. Do you want to switch your current network to %@?";
 "Scene.WalletConnect.NetworkNotSupport" = "The wallet network %@ is currently not supported by Mask Network. We can’t connect your wallet. Please switch your wallet network manually.";
+"Scene.WalletConnect.NoWallets" = "You haven’t installed any available %@ wallets for walletConnect";
 "Scene.WalletConnect.QrCodeTips" = "Use a WalletConnect compatiable wallet
 to scan the QR Code";
 "Scene.WalletConnect.ReplaceWalletConnectWallet" = "This wallet address was connected with WalletConnect. Importing this wallet address automatically dis-connects the walletConnect account.";

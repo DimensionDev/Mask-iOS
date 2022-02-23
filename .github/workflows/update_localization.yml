@@ -1,0 +1,22 @@
+name: Update Localization
+
+on:
+  push:
+    branches: [master, develop*, released]
+
+  workflow_dispatch:
+
+jobs:
+  update_localization:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up ruby env
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.2
+          bundler-cache: true
+
+      - name: Update Localization
+        run: ./update_localization.sh

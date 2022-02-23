@@ -23,7 +23,7 @@ final class PersonasActionViewModel {
 
     @InjectedProvider(\.vault)
     private var vault
-    
+
     var personaDownloadHandler: PersonaDownloadHandler?
 
     private var disposeBag = Set<AnyCancellable>()
@@ -33,10 +33,9 @@ final class PersonasActionViewModel {
     var title: String? {
         personaManager.currentPersona.value?.nickname
     }
-    
+
     var actions: [PersonasActionViewModel.Action] {
         PersonasActionViewModel.Action.allCases
-
     }
 
     var actionTitles: [String] {
@@ -114,10 +113,37 @@ final class PersonasActionViewModel {
             }), transition: .panModel(animated: true))
 
         case .download:
-            guard let identifier = personaManager.currentPersona.value?.identifier else { return }
-            personaDownloadHandler = PersonaDownloadHandler(personaIdentifier: identifier)
-            personaDownloadHandler?.downloadAction()
-            
+            guard userSetting.hasBackupPassword else {
+                let words = L10n.Common.Alert.DownloadIdentityCode.description(L10n.Scene.Setting.BackupRecovery.backUpPassword)
+                let alertController = AlertController(
+                    title: L10n.Common.Alert.DownloadIdentityCode.title,
+                    message: words,
+                    confirmButtonText: L10n.Common.Controls.ok,
+                    cancelButtonText: L10n.Common.Controls.cancel,
+                    buttonAxis: .horizontal,
+                    imageType: .warning,
+                    confirmButtonClicked: { [weak self] _ in
+                        self?.setBackupPassword(cell: cell)
+                    },
+                    cancelButtonClicked: nil
+                )
+                let keyWords = L10n.Scene.Setting.BackupRecovery.backUpPassword
+
+                let attributes = NSMutableAttributedString(string: words)
+                attributes.addAttribute(color: Asset.Colors.Public.blue.color, keywords: keyWords)
+                alertController.setAttributeMessage(attrMessage: attributes)
+                coordinator.present(
+                    scene: .alertController(alertController: alertController),
+                    transition: .alertController(completion: nil)
+                )
+                return
+            }
+            coordinator.present(scene: .backupPasswordVerify(verifyPassedCompletion: { [weak self] in
+                guard let identifier = self?.personaManager.currentPersona.value?.identifier else { return }
+                self?.personaDownloadHandler = PersonaDownloadHandler(personaIdentifier: identifier)
+                self?.personaDownloadHandler?.downloadAction()
+            }), transition: .panModel(animated: true))
+
         case .backUp:
             showBackupData(cell: cell)
 
@@ -252,7 +278,7 @@ extension PersonasActionViewModel {
 
             case .download:
                 return L10n.Scene.Personas.Action.download
-                
+
             case .backUp:
                 return L10n.Scene.Personas.Action.backup
 
@@ -274,7 +300,7 @@ extension PersonasActionViewModel {
 
             case .download:
                 return Asset.Images.Scene.Personas.download.name
-                
+
             case .backUp:
                 return Asset.Images.Scene.Personas.backup.name
 

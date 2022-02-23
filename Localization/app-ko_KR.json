@@ -113,6 +113,10 @@
                 "title": "",
                 "description": ""
             },
+            "download_identity_code": {
+                "title": "",
+                "description": ""
+            },
             "backup_tips_no_backup_password": {
                 "title": "",
                 "description": ""
@@ -158,7 +162,10 @@
             "back_up_locally": "",
             "back_up": "",
             "resend": "",
-            "edit": ""
+            "edit": "",
+            "download": "",
+            "skip": "",
+            "download_next": ""
         },
         "loading": "로딩 중"
     },
@@ -305,7 +312,9 @@
                 "back_up_data": "데이터 백업",
                 "back_up_password": "비밀번호 백업",
                 "back_up_password_empty": "",
-                "change_backup_password": "백업 비밀번호 변경"
+                "change_backup_password": "백업 비밀번호 변경",
+                "back_up_password_validation_tip": "",
+                "wrong_password": ""
             },
             "profile": {
                 "title": "프로필",
@@ -480,8 +489,8 @@
                 "change_add_persona": "페르소나 추가 및 변경",
                 "rename": "이름 바꾸기",
                 "export_private_key": "개인 키 수출",
+                "download": "",
                 "backup": "백업",
-                "recovery": "복구",
                 "log_out": "로그아웃",
                 "delete": "삭제"
             },
@@ -519,6 +528,13 @@
             "accounts": "계정",
             "connect_tips": "",
             "add": ""
+        },
+        "persona_download": {
+            "persona": "",
+            "mask_id": "",
+            "private_key": "",
+            "identity_id": "",
+            "download_tips": ""
         },
         "wallet_balance": {
             "btn_swap": "스왑",
@@ -564,8 +580,9 @@
             "recovery_sign_in": ""
         },
         "identity_create": {
-            "title": "아이덴티티 확인 코드",
-            "description": "단어를 전부 적어 두세요."
+            "title": "",
+            "description": "",
+            "identity_tips": ""
         },
         "identify_verify": {
             "title": "아이덴티티 확인 코드",
@@ -644,9 +661,8 @@
             "connect_button_title": "연결",
             "profile_select_title": "유저이름 선택",
             "connected": "연결됨",
-            "connect_hint1": "로그인하세요 ",
-            "connect_hint2": " mask Network에 연결하기.",
-            "connect_hint_logged_in": "다른 계정을 연결하기 위해 다른 계정을 로그아웃하고 로그인하세요.",
+            "connect_hint": "",
+            "connect_hint_logged_in": "",
             "connect_to_mask_network": "Mask Network에 연결하기",
             "account_already_connected": "계정은 이미 연결되었습니다",
             "connect_stop": "",
@@ -728,6 +744,7 @@
             "scan_q_r_code": "QR 코드 스캔",
             "qr_code_tips": "WalletConnect와 호환성이 있는 월렛을 사용하여 QR 코드 스캔하세요.",
             "tap_to_copy": "탭하여 텍스트를 클립보드로 복사",
+            "no_wallets": "",
             "connecting": "연결 중…",
             "connect_success": "월렛은 Mask Network에 성공적으로 연결되었습니다",
             "scan": "QR코드 스캔",
@@ -752,7 +769,8 @@
                 "tips": ""
             },
             "merge_to_local": {
-                "title": ""
+                "title": "",
+                "merge_failed_message": ""
             },
             "validation_code": "",
             "with_phone": "",

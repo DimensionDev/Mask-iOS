@@ -21,7 +21,7 @@ class BalanceExpandCell: UITableViewCell {
     
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = FontStyles.mh5.uifont
+        label.font = FontStyles.rh5.uifont
         label.textColor = Asset.Colors.Text.normal.color
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -70,7 +70,7 @@ class BalanceExpandCell: UITableViewCell {
             containerView.trailingAnchor.constraint(equalTo: expandIconImageView.trailingAnchor,
                                                     constant: 14),
             containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,
-                                                 constant: -8)
+                                                  constant: -8)
         ])
         
         NSLayoutConstraint.activate([

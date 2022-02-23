@@ -165,6 +165,17 @@ enum L10n {
         }
       }
 
+      enum DownloadIdentityCode {
+        /// Please set up your %@ before you download persona QR code. 
+        static func description(_ p1: String) -> String {
+          return L10n.tr("Localizable", "Common.Alert.DownloadIdentityCode.Description", p1)
+        }
+        /// Set up backup password 
+        static var title: String {
+          return L10n.tr("Localizable", "Common.Alert.DownloadIdentityCode.Title")
+        }
+      }
+
       enum ExportPrivateKey {
         /// Please set up your %@ before you export private key. 
         static func description(_ p1: String) -> String {
@@ -595,7 +606,7 @@ enum L10n {
         static var swap: String {
           return L10n.tr("Localizable", "Scene.App.PluginIntroduction.Swap")
         }
-        /// Buy crypto in 60+ countries with Transak support.
+        /// Buy crypto with Transak, support 60+ currencies.
         static var transak: String {
           return L10n.tr("Localizable", "Scene.App.PluginIntroduction.Transak")
         }
@@ -1327,7 +1338,7 @@ enum L10n {
         static var delete: String {
           return L10n.tr("Localizable", "Scene.Personas.Action.Delete")
         }
-        /// Download Mnemonic
+        /// Download Persona QR Code
         static var download: String {
           return L10n.tr("Localizable", "Scene.Personas.Action.Download")
         }
@@ -2368,6 +2379,10 @@ enum L10n {
       /// The wallet network %@ is currently not supported by Mask Network. We can’t connect your wallet. Please switch your wallet network manually.
       static func networkNotSupport(_ p1: String) -> String {
         return L10n.tr("Localizable", "Scene.WalletConnect.NetworkNotSupport", p1)
+      }
+      /// You haven’t installed any available %@ wallets for walletConnect
+      static func noWallets(_ p1: String) -> String {
+        return L10n.tr("Localizable", "Scene.WalletConnect.NoWallets", p1)
       }
       /// Use a WalletConnect compatiable wallet\nto scan the QR Code
       static var qrCodeTips: String {

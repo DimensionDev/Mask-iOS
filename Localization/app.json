@@ -113,6 +113,10 @@
                 "title": "Set up backup password ",
                 "description": "Please set up your %s before you export private key. "
             },
+            "download_identity_code": {
+                "title": "Set up backup password ",
+                "description": "Please set up your %s before you download persona QR code. "
+            },
             "backup_tips_no_backup_password": {
                 "title": " Set up backup password",
                 "description": "Please set up your %s before you back up."
@@ -486,7 +490,7 @@
                 "change_add_persona": "Change or Add Persona",
                 "rename": "Rename",
                 "export_private_key": "Export Private Key",
-                "download": "Download Mnemonic",
+                "download": "Download Persona QR Code",
                 "backup": "Back Up",
                 "log_out": "Log Out",
                 "delete": "Delete"
@@ -741,6 +745,7 @@
             "scan_q_r_code": "Scan QR Code",
             "qr_code_tips": "Use a WalletConnect compatiable wallet\nto scan the QR Code",
             "tap_to_copy": "Tap to copy to clipboard",
+            "no_wallets": "You haven’t installed any available %s wallets for walletConnect",
             "connecting": "Connecting...",
             "connect_success": "Wallet Successfully Connected to Mask Network",
             "scan": "Scan the QR code",
