@@ -80,9 +80,9 @@ extension Profile: Codable {
         updatedAt = try container.decode(Double.self, forKey: .updatedAt)
         
         var networkString = ProfileSocialPlatform.twitter.url
-        for profileSocialPlatform in ProfileSocialPlatform.allCases.enumerated() {
-            if identifier.contains(profileSocialPlatform.element.url) {
-                networkString = profileSocialPlatform.element.url
+        for profileSocialPlatform in ProfileSocialPlatform.allCases {
+            if identifier.contains(profileSocialPlatform.url) {
+                networkString = profileSocialPlatform.url
             }
         }
         network = networkString

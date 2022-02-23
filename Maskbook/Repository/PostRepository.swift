@@ -53,8 +53,8 @@ enum PostRepository {
     }
     
     static func updatePostRecordWithPartialPost(post: Post, postRecord: PostRecord) {
-        if let postBy = post.encryptBy {
-            postRecord.encryptBy = postBy
+        if let encryptBy = post.encryptBy {
+            postRecord.encryptBy = encryptBy
         }
         if let postBy = post.postBy {
             postRecord.postNetwork = ProfileRecord.getSocialPlatformFromIdentifier(postBy)?.url
@@ -77,7 +77,8 @@ enum PostRepository {
         }
     }
     
-    static func queryPost(identifier: String) -> PostRecord? {
+    static func queryPost(identifier: String,
+                          context: NSManagedObjectContext = PostRepository.viewContext) -> PostRecord? {
         do {
             let fetchRequest = PostRecord.sortedFetchRequest
             fetchRequest.predicate = PostRecord.predicate(identifier: identifier)

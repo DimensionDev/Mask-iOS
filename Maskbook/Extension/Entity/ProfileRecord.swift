@@ -35,9 +35,9 @@ extension ProfileRecord {
         guard let platformString = identifier.components(separatedBy: "/").first else {
             return nil
         }
-        for profileSocialPlatform in ProfileSocialPlatform.allCases.enumerated() {
-            if platformString.contains(profileSocialPlatform.element.url) {
-                return profileSocialPlatform.element.self
+        for profileSocialPlatform in ProfileSocialPlatform.allCases {
+            if platformString.contains(profileSocialPlatform.url) {
+                return profileSocialPlatform.self
             }
         }
         return nil
