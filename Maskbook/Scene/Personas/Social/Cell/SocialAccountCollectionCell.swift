@@ -122,6 +122,11 @@ class SocialAccountCollectionCell: UICollectionViewCell {
     
     func setEditMode(isEditing: Bool) {
         deleteImageView.isHidden = !isEditing
+        if isEditing {
+            self.shakeWhenDelete()
+        } else {
+            self.removeShakeWhenDelete()
+        }
     }
     
     func deleteAction(profile: Profile) {
