@@ -360,15 +360,15 @@ extension WebPublicApiMessageResolver {
         return WebPublicApiResponse(response: true)
     }
     
-    func profileDetected(messageData: Data) -> Bool {
+    func profileDetected(messageData: Data) -> [String]? {
         struct WebPublicAPIMessage<T: Decodable>: Decodable {
             let jsonrpc: String
             let method: String
             let params: T
         }
-        guard let request = try? decoder.decode(WebPublicAPIMessage<String>.self, from: messageData) else {
-            return false
+        guard let request = try? decoder.decode(WebPublicAPIMessage<[String]>.self, from: messageData) else {
+            return nil
         }
-        return true
+        return request.params
     }
 }

@@ -48,7 +48,7 @@ class MaskConnectingSocialViewController: BaseViewController {
     // Begin of Connecting related properties
     class ConnectViewModel {
         weak var socialViewController: MaskConnectingSocialViewController?
-        var latestDetectedProfile = CurrentValueSubject<SocialProfile?, Never>(nil)
+        var latestDetectedProfile = CurrentValueSubject<[SocialProfile]?, Never>(nil)
         
         private var didPresentLoginAlertPopup = false
         
@@ -184,10 +184,10 @@ extension MaskConnectingSocialViewController {
         loadSite(socialPlatform)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        startObservingUserProfile()
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        startObservingUserProfile()
+//    }
     
     private func setupNavigationBar() {
         navigationItem.title = socialPlatform.shortName
@@ -236,14 +236,15 @@ extension MaskConnectingSocialViewController {
     }
     
     private func bindEvents() {
+        maskBrowser.webPublicApisMessageResolver.delegate = self
         connectViewModel.latestDetectedProfile
             .removeDuplicates()
             .compactMap { $0 }
             .eraseToAnyPublisher()
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] profile in
+            .sink { [weak self] profiles in
                 guard let personaIdentifier = self?.personaIdentifier else { return }
-                self?.presentConnectPopupIfNeeded(profiles: [profile], personaIdentifier: personaIdentifier)
+                self?.presentConnectPopupIfNeeded(profiles: profiles, personaIdentifier: personaIdentifier)
             }
             .store(in: &disposeBag)
     }
@@ -281,7 +282,7 @@ extension MaskConnectingSocialViewController {
                         profile.connected = true
                     }
                     // User has logged in, present the popup for users to continue the connection
-                    self?.connectViewModel.latestDetectedProfile.accept(profile)
+                    self?.connectViewModel.latestDetectedProfile.accept([profile])
                 }
             }
             .store(in: &disposeBag)
@@ -296,7 +297,7 @@ extension MaskConnectingSocialViewController {
             connectViewModel.updateHintLabelNotLoggedIn(socialPlatform: socialPlatform)
             view.layoutIfNeeded()
         }
-        if !profiles.filter({ $0.connected == false }).isEmpty {
+        if profiles.contains(where: { $0.connected == false }) {
             coordinator.present(
                 scene: .detectProfiles(profiles: profiles, personaIdentifier: personaIdentifier, delegate: self),
                 transition: .panModel(animated: true)
@@ -406,7 +407,9 @@ extension MaskConnectingSocialViewController: TabDelegate {
 
 // MARK: - TabDownloadsDelegate
 extension MaskConnectingSocialViewController: TabDownloadsDelegate {
-    func tab(_ tab: Tab, didDownloadBlobWithOptions options: WebExtension.Browser.Downloads.Download.Options, result: Result<(Data, URLResponse), Error>) {
+    func tab(_ tab: Tab,
+             didDownloadBlobWithOptions options: WebExtension.Browser.Downloads.Download.Options,
+             result: Result<(Data, URLResponse), Error>) {
         guard let (data, _) = try? result.get() else {
             return
         }
@@ -461,5 +464,28 @@ extension MaskConnectingSocialViewController {
     @objc
     private func dashboardBarButtonItem(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
+    }
+}
+
+extension MaskConnectingSocialViewController: WebMessageResolverDelegate {
+    func webPublicApiMessageResolver(resolver: WebPublicApiMessageResolver,
+                                     profilesDetect profileIdentifiers: [String]) {
+        guard let personaRecord = personaManager.currentPersona.value else {
+            return
+        }
+        guard let persona = Persona(fromRecord: personaRecord) else { return }
+        
+        let profiles = profileIdentifiers.compactMap { detectIdentifier -> SocialProfile? in
+            guard var profile = SocialProfile(profileIdentifier: detectIdentifier)
+            else { return nil }
+            if persona.linkedProfiles.contains(where: { identifier, details in
+                identifier == detectIdentifier &&
+                details.connectionConfirmState == .confirmed
+            }) {
+                profile.connected = true
+            }
+            return profile
+        }
+        connectViewModel.latestDetectedProfile.accept(profiles)
     }
 }

@@ -11,6 +11,11 @@ import OSLog
 import SwiftyJSON
 import WebKit
 
+protocol WebMessageResolverDelegate: AnyObject {
+    func webPublicApiMessageResolver(resolver: WebPublicApiMessageResolver,
+                                     profilesDetect profileIdentifiers: [String])
+}
+
 class WebPublicApiMessageResolver: MaskMessageResolver {
     private enum ResolveMethodName: String, CaseIterable {
         case misc_openDashboardView
@@ -52,6 +57,8 @@ class WebPublicApiMessageResolver: MaskMessageResolver {
     @InjectedProvider(\.personaManager)
     var personaManager
     
+    weak var delegate: WebMessageResolverDelegate?
+    
     weak var webView: WKWebView?
     
     let decoder = JSONDecoder()
@@ -83,7 +90,7 @@ class WebPublicApiMessageResolver: MaskMessageResolver {
         guard let messageData = messageBodyString.data(using: .utf8) else {
             return false
         }
-        var parseResponse: WebPublicApiResponse<>
+        
         let requestId = messageBody["id"] as? String ?? ""
         switch resolvedMethod {
         case .misc_openDashboardView:
@@ -131,66 +138,88 @@ class WebPublicApiMessageResolver: MaskMessageResolver {
             return true
             
         case .create_persona:
-            parseResponse = createPersona(messageData: messageData)
+            let parseResponse = createPersona(messageData: messageData)
+            sendResponseToWebView(response: parseResponse.response, id: requestId)
             
         case .query_persona:
-            parseResponse = queryPersona(messageData: messageData)
+            let parseResponse = queryPersona(messageData: messageData)
+            sendResponseToWebView(response: parseResponse.response, id: requestId)
             
         case .query_personas:
-            parseResponse = queryPersonas(messageData: messageData)
+            let parseResponse = queryPersonas(messageData: messageData)
+            sendResponseToWebView(response: parseResponse.response, id: requestId)
             
         case .query_persona_by_profile:
-            parseResponse = queryPersonaByProfile(messageData: messageData)
+            let parseResponse = queryPersonaByProfile(messageData: messageData)
+            sendResponseToWebView(response: parseResponse.response, id: requestId)
             
         case .update_persona:
-            parseResponse = updatePersona(messageData: messageData)
+            let parseResponse = updatePersona(messageData: messageData)
+            sendResponseToWebView(response: parseResponse.response, id: requestId)
             
         case .delete_persona:
-            parseResponse = deletePersona(messageData: messageData)
+            let parseResponse = deletePersona(messageData: messageData)
+            sendResponseToWebView(response: parseResponse.response, id: requestId)
             
         case .create_profile:
-            parseResponse = createProfile(messageData: messageData)
+            let parseResponse = createProfile(messageData: messageData)
+            sendResponseToWebView(response: parseResponse.response, id: requestId)
             
         case .query_profile:
-            parseResponse = queryProfile(messageData: messageData)
+            let parseResponse = queryProfile(messageData: messageData)
+            sendResponseToWebView(response: parseResponse.response, id: requestId)
             
         case .query_profiles:
-            parseResponse = queryProfiles(messageData: messageData)
+            let parseResponse = queryProfiles(messageData: messageData)
+            sendResponseToWebView(response: parseResponse.response, id: requestId)
             
         case .delete_profile:
-            parseResponse = deleteProfile(messageData: messageData)
+            let parseResponse = deleteProfile(messageData: messageData)
+            sendResponseToWebView(response: parseResponse.response, id: requestId)
             
         case .update_profile:
-            parseResponse = updateProfile(messageData: messageData)
+            let parseResponse = updateProfile(messageData: messageData)
+            sendResponseToWebView(response: parseResponse.response, id: requestId)
             
         case .attach_profile:
-            parseResponse = attachProfile(messageData: messageData)
+            let parseResponse = attachProfile(messageData: messageData)
+            sendResponseToWebView(response: parseResponse.response, id: requestId)
             
         case .detach_profile:
-            parseResponse = detachProfile(messageData: messageData)
+            let parseResponse = detachProfile(messageData: messageData)
+            sendResponseToWebView(response: parseResponse.response, id: requestId)
             
         case .create_relation:
-            parseResponse = createRelation(messageData: messageData)
+            let parseResponse = createRelation(messageData: messageData)
+            sendResponseToWebView(response: parseResponse.response, id: requestId)
             
         case .query_relation:
-            parseResponse = queryRelation(messageData: messageData)
+            let parseResponse = queryRelation(messageData: messageData)
+            sendResponseToWebView(response: parseResponse.response, id: requestId)
             
         case .query_relations:
-            parseResponse = queryRelations(messageData: messageData)
+            let parseResponse = queryRelations(messageData: messageData)
+            sendResponseToWebView(response: parseResponse.response, id: requestId)
             
         case .update_relation:
-            parseResponse = updateRelation(messageData: messageData)
+            let parseResponse = updateRelation(messageData: messageData)
+            sendResponseToWebView(response: parseResponse.response, id: requestId)
             
         case .notifyRedpacket:
-            parseResponse = notifyRedpacket(messageData: messageData)
+            let parseResponse = notifyRedpacket(messageData: messageData)
+            sendResponseToWebView(response: parseResponse.response, id: requestId)
             
         case .claimOrRefundRedpacket:
-            parseResponse = claimOrRefundRedpacket(messageData: messageData)
+            let parseResponse = claimOrRefundRedpacket(messageData: messageData)
+            sendResponseToWebView(response: parseResponse.response, id: requestId)
             
         case .notify_visible_detected_profile_changed:
-            profileDetected(messageData: messageData)
+            if let profileIdentifiers = profileDetected(messageData: messageData) {
+                delegate?.webPublicApiMessageResolver(resolver: self,
+                                                      profilesDetect: profileIdentifiers)
+            }
         }
-        sendResponseToWebView(response: parseResponse.response, id: requestId)
+        
         return true
     }
     // swiftlint:enable cyclomatic_complexity
