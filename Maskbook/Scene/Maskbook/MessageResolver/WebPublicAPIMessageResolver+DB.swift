@@ -9,8 +9,10 @@
 import CoreData
 import CoreDataStack
 import Foundation
+import Kingfisher
 import SwiftyJSON
 
+// swiftlint:disable file_length
 extension Persona {
     init?(fromRecord personaRecord: PersonaRecord) {
         guard let recordIdentifier = personaRecord.identifier else {
@@ -38,7 +40,8 @@ extension Persona {
         }
 
         if let mnemonicWords = personaRecord.mnemonic,
-           let path = personaRecord.path {
+           let path = personaRecord.path
+        {
             mnemonic = Mnemonic(words: mnemonicWords,
                                 parameter: Mnemonic.Parameter(path: path,
                                                               withPassword: personaRecord.withPassword))
@@ -52,7 +55,8 @@ extension Persona {
         var linkedProfilesMap = [String: LinkedProfileDetails]()
         personaRecord.linkedProfiles?.forEach {
             if let profile = $0 as? ProfileRecord,
-               let identifier = profile.identifier {
+               let identifier = profile.identifier
+            {
                 linkedProfilesMap[identifier] = LinkedProfileDetails(connectionConfirmState: .confirmed)
             }
         }
@@ -77,25 +81,48 @@ extension Profile {
 extension Relation {
     init?(from relationRecord: RelationRecord) {
         guard let recordPersonaIdentifier = relationRecord.personaIdentifier,
-              let recordProfileIdentifier = relationRecord.profileIdentifier else {
-                  return nil
-              }
+              let recordProfileIdentifier = relationRecord.profileIdentifier
+        else {
+            return nil
+        }
         personaIdentifier = recordPersonaIdentifier
         profileIdentifier = recordProfileIdentifier
-        network = Profile.getSocialPlatformFromIdentifier(recordProfileIdentifier)?.url ??
-        ProfileSocialPlatform.twitter.url
+        network = ProfileRecord.getSocialPlatformFromIdentifier(recordProfileIdentifier)?.url ??
+            ProfileSocialPlatform.twitter.url
         favor = relationRecord.favor ? .collected : .uncollected
     }
 }
 
+extension Post {
+    init(fromRecord postRecord: PostRecord) {
+        identifier = postRecord.nonOptionalIdentifier
+        encryptBy = postRecord.encryptBy ?? ""
+        if let postUserId = postRecord.postUserId,
+           let postNetwork = postRecord.postNetwork
+        {
+            postBy = "person:\(postNetwork)/\(postUserId)"
+        } else {
+            postBy = ""
+        }
+        postCryptoKey = postRecord.postCryptoKeyRaw.flatMap { try? JSON(data: $0) }
+        url = postRecord.url
+        summary = postRecord.summary
+        foundAt = (postRecord.foundAt ?? Date()).timeIntervalSince1970 * 1_000
+        recipients = postRecord.recipientsRaw.flatMap { try? JSON(data: $0) } ?? JSON()
+        interestedMeta = postRecord.interestedMetaRaw.flatMap { try? JSON(data: $0) }
+    }
+}
+
 // MARK: - Persona methods handler
+
 extension WebPublicApiMessageResolver {
     @discardableResult
     func createPersona(messageData: Data) -> Bool {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<CreatePersonaParam>.self, from: messageData),
-              let newPersona = request.params?.persona else {
-                  return false
-              }
+              let newPersona = request.params?.persona
+        else {
+            return false
+        }
         PersonaRepository.createPersona(persona: newPersona,
                                         context: PersonaRepository.viewContext)
         sendResponseToWebView(response: newPersona, id: request.id)
@@ -113,7 +140,8 @@ extension WebPublicApiMessageResolver {
                                                                        hasPrivateKey: request.params?.hasPrivateKey,
                                                                        hasLogout: request.params?.includeLogout,
                                                                        nameContains: request.params?.nameContains,
-                                                                       pageOption: request.params?.pageOptions) {
+                                                                       pageOption: request.params?.pageOptions)
+            {
                 return Persona(fromRecord: foundPersonaRecord)
             }
             return nil
@@ -149,12 +177,13 @@ extension WebPublicApiMessageResolver {
         else {
             return false
         }
-        let profiles = ProfileRepository.queryProfile(identifier: request.params?.options?.profileIdentifier,
-                                                      network: nil,
-                                                      nameContains: request.params?.options?.nameContains,
-                                                      pageOption: request.params?.options?.pageOptions)
+        
+        let identifier = request.params?.options?.profileIdentifier
+        let profile = ProfileRepository.queryProfile(identifier: identifier,
+                                                     network: nil,
+                                                     nameContains: request.params?.options?.nameContains)
         let persona: Persona? = {
-            if let profile = profiles.first, let personaRecord = profile.linkedPersona {
+            if let profile = profile, let personaRecord = profile.linkedPersona {
                 return Persona(fromRecord: personaRecord)
             } else {
                 return nil
@@ -205,13 +234,15 @@ extension WebPublicApiMessageResolver {
 }
 
 // MARK: - Profile methods handler
+
 extension WebPublicApiMessageResolver {
     @discardableResult
     func createProfile(messageData: Data) -> Bool {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<CreateProfileParam>.self, from: messageData),
-              let newProfile = request.params?.profile else {
-                  return false
-              }
+              let newProfile = request.params?.profile
+        else {
+            return false
+        }
         ProfileRepository.createProfile(profile: newProfile,
                                         context: ProfileRepository.viewContext)
         sendResponseToWebView(response: true, id: request.id)
@@ -223,12 +254,12 @@ extension WebPublicApiMessageResolver {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryProfileParam>.self, from: messageData) else {
             return false
         }
-        let profileRecords = ProfileRepository.queryProfile(identifier: request.params?.options?.identifier,
-                                                            network: request.params?.options?.network,
-                                                            nameContains: request.params?.options?.nameContains,
-                                                            pageOption: request.params?.options?.pageOptions)
+        let identifier = request.params?.options?.identifier
+        let profileRecord = ProfileRepository.queryProfile(identifier: identifier,
+                                                           network: request.params?.options?.network,
+                                                           nameContains: request.params?.options?.nameContains)
         let profile: Profile? = {
-            if let profileRecord = profileRecords.first {
+            if let profileRecord = profileRecord {
                 return Profile(fromRecord: profileRecord)
             } else {
                 return nil
@@ -241,7 +272,8 @@ extension WebPublicApiMessageResolver {
     @discardableResult
     func queryProfiles(messageData: Data) -> Bool {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryProfilesParam>.self,
-                                                from: messageData) else {
+                                                from: messageData)
+        else {
             return false
         }
         let profileRecords = ProfileRepository.queryProfiles(identifiers: request.params?.identifiers,
@@ -258,7 +290,8 @@ extension WebPublicApiMessageResolver {
     @discardableResult
     func deleteProfile(messageData: Data) -> Bool {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<DeleteProfileParam>.self,
-                                                from: messageData) else {
+                                                from: messageData)
+        else {
             return false
         }
         guard let identifier = request.params?.identifier else {
@@ -272,7 +305,8 @@ extension WebPublicApiMessageResolver {
     @discardableResult
     func updateProfile(messageData: Data) -> Bool {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<UpdateProfileParam>.self,
-                                                from: messageData) else {
+                                                from: messageData)
+        else {
             return false
         }
         guard let newProfile = request.params?.profile else {
@@ -287,13 +321,15 @@ extension WebPublicApiMessageResolver {
     @discardableResult
     func attachProfile(messageData: Data) -> Bool {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<AttachProfileParam>.self,
-                                                from: messageData) else {
+                                                from: messageData)
+        else {
             return false
         }
         guard let profileIdentifier = request.params?.profileIdentifier,
-              let personaIdentifier = request.params?.personaIdentifier else {
-                  return false
-              }
+              let personaIdentifier = request.params?.personaIdentifier
+        else {
+            return false
+        }
         PersonaManager.attachProfile(personaIdentifier: personaIdentifier,
                                      profileIdentifier: profileIdentifier)
         sendResponseToWebView(response: true, id: request.id)
@@ -303,7 +339,8 @@ extension WebPublicApiMessageResolver {
     @discardableResult
     func detachProfile(messageData: Data) -> Bool {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<DetachProfileParam>.self,
-                                                from: messageData) else {
+                                                from: messageData)
+        else {
             return false
         }
         guard let profileIdentifier = request.params?.identifier else {
@@ -316,11 +353,13 @@ extension WebPublicApiMessageResolver {
 }
 
 // MARK: - Relation methods handler
+
 extension WebPublicApiMessageResolver {
     @discardableResult
     func createRelation(messageData: Data) -> Bool {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<CreateRelationParam>.self,
-                                                from: messageData) else {
+                                                from: messageData)
+        else {
             return false
         }
         guard let newRelation = request.params?.relation else {
@@ -334,16 +373,19 @@ extension WebPublicApiMessageResolver {
     @discardableResult
     func queryRelation(messageData: Data) -> Bool {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryRelationParam>.self,
-                                                from: messageData) else {
+                                                from: messageData)
+        else {
             return false
         }
         guard let param = request.params else { return false }
         let relations: [Relation] = {
             if let personaIdentifier = param.personaIdentifier,
-               let profileIdentifier = param.profileIdentifier {
+               let profileIdentifier = param.profileIdentifier
+            {
                 if let relationRecord = RelationRepository.queryRelation(personaIdentifier: personaIdentifier,
                                                                          profileIdentifier: profileIdentifier),
-                   let relation = Relation(from: relationRecord) {
+                    let relation = Relation(from: relationRecord)
+                {
                     return [relation]
                 }
             } else {
@@ -359,7 +401,8 @@ extension WebPublicApiMessageResolver {
     @discardableResult
     func queryRelations(messageData: Data) -> Bool {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryRelationsParam>.self,
-                                                from: messageData) else {
+                                                from: messageData)
+        else {
             return false
         }
         // TODO: Favor from JS should not be String type
@@ -378,7 +421,8 @@ extension WebPublicApiMessageResolver {
     @discardableResult
     func updateRelation(messageData: Data) -> Bool {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<UpdateRelationParam>.self,
-                                                from: messageData) else {
+                                                from: messageData)
+        else {
             return false
         }
         guard let newRelation = request.params?.relation else {
@@ -387,5 +431,131 @@ extension WebPublicApiMessageResolver {
         RelationRepository.updateRelation(newRelation: newRelation)
         sendResponseToWebView(response: true, id: request.id)
         return true
+    }
+    
+    // MARK: - Avatar methods handler
+    
+    @discardableResult
+    func queryAvatar(messageData: Data) -> Bool {
+        guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryAvatarParam>.self,
+                                                from: messageData)
+        else {
+            return false
+        }
+        guard let identifier = request.params?.identifier else { return false }
+        if let profileRecord = ProfileRepository.queryProfile(identifier: identifier) {
+            if let avatar = profileRecord.avatar {
+                self.getImageFromKingfisher(url: avatar, requestId: request.id)
+                return true
+            }
+        }
+        if let personarecord = PersonaRepository.queryPersona(identifier: identifier) {
+            if let avatar = personarecord.avatar {
+                self.getImageFromKingfisher(url: avatar, requestId: request.id)
+                return true
+            }
+        }
+        return false
+    }
+    
+    @discardableResult
+    func storeAvatar(messageData: Data) -> Bool {
+        guard let request = try? decoder.decode(WebPublicApiMessageRequest<StoreAvatarParam>.self,
+                                                from: messageData)
+        else {
+            return false
+        }
+        guard let identifier = request.params?.identifier else { return false }
+        guard let avatar = request.params?.avatar else { return false }
+        if ProfileRepository.queryProfile(identifier: identifier) != nil {
+            ProfileRepository.updateProfileAvatar(identifier: identifier, avatar: avatar)
+            return true
+        }
+        if PersonaRepository.queryPersona(identifier: identifier) != nil {
+            PersonaRepository.updatePersonaAvatar(identifier: identifier, avatar: avatar)
+            return true
+        }
+        return false
+    }
+    
+    // MARK: - Post methods handler
+    
+    @discardableResult
+    func createPost(messageData: Data) -> Bool {
+        guard let request = try? decoder.decode(WebPublicApiMessageRequest<CreatePostParam>.self,
+                                                from: messageData)
+        else {
+            return false
+        }
+        guard let para = request.params else { return false }
+        PostRepository.createPost(post: para.post)
+        sendResponseToWebView(response: para.post, id: request.id)
+        return true
+    }
+    
+    @discardableResult
+    func queryPost(messageData: Data) -> Bool {
+        guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryPostParam>.self,
+                                                from: messageData)
+        else {
+            return false
+        }
+        guard let identifier = request.params?.identifier else { return false }
+        let post = PostRepository.queryPost(identifier: identifier)
+            .flatMap {
+                Post(fromRecord: $0)
+            }
+        sendResponseToWebView(response: post, id: request.id)
+        return true
+    }
+    
+    @discardableResult
+    func queryPosts(messageData: Data) -> Bool {
+        guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryPostParam>.self,
+                                                from: messageData)
+        else {
+            return false
+        }
+        guard let queryParams = request.params else { return false }
+        let postRecords = PostRepository.queryPosts(encryptBy: queryParams.encryptBy,
+                                                    userIds: queryParams.userIds,
+                                                    network: queryParams.network,
+                                                    pageOption: queryParams.pageOption)
+        let posts = postRecords.map { Post(fromRecord: $0) }
+        sendResponseToWebView(response: posts, id: request.id)
+        return true
+    }
+    
+    @discardableResult
+    func updatePost(messageData: Data) -> Bool {
+        guard let request = try? decoder.decode(WebPublicApiMessageRequest<UpdatePostParam>.self,
+                                                from: messageData)
+        else {
+            return false
+        }
+        guard let updateParams = request.params else { return false }
+        if let postRecord = PostRepository.updatePost(post: updateParams.post,
+                                                      mode: updateParams.options.mode)
+        {
+            let post = Post(fromRecord: postRecord)
+            sendResponseToWebView(response: post, id: request.id)
+            return true
+        }
+        return false
+    }
+    
+    func getImageFromKingfisher(url: String, requestId: String) {
+        KingfisherManager.shared.retrieveImage(with: URL(string: url)!,
+                                               options: nil,
+                                               progressBlock: nil,
+                                               downloadTaskUpdated: nil) { [weak self] result in
+            switch result {
+            case .success(let value):
+                self?.sendResponseToWebView(response: value.image.convertImageToBase64String(), id: requestId)
+                
+            case .failure(let error):
+                log.debug("\(error)")
+            }
+        }
     }
 }
