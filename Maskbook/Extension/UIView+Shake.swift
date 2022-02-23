@@ -37,7 +37,7 @@ extension UIView {
         position.calculationMode = CAAnimationCalculationMode.linear
         position.isRemovedOnCompletion = false
         position.repeatCount = Float.greatestFiniteMagnitude
-        position.beginTime = CFTimeInterval(Double.random(in: 1 ..< 1_000).truncatingRemainder(dividingBy: Double(25)) / Double(100))
+        position.beginTime = CFTimeInterval(Double.random(in: 1 ..< 1_000).truncatingRemainder(dividingBy: 25.0) / 100.0)
         position.isAdditive = true
 
         let transform = CAKeyframeAnimation(keyPath: "transform")
@@ -53,7 +53,7 @@ extension UIView {
         transform.isRemovedOnCompletion = false
         transform.repeatCount = Float.greatestFiniteMagnitude
         transform.isAdditive = true
-        transform.beginTime = CFTimeInterval(Double.random(in: 1 ..< 1_000).truncatingRemainder(dividingBy: Double(25)) / Double(100))
+        transform.beginTime = CFTimeInterval(Double.random(in: 1 ..< 1_000).truncatingRemainder(dividingBy: 25.0) / 100.0)
 
         layer.add(position, forKey: "shakePosition")
         layer.add(transform, forKey: "shakeTransform")
