@@ -260,11 +260,8 @@ separated by spaces";
 "Scene.PersonaContacts.Delete" = "Confirm to delete ";
 "Scene.PersonaContacts.EmptyContactsTips" = "You don’t have encrypted friends. 
 Invite friends to download Mask Network.";
-"Scene.PersonaDownload.DownloadTips" = "This QR saves your identity code, please keep it safely. You can use Mask APP to scan QR to login persona. ";
-"Scene.PersonaDownload.IdentityId" = "Identity ID";
-"Scene.PersonaDownload.MaskId" = "MASK ID";
-"Scene.PersonaDownload.Persona" = "Persona:";
-"Scene.PersonaDownload.PrivateKey" = "Private Key";
+"Scene.PersonaDownload.DownloadTips" = "The QR code encrypts the identity code or private key of your persona. It’s recommended to print it. You can use Mask App to scan the QR code to login.";
+"Scene.PersonaDownload.IdentityId" = "Identity Code";
 "Scene.PersonaExportPrivateKey.BackupRecovery" = "Backup and Recovery";
 "Scene.PersonaExportPrivateKey.Tips" = "This export is only for exporting private key. We do not export any other data. If you need more data, please go to Settings: ";
 "Scene.PersonaExportPrivateKey.Title" = "Export Private Key";

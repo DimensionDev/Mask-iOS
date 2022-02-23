@@ -531,11 +531,8 @@
             "add": "add"
         },
         "persona_download": {
-            "persona": "Persona:",
-            "mask_id": "MASK ID",
-            "private_key": "Private Key",
-            "identity_id": "Identity ID",
-            "download_tips": "This QR saves your identity code, please keep it safely. You can use Mask APP to scan QR to login persona. "
+            "identity_id": "Identity Code",
+            "download_tips": "The QR code encrypts the identity code or private key of your persona. It’s recommended to print it. You can use Mask App to scan the QR code to login."
         },
         "wallet_balance": {
             "btn_swap": "Swap",

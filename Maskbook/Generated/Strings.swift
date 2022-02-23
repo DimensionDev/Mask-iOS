@@ -1216,25 +1216,13 @@ enum L10n {
     }
 
     enum PersonaDownload {
-      /// This QR saves your identity code, please keep it safely. You can use Mask APP to scan QR to login persona. 
+      /// The QR code encrypts the identity code or private key of your persona. It’s recommended to print it. You can use Mask App to scan the QR code to login.
       static var downloadTips: String {
         return L10n.tr("Localizable", "Scene.PersonaDownload.DownloadTips")
       }
-      /// Identity ID
+      /// Identity Code
       static var identityId: String {
         return L10n.tr("Localizable", "Scene.PersonaDownload.IdentityId")
-      }
-      /// MASK ID
-      static var maskId: String {
-        return L10n.tr("Localizable", "Scene.PersonaDownload.MaskId")
-      }
-      /// Persona:
-      static var persona: String {
-        return L10n.tr("Localizable", "Scene.PersonaDownload.Persona")
-      }
-      /// Private Key
-      static var privateKey: String {
-        return L10n.tr("Localizable", "Scene.PersonaDownload.PrivateKey")
       }
     }
 
