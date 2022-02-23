@@ -13,7 +13,8 @@ import UIKit
 class BalanceTokenCell: UITableViewCell {
     private var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .clear
+        view.backgroundColor = Asset.Colors.Public.Background.dark.color
+        view.applyCornerRadius(radius: 8)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -65,7 +66,7 @@ class BalanceTokenCell: UITableViewCell {
         selectionStyle = .none
         backgroundColor = .clear
         
-        containerView.layoutMargins = UIEdgeInsets(top: 24, left: 2, bottom: 8, right: 2)
+        containerView.layoutMargins = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
         
         contentView.addSubview(containerView)
         containerView.addSubview(tokenIconImageView)
@@ -76,14 +77,15 @@ class BalanceTokenCell: UITableViewCell {
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: contentView.readableContentGuide.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: contentView.readableContentGuide.trailingAnchor),
-            containerView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            containerView.heightAnchor.constraint(equalToConstant: 79),
-            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor,
+                                               constant: 6),
+            containerView.heightAnchor.constraint(equalToConstant: 63),
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,
+                                                  constant: -6)
         ])
         
         NSLayoutConstraint.activate([
-            tokenIconImageView.leadingAnchor.constraint(equalTo: containerView.layoutMarginsGuide.leadingAnchor,
-                                                       constant: 2),
+            tokenIconImageView.leadingAnchor.constraint(equalTo: containerView.layoutMarginsGuide.leadingAnchor),
             tokenIconImageView.topAnchor.constraint(equalTo: containerView.layoutMarginsGuide.topAnchor, constant: 4),
             tokenIconImageView.widthAnchor.constraint(equalToConstant: 49),
             tokenIconImageView.heightAnchor.constraint(equalToConstant: 38)
@@ -100,7 +102,9 @@ class BalanceTokenCell: UITableViewCell {
         tokenAmountlabel.setContentCompressionResistancePriority(.required - 1, for: .horizontal)
         NSLayoutConstraint.activate([
             tokenAmountlabel.leadingAnchor.constraint(equalTo: tokenNameLabel.leadingAnchor),
-            tokenAmountlabel.bottomAnchor.constraint(equalTo: containerView.layoutMarginsGuide.bottomAnchor)
+            tokenAmountlabel.bottomAnchor.constraint(equalTo: containerView.layoutMarginsGuide.bottomAnchor),
+            tokenAmountlabel.topAnchor.constraint(equalTo: tokenNameLabel.bottomAnchor,
+                                                  constant: 2)
         ])
         
         tokenBalanceLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
@@ -161,9 +165,9 @@ class BalanceTokenCell: UITableViewCell {
         super.prepareForReuse()
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        let newColor: UIColor = isSelected ? Asset.Colors.Public.Background.info.color : Asset.Colors.Background.normal.color
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        let newColor: UIColor = highlighted ? Asset.Colors.Public.Background.info.color : Asset.Colors.Public.Background.dark.color
         self.containerView.backgroundColor = newColor
     }
 }
