@@ -177,16 +177,13 @@ extension WebPublicApiMessageResolver {
         else {
             return false
         }
-        var identifiers = [String]()
-        if let identifier = request.params?.options?.profileIdentifier {
-            identifiers.append(identifier)
-        }
-        let profiles = ProfileRepository.queryProfiles(identifiers: identifiers,
-                                                       network: nil,
-                                                       nameContains: request.params?.options?.nameContains,
-                                                       pageOption: request.params?.options?.pageOptions)
+        
+        let identifier = request.params?.options?.profileIdentifier
+        let profile = ProfileRepository.queryProfile(identifier: identifier,
+                                                     network: nil,
+                                                     nameContains: request.params?.options?.nameContains)
         let persona: Persona? = {
-            if let profile = profiles.first, let personaRecord = profile.linkedPersona {
+            if let profile = profile, let personaRecord = profile.linkedPersona {
                 return Persona(fromRecord: personaRecord)
             } else {
                 return nil
@@ -257,16 +254,12 @@ extension WebPublicApiMessageResolver {
         guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryProfileParam>.self, from: messageData) else {
             return false
         }
-        var identifiers = [String]()
-        if let identifier = request.params?.options?.identifier {
-            identifiers.append(identifier)
-        }
-        let profileRecords = ProfileRepository.queryProfiles(identifiers: identifiers,
-                                                             network: request.params?.options?.network,
-                                                             nameContains: request.params?.options?.nameContains,
-                                                             pageOption: request.params?.options?.pageOptions)
+        let identifier = request.params?.options?.identifier
+        let profileRecord = ProfileRepository.queryProfile(identifier: identifier,
+                                                           network: request.params?.options?.network,
+                                                           nameContains: request.params?.options?.nameContains)
         let profile: Profile? = {
-            if let profileRecord = profileRecords.first {
+            if let profileRecord = profileRecord {
                 return Profile(fromRecord: profileRecord)
             } else {
                 return nil
