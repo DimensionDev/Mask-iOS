@@ -105,6 +105,14 @@ internal enum Asset {
       internal static let background1 = ColorAsset(name: "Colors/TokenDetail/Background1")
       internal static let background2 = ColorAsset(name: "Colors/TokenDetail/Background2")
       internal static let shadow = ColorAsset(name: "Colors/TokenDetail/Shadow")
+      internal enum Chains {
+        internal static let arbitrum = ColorAsset(name: "Colors/TokenDetail/chains/arbitrum")
+        internal static let bsc = ColorAsset(name: "Colors/TokenDetail/chains/bsc")
+        internal static let eth = ColorAsset(name: "Colors/TokenDetail/chains/eth")
+        internal static let matic = ColorAsset(name: "Colors/TokenDetail/chains/matic")
+        internal static let optimism = ColorAsset(name: "Colors/TokenDetail/chains/optimism")
+        internal static let xdai = ColorAsset(name: "Colors/TokenDetail/chains/xdai")
+      }
     }
     internal enum Twitter {
       internal static let buttonText = ColorAsset(name: "Colors/Twitter/buttonText")
@@ -134,7 +142,9 @@ internal enum Asset {
     }
     internal static let segmentShadow = ColorAsset(name: "Colors/segmentShadow")
     internal enum Shadow {
+      internal static let accoundCard = ColorAsset(name: "Colors/shadow/accoundCard")
       internal static let primaryButton = ColorAsset(name: "Colors/shadow/primaryButton")
+      internal static let sendButton = ColorAsset(name: "Colors/shadow/sendButton")
       internal static let sesondaryButton = ColorAsset(name: "Colors/shadow/sesondaryButton")
       internal static let socialShadow = ColorAsset(name: "Colors/shadow/socialShadow")
     }
@@ -169,6 +179,7 @@ internal enum Asset {
       internal enum Balance {
         internal static let accountBgMask1 = ImageAsset(name: "Images/Scene/Balance/accountBgMask1")
         internal static let accountBgMask2 = ImageAsset(name: "Images/Scene/Balance/accountBgMask2")
+        internal static let accountBgMask3 = ImageAsset(name: "Images/Scene/Balance/accountBgMask3")
         internal static let accountBgWc = ImageAsset(name: "Images/Scene/Balance/accountBgWc")
         internal enum Chain {
           internal static let all = ImageAsset(name: "Images/Scene/Balance/chain/all")
@@ -177,6 +188,14 @@ internal enum Asset {
           internal static let eth = ImageAsset(name: "Images/Scene/Balance/chain/eth")
           internal static let matic = ImageAsset(name: "Images/Scene/Balance/chain/matic")
           internal static let xdai = ImageAsset(name: "Images/Scene/Balance/chain/xdai")
+        }
+        internal enum ChainBg {
+          internal static let all = ImageAsset(name: "Images/Scene/Balance/chainBg/all")
+          internal static let arbitrium = ImageAsset(name: "Images/Scene/Balance/chainBg/arbitrium")
+          internal static let bsc = ImageAsset(name: "Images/Scene/Balance/chainBg/bsc")
+          internal static let eth = ImageAsset(name: "Images/Scene/Balance/chainBg/eth")
+          internal static let matic = ImageAsset(name: "Images/Scene/Balance/chainBg/matic")
+          internal static let xdai = ImageAsset(name: "Images/Scene/Balance/chainBg/xdai")
         }
         internal static let copyButton = ImageAsset(name: "Images/Scene/Balance/copyButton")
         internal static let emptyToken = ImageAsset(name: "Images/Scene/Balance/emptyToken")
@@ -254,6 +273,7 @@ internal enum Asset {
         internal static let scan = ImageAsset(name: "Images/Scene/SendTransaction/Scan")
         internal static let upload = ImageAsset(name: "Images/Scene/SendTransaction/Upload")
         internal static let arrow = ImageAsset(name: "Images/Scene/SendTransaction/arrow")
+        internal static let receive = ImageAsset(name: "Images/Scene/SendTransaction/receive")
         internal static let scanLine = ImageAsset(name: "Images/Scene/SendTransaction/scanLine")
         internal static let search = ImageAsset(name: "Images/Scene/SendTransaction/search")
       }

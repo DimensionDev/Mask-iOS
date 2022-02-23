@@ -528,15 +528,13 @@ extension TransactionHistory {
         
         self.gasFee = NSDecimalNumber(decimal: transaction.tx?.eth_gas_fee ?? 0).multiplying(by: NSDecimalNumber(mantissa: 1, exponent: Int16(18), isNegative: false)).decimalValue
         
-        let gasFee: NSDecimalNumber = {
-            if let ethGasFee = transaction.tx?.eth_gas_fee,
-               ethGasFee > .zero {
-                return NSDecimalNumber(decimal: ethGasFee)
+        let price: NSDecimalNumber = {
+            if transaction.tx?.eth_gas_fee == .zero {
+                return .zero
             }
-            return NSDecimalNumber(1)
+            return NSDecimalNumber(decimal: transaction.tx?
+                                            .usd_gas_fee ?? 0).dividing(by: NSDecimalNumber(decimal: transaction.tx?.eth_gas_fee ?? 1))
         }()
-        let price = NSDecimalNumber(decimal: transaction.tx?
-                                        .usd_gas_fee ?? 0).dividing(by: gasFee)
         self.gasPrice = price.decimalValue
         self.timeAt = TimeInterval(transaction.time_at ?? 0)
         let decimals = asset?.decimals ?? 1

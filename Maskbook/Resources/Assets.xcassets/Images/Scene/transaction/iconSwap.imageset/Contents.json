@@ -1,17 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Filter.pdf",
-      "idiom" : "universal"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
-      "filename" : "Filter-1.pdf",
+      "filename" : "Download1.pdf",
       "idiom" : "universal"
     }
   ],

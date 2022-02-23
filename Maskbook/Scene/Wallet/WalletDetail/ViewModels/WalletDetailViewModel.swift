@@ -46,12 +46,12 @@ class WalletDetailViewModel {
             items.append(chainItem)
             items.append(renameItem)
         }
+        items.append(historyItem)
         
         if !account.fromWalletConnect {
             items.append(backupItem)
         }
         
-        items.append(historyItem)
         if account.isDeletable {
             if account.fromWalletConnect {
                 let disconnect = WalletsItem.disconnect(title: L10n.Scene.WalletConnect.disconnect)
