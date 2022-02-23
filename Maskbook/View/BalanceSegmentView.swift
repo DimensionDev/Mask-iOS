@@ -58,7 +58,7 @@ extension BalanceSegmentView {
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         
-        indicatorView.backgroundColor = maskTintColor
+        indicatorView.backgroundColor = Asset.Colors.Public.blue.color
         indicatorView.layer.cornerRadius = 1.5
         indicatorView.layer.cornerCurve = .continuous
         indicatorView.clipsToBounds = true
