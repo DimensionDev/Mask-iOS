@@ -15,11 +15,6 @@ class AvatarView: UIView {
         return view
     }()
     
-    lazy var imageView: UIImageView = {
-        let imageView = UIImageView()
-        return imageView
-    }()
-    
     var title: String? {
         set {
             if let first = newValue?.uppercased().first {
@@ -31,53 +26,32 @@ class AvatarView: UIView {
         }
         
         get {
-            label.text
+            return label.text
         }
-    }
-    
-    func setNetworkURL(url: String?) {
-        if let url = url {
-            imageView.setNetworkImage(url: url)
-        }
-    }
-    
-    init() {
-        super.init(frame: .zero)
-        setupSubviews()
     }
     
     init(title: String?) {
         super.init(frame: .zero)
-        setupSubviews()
+        
+        self.backgroundColor = Asset.Colors.Public.blue.color
+        self.addSubview(label)
+        
         self.title = title
-    }
-    
-    func setupSubviews() {
-        backgroundColor = Asset.Colors.Public.blue.color
-        withSubViews {
-            label
-            imageView
-        }
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            label.centerYAnchor.constraint(equalTo: centerYAnchor),
-            label.centerXAnchor.constraint(equalTo: centerXAnchor)
-        ])
-        NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            imageView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            label.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            label.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ])
     }
     
-    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        label.font = .systemFont(ofSize: floor(frame.height * 0.5), weight: .semibold)
+        self.label.font = .systemFont(ofSize: floor(self.frame.height * 0.5), weight: .semibold)
     }
 }
 

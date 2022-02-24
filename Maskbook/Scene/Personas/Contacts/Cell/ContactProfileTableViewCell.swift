@@ -8,7 +8,6 @@
 
 import UIKit
 import UStack
-import CoreDataStack
 
 class ContactProfileTableViewCell: UITableViewCell {
     private var avatarView: AvatarView = {
@@ -113,10 +112,9 @@ class ContactProfileTableViewCell: UITableViewCell {
         super.prepareForReuse()
     }
     
-    func config(profile: ProfileRecord) {
+    func config(profile: Profile) {
         socialIDLabel.text = profile.socialID
-        avatarView.title = profile.nickname ?? profile.nonOptionalIdentifier.components(separatedBy: "/").last
-        avatarView.setNetworkURL(url: profile.avatar)
+        avatarView.title = profile.nickname ?? profile.identifier.components(separatedBy: "/").last
         platformIcon.image = profile.socialPlatform.icon
         if profile.linkedPersona != nil {
             inviteButton.isHidden = true

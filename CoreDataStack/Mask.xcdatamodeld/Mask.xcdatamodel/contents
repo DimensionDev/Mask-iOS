@@ -100,7 +100,6 @@
         </uniquenessConstraints>
     </entity>
     <entity name="PersonaRecord" representedClassName=".PersonaRecord" syncable="YES">
-        <attribute name="avatar" optional="YES" attributeType="String"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="hasLogout" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="identifier" attributeType="String"/>
@@ -136,27 +135,7 @@
         <attribute name="totalValue" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="account" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="portfolios" inverseEntity="Account"/>
     </entity>
-    <entity name="PostRecord" representedClassName=".PostRecord" syncable="YES">
-        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="encryptBy" optional="YES" attributeType="String"/>
-        <attribute name="foundAt" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="identifier" attributeType="String"/>
-        <attribute name="interestedMetaRaw" optional="YES" attributeType="Binary" valueTransformerName="ArrayTransformer" customClassName=".NSArray"/>
-        <attribute name="postCryptoKeyRaw" optional="YES" attributeType="Binary" valueTransformerName="JsonWebKeyTransformer" customClassName=".JsonWebKey"/>
-        <attribute name="postNetwork" attributeType="String"/>
-        <attribute name="postUserId" attributeType="String"/>
-        <attribute name="recipientsRaw" attributeType="Binary" valueTransformerName="DictionaryTransformer" customClassName=".NSDictionary"/>
-        <attribute name="summary" optional="YES" attributeType="String"/>
-        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="url" optional="YES" attributeType="String"/>
-        <uniquenessConstraints>
-            <uniquenessConstraint>
-                <constraint value="identifier"/>
-            </uniquenessConstraint>
-        </uniquenessConstraints>
-    </entity>
     <entity name="ProfileRecord" representedClassName=".ProfileRecord" syncable="YES">
-        <attribute name="avatar" optional="YES" attributeType="String"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="identifier" attributeType="String"/>
         <attribute name="network" attributeType="String"/>
@@ -233,13 +212,12 @@
         <element name="Contact" positionX="250.05859375" positionY="93.7265625" width="128" height="149"/>
         <element name="DeletedDerivationPath" positionX="90" positionY="144" width="128" height="59"/>
         <element name="LocalStorage" positionX="90" positionY="144" width="128" height="104"/>
-        <element name="PersonaRecord" positionX="90" positionY="144" width="128" height="239"/>
+        <element name="PersonaRecord" positionX="90" positionY="144" width="128" height="224"/>
         <element name="Portfolio" positionX="90" positionY="144" width="128" height="239"/>
-        <element name="ProfileRecord" positionX="99" positionY="153" width="128" height="134"/>
-        <element name="RelationRecord" positionX="108" positionY="162" width="128" height="104"/>
+        <element name="ProfileRecord" positionX="99" positionY="153" width="128" height="119"/>
         <element name="StoredKey" positionX="90" positionY="144" width="128" height="179"/>
         <element name="Token" positionX="-63" positionY="-18" width="128" height="254"/>
         <element name="WalletConnectSession" positionX="90" positionY="144" width="128" height="89"/>
-        <element name="PostRecord" positionX="90" positionY="144" width="128" height="209"/>
+        <element name="RelationRecord" positionX="108" positionY="162" width="128" height="104"/>
     </elements>
 </model>

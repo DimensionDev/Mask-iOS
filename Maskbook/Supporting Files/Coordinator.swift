@@ -197,17 +197,10 @@ class Coordinator {
         
         present(scene: .mainTab(selectedTab: .personas), transition: .modal(animated: false, adaptiveDelegate: maskSocialVC))
         
-        // If all data (legacy wallets info and indexedDB data) has migrated to
-        // native side, we do not need to wait for the extension JS scripts to
-        // finish executing
-        let needToWaitExtensionFinishLoaded =
-        !settings.legacyWalletsImported || !settings.indexedDBDataMigrated
-        if needToWaitExtensionFinishLoaded {
-            let welcomeVC = WelcomeViewController()
-            welcomeVC.modalPresentationStyle = .fullScreen
-            welcomeVC.modalPresentationCapturesStatusBarAppearance = true
-            UIApplication.getTopViewController()?.present(welcomeVC, animated: false, completion: nil)
-        }
+        let welcomeVC = WelcomeViewController()
+        welcomeVC.modalPresentationStyle = .fullScreen
+        welcomeVC.modalPresentationCapturesStatusBarAppearance = true
+        UIApplication.getTopViewController()?.present(welcomeVC, animated: false, completion: nil)
     }
 
     // swiftlint:disable cyclomatic_complexity

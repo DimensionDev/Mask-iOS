@@ -9,7 +9,6 @@
 import Combine
 import Foundation
 import UIKit
-import UStack
 
 class WalletConnectSelectWalletViewController: UIViewController {
     var disposeBag = Set<AnyCancellable>()
@@ -59,46 +58,11 @@ class WalletConnectSelectWalletViewController: UIViewController {
         button.isEnabled = true
         return button
     }()
-    
-    private lazy var emptyImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = Asset.Images.Scene.Balance.emptyToken.image
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-
-    private lazy var emptyTipsLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = Asset.Colors.Text.light.color
-        label.font = FontStyles.MH6
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        return label
-    }()
-
-    private lazy var emptyView: UIStackView = VStackView(spacing: 11,
-                                                         distribution: StackView.Distribution.fill,
-                                                         alignment: StackView.Alignment.center) {
-        emptyImageView
-            .cv.apply {
-                NSLayoutConstraint.activate([
-                    $0.widthAnchor.constraint(equalToConstant: 64),
-                    $0.heightAnchor.constraint(equalToConstant: 64)
-                ])
-            }
-        emptyTipsLabel
-            .cv.apply {
-                NSLayoutConstraint.activate([
-                    $0.widthAnchor.constraint(equalToConstant: 260)
-                ])
-            }
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtonsView()
         setupCollectionView()
-        setupEmptyView()
         subscribeSignal()
     }
 
@@ -168,8 +132,6 @@ class WalletConnectSelectWalletViewController: UIViewController {
         collectionView.reloadData()
         buttonLeftArrow.isHidden = viewModel.wallets.value.count <= 1
         buttonRightArrow.isHidden = viewModel.wallets.value.count <= 1
-        emptyTipsLabel.text = L10n.Scene.WalletConnect.noWallets(self.walletConnectClient.currentSelectedBlockchainNetworkSubject.value.shortName)
-        emptyView.isHidden = !viewModel.wallets.value.isEmpty
     }
 
     func setupButtonsView() {
@@ -248,16 +210,6 @@ class WalletConnectSelectWalletViewController: UIViewController {
             buttonRightArrow.heightAnchor.constraint(equalToConstant: 25),
             buttonRightArrow.widthAnchor.constraint(equalToConstant: 25),
             buttonRightArrow.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor, constant: 20)
-        ])
-    }
-    
-    func setupEmptyView() {
-        view.withSubViews {
-            emptyView
-        }
-        NSLayoutConstraint.activate([
-            emptyView.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor),
-            emptyView.centerYAnchor.constraint(equalTo: collectionView.centerYAnchor)
         ])
     }
 

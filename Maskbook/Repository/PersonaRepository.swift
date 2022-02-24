@@ -222,11 +222,4 @@ enum PersonaRepository {
             
         }
     }
-    
-    static func updatePersonaAvatar(identifier: String, avatar: String) {
-        if let personaRecord = Self.queryPersona(identifier: identifier) {
-            personaRecord.avatar = avatar
-            try? viewContext.saveOrRollback()
-        }
-    }
 }

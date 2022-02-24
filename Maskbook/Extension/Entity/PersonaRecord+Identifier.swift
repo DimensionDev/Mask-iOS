@@ -6,8 +6,8 @@
 //  Copyright © 2022 dimension. All rights reserved.
 //
 
-import CoreDataStack
 import Foundation
+import CoreDataStack
 
 extension PersonaRecord {
     var nonOptionalIdentifier: String {

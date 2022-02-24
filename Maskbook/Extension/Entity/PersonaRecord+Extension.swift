@@ -17,4 +17,8 @@ extension PersonaRecord {
         }
         return identifier
     }
+    
+    var isDownloadable: Bool {
+        return self.mnemonic != nil
+    }
 }

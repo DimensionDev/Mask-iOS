@@ -40,6 +40,8 @@ target 'Maskbook' do
   
   pod 'RSKPlaceholderTextView', '~> 6.0.0'
   
+  pod 'UITextField+Shake', '~> 1.2'
+  
   pod 'BMPlayer', '~> 1.3.0'
   
   # Web3

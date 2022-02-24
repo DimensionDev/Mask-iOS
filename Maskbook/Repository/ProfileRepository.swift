@@ -36,7 +36,8 @@ enum ProfileRepository {
     static func queryProfile(identifier: String?,
                              network: String? = nil,
                              nameContains: String? = nil,
-                             context: NSManagedObjectContext? = viewContext) -> ProfileRecord? {
+                             pageOption: PageOption? = nil,
+                             context: NSManagedObjectContext? = viewContext) -> [ProfileRecord] {
         do {
             let queryContext = context ?? viewContext
             let fetchRequest = ProfileRecord.sortedFetchRequest
@@ -44,10 +45,14 @@ enum ProfileRepository {
                 identifier: identifier,
                 network: network,
                 nameContains: nameContains)
-                fetchRequest.fetchLimit = 1
-            return try queryContext.fetch(fetchRequest).first
+            if let pageOption = pageOption {
+                fetchRequest.fetchLimit = pageOption.pageSize
+                fetchRequest.fetchOffset = pageOption.pageOffset
+            }
+            
+            return try queryContext.fetch(fetchRequest)
         } catch {
-            return nil
+            return []
         }
     }
     
@@ -86,7 +91,7 @@ enum ProfileRepository {
     
     static func updateProfile(newProfile: Profile,
                               createWhenNotExist: Bool? = nil) {
-        let toUpdateProfile = Self.queryProfile(identifier: newProfile.identifier)
+        let toUpdateProfile = Self.queryProfile(identifier: newProfile.identifier).first
         if toUpdateProfile == nil {
             if createWhenNotExist.boolValue {
                 Self.createProfile(profile: newProfile, context: viewContext)
@@ -98,7 +103,7 @@ enum ProfileRepository {
     }
     
     static func removeProfile(identifier: String) {
-        if let profile = Self.queryProfile(identifier: identifier) {
+        if let profile = Self.queryProfile(identifier: identifier).first {
             viewContext.delete(profile)
             try? viewContext.saveOrRollback()
         }
@@ -107,7 +112,7 @@ enum ProfileRepository {
     // swiftlint:disable empty_count
     static func attachProfile(personaIdentifier: String,
                               profileIdentifier: String) {
-        var profileRecord = ProfileRepository.queryProfile(identifier: profileIdentifier)
+        var profileRecord = ProfileRepository.queryProfile(identifier: profileIdentifier).first
         
         // Create a new profile if not exist
         if profileRecord == nil {
@@ -115,7 +120,7 @@ enum ProfileRepository {
                 return
             }
             ProfileRepository.createProfile(profile: newProfile, context: ProfileRepository.viewContext)
-            profileRecord = ProfileRepository.queryProfile(identifier: profileIdentifier)
+            profileRecord = ProfileRepository.queryProfile(identifier: profileIdentifier).first
         }
         guard let validProfileRecord = profileRecord else {
             return
@@ -140,19 +145,12 @@ enum ProfileRepository {
     // swiftlint:enable empty_count
     
     static func detachProfile(identifier: String) {
-        guard let profile = Self.queryProfile(identifier: identifier) else {
+        guard let profile = Self.queryProfile(identifier: identifier).first else {
             return
         }
         guard let persona = profile.linkedPersona else { return }
         persona.removeFromLinkedProfiles(profile)
         profile.linkedPersona = nil
         try? viewContext.saveOrRollback()
-    }
-    
-    static func updateProfileAvatar(identifier: String,avatar: String) {
-        if let profile = Self.queryProfile(identifier: identifier) {
-            profile.avatar = avatar
-            try? viewContext.saveOrRollback()
-        }
     }
 }

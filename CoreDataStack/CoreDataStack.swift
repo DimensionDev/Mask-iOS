@@ -40,7 +40,6 @@ public final class CoreDataStack {
         CoreDataStack.load(persistentContainer: container)
         container.backgroundContext = container.newBackgroundContext()
         container.backgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-        container.backgroundContext.automaticallyMergesChangesFromParent = true
         return container
     }
     

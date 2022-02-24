@@ -1,6 +1,6 @@
+import UIKit
 import ImageIO
 import MobileCoreServices
-import UIKit
 
 extension DBImageDecoder {
     var image: UIImage? {
@@ -38,7 +38,7 @@ extension DBImageDecoder {
                 downsamplingLevel: downsamplingLevel,
                 decodingOptions: DecodingOptions(
                     mode: .asynchronous,
-                    fitSize: maxSize
+                    sizeForDrawing: maxSize
                 )
             ) else {
                 continue

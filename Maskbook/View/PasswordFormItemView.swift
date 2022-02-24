@@ -9,6 +9,7 @@
 import Combine
 import OSLog
 import UIKit
+import UITextField_Shake
 
 class PasswordFormItemView: UIView {
     lazy var passwordTitleLabel: UILabel = {

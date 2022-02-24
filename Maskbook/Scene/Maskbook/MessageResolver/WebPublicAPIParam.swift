@@ -151,35 +151,6 @@ struct DeleteRelationParam: Decodable {
     let profileIdentifier: String
 }
 
-struct QueryAvatarParam: Decodable {
-    let identifier: String
-}
-
-struct StoreAvatarParam: Decodable {
-    let identifier: String?
-    let avatar: String?
-}
-
-struct CreatePostParam: Decodable {
-    let post: Post
-}
-
-struct QueryPostParam: Decodable {
-    let identifier: String?
-    let encryptBy: String?
-    let userIds: [String]?
-    let network: String?
-    let pageOption: PageOption?
-}
-
-struct UpdatePostParam: Decodable {
-    struct UpdatePostParamOptions: Decodable {
-        let mode: PostRepository.Mode
-    }
-    let post: Post
-    let options: UpdatePostParamOptions
-}
-
 // MARK: - Plugins
 struct NotifyRedpacketParam: Decodable {
     let redpacketPayload: String

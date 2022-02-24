@@ -54,15 +54,17 @@ extension Profile {
     }
     
     var socialPlatform: ProfileSocialPlatform {
-        return Self.getSocialPlatformFromIdentifier(identifier) ?? .twitter
+        for profileSocialPlatform in ProfileSocialPlatform.allCases.enumerated() {
+            if self.identifier.contains(profileSocialPlatform.element.url) {
+                return profileSocialPlatform.element.self
+            }
+        }
+        return .twitter
     }
     
     static func getSocialPlatformFromIdentifier(_ identifier: String) -> ProfileSocialPlatform? {
-        guard let platformString = identifier.components(separatedBy: "/").first else {
-            return nil
-        }
         for profileSocialPlatform in ProfileSocialPlatform.allCases.enumerated() {
-            if platformString.contains(profileSocialPlatform.element.url) {
+            if identifier.contains(profileSocialPlatform.element.url) {
                 return profileSocialPlatform.element.self
             }
         }
@@ -80,9 +82,9 @@ extension Profile: Codable {
         updatedAt = try container.decode(Double.self, forKey: .updatedAt)
         
         var networkString = ProfileSocialPlatform.twitter.url
-        for profileSocialPlatform in ProfileSocialPlatform.allCases {
-            if identifier.contains(profileSocialPlatform.url) {
-                networkString = profileSocialPlatform.url
+        for profileSocialPlatform in ProfileSocialPlatform.allCases.enumerated() {
+            if identifier.contains(profileSocialPlatform.element.url) {
+                networkString = profileSocialPlatform.element.url
             }
         }
         network = networkString

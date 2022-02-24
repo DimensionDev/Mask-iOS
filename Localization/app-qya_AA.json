@@ -113,10 +113,6 @@
                 "title": "crwdns13424:0crwdne13424:0",
                 "description": "crwdns13426:0%scrwdne13426:0"
             },
-            "download_identity_code": {
-                "title": "crwdns14536:0crwdne14536:0",
-                "description": "crwdns14538:0%scrwdne14538:0"
-            },
             "backup_tips_no_backup_password": {
                 "title": "crwdns13428:0crwdne13428:0",
                 "description": "crwdns13430:0%scrwdne13430:0"
@@ -489,7 +485,7 @@
                 "change_add_persona": "crwdns13946:0crwdne13946:0",
                 "rename": "crwdns13948:0crwdne13948:0",
                 "export_private_key": "crwdns13950:0crwdne13950:0",
-                "download": "crwdns14540:0crwdne14540:0",
+                "download": "crwdns13952:0crwdne13952:0",
                 "backup": "crwdns13954:0crwdne13954:0",
                 "log_out": "crwdns13956:0crwdne13956:0",
                 "delete": "crwdns13958:0crwdne13958:0"
@@ -744,7 +740,6 @@
             "scan_q_r_code": "crwdns14322:0crwdne14322:0",
             "qr_code_tips": "crwdns14324:0crwdne14324:0",
             "tap_to_copy": "crwdns14326:0crwdne14326:0",
-            "no_wallets": "crwdns14542:0%scrwdne14542:0",
             "connecting": "crwdns14328:0crwdne14328:0",
             "connect_success": "crwdns14330:0crwdne14330:0",
             "scan": "crwdns14332:0crwdne14332:0",
