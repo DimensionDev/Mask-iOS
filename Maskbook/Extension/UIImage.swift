@@ -110,3 +110,9 @@ extension UIImage {
                 .withRenderingMode(.alwaysTemplate)
     }
 }
+
+extension UIImage {
+    func convertImageToBase64String() -> String {
+        self.jpegData(compressionQuality: 1)?.base64EncodedString() ?? ""
+    }
+}
