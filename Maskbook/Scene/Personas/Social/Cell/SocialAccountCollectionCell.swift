@@ -9,9 +9,10 @@
 import Combine
 import Foundation
 import UIKit
+import CoreDataStack
 
 protocol SocialAccountCollectionCellDelegate: AnyObject {
-    func deleteAction(profile: Profile)
+    func deleteAction(profileIdentifier: String)
 }
 
 class SocialAccountCollectionCell: UICollectionViewCell { 
@@ -108,24 +109,30 @@ class SocialAccountCollectionCell: UICollectionViewCell {
         ])
     }
     
-    func configWith(profile: Profile) {
+    func configWith(profile: ProfileRecord) {
         titleLabel.text = profile.socialID
         avatarView.title = String(profile.socialID.dropFirst())
+        avatarView.setNetworkURL(url: profile.avatar)
         platformView.image = profile.socialPlatform.icon
         deleteImageView
             .cv.tapGesture()
             .sink { [weak self] _ in
-                self?.deleteAction(profile: profile)
+                self?.deleteAction(profileIdentifier: profile.nonOptionalIdentifier)
             }
             .store(in: &disposeBag)
     }
     
     func setEditMode(isEditing: Bool) {
         deleteImageView.isHidden = !isEditing
+        if isEditing {
+            self.shakeWhenDelete()
+        } else {
+            self.removeShakeWhenDelete()
+        }
     }
     
-    func deleteAction(profile: Profile) {
-        delegate?.deleteAction(profile: profile)
+    func deleteAction(profileIdentifier: String) {
+        delegate?.deleteAction(profileIdentifier: profileIdentifier)
     }
 }
 

@@ -113,6 +113,10 @@
                 "title": "",
                 "description": ""
             },
+            "download_identity_code": {
+                "title": "",
+                "description": ""
+            },
             "backup_tips_no_backup_password": {
                 "title": "",
                 "description": ""
@@ -740,6 +744,7 @@
             "scan_q_r_code": "",
             "qr_code_tips": "",
             "tap_to_copy": "",
+            "no_wallets": "",
             "connecting": "",
             "connect_success": "",
             "scan": "",

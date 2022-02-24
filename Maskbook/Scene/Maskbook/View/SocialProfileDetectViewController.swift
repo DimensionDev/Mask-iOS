@@ -159,6 +159,7 @@ class SocialProfileDetectViewController: UIViewController {
         view.addSubview(connectButton)
         
         avatarView.title = String(viewModel.persona?.nickname?.dropFirst() ?? "")
+        avatarView.setNetworkURL(url: viewModel.persona?.avatar)
         
         let connected = viewModel.profiles.first?.connected ?? false
         hintTitle.text = connected ? L10n.Scene.Social.accountAlreadyConnected : L10n.Scene.Social.connectToMaskNetwork

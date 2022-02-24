@@ -144,6 +144,9 @@
 		1FEE1EAC27845E1F00697F81 /* Web3+signTX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE1EAB27845E1F00697F81 /* Web3+signTX.swift */; };
 		2A0C16AF2666713D0085524E /* StoredKeyImportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0C16AE2666713D0085524E /* StoredKeyImportType.swift */; };
 		2A18E7FB266C9D210045BC88 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A18E7FA266C9D210045BC88 /* AvatarView.swift */; };
+		2A23A64C27C499E800CC5AD9 /* Shape+Fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A23A64A27C499E800CC5AD9 /* Shape+Fill.swift */; };
+		2A23A64D27C499E800CC5AD9 /* KFImage+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A23A64B27C499E800CC5AD9 /* KFImage+Network.swift */; };
+		2A23A65027C4B67D00CC5AD9 /* SwiftUI+Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A23A64F27C4B67D00CC5AD9 /* SwiftUI+Asset.swift */; };
 		2A3050C526A01B370003EECC /* OpenSeaProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3050C326A01B370003EECC /* OpenSeaProvider.swift */; };
 		2A3050C626A01B370003EECC /* NFTAssetsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3050C426A01B370003EECC /* NFTAssetsModel.swift */; };
 		2A35603E265D008100FB1D3B /* FontStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A35603D265D008100FB1D3B /* FontStyles.swift */; };
@@ -580,6 +583,13 @@
 		41E5004E27A11AFF00A73117 /* WebPublicApiMessageResolver+Plugins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E5004D27A11AFF00A73117 /* WebPublicApiMessageResolver+Plugins.swift */; };
 		5D069E0B27A16E2800054B4A /* TertiaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D069E0A27A16E2800054B4A /* TertiaryButton.swift */; };
 		5D114FE527B256790092BEDC /* PersonaRecord+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D114FE427B256790092BEDC /* PersonaRecord+Extension.swift */; };
+		5D114FE527B256790092BEDC /* PersonaRecord+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D114FE427B256790092BEDC /* PersonaRecord+Identifier.swift */; };
+		5D3E364727BE2D0200FDCFDD /* PostRecord+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3E364527BE2D0200FDCFDD /* PostRecord+CoreDataClass.swift */; };
+		5D3E364827BE2D0200FDCFDD /* PostRecord+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3E364627BE2D0200FDCFDD /* PostRecord+CoreDataProperties.swift */; };
+		5D3E364A27BE310C00FDCFDD /* PostRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3E364927BE310C00FDCFDD /* PostRecord.swift */; };
+		5D3E364C27BF41DE00FDCFDD /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3E364B27BF41DE00FDCFDD /* PostRepository.swift */; };
+		5D3E364E27BF503000FDCFDD /* PostRecord+Managed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3E364D27BF503000FDCFDD /* PostRecord+Managed.swift */; };
+		5D3E365027BF706500FDCFDD /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3E364F27BF706500FDCFDD /* Post.swift */; };
 		5D3F361A27A1524B007FDD8C /* RedPackageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3F361927A1524B007FDD8C /* RedPackageView.swift */; };
 		5D4AD18926560B02002D5380 /* HitTestExpandedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4AD18826560B02002D5380 /* HitTestExpandedButton.swift */; };
 		5D554EC6279FE58100D40848 /* OpenRedPackageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D554EC5279FE58100D40848 /* OpenRedPackageViewController.swift */; };
@@ -587,12 +597,14 @@
 		5D72F3C7265E3FE50073F6B9 /* KeyboardResponderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D72F3C6265E3FE50073F6B9 /* KeyboardResponderService.swift */; };
 		5D7F5A5127B6531E00A007C5 /* PersonaCreateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7F5A5027B6531E00A007C5 /* PersonaCreateHandler.swift */; };
 		5D7F5A5327B66C5600A007C5 /* PersonaKeyInfoPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7F5A5227B66C5600A007C5 /* PersonaKeyInfoPreview.swift */; };
+		5D7FE83827BD32D80066CF23 /* ProfileRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7FE83727BD32D80066CF23 /* ProfileRecord.swift */; };
 		5D84DC4D27B12B810009025E /* WebViewScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D84DC4C27B12B810009025E /* WebViewScrollViewDelegate.swift */; };
 		5D93DF9E267B2B5000A175BF /* MaskTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D93DF9D267B2B5000A175BF /* MaskTextField.swift */; };
 		5D93DFA2267B3F2E00A175BF /* Persona.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D93DFA1267B3F2E00A175BF /* Persona.swift */; };
 		5D9988EC2653E2610070ED17 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9988EB2653E2610070ED17 /* Strings.swift */; };
 		5D99DEC926788A7A006E345D /* MaskSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D99DEC826788A7A006E345D /* MaskSegmentControl.swift */; };
 		5D9A88DC27BB4AE200879068 /* PersonaDownloadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A88DB27BB4AE200879068 /* PersonaDownloadHandler.swift */; };
+		5DAC90B727C5D0B100BAFB23 /* UIView+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAC90B627C5D0B100BAFB23 /* UIView+Shake.swift */; };
 		5DB39E2B278694460025337C /* JSDocumentResourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2A278694460025337C /* JSDocumentResourceManager.swift */; };
 		5DB39E2E27869F6C0025337C /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2D27869F6C0025337C /* DebugView.swift */; };
 		5DB39E302786A4E40025337C /* JSResourceSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2F2786A4E40025337C /* JSResourceSelectView.swift */; };
@@ -834,6 +846,9 @@
 		2491189963AA026084035682 /* Pods_MaskbookTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaskbookTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A0C16AE2666713D0085524E /* StoredKeyImportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredKeyImportType.swift; sourceTree = "<group>"; };
 		2A18E7FA266C9D210045BC88 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
+		2A23A64A27C499E800CC5AD9 /* Shape+Fill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shape+Fill.swift"; sourceTree = "<group>"; };
+		2A23A64B27C499E800CC5AD9 /* KFImage+Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KFImage+Network.swift"; sourceTree = "<group>"; };
+		2A23A64F27C4B67D00CC5AD9 /* SwiftUI+Asset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Asset.swift"; sourceTree = "<group>"; };
 		2A3050C326A01B370003EECC /* OpenSeaProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenSeaProvider.swift; sourceTree = "<group>"; };
 		2A3050C426A01B370003EECC /* NFTAssetsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFTAssetsModel.swift; sourceTree = "<group>"; };
 		2A35603D265D008100FB1D3B /* FontStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyles.swift; sourceTree = "<group>"; };
@@ -1268,6 +1283,13 @@
 		544E28E62A824CEE315F61DF /* Pods-Maskbook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maskbook.release.xcconfig"; path = "Target Support Files/Pods-Maskbook/Pods-Maskbook.release.xcconfig"; sourceTree = "<group>"; };
 		5D069E0A27A16E2800054B4A /* TertiaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TertiaryButton.swift; sourceTree = "<group>"; };
 		5D114FE427B256790092BEDC /* PersonaRecord+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonaRecord+Extension.swift"; sourceTree = "<group>"; };
+		5D114FE427B256790092BEDC /* PersonaRecord+Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonaRecord+Identifier.swift"; sourceTree = "<group>"; };
+		5D3E364527BE2D0200FDCFDD /* PostRecord+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostRecord+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5D3E364627BE2D0200FDCFDD /* PostRecord+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostRecord+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5D3E364927BE310C00FDCFDD /* PostRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRecord.swift; sourceTree = "<group>"; };
+		5D3E364B27BF41DE00FDCFDD /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
+		5D3E364D27BF503000FDCFDD /* PostRecord+Managed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostRecord+Managed.swift"; sourceTree = "<group>"; };
+		5D3E364F27BF706500FDCFDD /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		5D3F361927A1524B007FDD8C /* RedPackageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPackageView.swift; sourceTree = "<group>"; };
 		5D4AD18826560B02002D5380 /* HitTestExpandedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HitTestExpandedButton.swift; sourceTree = "<group>"; };
 		5D554EC5279FE58100D40848 /* OpenRedPackageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenRedPackageViewController.swift; sourceTree = "<group>"; };
@@ -1275,12 +1297,14 @@
 		5D72F3C6265E3FE50073F6B9 /* KeyboardResponderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponderService.swift; sourceTree = "<group>"; };
 		5D7F5A5027B6531E00A007C5 /* PersonaCreateHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaCreateHandler.swift; sourceTree = "<group>"; };
 		5D7F5A5227B66C5600A007C5 /* PersonaKeyInfoPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaKeyInfoPreview.swift; sourceTree = "<group>"; };
+		5D7FE83727BD32D80066CF23 /* ProfileRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRecord.swift; sourceTree = "<group>"; };
 		5D84DC4C27B12B810009025E /* WebViewScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewScrollViewDelegate.swift; sourceTree = "<group>"; };
 		5D93DF9D267B2B5000A175BF /* MaskTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskTextField.swift; sourceTree = "<group>"; };
 		5D93DFA1267B3F2E00A175BF /* Persona.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persona.swift; sourceTree = "<group>"; };
 		5D9988EB2653E2610070ED17 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		5D99DEC826788A7A006E345D /* MaskSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskSegmentControl.swift; sourceTree = "<group>"; };
 		5D9A88DB27BB4AE200879068 /* PersonaDownloadHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaDownloadHandler.swift; sourceTree = "<group>"; };
+		5DAC90B627C5D0B100BAFB23 /* UIView+Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shake.swift"; sourceTree = "<group>"; };
 		5DB39E2A278694460025337C /* JSDocumentResourceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSDocumentResourceManager.swift; sourceTree = "<group>"; };
 		5DB39E2D27869F6C0025337C /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		5DB39E2F2786A4E40025337C /* JSResourceSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSResourceSelectView.swift; sourceTree = "<group>"; };
@@ -1507,6 +1531,8 @@
 		0FBC5AB1266759BC00328693 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				5D3E364527BE2D0200FDCFDD /* PostRecord+CoreDataClass.swift */,
+				5D3E364627BE2D0200FDCFDD /* PostRecord+CoreDataProperties.swift */,
 				41E50037279946E400A73117 /* PersonaRecord+CoreDataClass.swift */,
 				41E50038279946E400A73117 /* PersonaRecord+CoreDataProperties.swift */,
 				41E50039279946E400A73117 /* ProfileRecord+CoreDataClass.swift */,
@@ -1537,6 +1563,7 @@
 				41E500082791361E00A73117 /* PersonaRecord+Managed.swift */,
 				41E5000A2791CA9B00A73117 /* ProfileRecord+Managed.swift */,
 				41E500332799315B00A73117 /* RelationRecord+Managed.swift */,
+				5D3E364D27BF503000FDCFDD /* PostRecord+Managed.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1600,6 +1627,7 @@
 				5D7F5A5027B6531E00A007C5 /* PersonaCreateHandler.swift */,
 				5D9A88DB27BB4AE200879068 /* PersonaDownloadHandler.swift */,
 				5D7F5A5227B66C5600A007C5 /* PersonaKeyInfoPreview.swift */,
+				5D3E364F27BF706500FDCFDD /* Post.swift */,
 			);
 			path = Persona;
 			sourceTree = "<group>";
@@ -1728,6 +1756,25 @@
 				1FB8151627B65F9B00A2A3BE /* WKScriptMessageHandled.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		2A23A64927C499E800CC5AD9 /* Expand */ = {
+			isa = PBXGroup;
+			children = (
+				2A23A64A27C499E800CC5AD9 /* Shape+Fill.swift */,
+				2A23A64B27C499E800CC5AD9 /* KFImage+Network.swift */,
+			);
+			path = Expand;
+			sourceTree = "<group>";
+		};
+		2A23A64E27C4B66B00CC5AD9 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				2AF8861A271EEDF80004565A /* SwiftUI+Text.swift */,
+				2A23A64F27C4B67D00CC5AD9 /* SwiftUI+Asset.swift */,
+				2AF88627271EEDF80004565A /* SwiftUI+Color.swift */,
+			);
+			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 		2A3050C226A01B370003EECC /* OpenSea */ = {
@@ -3051,6 +3098,7 @@
 		2AF885F6271EED7D0004565A /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				2A23A64927C499E800CC5AD9 /* Expand */,
 				2AF885F7271EED7D0004565A /* AttributedText.swift */,
 				2AF885F8271EED7D0004565A /* SheetContainerModifier.swift */,
 				2AF885F9271EED7D0004565A /* MoveFromBottomModifier.swift */,
@@ -3064,11 +3112,12 @@
 		2AF88618271EEDF80004565A /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				2A23A64E27C4B66B00CC5AD9 /* SwiftUI */,
 				2DC5D89C272574FA00E351D3 /* Entity */,
 				2AF88619271EEDF80004565A /* UIApplication+extension.swift */,
+				5DAC90B627C5D0B100BAFB23 /* UIView+Shake.swift */,
 				2D1FDD852769EC05002E5C91 /* Managed+extension.swift */,
 				2D2ED7B3272FEBC7004B7408 /* NSMutableAttributedString+extension.swift */,
-				2AF8861A271EEDF80004565A /* SwiftUI+Text.swift */,
 				2AF8861B271EEDF80004565A /* Array+Safety.swift */,
 				2AF8861C271EEDF80004565A /* Publisher+extension.swift */,
 				2AF8861D271EEDF80004565A /* NSLayoutConstraint.swift */,
@@ -3081,7 +3130,6 @@
 				2AF88624271EEDF80004565A /* UIViewController+SocialBack.swift */,
 				2AF88625271EEDF80004565A /* UICollectionView+extension.swift */,
 				2AF88626271EEDF80004565A /* Date+Compare.swift */,
-				2AF88627271EEDF80004565A /* SwiftUI+Color.swift */,
 				2AF88628271EEDF80004565A /* UserDefaults+extension.swift */,
 				2AF88629271EEDF80004565A /* EthUtil.swift */,
 				2AF8862A271EEDF80004565A /* Result+extension.swift */,
@@ -3215,6 +3263,9 @@
 				2DC5D89E272574FA00E351D3 /* LocalStorage+extension.swift */,
 				2DC5D89F272574FA00E351D3 /* BlobStorage+extension.swift */,
 				5D114FE427B256790092BEDC /* PersonaRecord+Extension.swift */,
+				5D114FE427B256790092BEDC /* PersonaRecord+Identifier.swift */,
+				5D7FE83727BD32D80066CF23 /* ProfileRecord.swift */,
+				5D3E364927BE310C00FDCFDD /* PostRecord.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -3234,6 +3285,7 @@
 				41E5002727955E5200A73117 /* ProfileRepository.swift */,
 				41E50047279BFA5500A73117 /* IndexedDBDataMigrator.swift */,
 				41E50049279BFB3600A73117 /* RelationRepository.swift */,
+				5D3E364B27BF41DE00FDCFDD /* PostRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -3813,9 +3865,11 @@
 				0FBC5AE42667614500328693 /* Managed.swift in Sources */,
 				0FBC5ADD26675B6F00328693 /* CoreDataStack.swift in Sources */,
 				1FE54D49269947640041C742 /* NSManagedContext+extension.swift in Sources */,
+				5D3E364727BE2D0200FDCFDD /* PostRecord+CoreDataClass.swift in Sources */,
 				2DC651F7271E6CAB00BABA9C /* BlobStorage+CoreDataProperties.swift in Sources */,
 				41E500342799315B00A73117 /* RelationRecord+Managed.swift in Sources */,
 				41E5000B2791CA9B00A73117 /* ProfileRecord+Managed.swift in Sources */,
+				5D3E364E27BF503000FDCFDD /* PostRecord+Managed.swift in Sources */,
 				0FBC5ADC26675B0F00328693 /* URL.swift in Sources */,
 				2DC651F9271E6CAB00BABA9C /* LocalStorage+CoreDataProperties.swift in Sources */,
 				0F07028826AFE77C00C04F77 /* DeletedDerivationPath+CoreDataClass.swift in Sources */,
@@ -3825,6 +3879,7 @@
 				2DEDDEA82761ED7000D37A76 /* WalletConnectSession+CoreDataClass.swift in Sources */,
 				0F07028926AFE77C00C04F77 /* DeletedDerivationPath+CoreDataProperties.swift in Sources */,
 				0F93936F26A7AE9400F7F608 /* StoredKey+CoreDataClass.swift in Sources */,
+				5D3E364827BE2D0200FDCFDD /* PostRecord+CoreDataProperties.swift in Sources */,
 				0F93937426A7AE9400F7F608 /* Account+CoreDataProperties.swift in Sources */,
 				0FBC5AE12667611300328693 /* NSManagedObjectContext.swift in Sources */,
 				41E50042279946E400A73117 /* RelationRecord+CoreDataProperties.swift in Sources */,
@@ -4041,6 +4096,7 @@
 				2AF8851F271EE9310004565A /* TokenCardView.swift in Sources */,
 				2A6ABBB82720053B00CC3AED /* RemoteBackupActionsViewController.swift in Sources */,
 				2DA3FAB4273CDFBA0013A784 /* ChainInfo.swift in Sources */,
+				5D3E364A27BE310C00FDCFDD /* PostRecord.swift in Sources */,
 				2D6677FA27688FBE00528F4D /* WCRequestsHandler.swift in Sources */,
 				0F2051B3265E3B2F00602A0C /* DerivationPath.swift in Sources */,
 				2A6ABB932720053B00CC3AED /* RestorePreviewResult.swift in Sources */,
@@ -4168,6 +4224,7 @@
 				2AF884BF271EE9300004565A /* PluginFactory.swift in Sources */,
 				1FCBEDF62738FFEB001C3637 /* RestoreWalletPasswordVertifyView.swift in Sources */,
 				2AF884BD271EE9300004565A /* WebPublicApiMessageResolver.swift in Sources */,
+				5D3E365027BF706500FDCFDD /* Post.swift in Sources */,
 				2AF884C1271EE9300004565A /* MaskConnectingSocialViewController.swift in Sources */,
 				1FC638DD2726A172002D830B /* WalletBackupInfo.swift in Sources */,
 				1F57024027A2C1F600C96909 /* RedPacketShareViewModel.swift in Sources */,
@@ -4193,6 +4250,7 @@
 				2AF884CE271EE9300004565A /* MaskWebMessage+Persona+Backup.swift in Sources */,
 				2AF8856A271EE9310004565A /* CreateWalletWithNameViewController.swift in Sources */,
 				6F25328427C773AB000C0D27 /* NFTActionViewModel.swift in Sources */,
+				2A23A65027C4B67D00CC5AD9 /* SwiftUI+Asset.swift in Sources */,
 				5D7F5A5327B66C5600A007C5 /* PersonaKeyInfoPreview.swift in Sources */,
 				2AF884EC271EE9310004565A /* SizeMeasureModifier.swift in Sources */,
 				2A96349027A26A5C0019C4CA /* HappyRedPacketV4.swift in Sources */,
@@ -4214,6 +4272,7 @@
 				2A6ABB912720053B00CC3AED /* ValidationCodeParameters.swift in Sources */,
 				2A6ABB822720053B00CC3AED /* SetPasswordViewController.swift in Sources */,
 				2A6ABBB62720053B00CC3AED /* RemoteBackupActionsView.swift in Sources */,
+				5D7FE83827BD32D80066CF23 /* ProfileRecord.swift in Sources */,
 				4156689327A53BA70051E0E7 /* ShareLinkGenerator.swift in Sources */,
 				1F721096279E90DC00B8BF76 /* RedPacket.swift in Sources */,
 				2AF88533271EE9310004565A /* DerivationPathHeaderView.swift in Sources */,
@@ -4223,6 +4282,7 @@
 				2A6ABBB12720053B00CC3AED /* SettingBackupViewController.swift in Sources */,
 				2AF88557271EE9310004565A /* SendTransactionCofirmPopViewController.swift in Sources */,
 				1FCAD13027585FFF00F90A3E /* TransakIntegratingController.swift in Sources */,
+				5D3E364C27BF41DE00FDCFDD /* PostRepository.swift in Sources */,
 				2AF88548271EE9310004565A /* WalletListAddViewModel.swift in Sources */,
 				2AF884F3271EE9310004565A /* IdentityCreateViewModel.swift in Sources */,
 				2AF88546271EE9310004565A /* ImportKeystoreViewController.swift in Sources */,
@@ -4243,6 +4303,7 @@
 				1FCBEE00273A48F6001C3637 /* RestoreWalletPasswordConfigView.swift in Sources */,
 				2A6ABBAE2720053B00CC3AED /* RemoteBackupSetEamilStrategy.swift in Sources */,
 				2AF8863A271EEDF80004565A /* Array+Safety.swift in Sources */,
+				2A23A64C27C499E800CC5AD9 /* Shape+Fill.swift in Sources */,
 				1F8AD0D026CA3BAE00C9694F /* SpinBallAnimator.swift in Sources */,
 				2AF88522271EE9310004565A /* ImportPrivateKeyViewController.swift in Sources */,
 				2AF8860B271EED7D0004565A /* PresentStyle.swift in Sources */,
@@ -4288,6 +4349,7 @@
 				0F41A088260B39EF000037B2 /* WalletAssetObserver.swift in Sources */,
 				2AF88579271EE9310004565A /* WalletListViewController+WalletListWalletTableViewCellDelegate.swift in Sources */,
 				2A6ABB992720053B00CC3AED /* RemoteRestoreVerifyView.swift in Sources */,
+				5DAC90B727C5D0B100BAFB23 /* UIView+Shake.swift in Sources */,
 				2AF8851C271EE9310004565A /* TokenDetailTokenCell.swift in Sources */,
 				1F8D6919272115F1001084D6 /* RemoteInfoBindingViewController.swift in Sources */,
 				DBAAF49522C35A7100017594 /* AppDelegate.swift in Sources */,
@@ -4312,6 +4374,7 @@
 				2AF88577271EE9310004565A /* WalletListViewModel.swift in Sources */,
 				2A6ABB8D2720053B00CC3AED /* RestoreItemProvider.swift in Sources */,
 				1FEE1EAC27845E1F00697F81 /* Web3+signTX.swift in Sources */,
+				2A23A64D27C499E800CC5AD9 /* KFImage+Network.swift in Sources */,
 				0FAF2F502669D25A00C1B577 /* Currency.swift in Sources */,
 				2AF88583271EE9310004565A /* WalletHistoryViewController.swift in Sources */,
 				2AF88514271EE9310004565A /* WalletDetailViewController.swift in Sources */,

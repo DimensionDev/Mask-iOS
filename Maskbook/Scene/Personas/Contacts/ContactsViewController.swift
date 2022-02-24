@@ -10,6 +10,7 @@ import Combine
 import Foundation
 import UIKit
 import UStack
+import CoreDataStack
 
 class ContactsViewController: BaseViewController {
     private var disposeBag = Set<AnyCancellable>()
@@ -153,10 +154,8 @@ extension ContactsViewController: UITableViewDataSource {
         let cell: ContactProfileTableViewCell = tableView.dequeCell(at: indexPath)
         let profileRecord = viewModel.profileRecordsSubject.value[safeIndex: indexPath.row]
 
-        if let profileRecord = profileRecord,
-           let profile = Profile(fromRecord: profileRecord)
-        {
-            cell.config(profile: profile)
+        if let profileRecord = profileRecord {
+            cell.config(profile: profileRecord)
             cell.inviteButton.removeTarget(self, action: #selector(shareAction(sender:)), for: .touchUpInside)
             cell.inviteButton.addTarget(self, action: #selector(shareAction(sender:)), for: .touchUpInside)
         } else {
