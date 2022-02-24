@@ -137,6 +137,12 @@ extension PersonaDownloadHandler: UIDocumentPickerDelegate {
         let fileName = "mask-persona-" + name + ".pdf"
         let pdfURL = url.appendingPathComponent(fileName)
         log.debug("write pdf to path \(pdfURL.absoluteString)", source: "persona")
-        pdfDocument?.write(to: pdfURL)
+        guard let pdfDocument = pdfDocument else { return }
+        let success = pdfDocument.write(to: pdfURL)
+        if success {
+            UIApplication.getTopViewController()?.view
+                .makeToast(L10n.Common.Toast.saved,
+                           position: .center)
+        }
     }
 }
