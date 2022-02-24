@@ -402,7 +402,10 @@
          "NFT_Detail": {
             "list_price": "List Price",
             "last_sale_Price": "Last Sale Price",
-            "floor_price": "Floor Price"
+            "floor_price": "Floor Price",
+            "save_photo":"Save to Photos",
+            "collection_web":"View Collection Website",
+            "etherscan":"View on Etherscan",
         },
         "sendTransaction":{
             "send":{

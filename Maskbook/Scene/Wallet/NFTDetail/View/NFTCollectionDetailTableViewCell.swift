@@ -13,6 +13,8 @@ import web3swift
 
 
 class NFTCollectionDetailTableViewCell: UITableViewCell {
+    var token: Collectible
+
     private var backView: UIView = {
         let view = UIView()
         view.applyCornerRadius(radius: 20)
@@ -95,11 +97,13 @@ class NFTCollectionDetailTableViewCell: UITableViewCell {
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        token = Collectible()
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initViews()
     }
     
     required init?(coder: NSCoder) {
+        token = Collectible()
         super.init(coder: coder)
         initViews()
     }
@@ -174,10 +178,11 @@ class NFTCollectionDetailTableViewCell: UITableViewCell {
     
     @objc
     private func moreButtonDidClick(sender: UIButton) {
-        
+        Coordinator.main.present(scene: .nftAction(nftToken: self.token), transition: .panModel(animated: true))
     }
     
     func setCollectionStauts(floor: NFTCollectionStatusModel, collection: NFTAssetPriceModel, token: Collectible){
+        self.token = token
         titleLabel.text = token.name
         collectionLabel.text = token.collectionName
         

@@ -1096,6 +1096,14 @@ enum L10n {
     }
 
     enum NftDetail {
+      /// View Collection Website
+      static var collectionWeb: String {
+        return L10n.tr("Localizable", "Scene.NftDetail.CollectionWeb")
+      }
+      /// View on Etherscan
+      static var etherscan: String {
+        return L10n.tr("Localizable", "Scene.NftDetail.Etherscan")
+      }
       /// Floor Price
       static var floorPrice: String {
         return L10n.tr("Localizable", "Scene.NftDetail.FloorPrice")
@@ -1107,6 +1115,10 @@ enum L10n {
       /// List Price
       static var listPrice: String {
         return L10n.tr("Localizable", "Scene.NftDetail.ListPrice")
+      }
+      /// Save to Photos
+      static var savePhoto: String {
+        return L10n.tr("Localizable", "Scene.NftDetail.SavePhoto")
       }
     }
 
