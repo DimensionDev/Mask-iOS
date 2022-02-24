@@ -551,6 +551,13 @@ enum L10n {
         return L10n.tr("Localizable", "Common.Controls.WebviewGoBack")
       }
     }
+
+    enum Toast {
+      /// Saved！
+      static var saved: String {
+        return L10n.tr("Localizable", "Common.Toast.Saved")
+      }
+    }
   }
 
   enum Scene {

@@ -105,6 +105,7 @@
 "Common.Controls.Verify" = "Verify";
 "Common.Controls.WebviewGoBack" = "Back";
 "Common.Loading" = "Loading...";
+"Common.Toast.Saved" = "Saved！";
 "Scene.App.GoodLuckNextTime" = "Better Luck next time";
 "Scene.App.MarketTrendSource" = "Market trend source";
 "Scene.App.PluginIntroduction.FileService" = "Decentralized file storage for users.";

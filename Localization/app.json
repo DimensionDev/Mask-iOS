@@ -167,6 +167,9 @@
             "skip": "Skip, download later",
             "download_next": "I downloaded, next"
         },
+        "toast": {
+            "saved": "Saved！"
+        },
         "loading": "Loading..."
     },
     "scene": {

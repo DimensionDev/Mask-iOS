@@ -50,6 +50,7 @@ struct PersonaKeyInfoPreview: View {
                     .foregroundColor(Asset.Colors.Gradient.blue2.asColor())
                     .font(FontStyles.rh7.font)
             }
+            .offset(x: 5, y: 0)
             Spacer()
         }
         .padding(.init(top: 120,
