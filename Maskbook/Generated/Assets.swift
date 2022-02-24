@@ -28,8 +28,12 @@ internal enum Asset {
       internal static let addressText = ColorAsset(name: "Colors/AccountCard/address_text")
       internal static let buttonBg = ColorAsset(name: "Colors/AccountCard/button_bg")
       internal enum Chains {
+        internal static let all1 = ColorAsset(name: "Colors/AccountCard/chains/all1")
+        internal static let all2 = ColorAsset(name: "Colors/AccountCard/chains/all2")
         internal static let arbitrum1 = ColorAsset(name: "Colors/AccountCard/chains/arbitrum1")
         internal static let arbitrum2 = ColorAsset(name: "Colors/AccountCard/chains/arbitrum2")
+        internal static let bottomEnd = ColorAsset(name: "Colors/AccountCard/chains/bottomEnd")
+        internal static let bottomStart = ColorAsset(name: "Colors/AccountCard/chains/bottomStart")
         internal static let bsc1 = ColorAsset(name: "Colors/AccountCard/chains/bsc1")
         internal static let bsc2 = ColorAsset(name: "Colors/AccountCard/chains/bsc2")
         internal static let eth1 = ColorAsset(name: "Colors/AccountCard/chains/eth1")

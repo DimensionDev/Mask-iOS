@@ -43,11 +43,12 @@ class BalanceAccountCell: UITableViewCell {
         button.titleLabel?.font = FontStyles.bh5.uifont
         button.backgroundColor = Asset.Colors.Public.Background.dark.color
         button.applyCornerRadius(radius: 16)
+        button.layer.masksToBounds = false
         button.applyShadow(color: Asset.Colors.Shadow.sendButton.color,
                            alpha: 1,
                            x: 0,
                            y: 10,
-                           blur: 5,
+                           blur: 25,
                            cornerRadius: 16,
                            spread: 0)
         return button
@@ -64,7 +65,14 @@ class BalanceAccountCell: UITableViewCell {
         button.titleLabel?.font = FontStyles.bh5.uifont
         button.backgroundColor = Asset.Colors.Public.Background.dark.color
         button.applyCornerRadius(radius: 16)
-        
+        button.layer.masksToBounds = false
+        button.applyShadow(color: Asset.Colors.Shadow.sendButton.color,
+                           alpha: 1,
+                           x: 0,
+                           y: 10,
+                           blur: 25,
+                           cornerRadius: 16,
+                           spread: 0)
         return button
     }()
     
@@ -123,8 +131,8 @@ class BalanceAccountCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             accountCardView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 15),
-            accountCardView.leadingAnchor.constraint(equalTo: contentView.readableContentGuide.leadingAnchor, constant: 2),
-            accountCardView.trailingAnchor.constraint(equalTo: contentView.readableContentGuide.trailingAnchor, constant: -2),
+            accountCardView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 22.5),
+            accountCardView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -22.5),
             accountCardView.heightAnchor.constraint(equalToConstant: 186)
         ])
         
