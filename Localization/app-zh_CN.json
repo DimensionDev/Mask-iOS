@@ -534,7 +534,7 @@
         },
         "persona_download": {
             "identity_id": "身份代码",
-            "download_tips": ""
+            "download_tips": "二维码会加密您个人的身份码或私钥，建议打印它。您可以使用 Mask App 扫描二维码以登录。"
         },
         "wallet_balance": {
             "btn_swap": "兑换",
