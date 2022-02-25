@@ -27,6 +27,8 @@
 "Common.Alert.DisconnectProfile.Description" = "您确定要断开连接账户 ？ 断开连接后，此账户将无法解密解密 Mask Network 的信息。";
 "Common.Alert.DisconnectProfile.Title" = "断开社交账户 
  %@";
+"Common.Alert.DownloadIdentityCode.Description" = "请在下载身份二维码之前设置您的 %@。 ";
+"Common.Alert.DownloadIdentityCode.Title" = "设置备份密码 ";
 "Common.Alert.ExportPrivateKey.Description" = "请在导出私钥之前设置您的 %@。 ";
 "Common.Alert.ExportPrivateKey.Title" = "设置备份密码 ";
 "Common.Alert.FaceIdActivateFail.Description" = "启用面容ID失败。";
@@ -106,7 +108,7 @@
 "Scene.App.GoodLuckNextTime" = "祝您下次好运";
 "Scene.App.MarketTrendSource" = "市场趋势信息源";
 "Scene.App.PluginIntroduction.FileService" = "为用户提供去中心化文档存储功能。";
-"Scene.App.PluginIntroduction.Ito" = "允许用户在Twitter上直接购买令牌。";
+"Scene.App.PluginIntroduction.Ito" = "允许用户在Twitter上直接购买代币。";
 "Scene.App.PluginIntroduction.Luckydrop" = "发送红包(Token/NFT)，给加密好友带来惊喜。";
 "Scene.App.PluginIntroduction.Swap" = "通过Dex购买代币，无需额外费用和限制。";
 "Scene.App.PluginIntroduction.Transak" = "Transak 支持通过60多种货币购买代币。";
@@ -277,7 +279,7 @@ Clicking the confirm button means that you agree to bear the above possible risk
 "Scene.Personas.Action.Backup" = "备份";
 "Scene.Personas.Action.ChangeAddPersona" = "更改或添加角色";
 "Scene.Personas.Action.Delete" = "删除";
-"Scene.Personas.Action.Download" = "下载助记词";
+"Scene.Personas.Action.Download" = "下载身份二维码";
 "Scene.Personas.Action.ExportPrivateKey" = "导出私钥";
 "Scene.Personas.Action.LogOut" = "退出登录";
 "Scene.Personas.Action.Rename" = "重命名";
@@ -514,6 +516,7 @@ Clicking the confirm button means that you agree to bear the above possible risk
 "Scene.WalletConnect.Disconnect" = "断开连接";
 "Scene.WalletConnect.NetworkNotMatch" = "当前网络 %@ 与您正在连接的网络 %@ 不同。您想要将切换当前网络为 %@ 吗？";
 "Scene.WalletConnect.NetworkNotSupport" = "Mask Network 目前不支持钱包网络 %@ 。我们无法连接您的钱包。请手动切换您的钱包网络。";
+"Scene.WalletConnect.NoWallets" = "您还没有安装任何可用的 %@ 钱包用于 walletConnect";
 "Scene.WalletConnect.QrCodeTips" = "使用支持 WalletConnect 的钱包扫码下面的二维码";
 "Scene.WalletConnect.ReplaceWalletConnectWallet" = "这个钱包地址已连接到 WaletConnect。导入这个钱包地址会自动断开 WaletConnect 账户的连接。";
 "Scene.WalletConnect.Scan" = "扫描二维码";

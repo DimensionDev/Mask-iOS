@@ -582,7 +582,6 @@
 		41E5004C279C319C00A73117 /* Relation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E5004B279C319C00A73117 /* Relation.swift */; };
 		41E5004E27A11AFF00A73117 /* WebPublicApiMessageResolver+Plugins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E5004D27A11AFF00A73117 /* WebPublicApiMessageResolver+Plugins.swift */; };
 		5D069E0B27A16E2800054B4A /* TertiaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D069E0A27A16E2800054B4A /* TertiaryButton.swift */; };
-		5D114FE527B256790092BEDC /* PersonaRecord+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D114FE427B256790092BEDC /* PersonaRecord+Extension.swift */; };
 		5D114FE527B256790092BEDC /* PersonaRecord+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D114FE427B256790092BEDC /* PersonaRecord+Identifier.swift */; };
 		5D3E364727BE2D0200FDCFDD /* PostRecord+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3E364527BE2D0200FDCFDD /* PostRecord+CoreDataClass.swift */; };
 		5D3E364827BE2D0200FDCFDD /* PostRecord+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3E364627BE2D0200FDCFDD /* PostRecord+CoreDataProperties.swift */; };
@@ -609,6 +608,7 @@
 		5DB39E2E27869F6C0025337C /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2D27869F6C0025337C /* DebugView.swift */; };
 		5DB39E302786A4E40025337C /* JSResourceSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2F2786A4E40025337C /* JSResourceSelectView.swift */; };
 		5DB39E322786A8970025337C /* JSResourceSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E312786A8970025337C /* JSResourceSelectViewModel.swift */; };
+		5DCA069B27C75A8B007697C8 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCA069A27C75A8B007697C8 /* Toast.swift */; };
 		5DE1D5A227A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE1D5A127A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift */; };
 		5DE2B10F27BA60AC002ACA54 /* View+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE2B10E27BA60AC002ACA54 /* View+Snapshot.swift */; };
 		5DE5395727473599005F4CEA /* PanModalPresentable+color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5395627473599005F4CEA /* PanModalPresentable+color.swift */; };
@@ -1282,7 +1282,6 @@
 		4423BD6DC95BC7047B24A9B6 /* Pods_Maskbook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Maskbook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		544E28E62A824CEE315F61DF /* Pods-Maskbook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maskbook.release.xcconfig"; path = "Target Support Files/Pods-Maskbook/Pods-Maskbook.release.xcconfig"; sourceTree = "<group>"; };
 		5D069E0A27A16E2800054B4A /* TertiaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TertiaryButton.swift; sourceTree = "<group>"; };
-		5D114FE427B256790092BEDC /* PersonaRecord+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonaRecord+Extension.swift"; sourceTree = "<group>"; };
 		5D114FE427B256790092BEDC /* PersonaRecord+Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonaRecord+Identifier.swift"; sourceTree = "<group>"; };
 		5D3E364527BE2D0200FDCFDD /* PostRecord+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostRecord+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5D3E364627BE2D0200FDCFDD /* PostRecord+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostRecord+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -1309,6 +1308,7 @@
 		5DB39E2D27869F6C0025337C /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		5DB39E2F2786A4E40025337C /* JSResourceSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSResourceSelectView.swift; sourceTree = "<group>"; };
 		5DB39E312786A8970025337C /* JSResourceSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSResourceSelectViewModel.swift; sourceTree = "<group>"; };
+		5DCA069A27C75A8B007697C8 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		5DE1D5A127A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RedPacketInteractivePayload+Description.swift"; sourceTree = "<group>"; };
 		5DE2B10E27BA60AC002ACA54 /* View+Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Snapshot.swift"; sourceTree = "<group>"; };
 		5DE5395627473599005F4CEA /* PanModalPresentable+color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PanModalPresentable+color.swift"; sourceTree = "<group>"; };
@@ -3262,7 +3262,6 @@
 				2DC5D89D272574FA00E351D3 /* Account+WalletConnect.swift */,
 				2DC5D89E272574FA00E351D3 /* LocalStorage+extension.swift */,
 				2DC5D89F272574FA00E351D3 /* BlobStorage+extension.swift */,
-				5D114FE427B256790092BEDC /* PersonaRecord+Extension.swift */,
 				5D114FE427B256790092BEDC /* PersonaRecord+Identifier.swift */,
 				5D7FE83727BD32D80066CF23 /* ProfileRecord.swift */,
 				5D3E364927BE310C00FDCFDD /* PostRecord.swift */,
@@ -3304,6 +3303,7 @@
 				0FB3CCE8271185D00072B787 /* SocialIconBackBarItem.swift */,
 				0FE54FE32759C43100B32BD6 /* BalanceSegmentView.swift */,
 				2DBD0B9D2787FF9C0065A2B1 /* GroupStyleTableViewCell.swift */,
+				5DCA069A27C75A8B007697C8 /* Toast.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3963,7 +3963,7 @@
 				2AF8857E271EE9310004565A /* WalletListTableViewCell.swift in Sources */,
 				2AF88535271EE9310004565A /* ImportItem.swift in Sources */,
 				2AF884FE271EE9310004565A /* ContactsViewController.swift in Sources */,
-				5D114FE527B256790092BEDC /* PersonaRecord+Extension.swift in Sources */,
+				5D114FE527B256790092BEDC /* PersonaRecord+Identifier.swift in Sources */,
 				2AF8853C271EE9310004565A /* AccountCardView.swift in Sources */,
 				5D554EC6279FE58100D40848 /* OpenRedPackageViewController.swift in Sources */,
 				DB0B3A5D240F60AE00B1657D /* Coordinator.swift in Sources */,
@@ -4136,6 +4136,7 @@
 				41E500122791CD3800A73117 /* PersonaRepository.swift in Sources */,
 				4156689527A68B770051E0E7 /* JsonWebKey.swift in Sources */,
 				2AF88551271EE9310004565A /* SendConfirmPopViewModel.swift in Sources */,
+				5DCA069B27C75A8B007697C8 /* Toast.swift in Sources */,
 				2AF884C7271EE9300004565A /* WebViewNavigationFailureDescriptionView.swift in Sources */,
 				2AF88655271EEDF80004565A /* UITableView+extension.swift in Sources */,
 				2AF8856D271EE9310004565A /* WalletEditViewController.swift in Sources */,
