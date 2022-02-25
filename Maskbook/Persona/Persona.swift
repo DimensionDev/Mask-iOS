@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import SwiftMsgPack
 
 struct Persona {
     enum LinkedProfileConfirmState: String, Codable {
@@ -68,14 +69,28 @@ extension Persona {
     var packedData: Data? {
         var data = Data()
         guard let privateKey = privateKey else { return nil }
-        try? data.pack(["y": privateKey.y ?? "",
-                        "x": privateKey.x ?? "",
-                        "key_ops": privateKey.key_ops ?? "",
-                        "kty": privateKey.kty ?? "",
-                        "ext": true,
-                        "crv": privateKey.crv ?? "",
-                        "d": privateKey.d ?? ""]
-        )
+        guard let key_ops = privateKey.key_ops else { return nil }
+        do {
+            let type = MsgPackType.dict(items: 7)
+            var type_value = try type.value()
+            data.append( UnsafeBufferPointer(start: &type_value, count: 1) )
+            _ = try data.pack("y")
+            _ = try data.pack(privateKey.y ?? "")
+            _ = try data.pack("x")
+            _ = try data.pack(privateKey.x ?? "")
+            _ = try data.pack("key_ops")
+            _ = try data.pack(key_ops)
+            _ = try data.pack("kty")
+            _ = try data.pack(privateKey.kty ?? "")
+            _ = try data.pack("ext")
+            _ = try data.pack(true)
+            _ = try data.pack("crv")
+            _ = try data.pack(privateKey.crv ?? "")
+            _ = try data.pack("d")
+            _ = try data.pack(privateKey.d ?? "")
+        } catch {
+            print(error)
+        }
         return data
     }
 }
