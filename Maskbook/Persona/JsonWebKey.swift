@@ -15,7 +15,7 @@ struct JsonWebKey: Codable {
         let r: String?
         let t: String?
     }
-    
+
     let alg: String?
     let crv: String?
     let d: String?
@@ -49,12 +49,12 @@ extension JsonWebKey {
 
 extension JsonWebKey {
     var privateKeyPackedData: Data? {
-        var data = Data()
         guard let key_ops = key_ops else { return nil }
+        var data = Data()
         do {
             let type = MsgPackType.dict(items: 7)
             var type_value = try type.value()
-            data.append( UnsafeBufferPointer(start: &type_value, count: 1) )
+            data.append(UnsafeBufferPointer(start: &type_value, count: 1))
             _ = try data.pack("y")
             _ = try data.pack(y ?? "")
             _ = try data.pack("x")
@@ -74,8 +74,8 @@ extension JsonWebKey {
         }
         return data
     }
-    
+
     var privateKeyBase64String: String? {
-        return privateKeyPackedData?.base64EncodedString()
+        privateKeyPackedData?.base64EncodedString()
     }
 }
