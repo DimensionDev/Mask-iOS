@@ -258,6 +258,7 @@ class Coordinator {
 
             case let .modal(animated, delegate):
                 vc.presentationController?.delegate = delegate
+                vc.modalPresentationCapturesStatusBarAppearance = true
                 presentVC.present(vc, animated: animated, completion: completion)
 
             case let .alertController(completion):
@@ -328,7 +329,7 @@ extension Coordinator {
             return PersonasViewController()
 
         case .guide:
-            let vc = UIHostingController(rootView: AnyView(EmptyView()))
+            let vc = MaskHostViewController(rootView: AnyView(EmptyView()))
             let view = GuideView().environment(\.viewController, ViewControllerHolder(vc))
             vc.rootView = AnyView(view)
             return vc

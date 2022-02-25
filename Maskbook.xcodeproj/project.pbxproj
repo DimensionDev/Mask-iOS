@@ -224,8 +224,8 @@
 		2A6B662527C890BF00D185FB /* Decomposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6B661C27C890BF00D185FB /* Decomposable.swift */; };
 		2A6B662627C890BF00D185FB /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6B661D27C890BF00D185FB /* PageViewController.swift */; };
 		2A6B662827C8A00F00D185FB /* GuideItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6B662727C8A00F00D185FB /* GuideItemView.swift */; };
-		2A6B662A27C8CB2100D185FB /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6B662927C8CB2100D185FB /* HostingController.swift */; };
 		2A6B662C27C8DE0D00D185FB /* UIViewController+Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6B662B27C8DE0D00D185FB /* UIViewController+Environment.swift */; };
+		2A6B66A827C8F43A00D185FB /* MaskHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6B66A727C8F43A00D185FB /* MaskHostViewController.swift */; };
 		2A72F3FE27BE8185004A3F95 /* DBImageDecoder+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A72F3FB27BE8184004A3F95 /* DBImageDecoder+UIKit.swift */; };
 		2A72F3FF27BE8185004A3F95 /* DBImageDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A72F3FC27BE8184004A3F95 /* DBImageDecoder.swift */; };
 		2A72F40027BE8185004A3F95 /* DBImageDecoderDecodingOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A72F3FD27BE8184004A3F95 /* DBImageDecoderDecodingOptions.swift */; };
@@ -933,8 +933,8 @@
 		2A6B661C27C890BF00D185FB /* Decomposable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decomposable.swift; sourceTree = "<group>"; };
 		2A6B661D27C890BF00D185FB /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		2A6B662727C8A00F00D185FB /* GuideItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideItemView.swift; sourceTree = "<group>"; };
-		2A6B662927C8CB2100D185FB /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
 		2A6B662B27C8DE0D00D185FB /* UIViewController+Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Environment.swift"; sourceTree = "<group>"; };
+		2A6B66A727C8F43A00D185FB /* MaskHostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskHostViewController.swift; sourceTree = "<group>"; };
 		2A72F3FB27BE8184004A3F95 /* DBImageDecoder+UIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DBImageDecoder+UIKit.swift"; sourceTree = "<group>"; };
 		2A72F3FC27BE8184004A3F95 /* DBImageDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBImageDecoder.swift; sourceTree = "<group>"; };
 		2A72F3FD27BE8184004A3F95 /* DBImageDecoderDecodingOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBImageDecoderDecodingOptions.swift; sourceTree = "<group>"; };
@@ -3149,7 +3149,7 @@
 				2AF885FA271EED7D0004565A /* SheetHostingController.swift */,
 				1FCBEDFB273A1004001C3637 /* SheetGestureInteractor.swift */,
 				1FCBEDFD273A1BC6001C3637 /* ShakeAnimation.swift.swift */,
-				2A6B662927C8CB2100D185FB /* HostingController.swift */,
+				2A6B66A727C8F43A00D185FB /* MaskHostViewController.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -3964,7 +3964,6 @@
 				2AF884E3271EE9310004565A /* WebExtension.Setting+extension.swift in Sources */,
 				2AF8858C271EE9310004565A /* SelectActionTableViewCell.swift in Sources */,
 				0F31A1642742B3A1009D2E05 /* WalletMultiChainCell.swift in Sources */,
-				2A6B662A27C8CB2100D185FB /* HostingController.swift in Sources */,
 				2AF884EA271EE9310004565A /* PluginBlockView.swift in Sources */,
 				2A6ABBA22720053B00CC3AED /* RemoteBackupUploadFileRequest.swift in Sources */,
 				1FC638DF2727FF17002D830B /* WalletInfoProvider.swift in Sources */,
@@ -4255,6 +4254,7 @@
 				0F31A1662742C054009D2E05 /* CreateWalletMultichainView.swift in Sources */,
 				2AF88512271EE9310004565A /* MaskScanViewController.swift in Sources */,
 				2A6ABBAB2720053B00CC3AED /* BindRemoteBackupInfoViewModel.swift in Sources */,
+				2A6B66A827C8F43A00D185FB /* MaskHostViewController.swift in Sources */,
 				2AF884F5271EE9310004565A /* IdentityRecoveryViewController.swift in Sources */,
 				2A6ABBB32720053B00CC3AED /* SPasswordFormItemView.swift in Sources */,
 				2A3050C626A01B370003EECC /* NFTAssetsModel.swift in Sources */,
