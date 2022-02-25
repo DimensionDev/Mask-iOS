@@ -122,7 +122,6 @@ extension NFTActionViewController: UITableViewDelegate {
                                 if let image = image {
                                      self?.saveImageToPhotoLibrary(image: image)
                                 }
-                                self?.dismiss(animated: true, completion: nil)
                         }
         case .website(_, let websiteUrl):
             guard let url = websiteUrl else { return }
@@ -187,10 +186,14 @@ extension NFTActionViewController {
             }, completionHandler: {(isSuccess, error) in
                 DispatchQueue.main.async {
                     if isSuccess {
-                       // to do  toast 
+                        UIApplication.getTopViewController()?.view
+                            .makeToast(L10n.Common.Toast.saved,
+                                       position: .center)
                     } else  {
                         
                     }
+                    self.dismiss(animated: true, completion: nil)
+
                 }
             })
         }
