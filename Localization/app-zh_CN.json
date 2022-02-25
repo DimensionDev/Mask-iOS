@@ -168,7 +168,7 @@
             "download_next": "我已下载，下一步"
         },
         "toast": {
-            "saved": ""
+            "saved": "保存！"
         },
         "loading": "加载中..."
     },
@@ -533,7 +533,7 @@
             "add": "添加"
         },
         "persona_download": {
-            "identity_id": "",
+            "identity_id": "身份代码",
             "download_tips": ""
         },
         "wallet_balance": {
