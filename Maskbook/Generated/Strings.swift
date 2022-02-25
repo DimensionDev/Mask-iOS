@@ -958,6 +958,33 @@ enum L10n {
       }
     }
 
+    enum Guide {
+      /// Your Portal to the New, Open Internet
+      static var description1: String {
+        return L10n.tr("Localizable", "Scene.Guide.Description1")
+      }
+      /// Send encrypted messages on social media with persona
+      static var description2: String {
+        return L10n.tr("Localizable", "Scene.Guide.Description2")
+      }
+      /// Multi-Chain wallet, compatible with WalletConnect
+      static var description3: String {
+        return L10n.tr("Localizable", "Scene.Guide.Description3")
+      }
+      /// Back up in time, with cloud / local backup
+      static var description4: String {
+        return L10n.tr("Localizable", "Scene.Guide.Description4")
+      }
+      /// Let’s start
+      static var letsStart: String {
+        return L10n.tr("Localizable", "Scene.Guide.LetsStart")
+      }
+      /// Skip
+      static var skip: String {
+        return L10n.tr("Localizable", "Scene.Guide.Skip")
+      }
+    }
+
     enum IdentifyVerify {
       /// Tap each word in the correct order.
       static var description: String {

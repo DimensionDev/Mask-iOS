@@ -24,7 +24,7 @@ struct GuideItemView: View {
             Button {
                 viewController.value?.dismiss(animated: true, completion: nil)
             } label: {
-                Text("Skip")
+                Text(L10n.Scene.Guide.skip)
                     .font(FontStyles.bh5.font)
                     .foregroundColor(Asset.Colors.Background.blue.asColor())
             }
@@ -40,7 +40,7 @@ struct GuideItemView: View {
     }
     
     var topSpace: CGFloat {
-        0.11_453_202 * UIScreen.main.bounds.height
+        0.114_532_02 * UIScreen.main.bounds.height
     }
     
     var content: some View {
@@ -49,7 +49,6 @@ struct GuideItemView: View {
             page.guideImage.resizable().frame(height: 291)
             Spacer()
             Text(page.title)
-                .fontWeight(.heavy)
                 .font(FontStyles.mh4.font)
                 .foregroundColor(Asset.Colors.Text.lighter.asColor())
                 .multilineTextAlignment(.center)
@@ -58,7 +57,7 @@ struct GuideItemView: View {
                 Button {
                     viewController.value?.dismiss(animated: true, completion: nil)
                 } label: {
-                    Text("Let’s start")
+                    Text(L10n.Scene.Guide.letsStart)
                         .font(FontStyles.bh5.font)
                         .foregroundColor(Asset.Colors.Public.blue.asColor())
                 }
@@ -119,10 +118,10 @@ extension GuideItemView {
         
         var title: String {
             switch self {
-            case .one: return "Your Portal to the New, Open Internet"
-            case .two: return "Send encrypted messages on social media with persona"
-            case .three: return "Multi-Chain wallet, compatible with WalletConnect"
-            case .four: return "Back up in time, with cloud / local backup"
+            case .one: return L10n.Scene.Guide.description1
+            case .two: return L10n.Scene.Guide.description2
+            case .three: return L10n.Scene.Guide.description3
+            case .four: return  L10n.Scene.Guide.description4
             }
         }
     }

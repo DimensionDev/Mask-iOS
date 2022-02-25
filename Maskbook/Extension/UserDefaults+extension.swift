@@ -110,6 +110,7 @@ final class UserDefaultSettings {
         backupDate = nil
         backupAlertDate = nil
         indexedDBDataMigrated = false
+        hasShownGuide = false
     }
 
     /// Indicates whether or not the user has seen the onboarding. Default value is **false**
