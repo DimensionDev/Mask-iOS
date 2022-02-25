@@ -78,6 +78,8 @@ internal enum Asset {
     internal enum Gradient {
       internal static let blue1 = ColorAsset(name: "Colors/Gradient/blue1")
       internal static let blue2 = ColorAsset(name: "Colors/Gradient/blue2")
+      internal static let guide1 = ColorAsset(name: "Colors/Gradient/guide1")
+      internal static let guide2 = ColorAsset(name: "Colors/Gradient/guide2")
     }
     internal enum RedPackage {
       internal static let background = ColorAsset(name: "Colors/RedPackage/background")
@@ -233,6 +235,16 @@ internal enum Asset {
       }
       internal enum Empty {
         internal static let emptyBox = ImageAsset(name: "Images/Scene/Empty/EmptyBox")
+      }
+      internal enum Guide {
+        internal static let guide1 = ImageAsset(name: "Images/Scene/Guide/guide_1")
+        internal static let guide2 = ImageAsset(name: "Images/Scene/Guide/guide_2")
+        internal static let guide3 = ImageAsset(name: "Images/Scene/Guide/guide_3")
+        internal static let guide4 = ImageAsset(name: "Images/Scene/Guide/guide_4")
+        internal static let guidePage1 = ImageAsset(name: "Images/Scene/Guide/guide_page_1")
+        internal static let guidePage2 = ImageAsset(name: "Images/Scene/Guide/guide_page_2")
+        internal static let guidePage3 = ImageAsset(name: "Images/Scene/Guide/guide_page_3")
+        internal static let guidePage4 = ImageAsset(name: "Images/Scene/Guide/guide_page_4")
       }
       internal enum Identity {
         internal static let icloud = ImageAsset(name: "Images/Scene/Identity/icloud")
