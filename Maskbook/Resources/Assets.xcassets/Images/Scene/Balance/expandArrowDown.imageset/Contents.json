@@ -3,6 +3,16 @@
     {
       "filename" : "Arrow - Right 3.pdf",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Arrow - Down 2.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {
