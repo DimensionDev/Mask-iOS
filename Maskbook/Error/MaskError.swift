@@ -59,8 +59,7 @@ extension WalletSendError: LocalizedError {
             return "Invalid address"
             
         case .ethereumError(let error):
-            let web3error = error as! Web3Error
-            return web3error.errorDescription
+            return (error as? Web3Error)?.errorDescription ?? ""
             
         case .walletConnectError:
             return "Fail to connect with WalletConnect"
