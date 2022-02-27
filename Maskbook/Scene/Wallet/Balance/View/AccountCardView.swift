@@ -28,12 +28,9 @@ class AccountCardView: UIView {
     
     private var backgroundLayer: CAGradientLayer = {
         let layer1 = CAGradientLayer()
-        layer1.colors = [
-            Asset.Colors.AccountCard.background1.color.cgColor,
-            Asset.Colors.AccountCard.background2.color.cgColor
-        ]
-        layer1.startPoint = CGPoint(x: 0.5, y: 0.25)
-        layer1.endPoint = CGPoint(x: 0.5, y: 0.75)
+        layer1.colors = WalletDisplayBlockChainType.all.accoundCardBgColors
+        layer1.startPoint = CGPoint(x: 0.5, y: 0)
+        layer1.endPoint = CGPoint(x: 0.5, y: 1)
         layer1.cornerRadius = 20
         layer1.cornerCurve = .continuous
         layer1.masksToBounds = true
@@ -43,11 +40,11 @@ class AccountCardView: UIView {
     private var stackViewGradientLayer: CAGradientLayer = {
         let layer1 = CAGradientLayer()
         layer1.colors = [
-            UIColor.white.withAlphaComponent(0.08).cgColor,
-            UIColor.clear.cgColor
+            Asset.Colors.AccountCard.Chains.bottomStart.color.cgColor,
+            Asset.Colors.AccountCard.Chains.bottomEnd.color.cgColor
         ]
-        layer1.startPoint = CGPoint(x: 0.5, y: 0.25)
-        layer1.endPoint = CGPoint(x: 0.5, y: 0.75)
+        layer1.startPoint = CGPoint(x: 0.5, y: 0)
+        layer1.endPoint = CGPoint(x: 1, y: 1)
         layer1.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         layer1.cornerRadius = 20
         layer1.cornerCurve = .continuous

@@ -24,7 +24,7 @@ class TokenIconImageView: UIView {
         imageView.layer.borderWidth = 1
         imageView.layer.borderColor = Asset.Colors.Background.dark.color.cgColor
         imageView.isHidden = true
-        imageView.applyCornerRadius(radius: 8)
+        imageView.applyCornerRadius(radius: 9)
         return imageView
     }()
     
@@ -53,8 +53,8 @@ class TokenIconImageView: UIView {
         NSLayoutConstraint.activate([
             tokenBlockchainImageView.leadingAnchor.constraint(equalTo: tokenIconImageView.leadingAnchor,
                                                               constant: 30),
-            tokenBlockchainImageView.widthAnchor.constraint(equalToConstant: 16),
-            tokenBlockchainImageView.heightAnchor.constraint(equalToConstant: 16),
+            tokenBlockchainImageView.widthAnchor.constraint(equalToConstant: 18),
+            tokenBlockchainImageView.heightAnchor.constraint(equalToConstant: 18),
             tokenBlockchainImageView.bottomAnchor.constraint(equalTo: tokenIconImageView.bottomAnchor)
         ])
     }
