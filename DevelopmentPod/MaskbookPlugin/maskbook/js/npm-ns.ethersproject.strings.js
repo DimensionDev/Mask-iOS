@@ -200,6 +200,77 @@ function nameprep(value) {
 
 /***/ }),
 
+/***/ 9006:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "UnicodeNormalizationForm": () => (/* reexport */ utf8/* UnicodeNormalizationForm */.Uj),
+  "Utf8ErrorFuncs": () => (/* reexport */ utf8/* Utf8ErrorFuncs */.te),
+  "Utf8ErrorReason": () => (/* reexport */ utf8/* Utf8ErrorReason */.Uw),
+  "_toEscapedUtf8String": () => (/* reexport */ utf8/* _toEscapedUtf8String */.U$),
+  "formatBytes32String": () => (/* reexport */ formatBytes32String),
+  "nameprep": () => (/* reexport */ idna/* nameprep */.Ll),
+  "parseBytes32String": () => (/* reexport */ parseBytes32String),
+  "toUtf8Bytes": () => (/* reexport */ utf8/* toUtf8Bytes */.Y0),
+  "toUtf8CodePoints": () => (/* reexport */ utf8/* toUtf8CodePoints */.XL),
+  "toUtf8String": () => (/* reexport */ utf8/* toUtf8String */.ZN)
+});
+
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+constants@5.4.0/node_modules/@ethersproject/constants/lib.esm/hashes.js
+var hashes = __webpack_require__(76360);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+bytes@5.5.0/node_modules/@ethersproject/bytes/lib.esm/index.js + 1 modules
+var lib_esm = __webpack_require__(61115);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+strings@5.4.0/node_modules/@ethersproject/strings/lib.esm/utf8.js + 1 modules
+var utf8 = __webpack_require__(42716);
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@ethersproject+strings@5.4.0/node_modules/@ethersproject/strings/lib.esm/bytes32.js
+
+
+
+
+function formatBytes32String(text) {
+    // Get the bytes
+    const bytes = (0,utf8/* toUtf8Bytes */.Y0)(text);
+    // Check we have room for null-termination
+    if (bytes.length > 31) {
+        throw new Error("bytes32 string must be less than 32 bytes");
+    }
+    // Zero-pad (implicitly null-terminates)
+    return (0,lib_esm/* hexlify */.Dv)((0,lib_esm/* concat */.zo)([bytes, hashes/* HashZero */.R]).slice(0, 32));
+}
+function parseBytes32String(bytes) {
+    const data = (0,lib_esm/* arrayify */.lE)(bytes);
+    // Must be 32 bytes with a null-termination
+    if (data.length !== 32) {
+        throw new Error("invalid bytes32 - not 32 bytes long");
+    }
+    if (data[31] !== 0) {
+        throw new Error("invalid bytes32 string - no null terminator");
+    }
+    // Find the null termination
+    let length = 31;
+    while (data[length - 1] === 0) {
+        length--;
+    }
+    // Determine the string value
+    return (0,utf8/* toUtf8String */.ZN)(data.slice(0, length));
+}
+//# sourceMappingURL=bytes32.js.map
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+strings@5.4.0/node_modules/@ethersproject/strings/lib.esm/idna.js
+var idna = __webpack_require__(39813);
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@ethersproject+strings@5.4.0/node_modules/@ethersproject/strings/lib.esm/index.js
+
+
+
+
+
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
 /***/ 42716:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -207,13 +278,14 @@ function nameprep(value) {
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
   "Uj": () => (/* binding */ UnicodeNormalizationForm),
+  "te": () => (/* binding */ Utf8ErrorFuncs),
+  "Uw": () => (/* binding */ Utf8ErrorReason),
+  "U$": () => (/* binding */ _toEscapedUtf8String),
   "uu": () => (/* binding */ _toUtf8String),
   "Y0": () => (/* binding */ toUtf8Bytes),
   "XL": () => (/* binding */ toUtf8CodePoints),
   "ZN": () => (/* binding */ toUtf8String)
 });
-
-// UNUSED EXPORTS: Utf8ErrorFuncs, Utf8ErrorReason, _toEscapedUtf8String
 
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+bytes@5.5.0/node_modules/@ethersproject/bytes/lib.esm/index.js + 1 modules
 var lib_esm = __webpack_require__(61115);

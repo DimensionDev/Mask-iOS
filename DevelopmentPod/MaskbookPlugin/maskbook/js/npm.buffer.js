@@ -15,7 +15,7 @@
 
 
 var base64 = __webpack_require__(26446)
-var ieee754 = __webpack_require__(20972)
+var ieee754 = __webpack_require__(47164)
 var customInspectSymbol =
   (typeof Symbol === 'function' && typeof Symbol['for'] === 'function') // eslint-disable-line dot-notation
     ? Symbol['for']('nodejs.util.inspect.custom') // eslint-disable-line dot-notation
@@ -1840,7 +1840,7 @@ var __webpack_unused_export__;
 
 
 const base64 = __webpack_require__(26446)
-const ieee754 = __webpack_require__(20972)
+const ieee754 = __webpack_require__(47164)
 const customInspectSymbol =
   (typeof Symbol === 'function' && typeof Symbol['for'] === 'function') // eslint-disable-line dot-notation
     ? Symbol['for']('nodejs.util.inspect.custom') // eslint-disable-line dot-notation
@@ -3953,7 +3953,7 @@ function BufferBigIntNotDefined () {
 
 
 const base64 = __webpack_require__(26446)
-const ieee754 = __webpack_require__(20972)
+const ieee754 = __webpack_require__(47164)
 const customInspectSymbol =
   (typeof Symbol === 'function' && typeof Symbol['for'] === 'function') // eslint-disable-line dot-notation
     ? Symbol['for']('nodejs.util.inspect.custom') // eslint-disable-line dot-notation

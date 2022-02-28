@@ -27,7 +27,7 @@
  */
 var ethjsUnit = __webpack_require__(48861);
 var utils = __webpack_require__(92109);
-var soliditySha3 = __webpack_require__(55279);
+var soliditySha3 = __webpack_require__(55440);
 var randombytes = __webpack_require__(98773);
 var BN = __webpack_require__(28891);
 /**
@@ -409,7 +409,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 55279:
+/***/ 55440:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /*

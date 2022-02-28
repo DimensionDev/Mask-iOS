@@ -1,7 +1,7 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[9697],{
 
-/***/ 56648:
+/***/ 36978:
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -53,7 +53,7 @@ __webpack_require__.d(__webpack_exports__, {
 // UNUSED EXPORTS: namespace
 
 // EXTERNAL MODULE: ../../node_modules/.pnpm/stylis@4.0.13/node_modules/stylis/src/Enum.js
-var Enum = __webpack_require__(56648);
+var Enum = __webpack_require__(36978);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/stylis@4.0.13/node_modules/stylis/src/Utility.js
 var Utility = __webpack_require__(7975);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/stylis@4.0.13/node_modules/stylis/src/Tokenizer.js
@@ -301,7 +301,7 @@ function namespace (element) {
 /* harmony export */   "MY": () => (/* binding */ compile)
 /* harmony export */ });
 /* unused harmony exports parse, ruleset, comment, declaration */
-/* harmony import */ var _Enum_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(56648);
+/* harmony import */ var _Enum_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(36978);
 /* harmony import */ var _Utility_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7975);
 /* harmony import */ var _Tokenizer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(72933);
 
@@ -506,7 +506,7 @@ function declaration (value, root, parent, length) {
 /* harmony export */   "q": () => (/* binding */ serialize),
 /* harmony export */   "P": () => (/* binding */ stringify)
 /* harmony export */ });
-/* harmony import */ var _Enum_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(56648);
+/* harmony import */ var _Enum_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(36978);
 /* harmony import */ var _Utility_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7975);
 
 
