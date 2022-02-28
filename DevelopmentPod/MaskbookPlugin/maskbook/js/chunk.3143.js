@@ -4,7 +4,7 @@
 /***/ 43143:
 /***/ ((__webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-__webpack_require__.a(__webpack_module__, async (__webpack_handle_async_dependencies__) => {
+__webpack_require__.a(__webpack_module__, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "__initializeContext": () => (/* binding */ __initializeContext),
@@ -35,7 +35,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _validate_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(29409);
 /* harmony import */ var _wasm_loader_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(91717);
 var _wasm_loader_js__WEBPACK_IMPORTED_MODULE_2__, __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_wasm_loader_js__WEBPACK_IMPORTED_MODULE_2__]);
-_wasm_loader_js__WEBPACK_IMPORTED_MODULE_2__ = (__webpack_async_dependencies__.then ? await __webpack_async_dependencies__ : __webpack_async_dependencies__)[0];
+_wasm_loader_js__WEBPACK_IMPORTED_MODULE_2__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
 
 
 
@@ -398,7 +398,8 @@ function verifySchnorr(h, Q, signature) {
     }
 }
 
-});
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } });
 
 /***/ }),
 
@@ -627,20 +628,21 @@ function throwError(errcode) {
 /***/ 91717:
 /***/ ((__webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-__webpack_require__.a(__webpack_module__, async (__webpack_handle_async_dependencies__) => {
+__webpack_require__.a(__webpack_module__, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _secp256k1_wasm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(75017);
 var _secp256k1_wasm__WEBPACK_IMPORTED_MODULE_0__, __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_secp256k1_wasm__WEBPACK_IMPORTED_MODULE_0__]);
-_secp256k1_wasm__WEBPACK_IMPORTED_MODULE_0__ = (__webpack_async_dependencies__.then ? await __webpack_async_dependencies__ : __webpack_async_dependencies__)[0];
+_secp256k1_wasm__WEBPACK_IMPORTED_MODULE_0__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
 // Suppress TS2792: Cannot find module './secp256k1.wasm'.
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_secp256k1_wasm__WEBPACK_IMPORTED_MODULE_0__);
 
-});
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } });
 
 /***/ }),
 

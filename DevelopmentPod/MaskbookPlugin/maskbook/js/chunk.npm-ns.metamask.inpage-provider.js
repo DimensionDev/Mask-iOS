@@ -17,7 +17,7 @@ const safe_event_emitter_1 = __importDefault(__webpack_require__(35247));
 const fast_deep_equal_1 = __importDefault(__webpack_require__(87239));
 const eth_rpc_errors_1 = __webpack_require__(65679);
 const is_stream_1 = __webpack_require__(57983);
-const messages_1 = __importDefault(__webpack_require__(76350));
+const messages_1 = __importDefault(__webpack_require__(13443));
 const utils_1 = __webpack_require__(71242);
 class BaseProvider extends safe_event_emitter_1.default {
     /**
@@ -363,7 +363,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const eth_rpc_errors_1 = __webpack_require__(65679);
 const siteMetadata_1 = __importDefault(__webpack_require__(98991));
-const messages_1 = __importDefault(__webpack_require__(76350));
+const messages_1 = __importDefault(__webpack_require__(13443));
 const utils_1 = __webpack_require__(71242);
 const BaseProvider_1 = __importDefault(__webpack_require__(33745));
 class MetaMaskInpageProvider extends BaseProvider_1.default {
@@ -743,7 +743,7 @@ exports.setGlobalProvider = setGlobalProvider;
 
 /***/ }),
 
-/***/ 76350:
+/***/ 13443:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -853,7 +853,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const messages_1 = __importDefault(__webpack_require__(76350));
+const messages_1 = __importDefault(__webpack_require__(13443));
 const utils_1 = __webpack_require__(71242);
 /**
  * Sends site metadata over an RPC request.
