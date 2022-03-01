@@ -15,8 +15,8 @@ class NFTDetailViewController: BaseViewController {
     typealias Item = NFTDetailViewModel.SectionItem
     typealias ViewModel = NFTDetailViewModel
     
-    var viewModel: NFTDetailViewModel
-    
+    var viewModel: ViewModel
+
     lazy var tableView: UITableView = {
         let view = UITableView()
         view.backgroundColor = Asset.Colors.Background.normal.color

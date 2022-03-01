@@ -64,6 +64,7 @@ internal enum Asset {
       internal static let selected = ColorAsset(name: "Colors/Background/selected")
       internal static let twitterMask = ColorAsset(name: "Colors/Background/twitterMask")
       internal static let walletConnect = ColorAsset(name: "Colors/Background/walletConnect")
+      internal static let warningsBg = ColorAsset(name: "Colors/Background/warnings-bg")
       internal static let yellow = ColorAsset(name: "Colors/Background/yellow")
     }
     internal enum Balances {
@@ -246,6 +247,12 @@ internal enum Asset {
       }
       internal enum Mnemonic {
         internal static let refresh = ImageAsset(name: "Images/Scene/Mnemonic/refresh")
+      }
+      internal enum Nft {
+        internal static let more = ImageAsset(name: "Images/Scene/NFT/More")
+        internal static let ethscan = ImageAsset(name: "Images/Scene/NFT/ethscan")
+        internal static let savephoto = ImageAsset(name: "Images/Scene/NFT/savephoto")
+        internal static let website = ImageAsset(name: "Images/Scene/NFT/website")
       }
       internal enum Personas {
         internal static let plus = ImageAsset(name: "Images/Scene/Personas/Plus")

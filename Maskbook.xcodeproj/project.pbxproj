@@ -616,6 +616,9 @@
 		6F07ABE3279027E70039D69D /* NFTAssetPriceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE2279027E70039D69D /* NFTAssetPriceModel.swift */; };
 		6F07ABE5279697450039D69D /* NFTCollectionDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE4279697450039D69D /* NFTCollectionDetailTableViewCell.swift */; };
 		6F25327A27A2B0AA000C0D27 /* Web3TransactionReceipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F25327927A2B0AA000C0D27 /* Web3TransactionReceipt.swift */; };
+		6F25327C27C63168000C0D27 /* NFTActionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F25327B27C63164000C0D27 /* NFTActionTableViewCell.swift */; };
+		6F25328227C72883000C0D27 /* NFTActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F25328127C72883000C0D27 /* NFTActionViewController.swift */; };
+		6F25328427C773AB000C0D27 /* NFTActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F25328327C773AB000C0D27 /* NFTActionViewModel.swift */; };
 		6F702B262695B52900B72703 /* WalletSendHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F702B252695B52900B72703 /* WalletSendHelper.swift */; };
 		6F785E2F269305E20019079F /* RecentlyAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F785E2E269305E20019079F /* RecentlyAddress.swift */; };
 		6F785E36269445A00019079F /* ContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F785E35269445A00019079F /* ContactManager.swift */; };
@@ -1313,6 +1316,9 @@
 		6F07ABE2279027E70039D69D /* NFTAssetPriceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTAssetPriceModel.swift; sourceTree = "<group>"; };
 		6F07ABE4279697450039D69D /* NFTCollectionDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollectionDetailTableViewCell.swift; sourceTree = "<group>"; };
 		6F25327927A2B0AA000C0D27 /* Web3TransactionReceipt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web3TransactionReceipt.swift; sourceTree = "<group>"; };
+		6F25327B27C63164000C0D27 /* NFTActionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTActionTableViewCell.swift; sourceTree = "<group>"; };
+		6F25328127C72883000C0D27 /* NFTActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTActionViewController.swift; sourceTree = "<group>"; };
+		6F25328327C773AB000C0D27 /* NFTActionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTActionViewModel.swift; sourceTree = "<group>"; };
 		6F702B252695B52900B72703 /* WalletSendHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSendHelper.swift; sourceTree = "<group>"; };
 		6F785E2E269305E20019079F /* RecentlyAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyAddress.swift; sourceTree = "<group>"; };
 		6F785E35269445A00019079F /* ContactManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactManager.swift; sourceTree = "<group>"; };
@@ -2751,6 +2757,7 @@
 				2AF883FD271EE9300004565A /* ViewModel */,
 				2AF883FF271EE9300004565A /* View */,
 				2AF88402271EE9300004565A /* NFTDetailViewController.swift */,
+				6F25328127C72883000C0D27 /* NFTActionViewController.swift */,
 			);
 			path = NFTDetail;
 			sourceTree = "<group>";
@@ -2759,6 +2766,7 @@
 			isa = PBXGroup;
 			children = (
 				2AF883FE271EE9300004565A /* NFTDetailViewModel.swift */,
+				6F25328327C773AB000C0D27 /* NFTActionViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2769,6 +2777,7 @@
 				2AF88400271EE9300004565A /* NFTTransactionTableViewCell.swift */,
 				2AF88401271EE9300004565A /* NFTDetailTableViewCell.swift */,
 				6F07ABE4279697450039D69D /* NFTCollectionDetailTableViewCell.swift */,
+				6F25327B27C63164000C0D27 /* NFTActionTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4025,6 +4034,7 @@
 				2AF8851D271EE9310004565A /* TransactionCell.swift in Sources */,
 				2DC5D8A1272574FA00E351D3 /* LocalStorage+extension.swift in Sources */,
 				2AF884BC271EE9300004565A /* Web3MessageResolver.swift in Sources */,
+				6F25328227C72883000C0D27 /* NFTActionViewController.swift in Sources */,
 				2AF8854B271EE9310004565A /* NFTDetailTableViewCell.swift in Sources */,
 				2DC5D898272574D600E351D3 /* WalletConnectClient+Transation.swift in Sources */,
 				2AF885D0271EE9320004565A /* ScannerHandler.swift in Sources */,
@@ -4121,6 +4131,7 @@
 				1FEE1E99277D8FC500697F81 /* DappRPCResponse.swift in Sources */,
 				2AF8852C271EE9310004565A /* WalletBackupKeystoreViewController.swift in Sources */,
 				5D7F5A5127B6531E00A007C5 /* PersonaCreateHandler.swift in Sources */,
+				6F25327C27C63168000C0D27 /* NFTActionTableViewCell.swift in Sources */,
 				2AF884DB271EE9310004565A /* DataProviderViewModel.swift in Sources */,
 				41E500122791CD3800A73117 /* PersonaRepository.swift in Sources */,
 				4156689527A68B770051E0E7 /* JsonWebKey.swift in Sources */,
@@ -4239,6 +4250,7 @@
 				2D00A5FE27953F2D0082E693 /* DebugEntryView.swift in Sources */,
 				2AF884CE271EE9300004565A /* MaskWebMessage+Persona+Backup.swift in Sources */,
 				2AF8856A271EE9310004565A /* CreateWalletWithNameViewController.swift in Sources */,
+				6F25328427C773AB000C0D27 /* NFTActionViewModel.swift in Sources */,
 				2A23A65027C4B67D00CC5AD9 /* SwiftUI+Asset.swift in Sources */,
 				5D7F5A5327B66C5600A007C5 /* PersonaKeyInfoPreview.swift in Sources */,
 				2AF884EC271EE9310004565A /* SizeMeasureModifier.swift in Sources */,
