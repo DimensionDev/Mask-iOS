@@ -35,13 +35,13 @@
 "Common.Alert.FaceIdActivateFail.Title" = "Activation fails";
 "Common.Alert.IdentifyCodeScreenshotWarning.Description" = "Simply taking a screenshot of identity code is not safe.";
 "Common.Alert.IdentifyCodeScreenshotWarning.Title" = "Warning";
-"Common.Alert.IdentityCreate.Description" = "Please don’t forget your identity code. Your identity code is the only proof of your user identity and the only basis for you to encrypt or decrypt social activities. ";
-"Common.Alert.IdentityCreate.Title" = "Identity created!";
 "Common.Alert.IdentityPhrase.Description" = "Your identity phrase is composed of randomly selected words. Please carefully write down each word in the order it appears.";
 "Common.Alert.IdentityPhrase.Title" = "Identity Phrase";
 "Common.Alert.KeychainAuthPrompt.Title" = "Authenticate to use your secrets";
 "Common.Alert.LocalBackup.BackupCompleted" = "Backup completed!";
 "Common.Alert.LocalBackup.BackupFailed" = "Backup failed!";
+"Common.Alert.PersonaCreate.Description" = "You have successfully created your persona %@. ";
+"Common.Alert.PersonaCreate.Title" = "Successful ";
 "Common.Alert.PersonaLogout.Description" = "After logging out, your associated social accounts can no longer decrypt past encrypted messages.";
 "Common.Alert.PersonaLogout.Title" = "Confirm to log out?";
 "Common.Alert.PersonaNameDuplicated.Title" = "The username has already been created.";

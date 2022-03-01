@@ -209,17 +209,6 @@ enum L10n {
         }
       }
 
-      enum IdentityCreate {
-        /// Please don’t forget your identity code. Your identity code is the only proof of your user identity and the only basis for you to encrypt or decrypt social activities. 
-        static var description: String {
-          return L10n.tr("Localizable", "Common.Alert.IdentityCreate.Description")
-        }
-        /// Identity created!
-        static var title: String {
-          return L10n.tr("Localizable", "Common.Alert.IdentityCreate.Title")
-        }
-      }
-
       enum IdentityPhrase {
         /// Your identity phrase is composed of randomly selected words. Please carefully write down each word in the order it appears.
         static var description: String {
@@ -246,6 +235,17 @@ enum L10n {
         /// Backup failed!
         static var backupFailed: String {
           return L10n.tr("Localizable", "Common.Alert.LocalBackup.BackupFailed")
+        }
+      }
+
+      enum PersonaCreate {
+        /// You have successfully created your persona %@. 
+        static func description(_ p1: String) -> String {
+          return L10n.tr("Localizable", "Common.Alert.PersonaCreate.Description", p1)
+        }
+        /// Successful 
+        static var title: String {
+          return L10n.tr("Localizable", "Common.Alert.PersonaCreate.Title")
         }
       }
 
