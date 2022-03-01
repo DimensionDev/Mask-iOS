@@ -156,7 +156,8 @@ extension NFTActionViewController {
             case .authorized:
                 saveImage(image: img)
             case .notDetermined:
-                PHPhotoLibrary.requestAuthorization { [weak self](status) in
+                
+                PHPhotoLibrary.requestAuthorization { [weak self] status in
                     if status == .authorized {
                         self?.saveImage(image: img)
                     } else {
@@ -183,7 +184,7 @@ extension NFTActionViewController {
     private func saveImage(image: UIImage) {
             PHPhotoLibrary.shared().performChanges({
                 PHAssetChangeRequest.creationRequestForAsset(from: image)
-            }, completionHandler: {(isSuccess, error) in
+            }, completionHandler: { isSuccess, _ in
                 DispatchQueue.main.async {
                     if isSuccess {
                         UIApplication.getTopViewController()?.view
@@ -192,8 +193,6 @@ extension NFTActionViewController {
                     } else  {
                         
                     }
-                    self.dismiss(animated: true, completion: nil)
-
                 }
             })
         }
