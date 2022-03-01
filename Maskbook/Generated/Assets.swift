@@ -52,6 +52,7 @@ internal enum Asset {
     internal enum Background {
       internal static let bar = ColorAsset(name: "Colors/Background/bar")
       internal static let blue = ColorAsset(name: "Colors/Background/blue")
+      internal static let blue1 = ColorAsset(name: "Colors/Background/blue1")
       internal static let blur = ColorAsset(name: "Colors/Background/blur")
       internal static let blurred = ColorAsset(name: "Colors/Background/blurred")
       internal static let container = ColorAsset(name: "Colors/Background/container")

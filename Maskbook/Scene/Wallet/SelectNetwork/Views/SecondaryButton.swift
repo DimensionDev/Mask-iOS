@@ -14,7 +14,7 @@ class SecondaryButton: UIButton {
         
         setTitleColor(Asset.Colors.Text.link.color, for: .normal)
         setTitle(title, for: .normal)
-        setBackgroundImage(UIImage.placeholder(color: Asset.Colors.Background.blue.color), for: .normal)
+        setBackgroundImage(UIImage.placeholder(color: Asset.Colors.Background.blue1.color), for: .normal)
         layer.cornerRadius = 8
         clipsToBounds = true
         titleLabel?.font = FontStyles.BH5
@@ -26,6 +26,6 @@ class SecondaryButton: UIButton {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        setBackgroundImage(UIImage.placeholder(color: Asset.Colors.Background.blue.color), for: .normal)
+        setBackgroundImage(UIImage.placeholder(color: Asset.Colors.Background.blue1.color), for: .normal)
     }
 }
