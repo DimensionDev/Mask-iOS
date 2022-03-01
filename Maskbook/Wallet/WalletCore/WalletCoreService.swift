@@ -392,6 +392,7 @@ extension WalletCoreService {
         if let account = account {
             self.userSetting.defaultAccountAddress = account.address
             self.userSetting.network = network
+            self.userSetting.walletDisplayBlockchain = .blockchain(network)
         } else {
             let accounts = WalletCoreService.shared.getAllAccounts()
             guard let account = accounts.first(where: {
@@ -401,6 +402,7 @@ extension WalletCoreService {
             }
             self.userSetting.defaultAccountAddress = account.address
             self.userSetting.network = network
+            self.userSetting.walletDisplayBlockchain = .blockchain(network)
         }
     }
 }

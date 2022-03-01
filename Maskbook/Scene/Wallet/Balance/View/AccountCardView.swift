@@ -425,24 +425,42 @@ class AccountCardView: UIView {
             balanceLabel.text = "\(maskUserDefaults.currency.symbol)\(totalBalance.currency)"
         }
         if let account = account {
-            Publishers.CombineLatest4(
-                account.publisher(for: \.name).eraseToAnyPublisher(),
-                account.publisher(for: \.address).eraseToAnyPublisher(),
-                UserDefaultSettings.shared.displayBlockChainPublisher.eraseToAnyPublisher(),
-                UserDefaultPublishers.network.eraseToAnyPublisher()
-            )
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] name, address, displayBlockChain, networkType in
-                guard let validAddress = address else { return }
-                self?.updateBlockChainButtonStatus(currentBlockChain: displayBlockChain)
-                self?.nameLabel.text = name
-                self?.addressLabel.text = "\(validAddress.prefix(10))...\(validAddress.suffix(10))"
-                self?.networkLabel.text = networkType.shortName.lowercased().capitalized
-                self?.networkIcon.image = networkType.smallIcon?.withTintColor(Asset.Colors.AccountCard.nameText.color)
-                self?.updateBackground(isWalletConnect: account.fromWalletConnect,
-                                       displayBlockchain: displayBlockChain)
-            }
-            .store(in: &disposeBag)
+            UserDefaultSettings.shared.displayBlockChainPublisher.eraseToAnyPublisher()
+                .combineLatest(UserDefaultPublishers.network.eraseToAnyPublisher())
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] displayBlockChain, networkType in
+                    self?.updateBlockChainButtonStatus(currentBlockChain: displayBlockChain)
+                    self?.updateBackground(isWalletConnect: account.fromWalletConnect,
+                                           displayBlockchain: displayBlockChain)
+                    self?.networkLabel.text = networkType.shortName.lowercased().capitalized
+                    self?.networkIcon.image = networkType.smallIcon?.withTintColor(Asset.Colors.AccountCard.nameText.color)
+                }
+                .store(in: &disposeBag)
+            guard let validAddress = account.address else { return }
+            self.nameLabel.text = account.name
+            self.addressLabel.text = "\(validAddress.prefix(10))...\(validAddress.suffix(10))"
+            
+//            Publishers.CombineLatest4(
+//                account.publisher(for: \.name).eraseToAnyPublisher(),
+//                account.publisher(for: \.address).eraseToAnyPublisher(),
+//                UserDefaultSettings.shared.displayBlockChainPublisher.eraseToAnyPublisher(),
+//                UserDefaultPublishers.network.eraseToAnyPublisher()
+//            )
+//            .receive(on: DispatchQueue.main)
+//            .sink { [weak self] name, address, displayBlockChain, networkType in
+//                guard let validAddress = address else { return }
+//
+//                print(name,address,displayBlockChain,networkType)
+//
+//                self?.updateBlockChainButtonStatus(currentBlockChain: displayBlockChain)
+//                self?.updateBackground(isWalletConnect: account.fromWalletConnect,
+//                                       displayBlockchain: displayBlockChain)
+//                self?.nameLabel.text = name
+//                self?.addressLabel.text = "\(validAddress.prefix(10))...\(validAddress.suffix(10))"
+//                self?.networkLabel.text = networkType.shortName.lowercased().capitalized
+//                self?.networkIcon.image = networkType.smallIcon?.withTintColor(Asset.Colors.AccountCard.nameText.color)
+//            }
+//            .store(in: &disposeBag)
         } else {
             nameLabel.text = ""
             addressLabel.text = ""
