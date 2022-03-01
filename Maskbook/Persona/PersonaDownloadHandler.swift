@@ -141,7 +141,7 @@ extension PersonaDownloadHandler: UIDocumentPickerDelegate {
         let success = pdfDocument.write(to: pdfURL)
         if success {
             UIApplication.getTopViewController()?.view
-                .makeToast(message: L10n.Common.Toast.copy,
+                .makeToast(message: L10n.Common.Toast.saved ,
                            image: Asset.Images.Toast.check.image)
         }
     }
