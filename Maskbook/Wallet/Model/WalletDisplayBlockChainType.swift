@@ -174,4 +174,20 @@ extension WalletDisplayBlockChainType: Equatable {
             }
         }
     }
+    
+    var shadowColor: CGColor {
+        switch self {
+        case .all: return Asset.Colors.Shadow.Card.all.color.cgColor
+            
+        case .blockchain(let blockchain):
+            switch blockchain.rawValue {
+            case .eth: return Asset.Colors.Shadow.Card.eth.color.cgColor
+            case .bsc: return Asset.Colors.Shadow.Card.bsc.color.cgColor
+            case .polygon: return Asset.Colors.Shadow.Card.matic.color.cgColor
+            case .arbitrum: return Asset.Colors.Shadow.Card.arbitrum.color.cgColor
+            case .xdai: return Asset.Colors.Shadow.Card.xdai.color.cgColor
+            default: return Asset.Colors.Shadow.Card.all.color.cgColor
+            }
+        }
+    }
 }

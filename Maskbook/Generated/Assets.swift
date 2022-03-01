@@ -151,6 +151,15 @@ internal enum Asset {
     internal static let segmentShadow = ColorAsset(name: "Colors/segmentShadow")
     internal enum Shadow {
       internal static let accoundCard = ColorAsset(name: "Colors/shadow/accoundCard")
+      internal enum Card {
+        internal static let all = ColorAsset(name: "Colors/shadow/card/all")
+        internal static let arbitrum = ColorAsset(name: "Colors/shadow/card/arbitrum")
+        internal static let bsc = ColorAsset(name: "Colors/shadow/card/bsc")
+        internal static let eth = ColorAsset(name: "Colors/shadow/card/eth")
+        internal static let matic = ColorAsset(name: "Colors/shadow/card/matic")
+        internal static let wallet = ColorAsset(name: "Colors/shadow/card/wallet")
+        internal static let xdai = ColorAsset(name: "Colors/shadow/card/xdai")
+      }
       internal static let primaryButton = ColorAsset(name: "Colors/shadow/primaryButton")
       internal static let sendButton = ColorAsset(name: "Colors/shadow/sendButton")
       internal static let sesondaryButton = ColorAsset(name: "Colors/shadow/sesondaryButton")

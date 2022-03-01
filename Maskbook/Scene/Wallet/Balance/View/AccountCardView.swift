@@ -181,6 +181,8 @@ class AccountCardView: UIView {
     private static let chainButtonViewTag = 1
     private static let chainDotViewTag = 2
     
+    weak var shadowView: UIView?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -490,21 +492,26 @@ class AccountCardView: UIView {
         allChainButtons[selectChainIndex].viewWithTag(Self.chainDotViewTag)?.backgroundColor = .white
     }
     
-    private func updateBackground(isWalletConnect: Bool,
-                                  displayBlockchain: WalletDisplayBlockChainType) {
-        if isWalletConnect {
-            chainLargeImageView.image = Asset.Images.Scene.Balance.accountBgWc.image
-            backgroundLayer.colors = [
-                Asset.Colors.AccountCard.wcBackground1.color.cgColor,
-                Asset.Colors.AccountCard.wcBackground2.color.cgColor
-            ]
-            stackViewBackgroudLayer.backgroundColor =
-                Asset.Colors.AccountCard.wcBackground3.color.cgColor
-        } else {
-            chainLargeImageView.image = displayBlockchain.chainBgImage
-            backgroundLayer.colors = displayBlockchain.accoundCardBgColors
-            stackViewBackgroudLayer.backgroundColor = displayBlockchain.bottomBgColor
+    private func updateBackground(
+        isWalletConnect: Bool,
+        displayBlockchain: WalletDisplayBlockChainType) {
+            let shadowLayer = shadowView?.layer
+            if isWalletConnect {
+                chainLargeImageView.image = Asset.Images.Scene.Balance.accountBgWc.image
+                backgroundLayer.colors = [
+                    Asset.Colors.AccountCard.wcBackground1.color.cgColor,
+                    Asset.Colors.AccountCard.wcBackground2.color.cgColor
+                ]
+                stackViewBackgroudLayer.backgroundColor =
+                    Asset.Colors.AccountCard.wcBackground3.color.cgColor
+                shadowLayer?.shadowColor =
+                    Asset.Colors.Shadow.Card.all.color.cgColor
+            } else {
+                chainLargeImageView.image = displayBlockchain.chainBgImage
+                backgroundLayer.colors = displayBlockchain.accoundCardBgColors
+                stackViewBackgroudLayer.backgroundColor = displayBlockchain.bottomBgColor
+                shadowLayer?.shadowColor = displayBlockchain.shadowColor
+            }
         }
-    }
 }
 // swiftlint:ensable force_cast line_length type_body_length file_length

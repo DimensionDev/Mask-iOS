@@ -79,7 +79,6 @@ class BalanceAccountCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         let shadowLayer = accountCardShadowView.layer
-        shadowLayer.shadowColor = Asset.Colors.Shadow.accoundCard.color.cgColor
         shadowLayer.shadowOpacity = 1
         shadowLayer.shadowOffset = .zero
         shadowLayer.shadowRadius = 10
@@ -93,14 +92,14 @@ class BalanceAccountCell: UITableViewCell {
                                alpha: 1,
                                x: 0,
                                y: 10,
-                               blur: 25,
+                               blur: 6,
                                cornerRadius: 16,
                                spread: 0)
         receiveButton.applyShadow(color: Asset.Colors.Shadow.sendButton.color,
                                   alpha: 1,
                                   x: 0,
                                   y: 10,
-                                  blur: 25,
+                                  blur: 6,
                                   cornerRadius: 16,
                                   spread: 0)
     }
@@ -119,6 +118,8 @@ class BalanceAccountCell: UITableViewCell {
     
     weak var delegate: BalanceAccountCellDelegate?
     private func _init() {
+        accountCardView.shadowView = accountCardShadowView
+        
         selectionStyle = .none
         backgroundColor = .clear
         
