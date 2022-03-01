@@ -63,6 +63,7 @@ internal enum Asset {
       internal static let mask = ColorAsset(name: "Colors/Background/mask")
       internal static let normal = ColorAsset(name: "Colors/Background/normal")
       internal static let selected = ColorAsset(name: "Colors/Background/selected")
+      internal static let toast = ColorAsset(name: "Colors/Background/toast")
       internal static let twitterMask = ColorAsset(name: "Colors/Background/twitterMask")
       internal static let walletConnect = ColorAsset(name: "Colors/Background/walletConnect")
       internal static let warningsBg = ColorAsset(name: "Colors/Background/warnings-bg")
@@ -390,6 +391,9 @@ internal enum Asset {
         internal static let iconSend = ImageAsset(name: "Images/Scene/transaction/iconSend")
         internal static let iconSwap = ImageAsset(name: "Images/Scene/transaction/iconSwap")
       }
+    }
+    internal enum Toast {
+      internal static let check = ImageAsset(name: "Images/Toast/check")
     }
   }
   internal enum Plugins {

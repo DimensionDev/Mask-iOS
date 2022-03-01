@@ -71,9 +71,6 @@
             "change_backup_password_failed": {
                 "title": "Backup Password changed failed!"
             },
-            "wallet_backup": {
-                "title": "Copied!"
-            },
             "identity_phrase": {
                 "title": "Identity Phrase",
                 "description": "Your identity phrase is composed of randomly selected words. Please carefully write down each word in the order it appears."
@@ -168,7 +165,8 @@
             "download_next": "I downloaded, next"
         },
         "toast": {
-            "saved": "Saved！"
+            "saved": "Saved！",
+            "copy": "copied!"
         },
         "loading": "Loading..."
     },

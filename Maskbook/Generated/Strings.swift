@@ -384,13 +384,6 @@ enum L10n {
         }
       }
 
-      enum WalletBackup {
-        /// Copied!
-        static var title: String {
-          return L10n.tr("Localizable", "Common.Alert.WalletBackup.Title")
-        }
-      }
-
       enum WalletCreateSuccess {
         /// In order to protect your funds against hackers and thieves, store this recovery phrase in a safe and secure place.
         static var description: String {
@@ -553,6 +546,10 @@ enum L10n {
     }
 
     enum Toast {
+      /// copied!
+      static var copy: String {
+        return L10n.tr("Localizable", "Common.Toast.Copy")
+      }
       /// Saved！
       static var saved: String {
         return L10n.tr("Localizable", "Common.Toast.Saved")

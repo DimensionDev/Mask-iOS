@@ -66,7 +66,6 @@
 "Common.Alert.SetupBackupPasswordFailed.Title" = "Backup Password set up failed!";
 "Common.Alert.Signout.Description" = "Mask Network does not save any of your data. Please remember your account and password, and back up your data in time before your sign out.";
 "Common.Alert.Signout.Title" = "Are you sure?";
-"Common.Alert.WalletBackup.Title" = "Copied!";
 "Common.Alert.WalletCreateSuccess.Description" = "In order to protect your funds against hackers and thieves, store this recovery phrase in a safe and secure place.";
 "Common.Alert.WalletCreateSuccess.Title" = "Perfect!";
 "Common.Alert.WalletDeriveSuccess.Description" = "New wallet account created successfully";
@@ -105,6 +104,7 @@
 "Common.Controls.Verify" = "Verify";
 "Common.Controls.WebviewGoBack" = "Back";
 "Common.Loading" = "Loading...";
+"Common.Toast.Copy" = "copied!";
 "Common.Toast.Saved" = "Saved！";
 "Scene.App.GoodLuckNextTime" = "Better Luck next time";
 "Scene.App.MarketTrendSource" = "Market trend source";

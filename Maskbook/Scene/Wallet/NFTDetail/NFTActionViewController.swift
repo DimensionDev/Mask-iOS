@@ -187,9 +187,9 @@ extension NFTActionViewController {
             }, completionHandler: { isSuccess, _ in
                 DispatchQueue.main.async {
                     if isSuccess {
-                        UIApplication.getTopViewController()?.view
-                            .makeToast(L10n.Common.Toast.saved,
-                                       position: .center)
+//                        UIApplication.getTopViewController()?.view
+//                            .makeToast(L10n.Common.Toast.saved,
+//                                       position: .center)
                     } else  {
                         
                     }
