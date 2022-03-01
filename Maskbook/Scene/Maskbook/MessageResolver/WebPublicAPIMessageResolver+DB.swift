@@ -475,6 +475,9 @@ extension WebPublicApiMessageResolver {
             PersonaRepository.updatePersonaAvatar(identifier: identifier, avatar: avatar)
             return true
         }
+        // cache image for later usage
+        KingfisherManager.shared.retrieveImage(with: URL(string: avatar)!,
+                                               completionHandler: nil)
         return false
     }
     
