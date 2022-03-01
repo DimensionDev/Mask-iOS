@@ -131,8 +131,10 @@ class BalanceAccountCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             accountCardView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 15),
-            accountCardView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 22.5),
-            accountCardView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -22.5),
+            accountCardView.leadingAnchor.constraint(
+                equalTo: contentView.readableContentGuide.leadingAnchor),
+            accountCardView.trailingAnchor.constraint(
+                equalTo: contentView.readableContentGuide.trailingAnchor),
             accountCardView.heightAnchor.constraint(equalToConstant: 186)
         ])
         

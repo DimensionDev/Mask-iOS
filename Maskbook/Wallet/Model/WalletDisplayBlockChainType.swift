@@ -120,8 +120,8 @@ extension WalletDisplayBlockChainType: Equatable {
     var accoundCardBgColors: [CGColor] {
         switch self {
         case .all:
-            return [Asset.Colors.AccountCard.background1.color.cgColor,
-                    Asset.Colors.AccountCard.background2.color.cgColor]
+            return [Asset.Colors.AccountCard.Chains.all1.color.cgColor,
+                    Asset.Colors.AccountCard.Chains.all2.color.cgColor]
             
         case .blockchain(let blockchain):
             switch blockchain.rawValue {
@@ -154,6 +154,23 @@ extension WalletDisplayBlockChainType: Equatable {
                 
             default:
                 return []
+            }
+        }
+    }
+    
+    var bottomBgColor: CGColor {
+        switch self {
+        case .all: return Asset.Colors.AccountCard.Chains.all3.color.cgColor
+            
+        case .blockchain(let blockchain):
+            switch blockchain.rawValue {
+            case .eth: return Asset.Colors.AccountCard.Chains.eth3.color.cgColor
+            case .bsc: return Asset.Colors.AccountCard.Chains.bsc3.color.cgColor
+            case .polygon: return Asset.Colors.AccountCard.Chains.matic3.color.cgColor
+            case .arbitrum: return Asset.Colors.AccountCard.Chains.arbitrum3.color.cgColor
+            case .xdai: return Asset.Colors.AccountCard.Chains.xdai3.color.cgColor
+            case .optimism: return Asset.Colors.AccountCard.Chains.optimism3.color.cgColor
+            default: return Asset.Colors.AccountCard.Chains.all3.color.cgColor
             }
         }
     }
