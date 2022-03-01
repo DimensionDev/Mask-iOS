@@ -19,7 +19,7 @@ enum L10n {
       static var arbitrum: String {
         return L10n.tr("Localizable", "Chain.Name.Arbitrum")
       }
-      /// Binance smart chain
+      /// BNB Chain
       static var bsc: String {
         return L10n.tr("Localizable", "Chain.Name.Bsc")
       }
@@ -39,7 +39,7 @@ enum L10n {
       static var polygon: String {
         return L10n.tr("Localizable", "Chain.Name.Polygon")
       }
-      /// xDai
+      /// Gnosis
       static var xdai: String {
         return L10n.tr("Localizable", "Chain.Name.Xdai")
       }
@@ -50,7 +50,7 @@ enum L10n {
       static var arbitrum: String {
         return L10n.tr("Localizable", "Chain.ShortName.Arbitrum")
       }
-      /// BSC
+      /// BNB
       static var bsc: String {
         return L10n.tr("Localizable", "Chain.ShortName.Bsc")
       }
@@ -70,7 +70,7 @@ enum L10n {
       static var polygon: String {
         return L10n.tr("Localizable", "Chain.ShortName.Polygon")
       }
-      /// xDai
+      /// Gnosis
       static var xdai: String {
         return L10n.tr("Localizable", "Chain.ShortName.Xdai")
       }
@@ -1114,6 +1114,14 @@ enum L10n {
     }
 
     enum NftDetail {
+      /// View Collection Website
+      static var collectionWeb: String {
+        return L10n.tr("Localizable", "Scene.NftDetail.CollectionWeb")
+      }
+      /// View on Etherscan
+      static var etherscan: String {
+        return L10n.tr("Localizable", "Scene.NftDetail.Etherscan")
+      }
       /// Floor Price
       static var floorPrice: String {
         return L10n.tr("Localizable", "Scene.NftDetail.FloorPrice")
@@ -1125,6 +1133,10 @@ enum L10n {
       /// List Price
       static var listPrice: String {
         return L10n.tr("Localizable", "Scene.NftDetail.ListPrice")
+      }
+      /// Save to Photos
+      static var savePhoto: String {
+        return L10n.tr("Localizable", "Scene.NftDetail.SavePhoto")
       }
     }
 
@@ -1724,6 +1736,10 @@ enum L10n {
         /// Hold to Send
         static var btnWithoutpassword: String {
           return L10n.tr("Localizable", "Scene.Sendtransaction.Send.BtnWithoutpassword")
+        }
+        /// Insufficient gas balance.
+        static var gasfeeError: String {
+          return L10n.tr("Localizable", "Scene.Sendtransaction.Send.GasfeeError")
         }
         /// Amount
         static var labelAmount: String {

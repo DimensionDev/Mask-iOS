@@ -100,7 +100,7 @@ exports.AbiType = web3_1.AbiType;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const utils_1 = __webpack_require__(31557);
-const ethABI = __webpack_require__(60843);
+const ethABI = __webpack_require__(80848);
 const wyvern_js_1 = __webpack_require__(96577);
 const types_1 = __webpack_require__(66395);
 const failWith = (msg) => {
@@ -2492,7 +2492,7 @@ exports.rinkebyTokens = {
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const Web3 = __webpack_require__(90582);
-const types_1 = __webpack_require__(87265);
+const types_1 = __webpack_require__(39904);
 exports.FunctionInputKind = types_1.FunctionInputKind;
 var Network;
 (function (Network) {

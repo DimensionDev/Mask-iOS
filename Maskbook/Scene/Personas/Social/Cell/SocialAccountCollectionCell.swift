@@ -32,7 +32,7 @@ class SocialAccountCollectionCell: UICollectionViewCell {
     
     private var avatarView: AvatarView = {
         let view = AvatarView(title: "")
-        view.applyCornerRadius(radius: 32, cornerCurve: .circular)
+        view.layer.cornerRadius = 32
         view.backgroundColor = Asset.Colors.Public.blue.color
         view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

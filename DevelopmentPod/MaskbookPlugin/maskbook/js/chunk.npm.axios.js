@@ -1580,7 +1580,7 @@ module.exports = __webpack_require__(82604);
 
 var utils = __webpack_require__(14665);
 var settle = __webpack_require__(38142);
-var cookies = __webpack_require__(70409);
+var cookies = __webpack_require__(8743);
 var buildURL = __webpack_require__(92235);
 var buildFullPath = __webpack_require__(39882);
 var parseHeaders = __webpack_require__(48511);
@@ -2663,7 +2663,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 /***/ }),
 
-/***/ 70409:
+/***/ 8743:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
