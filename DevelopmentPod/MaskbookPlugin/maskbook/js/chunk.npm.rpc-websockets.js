@@ -22,7 +22,7 @@ var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(950
 
 var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(21618));
 
-var _websocket = _interopRequireDefault(__webpack_require__(80778));
+var _websocket = _interopRequireDefault(__webpack_require__(63632));
 
 var _client = _interopRequireDefault(__webpack_require__(85258));
 
@@ -554,7 +554,7 @@ exports["default"] = CommonClient;
 
 /***/ }),
 
-/***/ 80778:
+/***/ 63632:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 /**

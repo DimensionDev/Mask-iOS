@@ -43,15 +43,15 @@ var hashes = __webpack_require__(76360);
 var namehash = __webpack_require__(82190);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+networks@5.4.1/node_modules/@ethersproject/networks/lib.esm/index.js + 1 modules
 var networks_lib_esm = __webpack_require__(88562);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+sha2@5.4.0/node_modules/@ethersproject/sha2/lib.esm/sha2.js + 1 modules
-var sha2 = __webpack_require__(11149);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+sha2@5.4.0/node_modules/@ethersproject/sha2/lib.esm/sha2.js + 2 modules
+var sha2 = __webpack_require__(71252);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/bech32@1.1.4/node_modules/bech32/index.js
 var bech32 = __webpack_require__(37092);
 var bech32_default = /*#__PURE__*/__webpack_require__.n(bech32);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+address@5.4.0/node_modules/@ethersproject/address/lib.esm/index.js + 1 modules
 var address_lib_esm = __webpack_require__(99747);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+constants@5.4.0/node_modules/@ethersproject/constants/lib.esm/addresses.js
-var addresses = __webpack_require__(26367);
+var addresses = __webpack_require__(32704);
 ;// CONCATENATED MODULE: ../../node_modules/.pnpm/@ethersproject+providers@5.4.2/node_modules/@ethersproject/providers/lib.esm/formatter.js
 
 
@@ -224,7 +224,7 @@ class Formatter {
             if (!strict && value.substring(0, 2) !== "0x") {
                 value = "0x" + value;
             }
-            if ((0,bytes_lib_esm/* isHexString */.A7)(value)) {
+            if ((0,bytes_lib_esm.isHexString)(value)) {
                 return value.toLowerCase();
             }
         }
@@ -243,10 +243,10 @@ class Formatter {
         return (0,address_lib_esm.getAddress)(value);
     }
     callAddress(value) {
-        if (!(0,bytes_lib_esm/* isHexString */.A7)(value, 32)) {
+        if (!(0,bytes_lib_esm.isHexString)(value, 32)) {
             return null;
         }
-        const address = (0,address_lib_esm.getAddress)((0,bytes_lib_esm/* hexDataSlice */.p3)(value, 12));
+        const address = (0,address_lib_esm.getAddress)((0,bytes_lib_esm.hexDataSlice)(value, 12));
         return (address === addresses/* AddressZero */.d) ? null : address;
     }
     contractAddress(value) {
@@ -263,15 +263,15 @@ class Formatter {
         if (blockTag === "latest" || blockTag === "pending") {
             return blockTag;
         }
-        if (typeof (blockTag) === "number" || (0,bytes_lib_esm/* isHexString */.A7)(blockTag)) {
-            return (0,bytes_lib_esm/* hexValue */.$P)(blockTag);
+        if (typeof (blockTag) === "number" || (0,bytes_lib_esm.isHexString)(blockTag)) {
+            return (0,bytes_lib_esm.hexValue)(blockTag);
         }
         throw new Error("invalid blockTag");
     }
     // Requires a hash, optionally requires 0x prefix; returns prefixed lowercase hash.
     hash(value, strict) {
         const result = this.hex(value, strict);
-        if ((0,bytes_lib_esm/* hexDataLength */.E1)(result) !== 32) {
+        if ((0,bytes_lib_esm.hexDataLength)(result) !== 32) {
             return logger.throwArgumentError("invalid hash", "value", value);
         }
         return result;
@@ -289,10 +289,10 @@ class Formatter {
         return null;
     }
     uint256(value) {
-        if (!(0,bytes_lib_esm/* isHexString */.A7)(value)) {
+        if (!(0,bytes_lib_esm.isHexString)(value)) {
             throw new Error("invalid uint256");
         }
-        return (0,bytes_lib_esm/* hexZeroPad */.$m)(value, 32);
+        return (0,bytes_lib_esm.hexZeroPad)(value, 32);
     }
     _block(value, format) {
         if (value.author != null && value.miner == null) {
@@ -334,7 +334,7 @@ class Formatter {
         const result = Formatter.check(this.formats.transaction, transaction);
         if (transaction.chainId != null) {
             let chainId = transaction.chainId;
-            if ((0,bytes_lib_esm/* isHexString */.A7)(chainId)) {
+            if ((0,bytes_lib_esm.isHexString)(chainId)) {
                 chainId = bignumber/* BigNumber.from */.O$.from(chainId).toNumber();
             }
             result.chainId = chainId;
@@ -345,7 +345,7 @@ class Formatter {
             if (chainId == null && result.v == null) {
                 chainId = transaction.chainId;
             }
-            if ((0,bytes_lib_esm/* isHexString */.A7)(chainId)) {
+            if ((0,bytes_lib_esm.isHexString)(chainId)) {
                 chainId = bignumber/* BigNumber.from */.O$.from(chainId).toNumber();
             }
             if (typeof (chainId) !== "number" && result.v != null) {
@@ -525,7 +525,7 @@ function checkTopic(topic) {
     if (topic == null) {
         return "null";
     }
-    if ((0,bytes_lib_esm/* hexDataLength */.E1)(topic) !== 32) {
+    if ((0,bytes_lib_esm.hexDataLength)(topic) !== 32) {
         base_provider_logger.throwArgumentError("invalid topic", "topic", topic);
     }
     return topic.toLowerCase();
@@ -570,7 +570,7 @@ function deserializeTopics(data) {
 function getEventTag(eventName) {
     if (typeof (eventName) === "string") {
         eventName = eventName.toLowerCase();
-        if ((0,bytes_lib_esm/* hexDataLength */.E1)(eventName) === 32) {
+        if ((0,bytes_lib_esm.hexDataLength)(eventName) === 32) {
             return "tx:" + eventName;
         }
         if (eventName.indexOf(":") === -1) {
@@ -670,11 +670,11 @@ const coinInfos = {
     "700": { symbol: "xdai", ilk: "eth" },
 };
 function bytes32ify(value) {
-    return (0,bytes_lib_esm/* hexZeroPad */.$m)(bignumber/* BigNumber.from */.O$.from(value).toHexString(), 32);
+    return (0,bytes_lib_esm.hexZeroPad)(bignumber/* BigNumber.from */.O$.from(value).toHexString(), 32);
 }
 // Compute the Base58Check encoded data (checksum is first 4 bytes of sha256d)
 function base58Encode(data) {
-    return basex_lib_esm/* Base58.encode */.eU.encode((0,bytes_lib_esm/* concat */.zo)([data, (0,bytes_lib_esm/* hexDataSlice */.p3)((0,sha2/* sha256 */.JQ)((0,sha2/* sha256 */.JQ)(data)), 0, 4)]));
+    return basex_lib_esm/* Base58.encode */.eU.encode((0,bytes_lib_esm.concat)([data, (0,bytes_lib_esm.hexDataSlice)((0,sha2/* sha256 */.JQ)((0,sha2/* sha256 */.JQ)(data)), 0, 4)]));
 }
 class Resolver {
     constructor(provider, address, name) {
@@ -687,16 +687,16 @@ class Resolver {
             // keccak256("addr(bytes32,uint256)")
             const transaction = {
                 to: this.address,
-                data: (0,bytes_lib_esm/* hexConcat */.xs)([selector, (0,namehash/* namehash */.V)(this.name), (parameters || "0x")])
+                data: (0,bytes_lib_esm.hexConcat)([selector, (0,namehash/* namehash */.V)(this.name), (parameters || "0x")])
             };
             try {
                 const result = yield this.provider.call(transaction);
                 if (result === "0x") {
                     return null;
                 }
-                const offset = bignumber/* BigNumber.from */.O$.from((0,bytes_lib_esm/* hexDataSlice */.p3)(result, 0, 32)).toNumber();
-                const length = bignumber/* BigNumber.from */.O$.from((0,bytes_lib_esm/* hexDataSlice */.p3)(result, offset, offset + 32)).toNumber();
-                return (0,bytes_lib_esm/* hexDataSlice */.p3)(result, offset + 32, offset + 32 + length);
+                const offset = bignumber/* BigNumber.from */.O$.from((0,bytes_lib_esm.hexDataSlice)(result, 0, 32)).toNumber();
+                const length = bignumber/* BigNumber.from */.O$.from((0,bytes_lib_esm.hexDataSlice)(result, offset, offset + 32)).toNumber();
+                return (0,bytes_lib_esm.hexDataSlice)(result, offset + 32, offset + 32 + length);
             }
             catch (error) {
                 if (error.code === logger_lib_esm/* Logger.errors.CALL_EXCEPTION */.Yd.errors.CALL_EXCEPTION) {
@@ -716,14 +716,14 @@ class Resolver {
         if (coinInfo.ilk === "eth") {
             return this.provider.formatter.address(hexBytes);
         }
-        const bytes = (0,bytes_lib_esm/* arrayify */.lE)(hexBytes);
+        const bytes = (0,bytes_lib_esm.arrayify)(hexBytes);
         // P2PKH: OP_DUP OP_HASH160 <pubKeyHash> OP_EQUALVERIFY OP_CHECKSIG
         if (coinInfo.p2pkh != null) {
             const p2pkh = hexBytes.match(/^0x76a9([0-9a-f][0-9a-f])([0-9a-f]*)88ac$/);
             if (p2pkh) {
                 const length = parseInt(p2pkh[1], 16);
                 if (p2pkh[2].length === length * 2 && length >= 1 && length <= 75) {
-                    return base58Encode((0,bytes_lib_esm/* concat */.zo)([[coinInfo.p2pkh], ("0x" + p2pkh[2])]));
+                    return base58Encode((0,bytes_lib_esm.concat)([[coinInfo.p2pkh], ("0x" + p2pkh[2])]));
                 }
             }
         }
@@ -733,7 +733,7 @@ class Resolver {
             if (p2sh) {
                 const length = parseInt(p2sh[1], 16);
                 if (p2sh[2].length === length * 2 && length >= 1 && length <= 75) {
-                    return base58Encode((0,bytes_lib_esm/* concat */.zo)([[coinInfo.p2sh], ("0x" + p2sh[2])]));
+                    return base58Encode((0,bytes_lib_esm.concat)([[coinInfo.p2sh], ("0x" + p2sh[2])]));
                 }
             }
         }
@@ -838,12 +838,12 @@ class Resolver {
             let keyBytes = (0,utf8/* toUtf8Bytes */.Y0)(key);
             // The nodehash consumes the first slot, so the string pointer targets
             // offset 64, with the length at offset 64 and data starting at offset 96
-            keyBytes = (0,bytes_lib_esm/* concat */.zo)([bytes32ify(64), bytes32ify(keyBytes.length), keyBytes]);
+            keyBytes = (0,bytes_lib_esm.concat)([bytes32ify(64), bytes32ify(keyBytes.length), keyBytes]);
             // Pad to word-size (32 bytes)
             if ((keyBytes.length % 32) !== 0) {
-                keyBytes = (0,bytes_lib_esm/* concat */.zo)([keyBytes, (0,bytes_lib_esm/* hexZeroPad */.$m)("0x", 32 - (key.length % 32))]);
+                keyBytes = (0,bytes_lib_esm.concat)([keyBytes, (0,bytes_lib_esm.hexZeroPad)("0x", 32 - (key.length % 32))]);
             }
-            const hexBytes = yield this._fetchBytes("0x59d1d43c", (0,bytes_lib_esm/* hexlify */.Dv)(keyBytes));
+            const hexBytes = yield this._fetchBytes("0x59d1d43c", (0,bytes_lib_esm.hexlify)(keyBytes));
             if (hexBytes == null || hexBytes === "0x") {
                 return null;
             }
@@ -1479,7 +1479,7 @@ class BaseProvider extends abstract_provider_lib_esm/* Provider */.zt {
             });
             const result = yield this.perform("getCode", params);
             try {
-                return (0,bytes_lib_esm/* hexlify */.Dv)(result);
+                return (0,bytes_lib_esm.hexlify)(result);
             }
             catch (error) {
                 return base_provider_logger.throwError("bad result from backend", logger_lib_esm/* Logger.errors.SERVER_ERROR */.Yd.errors.SERVER_ERROR, {
@@ -1495,11 +1495,11 @@ class BaseProvider extends abstract_provider_lib_esm/* Provider */.zt {
             const params = yield (0,properties_lib_esm/* resolveProperties */.mE)({
                 address: this._getAddress(addressOrName),
                 blockTag: this._getBlockTag(blockTag),
-                position: Promise.resolve(position).then((p) => (0,bytes_lib_esm/* hexValue */.$P)(p))
+                position: Promise.resolve(position).then((p) => (0,bytes_lib_esm.hexValue)(p))
             });
             const result = yield this.perform("getStorageAt", params);
             try {
-                return (0,bytes_lib_esm/* hexlify */.Dv)(result);
+                return (0,bytes_lib_esm.hexlify)(result);
             }
             catch (error) {
                 return base_provider_logger.throwError("bad result from backend", logger_lib_esm/* Logger.errors.SERVER_ERROR */.Yd.errors.SERVER_ERROR, {
@@ -1511,7 +1511,7 @@ class BaseProvider extends abstract_provider_lib_esm/* Provider */.zt {
     }
     // This should be called by any subclass wrapping a TransactionResponse
     _wrapTransaction(tx, hash, startBlock) {
-        if (hash != null && (0,bytes_lib_esm/* hexDataLength */.E1)(hash) !== 32) {
+        if (hash != null && (0,bytes_lib_esm.hexDataLength)(hash) !== 32) {
             throw new Error("invalid response - sendTransaction");
         }
         const result = tx;
@@ -1558,7 +1558,7 @@ class BaseProvider extends abstract_provider_lib_esm/* Provider */.zt {
     sendTransaction(signedTransaction) {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.getNetwork();
-            const hexTx = yield Promise.resolve(signedTransaction).then(t => (0,bytes_lib_esm/* hexlify */.Dv)(t));
+            const hexTx = yield Promise.resolve(signedTransaction).then(t => (0,bytes_lib_esm.hexlify)(t));
             const tx = this.formatter.transaction(signedTransaction);
             if (tx.confirmations == null) {
                 tx.confirmations = 0;
@@ -1604,7 +1604,7 @@ class BaseProvider extends abstract_provider_lib_esm/* Provider */.zt {
                 if (values[key] == null) {
                     return;
                 }
-                tx[key] = Promise.resolve(values[key]).then((v) => (v ? (0,bytes_lib_esm/* hexlify */.Dv)(v) : null));
+                tx[key] = Promise.resolve(values[key]).then((v) => (v ? (0,bytes_lib_esm.hexlify)(v) : null));
             });
             return this.formatter.transactionRequest(yield (0,properties_lib_esm/* resolveProperties */.mE)(tx));
         });
@@ -1640,7 +1640,7 @@ class BaseProvider extends abstract_provider_lib_esm/* Provider */.zt {
             });
             const result = yield this.perform("call", params);
             try {
-                return (0,bytes_lib_esm/* hexlify */.Dv)(result);
+                return (0,bytes_lib_esm.hexlify)(result);
             }
             catch (error) {
                 return base_provider_logger.throwError("bad result from backend", logger_lib_esm/* Logger.errors.SERVER_ERROR */.Yd.errors.SERVER_ERROR, {
@@ -1688,13 +1688,13 @@ class BaseProvider extends abstract_provider_lib_esm/* Provider */.zt {
             const params = {
                 includeTransactions: !!includeTransactions
             };
-            if ((0,bytes_lib_esm/* isHexString */.A7)(blockHashOrBlockTag, 32)) {
+            if ((0,bytes_lib_esm.isHexString)(blockHashOrBlockTag, 32)) {
                 params.blockHash = blockHashOrBlockTag;
             }
             else {
                 try {
                     params.blockTag = this.formatter.blockTag(yield this._getBlockTag(blockHashOrBlockTag));
-                    if ((0,bytes_lib_esm/* isHexString */.A7)(params.blockTag)) {
+                    if ((0,bytes_lib_esm.isHexString)(params.blockTag)) {
                         blockNumber = parseInt(params.blockTag.substring(2), 16);
                     }
                 }
@@ -1907,7 +1907,7 @@ class BaseProvider extends abstract_provider_lib_esm/* Provider */.zt {
             }
             catch (error) {
                 // If is is a hexstring, the address is bad (See #694)
-                if ((0,bytes_lib_esm/* isHexString */.A7)(name)) {
+                if ((0,bytes_lib_esm.isHexString)(name)) {
                     throw error;
                 }
             }
@@ -1932,7 +1932,7 @@ class BaseProvider extends abstract_provider_lib_esm/* Provider */.zt {
                 return null;
             }
             // keccak("name(bytes32)")
-            let bytes = (0,bytes_lib_esm/* arrayify */.lE)(yield this.call({
+            let bytes = (0,bytes_lib_esm.arrayify)(yield this.call({
                 to: resolverAddress,
                 data: ("0x691f3431" + (0,namehash/* namehash */.V)(reverseName).substring(2))
             }));
@@ -2092,7 +2092,7 @@ function checkError(method, error, params) {
     // incompatibility; maybe for v6 consider forwarding reverts as errors
     if (method === "call" && error.code === logger_lib_esm/* Logger.errors.SERVER_ERROR */.Yd.errors.SERVER_ERROR) {
         const e = error.error;
-        if (e && e.message.match("reverted") && (0,bytes_lib_esm/* isHexString */.A7)(e.data)) {
+        if (e && e.message.match("reverted") && (0,bytes_lib_esm.isHexString)(e.data)) {
             return e.data;
         }
         json_rpc_provider_logger.throwError("missing revert data in call exception", logger_lib_esm/* Logger.errors.CALL_EXCEPTION */.Yd.errors.CALL_EXCEPTION, {
@@ -2290,7 +2290,7 @@ class JsonRpcSigner extends lib_esm/* Signer */.E {
             const data = ((typeof (message) === "string") ? (0,utf8/* toUtf8Bytes */.Y0)(message) : message);
             const address = yield this.getAddress();
             // https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_sign
-            return yield this.provider.send("eth_sign", [address.toLowerCase(), (0,bytes_lib_esm/* hexlify */.Dv)(data)]);
+            return yield this.provider.send("eth_sign", [address.toLowerCase(), (0,bytes_lib_esm.hexlify)(data)]);
         });
     }
     _signTypedData(domain, types, value) {
@@ -2611,7 +2611,7 @@ class JsonRpcProvider extends BaseProvider {
             if (transaction[key] == null) {
                 return;
             }
-            const value = (0,bytes_lib_esm/* hexValue */.$P)(transaction[key]);
+            const value = (0,bytes_lib_esm.hexValue)(transaction[key]);
             if (key === "gasLimit") {
                 key = "gas";
             }
@@ -2621,7 +2621,7 @@ class JsonRpcProvider extends BaseProvider {
             if (transaction[key] == null) {
                 return;
             }
-            result[key] = (0,bytes_lib_esm/* hexlify */.Dv)(transaction[key]);
+            result[key] = (0,bytes_lib_esm.hexlify)(transaction[key]);
         });
         if (transaction.accessList) {
             result["accessList"] = (0,transactions_lib_esm.accessListify)(transaction.accessList);
