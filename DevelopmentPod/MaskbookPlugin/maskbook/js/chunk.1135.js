@@ -34,6 +34,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(43576);
 /* harmony import */ var _shared_native_rpc__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(75126);
 /* harmony import */ var _shared__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(71986);
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(15594);
+
 
 
 
@@ -41,7 +43,7 @@ async function consistentPersonaDBWriteAccess(action) {
     await action();
 }
 async function createRelationsTransaction() {
-    return Promise.resolve();
+    return;
 }
 async function createPersonaDB(record) {
     await (_shared_native_rpc__WEBPACK_IMPORTED_MODULE_1__/* .nativeAPI */ .Nz === null || _shared_native_rpc__WEBPACK_IMPORTED_MODULE_1__/* .nativeAPI */ .Nz === void 0 ? void 0 : _shared_native_rpc__WEBPACK_IMPORTED_MODULE_1__/* .nativeAPI.api.create_persona */ .Nz.api.create_persona({
@@ -311,12 +313,14 @@ function partialPersonaRecordToDB(x) {
     };
 }
 function personaRecordOutDB(x) {
+    const identifier = _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .Identifier.fromString */ .xb.fromString(x.identifier, _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .ECKeyIdentifier */ .ob).unwrap();
     return {
         ...x,
         publicKey: x.publicKey,
+        publicHexKey: (0,_util__WEBPACK_IMPORTED_MODULE_3__/* .convertPersonaHexPublicKey */ .k)(identifier),
         privateKey: x.privateKey,
         localKey: x.localKey,
-        identifier: _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .Identifier.fromString */ .xb.fromString(x.identifier, _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .ECKeyIdentifier */ .ob).unwrap(),
+        identifier,
         linkedProfiles: new _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .IdentifierMap */ .qD(new Map(Object.entries(x.linkedProfiles)), _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .ProfileIdentifier */ .WO),
         createdAt: new Date(x.createdAt),
         updatedAt: new Date(x.updatedAt)
@@ -368,6 +372,24 @@ function relationRecordOutDB(x) {
         linked: _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .Identifier.fromString */ .xb.fromString(x.linked, _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .ECKeyIdentifier */ .ob).unwrap()
     };
 } // #endregion
+
+
+/***/ }),
+
+/***/ 15594:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "k": () => (/* binding */ convertPersonaHexPublicKey)
+/* harmony export */ });
+/* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(43576);
+
+function convertPersonaHexPublicKey(persona) {
+    const key256 = (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .decompressSecp256k1Key */ .qX)(persona.compressedPoint.replace(/\|/g, '/'));
+    if (!key256.x || !key256.y) return;
+    const arr = (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .compressSecp256k1Point */ .SH)(key256.x, key256.y);
+    return `0x${(0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .toHex */ .NC)(arr)}`;
+}
 
 
 /***/ })

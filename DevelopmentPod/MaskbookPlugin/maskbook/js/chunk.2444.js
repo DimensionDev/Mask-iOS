@@ -368,8 +368,8 @@ __webpack_require__.d(__webpack_exports__, {
 var src = __webpack_require__(89729);
 // EXTERNAL MODULE: ../web3-shared/flow/index.ts + 8 modules
 var flow = __webpack_require__(5001);
-// EXTERNAL MODULE: ../web3-providers/src/index.ts + 22 modules
-var web3_providers_src = __webpack_require__(13330);
+// EXTERNAL MODULE: ../web3-providers/src/index.ts
+var web3_providers_src = __webpack_require__(23290);
 // EXTERNAL MODULE: ../plugins/Flow/src/helpers/index.ts + 2 modules
 var helpers = __webpack_require__(86807);
 // EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules

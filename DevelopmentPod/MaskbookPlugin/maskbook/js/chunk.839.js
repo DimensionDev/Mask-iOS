@@ -330,8 +330,8 @@ var Collectible_types = __webpack_require__(14685);
 var hooks = __webpack_require__(31638);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+kit@0.0.0-20220223101101-4e6f3b9/node_modules/@dimensiondev/kit/esm/index.js + 1 modules
 var esm = __webpack_require__(85143);
-// EXTERNAL MODULE: ../web3-providers/src/index.ts + 22 modules
-var web3_providers_src = __webpack_require__(13330);
+// EXTERNAL MODULE: ../web3-providers/src/index.ts
+var web3_providers_src = __webpack_require__(23290);
 // EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
 var base_src = __webpack_require__(52522);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/head.js
@@ -4356,8 +4356,8 @@ function useHistory(provider, page, size, address, tokenId) {
     ]);
 }
 
-// EXTERNAL MODULE: ../web3-providers/src/index.ts + 22 modules
-var src = __webpack_require__(13330);
+// EXTERNAL MODULE: ../web3-providers/src/index.ts
+var src = __webpack_require__(23290);
 ;// CONCATENATED MODULE: ./src/plugins/EVM/hooks/useOrders.ts
 
 

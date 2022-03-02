@@ -1235,8 +1235,8 @@ function useDefaultEssay(user) {
     return essayMeta;
 }
 
-// EXTERNAL MODULE: ../web3-providers/src/index.ts + 22 modules
-var src = __webpack_require__(13330);
+// EXTERNAL MODULE: ../web3-providers/src/index.ts
+var src = __webpack_require__(23290);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useChainId.ts
 var useChainId = __webpack_require__(92971);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useCollectibles.ts

@@ -24,8 +24,8 @@ __webpack_require__.d(__webpack_exports__, {
 var esm = __webpack_require__(85143);
 // EXTERNAL MODULE: ../web3-shared/evm/types/index.ts
 var types = __webpack_require__(18249);
-// EXTERNAL MODULE: ../web3-providers/src/index.ts + 22 modules
-var src = __webpack_require__(13330);
+// EXTERNAL MODULE: ../web3-providers/src/index.ts
+var src = __webpack_require__(23290);
 ;// CONCATENATED MODULE: ./src/plugins/EVM/services/Asset/index.ts
 
 

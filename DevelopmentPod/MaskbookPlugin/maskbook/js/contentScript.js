@@ -1,10 +1,357 @@
 /******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
+
+/***/ 35850:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+/**
+ * Copyright (c) 2020, Peculiar Ventures, All rights reserved.
+ */
+
+(function (global, factory) {
+   true ? factory(exports) :
+  0;
+})(this, (function (exports) { 'use strict';
+
+  class BufferSourceConverter {
+      static isArrayBuffer(data) {
+          return Object.prototype.toString.call(data) === '[object ArrayBuffer]';
+      }
+      static toArrayBuffer(data) {
+          const buf = this.toUint8Array(data);
+          if (buf.byteOffset || buf.length) {
+              return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.length);
+          }
+          return buf.buffer;
+      }
+      static toUint8Array(data) {
+          return this.toView(data, Uint8Array);
+      }
+      static toView(data, type) {
+          if (typeof Buffer !== "undefined" && Buffer.isBuffer(data)) {
+              return new type(data.buffer, data.byteOffset, data.byteLength);
+          }
+          if (this.isArrayBuffer(data)) {
+              return new type(data);
+          }
+          if (this.isArrayBufferView(data)) {
+              return new type(data.buffer, data.byteOffset, data.byteLength);
+          }
+          throw new TypeError("The provided value is not of type '(ArrayBuffer or ArrayBufferView)'");
+      }
+      static isBufferSource(data) {
+          return this.isArrayBufferView(data)
+              || this.isArrayBuffer(data);
+      }
+      static isArrayBufferView(data) {
+          return ArrayBuffer.isView(data)
+              || (data && this.isArrayBuffer(data.buffer));
+      }
+      static isEqual(a, b) {
+          const aView = BufferSourceConverter.toUint8Array(a);
+          const bView = BufferSourceConverter.toUint8Array(b);
+          if (aView.length !== bView.byteLength) {
+              return false;
+          }
+          for (let i = 0; i < aView.length; i++) {
+              if (aView[i] !== bView[i]) {
+                  return false;
+              }
+          }
+          return true;
+      }
+  }
+
+  class Utf8Converter {
+      static fromString(text) {
+          const s = unescape(encodeURIComponent(text));
+          const uintArray = new Uint8Array(s.length);
+          for (let i = 0; i < s.length; i++) {
+              uintArray[i] = s.charCodeAt(i);
+          }
+          return uintArray.buffer;
+      }
+      static toString(buffer) {
+          const buf = BufferSourceConverter.toUint8Array(buffer);
+          let encodedString = "";
+          for (let i = 0; i < buf.length; i++) {
+              encodedString += String.fromCharCode(buf[i]);
+          }
+          const decodedString = decodeURIComponent(escape(encodedString));
+          return decodedString;
+      }
+  }
+  class Utf16Converter {
+      static toString(buffer, littleEndian = false) {
+          const arrayBuffer = BufferSourceConverter.toArrayBuffer(buffer);
+          const dataView = new DataView(arrayBuffer);
+          let res = "";
+          for (let i = 0; i < arrayBuffer.byteLength; i += 2) {
+              const code = dataView.getUint16(i, littleEndian);
+              res += String.fromCharCode(code);
+          }
+          return res;
+      }
+      static fromString(text, littleEndian = false) {
+          const res = new ArrayBuffer(text.length * 2);
+          const dataView = new DataView(res);
+          for (let i = 0; i < text.length; i++) {
+              dataView.setUint16(i * 2, text.charCodeAt(i), littleEndian);
+          }
+          return res;
+      }
+  }
+  class Convert {
+      static isHex(data) {
+          return typeof data === "string"
+              && /^[a-z0-9]+$/i.test(data);
+      }
+      static isBase64(data) {
+          return typeof data === "string"
+              && /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(data);
+      }
+      static isBase64Url(data) {
+          return typeof data === "string"
+              && /^[a-zA-Z0-9-_]+$/i.test(data);
+      }
+      static ToString(buffer, enc = "utf8") {
+          const buf = BufferSourceConverter.toUint8Array(buffer);
+          switch (enc.toLowerCase()) {
+              case "utf8":
+                  return this.ToUtf8String(buf);
+              case "binary":
+                  return this.ToBinary(buf);
+              case "hex":
+                  return this.ToHex(buf);
+              case "base64":
+                  return this.ToBase64(buf);
+              case "base64url":
+                  return this.ToBase64Url(buf);
+              case "utf16le":
+                  return Utf16Converter.toString(buf, true);
+              case "utf16":
+              case "utf16be":
+                  return Utf16Converter.toString(buf);
+              default:
+                  throw new Error(`Unknown type of encoding '${enc}'`);
+          }
+      }
+      static FromString(str, enc = "utf8") {
+          if (!str) {
+              return new ArrayBuffer(0);
+          }
+          switch (enc.toLowerCase()) {
+              case "utf8":
+                  return this.FromUtf8String(str);
+              case "binary":
+                  return this.FromBinary(str);
+              case "hex":
+                  return this.FromHex(str);
+              case "base64":
+                  return this.FromBase64(str);
+              case "base64url":
+                  return this.FromBase64Url(str);
+              case "utf16le":
+                  return Utf16Converter.fromString(str, true);
+              case "utf16":
+              case "utf16be":
+                  return Utf16Converter.fromString(str);
+              default:
+                  throw new Error(`Unknown type of encoding '${enc}'`);
+          }
+      }
+      static ToBase64(buffer) {
+          const buf = BufferSourceConverter.toUint8Array(buffer);
+          if (typeof btoa !== "undefined") {
+              const binary = this.ToString(buf, "binary");
+              return btoa(binary);
+          }
+          else {
+              return Buffer.from(buf).toString("base64");
+          }
+      }
+      static FromBase64(base64) {
+          const formatted = this.formatString(base64);
+          if (!formatted) {
+              return new ArrayBuffer(0);
+          }
+          if (!Convert.isBase64(formatted)) {
+              throw new TypeError("Argument 'base64Text' is not Base64 encoded");
+          }
+          if (typeof atob !== "undefined") {
+              return this.FromBinary(atob(formatted));
+          }
+          else {
+              return new Uint8Array(Buffer.from(formatted, "base64")).buffer;
+          }
+      }
+      static FromBase64Url(base64url) {
+          const formatted = this.formatString(base64url);
+          if (!formatted) {
+              return new ArrayBuffer(0);
+          }
+          if (!Convert.isBase64Url(formatted)) {
+              throw new TypeError("Argument 'base64url' is not Base64Url encoded");
+          }
+          return this.FromBase64(this.Base64Padding(formatted.replace(/\-/g, "+").replace(/\_/g, "/")));
+      }
+      static ToBase64Url(data) {
+          return this.ToBase64(data).replace(/\+/g, "-").replace(/\//g, "_").replace(/\=/g, "");
+      }
+      static FromUtf8String(text, encoding = Convert.DEFAULT_UTF8_ENCODING) {
+          switch (encoding) {
+              case "ascii":
+                  return this.FromBinary(text);
+              case "utf8":
+                  return Utf8Converter.fromString(text);
+              case "utf16":
+              case "utf16be":
+                  return Utf16Converter.fromString(text);
+              case "utf16le":
+              case "usc2":
+                  return Utf16Converter.fromString(text, true);
+              default:
+                  throw new Error(`Unknown type of encoding '${encoding}'`);
+          }
+      }
+      static ToUtf8String(buffer, encoding = Convert.DEFAULT_UTF8_ENCODING) {
+          switch (encoding) {
+              case "ascii":
+                  return this.ToBinary(buffer);
+              case "utf8":
+                  return Utf8Converter.toString(buffer);
+              case "utf16":
+              case "utf16be":
+                  return Utf16Converter.toString(buffer);
+              case "utf16le":
+              case "usc2":
+                  return Utf16Converter.toString(buffer, true);
+              default:
+                  throw new Error(`Unknown type of encoding '${encoding}'`);
+          }
+      }
+      static FromBinary(text) {
+          const stringLength = text.length;
+          const resultView = new Uint8Array(stringLength);
+          for (let i = 0; i < stringLength; i++) {
+              resultView[i] = text.charCodeAt(i);
+          }
+          return resultView.buffer;
+      }
+      static ToBinary(buffer) {
+          const buf = BufferSourceConverter.toUint8Array(buffer);
+          let res = "";
+          for (let i = 0; i < buf.length; i++) {
+              res += String.fromCharCode(buf[i]);
+          }
+          return res;
+      }
+      static ToHex(buffer) {
+          const buf = BufferSourceConverter.toUint8Array(buffer);
+          const splitter = "";
+          const res = [];
+          const len = buf.length;
+          for (let i = 0; i < len; i++) {
+              const char = buf[i].toString(16).padStart(2, "0");
+              res.push(char);
+          }
+          return res.join(splitter);
+      }
+      static FromHex(hexString) {
+          let formatted = this.formatString(hexString);
+          if (!formatted) {
+              return new ArrayBuffer(0);
+          }
+          if (!Convert.isHex(formatted)) {
+              throw new TypeError("Argument 'hexString' is not HEX encoded");
+          }
+          if (formatted.length % 2) {
+              formatted = `0${formatted}`;
+          }
+          const res = new Uint8Array(formatted.length / 2);
+          for (let i = 0; i < formatted.length; i = i + 2) {
+              const c = formatted.slice(i, i + 2);
+              res[i / 2] = parseInt(c, 16);
+          }
+          return res.buffer;
+      }
+      static ToUtf16String(buffer, littleEndian = false) {
+          return Utf16Converter.toString(buffer, littleEndian);
+      }
+      static FromUtf16String(text, littleEndian = false) {
+          return Utf16Converter.fromString(text, littleEndian);
+      }
+      static Base64Padding(base64) {
+          const padCount = 4 - (base64.length % 4);
+          if (padCount < 4) {
+              for (let i = 0; i < padCount; i++) {
+                  base64 += "=";
+              }
+          }
+          return base64;
+      }
+      static formatString(data) {
+          return (data === null || data === void 0 ? void 0 : data.replace(/[\n\r\t ]/g, "")) || "";
+      }
+  }
+  Convert.DEFAULT_UTF8_ENCODING = "utf8";
+
+  function assign(target, ...sources) {
+      const res = arguments[0];
+      for (let i = 1; i < arguments.length; i++) {
+          const obj = arguments[i];
+          for (const prop in obj) {
+              res[prop] = obj[prop];
+          }
+      }
+      return res;
+  }
+  function combine(...buf) {
+      const totalByteLength = buf.map((item) => item.byteLength).reduce((prev, cur) => prev + cur);
+      const res = new Uint8Array(totalByteLength);
+      let currentPos = 0;
+      buf.map((item) => new Uint8Array(item)).forEach((arr) => {
+          for (const item2 of arr) {
+              res[currentPos++] = item2;
+          }
+      });
+      return res.buffer;
+  }
+  function isEqual(bytes1, bytes2) {
+      if (!(bytes1 && bytes2)) {
+          return false;
+      }
+      if (bytes1.byteLength !== bytes2.byteLength) {
+          return false;
+      }
+      const b1 = new Uint8Array(bytes1);
+      const b2 = new Uint8Array(bytes2);
+      for (let i = 0; i < bytes1.byteLength; i++) {
+          if (b1[i] !== b2[i]) {
+              return false;
+          }
+      }
+      return true;
+  }
+
+  exports.BufferSourceConverter = BufferSourceConverter;
+  exports.Convert = Convert;
+  exports.assign = assign;
+  exports.combine = combine;
+  exports.isEqual = isEqual;
+
+  Object.defineProperty(exports, '__esModule', { value: true });
+
+}));
+
+
+/***/ }),
 
 /***/ 63462:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "vU": () => (/* binding */ Flags)
 /* harmony export */ });
@@ -78,6 +425,7 @@ if (false) {}
 /***/ 71986:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ql": () => (/* reexport safe */ _messages__WEBPACK_IMPORTED_MODULE_0__.q),
 /* harmony export */   "vU": () => (/* reexport safe */ _flags__WEBPACK_IMPORTED_MODULE_1__.vU),
@@ -101,6 +449,7 @@ if (false) {}
 /***/ 10570:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "$e": () => (/* binding */ setupMaskKVStorageBackend),
 /* harmony export */   "uU": () => (/* binding */ InMemoryStorages),
@@ -139,12 +488,38 @@ const PersistentStorages = {
 
 /***/ }),
 
-/***/ 96554:
+/***/ 45982:
 /***/ ((__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 
+"use strict";
 
-// EXTERNAL MODULE: ./src/setup.ui.0.ts
-var setup_ui_0 = __webpack_require__(94175);
+// EXTERNAL MODULE: ./shared/kv-storage.ts
+var kv_storage = __webpack_require__(10570);
+// EXTERNAL MODULE: ./src/extension/service.ts
+var service = __webpack_require__(99997);
+;// CONCATENATED MODULE: ./src/setup.ui.0.ts
+
+
+const memory = {
+    beforeAutoSync: Promise.resolve(),
+    getValue (...args) {
+        return service/* default.Settings.__kv_storage_read__ */.ZP.Settings.__kv_storage_read__('memory', ...args);
+    },
+    async setValue (...args) {
+        await service/* default.Settings.__kv_storage_write__ */.ZP.Settings.__kv_storage_write__('memory', ...args);
+    }
+};
+const indexedDB = {
+    beforeAutoSync: Promise.resolve(),
+    getValue (...args) {
+        return service/* default.Settings.__kv_storage_read__ */.ZP.Settings.__kv_storage_read__('indexedDB', ...args);
+    },
+    async setValue (...args) {
+        await service/* default.Settings.__kv_storage_write__ */.ZP.Settings.__kv_storage_write__('indexedDB', ...args);
+    }
+};
+(0,kv_storage/* setupMaskKVStorageBackend */.$e)(indexedDB, memory);
+
 // EXTERNAL MODULE: ./src/social-network-adaptor/index.ts + 5 modules
 var social_network_adaptor = __webpack_require__(14906);
 // EXTERNAL MODULE: ./src/social-network/define.ts
@@ -171,6 +546,7 @@ if (shared/* Flags.mask_SDK_ready */.vU.mask_SDK_ready) {
 /***/ 99997:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ZP": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   "Ql": () => (/* binding */ ServicesWithProgress)
@@ -209,7 +585,7 @@ const Services = {
     , 'Helper'),
     Ethereum: add(()=>Promise.all(/* import() */[__webpack_require__.e(2698), __webpack_require__.e(8000), __webpack_require__.e(1440), __webpack_require__.e(2162), __webpack_require__.e(8393), __webpack_require__.e(4227), __webpack_require__.e(4544), __webpack_require__.e(5737), __webpack_require__.e(3883), __webpack_require__.e(2299), __webpack_require__.e(6045), __webpack_require__.e(1077), __webpack_require__.e(2943), __webpack_require__.e(8117), __webpack_require__.e(5756), __webpack_require__.e(8492), __webpack_require__.e(7765), __webpack_require__.e(1305), __webpack_require__.e(5891), __webpack_require__.e(8936), __webpack_require__.e(6265), __webpack_require__.e(1246), __webpack_require__.e(7141), __webpack_require__.e(708), __webpack_require__.e(9447), __webpack_require__.e(5773), __webpack_require__.e(6134), __webpack_require__.e(7542)]).then(__webpack_require__.bind(__webpack_require__, 93195))
     , 'Ethereum'),
-    SocialNetwork: add(()=>Promise.all(/* import() */[__webpack_require__.e(5638), __webpack_require__.e(7871), __webpack_require__.e(8000), __webpack_require__.e(1440), __webpack_require__.e(2162), __webpack_require__.e(8393), __webpack_require__.e(9759), __webpack_require__.e(2475), __webpack_require__.e(6812), __webpack_require__.e(8042)]).then(__webpack_require__.bind(__webpack_require__, 58042))
+    SocialNetwork: add(()=>__webpack_require__.e(/* import() */ 8042).then(__webpack_require__.bind(__webpack_require__, 58042))
     , 'SocialNetwork'),
     Settings: add(()=>Promise.all(/* import() */[__webpack_require__.e(2698), __webpack_require__.e(8000), __webpack_require__.e(1440), __webpack_require__.e(2162), __webpack_require__.e(8393), __webpack_require__.e(3294), __webpack_require__.e(4227), __webpack_require__.e(4544), __webpack_require__.e(5737), __webpack_require__.e(3883), __webpack_require__.e(2299), __webpack_require__.e(6045), __webpack_require__.e(1077), __webpack_require__.e(2943), __webpack_require__.e(6316), __webpack_require__.e(8117), __webpack_require__.e(5756), __webpack_require__.e(8492), __webpack_require__.e(7765), __webpack_require__.e(1305), __webpack_require__.e(5891), __webpack_require__.e(8936), __webpack_require__.e(6265), __webpack_require__.e(1246), __webpack_require__.e(7141), __webpack_require__.e(708), __webpack_require__.e(9447), __webpack_require__.e(5773), __webpack_require__.e(6134), __webpack_require__.e(3370)]).then(__webpack_require__.bind(__webpack_require__, 33281))
     , 'Settings'),
@@ -258,9 +634,194 @@ if (false) {}
 
 /***/ }),
 
+/***/ 34709:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "R": () => (/* binding */ createPluginHost)
+/* harmony export */ });
+/* harmony import */ var _register__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(65641);
+/* harmony import */ var _servie_events__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(69260);
+/* harmony import */ var _utils_messages__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(87478);
+/* harmony import */ var _shared_ui_locales_legacy__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(90795);
+/* harmony import */ var _extension_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(99997);
+/* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(43576);
+// All plugin manager need to call createPluginHost so let's register plugins implicitly.
+
+
+// Do not export from '../utils/' to prevent initialization failure
+
+
+
+
+function createPluginHost(signal, createContext) {
+    const minimalMode = {
+        isEnabled: _extension_service__WEBPACK_IMPORTED_MODULE_3__/* ["default"].Settings.getPluginMinimalModeEnabled */ .ZP.Settings.getPluginMinimalModeEnabled,
+        events: new _servie_events__WEBPACK_IMPORTED_MODULE_5__/* .Emitter */ .Q5()
+    };
+    const removeListener = _utils_messages__WEBPACK_IMPORTED_MODULE_1__/* .MaskMessages.events.pluginMinimalModeChanged.on */ .q.events.pluginMinimalModeChanged.on(([id, val])=>minimalMode.events.emit(val ? 'enabled' : 'disabled', id)
+    );
+    signal === null || signal === void 0 ? void 0 : signal.addEventListener('abort', removeListener);
+    return {
+        signal,
+        minimalMode,
+        addI18NResource (plugin, resource) {
+            (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_4__/* .createI18NBundle */ .C9)(plugin, resource)(_shared_ui_locales_legacy__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z);
+        },
+        createContext
+    };
+}
+
+
+/***/ }),
+
+/***/ 45181:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Iz": () => (/* binding */ FACEBOOK_ID),
+/* harmony export */   "qv": () => (/* binding */ facebookBase),
+/* harmony export */   "DF": () => (/* binding */ isFacebook),
+/* harmony export */   "XO": () => (/* binding */ facebookWorkerBase)
+/* harmony export */ });
+const origins = [
+    'https://www.facebook.com/*',
+    'https://m.facebook.com/*',
+    'https://facebook.com/*'
+];
+const FACEBOOK_ID = 'facebook.com';
+const facebookBase = {
+    networkIdentifier: FACEBOOK_ID,
+    name: 'facebook',
+    declarativePermissions: {
+        origins
+    },
+    shouldActivate (location) {
+        return location.hostname.endsWith(FACEBOOK_ID);
+    }
+};
+function isFacebook(ui) {
+    return ui.networkIdentifier === FACEBOOK_ID;
+}
+const facebookWorkerBase = {
+    ...facebookBase,
+    gunNetworkHint: ''
+};
+
+
+/***/ }),
+
+/***/ 3604:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "j": () => (/* binding */ instagramBase),
+/* harmony export */   "x": () => (/* binding */ instagramWorkerBase)
+/* harmony export */ });
+const id = 'instagram.com';
+const origins = [
+    'https://www.instagram.com/*',
+    'https://m.instagram.com/*',
+    'https://instagram.com/*'
+];
+const instagramBase = {
+    networkIdentifier: id,
+    name: 'instagram',
+    declarativePermissions: {
+        origins
+    },
+    shouldActivate (location) {
+        return location.host.endsWith(id);
+    }
+};
+const instagramWorkerBase = {
+    ...instagramBase,
+    gunNetworkHint: id
+};
+
+
+/***/ }),
+
+/***/ 69825:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "oQ": () => (/* binding */ twitterBase),
+/* harmony export */   "L3": () => (/* binding */ isTwitter),
+/* harmony export */   "x": () => (/* binding */ twitterWorkerBase)
+/* harmony export */ });
+const id = 'twitter.com';
+const origins = [
+    'https://mobile.twitter.com/*',
+    'https://twitter.com/*'
+];
+const twitterBase = {
+    networkIdentifier: id,
+    name: 'twitter',
+    declarativePermissions: {
+        origins
+    },
+    shouldActivate (location) {
+        return location.hostname.endsWith('twitter.com');
+    }
+};
+function isTwitter(ui) {
+    return ui.networkIdentifier === id;
+}
+const twitterWorkerBase = {
+    ...twitterBase,
+    gunNetworkHint: 'twitter-'
+};
+
+
+/***/ }),
+
+/***/ 33410:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "G": () => (/* binding */ getCurrentSNSNetwork),
+/* harmony export */   "T": () => (/* binding */ getCurrentIdentifier)
+/* harmony export */ });
+/* harmony import */ var _twitter_com_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(69825);
+/* harmony import */ var _facebook_com_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(45181);
+/* harmony import */ var _instagram_com_base__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3604);
+/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(89729);
+/* harmony import */ var _social_network__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(44131);
+
+
+
+
+
+function getCurrentSNSNetwork(current) {
+    const table = {
+        [_twitter_com_base__WEBPACK_IMPORTED_MODULE_0__/* .twitterBase.networkIdentifier */ .oQ.networkIdentifier]: _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_3__/* .CurrentSNSNetwork.Twitter */ .mv.Twitter,
+        [_facebook_com_base__WEBPACK_IMPORTED_MODULE_1__/* .facebookBase.networkIdentifier */ .qv.networkIdentifier]: _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_3__/* .CurrentSNSNetwork.Facebook */ .mv.Facebook,
+        [_instagram_com_base__WEBPACK_IMPORTED_MODULE_2__/* .instagramBase.networkIdentifier */ .j.networkIdentifier]: _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_3__/* .CurrentSNSNetwork.Instagram */ .mv.Instagram
+    };
+    if (current in table) return table[current];
+    return _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_3__/* .CurrentSNSNetwork.Unknown */ .mv.Unknown;
+}
+const getCurrentIdentifier = ()=>{
+    var ref;
+    const current = (ref = _social_network__WEBPACK_IMPORTED_MODULE_4__/* .activatedSocialNetworkUI.collecting.identityProvider */ .LM.collecting.identityProvider) === null || ref === void 0 ? void 0 : ref.recognized.value;
+    return _social_network__WEBPACK_IMPORTED_MODULE_4__/* .globalUIState.profiles.value.find */ .EJ.profiles.value.find((i)=>{
+        return i.identifier.equals(current === null || current === void 0 ? void 0 : current.identifier);
+    }) || _social_network__WEBPACK_IMPORTED_MODULE_4__/* .globalUIState.profiles.value[0] */ .EJ.profiles.value[0];
+};
+
+
+/***/ }),
+
 /***/ 1027:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "LB": () => (/* binding */ definedSocialNetworkUIs),
 /* harmony export */   "Ps": () => (/* binding */ activateSocialNetworkUI),
@@ -298,33 +859,80 @@ function defineSocialNetworkWorker(worker) {
 
 /***/ }),
 
-/***/ 3749:
+/***/ 89729:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-__webpack_require__.r(__webpack_exports__);
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "activatedSocialNetworkUI": () => (/* binding */ activatedSocialNetworkUI),
-/* harmony export */   "globalUIState": () => (/* binding */ globalUIState),
-/* harmony export */   "activateSocialNetworkUIInner": () => (/* binding */ activateSocialNetworkUIInner),
-/* harmony export */   "loadSocialNetworkUI": () => (/* binding */ loadSocialNetworkUI),
-/* harmony export */   "loadSocialNetworkUISync": () => (/* binding */ loadSocialNetworkUISync)
+/* harmony export */   "$8": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.$8),
+/* harmony export */   "mA": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.mA),
+/* harmony export */   "KQ": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.KQ),
+/* harmony export */   "Ov": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.Ov),
+/* harmony export */   "x5": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.x5),
+/* harmony export */   "K1": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.K1),
+/* harmony export */   "xx": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.xx),
+/* harmony export */   "as": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.as),
+/* harmony export */   "Yn": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.Yn),
+/* harmony export */   "Vw": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.Vw),
+/* harmony export */   "px": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.px),
+/* harmony export */   "bL": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.bL),
+/* harmony export */   "Zn": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.Zn),
+/* harmony export */   "fY": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.fY),
+/* harmony export */   "_o": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__._o),
+/* harmony export */   "Os": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.Os),
+/* harmony export */   "rB": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.rB),
+/* harmony export */   "dM": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.dM),
+/* harmony export */   "$d": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.$d),
+/* harmony export */   "mv": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_1__.m),
+/* harmony export */   "je": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_1__.j),
+/* harmony export */   "V2": () => (/* reexport safe */ _web3_types__WEBPACK_IMPORTED_MODULE_2__.V2),
+/* harmony export */   "FF": () => (/* reexport safe */ _web3_types__WEBPACK_IMPORTED_MODULE_2__.FF),
+/* harmony export */   "iv": () => (/* reexport safe */ _web3_types__WEBPACK_IMPORTED_MODULE_2__.iv),
+/* harmony export */   "KP": () => (/* reexport safe */ _hooks__WEBPACK_IMPORTED_MODULE_3__.KP),
+/* harmony export */   "Rc": () => (/* reexport safe */ _hooks__WEBPACK_IMPORTED_MODULE_3__.Rc),
+/* harmony export */   "Ne": () => (/* reexport safe */ _hooks__WEBPACK_IMPORTED_MODULE_3__.Ne),
+/* harmony export */   "hn": () => (/* reexport safe */ _hooks__WEBPACK_IMPORTED_MODULE_3__.hn),
+/* harmony export */   "eS": () => (/* reexport safe */ _hooks__WEBPACK_IMPORTED_MODULE_3__.eS),
+/* harmony export */   "fI": () => (/* reexport safe */ _hooks__WEBPACK_IMPORTED_MODULE_3__.fI),
+/* harmony export */   "$q": () => (/* reexport safe */ _hooks__WEBPACK_IMPORTED_MODULE_3__.$q),
+/* harmony export */   "CB": () => (/* reexport safe */ _manager_dashboard__WEBPACK_IMPORTED_MODULE_4__.CB),
+/* harmony export */   "eE": () => (/* reexport safe */ _manager_dashboard__WEBPACK_IMPORTED_MODULE_4__.eE),
+/* harmony export */   "D4": () => (/* reexport safe */ _manager_sns_adaptor__WEBPACK_IMPORTED_MODULE_5__.D4),
+/* harmony export */   "Ar": () => (/* reexport safe */ _manager_sns_adaptor__WEBPACK_IMPORTED_MODULE_5__.Ar),
+/* harmony export */   "Pz": () => (/* reexport safe */ _manager_sns_adaptor__WEBPACK_IMPORTED_MODULE_5__.Pz),
+/* harmony export */   "EK": () => (/* reexport safe */ _utils__WEBPACK_IMPORTED_MODULE_7__.EK),
+/* harmony export */   "I4": () => (/* reexport safe */ _utils__WEBPACK_IMPORTED_MODULE_7__.I4),
+/* harmony export */   "V8": () => (/* reexport safe */ _utils__WEBPACK_IMPORTED_MODULE_7__.V8),
+/* harmony export */   "Sc": () => (/* reexport safe */ _utils__WEBPACK_IMPORTED_MODULE_7__.Sc),
+/* harmony export */   "eT": () => (/* reexport safe */ _PostContext__WEBPACK_IMPORTED_MODULE_8__.eT),
+/* harmony export */   "oQ": () => (/* reexport safe */ _PostContext__WEBPACK_IMPORTED_MODULE_8__.oQ),
+/* harmony export */   "H9": () => (/* reexport safe */ _PostContext__WEBPACK_IMPORTED_MODULE_8__.H9),
+/* harmony export */   "FT": () => (/* reexport safe */ _PostContext__WEBPACK_IMPORTED_MODULE_8__.FT),
+/* harmony export */   "Nw": () => (/* reexport safe */ _CompositionContext__WEBPACK_IMPORTED_MODULE_9__.N),
+/* harmony export */   "Cp": () => (/* reexport safe */ _CompositionContext__WEBPACK_IMPORTED_MODULE_9__.C),
+/* harmony export */   "Hq": () => (/* reexport safe */ ts_results__WEBPACK_IMPORTED_MODULE_10__.Hq),
+/* harmony export */   "x4": () => (/* reexport safe */ ts_results__WEBPACK_IMPORTED_MODULE_10__.x4),
+/* harmony export */   "bD": () => (/* reexport safe */ ts_results__WEBPACK_IMPORTED_MODULE_10__.bD),
+/* harmony export */   "_W": () => (/* reexport safe */ _manager_store__WEBPACK_IMPORTED_MODULE_11__._W),
+/* harmony export */   "fo": () => (/* reexport safe */ _manager_store__WEBPACK_IMPORTED_MODULE_11__.fo),
+/* harmony export */   "i1": () => (/* reexport safe */ _manager_store__WEBPACK_IMPORTED_MODULE_11__.i1),
+/* harmony export */   "fg": () => (/* reexport safe */ _manager_store__WEBPACK_IMPORTED_MODULE_11__.fg),
+/* harmony export */   "Rm": () => (/* reexport safe */ _manager_store__WEBPACK_IMPORTED_MODULE_11__.Rm),
+/* harmony export */   "i8": () => (/* reexport safe */ _manager_store__WEBPACK_IMPORTED_MODULE_11__.i8),
+/* harmony export */   "Je": () => (/* reexport safe */ _manager_worker__WEBPACK_IMPORTED_MODULE_6__.J)
 /* harmony export */ });
-/* harmony import */ var _utils_debug_general__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(77569);
-/* harmony import */ var _utils_debug_ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8091);
-/* harmony import */ var _extension_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(99997);
-/* harmony import */ var _shared__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(71986);
-/* harmony import */ var _shared_ui_locales_legacy__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(90795);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(71303);
-/* harmony import */ var _settings_settings__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(3087);
-/* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(43576);
-/* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(44162);
-/* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(89729);
-/* harmony import */ var _social_network_adaptor_utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(33410);
-/* harmony import */ var _plugin_infra_host__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(34709);
-/* harmony import */ var _define__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(1027);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(7282);
-/* harmony import */ var _dimensiondev_kit__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(85143);
+/* harmony import */ var _web3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(65418);
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8971);
+/* harmony import */ var _web3_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(58073);
+/* harmony import */ var _hooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(73400);
+/* harmony import */ var _manager_dashboard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(51797);
+/* harmony import */ var _manager_sns_adaptor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9026);
+/* harmony import */ var _manager_worker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(78488);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(13338);
+/* harmony import */ var _PostContext__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(65800);
+/* harmony import */ var _CompositionContext__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(79093);
+/* harmony import */ var ts_results__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(79594);
+/* harmony import */ var _manager_store__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(64753);
 
 
 
@@ -337,278 +945,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-const definedSocialNetworkUIsResolved = new Map();
-let activatedSocialNetworkUI = {
-    automation: {},
-    collecting: {},
-    customization: {},
-    configuration: {},
-    permission: {
-        has: async ()=>false
-        ,
-        request: async ()=>false
-    },
-    init: ()=>{
-        throw new Error();
-    },
-    injection: {},
-    networkIdentifier: 'localhost',
-    name: '',
-    shouldActivate: ()=>false
-    ,
-    utils: {
-        createPostContext: null
-    },
-    notReadyForProduction: true,
-    declarativePermissions: {
-        origins: []
-    }
-};
-let globalUIState = {};
-async function activateSocialNetworkUIInner(ui_deferred) {
-    var ref20, ref1, ref2, _injection16, ref3, _injection1, ref4, _injection2, ref5, ref6, ref7, _injection3, ref8, _injection4, ref9, _injection5, ref10, _injection6, ref11, _injection7, ref12, _injection8, ref13, _injection9, ref14, _injection10, ref15, _injection11, ref16, _injection12, ref17, _injection13, ref18;
-    (0,_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_14__.assertNotEnvironment)(_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_14__.Environment.ManifestBackground);
-    console.log('Activating provider', ui_deferred.networkIdentifier);
-    const ui = activatedSocialNetworkUI = await loadSocialNetworkUI(ui_deferred.networkIdentifier);
-    console.log('Provider activated. You can access it by globalThis.ui', ui);
-    Object.assign(globalThis, {
-        ui
-    });
-    const abort1 = new AbortController();
-    const { signal: signal1  } = abort1;
-    if (false) { var ref19; }
-    await (0,_dimensiondev_kit__WEBPACK_IMPORTED_MODULE_13__/* .waitDocumentReadyState */ .uL)('interactive');
-    i18nOverwrite();
-    const state = await ui.init(signal1);
-    globalUIState = {
-        ...state,
-        ...(0,_utils__WEBPACK_IMPORTED_MODULE_5__/* .managedStateCreator */ .MJ)()
-    };
-    (ref20 = ui.customization.paletteMode) === null || ref20 === void 0 ? void 0 : ref20.start(signal1);
-    startIntermediateSetupGuide();
-    $unknownIdentityResolution();
-    (ref1 = ui.collecting.postsProvider) === null || ref1 === void 0 ? void 0 : ref1.start(signal1);
-    startPostListener();
-    (ref2 = ui.collecting.currentVisitingIdentityProvider) === null || ref2 === void 0 ? void 0 : ref2.start(signal1);
-    (ref3 = (_injection16 = ui.injection).pageInspector) === null || ref3 === void 0 ? void 0 : ref3.call(_injection16, signal1);
-    if (_shared__WEBPACK_IMPORTED_MODULE_3__/* .Flags.toolbox_enabled */ .vU.toolbox_enabled) (ref4 = (_injection1 = ui.injection).toolbox) === null || ref4 === void 0 ? void 0 : ref4.call(_injection1, signal1);
-    (ref5 = (_injection2 = ui.injection).setupPrompt) === null || ref5 === void 0 ? void 0 : ref5.call(_injection2, signal1);
-    (ref6 = ui.injection.newPostComposition) === null || ref6 === void 0 ? void 0 : (ref7 = ref6.start) === null || ref7 === void 0 ? void 0 : ref7.call(ref6, signal1);
-    (ref8 = (_injection3 = ui.injection).searchResult) === null || ref8 === void 0 ? void 0 : ref8.call(_injection3, signal1);
-    (ref9 = (_injection4 = ui.injection).userBadge) === null || ref9 === void 0 ? void 0 : ref9.call(_injection4, signal1);
-    (ref10 = (_injection5 = ui.injection).profileTab) === null || ref10 === void 0 ? void 0 : ref10.call(_injection5, signal1);
-    (ref11 = (_injection6 = ui.injection).profileTabContent) === null || ref11 === void 0 ? void 0 : ref11.call(_injection6, signal1);
-    (ref12 = (_injection7 = ui.injection).userAvatar) === null || ref12 === void 0 ? void 0 : ref12.call(_injection7, signal1);
-    (ref13 = (_injection8 = ui.injection).profileAvatar) === null || ref13 === void 0 ? void 0 : ref13.call(_injection8, signal1);
-    (ref14 = (_injection9 = ui.injection).enhancedProfileNFTAvatar) === null || ref14 === void 0 ? void 0 : ref14.call(_injection9, signal1);
-    (ref15 = (_injection10 = ui.injection).openNFTAvatar) === null || ref15 === void 0 ? void 0 : ref15.call(_injection10, signal1);
-    (ref16 = (_injection11 = ui.injection).postAndReplyNFTAvatar) === null || ref16 === void 0 ? void 0 : ref16.call(_injection11, signal1);
-    (ref17 = (_injection12 = ui.injection).collectionAvatar) === null || ref17 === void 0 ? void 0 : ref17.call(_injection12, signal1);
-    (ref18 = (_injection13 = ui.injection).avatarClipNFT) === null || ref18 === void 0 ? void 0 : ref18.call(_injection13, signal1);
-    (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_8__/* .startPluginSNSAdaptor */ .D4)((0,_social_network_adaptor_utils__WEBPACK_IMPORTED_MODULE_9__/* .getCurrentSNSNetwork */ .G)(ui.networkIdentifier), (0,_plugin_infra_host__WEBPACK_IMPORTED_MODULE_10__/* .createPluginHost */ .R)(signal1, (pluginID, signal)=>{
-        return {
-            createKVStorage (type, defaultValues) {
-                if (type === 'memory') return _shared__WEBPACK_IMPORTED_MODULE_3__/* .InMemoryStorages.Plugin.createSubScope */ .uU.Plugin.createSubScope(pluginID, defaultValues, signal);
-                else return _shared__WEBPACK_IMPORTED_MODULE_3__/* .PersistentStorages.Plugin.createSubScope */ ._H.Plugin.createSubScope(pluginID, defaultValues, signal);
-            },
-            personaSign: _extension_service__WEBPACK_IMPORTED_MODULE_2__/* ["default"].Identity.signWithPersona */ .ZP.Identity.signWithPersona,
-            walletSign: _extension_service__WEBPACK_IMPORTED_MODULE_2__/* ["default"].Ethereum.personalSign */ .ZP.Ethereum.personalSign,
-            currentPersona: (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_7__/* .createSubscriptionFromAsync */ .Fd)(_extension_service__WEBPACK_IMPORTED_MODULE_2__/* ["default"].Settings.getCurrentPersonaIdentifier */ .ZP.Settings.getCurrentPersonaIdentifier, undefined, _utils__WEBPACK_IMPORTED_MODULE_12__/* .MaskMessages.events.currentPersonaIdentifier.on */ .ql.events.currentPersonaIdentifier.on)
-        };
-    }));
-    (0,_utils__WEBPACK_IMPORTED_MODULE_12__/* .setupShadowRootPortal */ .Vc)();
-    function i18nOverwrite() {
-        const i18n = ui.customization.i18nOverwrite || {};
-        for(const namespace in i18n){
-            const ns = i18n[namespace];
-            for(const i18nKey in ns){
-                const pair = i18n[namespace][i18nKey];
-                for(const language in pair){
-                    const value = pair[language];
-                    _shared_ui_locales_legacy__WEBPACK_IMPORTED_MODULE_4__/* ["default"].addResource */ .Z.addResource(language, namespace, i18nKey, value);
-                }
-            }
-        }
-    }
-    function $unknownIdentityResolution() {
-        const provider = ui.collecting.identityProvider;
-        if (!provider) return;
-        provider.start(signal1);
-        provider.recognized.addListener((newValue, oldValue)=>{
-            if (document.visibilityState === 'hidden') return;
-            if (newValue.identifier.equals(oldValue.identifier)) return;
-            if (newValue.identifier.isUnknown) return;
-            _utils__WEBPACK_IMPORTED_MODULE_12__/* .MaskMessages.events.Native_visibleSNS_currentDetectedProfileUpdated.sendToBackgroundPage */ .ql.events.Native_visibleSNS_currentDetectedProfileUpdated.sendToBackgroundPage(newValue.identifier.toText());
-        });
-        if (provider.hasDeprecatedPlaceholderName) {
-            provider.recognized.addListener((id)=>{
-                if (signal1.aborted) return;
-                if (id.identifier.isUnknown) return;
-                _extension_service__WEBPACK_IMPORTED_MODULE_2__/* ["default"].Identity.resolveIdentity */ .ZP.Identity.resolveIdentity(id.identifier);
-            });
-        }
-    }
-    function startPostListener() {
-        var ref25;
-        const posts = (ref25 = ui.collecting.postsProvider) === null || ref25 === void 0 ? void 0 : ref25.posts;
-        if (!posts) return;
-        const abortSignals = new WeakMap();
-        posts.event.on('set', async (key, value)=>{
-            var _injection, ref, _injection14, ref21, _injection15, ref22, ref23, ref24;
-            await unmount(key);
-            const abort = new AbortController();
-            signal1.addEventListener('abort', ()=>abort.abort()
-            );
-            abortSignals.set(key, abort);
-            const { signal: postSignal  } = abort;
-            (ref = (_injection = ui.injection).enhancedPostRenderer) === null || ref === void 0 ? void 0 : ref.call(_injection, postSignal, value);
-            (ref21 = (_injection14 = ui.injection).postInspector) === null || ref21 === void 0 ? void 0 : ref21.call(_injection14, postSignal, value);
-            (ref22 = (_injection15 = ui.injection).postActions) === null || ref22 === void 0 ? void 0 : ref22.call(_injection15, postSignal, value);
-            (ref23 = ui.injection.commentComposition) === null || ref23 === void 0 ? void 0 : ref23.compositionBox(postSignal, value);
-            (ref24 = ui.injection.commentComposition) === null || ref24 === void 0 ? void 0 : ref24.commentInspector(postSignal, value);
-        });
-        posts.event.on('delete', unmount);
-        function unmount(key) {
-            if (!abortSignals.has(key)) return;
-            abortSignals.get(key).abort();
-            // AbortSignal need an event loop
-            // unmount a React root need another one.
-            // let's guess a number that the React root will unmount.
-            return (0,_dimensiondev_kit__WEBPACK_IMPORTED_MODULE_13__/* .delay */ .gw)(16 * 3);
-        }
-    }
-    function startIntermediateSetupGuide() {
-        const network = ui.networkIdentifier;
-        const id1 = _settings_settings__WEBPACK_IMPORTED_MODULE_6__/* .currentSetupGuideStatus */ .AI[network].value;
-        let started = false;
-        const onStatusUpdate = (id)=>{
-            const { persona , status  } = JSON.parse(id || '{}');
-            if (persona && status && !started) {
-                var _injection, ref;
-                started = true;
-                (ref = (_injection = ui.injection).setupWizard) === null || ref === void 0 ? void 0 : ref.call(_injection, signal1, _masknet_shared_base__WEBPACK_IMPORTED_MODULE_7__/* .Identifier.fromString */ .xb.fromString(persona, _masknet_shared_base__WEBPACK_IMPORTED_MODULE_7__/* .ECKeyIdentifier */ .ob).unwrap());
-            }
-        };
-        _settings_settings__WEBPACK_IMPORTED_MODULE_6__/* .currentSetupGuideStatus */ .AI[network].addListener(onStatusUpdate);
-        _settings_settings__WEBPACK_IMPORTED_MODULE_6__/* .currentSetupGuideStatus */ .AI[network].readyPromise.then(onStatusUpdate);
-        onStatusUpdate(id1);
-    }
-}
-async function loadSocialNetworkUI(identifier) {
-    if (definedSocialNetworkUIsResolved.has(identifier)) return definedSocialNetworkUIsResolved.get(identifier);
-    const define = _define__WEBPACK_IMPORTED_MODULE_11__/* .definedSocialNetworkUIs.get */ .LB.get(identifier);
-    if (!define) throw new Error('SNS adaptor not found');
-    const ui1 = (await define.load()).default;
-    definedSocialNetworkUIsResolved.set(identifier, ui1);
-    if (false) { var ref; }
-    return ui1;
-}
-function loadSocialNetworkUISync(identifier) {
-    if (definedSocialNetworkUIsResolved.has(identifier)) return definedSocialNetworkUIsResolved.get(identifier);
-    return null;
-}
-
-
-/***/ }),
-
-/***/ 99677:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "C8": () => (/* binding */ getNetworkWorker),
-/* harmony export */   "Bu": () => (/* binding */ getNetworkWorkerUninitialized)
-/* harmony export */ });
-/* unused harmony export definedSocialNetworkWorkersResolved */
-/* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(44162);
-/* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _define__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1027);
-
-
-const definedSocialNetworkWorkersResolved = new Set();
-async function activateNetworkWorker(id) {
-    if (!(0,_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_1__.isEnvironment)(_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_1__.Environment.ManifestBackground)) {
-        throw new TypeError();
-    }
-    for (const each of definedSocialNetworkWorkersResolved){
-        if (each.networkIdentifier === id) return each;
-    }
-    for (const each1 of _define__WEBPACK_IMPORTED_MODULE_0__/* .definedSocialNetworkWorkers */ .zq){
-        if (each1.networkIdentifier === id) {
-            const worker = (await each1.load()).default;
-            definedSocialNetworkWorkersResolved.add(worker);
-            return worker;
-        }
-    }
-    throw new Error('Worker not found');
-}
-async function getNetworkWorker(network) {
-    if (typeof network === 'string') return activateNetworkWorker(network);
-    return getNetworkWorker(network.network);
-}
-function getNetworkWorkerUninitialized(network) {
-    if (typeof network === 'string') return [
-        ..._define__WEBPACK_IMPORTED_MODULE_0__/* .definedSocialNetworkWorkers */ .zq
-    ].find((x)=>x.networkIdentifier === network
-    );
-    return getNetworkWorkerUninitialized(network.network);
-}
-
-
-/***/ }),
-
-/***/ 56644:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "a": () => (/* binding */ UpgradeBackupJSONFile),
-/* harmony export */   "V": () => (/* binding */ getBackupPreviewInfo)
-/* harmony export */ });
-/* harmony import */ var _version_1__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(82093);
-/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(89729);
-/* harmony import */ var _version_0__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(63799);
-/* harmony import */ var _version_2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(73355);
-/* eslint-disable import/no-deprecated */ 
-
-
-
-function UpgradeBackupJSONFile(json, identity) {
-    if ((0,_version_2__WEBPACK_IMPORTED_MODULE_1__/* .isBackupJSONFileVersion2 */ .GI)(json)) return (0,_version_2__WEBPACK_IMPORTED_MODULE_1__/* .patchNonBreakingUpgradeForBackupJSONFileVersion2 */ .a6)(json);
-    if ((0,_version_1__WEBPACK_IMPORTED_MODULE_2__/* .isBackupJSONFileVersion1 */ .RV)(json)) return (0,_version_2__WEBPACK_IMPORTED_MODULE_1__/* .upgradeFromBackupJSONFileVersion1 */ .nl)((0,_version_1__WEBPACK_IMPORTED_MODULE_2__/* .patchNonBreakingUpgradeForBackupJSONFileVersion1 */ .z2)(json));
-    if ((0,_version_0__WEBPACK_IMPORTED_MODULE_3__/* .isBackupJSONFileVersion0 */ .m)(json) && identity) {
-        const upgraded = (0,_version_1__WEBPACK_IMPORTED_MODULE_2__/* .upgradeFromBackupJSONFileVersion0 */ .Bd)(json, identity);
-        if (upgraded === null) return null;
-        return (0,_version_2__WEBPACK_IMPORTED_MODULE_1__/* .upgradeFromBackupJSONFileVersion1 */ .nl)(upgraded);
-    }
-    return null;
-}
-function getBackupPreviewInfo(json) {
-    var ref, ref1;
-    return {
-        personas: json.personas.length,
-        accounts: json.personas.reduce((a, b)=>a + b.linkedProfiles.length
-        , 0),
-        posts: json.posts.length,
-        contacts: json.profiles.length,
-        relations: json.relations.length,
-        files: ((ref = json.plugin) === null || ref === void 0 ? void 0 : (ref1 = ref[_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__/* .PluginId.FileService */ .je.FileService]) === null || ref1 === void 0 ? void 0 : ref1.length) || 0,
-        wallets: json.wallets.length,
-        createdAt: json._meta_.createdAt
-    };
-}
-
-
-/***/ }),
-
-/***/ 75776:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "a": () => (/* reexport safe */ _JSON_latest__WEBPACK_IMPORTED_MODULE_0__.a)
-/* harmony export */ });
-/* harmony import */ var _JSON_latest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(56644);
 
 
 
@@ -617,6 +953,7 @@ function getBackupPreviewInfo(json) {
 /***/ 64753:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "i1": () => (/* binding */ registeredPlugins),
 /* harmony export */   "fg": () => (/* binding */ registeredPluginIDs),
@@ -693,6 +1030,7 @@ function __meetRegisterRequirement(def) {
 /***/ 78488:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "J": () => (/* binding */ activatedPluginsWorker)
 /* harmony export */ });
@@ -709,113 +1047,27 @@ const activatedPluginsWorker = activated.plugins;
 
 /***/ }),
 
-/***/ 55518:
+/***/ 11635:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "q": () => (/* binding */ IdentifierMap)
+/* harmony export */   "B": () => (/* binding */ NextIDAction),
+/* harmony export */   "V": () => (/* binding */ NextIDPlatform)
 /* harmony export */ });
-/* unused harmony export ReadonlyIdentifierMap */
-/* harmony import */ var _type__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(24366);
-/* harmony import */ var immer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(60232);
-
-
-var _key;
-var tmp = (_key = immer__WEBPACK_IMPORTED_MODULE_1__/* .immerable */ .sc, Symbol.iterator);
-/**
- * The IdentifierMap is like a built-in Map<Identifier, T>.
- *
- * Because Identifier is not a value-type record so to make it behave like a value-type,
- * please use this class instead of Map<Identifier, T>.
- */ class IdentifierMap {
-    get(key) {
-        return this.__raw_map__.get(key.toText());
-    }
-    set(key, data) {
-        if (!key) return this;
-        if (this.constructorName.length) {
-            if (!this.constructorName.includes(key.constructor.name)) {
-                console.warn(`IdentifierMap found a invalid write try which violates the constraint ${this.constructorName}`, key);
-                return this;
-            }
-        }
-        this.__raw_map__.set(key.toText(), data);
-        return this;
-    }
-    clear() {
-        this.__raw_map__.clear();
-    }
-    delete(data) {
-        return this.__raw_map__.delete(data.toText());
-    }
-    _identifierFromString(key) {
-        const identifier = _type__WEBPACK_IMPORTED_MODULE_0__/* .Identifier.fromString */ .xb.fromString(key);
-        if (identifier.err) {
-            console.warn('IdentifierMap found a key which cannot be converted into Identifier: ', identifier.val.message);
-        } else {
-            if (this.constructorName.length === 0) return identifier.val;
-            if (this.constructorName.includes(identifier.val.constructor.name)) return identifier.val;
-            console.warn(`IdentifierMap found a key which is not compatible with it constraint(${this.constructorName}), ${key}`);
-        }
-        return null;
-    }
-    *entries() {
-        const iter = this.__raw_map__.entries();
-        for (const [key, data] of iter){
-            const identifier = this._identifierFromString(key);
-            if (!identifier) continue;
-            yield [
-                identifier,
-                data
-            ];
-        }
-    }
-    forEach(callbackfn, thisArg) {
-        this.__raw_map__.forEach((value, key)=>{
-            const i = this._identifierFromString(key);
-            if (!i) return;
-            callbackfn.call(thisArg, value, i, this);
-        });
-    }
-    has(key) {
-        return this.__raw_map__.has(key.toText());
-    }
-    *keys() {
-        const iter = this.__raw_map__.keys();
-        for (const key of iter){
-            const i = this._identifierFromString(key);
-            if (i) yield i;
-            else continue;
-        }
-    }
-    get size() {
-        return [
-            ...this.keys()
-        ].length;
-    }
-    *values() {
-        for (const [k, v] of this.entries())yield v;
-    }
-    [tmp]() {
-        return this.entries();
-    }
-    /**
-     *
-     * @param __raw_map__ The origin data.
-     * @param constructor The Identifier constructor. If provided, IdentifierMap will try to do a runtime check to make sure the identifier type is correct.
-     */ constructor(__raw_map__, ...constructor){
-        this.__raw_map__ = __raw_map__;
-        this[_key] = true;
-        this.constructorName = [];
-        if (constructor) {
-            this.constructorName = constructor.map((x)=>x.name
-            );
-        }
-    }
-}
-IdentifierMap.prototype[Symbol.toStringTag] = 'IdentifierMap';
-// eslint-disable-next-line no-redeclare
-const ReadonlyIdentifierMap = (/* unused pure expression or super */ null && (IdentifierMap));
+var NextIDAction;
+(function(NextIDAction) {
+    NextIDAction["Create"] = 'create';
+    NextIDAction["Delete"] = 'delete';
+})(NextIDAction || (NextIDAction = {}));
+var NextIDPlatform;
+(function(NextIDPlatform) {
+    NextIDPlatform["NextId"] = 'nextid';
+    NextIDPlatform["Twitter"] = 'twitter';
+    NextIDPlatform["Keybase"] = 'keybase';
+    NextIDPlatform["Ethereum"] = 'ethereum';
+    NextIDPlatform["GitHub"] = 'github';
+})(NextIDPlatform || (NextIDPlatform = {}));
 
 
 /***/ }),
@@ -823,6 +1075,7 @@ const ReadonlyIdentifierMap = (/* unused pure expression or super */ null && (Id
 /***/ 66092:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "v": () => (/* binding */ DashboardRoutes)
 /* harmony export */ });
@@ -850,95 +1103,10 @@ var DashboardRoutes;
 
 /***/ }),
 
-/***/ 85287:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Ko": () => (/* reexport safe */ _servie_events__WEBPACK_IMPORTED_MODULE_0__.Ko),
-/* harmony export */   "$f": () => (/* binding */ ObservableWeakMap),
-/* harmony export */   "vP": () => (/* binding */ ObservableMap),
-/* harmony export */   "n7": () => (/* binding */ ObservableSet)
-/* harmony export */ });
-/* harmony import */ var _servie_events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(69260);
-
-
-function tick(callback) {
-    Promise.resolve().then(callback);
-}
-class ObservableWeakMap extends WeakMap {
-    delete(key) {
-        const _ = super.delete(key);
-        tick(()=>this.event.emit('delete', key)
-        );
-        return _;
-    }
-    set(key, value) {
-        const _ = super.set(key, value);
-        tick(()=>this.event.emit('set', key, value)
-        );
-        return _;
-    }
-    constructor(...args){
-        super(...args);
-        this.event = new _servie_events__WEBPACK_IMPORTED_MODULE_0__/* .Emitter */ .Q5();
-    }
-}
-class ObservableMap extends Map {
-    clear() {
-        super.clear();
-        this.size && tick(()=>this.event.emit('clear')
-        );
-    }
-    delete(key) {
-        const _ = super.delete(key);
-        tick(()=>this.event.emit('delete', key)
-        );
-        return _;
-    }
-    set(key, value) {
-        const _ = super.set(key, value);
-        tick(()=>this.event.emit('set', key, value)
-        );
-        this.event.emit('set', key, value);
-        return _;
-    }
-    constructor(...args){
-        super(...args);
-        this.event = new _servie_events__WEBPACK_IMPORTED_MODULE_0__/* .Emitter */ .Q5();
-    }
-}
-class ObservableSet extends Set {
-    clear() {
-        super.clear();
-        this.size && tick(()=>this.event.emit('clear')
-        );
-    }
-    delete(key) {
-        const _ = super.delete(key);
-        tick(()=>this.event.emit('delete', key)
-        );
-        return _;
-    }
-    add(...value) {
-        value.forEach((x)=>super.add(x)
-        );
-        this.event.emit('add', value);
-        tick(()=>this.event.emit('add', value)
-        );
-        return this;
-    }
-    constructor(...args){
-        super(...args);
-        this.event = new _servie_events__WEBPACK_IMPORTED_MODULE_0__/* .Emitter */ .Q5();
-    }
-}
-
-
-/***/ }),
-
 /***/ 94805:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "A9": () => (/* reexport safe */ _fallbackRule__WEBPACK_IMPORTED_MODULE_0__.A),
 /* harmony export */   "C9": () => (/* reexport safe */ _register_ns__WEBPACK_IMPORTED_MODULE_1__.C)
@@ -951,9 +1119,179 @@ class ObservableSet extends Set {
 
 /***/ }),
 
+/***/ 80870:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "q0": () => (/* reexport */ in_memory/* createInMemoryKVStorageBackend */.q),
+  "Ic": () => (/* reexport */ idb/* createIndexedDB_KVStorageBackend */.I),
+  "rc": () => (/* binding */ createKVStorageHost),
+  "X2": () => (/* reexport */ createProxyKVStorageBackend)
+});
+
+// UNUSED EXPORTS: removed
+
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+kit@0.0.0-20220223101101-4e6f3b9/node_modules/@dimensiondev/kit/esm/index.js + 1 modules
+var esm = __webpack_require__(85143);
+// EXTERNAL MODULE: ../shared-base/src/kv-storage/in-memory.ts
+var in_memory = __webpack_require__(98866);
+// EXTERNAL MODULE: ../shared-base/src/kv-storage/idb.ts
+var idb = __webpack_require__(99421);
+;// CONCATENATED MODULE: ../shared-base/src/kv-storage/proxy.ts
+
+function createProxyKVStorageBackend() {
+    let target;
+    let [promise, resolve, reject] = (0,esm/* defer */.PQ)();
+    return {
+        get beforeAutoSync () {
+            return promise;
+        },
+        async getValue (...args) {
+            return target.getValue(...args);
+        },
+        async setValue (...args) {
+            return target.setValue(...args);
+        },
+        replaceBackend (backend) {
+            target = backend;
+            // resolve old one
+            backend.beforeAutoSync.then(resolve, reject);
+            [promise, resolve, reject] = (0,esm/* defer */.PQ)();
+            backend.beforeAutoSync.then(resolve, reject);
+        }
+    };
+}
+
+;// CONCATENATED MODULE: ../shared-base/src/kv-storage/index.ts
+
+
+
+
+const removed = Symbol.for('removed');
+
+/**
+ * Create a root scope of simple K/V storage.
+ * @param backend The storage provider
+ * @param message The message channel to sync the latest value
+ * @param signal The abort signal
+ */ function createKVStorageHost(backend, message, signal = new AbortController().signal) {
+    return (name, defaultValues)=>{
+        return createScope(signal, backend, message, null, name, defaultValues);
+    };
+}
+const alwaysThrowHandler = ()=>{
+    throw new TypeError('Invalid operation');
+};
+function createScope(signal, backend, message, parentScope, scope, defaultValues1) {
+    if (scope.includes('/')) throw new TypeError('scope name cannot contains "/"');
+    if (scope.includes(':')) throw new TypeError('scope name cannot contains ":"');
+    const currentScope = parentScope === null ? scope : `${parentScope}/${scope}`;
+    const storage = new Proxy({
+        __proto__: null
+    }, {
+        defineProperty: alwaysThrowHandler,
+        deleteProperty: alwaysThrowHandler,
+        set: alwaysThrowHandler,
+        preventExtensions: alwaysThrowHandler,
+        setPrototypeOf: alwaysThrowHandler,
+        get (target, prop, receiver) {
+            if (typeof prop === 'symbol') return undefined;
+            if (target[prop]) return target[prop];
+            target[prop] = createState(signal, backend, message, currentScope, prop, defaultValues1[prop]);
+            return target[prop];
+        }
+    });
+    backend.beforeAutoSync.then(()=>{
+        for (const [key, value] of Object.entries(defaultValues1)){
+            if (value === removed) continue;
+            // trigger the auto sync
+            storage[key].initialized;
+        }
+    });
+    return {
+        createSubScope (subScope, defaultValues, scopeSignal) {
+            const aggregatedSignal = (0,esm/* combineAbortSignal */.dq)(scopeSignal, signal);
+            return createScope(aggregatedSignal, backend, message, currentScope, subScope, defaultValues);
+        },
+        storage
+    };
+}
+function createState(signal, backend, message, scope, prop, defaultValue) {
+    const propKey = `${scope}:${prop}`;
+    let initialized = false;
+    let usingDefaultValue = true;
+    const initializedPromise = backend.beforeAutoSync.then(()=>backend.getValue(propKey)
+    ).then((val)=>{
+        if (val.some) usingDefaultValue = false;
+        return val.unwrapOr(defaultValue);
+    }).then((val)=>{
+        state = val;
+        initialized = true;
+    });
+    let state = defaultValue;
+    const listeners = new Set();
+    function subscribe(f) {
+        listeners.add(f);
+        return ()=>listeners.delete(f)
+        ;
+    }
+    const subscription = {
+        getCurrentValue: ()=>{
+            if (!initialized) throw initializedPromise;
+            return state;
+        },
+        subscribe
+    };
+    function setter(val) {
+        if (isEqual(state, val)) return;
+        usingDefaultValue = false;
+        state = val;
+        for (const f of listeners)f();
+    }
+    message.on(([eventKey, newValue])=>eventKey === propKey && setter(newValue)
+    , {
+        signal
+    });
+    return {
+        get initialized () {
+            return initialized;
+        },
+        get initializedPromise () {
+            return initializedPromise;
+        },
+        get value () {
+            if (!initialized) throw new Error('Try to access K/V state before initialization finished.');
+            return state;
+        },
+        async setValue (value) {
+            if (signal.aborted) throw new TypeError('Aborted storage.');
+            // force trigger store when set state with default value to make it persistent.
+            if (usingDefaultValue || !isEqual(state, value)) await backend.setValue(propKey, value);
+            setter(value);
+        },
+        subscription
+    };
+}
+function isEqual(a, b) {
+    if (a === b) return true;
+    if (a === null || b === null) return false;
+    if (typeof a === 'object') {
+        // Note: JSON stringify is not stable.
+        return JSON.stringify(a) === JSON.stringify(b);
+    }
+    return false;
+}
+
+
+/***/ }),
+
 /***/ 40068:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "L": () => (/* binding */ parseURL)
 /* harmony export */ });
@@ -977,187 +1315,10 @@ function parseURL(text) {
 
 /***/ }),
 
-/***/ 10291:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  "u0": () => (/* reexport */ AddressViewer/* AddressViewer */.u),
-  "IR": () => (/* reexport */ AssetPlayer/* AssetPlayer */.I),
-  "T3": () => (/* reexport */ ERC20TokenList/* ERC20TokenList */.T),
-  "SV": () => (/* reexport */ ErrorBoundary/* ErrorBoundary */.SV),
-  "N3": () => (/* reexport */ ErrorBoundary/* ErrorBoundaryBuildInfoContext */.N3),
-  "qy": () => (/* reexport */ I18NextProviderHMR/* I18NextProviderHMR */.q),
-  "XB": () => (/* reexport */ ImageIcon/* ImageIcon */.X),
-  "p6": () => (/* reexport */ LoadingAnimation/* LoadingAnimation */.p),
-  "jq": () => (/* reexport */ MiniNetworkSelector/* MiniNetworkSelector */.j),
-  "yC": () => (/* reexport */ NFTCardStyledAssetPlayer/* NFTCardStyledAssetPlayer */.y),
-  "s_": () => (/* reexport */ QRCode/* QRCode */.s),
-  "xR": () => (/* reexport */ SelectTokenChip/* SelectTokenChip */.x),
-  "xl": () => (/* reexport */ TokenAmountPanel/* TokenAmountPanel */.x),
-  "T1": () => (/* reexport */ TokenIcon/* TokenIcon */.T),
-  "o": () => (/* reexport */ WalletIcon/* WalletIcon */.o)
-});
-
-// UNUSED EXPORTS: ChainIcon, CrashUI, TokenIconUI, useImageFailOver, withErrorBoundary
-
-// EXTERNAL MODULE: ../shared/src/UI/hooks/index.ts + 1 modules
-var hooks = __webpack_require__(84127);
-// EXTERNAL MODULE: ../shared/src/UI/components/TokenIcon/index.tsx + 2 modules
-var TokenIcon = __webpack_require__(48822);
-// EXTERNAL MODULE: ../shared/src/UI/components/ChainIcon/index.tsx
-var ChainIcon = __webpack_require__(30010);
-// EXTERNAL MODULE: ../shared/src/UI/components/ImageIcon/index.tsx
-var ImageIcon = __webpack_require__(54781);
-// EXTERNAL MODULE: ../shared/src/UI/components/WalletIcon/index.tsx
-var WalletIcon = __webpack_require__(3194);
-// EXTERNAL MODULE: ../shared/src/UI/components/ERC20TokenList/index.tsx + 5 modules
-var ERC20TokenList = __webpack_require__(29846);
-// EXTERNAL MODULE: ../shared/src/UI/components/QRCode/index.tsx
-var QRCode = __webpack_require__(63973);
-// EXTERNAL MODULE: ../shared/src/UI/components/ErrorBoundary/index.ts + 1 modules
-var ErrorBoundary = __webpack_require__(5036);
-// EXTERNAL MODULE: ../shared/src/UI/components/SelectTokenChip/index.tsx
-var SelectTokenChip = __webpack_require__(72197);
-// EXTERNAL MODULE: ../shared/src/UI/components/TokenAmountPanel/index.tsx
-var TokenAmountPanel = __webpack_require__(50777);
-// EXTERNAL MODULE: ../shared/src/UI/components/LoadingAnimation/index.tsx
-var LoadingAnimation = __webpack_require__(15148);
-// EXTERNAL MODULE: ../shared/src/UI/components/MiniNetworkSelector/index.tsx
-var MiniNetworkSelector = __webpack_require__(63282);
-// EXTERNAL MODULE: ../shared/src/UI/components/AddressViewer/index.tsx
-var AddressViewer = __webpack_require__(97529);
-// EXTERNAL MODULE: ../shared/src/UI/components/I18NextProviderHMR.tsx
-var I18NextProviderHMR = __webpack_require__(52347);
-// EXTERNAL MODULE: ../shared/src/UI/components/AssetPlayer/index.tsx + 2 modules
-var AssetPlayer = __webpack_require__(36301);
-// EXTERNAL MODULE: ../shared/src/UI/components/NFTCardStyledAssetPlayer/index.tsx
-var NFTCardStyledAssetPlayer = __webpack_require__(40672);
-;// CONCATENATED MODULE: ../shared/src/UI/components/index.ts
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-;// CONCATENATED MODULE: ../shared/src/UI/index.ts
-
-
-
-
-/***/ }),
-
-/***/ 24073:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "E": () => (/* reexport safe */ _useValueRef__WEBPACK_IMPORTED_MODULE_0__.E),
-/* harmony export */   "pv": () => (/* reexport safe */ _useObservableMapSet__WEBPACK_IMPORTED_MODULE_1__.p),
-/* harmony export */   "H9": () => (/* reexport safe */ _useMenu__WEBPACK_IMPORTED_MODULE_2__.H9),
-/* harmony export */   "F$": () => (/* reexport safe */ _useRemoteControlledDialog__WEBPACK_IMPORTED_MODULE_3__.F),
-/* harmony export */   "iD": () => (/* reexport safe */ _useSnackbarCallback__WEBPACK_IMPORTED_MODULE_4__.i),
-/* harmony export */   "S8": () => (/* reexport safe */ _useScrollBottomEvent__WEBPACK_IMPORTED_MODULE_5__.S),
-/* harmony export */   "r8": () => (/* reexport safe */ _createGlobalState__WEBPACK_IMPORTED_MODULE_6__.r)
-/* harmony export */ });
-/* harmony import */ var _useValueRef__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(84081);
-/* harmony import */ var _useObservableMapSet__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9790);
-/* harmony import */ var _useMenu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(63798);
-/* harmony import */ var _useRemoteControlledDialog__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(12293);
-/* harmony import */ var _useSnackbarCallback__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(95182);
-/* harmony import */ var _useScrollBottomEvent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(36013);
-/* harmony import */ var _createGlobalState__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(17222);
-
-
-
-
-
-
-
-
-
-/***/ }),
-
-/***/ 12293:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "F": () => (/* binding */ useRemoteControlledDialog)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(32513);
-
-
-/**
- * Use a dialog state controlled by remote
- */ function useRemoteControlledDialog(event1, onUpdateByRemote, tabType = 'self') {
-    const [HOOK_ID] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)((0,uuid__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)()) // create an uuid for every hook
-    ;
-    const [open, setOpen] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(()=>{
-        return event1.on((_ev)=>{
-            const event = _ev;
-            // ignore the event from the same hook
-            if (event.hookId === HOOK_ID) return;
-            setOpen(event.open);
-            onUpdateByRemote === null || onUpdateByRemote === void 0 ? void 0 : onUpdateByRemote(_ev);
-        });
-    }, [
-        onUpdateByRemote,
-        event1,
-        HOOK_ID
-    ]);
-    const timer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-    const onUpdateByLocal = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((ev)=>{
-        setOpen(ev.open);
-        const timer_ = timer.current;
-        if (timer_ !== null) clearTimeout(timer_);
-        timer.current = setTimeout(()=>{
-            const payload = {
-                hookId: HOOK_ID,
-                ...ev
-            };
-            tabType === 'self' ? event1.sendToLocal(payload) : event1.sendToVisiblePages(payload);
-        }, 100);
-    }, [
-        event1,
-        tabType,
-        HOOK_ID
-    ]);
-    const openDialog = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(()=>{
-        onUpdateByLocal({
-            open: true
-        });
-    }, []);
-    const closeDialog = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(()=>{
-        onUpdateByLocal({
-            open: false
-        });
-    }, []);
-    return {
-        open,
-        openDialog,
-        closeDialog,
-        setDialog: onUpdateByLocal
-    };
-}
-
-
-/***/ }),
-
 /***/ 79958:
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "u": () => (/* binding */ waitDocumentReadyState)
 /* harmony export */ });
@@ -1189,6 +1350,110 @@ function score(x) {
     (0,_index_js__WEBPACK_IMPORTED_MODULE_0__/* .unreachable */ .t1)(x);
 }
 //# sourceMappingURL=document.readyState.js.map
+
+/***/ }),
+
+/***/ 31637:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "unwrap": () => (/* reexport safe */ _wrap_idb_value_js__WEBPACK_IMPORTED_MODULE_0__.u),
+/* harmony export */   "wrap": () => (/* reexport safe */ _wrap_idb_value_js__WEBPACK_IMPORTED_MODULE_0__.w),
+/* harmony export */   "deleteDB": () => (/* binding */ deleteDB),
+/* harmony export */   "openDB": () => (/* binding */ openDB)
+/* harmony export */ });
+/* harmony import */ var _wrap_idb_value_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(85621);
+
+
+
+/**
+ * Open a database.
+ *
+ * @param name Name of the database.
+ * @param version Schema version.
+ * @param callbacks Additional callbacks.
+ */
+function openDB(name, version, { blocked, upgrade, blocking, terminated } = {}) {
+    const request = indexedDB.open(name, version);
+    const openPromise = (0,_wrap_idb_value_js__WEBPACK_IMPORTED_MODULE_0__.w)(request);
+    if (upgrade) {
+        request.addEventListener('upgradeneeded', (event) => {
+            upgrade((0,_wrap_idb_value_js__WEBPACK_IMPORTED_MODULE_0__.w)(request.result), event.oldVersion, event.newVersion, (0,_wrap_idb_value_js__WEBPACK_IMPORTED_MODULE_0__.w)(request.transaction));
+        });
+    }
+    if (blocked)
+        request.addEventListener('blocked', () => blocked());
+    openPromise
+        .then((db) => {
+        if (terminated)
+            db.addEventListener('close', () => terminated());
+        if (blocking)
+            db.addEventListener('versionchange', () => blocking());
+    })
+        .catch(() => { });
+    return openPromise;
+}
+/**
+ * Delete a database.
+ *
+ * @param name Name of the database.
+ */
+function deleteDB(name, { blocked } = {}) {
+    const request = indexedDB.deleteDatabase(name);
+    if (blocked)
+        request.addEventListener('blocked', () => blocked());
+    return (0,_wrap_idb_value_js__WEBPACK_IMPORTED_MODULE_0__.w)(request).then(() => undefined);
+}
+
+const readMethods = ['get', 'getKey', 'getAll', 'getAllKeys', 'count'];
+const writeMethods = ['put', 'add', 'delete', 'clear'];
+const cachedMethods = new Map();
+function getMethod(target, prop) {
+    if (!(target instanceof IDBDatabase &&
+        !(prop in target) &&
+        typeof prop === 'string')) {
+        return;
+    }
+    if (cachedMethods.get(prop))
+        return cachedMethods.get(prop);
+    const targetFuncName = prop.replace(/FromIndex$/, '');
+    const useIndex = prop !== targetFuncName;
+    const isWrite = writeMethods.includes(targetFuncName);
+    if (
+    // Bail if the target doesn't exist on the target. Eg, getAll isn't in Edge.
+    !(targetFuncName in (useIndex ? IDBIndex : IDBObjectStore).prototype) ||
+        !(isWrite || readMethods.includes(targetFuncName))) {
+        return;
+    }
+    const method = async function (storeName, ...args) {
+        // isWrite ? 'readwrite' : undefined gzipps better, but fails in Edge :(
+        const tx = this.transaction(storeName, isWrite ? 'readwrite' : 'readonly');
+        let target = tx.store;
+        if (useIndex)
+            target = target.index(args.shift());
+        // Must reject if op rejects.
+        // If it's a write operation, must reject if tx.done rejects.
+        // Must reject with op rejection first.
+        // Must resolve with op value.
+        // Must handle both promises (no unhandled rejections)
+        return (await Promise.all([
+            target[targetFuncName](...args),
+            isWrite && tx.done,
+        ]))[0];
+    };
+    cachedMethods.set(prop, method);
+    return method;
+}
+(0,_wrap_idb_value_js__WEBPACK_IMPORTED_MODULE_0__.r)((oldTraps) => ({
+    ...oldTraps,
+    get: (target, prop, receiver) => getMethod(target, prop) || oldTraps.get(target, prop, receiver),
+    has: (target, prop) => !!getMethod(target, prop) || oldTraps.has(target, prop),
+}));
+
+
+
 
 /***/ })
 
@@ -1634,8 +1899,8 @@ function score(x) {
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, [5638,2698,7871,9759,3294,2486,4227,4544,5737,187,3883,8136,3147,8019,8712,9227,3693,3758,4570,7822,7856,400,3453,5132,12,2619,5838,3142,5105,3846,3832,8129,5951,2752,7849,7512,5178,6565,9744,444,6160,71,2222,9197,4960,102,253,572,8547,8145,5313,2088,3981,1696,3638,1555,516,2974,159,9141,6067,234,9737,79,4590,2891,5784,4586,9855,4029,433,9697,3619,1012,9717,7493,3535,2775,9827,8911], () => (__webpack_require__(96554)))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [5638,2698,7871,9759,3294,2486,4227,4544,5737,187,3883,8136,3147,8019,8712,9227,3693,3758,4570,7822,7856,400,3453,5132,12,2619,5838,3142,5105,3846,3832,8129,5951,2752,7849,7512,5178,6565,9744,444,6160,71,2222,9197,4960,102,253,572,8547,8145,5313,2088,3981,1696,3638,1555,516,2974,159,9141,6067,234,9737,79,4590,2891,5784,4586,9855,4029,433,9697,3619,1012,9717,7493,3535,2775,9827,8911], () => (__webpack_require__(42038)))
+/******/ 	__webpack_require__.O(undefined, [5638,2698,7871,9759,3294,2486,4227,4544,5737,187,3883,8136,3147,8019,8712,9227,3693,3758,4570,7822,7856,400,3453,5132,12,2619,5838,3142,5105,3846,3832,8129,5951,2752,7849,7512,5178,6565,9744,444,6160,71,2222,9197,4960,102,253,572,8547,8145,5313,2088,3981,1696,3638,1555,516,2974,159,9141,6067,234,9737,79,4590,2891,5784,4586,9855,4029,433,9697,3619,7928,1744,3095,7039,8963,5584,6391], () => (__webpack_require__(45982)))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [5638,2698,7871,9759,3294,2486,4227,4544,5737,187,3883,8136,3147,8019,8712,9227,3693,3758,4570,7822,7856,400,3453,5132,12,2619,5838,3142,5105,3846,3832,8129,5951,2752,7849,7512,5178,6565,9744,444,6160,71,2222,9197,4960,102,253,572,8547,8145,5313,2088,3981,1696,3638,1555,516,2974,159,9141,6067,234,9737,79,4590,2891,5784,4586,9855,4029,433,9697,3619,7928,1744,3095,7039,8963,5584,6391], () => (__webpack_require__(42038)))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
