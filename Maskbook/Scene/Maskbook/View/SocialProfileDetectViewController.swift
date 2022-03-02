@@ -36,7 +36,7 @@ class SocialProfileDetectViewController: UIViewController {
     
     lazy var avatarView: AvatarView = {
         let view = AvatarView(title: "")
-        view.applyCornerRadius(radius: 24)
+        view.applyCornerRadius(radius: 24, cornerCurve: .circular)
         view.backgroundColor = Asset.Colors.Public.blue.color
         
         view.translatesAutoresizingMaskIntoConstraints = false
