@@ -9,6 +9,7 @@
 import CoreData
 import CoreDataStack
 import Foundation
+import Kingfisher
 
 enum ProfileRepository {
     static let viewContext = AppContext.shared.coreDataStack.persistentContainer.viewContext
@@ -153,6 +154,9 @@ enum ProfileRepository {
         if let profile = Self.queryProfile(identifier: identifier) {
             profile.avatar = avatar
             try? viewContext.saveOrRollback()
+            // cache image for later usage
+            KingfisherManager.shared.retrieveImage(with: URL(string: avatar)!,
+                                                   completionHandler: nil)
         }
     }
 }

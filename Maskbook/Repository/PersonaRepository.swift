@@ -9,6 +9,7 @@
 import CoreData
 import CoreDataStack
 import Foundation
+import Kingfisher
 
 enum LinkedProfileMergePolicy: Int, Codable {
     case replace = 0
@@ -227,6 +228,9 @@ enum PersonaRepository {
         if let personaRecord = Self.queryPersona(identifier: identifier) {
             personaRecord.avatar = avatar
             try? viewContext.saveOrRollback()
+            // cache image for later usage
+            KingfisherManager.shared.retrieveImage(with: URL(string: avatar)!,
+                                                   completionHandler: nil)
         }
     }
 }

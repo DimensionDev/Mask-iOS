@@ -271,7 +271,17 @@ extension TokenDetailViewController {
             cancelButtonText: L10n.Common.Controls.cancel,
             imageType: .warning,
             confirmButtonClicked: { [weak self] _ in
-                self?.userSetting.network = tokenBlockchain
+                guard let self = self else { return }
+                self.userSetting.network = tokenBlockchain
+                let tokenIdentifier = Token.createIdentifier(
+                    chainId: Int64(tokenBlockchain.chain.rawValue),
+                    networkId: Int64(tokenBlockchain.networkId),
+                    symbol: self.viewModel.token.symbol,
+                    account: self.userSetting.defaultAccountAddress)
+                Coordinator.main.present(
+                    scene: .sendTransaction(
+                        param: .token(id: tokenIdentifier)),
+                    transition: .detail(animated: true))
             }
         )
         alertController.setAttributeMessage(attrMessage: attributeString)

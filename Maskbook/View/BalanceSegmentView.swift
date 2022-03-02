@@ -111,13 +111,13 @@ extension BalanceSegmentView {
     func selectedIndex(index: Int, animated: Bool) {
         for (_index, label) in labels.enumerated() {
             if _index == index {
-                label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+                label.font = FontStyles.BH4
                 label.textColor = maskTintColor
                 indicatorLeading.isActive = false
                 indicatorLeading = self.indicatorView.centerXAnchor.constraint(equalTo: label.centerXAnchor)
                 indicatorLeading.isActive = true
             } else {
-                label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+                label.font = FontStyles.MH5
                 label.textColor = Asset.Colors.Text.normal.color
             }
             if animated {

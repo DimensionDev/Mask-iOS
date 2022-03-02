@@ -19,7 +19,7 @@ enum L10n {
       static var arbitrum: String {
         return L10n.tr("Localizable", "Chain.Name.Arbitrum")
       }
-      /// Binance smart chain
+      /// BNB Chain
       static var bsc: String {
         return L10n.tr("Localizable", "Chain.Name.Bsc")
       }
@@ -39,7 +39,7 @@ enum L10n {
       static var polygon: String {
         return L10n.tr("Localizable", "Chain.Name.Polygon")
       }
-      /// xDai
+      /// Gnosis
       static var xdai: String {
         return L10n.tr("Localizable", "Chain.Name.Xdai")
       }
@@ -50,7 +50,7 @@ enum L10n {
       static var arbitrum: String {
         return L10n.tr("Localizable", "Chain.ShortName.Arbitrum")
       }
-      /// BSC
+      /// BNB
       static var bsc: String {
         return L10n.tr("Localizable", "Chain.ShortName.Bsc")
       }
@@ -70,7 +70,7 @@ enum L10n {
       static var polygon: String {
         return L10n.tr("Localizable", "Chain.ShortName.Polygon")
       }
-      /// xDai
+      /// Gnosis
       static var xdai: String {
         return L10n.tr("Localizable", "Chain.ShortName.Xdai")
       }
@@ -209,17 +209,6 @@ enum L10n {
         }
       }
 
-      enum IdentityCreate {
-        /// Please don’t forget your identity code. Your identity code is the only proof of your user identity and the only basis for you to encrypt or decrypt social activities. 
-        static var description: String {
-          return L10n.tr("Localizable", "Common.Alert.IdentityCreate.Description")
-        }
-        /// Identity created!
-        static var title: String {
-          return L10n.tr("Localizable", "Common.Alert.IdentityCreate.Title")
-        }
-      }
-
       enum IdentityPhrase {
         /// Your identity phrase is composed of randomly selected words. Please carefully write down each word in the order it appears.
         static var description: String {
@@ -246,6 +235,17 @@ enum L10n {
         /// Backup failed!
         static var backupFailed: String {
           return L10n.tr("Localizable", "Common.Alert.LocalBackup.BackupFailed")
+        }
+      }
+
+      enum PersonaCreate {
+        /// You have successfully created your persona %@. 
+        static func description(_ p1: String) -> String {
+          return L10n.tr("Localizable", "Common.Alert.PersonaCreate.Description", p1)
+        }
+        /// Successful 
+        static var title: String {
+          return L10n.tr("Localizable", "Common.Alert.PersonaCreate.Title")
         }
       }
 
@@ -381,13 +381,6 @@ enum L10n {
         /// Are you sure?
         static var title: String {
           return L10n.tr("Localizable", "Common.Alert.Signout.Title")
-        }
-      }
-
-      enum WalletBackup {
-        /// Copied!
-        static var title: String {
-          return L10n.tr("Localizable", "Common.Alert.WalletBackup.Title")
         }
       }
 
@@ -553,6 +546,10 @@ enum L10n {
     }
 
     enum Toast {
+      /// copied!
+      static var copy: String {
+        return L10n.tr("Localizable", "Common.Toast.Copy")
+      }
       /// Saved！
       static var saved: String {
         return L10n.tr("Localizable", "Common.Toast.Saved")
@@ -1141,6 +1138,14 @@ enum L10n {
     }
 
     enum NftDetail {
+      /// View Collection Website
+      static var collectionWeb: String {
+        return L10n.tr("Localizable", "Scene.NftDetail.CollectionWeb")
+      }
+      /// View on Etherscan
+      static var etherscan: String {
+        return L10n.tr("Localizable", "Scene.NftDetail.Etherscan")
+      }
       /// Floor Price
       static var floorPrice: String {
         return L10n.tr("Localizable", "Scene.NftDetail.FloorPrice")
@@ -1152,6 +1157,10 @@ enum L10n {
       /// List Price
       static var listPrice: String {
         return L10n.tr("Localizable", "Scene.NftDetail.ListPrice")
+      }
+      /// Save to Photos
+      static var savePhoto: String {
+        return L10n.tr("Localizable", "Scene.NftDetail.SavePhoto")
       }
     }
 
@@ -1751,6 +1760,10 @@ enum L10n {
         /// Hold to Send
         static var btnWithoutpassword: String {
           return L10n.tr("Localizable", "Scene.Sendtransaction.Send.BtnWithoutpassword")
+        }
+        /// Insufficient gas balance.
+        static var gasfeeError: String {
+          return L10n.tr("Localizable", "Scene.Sendtransaction.Send.GasfeeError")
         }
         /// Amount
         static var labelAmount: String {

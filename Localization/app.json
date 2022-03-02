@@ -71,9 +71,6 @@
             "change_backup_password_failed": {
                 "title": "Backup Password changed failed!"
             },
-            "wallet_backup": {
-                "title": "Copied!"
-            },
             "identity_phrase": {
                 "title": "Identity Phrase",
                 "description": "Your identity phrase is composed of randomly selected words. Please carefully write down each word in the order it appears."
@@ -82,9 +79,9 @@
                 "title": "Warning",
                 "description": "Simply taking a screenshot of identity code is not safe."
             },
-            "identity_create": {
-                "title": "Identity created!",
-                "description": "Please don’t forget your identity code. Your identity code is the only proof of your user identity and the only basis for you to encrypt or decrypt social activities. "
+            "persona_create": {
+                "title": "Successful ",
+                "description": "You have successfully created your persona %s. "
             },
             "persona_logout": {
                 "title": "Confirm to log out?",
@@ -168,7 +165,8 @@
             "download_next": "I downloaded, next"
         },
         "toast": {
-            "saved": "Saved！"
+            "saved": "Saved！",
+            "copy": "copied!"
         },
         "loading": "Loading..."
     },
@@ -417,7 +415,10 @@
          "NFT_Detail": {
             "list_price": "List Price",
             "last_sale_Price": "Last Sale Price",
-            "floor_price": "Floor Price"
+            "floor_price": "Floor Price",
+            "save_photo":"Save to Photos",
+            "collection_web":"View Collection Website",
+            "etherscan":"View on Etherscan",
         },
         "sendTransaction":{
             "send":{
@@ -430,7 +431,8 @@
         	    "Label_Password":"Password",
                 "btn_withoutPassword":"Hold to Send",
                 "amount_error":"Insufficient amount.",
-                "password_error":"Incorrect payment password."
+                "password_error":"Incorrect payment password.",
+                "gasFee_error": "Insufficient gas balance."
         	},
         	"addContact":{
         		"btn_add":"Add Contact",
@@ -823,20 +825,20 @@
     "chain": {
         "short_name": {
             "eth": "ETH",
-            "bsc": "BSC",
+            "bsc": "BNB",
             "dot": "DOT",
             "polygon": "Polygon",
             "arbitrum": "Arbitrum",
-            "xdai": "xDai",
+            "xdai": "Gnosis",
             "optimism": "Optimism"
         },
         "name": {
             "eth": "Ethereum",
-            "bsc": "Binance smart chain",
+            "bsc": "BNB Chain",
             "dot": "Polkadot",
             "polygon": "Polygon/Matic Network",
             "arbitrum": "Arbitrum",
-            "xdai": "xDai",
+            "xdai": "Gnosis",
             "optimism": "Optimism"
         }
     }

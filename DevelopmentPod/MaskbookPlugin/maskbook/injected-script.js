@@ -516,11 +516,31 @@
         handlePromise(id, () => untilInner(path));
     }
 
+    function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }
+
     const proto = HTMLInputElement.prototype;
     const { defineProperty, deleteProperty } = Reflect;
     const setTimeoutCaptured = setTimeout.bind(window);
     const clearTimeoutCaptured = clearTimeout.bind(window);
-    function hookInputUploadOnce(...[format, fileName, fileArray]) {
+
+    /**
+     * This API can mock a file upload in React applications when injected script has been injected into the page.
+     *
+     * If the <input type='file' /> element is available, you can use the API like this:
+     *     input.focus()
+     *     hookInputUploadOnce(format, fileName, file, true)
+     *
+     * If the <input type='file' /> is dynamically generated after the user clicks "Upload" button on the web page, you can use the API like this:
+     *     hookInputUploadOnce(format, fileName, file, false)
+     *     uploadButton.click()
+     * @param format
+     * @param fileName
+     * @param fileArray
+     * @param triggerOnActiveElementNow
+     */
+    function hookInputUploadOnce(
+        ...[format, fileName, fileArray, triggerOnActiveElementNow]
+    ) {
         let timer = null;
         const e = new no_xray_Event('change', {
             bubbles: true,
@@ -549,6 +569,10 @@
                 deleteProperty(this, 'files');
             }, 200);
         };
+
+        if (triggerOnActiveElementNow && document.activeElement instanceof HTMLInputElement) {
+            _optionalChain([document, 'access', _ => _.activeElement, 'optionalAccess', _2 => _2.click, 'call', _3 => _3()]);
+        }
     }
 
     document.addEventListener(CustomEventId, (e) => {
@@ -659,31 +683,6 @@
         if (isFF) setupGecko();
         setupChromium();
     })();
-
-    const data = {
-        // @ts-ignore
-        __proto__: null,
-        appVersion:
-            '5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Mobile Safari/537.36',
-        platform: 'Linux armv8l',
-        userAgent:
-            'Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Mobile Safari/537.36',
-        vendor: 'Google Inc.',
-        vendorSub: '',
-        // navigator.userAgentData
-    };
-    if (location.hostname.endsWith('instagram.com')) {
-        const proto = Object.getPrototypeOf(window.navigator);
-        const desc = Object.getOwnPropertyDescriptors(proto);
-        for (const key in desc) {
-            // TODO: should this function f being xray-unwrapped?
-            const f = () => data[key ];
-            if (key in data) desc[key].get = f;
-            else delete desc[key];
-        }
-        delete proto.userAgentData;
-        Object.defineProperties(proto, desc);
-    }
 
     if (document.currentScript) document.currentScript.remove();
 

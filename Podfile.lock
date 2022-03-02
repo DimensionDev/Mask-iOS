@@ -194,7 +194,7 @@ DEPENDENCIES:
   - UStack (~> 2.2.1)
   - WalletConnectSwift (from `https://github.com/DimensionDev/WalletConnectSwift.git`)
   - web3swift (from `https://github.com/DimensionDev/web3swift.git`)
-  - WebExtension-Shim (from `https://github.com/DimensionDev/WebExtension-Shim-iOS.git`, branch `dev/2.0`)
+  - WebExtension-Shim (from `https://github.com/DimensionDev/WebExtension-Shim-iOS.git`, branch `master`)
   - ZIPFoundation (~> 0.9)
 
 SPEC REPOS:
@@ -255,7 +255,7 @@ EXTERNAL SOURCES:
   web3swift:
     :git: https://github.com/DimensionDev/web3swift.git
   WebExtension-Shim:
-    :branch: dev/2.0
+    :branch: master
     :git: https://github.com/DimensionDev/WebExtension-Shim-iOS.git
 
 CHECKOUT OPTIONS:
@@ -269,7 +269,7 @@ CHECKOUT OPTIONS:
     :commit: 229489fe14ef57c48a51c6205d39f8820f5e3f6a
     :git: https://github.com/DimensionDev/web3swift.git
   WebExtension-Shim:
-    :commit: 3a7edff4decdef34dcdcd9d0457e7cf830759d63
+    :commit: 9b416a1a8a0b5d5f2a7c410ac98451e7bbe088b6
     :git: https://github.com/DimensionDev/WebExtension-Shim-iOS.git
 
 SPEC CHECKSUMS:
@@ -320,6 +320,6 @@ SPEC CHECKSUMS:
   WebExtension-Shim: 11b071466c53f42097291eb176cf9bcc5fb9b050
   ZIPFoundation: ae5b4b813d216d3bf0a148773267fff14bd51d37
 
-PODFILE CHECKSUM: 621bbd5acab5b7d2abfd1fa19a623bf2e6cb693f
+PODFILE CHECKSUM: 74ef40635934949672a641694dcb2e7f14fd3f17
 
 COCOAPODS: 1.11.2

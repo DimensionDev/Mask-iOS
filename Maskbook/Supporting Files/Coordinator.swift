@@ -120,6 +120,7 @@ class Coordinator {
         case personaExportPrivateKey(personaIdentifier: String)
         case tokenDetail(token: MaskToken)
         case nftDetail(nftToken: Collectible)
+        case nftAction(nftToken: Collectible)
         case walletHistory
         case safariView(url: URL)
         case setPassword
@@ -528,6 +529,10 @@ extension Coordinator {
             let viewController = NFTDetailViewController(nftTokenModel: token)
             return viewController
 
+        case let .nftAction(token):
+            let viewController = NFTActionViewController(nftTokenModel: token)
+            return viewController
+            
         case .walletHistory:
             return WalletHistoryViewController()
             

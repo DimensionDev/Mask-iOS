@@ -26,7 +26,7 @@ struct PersonaKeyInfoPreview: View {
             .flatMap { String($0) }
             ?? ""
         let originPersona = Persona(fromRecord: persona)
-        self.privateKey = originPersona?.packedData?.base64URLEncodedString() ?? ""
+        self.privateKey = originPersona?.privateKey?.privateKeyBase64String ?? ""
 
         let mnemonic = persona.mnemonic
         self.word = mnemonic?
