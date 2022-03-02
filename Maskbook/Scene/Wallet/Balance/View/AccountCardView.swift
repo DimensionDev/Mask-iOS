@@ -14,6 +14,7 @@ import UIKit
 protocol AccountCardViewDelegate: AnyObject {
     func moreButtonDidClick(view: AccountCardView, button: UIButton)
 }
+// swiftlint:disable force_cast line_length type_body_length file_length
 
 // swiftlint:disable force_cast line_length type_body_length file_length
 class AccountCardView: UIView {

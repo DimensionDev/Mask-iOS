@@ -111,7 +111,7 @@
 "Scene.App.PluginIntroduction.Ito" = "允许用户在Twitter上直接购买代币。";
 "Scene.App.PluginIntroduction.Luckydrop" = "发送红包(Token/NFT)，给加密好友带来惊喜。";
 "Scene.App.PluginIntroduction.Swap" = "通过Dex购买代币，无需额外费用和限制。";
-"Scene.App.PluginIntroduction.Transak" = "Transak 支持通过60多种货币购买代币";
+"Scene.App.PluginIntroduction.Transak" = "Transak 支持通过60多种货币购买代币。";
 "Scene.App.PluginTip" = "如果您关闭了一个插件，当浏览社交媒体时，插件功能将无法在时间线上生效。";
 "Scene.App.Plugins.Collectibles" = "Collectibles";
 "Scene.App.Plugins.Dhedge" = "DHEDGE";
