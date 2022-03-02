@@ -416,6 +416,21 @@ enum L10n {
           return L10n.tr("Localizable", "Common.Alert.WalletImport.AlertTitleSuccess")
         }
       }
+
+      enum WrongFolder {
+        /// When you delete Mask App, the Mask Network folder would also be deleted. 
+        static var description1: String {
+          return L10n.tr("Localizable", "Common.Alert.WrongFolder.Description1")
+        }
+        /// For data security, please don’t save to this folder. 
+        static var description2: String {
+          return L10n.tr("Localizable", "Common.Alert.WrongFolder.Description2")
+        }
+        /// Please select another folder
+        static var title: String {
+          return L10n.tr("Localizable", "Common.Alert.WrongFolder.Title")
+        }
+      }
     }
 
     enum Controls {
@@ -1134,6 +1149,13 @@ enum L10n {
       /// Mnemonic word
       static var title: String {
         return L10n.tr("Localizable", "Scene.MnemonicWord.Title")
+      }
+    }
+
+    enum MoveBackupData {
+      /// Please move your data
+      static var title: String {
+        return L10n.tr("Localizable", "Scene.MoveBackupData.Title")
       }
     }
 

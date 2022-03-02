@@ -187,6 +187,7 @@ class Coordinator {
             claimedAmount: BigUInt?,
             shareActionDelegate: RedPacketShareDelegate?
         )
+        case moveBackupData
         case debug
     }
 
@@ -730,6 +731,9 @@ extension Coordinator {
                 shareDelegate: shareActionDelegate
             )
         
+        case .moveBackupData:
+            return MoveBackupDataViewController()
+            
         case .debug:
             return UIHostingController(rootView: DebugView())
         }

@@ -129,6 +129,11 @@
             "scan_persona_exist": {
                 "title": "The persona already existed.",
                 "description": "The persona that corresponds with the QR code already existed."
+            },
+            "wrong_folder": {
+                "title": "Please select another folder",
+                "description1": "When you delete Mask App, the Mask Network folder would also be deleted. ",
+                "description2": "For data security, please don’t save to this folder. "
             }
         },
         "controls": {
@@ -820,6 +825,9 @@
             "empty": "Empty",
             "share_message_official": "I just claimed a lucky drop from %s on %s network. Follow %s (mask.io) to claim lucky drops.\n#mask_io #LuckyDrop\n%s",
             "share_message_unsupport_platform": "I just claimed a lucky drop from @%s on %s network. \n%s"
+        },
+        "move_backup_data": {
+            "title": "Please move your data"
         }
     },
     "chain": {

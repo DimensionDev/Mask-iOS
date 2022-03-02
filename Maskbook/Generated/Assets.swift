@@ -482,7 +482,6 @@ internal enum Asset {
     internal static let setting = ImageAsset(name: "Tab/setting")
     internal static let wallet = ImageAsset(name: "Tab/wallet")
   }
-  internal static let backgroundGray = ColorAsset(name: "backgroundGray")
   internal static let facebookBlue = ColorAsset(name: "facebookBlue")
   internal static let dashboardIcon = ImageAsset(name: "dashboard_icon")
   internal static let dashboardSiteFacebook = ImageAsset(name: "dashboard_site_facebook")

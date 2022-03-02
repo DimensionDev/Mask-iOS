@@ -72,6 +72,9 @@
 "Common.Alert.WalletDeriveSuccess.Title" = "Perfect!";
 "Common.Alert.WalletImport.AlertTitleFail" = "Error!";
 "Common.Alert.WalletImport.AlertTitleSuccess" = "Import completed!";
+"Common.Alert.WrongFolder.Description1" = "When you delete Mask App, the Mask Network folder would also be deleted. ";
+"Common.Alert.WrongFolder.Description2" = "For data security, please don’t save to this folder. ";
+"Common.Alert.WrongFolder.Title" = "Please select another folder";
 "Common.Controls.Accept" = "Accept";
 "Common.Controls.BackUp" = "Back up";
 "Common.Controls.BackUpLocally" = "Back up locally";
@@ -238,6 +241,7 @@ separated by spaces";
 "Scene.MnemonicVerify.WordsTitle" = "Tap each word in the correct order.";
 "Scene.MnemonicWord.Description" = "Write down each word.";
 "Scene.MnemonicWord.Title" = "Mnemonic word";
+"Scene.MoveBackupData.Title" = "Please move your data";
 "Scene.NftDetail.CollectionWeb" = "View Collection Website";
 "Scene.NftDetail.Etherscan" = "View on Etherscan";
 "Scene.NftDetail.FloorPrice" = "Floor Price";

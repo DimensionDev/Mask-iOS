@@ -42,7 +42,7 @@ class JSResourceSelectViewModel: ObservableObject {
         readMaskbookItems()
     }
 
-    static let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    static let documentPath = URL.documents
 
     static let documentMaskbook = documentPath.appendingPathComponent("maskbook")
 

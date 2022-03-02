@@ -136,6 +136,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         FirebaseApp.configure()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+            Coordinator.main.present(scene: .moveBackupData, transition: .panModel(animated: true))
+        }
         return true
     }
     
