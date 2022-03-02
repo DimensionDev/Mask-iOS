@@ -5,6 +5,7 @@
 //  Created by BradGao on 2021/6/4.
 //  Copyright © 2021 dimension. All rights reserved.
 //
+// swiftlint:disable force_cast line_length type_body_length file_length
 
 import Combine
 import CoreDataStack
@@ -40,14 +41,8 @@ class AccountCardView: UIView {
         return layer1
     }()
     
-    private var stackViewGradientLayer: CAGradientLayer = {
-        let layer1 = CAGradientLayer()
-        layer1.colors = [
-            Asset.Colors.AccountCard.Chains.bottomStart.color.cgColor,
-            Asset.Colors.AccountCard.Chains.bottomEnd.color.cgColor
-        ]
-        layer1.startPoint = CGPoint(x: 0.5, y: 0)
-        layer1.endPoint = CGPoint(x: 1, y: 1)
+    private lazy var stackViewBackgroudLayer: CALayer = {
+        let layer1 = CALayer()
         layer1.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         layer1.cornerRadius = 20
         layer1.cornerCurve = .continuous
@@ -96,6 +91,21 @@ class AccountCardView: UIView {
         mask.contentMode = .scaleAspectFill
         mask.translatesAutoresizingMaskIntoConstraints = false
         return mask
+    }()
+    
+    private lazy var chainLargeImageContainer: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.spacing = 0
+        view.addArrangedSubview(chainLargeImageViewPadding)
+        view.addArrangedSubview(chainLargeImageView)
+        return view
+    }()
+    
+    private var chainLargeImageViewPadding: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
     }()
     
     private var nameLabel: UILabel = {
@@ -174,6 +184,8 @@ class AccountCardView: UIView {
     private static let chainButtonViewTag = 1
     private static let chainDotViewTag = 2
     
+    weak var shadowView: UIView?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -188,14 +200,16 @@ class AccountCardView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         backgroundLayer.frame = bounds
-        stackViewGradientLayer.frame = CGRect(x: bounds.origin.x,
-                                              y: chainsStackView.frame.origin.y - 13,
-                                              width: bounds.width,
-                                              height: 60)
-        stackViewTopBorderLayer.frame = CGRect(x: stackViewGradientLayer.frame.origin.x,
-                                               y: stackViewGradientLayer.frame.origin.y,
-                                               width: bounds.width,
-                                               height: 0.5)
+        stackViewBackgroudLayer.frame = CGRect(
+            x: bounds.origin.x,
+            y: chainsStackView.frame.origin.y - 13,
+            width: bounds.width,
+            height: 60)
+        stackViewTopBorderLayer.frame = CGRect(
+            x: stackViewBackgroudLayer.frame.origin.x,
+            y: stackViewBackgroudLayer.frame.origin.y,
+            width: bounds.width,
+            height: 0.5)
     }
     
     private func setup() {
@@ -204,7 +218,7 @@ class AccountCardView: UIView {
         directionalLayoutMargins = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 0, trailing: 16)
 
         layer.addSublayer(backgroundLayer)
-        addSubview(chainLargeImageView)
+        addSubview(chainLargeImageContainer)
         addSubview(maskImageView1)
         addSubview(maskImageView2)
         addSubview(maskImageView3)
@@ -216,17 +230,28 @@ class AccountCardView: UIView {
         addSubview(addressLabel)
         addSubview(copyButton)
         addSubview(balanceLabel)
+        layer.addSublayer(stackViewBackgroudLayer)
         addSubview(chainsStackView)
-        layer.addSublayer(stackViewGradientLayer)
         layer.addSublayer(stackViewTopBorderLayer)
         
+        chainLargeImageContainer.translatesAutoresizingMaskIntoConstraints = false
+        chainLargeImageViewPadding.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            chainLargeImageView.topAnchor.constraint(equalTo: self.layoutMarginsGuide.topAnchor,
-                                                     constant: 30),
-            chainLargeImageView.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor,
-                                                          constant: -20),
-            chainLargeImageView.widthAnchor.constraint(equalToConstant: 67),
-            chainLargeImageView.heightAnchor.constraint(equalToConstant: 67)
+            chainLargeImageContainer.leadingAnchor.constraint(
+                equalTo: maskImageView2.leadingAnchor),
+            chainLargeImageContainer.topAnchor.constraint(
+                equalTo: self.layoutMarginsGuide.topAnchor,
+                constant: 30
+            ),
+            // Set the position on the x-axis of `chainLargeImageView` according to the width of `maskImageView2`.
+            chainLargeImageViewPadding.widthAnchor.constraint(
+                equalTo: maskImageView2.widthAnchor,
+                multiplier: 53.0 / 158.0),
+            chainLargeImageView.widthAnchor.constraint(
+                equalTo: self.widthAnchor,
+                multiplier: 67.0 / 330),
+            chainLargeImageView.heightAnchor.constraint(
+                equalTo: chainLargeImageView.widthAnchor)
         ])
         
         NSLayoutConstraint.activate([
@@ -485,17 +510,26 @@ class AccountCardView: UIView {
         allChainButtons[selectChainIndex].viewWithTag(Self.chainDotViewTag)?.backgroundColor = .white
     }
     
-    private func updateBackground(isWalletConnect: Bool,
-                                  displayBlockchain: WalletDisplayBlockChainType) {
-        if isWalletConnect {
-            chainLargeImageView.image = Asset.Images.Scene.Balance.accountBgWc.image
-            backgroundLayer.colors = [
-                Asset.Colors.AccountCard.wcBackground1.color.cgColor,
-                Asset.Colors.AccountCard.wcBackground2.color.cgColor
-            ]
-        } else {
-            chainLargeImageView.image = displayBlockchain.chainBgImage
-            backgroundLayer.colors = displayBlockchain.accoundCardBgColors
+    private func updateBackground(
+        isWalletConnect: Bool,
+        displayBlockchain: WalletDisplayBlockChainType) {
+            let shadowLayer = shadowView?.layer
+            if isWalletConnect {
+                chainLargeImageView.image = Asset.Images.Scene.Balance.accountBgWc.image
+                backgroundLayer.colors = [
+                    Asset.Colors.AccountCard.wcBackground1.color.cgColor,
+                    Asset.Colors.AccountCard.wcBackground2.color.cgColor
+                ]
+                stackViewBackgroudLayer.backgroundColor =
+                    Asset.Colors.AccountCard.wcBackground3.color.cgColor
+                shadowLayer?.shadowColor =
+                    Asset.Colors.Shadow.Card.all.color.cgColor
+            } else {
+                chainLargeImageView.image = displayBlockchain.chainBgImage
+                backgroundLayer.colors = displayBlockchain.accoundCardBgColors
+                stackViewBackgroudLayer.backgroundColor = displayBlockchain.bottomBgColor
+                shadowLayer?.shadowColor = displayBlockchain.shadowColor
+            }
         }
     }
     
@@ -510,3 +544,4 @@ class AccountCardView: UIView {
         self.addressArr.append(validAddress)
     }
 }
+// swiftlint:ensable force_cast line_length type_body_length file_length

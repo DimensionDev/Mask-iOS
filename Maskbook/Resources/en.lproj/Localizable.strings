@@ -35,13 +35,13 @@
 "Common.Alert.FaceIdActivateFail.Title" = "Activation fails";
 "Common.Alert.IdentifyCodeScreenshotWarning.Description" = "Simply taking a screenshot of identity code is not safe.";
 "Common.Alert.IdentifyCodeScreenshotWarning.Title" = "Warning";
-"Common.Alert.IdentityCreate.Description" = "Please don’t forget your identity code. Your identity code is the only proof of your user identity and the only basis for you to encrypt or decrypt social activities. ";
-"Common.Alert.IdentityCreate.Title" = "Identity created!";
 "Common.Alert.IdentityPhrase.Description" = "Your identity phrase is composed of randomly selected words. Please carefully write down each word in the order it appears.";
 "Common.Alert.IdentityPhrase.Title" = "Identity Phrase";
 "Common.Alert.KeychainAuthPrompt.Title" = "Authenticate to use your secrets";
 "Common.Alert.LocalBackup.BackupCompleted" = "Backup completed!";
 "Common.Alert.LocalBackup.BackupFailed" = "Backup failed!";
+"Common.Alert.PersonaCreate.Description" = "You have successfully created your persona %@. ";
+"Common.Alert.PersonaCreate.Title" = "Successful ";
 "Common.Alert.PersonaLogout.Description" = "After logging out, your associated social accounts can no longer decrypt past encrypted messages.";
 "Common.Alert.PersonaLogout.Title" = "Confirm to log out?";
 "Common.Alert.PersonaNameDuplicated.Title" = "The username has already been created.";
@@ -66,7 +66,6 @@
 "Common.Alert.SetupBackupPasswordFailed.Title" = "Backup Password set up failed!";
 "Common.Alert.Signout.Description" = "Mask Network does not save any of your data. Please remember your account and password, and back up your data in time before your sign out.";
 "Common.Alert.Signout.Title" = "Are you sure?";
-"Common.Alert.WalletBackup.Title" = "Copied!";
 "Common.Alert.WalletCreateSuccess.Description" = "In order to protect your funds against hackers and thieves, store this recovery phrase in a safe and secure place.";
 "Common.Alert.WalletCreateSuccess.Title" = "Perfect!";
 "Common.Alert.WalletDeriveSuccess.Description" = "New wallet account created successfully";
@@ -105,6 +104,7 @@
 "Common.Controls.Verify" = "Verify";
 "Common.Controls.WebviewGoBack" = "Back";
 "Common.Loading" = "Loading...";
+"Common.Toast.Copy" = "copied!";
 "Common.Toast.Saved" = "Saved！";
 "Scene.App.GoodLuckNextTime" = "Better Luck next time";
 "Scene.App.MarketTrendSource" = "Market trend source";

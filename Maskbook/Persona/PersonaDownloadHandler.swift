@@ -140,9 +140,9 @@ extension PersonaDownloadHandler: UIDocumentPickerDelegate {
         guard let pdfDocument = pdfDocument else { return }
         let success = pdfDocument.write(to: pdfURL)
         if success {
-            UIApplication.getTopViewController()?.view
-                .makeToast(L10n.Common.Toast.saved,
-                           position: .center)
+            UIApplication.getTopViewController()?
+                .makeToast(message: L10n.Common.Toast.saved ,
+                           image: Asset.Images.Toast.check.image)
         }
     }
 }
