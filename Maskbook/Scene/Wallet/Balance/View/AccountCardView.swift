@@ -42,10 +42,9 @@ class AccountCardView: UIView {
     
     private let cornerRadiusValue: CGFloat = 20
     
-//    private var addressArr = [String]()
     private var displayAddressType: DisplayAddressType = .ens
     private var displayAddress: DisplayAddress?
-
+    
     private var backgroundLayer: CAGradientLayer = {
         let layer1 = CAGradientLayer()
         layer1.colors = WalletDisplayBlockChainType.all.accoundCardBgColors
@@ -232,7 +231,7 @@ class AccountCardView: UIView {
         applyCornerRadius(radius: 20)
         
         directionalLayoutMargins = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 0, trailing: 16)
-
+        
         layer.addSublayer(backgroundLayer)
         addSubview(chainLargeImageContainer)
         addSubview(maskImageView1)
@@ -379,7 +378,7 @@ class AccountCardView: UIView {
         let displayAddress = self.getFullAddress()
         UIPasteboard.general.string = displayAddress
         let alertController = AlertController(
-            title: L10n.Common.Alert.WalletBackup.title,
+            title: L10n.Common.Toast.copy,
             message: "",
             confirmButtonText: L10n.Common.Controls.done,
             imageType: .success,
@@ -486,16 +485,16 @@ class AccountCardView: UIView {
                 UserDefaultSettings.shared.displayBlockChainPublisher.eraseToAnyPublisher(),
                 UserDefaultPublishers.network.eraseToAnyPublisher()
             )
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] name, displayBlockChain, networkType in
-                self?.updateBlockChainButtonStatus(currentBlockChain: displayBlockChain)
-                self?.updateBackground(isWalletConnect: account.fromWalletConnect,
-                                       displayBlockchain: displayBlockChain)
-                self?.nameLabel.text = name
-                self?.networkLabel.text = networkType.shortName.lowercased().capitalized
-                self?.networkIcon.image = networkType.smallIcon?.withTintColor(Asset.Colors.AccountCard.nameText.color)
-            }
-            .store(in: &disposeBag)
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] name, displayBlockChain, networkType in
+                    self?.updateBlockChainButtonStatus(currentBlockChain: displayBlockChain)
+                    self?.updateBackground(isWalletConnect: account.fromWalletConnect,
+                                           displayBlockchain: displayBlockChain)
+                    self?.nameLabel.text = name
+                    self?.networkLabel.text = networkType.shortName.lowercased().capitalized
+                    self?.networkIcon.image = networkType.smallIcon?.withTintColor(Asset.Colors.AccountCard.nameText.color)
+                }
+                .store(in: &disposeBag)
         } else {
             nameLabel.text = ""
             addressLabel.text = ""
@@ -532,9 +531,9 @@ class AccountCardView: UIView {
                     Asset.Colors.AccountCard.wcBackground2.color.cgColor
                 ]
                 stackViewBackgroudLayer.backgroundColor =
-                    Asset.Colors.AccountCard.wcBackground3.color.cgColor
+                Asset.Colors.AccountCard.wcBackground3.color.cgColor
                 shadowLayer?.shadowColor =
-                    Asset.Colors.Shadow.Card.all.color.cgColor
+                Asset.Colors.Shadow.Card.all.color.cgColor
             } else {
                 chainLargeImageView.image = displayBlockchain.chainBgImage
                 backgroundLayer.colors = displayBlockchain.accoundCardBgColors
@@ -542,12 +541,10 @@ class AccountCardView: UIView {
                 shadowLayer?.shadowColor = displayBlockchain.shadowColor
             }
         }
-    }
     
     private func toggleDisplayAddressType() {
         switch displayAddressType {
         case .normal:
-
             displayAddressType = .ens
             
         case .ens:
