@@ -27,6 +27,8 @@ class AccountCardView: UIView {
     
     private let cornerRadiusValue: CGFloat = 20
     
+    private var addressArr = [String]()
+
     private var backgroundLayer: CAGradientLayer = {
         let layer1 = CAGradientLayer()
         layer1.colors = WalletDisplayBlockChainType.all.accoundCardBgColors
@@ -315,6 +317,19 @@ class AccountCardView: UIView {
         }
         
         copyButton.addTarget(self, action: #selector(copyButtonDidClick(sender:)), for: .touchUpInside)
+        
+        addressLabel.gesture()
+            .sink { [weak self] _ in
+                self?.addressArr = Array(self?.addressArr.reversed() ?? [])
+                let displayAddress = self?.addressArr.first ?? ""
+                if displayAddress.utf16.count > 30 {
+                    self?.addressLabel.text = "\(displayAddress.prefix(10))...\(displayAddress.suffix(10))"
+                } else {
+                    self?.addressLabel.text =  displayAddress
+                }
+        }
+        .store(in: &disposeBag)
+        
     }
     
     @objc
@@ -324,7 +339,8 @@ class AccountCardView: UIView {
     
     @objc
     private func copyButtonDidClick(sender: UIButton) {
-        UIPasteboard.general.string = userSetting.defaultAccountAddress
+        let displayAddress = self.addressArr.first ?? ""
+        UIPasteboard.general.string = displayAddress
         let alertController = AlertController(
             title: L10n.Common.Alert.WalletBackup.title,
             message: "",
@@ -436,10 +452,14 @@ class AccountCardView: UIView {
                     self?.networkIcon.image = networkType.smallIcon?.withTintColor(Asset.Colors.AccountCard.nameText.color)
                 }
                 .store(in: &disposeBag)
-            guard let validAddress = account.address else { return }
             self.nameLabel.text = account.name
-            self.addressLabel.text = "\(validAddress.prefix(10))...\(validAddress.suffix(10))"
-            
+            self.getAddressAndENS(account: account)
+            let displayAddress = self.addressArr.first ?? ""
+            if displayAddress.utf16.count > 30 {
+                self.addressLabel.text = "\(displayAddress.prefix(10))...\(displayAddress.suffix(10))"
+            } else {
+                self.addressLabel.text = displayAddress
+            }
 //            Publishers.CombineLatest4(
 //                account.publisher(for: \.name).eraseToAnyPublisher(),
 //                account.publisher(for: \.address).eraseToAnyPublisher(),
@@ -498,5 +518,16 @@ class AccountCardView: UIView {
             chainLargeImageView.image = displayBlockchain.chainBgImage
             backgroundLayer.colors = displayBlockchain.accoundCardBgColors
         }
+    }
+    
+    private func getAddressAndENS(account: Account) {
+        self.addressArr.removeAll()
+        guard let validAddress = account.address else { return }
+        guard let ensName = account.ensName else {
+            self.addressLabel.text = "\(validAddress.prefix(10))...\(validAddress.suffix(10))"
+            return
+        }
+        if ensName.isNotEmpty { self.addressArr.append(ensName) }
+        self.addressArr.append(validAddress)
     }
 }
