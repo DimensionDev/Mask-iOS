@@ -9,11 +9,11 @@
 import Combine
 import CoreDataStack
 import Foundation
+import Kingfisher
 import PanModal
-import UIKit
 import Photos
 import PhotosUI
-import Kingfisher
+import UIKit
 
 class NFTActionViewController: UIViewController {
     typealias Section = NFTActionViewModel.Section
@@ -33,27 +33,27 @@ class NFTActionViewController: UIViewController {
     }()
     
     lazy var dataSource: UITableViewDiffableDataSource<Section, Item> = {
-        return UITableViewDiffableDataSource<Section, Item>(
+        UITableViewDiffableDataSource<Section, Item>(
             tableView: tableView) { tableView, indexPath, item in
-            let cell: NFTActionTableViewCell = tableView.dequeCell(at: indexPath)
-            switch item {
-            case let .savephoto(title, _):
-                cell.iconView.image = Asset.Images.Scene.Nft.savephoto.image
-                cell.titleLabel.text = title
-                cell.isArrowDisplay = false
+                let cell: NFTActionTableViewCell = tableView.dequeCell(at: indexPath)
+                switch item {
+                case .savephoto(let title, _):
+                    cell.iconView.image = Asset.Images.Scene.Nft.savephoto.image
+                    cell.titleLabel.text = title
+                    cell.isArrowDisplay = false
                 
-            case let.website(title, _):
-                cell.iconView.image = Asset.Images.Scene.Nft.website.image
-                cell.titleLabel.text = title
-                cell.isArrowDisplay = true
+                case .website(let title, _):
+                    cell.iconView.image = Asset.Images.Scene.Nft.website.image
+                    cell.titleLabel.text = title
+                    cell.isArrowDisplay = true
                 
-            case let.ethscan(title, _):
-                cell.iconView.image = Asset.Images.Scene.Nft.ethscan.image
-                cell.titleLabel.text = title
-                cell.isArrowDisplay = true
+                case .ethscan(let title, _):
+                    cell.iconView.image = Asset.Images.Scene.Nft.ethscan.image
+                    cell.titleLabel.text = title
+                    cell.isArrowDisplay = true
+                }
+                return cell
             }
-            return cell
-        }
     }()
     
     let viewModel: ViewModel
@@ -113,24 +113,25 @@ extension NFTActionViewController: UITableViewDelegate {
         case .savephoto(_, let imageUrl):
             guard let url = imageUrl else { return }
             ImageDownloader.default.downloadImage(with: url) { [weak self] result in
-                                var image: UIImage?
-                                switch result {
-                                case let .success(value): image = value.image
-                                default:
-                                    break
-                                }
-                                if let image = image {
-                                     self?.saveImageToPhotoLibrary(image: image)
-                                }
-                        }
+                var image: UIImage?
+                switch result {
+                case .success(let value): image = value.image
+                    
+                default:
+                    break
+                }
+                if let image = image {
+                    self?.saveImageToPhotoLibrary(image: image)
+                }
+            }
         case .website(_, let websiteUrl):
             guard let url = websiteUrl else { return }
-            self.dismiss(animated: true, completion: nil)
+            dismiss(animated: true, completion: nil)
             Coordinator.main.present(scene: .safariView(url: url), transition: .modal(animated: true))
             
         case .ethscan(_, let ethscanUrl):
             guard let url = ethscanUrl else { return }
-            self.dismiss(animated: true, completion: nil)
+            dismiss(animated: true, completion: nil)
             Coordinator.main.present(scene: .safariView(url: url), transition: .modal(animated: true))
         }
     }
@@ -138,35 +139,36 @@ extension NFTActionViewController: UITableViewDelegate {
 
 extension NFTActionViewController: PanModalPresentable {
     var panScrollable: UIScrollView? {
-        return nil
+        nil
     }
     
     var longFormHeight: PanModalHeight {
-        let heightOfItem = 56 * CGFloat(self.dataSource.tableView(self.tableView, numberOfRowsInSection: 0))
+        let heightOfItem = 56 * CGFloat(dataSource.tableView(tableView, numberOfRowsInSection: 0))
         return .contentHeight(CGFloat(84 + heightOfItem))
     }
 }
 
 extension NFTActionViewController {
     private func saveImageToPhotoLibrary(image: UIImage?) {
-            guard let img = image else {
-                return
-            }
-            switch PHPhotoLibrary.authorizationStatus() {
-            case .authorized:
-                saveImage(image: img)
-            case .notDetermined:
+        guard let img = image else {
+            return
+        }
+        switch PHPhotoLibrary.authorizationStatus() {
+        case .authorized:
+            saveImage(image: img)
+            
+        case .notDetermined:
                 
-                PHPhotoLibrary.requestAuthorization { [weak self] status in
-                    if status == .authorized {
-                        self?.saveImage(image: img)
-                    } else {
-                        print("User denied")
-                    }
+            PHPhotoLibrary.requestAuthorization { [weak self] status in
+                if status == .authorized {
+                    self?.saveImage(image: img)
+                } else {
+                    print("User denied")
                 }
+            }
                 
-            case .restricted, .denied:
-                if let url = URL(string: UIApplication.openSettingsURLString) {
+        case .restricted, .denied:
+            if let url = URL(string: UIApplication.openSettingsURLString) {
                 if UIApplication.shared.canOpenURL(url) {
                     UIApplication.shared.open(url, options: [:]) { isAccess in
                         if isAccess {
@@ -176,24 +178,21 @@ extension NFTActionViewController {
                 }
             }
                 
-            case .limited:
-                PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self)
-            }
+        case .limited:
+            PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self)
         }
+    }
     
     private func saveImage(image: UIImage) {
-            PHPhotoLibrary.shared().performChanges({
-                PHAssetChangeRequest.creationRequestForAsset(from: image)
-            }, completionHandler: { isSuccess, _ in
-                DispatchQueue.main.async {
-                    if isSuccess {
-                        UIApplication.getTopViewController()?.view
-                            .makeToast(L10n.Common.Toast.saved,
-                                       position: .center)
-                    } else  {
-                        
-                    }
-                }
-            })
-        }
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAsset(from: image)
+        }, completionHandler: { [weak self] isSuccess, _ in
+            DispatchQueue.main.async {
+                if isSuccess {
+                    self?.makeToast(message: L10n.Common.Toast.saved,
+                                    image: Asset.Images.Toast.check.image)
+                } else {}
+            }
+        })
+    }
 }

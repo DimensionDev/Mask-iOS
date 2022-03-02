@@ -73,8 +73,7 @@ class WalletDeleteViewController: BaseViewController {
     
     lazy var avatarView: AvatarView = {
         let view = AvatarView(title: self.account.displayTitle)
-        view.layer.cornerRadius = 12
-        view.backgroundColor = Asset.Colors.Public.blue.color
+        view.applyCornerRadius(radius: 12, cornerCurve: .circular)
         
         view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

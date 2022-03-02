@@ -78,8 +78,8 @@ __webpack_require__.d(__webpack_exports__, {
   "setUserAddress": () => (/* reexport */ setUserAddress)
 });
 
-// EXTERNAL MODULE: ../web3-providers/src/index.ts + 22 modules
-var src = __webpack_require__(13330);
+// EXTERNAL MODULE: ../web3-providers/src/index.ts
+var src = __webpack_require__(23290);
 // EXTERNAL MODULE: ./src/extension/background-script/EthereumService.ts + 11 modules
 var EthereumService = __webpack_require__(93195);
 // EXTERNAL MODULE: ./src/plugins/Pets/constants.ts

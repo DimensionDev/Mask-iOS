@@ -79,7 +79,6 @@ class BalanceAccountCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         let shadowLayer = accountCardShadowView.layer
-        shadowLayer.shadowColor = Asset.Colors.Shadow.accoundCard.color.cgColor
         shadowLayer.shadowOpacity = 1
         shadowLayer.shadowOffset = .zero
         shadowLayer.shadowRadius = 10
@@ -93,14 +92,14 @@ class BalanceAccountCell: UITableViewCell {
                                alpha: 1,
                                x: 0,
                                y: 10,
-                               blur: 25,
+                               blur: 6,
                                cornerRadius: 16,
                                spread: 0)
         receiveButton.applyShadow(color: Asset.Colors.Shadow.sendButton.color,
                                   alpha: 1,
                                   x: 0,
                                   y: 10,
-                                  blur: 25,
+                                  blur: 6,
                                   cornerRadius: 16,
                                   spread: 0)
     }
@@ -119,6 +118,8 @@ class BalanceAccountCell: UITableViewCell {
     
     weak var delegate: BalanceAccountCellDelegate?
     private func _init() {
+        accountCardView.shadowView = accountCardShadowView
+        
         selectionStyle = .none
         backgroundColor = .clear
         
@@ -131,8 +132,10 @@ class BalanceAccountCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             accountCardView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 15),
-            accountCardView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 22.5),
-            accountCardView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -22.5),
+            accountCardView.leadingAnchor.constraint(
+                equalTo: contentView.readableContentGuide.leadingAnchor),
+            accountCardView.trailingAnchor.constraint(
+                equalTo: contentView.readableContentGuide.trailingAnchor),
             accountCardView.heightAnchor.constraint(equalToConstant: 186)
         ])
         

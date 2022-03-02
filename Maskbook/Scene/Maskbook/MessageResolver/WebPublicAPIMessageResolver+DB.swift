@@ -469,10 +469,12 @@ extension WebPublicApiMessageResolver {
         guard let avatar = request.params?.avatar else { return false }
         if ProfileRepository.queryProfile(identifier: identifier) != nil {
             ProfileRepository.updateProfileAvatar(identifier: identifier, avatar: avatar)
+            sendResponseToWebView(response: true, id: request.id)
             return true
         }
         if PersonaRepository.queryPersona(identifier: identifier) != nil {
             PersonaRepository.updatePersonaAvatar(identifier: identifier, avatar: avatar)
+            sendResponseToWebView(response: true, id: request.id)
             return true
         }
         return false

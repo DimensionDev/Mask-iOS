@@ -5,6 +5,7 @@
 //  Created by BradGao on 2021/6/4.
 //  Copyright © 2021 dimension. All rights reserved.
 //
+// swiftlint:disable force_cast line_length type_body_length file_length
 
 import Combine
 import CoreDataStack
@@ -15,7 +16,22 @@ protocol AccountCardViewDelegate: AnyObject {
 }
 // swiftlint:disable force_cast line_length type_body_length file_length
 
+// swiftlint:disable force_cast line_length type_body_length file_length
 class AccountCardView: UIView {
+    
+    private enum DisplayAddressType {
+        case normal, ens
+    }
+    
+    private struct DisplayAddress {
+        let address: String
+        let ensName: String?
+        
+        var truncatedAddress: String {
+            "\(address.prefix(10))...\(address.suffix(10))"
+        }
+    }
+    
     @InjectedProvider(\.userDefaultSettings)
     private var userSetting
     
@@ -26,6 +42,9 @@ class AccountCardView: UIView {
     private var disposeBag = Set<AnyCancellable>()
     
     private let cornerRadiusValue: CGFloat = 20
+    
+    private var displayAddressType: DisplayAddressType = .ens
+    private var displayAddress: DisplayAddress?
     
     private var backgroundLayer: CAGradientLayer = {
         let layer1 = CAGradientLayer()
@@ -38,14 +57,8 @@ class AccountCardView: UIView {
         return layer1
     }()
     
-    private var stackViewGradientLayer: CAGradientLayer = {
-        let layer1 = CAGradientLayer()
-        layer1.colors = [
-            Asset.Colors.AccountCard.Chains.bottomStart.color.cgColor,
-            Asset.Colors.AccountCard.Chains.bottomEnd.color.cgColor
-        ]
-        layer1.startPoint = CGPoint(x: 0.5, y: 0)
-        layer1.endPoint = CGPoint(x: 1, y: 1)
+    private lazy var stackViewBackgroudLayer: CALayer = {
+        let layer1 = CALayer()
         layer1.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         layer1.cornerRadius = 20
         layer1.cornerCurve = .continuous
@@ -94,6 +107,21 @@ class AccountCardView: UIView {
         mask.contentMode = .scaleAspectFill
         mask.translatesAutoresizingMaskIntoConstraints = false
         return mask
+    }()
+    
+    private lazy var chainLargeImageContainer: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.spacing = 0
+        view.addArrangedSubview(chainLargeImageViewPadding)
+        view.addArrangedSubview(chainLargeImageView)
+        return view
+    }()
+    
+    private var chainLargeImageViewPadding: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
     }()
     
     private var nameLabel: UILabel = {
@@ -172,6 +200,8 @@ class AccountCardView: UIView {
     private static let chainButtonViewTag = 1
     private static let chainDotViewTag = 2
     
+    weak var shadowView: UIView?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -186,23 +216,25 @@ class AccountCardView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         backgroundLayer.frame = bounds
-        stackViewGradientLayer.frame = CGRect(x: bounds.origin.x,
-                                              y: chainsStackView.frame.origin.y - 13,
-                                              width: bounds.width,
-                                              height: 60)
-        stackViewTopBorderLayer.frame = CGRect(x: stackViewGradientLayer.frame.origin.x,
-                                               y: stackViewGradientLayer.frame.origin.y,
-                                               width: bounds.width,
-                                               height: 0.5)
+        stackViewBackgroudLayer.frame = CGRect(
+            x: bounds.origin.x,
+            y: chainsStackView.frame.origin.y - 13,
+            width: bounds.width,
+            height: 60)
+        stackViewTopBorderLayer.frame = CGRect(
+            x: stackViewBackgroudLayer.frame.origin.x,
+            y: stackViewBackgroudLayer.frame.origin.y,
+            width: bounds.width,
+            height: 0.5)
     }
     
     private func setup() {
         applyCornerRadius(radius: 20)
         
         directionalLayoutMargins = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 0, trailing: 16)
-
+        
         layer.addSublayer(backgroundLayer)
-        addSubview(chainLargeImageView)
+        addSubview(chainLargeImageContainer)
         addSubview(maskImageView1)
         addSubview(maskImageView2)
         addSubview(maskImageView3)
@@ -214,17 +246,28 @@ class AccountCardView: UIView {
         addSubview(addressLabel)
         addSubview(copyButton)
         addSubview(balanceLabel)
+        layer.addSublayer(stackViewBackgroudLayer)
         addSubview(chainsStackView)
-        layer.addSublayer(stackViewGradientLayer)
         layer.addSublayer(stackViewTopBorderLayer)
         
+        chainLargeImageContainer.translatesAutoresizingMaskIntoConstraints = false
+        chainLargeImageViewPadding.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            chainLargeImageView.topAnchor.constraint(equalTo: self.layoutMarginsGuide.topAnchor,
-                                                     constant: 30),
-            chainLargeImageView.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor,
-                                                          constant: -20),
-            chainLargeImageView.widthAnchor.constraint(equalToConstant: 67),
-            chainLargeImageView.heightAnchor.constraint(equalToConstant: 67)
+            chainLargeImageContainer.leadingAnchor.constraint(
+                equalTo: maskImageView2.leadingAnchor),
+            chainLargeImageContainer.topAnchor.constraint(
+                equalTo: self.layoutMarginsGuide.topAnchor,
+                constant: 30
+            ),
+            // Set the position on the x-axis of `chainLargeImageView` according to the width of `maskImageView2`.
+            chainLargeImageViewPadding.widthAnchor.constraint(
+                equalTo: maskImageView2.widthAnchor,
+                multiplier: 53.0 / 158.0),
+            chainLargeImageView.widthAnchor.constraint(
+                equalTo: self.widthAnchor,
+                multiplier: 67.0 / 330),
+            chainLargeImageView.heightAnchor.constraint(
+                equalTo: chainLargeImageView.widthAnchor)
         ])
         
         NSLayoutConstraint.activate([
@@ -315,6 +358,15 @@ class AccountCardView: UIView {
         }
         
         copyButton.addTarget(self, action: #selector(copyButtonDidClick(sender:)), for: .touchUpInside)
+        
+        addressLabel.isUserInteractionEnabled = true
+        addressLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addressLabelDidTapped)))
+    }
+    
+    @objc
+    private func addressLabelDidTapped() {
+        toggleDisplayAddressType()
+        updateDisplayAddress()
     }
     
     @objc
@@ -324,9 +376,10 @@ class AccountCardView: UIView {
     
     @objc
     private func copyButtonDidClick(sender: UIButton) {
-        UIPasteboard.general.string = userSetting.defaultAccountAddress
+        let displayAddress = self.getFullAddress()
+        UIPasteboard.general.string = displayAddress
         let alertController = AlertController(
-            title: L10n.Common.Alert.WalletBackup.title,
+            title: L10n.Common.Toast.copy,
             message: "",
             confirmButtonText: L10n.Common.Controls.done,
             imageType: .success,
@@ -408,6 +461,7 @@ class AccountCardView: UIView {
     }
     
     func setup(account: Account?, portfolio: Portfolio?) {
+        disposeBag.removeAll()
         if let portfolio = portfolio {
             portfolio
                 .publisher(for: \.assetsValue)
@@ -425,24 +479,23 @@ class AccountCardView: UIView {
             balanceLabel.text = "\(maskUserDefaults.currency.symbol)\(totalBalance.currency)"
         }
         if let account = account {
-            Publishers.CombineLatest4(
+            setAddress(account: account)
+            updateDisplayAddress()
+            Publishers.CombineLatest3(
                 account.publisher(for: \.name).eraseToAnyPublisher(),
-                account.publisher(for: \.address).eraseToAnyPublisher(),
                 UserDefaultSettings.shared.displayBlockChainPublisher.eraseToAnyPublisher(),
                 UserDefaultPublishers.network.eraseToAnyPublisher()
             )
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] name, address, displayBlockChain, networkType in
-                guard let validAddress = address else { return }
-                self?.updateBlockChainButtonStatus(currentBlockChain: displayBlockChain)
-                self?.nameLabel.text = name
-                self?.addressLabel.text = "\(validAddress.prefix(10))...\(validAddress.suffix(10))"
-                self?.networkLabel.text = networkType.shortName.lowercased().capitalized
-                self?.networkIcon.image = networkType.smallIcon?.withTintColor(Asset.Colors.AccountCard.nameText.color)
-                self?.updateBackground(isWalletConnect: account.fromWalletConnect,
-                                       displayBlockchain: displayBlockChain)
-            }
-            .store(in: &disposeBag)
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] name, displayBlockChain, networkType in
+                    self?.updateBlockChainButtonStatus(currentBlockChain: displayBlockChain)
+                    self?.updateBackground(isWalletConnect: account.fromWalletConnect,
+                                           displayBlockchain: displayBlockChain)
+                    self?.nameLabel.text = name
+                    self?.networkLabel.text = networkType.shortName.lowercased().capitalized
+                    self?.networkIcon.image = networkType.smallIcon?.withTintColor(Asset.Colors.AccountCard.nameText.color)
+                }
+                .store(in: &disposeBag)
         } else {
             nameLabel.text = ""
             addressLabel.text = ""
@@ -468,17 +521,73 @@ class AccountCardView: UIView {
         allChainButtons[selectChainIndex].viewWithTag(Self.chainDotViewTag)?.backgroundColor = .white
     }
     
-    private func updateBackground(isWalletConnect: Bool,
-                                  displayBlockchain: WalletDisplayBlockChainType) {
-        if isWalletConnect {
-            chainLargeImageView.image = Asset.Images.Scene.Balance.accountBgWc.image
-            backgroundLayer.colors = [
-                Asset.Colors.AccountCard.wcBackground1.color.cgColor,
-                Asset.Colors.AccountCard.wcBackground2.color.cgColor
-            ]
-        } else {
-            chainLargeImageView.image = displayBlockchain.chainBgImage
-            backgroundLayer.colors = displayBlockchain.accoundCardBgColors
+    private func updateBackground(
+        isWalletConnect: Bool,
+        displayBlockchain: WalletDisplayBlockChainType) {
+            let shadowLayer = shadowView?.layer
+            if isWalletConnect {
+                chainLargeImageView.image = Asset.Images.Scene.Balance.accountBgWc.image
+                backgroundLayer.colors = [
+                    Asset.Colors.AccountCard.wcBackground1.color.cgColor,
+                    Asset.Colors.AccountCard.wcBackground2.color.cgColor
+                ]
+                stackViewBackgroudLayer.backgroundColor =
+                Asset.Colors.AccountCard.wcBackground3.color.cgColor
+                shadowLayer?.shadowColor =
+                Asset.Colors.Shadow.Card.all.color.cgColor
+            } else {
+                chainLargeImageView.image = displayBlockchain.chainBgImage
+                backgroundLayer.colors = displayBlockchain.accoundCardBgColors
+                stackViewBackgroudLayer.backgroundColor = displayBlockchain.bottomBgColor
+                shadowLayer?.shadowColor = displayBlockchain.shadowColor
+            }
+        }
+    
+    private func toggleDisplayAddressType() {
+        switch displayAddressType {
+        case .normal:
+            displayAddressType = .ens
+            
+        case .ens:
+            displayAddressType = .normal
+        }
+    }
+    
+    private func setAddress(account: Account) {
+        guard let validAddress = account.address else {
+            addressLabel.text = ""
+            return
+        }
+        
+        displayAddress = DisplayAddress(address: validAddress, ensName: account.ensName)
+    }
+    
+    private func updateDisplayAddress() {
+        let displayAddressText: String?
+        switch displayAddressType {
+        case .normal:
+            displayAddressText = displayAddress?.truncatedAddress
+            
+        case .ens:
+            if let validEnsName = displayAddress?.ensName, !validEnsName.isEmpty {
+                displayAddressText = validEnsName
+            } else {
+                displayAddressText = displayAddress?.truncatedAddress
+                // No valid ENS name found, change displayAddressType to .normal
+                displayAddressType = .normal
+            }
+        }
+        addressLabel.text = displayAddressText
+    }
+    
+    private func getFullAddress() -> String? {
+        switch displayAddressType {
+        case .normal:
+            return displayAddress?.address
+            
+        case .ens:
+            return displayAddress?.ensName
         }
     }
 }
+// swiftlint:ensable force_cast line_length type_body_length file_length

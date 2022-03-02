@@ -71,9 +71,6 @@
             "change_backup_password_failed": {
                 "title": "Backup Password changed failed!"
             },
-            "wallet_backup": {
-                "title": "Copied!"
-            },
             "identity_phrase": {
                 "title": "Identity Phrase",
                 "description": "Your identity phrase is composed of randomly selected words. Please carefully write down each word in the order it appears."
@@ -82,9 +79,9 @@
                 "title": "Warning",
                 "description": "Simply taking a screenshot of identity code is not safe."
             },
-            "identity_create": {
-                "title": "Identity created!",
-                "description": "Please don’t forget your identity code. Your identity code is the only proof of your user identity and the only basis for you to encrypt or decrypt social activities. "
+            "persona_create": {
+                "title": "Successful ",
+                "description": "You have successfully created your persona %s. "
             },
             "persona_logout": {
                 "title": "Confirm to log out?",
@@ -168,7 +165,8 @@
             "download_next": "I downloaded, next"
         },
         "toast": {
-            "saved": "Saved！"
+            "saved": "Saved！",
+            "copy": "copied!"
         },
         "loading": "Loading..."
     },

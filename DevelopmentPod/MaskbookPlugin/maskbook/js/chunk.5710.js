@@ -225,6 +225,7 @@ const hasEditor = ()=>!!(0,_selector__WEBPACK_IMPORTED_MODULE_0__/* .postEditorD
 /* harmony export */   "QK": () => (/* binding */ bioPageUserIDSelector),
 /* harmony export */   "YG": () => (/* binding */ floatingBioCardSelector),
 /* harmony export */   "rk": () => (/* binding */ postsImageSelector),
+/* harmony export */   "yR": () => (/* binding */ timelinePostContentSelector),
 /* harmony export */   "XD": () => (/* binding */ postsContentSelector),
 /* harmony export */   "vL": () => (/* binding */ postAvatarsContentSelector),
 /* harmony export */   "qB": () => (/* binding */ selfInfoSelectors),
@@ -357,6 +358,11 @@ const postsImageSelector = (node)=>new _dimensiondev_holoflows_kit__WEBPACK_IMPO
     ]).querySelectorAll([
         '[data-testid="tweet"] > div > div img[src*="media"]',
         '[data-testid="tweet"] ~ div img[src*="media"]'
+    ].join())
+;
+const timelinePostContentSelector = ()=>querySelectorAll([
+        '[data-testid="tweet"] div + div div[lang]',
+        '[data-testid="tweet"] div + div div[data-testid="card.wrapper"]'
     ].join())
 ;
 const postsContentSelector = ()=>{

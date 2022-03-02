@@ -20,7 +20,7 @@ class PersonaCreateHandler {
 
     @InjectedProvider(\.userDefaultSettings)
     private var userSetting
-    
+
     func createPersona(name: String, mnemonic: String) {
         let names = personaManager.personaRecordsSubject.value
             .map(\.nickname)
@@ -37,7 +37,7 @@ class PersonaCreateHandler {
                     if let identifier = result.result?.dictionaryValue["identifier"]?.stringValue {
                         self?.userSetting.currentPesonaIdentifier = identifier
                     }
-                    self?.succeedInCreatingPersona()
+                    self?.succeedInCreatingPersona(name: name)
                 } else {
                     self?.failedInCreatingPersona(result: result)
                 }
@@ -56,10 +56,28 @@ class PersonaCreateHandler {
             transition: .alertController(completion: nil))
     }
 
-    func succeedInCreatingPersona() {
-        DispatchQueue.main.async {
-            self.coordinator.present(scene: .persona, transition: .replaceCurrentNavigation(tab: .personas, animated: true))
+    func succeedInCreatingPersona(name: String) {
+        coordinator.present(scene: .persona, transition: .replaceCurrentNavigation(tab: .personas, animated: true)) {
+            let alertController = AlertController(title: L10n.Common.Alert.PersonaCreate.title,
+                                                  message: L10n.Common.Alert.PersonaCreate.description(name),
+                                                  confirmButtonText: L10n.Common.Controls.done,
+                                                  imageType: .success)
+            let message = self.titleAttributeString(name: name)
+            alertController.setAttributeMessage(attrMessage: message)
+            self.coordinator.present(scene: .alertController(alertController: alertController),
+                                     transition: .alertController(completion: nil))
         }
+    }
+
+    func titleAttributeString(name: String) -> NSAttributedString {
+        let words = L10n.Common.Alert.PersonaCreate.description(name)
+        let attributeString = NSMutableAttributedString()
+        let attribute = NSAttributedString(string: words,
+                                           attributes: [.foregroundColor: Asset.Colors.Text.normal.color,
+                                                        .font: FontStyles.MH5])
+        attributeString.append(attribute)
+        attributeString.addAttribute(color: Asset.Colors.Text.dark.color, keywords: name)
+        return attributeString
     }
 
     func failedInCreatingPersona(result: MaskWebMessageResult) {

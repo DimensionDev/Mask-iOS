@@ -6341,7 +6341,7 @@ function EthereumChainBoundary(props) {
                     children: t('plugin_wallet_connect_wallet_tip')
                 })
             }),
-            /*#__PURE__*/ (0,jsx_runtime.jsx)(ActionButton/* default */.ZP, {
+            !props.hiddenConnectButton ? /*#__PURE__*/ (0,jsx_runtime.jsx)(ActionButton/* default */.ZP, {
                 variant: "contained",
                 size: "small",
                 sx: {
@@ -6349,7 +6349,7 @@ function EthereumChainBoundary(props) {
                 },
                 onClick: openSelectProviderDialog,
                 children: t('plugin_wallet_connect_wallet')
-            })
+            }) : null
         ]
     }));
     if (isChainMatched && isPluginMatched || isValid) return(/*#__PURE__*/ (0,jsx_runtime.jsx)(jsx_runtime.Fragment, {

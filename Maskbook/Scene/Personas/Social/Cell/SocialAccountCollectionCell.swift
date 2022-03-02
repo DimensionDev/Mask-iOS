@@ -32,8 +32,7 @@ class SocialAccountCollectionCell: UICollectionViewCell {
     
     private var avatarView: AvatarView = {
         let view = AvatarView(title: "")
-        view.layer.cornerRadius = 32
-        view.backgroundColor = Asset.Colors.Public.blue.color
+        view.applyCornerRadius(radius: 32, cornerCurve: .circular)
         view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(equalToConstant: 64),
@@ -46,12 +45,12 @@ class SocialAccountCollectionCell: UICollectionViewCell {
     private lazy var platformView: UIImageView = {
         let view = UIImageView()
         NSLayoutConstraint.activate([
-            view.heightAnchor.constraint(equalToConstant: 22),
-            view.widthAnchor.constraint(equalToConstant: 22)
+            view.heightAnchor.constraint(equalToConstant: 24),
+            view.widthAnchor.constraint(equalToConstant: 24)
         ])
-        view.applyCornerRadius(radius: 11)
+        view.applyCornerRadius(radius: 12)
         view.layer.borderColor = Asset.Colors.Background.normal.color.cgColor
-        view.layer.borderWidth = 1
+        view.layer.borderWidth = 1.5
         return view
     }()
     
