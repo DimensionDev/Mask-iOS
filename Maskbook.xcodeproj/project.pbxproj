@@ -610,6 +610,7 @@
 		5DB39E302786A4E40025337C /* JSResourceSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2F2786A4E40025337C /* JSResourceSelectView.swift */; };
 		5DB39E322786A8970025337C /* JSResourceSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E312786A8970025337C /* JSResourceSelectViewModel.swift */; };
 		5DCA069B27C75A8B007697C8 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCA069A27C75A8B007697C8 /* Toast.swift */; };
+		5DD1BBC227CF0843001DB330 /* Toast+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BBC127CF0843001DB330 /* Toast+Extension.swift */; };
 		5DE1D5A227A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE1D5A127A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift */; };
 		5DE2B10F27BA60AC002ACA54 /* View+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE2B10E27BA60AC002ACA54 /* View+Snapshot.swift */; };
 		5DE5395727473599005F4CEA /* PanModalPresentable+color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5395627473599005F4CEA /* PanModalPresentable+color.swift */; };
@@ -1310,6 +1311,7 @@
 		5DB39E2F2786A4E40025337C /* JSResourceSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSResourceSelectView.swift; sourceTree = "<group>"; };
 		5DB39E312786A8970025337C /* JSResourceSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSResourceSelectViewModel.swift; sourceTree = "<group>"; };
 		5DCA069A27C75A8B007697C8 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		5DD1BBC127CF0843001DB330 /* Toast+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Toast+Extension.swift"; sourceTree = "<group>"; };
 		5DE1D5A127A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RedPacketInteractivePayload+Description.swift"; sourceTree = "<group>"; };
 		5DE2B10E27BA60AC002ACA54 /* View+Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Snapshot.swift"; sourceTree = "<group>"; };
 		5DE5395627473599005F4CEA /* PanModalPresentable+color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PanModalPresentable+color.swift"; sourceTree = "<group>"; };
@@ -3304,6 +3306,7 @@
 				0FE54FE32759C43100B32BD6 /* BalanceSegmentView.swift */,
 				2DBD0B9D2787FF9C0065A2B1 /* GroupStyleTableViewCell.swift */,
 				5DCA069A27C75A8B007697C8 /* Toast.swift */,
+				5DD1BBC127CF0843001DB330 /* Toast+Extension.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4449,6 +4452,7 @@
 				2A72F40227BE8323004A3F95 /* ColletibleIconContentControllerHandler.swift in Sources */,
 				2AF885FB271EED7D0004565A /* KeyboardSheetTransition.swift in Sources */,
 				1F57023A27A27E4900C96909 /* RedPacketShareSheet.swift in Sources */,
+				5DD1BBC227CF0843001DB330 /* Toast+Extension.swift in Sources */,
 				2AF88584271EE9310004565A /* WalletHistoryViewModel.swift in Sources */,
 				2AF8863F271EEDF80004565A /* String+Hex.swift in Sources */,
 				1F37DF2427BDFA3D008F8ABE /* RestoreLocalFileValidationViewModel.swift in Sources */,

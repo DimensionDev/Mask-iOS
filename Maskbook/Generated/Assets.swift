@@ -56,6 +56,7 @@ internal enum Asset {
     internal enum Background {
       internal static let bar = ColorAsset(name: "Colors/Background/bar")
       internal static let blue = ColorAsset(name: "Colors/Background/blue")
+      internal static let blue1 = ColorAsset(name: "Colors/Background/blue1")
       internal static let blur = ColorAsset(name: "Colors/Background/blur")
       internal static let blurred = ColorAsset(name: "Colors/Background/blurred")
       internal static let container = ColorAsset(name: "Colors/Background/container")
@@ -66,6 +67,7 @@ internal enum Asset {
       internal static let mask = ColorAsset(name: "Colors/Background/mask")
       internal static let normal = ColorAsset(name: "Colors/Background/normal")
       internal static let selected = ColorAsset(name: "Colors/Background/selected")
+      internal static let toast = ColorAsset(name: "Colors/Background/toast")
       internal static let twitterMask = ColorAsset(name: "Colors/Background/twitterMask")
       internal static let walletConnect = ColorAsset(name: "Colors/Background/walletConnect")
       internal static let warningsBg = ColorAsset(name: "Colors/Background/warnings-bg")
@@ -403,6 +405,9 @@ internal enum Asset {
         internal static let iconSwap = ImageAsset(name: "Images/Scene/transaction/iconSwap")
       }
     }
+    internal enum Toast {
+      internal static let check = ImageAsset(name: "Images/Toast/check")
+    }
   }
   internal enum Plugins {
     internal static let checkMark = ImageAsset(name: "Plugins/checkMark")
@@ -464,10 +469,35 @@ internal enum Asset {
     internal static let wallet = ImageAsset(name: "Tab/wallet")
   }
   internal static let backgroundGray = ColorAsset(name: "backgroundGray")
+  internal static let battleshipGrey20 = ColorAsset(name: "battleshipGrey20")
+  internal static let brightBlue = ColorAsset(name: "brightBlue")
+  internal static let darkBackgroundBasePrimary = ColorAsset(name: "darkBackgroundBasePrimary")
+  internal static let darkBackgroundBaseSecondary = ColorAsset(name: "darkBackgroundBaseSecondary")
+  internal static let darkBackgroundBaseTertiary = ColorAsset(name: "darkBackgroundBaseTertiary")
+  internal static let darkBackgroundElevatedPrimary = ColorAsset(name: "darkBackgroundElevatedPrimary")
+  internal static let darkBrandBlue = ColorAsset(name: "darkBrandBlue")
+  internal static let darkElevatedThin = ColorAsset(name: "darkElevatedThin")
+  internal static let darkInactive = ColorAsset(name: "darkInactive")
+  internal static let darkTextPrimary = ColorAsset(name: "darkTextPrimary")
+  internal static let darkTextSecondary = ColorAsset(name: "darkTextSecondary")
+  internal static let darkTextTertiary = ColorAsset(name: "darkTextTertiary")
   internal static let facebookBlue = ColorAsset(name: "facebookBlue")
+  internal static let lightAlertYellow = ColorAsset(name: "lightAlertYellow")
+  internal static let lightBackgroundPrimary = ColorAsset(name: "lightBackgroundPrimary")
+  internal static let lightBackgroundSecondary = ColorAsset(name: "lightBackgroundSecondary")
+  internal static let lightBrandBlue = ColorAsset(name: "lightBrandBlue")
+  internal static let lightDangerRed = ColorAsset(name: "lightDangerRed")
+  internal static let lightDisabled = ColorAsset(name: "lightDisabled")
+  internal static let lightElevatedThin = ColorAsset(name: "lightElevatedThin")
+  internal static let lightInactive = ColorAsset(name: "lightInactive")
+  internal static let lightSuccessGreen = ColorAsset(name: "lightSuccessGreen")
+  internal static let lightTextPrimary = ColorAsset(name: "lightTextPrimary")
+  internal static let lightTextSecondary = ColorAsset(name: "lightTextSecondary")
+  internal static let lightTextTertiary = ColorAsset(name: "lightTextTertiary")
   internal static let dashboardIcon = ImageAsset(name: "dashboard_icon")
   internal static let dashboardSiteFacebook = ImageAsset(name: "dashboard_site_facebook")
   internal static let dashboardSiteTwitter = ImageAsset(name: "dashboard_site_twitter")
+  internal static let orangeRed = ColorAsset(name: "orangeRed")
   internal static let 🎉 = ImageAsset(name: "🎉")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name

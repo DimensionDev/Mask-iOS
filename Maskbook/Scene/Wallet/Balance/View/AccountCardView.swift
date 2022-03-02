@@ -350,19 +350,9 @@ class AccountCardView: UIView {
     @objc
     private func copyButtonDidClick(sender: UIButton) {
         UIPasteboard.general.string = userSetting.defaultAccountAddress
-        let alertController = AlertController(
-            title: L10n.Common.Alert.WalletBackup.title,
-            message: "",
-            confirmButtonText: L10n.Common.Controls.done,
-            imageType: .success,
-            confirmButtonClicked: { _ in
-            }
-        )
-        
-        Coordinator.main.present(
-            scene: .alertController(alertController: alertController),
-            transition: .alertController(completion: nil)
-        )
+        UIApplication.getTopViewController()?
+            .makeToast(message: L10n.Common.Toast.copy,
+                  image: Asset.Images.Toast.check.image)
     }
     
     @objc
