@@ -9,7 +9,7 @@
 import UIKit
 
 final class SpinBallAnimator: LoadingAnimatable {
-    var forgroundColor: UIColor { Asset.Colors.Public.blue.color }
+    var forgroundColor: ColorAsset { Asset.Colors.Public.blue }
 
     func startAnimation(for view: UIView, layoutIn bounds: CGRect) {
         guard bounds != .zero else {
@@ -56,7 +56,7 @@ final class SpinBallAnimator: LoadingAnimatable {
                 size: circleSize,
                 origin: CGPoint(x: x, y: y),
                 containerSize: size,
-                color: forgroundColor
+                colorAsset: forgroundColor
             )
 
             animation.beginTime = beginTime + beginTimes[i]
@@ -65,7 +65,7 @@ final class SpinBallAnimator: LoadingAnimatable {
         }
     }
 
-    private func buildCircle(angle: CGFloat, size: CGFloat, origin: CGPoint, containerSize: CGSize, color: UIColor) -> CALayer {
+    private func buildCircle(angle: CGFloat, size: CGFloat, origin: CGPoint, containerSize: CGSize, colorAsset: ColorAsset) -> CALayer {
         let radius = containerSize.width / 2 - size / 2
         let circle = CAShapeLayer()
         let path = UIBezierPath()
@@ -75,7 +75,7 @@ final class SpinBallAnimator: LoadingAnimatable {
             startAngle: 0,
             endAngle: CGFloat(2 * Double.pi),
             clockwise: false)
-        circle.fillColor = color.cgColor
+        circle.fillColor = colorAsset.color.cgColor
 
         let frame = CGRect(
             x: origin.x + radius * (cos(angle) + 1),
@@ -89,4 +89,8 @@ final class SpinBallAnimator: LoadingAnimatable {
 
         return circle
     }
+}
+
+extension LoadingAnimatable where Self == SpinBallAnimator {
+    static var spinBall: Self { SpinBallAnimator() }
 }

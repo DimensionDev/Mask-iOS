@@ -16,10 +16,11 @@ final class MaskLoadingIndicator: NiblessView {
     private(set) var padding: CGFloat = 0
 
     init(
-        animator: LoadingAnimatable = SpinActivityAnimator(),
+        animator: LoadingAnimatable = .spinWheel,
         padding: CGFloat = 0
     ) {
         self.animator = animator
+        self.padding = padding
         super.init()
         prepareAnimation()
     }
@@ -53,6 +54,12 @@ final class MaskLoadingIndicator: NiblessView {
         layer.sublayers = nil
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        stopAnimation()
+        startAnimation()
+    }
+
     private func prepareAnimation() {
         layer.sublayers?.forEach { $0.removeFromSuperlayer() }
         layer.sublayers = nil
@@ -69,12 +76,12 @@ import SwiftUI
 struct MaskLoadingIndicatorPreview: PreviewProvider {
     static var previews: some SwiftUI.View {
         Preview {
-            MaskLoadingIndicator(animator: SpinActivityAnimator()).cv.apply {
+            MaskLoadingIndicator(padding: 2.665).cv.apply {
                 $0.startAnimation()
-                $0.bounds = CGRect(origin: .zero, size: CGSize(width: 100, height: 100))
+                $0.bounds = CGRect(origin: .zero, size: CGSize(width: 32, height: 32))
             }
         }
-        .previewLayout(.fixed(width: 100, height: 100))
+        .previewLayout(.fixed(width: 32, height: 32))
         .colorScheme(.dark)
     }
 }

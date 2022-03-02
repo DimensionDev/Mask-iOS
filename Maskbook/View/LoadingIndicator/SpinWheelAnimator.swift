@@ -1,17 +1,20 @@
 //
-//  SpinActivityAnimator.swift
+//  SpinWheelAnimator.swift
 //  Maskbook
 //
-//  Created by yzj on 2021/8/26.
-//  Copyright © 2021 dimension. All rights reserved.
+//  Created by yzj on 2022/3/2.
+//  Copyright © 2022 dimension. All rights reserved.
 //
-
 import UIKit
 
-final class SpinActivityAnimator: LoadingAnimatable {
-    var forgroundColor: ColorAsset { Asset.Colors.Public.blue }
-    let spinWidth: CGFloat = 12.36
-    let spinHeight: CGFloat = 4
+final class SpinWheelAnimator: LoadingAnimatable {
+    var forgroundColor: ColorAsset { Asset.Colors.Text.dark }
+
+    let spinWidth: CGFloat = 6.82
+    let spinHeight: CGFloat = 1.86
+
+    private var spinWidthRatio: CGFloat { spinWidth / 26.67 }
+    private var spinHeightRatio: CGFloat { spinHeight / 26.67 }
 
     func startAnimation(for view: UIView, layoutIn bounds: CGRect) {
         guard bounds != .zero else {
@@ -21,20 +24,13 @@ final class SpinActivityAnimator: LoadingAnimatable {
         let layer = view.layer
         let size = bounds.size
         let translatedX: CGFloat = {
-            11.66 * size.width / 48
+            6.515 * size.width / 26.67
         }()
         let x = (layer.bounds.size.width - size.width) / 2 + size.width / 2
         let y = (layer.bounds.size.height - size.height) / 2 + size.height / 2 - spinHeight / 2
         let duration: CFTimeInterval = 1.2
         let beginTime = CACurrentMediaTime()
         let beginTimes: [CFTimeInterval] = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1]
-
-        // Scale animation
-//        let scaleAnimation = CAKeyframeAnimation(keyPath: "transform.scale")
-//
-//        scaleAnimation.keyTimes = [0, 0.5, 1]
-//        scaleAnimation.values = [1, 0.4, 1]
-//        scaleAnimation.duration = duration
 
         // Opacity animation
         let opacityAnimaton = CAKeyframeAnimation(keyPath: "opacity")
@@ -52,18 +48,16 @@ final class SpinActivityAnimator: LoadingAnimatable {
         animation.repeatCount = HUGE
         animation.isRemovedOnCompletion = false
 
-        // Draw spin
-        for i in 0 ..< 12 {
-            let width: CGFloat = {
-                if i == 5 { return 0 }
-                return i < 5 ? spinWidth : spinWidth * CGFloat(i) / 12.0
-            }()
-            let offset: CGFloat = spinWidth - width
+        let width = {
+            size.width * spinWidthRatio
+        }()
+        // Draw wheels
+        for i in 0 ..< 8 {
             let circle = buildSpin(
-                angle: (.pi / 6.0) * CGFloat(i - 4),
+                angle: 2 * CGFloat.pi / 8 * CGFloat(i),
                 origin: CGPoint(x: x, y: y),
                 width: width,
-                offset: offset + translatedX,
+                offset: translatedX,
                 colorAsset: forgroundColor
             )
 
@@ -100,6 +94,6 @@ final class SpinActivityAnimator: LoadingAnimatable {
     }
 }
 
-extension LoadingAnimatable where Self == SpinActivityAnimator {
-    static var spinActivity: Self { SpinActivityAnimator() }
+extension LoadingAnimatable where Self == SpinWheelAnimator {
+    static var spinWheel: Self { SpinWheelAnimator() }
 }
