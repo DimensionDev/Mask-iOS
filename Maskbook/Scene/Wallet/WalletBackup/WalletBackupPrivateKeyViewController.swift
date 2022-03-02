@@ -155,9 +155,8 @@ class WalletBackupPrivateKeyViewController: BaseViewController {
     }
     
     private func showSuccess() {
-        UIApplication.getTopViewController()?.view
-            .makeToast(message: L10n.Common.Toast.copy,
-                       image: Asset.Images.Toast.check.image)
+        makeToast(message: L10n.Common.Toast.copy,
+                  image: Asset.Images.Toast.check.image)
     }
 }
 

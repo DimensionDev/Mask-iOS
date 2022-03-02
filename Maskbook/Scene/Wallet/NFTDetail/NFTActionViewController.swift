@@ -186,12 +186,11 @@ extension NFTActionViewController {
     private func saveImage(image: UIImage) {
         PHPhotoLibrary.shared().performChanges({
             PHAssetChangeRequest.creationRequestForAsset(from: image)
-        }, completionHandler: { isSuccess, _ in
+        }, completionHandler: { [weak self] isSuccess, _ in
             DispatchQueue.main.async {
                 if isSuccess {
-                    UIApplication.getTopViewController()?.view
-                        .makeToast(message: L10n.Common.Toast.saved,
-                                   image: Asset.Images.Toast.check.image)
+                    self?.makeToast(message: L10n.Common.Toast.saved,
+                                    image: Asset.Images.Toast.check.image)
                 } else {}
             }
         })

@@ -325,9 +325,9 @@ class AccountCardView: UIView {
     @objc
     private func copyButtonDidClick(sender: UIButton) {
         UIPasteboard.general.string = userSetting.defaultAccountAddress
-        UIApplication.getTopViewController()?.view
+        UIApplication.getTopViewController()?
             .makeToast(message: L10n.Common.Toast.copy,
-                       image: Asset.Images.Toast.check.image)
+                  image: Asset.Images.Toast.check.image)
     }
     
     @objc
