@@ -2390,7 +2390,8 @@ const usePostHistory = (network, page, size = 20)=>{
             network,
             userIds: (ref = currentPersona === null || currentPersona === void 0 ? void 0 : currentPersona.linkedProfiles.map((profile)=>profile.identifier.userId
             )) !== null && ref !== void 0 ? ref : [],
-            after: lastValue === null || lastValue === void 0 ? void 0 : lastValue.identifier
+            after: lastValue === null || lastValue === void 0 ? void 0 : lastValue.identifier,
+            pageOffset: page
         }, size);
         cache.current.set(page, (0,last/* default */.Z)(values));
         return values;

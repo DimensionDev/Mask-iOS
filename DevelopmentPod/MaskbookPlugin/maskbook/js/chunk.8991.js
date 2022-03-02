@@ -1,222 +1,75 @@
 "use strict";
-(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[4267],{
+(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[8991],{
 
-/***/ 25591:
+/***/ 17047:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "E": () => (/* binding */ detectScrollType),
-/* harmony export */   "T": () => (/* binding */ getNormalizedScrollLeft)
+/* harmony export */   "hg": () => (/* binding */ useFriendsList),
+/* harmony export */   "FB": () => (/* binding */ useLastRecognizedIdentity),
+/* harmony export */   "fb": () => (/* binding */ useCurrentVisitingIdentity),
+/* harmony export */   "FA": () => (/* binding */ useMyIdentities),
+/* harmony export */   "Ud": () => (/* binding */ useCurrentIdentity)
 /* harmony export */ });
-// Source from https://github.com/alitaheri/normalize-scroll-left
-let cachedType;
-/**
- * Based on the jquery plugin https://github.com/othree/jquery.rtl-scroll-type
- *
- * Types of scrollLeft, assuming scrollWidth=100 and direction is rtl.
- *
- * Type             | <- Most Left | Most Right -> | Initial
- * ---------------- | ------------ | ------------- | -------
- * default          | 0            | 100           | 100
- * negative (spec*) | -100         | 0             | 0
- * reverse          | 100          | 0             | 0
- *
- * Edge 85: default
- * Safari 14: negative
- * Chrome 85: negative
- * Firefox 81: negative
- * IE11: reverse
- *
- * spec* https://drafts.csswg.org/cssom-view/#dom-window-scroll
- */
-
-function detectScrollType() {
-  if (cachedType) {
-    return cachedType;
-  }
-
-  const dummy = document.createElement('div');
-  const container = document.createElement('div');
-  container.style.width = '10px';
-  container.style.height = '1px';
-  dummy.appendChild(container);
-  dummy.dir = 'rtl';
-  dummy.style.fontSize = '14px';
-  dummy.style.width = '4px';
-  dummy.style.height = '1px';
-  dummy.style.position = 'absolute';
-  dummy.style.top = '-1000px';
-  dummy.style.overflow = 'scroll';
-  document.body.appendChild(dummy);
-  cachedType = 'reverse';
-
-  if (dummy.scrollLeft > 0) {
-    cachedType = 'default';
-  } else {
-    dummy.scrollLeft = 1;
-
-    if (dummy.scrollLeft === 0) {
-      cachedType = 'negative';
-    }
-  }
-
-  document.body.removeChild(dummy);
-  return cachedType;
-} // Based on https://stackoverflow.com/a/24394376
-
-function getNormalizedScrollLeft(element, direction) {
-  const scrollLeft = element.scrollLeft; // Perform the calculations only when direction is rtl to avoid messing up the ltr behavior
-
-  if (direction !== 'rtl') {
-    return scrollLeft;
-  }
-
-  const type = detectScrollType();
-
-  switch (type) {
-    case 'negative':
-      return element.scrollWidth - element.clientWidth + scrollLeft;
-
-    case 'reverse':
-      return element.scrollWidth - element.clientWidth - scrollLeft;
-
-    default:
-      return scrollLeft;
-  }
-}
-
-/***/ }),
-
-/***/ 61458:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Z": () => (/* binding */ AbstractTab)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(42421);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(83849);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(54933);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(56789);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(88785);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(39541);
+/* unused harmony export CurrentIdentitySubscription */
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
+/* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(44162);
+/* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(78037);
+/* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(43576);
+/* harmony import */ var _social_network__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(44131);
+/* harmony import */ var use_subscription__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(47175);
 
 
 
 
-const useStyles = (0,_masknet_theme__WEBPACK_IMPORTED_MODULE_1__/* .makeStyles */ .ZL)()((theme)=>({
-        tab: {
-            minWidth: 'unset'
-        },
-        tabPanel: {
-            marginTop: theme.spacing(1)
-        },
-        disabledTab: {
-            opacity: 0.5
-        },
-        flexContainer: {}
-    })
-);
-function AbstractTab(props) {
-    const { tabs , state , index: index1 , height =200 , hasOnlyOneChild =false , scrollable =false  } = props;
-    const classes = (0,_masknet_theme__WEBPACK_IMPORTED_MODULE_1__/* .useStylesExtends */ .Bc)(useStyles(), props);
-    const [value, setValue] = state !== null && state !== void 0 ? state : [
-        undefined,
-        undefined
-    ];
-    const tabIndicatorStyle = tabs.length && !scrollable ? {
-        width: 100 / tabs.length + '%'
-    } : undefined;
-    return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-        children: [
-            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z, {
-                square: true,
-                elevation: 0,
-                className: classes.tabPaper,
-                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z, {
-                    className: classes.tabs,
-                    classes: {
-                        indicator: classes.indicator,
-                        flexContainer: classes.flexContainer
-                    },
-                    value: index1 ? index1 : value ? value : 0,
-                    indicatorColor: "primary",
-                    textColor: "primary",
-                    variant: scrollable ? 'scrollable' : 'fullWidth',
-                    TabIndicatorProps: {
-                        style: tabIndicatorStyle
-                    },
-                    scrollButtons: scrollable,
-                    allowScrollButtonsMobile: scrollable,
-                    onChange: (_, newValue)=>{
-                        return setValue === null || setValue === void 0 ? void 0 : setValue(newValue);
-                    },
-                    children: tabs.map((tab, i)=>{
-                        var ref;
-                        /*#__PURE__*/ return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z, {
-                            disabled: tab.disabled,
-                            className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(classes.tab, [
-                                index1,
-                                value
-                            ].includes(i) ? classes.focusTab : '', tab.disabled ? classes.disabledTab : ''),
-                            disableFocusRipple: tab.disableFocusRipple,
-                            disableRipple: tab.disableRipple,
-                            onClick: tab.cb,
-                            label: tab.label,
-                            "data-testid": `${(ref = tab.id) === null || ref === void 0 ? void 0 : ref.toLowerCase()}_tab`
-                        }, i);
-                    })
-                })
-            }),
-            !hasOnlyOneChild ? /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z, {
-                className: classes.tabPanel,
-                role: "tabpanel",
-                ...tabs.find((_, index)=>index === value
-                ),
-                sx: {
-                    height: height,
-                    minHeight: height
-                }
-            }) : null
+
+
+function useFriendsList() {
+    const ref = (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(_social_network__WEBPACK_IMPORTED_MODULE_3__/* .globalUIState.friends */ .EJ.friends);
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(()=>[
+            ...ref.values()
         ]
-    }));
-};
-
-
-/***/ }),
-
-/***/ 45279:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "fN": () => (/* binding */ MINDS_ID),
-/* harmony export */   "NE": () => (/* binding */ mindsBase),
-/* harmony export */   "Sf": () => (/* binding */ isMinds),
-/* harmony export */   "fy": () => (/* binding */ mindsWorkerBase)
-/* harmony export */ });
-const MINDS_ID = 'minds.com';
-const origins = [
-    'https://www.minds.com/*',
-    'https://minds.com/*',
-    'https://cdn.minds.com/*'
-];
-const mindsBase = {
-    networkIdentifier: MINDS_ID,
-    name: 'minds',
-    declarativePermissions: {
-        origins
-    },
-    shouldActivate (location) {
-        return location.hostname.endsWith('minds.com');
-    }
-};
-function isMinds(ui) {
-    return ui.networkIdentifier === MINDS_ID;
+    , [
+        ref
+    ]);
 }
-const mindsWorkerBase = {
-    ...mindsBase,
-    gunNetworkHint: 'minds-'
+const default_ = new _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_5__.ValueRef({
+    identifier: _masknet_shared_base__WEBPACK_IMPORTED_MODULE_2__/* .ProfileIdentifier.unknown */ .WO.unknown
+});
+function useLastRecognizedIdentity() {
+    var ref;
+    return (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(((ref = _social_network__WEBPACK_IMPORTED_MODULE_3__/* .activatedSocialNetworkUI.collecting.identityProvider */ .LM.collecting.identityProvider) === null || ref === void 0 ? void 0 : ref.recognized) || default_);
+}
+function useCurrentVisitingIdentity() {
+    var ref;
+    return (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(((ref = _social_network__WEBPACK_IMPORTED_MODULE_3__/* .activatedSocialNetworkUI.collecting.currentVisitingIdentityProvider */ .LM.collecting.currentVisitingIdentityProvider) === null || ref === void 0 ? void 0 : ref.recognized) || default_);
+}
+function useMyIdentities() {
+    return (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(_social_network__WEBPACK_IMPORTED_MODULE_3__/* .globalUIState.profiles */ .EJ.profiles);
+}
+function useCurrentIdentity() {
+    return (0,use_subscription__WEBPACK_IMPORTED_MODULE_4__.useSubscription)(CurrentIdentitySubscription);
+}
+const CurrentIdentitySubscription = {
+    getCurrentValue () {
+        var ref;
+        const all = _social_network__WEBPACK_IMPORTED_MODULE_3__/* .globalUIState.profiles.value */ .EJ.profiles.value;
+        const current = (((ref = _social_network__WEBPACK_IMPORTED_MODULE_3__/* .activatedSocialNetworkUI.collecting.identityProvider */ .LM.collecting.identityProvider) === null || ref === void 0 ? void 0 : ref.recognized) || default_).value.identifier;
+        return all.find((i)=>i.identifier.toText() === current.toText()
+        ) || all[0];
+    },
+    subscribe (sub) {
+        var ref;
+        const a = _social_network__WEBPACK_IMPORTED_MODULE_3__/* .globalUIState.profiles.addListener */ .EJ.profiles.addListener(sub);
+        const b = (ref = _social_network__WEBPACK_IMPORTED_MODULE_3__/* .activatedSocialNetworkUI.collecting.identityProvider */ .LM.collecting.identityProvider) === null || ref === void 0 ? void 0 : ref.recognized.addListener(sub);
+        return ()=>{
+            return [
+                a(),
+                b === null || b === void 0 ? void 0 : b()
+            ];
+        };
+    }
 };
 
 
@@ -633,7 +486,7 @@ function EthereumChainBoundary(props) {
                     children: t('plugin_wallet_connect_wallet_tip')
                 })
             }),
-            /*#__PURE__*/ (0,jsx_runtime.jsx)(ActionButton/* default */.ZP, {
+            !props.hiddenConnectButton ? /*#__PURE__*/ (0,jsx_runtime.jsx)(ActionButton/* default */.ZP, {
                 variant: "contained",
                 size: "small",
                 sx: {
@@ -641,7 +494,7 @@ function EthereumChainBoundary(props) {
                 },
                 onClick: openSelectProviderDialog,
                 children: t('plugin_wallet_connect_wallet')
-            })
+            }) : null
         ]
     }));
     if (isChainMatched && isPluginMatched || isValid) return(/*#__PURE__*/ (0,jsx_runtime.jsx)(jsx_runtime.Fragment, {

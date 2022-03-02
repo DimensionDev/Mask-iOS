@@ -103,8 +103,8 @@ var social_network = __webpack_require__(44131);
 var defaults = __webpack_require__(13448);
 // EXTERNAL MODULE: ./src/social-network/defaults/inject/PageInspector.tsx + 3 modules
 var PageInspector = __webpack_require__(43439);
-// EXTERNAL MODULE: ./src/social-network/defaults/inject/StartSetupGuide.tsx
-var StartSetupGuide = __webpack_require__(21614);
+// EXTERNAL MODULE: ./src/social-network/defaults/inject/StartSetupGuide.tsx + 7 modules
+var StartSetupGuide = __webpack_require__(91630);
 // EXTERNAL MODULE: ./src/social-network/defaults/state/InitFriends.ts
 var InitFriends = __webpack_require__(24504);
 // EXTERNAL MODULE: ./src/social-network/defaults/state/InitProfiles.ts
@@ -970,8 +970,8 @@ const MindsNotSetupYet = ()=>{
     }));
 };
 
-// EXTERNAL MODULE: ./src/components/InjectedComponents/ToolboxUnstyled.tsx
-var ToolboxUnstyled = __webpack_require__(88886);
+// EXTERNAL MODULE: ./src/components/InjectedComponents/ToolboxUnstyled.tsx + 1 modules
+var ToolboxUnstyled = __webpack_require__(63685);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.2_859545d82eec4e4ab7d574641ee2c82e/node_modules/@mui/material/styles/styled.js
 var styled = __webpack_require__(84879);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.2_859545d82eec4e4ab7d574641ee2c82e/node_modules/@mui/material/ListItemButton/ListItemButton.js
@@ -1253,7 +1253,7 @@ const mindsUI = {
 /* harmony import */ var _state_InitProfiles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(64750);
 /* harmony import */ var _inject_PageInspector__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(43439);
 /* harmony import */ var _inject_PostReplacer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(39811);
-/* harmony import */ var _inject_StartSetupGuide__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(21614);
+/* harmony import */ var _inject_StartSetupGuide__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(91630);
 
 
 

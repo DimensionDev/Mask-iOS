@@ -1,5 +1,5 @@
 "use strict";
-(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[3535],{
+(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[7039],{
 
 /***/ 28509:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -495,6 +495,444 @@ var src = __webpack_require__(43576);
 
 ;// CONCATENATED MODULE: ./src/utils/suspends/index.ts
 
+
+
+/***/ }),
+
+/***/ 26734:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "VJ": () => (/* binding */ useClassicMaskSNSTheme),
+/* harmony export */   "Kx": () => (/* binding */ useClassicMaskFullPageTheme),
+/* harmony export */   "Nh": () => (/* binding */ useColorStyles),
+/* harmony export */   "B6": () => (/* binding */ useErrorStyles),
+/* harmony export */   "Ql": () => (/* binding */ extendsTheme)
+/* harmony export */ });
+/* unused harmony export usePopupsMaskFullPageTheme */
+/* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(44162);
+/* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(78037);
+/* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(43576);
+/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(42421);
+/* harmony import */ var _masknet_public_api__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(87002);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(97978);
+/* harmony import */ var _mui_material_colors__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(29228);
+/* harmony import */ var _mui_material_colors__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(84207);
+/* harmony import */ var _mui_material_colors__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(11722);
+/* harmony import */ var _mui_material_colors__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(59295);
+/* harmony import */ var _mui_material_colors__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(91732);
+/* harmony import */ var _mui_material_locale_index__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(69384);
+/* harmony import */ var lodash_unified__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(9084);
+/* harmony import */ var lodash_unified__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(46440);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(76342);
+/* harmony import */ var _settings_settings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(3087);
+/* harmony import */ var _social_network__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(44131);
+/* harmony import */ var use_subscription__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(47175);
+/* harmony import */ var _social_network_adaptor_twitter_com_customization_twitter_color_schema_json__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(88674);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function getFontFamily(monospace) {
+    // We want to look native.
+    // Windows has no CJK sans monospace. Accommodate that.
+    // We only use it for fingerprints anyway so CJK coverage ain't a problem... yet.
+    const monofont = navigator.platform.startsWith('Win') ? 'Consolas, monospace' : 'monospace';
+    // https://caniuse.com/font-family-system-ui
+    // Firefox does NOT support yet it in any form on Windows, but tests indicate that it agrees with Edge in using the UI font for sans-serif:
+    // Microsoft YaHei on zh-Hans-CN.
+    return !monospace ? '-apple-system, system-ui, sans-serif' : monofont;
+}
+const base = {
+    palette: {
+        primary: {
+            main: '#1c68f3'
+        },
+        secondary: _mui_material_colors__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z,
+        text: {
+            hint: 'rgba(0, 0, 0, 0.38)'
+        }
+    },
+    typography: {
+        fontFamily: getFontFamily()
+    },
+    breakpoints: {
+        values: {
+            xs: 0,
+            sm: 600,
+            md: 1112,
+            lg: 1280,
+            xl: 1920
+        }
+    },
+    components: {
+        MuiLink: {
+            defaultProps: {
+                underline: 'hover'
+            }
+        },
+        MuiButton: {
+            styleOverrides: {
+                root: {
+                    textTransform: 'unset',
+                    minWidth: '100px'
+                }
+            },
+            defaultProps: {
+                size: 'small',
+                disableElevation: true
+            }
+        },
+        MuiTab: {
+            styleOverrides: {
+                root: {
+                    textTransform: 'unset',
+                    padding: '0',
+                    // up-sm
+                    '@media screen and (min-width: 600px)': {
+                        minWidth: 160
+                    }
+                }
+            }
+        },
+        MuiDialog: {
+            styleOverrides: {
+                paper: {
+                    borderRadius: '12px'
+                }
+            }
+        }
+    }
+};
+const lightThemePatch = {
+    palette: {
+        mode: 'light'
+    }
+};
+const darkThemePatch = {
+    palette: {
+        mode: 'dark',
+        background: {
+            paper: _mui_material_colors__WEBPACK_IMPORTED_MODULE_10__/* ["default"][900] */ .Z[900]
+        }
+    },
+    components: {
+        MuiPaper: {
+            // https://github.com/mui-org/material-ui/pull/25522
+            styleOverrides: {
+                root: {
+                    backgroundImage: 'unset'
+                }
+            }
+        }
+    }
+};
+const baseTheme = (theme)=>{
+    if (theme === 'light') return (0,lodash_unified__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)((0,lodash_unified__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z)(base), lightThemePatch);
+    return (0,lodash_unified__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)((0,lodash_unified__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z)(base), darkThemePatch);
+};
+// Theme
+const MaskLightTheme = (0,_mui_material__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z)(baseTheme('light'));
+const MaskDarkTheme = (0,_mui_material__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z)(baseTheme('dark'));
+const staticSubscription = (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .SubscriptionFromValueRef */ .Jf)(new _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_14__.ValueRef('light'));
+function useClassicMaskSNSTheme() {
+    var ref;
+    const { current: provider  } = (0,react__WEBPACK_IMPORTED_MODULE_4__.useRef)(((ref = _social_network__WEBPACK_IMPORTED_MODULE_6__/* .activatedSocialNetworkUI.customization.paletteMode */ .LM.customization.paletteMode) === null || ref === void 0 ? void 0 : ref.current) || staticSubscription);
+    const { current: usePostTheme = (t)=>t
+      } = (0,react__WEBPACK_IMPORTED_MODULE_4__.useRef)(_social_network__WEBPACK_IMPORTED_MODULE_6__/* .activatedSocialNetworkUI.customization.useTheme */ .LM.customization.useTheme);
+    const palette = (0,use_subscription__WEBPACK_IMPORTED_MODULE_7__.useSubscription)(provider);
+    const baseTheme1 = palette === 'dark' ? MaskDarkTheme : MaskLightTheme;
+    // TODO: support RTL?
+    const [localization, isRTL] = useThemeLanguage();
+    const theme = (0,_mui_material__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z)(baseTheme1, localization);
+    return usePostTheme(theme);
+}
+/**
+ * @deprecated
+ * - Popups: migrate to \@masknet/theme package
+ */ function useClassicMaskFullPageTheme(overwrite) {
+    const userPreference = (0,_masknet_theme__WEBPACK_IMPORTED_MODULE_2__.or)(overwrite === null || overwrite === void 0 ? void 0 : overwrite.forcePalette, (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_0__/* .useValueRef */ .E)(_settings_settings__WEBPACK_IMPORTED_MODULE_5__/* .appearanceSettings */ .OF));
+    const systemPreference = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const finalPalette = userPreference === _masknet_theme__WEBPACK_IMPORTED_MODULE_2__/* .Appearance["default"] */ .um["default"] ? systemPreference : userPreference;
+    const baseTheme2 = finalPalette === 'dark' ? MaskDarkTheme : MaskLightTheme;
+    const [localization, isRTL] = useThemeLanguage();
+    // TODO: support RTL
+    return (0,_mui_material__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z)(baseTheme2, localization);
+}
+/**
+ * Only used in swap pages under popups, will replace it in the future
+ */ function usePopupsMaskFullPageTheme() {
+    const baseTheme3 = MaskLightTheme;
+    setAutoFreeze(false);
+    const PopupTheme = produce(baseTheme3, (theme)=>{
+        theme.palette.background.paper = '#ffffff';
+        theme.palette.primary = {
+            ...theme.palette.primary,
+            main: '#1c68f3'
+        };
+        const colorSchema = twitterColorSchema.light;
+        const colors = Object.keys(colorSchema);
+        colors.forEach((color)=>{
+            if (typeof theme.palette[color] === 'object') {
+                Object.assign(theme.palette[color], colorSchema[color]);
+            }
+        });
+        theme.palette.divider = colorSchema.divider;
+        theme.palette.secondaryDivider = colorSchema.secondaryDivider;
+        theme.components = theme.components || {};
+        const smallQuery = `@media (max-width: ${theme.breakpoints.values.sm}px)`;
+        theme.components.MuiButton = {
+            defaultProps: {
+                size: 'medium',
+                disableElevation: true,
+                variant: 'contained'
+            },
+            variants: [
+                {
+                    props: {
+                        variant: 'sns'
+                    },
+                    style: {
+                        backgroundColor: theme.palette.primary.main,
+                        color: theme.palette.common.white,
+                        '&:hover': {
+                            backgroundColor: theme.palette.primary.dark,
+                            color: theme.palette.common.white
+                        },
+                        '&.Mui-disabled': {
+                            opacity: 0.5,
+                            backgroundColor: theme.palette.primary.main,
+                            color: theme.palette.common.white
+                        }
+                    }
+                },
+                {
+                    props: {
+                        color: 'error'
+                    },
+                    style: {
+                        backgroundColor: theme.palette.error.main,
+                        color: theme.palette.common.white,
+                        '&:hover': {
+                            backgroundColor: '#f53b47'
+                        }
+                    }
+                }, 
+            ],
+            styleOverrides: {
+                root: {
+                    borderRadius: 500,
+                    textTransform: 'initial',
+                    fontWeight: 600,
+                    minHeight: 39,
+                    paddingLeft: 15,
+                    paddingRight: 15,
+                    boxShadow: 'none',
+                    [smallQuery]: {
+                        '&': {
+                            height: 30,
+                            minHeight: 'auto !important',
+                            padding: '0 14px !important'
+                        }
+                    }
+                },
+                contained: {
+                    backgroundColor: theme.palette.text.primary,
+                    color: theme.palette.text.buttonText,
+                    '&.Mui-disabled': {
+                        opacity: 0.5,
+                        backgroundColor: theme.palette.text.primary,
+                        color: theme.palette.text.buttonText
+                    },
+                    '&:hover': {
+                        backgroundColor: theme.palette.action.buttonHover
+                    },
+                    [smallQuery]: {
+                        '&': {
+                            height: 30,
+                            minHeight: 'auto !important',
+                            padding: '0 14px !important'
+                        }
+                    }
+                },
+                containedSecondary: {
+                    backgroundColor: theme.palette.background.default,
+                    color: theme.palette.text.strong,
+                    '&:hover': {
+                        color: theme.palette.action.buttonHover,
+                        backgroundColor: theme.palette.action.bgHover
+                    },
+                    '&.Mui-disabled': {
+                        opacity: 0.5,
+                        backgroundColor: theme.palette.background.default,
+                        color: theme.palette.text.strong
+                    }
+                },
+                outlined: {
+                    color: theme.palette.text.strong,
+                    borderColor: theme.palette.secondaryDivider,
+                    backgroundColor: 'transparent',
+                    '&:hover': {
+                        color: theme.palette.action.buttonHover,
+                        borderColor: theme.palette.secondaryDivider,
+                        backgroundColor: parseColor(theme.palette.text.primary).setAlpha(0.1).toRgbString()
+                    },
+                    '&.Mui-disabled': {
+                        opacity: 0.5,
+                        color: theme.palette.text.strong,
+                        backgroundColor: 'transparent'
+                    }
+                },
+                sizeLarge: {
+                    minHeight: 40,
+                    paddingLeft: 30,
+                    paddingRight: 30,
+                    [smallQuery]: {
+                        '&': {
+                            height: 28,
+                            minHeight: 28,
+                            paddingLeft: 15,
+                            paddingRight: 15
+                        }
+                    }
+                },
+                sizeSmall: {
+                    minHeight: 30,
+                    paddingLeft: 15,
+                    paddingRight: 15,
+                    [smallQuery]: {
+                        '&': {
+                            height: 25,
+                            minHeight: 29,
+                            paddingLeft: 10,
+                            paddingRight: 10
+                        }
+                    }
+                }
+            }
+        };
+        theme.components.MuiPaper = {
+            defaultProps: {
+                elevation: 0
+            }
+        };
+        theme.components.MuiTab = {
+            styleOverrides: {
+                root: {
+                    textTransform: 'none'
+                }
+            }
+        };
+        theme.components.MuiChip = {
+            styleOverrides: {
+                root: {
+                    backgroundColor: theme.palette.background.default,
+                    color: theme.palette.text.strong
+                },
+                colorPrimary: {
+                    backgroundColor: theme.palette.primary.main,
+                    color: theme.palette.common.white,
+                    '&:hover': {
+                        backgroundColor: parseColor(theme.palette.text.primary).setAlpha(0.1).toRgbString()
+                    }
+                }
+            }
+        };
+        theme.components.MuiBackdrop = {
+            styleOverrides: {
+                root: {
+                    backgroundColor: theme.palette.action.mask
+                }
+            }
+        };
+        theme.components.MuiTooltip = {
+            styleOverrides: {
+                tooltip: {
+                    backgroundColor: theme.palette.background.tipMask,
+                    color: theme.palette.text.buttonText,
+                    borderRadius: 8
+                },
+                tooltipArrow: {
+                    backgroundColor: theme.palette.background.tipMask
+                }
+            }
+        };
+        theme.components.MuiSnackbar = {
+            styleOverrides: {
+                root: {
+                    filter: `drop-shadow(0px 0px 16px ${theme.palette.background.messageShadow});`
+                }
+            }
+        };
+    });
+    return unstable_createMuiStrictModeTheme(PopupTheme);
+}
+function useThemeLanguage() {
+    let language = (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_0__/* .useValueRef */ .E)(_settings_settings__WEBPACK_IMPORTED_MODULE_5__/* .languageSettings */ .pQ);
+    // TODO: support auto language
+    if (language === _masknet_public_api__WEBPACK_IMPORTED_MODULE_3__/* .LanguageOptions.__auto__ */ .P7.__auto__) language = _masknet_public_api__WEBPACK_IMPORTED_MODULE_3__/* .LanguageOptions.enUS */ .P7.enUS;
+    const displayLanguage = language;
+    const langs = {
+        [_masknet_public_api__WEBPACK_IMPORTED_MODULE_3__/* .SupportedLanguages.enUS */ .iu.enUS]: _mui_material_locale_index__WEBPACK_IMPORTED_MODULE_15__/* .enUS */ ._z,
+        [_masknet_public_api__WEBPACK_IMPORTED_MODULE_3__/* .SupportedLanguages.jaJP */ .iu.jaJP]: _mui_material_locale_index__WEBPACK_IMPORTED_MODULE_15__/* .jaJP */ .jz,
+        [_masknet_public_api__WEBPACK_IMPORTED_MODULE_3__/* .SupportedLanguages.koKR */ .iu.koKR]: _mui_material_locale_index__WEBPACK_IMPORTED_MODULE_15__/* .koKR */ .uG,
+        [_masknet_public_api__WEBPACK_IMPORTED_MODULE_3__/* .SupportedLanguages.zhTW */ .iu.zhTW]: _mui_material_locale_index__WEBPACK_IMPORTED_MODULE_15__/* .zhTW */ .cj,
+        [_masknet_public_api__WEBPACK_IMPORTED_MODULE_3__/* .SupportedLanguages.zhCN */ .iu.zhCN]: _mui_material_locale_index__WEBPACK_IMPORTED_MODULE_15__/* .zhCN */ .U1
+    };
+    return [
+        langs[displayLanguage] || _mui_material_locale_index__WEBPACK_IMPORTED_MODULE_15__/* .enUS */ ._z,
+        false
+    ];
+}
+const useColorStyles = (0,_masknet_theme__WEBPACK_IMPORTED_MODULE_2__/* .makeStyles */ .ZL)()((theme)=>{
+    const dark = theme.palette.mode === 'dark';
+    return {
+        error: {
+            color: dark ? _mui_material_colors__WEBPACK_IMPORTED_MODULE_16__/* ["default"][500] */ .Z[500] : _mui_material_colors__WEBPACK_IMPORTED_MODULE_16__/* ["default"][900] */ .Z[900]
+        },
+        success: {
+            color: dark ? _mui_material_colors__WEBPACK_IMPORTED_MODULE_17__/* ["default"][500] */ .Z[500] : _mui_material_colors__WEBPACK_IMPORTED_MODULE_17__/* ["default"][800] */ .Z[800]
+        },
+        info: {
+            color: dark ? _mui_material_colors__WEBPACK_IMPORTED_MODULE_18__/* ["default"][500] */ .Z[500] : _mui_material_colors__WEBPACK_IMPORTED_MODULE_18__/* ["default"][800] */ .Z[800]
+        }
+    };
+});
+const useErrorStyles = (0,_masknet_theme__WEBPACK_IMPORTED_MODULE_2__/* .makeStyles */ .ZL)()((theme)=>{
+    const dark = theme.palette.mode === 'dark';
+    return {
+        containedPrimary: {
+            backgroundColor: dark ? _mui_material_colors__WEBPACK_IMPORTED_MODULE_16__/* ["default"][500] */ .Z[500] : _mui_material_colors__WEBPACK_IMPORTED_MODULE_16__/* ["default"][900] */ .Z[900],
+            '&:hover': {
+                backgroundColor: dark ? _mui_material_colors__WEBPACK_IMPORTED_MODULE_16__/* ["default"][900] */ .Z[900] : _mui_material_colors__WEBPACK_IMPORTED_MODULE_16__/* ["default"][700] */ .Z[700]
+            }
+        },
+        outlinedPrimary: {
+            borderColor: dark ? _mui_material_colors__WEBPACK_IMPORTED_MODULE_16__/* ["default"][500] */ .Z[500] : _mui_material_colors__WEBPACK_IMPORTED_MODULE_16__/* ["default"][900] */ .Z[900],
+            color: dark ? _mui_material_colors__WEBPACK_IMPORTED_MODULE_16__/* ["default"][500] */ .Z[500] : _mui_material_colors__WEBPACK_IMPORTED_MODULE_16__/* ["default"][900] */ .Z[900],
+            '&:hover': {
+                borderColor: dark ? _mui_material_colors__WEBPACK_IMPORTED_MODULE_16__/* ["default"][900] */ .Z[900] : _mui_material_colors__WEBPACK_IMPORTED_MODULE_16__/* ["default"][700] */ .Z[700]
+            }
+        }
+    };
+});
+function extendsTheme(extend) {
+    return (theme)=>(0,lodash_unified__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)((0,lodash_unified__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z)(theme), extend(theme))
+    ;
+}
 
 
 /***/ }),

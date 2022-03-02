@@ -1,5 +1,5 @@
 "use strict";
-(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[8911],{
+(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[5584],{
 
 /***/ 80629:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
@@ -36,6 +36,128 @@ MaskMessages.serialization = _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/*
 Object.assign(globalThis, {
     MaskMessage: MaskMessages
 });
+
+
+/***/ }),
+
+/***/ 3087:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "vv": () => (/* binding */ debugModeSetting),
+/* harmony export */   "OF": () => (/* binding */ appearanceSettings),
+/* harmony export */   "pQ": () => (/* binding */ languageSettings),
+/* harmony export */   "tR": () => (/* binding */ pluginIDSettings),
+/* harmony export */   "AI": () => (/* binding */ currentSetupGuideStatus),
+/* harmony export */   "Ct": () => (/* binding */ userGuideStatus),
+/* harmony export */   "Pg": () => (/* binding */ sayHelloShowed),
+/* harmony export */   "g4": () => (/* binding */ dismissPinExtensionTip),
+/* harmony export */   "gG": () => (/* binding */ dismissVerifyNextID),
+/* harmony export */   "JE": () => (/* binding */ bioDescription),
+/* harmony export */   "yO": () => (/* binding */ personalHomepage),
+/* harmony export */   "VO": () => (/* binding */ currentPluginMinimalModeNOTEnabled),
+/* harmony export */   "i4": () => (/* binding */ launchPageSettings),
+/* harmony export */   "cn": () => (/* binding */ currentPersonaIdentifier)
+/* harmony export */ });
+/* unused harmony exports currentImagePayloadStatus, currentSelectedIdentity, getCurrentSelectedIdentity, newDashboardConnection */
+/* harmony import */ var _createSettings__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(90431);
+/* harmony import */ var _shared_ui_locales_legacy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(90795);
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(10941);
+/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(42421);
+/* harmony import */ var _masknet_public_api__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(87002);
+/* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(43576);
+/* harmony import */ var _plugins_EVM_constants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(32646);
+
+
+
+
+
+
+
+/**
+ * Does the debug mode on
+ */ const debugModeSetting = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createGlobalSettings */ .TI)('debugMode', false, {
+    primary: ()=>_shared_ui_locales_legacy__WEBPACK_IMPORTED_MODULE_1__/* .i18n.t */ .a.t('settings_enable_debug')
+    ,
+    secondary: ()=>_shared_ui_locales_legacy__WEBPACK_IMPORTED_MODULE_1__/* .i18n.t */ .a.t('settings_enable_debug_desc')
+});
+// #region appearance
+const appearanceSettings = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createGlobalSettings */ .TI)('appearance', _masknet_theme__WEBPACK_IMPORTED_MODULE_3__/* .Appearance["default"] */ .um["default"], {
+    primary: ()=>_shared_ui_locales_legacy__WEBPACK_IMPORTED_MODULE_1__/* .i18n.t */ .a.t('settings_appearance')
+    ,
+    secondary: ()=>_shared_ui_locales_legacy__WEBPACK_IMPORTED_MODULE_1__/* .i18n.t */ .a.t('settings_appearance_secondary')
+});
+// #endregion
+// #region language
+const languageSettings = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createGlobalSettings */ .TI)('language', _masknet_public_api__WEBPACK_IMPORTED_MODULE_4__/* .LanguageOptions.__auto__ */ .P7.__auto__, {
+    primary: ()=>_shared_ui_locales_legacy__WEBPACK_IMPORTED_MODULE_1__/* .i18n.t */ .a.t('settings_language')
+    ,
+    secondary: ()=>_shared_ui_locales_legacy__WEBPACK_IMPORTED_MODULE_1__/* .i18n.t */ .a.t('settings_language_secondary')
+});
+// #endregion
+// #region web3 plugin ID
+const pluginIDSettings = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createGlobalSettings */ .TI)('pluginID', _plugins_EVM_constants__WEBPACK_IMPORTED_MODULE_6__/* .PLUGIN_ID */ .Uu, {
+    primary: ()=>'DO NOT DISPLAY IT IN UI'
+});
+// #endregion
+// #region network setting
+/**
+ * Expected Usage: export const currentImagePayloadStatus = createNetworkSettings('currentImagePayloadStatus')
+ *
+ * Work around the issue:
+ *      https://github.com/microsoft/TypeScript/issues/42873
+ *      https://github.com/microsoft/TypeScript/issues/30858
+ *
+ * References:
+ *      PluginGitcoinMessages: packages/mask/src/plugins/Gitcoin/messages.ts
+ *      PluginTraderMessages: packages/mask/src/plugins/Trader/messages.ts
+ *      PluginTransakMessages: packages/mask/src/plugins/Transak/messages.ts
+ */ const currentImagePayloadStatus = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createNetworkSettings */ .Lk)('currentImagePayloadStatus', '');
+const currentSelectedIdentity = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createNetworkSettings */ .Lk)('currentSelectedIdentity', '');
+function getCurrentSelectedIdentity(network) {
+    return Identifier.fromString(currentSelectedIdentity[network].value, ProfileIdentifier).unwrapOr(ProfileIdentifier.unknown);
+}
+const currentSetupGuideStatus = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createNetworkSettings */ .Lk)('currentSetupGuideStatus', '');
+const userGuideStatus = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createNetworkSettings */ .Lk)('userGuideStatus', '');
+const sayHelloShowed = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createNetworkSettings */ .Lk)('sayHelloShowed', false);
+const dismissPinExtensionTip = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createGlobalSettings */ .TI)('dismissPinExtensionTip', false, {
+    primary: ()=>''
+});
+const dismissVerifyNextID = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createNetworkSettings */ .Lk)('dismissVerifyNextID', {});
+const bioDescription = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createNetworkSettings */ .Lk)('bioDescription', '');
+const personalHomepage = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createNetworkSettings */ .Lk)('personalHomepage', '');
+// This is a misuse of concept "NetworkSettings" as "namespaced settings"
+// The refactor is tracked in https://github.com/DimensionDev/Maskbook/issues/1884
+/**
+ * ! DO NOT use this directly to query the plugin status !
+ *
+ * use `useActivatedPluginsSNSAdaptor().find((x) => x.ID === PLUGIN_ID)` or
+ * `useActivatedPluginsDashboard().find((x) => x.ID === PLUGIN_ID)` instead
+ */ // This was "currentPluginEnabled" before, but we used it to represent minimal mode now to make the settings be able to migrate.
+const currentPluginMinimalModeNOTEnabled = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createNetworkSettings */ .Lk)('pluginsEnabled', true);
+// #endregion
+const launchPageSettings = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createGlobalSettings */ .TI)('launchPage', _types__WEBPACK_IMPORTED_MODULE_2__/* .LaunchPage.dashboard */ .z.dashboard, {
+    primary: ()=>_shared_ui_locales_legacy__WEBPACK_IMPORTED_MODULE_1__/* .i18n.t */ .a.t('settings_launch_page')
+    ,
+    secondary: ()=>_shared_ui_locales_legacy__WEBPACK_IMPORTED_MODULE_1__/* .i18n.t */ .a.t('settings_launch_page_secondary')
+});
+const newDashboardConnection = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createGlobalSettings */ .TI)('beta-dashboard', false, {
+    primary: ()=>'Experimental: Allow isolated dashboard to connect'
+    ,
+    secondary: ()=>"WARNING: DON'T OPEN THIS UNLESS YOU KNOW WHAT YOU ARE DOING."
+});
+const currentPersonaIdentifier = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createGlobalSettings */ .TI)('currentPersonaIdentifier', '', {
+    primary: ()=>'DO NOT DISPLAY IT IN UI'
+});
+try {
+    // Migrate language settings
+    const lng = languageSettings.value;
+    if (lng === 'en') languageSettings.value = _masknet_public_api__WEBPACK_IMPORTED_MODULE_4__/* .LanguageOptions.enUS */ .P7.enUS;
+    else if (lng === 'zh') languageSettings.value = _masknet_public_api__WEBPACK_IMPORTED_MODULE_4__/* .LanguageOptions.zhCN */ .P7.zhCN;
+    else if (lng === 'ja') languageSettings.value = _masknet_public_api__WEBPACK_IMPORTED_MODULE_4__/* .LanguageOptions.jaJP */ .P7.jaJP;
+    else if (lng === 'ko') languageSettings.value = _masknet_public_api__WEBPACK_IMPORTED_MODULE_4__/* .LanguageOptions.koKR */ .P7.koKR;
+    else languageSettings.value = _masknet_public_api__WEBPACK_IMPORTED_MODULE_4__/* .LanguageOptions.__auto__ */ .P7.__auto__;
+} catch  {}
 
 
 /***/ }),
@@ -534,6 +656,73 @@ function useWeb3State(expectedPluginID) {
     const pluginID = (0,_Context__WEBPACK_IMPORTED_MODULE_0__/* .usePluginIDContext */ .Zn)();
     var ref;
     return (ref = (0,_hooks_useActivatedPluginWeb3State__WEBPACK_IMPORTED_MODULE_1__/* .useActivatedPluginWeb3State */ .G)(expectedPluginID !== null && expectedPluginID !== void 0 ? expectedPluginID : pluginID)) !== null && ref !== void 0 ? ref : {};
+}
+
+
+/***/ }),
+
+/***/ 12293:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "F": () => (/* binding */ useRemoteControlledDialog)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(32513);
+
+
+/**
+ * Use a dialog state controlled by remote
+ */ function useRemoteControlledDialog(event1, onUpdateByRemote, tabType = 'self') {
+    const [HOOK_ID] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)((0,uuid__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)()) // create an uuid for every hook
+    ;
+    const [open, setOpen] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(()=>{
+        return event1.on((_ev)=>{
+            const event = _ev;
+            // ignore the event from the same hook
+            if (event.hookId === HOOK_ID) return;
+            setOpen(event.open);
+            onUpdateByRemote === null || onUpdateByRemote === void 0 ? void 0 : onUpdateByRemote(_ev);
+        });
+    }, [
+        onUpdateByRemote,
+        event1,
+        HOOK_ID
+    ]);
+    const timer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+    const onUpdateByLocal = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((ev)=>{
+        setOpen(ev.open);
+        const timer_ = timer.current;
+        if (timer_ !== null) clearTimeout(timer_);
+        timer.current = setTimeout(()=>{
+            const payload = {
+                hookId: HOOK_ID,
+                ...ev
+            };
+            tabType === 'self' ? event1.sendToLocal(payload) : event1.sendToVisiblePages(payload);
+        }, 100);
+    }, [
+        event1,
+        tabType,
+        HOOK_ID
+    ]);
+    const openDialog = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(()=>{
+        onUpdateByLocal({
+            open: true
+        });
+    }, []);
+    const closeDialog = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(()=>{
+        onUpdateByLocal({
+            open: false
+        });
+    }, []);
+    return {
+        open,
+        openDialog,
+        closeDialog,
+        setDialog: onUpdateByLocal
+    };
 }
 
 
@@ -1227,6 +1416,102 @@ var Appearance;
     Appearance["light"] = "light";
     Appearance["dark"] = "dark";
 })(Appearance || (Appearance = {}));
+
+
+/***/ }),
+
+/***/ 63991:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ry": () => (/* binding */ bindProof),
+/* harmony export */   "_9": () => (/* binding */ queryIsBound),
+/* harmony export */   "CV": () => (/* binding */ createPersonaPayload)
+/* harmony export */ });
+/* unused harmony exports queryExistedBindingByPersona, queryExistedBindingByPlatform, queryExistedBinding */
+/* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(43576);
+/* harmony import */ var urlcat__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(19802);
+/* harmony import */ var urlcat__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(urlcat__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+const BASE_URL =  true ? 'https://proof-service.next.id/' : 0;
+async function bindProof(personaPublicKey, action, platform, identity, walletSignature, signature, proofLocation) {
+    const requestBody = {
+        action,
+        platform,
+        identity,
+        public_key: personaPublicKey,
+        ...proofLocation ? {
+            proof_location: proofLocation
+        } : {},
+        extra: {
+            ...walletSignature ? {
+                wallet_signature: (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .toBase64 */ .s3)((0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .fromHex */ .H_)(walletSignature))
+            } : {},
+            ...signature ? {
+                signature: (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .toBase64 */ .s3)((0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .fromHex */ .H_)(signature))
+            } : {}
+        }
+    };
+    const response = await fetch(urlcat__WEBPACK_IMPORTED_MODULE_1___default()(BASE_URL, '/v1/proof'), {
+        body: JSON.stringify(requestBody),
+        method: 'POST',
+        mode: 'cors'
+    });
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.message);
+    return response;
+}
+async function queryExistedBindingByPersona(personaPublicKey) {
+    const response = await fetch(urlcat(BASE_URL, '/v1/proof', {
+        platform: 'nextid',
+        identity: personaPublicKey
+    }), {
+        mode: 'cors'
+    });
+    const result = await response.json();
+    // Will have only one item when query by personaPublicKey
+    return first(result.ids);
+}
+async function queryExistedBindingByPlatform(platform, identity) {
+    if (!platform && !identity) return [];
+    const response = await fetch(urlcat__WEBPACK_IMPORTED_MODULE_1___default()(BASE_URL, '/v1/proof', {
+        platform: platform,
+        identity: identity
+    }), {
+        mode: 'cors'
+    });
+    const result = await response.json();
+    return result.ids;
+}
+async function queryExistedBinding(platform, identity) {
+    throw new Error('To be implemented.');
+}
+async function queryIsBound(personaPublicKey, platform, identity) {
+    if (!platform && !identity) return false;
+    const ids = await queryExistedBindingByPlatform(platform, identity);
+    return ids.some((x)=>x.persona.toLowerCase() === personaPublicKey.toLowerCase()
+    );
+}
+async function createPersonaPayload(personaPublicKey, action, identity, platform) {
+    const requestBody = {
+        action,
+        platform,
+        identity,
+        public_key: personaPublicKey
+    };
+    const response = await fetch(urlcat__WEBPACK_IMPORTED_MODULE_1___default()(BASE_URL, '/v1/proof/payload'), {
+        body: JSON.stringify(requestBody),
+        method: 'POST',
+        mode: 'cors'
+    });
+    const result = await response.json();
+    return {
+        postContent: result.post_content,
+        signPayload: JSON.stringify(JSON.parse(result.sign_payload))
+    };
+}
 
 
 /***/ }),

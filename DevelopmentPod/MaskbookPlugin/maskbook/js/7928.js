@@ -1,4 +1,4 @@
-(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[1012],{
+(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[7928],{
 
 /***/ 40564:
 /***/ ((module) => {
@@ -13517,97 +13517,6 @@ module.exports = Array.isArray || function (arr) {
 
 /***/ }),
 
-/***/ 92304:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var json = typeof JSON !== 'undefined' ? JSON : __webpack_require__(81758);
-
-module.exports = function (obj, opts) {
-    if (!opts) opts = {};
-    if (typeof opts === 'function') opts = { cmp: opts };
-    var space = opts.space || '';
-    if (typeof space === 'number') space = Array(space+1).join(' ');
-    var cycles = (typeof opts.cycles === 'boolean') ? opts.cycles : false;
-    var replacer = opts.replacer || function(key, value) { return value; };
-
-    var cmp = opts.cmp && (function (f) {
-        return function (node) {
-            return function (a, b) {
-                var aobj = { key: a, value: node[a] };
-                var bobj = { key: b, value: node[b] };
-                return f(aobj, bobj);
-            };
-        };
-    })(opts.cmp);
-
-    var seen = [];
-    return (function stringify (parent, key, node, level) {
-        var indent = space ? ('\n' + new Array(level + 1).join(space)) : '';
-        var colonSeparator = space ? ': ' : ':';
-
-        if (node && node.toJSON && typeof node.toJSON === 'function') {
-            node = node.toJSON();
-        }
-
-        node = replacer.call(parent, key, node);
-
-        if (node === undefined) {
-            return;
-        }
-        if (typeof node !== 'object' || node === null) {
-            return json.stringify(node);
-        }
-        if (isArray(node)) {
-            var out = [];
-            for (var i = 0; i < node.length; i++) {
-                var item = stringify(node, i, node[i], level+1) || json.stringify(null);
-                out.push(indent + space + item);
-            }
-            return '[' + out.join(',') + indent + ']';
-        }
-        else {
-            if (seen.indexOf(node) !== -1) {
-                if (cycles) return json.stringify('__cycle__');
-                throw new TypeError('Converting circular structure to JSON');
-            }
-            else seen.push(node);
-
-            var keys = objectKeys(node).sort(cmp && cmp(node));
-            var out = [];
-            for (var i = 0; i < keys.length; i++) {
-                var key = keys[i];
-                var value = stringify(node, key, node[key], level+1);
-
-                if(!value) continue;
-
-                var keyValue = json.stringify(key)
-                    + colonSeparator
-                    + value;
-                ;
-                out.push(indent + space + keyValue);
-            }
-            seen.splice(seen.indexOf(node), 1);
-            return '{' + out.join(',') + indent + '}';
-        }
-    })({ '': obj }, '', obj, 0);
-};
-
-var isArray = Array.isArray || function (x) {
-    return {}.toString.call(x) === '[object Array]';
-};
-
-var objectKeys = Object.keys || function (obj) {
-    var has = Object.prototype.hasOwnProperty || function () { return true };
-    var keys = [];
-    for (var key in obj) {
-        if (has.call(obj, key)) keys.push(key);
-    }
-    return keys;
-};
-
-
-/***/ }),
-
 /***/ 81758:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
@@ -16279,353 +16188,6 @@ module.exports = function xor (a, b) {
 
 /***/ }),
 
-/***/ 35850:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
-/**
- * Copyright (c) 2020, Peculiar Ventures, All rights reserved.
- */
-
-(function (global, factory) {
-   true ? factory(exports) :
-  0;
-})(this, (function (exports) { 'use strict';
-
-  class BufferSourceConverter {
-      static isArrayBuffer(data) {
-          return Object.prototype.toString.call(data) === '[object ArrayBuffer]';
-      }
-      static toArrayBuffer(data) {
-          const buf = this.toUint8Array(data);
-          if (buf.byteOffset || buf.length) {
-              return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.length);
-          }
-          return buf.buffer;
-      }
-      static toUint8Array(data) {
-          return this.toView(data, Uint8Array);
-      }
-      static toView(data, type) {
-          if (typeof Buffer !== "undefined" && Buffer.isBuffer(data)) {
-              return new type(data.buffer, data.byteOffset, data.byteLength);
-          }
-          if (this.isArrayBuffer(data)) {
-              return new type(data);
-          }
-          if (this.isArrayBufferView(data)) {
-              return new type(data.buffer, data.byteOffset, data.byteLength);
-          }
-          throw new TypeError("The provided value is not of type '(ArrayBuffer or ArrayBufferView)'");
-      }
-      static isBufferSource(data) {
-          return this.isArrayBufferView(data)
-              || this.isArrayBuffer(data);
-      }
-      static isArrayBufferView(data) {
-          return ArrayBuffer.isView(data)
-              || (data && this.isArrayBuffer(data.buffer));
-      }
-      static isEqual(a, b) {
-          const aView = BufferSourceConverter.toUint8Array(a);
-          const bView = BufferSourceConverter.toUint8Array(b);
-          if (aView.length !== bView.byteLength) {
-              return false;
-          }
-          for (let i = 0; i < aView.length; i++) {
-              if (aView[i] !== bView[i]) {
-                  return false;
-              }
-          }
-          return true;
-      }
-  }
-
-  class Utf8Converter {
-      static fromString(text) {
-          const s = unescape(encodeURIComponent(text));
-          const uintArray = new Uint8Array(s.length);
-          for (let i = 0; i < s.length; i++) {
-              uintArray[i] = s.charCodeAt(i);
-          }
-          return uintArray.buffer;
-      }
-      static toString(buffer) {
-          const buf = BufferSourceConverter.toUint8Array(buffer);
-          let encodedString = "";
-          for (let i = 0; i < buf.length; i++) {
-              encodedString += String.fromCharCode(buf[i]);
-          }
-          const decodedString = decodeURIComponent(escape(encodedString));
-          return decodedString;
-      }
-  }
-  class Utf16Converter {
-      static toString(buffer, littleEndian = false) {
-          const arrayBuffer = BufferSourceConverter.toArrayBuffer(buffer);
-          const dataView = new DataView(arrayBuffer);
-          let res = "";
-          for (let i = 0; i < arrayBuffer.byteLength; i += 2) {
-              const code = dataView.getUint16(i, littleEndian);
-              res += String.fromCharCode(code);
-          }
-          return res;
-      }
-      static fromString(text, littleEndian = false) {
-          const res = new ArrayBuffer(text.length * 2);
-          const dataView = new DataView(res);
-          for (let i = 0; i < text.length; i++) {
-              dataView.setUint16(i * 2, text.charCodeAt(i), littleEndian);
-          }
-          return res;
-      }
-  }
-  class Convert {
-      static isHex(data) {
-          return typeof data === "string"
-              && /^[a-z0-9]+$/i.test(data);
-      }
-      static isBase64(data) {
-          return typeof data === "string"
-              && /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(data);
-      }
-      static isBase64Url(data) {
-          return typeof data === "string"
-              && /^[a-zA-Z0-9-_]+$/i.test(data);
-      }
-      static ToString(buffer, enc = "utf8") {
-          const buf = BufferSourceConverter.toUint8Array(buffer);
-          switch (enc.toLowerCase()) {
-              case "utf8":
-                  return this.ToUtf8String(buf);
-              case "binary":
-                  return this.ToBinary(buf);
-              case "hex":
-                  return this.ToHex(buf);
-              case "base64":
-                  return this.ToBase64(buf);
-              case "base64url":
-                  return this.ToBase64Url(buf);
-              case "utf16le":
-                  return Utf16Converter.toString(buf, true);
-              case "utf16":
-              case "utf16be":
-                  return Utf16Converter.toString(buf);
-              default:
-                  throw new Error(`Unknown type of encoding '${enc}'`);
-          }
-      }
-      static FromString(str, enc = "utf8") {
-          if (!str) {
-              return new ArrayBuffer(0);
-          }
-          switch (enc.toLowerCase()) {
-              case "utf8":
-                  return this.FromUtf8String(str);
-              case "binary":
-                  return this.FromBinary(str);
-              case "hex":
-                  return this.FromHex(str);
-              case "base64":
-                  return this.FromBase64(str);
-              case "base64url":
-                  return this.FromBase64Url(str);
-              case "utf16le":
-                  return Utf16Converter.fromString(str, true);
-              case "utf16":
-              case "utf16be":
-                  return Utf16Converter.fromString(str);
-              default:
-                  throw new Error(`Unknown type of encoding '${enc}'`);
-          }
-      }
-      static ToBase64(buffer) {
-          const buf = BufferSourceConverter.toUint8Array(buffer);
-          if (typeof btoa !== "undefined") {
-              const binary = this.ToString(buf, "binary");
-              return btoa(binary);
-          }
-          else {
-              return Buffer.from(buf).toString("base64");
-          }
-      }
-      static FromBase64(base64) {
-          const formatted = this.formatString(base64);
-          if (!formatted) {
-              return new ArrayBuffer(0);
-          }
-          if (!Convert.isBase64(formatted)) {
-              throw new TypeError("Argument 'base64Text' is not Base64 encoded");
-          }
-          if (typeof atob !== "undefined") {
-              return this.FromBinary(atob(formatted));
-          }
-          else {
-              return new Uint8Array(Buffer.from(formatted, "base64")).buffer;
-          }
-      }
-      static FromBase64Url(base64url) {
-          const formatted = this.formatString(base64url);
-          if (!formatted) {
-              return new ArrayBuffer(0);
-          }
-          if (!Convert.isBase64Url(formatted)) {
-              throw new TypeError("Argument 'base64url' is not Base64Url encoded");
-          }
-          return this.FromBase64(this.Base64Padding(formatted.replace(/\-/g, "+").replace(/\_/g, "/")));
-      }
-      static ToBase64Url(data) {
-          return this.ToBase64(data).replace(/\+/g, "-").replace(/\//g, "_").replace(/\=/g, "");
-      }
-      static FromUtf8String(text, encoding = Convert.DEFAULT_UTF8_ENCODING) {
-          switch (encoding) {
-              case "ascii":
-                  return this.FromBinary(text);
-              case "utf8":
-                  return Utf8Converter.fromString(text);
-              case "utf16":
-              case "utf16be":
-                  return Utf16Converter.fromString(text);
-              case "utf16le":
-              case "usc2":
-                  return Utf16Converter.fromString(text, true);
-              default:
-                  throw new Error(`Unknown type of encoding '${encoding}'`);
-          }
-      }
-      static ToUtf8String(buffer, encoding = Convert.DEFAULT_UTF8_ENCODING) {
-          switch (encoding) {
-              case "ascii":
-                  return this.ToBinary(buffer);
-              case "utf8":
-                  return Utf8Converter.toString(buffer);
-              case "utf16":
-              case "utf16be":
-                  return Utf16Converter.toString(buffer);
-              case "utf16le":
-              case "usc2":
-                  return Utf16Converter.toString(buffer, true);
-              default:
-                  throw new Error(`Unknown type of encoding '${encoding}'`);
-          }
-      }
-      static FromBinary(text) {
-          const stringLength = text.length;
-          const resultView = new Uint8Array(stringLength);
-          for (let i = 0; i < stringLength; i++) {
-              resultView[i] = text.charCodeAt(i);
-          }
-          return resultView.buffer;
-      }
-      static ToBinary(buffer) {
-          const buf = BufferSourceConverter.toUint8Array(buffer);
-          let res = "";
-          for (let i = 0; i < buf.length; i++) {
-              res += String.fromCharCode(buf[i]);
-          }
-          return res;
-      }
-      static ToHex(buffer) {
-          const buf = BufferSourceConverter.toUint8Array(buffer);
-          const splitter = "";
-          const res = [];
-          const len = buf.length;
-          for (let i = 0; i < len; i++) {
-              const char = buf[i].toString(16).padStart(2, "0");
-              res.push(char);
-          }
-          return res.join(splitter);
-      }
-      static FromHex(hexString) {
-          let formatted = this.formatString(hexString);
-          if (!formatted) {
-              return new ArrayBuffer(0);
-          }
-          if (!Convert.isHex(formatted)) {
-              throw new TypeError("Argument 'hexString' is not HEX encoded");
-          }
-          if (formatted.length % 2) {
-              formatted = `0${formatted}`;
-          }
-          const res = new Uint8Array(formatted.length / 2);
-          for (let i = 0; i < formatted.length; i = i + 2) {
-              const c = formatted.slice(i, i + 2);
-              res[i / 2] = parseInt(c, 16);
-          }
-          return res.buffer;
-      }
-      static ToUtf16String(buffer, littleEndian = false) {
-          return Utf16Converter.toString(buffer, littleEndian);
-      }
-      static FromUtf16String(text, littleEndian = false) {
-          return Utf16Converter.fromString(text, littleEndian);
-      }
-      static Base64Padding(base64) {
-          const padCount = 4 - (base64.length % 4);
-          if (padCount < 4) {
-              for (let i = 0; i < padCount; i++) {
-                  base64 += "=";
-              }
-          }
-          return base64;
-      }
-      static formatString(data) {
-          return (data === null || data === void 0 ? void 0 : data.replace(/[\n\r\t ]/g, "")) || "";
-      }
-  }
-  Convert.DEFAULT_UTF8_ENCODING = "utf8";
-
-  function assign(target, ...sources) {
-      const res = arguments[0];
-      for (let i = 1; i < arguments.length; i++) {
-          const obj = arguments[i];
-          for (const prop in obj) {
-              res[prop] = obj[prop];
-          }
-      }
-      return res;
-  }
-  function combine(...buf) {
-      const totalByteLength = buf.map((item) => item.byteLength).reduce((prev, cur) => prev + cur);
-      const res = new Uint8Array(totalByteLength);
-      let currentPos = 0;
-      buf.map((item) => new Uint8Array(item)).forEach((arr) => {
-          for (const item2 of arr) {
-              res[currentPos++] = item2;
-          }
-      });
-      return res.buffer;
-  }
-  function isEqual(bytes1, bytes2) {
-      if (!(bytes1 && bytes2)) {
-          return false;
-      }
-      if (bytes1.byteLength !== bytes2.byteLength) {
-          return false;
-      }
-      const b1 = new Uint8Array(bytes1);
-      const b2 = new Uint8Array(bytes2);
-      for (let i = 0; i < bytes1.byteLength; i++) {
-          if (b1[i] !== b2[i]) {
-              return false;
-          }
-      }
-      return true;
-  }
-
-  exports.BufferSourceConverter = BufferSourceConverter;
-  exports.Convert = Convert;
-  exports.assign = assign;
-  exports.combine = combine;
-  exports.isEqual = isEqual;
-
-  Object.defineProperty(exports, '__esModule', { value: true });
-
-}));
-
-
-/***/ }),
-
 /***/ 24400:
 /***/ ((module) => {
 
@@ -16970,6 +16532,29 @@ function randomFillSync (buf, offset, size) {
 
   return actualFill(buf, offset, size)
 }
+
+
+/***/ }),
+
+/***/ 4507:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+/** @license React v16.13.1
+ * react-is.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var b="function"===typeof Symbol&&Symbol.for,c=b?Symbol.for("react.element"):60103,d=b?Symbol.for("react.portal"):60106,e=b?Symbol.for("react.fragment"):60107,f=b?Symbol.for("react.strict_mode"):60108,g=b?Symbol.for("react.profiler"):60114,h=b?Symbol.for("react.provider"):60109,k=b?Symbol.for("react.context"):60110,l=b?Symbol.for("react.async_mode"):60111,m=b?Symbol.for("react.concurrent_mode"):60111,n=b?Symbol.for("react.forward_ref"):60112,p=b?Symbol.for("react.suspense"):60113,q=b?
+Symbol.for("react.suspense_list"):60120,r=b?Symbol.for("react.memo"):60115,t=b?Symbol.for("react.lazy"):60116,v=b?Symbol.for("react.block"):60121,w=b?Symbol.for("react.fundamental"):60117,x=b?Symbol.for("react.responder"):60118,y=b?Symbol.for("react.scope"):60119;
+function z(a){if("object"===typeof a&&null!==a){var u=a.$$typeof;switch(u){case c:switch(a=a.type,a){case l:case m:case e:case g:case f:case p:return a;default:switch(a=a&&a.$$typeof,a){case k:case n:case t:case r:case h:return a;default:return u}}case d:return u}}}function A(a){return z(a)===m}exports.AsyncMode=l;exports.ConcurrentMode=m;exports.ContextConsumer=k;exports.ContextProvider=h;exports.Element=c;exports.ForwardRef=n;exports.Fragment=e;exports.Lazy=t;exports.Memo=r;exports.Portal=d;
+exports.Profiler=g;exports.StrictMode=f;exports.Suspense=p;exports.isAsyncMode=function(a){return A(a)||z(a)===l};exports.isConcurrentMode=A;exports.isContextConsumer=function(a){return z(a)===k};exports.isContextProvider=function(a){return z(a)===h};exports.isElement=function(a){return"object"===typeof a&&null!==a&&a.$$typeof===c};exports.isForwardRef=function(a){return z(a)===n};exports.isFragment=function(a){return z(a)===e};exports.isLazy=function(a){return z(a)===t};
+exports.isMemo=function(a){return z(a)===r};exports.isPortal=function(a){return z(a)===d};exports.isProfiler=function(a){return z(a)===g};exports.isStrictMode=function(a){return z(a)===f};exports.isSuspense=function(a){return z(a)===p};
+exports.isValidElementType=function(a){return"string"===typeof a||"function"===typeof a||a===e||a===m||a===g||a===f||a===p||a===q||"object"===typeof a&&null!==a&&(a.$$typeof===t||a.$$typeof===r||a.$$typeof===h||a.$$typeof===k||a.$$typeof===n||a.$$typeof===w||a.$$typeof===x||a.$$typeof===y||a.$$typeof===v)};exports.typeOf=z;
 
 
 /***/ }),
@@ -21570,7 +21155,7 @@ __webpack_require__.d(__webpack_exports__, {
 });
 
 ;// CONCATENATED MODULE: ./shared-ui/locales/en-US.json
-const en_US_namespaceObject = JSON.parse('{"database_backup":"Backup Database","database_overwrite":"Overwrite Database with backup","database_clear":"Clear Database","debug_new_bug_issue":"New bug issue","debug_metadata_title":"Add new metadata or replace existing metadata","debug_metadata_put_metadata":"Put metadata","edit":"Edit","clear":"Clear","more":"More","approve":"Approve","address":"Address","operation":"Operation","gas_limit":"Gas Limit","gas_price":"Gas Price","redirect_to":"Redirect to","sign":"Sign","reload":"Reload","load":"Load","load_all":"Load All","no_data":"No Data","tip":"Tip","tags":"Tags","contract":"Contract","initializing":"Initializing...","redirect_alert":"If your browser does not redirect, please <terms>click here</terms>.","typed_message_text_alert":"Only TypedMessageText is supported currently.","badge_renderer_provided_by_plugin":"Provided by plugin","add_to_key_store_success":"The public key has been added to the Keystore","add_token":"Add Token","add_nft_contract_search_hint":"Search NFT Contract Symbol Name or Address","applications":"Applications","additional_post_box__encrypted_post_pre":"Decrypt this post with #mask_io ! {{encrypted}}","additional_post_box__encrypted_post_pre_red_packet_twitter_official_account":"Claim this lucky drop with #mask_io @{{account}} {{encrypted}}","additional_post_box__encrypted_post_pre_red_packet":"Claim this lucky drop with #mask_io {{encrypted}}","additional_post_box__steganography_post_pre":"This image is encrypted with #mask_io. 📪🔑 Install mask.io to decrypt it. {{random}}","auto_paste_failed_dialog_title":"Paste manually","auto_paste_failed_dialog_content":"Please copy the following text and image (if there is any) and publish it.","auto_paste_failed_dialog_image_caption":"Open in a new tab","auto_paste_failed_snackbar":"Do you need to paste encrypted content manually?","auto_paste_failed_snackbar_action":"Show me how","auto_paste_failed_snackbar_action_close":"Close","automation_request_click_post_button":"Please click the “Post” button to open the compose dialog.","try_again":"Try Again","ok":"OK","start":"Start","cancel":"Cancel","twitter_account":"realMaskNetwork","facebook_account":"masknetwork","comment_box__placeholder":"Add an encrypted comment…","confirm":"Confirm","copy_text":"Copy text","loading_failed":"Loading failed","copy_image":"Copy image","copy_success_of_wallet_addr":"Copy wallet address successfully!","copy_success_of_text":"Copy text successfully!","copy_success_of_image":"Copy image successfully!","connecting":"Connecting…","create":"Create","copied":"Copied","daily":"Daily","dashboard_tab_collectibles":"Collectibles","dashboard_no_collectible_found":"No collectible found.","dashboard_collectible_menu_all":"All ({{count}})","days":"Every {{days}} days","decrypted_postbox_add_recipients":"Append recipients","decrypted_postbox_decrypting":"Mask decrypting…","decrypted_postbox_decoding":"Mask decoding…","decrypted_postbox_decrypting_finding_person_key":"Mask is looking for the public key of the author…","decrypted_postbox_decrypting_finding_post_key":"Mask is retrieving the post key to decrypt this post…","decrypted_postbox_author_mismatch":"Originally posted by {{name}}","decrypted_postbox_title":"Decrypted by Mask:","dismiss":"Dismiss","delete":"Delete","delete_wallet":"Delete Wallet","hide_token":"Hide Token","hide_token_hint":"You can add <strong>{{token}}</strong> back in the future by going to \\"Add Token\\" in the wallet panel.","done":"Done!","download":"Download","failed":"Failed","buy_now":"Buy Now","setup_guide_login":"Please sign up or log in to connect Mask network.","setup_guide_find_username_text":"Mask needs the username to connect your profile to your persona.","setup_guide_connect_auto":"Connect","setup_guide_connect_failed":"Re-Connect","user_guide_tip_connected":"You have connected to this account successfully.","setup_guide_say_hello_content":"Hello Mask world. This is my first encrypted message. Install https://mask.io to send me encrypted post. ","setup_guide_say_hello_follow":"Follow {{account}} to explore Web 3.0.","setup_guide_pin_tip_0":"Don\'t forget to pin Mask Network in your browser toolbar to access web 3.0 easily.","setup_guide_pin_tip_1":"Click on ","setup_guide_pin_tip_1_s":" at top right of your browser.","setup_guide_pin_tip_2":"Find Mask Network in the list of extensions and click the ","setup_guide_pin_tip_2_s":" button.","setup_guide_pin_tip_3":"Pinned successfully.","setup_guide_pin_dismiss":"Don\'t show again.","user_guide_tip_1":"Connect wallet to explore multi-chain dApps.","user_guide_tip_2":"Setup your exclusive NFT Avatar, explore the endless possibilities of Web 3.0.","user_guide_tip_3":"Click here to have a quick start.","create_persona":"Create persona","connect_persona":"Connect persona","please_create_persona":"Please create persona","please_connect_persona":"Please connect persona","mask_network":"Mask Network","import":"Import","no_search_result":"No result","set_nft_profile_photo":"Set NFT Photo","use_nft":"Use NFT","loading":"Loading...","unlock":"Unlock","payload_bad":"This post seems to be corrupted. Mask cannot decrypt it.","payload_incomplete":"This post is incomplete. You need to view the full post to decrypt it.","payload_not_found":"Payload not found.","payload_throw_in_alpha41":"Support for Alpha41 is deprecated. Tell your friends to upgrade Mask!","personas":"Personas","browser_action_enter_dashboard":"Enter Dashboard","pending":"Pending...","popups_initial_tips":"Please sign in or sign up to use the {{type}}.","beta_sup":"<sup>(beta)<sup>","post_dialog_plugins_experimental":"Plugins <sup>(Experimental)</sup>","post_dialog__button":"Encrypt","post_dialog__dismiss_aria":"Dismiss the compose dialog","post_dialog__image_payload":"Image Payload","post_dialog__more_options_title":"More Options","post_dialog__placeholder":"Text goes here…","post_dialog__select_recipients_end_to_end":"Myself","post_dialog__select_recipients_share_to_everyone":"Everyone","post_dialog__select_recipients_title":"Select Recipients","post_dialog__select_specific_e2e_target_title":"and Mask Network users ({{selected}} selected)","post_dialog__title":"Mask: Compose","post_dialog_enable_paste_auto":"Enable auto paste","post_modal_hint__button":"Compose encrypted post","hide":"Hide","reset":"Reset","editor":"Editor","retry":"Retry","rename":"Rename","search":"Search","go_wrong":"Something went wrong.","search_box_placeholder":"Type here to search","select_all":"Select All","select_none":"Select None","all_friends":"All Friends","select_specific_friends_dialog__button":"Done","select_specific_friends_dialog__title":"Select Specific Contacts","service_decryption_failed":"Decryption failed.","service_invalid_backup_file":"This does not seem like a backup of Mask.","service_not_share_target":"Mask does not find the post key. This post may not be intended to share with you.","service_others_key_not_found":"The public key of {{name}} cannot be found!","service_publish_post_aes_key_failed":"Failed to publish the AES key!","service_self_key_decryption_failed":"Decryption failed. Maybe you selected a wrong identity or imported a key that was not used to encrypt this post.","service_decode_image_payload_failed":"Decode image failed.","service_unknown_payload":"Unknown post version. You may need to update Mask.","service_username_invalid":"Invalid Username","settings_enable_debug":"Debug Mode","settings_enable_debug_desc":"See additional information for debugging.","settings_appearance":"Appearance","settings_appearance_secondary":"Select the theme you would like to use.","settings_language":"Language","settings_language_secondary":"Select the language you would like to use.","settings_choose_eth_network":"Choose Ethereum Network","settings_launch_page":"Launch Page","settings_launch_page_secondary":"Select the default page to open when launch the app","speed_up":"Speed up","save":"Save","skip":"Skip","next":"Next","try":"Try","share":"Share","share_to":"Share to…","sharing":"Sharing","transfer":"Transfer","export":"Export","wallet_load_retry":"Failed to load {{symbol}}. Click to retry.","wallet_name":"Wallet Name","wallet_rename":"Rename Wallet","wallet_add_nft_invalid_owner":"The collectible does not belong to you.","wallet_add_nft_already_added":"The collectible has already been added.","wallet_loading_token":"Loading token...","wallet_loading_nft_contract":"Loading NFT contract...","wallet_search_contract_no_result":"No results or contract address does not meet the query criteria.","wallet_search_no_result":"No results.","wallet_confirm_with_password":"Confirm with password","wallet_airdrop_nft_unclaimed_title":"NFT Airdrop Unclaimed:","plugin_not_enabled":"{{plugin}} (Not Enabled)","plugin_external_unknown_plugin":"New unknown Mask plugins found. Do you want to load them?","plugin_external_loader_search_holder":"Search for an external plugin","plugin_external_loader_search_button":"Search for plugin","plugin_external_loader_search_sub_title":"Every external plugin has to hosted on an URL.","plugin_external_loader_alert":"IT WILL CHANGE. DO NOT BUILD OFFICIAL PRODUCT ON IT.","plugin_external_loader_example_github":"An official plugin example can be found at <terms>GitHub</terms>.","plugin_external_loader_intro":"Mask External plugin is an early stage feature of Mask Network that allows anyone to develop anexternal Mask plugin.","plugin_external_loader_alert_title":"External plugin: an experimental Mask Network feature!","plugin_external_plugin_url":"Plugin URL:","plugin_external_unverified_publisher":"Publisher: {{publisher}} (Unverified)","plugin_external_entry_title":"🧩 Load external plugins (Nightly feature)","plugin_external_name":"External plugin","plugin_external_get_started":"Let\'s get started","plugin_airdrop_nft_start_time":"Start Time: {{date}}","plugin_airdrop_nft_end_time":"End Time: {{date}}","plugin_airdrop_nft_expired":"Expired","plugin_airdrop_nft_claim":"Claim","plugin_airdrop_nft_claimed":"Claimed","plugin_airdrop_nft_check":"Check","plugin_airdrop_nft_check_address":"Check your Address","plugin_airdrop_nft_none_to_claim":"You don’t have airdrop to claim.","plugin_airdrop_nft_number_to_claim":"You have {{count}} {{name}} to claim.","plugin_airdrop_nft_claim_all":"Claim Token","plugin_airdrop_nft_claim_successful":"Token claimed successfully","plugin_airdrop_nft_claim_failed":"Token claimed failed","wallet_balance":"Balance","wallet_balance_eth":"Balance(ETH)","wallet_new":"New Wallet","wallets":"Wallets","wallet_status_button_change":"Change","wallet_status_button_disconnect":"Disconnect","wallet_status_button_disconnecting":"Disconnecting","wallet_status_button_copy_address":"Copy Address","wallet_transfer_account":"Transfer Account","wallet_transfer_receiving_account":"Receiving Account","wallet_transfer_to_address":"To Address","wallet_transfer_send":"Send","wallet_transfer_1559_placeholder":"Ens or Address(0x...)","wallet_transfer_title":"Transfer","wallet_transfer_error_amount_absence":"Enter an amount","wallet_transfer_error_address_absence":"Enter recipient address","wallet_transfer_error_same_address_with_current_account":"This receiving address is the same as the sending address. Please check again.","wallet_transfer_error_is_contract_address":"The receiving address is contract address. Please check again.","wallet_transfer_error_invalid_address":"Invalid recipient address","wallet_transfer_error_no_address_has_been_set_name":"The address of the receiver is invalid.","wallet_transfer_error_no_support_ens":"Network does not support ENS.","wallet_transfer_error_insufficient_balance":"Insufficient {{symbol}} balance","wallet_transfer_error_gas_price_absence":"Enter a gas price","wallet_transfer_error_gas_limit_absence":"Enter a gas limit","wallet_transfer_error_max_fee_absence":"Enter a max fee","wallet_transfer_error_max_priority_fee_absence":"Enter a max priority fee","wallet_transfer_error_max_fee_too_low":"Max fee is too low for network conditions.","wallet_transfer_error_max_fee_too_high":"Max fee is higher than necessary","wallet_transfer_error_max_priority_gas_fee_positive":"Max priority fee must be greater than 0 GWEI","wallet_transfer_error_max_priority_gas_fee_too_low":"Max priority fee is too low for network conditions","wallet_transfer_error_max_priority_gas_fee_too_high":"Max priority fee is higher than necessary. You may pay more than needed.","wallet_transfer_error_max_priority_gas_fee_imbalance":"Max fee cannot be lower than max priority fee","wallet_transfer_gwei":"GWEI","wallet_transfer_between_my_accounts":"Transfer between my accounts","wallet_risk_warning_dialog_title":"Risk Warning","wallet_risk_warning_no_select_wallet":"Not select wallet yet.","wallet_risk_warning_content":"Dear User,<br/><br/>When using any wallet-related plugins in Mask Network, please confirm the following usage risks:<br/><br/>Mask Network provides non-commercial free services. The plug-ins are provided by community members and other excellent third-party DApp teams. Due to the freedom of the decentralized network and other uncertain risk factors, users are requested to properly protect their sensitive information such as wallet mnemonic words and private keys. Please be cautious when conducting any blockchain contract interaction. The risks caused by any third-party DApps (plug-ins) are borne by the third-party DApps themselves. Clicking the confirm button means that you agree to bear the above possible risks.","weekly":"Weekly","wallet_risk_confirm_confirming":"Confirming","wallet_risk_confirm_failed":"Confirm Failed","relative_time_days_ago":"{{days}} days ago","relative_time_hours_ago":"{{hours}} hours ago","relative_time_minutes_ago":"{{minutes}} minutes ago","relative_time_months_ago":"{{months}} months ago","relative_time_seconds_ago":"{{seconds}} seconds ago","relative_time_years_ago":"{{years}} years ago","plugin_chain_not_supported":"Not supported on {{chain}} yet.","plugin_wallet_snackbar_wait_for_confirming":"Confirm this transaction in your wallet","plugin_wallet_snackbar_hash":"Transaction Submitted","plugin_wallet_snackbar_confirmed":"Transaction Confirmed","plugin_wallet_snackbar_success":"Transaction Succeed","plugin_wallet_snackbar_failed":"Transaction Failed","plugin_wallet_snackbar_swap_successful":"Successfully swapped Token","plugin_wallet_snackbar_swap_token":"Swap Token","plugin_wallet_guiding_step_1":"1. Choose Network","plugin_wallet_guiding_step_2":"2. Choose Wallet","plugin_wallet_connect_with":"Connect with","plugin_wallet_connect_with_retry":"Try Again","plugin_wallet_connected_with":"Connected with","plugin_wallet_metamask_error_already_request":"You\'ve opened the popup, please confirm.","plugin_wallet_connect_tip":"Please make sure that your {{providerName}} wallet is provided by the offical <providerLink>{{providerShortenLink}}</providerLink>.","plugin_wallet_collections":"Collections","plugin_wallet_select_a_token":"Select a Token","plugin_wallet_select_a_nft_contract":"Select an NFT Contract","plugin_wallet_select_a_nft_owner":"Select an NFT Contract Owner","plugin_wallet_select_a_nft_operator":"Select an NFT Contract Operator","plugin_wallet_fail_to_load_nft_contract":"Failed to load NFT Contract. Click to retry.","plugin_wallet_nft_approving_all":"Unlocking {{symbol}}...","plugin_wallet_approve_all_nft":"Unlock {{symbol}}","plugin_wallet_approve_all_nft_successfully":"Unlock {{symbol}} successfully","plugin_wallet_connect_a_wallet":"Connect a Wallet","plugin_wallet_confirm_risk_warning":"Confirm Risk Warning","plugin_wallet_no_gas_fee":"No Gas Fee","plugin_wallet_update_gas_fee":"Updating Gas Fee…","plugin_wallet_invalid_network":"Invalid Network","plugin_wallet_select_a_wallet":"Select a Wallet","plugin_wallet_transaction":"Transaction","plugin_wallet_transaction_wait_for_confirmation":"Waiting for confirmation…","plugin_wallet_transaction_submitted":"Your transaction was submitted!","plugin_wallet_transaction_confirmed":"Your transaction was confirmed!","plugin_wallet_transaction_reverted":"Transaction was reverted!","plugin_wallet_transaction_rejected":"Transaction was rejected!","plugin_wallet_transaction_underpriced":"Transaction underpriced.","plugin_wallet_transaction_server_error":"Transaction was failed due to an internal JSON-RPC server error.","plugin_wallet_view_on_explorer":"View on Explorer","plugin_ito_placeholder_when_token_unselected":"Please Select a Token first","plugin_wallet_wrong_network_tip":"Please connect to an appropriate network.","plugin_wallet_on_create":"Create Wallet","plugin_wallet_on_connect":"Connect Wallet","plugin_wallet_wrong_network":"Wrong Network","plugin_wallet_pending_transactions":"{{count}} Pending","plugin_wallet_import_wallet":"Import Wallet","plugin_wallet_select_provider_dialog_title":"Connect Wallet","plugin_wallet_qr_code_with_wallet_connect":"Scan QR code with a WalletConnect-compatible wallet","plugin_wallet_token_unlock":"Exact Unlock","plugin_wallet_token_infinite_unlock":"Infinite Unlock","plugin_wallet_connect_dialog_title":"WalletConnect","plugin_wallet_connect_safari_metamask":"Connect to MetaMask","plugin_wallet_connect_safari_rainbow":"Connect to Rainbow","plugin_wallet_connect_safari_trust":"Connect to Trust","plugin_wallet_connect_safari_im_token":"Connect to imToken","plugin_wallet_on_connect_in_firefox":"Connect","plugin_wallet_return_mobile_wallet_options":"Return to Mobile Wallet Options","plugin_wallet_view_qr_code":"View QR Code","plugin_wallet_switch_network":"Switch to {{network}} Network","plugin_wallet_switch_network_under_going":"Switching to {{network}} Network…","plugin_wallet_not_available_on":"Not available on {{network}} Network.","plugin_wallet_connect_wallet":"Connect Wallet","plugin_wallet_connect_wallet_tip":"Please connect to a wallet.","plugin_wallet_settings_fungible_asset_data_source_primary":"Portfolio Data Source","plugin_wallet_settings_fungible_asset_data_source_secondary":"Select the source of portfolio data.","plugin_wallet_settings_non_fungible_data_source_primary":"Collectible Data Source","plugin_wallet_settings_non_fungible_data_source_secondary":"Select the source of collectible data.","plugin_wallet_name_placeholder":"Enter 1-12 characters","plugin_wallet_fail_to_sign":"Failed to sign password.","plugin_wallet_cancel_sign":"Signature canceled.","plugin_red_packet_display_name":"Plugin: Lucky Drop","plugin_red_packet_claimed":"Claimed","plugin_red_packet_erc20_tab_title":"Token","plugin_red_packet_erc721_tab_title":"Collectibles","plugin_red_packet_erc721_insufficient_balance":"Insufficient Balance","plugin_red_packet_details":"Lucky Drop Details","plugin_red_packet_split_mode":"Split Mode","plugin_red_packet_average":"Average","plugin_red_packet_random":"Random","plugin_red_packet_shares":"Shares","plugin_red_packet_best_wishes":"Best Wishes!","plugin_red_packet_create_new":"New","plugin_red_packet_claim":"Claim","plugin_red_packet_claiming":"Claiming...","plugin_red_packet_refund":"Refund","plugin_red_packet_empty":"Empty","plugin_red_packet_data_broken":"The Lucky Drop can’t be sent due to data damage. Please withdraw the assets after {{duration}}.","plugin_red_packet_refunding":"Refunding","plugin_red_packet_select_existing":"Past","plugin_red_packet_share_message_official_account":"I just claimed a lucky drop from @{{sender}} on {{network}} network. Follow @{{account}} (mask.io) to claim lucky drops.\\n#mask_io #LuckyDrop\\n{{payload}}","plugin_red_packet_share_message_not_twitter":"I just claimed a lucky drop from @{{sender}} on {{network}} network. \\n{{payload}}","plugin_red_packet_nft_share_foreshow_message":"@{{sender}} is sending an NFT lucky drop on {{network}} network. Follow @{{account}} (mask.io) to claim NFT lucky drops.\\n#mask_io #LuckyDrop\\n{{payload}}","plugin_red_packet_nft_share_foreshow_message_not_twitter":"@{{sender}} is sending an NFT lucky drop on {{network}} network. \\n{{payload}}","plugin_red_packet_nft_share_claimed_message":"I just claimed an NFT lucky drop from @{{sender}} on {{network}} network. Follow @{{account}} (mask.io) to claim NFT lucky drops.\\n#mask_io #LuckyDrop\\n{{payload}}","plugin_red_packet_nft_share_claimed_message_not_twitter":"I just claimed an NFT lucky drop from @{{sender}} on {{network}} network. \\n{{payload}}","plugin_red_packet_nft_tip":"This is an NFT lucky drop.","plugin_red_packet_nft_no_history":"You haven’t created any NFT lucky drop yet. Try to create and share lucky with your friends.","plugin_red_packet_attached_message":"Attached Message","plugin_red_packet_from":"From: @{{name}}","plugin_red_packet_description_claimed":"You got {{amount}} {{symbol}}","plugin_red_packet_description_expired":"The Lucky Drop is expired.","plugin_red_packet_description_refunded":"The Lucky Drop has been refunded.","plugin_red_packet_description_refund":"You could refund {{balance}} {{symbol}}.","plugin_red_packet_description_empty":"The Lucky Drop is empty.","plugin_red_packet_description_broken":"The Lucky Drop is broken.","plugin_red_packet_description_failover":"{{shares}} shares / {{total}} {{symbol}}","plugin_red_packet_claiming_from":"Claiming Lucky Drop from {{name}}","plugin_red_packet_refunding_for":"Refunding Lucky Drop for {{balance}} {{symbol}}","plugin_red_packet_amount_per_share":"Amount per Share","plugin_red_packet_send_symbol":"Send {{amount}} {{symbol}}","plugin_red_packet_amount_total":"Amount Total","plugin_red_packet_next":"Next","plugin_red_packet_back":"Back","plugin_red_packet_hint":"You can withdraw the remaining balance 24 hours after the Lucky Drop is sent.","plugin_red_packet_token":"Token","plugin_red_packet_message_label":"Title","plugin_red_packet_create":"Create a Lucky Drop","plugin_red_packet_create_with_token":"Create a Lucky Drop with {{amount}} {{symbol}}","plugin_red_packet_history_duration":"Time: {{startTime}} ~ {{endTime}} (UTC+8)","plugin_red_packet_history_total_amount":"Total Amount: {{amount}} {{symbol}}","plugin_red_packet_history_total_claimed_amount":"Total: <span><strong>{{claimedAmount}}/{{amount}}</strong></span> {{symbol}}","plugin_red_packet_history_claimed":"Claimed: <strong>{{claimedShares}}/{{shares}}</strong> Share","plugin_red_packet_history_split_mode":"Split Mode: {{mode}}","plugin_red_packet_history_send":"Send","plugin_nft_red_packet_create":"Create an NFT Lucky Drop","plugin_red_packet_nft_account_name":"Wallet account","plugin_red_packet_nft_attached_message":"Attached Message","plugin_red_packet_nft_total_amount":"Total Amount","plugin_red_packet_nft_select_collection":"Choose your collection","plugin_red_packet_nft_max_shares":"The maximum number of NFTs to be sold in NFT lucky drop contract is {{amount}}.","plugin_red_packet_nft_max_shares_tip":"The collection lucky drop contract supports up to {{amount}} NFTs for sale.","plugin_red_packet_nft_shift_select_tip":"You can also use <text>{{text}}</text> to select multiple NFTs.","plugin_red_packet_nft_non_existed_tip":"Token ID <tokenIdList></tokenIdList> does not exist or belong to you.","plugin_red_packet_nft_select_all_option":"ALL ({{total}} NFT)","plugin_red_packet_nft_select_partially_option":"Select partially","plugin_red_packet_nft_approve_all_tip":"Note: When selecting approve all, all NFTs in the contract will be authorized for sale by default, including the NFTs transfered later.","plugin_red_packet_completed":"Completed","plugin_red_packet_expired":"Expired","plugin_red_packet_indivisible":"The minimum amount for each share is {{amount}} {{symbol}}","plugin_nft_red_packet_data_broken":"The Lucky Drop can’t be sent due to data damage.","plugin_gitcoin_readme":"By using this service, you will also be contributing 5% of your contribution to the <fund>Gitcoin grants development fund</fund>.","plugin_gitcoin_readme_fund_link":"https://gitcoin.co/grants/86/gitcoin-sustainability-fund","plugin_gitcoin_select_a_token":"Select a token","plugin_gitcoin_enter_an_amount":"Enter an amount","plugin_gitcoin_grant_not_available":"Grant not available","plugin_gitcoin_insufficient_balance":"Insufficient {{symbol}} balance","plugin_gitcoin_donate":"Donate","plugin_gitcoin_last_updated":"Last update:","plugin_gitcoin_by":"By","plugin_gitcoin_view_on":"View on Gitcoin","plugin_trader_fail_to_load":"Fail to load trending info from  ","plugin_trader_lbp_pool_in_balancer":"LBP Pool in Balancer","plugin_trader_tutorial":"Tutorial","plugin_trader_what_is_lbp":"What\'s LBP?","plugin_trader_lbp_intro":"Solid blue line illustrates the historical price of {{symbol}} on the {{symbol}}\'s LBP. The price could continue to go down if no one buys. Please make your investment decision wisely.","plugin_trader_no_pools_found":"No pools found.","plugin_trader_safety_agree":"i understand","plugin_trader_view_on_etherscan":"View on Etherscan","plugin_trader_safety_alert_title":"Token Safety Alert","plugin_trader_safety_alert":"Anyone can create and name any ERC20 token on Ethereum, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token. Similar to Etherscan, this site automatically tracks analytics for all ERC20 tokens independent of token integrity. Please do your own research before interacting with any ERC20 token.","plugin_trader_total_supply":"Total Supply","plugin_trader_circulating_supply":"Circulating Supply","plugin_trader_volume_24":"Volume (24h)","plugin_trader_market_cap":"Market Cap","plugin_trader_data_source":"Data Source","plugin_trader_price_updated":"Price Updated","plugin_trader_view_pair_analytics":"View pair analytics","plugin_savings":"Savings","plugin_savings_type":"Type","plugin_no_protocol_available":"No savings protocols available on this network","plugin_savings_apr":"APR","plugin_savings_wallet":"Wallet","plugin_savings_operation":"Operation","plugin_savings_amount":"Amount","plugin_savings_deposit":"Deposit","plugin_savings_withdraw":"Withdraw","plugin_savings_process_deposit":"Processing Deposit","plugin_savings_process_withdraw":"Processing Withdrawal","plugin_trader_swap":"Swap","plugin_trader_wrap":"Wrap","plugin_trader_unwrap":"Unwrap","plugin_trader_buy":"Buy","plugin_trader_no_data":"No Data","plugin_trader_tab_market":"General","plugin_trader_tab_price":"Price","plugin_trader_tab_exchange":"Exchange","plugin_trader_tab_swap":"Swap 🔥","plugin_trader_table_exchange":"Exchange","plugin_trader_table_pair":"Pair","plugin_trader_table_price":"Price","plugin_trader_table_volume":"Volume (24h)","plugin_trader_table_updated":"Updated","plugin_trader_route":"Route","plugin_trader_portion":"Portion","plugin_trader_error_amount_absence":"Enter an amount","plugin_trader_error_insufficient_balance":"Insufficient {{symbol}} balance","plugin_trader_error_insufficient_lp":"Insufficient liquidity for this trade","plugin_trade_error_input_amount_less_minimum_amount":"Input amount is below the minimum amount","plugin_trader_settings_data_source_primary":"Trending Data Source","plugin_trader_settings_data_source_secondary":"Select the source of cryptocurrencies\' trending data.","plugin_trader_slippage_tolerance":"Slippage Tolerance:","plugin_trader_swap_from":"From","plugin_trader_swap_to":"To(estimated)","plugin_trader_gas_fee":"Gas fee","plugin_trader_unlock_symbol":"Unlock {{symbol}}","plugin_trader_unlock_tips":"You must give the {{provider}} Smart contracts permission to use your {{symbol}}.You only have to do this once per token.","plugin_trader_swap_amount_symbol":"Swap {{amount}} {{symbol}} ","plugin_trader_confirm_from":"From","plugin_trader_confirm_to":"To","plugin_trader_confirm_max_price_slippage":"Max Price Slippage","plugin_trader_confirm_minimum_received":"Minimum Received","plugin_trader_confirm_tips":"Setting the max price slippage too low may cause a trade to fail due to price fluctuations.","plugin_trader_price_impact_warning_tips":"Setting the max price slippage too high may cause the minimum amount returned lower than the amount desired.","plugin_trader_confirm_swap":"Confirm Swap","plugin_trader_accept":"Accept","plugin_trader_price_impact":"Price Impact","plugin_trader_price_image_value":"Price Impact ({{percent}})","plugin_trader_slippage_warning":"You may receive 10% less with this level of slippage tolerance.","plugin_trader_confirm_price_impact":"Confirm Price Impact {{percent}}","plugin_trader_max_slippage":"Max Slippage","plugin_trader_gas_setting_instant":"Instant","plugin_trader_gas_setting_high":"High","plugin_trader_gas_setting_medium":"Medium","plugin_trader_gas_setting_standard":"Standard","plugin_trader_gas_setting_fast":"Fast","plugin_trader_gas_setting_custom":"Custom","plugin_trader_tx_cost_usd":"(~${{usd}})","plugin_trader_gas_option":"{{option}} ({{value}}) Gwei","plugin_trader_no_enough_liquidity":"No enough liquidity","plugin_trader_no_trade":"Please select a trade","plugin_trader_gas":"GAS","plugin_tip_tip":"Tip","plugin_tip_send":"Send","plugin_tip_token":"Token","plugin_tip_nft":"NFT","plugin_poll_display_name":"Plugin: Poll","plugin_poll_question_hint":"Ask a question…","plugin_poll_options_hint":"choice","plugin_poll_length":"Poll length","plugin_poll_length_days":"Days","plugin_poll_length_hours":"Hours","plugin_poll_length_minutes":"Minutes","plugin_poll_length_unknown":"Unknown","plugin_poll_create_new":"Create New","plugin_poll_select_existing":"Past","plugin_poll_send_poll":"Send Poll","plugin_poll_status_closed":"Closed","plugin_poll_status_voting":"Voting","plugin_poll_status_voted":"Voted.","plugin_poll_deadline":"{{time}} left until vote ends","plugin_ito_empty_token":"No need to unlock any token on this ITO.","plugin_ito_locked":"ITO locked","plugin_ito_share":"Share","plugin_ito_enter":"Enter","plugin_ito_dialog_swap_title":"Swap {{token}}","plugin_ito_dialog_swap_reminder_title":"Swap Reminder","plugin_ito_dialog_swap_unlock_title":"Unlock Token In Advance","plugin_ito_dialog_swap_share_title":"Share","plugin_ito_dialog_swap_exchange":"In exchange for","plugin_ito_dialog_swap_panel_title":"Swap","plugin_ito_dialog_swap_exceed_wallet_limit":"Exceeds single wallet limit","plugin_ito_swap_ration_label":"Swap Ratio","plugin_ito_swap_unlucky_fail":"Not lucky enough, please check the reason from the Etherscan link, then try it again.","plugin_ito_swap_only_once_remind":"Each wallet can only participate once.","plugin_ito_swap_title":"{{amount}} {{token}} per {{swap}} ","plugin_ito_swap_end_date":"End in {{date}}.","plugin_ito_dialog_claim_reminder_agree":"I Understand","plugin_ito_dialog_claim_reminder_text1":"Anyone can create a token on {{networkType}} with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.","plugin_ito_dialog_claim_reminder_text2":"This interface can load arbitrary tokens by token address. Please take extra caution and do your own research when interacting with arbitrary tokens.","plugin_ito_dialog_claim_reminder_text3":"If you purchase an arbitrary token, you might not be able to sell it back.","plugin_ito_dialog_claim_reminder_text4":"THE RIGHTS ARE NOT BEING OFFERED OR SOLD AND MAY NOT BE OFFERED OR SOLD, DIRECTLY OR INDIRECTLY, IN WHOLE OR IN PART, IN JURISDICTIONS OR TO WHOM SUCH AN OFFER WOULD BE UNLAWFUL.","plugin_ito_expired":"Expired","plugin_ito_create_new":"New","plugin_ito_claim_all_title":"Claim Token","plugin_ito_claim_all_status_unclaimed":"Unclaimed","plugin_ito_claim_all_status_locked":"Locked","plugin_ito_claim_all_unlock_time":"Unlock Time: {{time}}","plugin_ito_claim_all_dialog_title":"Claim Your Tokens","plugin_ito_swapping":"You will get {{amount}} {{symbol}} if you are lucky. Otherwise, you will receive a refund if the ITO out of stock hits.","plugin_ito_advanced":"Advanced","plugin_ito_advanced_ip_region":"IP Region Restrictions","plugin_ito_advanced_delay_unlocking":"Delay Unlocking Token","plugin_ito_advanced_contract":"Plugin Contract","plugin_ito_select_existing":"Past","plugin_ito_display_name":"ITO Composition Dialog","plugin_ito_sell_token":"Token","plugin_ito_sell_price":"Price","plugin_ito_sell_total_amount":"Input","plugin_ito_allocation_per_wallet":"Swap Limit {{limit}} {{token}}","plugin_ito_allocation_per_wallet_title":"Swap Limit","plugin_ito_begin_time_title":"Start Time","plugin_ito_wait_unlock_time":"Claim after {{unlockTime}} (UTC+8)","plugin_ito_claim":"Claim","plugin_ito_claiming":"Claiming...","plugin_ito_claim_all":"Claim All","plugin_ito_qualification_start_time":"Qualification Start Time:","plugin_ito_error_qualification_start_time":"Invalid: Qualification start time should be earlier than ITO end time","plugin_ito_end_time_title":"End Time","plugin_ito_error_invalid_qualification":"Invalid Qualification Address","plugin_ito_unlock_time_cert":"ITO Mask unlock time is {{date}}.","plugin_ito_unlock_time":"Unlock Time","plugin_ito_launch_campaign":"SocialFi Launch Campaign","plugin_ito_total_claimable_count":"Total: ","plugin_ito_qualification_label":"Plugin Contract","plugin_ito_message_label":"Title","plugin_ito_region_label":"IP Region Selection","plugin_ito_region_confirm_label":"IP Region","plugin_ito_region_list":"{{ select }} / {{ all }} regions","plugin_ito_region_all":"All regions","plugin_ito_region_search":"Type region name to search","plugin_ito_region_ban":"This Pool is banned by its creator at your region","plugin_ito_next":"Next","plugin_ito_back":"Back","plugin_ito_transaction_dialog_summary_with_no_token":"Create an ITO.","plugin_ito_transaction_dialog_summary":"Create an ITO with {{amount}} {{symbol}}.","plugin_ito_swap":"Swap","plugin_ito_send_tip":"You can find your ITOs in the Past tab.","plugin_ito_send_text":"Send {{total}} {{symbol}}","plugin_ito_error_enter_amount":"Enter an amount","plugin_ito_error_select_token":"Select a Token","plugin_ito_error_enter_amount_and_token":"Enter an amount and Select a token","plugin_ito_error_allocation_absence":"Enter swap limit","plugin_ito_error_allocation_invalid":"Invalid amount","plugin_ito_error_exchange_time":"Invalid: start time cannot be later than end time","plugin_ito_error_unlock_time":"Invalid: end time cannot be later than unlock time","plugin_ito_error_balance":"Insufficient {{symbol}} balance","plugin_ito_list_start_date":"Start Time {{date}}","plugin_ito_list_end_date":"End Time {{date}}","plugin_ito_list_sold_total":"Swapped: ","plugin_ito_list_total":"Total: ","plugin_ito_list_table_type":"Type","plugin_ito_list_table_price":"Swap Ratio","plugin_ito_no_claimable_token":"Your wallet address does not have any tokens that can be claimed.","plugin_ito_list_table_sold":"Swapped","plugin_ito_list_table_got":"Balance","plugin_ito_list_button_send":"Send","plugin_ito_withdraw":"Withdraw","plugin_ito_qualification_loading":"Verify qualification…","plugin_ito_qualification_failed":"The wallet address isn\'t on the list.","plugin_ito_withdrawn":"Withdrawn","plugin_ito_your_swapped_amount":"You swapped {{amount}} {{symbol}}","plugin_ito_your_claimed_amount":"You claimed {{amount}} {{symbol}}","plugin_ito_your_refund_amount":"return {{amount}} {{symbol}}.","plugin_ito_unlock_in_advance":"Unlock in Advance","plugin_ito_swapped_status":"{{remain}} / {{total}} {{token}} Swapped","plugin_ito_congratulations":"Congratulations!","plugin_ito_out_of_stock_hit":"Better luck next time","plugin_ito_claim_success_share":"I just attended @{{user}}\'s #ITO with @{{account}} to swap ${{symbol}}. Install mask.io and start your own Initial Twitter Offering! \\n {{link}}","plugin_ito_claim_success_share_no_official_account":"I just attended @{{user}}\'s #ITO to swap ${{symbol}}. Install mask.io and start your own Initial Twitter Offering! \\n {{link}}","plugin_ito_claim_foreshow_share":"{{symbol}}({{name}}) is launching a new #ITO. Come and join it! Follow @{{account}} (mask.io) to find more events! \\n {{link}}","plugin_ito_claim_foreshow_share_no_official_account":"{{symbol}}({{name}}) is launching a new #ITO. Come and join it! \\n {{link}}","plugin_ito_password":"Password: {{password}}","plugin_ito_status_no_start":"Not started","plugin_ito_status_ongoing":"Ongoing","plugin_ito_status_out_of_stock":"Out of stock","plugin_ito_loading":"Loading ITO ...","plugin_ito_amount_unlocked":"Unlocked {{amount}} {{symbol}}","plugin_ito_amount_unlocked_infinity":"Unlocked infinity {{symbol}}","plugin_ito_unlocking_symbol":"Unlocking {{symbol}}","plugin_ito_continue":"Continue","plugin_ito_view_on_explorer":"View on Explorer","plugin_ito_unlock_tip":"Allow the contract <contractLink>{{address}}</contractLink> to use your {{symbol}} tokens when a new ITO round starts later.","plugin_collectible_you":"You","plugin_collectible_done":"Done","plugin_collectible_retry":"Retry","plugin_collectible_get_more_token":"Get more {{token}}","plugin_collectible_sell":"Sell","plugin_collectible_checkout":"Checkout","plugin_collectible_place_bid":"Place Bid","plugin_collectible_buy_now":"Buy Now","plugin_collectible_make_offer":"Make Offer","plugin_collectible_post_listing":"Post Listing","plugin_collectible_description":"Current price is <strong>{{price}} {{symbol}}</strong>.","plugin_collectible_article":"Article","plugin_collectible_overview":"Overview","plugin_collectible_details":"Details","plugin_collectible_offers":"Offers","plugin_collectible_listing":"Listing","plugin_collectible_history":"History","plugin_collectible_event":"Event","plugin_collectible_unit_price":"Unit Price","plugin_collectible_price":"Price","plugin_collectible_from":"From","plugin_collectible_to":"To","plugin_collectible_date":"Date","plugin_collectible_quantity":"Quantity","plugin_collectible_expiration":"Expiration","plugin_collectible_no_offers":"No Offers","plugin_collectible_no_listings":"No Listings","plugin_collectible_base":"Base","plugin_collectible_properties":"Properties","plugin_collectible_about":"About","plugin_collectible_chain_info":"Chain Info","plugin_collectible_contract_address":"Contract Address","plugin_collectible_token_id":"Token ID","plugin_collectible_block_chain":"BlockChain","plugin_collectible_create_by":"Created by","plugin_collectible_owned_by":"Owned by","plugin_collectible_view_on":"View on","plugin_collectible_no_history":"No History","plugin_collectible_ensure_unreviewed_item":"Please ensure unreviewed item","plugin_collectible_check_tos_document":"Please check ToS document","plugin_collectible_insufficient_offer":"Insufficient Offer","plugin_collectible_not_been_reviewed_by_opensea":"This item has not been reviewed by OpenSea.","plugin_collectible_reviewed_tips":"You should proceed with extra caution. Anyone can create a digital item on a blockchain with any\\n                        name, including fake versions of existing items. Please take extra caution and do your research\\n                        when interacting with this item to ensure it\'s what it chains to be.","plugin_collectible_total":"Total","plugin_collectible_subtotal":"Subtotal","plugin_collectible_item":"Item","plugin_collectible_approved_tips":"By checking this box, I acknowledge that this item has not been reviewed\\n                                                or approved by OpenSea.","plugin_collectible_agree_terms":"By checking this box, I agree to OpenSea\'s <terms>Terms of Service</terms>.","plugin_collectible_convert_eth":"Convert ETH","plugin_collectible_sale_end":"Sale ends in {{time}}","plugin_collectible_set_initial_price":"Set an initial price.","plugin_collectible_ending_price_tip":"Will be on sale until you transfer this item or cancel it.","plugin_collectible_starting_price":"Starting Price","plugin_collectible_ending_price":"Ending Price","plugin_collectible_ending_price_less_than_staring":"Must be less than or equal to the starting price. The price will progress linearly to this amount until the expiration date.","plugin_collectible_expiration_date":"Expiration date","plugin_collectible_schedule_date":"Schedule Date","plugin_collectible_auto_cancel_tip":"Your listing will automatically end at this time. No need to cancel it!","plugin_collectible_schedule_future_date":"Schedule a future date.","plugin_collectible_buyer_address":"Buyer Address","plugin_collectible_buyer_address_placeholder":"Enter the buyer\'s address.","plugin_collectible_buyer_address_helper_text":"Only the buyer is allowed to buy it.","plugin_collectible_include_ending_price":"Include ending price","plugin_collectible_include_ending_price_helper":"Adding an ending price will allow this listing to expire, or for the price to be\\n                                    reduced until a buyer is found.","plugin_collectible_schedule_for_a_future_time":"Schedule for a future time","plugin_collectible_schedule_for_a_future_time_helper":"You can schedule this listing to only be buyable at a future data.","plugin_collectible_privacy":"Privacy","plugin_collectible_privacy_helper":"You can keep your listing public, or you can specify one address that\'s allowed to\\n                                    buy it.","plugin_collectible_enter_a_price":"Enter a price","plugin_collectible_insufficient_balance":"Insufficient balance","plugin_collectible_invalid_schedule_date":"Invalid schedule date","plugin_collectible_invalid_ending_price":"Invalid ending price","plugin_collectible_invalid_expiration_date":"Invalid expiration date","plugin_collectible_invalid_buyer_address":"Invalid buyer address","plugin_collectible_set_price":"Set Price","plugin_collectible_highest_bid":"Highest Bid","plugin_collectible_minimum_bid":"Minimum Bid","plugin_collectible_set_starting_bid_price":"Set your starting bid price.","plugin_collectible_reserve_price":"Reserve Price","plugin_collectible_reserve_price_helper":"Create a hidden limit by setting a reserve price. Reserve price must be greater than or equal to the start amount.","plugin_collectible_auction_auto_end":"Your auction will automatically end at this time and the highest bidder will win. No need to cancel it!","plugin_collectible_enter_minimum_bid":"Enter minimum bid","plugin_collectible_enter_reserve_price":"Enter reserve price","plugin_collectible_invalid_reserve_price":"Invalid reserve price","plugin_collectible_place_a_bid":"Place a Bid","plugin_collectible_make_an_offer":"Make an Offer","plugin_collectible_approved_by_open_sea":"By checking this box, I acknowledge that this item has not been reviewed or approved by OpenSea.","plugin_collectible_legal_text":"By checking this box, I agree to OpenSea\'s <terms>Terms of Service</terms>.","plugin_cryptoartai_description_title":"Description","plugin_cryptoartai_edition":"Edition of","plugin_cryptoartai_operator":"Operator","plugin_cryptoartai_activity_type":"Type","plugin_cryptoartai_status":"Status","plugin_cryptoartai_time":"Time","plugin_cryptoartai_price":"Price","plugin_cryptoartai_tx":"Tx","plugin_cryptoartai_latest_bid":"Latest Bid","plugin_cryptoartai_description":"Current Bid is <strong>{{bidPrice}}{{symbol}}</strong>, price is <strong>{{price}}{{symbol}}</strong>. Edition {{soldNum}} of {{totalAvailable}} #{{editionNumber}}.","plugin_cryptoartai_no_price_description":"Current Bid is <strong>{{bidPrice}}{{symbol}}</strong>. Edition {{soldNum}} of {{totalAvailable}} #{{editionNumber}}.","plugin_cryptoartai_sold_description":"Sold for <strong>{{soldPrice}}{{symbol}}</strong>. Edition {{soldNum}} of {{totalAvailable}} #{{editionNumber}}.","plugin_cryptoartai_buy":"Buy","plugin_cryptoartai_buy_now":"Buy now","plugin_cryptoartai_current_balance":"Current balance","plugin_cryptoartai_current_highest_offer":"Current highest offer is ","plugin_cryptoartai_bid_least":"Your must bid at least ","plugin_cryptoartai_escrowed":"Your offer will be escrowed in the smart contract until it is accepted or you withdraw it","plugin_cryptoartai_current_balance_is":"Current balance is ","plugin_cryptoartai_auction_end":"Auction has ended","plugin_cryptoartai_auction_end_time":"Auction end time ","plugin_cryptoartai_share":"I just paid {{amount}} {{symbol}} for {{title}} on {{assetLink}}.\\nPlease install Mask plugin, and follow @{{account}} to join it too.\\n#mask_io","plugin_cryptoartai_share_no_official_account":"I just paid {{amount}} {{symbol}} for {{title}} on {{assetLink}}. Welcome to join.","plugin_cryptoartai_offer_share":"I just offered {{amount}} {{symbol}} for {{title}} on {{assetLink}}.\\nPlease install Mask plugin, and follow @{{account}} to join it too.\\n#mask_io","plugin_cryptoartai_offer_share_no_official_account":"I just offered {{amount}} {{symbol}} for {{title}} on {{assetLink}}. Welcome to join.","plugin_snapshot_info_title":"Information","plugin_snapshot_info_strategy":"Strategie(s)","plugin_snapshot_info_author":"Author","plugin_snapshot_info_ipfs":"IPFS","plugin_snapshot_info_start":"Start date","plugin_snapshot_info_end":"End date","plugin_snapshot_info_snapshot":"Snapshot","plugin_snapshot_result_title":"Results","plugin_snapshot_votes_title":"Votes","plugin_snapshot_no_power":"No power","plugin_snapshot_vote_success":"Your vote is in!","plugin_snapshot_vote":"Vote","plugin_snapshot_vote_choice":"Choice","plugin_snapshot_vote_power":"Your voting power","plugin_snapshot_vote_title":"Cast your vote","plugin_snapshot_vote_confirm_dialog_title":"Confirm Vote","plugin_snapshot_vote_confirm_dialog_choice":"Are you sure you want to vote \\"{{ choiceText }}\\"?","plugin_snapshot_vote_confirm_dialog_warning":"This action cannot be undone.","plugin_snapshot_current_result_title":"Current results","plugin_snapshot_download_report":"Download report","plugin_find_truman_display_name":"FindTruman - Statistics","plugin_find_truman_status_puzzle":"Story Puzzle","plugin_find_truman_status_poll":"Plot Voting","plugin_find_truman_status_result":"Stage Result","plugin_find_truman_status_puzzle_result":"Revealing Answer","plugin_find_truman_status_poll_result":"Plot Confirmation","plugin_find_truman_puzzle_to_be_revealed":"puzzle is left to be revealed.","plugin_find_truman_puzzles_to_be_revealed":"puzzles are left to be revealed","plugin_find_truman_poll_to_be_revealed":"vote continues to be tallied.","plugin_find_truman_polls_to_be_revealed":"votes continue to be tallied","plugin_find_truman_puzzle_underway":"The puzzle hasn\'t been revealed yet.","plugin_find_truman_puzzle_rate":"Accuracy: ","plugin_find_truman_voting_underway":"The voting continues to be tallied.","plugin_find_truman_voting_rate":"Hit rate: ","plugin_find_truman_submit_failed":"Failed to submit.","plugin_find_truman_vote":"vote","plugin_find_truman_votes":"votes","plugin_find_truman_selected":"Selected","plugin_find_truman_unselect":"Select","plugin_find_truman_answer":"Answer","plugin_find_truman_result":"Result","plugin_find_truman_buy":"BUY","plugin_find_truman_decrypted_by":"Decrypted by FindTruman:","plugin_find_truman_insufficient_nft":"The following specific NFTs are needed for this vote.","plugin_find_truman_buy_nft_tip":"At least {{count}} copy of this NFT is required.","plugin_find_truman_connect_wallet_tip":"Please connect to a wallet.","plugin_find_truman_no_participation_tip":"You have not participated in any vote yet.","plugin_dhedge_managed_by":"Managed by <manager>{{managerName}}</manager>","plugin_dhedge_manager_share":"Holds <share>{{managerShare}}%</share> of the pool","plugin_dhedge_manager_share_more_than_50":"Holds more than 50% of the pool","plugin_dhedge_value_managed":"VALUE MANAGED","plugin_dhedge_lifetime_return":"LIFETIME RETURN","plugin_dhedge_risk_factor":"RISK FACTOR","plugin_dhedge_tab_stats":"Stats","plugin_dhedge_tab_chart":"Chart","plugin_dhedge_strategy":"Strategy","plugin_dhedge_see_less":"See less","plugin_dhedge_see_more":"See more","plugin_dhedge_no_data":"No Data","plugin_dhedge_fetch_error":"Unable to fetch data, please try again!","plugin_dhedge_loading_chart":"Loading","plugin_dhedge_invest":"INVEST","plugin_dhedge_buy_token":"GET {{symbol}}","plugin_dhedge_enter_an_amount":"Enter an amount","plugin_dhedge_insufficient_balance":"Insufficient {{symbol}} balance","plugin_dhedge_loading":"Loading...","plugin_dhedge_pool_not_found":"Invalid pool address.","plugin_dhedge_smt_wrong":"Something went wrong!","plugin_pooltogether_tab_pools":"Pools","plugin_pooltogether_tab_account":"Account","plugin_pooltogether_no_pool":"There is no pool on this network.","plugin_pooltogether_pool_ended":"Awarded","plugin_pooltogether_deposit":"Deposit {{token}}","plugin_pooltogether_deposit_msg":"Deposit","plugin_pooltogether_apr":"Earn {{apr}}% APR in {{token}}","plugin_pooltogether_view_pool":"View pool","plugin_pooltogether_prize":"{{period}} Prize","plugin_pooltogether_share":"I just deposit {{amount}} {{cashTag}}{{symbol}} into the {{pool}}, can I win the lottery this week?\\nFollow @PoolTogether_ and @{{account}} (mask.io) to deposit in PoolTogether\'s pools.\\n#pooltogether #mask_io","plugin_pooltogether_share_no_official_account":"I just deposit {{amount}} {{cashTag}}{{symbol}} into the {{pool}}, can I win the lottery this week?","plugin_pooltogether_buy":"GET {{symbol}}","plugin_pooltogether_enter_an_amount":"Enter an amount","plugin_pooltogether_insufficient_balance":"Insufficient {{symbol}} balance","plugin_pooltogether_deposit_title":"Deposit {{token}} to win","plugin_pooltogether_odds_title":"New odds of winning:","plugin_pooltogether_odds_value":"1 in {{value}} {{period}}!","plugin_pooltogether_short_odds_value":"1 in {{value}}","plugin_pooltogether_my_deposits":"Total Deposits","plugin_pooltogether_no_account_pool":"You don\'t have any pool in this network","plugin_pooltogether_missing_pool":"Missing some deposits? Check the complete listing at:\\n","plugin_pooltogether_winning_odds":"Winning odds:","plugin_pooltogether_in":"in","plugin_pooltogether_manage":"Manage","plugin_pooltogether_token_not_found":"Token not found!","plugin_good_ghosting_loading_other_player_stats":"Loading other players\' stats","plugin_good_ghosting_loading_game_stats":"Loading game stats","plugin_good_ghosting_game_duration":"Game Duration","plugin_good_ghosting_current_round":"Current Round","plugin_good_ghosting_recurring_deposit":"Deposit Per Round","plugin_good_ghosting_round_length":"Round Length","plugin_good_ghosting_pool_apy":"Pool APY","plugin_good_ghosting_pool_earnings":"Pool Earnings","plugin_good_ghosting_extra_rewards":"Extra Rewards","plugin_good_ghosting_total_saved":"Total Saved","plugin_good_ghosting_game_launched":"Game Launched","plugin_good_ghosting_join_round":"Join Round","plugin_good_ghosting_join_deadline":"Join Deadline","plugin_good_ghosting_deposit":"Deposit {{index}}","plugin_good_ghosting_deposit_deadline":"Deposit Deadline {{index}}","plugin_good_ghosting_waiting_round":"Waiting Round","plugin_good_ghosting_waiting_round_end":"Waiting Period Ends","plugin_good_ghosting_withdraw":"Withdraw","plugin_good_ghosting_all_players_status_winning":"Winning","plugin_good_ghosting_all_players_status_waiting":"Waiting","plugin_good_ghosting_all_players_status_ghost":"Ghosts","plugin_good_ghosting_all_players_status_dropout":"Drop-outs","plugin_good_ghosting_status_winning":"Winning","plugin_good_ghosting_status_waiting":"Waiting","plugin_good_ghosting_status_ghost":"Ghost","plugin_good_ghosting_status_dropout":"Withdrawn","plugin_good_ghosting_status_unknown":"Unknown","plugin_good_ghosting_status":"Status","plugin_good_ghosting_deposits":"Deposits made","plugin_good_ghosting_total_deposited":"Total deposited","plugin_good_ghosting_address":"Address","plugin_good_ghosting_not_a_participant":"Looks like you\'re not a participant in this game.","plugin_good_ghosting_next_event":"Coming up next","plugin_good_ghosting_game_end":"This game has ended","plugin_good_ghosting_game_over":"Game Over","plugin_good_ghosting_participants_withdraw":"Participants can now withdraw their earnings!","plugin_good_ghosting_join_game":"Join Game","plugin_good_ghosting_make_deposit":"Make Deposit","plugin_good_ghosting_join_help_text":"Deposit your first {{amount}} {{token}} and join this savings pool. To win, you need to deposit money into the savings pool every round, prior to the round\'s deadline.","plugin_good_ghosting_deposit_help_text":"Deposit {{segmentPayment}} {{token}} for this round and continue to be a winner.","plugin_good_ghosting_withdraw_help_text":"The game has ended! You can now withdraw your deposits, along with any earnings that you won.","plugin_good_ghosting_leave_game":"Leave Game","plugin_good_ghosting_early_withdraw_info":"If you wish to withdraw from an ongoing game, you may be charged a small fee of {{amount}} {{token}} to compensate the remaining players in the savings pool.","plugin_good_ghosting_rules":"Rules","plugin_good_ghosting_game_rules":"Deposit {{amount}} {{token}} every round for {{roundCount}} rounds to win the game. If other players miss depositing in a round and become ghosts, their earnings will go to you.","plugin_good_ghosting_tx_fail":"Failed to complete the transaction.","plugin_good_ghosting_tx_timeout":"Cannot read transaction status.","plugin_good_ghosting_something_went_wrong":"Something went wrong, please try again.","plugin_good_ghosting_view_on_explorer":"View on Explorer","plugin_good_ghosting_checking_balance":"Checking Balance...","plugin_good_ghosting_insufficient_balance":"You need at least {{amount}} {{token}} in your wallet to do this.","plugin_good_ghosting_balance_error":"Failed to check balance. Click to retry.","plugin_unlockprotocol_buy_lock":"Buy Lock","plugin_unlockprotocol_buy_lock_alert":"Please look for and buy an active lock","plugin_unlockprotocol_no_access":"You don\'t have access to this content","plugin_unlockprotocol_select_unlock_lock":"Select Unlock Lock","plugin_unlockprotocol_no_lock_found":"No lock found. Create your own lock at <dashboard>Unlock protocol Creator Dashboard</dashboard>.","plugin_unlockprotocol_submit_post":"Submit Post","plugin_unlockprotocol_title":"Unlock Protocol","plugin_unlockprotocol_server_error":"Some Server error occured, Please try again later.","plugin_furucombo_tab_pool":"Pool","plugin_furucombo_tab_investments":"All investments","plugin_furucombo_liquidity":"Liquidity","plugin_furucombo_annual_percentage_yield":"Apy","plugin_furucombo_rewards":"Rewards","plugin_furucombo_invest":"Invest","plugin_furucombo_pool_not_found":"Invalid pool address.","plugin_furucombo_smt_wrong":"Something went wrong!","plugin_furucombo_head_pools":"Pools","plugin_furucombo_head_action":"Action","plugin_pets_dialog_title":"Non-Fungible Friends","plugin_pets_dialog_title_share":"Successful","plugin_pets_dialog_contract":"NFT Contract","plugin_pets_dialog_token":"Token ID","plugin_pets_dialog_msg":"Greeting message","plugin_pets_dialog_msg_optional":"Optional, 100 characters max.","plugin_pets_dialog_btn":"Confirm","plugin_pets_dialog_btn_share":"Share","plugin_pets_dialog_preview":"Preview","plugin_pets_dialog_created":"Created by MintTeam","plugin_pets_dialog_powered":"Powered by RSS3","plugin_pets_dialog_success":"Your Non-Fungible Friend has been set up successfully","plugin_pets_dialog_fail":"Setting failed, please try later","plugin_pets_dialog_check_title":"Show NFT friends on the profile page.","popups_following_permissions":"The plugin ({{pluginName}}) (hosted on {{pluginURL}}) is going to request the following permissions:","popups_permissions":"Permissions","popups_sites":"Sites","popups_mask_requests_permission":"Mask needs the following permissions","popups_grant":"Grant","popups_permission_request":"Permission request","popups_permission_request_content":"To continue, Mask Network needs permission to access the following URL:","popups_permission_request_content2":"This gives Mask Network the necessary abilities to provide the requested function properly.","popups_welcome":"Welcome","popups_wallet_token":"Token","popups_wallet_dialog_legacy_wallet_tip":"Detected legacy wallets, please click confirm to restore them all.","popups_wallet_set_payment_password":"Set the payment password","popups_wallet_payment_password":"Payment Password","popups_wallet_re_payment_password":"Re-enter the payment password","popups_wallet_set_up_payment_password":"Set up payment password","popups_wallet_payment_password_tip":"The Payment password must be a combination of 2 categories out of numbers, letters, and special characters with a length of 8-20 characters.","popups_wallet_go_back":"Go back","popups_wallet_start_up_tip":"Connect to your wallet, create a new wallet or recover an existing wallet using a seed phrase.","popups_wallet_name_placeholder":"Enter 1-12 characters","popups_wallet_name_mnemonic":"Mnemonic","popups_wallet_name_json_file":"Json File","popups_wallet_name_private_key":"Private Key","popups_wallet_name_mnemonic_placeholder":"Please enter 12 mnemonic words separated by spaces","popups_wallet_name_origin_password":"Original Password","popups_wallet_tab_assets":"Assets","popups_wallet_tab_activity":"Activity","popups_wallet_derivation_path":"Derivation path ({{ path }})","popups_wallet_next":"Next","popups_wallet_backup_wallet":"Back up the wallet","popups_wallet_backup_json_file":"JSON File","popups_wallet_backup_private_key":"Private Key","popups_wallet_backup_json_file_confirm_password_tip":"This file has been encrypted and stored with your current password. Your current password is needed to decrypt this file when using it to import wallet.","popups_wallet_backup_private_key_tip":"Please don’t show anyone your private key. The private key can be used in any wallet that supports EVM-compatible chains without decryption.","popups_wallet_backup_input_password":"Input your password","popups_wallet_backup_json_file_drag_tip":"Drag your file into here…","popups_wallet_backup_json_file_click_tip":"Click or drag your file here","popups_wallet_enter_your_wallet_name":"Enter your wallet name","popups_wallet_delete_tip":"Are you sure you want to delete this wallet? Your wallet cannot be recovered without seed phrase.","popups_wallet_confirm_payment_password":"Confirm with payment password","popups_wallet_token_buy":"Buy","popups_wallet_token_send":"Send","popups_wallet_token_swap":"Swap","popups_wallet_view_on_explorer":"View on Explorer","popups_wallet_gas_fee_settings":"Gas fee settings","popups_wallet_gas_fee_settings_description":"Gas fees are the fees for paying ethereum miners. The miners prefer to pack transactions with higher gas fees. Transactions with low gas fees might fail, and the paid gas fees won’t be returned.","popups_wallet_gas_fee_settings_low":"Low","popups_wallet_gas_fee_settings_medium":"Medium","popups_wallet_gas_fee_settings_high":"High","popups_wallet_gas_fee_settings_usd":" ≈ ${{usd}}","popups_wallet_gas_fee_settings_gas_limit":"Gas Limit","popups_wallet_gas_fee_settings_max_priority_fee":"Max priority fee","popups_wallet_gas_fee_settings_max_fee":"Max fee","popups_wallet_gas_fee_settings_min_gas_limit_tips":"Gas limit must be at least {{limit}}","popups_wallet_unsupported_network":"Unsupported network type","popups_wallet_signature_request":"Signature request","popups_wallet_signature_request_message":"Message","popups_wallet_contract_interaction":"Contract Interaction","popups_wallet_token_unlock_permission":"Token unlock permission","popups_wallet_token_infinite_unlock":"Infinite unlock","popups_wallet_contract_interaction_transfer":"Transfer","popups_wallet_contract_interaction_gas_fee":"Gas fee","popups_wallet_contract_interaction_edit":"Edit","popups_wallet_contract_interaction_total":"Total","popups_wallet_password_dont_match":"The password does not match.","popups_wallet_password_satisfied_requirement":"The password is not satisfied the requirement.","popups_wallet_password_length_error":"The password length is incorrect.","popups_wallet_unlock_wallet":"Unlock Wallet","popups_wallet_unlock_error_password":"Password is incorrect","popups_wallet_activity_to_address":"To: {{address}}","popups_wallet_transfer_error_tip":"Network connection failure or contract error, send transaction failure.","popups_wallet_transactions_pending":"Pending...","popups_wallet_re_send":"Re-Send","popups_wallet_choose_token":"Choose Token","popups_wallet_gas_price":"Gas Price","popups_wallet_done":"Done","popups_wallet_recovered":"Wallet recovered","popups_wallet_no_transactions":"You have no transactions","popups_missing_parameter_caption":"Please close this page.","popups_persona_connect_to":"Connect to {{type}}","popups_persona_disconnect":"Disconnect","popups_persona_logout":"Log out","popups_persona_disconnect_tip":"After logging out, your associated social accounts can no longer decrypt past encrypted messages. If you need to reuse your account, you can recover your account with your identity, private key, local or cloud backup.","popups_persona_persona_name_exists":"The persona name already exists","popups_persona_sign_request_title":"Signature request","popups_persona_sign_request_message":"message","popups_password_do_not_match":"Incorrect backup password","popups_backup_password":"Backup Password","popups_rename_error_tip":"Maximum length is {{length}} characters long.","nft_wallet_label":"Wallet","plugin_profile_no_wallets":"Connect your wallet here.<br/>This section will be shown to your encrypted friends.<br/>The display content includes digital art, donations, badges<br/>and other public information on chain.","plugin_vcent_last_offer_at":"LATEST OFFER at","nft_input_address_label":"Please input contract address","nft_input_tokenid_label":"Please input token ID","nft_owner_hint":"This NFT does not exist or does not belong to you.","nft_add_dialog_title":"Add Collectible","nft_add_button_label":"Add","nft_list_title":"NFT Avatar Setting","nft_wallet_change":"Change","nft_button_add_collectible":"Add Collectible","nft_avatar":"NFT Avatar","web3_tab_hint":"No address found.","plugin_artblocks_not_active":"This project is no more active","plugin_artblocks_completed":"Completed","plugin_artblocks_paused":"Paused","plugin_artblocks_collection":"Collection","plugin_artblocks_details":"Details","plugin_artblocks_created_by":"Created by","plugin_artblocks_purchase":"Purchase","plugin_artblocks_purchasing":"Purchasing....","plugin_artblocks_legal_text":"By checking this box, I agree to ArtBlocks\'s <terms>Terms of Service</terms>.","plugin_artblocks_check_tos_document":"Please check ToS document","plugin_artblocks_price_per_mint":"Price per mint","plugin_artblocks_price_row":"Price:","plugin_artblocks_minted_row":"Minted:","plugin_artblocks_license_row":"License:","plugin_artblocks_library_row":"Library:","plugin_artblocks_website":"Website","plugin_artblocks_infos":"Infos","plugin_artblocks_chain":"Chain","plugin_artblocks_blockchain_row":"Blockchain:","plugin_artblocks_contract_row":"Contract:","plugin_artblocks_smt_wrong":"Something went wrong!","plugin_artblocks_share":"I just purchased a beautiful piece of art from \'{{name}}\' collection for {{price}} {{symbol}}. Install @realMaskNetwork to get yours.","plugin_artblocks_share_no_official_account":"I just purchased a beautiful piece of art from \'{{name}}\' collection for {{price}} {{symbol}}. Welcome to join.","nft_button_set_avatar":"Set NFT Avatar"}');
+const en_US_namespaceObject = JSON.parse('{"database_backup":"Backup Database","database_overwrite":"Overwrite Database with backup","database_clear":"Clear Database","debug_new_bug_issue":"New bug issue","debug_metadata_title":"Add new metadata or replace existing metadata","debug_metadata_put_metadata":"Put metadata","edit":"Edit","clear":"Clear","more":"More","approve":"Approve","address":"Address","operation":"Operation","gas_limit":"Gas Limit","gas_price":"Gas Price","redirect_to":"Redirect to","sign":"Sign","reload":"Reload","load":"Load","load_all":"Load All","no_data":"No Data","tip":"Tip","tags":"Tags","contract":"Contract","initializing":"Initializing...","redirect_alert":"If your browser does not redirect, please <terms>click here</terms>.","typed_message_text_alert":"Only TypedMessageText is supported currently.","badge_renderer_provided_by_plugin":"Provided by plugin","add_to_key_store_success":"The public key has been added to the Keystore","add_token":"Add Token","add_nft_contract_search_hint":"Search NFT Contract Symbol Name or Address","applications":"Applications","additional_post_box__encrypted_post_pre":"Decrypt this post with #mask_io ! {{encrypted}}","additional_post_box__encrypted_post_pre_red_packet_twitter_official_account":"Claim this lucky drop with #mask_io @{{account}} {{encrypted}}","additional_post_box__encrypted_post_pre_red_packet":"Claim this lucky drop with #mask_io {{encrypted}}","additional_post_box__steganography_post_pre":"This image is encrypted with #mask_io. 📪🔑 Install mask.io to decrypt it. {{random}}","auto_paste_failed_dialog_title":"Paste manually","auto_paste_failed_dialog_content":"Please copy the following text and image (if there is any) and publish it.","auto_paste_failed_dialog_image_caption":"Open in a new tab","auto_paste_failed_snackbar":"Do you need to paste encrypted content manually?","auto_paste_failed_snackbar_action":"Show me how","auto_paste_failed_snackbar_action_close":"Close","automation_request_click_post_button":"Please click the “Post” button to open the compose dialog.","try_again":"Try Again","ok":"OK","start":"Start","cancel":"Cancel","twitter_account":"realMaskNetwork","facebook_account":"masknetwork","comment_box__placeholder":"Add an encrypted comment…","confirm":"Confirm","copy_text":"Copy text","loading_failed":"Loading failed","copy_image":"Copy image","copy_success_of_wallet_addr":"Copy wallet address successfully!","copy_success_of_text":"Copy text successfully!","copy_success_of_image":"Copy image successfully!","connecting":"Connecting…","create":"Create","copied":"Copied","daily":"Daily","dashboard_tab_collectibles":"Collectibles","dashboard_no_collectible_found":"No collectible found.","dashboard_collectible_menu_all":"All ({{count}})","days":"Every {{days}} days","decrypted_postbox_add_recipients":"Append recipients","decrypted_postbox_decrypting":"Mask decrypting…","decrypted_postbox_decoding":"Mask decoding…","decrypted_postbox_decrypting_finding_person_key":"Mask is looking for the public key of the author…","decrypted_postbox_decrypting_finding_post_key":"Mask is retrieving the post key to decrypt this post…","decrypted_postbox_author_mismatch":"Originally posted by {{name}}","decrypted_postbox_title":"Decrypted by Mask:","dismiss":"Dismiss","delete":"Delete","delete_wallet":"Delete Wallet","hide_token":"Hide Token","hide_token_hint":"You can add <strong>{{token}}</strong> back in the future by going to \\"Add Token\\" in the wallet panel.","done":"Done!","download":"Download","failed":"Failed","buy_now":"Buy Now","setup_guide_login":"Please sign up or log in to connect Mask network.","setup_guide_find_username_text":"Mask needs the username to connect your profile to your persona.","setup_guide_connect_auto":"Connect","setup_guide_connect_failed":"Re-Connect","setup_guide_verify":"Verfiy","setup_guide_verify_dismiss":"Don\'t show again.","setup_guide_verify_checking":"Checking","setup_guide_verify_post_not_found":"No verification post found","setup_guide_verifying":"Verfiying","setup_guide_verifying_failed":"Re-Verfiy","user_guide_tip_connected":"You have connected to this account successfully.","user_guide_tip_need_verify_on_next_id":"Mask Network requires you to post an verification tweet to access Next.ID-based products.","setup_guide_say_hello_content":"Hello Mask world. This is my first encrypted message. Install https://mask.io to send me encrypted post. ","setup_guide_say_hello_follow":"Follow {{account}} to explore Web 3.0.","setup_guide_pin_tip":"Don\'t forget to pin Mask Network in your browser toolbar to access web 3.0 easily.","setup_guide_pin_tip_step_click_left":"Click on ","setup_guide_pin_tip_step_click_right":" at top right of your browser.","setup_guide_pin_tip_step_find_left":"Find Mask Network in the list of extensions and click the ","setup_guide_pin_tip_step_find_right":" button.","setup_guide_pin_tip_successfully":"Pinned successfully.","setup_guide_pin_dismiss":"Don\'t show again.","user_guide_tip_1":"Connect wallet to explore multi-chain dApps.","user_guide_tip_2":"Setup your exclusive NFT Avatar, explore the endless possibilities of Web 3.0.","user_guide_tip_3":"Click here to have a quick start.","create_persona":"Create persona","connect_persona":"Connect persona","please_create_persona":"Please create persona","please_connect_persona":"Please connect persona","mask_network":"Mask Network","import":"Import","no_search_result":"No result","set_nft_profile_photo":"Set NFT Photo","use_nft":"Use NFT","loading":"Loading...","unlock":"Unlock","payload_bad":"This post seems to be corrupted. Mask cannot decrypt it.","payload_incomplete":"This post is incomplete. You need to view the full post to decrypt it.","payload_not_found":"Payload not found.","payload_throw_in_alpha41":"Support for Alpha41 is deprecated. Tell your friends to upgrade Mask!","personas":"Personas","browser_action_enter_dashboard":"Enter Dashboard","pending":"Pending...","popups_initial_tips":"Please sign in or sign up to use the {{type}}.","beta_sup":"<sup>(beta)<sup>","post_dialog_plugins_experimental":"Plugins <sup>(Experimental)</sup>","post_dialog__button":"Encrypt","post_dialog__dismiss_aria":"Dismiss the compose dialog","post_dialog__image_payload":"Image Payload","post_dialog__more_options_title":"More Options","post_dialog__placeholder":"Text goes here…","post_dialog__select_recipients_end_to_end":"Myself","post_dialog__select_recipients_share_to_everyone":"Everyone","post_dialog__select_recipients_title":"Select Recipients","post_dialog__select_specific_e2e_target_title":"and Mask Network users ({{selected}} selected)","post_dialog__title":"Mask: Compose","post_dialog_enable_paste_auto":"Enable auto paste","post_modal_hint__button":"Compose encrypted post","hide":"Hide","reset":"Reset","editor":"Editor","retry":"Retry","rename":"Rename","search":"Search","go_wrong":"Something went wrong.","search_box_placeholder":"Type here to search","select_all":"Select All","select_none":"Select None","all_friends":"All Friends","select_specific_friends_dialog__button":"Done","select_specific_friends_dialog__title":"Select Specific Contacts","service_decryption_failed":"Decryption failed.","service_invalid_backup_file":"This does not seem like a backup of Mask.","service_not_share_target":"Mask does not find the post key. This post may not be intended to share with you.","service_others_key_not_found":"The public key of {{name}} cannot be found!","service_publish_post_aes_key_failed":"Failed to publish the AES key!","service_self_key_decryption_failed":"Decryption failed. Maybe you selected a wrong identity or imported a key that was not used to encrypt this post.","service_decode_image_payload_failed":"Decode image failed.","service_unknown_payload":"Unknown post version. You may need to update Mask.","service_username_invalid":"Invalid Username","settings_enable_debug":"Debug Mode","settings_enable_debug_desc":"See additional information for debugging.","settings_appearance":"Appearance","settings_appearance_secondary":"Select the theme you would like to use.","settings_language":"Language","settings_language_secondary":"Select the language you would like to use.","settings_choose_eth_network":"Choose Ethereum Network","settings_launch_page":"Launch Page","settings_launch_page_secondary":"Select the default page to open when launch the app","speed_up":"Speed up","save":"Save","skip":"Skip","next":"Next","try":"Try","share":"Share","share_to":"Share to…","sharing":"Sharing","transfer":"Transfer","export":"Export","wallet_load_retry":"Failed to load {{symbol}}. Click to retry.","wallet_name":"Wallet Name","wallet_rename":"Rename Wallet","wallet_add_nft_invalid_owner":"The collectible does not belong to you.","wallet_add_nft_already_added":"The collectible has already been added.","wallet_loading_token":"Loading token...","wallet_loading_nft_contract":"Loading NFT contract...","wallet_search_contract_no_result":"No results or contract address does not meet the query criteria.","wallet_search_no_result":"No results.","wallet_confirm_with_password":"Confirm with password","wallet_airdrop_nft_unclaimed_title":"NFT Airdrop Unclaimed:","plugin_not_enabled":"{{plugin}} (Not Enabled)","plugin_external_unknown_plugin":"New unknown Mask plugins found. Do you want to load them?","plugin_external_loader_search_holder":"Search for an external plugin","plugin_external_loader_search_button":"Search for plugin","plugin_external_loader_search_sub_title":"Every external plugin has to hosted on an URL.","plugin_external_loader_alert":"IT WILL CHANGE. DO NOT BUILD OFFICIAL PRODUCT ON IT.","plugin_external_loader_example_github":"An official plugin example can be found at <terms>GitHub</terms>.","plugin_external_loader_intro":"Mask External plugin is an early stage feature of Mask Network that allows anyone to develop anexternal Mask plugin.","plugin_external_loader_alert_title":"External plugin: an experimental Mask Network feature!","plugin_external_plugin_url":"Plugin URL:","plugin_external_unverified_publisher":"Publisher: {{publisher}} (Unverified)","plugin_external_entry_title":"🧩 Load external plugins (Nightly feature)","plugin_external_name":"External plugin","plugin_external_get_started":"Let\'s get started","plugin_airdrop_nft_start_time":"Start Time: {{date}}","plugin_airdrop_nft_end_time":"End Time: {{date}}","plugin_airdrop_nft_expired":"Expired","plugin_airdrop_nft_claim":"Claim","plugin_airdrop_nft_claimed":"Claimed","plugin_airdrop_nft_check":"Check","plugin_airdrop_nft_check_address":"Check your Address","plugin_airdrop_nft_none_to_claim":"You don’t have airdrop to claim.","plugin_airdrop_nft_number_to_claim":"You have {{count}} {{name}} to claim.","plugin_airdrop_nft_claim_all":"Claim Token","plugin_airdrop_nft_claim_successful":"Token claimed successfully","plugin_airdrop_nft_claim_failed":"Token claimed failed","wallet_balance":"Balance","wallet_balance_eth":"Balance(ETH)","wallet_new":"New Wallet","wallets":"Wallets","wallet_status_button_change":"Change","wallet_status_button_disconnect":"Disconnect","wallet_status_button_disconnecting":"Disconnecting","wallet_status_button_copy_address":"Copy Address","wallet_transfer_account":"Transfer Account","wallet_transfer_receiving_account":"Receiving Account","wallet_transfer_to_address":"To Address","wallet_transfer_send":"Send","wallet_transfer_1559_placeholder":"Ens or Address(0x...)","wallet_transfer_title":"Transfer","wallet_transfer_error_amount_absence":"Enter an amount","wallet_transfer_error_address_absence":"Enter recipient address","wallet_transfer_error_same_address_with_current_account":"This receiving address is the same as the sending address. Please check again.","wallet_transfer_error_is_contract_address":"The receiving address is contract address. Please check again.","wallet_transfer_error_invalid_address":"Invalid recipient address","wallet_transfer_error_no_address_has_been_set_name":"The address of the receiver is invalid.","wallet_transfer_error_no_support_ens":"Network does not support ENS.","wallet_transfer_error_insufficient_balance":"Insufficient {{symbol}} balance","wallet_transfer_error_gas_price_absence":"Enter a gas price","wallet_transfer_error_gas_limit_absence":"Enter a gas limit","wallet_transfer_error_max_fee_absence":"Enter a max fee","wallet_transfer_error_max_priority_fee_absence":"Enter a max priority fee","wallet_transfer_error_max_fee_too_low":"Max fee is too low for network conditions.","wallet_transfer_error_max_fee_too_high":"Max fee is higher than necessary","wallet_transfer_error_max_priority_gas_fee_positive":"Max priority fee must be greater than 0 GWEI","wallet_transfer_error_max_priority_gas_fee_too_low":"Max priority fee is too low for network conditions","wallet_transfer_error_max_priority_gas_fee_too_high":"Max priority fee is higher than necessary. You may pay more than needed.","wallet_transfer_error_max_priority_gas_fee_imbalance":"Max fee cannot be lower than max priority fee","wallet_transfer_gwei":"GWEI","wallet_transfer_between_my_accounts":"Transfer between my accounts","wallet_risk_warning_dialog_title":"Risk Warning","wallet_risk_warning_no_select_wallet":"Not select wallet yet.","wallet_risk_warning_content":"Dear User,<br/><br/>When using any wallet-related plugins in Mask Network, please confirm the following usage risks:<br/><br/>Mask Network provides non-commercial free services. The plug-ins are provided by community members and other excellent third-party DApp teams. Due to the freedom of the decentralized network and other uncertain risk factors, users are requested to properly protect their sensitive information such as wallet mnemonic words and private keys. Please be cautious when conducting any blockchain contract interaction. The risks caused by any third-party DApps (plug-ins) are borne by the third-party DApps themselves. Clicking the confirm button means that you agree to bear the above possible risks.","weekly":"Weekly","wallet_risk_confirm_confirming":"Confirming","wallet_risk_confirm_failed":"Confirm Failed","relative_time_days_ago":"{{days}} days ago","relative_time_hours_ago":"{{hours}} hours ago","relative_time_minutes_ago":"{{minutes}} minutes ago","relative_time_months_ago":"{{months}} months ago","relative_time_seconds_ago":"{{seconds}} seconds ago","relative_time_years_ago":"{{years}} years ago","plugin_chain_not_supported":"Not supported on {{chain}} yet.","plugin_wallet_snackbar_wait_for_confirming":"Confirm this transaction in your wallet","plugin_wallet_snackbar_hash":"Transaction Submitted","plugin_wallet_snackbar_confirmed":"Transaction Confirmed","plugin_wallet_snackbar_success":"Transaction Succeed","plugin_wallet_snackbar_failed":"Transaction Failed","plugin_wallet_snackbar_swap_successful":"Successfully swapped Token","plugin_wallet_snackbar_swap_token":"Swap Token","plugin_wallet_guiding_step_1":"1. Choose Network","plugin_wallet_guiding_step_2":"2. Choose Wallet","plugin_wallet_connect_with":"Connect with","plugin_wallet_connect_with_retry":"Try Again","plugin_wallet_connected_with":"Connected with","plugin_wallet_metamask_error_already_request":"You\'ve opened the popup, please confirm.","plugin_wallet_connect_tip":"Please make sure that your {{providerName}} wallet is provided by the offical <providerLink>{{providerShortenLink}}</providerLink>.","plugin_wallet_collections":"Collections","plugin_wallet_select_a_token":"Select a Token","plugin_wallet_select_a_nft_contract":"Select an NFT Contract","plugin_wallet_select_a_nft_owner":"Select an NFT Contract Owner","plugin_wallet_select_a_nft_operator":"Select an NFT Contract Operator","plugin_wallet_fail_to_load_nft_contract":"Failed to load NFT Contract. Click to retry.","plugin_wallet_nft_approving_all":"Unlocking {{symbol}}...","plugin_wallet_approve_all_nft":"Unlock {{symbol}}","plugin_wallet_approve_all_nft_successfully":"Unlock {{symbol}} successfully","plugin_wallet_connect_a_wallet":"Connect a Wallet","plugin_wallet_confirm_risk_warning":"Confirm Risk Warning","plugin_wallet_no_gas_fee":"No Gas Fee","plugin_wallet_update_gas_fee":"Updating Gas Fee…","plugin_wallet_invalid_network":"Invalid Network","plugin_wallet_select_a_wallet":"Select a Wallet","plugin_wallet_transaction":"Transaction","plugin_wallet_transaction_wait_for_confirmation":"Waiting for confirmation…","plugin_wallet_transaction_submitted":"Your transaction was submitted!","plugin_wallet_transaction_confirmed":"Your transaction was confirmed!","plugin_wallet_transaction_reverted":"Transaction was reverted!","plugin_wallet_transaction_rejected":"Transaction was rejected!","plugin_wallet_transaction_underpriced":"Transaction underpriced.","plugin_wallet_transaction_server_error":"Transaction was failed due to an internal JSON-RPC server error.","plugin_wallet_view_on_explorer":"View on Explorer","plugin_ito_placeholder_when_token_unselected":"Please Select a Token first","plugin_wallet_wrong_network_tip":"Please connect to an appropriate network.","plugin_wallet_on_create":"Create Wallet","plugin_wallet_on_connect":"Connect Wallet","plugin_wallet_wrong_network":"Wrong Network","plugin_wallet_pending_transactions":"{{count}} Pending","plugin_wallet_import_wallet":"Import Wallet","plugin_wallet_select_provider_dialog_title":"Connect Wallet","plugin_wallet_qr_code_with_wallet_connect":"Scan QR code with a WalletConnect-compatible wallet","plugin_wallet_token_unlock":"Exact Unlock","plugin_wallet_token_infinite_unlock":"Infinite Unlock","plugin_wallet_connect_dialog_title":"WalletConnect","plugin_wallet_connect_safari_metamask":"Connect to MetaMask","plugin_wallet_connect_safari_rainbow":"Connect to Rainbow","plugin_wallet_connect_safari_trust":"Connect to Trust","plugin_wallet_connect_safari_im_token":"Connect to imToken","plugin_wallet_on_connect_in_firefox":"Connect","plugin_wallet_return_mobile_wallet_options":"Return to Mobile Wallet Options","plugin_wallet_view_qr_code":"View QR Code","plugin_wallet_switch_network":"Switch to {{network}} Network","plugin_wallet_switch_network_under_going":"Switching to {{network}} Network…","plugin_wallet_not_available_on":"Not available on {{network}} Network.","plugin_wallet_connect_wallet":"Connect Wallet","plugin_wallet_connect_wallet_tip":"Please connect to a wallet.","plugin_wallet_settings_fungible_asset_data_source_primary":"Portfolio Data Source","plugin_wallet_settings_fungible_asset_data_source_secondary":"Select the source of portfolio data.","plugin_wallet_settings_non_fungible_data_source_primary":"Collectible Data Source","plugin_wallet_settings_non_fungible_data_source_secondary":"Select the source of collectible data.","plugin_wallet_name_placeholder":"Enter 1-12 characters","plugin_wallet_fail_to_sign":"Failed to sign password.","plugin_wallet_cancel_sign":"Signature canceled.","plugin_red_packet_display_name":"Plugin: Lucky Drop","plugin_red_packet_claimed":"Claimed","plugin_red_packet_erc20_tab_title":"Token","plugin_red_packet_erc721_tab_title":"Collectibles","plugin_red_packet_erc721_insufficient_balance":"Insufficient Balance","plugin_red_packet_details":"Lucky Drop Details","plugin_red_packet_split_mode":"Split Mode","plugin_red_packet_average":"Average","plugin_red_packet_random":"Random","plugin_red_packet_shares":"Shares","plugin_red_packet_best_wishes":"Best Wishes!","plugin_red_packet_create_new":"New","plugin_red_packet_claim":"Claim","plugin_red_packet_claiming":"Claiming...","plugin_red_packet_refund":"Refund","plugin_red_packet_empty":"Empty","plugin_red_packet_data_broken":"The Lucky Drop can’t be sent due to data damage. Please withdraw the assets after {{duration}}.","plugin_red_packet_refunding":"Refunding","plugin_red_packet_select_existing":"Past","plugin_red_packet_share_message_official_account":"I just claimed a lucky drop from @{{sender}} on {{network}} network. Follow @{{account}} (mask.io) to claim lucky drops.\\n#mask_io #LuckyDrop\\n{{payload}}","plugin_red_packet_share_message_not_twitter":"I just claimed a lucky drop from @{{sender}} on {{network}} network. \\n{{payload}}","plugin_red_packet_nft_share_foreshow_message":"@{{sender}} is sending an NFT lucky drop on {{network}} network. Follow @{{account}} (mask.io) to claim NFT lucky drops.\\n#mask_io #LuckyDrop\\n{{payload}}","plugin_red_packet_nft_share_foreshow_message_not_twitter":"@{{sender}} is sending an NFT lucky drop on {{network}} network. \\n{{payload}}","plugin_red_packet_nft_share_claimed_message":"I just claimed an NFT lucky drop from @{{sender}} on {{network}} network. Follow @{{account}} (mask.io) to claim NFT lucky drops.\\n#mask_io #LuckyDrop\\n{{payload}}","plugin_red_packet_nft_share_claimed_message_not_twitter":"I just claimed an NFT lucky drop from @{{sender}} on {{network}} network. \\n{{payload}}","plugin_red_packet_nft_tip":"This is an NFT lucky drop.","plugin_red_packet_nft_no_history":"You haven’t created any NFT lucky drop yet. Try to create and share lucky with your friends.","plugin_red_packet_attached_message":"Attached Message","plugin_red_packet_from":"From: @{{name}}","plugin_red_packet_description_claimed":"You got {{amount}} {{symbol}}","plugin_red_packet_description_expired":"The Lucky Drop is expired.","plugin_red_packet_description_refunded":"The Lucky Drop has been refunded.","plugin_red_packet_description_refund":"You could refund {{balance}} {{symbol}}.","plugin_red_packet_description_empty":"The Lucky Drop is empty.","plugin_red_packet_description_broken":"The Lucky Drop is broken.","plugin_red_packet_description_failover":"{{shares}} shares / {{total}} {{symbol}}","plugin_red_packet_claiming_from":"Claiming Lucky Drop from {{name}}","plugin_red_packet_refunding_for":"Refunding Lucky Drop for {{balance}} {{symbol}}","plugin_red_packet_amount_per_share":"Amount per Share","plugin_red_packet_send_symbol":"Send {{amount}} {{symbol}}","plugin_red_packet_amount_total":"Amount Total","plugin_red_packet_next":"Next","plugin_red_packet_back":"Back","plugin_red_packet_hint":"You can withdraw the remaining balance 24 hours after the Lucky Drop is sent.","plugin_red_packet_token":"Token","plugin_red_packet_message_label":"Title","plugin_red_packet_create":"Create a Lucky Drop","plugin_red_packet_create_with_token":"Create a Lucky Drop with {{amount}} {{symbol}}","plugin_red_packet_history_duration":"Time: {{startTime}} ~ {{endTime}} (UTC+8)","plugin_red_packet_history_total_amount":"Total Amount: {{amount}} {{symbol}}","plugin_red_packet_history_total_claimed_amount":"Total: <span><strong>{{claimedAmount}}/{{amount}}</strong></span> {{symbol}}","plugin_red_packet_history_claimed":"Claimed: <strong>{{claimedShares}}/{{shares}}</strong> Share","plugin_red_packet_history_split_mode":"Split Mode: {{mode}}","plugin_red_packet_history_send":"Send","plugin_nft_red_packet_create":"Create an NFT Lucky Drop","plugin_red_packet_nft_account_name":"Wallet account","plugin_red_packet_nft_attached_message":"Attached Message","plugin_red_packet_nft_total_amount":"Total Amount","plugin_red_packet_nft_select_collection":"Choose your collection","plugin_red_packet_nft_max_shares":"The maximum number of NFTs to be sold in NFT lucky drop contract is {{amount}}.","plugin_red_packet_nft_max_shares_tip":"The collection lucky drop contract supports up to {{amount}} NFTs for sale.","plugin_red_packet_nft_shift_select_tip":"You can also use <text>{{text}}</text> to select multiple NFTs.","plugin_red_packet_nft_non_existed_tip":"Token ID <tokenIdList></tokenIdList> does not exist or belong to you.","plugin_red_packet_nft_select_all_option":"ALL ({{total}} NFT)","plugin_red_packet_nft_select_partially_option":"Select partially","plugin_red_packet_nft_approve_all_tip":"Note: When selecting approve all, all NFTs in the contract will be authorized for sale by default, including the NFTs transfered later.","plugin_red_packet_completed":"Completed","plugin_red_packet_expired":"Expired","plugin_red_packet_indivisible":"The minimum amount for each share is {{amount}} {{symbol}}","plugin_nft_red_packet_data_broken":"The Lucky Drop can’t be sent due to data damage.","plugin_gitcoin_readme":"By using this service, you will also be contributing 5% of your contribution to the <fund>Gitcoin grants development fund</fund>.","plugin_gitcoin_readme_fund_link":"https://gitcoin.co/grants/86/gitcoin-sustainability-fund","plugin_gitcoin_select_a_token":"Select a token","plugin_gitcoin_enter_an_amount":"Enter an amount","plugin_gitcoin_grant_not_available":"Grant not available","plugin_gitcoin_insufficient_balance":"Insufficient {{symbol}} balance","plugin_gitcoin_donate":"Donate","plugin_gitcoin_last_updated":"Last update:","plugin_gitcoin_by":"By","plugin_gitcoin_view_on":"View on Gitcoin","plugin_trader_fail_to_load":"Fail to load trending info from  ","plugin_trader_lbp_pool_in_balancer":"LBP Pool in Balancer","plugin_trader_tutorial":"Tutorial","plugin_trader_what_is_lbp":"What\'s LBP?","plugin_trader_lbp_intro":"Solid blue line illustrates the historical price of {{symbol}} on the {{symbol}}\'s LBP. The price could continue to go down if no one buys. Please make your investment decision wisely.","plugin_trader_no_pools_found":"No pools found.","plugin_trader_safety_agree":"i understand","plugin_trader_view_on_etherscan":"View on Etherscan","plugin_trader_safety_alert_title":"Token Safety Alert","plugin_trader_safety_alert":"Anyone can create and name any ERC20 token on Ethereum, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token. Similar to Etherscan, this site automatically tracks analytics for all ERC20 tokens independent of token integrity. Please do your own research before interacting with any ERC20 token.","plugin_trader_total_supply":"Total Supply","plugin_trader_circulating_supply":"Circulating Supply","plugin_trader_volume_24":"Volume (24h)","plugin_trader_market_cap":"Market Cap","plugin_trader_data_source":"Data Source","plugin_trader_price_updated":"Price Updated","plugin_trader_view_pair_analytics":"View pair analytics","plugin_savings":"Savings","plugin_savings_type":"Type","plugin_no_protocol_available":"No savings protocols available on this network","plugin_savings_apr":"APR","plugin_savings_wallet":"Wallet","plugin_savings_operation":"Operation","plugin_savings_amount":"Amount","plugin_savings_deposit":"Deposit","plugin_savings_withdraw":"Withdraw","plugin_savings_process_deposit":"Processing Deposit","plugin_savings_process_withdraw":"Processing Withdrawal","plugin_trader_swap":"Swap","plugin_trader_wrap":"Wrap","plugin_trader_unwrap":"Unwrap","plugin_trader_buy":"Buy","plugin_trader_no_data":"No Data","plugin_trader_tab_market":"General","plugin_trader_tab_price":"Price","plugin_trader_tab_exchange":"Exchange","plugin_trader_tab_swap":"Swap 🔥","plugin_trader_table_exchange":"Exchange","plugin_trader_table_pair":"Pair","plugin_trader_table_price":"Price","plugin_trader_table_volume":"Volume (24h)","plugin_trader_table_updated":"Updated","plugin_trader_route":"Route","plugin_trader_portion":"Portion","plugin_trader_error_amount_absence":"Enter an amount","plugin_trader_error_insufficient_balance":"Insufficient {{symbol}} balance","plugin_trader_error_insufficient_lp":"Insufficient liquidity for this trade","plugin_trade_error_input_amount_less_minimum_amount":"Input amount is below the minimum amount","plugin_trader_settings_data_source_primary":"Trending Data Source","plugin_trader_settings_data_source_secondary":"Select the source of cryptocurrencies\' trending data.","plugin_trader_slippage_tolerance":"Slippage Tolerance:","plugin_trader_swap_from":"From","plugin_trader_swap_to":"To(estimated)","plugin_trader_gas_fee":"Gas fee","plugin_trader_unlock_symbol":"Unlock {{symbol}}","plugin_trader_unlock_tips":"You must give the {{provider}} Smart contracts permission to use your {{symbol}}.You only have to do this once per token.","plugin_trader_swap_amount_symbol":"Swap {{amount}} {{symbol}} ","plugin_trader_confirm_from":"From","plugin_trader_confirm_to":"To","plugin_trader_confirm_max_price_slippage":"Max Price Slippage","plugin_trader_confirm_minimum_received":"Minimum Received","plugin_trader_confirm_tips":"Setting the max price slippage too low may cause a trade to fail due to price fluctuations.","plugin_trader_price_impact_warning_tips":"Setting the max price slippage too high may cause the minimum amount returned lower than the amount desired.","plugin_trader_confirm_swap":"Confirm Swap","plugin_trader_accept":"Accept","plugin_trader_price_impact":"Price Impact","plugin_trader_price_image_value":"Price Impact ({{percent}})","plugin_trader_slippage_warning":"You may receive 10% less with this level of slippage tolerance.","plugin_trader_confirm_price_impact":"Confirm Price Impact {{percent}}","plugin_trader_max_slippage":"Max Slippage","plugin_trader_gas_setting_instant":"Instant","plugin_trader_gas_setting_high":"High","plugin_trader_gas_setting_medium":"Medium","plugin_trader_gas_setting_standard":"Standard","plugin_trader_gas_setting_fast":"Fast","plugin_trader_gas_setting_custom":"Custom","plugin_trader_tx_cost_usd":"(~${{usd}})","plugin_trader_gas_option":"{{option}} ({{value}}) Gwei","plugin_trader_no_enough_liquidity":"No enough liquidity","plugin_trader_no_trade":"Please select a trade","plugin_trader_gas":"GAS","plugin_tip_tip":"Tip","plugin_tip_send":"Send","plugin_tip_token":"Token","plugin_tip_nft":"NFT","plugin_poll_display_name":"Plugin: Poll","plugin_poll_question_hint":"Ask a question…","plugin_poll_options_hint":"choice","plugin_poll_length":"Poll length","plugin_poll_length_days":"Days","plugin_poll_length_hours":"Hours","plugin_poll_length_minutes":"Minutes","plugin_poll_length_unknown":"Unknown","plugin_poll_create_new":"Create New","plugin_poll_select_existing":"Past","plugin_poll_send_poll":"Send Poll","plugin_poll_status_closed":"Closed","plugin_poll_status_voting":"Voting","plugin_poll_status_voted":"Voted.","plugin_poll_deadline":"{{time}} left until vote ends","plugin_ito_empty_token":"No need to unlock any token on this ITO.","plugin_ito_locked":"ITO locked","plugin_ito_share":"Share","plugin_ito_enter":"Enter","plugin_ito_dialog_swap_title":"Swap {{token}}","plugin_ito_dialog_swap_reminder_title":"Swap Reminder","plugin_ito_dialog_swap_unlock_title":"Unlock Token In Advance","plugin_ito_dialog_swap_share_title":"Share","plugin_ito_dialog_swap_exchange":"In exchange for","plugin_ito_dialog_swap_panel_title":"Swap","plugin_ito_dialog_swap_exceed_wallet_limit":"Exceeds single wallet limit","plugin_ito_swap_ration_label":"Swap Ratio","plugin_ito_swap_unlucky_fail":"Not lucky enough, please check the reason from the Etherscan link, then try it again.","plugin_ito_swap_only_once_remind":"Each wallet can only participate once.","plugin_ito_swap_title":"{{amount}} {{token}} per {{swap}} ","plugin_ito_swap_end_date":"End in {{date}}.","plugin_ito_dialog_claim_reminder_agree":"I Understand","plugin_ito_dialog_claim_reminder_text1":"Anyone can create a token on {{networkType}} with any name, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.","plugin_ito_dialog_claim_reminder_text2":"This interface can load arbitrary tokens by token address. Please take extra caution and do your own research when interacting with arbitrary tokens.","plugin_ito_dialog_claim_reminder_text3":"If you purchase an arbitrary token, you might not be able to sell it back.","plugin_ito_dialog_claim_reminder_text4":"THE RIGHTS ARE NOT BEING OFFERED OR SOLD AND MAY NOT BE OFFERED OR SOLD, DIRECTLY OR INDIRECTLY, IN WHOLE OR IN PART, IN JURISDICTIONS OR TO WHOM SUCH AN OFFER WOULD BE UNLAWFUL.","plugin_ito_expired":"Expired","plugin_ito_create_new":"New","plugin_ito_claim_all_title":"Claim Token","plugin_ito_claim_all_status_unclaimed":"Unclaimed","plugin_ito_claim_all_status_locked":"Locked","plugin_ito_claim_all_unlock_time":"Unlock Time: {{time}}","plugin_ito_claim_all_dialog_title":"Claim Your Tokens","plugin_ito_swapping":"You will get {{amount}} {{symbol}} if you are lucky. Otherwise, you will receive a refund if the ITO out of stock hits.","plugin_ito_advanced":"Advanced","plugin_ito_advanced_ip_region":"IP Region Restrictions","plugin_ito_advanced_delay_unlocking":"Delay Unlocking Token","plugin_ito_advanced_contract":"Plugin Contract","plugin_ito_select_existing":"Past","plugin_ito_display_name":"ITO Composition Dialog","plugin_ito_sell_token":"Token","plugin_ito_sell_price":"Price","plugin_ito_sell_total_amount":"Input","plugin_ito_allocation_per_wallet":"Swap Limit {{limit}} {{token}}","plugin_ito_allocation_per_wallet_title":"Swap Limit","plugin_ito_begin_time_title":"Start Time","plugin_ito_wait_unlock_time":"Claim after {{unlockTime}} (UTC+8)","plugin_ito_claim":"Claim","plugin_ito_claiming":"Claiming...","plugin_ito_claim_all":"Claim All","plugin_ito_qualification_start_time":"Qualification Start Time:","plugin_ito_error_qualification_start_time":"Invalid: Qualification start time should be earlier than ITO end time","plugin_ito_end_time_title":"End Time","plugin_ito_error_invalid_qualification":"Invalid Qualification Address","plugin_ito_unlock_time_cert":"ITO Mask unlock time is {{date}}.","plugin_ito_unlock_time":"Unlock Time","plugin_ito_launch_campaign":"SocialFi Launch Campaign","plugin_ito_total_claimable_count":"Total: ","plugin_ito_qualification_label":"Plugin Contract","plugin_ito_message_label":"Title","plugin_ito_region_label":"IP Region Selection","plugin_ito_region_confirm_label":"IP Region","plugin_ito_region_list":"{{ select }} / {{ all }} regions","plugin_ito_region_all":"All regions","plugin_ito_region_search":"Type region name to search","plugin_ito_region_ban":"This Pool is banned by its creator at your region","plugin_ito_next":"Next","plugin_ito_back":"Back","plugin_ito_transaction_dialog_summary_with_no_token":"Create an ITO.","plugin_ito_transaction_dialog_summary":"Create an ITO with {{amount}} {{symbol}}.","plugin_ito_swap":"Swap","plugin_ito_send_tip":"You can find your ITOs in the Past tab.","plugin_ito_send_text":"Send {{total}} {{symbol}}","plugin_ito_error_enter_amount":"Enter an amount","plugin_ito_error_select_token":"Select a Token","plugin_ito_error_enter_amount_and_token":"Enter an amount and Select a token","plugin_ito_error_allocation_absence":"Enter swap limit","plugin_ito_error_allocation_invalid":"Invalid amount","plugin_ito_error_exchange_time":"Invalid: start time cannot be later than end time","plugin_ito_error_unlock_time":"Invalid: end time cannot be later than unlock time","plugin_ito_error_balance":"Insufficient {{symbol}} balance","plugin_ito_list_start_date":"Start Time {{date}}","plugin_ito_list_end_date":"End Time {{date}}","plugin_ito_list_sold_total":"Swapped: ","plugin_ito_list_total":"Total: ","plugin_ito_list_table_type":"Type","plugin_ito_list_table_price":"Swap Ratio","plugin_ito_no_claimable_token":"Your wallet address does not have any tokens that can be claimed.","plugin_ito_list_table_sold":"Swapped","plugin_ito_list_table_got":"Balance","plugin_ito_list_button_send":"Send","plugin_ito_withdraw":"Withdraw","plugin_ito_qualification_loading":"Verify qualification…","plugin_ito_qualification_failed":"The wallet address isn\'t on the list.","plugin_ito_withdrawn":"Withdrawn","plugin_ito_your_swapped_amount":"You swapped {{amount}} {{symbol}}","plugin_ito_your_claimed_amount":"You claimed {{amount}} {{symbol}}","plugin_ito_your_refund_amount":"return {{amount}} {{symbol}}.","plugin_ito_unlock_in_advance":"Unlock in Advance","plugin_ito_swapped_status":"{{remain}} / {{total}} {{token}} Swapped","plugin_ito_congratulations":"Congratulations!","plugin_ito_out_of_stock_hit":"Better luck next time","plugin_ito_claim_success_share":"I just attended @{{user}}\'s #ITO with @{{account}} to swap ${{symbol}}. Install mask.io and start your own Initial Twitter Offering! \\n {{link}}","plugin_ito_claim_success_share_no_official_account":"I just attended @{{user}}\'s #ITO to swap ${{symbol}}. Install mask.io and start your own Initial Twitter Offering! \\n {{link}}","plugin_ito_claim_foreshow_share":"{{symbol}}({{name}}) is launching a new #ITO. Come and join it! Follow @{{account}} (mask.io) to find more events! \\n {{link}}","plugin_ito_claim_foreshow_share_no_official_account":"{{symbol}}({{name}}) is launching a new #ITO. Come and join it! \\n {{link}}","plugin_ito_password":"Password: {{password}}","plugin_ito_status_no_start":"Not started","plugin_ito_status_ongoing":"Ongoing","plugin_ito_status_out_of_stock":"Out of stock","plugin_ito_loading":"Loading ITO ...","plugin_ito_amount_unlocked":"Unlocked {{amount}} {{symbol}}","plugin_ito_amount_unlocked_infinity":"Unlocked infinity {{symbol}}","plugin_ito_unlocking_symbol":"Unlocking {{symbol}}","plugin_ito_continue":"Continue","plugin_ito_view_on_explorer":"View on Explorer","plugin_ito_unlock_tip":"Allow the contract <contractLink>{{address}}</contractLink> to use your {{symbol}} tokens when a new ITO round starts later.","plugin_collectible_you":"You","plugin_collectible_done":"Done","plugin_collectible_retry":"Retry","plugin_collectible_get_more_token":"Get more {{token}}","plugin_collectible_sell":"Sell","plugin_collectible_checkout":"Checkout","plugin_collectible_place_bid":"Place Bid","plugin_collectible_buy_now":"Buy Now","plugin_collectible_make_offer":"Make Offer","plugin_collectible_post_listing":"Post Listing","plugin_collectible_description":"Current price is <strong>{{price}} {{symbol}}</strong>.","plugin_collectible_article":"Article","plugin_collectible_overview":"Overview","plugin_collectible_details":"Details","plugin_collectible_offers":"Offers","plugin_collectible_listing":"Listing","plugin_collectible_history":"History","plugin_collectible_event":"Event","plugin_collectible_unit_price":"Unit Price","plugin_collectible_price":"Price","plugin_collectible_from":"From","plugin_collectible_to":"To","plugin_collectible_date":"Date","plugin_collectible_quantity":"Quantity","plugin_collectible_expiration":"Expiration","plugin_collectible_no_offers":"No Offers","plugin_collectible_no_listings":"No Listings","plugin_collectible_base":"Base","plugin_collectible_properties":"Properties","plugin_collectible_about":"About","plugin_collectible_chain_info":"Chain Info","plugin_collectible_contract_address":"Contract Address","plugin_collectible_token_id":"Token ID","plugin_collectible_block_chain":"BlockChain","plugin_collectible_create_by":"Created by","plugin_collectible_owned_by":"Owned by","plugin_collectible_view_on":"View on","plugin_collectible_no_history":"No History","plugin_collectible_ensure_unreviewed_item":"Please ensure unreviewed item","plugin_collectible_check_tos_document":"Please check ToS document","plugin_collectible_insufficient_offer":"Insufficient Offer","plugin_collectible_not_been_reviewed_by_opensea":"This item has not been reviewed by OpenSea.","plugin_collectible_reviewed_tips":"You should proceed with extra caution. Anyone can create a digital item on a blockchain with any\\n                        name, including fake versions of existing items. Please take extra caution and do your research\\n                        when interacting with this item to ensure it\'s what it chains to be.","plugin_collectible_total":"Total","plugin_collectible_subtotal":"Subtotal","plugin_collectible_item":"Item","plugin_collectible_approved_tips":"By checking this box, I acknowledge that this item has not been reviewed\\n                                                or approved by OpenSea.","plugin_collectible_agree_terms":"By checking this box, I agree to OpenSea\'s <terms>Terms of Service</terms>.","plugin_collectible_convert_eth":"Convert ETH","plugin_collectible_sale_end":"Sale ends in {{time}}","plugin_collectible_set_initial_price":"Set an initial price.","plugin_collectible_ending_price_tip":"Will be on sale until you transfer this item or cancel it.","plugin_collectible_starting_price":"Starting Price","plugin_collectible_ending_price":"Ending Price","plugin_collectible_ending_price_less_than_staring":"Must be less than or equal to the starting price. The price will progress linearly to this amount until the expiration date.","plugin_collectible_expiration_date":"Expiration date","plugin_collectible_schedule_date":"Schedule Date","plugin_collectible_auto_cancel_tip":"Your listing will automatically end at this time. No need to cancel it!","plugin_collectible_schedule_future_date":"Schedule a future date.","plugin_collectible_buyer_address":"Buyer Address","plugin_collectible_buyer_address_placeholder":"Enter the buyer\'s address.","plugin_collectible_buyer_address_helper_text":"Only the buyer is allowed to buy it.","plugin_collectible_include_ending_price":"Include ending price","plugin_collectible_include_ending_price_helper":"Adding an ending price will allow this listing to expire, or for the price to be\\n                                    reduced until a buyer is found.","plugin_collectible_schedule_for_a_future_time":"Schedule for a future time","plugin_collectible_schedule_for_a_future_time_helper":"You can schedule this listing to only be buyable at a future data.","plugin_collectible_privacy":"Privacy","plugin_collectible_privacy_helper":"You can keep your listing public, or you can specify one address that\'s allowed to\\n                                    buy it.","plugin_collectible_enter_a_price":"Enter a price","plugin_collectible_insufficient_balance":"Insufficient balance","plugin_collectible_invalid_schedule_date":"Invalid schedule date","plugin_collectible_invalid_ending_price":"Invalid ending price","plugin_collectible_invalid_expiration_date":"Invalid expiration date","plugin_collectible_invalid_buyer_address":"Invalid buyer address","plugin_collectible_set_price":"Set Price","plugin_collectible_highest_bid":"Highest Bid","plugin_collectible_minimum_bid":"Minimum Bid","plugin_collectible_set_starting_bid_price":"Set your starting bid price.","plugin_collectible_reserve_price":"Reserve Price","plugin_collectible_reserve_price_helper":"Create a hidden limit by setting a reserve price. Reserve price must be greater than or equal to the start amount.","plugin_collectible_auction_auto_end":"Your auction will automatically end at this time and the highest bidder will win. No need to cancel it!","plugin_collectible_enter_minimum_bid":"Enter minimum bid","plugin_collectible_enter_reserve_price":"Enter reserve price","plugin_collectible_invalid_reserve_price":"Invalid reserve price","plugin_collectible_place_a_bid":"Place a Bid","plugin_collectible_make_an_offer":"Make an Offer","plugin_collectible_approved_by_open_sea":"By checking this box, I acknowledge that this item has not been reviewed or approved by OpenSea.","plugin_collectible_legal_text":"By checking this box, I agree to OpenSea\'s <terms>Terms of Service</terms>.","plugin_cryptoartai_description_title":"Description","plugin_cryptoartai_edition":"Edition of","plugin_cryptoartai_operator":"Operator","plugin_cryptoartai_activity_type":"Type","plugin_cryptoartai_status":"Status","plugin_cryptoartai_time":"Time","plugin_cryptoartai_price":"Price","plugin_cryptoartai_tx":"Tx","plugin_cryptoartai_latest_bid":"Latest Bid","plugin_cryptoartai_description":"Current Bid is <strong>{{bidPrice}}{{symbol}}</strong>, price is <strong>{{price}}{{symbol}}</strong>. Edition {{soldNum}} of {{totalAvailable}} #{{editionNumber}}.","plugin_cryptoartai_no_price_description":"Current Bid is <strong>{{bidPrice}}{{symbol}}</strong>. Edition {{soldNum}} of {{totalAvailable}} #{{editionNumber}}.","plugin_cryptoartai_sold_description":"Sold for <strong>{{soldPrice}}{{symbol}}</strong>. Edition {{soldNum}} of {{totalAvailable}} #{{editionNumber}}.","plugin_cryptoartai_buy":"Buy","plugin_cryptoartai_buy_now":"Buy now","plugin_cryptoartai_current_balance":"Current balance","plugin_cryptoartai_current_highest_offer":"Current highest offer is ","plugin_cryptoartai_bid_least":"Your must bid at least ","plugin_cryptoartai_escrowed":"Your offer will be escrowed in the smart contract until it is accepted or you withdraw it","plugin_cryptoartai_current_balance_is":"Current balance is ","plugin_cryptoartai_auction_end":"Auction has ended","plugin_cryptoartai_auction_end_time":"Auction end time ","plugin_cryptoartai_share":"I just paid {{amount}} {{symbol}} for {{title}} on {{assetLink}}.\\nPlease install Mask plugin, and follow @{{account}} to join it too.\\n#mask_io","plugin_cryptoartai_share_no_official_account":"I just paid {{amount}} {{symbol}} for {{title}} on {{assetLink}}. Welcome to join.","plugin_cryptoartai_offer_share":"I just offered {{amount}} {{symbol}} for {{title}} on {{assetLink}}.\\nPlease install Mask plugin, and follow @{{account}} to join it too.\\n#mask_io","plugin_cryptoartai_offer_share_no_official_account":"I just offered {{amount}} {{symbol}} for {{title}} on {{assetLink}}. Welcome to join.","plugin_snapshot_info_title":"Information","plugin_snapshot_info_strategy":"Strategie(s)","plugin_snapshot_info_author":"Author","plugin_snapshot_info_ipfs":"IPFS","plugin_snapshot_info_start":"Start date","plugin_snapshot_info_end":"End date","plugin_snapshot_info_snapshot":"Snapshot","plugin_snapshot_result_title":"Results","plugin_snapshot_votes_title":"Votes","plugin_snapshot_no_power":"No power","plugin_snapshot_vote_success":"Your vote is in!","plugin_snapshot_vote":"Vote","plugin_snapshot_vote_choice":"Choice","plugin_snapshot_vote_power":"Your voting power","plugin_snapshot_vote_title":"Cast your vote","plugin_snapshot_vote_confirm_dialog_title":"Confirm Vote","plugin_snapshot_vote_confirm_dialog_choice":"Are you sure you want to vote \\"{{ choiceText }}\\"?","plugin_snapshot_vote_confirm_dialog_warning":"This action cannot be undone.","plugin_snapshot_current_result_title":"Current results","plugin_snapshot_download_report":"Download report","plugin_find_truman_display_name":"FindTruman - Statistics","plugin_find_truman_status_puzzle":"Story Puzzle","plugin_find_truman_status_poll":"Plot Voting","plugin_find_truman_status_result":"Stage Result","plugin_find_truman_status_puzzle_result":"Revealing Answer","plugin_find_truman_status_poll_result":"Plot Confirmation","plugin_find_truman_puzzle_to_be_revealed":"puzzle is left to be revealed.","plugin_find_truman_puzzles_to_be_revealed":"puzzles are left to be revealed","plugin_find_truman_poll_to_be_revealed":"vote continues to be tallied.","plugin_find_truman_polls_to_be_revealed":"votes continue to be tallied","plugin_find_truman_puzzle_underway":"The puzzle hasn\'t been revealed yet.","plugin_find_truman_puzzle_rate":"Accuracy: ","plugin_find_truman_voting_underway":"The voting continues to be tallied.","plugin_find_truman_voting_rate":"Hit rate: ","plugin_find_truman_submit_failed":"Failed to submit.","plugin_find_truman_vote":"vote","plugin_find_truman_votes":"votes","plugin_find_truman_selected":"Selected","plugin_find_truman_unselect":"Select","plugin_find_truman_answer":"Answer","plugin_find_truman_result":"Result","plugin_find_truman_buy":"BUY","plugin_find_truman_decrypted_by":"Decrypted by FindTruman:","plugin_find_truman_insufficient_nft":"The following specific NFTs are needed for this vote.","plugin_find_truman_buy_nft_tip":"At least {{count}} copy of this NFT is required.","plugin_find_truman_connect_wallet_tip":"Please connect to a wallet.","plugin_find_truman_no_participation_tip":"You have not participated in any vote yet.","plugin_dhedge_managed_by":"Managed by <manager>{{managerName}}</manager>","plugin_dhedge_manager_share":"Holds <share>{{managerShare}}%</share> of the pool","plugin_dhedge_manager_share_more_than_50":"Holds more than 50% of the pool","plugin_dhedge_value_managed":"VALUE MANAGED","plugin_dhedge_lifetime_return":"LIFETIME RETURN","plugin_dhedge_risk_factor":"RISK FACTOR","plugin_dhedge_tab_stats":"Stats","plugin_dhedge_tab_chart":"Chart","plugin_dhedge_strategy":"Strategy","plugin_dhedge_see_less":"See less","plugin_dhedge_see_more":"See more","plugin_dhedge_no_data":"No Data","plugin_dhedge_fetch_error":"Unable to fetch data, please try again!","plugin_dhedge_loading_chart":"Loading","plugin_dhedge_invest":"INVEST","plugin_dhedge_buy_token":"GET {{symbol}}","plugin_dhedge_enter_an_amount":"Enter an amount","plugin_dhedge_insufficient_balance":"Insufficient {{symbol}} balance","plugin_dhedge_loading":"Loading...","plugin_dhedge_pool_not_found":"Invalid pool address.","plugin_dhedge_smt_wrong":"Something went wrong!","plugin_pooltogether_tab_pools":"Pools","plugin_pooltogether_tab_account":"Account","plugin_pooltogether_no_pool":"There is no pool on this network.","plugin_pooltogether_pool_ended":"Awarded","plugin_pooltogether_deposit":"Deposit {{token}}","plugin_pooltogether_deposit_msg":"Deposit","plugin_pooltogether_apr":"Earn {{apr}}% APR in {{token}}","plugin_pooltogether_view_pool":"View pool","plugin_pooltogether_prize":"{{period}} Prize","plugin_pooltogether_share":"I just deposit {{amount}} {{cashTag}}{{symbol}} into the {{pool}}, can I win the lottery this week?\\nFollow @PoolTogether_ and @{{account}} (mask.io) to deposit in PoolTogether\'s pools.\\n#pooltogether #mask_io","plugin_pooltogether_share_no_official_account":"I just deposit {{amount}} {{cashTag}}{{symbol}} into the {{pool}}, can I win the lottery this week?","plugin_pooltogether_buy":"GET {{symbol}}","plugin_pooltogether_enter_an_amount":"Enter an amount","plugin_pooltogether_insufficient_balance":"Insufficient {{symbol}} balance","plugin_pooltogether_deposit_title":"Deposit {{token}} to win","plugin_pooltogether_odds_title":"New odds of winning:","plugin_pooltogether_odds_value":"1 in {{value}} {{period}}!","plugin_pooltogether_short_odds_value":"1 in {{value}}","plugin_pooltogether_my_deposits":"Total Deposits","plugin_pooltogether_no_account_pool":"You don\'t have any pool in this network","plugin_pooltogether_missing_pool":"Missing some deposits? Check the complete listing at:\\n","plugin_pooltogether_winning_odds":"Winning odds:","plugin_pooltogether_in":"in","plugin_pooltogether_manage":"Manage","plugin_pooltogether_token_not_found":"Token not found!","plugin_good_ghosting_loading_other_player_stats":"Loading other players\' stats","plugin_good_ghosting_loading_game_stats":"Loading game stats","plugin_good_ghosting_game_duration":"Game Duration","plugin_good_ghosting_current_round":"Current Round","plugin_good_ghosting_recurring_deposit":"Deposit Per Round","plugin_good_ghosting_round_length":"Round Length","plugin_good_ghosting_pool_apy":"Pool APY","plugin_good_ghosting_pool_earnings":"Pool Earnings","plugin_good_ghosting_extra_rewards":"Extra Rewards","plugin_good_ghosting_total_saved":"Total Saved","plugin_good_ghosting_game_launched":"Game Launched","plugin_good_ghosting_join_round":"Join Round","plugin_good_ghosting_join_deadline":"Join Deadline","plugin_good_ghosting_deposit":"Deposit {{index}}","plugin_good_ghosting_deposit_deadline":"Deposit Deadline {{index}}","plugin_good_ghosting_waiting_round":"Waiting Round","plugin_good_ghosting_waiting_round_end":"Waiting Period Ends","plugin_good_ghosting_withdraw":"Withdraw","plugin_good_ghosting_all_players_status_winning":"Winning","plugin_good_ghosting_all_players_status_waiting":"Waiting","plugin_good_ghosting_all_players_status_ghost":"Ghosts","plugin_good_ghosting_all_players_status_dropout":"Drop-outs","plugin_good_ghosting_status_winning":"Winning","plugin_good_ghosting_status_waiting":"Waiting","plugin_good_ghosting_status_ghost":"Ghost","plugin_good_ghosting_status_dropout":"Withdrawn","plugin_good_ghosting_status_unknown":"Unknown","plugin_good_ghosting_status":"Status","plugin_good_ghosting_deposits":"Deposits made","plugin_good_ghosting_total_deposited":"Total deposited","plugin_good_ghosting_address":"Address","plugin_good_ghosting_not_a_participant":"Looks like you\'re not a participant in this game.","plugin_good_ghosting_next_event":"Coming up next","plugin_good_ghosting_game_end":"This game has ended","plugin_good_ghosting_game_over":"Game Over","plugin_good_ghosting_participants_withdraw":"Participants can now withdraw their earnings!","plugin_good_ghosting_join_game":"Join Game","plugin_good_ghosting_make_deposit":"Make Deposit","plugin_good_ghosting_join_help_text":"Deposit your first {{amount}} {{token}} and join this savings pool. To win, you need to deposit money into the savings pool every round, prior to the round\'s deadline.","plugin_good_ghosting_deposit_help_text":"Deposit {{segmentPayment}} {{token}} for this round and continue to be a winner.","plugin_good_ghosting_withdraw_help_text":"The game has ended! You can now withdraw your deposits, along with any earnings that you won.","plugin_good_ghosting_leave_game":"Leave Game","plugin_good_ghosting_early_withdraw_info":"If you wish to withdraw from an ongoing game, you may be charged a small fee of {{amount}} {{token}} to compensate the remaining players in the savings pool.","plugin_good_ghosting_rules":"Rules","plugin_good_ghosting_game_rules":"Deposit {{amount}} {{token}} every round for {{roundCount}} rounds to win the game. If other players miss depositing in a round and become ghosts, their earnings will go to you.","plugin_good_ghosting_tx_fail":"Failed to complete the transaction.","plugin_good_ghosting_tx_timeout":"Cannot read transaction status.","plugin_good_ghosting_something_went_wrong":"Something went wrong, please try again.","plugin_good_ghosting_view_on_explorer":"View on Explorer","plugin_good_ghosting_checking_balance":"Checking Balance...","plugin_good_ghosting_insufficient_balance":"You need at least {{amount}} {{token}} in your wallet to do this.","plugin_good_ghosting_balance_error":"Failed to check balance. Click to retry.","plugin_unlockprotocol_buy_lock":"Buy Lock","plugin_unlockprotocol_buy_lock_alert":"Please look for and buy an active lock","plugin_unlockprotocol_no_access":"You don\'t have access to this content","plugin_unlockprotocol_select_unlock_lock":"Select Unlock Lock","plugin_unlockprotocol_no_lock_found":"No lock found. Create your own lock at <dashboard>Unlock protocol Creator Dashboard</dashboard>.","plugin_unlockprotocol_submit_post":"Submit Post","plugin_unlockprotocol_title":"Unlock Protocol","plugin_unlockprotocol_server_error":"Some Server error occured, Please try again later.","plugin_furucombo_tab_pool":"Pool","plugin_furucombo_tab_investments":"All investments","plugin_furucombo_liquidity":"Liquidity","plugin_furucombo_annual_percentage_yield":"Apy","plugin_furucombo_rewards":"Rewards","plugin_furucombo_invest":"Invest","plugin_furucombo_pool_not_found":"Invalid pool address.","plugin_furucombo_smt_wrong":"Something went wrong!","plugin_furucombo_head_pools":"Pools","plugin_furucombo_head_action":"Action","plugin_pets_dialog_title":"Non-Fungible Friends","plugin_pets_dialog_title_share":"Successful","plugin_pets_dialog_contract":"NFT Contract","plugin_pets_dialog_token":"Token ID","plugin_pets_dialog_msg":"Greeting message","plugin_pets_dialog_msg_optional":"Optional, 100 characters max.","plugin_pets_dialog_btn":"Confirm","plugin_pets_dialog_btn_share":"Share","plugin_pets_dialog_preview":"Preview","plugin_pets_dialog_created":"Created by MintTeam","plugin_pets_dialog_powered":"Powered by RSS3","plugin_pets_dialog_success":"Your Non-Fungible Friend has been set up successfully","plugin_pets_dialog_fail":"Setting failed, please try later","plugin_pets_dialog_check_title":"Show NFT friends on the profile page.","popups_following_permissions":"The plugin ({{pluginName}}) (hosted on {{pluginURL}}) is going to request the following permissions:","popups_permissions":"Permissions","popups_sites":"Sites","popups_mask_requests_permission":"Mask needs the following permissions","popups_grant":"Grant","popups_permission_request":"Permission request","popups_permission_request_content":"To continue, Mask Network needs permission to access the following URL:","popups_permission_request_content2":"This gives Mask Network the necessary abilities to provide the requested function properly.","popups_welcome":"Welcome","popups_wallet_token":"Token","popups_wallet_dialog_legacy_wallet_tip":"Detected legacy wallets, please click confirm to restore them all.","popups_wallet_set_payment_password":"Set the payment password","popups_wallet_payment_password":"Payment Password","popups_wallet_re_payment_password":"Re-enter the payment password","popups_wallet_set_up_payment_password":"Set up payment password","popups_wallet_payment_password_tip":"The Payment password must be a combination of 2 categories out of numbers, letters, and special characters with a length of 8-20 characters.","popups_wallet_go_back":"Go back","popups_wallet_start_up_tip":"Connect to your wallet, create a new wallet or recover an existing wallet using a seed phrase.","popups_wallet_name_placeholder":"Enter 1-12 characters","popups_wallet_name_mnemonic":"Mnemonic","popups_wallet_name_json_file":"Json File","popups_wallet_name_private_key":"Private Key","popups_wallet_name_mnemonic_placeholder":"Please enter 12 mnemonic words separated by spaces","popups_wallet_name_origin_password":"Original Password","popups_wallet_tab_assets":"Assets","popups_wallet_tab_activity":"Activity","popups_wallet_derivation_path":"Derivation path ({{ path }})","popups_wallet_next":"Next","popups_wallet_backup_wallet":"Back up the wallet","popups_wallet_backup_json_file":"JSON File","popups_wallet_backup_private_key":"Private Key","popups_wallet_backup_json_file_confirm_password_tip":"This file has been encrypted and stored with your current password. Your current password is needed to decrypt this file when using it to import wallet.","popups_wallet_backup_private_key_tip":"Please don’t show anyone your private key. The private key can be used in any wallet that supports EVM-compatible chains without decryption.","popups_wallet_backup_input_password":"Input your password","popups_wallet_backup_json_file_drag_tip":"Drag your file into here…","popups_wallet_backup_json_file_click_tip":"Click or drag your file here","popups_wallet_enter_your_wallet_name":"Enter your wallet name","popups_wallet_delete_tip":"Are you sure you want to delete this wallet? Your wallet cannot be recovered without seed phrase.","popups_wallet_confirm_payment_password":"Confirm with payment password","popups_wallet_token_buy":"Buy","popups_wallet_token_send":"Send","popups_wallet_token_swap":"Swap","popups_wallet_view_on_explorer":"View on Explorer","popups_wallet_gas_fee_settings":"Gas fee settings","popups_wallet_gas_fee_settings_description":"Gas fees are the fees for paying ethereum miners. The miners prefer to pack transactions with higher gas fees. Transactions with low gas fees might fail, and the paid gas fees won’t be returned.","popups_wallet_gas_fee_settings_low":"Low","popups_wallet_gas_fee_settings_medium":"Medium","popups_wallet_gas_fee_settings_high":"High","popups_wallet_gas_fee_settings_usd":" ≈ ${{usd}}","popups_wallet_gas_fee_settings_gas_limit":"Gas Limit","popups_wallet_gas_fee_settings_max_priority_fee":"Max priority fee","popups_wallet_gas_fee_settings_max_fee":"Max fee","popups_wallet_gas_fee_settings_min_gas_limit_tips":"Gas limit must be at least {{limit}}","popups_wallet_unsupported_network":"Unsupported network type","popups_wallet_signature_request":"Signature request","popups_wallet_signature_request_message":"Message","popups_wallet_contract_interaction":"Contract Interaction","popups_wallet_token_unlock_permission":"Token unlock permission","popups_wallet_token_infinite_unlock":"Infinite unlock","popups_wallet_contract_interaction_transfer":"Transfer","popups_wallet_contract_interaction_gas_fee":"Gas fee","popups_wallet_contract_interaction_edit":"Edit","popups_wallet_contract_interaction_total":"Total","popups_wallet_password_dont_match":"The password does not match.","popups_wallet_password_satisfied_requirement":"The password is not satisfied the requirement.","popups_wallet_password_length_error":"The password length is incorrect.","popups_wallet_unlock_wallet":"Unlock Wallet","popups_wallet_unlock_error_password":"Password is incorrect","popups_wallet_activity_to_address":"To: {{address}}","popups_wallet_transfer_error_tip":"Network connection failure or contract error, send transaction failure.","popups_wallet_transactions_pending":"Pending...","popups_wallet_re_send":"Re-Send","popups_wallet_choose_token":"Choose Token","popups_wallet_gas_price":"Gas Price","popups_wallet_done":"Done","popups_wallet_recovered":"Wallet recovered","popups_wallet_no_transactions":"You have no transactions","popups_missing_parameter_caption":"Please close this page.","popups_persona_connect_to":"Connect to {{type}}","popups_persona_disconnect":"Disconnect","popups_persona_logout":"Log out","popups_persona_disconnect_tip":"After logging out, your associated social accounts can no longer decrypt past encrypted messages. If you need to reuse your account, you can recover your account with your identity, private key, local or cloud backup.","popups_persona_persona_name_exists":"The persona name already exists","popups_persona_sign_request_title":"Signature request","popups_persona_sign_request_message":"message","popups_password_do_not_match":"Incorrect backup password","popups_backup_password":"Backup Password","popups_rename_error_tip":"Maximum length is {{length}} characters long.","nft_wallet_label":"Wallet","plugin_profile_no_wallets":"Connect your wallet here.<br/>This section will be shown to your encrypted friends.<br/>The display content includes digital art, donations, badges<br/>and other public information on chain.","plugin_vcent_last_offer_at":"LATEST OFFER at","nft_input_address_label":"Please input contract address","nft_input_tokenid_label":"Please input token ID","nft_owner_hint":"This NFT does not exist or does not belong to you.","nft_add_dialog_title":"Add Collectible","nft_add_button_label":"Add","nft_list_title":"NFT Avatar Setting","nft_wallet_change":"Change","nft_button_add_collectible":"Add Collectible","nft_avatar":"NFT Avatar","web3_tab_hint":"No address found.","plugin_artblocks_not_active":"This project is no more active","plugin_artblocks_completed":"Completed","plugin_artblocks_paused":"Paused","plugin_artblocks_collection":"Collection","plugin_artblocks_details":"Details","plugin_artblocks_created_by":"Created by","plugin_artblocks_purchase":"Purchase","plugin_artblocks_purchasing":"Purchasing....","plugin_artblocks_legal_text":"By checking this box, I agree to ArtBlocks\'s <terms>Terms of Service</terms>.","plugin_artblocks_check_tos_document":"Please check ToS document","plugin_artblocks_price_per_mint":"Price per mint","plugin_artblocks_price_row":"Price:","plugin_artblocks_minted_row":"Minted:","plugin_artblocks_license_row":"License:","plugin_artblocks_library_row":"Library:","plugin_artblocks_website":"Website","plugin_artblocks_infos":"Infos","plugin_artblocks_chain":"Chain","plugin_artblocks_blockchain_row":"Blockchain:","plugin_artblocks_contract_row":"Contract:","plugin_artblocks_smt_wrong":"Something went wrong!","plugin_artblocks_share":"I just purchased a beautiful piece of art from \'{{name}}\' collection for {{price}} {{symbol}}. Install @realMaskNetwork to get yours.","plugin_artblocks_share_no_official_account":"I just purchased a beautiful piece of art from \'{{name}}\' collection for {{price}} {{symbol}}. Welcome to join.","nft_button_set_avatar":"Set NFT Avatar"}');
 ;// CONCATENATED MODULE: ./shared-ui/locales/ja-JP.json
 const ja_JP_namespaceObject = JSON.parse('{"add_to_key_store_success":"公開鍵はキーストアに追加されました。","add_token":"トークンを追加","additional_post_box__encrypted_post_pre":"#mask_io で復号しましょう！ {{encrypted}}","additional_post_box__steganography_post_pre":"この投稿は #mask_io によって暗号化されています。 📪🔑 mask.io をインストールして復号しましょう！ ([I:b]) {{random}}","auto_paste_failed_dialog_title":"手動でペーストする","auto_paste_failed_dialog_content":"以下の文字列と画像（存在すれば）をコピーし、公開しましょう。","auto_paste_failed_dialog_image_caption":"新しいタブで開く","auto_paste_failed_snackbar":"Mask が自動で投稿を作成できませんでした。手動でペーストしてください。","auto_paste_failed_snackbar_action":"方法を確認","automation_request_click_post_button":"[公開] ボタンをクリックして編集ダイアログを開きます。","cancel":"取り消す","comment_box__placeholder":"コメントを暗号化するには…","confirm":"確認する","copy_text":"テキストをコピー","copy_image":"画像をコピー","copy_success_of_wallet_addr":"ウォレットのコピーに成功しました","copy_success_of_text":"テキストのコピーに成功しました","copy_success_of_image":"画像のコピーに成功しました","connecting":"接続中…","create":"作成","dashboard_tab_collectibles":"コレクション","dashboard_no_collectible_found":"コレクションが見つかりません","decrypted_postbox_add_recipients":"受信者を追加","decrypted_postbox_decrypting":"Mask が復号しています。","decrypted_postbox_decoding":"Mask が解読しています。","decrypted_postbox_decrypting_finding_person_key":"Mask は公開鍵を探しています…","decrypted_postbox_decrypting_finding_post_key":"Mask はこの投稿を復号するために ポストキーを取得しています…","decrypted_postbox_author_mismatch":"最初の作者は {{name}}","decrypted_postbox_title":"Mask で暗号化されています:","dismiss":"戻る","delete":"削除","delete_wallet":"ウォレットを削除する","hide_token":"トークンを隠す","hide_token_hint":"将来的には、ウォレットパネルで「トークンを追加」を選択することで、再び <strong>{{token}}</strong> を追加することができます。","done":"完了です！","download":"ダウンロード","buy_now":"今すぐ購入","setup_guide_find_username_text":"Mask のペルソナと接続するためにユーザー名が必要です。<br /> 正しいものを入力してください。","setup_guide_connect_auto":"接続する","setup_guide_connect_failed":"失敗しました… もう一度お試しください。","import":"インポート","no_search_result":"該当なし","payload_bad":"この投稿は破損しているため、Mask で復号できません。","payload_incomplete":"この投稿は不完全です。全文を見ることにより復号が可能になります。","payload_not_found":"ペイロードが見つかりませんでした。","payload_throw_in_alpha41":"Alpha41方式は使用できません。Mask をアップデートしてください。","personas":"ペルソナ","browser_action_enter_dashboard":"ダッシュボードに入る","post_dialog__button":"完了","post_dialog__dismiss_aria":"作成ダイアログを閉じる","post_dialog__image_payload":"画像で暗号化","post_dialog__more_options_title":"他のオプション","post_dialog__placeholder":"ここにテキストを持ってきます","post_dialog__select_recipients_share_to_everyone":"全てのユーザー","post_dialog__select_recipients_title":"閲覧可能な人を選ぶ","post_dialog__title":"Mask: 作成","post_modal_hint__button":"投稿を暗号化","hide":"隠す","reset":"リセットする","rename":"名前を変える","search":"検索","search_box_placeholder":"ここに打って検索","select_all":"全て選ぶ","select_none":"何も選んでいません。","select_specific_friends_dialog__button":"完了","select_specific_friends_dialog__title":"特定の連絡先を選ぶ","service_decryption_failed":"復号に失敗","service_invalid_backup_file":"これは Mask のバックアップではないかもしれません。","service_not_share_target":" Mask は投稿鍵を発見できませんでした。この投稿はあなたに共有されていない可能性があります。","service_others_key_not_found":"{{name}} の公開鍵が見つかりません!","service_publish_post_aes_key_failed":"AES キーを公開するのに失敗しました。","service_self_key_decryption_failed":"復号に失敗しました。間違ったIDを選択したか、この投稿の暗号化に使用されていない鍵をインポートしたのかもしれません。","service_decode_image_payload_failed":"画像のデコードに失敗しました。","service_unknown_payload":"投稿のバージョンが不明です。Mask のアップデートが必要かもしれません。","service_username_invalid":"無効なユーザー名","settings_enable_debug":"デバッグモード","settings_enable_debug_desc":"デバッグのための追加情報を参照してください。","settings_appearance":"テーマ","settings_appearance_secondary":"テーマを選んでください。","settings_language":"言語を設定","settings_language_secondary":"ご利用になりたい言語をお選びください。","settings_choose_eth_network":"Ethereum ネットワークを選択してください","settings_launch_page":"初期画面","settings_launch_page_secondary":"アプリを開いたときに最初に開かれる画面を選んでください。","skip":"スキップ","share":"共有","share_to":"共有先","sharing":"共有する","transfer":"転送","wallet_name":"ウォレット名","wallet_rename":"ウォレット名を変更","wallet_balance":"残高","wallet_new":"新規ウォレット名","wallets":"ウォレット","wallet_status_button_change":"変更","wallet_status_button_disconnect":"接続を外す","wallet_status_button_copy_address":"アドレスをコピー","wallet_transfer_to_address":"宛先のアドレス","wallet_transfer_send":"送る","wallet_transfer_title":"転送","wallet_transfer_error_amount_absence":"量を入力","wallet_transfer_error_address_absence":"受け手のアドレスを入力","wallet_transfer_error_invalid_address":"無効な受け手のアドレス","relative_time_days_ago":"{{days}}日前","relative_time_hours_ago":"{{hours}}時間前","relative_time_minutes_ago":"{{minutes}}分前","relative_time_months_ago":"{{months}}月前","relative_time_seconds_ago":"{{seconds}}秒前","relative_time_years_ago":"{{years}}年前","plugin_wallet_select_a_token":"トークンを選択","plugin_wallet_connect_a_wallet":"ウォレットと接続","plugin_wallet_no_gas_fee":"ガス代が不足しています","plugin_wallet_update_gas_fee":"ガス代を更新中…","plugin_wallet_invalid_network":"無効のネットワーク","plugin_wallet_select_a_wallet":"ウォレットを選択","plugin_wallet_transaction":"取引","plugin_wallet_transaction_wait_for_confirmation":"確認を待っています","plugin_wallet_transaction_submitted":"取引は送信されました。","plugin_wallet_transaction_confirmed":"取引は成功しました。","plugin_wallet_transaction_reverted":"取引は元に戻されました。","plugin_wallet_transaction_rejected":"取引は拒否されました。","plugin_wallet_transaction_server_error":"取引は内部の JSON-RPC サーバーのエラーにより失敗しました。","plugin_wallet_view_on_explorer":"Explorer で見る","plugin_wallet_wrong_network_tip":"正しい Ethereum ネットワークを選択してください。","plugin_wallet_on_create":"ウォレットを作成","plugin_wallet_on_connect":"ウォレットに接続しています","plugin_wallet_select_provider_dialog_title":"ウォレットを接続","plugin_wallet_qr_code_with_wallet_connect":"WalletConnect 対応の QR コードを読みこむ","plugin_wallet_token_unlock":"確かにアンロックする","plugin_wallet_token_infinite_unlock":"永遠にアンロックする","plugin_wallet_connect_safari_metamask":"MetaMask に接続する","plugin_wallet_connect_safari_rainbow":"Rainbow に接続する","plugin_wallet_connect_safari_trust":"Trust に接続する","plugin_wallet_connect_safari_im_token":"imToken に接続する","plugin_wallet_on_connect_in_firefox":"接続する","plugin_wallet_return_mobile_wallet_options":"モバイルウォレットのオプションに戻る","plugin_wallet_view_qr_code":"QR コードを表示する","plugin_red_packet_display_name":"プラグイン: 投げ銭","plugin_red_packet_split_mode":"分割モード","plugin_red_packet_average":"平均","plugin_red_packet_random":"ランダム","plugin_red_packet_shares":"株数","plugin_red_packet_best_wishes":"幸運を祈ります！","plugin_red_packet_create_new":"新しい投げ銭を作成","plugin_red_packet_claim":"受け取る","plugin_red_packet_refund":"無効","plugin_red_packet_select_existing":"既存の投げ銭を選択","plugin_red_packet_attached_message":"メッセージを追加","plugin_red_packet_from":"送信者：{{name}}","plugin_red_packet_description_expired":"期限切れです","plugin_red_packet_description_refunded":"無効です","plugin_red_packet_description_refund":"{{balance}}{{symbol}}を受け取れます","plugin_red_packet_description_empty":"期限切れです","plugin_red_packet_description_broken":"破損しています","plugin_red_packet_description_failover":"{{amount}} {{symbol}} / {{shares}} 株","plugin_red_packet_claiming_from":"{{name}} から投げ銭を請求中","plugin_red_packet_refunding_for":"{{balance}} {{symbol}} の投げ銭を払い戻し中","plugin_red_packet_amount_per_share":"1株当たりの金額","plugin_red_packet_send_symbol":"{{symbol}} を送る","plugin_red_packet_create_with_token":"{{symbol}} で投げ銭を作成する","plugin_gitcoin_readme":"このサービスを利用するにあたり、寄付金額の 5% が <fund>Gitcoin grants development fund</fund> に寄付されます","plugin_gitcoin_select_a_token":"トークンを選択する","plugin_gitcoin_enter_an_amount":"量を決める","plugin_gitcoin_grant_not_available":"Grantは有効ではありません","plugin_gitcoin_insufficient_balance":"{{symbol}} の残高が足りません","plugin_gitcoin_donate":"寄付する","plugin_gitcoin_last_updated":"最新の更新：","plugin_gitcoin_view_on":"Gitcoin で見る","plugin_trader_swap":"スワップ","plugin_trader_wrap":"ラップ","plugin_trader_unwrap":"アンラップ","plugin_trader_buy":"購入","plugin_trader_no_data":"データなし","plugin_trader_tab_market":"一般","plugin_trader_tab_price":"価格","plugin_trader_tab_exchange":"取引所","plugin_trader_tab_swap":"スワップ 🔥","plugin_trader_table_exchange":"ソース","plugin_trader_table_pair":"通貨ペア","plugin_trader_table_price":"価格","plugin_trader_table_volume":"取引高（24時間）","plugin_trader_table_updated":"更新","plugin_trader_route":"ルート","plugin_trader_portion":"分割","plugin_trader_error_amount_absence":"量を入力してください。","plugin_trader_error_insufficient_balance":"{{symbol}} の残高が足りません","plugin_trader_error_insufficient_lp":"流動性が足りません","plugin_trade_error_input_amount_less_minimum_amount":"入力量は最小量を下回っています","plugin_trader_settings_data_source_primary":"取引データのソース","plugin_trader_settings_data_source_secondary":"暗号通貨トレンドデータのソースを選択する。","plugin_trader_slippage_tolerance":"スリッページの許容範囲：","plugin_poll_display_name":"プラグイン: 投票","plugin_poll_question_hint":"質問を入力してください...","plugin_poll_options_hint":"オプション","plugin_poll_length":"投票期限","plugin_poll_length_days":"日","plugin_poll_length_hours":"時間","plugin_poll_length_minutes":"分","plugin_poll_length_unknown":"知らない","plugin_poll_create_new":"新しい投票を作成","plugin_poll_select_existing":"既存の投票を選択","plugin_poll_send_poll":"投票を作成","plugin_poll_status_closed":"投票は終了しました","plugin_poll_status_voting":"投票しています","plugin_poll_status_voted":"投票した.","plugin_poll_deadline":"{{time}} で終了","plugin_ito_share":"共有","plugin_ito_enter":"参加","plugin_ito_dialog_swap_title":"{{token}} をスワップ","plugin_ito_dialog_swap_reminder_title":"スワップリマインダー","plugin_ito_dialog_swap_unlock_title":"事前にトークンをアンロックする","plugin_ito_dialog_swap_share_title":"共有","plugin_ito_dialog_swap_exchange":"交換する","plugin_ito_dialog_swap_panel_title":"スワップ","plugin_ito_dialog_swap_exceed_wallet_limit":"一つのウォレットの限度を超えています","plugin_ito_swap_ration_label":"スワップ比率","plugin_ito_swap_unlucky_fail":"残念でした。失敗した理由を Etherscan リンクから確認してからもう一度試してください。","plugin_ito_swap_only_once_remind":"各ウォレットは一度しか参加できません。","plugin_ito_swap_title":"{{swap}} 分の {{amount}} {{token}}","plugin_ito_swap_end_date":"{{date}} に終了","plugin_ito_dialog_claim_reminder_agree":"了解しました","plugin_ito_dialog_claim_reminder_text1":"現存するトークンを偽ったものや、トークンを持っていないプロジェクトであるのに関わらずそれのトークンであると騙るように、誰もが Ethereum 上で任意の名前でトークンを作成することができます。","plugin_ito_dialog_claim_reminder_text2":"このインターフェイスはトークンアドレスから任意のトークンを読み込むことができます。任意の ERC20 のトークンをやり取りするときは、特に注意し、自分で調べてください。","plugin_ito_dialog_claim_reminder_text3":"もし任意のトークンを購入した場合、あなたはそれを払い戻すことができない可能性があります。","plugin_ito_dialog_claim_reminder_text4":"本権利は裁判において、もしくは正当な請求ではないと判断される者に対して、全体もしくは一部、直接的もしくは間接的に提供または販売されておらず、今後されることもありません。","plugin_ito_expired":"期限切れ","plugin_ito_create_new":"新しいもの","plugin_ito_claim_all_status_unclaimed":"未請求","plugin_ito_claim_all_status_locked":"ロックされています","plugin_ito_claim_all_unlock_time":"ロック解除：{{time}}","plugin_ito_claim_all_dialog_title":"あなたのトークンを請求する","plugin_ito_swapping":"幸運ならあなたは {{amount}} {{symbol}} を得ることができます。また、ITO の在庫切れが発生した場合は返金されます。","plugin_ito_advanced":"進行中","plugin_ito_advanced_ip_region":"IP リージョン制限","plugin_ito_advanced_delay_unlocking":"トークンのロック解除時間を設定","plugin_ito_advanced_contract":"プラグインコントラクト","plugin_ito_select_existing":"古いもの","plugin_ito_display_name":"ITO 構成ダイアログ","plugin_ito_sell_token":"トークン","plugin_ito_sell_price":"価格","plugin_ito_sell_total_amount":"入力","plugin_ito_allocation_per_wallet":"スワップ上限 {{limit}} {{token}}","plugin_ito_wait_unlock_time":"{{unlockTime}} に請求","plugin_ito_claim":"請求","plugin_ito_claiming":"請求中","plugin_ito_claim_all":"全て請求","plugin_ito_qualification_start_time":"参加資格開始時間：","plugin_ito_error_qualification_start_time":"無効：資格開始時間は ITO の終了時間よりも前でなくてはいけません","plugin_ito_error_invalid_qualification":"無効な資格アドレス","plugin_ito_unlock_time":"ロック解除時間 {{zone}}","plugin_ito_qualification_label":"プラグインのコントラクト","plugin_ito_message_label":"タイトル","plugin_ito_region_label":"IP リージョンの選択","plugin_ito_region_confirm_label":"IP リージョン","plugin_ito_region_list":"{{ select }} / {{ all }} リージョン","plugin_ito_region_all":"全てのリージョン","plugin_ito_region_search":"リージョンの名前を入力して検索","plugin_ito_region_ban":"あなたのリージョンではこのプールはプールの作成者から Ban されています","plugin_ito_next":"次","plugin_ito_back":"戻る","plugin_ito_transaction_dialog_summary":"{{amount}} {{symbol}} で ITO を作成。","plugin_ito_swap":"スワップ","plugin_ito_send_tip":"過去のタブからあなたの行った ITO を探すことができます。","plugin_ito_send_text":"{{total}} {{symbol}} を送る","plugin_ito_error_enter_amount":"量を入力してください","plugin_ito_error_select_token":"トークンを選択してください","plugin_ito_error_enter_amount_and_token":"量を入力し、トークンを選択してください。","plugin_ito_error_allocation_absence":"スワップ上限を入力してください","plugin_ito_error_allocation_invalid":"無効の量","plugin_ito_error_exchange_time":"無効：開始時刻は終了時刻よりあとになっています","plugin_ito_error_unlock_time":"無効：終了時間はロック解除時間よりも後にはできません","plugin_ito_error_balance":"{{symbol}} の残高が足りません","plugin_ito_list_start_date":"開始時刻 {{date}}","plugin_ito_list_end_date":"終了時刻 {{date}}","plugin_ito_list_sold_total":"スワップしました","plugin_ito_list_total":"総量","plugin_ito_list_table_type":"形式","plugin_ito_list_table_price":"スワップ比率","plugin_ito_no_claimable_token":"トークンの請求権はありません。","plugin_ito_list_table_sold":"スワップしました","plugin_ito_list_table_got":"バランス","plugin_ito_list_button_send":"送る","plugin_ito_withdraw":"取り消す","plugin_ito_qualification_loading":"資格認証中…","plugin_ito_qualification_failed":"ウォレットアドレスがリストにありません。","plugin_ito_withdrawn":"取り消しました","plugin_ito_your_swapped_amount":"あなたは {{amount}} {{symbol}} を獲得しました","plugin_ito_your_claimed_amount":"あなたは {{amount}} {{symbol}} を請求しました","plugin_ito_your_refund_amount":"{{amount}} {{symbol}} を戻す","plugin_ito_unlock_in_advance":"事前にアンロックする","plugin_ito_swapped_status":"{{remain}} / {{total}} {{token}} をスワップしました","plugin_ito_congratulations":"おめでとうございます！","plugin_ito_out_of_stock_hit":"次の幸運を祈っています","plugin_ito_claim_success_share":".@{{account}} を使って ${{symbol}} をスワップし、 @{{user}} の #ITO に参加しました。mask.io をインストールして Initial Twitter Offering を始めましょう！ \\n {{link}}","plugin_ito_claim_foreshow_share":"{{symbol}}({{name}}) は新しい #ITO をローンチしました。参加してみましょう！ @{{account}} (mask.io) をフォローしてさらにイベントを見つけましょう。\\n {{link}}","plugin_ito_password":"パスワード: {{password}}","plugin_ito_status_no_start":"まだ開催されていません","plugin_ito_status_ongoing":"開催中","plugin_ito_status_out_of_stock":"品切れ","plugin_ito_loading":"ITO を読み込んでいます","plugin_ito_amount_unlocked":"ロック解除された {{amount}} {{symbol}}","plugin_ito_amount_unlocked_infinity":"永遠に {{symbol}} のロックを解除する","plugin_ito_unlocking_symbol":"{{symbol}} をアンロック中","plugin_ito_continue":"再開","plugin_ito_view_on_explorer":"Explorer で見る","plugin_collectible_you":"あなた","plugin_collectible_done":"完了","plugin_collectible_retry":"リトライ","plugin_collectible_sell":"売る","plugin_collectible_checkout":"チェックアウト","plugin_collectible_place_bid":"入札する","plugin_collectible_buy_now":"今買う","plugin_collectible_make_offer":"オファーする","plugin_collectible_post_listing":"投稿リスト","plugin_collectible_description":"現在の価格は <strong>{{price}} {{symbol}}</strong> です。","plugin_collectible_article":"品目","plugin_collectible_details":"詳細","plugin_collectible_offers":"オファー","plugin_collectible_listing":"リスティング","plugin_collectible_history":"履歴","plugin_collectible_event":"イベント","plugin_collectible_unit_price":"単価","plugin_collectible_price":"価格","plugin_collectible_date":"日にち","plugin_collectible_quantity":"量","plugin_collectible_expiration":"有効期限","plugin_collectible_no_offers":"オファーがありません","plugin_collectible_no_listings":"リストにありません","plugin_collectible_base":"ベース","plugin_collectible_properties":"プロパティ","plugin_collectible_about":"詳細","plugin_collectible_chain_info":"チェーン情報","plugin_collectible_contract_address":"コントラクトアドレス","plugin_collectible_token_id":"トークンID","plugin_collectible_block_chain":"ブロックチェーン","plugin_collectible_create_by":"作成者","plugin_collectible_owned_by":"所持者","plugin_collectible_no_history":"履歴がありません","plugin_collectible_ensure_unreviewed_item":"未レビューのアイテムを確認してください","plugin_collectible_check_tos_document":"ToS ドキュメントを確認してください","plugin_collectible_not_been_reviewed_by_opensea":"このアイテムは OpenSea でレビューされていません。","plugin_collectible_reviewed_tips":"注意して行動してください。ブロックチェーン上で誰もがどんな名前でデジタルアイテムを作成することができます。これは、既存のアイテムの偽のバージョンも含みます。デジタルアイテムを扱う際には十分に注意、調査をして、それがチェーン上にあるのか確かめてください。","plugin_collectible_total":"合計","plugin_collectible_subtotal":"小計","plugin_collectible_item":"アイテム","plugin_collectible_approved_tips":"このボックスをチェックすることで、このアイテムが OpenSea によってレビューまたは承認されていないことを認めます。","plugin_collectible_agree_terms":"このボックスをチェックすることで、OpenSea の<terms>利用規約</terms>に同意します。","plugin_collectible_convert_eth":"ETH を両替する","plugin_collectible_sale_end":"{{time}} に販売は終了します","plugin_collectible_set_initial_price":"初期価格を設定する。","plugin_collectible_ending_price_tip":"このアイテムはアイテムをあなたが転送もしくキャンセルするまで販売されます。","plugin_collectible_starting_price":"開始価格","plugin_collectible_ending_price":"終了価格","plugin_collectible_ending_price_less_than_staring":"終了価格は開始価格以下である必要があります。 価格は有効期限まで直線的に変動します。","plugin_collectible_expiration_date":"有効期限","plugin_collectible_schedule_date":"予定日","plugin_collectible_auto_cancel_tip":"あなたのリスティングは自動的にこの時間で終了します。あなたがキャンセル必要はありません！","plugin_collectible_schedule_future_date":"今後のスケジュールを立てる。","plugin_collectible_buyer_address":"買い手のアドレス","plugin_collectible_buyer_address_placeholder":"買い手のアドレスを入力する。","plugin_collectible_buyer_address_helper_text":"買い手だけが購入することができます。","plugin_collectible_include_ending_price":"終了価格を含む","plugin_collectible_include_ending_price_helper":"終了価格を追加すると、このリスティングが失効したり、買い手が見つかるまで価格が引き下げられたりします。","plugin_collectible_schedule_for_a_future_time":"未来の時間のスケジュールを立てる。","plugin_collectible_schedule_for_a_future_time_helper":"このリスティングは、未来のデータでのみ購入できるようにスケジュールを立てることができます。","plugin_collectible_privacy":"プライバシー","plugin_collectible_privacy_helper":"あなたはリスティングを公開にすることができますし、１つのアドレスだけが購入できるように指定することができます。","plugin_collectible_enter_a_price":"価格を入力","plugin_collectible_invalid_schedule_date":"無効な予定日","plugin_collectible_invalid_ending_price":"無効な終了価格","plugin_collectible_invalid_expiration_date":"無効な有効期限","plugin_collectible_invalid_buyer_address":"無効な買い手のアドレス","plugin_collectible_set_price":"価格を設定する","plugin_collectible_highest_bid":"最高の入札価格","plugin_collectible_minimum_bid":"最低の入札価格","plugin_collectible_set_starting_bid_price":"あなたの入札開始価格を設定する","plugin_collectible_reserve_price":"予約価格","plugin_collectible_reserve_price_helper":"予約価格を設定して、隠れた制限を作成します。 予約価格は開始価格以上である必要があります。","plugin_collectible_auction_auto_end":"この時点であなたのオークションは自動的に終了し、最高価格の入札者が落札します。キャンセルする必要はありません。","plugin_collectible_enter_minimum_bid":"最低入札価格の入力","plugin_collectible_enter_reserve_price":"予約価格の入力","plugin_collectible_invalid_reserve_price":"無効な予約価格","plugin_collectible_place_a_bid":"入札する","plugin_collectible_make_an_offer":"オファーする","plugin_collectible_approved_by_open_sea":"このボックスをチェックすることで、このアイテムが OpenSea によってレビューまたは承認されていないことを認めます。","plugin_collectible_legal_text":"このボックスをチェックすることで、OpenSea の<terms>利用規約</terms>に同意します。","plugin_snapshot_info_title":"情報","plugin_snapshot_info_strategy":"戦略家","plugin_snapshot_info_author":"著者","plugin_snapshot_info_start":"開始日","plugin_snapshot_info_end":"終了日","plugin_snapshot_result_title":"結果","plugin_snapshot_votes_title":"投票","plugin_snapshot_no_power":"投票権がありません","plugin_snapshot_vote_success":"投票されています！","plugin_snapshot_vote":"投票","plugin_snapshot_vote_choice":"選択","plugin_snapshot_vote_power":"あなたの投票力","plugin_snapshot_vote_title":"投票する","plugin_snapshot_vote_confirm_dialog_title":"投票の確認","plugin_snapshot_vote_confirm_dialog_choice":"本当に 「{{ choiceText }}」 に投票しますか？","plugin_snapshot_vote_confirm_dialog_warning":"このアクションは元に戻すことはできません。","plugin_snapshot_current_result_title":"現在の結果","plugin_snapshot_download_report":"レポートをダウンロードする","plugin_dhedge_managed_by":"<manager>{{managerName}}</manager> によって管理されています","plugin_dhedge_manager_share":"プールのうち <share>{{managerShare}}%</share> を所持しています","plugin_dhedge_value_managed":"価値が管理されています","plugin_dhedge_lifetime_return":"生涯リターン","plugin_dhedge_risk_factor":"リスク要因","plugin_dhedge_tab_stats":"統計","plugin_dhedge_tab_chart":"チャート","plugin_dhedge_strategy":"戦略家","plugin_dhedge_see_less":"閉じる","plugin_dhedge_see_more":"詳細","plugin_dhedge_no_data":"データがありません","plugin_dhedge_fetch_error":"データを取得できません。再度試してください。","plugin_dhedge_loading_chart":"ロード中","plugin_dhedge_invest":"投資する","plugin_dhedge_buy_token":"{{symbol}} を得る","plugin_dhedge_enter_an_amount":"量を入力","plugin_dhedge_insufficient_balance":"{{symbol}} の残高が不十分です","plugin_dhedge_loading":"ロード中…","plugin_dhedge_pool_not_found":"無効なプールアドレスです！","plugin_dhedge_smt_wrong":"何か間違いが発生しました！"}');
 ;// CONCATENATED MODULE: ./shared-ui/locales/ko-KR.json
@@ -22149,12 +21734,12 @@ const buildInfoMarkdown = `## Build info
 - target: ${"safari"}
 - build: ${"stable"}
 - architecture: ${"app"}
-- BUILD_DATE: ${"2022-02-28T03:26:59.538Z"}
-- VERSION: ${"v1.29.12-2039-g2cf4a489b"}
+- BUILD_DATE: ${"2022-03-01T10:25:42.833Z"}
+- VERSION: ${"v1.29.12-2051-gaef1d4e62"}
 
 ## Git (${ true ? '*' : 0}):
 
-${"2cf4a489b"} (${"HEAD"}) on tag "${"v2.5.0"}"
+${"aef1d4e62"} (${"HEAD"}) on tag "${"v2.5.0"}"
 ${((ref6 = (ref5 = "https://github.com/DimensionDev/Maskbook") === null || ref5 === void 0 ? void 0 : ref5.toLowerCase()) === null || ref6 === void 0 ? void 0 : ref6.includes('DimensionDev')) ? '' : "https://github.com/DimensionDev/Maskbook"}`;
 
 // EXTERNAL MODULE: ./src/social-network/index.ts
@@ -34253,28 +33838,175 @@ function createLookupTableResolver(map, fallback) {
 
 /***/ }),
 
-/***/ 13330:
+/***/ 23104:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "oD": () => (/* binding */ CoinGecko),
-  "bC": () => (/* binding */ Explorer),
-  "cl": () => (/* binding */ KeyValue),
-  "jo": () => (/* binding */ NFTScan),
-  "x4": () => (/* reexport */ NonFungibleTokenAPI),
-  "Nn": () => (/* binding */ OpenSea),
-  "S5": () => (/* binding */ src_RSS3),
-  "e8": () => (/* binding */ Rarible),
-  "no": () => (/* binding */ TokenList),
-  "GI": () => (/* binding */ TokenPrice),
-  "tL": () => (/* binding */ Twitter),
-  "bb": () => (/* reexport */ utils/* getOrderUnitPrice */.bb)
+  "Ur": () => (/* binding */ NFTScanAPI)
 });
 
-// UNUSED EXPORTS: RSS3BaseAPI, getAssetListFromDebank, getNFTScanNFTList, getNFTScanNFTs, getOpenSeaCollectionList, getOpenSeaNFTList, getOrderUSDPrice, getRaribleNFTList, toImage
+// UNUSED EXPORTS: getNFTScanNFTList, getNFTScanNFTs
+
+// EXTERNAL MODULE: ../web3-shared/evm/utils/token.ts
+var token = __webpack_require__(28389);
+// EXTERNAL MODULE: ../web3-shared/evm/types/index.ts
+var types = __webpack_require__(18249);
+// EXTERNAL MODULE: ../web3-shared/evm/pipes/index.ts
+var pipes = __webpack_require__(29528);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/date-fns@2.28.0/node_modules/date-fns/esm/addSeconds/index.js
+var addSeconds = __webpack_require__(71767);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/date-fns@2.28.0/node_modules/date-fns/esm/isBefore/index.js
+var isBefore = __webpack_require__(17438);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/urlcat@2.0.4/node_modules/urlcat/dist/index.js
+var dist = __webpack_require__(19802);
+var dist_default = /*#__PURE__*/__webpack_require__.n(dist);
+// EXTERNAL MODULE: ../web3-providers/src/helpers.ts
+var helpers = __webpack_require__(33037);
+;// CONCATENATED MODULE: ../web3-providers/src/NFTScan/constants.ts
+
+
+const NFTSCAN_ID = 't9k2o5GC';
+const NFTSCAN_SECRET = '21da1d638ef5d0bf76e37aa5c2da7fd789ade9e3';
+const NFTSCAN_URL = 'https://restapi.nftscan.com';
+const NFTSCAN_BASE_API = dist_default()(NFTSCAN_URL, '/api/v1');
+const NFTSCAN_ACCESS_TOKEN_URL = (0,helpers/* courier */.t4)(dist_default()(NFTSCAN_URL, '/gw/token', {
+    apiKey: NFTSCAN_ID,
+    apiSecret: NFTSCAN_SECRET
+}));
+
+;// CONCATENATED MODULE: ../web3-providers/src/NFTScan/index.ts
+
+
+
+
+
+
+const tokenCache = new Map();
+async function getToken() {
+    const token = tokenCache.get('token');
+    if (token && (0,isBefore/* default */.Z)(Date.now(), token.expiration)) {
+        return token.token;
+    }
+    const response = await fetch(NFTSCAN_ACCESS_TOKEN_URL, {
+        ...!(0,helpers/* isProxyENV */.HN)() && {
+            mode: 'cors'
+        }
+    });
+    const { data ,  } = await response.json();
+    tokenCache.set('token', {
+        token: data.accessToken,
+        expiration: (0,addSeconds/* default */.Z)(Date.now(), data.expiration)
+    });
+    return data.accessToken;
+}
+async function fetchAsset(path, body) {
+    const url = (0,helpers/* courier */.t4)(dist_default()(NFTSCAN_BASE_API, path));
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Access-Token': await getToken(),
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    });
+    if (!response.ok) return;
+    return response.json();
+}
+function createERC721ContractDetailedFromAssetContract(asset) {
+    var _trade_contract;
+    return (0,token/* createERC721ContractDetailed */.ek)(types/* ChainId.Mainnet */.a_.Mainnet, (_trade_contract = asset.trade_contract) !== null && _trade_contract !== void 0 ? _trade_contract : asset.nft_contract_address, undefined, asset.trade_symbol);
+}
+function createERC721TokenAsset(asset) {
+    const payload = JSON.parse(asset.nft_json);
+    const detailed = createERC721ContractDetailedFromAssetContract(asset);
+    var ref, ref1, ref2, ref3, _nft_cover, ref4, ref5, _nft_holder;
+    return (0,token/* createERC721Token */.Of)(detailed, {
+        name: (ref2 = (ref1 = (ref = payload === null || payload === void 0 ? void 0 : payload.name) !== null && ref !== void 0 ? ref : asset.nft_name) !== null && ref1 !== void 0 ? ref1 : asset.nft_platform_name) !== null && ref2 !== void 0 ? ref2 : '',
+        description: (ref3 = payload === null || payload === void 0 ? void 0 : payload.description) !== null && ref3 !== void 0 ? ref3 : '',
+        mediaUrl: (0,pipes/* resolveResourceLink */.yl)((ref5 = (ref4 = (_nft_cover = asset.nft_cover) !== null && _nft_cover !== void 0 ? _nft_cover : asset.nft_content_uri) !== null && ref4 !== void 0 ? ref4 : payload.image) !== null && ref5 !== void 0 ? ref5 : ''),
+        owner: (_nft_holder = asset.nft_holder) !== null && _nft_holder !== void 0 ? _nft_holder : ''
+    }, asset.token_id);
+}
+class NFTScanAPI {
+    async getContractBalance(address) {
+        const response = await fetchAsset('getGroupByNftContract', {
+            erc: 'erc721',
+            user_address: address
+        });
+        if (!(response === null || response === void 0 ? void 0 : response.data)) return [];
+        return response.data.map((x)=>{
+            const contractDetailed = (0,token/* createERC721ContractDetailed */.ek)(types/* ChainId.Mainnet */.a_.Mainnet, x.nft_contract_address, x.nft_platform_name, undefined, undefined, x.nft_platform_image);
+            const balance = x.nft_asset.length;
+            return {
+                contractDetailed,
+                balance
+            };
+        }).sort((a, b)=>a.balance - b.balance
+        );
+    }
+    async getToken(address, tokenId, chainId) {
+        const response = await fetchAsset('getSingleNft', {
+            nft_address: address,
+            token_id: tokenId
+        });
+        if (!response) return;
+        return createERC721TokenAsset(response.data);
+    }
+    async getTokens(from, { chainId =types/* ChainId.Mainnet */.a_.Mainnet , page =0 , size =50 , pageInfo  }) {
+        var ref;
+        const response = await fetchAsset('getAllNftByUserAddress', {
+            page_size: size,
+            page_index: page + 1,
+            user_address: from,
+            erc: (ref = pageInfo === null || pageInfo === void 0 ? void 0 : pageInfo.type) !== null && ref !== void 0 ? ref : 'erc721'
+        });
+        if (!(response === null || response === void 0 ? void 0 : response.data)) return {
+            data: [],
+            hasNextPage: false
+        };
+        var ref6;
+        const data = (ref6 = response.data.content.map(createERC721TokenAsset).map((x)=>({
+                ...x,
+                provideBy: 'NFTScan'
+            })
+        )) !== null && ref6 !== void 0 ? ref6 : [];
+        const total = response.data.total;
+        return {
+            data,
+            hasNextPage: total - (page + 1) * size > 0
+        };
+    }
+}
+function getNFTScanNFTList(address) {
+    const nftScanAPI = new NFTScanAPI();
+    return nftScanAPI.getContractBalance(address);
+}
+function getNFTScanNFTs(address, type, page, size) {
+    const nftScanAPI = new NFTScanAPI();
+    return nftScanAPI.getTokens(address, {
+        page,
+        size,
+        pageInfo: {
+            type
+        }
+    });
+}
+
+
+/***/ }),
+
+/***/ 24704:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "J": () => (/* binding */ CoinGeckoAPI)
+});
 
 ;// CONCATENATED MODULE: ../web3-providers/src/coingecko/constants.ts
 const COINGECKO_URL_BASE = 'https://api.coingecko.com/api/v3';
@@ -34294,6 +34026,252 @@ class CoinGeckoAPI {
         );
     }
 }
+
+
+/***/ }),
+
+/***/ 81292:
+/***/ ((__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
+
+"use strict";
+
+// UNUSED EXPORTS: getAssetListFromDebank
+
+// EXTERNAL MODULE: ../../node_modules/.pnpm/urlcat@2.0.4/node_modules/urlcat/dist/index.js
+var dist = __webpack_require__(19802);
+// EXTERNAL MODULE: ../plugin-infra/src/index.ts
+var src = __webpack_require__(89729);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
+var base_src = __webpack_require__(52522);
+// EXTERNAL MODULE: ../web3-constants/evm/debank.json
+var debank = __webpack_require__(60816);
+;// CONCATENATED MODULE: ../web3-providers/src/debank/format.ts
+
+
+
+
+function format_formatAssets(data) {
+    const supportedChains = Object.values(DeBank.CHAIN_ID).filter(Boolean);
+    return data.filter((x)=>x.is_verified
+    ).map((y)=>{
+        var ref;
+        const chainIdFromChain = (ref = getChainIdFromName(y.chain)) !== null && ref !== void 0 ? ref : ChainId.Mainnet;
+        const address = supportedChains.includes(y.id) ? createNativeToken(chainIdFromChain).address : y.id;
+        var _price;
+        return {
+            id: address,
+            chainId: chainIdFromChain,
+            token: {
+                id: address,
+                address: address,
+                chainId: chainIdFromChain,
+                type: TokenType.Fungible,
+                decimals: y.decimals,
+                name: y.name,
+                symbol: y.symbol,
+                logoURI: y.logo_url
+            },
+            balance: rightShift(y.amount, y.decimals).toFixed(),
+            price: {
+                [CurrencyType.USD]: toFixed(y.price)
+            },
+            value: {
+                [CurrencyType.USD]: multipliedBy((_price = y.price) !== null && _price !== void 0 ? _price : 0, y.amount).toFixed()
+            },
+            logoURI: y.logo_url
+        };
+    });
+}
+
+;// CONCATENATED MODULE: ../web3-providers/src/debank/index.ts
+
+
+const DEBANK_OPEN_API = 'https://openapi.debank.com';
+async function getAssetListFromDebank(address) {
+    const response = await fetch(urlcat(DEBANK_OPEN_API, '/v1/user/token_list', {
+        is_all: true,
+        has_balance: true,
+        id: address.toLowerCase()
+    }));
+    try {
+        var ref;
+        const result = (ref = await response.json()) !== null && ref !== void 0 ? ref : [];
+        return formatAssets(result);
+    } catch  {
+        return [];
+    }
+}
+
+
+/***/ }),
+
+/***/ 85560:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "b": () => (/* binding */ NativeExplorerAPI)
+});
+
+// EXTERNAL MODULE: ../../node_modules/.pnpm/urlcat@2.0.4/node_modules/urlcat/dist/index.js
+var dist = __webpack_require__(19802);
+var dist_default = /*#__PURE__*/__webpack_require__.n(dist);
+;// CONCATENATED MODULE: ../web3-providers/src/explorer/helpers.ts
+function toTransaction(transaction) {
+    return {
+        nonce: Number.parseInt(transaction.nonce, 10),
+        blockHash: transaction.blockHash,
+        blockNumber: Number.parseInt(transaction.blockNumber, 10),
+        from: transaction.from,
+        to: transaction.to,
+        gas: Number.parseInt(transaction.gas, 10),
+        gasPrice: transaction.gasPrice,
+        hash: transaction.hash,
+        input: transaction.input,
+        transactionIndex: Number.parseInt(transaction.transactionIndex, 10),
+        value: transaction.value,
+        status: transaction.txreceipt_status,
+        confirmations: Number.parseInt(transaction.confirmations, 10)
+    };
+}
+
+;// CONCATENATED MODULE: ../web3-providers/src/explorer/index.ts
+
+
+class NativeExplorerAPI {
+    async getLatestTransactions(account, url, { offset =10 , apikey  } = {}) {
+        var ref;
+        const response = await fetch(dist_default()(url, {
+            module: 'account',
+            action: 'txlist',
+            address: account.toLowerCase(),
+            startBlock: 0,
+            endblock: 999999999999,
+            page: 1,
+            offset,
+            sort: 'desc',
+            apikey
+        }));
+        const rawTransactions = await response.json();
+        var ref1;
+        return (ref1 = (ref = rawTransactions.result) === null || ref === void 0 ? void 0 : ref.map(toTransaction)) !== null && ref1 !== void 0 ? ref1 : [];
+    }
+}
+
+
+/***/ }),
+
+/***/ 33037:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "HN": () => (/* binding */ isProxyENV),
+/* harmony export */   "ZV": () => (/* binding */ fetchJSON),
+/* harmony export */   "t4": () => (/* binding */ courier)
+/* harmony export */ });
+/* harmony import */ var urlcat__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19802);
+/* harmony import */ var urlcat__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(urlcat__WEBPACK_IMPORTED_MODULE_0__);
+
+function isProxyENV() {
+    try {
+        return process.env.PROVIDER_API_ENV === 'proxy';
+    } catch  {
+        return false;
+    }
+}
+async function fetchJSON(requestInfo, requestInit) {
+    const res = await globalThis.fetch(requestInfo, requestInit);
+    return res.json();
+}
+const CORS_PROXY = 'https://cors.r2d2.to';
+function courier(url) {
+    return urlcat__WEBPACK_IMPORTED_MODULE_0___default()(`${CORS_PROXY}?:url`, {
+        url
+    });
+}
+
+
+/***/ }),
+
+/***/ 56107:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "Z": () => (/* binding */ KeyValueAPI)
+});
+
+// UNUSED EXPORTS: JSON_Storage
+
+// EXTERNAL MODULE: ../../node_modules/.pnpm/urlcat@2.0.4/node_modules/urlcat/dist/index.js
+var dist = __webpack_require__(19802);
+var dist_default = /*#__PURE__*/__webpack_require__.n(dist);
+// EXTERNAL MODULE: ../web3-providers/src/helpers.ts
+var helpers = __webpack_require__(33037);
+;// CONCATENATED MODULE: ../web3-providers/src/kv/constants.ts
+const KV_ROOT_URL = 'https://kv.r2d2.to';
+
+;// CONCATENATED MODULE: ../web3-providers/src/kv/index.ts
+
+
+
+class JSON_Storage {
+    async set(key, value) {
+        await fetch(dist_default()(KV_ROOT_URL, 'api/:name', {
+            name: `${this.prefix}_${key}`
+        }), {
+            method: 'PUT',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(value)
+        });
+    }
+    async get(key) {
+        try {
+            return (0,helpers/* fetchJSON */.ZV)(dist_default()(KV_ROOT_URL, 'api/:name', {
+                name: `${this.prefix}_${key}`
+            }), {
+                method: 'GET',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        } catch  {
+            return;
+        }
+    }
+    constructor(prefix){
+        this.prefix = prefix;
+    }
+}
+class KeyValueAPI {
+    createJSON_Storage(key) {
+        return new JSON_Storage(key);
+    }
+}
+
+
+/***/ }),
+
+/***/ 50551:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "rQ": () => (/* binding */ OpenSeaAPI)
+});
+
+// UNUSED EXPORTS: getOpenSeaCollectionList, getOpenSeaNFTList
 
 // EXTERNAL MODULE: ../web3-shared/evm/types/index.ts
 var types = __webpack_require__(18249);
@@ -34320,26 +34298,8 @@ const OPENSEA_ACCOUNT_URL = 'https://opensea.io/accounts/:address';
 const OPENSEA_API_KEY = 'c38fe2446ee34f919436c32db480a2e3';
 const OPENSEA_API_URL = 'https://api.opensea.io';
 
-;// CONCATENATED MODULE: ../web3-providers/src/helpers.ts
-
-function isProxyENV() {
-    try {
-        return process.env.PROVIDER_API_ENV === 'proxy';
-    } catch  {
-        return false;
-    }
-}
-async function fetchJSON(requestInfo, requestInit) {
-    const res = await globalThis.fetch(requestInfo, requestInit);
-    return res.json();
-}
-const CORS_PROXY = 'https://cors.r2d2.to';
-function courier(url) {
-    return dist_default()(`${CORS_PROXY}?:url`, {
-        url
-    });
-}
-
+// EXTERNAL MODULE: ../web3-providers/src/helpers.ts
+var helpers = __webpack_require__(33037);
 ;// CONCATENATED MODULE: ../web3-providers/src/opensea/index.ts
 
 
@@ -34362,7 +34322,7 @@ async function fetchFromOpenSea(url, chainId, apiKey) {
                 'x-api-key': apiKey !== null && apiKey !== void 0 ? apiKey : OPENSEA_API_KEY,
                 Accept: 'application/json'
             },
-            ...!isProxyENV() && {
+            ...!(0,helpers/* isProxyENV */.HN)() && {
                 mode: 'cors'
             }
         });
@@ -34678,10 +34638,32 @@ function getOpenSeaCollectionList(apiKey, address, page, size) {
     });
 }
 
+
+/***/ }),
+
+/***/ 47016:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "I": () => (/* binding */ RaribleAPI)
+});
+
+// UNUSED EXPORTS: getRaribleNFTList
+
+// EXTERNAL MODULE: ../../node_modules/.pnpm/urlcat@2.0.4/node_modules/urlcat/dist/index.js
+var dist = __webpack_require__(19802);
+var dist_default = /*#__PURE__*/__webpack_require__.n(dist);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/head.js
+var head = __webpack_require__(29730);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/compact.js
 var compact = __webpack_require__(27862);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/enum.ts
 var utils_enum = __webpack_require__(18392);
+// EXTERNAL MODULE: ../web3-shared/evm/types/index.ts
+var types = __webpack_require__(18249);
 // EXTERNAL MODULE: ../web3-shared/evm/pipes/index.ts
 var pipes = __webpack_require__(29528);
 ;// CONCATENATED MODULE: ../web3-providers/src/rarible/types.ts
@@ -34715,6 +34697,10 @@ const RaribleMainnetURL = 'https://api-mainnet.rarible.com/marketplace/api/v4/';
 const RaribleStagingMainnetAPI_URL = 'https://api-staging.rarible.com/protocol/v0.1';
 const RaribleMainnetSearchURL = 'https://api-mainnet.rarible.com/marketplace/search/v1/';
 
+// EXTERNAL MODULE: ../web3-providers/src/index.ts
+var src = __webpack_require__(23290);
+// EXTERNAL MODULE: ../web3-providers/src/helpers.ts
+var helpers = __webpack_require__(33037);
 ;// CONCATENATED MODULE: ../web3-providers/src/rarible/index.ts
 
 
@@ -34729,7 +34715,7 @@ const resolveRaribleUserNetwork = (0,utils_enum/* createLookupTableResolver */.F
 }, RaribleUserURL);
 async function fetchFromRarible(url, path, init) {
     const response = await fetch(dist_default()(url, path), {
-        ...!isProxyENV() && {
+        ...!(0,helpers/* isProxyENV */.HN)() && {
             mode: 'cors'
         },
         ...init
@@ -34745,7 +34731,7 @@ function getProfilesFromRarible(addresses) {
         }
     });
 }
-function rarible_createERC721TokenFromAsset(tokenAddress, tokenId, asset) {
+function createERC721TokenFromAsset(tokenAddress, tokenId, asset) {
     var ref, ref1, ref2, ref3;
     var _ORIGINAL, ref4;
     const imageURL = (0,pipes/* resolveResourceLink */.yl)((ref4 = (_ORIGINAL = (ref = asset === null || asset === void 0 ? void 0 : asset.meta.image) === null || ref === void 0 ? void 0 : ref.url.ORIGINAL) !== null && _ORIGINAL !== void 0 ? _ORIGINAL : (ref1 = asset === null || asset === void 0 ? void 0 : asset.meta.image) === null || ref1 === void 0 ? void 0 : ref1.url.PREVIEW) !== null && ref4 !== void 0 ? ref4 : '');
@@ -34768,7 +34754,7 @@ function rarible_createERC721TokenFromAsset(tokenAddress, tokenId, asset) {
         tokenId: tokenId
     };
 }
-function rarible_createNFTAsset(asset, chainId) {
+function createNFTAsset(asset, chainId) {
     var ref, ref6;
     const owner = (0,head/* default */.Z)(asset === null || asset === void 0 ? void 0 : asset.owners);
     const creator = (0,head/* default */.Z)(asset === null || asset === void 0 ? void 0 : asset.creators);
@@ -34846,11 +34832,11 @@ class RaribleAPI {
     async getAsset(address, tokenId, { chainId =types/* ChainId.Mainnet */.a_.Mainnet  } = {}) {
         const asset = await _getAsset(address, tokenId);
         if (!asset) return;
-        return rarible_createNFTAsset(asset, chainId);
+        return createNFTAsset(asset, chainId);
     }
     async getToken(tokenAddress, tokenId) {
         const asset = await _getAsset(tokenAddress, tokenId);
-        return rarible_createERC721TokenFromAsset(tokenAddress, tokenId, asset);
+        return createERC721TokenFromAsset(tokenAddress, tokenId, asset);
     }
     async getTokens(from, opts) {
         const requestPath = dist_default()('/protocol/v0.1/ethereum/nft/items/byOwner', {
@@ -34864,7 +34850,7 @@ class RaribleAPI {
             hasNextPage: false
         };
         var ref8;
-        const data = (ref8 = asset1.items.map((asset)=>rarible_createERC721TokenFromAsset(asset.contract, asset.tokenId, asset)
+        const data = (ref8 = asset1.items.map((asset)=>createERC721TokenFromAsset(asset.contract, asset.tokenId, asset)
         ).filter((x)=>{
             var ref, ref7;
             return ((ref = x.info) === null || ref === void 0 ? void 0 : (ref7 = ref.owner) === null || ref7 === void 0 ? void 0 : ref7.toLowerCase()) === from.toLowerCase();
@@ -34907,7 +34893,7 @@ class RaribleAPI {
                 current_bounty: order.fee,
                 payment_token: order.token,
                 listing_time: 0,
-                side: NonFungibleTokenAPI.OrderSide.Buy,
+                side: src/* NonFungibleTokenAPI.OrderSide.Buy */.x4.OrderSide.Buy,
                 quantity: '1',
                 expiration_time: 0,
                 order_hash: order.signature,
@@ -34943,7 +34929,7 @@ class RaribleAPI {
                 current_price: asset.priceEth,
                 payment_token: asset.token,
                 listing_time: 0,
-                side: NonFungibleTokenAPI.OrderSide.Buy,
+                side: src/* NonFungibleTokenAPI.OrderSide.Buy */.x4.OrderSide.Buy,
                 quantity: '1',
                 expiration_time: 0,
                 order_hash: asset.signature,
@@ -34960,9 +34946,9 @@ class RaribleAPI {
     }
     async getOrders(tokenAddress, tokenId, side, opts = {}) {
         switch(side){
-            case NonFungibleTokenAPI.OrderSide.Buy:
+            case src/* NonFungibleTokenAPI.OrderSide.Buy */.x4.OrderSide.Buy:
                 return this.getOffers(tokenAddress, tokenId, opts);
-            case NonFungibleTokenAPI.OrderSide.Sell:
+            case src/* NonFungibleTokenAPI.OrderSide.Sell */.x4.OrderSide.Sell:
                 return this.getListings(tokenAddress, tokenId, opts);
             default:
                 return [];
@@ -35046,207 +35032,32 @@ function getRaribleNFTList(apiKey, address, page, size, pageInfo) {
     });
 }
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/date-fns@2.28.0/node_modules/date-fns/esm/addSeconds/index.js
-var addSeconds = __webpack_require__(71767);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/date-fns@2.28.0/node_modules/date-fns/esm/isBefore/index.js
-var isBefore = __webpack_require__(17438);
-;// CONCATENATED MODULE: ../web3-providers/src/NFTScan/constants.ts
 
+/***/ }),
 
-const NFTSCAN_ID = 't9k2o5GC';
-const NFTSCAN_SECRET = '21da1d638ef5d0bf76e37aa5c2da7fd789ade9e3';
-const NFTSCAN_URL = 'https://restapi.nftscan.com';
-const NFTSCAN_BASE_API = dist_default()(NFTSCAN_URL, '/api/v1');
-const NFTSCAN_ACCESS_TOKEN_URL = courier(dist_default()(NFTSCAN_URL, '/gw/token', {
-    apiKey: NFTSCAN_ID,
-    apiSecret: NFTSCAN_SECRET
-}));
+/***/ 81410:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-;// CONCATENATED MODULE: ../web3-providers/src/NFTScan/index.ts
+"use strict";
 
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "M": () => (/* binding */ RSS3API)
+});
 
-
-
-
-
-const tokenCache = new Map();
-async function getToken() {
-    const token = tokenCache.get('token');
-    if (token && (0,isBefore/* default */.Z)(Date.now(), token.expiration)) {
-        return token.token;
-    }
-    const response = await fetch(NFTSCAN_ACCESS_TOKEN_URL, {
-        ...!isProxyENV() && {
-            mode: 'cors'
-        }
-    });
-    const { data ,  } = await response.json();
-    tokenCache.set('token', {
-        token: data.accessToken,
-        expiration: (0,addSeconds/* default */.Z)(Date.now(), data.expiration)
-    });
-    return data.accessToken;
-}
-async function fetchAsset(path, body) {
-    const url = courier(dist_default()(NFTSCAN_BASE_API, path));
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Access-Token': await getToken(),
-            'Content-type': 'application/json'
-        },
-        body: JSON.stringify(body)
-    });
-    if (!response.ok) return;
-    return response.json();
-}
-function createERC721ContractDetailedFromAssetContract(asset) {
-    var _trade_contract;
-    return (0,utils_token/* createERC721ContractDetailed */.ek)(types/* ChainId.Mainnet */.a_.Mainnet, (_trade_contract = asset.trade_contract) !== null && _trade_contract !== void 0 ? _trade_contract : asset.nft_contract_address, undefined, asset.trade_symbol);
-}
-function createERC721TokenAsset(asset) {
-    const payload = JSON.parse(asset.nft_json);
-    const detailed = createERC721ContractDetailedFromAssetContract(asset);
-    var ref, ref1, ref2, ref3, _nft_cover, ref4, ref5, _nft_holder;
-    return (0,utils_token/* createERC721Token */.Of)(detailed, {
-        name: (ref2 = (ref1 = (ref = payload === null || payload === void 0 ? void 0 : payload.name) !== null && ref !== void 0 ? ref : asset.nft_name) !== null && ref1 !== void 0 ? ref1 : asset.nft_platform_name) !== null && ref2 !== void 0 ? ref2 : '',
-        description: (ref3 = payload === null || payload === void 0 ? void 0 : payload.description) !== null && ref3 !== void 0 ? ref3 : '',
-        mediaUrl: (0,pipes/* resolveResourceLink */.yl)((ref5 = (ref4 = (_nft_cover = asset.nft_cover) !== null && _nft_cover !== void 0 ? _nft_cover : asset.nft_content_uri) !== null && ref4 !== void 0 ? ref4 : payload.image) !== null && ref5 !== void 0 ? ref5 : ''),
-        owner: (_nft_holder = asset.nft_holder) !== null && _nft_holder !== void 0 ? _nft_holder : ''
-    }, asset.token_id);
-}
-class NFTScanAPI {
-    async getContractBalance(address) {
-        const response = await fetchAsset('getGroupByNftContract', {
-            erc: 'erc721',
-            user_address: address
-        });
-        if (!(response === null || response === void 0 ? void 0 : response.data)) return [];
-        return response.data.map((x)=>{
-            const contractDetailed = (0,utils_token/* createERC721ContractDetailed */.ek)(types/* ChainId.Mainnet */.a_.Mainnet, x.nft_contract_address, x.nft_platform_name, undefined, undefined, x.nft_platform_image);
-            const balance = x.nft_asset.length;
-            return {
-                contractDetailed,
-                balance
-            };
-        }).sort((a, b)=>a.balance - b.balance
-        );
-    }
-    async getToken(address, tokenId, chainId) {
-        const response = await fetchAsset('getSingleNft', {
-            nft_address: address,
-            token_id: tokenId
-        });
-        if (!response) return;
-        return createERC721TokenAsset(response.data);
-    }
-    async getTokens(from, { chainId =types/* ChainId.Mainnet */.a_.Mainnet , page =0 , size =50 , pageInfo  }) {
-        var ref;
-        const response = await fetchAsset('getAllNftByUserAddress', {
-            page_size: size,
-            page_index: page + 1,
-            user_address: from,
-            erc: (ref = pageInfo === null || pageInfo === void 0 ? void 0 : pageInfo.type) !== null && ref !== void 0 ? ref : 'erc721'
-        });
-        if (!(response === null || response === void 0 ? void 0 : response.data)) return {
-            data: [],
-            hasNextPage: false
-        };
-        var ref6;
-        const data = (ref6 = response.data.content.map(createERC721TokenAsset).map((x)=>({
-                ...x,
-                provideBy: 'NFTScan'
-            })
-        )) !== null && ref6 !== void 0 ? ref6 : [];
-        const total = response.data.total;
-        return {
-            data,
-            hasNextPage: total - (page + 1) * size > 0
-        };
-    }
-}
-function getNFTScanNFTList(address) {
-    const nftScanAPI = new NFTScanAPI();
-    return nftScanAPI.getContractBalance(address);
-}
-function getNFTScanNFTs(address, type, page, size) {
-    const nftScanAPI = new NFTScanAPI();
-    return nftScanAPI.getTokens(address, {
-        page,
-        size,
-        pageInfo: {
-            type
-        }
-    });
-}
-
-;// CONCATENATED MODULE: ../web3-providers/src/explorer/helpers.ts
-function toTransaction(transaction) {
-    return {
-        nonce: Number.parseInt(transaction.nonce, 10),
-        blockHash: transaction.blockHash,
-        blockNumber: Number.parseInt(transaction.blockNumber, 10),
-        from: transaction.from,
-        to: transaction.to,
-        gas: Number.parseInt(transaction.gas, 10),
-        gasPrice: transaction.gasPrice,
-        hash: transaction.hash,
-        input: transaction.input,
-        transactionIndex: Number.parseInt(transaction.transactionIndex, 10),
-        value: transaction.value,
-        status: transaction.txreceipt_status,
-        confirmations: Number.parseInt(transaction.confirmations, 10)
-    };
-}
-
-;// CONCATENATED MODULE: ../web3-providers/src/explorer/index.ts
-
-
-class NativeExplorerAPI {
-    async getLatestTransactions(account, url, { offset =10 , apikey  } = {}) {
-        var ref;
-        const response = await fetch(dist_default()(url, {
-            module: 'account',
-            action: 'txlist',
-            address: account.toLowerCase(),
-            startBlock: 0,
-            endblock: 999999999999,
-            page: 1,
-            offset,
-            sort: 'desc',
-            apikey
-        }));
-        const rawTransactions = await response.json();
-        var ref1;
-        return (ref1 = (ref = rawTransactions.result) === null || ref === void 0 ? void 0 : ref.map(toTransaction)) !== null && ref1 !== void 0 ? ref1 : [];
-    }
-}
-
+// EXTERNAL MODULE: ../../node_modules/.pnpm/urlcat@2.0.4/node_modules/urlcat/dist/index.js
+var dist = __webpack_require__(19802);
+var dist_default = /*#__PURE__*/__webpack_require__.n(dist);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/rss3-next@0.6.17_typescript@4.6.1-rc/node_modules/rss3-next/dist/browser/RSS3.js
 var RSS3 = __webpack_require__(6351);
 var RSS3_default = /*#__PURE__*/__webpack_require__.n(RSS3);
 ;// CONCATENATED MODULE: ../web3-providers/src/rss3/constants.ts
 const RSS3_ENDPOINT = 'https://hub.pass3.me';
 
-;// CONCATENATED MODULE: ../web3-providers/src/types.ts
-var RSS3BaseAPI;
-(function(RSS3BaseAPI1) {
-    let AssetType;
-    (function(AssetType) {
-        AssetType["GitcoinDonation"] = 'Gitcoin-Donation';
-        AssetType["POAP"] = 'POAP';
-        AssetType["NFT"] = 'NFT';
-    })(AssetType = RSS3BaseAPI1.AssetType || (RSS3BaseAPI1.AssetType = {}));
-})(RSS3BaseAPI || (RSS3BaseAPI = {}));
-var NonFungibleTokenAPI;
-(function(NonFungibleTokenAPI1) {
-    let OrderSide;
-    (function(OrderSide) {
-        OrderSide[OrderSide["Buy"] = 0] = "Buy";
-        OrderSide[OrderSide["Sell"] = 1] = "Sell";
-    })(OrderSide = NonFungibleTokenAPI1.OrderSide || (NonFungibleTokenAPI1.OrderSide = {}));
-})(NonFungibleTokenAPI || (NonFungibleTokenAPI = {}));
-
+// EXTERNAL MODULE: ../web3-providers/src/types.ts
+var types = __webpack_require__(68088);
+// EXTERNAL MODULE: ../web3-providers/src/helpers.ts
+var helpers = __webpack_require__(33037);
 ;// CONCATENATED MODULE: ../web3-providers/src/rss3/index.ts
 
 
@@ -35286,38 +35097,38 @@ class RSS3API {
     async getDonations(address) {
         const url = dist_default()(RSS3_ENDPOINT, '/assets/list', {
             personaID: address,
-            type: RSS3BaseAPI.AssetType.GitcoinDonation
+            type: types/* RSS3BaseAPI.AssetType.GitcoinDonation */.b.AssetType.GitcoinDonation
         });
-        return fetchJSON(url);
+        return (0,helpers/* fetchJSON */.ZV)(url);
     }
     async getFootprints(address) {
         const url = dist_default()(RSS3_ENDPOINT, '/assets/list', {
             personaID: address,
-            type: RSS3BaseAPI.AssetType.POAP
+            type: types/* RSS3BaseAPI.AssetType.POAP */.b.AssetType.POAP
         });
-        return fetchJSON(url);
+        return (0,helpers/* fetchJSON */.ZV)(url);
     }
     async getNameInfo(id) {
         if (!id) return;
         const url = dist_default()('https://rss3.domains/name/:id', {
             id
         });
-        return fetchJSON(url);
+        return (0,helpers/* fetchJSON */.ZV)(url);
     }
     async getProfileInfo(address) {
         if (!address) return;
         const url = dist_default()(RSS3_ENDPOINT, '/:address', {
             address
         });
-        const rsp = await fetchJSON(url);
+        const rsp = await (0,helpers/* fetchJSON */.ZV)(url);
         return rsp === null || rsp === void 0 ? void 0 : rsp.profile;
     }
     async getAssets(address) {
         const url = dist_default()(RSS3_ENDPOINT, '/assets/list', {
             personaID: address,
-            type: RSS3BaseAPI.AssetType.NFT
+            type: types/* RSS3BaseAPI.AssetType.NFT */.b.AssetType.NFT
         });
-        const { status , assets =[]  } = await fetchJSON(url);
+        const { status , assets =[]  } = await (0,helpers/* fetchJSON */.ZV)(url);
         if (!status) return [];
         return assets.map((asset)=>{
             var _image_preview_url, _title, _collection, _animation_url;
@@ -35350,58 +35161,169 @@ class RSS3API {
     }
 }
 
-;// CONCATENATED MODULE: ../web3-providers/src/kv/constants.ts
-const KV_ROOT_URL = 'https://kv.r2d2.to';
 
-;// CONCATENATED MODULE: ../web3-providers/src/kv/index.ts
+/***/ }),
+
+/***/ 69701:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "U": () => (/* binding */ TokenListAPI)
+/* harmony export */ });
+/* harmony import */ var _dimensiondev_kit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(85143);
+/* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(18249);
+/* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(80945);
+/* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(71831);
+/* harmony import */ var lodash_unified__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(70688);
 
 
 
-class JSON_Storage {
-    async set(key, value) {
-        await fetch(dist_default()(KV_ROOT_URL, 'api/:name', {
-            name: `${this.prefix}_${key}`
-        }), {
-            method: 'PUT',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(value)
-        });
-    }
-    async get(key) {
-        try {
-            return fetchJSON(dist_default()(KV_ROOT_URL, 'api/:name', {
-                name: `${this.prefix}_${key}`
-            }), {
-                method: 'GET',
-                mode: 'cors',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-        } catch  {
-            return;
+const NATIVE_TOKEN_ADDRESS_IN_1INCH = '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee';
+const fetchTokenList = (0,_dimensiondev_kit__WEBPACK_IMPORTED_MODULE_0__/* .memoizePromise */ .J3)(async (url)=>{
+    const response = await fetch(url, {
+        cache: 'force-cache'
+    });
+    return response.json();
+}, (url)=>url
+);
+/**
+ * Fetch tokens from 1inch token list
+ * @param url
+ * @param chainId
+ */ async function fetch1inchERC20TokensFromTokenList(url, chainId = _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_1__/* .ChainId.Mainnet */ .a_.Mainnet) {
+    const tokens = (await fetchTokenList(url)).tokens;
+    const _tokens = Object.values(tokens);
+    return _tokens.filter((x)=>x.address.toLowerCase() !== NATIVE_TOKEN_ADDRESS_IN_1INCH
+    ).map((x)=>({
+            type: _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_1__/* .EthereumTokenType.ERC20 */ .Dr.ERC20,
+            ...x,
+            chainId: chainId,
+            logoURI: x.logoURI ? [
+                x.logoURI
+            ] : []
+        })
+    );
+}
+/**
+ * Fetch tokens from common token list
+ * @param url
+ * @param chainId
+ */ async function fetchCommonERC20TokensFromTokenList(url, chainId = _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_1__/* .ChainId.Mainnet */ .a_.Mainnet) {
+    return (await fetchTokenList(url)).tokens.filter((x)=>{
+        var ref;
+        return x.chainId === chainId && ( true ? ((ref = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_2__/* .getChainDetailed */ .$G)(chainId)) === null || ref === void 0 ? void 0 : ref.network) === 'mainnet' : 0);
+    }).map((x)=>({
+            type: _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_1__/* .EthereumTokenType.ERC20 */ .Dr.ERC20,
+            ...x,
+            logoURI: x.logoURI ? [
+                x.logoURI
+            ] : []
+        })
+    );
+}
+/**
+ * Fetch tokens adapter
+ * @param urls
+ * @param chainId
+ */ async function fetchERC20TokensFromTokenList(urls, chainId = _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_1__/* .ChainId.Mainnet */ .a_.Mainnet) {
+    const allRequest = urls.map(async (x)=>{
+        if (x.includes('1inch')) {
+            const tokens = await fetch1inchERC20TokensFromTokenList(x, chainId);
+            return {
+                tokens,
+                weight: 0
+            };
         }
-    }
-    constructor(prefix){
-        this.prefix = prefix;
-    }
+        const tokens = await fetchCommonERC20TokensFromTokenList(x, chainId);
+        return {
+            tokens,
+            weight: x.includes('Mask-Token-List') ? 1 : 0
+        };
+    });
+    const allListResponse = await Promise.allSettled(allRequest);
+    return allListResponse.map((x)=>x.status === 'fulfilled' ? x.value : {
+            tokens: [],
+            weight: 0
+        }
+    );
 }
-class KeyValueAPI {
-    createJSON_Storage(key) {
-        return new JSON_Storage(key);
+/**
+ * Fetch tokens from multiple token lists
+ * @param urls
+ * @param chainId
+ */ class TokenListAPI {
+    async fetchERC20TokensFromTokenLists(url, chainId1) {
+        const result = (0,_dimensiondev_kit__WEBPACK_IMPORTED_MODULE_0__/* .memoizePromise */ .J3)(async (urls, chainId = _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_1__/* .ChainId.Mainnet */ .a_.Mainnet)=>{
+            const tokens = (await fetchERC20TokensFromTokenList(urls, chainId)).sort((a, b)=>b.weight - a.weight
+            ).flatMap((x)=>x.tokens
+            );
+            const groupedToken = (0,lodash_unified__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z)(tokens, (x)=>x.address.toLowerCase()
+            );
+            return Object.values(groupedToken).map((tokenList)=>{
+                const logoURIs = tokenList.map((token)=>token.logoURI
+                ).flat().filter((token)=>!!token
+                );
+                return {
+                    ...tokenList[0],
+                    ...{
+                        address: (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_4__/* .formatEthereumAddress */ .j8)(tokenList[0].address)
+                    },
+                    ...{
+                        logoURI: logoURIs
+                    }
+                };
+            });
+        }, (urls, chainId)=>`${chainId}-${urls.join()}`
+        );
+        return result(url, chainId1);
     }
 }
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/escapeRegExp.js
-var escapeRegExp = __webpack_require__(39345);
-;// CONCATENATED MODULE: ../web3-providers/src/twitter/index.ts
+
+/***/ }),
+
+/***/ 27162:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "J": () => (/* binding */ TokenPriceAPI)
+/* harmony export */ });
+const URL_BASE = 'https://api.coingecko.com/api/v3';
+class TokenPriceAPI {
+    async getTokenPrices(platform, contractAddresses, currency) {
+        const addressList = contractAddresses.join(',');
+        const requestPath = `${URL_BASE}/simple/token_price/${platform}?contract_addresses=${addressList}&vs_currencies=${currency}`;
+        const prices = await fetch(requestPath).then((r)=>r.json()
+        );
+        return prices;
+    }
+    async getNativeTokenPrice(tokenIds, currency) {
+        const requestPath = `${URL_BASE}/simple/price?ids=${tokenIds.join(',')}&vs_currencies=${currency}`;
+        const prices = await fetch(requestPath).then((r)=>r.json()
+        );
+        return prices;
+    }
+}
+
+
+/***/ }),
+
+/***/ 28008:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "I": () => (/* binding */ TwitterAPI)
+/* harmony export */ });
+/* harmony import */ var lodash_unified__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(39345);
+/* harmony import */ var urlcat__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19802);
+/* harmony import */ var urlcat__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(urlcat__WEBPACK_IMPORTED_MODULE_0__);
 
 
 function getScriptURL(content, name) {
-    const matchURL = new RegExp(`https://abs.twimg.com/responsive-web/\(client-web|client-web-\\w+\)\{1\}/${(0,escapeRegExp/* default */.Z)(`${name}.`)}\\w+${(0,escapeRegExp/* default */.Z)('.js')}`, 'm');
+    const matchURL = new RegExp(`https://abs.twimg.com/responsive-web/\(client-web|client-web-\\w+\)\{1\}/${(0,lodash_unified__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)(`${name}.`)}\\w+${(0,lodash_unified__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)('.js')}`, 'm');
     var ref;
     const [url] = (ref = content.match(matchURL)) !== null && ref !== void 0 ? ref : [];
     return url;
@@ -35423,7 +35345,7 @@ async function getScriptContent(url) {
     return response.text();
 }
 async function getUserNftContainer(screenName, queryToken, bearerToken, csrfToken) {
-    const response = await fetch(dist_default()(`https://twitter.com/i/api/graphql/:queryToken/userNftContainer_Query?variables=${encodeURIComponent(JSON.stringify({
+    const response = await fetch(urlcat__WEBPACK_IMPORTED_MODULE_0___default()(`https://twitter.com/i/api/graphql/:queryToken/userNftContainer_Query?variables=${encodeURIComponent(JSON.stringify({
         screenName
     }))}`, {
         queryToken
@@ -35467,228 +35389,34 @@ class TwitterAPI {
     }
 }
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+kit@0.0.0-20220223101101-4e6f3b9/node_modules/@dimensiondev/kit/esm/index.js + 1 modules
-var esm = __webpack_require__(85143);
-// EXTERNAL MODULE: ../web3-shared/evm/utils/chainDetailed.ts
-var chainDetailed = __webpack_require__(80945);
-// EXTERNAL MODULE: ../web3-shared/evm/utils/formatter.ts
-var formatter = __webpack_require__(71831);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/groupBy.js + 3 modules
-var groupBy = __webpack_require__(70688);
-;// CONCATENATED MODULE: ../web3-providers/src/token-list/index.ts
 
+/***/ }),
 
+/***/ 68088:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-const NATIVE_TOKEN_ADDRESS_IN_1INCH = '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee';
-const fetchTokenList = (0,esm/* memoizePromise */.J3)(async (url)=>{
-    const response = await fetch(url, {
-        cache: 'force-cache'
-    });
-    return response.json();
-}, (url)=>url
-);
-/**
- * Fetch tokens from 1inch token list
- * @param url
- * @param chainId
- */ async function fetch1inchERC20TokensFromTokenList(url, chainId = types/* ChainId.Mainnet */.a_.Mainnet) {
-    const tokens = (await fetchTokenList(url)).tokens;
-    const _tokens = Object.values(tokens);
-    return _tokens.filter((x)=>x.address.toLowerCase() !== NATIVE_TOKEN_ADDRESS_IN_1INCH
-    ).map((x)=>({
-            type: types/* EthereumTokenType.ERC20 */.Dr.ERC20,
-            ...x,
-            chainId: chainId,
-            logoURI: x.logoURI ? [
-                x.logoURI
-            ] : []
-        })
-    );
-}
-/**
- * Fetch tokens from common token list
- * @param url
- * @param chainId
- */ async function fetchCommonERC20TokensFromTokenList(url, chainId = types/* ChainId.Mainnet */.a_.Mainnet) {
-    return (await fetchTokenList(url)).tokens.filter((x)=>{
-        var ref;
-        return x.chainId === chainId && ( true ? ((ref = (0,chainDetailed/* getChainDetailed */.$G)(chainId)) === null || ref === void 0 ? void 0 : ref.network) === 'mainnet' : 0);
-    }).map((x)=>({
-            type: types/* EthereumTokenType.ERC20 */.Dr.ERC20,
-            ...x,
-            logoURI: x.logoURI ? [
-                x.logoURI
-            ] : []
-        })
-    );
-}
-/**
- * Fetch tokens adapter
- * @param urls
- * @param chainId
- */ async function fetchERC20TokensFromTokenList(urls, chainId = types/* ChainId.Mainnet */.a_.Mainnet) {
-    const allRequest = urls.map(async (x)=>{
-        if (x.includes('1inch')) {
-            const tokens = await fetch1inchERC20TokensFromTokenList(x, chainId);
-            return {
-                tokens,
-                weight: 0
-            };
-        }
-        const tokens = await fetchCommonERC20TokensFromTokenList(x, chainId);
-        return {
-            tokens,
-            weight: x.includes('Mask-Token-List') ? 1 : 0
-        };
-    });
-    const allListResponse = await Promise.allSettled(allRequest);
-    return allListResponse.map((x)=>x.status === 'fulfilled' ? x.value : {
-            tokens: [],
-            weight: 0
-        }
-    );
-}
-/**
- * Fetch tokens from multiple token lists
- * @param urls
- * @param chainId
- */ class TokenListAPI {
-    async fetchERC20TokensFromTokenLists(url, chainId1) {
-        const result = (0,esm/* memoizePromise */.J3)(async (urls, chainId = types/* ChainId.Mainnet */.a_.Mainnet)=>{
-            const tokens = (await fetchERC20TokensFromTokenList(urls, chainId)).sort((a, b)=>b.weight - a.weight
-            ).flatMap((x)=>x.tokens
-            );
-            const groupedToken = (0,groupBy/* default */.Z)(tokens, (x)=>x.address.toLowerCase()
-            );
-            return Object.values(groupedToken).map((tokenList)=>{
-                const logoURIs = tokenList.map((token)=>token.logoURI
-                ).flat().filter((token)=>!!token
-                );
-                return {
-                    ...tokenList[0],
-                    ...{
-                        address: (0,formatter/* formatEthereumAddress */.j8)(tokenList[0].address)
-                    },
-                    ...{
-                        logoURI: logoURIs
-                    }
-                };
-            });
-        }, (urls, chainId)=>`${chainId}-${urls.join()}`
-        );
-        return result(url, chainId1);
-    }
-}
-
-;// CONCATENATED MODULE: ../web3-providers/src/token-price/index.ts
-const URL_BASE = 'https://api.coingecko.com/api/v3';
-class TokenPriceAPI {
-    async getTokenPrices(platform, contractAddresses, currency) {
-        const addressList = contractAddresses.join(',');
-        const requestPath = `${URL_BASE}/simple/token_price/${platform}?contract_addresses=${addressList}&vs_currencies=${currency}`;
-        const prices = await fetch(requestPath).then((r)=>r.json()
-        );
-        return prices;
-    }
-    async getNativeTokenPrice(tokenIds, currency) {
-        const requestPath = `${URL_BASE}/simple/price?ids=${tokenIds.join(',')}&vs_currencies=${currency}`;
-        const prices = await fetch(requestPath).then((r)=>r.json()
-        );
-        return prices;
-    }
-}
-
-// EXTERNAL MODULE: ../plugin-infra/src/index.ts
-var src = __webpack_require__(89729);
-// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
-var base_src = __webpack_require__(52522);
-// EXTERNAL MODULE: ../web3-constants/evm/debank.json
-var debank = __webpack_require__(60816);
-;// CONCATENATED MODULE: ../web3-providers/src/debank/format.ts
-
-
-
-
-function format_formatAssets(data) {
-    const supportedChains = Object.values(DeBank.CHAIN_ID).filter(Boolean);
-    return data.filter((x)=>x.is_verified
-    ).map((y)=>{
-        var ref;
-        const chainIdFromChain = (ref = getChainIdFromName(y.chain)) !== null && ref !== void 0 ? ref : ChainId.Mainnet;
-        const address = supportedChains.includes(y.id) ? createNativeToken(chainIdFromChain).address : y.id;
-        var _price;
-        return {
-            id: address,
-            chainId: chainIdFromChain,
-            token: {
-                id: address,
-                address: address,
-                chainId: chainIdFromChain,
-                type: TokenType.Fungible,
-                decimals: y.decimals,
-                name: y.name,
-                symbol: y.symbol,
-                logoURI: y.logo_url
-            },
-            balance: rightShift(y.amount, y.decimals).toFixed(),
-            price: {
-                [CurrencyType.USD]: toFixed(y.price)
-            },
-            value: {
-                [CurrencyType.USD]: multipliedBy((_price = y.price) !== null && _price !== void 0 ? _price : 0, y.amount).toFixed()
-            },
-            logoURI: y.logo_url
-        };
-    });
-}
-
-;// CONCATENATED MODULE: ../web3-providers/src/debank/index.ts
-
-
-const DEBANK_OPEN_API = 'https://openapi.debank.com';
-async function getAssetListFromDebank(address) {
-    const response = await fetch(urlcat(DEBANK_OPEN_API, '/v1/user/token_list', {
-        is_all: true,
-        has_balance: true,
-        id: address.toLowerCase()
-    }));
-    try {
-        var ref;
-        const result = (ref = await response.json()) !== null && ref !== void 0 ? ref : [];
-        return formatAssets(result);
-    } catch  {
-        return [];
-    }
-}
-
-;// CONCATENATED MODULE: ../web3-providers/src/index.ts
-
-
-
-
-
-
-
-
-
-
-
-
-const OpenSea = new OpenSeaAPI();
-const Rarible = new RaribleAPI();
-const NFTScan = new NFTScanAPI();
-const CoinGecko = new CoinGeckoAPI();
-const Explorer = new NativeExplorerAPI();
-const src_RSS3 = new RSS3API();
-const KeyValue = new KeyValueAPI();
-const Twitter = new TwitterAPI();
-const TokenList = new TokenListAPI();
-const TokenPrice = new TokenPriceAPI();
-// Method for provider proxy
-
-
-
-
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "b": () => (/* binding */ RSS3BaseAPI),
+/* harmony export */   "x": () => (/* binding */ NonFungibleTokenAPI)
+/* harmony export */ });
+var RSS3BaseAPI;
+(function(RSS3BaseAPI1) {
+    let AssetType;
+    (function(AssetType) {
+        AssetType["GitcoinDonation"] = 'Gitcoin-Donation';
+        AssetType["POAP"] = 'POAP';
+        AssetType["NFT"] = 'NFT';
+    })(AssetType = RSS3BaseAPI1.AssetType || (RSS3BaseAPI1.AssetType = {}));
+})(RSS3BaseAPI || (RSS3BaseAPI = {}));
+var NonFungibleTokenAPI;
+(function(NonFungibleTokenAPI1) {
+    let OrderSide;
+    (function(OrderSide) {
+        OrderSide[OrderSide["Buy"] = 0] = "Buy";
+        OrderSide[OrderSide["Sell"] = 1] = "Sell";
+    })(OrderSide = NonFungibleTokenAPI1.OrderSide || (NonFungibleTokenAPI1.OrderSide = {}));
+})(NonFungibleTokenAPI || (NonFungibleTokenAPI = {}));
 
 
 /***/ }),
@@ -42951,12 +42679,12 @@ var Wallet_src = __webpack_require__(37828);
 (0,plugin_infra_src/* registerPlugin */.fo)({
     ...Wallet_src/* base */.ue,
     SNSAdaptor: {
-        load: ()=>Promise.all(/* import() */[__webpack_require__.e(5638), __webpack_require__.e(2698), __webpack_require__.e(7871), __webpack_require__.e(9759), __webpack_require__.e(3294), __webpack_require__.e(2486), __webpack_require__.e(2598), __webpack_require__.e(6230), __webpack_require__.e(187), __webpack_require__.e(8136), __webpack_require__.e(405), __webpack_require__.e(1546), __webpack_require__.e(2939), __webpack_require__.e(3617), __webpack_require__.e(4162), __webpack_require__.e(4428), __webpack_require__.e(3449), __webpack_require__.e(5773), __webpack_require__.e(4333), __webpack_require__.e(8477), __webpack_require__.e(5438), __webpack_require__.e(8320), __webpack_require__.e(7134), __webpack_require__.e(2257), __webpack_require__.e(9149)]).then(__webpack_require__.bind(__webpack_require__, 59149))
+        load: ()=>Promise.all(/* import() */[__webpack_require__.e(5638), __webpack_require__.e(2698), __webpack_require__.e(7871), __webpack_require__.e(9759), __webpack_require__.e(3294), __webpack_require__.e(2486), __webpack_require__.e(2598), __webpack_require__.e(6230), __webpack_require__.e(187), __webpack_require__.e(8136), __webpack_require__.e(405), __webpack_require__.e(1546), __webpack_require__.e(2939), __webpack_require__.e(3617), __webpack_require__.e(4162), __webpack_require__.e(4428), __webpack_require__.e(3449), __webpack_require__.e(5773), __webpack_require__.e(4333), __webpack_require__.e(8477), __webpack_require__.e(7074), __webpack_require__.e(8320), __webpack_require__.e(7134), __webpack_require__.e(2015), __webpack_require__.e(9149)]).then(__webpack_require__.bind(__webpack_require__, 59149))
         ,
         hotModuleReload: (hot)=>/* unsupported import.meta.webpackHot */ undefined && 0
     },
     Dashboard: {
-        load: ()=>Promise.all(/* import() */[__webpack_require__.e(5638), __webpack_require__.e(2698), __webpack_require__.e(7871), __webpack_require__.e(9759), __webpack_require__.e(3294), __webpack_require__.e(2486), __webpack_require__.e(2598), __webpack_require__.e(6230), __webpack_require__.e(187), __webpack_require__.e(8136), __webpack_require__.e(405), __webpack_require__.e(1546), __webpack_require__.e(2939), __webpack_require__.e(3617), __webpack_require__.e(4162), __webpack_require__.e(4428), __webpack_require__.e(3449), __webpack_require__.e(5773), __webpack_require__.e(4333), __webpack_require__.e(8477), __webpack_require__.e(5438), __webpack_require__.e(8320), __webpack_require__.e(7134), __webpack_require__.e(2257), __webpack_require__.e(4153)]).then(__webpack_require__.bind(__webpack_require__, 4153))
+        load: ()=>Promise.all(/* import() */[__webpack_require__.e(5638), __webpack_require__.e(2698), __webpack_require__.e(7871), __webpack_require__.e(9759), __webpack_require__.e(3294), __webpack_require__.e(2486), __webpack_require__.e(2598), __webpack_require__.e(6230), __webpack_require__.e(187), __webpack_require__.e(8136), __webpack_require__.e(405), __webpack_require__.e(1546), __webpack_require__.e(2939), __webpack_require__.e(3617), __webpack_require__.e(4162), __webpack_require__.e(4428), __webpack_require__.e(3449), __webpack_require__.e(5773), __webpack_require__.e(4333), __webpack_require__.e(8477), __webpack_require__.e(7074), __webpack_require__.e(8320), __webpack_require__.e(7134), __webpack_require__.e(2015), __webpack_require__.e(4153)]).then(__webpack_require__.bind(__webpack_require__, 4153))
         ,
         hotModuleReload: (hot)=>/* unsupported import.meta.webpackHot */ undefined && 0
     },
@@ -42999,7 +42727,7 @@ var RedPacket_base = __webpack_require__(74343);
 (0,plugin_infra_src/* registerPlugin */.fo)({
     ...RedPacket_base/* base */.u,
     SNSAdaptor: {
-        load: ()=>Promise.all(/* import() */[__webpack_require__.e(5638), __webpack_require__.e(2698), __webpack_require__.e(7871), __webpack_require__.e(8000), __webpack_require__.e(1440), __webpack_require__.e(2162), __webpack_require__.e(8393), __webpack_require__.e(3294), __webpack_require__.e(2475), __webpack_require__.e(3449), __webpack_require__.e(4267), __webpack_require__.e(3951)]).then(__webpack_require__.bind(__webpack_require__, 44557))
+        load: ()=>Promise.all(/* import() */[__webpack_require__.e(5638), __webpack_require__.e(2698), __webpack_require__.e(7871), __webpack_require__.e(8000), __webpack_require__.e(1440), __webpack_require__.e(2162), __webpack_require__.e(8393), __webpack_require__.e(3294), __webpack_require__.e(2475), __webpack_require__.e(3449), __webpack_require__.e(8991), __webpack_require__.e(7533)]).then(__webpack_require__.bind(__webpack_require__, 44557))
         ,
         hotModuleReload: (hot)=>/* unsupported import.meta.webpackHot */ undefined && 0
     },
@@ -43184,12 +42912,12 @@ var Trader_base = __webpack_require__(85473);
 (0,plugin_infra_src/* registerPlugin */.fo)({
     ...Trader_base/* base */.u,
     SNSAdaptor: {
-        load: ()=>Promise.all(/* import() */[__webpack_require__.e(5638), __webpack_require__.e(2698), __webpack_require__.e(7871), __webpack_require__.e(9759), __webpack_require__.e(2486), __webpack_require__.e(2598), __webpack_require__.e(6230), __webpack_require__.e(187), __webpack_require__.e(405), __webpack_require__.e(1546), __webpack_require__.e(2939), __webpack_require__.e(4428), __webpack_require__.e(4072), __webpack_require__.e(7015), __webpack_require__.e(7531), __webpack_require__.e(5678), __webpack_require__.e(3449), __webpack_require__.e(5773), __webpack_require__.e(4333), __webpack_require__.e(8477), __webpack_require__.e(5438), __webpack_require__.e(7590), __webpack_require__.e(2594)]).then(__webpack_require__.bind(__webpack_require__, 33619))
+        load: ()=>Promise.all(/* import() */[__webpack_require__.e(5638), __webpack_require__.e(2698), __webpack_require__.e(7871), __webpack_require__.e(9759), __webpack_require__.e(2486), __webpack_require__.e(2598), __webpack_require__.e(6230), __webpack_require__.e(187), __webpack_require__.e(405), __webpack_require__.e(1546), __webpack_require__.e(2939), __webpack_require__.e(4428), __webpack_require__.e(4072), __webpack_require__.e(7015), __webpack_require__.e(7531), __webpack_require__.e(5678), __webpack_require__.e(3449), __webpack_require__.e(5773), __webpack_require__.e(4333), __webpack_require__.e(8477), __webpack_require__.e(7074), __webpack_require__.e(7590), __webpack_require__.e(2594)]).then(__webpack_require__.bind(__webpack_require__, 33619))
         ,
         hotModuleReload: (hot)=>/* unsupported import.meta.webpackHot */ undefined && 0
     },
     Dashboard: {
-        load: ()=>Promise.all(/* import() */[__webpack_require__.e(5638), __webpack_require__.e(2698), __webpack_require__.e(7871), __webpack_require__.e(9759), __webpack_require__.e(2486), __webpack_require__.e(2598), __webpack_require__.e(6230), __webpack_require__.e(187), __webpack_require__.e(405), __webpack_require__.e(1546), __webpack_require__.e(2939), __webpack_require__.e(4428), __webpack_require__.e(3449), __webpack_require__.e(5773), __webpack_require__.e(4333), __webpack_require__.e(8477), __webpack_require__.e(5438), __webpack_require__.e(3347)]).then(__webpack_require__.bind(__webpack_require__, 93347))
+        load: ()=>Promise.all(/* import() */[__webpack_require__.e(5638), __webpack_require__.e(2698), __webpack_require__.e(7871), __webpack_require__.e(9759), __webpack_require__.e(2486), __webpack_require__.e(2598), __webpack_require__.e(6230), __webpack_require__.e(187), __webpack_require__.e(405), __webpack_require__.e(1546), __webpack_require__.e(2939), __webpack_require__.e(4428), __webpack_require__.e(3449), __webpack_require__.e(5773), __webpack_require__.e(4333), __webpack_require__.e(8477), __webpack_require__.e(7074), __webpack_require__.e(2178)]).then(__webpack_require__.bind(__webpack_require__, 93347))
         ,
         hotModuleReload: (hot)=>/* unsupported import.meta.webpackHot */ undefined && 0
     },
@@ -43352,7 +43080,7 @@ var NextID_constants = __webpack_require__(25421);
 (0,plugin_infra_src/* registerPlugin */.fo)({
     ...NextID_base/* base */.u,
     SNSAdaptor: {
-        load: ()=>Promise.all(/* import() */[__webpack_require__.e(5638), __webpack_require__.e(2698), __webpack_require__.e(7871), __webpack_require__.e(8000), __webpack_require__.e(1440), __webpack_require__.e(2162), __webpack_require__.e(8393), __webpack_require__.e(9759), __webpack_require__.e(405), __webpack_require__.e(2475), __webpack_require__.e(6812), __webpack_require__.e(4267), __webpack_require__.e(6665)]).then(__webpack_require__.bind(__webpack_require__, 13535))
+        load: ()=>Promise.all(/* import() */[__webpack_require__.e(5638), __webpack_require__.e(2698), __webpack_require__.e(7871), __webpack_require__.e(9759), __webpack_require__.e(405), __webpack_require__.e(7074), __webpack_require__.e(8991), __webpack_require__.e(6665)]).then(__webpack_require__.bind(__webpack_require__, 13535))
         ,
         hotModuleReload: (hot)=>/* unsupported import.meta.webpackHot */ undefined && 0
     },

@@ -1491,8 +1491,8 @@ __webpack_require__.d(__webpack_exports__, {
 var src = __webpack_require__(89729);
 // EXTERNAL MODULE: ../web3-shared/solana/index.ts + 4 modules
 var solana = __webpack_require__(47950);
-// EXTERNAL MODULE: ../web3-providers/src/index.ts + 22 modules
-var web3_providers_src = __webpack_require__(13330);
+// EXTERNAL MODULE: ../web3-providers/src/index.ts
+var web3_providers_src = __webpack_require__(23290);
 // EXTERNAL MODULE: ../plugins/Solana/src/helpers/index.ts + 2 modules
 var helpers = __webpack_require__(9458);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@solana+spl-token-registry@0.2.1301/node_modules/@solana/spl-token-registry/dist/module/index.js + 2 modules

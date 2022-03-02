@@ -506,8 +506,8 @@ function useHistory(provider, page, size, address, tokenId) {
     ]);
 }
 
-// EXTERNAL MODULE: ../web3-providers/src/index.ts + 22 modules
-var src = __webpack_require__(13330);
+// EXTERNAL MODULE: ../web3-providers/src/index.ts
+var src = __webpack_require__(23290);
 ;// CONCATENATED MODULE: ./src/plugins/EVM/hooks/useOrders.ts
 
 

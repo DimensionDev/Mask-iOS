@@ -291,7 +291,7 @@ async function queryPersonaHexPublicKey(persona) {
     const arr = (0,src/* compressSecp256k1Point */.SH)(key256.x, key256.y);
     return `0x${(0,src/* toHex */.NC)(arr)}`;
 }
-async function queryExistedBinding(persona) {
+/** @deprecated Use NextIDService */ async function queryExistedBinding(persona) {
     const publicKey = await queryPersonaHexPublicKey(persona);
     if (!publicKey) return;
     const response = await fetch(dist_default()(BASE_URL, '/v1/proof', {
@@ -303,7 +303,7 @@ async function queryExistedBinding(persona) {
     const result = await response.json();
     return (0,head/* default */.Z)(result.ids);
 }
-async function createPersonaPayload(persona, action, identity, platform) {
+/** @deprecated Use NextIDService */ async function createPersonaPayload(persona, action, identity, platform) {
     const publicKey = await queryPersonaHexPublicKey(persona);
     if (!publicKey) return;
     const requestBody = {

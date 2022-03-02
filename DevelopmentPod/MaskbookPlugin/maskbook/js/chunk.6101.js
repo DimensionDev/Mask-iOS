@@ -1,5 +1,5 @@
 "use strict";
-(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[9266],{
+(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[6101],{
 
 /***/ 68098:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -2056,32 +2056,144 @@ function PostDialogHint(props) {
 
 /***/ }),
 
-/***/ 88886:
+/***/ 63685:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "z": () => (/* binding */ ToolboxHintUnstyled)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(52867);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(17060);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(90056);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(67020);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(39541);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(54105);
-/* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(18249);
-/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(89729);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(76342);
-/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(78037);
-/* harmony import */ var _plugins_Wallet_messages__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(70202);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(7282);
-/* harmony import */ var _shared_native_rpc__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(75126);
-/* harmony import */ var _plugins_Wallet_hooks_useRecentTransactions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(19085);
-/* harmony import */ var _GuideStep__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(81048);
-/* harmony import */ var _resources_MaskIcon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(51155);
-/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(42421);
-/* harmony import */ var _mui_icons_material_FiberManualRecord__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(86150);
-/* harmony import */ var _DataSource_usePersonaConnectStatus__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(64506);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "z": () => (/* binding */ ToolboxHintUnstyled)
+});
+
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(74750);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.2_859545d82eec4e4ab7d574641ee2c82e/node_modules/@mui/material/ListItemButton/ListItemButton.js
+var ListItemButton_ListItemButton = __webpack_require__(52867);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.2_859545d82eec4e4ab7d574641ee2c82e/node_modules/@mui/material/ListItemText/ListItemText.js
+var ListItemText_ListItemText = __webpack_require__(17060);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.2_859545d82eec4e4ab7d574641ee2c82e/node_modules/@mui/material/ListItemIcon/ListItemIcon.js
+var ListItemIcon_ListItemIcon = __webpack_require__(90056);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.2_859545d82eec4e4ab7d574641ee2c82e/node_modules/@mui/material/Typography/Typography.js + 1 modules
+var Typography_Typography = __webpack_require__(67020);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.2_859545d82eec4e4ab7d574641ee2c82e/node_modules/@mui/material/Box/Box.js
+var Box = __webpack_require__(39541);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.2_859545d82eec4e4ab7d574641ee2c82e/node_modules/@mui/material/CircularProgress/CircularProgress.js + 1 modules
+var CircularProgress = __webpack_require__(54105);
+// EXTERNAL MODULE: ../web3-shared/evm/types/index.ts
+var types = __webpack_require__(18249);
+// EXTERNAL MODULE: ../plugin-infra/src/index.ts
+var src = __webpack_require__(89729);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
+var react = __webpack_require__(76342);
+// EXTERNAL MODULE: ../shared/src/index.ts
+var shared_src = __webpack_require__(78037);
+// EXTERNAL MODULE: ./src/plugins/Wallet/messages.ts
+var messages = __webpack_require__(70202);
+// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
+var utils = __webpack_require__(7282);
+// EXTERNAL MODULE: ./shared/native-rpc/index.ts
+var native_rpc = __webpack_require__(75126);
+// EXTERNAL MODULE: ./src/plugins/Wallet/hooks/useRecentTransactions.ts
+var useRecentTransactions = __webpack_require__(19085);
+// EXTERNAL MODULE: ./src/components/GuideStep/index.tsx
+var GuideStep = __webpack_require__(81048);
+// EXTERNAL MODULE: ./src/resources/MaskIcon.tsx
+var MaskIcon = __webpack_require__(51155);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var theme_src = __webpack_require__(42421);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.4.2_c6f532f0ffa0f9bea763747ab672d46f/node_modules/@mui/icons-material/FiberManualRecord.js
+var FiberManualRecord = __webpack_require__(86150);
+// EXTERNAL MODULE: ./src/components/DataSource/usePersonaConnectStatus.ts
+var usePersonaConnectStatus = __webpack_require__(64506);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useAsync.js
+var useAsync = __webpack_require__(59302);
+// EXTERNAL MODULE: ./src/extension/service.ts
+var service = __webpack_require__(99997);
+// EXTERNAL MODULE: ./src/social-network/index.ts
+var social_network = __webpack_require__(44131);
+// EXTERNAL MODULE: ./src/settings/settings.ts
+var settings = __webpack_require__(3087);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/json-stable-stringify@1.0.1/node_modules/json-stable-stringify/index.js
+var json_stable_stringify = __webpack_require__(92304);
+var json_stable_stringify_default = /*#__PURE__*/__webpack_require__.n(json_stable_stringify);
+// EXTERNAL MODULE: ./src/components/InjectedComponents/SetupGuide/types.ts
+var SetupGuide_types = __webpack_require__(28090);
+// EXTERNAL MODULE: ./src/components/DataSource/useActivatedUI.ts
+var useActivatedUI = __webpack_require__(17047);
+// EXTERNAL MODULE: ../web3-providers/src/index.ts
+var web3_providers_src = __webpack_require__(23290);
+;// CONCATENATED MODULE: ./src/components/DataSource/useNextID.ts
+
+
+
+
+
+
+
+
+
+
+
+const usePersonaBoundPlatform = (personaPublicKey)=>{
+    useAsyncRetry(()=>{
+        return queryExistedBindingByPersona(personaPublicKey);
+    }, [
+        personaPublicKey
+    ]);
+};
+let isOpenedVerifyDialog = false;
+const useNextIDBoundByPlatform = (platform, identity)=>{
+    useAsyncRetry(()=>{
+        return queryExistedBindingByPlatform(platform, identity);
+    }, [
+        platform,
+        identity
+    ]);
+};
+function useNextIDConnectStatus() {
+    var ref1;
+    const ui = social_network/* activatedSocialNetworkUI */.LM;
+    const [enableNextID] = (0,react.useState)((ref1 = ui.configuration.nextIDConfig) === null || ref1 === void 0 ? void 0 : ref1.enable);
+    const personaConnectStatus = (0,usePersonaConnectStatus/* usePersonaConnectStatus */.x)();
+    const lastStateRef = settings/* currentSetupGuideStatus */.AI[ui.networkIdentifier];
+    const lastState_ = (0,shared_src/* useValueRef */.E)(lastStateRef);
+    const lastState = (0,react.useMemo)(()=>{
+        try {
+            return JSON.parse(lastState_);
+        } catch  {
+            return {};
+        }
+    }, [
+        lastState_
+    ]);
+    const lastRecognized = (0,useActivatedUI/* useLastRecognizedIdentity */.FB)();
+    const [username] = (0,react.useState)(lastState.username || (lastRecognized.identifier.isUnknown ? '' : lastRecognized.identifier.userId));
+    const { value: isVerified = false  } = (0,useAsync/* default */.Z)(async ()=>{
+        var ref;
+        if (isOpenedVerifyDialog) return true;
+        if (!enableNextID || !username || !personaConnectStatus.connected) return true;
+        const currentPersona = await service/* default.Settings.getCurrentPersona */.ZP.Settings.getCurrentPersona();
+        if (!(currentPersona === null || currentPersona === void 0 ? void 0 : currentPersona.publicHexKey)) return true;
+        if (settings/* dismissVerifyNextID */.gG[ui.networkIdentifier].value[`${username}_${currentPersona.identifier.toText()}`]) return true;
+        const platform = (ref = ui.configuration.nextIDConfig) === null || ref === void 0 ? void 0 : ref.platform;
+        if (!platform) return true;
+        const isBound = await (0,web3_providers_src/* queryIsBound */._9)(currentPersona.publicHexKey, platform, username);
+        if (isBound) return true;
+        settings/* currentSetupGuideStatus */.AI[ui.networkIdentifier].value = json_stable_stringify_default()({
+            status: SetupGuide_types/* SetupGuideStep.VerifyOnNextID */.s.VerifyOnNextID,
+            persona: currentPersona === null || currentPersona === void 0 ? void 0 : currentPersona.identifier.toText()
+        });
+        isOpenedVerifyDialog = true;
+        return false;
+    }, [
+        username,
+        enableNextID,
+        lastStateRef.value
+    ]);
+    return isVerified;
+}
+
+;// CONCATENATED MODULE: ./src/components/InjectedComponents/ToolboxUnstyled.tsx
 
 
 
@@ -2097,7 +2209,8 @@ function PostDialogHint(props) {
 
 
 
-const useStyles = (0,_masknet_theme__WEBPACK_IMPORTED_MODULE_10__/* .makeStyles */ .ZL)()((theme)=>({
+
+const useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
         title: {
             color: theme.palette.mode === 'dark' ? theme.palette.text.primary : 'rgb(15, 20, 25)',
             display: 'flex',
@@ -2133,14 +2246,15 @@ const useStyles = (0,_masknet_theme__WEBPACK_IMPORTED_MODULE_10__/* .makeStyles 
     })
 );
 function ToolboxHintUnstyled(props) {
-    const { t  } = (0,_utils__WEBPACK_IMPORTED_MODULE_5__/* .useI18N */ .M1)();
-    const { ListItemButton =_mui_material__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z , ListItemText =_mui_material__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z , ListItemIcon =_mui_material__WEBPACK_IMPORTED_MODULE_14__/* ["default"] */ .Z , Container ='div' , Typography =_mui_material__WEBPACK_IMPORTED_MODULE_15__/* ["default"] */ .Z , iconSize =24 , badgeSize =10 , mini ,  } = props;
+    const { t  } = (0,utils/* useI18N */.M1)();
+    const isNextIDVerified = useNextIDConnectStatus();
+    const { ListItemButton =ListItemButton_ListItemButton/* default */.Z , ListItemText =ListItemText_ListItemText/* default */.Z , ListItemIcon =ListItemIcon_ListItemIcon/* default */.Z , Container ='div' , Typography =Typography_Typography/* default */.Z , iconSize =24 , badgeSize =10 , mini ,  } = props;
     const { classes  } = useStyles();
     const { openWallet , isWalletValid , walletTitle , chainColor , shouldDisplayChainIndicator  } = useToolbox();
-    const networkDescriptor = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__/* .useNetworkDescriptor */ .Vw)();
-    const providerDescriptor = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__/* .useProviderDescriptor */ .fY)();
-    const personaConnectStatus = (0,_DataSource_usePersonaConnectStatus__WEBPACK_IMPORTED_MODULE_11__/* .usePersonaConnectStatus */ .x)();
-    const title = (0,react__WEBPACK_IMPORTED_MODULE_2__.useMemo)(()=>{
+    const networkDescriptor = (0,src/* useNetworkDescriptor */.Vw)();
+    const providerDescriptor = (0,src/* useProviderDescriptor */.fY)();
+    const personaConnectStatus = (0,usePersonaConnectStatus/* usePersonaConnectStatus */.x)();
+    const title = (0,react.useMemo)(()=>{
         return !personaConnectStatus.hasPersona ? t('create_persona') : !personaConnectStatus.connected ? t('connect_persona') : walletTitle;
     }, [
         personaConnectStatus,
@@ -2148,41 +2262,42 @@ function ToolboxHintUnstyled(props) {
         t
     ]);
     const onClick = ()=>{
+        if (!isNextIDVerified) return;
         personaConnectStatus.action ? personaConnectStatus.action() : openWallet();
     };
-    return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GuideStep__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z, {
+    return(/*#__PURE__*/ (0,jsx_runtime.jsx)(jsx_runtime.Fragment, {
+        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(GuideStep/* default */.Z, {
             step: 1,
             total: 3,
             tip: t('user_guide_tip_1'),
-            children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Container, {
-                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(ListItemButton, {
+            children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Container, {
+                children: /*#__PURE__*/ (0,jsx_runtime.jsxs)(ListItemButton, {
                     onClick: onClick,
                     children: [
-                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(ListItemIcon, {
-                            children: isWalletValid ? /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_masknet_shared__WEBPACK_IMPORTED_MODULE_3__/* .WalletIcon */ .o, {
+                        /*#__PURE__*/ (0,jsx_runtime.jsx)(ListItemIcon, {
+                            children: isWalletValid ? /*#__PURE__*/ (0,jsx_runtime.jsx)(shared_src/* WalletIcon */.o, {
                                 size: iconSize,
                                 badgeSize: badgeSize,
                                 networkIcon: providerDescriptor === null || providerDescriptor === void 0 ? void 0 : providerDescriptor.icon,
                                 providerIcon: networkDescriptor === null || networkDescriptor === void 0 ? void 0 : networkDescriptor.icon,
                                 isBorderColorNotDefault: true
-                            }) : /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_resources_MaskIcon__WEBPACK_IMPORTED_MODULE_9__/* .MaskFilledIcon */ .x7, {
+                            }) : /*#__PURE__*/ (0,jsx_runtime.jsx)(MaskIcon/* MaskFilledIcon */.x7, {
                                 size: iconSize
                             })
                         }),
-                        mini ? null : /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(ListItemText, {
-                            primary: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_16__/* ["default"] */ .Z, {
+                        mini ? null : /*#__PURE__*/ (0,jsx_runtime.jsx)(ListItemText, {
+                            primary: /*#__PURE__*/ (0,jsx_runtime.jsxs)(Box/* default */.Z, {
                                 sx: {
                                     display: 'flex',
                                     justifyContent: 'space-between',
                                     alignItems: 'center'
                                 },
                                 children: [
-                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Typography, {
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(Typography, {
                                         className: classes.title,
                                         children: title
                                     }),
-                                    shouldDisplayChainIndicator ? /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_icons_material_FiberManualRecord__WEBPACK_IMPORTED_MODULE_17__/* ["default"] */ .Z, {
+                                    shouldDisplayChainIndicator ? /*#__PURE__*/ (0,jsx_runtime.jsx)(FiberManualRecord/* default */.Z, {
                                         className: classes.chainIcon,
                                         style: {
                                             color: chainColor
@@ -2198,31 +2313,31 @@ function ToolboxHintUnstyled(props) {
     }));
 }
 function useToolbox() {
-    const { t  } = (0,_utils__WEBPACK_IMPORTED_MODULE_5__/* .useI18N */ .M1)();
-    const account = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__/* .useAccount */ .mA)();
-    const selectedWallet = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__/* .useWallet */ .Os)();
-    const chainColor = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__/* .useChainColor */ .x5)();
-    const chainIdValid = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__/* .useChainIdValid */ .as)();
-    const chainDetailed = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__/* .useChainDetailed */ .K1)();
-    const { Utils  } = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__/* .useWeb3State */ .dM)();
+    const { t  } = (0,utils/* useI18N */.M1)();
+    const account = (0,src/* useAccount */.mA)();
+    const selectedWallet = (0,src/* useWallet */.Os)();
+    const chainColor = (0,src/* useChainColor */.x5)();
+    const chainIdValid = (0,src/* useChainIdValid */.as)();
+    const chainDetailed = (0,src/* useChainDetailed */.K1)();
+    const { Utils  } = (0,src/* useWeb3State */.dM)();
     // #region recent pending transactions
-    const { value: pendingTransactions = []  } = (0,_plugins_Wallet_hooks_useRecentTransactions__WEBPACK_IMPORTED_MODULE_7__/* .useRecentTransactions */ .S)({
-        status: _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_18__/* .TransactionStatusType.NOT_DEPEND */ .g8.NOT_DEPEND
+    const { value: pendingTransactions = []  } = (0,useRecentTransactions/* useRecentTransactions */.S)({
+        status: types/* TransactionStatusType.NOT_DEPEND */.g8.NOT_DEPEND
     });
     // #endregion
     // #region Wallet
-    const { openDialog: openWalletStatusDialog  } = (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_3__/* .useRemoteControlledDialog */ .F$)(_plugins_Wallet_messages__WEBPACK_IMPORTED_MODULE_4__/* .WalletMessages.events.walletStatusDialogUpdated */ .R.events.walletStatusDialogUpdated);
+    const { openDialog: openWalletStatusDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.walletStatusDialogUpdated */.R.events.walletStatusDialogUpdated);
     // #endregion
     const isWalletValid = !!account && selectedWallet && chainIdValid;
-    const { value: domain  } = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__/* .useReverseAddress */ .$q)(account);
+    const { value: domain  } = (0,src/* useReverseAddress */.$q)(account);
     function renderButtonText() {
         var ref, ref1;
         if (!account) return t('mask_network');
         if (!chainIdValid) return t('plugin_wallet_wrong_network');
         if (pendingTransactions.length <= 0) return (Utils === null || Utils === void 0 ? void 0 : (ref = Utils.formatDomainName) === null || ref === void 0 ? void 0 : ref.call(Utils, domain)) || (Utils === null || Utils === void 0 ? void 0 : (ref1 = Utils.formatAddress) === null || ref1 === void 0 ? void 0 : ref1.call(Utils, account, 4)) || account;
-        return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+        return(/*#__PURE__*/ (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
             children: [
-                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+                /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
                     style: {
                         marginRight: 12
                     },
@@ -2230,7 +2345,7 @@ function useToolbox() {
                         count: pendingTransactions.length
                     })
                 }),
-                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_19__/* ["default"] */ .Z, {
+                /*#__PURE__*/ (0,jsx_runtime.jsx)(CircularProgress/* default */.Z, {
                     thickness: 6,
                     size: 20,
                     color: "inherit"
@@ -2238,12 +2353,12 @@ function useToolbox() {
             ]
         }));
     }
-    const openWallet = (0,react__WEBPACK_IMPORTED_MODULE_2__.useCallback)(()=>{
-        if (_shared_native_rpc__WEBPACK_IMPORTED_MODULE_6__/* .hasNativeAPI */ ._) return _shared_native_rpc__WEBPACK_IMPORTED_MODULE_6__/* .nativeAPI */ .Nz === null || _shared_native_rpc__WEBPACK_IMPORTED_MODULE_6__/* .nativeAPI */ .Nz === void 0 ? void 0 : _shared_native_rpc__WEBPACK_IMPORTED_MODULE_6__/* .nativeAPI.api.misc_openCreateWalletView */ .Nz.api.misc_openCreateWalletView();
+    const openWallet = (0,react.useCallback)(()=>{
+        if (native_rpc/* hasNativeAPI */._) return native_rpc/* nativeAPI */.Nz === null || native_rpc/* nativeAPI */.Nz === void 0 ? void 0 : native_rpc/* nativeAPI.api.misc_openCreateWalletView */.Nz.api.misc_openCreateWalletView();
         return openWalletStatusDialog();
     }, [
         openWalletStatusDialog,
-        _shared_native_rpc__WEBPACK_IMPORTED_MODULE_6__/* .hasNativeAPI */ ._
+        native_rpc/* hasNativeAPI */._
     ]);
     const walletTitle = renderButtonText();
     const shouldDisplayChainIndicator = account && chainIdValid && (chainDetailed === null || chainDetailed === void 0 ? void 0 : chainDetailed.network) && chainDetailed.network !== 'mainnet';

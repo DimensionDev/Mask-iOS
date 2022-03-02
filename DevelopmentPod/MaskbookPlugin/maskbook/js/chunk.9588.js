@@ -1,6 +1,24 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[9588],{
 
+/***/ 15594:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "k": () => (/* binding */ convertPersonaHexPublicKey)
+/* harmony export */ });
+/* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(43576);
+
+function convertPersonaHexPublicKey(persona) {
+    const key256 = (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .decompressSecp256k1Key */ .qX)(persona.compressedPoint.replace(/\|/g, '/'));
+    if (!key256.x || !key256.y) return;
+    const arr = (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .compressSecp256k1Point */ .SH)(key256.x, key256.y);
+    return `0x${(0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .toHex */ .NC)(arr)}`;
+}
+
+
+/***/ }),
+
 /***/ 99588:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -189,7 +207,10 @@ var Type;
 var shared = __webpack_require__(71986);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/isEmpty.js
 var isEmpty = __webpack_require__(67127);
+// EXTERNAL MODULE: ./background/database/persona/util.ts
+var util = __webpack_require__(15594);
 ;// CONCATENATED MODULE: ./background/database/persona/web.ts
+
 
 
 
@@ -512,7 +533,6 @@ async function createOrUpdatePersonaDB(record, howToMerge, t) {
 /**
  * Query many profiles.
  */ async function queryProfilesDB(query, t) {
-    var ref;
     t = t || (0,openDB/* createTransaction */._X)(await db(), 'readonly')('profiles');
     const result = [];
     if ((0,isEmpty/* default */.Z)(query)) {
@@ -529,7 +549,7 @@ async function createOrUpdatePersonaDB(record, howToMerge, t) {
             if (query.hasLinkedPersona && !out.linkedPersona) return;
             result.push(out);
         });
-    } else if ((ref = query.identifiers) === null || ref === void 0 ? void 0 : ref.length) {
+    } else if (query.identifiers) {
         for await (const each of t.objectStore('profiles').iterate()){
             const out = profileOutDB(each.value);
             if (query.hasLinkedPersona && !out.linkedPersona) continue;
@@ -785,9 +805,11 @@ function personaRecordToDB(x) {
 function personaRecordOutDB(x) {
     // @ts-ignore
     delete x.hasPrivateKey;
+    const identifier = src/* Identifier.fromString */.xb.fromString(x.identifier, src/* ECKeyIdentifier */.ob).unwrap();
     const obj = {
         ...x,
-        identifier: src/* Identifier.fromString */.xb.fromString(x.identifier, src/* ECKeyIdentifier */.ob).unwrap(),
+        identifier,
+        publicHexKey: (0,util/* convertPersonaHexPublicKey */.k)(identifier),
         linkedProfiles: new src/* IdentifierMap */.qD(x.linkedProfiles, src/* ProfileIdentifier */.WO)
     };
     return obj;

@@ -1514,8 +1514,8 @@ var chainDetailed = __webpack_require__(80945);
 var types = __webpack_require__(18249);
 // EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
 var base_src = __webpack_require__(52522);
-// EXTERNAL MODULE: ../web3-providers/src/index.ts + 22 modules
-var web3_providers_src = __webpack_require__(13330);
+// EXTERNAL MODULE: ../web3-providers/src/index.ts
+var web3_providers_src = __webpack_require__(23290);
 ;// CONCATENATED MODULE: ../dashboard/src/web3/context.ts
 
 
