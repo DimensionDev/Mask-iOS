@@ -391,8 +391,6 @@ extension WalletCoreService {
     func changeNetwork(network: BlockChainNetwork, account: Account? = nil) {
         if let account = account {
             self.userSetting.defaultAccountAddress = account.address
-            self.userSetting.network = network
-            self.userSetting.walletDisplayBlockchain = .blockchain(network)
         } else {
             let accounts = WalletCoreService.shared.getAllAccounts()
             guard let account = accounts.first(where: {
@@ -401,9 +399,9 @@ extension WalletCoreService {
                 return
             }
             self.userSetting.defaultAccountAddress = account.address
-            self.userSetting.network = network
-            self.userSetting.walletDisplayBlockchain = .blockchain(network)
         }
+        userSetting.changeNetwork(network: network,
+                                  address: userSetting.defaultAccountAddress)
     }
 }
 // swiftlint:enable empty_count
