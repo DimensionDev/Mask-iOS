@@ -143,9 +143,6 @@ extension WalletDisplayBlockChainType: Equatable {
                 return [Asset.Colors.AccountCard.Chains.optimism1.color.cgColor,
                         Asset.Colors.AccountCard.Chains.optimism2.color.cgColor]
                 
-            case .polkd:
-                return []
-                
             default:
                 return []
             }
