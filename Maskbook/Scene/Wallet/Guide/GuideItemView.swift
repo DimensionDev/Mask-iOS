@@ -69,10 +69,11 @@ struct GuideItemView: View {
         .background(
             VStack(spacing: 0) {
                 Spacer().frame(height: netPaddingTop)
-                Asset.Images.Scene.Guide.net.asImage().resizable().aspectRatio(contentMode: .fit)//.background(Color.red)
+                Asset.Images.Scene.Guide.net.asImage().resizable().aspectRatio(contentMode: .fit)
                 Spacer()
             }
         )
+        .colorScheme(.light)
     }
     
     var body: some View {

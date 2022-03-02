@@ -59,13 +59,12 @@ struct GuideView: View {
                     GuideItemView(page: $0, contentSize: contentSize) {
                         presentationMode.wrappedValue.dismiss()
                     }
+                    .frame(width: contentSize.width, height: contentSize.height)
                 }
-                .frame(width: contentSize.width, height: contentSize.height)
             }
         }
         .withBlueGradient(radius: 0, colorDecorator: gradientDecorator)
         .ignoresSafeArea()
-        .colorScheme(.light)
     }
     
     private func buildControls(contentSize: CGSize) -> some View {
