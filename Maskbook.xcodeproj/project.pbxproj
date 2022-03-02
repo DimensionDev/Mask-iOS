@@ -88,6 +88,7 @@
 		1F57023D27A2AF8600C96909 /* RedPacketShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F57023C27A2AF8600C96909 /* RedPacketShareView.swift */; };
 		1F57024027A2C1F600C96909 /* RedPacketShareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F57023F27A2C1F600C96909 /* RedPacketShareViewModel.swift */; };
 		1F58730F277C51A3005A7B11 /* DappScriptPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58730E277C51A3005A7B11 /* DappScriptPayload.swift */; };
+		1F705FE327CF6AB9002A4A7E /* SpinWheelAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */; };
 		1F721096279E90DC00B8BF76 /* RedPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F721095279E90DC00B8BF76 /* RedPacket.swift */; };
 		1F721098279EB2F100B8BF76 /* FungibleToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F721097279EB2F100B8BF76 /* FungibleToken.swift */; };
 		1F72109A279EC22300B8BF76 /* NftPacketPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F721099279EC22200B8BF76 /* NftPacketPayload.swift */; };
@@ -791,6 +792,7 @@
 		1F57023C27A2AF8600C96909 /* RedPacketShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketShareView.swift; sourceTree = "<group>"; };
 		1F57023F27A2C1F600C96909 /* RedPacketShareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketShareViewModel.swift; sourceTree = "<group>"; };
 		1F58730E277C51A3005A7B11 /* DappScriptPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappScriptPayload.swift; sourceTree = "<group>"; };
+		1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinWheelAnimator.swift; sourceTree = "<group>"; };
 		1F721095279E90DC00B8BF76 /* RedPacket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacket.swift; sourceTree = "<group>"; };
 		1F721097279EB2F100B8BF76 /* FungibleToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FungibleToken.swift; sourceTree = "<group>"; };
 		1F721099279EC22200B8BF76 /* NftPacketPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftPacketPayload.swift; sourceTree = "<group>"; };
@@ -1731,6 +1733,7 @@
 				1F8AD0CF26CA3BAE00C9694F /* SpinBallAnimator.swift */,
 				1FCCE39A26D7F09700909A5B /* SpinActivityAnimator.swift */,
 				2AFBEDE426E61D6400BD77B7 /* LoadingWithTextController.swift */,
+				1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */,
 			);
 			path = LoadingIndicator;
 			sourceTree = "<group>";
@@ -3950,6 +3953,7 @@
 				2AF88543271EE9310004565A /* BiometryRecognitionViewModel.swift in Sources */,
 				2AF884C4271EE9300004565A /* SocialProfileDetectViewModel.swift in Sources */,
 				1F9C60E926B793DE001C26D2 /* Assets.swift in Sources */,
+				1F705FE327CF6AB9002A4A7E /* SpinWheelAnimator.swift in Sources */,
 				2AF8855D271EE9310004565A /* NetworkError.swift in Sources */,
 				2AF88516271EE9310004565A /* SelectNetworkViewModel.swift in Sources */,
 				2AF88650271EEDF80004565A /* UIView+Shadow.swift in Sources */,

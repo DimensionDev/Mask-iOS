@@ -9,9 +9,6 @@
 import UIKit
 
 final class LoadingIndicatorController: PopupViewController {
-    @ShadowAndRadiusWrapped(
-        paddings: UIEdgeInsets(top: 24, left: 65, bottom: 24, right: 65)
-    )
     private(set) var indicatorView = MaskLoadingIndicator()
 
     init() {
@@ -33,7 +30,7 @@ final class LoadingIndicatorController: PopupViewController {
 
         view.backgroundColor = Asset.Colors.Background.normal.color
         view.withSubViews {
-            $indicatorView
+            indicatorView
         }
     }
 
@@ -50,12 +47,9 @@ final class LoadingIndicatorController: PopupViewController {
     override func buildLayout() {
         super.buildLayout()
 
-        $indicatorView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview()
-                .offset(-100)
-            $0.width.equalTo(190)
-            $0.height.equalTo(108)
+        indicatorView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.size.greaterThanOrEqualTo(32)
         }
     }
 }
