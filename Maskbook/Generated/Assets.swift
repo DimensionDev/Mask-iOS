@@ -55,6 +55,7 @@ internal enum Asset {
       internal static let disable = ColorAsset(name: "Colors/Background/disable")
       internal static let gradient = ColorAsset(name: "Colors/Background/gradient")
       internal static let light = ColorAsset(name: "Colors/Background/light")
+      internal static let lightBlue = ColorAsset(name: "Colors/Background/lightBlue")
       internal static let mask = ColorAsset(name: "Colors/Background/mask")
       internal static let normal = ColorAsset(name: "Colors/Background/normal")
       internal static let selected = ColorAsset(name: "Colors/Background/selected")
@@ -245,6 +246,7 @@ internal enum Asset {
         internal static let guidePage2 = ImageAsset(name: "Images/Scene/Guide/guide_page_2")
         internal static let guidePage3 = ImageAsset(name: "Images/Scene/Guide/guide_page_3")
         internal static let guidePage4 = ImageAsset(name: "Images/Scene/Guide/guide_page_4")
+        internal static let net = ImageAsset(name: "Images/Scene/Guide/net")
       }
       internal enum Identity {
         internal static let icloud = ImageAsset(name: "Images/Scene/Identity/icloud")

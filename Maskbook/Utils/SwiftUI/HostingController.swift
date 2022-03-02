@@ -1,5 +1,5 @@
 //
-//  MaskHostViewController.swift
+//  HostingController.swift
 //  Maskbook
 //
 //  Created by Hugo L on 2022/2/25.
@@ -8,12 +8,9 @@
 
 import Foundation
 import SwiftUI
-import UIKit
 
-class MaskHostViewController<Content: View>: UIHostingController<Content> {
-    var statusBarStyle: UIStatusBarStyle = .lightContent
-    
+class MaskHostingController<Content: View>: UIHostingController<Content> {
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        statusBarStyle
+        return .darkContent
     }
 }

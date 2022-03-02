@@ -10,27 +10,12 @@ import Foundation
 import SwiftUI
 
 struct GuideItemView: View {
-    @Environment(\.viewController) var viewController
-    
     var page: Page
+    var contentSize: CGSize
+    var dismiss: (() -> Void)?
     
     var isLastOne: Bool {
         page == Page.allCases.last
-    }
-    
-    var skipSection: some View {
-        HStack {
-            Spacer()
-            Button {
-                viewController.value?.dismiss(animated: true, completion: nil)
-            } label: {
-                Text(L10n.Scene.Guide.skip)
-                    .font(FontStyles.bh5.font)
-                    .foregroundColor(Asset.Colors.Background.blue.asColor())
-            }
-            .opacity(isLastOne ? 0 : 1)
-        }
-        .padding(.horizontal, 22.5)
     }
     
     var pageControlSection: some View {
@@ -40,14 +25,26 @@ struct GuideItemView: View {
     }
     
     var topSpace: CGFloat {
-        0.114_532_02 * UIScreen.main.bounds.height
+        0.131 * contentSize.height
+    }
+    
+    var textTopSpace: CGFloat {
+        0.113 * contentSize.height
+    }
+    
+    var padding: CGFloat {
+        0.096 * contentSize.width
+    }
+    
+    var netPaddingTop: CGFloat {
+        0.090 * contentSize.width
     }
     
     var content: some View {
         VStack(alignment: .center) {
             Spacer().frame(height: topSpace)
-            page.guideImage.resizable().frame(height: 291)
-            Spacer()
+            page.guideImage.resizable().aspectRatio(contentMode: .fit).frame(maxWidth: .infinity)
+            Spacer().frame(height: textTopSpace)
             Text(page.title)
                 .font(FontStyles.mh4.font)
                 .foregroundColor(Asset.Colors.Text.lighter.asColor())
@@ -55,7 +52,7 @@ struct GuideItemView: View {
             if isLastOne {
                 Spacer().frame(height: 24)
                 Button {
-                    viewController.value?.dismiss(animated: true, completion: nil)
+                    dismiss?()
                 } label: {
                     Text(L10n.Scene.Guide.letsStart)
                         .font(FontStyles.bh5.font)
@@ -68,31 +65,27 @@ struct GuideItemView: View {
             }
             Spacer()
         }
-        .padding(.horizontal, 36)
+        .padding(.horizontal, padding)
+        .background(
+            VStack(spacing: 0) {
+                Spacer().frame(height: netPaddingTop)
+                Asset.Images.Scene.Guide.net.asImage().resizable().aspectRatio(contentMode: .fit)//.background(Color.red)
+                Spacer()
+            }
+        )
     }
     
     var body: some View {
-        ZStack {
-            LinearGradient(
-                colors: [
-                    Asset.Colors.Gradient.guide1.asColor(),
-                    Asset.Colors.Gradient.guide2.asColor()
-                ],
-                startPoint: .init(x: 0.5, y: 0),
-                endPoint: .init(x: 0.5, y: 1)
-            ).ignoresSafeArea()
-            VStack {
-                skipSection
-                content
-                pageControlSection
-                Spacer().frame(height: 24)
-            }
-        }
+        content.ignoresSafeArea().background(Color.clear)
     }
 }
 
 extension GuideItemView {
-    enum Page: CaseIterable {
+    enum Page: Int, CaseIterable, Identifiable {
+        var id: Int {
+            return rawValue
+        }
+        
         case one
         case two
         case three
@@ -129,7 +122,6 @@ extension GuideItemView {
 
 struct GuideItemView_Previews: PreviewProvider {
     static var previews: some View {
-        GuideItemView(page: .one)
-        GuideItemView(page: .four)
+        GuideView()
     }
 }

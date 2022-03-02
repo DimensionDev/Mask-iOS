@@ -329,10 +329,7 @@ extension Coordinator {
             return PersonasViewController()
 
         case .guide:
-            let vc = MaskHostViewController(rootView: AnyView(EmptyView()))
-            let view = GuideView().environment(\.viewController, ViewControllerHolder(vc))
-            vc.rootView = AnyView(view)
-            return vc
+            return MaskHostViewController(rootView: GuideView())
             
         case let .termsOfService(walletStartType):
             let termsOfServiceViewController = TermsOfServiceViewController(walletStartType: walletStartType)
