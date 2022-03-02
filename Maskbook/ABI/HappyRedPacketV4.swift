@@ -273,12 +273,12 @@ enum ABI {
 
 extension BlockChainNetwork {
     var redPacketConstantKey: String {
-        switch rawValue {
+        switch self {
         case .eth: return "Mainnet"
         case .rinkeby: return ""
         case .bsc: return "BSC"
         case .polygon: return "Matic"
-        case .polkd: return ""
+        case .polka: return ""
         case .arbitrum: return "Arbitrum"
         case .xdai: return "xDai"
         case .optimism: return ""
