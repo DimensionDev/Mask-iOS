@@ -76,7 +76,9 @@ struct GuideItemView: View {
     }
     
     var body: some View {
-        content.ignoresSafeArea().background(Color.clear)
+        content.background(
+            Color.clear.ignoresSafeArea()
+        )
     }
 }
 

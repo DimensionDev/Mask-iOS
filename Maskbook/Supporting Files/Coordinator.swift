@@ -191,7 +191,7 @@ class Coordinator {
 
     func setup(window: UIWindow) {
         let maskSocialVC = MaskSocialViewController(socialPlatform: settings.currentProfileSocialPlatform)
-        let naviVC = UINavigationController(rootViewController: maskSocialVC)
+        let naviVC = NavigationController(rootViewController: maskSocialVC)
         window.rootViewController = naviVC
         window.makeKeyAndVisible()
         
@@ -622,7 +622,7 @@ extension Coordinator {
             
         case let .maskSocial(socialPlatform):
             let maskSocialVC = MaskSocialViewController(socialPlatform: socialPlatform)
-            let naviVC = UINavigationController(rootViewController: maskSocialVC)
+            let naviVC = NavigationController(rootViewController: maskSocialVC)
             return naviVC
             
         case let .maskConnectingSocial(socialPlatform, personaIdentifier):

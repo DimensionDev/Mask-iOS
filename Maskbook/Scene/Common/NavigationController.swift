@@ -38,6 +38,11 @@ class NavigationController: UINavigationController {
             viewController.prepareLeftNavigationItems()
         }
     }
+    
+    override var childForStatusBarStyle: UIViewController? {
+        let child = super.childForStatusBarStyle
+        return child ?? topViewController
+    }
 }
 
 extension NavigationController: UIGestureRecognizerDelegate {
