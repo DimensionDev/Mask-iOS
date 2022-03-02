@@ -37,20 +37,11 @@ class AvatarView: UIView {
     }
     
     func setNetworkURL(url: String?) {
+        imageView.kf.cancelDownloadTask()
         if let url = url {
-            imageView.setNetworkImage(url: url) { [weak self] result in
-                switch result {
-                case .success(let result):
-                    self?.imageView.image = result.image
-                    self?.imageView.isHidden = false
-                    
-                case .failure(_):
-                    self?.imageView.isHidden = true
-                    self?.imageView.image = nil
-                }
-            }
+            imageView.isHidden = false
+            imageView.setNetworkImage(url: url)
         } else {
-            imageView.kf.cancelDownloadTask()
             imageView.isHidden = true
             imageView.image = nil
         }
