@@ -823,6 +823,7 @@ function NFTAvatar(props) {
                         ]
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(EthereumChainBoundary/* EthereumChainBoundary */.T, {
+                        hiddenConnectButton: true,
                         chainId: chainId,
                         children: /*#__PURE__*/ (0,jsx_runtime.jsxs)(Box/* default */.Z, {
                             className: classes.galleryItem,
@@ -1461,7 +1462,7 @@ const PluginNFTAvatarRPC = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(18249);
 /* harmony import */ var _EVM_messages__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(56902);
 /* harmony import */ var _extension_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(99997);
-/* harmony import */ var _masknet_web3_providers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(13330);
+/* harmony import */ var _masknet_web3_providers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(23290);
 /* harmony import */ var _masknet_web3_shared_base__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(52522);
 /* harmony import */ var bignumber_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(42263);
 /* harmony import */ var bignumber_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(bignumber_js__WEBPACK_IMPORTED_MODULE_4__);
@@ -1771,7 +1772,7 @@ function EthereumChainBoundary(props) {
                     children: t('plugin_wallet_connect_wallet_tip')
                 })
             }),
-            /*#__PURE__*/ (0,jsx_runtime.jsx)(ActionButton/* default */.ZP, {
+            !props.hiddenConnectButton ? /*#__PURE__*/ (0,jsx_runtime.jsx)(ActionButton/* default */.ZP, {
                 variant: "contained",
                 size: "small",
                 sx: {
@@ -1779,7 +1780,7 @@ function EthereumChainBoundary(props) {
                 },
                 onClick: openSelectProviderDialog,
                 children: t('plugin_wallet_connect_wallet')
-            })
+            }) : null
         ]
     }));
     if (isChainMatched && isPluginMatched || isValid) return(/*#__PURE__*/ (0,jsx_runtime.jsx)(jsx_runtime.Fragment, {

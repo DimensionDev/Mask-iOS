@@ -1157,8 +1157,8 @@ function useThemeTwitterVariant(baseTheme) {
     ]);
 }
 
-// EXTERNAL MODULE: ./src/components/InjectedComponents/ToolboxUnstyled.tsx
-var ToolboxUnstyled = __webpack_require__(88886);
+// EXTERNAL MODULE: ./src/components/InjectedComponents/ToolboxUnstyled.tsx + 1 modules
+var ToolboxUnstyled = __webpack_require__(63685);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.2_859545d82eec4e4ab7d574641ee2c82e/node_modules/@mui/material/styles/styled.js
 var styled = __webpack_require__(84879);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.2_859545d82eec4e4ab7d574641ee2c82e/node_modules/@mui/material/ListItemButton/ListItemButton.js
@@ -1738,8 +1738,8 @@ function injectPostBoxComposed(signal) {
     injectPostDialogHintAtTwitter(signal);
 }
 
-// EXTERNAL MODULE: ./src/social-network/defaults/inject/StartSetupGuide.tsx
-var StartSetupGuide = __webpack_require__(21614);
+// EXTERNAL MODULE: ./src/social-network/defaults/inject/StartSetupGuide.tsx + 7 modules
+var StartSetupGuide = __webpack_require__(91630);
 // EXTERNAL MODULE: ./src/social-network/defaults/automation/AttachImageToComposition.ts
 var AttachImageToComposition = __webpack_require__(14218);
 // EXTERNAL MODULE: ./src/social-network/defaults/inject/PostInspector.tsx + 16 modules
@@ -2218,8 +2218,8 @@ function getInjectNodeInfo(ele) {
 // EXTERNAL MODULE: ../../node_modules/.pnpm/classnames@2.3.1/node_modules/classnames/index.js
 var classnames = __webpack_require__(83849);
 var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
-// EXTERNAL MODULE: ../web3-providers/src/index.ts + 22 modules
-var web3_providers_src = __webpack_require__(13330);
+// EXTERNAL MODULE: ../web3-providers/src/index.ts
+var web3_providers_src = __webpack_require__(23290);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useAsyncRetry.js
 var useAsyncRetry = __webpack_require__(22572);
 ;// CONCATENATED MODULE: ./src/plugins/Avatar/hooks/useNFTContainerAtTwitter.ts
@@ -2971,6 +2971,9 @@ const TwitterRenderFragments = {
 
 
 
+
+
+
 const useInjectedDialogClassesOverwriteTwitter = (0,theme_src/* makeStyles */.ZL)()((theme)=>{
     const smallQuery = `@media (max-width: ${theme.breakpoints.values.sm}px)`;
     return {
@@ -3120,6 +3123,25 @@ const twitterUI = {
         avatarClipNFT: injectNFTAvatarClipInTwitter
     },
     configuration: {
+        nextIDConfig: {
+            enable: true,
+            platform: src/* NextIDPlatform.Twitter */.Vd.Twitter,
+            collectVerificationPost: (keyword)=>{
+                const userId = IdentityProviderTwitter.recognized.value.identifier || social_network/* globalUIState.profiles.value.0.identifier */.EJ.profiles.value[0].identifier;
+                const postNodes = (0,selector/* timelinePostContentSelector */.yR)().evaluate();
+                for (const postNode of postNodes){
+                    var ref;
+                    const postId = postIdParser(postNode);
+                    const postContent = postContentMessageParser(postNode);
+                    var ref1;
+                    const isVerified = postId && postContent[0] && (0,typed_message_base/* isTypedMessageText */.Rz)(postContent[0]) && ((ref1 = (ref = postContent[0]) === null || ref === void 0 ? void 0 : ref.content) !== null && ref1 !== void 0 ? ref1 : '').toLowerCase() === keyword.toLowerCase();
+                    if (isVerified && userId) {
+                        return new src/* PostIdentifier */._P(userId, postId);
+                    }
+                }
+                return null;
+            }
+        },
         steganography: {
             password () {
                 // ! Change this might be a breaking change !
@@ -3210,6 +3232,7 @@ const hasEditor = ()=>!!(0,_selector__WEBPACK_IMPORTED_MODULE_0__/* .postEditorD
 /* harmony export */   "QK": () => (/* binding */ bioPageUserIDSelector),
 /* harmony export */   "YG": () => (/* binding */ floatingBioCardSelector),
 /* harmony export */   "rk": () => (/* binding */ postsImageSelector),
+/* harmony export */   "yR": () => (/* binding */ timelinePostContentSelector),
 /* harmony export */   "XD": () => (/* binding */ postsContentSelector),
 /* harmony export */   "vL": () => (/* binding */ postAvatarsContentSelector),
 /* harmony export */   "qB": () => (/* binding */ selfInfoSelectors),
@@ -3342,6 +3365,11 @@ const postsImageSelector = (node)=>new _dimensiondev_holoflows_kit__WEBPACK_IMPO
     ]).querySelectorAll([
         '[data-testid="tweet"] > div > div img[src*="media"]',
         '[data-testid="tweet"] ~ div img[src*="media"]'
+    ].join())
+;
+const timelinePostContentSelector = ()=>querySelectorAll([
+        '[data-testid="tweet"] div + div div[lang]',
+        '[data-testid="tweet"] div + div div[data-testid="card.wrapper"]'
     ].join())
 ;
 const postsContentSelector = ()=>{

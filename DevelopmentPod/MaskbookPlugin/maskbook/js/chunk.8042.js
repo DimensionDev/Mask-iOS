@@ -1,6 +1,23 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[8042],{
 
+/***/ 28090:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "s": () => (/* binding */ SetupGuideStep)
+/* harmony export */ });
+var SetupGuideStep;
+(function(SetupGuideStep) {
+    SetupGuideStep["FindUsername"] = 'find-username';
+    SetupGuideStep["VerifyOnNextID"] = 'next-id-verify';
+    SetupGuideStep["PinExtension"] = 'pin-extension';
+    SetupGuideStep["Close"] = 'close';
+})(SetupGuideStep || (SetupGuideStep = {}));
+
+
+/***/ }),
+
 /***/ 58042:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -41,8 +58,8 @@ var settings = __webpack_require__(3087);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/json-stable-stringify@1.0.1/node_modules/json-stable-stringify/index.js
 var json_stable_stringify = __webpack_require__(92304);
 var json_stable_stringify_default = /*#__PURE__*/__webpack_require__.n(json_stable_stringify);
-// EXTERNAL MODULE: ./src/components/InjectedComponents/SetupGuide.tsx
-var SetupGuide = __webpack_require__(24513);
+// EXTERNAL MODULE: ./src/components/InjectedComponents/SetupGuide/types.ts
+var types = __webpack_require__(28090);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+kit@0.0.0-20220223101101-4e6f3b9/node_modules/@dimensiondev/kit/esm/index.js + 1 modules
 var esm = __webpack_require__(85143);
 ;// CONCATENATED MODULE: ./src/extension/background-script/SocialNetworkService.ts
@@ -70,7 +87,7 @@ async function connectSocialNetwork(identifier, network) {
         if (!await requestSNSAdaptorPermission(ui)) return;
     }
     settings/* currentSetupGuideStatus */.AI[network].value = json_stable_stringify_default()({
-        status: SetupGuide/* SetupGuideStep.FindUsername */.s.FindUsername,
+        status: types/* SetupGuideStep.FindUsername */.s.FindUsername,
         persona: identifier.toText()
     });
     await (0,esm/* delay */.gw)(100);

@@ -1,5 +1,5 @@
 "use strict";
-(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[9827],{
+(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[8963],{
 
 /***/ 4520:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -751,6 +751,117 @@ const base = {
     },
     i18n: _locales_languages__WEBPACK_IMPORTED_MODULE_1__/* .languages */ .M
 };
+
+
+/***/ }),
+
+/***/ 10291:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "u0": () => (/* reexport */ AddressViewer/* AddressViewer */.u),
+  "IR": () => (/* reexport */ AssetPlayer/* AssetPlayer */.I),
+  "T3": () => (/* reexport */ ERC20TokenList/* ERC20TokenList */.T),
+  "SV": () => (/* reexport */ ErrorBoundary/* ErrorBoundary */.SV),
+  "N3": () => (/* reexport */ ErrorBoundary/* ErrorBoundaryBuildInfoContext */.N3),
+  "qy": () => (/* reexport */ I18NextProviderHMR/* I18NextProviderHMR */.q),
+  "XB": () => (/* reexport */ ImageIcon/* ImageIcon */.X),
+  "p6": () => (/* reexport */ LoadingAnimation/* LoadingAnimation */.p),
+  "jq": () => (/* reexport */ MiniNetworkSelector/* MiniNetworkSelector */.j),
+  "yC": () => (/* reexport */ NFTCardStyledAssetPlayer/* NFTCardStyledAssetPlayer */.y),
+  "s_": () => (/* reexport */ QRCode/* QRCode */.s),
+  "xR": () => (/* reexport */ SelectTokenChip/* SelectTokenChip */.x),
+  "xl": () => (/* reexport */ TokenAmountPanel/* TokenAmountPanel */.x),
+  "T1": () => (/* reexport */ TokenIcon/* TokenIcon */.T),
+  "o": () => (/* reexport */ WalletIcon/* WalletIcon */.o)
+});
+
+// UNUSED EXPORTS: ChainIcon, CrashUI, TokenIconUI, useImageFailOver, withErrorBoundary
+
+// EXTERNAL MODULE: ../shared/src/UI/hooks/index.ts + 1 modules
+var hooks = __webpack_require__(84127);
+// EXTERNAL MODULE: ../shared/src/UI/components/TokenIcon/index.tsx + 2 modules
+var TokenIcon = __webpack_require__(48822);
+// EXTERNAL MODULE: ../shared/src/UI/components/ChainIcon/index.tsx
+var ChainIcon = __webpack_require__(30010);
+// EXTERNAL MODULE: ../shared/src/UI/components/ImageIcon/index.tsx
+var ImageIcon = __webpack_require__(54781);
+// EXTERNAL MODULE: ../shared/src/UI/components/WalletIcon/index.tsx
+var WalletIcon = __webpack_require__(3194);
+// EXTERNAL MODULE: ../shared/src/UI/components/ERC20TokenList/index.tsx + 5 modules
+var ERC20TokenList = __webpack_require__(29846);
+// EXTERNAL MODULE: ../shared/src/UI/components/QRCode/index.tsx
+var QRCode = __webpack_require__(63973);
+// EXTERNAL MODULE: ../shared/src/UI/components/ErrorBoundary/index.ts + 1 modules
+var ErrorBoundary = __webpack_require__(5036);
+// EXTERNAL MODULE: ../shared/src/UI/components/SelectTokenChip/index.tsx
+var SelectTokenChip = __webpack_require__(72197);
+// EXTERNAL MODULE: ../shared/src/UI/components/TokenAmountPanel/index.tsx
+var TokenAmountPanel = __webpack_require__(50777);
+// EXTERNAL MODULE: ../shared/src/UI/components/LoadingAnimation/index.tsx
+var LoadingAnimation = __webpack_require__(15148);
+// EXTERNAL MODULE: ../shared/src/UI/components/MiniNetworkSelector/index.tsx
+var MiniNetworkSelector = __webpack_require__(63282);
+// EXTERNAL MODULE: ../shared/src/UI/components/AddressViewer/index.tsx
+var AddressViewer = __webpack_require__(97529);
+// EXTERNAL MODULE: ../shared/src/UI/components/I18NextProviderHMR.tsx
+var I18NextProviderHMR = __webpack_require__(52347);
+// EXTERNAL MODULE: ../shared/src/UI/components/AssetPlayer/index.tsx + 2 modules
+var AssetPlayer = __webpack_require__(36301);
+// EXTERNAL MODULE: ../shared/src/UI/components/NFTCardStyledAssetPlayer/index.tsx
+var NFTCardStyledAssetPlayer = __webpack_require__(40672);
+;// CONCATENATED MODULE: ../shared/src/UI/components/index.ts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;// CONCATENATED MODULE: ../shared/src/UI/index.ts
+
+
+
+
+/***/ }),
+
+/***/ 24073:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "E": () => (/* reexport safe */ _useValueRef__WEBPACK_IMPORTED_MODULE_0__.E),
+/* harmony export */   "pv": () => (/* reexport safe */ _useObservableMapSet__WEBPACK_IMPORTED_MODULE_1__.p),
+/* harmony export */   "H9": () => (/* reexport safe */ _useMenu__WEBPACK_IMPORTED_MODULE_2__.H9),
+/* harmony export */   "F$": () => (/* reexport safe */ _useRemoteControlledDialog__WEBPACK_IMPORTED_MODULE_3__.F),
+/* harmony export */   "iD": () => (/* reexport safe */ _useSnackbarCallback__WEBPACK_IMPORTED_MODULE_4__.i),
+/* harmony export */   "S8": () => (/* reexport safe */ _useScrollBottomEvent__WEBPACK_IMPORTED_MODULE_5__.S),
+/* harmony export */   "r8": () => (/* reexport safe */ _createGlobalState__WEBPACK_IMPORTED_MODULE_6__.r)
+/* harmony export */ });
+/* harmony import */ var _useValueRef__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(84081);
+/* harmony import */ var _useObservableMapSet__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9790);
+/* harmony import */ var _useMenu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(63798);
+/* harmony import */ var _useRemoteControlledDialog__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(12293);
+/* harmony import */ var _useSnackbarCallback__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(95182);
+/* harmony import */ var _useScrollBottomEvent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(36013);
+/* harmony import */ var _createGlobalState__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(17222);
+
+
+
+
+
+
+
 
 
 /***/ }),

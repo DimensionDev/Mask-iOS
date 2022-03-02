@@ -460,8 +460,8 @@ var utils_address = __webpack_require__(77031);
 var src = __webpack_require__(89729);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/date-fns@2.28.0/node_modules/date-fns/esm/addSeconds/index.js
 var addSeconds = __webpack_require__(71767);
-// EXTERNAL MODULE: ../web3-providers/src/index.ts + 22 modules
-var web3_providers_src = __webpack_require__(13330);
+// EXTERNAL MODULE: ../web3-providers/src/index.ts
+var web3_providers_src = __webpack_require__(23290);
 // EXTERNAL MODULE: ../gun-utils/src/index.ts + 3 modules
 var gun_utils_src = __webpack_require__(54151);
 ;// CONCATENATED MODULE: ./src/plugins/Avatar/Services/bind.ts

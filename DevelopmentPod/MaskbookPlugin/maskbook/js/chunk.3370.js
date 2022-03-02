@@ -188,6 +188,24 @@ const { queryProfilesDB , queryProfileDB , queryPersonaDB , queryPersonasDB , de
 
 /***/ }),
 
+/***/ 15594:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "k": () => (/* binding */ convertPersonaHexPublicKey)
+/* harmony export */ });
+/* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(43576);
+
+function convertPersonaHexPublicKey(persona) {
+    const key256 = (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .decompressSecp256k1Key */ .qX)(persona.compressedPoint.replace(/\|/g, '/'));
+    if (!key256.x || !key256.y) return;
+    const arr = (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .compressSecp256k1Point */ .SH)(key256.x, key256.y);
+    return `0x${(0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .toHex */ .NC)(arr)}`;
+}
+
+
+/***/ }),
+
 /***/ 99588:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -376,7 +394,10 @@ var Type;
 var shared = __webpack_require__(71986);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/isEmpty.js
 var isEmpty = __webpack_require__(67127);
+// EXTERNAL MODULE: ./background/database/persona/util.ts
+var util = __webpack_require__(15594);
 ;// CONCATENATED MODULE: ./background/database/persona/web.ts
+
 
 
 
@@ -699,7 +720,6 @@ async function createOrUpdatePersonaDB(record, howToMerge, t) {
 /**
  * Query many profiles.
  */ async function queryProfilesDB(query, t) {
-    var ref;
     t = t || (0,openDB/* createTransaction */._X)(await db(), 'readonly')('profiles');
     const result = [];
     if ((0,isEmpty/* default */.Z)(query)) {
@@ -716,7 +736,7 @@ async function createOrUpdatePersonaDB(record, howToMerge, t) {
             if (query.hasLinkedPersona && !out.linkedPersona) return;
             result.push(out);
         });
-    } else if ((ref = query.identifiers) === null || ref === void 0 ? void 0 : ref.length) {
+    } else if (query.identifiers) {
         for await (const each of t.objectStore('profiles').iterate()){
             const out = profileOutDB(each.value);
             if (query.hasLinkedPersona && !out.linkedPersona) continue;
@@ -972,9 +992,11 @@ function personaRecordToDB(x) {
 function personaRecordOutDB(x) {
     // @ts-ignore
     delete x.hasPrivateKey;
+    const identifier = src/* Identifier.fromString */.xb.fromString(x.identifier, src/* ECKeyIdentifier */.ob).unwrap();
     const obj = {
         ...x,
-        identifier: src/* Identifier.fromString */.xb.fromString(x.identifier, src/* ECKeyIdentifier */.ob).unwrap(),
+        identifier,
+        publicHexKey: (0,util/* convertPersonaHexPublicKey */.k)(identifier),
         linkedProfiles: new src/* IdentifierMap */.qD(x.linkedProfiles, src/* ProfileIdentifier */.WO)
     };
     return obj;
@@ -1002,289 +1024,28 @@ function relationRecordOutDB(x) {
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Nz": () => (/* binding */ PostDBAccess),
 /* harmony export */   "$v": () => (/* binding */ createPostDB),
 /* harmony export */   "rr": () => (/* binding */ updatePostDB),
 /* harmony export */   "q3": () => (/* binding */ queryPostDB),
 /* harmony export */   "hZ": () => (/* binding */ queryPostsDB),
-/* harmony export */   "xN": () => (/* binding */ queryPostPagedDB)
+/* harmony export */   "xN": () => (/* binding */ queryPostPagedDB),
+/* harmony export */   "Nz": () => (/* binding */ PostDBAccess)
 /* harmony export */ });
-/* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(43576);
-/* harmony import */ var idb_with_async_ittr__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(20326);
-/* harmony import */ var _utils_pure__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(61427);
-/* harmony import */ var _utils_openDB__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(71886);
+/* harmony import */ var _shared_native_rpc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(75126);
 
 
-
-
-const db = (0,_utils_openDB__WEBPACK_IMPORTED_MODULE_3__/* .createDBAccessWithAsyncUpgrade */ .Ns)(4, 7, (currentTryOpen, knowledge)=>{
-    return (0,idb_with_async_ittr__WEBPACK_IMPORTED_MODULE_1__/* .openDB */ .X3)('maskbook-post-v2', currentTryOpen, {
-        async upgrade (db1, oldVersion, _newVersion, transaction) {
-            /**
-                 * A type assert that make sure a and b are the same type
-                 * @param a The latest version PostRecord
-                 */ function _assert(a, b) {
-                a = b;
-                b = a;
+const { createPostDB , updatePostDB , queryPostDB , queryPostsDB , queryPostPagedDB , PostDBAccess  } = new Proxy({}, {
+    get (_, key) {
+        return async function(...args) {
+            if (_shared_native_rpc__WEBPACK_IMPORTED_MODULE_0__/* .hasNativeAPI */ ._) {
+                return __webpack_require__.e(/* import() */ 8173).then(__webpack_require__.bind(__webpack_require__, 78173)).then((x)=>x[key](...args)
+                );
             }
-            // Prevent unused code removal
-            // eslint-disable-next-line no-constant-condition
-            if (false) {}
-            if (oldVersion < 1) {
-                // inline keys
-                return void db1.createObjectStore('post', {
-                    keyPath: 'identifier'
-                });
-            }
-            /**
-                 * In the version 1 we use PostIdentifier to store post that identified by post iv
-                 * After upgrade to version 2, we use PostIVIdentifier to store it.
-                 * So we transform all old data into new data.
-                 */ if (oldVersion <= 1) {
-                const store = transaction.objectStore('post');
-                const old = await store.getAll();
-                await store.clear();
-                for (const each of old){
-                    const id = _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .Identifier.fromString */ .xb.fromString(each.identifier, _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .PostIdentifier */ ._P);
-                    if (id.ok) {
-                        const { postId , identifier  } = id.val;
-                        each.identifier = new _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .PostIVIdentifier */ .bb(identifier.network, postId).toText();
-                        await store.add(each);
-                    }
-                }
-            }
-            /**
-                 * In the version 2 we use `recipients?: ProfileIdentifier[]`
-                 * After upgrade to version 3, we use `recipients: Record<string, RecipientDetail>`
-                 */ if (oldVersion <= 2) {
-                const store = transaction.objectStore('post');
-                for await (const cursor of store){
-                    const v2record = cursor.value;
-                    const oldType = v2record.recipients;
-                    oldType && (0,_utils_pure__WEBPACK_IMPORTED_MODULE_2__/* .restorePrototypeArray */ .Yo)(oldType, _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .ProfileIdentifier.prototype */ .WO.prototype);
-                    const newType = {};
-                    if (oldType !== undefined) for (const each of oldType){
-                        newType[each.toText()] = {
-                            reason: [
-                                {
-                                    type: 'direct',
-                                    at: new Date(0)
-                                }
-                            ]
-                        };
-                    }
-                    const next = {
-                        ...v2record,
-                        recipients: newType,
-                        postBy: _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .ProfileIdentifier.unknown */ .WO.unknown,
-                        foundAt: new Date(0),
-                        recipientGroups: []
-                    };
-                    await cursor.update(next);
-                }
-            }
-            /**
-                 * In the version 3 we use `recipients?: Record<string, RecipientDetail>`
-                 * After upgrade to version 4, we use `recipients: IdentifierMap<ProfileIdentifier, RecipientDetail>`
-                 */ if (oldVersion <= 3) {
-                const store = transaction.objectStore('post');
-                for await (const cursor of store){
-                    const v3Record = cursor.value;
-                    const newType = new Map();
-                    for (const [key, value] of Object.entries(v3Record.recipients)){
-                        newType.set(key, value);
-                    }
-                    const v4Record = {
-                        ...v3Record,
-                        recipients: newType
-                    };
-                    await cursor.update(v4Record);
-                }
-            }
-            /**
-                 * In version 4 we use CryptoKey, in version 5 we use JsonWebKey
-                 */ if (oldVersion <= 4) {
-                const store = transaction.objectStore('post');
-                for await (const cursor of store){
-                    const v4Record = cursor.value;
-                    const data = knowledge === null || knowledge === void 0 ? void 0 : knowledge.data;
-                    if (!v4Record.postCryptoKey) continue;
-                    const v5Record = {
-                        ...v4Record,
-                        postCryptoKey: data.get(v4Record.identifier)
-                    };
-                    if (!v5Record.postCryptoKey) delete v5Record.postCryptoKey;
-                    await cursor.update(v5Record);
-                }
-            }
-            // version 6 ships a wrong db migration.
-            // therefore need to upgrade again to fix it.
-            if (oldVersion <= 6) {
-                const store = transaction.objectStore('post');
-                for await (const cursor of store){
-                    const v5Record = cursor.value;
-                    const by = v5Record.encryptBy;
-                    // This is the correct data type
-                    if (typeof by === 'string') continue;
-                    if (!by) continue;
-                    cursor.value.encryptBy = (0,_utils_pure__WEBPACK_IMPORTED_MODULE_2__/* .restorePrototype */ .mS)(by, _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .ECKeyIdentifier.prototype */ .ob.prototype).toText();
-                    cursor.update(cursor.value);
-                }
-                store.createIndex('persona, date', [
-                    'encryptBy',
-                    'foundAt'
-                ], {
-                    unique: false
-                });
-            }
-        }
-    });
-}, async (db2)=>{
-    if (db2.version === 4) {
-        const map = new Map();
-        const knowledge = {
-            version: 4,
-            data: map
-        };
-        const records = await (0,_utils_openDB__WEBPACK_IMPORTED_MODULE_3__/* .createTransaction */ ._X)(db2, 'readonly')('post').objectStore('post').getAll();
-        for (const r of records){
-            const x = r.postCryptoKey;
-            if (!x) continue;
-            try {
-                const key = await (0,_utils_pure__WEBPACK_IMPORTED_MODULE_2__/* .CryptoKeyToJsonWebKey */ .iV)(x);
-                map.set(r.identifier, key);
-            } catch  {
-                continue;
-            }
-        }
-        return knowledge;
-    }
-    return undefined;
-});
-const PostDBAccess = db;
-async function createPostDB(record, t) {
-    t || (t = (0,_utils_openDB__WEBPACK_IMPORTED_MODULE_3__/* .createTransaction */ ._X)(await db(), 'readwrite')('post'));
-    const toSave = postToDB(record);
-    await t.objectStore('post').add(toSave);
-}
-async function updatePostDB(updateRecord, mode, t) {
-    t || (t = (0,_utils_openDB__WEBPACK_IMPORTED_MODULE_3__/* .createTransaction */ ._X)(await db(), 'readwrite')('post'));
-    const emptyRecord = {
-        identifier: updateRecord.identifier,
-        recipients: new _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .IdentifierMap */ .qD(new Map()),
-        postBy: _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .ProfileIdentifier.unknown */ .WO.unknown,
-        foundAt: new Date()
-    };
-    const currentRecord = await queryPostDB(updateRecord.identifier, t) || emptyRecord;
-    const nextRecord = {
-        ...currentRecord,
-        ...updateRecord
-    };
-    const nextRecipients = mode === 'override' ? postToDB(nextRecord).recipients : postToDB(currentRecord).recipients;
-    if (mode === 'append') {
-        if (updateRecord.recipients) {
-            if (typeof updateRecord.recipients === 'object' && typeof nextRecipients === 'object') {
-                for (const [id, patchDetail] of updateRecord.recipients){
-                    const idText = id.toText();
-                    if (nextRecipients.has(idText)) {
-                        const { reason , ...rest } = patchDetail;
-                        const nextDetail = nextRecipients.get(idText);
-                        Object.assign(nextDetail, rest);
-                        nextDetail.reason = [
-                            ...nextDetail.reason,
-                            ...patchDetail.reason
-                        ];
-                    } else {
-                        nextRecipients.set(idText, patchDetail);
-                    }
-                }
-            } else {
-                nextRecord.recipients = 'everyone';
-            }
-        }
-    }
-    const nextRecordInDBType = postToDB(nextRecord);
-    await t.objectStore('post').put(nextRecordInDBType);
-}
-async function queryPostDB(record, t) {
-    t || (t = (0,_utils_openDB__WEBPACK_IMPORTED_MODULE_3__/* .createTransaction */ ._X)(await db(), 'readonly')('post'));
-    const result = await t.objectStore('post').get(record.toText());
-    if (result) return postOutDB(result);
-    return null;
-}
-async function queryPostsDB(query, t) {
-    t || (t = (0,_utils_openDB__WEBPACK_IMPORTED_MODULE_3__/* .createTransaction */ ._X)(await db(), 'readonly')('post'));
-    const selected = [];
-    for await (const { value  } of t.objectStore('post')){
-        const idResult = _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .Identifier.fromString */ .xb.fromString(value.identifier, _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .PostIVIdentifier */ .bb);
-        if (idResult.err) {
-            console.warn(idResult.val.message);
-            continue;
-        }
-        const id = idResult.val;
-        if (typeof query === 'string') {
-            if (id.network === query) selected.push(postOutDB(value));
-        } else {
-            const v = postOutDB(value);
-            if (query(v, id)) selected.push(v);
-        }
-    }
-    return selected;
-}
-/**
- * Query posts by paged
- */ async function queryPostPagedDB(linked, options, count) {
-    const t = (0,_utils_openDB__WEBPACK_IMPORTED_MODULE_3__/* .createTransaction */ ._X)(await db(), 'readonly')('post');
-    const data = [];
-    let firstRecord = true;
-    for await (const cursor of t.objectStore('post').iterate()){
-        if (cursor.value.encryptBy !== linked.toText()) continue;
-        if (!options.userIds.includes(cursor.value.postBy.userId)) continue;
-        const postIdentifier = _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .Identifier.fromString */ .xb.fromString(cursor.value.identifier, _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .PostIVIdentifier */ .bb).unwrap();
-        if (postIdentifier.network !== options.network) continue;
-        if (firstRecord && options.after) {
-            cursor.continue(options.after.toText());
-            firstRecord = false;
-            continue;
-        }
-        if (postIdentifier === options.after) continue;
-        if (count <= 0) break;
-        const outData = postOutDB(cursor.value);
-        count -= 1;
-        data.push(outData);
-    }
-    return data;
-}
-// #region db in and out
-function postOutDB(db3) {
-    const { identifier , foundAt , postBy , recipients , postCryptoKey , encryptBy , interestedMeta , summary , url  } = db3;
-    if (typeof recipients === 'object') {
-        for (const detail of recipients.values()){
-            detail.reason.forEach((x)=>x.type === 'group' && (0,_utils_pure__WEBPACK_IMPORTED_MODULE_2__/* .restorePrototype */ .mS)(x.group, _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .GroupIdentifier.prototype */ .xI.prototype)
+            return __webpack_require__.e(/* import() */ 6189).then(__webpack_require__.bind(__webpack_require__, 26189)).then((x)=>x[key](...args)
             );
-        }
+        };
     }
-    return {
-        identifier: _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .Identifier.fromString */ .xb.fromString(identifier, _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .PostIVIdentifier */ .bb).unwrap(),
-        postBy: (0,_utils_pure__WEBPACK_IMPORTED_MODULE_2__/* .restorePrototype */ .mS)(postBy, _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .ProfileIdentifier.prototype */ .WO.prototype),
-        recipients: recipients === true ? 'everyone' : new _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .IdentifierMap */ .qD(recipients, _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .ProfileIdentifier */ .WO),
-        foundAt: foundAt,
-        postCryptoKey: postCryptoKey,
-        encryptBy: encryptBy ? _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .Identifier.fromString */ .xb.fromString(encryptBy, _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .ECKeyIdentifier */ .ob).unwrapOr(undefined) : undefined,
-        interestedMeta,
-        summary,
-        url
-    };
-}
-function postToDB(out) {
-    var ref;
-    return {
-        ...out,
-        identifier: out.identifier.toText(),
-        recipients: out.recipients === 'everyone' ? true : out.recipients.__raw_map__,
-        encryptBy: (ref = out.encryptBy) === null || ref === void 0 ? void 0 : ref.toText()
-    };
-}
+});
 
 
 /***/ }),
@@ -1375,6 +1136,8 @@ var src = __webpack_require__(43576);
 var db = __webpack_require__(90520);
 // EXTERNAL MODULE: ./shared/index.ts
 var shared = __webpack_require__(71986);
+// EXTERNAL MODULE: ./shared/native-rpc/index.ts
+var native_rpc = __webpack_require__(75126);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+kit@0.0.0-20220223101101-4e6f3b9/node_modules/@dimensiondev/kit/esm/index.js + 1 modules
 var esm = __webpack_require__(85143);
 // EXTERNAL MODULE: ./background/database/utils/openDB.ts
@@ -1385,10 +1148,15 @@ var openDB = __webpack_require__(71886);
 
 
 
+
 /**
- * Get a (cached) blob url for an identifier.
+ * Get a (cached) blob url for an identifier. No cache for native api.
  * ? Because of cross-origin restrictions, we cannot use blob url here. sad :(
- */ const queryAvatarDataURL = (0,esm/* memoizePromise */.J3)(async function(identifier) {
+ */ const queryAvatarDataURL = native_rpc/* hasNativeAPI */._ ? async function(identifier) {
+    return native_rpc/* nativeAPI */.Nz === null || native_rpc/* nativeAPI */.Nz === void 0 ? void 0 : native_rpc/* nativeAPI.api.query_avatar */.Nz.api.query_avatar({
+        identifier: identifier.toText()
+    });
+} : (0,esm/* memoizePromise */.J3)(async function(identifier) {
     const t = (0,openDB/* createTransaction */._X)(await (0,db/* createAvatarDBAccess */.Hm)(), 'readonly')('avatars');
     const buffer = await (0,db/* queryAvatarDB */.dg)(t, identifier);
     if (!buffer) throw new Error('Avatar not found');
@@ -1407,6 +1175,15 @@ var openDB = __webpack_require__(71886);
  */ async function storeAvatar(identifier, avatar) {
     if (identifier instanceof src/* ProfileIdentifier */.WO && identifier.isUnknown) return;
     try {
+        if (native_rpc/* hasNativeAPI */._) {
+            // ArrayBuffer is unreachable on Native side.
+            if (typeof avatar !== 'string') return;
+            await (native_rpc/* nativeAPI */.Nz === null || native_rpc/* nativeAPI */.Nz === void 0 ? void 0 : native_rpc/* nativeAPI.api.store_avatar */.Nz.api.store_avatar({
+                identifier: identifier.toText(),
+                avatar: avatar
+            }));
+            return;
+        }
         if (typeof avatar === 'string') {
             if (avatar.startsWith('https') === false) return;
             const isOutdated = await (0,db/* isAvatarOutdatedDB */.PU)((0,openDB/* createTransaction */._X)(await (0,db/* createAvatarDBAccess */.Hm)(), 'readonly')('metadata'), identifier, 'lastUpdateTime');
@@ -1426,7 +1203,8 @@ var openDB = __webpack_require__(71886);
     } catch (error) {
         console.error('[AvatarDB] Store avatar failed', error);
     } finally{
-        queryAvatarDataURL.cache.delete(identifier.toText());
+        var ref;
+        (ref = queryAvatarDataURL.cache) === null || ref === void 0 ? void 0 : ref.delete(identifier.toText());
         if (identifier instanceof src/* ProfileIdentifier */.WO) {
             shared/* MaskMessages.events.profilesChanged.sendToAll */.ql.events.profilesChanged.sendToAll([
                 {
@@ -2057,7 +1835,7 @@ async function patchCreateOrUpdateRelation(profiles, personas, defaultFavor = sh
 async function patchCreateNewRelation(relations) {
     await (0,db/* consistentPersonaDBWriteAccess */.As)(async (t)=>{
         for (const relation of relations){
-            const relationsInDB = await (0,db/* queryRelations */.bF)(relation.linked, relation.profile);
+            const relationsInDB = await (0,db/* queryRelations */.bF)(relation.linked, relation.profile, t);
             if (relationsInDB.length > 0) {
                 for (const relation of relationsInDB){
                     await (0,db/* updateRelationDB */.Jx)(relation, t, true);
@@ -2074,7 +1852,7 @@ async function patchCreateNewRelation(relations) {
 }
 async function createNewRelation(profile, linked, favor = shared_base_src/* RelationFavor.UNCOLLECTED */.Kn.UNCOLLECTED) {
     const t = await (0,db/* createRelationsTransaction */.cl)();
-    const relationInDB = await (0,db/* queryRelations */.bF)(linked, profile);
+    const relationInDB = await (0,db/* queryRelations */.bF)(linked, profile, t);
     if (relationInDB.length > 0) return;
     await (0,db/* createRelationDB */.N8)({
         profile,
@@ -2223,6 +2001,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "getCurrentMaskWalletLockedSettings": () => (/* binding */ getCurrentMaskWalletLockedSettings),
 /* harmony export */   "setCurrentMaskWalletLockedSettings": () => (/* binding */ setCurrentMaskWalletLockedSettings),
 /* harmony export */   "getWalletAllowTestChain": () => (/* binding */ getWalletAllowTestChain),
+/* harmony export */   "getCurrentPersona": () => (/* binding */ getCurrentPersona),
 /* harmony export */   "getCurrentPersonaIdentifier": () => (/* binding */ getCurrentPersonaIdentifier),
 /* harmony export */   "setCurrentPersonaIdentifier": () => (/* binding */ setCurrentPersonaIdentifier),
 /* harmony export */   "getPluginMinimalModeEnabled": () => (/* binding */ getPluginMinimalModeEnabled),
@@ -2280,6 +2059,11 @@ const [getCurrentCollectibleDataProvider, setCurrentCollectibleDataProvider] = c
 const [getCurrentMaskWalletLockedSettings, setCurrentMaskWalletLockedSettings] = create(_plugins_Wallet_settings__WEBPACK_IMPORTED_MODULE_4__/* .currentMaskWalletLockStatusSettings */ .Jg);
 async function getWalletAllowTestChain() {
     return _shared__WEBPACK_IMPORTED_MODULE_5__/* .Flags.wallet_allow_testnet */ .vU.wallet_allow_testnet;
+}
+async function getCurrentPersona() {
+    const currentPersonaIdentifier1 = await getCurrentPersonaIdentifier();
+    if (!currentPersonaIdentifier1) return undefined;
+    return (0,_IdentityService__WEBPACK_IMPORTED_MODULE_3__.queryPersona)(currentPersonaIdentifier1);
 }
 async function getCurrentPersonaIdentifier() {
     await _settings_settings__WEBPACK_IMPORTED_MODULE_1__/* .currentPersonaIdentifier.readyPromise */ .cn.readyPromise;

@@ -974,8 +974,8 @@ function getMetadataImages(node2) {
 var AttachImageToComposition = __webpack_require__(14218);
 // EXTERNAL MODULE: ./src/social-network/defaults/inject/PageInspector.tsx + 3 modules
 var PageInspector = __webpack_require__(43439);
-// EXTERNAL MODULE: ./src/social-network/defaults/inject/StartSetupGuide.tsx
-var StartSetupGuide = __webpack_require__(21614);
+// EXTERNAL MODULE: ./src/social-network/defaults/inject/StartSetupGuide.tsx + 7 modules
+var StartSetupGuide = __webpack_require__(91630);
 // EXTERNAL MODULE: ../encryption/src/index.ts + 22 modules
 var encryption_src = __webpack_require__(37348);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.2_859545d82eec4e4ab7d574641ee2c82e/node_modules/@mui/material/styles/createMuiStrictModeTheme.js
@@ -1132,8 +1132,8 @@ var Typography = __webpack_require__(67020);
 var ListItemIcon = __webpack_require__(90056);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.2_859545d82eec4e4ab7d574641ee2c82e/node_modules/@mui/material/useMediaQuery/useMediaQuery.js
 var useMediaQuery = __webpack_require__(11178);
-// EXTERNAL MODULE: ./src/components/InjectedComponents/ToolboxUnstyled.tsx
-var ToolboxUnstyled = __webpack_require__(88886);
+// EXTERNAL MODULE: ./src/components/InjectedComponents/ToolboxUnstyled.tsx + 1 modules
+var ToolboxUnstyled = __webpack_require__(63685);
 ;// CONCATENATED MODULE: ./src/social-network-adaptor/facebook.com/injection/ToolbarUI.tsx
 
 // see https://github.com/import-js/eslint-plugin-import/issues/2288

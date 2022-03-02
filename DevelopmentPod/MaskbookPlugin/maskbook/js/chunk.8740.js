@@ -210,7 +210,7 @@ const searchNickNameSelector = ()=>querySelector('[id="react-root"] section main
 ;
 const searchUserIdSelector = ()=>querySelector('[id="react-root"] section main header section h2')
 ;
-const searchUserIdInEditPageSelector = ()=>querySelector('[id="react-root"] button[title="Change Profile Photo"] > img').closest(4).querySelector('h1')
+const searchUserIdInEditPageSelector = ()=>querySelector('[id="react-root"] button > img').closest(4).querySelector('h1')
 ;
 const searchProfileTabArticlePageSelector = ()=>querySelector('[id="react-root"] section main div[role="tablist"]')
 ;
@@ -218,19 +218,21 @@ const searchProfileTabOtherArticlePageSelector = ()=>querySelector('[id="react-r
 ;
 const searchInstagramAvatarListSelector = ()=>querySelector('[role="dialog"] .piCib > div > form').closest(1).querySelector('button')
 ;
-const searchInstagramAvatarOpenFilesSelector = ()=>querySelector('[id="react-root"] button[title="Change Profile Photo"] > img').closest(4).querySelector('form')
+const searchInstagramAvatarOpenFilesSelector = ()=>querySelector('[id="react-root"] button > img').closest(4).querySelector('form')
 ;
 const searchInstagramSaveAvatarButtonSelector = ()=>querySelector('section > div > header > div > div:last-child > button')
 ;
-const searchInstagramAvatarSelector = ()=>querySelector('[id="react-root"] header img[alt="Change Profile Photo"], img[data-testid="user-avatar"]')
+const searchInstagramAvatarSelector = ()=>querySelector('[id="react-root"] header img, img[data-testid="user-avatar"]')
 ;
-const searchInstagramProfileAvatarButtonSelector = ()=>querySelector('[id="react-root"] button[title="Change Profile Photo"] > img').closest(3)
+const searchInstagramProfileAvatarButtonSelector = ()=>querySelector('[id="react-root"] button > img').closest(3)
 ;
 const searchInstagramAvatarSettingDialog = ()=>querySelector('[id="react-root"]')
 ;
-const searchInstagramAvatarUploadLoadingSelector = ()=>querySelector('[id="react-root"] button[title="Change Profile Photo"]').closest(1).querySelector('div[data-visualcompletion="loading-state"]')
+const searchInstagramAvatarUploadLoadingSelector = ()=>querySelector('[id="react-root"] button').closest(1).querySelector('div[data-visualcompletion="loading-state"]')
 ;
-const searchInstagramProfileSettingButtonSelector = ()=>querySelector('[id="react-root"] header button[title="Change Profile Photo"]').closest(4).querySelector('section > div > div')
+const searchInstagramProfileSettingButtonSelector = ()=>querySelector('[id="react-root"] header button').closest(4).querySelector('section > div > div')
+;
+const searchInstagramProfileEditButton = ()=>querySelector('[id="react-root"] a[href="/accounts/edit/"]')
 ;
 const searchInstagramPostAvatarSelector = ()=>new umd.LiveSelector().querySelectorAll('[role="button"] > a > img[data-testid="user-avatar"]')
 ;
@@ -742,7 +744,11 @@ function OpenNFTAvatarEditProfileButtonInInstagram() {
         });
     }, []);
     const { classes  } = NFTAvatarEditProfile_useStyles();
-    if ((ref = location.pathname) === null || ref === void 0 ? void 0 : ref.includes('/edit')) return null;
+    const editButton = (0,react.useMemo)(()=>searchInstagramProfileEditButton().evaluate()
+    , [
+        location.pathname
+    ]);
+    if (((ref = location.pathname) === null || ref === void 0 ? void 0 : ref.includes('/edit')) || !editButton) return null;
     return(/*#__PURE__*/ (0,jsx_runtime.jsx)(NFTAvatarButton/* NFTAvatarButton */.m, {
         onClick: onClick,
         classes: classes
@@ -1174,7 +1180,7 @@ const ui_provider_define = {
 /* harmony import */ var _state_InitProfiles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(64750);
 /* harmony import */ var _inject_PageInspector__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(43439);
 /* harmony import */ var _inject_PostReplacer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(39811);
-/* harmony import */ var _inject_StartSetupGuide__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(21614);
+/* harmony import */ var _inject_StartSetupGuide__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(91630);
 
 
 
