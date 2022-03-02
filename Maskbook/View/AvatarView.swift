@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class AvatarView: UIView {
     lazy var label: UILabel = {
@@ -36,8 +37,13 @@ class AvatarView: UIView {
     }
     
     func setNetworkURL(url: String?) {
+        imageView.kf.cancelDownloadTask()
         if let url = url {
+            imageView.isHidden = false
             imageView.setNetworkImage(url: url)
+        } else {
+            imageView.isHidden = true
+            imageView.image = nil
         }
     }
     
@@ -54,6 +60,7 @@ class AvatarView: UIView {
     
     func setupSubviews() {
         backgroundColor = Asset.Colors.Public.blue.color
+        clipsToBounds = true
         withSubViews {
             label
             imageView
