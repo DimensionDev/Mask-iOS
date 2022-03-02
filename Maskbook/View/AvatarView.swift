@@ -46,11 +46,13 @@ class AvatarView: UIView {
                     
                 case .failure(_):
                     self?.imageView.isHidden = true
+                    self?.imageView.image = nil
                 }
             }
         } else {
             imageView.kf.cancelDownloadTask()
             imageView.isHidden = true
+            imageView.image = nil
         }
     }
     
