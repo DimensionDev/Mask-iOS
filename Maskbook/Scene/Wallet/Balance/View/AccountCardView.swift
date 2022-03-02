@@ -16,6 +16,20 @@ protocol AccountCardViewDelegate: AnyObject {
 
 // swiftlint:disable force_cast line_length type_body_length file_length
 class AccountCardView: UIView {
+    
+    private enum DisplayAddressType {
+        case normal, ens
+    }
+    
+    private struct DisplayAddress {
+        let address: String
+        let ensName: String?
+        
+        var truncatedAddress: String {
+            "\(address.prefix(10))...\(address.suffix(10))"
+        }
+    }
+    
     @InjectedProvider(\.userDefaultSettings)
     private var userSetting
     
@@ -27,7 +41,9 @@ class AccountCardView: UIView {
     
     private let cornerRadiusValue: CGFloat = 20
     
-    private var addressArr = [String]()
+//    private var addressArr = [String]()
+    private var displayAddressType: DisplayAddressType = .ens
+    private var displayAddress: DisplayAddress?
 
     private var backgroundLayer: CAGradientLayer = {
         let layer1 = CAGradientLayer()
@@ -318,17 +334,14 @@ class AccountCardView: UIView {
         
         copyButton.addTarget(self, action: #selector(copyButtonDidClick(sender:)), for: .touchUpInside)
         
-        addressLabel.gesture()
-            .sink { [weak self] _ in
-                self?.addressArr = Array(self?.addressArr.reversed() ?? [])
-                let displayAddress = self?.addressArr.first ?? ""
-                if displayAddress.utf16.count > 30 {
-                    self?.addressLabel.text = "\(displayAddress.prefix(10))...\(displayAddress.suffix(10))"
-                } else {
-                    self?.addressLabel.text = displayAddress
-                }
-            }
-            .store(in: &disposeBag)
+        addressLabel.isUserInteractionEnabled = true
+        addressLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addressLabelDidTapped)))
+    }
+    
+    @objc
+    private func addressLabelDidTapped() {
+        toggleDisplayAddressType()
+        updateDisplayAddress()
     }
     
     @objc
@@ -338,7 +351,7 @@ class AccountCardView: UIView {
     
     @objc
     private func copyButtonDidClick(sender: UIButton) {
-        let displayAddress = self.addressArr.first ?? ""
+        let displayAddress = self.getFullAddress()
         UIPasteboard.general.string = displayAddress
         let alertController = AlertController(
             title: L10n.Common.Alert.WalletBackup.title,
@@ -441,21 +454,19 @@ class AccountCardView: UIView {
             balanceLabel.text = "\(maskUserDefaults.currency.symbol)\(totalBalance.currency)"
         }
         if let account = account {
-            Publishers.CombineLatest4(
+            setAddress(account: account)
+            updateDisplayAddress()
+            Publishers.CombineLatest3(
                 account.publisher(for: \.name).eraseToAnyPublisher(),
-                account.publisher(for: \.address).eraseToAnyPublisher(),
                 UserDefaultSettings.shared.displayBlockChainPublisher.eraseToAnyPublisher(),
                 UserDefaultPublishers.network.eraseToAnyPublisher()
             )
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] name, address, displayBlockChain, networkType in
-                guard let validAddress = address else { return }
-
+            .sink { [weak self] name, displayBlockChain, networkType in
                 self?.updateBlockChainButtonStatus(currentBlockChain: displayBlockChain)
                 self?.updateBackground(isWalletConnect: account.fromWalletConnect,
                                        displayBlockchain: displayBlockChain)
                 self?.nameLabel.text = name
-                self?.addressLabel.text = "\(validAddress.prefix(10))...\(validAddress.suffix(10))"
                 self?.networkLabel.text = networkType.shortName.lowercased().capitalized
                 self?.networkIcon.image = networkType.smallIcon?.withTintColor(Asset.Colors.AccountCard.nameText.color)
             }
@@ -499,14 +510,51 @@ class AccountCardView: UIView {
         }
     }
     
-    private func getAddressAndENS(account: Account) {
-        self.addressArr.removeAll()
-        guard let validAddress = account.address else { return }
-        guard let ensName = account.ensName else {
-            self.addressLabel.text = "\(validAddress.prefix(10))...\(validAddress.suffix(10))"
+    private func toggleDisplayAddressType() {
+        switch displayAddressType {
+        case .normal:
+
+            displayAddressType = .ens
+            
+        case .ens:
+            displayAddressType = .normal
+        }
+    }
+    
+    private func setAddress(account: Account) {
+        guard let validAddress = account.address else {
+            addressLabel.text = ""
             return
         }
-        if ensName.isNotEmpty { self.addressArr.append(ensName) }
-        self.addressArr.append(validAddress)
+        
+        displayAddress = DisplayAddress(address: validAddress, ensName: account.ensName)
+    }
+    
+    private func updateDisplayAddress() {
+        let displayAddressText: String?
+        switch displayAddressType {
+        case .normal:
+            displayAddressText = displayAddress?.truncatedAddress
+            
+        case .ens:
+            if let validEnsName = displayAddress?.ensName, !validEnsName.isEmpty {
+                displayAddressText = validEnsName
+            } else {
+                displayAddressText = displayAddress?.truncatedAddress
+                // No valid ENS name found, change displayAddressType to .normal
+                displayAddressType = .normal
+            }
+        }
+        addressLabel.text = displayAddressText
+    }
+    
+    private func getFullAddress() -> String? {
+        switch displayAddressType {
+        case .normal:
+            return displayAddress?.address
+            
+        case .ens:
+            return displayAddress?.ensName
+        }
     }
 }
