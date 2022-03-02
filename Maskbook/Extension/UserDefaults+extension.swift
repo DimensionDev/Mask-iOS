@@ -326,7 +326,6 @@ final class UserDefaultSettings {
     
     @ReactiveUserDefault(key: Keys.jsResourceIsUsingBundle.rawValue, defaultValue: true)
     var jsResourceIsUsingBundle: Bool
-    
 }
 
 extension UserDefaultSettings {

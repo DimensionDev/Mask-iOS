@@ -14,9 +14,23 @@ import UIKit
 protocol AccountCardViewDelegate: AnyObject {
     func moreButtonDidClick(view: AccountCardView, button: UIButton)
 }
-// swiftlint:disable force_cast line_length type_body_length file_length
 
+// swiftlint:disable force_cast line_length type_body_length file_length
 class AccountCardView: UIView {
+    
+    private enum DisplayAddressType {
+        case normal, ens
+    }
+    
+    private struct DisplayAddress {
+        let address: String
+        let ensName: String?
+        
+        var truncatedAddress: String {
+            "\(address.prefix(10))...\(address.suffix(10))"
+        }
+    }
+    
     @InjectedProvider(\.userDefaultSettings)
     private var userSetting
     
@@ -27,6 +41,9 @@ class AccountCardView: UIView {
     private var disposeBag = Set<AnyCancellable>()
     
     private let cornerRadiusValue: CGFloat = 20
+    
+    private var displayAddressType: DisplayAddressType = .ens
+    private var displayAddress: DisplayAddress?
     
     private var backgroundLayer: CAGradientLayer = {
         let layer1 = CAGradientLayer()
@@ -214,7 +231,7 @@ class AccountCardView: UIView {
         applyCornerRadius(radius: 20)
         
         directionalLayoutMargins = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 0, trailing: 16)
-
+        
         layer.addSublayer(backgroundLayer)
         addSubview(chainLargeImageContainer)
         addSubview(maskImageView1)
@@ -340,6 +357,15 @@ class AccountCardView: UIView {
         }
         
         copyButton.addTarget(self, action: #selector(copyButtonDidClick(sender:)), for: .touchUpInside)
+        
+        addressLabel.isUserInteractionEnabled = true
+        addressLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addressLabelDidTapped)))
+    }
+    
+    @objc
+    private func addressLabelDidTapped() {
+        toggleDisplayAddressType()
+        updateDisplayAddress()
     }
     
     @objc
@@ -349,10 +375,21 @@ class AccountCardView: UIView {
     
     @objc
     private func copyButtonDidClick(sender: UIButton) {
-        UIPasteboard.general.string = userSetting.defaultAccountAddress
-        UIApplication.getTopViewController()?
-            .makeToast(message: L10n.Common.Toast.copy,
-                  image: Asset.Images.Toast.check.image)
+        let displayAddress = self.getFullAddress()
+        UIPasteboard.general.string = displayAddress
+        let alertController = AlertController(
+            title: L10n.Common.Toast.copy,
+            message: "",
+            confirmButtonText: L10n.Common.Controls.done,
+            imageType: .success,
+            confirmButtonClicked: { _ in
+            }
+        )
+        
+        Coordinator.main.present(
+            scene: .alertController(alertController: alertController),
+            transition: .alertController(completion: nil)
+        )
     }
     
     @objc
@@ -423,6 +460,7 @@ class AccountCardView: UIView {
     }
     
     func setup(account: Account?, portfolio: Portfolio?) {
+        disposeBag.removeAll()
         if let portfolio = portfolio {
             portfolio
                 .publisher(for: \.assetsValue)
@@ -440,24 +478,23 @@ class AccountCardView: UIView {
             balanceLabel.text = "\(maskUserDefaults.currency.symbol)\(totalBalance.currency)"
         }
         if let account = account {
-            Publishers.CombineLatest4(
+            setAddress(account: account)
+            updateDisplayAddress()
+            Publishers.CombineLatest3(
                 account.publisher(for: \.name).eraseToAnyPublisher(),
-                account.publisher(for: \.address).eraseToAnyPublisher(),
                 UserDefaultSettings.shared.displayBlockChainPublisher.eraseToAnyPublisher(),
                 UserDefaultPublishers.network.eraseToAnyPublisher()
             )
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] name, address, displayBlockChain, networkType in
-                guard let validAddress = address else { return }
-                self?.updateBlockChainButtonStatus(currentBlockChain: displayBlockChain)
-                self?.nameLabel.text = name
-                self?.addressLabel.text = "\(validAddress.prefix(10))...\(validAddress.suffix(10))"
-                self?.networkLabel.text = networkType.shortName.lowercased().capitalized
-                self?.networkIcon.image = networkType.smallIcon?.withTintColor(Asset.Colors.AccountCard.nameText.color)
-                self?.updateBackground(isWalletConnect: account.fromWalletConnect,
-                                       displayBlockchain: displayBlockChain)
-            }
-            .store(in: &disposeBag)
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] name, displayBlockChain, networkType in
+                    self?.updateBlockChainButtonStatus(currentBlockChain: displayBlockChain)
+                    self?.updateBackground(isWalletConnect: account.fromWalletConnect,
+                                           displayBlockchain: displayBlockChain)
+                    self?.nameLabel.text = name
+                    self?.networkLabel.text = networkType.shortName.lowercased().capitalized
+                    self?.networkIcon.image = networkType.smallIcon?.withTintColor(Asset.Colors.AccountCard.nameText.color)
+                }
+                .store(in: &disposeBag)
         } else {
             nameLabel.text = ""
             addressLabel.text = ""
@@ -494,9 +531,9 @@ class AccountCardView: UIView {
                     Asset.Colors.AccountCard.wcBackground2.color.cgColor
                 ]
                 stackViewBackgroudLayer.backgroundColor =
-                    Asset.Colors.AccountCard.wcBackground3.color.cgColor
+                Asset.Colors.AccountCard.wcBackground3.color.cgColor
                 shadowLayer?.shadowColor =
-                    Asset.Colors.Shadow.Card.all.color.cgColor
+                Asset.Colors.Shadow.Card.all.color.cgColor
             } else {
                 chainLargeImageView.image = displayBlockchain.chainBgImage
                 backgroundLayer.colors = displayBlockchain.accoundCardBgColors
@@ -504,5 +541,52 @@ class AccountCardView: UIView {
                 shadowLayer?.shadowColor = displayBlockchain.shadowColor
             }
         }
+    
+    private func toggleDisplayAddressType() {
+        switch displayAddressType {
+        case .normal:
+            displayAddressType = .ens
+            
+        case .ens:
+            displayAddressType = .normal
+        }
+    }
+    
+    private func setAddress(account: Account) {
+        guard let validAddress = account.address else {
+            addressLabel.text = ""
+            return
+        }
+        
+        displayAddress = DisplayAddress(address: validAddress, ensName: account.ensName)
+    }
+    
+    private func updateDisplayAddress() {
+        let displayAddressText: String?
+        switch displayAddressType {
+        case .normal:
+            displayAddressText = displayAddress?.truncatedAddress
+            
+        case .ens:
+            if let validEnsName = displayAddress?.ensName, !validEnsName.isEmpty {
+                displayAddressText = validEnsName
+            } else {
+                displayAddressText = displayAddress?.truncatedAddress
+                // No valid ENS name found, change displayAddressType to .normal
+                displayAddressType = .normal
+            }
+        }
+        addressLabel.text = displayAddressText
+    }
+    
+    private func getFullAddress() -> String? {
+        switch displayAddressType {
+        case .normal:
+            return displayAddress?.address
+            
+        case .ens:
+            return displayAddress?.ensName
+        }
+    }
 }
 // swiftlint:ensable force_cast line_length type_body_length file_length
