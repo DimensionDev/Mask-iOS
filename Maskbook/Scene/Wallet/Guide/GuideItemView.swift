@@ -25,7 +25,7 @@ struct GuideItemView: View {
     }
     
     var topSpace: CGFloat {
-        0.131 * contentSize.height
+        0.145 * contentSize.height
     }
     
     var textTopSpace: CGFloat {
@@ -37,7 +37,7 @@ struct GuideItemView: View {
     }
     
     var netPaddingTop: CGFloat {
-        0.090 * contentSize.width
+        0.15 * contentSize.width
     }
     
     var content: some View {
@@ -124,6 +124,10 @@ extension GuideItemView {
 
 struct GuideItemView_Previews: PreviewProvider {
     static var previews: some View {
-        GuideView()
+        Group {
+            GuideView()
+            GuideView()
+                .previewDevice("iPhone 12 mini")
+        }
     }
 }
