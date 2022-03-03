@@ -40,7 +40,7 @@ struct GuideItemView: View {
         0.15 * contentSize.width
     }
     
-    var content: some View {
+    var body: some View {
         VStack(alignment: .center) {
             Spacer().frame(height: topSpace)
             page.guideImage.resizable().aspectRatio(contentMode: .fit).frame(maxWidth: .infinity)
@@ -74,12 +74,6 @@ struct GuideItemView: View {
             }
         )
         .colorScheme(.light)
-    }
-    
-    var body: some View {
-        content.background(
-            Color.clear.ignoresSafeArea()
-        )
     }
 }
 

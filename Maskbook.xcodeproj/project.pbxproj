@@ -158,7 +158,6 @@
 		2A36E279275746750075E95B /* ChangePasswordStep1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A36E278275746740075E95B /* ChangePasswordStep1ViewController.swift */; };
 		2A4145F826D7880800708337 /* CryptoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4145F726D7880800708337 /* CryptoTests.swift */; };
 		2A5FAEA027CF7AD200D01250 /* GuideItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5FAE9D27CF7AD200D01250 /* GuideItemView.swift */; };
-		2A5FAEA127CF7AD200D01250 /* PagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5FAE9E27CF7AD200D01250 /* PagerView.swift */; };
 		2A5FAEA227CF7AD200D01250 /* GuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5FAE9F27CF7AD200D01250 /* GuideView.swift */; };
 		2A5FAEA427CF7AEE00D01250 /* MaskHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5FAEA327CF7AEE00D01250 /* MaskHostViewController.swift */; };
 		2A6ABB7B2720053B00CC3AED /* SelectAppearanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6ABB292720053B00CC3AED /* SelectAppearanceViewModel.swift */; };
@@ -861,7 +860,6 @@
 		2A36E278275746740075E95B /* ChangePasswordStep1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordStep1ViewController.swift; sourceTree = "<group>"; };
 		2A4145F726D7880800708337 /* CryptoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTests.swift; sourceTree = "<group>"; };
 		2A5FAE9D27CF7AD200D01250 /* GuideItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideItemView.swift; sourceTree = "<group>"; };
-		2A5FAE9E27CF7AD200D01250 /* PagerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerView.swift; sourceTree = "<group>"; };
 		2A5FAE9F27CF7AD200D01250 /* GuideView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideView.swift; sourceTree = "<group>"; };
 		2A5FAEA327CF7AEE00D01250 /* MaskHostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskHostViewController.swift; sourceTree = "<group>"; };
 		2A6ABB292720053B00CC3AED /* SelectAppearanceViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAppearanceViewModel.swift; sourceTree = "<group>"; };
@@ -1815,7 +1813,6 @@
 			isa = PBXGroup;
 			children = (
 				2A5FAE9D27CF7AD200D01250 /* GuideItemView.swift */,
-				2A5FAE9E27CF7AD200D01250 /* PagerView.swift */,
 				2A5FAE9F27CF7AD200D01250 /* GuideView.swift */,
 			);
 			path = Guide;
@@ -4200,7 +4197,6 @@
 				2AF8854F271EE9310004565A /* SendNftTokenViewModel.swift in Sources */,
 				2AF8857C271EE9310004565A /* WalletListWalletTableViewCell.swift in Sources */,
 				2AF8856B271EE9310004565A /* UnlockViewModel.swift in Sources */,
-				2A5FAEA127CF7AD200D01250 /* PagerView.swift in Sources */,
 				2AF88640271EEDF80004565A /* UIButton+Padding.swift in Sources */,
 				2A7310082685B83200C5354A /* PasswordFormItemView.swift in Sources */,
 				2AF88562271EE9310004565A /* TokenListTableViewCell.swift in Sources */,
