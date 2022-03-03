@@ -63,23 +63,21 @@ struct WalkThroughBoard<V: SplashItemView & View>: View {
         .colorScheme(.light)
         .overlay(
             // indicator control
-            VStack {
-                Spacer()
-                HStack(spacing: indicatorSpacing) {
-                    ForEach(V.Item.allCases.indices) { index in
-                        Capsule()
-                            .fill(Asset.Colors.Background.lightBlue.asColor())
-                            .frame(width: self.index == index ? capsuleWidth : indicatorWidth, height: indicatorHeight)
-                    }
-                }
-                .overlay(
+            HStack(spacing: indicatorSpacing) {
+                ForEach(V.Item.allCases.indices) { index in
                     Capsule()
                         .fill(Asset.Colors.Background.lightBlue.asColor())
-                        .frame(width: capsuleWidth, height: indicatorHeight)
-                        .offset(x: calculatedOffset),
-                    alignment: .leading
-                )
+                        .frame(width: self.index == index ? capsuleWidth : indicatorWidth, height: indicatorHeight)
+                }
             }
+            .overlay(
+                Capsule()
+                    .fill(Asset.Colors.Background.lightBlue.asColor())
+                    .frame(width: capsuleWidth, height: indicatorHeight)
+                    .offset(x: calculatedOffset),
+                alignment: .leading
+            ),
+            alignment: .bottom
         )
     }
 
