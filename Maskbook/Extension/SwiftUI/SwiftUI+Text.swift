@@ -12,10 +12,17 @@ extension Text {
 }
 
 extension View {
-    func horizontallyFilled() -> some View {
+    func horizontallyFilled(alignment: HorizontalAlignment = .leading) -> some View {
         HStack(spacing: 0) {
-            self
-            Spacer()
+            switch alignment {
+            case .trailing:
+                Spacer()
+                self
+
+            default:
+                self
+                Spacer()
+            }
         }
     }
 

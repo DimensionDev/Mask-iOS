@@ -20,19 +20,17 @@ struct GuideView: View {
     }
     
     var body: some View {
-        let gradientColors = [
-            Asset.Colors.Gradient.guide1.asColor(),
-            Asset.Colors.Gradient.guide2.asColor()
-        ]
-        
-        return GeometryReader { proxy in
+        GeometryReader { proxy in
             let contentSize = proxy.size
             buildPageContent(contentSize: contentSize)
                 .overlay(buildControls(contentSize: contentSize))
         }
         .background(
             LinearGradient(
-                colors: gradientColors,
+                colors: [
+                    Asset.Colors.Gradient.guide1.asColor(),
+                    Asset.Colors.Gradient.guide2.asColor()
+                ],
                 startPoint: .init(x: 0.5, y: 0),
                 endPoint: .init(x: 0.5, y: 1)
             ).ignoresSafeArea()

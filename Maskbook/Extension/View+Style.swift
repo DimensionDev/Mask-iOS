@@ -85,4 +85,14 @@ extension BlueGradientDecorator {
             ]
         )
     }
+
+    static var guideGradient: BlueGradientDecorator {
+        .init(
+            selectedColors: [],
+            normalColors: [
+                Asset.Colors.Gradient.guide1.asColor(),
+                Asset.Colors.Gradient.guide2.asColor()
+            ]
+        )
+    }
 }

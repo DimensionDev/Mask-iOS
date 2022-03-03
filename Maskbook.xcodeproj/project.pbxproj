@@ -90,6 +90,8 @@
 		1F57024027A2C1F600C96909 /* RedPacketShareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F57023F27A2C1F600C96909 /* RedPacketShareViewModel.swift */; };
 		1F58730F277C51A3005A7B11 /* DappScriptPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58730E277C51A3005A7B11 /* DappScriptPayload.swift */; };
 		1F705FE327CF6AB9002A4A7E /* SpinWheelAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */; };
+		1F705FE527D0665E002A4A7E /* WalkThroughBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F705FE427D0665E002A4A7E /* WalkThroughBoard.swift */; };
+		1F705FE727D066BB002A4A7E /* SplashItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F705FE627D066BB002A4A7E /* SplashItem.swift */; };
 		1F721096279E90DC00B8BF76 /* RedPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F721095279E90DC00B8BF76 /* RedPacket.swift */; };
 		1F721098279EB2F100B8BF76 /* FungibleToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F721097279EB2F100B8BF76 /* FungibleToken.swift */; };
 		1F72109A279EC22300B8BF76 /* NftPacketPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F721099279EC22200B8BF76 /* NftPacketPayload.swift */; };
@@ -794,6 +796,8 @@
 		1F57023F27A2C1F600C96909 /* RedPacketShareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketShareViewModel.swift; sourceTree = "<group>"; };
 		1F58730E277C51A3005A7B11 /* DappScriptPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappScriptPayload.swift; sourceTree = "<group>"; };
 		1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinWheelAnimator.swift; sourceTree = "<group>"; };
+		1F705FE427D0665E002A4A7E /* WalkThroughBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkThroughBoard.swift; sourceTree = "<group>"; };
+		1F705FE627D066BB002A4A7E /* SplashItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashItem.swift; sourceTree = "<group>"; };
 		1F721095279E90DC00B8BF76 /* RedPacket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacket.swift; sourceTree = "<group>"; };
 		1F721097279EB2F100B8BF76 /* FungibleToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FungibleToken.swift; sourceTree = "<group>"; };
 		1F721099279EC22200B8BF76 /* NftPacketPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftPacketPayload.swift; sourceTree = "<group>"; };
@@ -1814,6 +1818,8 @@
 			children = (
 				2A5FAE9D27CF7AD200D01250 /* GuideItemView.swift */,
 				2A5FAE9F27CF7AD200D01250 /* GuideView.swift */,
+				1F705FE427D0665E002A4A7E /* WalkThroughBoard.swift */,
+				1F705FE627D066BB002A4A7E /* SplashItem.swift */,
 			);
 			path = Guide;
 			sourceTree = "<group>";
@@ -3962,6 +3968,7 @@
 				0FEA5D0B26944923009ED058 /* TransactionHistory.swift in Sources */,
 				6F07ABE1279022B80039D69D /* NFTCollectionStatusModel.swift in Sources */,
 				2AF88612271EED7D0004565A /* LazyFuture.swift in Sources */,
+				1F705FE527D0665E002A4A7E /* WalkThroughBoard.swift in Sources */,
 				2AF88560271EE9310004565A /* GasFeeCustomCollectionViewCell.swift in Sources */,
 				2A6ABBA82720053B00CC3AED /* RemoteBackupVerifyViewModel.swift in Sources */,
 				2AF88588271EE9310004565A /* MaskTabBarButton.swift in Sources */,
@@ -4029,6 +4036,7 @@
 				0F641F12268C0E73002A4D33 /* DebankAPIModel.swift in Sources */,
 				2DEDDEA32761965700D37A76 /* WalletConnectPanelButton.swift in Sources */,
 				2AF884E2271EE9310004565A /* MarketDataproviderSheet.swift in Sources */,
+				1F705FE727D066BB002A4A7E /* SplashItem.swift in Sources */,
 				2A6ABB902720053B00CC3AED /* MaskServiceRequest.swift in Sources */,
 				2AF884EB271EE9310004565A /* SwapProviderListView.swift in Sources */,
 				0F2051AD265E325900602A0C /* MaskWalletAccount.swift in Sources */,
