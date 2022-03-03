@@ -27,11 +27,9 @@ struct GuideView: View {
         
         return GeometryReader { proxy in
             let contentSize = proxy.size
-            VStack {
-                ZStack {
-                    buildPageContent(contentSize: contentSize)
-                    buildControls(contentSize: contentSize)
-                }
+            ZStack {
+                buildPageContent(contentSize: contentSize)
+                buildControls(contentSize: contentSize)
             }
         }
         .background(
