@@ -42,8 +42,10 @@ struct GuideView: View {
                     .foregroundColor(Asset.Colors.Background.lightBlue.asColor())
             }
             .opacity(isLastOne ? 0 : 1)
+            .padding(.horizontal, 22.5)
+            .padding(.vertical, 8)
+            .contentShape(Rectangle())
         }
-        .padding(.horizontal, 22.5)
     }
     
     private func buildPageContent(contentSize: CGSize) -> some View {
