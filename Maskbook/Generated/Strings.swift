@@ -418,13 +418,9 @@ enum L10n {
       }
 
       enum WrongFolder {
-        /// When you delete Mask App, the Mask Network folder would also be deleted. 
-        static var description1: String {
-          return L10n.tr("Localizable", "Common.Alert.WrongFolder.Description1")
-        }
-        /// For data security, please don’t save to this folder. 
-        static var description2: String {
-          return L10n.tr("Localizable", "Common.Alert.WrongFolder.Description2")
+        /// When you delete Mask App, the Mask Network sandbox folder would also be deleted. For data security, please save to a more secure folder (non-sandbox).
+        static var description: String {
+          return L10n.tr("Localizable", "Common.Alert.WrongFolder.Description")
         }
         /// Please select another folder
         static var title: String {
@@ -510,6 +506,10 @@ enum L10n {
       static var mergeToLocalData: String {
         return L10n.tr("Localizable", "Common.Controls.MergeToLocalData")
       }
+      /// Move data now
+      static var moveDataNow: String {
+        return L10n.tr("Localizable", "Common.Controls.MoveDataNow")
+      }
       /// Next
       static var next: String {
         return L10n.tr("Localizable", "Common.Controls.Next")
@@ -521,6 +521,10 @@ enum L10n {
       /// Ok
       static var ok: String {
         return L10n.tr("Localizable", "Common.Controls.Ok")
+      }
+      /// Remind me later
+      static var remindMeLater: String {
+        return L10n.tr("Localizable", "Common.Controls.RemindMeLater")
       }
       /// Resend
       static var resend: String {
@@ -565,7 +569,7 @@ enum L10n {
       static var copy: String {
         return L10n.tr("Localizable", "Common.Toast.Copy")
       }
-      /// Saved！
+      /// Saved!
       static var saved: String {
         return L10n.tr("Localizable", "Common.Toast.Saved")
       }
@@ -1153,6 +1157,18 @@ enum L10n {
     }
 
     enum MoveBackupData {
+      /// We have detected that there are probably important backup documents(.pdf, .bin) in your Mask Network Sandbox Folder.
+      static var description1: String {
+        return L10n.tr("Localizable", "Scene.MoveBackupData.Description1")
+      }
+      /// When you delete Mask App, these documents would also be deleted.
+      static var description2: String {
+        return L10n.tr("Localizable", "Scene.MoveBackupData.Description2")
+      }
+      /// For data safety, please move your data to a more secure folder.
+      static var description3: String {
+        return L10n.tr("Localizable", "Scene.MoveBackupData.Description3")
+      }
       /// Please move your data
       static var title: String {
         return L10n.tr("Localizable", "Scene.MoveBackupData.Title")

@@ -132,8 +132,7 @@
             },
             "wrong_folder": {
                 "title": "Please select another folder",
-                "description1": "When you delete Mask App, the Mask Network folder would also be deleted. ",
-                "description2": "For data security, please don’t save to this folder. "
+                "description": "When you delete Mask App, the Mask Network sandbox folder would also be deleted. For data security, please save to a more secure folder (non-sandbox)."
             }
         },
         "controls": {
@@ -167,10 +166,12 @@
             "edit": "Edit",
             "download": "download",
             "skip": "Skip, download later",
-            "download_next": "I downloaded, next"
+            "download_next": "I downloaded, next",
+            "move_data_now": "Move data now",
+            "remind_me_later": "Remind me later"
         },
         "toast": {
-            "saved": "Saved！",
+            "saved": "Saved!",
             "copy": "copied!"
         },
         "loading": "Loading..."
@@ -827,7 +828,11 @@
             "share_message_unsupport_platform": "I just claimed a lucky drop from @%s on %s network. \n%s"
         },
         "move_backup_data": {
-            "title": "Please move your data"
+            "title": "Please move your data",
+            "description1": "We have detected that there are probably important backup documents(.pdf, .bin) in your Mask Network Sandbox Folder.",
+            "description2": "When you delete Mask App, these documents would also be deleted.",
+            "description3": "For data safety, please move your data to a more secure folder."
+            
         }
     },
     "chain": {

@@ -9,39 +9,37 @@
 import Foundation
 
 class BackupFolderCheckService {
+    internal static let shared = BackupFolderCheckService()
+
+    @InjectedProvider(\.mainCoordinator)
+    var coordinator
+
     static func checkAndAlert(_ url: URL) -> Bool {
-        let documentPath = URL.documents.relativePath
-        if url.absoluteString.contains(documentPath) {
+        let sandBoxPath = URL.documents.relativePath
+        if url.absoluteString.contains(sandBoxPath) {
             url.stopAccessingSecurityScopedResource()
-            showWrongFolderAlert()
+            Self.shared.showWrongFolderAlert()
             return false
         }
         return true
     }
-    
-    static func showWrongFolderAlert() {
-        @InjectedProvider(\.mainCoordinator)
-        var coordinator
-        
+
+    func showWrongFolderAlert() {
         let alertController = AlertController(title: L10n.Common.Alert.WrongFolder.title,
-                                              message: L10n.Common.Alert.WrongFolder.title,
+                                              message: L10n.Common.Alert.WrongFolder.description,
                                               confirmButtonText: L10n.Common.Controls.done,
                                               imageType: .error)
-        alertController.setAttributeMessage(attrMessage: attributeString())
         coordinator.present(scene: .alertController(alertController: alertController),
                             transition: .alertController(completion: nil))
     }
-    
-    static func attributeString() -> NSAttributedString {
-        let attributeString = NSMutableAttributedString()
-        let attribute = NSAttributedString(string: L10n.Common.Alert.WrongFolder.description1,
-                                           attributes: [.foregroundColor: Asset.Colors.Text.dark.color,
-                                                        .font: FontStyles.MH5])
-        let attribute2 = NSAttributedString(string: L10n.Common.Alert.WrongFolder.description1,
-                                            attributes: [.foregroundColor: Asset.Colors.Text.normal.color,
-                                                         .font: FontStyles.RH5])
-        attributeString.append(attribute)
-        attributeString.append(attribute2)
-        return attributeString
+}
+
+enum BackupFolderCheckServiceInjectKey: InjectValueKey {
+    static var defaultInjectValue = BackupFolderCheckService.shared
+}
+
+extension InjectValues {
+    var backupFolderCheckService: BackupFolderCheckService {
+        Self[BackupFolderCheckServiceInjectKey.self]
     }
 }

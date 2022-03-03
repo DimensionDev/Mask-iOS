@@ -51,6 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     @InjectedProvider(\.schemeService)
     private var schemeService
     
+    @InjectedProvider(\.backupFileDetectService)
+    private var backupFileDetectService
+    
     var disposeBag = Set<AnyCancellable>()
     
     func application(
@@ -136,9 +139,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         FirebaseApp.configure()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-            Coordinator.main.present(scene: .moveBackupData, transition: .panModel(animated: true))
-        }
         return true
     }
     
@@ -157,6 +157,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
         let request = WebExtension.Setting.AppResumeMessage()
         messageRelay.request(request)
+        backupFileDetectService.detectBackupFiles()
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
