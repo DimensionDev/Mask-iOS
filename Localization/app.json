@@ -171,6 +171,14 @@
         "loading": "Loading..."
     },
     "scene": {
+        "guide": {
+            "skip": "Skip",
+            "lets_start": "Let’s start",
+            "description1": "Your Portal to the New, Open Internet",
+            "description2": "Send encrypted messages on social media with persona",
+            "description3": "Multi-Chain wallet, compatible with WalletConnect",
+            "description4": "Back up in time, with cloud / local backup"
+        },
         "terms_of_service": {
             "title": "Legal",
             "description": "Please review the Privacy Policy and Terms of Service of Mask Network.",

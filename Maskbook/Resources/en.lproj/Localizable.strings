@@ -199,6 +199,12 @@ Clicking the confirm button means that you agree to bear the above possible risk
 "Scene.CreateWallet.SelectNetwork" = "Select Network";
 "Scene.CreateWallet.WalletName" = "Wallet Name";
 "Scene.CreateWallet.WalletNamePlaceholder" = "Name your wallet";
+"Scene.Guide.Description1" = "Your Portal to the New, Open Internet";
+"Scene.Guide.Description2" = "Send encrypted messages on social media with persona";
+"Scene.Guide.Description3" = "Multi-Chain wallet, compatible with WalletConnect";
+"Scene.Guide.Description4" = "Back up in time, with cloud / local backup";
+"Scene.Guide.LetsStart" = "Let’s start";
+"Scene.Guide.Skip" = "Skip";
 "Scene.IdentifyVerify.Description" = "Tap each word in the correct order.";
 "Scene.IdentifyVerify.IdentityError" = "The identity code is incorrect";
 "Scene.IdentifyVerify.Title" = "Verify identity code";
