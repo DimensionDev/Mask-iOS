@@ -11,24 +11,32 @@ import SwiftUI
 struct GuideView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var page: Int = 0
-    @State private var offset: CGFloat = 0
     
     var isLastOne: Bool {
         guard let pageEnum = GuideItemView.Page.allCases.last else {
             return true
         }
-        
         return pageEnum.rawValue == page
     }
     
     var body: some View {
-        GeometryReader { proxy in
+        let gradientColors = [
+            Asset.Colors.Gradient.guide1.asColor(),
+            Asset.Colors.Gradient.guide2.asColor()
+        ]
+        
+        return GeometryReader { proxy in
             let contentSize = proxy.size
-            ZStack {
-                buildPageContent(contentSize: contentSize)
-                buildControls(contentSize: contentSize)
-            }
+            buildPageContent(contentSize: contentSize)
+                .overlay(buildControls(contentSize: contentSize))
         }
+        .background(
+            LinearGradient(
+                colors: gradientColors,
+                startPoint: .init(x: 0.5, y: 0),
+                endPoint: .init(x: 0.5, y: 1)
+            ).ignoresSafeArea()
+        )
     }
     
     var skipSection: some View {
@@ -48,27 +56,21 @@ struct GuideView: View {
         }
     }
     
+    @ViewBuilder
     private func buildPageContent(contentSize: CGSize) -> some View {
-        let gradientDecorator = BlueGradientDecorator(
-            selectedColors: [],
-            normalColors: [
-                Asset.Colors.Gradient.guide1.asColor(),
-                Asset.Colors.Gradient.guide2.asColor()
-            ])
-        return PagerView(contentSize: contentSize, page: $page, offset: $offset) {
-            HStack(spacing: 0) {
-                ForEach(GuideItemView.Page.allCases) {
-                    GuideItemView(page: $0, contentSize: contentSize) {
-                        presentationMode.wrappedValue.dismiss()
-                    }
-                    .frame(width: contentSize.width, height: contentSize.height)
+        TabView(selection: $page.animation(.default)) {
+            ForEach(GuideItemView.Page.allCases) { page in
+                GuideItemView(page: page, contentSize: contentSize) {
+                    presentationMode.wrappedValue.dismiss()
                 }
+                .frame(width: contentSize.width, height: contentSize.height)
             }
         }
-        .withBlueGradient(radius: 0, colorDecorator: gradientDecorator)
-        .ignoresSafeArea()
+        .frame(width: contentSize.width, height: contentSize.height)
+        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
     }
     
+    @ViewBuilder
     private func buildControls(contentSize: CGSize) -> some View {
         VStack {
             skipSection
@@ -77,6 +79,7 @@ struct GuideView: View {
         }.padding(.bottom, 29)
     }
     
+    @ViewBuilder
     private func buildPageIndicator(screenSize: CGSize) -> some View {
         HStack(spacing: 7) {
             ForEach(GuideItemView.Page.allCases.indices) { index in
@@ -95,9 +98,8 @@ struct GuideView: View {
     }
     
     private func getIndicatorOffset(screenSize: CGSize) -> CGFloat {
-        let progress = offset / screenSize.width
         let maxWidth = 7.0 + 10.0
-        return maxWidth * progress
+        return maxWidth * CGFloat(page)
     }
 }
 
