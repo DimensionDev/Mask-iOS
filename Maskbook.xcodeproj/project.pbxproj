@@ -3589,7 +3589,6 @@
 				DBAAF48D22C35A7100017594 /* Sources */,
 				DBAAF48E22C35A7100017594 /* Frameworks */,
 				DBAAF48F22C35A7100017594 /* Resources */,
-				1FE54D432696BE0C0041C742 /* SwiftLint Script */,
 				0FFB22562654E972005CAFFA /* Embed Frameworks */,
 				74B6197DACB6F58327A619B7 /* [CP] Embed Pods Frameworks */,
 			);
@@ -3608,7 +3607,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DBAAF4B122C35A7100017594 /* Build configuration list for PBXNativeTarget "MaskbookTests" */;
 			buildPhases = (
-				CAEF2B481B07F9F0AE78DD18 /* [CP] Check Pods Manifest.lock */,
+				712879B570CD0874141900D9 /* [CP] Check Pods Manifest.lock */,
 				DBAAF4A122C35A7100017594 /* Sources */,
 				DBAAF4A222C35A7100017594 /* Frameworks */,
 				DBAAF4A322C35A7100017594 /* Resources */,
@@ -3774,42 +3773,7 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n$PODS_ROOT/SwiftGen/bin/swiftgen\n";
 		};
-		1FE54D432696BE0C0041C742 /* SwiftLint Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "SwiftLint Script";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\" --config \"${PROJECT_DIR}/.swiftlint.yml\"\n";
-		};
-		74B6197DACB6F58327A619B7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Maskbook/Pods-Maskbook-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Maskbook/Pods-Maskbook-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Maskbook/Pods-Maskbook-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CAEF2B481B07F9F0AE78DD18 /* [CP] Check Pods Manifest.lock */ = {
+		712879B570CD0874141900D9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3829,6 +3793,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		74B6197DACB6F58327A619B7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Maskbook/Pods-Maskbook-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Maskbook/Pods-Maskbook-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Maskbook/Pods-Maskbook-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EFDF987A90ECDFD902821D22 /* [CP] Check Pods Manifest.lock */ = {

@@ -5,9 +5,21 @@
         "color-space" : "srgb",
         "components" : {
           "alpha" : "1.000",
+<<<<<<< HEAD
           "blue" : "0x51",
           "green" : "0xCB",
           "red" : "0xFD"
+=======
+<<<<<<< HEAD:Maskbook/Resources/Assets.xcassets/Colors/AccountCard/chains/arbitrum3.colorset/Contents.json
+          "blue" : "0xC6",
+          "green" : "0x83",
+          "red" : "0x25"
+=======
+          "blue" : "0x51",
+          "green" : "0xCB",
+          "red" : "0xFD"
+>>>>>>> release/2.0.8:Maskbook/Resources/Assets.xcassets/Colors/AccountCard/chains/bsc3.colorset/Contents.json
+>>>>>>> release/2.0.8
         }
       },
       "idiom" : "universal"
