@@ -3206,10 +3206,7 @@ const VerifiedIcon = (0,icons_utils/* createIcon */.I)('VerifiedIcon', /*#__PURE
 
 // EXTERNAL MODULE: ./src/extension/options-page/DashboardComponents/ActionButton.tsx
 var ActionButton = __webpack_require__(57767);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/noop.js
-var noop = __webpack_require__(21122);
 ;// CONCATENATED MODULE: ./src/components/InjectedComponents/SetupGuide/FindUsername.tsx
-
 
 
 
@@ -3312,7 +3309,7 @@ function FindUsername({ personaName , username , avatar , onConnect , onDone , o
             complete: enableNextID ? t('setup_guide_verify_checking') : t('ok'),
             failed: t('setup_guide_connect_failed'),
             executor: onConnect,
-            completeOnClick: enableNextID ? noop/* default */.Z : onDone,
+            completeOnClick: enableNextID ? undefined : onDone,
             onComplete: enableNextID ? onDone : ()=>setConnected(true)
             ,
             disabled: !username || !personaName,
@@ -3685,7 +3682,7 @@ function SetupGuideUI(props) {
             const signResult = await service/* default.Identity.signWithPersona */.ZP.Identity.signWithPersona({
                 method: 'eth',
                 message: payload.signPayload,
-                identifier: persona_.publicHexKey
+                identifier: persona_.identifier.toText()
             });
             if (!signResult) throw new Error('Failed to sign by persona.');
             const signature = signResult.signature.signature;

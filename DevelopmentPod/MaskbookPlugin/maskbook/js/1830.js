@@ -873,6 +873,7 @@ var PluginId;
     PluginId["Flow"] = 'com.mask.flow';
     PluginId["RSS3"] = 'bio.rss3';
     PluginId["RedPacket"] = 'com.maskbook.red_packet';
+    PluginId["RedPacketNFT"] = 'com.maskbook.red_packet_nft';
     PluginId["Pets"] = 'com.maskbook.pets';
     PluginId["Snapshot"] = 'org.snapshot';
     PluginId["ITO"] = 'com.maskbook.ito';

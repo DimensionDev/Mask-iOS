@@ -87,6 +87,476 @@ function getNormalizedScrollLeft(element, direction) {
 
 /***/ }),
 
+/***/ 87896:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "G": () => (/* binding */ NFTRedPacketIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(44438);
+
+
+const NFTRedPacketIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIcon */ .I)('NFTRedPacketIcon', /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("g", {
+    children: [
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M4.51712 6.19485C4.51712 6.19485 3.72407 3.91086 12.638 3.91086C21.5519 3.91086 20.7588 6.19485 20.7588 6.19485V7.17823H4.51712V6.19485Z",
+            fill: "#DB1919"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M18.6377 15.0001H17.1377V16.5001H18.6377V15.0001Z",
+            fill: "#291E20"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M17.1377 15.0001H15.6377V16.5001H17.1377V15.0001Z",
+            fill: "#1A1115"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M15.6377 15.0001H14.1377V16.5001H15.6377V15.0001Z",
+            fill: "#1B1417"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M14.1377 15.0001H12.6377V16.5001H14.1377V15.0001Z",
+            fill: "#1D1018"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M12.6377 15.0001H11.1377V16.5001H12.6377V15.0001Z",
+            fill: "#131117"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M11.1377 15.0001H9.6377V16.5001H11.1377V15.0001Z",
+            fill: "#1B1419"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M9.6377 15.0001H8.1377V16.5001H9.6377V15.0001Z",
+            fill: "#2D2529"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M18.6377 13.5001H17.1377V15.0001H18.6377V13.5001Z",
+            fill: "#1F1114"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M17.1377 13.5001H15.6377V15.0001H17.1377V13.5001Z",
+            fill: "#0F0407"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M15.6377 13.5001H14.1377V15.0001H15.6377V13.5001Z",
+            fill: "#130408"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M14.1377 13.5001H12.6377V15.0001H14.1377V13.5001Z",
+            fill: "#12060B"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M12.6377 13.5001H11.1377V15.0001H12.6377V13.5001Z",
+            fill: "#562311"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M11.1377 13.5001H9.6377V15.0001H11.1377V13.5001Z",
+            fill: "#512111"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M9.6377 13.5001H8.1377V15.0001H9.6377V13.5001Z",
+            fill: "#211618"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M18.6377 12.0001H17.1377V13.5001H18.6377V12.0001Z",
+            fill: "#171112"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M17.1377 12.0001H15.6377V13.5001H17.1377V12.0001Z",
+            fill: "#1A0A0B"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M15.6377 12.0001H14.1377V13.5001H15.6377V12.0001Z",
+            fill: "#270D04"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M14.1377 12.0001H12.6377V13.5001H14.1377V12.0001Z",
+            fill: "#E97800"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M12.6377 12.0001H11.1377V13.5001H12.6377V12.0001Z",
+            fill: "#ED8900"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M11.1377 12.0001H9.6377V13.5001H11.1377V12.0001Z",
+            fill: "#5B3311"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M9.6377 12.0001H8.1377V13.5001H9.6377V12.0001Z",
+            fill: "#21171D"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M18.6377 10.5001H17.1377V12.0001H18.6377V10.5001Z",
+            fill: "#1D1614"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M17.1377 10.5001H15.6377V12.0001H17.1377V10.5001Z",
+            fill: "#150706"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M15.6377 10.5001H14.1377V12.0001H15.6377V10.5001Z",
+            fill: "#030106"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M14.1377 10.5001H12.6377V12.0001H14.1377V10.5001Z",
+            fill: "#0D0808"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M12.6377 10.5001H11.1377V12.0001H12.6377V10.5001Z",
+            fill: "#462B10"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M11.1377 10.5001H9.6377V12.0001H11.1377V10.5001Z",
+            fill: "#5C310C"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M9.6377 10.5001H8.1377V12.0001H9.6377V10.5001Z",
+            fill: "#1C1118"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M18.6377 9.00009H17.1377V10.5001H18.6377V9.00009Z",
+            fill: "#2C1B19"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M17.1377 9.00009H15.6377V10.5001H17.1377V9.00009Z",
+            fill: "#1A0908"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M15.6377 9.00009H14.1377V10.5001H15.6377V9.00009Z",
+            fill: "#0E0503"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M14.1377 9.00009H12.6377V10.5001H14.1377V9.00009Z",
+            fill: "#0A060A"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M12.6377 9.00009H11.1377V10.5001H12.6377V9.00009Z",
+            fill: "#000105"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M11.1377 9.00009H9.6377V10.5001H11.1377V9.00009Z",
+            fill: "#10070C"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M9.6377 9.00009H8.1377V10.5001H9.6377V9.00009Z",
+            fill: "#4F361D"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M18.6377 7.50009H17.1377V9.00009H18.6377V7.50009Z",
+            fill: "#592613"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M17.1377 7.50009H15.6377V9.00009H17.1377V7.50009Z",
+            fill: "#190C0B"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M15.6377 7.50009H14.1377V9.00009H15.6377V7.50009Z",
+            fill: "#7E4B08"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M14.1377 7.50009H12.6377V9.00009H14.1377V7.50009Z",
+            fill: "#E39B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M12.6377 7.50009H11.1377V9.00009H12.6377V7.50009Z",
+            fill: "#5D320C"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M11.1377 7.50009H9.6377V9.00009H11.1377V7.50009Z",
+            fill: "#22110E"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M9.6377 7.50009H8.1377V9.00009H9.6377V7.50009Z",
+            fill: "#6A2C1E"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M18.6377 6.00009H17.1377V7.50009H18.6377V6.00009Z",
+            fill: "#4F3A11"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M17.1377 6.00009H15.6377V7.50009H17.1377V6.00009Z",
+            fill: "#2F270E"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M15.6377 6.00009H14.1377V7.50009H15.6377V6.00009Z",
+            fill: "#904400"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M14.1377 6.00009H12.6377V7.50009H14.1377V6.00009Z",
+            fill: "#341206"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M12.6377 6.00009H11.1377V7.50009H12.6377V6.00009Z",
+            fill: "#140E0F"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M11.1377 6.00009H9.6377V7.50009H11.1377V6.00009Z",
+            fill: "#4D401E"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M9.6377 6.00009H8.1377V7.50009H9.6377V6.00009Z",
+            fill: "#3B3524"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M18.6377 4.50009H17.1377V6.00009H18.6377V4.50009Z",
+            fill: "#625617"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M17.1377 4.50009H15.6377V6.00009H17.1377V4.50009Z",
+            fill: "#333417"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M15.6377 4.50009H14.1377V6.00009H15.6377V4.50009Z",
+            fill: "#41160C"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M14.1377 4.50009H12.6377V6.00009H14.1377V4.50009Z",
+            fill: "#D47100"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M12.6377 4.50009H11.1377V6.00009H12.6377V4.50009Z",
+            fill: "#33190B"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M11.1377 4.50009H9.6377V6.00009H11.1377V4.50009Z",
+            fill: "#21200E"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M9.6377 4.50009H8.1377V6.00009H9.6377V4.50009Z",
+            fill: "#3B3B23"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M18.6377 3.00009H17.1377V4.50009H18.6377V3.00009Z",
+            fill: "#C29F09"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M17.1377 3.00009H15.6377V4.50009H17.1377V3.00009Z",
+            fill: "#83711D"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M15.6377 3.00009H14.1377V4.50009H15.6377V3.00009Z",
+            fill: "#461400"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M14.1377 3.00009H12.6377V4.50009H14.1377V3.00009Z",
+            fill: "#D17C00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M12.6377 3.00009H11.1377V4.50009H12.6377V3.00009Z",
+            fill: "#8A5D1B"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M11.1377 3.00009H9.6377V4.50009H11.1377V3.00009Z",
+            fill: "#B6972C"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M9.6377 3.00009H8.1377V4.50009H9.6377V3.00009Z",
+            fill: "#7C6729"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M18.6377 1.50009H17.1377V3.00009H18.6377V1.50009Z",
+            fill: "#BD980B"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M17.1377 1.50009H15.6377V3.00009H17.1377V1.50009Z",
+            fill: "#E2B92B"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M15.6377 1.50009H14.1377V3.00009H15.6377V1.50009Z",
+            fill: "#020000"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M14.1377 1.50009H12.6377V3.00009H14.1377V1.50009Z",
+            fill: "#D68900"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M12.6377 1.50009H11.1377V3.00009H12.6377V1.50009Z",
+            fill: "#B38825"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M11.1377 1.50009H9.6377V3.00009H11.1377V1.50009Z",
+            fill: "#F4C32E"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M9.6377 1.50009H8.1377V3.00009H9.6377V1.50009Z",
+            fill: "#C29F36"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M18.6377 9.15527e-05H17.1377V1.50009H18.6377V9.15527e-05Z",
+            fill: "#8D8239"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M17.1377 9.15527e-05H15.6377V1.50009H17.1377V9.15527e-05Z",
+            fill: "#8F732B"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M15.6377 9.15527e-05H14.1377V1.50009H15.6377V9.15527e-05Z",
+            fill: "#AA9530"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M14.1377 9.15527e-05H12.6377V1.50009H14.1377V9.15527e-05Z",
+            fill: "#8F8533"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M12.6377 9.15527e-05H11.1377V1.50009H12.6377V9.15527e-05Z",
+            fill: "#887527"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M11.1377 9.15527e-05H9.6377V1.50009H11.1377V9.15527e-05Z",
+            fill: "#8F792B"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M9.6377 9.15527e-05H8.1377V1.50009H9.6377V9.15527e-05Z",
+            fill: "#93813A"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M8.1377 9.15527e-05H6.6377V1.50009H8.1377V9.15527e-05Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M8.1377 1.50009H6.6377V3.00009H8.1377V1.50009Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M8.1377 3.00009H6.6377V4.50009H8.1377V3.00009Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M8.1377 4.50009H6.6377V6.00009H8.1377V4.50009Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M8.1377 6.00009H6.6377V7.50009H8.1377V6.00009Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M8.1377 7.50009H6.6377V9.00009H8.1377V7.50009Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M8.1377 9.00009H6.6377V10.5001H8.1377V9.00009Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M8.1377 10.5001H6.6377V12.0001H8.1377V10.5001Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M8.1377 12.0001H6.6377V13.5001H8.1377V12.0001Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M8.1377 13.5001H6.6377V15.0001H8.1377V13.5001Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M8.1377 15.0001H6.6377V16.5001H8.1377V15.0001Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M9.6377 15.0001H8.1377V16.5001H9.6377V15.0001Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M11.1377 15.0001H9.6377V16.5001H11.1377V15.0001Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M12.6377 15.0001H11.1377V16.5001H12.6377V15.0001Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M14.1377 15.0001H12.6377V16.5001H14.1377V15.0001Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M15.6377 15.0001H14.1377V16.5001H15.6377V15.0001Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M17.1377 15.0001H15.6377V16.5001H17.1377V15.0001Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M18.6377 15.0001H17.1377V16.5001H18.6377V15.0001Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M18.6377 13.5001H17.1377V15.0001H18.6377V13.5001Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M18.6377 12.0001H17.1377V13.5001H18.6377V12.0001Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M18.6377 10.5001H17.1377V12.0001H18.6377V10.5001Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M18.6377 9.00009H17.1377V10.5001H18.6377V9.00009Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M18.6377 7.50009H17.1377V9.00009H18.6377V7.50009Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M18.6377 6.00009H17.1377V7.50009H18.6377V6.00009Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M18.6377 4.50009H17.1377V6.00009H18.6377V4.50009Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M18.6377 3.00009H17.1377V4.50009H18.6377V3.00009Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M18.6377 1.50009H17.1377V3.00009H18.6377V1.50009Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M18.6377 9.15527e-05H17.1377V1.50009H18.6377V9.15527e-05Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M17.1377 9.15527e-05H15.6377V1.50009H17.1377V9.15527e-05Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M15.6377 9.15527e-05H14.1377V1.50009H15.6377V9.15527e-05Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M14.1377 9.15527e-05H12.6377V1.50009H14.1377V9.15527e-05Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M12.6377 9.15527e-05H11.1377V1.50009H12.6377V9.15527e-05Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M11.1377 9.15527e-05H9.6377V1.50009H11.1377V9.15527e-05Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M9.6377 9.15527e-05H8.1377V1.50009H9.6377V9.15527e-05Z",
+            fill: "#CA9B00"
+        }),
+        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            d: "M4.51758 6.2583C4.51758 6.2583 7.53117 7.16238 12.6226 7.16238C17.714 7.16238 20.7593 6.2583 20.7593 6.2583V21.5C20.7593 22.0523 20.3116 22.5 19.7593 22.5H5.51758C4.96529 22.5 4.51758 22.0523 4.51758 21.5V6.2583Z",
+            fill: "#F93737"
+        })
+    ]
+}), '0 0 24 24');
+
+
+/***/ }),
+
 /***/ 66502:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -1923,7 +2393,7 @@ function SelectNftTokenDialog(props) {
                                         tokenDetailedOwnerList.map((token, i)=>{
                                             const findToken = tokenDetailedSelectedList.find((t)=>t.tokenId === token.tokenId
                                             );
-                                            return(/*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                            return tokenIdFilterList.length > 0 && !tokenIdFilterList.includes(token.tokenId) ? null : /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
                                                 children: /*#__PURE__*/ (0,jsx_runtime.jsx)(NFTCard, {
                                                     findToken: findToken,
                                                     renderOrder: i,
@@ -1932,7 +2402,7 @@ function SelectNftTokenDialog(props) {
                                                     selectToken: selectToken,
                                                     isSelectSharesExceed: isSelectSharesExceed
                                                 })
-                                            }, i));
+                                            }, i);
                                         }),
                                         loadingOwnerList ? /*#__PURE__*/ (0,jsx_runtime.jsx)(ListItem/* default */.ZP, {
                                             className: classnames_default()(classes.selectWrapper, classes.loadingWrapper),
@@ -2016,9 +2486,8 @@ function NFTCard(props) {
     const { classes  } = SelectNftTokenDialog_useStyles({
         isSelectSharesExceed
     });
-    const [name, setName] = (0,react.useState)('#' + token.tokenId);
     return(/*#__PURE__*/ (0,jsx_runtime.jsxs)(ListItem/* default */.ZP, {
-        className: classnames_default()(classes.selectWrapper, tokenIdFilterList.length > 0 && !tokenIdFilterList.includes(token.tokenId) ? classes.hide : ''),
+        className: classes.selectWrapper,
         children: [
             /*#__PURE__*/ (0,jsx_runtime.jsx)(shared_src/* NFTCardStyledAssetPlayer */.yC, {
                 contractAddress: token.contractDetailed.address,
@@ -2028,15 +2497,14 @@ function NFTCard(props) {
                 classes: {
                     loadingFailImage: classes.loadingFailImage,
                     iframe: classes.iframe
-                },
-                setERC721TokenName: setName
+                }
             }),
             /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
                 className: classes.selectWrapperNftNameWrapper,
                 children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Typography/* default */.Z, {
                     className: classes.selectWrapperNftName,
                     color: "textSecondary",
-                    children: name
+                    children: (0,formatter/* formatNFT_TokenId */.uu)(token.tokenId, 2)
                 })
             }),
             /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
@@ -2604,7 +3072,7 @@ function RedpacketNftConfirmDialog(props) {
 function RedpacketNftConfirmDialog_NFTCard(props) {
     const { token , renderOrder  } = props;
     const { classes  } = RedpacketNftConfirmDialog_useStyles();
-    const [name, setName] = (0,react.useState)('#' + token.tokenId);
+    const [name, setName] = (0,react.useState)((0,formatter/* formatNFT_TokenId */.uu)(token.tokenId, 2));
     return(/*#__PURE__*/ (0,jsx_runtime.jsxs)(ListItem/* default */.ZP, {
         className: classnames_default()(classes.tokenSelectorWrapper),
         children: [
@@ -3023,7 +3491,7 @@ function RedPacketERC721Form(props) {
 function RedPacketERC721Form_NFTCard(props) {
     const { token , removeToken , renderOrder  } = props;
     const { classes  } = RedPacketERC721Form_useStyles();
-    const [name, setName] = (0,react.useState)('#' + token.tokenId);
+    const [name, setName] = (0,react.useState)((0,formatter/* formatNFT_TokenId */.uu)(token.tokenId, 2));
     return(/*#__PURE__*/ (0,jsx_runtime.jsxs)(ListItem/* default */.ZP, {
         className: classnames_default()(classes.tokenSelectorWrapper),
         children: [
@@ -4009,9 +4477,8 @@ function useAvailabilityNftRedPacket(id, from) {
     ]);
 }
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.2_859545d82eec4e4ab7d574641ee2c82e/node_modules/@mui/material/Skeleton/Skeleton.js + 2 modules
-var Skeleton = __webpack_require__(56213);
 ;// CONCATENATED MODULE: ./src/plugins/RedPacket/SNSAdaptor/NftList.tsx
+
 
 
 
@@ -4041,6 +4508,7 @@ const NftList_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>{
             width: 120,
             height: 185,
             flexDirection: 'column',
+            backgroundColor: theme.palette.background.paper,
             margin: '0 auto',
             borderRadius: 8,
             overflow: 'hidden',
@@ -4085,7 +4553,9 @@ const NftList_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>{
         },
         name: {
             fontSize: 12,
+            height: 18,
             textOverflow: 'ellipsis',
+            textAlign: 'center',
             overflow: 'hidden',
             whiteSpace: 'nowrap',
             padding: '2px 2px 6px',
@@ -4103,17 +4573,7 @@ const NftList_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>{
 const NftItem = ({ contract , tokenId , className , claimed , renderOrder , ...rest })=>{
     const { t  } = (0,utils/* useI18N */.M1)();
     const { classes  } = NftList_useStyles();
-    const [name, setName] = (0,react.useState)('#' + tokenId);
-    if (!contract) {
-        return(/*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-            className: classnames_default()(className, classes.nft, classes.loading),
-            ...rest,
-            children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Skeleton/* default */.Z, {
-                height: 185,
-                width: 120
-            })
-        }));
-    }
+    const [name, setName] = (0,react.useState)((0,formatter/* formatNFT_TokenId */.uu)(tokenId, 2));
     return(/*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
         className: classnames_default()(className, classes.nft),
         ...rest,
@@ -4378,7 +4838,10 @@ const NftRedPacketHistoryItem = /*#__PURE__*/ (0,react.memo)(({ history , onSend
                         /*#__PURE__*/ (0,jsx_runtime.jsx)("section", {
                             className: classes.nftList,
                             children: /*#__PURE__*/ (0,jsx_runtime.jsx)(NftList, {
-                                contract: contractDetailed,
+                                contract: {
+                                    address: history.token_contract.address,
+                                    chainId: history.token_contract.chain_id
+                                },
                                 statusList: bitStatusList,
                                 tokenIds: history.token_ids
                             })
@@ -5801,13 +6264,14 @@ function RedPacket(props) {
     const { canFetch , canClaim , canRefund , listOfStatus  } = availabilityComputed;
     // #region remote controlled transaction dialog
     const postLink = (0,usePostInfo/* usePostLink */.Vc)();
-    const shareLink = (ref2 = (_utils = social_network/* activatedSocialNetworkUI.utils */.LM.utils).getShareLinkURL) === null || ref2 === void 0 ? void 0 : ref2.call(_utils, t((0,twitter_com_base/* isTwitter */.L3)(social_network/* activatedSocialNetworkUI */.LM) || (0,facebook_com_base/* isFacebook */.DF)(social_network/* activatedSocialNetworkUI */.LM) ? 'plugin_red_packet_share_message_official_account' : 'plugin_red_packet_share_message_not_twitter', {
+    const shareTextOption = {
         sender: payload.sender.name,
         payload: postLink,
         network: (0,pipes/* resolveNetworkName */.nW)(networkType),
         account: (0,twitter_com_base/* isTwitter */.L3)(social_network/* activatedSocialNetworkUI */.LM) ? t('twitter_account') : t('facebook_account')
-    }).trim()).toString();
+    };
     const [claimState, claimCallback, resetClaimCallback] = useClaimCallback(payload.contract_version, account, payload.rpid, payload.contract_version > 3 ? web3.eth.accounts.sign(account, payload.password).signature : payload.password);
+    const shareLink = (ref2 = (_utils = social_network/* activatedSocialNetworkUI.utils */.LM.utils).getShareLinkURL) === null || ref2 === void 0 ? void 0 : ref2.call(_utils, (listOfStatus.includes(RedPacketStatus.claimed) || claimState.type === types/* TransactionStateType.CONFIRMED */.n$.CONFIRMED ? (0,twitter_com_base/* isTwitter */.L3)(social_network/* activatedSocialNetworkUI */.LM) || (0,facebook_com_base/* isFacebook */.DF)(social_network/* activatedSocialNetworkUI */.LM) ? t('plugin_red_packet_share_message_official_account', shareTextOption) : t('plugin_red_packet_share_message_not_twitter', shareTextOption) : (0,twitter_com_base/* isTwitter */.L3)(social_network/* activatedSocialNetworkUI */.LM) || (0,facebook_com_base/* isFacebook */.DF)(social_network/* activatedSocialNetworkUI */.LM) ? t('plugin_red_packet_share_unclaimed_message_official_account', shareTextOption) : t('plugin_red_packet_share_unclaimed_message_not_twitter', shareTextOption)).trim()).toString();
     const [refundState, refundCallback, resetRefundCallback] = useRefundCallback(payload.contract_version, account, payload.rpid);
     // close the transaction dialog
     const { setDialog: setTransactionDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.transactionDialogUpdated */.R.events.transactionDialogUpdated);
@@ -6046,6 +6510,8 @@ function RedPacketInPost(props) {
     }));
 }
 
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.2_859545d82eec4e4ab7d574641ee2c82e/node_modules/@mui/material/Skeleton/Skeleton.js + 2 modules
+var Skeleton = __webpack_require__(56213);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.2_859545d82eec4e4ab7d574641ee2c82e/node_modules/@mui/material/CardHeader/CardHeader.js + 1 modules
 var CardHeader = __webpack_require__(61733);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.2_859545d82eec4e4ab7d574641ee2c82e/node_modules/@mui/material/CardMedia/CardMedia.js + 1 modules
@@ -6679,6 +7145,8 @@ function RedPacketNftInPost({ payload  }) {
     }));
 }
 
+// EXTERNAL MODULE: ../icons/general/NFTRedPacket.tsx
+var NFTRedPacket = __webpack_require__(87896);
 // EXTERNAL MODULE: ../icons/general/RedPacket.tsx
 var general_RedPacket = __webpack_require__(66502);
 ;// CONCATENATED MODULE: ./src/plugins/RedPacket/SNSAdaptor/index.tsx
@@ -6700,6 +7168,14 @@ function Render(props) {
         children: props.children
     }));
 }
+const containerStyle = {
+    display: 'flex',
+    alignItems: 'center'
+};
+const badgeSvgIconSize = {
+    width: 16,
+    height: 16
+};
 const sns = {
     ...base/* base */.u,
     init (signal) {},
@@ -6736,9 +7212,12 @@ const sns = {
             (_payload)=>{
                 const payload = _payload;
                 return {
-                    text: /*#__PURE__*/ (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
+                    text: /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                        style: containerStyle,
                         children: [
-                            "🧧 ",
+                            /*#__PURE__*/ (0,jsx_runtime.jsx)(NFTRedPacket/* NFTRedPacketIcon */.G, {
+                                style: badgeSvgIconSize
+                            }),
                             payload.message ? payload.message : 'An NFT Lucky Drop'
                         ]
                     })
@@ -6752,10 +7231,7 @@ const sns = {
             fallback: /*#__PURE__*/ (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
                 children: [
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(general_RedPacket/* RedPacketIcon */.t, {
-                        style: {
-                            width: 16,
-                            height: 16
-                        }
+                        style: badgeSvgIconSize
                     }),
                     "Luck drop"
                 ]
@@ -6774,9 +7250,13 @@ function ERC20RedpacketBadge(props) {
     var _token;
     const tokenDetailed = ((ref1 = payload.token) === null || ref1 === void 0 ? void 0 : ref1.type) === types/* EthereumTokenType.Native */.Dr.Native ? chainDetailed === null || chainDetailed === void 0 ? void 0 : chainDetailed.nativeCurrency : (_token = payload.token) !== null && _token !== void 0 ? _token : fetchedToken;
     var ref4, ref5, ref6;
-    return(/*#__PURE__*/ (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
+    return(/*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+        style: containerStyle,
         children: [
-            "🧧 A Lucky Drop with ",
+            /*#__PURE__*/ (0,jsx_runtime.jsx)(general_RedPacket/* RedPacketIcon */.t, {
+                style: badgeSvgIconSize
+            }),
+            " A Lucky Drop with",
             (0,formatter/* formatBalance */.az)(payload.total, (ref4 = tokenDetailed === null || tokenDetailed === void 0 ? void 0 : tokenDetailed.decimals) !== null && ref4 !== void 0 ? ref4 : 0),
             " $",
             (ref6 = (ref5 = tokenDetailed === null || tokenDetailed === void 0 ? void 0 : tokenDetailed.symbol) !== null && ref5 !== void 0 ? ref5 : tokenDetailed === null || tokenDetailed === void 0 ? void 0 : tokenDetailed.name) !== null && ref6 !== void 0 ? ref6 : 'Token',

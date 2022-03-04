@@ -1889,7 +1889,7 @@ function ConnectionProgress(props) {
                                 children: [
                                     /*#__PURE__*/ (0,jsx_runtime.jsxs)(Typography/* default */.Z, {
                                         children: [
-                                            t(connected ? 'plugin_wallet_connected_with' : 'plugin_wallet_connect_with'),
+                                            loading ? t('plugin_wallet_connecting_with') : t(connected ? 'plugin_wallet_connected_with' : 'plugin_wallet_connect_with'),
                                             ' ',
                                             (0,pipes/* resolveProviderName */.Hw)(providerType)
                                         ]
@@ -3577,7 +3577,6 @@ function SelectNftContractDialog(props) {
         open: open,
         onClose: onClose,
         title: t('plugin_wallet_select_a_nft_contract'),
-        maxWidth: "xs",
         children: /*#__PURE__*/ (0,jsx_runtime.jsxs)(DialogContent/* default */.Z, {
             className: classes.dialogContent,
             children: [
@@ -8593,7 +8592,7 @@ function QuestDialog(props) {
     const { classes  } = PartsPanel_useStyles();
     const { t , const: consts  } = (0,react.useContext)(context/* FindTrumanContext */.c);
     const poapIds = (0,react.useMemo)(()=>{
-        return quest.poaps.map((e)=>`#${e.tokenId}`
+        return quest.poaps.map((e)=>(0,formatter/* formatNFT_TokenId */.uu)(e.tokenId.toString(), 2)
         ).join(', ');
     }, [
         quest
@@ -8917,7 +8916,7 @@ function FtgItem(props) {
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(FtgInfoRow, {
                         title: t('plugin_find_truman_dialog_ftg_info_token'),
-                        value: `#${ftg.tokenId}`
+                        value: (0,formatter/* formatNFT_TokenId */.uu)(ftg.tokenId, 2)
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(FtgInfoRow, {
                         title: t('plugin_find_truman_dialog_ftg_info_blockchain'),

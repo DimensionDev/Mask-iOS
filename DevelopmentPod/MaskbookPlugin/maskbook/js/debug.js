@@ -362,11 +362,11 @@ const body = `\
 ## Environment
 
 User Agent: ${navigator.userAgent}
-Version: ${"v1.29.12-2051-gaef1d4e62"}
+Version: ${"v1.29.12-2064-gc7b26d92d"}
 Tag Name: ${"v2.5.0"}
-Build Date: ${"2022-03-01T10:25:42.833Z"}
-Commit Hash: ${"aef1d4e62"}
-Commit Date: ${"2022-03-01T10:21:42.000Z"}
+Build Date: ${"2022-03-04T06:35:52.094Z"}
+Commit Hash: ${"c7b26d92d"}
+Commit Date: ${"2022-03-04T06:26:29.000Z"}
 Remote URL: ${"https://github.com/DimensionDev/Maskbook"}
 Branch Name: ${"HEAD"}
 
@@ -394,11 +394,11 @@ var utils = __webpack_require__(7282);
 
 const DEBUG_INFO = {
     'User Agent': navigator.userAgent,
-    'Mask Version': "v1.29.12-2051-gaef1d4e62",
+    'Mask Version': "v1.29.12-2064-gc7b26d92d",
     'Build Date': process.env.channel_DATE,
     'Tag Name': "v2.5.0",
-    'Commit Hash': "aef1d4e62",
-    'Commit Date': "2022-03-01T10:21:42.000Z",
+    'Commit Hash': "c7b26d92d",
+    'Commit Date': "2022-03-04T06:26:29.000Z",
     'Remote URL': "https://github.com/DimensionDev/Maskbook",
     'Branch Name': "HEAD",
     Dirty: false,
@@ -668,11 +668,11 @@ async function backupAll() {
     const payload = {
         buildInfo: {
             'user-agent': navigator.userAgent,
-            version: "v1.29.12-2051-gaef1d4e62",
-            'build-date': "2022-03-01T10:25:42.833Z",
+            version: "v1.29.12-2064-gc7b26d92d",
+            'build-date': "2022-03-04T06:35:52.094Z",
             'tag-name': "v2.5.0",
-            'commit-hash': "aef1d4e62",
-            'commit-date': "2022-03-01T10:21:42.000Z",
+            'commit-hash': "c7b26d92d",
+            'commit-date': "2022-03-04T06:26:29.000Z",
             'remote-url': "https://github.com/DimensionDev/Maskbook",
             'branch-name': "HEAD",
             dirty: false,
@@ -944,7 +944,7 @@ const sayHelloShowed = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .create
 const dismissPinExtensionTip = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createGlobalSettings */ .TI)('dismissPinExtensionTip', false, {
     primary: ()=>''
 });
-const dismissVerifyNextID = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createNetworkSettings */ .Lk)('dismissVerifyNextID', {});
+const dismissVerifyNextID =  true ? (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createNetworkSettings */ .Lk)('useless', false) : 0;
 const bioDescription = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createNetworkSettings */ .Lk)('bioDescription', '');
 const personalHomepage = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createNetworkSettings */ .Lk)('personalHomepage', '');
 // This is a misuse of concept "NetworkSettings" as "namespaced settings"

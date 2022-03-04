@@ -1932,49 +1932,6 @@ function useCollectibles(address, chainId, dependReady) {
 
 /***/ }),
 
-/***/ 14877:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "v": () => (/* binding */ useImageChecker)
-/* harmony export */ });
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(59302);
-
-// filter out nft with image resource
-function useImageChecker(url) {
-    return (0,react_use__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)(async ()=>{
-        if (!url) return false;
-        const { pathname  } = new URL(url);
-        if (/\.(gif|svg|png|webp|jpg|jpeg)$/.test(pathname)) return true;
-        if (/\.(mp4|webm|mov|ogg|mp3|wav)$/.test(pathname)) return false;
-        const contentType = await getContentType(url);
-        return contentType.startsWith('image/');
-    }, [
-        url
-    ]);
-}
-async function getContentType(url) {
-    if (!/^https?:/.test(url)) {
-        return '';
-    }
-    return Promise.race([
-        new Promise((resolve)=>setTimeout(()=>resolve('')
-            , 20000)
-        ),
-        new Promise((resolve)=>{
-            fetch(url, {
-                method: 'HEAD',
-                mode: 'cors'
-            }).then((response)=>response.status !== 200 ? resolve('') : resolve(response.headers.get('content-type'))
-            ).catch(()=>resolve('')
-            );
-        }), 
-    ]);
-}
-
-
-/***/ }),
-
 /***/ 19132:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 

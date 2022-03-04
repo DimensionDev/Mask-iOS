@@ -75,12 +75,12 @@ function postInNative(record) {
 }
 function postOutNative(record) {
     return {
-        postBy: _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .Identifier.fromString */ .xb.fromString(record.postBy).unwrap(),
-        identifier: _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .Identifier.fromString */ .xb.fromString(record.identifier).unwrap(),
+        postBy: _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .ProfileIdentifier.fromString */ .WO.fromString(record.postBy, _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .ProfileIdentifier */ .WO).unwrap(),
+        identifier: _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .PostIVIdentifier.fromString */ .bb.fromString(record.identifier, _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .PostIVIdentifier */ .bb).unwrap(),
         postCryptoKey: record.postCryptoKey,
         recipients: new _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .IdentifierMap */ .qD(new Map(Object.entries(record.recipients))),
         foundAt: new Date(record.foundAt),
-        encryptBy: record.encryptBy ? _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .Identifier.fromString */ .xb.fromString(record.encryptBy).unwrap() : undefined,
+        encryptBy: record.encryptBy ? _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .ECKeyIdentifier.fromString */ .ob.fromString(record.encryptBy, _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .ECKeyIdentifier */ .ob).unwrap() : undefined,
         url: record.url,
         summary: record.summary,
         interestedMeta: record.interestedMeta

@@ -294,8 +294,6 @@ var Link = __webpack_require__(4467);
 var Card = __webpack_require__(93230);
 // EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
 var src = __webpack_require__(42421);
-// EXTERNAL MODULE: ../web3-shared/evm/hooks/useImageChecker.ts
-var useImageChecker = __webpack_require__(14877);
 // EXTERNAL MODULE: ../web3-shared/evm/pipes/index.ts
 var pipes = __webpack_require__(29528);
 // EXTERNAL MODULE: ../shared/src/index.ts
@@ -934,8 +932,6 @@ function ActionsBarNFT(props) {
 
 
 
-
-
 const CollectibleCard_useStyles = (0,src/* makeStyles */.ZL)()((theme)=>({
         root: {
             display: 'flex',
@@ -988,30 +984,8 @@ const CollectibleCard_useStyles = (0,src/* makeStyles */.ZL)()((theme)=>({
 function CollectibleCard(props) {
     const { wallet , token , provider , readonly , renderOrder  } = props;
     const { classes  } = CollectibleCard_useStyles();
-    const imgRef = (0,react.useRef)(null);
-    const [imageLinkWithLazy, setImageLinkWithLazy] = (0,react.useState)('');
-    (0,react.useEffect)(()=>{
-        const observer = new IntersectionObserver((entries)=>{
-            entries.forEach((item)=>{
-                if (!item.isIntersecting) return;
-                setImageLinkWithLazy(token.info.imageURL || token.info.mediaUrl);
-                observer.unobserve(item.target);
-            });
-        }, {
-            rootMargin: '0px 0px 1000px 0px',
-            threshold: 0.1
-        });
-        observer.observe(imgRef.current);
-        return ()=>{
-            observer.unobserve(imgRef.current);
-        };
-    }, []);
     const theme = (0,useTheme/* default */.Z)();
-    const fallbackImageURL = theme.palette.mode === 'dark' ? new URL(/* asset import */ __webpack_require__(17289), __webpack_require__.b) : new URL(/* asset import */ __webpack_require__(88289), __webpack_require__.b);
-    const { value: isImageToken , loading  } = (0,useImageChecker/* useImageChecker */.v)(token.info.imageURL || token.info.mediaUrl);
-    var _imageURL;
     return(/*#__PURE__*/ (0,jsx_runtime.jsxs)(Link/* default */.Z, {
-        ref: imgRef,
         target: "_blank",
         rel: "noopener noreferrer",
         className: classes.linkWrapper,
@@ -1030,60 +1004,16 @@ function CollectibleCard(props) {
                         wallet: wallet,
                         token: token
                     }),
-                    token.info.imageURL || token.info.mediaUrl ? loading ? /*#__PURE__*/ (0,jsx_runtime.jsx)(Image/* Image */.E, {
-                        component: "img",
-                        width: 172,
-                        height: 172,
-                        loading: true,
-                        src: ""
-                    }) : isImageToken && imageLinkWithLazy ? /*#__PURE__*/ (0,jsx_runtime.jsx)(Image/* Image */.E, {
-                        component: "img",
-                        width: 172,
-                        height: 172,
-                        style: {
-                            objectFit: 'cover'
-                        },
-                        src: imageLinkWithLazy,
-                        onError: (event)=>{
-                            const target = event.currentTarget;
-                            target.src = fallbackImageURL.toString();
-                            var _loadingFailImage;
-                            target.classList.add((_loadingFailImage = classes.loadingFailImage) !== null && _loadingFailImage !== void 0 ? _loadingFailImage : '');
-                        }
-                    }) : /*#__PURE__*/ (0,jsx_runtime.jsx)(shared_src/* NFTCardStyledAssetPlayer */.yC, {
+                    /*#__PURE__*/ (0,jsx_runtime.jsx)(shared_src/* NFTCardStyledAssetPlayer */.yC, {
                         contractAddress: token.contractDetailed.address,
                         chainId: token.contractDetailed.chainId,
                         url: token.info.mediaUrl,
                         renderOrder: renderOrder,
                         tokenId: token.tokenId,
-                        fallbackResourceLoader: /*#__PURE__*/ (0,jsx_runtime.jsx)(Image/* Image */.E, {
-                            component: "img",
-                            width: 172,
-                            height: 172,
-                            style: {
-                                objectFit: 'cover'
-                            },
-                            src: (_imageURL = token.info.imageURL) !== null && _imageURL !== void 0 ? _imageURL : '',
-                            onError: (event)=>{
-                                const target = event.currentTarget;
-                                target.src = fallbackImageURL.toString();
-                                var _loadingFailImage;
-                                target.classList.add((_loadingFailImage = classes.loadingFailImage) !== null && _loadingFailImage !== void 0 ? _loadingFailImage : '');
-                            }
-                        }),
                         classes: {
                             loadingFailImage: classes.loadingFailImage,
                             wrapper: classes.wrapper
                         }
-                    }) : /*#__PURE__*/ (0,jsx_runtime.jsx)(Image/* Image */.E, {
-                        component: "img",
-                        width: 172,
-                        height: 172,
-                        style: {
-                            objectFit: 'cover'
-                        },
-                        src: fallbackImageURL.toString(),
-                        className: classes.loadingFailImage
                     })
                 ]
             })
@@ -1912,49 +1842,6 @@ function useCollectibles(address, chainId, dependReady) {
 
 /***/ }),
 
-/***/ 14877:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "v": () => (/* binding */ useImageChecker)
-/* harmony export */ });
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(59302);
-
-// filter out nft with image resource
-function useImageChecker(url) {
-    return (0,react_use__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)(async ()=>{
-        if (!url) return false;
-        const { pathname  } = new URL(url);
-        if (/\.(gif|svg|png|webp|jpg|jpeg)$/.test(pathname)) return true;
-        if (/\.(mp4|webm|mov|ogg|mp3|wav)$/.test(pathname)) return false;
-        const contentType = await getContentType(url);
-        return contentType.startsWith('image/');
-    }, [
-        url
-    ]);
-}
-async function getContentType(url) {
-    if (!/^https?:/.test(url)) {
-        return '';
-    }
-    return Promise.race([
-        new Promise((resolve)=>setTimeout(()=>resolve('')
-            , 20000)
-        ),
-        new Promise((resolve)=>{
-            fetch(url, {
-                method: 'HEAD',
-                mode: 'cors'
-            }).then((response)=>response.status !== 200 ? resolve('') : resolve(response.headers.get('content-type'))
-            ).catch(()=>resolve('')
-            );
-        }), 
-    ]);
-}
-
-
-/***/ }),
-
 /***/ 19132:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -2367,20 +2254,6 @@ function useTokenTransferCallback(type, address) {
     }
 }
 
-
-/***/ }),
-
-/***/ 88289:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "assets/19f2a548c256a9e118a7.png";
-
-/***/ }),
-
-/***/ 17289:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "assets/d62071d31816d5f7b3f6.png";
 
 /***/ }),
 

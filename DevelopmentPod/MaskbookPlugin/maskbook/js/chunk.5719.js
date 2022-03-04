@@ -698,6 +698,7 @@ var social_network_adaptor_utils = __webpack_require__(33410);
 
 
 
+
 function getPostActionsNode(postNode) {
     var ref;
     if (!postNode) return null;
@@ -803,6 +804,20 @@ const PostProviderTwitter = {
         registerPostCollectorInner(this.posts, cancel);
     }
 };
+function collectVerificationPost(keyword) {
+    const userId = IdentityProviderTwitter.recognized.value.identifier || social_network/* globalUIState.profiles.value.0.identifier */.EJ.profiles.value[0].identifier;
+    const postNodes = (0,selector/* timelinePostContentSelector */.yR)().evaluate();
+    for (const postNode of postNodes){
+        const postId = postIdParser(postNode);
+        const postContent = postContentMessageParser(postNode);
+        var _content;
+        const isVerified = postId && postContent[0] && (0,typed_message_base/* isTypedMessageText */.Rz)(postContent[0]) && ((_content = postContent[0].content) !== null && _content !== void 0 ? _content : '').toLowerCase() === keyword.toLowerCase();
+        if (isVerified && userId) {
+            return new src/* PostIdentifier */._P(userId, postId);
+        }
+    }
+    return null;
+}
 function collectPostInfo(tweetNode, info, cancel) {
     if (!tweetNode) return;
     if (cancel === null || cancel === void 0 ? void 0 : cancel.aborted) return;
@@ -2971,9 +2986,6 @@ const TwitterRenderFragments = {
 
 
 
-
-
-
 const useInjectedDialogClassesOverwriteTwitter = (0,theme_src/* makeStyles */.ZL)()((theme)=>{
     const smallQuery = `@media (max-width: ${theme.breakpoints.values.sm}px)`;
     return {
@@ -3126,21 +3138,7 @@ const twitterUI = {
         nextIDConfig: {
             enable: true,
             platform: src/* NextIDPlatform.Twitter */.Vd.Twitter,
-            collectVerificationPost: (keyword)=>{
-                const userId = IdentityProviderTwitter.recognized.value.identifier || social_network/* globalUIState.profiles.value.0.identifier */.EJ.profiles.value[0].identifier;
-                const postNodes = (0,selector/* timelinePostContentSelector */.yR)().evaluate();
-                for (const postNode of postNodes){
-                    var ref;
-                    const postId = postIdParser(postNode);
-                    const postContent = postContentMessageParser(postNode);
-                    var ref1;
-                    const isVerified = postId && postContent[0] && (0,typed_message_base/* isTypedMessageText */.Rz)(postContent[0]) && ((ref1 = (ref = postContent[0]) === null || ref === void 0 ? void 0 : ref.content) !== null && ref1 !== void 0 ? ref1 : '').toLowerCase() === keyword.toLowerCase();
-                    if (isVerified && userId) {
-                        return new src/* PostIdentifier */._P(userId, postId);
-                    }
-                }
-                return null;
-            }
+            collectVerificationPost: collectVerificationPost
         },
         steganography: {
             password () {

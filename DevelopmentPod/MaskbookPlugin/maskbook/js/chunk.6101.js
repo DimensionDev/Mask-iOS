@@ -2170,6 +2170,7 @@ function useNextIDConnectStatus() {
     const [username] = (0,react.useState)(lastState.username || (lastRecognized.identifier.isUnknown ? '' : lastRecognized.identifier.userId));
     const { value: isVerified = false  } = (0,useAsync/* default */.Z)(async ()=>{
         var ref;
+        if (lastState.status === SetupGuide_types/* SetupGuideStep.FindUsername */.s.FindUsername) return true;
         if (isOpenedVerifyDialog) return true;
         if (!enableNextID || !username || !personaConnectStatus.connected) return true;
         const currentPersona = await service/* default.Settings.getCurrentPersona */.ZP.Settings.getCurrentPersona();

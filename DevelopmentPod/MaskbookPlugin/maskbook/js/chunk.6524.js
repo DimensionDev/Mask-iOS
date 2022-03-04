@@ -200,7 +200,7 @@ const querySelectorAll = (selector)=>{
 };
 const searchUserIdOnMobileSelector = ()=>querySelector('div[data-sigil$="profile"] a')
 ;
-const searchAvatarSelector = ()=>querySelector('[role="link"] [role="img"] image, [role="button"] [role="img"] image')
+const searchAvatarSelector = ()=>querySelector('[role="main"] [role="link"] [role="img"] image, [role="main"] [role="button"] [role="img"] image')
 ;
 const searchNickNameSelector = ()=>querySelector('span[dir="auto"] div h1')
 ;
@@ -219,11 +219,11 @@ const searchFacebookAvatarListSelector = ()=>querySelector('[role="dialog"] > di
 ;
 const searchFacebookAvatarMobileListSelector = ()=>querySelector('#nuxChoosePhotoButton').closest(6)
 ;
-const searchFacebookAvatarSelector = ()=>querySelector('[role="button"] svg[role="img"], [role="link"] svg[role="img"]')
+const searchFacebookAvatarSelector = ()=>querySelector('[role="main"] [role="button"] svg[role="img"],[role="main"] [role="link"] svg[role="img"]')
 ;
 const searchFacebookAvatarOnMobileSelector = ()=>querySelector('[data-sigil="timeline-cover"] i[aria-label$="picture"]')
 ;
-const searchFaceBookPostAvatarSelector = ()=>new umd.LiveSelector().querySelectorAll('[type="nested/pressable"] svg')
+const searchFaceBookPostAvatarSelector = ()=>new umd.LiveSelector().querySelectorAll('[type="nested/pressable"] > a > div > svg, ul div[role="article"] a > div > svg[role="none"]')
 ;
 const searchFaceBookPostAvatarOnMobileSelector = ()=>querySelectorAll('[data-gt=\'{"tn":"~"}\']')
 ;
@@ -1523,7 +1523,7 @@ function NFTAvatarInFacebook() {
         location
     ]);
     // #region clear white border
-    (0,react.useEffect)(()=>{
+    (0,react.useLayoutEffect)(()=>{
         const node = searchFacebookAvatarSelector().closest(3).evaluate();
         if (!node) return;
         if (showAvatar) {
@@ -1531,9 +1531,7 @@ function NFTAvatarInFacebook() {
         } else {
             node.removeAttribute('style');
         }
-    }, [
-        showAvatar
-    ]);
+    });
     // #endregion
     if (!avatar || !size || !showAvatar) return null;
     return(/*#__PURE__*/ (0,jsx_runtime.jsx)(NFTBadge/* NFTBadge */.A, {
@@ -1601,12 +1599,46 @@ var NFTBadgeTimeline = __webpack_require__(37677);
 
 
 
+
+
+const NFTAvatarInTimeline_useStyles = (0,theme_src/* makeStyles */.ZL)()(()=>({
+        root: {
+            transform: 'scale(1)!important'
+        }
+    })
+);
+const TimelineRainbow = /*#__PURE__*/ (0,react.memo)(({ userId , avatarId , width , height  })=>{
+    const { classes  } = NFTAvatarInTimeline_useStyles();
+    return(/*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+        style: {
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            zIndex: 2
+        },
+        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(NFTBadgeTimeline/* NFTBadgeTimeline */.J, {
+            userId: userId,
+            avatarId: avatarId,
+            width: width,
+            height: height,
+            classes: classes,
+            snsKey: constants/* RSS3_KEY_SNS.FACEBOOK */.vu.FACEBOOK
+        })
+    }));
+});
 function NFTAvatarInTimeline_getFacebookId(element) {
     var ref;
     const node = isMobile/* isMobileFacebook */.q ? element.firstChild : (ref = element.parentNode) === null || ref === void 0 ? void 0 : ref.parentNode;
     if (!node) return '';
     const url = new URL(node.href);
-    if (url.pathname === '/profile.php' && url.searchParams.get('id')) return url.searchParams.get(isMobile/* isMobileFacebook */.q ? 'lst' : 'id');
+    if (url.pathname === '/profile.php' && url.searchParams.get('id')) {
+        return url.searchParams.get(isMobile/* isMobileFacebook */.q ? 'lst' : 'id');
+    }
+    if (url.pathname.includes('/groups')) {
+        const match = url.pathname.match(/\/user\/(\w+)\//);
+        if (!match) return '';
+        return match[1];
+    }
     return url.pathname.replace('/', '');
 }
 function _(selector, signal) {
@@ -1633,12 +1665,11 @@ function _(selector, signal) {
                     top: 0,
                     zIndex: 2
                 },
-                children: /*#__PURE__*/ (0,jsx_runtime.jsx)(NFTBadgeTimeline/* NFTBadgeTimeline */.J, {
+                children: /*#__PURE__*/ (0,jsx_runtime.jsx)(TimelineRainbow, {
                     userId: facebookId,
                     avatarId: info.avatarId,
                     width: info.width - 4,
-                    height: info.height - 4,
-                    snsKey: constants/* RSS3_KEY_SNS.FACEBOOK */.vu.FACEBOOK
+                    height: info.height - 4
                 })
             }));
             remove = root.destory;
