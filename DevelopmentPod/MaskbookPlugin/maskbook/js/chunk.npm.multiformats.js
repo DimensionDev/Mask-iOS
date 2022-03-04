@@ -313,13 +313,13 @@ const rfc4648 = ({name, prefix, bitsPerChar, alphabet}) => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "base32": () => (/* binding */ base32),
-/* harmony export */   "base32upper": () => (/* binding */ base32upper),
-/* harmony export */   "base32pad": () => (/* binding */ base32pad),
-/* harmony export */   "base32padupper": () => (/* binding */ base32padupper),
 /* harmony export */   "base32hex": () => (/* binding */ base32hex),
-/* harmony export */   "base32hexupper": () => (/* binding */ base32hexupper),
 /* harmony export */   "base32hexpad": () => (/* binding */ base32hexpad),
 /* harmony export */   "base32hexpadupper": () => (/* binding */ base32hexpadupper),
+/* harmony export */   "base32hexupper": () => (/* binding */ base32hexupper),
+/* harmony export */   "base32pad": () => (/* binding */ base32pad),
+/* harmony export */   "base32padupper": () => (/* binding */ base32padupper),
+/* harmony export */   "base32upper": () => (/* binding */ base32upper),
 /* harmony export */   "base32z": () => (/* binding */ base32z)
 /* harmony export */ });
 /* harmony import */ var _base_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(97037);
@@ -706,14 +706,14 @@ const codecs = {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "equals": () => (/* binding */ equals),
 /* harmony export */   "coerce": () => (/* binding */ coerce),
-/* harmony export */   "isBinary": () => (/* binding */ isBinary),
+/* harmony export */   "empty": () => (/* binding */ empty),
+/* harmony export */   "equals": () => (/* binding */ equals),
 /* harmony export */   "fromHex": () => (/* binding */ fromHex),
-/* harmony export */   "toHex": () => (/* binding */ toHex),
 /* harmony export */   "fromString": () => (/* binding */ fromString),
-/* harmony export */   "toString": () => (/* binding */ toString),
-/* harmony export */   "empty": () => (/* binding */ empty)
+/* harmony export */   "isBinary": () => (/* binding */ isBinary),
+/* harmony export */   "toHex": () => (/* binding */ toHex),
+/* harmony export */   "toString": () => (/* binding */ toString)
 /* harmony export */ });
 const empty = new Uint8Array(0);
 const toHex = d => d.reduce((hex, byte) => hex + byte.toString(16).padStart(2, '0'), '');
@@ -1079,10 +1079,10 @@ if (cid) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Digest": () => (/* binding */ Digest),
 /* harmony export */   "create": () => (/* binding */ create),
 /* harmony export */   "decode": () => (/* binding */ decode),
-/* harmony export */   "equals": () => (/* binding */ equals),
-/* harmony export */   "Digest": () => (/* binding */ Digest)
+/* harmony export */   "equals": () => (/* binding */ equals)
 /* harmony export */ });
 /* harmony import */ var _bytes_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(35610);
 /* harmony import */ var _varint_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(49124);

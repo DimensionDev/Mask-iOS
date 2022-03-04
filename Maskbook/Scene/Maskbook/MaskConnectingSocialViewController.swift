@@ -48,7 +48,7 @@ class MaskConnectingSocialViewController: BaseViewController {
     // Begin of Connecting related properties
     class ConnectViewModel {
         weak var socialViewController: MaskConnectingSocialViewController?
-        var latestDetectedProfile = CurrentValueSubject<SocialProfile?, Never>(nil)
+        var latestDetectedProfile = CurrentValueSubject<[SocialProfile]?, Never>(nil)
         
         private var didPresentLoginAlertPopup = false
         
@@ -184,11 +184,6 @@ extension MaskConnectingSocialViewController {
         loadSite(socialPlatform)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        startObservingUserProfile()
-    }
-    
     private func setupNavigationBar() {
         navigationItem.title = socialPlatform.shortName
         let dashboardBarButtonItem = UIBarButtonItem(image: Asset.Images.Scene.Social.iconMaskDashboard.image,
@@ -236,53 +231,15 @@ extension MaskConnectingSocialViewController {
     }
     
     private func bindEvents() {
+        maskBrowser.webPublicApisMessageResolver.delegate = self
         connectViewModel.latestDetectedProfile
             .removeDuplicates()
             .compactMap { $0 }
             .eraseToAnyPublisher()
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] profile in
+            .sink { [weak self] profiles in
                 guard let personaIdentifier = self?.personaIdentifier else { return }
-                self?.presentConnectPopupIfNeeded(profiles: [profile], personaIdentifier: personaIdentifier)
-            }
-            .store(in: &disposeBag)
-    }
-    
-    func startObservingUserProfile() {
-        Timer.publish(every: 1, on: .current, in: .default)
-            .autoconnect()
-            .receive(on: DispatchQueue.main)
-            .flatMap { [weak self] _ -> AnyPublisher<MaskWebMessageResult, Never> in
-                if let messageRelay = self?.maskMessageRelay, let tabId = self?.tabId {
-                    let detectProfileRequest = WebExtension.SNSAdaptor.GetCurrentDetectedProfile(target: .content(id: tabId))
-                    return messageRelay.send(detectProfileRequest)
-                        .replaceError(with: MaskWebMessageResult(jsonrpc: "", id: "", result: nil, error: nil))
-                        .eraseToAnyPublisher()
-                } else {
-                    return Just(MaskWebMessageResult(jsonrpc: "", id: "", result: nil, error: nil)).eraseToAnyPublisher()
-                }
-            }
-            .map {
-                $0.result?.string
-            }
-            .sink { [weak self] detectedProfileIdentifier in
-                // Our profile detection method does NOT work until Twitter webpage finishes its processing tasks, so
-                // we have to use a timer publisher to keep track the user login status
-                guard let personaRecord = self?.personaManager.currentPersona.value else {
-                    return
-                }
-                guard let persona = Persona(fromRecord: personaRecord) else { return }
-                if let validProfileIdentifier = detectedProfileIdentifier,
-                   var profile = SocialProfile(profileIdentifier: validProfileIdentifier) {
-                    // Check whether the detected profile is already connected
-                    if persona.linkedProfiles.contains(where: { identifier, details in
-                        identifier == detectedProfileIdentifier && details.connectionConfirmState == .confirmed
-                    }) {
-                        profile.connected = true
-                    }
-                    // User has logged in, present the popup for users to continue the connection
-                    self?.connectViewModel.latestDetectedProfile.accept(profile)
-                }
+                self?.presentConnectPopupIfNeeded(profiles: profiles, personaIdentifier: personaIdentifier)
             }
             .store(in: &disposeBag)
     }
@@ -296,7 +253,7 @@ extension MaskConnectingSocialViewController {
             connectViewModel.updateHintLabelNotLoggedIn(socialPlatform: socialPlatform)
             view.layoutIfNeeded()
         }
-        if !profiles.filter({ $0.connected == false }).isEmpty {
+        if profiles.contains(where: { $0.connected == false }) {
             coordinator.present(
                 scene: .detectProfiles(profiles: profiles, personaIdentifier: personaIdentifier, delegate: self),
                 transition: .panModel(animated: true)
@@ -461,5 +418,28 @@ extension MaskConnectingSocialViewController {
     @objc
     private func dashboardBarButtonItem(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
+    }
+}
+
+extension MaskConnectingSocialViewController: WebMessageResolverDelegate {
+    func webPublicApiMessageResolver(resolver: WebPublicApiMessageResolver,
+                                     profilesDetect profileIdentifiers: [String]) {
+        guard let personaRecord = personaManager.currentPersona.value else {
+            return
+        }
+        guard let persona = Persona(fromRecord: personaRecord) else { return }
+
+        let profiles = profileIdentifiers.compactMap { detectIdentifier -> SocialProfile? in
+            guard var profile = SocialProfile(profileIdentifier: detectIdentifier)
+            else { return nil }
+            if persona.linkedProfiles.contains(where: { identifier, details in
+                identifier == detectIdentifier &&
+                details.connectionConfirmState == .confirmed
+            }) {
+                profile.connected = true
+            }
+            return profile
+        }
+        connectViewModel.latestDetectedProfile.accept(profiles)
     }
 }

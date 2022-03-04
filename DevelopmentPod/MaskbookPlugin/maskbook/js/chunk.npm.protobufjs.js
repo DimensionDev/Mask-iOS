@@ -968,7 +968,7 @@ util.asPromise = __webpack_require__(1461);
 util.base64 = __webpack_require__(86604);
 
 // base class of rpc.Service
-util.EventEmitter = __webpack_require__(19193);
+util.EventEmitter = __webpack_require__(71986);
 
 // float handling accross browsers
 util.float = __webpack_require__(93644);

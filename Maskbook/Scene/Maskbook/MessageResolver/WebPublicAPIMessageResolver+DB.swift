@@ -520,6 +520,19 @@ extension WebPublicApiMessageResolver {
         return false
     }
     
+    func profileDetected(messageData: Data) -> [String]? {
+        struct WebPublicAPIMessage<T: Decodable>: Decodable {
+            let jsonrpc: String
+            let method: String
+            let params: T
+        }
+        guard let request = try? decoder.decode(WebPublicAPIMessage<[String]>.self,
+                                                from: messageData) else {
+            return nil
+        }
+        return request.params
+    }
+    
     func getImageFromKingfisher(url: String, requestId: String) {
         guard let imageURL = URL(string: url) else {
             return

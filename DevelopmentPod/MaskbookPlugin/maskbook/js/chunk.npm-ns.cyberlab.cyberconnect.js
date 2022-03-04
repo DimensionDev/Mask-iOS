@@ -13,7 +13,7 @@ exports.C_ACCESS_TOKEN_KEY = 'CYBERCONNECT_ACCESS_TOKEN';
 
 /***/ }),
 
-/***/ 22229:
+/***/ 32135:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -320,7 +320,7 @@ var utils_1 = __webpack_require__(80830);
 var stream_caip10_link_1 = __webpack_require__(6303);
 var _1 = __webpack_require__(70820);
 var constant_1 = __webpack_require__(91168);
-var crypto_1 = __webpack_require__(22229);
+var crypto_1 = __webpack_require__(32135);
 var CyberConnect = /** @class */ (function () {
     function CyberConnect(config) {
         this.address = '';
