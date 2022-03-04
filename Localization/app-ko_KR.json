@@ -167,6 +167,9 @@
             "skip": "",
             "download_next": ""
         },
+        "toast": {
+            "saved": ""
+        },
         "loading": "로딩 중"
     },
     "scene": {
@@ -530,9 +533,6 @@
             "add": ""
         },
         "persona_download": {
-            "persona": "",
-            "mask_id": "",
-            "private_key": "",
             "identity_id": "",
             "download_tips": ""
         },
