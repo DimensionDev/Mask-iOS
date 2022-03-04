@@ -231,6 +231,7 @@ extension MaskConnectingSocialViewController {
     }
     
     private func bindEvents() {
+        maskBrowser.webPublicApisMessageResolver.delegate = self
         connectViewModel.latestDetectedProfile
             .removeDuplicates()
             .compactMap { $0 }

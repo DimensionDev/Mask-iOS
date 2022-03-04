@@ -981,13 +981,13 @@ module.exports = punycode;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ucs2decode": () => (/* binding */ ucs2decode),
-/* harmony export */   "ucs2encode": () => (/* binding */ ucs2encode),
 /* harmony export */   "decode": () => (/* binding */ decode),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   "encode": () => (/* binding */ encode),
 /* harmony export */   "toASCII": () => (/* binding */ toASCII),
 /* harmony export */   "toUnicode": () => (/* binding */ toUnicode),
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "ucs2decode": () => (/* binding */ ucs2decode),
+/* harmony export */   "ucs2encode": () => (/* binding */ ucs2encode)
 /* harmony export */ });
 
 

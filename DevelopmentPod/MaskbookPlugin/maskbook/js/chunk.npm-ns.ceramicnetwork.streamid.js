@@ -38,7 +38,7 @@ const varint_1 = __importDefault(__webpack_require__(80233));
 const concat_1 = __importDefault(__webpack_require__(36713));
 const to_string_1 = __importDefault(__webpack_require__(48270));
 const typescript_memoize_1 = __webpack_require__(30851);
-const constants_1 = __webpack_require__(48831);
+const constants_1 = __webpack_require__(56471);
 const reading_bytes_1 = __webpack_require__(43214);
 const stream_id_1 = __webpack_require__(42125);
 function fromBytes(bytes) {
@@ -214,7 +214,7 @@ exports.CommitID = CommitID;
 
 /***/ }),
 
-/***/ 48831:
+/***/ 56471:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -337,7 +337,7 @@ const varint_1 = __importDefault(__webpack_require__(80233));
 const ipld_dag_cbor_1 = __importDefault(__webpack_require__(85402));
 const concat_1 = __importDefault(__webpack_require__(36713));
 const to_string_1 = __importDefault(__webpack_require__(48270));
-const constants_1 = __webpack_require__(48831);
+const constants_1 = __webpack_require__(56471);
 const reading_bytes_1 = __webpack_require__(43214);
 const typescript_memoize_1 = __webpack_require__(30851);
 const commit_id_1 = __webpack_require__(27777);

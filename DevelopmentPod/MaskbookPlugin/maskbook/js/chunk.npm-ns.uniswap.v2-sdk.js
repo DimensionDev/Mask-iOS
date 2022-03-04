@@ -5,9 +5,9 @@
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "sO": () => (/* binding */ Pair),
 /* harmony export */   "F0": () => (/* binding */ Router),
-/* harmony export */   "ho": () => (/* binding */ Trade)
+/* harmony export */   "ho": () => (/* binding */ Trade),
+/* harmony export */   "sO": () => (/* binding */ Pair)
 /* harmony export */ });
 /* unused harmony exports FACTORY_ADDRESS, INIT_CODE_HASH, InsufficientInputAmountError, InsufficientReservesError, MINIMUM_LIQUIDITY, Route, computePairAddress, inputOutputComparator, tradeComparator */
 /* harmony import */ var jsbi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(24994);

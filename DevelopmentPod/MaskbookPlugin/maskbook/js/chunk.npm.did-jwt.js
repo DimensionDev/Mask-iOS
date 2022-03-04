@@ -2162,9 +2162,9 @@ exports.xc20pDirEncrypter = xc20pDirEncrypter;
 "use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Qu": () => (/* binding */ NaclSigner),
-/* harmony export */   "pk": () => (/* binding */ createJWS),
+/* harmony export */   "Y": () => (/* binding */ x25519Decrypter),
 /* harmony export */   "jB": () => (/* binding */ decryptJWE),
-/* harmony export */   "Y": () => (/* binding */ x25519Decrypter)
+/* harmony export */   "pk": () => (/* binding */ createJWS)
 /* harmony export */ });
 /* unused harmony exports ES256KSigner, EdDSASigner, EllipticSigner, SimpleSigner, createAnonDecrypter, createAnonEncrypter, createAuthDecrypter, createAuthEncrypter, createJWE, createJWT, createX25519ECDH, decodeJWT, resolveX25519Encrypters, toEthereumAddress, verifyJWS, verifyJWT, x25519Encrypter, xc20pAuthDecrypterEcdh1PuV3x25519WithXc20PkwV2, xc20pAuthEncrypterEcdh1PuV3x25519WithXc20PkwV2, xc20pDirDecrypter, xc20pDirEncrypter */
 /* harmony import */ var uint8arrays__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(79088);

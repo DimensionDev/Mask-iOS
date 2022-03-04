@@ -526,7 +526,8 @@ extension WebPublicApiMessageResolver {
             let method: String
             let params: T
         }
-        guard let request = request(of: [String].self, from: messageData) else {
+        guard let request = try? decoder.decode(WebPublicAPIMessage<[String]>.self,
+                                                from: messageData) else {
             return nil
         }
         return request.params
