@@ -423,6 +423,10 @@ extension Contact: Managed {
         }
     }
     
+    public static func predicate(chainId: Int64, networkId: Int64) -> NSPredicate {
+        return NSCompoundPredicate(andPredicateWithSubpredicates: [predicate(chainId: Int64(chainId)), predicate(networkId: networkId)])
+    }
+    
     override public func awakeFromInsert() {
         super.awakeFromInsert()
         
