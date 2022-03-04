@@ -11,6 +11,11 @@ import OSLog
 import SwiftyJSON
 import WebKit
 
+protocol WebMessageResolverDelegate: AnyObject {
+    func webPublicApiMessageResolver(resolver: WebPublicApiMessageResolver,
+                                     profilesDetect profileIdentifiers: [String])
+}
+
 class WebPublicApiMessageResolver: MaskMessageResolver {
     private enum ResolveMethodName: String, CaseIterable {
         case misc_openDashboardView
@@ -37,8 +42,18 @@ class WebPublicApiMessageResolver: MaskMessageResolver {
         case query_relations
         case update_relation
         
+        case query_avatar
+        case store_avatar
+        
+        case create_post
+        case query_post
+        case query_posts
+        case update_post
+        
         case notifyRedpacket
         case claimOrRefundRedpacket
+        
+        case notify_visible_detected_profile_changed
     }
     
     @InjectedProvider(\.mainCoordinator)
@@ -49,6 +64,8 @@ class WebPublicApiMessageResolver: MaskMessageResolver {
     
     @InjectedProvider(\.personaManager)
     var personaManager
+    
+    weak var delegate: WebMessageResolverDelegate?
     
     weak var webView: WKWebView?
     
@@ -73,8 +90,8 @@ class WebPublicApiMessageResolver: MaskMessageResolver {
         }
         guard let method = messageBody["method"] as? String,
               let resolvedMethod = ResolveMethodName(rawValue: method) else {
-            return false
-        }
+                  return false
+              }
         guard let messageBodyString = JSON(rawValue: message.body)?.rawString() else {
             return false
         }
@@ -179,11 +196,35 @@ class WebPublicApiMessageResolver: MaskMessageResolver {
         case .update_relation:
             parseSuccess = updateRelation(messageData: messageData)
             
+        case .query_avatar:
+            parseSuccess = queryAvatar(messageData: messageData)
+            
+        case .store_avatar:
+            parseSuccess = storeAvatar(messageData: messageData)
+            
+        case .create_post:
+            parseSuccess = createPost(messageData: messageData)
+            
+        case .query_post:
+            parseSuccess = queryPost(messageData: messageData)
+            
+        case .query_posts:
+            parseSuccess = queryPosts(messageData: messageData)
+            
+        case .update_post:
+            parseSuccess = updatePost(messageData: messageData)
+            
         case .notifyRedpacket:
             parseSuccess = notifyRedpacket(messageData: messageData)
             
         case .claimOrRefundRedpacket:
             parseSuccess = claimOrRefundRedpacket(messageData: messageData)
+            
+        case .notify_visible_detected_profile_changed:
+            if let profileIdentifiers = profileDetected(messageData: messageData) {
+                delegate?.webPublicApiMessageResolver(resolver: self,
+                                                      profilesDetect: profileIdentifiers)
+            }
         }
         if !parseSuccess {
             sendResponseToWebView(response: false, id: requestId)

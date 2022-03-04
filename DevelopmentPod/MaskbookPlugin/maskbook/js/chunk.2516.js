@@ -1,0 +1,142 @@
+"use strict";
+(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[2516],{
+
+/***/ 51212:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "s": () => (/* binding */ SetupGuideStep)
+/* harmony export */ });
+var SetupGuideStep;
+(function(SetupGuideStep) {
+    SetupGuideStep["FindUsername"] = 'find-username';
+    SetupGuideStep["VerifyOnNextID"] = 'next-id-verify';
+    SetupGuideStep["PinExtension"] = 'pin-extension';
+    SetupGuideStep["Close"] = 'close';
+})(SetupGuideStep || (SetupGuideStep = {}));
+
+
+/***/ }),
+
+/***/ 62516:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "connectSocialNetwork": () => (/* binding */ connectSocialNetwork),
+  "getDefinedSocialNetworkUIs": () => (/* binding */ getDefinedSocialNetworkUIs),
+  "getDesignatedAutoStartPluginID": () => (/* binding */ getDesignatedAutoStartPluginID),
+  "openProfilePage": () => (/* binding */ openProfilePage),
+  "openSNSAndActivatePlugin": () => (/* binding */ openSNSAndActivatePlugin),
+  "openShareLink": () => (/* binding */ openShareLink)
+});
+
+// EXTERNAL MODULE: ./src/social-network/index.ts
+var social_network = __webpack_require__(61751);
+// EXTERNAL MODULE: ./shared/index.ts
+var shared = __webpack_require__(70609);
+// EXTERNAL MODULE: ./src/extension/service.ts
+var service = __webpack_require__(45925);
+;// CONCATENATED MODULE: ./src/social-network/utils/permissions.ts
+
+function requestSNSAdaptorPermission(ui) {
+    var ref;
+    const req = (ref = ui.permission) === null || ref === void 0 ? void 0 : ref.request();
+    if (req) return req;
+    return service/* default.Helper.requestExtensionPermission */.ZP.Helper.requestExtensionPermission({
+        origins: [
+            ...ui.declarativePermissions.origins
+        ]
+    });
+}
+
+// EXTERNAL MODULE: ./src/settings/settings.ts
+var settings = __webpack_require__(21202);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/json-stable-stringify@1.0.1/node_modules/json-stable-stringify/index.js
+var json_stable_stringify = __webpack_require__(92304);
+var json_stable_stringify_default = /*#__PURE__*/__webpack_require__.n(json_stable_stringify);
+// EXTERNAL MODULE: ./src/components/InjectedComponents/SetupGuide/types.ts
+var types = __webpack_require__(51212);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+kit@0.0.0-20220223101101-4e6f3b9/node_modules/@dimensiondev/kit/esm/index.js + 2 modules
+var esm = __webpack_require__(66559);
+;// CONCATENATED MODULE: ./src/extension/background-script/SocialNetworkService.ts
+
+
+
+
+
+
+
+async function getDefinedSocialNetworkUIs() {
+    return [
+        ...social_network/* definedSocialNetworkUIs.values */.LB.values()
+    ].map(({ networkIdentifier  })=>{
+        return {
+            networkIdentifier
+        };
+    });
+}
+async function connectSocialNetwork(identifier, network) {
+    var _utils, ref;
+    const ui = await (0,social_network/* loadSocialNetworkUI */.gE)(network);
+    const home = (ref = (_utils = ui.utils).getHomePage) === null || ref === void 0 ? void 0 : ref.call(_utils);
+    if (!shared/* Flags.no_web_extension_dynamic_permission_request */.vU.no_web_extension_dynamic_permission_request) {
+        if (!await requestSNSAdaptorPermission(ui)) return;
+    }
+    settings/* currentSetupGuideStatus */.AI[network].value = json_stable_stringify_default()({
+        status: types/* SetupGuideStep.FindUsername */.s.FindUsername,
+        persona: identifier.toText()
+    });
+    await (0,esm/* delay */.gw)(100);
+    home && browser.tabs.create({
+        active: true,
+        url: home
+    });
+}
+async function openProfilePage(network, userId) {
+    var _utils, ref;
+    const ui = await (0,social_network/* loadSocialNetworkUI */.gE)(network);
+    const profile = (ref = (_utils = ui.utils).getProfilePage) === null || ref === void 0 ? void 0 : ref.call(_utils, userId);
+    if (!shared/* Flags.no_web_extension_dynamic_permission_request */.vU.no_web_extension_dynamic_permission_request) {
+        if (!await requestSNSAdaptorPermission(ui)) return;
+    }
+    await (0,esm/* delay */.gw)(100);
+    profile && browser.tabs.create({
+        active: true,
+        url: profile
+    });
+}
+async function openShareLink(SNSIdentifier, post) {
+    var _utils, ref;
+    const url = (ref = (_utils = (await (0,social_network/* getNetworkWorker */.C8)(SNSIdentifier)).utils).getShareLinkURL) === null || ref === void 0 ? void 0 : ref.call(_utils, post);
+    if (!url) return;
+    browser.tabs.create({
+        active: true,
+        url: url.toString()
+    });
+}
+const key = 'openSNSAndActivatePlugin';
+/**
+ * This function will open a new web page, then open the composition dialog and activate the composition entry of the given plugin.
+ * @param url URL to open
+ * @param pluginID Plugin to activate
+ */ async function openSNSAndActivatePlugin(url, pluginID) {
+    await browser.tabs.create({
+        active: true,
+        url
+    });
+    sessionStorage.setItem(key, pluginID);
+}
+async function getDesignatedAutoStartPluginID() {
+    const val = sessionStorage.getItem(key);
+    sessionStorage.removeItem(key);
+    return val;
+}
+
+
+/***/ })
+
+}]);

@@ -9,9 +9,10 @@
 import Combine
 import Foundation
 import UIKit
+import CoreDataStack
 
 protocol SocialAccountCollectionCellDelegate: AnyObject {
-    func deleteAction(profile: Profile)
+    func deleteAction(profileIdentifier: String)
 }
 
 class SocialAccountCollectionCell: UICollectionViewCell { 
@@ -32,7 +33,6 @@ class SocialAccountCollectionCell: UICollectionViewCell {
     private var avatarView: AvatarView = {
         let view = AvatarView(title: "")
         view.applyCornerRadius(radius: 32, cornerCurve: .circular)
-        view.backgroundColor = Asset.Colors.Public.blue.color
         view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(equalToConstant: 64),
@@ -45,12 +45,12 @@ class SocialAccountCollectionCell: UICollectionViewCell {
     private lazy var platformView: UIImageView = {
         let view = UIImageView()
         NSLayoutConstraint.activate([
-            view.heightAnchor.constraint(equalToConstant: 22),
-            view.widthAnchor.constraint(equalToConstant: 22)
+            view.heightAnchor.constraint(equalToConstant: 24),
+            view.widthAnchor.constraint(equalToConstant: 24)
         ])
-        view.applyCornerRadius(radius: 11)
+        view.applyCornerRadius(radius: 12)
         view.layer.borderColor = Asset.Colors.Background.normal.color.cgColor
-        view.layer.borderWidth = 1
+        view.layer.borderWidth = 1.5
         return view
     }()
     
@@ -108,24 +108,30 @@ class SocialAccountCollectionCell: UICollectionViewCell {
         ])
     }
     
-    func configWith(profile: Profile) {
+    func configWith(profile: ProfileRecord) {
         titleLabel.text = profile.socialID
         avatarView.title = String(profile.socialID.dropFirst())
+        avatarView.setNetworkURL(url: profile.avatar)
         platformView.image = profile.socialPlatform.icon
         deleteImageView
             .cv.tapGesture()
             .sink { [weak self] _ in
-                self?.deleteAction(profile: profile)
+                self?.deleteAction(profileIdentifier: profile.nonOptionalIdentifier)
             }
             .store(in: &disposeBag)
     }
     
     func setEditMode(isEditing: Bool) {
         deleteImageView.isHidden = !isEditing
+        if isEditing {
+            self.shakeWhenDelete()
+        } else {
+            self.removeShakeWhenDelete()
+        }
     }
     
-    func deleteAction(profile: Profile) {
-        delegate?.deleteAction(profile: profile)
+    func deleteAction(profileIdentifier: String) {
+        delegate?.deleteAction(profileIdentifier: profileIdentifier)
     }
 }
 

@@ -43,11 +43,12 @@ class BalanceAccountCell: UITableViewCell {
         button.titleLabel?.font = FontStyles.bh5.uifont
         button.backgroundColor = Asset.Colors.Public.Background.dark.color
         button.applyCornerRadius(radius: 16)
+        button.layer.masksToBounds = false
         button.applyShadow(color: Asset.Colors.Shadow.sendButton.color,
                            alpha: 1,
                            x: 0,
                            y: 10,
-                           blur: 5,
+                           blur: 25,
                            cornerRadius: 16,
                            spread: 0)
         return button
@@ -64,14 +65,20 @@ class BalanceAccountCell: UITableViewCell {
         button.titleLabel?.font = FontStyles.bh5.uifont
         button.backgroundColor = Asset.Colors.Public.Background.dark.color
         button.applyCornerRadius(radius: 16)
-        
+        button.layer.masksToBounds = false
+        button.applyShadow(color: Asset.Colors.Shadow.sendButton.color,
+                           alpha: 1,
+                           x: 0,
+                           y: 10,
+                           blur: 25,
+                           cornerRadius: 16,
+                           spread: 0)
         return button
     }()
     
     override func layoutSubviews() {
         super.layoutSubviews()
         let shadowLayer = accountCardShadowView.layer
-        shadowLayer.shadowColor = Asset.Colors.Shadow.accoundCard.color.cgColor
         shadowLayer.shadowOpacity = 1
         shadowLayer.shadowOffset = .zero
         shadowLayer.shadowRadius = 10
@@ -85,14 +92,14 @@ class BalanceAccountCell: UITableViewCell {
                                alpha: 1,
                                x: 0,
                                y: 10,
-                               blur: 25,
+                               blur: 6,
                                cornerRadius: 16,
                                spread: 0)
         receiveButton.applyShadow(color: Asset.Colors.Shadow.sendButton.color,
                                   alpha: 1,
                                   x: 0,
                                   y: 10,
-                                  blur: 25,
+                                  blur: 6,
                                   cornerRadius: 16,
                                   spread: 0)
     }
@@ -111,6 +118,8 @@ class BalanceAccountCell: UITableViewCell {
     
     weak var delegate: BalanceAccountCellDelegate?
     private func _init() {
+        accountCardView.shadowView = accountCardShadowView
+        
         selectionStyle = .none
         backgroundColor = .clear
         
@@ -123,8 +132,10 @@ class BalanceAccountCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             accountCardView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 15),
-            accountCardView.leadingAnchor.constraint(equalTo: contentView.readableContentGuide.leadingAnchor, constant: 2),
-            accountCardView.trailingAnchor.constraint(equalTo: contentView.readableContentGuide.trailingAnchor, constant: -2),
+            accountCardView.leadingAnchor.constraint(
+                equalTo: contentView.readableContentGuide.leadingAnchor),
+            accountCardView.trailingAnchor.constraint(
+                equalTo: contentView.readableContentGuide.trailingAnchor),
             accountCardView.heightAnchor.constraint(equalToConstant: 186)
         ])
         

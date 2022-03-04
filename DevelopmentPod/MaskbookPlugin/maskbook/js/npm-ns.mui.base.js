@@ -1,29 +1,19 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[2486],{
 
-/***/ 86197:
+/***/ 52525:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (/* binding */ useAutocomplete)
 /* harmony export */ });
 /* unused harmony export createFilterOptions */
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(37879);
-}
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(97538);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(21720);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(99220);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(71324);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(15555);
-}
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(68875);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(88766);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(27744);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(39638);
 
 
 /* eslint-disable no-constant-condition */
@@ -127,6 +117,7 @@ function useAutocomplete(props) {
     open: openProp,
     openOnFocus = false,
     options,
+    readOnly = false,
     selectOnFocus = !props.freeSolo,
     value: valueProp
   } = props;
@@ -219,7 +210,7 @@ function useAutocomplete(props) {
   });
   const [inputPristine, setInputPristine] = react__WEBPACK_IMPORTED_MODULE_0__.useState(true);
   const inputValueIsSelectedValue = !multiple && value != null && inputValue === getOptionLabel(value);
-  const popupOpen = open;
+  const popupOpen = open && !readOnly;
   const filteredOptions = popupOpen ? filterOptions(options.filter(option => {
     if (filterSelectedOptions && (multiple ? value : [value]).some(value2 => value2 !== null && isOptionEqualToValue(option, value2))) {
       return false;
@@ -232,7 +223,7 @@ function useAutocomplete(props) {
     inputValue: inputValueIsSelectedValue && inputPristine ? '' : inputValue,
     getOptionLabel
   }) : [];
-  const listboxAvailable = open && filteredOptions.length > 0;
+  const listboxAvailable = open && filteredOptions.length > 0 && !readOnly;
 
   if (false) {}
 
@@ -522,7 +513,11 @@ function useAutocomplete(props) {
   };
 
   const handleValue = (event, newValue, reason, details) => {
-    if (value === newValue) {
+    if (Array.isArray(value)) {
+      if (value.length === newValue.length && value.every((val, i) => val === newValue[i])) {
+        return;
+      }
+    } else if (value === newValue) {
       return;
     }
 
@@ -777,7 +772,7 @@ function useAutocomplete(props) {
           break;
 
         case 'Backspace':
-          if (multiple && inputValue === '' && value.length > 0) {
+          if (multiple && !readOnly && inputValue === '' && value.length > 0) {
             const index = focusedTag === -1 ? value.length - 1 : focusedTag;
             const newValue = value.slice();
             newValue.splice(index, 1);
@@ -959,7 +954,7 @@ function useAutocomplete(props) {
       // only have an opinion about this when closed
       'aria-activedescendant': popupOpen ? '' : null,
       'aria-autocomplete': autoComplete ? 'both' : 'list',
-      'aria-controls': listboxAvailable ? `${id}-listbox` : null,
+      'aria-controls': listboxAvailable ? `${id}-listbox` : undefined,
       // Disable browser's suggestion that might overlap with the popup.
       // Handle autocomplete but not autofill.
       autoComplete: 'off',
@@ -977,10 +972,11 @@ function useAutocomplete(props) {
     }),
     getTagProps: ({
       index
-    }) => ({
+    }) => (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)({
       key: index,
       'data-tag-index': index,
-      tabIndex: -1,
+      tabIndex: -1
+    }, !readOnly && {
       onDelete: handleTagDelete(index)
     }),
     getListboxProps: () => ({
@@ -1027,35 +1023,45 @@ function useAutocomplete(props) {
 
 /***/ }),
 
-/***/ 17392:
+/***/ 9517:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(37879);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(93817);
-}
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(25789);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _composeClasses__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(85186);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _utils_isHostComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(90109);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _backdropUnstyledClasses__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(85709);
-}
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(74750);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "Z": () => (/* binding */ BackdropUnstyled_BackdropUnstyled)
+});
+
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.17.2/node_modules/@babel/runtime/helpers/esm/extends.js
+var esm_extends = __webpack_require__(97538);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.17.2/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
+var objectWithoutPropertiesLoose = __webpack_require__(93086);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
+var react = __webpack_require__(76342);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/clsx@1.1.1/node_modules/clsx/dist/clsx.m.js
+var clsx_m = __webpack_require__(25789);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/composeClasses/composeClasses.js
+var composeClasses = __webpack_require__(51764);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/utils/isHostComponent.js
+var isHostComponent = __webpack_require__(85745);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/generateUtilityClasses/generateUtilityClasses.js
+var generateUtilityClasses = __webpack_require__(81232);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/generateUtilityClass/generateUtilityClass.js
+var generateUtilityClass = __webpack_require__(94626);
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/BackdropUnstyled/backdropUnstyledClasses.js
 
 
-const _excluded = (/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (["classes", "className", "invisible", "component", "components", "componentsProps", "theme"]) : null);
+function getBackdropUtilityClass(slot) {
+  return (0,generateUtilityClass/* default */.Z)('MuiBackdrop', slot);
+}
+const backdropUnstyledClasses = (0,generateUtilityClasses/* default */.Z)('MuiBackdrop', ['root', 'invisible']);
+/* harmony default export */ const BackdropUnstyled_backdropUnstyledClasses = ((/* unused pure expression or super */ null && (backdropUnstyledClasses)));
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(74750);
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/BackdropUnstyled/BackdropUnstyled.js
+
+
+const _excluded = ["classes", "className", "invisible", "component", "components", "componentsProps", "theme"];
 
 
 
@@ -1072,10 +1078,10 @@ const useUtilityClasses = ownerState => {
   const slots = {
     root: ['root', invisible && 'invisible']
   };
-  return (0,_composeClasses__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(slots, _backdropUnstyledClasses__WEBPACK_IMPORTED_MODULE_3__/* .getBackdropUtilityClass */ .s, classes);
+  return (0,composeClasses/* default */.Z)(slots, getBackdropUtilityClass, classes);
 };
 
-const BackdropUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(function BackdropUnstyled(props, ref) {
+const BackdropUnstyled = /*#__PURE__*/react.forwardRef(function BackdropUnstyled(props, ref) {
   const {
     classes: classesProp,
     className,
@@ -1087,9 +1093,9 @@ const BackdropUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or s
     /* eslint-disable react/prop-types */
     theme
   } = props,
-        other = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z)(props, _excluded);
+        other = (0,objectWithoutPropertiesLoose/* default */.Z)(props, _excluded);
 
-  const ownerState = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)({}, props, {
+  const ownerState = (0,esm_extends/* default */.Z)({}, props, {
     classes: classesProp,
     invisible
   });
@@ -1097,78 +1103,104 @@ const BackdropUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or s
   const classes = useUtilityClasses(ownerState);
   const Root = components.Root || component;
   const rootProps = componentsProps.root || {};
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Root, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)({
+  return /*#__PURE__*/(0,jsx_runtime.jsx)(Root, (0,esm_extends/* default */.Z)({
     "aria-hidden": true
-  }, rootProps, !(0,_utils_isHostComponent__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z)(Root) && {
+  }, rootProps, !(0,isHostComponent/* default */.Z)(Root) && {
     as: component,
-    ownerState: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)({}, ownerState, rootProps.ownerState),
+    ownerState: (0,esm_extends/* default */.Z)({}, ownerState, rootProps.ownerState),
     theme
   }, {
     ref: ref
   }, other, {
-    className: (0,clsx__WEBPACK_IMPORTED_MODULE_7__["default"])(classes.root, rootProps.className, className)
+    className: (0,clsx_m["default"])(classes.root, rootProps.className, className)
   }));
-})) : null);
+});
  false ? 0 : void 0;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (BackdropUnstyled) : null));
+/* harmony default export */ const BackdropUnstyled_BackdropUnstyled = (BackdropUnstyled);
 
 /***/ }),
 
-/***/ 85709:
+/***/ 67777:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "s": () => (/* binding */ getBackdropUtilityClass)
-/* harmony export */ });
-/* harmony import */ var _generateUtilityClasses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(38926);
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1830);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "Z": () => (/* binding */ BadgeUnstyled_BadgeUnstyled)
+});
+
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.17.2/node_modules/@babel/runtime/helpers/esm/extends.js
+var esm_extends = __webpack_require__(97538);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.17.2/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
+var objectWithoutPropertiesLoose = __webpack_require__(93086);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
+var react = __webpack_require__(76342);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/clsx@1.1.1/node_modules/clsx/dist/clsx.m.js
+var clsx_m = __webpack_require__(25789);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.0/node_modules/@mui/utils/esm/capitalize.js
+var capitalize = __webpack_require__(53030);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/composeClasses/composeClasses.js
+var composeClasses = __webpack_require__(51764);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/utils/appendOwnerState.js
+var appendOwnerState = __webpack_require__(57247);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.0/node_modules/@mui/utils/esm/usePreviousProps.js
+var usePreviousProps = __webpack_require__(35266);
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/BadgeUnstyled/useBadge.js
+
+function useBadge(props) {
+  const {
+    anchorOrigin: anchorOriginProp = {
+      vertical: 'top',
+      horizontal: 'right'
+    },
+    badgeContent: badgeContentProp,
+    invisible: invisibleProp = false,
+    max: maxProp = 99,
+    showZero = false,
+    variant: variantProp = 'standard'
+  } = props;
+  const prevProps = (0,usePreviousProps/* default */.Z)({
+    anchorOrigin: anchorOriginProp,
+    badgeContent: badgeContentProp,
+    max: maxProp,
+    variant: variantProp
+  });
+  let invisible = invisibleProp;
+
+  if (invisibleProp === false && (badgeContentProp === 0 && !showZero || badgeContentProp == null && variantProp !== 'dot')) {
+    invisible = true;
+  }
+
+  const {
+    anchorOrigin = anchorOriginProp,
+    badgeContent,
+    max = maxProp,
+    variant = variantProp
+  } = invisible ? prevProps : props;
+  let displayValue = '';
+
+  if (variant !== 'dot') {
+    displayValue = badgeContent && Number(badgeContent) > max ? `${max}+` : badgeContent;
+  }
+
+  return {
+    anchorOrigin,
+    badgeContent,
+    invisible,
+    max,
+    variant,
+    displayValue
+  };
 }
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/BadgeUnstyled/badgeUnstyledClasses.js
+var badgeUnstyledClasses = __webpack_require__(7579);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(74750);
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/BadgeUnstyled/BadgeUnstyled.js
 
 
-function getBackdropUtilityClass(slot) {
-  return (0,_generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)('MuiBackdrop', slot);
-}
-const backdropUnstyledClasses = (0,_generateUtilityClasses__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)('MuiBackdrop', ['root', 'invisible']);
-/* unused harmony default export */ var __WEBPACK_DEFAULT_EXPORT__ = ((/* unused pure expression or super */ null && (backdropUnstyledClasses)));
+const _excluded = ["anchorOrigin", "classes", "badgeContent", "component", "children", "className", "components", "componentsProps", "invisible", "max", "showZero", "variant"];
 
-/***/ }),
-
-/***/ 81276:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(37879);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(93817);
-}
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(25789);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(41949);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(39859);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _composeClasses__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(85186);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _utils_appendOwnerState__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(70545);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _badgeUnstyledClasses__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(47794);
-}
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(74750);
-
-
-const _excluded = (/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (["anchorOrigin", "classes", "badgeContent", "component", "children", "className", "components", "componentsProps", "invisible", "max", "overlap", "showZero", "variant", "theme"]) : null);
 
 
 
@@ -1183,126 +1215,106 @@ const useUtilityClasses = ownerState => {
   const {
     variant,
     anchorOrigin,
-    overlap,
     invisible,
     classes
   } = ownerState;
   const slots = {
     root: ['root'],
-    badge: ['badge', variant, `anchorOrigin${(0,_mui_utils__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(anchorOrigin.vertical)}${(0,_mui_utils__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(anchorOrigin.horizontal)}${(0,_mui_utils__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(overlap)}`, invisible && 'invisible']
+    badge: ['badge', variant, `anchorOrigin${(0,capitalize/* default */.Z)(anchorOrigin.vertical)}${(0,capitalize/* default */.Z)(anchorOrigin.horizontal)}`, invisible && 'invisible']
   };
-  return (0,_composeClasses__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z)(slots, _badgeUnstyledClasses__WEBPACK_IMPORTED_MODULE_4__/* .getBadgeUtilityClass */ .I, classes);
+  return (0,composeClasses/* default */.Z)(slots, badgeUnstyledClasses/* getBadgeUtilityClass */.I, classes);
 };
 
-const BadgeUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(function BadgeUnstyled(props, ref) {
+const BadgeUnstyled = /*#__PURE__*/react.forwardRef(function BadgeUnstyled(props, ref) {
   const {
     anchorOrigin: anchorOriginProp = {
       vertical: 'top',
       horizontal: 'right'
     },
     classes: classesProp,
-    badgeContent: badgeContentProp,
     component,
     children,
     className,
     components = {},
     componentsProps = {},
-    invisible: invisibleProp,
     max: maxProp = 99,
-    overlap: overlapProp = 'rectangular',
     showZero = false,
     variant: variantProp = 'standard'
   } = props,
-        other = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)(props, _excluded);
-
-  const prevProps = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z)({
-    anchorOrigin: anchorOriginProp,
-    badgeContent: badgeContentProp,
-    max: maxProp,
-    overlap: overlapProp,
-    variant: variantProp
-  });
-  let invisible = invisibleProp;
-
-  if (invisibleProp == null && (badgeContentProp === 0 && !showZero || badgeContentProp == null && variantProp !== 'dot')) {
-    invisible = true;
-  }
+        other = (0,objectWithoutPropertiesLoose/* default */.Z)(props, _excluded);
 
   const {
-    anchorOrigin = anchorOriginProp,
+    anchorOrigin,
     badgeContent,
-    max = maxProp,
-    overlap = overlapProp,
-    variant = variantProp
-  } = invisible ? prevProps : props;
+    max,
+    variant,
+    displayValue,
+    invisible
+  } = useBadge((0,esm_extends/* default */.Z)({}, props, {
+    anchorOrigin: anchorOriginProp,
+    max: maxProp,
+    variant: variantProp
+  }));
 
-  const ownerState = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)({}, props, {
+  const ownerState = (0,esm_extends/* default */.Z)({}, props, {
     anchorOrigin,
     badgeContent,
     classes: classesProp,
     invisible,
     max,
-    overlap,
-    variant
+    variant,
+    showZero
   });
-
-  let displayValue = '';
-
-  if (variant !== 'dot') {
-    displayValue = badgeContent > max ? `${max}+` : badgeContent;
-  }
 
   const classes = useUtilityClasses(ownerState);
   const Root = component || components.Root || 'span';
-  const rootProps = (0,_utils_appendOwnerState__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z)(Root, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)({}, other, componentsProps.root), ownerState);
+  const rootProps = (0,appendOwnerState/* default */.Z)(Root, (0,esm_extends/* default */.Z)({}, other, componentsProps.root), ownerState);
   const Badge = components.Badge || 'span';
-  const badgeProps = (0,_utils_appendOwnerState__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z)(Badge, componentsProps.badge, ownerState);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(Root, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)({}, rootProps, {
+  const badgeProps = (0,appendOwnerState/* default */.Z)(Badge, componentsProps.badge, ownerState);
+  return /*#__PURE__*/(0,jsx_runtime.jsxs)(Root, (0,esm_extends/* default */.Z)({}, rootProps, {
     ref: ref
   }, other, {
-    className: (0,clsx__WEBPACK_IMPORTED_MODULE_9__["default"])(classes.root, rootProps.className, className),
-    children: [children, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Badge, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)({}, badgeProps, {
-      className: (0,clsx__WEBPACK_IMPORTED_MODULE_9__["default"])(classes.badge, badgeProps.className),
+    className: (0,clsx_m["default"])(classes.root, rootProps.className, className),
+    children: [children, /*#__PURE__*/(0,jsx_runtime.jsx)(Badge, (0,esm_extends/* default */.Z)({}, badgeProps, {
+      className: (0,clsx_m["default"])(classes.badge, badgeProps.className),
       children: displayValue
     }))]
   }));
-})) : null);
+});
  false ? 0 : void 0;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (BadgeUnstyled) : null));
+/* harmony default export */ const BadgeUnstyled_BadgeUnstyled = (BadgeUnstyled);
 
 /***/ }),
 
-/***/ 47794:
+/***/ 7579:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "I": () => (/* binding */ getBadgeUtilityClass),
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _generateUtilityClasses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(38926);
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1830);
-}
+/* harmony import */ var _generateUtilityClasses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(81232);
+/* harmony import */ var _generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(94626);
 
 
 function getBadgeUtilityClass(slot) {
   return (0,_generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)('MuiBadge', slot);
 }
-const badgeUnstyledClasses = (0,_generateUtilityClasses__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)('MuiBadge', ['root', 'badge', 'dot', 'standard', 'anchorOriginTopLeftCircular', 'anchorOriginTopLeftRectangular', 'anchorOriginTopRightCircular', 'anchorOriginTopRightRectangular', 'anchorOriginBottomLeftCircular', 'anchorOriginBottomLeftRectangular', 'anchorOriginBottomRightCircular', 'anchorOriginBottomRightRectangular', 'invisible']);
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (badgeUnstyledClasses) : null));
+const badgeUnstyledClasses = (0,_generateUtilityClasses__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)('MuiBadge', ['root', 'badge', 'dot', 'standard', 'anchorOriginTopLeft', 'anchorOriginTopRight', 'anchorOriginBottomLeft', 'anchorOriginBottomRight', 'invisible']);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (badgeUnstyledClasses);
 
 /***/ }),
 
-/***/ 36299:
+/***/ 59577:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5213);
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(71324);
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(81749);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(11419);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(27744);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(87133);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(74750);
 
 
@@ -1461,7 +1473,7 @@ if (false) {}
 
 /***/ }),
 
-/***/ 60623:
+/***/ 96019:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 
@@ -1470,33 +1482,33 @@ __webpack_require__.d(__webpack_exports__, {
   "Z": () => (/* binding */ ModalUnstyled_ModalUnstyled)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.16.5/node_modules/@babel/runtime/helpers/esm/extends.js
-var esm_extends = __webpack_require__(37879);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.16.5/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
-var objectWithoutPropertiesLoose = __webpack_require__(93817);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.17.2/node_modules/@babel/runtime/helpers/esm/extends.js
+var esm_extends = __webpack_require__(97538);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.17.2/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
+var objectWithoutPropertiesLoose = __webpack_require__(93086);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
 var react = __webpack_require__(76342);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/clsx@1.1.1/node_modules/clsx/dist/clsx.m.js
 var clsx_m = __webpack_require__(25789);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.2.3_react@18.0.0-rc.0/node_modules/@mui/utils/esm/useForkRef.js
-var useForkRef = __webpack_require__(5213);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.2.3_react@18.0.0-rc.0/node_modules/@mui/utils/esm/ownerDocument.js
-var ownerDocument = __webpack_require__(81749);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.2.3_react@18.0.0-rc.0/node_modules/@mui/utils/esm/useEventCallback.js
-var useEventCallback = __webpack_require__(71324);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.2.3_react@18.0.0-rc.0/node_modules/@mui/utils/esm/createChainedFunction.js
-var createChainedFunction = __webpack_require__(78751);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.61_2f50eb45a1501445764b3dbbd8573d7c/node_modules/@mui/base/composeClasses/composeClasses.js
-var composeClasses = __webpack_require__(85186);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.61_2f50eb45a1501445764b3dbbd8573d7c/node_modules/@mui/base/utils/isHostComponent.js
-var isHostComponent = __webpack_require__(90109);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.61_2f50eb45a1501445764b3dbbd8573d7c/node_modules/@mui/base/Portal/Portal.js
-var Portal = __webpack_require__(31634);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.2.3_react@18.0.0-rc.0/node_modules/@mui/utils/esm/ownerWindow.js
-var ownerWindow = __webpack_require__(23342);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.2.3_react@18.0.0-rc.0/node_modules/@mui/utils/esm/getScrollbarSize.js
-var getScrollbarSize = __webpack_require__(23049);
-;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.61_2f50eb45a1501445764b3dbbd8573d7c/node_modules/@mui/base/ModalUnstyled/ModalManager.js
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.0/node_modules/@mui/utils/esm/useForkRef.js
+var useForkRef = __webpack_require__(11419);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.0/node_modules/@mui/utils/esm/ownerDocument.js
+var ownerDocument = __webpack_require__(87133);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.0/node_modules/@mui/utils/esm/useEventCallback.js
+var useEventCallback = __webpack_require__(27744);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.0/node_modules/@mui/utils/esm/createChainedFunction.js
+var createChainedFunction = __webpack_require__(15542);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/composeClasses/composeClasses.js
+var composeClasses = __webpack_require__(51764);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/utils/isHostComponent.js
+var isHostComponent = __webpack_require__(85745);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/Portal/Portal.js
+var Portal = __webpack_require__(31357);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.0/node_modules/@mui/utils/esm/ownerWindow.js
+var ownerWindow = __webpack_require__(92189);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.0/node_modules/@mui/utils/esm/getScrollbarSize.js
+var getScrollbarSize = __webpack_require__(26211);
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/ModalUnstyled/ModalManager.js
 
 
 // Is a vertical scrollbar displayed?
@@ -1722,13 +1734,320 @@ class ModalManager {
   }
 
 }
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.61_2f50eb45a1501445764b3dbbd8573d7c/node_modules/@mui/base/Unstable_TrapFocus/Unstable_TrapFocus.js
-var Unstable_TrapFocus = __webpack_require__(67055);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.61_2f50eb45a1501445764b3dbbd8573d7c/node_modules/@mui/base/ModalUnstyled/modalUnstyledClasses.js
-var modalUnstyledClasses = __webpack_require__(39904);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
 var jsx_runtime = __webpack_require__(74750);
-;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.61_2f50eb45a1501445764b3dbbd8573d7c/node_modules/@mui/base/ModalUnstyled/ModalUnstyled.js
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/Unstable_TrapFocus/Unstable_TrapFocus.js
+/* eslint-disable @typescript-eslint/naming-convention, consistent-return, jsx-a11y/no-noninteractive-tabindex */
+
+
+ // Inspired by https://github.com/focus-trap/tabbable
+
+
+
+const candidatesSelector = ['input', 'select', 'textarea', 'a[href]', 'button', '[tabindex]', 'audio[controls]', 'video[controls]', '[contenteditable]:not([contenteditable="false"])'].join(',');
+
+function getTabIndex(node) {
+  const tabindexAttr = parseInt(node.getAttribute('tabindex'), 10);
+
+  if (!Number.isNaN(tabindexAttr)) {
+    return tabindexAttr;
+  } // Browsers do not return `tabIndex` correctly for contentEditable nodes;
+  // https://bugs.chromium.org/p/chromium/issues/detail?id=661108&q=contenteditable%20tabindex&can=2
+  // so if they don't have a tabindex attribute specifically set, assume it's 0.
+  // in Chrome, <details/>, <audio controls/> and <video controls/> elements get a default
+  //  `tabIndex` of -1 when the 'tabindex' attribute isn't specified in the DOM,
+  //  yet they are still part of the regular tab order; in FF, they get a default
+  //  `tabIndex` of 0; since Chrome still puts those elements in the regular tab
+  //  order, consider their tab index to be 0.
+
+
+  if (node.contentEditable === 'true' || (node.nodeName === 'AUDIO' || node.nodeName === 'VIDEO' || node.nodeName === 'DETAILS') && node.getAttribute('tabindex') === null) {
+    return 0;
+  }
+
+  return node.tabIndex;
+}
+
+function isNonTabbableRadio(node) {
+  if (node.tagName !== 'INPUT' || node.type !== 'radio') {
+    return false;
+  }
+
+  if (!node.name) {
+    return false;
+  }
+
+  const getRadio = selector => node.ownerDocument.querySelector(`input[type="radio"]${selector}`);
+
+  let roving = getRadio(`[name="${node.name}"]:checked`);
+
+  if (!roving) {
+    roving = getRadio(`[name="${node.name}"]`);
+  }
+
+  return roving !== node;
+}
+
+function isNodeMatchingSelectorFocusable(node) {
+  if (node.disabled || node.tagName === 'INPUT' && node.type === 'hidden' || isNonTabbableRadio(node)) {
+    return false;
+  }
+
+  return true;
+}
+
+function defaultGetTabbable(root) {
+  const regularTabNodes = [];
+  const orderedTabNodes = [];
+  Array.from(root.querySelectorAll(candidatesSelector)).forEach((node, i) => {
+    const nodeTabIndex = getTabIndex(node);
+
+    if (nodeTabIndex === -1 || !isNodeMatchingSelectorFocusable(node)) {
+      return;
+    }
+
+    if (nodeTabIndex === 0) {
+      regularTabNodes.push(node);
+    } else {
+      orderedTabNodes.push({
+        documentOrder: i,
+        tabIndex: nodeTabIndex,
+        node
+      });
+    }
+  });
+  return orderedTabNodes.sort((a, b) => a.tabIndex === b.tabIndex ? a.documentOrder - b.documentOrder : a.tabIndex - b.tabIndex).map(a => a.node).concat(regularTabNodes);
+}
+
+function defaultIsEnabled() {
+  return true;
+}
+/**
+ * Utility component that locks focus inside the component.
+ */
+
+
+function Unstable_TrapFocus(props) {
+  const {
+    children,
+    disableAutoFocus = false,
+    disableEnforceFocus = false,
+    disableRestoreFocus = false,
+    getTabbable = defaultGetTabbable,
+    isEnabled = defaultIsEnabled,
+    open
+  } = props;
+  const ignoreNextEnforceFocus = react.useRef();
+  const sentinelStart = react.useRef(null);
+  const sentinelEnd = react.useRef(null);
+  const nodeToRestore = react.useRef(null);
+  const reactFocusEventTarget = react.useRef(null); // This variable is useful when disableAutoFocus is true.
+  // It waits for the active element to move into the component to activate.
+
+  const activated = react.useRef(false);
+  const rootRef = react.useRef(null);
+  const handleRef = (0,useForkRef/* default */.Z)(children.ref, rootRef);
+  const lastKeydown = react.useRef(null);
+  react.useEffect(() => {
+    // We might render an empty child.
+    if (!open || !rootRef.current) {
+      return;
+    }
+
+    activated.current = !disableAutoFocus;
+  }, [disableAutoFocus, open]);
+  react.useEffect(() => {
+    // We might render an empty child.
+    if (!open || !rootRef.current) {
+      return;
+    }
+
+    const doc = (0,ownerDocument/* default */.Z)(rootRef.current);
+
+    if (!rootRef.current.contains(doc.activeElement)) {
+      if (!rootRef.current.hasAttribute('tabIndex')) {
+        if (false) {}
+
+        rootRef.current.setAttribute('tabIndex', -1);
+      }
+
+      if (activated.current) {
+        rootRef.current.focus();
+      }
+    }
+
+    return () => {
+      // restoreLastFocus()
+      if (!disableRestoreFocus) {
+        // In IE11 it is possible for document.activeElement to be null resulting
+        // in nodeToRestore.current being null.
+        // Not all elements in IE11 have a focus method.
+        // Once IE11 support is dropped the focus() call can be unconditional.
+        if (nodeToRestore.current && nodeToRestore.current.focus) {
+          ignoreNextEnforceFocus.current = true;
+          nodeToRestore.current.focus();
+        }
+
+        nodeToRestore.current = null;
+      }
+    }; // Missing `disableRestoreFocus` which is fine.
+    // We don't support changing that prop on an open TrapFocus
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+  react.useEffect(() => {
+    // We might render an empty child.
+    if (!open || !rootRef.current) {
+      return;
+    }
+
+    const doc = (0,ownerDocument/* default */.Z)(rootRef.current);
+
+    const contain = nativeEvent => {
+      const {
+        current: rootElement
+      } = rootRef; // Cleanup functions are executed lazily in React 17.
+      // Contain can be called between the component being unmounted and its cleanup function being run.
+
+      if (rootElement === null) {
+        return;
+      }
+
+      if (!doc.hasFocus() || disableEnforceFocus || !isEnabled() || ignoreNextEnforceFocus.current) {
+        ignoreNextEnforceFocus.current = false;
+        return;
+      }
+
+      if (!rootElement.contains(doc.activeElement)) {
+        // if the focus event is not coming from inside the children's react tree, reset the refs
+        if (nativeEvent && reactFocusEventTarget.current !== nativeEvent.target || doc.activeElement !== reactFocusEventTarget.current) {
+          reactFocusEventTarget.current = null;
+        } else if (reactFocusEventTarget.current !== null) {
+          return;
+        }
+
+        if (!activated.current) {
+          return;
+        }
+
+        let tabbable = [];
+
+        if (doc.activeElement === sentinelStart.current || doc.activeElement === sentinelEnd.current) {
+          tabbable = getTabbable(rootRef.current);
+        }
+
+        if (tabbable.length > 0) {
+          var _lastKeydown$current, _lastKeydown$current2;
+
+          const isShiftTab = Boolean(((_lastKeydown$current = lastKeydown.current) == null ? void 0 : _lastKeydown$current.shiftKey) && ((_lastKeydown$current2 = lastKeydown.current) == null ? void 0 : _lastKeydown$current2.key) === 'Tab');
+          const focusNext = tabbable[0];
+          const focusPrevious = tabbable[tabbable.length - 1];
+
+          if (isShiftTab) {
+            focusPrevious.focus();
+          } else {
+            focusNext.focus();
+          }
+        } else {
+          rootElement.focus();
+        }
+      }
+    };
+
+    const loopFocus = nativeEvent => {
+      lastKeydown.current = nativeEvent;
+
+      if (disableEnforceFocus || !isEnabled() || nativeEvent.key !== 'Tab') {
+        return;
+      } // Make sure the next tab starts from the right place.
+      // doc.activeElement referes to the origin.
+
+
+      if (doc.activeElement === rootRef.current && nativeEvent.shiftKey) {
+        // We need to ignore the next contain as
+        // it will try to move the focus back to the rootRef element.
+        ignoreNextEnforceFocus.current = true;
+        sentinelEnd.current.focus();
+      }
+    };
+
+    doc.addEventListener('focusin', contain);
+    doc.addEventListener('keydown', loopFocus, true); // With Edge, Safari and Firefox, no focus related events are fired when the focused area stops being a focused area.
+    // e.g. https://bugzilla.mozilla.org/show_bug.cgi?id=559561.
+    // Instead, we can look if the active element was restored on the BODY element.
+    //
+    // The whatwg spec defines how the browser should behave but does not explicitly mention any events:
+    // https://html.spec.whatwg.org/multipage/interaction.html#focus-fixup-rule.
+
+    const interval = setInterval(() => {
+      if (doc.activeElement.tagName === 'BODY') {
+        contain();
+      }
+    }, 50);
+    return () => {
+      clearInterval(interval);
+      doc.removeEventListener('focusin', contain);
+      doc.removeEventListener('keydown', loopFocus, true);
+    };
+  }, [disableAutoFocus, disableEnforceFocus, disableRestoreFocus, isEnabled, open, getTabbable]);
+
+  const onFocus = event => {
+    if (nodeToRestore.current === null) {
+      nodeToRestore.current = event.relatedTarget;
+    }
+
+    activated.current = true;
+    reactFocusEventTarget.current = event.target;
+    const childrenPropsHandler = children.props.onFocus;
+
+    if (childrenPropsHandler) {
+      childrenPropsHandler(event);
+    }
+  };
+
+  const handleFocusSentinel = event => {
+    if (nodeToRestore.current === null) {
+      nodeToRestore.current = event.relatedTarget;
+    }
+
+    activated.current = true;
+  };
+
+  return /*#__PURE__*/(0,jsx_runtime.jsxs)(react.Fragment, {
+    children: [/*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+      tabIndex: 0,
+      onFocus: handleFocusSentinel,
+      ref: sentinelStart,
+      "data-test": "sentinelStart"
+    }), /*#__PURE__*/react.cloneElement(children, {
+      ref: handleRef,
+      onFocus
+    }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+      tabIndex: 0,
+      onFocus: handleFocusSentinel,
+      ref: sentinelEnd,
+      "data-test": "sentinelEnd"
+    })]
+  });
+}
+
+ false ? 0 : void 0;
+
+if (false) {}
+
+/* harmony default export */ const Unstable_TrapFocus_Unstable_TrapFocus = (Unstable_TrapFocus);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/generateUtilityClasses/generateUtilityClasses.js
+var generateUtilityClasses = __webpack_require__(81232);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/generateUtilityClass/generateUtilityClass.js
+var generateUtilityClass = __webpack_require__(94626);
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/ModalUnstyled/modalUnstyledClasses.js
+
+
+function getModalUtilityClass(slot) {
+  return (0,generateUtilityClass/* default */.Z)('MuiModal', slot);
+}
+const modalUnstyledClasses = (0,generateUtilityClasses/* default */.Z)('MuiModal', ['root', 'hidden']);
+/* harmony default export */ const ModalUnstyled_modalUnstyledClasses = ((/* unused pure expression or super */ null && (modalUnstyledClasses)));
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/ModalUnstyled/ModalUnstyled.js
 
 
 const _excluded = ["BackdropComponent", "BackdropProps", "children", "classes", "className", "closeAfterTransition", "component", "components", "componentsProps", "container", "disableAutoFocus", "disableEnforceFocus", "disableEscapeKeyDown", "disablePortal", "disableRestoreFocus", "disableScrollLock", "hideBackdrop", "keepMounted", "manager", "onBackdropClick", "onClose", "onKeyDown", "open", "theme", "onTransitionEnter", "onTransitionExited"];
@@ -1754,7 +2073,7 @@ const useUtilityClasses = ownerState => {
   const slots = {
     root: ['root', !open && exited && 'hidden']
   };
-  return (0,composeClasses/* default */.Z)(slots, modalUnstyledClasses/* getModalUtilityClass */.x, classes);
+  return (0,composeClasses/* default */.Z)(slots, getModalUtilityClass, classes);
 };
 
 function getContainer(container) {
@@ -1988,7 +2307,7 @@ const ModalUnstyled = /*#__PURE__*/react.forwardRef(function ModalUnstyled(props
       children: [!hideBackdrop && BackdropComponent ? /*#__PURE__*/(0,jsx_runtime.jsx)(BackdropComponent, (0,esm_extends/* default */.Z)({
         open: open,
         onClick: handleBackdropClick
-      }, BackdropProps)) : null, /*#__PURE__*/(0,jsx_runtime.jsx)(Unstable_TrapFocus/* default */.Z, {
+      }, BackdropProps)) : null, /*#__PURE__*/(0,jsx_runtime.jsx)(Unstable_TrapFocus_Unstable_TrapFocus, {
         disableEnforceFocus: disableEnforceFocus,
         disableAutoFocus: disableAutoFocus,
         disableRestoreFocus: disableRestoreFocus,
@@ -2004,59 +2323,25 @@ const ModalUnstyled = /*#__PURE__*/react.forwardRef(function ModalUnstyled(props
 
 /***/ }),
 
-/***/ 39904:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "x": () => (/* binding */ getModalUtilityClass)
-/* harmony export */ });
-/* harmony import */ var _generateUtilityClasses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(38926);
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1830);
-}
-
-
-function getModalUtilityClass(slot) {
-  return (0,_generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)('MuiModal', slot);
-}
-const modalUnstyledClasses = (0,_generateUtilityClasses__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)('MuiModal', ['root', 'hidden']);
-/* unused harmony default export */ var __WEBPACK_DEFAULT_EXPORT__ = ((/* unused pure expression or super */ null && (modalUnstyledClasses)));
-
-/***/ }),
-
-/***/ 59190:
+/***/ 33019:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(37879);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(93817);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5213);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(23471);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(81749);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _popperjs_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(4324);
-}
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(97538);
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(93086);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(11419);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(98253);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(87133);
+/* harmony import */ var _popperjs_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(39416);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _Portal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(31634);
-}
+/* harmony import */ var _Portal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(31357);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(74750);
 
 
-const _excluded = (/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (["anchorEl", "children", "direction", "disablePortal", "modifiers", "open", "placement", "popperOptions", "popperRef", "TransitionProps"]) : null),
-      _excluded2 = (/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (["anchorEl", "children", "container", "direction", "disablePortal", "keepMounted", "modifiers", "open", "placement", "popperOptions", "popperRef", "style", "transition"]) : null);
+const _excluded = ["anchorEl", "children", "direction", "disablePortal", "modifiers", "open", "ownerState", "placement", "popperOptions", "popperRef", "TransitionProps"],
+      _excluded2 = ["anchorEl", "children", "container", "direction", "disablePortal", "keepMounted", "modifiers", "open", "placement", "popperOptions", "popperRef", "style", "transition"];
 
 
 
@@ -2094,7 +2379,7 @@ function resolveAnchorEl(anchorEl) {
 const defaultPopperOptions = {};
 /* eslint-disable react/prop-types */
 
-const PopperTooltip = /*#__PURE__*/(/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(function PopperTooltip(props, ref) {
+const PopperTooltip = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(function PopperTooltip(props, ref) {
   const {
     anchorEl,
     children,
@@ -2197,14 +2482,14 @@ const PopperTooltip = /*#__PURE__*/(/* runtime-dependent pure expression or supe
   }, other, {
     children: typeof children === 'function' ? children(childProps) : children
   }));
-})) : null);
+});
 /* eslint-enable react/prop-types */
 
 /**
  * Poppers rely on the 3rd party library [Popper.js](https://popper.js.org/docs/v2/) for positioning.
  */
 
-const PopperUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(function PopperUnstyled(props, ref) {
+const PopperUnstyled = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(function PopperUnstyled(props, ref) {
   const {
     anchorEl,
     children,
@@ -2270,13 +2555,13 @@ const PopperUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or sup
       children: children
     }))
   });
-})) : null);
+});
  false ? 0 : void 0;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (PopperUnstyled) : null));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PopperUnstyled);
 
 /***/ }),
 
-/***/ 31634:
+/***/ 31357:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -2284,15 +2569,9 @@ const PopperUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or sup
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15621);
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5213);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(23471);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(15555);
-}
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(11419);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(98253);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(39638);
 
 
 
@@ -2307,7 +2586,7 @@ function getContainer(container) {
  */
 
 
-const Portal = /*#__PURE__*/(/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(function Portal(props, ref) {
+const Portal = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(function Portal(props, ref) {
   const {
     children,
     container,
@@ -2342,75 +2621,57 @@ const Portal = /*#__PURE__*/(/* runtime-dependent pure expression or super */ 45
   }
 
   return mountNode ? /*#__PURE__*/react_dom__WEBPACK_IMPORTED_MODULE_1__.createPortal(children, mountNode) : mountNode;
-})) : null);
+});
  false ? 0 : void 0;
 
 if (false) {}
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (Portal) : null));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Portal);
 
 /***/ }),
 
-/***/ 8722:
+/***/ 81128:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(37879);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(93817);
-}
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(25789);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(81749);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(99220);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(18248);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(5213);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(71324);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(23471);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(20254);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _utils_isHostComponent__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(90109);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _composeClasses__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(85186);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _sliderUnstyledClasses__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3798);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _SliderValueLabelUnstyled__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(29303);
-}
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(74750);
 
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "Z": () => (/* binding */ SliderUnstyled_SliderUnstyled)
+});
 
-const _excluded = (/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (["aria-label", "aria-labelledby", "aria-valuetext", "className", "component", "classes", "defaultValue", "disableSwap", "disabled", "getAriaLabel", "getAriaValueText", "marks", "max", "min", "name", "onChange", "onChangeCommitted", "onMouseDown", "orientation", "scale", "step", "tabIndex", "track", "value", "valueLabelDisplay", "valueLabelFormat", "isRtl", "components", "componentsProps"]) : null);
-
-
-
-
-
-
-
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.17.2/node_modules/@babel/runtime/helpers/esm/extends.js
+var esm_extends = __webpack_require__(97538);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.17.2/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
+var objectWithoutPropertiesLoose = __webpack_require__(93086);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
+var react = __webpack_require__(76342);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/clsx@1.1.1/node_modules/clsx/dist/clsx.m.js
+var clsx_m = __webpack_require__(25789);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/utils/appendOwnerState.js
+var appendOwnerState = __webpack_require__(57247);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/utils/isHostComponent.js
+var isHostComponent = __webpack_require__(85745);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/composeClasses/composeClasses.js
+var composeClasses = __webpack_require__(51764);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/SliderUnstyled/sliderUnstyledClasses.js
+var sliderUnstyledClasses = __webpack_require__(43798);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/SliderUnstyled/SliderValueLabelUnstyled.js
+var SliderValueLabelUnstyled = __webpack_require__(47092);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.0/node_modules/@mui/utils/esm/ownerDocument.js
+var ownerDocument = __webpack_require__(87133);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.0/node_modules/@mui/utils/esm/useControlled.js
+var useControlled = __webpack_require__(88766);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.0/node_modules/@mui/utils/esm/useIsFocusVisible.js
+var useIsFocusVisible = __webpack_require__(66739);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.0/node_modules/@mui/utils/esm/useForkRef.js
+var useForkRef = __webpack_require__(11419);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.0/node_modules/@mui/utils/esm/useEnhancedEffect.js
+var useEnhancedEffect = __webpack_require__(98253);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.0/node_modules/@mui/utils/esm/useEventCallback.js
+var useEventCallback = __webpack_require__(27744);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.0/node_modules/@mui/utils/esm/visuallyHidden.js
+var visuallyHidden = __webpack_require__(46179);
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/SliderUnstyled/useSlider.js
 
 
 
@@ -2429,9 +2690,11 @@ function clamp(value, min, max) {
 }
 
 function findClosest(values, currentValue) {
+  var _values$reduce;
+
   const {
     index: closestIndex
-  } = values.reduce((acc, value, index) => {
+  } = (_values$reduce = values.reduce((acc, value, index) => {
     const distance = Math.abs(currentValue - value);
 
     if (acc === null || distance < acc.distance || distance === acc.distance) {
@@ -2442,14 +2705,17 @@ function findClosest(values, currentValue) {
     }
 
     return acc;
-  }, null);
+  }, null)) != null ? _values$reduce : {};
   return closestIndex;
 }
 
 function trackFinger(event, touchId) {
+  // The event is TouchEvent
   if (touchId.current !== undefined && event.changedTouches) {
-    for (let i = 0; i < event.changedTouches.length; i += 1) {
-      const touch = event.changedTouches[i];
+    const touchEvent = event;
+
+    for (let i = 0; i < touchEvent.changedTouches.length; i += 1) {
+      const touch = touchEvent.changedTouches[i];
 
       if (touch.identifier === touchId.current) {
         return {
@@ -2460,7 +2726,8 @@ function trackFinger(event, touchId) {
     }
 
     return false;
-  }
+  } // The event is MouseEvent
+
 
   return {
     x: event.clientX,
@@ -2509,10 +2776,14 @@ function focusThumb({
   activeIndex,
   setActive
 }) {
-  const doc = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(sliderRef.current);
+  var _sliderRef$current, _doc$activeElement;
 
-  if (!sliderRef.current.contains(doc.activeElement) || Number(doc.activeElement.getAttribute('data-index')) !== activeIndex) {
-    sliderRef.current.querySelector(`[type="range"][data-index="${activeIndex}"]`).focus();
+  const doc = (0,ownerDocument/* default */.Z)(sliderRef.current);
+
+  if (!((_sliderRef$current = sliderRef.current) != null && _sliderRef$current.contains(doc.activeElement)) || Number(doc == null ? void 0 : (_doc$activeElement = doc.activeElement) == null ? void 0 : _doc$activeElement.getAttribute('data-index')) !== activeIndex) {
+    var _sliderRef$current2;
+
+    (_sliderRef$current2 = sliderRef.current) == null ? void 0 : _sliderRef$current2.querySelector(`[type="range"][data-index="${activeIndex}"]`).focus();
   }
 
   if (setActive) {
@@ -2546,7 +2817,6 @@ const axisProps = {
     })
   }
 };
-
 const Identity = x => x; // TODO: remove support for Safari < 13.
 // https://caniuse.com/#search=touch-action
 //
@@ -2557,7 +2827,6 @@ const Identity = x => x; // TODO: remove support for Safari < 13.
 // Since CSS.supports is supported on all but Edge@12 and IE and touch-action
 // is supported on both Edge@12 and IE if CSS.supports is not available that means that
 // touch-action will be supported
-
 
 let cachedSupportsTouchActionNone;
 
@@ -2573,79 +2842,35 @@ function doesSupportTouchActionNone() {
   return cachedSupportsTouchActionNone;
 }
 
-const useUtilityClasses = ownerState => {
+function useSlider(props) {
   const {
-    disabled,
-    dragging,
-    marked,
-    orientation,
-    track,
-    classes
-  } = ownerState;
-  const slots = {
-    root: ['root', disabled && 'disabled', dragging && 'dragging', marked && 'marked', orientation === 'vertical' && 'vertical', track === 'inverted' && 'trackInverted', track === false && 'trackFalse'],
-    rail: ['rail'],
-    track: ['track'],
-    mark: ['mark'],
-    markActive: ['markActive'],
-    markLabel: ['markLabel'],
-    markLabelActive: ['markLabelActive'],
-    valueLabel: ['valueLabel'],
-    thumb: ['thumb', disabled && 'disabled'],
-    active: ['active'],
-    disabled: ['disabled'],
-    focusVisible: ['focusVisible']
-  };
-  return (0,_composeClasses__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z)(slots, _sliderUnstyledClasses__WEBPACK_IMPORTED_MODULE_4__/* .getSliderUtilityClass */ .k, classes);
-};
-
-const Forward = ({
-  children
-}) => children;
-
-const SliderUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(function SliderUnstyled(props, ref) {
-  const {
-    'aria-label': ariaLabel,
+    ref,
     'aria-labelledby': ariaLabelledby,
-    'aria-valuetext': ariaValuetext,
-    className,
-    component = 'span',
-    classes: classesProp,
     defaultValue,
     disableSwap = false,
     disabled = false,
-    getAriaLabel,
-    getAriaValueText,
     marks: marksProp = false,
     max = 100,
     min = 0,
     name,
     onChange,
     onChangeCommitted,
-    onMouseDown,
     orientation = 'horizontal',
     scale = Identity,
     step = 1,
     tabIndex,
-    track = 'normal',
     value: valueProp,
-    valueLabelDisplay = 'off',
-    valueLabelFormat = Identity,
-    isRtl = false,
-    components = {},
-    componentsProps = {}
-  } = props,
-        other = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)(props, _excluded);
-
-  const touchId = react__WEBPACK_IMPORTED_MODULE_0__.useRef(); // We can't use the :active browser pseudo-classes.
+    isRtl = false
+  } = props;
+  const touchId = react.useRef(); // We can't use the :active browser pseudo-classes.
   // - The active state isn't triggered when clicking on the rail.
   // - The active state isn't transferred when inversing a range slider.
 
-  const [active, setActive] = react__WEBPACK_IMPORTED_MODULE_0__.useState(-1);
-  const [open, setOpen] = react__WEBPACK_IMPORTED_MODULE_0__.useState(-1);
-  const [dragging, setDragging] = react__WEBPACK_IMPORTED_MODULE_0__.useState(false);
-  const moveCount = react__WEBPACK_IMPORTED_MODULE_0__.useRef(0);
-  const [valueDerived, setValueState] = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z)({
+  const [active, setActive] = react.useState(-1);
+  const [open, setOpen] = react.useState(-1);
+  const [dragging, setDragging] = react.useState(false);
+  const moveCount = react.useRef(0);
+  const [valueDerived, setValueState] = (0,useControlled/* default */.Z)({
     controlled: valueProp,
     default: defaultValue != null ? defaultValue : min,
     name: 'Slider'
@@ -2654,9 +2879,10 @@ const SliderUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or sup
   const handleChange = onChange && ((event, value, thumbIndex) => {
     // Redefine target to allow name and value to be read.
     // This allows seamless integration with the most popular form libraries.
-    // https://github.com/mui-org/material-ui/issues/13485#issuecomment-676048492
+    // https://github.com/mui/material-ui/issues/13485#issuecomment-676048492
     // Clone the event to not override `target` of the original event.
-    const nativeEvent = event.nativeEvent || event;
+    const nativeEvent = event.nativeEvent || event; // @ts-ignore The nativeEvent is function, not object
+
     const clonedEvent = new nativeEvent.constructor(nativeEvent.type, nativeEvent);
     Object.defineProperty(clonedEvent, 'target', {
       writable: true,
@@ -2674,18 +2900,21 @@ const SliderUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or sup
   const marks = marksProp === true && step !== null ? [...Array(Math.floor((max - min) / step) + 1)].map((_, index) => ({
     value: min + step * index
   })) : marksProp || [];
+  const marksValues = marks.map(mark => mark.value);
   const {
     isFocusVisibleRef,
     onBlur: handleBlurVisible,
     onFocus: handleFocusVisible,
     ref: focusVisibleRef
-  } = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)();
-  const [focusVisible, setFocusVisible] = react__WEBPACK_IMPORTED_MODULE_0__.useState(-1);
-  const sliderRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef();
-  const handleFocusRef = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z)(focusVisibleRef, sliderRef);
-  const handleRef = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z)(ref, handleFocusRef);
+  } = (0,useIsFocusVisible/* default */.Z)();
+  const [focusVisible, setFocusVisible] = react.useState(-1);
+  const sliderRef = react.useRef();
+  const handleFocusRef = (0,useForkRef/* default */.Z)(focusVisibleRef, sliderRef);
+  const handleRef = (0,useForkRef/* default */.Z)(ref, handleFocusRef);
 
-  const handleFocus = event => {
+  const createHandleHiddenInputFocus = otherHandlers => event => {
+    var _otherHandlers$onFocu;
+
     const index = Number(event.currentTarget.getAttribute('data-index'));
     handleFocusVisible(event);
 
@@ -2694,9 +2923,12 @@ const SliderUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or sup
     }
 
     setOpen(index);
+    otherHandlers == null ? void 0 : (_otherHandlers$onFocu = otherHandlers.onFocus) == null ? void 0 : _otherHandlers$onFocu.call(otherHandlers, event);
   };
 
-  const handleBlur = event => {
+  const createHandleHiddenInputBlur = otherHandlers => event => {
+    var _otherHandlers$onBlur;
+
     handleBlurVisible(event);
 
     if (isFocusVisibleRef.current === false) {
@@ -2704,21 +2936,18 @@ const SliderUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or sup
     }
 
     setOpen(-1);
+    otherHandlers == null ? void 0 : (_otherHandlers$onBlur = otherHandlers.onBlur) == null ? void 0 : _otherHandlers$onBlur.call(otherHandlers, event);
   };
 
-  const handleMouseOver = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z)(event => {
-    const index = Number(event.currentTarget.getAttribute('data-index'));
-    setOpen(index);
-  });
-  const handleMouseLeave = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z)(() => {
-    setOpen(-1);
-  });
-  (0,_mui_utils__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z)(() => {
+  (0,useEnhancedEffect/* default */.Z)(() => {
     if (disabled && sliderRef.current.contains(document.activeElement)) {
+      var _document$activeEleme;
+
       // This is necessary because Firefox and Safari will keep focus
       // on a disabled element:
       // https://codesandbox.io/s/mui-pr-22247-forked-h151h?file=/src/App.js
-      document.activeElement.blur();
+      // @ts-ignore
+      (_document$activeEleme = document.activeElement) == null ? void 0 : _document$activeEleme.blur();
     }
   }, [disabled]);
 
@@ -2730,11 +2959,14 @@ const SliderUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or sup
     setFocusVisible(-1);
   }
 
-  const handleHiddenInputChange = event => {
+  const createHandleHiddenInputChange = otherHandlers => event => {
+    var _otherHandlers$onChan;
+
+    (_otherHandlers$onChan = otherHandlers.onChange) == null ? void 0 : _otherHandlers$onChan.call(otherHandlers, event);
     const index = Number(event.currentTarget.getAttribute('data-index'));
     const value = values[index];
-    const marksValues = marks.map(mark => mark.value);
-    const marksIndex = marksValues.indexOf(value);
+    const marksIndex = marksValues.indexOf(value); // @ts-ignore
+
     let newValue = event.target.valueAsNumber;
 
     if (marks && step == null) {
@@ -2744,9 +2976,8 @@ const SliderUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or sup
     newValue = clamp(newValue, min, max);
 
     if (marks && step == null) {
-      const markValues = marks.map(mark => mark.value);
-      const currentMarkIndex = markValues.indexOf(values[index]);
-      newValue = newValue < values[index] ? markValues[currentMarkIndex - 1] : markValues[currentMarkIndex + 1];
+      const currentMarkIndex = marksValues.indexOf(values[index]);
+      newValue = newValue < values[index] ? marksValues[currentMarkIndex - 1] : marksValues[currentMarkIndex + 1];
     }
 
     if (range) {
@@ -2785,10 +3016,10 @@ const SliderUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or sup
     }
   };
 
-  const previousIndex = react__WEBPACK_IMPORTED_MODULE_0__.useRef();
+  const previousIndex = react.useRef();
   let axis = orientation;
 
-  if (isRtl && orientation !== "vertical") {
+  if (isRtl && orientation === 'horizontal') {
     axis += '-reverse';
   }
 
@@ -2824,7 +3055,6 @@ const SliderUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or sup
     if (step) {
       newValue = roundValueToStep(newValue, step, min);
     } else {
-      const marksValues = marks.map(mark => mark.value);
       const closestIndex = findClosest(marksValues, newValue);
       newValue = marksValues[closestIndex];
     }
@@ -2863,7 +3093,7 @@ const SliderUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or sup
     };
   };
 
-  const handleTouchMove = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z)(nativeEvent => {
+  const handleTouchMove = (0,useEventCallback/* default */.Z)(nativeEvent => {
     const finger = trackFinger(nativeEvent, touchId);
 
     if (!finger) {
@@ -2871,6 +3101,7 @@ const SliderUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or sup
     }
 
     moveCount.current += 1; // Cancel move in case some other element consumed a mouseup event and it was not fired.
+    // @ts-ignore buttons doesn't not exists on touch event
 
     if (nativeEvent.type === 'mousemove' && nativeEvent.buttons === 0) {
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -2901,7 +3132,7 @@ const SliderUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or sup
       handleChange(nativeEvent, newValue, activeIndex);
     }
   });
-  const handleTouchEnd = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z)(nativeEvent => {
+  const handleTouchEnd = (0,useEventCallback/* default */.Z)(nativeEvent => {
     const finger = trackFinger(nativeEvent, touchId);
     setDragging(false);
 
@@ -2929,7 +3160,7 @@ const SliderUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or sup
 
     stopListening();
   });
-  const handleTouchStart = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z)(nativeEvent => {
+  const handleTouchStart = (0,useEventCallback/* default */.Z)(nativeEvent => {
     // If touch-action: none; is not supported we need to prevent the scroll manually.
     if (!doesSupportTouchActionNone()) {
       nativeEvent.preventDefault();
@@ -2943,37 +3174,40 @@ const SliderUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or sup
     }
 
     const finger = trackFinger(nativeEvent, touchId);
-    const {
-      newValue,
-      activeIndex
-    } = getFingerNewValue({
-      finger,
-      values
-    });
-    focusThumb({
-      sliderRef,
-      activeIndex,
-      setActive
-    });
-    setValueState(newValue);
 
-    if (handleChange) {
-      handleChange(nativeEvent, newValue, activeIndex);
+    if (finger !== false) {
+      const {
+        newValue,
+        activeIndex
+      } = getFingerNewValue({
+        finger,
+        values
+      });
+      focusThumb({
+        sliderRef,
+        activeIndex,
+        setActive
+      });
+      setValueState(newValue);
+
+      if (handleChange) {
+        handleChange(nativeEvent, newValue, activeIndex);
+      }
     }
 
     moveCount.current = 0;
-    const doc = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(sliderRef.current);
+    const doc = (0,ownerDocument/* default */.Z)(sliderRef.current);
     doc.addEventListener('touchmove', handleTouchMove);
     doc.addEventListener('touchend', handleTouchEnd);
   });
-  const stopListening = react__WEBPACK_IMPORTED_MODULE_0__.useCallback(() => {
-    const doc = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(sliderRef.current);
+  const stopListening = react.useCallback(() => {
+    const doc = (0,ownerDocument/* default */.Z)(sliderRef.current);
     doc.removeEventListener('mousemove', handleTouchMove);
     doc.removeEventListener('mouseup', handleTouchEnd);
     doc.removeEventListener('touchmove', handleTouchMove);
     doc.removeEventListener('touchend', handleTouchEnd);
   }, [handleTouchEnd, handleTouchMove]);
-  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
+  react.useEffect(() => {
     const {
       current: slider
     } = sliderRef;
@@ -2981,20 +3215,26 @@ const SliderUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or sup
       passive: doesSupportTouchActionNone()
     });
     return () => {
+      // @ts-ignore
       slider.removeEventListener('touchstart', handleTouchStart, {
         passive: doesSupportTouchActionNone()
       });
       stopListening();
     };
   }, [stopListening, handleTouchStart]);
-  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
+  react.useEffect(() => {
     if (disabled) {
       stopListening();
     }
   }, [disabled, stopListening]);
-  const handleMouseDown = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z)(event => {
-    if (onMouseDown) {
-      onMouseDown(event);
+
+  const createHandleMouseDown = otherHandlers => event => {
+    var _otherHandlers$onMous;
+
+    (_otherHandlers$onMous = otherHandlers.onMouseDown) == null ? void 0 : _otherHandlers$onMous.call(otherHandlers, event);
+
+    if (event.defaultPrevented) {
+      return;
     } // Only handle left clicks
 
 
@@ -3005,56 +3245,209 @@ const SliderUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or sup
 
     event.preventDefault();
     const finger = trackFinger(event, touchId);
-    const {
-      newValue,
-      activeIndex
-    } = getFingerNewValue({
-      finger,
-      values
-    });
-    focusThumb({
-      sliderRef,
-      activeIndex,
-      setActive
-    });
-    setValueState(newValue);
 
-    if (handleChange) {
-      handleChange(event, newValue, activeIndex);
+    if (finger !== false) {
+      const {
+        newValue,
+        activeIndex
+      } = getFingerNewValue({
+        finger,
+        values
+      });
+      focusThumb({
+        sliderRef,
+        activeIndex,
+        setActive
+      });
+      setValueState(newValue);
+
+      if (handleChange) {
+        handleChange(event, newValue, activeIndex);
+      }
     }
 
     moveCount.current = 0;
-    const doc = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(sliderRef.current);
+    const doc = (0,ownerDocument/* default */.Z)(sliderRef.current);
     doc.addEventListener('mousemove', handleTouchMove);
     doc.addEventListener('mouseup', handleTouchEnd);
-  });
+  };
+
   const trackOffset = valueToPercent(range ? values[0] : min, min, max);
   const trackLeap = valueToPercent(values[values.length - 1], min, max) - trackOffset;
 
-  const trackStyle = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, axisProps[axis].offset(trackOffset), axisProps[axis].leap(trackLeap));
+  const getRootProps = otherHandlers => {
+    const ownEventHandlers = {
+      onMouseDown: createHandleMouseDown(otherHandlers || {})
+    };
 
-  const Root = components.Root || component;
-  const rootProps = componentsProps.root || {};
-  const Rail = components.Rail || 'span';
-  const railProps = componentsProps.rail || {};
-  const Track = components.Track || 'span';
-  const trackProps = componentsProps.track || {};
-  const Thumb = components.Thumb || 'span';
-  const thumbProps = componentsProps.thumb || {};
-  const ValueLabel = components.ValueLabel || _SliderValueLabelUnstyled__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z;
-  const valueLabelProps = componentsProps.valueLabel || {};
-  const Mark = components.Mark || 'span';
-  const markProps = componentsProps.mark || {};
-  const MarkLabel = components.MarkLabel || 'span';
-  const markLabelProps = componentsProps.markLabel || {}; // all props with defaults
-  // consider extracting to hook an reusing the lint rule for the varints
+    const mergedEventHandlers = (0,esm_extends/* default */.Z)({}, otherHandlers, ownEventHandlers);
 
-  const ownerState = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, props, {
-    classes: classesProp,
+    return (0,esm_extends/* default */.Z)({
+      ref: handleRef
+    }, mergedEventHandlers);
+  };
+
+  const createHandleMouseOver = otherHandlers => event => {
+    var _otherHandlers$onMous2;
+
+    (_otherHandlers$onMous2 = otherHandlers.onMouseOver) == null ? void 0 : _otherHandlers$onMous2.call(otherHandlers, event);
+    const index = Number(event.currentTarget.getAttribute('data-index'));
+    setOpen(index);
+  };
+
+  const createHandleMouseLeave = otherHandlers => event => {
+    var _otherHandlers$onMous3;
+
+    (_otherHandlers$onMous3 = otherHandlers.onMouseLeave) == null ? void 0 : _otherHandlers$onMous3.call(otherHandlers, event);
+    setOpen(-1);
+  };
+
+  const getThumbProps = otherHandlers => {
+    const ownEventHandlers = {
+      onMouseOver: createHandleMouseOver(otherHandlers || {}),
+      onMouseLeave: createHandleMouseLeave(otherHandlers || {})
+    };
+
+    const mergedEventHandlers = (0,esm_extends/* default */.Z)({}, otherHandlers, ownEventHandlers);
+
+    return (0,esm_extends/* default */.Z)({}, mergedEventHandlers);
+  };
+
+  const getHiddenInputProps = otherHandlers => {
+    const ownEventHandlers = {
+      onChange: createHandleHiddenInputChange(otherHandlers || {}),
+      onFocus: createHandleHiddenInputFocus(otherHandlers || {}),
+      onBlur: createHandleHiddenInputBlur(otherHandlers || {})
+    };
+
+    const mergedEventHandlers = (0,esm_extends/* default */.Z)({}, otherHandlers, ownEventHandlers);
+
+    return (0,esm_extends/* default */.Z)({
+      tabIndex,
+      'aria-labelledby': ariaLabelledby,
+      'aria-orientation': orientation,
+      'aria-valuemax': scale(max),
+      'aria-valuemin': scale(min),
+      name,
+      type: 'range',
+      min: props.min,
+      max: props.max,
+      step: props.step,
+      disabled
+    }, mergedEventHandlers, {
+      style: (0,esm_extends/* default */.Z)({}, visuallyHidden/* default */.Z, {
+        direction: isRtl ? 'rtl' : 'ltr',
+        // So that VoiceOver's focus indicator matches the thumb's dimensions
+        width: '100%',
+        height: '100%'
+      })
+    });
+  };
+
+  return {
+    axis,
+    axisProps,
+    getRootProps,
+    getHiddenInputProps,
+    getThumbProps,
+    dragging,
+    marks,
+    values,
+    active,
+    focusVisible,
+    open,
+    range,
+    trackOffset,
+    trackLeap
+  };
+}
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(74750);
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/SliderUnstyled/SliderUnstyled.js
+
+
+const _excluded = ["aria-label", "aria-valuetext", "className", "component", "classes", "disableSwap", "disabled", "getAriaLabel", "getAriaValueText", "marks", "max", "min", "name", "onChange", "onChangeCommitted", "onMouseDown", "orientation", "scale", "step", "tabIndex", "track", "value", "valueLabelDisplay", "valueLabelFormat", "isRtl", "components", "componentsProps"];
+
+
+
+
+
+
+
+
+
+
+
+
+
+const SliderUnstyled_Identity = x => x;
+
+const useUtilityClasses = ownerState => {
+  const {
     disabled,
     dragging,
+    marked,
+    orientation,
+    track,
+    classes
+  } = ownerState;
+  const slots = {
+    root: ['root', disabled && 'disabled', dragging && 'dragging', marked && 'marked', orientation === 'vertical' && 'vertical', track === 'inverted' && 'trackInverted', track === false && 'trackFalse'],
+    rail: ['rail'],
+    track: ['track'],
+    mark: ['mark'],
+    markActive: ['markActive'],
+    markLabel: ['markLabel'],
+    markLabelActive: ['markLabelActive'],
+    valueLabel: ['valueLabel'],
+    thumb: ['thumb', disabled && 'disabled'],
+    active: ['active'],
+    disabled: ['disabled'],
+    focusVisible: ['focusVisible']
+  };
+  return (0,composeClasses/* default */.Z)(slots, sliderUnstyledClasses/* getSliderUtilityClass */.k, classes);
+};
+
+const Forward = ({
+  children
+}) => children;
+
+const SliderUnstyled = /*#__PURE__*/react.forwardRef(function SliderUnstyled(props, ref) {
+  var _ref, _components$Rail, _components$Track, _components$Thumb, _components$ValueLabe, _components$Mark, _components$MarkLabel;
+
+  const {
+    'aria-label': ariaLabel,
+    'aria-valuetext': ariaValuetext,
+    className,
+    component,
+    classes: classesProp,
+    disableSwap = false,
+    disabled = false,
+    getAriaLabel,
+    getAriaValueText,
+    marks: marksProp = false,
+    max = 100,
+    min = 0,
+    onMouseDown,
+    orientation = 'horizontal',
+    scale = SliderUnstyled_Identity,
+    step = 1,
+    track = 'normal',
+    valueLabelDisplay = 'off',
+    valueLabelFormat = SliderUnstyled_Identity,
+    isRtl = false,
+    components = {},
+    componentsProps = {}
+  } = props,
+        other = (0,objectWithoutPropertiesLoose/* default */.Z)(props, _excluded); // all props with defaults
+  // consider extracting to hook an reusing the lint rule for the varints
+
+
+  const ownerState = (0,esm_extends/* default */.Z)({}, props, {
+    mark: marksProp,
+    classes: classesProp,
+    disabled,
     isRtl,
-    marked: marks.length > 0 && marks.some(mark => mark.label),
     max,
     min,
     orientation,
@@ -3065,24 +3458,56 @@ const SliderUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or sup
     valueLabelFormat
   });
 
+  const {
+    axisProps,
+    getRootProps,
+    getHiddenInputProps,
+    getThumbProps,
+    open,
+    active,
+    axis,
+    range,
+    focusVisible,
+    dragging,
+    marks,
+    values,
+    trackOffset,
+    trackLeap
+  } = useSlider((0,esm_extends/* default */.Z)({}, ownerState, {
+    ref
+  }));
+  ownerState.marked = marks.length > 0 && marks.some(mark => mark.label);
+  ownerState.dragging = dragging;
+  const Root = (_ref = component != null ? component : components.Root) != null ? _ref : 'span';
+  const rootProps = (0,appendOwnerState/* default */.Z)(Root, (0,esm_extends/* default */.Z)({}, other, componentsProps.root), ownerState);
+  const Rail = (_components$Rail = components.Rail) != null ? _components$Rail : 'span';
+  const railProps = (0,appendOwnerState/* default */.Z)(Rail, componentsProps.rail, ownerState);
+  const Track = (_components$Track = components.Track) != null ? _components$Track : 'span';
+  const trackProps = (0,appendOwnerState/* default */.Z)(Track, componentsProps.track, ownerState);
+
+  const trackStyle = (0,esm_extends/* default */.Z)({}, axisProps[axis].offset(trackOffset), axisProps[axis].leap(trackLeap));
+
+  const Thumb = (_components$Thumb = components.Thumb) != null ? _components$Thumb : 'span';
+  const thumbProps = (0,appendOwnerState/* default */.Z)(Thumb, componentsProps.thumb, ownerState);
+  const ValueLabel = (_components$ValueLabe = components.ValueLabel) != null ? _components$ValueLabe : SliderValueLabelUnstyled/* default */.Z;
+  const valueLabelProps = (0,appendOwnerState/* default */.Z)(ValueLabel, componentsProps.valueLabel, ownerState);
+  const Mark = (_components$Mark = components.Mark) != null ? _components$Mark : 'span';
+  const markProps = (0,appendOwnerState/* default */.Z)(Mark, componentsProps.mark, ownerState);
+  const MarkLabel = (_components$MarkLabel = components.MarkLabel) != null ? _components$MarkLabel : 'span';
+  const markLabelProps = (0,appendOwnerState/* default */.Z)(MarkLabel, componentsProps.markLabel, ownerState);
+  const Input = components.Input || 'input';
+  const inputProps = (0,appendOwnerState/* default */.Z)(Input, componentsProps.input, ownerState);
+  const hiddenInputProps = getHiddenInputProps();
   const classes = useUtilityClasses(ownerState);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(Root, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({
-    ref: handleRef,
-    onMouseDown: handleMouseDown
-  }, rootProps, !(0,_utils_isHostComponent__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z)(Root) && {
-    as: component,
-    ownerState: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, ownerState, rootProps.ownerState)
-  }, other, {
-    className: (0,clsx__WEBPACK_IMPORTED_MODULE_14__["default"])(classes.root, rootProps.className, className),
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Rail, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, railProps, !(0,_utils_isHostComponent__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z)(Rail) && {
-      ownerState: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, ownerState, railProps.ownerState)
-    }, {
-      className: (0,clsx__WEBPACK_IMPORTED_MODULE_14__["default"])(classes.rail, railProps.className)
-    })), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Track, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, trackProps, !(0,_utils_isHostComponent__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z)(Track) && {
-      ownerState: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, ownerState, trackProps.ownerState)
-    }, {
-      className: (0,clsx__WEBPACK_IMPORTED_MODULE_14__["default"])(classes.track, trackProps.className),
-      style: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, trackStyle, trackProps.style)
+  return /*#__PURE__*/(0,jsx_runtime.jsxs)(Root, (0,esm_extends/* default */.Z)({}, rootProps, getRootProps({
+    onMouseDown
+  }), {
+    className: (0,clsx_m["default"])(classes.root, rootProps.className, className),
+    children: [/*#__PURE__*/(0,jsx_runtime.jsx)(Rail, (0,esm_extends/* default */.Z)({}, railProps, {
+      className: (0,clsx_m["default"])(classes.rail, railProps.className)
+    })), /*#__PURE__*/(0,jsx_runtime.jsx)(Track, (0,esm_extends/* default */.Z)({}, trackProps, {
+      className: (0,clsx_m["default"])(classes.track, trackProps.className),
+      style: (0,esm_extends/* default */.Z)({}, trackStyle, trackProps.style)
     })), marks.map((mark, index) => {
       const percent = valueToPercent(mark.value, min, max);
       const style = axisProps[axis].offset(percent);
@@ -3094,24 +3519,22 @@ const SliderUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or sup
         markActive = track === 'normal' && (range ? mark.value >= values[0] && mark.value <= values[values.length - 1] : mark.value <= values[0]) || track === 'inverted' && (range ? mark.value <= values[0] || mark.value >= values[values.length - 1] : mark.value >= values[0]);
       }
 
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Mark, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({
+      return /*#__PURE__*/(0,jsx_runtime.jsxs)(react.Fragment, {
+        children: [/*#__PURE__*/(0,jsx_runtime.jsx)(Mark, (0,esm_extends/* default */.Z)({
           "data-index": index
-        }, markProps, !(0,_utils_isHostComponent__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z)(Mark) && {
-          ownerState: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, ownerState, markProps.ownerState),
+        }, markProps, !(0,isHostComponent/* default */.Z)(Mark) && {
           markActive
         }, {
-          style: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, style, markProps.style),
-          className: (0,clsx__WEBPACK_IMPORTED_MODULE_14__["default"])(classes.mark, markProps.className, markActive && classes.markActive)
-        })), mark.label != null ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(MarkLabel, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({
+          style: (0,esm_extends/* default */.Z)({}, style, markProps.style),
+          className: (0,clsx_m["default"])(classes.mark, markProps.className, markActive && classes.markActive)
+        })), mark.label != null ? /*#__PURE__*/(0,jsx_runtime.jsx)(MarkLabel, (0,esm_extends/* default */.Z)({
           "aria-hidden": true,
           "data-index": index
-        }, markLabelProps, !(0,_utils_isHostComponent__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z)(MarkLabel) && {
-          ownerState: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, ownerState, markLabelProps.ownerState)
+        }, markLabelProps, !(0,isHostComponent/* default */.Z)(MarkLabel) && {
+          markLabelActive: markActive
         }, {
-          markLabelActive: markActive,
-          style: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, style, markLabelProps.style),
-          className: (0,clsx__WEBPACK_IMPORTED_MODULE_14__["default"])(classes.markLabel, markLabelProps.className, markActive && classes.markLabelActive),
+          style: (0,esm_extends/* default */.Z)({}, style, markLabelProps.style),
+          className: (0,clsx_m["default"])(classes.markLabel, markLabelProps.className, markActive && classes.markLabelActive),
           children: mark.label
         })) : null]
       }, mark.value);
@@ -3119,82 +3542,57 @@ const SliderUnstyled = /*#__PURE__*/(/* runtime-dependent pure expression or sup
       const percent = valueToPercent(value, min, max);
       const style = axisProps[axis].offset(percent);
       const ValueLabelComponent = valueLabelDisplay === 'off' ? Forward : ValueLabel;
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ValueLabelComponent, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({
-          valueLabelFormat: valueLabelFormat,
-          valueLabelDisplay: valueLabelDisplay,
+      return /*#__PURE__*/(0,jsx_runtime.jsx)(react.Fragment, {
+        children: /*#__PURE__*/(0,jsx_runtime.jsx)(ValueLabelComponent, (0,esm_extends/* default */.Z)({}, !(0,isHostComponent/* default */.Z)(ValueLabelComponent) && {
+          valueLabelFormat,
+          valueLabelDisplay,
           value: typeof valueLabelFormat === 'function' ? valueLabelFormat(scale(value), index) : valueLabelFormat,
-          index: index,
+          index,
           open: open === index || active === index || valueLabelDisplay === 'on',
-          disabled: disabled
+          disabled
         }, valueLabelProps, {
-          className: (0,clsx__WEBPACK_IMPORTED_MODULE_14__["default"])(classes.valueLabel, valueLabelProps.className)
-        }, !(0,_utils_isHostComponent__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z)(ValueLabel) && {
-          ownerState: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, ownerState, valueLabelProps.ownerState)
-        }, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Thumb, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({
-            "data-index": index,
-            onMouseOver: handleMouseOver,
-            onMouseLeave: handleMouseLeave
-          }, thumbProps, {
-            className: (0,clsx__WEBPACK_IMPORTED_MODULE_14__["default"])(classes.thumb, thumbProps.className, active === index && classes.active, focusVisible === index && classes.focusVisible)
-          }, !(0,_utils_isHostComponent__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z)(Thumb) && {
-            ownerState: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, ownerState, thumbProps.ownerState)
+          className: (0,clsx_m["default"])(classes.valueLabel, valueLabelProps.className),
+          children: /*#__PURE__*/(0,jsx_runtime.jsx)(Thumb, (0,esm_extends/* default */.Z)({
+            "data-index": index
+          }, thumbProps, getThumbProps(), {
+            className: (0,clsx_m["default"])(classes.thumb, thumbProps.className, active === index && classes.active, focusVisible === index && classes.focusVisible)
+          }, !(0,isHostComponent/* default */.Z)(Thumb) && {
+            ownerState: (0,esm_extends/* default */.Z)({}, ownerState, thumbProps.ownerState)
           }, {
-            style: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, style, {
+            style: (0,esm_extends/* default */.Z)({}, style, {
               pointerEvents: disableSwap && active !== index ? 'none' : undefined
             }, thumbProps.style),
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
-              tabIndex: tabIndex,
+            children: /*#__PURE__*/(0,jsx_runtime.jsx)(Input, (0,esm_extends/* default */.Z)({}, hiddenInputProps, {
               "data-index": index,
               "aria-label": getAriaLabel ? getAriaLabel(index) : ariaLabel,
-              "aria-labelledby": ariaLabelledby,
-              "aria-orientation": orientation,
-              "aria-valuemax": scale(max),
-              "aria-valuemin": scale(min),
               "aria-valuenow": scale(value),
               "aria-valuetext": getAriaValueText ? getAriaValueText(scale(value), index) : ariaValuetext,
-              onFocus: handleFocus,
-              onBlur: handleBlur,
-              name: name,
-              type: "range",
-              min: props.min,
-              max: props.max,
-              step: props.step,
-              disabled: disabled,
-              value: values[index],
-              onChange: handleHiddenInputChange,
-              style: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)({}, _mui_utils__WEBPACK_IMPORTED_MODULE_15__/* ["default"] */ .Z, {
-                direction: isRtl ? 'rtl' : 'ltr',
-                // So that VoiceOver's focus indicator matches the thumb's dimensions
-                width: '100%',
-                height: '100%'
-              })
-            })
+              value: values[index]
+            }, !(0,isHostComponent/* default */.Z)(Input) && {
+              ownerState: (0,esm_extends/* default */.Z)({}, ownerState, inputProps.ownerState)
+            }, inputProps, {
+              style: (0,esm_extends/* default */.Z)({}, hiddenInputProps.style, inputProps.style)
+            }))
           }))
         }))
       }, index);
     })]
   }));
-})) : null);
+});
  false ? 0 : void 0;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (SliderUnstyled) : null));
+/* harmony default export */ const SliderUnstyled_SliderUnstyled = (SliderUnstyled);
 
 /***/ }),
 
-/***/ 29303:
+/***/ 47092:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(25789);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _sliderUnstyledClasses__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3798);
-}
+/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(25789);
+/* harmony import */ var _sliderUnstyledClasses__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(43798);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(74750);
 
 
@@ -3246,60 +3644,46 @@ function SliderValueLabelUnstyled(props) {
 }
 
  false ? 0 : void 0;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (SliderValueLabelUnstyled) : null));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SliderValueLabelUnstyled);
 
 /***/ }),
 
-/***/ 3798:
+/***/ 43798:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "k": () => (/* binding */ getSliderUtilityClass),
-/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   "k": () => (/* binding */ getSliderUtilityClass)
 /* harmony export */ });
-/* harmony import */ var _generateUtilityClasses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(38926);
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1830);
-}
+/* harmony import */ var _generateUtilityClasses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(81232);
+/* harmony import */ var _generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(94626);
 
 
 function getSliderUtilityClass(slot) {
   return (0,_generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)('MuiSlider', slot);
 }
 const sliderUnstyledClasses = (0,_generateUtilityClasses__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)('MuiSlider', ['root', 'active', 'focusVisible', 'disabled', 'dragging', 'marked', 'vertical', 'trackInverted', 'trackFalse', 'rail', 'track', 'mark', 'markActive', 'markLabel', 'markLabelActive', 'thumb', 'valueLabel', 'valueLabelOpen', 'valueLabelCircle', 'valueLabelLabel']);
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (sliderUnstyledClasses) : null));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (sliderUnstyledClasses);
 
 /***/ }),
 
-/***/ 48091:
+/***/ 45130:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(37879);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(93817);
-}
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(97538);
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(93086);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5213);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(23342);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(79138);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(23471);
-}
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(11419);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(92189);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(78655);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(98253);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(74750);
 
 
-const _excluded = (/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (["onChange", "maxRows", "minRows", "style", "value"]) : null);
+const _excluded = ["onChange", "maxRows", "minRows", "style", "value"];
 
 
 
@@ -3325,7 +3709,7 @@ const styles = {
     transform: 'translateZ(0)'
   }
 };
-const TextareaAutosize = /*#__PURE__*/(/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(function TextareaAutosize(props, ref) {
+const TextareaAutosize = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(function TextareaAutosize(props, ref) {
   const {
     onChange,
     maxRows,
@@ -3468,328 +3852,13 @@ const TextareaAutosize = /*#__PURE__*/(/* runtime-dependent pure expression or s
       })
     })]
   });
-})) : null);
+});
  false ? 0 : void 0;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (TextareaAutosize) : null));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TextareaAutosize);
 
 /***/ }),
 
-/***/ 67055:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5213);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(81749);
-}
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(74750);
-/* eslint-disable @typescript-eslint/naming-convention, consistent-return, jsx-a11y/no-noninteractive-tabindex */
-
-
- // Inspired by https://github.com/focus-trap/tabbable
-
-
-
-const candidatesSelector = ['input', 'select', 'textarea', 'a[href]', 'button', '[tabindex]', 'audio[controls]', 'video[controls]', '[contenteditable]:not([contenteditable="false"])'].join(',');
-
-function getTabIndex(node) {
-  const tabindexAttr = parseInt(node.getAttribute('tabindex'), 10);
-
-  if (!Number.isNaN(tabindexAttr)) {
-    return tabindexAttr;
-  } // Browsers do not return `tabIndex` correctly for contentEditable nodes;
-  // https://bugs.chromium.org/p/chromium/issues/detail?id=661108&q=contenteditable%20tabindex&can=2
-  // so if they don't have a tabindex attribute specifically set, assume it's 0.
-  // in Chrome, <details/>, <audio controls/> and <video controls/> elements get a default
-  //  `tabIndex` of -1 when the 'tabindex' attribute isn't specified in the DOM,
-  //  yet they are still part of the regular tab order; in FF, they get a default
-  //  `tabIndex` of 0; since Chrome still puts those elements in the regular tab
-  //  order, consider their tab index to be 0.
-
-
-  if (node.contentEditable === 'true' || (node.nodeName === 'AUDIO' || node.nodeName === 'VIDEO' || node.nodeName === 'DETAILS') && node.getAttribute('tabindex') === null) {
-    return 0;
-  }
-
-  return node.tabIndex;
-}
-
-function isNonTabbableRadio(node) {
-  if (node.tagName !== 'INPUT' || node.type !== 'radio') {
-    return false;
-  }
-
-  if (!node.name) {
-    return false;
-  }
-
-  const getRadio = selector => node.ownerDocument.querySelector(`input[type="radio"]${selector}`);
-
-  let roving = getRadio(`[name="${node.name}"]:checked`);
-
-  if (!roving) {
-    roving = getRadio(`[name="${node.name}"]`);
-  }
-
-  return roving !== node;
-}
-
-function isNodeMatchingSelectorFocusable(node) {
-  if (node.disabled || node.tagName === 'INPUT' && node.type === 'hidden' || isNonTabbableRadio(node)) {
-    return false;
-  }
-
-  return true;
-}
-
-function defaultGetTabbable(root) {
-  const regularTabNodes = [];
-  const orderedTabNodes = [];
-  Array.from(root.querySelectorAll(candidatesSelector)).forEach((node, i) => {
-    const nodeTabIndex = getTabIndex(node);
-
-    if (nodeTabIndex === -1 || !isNodeMatchingSelectorFocusable(node)) {
-      return;
-    }
-
-    if (nodeTabIndex === 0) {
-      regularTabNodes.push(node);
-    } else {
-      orderedTabNodes.push({
-        documentOrder: i,
-        tabIndex: nodeTabIndex,
-        node
-      });
-    }
-  });
-  return orderedTabNodes.sort((a, b) => a.tabIndex === b.tabIndex ? a.documentOrder - b.documentOrder : a.tabIndex - b.tabIndex).map(a => a.node).concat(regularTabNodes);
-}
-
-function defaultIsEnabled() {
-  return true;
-}
-/**
- * Utility component that locks focus inside the component.
- */
-
-
-function Unstable_TrapFocus(props) {
-  const {
-    children,
-    disableAutoFocus = false,
-    disableEnforceFocus = false,
-    disableRestoreFocus = false,
-    getTabbable = defaultGetTabbable,
-    isEnabled = defaultIsEnabled,
-    open
-  } = props;
-  const ignoreNextEnforceFocus = react__WEBPACK_IMPORTED_MODULE_0__.useRef();
-  const sentinelStart = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null);
-  const sentinelEnd = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null);
-  const nodeToRestore = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null);
-  const reactFocusEventTarget = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null); // This variable is useful when disableAutoFocus is true.
-  // It waits for the active element to move into the component to activate.
-
-  const activated = react__WEBPACK_IMPORTED_MODULE_0__.useRef(false);
-  const rootRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null);
-  const handleRef = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(children.ref, rootRef);
-  const lastKeydown = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null);
-  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-    // We might render an empty child.
-    if (!open || !rootRef.current) {
-      return;
-    }
-
-    activated.current = !disableAutoFocus;
-  }, [disableAutoFocus, open]);
-  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-    // We might render an empty child.
-    if (!open || !rootRef.current) {
-      return;
-    }
-
-    const doc = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z)(rootRef.current);
-
-    if (!rootRef.current.contains(doc.activeElement)) {
-      if (!rootRef.current.hasAttribute('tabIndex')) {
-        if (false) {}
-
-        rootRef.current.setAttribute('tabIndex', -1);
-      }
-
-      if (activated.current) {
-        rootRef.current.focus();
-      }
-    }
-
-    return () => {
-      // restoreLastFocus()
-      if (!disableRestoreFocus) {
-        // In IE11 it is possible for document.activeElement to be null resulting
-        // in nodeToRestore.current being null.
-        // Not all elements in IE11 have a focus method.
-        // Once IE11 support is dropped the focus() call can be unconditional.
-        if (nodeToRestore.current && nodeToRestore.current.focus) {
-          ignoreNextEnforceFocus.current = true;
-          nodeToRestore.current.focus();
-        }
-
-        nodeToRestore.current = null;
-      }
-    }; // Missing `disableRestoreFocus` which is fine.
-    // We don't support changing that prop on an open TrapFocus
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open]);
-  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-    // We might render an empty child.
-    if (!open || !rootRef.current) {
-      return;
-    }
-
-    const doc = (0,_mui_utils__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z)(rootRef.current);
-
-    const contain = nativeEvent => {
-      const {
-        current: rootElement
-      } = rootRef; // Cleanup functions are executed lazily in React 17.
-      // Contain can be called between the component being unmounted and its cleanup function being run.
-
-      if (rootElement === null) {
-        return;
-      }
-
-      if (!doc.hasFocus() || disableEnforceFocus || !isEnabled() || ignoreNextEnforceFocus.current) {
-        ignoreNextEnforceFocus.current = false;
-        return;
-      }
-
-      if (!rootElement.contains(doc.activeElement)) {
-        // if the focus event is not coming from inside the children's react tree, reset the refs
-        if (nativeEvent && reactFocusEventTarget.current !== nativeEvent.target || doc.activeElement !== reactFocusEventTarget.current) {
-          reactFocusEventTarget.current = null;
-        } else if (reactFocusEventTarget.current !== null) {
-          return;
-        }
-
-        if (!activated.current) {
-          return;
-        }
-
-        let tabbable = [];
-
-        if (doc.activeElement === sentinelStart.current || doc.activeElement === sentinelEnd.current) {
-          tabbable = getTabbable(rootRef.current);
-        }
-
-        if (tabbable.length > 0) {
-          var _lastKeydown$current, _lastKeydown$current2;
-
-          const isShiftTab = Boolean(((_lastKeydown$current = lastKeydown.current) == null ? void 0 : _lastKeydown$current.shiftKey) && ((_lastKeydown$current2 = lastKeydown.current) == null ? void 0 : _lastKeydown$current2.key) === 'Tab');
-          const focusNext = tabbable[0];
-          const focusPrevious = tabbable[tabbable.length - 1];
-
-          if (isShiftTab) {
-            focusPrevious.focus();
-          } else {
-            focusNext.focus();
-          }
-        } else {
-          rootElement.focus();
-        }
-      }
-    };
-
-    const loopFocus = nativeEvent => {
-      lastKeydown.current = nativeEvent;
-
-      if (disableEnforceFocus || !isEnabled() || nativeEvent.key !== 'Tab') {
-        return;
-      } // Make sure the next tab starts from the right place.
-      // doc.activeElement referes to the origin.
-
-
-      if (doc.activeElement === rootRef.current && nativeEvent.shiftKey) {
-        // We need to ignore the next contain as
-        // it will try to move the focus back to the rootRef element.
-        ignoreNextEnforceFocus.current = true;
-        sentinelEnd.current.focus();
-      }
-    };
-
-    doc.addEventListener('focusin', contain);
-    doc.addEventListener('keydown', loopFocus, true); // With Edge, Safari and Firefox, no focus related events are fired when the focused area stops being a focused area.
-    // e.g. https://bugzilla.mozilla.org/show_bug.cgi?id=559561.
-    // Instead, we can look if the active element was restored on the BODY element.
-    //
-    // The whatwg spec defines how the browser should behave but does not explicitly mention any events:
-    // https://html.spec.whatwg.org/multipage/interaction.html#focus-fixup-rule.
-
-    const interval = setInterval(() => {
-      if (doc.activeElement.tagName === 'BODY') {
-        contain();
-      }
-    }, 50);
-    return () => {
-      clearInterval(interval);
-      doc.removeEventListener('focusin', contain);
-      doc.removeEventListener('keydown', loopFocus, true);
-    };
-  }, [disableAutoFocus, disableEnforceFocus, disableRestoreFocus, isEnabled, open, getTabbable]);
-
-  const onFocus = event => {
-    if (nodeToRestore.current === null) {
-      nodeToRestore.current = event.relatedTarget;
-    }
-
-    activated.current = true;
-    reactFocusEventTarget.current = event.target;
-    const childrenPropsHandler = children.props.onFocus;
-
-    if (childrenPropsHandler) {
-      childrenPropsHandler(event);
-    }
-  };
-
-  const handleFocusSentinel = event => {
-    if (nodeToRestore.current === null) {
-      nodeToRestore.current = event.relatedTarget;
-    }
-
-    activated.current = true;
-  };
-
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-      tabIndex: 0,
-      onFocus: handleFocusSentinel,
-      ref: sentinelStart,
-      "data-test": "sentinelStart"
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.cloneElement(children, {
-      ref: handleRef,
-      onFocus
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-      tabIndex: 0,
-      onFocus: handleFocusSentinel,
-      ref: sentinelEnd,
-      "data-test": "sentinelEnd"
-    })]
-  });
-}
-
- false ? 0 : void 0;
-
-if (false) {}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (Unstable_TrapFocus) : null));
-
-/***/ }),
-
-/***/ 85186:
+/***/ 51764:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -3817,7 +3886,7 @@ function composeClasses(slots, getUtilityClass, classes) {
 
 /***/ }),
 
-/***/ 6336:
+/***/ 15486:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -3848,13 +3917,13 @@ const ClassNameGenerator = createClassNameGenerator();
 
 /***/ }),
 
-/***/ 1830:
+/***/ 94626:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (/* binding */ generateUtilityClass)
 /* harmony export */ });
-/* harmony import */ var _ClassNameGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6336);
+/* harmony import */ var _ClassNameGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15486);
 
 const globalStateClassesMapping = {
   active: 'Mui-active',
@@ -3875,13 +3944,13 @@ function generateUtilityClass(componentName, slot) {
 
 /***/ }),
 
-/***/ 38926:
+/***/ 81232:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (/* binding */ generateUtilityClasses)
 /* harmony export */ });
-/* harmony import */ var _generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1830);
+/* harmony import */ var _generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(94626);
 
 function generateUtilityClasses(componentName, slots) {
   const result = {};
@@ -3893,18 +3962,14 @@ function generateUtilityClasses(componentName, slots) {
 
 /***/ }),
 
-/***/ 70545:
+/***/ 57247:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (/* binding */ appendOwnerState)
 /* harmony export */ });
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(37879);
-}
-if (4554 != __webpack_require__.j) {
-	/* harmony import */ var _isHostComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(90109);
-}
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(97538);
+/* harmony import */ var _isHostComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(85745);
 
 
 /**
@@ -3927,7 +3992,7 @@ function appendOwnerState(elementType, existingProps = {}, ownerState) {
 
 /***/ }),
 
-/***/ 90109:
+/***/ 85745:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -3940,7 +4005,7 @@ function isHostComponent(element) {
   return typeof element === 'string';
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((/* runtime-dependent pure expression or super */ 4554 != __webpack_require__.j ? (isHostComponent) : null));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (isHostComponent);
 
 /***/ })
 

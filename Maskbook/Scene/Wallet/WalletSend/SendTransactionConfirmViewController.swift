@@ -207,6 +207,28 @@ class SendTransactionConfirmViewController: BaseViewController {
         return button
     }()
     
+    let warningImage: UIImageView = {
+         let image = UIImageView()
+         image.image = Asset.Images.Scene.Alert.warning.image
+         return image
+     }()
+
+     let warningLabel: UILabel = {
+         let label = UILabel()
+         label.font = FontStyles.MH7
+         label.textColor = Asset.Colors.Public.warnings.color
+         label.text = L10n.Scene.Sendtransaction.Send.gasfeeError
+         return label
+     }()
+
+     lazy var warningView: UIView = {
+         let view = UIView()
+         view.applyCornerRadius(radius: 16)
+         view.backgroundColor = Asset.Colors.Background.warningsBg.color
+         view.isHidden = true
+         return view
+     }()
+    
     let sendButton: PrimeryButton =  {
         let button = PrimeryButton(title: L10n.Scene.Sendtransaction.Send.btnSend)
         button.tintColor = Asset.Colors.AccountCard.nameText.color
@@ -363,6 +385,26 @@ class SendTransactionConfirmViewController: BaseViewController {
             view.trailingAnchor.constraint(equalTo: passwordStackView.trailingAnchor)
         ])
         
+        view.addSubview(warningView)
+        warningView.snp.makeConstraints {
+            $0.height.equalTo(56)
+            $0.left.right.equalTo(amountTextField)
+            $0.top.equalTo(passwordStackView.snp.bottom).offset(20)
+        }
+
+        warningView.addSubview(warningImage)
+        warningImage.snp.makeConstraints {
+            $0.size.equalTo(CGSize(width: 20, height: 20))
+            $0.centerY.equalTo(warningView)
+            $0.left.equalTo(18)
+        }
+
+        warningView.addSubview(warningLabel)
+        warningLabel.snp.makeConstraints {
+            $0.centerY.equalTo(warningView)
+            $0.left.equalTo(warningImage.snp.right).offset(12)
+        }
+        
         view.addSubview(sendButton)
         sendButton.snp.makeConstraints { make in
             make.right.equalTo(-23)
@@ -432,7 +474,12 @@ class SendTransactionConfirmViewController: BaseViewController {
                 guard let price = gasFeeToken?.price else { return }
                 let gasFee = EthUtil.getGasFee(gwei: gasPrice, gasLimit: gasLimit, price: price.doubleValue)
                 self?.feeButton.setTitle("\(L10n.Scene.Sendtransaction.Gasprice.fee) :\(maskUserDefaults.currency.symbol)\(gasFee)", for: .normal)
-                self?.sendButton.isEnabled = true
+                
+                guard let totalAmount = gasFeeToken?.displayQuantity else { return }
+                guard let gas = Web3.Utils.formatToEthereumUnits(gasPrice * gasLimit, toUnits: .eth, decimals: 6) else { return }
+                let isShow = NSDecimalNumber(string: gas).compare(totalAmount) == .orderedDescending
+                self?.warningView.isHidden = !isShow
+                self?.sendButton.isEnabled = !isShow
             }
             .store(in: &subscriptions)
         

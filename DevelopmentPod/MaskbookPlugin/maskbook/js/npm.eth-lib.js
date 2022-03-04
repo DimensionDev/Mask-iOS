@@ -590,7 +590,7 @@ module.exports = {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
 const Bytes = __webpack_require__(57587);
-const Nat = __webpack_require__(87518);
+const Nat = __webpack_require__(26605);
 const elliptic = __webpack_require__(75367);
 const rlp = __webpack_require__(9572);
 const secp256k1 = new elliptic.ec("secp256k1"); // eslint-disable-line
@@ -1192,7 +1192,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 87518:
+/***/ 26605:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 const BN = __webpack_require__(28891);

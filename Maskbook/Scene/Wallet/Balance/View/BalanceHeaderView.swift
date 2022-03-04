@@ -27,7 +27,9 @@ class BalanceHeaderView: UITableViewHeaderFooterView {
         }
     }
     
-    let segments = BalanceSegmentView()
+    let segments = BalanceSegmentView().cv.apply { view in
+        view.indicatorView.backgroundColor = Asset.Colors.Background.blue.color
+    }
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)

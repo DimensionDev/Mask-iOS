@@ -1,6 +1,6 @@
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[8019],{
 
-/***/ 10592:
+/***/ 69906:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var Web3 = __webpack_require__(24373);
@@ -117,7 +117,7 @@ module.exports = SolidityTypeBytes;
 
 /***/ }),
 
-/***/ 61928:
+/***/ 45191:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /*
@@ -2248,7 +2248,7 @@ module.exports = Web3;
  */
 
 var sha3 = __webpack_require__(50224);
-var SolidityEvent = __webpack_require__(4778);
+var SolidityEvent = __webpack_require__(97774);
 var formatters = __webpack_require__(95096);
 var utils = __webpack_require__(70472);
 var Filter = __webpack_require__(91023);
@@ -2415,8 +2415,8 @@ module.exports = Batch;
  */
 
 var utils = __webpack_require__(70472);
-var coder = __webpack_require__(61928);
-var SolidityEvent = __webpack_require__(4778);
+var coder = __webpack_require__(45191);
+var SolidityEvent = __webpack_require__(97774);
 var SolidityFunction = __webpack_require__(27100);
 var AllEvents = __webpack_require__(19960);
 
@@ -2756,7 +2756,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 4778:
+/***/ 97774:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /*
@@ -2782,7 +2782,7 @@ module.exports = {
  */
 
 var utils = __webpack_require__(70472);
-var coder = __webpack_require__(61928);
+var coder = __webpack_require__(45191);
 var formatters = __webpack_require__(95096);
 var sha3 = __webpack_require__(50224);
 var Filter = __webpack_require__(91023);
@@ -3621,7 +3621,7 @@ module.exports = {
  * @date 2015
  */
 
-var coder = __webpack_require__(61928);
+var coder = __webpack_require__(45191);
 var utils = __webpack_require__(70472);
 var errors = __webpack_require__(48048);
 var formatters = __webpack_require__(95096);
@@ -6416,7 +6416,7 @@ module.exports = IsSyncing;
  */
 
 var Iban = __webpack_require__(29995);
-var exchangeAbi = __webpack_require__(92805);
+var exchangeAbi = __webpack_require__(37327);
 
 /**
  * Should be used to make Iban transfer
@@ -6579,7 +6579,7 @@ module.exports = JSON.parse('[{"constant":true,"inputs":[{"name":"_name","type":
 
 /***/ }),
 
-/***/ 92805:
+/***/ 37327:
 /***/ ((module) => {
 
 "use strict";

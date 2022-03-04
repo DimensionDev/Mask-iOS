@@ -1802,8 +1802,8 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(16126);
-axios.CancelToken = __webpack_require__(65095);
+axios.Cancel = __webpack_require__(16449);
+axios.CancelToken = __webpack_require__(78813);
 axios.isCancel = __webpack_require__(26525);
 
 // Expose all/spread
@@ -1823,7 +1823,7 @@ module.exports["default"] = axios;
 
 /***/ }),
 
-/***/ 16126:
+/***/ 16449:
 /***/ ((module) => {
 
 "use strict";
@@ -1850,13 +1850,13 @@ module.exports = Cancel;
 
 /***/ }),
 
-/***/ 65095:
+/***/ 78813:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
 
-var Cancel = __webpack_require__(16126);
+var Cancel = __webpack_require__(16449);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.

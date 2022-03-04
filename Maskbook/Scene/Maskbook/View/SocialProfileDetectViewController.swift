@@ -36,7 +36,7 @@ class SocialProfileDetectViewController: UIViewController {
     
     lazy var avatarView: AvatarView = {
         let view = AvatarView(title: "")
-        view.applyCornerRadius(radius: 24)
+        view.applyCornerRadius(radius: 24, cornerCurve: .circular)
         view.backgroundColor = Asset.Colors.Public.blue.color
         
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -159,6 +159,7 @@ class SocialProfileDetectViewController: UIViewController {
         view.addSubview(connectButton)
         
         avatarView.title = String(viewModel.persona?.nickname?.dropFirst() ?? "")
+        avatarView.setNetworkURL(url: viewModel.persona?.avatar)
         
         let connected = viewModel.profiles.first?.connected ?? false
         hintTitle.text = connected ? L10n.Scene.Social.accountAlreadyConnected : L10n.Scene.Social.connectToMaskNetwork

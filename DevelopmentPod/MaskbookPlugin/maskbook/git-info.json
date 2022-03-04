@@ -1,11 +1,11 @@
 {
-    "BUILD_DATE": "2022-02-14T06:01:22.267Z",
-    "VERSION": "v1.29.12-1931-g638baffa2",
-    "TAG_NAME": "v2.1.0",
-    "COMMIT_HASH": "638baffa2",
-    "COMMIT_DATE": "2022-02-14T05:55:46.000Z",
-    "REMOTE_URL": "https://github.com/DimensionDev/Maskbook",
-    "BRANCH_NAME": "HEAD",
+    "BUILD_DATE": "2022-03-04T08:10:32.307Z",
+    "VERSION": "v1.29.12-2082-g1a6c3c7cb",
+    "TAG_NAME": "v2.5.0",
+    "COMMIT_HASH": "1a6c3c7cb",
+    "COMMIT_DATE": "2022-03-04T08:04:23.000Z",
+    "REMOTE_URL": "git@github.com:DimensionDev/Maskbook.git",
+    "BRANCH_NAME": "feat/sendRedpacketToNative",
     "DIRTY": false,
     "TAG_DIRTY": true
 }

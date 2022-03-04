@@ -1,6 +1,6 @@
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[3693],{
 
-/***/ 82263:
+/***/ 40460:
 /***/ (function(__unused_webpack_module, exports) {
 
 /// <reference types="./full.d.ts" />
@@ -959,7 +959,7 @@
 
 /***/ }),
 
-/***/ 62840:
+/***/ 72406:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -1012,9 +1012,10 @@ class r extends Error{constructor(r,e,t,n){super(e),this.name=r,this.code=t,this
 "use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "LE": () => (/* binding */ AsyncCall),
+/* harmony export */   "h4": () => (/* binding */ notify),
 /* harmony export */   "rc": () => (/* binding */ AsyncGeneratorCall)
 /* harmony export */ });
-/* unused harmony exports JSONSerialization, NoSerialization, batch, notify */
+/* unused harmony exports JSONSerialization, NoSerialization, batch */
 /// <reference types="./full.d.ts" />
 class CustomError extends Error {
     constructor( name, message,  code,  stack) {

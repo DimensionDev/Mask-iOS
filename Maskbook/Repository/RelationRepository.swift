@@ -64,7 +64,7 @@ enum RelationRepository {
             
             let records = try queryContext.fetch(fetchRequest)
             let filteredRecords = records.filter { record in
-                guard let profile = ProfileRepository.queryProfile(identifier: record.profileIdentifier).first else {
+                guard let profile = ProfileRepository.queryProfile(identifier: record.profileIdentifier) else {
                     return false
                 }
                 if let network = network {

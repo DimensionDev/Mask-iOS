@@ -7,12 +7,18 @@
 //
 
 import UIKit
+import Kingfisher
 
 class AvatarView: UIView {
     lazy var label: UILabel = {
         let view = UILabel()
         view.textColor = Asset.Colors.Public.white.color
         return view
+    }()
+    
+    lazy var imageView: UIImageView = {
+        let imageView = UIImageView()
+        return imageView
     }()
     
     var title: String? {
@@ -26,32 +32,59 @@ class AvatarView: UIView {
         }
         
         get {
-            return label.text
+            label.text
         }
+    }
+    
+    func setNetworkURL(url: String?) {
+        imageView.kf.cancelDownloadTask()
+        if let url = url {
+            imageView.isHidden = false
+            imageView.setNetworkImage(url: url)
+        } else {
+            imageView.isHidden = true
+            imageView.image = nil
+        }
+    }
+    
+    init() {
+        super.init(frame: .zero)
+        setupSubviews()
     }
     
     init(title: String?) {
         super.init(frame: .zero)
-        
-        self.backgroundColor = Asset.Colors.Public.blue.color
-        self.addSubview(label)
-        
+        setupSubviews()
         self.title = title
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    func setupSubviews() {
+        backgroundColor = Asset.Colors.Public.blue.color
+        clipsToBounds = true
+        withSubViews {
+            label
+            imageView
+        }
         NSLayoutConstraint.activate([
-            label.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            label.centerXAnchor.constraint(equalTo: self.centerXAnchor)
+            label.centerYAnchor.constraint(equalTo: centerYAnchor),
+            label.centerXAnchor.constraint(equalTo: centerXAnchor)
+        ])
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: topAnchor),
+            imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            imageView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.label.font = .systemFont(ofSize: floor(self.frame.height * 0.5), weight: .semibold)
+        label.font = .systemFont(ofSize: floor(frame.height * 0.5), weight: .semibold)
     }
 }
 

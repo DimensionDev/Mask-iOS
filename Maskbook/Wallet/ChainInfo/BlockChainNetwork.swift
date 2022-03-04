@@ -71,12 +71,12 @@ extension String {
 
 extension BlockChainNetwork: BlockChainNetworkRepresentable {
     var shortName: String {
-        switch rawValue {
+        switch self {
         case .eth: return L10n.Chain.ShortName.eth
         case .rinkeby: return L10n.Chain.ShortName.eth
         case .bsc: return L10n.Chain.ShortName.bsc
         case .polygon: return L10n.Chain.ShortName.polygon
-        case .polkd: return L10n.Chain.ShortName.dot
+        case .polka: return L10n.Chain.ShortName.dot
         case .arbitrum: return L10n.Chain.ShortName.arbitrum
         case .xdai: return L10n.Chain.ShortName.xdai
         case .optimism: return L10n.Chain.ShortName.optimism
@@ -87,12 +87,12 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
     }
 
     var name: String {
-        switch rawValue {
+        switch self {
         case .eth: return L10n.Chain.Name.eth
         case .rinkeby: return L10n.Chain.Name.eth + " Testnet Rinkeby"
         case .bsc: return L10n.Chain.Name.bsc
         case .polygon: return L10n.Chain.Name.polygon
-        case .polkd: return L10n.Chain.Name.dot
+        case .polka: return L10n.Chain.Name.dot
         case .arbitrum: return L10n.Chain.Name.arbitrum
         case .xdai: return L10n.Chain.ShortName.xdai
         case .optimism: return L10n.Chain.ShortName.optimism
@@ -103,12 +103,12 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
     }
     
     var selectedIcon: UIImage? {
-        switch rawValue {
+        switch self {
         case .eth: return Asset.Images.Scene.WalletList.Coins.ethSelected.image
         case .rinkeby: return Asset.Images.Scene.WalletList.Coins.ethSelected.image
         case .bsc: return Asset.Images.Scene.WalletList.Coins.bscSelected.image
         case .polygon: return Asset.Images.Scene.WalletList.Coins.polygonSelected.image
-        case .polkd: return nil
+        case .polka: return nil
         case .arbitrum: return Asset.Images.Scene.WalletList.Coins.arbitrumSelected.image
         case .xdai: return Asset.Images.Scene.WalletList.Coins.xdaiSelected.image
         case .optimism: return Asset.Images.Scene.WalletList.Coins.optimismSelected.image
@@ -119,12 +119,12 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
     }
     
     var unselectedIcon: UIImage? {
-        switch rawValue {
+        switch self {
         case .eth: return Asset.Images.Scene.WalletList.Coins.ethUnselected.image
         case .rinkeby: return Asset.Images.Scene.WalletList.Coins.ethUnselected.image
         case .bsc: return Asset.Images.Scene.WalletList.Coins.bscUnselected.image
         case .polygon: return Asset.Images.Scene.WalletList.Coins.polygonUnselected.image
-        case .polkd: return nil
+        case .polka: return nil
         case .arbitrum: return Asset.Images.Scene.WalletList.Coins.arbitrumUnselected.image
         case .xdai: return Asset.Images.Scene.WalletList.Coins.xdaiUnselected.image
         case .optimism: return Asset.Images.Scene.WalletList.Coins.optimismUnselected.image
@@ -135,11 +135,11 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
     }
     
     var smallIcon: UIImage? {
-        switch rawValue {
+        switch self {
         case .eth: return Asset.Images.Scene.Balance.SmallChain.eth.image
         case .bsc: return Asset.Images.Scene.Balance.SmallChain.bsc.image
         case .polygon: return Asset.Images.Scene.Balance.SmallChain.matic.image
-        case .polkd: return nil
+        case .polka: return nil
         case .arbitrum: return Asset.Images.Scene.Balance.SmallChain.arbitrum.image
         case .xdai: return Asset.Images.Scene.Balance.SmallChain.xdai.image
         case .optimism: return nil
@@ -150,7 +150,7 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
     }
     
     var tokenCardBgColor: UIColor? {
-        switch rawValue {
+        switch self {
         case .eth:
             return Asset.Colors.TokenDetail.Chains.eth.color
             
@@ -169,7 +169,7 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
         case .optimism:
             return Asset.Colors.TokenDetail.Chains.optimism.color
             
-        case .polkd:
+        case .polka:
             return nil
             
         default:
@@ -181,7 +181,7 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
         let coinId = Int64(chain.rawValue)
         let id = networkId
         
-        switch rawValue {
+        switch self {
         case .eth, .rinkeby:
             return MaskToken(coinId: coinId,
                              chainId: Int64(id),
@@ -227,7 +227,7 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
                              logoURI: nil,
                              address: "")
 
-        case .polkd: return nil
+        case .polka: return nil
         default: return nil
         }
     }
@@ -266,14 +266,14 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
     }
 
     func getScanUrl(hash: String) -> URL? {
-        switch rawValue {
+        switch self {
         case .eth, .rinkeby: return URL(string: "https://etherscan.io/tx/\(hash)")
         case .bsc: return URL(string: "https://bscscan.com/tx/\(hash)")
         case .polygon: return URL(string: "https://polygonscan.com/tx/\(hash)")
         case .arbitrum: return URL(string: "https://arbiscan.io/tx/\(hash)")
         case .xdai: return URL(string: "https://blockscout.com/xdai/mainnet/tx/\(hash)")
         case .optimism: return URL(string: "https://optimistic.etherscan.io/tx/\(hash)")
-        case .polkd: return nil
+        case .polka: return nil
         default: return nil
         }
     }

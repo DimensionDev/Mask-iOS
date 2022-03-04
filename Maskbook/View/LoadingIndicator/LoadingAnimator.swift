@@ -10,10 +10,5 @@ import UIKit
 
 protocol LoadingAnimatable: AnyObject {
     func startAnimation(for view: UIView, layoutIn bounds: CGRect)
-    var forgroundColor: UIColor { get }
-}
-
-// This will work when Swift 5.5 release with Xcode 13.0
-extension LoadingAnimatable where Self == SpinBallAnimator {
-   static var spinBall: Self { SpinBallAnimator() }
+    var forgroundColor: ColorAsset { get }
 }

@@ -101,7 +101,8 @@ extension SelectNetworkViewController: PanModalPresentable {
     }
     
     var longFormHeight: PanModalHeight {
-        return .contentHeight(344)
+        let heightOfItem = 85 * CGFloat(self.dataSource.tableView(self.tableView, numberOfRowsInSection: 0))
+        return .contentHeight(CGFloat(heightOfItem))
     }
 }
 
@@ -109,6 +110,7 @@ extension SelectNetworkViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let items = viewModel.menuItems.value
         viewModel.select(item: items[indexPath.row])
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
