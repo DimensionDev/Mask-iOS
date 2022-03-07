@@ -43,15 +43,15 @@ class BalanceHeaderView: UITableViewHeaderFooterView {
     
     private func _init() {
         contentView.backgroundColor = Asset.Colors.Background.normal.color
+        contentView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 22.5, bottom: 10, trailing: 22.5)
         
         contentView.addSubview(segments)
         segments.backgroundColor = .clear
         segments.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             segments.topAnchor.constraint(equalTo: contentView.topAnchor),
-            segments.leadingAnchor.constraint(equalTo: contentView.readableContentGuide.leadingAnchor, constant: 2),
-            segments.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,
-                                             constant: -10)
+            segments.leadingAnchor.constraint(equalTo: contentView.readableContentGuide.leadingAnchor),
+            segments.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
         
         segments.setItems(items: BalanceHeaderType.allCases.map(\.title))
