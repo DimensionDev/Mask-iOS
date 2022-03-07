@@ -9,7 +9,7 @@
 import UIKit
 
 final class SpinActivityAnimator: LoadingAnimatable {
-    var forgroundColor: UIColor { Asset.Colors.Public.blue.color }
+    var forgroundColor: ColorAsset { Asset.Colors.Public.blue }
     let spinWidth: CGFloat = 12.36
     let spinHeight: CGFloat = 4
 
@@ -52,19 +52,19 @@ final class SpinActivityAnimator: LoadingAnimatable {
         animation.repeatCount = HUGE
         animation.isRemovedOnCompletion = false
 
-        // Draw circles
+        // Draw spin
         for i in 0 ..< 12 {
             let width: CGFloat = {
                 if i == 5 { return 0 }
-                return i < 5 ? spinWidth : spinWidth * CGFloat(i) / CGFloat(12)
+                return i < 5 ? spinWidth : spinWidth * CGFloat(i) / 12.0
             }()
             let offset: CGFloat = spinWidth - width
             let circle = buildSpin(
-                angle: CGFloat(Double.pi / 6) * CGFloat(i - 4),
+                angle: (.pi / 6.0) * CGFloat(i - 4),
                 origin: CGPoint(x: x, y: y),
                 width: width,
                 offset: offset + translatedX,
-                color: forgroundColor
+                colorAsset: forgroundColor
             )
 
             animation.beginTime = beginTime + beginTimes[i]
@@ -78,7 +78,7 @@ final class SpinActivityAnimator: LoadingAnimatable {
         origin: CGPoint,
         width: CGFloat,
         offset: CGFloat,
-        color: UIColor
+        colorAsset: ColorAsset
     ) -> CALayer {
         let circle = CAShapeLayer()
         circle.anchorPoint = CGPoint(x: 0, y: 0.5)
@@ -86,7 +86,7 @@ final class SpinActivityAnimator: LoadingAnimatable {
 
         let rect = CGRect(origin: .zero, size: frame.size)
         let path = UIBezierPath(roundedRect: rect, cornerRadius: 2)
-        circle.fillColor = color.cgColor
+        circle.fillColor = colorAsset.color.cgColor
 
         circle.backgroundColor = nil
         circle.path = path.cgPath
@@ -98,4 +98,8 @@ final class SpinActivityAnimator: LoadingAnimatable {
 
         return circle
     }
+}
+
+extension LoadingAnimatable where Self == SpinActivityAnimator {
+    static var spinActivity: Self { SpinActivityAnimator() }
 }

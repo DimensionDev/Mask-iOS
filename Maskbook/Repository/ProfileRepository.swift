@@ -150,7 +150,7 @@ enum ProfileRepository {
         try? viewContext.saveOrRollback()
     }
     
-    static func updateProfileAvatar(identifier: String,avatar: String) {
+    static func updateProfileAvatar(identifier: String, avatar: String) {
         if let profile = Self.queryProfile(identifier: identifier) {
             profile.avatar = avatar
             try? viewContext.saveOrRollback()

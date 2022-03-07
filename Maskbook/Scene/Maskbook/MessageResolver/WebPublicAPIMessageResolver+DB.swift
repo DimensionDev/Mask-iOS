@@ -113,14 +113,35 @@ extension Post {
     }
 }
 
+// MARK: Helper functions
+
+extension WebPublicApiMessageResolver {
+    func request<R: Decodable>(of type: R.Type, from data: Data) -> WebPublicApiMessageRequest<R>? {
+        try? decoder.decode(WebPublicApiMessageRequest<R>.self, from: data)
+    }
+
+    func userAvatar(for identifier: String) -> String? {
+        if let profileRecord = ProfileRepository.queryProfile(identifier: identifier),
+           let avatar = profileRecord.avatar {
+            return avatar
+        }
+
+        if let personarecord = PersonaRepository.queryPersona(identifier: identifier),
+           let avatar = personarecord.avatar {
+            return avatar
+        }
+
+        return nil
+    }
+}
+
 // MARK: - Persona methods handler
 
 extension WebPublicApiMessageResolver {
     @discardableResult
     func createPersona(messageData: Data) -> Bool {
-        guard let request = try? decoder.decode(WebPublicApiMessageRequest<CreatePersonaParam>.self, from: messageData),
-              let newPersona = request.params?.persona
-        else {
+        guard let request = request(of: CreatePersonaParam.self, from: messageData),
+              let newPersona = request.params?.persona else {
             return false
         }
         PersonaRepository.createPersona(persona: newPersona,
@@ -131,7 +152,7 @@ extension WebPublicApiMessageResolver {
     
     @discardableResult
     func queryPersona(messageData: Data) -> Bool {
-        guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryPersonaParam>.self, from: messageData) else {
+        guard let request = request(of: QueryPersonaParam.self, from: messageData) else {
             return false
         }
         let persona: Persona? = {
@@ -152,9 +173,7 @@ extension WebPublicApiMessageResolver {
     
     @discardableResult
     func queryPersonas(messageData: Data) -> Bool {
-        guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryPersonasParam>.self,
-                                                from: messageData)
-        else {
+        guard let request = request(of: QueryPersonasParam.self, from: messageData) else {
             return false
         }
         let personaRecords = PersonaRepository.queryPersonas(identifiers: request.params?.identifiers,
@@ -172,9 +191,7 @@ extension WebPublicApiMessageResolver {
     
     @discardableResult
     func queryPersonaByProfile(messageData: Data) -> Bool {
-        guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryPersonaByProfileParam>.self,
-                                                from: messageData)
-        else {
+        guard let request = request(of: QueryPersonaByProfileParam.self, from: messageData) else {
             return false
         }
         
@@ -195,9 +212,7 @@ extension WebPublicApiMessageResolver {
     
     @discardableResult
     func updatePersona(messageData: Data) -> Bool {
-        guard let request = try? decoder.decode(WebPublicApiMessageRequest<UpdatePersonaParam>.self,
-                                                from: messageData)
-        else {
+        guard let request = request(of: UpdatePersonaParam.self, from: messageData) else {
             return false
         }
         guard let newPersona = request.params?.persona else {
@@ -218,9 +233,7 @@ extension WebPublicApiMessageResolver {
     
     @discardableResult
     func deletePersona(messageData: Data) -> Bool {
-        guard let request = try? decoder.decode(WebPublicApiMessageRequest<DeletePersonaParam>.self,
-                                                from: messageData)
-        else {
+        guard let request = request(of: DeletePersonaParam.self, from: messageData) else {
             return false
         }
         guard let toDeleteIdentifier = request.params?.identifier else {
@@ -238,7 +251,7 @@ extension WebPublicApiMessageResolver {
 extension WebPublicApiMessageResolver {
     @discardableResult
     func createProfile(messageData: Data) -> Bool {
-        guard let request = try? decoder.decode(WebPublicApiMessageRequest<CreateProfileParam>.self, from: messageData),
+        guard let request = request(of: CreateProfileParam.self, from: messageData),
               let newProfile = request.params?.profile
         else {
             return false
@@ -251,7 +264,7 @@ extension WebPublicApiMessageResolver {
     
     @discardableResult
     func queryProfile(messageData: Data) -> Bool {
-        guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryProfileParam>.self, from: messageData) else {
+        guard let request = request(of: QueryProfileParam.self, from: messageData) else {
             return false
         }
         let identifier = request.params?.options?.identifier
@@ -271,9 +284,7 @@ extension WebPublicApiMessageResolver {
     
     @discardableResult
     func queryProfiles(messageData: Data) -> Bool {
-        guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryProfilesParam>.self,
-                                                from: messageData)
-        else {
+        guard let request = request(of: QueryProfilesParam.self, from: messageData) else {
             return false
         }
         let profileRecords = ProfileRepository.queryProfiles(identifiers: request.params?.identifiers,
@@ -289,9 +300,7 @@ extension WebPublicApiMessageResolver {
     
     @discardableResult
     func deleteProfile(messageData: Data) -> Bool {
-        guard let request = try? decoder.decode(WebPublicApiMessageRequest<DeleteProfileParam>.self,
-                                                from: messageData)
-        else {
+        guard let request = request(of: DeleteProfileParam.self, from: messageData) else {
             return false
         }
         guard let identifier = request.params?.identifier else {
@@ -304,9 +313,7 @@ extension WebPublicApiMessageResolver {
     
     @discardableResult
     func updateProfile(messageData: Data) -> Bool {
-        guard let request = try? decoder.decode(WebPublicApiMessageRequest<UpdateProfileParam>.self,
-                                                from: messageData)
-        else {
+        guard let request = request(of: UpdateProfileParam.self, from: messageData) else {
             return false
         }
         guard let newProfile = request.params?.profile else {
@@ -320,14 +327,11 @@ extension WebPublicApiMessageResolver {
     
     @discardableResult
     func attachProfile(messageData: Data) -> Bool {
-        guard let request = try? decoder.decode(WebPublicApiMessageRequest<AttachProfileParam>.self,
-                                                from: messageData)
-        else {
+        guard let request = request(of: AttachProfileParam.self, from: messageData) else {
             return false
         }
         guard let profileIdentifier = request.params?.profileIdentifier,
-              let personaIdentifier = request.params?.personaIdentifier
-        else {
+              let personaIdentifier = request.params?.personaIdentifier else {
             return false
         }
         PersonaManager.attachProfile(personaIdentifier: personaIdentifier,
@@ -338,9 +342,7 @@ extension WebPublicApiMessageResolver {
     
     @discardableResult
     func detachProfile(messageData: Data) -> Bool {
-        guard let request = try? decoder.decode(WebPublicApiMessageRequest<DetachProfileParam>.self,
-                                                from: messageData)
-        else {
+        guard let request = request(of: DetachProfileParam.self, from: messageData) else {
             return false
         }
         guard let profileIdentifier = request.params?.identifier else {
@@ -357,9 +359,7 @@ extension WebPublicApiMessageResolver {
 extension WebPublicApiMessageResolver {
     @discardableResult
     func createRelation(messageData: Data) -> Bool {
-        guard let request = try? decoder.decode(WebPublicApiMessageRequest<CreateRelationParam>.self,
-                                                from: messageData)
-        else {
+        guard let request = request(of: CreateRelationParam.self, from: messageData) else {
             return false
         }
         guard let newRelation = request.params?.relation else {
@@ -372,9 +372,7 @@ extension WebPublicApiMessageResolver {
     
     @discardableResult
     func queryRelation(messageData: Data) -> Bool {
-        guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryRelationParam>.self,
-                                                from: messageData)
-        else {
+        guard let request = request(of: QueryRelationParam.self, from: messageData) else {
             return false
         }
         guard let param = request.params else { return false }
@@ -400,9 +398,7 @@ extension WebPublicApiMessageResolver {
     
     @discardableResult
     func queryRelations(messageData: Data) -> Bool {
-        guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryRelationsParam>.self,
-                                                from: messageData)
-        else {
+        guard let request = request(of: QueryRelationsParam.self, from: messageData) else {
             return false
         }
         // TODO: Favor from JS should not be String type
@@ -420,9 +416,7 @@ extension WebPublicApiMessageResolver {
     
     @discardableResult
     func updateRelation(messageData: Data) -> Bool {
-        guard let request = try? decoder.decode(WebPublicApiMessageRequest<UpdateRelationParam>.self,
-                                                from: messageData)
-        else {
+        guard let request = request(of: UpdateRelationParam.self, from: messageData) else {
             return false
         }
         guard let newRelation = request.params?.relation else {
@@ -437,32 +431,22 @@ extension WebPublicApiMessageResolver {
     
     @discardableResult
     func queryAvatar(messageData: Data) -> Bool {
-        guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryAvatarParam>.self,
-                                                from: messageData)
-        else {
+        guard let request = request(of: QueryAvatarParam.self, from: messageData) else {
             return false
         }
         guard let identifier = request.params?.identifier else { return false }
-        if let profileRecord = ProfileRepository.queryProfile(identifier: identifier) {
-            if let avatar = profileRecord.avatar {
-                self.getImageFromKingfisher(url: avatar, requestId: request.id)
-                return true
-            }
+
+        if let avatar = userAvatar(for: identifier) {
+            self.getImageFromKingfisher(url: avatar, requestId: request.id)
+            return true
         }
-        if let personarecord = PersonaRepository.queryPersona(identifier: identifier) {
-            if let avatar = personarecord.avatar {
-                self.getImageFromKingfisher(url: avatar, requestId: request.id)
-                return true
-            }
-        }
+
         return false
     }
     
     @discardableResult
     func storeAvatar(messageData: Data) -> Bool {
-        guard let request = try? decoder.decode(WebPublicApiMessageRequest<StoreAvatarParam>.self,
-                                                from: messageData)
-        else {
+        guard let request = request(of: StoreAvatarParam.self, from: messageData) else {
             return false
         }
         guard let identifier = request.params?.identifier else { return false }
@@ -484,9 +468,7 @@ extension WebPublicApiMessageResolver {
     
     @discardableResult
     func createPost(messageData: Data) -> Bool {
-        guard let request = try? decoder.decode(WebPublicApiMessageRequest<CreatePostParam>.self,
-                                                from: messageData)
-        else {
+        guard let request = request(of: CreatePostParam.self, from: messageData) else {
             return false
         }
         guard let para = request.params else { return false }
@@ -497,25 +479,19 @@ extension WebPublicApiMessageResolver {
     
     @discardableResult
     func queryPost(messageData: Data) -> Bool {
-        guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryPostParam>.self,
-                                                from: messageData)
-        else {
+        guard let request = request(of: QueryPostParam.self, from: messageData) else {
             return false
         }
         guard let identifier = request.params?.identifier else { return false }
         let post = PostRepository.queryPost(identifier: identifier)
-            .flatMap {
-                Post(fromRecord: $0)
-            }
+            .flatMap { Post(fromRecord: $0) }
         sendResponseToWebView(response: post, id: request.id)
         return true
     }
     
     @discardableResult
     func queryPosts(messageData: Data) -> Bool {
-        guard let request = try? decoder.decode(WebPublicApiMessageRequest<QueryPostParam>.self,
-                                                from: messageData)
-        else {
+        guard let request = request(of: QueryPostParam.self, from: messageData) else {
             return false
         }
         guard let queryParams = request.params else { return false }
@@ -530,9 +506,7 @@ extension WebPublicApiMessageResolver {
     
     @discardableResult
     func updatePost(messageData: Data) -> Bool {
-        guard let request = try? decoder.decode(WebPublicApiMessageRequest<UpdatePostParam>.self,
-                                                from: messageData)
-        else {
+        guard let request = request(of: UpdatePostParam.self, from: messageData) else {
             return false
         }
         guard let updateParams = request.params else { return false }
@@ -546,8 +520,24 @@ extension WebPublicApiMessageResolver {
         return false
     }
     
+    func profileDetected(messageData: Data) -> [String]? {
+        struct WebPublicAPIMessage<T: Decodable>: Decodable {
+            let jsonrpc: String
+            let method: String
+            let params: T
+        }
+        guard let request = try? decoder.decode(WebPublicAPIMessage<[String]>.self,
+                                                from: messageData) else {
+            return nil
+        }
+        return request.params
+    }
+    
     func getImageFromKingfisher(url: String, requestId: String) {
-        KingfisherManager.shared.retrieveImage(with: URL(string: url)!,
+        guard let imageURL = URL(string: url) else {
+            return
+        }
+        KingfisherManager.shared.retrieveImage(with: imageURL,
                                                options: nil,
                                                progressBlock: nil,
                                                downloadTaskUpdated: nil) { [weak self] result in

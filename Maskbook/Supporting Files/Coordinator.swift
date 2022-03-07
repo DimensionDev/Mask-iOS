@@ -65,6 +65,7 @@ class Coordinator {
         case welcome
         case mainTab(selectedTab: MainTabBarController.Tab)
         case persona
+        case guide
         case termsOfService(walletStartType: WalletStartType)
         case biometryRecognition(walletStartType: WalletStartType)
         case mnemonicWord(name: String?)
@@ -191,11 +192,16 @@ class Coordinator {
 
     func setup(window: UIWindow) {
         let maskSocialVC = MaskSocialViewController(socialPlatform: settings.currentProfileSocialPlatform)
-        let naviVC = UINavigationController(rootViewController: maskSocialVC)
+        let naviVC = NavigationController(rootViewController: maskSocialVC)
         window.rootViewController = naviVC
         window.makeKeyAndVisible()
         
         present(scene: .mainTab(selectedTab: .personas), transition: .modal(animated: false, adaptiveDelegate: maskSocialVC))
+        
+        if !settings.hasShownGuide {
+            settings.hasShownGuide = true
+            present(scene: .guide, transition: .modal(animated: false, adaptiveDelegate: maskSocialVC))
+        }
         
         // If all data (legacy wallets info and indexedDB data) has migrated to
         // native side, we do not need to wait for the extension JS scripts to
@@ -253,6 +259,7 @@ class Coordinator {
 
             case let .modal(animated, delegate):
                 vc.presentationController?.delegate = delegate
+                vc.modalPresentationCapturesStatusBarAppearance = true
                 presentVC.present(vc, animated: animated, completion: completion)
 
             case let .alertController(completion):
@@ -322,6 +329,9 @@ extension Coordinator {
         case .persona:
             return PersonasViewController()
 
+        case .guide:
+            return MaskHostViewController(rootView: GuideView())
+            
         case let .termsOfService(walletStartType):
             let termsOfServiceViewController = TermsOfServiceViewController(walletStartType: walletStartType)
             return termsOfServiceViewController
@@ -617,7 +627,7 @@ extension Coordinator {
             
         case let .maskSocial(socialPlatform):
             let maskSocialVC = MaskSocialViewController(socialPlatform: socialPlatform)
-            let naviVC = UINavigationController(rootViewController: maskSocialVC)
+            let naviVC = NavigationController(rootViewController: maskSocialVC)
             return naviVC
             
         case let .maskConnectingSocial(socialPlatform, personaIdentifier):

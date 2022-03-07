@@ -86,6 +86,9 @@ final class UserDefaultSettings {
         case beAwareOfPluginTip
         case jsResourceIsUsingBundle
         case jsDocumentResourceSelectedCommitHash
+        
+        // if this flag return true, the `GuideView` should not be presented.
+        case hasShownGuide
     }
 
     func removeAll() {
@@ -107,6 +110,7 @@ final class UserDefaultSettings {
         backupDate = nil
         backupAlertDate = nil
         indexedDBDataMigrated = false
+        hasShownGuide = false
     }
 
     /// Indicates whether or not the user has seen the onboarding. Default value is **false**
@@ -326,6 +330,9 @@ final class UserDefaultSettings {
     
     @ReactiveUserDefault(key: Keys.jsResourceIsUsingBundle.rawValue, defaultValue: true)
     var jsResourceIsUsingBundle: Bool
+    
+    @ReactiveUserDefault(key: Keys.hasShownGuide.rawValue, defaultValue: false)
+    var hasShownGuide: Bool
 }
 
 extension UserDefaultSettings {

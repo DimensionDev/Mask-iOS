@@ -46,7 +46,7 @@ var debug = __webpack_require__(95553)('engine.io-client:socket');
 var index = __webpack_require__(81363);
 var parser = __webpack_require__(96816);
 var parseuri = __webpack_require__(89138);
-var parseqs = __webpack_require__(32386);
+var parseqs = __webpack_require__(22610);
 
 /**
  * Module exports.
@@ -1686,7 +1686,7 @@ function unloadHandler () {
  */
 
 var Transport = __webpack_require__(10079);
-var parseqs = __webpack_require__(32386);
+var parseqs = __webpack_require__(22610);
 var parser = __webpack_require__(96816);
 var inherit = __webpack_require__(50173);
 var yeast = __webpack_require__(20003);
@@ -1940,7 +1940,7 @@ Polling.prototype.uri = function () {
 
 var Transport = __webpack_require__(10079);
 var parser = __webpack_require__(96816);
-var parseqs = __webpack_require__(32386);
+var parseqs = __webpack_require__(22610);
 var inherit = __webpack_require__(50173);
 var yeast = __webpack_require__(20003);
 var debug = __webpack_require__(95553)('engine.io-client:websocket');

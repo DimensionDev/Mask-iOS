@@ -120,13 +120,11 @@ class ContactProfileTableViewCell: UITableViewCell {
         platformIcon.image = profile.socialPlatform.icon
         if profile.linkedPersona != nil {
             inviteButton.isHidden = true
-            platformIcon.isHidden = false
             nicknameLabel.text = profile.nickname
                 ?? profile.socialID
             maskIcon.isHidden = false
         } else {
             inviteButton.isHidden = false
-            platformIcon.isHidden = true
             nicknameLabel.text = profile.nickname
                 ?? profile.socialID
             maskIcon.isHidden = true

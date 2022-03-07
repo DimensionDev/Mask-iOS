@@ -290,7 +290,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 var types_1 = __webpack_require__(22407);
 var _ = __webpack_require__(39378);
 var Web3 = __webpack_require__(69906);
-var SolidityCoder = __webpack_require__(61928);
+var SolidityCoder = __webpack_require__(45191);
 var configured_bignumber_1 = __webpack_require__(85851);
 var AbiDecoder = /** @class */ (function () {
     function AbiDecoder(abiArrays) {
@@ -644,7 +644,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 var types_1 = __webpack_require__(22407);
 var _ = __webpack_require__(39378);
 var Web3 = __webpack_require__(69906);
-var SolidityCoder = __webpack_require__(61928);
+var SolidityCoder = __webpack_require__(45191);
 var configured_bignumber_1 = __webpack_require__(3421);
 var AbiDecoder = /** @class */ (function () {
     function AbiDecoder(abiArrays) {

@@ -992,7 +992,7 @@ MetadataProgram.PUBKEY = new web3_js_1.PublicKey(mpl_core_1.config.programs.meta
 
 /***/ }),
 
-/***/ 80426:
+/***/ 71797:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -1294,7 +1294,7 @@ const MetadataProgram_1 = __webpack_require__(50683);
 const Edition_1 = __webpack_require__(9083);
 const MasterEdition_1 = __webpack_require__(69988);
 const Uses_1 = __webpack_require__(3316);
-const Collection_1 = __webpack_require__(80426);
+const Collection_1 = __webpack_require__(71797);
 const constants_1 = __webpack_require__(12754);
 class Creator extends mpl_core_1.Borsh.Data {
 }
@@ -1585,7 +1585,7 @@ __exportStar(__webpack_require__(39897), exports);
 __exportStar(__webpack_require__(69988), exports);
 __exportStar(__webpack_require__(9083), exports);
 __exportStar(__webpack_require__(68641), exports);
-__exportStar(__webpack_require__(80426), exports);
+__exportStar(__webpack_require__(71797), exports);
 __exportStar(__webpack_require__(3316), exports);
 //# sourceMappingURL=index.js.map
 
