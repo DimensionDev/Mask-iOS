@@ -142,8 +142,8 @@ class SendTransactionViewController: BaseViewController {
         
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
-            make.right.equalTo(-23)
-            make.left.equalTo(23)
+            make.leading.equalTo(-23)
+            make.trailing.equalTo(23)
             make.height.equalTo(54)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-24)
         }
