@@ -51,8 +51,8 @@ class SendTransactionViewController: BaseViewController {
         paddingView.addSubview(imageView)
         imageView.snp.makeConstraints { make in
             make.centerY.equalTo(paddingView)
-            make.left.equalTo(8)
-            make.right.equalTo(-12)
+            make.leading.equalTo(8)
+            make.trailing.equalTo(-12)
             make.size.equalTo(CGSize(width: 24, height: 24))
         }
         textField.rightView = paddingView
