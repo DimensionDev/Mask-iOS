@@ -12,14 +12,14 @@ import CoreDataStack
 import UIKit
 
 class RecentlyAddressViewModel: NSObject {
-//    lazy var cellItemPublisher: AnyPublisher<[CellItem], Never> = {
-//        return Future { [weak self] promise in
-//            guard let self = self else { return promise(.success([])) }
-//            let items = self.generateCellItem()
-//            promise(.success(items))
-//        }
-//        .eraseToAnyPublisher()
-//    }()
+    
+    lazy var pasteStringPublisher: AnyPublisher<String, Never> = {
+        return Future { [weak self] promise in
+            guard let self = self else { return promise(.success("")) }
+            promise(.success(UIPasteboard.general.string ?? ""))
+        }
+        .eraseToAnyPublisher()
+    }()
     
     func generateCellItem(toSearch text: String?) -> [CellItem] {
         let currentChainId = Int64(maskUserDefaults.network.chain.rawValue)
@@ -85,9 +85,7 @@ class RecentlyAddressViewModel: NSObject {
         })
         return items
     }
-    
-    
-    
+        
     func pasteCellItem(pasteText: String, ensName: String?) -> [CellItem] {
         var items = [CellItem]()
         items.append(CellItem.paste(address: pasteText, ensName: ensName))

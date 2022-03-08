@@ -239,24 +239,28 @@ class SendTransactionViewController: BaseViewController {
             })
             .store(in: &subscriptions)
         
-        if let string = UIPasteboard.general.string {
-            if WalletCoreHelper.validateAddress(address: string, chainType: maskUserDefaults.network.chain){
-                guard let ens = ENS(web3: Web3.InfuraMainnetWeb3()) else { return }
-                DispatchQueue.global().async {
-                    do {
-                        let ensName = try ens.getName(forNode: string.stripHexPrefix() + ".addr.reverse")
-                        DispatchQueue.main.async {
-                            let cellItem = self.viewModel.pasteCellItem(pasteText: string, ensName: ensName)
-                            var snapshot = self.dataSource.snapshot()
-                            snapshot.appendItems(cellItem, toSection: .paste)
-                            self.dataSource.apply(snapshot, animatingDifferences: false)
+        viewModel.pasteStringPublisher
+            .sink { [weak self] pasteStr in
+                if WalletCoreHelper.validateAddress(address: pasteStr, chainType: maskUserDefaults.network.chain){
+                    guard let self = self else { return }
+                    guard let ens = ENS(web3: Web3.InfuraMainnetWeb3()) else { return }
+                    DispatchQueue.global().async {
+                        do {
+                            let ensName = try ens.getName(forNode: pasteStr.stripHexPrefix() + ".addr.reverse")
+                            DispatchQueue.main.async {
+                                let cellItem = self.viewModel.pasteCellItem(pasteText: pasteStr, ensName: ensName)
+                                var snapshot = self.dataSource.snapshot()
+                                snapshot.appendItems(cellItem, toSection: .paste)
+                                self.dataSource.apply(snapshot, animatingDifferences: false)
+                            }
+                        } catch {
+                            return
                         }
-                    } catch {
-                        return
                     }
                 }
             }
-        }
+            .store(in: &subscriptions)
+
     }
 }
 
@@ -374,12 +378,12 @@ extension SendTransactionViewController: UITableViewDelegate {
         switch self.dataSource.snapshot().sectionIdentifiers[section]{
         case .address:
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: RecentlyHeaderView.self)) as! RecentlyHeaderView
-            header.setContent(text: "Recent", image: Asset.Images.Scene.SendTransaction.recent.image)
+            header.setContent(text: L10n.Scene.Sendtransaction.Send.recent, image: Asset.Images.Scene.SendTransaction.recent.image)
             return header
             
         case .contact:
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: RecentlyHeaderView.self)) as! RecentlyHeaderView
-            header.setContent(text: "Contacts", image: Asset.Images.Scene.SendTransaction.contacts.image)
+            header.setContent(text: L10n.Scene.Sendtransaction.Send.contact, image: Asset.Images.Scene.SendTransaction.contacts.image)
             return header
             
         default:
