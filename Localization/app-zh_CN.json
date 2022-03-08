@@ -421,8 +421,7 @@
                 "Label_Password": "密码",
                 "btn_withoutPassword": "按住以发送",
                 "amount_error": "金额不足",
-                "password_error": "支付密码错误。",
-                "gasFee_error": "手续费不足。"
+                "password_error": "支付密码错误。"
             },
             "addContact": {
                 "btn_add": "添加联系人",
@@ -646,7 +645,7 @@
                 "dhedge": "DHEDGE"
             },
             "plugin_introduction": {
-                "transak": "Transak 支持通过60多种货币购买代币",
+                "transak": "Transak 支持通过60多种货币购买代币。",
                 "ito": "允许用户在Twitter上直接购买代币。",
                 "luckyDrop": "发送红包(Token/NFT)，给加密好友带来惊喜。",
                 "swap": "通过Dex购买代币，无需额外费用和限制。",
@@ -815,20 +814,20 @@
     "chain": {
         "short_name": {
             "eth": "ETH",
-            "bsc": "BNB",
+            "bsc": "BSC",
             "dot": "DOT",
             "polygon": "Polygon",
             "arbitrum": "Arbitrum",
-            "xdai": "Gnosis",
+            "xdai": "xDai",
             "optimism": "Optimism"
         },
         "name": {
             "eth": "Ethereum",
-            "bsc": "BNB Chain",
+            "bsc": "Binance smart chain",
             "dot": "Polkadot",
             "polygon": "Polygon/Matic Network",
             "arbitrum": "Arbitrum",
-            "xdai": "Gnosis",
+            "xdai": "xDai",
             "optimism": "Optimism"
         }
     }
