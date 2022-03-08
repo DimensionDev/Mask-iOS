@@ -51,6 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     @InjectedProvider(\.schemeService)
     private var schemeService
     
+    @InjectedProvider(\.backupFileDetectService)
+    private var backupFileDetectService
+    
     var disposeBag = Set<AnyCancellable>()
     
     func application(
@@ -154,6 +157,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
         let request = WebExtension.Setting.AppResumeMessage()
         messageRelay.request(request)
+        backupFileDetectService.detectBackupFiles()
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

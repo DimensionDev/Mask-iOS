@@ -436,7 +436,6 @@
 		2AF8858C271EE9310004565A /* SelectActionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF88454271EE9300004565A /* SelectActionTableViewCell.swift */; };
 		2AF8858D271EE9310004565A /* SelectActionViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF88455271EE9300004565A /* SelectActionViewModelProtocol.swift */; };
 		2AF8858E271EE9310004565A /* SelectItemViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF88456271EE9300004565A /* SelectItemViewModelProtocol.swift */; };
-		2AF885CE271EE9320004565A /* KeystoreQRCodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF884AC271EE9300004565A /* KeystoreQRCodeScannerViewController.swift */; };
 		2AF885CF271EE9320004565A /* ScannerPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF884AE271EE9300004565A /* ScannerPermission.swift */; };
 		2AF885D0271EE9320004565A /* ScannerHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF884AF271EE9300004565A /* ScannerHandler.swift */; };
 		2AF885D1271EE9320004565A /* ScanLineAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF884B0271EE9300004565A /* ScanLineAnimationView.swift */; };
@@ -599,7 +598,12 @@
 		5D4AD18926560B02002D5380 /* HitTestExpandedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4AD18826560B02002D5380 /* HitTestExpandedButton.swift */; };
 		5D554EC6279FE58100D40848 /* OpenRedPackageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D554EC5279FE58100D40848 /* OpenRedPackageViewController.swift */; };
 		5D554EC8279FE58D00D40848 /* OpenRedPackageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D554EC7279FE58D00D40848 /* OpenRedPackageViewModel.swift */; };
+		5D61527127CF35E2001CB038 /* MoveBackupDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D61527027CF35E2001CB038 /* MoveBackupDataViewModel.swift */; };
+		5D61527327CF35FC001CB038 /* MoveBackupDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D61527227CF35FC001CB038 /* MoveBackupDataViewController.swift */; };
+		5D61527527CF3F91001CB038 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D61527427CF3F91001CB038 /* URL.swift */; };
+		5D61527927D06B7A001CB038 /* BackupFolderCheckService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D61527827D06B7A001CB038 /* BackupFolderCheckService.swift */; };
 		5D72F3C7265E3FE50073F6B9 /* KeyboardResponderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D72F3C6265E3FE50073F6B9 /* KeyboardResponderService.swift */; };
+		5D7BF7CE27D0997C00C58EF2 /* BackupFileDetectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7BF7CD27D0997C00C58EF2 /* BackupFileDetectService.swift */; };
 		5D7F5A5127B6531E00A007C5 /* PersonaCreateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7F5A5027B6531E00A007C5 /* PersonaCreateHandler.swift */; };
 		5D7F5A5327B66C5600A007C5 /* PersonaKeyInfoPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7F5A5227B66C5600A007C5 /* PersonaKeyInfoPreview.swift */; };
 		5D7FE83827BD32D80066CF23 /* ProfileRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7FE83727BD32D80066CF23 /* ProfileRecord.swift */; };
@@ -1138,7 +1142,6 @@
 		2AF88454271EE9300004565A /* SelectActionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectActionTableViewCell.swift; sourceTree = "<group>"; };
 		2AF88455271EE9300004565A /* SelectActionViewModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectActionViewModelProtocol.swift; sourceTree = "<group>"; };
 		2AF88456271EE9300004565A /* SelectItemViewModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectItemViewModelProtocol.swift; sourceTree = "<group>"; };
-		2AF884AC271EE9300004565A /* KeystoreQRCodeScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeystoreQRCodeScannerViewController.swift; sourceTree = "<group>"; };
 		2AF884AE271EE9300004565A /* ScannerPermission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerPermission.swift; sourceTree = "<group>"; };
 		2AF884AF271EE9300004565A /* ScannerHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerHandler.swift; sourceTree = "<group>"; };
 		2AF884B0271EE9300004565A /* ScanLineAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanLineAnimationView.swift; sourceTree = "<group>"; };
@@ -1299,7 +1302,12 @@
 		5D4AD18826560B02002D5380 /* HitTestExpandedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HitTestExpandedButton.swift; sourceTree = "<group>"; };
 		5D554EC5279FE58100D40848 /* OpenRedPackageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenRedPackageViewController.swift; sourceTree = "<group>"; };
 		5D554EC7279FE58D00D40848 /* OpenRedPackageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenRedPackageViewModel.swift; sourceTree = "<group>"; };
+		5D61527027CF35E2001CB038 /* MoveBackupDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveBackupDataViewModel.swift; sourceTree = "<group>"; };
+		5D61527227CF35FC001CB038 /* MoveBackupDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveBackupDataViewController.swift; sourceTree = "<group>"; };
+		5D61527427CF3F91001CB038 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
+		5D61527827D06B7A001CB038 /* BackupFolderCheckService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupFolderCheckService.swift; sourceTree = "<group>"; };
 		5D72F3C6265E3FE50073F6B9 /* KeyboardResponderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponderService.swift; sourceTree = "<group>"; };
+		5D7BF7CD27D0997C00C58EF2 /* BackupFileDetectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupFileDetectService.swift; sourceTree = "<group>"; };
 		5D7F5A5027B6531E00A007C5 /* PersonaCreateHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaCreateHandler.swift; sourceTree = "<group>"; };
 		5D7F5A5227B66C5600A007C5 /* PersonaKeyInfoPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaKeyInfoPreview.swift; sourceTree = "<group>"; };
 		5D7FE83727BD32D80066CF23 /* ProfileRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRecord.swift; sourceTree = "<group>"; };
@@ -2089,6 +2097,7 @@
 		2AF88327271EE9300004565A /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				5D61526F27CF28A6001CB038 /* MoveBackupData */,
 				5D554EC4279FE55400D40848 /* OpenRedPackage */,
 				5DB39E2C27869F390025337C /* Debug */,
 				2A5FAE9C27CF7AD200D01250 /* Guide */,
@@ -3005,7 +3014,6 @@
 		2AF884AB271EE9300004565A /* Scanner */ = {
 			isa = PBXGroup;
 			children = (
-				2AF884AC271EE9300004565A /* KeystoreQRCodeScannerViewController.swift */,
 				2AF884AD271EE9300004565A /* ScannerSource */,
 				2AF884B3271EE9300004565A /* ScannerViewController.swift */,
 			);
@@ -3165,6 +3173,7 @@
 				2AF88632271EEDF80004565A /* UIApplication.swift */,
 				2AF88633271EEDF80004565A /* CurrentSubject+extension.swift */,
 				2AF88634271EEDF80004565A /* UIControl.swift */,
+				5D61527427CF3F91001CB038 /* URL.swift */,
 				2AF88635271EEDF80004565A /* AVCaptureVideoOrientation.swift */,
 				2AF88636271EEDF80004565A /* UITableView+extension.swift */,
 				2AF88637271EEDF80004565A /* Array+extension.swift */,
@@ -3353,12 +3362,23 @@
 			path = OpenRedPackage;
 			sourceTree = "<group>";
 		};
+		5D61526F27CF28A6001CB038 /* MoveBackupData */ = {
+			isa = PBXGroup;
+			children = (
+				5D61527027CF35E2001CB038 /* MoveBackupDataViewModel.swift */,
+				5D61527227CF35FC001CB038 /* MoveBackupDataViewController.swift */,
+			);
+			path = MoveBackupData;
+			sourceTree = "<group>";
+		};
 		5D72F3C5265E3FC90073F6B9 /* Service */ = {
 			isa = PBXGroup;
 			children = (
 				2D6E31DB279974C500A70187 /* SchemeService */,
 				5DB39E2A278694460025337C /* JSDocumentResourceManager.swift */,
 				5D72F3C6265E3FE50073F6B9 /* KeyboardResponderService.swift */,
+				5D61527827D06B7A001CB038 /* BackupFolderCheckService.swift */,
+				5D7BF7CD27D0997C00C58EF2 /* BackupFileDetectService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -3938,6 +3958,7 @@
 				2D6677F827688FBE00528F4D /* WalletConnectSession+Extension.swift in Sources */,
 				2AF8860D271EED7D0004565A /* ShadowWrapped.swift in Sources */,
 				5D069E0B27A16E2800054B4A /* TertiaryButton.swift in Sources */,
+				5D61527927D06B7A001CB038 /* BackupFolderCheckService.swift in Sources */,
 				2AF88518271EE9310004565A /* SelectNetworkTableViewCell.swift in Sources */,
 				1F57023727A139E700C96909 /* RedPacketInteractivePayload.swift in Sources */,
 				0FEA5D0B26944923009ED058 /* TransactionHistory.swift in Sources */,
@@ -4169,6 +4190,7 @@
 				2AF88652271EEDF80004565A /* CurrentSubject+extension.swift in Sources */,
 				2AF8856C271EE9310004565A /* UnlockViewController.swift in Sources */,
 				41E50044279948D200A73117 /* Optional+Extension.swift in Sources */,
+				5D61527327CF35FC001CB038 /* MoveBackupDataViewController.swift in Sources */,
 				2AF88578271EE9310004565A /* WalletListTableViewCellModel.swift in Sources */,
 				2AF88644271EEDF80004565A /* UICollectionView+extension.swift in Sources */,
 				0FACA3B22671DBEA00CB8AC0 /* StoredKeyExportType.swift in Sources */,
@@ -4296,6 +4318,7 @@
 				2AF88546271EE9310004565A /* ImportKeystoreViewController.swift in Sources */,
 				1FCBEDFC273A1004001C3637 /* SheetGestureInteractor.swift in Sources */,
 				2AF884E7271EE9310004565A /* SwitchButton.swift in Sources */,
+				5D7BF7CE27D0997C00C58EF2 /* BackupFileDetectService.swift in Sources */,
 				1FCBEDF02738DA2E001C3637 /* RestoreWalletInfoController.swift.swift in Sources */,
 				2AF88638271EEDF80004565A /* UIApplication+extension.swift in Sources */,
 				6F07ABE5279697450039D69D /* NFTCollectionDetailTableViewCell.swift in Sources */,
@@ -4317,6 +4340,7 @@
 				2AF88522271EE9310004565A /* ImportPrivateKeyViewController.swift in Sources */,
 				2AF8860B271EED7D0004565A /* PresentStyle.swift in Sources */,
 				0F2051A6265E14F300602A0C /* UIViewPreview.swift in Sources */,
+				5D61527127CF35E2001CB038 /* MoveBackupDataViewModel.swift in Sources */,
 				2AF884FD271EE9310004565A /* PersonasViewController.swift in Sources */,
 				2AF88549271EE9310004565A /* NFTDetailViewModel.swift in Sources */,
 				2AF88553271EE9310004565A /* RecentlyAddressViewModel.swift in Sources */,
@@ -4401,8 +4425,8 @@
 				2DC5D8A2272574FA00E351D3 /* BlobStorage+extension.swift in Sources */,
 				2A0C16AF2666713D0085524E /* StoredKeyImportType.swift in Sources */,
 				2AF88582271EE9310004565A /* TermsOfServiceViewController.swift in Sources */,
+				5D61527527CF3F91001CB038 /* URL.swift in Sources */,
 				2AF884F2271EE9310004565A /* IdentityMnemonicImportViewController.swift in Sources */,
-				2AF885CE271EE9320004565A /* KeystoreQRCodeScannerViewController.swift in Sources */,
 				2AF8857A271EE9310004565A /* WalletListViewController.swift in Sources */,
 				5D93DFA2267B3F2E00A175BF /* Persona.swift in Sources */,
 				0F641F10268B0237002A4D33 /* MaskError.swift in Sources */,
