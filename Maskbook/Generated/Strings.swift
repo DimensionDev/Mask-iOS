@@ -1289,7 +1289,7 @@ enum L10n {
       static var accounts: String {
         return L10n.tr("Localizable", "Scene.PersonaSocial.Accounts")
       }
-      /// add
+      /// Add
       static var add: String {
         return L10n.tr("Localizable", "Scene.PersonaSocial.Add")
       }
@@ -1351,7 +1351,7 @@ enum L10n {
       static var deleteTip: String {
         return L10n.tr("Localizable", "Scene.Personas.DeleteTip")
       }
-      /// Personas
+      /// Persona
       static var personas: String {
         return L10n.tr("Localizable", "Scene.Personas.Personas")
       }
@@ -2717,7 +2717,7 @@ enum L10n {
     static var labs: String {
       return L10n.tr("Localizable", "Tab.Labs")
     }
-    /// Personas
+    /// Persona
     static var personas: String {
       return L10n.tr("Localizable", "Tab.Personas")
     }

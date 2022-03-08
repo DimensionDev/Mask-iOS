@@ -1,6 +1,6 @@
 {
     "tab": {
-        "personas": "Personas",
+        "personas": "Persona",
         "wallet": "Wallet",
         "labs": "Labs",
         "setting": "Setting"
@@ -492,7 +492,7 @@
             "password_demand": "Payment Password must be a combination of 2 categories out of numbers, letters and special characters with a length of 8-20 characters."
         },
         "personas": {
-            "personas": "Personas",
+            "personas": "Persona",
             "tabs": {
                 "social": "Social",
                 "post": "Post",
@@ -541,7 +541,7 @@
             "connect_social_accounts": "Connect Social accounts",
             "accounts": "Accounts",
             "connect_tips": "Select the social account to connect your persona. Enjoy a web 3.0 social expereince.",
-            "add": "add"
+            "add": "Add"
         },
         "persona_download": {
             "identity_id": "Identity Code",

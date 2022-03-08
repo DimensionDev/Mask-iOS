@@ -589,6 +589,8 @@
 		41E5004E27A11AFF00A73117 /* WebPublicApiMessageResolver+Plugins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E5004D27A11AFF00A73117 /* WebPublicApiMessageResolver+Plugins.swift */; };
 		5D069E0B27A16E2800054B4A /* TertiaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D069E0A27A16E2800054B4A /* TertiaryButton.swift */; };
 		5D114FE527B256790092BEDC /* PersonaRecord+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D114FE427B256790092BEDC /* PersonaRecord+Identifier.swift */; };
+		5D2893E427D5DD0A0013FCB6 /* PersonaCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2893E327D5DD0A0013FCB6 /* PersonaCollectionCell.swift */; };
+		5D2893E627D5E8A30013FCB6 /* PersonaCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2893E527D5E8A30013FCB6 /* PersonaCollectionDataSource.swift */; };
 		5D3E364727BE2D0200FDCFDD /* PostRecord+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3E364527BE2D0200FDCFDD /* PostRecord+CoreDataClass.swift */; };
 		5D3E364827BE2D0200FDCFDD /* PostRecord+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3E364627BE2D0200FDCFDD /* PostRecord+CoreDataProperties.swift */; };
 		5D3E364A27BE310C00FDCFDD /* PostRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3E364927BE310C00FDCFDD /* PostRecord.swift */; };
@@ -1289,6 +1291,8 @@
 		5D069E0A27A16E2800054B4A /* TertiaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TertiaryButton.swift; sourceTree = "<group>"; };
 		5D114FE427B256790092BEDC /* PersonaRecord+Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonaRecord+Identifier.swift"; sourceTree = "<group>"; };
 		5D1470E396AD706CE2B7052D /* Pods-MaskbookTests.release touchpreview.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskbookTests.release touchpreview.xcconfig"; path = "Target Support Files/Pods-MaskbookTests/Pods-MaskbookTests.release touchpreview.xcconfig"; sourceTree = "<group>"; };
+		5D2893E327D5DD0A0013FCB6 /* PersonaCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaCollectionCell.swift; sourceTree = "<group>"; };
+		5D2893E527D5E8A30013FCB6 /* PersonaCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaCollectionDataSource.swift; sourceTree = "<group>"; };
 		5D3E364527BE2D0200FDCFDD /* PostRecord+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostRecord+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5D3E364627BE2D0200FDCFDD /* PostRecord+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostRecord+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5D3E364927BE310C00FDCFDD /* PostRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRecord.swift; sourceTree = "<group>"; };
@@ -2373,7 +2377,7 @@
 		2AF88389271EE9300004565A /* Personas */ = {
 			isa = PBXGroup;
 			children = (
-				2AF8838A271EE9300004565A /* PersonasViewController.swift */,
+				5D2893E227D5DC140013FCB6 /* Personas */,
 				2AF8838B271EE9300004565A /* Contacts */,
 				2AF88391271EE9300004565A /* PersonaAction */,
 				2AF88394271EE9300004565A /* Social */,
@@ -3321,6 +3325,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5D2893E227D5DC140013FCB6 /* Personas */ = {
+			isa = PBXGroup;
+			children = (
+				2AF8838A271EE9300004565A /* PersonasViewController.swift */,
+				5D2893E327D5DD0A0013FCB6 /* PersonaCollectionCell.swift */,
+				5D2893E527D5E8A30013FCB6 /* PersonaCollectionDataSource.swift */,
+			);
+			path = Personas;
+			sourceTree = "<group>";
+		};
 		5D4AD18726560B02002D5380 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -4036,7 +4050,9 @@
 				2D86E0C627716ABE005D3710 /* WalletConnectSelectAccountCollectionCell.swift in Sources */,
 				2AF8850C271EE9310004565A /* PersonaExportPrivateKeyViewModel.swift in Sources */,
 				2AF8863B271EEDF80004565A /* Publisher+extension.swift in Sources */,
+				5D2893E627D5E8A30013FCB6 /* PersonaCollectionDataSource.swift in Sources */,
 				2A6ABB9F2720053B00CC3AED /* ChangeBackupPasswordViewController.swift in Sources */,
+				5D2893E427D5DD0A0013FCB6 /* PersonaCollectionCell.swift in Sources */,
 				2AF8864F271EEDF80004565A /* UIView+Gesture.swift in Sources */,
 				2AF88502271EE9310004565A /* PersonasActionViewModel.swift in Sources */,
 				2AF88552271EE9310004565A /* SendTransactionConfirmViewModel.swift in Sources */,

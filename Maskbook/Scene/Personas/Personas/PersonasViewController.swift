@@ -41,7 +41,7 @@ class PersonasViewController: BaseViewController {
 
     @InjectedProvider(\.mainCoordinator)
     private var coordinator
-    
+
     @InjectedProvider(\.personaManager)
     private var personaManager
 
@@ -58,45 +58,57 @@ class PersonasViewController: BaseViewController {
 
     lazy var connectTOSocialVC = ConnectableSocialListViewController()
 
-    lazy var titleStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 9
-        let imageView = UIImageView(image: Asset.Icon.Arrows.drop.image.withRenderingMode(.alwaysTemplate))
-        imageView.tintColor = Asset.Colors.Text.dark.color
-        imageView.contentMode = .scaleAspectFit
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(imageView)
-        return stackView
-    }()
-
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = FontStyles.BH4
-        label.textColor = Asset.Colors.Text.dark.color
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
     let scanButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setImage(Asset.Images.Scene.Balance.walletConnectScan.image, for: .normal)
         return button
     }()
 
+    private lazy var personaCollectionView: UICollectionView = {
+        let flowLayout = MnemonicVerifyCollectionFlowLayout()
+        flowLayout.itemSize = PersonaCollectionDataSource.itemSize
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.sideItemScale = 0.9
+        let view = ControlContainableCollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        view.backgroundColor = .clear
+        view.showsHorizontalScrollIndicator = false
+        view.showsVerticalScrollIndicator = false
+        view.layer.masksToBounds = false
+        view.clipsToBounds = true
+        return view
+    }()
+
+    lazy var horizontalDataSource = PersonaCollectionDataSource()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationItems()
+        setuppersonaCollectionView()
         setupSegmentViewController()
         setupConnectViewController()
         subscribeSignals()
         updateWithPersonaProfileState()
     }
 
+    func setuppersonaCollectionView() {
+        personaCollectionView.delegate = horizontalDataSource
+        personaCollectionView.dataSource = horizontalDataSource
+        personaCollectionView.register(PersonaCollectionCell.self)
+        personaCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(personaCollectionView)
+        NSLayoutConstraint.activate([
+            personaCollectionView.topAnchor.constraint(equalTo: view.readableContentGuide.topAnchor, constant: 24),
+            personaCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            personaCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            personaCollectionView.heightAnchor.constraint(equalToConstant: 102)
+        ])
+    }
+
     func setupNavigationItems() {
+        title = L10n.Scene.Personas.personas
         navigationItem.largeTitleDisplayMode = .never
-        var leftBarButtonItems = [ .fixedSpace(14),
-                                   UIBarButtonItem(customView: scanButton)]
+        var leftBarButtonItems = [.fixedSpace(14),
+                                  UIBarButtonItem(customView: scanButton)]
         if DebugControl.isDebugEntryEnable {
             let debugEntryButton = UIBarButtonItem(customView: DebugEntryView())
             leftBarButtonItems.append(debugEntryButton)
@@ -112,7 +124,7 @@ class PersonasViewController: BaseViewController {
         view.addSubview(segmentView)
         segmentViewController.didMove(toParent: self)
         NSLayoutConstraint.activate([
-            segmentView.topAnchor.constraint(equalTo: view.readableContentGuide.topAnchor),
+            segmentView.topAnchor.constraint(equalTo: personaCollectionView.bottomAnchor, constant: 20),
             segmentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             segmentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             segmentView.bottomAnchor.constraint(equalTo: view.readableContentGuide.bottomAnchor)
@@ -127,7 +139,7 @@ class PersonasViewController: BaseViewController {
         view.addSubview(subView)
         segmentViewController.didMove(toParent: self)
         NSLayoutConstraint.activate([
-            subView.topAnchor.constraint(equalTo: view.readableContentGuide.topAnchor),
+            subView.topAnchor.constraint(equalTo: personaCollectionView.bottomAnchor, constant: 20),
             subView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             subView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             subView.bottomAnchor.constraint(equalTo: view.readableContentGuide.bottomAnchor)
@@ -142,12 +154,6 @@ class PersonasViewController: BaseViewController {
             }
             .store(in: &disposeBag)
 
-        titleStackView.gesture()
-            .sink { [weak self] _ in
-                self?.titleViewClicked()
-            }
-            .store(in: &disposeBag)
-        
         scanButton
             .cv.tap()
             .sink { [weak self] in
@@ -157,19 +163,7 @@ class PersonasViewController: BaseViewController {
     }
 
     func updateWithPersonaProfileState() {
-        if let persona = personaManager.currentPersona.value {
-            addTitleView(title: persona.nickname ?? persona.nonOptionalIdentifier)
-        }
         connectTOSocialVC.view.isHidden = !personaManager.currentProfiles.value.isEmpty
-    }
-
-    func addTitleView(title: String) {
-        navigationItem.titleView = titleStackView
-        titleLabel.text = title
-    }
-
-    func removeTitleView() {
-        navigationItem.titleView = nil
     }
 }
 
@@ -187,13 +181,6 @@ extension PersonasViewController {
         )
     }
 
-    func titleViewClicked() {
-        coordinator.present(
-            scene: .personaAction(viewModel: PersonasActionViewModel()),
-            transition: .detail(animated: true)
-        )
-    }
-    
     func scanAction() {
         coordinator.present(scene: .commonScan, transition: .modal(animated: true))
     }
