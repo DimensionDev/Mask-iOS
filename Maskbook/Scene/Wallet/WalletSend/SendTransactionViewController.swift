@@ -128,8 +128,8 @@ class SendTransactionViewController: BaseViewController {
         enterAddressTextField.snp.makeConstraints {make in
             make.left.equalTo(toAddressLabel)
             make.top.equalTo(toAddressLabel.snp.bottom).offset(8)
-            make.right.equalTo(-22.5)
-            make.height.equalTo(54)
+            make.leading.equalTo(-22.5)
+            make.trailing.equalTo(54)
         }
         
         view.addSubview(tableView)
