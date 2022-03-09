@@ -3,7 +3,6 @@ import UIKit
 import UStack
 
 protocol AlertItemRepresentable {
-    var itemPack: [AlertItemRepresentable] { get }
     func makeView(for alert: Alert) -> UIView
 }
 

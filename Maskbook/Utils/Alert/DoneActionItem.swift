@@ -11,8 +11,6 @@ struct DoneActionItem {
 }
 
 extension DoneActionItem: AlertItemRepresentable {
-    var itemPack: [AlertItemRepresentable] { [self] }
-
     func makeView(for alert: Alert) -> UIView {
         alert.dissmissOnTap = false
         return UIButton().cv.apply { button in
