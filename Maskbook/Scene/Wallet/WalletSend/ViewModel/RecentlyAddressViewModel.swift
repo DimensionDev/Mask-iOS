@@ -25,7 +25,7 @@ class RecentlyAddressViewModel: NSObject {
         let currentChainId = Int64(maskUserDefaults.network.chain.rawValue)
         let currentNetworkId = Int64(maskUserDefaults.network.networkId)
         let rencentlyAddress = maskUserDefaults.recentlyAddresses.filter {
-            $0.chainId == Int64(maskUserDefaults.network.networkId)
+            $0.chainId == Int64(maskUserDefaults.network.chain.rawValue)
         }
         
         var items = [CellItem]()
@@ -54,7 +54,7 @@ class RecentlyAddressViewModel: NSObject {
         let currentChainId = Int64(maskUserDefaults.network.chain.rawValue)
         let currentNetworkId = Int64(maskUserDefaults.network.networkId)
         let rencentlyAddress = maskUserDefaults.recentlyAddresses.filter {
-            $0.chainId == Int64(maskUserDefaults.network.networkId)
+            $0.chainId == Int64(maskUserDefaults.network.chain.rawValue)
         }
         
         var items = [CellItem]()

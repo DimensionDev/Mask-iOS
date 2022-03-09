@@ -120,7 +120,7 @@ class SendTransactionViewController: BaseViewController {
         
         view.addSubview(toAddressLabel)
         toAddressLabel.snp.makeConstraints { make in
-            make.left.equalTo(22.5)
+            make.leading.equalTo(22.5)
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(24)
         }
             
@@ -128,8 +128,8 @@ class SendTransactionViewController: BaseViewController {
         enterAddressTextField.snp.makeConstraints {make in
             make.left.equalTo(toAddressLabel)
             make.top.equalTo(toAddressLabel.snp.bottom).offset(8)
-            make.leading.equalTo(-22.5)
-            make.trailing.equalTo(54)
+            make.trailing.equalTo(-22.5)
+            make.height.equalTo(54)
         }
         
         view.addSubview(tableView)
@@ -142,8 +142,8 @@ class SendTransactionViewController: BaseViewController {
         
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
-            make.leading.equalTo(-23)
-            make.trailing.equalTo(23)
+            make.leading.equalTo(23)
+            make.trailing.equalTo(-23)
             make.height.equalTo(54)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-24)
         }
@@ -196,7 +196,6 @@ class SendTransactionViewController: BaseViewController {
                     snapshot.appendItems(contactAddressItems, toSection: .contact)
                     snapshot.appendItems(recentAddressItems, toSection: .address)
                     self.dataSource.apply(snapshot, animatingDifferences: false)
-                    
                 } else {
                     let items = self.viewModel.generateCellItem(toSearch: text)
                     var snapshot = self.dataSource.snapshot()
@@ -205,7 +204,6 @@ class SendTransactionViewController: BaseViewController {
                 }
             }
             .store(in: &subscriptions)
-        
         
         enterAddressTextField.textPublisher()
             .receive(on: DispatchQueue.global())
@@ -260,7 +258,6 @@ class SendTransactionViewController: BaseViewController {
                 }
             }
             .store(in: &subscriptions)
-
     }
 }
 
@@ -356,6 +353,7 @@ extension SendTransactionViewController: UITableViewDelegate {
             }
             
         case let .paste(address, _):
+            enterAddressTextField.text = ""
             enterAddressTextField.insertText(address)
         }
     }
@@ -377,12 +375,12 @@ extension SendTransactionViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch self.dataSource.snapshot().sectionIdentifiers[section]{
         case .address:
-                        let header = tableView.dequeueHeaderFooter(RecentlyHeaderView.self)
+            let header = tableView.dequeueHeaderFooter(RecentlyHeaderView.self)
             header?.setContent(text: L10n.Scene.Sendtransaction.Send.recent, image: Asset.Images.Scene.SendTransaction.recent.image)
             return header
             
         case .contact:
-            let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: RecentlyHeaderView.self)) as! RecentlyHeaderView
+            let header = tableView.dequeueHeaderFooter(RecentlyHeaderView.self)
             header.setContent(text: L10n.Scene.Sendtransaction.Send.contact, image: Asset.Images.Scene.SendTransaction.contacts.image)
             return header
             

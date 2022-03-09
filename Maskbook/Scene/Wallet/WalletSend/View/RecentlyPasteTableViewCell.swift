@@ -54,12 +54,10 @@ class RecentlyPasteTableViewCell: UITableViewCell {
         return view
     }()
     
-
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         initView()
-
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
