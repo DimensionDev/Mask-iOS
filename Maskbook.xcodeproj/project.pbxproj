@@ -230,6 +230,7 @@
 		2A9EF067275A053D00AA66A2 /* KeyboardHandlerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9EF066275A053D00AA66A2 /* KeyboardHandlerViewController.swift */; };
 		2ABA6A1827A50A6800C0F82B /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABA6A1727A50A6800C0F82B /* Logging.swift */; };
 		2ACA1E1227182F01000C0ECC /* PasswordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACA1E1127182F01000C0ECC /* PasswordTests.swift */; };
+		2ADF9B0627D899D80020D254 /* Dismissable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF9B0527D899D80020D254 /* Dismissable.swift */; };
 		2AF884B6271EE9300004565A /* WalletConnectConnectingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF88329271EE9300004565A /* WalletConnectConnectingViewController.swift */; };
 		2AF884B7271EE9300004565A /* WallectConnectFloatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8832B271EE9300004565A /* WallectConnectFloatingView.swift */; };
 		2AF884BB271EE9300004565A /* MaskbookUIDelegateShim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF88332271EE9300004565A /* MaskbookUIDelegateShim.swift */; };
@@ -936,6 +937,7 @@
 		2A9EF066275A053D00AA66A2 /* KeyboardHandlerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandlerViewController.swift; sourceTree = "<group>"; };
 		2ABA6A1727A50A6800C0F82B /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		2ACA1E1127182F01000C0ECC /* PasswordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTests.swift; sourceTree = "<group>"; };
+		2ADF9B0527D899D80020D254 /* Dismissable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dismissable.swift; sourceTree = "<group>"; };
 		2AF88329271EE9300004565A /* WalletConnectConnectingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletConnectConnectingViewController.swift; sourceTree = "<group>"; };
 		2AF8832B271EE9300004565A /* WallectConnectFloatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallectConnectFloatingView.swift; sourceTree = "<group>"; };
 		2AF88332271EE9300004565A /* MaskbookUIDelegateShim.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskbookUIDelegateShim.swift; sourceTree = "<group>"; };
@@ -3129,6 +3131,7 @@
 			children = (
 				2A23A64927C499E800CC5AD9 /* Expand */,
 				2AF885F7271EED7D0004565A /* AttributedText.swift */,
+				2ADF9B0527D899D80020D254 /* Dismissable.swift */,
 				2AF885F8271EED7D0004565A /* SheetContainerModifier.swift */,
 				2A5FAEA327CF7AEE00D01250 /* MaskHostViewController.swift */,
 				2AF885F9271EED7D0004565A /* MoveFromBottomModifier.swift */,
@@ -3932,6 +3935,7 @@
 				2A6ABBB52720053B00CC3AED /* MergeToLocalView.swift in Sources */,
 				1F58730F277C51A3005A7B11 /* DappScriptPayload.swift in Sources */,
 				1F8AD0D226CA3C0100C9694F /* NiblessView.swift in Sources */,
+				2ADF9B0627D899D80020D254 /* Dismissable.swift in Sources */,
 				2AF884F1271EE9310004565A /* IdentityPrivateKeyImportViewController.swift in Sources */,
 				1F721098279EB2F100B8BF76 /* FungibleToken.swift in Sources */,
 				2A6ABB872720053B00CC3AED /* RestoreFilePreviewViewModel.swift in Sources */,
