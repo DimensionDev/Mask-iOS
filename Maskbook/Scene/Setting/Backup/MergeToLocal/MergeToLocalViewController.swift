@@ -76,9 +76,9 @@ final class MergeToLocalViewController: SheetViewController {
     }
     
     func showError(_ errorMessage: String) {
-        Alert(items: {
-            AlertItem.image(.error)
-            AlertItem.tipWith(
+        Alert {
+            ImageItem(.error)
+            WithTipItem(
                 title: "",
                 detail: NSAttributedString(
                     string: errorMessage,
@@ -88,13 +88,13 @@ final class MergeToLocalViewController: SheetViewController {
                     ]
                 )
             )
-            AlertItem.doneAction(
+            DoneActionItem(
                 .init(
                     title: L10n.Common.Controls.confirm,
                     action: { }
                 )
             )
-        })
+        }
         .show()
     }
 }
