@@ -15,8 +15,6 @@ struct WithTipItem {
 }
 
 extension WithTipItem: AlertItemRepresentable {
-    var itemPack: [AlertItemRepresentable] { [self] }
-
     func makeView(for alert: Alert) -> UIView {
         VStackView(spacing: 12) {
             UILabel().cv.apply { titlelabel in
