@@ -81,6 +81,7 @@ extension UIButton {
 
         setTitleColor(Asset.Colors.Public.white.color, for: .normal)
         setTitleColor(Asset.Colors.Text.normal.color, for: .disabled)
+        titleLabel?.font = FontStyles.BH5
 
         setBackgroundImage(UIImage.placeholder(color: Asset.Colors.Public.blue.color), for: .normal)
         setBackgroundImage(UIImage.placeholder(color: Asset.Colors.Background.disable.color), for: .disabled)
@@ -92,9 +93,13 @@ extension UIButton {
     @discardableResult
     func cancelButtonStyle() -> Self {
         applyCornerRadius(radius: 8)
-        backgroundColor = Asset.Colors.Background.blue.color
+        backgroundColor = Asset.Colors.Background.blue1.color
+
         setTitle(L10n.Common.Controls.cancel, for: .normal)
         setTitleColor(Asset.Colors.Text.link.color, for: .normal)
+
+        titleLabel?.font = FontStyles.BH5
+        
         snp.makeConstraints { $0.height.equalTo(54) }
         return self
     }
