@@ -47,12 +47,10 @@ class PersonaCollectionCell: UICollectionViewCell {
         return imageView
     }()
     
-//    private lazy var shadowImageView: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.contentMode = .scaleAspectFit
-//        imageView.image = Asset.Images.Scene.Personas.personaShadow.image
-//        return imageView
-//    }()
+    private lazy var shadowView: UIView = {
+        let view = UIView()
+        return view
+    }()
     
     private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView()
@@ -73,14 +71,13 @@ class PersonaCollectionCell: UICollectionViewCell {
         label.font = FontStyles.RH10
         label.textColor = Asset.Colors.Public.white.color
         label.numberOfLines = 0
-        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
     private lazy var littleMaskView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.image = Asset.Icon.Logo.littleMask.image
+        imageView.image = Asset.Icon.Logo.maskWithBorder.image
         return imageView
     }()
     
@@ -92,18 +89,12 @@ class PersonaCollectionCell: UICollectionViewCell {
     }()
     
     private lazy var stack: HStackView = {
-        let identifierStackView = HStackView {
+        let identifierStackView = HStackView(spacing: 4, alignment: .top) {
             littleMaskView
-                .cv.apply {
-                    NSLayoutConstraint.activate([
-                        $0.heightAnchor.constraint(equalToConstant: 16),
-                        $0.widthAnchor.constraint(equalToConstant: 16)
-                    ])
-                }
             identifierLabel
         }
         
-        let infoStack = VStackView {
+        let infoStack = VStackView(spacing: 4) {
             nameLabel
             identifierStackView
         }
@@ -154,23 +145,29 @@ class PersonaCollectionCell: UICollectionViewCell {
         layer.startPoint = CGPoint(x: 0, y: 0)
         layer.endPoint = CGPoint(x: 0, y: 1)
         layer.cornerRadius = 20
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 5)
-        layer.shadowRadius = 5
-        layer.shadowOpacity = 0.5
         return layer
     }()
     
     override func layoutSubviews() {
         super.layoutSubviews()
         backgroundLayer.frame = stack.bounds
+        let shadowLayer = shadowView.layer
+        shadowLayer.shadowOpacity = 1
+        shadowLayer.shadowOffset = .zero
+        shadowLayer.shadowRadius = 10
+        shadowLayer.shadowColor = Asset.Colors.Shadow.Card.all.color.cgColor
+        let rect = CGRect(x: 40,
+                          y: shadowView.bounds.height,
+                          width: shadowView.bounds.width - 80,
+                          height: 7)
+        shadowLayer.shadowPath = UIBezierPath(roundedRect: rect, cornerRadius: 20).cgPath
     }
     
     private func configure() {
         contentView.backgroundColor = .clear
         
         contentView.withSubViews {
-//            shadowImageView
+            shadowView
             backgroundImageView
             stack
         }
@@ -189,13 +186,12 @@ class PersonaCollectionCell: UICollectionViewCell {
             backgroundImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12)
         ])
         
-//        NSLayoutConstraint.activate([
-//            shadowImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-//            shadowImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 40),
-//            shadowImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -40),
-//            shadowImageView.heightAnchor.constraint(equalToConstant: 40),
-//            shadowImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 40)
-//        ])
+        NSLayoutConstraint.activate([
+            shadowView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            shadowView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 40),
+            shadowView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -40),
+            shadowView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12 )
+        ])
         
         contentView.layer.insertSublayer(backgroundLayer, at: 0)
         backgroundLayer.frame = stack.bounds
@@ -217,7 +213,7 @@ class PersonaCollectionCell: UICollectionViewCell {
     
     func config(persona: PersonaRecord) {
         nameLabel.text = persona.nickname
-        identifierLabel.text = persona.identifier
+        identifierLabel.text = persona.identifier?.split(separator: "/").last.flatMap({ String($0) })
         avatarImageView.image = Asset.Images.Scene.Personas.personaDefault.image
     }
     

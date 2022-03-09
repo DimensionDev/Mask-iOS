@@ -15,7 +15,7 @@ import CoreDataStack
 class ContactsViewController: BaseViewController {
     private var disposeBag = Set<AnyCancellable>()
 
-    private let viewModel = ContactsViewViewModel()
+    private let viewModel = ContactsViewModel()
 
     @InjectedProvider(\.userDefaultSettings)
     private var settings

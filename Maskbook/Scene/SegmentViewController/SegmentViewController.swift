@@ -16,7 +16,19 @@ class SegmentViewController: UIViewController {
     var items: [String]
     var viewControllers: [UIViewController]
     
-    let segments = MaskSegmentControl()
+    var style: MaskSegmentControlStyle
+    
+    private lazy var segments: MaskSegmentControl = {
+        switch style {
+        case .group:
+            let segments = GroupMaskSegmentControl()
+            return segments
+            
+        case .plain:
+            let segments = PlainMaskSegmentComtrol()
+            return segments
+        }
+    }()
     
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -32,9 +44,10 @@ class SegmentViewController: UIViewController {
         UIScreen.main.bounds.width
     }
     
-    required init(items: [String], viewControllers: [UIViewController]) {
+    required init(items: [String], viewControllers: [UIViewController], style: MaskSegmentControlStyle = .plain) {
         self.items = items
         self.viewControllers = viewControllers
+        self.style = style
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -60,7 +73,6 @@ class SegmentViewController: UIViewController {
     
     func setupSegmentControl() {
         segments.setItems(items: items)
-        segments.backgroundColor = Asset.Colors.Background.blurred.color
         view.addSubview(segments)
         segments.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -70,9 +82,6 @@ class SegmentViewController: UIViewController {
             segments.heightAnchor.constraint(equalToConstant: 56)
         ])
         DispatchQueue.main.async {
-            self.segments.clipsToBounds = false
-            self.segments.layer.masksToBounds = false
-            self.segments.applyShadow(color: Asset.Colors.segmentShadow.color, alpha: 1, x: 0, y: 4, blur: 14, cornerRadius: 0, spread: 1)
             self.segments.selectedIndex(at: 0, animated: false)
         }
     }

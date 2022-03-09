@@ -12,7 +12,7 @@ import CoreDataStack
 import Foundation
 import UIKit
 
-class ContactsViewViewModel {
+class ContactsViewModel {
     private var disposeBag = Set<AnyCancellable>()
 
     @InjectedProvider(\.personaManager)
@@ -44,7 +44,7 @@ class ContactsViewViewModel {
                     let relations = RelationRepository.queryRelations(personaIdentifier: personaIdentifier)
                     profileIdentifiers = relations.compactMap(\.profileIdentifier)
                 }
-                let publisher = ContactsViewViewModel.profileRecordPublisher(identifiers: profileIdentifiers)
+                let publisher = ContactsViewModel.profileRecordPublisher(identifiers: profileIdentifiers)
                 self?.profileRecordPublisher = publisher
                 return publisher
             }

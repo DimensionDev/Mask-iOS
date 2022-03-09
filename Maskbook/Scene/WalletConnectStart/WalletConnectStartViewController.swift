@@ -59,7 +59,6 @@ class WalletConnectStartViewController: BaseViewController {
         view.addSubview(segmentView)
         segmentView.translatesAutoresizingMaskIntoConstraints = false
         segmentViewController.scrollView.isScrollEnabled = false
-        segmentViewController.segments.backgroundColor = UIColor.clear
         segmentViewController.didMove(toParent: self)
         NSLayoutConstraint.activate([
             segmentView.topAnchor.constraint(equalTo: view.topAnchor, constant: 86),

@@ -51,7 +51,7 @@ class PersonasViewController: BaseViewController {
     weak var socialViewController: SocialViewController?
 
     lazy var segmentViewController: SegmentViewController = {
-        let segmentVC = SegmentViewController(items: items, viewControllers: viewControllers)
+        let segmentVC = SegmentViewController(items: items, viewControllers: viewControllers, style: .group)
         socialViewController = segmentVC.viewControllers.first as? SocialViewController
         return segmentVC
     }()
@@ -83,14 +83,15 @@ class PersonasViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationItems()
-        setuppersonaCollectionView()
+        setupPersonaCollectionView()
         setupSegmentViewController()
         setupConnectViewController()
         subscribeSignals()
         updateWithPersonaProfileState()
+        scrollToCurrentPersona()
     }
 
-    func setuppersonaCollectionView() {
+    func setupPersonaCollectionView() {
         personaCollectionView.delegate = horizontalDataSource
         personaCollectionView.dataSource = horizontalDataSource
         personaCollectionView.register(PersonaCollectionCell.self)
@@ -129,7 +130,6 @@ class PersonasViewController: BaseViewController {
             segmentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             segmentView.bottomAnchor.constraint(equalTo: view.readableContentGuide.bottomAnchor)
         ])
-        segmentViewController.segments.backgroundColor = Asset.Colors.Background.bar.color
     }
 
     func setupConnectViewController() {
@@ -164,6 +164,15 @@ class PersonasViewController: BaseViewController {
 
     func updateWithPersonaProfileState() {
         connectTOSocialVC.view.isHidden = !personaManager.currentProfiles.value.isEmpty
+    }
+
+    func scrollToCurrentPersona() {
+        guard let persona = personaManager.currentPersona.value else { return }
+        let personas = personaManager.personaRecordsSubject.value
+        guard let index = personas.firstIndex(of: persona) else { return }
+        DispatchQueue.main.async {
+            self.personaCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .left, animated: false)
+        }
     }
 }
 
