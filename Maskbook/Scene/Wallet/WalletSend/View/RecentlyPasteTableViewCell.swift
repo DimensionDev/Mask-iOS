@@ -104,11 +104,7 @@ class RecentlyPasteTableViewCell: UITableViewCell {
     
     func setModel(name: String?, address: String) {
         addressslabel.text = address
-        if  name != nil {
-            nameLabel.text = name
-            nameLabel.isHidden = false
-        } else {
-            nameLabel.isHidden = true
-        }
+        nameLabel.text = name
+        nameLabel.isHidden = false
     }
 }
