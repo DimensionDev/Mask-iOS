@@ -105,6 +105,7 @@
 "Common.Controls.Verify" = "验证";
 "Common.Controls.WebviewGoBack" = "后退";
 "Common.Loading" = "加载中...";
+"Common.Toast.Saved" = "保存！";
 "Scene.App.GoodLuckNextTime" = "祝您下次好运";
 "Scene.App.MarketTrendSource" = "市场趋势信息源";
 "Scene.App.PluginIntroduction.FileService" = "为用户提供去中心化文档存储功能。";
@@ -256,11 +257,8 @@ Clicking the confirm button means that you agree to bear the above possible risk
 "Scene.PersonaContacts.Delete" = "确认删除";
 "Scene.PersonaContacts.EmptyContactsTips" = "您还没有联系人。 
 邀请好友下载 Mask Network。";
-"Scene.PersonaDownload.DownloadTips" = "这个二维码包含您的身份信息，请安全保存。您可以使用Mask APP 扫描二维码登录身份。";
-"Scene.PersonaDownload.IdentityId" = "身份 ID";
-"Scene.PersonaDownload.MaskId" = "MASK ID";
-"Scene.PersonaDownload.Persona" = "身份:";
-"Scene.PersonaDownload.PrivateKey" = "私钥";
+"Scene.PersonaDownload.DownloadTips" = "二维码会加密您个人的身份码或私钥，建议打印它。您可以使用 Mask App 扫描二维码以登录。";
+"Scene.PersonaDownload.IdentityId" = "身份代码";
 "Scene.PersonaExportPrivateKey.BackupRecovery" = "备份与恢复设置";
 "Scene.PersonaExportPrivateKey.Tips" = "此导出仅用于导出私钥。我们不导出任何其他数据。如果您需要导入更多数据，请前往设置： ";
 "Scene.PersonaExportPrivateKey.Title" = "导出私钥";

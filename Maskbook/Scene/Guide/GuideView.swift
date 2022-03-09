@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct GuideView: View {
+struct GuideView: View, Dismissable {
     @Environment(\.presentationMode) var presentationMode
     @State private var page: Int = 0
     
@@ -43,7 +43,7 @@ struct GuideView: View {
         HStack {
             Spacer()
             Button {
-                presentationMode.wrappedValue.dismiss()
+                dismiss()
             } label: {
                 Text(L10n.Scene.Guide.skip)
                     .font(FontStyles.bh5.font)
@@ -61,7 +61,7 @@ struct GuideView: View {
         TabView(selection: $page.animation(.default)) {
             ForEach(GuideItemView.Page.allCases) { page in
                 GuideItemView(page: page, contentSize: contentSize) {
-                    presentationMode.wrappedValue.dismiss()
+                    dismiss()
                 }
                 .frame(width: contentSize.width, height: contentSize.height)
             }
