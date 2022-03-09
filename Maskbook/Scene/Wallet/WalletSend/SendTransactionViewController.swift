@@ -381,7 +381,7 @@ extension SendTransactionViewController: UITableViewDelegate {
             
         case .contact:
             let header = tableView.dequeueHeaderFooter(RecentlyHeaderView.self)
-            header.setContent(text: L10n.Scene.Sendtransaction.Send.contact, image: Asset.Images.Scene.SendTransaction.contacts.image)
+            header?.setContent(text: L10n.Scene.Sendtransaction.Send.contact, image: Asset.Images.Scene.SendTransaction.contacts.image)
             return header
             
         default:
