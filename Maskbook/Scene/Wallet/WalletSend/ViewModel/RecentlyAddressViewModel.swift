@@ -88,7 +88,7 @@ class RecentlyAddressViewModel: NSObject {
         
     func pasteCellItem(pasteText: String, ensName: String?) -> [CellItem] {
         var items = [CellItem]()
-        items.append(CellItem.paste(address: pasteText, ensName: ensName))
+        items.append(.paste(address: pasteText, ensName: ensName))
         return items
     }
 }
