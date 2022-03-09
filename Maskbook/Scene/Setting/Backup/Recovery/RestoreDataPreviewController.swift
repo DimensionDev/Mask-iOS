@@ -196,17 +196,17 @@ final class RestoreDataPreviewController: BaseViewController {
         finalTip.append(restoeSucceedTip)
         finalTip.append(syncPasswordTip)
 
-        Alert(items: {
-            AlertItem.image(.success)
-            AlertItem.contentText(
+        Alert {
+            ImageItem(.success)
+            ContentTextItem(
                 finalTip,
                 alignment: .left
             )
-            AlertItem.cancelAndConfirm(
+            CancelAndConfirmItem(
                 cancel: .init(title: L10n.Common.Controls.cancel, action: { [weak self] in self?.login() }),
                 confirm: .init(title: L10n.Common.Controls.confirm, action: { [weak self] in self?.syncPasswordAndLogin() })
             )
-        })
+        }
         .show()
     }
 
@@ -222,9 +222,9 @@ final class RestoreDataPreviewController: BaseViewController {
             }
 
         case .root, .setting:
-            Alert(items: {
-                AlertItem.image(.success)
-                AlertItem.tipWith(
+            Alert {
+                ImageItem(.success)
+                WithTipItem(
                     title: L10n.Scene.Restore.completion,
                     detail: NSAttributedString(
                         string: L10n.Scene.Restore.succeedDetail,
@@ -234,7 +234,7 @@ final class RestoreDataPreviewController: BaseViewController {
                         ]
                     )
                 )
-                AlertItem.doneAction(
+                DoneActionItem(
                     .init(
                         title: L10n.Common.Controls.done,
                         action: { [weak self] in
@@ -247,7 +247,7 @@ final class RestoreDataPreviewController: BaseViewController {
                         }
                     )
                 )
-            })
+            }
             .show()
         }
     }
@@ -257,9 +257,9 @@ final class RestoreDataPreviewController: BaseViewController {
 
 extension RestoreDataPreviewController {
     private func showRetryAlert() {
-        Alert(items: {
-            AlertItem.image(.error)
-            AlertItem.tipWith(
+        Alert {
+            ImageItem(.error)
+            WithTipItem(
                 title: L10n.Scene.Restore.Titles.loadingFailed,
                 detail: NSAttributedString(
                     string: L10n.Scene.Restore.Tip.dataFailedToFetch,
@@ -269,7 +269,7 @@ extension RestoreDataPreviewController {
                     ]
                 )
             )
-            AlertItem.cancelAndConfirm(
+            CancelAndConfirmItem(
                 cancel: .init(title: L10n.Common.Controls.cancel),
                 confirm: .init(
                     title: L10n.Common.Controls.tryAgain,
@@ -279,30 +279,30 @@ extension RestoreDataPreviewController {
                     }
                 )
             )
-        })
+        }
         .show()
     }
 
     private func showRestoreFailedAlert() {
-        Alert(items: {
-            AlertItem.image(.error)
-            AlertItem.plainText(
+        Alert {
+            ImageItem(.error)
+            PlainTextItem(
                 title: L10n.Scene.Restore.Titles.restoreFailed,
                 detail: ""
             )
-            AlertItem.doneAction(.init(
+            DoneActionItem(.init(
                 title: L10n.Common.Controls.ok,
                 action: {
                 }
             ))
-        })
+        }
         .show()
     }
 
     private func showAlertWhenFileParsingFailed() {
-        Alert(items: {
-            AlertItem.image(.warning)
-            AlertItem.tipWith(
+        Alert {
+            ImageItem(.warning)
+            WithTipItem(
                 title: L10n.Scene.Restore.Titles.unsupportRestoreData,
                 detail: NSAttributedString(
                     string: L10n.Scene.Restore.checkUnsupportData,
@@ -312,7 +312,7 @@ extension RestoreDataPreviewController {
                     ]
                 )
             )
-            AlertItem.doneAction(
+            DoneActionItem(
                 .init(
                     title: L10n.Common.Controls.ok,
                     action: { [weak self] in
@@ -320,7 +320,7 @@ extension RestoreDataPreviewController {
                     }
                 )
             )
-        })
+        }
         .show()
     }
 }

@@ -37,8 +37,8 @@ class AlertContainerController<V: UIView>: PopupViewController {
     @ShadowAndRadiusWrapped
     private(set) var content: V
 
-    init(_ content: @escaping () -> V) {
-        self.content = content()
+    init(_ content: V) {
+        self.content = content
         super.init(presenter: .alert)
     }
 
