@@ -377,8 +377,8 @@ extension SendTransactionViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch self.dataSource.snapshot().sectionIdentifiers[section]{
         case .address:
-            let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: RecentlyHeaderView.self)) as! RecentlyHeaderView
-            header.setContent(text: L10n.Scene.Sendtransaction.Send.recent, image: Asset.Images.Scene.SendTransaction.recent.image)
+                        let header = tableView.dequeueHeaderFooter(RecentlyHeaderView.self)
+            header?.setContent(text: L10n.Scene.Sendtransaction.Send.recent, image: Asset.Images.Scene.SendTransaction.recent.image)
             return header
             
         case .contact:
