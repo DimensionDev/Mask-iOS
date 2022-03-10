@@ -133,6 +133,10 @@
             "wrong_folder": {
                 "title": "Please select another folder",
                 "description": "When you delete Mask App, the Mask Network sandbox folder would also be deleted. For data security, please save to a more secure folder (non-sandbox)."
+            },
+            "backup_popup_binding_first": {
+                "title": "Bind your email or phone",
+                "description": "Please bind your email or phone number before you back up to cloud."
             }
         },
         "controls": {

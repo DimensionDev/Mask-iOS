@@ -180,8 +180,8 @@ private extension SettingBackupViewController {
         Alert(items: {
             AlertItem.image(.warning)
             AlertItem.plainText(
-                title: "Bind your email or phone",
-                detail: "Please bind your email or phone number before you back up to cloud. "
+                title: L10n.Common.Alert.BackupPopupBindingFirst.title,
+                detail: L10n.Common.Alert.BackupPopupBindingFirst.description
             )
             AlertItem.doneAction(
                 .init(
