@@ -1139,6 +1139,8 @@ const CollectionIcon = /*#__PURE__*/ (0,react.memo)(({ collection , onClick , se
             className: classnames_default()(classes.collectionWrap, (0,utils_address/* isSameAddress */.Wr)(collection.address, selectedCollection) ? classes.selected : ''),
             onClick: onClick,
             children: collection.iconURL ? /*#__PURE__*/ (0,jsx_runtime.jsx)(Image/* Image */.E, {
+                width: 24,
+                height: 24,
                 component: "img",
                 className: classes.collectionImg,
                 src: collection.iconURL
@@ -1417,18 +1419,45 @@ function CollectionList({ addressName , onSelectAddress  }) {
         collectibles.length,
         collectionsFormRemote.length
     ]);
-    if (!isLoading && !collectibles.length) return(/*#__PURE__*/ (0,jsx_runtime.jsx)(Box/* default */.Z, {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Typography/* default */.Z, {
-            color: "textPrimary",
-            sx: {
-                paddingTop: 4,
-                paddingBottom: 4
-            },
-            children: t('dashboard_no_collectible_found')
-        })
+    if (!isLoading && !collectibles.length) return(/*#__PURE__*/ (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
+        children: [
+            addressName && /*#__PURE__*/ (0,jsx_runtime.jsx)(Stack/* default */.Z, {
+                direction: "row",
+                height: 42,
+                justifyContent: "flex-end",
+                alignItems: "center",
+                px: 2,
+                children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Box/* default */.Z, {
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-end",
+                    flexWrap: "wrap",
+                    children: /*#__PURE__*/ (0,jsx_runtime.jsxs)(Button/* default */.Z, {
+                        onClick: onSelectAddress,
+                        className: classes.button,
+                        variant: "outlined",
+                        size: "small",
+                        children: [
+                            (0,formatter/* formatEthereumAddress */.j8)(addressName.label, 5),
+                            /*#__PURE__*/ (0,jsx_runtime.jsx)(KeyboardArrowDown/* default */.Z, {})
+                        ]
+                    })
+                })
+            }),
+            /*#__PURE__*/ (0,jsx_runtime.jsx)(Box/* default */.Z, {
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Typography/* default */.Z, {
+                    color: "textPrimary",
+                    sx: {
+                        paddingTop: 4,
+                        paddingBottom: 4
+                    },
+                    children: t('dashboard_no_collectible_found')
+                })
+            })
+        ]
     }));
     return(/*#__PURE__*/ (0,jsx_runtime.jsxs)(Box/* default */.Z, {
         children: [

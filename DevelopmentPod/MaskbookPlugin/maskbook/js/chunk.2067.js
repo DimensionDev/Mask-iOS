@@ -136,6 +136,7 @@ var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
 
 
 
+
 const useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
         card: {
             borderRadius: 8,
@@ -185,6 +186,7 @@ const useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
 );
 const DonationCard = ({ imageUrl , name , contribCount , contribDetails , className , ...rest })=>{
     const { classes  } = useStyles();
+    const t = useI18N();
     return(/*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
         className: classnames_default()(classes.card, className),
         ...rest,
@@ -215,9 +217,14 @@ const DonationCard = ({ imageUrl , name , contribCount , contribDetails , classN
                                 className: classes.infoLabel,
                                 children: contribCount
                             }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("span", {
                                 className: classes.infoValue,
-                                children: " Contrib"
+                                children: [
+                                    " ",
+                                    t.contribution({
+                                        count: contribCount
+                                    })
+                                ]
                             })
                         ]
                     }),

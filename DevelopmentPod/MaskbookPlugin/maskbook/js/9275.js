@@ -1,4 +1,4 @@
-(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[6380],{
+(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[9275],{
 
 /***/ 40564:
 /***/ ((module) => {
@@ -21110,12 +21110,12 @@ const buildInfoMarkdown = `## Build info
 - target: ${"safari"}
 - build: ${"stable"}
 - architecture: ${"app"}
-- BUILD_DATE: ${"2022-03-04T08:10:16.981Z"}
-- VERSION: ${"v1.29.12-2082-g1a6c3c7cb"}
+- BUILD_DATE: ${"2022-03-10T06:24:06.162Z"}
+- VERSION: ${"v1.29.12-2096-g2617e1b04"}
 
 ## Git (${ true ? '*' : 0}):
 
-${"1a6c3c7cb"} (${"feat/sendRedpacketToNative"}) on tag "${"v2.5.0"}"
+${"2617e1b04"} (${"feat/sendRedpacketToNative"}) on tag "${"v2.5.0"}"
 ${((ref6 = (ref5 = "git@github.com:DimensionDev/Maskbook.git") === null || ref5 === void 0 ? void 0 : ref5.toLowerCase()) === null || ref6 === void 0 ? void 0 : ref6.includes('DimensionDev')) ? '' : "git@github.com:DimensionDev/Maskbook.git"}`;
 
 // EXTERNAL MODULE: ./src/social-network/index.ts
@@ -23086,7 +23086,7 @@ var types = __webpack_require__(95130);
 // EXTERNAL MODULE: ./src/plugins/NextID/constants.ts
 var constants = __webpack_require__(96214);
 ;// CONCATENATED MODULE: ./src/plugins/NextID/locales/en-US.json
-const en_US_namespaceObject = JSON.parse('{"wallet":"Wallet","persona":"Persona","unsupported_network":"Unsupported Network","connect_wallet__other_user_tip_intro":"Currently no wallet is bound by this account.","connect_wallet_tip_intro":"Connect your wallet here.","connect_wallet_tip":"In this Web 3 section, you can show your address for receiving tips, your NFT collection, donation records, and other on-chain information to friends who have installed Mask Network.","verify_wallet_button":"Verify your wallet","add_wallet_button":"Add wallet","verify_wallet_dialog_title":"Verify your wallet","bind_wallet_bound_error":"This wallet address has already bound.","unbind_wallet_same_account_error":"Please switch to the address that needs to be unbound.","unbind_dialog_title":"Unbind wallet","persona_sign":"Persona Sign","wallet_sign":"Wallet Sign","copied":"copied","view_on_explorer":"View on explorer","notify_persona_sign":"Persona Sign","notify_persona_sign_confirm":"Confirm this sign in your Personas","notify_persona_sign_cancel":"Your wallet cancelled the sign","notify_wallet_sign":"Wallet Sign","notify_wallet_sign_confirm":"Confirm this sign in your wallet","notify_wallet_sign_cancel":"Your wallet cancelled the sign","notify_wallet_sign_request_title":"Wallet Sign","notify_wallet_sign_request_success":"Signature success","notify_wallet_sign_request_failed":"Signature failed","create_persona":"Create persona","connect_persona":"Connect persona","please_create_persona":"Please create persona","please_connect_persona":"Please connect persona","unbind_persona_tip":"Choose either your Persona or the currently bound wallet to sign to unbind.","unbind_wallet_tip":"Choose either your Persona or the currently bound wallet to sign to unbind.","done":"Done","copy_success_of_wallet_address":"Copy wallet address successfully!"}');
+const en_US_namespaceObject = JSON.parse('{"wallet":"Wallet","persona":"Persona","unsupported_network":"Unsupported Network","connect_wallet__other_user_tip_intro":"This user has no wallets connected.","connect_wallet_tip_intro":"Connect you wallet.","connect_wallet_tip":"In the Web3 tab, you can show your wallet addresses for receiving tips, NFT collections, donation records, and other on-chain feeds to friends who have also installed the Mask extension.","verify_wallet_button":"Verify Your Wallet","add_wallet_button":"Add A Wallet","verify_wallet_dialog_title":"Verify your wallet","bind_wallet_bound_error":"This wallet address has already connected.","unbind_wallet_same_account_error":"Please switch to the address that you want to disconnect.","unbind_dialog_title":"Disconnect wallet","persona_sign":"Persona Sign","wallet_sign":"Wallet Sign","copied":"copied","view_on_explorer":"View on explorer","notify_persona_sign":"Persona Sign","notify_persona_sign_confirm":"Confirm this sign in your Personas","notify_persona_sign_cancel":"Your wallet cancelled the sign","notify_wallet_sign":"Wallet Sign","notify_wallet_sign_confirm":"Confirm this transaction in your wallet.","notify_wallet_sign_cancel":"Wallet sign cancelled.","notify_wallet_sign_request_title":"Wallet Sign","notify_wallet_sign_request_success":"Wallet sign succeeded.","notify_wallet_sign_request_failed":"Wallet sign failed.","create_persona":"Create Persona","connect_persona":"Connect Persona","please_create_persona":"Please create persona","please_connect_persona":"Please connect persona","unbind_persona_tip":"Choose either your Persona or the currently connected wallet to sign to disconnect.","unbind_wallet_tip":"Choose either your Persona or the currently connected wallet to sign to disconnect.","done":"Done","copy_success_of_wallet_address":"Copy wallet address successfully!"}');
 ;// CONCATENATED MODULE: ./src/plugins/NextID/locales/ja-JP.json
 const ja_JP_namespaceObject = {};
 ;// CONCATENATED MODULE: ./src/plugins/NextID/locales/ko-KR.json
@@ -27162,7 +27162,7 @@ __webpack_require__.d(__webpack_exports__, {
 });
 
 ;// CONCATENATED MODULE: ../plugins/RSS3/src/locales/en-US.json
-const en_US_namespaceObject = JSON.parse('{"inactive_project":"Inactive Project","no_activity_time":"No activity time","attended":"attended","no_data":"No data","total_grants":"Total {{count}} Grants"}');
+const en_US_namespaceObject = JSON.parse('{"inactive_project":"Inactive Project","no_activity_time":"No activity time","attended":"attended","no_data":"No data","total_grants":"Total {{count}} Grants","contribution":"Contribution","contribution_other":"Contributions"}');
 ;// CONCATENATED MODULE: ../plugins/RSS3/src/locales/ja-JP.json
 const ja_JP_namespaceObject = {};
 ;// CONCATENATED MODULE: ../plugins/RSS3/src/locales/ko-KR.json
@@ -33258,35 +33258,39 @@ var debank = __webpack_require__(60816);
 
 function format_formatAssets(data) {
     const supportedChains = Object.values(DeBank.CHAIN_ID).filter(Boolean);
-    return data.filter((x)=>x.is_verified
-    ).map((y)=>{
-        var ref;
-        const chainIdFromChain = (ref = getChainIdFromName(y.chain)) !== null && ref !== void 0 ? ref : ChainId.Mainnet;
+    const result = data.reduce((list, y)=>{
+        if (!y.is_verified) return list;
+        const chainIdFromChain = getChainIdFromName(y.chain);
+        if (!chainIdFromChain) return list;
         const address = supportedChains.includes(y.id) ? createNativeToken(chainIdFromChain).address : y.id;
         var _price;
-        return {
-            id: address,
-            chainId: chainIdFromChain,
-            token: {
+        return [
+            ...list,
+            {
                 id: address,
-                address: address,
                 chainId: chainIdFromChain,
-                type: TokenType.Fungible,
-                decimals: y.decimals,
-                name: y.name,
-                symbol: y.symbol,
+                token: {
+                    id: address,
+                    address: address,
+                    chainId: chainIdFromChain,
+                    type: TokenType.Fungible,
+                    decimals: y.decimals,
+                    name: y.name,
+                    symbol: y.symbol,
+                    logoURI: y.logo_url
+                },
+                balance: rightShift(y.amount, y.decimals).toFixed(),
+                price: {
+                    [CurrencyType.USD]: toFixed(y.price)
+                },
+                value: {
+                    [CurrencyType.USD]: multipliedBy((_price = y.price) !== null && _price !== void 0 ? _price : 0, y.amount).toFixed()
+                },
                 logoURI: y.logo_url
-            },
-            balance: rightShift(y.amount, y.decimals).toFixed(),
-            price: {
-                [CurrencyType.USD]: toFixed(y.price)
-            },
-            value: {
-                [CurrencyType.USD]: multipliedBy((_price = y.price) !== null && _price !== void 0 ? _price : 0, y.amount).toFixed()
-            },
-            logoURI: y.logo_url
-        };
-    });
+            }, 
+        ];
+    }, []);
+    return result;
 }
 
 ;// CONCATENATED MODULE: ../web3-providers/src/debank/index.ts
@@ -33532,8 +33536,10 @@ async function fetchFromOpenSea(url, chainId, apiKey) {
                 mode: 'cors'
             }
         });
-        if (response.status === 404) return;
-        return response.json();
+        if (response.ok) {
+            return await response.json();
+        }
+        return;
     } catch  {
         return;
     }
@@ -33735,7 +33741,7 @@ class OpenSeaAPI {
         return createERC721TokenFromAsset(address, tokenId, chainId, response);
     }
     async getTokens(from, opts) {
-        var ref;
+        var ref, ref42;
         const { chainId =types/* ChainId.Mainnet */.a_.Mainnet , page =0 , size =50  } = opts;
         const requestPath = dist_default()('/api/v1/assets', {
             owner: from,
@@ -33744,8 +33750,8 @@ class OpenSeaAPI {
             collection: (ref = opts.pageInfo) === null || ref === void 0 ? void 0 : ref.collection
         });
         const response = await fetchFromOpenSea(requestPath, chainId, this._apiKey);
-        var ref42;
-        const assets = (ref42 = response === null || response === void 0 ? void 0 : response.assets.filter((x)=>[
+        var ref43;
+        const assets = (ref43 = response === null || response === void 0 ? void 0 : (ref42 = response.assets) === null || ref42 === void 0 ? void 0 : ref42.filter((x)=>[
                 'non-fungible',
                 'semi-fungible'
             ].includes(x.asset_contract.asset_contract_type) || [
@@ -33757,7 +33763,7 @@ class OpenSeaAPI {
                 ...x,
                 provideBy: 'OpenSea'
             })
-        )) !== null && ref42 !== void 0 ? ref42 : [];
+        )) !== null && ref43 !== void 0 ? ref43 : [];
         return {
             data: assets,
             hasNextPage: assets.length === size
@@ -33772,8 +33778,8 @@ class OpenSeaAPI {
             limit: size
         });
         const response = await fetchFromOpenSea(requestPath, chainId);
-        var ref43;
-        return (ref43 = response === null || response === void 0 ? void 0 : (ref = response.asset_events) === null || ref === void 0 ? void 0 : ref.map(createNFTHistory)) !== null && ref43 !== void 0 ? ref43 : [];
+        var ref44;
+        return (ref44 = response === null || response === void 0 ? void 0 : (ref = response.asset_events) === null || ref === void 0 ? void 0 : ref.map(createNFTHistory)) !== null && ref44 !== void 0 ? ref44 : [];
     }
     async getOrders(address, tokenId, side, { chainId =types/* ChainId.Mainnet */.a_.Mainnet , page , size  } = {}) {
         var ref;
@@ -33785,8 +33791,8 @@ class OpenSeaAPI {
             limit: size
         });
         const response = await fetchFromOpenSea(requestPath, chainId);
-        var ref44;
-        return (ref44 = response === null || response === void 0 ? void 0 : (ref = response.orders) === null || ref === void 0 ? void 0 : ref.map(createAssetOrder)) !== null && ref44 !== void 0 ? ref44 : [];
+        var ref45;
+        return (ref45 = response === null || response === void 0 ? void 0 : (ref = response.orders) === null || ref === void 0 ? void 0 : ref.map(createAssetOrder)) !== null && ref45 !== void 0 ? ref45 : [];
     }
     async getCollections(address, opts = {}) {
         const { chainId =types/* ChainId.Mainnet */.a_.Mainnet , page =0 , size =50  } = opts;
@@ -33802,24 +33808,24 @@ class OpenSeaAPI {
                 hasNextPage: false
             };
         }
-        var ref49;
-        const collections = (ref49 = response === null || response === void 0 ? void 0 : response.map((x1)=>{
-            var ref, ref45, ref46, ref47, ref48;
+        var ref50;
+        const collections = (ref50 = response === null || response === void 0 ? void 0 : response.map((x1)=>{
+            var ref, ref46, ref47, ref48, ref49;
             return {
                 name: x1.name,
                 image: x1.image_url || undefined,
                 slug: x1.slug,
                 id: x1.slug,
                 chainId,
-                symbol: (ref = x1.primary_asset_contracts) === null || ref === void 0 ? void 0 : (ref45 = ref[0]) === null || ref45 === void 0 ? void 0 : ref45.symbol,
-                address: (ref46 = x1.primary_asset_contracts) === null || ref46 === void 0 ? void 0 : (ref47 = ref46[0]) === null || ref47 === void 0 ? void 0 : ref47.address,
+                symbol: (ref = x1.primary_asset_contracts) === null || ref === void 0 ? void 0 : (ref46 = ref[0]) === null || ref46 === void 0 ? void 0 : ref46.symbol,
+                address: (ref47 = x1.primary_asset_contracts) === null || ref47 === void 0 ? void 0 : (ref48 = ref47[0]) === null || ref48 === void 0 ? void 0 : ref48.address,
                 // workaround: rarible collection have multi contract
-                addresses: (ref48 = x1.primary_asset_contracts) === null || ref48 === void 0 ? void 0 : ref48.map((x)=>x.address
+                addresses: (ref49 = x1.primary_asset_contracts) === null || ref49 === void 0 ? void 0 : ref49.map((x)=>x.address
                 ),
                 iconURL: x1.image_url,
                 balance: x1.owned_asset_count
             };
-        })) !== null && ref49 !== void 0 ? ref49 : [];
+        })) !== null && ref50 !== void 0 ? ref50 : [];
         return {
             data: collections,
             hasNextPage: collections.length === size
@@ -44049,6 +44055,19 @@ function toString(val) {
     return value;
 }
 //# sourceMappingURL=utils.js.map
+
+/***/ }),
+
+/***/ 44284:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "oy": () => (/* binding */ u)
+/* harmony export */ });
+/* unused harmony exports JSON_TYPES, TypesonPromise, Undefined, escapeKeyPathComponent, getByKeyPath, getJSONType, hasConstructorOf, isObject, isPlainObject, isThenable, isUserObject, setAtKeyPath, toStringTag, unescapeKeyPathComponent */
+function ownKeys(e,t){var r=Object.keys(e);if(Object.getOwnPropertySymbols){var n=Object.getOwnPropertySymbols(e);t&&(n=n.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),r.push.apply(r,n)}return r}function _objectSpread2(e){for(var t=1;t<arguments.length;t++){var r=null!=arguments[t]?arguments[t]:{};t%2?ownKeys(Object(r),!0).forEach((function(t){_defineProperty(e,t,r[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(r)):ownKeys(Object(r)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(r,t))}))}return e}function _typeof(e){return(_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _defineProperties(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}function _createClass(e,t,r){return t&&_defineProperties(e.prototype,t),r&&_defineProperties(e,r),Object.defineProperty(e,"prototype",{writable:!1}),e}function _defineProperty(e,t,r){return t in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}function _slicedToArray(e,t){return function _arrayWithHoles(e){if(Array.isArray(e))return e}(e)||function _iterableToArrayLimit(e,t){var r=null==e?null:"undefined"!=typeof Symbol&&e[Symbol.iterator]||e["@@iterator"];if(null==r)return;var n,a,o=[],i=!0,c=!1;try{for(r=r.call(e);!(i=(n=r.next()).done)&&(o.push(n.value),!t||o.length!==t);i=!0);}catch(e){c=!0,a=e}finally{try{i||null==r.return||r.return()}finally{if(c)throw a}}return o}(e,t)||_unsupportedIterableToArray(e,t)||function _nonIterableRest(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function _toConsumableArray(e){return function _arrayWithoutHoles(e){if(Array.isArray(e))return _arrayLikeToArray(e)}(e)||function _iterableToArray(e){if("undefined"!=typeof Symbol&&null!=e[Symbol.iterator]||null!=e["@@iterator"])return Array.from(e)}(e)||_unsupportedIterableToArray(e)||function _nonIterableSpread(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function _unsupportedIterableToArray(e,t){if(e){if("string"==typeof e)return _arrayLikeToArray(e,t);var r=Object.prototype.toString.call(e).slice(8,-1);return"Object"===r&&e.constructor&&(r=e.constructor.name),"Map"===r||"Set"===r?Array.from(e):"Arguments"===r||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)?_arrayLikeToArray(e,t):void 0}}function _arrayLikeToArray(e,t){(null==t||t>e.length)&&(t=e.length);for(var r=0,n=new Array(t);r<t;r++)n[r]=e[r];return n}var e=_createClass((function TypesonPromise(e){_classCallCheck(this,TypesonPromise),this.p=new Promise(e)}));e.__typeson__type__="TypesonPromise","undefined"!=typeof Symbol&&(e.prototype[Symbol.toStringTag]="TypesonPromise"),e.prototype.then=function(t,r){var n=this;return new e((function(e,a){n.p.then((function(r){e(t?t(r):r)})).catch((function(e){return r?r(e):Promise.reject(e)})).then(e,a)}))},e.prototype.catch=function(e){return this.then(null,e)},e.resolve=function(t){return new e((function(e){e(t)}))},e.reject=function(t){return new e((function(e,r){r(t)}))},["all","race","allSettled"].forEach((function(t){e[t]=function(r){return new e((function(e,n){Promise[t](r.map((function(e){return e&&e.constructor&&"TypesonPromise"===e.constructor.__typeson__type__?e.p:e}))).then(e,n)}))}}));var t={}.toString,r={}.hasOwnProperty,n=Object.getPrototypeOf,a=r.toString;function isThenable(e,t){return isObject(e)&&"function"==typeof e.then&&(!t||"function"==typeof e.catch)}function toStringTag(e){return t.call(e).slice(8,-1)}function hasConstructorOf(e,t){if(!e||"object"!==_typeof(e))return!1;var o=n(e);if(!o)return null===t;var i=r.call(o,"constructor")&&o.constructor;return"function"!=typeof i?null===t:t===i||(null!==t&&a.call(i)===a.call(t)||"function"==typeof t&&"string"==typeof i.__typeson__type__&&i.__typeson__type__===t.__typeson__type__)}function isPlainObject(e){return!(!e||"Object"!==toStringTag(e))&&(!n(e)||hasConstructorOf(e,Object))}function isUserObject(e){if(!e||"Object"!==toStringTag(e))return!1;var t=n(e);return!t||(hasConstructorOf(e,Object)||isUserObject(t))}function isObject(e){return e&&"object"===_typeof(e)}function escapeKeyPathComponent(e){return e.replace(/~/g,"~0").replace(/\./g,"~1")}function unescapeKeyPathComponent(e){return e.replace(/~1/g,".").replace(/~0/g,"~")}function getByKeyPath(e,t){if(""===t)return e;var r=t.indexOf(".");if(r>-1){var n=e[unescapeKeyPathComponent(t.slice(0,r))];return void 0===n?void 0:getByKeyPath(n,t.slice(r+1))}return e[unescapeKeyPathComponent(t)]}function setAtKeyPath(e,t,r){if(""===t)return r;var n=t.indexOf(".");return n>-1?setAtKeyPath(e[unescapeKeyPathComponent(t.slice(0,n))],t.slice(n+1),r):(e[unescapeKeyPathComponent(t)]=r,e)}function getJSONType(e){return null===e?"null":Array.isArray(e)?"array":_typeof(e)}function _await(e,t,r){return r?t?t(e):e:(e&&e.then||(e=Promise.resolve(e)),t?e.then(t):e)}var o=Object.keys,i=Array.isArray,c={}.hasOwnProperty,s=["type","replaced","iterateIn","iterateUnsetNumeric"];function _async(e){return function(){for(var t=[],r=0;r<arguments.length;r++)t[r]=arguments[r];try{return Promise.resolve(e.apply(this,t))}catch(e){return Promise.reject(e)}}}function nestedPathsFirst(e,t){if(""===e.keypath)return-1;var r=e.keypath.match(/\./g)||0,n=t.keypath.match(/\./g)||0;return r&&(r=r.length),n&&(n=n.length),r>n?-1:r<n?1:e.keypath<t.keypath?-1:e.keypath>t.keypath}var u=function(){function Typeson(e){_classCallCheck(this,Typeson),this.options=e,this.plainObjectReplacers=[],this.nonplainObjectReplacers=[],this.revivers={},this.types={}}return _createClass(Typeson,[{key:"stringify",value:function stringify(e,t,r,n){n=_objectSpread2(_objectSpread2(_objectSpread2({},this.options),n),{},{stringification:!0});var a=this.encapsulate(e,null,n);return i(a)?JSON.stringify(a[0],t,r):a.then((function(e){return JSON.stringify(e,t,r)}))}},{key:"stringifySync",value:function stringifySync(e,t,r,n){return this.stringify(e,t,r,_objectSpread2(_objectSpread2({throwOnBadSyncType:!0},n),{},{sync:!0}))}},{key:"stringifyAsync",value:function stringifyAsync(e,t,r,n){return this.stringify(e,t,r,_objectSpread2(_objectSpread2({throwOnBadSyncType:!0},n),{},{sync:!1}))}},{key:"parse",value:function parse(e,t,r){return r=_objectSpread2(_objectSpread2(_objectSpread2({},this.options),r),{},{parse:!0}),this.revive(JSON.parse(e,t),r)}},{key:"parseSync",value:function parseSync(e,t,r){return this.parse(e,t,_objectSpread2(_objectSpread2({throwOnBadSyncType:!0},r),{},{sync:!0}))}},{key:"parseAsync",value:function parseAsync(e,t,r){return this.parse(e,t,_objectSpread2(_objectSpread2({throwOnBadSyncType:!0},r),{},{sync:!1}))}},{key:"specialTypeNames",value:function specialTypeNames(e,t){var r=arguments.length>2&&void 0!==arguments[2]?arguments[2]:{};return r.returnTypeNames=!0,this.encapsulate(e,t,r)}},{key:"rootTypeName",value:function rootTypeName(e,t){var r=arguments.length>2&&void 0!==arguments[2]?arguments[2]:{};return r.iterateNone=!0,this.encapsulate(e,t,r)}},{key:"encapsulate",value:function encapsulate(t,r,n){var a=_async((function(t,r){return _await(Promise.all(r.map((function(e){return e[1].p}))),(function(n){return _await(Promise.all(n.map(_async((function(n){var o=!1,i=[],c=_slicedToArray(r.splice(0,1),1),s=_slicedToArray(c[0],7),u=s[0],p=s[2],y=s[3],l=s[4],f=s[5],h=s[6],v=_encapsulate(u,n,p,y,i,!0,h),d=hasConstructorOf(v,e);return function _invoke(e,t){var r=e();return r&&r.then?r.then(t):t(r)}((function(){if(u&&d)return _await(v.p,(function(e){l[f]=e;var r=a(t,i);return o=!0,r}))}),(function(e){return o?e:(u?l[f]=v:t=d?v.p:v,a(t,i))}))})))),(function(){return t}))}))})),u=(n=_objectSpread2(_objectSpread2({sync:!0},this.options),n)).sync,p=this,y={},l=[],f=[],h=[],v=!("cyclic"in n)||n.cyclic,d=n.encapsulateObserver,b=_encapsulate("",t,v,r||{},h);function finish(e){var t=Object.values(y);if(n.iterateNone)return t.length?t[0]:getJSONType(e);if(t.length){if(n.returnTypeNames)return _toConsumableArray(new Set(t));e&&isPlainObject(e)&&!c.call(e,"$types")?e.$types=y:e={$:e,$types:{$:y}}}else isObject(e)&&c.call(e,"$types")&&(e={$:e,$types:!0});return!n.returnTypeNames&&e}function _adaptBuiltinStateObjectProperties(e,t,r){Object.assign(e,t);var n=s.map((function(t){var r=e[t];return delete e[t],r}));r(),s.forEach((function(t,r){e[t]=n[r]}))}function _encapsulate(t,r,a,s,u,h,v){var b,_={},O=_typeof(r),j=d?function(n){var o=v||s.type||getJSONType(r);d(Object.assign(n||_,{keypath:t,value:r,cyclic:a,stateObj:s,promisesData:u,resolvingTypesonPromise:h,awaitingTypesonPromise:hasConstructorOf(r,e)},{type:o}))}:null;if(["string","boolean","number","undefined"].includes(O))return void 0===r||Number.isNaN(r)||r===Number.NEGATIVE_INFINITY||r===Number.POSITIVE_INFINITY?(b=s.replaced?r:replace(t,r,s,u,!1,h,j))!==r&&(_={replaced:b}):b=r,j&&j(),b;if(null===r)return j&&j(),r;if(a&&!s.iterateIn&&!s.iterateUnsetNumeric&&r&&"object"===_typeof(r)){var m=l.indexOf(r);if(!(m<0))return y[t]="#",j&&j({cyclicKeypath:f[m]}),"#"+f[m];!0===a&&(l.push(r),f.push(t))}var S,g=isPlainObject(r),P=i(r),T=(g||P)&&(!p.plainObjectReplacers.length||s.replaced)||s.iterateIn?r:replace(t,r,s,u,g||P,null,j);if(T!==r?(b=T,_={replaced:T}):""===t&&hasConstructorOf(r,e)?(u.push([t,r,a,s,void 0,void 0,s.type]),b=r):P&&"object"!==s.iterateIn||"array"===s.iterateIn?(S=new Array(r.length),_={clone:S}):(["function","symbol"].includes(_typeof(r))||"toJSON"in r||hasConstructorOf(r,e)||hasConstructorOf(r,Promise)||hasConstructorOf(r,ArrayBuffer))&&!g&&"object"!==s.iterateIn?b=r:(S={},s.addLength&&(S.length=r.length),_={clone:S}),j&&j(),n.iterateNone)return S||b;if(!S)return b;if(s.iterateIn){var w=function _loop(n){var o={ownKeys:c.call(r,n)};_adaptBuiltinStateObjectProperties(s,o,(function(){var o=t+(t?".":"")+escapeKeyPathComponent(n),i=_encapsulate(o,r[n],Boolean(a),s,u,h);hasConstructorOf(i,e)?u.push([o,i,Boolean(a),s,S,n,s.type]):void 0!==i&&(S[n]=i)}))};for(var A in r)w(A);j&&j({endIterateIn:!0,end:!0})}else o(r).forEach((function(n){var o=t+(t?".":"")+escapeKeyPathComponent(n);_adaptBuiltinStateObjectProperties(s,{ownKeys:!0},(function(){var t=_encapsulate(o,r[n],Boolean(a),s,u,h);hasConstructorOf(t,e)?u.push([o,t,Boolean(a),s,S,n,s.type]):void 0!==t&&(S[n]=t)}))})),j&&j({endIterateOwn:!0,end:!0});if(s.iterateUnsetNumeric){for(var C=r.length,k=function _loop2(n){if(!(n in r)){var o=t+(t?".":"")+n;_adaptBuiltinStateObjectProperties(s,{ownKeys:!1},(function(){var t=_encapsulate(o,void 0,Boolean(a),s,u,h);hasConstructorOf(t,e)?u.push([o,t,Boolean(a),s,S,n,s.type]):void 0!==t&&(S[n]=t)}))}},N=0;N<C;N++)k(N);j&&j({endIterateUnsetNumeric:!0,end:!0})}return S}function replace(e,t,r,n,a,o,i){for(var c=a?p.plainObjectReplacers:p.nonplainObjectReplacers,s=c.length;s--;){var l=c[s];if(l.test(t,r)){var f=l.type;if(p.revivers[f]){var h=y[e];y[e]=h?[f].concat(h):f}return Object.assign(r,{type:f,replaced:!0}),!u&&l.replaceAsync||l.replace?(i&&i({replacing:!0}),_encapsulate(e,l[u||!l.replaceAsync?"replace":"replaceAsync"](t,r),v&&"readonly",r,n,o,f)):(i&&i({typeDetected:!0}),_encapsulate(e,t,v&&"readonly",r,n,o,f))}}return t}return h.length?u&&n.throwOnBadSyncType?function(){throw new TypeError("Sync method requested but async result obtained")}():Promise.resolve(a(b,h)).then(finish):!u&&n.throwOnBadSyncType?function(){throw new TypeError("Async method requested but sync result obtained")}():n.stringification&&u?[finish(b)]:u?finish(b):Promise.resolve(finish(b))}},{key:"encapsulateSync",value:function encapsulateSync(e,t,r){return this.encapsulate(e,t,_objectSpread2(_objectSpread2({throwOnBadSyncType:!0},r),{},{sync:!0}))}},{key:"encapsulateAsync",value:function encapsulateAsync(e,t,r){return this.encapsulate(e,t,_objectSpread2(_objectSpread2({throwOnBadSyncType:!0},r),{},{sync:!1}))}},{key:"revive",value:function revive(t,r){var n=t&&t.$types;if(!n)return t;if(!0===n)return t.$;var a=(r=_objectSpread2(_objectSpread2({sync:!0},this.options),r)).sync,c=[],s={},u=!0;n.$&&isPlainObject(n.$)&&(t=t.$,n=n.$,u=!1);var y=this;function executeReviver(e,t){var r=_slicedToArray(y.revivers[e]||[],1)[0];if(!r)throw new Error("Unregistered type: "+e);return a&&!("revive"in r)?t:r[a&&r.revive?"revive":!a&&r.reviveAsync?"reviveAsync":"revive"](t,s)}var l=[];function checkUndefined(e){return hasConstructorOf(e,p)?void 0:e}var f,h=function revivePlainObjects(){var r=[];if(Object.entries(n).forEach((function(e){var t=_slicedToArray(e,2),a=t[0],o=t[1];"#"!==o&&[].concat(o).forEach((function(e){_slicedToArray(y.revivers[e]||[null,{}],2)[1].plain&&(r.push({keypath:a,type:e}),delete n[a])}))})),r.length)return r.sort(nestedPathsFirst).reduce((function reducer(r,n){var a=n.keypath,o=n.type;if(isThenable(r))return r.then((function(e){return reducer(e,{keypath:a,type:o})}));var i=getByKeyPath(t,a);if(hasConstructorOf(i=executeReviver(o,i),e))return i.then((function(e){var r=setAtKeyPath(t,a,e);r===e&&(t=r)}));var c=setAtKeyPath(t,a,i);c===i&&(t=c)}),void 0)}();return hasConstructorOf(h,e)?f=h.then((function(){return t})):(f=function _revive(t,r,a,s,y){if(!u||"$types"!==t){var f=n[t],h=i(r);if(h||isPlainObject(r)){var v=h?new Array(r.length):{};for(o(r).forEach((function(n){var o=_revive(t+(t?".":"")+escapeKeyPathComponent(n),r[n],a||v,v,n),i=function set(e){return hasConstructorOf(e,p)?v[n]=void 0:void 0!==e&&(v[n]=e),e};hasConstructorOf(o,e)?l.push(o.then((function(e){return i(e)}))):i(o)})),r=v;c.length;){var d=_slicedToArray(c[0],4),b=d[0],_=d[1],O=d[2],j=d[3],m=getByKeyPath(b,_);if(void 0===m)break;O[j]=m,c.splice(0,1)}}if(!f)return r;if("#"===f){var S=getByKeyPath(a,r.slice(1));return void 0===S&&c.push([a,r.slice(1),s,y]),S}return[].concat(f).reduce((function reducer(t,r){return hasConstructorOf(t,e)?t.then((function(e){return reducer(e,r)})):executeReviver(r,t)}),r)}}("",t,null),l.length&&(f=e.resolve(f).then((function(t){return e.all([t].concat(l))})).then((function(e){return _slicedToArray(e,1)[0]})))),isThenable(f)?a&&r.throwOnBadSyncType?function(){throw new TypeError("Sync method requested but async result obtained")}():hasConstructorOf(f,e)?f.p.then(checkUndefined):f:!a&&r.throwOnBadSyncType?function(){throw new TypeError("Async method requested but sync result obtained")}():a?checkUndefined(f):Promise.resolve(checkUndefined(f))}},{key:"reviveSync",value:function reviveSync(e,t){return this.revive(e,_objectSpread2(_objectSpread2({throwOnBadSyncType:!0},t),{},{sync:!0}))}},{key:"reviveAsync",value:function reviveAsync(e,t){return this.revive(e,_objectSpread2(_objectSpread2({throwOnBadSyncType:!0},t),{},{sync:!1}))}},{key:"register",value:function register(e,t){var r=this;t=t||{};var n=function R(e){i(e)?e.forEach((function(e){return R(e)})):e&&o(e).forEach((function(n){if("#"===n)throw new TypeError("# cannot be used as a type name as it is reserved for cyclic objects");if(y.includes(n))throw new TypeError("Plain JSON object types are reserved as type names");var a=e[n],o=a&&a.testPlainObjects?r.plainObjectReplacers:r.nonplainObjectReplacers,c=o.filter((function(e){return e.type===n}));if(c.length&&(o.splice(o.indexOf(c[0]),1),delete r.revivers[n],delete r.types[n]),"function"==typeof a){var s=a;a={test:function test(e){return e&&e.constructor===s},replace:function replace(e){return _objectSpread2({},e)},revive:function revive(e){return Object.assign(Object.create(s.prototype),e)}}}else if(i(a)){var u=_slicedToArray(a,3);a={test:u[0],replace:u[1],revive:u[2]}}if(a&&a.test){var p={type:n,test:a.test.bind(a)};a.replace&&(p.replace=a.replace.bind(a)),a.replaceAsync&&(p.replaceAsync=a.replaceAsync.bind(a));var l="number"==typeof t.fallback?t.fallback:t.fallback?0:Number.POSITIVE_INFINITY;if(a.testPlainObjects?r.plainObjectReplacers.splice(l,0,p):r.nonplainObjectReplacers.splice(l,0,p),a.revive||a.reviveAsync){var f={};a.revive&&(f.revive=a.revive.bind(a)),a.reviveAsync&&(f.reviveAsync=a.reviveAsync.bind(a)),r.revivers[n]=[f,{plain:a.testPlainObjects}]}r.types[n]=a}}))};return[].concat(e).forEach((function(e){return n(e)})),this}}]),Typeson}(),p=_createClass((function Undefined(){_classCallCheck(this,Undefined)}));p.__typeson__type__="TypesonUndefined";var y=["null","boolean","number","string","array","object"];
+
 
 /***/ }),
 

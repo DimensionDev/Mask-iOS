@@ -854,9 +854,8 @@ __webpack_require__.d(__webpack_exports__, {
 
 // UNUSED EXPORTS: ECKeyIdentifierFromCryptoKey, PayloadVersions, PersonaIdentifier, ReadonlyIdentifierMap, ValueRefFromSubscription, __DEBUG__ONLY__enableCryptoKeySerialization, addI18NBundle, andThenAsync, decompressSecp256k1Point, removed
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/typeson@6.1.0/node_modules/typeson/dist/typeson.js
-var typeson = __webpack_require__(72421);
-var typeson_default = /*#__PURE__*/__webpack_require__.n(typeson);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/typeson@7.0.1/node_modules/typeson/dist/typeson.esm.min.js
+var typeson_esm_min = __webpack_require__(44284);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/ts-results@3.3.0/node_modules/ts-results/esm/index.js
 var esm = __webpack_require__(79594);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/bignumber.js@9.0.2/node_modules/bignumber.js/bignumber.js
@@ -876,7 +875,7 @@ var type = __webpack_require__(8785);
 
 
 
-let serializer_typeson;
+let typeson;
 function setup() {
     const { default: BigNumber  } = bignumber;
     const all = [];
@@ -888,16 +887,16 @@ function setup() {
             constructor
         ]);
     }
-    serializer_typeson = new (typeson_default())({});
-    serializer_typeson.register(index_min/* builtin */.j0);
-    serializer_typeson.register(index_min/* specialNumbers */.so);
-    serializer_typeson.register([
+    typeson = new typeson_esm_min/* Typeson */.oy({});
+    typeson.register(index_min/* builtin */.j0);
+    typeson.register(index_min/* specialNumbers */.so);
+    typeson.register([
         index_min/* blob */.Ik,
         index_min/* file */.tP,
         index_min/* filelist */.Jj,
         index_min/* imagebitmap */.xA
     ]);
-    serializer_typeson.register({
+    typeson.register({
         None: [
             (x)=>x === esm/* None */.Hq
             ,
@@ -923,7 +922,7 @@ function setup() {
             writable: false,
             value: name1
         });
-        serializer_typeson.register({
+        typeson.register({
             [name1]: ser && des ? [
                 (x)=>x instanceof constructor1
                 ,
@@ -937,11 +936,11 @@ function setup() {
                     const y = Object.assign({}, x1);
                     Object.getOwnPropertySymbols(y).forEach((x)=>Reflect.deleteProperty(y, x)
                     );
-                    return serializer_typeson.encapsulate(y);
+                    return typeson.encapsulate(y);
                 },
                 // eslint-disable-next-line @typescript-eslint/no-loop-func
                 (x)=>{
-                    const y = serializer_typeson.revive(x);
+                    const y = typeson.revive(x);
                     Object.setPrototypeOf(y, constructor1.prototype);
                     return y;
                 }, 
@@ -951,18 +950,18 @@ function setup() {
 }
 const serializer = {
     serialization (from) {
-        if (!serializer_typeson) setup();
-        return serializer_typeson.encapsulate(from);
+        if (!typeson) setup();
+        return typeson.encapsulate(from);
     },
     // cspell:disable-next-line
     deserialization (to) {
-        if (!serializer_typeson) setup();
-        return serializer_typeson.revive(to);
+        if (!typeson) setup();
+        return typeson.revive(to);
     }
 };
 /** THIS MUST NOT BE USED OUTSIDE OF A DEBUGGER CONTEXT */ function __DEBUG__ONLY__enableCryptoKeySerialization() {
-    if (!serializer_typeson) setup();
-    serializer_typeson.register(cryptokey);
+    if (!typeson) setup();
+    typeson.register(cryptokey);
 }
 
 // EXTERNAL MODULE: ../shared-base/src/collections/index.ts

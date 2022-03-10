@@ -507,12 +507,12 @@ const { queryProfilesDB , queryProfileDB , queryPersonaDB , queryPersonasDB , de
 "use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "$v": () => (/* binding */ createPostDB),
-/* harmony export */   "Nz": () => (/* binding */ PostDBAccess),
 /* harmony export */   "hZ": () => (/* binding */ queryPostsDB),
 /* harmony export */   "q3": () => (/* binding */ queryPostDB),
 /* harmony export */   "rr": () => (/* binding */ updatePostDB),
 /* harmony export */   "xN": () => (/* binding */ queryPostPagedDB)
 /* harmony export */ });
+/* unused harmony export PostDBAccess */
 /* harmony import */ var _shared_native_rpc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(81653);
 
 
@@ -1500,7 +1500,6 @@ function toStore(plugin_id, value) {
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "Nz": () => (/* reexport */ post/* PostDBAccess */.Nz),
   "w0": () => (/* reexport */ createPersonaByJsonWebKey),
   "A8": () => (/* reexport */ createPersonaByMnemonic),
   "c9": () => (/* reexport */ createPersonaByMnemonicV2),
@@ -1515,6 +1514,7 @@ __webpack_require__.d(__webpack_exports__, {
   "pR": () => (/* reexport */ queryPersona),
   "Id": () => (/* reexport */ queryPersonaByProfile),
   "yQ": () => (/* reexport */ queryPersonaRecord),
+  "q3": () => (/* reexport */ post/* queryPostDB */.q3),
   "xN": () => (/* reexport */ post/* queryPostPagedDB */.xN),
   "hZ": () => (/* reexport */ post/* queryPostsDB */.hZ),
   "wb": () => (/* reexport */ queryPrivateKey),
@@ -1528,7 +1528,7 @@ __webpack_require__.d(__webpack_exports__, {
   "rr": () => (/* reexport */ post/* updatePostDB */.rr)
 });
 
-// UNUSED EXPORTS: createPluginDBAccess, createPluginDatabase, pluginDataHasValidKeyPath, profileRecordToProfile, queryPersonasWithQuery, queryPostDB, toStore
+// UNUSED EXPORTS: PostDBAccess, createPluginDBAccess, createPluginDatabase, pluginDataHasValidKeyPath, profileRecordToProfile, queryPersonasWithQuery, toStore
 
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var src = __webpack_require__(79226);
