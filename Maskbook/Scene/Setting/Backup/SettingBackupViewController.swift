@@ -177,21 +177,14 @@ private extension SettingBackupViewController {
     }
 
     private func showBindingAlert() {
-        Alert(items: {
-            AlertItem.image(.warning)
-            AlertItem.plainText(
+        Alert {
+            ImageItem(.warning)
+            PlainTextItem(
                 title: L10n.Common.Alert.BackupPopupBindingFirst.title,
                 detail: L10n.Common.Alert.BackupPopupBindingFirst.description
             )
-            AlertItem.doneAction(
-                .init(
-                    title: L10n.Common.Controls.ok,
-                    action: {
-                        // bind email or phone
-                    }
-                )
-            )
-        })
+            DoneActionItem(.init(title: L10n.Common.Controls.ok))
+        }
         .show()
     }
 }

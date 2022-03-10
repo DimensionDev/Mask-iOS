@@ -75,17 +75,17 @@ final class RestoreDataPickerController: UIDocumentPickerViewController {
                 .foregroundColor: Asset.Colors.Text.normal.color
             ]
         )
-        Alert(items: {
-            AlertItem.image(.warning)
-            AlertItem.tipWith(
+        Alert {
+            ImageItem(.warning)
+            WithTipItem(
                 title: L10n.Scene.Restore.Titles.unsupportRestoreData,
                 detail: warningDetail,
                 detailAlignment: .left
             )
-            AlertItem.doneAction(
+            DoneActionItem(
                 .init(title: L10n.Common.Controls.ok)
             )
-        })
+        }
         .show()
     }
 
