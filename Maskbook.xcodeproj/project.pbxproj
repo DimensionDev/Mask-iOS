@@ -612,6 +612,7 @@
 		5D9988EC2653E2610070ED17 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9988EB2653E2610070ED17 /* Strings.swift */; };
 		5D99DEC926788A7A006E345D /* MaskSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D99DEC826788A7A006E345D /* MaskSegmentControl.swift */; };
 		5D9A88DC27BB4AE200879068 /* PersonaDownloadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A88DB27BB4AE200879068 /* PersonaDownloadHandler.swift */; };
+		5DA5B6CB27D9F6260014780A /* UISearchBar+Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA5B6CA27D9F6260014780A /* UISearchBar+Height.swift */; };
 		5DAC90B727C5D0B100BAFB23 /* UIView+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAC90B627C5D0B100BAFB23 /* UIView+Shake.swift */; };
 		5DB39E2B278694460025337C /* JSDocumentResourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2A278694460025337C /* JSDocumentResourceManager.swift */; };
 		5DB39E2E27869F6C0025337C /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2D27869F6C0025337C /* DebugView.swift */; };
@@ -622,6 +623,7 @@
 		5DE1D5A227A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE1D5A127A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift */; };
 		5DE2B10F27BA60AC002ACA54 /* View+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE2B10E27BA60AC002ACA54 /* View+Snapshot.swift */; };
 		5DE5395727473599005F4CEA /* PanModalPresentable+color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5395627473599005F4CEA /* PanModalPresentable+color.swift */; };
+		5DF1C30B27DA33EB003F26C1 /* FixUITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF1C30A27DA33EB003F26C1 /* FixUITableView.swift */; };
 		6936CABEC702BABE09CAD1D6 /* Pods_Maskbook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B22CF13FDEA7F9081377F7B5 /* Pods_Maskbook.framework */; };
 		6F07ABE1279022B80039D69D /* NFTCollectionStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE0279022B80039D69D /* NFTCollectionStatusModel.swift */; };
 		6F07ABE3279027E70039D69D /* NFTAssetPriceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE2279027E70039D69D /* NFTAssetPriceModel.swift */; };
@@ -1315,6 +1317,7 @@
 		5D9988EB2653E2610070ED17 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		5D99DEC826788A7A006E345D /* MaskSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskSegmentControl.swift; sourceTree = "<group>"; };
 		5D9A88DB27BB4AE200879068 /* PersonaDownloadHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaDownloadHandler.swift; sourceTree = "<group>"; };
+		5DA5B6CA27D9F6260014780A /* UISearchBar+Height.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Height.swift"; sourceTree = "<group>"; };
 		5DAC90B627C5D0B100BAFB23 /* UIView+Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shake.swift"; sourceTree = "<group>"; };
 		5DB39E2A278694460025337C /* JSDocumentResourceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSDocumentResourceManager.swift; sourceTree = "<group>"; };
 		5DB39E2D27869F6C0025337C /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
@@ -1325,6 +1328,7 @@
 		5DE1D5A127A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RedPacketInteractivePayload+Description.swift"; sourceTree = "<group>"; };
 		5DE2B10E27BA60AC002ACA54 /* View+Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Snapshot.swift"; sourceTree = "<group>"; };
 		5DE5395627473599005F4CEA /* PanModalPresentable+color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PanModalPresentable+color.swift"; sourceTree = "<group>"; };
+		5DF1C30A27DA33EB003F26C1 /* FixUITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixUITableView.swift; sourceTree = "<group>"; };
 		5E5FB61CA8DEBD9BB0253DD3 /* Pods-MaskbookTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskbookTests.release.xcconfig"; path = "Target Support Files/Pods-MaskbookTests/Pods-MaskbookTests.release.xcconfig"; sourceTree = "<group>"; };
 		6F07ABE0279022B80039D69D /* NFTCollectionStatusModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFTCollectionStatusModel.swift; sourceTree = "<group>"; };
 		6F07ABE2279027E70039D69D /* NFTAssetPriceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTAssetPriceModel.swift; sourceTree = "<group>"; };
@@ -2395,8 +2399,8 @@
 			children = (
 				2AF8838C271EE9300004565A /* ContactsViewController.swift */,
 				2AF8838D271EE9300004565A /* Cell */,
-				2AF8838F271EE9300004565A /* ContactActionViewModel.swift */,
 				2AF88390271EE9300004565A /* ContactsViewModel.swift */,
+				2AF8838F271EE9300004565A /* ContactActionViewModel.swift */,
 			);
 			path = Contacts;
 			sourceTree = "<group>";
@@ -3168,6 +3172,7 @@
 				2AF8862F271EEDF80004565A /* NSDiffableDataSourceSnapshot+extension.swift */,
 				2AF88630271EEDF80004565A /* UIView+Gesture.swift */,
 				2AF88631271EEDF80004565A /* UIView+Shadow.swift */,
+				5DA5B6CA27D9F6260014780A /* UISearchBar+Height.swift */,
 				2AF88632271EEDF80004565A /* UIApplication.swift */,
 				2AF88633271EEDF80004565A /* CurrentSubject+extension.swift */,
 				2AF88634271EEDF80004565A /* UIControl.swift */,
@@ -3349,6 +3354,7 @@
 				5D93DF9D267B2B5000A175BF /* MaskTextField.swift */,
 				2A7310072685B83200C5354A /* PasswordFormItemView.swift */,
 				1F8AD0D126CA3C0100C9694F /* NiblessView.swift */,
+				5DF1C30A27DA33EB003F26C1 /* FixUITableView.swift */,
 				0FB3CCE8271185D00072B787 /* SocialIconBackBarItem.swift */,
 				0FE54FE32759C43100B32BD6 /* BalanceSegmentView.swift */,
 				2DBD0B9D2787FF9C0065A2B1 /* GroupStyleTableViewCell.swift */,
@@ -4259,6 +4265,7 @@
 				2A6ABB8C2720053B00CC3AED /* SettingRecoverViewController.swift in Sources */,
 				2A6ABB922720053B00CC3AED /* RemoteValidationRequestResponse.swift in Sources */,
 				0F41A05F260B2CFD000037B2 /* WalletAssetManager.swift in Sources */,
+				5DF1C30B27DA33EB003F26C1 /* FixUITableView.swift in Sources */,
 				2AF88585271EE9310004565A /* RenameViewModel.swift in Sources */,
 				2D11F03C27894A28002CE232 /* ConnectTipsView.swift in Sources */,
 				2A6ABB8F2720053B00CC3AED /* VerifyValidationCodeRequest.swift in Sources */,
@@ -4307,6 +4314,7 @@
 				5D2C6F7427D88E190076096C /* GroupMaskSegmentControl.swift in Sources */,
 				2AF88506271EE9310004565A /* SocialViewController.swift in Sources */,
 				0FACA3BA26720D9A00CB8AC0 /* ZerionAssetsProvider.swift in Sources */,
+				5DA5B6CB27D9F6260014780A /* UISearchBar+Height.swift in Sources */,
 				1FCBEE04273A6A71001C3637 /* RestoreWalletPasswordConfigController.swift in Sources */,
 				0F2051A7265E14F300602A0C /* ControlContainableScrollViews.swift in Sources */,
 				2DBD0BA0278804540065A2B1 /* IdentityRecoveryViewModel.swift in Sources */,

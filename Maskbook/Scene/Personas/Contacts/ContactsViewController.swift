@@ -7,15 +7,19 @@
 //
 
 import Combine
+import CoreDataStack
 import Foundation
 import UIKit
 import UStack
-import CoreDataStack
 
 class ContactsViewController: BaseViewController {
+    static var searchBarHeight: CGFloat = 52
+
+    static var tableHeaderHeight: CGFloat = 52 + 12
+    
     private var disposeBag = Set<AnyCancellable>()
 
-    private let viewModel = ContactsViewModel()
+    let viewModel = ContactsViewModel()
 
     @InjectedProvider(\.userDefaultSettings)
     private var settings
@@ -36,14 +40,14 @@ class ContactsViewController: BaseViewController {
         }
     }
 
-    private let emptyImageView: UIImageView = {
+    private lazy var emptyImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = Asset.Images.Scene.Personas.emptyContact.image
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
 
-    private let emptyTipsLabel: UILabel = {
+    private lazy var emptyTipsLabel: UILabel = {
         let label = UILabel()
         label.text = L10n.Scene.PersonaContacts.emptyContactsTips
         label.textColor = Asset.Colors.Text.dark.color
@@ -53,18 +57,46 @@ class ContactsViewController: BaseViewController {
         return label
     }()
 
-    private let inviteButton = PrimeryButton(title: L10n.Common.Controls.invite)
+    private lazy var inviteButton = PrimeryButton(title: L10n.Common.Controls.invite)
 
-    private lazy var tableView: UITableView = {
-        let view = UITableView()
+    private lazy var searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.placeholder = L10n.Scene.Personas.Search.placeholder
+        searchBar.delegate = self
+        searchBar.searchBarStyle = .minimal
+        searchBar.update(height: Self.searchBarHeight, color: Asset.Colors.Background.dark.color, radius: 10)
+        let attributes = [NSAttributedString.Key.font: FontStyles.BH5,
+                          NSAttributedString.Key.foregroundColor: Asset.Colors.Text.dark.color]
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes,
+                                                                                                          for: .normal)
+        return searchBar
+    }()
+
+    private lazy var tableHeader: UIView = {
+        let view = UIView()
+        view.backgroundColor = Asset.Colors.Background.normal.color
+        view.addSubview(searchBar)
+        NSLayoutConstraint.activate([
+            searchBar.topAnchor.constraint(equalTo: view.topAnchor),
+            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
+            searchBar.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -12),
+            searchBar.heightAnchor.constraint(equalToConstant: Self.searchBarHeight)
+        ])
+        return view
+    }()
+
+    private lazy var tableView: FixUITableView = {
+        let view = FixUITableView()
         view.backgroundColor = Asset.Colors.Background.normal.color
         view.estimatedRowHeight = 80
         view.rowHeight = 80
         view.tableFooterView = UIView()
         view.separatorStyle = .none
         view.dataSource = self
+        view.delegate = self
         view.register(ContactProfileTableViewCell.self)
-        view.contentInsetAdjustmentBehavior = .always
         return view
     }()
 
@@ -72,17 +104,15 @@ class ContactsViewController: BaseViewController {
         super.viewDidLoad()
         showEmptyView()
         subscribeSignal()
+        addSearchBar()
+        adjustTableView()
     }
 
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        adjustTableViewInset()
-    }
-
-    func adjustTableViewInset() {
-        let insets = UIEdgeInsets(top: -tableView.adjustedContentInset.top + 14, left: 0, bottom: 0, right: 0)
+    func adjustTableView() {
+        let insets = UIEdgeInsets(top: Self.tableHeaderHeight, left: 0, bottom: 0, right: 0)
         tableView.scrollIndicatorInsets = insets
         tableView.contentInset = insets
+        tableView.contentOffset = CGPoint(x: 0, y: -Self.tableHeaderHeight)
     }
 
     func showEmptyView() {
@@ -99,8 +129,9 @@ class ContactsViewController: BaseViewController {
         view.withSubViews {
             tableView
         }
+
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.readableContentGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
@@ -115,12 +146,21 @@ class ContactsViewController: BaseViewController {
             }
             .store(in: &disposeBag)
 
-        viewModel.profileRecordsSubject
+        viewModel.dataSource
+            .removeDuplicates()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.refreshTableView()
             }
             .store(in: &disposeBag)
+    }
+
+    func addSearchBar() {
+        tableHeader.frame = CGRect(origin: CGPoint(x: 0,
+                                                   y: -Self.tableHeaderHeight),
+                                   size: CGSize(width: UIScreen.main.bounds.width,
+                                                height: Self.tableHeaderHeight))
+        tableView.addSubview(tableHeader)
     }
 
     func refreshTableView() {
@@ -141,18 +181,18 @@ class ContactsViewController: BaseViewController {
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        adjustTableViewInset()
+        searchBar.update(height: Self.searchBarHeight, color: Asset.Colors.Background.dark.color, radius: 10)
     }
 }
 
 extension ContactsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.profileRecordsSubject.value.count
+        viewModel.dataSource.value.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ContactProfileTableViewCell = tableView.dequeCell(at: indexPath)
-        let profileRecord = viewModel.profileRecordsSubject.value[safeIndex: indexPath.row]
+        let profileRecord = viewModel.dataSource.value[safeIndex: indexPath.row]
 
         if let profileRecord = profileRecord {
             cell.config(profile: profileRecord)
@@ -162,6 +202,16 @@ extension ContactsViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         return cell
+    }
+}
+
+extension ContactsViewController: UITableViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if !viewModel.isSearching.value {
+            tableHeader.frame.origin = CGPoint(x: 0, y: -Self.tableHeaderHeight)
+        } else {
+            tableHeader.frame.origin = CGPoint(x: 0, y: tableView.contentOffset.y)
+        }
     }
 }
 
@@ -180,6 +230,33 @@ extension ContactsViewController {
             barButtonItem: nil
         ),
         transition: .presentActivity(animated: true, from: sender, completion: nil))
+    }
+}
+
+extension ContactsViewController: UISearchBarDelegate {
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        true
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        viewModel.searchString.value = searchBar.text ?? ""
+    }
+
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+        viewModel.isSearching.value = true
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.text = nil
+        viewModel.searchString.value = ""
+        viewModel.isSearching.value = false
+        searchBar.resignFirstResponder()
+    }
+
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
 }
 

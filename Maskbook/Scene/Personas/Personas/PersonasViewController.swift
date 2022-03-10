@@ -49,12 +49,16 @@ class PersonasViewController: BaseViewController {
 
     let viewControllers = PersonaSubViewController.allCases.map(\.viewController)
     weak var socialViewController: SocialViewController?
+    weak var contactsViewController: ContactsViewController?
 
     lazy var segmentViewController: SegmentViewController = {
         let segmentVC = SegmentViewController(items: items, viewControllers: viewControllers, style: .group)
         socialViewController = segmentVC.viewControllers.first as? SocialViewController
+        contactsViewController = segmentVC.viewControllers.last as? ContactsViewController
         return segmentVC
     }()
+    
+    var segmentTopConstraint: NSLayoutConstraint!
 
     lazy var connectTOSocialVC = ConnectableSocialListViewController()
 
@@ -124,8 +128,9 @@ class PersonasViewController: BaseViewController {
         segmentView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentView)
         segmentViewController.didMove(toParent: self)
+        segmentTopConstraint = segmentView.topAnchor.constraint(equalTo: view.readableContentGuide.topAnchor, constant: 146)
         NSLayoutConstraint.activate([
-            segmentView.topAnchor.constraint(equalTo: personaCollectionView.bottomAnchor, constant: 20),
+            segmentTopConstraint,
             segmentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             segmentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             segmentView.bottomAnchor.constraint(equalTo: view.readableContentGuide.bottomAnchor)
@@ -160,6 +165,24 @@ class PersonasViewController: BaseViewController {
                 self?.scanAction()
             }
             .store(in: &disposeBag)
+        
+        contactsViewController?.viewModel.isSearching
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] isSearching in
+                guard let self = self else { return }
+                UIView.animate(withDuration: 0.3) {
+                    let offset = self.segmentViewController.view.frame.origin.y + SegmentViewController.segmentHeight - 24
+                    if isSearching {
+                        self.segmentTopConstraint.constant = 146 - offset
+                    } else {
+                        self.segmentTopConstraint.constant = 146
+                    }
+                    self.segmentViewController.segments.alpha = isSearching ? 0 : 1
+                    self.personaCollectionView.alpha = isSearching ? 0 : 1
+                    self.view.layoutIfNeeded()
+                }
+            })
+            .store(in: &disposeBag)
     }
 
     func updateWithPersonaProfileState() {
@@ -170,8 +193,9 @@ class PersonasViewController: BaseViewController {
         guard let persona = personaManager.currentPersona.value else { return }
         let personas = personaManager.personaRecordsSubject.value
         guard let index = personas.firstIndex(of: persona) else { return }
+        if index == 0 { return }
         DispatchQueue.main.async {
-            self.personaCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .left, animated: false)
+            self.personaCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredHorizontally, animated: false)
         }
     }
 }

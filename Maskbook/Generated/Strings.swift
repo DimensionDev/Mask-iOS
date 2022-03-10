@@ -1402,6 +1402,13 @@ enum L10n {
         }
       }
 
+      enum Search {
+        /// Search
+        static var placeholder: String {
+          return L10n.tr("Localizable", "Scene.Personas.Search.Placeholder")
+        }
+      }
+
       enum Tabs {
         /// Contacts
         static var contacts: String {

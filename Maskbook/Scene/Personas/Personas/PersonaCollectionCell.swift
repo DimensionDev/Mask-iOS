@@ -159,7 +159,7 @@ class PersonaCollectionCell: UICollectionViewCell {
         let rect = CGRect(x: 40,
                           y: shadowView.bounds.height,
                           width: shadowView.bounds.width - 80,
-                          height: 7)
+                          height: 10)
         shadowLayer.shadowPath = UIBezierPath(roundedRect: rect, cornerRadius: 20).cgPath
     }
     

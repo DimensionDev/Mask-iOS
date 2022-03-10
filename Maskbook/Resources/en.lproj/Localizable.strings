@@ -302,6 +302,7 @@ Invite friends to download Mask Network.";
 ";
 "Scene.Personas.DeleteTip" = "If you haven’t backed up, please go to Settings - Backup and Recovery";
 "Scene.Personas.Personas" = "Persona";
+"Scene.Personas.Search.Placeholder" = "Search";
 "Scene.Personas.Tabs.Contacts" = "Contacts";
 "Scene.Personas.Tabs.Group" = "Group";
 "Scene.Personas.Tabs.Post" = "Post";

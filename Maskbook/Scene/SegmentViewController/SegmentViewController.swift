@@ -11,6 +11,8 @@ import Foundation
 import UIKit
 
 class SegmentViewController: UIViewController {
+    static var segmentHeight: CGFloat = 56
+    
     var disposeBag = Set<AnyCancellable>()
     
     var items: [String]
@@ -18,7 +20,7 @@ class SegmentViewController: UIViewController {
     
     var style: MaskSegmentControlStyle
     
-    private lazy var segments: MaskSegmentControl = {
+    lazy var segments: MaskSegmentControl = {
         switch style {
         case .group:
             let segments = GroupMaskSegmentControl()
@@ -79,7 +81,7 @@ class SegmentViewController: UIViewController {
             segments.topAnchor.constraint(equalTo: view.readableContentGuide.topAnchor),
             segments.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             segments.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            segments.heightAnchor.constraint(equalToConstant: 56)
+            segments.heightAnchor.constraint(equalToConstant: Self.segmentHeight)
         ])
         DispatchQueue.main.async {
             self.segments.selectedIndex(at: 0, animated: false)
@@ -115,19 +117,19 @@ class SegmentViewController: UIViewController {
     }
     
     func loadViewOfIndex(index: Int) {
-        let vc = self.viewControllers[index]
+        let vc = viewControllers[index]
         let subView = vc.view!
         if subView.superview == nil {
-            self.addChild(vc)
+            addChild(vc)
             subView.translatesAutoresizingMaskIntoConstraints = false
-            self.scrollView.addSubview(subView)
+            scrollView.addSubview(subView)
             vc.didMove(toParent: self)
 
             NSLayoutConstraint.activate([
-                subView.topAnchor.constraint(equalTo: self.scrollView.contentLayoutGuide.topAnchor),
-                subView.leadingAnchor.constraint(equalTo: self.scrollView.contentLayoutGuide.leadingAnchor, constant: CGFloat(index) * width),
+                subView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+                subView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor, constant: CGFloat(index) * width),
                 subView.widthAnchor.constraint(equalToConstant: width),
-                subView.heightAnchor.constraint(equalTo: self.scrollView.contentLayoutGuide.heightAnchor)
+                subView.heightAnchor.constraint(equalTo: scrollView.contentLayoutGuide.heightAnchor)
             ])
         }
     }
@@ -135,7 +137,7 @@ class SegmentViewController: UIViewController {
 
 extension SegmentViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.parent?.view.endEditing(true)
+        parent?.view.endEditing(true)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {

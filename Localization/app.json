@@ -513,6 +513,9 @@
                 "create_persona": "Create Persona",
                 "input_persona_name": "Input persona name"
             },
+            "search": {
+                "placeholder": "Search"
+            },
             "delete": "Confirm to delete persona\n",
             "delete_tip": "If you haven’t backed up, please go to Settings - Backup and Recovery",
             "add_persona": "Add Persona"
