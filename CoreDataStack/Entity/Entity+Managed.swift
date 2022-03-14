@@ -396,7 +396,7 @@ extension Contact: Managed {
             return predicate1
         } else {
             let predicate2 = NSCompoundPredicate(andPredicateWithSubpredicates: predicates2)
-            return NSCompoundPredicate(orPredicateWithSubpredicates: [predicate1, predicate2])
+            return NSCompoundPredicate(andPredicateWithSubpredicates: [predicate1, predicate2])
         }
     }
     
