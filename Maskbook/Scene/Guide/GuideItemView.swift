@@ -120,8 +120,8 @@ extension GuideItemView {
 struct GuideItemView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            GuideView()
-            GuideView()
+            GuideView(dismiss: nil)
+            GuideView(dismiss: nil)
                 .previewDevice("iPhone 12 mini")
         }
     }

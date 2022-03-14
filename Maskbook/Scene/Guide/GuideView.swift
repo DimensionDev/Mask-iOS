@@ -8,9 +8,10 @@
 
 import SwiftUI
 
-struct GuideView: View, Dismissable {
+struct GuideView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var page: Int = 0
+    let dismiss: (() -> Void)?
     
     var isLastOne: Bool {
         guard let pageEnum = GuideItemView.Page.allCases.last else {
@@ -43,7 +44,7 @@ struct GuideView: View, Dismissable {
         HStack {
             Spacer()
             Button {
-                dismiss()
+                dismiss?()
             } label: {
                 Text(L10n.Scene.Guide.skip)
                     .font(FontStyles.bh5.font)
@@ -61,7 +62,7 @@ struct GuideView: View, Dismissable {
         TabView(selection: $page.animation(.default)) {
             ForEach(GuideItemView.Page.allCases) { page in
                 GuideItemView(page: page, contentSize: contentSize) {
-                    dismiss()
+                    dismiss?()
                 }
                 .frame(width: contentSize.width, height: contentSize.height)
             }
@@ -106,8 +107,8 @@ struct GuideView: View, Dismissable {
 struct GuideView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            GuideView()
-            GuideView()
+            GuideView(dismiss: nil)
+            GuideView(dismiss: nil)
                 .previewDevice("iPhone 8")
         }
     }

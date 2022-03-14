@@ -85,6 +85,17 @@ enum L10n {
 
     enum Alert {
 
+      enum BackupPopupBindingFirst {
+        /// Please bind your email or phone number before you back up to cloud.
+        static var description: String {
+          return L10n.tr("Localizable", "Common.Alert.BackupPopupBindingFirst.Description")
+        }
+        /// Bind your email or phone
+        static var title: String {
+          return L10n.tr("Localizable", "Common.Alert.BackupPopupBindingFirst.Title")
+        }
+      }
+
       enum BackupTipsNoBackupPassword {
         /// Please set up your %@ before you back up.
         static func description(_ p1: String) -> String {

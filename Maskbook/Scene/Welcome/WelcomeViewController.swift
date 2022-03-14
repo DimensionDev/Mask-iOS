@@ -34,7 +34,11 @@ class WelcomeViewController: BaseViewController {
         
         indicatorView.startAnimation()
         
-        NotificationCenter.default.publisher(for: Notification.Name.extensionTabDidFinishLoad)
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            self.dismiss(animated: false, completion: nil)
+            return
+        }
+        appDelegate.extensionTabDidFinishLoad
             .flatMap { [weak self] _ -> AnyPublisher<[LegacyWalletInfo], Error> in
                 if self?.settings.legacyWalletsImported == false {
                     return WebExtension.Wallet.GetLegacyWallets()
