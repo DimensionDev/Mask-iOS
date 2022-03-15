@@ -478,11 +478,11 @@ const body = `\
 ## Environment
 
 User Agent: ${navigator.userAgent}
-Version: ${"v1.29.12-2082-g1a6c3c7cb"}
+Version: ${"v1.29.12-2096-g2617e1b04"}
 Tag Name: ${"v2.5.0"}
-Build Date: ${"2022-03-04T08:10:16.981Z"}
-Commit Hash: ${"1a6c3c7cb"}
-Commit Date: ${"2022-03-04T08:04:23.000Z"}
+Build Date: ${"2022-03-10T06:24:06.162Z"}
+Commit Hash: ${"2617e1b04"}
+Commit Date: ${"2022-03-10T06:18:26.000Z"}
 Remote URL: ${"git@github.com:DimensionDev/Maskbook.git"}
 Branch Name: ${"feat/sendRedpacketToNative"}
 
@@ -510,11 +510,11 @@ var utils = __webpack_require__(13573);
 
 const DEBUG_INFO = {
     'User Agent': navigator.userAgent,
-    'Mask Version': "v1.29.12-2082-g1a6c3c7cb",
+    'Mask Version': "v1.29.12-2096-g2617e1b04",
     'Build Date': process.env.channel_DATE,
     'Tag Name': "v2.5.0",
-    'Commit Hash': "1a6c3c7cb",
-    'Commit Date': "2022-03-04T08:04:23.000Z",
+    'Commit Hash': "2617e1b04",
+    'Commit Date': "2022-03-10T06:18:26.000Z",
     'Remote URL': "git@github.com:DimensionDev/Maskbook.git",
     'Branch Name': "feat/sendRedpacketToNative",
     Dirty: false,
@@ -725,11 +725,11 @@ async function backupAll() {
     const payload = {
         buildInfo: {
             'user-agent': navigator.userAgent,
-            version: "v1.29.12-2082-g1a6c3c7cb",
-            'build-date': "2022-03-04T08:10:16.981Z",
+            version: "v1.29.12-2096-g2617e1b04",
+            'build-date': "2022-03-10T06:24:06.162Z",
             'tag-name': "v2.5.0",
-            'commit-hash': "1a6c3c7cb",
-            'commit-date': "2022-03-04T08:04:23.000Z",
+            'commit-hash': "2617e1b04",
+            'commit-date': "2022-03-10T06:18:26.000Z",
             'remote-url': "git@github.com:DimensionDev/Maskbook.git",
             'branch-name': "feat/sendRedpacketToNative",
             dirty: false,
@@ -3266,9 +3266,8 @@ __webpack_require__.d(__webpack_exports__, {
 
 // UNUSED EXPORTS: ECKeyIdentifierFromCryptoKey, NextIDAction, NextIDPlatform, PayloadVersions, PersonaIdentifier, ReadonlyIdentifierMap, SubscriptionDebug, ValueRefFromSubscription, addI18NBundle, andThenAsync, decompressSecp256k1Point, removed
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/typeson@6.1.0/node_modules/typeson/dist/typeson.js
-var typeson = __webpack_require__(72421);
-var typeson_default = /*#__PURE__*/__webpack_require__.n(typeson);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/typeson@7.0.1/node_modules/typeson/dist/typeson.esm.min.js
+var typeson_esm_min = __webpack_require__(44284);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/ts-results@3.3.0/node_modules/ts-results/esm/index.js
 var esm = __webpack_require__(79594);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/bignumber.js@9.0.2/node_modules/bignumber.js/bignumber.js
@@ -3288,7 +3287,7 @@ var type = __webpack_require__(8785);
 
 
 
-let serializer_typeson;
+let typeson;
 function setup() {
     const { default: BigNumber  } = bignumber;
     const all = [];
@@ -3300,16 +3299,16 @@ function setup() {
             constructor
         ]);
     }
-    serializer_typeson = new (typeson_default())({});
-    serializer_typeson.register(index_min/* builtin */.j0);
-    serializer_typeson.register(index_min/* specialNumbers */.so);
-    serializer_typeson.register([
+    typeson = new typeson_esm_min/* Typeson */.oy({});
+    typeson.register(index_min/* builtin */.j0);
+    typeson.register(index_min/* specialNumbers */.so);
+    typeson.register([
         index_min/* blob */.Ik,
         index_min/* file */.tP,
         index_min/* filelist */.Jj,
         index_min/* imagebitmap */.xA
     ]);
-    serializer_typeson.register({
+    typeson.register({
         None: [
             (x)=>x === esm/* None */.Hq
             ,
@@ -3335,7 +3334,7 @@ function setup() {
             writable: false,
             value: name1
         });
-        serializer_typeson.register({
+        typeson.register({
             [name1]: ser && des ? [
                 (x)=>x instanceof constructor1
                 ,
@@ -3349,11 +3348,11 @@ function setup() {
                     const y = Object.assign({}, x1);
                     Object.getOwnPropertySymbols(y).forEach((x)=>Reflect.deleteProperty(y, x)
                     );
-                    return serializer_typeson.encapsulate(y);
+                    return typeson.encapsulate(y);
                 },
                 // eslint-disable-next-line @typescript-eslint/no-loop-func
                 (x)=>{
-                    const y = serializer_typeson.revive(x);
+                    const y = typeson.revive(x);
                     Object.setPrototypeOf(y, constructor1.prototype);
                     return y;
                 }, 
@@ -3363,18 +3362,18 @@ function setup() {
 }
 const serializer = {
     serialization (from) {
-        if (!serializer_typeson) setup();
-        return serializer_typeson.encapsulate(from);
+        if (!typeson) setup();
+        return typeson.encapsulate(from);
     },
     // cspell:disable-next-line
     deserialization (to) {
-        if (!serializer_typeson) setup();
-        return serializer_typeson.revive(to);
+        if (!typeson) setup();
+        return typeson.revive(to);
     }
 };
 /** THIS MUST NOT BE USED OUTSIDE OF A DEBUGGER CONTEXT */ function __DEBUG__ONLY__enableCryptoKeySerialization() {
-    if (!serializer_typeson) setup();
-    serializer_typeson.register(index_min/* cryptokey */.W2);
+    if (!typeson) setup();
+    typeson.register(index_min/* cryptokey */.W2);
 }
 
 // EXTERNAL MODULE: ../shared-base/src/collections/index.ts
@@ -6274,8 +6273,8 @@ module.exports = {};
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, [5638,2698,7871,9759,3294,2486,4227,4544,5737,187,3883,8136,3147,8019,8712,9227,3693,3758,4570,7822,7856,400,3453,5132,12,2619,5838,3142,5105,3846,8129,5951,2752,7849,7512,5178,6565,9744,444,6160,71,4278,9197,4960,102,253,572,8547,8145,5313,2088,3981,1696,3638,1555,516,2974,3832,159,9141,6067,234,9737,79,4590,2891,5784,4586,9855,4029,433,9697,3619,2222,6380,9075,8780,4198], () => (__webpack_require__(20199)))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [5638,2698,7871,9759,3294,2486,4227,4544,5737,187,3883,8136,3147,8019,8712,9227,3693,3758,4570,7822,7856,400,3453,5132,12,2619,5838,3142,5105,3846,8129,5951,2752,7849,7512,5178,6565,9744,444,6160,71,4278,9197,4960,102,253,572,8547,8145,5313,2088,3981,1696,3638,1555,516,2974,3832,159,9141,6067,234,9737,79,4590,2891,5784,4586,9855,4029,433,9697,3619,2222,6380,9075,8780,4198], () => (__webpack_require__(42038)))
+/******/ 	__webpack_require__.O(undefined, [5638,2698,7871,9759,3294,2486,4227,4544,5737,187,3883,8136,3147,8019,8712,9227,3693,3758,4570,7822,7856,400,3453,5132,12,2619,5838,3142,5105,3846,8129,5951,2752,7849,7512,5178,6565,9744,444,6160,4278,9197,4960,102,253,572,8547,8145,5313,2088,3981,1696,3638,1555,516,2974,3832,159,9141,6067,234,9737,79,4590,2891,5784,4586,9855,4029,433,9697,3619,2222,9275,9075,8780,4198], () => (__webpack_require__(20199)))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [5638,2698,7871,9759,3294,2486,4227,4544,5737,187,3883,8136,3147,8019,8712,9227,3693,3758,4570,7822,7856,400,3453,5132,12,2619,5838,3142,5105,3846,8129,5951,2752,7849,7512,5178,6565,9744,444,6160,4278,9197,4960,102,253,572,8547,8145,5313,2088,3981,1696,3638,1555,516,2974,3832,159,9141,6067,234,9737,79,4590,2891,5784,4586,9855,4029,433,9697,3619,2222,9275,9075,8780,4198], () => (__webpack_require__(42038)))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

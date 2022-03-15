@@ -969,18 +969,10 @@ var useAsyncFn = __webpack_require__(56838);
 ;// CONCATENATED MODULE: ./src/plugins/NextID/hooks/usePersonaSign.ts
 
 
-
-
 function usePersonaSign(message, currentIdentifier) {
-    const t = useI18N();
-    const { showSnackbar  } = (0,src/* useCustomSnackbar */.Ii)();
     return (0,useAsyncFn/* default */.Z)(async ()=>{
         if (!message || !currentIdentifier) return;
         try {
-            showSnackbar(t.notify_persona_sign(), {
-                processing: true,
-                message: t.notify_persona_sign_confirm()
-            });
             const result = await service/* default.Identity.signWithPersona */.ZP.Identity.signWithPersona({
                 method: 'eth',
                 message: message,
@@ -988,10 +980,6 @@ function usePersonaSign(message, currentIdentifier) {
             });
             return result;
         } catch  {
-            showSnackbar(t.notify_persona_sign(), {
-                variant: 'error',
-                message: t.notify_persona_sign_cancel()
-            });
             return;
         }
     }, [

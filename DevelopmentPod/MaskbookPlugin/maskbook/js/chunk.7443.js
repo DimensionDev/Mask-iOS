@@ -2290,14 +2290,23 @@ const rainbowBorderKeyFrames = theme_src/* keyframes */.F4`
 const NFTAvatarClip_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
         root: {},
         miniBorder: {
-            transform: 'scale(0.94) translate(7px, 6px) translateZ(0)',
+            transform: 'scale(0.94) translate(7px, 6px)',
             strokeWidth: 6,
             stroke: '#00f8ff',
-            fill: 'none'
+            fill: 'none',
+            '@supports (translate: 0)': {
+                transform: 'none',
+                translate: '7px 6px'
+            }
         },
         borderPath: {
             transform: 'scale(0.98, 1.035) translate(3px, -2px)',
-            strokeWidth: 3
+            strokeWidth: 3,
+            '@supports (translate: 0)': {
+                transform: 'none',
+                scale: '0.98, 1.035',
+                translate: '3px, -2px'
+            }
         },
         background: {
             transform: 'scale(1, 1.05) translate(1px, -3px)',
@@ -2305,7 +2314,12 @@ const NFTAvatarClip_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
             strokeWidth: 30,
             stroke: 'black',
             strokeLinecap: 'round',
-            strokeLinejoin: 'round'
+            strokeLinejoin: 'round',
+            '@supports (translate: 0)': {
+                transform: 'none',
+                scale: '1, 1.5',
+                translate: '1px, -3px'
+            }
         },
         rainbowBorder: {
             animation: `${rainbowBorderKeyFrames} 6s linear infinite`,
@@ -2315,13 +2329,26 @@ const NFTAvatarClip_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
             strokeLinecap: 'round'
         },
         text: {
-            transform: 'translate(1px, -5px) '
+            transform: 'translate(1px, -5px) ',
+            '@supports (translate: 0)': {
+                transform: 'none',
+                translate: '1px, -5px'
+            }
         },
         price: {
-            transform: 'translate(0px, -5px) '
+            transform: 'translate(0px, -5px) ',
+            '@supports (translate: 0)': {
+                transform: 'none',
+                translate: '0px, -5px'
+            }
         },
         namePath: {
-            transform: 'scale(0.9) translate(10px, 10px)'
+            transform: 'scale(0.9) translate(10px, 10px)',
+            '@supports (translate: 0)': {
+                transform: 'none',
+                translate: '10px, 10px',
+                scale: 0.9
+            }
         }
     })
 );

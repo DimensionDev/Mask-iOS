@@ -1025,12 +1025,12 @@ function relationRecordOutDB(x) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "$v": () => (/* binding */ createPostDB),
-/* harmony export */   "Nz": () => (/* binding */ PostDBAccess),
 /* harmony export */   "hZ": () => (/* binding */ queryPostsDB),
 /* harmony export */   "q3": () => (/* binding */ queryPostDB),
 /* harmony export */   "rr": () => (/* binding */ updatePostDB),
 /* harmony export */   "xN": () => (/* binding */ queryPostPagedDB)
 /* harmony export */ });
+/* unused harmony export PostDBAccess */
 /* harmony import */ var _shared_native_rpc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(81653);
 
 
@@ -1100,7 +1100,6 @@ if (true) {
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "Nz": () => (/* reexport */ post/* PostDBAccess */.Nz),
   "w0": () => (/* reexport */ createPersonaByJsonWebKey),
   "A8": () => (/* reexport */ createPersonaByMnemonic),
   "c9": () => (/* reexport */ createPersonaByMnemonicV2),
@@ -1115,6 +1114,7 @@ __webpack_require__.d(__webpack_exports__, {
   "pR": () => (/* reexport */ queryPersona),
   "Id": () => (/* reexport */ queryPersonaByProfile),
   "yQ": () => (/* reexport */ queryPersonaRecord),
+  "q3": () => (/* reexport */ post/* queryPostDB */.q3),
   "xN": () => (/* reexport */ post/* queryPostPagedDB */.xN),
   "hZ": () => (/* reexport */ post/* queryPostsDB */.hZ),
   "wb": () => (/* reexport */ queryPrivateKey),
@@ -1128,7 +1128,7 @@ __webpack_require__.d(__webpack_exports__, {
   "rr": () => (/* reexport */ post/* updatePostDB */.rr)
 });
 
-// UNUSED EXPORTS: createPluginDBAccess, createPluginDatabase, pluginDataHasValidKeyPath, profileRecordToProfile, queryPersonasWithQuery, queryPostDB, toStore
+// UNUSED EXPORTS: PostDBAccess, createPluginDBAccess, createPluginDatabase, pluginDataHasValidKeyPath, profileRecordToProfile, queryPersonasWithQuery, toStore
 
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var src = __webpack_require__(79226);
@@ -2470,7 +2470,7 @@ function makeBackupName(extension) {
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13573);
 /* harmony import */ var _shared_ui_locales_legacy__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6900);
 /* harmony import */ var _background_database_persona_db__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(41715);
-/* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(66580);
+/* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(66580);
 /* harmony import */ var _utils_type_transform_BackupFormat_JSON_DBRecord_JSON_PersonaRecord__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(86619);
 /* harmony import */ var _utils_type_transform_BackupFormat_JSON_DBRecord_JSON_ProfileRecord__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(13740);
 /* harmony import */ var _utils_type_transform_BackupFormat_JSON_DBRecord_JSON_PostRecord__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(50497);
@@ -2483,8 +2483,6 @@ function makeBackupName(extension) {
 /* harmony import */ var _IdentityService__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(64426);
 /* harmony import */ var _utils_type_transform_BackupFormat_JSON_DBRecord_JSON_RelationRecord__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(52612);
 /* harmony import */ var _masknet_plugin_wallet__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(89987);
-/* harmony import */ var _background_database_utils_openDB__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(49100);
-
 
 
 
@@ -2537,7 +2535,7 @@ function makeBackupName(extension) {
             else if (record.mnemonic) {
                 // fix a backup bug of pre-v2.2.2 versions
                 const accounts = await (0,_plugins_Wallet_services__WEBPACK_IMPORTED_MODULE_9__.getDerivableAccounts)(record.mnemonic, 1, 5);
-                const index = accounts.findIndex((0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_17__/* .currySameAddress */ .DC)(record.address));
+                const index = accounts.findIndex((0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_16__/* .currySameAddress */ .DC)(record.address));
                 await (0,_plugins_Wallet_services__WEBPACK_IMPORTED_MODULE_9__.recoverWalletFromMnemonic)(name, record.mnemonic, index > -1 ? `${_masknet_plugin_wallet__WEBPACK_IMPORTED_MODULE_15__/* .HD_PATH_WITHOUT_INDEX_ETHEREUM */ .UB}/${index}` : record.derivationPath);
             }
         } catch (error) {
@@ -2546,14 +2544,13 @@ function makeBackupName(extension) {
         }
     }
     {
-        const t = (0,_background_database_utils_openDB__WEBPACK_IMPORTED_MODULE_16__/* .createTransaction */ ._X)(await (0,_database__WEBPACK_IMPORTED_MODULE_7__/* .PostDBAccess */ .Nz)(), 'readwrite')('post');
         for (const x of data.posts){
             const { val , err  } = ts_results__WEBPACK_IMPORTED_MODULE_11__/* .Result.wrap */ .x4.wrap(()=>(0,_utils_type_transform_BackupFormat_JSON_DBRecord_JSON_PostRecord__WEBPACK_IMPORTED_MODULE_6__/* .PostRecordFromJSONFormat */ .n)(x)
             );
             if (err) continue;
-            if (await t.objectStore('post').get(val.identifier.toText())) {
-                await (0,_database__WEBPACK_IMPORTED_MODULE_7__/* .updatePostDB */ .rr)(val, 'append', t);
-            } else await (0,_database__WEBPACK_IMPORTED_MODULE_7__/* .createPostDB */ .$v)(val, t);
+            if (await (0,_database__WEBPACK_IMPORTED_MODULE_7__/* .queryPostDB */ .q3)(val.identifier)) {
+                await (0,_database__WEBPACK_IMPORTED_MODULE_7__/* .updatePostDB */ .rr)(val, 'append');
+            } else await (0,_database__WEBPACK_IMPORTED_MODULE_7__/* .createPostDB */ .$v)(val);
         }
     }
     if ((ref = data.relations) === null || ref === void 0 ? void 0 : ref.length) {
