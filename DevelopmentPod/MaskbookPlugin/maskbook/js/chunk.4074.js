@@ -1648,7 +1648,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getClientMeta = exports.getLocalStorage = exports.getLocalStorageOrThrow = exports.getCrypto = exports.getCryptoOrThrow = exports.getLocation = exports.getLocationOrThrow = exports.getNavigator = exports.getNavigatorOrThrow = exports.getDocument = exports.getDocumentOrThrow = exports.getFromWindowOrThrow = exports.getFromWindow = exports.isBrowser = exports.isNode = exports.isMobile = exports.isIOS = exports.detectOS = exports.detectEnv = void 0;
 const tslib_1 = __webpack_require__(78951);
 const windowMetadata = tslib_1.__importStar(__webpack_require__(37199));
-const windowGetters = tslib_1.__importStar(__webpack_require__(88672));
+const windowGetters = tslib_1.__importStar(__webpack_require__(68600));
 const detect_browser_1 = __webpack_require__(6080);
 function detectEnv(userAgent) {
     return detect_browser_1.detect(userAgent);
@@ -3293,10 +3293,10 @@ function detectOS(userAgentString) {
 }
 
 function getNodeVersion() {
-  var isNode = typeof process !== 'undefined' && "v17.5.0";
+  var isNode = typeof process !== 'undefined' && "v16.14.0";
   return isNode && {
     name: 'node',
-    version: "v17.5.0".slice(1),
+    version: "v16.14.0".slice(1),
     os: process.platform
   };
 }
@@ -3623,8 +3623,8 @@ function detectOS(ua) {
     return null;
 }
 function getNodeVersion() {
-    var isNode = typeof process !== 'undefined' && "v17.5.0";
-    return isNode ? new NodeInfo("v17.5.0".slice(1)) : null;
+    var isNode = typeof process !== 'undefined' && "v16.14.0";
+    return isNode ? new NodeInfo("v16.14.0".slice(1)) : null;
 }
 function createVersionParts(count) {
     var output = [];
@@ -5099,7 +5099,7 @@ function onceStrict (fn) {
 
 /***/ }),
 
-/***/ 22610:
+/***/ 32386:
 /***/ ((__unused_webpack_module, exports) => {
 
 /**
@@ -5226,7 +5226,7 @@ var eos = __webpack_require__(59806)
 var fs = __webpack_require__(95985) // we only need fs to get the ReadStream and WriteStream prototypes
 
 var noop = function () {}
-var ancient = /^v?\.0/.test("v17.5.0")
+var ancient = /^v?\.0/.test("v16.14.0")
 
 var isFn = function (fn) {
   return typeof fn === 'function'
@@ -7141,8 +7141,8 @@ var shared = __webpack_require__(70609);
 var native_rpc = __webpack_require__(81653);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/web3-eth-abi@1.5.2/node_modules/web3-eth-abi/lib/index.js
 var web3_eth_abi_lib = __webpack_require__(24278);
-// EXTERNAL MODULE: ../web3-shared/evm/constants/specific.ts
-var specific = __webpack_require__(5919);
+// EXTERNAL MODULE: ../web3-shared/evm/constants/primitives.ts
+var primitives = __webpack_require__(41769);
 // EXTERNAL MODULE: ../web3-contracts/abis/BulkCheckout.json
 var BulkCheckout = __webpack_require__(29389);
 // EXTERNAL MODULE: ../web3-contracts/abis/ITO2.json
@@ -7158,7 +7158,7 @@ var RouterV2 = __webpack_require__(50092);
 // EXTERNAL MODULE: ../web3-contracts/abis/SwapRouter.json
 var SwapRouter = __webpack_require__(75517);
 // EXTERNAL MODULE: ../web3-contracts/abis/MaskBox.json
-var MaskBox = __webpack_require__(7744);
+var MaskBox = __webpack_require__(22151);
 ;// CONCATENATED MODULE: ./src/extension/background-script/EthereumServices/rpc/abi.ts
 
 // built in abis
@@ -7242,8 +7242,8 @@ function getData(tx) {
 }
 function getTo(tx) {
     const { to  } = tx;
-    if (!to) return specific/* ZERO_ADDRESS */.r_;
-    if (isEmptyHex(to)) return specific/* ZERO_ADDRESS */.r_;
+    if (!to) return primitives/* ZERO_ADDRESS */.r;
+    if (isEmptyHex(to)) return primitives/* ZERO_ADDRESS */.r;
     return to;
 }
 function getFunctionSignature(tx) {
@@ -8765,7 +8765,7 @@ async function createWeb3({ chainId =_plugins_Wallet_settings__WEBPACK_IMPORTED_
 /* harmony export */   "j": () => (/* binding */ EVM_Messages),
 /* harmony export */   "k": () => (/* binding */ EVM_RPC)
 /* harmony export */ });
-/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(27194);
+/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63151);
 /* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(79226);
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(89664);
 
@@ -9568,8 +9568,8 @@ async function getSupportedNetworks() {
 var base_src = __webpack_require__(15091);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/token.ts
 var utils_token = __webpack_require__(11315);
-// EXTERNAL MODULE: ../web3-shared/evm/constants/index.ts + 26 modules
-var constants = __webpack_require__(92211);
+// EXTERNAL MODULE: ../web3-shared/evm/constants/constants.ts + 26 modules
+var constants = __webpack_require__(24403);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/bignumber.js@9.0.2/node_modules/bignumber.js/bignumber.js
 var bignumber = __webpack_require__(42263);
 var bignumber_default = /*#__PURE__*/__webpack_require__.n(bignumber);
@@ -10092,8 +10092,8 @@ function fromZerion(data) {
 
 // EXTERNAL MODULE: ./src/plugins/Wallet/services/transaction/database.ts
 var transaction_database = __webpack_require__(75804);
-// EXTERNAL MODULE: ../web3-providers/src/index.ts
-var web3_providers_src = __webpack_require__(24524);
+// EXTERNAL MODULE: ../web3-providers/src/index.ts + 2 modules
+var web3_providers_src = __webpack_require__(54492);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/transaction.ts
 var transaction = __webpack_require__(90609);
 ;// CONCATENATED MODULE: ./src/plugins/Wallet/services/transaction/helpers.ts
@@ -10822,8 +10822,8 @@ function getGasPriceDictFromDeBank(chainId) {
 
 // EXTERNAL MODULE: ./src/extension/background-script/EthereumServices/web3.ts
 var EthereumServices_web3 = __webpack_require__(19875);
-// EXTERNAL MODULE: ../plugin-infra/src/index.ts + 1 modules
-var plugin_infra_src = __webpack_require__(27194);
+// EXTERNAL MODULE: ../plugin-infra/src/index.ts
+var plugin_infra_src = __webpack_require__(63151);
 ;// CONCATENATED MODULE: ./src/plugins/Profile/constants.ts
 
 const PLUGIN_ID = plugin_infra_src/* PluginId.Profile */.je.Profile;
@@ -12148,7 +12148,7 @@ module.exports = function typedarrayToBuffer (arr) {
 
 /***/ }),
 
-/***/ 88672:
+/***/ 68600:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -12220,7 +12220,7 @@ exports.getLocalStorage = getLocalStorage;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const window_getters_1 = __webpack_require__(88672);
+const window_getters_1 = __webpack_require__(68600);
 function getWindowMetadata() {
     let doc;
     let loc;
@@ -12581,7 +12581,7 @@ module.exports = JSON.parse('[{"anonymous":false,"inputs":[{"indexed":true,"inte
 
 /***/ }),
 
-/***/ 7744:
+/***/ 22151:
 /***/ ((module) => {
 
 "use strict";

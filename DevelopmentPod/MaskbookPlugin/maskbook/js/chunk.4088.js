@@ -169,10 +169,11 @@ const inMemory_KVStorageBackend = (0,_masknet_shared_base__WEBPACK_IMPORTED_MODU
 /* harmony export */   "o7": () => (/* binding */ createOrUpdateProfileDB),
 /* harmony export */   "tc": () => (/* binding */ attachProfileDB)
 /* harmony export */ });
+/* unused harmony export createPersonaDBReadonlyAccess */
 /* harmony import */ var _shared_native_rpc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(81653);
 
 
-const { queryProfilesDB , queryProfileDB , queryPersonaDB , queryPersonasDB , detachProfileDB , deletePersonaDB , safeDeletePersonaDB , queryPersonaByProfileDB , createPersonaDB , attachProfileDB , consistentPersonaDBWriteAccess , updatePersonaDB , createOrUpdatePersonaDB , queryProfilesPagedDB , createOrUpdateProfileDB , createProfileDB , createRelationDB , createRelationsTransaction , deleteProfileDB , queryRelationsPagedDB , updateRelationDB , queryPersonasWithPrivateKey , queryRelations ,  } = new Proxy({}, {
+const { queryProfilesDB , queryProfileDB , queryPersonaDB , queryPersonasDB , detachProfileDB , deletePersonaDB , safeDeletePersonaDB , queryPersonaByProfileDB , createPersonaDB , attachProfileDB , createPersonaDBReadonlyAccess , consistentPersonaDBWriteAccess , updatePersonaDB , createOrUpdatePersonaDB , queryProfilesPagedDB , createOrUpdateProfileDB , createProfileDB , createRelationDB , createRelationsTransaction , deleteProfileDB , queryRelationsPagedDB , updateRelationDB , queryPersonasWithPrivateKey , queryRelations ,  } = new Proxy({}, {
     get (_, key) {
         return async function(...args) {
             if (_shared_native_rpc__WEBPACK_IMPORTED_MODULE_0__/* .hasNativeAPI */ ._) {
@@ -184,6 +185,195 @@ const { queryProfilesDB , queryProfileDB , queryPersonaDB , queryPersonasDB , de
         };
     }
 });
+
+
+/***/ }),
+
+/***/ 56935:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "lr": () => (/* binding */ createProfileWithPersona),
+/* harmony export */   "w0": () => (/* binding */ createPersonaByJsonWebKey)
+/* harmony export */ });
+/* unused harmony exports hasLocalKeyOf, decryptByLocalKey, deriveAESByECDH, deriveAESByECDH_version38_or_older */
+/* harmony import */ var _dimensiondev_kit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(66559);
+/* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(79226);
+/* harmony import */ var _db__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(41715);
+
+
+
+// #region Local key helpers
+/**
+ * If has local key of a profile in the database.
+ * @param id Profile Identifier
+ */ async function hasLocalKeyOf(id) {
+    let has = false;
+    await createPersonaDBReadonlyAccess(async (tx)=>{
+        const result = await getLocalKeyOf(id, tx);
+        has = !!result;
+    });
+    return has;
+}
+/**
+ * Try to decrypt data using local key.
+ *
+ * @param authorHint Author of the local key
+ * @param data Data to be decrypted
+ * @param iv IV
+ */ async function decryptByLocalKey(authorHint, data, iv) {
+    const candidateKeys = [];
+    if (authorHint) {
+        await createPersonaDBReadonlyAccess(async (tx)=>{
+            const key = await getLocalKeyOf(authorHint, tx);
+            key && candidateKeys.push(key);
+        });
+    // TODO: We may push every local key we owned to the candidate list so we can also decrypt when authorHint is null, but that might be a performance pitfall when localKey field is not indexed.
+    }
+    let check = ()=>{};
+    return Promise.any(candidateKeys.map(async (key)=>{
+        const k = await crypto.subtle.importKey('jwk', key, {
+            name: 'AES-GCM',
+            length: 256
+        }, false, [
+            'decrypt'
+        ]);
+        check();
+        const result = await crypto.subtle.decrypt({
+            iv,
+            name: 'AES-GCM'
+        }, k, data);
+        check = abort;
+        return result;
+    }));
+}
+async function getLocalKeyOf(id, tx) {
+    const profile = await queryProfileDB(id, tx);
+    if (!profile) return;
+    if (profile.localKey) return profile.localKey;
+    if (!profile.linkedPersona) return;
+    const persona = await queryPersonaByProfileDB(id, tx);
+    return persona === null || persona === void 0 ? void 0 : persona.localKey;
+}
+// #endregion
+// #region ECDH
+async function deriveAESByECDH(pub, extractable = true) {
+    const curve = pub.algorithm.namedCurve || '';
+    const sameCurvePrivateKeys = new IdentifierMap(new Map(), ECKeyIdentifier);
+    await createPersonaDBReadonlyAccess(async (tx)=>{
+        const personas = await queryPersonasWithPrivateKey(tx);
+        for (const persona of personas){
+            if (!persona.privateKey) continue;
+            if (persona.privateKey.crv !== curve) continue;
+            sameCurvePrivateKeys.set(persona.identifier, persona.privateKey);
+        }
+    });
+    const deriveResult = new IdentifierMap(new Map(), ECKeyIdentifier);
+    const result1 = await Promise.allSettled([
+        ...sameCurvePrivateKeys
+    ].map(async ([id, key])=>{
+        const k = await crypto.subtle.importKey('jwk', key, {
+            name: 'ECDH',
+            namedCurve: key.crv
+        }, false, [
+            'deriveKey'
+        ]);
+        const result = await crypto.subtle.deriveKey({
+            name: 'ECDH',
+            public: pub
+        }, k, {
+            name: 'AES-GCM',
+            length: 256
+        }, extractable, [
+            'encrypt',
+            'decrypt'
+        ]);
+        deriveResult.set(id, result);
+    }));
+    const failed = result1.filter((x)=>x.status === 'rejected'
+    );
+    if (failed.length) {
+        console.warn('Failed to ECDH', ...failed.map((x)=>x.reason
+        ));
+    }
+    return deriveResult;
+}
+const KEY = (0,_dimensiondev_kit__WEBPACK_IMPORTED_MODULE_0__/* .decodeArrayBuffer */ .xe)('KEY');
+const IV = (0,_dimensiondev_kit__WEBPACK_IMPORTED_MODULE_0__/* .decodeArrayBuffer */ .xe)('IV');
+async function deriveAESByECDH_version38_or_older(pub, iv, extractable = false) {
+    const deriveResult = (await deriveAESByECDH(pub, true)).__raw_map__;
+    const next_map = new Map();
+    for (const [id, key] of deriveResult){
+        const derivedKeyRaw = await crypto.subtle.exportKey('raw', key);
+        const _a = concatArrayBuffer(derivedKeyRaw, iv);
+        const nextAESKeyMaterial = await crypto.subtle.digest('SHA-256', concatArrayBuffer(_a, iv, KEY));
+        const iv_pre = new Uint8Array(await crypto.subtle.digest('SHA-256', concatArrayBuffer(_a, iv, IV)));
+        const nextIV = new Uint8Array(16);
+        for(let i = 0; i <= 16; i += 1){
+            // eslint-disable-next-line no-bitwise
+            nextIV[i] = iv_pre[i] ^ iv_pre[16 + i];
+        }
+        const nextAESKey = await crypto.subtle.importKey('raw', nextAESKeyMaterial, {
+            name: 'AES-GCM',
+            length: 256
+        }, extractable, [
+            'encrypt',
+            'decrypt'
+        ]);
+        next_map.set(id, [
+            nextAESKey,
+            nextIV
+        ]);
+    }
+    return new IdentifierMap(next_map, ECKeyIdentifier);
+}
+// #endregion
+// #region normal functions
+async function createPersonaByJsonWebKey(options) {
+    const identifier = (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .ECKeyIdentifierFromJsonWebKey */ .CH)(options.publicKey);
+    const record = {
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        identifier: identifier,
+        linkedProfiles: new _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .IdentifierMap */ .qD(new Map(), _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .ProfileIdentifier */ .WO),
+        publicKey: options.publicKey,
+        privateKey: options.privateKey,
+        nickname: options.nickname,
+        mnemonic: options.mnemonic,
+        localKey: options.localKey,
+        hasLogout: false,
+        uninitialized: options.uninitialized
+    };
+    await (0,_db__WEBPACK_IMPORTED_MODULE_2__/* .consistentPersonaDBWriteAccess */ .As)((t)=>(0,_db__WEBPACK_IMPORTED_MODULE_2__/* .createPersonaDB */ .E9)(record, t)
+    );
+    return identifier;
+}
+async function createProfileWithPersona(profileID, data, keys) {
+    const ec_id = (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .ECKeyIdentifierFromJsonWebKey */ .CH)(keys.publicKey);
+    const rec = {
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        identifier: ec_id,
+        linkedProfiles: new _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .IdentifierMap */ .qD(new Map(), _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .ProfileIdentifier */ .WO),
+        nickname: keys.nickname,
+        publicKey: keys.publicKey,
+        privateKey: keys.privateKey,
+        localKey: keys.localKey,
+        mnemonic: keys.mnemonic,
+        hasLogout: false
+    };
+    await (0,_db__WEBPACK_IMPORTED_MODULE_2__/* .consistentPersonaDBWriteAccess */ .As)(async (t)=>{
+        await (0,_db__WEBPACK_IMPORTED_MODULE_2__/* .createOrUpdatePersonaDB */ .lX)(rec, {
+            explicitUndefinedField: 'ignore',
+            linkedProfiles: 'merge'
+        }, t);
+        await (0,_db__WEBPACK_IMPORTED_MODULE_2__/* .attachProfileDB */ .tc)(profileID, ec_id, data, t);
+    });
+}
+// #endregion
+function abort() {
+    throw new Error('Cancelled');
+}
 
 
 /***/ }),
@@ -219,6 +409,7 @@ __webpack_require__.d(__webpack_exports__, {
   "createOrUpdatePersonaDB": () => (/* binding */ createOrUpdatePersonaDB),
   "createOrUpdateProfileDB": () => (/* binding */ createOrUpdateProfileDB),
   "createPersonaDB": () => (/* binding */ createPersonaDB),
+  "createPersonaDBReadonlyAccess": () => (/* binding */ createPersonaDBReadonlyAccess),
   "createProfileDB": () => (/* binding */ createProfileDB),
   "createReadonlyPersonaTransaction": () => (/* binding */ createReadonlyPersonaTransaction),
   "createRelationDB": () => (/* binding */ createRelationDB),
@@ -531,6 +722,11 @@ var util = __webpack_require__(27725);
 async function createRelationsTransaction() {
     const database = await db();
     return (0,openDB/* createTransaction */._X)(database, 'readwrite')('relations');
+}
+async function createPersonaDBReadonlyAccess(action) {
+    const database = await db();
+    const transaction = (0,openDB/* createTransaction */._X)(database, 'readonly')('personas', 'profiles', 'relations');
+    await action(transaction);
 }
 // @deprecated Please create a transaction directly
 async function consistentPersonaDBWriteAccess(action, tryToAutoFix = true) {
@@ -1058,7 +1254,7 @@ const { createPostDB , updatePostDB , queryPostDB , queryPostsDB , queryPostPage
 /* harmony export */   "_": () => (/* binding */ hasNativeAPI)
 /* harmony export */ });
 /* unused harmony export sharedNativeAPI */
-/* harmony import */ var async_call_rpc_full__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(73302);
+/* harmony import */ var async_call_rpc_full__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19245);
 /* harmony import */ var _iOS_channel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2045);
 
 
@@ -1100,11 +1296,9 @@ if (true) {
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "w0": () => (/* reexport */ createPersonaByJsonWebKey),
   "A8": () => (/* reexport */ createPersonaByMnemonic),
   "c9": () => (/* reexport */ createPersonaByMnemonicV2),
   "$v": () => (/* reexport */ post/* createPostDB */.$v),
-  "lr": () => (/* reexport */ createProfileWithPersona),
   "FB": () => (/* reexport */ deletePersona),
   "A": () => (/* reexport */ loginPersona),
   "lW": () => (/* reexport */ logoutPersona),
@@ -1226,7 +1420,10 @@ var mnemonic_code = __webpack_require__(69914);
 var localKeyGenerate = __webpack_require__(74907);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/bip39@3.0.4/node_modules/bip39/src/index.js
 var bip39_src = __webpack_require__(68440);
+// EXTERNAL MODULE: ./background/database/persona/helper.ts
+var helper = __webpack_require__(56935);
 ;// CONCATENATED MODULE: ./src/database/Persona/helpers.ts
+
 
 
 
@@ -1391,7 +1588,7 @@ async function createPersonaByMnemonic(nickname, password) {
     const { key , mnemonicRecord: mnemonic  } = await (0,mnemonic_code/* generate_ECDH_256k1_KeyPair_ByMnemonicWord */.xX)(password);
     const { privateKey , publicKey  } = key;
     const localKey = await (0,localKeyGenerate/* deriveLocalKeyFromECDHKey */.i)(publicKey, mnemonic.words);
-    return createPersonaByJsonWebKey({
+    return (0,helper/* createPersonaByJsonWebKey */.w0)({
         privateKey,
         publicKey,
         localKey,
@@ -1410,54 +1607,13 @@ async function createPersonaByMnemonicV2(mnemonicWord, nickname, password) {
     const { key , mnemonicRecord: mnemonic  } = await (0,mnemonic_code/* recover_ECDH_256k1_KeyPair_ByMnemonicWord */.Hb)(mnemonicWord, password);
     const { privateKey , publicKey  } = key;
     const localKey = await (0,localKeyGenerate/* deriveLocalKeyFromECDHKey */.i)(publicKey, mnemonic.words);
-    return createPersonaByJsonWebKey({
+    return (0,helper/* createPersonaByJsonWebKey */.w0)({
         privateKey,
         publicKey,
         localKey,
         mnemonic,
         nickname,
         uninitialized: false
-    });
-}
-async function createPersonaByJsonWebKey(options) {
-    const identifier = (0,src/* ECKeyIdentifierFromJsonWebKey */.CH)(options.publicKey);
-    const record = {
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        identifier: identifier,
-        linkedProfiles: new src/* IdentifierMap */.qD(new Map(), src/* ProfileIdentifier */.WO),
-        publicKey: options.publicKey,
-        privateKey: options.privateKey,
-        nickname: options.nickname,
-        mnemonic: options.mnemonic,
-        localKey: options.localKey,
-        hasLogout: false,
-        uninitialized: options.uninitialized
-    };
-    await (0,persona_db/* consistentPersonaDBWriteAccess */.As)((t)=>(0,persona_db/* createPersonaDB */.E9)(record, t)
-    );
-    return identifier;
-}
-async function createProfileWithPersona(profileID, data, keys) {
-    const ec_id = (0,src/* ECKeyIdentifierFromJsonWebKey */.CH)(keys.publicKey);
-    const rec = {
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        identifier: ec_id,
-        linkedProfiles: new src/* IdentifierMap */.qD(new Map(), src/* ProfileIdentifier */.WO),
-        nickname: keys.nickname,
-        publicKey: keys.publicKey,
-        privateKey: keys.privateKey,
-        localKey: keys.localKey,
-        mnemonic: keys.mnemonic,
-        hasLogout: false
-    };
-    await (0,persona_db/* consistentPersonaDBWriteAccess */.As)(async (t)=>{
-        await (0,persona_db/* createOrUpdatePersonaDB */.lX)(rec, {
-            explicitUndefinedField: 'ignore',
-            linkedProfiles: 'merge'
-        }, t);
-        await (0,persona_db/* attachProfileDB */.tc)(profileID, ec_id, data, t);
     });
 }
 async function queryLocalKey(i) {
@@ -1472,9 +1628,6 @@ async function queryLocalKey(i) {
         var ref1;
         return (ref1 = (ref = await (0,persona_db/* queryPersonaDB */.Hm)(i)) === null || ref === void 0 ? void 0 : ref.localKey) !== null && ref1 !== void 0 ? ref1 : null;
     }
-}
-function cover_ECDH_256k1_KeyPair_ByMnemonicWord(password) {
-    throw new Error('Function not implemented.');
 }
 
 // EXTERNAL MODULE: ./src/database/Plugin/index.ts + 2 modules
@@ -1554,6 +1707,8 @@ var encode = __webpack_require__(82151);
 var decode = __webpack_require__(92415);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+kit@0.0.0-20220223101101-4e6f3b9/node_modules/@dimensiondev/kit/esm/index.js + 2 modules
 var esm = __webpack_require__(66559);
+// EXTERNAL MODULE: ./background/database/persona/helper.ts
+var helper = __webpack_require__(56935);
 // EXTERNAL MODULE: ./src/database/index.ts + 2 modules
 var database = __webpack_require__(1196);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
@@ -1577,7 +1732,7 @@ var SettingsService = __webpack_require__(27689);
 // EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
 var utils = __webpack_require__(13573);
 // EXTERNAL MODULE: ./src/modules/CryptoAlgorithm/helper.ts
-var helper = __webpack_require__(1335);
+var CryptoAlgorithm_helper = __webpack_require__(1335);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/head.js
 var head = __webpack_require__(29730);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/orderBy.js
@@ -1635,6 +1790,7 @@ async function signWithPersona({ message , method , identifier  }) {
 }
 
 ;// CONCATENATED MODULE: ./src/extension/background-script/IdentityService.ts
+
 
 
 
@@ -1954,8 +2110,8 @@ async function queryPersonaByPrivateKey(privateKeyString) {
 }
 async function createPersonaByPrivateKey(privateKeyString, nickname) {
     const privateKey = (0,decode/* decode */.Jx)((0,esm/* decodeArrayBuffer */.xe)(privateKeyString));
-    const key = await (0,helper/* split_ec_k256_keypair_into_pub_priv */.Sl)(privateKey);
-    return (0,database/* createPersonaByJsonWebKey */.w0)({
+    const key = await (0,CryptoAlgorithm_helper/* split_ec_k256_keypair_into_pub_priv */.Sl)(privateKey);
+    return (0,helper/* createPersonaByJsonWebKey */.w0)({
         privateKey: key.privateKey,
         publicKey: key.publicKey,
         nickname
@@ -2153,8 +2309,8 @@ var esm = __webpack_require__(66559);
 var src = __webpack_require__(79226);
 // EXTERNAL MODULE: ./src/utils/mnemonic-code/index.ts
 var mnemonic_code = __webpack_require__(69914);
-// EXTERNAL MODULE: ./src/database/index.ts + 2 modules
-var database = __webpack_require__(1196);
+// EXTERNAL MODULE: ./background/database/persona/helper.ts
+var helper = __webpack_require__(56935);
 // EXTERNAL MODULE: ./background/database/persona/db.ts
 var db = __webpack_require__(41715);
 // EXTERNAL MODULE: ./src/utils/mnemonic-code/localKeyGenerate.ts
@@ -2175,8 +2331,8 @@ var PostRecord = __webpack_require__(50497);
 var services = __webpack_require__(62596);
 // EXTERNAL MODULE: ./src/utils/type-transform/BackupFormat/JSON/DBRecord-JSON/WalletRecord.ts
 var WalletRecord = __webpack_require__(17075);
-// EXTERNAL MODULE: ../plugin-infra/src/index.ts + 1 modules
-var plugin_infra_src = __webpack_require__(27194);
+// EXTERNAL MODULE: ../plugin-infra/src/index.ts
+var plugin_infra_src = __webpack_require__(63151);
 // EXTERNAL MODULE: ./src/utils/type-transform/BackupFormat/JSON/DBRecord-JSON/RelationRecord.ts
 var RelationRecord = __webpack_require__(52612);
 ;// CONCATENATED MODULE: ./src/extension/background-script/WelcomeServices/generateBackupJSON.ts
@@ -2305,7 +2461,7 @@ async function generateBackupPreviewInfo(opts = {}) {
 }
 
 // EXTERNAL MODULE: ./background/services/helper/index.ts + 6 modules
-var helper = __webpack_require__(90841);
+var services_helper = __webpack_require__(90841);
 // EXTERNAL MODULE: ./shared/index.ts
 var shared = __webpack_require__(70609);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+holoflows-kit@0.9.0-20210902104757-7c3d0d0_webextension-polyfill@0.8.0/node_modules/@dimensiondev/holoflows-kit/umd/index.cjs
@@ -2318,6 +2474,8 @@ var v4 = __webpack_require__(32513);
 var restoreBackup = __webpack_require__(4717);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/date-fns@2.28.0/node_modules/date-fns/esm/format/index.js + 14 modules
 var format = __webpack_require__(57753);
+// EXTERNAL MODULE: ./src/database/index.ts + 2 modules
+var database = __webpack_require__(1196);
 ;// CONCATENATED MODULE: ./src/extension/background-script/WelcomeService.ts
 
 
@@ -2347,7 +2505,7 @@ var format = __webpack_require__(57753);
     const { key , mnemonicRecord  } = await (0,mnemonic_code/* recover_ECDH_256k1_KeyPair_ByMnemonicWord */.Hb)(word, password);
     const { privateKey , publicKey  } = key;
     const localKeyJwk = await (0,localKeyGenerate/* deriveLocalKeyFromECDHKey */.i)(publicKey, mnemonicRecord.words);
-    const ecKeyID = await (0,database/* createPersonaByJsonWebKey */.w0)({
+    const ecKeyID = await (0,helper/* createPersonaByJsonWebKey */.w0)({
         publicKey,
         privateKey,
         localKey: info.localKey || localKeyJwk,
@@ -2426,7 +2584,7 @@ async function checkPermissionsAndRestore(id) {
     if (json) {
         const permissions = await (0,utils/* extraPermissions */.uM)(json.grantedHostPermissions);
         if (permissions.length) {
-            const granted = await (0,helper.requestExtensionPermission)({
+            const granted = await (0,services_helper.requestExtensionPermission)({
                 origins: permissions
             });
             if (!granted) return;
@@ -2439,12 +2597,12 @@ async function checkPermissionAndOpenWalletRecovery(id) {
     if (json) {
         const permissions = await (0,utils/* extraPermissions */.uM)(json.grantedHostPermissions);
         if (permissions.length) {
-            const granted = await (0,helper.requestExtensionPermission)({
+            const granted = await (0,services_helper.requestExtensionPermission)({
                 origins: permissions
             });
             if (!granted) return;
         }
-        await (0,helper.openPopupWindow)(src/* PopupRoutes.WalletRecovered */.mZ.WalletRecovered, {
+        await (0,services_helper.openPopupWindow)(src/* PopupRoutes.WalletRecovered */.mZ.WalletRecovered, {
             backupId: id
         });
     }
@@ -2477,7 +2635,7 @@ function makeBackupName(extension) {
 /* harmony import */ var _database__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(1196);
 /* harmony import */ var _utils_type_transform_BackupFormat_JSON_DBRecord_JSON_WalletRecord__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(17075);
 /* harmony import */ var _plugins_Wallet_services__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(62596);
-/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(27194);
+/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(63151);
 /* harmony import */ var ts_results__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(79594);
 /* harmony import */ var _plugins_Wallet_services_wallet_database__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(31847);
 /* harmony import */ var _IdentityService__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(64426);
@@ -2816,7 +2974,7 @@ async function _helper(x) {
 /* harmony export */   "B": () => (/* binding */ PluginNFTAvatarRPC)
 /* harmony export */ });
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(17692);
-/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(27194);
+/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63151);
 
 
 if (false) {}
@@ -2831,14 +2989,12 @@ const PluginNFTAvatarRPC = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Aj": () => (/* binding */ getCurrentTradeProviderGeneralSettings),
 /* harmony export */   "DG": () => (/* binding */ currentSingleHopOnlySettings),
-/* harmony export */   "EG": () => (/* binding */ approvedTokensFromUniSwap),
 /* harmony export */   "It": () => (/* binding */ currentSlippageSettings),
 /* harmony export */   "Lc": () => (/* binding */ getCurrentPreferredCoinIdSettings),
+/* harmony export */   "dm": () => (/* binding */ approvedTokensFromUniswap),
 /* harmony export */   "gG": () => (/* binding */ currentDataProviderSettings)
 /* harmony export */ });
-/* unused harmony export getCurrentDataProviderGeneralSettings */
 /* harmony import */ var _dimensiondev_kit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(66559);
 /* harmony import */ var _settings_createSettings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(91296);
 /* harmony import */ var _shared_ui_locales_legacy__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6900);
@@ -2866,79 +3022,6 @@ const PluginNFTAvatarRPC = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__
     ,
     secondary: ()=>_shared_ui_locales_legacy__WEBPACK_IMPORTED_MODULE_2__/* .i18n.t */ .a.t('plugin_trader_settings_data_source_secondary')
 });
-const uniswapV2Settings = (0,_settings_createSettings__WEBPACK_IMPORTED_MODULE_1__/* .createInternalSettings */ .PS)(`${_constants__WEBPACK_IMPORTED_MODULE_3__/* .PLUGIN_ID */ .Uu}+tradeProvider+uniswap+v2`, '');
-const uniswapV3Settings = (0,_settings_createSettings__WEBPACK_IMPORTED_MODULE_1__/* .createInternalSettings */ .PS)(`${_constants__WEBPACK_IMPORTED_MODULE_3__/* .PLUGIN_ID */ .Uu}+tradeProvider+uniswap+v3`, '');
-const zrxSettings = (0,_settings_createSettings__WEBPACK_IMPORTED_MODULE_1__/* .createInternalSettings */ .PS)(`${_constants__WEBPACK_IMPORTED_MODULE_3__/* .PLUGIN_ID */ .Uu}+tradeProvider+zrx`, '');
-const sushiswapSettings = (0,_settings_createSettings__WEBPACK_IMPORTED_MODULE_1__/* .createInternalSettings */ .PS)(`${_constants__WEBPACK_IMPORTED_MODULE_3__/* .PLUGIN_ID */ .Uu}+tradeProvider+sushiswap`, '');
-const sashimiswapSettings = (0,_settings_createSettings__WEBPACK_IMPORTED_MODULE_1__/* .createInternalSettings */ .PS)(`${_constants__WEBPACK_IMPORTED_MODULE_3__/* .PLUGIN_ID */ .Uu}+tradeProvider+sashimiswap`, '');
-const quickswapSettings = (0,_settings_createSettings__WEBPACK_IMPORTED_MODULE_1__/* .createInternalSettings */ .PS)(`${_constants__WEBPACK_IMPORTED_MODULE_3__/* .PLUGIN_ID */ .Uu}+tradeProvider+quickswap`, '');
-const pancakeswapSettings = (0,_settings_createSettings__WEBPACK_IMPORTED_MODULE_1__/* .createInternalSettings */ .PS)(`${_constants__WEBPACK_IMPORTED_MODULE_3__/* .PLUGIN_ID */ .Uu}+tradeProvider+pancakeswap`, '');
-const balancerSettings = (0,_settings_createSettings__WEBPACK_IMPORTED_MODULE_1__/* .createInternalSettings */ .PS)(`${_constants__WEBPACK_IMPORTED_MODULE_3__/* .PLUGIN_ID */ .Uu}+tradeProvider+balancer`, '');
-const dodoSettings = (0,_settings_createSettings__WEBPACK_IMPORTED_MODULE_1__/* .createInternalSettings */ .PS)(`${_constants__WEBPACK_IMPORTED_MODULE_3__/* .PLUGIN_ID */ .Uu}+tradeProvider+dodo`, '');
-const bancorSettings = (0,_settings_createSettings__WEBPACK_IMPORTED_MODULE_1__/* .createInternalSettings */ .PS)(`${_constants__WEBPACK_IMPORTED_MODULE_3__/* .PLUGIN_ID */ .Uu}+tradeProvider+bancor`, '');
-const traderjoeSettings = (0,_settings_createSettings__WEBPACK_IMPORTED_MODULE_1__/* .createInternalSettings */ .PS)(`${_constants__WEBPACK_IMPORTED_MODULE_3__/* .PLUGIN_ID */ .Uu}+tradeProvider+traderjoe`, '');
-const pangolinSettings = (0,_settings_createSettings__WEBPACK_IMPORTED_MODULE_1__/* .createInternalSettings */ .PS)(`${_constants__WEBPACK_IMPORTED_MODULE_3__/* .PLUGIN_ID */ .Uu}+tradeProvider+pangolin`, '');
-const openoceanSettings = (0,_settings_createSettings__WEBPACK_IMPORTED_MODULE_1__/* .createInternalSettings */ .PS)(`${_constants__WEBPACK_IMPORTED_MODULE_3__/* .PLUGIN_ID */ .Uu}+tradeProvider+openocean`, '');
-const trisolarisSettings = (0,_settings_createSettings__WEBPACK_IMPORTED_MODULE_1__/* .createInternalSettings */ .PS)(`${_constants__WEBPACK_IMPORTED_MODULE_3__/* .PLUGIN_ID */ .Uu}+tradeProvider+trisolaris`, '');
-const wannaswapSettings = (0,_settings_createSettings__WEBPACK_IMPORTED_MODULE_1__/* .createInternalSettings */ .PS)(`${_constants__WEBPACK_IMPORTED_MODULE_3__/* .PLUGIN_ID */ .Uu}+tradeProvider+wannaswap`, '');
-/**
- * The general settings of specific tarde provider
- */ function getCurrentTradeProviderGeneralSettings(tradeProvider) {
-    switch(tradeProvider){
-        case _masknet_public_api__WEBPACK_IMPORTED_MODULE_4__/* .TradeProvider.UNISWAP_V2 */ .z4.UNISWAP_V2:
-            return uniswapV2Settings;
-        case _masknet_public_api__WEBPACK_IMPORTED_MODULE_4__/* .TradeProvider.UNISWAP_V3 */ .z4.UNISWAP_V3:
-            return uniswapV3Settings;
-        case _masknet_public_api__WEBPACK_IMPORTED_MODULE_4__/* .TradeProvider.ZRX */ .z4.ZRX:
-            return zrxSettings;
-        case _masknet_public_api__WEBPACK_IMPORTED_MODULE_4__/* .TradeProvider.SUSHISWAP */ .z4.SUSHISWAP:
-            return sushiswapSettings;
-        case _masknet_public_api__WEBPACK_IMPORTED_MODULE_4__/* .TradeProvider.SASHIMISWAP */ .z4.SASHIMISWAP:
-            return sashimiswapSettings;
-        case _masknet_public_api__WEBPACK_IMPORTED_MODULE_4__/* .TradeProvider.QUICKSWAP */ .z4.QUICKSWAP:
-            return quickswapSettings;
-        case _masknet_public_api__WEBPACK_IMPORTED_MODULE_4__/* .TradeProvider.PANCAKESWAP */ .z4.PANCAKESWAP:
-            return pancakeswapSettings;
-        case _masknet_public_api__WEBPACK_IMPORTED_MODULE_4__/* .TradeProvider.BALANCER */ .z4.BALANCER:
-            return balancerSettings;
-        case _masknet_public_api__WEBPACK_IMPORTED_MODULE_4__/* .TradeProvider.DODO */ .z4.DODO:
-            return dodoSettings;
-        case _masknet_public_api__WEBPACK_IMPORTED_MODULE_4__/* .TradeProvider.BANCOR */ .z4.BANCOR:
-            return bancorSettings;
-        case _masknet_public_api__WEBPACK_IMPORTED_MODULE_4__/* .TradeProvider.TRADERJOE */ .z4.TRADERJOE:
-            return traderjoeSettings;
-        case _masknet_public_api__WEBPACK_IMPORTED_MODULE_4__/* .TradeProvider.OPENOCEAN */ .z4.OPENOCEAN:
-            return openoceanSettings;
-        case _masknet_public_api__WEBPACK_IMPORTED_MODULE_4__/* .TradeProvider.PANGOLIN */ .z4.PANGOLIN:
-            return pangolinSettings;
-        case _masknet_public_api__WEBPACK_IMPORTED_MODULE_4__/* .TradeProvider.TRISOLARIS */ .z4.TRISOLARIS:
-            return trisolarisSettings;
-        case _masknet_public_api__WEBPACK_IMPORTED_MODULE_4__/* .TradeProvider.WANNASWAP */ .z4.WANNASWAP:
-            return wannaswapSettings;
-        default:
-            (0,_dimensiondev_kit__WEBPACK_IMPORTED_MODULE_0__/* .unreachable */ .t1)(tradeProvider);
-    }
-}
-// #endregion
-// #region data provider general settings
-const coinGeckoSettings = (0,_settings_createSettings__WEBPACK_IMPORTED_MODULE_1__/* .createInternalSettings */ .PS)(`${_constants__WEBPACK_IMPORTED_MODULE_3__/* .PLUGIN_ID */ .Uu}+currentCoinGeckoSettings`, '');
-const coinMarketCapSettings = (0,_settings_createSettings__WEBPACK_IMPORTED_MODULE_1__/* .createInternalSettings */ .PS)(`${_constants__WEBPACK_IMPORTED_MODULE_3__/* .PLUGIN_ID */ .Uu}+currentCoinMarketCapSettings`, '');
-const coinUniswapSettings = (0,_settings_createSettings__WEBPACK_IMPORTED_MODULE_1__/* .createInternalSettings */ .PS)(`${_constants__WEBPACK_IMPORTED_MODULE_3__/* .PLUGIN_ID */ .Uu}+currentCoinUniswapSettings`, '');
-/**
- * The general settings of specific data provider
- */ function getCurrentDataProviderGeneralSettings(dataProvider) {
-    switch(dataProvider){
-        case DataProvider.COIN_GECKO:
-            return coinGeckoSettings;
-        case DataProvider.COIN_MARKET_CAP:
-            return coinMarketCapSettings;
-        case DataProvider.UNISWAP_INFO:
-            return coinUniswapSettings;
-        default:
-            unreachable(dataProvider);
-    }
-}
-// #endregion
 // #region the user preferred coin id
 const coinGeckoPreferredCoinId = (0,_settings_createSettings__WEBPACK_IMPORTED_MODULE_1__/* .createInternalSettings */ .PS)(`${_constants__WEBPACK_IMPORTED_MODULE_3__/* .PLUGIN_ID */ .Uu}+currentCoinGeckoPreferredCoinId`, '{}');
 const coinMarketCapPreferredCoinId = (0,_settings_createSettings__WEBPACK_IMPORTED_MODULE_1__/* .createInternalSettings */ .PS)(`${_constants__WEBPACK_IMPORTED_MODULE_3__/* .PLUGIN_ID */ .Uu}+currentCoinMarketCapPreferredCoinId`, '{}');
@@ -2958,7 +3041,7 @@ function getCurrentPreferredCoinIdSettings(dataProvider) {
 // #endregion
 /**
  * The approved tokens from uniswap
- */ const approvedTokensFromUniSwap = (0,_settings_createSettings__WEBPACK_IMPORTED_MODULE_1__/* .createInternalSettings */ .PS)(`${_constants__WEBPACK_IMPORTED_MODULE_3__/* .PLUGIN_ID */ .Uu}+approvedTokens`, '[]');
+ */ const approvedTokensFromUniswap = (0,_settings_createSettings__WEBPACK_IMPORTED_MODULE_1__/* .createInternalSettings */ .PS)(`${_constants__WEBPACK_IMPORTED_MODULE_3__/* .PLUGIN_ID */ .Uu}+approvedTokens`, '[]');
 
 
 /***/ }),

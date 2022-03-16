@@ -28,7 +28,7 @@ const worker = {
 /* harmony export */   "y": () => (/* binding */ PluginVCentRPC)
 /* harmony export */ });
 /* unused harmony export PluginVCentMessages */
-/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(27194);
+/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63151);
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(24698);
 
 

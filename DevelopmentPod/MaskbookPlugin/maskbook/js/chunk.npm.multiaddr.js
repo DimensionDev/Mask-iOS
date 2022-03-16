@@ -1187,7 +1187,7 @@ module.exports = { Multiaddr, multiaddr, protocols, resolvers }
 
 
 
-const isIp = __webpack_require__(46565)
+const isIp = __webpack_require__(44193)
 const { toString: uint8ArrayToString } = __webpack_require__(90453)
 
 const isIP = isIp

@@ -4880,7 +4880,7 @@ var c = __webpack_require__(66433);
 var Contract = __webpack_require__(65809);
 var watches = __webpack_require__(94995);
 var Filter = __webpack_require__(91023);
-var IsSyncing = __webpack_require__(36300);
+var IsSyncing = __webpack_require__(74096);
 var namereg = __webpack_require__(35949);
 var Iban = __webpack_require__(29995);
 var transfer = __webpack_require__(62544);
@@ -6290,7 +6290,7 @@ module.exports = Settings;
 
 /***/ }),
 
-/***/ 36300:
+/***/ 74096:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /*

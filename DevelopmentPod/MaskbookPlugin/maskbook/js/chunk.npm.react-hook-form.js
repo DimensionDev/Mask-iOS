@@ -1,7 +1,7 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[2598],{
 
-/***/ 38447:
+/***/ 56247:
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -14,7 +14,7 @@
 /* harmony export */   "t8": () => (/* binding */ set)
 /* harmony export */ });
 /* unused harmony exports useController, useFieldArray, useFormState, useWatch */
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
 
 
 var isCheckBoxInput = (element) => element.type === 'checkbox';

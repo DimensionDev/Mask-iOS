@@ -32,6 +32,7 @@ __webpack_require__.d(__webpack_exports__, {
   "createOrUpdatePersonaDB": () => (/* binding */ createOrUpdatePersonaDB),
   "createOrUpdateProfileDB": () => (/* binding */ createOrUpdateProfileDB),
   "createPersonaDB": () => (/* binding */ createPersonaDB),
+  "createPersonaDBReadonlyAccess": () => (/* binding */ createPersonaDBReadonlyAccess),
   "createProfileDB": () => (/* binding */ createProfileDB),
   "createReadonlyPersonaTransaction": () => (/* binding */ createReadonlyPersonaTransaction),
   "createRelationDB": () => (/* binding */ createRelationDB),
@@ -344,6 +345,11 @@ var util = __webpack_require__(27725);
 async function createRelationsTransaction() {
     const database = await db();
     return (0,openDB/* createTransaction */._X)(database, 'readwrite')('relations');
+}
+async function createPersonaDBReadonlyAccess(action) {
+    const database = await db();
+    const transaction = (0,openDB/* createTransaction */._X)(database, 'readonly')('personas', 'profiles', 'relations');
+    await action(transaction);
 }
 // @deprecated Please create a transaction directly
 async function consistentPersonaDBWriteAccess(action, tryToAutoFix = true) {

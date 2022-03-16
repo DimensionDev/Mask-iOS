@@ -43,7 +43,7 @@ var merge_options = __webpack_require__(31061);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/ipfs-core-utils@0.12.2/node_modules/ipfs-core-utils/esm/src/to-url-string.js
 var to_url_string = __webpack_require__(71154);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/ipfs-core-utils@0.12.2/node_modules/ipfs-core-utils/esm/src/agent.browser.js
-var agent_browser = __webpack_require__(24190);
+var agent_browser = __webpack_require__(99250);
 ;// CONCATENATED MODULE: ../../node_modules/.pnpm/ipfs-http-client@54.0.2/node_modules/ipfs-http-client/esm/src/lib/core.js
 
 

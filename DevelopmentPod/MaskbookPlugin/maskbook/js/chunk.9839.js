@@ -7,7 +7,7 @@
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "_": () => (/* binding */ CloudLinkIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -73,22 +73,22 @@ __webpack_require__.d(__webpack_exports__, {
   "default": () => (/* binding */ Wallet_WalletSettings)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
 // EXTERNAL MODULE: ./src/extension/popups/pages/Wallet/components/WalletHeader/index.tsx + 1 modules
 var WalletHeader = __webpack_require__(19651);
 // EXTERNAL MODULE: ./src/extension/popups/pages/Wallet/components/WalletInfo/index.tsx
 var WalletInfo = __webpack_require__(3359);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/List/List.js + 1 modules
-var List = __webpack_require__(59216);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/ListItem/ListItem.js + 2 modules
-var ListItem = __webpack_require__(73268);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/ListItemText/ListItemText.js
-var ListItemText = __webpack_require__(10);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Link/Link.js + 1 modules
-var Link = __webpack_require__(98294);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var src = __webpack_require__(92597);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/List/List.js + 1 modules
+var List = __webpack_require__(66407);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/ListItem/ListItem.js + 2 modules
+var ListItem = __webpack_require__(66552);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/ListItemText/ListItemText.js
+var ListItemText = __webpack_require__(81396);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Link/Link.js + 1 modules
+var Link = __webpack_require__(86377);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var src = __webpack_require__(43021);
 // EXTERNAL MODULE: ./src/extension/popups/components/EnterDashboard/index.tsx
 var EnterDashboard = __webpack_require__(30395);
 // EXTERNAL MODULE: ../icons/utils/index.tsx
@@ -248,10 +248,10 @@ const TrashIcon = (0,utils/* createIcon */.I)('TrashIcon', /*#__PURE__*/ (0,jsx_
 
 // EXTERNAL MODULE: ../icons/general/CloudLink.tsx
 var CloudLink = __webpack_require__(95923);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router@5.2.1_react@18.0.0-rc.0/node_modules/react-router/esm/react-router.js
-var react_router = __webpack_require__(22749);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router@6.2.2_react@18.0.0-rc.2/node_modules/react-router/index.js
+var react_router = __webpack_require__(92186);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var shared_base_src = __webpack_require__(79226);
 // EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
@@ -304,7 +304,7 @@ const useStyles = (0,src/* makeStyles */.ZL)()({
 });
 const WalletSettings = /*#__PURE__*/ (0,react.memo)(()=>{
     const { t  } = (0,src_utils/* useI18N */.M1)();
-    const history = (0,react_router/* useHistory */.k6)();
+    const navigate = (0,react_router/* useNavigate */.s0)();
     const chainId = (0,useChainId/* useChainId */.xx)();
     const wallet = (0,useWallet/* useWallet */.O)();
     const { classes  } = useStyles();
@@ -321,7 +321,7 @@ const WalletSettings = /*#__PURE__*/ (0,react.memo)(()=>{
                     children: [
                         /*#__PURE__*/ (0,jsx_runtime.jsxs)(ListItem/* default */.ZP, {
                             className: classes.item,
-                            onClick: ()=>history.push(shared_base_src/* PopupRoutes.BackupWallet */.mZ.BackupWallet)
+                            onClick: ()=>navigate(shared_base_src/* PopupRoutes.BackupWallet */.mZ.BackupWallet)
                             ,
                             children: [
                                 /*#__PURE__*/ (0,jsx_runtime.jsx)(BackUpIcon, {
@@ -335,7 +335,7 @@ const WalletSettings = /*#__PURE__*/ (0,react.memo)(()=>{
                         }),
                         (wallet === null || wallet === void 0 ? void 0 : wallet.configurable) ? /*#__PURE__*/ (0,jsx_runtime.jsxs)(ListItem/* default */.ZP, {
                             className: classes.item,
-                            onClick: ()=>history.push(shared_base_src/* PopupRoutes.DeleteWallet */.mZ.DeleteWallet)
+                            onClick: ()=>navigate(shared_base_src/* PopupRoutes.DeleteWallet */.mZ.DeleteWallet)
                             ,
                             children: [
                                 /*#__PURE__*/ (0,jsx_runtime.jsx)(TrashIcon, {

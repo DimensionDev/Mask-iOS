@@ -1487,12 +1487,12 @@ __webpack_require__.d(__webpack_exports__, {
   "z": () => (/* reexport */ getNonFungibleAssets)
 });
 
-// EXTERNAL MODULE: ../plugin-infra/src/index.ts + 1 modules
-var src = __webpack_require__(27194);
+// EXTERNAL MODULE: ../plugin-infra/src/index.ts
+var src = __webpack_require__(63151);
 // EXTERNAL MODULE: ../web3-shared/solana/index.ts + 4 modules
 var solana = __webpack_require__(87210);
-// EXTERNAL MODULE: ../web3-providers/src/index.ts
-var web3_providers_src = __webpack_require__(24524);
+// EXTERNAL MODULE: ../web3-providers/src/index.ts + 2 modules
+var web3_providers_src = __webpack_require__(54492);
 // EXTERNAL MODULE: ../plugins/Solana/src/helpers/index.ts + 2 modules
 var helpers = __webpack_require__(70569);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@solana+spl-token-registry@0.2.1301/node_modules/@solana/spl-token-registry/dist/module/index.js + 2 modules
@@ -1716,8 +1716,8 @@ function formatCurrency(value, sign = '') {
     return `${sign}${digits}`;
 }
 
-// EXTERNAL MODULE: ../plugin-infra/src/index.ts + 1 modules
-var plugin_infra_src = __webpack_require__(27194);
+// EXTERNAL MODULE: ../plugin-infra/src/index.ts
+var plugin_infra_src = __webpack_require__(63151);
 ;// CONCATENATED MODULE: ../plugins/Solana/src/helpers/token.ts
 
 

@@ -87,7 +87,7 @@ var _isOctal = _interopRequireDefault(__webpack_require__(56615));
 
 var _isDivisibleBy = _interopRequireDefault(__webpack_require__(40282));
 
-var _isHexColor = _interopRequireDefault(__webpack_require__(80778));
+var _isHexColor = _interopRequireDefault(__webpack_require__(22572));
 
 var _isRgbColor = _interopRequireDefault(__webpack_require__(89803));
 
@@ -103,7 +103,7 @@ var _isMD = _interopRequireDefault(__webpack_require__(47981));
 
 var _isHash = _interopRequireDefault(__webpack_require__(74139));
 
-var _isJWT = _interopRequireDefault(__webpack_require__(52009));
+var _isJWT = _interopRequireDefault(__webpack_require__(75357));
 
 var _isJSON = _interopRequireDefault(__webpack_require__(6308));
 
@@ -1999,7 +1999,7 @@ module.exports["default"] = exports.default;
 
 /***/ }),
 
-/***/ 80778:
+/***/ 22572:
 /***/ ((module, exports, __webpack_require__) => {
 
 
@@ -3312,7 +3312,7 @@ module.exports["default"] = exports.default;
 
 /***/ }),
 
-/***/ 52009:
+/***/ 75357:
 /***/ ((module, exports, __webpack_require__) => {
 
 

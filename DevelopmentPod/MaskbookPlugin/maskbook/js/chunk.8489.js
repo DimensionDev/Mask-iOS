@@ -12,16 +12,16 @@ __webpack_require__.d(__webpack_exports__, {
   "default": () => (/* binding */ Wallet_SwitchWallet)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/List/List.js + 1 modules
-var List = __webpack_require__(59216);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Button/Button.js
-var Button = __webpack_require__(9744);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var src = __webpack_require__(92597);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/List/List.js + 1 modules
+var List = __webpack_require__(66407);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Button/Button.js
+var Button = __webpack_require__(12463);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var src = __webpack_require__(43021);
 // EXTERNAL MODULE: ../web3-shared/evm/context/index.tsx
 var context = __webpack_require__(67937);
 ;// CONCATENATED MODULE: ../web3-shared/evm/hooks/useWalletPrimary.ts
@@ -39,34 +39,34 @@ var useWallets = __webpack_require__(95219);
 var types = __webpack_require__(95130);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/address.ts
 var address = __webpack_require__(66580);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router@5.2.1_react@18.0.0-rc.0/node_modules/react-router/esm/react-router.js
-var react_router = __webpack_require__(22749);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router@6.2.2_react@18.0.0-rc.2/node_modules/react-router/index.js
+var react_router = __webpack_require__(92186);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var shared_base_src = __webpack_require__(79226);
 // EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
 var utils = __webpack_require__(13573);
 // EXTERNAL MODULE: ./src/plugins/Wallet/messages.ts
 var messages = __webpack_require__(63081);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useCopyToClipboard.js + 1 modules
-var useCopyToClipboard = __webpack_require__(17734);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useCopyToClipboard.js + 1 modules
+var useCopyToClipboard = __webpack_require__(35750);
 // EXTERNAL MODULE: ./src/extension/popups/components/NetworkSelector/index.tsx
 var NetworkSelector = __webpack_require__(1968);
 // EXTERNAL MODULE: ./src/plugins/Wallet/settings.ts
 var settings = __webpack_require__(63361);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/formatter.ts
 var formatter = __webpack_require__(22283);
-// EXTERNAL MODULE: ../plugin-infra/src/index.ts + 1 modules
-var plugin_infra_src = __webpack_require__(27194);
+// EXTERNAL MODULE: ../plugin-infra/src/index.ts
+var plugin_infra_src = __webpack_require__(63151);
 // EXTERNAL MODULE: ../icons/brands/MaskWallet.tsx
 var MaskWallet = __webpack_require__(12605);
 // EXTERNAL MODULE: ../icons/general/Success.tsx
 var Success = __webpack_require__(57214);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/ListItem/ListItem.js + 2 modules
-var ListItem = __webpack_require__(73268);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/ListItemText/ListItemText.js
-var ListItemText = __webpack_require__(10);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Typography/Typography.js + 1 modules
-var Typography = __webpack_require__(7280);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/ListItem/ListItem.js + 2 modules
+var ListItem = __webpack_require__(66552);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/ListItemText/ListItemText.js
+var ListItemText = __webpack_require__(81396);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Typography/Typography.js + 1 modules
+var Typography = __webpack_require__(74491);
 // EXTERNAL MODULE: ../shared/src/index.ts
 var shared_src = __webpack_require__(39850);
 // EXTERNAL MODULE: ./src/extension/popups/components/CopyIconButton/index.tsx
@@ -259,7 +259,7 @@ const SwitchWallet = /*#__PURE__*/ (0,react.memo)(()=>{
     const { t  } = (0,utils/* useI18N */.M1)();
     const walletPrimary = useWalletPrimary();
     const { classes  } = SwitchWallet_useStyles();
-    const history = (0,react_router/* useHistory */.k6)();
+    const navigate = (0,react_router/* useNavigate */.s0)();
     const wallet = (0,useWallet/* useWallet */.O)();
     const wallets = (0,useWallets/* useWallets */.r)(types/* ProviderType.MaskWallet */.lP.MaskWallet);
     const [, copyToClipboard] = (0,useCopyToClipboard/* default */.Z)();
@@ -270,7 +270,7 @@ const SwitchWallet = /*#__PURE__*/ (0,react.memo)(()=>{
                 url: browser.runtime.getURL('/dashboard.html#/create-mask-wallet')
             });
         } else {
-            history.push(shared_base_src/* PopupRoutes.CreateWallet */.mZ.CreateWallet);
+            navigate(shared_base_src/* PopupRoutes.CreateWallet */.mZ.CreateWallet);
         }
     }, [
         walletPrimary,
@@ -284,7 +284,9 @@ const SwitchWallet = /*#__PURE__*/ (0,react.memo)(()=>{
             account: address,
             providerType: types/* ProviderType.MaskWallet */.lP.MaskWallet
         });
-        history.replace(shared_base_src/* PopupRoutes.Wallet */.mZ.Wallet);
+        navigate(shared_base_src/* PopupRoutes.Wallet */.mZ.Wallet, {
+            replace: true
+        });
     }, [
         history
     ]);
@@ -328,7 +330,7 @@ const SwitchWallet = /*#__PURE__*/ (0,react.memo)(()=>{
                         variant: "contained",
                         disabled: wallets.length >= shared_src/* MAX_WALLET_LIMIT */.hA,
                         className: classes.button,
-                        onClick: ()=>history.push(shared_base_src/* PopupRoutes.ImportWallet */.mZ.ImportWallet)
+                        onClick: ()=>navigate(shared_base_src/* PopupRoutes.ImportWallet */.mZ.ImportWallet)
                         ,
                         children: t('import')
                     })

@@ -38,7 +38,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.BaseTransaction = void 0;
 var common_1 = __importDefault(__webpack_require__(88215));
-var ethereumjs_util_1 = __webpack_require__(39906);
+var ethereumjs_util_1 = __webpack_require__(5459);
 var types_1 = __webpack_require__(85652);
 /**
  * This base class will likely be subject to further
@@ -375,7 +375,7 @@ var __read = (this && this.__read) || function (o, n) {
     return ar;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-var ethereumjs_util_1 = __webpack_require__(39906);
+var ethereumjs_util_1 = __webpack_require__(5459);
 var baseTransaction_1 = __webpack_require__(3591);
 var types_1 = __webpack_require__(85652);
 var util_1 = __webpack_require__(89543);
@@ -750,7 +750,7 @@ var __read = (this && this.__read) || function (o, n) {
     return ar;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-var ethereumjs_util_1 = __webpack_require__(39906);
+var ethereumjs_util_1 = __webpack_require__(5459);
 var baseTransaction_1 = __webpack_require__(3591);
 var types_1 = __webpack_require__(85652);
 var util_1 = __webpack_require__(89543);
@@ -1153,7 +1153,7 @@ var __read = (this && this.__read) || function (o, n) {
     return ar;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-var ethereumjs_util_1 = __webpack_require__(39906);
+var ethereumjs_util_1 = __webpack_require__(5459);
 var types_1 = __webpack_require__(85652);
 var baseTransaction_1 = __webpack_require__(3591);
 var TRANSACTION_TYPE = 0;
@@ -1473,7 +1473,7 @@ exports["default"] = Transaction;
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-var ethereumjs_util_1 = __webpack_require__(39906);
+var ethereumjs_util_1 = __webpack_require__(5459);
 var _1 = __webpack_require__(79992);
 var TransactionFactory = /** @class */ (function () {
     // It is not possible to instantiate a TransactionFactory object.
@@ -1598,7 +1598,7 @@ exports["default"] = TransactionFactory;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.N_DIV_2 = exports.isAccessList = exports.isAccessListBuffer = exports.Capability = void 0;
-var ethereumjs_util_1 = __webpack_require__(39906);
+var ethereumjs_util_1 = __webpack_require__(5459);
 /**
  * Can be used in conjunction with {@link Transaction.supports}
  * to query on tx capabilities
@@ -1655,7 +1655,7 @@ exports.N_DIV_2 = new ethereumjs_util_1.BN('7fffffffffffffffffffffffffffffff5d57
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AccessLists = void 0;
-var ethereumjs_util_1 = __webpack_require__(39906);
+var ethereumjs_util_1 = __webpack_require__(5459);
 var types_1 = __webpack_require__(85652);
 var AccessLists = /** @class */ (function () {
     function AccessLists() {
