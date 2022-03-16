@@ -442,7 +442,9 @@
                 "btn_withoutPassword":"Hold to Send",
                 "amount_error":"Insufficient amount.",
                 "password_error":"Incorrect payment password.",
-                "gasFee_error": "Insufficient gas balance."
+                "gasFee_error": "Insufficient gas balance.",
+                "contact":"Contacts",
+                "recent":"Recent"
         	},
         	"addContact":{
         		"btn_add":"Add Contact",

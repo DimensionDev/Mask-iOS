@@ -642,6 +642,8 @@
 		6F702B262695B52900B72703 /* WalletSendHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F702B252695B52900B72703 /* WalletSendHelper.swift */; };
 		6F785E2F269305E20019079F /* RecentlyAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F785E2E269305E20019079F /* RecentlyAddress.swift */; };
 		6F785E36269445A00019079F /* ContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F785E35269445A00019079F /* ContactManager.swift */; };
+		6FA1112B27D0BB3E0041B16A /* RecentlyPasteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA1112A27D0BB3D0041B16A /* RecentlyPasteTableViewCell.swift */; };
+		6FA1112D27D0D19A0041B16A /* RecentlyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA1112C27D0D19A0041B16A /* RecentlyHeaderView.swift */; };
 		6FA623AD26D4C4630091FDFF /* NFTAssetEventsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA623AC26D4C4630091FDFF /* NFTAssetEventsModel.swift */; };
 		6FA623AF26D4D0540091FDFF /* NFTTransactionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA623AE26D4D0540091FDFF /* NFTTransactionHistory.swift */; };
 		9E25FB5AA13E4B0F9422E1C9 /* Pods_Maskbook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F30EAE46DE40DCAA6C88051F /* Pods_Maskbook.framework */; };
@@ -1356,6 +1358,8 @@
 		6F702B252695B52900B72703 /* WalletSendHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSendHelper.swift; sourceTree = "<group>"; };
 		6F785E2E269305E20019079F /* RecentlyAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyAddress.swift; sourceTree = "<group>"; };
 		6F785E35269445A00019079F /* ContactManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactManager.swift; sourceTree = "<group>"; };
+		6FA1112A27D0BB3D0041B16A /* RecentlyPasteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyPasteTableViewCell.swift; sourceTree = "<group>"; };
+		6FA1112C27D0D19A0041B16A /* RecentlyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyHeaderView.swift; sourceTree = "<group>"; };
 		6FA623AC26D4C4630091FDFF /* NFTAssetEventsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTAssetEventsModel.swift; sourceTree = "<group>"; };
 		6FA623AE26D4D0540091FDFF /* NFTTransactionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTTransactionHistory.swift; sourceTree = "<group>"; };
 		909D6705171D560F9168636C /* Pods-Maskbook.release touchpreview.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maskbook.release touchpreview.xcconfig"; path = "Target Support Files/Pods-Maskbook/Pods-Maskbook.release touchpreview.xcconfig"; sourceTree = "<group>"; };
@@ -2897,6 +2901,8 @@
 				2AF8841C271EE9300004565A /* TokenListTableViewCell.swift */,
 				2AF8841D271EE9300004565A /* SendContactListTableViewCell.swift */,
 				2AF8841E271EE9300004565A /* GasFeeStandardCollectionViewCell.swift */,
+				6FA1112A27D0BB3D0041B16A /* RecentlyPasteTableViewCell.swift */,
+				6FA1112C27D0D19A0041B16A /* RecentlyHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3979,6 +3985,7 @@
 				2AF8858C271EE9310004565A /* SelectActionTableViewCell.swift in Sources */,
 				0F31A1642742B3A1009D2E05 /* WalletMultiChainCell.swift in Sources */,
 				2AF884EA271EE9310004565A /* PluginBlockView.swift in Sources */,
+				6FA1112B27D0BB3E0041B16A /* RecentlyPasteTableViewCell.swift in Sources */,
 				2A6ABBA22720053B00CC3AED /* RemoteBackupUploadFileRequest.swift in Sources */,
 				1FC638DF2727FF17002D830B /* WalletInfoProvider.swift in Sources */,
 				2AF884CF271EE9300004565A /* MaskWebMessage+App.swift in Sources */,
@@ -4455,6 +4462,7 @@
 				0FAF2F502669D25A00C1B577 /* Currency.swift in Sources */,
 				2AF88583271EE9310004565A /* WalletHistoryViewController.swift in Sources */,
 				2AF88514271EE9310004565A /* WalletDetailViewController.swift in Sources */,
+				6FA1112D27D0D19A0041B16A /* RecentlyHeaderView.swift in Sources */,
 				2AF8852B271EE9310004565A /* WalletBackupPrivateKeyViewModel.swift in Sources */,
 				2AF88509271EE9310004565A /* PersonaListViewController.swift in Sources */,
 				2AF8851A271EE9310004565A /* SecondaryButton.swift in Sources */,

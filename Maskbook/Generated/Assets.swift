@@ -311,9 +311,12 @@ internal enum Asset {
       }
       internal enum SendTransaction {
         internal static let addUser = ImageAsset(name: "Images/Scene/SendTransaction/AddUser")
+        internal static let recent = ImageAsset(name: "Images/Scene/SendTransaction/Recent")
         internal static let scan = ImageAsset(name: "Images/Scene/SendTransaction/Scan")
         internal static let upload = ImageAsset(name: "Images/Scene/SendTransaction/Upload")
         internal static let arrow = ImageAsset(name: "Images/Scene/SendTransaction/arrow")
+        internal static let contacts = ImageAsset(name: "Images/Scene/SendTransaction/contacts")
+        internal static let paste = ImageAsset(name: "Images/Scene/SendTransaction/paste")
         internal static let receive = ImageAsset(name: "Images/Scene/SendTransaction/receive")
         internal static let scanLine = ImageAsset(name: "Images/Scene/SendTransaction/scanLine")
         internal static let search = ImageAsset(name: "Images/Scene/SendTransaction/search")

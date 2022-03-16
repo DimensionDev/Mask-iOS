@@ -14,7 +14,7 @@ class RecentlyAddressTableViewCell: UITableViewCell {
     private var addressslabel: UILabel = {
         let label = UILabel()
         label.textColor = Asset.Colors.Text.normal.color
-        label.font = FontStyles.MH7
+        label.font = FontStyles.RH7
         return label
     }()
 
@@ -35,10 +35,10 @@ class RecentlyAddressTableViewCell: UITableViewCell {
 
         addressslabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addArrangedSubview(addressslabel)
         view.addArrangedSubview(nameLabel)
+        view.addArrangedSubview(addressslabel)
         
-        view.setCustomSpacing(2, after: addressslabel)
+        view.setCustomSpacing(2, after: nameLabel)
         return view
     }()
     

@@ -124,15 +124,18 @@ extension NFTActionViewController: UITableViewDelegate {
                     self?.saveImageToPhotoLibrary(image: image)
                 }
             }
+            
         case .website(_, let websiteUrl):
             guard let url = websiteUrl else { return }
-            dismiss(animated: true, completion: nil)
-            Coordinator.main.present(scene: .safariView(url: url), transition: .modal(animated: true))
-            
+            dismiss(animated: true) {
+                Coordinator.main.present(scene: .safariView(url: url), transition: .modal(animated: true))
+            }
+   
         case .ethscan(_, let ethscanUrl):
             guard let url = ethscanUrl else { return }
-            dismiss(animated: true, completion: nil)
-            Coordinator.main.present(scene: .safariView(url: url), transition: .modal(animated: true))
+            dismiss(animated: true) {
+                Coordinator.main.present(scene: .safariView(url: url), transition: .modal(animated: true))
+            }
         }
     }
 }

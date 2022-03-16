@@ -1810,6 +1810,10 @@ enum L10n {
         static var btnWithoutpassword: String {
           return L10n.tr("Localizable", "Scene.Sendtransaction.Send.BtnWithoutpassword")
         }
+        /// Contacts
+        static var contact: String {
+          return L10n.tr("Localizable", "Scene.Sendtransaction.Send.Contact")
+        }
         /// Insufficient gas balance.
         static var gasfeeError: String {
           return L10n.tr("Localizable", "Scene.Sendtransaction.Send.GasfeeError")
@@ -1833,6 +1837,10 @@ enum L10n {
         /// Ens or Address(0x...)
         static var placeholderAddress: String {
           return L10n.tr("Localizable", "Scene.Sendtransaction.Send.PlaceholderAddress")
+        }
+        /// Recent
+        static var recent: String {
+          return L10n.tr("Localizable", "Scene.Sendtransaction.Send.Recent")
         }
       }
 
