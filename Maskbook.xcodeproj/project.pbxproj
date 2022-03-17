@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E9390339CB97010944D0892 /* Pods_MaskbookTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCF053D72611A19F2C95BF05 /* Pods_MaskbookTests.framework */; };
 		0F07028826AFE77C00C04F77 /* DeletedDerivationPath+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F07028626AFE77C00C04F77 /* DeletedDerivationPath+CoreDataClass.swift */; };
 		0F07028926AFE77C00C04F77 /* DeletedDerivationPath+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F07028726AFE77C00C04F77 /* DeletedDerivationPath+CoreDataProperties.swift */; };
 		0F1A15A0265CE83900B5E83E /* WalletCoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1A159F265CE83900B5E83E /* WalletCoreService.swift */; };
@@ -152,6 +153,7 @@
 		1FEE1EA82784508A00697F81 /* EthereumTransaction+Signing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE1EA72784508A00697F81 /* EthereumTransaction+Signing.swift */; };
 		1FEE1EAA27845CEF00697F81 /* TransactionOptions+Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE1EA927845CEF00697F81 /* TransactionOptions+Address.swift */; };
 		1FEE1EAC27845E1F00697F81 /* Web3+signTX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE1EAB27845E1F00697F81 /* Web3+signTX.swift */; };
+		25B9A33A18D09073937F7C13 /* Pods_MaskWalletTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA410D1B7778E6489B615FDE /* Pods_MaskWalletTests.framework */; };
 		2A0C16AF2666713D0085524E /* StoredKeyImportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0C16AE2666713D0085524E /* StoredKeyImportType.swift */; };
 		2A18E7FB266C9D210045BC88 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A18E7FA266C9D210045BC88 /* AvatarView.swift */; };
 		2A23A64C27C499E800CC5AD9 /* Shape+Fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A23A64A27C499E800CC5AD9 /* Shape+Fill.swift */; };
@@ -632,6 +634,7 @@
 		5DE1D5A227A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE1D5A127A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift */; };
 		5DE2B10F27BA60AC002ACA54 /* View+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE2B10E27BA60AC002ACA54 /* View+Snapshot.swift */; };
 		5DE5395727473599005F4CEA /* PanModalPresentable+color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5395627473599005F4CEA /* PanModalPresentable+color.swift */; };
+		6936CABEC702BABE09CAD1D6 /* Pods_Maskbook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B22CF13FDEA7F9081377F7B5 /* Pods_Maskbook.framework */; };
 		6F07ABE1279022B80039D69D /* NFTCollectionStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE0279022B80039D69D /* NFTCollectionStatusModel.swift */; };
 		6F07ABE3279027E70039D69D /* NFTAssetPriceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE2279027E70039D69D /* NFTAssetPriceModel.swift */; };
 		6F07ABE5279697450039D69D /* NFTCollectionDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE4279697450039D69D /* NFTCollectionDetailTableViewCell.swift */; };
@@ -1312,6 +1315,7 @@
 		41E5004D27A11AFF00A73117 /* WebPublicApiMessageResolver+Plugins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebPublicApiMessageResolver+Plugins.swift"; sourceTree = "<group>"; };
 		5D069E0A27A16E2800054B4A /* TertiaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TertiaryButton.swift; sourceTree = "<group>"; };
 		5D114FE427B256790092BEDC /* PersonaRecord+Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonaRecord+Identifier.swift"; sourceTree = "<group>"; };
+		5D1470E396AD706CE2B7052D /* Pods-MaskbookTests.release touchpreview.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskbookTests.release touchpreview.xcconfig"; path = "Target Support Files/Pods-MaskbookTests/Pods-MaskbookTests.release touchpreview.xcconfig"; sourceTree = "<group>"; };
 		5D3E364527BE2D0200FDCFDD /* PostRecord+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostRecord+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5D3E364627BE2D0200FDCFDD /* PostRecord+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostRecord+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5D3E364927BE310C00FDCFDD /* PostRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRecord.swift; sourceTree = "<group>"; };
@@ -3359,6 +3363,16 @@
 				5D3E364B27BF41DE00FDCFDD /* PostRepository.swift */,
 			);
 			path = Repository;
+			sourceTree = "<group>";
+		};
+		44AFA52A07427E4CA0DD5087 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EA410D1B7778E6489B615FDE /* Pods_MaskWalletTests.framework */,
+				B22CF13FDEA7F9081377F7B5 /* Pods_Maskbook.framework */,
+				DCF053D72611A19F2C95BF05 /* Pods_MaskbookTests.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		5D4AD18726560B02002D5380 /* View */ = {

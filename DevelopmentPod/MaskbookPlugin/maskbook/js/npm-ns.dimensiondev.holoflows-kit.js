@@ -3491,7 +3491,6 @@ Or to ignore this message, call \`.dismissSingleModeWarning()\` on the watcher.\
                         applyUseForeachCallback(this.singleModeCallback)('warn mutation')(this._warning_mutation_);
                     }
                 }
-                console.log("send onadd!!!");
                 this.emit('onAdd', { key: undefined, value: firstValue });
                 this.singleModeLastValue = firstValue;
                 this.singleModeHasLastValue = true;
@@ -3499,7 +3498,6 @@ Or to ignore this message, call \`.dismissSingleModeWarning()\` on the watcher.\
             // ? Case: value has changed
             else if (this.singleModeHasLastValue && !this.valueComparer(this.singleModeLastValue, firstValue)) {
                 applyUseForeachCallback(this.singleModeCallback)('target change')(firstValue, this.singleModeLastValue);
-                console.log("send onChange!!!");
                 this.emit('onChange', {
                     newKey: undefined,
                     oldKey: undefined,
@@ -3764,7 +3762,6 @@ Or to ignore this message, call \`.dismissSingleModeWarning()\` on the watcher.\
          * {@inheritdoc Watcher.stopWatch}
          */
         stopWatch() {
-            console.log("MutationObserverWatcher stopWatch!!!");
             super.stopWatch();
             this.observer.disconnect();
         }
@@ -3793,7 +3790,6 @@ Or to ignore this message, call \`.dismissSingleModeWarning()\` on the watcher.\
          * {@inheritdoc Watcher.stopWatch}
          */
         stopWatch() {
-            console.log("IntervalWatcher stopWatch!!!");
             super.stopWatch();
             if (this.timer)
                 clearInterval(this.timer);

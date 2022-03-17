@@ -209,6 +209,11 @@ class Coordinator {
         
         present(scene: .mainTab(selectedTab: .personas), transition: .modal(animated: false, adaptiveDelegate: maskSocialVC))
         
+        if !settings.hasShownGuide {
+            settings.hasShownGuide = true
+            present(scene: .guide, transition: .modal(animated: false, adaptiveDelegate: maskSocialVC))
+        }
+        
         // If all data (legacy wallets info and indexedDB data) has migrated to
         // native side, we do not need to wait for the extension JS scripts to
         // finish executing
