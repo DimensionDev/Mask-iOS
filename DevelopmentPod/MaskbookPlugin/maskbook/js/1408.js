@@ -34376,7 +34376,7 @@ async function getUserNftContainer(screenName, queryToken, bearerToken, csrfToke
             'content-type': 'application/json',
             'x-twitter-auth-type': 'OAuth2Session',
             'x-twitter-active-user': 'yes',
-            referer: `twitter.com/${screenName}/nft`
+            referer: `https://twitter.com/${screenName}/nft`
         }
     });
     return response.json();
