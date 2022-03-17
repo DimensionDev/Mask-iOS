@@ -63,11 +63,13 @@ internal enum Asset {
       internal static let dark = ColorAsset(name: "Colors/Background/dark")
       internal static let disable = ColorAsset(name: "Colors/Background/disable")
       internal static let gradient = ColorAsset(name: "Colors/Background/gradient")
+      internal static let infoBg = ColorAsset(name: "Colors/Background/info-bg")
       internal static let light = ColorAsset(name: "Colors/Background/light")
       internal static let lightBlue = ColorAsset(name: "Colors/Background/lightBlue")
       internal static let mask = ColorAsset(name: "Colors/Background/mask")
       internal static let normal = ColorAsset(name: "Colors/Background/normal")
       internal static let selected = ColorAsset(name: "Colors/Background/selected")
+      internal static let tab = ColorAsset(name: "Colors/Background/tab")
       internal static let toast = ColorAsset(name: "Colors/Background/toast")
       internal static let twitterMask = ColorAsset(name: "Colors/Background/twitterMask")
       internal static let walletConnect = ColorAsset(name: "Colors/Background/walletConnect")
@@ -178,6 +180,7 @@ internal enum Asset {
       internal static let backArrow = ImageAsset(name: "Icon/Arrows/backArrow")
       internal static let celllRight = ImageAsset(name: "Icon/Arrows/celllRight")
       internal static let down = ImageAsset(name: "Icon/Arrows/down")
+      internal static let down1 = ImageAsset(name: "Icon/Arrows/down1")
       internal static let drop = ImageAsset(name: "Icon/Arrows/drop")
       internal static let `left` = ImageAsset(name: "Icon/Arrows/left")
     }
@@ -427,6 +430,11 @@ internal enum Asset {
     }
   }
   internal enum Plugins {
+    internal enum LuckyDrop {
+      internal static let lock = ImageAsset(name: "Plugins/LuckyDrop/lock")
+      internal static let redPacket = ImageAsset(name: "Plugins/LuckyDrop/redPacket")
+      internal static let setting = ImageAsset(name: "Plugins/LuckyDrop/setting")
+    }
     internal static let checkMark = ImageAsset(name: "Plugins/checkMark")
     internal static let circleBackground = ColorAsset(name: "Plugins/circleBackground")
     internal static let closeSquare = ImageAsset(name: "Plugins/closeSquare")
