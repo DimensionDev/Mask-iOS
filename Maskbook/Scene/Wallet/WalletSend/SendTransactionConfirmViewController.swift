@@ -184,8 +184,8 @@ class SendTransactionConfirmViewController: BaseViewController {
         let button = UIButton(type: .custom)
         button.backgroundColor = Asset.Colors.Background.blue.color
         button.applyCornerRadius(radius: 13)
-        button.setTitleColor(Asset.Colors.Public.blue.color, for: .normal)
-        button.setTitleColor(Asset.Colors.Public.blue.color, for: .selected)
+        button.setTitleColor(Asset.Colors.Public.white.color, for: .normal)
+        button.setTitleColor(Asset.Colors.Public.white.color, for: .selected)
         button.setTitle("fee", for: .normal)
         button.titleLabel?.font = FontStyles.BH7
         button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
@@ -197,8 +197,8 @@ class SendTransactionConfirmViewController: BaseViewController {
         let button = UIButton(type: .custom)
         button.backgroundColor = Asset.Colors.Background.blue.color
         button.applyCornerRadius(radius: 13)
-        button.setTitleColor(Asset.Colors.Public.blue.color, for: .normal)
-        button.setTitleColor(Asset.Colors.Public.blue.color, for: .selected)
+        button.setTitleColor(Asset.Colors.Public.white.color, for: .normal)
+        button.setTitleColor(Asset.Colors.Public.white.color, for: .selected)
         button.setTitle("Arrives", for: .normal)
         button.titleLabel?.font = FontStyles.BH7
         button.addTarget(self, action: #selector(chooseFee(_:)), for: .touchUpInside)

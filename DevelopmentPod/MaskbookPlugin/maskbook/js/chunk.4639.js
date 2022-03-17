@@ -24,8 +24,8 @@ __webpack_require__.d(__webpack_exports__, {
 var esm = __webpack_require__(66559);
 // EXTERNAL MODULE: ../web3-shared/evm/types/index.ts
 var types = __webpack_require__(95130);
-// EXTERNAL MODULE: ../web3-providers/src/index.ts
-var src = __webpack_require__(24524);
+// EXTERNAL MODULE: ../web3-providers/src/index.ts + 2 modules
+var src = __webpack_require__(54492);
 ;// CONCATENATED MODULE: ./src/plugins/EVM/services/Asset/index.ts
 
 
@@ -129,7 +129,7 @@ async function getNFT(options) {
         case types/* NonFungibleAssetProvider.OPENSEA */.pI.OPENSEA:
             return src/* OpenSea.getToken */.Nn.getToken(address, tokenId, chainId);
         case types/* NonFungibleAssetProvider.NFTSCAN */.pI.NFTSCAN:
-            return src/* NFTScan.getToken */.jo.getToken(address, tokenId, chainId);
+            return src/* NFTScan.getToken */.jo.getToken(address, tokenId);
         case types/* NonFungibleAssetProvider.RARIBLE */.pI.RARIBLE:
             return src/* Rarible.getToken */.e8.getToken(address, tokenId);
         default:

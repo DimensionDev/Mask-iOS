@@ -129,6 +129,14 @@
             "scan_persona_exist": {
                 "title": "The persona already existed.",
                 "description": "The persona that corresponds with the QR code already existed."
+            },
+            "wrong_folder": {
+                "title": "Please select another folder",
+                "description": "When you delete Mask App, the Mask Network sandbox folder would also be deleted. For data security, please save to a more secure folder (non-sandbox)."
+            },
+            "backup_popup_binding_first": {
+                "title": "Bind your email or phone",
+                "description": "Please bind your email or phone number before you back up to cloud."
             }
         },
         "controls": {
@@ -162,10 +170,12 @@
             "edit": "Edit",
             "download": "download",
             "skip": "Skip, download later",
-            "download_next": "I downloaded, next"
+            "download_next": "I downloaded, next",
+            "move_data_now": "Move data now",
+            "remind_me_later": "Remind me later"
         },
         "toast": {
-            "saved": "Saved！",
+            "saved": "Saved!",
             "copy": "copied!"
         },
         "loading": "Loading..."
@@ -432,7 +442,9 @@
                 "btn_withoutPassword":"Hold to Send",
                 "amount_error":"Insufficient amount.",
                 "password_error":"Incorrect payment password.",
-                "gasFee_error": "Insufficient gas balance."
+                "gasFee_error": "Insufficient gas balance.",
+                "contact":"Contacts",
+                "recent":"Recent"
         	},
         	"addContact":{
         		"btn_add":"Add Contact",
@@ -820,6 +832,13 @@
             "empty": "Empty",
             "share_message_official": "I just claimed a lucky drop from %s on %s network. Follow %s (mask.io) to claim lucky drops.\n#mask_io #LuckyDrop\n%s",
             "share_message_unsupport_platform": "I just claimed a lucky drop from @%s on %s network. \n%s"
+        },
+        "move_backup_data": {
+            "title": "Please move your data",
+            "description1": "We have detected that there are probably important backup documents(.pdf, .bin) in your Mask Network Sandbox Folder.",
+            "description2": "When you delete Mask App, these documents would also be deleted.",
+            "description3": "For data safety, please move your data to a more secure folder."
+            
         }
     },
     "chain": {

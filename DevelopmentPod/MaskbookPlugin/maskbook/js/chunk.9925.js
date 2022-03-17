@@ -14,8 +14,8 @@ __webpack_require__.d(__webpack_exports__, {
 
 // EXTERNAL MODULE: ./src/plugins/Savings/base.ts
 var base = __webpack_require__(73093);
-// EXTERNAL MODULE: ../plugin-infra/src/index.ts + 1 modules
-var src = __webpack_require__(27194);
+// EXTERNAL MODULE: ../plugin-infra/src/index.ts
+var src = __webpack_require__(63151);
 // EXTERNAL MODULE: ./src/plugins/Savings/constants.ts
 var constants = __webpack_require__(92906);
 ;// CONCATENATED MODULE: ./src/plugins/Savings/messages.ts

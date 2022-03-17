@@ -1960,10 +1960,10 @@ module.exports = self.fetch.bind(self);
 /* harmony export */   "P": () => (/* binding */ PriceChartDaysControl),
 /* harmony export */   "h": () => (/* binding */ Days)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(98294);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(7280);
-/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(92597);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(86377);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(74491);
+/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(43021);
 /* harmony import */ var _pipes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(21957);
 
 
@@ -2042,203 +2042,43 @@ function PriceChartDaysControl(props) {
 /* harmony export */   "uM": () => (/* binding */ resolveTradeProviderName),
 /* harmony export */   "xo": () => (/* binding */ resolveDaysName)
 /* harmony export */ });
-/* unused harmony exports resolveCurrencyName, resolveTradeProviderLink, resolveTradePairLink, resolveUniswapWarningLevel, resolveUniswapWarningLevelColor, resolveZrxTradePoolName */
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(41391);
-/* harmony import */ var _masknet_public_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(48476);
-/* harmony import */ var _dimensiondev_kit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(66559);
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(43545);
-/* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(88486);
-/* harmony import */ var urlcat__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(19802);
-/* harmony import */ var urlcat__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(urlcat__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _masknet_public_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(48476);
+/* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(88486);
 
 
-
-
-
-
-function resolveCurrencyName(currency) {
-    return [
-        currency.name,
-        currency.symbol ? `"${currency.symbol}"` : '',
-        currency.description ? `(${currency.description})` : '', 
-    ].join(' ');
-}
-const resolveDataProviderName = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_5__/* .createLookupTableResolver */ .F)({
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .DataProvider.COIN_GECKO */ .FW.COIN_GECKO]: 'CoinGecko',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .DataProvider.COIN_MARKET_CAP */ .FW.COIN_MARKET_CAP]: 'CoinMarketCap',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .DataProvider.UNISWAP_INFO */ .FW.UNISWAP_INFO]: 'Uniswap Info'
+const resolveDataProviderName = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_1__/* .createLookupTableResolver */ .F)({
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .DataProvider.COIN_GECKO */ .FW.COIN_GECKO]: 'CoinGecko',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .DataProvider.COIN_MARKET_CAP */ .FW.COIN_MARKET_CAP]: 'CoinMarketCap',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .DataProvider.UNISWAP_INFO */ .FW.UNISWAP_INFO]: 'Uniswap Info'
 }, (dataProvider)=>{
     throw new Error(`Unknown data provider: ${dataProvider}`);
 });
-const resolveDataProviderLink = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_5__/* .createLookupTableResolver */ .F)({
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .DataProvider.COIN_GECKO */ .FW.COIN_GECKO]: 'https://www.coingecko.com/',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .DataProvider.COIN_MARKET_CAP */ .FW.COIN_MARKET_CAP]: 'https://coinmarketcap.com/',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .DataProvider.UNISWAP_INFO */ .FW.UNISWAP_INFO]: 'https://info.uniswap.org/'
+const resolveDataProviderLink = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_1__/* .createLookupTableResolver */ .F)({
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .DataProvider.COIN_GECKO */ .FW.COIN_GECKO]: 'https://www.coingecko.com/',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .DataProvider.COIN_MARKET_CAP */ .FW.COIN_MARKET_CAP]: 'https://coinmarketcap.com/',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .DataProvider.UNISWAP_INFO */ .FW.UNISWAP_INFO]: 'https://info.uniswap.org/'
 }, (dataProvider)=>{
     throw new Error(`Unknown data provider: ${dataProvider}`);
 });
-const resolveTradeProviderName = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_5__/* .createLookupTableResolver */ .F)({
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.UNISWAP_V2 */ .z4.UNISWAP_V2]: 'Uniswap V2',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.UNISWAP_V3 */ .z4.UNISWAP_V3]: 'Uniswap V3',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.ZRX */ .z4.ZRX]: '0x',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.SUSHISWAP */ .z4.SUSHISWAP]: 'SushiSwap',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.SASHIMISWAP */ .z4.SASHIMISWAP]: 'SashimiSwap',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.BALANCER */ .z4.BALANCER]: 'Balancer',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.QUICKSWAP */ .z4.QUICKSWAP]: 'QuickSwap',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.PANCAKESWAP */ .z4.PANCAKESWAP]: 'PancakeSwap',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.DODO */ .z4.DODO]: 'DODO',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.BANCOR */ .z4.BANCOR]: 'Bancor',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.OPENOCEAN */ .z4.OPENOCEAN]: 'OpenOcean',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.TRADERJOE */ .z4.TRADERJOE]: 'TraderJoe',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.PANGOLIN */ .z4.PANGOLIN]: 'PangolinDex',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.TRISOLARIS */ .z4.TRISOLARIS]: 'Trisolaris',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.WANNASWAP */ .z4.WANNASWAP]: 'WannaSwap'
+const resolveTradeProviderName = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_1__/* .createLookupTableResolver */ .F)({
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.UNISWAP_V2 */ .z4.UNISWAP_V2]: 'Uniswap V2',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.UNISWAP_V3 */ .z4.UNISWAP_V3]: 'Uniswap V3',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.ZRX */ .z4.ZRX]: '0x',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.SUSHISWAP */ .z4.SUSHISWAP]: 'SushiSwap',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.SASHIMISWAP */ .z4.SASHIMISWAP]: 'SashimiSwap',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.BALANCER */ .z4.BALANCER]: 'Balancer',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.QUICKSWAP */ .z4.QUICKSWAP]: 'QuickSwap',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.PANCAKESWAP */ .z4.PANCAKESWAP]: 'PancakeSwap',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.DODO */ .z4.DODO]: 'DODO',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.BANCOR */ .z4.BANCOR]: 'Bancor',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.OPENOCEAN */ .z4.OPENOCEAN]: 'OpenOcean',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.TRADERJOE */ .z4.TRADERJOE]: 'TraderJoe',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.PANGOLIN */ .z4.PANGOLIN]: 'PangolinDex',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.TRISOLARIS */ .z4.TRISOLARIS]: 'Trisolaris',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.WANNASWAP */ .z4.WANNASWAP]: 'WannaSwap'
 }, (tradeProvider)=>{
     throw new Error(`Unknown provider type: ${tradeProvider}`);
 });
-function resolveTradeProviderLink(tradeProvider, networkType) {
-    switch(tradeProvider){
-        case TradeProvider.UNISWAP_V2:
-            return 'https://uniswap.org/';
-        case TradeProvider.UNISWAP_V3:
-            return 'https://uniswap.org/';
-        case TradeProvider.ZRX:
-            switch(networkType){
-                case NetworkType.Ethereum:
-                    return 'https://api.0x.org/';
-                case NetworkType.Binance:
-                    return 'https://bsc.api.0x.org/';
-                case NetworkType.Polygon:
-                    return 'https://polygon.api.0x.org/';
-                case NetworkType.Arbitrum:
-                    return 'https://aribitrum.api.0x.org/';
-                case NetworkType.xDai:
-                    return 'https://xdai.api.0x.org/';
-                case NetworkType.Celo:
-                    return 'https://celo.api.0x.org/';
-                case NetworkType.Fantom:
-                    return 'https://fantom.api.0x.org/';
-                case NetworkType.Avalanche:
-                    return 'https://avalanche.api.0x.org/';
-                case NetworkType.Aurora:
-                    return 'https://aurora.api.0x.org/';
-                case NetworkType.Boba:
-                case NetworkType.Fuse:
-                case NetworkType.Metis:
-                case NetworkType.Avalanche:
-                case NetworkType.Optimistic:
-                    console.error('To be implement network: ', networkType);
-                    return '';
-                default:
-                    safeUnreachable(networkType);
-                    return '';
-            }
-        case TradeProvider.SUSHISWAP:
-            return 'https://sushiswapclassic.org/';
-        case TradeProvider.SASHIMISWAP:
-            return 'https://sashimi.cool/';
-        case TradeProvider.BALANCER:
-            return 'https://balancer.exchange/';
-        case TradeProvider.QUICKSWAP:
-            return 'https://quickswap.exchange/';
-        case TradeProvider.PANCAKESWAP:
-            return 'https://exchange.pancakeswap.finance/#/swap';
-        case TradeProvider.DODO:
-            return 'https://app.dodoex.io';
-        case TradeProvider.BANCOR:
-            return 'https://app.bancor.network/eth/swap';
-        case TradeProvider.OPENOCEAN:
-            return 'https://openocean.finance/classic';
-        case TradeProvider.TRADERJOE:
-            return 'https://traderjoexyz.com/#/trade';
-        case TradeProvider.PANGOLIN:
-            return 'https://app.pangolin.exchange/#/swap';
-        case TradeProvider.TRISOLARIS:
-            return 'https://www.trisolaris.io/#/swap';
-        case TradeProvider.WANNASWAP:
-            return 'https://wannaswap.finance/exchange/swap';
-        default:
-            unreachable(tradeProvider);
-    }
-}
-function resolveTradePairLink(tradeProvider, address, networkType) {
-    switch(tradeProvider){
-        case TradeProvider.UNISWAP_V2:
-            return `https://v2.info.uniswap.org/pair/${address}`;
-        case TradeProvider.UNISWAP_V3:
-            return `https://info.uniswap.org/pair/${address}`;
-        case TradeProvider.ZRX:
-            return '';
-        case TradeProvider.DODO:
-            {
-                if (!networkNames[networkType]) {
-                    console.error('Unsupported network: ', networkType);
-                    return '';
-                }
-                return urlcat('https://app.dodoex.io/exchange/:address', {
-                    address,
-                    network: networkNames[networkType],
-                    forced: true
-                });
-            }
-        case TradeProvider.SUSHISWAP:
-            switch(networkType){
-                case NetworkType.Ethereum:
-                    return `https://analytics.sushi.com/pairs/${address}`;
-                case NetworkType.Binance:
-                    return `https://analytics-bsc.sushi.com/pairs/${address}`;
-                case NetworkType.Polygon:
-                    return `https://analytics-polygon.sushi.com/pairs/${address}`;
-                case NetworkType.Arbitrum:
-                    return `https://analytics-aribtrum.sushi.com/pairs/${address}`;
-                case NetworkType.xDai:
-                    return `https://analytics-xdai.sushi.com/pairs/${address}`;
-                case NetworkType.Celo:
-                    return `https://analytics-celo.sushi.com/pairs/${address}`;
-                case NetworkType.Fantom:
-                    return `https://analytics-ftm.sushi.com/pairs/${address}`;
-                case NetworkType.Avalanche:
-                    return `https://analytics-avx.sushi.com/pairs/${address}`;
-                case NetworkType.Aurora:
-                    return `https://analytics-aurora.sushi.com/pairs/${address}`;
-                case NetworkType.Boba:
-                case NetworkType.Fuse:
-                case NetworkType.Metis:
-                case NetworkType.Optimistic:
-                    console.error('To be implement network: ', networkType);
-                    return '';
-                default:
-                    safeUnreachable(networkType);
-                    return '';
-            }
-        case TradeProvider.SASHIMISWAP:
-            return `https://info.sashimi.cool/pair/${address}`;
-        case TradeProvider.BALANCER:
-            return `https://pools.balancer.exchange/#/pool/${address}/`;
-        case TradeProvider.QUICKSWAP:
-            return `https://info.quickswap.exchange/pair/${address}`;
-        case TradeProvider.PANCAKESWAP:
-            return `https://pancakeswap.info/pool/${address}`;
-        case TradeProvider.BANCOR:
-            // TODO - Bancor analytics should be available with V3
-            return '';
-        case TradeProvider.OPENOCEAN:
-            // TODO - OpenOcean
-            return '';
-        case TradeProvider.TRADERJOE:
-            return `https://analytics.traderjoexyz.com/pairs/${address}`;
-        case TradeProvider.PANGOLIN:
-            return `https://info.pangolin.exchange/pair/${address}`;
-        case TradeProvider.TRISOLARIS:
-            // TODO - add Trisolaris Analytics
-            return '';
-        case TradeProvider.WANNASWAP:
-            // TODO - add WannaSwap analytics
-            return '';
-        default:
-            unreachable(tradeProvider);
-    }
-}
 function resolveDaysName(days) {
     if (days === 0) return 'MAX';
     if (days >= 365) return `${Math.floor(days / 365)}y`;
@@ -2246,81 +2086,6 @@ function resolveDaysName(days) {
     if (days >= 7) return `${Math.floor(days / 7)}w`;
     return `${days}d`;
 }
-function resolveUniswapWarningLevel(priceImpact) {
-    const priceImpact_ = priceImpact.multipliedBy(BIPS_BASE);
-    if (priceImpact_.isGreaterThan(PRICE_IMPACT_NON_EXPERT_BLOCKED)) return WarningLevel.BLOCKED;
-    if (priceImpact_.isGreaterThan(PRICE_IMPACT_WITHOUT_FEE_CONFIRM_MIN)) return WarningLevel.CONFIRMATION_REQUIRED;
-    if (priceImpact_.isGreaterThan(PRICE_IMPACT_HIGH)) return WarningLevel.HIGH;
-    if (priceImpact_.isGreaterThan(PRICE_IMPACT_MEDIUM)) return WarningLevel.MEDIUM;
-    if (priceImpact_.isGreaterThan(PRICE_IMPACT_LOW)) return WarningLevel.LOW;
-    return WarningLevel.LOW;
-}
-const resolveUniswapWarningLevelColor = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_5__/* .createLookupTableResolver */ .F)({
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .WarningLevel.LOW */ .Os.LOW]: 'inherit',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .WarningLevel.MEDIUM */ .Os.MEDIUM]: '#f3841e',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .WarningLevel.HIGH */ .Os.HIGH]: '#f3841e',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .WarningLevel.CONFIRMATION_REQUIRED */ .Os.CONFIRMATION_REQUIRED]: '#ff6871',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .WarningLevel.BLOCKED */ .Os.BLOCKED]: '#ff6871'
-}, '#27ae60');
-const resolveZrxTradePoolName = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_5__/* .createLookupTableResolver */ .F)({
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.ZRX */ .Zy.ZRX]: '0x',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.ACryptoS */ .Zy.ACryptoS]: 'ACryptoS',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.ApeSwap */ .Zy.ApeSwap]: 'ApeSwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.BakerySwap */ .Zy.BakerySwap]: 'BakerySwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Balancer */ .Zy.Balancer]: 'Balancer',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.BalancerV2 */ .Zy.BalancerV2]: 'Balancer V2',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Bancor */ .Zy.Bancor]: 'Bancor',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Belt */ .Zy.Belt]: 'Belt',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.CafeSwap */ .Zy.CafeSwap]: 'CafeSwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.CheeseSwap */ .Zy.CheeseSwap]: 'CheeseSwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.ComethSwap */ .Zy.ComethSwap]: 'ComethSwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Component */ .Zy.Component]: 'Component',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Cream */ .Zy.Cream]: 'CREAM',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.CryptoCom */ .Zy.CryptoCom]: 'CryptoCom',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Curve */ .Zy.Curve]: 'Curve',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.CurveV2 */ .Zy.CurveV2]: 'Curve V2',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Dfyn */ .Zy.Dfyn]: 'Dfyn',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Dodo */ .Zy.Dodo]: 'DODO',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.DodoV2 */ .Zy.DodoV2]: 'DODO V2',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Ellipsis */ .Zy.Ellipsis]: 'Ellipsis',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Eth2Dai */ .Zy.Eth2Dai]: 'Eth2Dai',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.FirebirdOneSwap */ .Zy.FirebirdOneSwap]: 'FirebirdOneSwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.IronSwap */ .Zy.IronSwap]: 'IronSwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.JetSwap */ .Zy.JetSwap]: 'JetSwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.JulSwap */ .Zy.JulSwap]: 'JulSwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Kyber */ .Zy.Kyber]: 'Kyber',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.KyberDMM */ .Zy.KyberDMM]: 'KyberDMM',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Lido */ .Zy.Lido]: 'Lido',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Linkswap */ .Zy.Linkswap]: 'Linkswap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.LiquidityProvider */ .Zy.LiquidityProvider]: 'LiquidityProvider',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.MStable */ .Zy.MStable]: 'mStable',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.MakerPsm */ .Zy.MakerPsm]: 'MakerPsm',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Mesh */ .Zy.Mesh]: 'Mesh',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Mooniswap */ .Zy.Mooniswap]: 'Mooniswap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.MultiBridge */ .Zy.MultiBridge]: 'MultiBridge',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.MultiHop */ .Zy.MultiHop]: 'MultiHop',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Native */ .Zy.Native]: 'Native',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Nerve */ .Zy.Nerve]: 'Nerve',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Oasis */ .Zy.Oasis]: 'Oasis',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.PancakeSwap */ .Zy.PancakeSwap]: 'PancakeSwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.PancakeSwapV2 */ .Zy.PancakeSwapV2]: 'PancakeSwap V2',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.QuickSwap */ .Zy.QuickSwap]: 'QuickSwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Saddle */ .Zy.Saddle]: 'Saddle',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Shell */ .Zy.Shell]: 'Shell',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Smoothy */ .Zy.Smoothy]: 'Smoothy',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.SnowSwap */ .Zy.SnowSwap]: 'SnowSwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.SushiSwap */ .Zy.SushiSwap]: 'SushiSwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Swerve */ .Zy.Swerve]: 'Swerve',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Uniswap */ .Zy.Uniswap]: 'Uniswap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.UniswapV2 */ .Zy.UniswapV2]: 'Uniswap V2',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.UniswapV3 */ .Zy.UniswapV3]: 'Uniswap V3',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.WaultSwap */ .Zy.WaultSwap]: 'WaultSwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.xSigma */ .Zy.xSigma]: 'xSigma',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.TraderJoe */ .Zy.TraderJoe]: 'TraderJoe',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.PangolinDex */ .Zy.PangolinDex]: 'PangolinDex',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Trisolaris */ .Zy.Trisolaris]: 'Trisolaris',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.WannaSwap */ .Zy.WannaSwap]: 'WannaSwap'
-}, 'Unknown');
 
 
 /***/ }),
@@ -2398,8 +2163,8 @@ async function swapQuote(request, networkType) {
 var sor_dist = __webpack_require__(15092);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+providers@5.4.2/node_modules/@ethersproject/providers/lib.esm/json-rpc-provider.js + 3 modules
 var json_rpc_provider = __webpack_require__(34110);
-// EXTERNAL MODULE: ../web3-shared/evm/constants/index.ts + 26 modules
-var evm_constants = __webpack_require__(92211);
+// EXTERNAL MODULE: ../web3-shared/evm/constants/constants.ts + 26 modules
+var constants_constants = __webpack_require__(24403);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/address.ts
 var address = __webpack_require__(66580);
 // EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
@@ -2444,7 +2209,7 @@ var flatten = __webpack_require__(62517);
 
 
 async function fetchFromEthereumBlocksSubgraph(query) {
-    const subgraphURL = (0,evm_constants/* getTrendingConstants */.$o)(settings/* currentChainIdSettings.value */.wU.value).ETHEREUM_BLOCKS_SUBGRAPH_URL;
+    const subgraphURL = (0,constants_constants/* getTrendingConstants */.$o)(settings/* currentChainIdSettings.value */.wU.value).ETHEREUM_BLOCKS_SUBGRAPH_URL;
     if (!subgraphURL) return null;
     const response = await fetch(subgraphURL, {
         method: 'POST',
@@ -2552,7 +2317,7 @@ async function fetchFromEthereumBlocksSubgraph(query) {
 
 
 async function fetchFromBalancerPoolSubgraph(query) {
-    const subgraphURL = (0,evm_constants/* getLBPConstants */.Hk)(settings/* currentChainIdSettings.value */.wU.value).BALANCER_POOLS_SUBGRAPH_URL;
+    const subgraphURL = (0,constants_constants/* getLBPConstants */.Hk)(settings/* currentChainIdSettings.value */.wU.value).BALANCER_POOLS_SUBGRAPH_URL;
     if (!subgraphURL) return null;
     const response = await fetch(subgraphURL, {
         method: 'POST',
@@ -2654,7 +2419,7 @@ async function fetchLBP_PoolTokens(poolId, blockNumbers) {
 
 // #region create cached SOR
 const createSOR_ = (0,memoize/* default */.Z)((chainId)=>{
-    const { RPC  } = (0,evm_constants/* getRPCConstants */.t0)(chainId);
+    const { RPC  } = (0,constants_constants/* getRPCConstants */.t0)(chainId);
     const providerURL = (0,head/* default */.Z)(RPC);
     if (!providerURL) throw new Error('Unknown chain id.');
     return new sor_dist.SOR(// we choose a fixed provider cause it's only used here.
@@ -2664,7 +2429,7 @@ const createSOR_ = (0,memoize/* default */.Z)((chainId)=>{
 function createSOR(chainId) {
     const sor = createSOR_(chainId);
     // update pools url when sor object was created or reused
-    sor.poolsUrl = `${(0,evm_constants/* getTraderConstants */.Gr)(chainId).BALANCER_POOLS_URL}?timestamp=${Date.now()}`;
+    sor.poolsUrl = `${(0,constants_constants/* getTraderConstants */.Gr)(chainId).BALANCER_POOLS_URL}?timestamp=${Date.now()}`;
     return sor;
 }
 // #endregion
@@ -2673,7 +2438,7 @@ async function updatePools(force = false, chainId) {
     const sor = createSOR(currentChainId);
     // this fetches all pools list from URL in constructor then onChain balances using Multicall
     if (!sor.isAllFetched || force) {
-        sor.poolsUrl = `${(0,evm_constants/* getTraderConstants */.Gr)(currentChainId).BALANCER_POOLS_URL}?timestamp=${Date.now()}`;
+        sor.poolsUrl = `${(0,constants_constants/* getTraderConstants */.Gr)(currentChainId).BALANCER_POOLS_URL}?timestamp=${Date.now()}`;
         await sor.fetchPools();
     }
 }
@@ -3041,7 +2806,7 @@ const PairFields = `
   }
 `;
 async function fetchFromUniswapV2Subgraph(query) {
-    const subgraphURL = (0,evm_constants/* getTrendingConstants */.$o)(settings/* currentChainIdSettings.value */.wU.value).UNISWAP_V2_SUBGRAPH_URL;
+    const subgraphURL = (0,constants_constants/* getTrendingConstants */.$o)(settings/* currentChainIdSettings.value */.wU.value).UNISWAP_V2_SUBGRAPH_URL;
     if (!subgraphURL) return null;
     const response = await fetch(subgraphURL, {
         method: 'POST',
@@ -3262,7 +3027,7 @@ async function fetchFromUniswapV2Subgraph(query) {
 
 
 async function fetchFromUniswapV2Health(query) {
-    const subgraphURL = (0,evm_constants/* getTrendingConstants */.$o)(settings/* currentChainIdSettings.value */.wU.value).UNISWAP_V2_HEALTH_URL;
+    const subgraphURL = (0,constants_constants/* getTrendingConstants */.$o)(settings/* currentChainIdSettings.value */.wU.value).UNISWAP_V2_HEALTH_URL;
     if (!subgraphURL) return null;
     const response = await fetch(subgraphURL, {
         method: 'POST',
@@ -3639,9 +3404,9 @@ const NETWORK_ID_MAP = {
 (0,esm/* getEnumAsArray */.Yl)(types/* NetworkType */.td).map(({ value: networkType  })=>{
     const chainId = (0,chainDetailed/* getChainIdFromNetworkType */.EP)(networkType);
     var _PLATFORM_ID;
-    NETWORK_ID_MAP[public_api_src/* DataProvider.COIN_GECKO */.FW.COIN_GECKO][networkType] = (_PLATFORM_ID = (0,evm_constants/* getCoinGeckoConstants */.V6)(chainId).PLATFORM_ID) !== null && _PLATFORM_ID !== void 0 ? _PLATFORM_ID : '';
+    NETWORK_ID_MAP[public_api_src/* DataProvider.COIN_GECKO */.FW.COIN_GECKO][networkType] = (_PLATFORM_ID = (0,constants_constants/* getCoinGeckoConstants */.V6)(chainId).PLATFORM_ID) !== null && _PLATFORM_ID !== void 0 ? _PLATFORM_ID : '';
     var _CHAIN_ID;
-    NETWORK_ID_MAP[public_api_src/* DataProvider.COIN_MARKET_CAP */.FW.COIN_MARKET_CAP][networkType] = (_CHAIN_ID = (0,evm_constants/* getCoinMarketCapConstants */.fN)(chainId).CHAIN_ID) !== null && _CHAIN_ID !== void 0 ? _CHAIN_ID : '';
+    NETWORK_ID_MAP[public_api_src/* DataProvider.COIN_MARKET_CAP */.FW.COIN_MARKET_CAP][networkType] = (_CHAIN_ID = (0,constants_constants/* getCoinMarketCapConstants */.fN)(chainId).CHAIN_ID) !== null && _CHAIN_ID !== void 0 ? _CHAIN_ID : '';
 });
 function resolveAlias(keyword, dataProvider) {
     var ref;
@@ -4248,7 +4013,7 @@ async function swapOO(request) {
         slippage: request.slippage,
         disabledDexIds: '',
         account: request.userAddr,
-        referrer: (ref4 = (0,evm_constants/* getOpenOceanConstants */.hc)(request.chainId).REFERRER_ADDRESS) === null || ref4 === void 0 ? void 0 : ref4.toLowerCase()
+        referrer: (ref4 = (0,constants_constants/* getOpenOceanConstants */.hc)(request.chainId).REFERRER_ADDRESS) === null || ref4 === void 0 ? void 0 : ref4.toLowerCase()
     }));
     const payload = await response.json();
     const { data , outAmount , minOutAmount , to , value , estimatedGas  } = payload;
@@ -4298,10 +4063,10 @@ async function swapOO(request) {
 __webpack_require__.d(__webpack_exports__, {
   "Qy": () => (/* reexport */ TagType),
   "Vo": () => (/* reexport */ TokenPanelType),
-  "tB": () => (/* reexport */ TradeStrategy),
-  "Os": () => (/* reexport */ WarningLevel),
-  "Zy": () => (/* reexport */ ZrxTradePool)
+  "tB": () => (/* reexport */ TradeStrategy)
 });
+
+// UNUSED EXPORTS: WarningLevel, ZrxTradePool
 
 ;// CONCATENATED MODULE: ./src/plugins/Trader/types/trader.ts
 var WarningLevel;

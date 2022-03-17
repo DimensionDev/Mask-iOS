@@ -7,8 +7,8 @@
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "L": () => (/* binding */ SearchResultBox)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(27194);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63151);
 
 
 const PluginRenderer = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__/* .createInjectHooksRenderer */ .EK)(_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__/* .useActivatedPluginsSNSAdaptor.visibility.useNotMinimalMode */ .Pz.visibility.useNotMinimalMode, (x)=>x.SearchResultBox
@@ -26,7 +26,7 @@ function SearchResultBox(props) {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "n": () => (/* binding */ twitterEncoding)
 /* harmony export */ });
-/* harmony import */ var _masknet_encryption__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(96663);
+/* harmony import */ var _masknet_encryption__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10491);
 /* harmony import */ var lodash_unified__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(32139);
 
 
@@ -579,8 +579,8 @@ const postParser = (node)=>{
 var memoize = __webpack_require__(77184);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/noop.js
 var noop = __webpack_require__(21122);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
 // EXTERNAL MODULE: ./src/resources/MaskIcon.tsx
 var MaskIcon = __webpack_require__(70119);
 // EXTERNAL MODULE: ./src/utils/shadow-root/renderInShadowRoot.tsx
@@ -867,18 +867,18 @@ function collectLinks(tweetNode, info, cancel) {
 
 // EXTERNAL MODULE: ../shared/src/index.ts
 var shared_src = __webpack_require__(39850);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/styles/createMuiStrictModeTheme.js
-var createMuiStrictModeTheme = __webpack_require__(58727);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/styles/createMuiStrictModeTheme.js
+var createMuiStrictModeTheme = __webpack_require__(7744);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/immer@9.0.12/node_modules/immer/dist/immer.esm.js
 var immer_esm = __webpack_require__(60232);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
 // EXTERNAL MODULE: ./src/utils/theme-tools.ts
 var theme_tools = __webpack_require__(11062);
 // EXTERNAL MODULE: ./src/social-network-adaptor/twitter.com/customization/twitter-color-schema.json
 var twitter_color_schema = __webpack_require__(88674);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var theme_src = __webpack_require__(92597);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var theme_src = __webpack_require__(43021);
 ;// CONCATENATED MODULE: ./src/social-network-adaptor/twitter.com/customization/custom.ts
 
 
@@ -1174,25 +1174,23 @@ function useThemeTwitterVariant(baseTheme) {
 
 // EXTERNAL MODULE: ./src/components/InjectedComponents/ToolboxUnstyled.tsx + 1 modules
 var ToolboxUnstyled = __webpack_require__(19462);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/styles/styled.js
-var styled = __webpack_require__(8571);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/ListItemButton/ListItemButton.js
-var ListItemButton = __webpack_require__(58364);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Typography/Typography.js + 1 modules
-var Typography = __webpack_require__(7280);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/ListItemIcon/ListItemIcon.js
-var ListItemIcon = __webpack_require__(13970);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/useMediaQuery/useMediaQuery.js
-var useMediaQuery = __webpack_require__(19063);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Box/Box.js
-var Box = __webpack_require__(46486);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/styles/styled.js
+var styled = __webpack_require__(68435);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/ListItemButton/ListItemButton.js
+var ListItemButton = __webpack_require__(31262);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Typography/Typography.js + 1 modules
+var Typography = __webpack_require__(74491);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/ListItemIcon/ListItemIcon.js
+var ListItemIcon = __webpack_require__(46565);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/useMediaQuery/useMediaQuery.js
+var useMediaQuery = __webpack_require__(90171);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Box/Box.js
+var Box = __webpack_require__(18287);
 // EXTERNAL MODULE: ./src/components/GuideStep/index.tsx
 var GuideStep = __webpack_require__(3037);
 ;// CONCATENATED MODULE: ./src/social-network-adaptor/twitter.com/injection/ToolboxHint_UI.tsx
 
 
-// see https://github.com/import-js/eslint-plugin-import/issues/2288
-// eslint-disable-next-line import/no-deprecated
 
 
 
@@ -1231,8 +1229,6 @@ const ToolboxHint_UI_Icon = (0,styled/* default */.ZP)(ListItemIcon/* default */
     min-width: 0;
 `;
 function ToolboxHintAtTwitter() {
-    // see https://github.com/import-js/eslint-plugin-import/issues/2288
-    // eslint-disable-next-line import/no-deprecated
     const mini = (0,useMediaQuery/* default */.Z)(`(max-width: ${twitterBreakPoint}px)`);
     return(/*#__PURE__*/ (0,jsx_runtime.jsx)(ToolboxUnstyled/* ToolboxHintUnstyled */.z, {
         mini: mini,
@@ -1351,8 +1347,8 @@ function injectSearchResultBoxAtTwitter(signal) {
     }).render(/*#__PURE__*/ (0,jsx_runtime.jsx)(SearchResultBox/* SearchResultBox */.L, {}));
 }
 
-// EXTERNAL MODULE: ../plugin-infra/src/index.ts + 1 modules
-var plugin_infra_src = __webpack_require__(27194);
+// EXTERNAL MODULE: ../plugin-infra/src/index.ts
+var plugin_infra_src = __webpack_require__(63151);
 ;// CONCATENATED MODULE: ./src/components/InjectedComponents/ProfileSlider.tsx
 
 
@@ -1457,7 +1453,7 @@ const useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>{
         }
     };
 });
-async function clear() {
+async function hideTwitterActivatedContent() {
     var ref;
     const eleTab = (ref = (0,selector/* searchProfileTabSelector */.Fe)().evaluate()) === null || ref === void 0 ? void 0 : ref.querySelector('div');
     if (!eleTab) return;
@@ -1481,7 +1477,7 @@ async function clear() {
         elePage.style.height = '0px';
     }
 }
-function ProfileTab_reset() {
+function resetTwitterActivatedContent() {
     var ref;
     const eleTab = (ref = (0,selector/* searchProfileTabSelector */.Fe)().evaluate()) === null || ref === void 0 ? void 0 : ref.querySelector('div');
     if (!eleTab) return;
@@ -1505,8 +1501,8 @@ function ProfileTabAtTwitter() {
     return(/*#__PURE__*/ (0,jsx_runtime.jsx)(ProfileTab/* ProfileTab */.D, {
         title: "Web3",
         classes: classes,
-        reset: ProfileTab_reset,
-        clear: clear,
+        reset: resetTwitterActivatedContent,
+        clear: hideTwitterActivatedContent,
         children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
             className: classes.line
         })
@@ -1674,8 +1670,8 @@ function injectPostDialogAtTwitter(signal) {
 
 // EXTERNAL MODULE: ./src/components/InjectedComponents/PostDialogHint.tsx
 var PostDialogHint = __webpack_require__(91968);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+system@5.4.4_d1c81cb414c255fa45866714477ddb5d/node_modules/@mui/system/esm/colorManipulator.js
-var colorManipulator = __webpack_require__(67242);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+system@5.5.0_b402f089c119e77071a0bfc88393bc7a/node_modules/@mui/system/esm/colorManipulator.js
+var colorManipulator = __webpack_require__(47565);
 // EXTERNAL MODULE: ./src/settings/settings.ts
 var settings = __webpack_require__(21202);
 ;// CONCATENATED MODULE: ./src/social-network-adaptor/twitter.com/injection/PostDialogHint.tsx
@@ -1764,8 +1760,8 @@ function injectPostBoxComposed(signal) {
 var StartSetupGuide = __webpack_require__(72048);
 // EXTERNAL MODULE: ./src/social-network/defaults/automation/AttachImageToComposition.ts
 var AttachImageToComposition = __webpack_require__(66991);
-// EXTERNAL MODULE: ./src/social-network/defaults/inject/PostInspector.tsx + 16 modules
-var PostInspector = __webpack_require__(13360);
+// EXTERNAL MODULE: ./src/social-network/defaults/inject/PostInspector.tsx + 15 modules
+var PostInspector = __webpack_require__(97770);
 // EXTERNAL MODULE: ./src/social-network-adaptor/twitter.com/encoding.ts
 var encoding = __webpack_require__(79208);
 ;// CONCATENATED MODULE: ./src/social-network-adaptor/twitter.com/injection/PostInspector.tsx
@@ -1873,14 +1869,14 @@ var Avatar_messages = __webpack_require__(37867);
 var NFTBadge = __webpack_require__(42509);
 // EXTERNAL MODULE: ./src/plugins/Avatar/SNSAdaptor/NFTAvatar.tsx + 2 modules
 var NFTAvatar = __webpack_require__(26176);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useWindowSize.js
-var useWindowSize = __webpack_require__(30865);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useLocation.js
-var useLocation = __webpack_require__(44719);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useAsync.js
-var useAsync = __webpack_require__(59302);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useUpdateEffect.js + 1 modules
-var useUpdateEffect = __webpack_require__(19669);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useWindowSize.js
+var useWindowSize = __webpack_require__(11485);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useLocation.js
+var useLocation = __webpack_require__(66944);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useAsync.js
+var useAsync = __webpack_require__(1154);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useUpdateEffect.js + 1 modules
+var useUpdateEffect = __webpack_require__(1433);
 // EXTERNAL MODULE: ./src/plugins/Avatar/SNSAdaptor/RainbowBox.tsx
 var RainbowBox = __webpack_require__(10593);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/trim.js
@@ -2240,10 +2236,10 @@ function getInjectNodeInfo(ele) {
 // EXTERNAL MODULE: ../../node_modules/.pnpm/classnames@2.3.1/node_modules/classnames/index.js
 var classnames = __webpack_require__(83849);
 var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
-// EXTERNAL MODULE: ../web3-providers/src/index.ts
-var web3_providers_src = __webpack_require__(24524);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useAsyncRetry.js
-var useAsyncRetry = __webpack_require__(22572);
+// EXTERNAL MODULE: ../web3-providers/src/index.ts + 2 modules
+var web3_providers_src = __webpack_require__(54492);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useAsyncRetry.js
+var useAsyncRetry = __webpack_require__(28577);
 ;// CONCATENATED MODULE: ./src/plugins/Avatar/hooks/useNFTContainerAtTwitter.ts
 
 
@@ -2290,14 +2286,23 @@ const rainbowBorderKeyFrames = theme_src/* keyframes */.F4`
 const NFTAvatarClip_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
         root: {},
         miniBorder: {
-            transform: 'scale(0.94) translate(7px, 6px) translateZ(0)',
+            transform: 'scale(0.94) translate(7px, 6px)',
             strokeWidth: 6,
             stroke: '#00f8ff',
-            fill: 'none'
+            fill: 'none',
+            '@supports (translate: 0)': {
+                transform: 'none',
+                translate: '7px 6px'
+            }
         },
         borderPath: {
             transform: 'scale(0.98, 1.035) translate(3px, -2px)',
-            strokeWidth: 3
+            strokeWidth: 3,
+            '@supports (translate: 0)': {
+                transform: 'none',
+                scale: '0.98, 1.035',
+                translate: '3px, -2px'
+            }
         },
         background: {
             transform: 'scale(1, 1.05) translate(1px, -3px)',
@@ -2305,7 +2310,12 @@ const NFTAvatarClip_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
             strokeWidth: 30,
             stroke: 'black',
             strokeLinecap: 'round',
-            strokeLinejoin: 'round'
+            strokeLinejoin: 'round',
+            '@supports (translate: 0)': {
+                transform: 'none',
+                scale: '1, 1.5',
+                translate: '1px, -3px'
+            }
         },
         rainbowBorder: {
             animation: `${rainbowBorderKeyFrames} 6s linear infinite`,
@@ -2315,13 +2325,26 @@ const NFTAvatarClip_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
             strokeLinecap: 'round'
         },
         text: {
-            transform: 'translate(1px, -5px) '
+            transform: 'translate(1px, -5px) ',
+            '@supports (translate: 0)': {
+                transform: 'none',
+                translate: '1px, -5px'
+            }
         },
         price: {
-            transform: 'translate(0px, -5px) '
+            transform: 'translate(0px, -5px) ',
+            '@supports (translate: 0)': {
+                transform: 'none',
+                translate: '0px, -5px'
+            }
         },
         namePath: {
-            transform: 'scale(0.9) translate(10px, 10px)'
+            transform: 'scale(0.9) translate(10px, 10px)',
+            '@supports (translate: 0)': {
+                transform: 'none',
+                translate: '10px, 10px',
+                scale: 0.9
+            }
         }
     })
 );
@@ -2821,8 +2844,8 @@ function NFTAvatarClipInTwitter() {
     }));
 }
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Link/Link.js + 1 modules
-var Link = __webpack_require__(98294);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Link/Link.js + 1 modules
+var Link = __webpack_require__(86377);
 // EXTERNAL MODULE: ./shared-ui/TypedMessageRender/Components/Text.tsx
 var Components_Text = __webpack_require__(69973);
 ;// CONCATENATED MODULE: ./src/social-network-adaptor/twitter.com/customization/render-fragments.tsx
@@ -3179,7 +3202,7 @@ const searchProfileSelector = ()=>querySelector('[aria-label][role="navigation"]
 ;
 const searchProfileTabListLastChildSelector = ()=>querySelector('[data-testid="primaryColumn"] div + [role="navigation"][aria-label] [data-testid="ScrollSnap-nextButtonWrapper"]')
 ;
-const searchProfileTabPageSelector = ()=>querySelector('[data-testid="primaryColumn"] [role="navigation"] + * div')
+const searchProfileTabPageSelector = ()=>querySelector('[data-testid="primaryColumn"] [role="navigation"] + * > div:not([role="progressbar"])')
 ;
 const searchProfileEmptySelector = ()=>querySelector('[data-testid="primaryColumn"] [data-testid="emptyState"]')
 ;
@@ -3465,10 +3488,10 @@ __webpack_require__.d(__webpack_exports__, {
   "C": () => (/* binding */ injectPostReplacer)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
 // EXTERNAL MODULE: ./src/utils/shadow-root/renderInShadowRoot.tsx
 var renderInShadowRoot = __webpack_require__(78632);
 // EXTERNAL MODULE: ./src/components/DataSource/usePostInfo.ts
@@ -3477,8 +3500,8 @@ var usePostInfo = __webpack_require__(76262);
 var base = __webpack_require__(69492);
 // EXTERNAL MODULE: ../typed-message/dom/index.ts + 15 modules
 var dom = __webpack_require__(68876);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var src = __webpack_require__(92597);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var src = __webpack_require__(43021);
 // EXTERNAL MODULE: ./shared-ui/TypedMessageRender/context.tsx + 2 modules
 var context = __webpack_require__(53763);
 // EXTERNAL MODULE: ./src/components/DataSource/useActivatedUI.ts

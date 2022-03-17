@@ -30,7 +30,6 @@ const facebookShared = {
         ,
         isValidUsername: (v)=>!!(0,_utils_parse_username__WEBPACK_IMPORTED_MODULE_1__/* .isValidFacebookUsername */ .mt)(v)
         ,
-        publicKeyEncoding: undefined,
         textPayloadPostProcessor: undefined,
         getPostURL,
         getShareLinkURL (message) {

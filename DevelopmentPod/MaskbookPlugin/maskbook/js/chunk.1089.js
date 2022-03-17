@@ -49,7 +49,6 @@ const mindsShared = {
         getProfilePage: ()=>'https://www.minds.com'
         ,
         isValidUsername: usernameValidator,
-        publicKeyEncoding: undefined,
         textPayloadPostProcessor: undefined,
         getPostURL,
         getShareLinkURL (message) {

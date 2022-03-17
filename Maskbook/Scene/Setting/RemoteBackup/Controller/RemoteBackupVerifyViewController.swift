@@ -68,9 +68,9 @@ final class RemoteBackupVerifyViewController: SheetViewController {
     }
     
     private func showError(error: Error) {
-        Alert(items: {
-            AlertItem.image(.error)
-            AlertItem.tipWith(
+        Alert {
+            ImageItem(.error)
+            WithTipItem(
                 title: "",
                 detail: NSAttributedString(
                     string: error.localizedDescription,
@@ -80,7 +80,7 @@ final class RemoteBackupVerifyViewController: SheetViewController {
                     ]
                 )
             )
-            AlertItem.doneAction(
+            DoneActionItem(
                 .init(
                     title: L10n.Common.Controls.ok,
                     action: { [weak self] in
@@ -88,7 +88,7 @@ final class RemoteBackupVerifyViewController: SheetViewController {
                     }
                 )
             )
-        })
+        }
         .show()
     }
 }

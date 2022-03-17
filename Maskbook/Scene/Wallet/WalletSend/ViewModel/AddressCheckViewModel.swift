@@ -44,23 +44,6 @@ class AddressCheckViewModel {
     
     func checkAddressLegal(address: String?) -> AnyPublisher<String, Never> {
         return Future<String, Never> { promise in
-//            guard let address = address else { return promise(.success("")) }
-//            guard let ethAddress = EthereumAddress(address) else{
-//                let web = web3(provider: InfuraProvider(Networks.Mainnet)!)
-//                let ens = ENS(web3: web)!
-//                DispatchQueue.global().async {
-//                    do {
-//                        let ensAddress = try ens.getAddress(forNode: address)
-//                        guard ensAddress.isValid else { return promise(.success(""))}
-//                        promise(.success(ensAddress.address))
-//                    } catch {
-//                        promise(.success(""))
-//                    }
-//                }
-//                return
-//            }
-//            guard ethAddress.isValid else { return promise(.success(""))}
-//            promise(.success(ethAddress.address))
             guard let address = address,
                   let provider = InfuraProvider(Networks.Mainnet),
                   let ens = ENS(web3: web3(provider: provider)) else {

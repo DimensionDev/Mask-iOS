@@ -503,7 +503,9 @@ extension LocalBackupViewController: UIDocumentPickerDelegate {
             // Handle the failure here.
             return
         }
-        
+        guard BackupFolderCheckService.checkAndAlert(url) else {
+            return
+        }
         // Make sure you release the security-scoped resource when you finish.
         defer {
             viewModel.loading = .loading(text: L10n.Scene.Setting.LocalBackup.loadingText)

@@ -57,6 +57,19 @@ enum ContactManager {
         }
     }
     
+    static func getAssignContact(chainId: Int64,
+                                 networkId: Int64) -> [Contact] {
+        do {
+            let fetchRequest = Contact.sortedFetchRequest
+            fetchRequest.predicate = Contact.predicate(chainId: chainId, networkId: networkId)
+            fetchRequest.returnsObjectsAsFaults = false
+            let contacts = try viewContext.fetch(fetchRequest)
+            return contacts
+        } catch {
+            return []
+        }
+    }
+    
     @discardableResult
     static func addContact(address: String?,
                            name: String?,

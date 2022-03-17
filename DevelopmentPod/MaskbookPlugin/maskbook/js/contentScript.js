@@ -444,12 +444,13 @@ var objectKeys = Object.keys || function (obj) {
 
 "use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "S_": () => (/* binding */ isAndroidApp),
 /* harmony export */   "vU": () => (/* binding */ Flags)
 /* harmony export */ });
-/* unused harmony exports is_iOSApp, isAndroidApp */
+/* unused harmony export is_iOSApp */
 var ref, ref1;
 const is_iOSApp =  true && "app" === 'app';
-const isAndroidApp = (/* unused pure expression or super */ null && ( true && "safari" === 'firefox'));
+const isAndroidApp =  true && "safari" === 'firefox';
 const appOnly = "app" === 'app';
 const devOnly = "production" === 'development';
 const webOnly =  false || devOnly;
@@ -518,6 +519,7 @@ if (false) {}
 
 "use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "S_": () => (/* reexport safe */ _flags__WEBPACK_IMPORTED_MODULE_1__.S_),
 /* harmony export */   "_H": () => (/* reexport safe */ _kv_storage__WEBPACK_IMPORTED_MODULE_2__._H),
 /* harmony export */   "dH": () => (/* reexport safe */ _helpers_download__WEBPACK_IMPORTED_MODULE_3__.d),
 /* harmony export */   "ql": () => (/* reexport safe */ _messages__WEBPACK_IMPORTED_MODULE_0__.q),
@@ -643,7 +645,7 @@ if (shared/* Flags.mask_SDK_ready */.vU.mask_SDK_ready) {
 /* harmony export */   "ZP": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* unused harmony export Services */
-/* harmony import */ var async_call_rpc_full__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(73302);
+/* harmony import */ var async_call_rpc_full__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19245);
 /* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(44162);
 /* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(79226);
@@ -666,7 +668,7 @@ const log = {
     requestReplay: "production" === 'development'
 };
 const Services = {
-    Crypto: add(()=>Promise.all(/* import() */[__webpack_require__.e(2698), __webpack_require__.e(8000), __webpack_require__.e(1440), __webpack_require__.e(2162), __webpack_require__.e(8393), __webpack_require__.e(2943), __webpack_require__.e(6316), __webpack_require__.e(2908), __webpack_require__.e(4477), __webpack_require__.e(9492), __webpack_require__.e(6663), __webpack_require__.e(4429), __webpack_require__.e(8707)]).then(__webpack_require__.bind(__webpack_require__, 78707))
+    Crypto: add(()=>Promise.all(/* import() */[__webpack_require__.e(2698), __webpack_require__.e(8000), __webpack_require__.e(1440), __webpack_require__.e(2162), __webpack_require__.e(8393), __webpack_require__.e(2943), __webpack_require__.e(6316), __webpack_require__.e(2908), __webpack_require__.e(4477), __webpack_require__.e(9492), __webpack_require__.e(491), __webpack_require__.e(9273), __webpack_require__.e(8707)]).then(__webpack_require__.bind(__webpack_require__, 78707))
     , 'Crypto'),
     Identity: add(()=>Promise.all(/* import() */[__webpack_require__.e(2698), __webpack_require__.e(8000), __webpack_require__.e(1440), __webpack_require__.e(2162), __webpack_require__.e(8393), __webpack_require__.e(3294), __webpack_require__.e(4227), __webpack_require__.e(4544), __webpack_require__.e(5737), __webpack_require__.e(3883), __webpack_require__.e(2299), __webpack_require__.e(6045), __webpack_require__.e(1077), __webpack_require__.e(2943), __webpack_require__.e(6316), __webpack_require__.e(8117), __webpack_require__.e(5756), __webpack_require__.e(8492), __webpack_require__.e(7765), __webpack_require__.e(1305), __webpack_require__.e(5891), __webpack_require__.e(8936), __webpack_require__.e(6265), __webpack_require__.e(1246), __webpack_require__.e(7141), __webpack_require__.e(708), __webpack_require__.e(9447), __webpack_require__.e(1922), __webpack_require__.e(4074), __webpack_require__.e(4088)]).then(__webpack_require__.bind(__webpack_require__, 64426))
     , 'Identity'),
@@ -684,7 +686,7 @@ const Services = {
     , 'ThirdPartyPlugin')
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Services);
-const ServicesWithProgress = add(()=>Promise.all(/* import() */[__webpack_require__.e(2698), __webpack_require__.e(8000), __webpack_require__.e(1440), __webpack_require__.e(2162), __webpack_require__.e(8393), __webpack_require__.e(2943), __webpack_require__.e(6316), __webpack_require__.e(2908), __webpack_require__.e(4477), __webpack_require__.e(9492), __webpack_require__.e(6663), __webpack_require__.e(4429), __webpack_require__.e(2548)]).then(__webpack_require__.bind(__webpack_require__, 2548))
+const ServicesWithProgress = add(()=>Promise.all(/* import() */[__webpack_require__.e(2698), __webpack_require__.e(8000), __webpack_require__.e(1440), __webpack_require__.e(2162), __webpack_require__.e(8393), __webpack_require__.e(2943), __webpack_require__.e(6316), __webpack_require__.e(2908), __webpack_require__.e(4477), __webpack_require__.e(9492), __webpack_require__.e(491), __webpack_require__.e(9273), __webpack_require__.e(122)]).then(__webpack_require__.bind(__webpack_require__, 40122))
 , 'ServicesWithProgress', true);
 if (false) {}
 /**
@@ -882,7 +884,7 @@ const twitterWorkerBase = {
 /* harmony import */ var _twitter_com_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74926);
 /* harmony import */ var _facebook_com_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(40543);
 /* harmony import */ var _instagram_com_base__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(94869);
-/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(27194);
+/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(63151);
 /* harmony import */ var _social_network__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(61751);
 
 
@@ -972,7 +974,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(79226);
 /* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(44162);
 /* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(27194);
+/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(63151);
 /* harmony import */ var _social_network_adaptor_utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(23003);
 /* harmony import */ var _plugin_infra_host__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(73336);
 /* harmony import */ var _define__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(86911);
@@ -1221,10 +1223,10 @@ function getNetworkWorkerUninitialized(network) {
 /* harmony export */   "a": () => (/* binding */ UpgradeBackupJSONFile)
 /* harmony export */ });
 /* harmony import */ var _version_1__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(61290);
-/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(27194);
+/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63151);
 /* harmony import */ var _version_0__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(24213);
 /* harmony import */ var _version_2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(49884);
-/* eslint-disable import/no-deprecated */ 
+
 
 
 
@@ -1269,107 +1271,80 @@ function getBackupPreviewInfo(json) {
 
 /***/ }),
 
-/***/ 27194:
+/***/ 63151:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  "Nw": () => (/* reexport */ CompositionContext/* CompositionContext */.N),
-  "V2": () => (/* reexport */ web3_types/* CurrencyType */.V2),
-  "mv": () => (/* reexport */ types/* CurrentSNSNetwork */.m),
-  "FF": () => (/* reexport */ web3_types/* NetworkPluginID */.FF),
-  "Hq": () => (/* reexport */ esm/* None */.Hq),
-  "KP": () => (/* reexport */ hooks/* PluginI18NFieldRender */.KP),
-  "je": () => (/* reexport */ types/* PluginId */.j),
-  "$8": () => (/* reexport */ web3/* PluginsWeb3ContextProvider */.$8),
-  "eT": () => (/* reexport */ PostContext/* PostInfoProvider */.eT),
-  "x4": () => (/* reexport */ esm/* Result */.x4),
-  "bD": () => (/* reexport */ esm/* Some */.bD),
-  "iv": () => (/* reexport */ web3_types/* TokenType */.iv),
-  "Je": () => (/* reexport */ activatedPluginsWorker),
-  "EK": () => (/* reexport */ utils/* createInjectHooksRenderer */.EK),
-  "I4": () => (/* reexport */ utils/* createPluginMessage */.I4),
-  "V8": () => (/* reexport */ utils/* createPluginRPC */.V8),
-  "Sc": () => (/* reexport */ utils/* createPluginRPCGenerator */.Sc),
-  "_W": () => (/* reexport */ store/* getPluginDefine */._W),
-  "Rm": () => (/* reexport */ store/* getRegisteredWeb3Networks */.Rm),
-  "i8": () => (/* reexport */ store/* getRegisteredWeb3Providers */.i8),
-  "fo": () => (/* reexport */ store/* registerPlugin */.fo),
-  "fg": () => (/* reexport */ store/* registeredPluginIDs */.fg),
-  "i1": () => (/* reexport */ store/* registeredPlugins */.i1),
-  "CB": () => (/* reexport */ dashboard/* startPluginDashboard */.CB),
-  "D4": () => (/* reexport */ sns_adaptor/* startPluginSNSAdaptor */.D4),
-  "mA": () => (/* reexport */ web3/* useAccount */.mA),
-  "Rc": () => (/* reexport */ hooks/* useActivatedPlugin */.Rc),
-  "Ar": () => (/* reexport */ sns_adaptor/* useActivatedPluginSNSAdaptor_Web3Supported */.Ar),
-  "eE": () => (/* reexport */ dashboard/* useActivatedPluginsDashboard */.eE),
-  "Pz": () => (/* reexport */ sns_adaptor/* useActivatedPluginsSNSAdaptor */.Pz),
-  "Ne": () => (/* reexport */ hooks/* useAllPluginsWeb3State */.Ne),
-  "KQ": () => (/* reexport */ web3/* useBalance */.KQ),
-  "Ov": () => (/* reexport */ web3/* useBlockNumber */.Ov),
-  "x5": () => (/* reexport */ web3/* useChainColor */.x5),
-  "K1": () => (/* reexport */ web3/* useChainDetailed */.K1),
-  "xx": () => (/* reexport */ web3/* useChainId */.xx),
-  "as": () => (/* reexport */ web3/* useChainIdValid */.as),
-  "Cp": () => (/* reexport */ CompositionContext/* useCompositionContext */.C),
-  "Yn": () => (/* reexport */ web3/* useDoubleBlockBeatRetry */.Yn),
-  "hn": () => (/* reexport */ hooks/* useLookupAddress */.hn),
-  "Vw": () => (/* reexport */ web3/* useNetworkDescriptor */.Vw),
-  "px": () => (/* reexport */ web3/* useNetworkDescriptors */.px),
-  "bL": () => (/* reexport */ web3/* useNetworkType */.bL),
-  "eS": () => (/* reexport */ hooks/* usePluginI18NField */.eS),
-  "Zn": () => (/* reexport */ web3/* usePluginIDContext */.Zn),
-  "fI": () => (/* reexport */ hooks/* usePluginWrapper */.fI),
-  "oQ": () => (/* reexport */ PostContext/* usePostInfo */.oQ),
-  "H9": () => (/* reexport */ PostContext/* usePostInfoDetails */.H9),
-  "FT": () => (/* reexport */ PostContext/* usePostInfoSharedPublic */.FT),
-  "fY": () => (/* reexport */ web3/* useProviderDescriptor */.fY),
-  "_o": () => (/* reexport */ web3/* useProviderType */._o),
-  "$q": () => (/* reexport */ hooks/* useReverseAddress */.$q),
-  "Os": () => (/* reexport */ web3/* useWallet */.Os),
-  "rB": () => (/* reexport */ web3/* useWallets */.rB),
-  "dM": () => (/* reexport */ web3/* useWeb3State */.dM),
-  "$d": () => (/* reexport */ web3/* useWeb3UI */.$d)
-});
-
-// UNUSED EXPORTS: Err, ErrImpl, Ok, OkImpl, Option, startPluginWorker, useActivatedPluginDashboard, useActivatedPluginSNSAdaptor, useActivatedPluginWeb3State, useActivatedPluginWeb3UI, useAllowTestnet, useAssetType, useCollectibleType, useIsMinimalMode, useNameType, usePluginWeb3StateContext, usePluginsWeb3StateContext, useProviderDescriptors, useSingleBlockBeatRetry, useTokenPrice, useTransactionType, useWalletPrimary
-
-// EXTERNAL MODULE: ../plugin-infra/src/web3/index.ts
-var web3 = __webpack_require__(27361);
-// EXTERNAL MODULE: ../plugin-infra/src/types.ts
-var types = __webpack_require__(22106);
-// EXTERNAL MODULE: ../plugin-infra/src/web3-types.ts
-var web3_types = __webpack_require__(38513);
-// EXTERNAL MODULE: ../plugin-infra/src/hooks/index.ts + 2 modules
-var hooks = __webpack_require__(99283);
-// EXTERNAL MODULE: ../plugin-infra/src/manager/dashboard.ts
-var dashboard = __webpack_require__(91921);
-// EXTERNAL MODULE: ../plugin-infra/src/manager/sns-adaptor.ts
-var sns_adaptor = __webpack_require__(74724);
-// EXTERNAL MODULE: ../plugin-infra/src/manager/manage.ts
-var manage = __webpack_require__(35783);
-;// CONCATENATED MODULE: ../plugin-infra/src/manager/worker.ts
-
-const { startDaemon , activated  } = (0,manage/* createManager */.m)((def)=>def.Worker
-);
-function startPluginWorker(host) {
-    startDaemon(host);
-}
-const activatedPluginsWorker = activated.plugins;
-
-// EXTERNAL MODULE: ../plugin-infra/src/utils/index.ts + 2 modules
-var utils = __webpack_require__(45337);
-// EXTERNAL MODULE: ../plugin-infra/src/PostContext.ts
-var PostContext = __webpack_require__(27900);
-// EXTERNAL MODULE: ../plugin-infra/src/CompositionContext.tsx
-var CompositionContext = __webpack_require__(57466);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/ts-results@3.3.0/node_modules/ts-results/esm/index.js
-var esm = __webpack_require__(79594);
-// EXTERNAL MODULE: ../plugin-infra/src/manager/store.ts
-var store = __webpack_require__(24799);
-;// CONCATENATED MODULE: ../plugin-infra/src/index.ts
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "$8": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.$8),
+/* harmony export */   "$d": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.$d),
+/* harmony export */   "$q": () => (/* reexport safe */ _hooks__WEBPACK_IMPORTED_MODULE_3__.$q),
+/* harmony export */   "Ar": () => (/* reexport safe */ _manager_sns_adaptor__WEBPACK_IMPORTED_MODULE_5__.Ar),
+/* harmony export */   "CB": () => (/* reexport safe */ _manager_dashboard__WEBPACK_IMPORTED_MODULE_4__.CB),
+/* harmony export */   "Cp": () => (/* reexport safe */ _CompositionContext__WEBPACK_IMPORTED_MODULE_9__.C),
+/* harmony export */   "D4": () => (/* reexport safe */ _manager_sns_adaptor__WEBPACK_IMPORTED_MODULE_5__.D4),
+/* harmony export */   "EK": () => (/* reexport safe */ _utils__WEBPACK_IMPORTED_MODULE_7__.EK),
+/* harmony export */   "FF": () => (/* reexport safe */ _web3_types__WEBPACK_IMPORTED_MODULE_2__.FF),
+/* harmony export */   "FT": () => (/* reexport safe */ _PostContext__WEBPACK_IMPORTED_MODULE_8__.FT),
+/* harmony export */   "H9": () => (/* reexport safe */ _PostContext__WEBPACK_IMPORTED_MODULE_8__.H9),
+/* harmony export */   "Hq": () => (/* reexport safe */ ts_results__WEBPACK_IMPORTED_MODULE_10__.Hq),
+/* harmony export */   "I4": () => (/* reexport safe */ _utils__WEBPACK_IMPORTED_MODULE_7__.I4),
+/* harmony export */   "Je": () => (/* reexport safe */ _manager_worker__WEBPACK_IMPORTED_MODULE_6__.J),
+/* harmony export */   "K1": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.K1),
+/* harmony export */   "KP": () => (/* reexport safe */ _hooks__WEBPACK_IMPORTED_MODULE_3__.KP),
+/* harmony export */   "KQ": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.KQ),
+/* harmony export */   "Ne": () => (/* reexport safe */ _hooks__WEBPACK_IMPORTED_MODULE_3__.Ne),
+/* harmony export */   "Nw": () => (/* reexport safe */ _CompositionContext__WEBPACK_IMPORTED_MODULE_9__.N),
+/* harmony export */   "Os": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.Os),
+/* harmony export */   "Ov": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.Ov),
+/* harmony export */   "Pz": () => (/* reexport safe */ _manager_sns_adaptor__WEBPACK_IMPORTED_MODULE_5__.Pz),
+/* harmony export */   "Rc": () => (/* reexport safe */ _hooks__WEBPACK_IMPORTED_MODULE_3__.Rc),
+/* harmony export */   "Rm": () => (/* reexport safe */ _manager_store__WEBPACK_IMPORTED_MODULE_11__.Rm),
+/* harmony export */   "Sc": () => (/* reexport safe */ _utils__WEBPACK_IMPORTED_MODULE_7__.Sc),
+/* harmony export */   "V2": () => (/* reexport safe */ _web3_types__WEBPACK_IMPORTED_MODULE_2__.V2),
+/* harmony export */   "V8": () => (/* reexport safe */ _utils__WEBPACK_IMPORTED_MODULE_7__.V8),
+/* harmony export */   "Vw": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.Vw),
+/* harmony export */   "Yn": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.Yn),
+/* harmony export */   "Zn": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.Zn),
+/* harmony export */   "_W": () => (/* reexport safe */ _manager_store__WEBPACK_IMPORTED_MODULE_11__._W),
+/* harmony export */   "_o": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__._o),
+/* harmony export */   "as": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.as),
+/* harmony export */   "bD": () => (/* reexport safe */ ts_results__WEBPACK_IMPORTED_MODULE_10__.bD),
+/* harmony export */   "bL": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.bL),
+/* harmony export */   "dM": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.dM),
+/* harmony export */   "eE": () => (/* reexport safe */ _manager_dashboard__WEBPACK_IMPORTED_MODULE_4__.eE),
+/* harmony export */   "eS": () => (/* reexport safe */ _hooks__WEBPACK_IMPORTED_MODULE_3__.eS),
+/* harmony export */   "eT": () => (/* reexport safe */ _PostContext__WEBPACK_IMPORTED_MODULE_8__.eT),
+/* harmony export */   "fI": () => (/* reexport safe */ _hooks__WEBPACK_IMPORTED_MODULE_3__.fI),
+/* harmony export */   "fY": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.fY),
+/* harmony export */   "fg": () => (/* reexport safe */ _manager_store__WEBPACK_IMPORTED_MODULE_11__.fg),
+/* harmony export */   "fo": () => (/* reexport safe */ _manager_store__WEBPACK_IMPORTED_MODULE_11__.fo),
+/* harmony export */   "hn": () => (/* reexport safe */ _hooks__WEBPACK_IMPORTED_MODULE_3__.hn),
+/* harmony export */   "i1": () => (/* reexport safe */ _manager_store__WEBPACK_IMPORTED_MODULE_11__.i1),
+/* harmony export */   "i8": () => (/* reexport safe */ _manager_store__WEBPACK_IMPORTED_MODULE_11__.i8),
+/* harmony export */   "iv": () => (/* reexport safe */ _web3_types__WEBPACK_IMPORTED_MODULE_2__.iv),
+/* harmony export */   "je": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_1__.j),
+/* harmony export */   "mA": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.mA),
+/* harmony export */   "mv": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_1__.m),
+/* harmony export */   "oQ": () => (/* reexport safe */ _PostContext__WEBPACK_IMPORTED_MODULE_8__.oQ),
+/* harmony export */   "px": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.px),
+/* harmony export */   "rB": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.rB),
+/* harmony export */   "x4": () => (/* reexport safe */ ts_results__WEBPACK_IMPORTED_MODULE_10__.x4),
+/* harmony export */   "x5": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.x5),
+/* harmony export */   "xx": () => (/* reexport safe */ _web3__WEBPACK_IMPORTED_MODULE_0__.xx)
+/* harmony export */ });
+/* harmony import */ var _web3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(27361);
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(22106);
+/* harmony import */ var _web3_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(38513);
+/* harmony import */ var _hooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(110);
+/* harmony import */ var _manager_dashboard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(91921);
+/* harmony import */ var _manager_sns_adaptor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(74724);
+/* harmony import */ var _manager_worker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(60567);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(45337);
+/* harmony import */ var _PostContext__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(27900);
+/* harmony import */ var _CompositionContext__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(57466);
+/* harmony import */ var ts_results__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(79594);
+/* harmony import */ var _manager_store__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(24799);
 
 
 
@@ -1460,6 +1435,26 @@ function __meetRegisterRequirement(def) {
     }
     return true;
 }
+
+
+/***/ }),
+
+/***/ 60567:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "J": () => (/* binding */ activatedPluginsWorker)
+/* harmony export */ });
+/* unused harmony export startPluginWorker */
+/* harmony import */ var _manage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(35783);
+
+const { startDaemon , activated  } = (0,_manage__WEBPACK_IMPORTED_MODULE_0__/* .createManager */ .m)((def)=>def.Worker
+);
+function startPluginWorker(host) {
+    startDaemon(host);
+}
+const activatedPluginsWorker = activated.plugins;
 
 
 /***/ }),
@@ -1628,6 +1623,29 @@ var DashboardRoutes;
     DashboardRoutes["Settings"] = '/settings';
     DashboardRoutes["Labs"] = '/labs';
 })(DashboardRoutes || (DashboardRoutes = {}));
+
+
+/***/ }),
+
+/***/ 88672:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Y_": () => (/* binding */ relativeRouteOf),
+/* harmony export */   "mZ": () => (/* reexport safe */ _PopupRoutes__WEBPACK_IMPORTED_MODULE_0__.m),
+/* harmony export */   "vq": () => (/* reexport safe */ _DashboardRoutes__WEBPACK_IMPORTED_MODULE_1__.v)
+/* harmony export */ });
+/* harmony import */ var _PopupRoutes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(80847);
+/* harmony import */ var _DashboardRoutes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(26637);
+
+
+function relativeRouteOf(parent) {
+    return (child)=>{
+        if (!child.startsWith(parent)) throw new Error();
+        return child.slice(parent.length).replace(/^\//, '');
+    };
+}
 
 
 /***/ }),
@@ -2516,8 +2534,8 @@ function getMethod(target, prop) {
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, [5638,2698,7871,9759,3294,2486,4227,4544,5737,187,3883,8136,3147,8019,8712,9227,3693,3758,4570,7822,7856,400,3453,5132,12,2619,5838,3142,5105,3846,8129,5951,2752,7849,7512,5178,6565,9744,444,6160,71,4278,9197,4960,102,253,572,8547,8145,5313,2088,3981,1696,3638,1555,516,2974,3832,159,9141,6067,234,9737,79,4590,2891,5784,4586,9855,4029,433,9697,3619,2222,6380,2599,9075,4198,8469,9331], () => (__webpack_require__(15096)))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [5638,2698,7871,9759,3294,2486,4227,4544,5737,187,3883,8136,3147,8019,8712,9227,3693,3758,4570,7822,7856,400,3453,5132,12,2619,5838,3142,5105,3846,8129,5951,2752,7849,7512,5178,6565,9744,444,6160,71,4278,9197,4960,102,253,572,8547,8145,5313,2088,3981,1696,3638,1555,516,2974,3832,159,9141,6067,234,9737,79,4590,2891,5784,4586,9855,4029,433,9697,3619,2222,6380,2599,9075,4198,8469,9331], () => (__webpack_require__(42038)))
+/******/ 	__webpack_require__.O(undefined, [5638,2698,7871,9759,3294,2486,4227,4544,5737,187,3883,8136,3147,8019,8712,9227,3693,3758,4570,7822,7856,400,3453,5132,12,2619,5838,3142,5105,3846,8129,5951,2752,7849,7512,5178,6565,9744,444,6160,4278,9197,4960,102,253,572,8547,8145,5313,2088,3981,1696,3638,1555,516,2974,3832,9141,159,6067,234,9737,79,4590,2891,5784,4586,9855,4029,433,9697,3619,2222,1408,9071,9075,4198,8469,9121], () => (__webpack_require__(15096)))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [5638,2698,7871,9759,3294,2486,4227,4544,5737,187,3883,8136,3147,8019,8712,9227,3693,3758,4570,7822,7856,400,3453,5132,12,2619,5838,3142,5105,3846,8129,5951,2752,7849,7512,5178,6565,9744,444,6160,4278,9197,4960,102,253,572,8547,8145,5313,2088,3981,1696,3638,1555,516,2974,3832,9141,159,6067,234,9737,79,4590,2891,5784,4586,9855,4029,433,9697,3619,2222,1408,9071,9075,4198,8469,9121], () => (__webpack_require__(42038)))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

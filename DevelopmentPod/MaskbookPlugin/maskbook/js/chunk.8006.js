@@ -6110,7 +6110,7 @@ function defaultConstrain(transform, extent, translateExtent) {
 /* harmony export */   "$": () => (/* binding */ useDimension)
 /* harmony export */ });
 /* harmony import */ var d3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(72997);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(76342);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
 
 
 function useDimension(svgRef, { width , height  }) {
@@ -6134,7 +6134,7 @@ function useDimension(svgRef, { width , height  }) {
 /* harmony export */   "t": () => (/* binding */ useLineChart)
 /* harmony export */ });
 /* harmony import */ var d3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(72997);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(76342);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
 /* harmony import */ var json_stable_stringify__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(92304);
 /* harmony import */ var json_stable_stringify__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(json_stable_stringify__WEBPACK_IMPORTED_MODULE_2__);
 

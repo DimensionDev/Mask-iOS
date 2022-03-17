@@ -396,7 +396,7 @@ extension Contact: Managed {
             return predicate1
         } else {
             let predicate2 = NSCompoundPredicate(andPredicateWithSubpredicates: predicates2)
-            return NSCompoundPredicate(orPredicateWithSubpredicates: [predicate1, predicate2])
+            return NSCompoundPredicate(andPredicateWithSubpredicates: [predicate1, predicate2])
         }
     }
     
@@ -421,6 +421,10 @@ extension Contact: Managed {
             let predicate2 = NSCompoundPredicate(andPredicateWithSubpredicates: predicates2)
             return NSCompoundPredicate(orPredicateWithSubpredicates: [predicate1, predicate2])
         }
+    }
+    
+    public static func predicate(chainId: Int64, networkId: Int64) -> NSPredicate {
+        return NSCompoundPredicate(andPredicateWithSubpredicates: [predicate(chainId: Int64(chainId)), predicate(networkId: networkId)])
     }
     
     override public func awakeFromInsert() {

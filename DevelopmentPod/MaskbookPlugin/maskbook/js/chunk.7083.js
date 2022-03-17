@@ -12,16 +12,16 @@ __webpack_require__.d(__webpack_exports__, {
   "default": () => (/* binding */ SNSAdaptor)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
 // EXTERNAL MODULE: ../plugins/DAO/src/base.ts + 7 modules
 var base = __webpack_require__(23272);
 // EXTERNAL MODULE: ../plugins/DAO/src/constants.ts
 var constants = __webpack_require__(74728);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/iframe-resizer-react@1.1.0_757a802188413a36d4f24237d13b8e90/node_modules/iframe-resizer-react/dist/index.es.js
-var index_es = __webpack_require__(58440);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/iframe-resizer-react@1.1.0_bc22c48adf1a4e34a005159413cd72b5/node_modules/iframe-resizer-react/dist/index.es.js
+var index_es = __webpack_require__(51312);
 // EXTERNAL MODULE: ../icons/utils/MaskIconPaletteContext.ts
 var MaskIconPaletteContext = __webpack_require__(12600);
 ;// CONCATENATED MODULE: ../plugins/DAO/src/components/DAOPage.tsx

@@ -730,7 +730,7 @@ var toArray = __webpack_require__(80305);
 var on = __webpack_require__(21409);
 var bind = __webpack_require__(75864);
 var debug = __webpack_require__(95553)('socket.io-client:socket');
-var parseqs = __webpack_require__(22610);
+var parseqs = __webpack_require__(32386);
 var hasBin = __webpack_require__(34196);
 
 /**

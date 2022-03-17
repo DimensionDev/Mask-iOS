@@ -26,6 +26,8 @@ import MaskWalletCore
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
+    
+    let extensionTabDidFinishLoad = CurrentValueSubject<Bool, Never>(false)
 
     @InjectedProvider(\.mainCoordinator)
     private var mainCoordinator
@@ -50,6 +52,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     @InjectedProvider(\.schemeService)
     private var schemeService
+    
+    @InjectedProvider(\.backupFileDetectService)
+    private var backupFileDetectService
     
     var disposeBag = Set<AnyCancellable>()
     
@@ -103,6 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Enable orientation notification for QR scaner
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
         
+        observeExtensionTabDidFinished()
         let tab = maskBrowser.browser.tabs.backgroundTab
         tab.webView.backgroundColor = .clear
         self.window?.addSubview(tab.webView)
@@ -154,6 +160,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
         let request = WebExtension.Setting.AppResumeMessage()
         messageRelay.request(request)
+        backupFileDetectService.detectBackupFiles()
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -179,6 +186,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func handleOpenURL(url: URL) {
         schemeService.handleURL(url: url)
+    }
+    
+    private func observeExtensionTabDidFinished() {
+        NotificationCenter.default.publisher(for: Notification.Name.extensionTabDidFinishLoad)
+            .compactMap({ _ in true })
+            .bind(to: \.extensionTabDidFinishLoad, on: self)
+            .store(in: &disposeBag)
     }
 }
 
