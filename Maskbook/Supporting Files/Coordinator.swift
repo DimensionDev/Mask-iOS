@@ -65,6 +65,8 @@ class Coordinator {
         case welcome
         case mainTab(selectedTab: MainTabBarController.Tab)
         case persona
+        case personaAvatar
+        case cropImage(image: UIImage)
         case guide
         case termsOfService(walletStartType: WalletStartType)
         case biometryRecognition(walletStartType: WalletStartType)
@@ -328,7 +330,13 @@ extension Coordinator {
         
         case .persona:
             return PersonasViewController()
+            
+        case .personaAvatar:
+            return PersonaAvatarViewController()
 
+        case let .cropImage(image):
+            return CropImageViewController(image: image)
+            
         case .guide:
             return MaskHostViewController(rootView: GuideView())
             

@@ -183,6 +183,7 @@ internal enum Asset {
     internal enum Arrows {
       internal static let `right` = ImageAsset(name: "Icon/Arrows/Right")
       internal static let backArrow = ImageAsset(name: "Icon/Arrows/backArrow")
+      internal static let backArrowSmall = ImageAsset(name: "Icon/Arrows/backArrowSmall")
       internal static let celllRight = ImageAsset(name: "Icon/Arrows/celllRight")
       internal static let down = ImageAsset(name: "Icon/Arrows/down")
       internal static let drop = ImageAsset(name: "Icon/Arrows/drop")

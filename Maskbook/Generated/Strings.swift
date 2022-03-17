@@ -515,6 +515,14 @@ enum L10n {
       static var retry: String {
         return L10n.tr("Localizable", "Common.Controls.Retry")
       }
+      /// Save
+      static var save: String {
+        return L10n.tr("Localizable", "Common.Controls.Save")
+      }
+      /// Select from photos
+      static var selectFromPhoto: String {
+        return L10n.tr("Localizable", "Common.Controls.SelectFromPhoto")
+      }
       /// Sending...
       static var sending: String {
         return L10n.tr("Localizable", "Common.Controls.Sending")
@@ -530,6 +538,10 @@ enum L10n {
       /// Skip, download later
       static var skip: String {
         return L10n.tr("Localizable", "Common.Controls.Skip")
+      }
+      /// Take a photo
+      static var takePhoto: String {
+        return L10n.tr("Localizable", "Common.Controls.TakePhoto")
       }
       /// Try Again
       static var tryAgain: String {
@@ -550,7 +562,7 @@ enum L10n {
       static var copy: String {
         return L10n.tr("Localizable", "Common.Toast.Copy")
       }
-      /// Saved！
+      /// Saved!
       static var saved: String {
         return L10n.tr("Localizable", "Common.Toast.Saved")
       }
@@ -1240,6 +1252,17 @@ enum L10n {
       /// Wrong Network
       static var wrongNetwork: String {
         return L10n.tr("Localizable", "Scene.OpenRedPackage.WrongNetwork")
+      }
+    }
+
+    enum PersonaAvatar {
+      /// Crop & rotate
+      static var crop: String {
+        return L10n.tr("Localizable", "Scene.PersonaAvatar.Crop")
+      }
+      /// Set Persona Avatar
+      static var title: String {
+        return L10n.tr("Localizable", "Scene.PersonaAvatar.Title")
       }
     }
 

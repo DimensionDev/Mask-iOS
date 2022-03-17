@@ -15,7 +15,7 @@ class PersonaCollectionDataSource: NSObject {
 
     @InjectedProvider(\.mainCoordinator)
     private var mainCoordinator
-    
+
     @InjectedProvider(\.userDefaultSettings)
     private var userSetting
 
@@ -88,7 +88,9 @@ extension PersonaCollectionDataSource: PersonaCollectionCellDelegate {
             transition: .detail(animated: true)
         )
     }
-    
+
     func avatarClicked() {
+        mainCoordinator.present(scene: .personaAvatar,
+                                transition: .detail(animated: true))
     }
 }
