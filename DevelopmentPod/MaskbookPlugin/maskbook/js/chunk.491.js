@@ -1,7 +1,7 @@
 "use strict";
-(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[6663],{
+(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[491],{
 
-/***/ 96663:
+/***/ 10491:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 
@@ -10,11 +10,11 @@ __webpack_require__.d(__webpack_exports__, {
   "Ft": () => (/* reexport */ grayscale.GrayscaleAlgorithm),
   "Ym": () => (/* reexport */ twitter_TwitterDecoder),
   "EK": () => (/* reexport */ twitter_TwitterEncoder),
-  "Xo": () => (/* reexport */ steganographyDecodeImageUrl),
+  "oX": () => (/* reexport */ steganographyDecodeImage),
   "Mk": () => (/* reexport */ steganographyEncodeImage)
 });
 
-// UNUSED EXPORTS: AESAlgorithmEnum, DecryptError, DecryptIntermediateProgressKind, DecryptProgressKind, ErrorReasons, PublicKeyAlgorithmEnum, SocialNetworkEnum, SocialNetworkEnumToProfileDomain, decrypt, encodePayload, importAESFromJWK, importAsymmetryKeyFromJsonWebKeyOrSPKI, parsePayload, socialNetworkDecoder, socialNetworkEncoder
+// UNUSED EXPORTS: AESAlgorithmEnum, DecryptError, DecryptIntermediateProgressKind, DecryptProgressKind, EC_KeyCurveEnum, EncryptError, EncryptErrorReasons, ErrorReasons, SocialNetworkEnum, SocialNetworkEnumToProfileDomain, decrypt, encodePayload, encrypt, importAESFromJWK, importEC_Key, parsePayload, socialNetworkDecoder, socialNetworkEncoder
 
 // EXTERNAL MODULE: ../../node_modules/.pnpm/ts-results@3.3.0/node_modules/ts-results/esm/index.js
 var esm = __webpack_require__(79594);
@@ -95,33 +95,38 @@ function exportCryptoKeyToRaw(key) {
         )
     );
 }
-function importAsymmetryKeyFromJsonWebKeyOrSPKI(key, kind) {
+function importEC_Key(key, kind) {
     const DeriveKeyUsage = [
         'deriveKey',
         'deriveBits'
     ];
     const ImportParamsMap = {
-        [types_PublicKeyAlgorithmEnum.secp256k1]: {
+        [types_EC_KeyCurveEnum.secp256k1]: {
             name: 'ECDH',
             namedCurve: 'K-256'
         },
-        [types_PublicKeyAlgorithmEnum.secp256p1]: {
+        [types_EC_KeyCurveEnum.secp256p1]: {
             name: 'ECDH',
             namedCurve: 'P-256'
         }
     };
     return esm/* Result.wrapAsync */.x4.wrapAsync(async ()=>{
-        if (kind === types_PublicKeyAlgorithmEnum.ed25519) {
+        if (kind === types_EC_KeyCurveEnum.ed25519) {
             throw new src/* CheckedError */.iD(Exception_CryptoException.UnsupportedAlgorithm, 'TODO: support ED25519');
         }
+        const args = [
+            ImportParamsMap[kind],
+            true,
+            DeriveKeyUsage
+        ];
         if (key instanceof Uint8Array) {
-            return crypto.subtle.importKey('spki', key, ImportParamsMap[kind], true, DeriveKeyUsage);
+            return crypto.subtle.importKey('spki', key, ...args);
         } else {
-            return crypto.subtle.importKey('jwk', key, ImportParamsMap[kind], true, DeriveKeyUsage);
+            return crypto.subtle.importKey('jwk', key, ...args);
         }
     });
 }
-function encryptWithAES(kind, key, iv, message) {
+function crypto_encryptWithAES(kind, key, iv, message) {
     const param = {
         [types_AESAlgorithmEnum.A256GCM]: {
             name: 'AES-GCM',
@@ -129,7 +134,8 @@ function encryptWithAES(kind, key, iv, message) {
         }
     };
     return esm/* Result.wrapAsync */.x4.wrapAsync(()=>{
-        return crypto.subtle.encrypt(param[kind], key, message);
+        return crypto.subtle.encrypt(param[kind], key, message).then((x)=>new Uint8Array(x)
+        );
     });
 }
 function crypto_decryptWithAES(kind, key, iv, message) {
@@ -310,7 +316,7 @@ const version_38_parser_decodeUint8Array = decodeUint8ArrayF(Exception_PayloadEx
 const decodeUint8ArrayCrypto = decodeUint8ArrayF(Exception_CryptoException.InvalidCryptoKey, Exception_CryptoException.InvalidCryptoKey);
 const decodeTextCrypto = decodeTextF(Exception_CryptoException.InvalidCryptoKey, Exception_CryptoException.InvalidCryptoKey);
 const JSONParse = JSONParseF(Exception_CryptoException.InvalidCryptoKey, Exception_CryptoException.InvalidCryptoKey);
-const importEC = src/* CheckedError.withErr */.iD.withErr(importAsymmetryKeyFromJsonWebKeyOrSPKI, Exception_CryptoException.InvalidCryptoKey);
+const importEC = src/* CheckedError.withErr */.iD.withErr(importEC_Key, Exception_CryptoException.InvalidCryptoKey);
 async function version_38_parser_parse38(payload) {
     // #region Parse text
     const header = '\u{1F3BC}4/4';
@@ -416,10 +422,10 @@ async function decodeECDHPublicKey(compressedPublic) {
         ],
         kty: 'EC'
     };
-    const imported = await importEC(jwk, PublicKeyAlgorithmEnum.secp256k1);
+    const imported = await importEC(jwk, EC_KeyCurveEnum.secp256k1);
     if (imported.err) return imported;
     return OptionalResult.Some({
-        algr: PublicKeyAlgorithmEnum.secp256k1,
+        algr: EC_KeyCurveEnum.secp256k1,
         key: imported.val
     });
 }
@@ -486,7 +492,7 @@ async function encodeAESKeyEncrypted(encryption) {
         // ? We use the Chrome order to keep the result stable.
         const text = `{"alg":"A256GCM","ext":true,"k":"${jwk.val.k}","key_ops":["decrypt","encrypt"],"kty":"oct"}`;
         const ab = (0,kit_esm/* encodeText */.YT)(text);
-        const encryptedKey = await encryptWithAES(types_AESAlgorithmEnum.A256GCM, publicSharedKey.val, iv, ab);
+        const encryptedKey = await crypto_encryptWithAES(types_AESAlgorithmEnum.A256GCM, publicSharedKey.val, iv, ab);
         if (encryptedKey.err) return encryptedKey.mapErr((e)=>new src/* CheckedError */.iD(Exception_CryptoException.EncryptFailed, e)
         );
         return (0,esm.Ok)((0,kit_esm/* encodeArrayBuffer */.ll)(encryptedKey.val.slice()));
@@ -509,24 +515,26 @@ async function compressSecp256k1Key(key) {
 }
 
 ;// CONCATENATED MODULE: ../encryption/src/payload/types.ts
-var types_PublicKeyAlgorithmEnum;
-(function(PublicKeyAlgorithmEnum) {
-    PublicKeyAlgorithmEnum[PublicKeyAlgorithmEnum["ed25519"] = 0] = "ed25519";
-    PublicKeyAlgorithmEnum[PublicKeyAlgorithmEnum["secp256p1"] = 1] = "secp256p1";
-    PublicKeyAlgorithmEnum[PublicKeyAlgorithmEnum["secp256k1"] = 2] = "secp256k1";
-})(types_PublicKeyAlgorithmEnum || (types_PublicKeyAlgorithmEnum = {}));
+var types_EC_KeyCurveEnum;
+(function(EC_KeyCurveEnum) {
+    EC_KeyCurveEnum[EC_KeyCurveEnum["ed25519"] = 0] = "ed25519";
+    EC_KeyCurveEnum[EC_KeyCurveEnum["secp256p1"] = 1] = "secp256p1";
+    EC_KeyCurveEnum[EC_KeyCurveEnum["secp256k1"] = 2] = "secp256k1";
+})(types_EC_KeyCurveEnum || (types_EC_KeyCurveEnum = {}));
 var types_AESAlgorithmEnum;
 (function(AESAlgorithmEnum) {
     AESAlgorithmEnum["A256GCM"] = "A256GCM";
 })(types_AESAlgorithmEnum || (types_AESAlgorithmEnum = {}));
 var types_SocialNetworkEnum;
 (function(SocialNetworkEnum) {
+    SocialNetworkEnum[SocialNetworkEnum["Unknown"] = -1] = "Unknown";
     SocialNetworkEnum[SocialNetworkEnum["Facebook"] = 0] = "Facebook";
     SocialNetworkEnum[SocialNetworkEnum["Twitter"] = 1] = "Twitter";
     SocialNetworkEnum[SocialNetworkEnum["Instagram"] = 2] = "Instagram";
     SocialNetworkEnum[SocialNetworkEnum["Minds"] = 3] = "Minds";
 })(types_SocialNetworkEnum || (types_SocialNetworkEnum = {}));
 const SocialNetworkEnumToDomain = {
+    [types_SocialNetworkEnum.Unknown]: 'localhost',
     [types_SocialNetworkEnum.Facebook]: 'facebook.com',
     [types_SocialNetworkEnum.Minds]: 'minds.com',
     [types_SocialNetworkEnum.Twitter]: 'twitter.com',
@@ -585,7 +593,7 @@ function SignatureContainer_parseSignatureContainer(signatureContainer) {
 const version_37_parser_decode = decodeMessagePackF(Exception_PayloadException.InvalidPayload, Exception_PayloadException.DecodeFailed);
 const InvalidPayload = (msg)=>new CheckedError(PayloadException.InvalidPayload, msg).toErr()
 ;
-const importSpki = src/* CheckedError.withErr */.iD.withErr(importAsymmetryKeyFromJsonWebKeyOrSPKI, Exception_CryptoException.InvalidCryptoKey);
+const importSpki = src/* CheckedError.withErr */.iD.withErr(importEC_Key, Exception_CryptoException.InvalidCryptoKey);
 const importAES256 = src/* CheckedError.withErr */.iD.withErr(crypto_importAESFromJWK, Exception_CryptoException.InvalidCryptoKey);
 async function version_37_parser_parse37(input) {
     const signatureContainer = parseSignatureContainer(input);
@@ -676,7 +684,7 @@ function parseAES(aes1) {
 function importAsymmetryKey(algr, key1, name) {
     return andThenAsync(assertUint8Array(key1, name, CryptoException.InvalidCryptoKey), async (pubKey)=>{
         if (typeof algr === 'number') {
-            if (algr in PublicKeyAlgorithmEnum) {
+            if (algr in EC_KeyCurveEnum) {
                 const key = await importSpki(pubKey, algr);
                 if (key.err) return key;
                 return Ok({
@@ -795,7 +803,7 @@ async function encodePayloadWithoutSignatureContainer(payload) {
     const errorMessage = decodeOnly ? `version ${payload.version} only supports decode.` : null;
     return new src/* CheckedError */.iD(Exception_PayloadException.UnknownVersion, errorMessage).toErr();
 }
-async function encodePayload(payload, sign) {
+async function payload_encodePayload(payload, sign) {
     if (payload.version === -37) {
         const bin = await encodePayloadWithoutSignatureContainer(payload);
         if (bin.err) return bin;
@@ -808,16 +816,16 @@ async function encodePayload(payload, sign) {
     if (val.ok && typeof val.val !== 'string') throw new TypeError('This should always be a string for version < -37');
     return val;
 }
-encodePayload.NoSign = (payload)=>encodePayload(payload, async ()=>src/* OptionalResult.None */.E.None
+payload_encodePayload.NoSign = (payload)=>payload_encodePayload(payload, async ()=>src/* OptionalResult.None */.E.None
     )
 ;
 
 // EXTERNAL MODULE: ../typed-message/base/index.ts + 27 modules
 var base = __webpack_require__(69492);
 ;// CONCATENATED MODULE: ../encryption/src/encryption/DecryptionTypes.ts
+
 var DecryptionTypes_DecryptProgressKind;
 (function(DecryptProgressKind) {
-    DecryptProgressKind["Started"] = 'started';
     DecryptProgressKind["Success"] = 'success';
     DecryptProgressKind["Error"] = 'error';
     DecryptProgressKind["Info"] = 'info';
@@ -839,6 +847,7 @@ var ErrorReasons;
     ErrorReasons[// Not used in this library.
     "UnrecognizedAuthor"] = '[@masknet/encryption] No author is recognized which is required for the image steganography decoding.';
     ErrorReasons["CurrentProfileDoesNotConnectedToPersona"] = '[@masknet/encryption] Cannot decrypt by E2E because no persona is linked with the current profile.';
+    ErrorReasons["NoPayloadFound"] = '[@masknet/encryption] No payload found in this material.';
 })(ErrorReasons || (ErrorReasons = {}));
 class DecryptionTypes_DecryptError extends Error {
     constructor(message, cause, recoverable = false){
@@ -851,6 +860,18 @@ class DecryptionTypes_DecryptError extends Error {
     }
 }
 DecryptionTypes_DecryptError.Reasons = ErrorReasons;
+(0,src/* registerSerializableClass */.tr)('MaskDecryptError', (x)=>x instanceof DecryptionTypes_DecryptError
+, (e)=>({
+        cause: e.cause,
+        recoverable: e.recoverable,
+        message: e.message,
+        stack: e.stack
+    })
+, (o)=>{
+    const e = new DecryptionTypes_DecryptError(o.message, o.cause, o.recoverable);
+    e.stack = o.stack;
+    return e;
+});
 
 ;// CONCATENATED MODULE: ../encryption/src/encryption/Decryption.ts
 
@@ -863,7 +884,6 @@ DecryptionTypes_DecryptError.Reasons = ErrorReasons;
 
 const Decryption_ErrorReasons = DecryptionTypes_DecryptError.Reasons;
 async function* decrypt(options, io) {
-    yield progress(DecryptProgressKind.Started);
     const { author: _author , encrypted: _encrypted , encryption: _encryption , version  } = options.message;
     const { authorPublicKey: _authorPublicKey  } = options.message;
     if (_encryption.err) return yield new DecryptError(Decryption_ErrorReasons.PayloadBroken, _encryption.val);
@@ -1012,7 +1032,270 @@ function progress(kind, rest) {
     };
 }
 
+;// CONCATENATED MODULE: ../encryption/src/encryption/EncryptionTypes.ts
+var EncryptionTypes_EncryptErrorReasons;
+(function(EncryptErrorReasons) {
+    EncryptErrorReasons["ComplexTypedMessageNotSupportedInPayload38"] = '[@masknet/encryption] Complex TypedMessage is not supported in payload v38.';
+    EncryptErrorReasons["PublicKeyNotFound"] = '[@masknet/encryption] Target public key not found.';
+})(EncryptionTypes_EncryptErrorReasons || (EncryptionTypes_EncryptErrorReasons = {}));
+class EncryptionTypes_EncryptError extends Error {
+    constructor(message, cause){
+        super(message, {
+            cause
+        });
+        this.message = message;
+    }
+}
+EncryptionTypes_EncryptError.Reasons = EncryptionTypes_EncryptErrorReasons;
+
+;// CONCATENATED MODULE: ../encryption/src/encryption/Encryption.ts
+
+
+
+
+
+
+
+
+async function encrypt(options, io) {
+    if (options.target.type === 'public') return encryptionPublic(options, io);
+    if (options.version === -38) {
+        return v38EncryptionE2E(options, io);
+    } else if (options.version === -37) {
+        return v37EncryptionE2E(options, io);
+    }
+    unreachable(options.version);
+}
+async function encryptionPublic(options, io) {
+    const iv = getIV(io);
+    const postKey = await aes256GCM(io);
+    const authorPublic = queryAuthorPublicKey(options.author, io);
+    const encodedMessage = encodeMessage(options.version, options.message);
+    const encryptedMessage = encodedMessage.then((message)=>encryptWithAES(AESAlgorithmEnum.A256GCM, postKey, iv, message)
+    ).then((x)=>x.unwrap()
+    );
+    const encryption = {
+        iv,
+        type: 'public',
+        AESKey: {
+            algr: AESAlgorithmEnum.A256GCM,
+            key: postKey
+        }
+    };
+    const payload = encodePayload.NoSign({
+        version: options.version,
+        author: options.author.isUnknown ? None : Some(options.author),
+        authorPublicKey: await authorPublic,
+        encryption,
+        encrypted: await encryptedMessage,
+        signature: None
+    }).then((x)=>x.unwrap()
+    );
+    return {
+        author: options.author,
+        identifier: new PostIVIdentifier(options.author.network, encodeArrayBuffer(iv)),
+        postKey,
+        output: await payload
+    };
+}
+async function v38EncryptionE2E(options, io) {
+    if (options.target.type === 'public') throw new Error('unreachable');
+    const iv1 = getIV(io);
+    const postKey = await aes256GCM(io);
+    const authorPublic = queryAuthorPublicKey(options.author, io);
+    const encodedMessage = encodeMessage(options.version, options.message);
+    const encryptedMessage = encodedMessage.then((message)=>encryptWithAES(AESAlgorithmEnum.A256GCM, postKey, iv1, message)
+    ).then((x)=>x.unwrap()
+    );
+    const postKeyEncoded = crypto.subtle.exportKey('jwk', postKey).then(JSON.stringify).then((x)=>new TextEncoder().encode(x)
+    );
+    // For every receiver R,
+    //     1. Let R_pub = R.publicKey
+    //     2. Let Internal_AES be the result of ECDH with the sender's private key and R_pub
+    //     Note: To keep compatibility, here we use the algorithm in
+    //     https://github.com/DimensionDev/Maskbook/blob/f3d83713d60dd0aad462e0648c4d38586c106edc/packages/mask/src/crypto/crypto-alpha-40.ts#L29-L58
+    //     3. Let ivToBePublish be a new generated IV. This should be sent to the receiver.
+    //     4. Calculate new AES key and IV based on Internal_AES and ivToBePublish.
+    //     Note: Internal_AES is not returned by io.deriveAESKey_version38_or_older, it is internal algorithm of that method.
+    const ecdh = Promise.allSettled(options.target.target.map(async (id)=>{
+        const receiverPublicKey = await io.queryPublicKey(id);
+        if (!receiverPublicKey) throw new EncryptError(EncryptErrorReasons.PublicKeyNotFound);
+        const { aes , iv , ivToBePublished  } = await io.deriveAESKey_version38_or_older(receiverPublicKey.key);
+        const encryptedPostKey = await encryptWithAES(AESAlgorithmEnum.A256GCM, aes, iv, await postKeyEncoded);
+        return {
+            ivToBePublished,
+            encryptedPostKey: encryptedPostKey.unwrap(),
+            target: id
+        };
+    })).then((x)=>x.entries()
+    );
+    const encryption = {
+        type: 'E2E',
+        // v38 does not support ephemeral encryption.
+        ephemeralPublicKey: new Map(),
+        iv: iv1,
+        ownersAESKeyEncrypted: await io.encryptByLocalKey(await postKeyEncoded, iv1)
+    };
+    const payload = encodePayload.NoSign({
+        version: -38,
+        author: options.author.isUnknown ? None : Some(options.author),
+        authorPublicKey: await authorPublic,
+        encryption,
+        encrypted: await encryptedMessage,
+        signature: None
+    }).then((x)=>x.unwrap()
+    );
+    const ecdhResult = new IdentifierMap(new Map(), ProfileIdentifier);
+    for (const [index, result] of (await ecdh)){
+        ecdhResult.set(options.target.target[index], result);
+    }
+    return {
+        author: options.author,
+        identifier: new PostIVIdentifier(options.author.network, encodeArrayBuffer(iv1)),
+        output: await payload,
+        postKey: postKey,
+        e2e: ecdhResult
+    };
+}
+async function v37EncryptionE2E(options, io) {
+    if (options.target.type === 'public') throw new Error('unreachable');
+    const iv = getIV(io);
+    const postKey = await aes256GCM(io);
+    const encodedMessage = encodeMessage(options.version, options.message);
+    const encryptedMessage = encodedMessage.then((message)=>encryptWithAES(AESAlgorithmEnum.A256GCM, postKey, iv, message)
+    ).then((x)=>x.unwrap()
+    );
+    const postKeyEncoded = crypto.subtle.exportKey('raw', postKey).then((x)=>new Uint8Array(x)
+    );
+    const authorPublic = await queryAuthorPublicKey(options.author, io);
+    if (!authorPublic.some) throw new EncryptError(EncryptErrorReasons.PublicKeyNotFound);
+    const ephemeralKeys = new Map();
+    // get ephemeral keys, generate one if not found
+    const getEphemeralKey = async (curve)=>{
+        if (ephemeralKeys.has(curve)) return ephemeralKeys.get(curve);
+        ephemeralKeys.set(curve, ec(io, curve));
+        return ephemeralKeys.get(curve);
+    };
+    const ecdh = Promise.allSettled(options.target.target.map(async (id)=>{
+        const receiverPublicKey = await io.queryPublicKey(id);
+        if (!receiverPublicKey) throw new EncryptError(EncryptErrorReasons.PublicKeyNotFound);
+        const [, ephemeralPrivateKey] = await getEphemeralKey(receiverPublicKey.algr);
+        const aes = await crypto.subtle.deriveKey({
+            name: 'ECDH',
+            public: receiverPublicKey.key
+        }, ephemeralPrivateKey, {
+            name: 'AES-GCM',
+            length: 256
+        }, true, [
+            'encrypt'
+        ]);
+        // Note: we're reusing iv in the post encryption.
+        const encryptedPostKey = await encryptWithAES(AESAlgorithmEnum.A256GCM, aes, iv, await postKeyEncoded);
+        return {
+            encryptedPostKey: encryptedPostKey.unwrap(),
+            target: id
+        };
+    })).then((x)=>x.entries()
+    );
+    const ownersAESKeyEncrypted = Promise.resolve().then(async ()=>{
+        const authorPublicKey = authorPublic.val;
+        const [, ephemeralPrivateKey] = await getEphemeralKey(authorPublicKey.algr);
+        // we get rid of localKey in v38
+        const aes = await crypto.subtle.deriveKey({
+            name: 'ECDH',
+            public: authorPublicKey.key
+        }, ephemeralPrivateKey, {
+            name: 'AES-GCM',
+            length: 256
+        }, true, [
+            'encrypt'
+        ]);
+        // Note: we're reusing iv in the post encryption.
+        const encryptedPostKey = await encryptWithAES(AESAlgorithmEnum.A256GCM, aes, iv, await postKeyEncoded);
+        return encryptedPostKey.unwrap();
+    });
+    const encryption = {
+        type: 'E2E',
+        ephemeralPublicKey: new Map(),
+        iv,
+        ownersAESKeyEncrypted: await ownersAESKeyEncrypted
+    };
+    // we must ensure ecdh is all resolved, otherwise we may miss some result of ephemeralPublicKey.
+    const ecdhResult = new IdentifierMap(new Map(), ProfileIdentifier);
+    for (const [index, result] of (await ecdh)){
+        ecdhResult.set(options.target.target[index], result);
+    }
+    for (const [curve1, keys] of ephemeralKeys){
+        encryption.ephemeralPublicKey.set(curve1, (await keys)[0]);
+    }
+    const payload = await encodePayload.NoSign({
+        version: -38,
+        author: options.author.isUnknown ? None : Some(options.author),
+        authorPublicKey: authorPublic,
+        encryption,
+        encrypted: await encryptedMessage,
+        signature: None
+    });
+    return {
+        author: options.author,
+        identifier: new PostIVIdentifier(options.author.network, encodeArrayBuffer(iv)),
+        output: payload.unwrap(),
+        postKey: postKey,
+        e2e: ecdhResult
+    };
+}
+async function encodeMessage(version, message) {
+    if (version === -37) return encodeTypedMessageToDocument(message);
+    if (!isTypedMessageText(message)) throw new EncryptError(EncryptErrorReasons.ComplexTypedMessageNotSupportedInPayload38);
+    return encodeTypedMessageV38Format(message);
+}
+async function queryAuthorPublicKey(of, io) {
+    try {
+        const key = await io.queryPublicKey(of);
+        if (!key) return None;
+        return Some(key);
+    } catch (error) {
+        console.warn('[@masknet/encryption] Failed when query author public key', error);
+        return None;
+    }
+}
+function getIV(io) {
+    if (io.getRandomValues) return io.getRandomValues(new Uint8Array(16));
+    return crypto.getRandomValues(new Uint8Array(16));
+}
+async function aes256GCM(io) {
+    if (io.getRandomAESKey) return io.getRandomAESKey();
+    return await crypto.subtle.generateKey({
+        name: 'AES-GCM',
+        length: 256
+    }, true, [
+        'encrypt',
+        'decrypt', 
+    ]);
+}
+async function ec(io, kind) {
+    if (io.getRandomECKey) return io.getRandomECKey(kind);
+    const namedCurve = {
+        [EC_KeyCurveEnum.secp256p1]: 'P-256',
+        [EC_KeyCurveEnum.secp256k1]: 'K-256',
+        get [EC_KeyCurveEnum.ed25519] () {
+            throw new Error('TODO: support ED25519');
+        }
+    };
+    const { privateKey , publicKey  } = await crypto.subtle.generateKey({
+        name: 'ECDH',
+        namedCurve: namedCurve[kind]
+    }, true, [
+        'deriveKey'
+    ]);
+    return [
+        publicKey,
+        privateKey
+    ];
+}
+
 ;// CONCATENATED MODULE: ../encryption/src/encryption/index.ts
+
 
 
 ;// CONCATENATED MODULE: ../encryption/src/social-network-encode-decode/twitter.ts
@@ -1085,10 +1368,14 @@ function batchReplace(source, group) {
 ;// CONCATENATED MODULE: ../encryption/src/social-network-encode-decode/index.ts
 
 
-
 function socialNetworkDecoder(network, content) {
-    if (network === SocialNetworkEnum.Twitter) return TwitterDecoder(content);
-    return Some(content);
+    if (network === SocialNetworkEnum.Twitter) return TwitterDecoder(content).map((x)=>[
+            x
+        ]
+    ).unwrapOr([]);
+    const all = content.match(/(\u{1F3BC}[\w+/=|]+:\|\|)/giu);
+    if (all) return all;
+    return [];
 }
 function socialNetworkEncoder(network, content) {
     if (network === SocialNetworkEnum.Twitter) return __TwitterEncoder(content);
@@ -1228,7 +1515,7 @@ async function steganographyEncodeImage(buf, options) {
         ...(0,omit/* default */.Z)(options, 'template')
     }));
 }
-async function steganographyDecodeImage(buf, options) {
+async function inner(buf, options) {
     const dimension = getDimension(buf);
     const preset = dimensionPreset.find((d)=>isSameDimension(d, dimension)
     );
@@ -1239,11 +1526,12 @@ async function steganographyDecodeImage(buf, options) {
         ...options
     });
 }
-async function steganographyDecodeImageUrl(url, options) {
-    return steganographyDecodeImage(await options.downloadImage(url), options);
+async function steganographyDecodeImage(image, options) {
+    return inner(typeof image === 'string' ? await options.downloadImage(image) : await image.arrayBuffer(), options);
 }
 
 ;// CONCATENATED MODULE: ../encryption/src/index.ts
+
 
 
 

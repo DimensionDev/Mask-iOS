@@ -15,14 +15,13 @@ __webpack_require__.d(__webpack_exports__, {
   "encryptTo": () => (/* reexport */ encryptTo),
   "getPartialSharedListOfPost": () => (/* reexport */ getPartialSharedListOfPost),
   "publishPostAESKey": () => (/* reexport */ publishPostAESKey),
-  "steganographyEncodeImage": () => (/* binding */ steganographyEncodeImage),
-  "verifyOthersProve": () => (/* reexport */ verifyOthersProve/* verifyOthersProve */.f)
+  "steganographyEncodeImage": () => (/* binding */ steganographyEncodeImage)
 });
 
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+holoflows-kit@0.9.0-20210902104757-7c3d0d0_webextension-polyfill@0.8.0/node_modules/@dimensiondev/holoflows-kit/umd/index.cjs
 var umd = __webpack_require__(44162);
-// EXTERNAL MODULE: ../encryption/src/index.ts + 22 modules
-var src = __webpack_require__(96663);
+// EXTERNAL MODULE: ../encryption/src/index.ts + 24 modules
+var src = __webpack_require__(10491);
 // EXTERNAL MODULE: ./src/extension/background-script/CryptoServices/utils.ts
 var utils = __webpack_require__(97535);
 // EXTERNAL MODULE: ./src/crypto/crypto-alpha-40.ts
@@ -257,14 +256,11 @@ async function appendShareTarget(version, postAESKey, iv, people, whoAmI, reason
     ).map(database/* queryProfile */.JL));
 }
 
-// EXTERNAL MODULE: ./src/extension/background-script/CryptoServices/verifyOthersProve.ts
-var verifyOthersProve = __webpack_require__(21300);
 ;// CONCATENATED MODULE: ./src/extension/background-script/CryptoService.ts
 
 
 
 (0,umd.assertEnvironment)(umd.Environment.ManifestBackground);
-
 
 
 

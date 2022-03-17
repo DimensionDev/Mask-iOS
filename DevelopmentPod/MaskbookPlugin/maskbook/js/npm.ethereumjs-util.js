@@ -5903,30 +5903,11 @@ exports.toType = toType;
 
 /***/ }),
 
-/***/ 23180:
+/***/ 14636:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __read = (this && this.__read) || function (o, n) {
     var m = typeof Symbol === "function" && o[Symbol.iterator];
     if (!m) return o;
@@ -5949,23 +5930,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.isZeroAddress = exports.zeroAddress = exports.importPublic = exports.privateToAddress = exports.privateToPublic = exports.publicToAddress = exports.pubToAddress = exports.isValidPublic = exports.isValidPrivate = exports.generateAddress2 = exports.generateAddress = exports.isValidChecksumAddress = exports.toChecksumAddress = exports.isValidAddress = exports.Account = void 0;
 var assert_1 = __importDefault(__webpack_require__(57579));
-var bn_js_1 = __importDefault(__webpack_require__(35579));
-var rlp = __importStar(__webpack_require__(11562));
+var externals_1 = __webpack_require__(12971);
 var secp256k1_1 = __webpack_require__(74665);
-var internal_1 = __webpack_require__(66277);
-var constants_1 = __webpack_require__(93297);
-var bytes_1 = __webpack_require__(35269);
-var hash_1 = __webpack_require__(5781);
-var helpers_1 = __webpack_require__(11366);
-var types_1 = __webpack_require__(20002);
+var internal_1 = __webpack_require__(46482);
+var constants_1 = __webpack_require__(84861);
+var bytes_1 = __webpack_require__(46462);
+var hash_1 = __webpack_require__(26759);
+var helpers_1 = __webpack_require__(73429);
+var types_1 = __webpack_require__(79671);
 var Account = /** @class */ (function () {
     /**
      * This constructor assigns and validates the values.
      * Use the static factory methods to assist in creating an Account from varying data types.
      */
     function Account(nonce, balance, stateRoot, codeHash) {
-        if (nonce === void 0) { nonce = new bn_js_1.default(0); }
-        if (balance === void 0) { balance = new bn_js_1.default(0); }
+        if (nonce === void 0) { nonce = new externals_1.BN(0); }
+        if (balance === void 0) { balance = new externals_1.BN(0); }
         if (stateRoot === void 0) { stateRoot = constants_1.KECCAK256_RLP; }
         if (codeHash === void 0) { codeHash = constants_1.KECCAK256_NULL; }
         this.nonce = nonce;
@@ -5976,10 +5956,10 @@ var Account = /** @class */ (function () {
     }
     Account.fromAccountData = function (accountData) {
         var nonce = accountData.nonce, balance = accountData.balance, stateRoot = accountData.stateRoot, codeHash = accountData.codeHash;
-        return new Account(nonce ? new bn_js_1.default((0, bytes_1.toBuffer)(nonce)) : undefined, balance ? new bn_js_1.default((0, bytes_1.toBuffer)(balance)) : undefined, stateRoot ? (0, bytes_1.toBuffer)(stateRoot) : undefined, codeHash ? (0, bytes_1.toBuffer)(codeHash) : undefined);
+        return new Account(nonce ? new externals_1.BN((0, bytes_1.toBuffer)(nonce)) : undefined, balance ? new externals_1.BN((0, bytes_1.toBuffer)(balance)) : undefined, stateRoot ? (0, bytes_1.toBuffer)(stateRoot) : undefined, codeHash ? (0, bytes_1.toBuffer)(codeHash) : undefined);
     };
     Account.fromRlpSerializedAccount = function (serialized) {
-        var values = rlp.decode(serialized);
+        var values = externals_1.rlp.decode(serialized);
         if (!Array.isArray(values)) {
             throw new Error('Invalid serialized account input. Must be array');
         }
@@ -5987,13 +5967,13 @@ var Account = /** @class */ (function () {
     };
     Account.fromValuesArray = function (values) {
         var _a = __read(values, 4), nonce = _a[0], balance = _a[1], stateRoot = _a[2], codeHash = _a[3];
-        return new Account(new bn_js_1.default(nonce), new bn_js_1.default(balance), stateRoot, codeHash);
+        return new Account(new externals_1.BN(nonce), new externals_1.BN(balance), stateRoot, codeHash);
     };
     Account.prototype._validate = function () {
-        if (this.nonce.lt(new bn_js_1.default(0))) {
+        if (this.nonce.lt(new externals_1.BN(0))) {
             throw new Error('nonce must be greater than zero');
         }
-        if (this.balance.lt(new bn_js_1.default(0))) {
+        if (this.balance.lt(new externals_1.BN(0))) {
             throw new Error('balance must be greater than zero');
         }
         if (this.stateRoot.length !== 32) {
@@ -6018,7 +5998,7 @@ var Account = /** @class */ (function () {
      * Returns the RLP serialization of the account as a `Buffer`.
      */
     Account.prototype.serialize = function () {
-        return rlp.encode(this.raw());
+        return externals_1.rlp.encode(this.raw());
     };
     /**
      * Returns a `Boolean` determining if the account is a contract.
@@ -6100,7 +6080,7 @@ exports.isValidChecksumAddress = isValidChecksumAddress;
 var generateAddress = function (from, nonce) {
     (0, helpers_1.assertIsBuffer)(from);
     (0, helpers_1.assertIsBuffer)(nonce);
-    var nonceBN = new bn_js_1.default(nonce);
+    var nonceBN = new externals_1.BN(nonce);
     if (nonceBN.isZero()) {
         // in RLP we want to encode null in the case of zero nonce
         // read the RLP documentation for an answer if you dare
@@ -6226,7 +6206,7 @@ exports.isZeroAddress = isZeroAddress;
 
 /***/ }),
 
-/***/ 61192:
+/***/ 511:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
@@ -6237,9 +6217,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Address = void 0;
 var assert_1 = __importDefault(__webpack_require__(57579));
-var bn_js_1 = __importDefault(__webpack_require__(35579));
-var bytes_1 = __webpack_require__(35269);
-var account_1 = __webpack_require__(23180);
+var externals_1 = __webpack_require__(12971);
+var bytes_1 = __webpack_require__(46462);
+var account_1 = __webpack_require__(14636);
 var Address = /** @class */ (function () {
     function Address(buf) {
         (0, assert_1.default)(buf.length === 20, 'Invalid address length');
@@ -6283,7 +6263,7 @@ var Address = /** @class */ (function () {
      * @param nonce The nonce of the from account
      */
     Address.generate = function (from, nonce) {
-        (0, assert_1.default)(bn_js_1.default.isBN(nonce));
+        (0, assert_1.default)(externals_1.BN.isBN(nonce));
         return new Address((0, account_1.generateAddress)(from.buf, nonce.toArrayLike(Buffer)));
     };
     /**
@@ -6314,9 +6294,9 @@ var Address = /** @class */ (function () {
      * by EIP-1352
      */
     Address.prototype.isPrecompileOrSystemAddress = function () {
-        var addressBN = new bn_js_1.default(this.buf);
-        var rangeMin = new bn_js_1.default(0);
-        var rangeMax = new bn_js_1.default('ffff', 'hex');
+        var addressBN = new externals_1.BN(this.buf);
+        var rangeMin = new externals_1.BN(0);
+        var rangeMax = new externals_1.BN('ffff', 'hex');
         return addressBN.gte(rangeMin) && addressBN.lte(rangeMax);
     };
     /**
@@ -6338,19 +6318,43 @@ exports.Address = Address;
 
 /***/ }),
 
-/***/ 35269:
+/***/ 46462:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __values = (this && this.__values) || function(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+};
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.baToJSON = exports.toUtf8 = exports.addHexPrefix = exports.toUnsigned = exports.fromSigned = exports.bufferToHex = exports.bufferToInt = exports.toBuffer = exports.unpadHexString = exports.unpadArray = exports.unpadBuffer = exports.setLengthRight = exports.setLengthLeft = exports.zeros = exports.intToBuffer = exports.intToHex = void 0;
-var bn_js_1 = __importDefault(__webpack_require__(35579));
-var internal_1 = __webpack_require__(66277);
-var helpers_1 = __webpack_require__(11366);
+exports.bufArrToArr = exports.arrToBufArr = exports.validateNoLeadingZeroes = exports.baToJSON = exports.toUtf8 = exports.addHexPrefix = exports.toUnsigned = exports.fromSigned = exports.bufferToHex = exports.bufferToInt = exports.toBuffer = exports.unpadHexString = exports.unpadArray = exports.unpadBuffer = exports.setLengthRight = exports.setLengthLeft = exports.zeros = exports.intToBuffer = exports.intToHex = void 0;
+var externals_1 = __webpack_require__(12971);
+var internal_1 = __webpack_require__(46482);
+var helpers_1 = __webpack_require__(73429);
 /**
  * Converts a `Number` into a hex `String`
  * @param {Number} i
@@ -6358,9 +6362,9 @@ var helpers_1 = __webpack_require__(11366);
  */
 var intToHex = function (i) {
     if (!Number.isSafeInteger(i) || i < 0) {
-        throw new Error("Received an invalid integer type: " + i);
+        throw new Error("Received an invalid integer type: ".concat(i));
     }
-    return "0x" + i.toString(16);
+    return "0x".concat(i.toString(16));
 };
 exports.intToHex = intToHex;
 /**
@@ -6492,14 +6496,17 @@ var toBuffer = function (v) {
     }
     if (typeof v === 'string') {
         if (!(0, internal_1.isHexString)(v)) {
-            throw new Error("Cannot convert string to buffer. toBuffer only supports 0x-prefixed hex strings and this string was given: " + v);
+            throw new Error("Cannot convert string to buffer. toBuffer only supports 0x-prefixed hex strings and this string was given: ".concat(v));
         }
         return Buffer.from((0, internal_1.padToEven)((0, internal_1.stripHexPrefix)(v)), 'hex');
     }
     if (typeof v === 'number') {
         return (0, exports.intToBuffer)(v);
     }
-    if (bn_js_1.default.isBN(v)) {
+    if (externals_1.BN.isBN(v)) {
+        if (v.isNeg()) {
+            throw new Error("Cannot convert negative BN to buffer. Given: ".concat(v));
+        }
         return v.toArrayLike(Buffer);
     }
     if (v.toArray) {
@@ -6518,7 +6525,7 @@ exports.toBuffer = toBuffer;
  * @throws If the input number exceeds 53 bits.
  */
 var bufferToInt = function (buf) {
-    return new bn_js_1.default((0, exports.toBuffer)(buf)).toNumber();
+    return new externals_1.BN((0, exports.toBuffer)(buf)).toNumber();
 };
 exports.bufferToInt = bufferToInt;
 /**
@@ -6535,7 +6542,7 @@ exports.bufferToHex = bufferToHex;
  * @param num Signed integer value
  */
 var fromSigned = function (num) {
-    return new bn_js_1.default(num).fromTwos(256);
+    return new externals_1.BN(num).fromTwos(256);
 };
 exports.fromSigned = fromSigned;
 /**
@@ -6590,7 +6597,7 @@ exports.toUtf8 = toUtf8;
  */
 var baToJSON = function (ba) {
     if (Buffer.isBuffer(ba)) {
-        return "0x" + ba.toString('hex');
+        return "0x".concat(ba.toString('hex'));
     }
     else if (ba instanceof Array) {
         var array = [];
@@ -6601,29 +6608,76 @@ var baToJSON = function (ba) {
     }
 };
 exports.baToJSON = baToJSON;
+/**
+ * Checks provided Buffers for leading zeroes and throws if found.
+ *
+ * Examples:
+ *
+ * Valid values: 0x1, 0x, 0x01, 0x1234
+ * Invalid values: 0x0, 0x00, 0x001, 0x0001
+ *
+ * Note: This method is useful for validating that RLP encoded integers comply with the rule that all
+ * integer values encoded to RLP must be in the most compact form and contain no leading zero bytes
+ * @param values An object containing string keys and Buffer values
+ * @throws if any provided value is found to have leading zero bytes
+ */
+var validateNoLeadingZeroes = function (values) {
+    var e_1, _a;
+    try {
+        for (var _b = __values(Object.entries(values)), _c = _b.next(); !_c.done; _c = _b.next()) {
+            var _d = __read(_c.value, 2), k = _d[0], v = _d[1];
+            if (v !== undefined && v.length > 0 && v[0] === 0) {
+                throw new Error("".concat(k, " cannot have leading zeroes, received: ").concat(v.toString('hex')));
+            }
+        }
+    }
+    catch (e_1_1) { e_1 = { error: e_1_1 }; }
+    finally {
+        try {
+            if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+        }
+        finally { if (e_1) throw e_1.error; }
+    }
+};
+exports.validateNoLeadingZeroes = validateNoLeadingZeroes;
+function arrToBufArr(arr) {
+    if (!Array.isArray(arr)) {
+        return Buffer.from(arr);
+    }
+    return arr.map(function (a) { return arrToBufArr(a); });
+}
+exports.arrToBufArr = arrToBufArr;
+function bufArrToArr(arr) {
+    if (!Array.isArray(arr)) {
+        return Uint8Array.from(arr !== null && arr !== void 0 ? arr : []);
+    }
+    return arr.map(function (a) { return bufArrToArr(a); });
+}
+exports.bufArrToArr = bufArrToArr;
 //# sourceMappingURL=bytes.js.map
 
 /***/ }),
 
-/***/ 93297:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ 84861:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.KECCAK256_RLP = exports.KECCAK256_RLP_S = exports.KECCAK256_RLP_ARRAY = exports.KECCAK256_RLP_ARRAY_S = exports.KECCAK256_NULL = exports.KECCAK256_NULL_S = exports.TWO_POW256 = exports.MAX_INTEGER = void 0;
-var Buffer = (__webpack_require__(15313).Buffer);
-var bn_js_1 = __importDefault(__webpack_require__(35579));
+exports.KECCAK256_RLP = exports.KECCAK256_RLP_S = exports.KECCAK256_RLP_ARRAY = exports.KECCAK256_RLP_ARRAY_S = exports.KECCAK256_NULL = exports.KECCAK256_NULL_S = exports.TWO_POW256 = exports.MAX_INTEGER = exports.MAX_UINT64 = void 0;
+var buffer_1 = __webpack_require__(15313);
+var externals_1 = __webpack_require__(12971);
 /**
- * The max integer that this VM can handle
+ * 2^64-1
  */
-exports.MAX_INTEGER = new bn_js_1.default('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 16);
+exports.MAX_UINT64 = new externals_1.BN('ffffffffffffffff', 16);
+/**
+ * The max integer that the evm can handle (2^256-1)
+ */
+exports.MAX_INTEGER = new externals_1.BN('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 16);
 /**
  * 2^256
  */
-exports.TWO_POW256 = new bn_js_1.default('10000000000000000000000000000000000000000000000000000000000000000', 16);
+exports.TWO_POW256 = new externals_1.BN('10000000000000000000000000000000000000000000000000000000000000000', 16);
 /**
  * Keccak-256 hash of null
  */
@@ -6631,7 +6685,7 @@ exports.KECCAK256_NULL_S = 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfa
 /**
  * Keccak-256 hash of null
  */
-exports.KECCAK256_NULL = Buffer.from(exports.KECCAK256_NULL_S, 'hex');
+exports.KECCAK256_NULL = buffer_1.Buffer.from(exports.KECCAK256_NULL_S, 'hex');
 /**
  * Keccak-256 of an RLP of an empty array
  */
@@ -6639,7 +6693,7 @@ exports.KECCAK256_RLP_ARRAY_S = '1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a741
 /**
  * Keccak-256 of an RLP of an empty array
  */
-exports.KECCAK256_RLP_ARRAY = Buffer.from(exports.KECCAK256_RLP_ARRAY_S, 'hex');
+exports.KECCAK256_RLP_ARRAY = buffer_1.Buffer.from(exports.KECCAK256_RLP_ARRAY_S, 'hex');
 /**
  * Keccak-256 hash of the RLP of null
  */
@@ -6647,12 +6701,12 @@ exports.KECCAK256_RLP_S = '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622
 /**
  * Keccak-256 hash of the RLP of null
  */
-exports.KECCAK256_RLP = Buffer.from(exports.KECCAK256_RLP_S, 'hex');
+exports.KECCAK256_RLP = buffer_1.Buffer.from(exports.KECCAK256_RLP_S, 'hex');
 //# sourceMappingURL=constants.js.map
 
 /***/ }),
 
-/***/ 87179:
+/***/ 12971:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -6693,37 +6747,18 @@ exports.rlp = rlp;
 
 /***/ }),
 
-/***/ 5781:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ 26759:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.rlphash = exports.ripemd160FromArray = exports.ripemd160FromString = exports.ripemd160 = exports.sha256FromArray = exports.sha256FromString = exports.sha256 = exports.keccakFromArray = exports.keccakFromHexString = exports.keccakFromString = exports.keccak256 = exports.keccak = void 0;
 var keccak_1 = __webpack_require__(74040);
 var createHash = __webpack_require__(20160);
-var rlp = __importStar(__webpack_require__(11562));
-var bytes_1 = __webpack_require__(35269);
-var helpers_1 = __webpack_require__(11366);
+var externals_1 = __webpack_require__(12971);
+var bytes_1 = __webpack_require__(46462);
+var helpers_1 = __webpack_require__(73429);
 /**
  * Creates Keccak hash of a Buffer input
  * @param a The input data (Buffer)
@@ -6746,7 +6781,7 @@ var keccak = function (a, bits) {
             return (0, keccak_1.keccak512)(a);
         }
         default: {
-            throw new Error("Invald algorithm: keccak" + bits);
+            throw new Error("Invald algorithm: keccak".concat(bits));
         }
     }
 };
@@ -6878,28 +6913,28 @@ exports.ripemd160FromArray = ripemd160FromArray;
  * @param a The input data
  */
 var rlphash = function (a) {
-    return (0, exports.keccak)(rlp.encode(a));
+    return (0, exports.keccak)(externals_1.rlp.encode(a));
 };
 exports.rlphash = rlphash;
 //# sourceMappingURL=hash.js.map
 
 /***/ }),
 
-/***/ 11366:
+/***/ 73429:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.assertIsString = exports.assertIsArray = exports.assertIsBuffer = exports.assertIsHexString = void 0;
-var internal_1 = __webpack_require__(66277);
+var internal_1 = __webpack_require__(46482);
 /**
  * Throws if a string is not hex prefixed
  * @param {string} input string to check hex prefix of
  */
 var assertIsHexString = function (input) {
     if (!(0, internal_1.isHexString)(input)) {
-        var msg = "This method only supports 0x-prefixed hex strings but input was: " + input;
+        var msg = "This method only supports 0x-prefixed hex strings but input was: ".concat(input);
         throw new Error(msg);
     }
 };
@@ -6910,7 +6945,7 @@ exports.assertIsHexString = assertIsHexString;
  */
 var assertIsBuffer = function (input) {
     if (!Buffer.isBuffer(input)) {
-        var msg = "This method only supports Buffer but input was: " + input;
+        var msg = "This method only supports Buffer but input was: ".concat(input);
         throw new Error(msg);
     }
 };
@@ -6921,7 +6956,7 @@ exports.assertIsBuffer = assertIsBuffer;
  */
 var assertIsArray = function (input) {
     if (!Array.isArray(input)) {
-        var msg = "This method only supports number arrays but input was: " + input;
+        var msg = "This method only supports number arrays but input was: ".concat(input);
         throw new Error(msg);
     }
 };
@@ -6932,7 +6967,7 @@ exports.assertIsArray = assertIsArray;
  */
 var assertIsString = function (input) {
     if (typeof input !== 'string') {
-        var msg = "This method only supports strings but input was: " + input;
+        var msg = "This method only supports strings but input was: ".concat(input);
         throw new Error(msg);
     }
 };
@@ -6941,7 +6976,7 @@ exports.assertIsString = assertIsString;
 
 /***/ }),
 
-/***/ 39906:
+/***/ 5459:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -6960,43 +6995,43 @@ exports.isHexString = exports.getKeys = exports.fromAscii = exports.fromUtf8 = e
 /**
  * Constants
  */
-__exportStar(__webpack_require__(93297), exports);
+__exportStar(__webpack_require__(84861), exports);
 /**
  * Account class and helper functions
  */
-__exportStar(__webpack_require__(23180), exports);
+__exportStar(__webpack_require__(14636), exports);
 /**
  * Address type
  */
-__exportStar(__webpack_require__(61192), exports);
+__exportStar(__webpack_require__(511), exports);
 /**
  * Hash functions
  */
-__exportStar(__webpack_require__(5781), exports);
+__exportStar(__webpack_require__(26759), exports);
 /**
  * ECDSA signature
  */
-__exportStar(__webpack_require__(75664), exports);
+__exportStar(__webpack_require__(69875), exports);
 /**
  * Utilities for manipulating Buffers, byte arrays, etc.
  */
-__exportStar(__webpack_require__(35269), exports);
+__exportStar(__webpack_require__(46462), exports);
 /**
  * Function for definining properties on an object
  */
-__exportStar(__webpack_require__(67832), exports);
+__exportStar(__webpack_require__(18085), exports);
 /**
- * External exports (BN, rlp, secp256k1)
+ * External exports (BN, rlp)
  */
-__exportStar(__webpack_require__(87179), exports);
+__exportStar(__webpack_require__(12971), exports);
 /**
  * Helpful TypeScript types
  */
-__exportStar(__webpack_require__(20002), exports);
+__exportStar(__webpack_require__(79671), exports);
 /**
  * Export ethjs-util methods
  */
-var internal_1 = __webpack_require__(66277);
+var internal_1 = __webpack_require__(46482);
 Object.defineProperty(exports, "isHexPrefixed", ({ enumerable: true, get: function () { return internal_1.isHexPrefixed; } }));
 Object.defineProperty(exports, "stripHexPrefix", ({ enumerable: true, get: function () { return internal_1.stripHexPrefix; } }));
 Object.defineProperty(exports, "padToEven", ({ enumerable: true, get: function () { return internal_1.padToEven; } }));
@@ -7011,7 +7046,7 @@ Object.defineProperty(exports, "isHexString", ({ enumerable: true, get: function
 
 /***/ }),
 
-/***/ 66277:
+/***/ 46482:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
@@ -7049,7 +7084,7 @@ exports.isHexString = exports.getKeys = exports.fromAscii = exports.fromUtf8 = e
  */
 function isHexPrefixed(str) {
     if (typeof str !== 'string') {
-        throw new Error("[isHexPrefixed] input must be type 'string', received type " + typeof str);
+        throw new Error("[isHexPrefixed] input must be type 'string', received type ".concat(typeof str));
     }
     return str[0] === '0' && str[1] === 'x';
 }
@@ -7061,7 +7096,7 @@ exports.isHexPrefixed = isHexPrefixed;
  */
 var stripHexPrefix = function (str) {
     if (typeof str !== 'string')
-        throw new Error("[stripHexPrefix] input must be type 'string', received " + typeof str);
+        throw new Error("[stripHexPrefix] input must be type 'string', received ".concat(typeof str));
     return isHexPrefixed(str) ? str.slice(2) : str;
 };
 exports.stripHexPrefix = stripHexPrefix;
@@ -7073,10 +7108,10 @@ exports.stripHexPrefix = stripHexPrefix;
 function padToEven(value) {
     var a = value;
     if (typeof a !== 'string') {
-        throw new Error("[padToEven] value must be type 'string', received " + typeof a);
+        throw new Error("[padToEven] value must be type 'string', received ".concat(typeof a));
     }
     if (a.length % 2)
-        a = "0" + a;
+        a = "0".concat(a);
     return a;
 }
 exports.padToEven = padToEven;
@@ -7087,7 +7122,7 @@ exports.padToEven = padToEven;
  */
 function getBinarySize(str) {
     if (typeof str !== 'string') {
-        throw new Error("[getBinarySize] method requires input type 'string', recieved " + typeof str);
+        throw new Error("[getBinarySize] method requires input type 'string', recieved ".concat(typeof str));
     }
     return Buffer.byteLength(str, 'utf8');
 }
@@ -7102,10 +7137,10 @@ exports.getBinarySize = getBinarySize;
  */
 function arrayContainsArray(superset, subset, some) {
     if (Array.isArray(superset) !== true) {
-        throw new Error("[arrayContainsArray] method requires input 'superset' to be an array, got type '" + typeof superset + "'");
+        throw new Error("[arrayContainsArray] method requires input 'superset' to be an array, got type '".concat(typeof superset, "'"));
     }
     if (Array.isArray(subset) !== true) {
-        throw new Error("[arrayContainsArray] method requires input 'subset' to be an array, got type '" + typeof subset + "'");
+        throw new Error("[arrayContainsArray] method requires input 'subset' to be an array, got type '".concat(typeof subset, "'"));
     }
     return subset[some ? 'some' : 'every'](function (value) { return superset.indexOf(value) >= 0; });
 }
@@ -7138,7 +7173,7 @@ exports.toAscii = toAscii;
  */
 function fromUtf8(stringValue) {
     var str = Buffer.from(stringValue, 'utf8');
-    return "0x" + padToEven(str.toString('hex')).replace(/^0+|0+$/g, '');
+    return "0x".concat(padToEven(str.toString('hex')).replace(/^0+|0+$/g, ''));
 }
 exports.fromUtf8 = fromUtf8;
 /**
@@ -7153,9 +7188,9 @@ function fromAscii(stringValue) {
     for (var i = 0; i < stringValue.length; i++) {
         var code = stringValue.charCodeAt(i);
         var n = code.toString(16);
-        hex += n.length < 2 ? "0" + n : n;
+        hex += n.length < 2 ? "0".concat(n) : n;
     }
-    return "0x" + hex;
+    return "0x".concat(hex);
 }
 exports.fromAscii = fromAscii;
 /**
@@ -7171,10 +7206,10 @@ exports.fromAscii = fromAscii;
  */
 function getKeys(params, key, allowEmpty) {
     if (!Array.isArray(params)) {
-        throw new Error("[getKeys] method expects input 'params' to be an array, got " + typeof params);
+        throw new Error("[getKeys] method expects input 'params' to be an array, got ".concat(typeof params));
     }
     if (typeof key !== 'string') {
-        throw new Error("[getKeys] method expects input 'key' to be type 'string', got " + typeof params);
+        throw new Error("[getKeys] method expects input 'key' to be type 'string', got ".concat(typeof params));
     }
     var result = [];
     for (var i = 0; i < params.length; i++) {
@@ -7183,7 +7218,7 @@ function getKeys(params, key, allowEmpty) {
             value = '';
         }
         else if (typeof value !== 'string') {
-            throw new Error("invalid abi - expected type 'string', received " + typeof value);
+            throw new Error("invalid abi - expected type 'string', received ".concat(typeof value));
         }
         result.push(value);
     }
@@ -7209,39 +7244,20 @@ exports.isHexString = isHexString;
 
 /***/ }),
 
-/***/ 67832:
+/***/ 18085:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.defineProperties = void 0;
 var assert_1 = __importDefault(__webpack_require__(57579));
-var internal_1 = __webpack_require__(66277);
-var rlp = __importStar(__webpack_require__(11562));
-var bytes_1 = __webpack_require__(35269);
+var internal_1 = __webpack_require__(46482);
+var externals_1 = __webpack_require__(12971);
+var bytes_1 = __webpack_require__(46462);
 /**
  * Defines properties on a `Object`. It make the assumption that underlying data is binary.
  * @param self the `Object` to define properties on
@@ -7262,14 +7278,14 @@ var defineProperties = function (self, fields, data) {
         if (label) {
             var obj_1 = {};
             self._fields.forEach(function (field) {
-                obj_1[field] = "0x" + self[field].toString('hex');
+                obj_1[field] = "0x".concat(self[field].toString('hex'));
             });
             return obj_1;
         }
         return (0, bytes_1.baToJSON)(self.raw);
     };
     self.serialize = function serialize() {
-        return rlp.encode(self.raw);
+        return externals_1.rlp.encode(self.raw);
     };
     fields.forEach(function (field, i) {
         self._fields.push(field.name);
@@ -7283,10 +7299,10 @@ var defineProperties = function (self, fields, data) {
             }
             if (field.allowLess && field.length) {
                 v = (0, bytes_1.unpadBuffer)(v);
-                (0, assert_1.default)(field.length >= v.length, "The field " + field.name + " must not have more " + field.length + " bytes");
+                (0, assert_1.default)(field.length >= v.length, "The field ".concat(field.name, " must not have more ").concat(field.length, " bytes"));
             }
             else if (!(field.allowZero && v.length === 0) && field.length) {
-                (0, assert_1.default)(field.length === v.length, "The field " + field.name + " must have byte length of " + field.length);
+                (0, assert_1.default)(field.length === v.length, "The field ".concat(field.name, " must have byte length of ").concat(field.length));
             }
             self.raw[i] = v;
         }
@@ -7315,7 +7331,7 @@ var defineProperties = function (self, fields, data) {
             data = Buffer.from((0, internal_1.stripHexPrefix)(data), 'hex');
         }
         if (Buffer.isBuffer(data)) {
-            data = rlp.decode(data);
+            data = externals_1.rlp.decode(data);
         }
         if (Array.isArray(data)) {
             if (data.length > self._fields.length) {
@@ -7345,22 +7361,19 @@ exports.defineProperties = defineProperties;
 
 /***/ }),
 
-/***/ 75664:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ 69875:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.hashPersonalMessage = exports.isValidSignature = exports.fromRpcSig = exports.toCompactSig = exports.toRpcSig = exports.ecrecover = exports.ecsign = void 0;
 var secp256k1_1 = __webpack_require__(74665);
-var bn_js_1 = __importDefault(__webpack_require__(35579));
-var bytes_1 = __webpack_require__(35269);
-var hash_1 = __webpack_require__(5781);
-var helpers_1 = __webpack_require__(11366);
-var types_1 = __webpack_require__(20002);
+var externals_1 = __webpack_require__(12971);
+var bytes_1 = __webpack_require__(46462);
+var hash_1 = __webpack_require__(26759);
+var helpers_1 = __webpack_require__(73429);
+var types_1 = __webpack_require__(79671);
 function ecsign(msgHash, privateKey, chainId) {
     var _a = (0, secp256k1_1.ecdsaSign)(msgHash, privateKey), signature = _a.signature, recovery = _a.recid;
     var r = Buffer.from(signature.slice(0, 32));
@@ -7387,7 +7400,7 @@ function calculateSigRecovery(v, chainId) {
     return vBN.sub(chainIdBN.muln(2).addn(35));
 }
 function isValidSigRecovery(recovery) {
-    var rec = new bn_js_1.default(recovery);
+    var rec = new externals_1.BN(recovery);
     return rec.eqn(0) || rec.eqn(1);
 }
 /**
@@ -7476,16 +7489,16 @@ exports.fromRpcSig = fromRpcSig;
  */
 var isValidSignature = function (v, r, s, homesteadOrLater, chainId) {
     if (homesteadOrLater === void 0) { homesteadOrLater = true; }
-    var SECP256K1_N_DIV_2 = new bn_js_1.default('7fffffffffffffffffffffffffffffff5d576e7357a4501ddfe92f46681b20a0', 16);
-    var SECP256K1_N = new bn_js_1.default('fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141', 16);
+    var SECP256K1_N_DIV_2 = new externals_1.BN('7fffffffffffffffffffffffffffffff5d576e7357a4501ddfe92f46681b20a0', 16);
+    var SECP256K1_N = new externals_1.BN('fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141', 16);
     if (r.length !== 32 || s.length !== 32) {
         return false;
     }
     if (!isValidSigRecovery(calculateSigRecovery(v, chainId))) {
         return false;
     }
-    var rBN = new bn_js_1.default(r);
-    var sBN = new bn_js_1.default(s);
+    var rBN = new externals_1.BN(r);
+    var sBN = new externals_1.BN(s);
     if (rBN.isZero() || rBN.gt(SECP256K1_N) || sBN.isZero() || sBN.gt(SECP256K1_N)) {
         return false;
     }
@@ -7503,7 +7516,7 @@ exports.isValidSignature = isValidSignature;
  */
 var hashPersonalMessage = function (message) {
     (0, helpers_1.assertIsBuffer)(message);
-    var prefix = Buffer.from("\u0019Ethereum Signed Message:\n" + message.length, 'utf-8');
+    var prefix = Buffer.from("\u0019Ethereum Signed Message:\n".concat(message.length), 'utf-8');
     return (0, hash_1.keccak)(Buffer.concat([prefix, message]));
 };
 exports.hashPersonalMessage = hashPersonalMessage;
@@ -7511,24 +7524,21 @@ exports.hashPersonalMessage = hashPersonalMessage;
 
 /***/ }),
 
-/***/ 20002:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ 79671:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.toType = exports.TypeOutput = exports.bnToRlp = exports.bnToUnpaddedBuffer = exports.bnToHex = void 0;
-var bn_js_1 = __importDefault(__webpack_require__(35579));
-var internal_1 = __webpack_require__(66277);
-var bytes_1 = __webpack_require__(35269);
+var externals_1 = __webpack_require__(12971);
+var internal_1 = __webpack_require__(46482);
+var bytes_1 = __webpack_require__(46462);
 /**
  * Convert BN to 0x-prefixed hex string.
  */
 function bnToHex(value) {
-    return "0x" + value.toString(16);
+    return "0x".concat(value.toString(16));
 }
 exports.bnToHex = bnToHex;
 /**
@@ -7568,7 +7578,7 @@ function toType(input, outputType) {
         return undefined;
     }
     if (typeof input === 'string' && !(0, internal_1.isHexString)(input)) {
-        throw new Error("A string must be provided with a 0x-prefix, given: " + input);
+        throw new Error("A string must be provided with a 0x-prefix, given: ".concat(input));
     }
     else if (typeof input === 'number' && !Number.isSafeInteger(input)) {
         throw new Error('The provided number is greater than MAX_SAFE_INTEGER (please use an alternative input type)');
@@ -7578,11 +7588,11 @@ function toType(input, outputType) {
         return output;
     }
     else if (outputType === TypeOutput.BN) {
-        return new bn_js_1.default(output);
+        return new externals_1.BN(output);
     }
     else if (outputType === TypeOutput.Number) {
-        var bn = new bn_js_1.default(output);
-        var max = new bn_js_1.default(Number.MAX_SAFE_INTEGER.toString());
+        var bn = new externals_1.BN(output);
+        var max = new externals_1.BN(Number.MAX_SAFE_INTEGER.toString());
         if (bn.gt(max)) {
             throw new Error('The provided number is greater than MAX_SAFE_INTEGER (please use an alternative output type)');
         }
@@ -7590,7 +7600,7 @@ function toType(input, outputType) {
     }
     else {
         // outputType === TypeOutput.PrefixedHexString
-        return "0x" + output.toString('hex');
+        return "0x".concat(output.toString('hex'));
     }
 }
 exports.toType = toType;

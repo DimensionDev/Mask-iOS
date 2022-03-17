@@ -337,16 +337,16 @@ const CurrentVisitingIdentityProviderInstagram = {
     }
 };
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var theme_src = __webpack_require__(92597);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var theme_src = __webpack_require__(43021);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
 // EXTERNAL MODULE: ./src/utils/hooks/useLocationChange.ts
 var useLocationChange = __webpack_require__(75995);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useLocation.js
-var useLocation = __webpack_require__(44719);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useLocation.js
+var useLocation = __webpack_require__(66944);
 ;// CONCATENATED MODULE: ./src/social-network-adaptor/instagram.com/injection/NFT/ProfileNFTAvatar.tsx
 
 
@@ -417,8 +417,8 @@ function NFTAvatarButtonInDialog() {
     }));
 }
 
-// EXTERNAL MODULE: ../plugin-infra/src/index.ts + 1 modules
-var plugin_infra_src = __webpack_require__(27194);
+// EXTERNAL MODULE: ../plugin-infra/src/index.ts
+var plugin_infra_src = __webpack_require__(63151);
 // EXTERNAL MODULE: ./src/components/DataSource/useActivatedUI.ts
 var useActivatedUI = __webpack_require__(41529);
 // EXTERNAL MODULE: ./src/plugins/Avatar/hooks/index.ts + 2 modules
@@ -427,8 +427,8 @@ var hooks = __webpack_require__(45255);
 var constants = __webpack_require__(17692);
 // EXTERNAL MODULE: ./src/plugins/Avatar/messages.ts
 var messages = __webpack_require__(37867);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useWindowSize.js
-var useWindowSize = __webpack_require__(30865);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useWindowSize.js
+var useWindowSize = __webpack_require__(11485);
 // EXTERNAL MODULE: ./src/plugins/Avatar/SNSAdaptor/NFTBadge.tsx + 1 modules
 var NFTBadge = __webpack_require__(42509);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/max.js
@@ -618,12 +618,12 @@ function NFTAvatarInInstagram() {
 var NFTAvatarButton = __webpack_require__(81179);
 // EXTERNAL MODULE: ./src/plugins/Avatar/utils/index.ts
 var Avatar_utils = __webpack_require__(23594);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useMount.js
-var useMount = __webpack_require__(43470);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useMount.js
+var useMount = __webpack_require__(69910);
 // EXTERNAL MODULE: ./src/components/shared/InjectedDialog.tsx + 1 modules
 var InjectedDialog = __webpack_require__(57464);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/DialogContent/DialogContent.js + 1 modules
-var DialogContent = __webpack_require__(35437);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/DialogContent/DialogContent.js + 1 modules
+var DialogContent = __webpack_require__(68681);
 // EXTERNAL MODULE: ./src/plugins/Avatar/SNSAdaptor/NFTAvatar.tsx + 2 modules
 var NFTAvatar = __webpack_require__(26176);
 ;// CONCATENATED MODULE: ./src/social-network-adaptor/instagram.com/injection/NFT/NFTAvatarSettingDialog.tsx
@@ -1175,7 +1175,7 @@ const ui_provider_define = {
 /* harmony import */ var _automation_AttachImageToComposition__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(66991);
 /* harmony import */ var _inject_CommentBox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(86330);
 /* harmony import */ var _inject_Comments__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(84334);
-/* harmony import */ var _inject_PostInspector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(13360);
+/* harmony import */ var _inject_PostInspector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(97770);
 /* harmony import */ var _state_InitFriends__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(50814);
 /* harmony import */ var _state_InitProfiles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(49165);
 /* harmony import */ var _inject_PageInspector__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(89887);
@@ -1203,18 +1203,18 @@ __webpack_require__.d(__webpack_exports__, {
   "S": () => (/* binding */ injectCommentBoxDefaultFactory)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+holoflows-kit@0.9.0-20210902104757-7c3d0d0_webextension-polyfill@0.8.0/node_modules/@dimensiondev/holoflows-kit/umd/index.cjs
 var umd = __webpack_require__(44162);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var src = __webpack_require__(92597);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Box/Box.js
-var Box = __webpack_require__(46486);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/InputBase/InputBase.js
-var InputBase = __webpack_require__(13863);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var src = __webpack_require__(43021);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Box/Box.js
+var Box = __webpack_require__(18287);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/InputBase/InputBase.js
+var InputBase = __webpack_require__(59324);
 // EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
 var utils = __webpack_require__(13573);
 // EXTERNAL MODULE: ./src/social-network/index.ts
@@ -1380,24 +1380,24 @@ __webpack_require__.d(__webpack_exports__, {
   "M": () => (/* binding */ injectPostCommentsDefault)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+holoflows-kit@0.9.0-20210902104757-7c3d0d0_webextension-polyfill@0.8.0/node_modules/@dimensiondev/holoflows-kit/umd/index.cjs
 var umd = __webpack_require__(44162);
 // EXTERNAL MODULE: ./src/utils/shadow-root/renderInShadowRoot.tsx
 var renderInShadowRoot = __webpack_require__(78632);
 // EXTERNAL MODULE: ../shared/src/index.ts
 var src = __webpack_require__(39850);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Chip/Chip.js + 1 modules
-var Chip = __webpack_require__(3073);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var theme_src = __webpack_require__(92597);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.4.4_d06e3de907ce734e888a65f5db1d962e/node_modules/@mui/icons-material/Lock.js
-var Lock = __webpack_require__(43257);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useAsync.js
-var useAsync = __webpack_require__(59302);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Chip/Chip.js + 1 modules
+var Chip = __webpack_require__(70644);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var theme_src = __webpack_require__(43021);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/Lock.js
+var Lock = __webpack_require__(10111);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useAsync.js
+var useAsync = __webpack_require__(1154);
 // EXTERNAL MODULE: ./src/extension/service.ts
 var service = __webpack_require__(45925);
 // EXTERNAL MODULE: ../typed-message/base/index.ts + 27 modules
@@ -1549,10 +1549,10 @@ __webpack_require__.d(__webpack_exports__, {
   "C": () => (/* binding */ injectPostReplacer)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
 // EXTERNAL MODULE: ./src/utils/shadow-root/renderInShadowRoot.tsx
 var renderInShadowRoot = __webpack_require__(78632);
 // EXTERNAL MODULE: ./src/components/DataSource/usePostInfo.ts
@@ -1561,8 +1561,8 @@ var usePostInfo = __webpack_require__(76262);
 var base = __webpack_require__(69492);
 // EXTERNAL MODULE: ../typed-message/dom/index.ts + 15 modules
 var dom = __webpack_require__(68876);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var src = __webpack_require__(92597);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var src = __webpack_require__(43021);
 // EXTERNAL MODULE: ./shared-ui/TypedMessageRender/context.tsx + 2 modules
 var context = __webpack_require__(53763);
 // EXTERNAL MODULE: ./src/components/DataSource/useActivatedUI.ts

@@ -1,7 +1,7 @@
 "use strict";
-(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[2509],{
+(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[7905],{
 
-/***/ 20690:
+/***/ 88233:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -98,40 +98,40 @@ __webpack_require__.d(__webpack_exports__, {
   "default": () => (/* binding */ SNSAdaptor)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
-// EXTERNAL MODULE: ../plugin-infra/src/index.ts + 1 modules
-var src = __webpack_require__(27194);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
+// EXTERNAL MODULE: ../plugin-infra/src/index.ts
+var src = __webpack_require__(63151);
 // EXTERNAL MODULE: ./src/plugins/Furucombo/base.tsx
 var base = __webpack_require__(86365);
 // EXTERNAL MODULE: ../typed-message/base/index.ts + 27 modules
 var typed_message_base = __webpack_require__(69492);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var shared_base_src = __webpack_require__(79226);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var theme_src = __webpack_require__(92597);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var theme_src = __webpack_require__(43021);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useChainId.ts
 var useChainId = __webpack_require__(63541);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/address.ts
 var address = __webpack_require__(66580);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Typography/Typography.js + 1 modules
-var Typography = __webpack_require__(7280);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Card/Card.js + 1 modules
-var Card = __webpack_require__(24515);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/CardContent/CardContent.js + 1 modules
-var CardContent = __webpack_require__(22946);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Tabs/Tabs.js + 4 modules
-var Tabs = __webpack_require__(49103);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Tab/Tab.js
-var Tab = __webpack_require__(80241);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Paper/Paper.js
-var Paper = __webpack_require__(35428);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Typography/Typography.js + 1 modules
+var Typography = __webpack_require__(74491);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Card/Card.js + 1 modules
+var Card = __webpack_require__(22234);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/CardContent/CardContent.js + 1 modules
+var CardContent = __webpack_require__(70008);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Tabs/Tabs.js + 4 modules
+var Tabs = __webpack_require__(40158);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Tab/Tab.js
+var Tab = __webpack_require__(50585);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Paper/Paper.js
+var Paper = __webpack_require__(30592);
 // EXTERNAL MODULE: ./src/utils/i18n-next-ui.ts
 var i18n_next_ui = __webpack_require__(47930);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useAsyncRetry.js
-var useAsyncRetry = __webpack_require__(22572);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useAsyncRetry.js
+var useAsyncRetry = __webpack_require__(28577);
 // EXTERNAL MODULE: ./src/plugins/Furucombo/constants.ts
 var constants = __webpack_require__(31463);
 ;// CONCATENATED MODULE: ./src/plugins/Furucombo/apis/index.ts
@@ -158,8 +158,8 @@ function useFetchPools() {
     );
 }
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/styles/useTheme.js
-var useTheme = __webpack_require__(73322);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/styles/useTheme.js
+var useTheme = __webpack_require__(99537);
 ;// CONCATENATED MODULE: ./src/plugins/Furucombo/utils.ts
 function liquidityFormatter(num, digits) {
     const lookup = [
@@ -207,38 +207,38 @@ function apyFormatter(num) {
 
 // EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
 var utils = __webpack_require__(13573);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Box/Box.js
-var Box = __webpack_require__(46486);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/IconButton/IconButton.js + 1 modules
-var IconButton = __webpack_require__(91497);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/TableContainer/TableContainer.js + 1 modules
-var TableContainer = __webpack_require__(51671);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Table/Table.js + 1 modules
-var Table = __webpack_require__(27238);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/TableHead/TableHead.js + 1 modules
-var TableHead = __webpack_require__(49010);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/TableRow/TableRow.js + 1 modules
-var TableRow = __webpack_require__(65619);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/TableCell/TableCell.js + 1 modules
-var TableCell = __webpack_require__(68119);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/TableSortLabel/TableSortLabel.js + 2 modules
-var TableSortLabel = __webpack_require__(53232);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/TableBody/TableBody.js + 1 modules
-var TableBody = __webpack_require__(1585);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Button/Button.js
-var Button = __webpack_require__(9744);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/TableFooter/TableFooter.js + 1 modules
-var TableFooter = __webpack_require__(2230);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/TablePagination/TablePagination.js + 3 modules
-var TablePagination = __webpack_require__(31438);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.4.4_d06e3de907ce734e888a65f5db1d962e/node_modules/@mui/icons-material/esm/LastPage.js
-var LastPage = __webpack_require__(45153);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.4.4_d06e3de907ce734e888a65f5db1d962e/node_modules/@mui/icons-material/esm/FirstPage.js
-var FirstPage = __webpack_require__(93778);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.4.4_d06e3de907ce734e888a65f5db1d962e/node_modules/@mui/icons-material/esm/KeyboardArrowRight.js
-var KeyboardArrowRight = __webpack_require__(59123);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.4.4_d06e3de907ce734e888a65f5db1d962e/node_modules/@mui/icons-material/esm/KeyboardArrowLeft.js
-var KeyboardArrowLeft = __webpack_require__(33932);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Box/Box.js
+var Box = __webpack_require__(18287);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/IconButton/IconButton.js + 1 modules
+var IconButton = __webpack_require__(87409);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/TableContainer/TableContainer.js + 1 modules
+var TableContainer = __webpack_require__(50328);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Table/Table.js + 1 modules
+var Table = __webpack_require__(21859);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/TableHead/TableHead.js + 1 modules
+var TableHead = __webpack_require__(54311);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/TableRow/TableRow.js + 1 modules
+var TableRow = __webpack_require__(61379);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/TableCell/TableCell.js + 1 modules
+var TableCell = __webpack_require__(72863);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/TableSortLabel/TableSortLabel.js + 2 modules
+var TableSortLabel = __webpack_require__(41708);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/TableBody/TableBody.js + 1 modules
+var TableBody = __webpack_require__(14610);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Button/Button.js
+var Button = __webpack_require__(12463);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/TableFooter/TableFooter.js + 1 modules
+var TableFooter = __webpack_require__(21573);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/TablePagination/TablePagination.js + 3 modules
+var TablePagination = __webpack_require__(41962);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/esm/LastPage.js
+var LastPage = __webpack_require__(25010);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/esm/FirstPage.js
+var FirstPage = __webpack_require__(79660);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/esm/KeyboardArrowRight.js
+var KeyboardArrowRight = __webpack_require__(41124);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/esm/KeyboardArrowLeft.js
+var KeyboardArrowLeft = __webpack_require__(81821);
 ;// CONCATENATED MODULE: ./src/plugins/Furucombo/UI/InvestmentsView.tsx
 
 
@@ -507,16 +507,16 @@ function InvestmentsView(props) {
     }));
 }
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Container/Container.js + 1 modules
-var Container = __webpack_require__(16126);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Grid/Grid.js + 2 modules
-var Grid = __webpack_require__(11061);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Divider/Divider.js
-var Divider = __webpack_require__(47131);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Container/Container.js + 1 modules
+var Container = __webpack_require__(93665);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Grid/Grid.js + 2 modules
+var Grid = __webpack_require__(20333);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Divider/Divider.js
+var Divider = __webpack_require__(11784);
 // EXTERNAL MODULE: ./src/resources/FurucomboIcon.tsx
 var FurucomboIcon = __webpack_require__(12922);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Icon/Icon.js + 1 modules
-var Icon = __webpack_require__(7497);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Icon/Icon.js + 1 modules
+var Icon = __webpack_require__(33719);
 ;// CONCATENATED MODULE: ./src/plugins/Furucombo/resources/QuickIcon.tsx
 
 
@@ -531,8 +531,8 @@ const QuickIcon = (props)=>/*#__PURE__*/ (0,jsx_runtime.jsx)(Icon/* default */.Z
     })
 ;
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/SvgIcon/SvgIcon.js + 1 modules
-var SvgIcon = __webpack_require__(96919);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/SvgIcon/SvgIcon.js + 1 modules
+var SvgIcon = __webpack_require__(77990);
 ;// CONCATENATED MODULE: ./src/plugins/Furucombo/resources/UnknownIcon.tsx
 
 
@@ -898,7 +898,7 @@ function FurucomboView(props) {
 }
 
 // EXTERNAL MODULE: ./src/web3/UI/EthereumChainBoundary.tsx + 1 modules
-var EthereumChainBoundary = __webpack_require__(72148);
+var EthereumChainBoundary = __webpack_require__(13484);
 ;// CONCATENATED MODULE: ./src/plugins/Furucombo/SNSAdaptor/index.tsx
 
 
@@ -952,7 +952,7 @@ function Renderer(props) {
 
 /***/ }),
 
-/***/ 72148:
+/***/ 13484:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 
@@ -961,18 +961,18 @@ __webpack_require__.d(__webpack_exports__, {
   "T": () => (/* binding */ EthereumChainBoundary)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Box/Box.js
-var Box = __webpack_require__(46486);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Typography/Typography.js + 1 modules
-var Typography = __webpack_require__(7280);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var src = __webpack_require__(92597);
-// EXTERNAL MODULE: ../plugin-infra/src/index.ts + 1 modules
-var plugin_infra_src = __webpack_require__(27194);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Box/Box.js
+var Box = __webpack_require__(18287);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Typography/Typography.js + 1 modules
+var Typography = __webpack_require__(74491);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var src = __webpack_require__(43021);
+// EXTERNAL MODULE: ../plugin-infra/src/index.ts
+var plugin_infra_src = __webpack_require__(63151);
 // EXTERNAL MODULE: ../web3-shared/evm/context/index.tsx
 var context = __webpack_require__(67937);
 ;// CONCATENATED MODULE: ../web3-shared/evm/hooks/useAllowTestnet.ts

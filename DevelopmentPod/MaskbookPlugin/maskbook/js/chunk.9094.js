@@ -364,12 +364,12 @@ __webpack_require__.d(__webpack_exports__, {
   "K": () => (/* reexport */ getFungibleAssets)
 });
 
-// EXTERNAL MODULE: ../plugin-infra/src/index.ts + 1 modules
-var src = __webpack_require__(27194);
+// EXTERNAL MODULE: ../plugin-infra/src/index.ts
+var src = __webpack_require__(63151);
 // EXTERNAL MODULE: ../web3-shared/flow/index.ts + 8 modules
 var flow = __webpack_require__(12084);
-// EXTERNAL MODULE: ../web3-providers/src/index.ts
-var web3_providers_src = __webpack_require__(24524);
+// EXTERNAL MODULE: ../web3-providers/src/index.ts + 2 modules
+var web3_providers_src = __webpack_require__(54492);
 // EXTERNAL MODULE: ../plugins/Flow/src/helpers/index.ts + 2 modules
 var helpers = __webpack_require__(45096);
 // EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
@@ -475,8 +475,8 @@ function formatAddress(address, size = 0) {
     return `${address.substr(0, 2 + size)}...${address.substr(-size)}`;
 }
 
-// EXTERNAL MODULE: ../plugin-infra/src/index.ts + 1 modules
-var src = __webpack_require__(27194);
+// EXTERNAL MODULE: ../plugin-infra/src/index.ts
+var src = __webpack_require__(63151);
 // EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
 var base_src = __webpack_require__(15091);
 ;// CONCATENATED MODULE: ../plugins/Flow/src/helpers/token.ts
@@ -607,8 +607,8 @@ function resolveBlockLinkOnExplorer(chainId, blockNumber) {
     return '';
 }
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
 ;// CONCATENATED MODULE: ../web3-shared/flow/hooks/useFCL.ts
 
 

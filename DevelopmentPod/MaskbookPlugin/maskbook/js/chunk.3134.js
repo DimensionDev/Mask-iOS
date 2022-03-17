@@ -7,12 +7,12 @@
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "u": () => (/* binding */ LoadingPlaceholder)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(76342);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
 /* harmony import */ var _masknet_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(16787);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(7280);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(74491);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(13573);
-/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(92597);
+/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(43021);
 
 
 
@@ -63,10 +63,10 @@ const LoadingPlaceholder = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.m
 /* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(39850);
 /* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(79226);
 /* harmony import */ var _settings_settings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(21202);
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(22572);
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(28577);
 /* harmony import */ var _service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(45925);
 /* harmony import */ var lodash_unified__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(29730);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(76342);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(63423);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(13573);
 
 
@@ -113,12 +113,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(76342);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
 /* harmony import */ var _components_LoadingPlaceholder__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(75677);
 /* harmony import */ var _hooks_usePersonaContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(66707);
 /* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(79226);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(22749);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(92186);
 
 
 
@@ -133,31 +133,28 @@ const PersonaRename = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.lazy)(
 );
 const PersonaSignRequest = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.lazy)(()=>__webpack_require__.e(/* import() */ 265).then(__webpack_require__.bind(__webpack_require__, 80265))
 );
+const r = (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_4__/* .relativeRouteOf */ .zD)(_masknet_shared_base__WEBPACK_IMPORTED_MODULE_4__/* .PopupRoutes.Personas */ .mZ.Personas);
 const Persona = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.memo)(()=>{
     return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react__WEBPACK_IMPORTED_MODULE_1__.Suspense, {
         fallback: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components_LoadingPlaceholder__WEBPACK_IMPORTED_MODULE_2__/* .LoadingPlaceholder */ .u, {}),
         children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_hooks_usePersonaContext__WEBPACK_IMPORTED_MODULE_3__/* .PersonaContext.Provider */ .m.Provider, {
-            children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__/* .Switch */ .rs, {
+            children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__/* .Routes */ .Z5, {
                 children: [
                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__/* .Route */ .AW, {
-                        path: _masknet_shared_base__WEBPACK_IMPORTED_MODULE_4__/* .PopupRoutes.Personas */ .mZ.Personas,
-                        exact: true,
-                        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Home, {})
+                        path: r(_masknet_shared_base__WEBPACK_IMPORTED_MODULE_4__/* .PopupRoutes.Logout */ .mZ.Logout),
+                        element: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Logout, {})
                     }),
                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__/* .Route */ .AW, {
-                        path: _masknet_shared_base__WEBPACK_IMPORTED_MODULE_4__/* .PopupRoutes.Logout */ .mZ.Logout,
-                        exact: true,
-                        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Logout, {})
+                        path: r(_masknet_shared_base__WEBPACK_IMPORTED_MODULE_4__/* .PopupRoutes.PersonaRename */ .mZ.PersonaRename),
+                        element: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(PersonaRename, {})
                     }),
                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__/* .Route */ .AW, {
-                        path: _masknet_shared_base__WEBPACK_IMPORTED_MODULE_4__/* .PopupRoutes.PersonaRename */ .mZ.PersonaRename,
-                        exact: true,
-                        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(PersonaRename, {})
+                        path: r(_masknet_shared_base__WEBPACK_IMPORTED_MODULE_4__/* .PopupRoutes.PersonaSignRequest */ .mZ.PersonaSignRequest),
+                        element: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(PersonaSignRequest, {})
                     }),
                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__/* .Route */ .AW, {
-                        path: _masknet_shared_base__WEBPACK_IMPORTED_MODULE_4__/* .PopupRoutes.PersonaSignRequest */ .mZ.PersonaSignRequest,
-                        exact: true,
-                        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(PersonaSignRequest, {})
+                        path: "*",
+                        element: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Home, {})
                     })
                 ]
             })

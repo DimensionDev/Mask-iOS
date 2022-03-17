@@ -1,13 +1,13 @@
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[3693],{
 
-/***/ 40460:
+/***/ 74833:
 /***/ (function(__unused_webpack_module, exports) {
 
 /// <reference types="./full.d.ts" />
 (function (global, factory) {
      true ? factory(exports) :
     0;
-}(this, (function (exports) { 'use strict';
+})(this, (function (exports) { 'use strict';
 
     class CustomError extends Error {
         constructor( name, message,  code,  stack) {
@@ -607,7 +607,8 @@
                 }
             } catch (e) {
                 if (log_localError) console_error(e, data, result);
-                return ErrorResponseParseError(e, mapError || defaultErrorMapper(e && e.stack))
+                // todo: should check before access e.stack
+                return ErrorResponseParseError(e, mapError || defaultErrorMapper(e && (e ).stack))
             }
         };
         const rawMessageSender = async (res) => {
@@ -954,12 +955,12 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 
 
 /***/ }),
 
-/***/ 72406:
+/***/ 30858:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -991,7 +992,7 @@ class WorkerChannel {
 
 /***/ }),
 
-/***/ 51754:
+/***/ 45824:
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -1006,7 +1007,7 @@ class r extends Error{constructor(r,e,t,n){super(e),this.name=r,this.code=t,this
 
 /***/ }),
 
-/***/ 73302:
+/***/ 19245:
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -1615,7 +1616,8 @@ function AsyncCall(
             }
         } catch (e) {
             if (log_localError) console_error(e, data, result);
-            return ErrorResponseParseError(e, mapError || defaultErrorMapper(e && e.stack))
+            // todo: should check before access e.stack
+            return ErrorResponseParseError(e, mapError || defaultErrorMapper(e && (e ).stack))
         }
     };
     const rawMessageSender = async (res) => {

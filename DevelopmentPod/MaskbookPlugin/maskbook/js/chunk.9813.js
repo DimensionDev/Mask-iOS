@@ -30,7 +30,6 @@ const facebookShared = {
         ,
         isValidUsername: (v)=>!!(0,_utils_parse_username__WEBPACK_IMPORTED_MODULE_1__/* .isValidFacebookUsername */ .mt)(v)
         ,
-        publicKeyEncoding: undefined,
         textPayloadPostProcessor: undefined,
         getPostURL,
         getShareLinkURL (message) {
@@ -549,10 +548,10 @@ const myUsernameLiveSelectorMobile = new umd.LiveSelector().querySelector('#book
 var InitFriends = __webpack_require__(50814);
 // EXTERNAL MODULE: ./src/social-network/defaults/state/InitProfiles.ts
 var InitProfiles = __webpack_require__(49165);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
 // EXTERNAL MODULE: ./src/utils/shadow-root/renderInShadowRoot.tsx
 var renderInShadowRoot = __webpack_require__(78632);
 // EXTERNAL MODULE: ./src/components/CompositionDialog/Composition.tsx + 15 modules
@@ -561,8 +560,8 @@ var Composition = __webpack_require__(71244);
 var PostDialogHint = __webpack_require__(91968);
 // EXTERNAL MODULE: ./src/utils/watcher.ts
 var utils_watcher = __webpack_require__(84749);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var theme_src = __webpack_require__(92597);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var theme_src = __webpack_require__(43021);
 ;// CONCATENATED MODULE: ./src/social-network-adaptor/facebook.com/injection/Composition.tsx
 
 
@@ -723,8 +722,8 @@ async function pasteToCommentBoxFacebook(encryptedComment, current, dom) {
 
 // EXTERNAL MODULE: ./src/social-network/defaults/inject/CommentBox.tsx + 1 modules
 var CommentBox = __webpack_require__(86330);
-// EXTERNAL MODULE: ./src/social-network/defaults/inject/PostInspector.tsx + 16 modules
-var PostInspector = __webpack_require__(13360);
+// EXTERNAL MODULE: ./src/social-network/defaults/inject/PostInspector.tsx + 15 modules
+var PostInspector = __webpack_require__(97770);
 // EXTERNAL MODULE: ./shared/index.ts
 var shared_0 = __webpack_require__(70609);
 ;// CONCATENATED MODULE: ./src/social-network-adaptor/facebook.com/injection/PostInspector.tsx
@@ -976,10 +975,10 @@ var AttachImageToComposition = __webpack_require__(66991);
 var PageInspector = __webpack_require__(89887);
 // EXTERNAL MODULE: ./src/social-network/defaults/inject/StartSetupGuide.tsx + 7 modules
 var StartSetupGuide = __webpack_require__(72048);
-// EXTERNAL MODULE: ../encryption/src/index.ts + 22 modules
-var encryption_src = __webpack_require__(96663);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/styles/createMuiStrictModeTheme.js
-var createMuiStrictModeTheme = __webpack_require__(58727);
+// EXTERNAL MODULE: ../encryption/src/index.ts + 24 modules
+var encryption_src = __webpack_require__(10491);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/styles/createMuiStrictModeTheme.js
+var createMuiStrictModeTheme = __webpack_require__(7744);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/immer@9.0.12/node_modules/immer/dist/immer.esm.js
 var immer_esm = __webpack_require__(60232);
 // EXTERNAL MODULE: ../shared/src/index.ts
@@ -1122,22 +1121,20 @@ function useThemeFacebookVariant(baseTheme) {
     ]);
 }
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/styles/styled.js
-var styled = __webpack_require__(8571);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/ListItemButton/ListItemButton.js
-var ListItemButton = __webpack_require__(58364);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Typography/Typography.js + 1 modules
-var Typography = __webpack_require__(7280);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/ListItemIcon/ListItemIcon.js
-var ListItemIcon = __webpack_require__(13970);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/useMediaQuery/useMediaQuery.js
-var useMediaQuery = __webpack_require__(19063);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/styles/styled.js
+var styled = __webpack_require__(68435);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/ListItemButton/ListItemButton.js
+var ListItemButton = __webpack_require__(31262);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Typography/Typography.js + 1 modules
+var Typography = __webpack_require__(74491);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/ListItemIcon/ListItemIcon.js
+var ListItemIcon = __webpack_require__(46565);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/useMediaQuery/useMediaQuery.js
+var useMediaQuery = __webpack_require__(90171);
 // EXTERNAL MODULE: ./src/components/InjectedComponents/ToolboxUnstyled.tsx + 1 modules
 var ToolboxUnstyled = __webpack_require__(19462);
 ;// CONCATENATED MODULE: ./src/social-network-adaptor/facebook.com/injection/ToolbarUI.tsx
 
-// see https://github.com/import-js/eslint-plugin-import/issues/2288
-// eslint-disable-next-line import/no-deprecated
 
 
 const fbBreakPoint = 700 /** px */ ;
@@ -1161,8 +1158,6 @@ const Icon = (0,styled/* default */.ZP)(ListItemIcon/* default */.Z)`
     }
 `;
 function ToolboxAtFacebook() {
-    // see https://github.com/import-js/eslint-plugin-import/issues/2288
-    // eslint-disable-next-line import/no-deprecated
     const isSmall = (0,useMediaQuery/* default */.Z)(`(max-height: ${fbBreakPoint}px)`);
     return(/*#__PURE__*/ (0,jsx_runtime.jsx)(ToolboxUnstyled/* ToolboxHintUnstyled */.z, {
         iconSize: isSmall ? 24 : 32,
@@ -1340,14 +1335,14 @@ function NFTAvatarListInFaceBookMobile() {
 var max = __webpack_require__(77218);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/pickBy.js
 var pickBy = __webpack_require__(74258);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useLocation.js
-var useLocation = __webpack_require__(44719);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useWindowSize.js
-var useWindowSize = __webpack_require__(30865);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useAsync.js
-var useAsync = __webpack_require__(59302);
-// EXTERNAL MODULE: ../plugin-infra/src/index.ts + 1 modules
-var plugin_infra_src = __webpack_require__(27194);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useLocation.js
+var useLocation = __webpack_require__(66944);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useWindowSize.js
+var useWindowSize = __webpack_require__(11485);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useAsync.js
+var useAsync = __webpack_require__(1154);
+// EXTERNAL MODULE: ../plugin-infra/src/index.ts
+var plugin_infra_src = __webpack_require__(63151);
 // EXTERNAL MODULE: ./src/plugins/Avatar/messages.ts
 var Avatar_messages = __webpack_require__(37867);
 // EXTERNAL MODULE: ./src/plugins/Avatar/hooks/index.ts + 2 modules
@@ -1760,8 +1755,8 @@ function OpenNFTAvatarEditProfileButtonInFaceBook() {
 
 // EXTERNAL MODULE: ./src/components/InjectedComponents/ProfileTab.tsx
 var ProfileTab = __webpack_require__(3925);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/utils/debounce.js
-var debounce = __webpack_require__(4045);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/utils/debounce.js
+var debounce = __webpack_require__(2772);
 ;// CONCATENATED MODULE: ./src/social-network-adaptor/facebook.com/injection/ProfileTab.tsx
 
 
@@ -1968,8 +1963,8 @@ function ProfileTabContentAtFacebook() {
     }));
 }
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Link/Link.js + 1 modules
-var Link = __webpack_require__(98294);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Link/Link.js + 1 modules
+var Link = __webpack_require__(86377);
 // EXTERNAL MODULE: ./shared-ui/TypedMessageRender/Components/Text.tsx
 var Components_Text = __webpack_require__(69973);
 ;// CONCATENATED MODULE: ./src/social-network-adaptor/facebook.com/customization/render-fragments.tsx
@@ -2271,18 +2266,18 @@ __webpack_require__.d(__webpack_exports__, {
   "S": () => (/* binding */ injectCommentBoxDefaultFactory)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+holoflows-kit@0.9.0-20210902104757-7c3d0d0_webextension-polyfill@0.8.0/node_modules/@dimensiondev/holoflows-kit/umd/index.cjs
 var umd = __webpack_require__(44162);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var src = __webpack_require__(92597);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Box/Box.js
-var Box = __webpack_require__(46486);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/InputBase/InputBase.js
-var InputBase = __webpack_require__(13863);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var src = __webpack_require__(43021);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Box/Box.js
+var Box = __webpack_require__(18287);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/InputBase/InputBase.js
+var InputBase = __webpack_require__(59324);
 // EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
 var utils = __webpack_require__(13573);
 // EXTERNAL MODULE: ./src/social-network/index.ts
@@ -2448,24 +2443,24 @@ __webpack_require__.d(__webpack_exports__, {
   "M": () => (/* binding */ injectPostCommentsDefault)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+holoflows-kit@0.9.0-20210902104757-7c3d0d0_webextension-polyfill@0.8.0/node_modules/@dimensiondev/holoflows-kit/umd/index.cjs
 var umd = __webpack_require__(44162);
 // EXTERNAL MODULE: ./src/utils/shadow-root/renderInShadowRoot.tsx
 var renderInShadowRoot = __webpack_require__(78632);
 // EXTERNAL MODULE: ../shared/src/index.ts
 var src = __webpack_require__(39850);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Chip/Chip.js + 1 modules
-var Chip = __webpack_require__(3073);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var theme_src = __webpack_require__(92597);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.4.4_d06e3de907ce734e888a65f5db1d962e/node_modules/@mui/icons-material/Lock.js
-var Lock = __webpack_require__(43257);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useAsync.js
-var useAsync = __webpack_require__(59302);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Chip/Chip.js + 1 modules
+var Chip = __webpack_require__(70644);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var theme_src = __webpack_require__(43021);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/Lock.js
+var Lock = __webpack_require__(10111);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useAsync.js
+var useAsync = __webpack_require__(1154);
 // EXTERNAL MODULE: ./src/extension/service.ts
 var service = __webpack_require__(45925);
 // EXTERNAL MODULE: ../typed-message/base/index.ts + 27 modules

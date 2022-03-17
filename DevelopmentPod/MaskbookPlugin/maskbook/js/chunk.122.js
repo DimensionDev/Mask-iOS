@@ -1,7 +1,7 @@
 "use strict";
-(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[2548],{
+(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[122],{
 
-/***/ 2548:
+/***/ 40122:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -33,16 +33,52 @@ var post = __webpack_require__(32849);
 var social_network_worker = __webpack_require__(44840);
 // EXTERNAL MODULE: ./src/extension/background-script/CryptoServices/cryptoProviderTable.ts
 var cryptoProviderTable = __webpack_require__(18465);
-// EXTERNAL MODULE: ./src/extension/background-script/CryptoServices/verifyOthersProve.ts
-var verifyOthersProve = __webpack_require__(21300);
+// EXTERNAL MODULE: ./src/social-network/utils/text-payload-worker.ts
+var text_payload_worker = __webpack_require__(88925);
+// EXTERNAL MODULE: ./background/database/persona/helper.ts
+var helper = __webpack_require__(56935);
+;// CONCATENATED MODULE: ./src/extension/background-script/CryptoServices/verifyOthersProve.ts
+
+
+
+
+async function verifyOthersProve(bio, others) {
+    var ref, ref1;
+    const compressedX = typeof bio === 'string' ? (await (0,text_payload_worker/* decodePublicKeyWorker */.IC)(others.network))(bio) : [
+        bio.raw
+    ];
+    if (!compressedX) return false;
+    const publicKey = compressedX.map((x)=>{
+        try {
+            return (0,src/* decompressSecp256k1Key */.qX)(x);
+        } catch  {
+            return null;
+        }
+    }).filter((x)=>x
+    )[0];
+    if (!publicKey) return false;
+    // TODO: use json schema / other ways to verify the JWK
+    // or
+    // throw new Error(i18n.t('service_key_parse_failed'))
+    // if privateKey, we should possibly not recreate it
+    const hasPrivate = ((ref = await (0,database/* queryPersonaRecord */.yQ)((0,src/* ECKeyIdentifierFromJsonWebKey */.CH)(publicKey))) === null || ref === void 0 ? void 0 : ref.privateKey) || ((ref1 = await (0,database/* queryPersonaRecord */.yQ)(others)) === null || ref1 === void 0 ? void 0 : ref1.privateKey);
+    if (!hasPrivate) await (0,helper/* createProfileWithPersona */.lr)(others, {
+        connectionConfirmState: 'pending'
+    }, {
+        publicKey
+    });
+    // TODO: unhandled case: if the profile is connected but a different key.
+    return true;
+}
+
 // EXTERNAL MODULE: ./src/crypto/crypto-alpha-38.ts
 var crypto_alpha_38 = __webpack_require__(41022);
 // EXTERNAL MODULE: ./src/utils/constants.ts
 var constants = __webpack_require__(29941);
 // EXTERNAL MODULE: ./src/utils/type-transform/asyncIteratorHelpers.ts
 var asyncIteratorHelpers = __webpack_require__(3266);
-// EXTERNAL MODULE: ../encryption/src/index.ts + 22 modules
-var encryption_src = __webpack_require__(96663);
+// EXTERNAL MODULE: ../encryption/src/index.ts + 24 modules
+var encryption_src = __webpack_require__(10491);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/json-stable-stringify@1.0.1/node_modules/json-stable-stringify/index.js
 var json_stable_stringify = __webpack_require__(92304);
 var json_stable_stringify_default = /*#__PURE__*/__webpack_require__.n(json_stable_stringify);
@@ -50,8 +86,6 @@ var json_stable_stringify_default = /*#__PURE__*/__webpack_require__.n(json_stab
 var messages = __webpack_require__(2214);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/ts-results@3.3.0/node_modules/ts-results/esm/index.js
 var ts_results_esm = __webpack_require__(79594);
-// EXTERNAL MODULE: ./src/social-network/utils/text-payload-worker.ts
-var text_payload_worker = __webpack_require__(88925);
 // EXTERNAL MODULE: ./src/extension/background-script/CryptoServices/utils.ts
 var utils = __webpack_require__(97535);
 // EXTERNAL MODULE: ./background/network/gun/encryption/queryPostKey.ts
@@ -182,7 +216,7 @@ function makeError(error, internal = false) {
         }
         // ? If the author's key is in the payload, store it.
         if (data.version === -38 && data.authorPublicKey && !author.isUnknown) {
-            await (0,verifyOthersProve/* verifyOthersProve */.f)({
+            await verifyOthersProve({
                 raw: data.authorPublicKey
             }, author).catch(console.error);
         }
@@ -336,7 +370,7 @@ function makeError(error, internal = false) {
 async function* decryptFromImageUrlWithProgress_raw(url, author, authorNetworkHint, whoAmI, discoverURL) {
     if (successDecryptionCache.has(url)) return successDecryptionCache.get(url);
     yield makeProgress('decode_post', true);
-    const post = await (0,encryption_src/* steganographyDecodeImageUrl */.Xo)(url, {
+    const post = await (0,encryption_src/* steganographyDecodeImage */.oX)(url, {
         pass: author.toText(),
         downloadImage: utils/* steganographyDownloadImage */.V
     });

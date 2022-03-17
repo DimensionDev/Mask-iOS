@@ -1,7 +1,7 @@
 "use strict";
-(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[6859],{
+(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[4222],{
 
-/***/ 20690:
+/***/ 88233:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -93,7 +93,7 @@ function getNormalizedScrollLeft(element, direction) {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "G": () => (/* binding */ NFTRedPacketIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -563,7 +563,7 @@ const NFTRedPacketIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIcon */
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "t": () => (/* binding */ RedPacketIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -662,7 +662,7 @@ class iOSWebkitChannel {
 /* harmony export */   "_": () => (/* binding */ hasNativeAPI)
 /* harmony export */ });
 /* unused harmony export sharedNativeAPI */
-/* harmony import */ var async_call_rpc_full__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(73302);
+/* harmony import */ var async_call_rpc_full__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19245);
 /* harmony import */ var _iOS_channel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2045);
 
 
@@ -710,7 +710,7 @@ if (true) {
 /* harmony export */   "oQ": () => (/* reexport safe */ _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__.oQ)
 /* harmony export */ });
 /* harmony import */ var _social_network__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(61751);
-/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(27194);
+/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63151);
 
 
 
@@ -738,14 +738,14 @@ function usePostClaimedAuthor() {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (/* binding */ AbstractTab)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(92597);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(43021);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(83849);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(35428);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(49103);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(80241);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(46486);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(30592);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(40158);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(50585);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(18287);
 
 
 
@@ -837,9 +837,9 @@ function AbstractTab(props) {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "B": () => (/* binding */ StyledLinearProgress)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(59837);
-/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(92597);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(87799);
+/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(43021);
 
 
 
@@ -910,10 +910,10 @@ __webpack_require__.d(__webpack_exports__, {
   "default": () => (/* binding */ SNSAdaptor)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../plugin-infra/src/index.ts + 1 modules
-var src = __webpack_require__(27194);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../plugin-infra/src/index.ts
+var src = __webpack_require__(63151);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useERC20TokenDetailed.ts + 2 modules
 var useERC20TokenDetailed = __webpack_require__(14754);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/chainDetailed.ts
@@ -928,12 +928,12 @@ var base = __webpack_require__(43938);
 var constants = __webpack_require__(29286);
 // EXTERNAL MODULE: ./src/plugins/RedPacket/SNSAdaptor/helpers.ts + 2 modules
 var helpers = __webpack_require__(1487);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/DialogContent/DialogContent.js + 1 modules
-var DialogContent = __webpack_require__(35437);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var theme_src = __webpack_require__(92597);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/DialogContent/DialogContent.js + 1 modules
+var DialogContent = __webpack_require__(68681);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var theme_src = __webpack_require__(43021);
 // EXTERNAL MODULE: ../shared/src/index.ts
 var shared_src = __webpack_require__(39850);
 // EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
@@ -970,8 +970,8 @@ var messages = __webpack_require__(13760);
 var useChainId = __webpack_require__(63541);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useAccount.ts
 var useAccount = __webpack_require__(98086);
-// EXTERNAL MODULE: ../web3-shared/evm/constants/index.ts + 26 modules
-var evm_constants = __webpack_require__(92211);
+// EXTERNAL MODULE: ../web3-shared/evm/constants/constants.ts + 26 modules
+var constants_constants = __webpack_require__(24403);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useNativeTokenDetailed.ts
 var useNativeTokenDetailed = __webpack_require__(80955);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useFungibleTokenBalance.ts
@@ -980,16 +980,16 @@ var useFungibleTokenBalance = __webpack_require__(42624);
 var base_src = __webpack_require__(15091);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/omit.js + 3 modules
 var omit = __webpack_require__(96596);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/FormControl/FormControl.js + 1 modules
-var FormControl = __webpack_require__(97648);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/InputLabel/InputLabel.js + 1 modules
-var InputLabel = __webpack_require__(3372);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Select/Select.js + 3 modules
-var Select = __webpack_require__(90930);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/MenuItem/MenuItem.js + 1 modules
-var MenuItem = __webpack_require__(88624);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/TextField/TextField.js + 2 modules
-var TextField = __webpack_require__(67182);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/FormControl/FormControl.js + 1 modules
+var FormControl = __webpack_require__(14561);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/InputLabel/InputLabel.js + 1 modules
+var InputLabel = __webpack_require__(4983);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Select/Select.js + 3 modules
+var Select = __webpack_require__(5630);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/MenuItem/MenuItem.js + 1 modules
+var MenuItem = __webpack_require__(56561);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/TextField/TextField.js + 2 modules
+var TextField = __webpack_require__(15672);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/bignumber.js@9.0.2/node_modules/bignumber.js/bignumber.js
 var bignumber = __webpack_require__(42263);
 var bignumber_default = /*#__PURE__*/__webpack_require__.n(bignumber);
@@ -1082,7 +1082,7 @@ function RedPacketERC20Form(props) {
     // context
     const account = (0,useAccount/* useAccount */.m)();
     const chainId = (0,useChainId/* useChainId */.xx)();
-    const { HAPPY_RED_PACKET_ADDRESS_V4  } = (0,evm_constants/* useRedPacketConstants */.AA)();
+    const { HAPPY_RED_PACKET_ADDRESS_V4  } = (0,constants_constants/* useRedPacketConstants */.AA)();
     // #region select token
     const { value: nativeTokenDetailed  } = (0,useNativeTokenDetailed/* useNativeTokenDetailed */.J)();
     const [token = nativeTokenDetailed, setToken] = (0,react.useState)(origin === null || origin === void 0 ? void 0 : origin.token);
@@ -1328,23 +1328,23 @@ function RedPacketERC20Form(props) {
     }));
 }
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Box/Box.js
-var Box = __webpack_require__(46486);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/CircularProgress/CircularProgress.js + 1 modules
-var CircularProgress = __webpack_require__(55673);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Typography/Typography.js + 1 modules
-var Typography = __webpack_require__(7280);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/List/List.js + 1 modules
-var List = __webpack_require__(59216);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/ListItem/ListItem.js + 2 modules
-var ListItem = __webpack_require__(73268);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Box/Box.js
+var Box = __webpack_require__(18287);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/CircularProgress/CircularProgress.js + 1 modules
+var CircularProgress = __webpack_require__(83634);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Typography/Typography.js + 1 modules
+var Typography = __webpack_require__(74491);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/List/List.js + 1 modules
+var List = __webpack_require__(66407);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/ListItem/ListItem.js + 2 modules
+var ListItem = __webpack_require__(66552);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/classnames@2.3.1/node_modules/classnames/index.js
 var classnames = __webpack_require__(83849);
 var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
 // EXTERNAL MODULE: ./src/web3/UI/ERC721ContractSelectPanel.tsx + 1 modules
 var ERC721ContractSelectPanel = __webpack_require__(9414);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useAsyncRetry.js
-var useAsyncRetry = __webpack_require__(22572);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useAsyncRetry.js
+var useAsyncRetry = __webpack_require__(28577);
 // EXTERNAL MODULE: ../web3-shared/evm/contracts/useERC721TokenContract.ts
 var useERC721TokenContract = __webpack_require__(21532);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/call.ts
@@ -1456,10 +1456,10 @@ var useTransactionState = __webpack_require__(15030);
 
 // EXTERNAL MODULE: ../web3-shared/evm/pipes/index.ts
 var pipes = __webpack_require__(83468);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.4.4_d06e3de907ce734e888a65f5db1d962e/node_modules/@mui/icons-material/OpenInNew.js
-var OpenInNew = __webpack_require__(81953);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Link/Link.js + 1 modules
-var Link = __webpack_require__(98294);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/OpenInNew.js
+var OpenInNew = __webpack_require__(86167);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Link/Link.js + 1 modules
+var Link = __webpack_require__(86377);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/wallet.ts@1.0.1/node_modules/wallet.ts/dist/index.js
 var dist = __webpack_require__(99674);
 ;// CONCATENATED MODULE: ./src/web3/UI/EthereumERC721TokenApprovedBoundary.tsx
@@ -1616,16 +1616,16 @@ function EthereumERC721TokenApprovedBoundary(props) {
     }));
 }
 
-// EXTERNAL MODULE: ../web3-shared/evm/hooks/useERC721TokenDetailedOwnerList.ts
-var useERC721TokenDetailedOwnerList = __webpack_require__(62043);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.4.4_d06e3de907ce734e888a65f5db1d962e/node_modules/@mui/icons-material/Check.js
-var Check = __webpack_require__(61544);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.4.4_d06e3de907ce734e888a65f5db1d962e/node_modules/@mui/icons-material/Close.js
-var Close = __webpack_require__(33312);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.4.4_d06e3de907ce734e888a65f5db1d962e/node_modules/@mui/icons-material/AddCircleOutline.js
-var AddCircleOutline = __webpack_require__(40778);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/InputBase/InputBase.js
-var InputBase = __webpack_require__(13863);
+// EXTERNAL MODULE: ../web3-providers/src/index.ts + 2 modules
+var web3_providers_src = __webpack_require__(54492);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/Check.js
+var Check = __webpack_require__(17005);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/Close.js
+var Close = __webpack_require__(41457);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/AddCircleOutline.js
+var AddCircleOutline = __webpack_require__(63672);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/InputBase/InputBase.js
+var InputBase = __webpack_require__(59324);
 ;// CONCATENATED MODULE: ./src/plugins/RedPacket/SNSAdaptor/RedpacketMessagePanel.tsx
 
 
@@ -1699,20 +1699,18 @@ var InjectedDialog = __webpack_require__(57464);
 var useERC721TokenDetailedCallback = __webpack_require__(8503);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/address.ts
 var address = __webpack_require__(66580);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Paper/Paper.js
-var Paper = __webpack_require__(35428);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Button/Button.js
-var Button = __webpack_require__(9744);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.4.4_d06e3de907ce734e888a65f5db1d962e/node_modules/@mui/icons-material/QuestionMark.js
-var QuestionMark = __webpack_require__(96611);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Paper/Paper.js
+var Paper = __webpack_require__(30592);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Button/Button.js
+var Button = __webpack_require__(12463);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/QuestionMark.js
+var QuestionMark = __webpack_require__(64787);
 // EXTERNAL MODULE: ../icons/general/Search.tsx
 var Search = __webpack_require__(1325);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-i18next@11.15.5_07b14a436152a0046ed0bd90fadfd5f7/node_modules/react-i18next/dist/es/Trans.js
-var Trans = __webpack_require__(76529);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useUpdate.js
-var useUpdate = __webpack_require__(54692);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/uniqBy.js
-var uniqBy = __webpack_require__(18443);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-i18next@11.15.6_2537b8183b5267e659a67a26d5d4f10f/node_modules/react-i18next/dist/es/Trans.js
+var Trans = __webpack_require__(92452);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useUpdate.js
+var useUpdate = __webpack_require__(52781);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/findLastIndex.js
 var findLastIndex = __webpack_require__(86049);
 ;// CONCATENATED MODULE: ./src/plugins/RedPacket/SNSAdaptor/SelectNftTokenDialog.tsx
@@ -1737,7 +1735,7 @@ const SelectNftTokenDialog_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme
             minHeight: 380
         },
         dialogContentFixedHeight: {
-            height: 600
+            height: 610
         },
         tokenBox: {
             background: theme.palette.background.default,
@@ -2000,6 +1998,9 @@ const SelectNftTokenDialog_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center'
+        },
+        assetImgWrapper: {
+            maxHeight: 155
         }
     })
 );
@@ -2015,25 +2016,17 @@ function SelectNftTokenDialog(props) {
     const [tokenIdListInput, setTokenIdListInput] = (0,react.useState)('');
     const [tokenIdFilterList, setTokenIdFilterList] = (0,react.useState)([]);
     const [nonExistedTokenIdList, setNonExistedTokenIdList] = (0,react.useState)([]);
-    const maxSelectShares = Math.min(constants/* NFT_RED_PACKET_MAX_SHARES */.I0, tokenDetailedOwnerList.length);
     const isSelectSharesExceed = (tokenDetailedOwnerList.length === 0 ? constants/* NFT_RED_PACKET_MAX_SHARES */.I0 - 1 : constants/* NFT_RED_PACKET_MAX_SHARES */.I0) < tokenDetailedSelectedList.length;
     const { classes  } = SelectNftTokenDialog_useStyles({
         isSelectSharesExceed
     });
-    const selectAll = maxSelectShares === tokenDetailedSelectedList.length;
+    const [selectAll, setSelectAll] = (0,react.useState)(false);
     const selectAllHandler = (0,react.useCallback)(()=>{
-        setTokenDetailedSelectedList(tokenIdFilterList.length === 0 ? [] : selectAll ? tokenDetailedSelectedList.filter((t)=>!tokenIdFilterList.includes(t.tokenId)
-        ) : tokenDetailedSelectedList);
-        if (!selectAll) {
-            const newlyAdded = tokenDetailedOwnerList.filter((t)=>tokenIdFilterList.length === 0 || tokenIdFilterList.includes(t.tokenId)
-            ).slice(0, maxSelectShares);
-            setTokenDetailedSelectedList((0,uniqBy/* default */.Z)(newlyAdded.concat(tokenDetailedSelectedList), 'tokenId'));
-        }
+        setTokenDetailedSelectedList(selectAll ? [] : tokenDetailedOwnerList);
+        setSelectAll(!selectAll);
     }, [
         selectAll,
-        maxSelectShares,
-        tokenIdFilterList,
-        tokenDetailedSelectedList
+        tokenDetailedOwnerList
     ]);
     (0,react.useEffect)(()=>{
         setTokenDetailed(undefined);
@@ -2223,7 +2216,8 @@ function SelectNftTokenDialog(props) {
                                     tokenId: tokenId,
                                     classes: {
                                         loadingFailImage: classes.loadingFailImage,
-                                        iframe: classes.iframe
+                                        iframe: classes.iframe,
+                                        imgWrapper: classes.assetImgWrapper
                                     }
                                 }),
                                 /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
@@ -2253,7 +2247,9 @@ function SelectNftTokenDialog(props) {
                                 /*#__PURE__*/ (0,jsx_runtime.jsx)(theme_src/* ShadowRootTooltip */.p_, {
                                     title: /*#__PURE__*/ (0,jsx_runtime.jsx)(Typography/* default */.Z, {
                                         className: classes.tooltipText,
-                                        children: t1('plugin_red_packet_nft_max_shares', {
+                                        children: tokenDetailedSelectedList.length > constants/* NFT_RED_PACKET_MAX_SHARES */.I0 ? t1('plugin_red_packet_nft_max_shares_tip', {
+                                            amount: constants/* NFT_RED_PACKET_MAX_SHARES */.I0
+                                        }) : t1('plugin_red_packet_nft_max_shares', {
                                             amount: constants/* NFT_RED_PACKET_MAX_SHARES */.I0
                                         })
                                     }),
@@ -2439,7 +2435,9 @@ function SelectNftTokenDialog(props) {
                                 /*#__PURE__*/ (0,jsx_runtime.jsx)(theme_src/* ShadowRootTooltip */.p_, {
                                     title: /*#__PURE__*/ (0,jsx_runtime.jsx)(Typography/* default */.Z, {
                                         className: classes.tooltipText,
-                                        children: t1('plugin_red_packet_nft_max_shares', {
+                                        children: tokenDetailedSelectedList.length > constants/* NFT_RED_PACKET_MAX_SHARES */.I0 ? t1('plugin_red_packet_nft_max_shares_tip', {
+                                            amount: constants/* NFT_RED_PACKET_MAX_SHARES */.I0
+                                        }) : t1('plugin_red_packet_nft_max_shares', {
                                             amount: constants/* NFT_RED_PACKET_MAX_SHARES */.I0
                                         })
                                     }),
@@ -2490,13 +2488,15 @@ function NFTCard(props) {
         className: classes.selectWrapper,
         children: [
             /*#__PURE__*/ (0,jsx_runtime.jsx)(shared_src/* NFTCardStyledAssetPlayer */.yC, {
+                url: token.info.mediaUrl,
                 contractAddress: token.contractDetailed.address,
                 tokenId: token.tokenId,
                 renderOrder: renderOrder,
                 chainId: token.contractDetailed.chainId,
                 classes: {
                     loadingFailImage: classes.loadingFailImage,
-                    iframe: classes.iframe
+                    iframe: classes.iframe,
+                    imgWrapper: classes.assetImgWrapper
                 }
             }),
             /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
@@ -2523,10 +2523,10 @@ function NFTCard(props) {
 var useWallet = __webpack_require__(51596);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useWeb3.ts + 1 modules
 var useWeb3 = __webpack_require__(90495);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Grid/Grid.js + 2 modules
-var Grid = __webpack_require__(11061);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.4.4_d06e3de907ce734e888a65f5db1d962e/node_modules/@mui/icons-material/Launch.js
-var Launch = __webpack_require__(4600);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Grid/Grid.js + 2 modules
+var Grid = __webpack_require__(20333);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/Launch.js
+var Launch = __webpack_require__(3949);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/web3-utils@1.5.2/node_modules/web3-utils/lib/index.js
 var lib = __webpack_require__(83317);
 var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
@@ -2538,7 +2538,7 @@ var useContract = __webpack_require__(42340);
 
 
 function useNftRedPacketContract() {
-    const { RED_PACKET_NFT_ADDRESS  } = (0,evm_constants/* useNftRedPacketConstants */.uq)();
+    const { RED_PACKET_NFT_ADDRESS  } = (0,constants_constants/* useNftRedPacketConstants */.uq)();
     const contract = (0,useContract/* useContract */.cq)(RED_PACKET_NFT_ADDRESS, NftRedPacket_namespaceObject);
     return contract;
 }
@@ -3120,6 +3120,7 @@ function RedpacketNftConfirmDialog_NFTCard(props) {
 
 
 
+
 const RedPacketERC721Form_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>{
     return {
         root: {
@@ -3195,7 +3196,8 @@ const RedPacketERC721Form_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)
             cursor: 'pointer',
             alignItems: 'center',
             background: `${theme.palette.background.default} !important`,
-            justifyContent: 'center'
+            justifyContent: 'center',
+            border: `1px solid ${theme.palette.divider}`
         },
         addIcon: {
             color: '#AFC3E1'
@@ -3270,7 +3272,10 @@ const RedPacketERC721Form_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)
         },
         approveAllTip: {
             color: '#FF5F5F',
-            margin: '0px 4px 24px 4px'
+            margin: '16px 4px 24px 4px'
+        },
+        unapprovedTip: {
+            color: theme.palette.grey[500]
         },
         disabledSelector: {
             opacity: 0.5,
@@ -3281,6 +3286,9 @@ const RedPacketERC721Form_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)
         },
         iframe: {
             minHeight: 147
+        },
+        assetImgWrapper: {
+            maxHeight: 155
         }
     };
 });
@@ -3295,9 +3303,11 @@ function RedPacketERC721Form(props) {
     const account = (0,useAccount/* useAccount */.m)();
     const chainId = (0,useChainId/* useChainId */.xx)();
     const [contract, setContract] = (0,react.useState)();
-    const [existTokenDetailedList, setExistTokenDetailedList] = (0,react.useState)([]);
+    const [manualSelectedTokenDetailedList, setExistTokenDetailedList] = (0,react.useState)([]);
+    const [onceAllSelectedTokenDetailedList, setAllTokenDetailedList] = (0,react.useState)([]);
+    const tokenDetailedList = selectOption === NFTSelectOption.Partial ? manualSelectedTokenDetailedList : onceAllSelectedTokenDetailedList;
     const [message, setMessage] = (0,react.useState)('Best Wishes!');
-    const { asyncRetry: { loading: loadingOwnerList  } , tokenDetailedOwnerList: _tokenDetailedOwnerList = [] , clearTokenDetailedOwnerList ,  } = (0,useERC721TokenDetailedOwnerList/* useERC721TokenDetailedOwnerList */.t)(contract, account);
+    const { asyncRetry: { loading: loadingOwnerList  } , tokenDetailedOwnerList: _tokenDetailedOwnerList = [] , clearTokenDetailedOwnerList ,  } = (0,web3_providers_src/* useERC721TokenDetailedOwnerList */.t9)(contract, account);
     const tokenDetailedOwnerList = _tokenDetailedOwnerList.map((v, index)=>({
             ...v,
             index
@@ -3343,13 +3353,13 @@ function RedPacketERC721Form(props) {
     }, [
         chainId
     ]);
-    const { RED_PACKET_NFT_ADDRESS  } = (0,evm_constants/* useNftRedPacketConstants */.uq)();
+    const { RED_PACKET_NFT_ADDRESS  } = (0,constants_constants/* useNftRedPacketConstants */.uq)();
     const validationMessage = (0,react.useMemo)(()=>{
         if (!balance) return t1('plugin_red_packet_erc721_insufficient_balance');
-        if (existTokenDetailedList.length === 0) return t1('plugin_wallet_select_a_token');
+        if (tokenDetailedList.length === 0) return t1('plugin_wallet_select_a_token');
         return '';
     }, [
-        existTokenDetailedList.length,
+        tokenDetailedList.length,
         balance
     ]);
     return(/*#__PURE__*/ (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
@@ -3372,7 +3382,7 @@ function RedPacketERC721Form(props) {
                                 className: classnames_default()(classes.optionLeft, classes.option, tokenDetailedOwnerList.length === 0 ? classes.disabledSelector : null),
                                 onClick: ()=>{
                                     setSelectOption(NFTSelectOption.All);
-                                    setExistTokenDetailedList(tokenDetailedOwnerList.slice(0, maxSelectShares));
+                                    setAllTokenDetailedList(tokenDetailedOwnerList.slice(0, maxSelectShares));
                                 },
                                 children: [
                                     /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
@@ -3391,10 +3401,8 @@ function RedPacketERC721Form(props) {
                             }),
                             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                                 className: classes.option,
-                                onClick: ()=>{
-                                    setSelectOption(NFTSelectOption.Partial);
-                                    setExistTokenDetailedList([]);
-                                },
+                                onClick: ()=>setSelectOption(NFTSelectOption.Partial)
+                                ,
                                 children: [
                                     /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
                                         className: classnames_default()(classes.checkIconWrapper, selectOption === NFTSelectOption.Partial ? classes.checked : ''),
@@ -3410,12 +3418,12 @@ function RedPacketERC721Form(props) {
                             })
                         ]
                     }) : null,
-                    contract && balance && selectOption === NFTSelectOption.Partial && !loadingOwnerList ? /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                    contract && balance && !loadingOwnerList ? /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
                         className: classes.tokenSelectorParent,
                         children: /*#__PURE__*/ (0,jsx_runtime.jsxs)(List/* default */.Z, {
                             className: classes.tokenSelector,
                             children: [
-                                existTokenDetailedList.map((value, i)=>/*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                tokenDetailedList.map((value, i)=>/*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
                                         children: /*#__PURE__*/ (0,jsx_runtime.jsx)(RedPacketERC721Form_NFTCard, {
                                             token: value,
                                             removeToken: removeToken,
@@ -3443,9 +3451,17 @@ function RedPacketERC721Form(props) {
                             message: message
                         })
                     }),
-                    contract && balance && !loadingOwnerList ? /*#__PURE__*/ (0,jsx_runtime.jsx)(Typography/* default */.Z, {
-                        className: classes.approveAllTip,
-                        children: t1('plugin_red_packet_nft_approve_all_tip')
+                    contract && balance && !loadingOwnerList ? /*#__PURE__*/ (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
+                        children: [
+                            /*#__PURE__*/ (0,jsx_runtime.jsx)(Typography/* default */.Z, {
+                                className: classes.unapprovedTip,
+                                children: t1('plugin_red_packet_nft_unapproved_tip')
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime.jsx)(Typography/* default */.Z, {
+                                className: classes.approveAllTip,
+                                children: t1('plugin_red_packet_nft_approve_all_tip')
+                            })
+                        ]
                     }) : null,
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(EthereumWalletConnectedBoundary/* EthereumWalletConnectedBoundary */.Y, {
                         children: /*#__PURE__*/ (0,jsx_runtime.jsx)(EthereumERC721TokenApprovedBoundary, {
@@ -3471,7 +3487,7 @@ function RedPacketERC721Form(props) {
                 onClose: ()=>setOpen(false)
                 ,
                 contract: contract,
-                existTokenDetailedList: existTokenDetailedList,
+                existTokenDetailedList: tokenDetailedList,
                 setExistTokenDetailedList: setExistTokenDetailedList,
                 tokenDetailedOwnerList: tokenDetailedOwnerList,
                 loadingOwnerList: loadingOwnerList
@@ -3480,7 +3496,7 @@ function RedPacketERC721Form(props) {
                 message: message,
                 contract: contract,
                 open: openConfirmDialog,
-                tokenList: existTokenDetailedList,
+                tokenList: tokenDetailedList,
                 onBack: ()=>setOpenConfirmDialog(false)
                 ,
                 onClose: onClose
@@ -3498,12 +3514,14 @@ function RedPacketERC721Form_NFTCard(props) {
             /*#__PURE__*/ (0,jsx_runtime.jsx)(shared_src/* NFTCardStyledAssetPlayer */.yC, {
                 contractAddress: token.contractDetailed.address,
                 chainId: token.contractDetailed.chainId,
+                url: token.info.mediaUrl || token.info.imageURL,
                 tokenId: token.tokenId,
                 renderOrder: renderOrder,
                 setERC721TokenName: setName,
                 classes: {
                     loadingFailImage: classes.loadingFailImage,
-                    iframe: classes.iframe
+                    iframe: classes.iframe,
+                    imgWrapper: classes.assetImgWrapper
                 }
             }),
             /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
@@ -3658,10 +3676,10 @@ function RedPacketCreateNew(props) {
     }));
 }
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/useMediaQuery/useMediaQuery.js
-var useMediaQuery = __webpack_require__(19063);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Popper/Popper.js
-var Popper = __webpack_require__(90153);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/useMediaQuery/useMediaQuery.js
+var useMediaQuery = __webpack_require__(90171);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Popper/Popper.js
+var Popper = __webpack_require__(24190);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useFungibleTokenDetailed.ts
 var useFungibleTokenDetailed = __webpack_require__(34082);
 // EXTERNAL MODULE: ./shared-ui/locales_legacy/index.ts + 3 modules
@@ -3699,7 +3717,7 @@ var HappyRedPacketV4 = __webpack_require__(5261);
 
 
 function useRedPacketContract(version) {
-    const { HAPPY_RED_PACKET_ADDRESS_V1: addressV1 , HAPPY_RED_PACKET_ADDRESS_V2: addressV2 , HAPPY_RED_PACKET_ADDRESS_V3: addressV3 , HAPPY_RED_PACKET_ADDRESS_V4: addressV4 ,  } = (0,evm_constants/* useRedPacketConstants */.AA)();
+    const { HAPPY_RED_PACKET_ADDRESS_V1: addressV1 , HAPPY_RED_PACKET_ADDRESS_V2: addressV2 , HAPPY_RED_PACKET_ADDRESS_V3: addressV3 , HAPPY_RED_PACKET_ADDRESS_V4: addressV4 ,  } = (0,constants_constants/* useRedPacketConstants */.AA)();
     const v1 = (0,useContract/* useContract */.cq)(addressV1, HappyRedPacketV1_namespaceObject);
     const v2 = (0,useContract/* useContract */.cq)(addressV2, HappyRedPacketV2_namespaceObject);
     const v3 = (0,useContract/* useContract */.cq)(addressV3, HappyRedPacketV3_namespaceObject);
@@ -3866,8 +3884,6 @@ var nextDay = __webpack_require__(16162);
 
 
 
-// see https://github.com/import-js/eslint-plugin-import/issues/2288
-// eslint-disable-next-line import/no-deprecated
 
 
 
@@ -4039,12 +4055,10 @@ function RedPacketInHistoryList(props) {
     const { history , onSelect  } = props;
     const { t  } = (0,utils/* useI18N */.M1)();
     const { classes  } = RedPacketInHistoryList_useStyles();
-    // see https://github.com/import-js/eslint-plugin-import/issues/2288
-    // eslint-disable-next-line import/no-deprecated
     const isSmall = (0,useMediaQuery/* default */.Z)((theme)=>theme.breakpoints.down('sm')
     );
     const { value: availability , computed: { canRefund , canSend , listOfStatus , isPasswordValid  } , retry: revalidateAvailability ,  } = useAvailabilityComputed(account, history);
-    const { NATIVE_TOKEN_ADDRESS  } = (0,evm_constants/* useTokenConstants */.kd)();
+    const { NATIVE_TOKEN_ADDRESS  } = (0,constants_constants/* useTokenConstants */.kd)();
     const [refundState, refundCallback, resetRefundCallback] = useRefundCallback(history.contract_version, account, history.rpid);
     var ref2;
     const tokenAddress = (ref2 = (ref7 = history.token) === null || ref7 === void 0 ? void 0 : ref7.address) !== null && ref2 !== void 0 ? ref2 : history.token_address;
@@ -5205,7 +5219,7 @@ function checkParams(paramsObj, setCreateState) {
 }
 function useCreateParams(redPacketSettings, version, publicKey) {
     const redPacketContract = useRedPacketContract(version);
-    const { NATIVE_TOKEN_ADDRESS  } = (0,evm_constants/* useTokenConstants */.kd)();
+    const { NATIVE_TOKEN_ADDRESS  } = (0,constants_constants/* useTokenConstants */.kd)();
     const account = (0,useAccount/* useAccount */.m)();
     return (0,react.useCallback)(async ()=>{
         var ref;
@@ -5675,7 +5689,7 @@ function RedPacketDialog(props) {
     const chainId = (0,useChainId/* useChainId */.xx)();
     const account = (0,useAccount/* useAccount */.m)();
     const { classes  } = RedPacketDialog_useStyles();
-    const { HAPPY_RED_PACKET_ADDRESS_V4  } = (0,evm_constants/* useRedPacketConstants */.AA)();
+    const { HAPPY_RED_PACKET_ADDRESS_V4  } = (0,constants_constants/* useRedPacketConstants */.AA)();
     const { attachMetadata , dropMetadata  } = (0,src/* useCompositionContext */.Cp)();
     const state = (0,react.useState)(DialogTabs.create);
     const networkType = (0,useNetworkType/* useNetworkType */.b)();
@@ -5823,7 +5837,7 @@ function RedPacketDialog(props) {
         setSettings(val);
     }, []);
     const tokenState = (0,react.useState)(RpTypeTabs.ERC20);
-    const dialogContentHeight = state[0] === DialogTabs.past ? 600 : tokenState[0] === RpTypeTabs.ERC20 ? 350 : 640;
+    const dialogContentHeight = state[0] === DialogTabs.past ? 600 : tokenState[0] === RpTypeTabs.ERC20 ? 350 : 670;
     const tabProps = {
         tabs: [
             {
@@ -5891,14 +5905,14 @@ function RedPacketDialog(props) {
 
 // EXTERNAL MODULE: ./src/components/DataSource/usePostInfo.ts
 var usePostInfo = __webpack_require__(76262);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Card/Card.js + 1 modules
-var Card = __webpack_require__(24515);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Card/Card.js + 1 modules
+var Card = __webpack_require__(22234);
 // EXTERNAL MODULE: ./src/social-network-adaptor/twitter.com/base.ts
 var twitter_com_base = __webpack_require__(74926);
 // EXTERNAL MODULE: ./src/social-network-adaptor/facebook.com/base.ts
 var facebook_com_base = __webpack_require__(40543);
 // EXTERNAL MODULE: ./src/web3/UI/EthereumChainBoundary.tsx + 1 modules
-var EthereumChainBoundary = __webpack_require__(72148);
+var EthereumChainBoundary = __webpack_require__(13484);
 ;// CONCATENATED MODULE: ./src/plugins/RedPacket/SNSAdaptor/hooks/useClaimCallback.ts
 
 
@@ -6192,9 +6206,17 @@ function OperationFooter({ canClaim , canRefund , claimState , refundState , sha
                 children: t('plugin_wallet_invalid_network')
             }));
         }
+        const isLoading = [
+            types/* TransactionStateType.HASH */.n$.HASH,
+            types/* TransactionStateType.WAIT_FOR_CONFIRMING */.n$.WAIT_FOR_CONFIRMING
+        ].includes(claimState.type) || [
+            types/* TransactionStateType.HASH */.n$.HASH,
+            types/* TransactionStateType.WAIT_FOR_CONFIRMING */.n$.WAIT_FOR_CONFIRMING
+        ].includes(refundState.type);
         return(/*#__PURE__*/ (0,jsx_runtime.jsx)(ActionButton/* default */.ZP, {
             fullWidth: true,
-            disabled: claimState.type === types/* TransactionStateType.HASH */.n$.HASH || refundState.type === types/* TransactionStateType.HASH */.n$.HASH,
+            disabled: isLoading,
+            loading: isLoading,
             variant: "contained",
             size: "large",
             onClick: onClaimOrRefund,
@@ -6208,7 +6230,7 @@ function OperationFooter({ canClaim , canRefund , claimState , refundState , sha
         children: /*#__PURE__*/ (0,jsx_runtime.jsxs)(Box/* default */.Z, {
             className: classes.footer,
             children: [
-                /*#__PURE__*/ (0,jsx_runtime.jsx)(ActionButton/* default */.ZP, {
+                canRefund ? null : /*#__PURE__*/ (0,jsx_runtime.jsx)(ActionButton/* default */.ZP, {
                     variant: "contained",
                     fullWidth: true,
                     size: "large",
@@ -6255,7 +6277,7 @@ function RedPacket(props) {
     const networkType = (0,useNetworkType/* useNetworkType */.b)();
     // #region token detailed
     const { value: availability , computed: availabilityComputed , retry: revalidateAvailability ,  } = useAvailabilityComputed(account, payload);
-    const { NATIVE_TOKEN_ADDRESS  } = (0,evm_constants/* useTokenConstants */.kd)();
+    const { NATIVE_TOKEN_ADDRESS  } = (0,constants_constants/* useTokenConstants */.kd)();
     var ref3, ref4, ref5, ref6;
     const { value: tokenDetailed  } = (0,useFungibleTokenDetailed/* useFungibleTokenDetailed */.j)((ref4 = (ref3 = (ref = payload.token) === null || ref === void 0 ? void 0 : ref.type) !== null && ref3 !== void 0 ? ref3 : payload.token_type) !== null && ref4 !== void 0 ? ref4 : (0,address/* isSameAddress */.Wr)(NATIVE_TOKEN_ADDRESS, payload.token_address) ? types/* EthereumTokenType.Native */.Dr.Native : types/* EthereumTokenType.ERC20 */.Dr.ERC20, (ref6 = (ref5 = (ref1 = payload.token) === null || ref1 === void 0 ? void 0 : ref1.address) !== null && ref5 !== void 0 ? ref5 : payload.token_address) !== null && ref6 !== void 0 ? ref6 : '');
     var _token;
@@ -6281,16 +6303,13 @@ function RedPacket(props) {
         if (state.type === types/* TransactionStateType.UNKNOWN */.n$.UNKNOWN) return;
         if (!availability || !token) return;
         if (state.type === types/* TransactionStateType.CONFIRMED */.n$.CONFIRMED) {
-            setTransactionDialog({
+            canClaim && setTransactionDialog({
                 open: true,
                 shareLink: shareLink,
                 state,
-                summary: canClaim ? t('plugin_red_packet_claiming_from', {
+                summary: t('plugin_red_packet_claiming_from', {
                     name: payload.sender.name
-                }) : canRefund ? t('plugin_red_packet_refunding_for', {
-                    balance: (0,formatter/* formatBalance */.az)(availability.balance, token.decimals),
-                    symbol: token.symbol
-                }) : ''
+                })
             });
             resetClaimCallback();
             resetRefundCallback();
@@ -6302,6 +6321,8 @@ function RedPacket(props) {
     ]);
     // #endregion
     const onClaimOrRefund = (0,react.useCallback)(async ()=>{
+        resetClaimCallback();
+        resetRefundCallback();
         if (canClaim) await claimCallback();
         else if (canRefund) await refundCallback();
     }, [
@@ -6459,7 +6480,7 @@ function RedPacket(props) {
                     })
                 ]
             }),
-            listOfStatus.includes(RedPacketStatus.expired) || listOfStatus.includes(RedPacketStatus.empty) ? null : /*#__PURE__*/ (0,jsx_runtime.jsx)(OperationFooter, {
+            listOfStatus.includes(RedPacketStatus.empty) ? null : /*#__PURE__*/ (0,jsx_runtime.jsx)(OperationFooter, {
                 canClaim: canClaim,
                 canRefund: canRefund,
                 claimState: claimState,
@@ -6510,14 +6531,14 @@ function RedPacketInPost(props) {
     }));
 }
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Skeleton/Skeleton.js + 2 modules
-var Skeleton = __webpack_require__(15164);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/CardHeader/CardHeader.js + 1 modules
-var CardHeader = __webpack_require__(41593);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/CardMedia/CardMedia.js + 1 modules
-var CardMedia = __webpack_require__(79108);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/CardContent/CardContent.js + 1 modules
-var CardContent = __webpack_require__(22946);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Skeleton/Skeleton.js + 2 modules
+var Skeleton = __webpack_require__(92093);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/CardHeader/CardHeader.js + 1 modules
+var CardHeader = __webpack_require__(4834);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/CardMedia/CardMedia.js + 1 modules
+var CardMedia = __webpack_require__(62810);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/CardContent/CardContent.js + 1 modules
+var CardContent = __webpack_require__(70008);
 ;// CONCATENATED MODULE: ./src/plugins/RedPacket/SNSAdaptor/hooks/useClaimNftRedpacketCallback.ts
 
 
@@ -6821,6 +6842,10 @@ const RedPacketNft_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
             marginBottom: 16,
             height: '160px !important'
         },
+        imgWrapper: {
+            maxWidth: 180,
+            marginBottom: 10
+        },
         assetPlayerVideoIframe: {
             minWidth: 'fit-content'
         },
@@ -6985,6 +7010,7 @@ function RedPacketNft({ payload  }) {
                                 setSourceType: setSourceType,
                                 classes: {
                                     iframe: classnames_default()(classes.assetPlayerIframe, sourceType === 'video' ? classes.assetPlayerVideoIframe : ''),
+                                    imgWrapper: classes.imgWrapper,
                                     loadingFailImage: classes.loadingFailImage
                                 },
                                 fallbackImage: new URL(/* asset import */ __webpack_require__(59068), __webpack_require__.b)
@@ -7257,6 +7283,7 @@ function ERC20RedpacketBadge(props) {
                 style: badgeSvgIconSize
             }),
             " A Lucky Drop with",
+            ' ',
             (0,formatter/* formatBalance */.az)(payload.total, (ref4 = tokenDetailed === null || tokenDetailed === void 0 ? void 0 : tokenDetailed.decimals) !== null && ref4 !== void 0 ? ref4 : 0),
             " $",
             (ref6 = (ref5 = tokenDetailed === null || tokenDetailed === void 0 ? void 0 : tokenDetailed.symbol) !== null && ref5 !== void 0 ? ref5 : tokenDetailed === null || tokenDetailed === void 0 ? void 0 : tokenDetailed.name) !== null && ref6 !== void 0 ? ref6 : 'Token',
@@ -7277,7 +7304,7 @@ function ERC20RedpacketBadge(props) {
 /* harmony export */   "T": () => (/* binding */ RedPacketRPC)
 /* harmony export */ });
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(29286);
-/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(27194);
+/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63151);
 
 
 if (false) {}
@@ -7333,12 +7360,12 @@ __webpack_require__.d(__webpack_exports__, {
   "Y": () => (/* binding */ EthereumWalletConnectedBoundary)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Grid/Grid.js + 2 modules
-var Grid = __webpack_require__(11061);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var src = __webpack_require__(92597);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Grid/Grid.js + 2 modules
+var Grid = __webpack_require__(20333);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var src = __webpack_require__(43021);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/classnames@2.3.1/node_modules/classnames/index.js
 var classnames = __webpack_require__(83849);
 var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
@@ -7358,8 +7385,8 @@ var useChainId = __webpack_require__(63541);
 var useNativeTokenBalance = __webpack_require__(1347);
 // EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
 var base_src = __webpack_require__(15091);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
 ;// CONCATENATED MODULE: ./src/plugins/Wallet/hooks/useWalletRiskWarningDialog.ts
 
 
@@ -7479,7 +7506,7 @@ function EthereumWalletConnectedBoundary(props) {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "O": () => (/* binding */ useBlockNumber)
 /* harmony export */ });
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(22572);
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(28577);
 /* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63541);
 /* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(90495);
 
@@ -7507,14 +7534,14 @@ function EthereumWalletConnectedBoundary(props) {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "P": () => (/* binding */ useERC721ContractDetailed)
 /* harmony export */ });
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(22572);
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(28577);
 /* harmony import */ var wallet_ts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(99674);
 /* harmony import */ var wallet_ts__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(wallet_ts__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _useChainId__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63541);
 /* harmony import */ var _contracts_useERC721TokenContract__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(21532);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(78842);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(11315);
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(92211);
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(24403);
 
 
 

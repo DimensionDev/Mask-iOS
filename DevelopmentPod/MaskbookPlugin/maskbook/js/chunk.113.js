@@ -11,6 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "createOrUpdatePersonaDB": () => (/* binding */ createOrUpdatePersonaDB),
 /* harmony export */   "createOrUpdateProfileDB": () => (/* binding */ createOrUpdateProfileDB),
 /* harmony export */   "createPersonaDB": () => (/* binding */ createPersonaDB),
+/* harmony export */   "createPersonaDBReadonlyAccess": () => (/* binding */ createPersonaDBReadonlyAccess),
 /* harmony export */   "createProfileDB": () => (/* binding */ createProfileDB),
 /* harmony export */   "createRelationDB": () => (/* binding */ createRelationDB),
 /* harmony export */   "createRelationsTransaction": () => (/* binding */ createRelationsTransaction),
@@ -39,6 +40,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+async function createPersonaDBReadonlyAccess(action) {
+    await action();
+}
 async function consistentPersonaDBWriteAccess(action) {
     await action();
 }

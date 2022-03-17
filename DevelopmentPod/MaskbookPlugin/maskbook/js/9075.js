@@ -458,8 +458,8 @@ const WANNASWAP_BASE_AGAINST_TOKENS = {
 /* harmony export */   "M": () => (/* binding */ useI18N),
 /* harmony export */   "Z": () => (/* binding */ useLanguage)
 /* harmony export */ });
-/* harmony import */ var react_i18next__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(1579);
-/* harmony import */ var react_i18next__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(39465);
+/* harmony import */ var react_i18next__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(13772);
+/* harmony import */ var react_i18next__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(26530);
 /* harmony import */ var _shared_ui_locales_legacy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6900);
 /* harmony import */ var _settings_settings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(21202);
 /* harmony import */ var _masknet_public_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(48476);
@@ -518,7 +518,7 @@ _settings_settings__WEBPACK_IMPORTED_MODULE_1__/* .languageSettings.addListener 
 /* harmony import */ var _shared__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(70609);
 /* harmony import */ var _extension_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(45925);
 /* harmony import */ var _masknet_web3_shared_base__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(15091);
-/* harmony import */ var _masknet_web3_providers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(24524);
+/* harmony import */ var _masknet_web3_providers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(54492);
 /* harmony import */ var _masknet_web3_contracts_abis_ERC721_json__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(78322);
 /* harmony import */ var _masknet_web3_contracts_abis_CryptoPunks_json__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(28053);
 
@@ -697,13 +697,17 @@ function createSubscriptionFromAsync(f, defaultValue, onChange) {
         trigger();
     };
     return {
-        getCurrentValue: ()=>{
+        getCurrentValue: _shared__WEBPACK_IMPORTED_MODULE_4__/* .isAndroidApp */ .S_ ? ()=>state
+         : ()=>{
             if (isLoading) throw init;
             return state;
         },
         subscribe: (sub)=>{
             const a = subscribe(sub);
-            const b = onChange(()=>{
+            const b = onChange(_shared__WEBPACK_IMPORTED_MODULE_4__/* .isAndroidApp */ .S_ ? async ()=>{
+                beats += 1;
+                if (beats === 1) await flush();
+            } : ()=>{
                 beats += 1;
                 if (beats === 1) flush();
             });
@@ -792,7 +796,7 @@ var PopupRoutes;
 /* harmony export */   "n2": () => (/* binding */ mediaViewerUrl)
 /* harmony export */ });
 /* unused harmony export MAX_WALLET_LIMIT */
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _masknet_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5096);
 /* harmony import */ var _masknet_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(22807);
 /* harmony import */ var _masknet_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(37127);
@@ -821,10 +825,10 @@ const MAX_PERSONA_LIMIT = 10;
 /* harmony export */   "H9": () => (/* binding */ useMenu)
 /* harmony export */ });
 /* unused harmony exports useMenuContext, useMenuConfig */
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(76342);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(12571);
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(54692);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(64765);
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(52781);
 
 
 
@@ -1198,7 +1202,7 @@ const getProxyWebsocketInstance = getProxyWebsocketInstanceWrapper();
 /* harmony import */ var web3_utils__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(web3_utils__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _enum__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(88486);
 /* harmony import */ var _assets_chains_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2545);
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(92211);
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(24403);
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(95130);
 
 
@@ -1300,10 +1304,10 @@ const getChainIdFromNetworkType = (0,_enum__WEBPACK_IMPORTED_MODULE_4__/* .creat
 // The value should be same as chain field in packages/web3-shared/evm/assets/chains.json
 const chainNameMap = {
     [_types__WEBPACK_IMPORTED_MODULE_1__/* .NetworkType.Ethereum */ .td.Ethereum]: 'ETH',
-    [_types__WEBPACK_IMPORTED_MODULE_1__/* .NetworkType.Binance */ .td.Binance]: 'BSC',
+    [_types__WEBPACK_IMPORTED_MODULE_1__/* .NetworkType.Binance */ .td.Binance]: 'BNB Chain',
     [_types__WEBPACK_IMPORTED_MODULE_1__/* .NetworkType.Polygon */ .td.Polygon]: 'Polygon',
     [_types__WEBPACK_IMPORTED_MODULE_1__/* .NetworkType.Arbitrum */ .td.Arbitrum]: 'Arbitrum',
-    [_types__WEBPACK_IMPORTED_MODULE_1__/* .NetworkType.xDai */ .td.xDai]: 'xDai',
+    [_types__WEBPACK_IMPORTED_MODULE_1__/* .NetworkType.xDai */ .td.xDai]: 'Gnosis',
     [_types__WEBPACK_IMPORTED_MODULE_1__/* .NetworkType.Celo */ .td.Celo]: 'CELO',
     [_types__WEBPACK_IMPORTED_MODULE_1__/* .NetworkType.Fantom */ .td.Fantom]: 'FTM',
     [_types__WEBPACK_IMPORTED_MODULE_1__/* .NetworkType.Aurora */ .td.Aurora]: 'Aurora',

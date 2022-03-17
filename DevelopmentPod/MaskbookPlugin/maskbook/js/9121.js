@@ -1,10 +1,11 @@
 "use strict";
-(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[9331],{
+(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[9121],{
 
-/***/ 80629:
+/***/ 50023:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/** @license React vundefined
+/**
+ * @license React
  * react-jsx-runtime.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -12,8 +13,8 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-__webpack_require__(52458);var f=__webpack_require__(76342),g=60103;exports.Fragment=60107;if("function"===typeof Symbol&&Symbol.for){var h=Symbol.for;g=h("react.element");exports.Fragment=h("react.fragment")}var m=Object.prototype.hasOwnProperty,n=f.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner,p={key:!0,ref:!0,__self:!0,__source:!0};
-function q(c,a,k){var b,d={},e=null,l=null;void 0!==k&&(e=""+k);void 0!==a.key&&(e=""+a.key);void 0!==a.ref&&(l=a.ref);for(b in a)m.call(a,b)&&!p.hasOwnProperty(b)&&(d[b]=a[b]);if(c&&c.defaultProps)for(b in a=c.defaultProps,a)void 0===d[b]&&(d[b]=a[b]);return{$$typeof:g,type:c,key:e,ref:l,props:d,_owner:n.current}}exports.jsx=q;exports.jsxs=q;
+var f=__webpack_require__(63423),k=Symbol.for("react.element"),l=Symbol.for("react.fragment"),m=Object.prototype.hasOwnProperty,n=f.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner,p={key:!0,ref:!0,__self:!0,__source:!0};
+function q(c,a,g){var b,d={},e=null,h=null;void 0!==g&&(e=""+g);void 0!==a.key&&(e=""+a.key);void 0!==a.ref&&(h=a.ref);for(b in a)m.call(a,b)&&!p.hasOwnProperty(b)&&(d[b]=a[b]);if(c&&c.defaultProps)for(b in a=c.defaultProps,a)void 0===d[b]&&(d[b]=a[b]);return{$$typeof:k,type:c,key:e,ref:h,props:d,_owner:n.current}}exports.Fragment=l;exports.jsx=q;exports.jsxs=q;
 
 
 /***/ }),
@@ -63,10 +64,12 @@ Object.assign(globalThis, {
 /* harmony import */ var _createSettings__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(91296);
 /* harmony import */ var _shared_ui_locales_legacy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6900);
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(13758);
-/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(92597);
+/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(43021);
 /* harmony import */ var _masknet_public_api__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(48476);
 /* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(79226);
 /* harmony import */ var _plugins_EVM_constants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(89664);
+/* harmony import */ var lodash_unified__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(23587);
+
 
 
 
@@ -123,7 +126,7 @@ const sayHelloShowed = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .create
 const dismissPinExtensionTip = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createGlobalSettings */ .TI)('dismissPinExtensionTip', false, {
     primary: ()=>''
 });
-const dismissVerifyNextID =  true ? (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createNetworkSettings */ .Lk)('useless', false) : 0;
+const dismissVerifyNextID = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createNetworkSettings */ .Lk)('dismissVerifyNextID', {}, lodash_unified__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z);
 const bioDescription = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createNetworkSettings */ .Lk)('bioDescription', '');
 const personalHomepage = (0,_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createNetworkSettings */ .Lk)('personalHomepage', '');
 // This is a misuse of concept "NetworkSettings" as "namespaced settings"
@@ -169,7 +172,7 @@ try {
 /* harmony export */   "C": () => (/* binding */ useCompositionContext),
 /* harmony export */   "N": () => (/* binding */ CompositionContext)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
 
 const CompositionContext = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)({
     attachMetadata () {},
@@ -195,8 +198,8 @@ const useCompositionContext = ()=>(0,react__WEBPACK_IMPORTED_MODULE_0__.useConte
 /* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(79226);
 /* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(44162);
 /* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(76342);
-/* harmony import */ var use_subscription__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(47175);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(63423);
+/* harmony import */ var use_subscription__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(85848);
 
 
 
@@ -250,7 +253,7 @@ function usePostInfoSharedPublic() {
 
 /***/ }),
 
-/***/ 99283:
+/***/ 110:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 
@@ -261,8 +264,8 @@ __webpack_require__.d(__webpack_exports__, {
   "Ne": () => (/* reexport */ useAllPluginsWeb3State/* useAllPluginsWeb3State */.N),
   "hn": () => (/* reexport */ useLookupDomain/* useLookupAddress */.h),
   "eS": () => (/* reexport */ usePluginI18NField),
-  "fI": () => (/* reexport */ usePluginWrapper/* usePluginWrapper */.fI),
-  "$q": () => (/* reexport */ useReverseAddress)
+  "fI": () => (/* reexport */ usePluginWrapper/* usePluginWrapper */.f),
+  "$q": () => (/* reexport */ useReverseAddress/* useReverseAddress */.$)
 });
 
 // UNUSED EXPORTS: useActivatedPluginWeb3State, useActivatedPluginWeb3UI
@@ -277,31 +280,12 @@ var useActivatedPluginWeb3State = __webpack_require__(91583);
 var useAllPluginsWeb3State = __webpack_require__(92248);
 // EXTERNAL MODULE: ../plugin-infra/src/hooks/useLookupDomain.ts
 var useLookupDomain = __webpack_require__(99297);
-// EXTERNAL MODULE: ../plugin-infra/src/web3/index.ts
-var web3 = __webpack_require__(27361);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useAsync.js
-var useAsync = __webpack_require__(59302);
-;// CONCATENATED MODULE: ../plugin-infra/src/hooks/useReverseAddress.ts
-
-
-function useReverseAddress(address, pluginId) {
-    const { NameService  } = (0,web3/* useWeb3State */.dM)(pluginId);
-    const chainId = (0,web3/* useChainId */.xx)(pluginId);
-    return (0,useAsync/* default */.Z)(async ()=>{
-        var ref;
-        if (!address) return undefined;
-        return NameService === null || NameService === void 0 ? void 0 : (ref = NameService.reverse) === null || ref === void 0 ? void 0 : ref.call(NameService, address);
-    }, [
-        NameService,
-        address,
-        chainId
-    ]);
-}
-
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-i18next@11.15.5_07b14a436152a0046ed0bd90fadfd5f7/node_modules/react-i18next/dist/es/useTranslation.js
-var useTranslation = __webpack_require__(39465);
+// EXTERNAL MODULE: ../plugin-infra/src/hooks/useReverseAddress.ts
+var useReverseAddress = __webpack_require__(26291);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-i18next@11.15.6_2537b8183b5267e659a67a26d5d4f10f/node_modules/react-i18next/dist/es/useTranslation.js
+var useTranslation = __webpack_require__(26530);
 ;// CONCATENATED MODULE: ../plugin-infra/src/hooks/useI18N.tsx
 
 
@@ -365,17 +349,46 @@ var usePluginWrapper = __webpack_require__(93828);
 
 /***/ }),
 
+/***/ 26291:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "$": () => (/* binding */ useReverseAddress)
+/* harmony export */ });
+/* harmony import */ var _web3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(27361);
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1154);
+
+
+function useReverseAddress(address, pluginId) {
+    const { NameService  } = (0,_web3__WEBPACK_IMPORTED_MODULE_0__/* .useWeb3State */ .dM)(pluginId);
+    const chainId = (0,_web3__WEBPACK_IMPORTED_MODULE_0__/* .useChainId */ .xx)(pluginId);
+    return (0,react_use__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)(async ()=>{
+        var ref;
+        if (!address) return undefined;
+        return NameService === null || NameService === void 0 ? void 0 : (ref = NameService.reverse) === null || ref === void 0 ? void 0 : ref.call(NameService, address);
+    }, [
+        NameService,
+        address,
+        chainId
+    ]);
+}
+
+
+/***/ }),
+
 /***/ 51714:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "E": () => (/* binding */ createInjectHooksRenderer)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(76342);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
 /* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(39850);
-/* harmony import */ var _hooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(99283);
+/* harmony import */ var _hooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(110);
 /* harmony import */ var _hooks_usePluginWrapper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(93828);
+/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(43021);
+
 
 
 
@@ -389,10 +402,10 @@ function createInjectHooksRenderer(usePlugins, pickInjectorHook, PluginWrapperCo
             return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(PluginWrapperComponent, {
                 definition: plugin,
                 ref: setRef,
-                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_hooks_usePluginWrapper__WEBPACK_IMPORTED_MODULE_4__/* .PluginWrapperMethodsContext.Provider */ .yd.Provider, {
-                    value: ref || _hooks_usePluginWrapper__WEBPACK_IMPORTED_MODULE_4__/* .emptyPluginWrapperMethods */ .Nt,
+                children: ref ? /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_hooks_usePluginWrapper__WEBPACK_IMPORTED_MODULE_4__/* .PluginWrapperMethodsContext.Provider */ .y.Provider, {
+                    value: ref,
                     children: element
-                })
+                }) : null
             }));
         }
         return element;
@@ -412,9 +425,12 @@ function createInjectHooksRenderer(usePlugins, pickInjectorHook, PluginWrapperCo
     function PluginsInjectionHookRender(props) {
         const all = usePlugins().filter(pickInjectorHook).map((plugin)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(PropsContext.Provider, {
                 value: props,
-                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(SinglePluginWithinErrorBoundary, {
-                    plugin: plugin
-                }, plugin.ID)
+                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_masknet_theme__WEBPACK_IMPORTED_MODULE_5__/* .ShadowRootIsolation */ .Q, {
+                    "data-plugin": plugin.ID,
+                    children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(SinglePluginWithinErrorBoundary, {
+                        plugin: plugin
+                    })
+                })
             }, plugin.ID)
         );
         return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
@@ -422,9 +438,12 @@ function createInjectHooksRenderer(usePlugins, pickInjectorHook, PluginWrapperCo
         }));
     }
     return(/*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.memo)(function PluginsInjectionHookRenderErrorBoundary(props) {
-        return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_masknet_shared__WEBPACK_IMPORTED_MODULE_2__/* .ErrorBoundary */ .SV, {
-            children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(PluginsInjectionHookRender, {
-                ...props
+        return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+            "data-plugin-render": "",
+            children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_masknet_shared__WEBPACK_IMPORTED_MODULE_2__/* .ErrorBoundary */ .SV, {
+                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(PluginsInjectionHookRender, {
+                    ...props
+                })
             })
         }));
     }));
@@ -460,7 +479,7 @@ function RawHookRender({ UI , data  }) {
         data
     ]);
     return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-        ref: (r)=>ref === r || setRef(r)
+        ref: setRef
     }));
 }
 function isRawInjectHook(x) {
@@ -659,7 +678,7 @@ function useWeb3State(expectedPluginID) {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "F": () => (/* binding */ useRemoteControlledDialog)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
 /* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(32513);
 
 
@@ -720,298 +739,32 @@ function useWeb3State(expectedPluginID) {
 
 /***/ }),
 
-/***/ 7901:
+/***/ 43933:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ad": () => (/* binding */ usePortalShadowRoot),
-/* harmony export */   "d_": () => (/* binding */ setupPortalShadowRoot),
-/* harmony export */   "lr": () => (/* binding */ createShadowRootForwardedComponent),
-/* harmony export */   "vg": () => (/* binding */ createShadowRootForwardedPopperComponent)
+/* harmony export */   "Ii": () => (/* binding */ useCustomSnackbar),
+/* harmony export */   "YO": () => (/* binding */ CustomSnackbarProvider),
+/* harmony export */   "wT": () => (/* reexport safe */ notistack__WEBPACK_IMPORTED_MODULE_3__.wT)
 /* harmony export */ });
-/* unused harmony export NoEffectUsePortalShadowRootContext */
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(76342);
-/* harmony import */ var _ShadowRootStyleProvider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(51079);
-
-
-
-/**
- * ! Do not export !
- *
- * You SHOULD NOT use this in React directly
- */ let mountingPoint;
-let mountingShadowRoot;
-function setupPortalShadowRoot(init, preventEventPropagationList) {
-    if (mountingPoint) return mountingShadowRoot;
-    mountingShadowRoot = document.body.appendChild(document.createElement('div')).attachShadow(init);
-    for (const each of preventEventPropagationList){
-        mountingShadowRoot.addEventListener(each, (e)=>e.stopPropagation()
-        );
-    }
-    mountingPoint = mountingShadowRoot.appendChild(document.createElement('div'));
-    return mountingShadowRoot;
-}
-/** usePortalShadowRoot under this context does not do anything. (And it will return an empty container). */ const NoEffectUsePortalShadowRootContext = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.createContext)(false);
-/**
- * Render to a React Portal in to the page needs this hook. It will provide a wrapped container that provides ShadowRoot isolation and CSS support for it.
- *
- * The return value can only be used once!
- * @param renderer A function that want to use PortalShadowRoot
- * @example
- * const picker = usePortalShadowRoot((container) => (
- *      <DatePicker
- *          DialogProps={{ container }}
- *          PopperProps={{ container }}
- *          value={new Date()}
- *          onChange={() => {}}
- *          renderInput={(props) => <TextField {...props} />}
- *      />
- * ))
- */ function usePortalShadowRoot(renderer) {
-    // we ignore the changes on this property during multiple render
-    // so we can violates the React hooks rule and still be safe.
-    const disabled = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)((0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(NoEffectUsePortalShadowRootContext)).current;
-    if (disabled) return renderer(undefined);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [findMountingShadowRef, setRef] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const doms = useSideEffectRef(()=>{
-        const root = document.createElement('div');
-        const container = root.appendChild(document.createElement('div'));
-        const style = root.appendChild(document.createElement('style'));
-        return {
-            root,
-            container,
-            style
-        };
-    });
-    const { container: container1  } = doms;
-    return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(IsolatedRender, {
-        ...doms,
-        findMountingShadowRef: findMountingShadowRef,
-        children: [
-            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
-                style: {
-                    display: 'none'
-                },
-                ref: (ref)=>findMountingShadowRef !== ref && setRef(ref)
-            }),
-            renderer(container1)
-        ]
-    }));
-}
-const IsolatedRender = ({ container , root , style , children , findMountingShadowRef  })=>{
-    const update = useUpdate();
-    const css = (0,_ShadowRootStyleProvider__WEBPACK_IMPORTED_MODULE_2__/* .useCurrentShadowRootStyles */ .I)(findMountingShadowRef);
-    const containerInUse = container.children.length !== 0;
-    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
-        container.appendChild = bind(container.appendChild, container, update);
-        container.removeChild = bind(container.removeChild, container, update);
-    }, []);
-    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
-        if (!containerInUse) return root.remove();
-        const shadow = PortalShadowRoot();
-        if (root.parentElement === shadow) return;
-        shadow.appendChild(root);
-    }, [
-        containerInUse,
-        root
-    ]);
-    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
-        if (findMountingShadowRef && style.textContent !== css) style.textContent = css;
-    }, [
-        style,
-        css,
-        findMountingShadowRef
-    ]);
-    return children;
-};
-function createShadowRootForwardedComponent(Component) {
-    return(/*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.forwardRef)((props, ref)=>{
-        return usePortalShadowRoot((container)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Component, {
-                container: container,
-                ...props,
-                ref: ref
-            })
-        );
-    }));
-}
-function createShadowRootForwardedPopperComponent(Component) {
-    return(/*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.forwardRef)((props, ref)=>{
-        return usePortalShadowRoot((container)=>{
-            return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Component, {
-                ...props,
-                PopperProps: {
-                    container,
-                    ...props.PopperProps
-                },
-                ref: ref
-            }));
-        });
-    }));
-}
-/**
- * ! Do not export !
- */ function PortalShadowRoot() {
-    if (location.protocol.includes('extension')) return document.body;
-    if (globalThis.location.hostname === 'localhost') return document.body;
-    if (!mountingPoint) throw new TypeError('Please call setupPortalShadowRoot first');
-    return mountingPoint;
-}
-function bind(f, thisArg, hook) {
-    return (...args)=>{
-        try {
-            return f.apply(thisArg, args);
-        } finally{
-            hook();
-        }
-    };
-}
-function useUpdate() {
-    const [, _update] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
-    return ()=>_update((i)=>i + 1
-        )
-    ;
-}
-function useSideEffectRef(f) {
-    const ref = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(undefined);
-    if (!ref.current) ref.current = f();
-    return ref.current;
-}
-
-
-/***/ }),
-
-/***/ 20851:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "dy": () => (/* binding */ ShadowRootMenu),
-/* harmony export */   "p_": () => (/* binding */ ShadowRootTooltip),
-/* harmony export */   "sV": () => (/* binding */ ShadowRootPopper)
-/* harmony export */ });
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8309);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(12571);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(90153);
-/* harmony import */ var _Portal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7901);
-
-
-const ShadowRootTooltip = (0,_Portal__WEBPACK_IMPORTED_MODULE_0__/* .createShadowRootForwardedPopperComponent */ .vg)(_mui_material__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z);
-const ShadowRootMenu = (0,_Portal__WEBPACK_IMPORTED_MODULE_0__/* .createShadowRootForwardedComponent */ .lr)(_mui_material__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z);
-const ShadowRootPopper = (0,_Portal__WEBPACK_IMPORTED_MODULE_0__/* .createShadowRootForwardedComponent */ .lr)(_mui_material__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z);
-
-
-/***/ }),
-
-/***/ 92597:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  "um": () => (/* binding */ Appearance),
-  "E1": () => (/* reexport */ ButtonGroupTab/* ButtonGroupTabList */.E),
-  "US": () => (/* reexport */ ShadowRoot/* CSSVariableInjector */.US),
-  "qA": () => (/* reexport */ CountdownButton/* CountdownButton */.q),
-  "YO": () => (/* reexport */ CustomSnackbarProvider),
-  "yu": () => (/* reexport */ DialogStack/* DialogStackingProvider */.y),
-  "pL": () => (/* reexport */ FolderTabs/* FolderTabPanel */.p),
-  "Jc": () => (/* reexport */ FolderTabs/* FolderTabs */.J),
-  "ZN": () => (/* reexport */ constants/* MaskColorVar */.ZN),
-  "Hr": () => (/* binding */ MaskDarkTheme),
-  "Df": () => (/* reexport */ Dialog/* MaskDialog */.D),
-  "Cp": () => (/* binding */ MaskLightTheme),
-  "b4": () => (/* reexport */ LoadingButton/* MaskLoadingButton */.b),
-  "FU": () => (/* reexport */ TextField/* MaskTextField */.F),
-  "g8": () => (/* reexport */ PhoneNumberField/* PhoneNumberField */.g),
-  "xV": () => (/* reexport */ SearchableList/* SearchableList */.x),
-  "oe": () => (/* reexport */ SendingCodeField/* SendingCodeField */.o),
-  "dy": () => (/* reexport */ ShadowRoot/* ShadowRootMenu */.dy),
-  "sV": () => (/* reexport */ ShadowRoot/* ShadowRootPopper */.sV),
-  "p_": () => (/* reexport */ ShadowRoot/* ShadowRootTooltip */.p_),
-  "wT": () => (/* reexport */ notistack_esm/* SnackbarProvider */.wT),
-  "Dc": () => (/* reexport */ constants/* applyMaskColorVars */.Dc),
-  "zV": () => (/* reexport */ ShadowRoot/* createReactRootShadowedPartial */.zV),
-  "nb": () => (/* reexport */ constants/* getMaskColor */.nb),
-  "F4": () => (/* reexport */ makeStyles/* keyframes */.F),
-  "ZL": () => (/* reexport */ makeStyles/* makeStyles */.Z),
-  "ze": () => (/* reexport */ custom_ui_helper/* mergeClasses */.z),
-  "or": () => (/* reexport */ custom_ui_helper.or),
-  "lu": () => (/* binding */ parseColor),
-  "d_": () => (/* reexport */ ShadowRoot/* setupPortalShadowRoot */.d_),
-  "Ii": () => (/* reexport */ useCustomSnackbar),
-  "tE": () => (/* reexport */ DialogStack/* useDialogStackActor */.t),
-  "ad": () => (/* reexport */ ShadowRoot/* usePortalShadowRoot */.ad),
-  "Bc": () => (/* reexport */ custom_ui_helper/* useStylesExtends */.B),
-  "QO": () => (/* binding */ useSystemPreferencePalette),
-  "YE": () => (/* reexport */ hooks/* useTabs */.Y)
-});
-
-// UNUSED EXPORTS: ButtonTab, CustomSnackbarContent, MaskDialogTitle, MaskSearchableItemInList, NoEffectUsePortalShadowRootContext, createShadowRootForwardedComponent, createShadowRootForwardedPopperComponent, currentSystemPreferencePalette, useCurrentShadowRootStyles, useMaskColor, useMaskDialog, useSnackbar
-
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/styles/createTheme.js + 8 modules
-var createTheme = __webpack_require__(65185);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/useMediaQuery/useMediaQuery.js
-var useMediaQuery = __webpack_require__(19063);
-// EXTERNAL MODULE: ../theme/src/changes.ts
-var changes = __webpack_require__(23344);
-// EXTERNAL MODULE: ../theme/src/component-changes.ts
-var component_changes = __webpack_require__(25146);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/merge.js + 6 modules
-var merge = __webpack_require__(9084);
-// EXTERNAL MODULE: ../theme/src/constants.ts
-var constants = __webpack_require__(5400);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/tinycolor2@1.4.2/node_modules/tinycolor2/tinycolor.js
-var tinycolor = __webpack_require__(32086);
-var tinycolor_default = /*#__PURE__*/__webpack_require__.n(tinycolor);
-// EXTERNAL MODULE: ../theme/src/makeStyles.ts
-var makeStyles = __webpack_require__(61928);
-// EXTERNAL MODULE: ../theme/src/Components/Dialogs/Dialog.tsx
-var Dialog = __webpack_require__(28365);
-// EXTERNAL MODULE: ../theme/src/Components/Dialogs/DialogTitle.tsx
-var DialogTitle = __webpack_require__(74626);
-// EXTERNAL MODULE: ../theme/src/Components/Dialogs/DialogStack.tsx
-var DialogStack = __webpack_require__(45739);
-;// CONCATENATED MODULE: ../theme/src/Components/Dialogs/index.ts
-
-
-
-
-// EXTERNAL MODULE: ../theme/src/Components/ButtonGroupTab/index.ts + 2 modules
-var ButtonGroupTab = __webpack_require__(13726);
-// EXTERNAL MODULE: ../theme/src/Components/FolderTabs/index.tsx
-var FolderTabs = __webpack_require__(94615);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/tss-react@3.4.2_@emotion+react@11.8.1/node_modules/tss-react/index.js
-var tss_react = __webpack_require__(4642);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/notistack@2.0.3_d496b18b49bddf812c1fc8e029edd966/node_modules/notistack/dist/notistack.esm.js
-var notistack_esm = __webpack_require__(65762);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/IconButton/IconButton.js + 1 modules
-var IconButton = __webpack_require__(91497);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Typography/Typography.js + 1 modules
-var Typography = __webpack_require__(7280);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/classnames@2.3.1/node_modules/classnames/index.js
-var classnames = __webpack_require__(83849);
-var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.4.4_d06e3de907ce734e888a65f5db1d962e/node_modules/@mui/icons-material/esm/Close.js
-var Close = __webpack_require__(74060);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.4.4_d06e3de907ce734e888a65f5db1d962e/node_modules/@mui/icons-material/Warning.js
-var Warning = __webpack_require__(66110);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.4.4_d06e3de907ce734e888a65f5db1d962e/node_modules/@mui/icons-material/Info.js
-var Info = __webpack_require__(15043);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.4.4_d06e3de907ce734e888a65f5db1d962e/node_modules/@mui/icons-material/Done.js
-var Done = __webpack_require__(26108);
-// EXTERNAL MODULE: ../icons/general/Risk.tsx
-var Risk = __webpack_require__(26224);
-// EXTERNAL MODULE: ../icons/general/Loading.tsx
-var Loading = __webpack_require__(16787);
-// EXTERNAL MODULE: ../theme/src/UIHelper/custom-ui-helper.tsx
-var custom_ui_helper = __webpack_require__(29025);
-;// CONCATENATED MODULE: ../theme/src/Components/Snackbar/index.tsx
+/* unused harmony export CustomSnackbarContent */
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
+/* harmony import */ var tss_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(45365);
+/* harmony import */ var notistack__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(97126);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(87409);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(74491);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(83849);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _mui_icons_material__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(87857);
+/* harmony import */ var _mui_icons_material_Warning__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(45655);
+/* harmony import */ var _mui_icons_material_Info__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(98318);
+/* harmony import */ var _mui_icons_material_Done__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(71997);
+/* harmony import */ var _masknet_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(26224);
+/* harmony import */ var _masknet_icons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(16787);
+/* harmony import */ var _makeStyles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(61928);
+/* harmony import */ var _UIHelper_custom_ui_helper__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(29025);
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(5400);
 
 
 
@@ -1027,21 +780,21 @@ var custom_ui_helper = __webpack_require__(29025);
 
 
 
-const useStyles = (0,makeStyles/* makeStyles */.Z)()((theme, { isFacebook  }, refs)=>{
+const useStyles = (0,_makeStyles__WEBPACK_IMPORTED_MODULE_5__/* .makeStyles */ .Z)()((theme, { offsetY  }, refs)=>{
     const { palette  } = theme;
     const isDark = palette.mode === 'dark';
-    const spinningAnimationKeyFrames = tss_react/* keyframes */.F4`
+    const spinningAnimationKeyFrames = tss_react__WEBPACK_IMPORTED_MODULE_2__/* .keyframes */ .F4`
 to {
   transform: rotate(360deg)
 }`;
     const title = {
-        color: constants/* MaskColorVar.textPrimary */.ZN.textPrimary,
+        color: _constants__WEBPACK_IMPORTED_MODULE_6__/* .MaskColorVar.textPrimary */ .ZN.textPrimary,
         fontWeight: 400,
         fontSize: 14,
         lineHeight: '20px'
     };
     const message = {
-        color: constants/* MaskColorVar.textSecondary */.ZN.textSecondary,
+        color: _constants__WEBPACK_IMPORTED_MODULE_6__/* .MaskColorVar.textSecondary */ .ZN.textSecondary,
         fontWeight: 400,
         display: 'flex',
         alignItems: 'center',
@@ -1097,8 +850,8 @@ to {
     return {
         root: {
             zIndex: 9999,
-            transform: isFacebook ? 'translateY(80px)' : 'none',
-            color: constants/* MaskColorVar.textLight */.ZN.textLight,
+            transform: typeof offsetY !== undefined ? `translateY(${80}px)` : 'none',
+            color: _constants__WEBPACK_IMPORTED_MODULE_6__/* .MaskColorVar.textLight */ .ZN.textLight,
             pointerEvents: 'inherit'
         },
         content: {
@@ -1108,18 +861,18 @@ to {
             width: 380,
             flexWrap: 'nowrap !important',
             [`&.${success.ref}`]: {
-                background: constants/* MaskColorVar.greenMain */.ZN.greenMain,
-                color: constants/* MaskColorVar.lightestBackground */.ZN.lightestBackground
+                background: _constants__WEBPACK_IMPORTED_MODULE_6__/* .MaskColorVar.greenMain */ .ZN.greenMain,
+                color: _constants__WEBPACK_IMPORTED_MODULE_6__/* .MaskColorVar.lightestBackground */ .ZN.lightestBackground
             },
             [`&.${error.ref}`]: {
-                background: constants/* MaskColorVar.redMain */.ZN.redMain,
-                color: constants/* MaskColorVar.lightestBackground */.ZN.lightestBackground,
+                background: _constants__WEBPACK_IMPORTED_MODULE_6__/* .MaskColorVar.redMain */ .ZN.redMain,
+                color: _constants__WEBPACK_IMPORTED_MODULE_6__/* .MaskColorVar.lightestBackground */ .ZN.lightestBackground,
                 title: {
                     color: 'inherit'
                 }
             },
             [`&.${info.ref}`]: {
-                color: constants/* MaskColorVar.lightestBackground */.ZN.lightestBackground
+                color: _constants__WEBPACK_IMPORTED_MODULE_6__/* .MaskColorVar.lightestBackground */ .ZN.lightestBackground
             },
             [`&.${warning.ref}`]: {
                 color: '#ffffff'
@@ -1157,75 +910,73 @@ to {
     };
 });
 const IconMap = {
-    default: /*#__PURE__*/ (0,jsx_runtime.jsx)(Info/* default */.Z, {
+    default: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_icons_material_Info__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z, {
         color: "inherit"
     }),
-    success: /*#__PURE__*/ (0,jsx_runtime.jsx)(Done/* default */.Z, {
+    success: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_icons_material_Done__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z, {
         color: "inherit"
     }),
-    error: /*#__PURE__*/ (0,jsx_runtime.jsx)(Risk/* RiskIcon */.w, {}),
-    warning: /*#__PURE__*/ (0,jsx_runtime.jsx)(Warning/* default */.Z, {
+    error: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_masknet_icons__WEBPACK_IMPORTED_MODULE_9__/* .RiskIcon */ .w, {}),
+    warning: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_icons_material_Warning__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z, {
         color: "inherit"
     }),
-    info: /*#__PURE__*/ (0,jsx_runtime.jsx)(Info/* default */.Z, {
+    info: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_icons_material_Info__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z, {
         color: "inherit"
     })
 };
-const CustomSnackbarContent = /*#__PURE__*/ (0,react.forwardRef)((props, ref)=>{
-    var _isFacebook;
-    const classes = (0,custom_ui_helper/* useStylesExtends */.B)(useStyles({
-        isFacebook: (_isFacebook = props.isFacebook) !== null && _isFacebook !== void 0 ? _isFacebook : false
+const CustomSnackbarContent = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.forwardRef)((props, ref)=>{
+    const classes = (0,_UIHelper_custom_ui_helper__WEBPACK_IMPORTED_MODULE_11__/* .useStylesExtends */ .B)(useStyles({
+        offsetY: props.offsetY
     }), props);
-    const snackbar = (0,notistack_esm/* useSnackbar */.Ds)();
-    const loadingIcon = /*#__PURE__*/ (0,jsx_runtime.jsx)(Loading/* LoadingIcon */.H, {
+    const snackbar = (0,notistack__WEBPACK_IMPORTED_MODULE_3__/* .useSnackbar */ .Ds)();
+    const loadingIcon = /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_masknet_icons__WEBPACK_IMPORTED_MODULE_12__/* .LoadingIcon */ .H, {
         color: "inherit",
         className: classes.spinning
     });
     const variantIcon = props.processing ? loadingIcon : props.variant ? IconMap[props.variant] : null;
-    let renderedAction = /*#__PURE__*/ (0,jsx_runtime.jsx)(IconButton/* default */.Z, {
+    let renderedAction = /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z, {
         className: classes.closeButton,
         onClick: ()=>snackbar.closeSnackbar(props.id)
         ,
-        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Close/* default */.Z, {})
+        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_icons_material__WEBPACK_IMPORTED_MODULE_14__/* ["default"] */ .Z, {})
     });
     if (props.action) {
         renderedAction = typeof props.action === 'function' ? props.action(props.id) : props.action;
     }
-    return(/*#__PURE__*/ (0,jsx_runtime.jsxs)(notistack_esm/* SnackbarContent */.No, {
+    return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(notistack__WEBPACK_IMPORTED_MODULE_3__/* .SnackbarContent */ .No, {
         ref: ref,
-        className: classnames_default()(classes.content, classes[props.variant]),
+        className: classnames__WEBPACK_IMPORTED_MODULE_4___default()(classes.content, classes[props.variant]),
         children: [
-            variantIcon && /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+            variantIcon && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
                 className: classes.icon,
                 children: variantIcon
             }),
-            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                 className: classes.texts,
                 children: [
-                    /*#__PURE__*/ (0,jsx_runtime.jsx)(Typography/* default */.Z, {
+                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_15__/* ["default"] */ .Z, {
                         className: classes.title,
                         variant: "h2",
                         children: props.title
                     }),
-                    props.message && /*#__PURE__*/ (0,jsx_runtime.jsx)(Typography/* default */.Z, {
+                    props.message && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_15__/* ["default"] */ .Z, {
                         className: classes.message,
                         variant: "body1",
                         children: props.message
                     })
                 ]
             }),
-            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
                 className: classes.action,
                 children: renderedAction
             })
         ]
     }));
 });
-const CustomSnackbarProvider = /*#__PURE__*/ (0,react.memo)((props)=>{
-    const ref1 = (0,react.useRef)(null);
-    var _isFacebook;
+const CustomSnackbarProvider = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.memo)(({ offsetY , ...rest })=>{
+    const ref1 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
     const { classes  } = useStyles({
-        isFacebook: (_isFacebook = props.isFacebook) !== null && _isFacebook !== void 0 ? _isFacebook : false
+        offsetY: offsetY
     });
     const onDismiss = (key)=>{
         return ()=>{
@@ -1234,7 +985,7 @@ const CustomSnackbarProvider = /*#__PURE__*/ (0,react.memo)((props)=>{
         };
     };
     var _variant;
-    return(/*#__PURE__*/ (0,jsx_runtime.jsx)(notistack_esm/* SnackbarProvider */.wT, {
+    return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(notistack__WEBPACK_IMPORTED_MODULE_3__/* .SnackbarProvider */ .wT, {
         ref: ref1,
         maxSnack: 30,
         disableWindowBlurListener: true,
@@ -1243,20 +994,20 @@ const CustomSnackbarProvider = /*#__PURE__*/ (0,react.memo)((props)=>{
             horizontal: 'right'
         },
         hideIconVariant: true,
-        content: (key, title)=>/*#__PURE__*/ (0,jsx_runtime.jsx)(CustomSnackbarContent, {
+        content: (key, title)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(CustomSnackbarContent, {
                 id: key,
-                variant: (_variant = props.variant) !== null && _variant !== void 0 ? _variant : 'default',
+                variant: (_variant = rest.variant) !== null && _variant !== void 0 ? _variant : 'default',
                 title: title,
-                isFacebook: props.isFacebook
+                offsetY: offsetY
             })
         ,
-        action: (key)=>/*#__PURE__*/ (0,jsx_runtime.jsx)(IconButton/* default */.Z, {
+        action: (key)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z, {
                 size: "large",
                 onClick: onDismiss(key),
                 sx: {
                     color: 'inherit'
                 },
-                children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Close/* default */.Z, {
+                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_icons_material__WEBPACK_IMPORTED_MODULE_14__/* ["default"] */ .Z, {
                     color: "inherit"
                 })
             })
@@ -1268,19 +1019,19 @@ const CustomSnackbarProvider = /*#__PURE__*/ (0,react.memo)((props)=>{
             variantInfo: classes.info,
             variantWarning: classes.warning
         },
-        ...props
+        ...rest
     }));
 });
 function useCustomSnackbar() {
-    const { enqueueSnackbar , closeSnackbar  } = (0,notistack_esm/* useSnackbar */.Ds)();
-    const showSnackbar = (0,react.useCallback)((text, options = {
+    const { enqueueSnackbar , closeSnackbar  } = (0,notistack__WEBPACK_IMPORTED_MODULE_3__/* .useSnackbar */ .Ds)();
+    const showSnackbar = (0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)((text, options = {
         variant: 'default'
     })=>{
         const { processing , message , variant , ...rest } = options;
         return enqueueSnackbar(text, {
             variant: options.variant,
             content: (key, title)=>{
-                return(/*#__PURE__*/ (0,jsx_runtime.jsx)(CustomSnackbarContent, {
+                return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(CustomSnackbarContent, {
                     variant: variant !== null && variant !== void 0 ? variant : 'default',
                     id: key,
                     title: title,
@@ -1301,6 +1052,233 @@ function useCustomSnackbar() {
     };
 }
 
+
+/***/ }),
+
+/***/ 7901:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ad": () => (/* binding */ usePortalShadowRoot),
+/* harmony export */   "d_": () => (/* binding */ setupPortalShadowRoot),
+/* harmony export */   "lr": () => (/* binding */ createShadowRootForwardedComponent),
+/* harmony export */   "vg": () => (/* binding */ createShadowRootForwardedPopperComponent)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
+/* harmony import */ var _Contexts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(87586);
+
+/* eslint-disable react-hooks/rules-of-hooks */ 
+
+let mountingPoint;
+let mountingShadowRoot;
+function setupPortalShadowRoot(init) {
+    if (mountingShadowRoot) return mountingShadowRoot;
+    mountingShadowRoot = document.body.appendChild(document.createElement('div')).attachShadow(init);
+    mountingPoint = mountingShadowRoot.appendChild(document.createElement('div'));
+    return mountingShadowRoot;
+}
+/**
+ * Render to a React Portal in to the page needs this hook. It will provide a wrapped container that provides ShadowRoot isolation and CSS support for it.
+ *
+ * The return value can only be used once!
+ * @param renderer A function that want to use PortalShadowRoot
+ * @example
+ * const picker = usePortalShadowRoot((container) => (
+ *      <DatePicker
+ *          DialogProps={{ container }}
+ *          PopperProps={{ container }}
+ *          value={new Date()}
+ *          onChange={() => {}}
+ *          renderInput={(props) => <TextField {...props} />}
+ *      />
+ * ))
+ */ function usePortalShadowRoot(renderer) {
+    const disabled = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)((0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(_Contexts__WEBPACK_IMPORTED_MODULE_2__/* .DisableShadowRootContext */ .AZ)).current;
+    // we ignore the changes on this property during multiple render
+    // so we can violates the React hooks rule and still be safe.
+    if (disabled) return renderer(undefined);
+    const sheets = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(_Contexts__WEBPACK_IMPORTED_MODULE_2__/* .StyleSheetsContext */ .EP);
+    const signal = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
+    const preventEventPropagationList = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(_Contexts__WEBPACK_IMPORTED_MODULE_2__/* .PreventEventPropagationListContext */ .gt);
+    const { container: container1  } = useRefInit(()=>{
+        signal.current = new AbortController();
+        const portal = PortalShadowRoot();
+        const root = document.createElement('div');
+        root.dataset.portalShadowRoot = '';
+        const shadow = root.attachShadow({
+            mode: 'open'
+        });
+        const stop = (e)=>e.stopPropagation()
+        ;
+        for (const each of preventEventPropagationList){
+            shadow.addEventListener(each, stop, {
+                signal: signal.current.signal
+            });
+        }
+        const container = shadow.appendChild(document.createElement('main'));
+        sheets.map((x)=>x.addContainer(shadow)
+        );
+        // This is proved to be important to the correct portal orders...
+        container.appendChild = (child)=>{
+            if (!root.parentElement) portal.appendChild(root);
+            Node.prototype.appendChild.call(container, child);
+            return child;
+        };
+        container.removeChild = (child)=>{
+            Node.prototype.removeChild.call(container, child);
+            if (container.childElementCount === 0) portal.removeChild(root);
+            return child;
+        };
+        return {
+            container
+        };
+    });
+    return renderer(container1);
+}
+function createShadowRootForwardedComponent(Component) {
+    return(/*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.forwardRef)((props, ref)=>{
+        return usePortalShadowRoot((container)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Component, {
+                container: container,
+                ...props,
+                ref: ref
+            })
+        );
+    }));
+}
+function createShadowRootForwardedPopperComponent(Component) {
+    return(/*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.forwardRef)((props, ref)=>{
+        return usePortalShadowRoot((container)=>{
+            return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Component, {
+                ...props,
+                PopperProps: {
+                    container,
+                    ...props.PopperProps
+                },
+                ref: ref
+            }));
+        });
+    }));
+}
+/**
+ * ! Do not export !
+ */ function PortalShadowRoot() {
+    if (location.protocol.includes('extension')) return document.body;
+    if (globalThis.location.hostname === 'localhost') return document.body;
+    if (!mountingPoint) throw new TypeError('Please call setupPortalShadowRoot first');
+    return mountingPoint;
+}
+function useRefInit(f) {
+    const ref = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(undefined);
+    if (!ref.current) ref.current = f();
+    return ref.current;
+}
+
+
+/***/ }),
+
+/***/ 20851:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "dy": () => (/* binding */ ShadowRootMenu),
+/* harmony export */   "p_": () => (/* binding */ ShadowRootTooltip),
+/* harmony export */   "sV": () => (/* binding */ ShadowRootPopper)
+/* harmony export */ });
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(72753);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(64765);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(24190);
+/* harmony import */ var _Portal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7901);
+
+
+const ShadowRootTooltip = (0,_Portal__WEBPACK_IMPORTED_MODULE_0__/* .createShadowRootForwardedPopperComponent */ .vg)(_mui_material__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z);
+const ShadowRootMenu = (0,_Portal__WEBPACK_IMPORTED_MODULE_0__/* .createShadowRootForwardedComponent */ .lr)(_mui_material__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z);
+const ShadowRootPopper = (0,_Portal__WEBPACK_IMPORTED_MODULE_0__/* .createShadowRootForwardedComponent */ .lr)(_mui_material__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z);
+
+
+/***/ }),
+
+/***/ 43021:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "um": () => (/* binding */ Appearance),
+  "E1": () => (/* reexport */ ButtonGroupTab/* ButtonGroupTabList */.E),
+  "US": () => (/* reexport */ CSSVariableInjector/* CSSVariableInjector */.U),
+  "qA": () => (/* reexport */ CountdownButton/* CountdownButton */.q),
+  "YO": () => (/* reexport */ Snackbar/* CustomSnackbarProvider */.YO),
+  "yu": () => (/* reexport */ DialogStack/* DialogStackingProvider */.y),
+  "pL": () => (/* reexport */ FolderTabs/* FolderTabPanel */.p),
+  "Jc": () => (/* reexport */ FolderTabs/* FolderTabs */.J),
+  "ZN": () => (/* reexport */ constants/* MaskColorVar */.ZN),
+  "Hr": () => (/* binding */ MaskDarkTheme),
+  "Df": () => (/* reexport */ Dialog/* MaskDialog */.D),
+  "Cp": () => (/* binding */ MaskLightTheme),
+  "b4": () => (/* reexport */ LoadingButton/* MaskLoadingButton */.b),
+  "FU": () => (/* reexport */ TextField/* MaskTextField */.F),
+  "g8": () => (/* reexport */ PhoneNumberField/* PhoneNumberField */.g),
+  "xV": () => (/* reexport */ SearchableList/* SearchableList */.x),
+  "oe": () => (/* reexport */ SendingCodeField/* SendingCodeField */.o),
+  "Q": () => (/* reexport */ ShadowRoot/* ShadowRootIsolation */.Q),
+  "dy": () => (/* reexport */ ShadowRoot/* ShadowRootMenu */.dy),
+  "sV": () => (/* reexport */ ShadowRoot/* ShadowRootPopper */.sV),
+  "p_": () => (/* reexport */ ShadowRoot/* ShadowRootTooltip */.p_),
+  "wT": () => (/* reexport */ Snackbar/* SnackbarProvider */.wT),
+  "Dc": () => (/* reexport */ constants/* applyMaskColorVars */.Dc),
+  "zV": () => (/* reexport */ ShadowRoot/* createReactRootShadowedPartial */.zV),
+  "nb": () => (/* reexport */ constants/* getMaskColor */.nb),
+  "F4": () => (/* reexport */ makeStyles/* keyframes */.F),
+  "ZL": () => (/* reexport */ makeStyles/* makeStyles */.Z),
+  "ze": () => (/* reexport */ custom_ui_helper/* mergeClasses */.z),
+  "or": () => (/* reexport */ custom_ui_helper.or),
+  "lu": () => (/* binding */ parseColor),
+  "d_": () => (/* reexport */ ShadowRoot/* setupPortalShadowRoot */.d_),
+  "Ii": () => (/* reexport */ Snackbar/* useCustomSnackbar */.Ii),
+  "tE": () => (/* reexport */ DialogStack/* useDialogStackActor */.t),
+  "ad": () => (/* reexport */ ShadowRoot/* usePortalShadowRoot */.ad),
+  "Bc": () => (/* reexport */ custom_ui_helper/* useStylesExtends */.B),
+  "QO": () => (/* binding */ useSystemPreferencePalette),
+  "YE": () => (/* reexport */ hooks/* useTabs */.Y)
+});
+
+// UNUSED EXPORTS: ButtonTab, CustomSnackbarContent, DisableShadowRootContext, MaskDialogTitle, MaskSearchableItemInList, createShadowRootForwardedComponent, createShadowRootForwardedPopperComponent, currentSystemPreferencePalette, useMaskColor, useMaskDialog, useSnackbar
+
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/styles/createTheme.js + 8 modules
+var createTheme = __webpack_require__(86001);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/useMediaQuery/useMediaQuery.js
+var useMediaQuery = __webpack_require__(90171);
+// EXTERNAL MODULE: ../theme/src/changes.ts
+var changes = __webpack_require__(23344);
+// EXTERNAL MODULE: ../theme/src/component-changes.ts
+var component_changes = __webpack_require__(25146);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/merge.js + 6 modules
+var merge = __webpack_require__(9084);
+// EXTERNAL MODULE: ../theme/src/constants.ts
+var constants = __webpack_require__(5400);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/tinycolor2@1.4.2/node_modules/tinycolor2/tinycolor.js
+var tinycolor = __webpack_require__(32086);
+var tinycolor_default = /*#__PURE__*/__webpack_require__.n(tinycolor);
+// EXTERNAL MODULE: ../theme/src/makeStyles.ts
+var makeStyles = __webpack_require__(61928);
+// EXTERNAL MODULE: ../theme/src/Components/Dialogs/Dialog.tsx
+var Dialog = __webpack_require__(28365);
+// EXTERNAL MODULE: ../theme/src/Components/Dialogs/DialogTitle.tsx
+var DialogTitle = __webpack_require__(74626);
+// EXTERNAL MODULE: ../theme/src/Components/Dialogs/DialogStack.tsx
+var DialogStack = __webpack_require__(45739);
+;// CONCATENATED MODULE: ../theme/src/Components/Dialogs/index.ts
+
+
+
+
+// EXTERNAL MODULE: ../theme/src/Components/ButtonGroupTab/index.ts + 2 modules
+var ButtonGroupTab = __webpack_require__(13726);
+// EXTERNAL MODULE: ../theme/src/Components/FolderTabs/index.tsx
+var FolderTabs = __webpack_require__(94615);
+// EXTERNAL MODULE: ../theme/src/Components/Snackbar/index.tsx
+var Snackbar = __webpack_require__(43933);
 // EXTERNAL MODULE: ../theme/src/Components/SearchableList/index.ts + 2 modules
 var SearchableList = __webpack_require__(8546);
 // EXTERNAL MODULE: ../theme/src/Components/TextField/index.tsx
@@ -1329,10 +1307,13 @@ var LoadingButton = __webpack_require__(55456);
 var hooks = __webpack_require__(76760);
 // EXTERNAL MODULE: ../theme/src/ShadowRoot/index.ts
 var ShadowRoot = __webpack_require__(62840);
+// EXTERNAL MODULE: ../theme/src/UIHelper/custom-ui-helper.tsx
+var custom_ui_helper = __webpack_require__(29025);
+// EXTERNAL MODULE: ../theme/src/CSSVariableInjector.tsx
+var CSSVariableInjector = __webpack_require__(92824);
 ;// CONCATENATED MODULE: ../theme/src/index.ts
 /// <reference path="./extended.d.ts" />
 // see https://github.com/import-js/eslint-plugin-import/issues/2288
-// eslint-disable-next-line import/no-deprecated
 
 
 
@@ -1390,10 +1371,10 @@ const MaskDarkTheme = MaskTheme('dark');
 
 
 
+
 const query = '(prefers-color-scheme: dark)';
 function useSystemPreferencePalette() {
     // see https://github.com/import-js/eslint-plugin-import/issues/2288
-    // eslint-disable-next-line import/no-deprecated
     return (0,useMediaQuery/* default */.Z)(query) ? 'dark' : 'light';
 }
 function currentSystemPreferencePalette() {

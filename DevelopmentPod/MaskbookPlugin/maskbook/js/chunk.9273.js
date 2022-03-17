@@ -1,4 +1,4 @@
-(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[4429],{
+(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[9273],{
 
 /***/ 37313:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
@@ -482,10 +482,11 @@ function scheduleAvatarMetaUpdate(id1, meta1) {
 /* harmony export */   "o7": () => (/* binding */ createOrUpdateProfileDB),
 /* harmony export */   "tc": () => (/* binding */ attachProfileDB)
 /* harmony export */ });
+/* unused harmony export createPersonaDBReadonlyAccess */
 /* harmony import */ var _shared_native_rpc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(81653);
 
 
-const { queryProfilesDB , queryProfileDB , queryPersonaDB , queryPersonasDB , detachProfileDB , deletePersonaDB , safeDeletePersonaDB , queryPersonaByProfileDB , createPersonaDB , attachProfileDB , consistentPersonaDBWriteAccess , updatePersonaDB , createOrUpdatePersonaDB , queryProfilesPagedDB , createOrUpdateProfileDB , createProfileDB , createRelationDB , createRelationsTransaction , deleteProfileDB , queryRelationsPagedDB , updateRelationDB , queryPersonasWithPrivateKey , queryRelations ,  } = new Proxy({}, {
+const { queryProfilesDB , queryProfileDB , queryPersonaDB , queryPersonasDB , detachProfileDB , deletePersonaDB , safeDeletePersonaDB , queryPersonaByProfileDB , createPersonaDB , attachProfileDB , createPersonaDBReadonlyAccess , consistentPersonaDBWriteAccess , updatePersonaDB , createOrUpdatePersonaDB , queryProfilesPagedDB , createOrUpdateProfileDB , createProfileDB , createRelationDB , createRelationsTransaction , deleteProfileDB , queryRelationsPagedDB , updateRelationDB , queryPersonasWithPrivateKey , queryRelations ,  } = new Proxy({}, {
     get (_, key) {
         return async function(...args) {
             if (_shared_native_rpc__WEBPACK_IMPORTED_MODULE_0__/* .hasNativeAPI */ ._) {
@@ -497,6 +498,196 @@ const { queryProfilesDB , queryProfileDB , queryPersonaDB , queryPersonasDB , de
         };
     }
 });
+
+
+/***/ }),
+
+/***/ 56935:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "lr": () => (/* binding */ createProfileWithPersona),
+/* harmony export */   "w0": () => (/* binding */ createPersonaByJsonWebKey)
+/* harmony export */ });
+/* unused harmony exports hasLocalKeyOf, decryptByLocalKey, deriveAESByECDH, deriveAESByECDH_version38_or_older */
+/* harmony import */ var _dimensiondev_kit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(66559);
+/* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(79226);
+/* harmony import */ var _db__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(41715);
+
+
+
+// #region Local key helpers
+/**
+ * If has local key of a profile in the database.
+ * @param id Profile Identifier
+ */ async function hasLocalKeyOf(id) {
+    let has = false;
+    await createPersonaDBReadonlyAccess(async (tx)=>{
+        const result = await getLocalKeyOf(id, tx);
+        has = !!result;
+    });
+    return has;
+}
+/**
+ * Try to decrypt data using local key.
+ *
+ * @param authorHint Author of the local key
+ * @param data Data to be decrypted
+ * @param iv IV
+ */ async function decryptByLocalKey(authorHint, data, iv) {
+    const candidateKeys = [];
+    if (authorHint) {
+        await createPersonaDBReadonlyAccess(async (tx)=>{
+            const key = await getLocalKeyOf(authorHint, tx);
+            key && candidateKeys.push(key);
+        });
+    // TODO: We may push every local key we owned to the candidate list so we can also decrypt when authorHint is null, but that might be a performance pitfall when localKey field is not indexed.
+    }
+    let check = ()=>{};
+    return Promise.any(candidateKeys.map(async (key)=>{
+        const k = await crypto.subtle.importKey('jwk', key, {
+            name: 'AES-GCM',
+            length: 256
+        }, false, [
+            'decrypt'
+        ]);
+        check();
+        const result = await crypto.subtle.decrypt({
+            iv,
+            name: 'AES-GCM'
+        }, k, data);
+        check = abort;
+        return result;
+    }));
+}
+async function getLocalKeyOf(id, tx) {
+    const profile = await queryProfileDB(id, tx);
+    if (!profile) return;
+    if (profile.localKey) return profile.localKey;
+    if (!profile.linkedPersona) return;
+    const persona = await queryPersonaByProfileDB(id, tx);
+    return persona === null || persona === void 0 ? void 0 : persona.localKey;
+}
+// #endregion
+// #region ECDH
+async function deriveAESByECDH(pub, extractable = true) {
+    const curve = pub.algorithm.namedCurve || '';
+    const sameCurvePrivateKeys = new IdentifierMap(new Map(), ECKeyIdentifier);
+    await createPersonaDBReadonlyAccess(async (tx)=>{
+        const personas = await queryPersonasWithPrivateKey(tx);
+        for (const persona of personas){
+            if (!persona.privateKey) continue;
+            if (persona.privateKey.crv !== curve) continue;
+            sameCurvePrivateKeys.set(persona.identifier, persona.privateKey);
+        }
+    });
+    const deriveResult = new IdentifierMap(new Map(), ECKeyIdentifier);
+    const result1 = await Promise.allSettled([
+        ...sameCurvePrivateKeys
+    ].map(async ([id, key])=>{
+        const k = await crypto.subtle.importKey('jwk', key, {
+            name: 'ECDH',
+            namedCurve: key.crv
+        }, false, [
+            'deriveKey'
+        ]);
+        const result = await crypto.subtle.deriveKey({
+            name: 'ECDH',
+            public: pub
+        }, k, {
+            name: 'AES-GCM',
+            length: 256
+        }, extractable, [
+            'encrypt',
+            'decrypt'
+        ]);
+        deriveResult.set(id, result);
+    }));
+    const failed = result1.filter((x)=>x.status === 'rejected'
+    );
+    if (failed.length) {
+        console.warn('Failed to ECDH', ...failed.map((x)=>x.reason
+        ));
+    }
+    return deriveResult;
+}
+const KEY = (0,_dimensiondev_kit__WEBPACK_IMPORTED_MODULE_0__/* .decodeArrayBuffer */ .xe)('KEY');
+const IV = (0,_dimensiondev_kit__WEBPACK_IMPORTED_MODULE_0__/* .decodeArrayBuffer */ .xe)('IV');
+async function deriveAESByECDH_version38_or_older(pub, iv, extractable = false) {
+    const deriveResult = (await deriveAESByECDH(pub, true)).__raw_map__;
+    const next_map = new Map();
+    for (const [id, key] of deriveResult){
+        const derivedKeyRaw = await crypto.subtle.exportKey('raw', key);
+        const _a = concatArrayBuffer(derivedKeyRaw, iv);
+        const nextAESKeyMaterial = await crypto.subtle.digest('SHA-256', concatArrayBuffer(_a, iv, KEY));
+        const iv_pre = new Uint8Array(await crypto.subtle.digest('SHA-256', concatArrayBuffer(_a, iv, IV)));
+        const nextIV = new Uint8Array(16);
+        for(let i = 0; i <= 16; i += 1){
+            // eslint-disable-next-line no-bitwise
+            nextIV[i] = iv_pre[i] ^ iv_pre[16 + i];
+        }
+        const nextAESKey = await crypto.subtle.importKey('raw', nextAESKeyMaterial, {
+            name: 'AES-GCM',
+            length: 256
+        }, extractable, [
+            'encrypt',
+            'decrypt'
+        ]);
+        next_map.set(id, [
+            nextAESKey,
+            nextIV
+        ]);
+    }
+    return new IdentifierMap(next_map, ECKeyIdentifier);
+}
+// #endregion
+// #region normal functions
+async function createPersonaByJsonWebKey(options) {
+    const identifier = (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .ECKeyIdentifierFromJsonWebKey */ .CH)(options.publicKey);
+    const record = {
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        identifier: identifier,
+        linkedProfiles: new _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .IdentifierMap */ .qD(new Map(), _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .ProfileIdentifier */ .WO),
+        publicKey: options.publicKey,
+        privateKey: options.privateKey,
+        nickname: options.nickname,
+        mnemonic: options.mnemonic,
+        localKey: options.localKey,
+        hasLogout: false,
+        uninitialized: options.uninitialized
+    };
+    await (0,_db__WEBPACK_IMPORTED_MODULE_2__/* .consistentPersonaDBWriteAccess */ .As)((t)=>(0,_db__WEBPACK_IMPORTED_MODULE_2__/* .createPersonaDB */ .E9)(record, t)
+    );
+    return identifier;
+}
+async function createProfileWithPersona(profileID, data, keys) {
+    const ec_id = (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .ECKeyIdentifierFromJsonWebKey */ .CH)(keys.publicKey);
+    const rec = {
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        identifier: ec_id,
+        linkedProfiles: new _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .IdentifierMap */ .qD(new Map(), _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .ProfileIdentifier */ .WO),
+        nickname: keys.nickname,
+        publicKey: keys.publicKey,
+        privateKey: keys.privateKey,
+        localKey: keys.localKey,
+        mnemonic: keys.mnemonic,
+        hasLogout: false
+    };
+    await (0,_db__WEBPACK_IMPORTED_MODULE_2__/* .consistentPersonaDBWriteAccess */ .As)(async (t)=>{
+        await (0,_db__WEBPACK_IMPORTED_MODULE_2__/* .createOrUpdatePersonaDB */ .lX)(rec, {
+            explicitUndefinedField: 'ignore',
+            linkedProfiles: 'merge'
+        }, t);
+        await (0,_db__WEBPACK_IMPORTED_MODULE_2__/* .attachProfileDB */ .tc)(profileID, ec_id, data, t);
+    });
+}
+// #endregion
+function abort() {
+    throw new Error('Cancelled');
+}
 
 
 /***/ }),
@@ -855,7 +1046,7 @@ class iOSWebkitChannel {
 /* harmony export */   "_": () => (/* binding */ hasNativeAPI)
 /* harmony export */ });
 /* unused harmony export sharedNativeAPI */
-/* harmony import */ var async_call_rpc_full__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(73302);
+/* harmony import */ var async_call_rpc_full__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19245);
 /* harmony import */ var _iOS_channel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2045);
 
 
@@ -1500,11 +1691,9 @@ function toStore(plugin_id, value) {
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "w0": () => (/* reexport */ createPersonaByJsonWebKey),
   "A8": () => (/* reexport */ createPersonaByMnemonic),
   "c9": () => (/* reexport */ createPersonaByMnemonicV2),
   "$v": () => (/* reexport */ post/* createPostDB */.$v),
-  "lr": () => (/* reexport */ createProfileWithPersona),
   "FB": () => (/* reexport */ deletePersona),
   "A": () => (/* reexport */ loginPersona),
   "lW": () => (/* reexport */ logoutPersona),
@@ -1626,7 +1815,10 @@ var mnemonic_code = __webpack_require__(69914);
 var localKeyGenerate = __webpack_require__(74907);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/bip39@3.0.4/node_modules/bip39/src/index.js
 var bip39_src = __webpack_require__(68440);
+// EXTERNAL MODULE: ./background/database/persona/helper.ts
+var helper = __webpack_require__(56935);
 ;// CONCATENATED MODULE: ./src/database/Persona/helpers.ts
+
 
 
 
@@ -1791,7 +1983,7 @@ async function createPersonaByMnemonic(nickname, password) {
     const { key , mnemonicRecord: mnemonic  } = await (0,mnemonic_code/* generate_ECDH_256k1_KeyPair_ByMnemonicWord */.xX)(password);
     const { privateKey , publicKey  } = key;
     const localKey = await (0,localKeyGenerate/* deriveLocalKeyFromECDHKey */.i)(publicKey, mnemonic.words);
-    return createPersonaByJsonWebKey({
+    return (0,helper/* createPersonaByJsonWebKey */.w0)({
         privateKey,
         publicKey,
         localKey,
@@ -1810,54 +2002,13 @@ async function createPersonaByMnemonicV2(mnemonicWord, nickname, password) {
     const { key , mnemonicRecord: mnemonic  } = await (0,mnemonic_code/* recover_ECDH_256k1_KeyPair_ByMnemonicWord */.Hb)(mnemonicWord, password);
     const { privateKey , publicKey  } = key;
     const localKey = await (0,localKeyGenerate/* deriveLocalKeyFromECDHKey */.i)(publicKey, mnemonic.words);
-    return createPersonaByJsonWebKey({
+    return (0,helper/* createPersonaByJsonWebKey */.w0)({
         privateKey,
         publicKey,
         localKey,
         mnemonic,
         nickname,
         uninitialized: false
-    });
-}
-async function createPersonaByJsonWebKey(options) {
-    const identifier = (0,src/* ECKeyIdentifierFromJsonWebKey */.CH)(options.publicKey);
-    const record = {
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        identifier: identifier,
-        linkedProfiles: new src/* IdentifierMap */.qD(new Map(), src/* ProfileIdentifier */.WO),
-        publicKey: options.publicKey,
-        privateKey: options.privateKey,
-        nickname: options.nickname,
-        mnemonic: options.mnemonic,
-        localKey: options.localKey,
-        hasLogout: false,
-        uninitialized: options.uninitialized
-    };
-    await (0,persona_db/* consistentPersonaDBWriteAccess */.As)((t)=>(0,persona_db/* createPersonaDB */.E9)(record, t)
-    );
-    return identifier;
-}
-async function createProfileWithPersona(profileID, data, keys) {
-    const ec_id = (0,src/* ECKeyIdentifierFromJsonWebKey */.CH)(keys.publicKey);
-    const rec = {
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        identifier: ec_id,
-        linkedProfiles: new src/* IdentifierMap */.qD(new Map(), src/* ProfileIdentifier */.WO),
-        nickname: keys.nickname,
-        publicKey: keys.publicKey,
-        privateKey: keys.privateKey,
-        localKey: keys.localKey,
-        mnemonic: keys.mnemonic,
-        hasLogout: false
-    };
-    await (0,persona_db/* consistentPersonaDBWriteAccess */.As)(async (t)=>{
-        await (0,persona_db/* createOrUpdatePersonaDB */.lX)(rec, {
-            explicitUndefinedField: 'ignore',
-            linkedProfiles: 'merge'
-        }, t);
-        await (0,persona_db/* attachProfileDB */.tc)(profileID, ec_id, data, t);
     });
 }
 async function queryLocalKey(i) {
@@ -1872,9 +2023,6 @@ async function queryLocalKey(i) {
         var ref1;
         return (ref1 = (ref = await (0,persona_db/* queryPersonaDB */.Hm)(i)) === null || ref === void 0 ? void 0 : ref.localKey) !== null && ref1 !== void 0 ? ref1 : null;
     }
-}
-function cover_ECDH_256k1_KeyPair_ByMnemonicWord(password) {
-    throw new Error('Function not implemented.');
 }
 
 // EXTERNAL MODULE: ./src/database/Plugin/index.ts + 2 modules
@@ -1924,51 +2072,6 @@ const cryptoProviderTable = {
 
 const steganographyDownloadImage = (0,_dimensiondev_kit__WEBPACK_IMPORTED_MODULE_0__/* .memoizePromise */ .J3)(async (url)=>(await (0,_utils_utils__WEBPACK_IMPORTED_MODULE_1__/* .downloadUrl */ .GR)(url)).arrayBuffer()
 , void 0);
-
-
-/***/ }),
-
-/***/ 21300:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "f": () => (/* binding */ verifyOthersProve)
-/* harmony export */ });
-/* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(79226);
-/* harmony import */ var _social_network_utils_text_payload_worker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(88925);
-/* harmony import */ var _database__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1196);
-
-
-
-async function verifyOthersProve(bio, others) {
-    var ref, ref1;
-    const compressedX = typeof bio === 'string' ? (await (0,_social_network_utils_text_payload_worker__WEBPACK_IMPORTED_MODULE_1__/* .decodePublicKeyWorker */ .IC)(others.network))(bio) : [
-        bio.raw
-    ];
-    if (!compressedX) return false;
-    const publicKey = compressedX.map((x)=>{
-        try {
-            return (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .decompressSecp256k1Key */ .qX)(x);
-        } catch  {
-            return null;
-        }
-    }).filter((x)=>x
-    )[0];
-    if (!publicKey) return false;
-    // TODO: use json schema / other ways to verify the JWK
-    // or
-    // throw new Error(i18n.t('service_key_parse_failed'))
-    // if privateKey, we should possibly not recreate it
-    const hasPrivate = ((ref = await (0,_database__WEBPACK_IMPORTED_MODULE_2__/* .queryPersonaRecord */ .yQ)((0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .ECKeyIdentifierFromJsonWebKey */ .CH)(publicKey))) === null || ref === void 0 ? void 0 : ref.privateKey) || ((ref1 = await (0,_database__WEBPACK_IMPORTED_MODULE_2__/* .queryPersonaRecord */ .yQ)(others)) === null || ref1 === void 0 ? void 0 : ref1.privateKey);
-    if (!hasPrivate) await (0,_database__WEBPACK_IMPORTED_MODULE_2__/* .createProfileWithPersona */ .lr)(others, {
-        connectionConfirmState: 'pending'
-    }, {
-        publicKey
-    });
-    // TODO: unhandled case: if the profile is connected but a different key.
-    return true;
-}
 
 
 /***/ }),
@@ -2169,16 +2272,8 @@ async function _helper(x) {
 /* harmony export */   "QO": () => (/* binding */ encodeTextPayloadWorker),
 /* harmony export */   "s1": () => (/* binding */ decodeTextPayloadWorker)
 /* harmony export */ });
-/* unused harmony export encodePublicKeyWorker */
 /* harmony import */ var _worker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(44840);
 
-async function encodePublicKeyWorker(query) {
-    var ref;
-    const f = (ref = (await getNetworkWorker(query)).utils.publicKeyEncoding) === null || ref === void 0 ? void 0 : ref.encoder;
-    return (x)=>{
-        return (f === null || f === void 0 ? void 0 : f(x)) || x;
-    };
-}
 async function decodePublicKeyWorker(query) {
     var ref;
     const f = (ref = (await (0,_worker__WEBPACK_IMPORTED_MODULE_0__/* .getNetworkWorker */ .C8)(query)).utils.publicKeyEncoding) === null || ref === void 0 ? void 0 : ref.decoder;

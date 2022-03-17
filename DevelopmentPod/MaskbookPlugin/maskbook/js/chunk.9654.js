@@ -346,7 +346,7 @@ function getGunNodeFromPath(path1) {
 /* harmony export */   "_": () => (/* binding */ hasNativeAPI)
 /* harmony export */ });
 /* unused harmony export sharedNativeAPI */
-/* harmony import */ var async_call_rpc_full__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(73302);
+/* harmony import */ var async_call_rpc_full__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19245);
 /* harmony import */ var _iOS_channel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2045);
 
 
@@ -455,12 +455,12 @@ async function getNFTAvatarFromJSON(userId) {
 var types = __webpack_require__(95130);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/address.ts
 var utils_address = __webpack_require__(66580);
-// EXTERNAL MODULE: ../plugin-infra/src/index.ts + 1 modules
-var src = __webpack_require__(27194);
+// EXTERNAL MODULE: ../plugin-infra/src/index.ts
+var src = __webpack_require__(63151);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/date-fns@2.28.0/node_modules/date-fns/esm/addSeconds/index.js
 var addSeconds = __webpack_require__(71767);
-// EXTERNAL MODULE: ../web3-providers/src/index.ts
-var web3_providers_src = __webpack_require__(24524);
+// EXTERNAL MODULE: ../web3-providers/src/index.ts + 2 modules
+var web3_providers_src = __webpack_require__(54492);
 // EXTERNAL MODULE: ../gun-utils/src/index.ts + 3 modules
 var gun_utils_src = __webpack_require__(75706);
 ;// CONCATENATED MODULE: ./src/plugins/Avatar/Services/bind.ts

@@ -1,6 +1,6 @@
-(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[5558],{
+(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[1110],{
 
-/***/ 89338:
+/***/ 43221:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -14,32 +14,32 @@ __webpack_require__.d(__webpack_exports__, {
 var esm_extends = __webpack_require__(97538);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.17.2/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
 var objectWithoutPropertiesLoose = __webpack_require__(93086);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/clsx@1.1.1/node_modules/clsx/dist/clsx.m.js
 var clsx_m = __webpack_require__(25789);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/styles/styled.js
-var styled = __webpack_require__(8571);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/styles/useThemeProps.js
-var useThemeProps = __webpack_require__(6707);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/composeClasses/composeClasses.js
-var composeClasses = __webpack_require__(51764);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/generateUtilityClass/generateUtilityClass.js
-var generateUtilityClass = __webpack_require__(94626);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.70_9eb0130ea7f00b7e78e913147317bb83/node_modules/@mui/base/generateUtilityClasses/generateUtilityClasses.js
-var generateUtilityClasses = __webpack_require__(81232);
-;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+lab@5.0.0-alpha.71_6860626c1dd203d2615586c177a8991f/node_modules/@mui/lab/TabPanel/tabPanelClasses.js
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/styles/styled.js
+var styled = __webpack_require__(68435);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/styles/useThemeProps.js
+var useThemeProps = __webpack_require__(65379);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/composeClasses/composeClasses.js
+var composeClasses = __webpack_require__(48301);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/generateUtilityClass/generateUtilityClass.js
+var generateUtilityClass = __webpack_require__(53038);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/generateUtilityClasses/generateUtilityClasses.js
+var generateUtilityClasses = __webpack_require__(6038);
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+lab@5.0.0-alpha.72_154258abcf19999eeddd92026c0a2f6c/node_modules/@mui/lab/TabPanel/tabPanelClasses.js
 
 function getTabPanelUtilityClass(slot) {
   return (0,generateUtilityClass/* default */.Z)('MuiTabPanel', slot);
 }
 const tabPanelClasses = (0,generateUtilityClasses/* default */.Z)('MuiTabPanel', ['root']);
 /* harmony default export */ const TabPanel_tabPanelClasses = ((/* unused pure expression or super */ null && (tabPanelClasses)));
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+lab@5.0.0-alpha.71_6860626c1dd203d2615586c177a8991f/node_modules/@mui/lab/TabContext/TabContext.js
-var TabContext = __webpack_require__(38884);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+lab@5.0.0-alpha.71_6860626c1dd203d2615586c177a8991f/node_modules/@mui/lab/TabPanel/TabPanel.js
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+lab@5.0.0-alpha.72_154258abcf19999eeddd92026c0a2f6c/node_modules/@mui/lab/TabContext/TabContext.js
+var TabContext = __webpack_require__(10018);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+lab@5.0.0-alpha.72_154258abcf19999eeddd92026c0a2f6c/node_modules/@mui/lab/TabPanel/TabPanel.js
 
 
 const _excluded = ["children", "className", "value"];
@@ -112,7 +112,7 @@ const TabPanel = /*#__PURE__*/react.forwardRef(function TabPanel(inProps, ref) {
 
 /***/ }),
 
-/***/ 20690:
+/***/ 88233:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -327,7 +327,7 @@ module.exports = copy;
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "l": () => (/* binding */ ArrowDownRound)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -352,7 +352,7 @@ const ArrowDownRound = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIcon */ .
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "L": () => (/* binding */ ArrowRightIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -373,7 +373,7 @@ const ArrowRightIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIcon */ .
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "T": () => (/* binding */ CopyIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -406,7 +406,7 @@ const CopyIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIcon */ .I)('co
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "d": () => (/* binding */ EditIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -429,7 +429,7 @@ const EditIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIcon */ .I)('Ed
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "w": () => (/* binding */ InteractionCircleIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -472,7 +472,7 @@ const InteractionCircleIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIc
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "t": () => (/* binding */ SuccessIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -502,7 +502,7 @@ const SuccessIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIcon */ .I)(
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "r": () => (/* binding */ UploadIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -542,12 +542,12 @@ const UploadIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIcon */ .I)('
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "m": () => (/* binding */ CopyIconButton)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(76342);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(8309);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(72753);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(13573);
 /* harmony import */ var _masknet_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(45007);
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(17734);
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(35750);
 
 
 
@@ -595,10 +595,10 @@ const CopyIconButton = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.memo)
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "P": () => (/* binding */ EnterDashboard)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(76342);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(46486);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(7280);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(18287);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(74491);
 /* harmony import */ var _hook_useEnterDashboard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(63434);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(13573);
 
@@ -641,12 +641,12 @@ const EnterDashboard = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.memo)
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "u": () => (/* binding */ LoadingPlaceholder)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(76342);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
 /* harmony import */ var _masknet_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(16787);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(7280);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(74491);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(13573);
-/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(92597);
+/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(43021);
 
 
 
@@ -695,17 +695,17 @@ const LoadingPlaceholder = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.m
 /* harmony export */   "k": () => (/* binding */ NetworkSelector)
 /* harmony export */ });
 /* unused harmony export NetworkSelectorUI */
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(76342);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(88624);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(7280);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(46486);
-/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(92597);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(56561);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(74491);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(18287);
+/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(43021);
 /* harmony import */ var _shared__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(70609);
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(98086);
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(63541);
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(95130);
-/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(27194);
+/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(63151);
 /* harmony import */ var _plugins_Wallet_settings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(63361);
 /* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(39850);
 /* harmony import */ var _masknet_icons__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(60312);
@@ -866,9 +866,9 @@ const NetworkSelectorUI = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.me
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "T": () => (/* binding */ useHasPassword)
 /* harmony export */ });
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(22572);
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(28577);
 /* harmony import */ var _plugins_Wallet_messages__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63081);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(76342);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
 /* harmony import */ var _masknet_plugin_wallet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(89987);
 
 
@@ -902,25 +902,25 @@ __webpack_require__.d(__webpack_exports__, {
 
 // UNUSED EXPORTS: ActivityListUI
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/urlcat@2.0.4/node_modules/urlcat/dist/index.js
 var dist = __webpack_require__(19802);
 var dist_default = /*#__PURE__*/__webpack_require__.n(dist);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router@5.2.1_react@18.0.0-rc.0/node_modules/react-router/esm/react-router.js
-var react_router = __webpack_require__(22749);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var src = __webpack_require__(92597);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router@6.2.2_react@18.0.0-rc.2/node_modules/react-router/index.js
+var react_router = __webpack_require__(92186);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var src = __webpack_require__(43021);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/unstated-next@1.1.0/node_modules/unstated-next/dist/unstated-next.mjs
 var unstated_next = __webpack_require__(44737);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/List/List.js + 1 modules
-var List = __webpack_require__(59216);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Link/Link.js + 1 modules
-var Link = __webpack_require__(98294);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Button/Button.js
-var Button = __webpack_require__(9744);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/List/List.js + 1 modules
+var List = __webpack_require__(66407);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Link/Link.js + 1 modules
+var Link = __webpack_require__(86377);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Button/Button.js
+var Button = __webpack_require__(12463);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/address.ts
 var address = __webpack_require__(66580);
 // EXTERNAL MODULE: ../web3-shared/evm/types/index.ts
@@ -937,14 +937,14 @@ var useWalletContext = __webpack_require__(1130);
 var utils = __webpack_require__(13573);
 // EXTERNAL MODULE: ./src/extension/popups/pages/Wallet/type.ts
 var type = __webpack_require__(74275);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/ListItem/ListItem.js + 2 modules
-var ListItem = __webpack_require__(73268);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/ListItemText/ListItemText.js
-var ListItemText = __webpack_require__(10);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Typography/Typography.js + 1 modules
-var Typography = __webpack_require__(7280);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Box/Box.js
-var Box = __webpack_require__(46486);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/ListItem/ListItem.js + 2 modules
+var ListItem = __webpack_require__(66552);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/ListItemText/ListItemText.js
+var ListItemText = __webpack_require__(81396);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Typography/Typography.js + 1 modules
+var Typography = __webpack_require__(74491);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Box/Box.js
+var Box = __webpack_require__(18287);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/formatter.ts
 var formatter = __webpack_require__(22283);
 // EXTERNAL MODULE: ../icons/utils/index.tsx
@@ -981,8 +981,8 @@ var ArrowRight = __webpack_require__(86368);
 var TransactionDescription = __webpack_require__(85066);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/date-fns@2.28.0/node_modules/date-fns/esm/format/index.js + 14 modules
 var format = __webpack_require__(57753);
-// EXTERNAL MODULE: ../plugin-infra/src/index.ts + 1 modules
-var plugin_infra_src = __webpack_require__(27194);
+// EXTERNAL MODULE: ../plugin-infra/src/index.ts
+var plugin_infra_src = __webpack_require__(63151);
 ;// CONCATENATED MODULE: ./src/extension/popups/pages/Wallet/components/ActivityList/ActivityListItem.tsx
 
 
@@ -1256,7 +1256,7 @@ const ActivityListUI = /*#__PURE__*/ (0,react.memo)(({ dataSource , chainId  })=
     const { classes  } = ActivityList_useStyles();
     const { t  } = (0,utils/* useI18N */.M1)();
     const [isExpand, setExpand] = (0,react.useState)(!(dataSource.length > 3));
-    const history = (0,react_router/* useHistory */.k6)();
+    const navigate = (0,react_router/* useNavigate */.s0)();
     const { setTransaction  } = (0,unstated_next/* useContainer */.u)(useWalletContext/* WalletContext */.z);
     if (dataSource.length === 0) return(/*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
         className: classes.empty,
@@ -1284,14 +1284,14 @@ const ActivityListUI = /*#__PURE__*/ (0,react.memo)(({ dataSource , chainId  })=
                             onSpeedUpClick: (e)=>{
                                 e.preventDefault();
                                 setTransaction(transaction);
-                                history.push(dist_default()(shared_base_src/* PopupRoutes.ReplaceTransaction */.mZ.ReplaceTransaction, {
+                                navigate(dist_default()(shared_base_src/* PopupRoutes.ReplaceTransaction */.mZ.ReplaceTransaction, {
                                     type: type/* ReplaceType.SPEED_UP */.u.SPEED_UP
                                 }));
                             },
                             onCancelClick: (e)=>{
                                 e.preventDefault();
                                 setTransaction(transaction);
-                                history.push(dist_default()(shared_base_src/* PopupRoutes.ReplaceTransaction */.mZ.ReplaceTransaction, {
+                                navigate(dist_default()(shared_base_src/* PopupRoutes.ReplaceTransaction */.mZ.ReplaceTransaction, {
                                     type: type/* ReplaceType.CANCEL */.u.CANCEL
                                 }));
                             }
@@ -1350,12 +1350,12 @@ __webpack_require__.d(__webpack_exports__, {
   "Z": () => (/* binding */ WalletHeader)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var src = __webpack_require__(92597);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var src = __webpack_require__(43021);
 // EXTERNAL MODULE: ../icons/utils/index.tsx
 var utils = __webpack_require__(46098);
 ;// CONCATENATED MODULE: ../icons/general/Setting.tsx
@@ -1380,8 +1380,8 @@ const SettingIcon = (0,utils/* createIcon */.I)('SettingIcon', /*#__PURE__*/ (0,
 
 // EXTERNAL MODULE: ./src/extension/popups/components/NetworkSelector/index.tsx
 var NetworkSelector = __webpack_require__(1968);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router@5.2.1_react@18.0.0-rc.0/node_modules/react-router/esm/react-router.js
-var react_router = __webpack_require__(22749);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router@6.2.2_react@18.0.0-rc.2/node_modules/react-router/index.js
+var react_router = __webpack_require__(92186);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var shared_base_src = __webpack_require__(79226);
 ;// CONCATENATED MODULE: ./src/extension/popups/pages/Wallet/components/WalletHeader/index.tsx
@@ -1409,7 +1409,7 @@ const useStyles = (0,src/* makeStyles */.ZL)()({
 });
 const WalletHeader = /*#__PURE__*/ (0,react.memo)(()=>{
     const { classes  } = useStyles();
-    const history = (0,react_router/* useHistory */.k6)();
+    const navigate = (0,react_router/* useNavigate */.s0)();
     return(/*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
         children: /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
             className: classes.container,
@@ -1417,7 +1417,7 @@ const WalletHeader = /*#__PURE__*/ (0,react.memo)(()=>{
                 /*#__PURE__*/ (0,jsx_runtime.jsx)(NetworkSelector/* NetworkSelector */.k, {}),
                 /*#__PURE__*/ (0,jsx_runtime.jsx)(SettingIcon, {
                     className: classes.setting,
-                    onClick: ()=>history.push(shared_base_src/* PopupRoutes.SwitchWallet */.mZ.SwitchWallet)
+                    onClick: ()=>navigate(shared_base_src/* PopupRoutes.SwitchWallet */.mZ.SwitchWallet)
                 })
             ]
         })
@@ -1435,21 +1435,21 @@ const WalletHeader = /*#__PURE__*/ (0,react.memo)(()=>{
 /* harmony export */   "M": () => (/* binding */ WalletInfo)
 /* harmony export */ });
 /* unused harmony export WalletInfoUI */
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(76342);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(46486);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(7280);
-/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(92597);
-/* harmony import */ var _mui_icons_material__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(97116);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(18287);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(74491);
+/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(43021);
+/* harmony import */ var _mui_icons_material__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(90586);
 /* harmony import */ var _masknet_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(12605);
 /* harmony import */ var _masknet_icons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(17514);
 /* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(39850);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(22749);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(92186);
 /* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(79226);
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(51596);
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(22283);
 /* harmony import */ var _components_CopyIconButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(82666);
-/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(27194);
+/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(63151);
 
 
 
@@ -1516,22 +1516,19 @@ const useStyles = (0,_masknet_theme__WEBPACK_IMPORTED_MODULE_2__/* .makeStyles *
 });
 const WalletInfo = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.memo)(()=>{
     const wallet = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_7__/* .useWallet */ .O)();
-    const history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__/* .useHistory */ .k6)();
+    const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__/* .useNavigate */ .s0)();
     const address = new URLSearchParams((0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__/* .useLocation */ .TH)().search).get('address');
     const { value: domain  } = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_6__/* .useReverseAddress */ .$q)(address !== null && address !== void 0 ? address : wallet === null || wallet === void 0 ? void 0 : wallet.address, _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_6__/* .NetworkPluginID.PLUGIN_EVM */ .FF.PLUGIN_EVM);
     const { Utils  } = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_6__/* .useWeb3State */ .dM)();
-    const excludePath = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__/* .useRouteMatch */ .$B)({
-        path: _masknet_shared_base__WEBPACK_IMPORTED_MODULE_4__/* .PopupRoutes.WalletSettings */ .mZ.WalletSettings,
-        exact: true
-    });
+    const excludePath = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__/* .useMatch */ .bS)(_masknet_shared_base__WEBPACK_IMPORTED_MODULE_4__/* .PopupRoutes.WalletSettings */ .mZ.WalletSettings);
     if (!wallet) return null;
     var _name;
     return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(WalletInfoUI, {
         name: (_name = wallet.name) !== null && _name !== void 0 ? _name : '',
         address: wallet.address,
-        onEditClick: ()=>history.push(_masknet_shared_base__WEBPACK_IMPORTED_MODULE_4__/* .PopupRoutes.WalletRename */ .mZ.WalletRename)
+        onEditClick: ()=>navigate(_masknet_shared_base__WEBPACK_IMPORTED_MODULE_4__/* .PopupRoutes.WalletRename */ .mZ.WalletRename)
         ,
-        onSettingClick: ()=>history.push(_masknet_shared_base__WEBPACK_IMPORTED_MODULE_4__/* .PopupRoutes.WalletSettings */ .mZ.WalletSettings)
+        onSettingClick: ()=>navigate(_masknet_shared_base__WEBPACK_IMPORTED_MODULE_4__/* .PopupRoutes.WalletSettings */ .mZ.WalletSettings)
         ,
         hideSettings: !!excludePath,
         domain: domain,
@@ -1613,7 +1610,7 @@ const WalletInfoUI = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.memo)((
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "z": () => (/* binding */ WalletContext)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
 /* harmony import */ var unstated_next__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(44737);
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5364);
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(81174);
@@ -1657,10 +1654,10 @@ const WalletContext = (0,unstated_next__WEBPACK_IMPORTED_MODULE_5__/* .createCon
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "f": () => (/* binding */ useWalletLockStatus)
 /* harmony export */ });
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(22572);
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(28577);
 /* harmony import */ var _plugins_Wallet_messages__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63081);
 /* harmony import */ var _masknet_plugin_wallet__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(89987);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(76342);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(63423);
 
 
 
@@ -1696,24 +1693,24 @@ __webpack_require__.d(__webpack_exports__, {
   "default": () => (/* binding */ Wallet)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Box/Box.js
-var Box = __webpack_require__(46486);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Alert/Alert.js + 4 modules
-var Alert = __webpack_require__(41567);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/AlertTitle/AlertTitle.js + 1 modules
-var AlertTitle = __webpack_require__(78862);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Typography/Typography.js + 1 modules
-var Typography = __webpack_require__(7280);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var src = __webpack_require__(92597);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router-dom@5.3.0_react@18.0.0-rc.0/node_modules/react-router-dom/esm/react-router-dom.js
-var react_router_dom = __webpack_require__(67379);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router@5.2.1_react@18.0.0-rc.0/node_modules/react-router/esm/react-router.js
-var react_router = __webpack_require__(22749);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Box/Box.js
+var Box = __webpack_require__(18287);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Alert/Alert.js + 4 modules
+var Alert = __webpack_require__(39402);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/AlertTitle/AlertTitle.js + 1 modules
+var AlertTitle = __webpack_require__(54421);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Typography/Typography.js + 1 modules
+var Typography = __webpack_require__(74491);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var src = __webpack_require__(43021);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router-dom@6.2.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-router-dom/index.js
+var react_router_dom = __webpack_require__(24336);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router@6.2.2_react@18.0.0-rc.2/node_modules/react-router/index.js
+var react_router = __webpack_require__(92186);
 // EXTERNAL MODULE: ../icons/brands/MaskWallet.tsx
 var MaskWallet = __webpack_require__(12605);
 // EXTERNAL MODULE: ../icons/utils/index.tsx
@@ -1988,40 +1985,38 @@ const WalletStartUp = /*#__PURE__*/ (0,react.memo)(()=>{
 
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useWallet.ts
 var useWallet = __webpack_require__(51596);
-// EXTERNAL MODULE: ../web3-shared/evm/hooks/useWallets.ts
-var useWallets = __webpack_require__(95219);
 // EXTERNAL MODULE: ../web3-shared/evm/types/index.ts
 var types = __webpack_require__(95130);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/styles/styled.js
-var styled = __webpack_require__(8571);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Tabs/Tabs.js + 4 modules
-var Tabs = __webpack_require__(49103);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Tabs/tabsClasses.js
-var tabsClasses = __webpack_require__(6421);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Tab/Tab.js
-var Tab = __webpack_require__(80241);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Tab/tabClasses.js
-var tabClasses = __webpack_require__(46971);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Button/Button.js
-var Button = __webpack_require__(9744);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/styles/styled.js
+var styled = __webpack_require__(68435);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Tabs/Tabs.js + 4 modules
+var Tabs = __webpack_require__(40158);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Tabs/tabsClasses.js
+var tabsClasses = __webpack_require__(85101);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Tab/Tab.js
+var Tab = __webpack_require__(50585);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Tab/tabClasses.js
+var tabClasses = __webpack_require__(21711);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Button/Button.js
+var Button = __webpack_require__(12463);
 // EXTERNAL MODULE: ./src/extension/popups/pages/Wallet/components/WalletHeader/index.tsx + 1 modules
 var WalletHeader = __webpack_require__(19651);
 // EXTERNAL MODULE: ./src/extension/popups/pages/Wallet/components/WalletInfo/index.tsx
 var WalletInfo = __webpack_require__(3359);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+lab@5.0.0-alpha.71_6860626c1dd203d2615586c177a8991f/node_modules/@mui/lab/TabContext/TabContext.js
-var TabContext = __webpack_require__(38884);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+lab@5.0.0-alpha.71_6860626c1dd203d2615586c177a8991f/node_modules/@mui/lab/TabPanel/TabPanel.js + 1 modules
-var TabPanel = __webpack_require__(89338);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+lab@5.0.0-alpha.72_154258abcf19999eeddd92026c0a2f6c/node_modules/@mui/lab/TabContext/TabContext.js
+var TabContext = __webpack_require__(10018);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+lab@5.0.0-alpha.72_154258abcf19999eeddd92026c0a2f6c/node_modules/@mui/lab/TabPanel/TabPanel.js + 1 modules
+var TabPanel = __webpack_require__(43221);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/unstated-next@1.1.0/node_modules/unstated-next/dist/unstated-next.mjs
 var unstated_next = __webpack_require__(44737);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/formatter.ts
 var formatter = __webpack_require__(22283);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/List/List.js + 1 modules
-var List = __webpack_require__(59216);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/ListItem/ListItem.js + 2 modules
-var ListItem = __webpack_require__(73268);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/ListItemText/ListItemText.js
-var ListItemText = __webpack_require__(10);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/List/List.js + 1 modules
+var List = __webpack_require__(66407);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/ListItem/ListItem.js + 2 modules
+var ListItem = __webpack_require__(66552);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/ListItemText/ListItemText.js
+var ListItemText = __webpack_require__(81396);
 // EXTERNAL MODULE: ../icons/general/ArrowRight.tsx
 var ArrowRight = __webpack_require__(86368);
 // EXTERNAL MODULE: ../shared/src/index.ts
@@ -2074,11 +2069,11 @@ const AssetsList_useStyles = (0,src/* makeStyles */.ZL)()({
     }
 });
 const AssetsList = /*#__PURE__*/ (0,react.memo)(()=>{
-    const history = (0,react_router/* useHistory */.k6)();
+    const navigate = (0,react_router/* useNavigate */.s0)();
     const { assets , setCurrentToken  } = (0,unstated_next/* useContainer */.u)(useWalletContext/* WalletContext */.z);
     const onItemClick = (0,react.useCallback)((asset)=>{
         setCurrentToken(asset);
-        history.push(shared_base_src/* PopupRoutes.TokenDetail */.mZ.TokenDetail);
+        navigate(shared_base_src/* PopupRoutes.TokenDetail */.mZ.TokenDetail);
     }, []);
     return(/*#__PURE__*/ (0,jsx_runtime.jsx)(AssetsListUI, {
         dataSource: assets,
@@ -2216,9 +2211,9 @@ var WalletTabs;
     WalletTabs["Activity"] = "Activity";
 })(WalletTabs || (WalletTabs = {}));
 const WalletAssets = /*#__PURE__*/ (0,react.memo)(()=>{
-    const history = (0,react_router/* useHistory */.k6)();
+    const navigate = (0,react_router/* useNavigate */.s0)();
     return(/*#__PURE__*/ (0,jsx_runtime.jsx)(WalletAssetsUI, {
-        onAddTokenClick: ()=>history.push(shared_base_src/* PopupRoutes.AddToken */.mZ.AddToken)
+        onAddTokenClick: ()=>navigate(shared_base_src/* PopupRoutes.AddToken */.mZ.AddToken)
     }));
 });
 const WalletAssetsUI = /*#__PURE__*/ (0,react.memo)(({ onAddTokenClick  })=>{
@@ -2287,14 +2282,16 @@ const WalletAssetsUI = /*#__PURE__*/ (0,react.memo)(({ onAddTokenClick  })=>{
     });
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useAsyncRetry.js
-var useAsyncRetry = __webpack_require__(22572);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useAsyncRetry.js
+var useAsyncRetry = __webpack_require__(28577);
 // EXTERNAL MODULE: ./src/plugins/Wallet/messages.ts
 var messages = __webpack_require__(63081);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/head.js
 var head = __webpack_require__(29730);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useAccount.ts
 var useAccount = __webpack_require__(98086);
+// EXTERNAL MODULE: ../web3-shared/evm/hooks/useWallets.ts
+var useWallets = __webpack_require__(95219);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useChainId.ts
 var useChainId = __webpack_require__(63541);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/chainDetailed.ts
@@ -2307,8 +2304,8 @@ var settings = __webpack_require__(63361);
 var Success = __webpack_require__(57214);
 // EXTERNAL MODULE: ./src/extension/popups/components/CopyIconButton/index.tsx
 var CopyIconButton = __webpack_require__(82666);
-// EXTERNAL MODULE: ../plugin-infra/src/index.ts + 1 modules
-var plugin_infra_src = __webpack_require__(27194);
+// EXTERNAL MODULE: ../plugin-infra/src/index.ts
+var plugin_infra_src = __webpack_require__(63151);
 ;// CONCATENATED MODULE: ./src/extension/popups/pages/Wallet/SelectWallet/WalletItem.tsx
 
 
@@ -2656,13 +2653,13 @@ const WalletRecovery = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() 
 );
 const LegacyWalletRecovery = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(6230), __webpack_require__.e(2598), __webpack_require__.e(1102)]).then(__webpack_require__.bind(__webpack_require__, 81102))
 );
-const ReplaceTransaction = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(2698), __webpack_require__.e(6230), __webpack_require__.e(2598), __webpack_require__.e(1754)]).then(__webpack_require__.bind(__webpack_require__, 61754))
+const ReplaceTransaction = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(2698), __webpack_require__.e(6230), __webpack_require__.e(2598), __webpack_require__.e(1754)]).then(__webpack_require__.bind(__webpack_require__, 47905))
 );
+const r = (0,shared_base_src/* relativeRouteOf */.zD)(shared_base_src/* PopupRoutes.Wallet */.mZ.Wallet);
 function Wallet() {
     const wallet = (0,useWallet/* useWallet */.O)();
     const location = (0,react_router/* useLocation */.TH)();
-    const history = (0,react_router/* useHistory */.k6)();
-    const wallets = (0,useWallets/* useWallets */.r)(types/* ProviderType.MaskWallet */.lP.MaskWallet);
+    const navigate = (0,react_router/* useNavigate */.s0)();
     const { isLocked , loading: getLockStatusLoading  } = (0,useWalletLockStatus/* useWalletLockStatus */.f)();
     const { loading , retry  } = (0,useAsyncRetry/* default */.Z)(async ()=>{
         if ([
@@ -2683,11 +2680,15 @@ function Wallet() {
             switch(value.computedPayload.type){
                 case types/* EthereumRpcType.SIGN */.Wv.SIGN:
                 case types/* EthereumRpcType.SIGN_TYPED_DATA */.Wv.SIGN_TYPED_DATA:
-                    history.replace(shared_base_src/* PopupRoutes.WalletSignRequest */.mZ.WalletSignRequest);
+                    navigate(shared_base_src/* PopupRoutes.WalletSignRequest */.mZ.WalletSignRequest, {
+                        replace: true
+                    });
                     break;
                 case types/* EthereumRpcType.CONTRACT_INTERACTION */.Wv.CONTRACT_INTERACTION:
                 case types/* EthereumRpcType.SEND_ETHER */.Wv.SEND_ETHER:
-                    history.replace(shared_base_src/* PopupRoutes.ContractInteraction */.mZ.ContractInteraction);
+                    navigate(shared_base_src/* PopupRoutes.ContractInteraction */.mZ.ContractInteraction, {
+                        replace: true
+                    });
                     break;
                 default:
                     break;
@@ -2699,9 +2700,11 @@ function Wallet() {
     ]);
     (0,react.useEffect)(()=>{
         if (!(isLocked && !getLockStatusLoading && location.pathname !== shared_base_src/* PopupRoutes.Unlock */.mZ.Unlock)) return;
-        history.replace(dist_default()(shared_base_src/* PopupRoutes.Unlock */.mZ.Unlock, {
+        navigate(dist_default()(shared_base_src/* PopupRoutes.Unlock */.mZ.Unlock, {
             from: location.pathname
-        }));
+        }), {
+            replace: true
+        });
     }, [
         isLocked,
         location.pathname,
@@ -2717,107 +2720,91 @@ function Wallet() {
     return(/*#__PURE__*/ (0,jsx_runtime.jsx)(react.Suspense, {
         fallback: /*#__PURE__*/ (0,jsx_runtime.jsx)(LoadingPlaceholder/* LoadingPlaceholder */.u, {}),
         children: /*#__PURE__*/ (0,jsx_runtime.jsx)(useWalletContext/* WalletContext.Provider */.z.Provider, {
-            children: loading ? /*#__PURE__*/ (0,jsx_runtime.jsx)(LoadingPlaceholder/* LoadingPlaceholder */.u, {}) : /*#__PURE__*/ (0,jsx_runtime.jsxs)(react_router/* Switch */.rs, {
+            children: loading ? /*#__PURE__*/ (0,jsx_runtime.jsx)(LoadingPlaceholder/* LoadingPlaceholder */.u, {}) : /*#__PURE__*/ (0,jsx_runtime.jsxs)(react_router/* Routes */.Z5, {
                 children: [
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                        path: shared_base_src/* PopupRoutes.WalletRecovered */.mZ.WalletRecovered,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(WalletRecovery, {}),
-                        exact: true
+                        path: "*",
+                        element: !wallet ? /*#__PURE__*/ (0,jsx_runtime.jsx)(WalletStartUp, {}) : /*#__PURE__*/ (0,jsx_runtime.jsx)(WalletAssets, {})
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                        path: shared_base_src/* PopupRoutes.LegacyWalletRecovered */.mZ.LegacyWalletRecovered,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(LegacyWalletRecovery, {}),
-                        exact: true
+                        path: r(shared_base_src/* PopupRoutes.WalletRecovered */.mZ.WalletRecovered),
+                        element: /*#__PURE__*/ (0,jsx_runtime.jsx)(WalletRecovery, {})
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                        path: shared_base_src/* PopupRoutes.Wallet */.mZ.Wallet,
-                        exact: true,
-                        children: !wallet ? /*#__PURE__*/ (0,jsx_runtime.jsx)(WalletStartUp, {}) : /*#__PURE__*/ (0,jsx_runtime.jsx)(WalletAssets, {})
+                        path: r(shared_base_src/* PopupRoutes.LegacyWalletRecovered */.mZ.LegacyWalletRecovered),
+                        element: /*#__PURE__*/ (0,jsx_runtime.jsx)(LegacyWalletRecovery, {})
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                        path: shared_base_src/* PopupRoutes.ImportWallet */.mZ.ImportWallet,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(ImportWallet, {}),
-                        exact: true
+                        path: r(shared_base_src/* PopupRoutes.ImportWallet */.mZ.ImportWallet),
+                        element: /*#__PURE__*/ (0,jsx_runtime.jsx)(ImportWallet, {})
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                        path: shared_base_src/* PopupRoutes.AddDeriveWallet */.mZ.AddDeriveWallet,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(AddDeriveWallet, {}),
-                        exact: true
+                        path: r(shared_base_src/* PopupRoutes.AddDeriveWallet */.mZ.AddDeriveWallet),
+                        element: /*#__PURE__*/ (0,jsx_runtime.jsx)(AddDeriveWallet, {})
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                        path: shared_base_src/* PopupRoutes.WalletSettings */.mZ.WalletSettings,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(WalletSettings, {}),
-                        exact: true
+                        path: r(shared_base_src/* PopupRoutes.WalletSettings */.mZ.WalletSettings),
+                        element: /*#__PURE__*/ (0,jsx_runtime.jsx)(WalletSettings, {})
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                        path: shared_base_src/* PopupRoutes.WalletRename */.mZ.WalletRename,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(WalletRename, {}),
-                        exact: true
+                        path: r(shared_base_src/* PopupRoutes.WalletRename */.mZ.WalletRename),
+                        element: /*#__PURE__*/ (0,jsx_runtime.jsx)(WalletRename, {})
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                        path: shared_base_src/* PopupRoutes.DeleteWallet */.mZ.DeleteWallet,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(DeleteWallet, {}),
-                        exact: true
+                        path: r(shared_base_src/* PopupRoutes.DeleteWallet */.mZ.DeleteWallet),
+                        element: /*#__PURE__*/ (0,jsx_runtime.jsx)(DeleteWallet, {})
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                        path: shared_base_src/* PopupRoutes.CreateWallet */.mZ.CreateWallet,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(CreateWallet, {}),
-                        exact: true
+                        path: r(shared_base_src/* PopupRoutes.CreateWallet */.mZ.CreateWallet),
+                        element: /*#__PURE__*/ (0,jsx_runtime.jsx)(CreateWallet, {})
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                        path: shared_base_src/* PopupRoutes.SwitchWallet */.mZ.SwitchWallet,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(SwitchWallet, {}),
-                        exact: true
+                        path: r(shared_base_src/* PopupRoutes.SwitchWallet */.mZ.SwitchWallet),
+                        element: /*#__PURE__*/ (0,jsx_runtime.jsx)(SwitchWallet, {})
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                        path: shared_base_src/* PopupRoutes.BackupWallet */.mZ.BackupWallet,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(BackupWallet, {}),
-                        exact: true
+                        path: r(shared_base_src/* PopupRoutes.BackupWallet */.mZ.BackupWallet),
+                        element: /*#__PURE__*/ (0,jsx_runtime.jsx)(BackupWallet, {})
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                        path: shared_base_src/* PopupRoutes.AddToken */.mZ.AddToken,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(AddToken, {}),
-                        exact: true
+                        path: r(shared_base_src/* PopupRoutes.AddToken */.mZ.AddToken),
+                        element: /*#__PURE__*/ (0,jsx_runtime.jsx)(AddToken, {})
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                        path: shared_base_src/* PopupRoutes.WalletSignRequest */.mZ.WalletSignRequest,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(SignRequest, {})
+                        path: r(shared_base_src/* PopupRoutes.WalletSignRequest */.mZ.WalletSignRequest),
+                        element: /*#__PURE__*/ (0,jsx_runtime.jsx)(SignRequest, {})
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                        path: shared_base_src/* PopupRoutes.GasSetting */.mZ.GasSetting,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(GasSetting, {})
+                        path: r(shared_base_src/* PopupRoutes.GasSetting */.mZ.GasSetting),
+                        element: /*#__PURE__*/ (0,jsx_runtime.jsx)(GasSetting, {})
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                        path: shared_base_src/* PopupRoutes.TokenDetail */.mZ.TokenDetail,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(TokenDetail, {}),
-                        exact: true
+                        path: r(shared_base_src/* PopupRoutes.TokenDetail */.mZ.TokenDetail),
+                        element: /*#__PURE__*/ (0,jsx_runtime.jsx)(TokenDetail, {})
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                        path: shared_base_src/* PopupRoutes.Transfer */.mZ.Transfer,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Transfer, {}),
-                        exact: true
+                        path: r(shared_base_src/* PopupRoutes.Transfer */.mZ.Transfer),
+                        element: /*#__PURE__*/ (0,jsx_runtime.jsx)(Transfer, {})
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                        path: shared_base_src/* PopupRoutes.ContractInteraction */.mZ.ContractInteraction,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(ContractInteraction, {})
+                        path: r(shared_base_src/* PopupRoutes.ContractInteraction */.mZ.ContractInteraction),
+                        element: /*#__PURE__*/ (0,jsx_runtime.jsx)(ContractInteraction, {})
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                        path: shared_base_src/* PopupRoutes.SelectWallet */.mZ.SelectWallet,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Wallet_SelectWallet, {})
+                        path: r(shared_base_src/* PopupRoutes.SelectWallet */.mZ.SelectWallet),
+                        element: /*#__PURE__*/ (0,jsx_runtime.jsx)(Wallet_SelectWallet, {})
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                        path: shared_base_src/* PopupRoutes.Unlock */.mZ.Unlock,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Unlock, {})
+                        path: r(shared_base_src/* PopupRoutes.Unlock */.mZ.Unlock),
+                        element: /*#__PURE__*/ (0,jsx_runtime.jsx)(Unlock, {})
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                        path: shared_base_src/* PopupRoutes.SetPaymentPassword */.mZ.SetPaymentPassword,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(SetPaymentPassword, {}),
-                        exact: true
+                        path: r(shared_base_src/* PopupRoutes.SetPaymentPassword */.mZ.SetPaymentPassword),
+                        element: /*#__PURE__*/ (0,jsx_runtime.jsx)(SetPaymentPassword, {})
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                        path: shared_base_src/* PopupRoutes.ReplaceTransaction */.mZ.ReplaceTransaction,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(ReplaceTransaction, {}),
-                        exact: true
+                        path: r(shared_base_src/* PopupRoutes.ReplaceTransaction */.mZ.ReplaceTransaction),
+                        element: /*#__PURE__*/ (0,jsx_runtime.jsx)(ReplaceTransaction, {})
                     })
                 ]
             })
@@ -2862,8 +2849,8 @@ __webpack_require__.d(__webpack_exports__, {
   "q": () => (/* binding */ RecentTransactionDescription)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/last.js
 var last = __webpack_require__(7683);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/head.js
@@ -2880,8 +2867,8 @@ var useNativeTokenDetailed = __webpack_require__(80955);
 var useERC20TokenDetailed = __webpack_require__(14754);
 // EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
 var src = __webpack_require__(15091);
-// EXTERNAL MODULE: ../web3-shared/evm/constants/index.ts + 26 modules
-var constants = __webpack_require__(92211);
+// EXTERNAL MODULE: ../web3-shared/evm/constants/constants.ts + 26 modules
+var constants = __webpack_require__(24403);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/address.ts
 var utils_address = __webpack_require__(66580);
 // EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
@@ -3084,8 +3071,8 @@ function RecentTransactionDescription(props) {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "S": () => (/* binding */ useRecentTransactions)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(22572);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(28577);
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(98086);
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(63541);
 /* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63081);
@@ -3138,12 +3125,12 @@ var useNativeTokenDetailed = __webpack_require__(80955);
 var useAssetsFromChain = __webpack_require__(25632);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useAssetsFromProvider.ts
 var useAssetsFromProvider = __webpack_require__(44167);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/uniqBy.js
 var uniqBy = __webpack_require__(18443);
-// EXTERNAL MODULE: ../web3-shared/evm/constants/index.ts + 26 modules
-var constants = __webpack_require__(92211);
+// EXTERNAL MODULE: ../web3-shared/evm/constants/constants.ts + 26 modules
+var constants = __webpack_require__(24403);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/misc.ts
 var misc = __webpack_require__(7454);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/formatter.ts
