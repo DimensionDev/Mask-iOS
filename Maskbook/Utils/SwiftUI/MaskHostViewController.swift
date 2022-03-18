@@ -16,4 +16,43 @@ class MaskHostViewController<Content: View>: UIHostingController<Content> {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         statusBarStyle
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.view.invalidateIntrinsicContentSize()
+    }
+}
+
+class SheetHostViewController<Content: View>: SheetViewController {
+    let hostViewController: MaskHostViewController<Content>
+    
+    init(rootView: Content) {
+        hostViewController = MaskHostViewController(rootView: rootView)
+        
+        super.init(presenter: SheetPresenter(presentStyle: .translucent))
+    }
+    
+    override func buildContent() {
+        super.buildContent()
+        
+        addChild(hostViewController)
+        contentView.addSubview(hostViewController.view)
+        hostViewController.view.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    override func buildLayout() {
+        super.buildLayout()
+        
+        hostViewController.view.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.view.invalidateIntrinsicContentSize()
+    }
 }
