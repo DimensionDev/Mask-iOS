@@ -56,6 +56,8 @@ class CropImageViewController: BaseViewController {
         button.titleLabel?.font = FontStyles.BH6
         button.setTitle(L10n.Common.Controls.save, for: .normal)
         button.setInsets(forContentPadding: UIEdgeInsets(top: 11, left: 8, bottom: 11, right: 8), imageTitlePadding: 0)
+        
+        button.addTarget(self, action: #selector(saveAction), for: .touchUpInside)
         return button
     }()
 
@@ -63,6 +65,14 @@ class CropImageViewController: BaseViewController {
         let button = UIButton(type: .custom)
         button.setImage(Asset.Icon.Arrows.backArrowSmall.image, for: .normal)
         button.setInsets(forContentPadding: UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6), imageTitlePadding: 0)
+        button.addTarget(self, action: #selector(backAction), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var rotateButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(Asset.Images.Scene.Personas.rotate.image, for: .normal)
+        button.addTarget(self, action: #selector(rotateAction), for: .touchUpInside)
         return button
     }()
 
@@ -78,6 +88,8 @@ class CropImageViewController: BaseViewController {
     private lazy var scanBorderView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isUserInteractionEnabled = false
         return view
     }()
 
@@ -110,7 +122,7 @@ class CropImageViewController: BaseViewController {
         let width = UIScreen.main.bounds.size.width / 2 - 44
 
         let shapeLayer = CAShapeLayer()
-        shapeLayer.opacity = 0.3
+        shapeLayer.opacity = 0.7
         shapeLayer.fillColor = Asset.Colors.Background.mask.color.cgColor
         shapeLayer.frame = view.bounds
         let path = UIBezierPath(arcCenter: center,
@@ -127,14 +139,14 @@ class CropImageViewController: BaseViewController {
 
         view.addSubview(scanBorderView)
         NSLayoutConstraint.activate([
-            scanBorderView.widthAnchor.constraint(equalToConstant: width),
-            scanBorderView.heightAnchor.constraint(equalToConstant: width),
+            scanBorderView.widthAnchor.constraint(equalToConstant: width * 2),
+            scanBorderView.heightAnchor.constraint(equalToConstant: width * 2),
             scanBorderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             scanBorderView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+        scanBorderView.layer.cornerRadius = width
         scanBorderView.layer.borderColor = CGColor.white()
         scanBorderView.layer.borderWidth = 1
-        scanBorderView.applyCornerRadius(radius: width)
     }
 
     func addImageView() {
@@ -148,11 +160,42 @@ class CropImageViewController: BaseViewController {
             imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+    
+    func addRotateButton() {
+        view.withSubViews {
+            rotateButton
+        }
+        NSLayoutConstraint.activate([
+            rotateButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            rotateButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60)
+        ])
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .black
+        view.clipsToBounds = true
         addImageView()
         addMaskLayer()
         setupCustomNavigationBar()
+        addRotateButton()
+    }
+}
+
+extension CropImageViewController {
+    @objc
+    func backAction() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc
+    func saveAction() {
+        PersonaAvatarViewModel.saveImageForCurrentPersona(image: image)
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc
+    func rotateAction() {
+        imageView.rotateLeft()
     }
 }

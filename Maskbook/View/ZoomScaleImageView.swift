@@ -46,7 +46,7 @@ class ZoomScaleImageView: UIImageView, UIGestureRecognizerDelegate {
         initialSetup()
     }
     
-    func initialSetup() {
+    private func initialSetup() {
         isUserInteractionEnabled = true
 
         addGestureRecognizer(pinchGesture)
@@ -54,8 +54,8 @@ class ZoomScaleImageView: UIImageView, UIGestureRecognizerDelegate {
         addGestureRecognizer(panGesture)
     }
     
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
-                           shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool
+    internal func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                                    shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool
     {
         if gestureRecognizer is UITapGestureRecognizer
             || otherGestureRecognizer is UITapGestureRecognizer
@@ -66,7 +66,7 @@ class ZoomScaleImageView: UIImageView, UIGestureRecognizerDelegate {
     }
     
     @objc
-    func panMonster() {
+    private func panMonster() {
         let translation = panGesture.translation(in: superview)
         guard let panView = panGesture.view else {
             return
@@ -79,7 +79,7 @@ class ZoomScaleImageView: UIImageView, UIGestureRecognizerDelegate {
     }
     
     @objc
-    func rotateMonster() {
+    private func rotateMonster() {
         guard let rotateView = rotateGesture.view else {
             return
         }
@@ -88,11 +88,39 @@ class ZoomScaleImageView: UIImageView, UIGestureRecognizerDelegate {
     }
     
     @objc
-    func pinchMonster() {
+    private func pinchMonster() {
         guard let pinchView = pinchGesture.view else {
             return
         }
         pinchView.transform = pinchView.transform.scaledBy(x: pinchGesture.scale, y: pinchGesture.scale)
         pinchGesture.scale = 1
+    }
+    
+    func rotateLeft() {
+        let rotate = rotation(from: transform)
+        var index = rotate * 2.0 / Double.pi
+        let floorIndex = floor(index)
+        if index == floorIndex {
+            index -= 1
+        } else if floorIndex - index < 0.0001 {
+            index = floorIndex - 1
+        }
+        let rotateIndex = floor(index) / 2.0
+        print(index)
+        let oldTransform = transform
+        UIView.animate(withDuration: 0.3) {
+            self.transform = CGAffineTransform.makeTransform(
+                xScale: oldTransform.xScale,
+                yScale: oldTransform.yScale,
+                theta: rotateIndex * Double.pi,
+                tx: oldTransform.tx,
+                ty: oldTransform.ty)
+        }
+    }
+}
+
+extension ZoomScaleImageView {
+    func rotation(from transform: CGAffineTransform) -> Double {
+        atan2(Double(transform.b), Double(transform.a))
     }
 }

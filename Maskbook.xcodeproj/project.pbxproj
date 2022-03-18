@@ -627,6 +627,7 @@
 		5DE1D5A227A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE1D5A127A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift */; };
 		5DE2B10F27BA60AC002ACA54 /* View+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE2B10E27BA60AC002ACA54 /* View+Snapshot.swift */; };
 		5DE5395727473599005F4CEA /* PanModalPresentable+color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5395627473599005F4CEA /* PanModalPresentable+color.swift */; };
+		5DE5E53A27E4424300F2B62A /* CGAffineTransform+extensiion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5E53927E4424300F2B62A /* CGAffineTransform+extensiion.swift */; };
 		5DF1C30B27DA33EB003F26C1 /* FixUITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF1C30A27DA33EB003F26C1 /* FixUITableView.swift */; };
 		6936CABEC702BABE09CAD1D6 /* Pods_Maskbook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B22CF13FDEA7F9081377F7B5 /* Pods_Maskbook.framework */; };
 		6F07ABE1279022B80039D69D /* NFTCollectionStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE0279022B80039D69D /* NFTCollectionStatusModel.swift */; };
@@ -1336,6 +1337,7 @@
 		5DE1D5A127A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RedPacketInteractivePayload+Description.swift"; sourceTree = "<group>"; };
 		5DE2B10E27BA60AC002ACA54 /* View+Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Snapshot.swift"; sourceTree = "<group>"; };
 		5DE5395627473599005F4CEA /* PanModalPresentable+color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PanModalPresentable+color.swift"; sourceTree = "<group>"; };
+		5DE5E53927E4424300F2B62A /* CGAffineTransform+extensiion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGAffineTransform+extensiion.swift"; sourceTree = "<group>"; };
 		5DF1C30A27DA33EB003F26C1 /* FixUITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixUITableView.swift; sourceTree = "<group>"; };
 		5E5FB61CA8DEBD9BB0253DD3 /* Pods-MaskbookTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskbookTests.release.xcconfig"; path = "Target Support Files/Pods-MaskbookTests/Pods-MaskbookTests.release.xcconfig"; sourceTree = "<group>"; };
 		6F07ABE0279022B80039D69D /* NFTCollectionStatusModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFTCollectionStatusModel.swift; sourceTree = "<group>"; };
@@ -3160,6 +3162,7 @@
 				5DAC90B627C5D0B100BAFB23 /* UIView+Shake.swift */,
 				2D1FDD852769EC05002E5C91 /* Managed+extension.swift */,
 				2D2ED7B3272FEBC7004B7408 /* NSMutableAttributedString+extension.swift */,
+				5DE5E53927E4424300F2B62A /* CGAffineTransform+extensiion.swift */,
 				2AF8861B271EEDF80004565A /* Array+Safety.swift */,
 				2AF8861C271EEDF80004565A /* Publisher+extension.swift */,
 				2AF8861D271EEDF80004565A /* NSLayoutConstraint.swift */,
@@ -4420,6 +4423,7 @@
 				6F785E2F269305E20019079F /* RecentlyAddress.swift in Sources */,
 				2A6ABB832720053B00CC3AED /* SetPasswordViewModel.swift in Sources */,
 				1F57023D27A2AF8600C96909 /* RedPacketShareView.swift in Sources */,
+				5DE5E53A27E4424300F2B62A /* CGAffineTransform+extensiion.swift in Sources */,
 				2AF88570271EE9310004565A /* WordsVerifyProtocol.swift in Sources */,
 				2AF8858A271EE9310004565A /* SelectItemViewController.swift in Sources */,
 				2AFBEDE526E61D6400BD77B7 /* LoadingWithTextController.swift in Sources */,

@@ -10,11 +10,7 @@ import Foundation
 import UIKit
 
 class PersonaAvatarViewModel {
-    static func saveImage(image: UIImage) {
-        
-    }
-    
-    static func removeAvatar() {
-        
-    }
+    static func saveImageForCurrentPersona(image: UIImage) {}
+
+    static func removeAvatarForCurrentPersona() {}
 }

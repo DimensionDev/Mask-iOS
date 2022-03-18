@@ -96,58 +96,57 @@ class PersonaAvatarViewController: BaseViewController {
     }
     
     private func cropImage(image: UIImage, pickerViewController: UIViewController) {
-        coordinator.present(scene: .cropImage(image: image),
-                            transition: .detail(animated: true))
+        DispatchQueue.main.async {
+            self.coordinator.present(scene: .cropImage(image: image),
+                                     transition: .detail(animated: true))
+        }
     }
 }
 
 extension PersonaAvatarViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        picker.dismiss(animated: true, completion: {})
-        guard let itemProvider = results.first?.itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) else {
-            return
-        }
-        itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
-            guard let self = self else { return }
-            guard let image = image as? UIImage else {
-                DispatchQueue.main.async {
-                    if let errorDescription = error?.localizedDescription {
-                        let alertController = AlertController(
-                            title: errorDescription,
-                            message: "",
-                            confirmButtonText: L10n.Common.Controls.done,
-                            imageType: .error)
-                        self.coordinator.present(
-                            scene: .alertController(alertController: alertController),
-                            transition: .alertController(completion: nil))
-                    }
-                }
+        DispatchQueue.main.async {
+            guard let itemProvider = results.first?.itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) else {
+                picker.dismiss(animated: true, completion: {})
                 return
             }
-            
-            self.cropImage(image: image, pickerViewController: picker)
+            itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
+                guard let self = self else { return }
+                DispatchQueue.main.async {
+                    guard let image = image as? UIImage else {
+                        picker.dismiss(animated: true, completion: {
+                            if let errorDescription = error?.localizedDescription {
+                                let alertController = AlertController(
+                                    title: errorDescription,
+                                    message: "",
+                                    confirmButtonText: L10n.Common.Controls.done,
+                                    imageType: .error)
+                                self.coordinator.present(
+                                    scene: .alertController(alertController: alertController),
+                                    transition: .alertController(completion: nil))
+                            }
+                        })
+                        return
+                    }
+                    picker.dismiss(animated: true, completion: {
+                        self.cropImage(image: image, pickerViewController: picker)
+                    })
+                }
+            }
         }
     }
 }
 
 extension PersonaAvatarViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        picker.dismiss(animated: true, completion: nil)
-
-        guard let image = info[.originalImage] as? UIImage else { return }
-
-        cropImage(image: image, pickerViewController: picker)
+        picker.dismiss(animated: true) {
+            guard let image = info[.originalImage] as? UIImage else { return }
+            self.cropImage(image: image, pickerViewController: picker)
+        }
     }
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
-    }
-}
-
-extension PersonaAvatarViewController: CropImageViewControllerDelegate {
-    public func cropViewController(_ cropViewController: CropImageViewController, didCropToImage image: UIImage) {
-        PersonaAvatarViewModel.saveImage(image: image)
-        cropViewController.dismiss(animated: true, completion: nil)
     }
 }
 
