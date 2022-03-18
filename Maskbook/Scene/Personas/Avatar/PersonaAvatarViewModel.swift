@@ -10,7 +10,24 @@ import Foundation
 import UIKit
 
 class PersonaAvatarViewModel {
-    static func saveImageForCurrentPersona(image: UIImage) {}
+    static func saveImageForCurrentPersona(image: UIImage) {
+        @InjectedProvider(\.personaManager)
+        var personaManager
+        guard let identifier = personaManager.currentPersona.value?.identifier,
+              let data = image.pngData()
+        else {
+            return
+        }
+        PersonaRepository.updatePersonaAvatarData(identifier: identifier, avatarData: data)
+    }
 
-    static func removeAvatarForCurrentPersona() {}
+    static func removeAvatarForCurrentPersona() {
+        @InjectedProvider(\.personaManager)
+        var personaManager
+        guard let identifier = personaManager.currentPersona.value?.identifier
+        else {
+            return
+        }
+        PersonaRepository.updatePersonaAvatarData(identifier: identifier, avatarData: nil)
+    }
 }

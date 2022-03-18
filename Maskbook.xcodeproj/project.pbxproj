@@ -628,6 +628,7 @@
 		5DE2B10F27BA60AC002ACA54 /* View+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE2B10E27BA60AC002ACA54 /* View+Snapshot.swift */; };
 		5DE5395727473599005F4CEA /* PanModalPresentable+color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5395627473599005F4CEA /* PanModalPresentable+color.swift */; };
 		5DE5E53A27E4424300F2B62A /* CGAffineTransform+extensiion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5E53927E4424300F2B62A /* CGAffineTransform+extensiion.swift */; };
+		5DE5E53C27E468B400F2B62A /* PersonaAvatarActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5E53B27E468B400F2B62A /* PersonaAvatarActionViewModel.swift */; };
 		5DF1C30B27DA33EB003F26C1 /* FixUITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF1C30A27DA33EB003F26C1 /* FixUITableView.swift */; };
 		6936CABEC702BABE09CAD1D6 /* Pods_Maskbook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B22CF13FDEA7F9081377F7B5 /* Pods_Maskbook.framework */; };
 		6F07ABE1279022B80039D69D /* NFTCollectionStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE0279022B80039D69D /* NFTCollectionStatusModel.swift */; };
@@ -1338,6 +1339,7 @@
 		5DE2B10E27BA60AC002ACA54 /* View+Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Snapshot.swift"; sourceTree = "<group>"; };
 		5DE5395627473599005F4CEA /* PanModalPresentable+color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PanModalPresentable+color.swift"; sourceTree = "<group>"; };
 		5DE5E53927E4424300F2B62A /* CGAffineTransform+extensiion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGAffineTransform+extensiion.swift"; sourceTree = "<group>"; };
+		5DE5E53B27E468B400F2B62A /* PersonaAvatarActionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaAvatarActionViewModel.swift; sourceTree = "<group>"; };
 		5DF1C30A27DA33EB003F26C1 /* FixUITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixUITableView.swift; sourceTree = "<group>"; };
 		5E5FB61CA8DEBD9BB0253DD3 /* Pods-MaskbookTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskbookTests.release.xcconfig"; path = "Target Support Files/Pods-MaskbookTests/Pods-MaskbookTests.release.xcconfig"; sourceTree = "<group>"; };
 		6F07ABE0279022B80039D69D /* NFTCollectionStatusModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFTCollectionStatusModel.swift; sourceTree = "<group>"; };
@@ -3413,6 +3415,7 @@
 			children = (
 				5D770B1027DED6F900539254 /* PersonaAvatarViewController.swift */,
 				5D770B1227DED70400539254 /* PersonaAvatarViewModel.swift */,
+				5DE5E53B27E468B400F2B62A /* PersonaAvatarActionViewModel.swift */,
 			);
 			path = Avatar;
 			sourceTree = "<group>";
@@ -4365,6 +4368,7 @@
 				4156689327A53BA70051E0E7 /* ShareLinkGenerator.swift in Sources */,
 				1F721096279E90DC00B8BF76 /* RedPacket.swift in Sources */,
 				2AF88533271EE9310004565A /* DerivationPathHeaderView.swift in Sources */,
+				5DE5E53C27E468B400F2B62A /* PersonaAvatarActionViewModel.swift in Sources */,
 				1F0363922779D223001E8A88 /* DecentralisedApplicationResolver.swift in Sources */,
 				1FCBEDF42738FF6C001C3637 /* RestoreWalletPasswordVerifyController.swift in Sources */,
 				2AF88616271EED7D0004565A /* MoveFromBottomModifier.swift in Sources */,

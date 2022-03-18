@@ -555,7 +555,8 @@
         },
         "persona_avatar": {
             "title": "Set Persona Avatar",
-            "crop": "Crop & rotate"
+            "crop": "Crop & rotate",
+            "remove_avatar": "Remove Persona Avatar"
         },
         "wallet_balance": {
             "btn_swap": "Swap",

@@ -313,8 +313,10 @@ internal enum Asset {
         internal static let personaDefault = ImageAsset(name: "Images/Scene/Personas/personaDefault")
         internal static let personaShadow = ImageAsset(name: "Images/Scene/Personas/personaShadow")
         internal static let recovery = ImageAsset(name: "Images/Scene/Personas/recovery")
+        internal static let removeAvatar = ImageAsset(name: "Images/Scene/Personas/removeAvatar")
         internal static let rename = ImageAsset(name: "Images/Scene/Personas/rename")
         internal static let rotate = ImageAsset(name: "Images/Scene/Personas/rotate")
+        internal static let setAvatar = ImageAsset(name: "Images/Scene/Personas/setAvatar")
         internal static let twitter = ImageAsset(name: "Images/Scene/Personas/twitter")
         internal static let watermark = ImageAsset(name: "Images/Scene/Personas/watermark")
       }

@@ -56,7 +56,7 @@ class CropImageViewController: BaseViewController {
         button.titleLabel?.font = FontStyles.BH6
         button.setTitle(L10n.Common.Controls.save, for: .normal)
         button.setInsets(forContentPadding: UIEdgeInsets(top: 11, left: 8, bottom: 11, right: 8), imageTitlePadding: 0)
-        
+
         button.addTarget(self, action: #selector(saveAction), for: .touchUpInside)
         return button
     }()
@@ -68,7 +68,7 @@ class CropImageViewController: BaseViewController {
         button.addTarget(self, action: #selector(backAction), for: .touchUpInside)
         return button
     }()
-    
+
     private lazy var rotateButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setImage(Asset.Images.Scene.Personas.rotate.image, for: .normal)
@@ -90,6 +90,13 @@ class CropImageViewController: BaseViewController {
         view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isUserInteractionEnabled = false
+        return view
+    }()
+
+    private lazy var imageContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
@@ -151,8 +158,19 @@ class CropImageViewController: BaseViewController {
 
     func addImageView() {
         view.withSubViews {
+            imageContainer
+        }
+        imageContainer.withSubViews {
             imageView
         }
+        let width = UIScreen.main.bounds.size.width / 2 - 44
+
+        NSLayoutConstraint.activate([
+            imageContainer.widthAnchor.constraint(equalToConstant: width * 2),
+            imageContainer.heightAnchor.constraint(equalToConstant: width * 2),
+            imageContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            imageContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: view.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -160,7 +178,7 @@ class CropImageViewController: BaseViewController {
             imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-    
+
     func addRotateButton() {
         view.withSubViews {
             rotateButton
@@ -183,17 +201,27 @@ class CropImageViewController: BaseViewController {
 }
 
 extension CropImageViewController {
+    func cropImage() -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(imageContainer.bounds.size, false, 0)
+        imageContainer.drawHierarchy(in: imageContainer.bounds, afterScreenUpdates: true)
+        let screenShot = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return screenShot
+    }
+
     @objc
     func backAction() {
         navigationController?.popViewController(animated: true)
     }
-    
+
     @objc
     func saveAction() {
-        PersonaAvatarViewModel.saveImageForCurrentPersona(image: image)
+        if let image = cropImage() {
+            PersonaAvatarViewModel.saveImageForCurrentPersona(image: image)
+        }
         navigationController?.popViewController(animated: true)
     }
-    
+
     @objc
     func rotateAction() {
         imageView.rotateLeft()

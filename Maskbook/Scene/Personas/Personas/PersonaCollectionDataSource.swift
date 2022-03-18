@@ -90,7 +90,8 @@ extension PersonaCollectionDataSource: PersonaCollectionCellDelegate {
     }
 
     func avatarClicked() {
-        mainCoordinator.present(scene: .personaAvatar,
-                                transition: .detail(animated: true))
+        let viewModel = PersonaAvatarActionViewModel()
+        mainCoordinator.present(scene: .selectActionViewController(viewModel: viewModel),
+                                transition: .panModel(animated: true))
     }
 }

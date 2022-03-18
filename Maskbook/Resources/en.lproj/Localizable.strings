@@ -270,6 +270,7 @@ separated by spaces";
 "Scene.OpenRedPackage.Wallet" = "Wallet";
 "Scene.OpenRedPackage.WrongNetwork" = "Wrong Network";
 "Scene.PersonaAvatar.Crop" = "Crop & rotate";
+"Scene.PersonaAvatar.RemoveAvatar" = "Remove Persona Avatar";
 "Scene.PersonaAvatar.Title" = "Set Persona Avatar";
 "Scene.PersonaContacts.Contact" = "Contact";
 "Scene.PersonaContacts.Delete" = "Confirm to delete ";

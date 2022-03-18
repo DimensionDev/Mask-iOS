@@ -1260,6 +1260,10 @@ enum L10n {
       static var crop: String {
         return L10n.tr("Localizable", "Scene.PersonaAvatar.Crop")
       }
+      /// Remove Persona Avatar
+      static var removeAvatar: String {
+        return L10n.tr("Localizable", "Scene.PersonaAvatar.RemoveAvatar")
+      }
       /// Set Persona Avatar
       static var title: String {
         return L10n.tr("Localizable", "Scene.PersonaAvatar.Title")

@@ -18,6 +18,9 @@ class PersonaAvatarViewController: BaseViewController {
     @InjectedProvider(\.mainCoordinator)
     private var coordinator
     
+    @InjectedProvider(\.personaManager)
+    private var personaManager
+    
     private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -93,6 +96,18 @@ class PersonaAvatarViewController: BaseViewController {
         avatarImageView.applyCornerRadius(radius: (UIScreen.main.bounds.width - 22.5 * 2) / 2.0, cornerCurve: .circular)
         selectPhotoButton.addTarget(self, action: #selector(selectFromPhotosAction), for: .touchUpInside)
         takePhotoButton.addTarget(self, action: #selector(takePhotoAction), for: .touchUpInside)
+        
+        personaManager.currentPersona
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] persona in
+                if let self = self,
+                      let data = persona?.avatarData,
+                      let image = UIImage(data: data)
+                {
+                    self.avatarImageView.image = image
+                }
+            }
+            .store(in: &disposeBag)
     }
     
     private func cropImage(image: UIImage, pickerViewController: UIViewController) {

@@ -183,6 +183,12 @@ class PersonasViewController: BaseViewController {
                 }
             })
             .store(in: &disposeBag)
+        
+        personaManager.personaRecordsSubject
+            .sink { [weak self] _ in
+                self?.personaCollectionView.reloadData()
+            }
+            .store(in: &disposeBag)
     }
 
     func updateWithPersonaProfileState() {

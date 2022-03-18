@@ -56,6 +56,7 @@ class PersonaCollectionCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.image = Asset.Images.Scene.Personas.personaDefault.image
+        imageView.applyCornerRadius(radius: 28)
         return imageView
     }()
     
@@ -214,7 +215,12 @@ class PersonaCollectionCell: UICollectionViewCell {
     func config(persona: PersonaRecord) {
         nameLabel.text = persona.nickname
         identifierLabel.text = persona.identifier?.split(separator: "/").last.flatMap({ String($0) })
-        avatarImageView.image = Asset.Images.Scene.Personas.personaDefault.image
+        if let data = persona.avatarData,
+           let image = UIImage(data: data) {
+            avatarImageView.image = image
+        } else {
+            avatarImageView.image = Asset.Images.Scene.Personas.personaDefault.image
+        }
     }
     
     func applyGradient(index: Int) {
