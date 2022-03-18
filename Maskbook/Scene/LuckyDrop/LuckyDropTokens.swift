@@ -14,8 +14,8 @@ struct LuckyDropTokens: View {
     @State private var message: String = ""
     
     var body: some View {
-        VStack {
-            VStack {
+        VStack(spacing: 0) {
+            VStack(spacing: 0) {
                 tokenRow
                 Spacer().frame(height: 16)
                 quantityRow
@@ -23,16 +23,9 @@ struct LuckyDropTokens: View {
                 messageRow
                 Spacer().frame(height: 12)
                 transactionView
-                PrimaryButton(action: {
-                    
-                }, title: "Confirm Risk Warning")
             }
             .padding(.horizontal, 16)
-            Spacer()
-            WalletBottomWidgetView()
-                .padding(.horizontal, 16)
         }
-        .edgesIgnoringSafeArea(.bottom)
     }
     
     @ViewBuilder
@@ -81,7 +74,7 @@ struct LuckyDropTokens: View {
     @ViewBuilder
     var messageRow: some View {
         HStack(spacing: 0) {
-            TextField("Enter quantity", text: $message)
+            TextField("Enter attached message", text: $message)
                 .frame(maxHeight: .infinity)
         }
         .frame(height: 52)
@@ -90,8 +83,8 @@ struct LuckyDropTokens: View {
     
     @ViewBuilder
     var transactionView: some View {
-        VStack {
-            HStack {
+        VStack(spacing: 0) {
+            HStack(spacing: 0) {
                 Text("Transaction fee")
                     .font(FontStyles.mh5.font)
                     .foregroundColor(Asset.Colors.Text.normal.asColor())

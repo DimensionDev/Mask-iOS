@@ -9,58 +9,39 @@
 import SwiftUI
 
 struct LuckyDropView: View {
+    @InjectedProvider(\.mainCoordinator)
+    private var mainCoordinator
+    
     @State var segmentSize: CGSize = .zero
     
     var body: some View {
-        VStack {
-            Spacer().frame(height: LayoutConstraints.top)
-            LazyVStack {
-                segmentRow
-                tokensRow
-                confirmRiskRow
-            }
-        }.padding(.horizontal, LayoutConstraints.horizontal)
-    }
-    
-    @ViewBuilder
-    var segmentRow: some View {
-        HStack {
-            Text("Tokens")
-                .frame(width: segmentSize.width / 2 - 8, height: segmentSize.height - 8)
-                .background(segmentBackground)
-            Text("NFTs")
-                .frame(width: segmentSize.width / 2 - 8, height: segmentSize.height - 8)
-                .background(segmentBackground)
+        VStack(spacing: 0) {
+            VStack(spacing: 0) {
+                Spacer().frame(height: LayoutConstraints.top)
+                LazyVStack(spacing: 0) {
+                    LuckyDropSegmentView()
+                    tokensRow
+                    PrimaryButton(action: {
+                        mainCoordinator.present(scene: .pluginRiskWarning, transition: .popup)
+                    }, title: "Confirm Risk Warning")
+                }
+            }.padding(.horizontal, LayoutConstraints.horizontal)
+            Spacer()
+            WalletBottomWidgetView()
+                .padding(.horizontal, 16)
         }
-        .frame(maxWidth: .infinity)
-        .frame(height: 48)
-        .background(Asset.Colors.Background.selected.asColor().cornerRadius(8))
-        .measureSize(to: $segmentSize)
-    }
-    
-    @ViewBuilder
-    var segmentBackground: some View {
-        Asset.Colors.Background.tab.asColor().cornerRadius(8)
+        .edgesIgnoringSafeArea(.bottom)
     }
     
     @ViewBuilder
     var tokensRow: some View {
-        Color.red.overlay(
-            Text("tokens row")
-        ).frame(height: 60)
+        LuckyDropTokens()
     }
     
     @ViewBuilder
     var nftsRow: some View {
         Color.red.overlay(
             Text("nfts row")
-        ).frame(height: 60)
-    }
-    
-    @ViewBuilder
-    var confirmRiskRow: some View {
-        Color.red.overlay(
-            Text("confirm risk row")
         ).frame(height: 60)
     }
 }

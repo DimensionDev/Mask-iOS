@@ -166,6 +166,8 @@
 		2A38601627E3644F00E4B2BC /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A38601527E3644F00E4B2BC /* PrimaryButton.swift */; };
 		2A38601827E371DD00E4B2BC /* WalletBottomWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A38601727E371DD00E4B2BC /* WalletBottomWidgetView.swift */; };
 		2A4145F826D7880800708337 /* CryptoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4145F726D7880800708337 /* CryptoTests.swift */; };
+		2A5913CE27E42A36007E4225 /* LuckyDropHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5913CD27E42A36007E4225 /* LuckyDropHistoryView.swift */; };
+		2A5913D027E432B8007E4225 /* LuckyDropSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5913CF27E432B8007E4225 /* LuckyDropSegmentView.swift */; };
 		2A5FAEA027CF7AD200D01250 /* GuideItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5FAE9D27CF7AD200D01250 /* GuideItemView.swift */; };
 		2A5FAEA227CF7AD200D01250 /* GuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5FAE9F27CF7AD200D01250 /* GuideView.swift */; };
 		2A5FAEA427CF7AEE00D01250 /* MaskHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5FAEA327CF7AEE00D01250 /* MaskHostViewController.swift */; };
@@ -891,6 +893,8 @@
 		2A38601527E3644F00E4B2BC /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		2A38601727E371DD00E4B2BC /* WalletBottomWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletBottomWidgetView.swift; sourceTree = "<group>"; };
 		2A4145F726D7880800708337 /* CryptoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTests.swift; sourceTree = "<group>"; };
+		2A5913CD27E42A36007E4225 /* LuckyDropHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuckyDropHistoryView.swift; sourceTree = "<group>"; };
+		2A5913CF27E432B8007E4225 /* LuckyDropSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuckyDropSegmentView.swift; sourceTree = "<group>"; };
 		2A5FAE9D27CF7AD200D01250 /* GuideItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideItemView.swift; sourceTree = "<group>"; };
 		2A5FAE9F27CF7AD200D01250 /* GuideView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideView.swift; sourceTree = "<group>"; };
 		2A5FAEA327CF7AEE00D01250 /* MaskHostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskHostViewController.swift; sourceTree = "<group>"; };
@@ -2165,6 +2169,8 @@
 			children = (
 				2AA5C15127E2DEE3009F3B75 /* LuckyDropView.swift */,
 				2AA5C15327E30CEE009F3B75 /* LuckyDropTokens.swift */,
+				2A5913CD27E42A36007E4225 /* LuckyDropHistoryView.swift */,
+				2A5913CF27E432B8007E4225 /* LuckyDropSegmentView.swift */,
 			);
 			path = LuckyDrop;
 			sourceTree = "<group>";
@@ -4095,6 +4101,7 @@
 				41E5004A279BFB3600A73117 /* RelationRepository.swift in Sources */,
 				2DDCC850269D2A2D00A14ED4 /* MaskToken.swift in Sources */,
 				2A6ABB8B2720053B00CC3AED /* RemoteRestoreVerifyController.swift in Sources */,
+				2A5913CE27E42A36007E4225 /* LuckyDropHistoryView.swift in Sources */,
 				2A9EF067275A053D00AA66A2 /* KeyboardHandlerViewController.swift in Sources */,
 				2AF884C8271EE9300004565A /* PersonaManager+Restore.swift in Sources */,
 				1F8D691B27211614001084D6 /* BindRemoteBackupInfoView.swift in Sources */,
@@ -4457,6 +4464,7 @@
 				6F785E2F269305E20019079F /* RecentlyAddress.swift in Sources */,
 				2A6ABB832720053B00CC3AED /* SetPasswordViewModel.swift in Sources */,
 				1F57023D27A2AF8600C96909 /* RedPacketShareView.swift in Sources */,
+				2A5913D027E432B8007E4225 /* LuckyDropSegmentView.swift in Sources */,
 				2AF88570271EE9310004565A /* WordsVerifyProtocol.swift in Sources */,
 				2AF8858A271EE9310004565A /* SelectItemViewController.swift in Sources */,
 				2AFBEDE526E61D6400BD77B7 /* LoadingWithTextController.swift in Sources */,
