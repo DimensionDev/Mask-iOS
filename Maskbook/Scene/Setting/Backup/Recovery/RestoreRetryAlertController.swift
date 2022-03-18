@@ -29,45 +29,44 @@ final class RestoreRetryAlertController: AlertContainerController<VStackView> {
             $0.edges.equalToSuperview()
         }
         self.okButton = okButton
-        super.init {
-            VStackView(spacing: 20) {
+        let vstack =  VStackView(spacing: 20) {
+            Spacer().cv.apply {
+                $0.snp.makeConstraints { $0.height.equalTo(12) }
+            }
+
+            HStackView(distribution: .equalSpacing) {
+                Spacer()
+                UIImageView(image: Asset.Images.Scene.Alert.error.image)
+                    .cv.apply {
+                        $0.snp.makeConstraints { $0.size.equalTo(60) }
+                    }
+                Spacer()
+            }
+
+            UILabel().cv.apply { label in
+                label.textAlignment = .center
+                label.textColor = Asset.Colors.Text.dark.color
+                label.font = FontStyles.BH4
+                label.text = L10n.Scene.Restore.Tip.failedLoadingRemotefile
+            }
+
+            HStackView {
                 Spacer().cv.apply {
-                    $0.snp.makeConstraints { $0.height.equalTo(12) }
+                    $0.snp.makeConstraints { $0.width.equalTo(16) }
                 }
-
-                HStackView(distribution: .equalSpacing) {
-                    Spacer()
-                    UIImageView(image: Asset.Images.Scene.Alert.error.image)
-                        .cv.apply {
-                            $0.snp.makeConstraints { $0.size.equalTo(60) }
-                        }
-                    Spacer()
+                shadowView.cv.apply {
+                    $0.snp.makeConstraints { $0.height.equalTo(54) }
                 }
-
-                UILabel().cv.apply { label in
-                    label.textAlignment = .center
-                    label.textColor = Asset.Colors.Text.dark.color
-                    label.font = FontStyles.BH4
-                    label.text = L10n.Scene.Restore.Tip.failedLoadingRemotefile
-                }
-
-                HStackView {
-                    Spacer().cv.apply {
-                        $0.snp.makeConstraints { $0.width.equalTo(16) }
-                    }
-                    shadowView.cv.apply {
-                        $0.snp.makeConstraints { $0.height.equalTo(54) }
-                    }
-                    Spacer().cv.apply {
-                        $0.snp.makeConstraints { $0.width.equalTo(16) }
-                    }
-                }
-
                 Spacer().cv.apply {
-                    $0.snp.makeConstraints { $0.height.equalTo(4) }
+                    $0.snp.makeConstraints { $0.width.equalTo(16) }
                 }
             }
+
+            Spacer().cv.apply {
+                $0.snp.makeConstraints { $0.height.equalTo(4) }
+            }
         }
+        super.init(vstack)
         dissmissOnTap = false
     }
 

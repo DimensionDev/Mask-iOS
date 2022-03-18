@@ -85,6 +85,17 @@ enum L10n {
 
     enum Alert {
 
+      enum BackupPopupBindingFirst {
+        /// Please bind your email or phone number before you back up to cloud.
+        static var description: String {
+          return L10n.tr("Localizable", "Common.Alert.BackupPopupBindingFirst.Description")
+        }
+        /// Bind your email or phone
+        static var title: String {
+          return L10n.tr("Localizable", "Common.Alert.BackupPopupBindingFirst.Title")
+        }
+      }
+
       enum BackupTipsNoBackupPassword {
         /// Please set up your %@ before you back up.
         static func description(_ p1: String) -> String {
@@ -416,6 +427,17 @@ enum L10n {
           return L10n.tr("Localizable", "Common.Alert.WalletImport.AlertTitleSuccess")
         }
       }
+
+      enum WrongFolder {
+        /// When you delete Mask App, the Mask Network sandbox folder would also be deleted. For data security, please save to a more secure folder (non-sandbox).
+        static var description: String {
+          return L10n.tr("Localizable", "Common.Alert.WrongFolder.Description")
+        }
+        /// Please select another folder
+        static var title: String {
+          return L10n.tr("Localizable", "Common.Alert.WrongFolder.Title")
+        }
+      }
     }
 
     enum Controls {
@@ -495,6 +517,10 @@ enum L10n {
       static var mergeToLocalData: String {
         return L10n.tr("Localizable", "Common.Controls.MergeToLocalData")
       }
+      /// Move data now
+      static var moveDataNow: String {
+        return L10n.tr("Localizable", "Common.Controls.MoveDataNow")
+      }
       /// Next
       static var next: String {
         return L10n.tr("Localizable", "Common.Controls.Next")
@@ -506,6 +532,10 @@ enum L10n {
       /// Ok
       static var ok: String {
         return L10n.tr("Localizable", "Common.Controls.Ok")
+      }
+      /// Remind me later
+      static var remindMeLater: String {
+        return L10n.tr("Localizable", "Common.Controls.RemindMeLater")
       }
       /// Resend
       static var resend: String {
@@ -1146,6 +1176,25 @@ enum L10n {
       /// Mnemonic word
       static var title: String {
         return L10n.tr("Localizable", "Scene.MnemonicWord.Title")
+      }
+    }
+
+    enum MoveBackupData {
+      /// We have detected that there are probably important backup documents(.pdf, .bin) in your Mask Network Sandbox Folder.
+      static var description1: String {
+        return L10n.tr("Localizable", "Scene.MoveBackupData.Description1")
+      }
+      /// When you delete Mask App, these documents would also be deleted.
+      static var description2: String {
+        return L10n.tr("Localizable", "Scene.MoveBackupData.Description2")
+      }
+      /// For data safety, please move your data to a more secure folder.
+      static var description3: String {
+        return L10n.tr("Localizable", "Scene.MoveBackupData.Description3")
+      }
+      /// Please move your data
+      static var title: String {
+        return L10n.tr("Localizable", "Scene.MoveBackupData.Title")
       }
     }
 
@@ -1795,6 +1844,10 @@ enum L10n {
         static var btnWithoutpassword: String {
           return L10n.tr("Localizable", "Scene.Sendtransaction.Send.BtnWithoutpassword")
         }
+        /// Contacts
+        static var contact: String {
+          return L10n.tr("Localizable", "Scene.Sendtransaction.Send.Contact")
+        }
         /// Insufficient gas balance.
         static var gasfeeError: String {
           return L10n.tr("Localizable", "Scene.Sendtransaction.Send.GasfeeError")
@@ -1818,6 +1871,10 @@ enum L10n {
         /// Ens or Address(0x...)
         static var placeholderAddress: String {
           return L10n.tr("Localizable", "Scene.Sendtransaction.Send.PlaceholderAddress")
+        }
+        /// Recent
+        static var recent: String {
+          return L10n.tr("Localizable", "Scene.Sendtransaction.Send.Recent")
         }
       }
 

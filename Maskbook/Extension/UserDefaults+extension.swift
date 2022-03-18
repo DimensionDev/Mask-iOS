@@ -89,6 +89,8 @@ final class UserDefaultSettings {
         
         // if this flag return true, the `GuideView` should not be presented.
         case hasShownGuide
+        
+        case backupFileDetectDate
     }
 
     func removeAll() {
@@ -333,6 +335,9 @@ final class UserDefaultSettings {
     
     @ReactiveUserDefault(key: Keys.hasShownGuide.rawValue, defaultValue: false)
     var hasShownGuide: Bool
+    
+    @OptionalUserDefault(key: Keys.backupFileDetectDate.rawValue)
+    var backupFileDetectDate: Date?
 }
 
 extension UserDefaultSettings {

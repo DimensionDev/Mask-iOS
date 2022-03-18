@@ -1,7 +1,7 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[8129],{
 
-/***/ 34459:
+/***/ 48427:
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -798,7 +798,7 @@ var Translator = function (_EventEmitter) {
           if (this.options.saveMissing) {
             if (this.options.saveMissingPlurals && needsPluralHandling) {
               lngs.forEach(function (language) {
-                _this2.pluralResolver.getSuffixes(language).forEach(function (suffix) {
+                _this2.pluralResolver.getSuffixes(language, options).forEach(function (suffix) {
                   send([language], key + suffix, options["defaultValue".concat(suffix)] || defaultValue);
                 });
               });
@@ -1726,10 +1726,10 @@ function parseFormatStr(formatStr) {
             rest = _opt$split2.slice(1);
 
         var val = rest.join(':');
+        if (!formatOptions[key.trim()]) formatOptions[key.trim()] = val.trim();
         if (val.trim() === 'false') formatOptions[key.trim()] = false;
         if (val.trim() === 'true') formatOptions[key.trim()] = true;
         if (!isNaN(val.trim())) formatOptions[key.trim()] = parseInt(val.trim(), 10);
-        if (!formatOptions[key.trim()]) formatOptions[key.trim()] = val.trim();
       });
     }
   }
@@ -2406,7 +2406,10 @@ var I18n = function (_EventEmitter) {
           });
         }
 
-        this.services.backendConnector.load(toLoad, this.options.ns, usedCallback);
+        this.services.backendConnector.load(toLoad, this.options.ns, function (e) {
+          if (!e && !_this3.resolvedLanguage && _this3.language) _this3.setResolvedLanguage(_this3.language);
+          usedCallback(e);
+        });
       } else {
         usedCallback(null);
       }
@@ -2461,6 +2464,22 @@ var I18n = function (_EventEmitter) {
       return this;
     }
   }, {
+    key: "setResolvedLanguage",
+    value: function setResolvedLanguage(l) {
+      if (!l || !this.languages) return;
+      if (['cimode', 'dev'].indexOf(l) > -1) return;
+
+      for (var li = 0; li < this.languages.length; li++) {
+        var lngInLngs = this.languages[li];
+        if (['cimode', 'dev'].indexOf(lngInLngs) > -1) continue;
+
+        if (this.store.hasLanguageSomeTranslations(lngInLngs)) {
+          this.resolvedLanguage = lngInLngs;
+          break;
+        }
+      }
+    }
+  }, {
     key: "changeLanguage",
     value: function changeLanguage(lng, callback) {
       var _this4 = this;
@@ -2473,17 +2492,8 @@ var I18n = function (_EventEmitter) {
         _this4.language = l;
         _this4.languages = _this4.services.languageUtils.toResolveHierarchy(l);
         _this4.resolvedLanguage = undefined;
-        if (['cimode', 'dev'].indexOf(l) > -1) return;
 
-        for (var li = 0; li < _this4.languages.length; li++) {
-          var lngInLngs = _this4.languages[li];
-          if (['cimode', 'dev'].indexOf(lngInLngs) > -1) continue;
-
-          if (_this4.store.hasLanguageSomeTranslations(lngInLngs)) {
-            _this4.resolvedLanguage = lngInLngs;
-            break;
-          }
-        }
+        _this4.setResolvedLanguage(l);
       };
 
       var done = function done(err, l) {

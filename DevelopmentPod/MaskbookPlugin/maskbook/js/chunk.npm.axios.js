@@ -1580,7 +1580,7 @@ module.exports = __webpack_require__(82604);
 
 var utils = __webpack_require__(14665);
 var settle = __webpack_require__(38142);
-var cookies = __webpack_require__(8743);
+var cookies = __webpack_require__(70409);
 var buildURL = __webpack_require__(92235);
 var buildFullPath = __webpack_require__(39882);
 var parseHeaders = __webpack_require__(48511);
@@ -1803,7 +1803,7 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(16126);
-axios.CancelToken = __webpack_require__(65095);
+axios.CancelToken = __webpack_require__(78813);
 axios.isCancel = __webpack_require__(26525);
 
 // Expose all/spread
@@ -1850,7 +1850,7 @@ module.exports = Cancel;
 
 /***/ }),
 
-/***/ 65095:
+/***/ 78813:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -2663,7 +2663,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 /***/ }),
 
-/***/ 8743:
+/***/ 70409:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";

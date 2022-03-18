@@ -3524,7 +3524,7 @@ exports.WyvernTokenContract = WyvernTokenContract;
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-var wyvernProtocol_1 = __webpack_require__(36592);
+var wyvernProtocol_1 = __webpack_require__(49257);
 exports.WyvernProtocol = wyvernProtocol_1.WyvernProtocol;
 //# sourceMappingURL=index.js.map
 
@@ -3779,7 +3779,7 @@ exports.assert = __assign({}, assert_1.assert, { isValidSignature: function (ord
 
 /***/ }),
 
-/***/ 12463:
+/***/ 98221:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -3945,7 +3945,7 @@ exports.authenticatedProxyABI = [
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-var atomicizerABI_1 = __webpack_require__(12463);
+var atomicizerABI_1 = __webpack_require__(98221);
 var authenticatedProxyABI_1 = __webpack_require__(90187);
 var daoABI_1 = __webpack_require__(66149);
 var deployed_1 = __webpack_require__(35601);
@@ -7246,7 +7246,7 @@ exports.utils = {
 
 /***/ }),
 
-/***/ 36592:
+/***/ 49257:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
@@ -11154,7 +11154,7 @@ exports.atomicizerABI = [
 
 /***/ }),
 
-/***/ 34740:
+/***/ 67595:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -11954,7 +11954,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var _ = __webpack_require__(39378);
 var types_1 = __webpack_require__(26126);
-var constants_1 = __webpack_require__(34740);
+var constants_1 = __webpack_require__(67595);
 var contractCallErrorTransformer = function (error) {
     if (_.includes(error.message, constants_1.constants.INVALID_JUMP_PATTERN)) {
         return new Error(types_1.WyvernProtocolError.InvalidJump);
@@ -14522,7 +14522,7 @@ var _ = __webpack_require__(39378);
 var types_1 = __webpack_require__(26126);
 var schemas_1 = __webpack_require__(48731);
 var assert_1 = __webpack_require__(29);
-var constants_1 = __webpack_require__(34740);
+var constants_1 = __webpack_require__(67595);
 var decorators_1 = __webpack_require__(92670);
 var signature_utils_1 = __webpack_require__(65381);
 var utils_2 = __webpack_require__(82378);

@@ -117,7 +117,7 @@ module.exports = SolidityTypeBytes;
 
 /***/ }),
 
-/***/ 61928:
+/***/ 45191:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /*
@@ -2415,7 +2415,7 @@ module.exports = Batch;
  */
 
 var utils = __webpack_require__(70472);
-var coder = __webpack_require__(61928);
+var coder = __webpack_require__(45191);
 var SolidityEvent = __webpack_require__(97774);
 var SolidityFunction = __webpack_require__(27100);
 var AllEvents = __webpack_require__(19960);
@@ -2782,7 +2782,7 @@ module.exports = {
  */
 
 var utils = __webpack_require__(70472);
-var coder = __webpack_require__(61928);
+var coder = __webpack_require__(45191);
 var formatters = __webpack_require__(95096);
 var sha3 = __webpack_require__(50224);
 var Filter = __webpack_require__(91023);
@@ -3621,7 +3621,7 @@ module.exports = {
  * @date 2015
  */
 
-var coder = __webpack_require__(61928);
+var coder = __webpack_require__(45191);
 var utils = __webpack_require__(70472);
 var errors = __webpack_require__(48048);
 var formatters = __webpack_require__(95096);
@@ -4880,7 +4880,7 @@ var c = __webpack_require__(66433);
 var Contract = __webpack_require__(65809);
 var watches = __webpack_require__(94995);
 var Filter = __webpack_require__(91023);
-var IsSyncing = __webpack_require__(36300);
+var IsSyncing = __webpack_require__(74096);
 var namereg = __webpack_require__(35949);
 var Iban = __webpack_require__(29995);
 var transfer = __webpack_require__(62544);
@@ -6290,7 +6290,7 @@ module.exports = Settings;
 
 /***/ }),
 
-/***/ 36300:
+/***/ 74096:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /*

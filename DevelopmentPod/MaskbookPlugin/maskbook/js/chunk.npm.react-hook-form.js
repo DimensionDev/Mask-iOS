@@ -1,20 +1,20 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[2598],{
 
-/***/ 67947:
+/***/ 56247:
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Gc": () => (/* binding */ useFormContext),
+/* harmony export */   "KN": () => (/* binding */ appendErrors),
 /* harmony export */   "Qr": () => (/* binding */ Controller),
 /* harmony export */   "RV": () => (/* binding */ FormProvider),
-/* harmony export */   "KN": () => (/* binding */ appendErrors),
 /* harmony export */   "U2": () => (/* binding */ get),
-/* harmony export */   "t8": () => (/* binding */ set),
 /* harmony export */   "cI": () => (/* binding */ useForm),
-/* harmony export */   "Gc": () => (/* binding */ useFormContext)
+/* harmony export */   "t8": () => (/* binding */ set)
 /* harmony export */ });
 /* unused harmony exports useController, useFieldArray, useFormState, useWatch */
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
 
 
 var isCheckBoxInput = (element) => element.type === 'checkbox';
@@ -926,7 +926,9 @@ function unset(object, path) {
             if (currentPathsLength === index &&
                 ((isObject(objectRef) && isEmptyObject(objectRef)) ||
                     (Array.isArray(objectRef) &&
-                        !objectRef.filter((data) => (isObject(data) && !isEmptyObject(data)) || isBoolean(data)).length))) {
+                        !objectRef.filter((data) => (isObject(data) && !isEmptyObject(data)) ||
+                            isBoolean(data) ||
+                            (Array.isArray(data) && data.length)).length))) {
                 previousObjRef ? delete previousObjRef[item] : delete object[item];
             }
             previousObjRef = objectRef;

@@ -167,6 +167,9 @@
             "skip": "跳过，稍后下载",
             "download_next": "我已下载，下一步"
         },
+        "toast": {
+            "saved": "保存！"
+        },
         "loading": "加载中..."
     },
     "scene": {
@@ -531,11 +534,8 @@
             "add": "添加"
         },
         "persona_download": {
-            "persona": "身份:",
-            "mask_id": "MASK ID",
-            "private_key": "私钥",
-            "identity_id": "身份 ID",
-            "download_tips": "这个二维码包含您的身份信息，请安全保存。您可以使用Mask APP 扫描二维码登录身份。"
+            "identity_id": "身份代码",
+            "download_tips": "二维码会加密您个人的身份码或私钥，建议打印它。您可以使用 Mask App 扫描二维码以登录。"
         },
         "wallet_balance": {
             "btn_swap": "兑换",

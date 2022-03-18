@@ -24,6 +24,8 @@ class Coordinator {
     @InjectedProvider(\.userDefaultSettings)
     private var settings
     
+    private var window: UIWindow?
+    
     enum FromEdge {
         case bottom
     }
@@ -189,10 +191,19 @@ class Coordinator {
             claimedAmount: BigUInt?,
             shareActionDelegate: RedPacketShareDelegate?
         )
+        case moveBackupData
         case debug
     }
 
     func setup(window: UIWindow) {
+        self.window = window
+        
+        guard settings.hasShownGuide else {
+            settings.hasShownGuide = true
+            showGuide(window: window)
+            return
+        }
+        
         let maskSocialVC = MaskSocialViewController(socialPlatform: settings.currentProfileSocialPlatform)
         let naviVC = NavigationController(rootViewController: maskSocialVC)
         window.rootViewController = naviVC
@@ -216,6 +227,14 @@ class Coordinator {
             welcomeVC.modalPresentationCapturesStatusBarAppearance = true
             UIApplication.getTopViewController()?.present(welcomeVC, animated: false, completion: nil)
         }
+    }
+    
+    private func showGuide(window: UIWindow) {
+        let guideVC = MaskHostViewController(rootView: GuideView() { [weak self] in
+            self?.setup(window: window)
+        })
+        window.rootViewController = guideVC
+        window.makeKeyAndVisible()
     }
 
     // swiftlint:disable cyclomatic_complexity
@@ -338,7 +357,13 @@ extension Coordinator {
             return CropImageViewController(image: image)
             
         case .guide:
-            return MaskHostViewController(rootView: GuideView())
+            return MaskHostViewController(rootView: GuideView() { [weak self] in
+                guard let window = self?.window else {
+                    assert(false, "GuideView can't be dismissed if window is nil.")
+                    return
+                }
+                self?.setup(window: window)
+            })
             
         case let .termsOfService(walletStartType):
             let termsOfServiceViewController = TermsOfServiceViewController(walletStartType: walletStartType)
@@ -738,6 +763,9 @@ extension Coordinator {
                 shareDelegate: shareActionDelegate
             )
         
+        case .moveBackupData:
+            return MoveBackupDataViewController()
+            
         case .debug:
             return UIHostingController(rootView: DebugView())
         }

@@ -7,8 +7,8 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "api": () => (/* binding */ api),
-/* harmony export */   "ethereum": () => (/* binding */ ethereum),
-/* harmony export */   "default": () => (/* binding */ $root)
+/* harmony export */   "default": () => (/* binding */ $root),
+/* harmony export */   "ethereum": () => (/* binding */ ethereum)
 /* harmony export */ });
 /* harmony import */ var protobufjs_minimal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6110);
 /* harmony import */ var protobufjs_minimal__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(protobufjs_minimal__WEBPACK_IMPORTED_MODULE_0__);
@@ -4976,8 +4976,8 @@ const ethereum = $root.ethereum = (() => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "request": () => (/* binding */ request),
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   "request": () => (/* binding */ request)
 /* harmony export */ });
 
 let wasm;
