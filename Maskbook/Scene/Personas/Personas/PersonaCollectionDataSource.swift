@@ -19,7 +19,7 @@ class PersonaCollectionDataSource: NSObject {
     @InjectedProvider(\.userDefaultSettings)
     private var userSetting
 
-    static var itemSize = CGSize(width: UIScreen.main.bounds.size.width - 23 * 2, height: 102)
+    static var itemSize = CGSize(width: UIScreen.main.bounds.size.width - 23 * 2, height: 122)
 }
 
 extension PersonaCollectionDataSource: UICollectionViewDataSource {

@@ -177,21 +177,21 @@ class PersonaCollectionCell: UICollectionViewCell {
             stack.topAnchor.constraint(equalTo: contentView.topAnchor),
             stack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             stack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            stack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12)
+            stack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -32)
         ])
         
         NSLayoutConstraint.activate([
             backgroundImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             backgroundImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             backgroundImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            backgroundImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12)
+            backgroundImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -32)
         ])
         
         NSLayoutConstraint.activate([
             shadowView.topAnchor.constraint(equalTo: contentView.topAnchor),
             shadowView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 40),
             shadowView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -40),
-            shadowView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12 )
+            shadowView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -32)
         ])
         
         contentView.layer.insertSublayer(backgroundLayer, at: 0)

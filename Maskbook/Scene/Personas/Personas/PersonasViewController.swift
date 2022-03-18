@@ -105,7 +105,7 @@ class PersonasViewController: BaseViewController {
             personaCollectionView.topAnchor.constraint(equalTo: view.readableContentGuide.topAnchor, constant: 24),
             personaCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             personaCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            personaCollectionView.heightAnchor.constraint(equalToConstant: 102)
+            personaCollectionView.heightAnchor.constraint(equalToConstant: 122)
         ])
     }
 
@@ -144,7 +144,7 @@ class PersonasViewController: BaseViewController {
         view.addSubview(subView)
         segmentViewController.didMove(toParent: self)
         NSLayoutConstraint.activate([
-            subView.topAnchor.constraint(equalTo: personaCollectionView.bottomAnchor, constant: 20),
+            subView.topAnchor.constraint(equalTo: personaCollectionView.bottomAnchor),
             subView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             subView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             subView.bottomAnchor.constraint(equalTo: view.readableContentGuide.bottomAnchor)
