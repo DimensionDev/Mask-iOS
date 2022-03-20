@@ -154,6 +154,9 @@
 		1FEE1EAC27845E1F00697F81 /* Web3+signTX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE1EAB27845E1F00697F81 /* Web3+signTX.swift */; };
 		2A0C16AF2666713D0085524E /* StoredKeyImportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0C16AE2666713D0085524E /* StoredKeyImportType.swift */; };
 		2A18E7FB266C9D210045BC88 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A18E7FA266C9D210045BC88 /* AvatarView.swift */; };
+		2A2159E627E705C900D1C7C2 /* SelectSocialAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2159E527E705C900D1C7C2 /* SelectSocialAccountView.swift */; };
+		2A2159E827E71F4700D1C7C2 /* ShareLuckyDropPersonaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2159E727E71F4700D1C7C2 /* ShareLuckyDropPersonaView.swift */; };
+		2A2159EA27E72A9C00D1C7C2 /* ShareLuckyDropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2159E927E72A9C00D1C7C2 /* ShareLuckyDropView.swift */; };
 		2A23A64C27C499E800CC5AD9 /* Shape+Fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A23A64A27C499E800CC5AD9 /* Shape+Fill.swift */; };
 		2A23A64D27C499E800CC5AD9 /* KFImage+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A23A64B27C499E800CC5AD9 /* KFImage+Network.swift */; };
 		2A23A65027C4B67D00CC5AD9 /* SwiftUI+Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A23A64F27C4B67D00CC5AD9 /* SwiftUI+Asset.swift */; };
@@ -881,6 +884,9 @@
 		25BA334669B8CAF9AD3B6592 /* Pods-MaskWalletTests.release touchpreview.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskWalletTests.release touchpreview.xcconfig"; path = "Target Support Files/Pods-MaskWalletTests/Pods-MaskWalletTests.release touchpreview.xcconfig"; sourceTree = "<group>"; };
 		2A0C16AE2666713D0085524E /* StoredKeyImportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredKeyImportType.swift; sourceTree = "<group>"; };
 		2A18E7FA266C9D210045BC88 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
+		2A2159E527E705C900D1C7C2 /* SelectSocialAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSocialAccountView.swift; sourceTree = "<group>"; };
+		2A2159E727E71F4700D1C7C2 /* ShareLuckyDropPersonaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareLuckyDropPersonaView.swift; sourceTree = "<group>"; };
+		2A2159E927E72A9C00D1C7C2 /* ShareLuckyDropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareLuckyDropView.swift; sourceTree = "<group>"; };
 		2A23A64A27C499E800CC5AD9 /* Shape+Fill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shape+Fill.swift"; sourceTree = "<group>"; };
 		2A23A64B27C499E800CC5AD9 /* KFImage+Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KFImage+Network.swift"; sourceTree = "<group>"; };
 		2A23A64F27C4B67D00CC5AD9 /* SwiftUI+Asset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Asset.swift"; sourceTree = "<group>"; };
@@ -2171,6 +2177,9 @@
 				2AA5C15327E30CEE009F3B75 /* LuckyDropTokens.swift */,
 				2A5913CD27E42A36007E4225 /* LuckyDropHistoryView.swift */,
 				2A5913CF27E432B8007E4225 /* LuckyDropSegmentView.swift */,
+				2A2159E527E705C900D1C7C2 /* SelectSocialAccountView.swift */,
+				2A2159E727E71F4700D1C7C2 /* ShareLuckyDropPersonaView.swift */,
+				2A2159E927E72A9C00D1C7C2 /* ShareLuckyDropView.swift */,
 			);
 			path = LuckyDrop;
 			sourceTree = "<group>";
@@ -4245,6 +4254,7 @@
 				2D27F5A627632BD1004FACCB /* WalletConnectDappListViewController.swift in Sources */,
 				2AF884C6271EE9300004565A /* SocialProfileDetectViewController.swift in Sources */,
 				0FE54FE42759C43100B32BD6 /* BalanceSegmentView.swift in Sources */,
+				2A2159E827E71F4700D1C7C2 /* ShareLuckyDropPersonaView.swift in Sources */,
 				0F9C043426725B250085342A /* Token+Display.swift in Sources */,
 				5DE2B10F27BA60AC002ACA54 /* View+Snapshot.swift in Sources */,
 				2AF885FD271EED7D0004565A /* WarningPopController.swift in Sources */,
@@ -4553,6 +4563,7 @@
 				2AF884E8271EE9310004565A /* PluginIconView.swift in Sources */,
 				2AF8855A271EE9310004565A /* GasFeeChooseViewController.swift in Sources */,
 				2AF8864E271EEDF80004565A /* NSDiffableDataSourceSnapshot+extension.swift in Sources */,
+				2A2159E627E705C900D1C7C2 /* SelectSocialAccountView.swift in Sources */,
 				2AF884E1271EE9310004565A /* LabsViewController.swift in Sources */,
 				0F2051A9265E271500602A0C /* WalletCoreStorage.swift in Sources */,
 				0F31A15E273E33DF009D2E05 /* LegacyWalletInfo.swift in Sources */,
@@ -4580,6 +4591,7 @@
 				0FB3CCE7270D7BD90072B787 /* Secrets.swift in Sources */,
 				2AF88547271EE9310004565A /* WalletListAddViewController.swift in Sources */,
 				2DC5D895272574D600E351D3 /* WalletConnectClient+Extensions.swift in Sources */,
+				2A2159EA27E72A9C00D1C7C2 /* ShareLuckyDropView.swift in Sources */,
 				2AF8852E271EE9310004565A /* WalletBackupViewController.swift in Sources */,
 				2A72F40227BE8323004A3F95 /* ColletibleIconContentControllerHandler.swift in Sources */,
 				2AF885FB271EED7D0004565A /* KeyboardSheetTransition.swift in Sources */,

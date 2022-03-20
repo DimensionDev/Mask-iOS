@@ -40,11 +40,11 @@ struct LuckyDropTokens: View {
                 .font(FontStyles.bh5.font)
             Spacer().frame(width: 4)
             Asset.Icon.Arrows.down1.asImage()
-            Text("MAX").padding(.horizontal, 5.5)
+            Text(L10n.Plugins.Luckydrop.max).padding(.horizontal, 5.5)
                 .frame(height: 24)
                 .background(Asset.Colors.Background.infoBg.asColor().cornerRadius(4))
             Spacer()
-            TextField("Total Amount", text: $totalAmountStr)
+            TextField(L10n.Plugins.Luckydrop.totalAmount, text: $totalAmountStr)
                 .multilineTextAlignment(.trailing)
                 .frame(maxHeight: .infinity)
         }
@@ -63,7 +63,7 @@ struct LuckyDropTokens: View {
             Text("ETH").foregroundColor(Asset.Colors.Text.dark.asColor())
                 .font(FontStyles.bh5.font)
             Spacer()
-            TextField("Enter quantity", text: $quantityStr)
+            TextField(L10n.Plugins.Luckydrop.enterQuantity, text: $quantityStr)
                 .multilineTextAlignment(.trailing)
                 .frame(maxHeight: .infinity)
         }
@@ -74,7 +74,7 @@ struct LuckyDropTokens: View {
     @ViewBuilder
     var messageRow: some View {
         HStack(spacing: 0) {
-            TextField("Enter attached message", text: $message)
+            TextField(L10n.Plugins.Luckydrop.enterMessage, text: $message)
                 .frame(maxHeight: .infinity)
         }
         .frame(height: 52)
@@ -85,7 +85,7 @@ struct LuckyDropTokens: View {
     var transactionView: some View {
         VStack(spacing: 0) {
             HStack(spacing: 0) {
-                Text("Transaction fee")
+                Text(L10n.Plugins.Luckydrop.transactionFee)
                     .font(FontStyles.mh5.font)
                     .foregroundColor(Asset.Colors.Text.normal.asColor())
                 Spacer()

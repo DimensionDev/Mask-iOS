@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 enum ProfileSocialPlatform: Int, CaseIterable {
     case twitter
@@ -59,6 +60,15 @@ enum ProfileSocialPlatform: Int, CaseIterable {
         case .facebook: return Asset.Images.Scene.Personas.facebook.image
         case .instagram: return Asset.Images.Scene.Personas.instagram.image
         case .minds: return Asset.Images.Scene.Personas.minds.image
+        }
+    }
+    
+    var iconImage: Image {
+        switch self {
+        case .twitter: return Asset.Images.Scene.Personas.twitter.asImage()
+        case .facebook: return Asset.Images.Scene.Personas.facebook.asImage()
+        case .instagram: return Asset.Images.Scene.Personas.instagram.asImage()
+        case .minds: return Asset.Images.Scene.Personas.minds.asImage()
         }
     }
     

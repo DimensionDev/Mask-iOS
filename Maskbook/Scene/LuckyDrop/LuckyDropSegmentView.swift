@@ -13,12 +13,12 @@ struct LuckyDropSegmentView: View {
     
     var body: some View {
         HStack(spacing: 0) {
-            Text("Token")
+            Text(L10n.Plugins.Luckydrop.token)
                 .font(FontStyles.bh5.font)
                 .foregroundColor(Asset.Colors.Text.dark.asColor())
                 .frame(width: segmentSize.width / 2 - 8, height: segmentSize.height - 8)
                 .background(segmentBackground)
-            Text("NFT")
+            Text(L10n.Plugins.Luckydrop.nft)
                 .font(FontStyles.mh5.font)
                 .foregroundColor(Asset.Colors.Text.normal.asColor())
                 .frame(width: segmentSize.width / 2 - 8, height: segmentSize.height - 8)

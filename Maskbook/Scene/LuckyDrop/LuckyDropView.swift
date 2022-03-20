@@ -23,7 +23,7 @@ struct LuckyDropView: View {
                     tokensRow
                     PrimaryButton(action: {
                         mainCoordinator.present(scene: .pluginRiskWarning, transition: .popup)
-                    }, title: "Confirm Risk Warning")
+                    }, title: L10n.Plugins.Luckydrop.Buttons.riskWarning)
                 }
             }.padding(.horizontal, LayoutConstraints.horizontal)
             Spacer()
@@ -36,13 +36,6 @@ struct LuckyDropView: View {
     @ViewBuilder
     var tokensRow: some View {
         LuckyDropTokens()
-    }
-    
-    @ViewBuilder
-    var nftsRow: some View {
-        Color.red.overlay(
-            Text("nfts row")
-        ).frame(height: 60)
     }
 }
 

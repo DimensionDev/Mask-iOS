@@ -587,6 +587,87 @@ enum L10n {
     }
   }
 
+  enum Plugins {
+
+    enum Luckydrop {
+      /// Claimed
+      static var claimed: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Claimed")
+      }
+      /// End Time
+      static var endTime: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.End-Time")
+      }
+      /// Enter attached message
+      static var enterMessage: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Enter-Message")
+      }
+      /// Enter quantity
+      static var enterQuantity: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Enter-Quantity")
+      }
+      /// MAX
+      static var max: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Max")
+      }
+      /// NFT
+      static var nft: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Nft")
+      }
+      /// Refund
+      static var refund: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Refund")
+      }
+      /// Select the Social account to share the Lucky Drop.
+      static var selectSocialDescription: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Select-Social-Description")
+      }
+      /// Select Social Account
+      static var selectSocialTitle: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Select-Social-Title")
+      }
+      /// Connect your Persona to social media before you share your lucky Drop.
+      static var shareConnectPersona: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Share-Connect-Persona")
+      }
+      /// To send lucky drop, please create a persona to connect to your social account.
+      static var shareCreatePersona: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Share-Create-Persona")
+      }
+      /// Share Lucky Drop
+      static var shareTitle: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Share-Title")
+      }
+      /// Token
+      static var token: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Token")
+      }
+      /// Total Amount
+      static var totalAmount: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Total-Amount")
+      }
+      /// Transaction fee
+      static var transactionFee: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Transaction-Fee")
+      }
+
+      enum Buttons {
+        /// Create Persona
+        static var createPersona: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Create-Persona")
+        }
+        /// Recover Persona
+        static var recoverPersona: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Recover-Persona")
+        }
+        /// Confirm Risk Warning
+        static var riskWarning: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Risk-Warning")
+        }
+      }
+    }
+  }
+
   enum Scene {
 
     enum App {

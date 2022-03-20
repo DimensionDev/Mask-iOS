@@ -860,5 +860,29 @@
             "xdai": "Gnosis",
             "optimism": "Optimism"
         }
+    },
+    "plugins": {
+        "luckyDrop": {
+            "buttons": {
+                "risk-warning": "Confirm Risk Warning",
+                "create-persona": "Create Persona",
+                "recover-persona": "Recover Persona"
+            },
+            "max": "MAX",
+            "total-amount": "Total Amount",
+            "enter-quantity": "Enter quantity",
+            "enter-message": "Enter attached message",
+            "transaction-fee": "Transaction fee",
+            "end-time": "End Time",
+            "claimed": "Claimed",
+            "refund": "Refund",
+            "token": "Token",
+            "nft": "NFT",
+            "select-social-title": "Select Social Account",
+            "select-social-description": "Select the Social account to share the Lucky Drop.",
+            "share-title": "Share Lucky Drop",
+            "share-connect-persona": "Connect your Persona to social media before you share your lucky Drop.",
+            "share-create-persona": "To send lucky drop, please create a persona to connect to your social account."
+        }
     }
 }

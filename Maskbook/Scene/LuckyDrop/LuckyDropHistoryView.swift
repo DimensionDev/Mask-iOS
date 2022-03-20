@@ -39,7 +39,7 @@ struct LuckyDropHistoryRow: View {
                     .foregroundColor(Asset.Colors.Text.dark.asColor())
                 Spacer().frame(height: 2)
                 HStack(spacing: 4) {
-                    Text("End Time")
+                    Text(L10n.Plugins.Luckydrop.endTime)
                         .font(FontStyles.rh7.font)
                         .foregroundColor(Asset.Colors.Text.dark.asColor())
                     Text("2020/12/30 12:30 UTC+8")
@@ -48,7 +48,7 @@ struct LuckyDropHistoryRow: View {
                 }
                 Spacer().frame(height: 12)
                 HStack(spacing: 0) {
-                    Text("Claimed")
+                    Text(L10n.Plugins.Luckydrop.claimed)
                         .font(FontStyles.rh7.font)
                         .foregroundColor(Asset.Colors.Text.dark.asColor())
                     Spacer().frame(width: 4)
@@ -75,7 +75,7 @@ struct LuckyDropHistoryRow: View {
             Button {
                 
             } label: {
-                Text("Refund").font(FontStyles.bh6.font)
+                Text(L10n.Plugins.Luckydrop.refund).font(FontStyles.bh6.font)
                     .foregroundColor(Color.white)
             }
             .padding(.horizontal, 21.5)

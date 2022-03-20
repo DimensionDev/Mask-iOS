@@ -23,11 +23,24 @@ class MaskHostViewController<Content: View>: UIHostingController<Content> {
     }
 }
 
-class SheetHostViewController<Content: View>: SheetViewController {
-    let hostViewController: MaskHostViewController<Content>
+/// An adapter for `SheetView`. The distance between `content` and the gray pan indicator is 25 pt. The distance between `content` and `safeArea.bottom` is 20 pt.
+/// ** You need to subtract `safeArea.bottom` (34) in the design documents. **
+struct SheetViewAdapterView<Content: View>: View {
+    let rootView: Content
+    
+    var body: some View {
+        rootView
+            .padding(.top, 23)
+            .padding(.bottom, 20)
+    }
+}
+
+class SheetViewAdapterViewController<Content: View>: SheetViewController {
+    let hostViewController: MaskHostViewController<SheetViewAdapterView<Content>>
     
     init(rootView: Content) {
-        hostViewController = MaskHostViewController(rootView: rootView)
+        let viewAdapted = SheetViewAdapterView(rootView: rootView)
+        hostViewController = MaskHostViewController(rootView: viewAdapted)
         
         super.init(presenter: SheetPresenter(presentStyle: .translucent))
     }
@@ -37,17 +50,13 @@ class SheetHostViewController<Content: View>: SheetViewController {
         
         addChild(hostViewController)
         contentView.addSubview(hostViewController.view)
-        hostViewController.view.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
     }
     
     override func buildLayout() {
         super.buildLayout()
         
         hostViewController.view.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview()
-            $0.leading.trailing.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
     }
     
