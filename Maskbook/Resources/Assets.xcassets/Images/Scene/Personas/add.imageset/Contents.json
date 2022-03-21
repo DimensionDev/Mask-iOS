@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "add.pdf",
+      "filename" : "addLight.pdf",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "addDark.pdf",
       "idiom" : "universal"
     }
   ],

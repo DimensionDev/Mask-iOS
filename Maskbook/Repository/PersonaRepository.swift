@@ -233,4 +233,13 @@ enum PersonaRepository {
                                                    completionHandler: nil)
         }
     }
+    
+    static func updatePersonaAvatarData(identifier: String,
+                                      avatarData: Data?) {
+        if let persona = Self.queryPersona(identifier: identifier) {
+            persona.avatarData = avatarData
+            try? viewContext.saveOrRollback()
+        }
+    }
+    
 }
