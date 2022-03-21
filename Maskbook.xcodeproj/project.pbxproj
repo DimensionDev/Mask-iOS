@@ -1763,6 +1763,13 @@
 		1F57023B27A2AF7300C96909 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2AA5C15127E2DEE3009F3B75 /* LuckyDropView.swift */,
+				2AA5C15327E30CEE009F3B75 /* LuckyDropTokens.swift */,
+				2A5913CD27E42A36007E4225 /* LuckyDropHistoryView.swift */,
+				2A5913CF27E432B8007E4225 /* LuckyDropSegmentView.swift */,
+				2A2159E527E705C900D1C7C2 /* SelectSocialAccountView.swift */,
+				2A2159E727E71F4700D1C7C2 /* ShareLuckyDropPersonaView.swift */,
+				2A2159E927E72A9C00D1C7C2 /* ShareLuckyDropView.swift */,
 				1F57023C27A2AF8600C96909 /* RedPacketShareView.swift */,
 			);
 			path = View;
@@ -2170,24 +2177,9 @@
 			path = ABI;
 			sourceTree = "<group>";
 		};
-		2AA5C15027E2DEC9009F3B75 /* LuckyDrop */ = {
-			isa = PBXGroup;
-			children = (
-				2AA5C15127E2DEE3009F3B75 /* LuckyDropView.swift */,
-				2AA5C15327E30CEE009F3B75 /* LuckyDropTokens.swift */,
-				2A5913CD27E42A36007E4225 /* LuckyDropHistoryView.swift */,
-				2A5913CF27E432B8007E4225 /* LuckyDropSegmentView.swift */,
-				2A2159E527E705C900D1C7C2 /* SelectSocialAccountView.swift */,
-				2A2159E727E71F4700D1C7C2 /* ShareLuckyDropPersonaView.swift */,
-				2A2159E927E72A9C00D1C7C2 /* ShareLuckyDropView.swift */,
-			);
-			path = LuckyDrop;
-			sourceTree = "<group>";
-		};
 		2AF88327271EE9300004565A /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				2AA5C15027E2DEC9009F3B75 /* LuckyDrop */,
 				5D61526F27CF28A6001CB038 /* MoveBackupData */,
 				5D554EC4279FE55400D40848 /* OpenRedPackage */,
 				5DB39E2C27869F390025337C /* Debug */,

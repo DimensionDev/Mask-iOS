@@ -37,7 +37,7 @@ struct SocialPlatformView: View {
     
     var body: some View {
         VStack(spacing: 6) {
-            platform.iconImage
+            platform.iconName
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 48)
