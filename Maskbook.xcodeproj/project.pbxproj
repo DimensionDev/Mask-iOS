@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E9390339CB97010944D0892 /* Pods_MaskbookTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCF053D72611A19F2C95BF05 /* Pods_MaskbookTests.framework */; };
 		0F07028826AFE77C00C04F77 /* DeletedDerivationPath+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F07028626AFE77C00C04F77 /* DeletedDerivationPath+CoreDataClass.swift */; };
 		0F07028926AFE77C00C04F77 /* DeletedDerivationPath+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F07028726AFE77C00C04F77 /* DeletedDerivationPath+CoreDataProperties.swift */; };
 		0F1A15A0265CE83900B5E83E /* WalletCoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1A159F265CE83900B5E83E /* WalletCoreService.swift */; };
@@ -94,7 +93,6 @@
 		1F57023527A1396000C96909 /* RedPacketAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F57023427A1396000C96909 /* RedPacketAvailability.swift */; };
 		1F57023727A139E700C96909 /* RedPacketInteractivePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F57023627A139E700C96909 /* RedPacketInteractivePayload.swift */; };
 		1F57023A27A27E4900C96909 /* RedPacketShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F57023927A27E4900C96909 /* RedPacketShareSheet.swift */; };
-		1F57023D27A2AF8600C96909 /* RedPacketShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F57023C27A2AF8600C96909 /* RedPacketShareView.swift */; };
 		1F57024027A2C1F600C96909 /* RedPacketShareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F57023F27A2C1F600C96909 /* RedPacketShareViewModel.swift */; };
 		1F58730F277C51A3005A7B11 /* DappScriptPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58730E277C51A3005A7B11 /* DappScriptPayload.swift */; };
 		1F705FE327CF6AB9002A4A7E /* SpinWheelAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */; };
@@ -153,12 +151,20 @@
 		1FEE1EA82784508A00697F81 /* EthereumTransaction+Signing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE1EA72784508A00697F81 /* EthereumTransaction+Signing.swift */; };
 		1FEE1EAA27845CEF00697F81 /* TransactionOptions+Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE1EA927845CEF00697F81 /* TransactionOptions+Address.swift */; };
 		1FEE1EAC27845E1F00697F81 /* Web3+signTX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE1EAB27845E1F00697F81 /* Web3+signTX.swift */; };
-		25B9A33A18D09073937F7C13 /* Pods_MaskWalletTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA410D1B7778E6489B615FDE /* Pods_MaskWalletTests.framework */; };
 		2A0C16AF2666713D0085524E /* StoredKeyImportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0C16AE2666713D0085524E /* StoredKeyImportType.swift */; };
 		2A18E7FB266C9D210045BC88 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A18E7FA266C9D210045BC88 /* AvatarView.swift */; };
 		2A23A64C27C499E800CC5AD9 /* Shape+Fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A23A64A27C499E800CC5AD9 /* Shape+Fill.swift */; };
 		2A23A64D27C499E800CC5AD9 /* KFImage+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A23A64B27C499E800CC5AD9 /* KFImage+Network.swift */; };
 		2A23A65027C4B67D00CC5AD9 /* SwiftUI+Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A23A64F27C4B67D00CC5AD9 /* SwiftUI+Asset.swift */; };
+		2A2B4EC227E8B08C0097D50D /* HappyRedPacketV4 in Resources */ = {isa = PBXBuildFile; fileRef = 2A2B4EC127E8B08C0097D50D /* HappyRedPacketV4 */; };
+		2A2B4ECB27E8B0B20097D50D /* ShareLuckyDropPersonaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4EC327E8B0B10097D50D /* ShareLuckyDropPersonaView.swift */; };
+		2A2B4ECC27E8B0B20097D50D /* LuckyDropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4EC427E8B0B10097D50D /* LuckyDropView.swift */; };
+		2A2B4ECD27E8B0B20097D50D /* LuckyDropHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4EC527E8B0B10097D50D /* LuckyDropHistoryView.swift */; };
+		2A2B4ECE27E8B0B20097D50D /* LuckyDropTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4EC627E8B0B10097D50D /* LuckyDropTokens.swift */; };
+		2A2B4ECF27E8B0B20097D50D /* ShareLuckyDropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4EC727E8B0B20097D50D /* ShareLuckyDropView.swift */; };
+		2A2B4ED027E8B0B20097D50D /* SelectSocialAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4EC827E8B0B20097D50D /* SelectSocialAccountView.swift */; };
+		2A2B4ED127E8B0B20097D50D /* LuckyDropSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4EC927E8B0B20097D50D /* LuckyDropSegmentView.swift */; };
+		2A2B4ED227E8B0B20097D50D /* RedPacketShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4ECA27E8B0B20097D50D /* RedPacketShareView.swift */; };
 		2A3050C526A01B370003EECC /* OpenSeaProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3050C326A01B370003EECC /* OpenSeaProvider.swift */; };
 		2A3050C626A01B370003EECC /* NFTAssetsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3050C426A01B370003EECC /* NFTAssetsModel.swift */; };
 		2A35603E265D008100FB1D3B /* FontStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A35603D265D008100FB1D3B /* FontStyles.swift */; };
@@ -233,9 +239,6 @@
 		2A72F40227BE8323004A3F95 /* ColletibleIconContentControllerHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A72F40127BE8323004A3F95 /* ColletibleIconContentControllerHandler.swift */; };
 		2A7310082685B83200C5354A /* PasswordFormItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7310072685B83200C5354A /* PasswordFormItemView.swift */; };
 		2A852ADF2721775F00EE7EEC /* MaskSocialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A852ADE2721775F00EE7EEC /* MaskSocialViewModel.swift */; };
-		2A96348F27A26A5C0019C4CA /* red-packet.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A96348D27A26A5B0019C4CA /* red-packet.json */; };
-		2A96349027A26A5C0019C4CA /* HappyRedPacketV4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A96348E27A26A5B0019C4CA /* HappyRedPacketV4.swift */; };
-		2A96349427A26ACE0019C4CA /* HappyRedPacketV4.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A96349327A26ACE0019C4CA /* HappyRedPacketV4.json */; };
 		2A9EF067275A053D00AA66A2 /* KeyboardHandlerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9EF066275A053D00AA66A2 /* KeyboardHandlerViewController.swift */; };
 		2ABA6A1827A50A6800C0F82B /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABA6A1727A50A6800C0F82B /* Logging.swift */; };
 		2ACA1E1227182F01000C0ECC /* PasswordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACA1E1127182F01000C0ECC /* PasswordTests.swift */; };
@@ -645,7 +648,6 @@
 		5DE5E53A27E4424300F2B62A /* CGAffineTransform+extensiion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5E53927E4424300F2B62A /* CGAffineTransform+extensiion.swift */; };
 		5DE5E53C27E468B400F2B62A /* PersonaAvatarActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5E53B27E468B400F2B62A /* PersonaAvatarActionViewModel.swift */; };
 		5DF1C30B27DA33EB003F26C1 /* FixUITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF1C30A27DA33EB003F26C1 /* FixUITableView.swift */; };
-		6936CABEC702BABE09CAD1D6 /* Pods_Maskbook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B22CF13FDEA7F9081377F7B5 /* Pods_Maskbook.framework */; };
 		6F07ABE1279022B80039D69D /* NFTCollectionStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE0279022B80039D69D /* NFTCollectionStatusModel.swift */; };
 		6F07ABE3279027E70039D69D /* NFTAssetPriceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE2279027E70039D69D /* NFTAssetPriceModel.swift */; };
 		6F07ABE5279697450039D69D /* NFTCollectionDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE4279697450039D69D /* NFTCollectionDetailTableViewCell.swift */; };
@@ -827,7 +829,6 @@
 		1F57023427A1396000C96909 /* RedPacketAvailability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketAvailability.swift; sourceTree = "<group>"; };
 		1F57023627A139E700C96909 /* RedPacketInteractivePayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketInteractivePayload.swift; sourceTree = "<group>"; };
 		1F57023927A27E4900C96909 /* RedPacketShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketShareSheet.swift; sourceTree = "<group>"; };
-		1F57023C27A2AF8600C96909 /* RedPacketShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketShareView.swift; sourceTree = "<group>"; };
 		1F57023F27A2C1F600C96909 /* RedPacketShareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketShareViewModel.swift; sourceTree = "<group>"; };
 		1F58730E277C51A3005A7B11 /* DappScriptPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappScriptPayload.swift; sourceTree = "<group>"; };
 		1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinWheelAnimator.swift; sourceTree = "<group>"; };
@@ -891,6 +892,15 @@
 		2A23A64A27C499E800CC5AD9 /* Shape+Fill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shape+Fill.swift"; sourceTree = "<group>"; };
 		2A23A64B27C499E800CC5AD9 /* KFImage+Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KFImage+Network.swift"; sourceTree = "<group>"; };
 		2A23A64F27C4B67D00CC5AD9 /* SwiftUI+Asset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Asset.swift"; sourceTree = "<group>"; };
+		2A2B4EC127E8B08C0097D50D /* HappyRedPacketV4 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = HappyRedPacketV4; sourceTree = "<group>"; };
+		2A2B4EC327E8B0B10097D50D /* ShareLuckyDropPersonaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareLuckyDropPersonaView.swift; sourceTree = "<group>"; };
+		2A2B4EC427E8B0B10097D50D /* LuckyDropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuckyDropView.swift; sourceTree = "<group>"; };
+		2A2B4EC527E8B0B10097D50D /* LuckyDropHistoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuckyDropHistoryView.swift; sourceTree = "<group>"; };
+		2A2B4EC627E8B0B10097D50D /* LuckyDropTokens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuckyDropTokens.swift; sourceTree = "<group>"; };
+		2A2B4EC727E8B0B20097D50D /* ShareLuckyDropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareLuckyDropView.swift; sourceTree = "<group>"; };
+		2A2B4EC827E8B0B20097D50D /* SelectSocialAccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectSocialAccountView.swift; sourceTree = "<group>"; };
+		2A2B4EC927E8B0B20097D50D /* LuckyDropSegmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuckyDropSegmentView.swift; sourceTree = "<group>"; };
+		2A2B4ECA27E8B0B20097D50D /* RedPacketShareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedPacketShareView.swift; sourceTree = "<group>"; };
 		2A3050C326A01B370003EECC /* OpenSeaProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenSeaProvider.swift; sourceTree = "<group>"; };
 		2A3050C426A01B370003EECC /* NFTAssetsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFTAssetsModel.swift; sourceTree = "<group>"; };
 		2A35603D265D008100FB1D3B /* FontStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyles.swift; sourceTree = "<group>"; };
@@ -965,9 +975,6 @@
 		2A72F40127BE8323004A3F95 /* ColletibleIconContentControllerHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColletibleIconContentControllerHandler.swift; sourceTree = "<group>"; };
 		2A7310072685B83200C5354A /* PasswordFormItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFormItemView.swift; sourceTree = "<group>"; };
 		2A852ADE2721775F00EE7EEC /* MaskSocialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskSocialViewModel.swift; sourceTree = "<group>"; };
-		2A96348D27A26A5B0019C4CA /* red-packet.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "red-packet.json"; sourceTree = "<group>"; };
-		2A96348E27A26A5B0019C4CA /* HappyRedPacketV4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HappyRedPacketV4.swift; sourceTree = "<group>"; };
-		2A96349327A26ACE0019C4CA /* HappyRedPacketV4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = HappyRedPacketV4.json; sourceTree = "<group>"; };
 		2A9EF066275A053D00AA66A2 /* KeyboardHandlerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandlerViewController.swift; sourceTree = "<group>"; };
 		2ABA6A1727A50A6800C0F82B /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		2ACA1E1127182F01000C0ECC /* PasswordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTests.swift; sourceTree = "<group>"; };
@@ -1326,7 +1333,6 @@
 		5D069E0A27A16E2800054B4A /* TertiaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TertiaryButton.swift; sourceTree = "<group>"; };
 		5D11473627E2CDB200D4448C /* CropImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropImageViewController.swift; sourceTree = "<group>"; };
 		5D114FE427B256790092BEDC /* PersonaRecord+Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonaRecord+Identifier.swift"; sourceTree = "<group>"; };
-		5D1470E396AD706CE2B7052D /* Pods-MaskbookTests.release touchpreview.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskbookTests.release touchpreview.xcconfig"; path = "Target Support Files/Pods-MaskbookTests/Pods-MaskbookTests.release touchpreview.xcconfig"; sourceTree = "<group>"; };
 		5D2893E327D5DD0A0013FCB6 /* PersonaCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaCollectionCell.swift; sourceTree = "<group>"; };
 		5D2893E527D5E8A30013FCB6 /* PersonaCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaCollectionDataSource.swift; sourceTree = "<group>"; };
 		5D2C6F7327D88E190076096C /* GroupMaskSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMaskSegmentControl.swift; sourceTree = "<group>"; };
@@ -1373,7 +1379,6 @@
 		5DE5E53927E4424300F2B62A /* CGAffineTransform+extensiion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGAffineTransform+extensiion.swift"; sourceTree = "<group>"; };
 		5DE5E53B27E468B400F2B62A /* PersonaAvatarActionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaAvatarActionViewModel.swift; sourceTree = "<group>"; };
 		5DF1C30A27DA33EB003F26C1 /* FixUITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixUITableView.swift; sourceTree = "<group>"; };
-		5E5FB61CA8DEBD9BB0253DD3 /* Pods-MaskbookTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskbookTests.release.xcconfig"; path = "Target Support Files/Pods-MaskbookTests/Pods-MaskbookTests.release.xcconfig"; sourceTree = "<group>"; };
 		63B73757B44E765D9B53FC61 /* Pods-Maskbook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maskbook.debug.xcconfig"; path = "Target Support Files/Pods-Maskbook/Pods-Maskbook.debug.xcconfig"; sourceTree = "<group>"; };
 		6F07ABE0279022B80039D69D /* NFTCollectionStatusModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFTCollectionStatusModel.swift; sourceTree = "<group>"; };
 		6F07ABE2279027E70039D69D /* NFTAssetPriceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTAssetPriceModel.swift; sourceTree = "<group>"; };
@@ -1770,7 +1775,14 @@
 		1F57023B27A2AF7300C96909 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1F57023C27A2AF8600C96909 /* RedPacketShareView.swift */,
+				2A2B4EC527E8B0B10097D50D /* LuckyDropHistoryView.swift */,
+				2A2B4EC927E8B0B20097D50D /* LuckyDropSegmentView.swift */,
+				2A2B4EC627E8B0B10097D50D /* LuckyDropTokens.swift */,
+				2A2B4EC427E8B0B10097D50D /* LuckyDropView.swift */,
+				2A2B4ECA27E8B0B20097D50D /* RedPacketShareView.swift */,
+				2A2B4EC827E8B0B20097D50D /* SelectSocialAccountView.swift */,
+				2A2B4EC327E8B0B10097D50D /* ShareLuckyDropPersonaView.swift */,
+				2A2B4EC727E8B0B20097D50D /* ShareLuckyDropView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2152,9 +2164,7 @@
 		2A96348C27A26A5B0019C4CA /* ABI */ = {
 			isa = PBXGroup;
 			children = (
-				2A96349327A26ACE0019C4CA /* HappyRedPacketV4.json */,
-				2A96348D27A26A5B0019C4CA /* red-packet.json */,
-				2A96348E27A26A5B0019C4CA /* HappyRedPacketV4.swift */,
+				2A2B4EC127E8B08C0097D50D /* HappyRedPacketV4 */,
 			);
 			path = ABI;
 			sourceTree = "<group>";
@@ -3392,16 +3402,6 @@
 			path = Repository;
 			sourceTree = "<group>";
 		};
-		44AFA52A07427E4CA0DD5087 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				EA410D1B7778E6489B615FDE /* Pods_MaskWalletTests.framework */,
-				B22CF13FDEA7F9081377F7B5 /* Pods_Maskbook.framework */,
-				DCF053D72611A19F2C95BF05 /* Pods_MaskbookTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		5D11473527E2CD9C00D4448C /* CropImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -3848,9 +3848,8 @@
 				0F641EF726870AA8002A4D33 /* Localizable.strings in Resources */,
 				1F8D692F2721549E001084D6 /* wallets.json in Resources */,
 				DBAAF49F22C35A7100017594 /* LaunchScreen.storyboard in Resources */,
-				2A96348F27A26A5C0019C4CA /* red-packet.json in Resources */,
-				2A96349427A26ACE0019C4CA /* HappyRedPacketV4.json in Resources */,
 				DBAAF49C22C35A7100017594 /* Assets.xcassets in Resources */,
+				2A2B4EC227E8B08C0097D50D /* HappyRedPacketV4 in Resources */,
 				DBAAF49A22C35A7100017594 /* Main.storyboard in Resources */,
 				41829919277C816800F5417B /* GoogleService-Info.plist in Resources */,
 			);
@@ -4041,6 +4040,7 @@
 				2AF8860C271EED7D0004565A /* Transition.swift in Sources */,
 				2AF884C5271EE9300004565A /* SocialProfileDetectCell.swift in Sources */,
 				2AF88641271EEDF80004565A /* String+Regex.swift in Sources */,
+				2A2B4ED127E8B0B20097D50D /* LuckyDropSegmentView.swift in Sources */,
 				2D6677F727688FBE00528F4D /* WalletConnectSendResponseDelegate.swift in Sources */,
 				1FCF0D5A27DF3B95007BF0E6 /* EmptyItem.swift in Sources */,
 				2A6ABBB52720053B00CC3AED /* MergeToLocalView.swift in Sources */,
@@ -4069,6 +4069,7 @@
 				2AF88544271EE9310004565A /* WalletEmptyViewController.swift in Sources */,
 				2AF884BB271EE9300004565A /* MaskbookUIDelegateShim.swift in Sources */,
 				2AF884C9271EE9300004565A /* PersonaManager+Backup.swift in Sources */,
+				2A2B4ECE27E8B0B20097D50D /* LuckyDropTokens.swift in Sources */,
 				2A6ABBA42720053B00CC3AED /* LocalBackupViewController.swift in Sources */,
 				2AF8854E271EE9310004565A /* AddressCheckViewModel.swift in Sources */,
 				2D6677F827688FBE00528F4D /* WalletConnectSession+Extension.swift in Sources */,
@@ -4154,6 +4155,7 @@
 				2A6ABB902720053B00CC3AED /* MaskServiceRequest.swift in Sources */,
 				2AF884EB271EE9310004565A /* SwapProviderListView.swift in Sources */,
 				0F2051AD265E325900602A0C /* MaskWalletAccount.swift in Sources */,
+				2A2B4ECC27E8B0B20097D50D /* LuckyDropView.swift in Sources */,
 				5D93DF9E267B2B5000A175BF /* MaskTextField.swift in Sources */,
 				2D86E0C627716ABE005D3710 /* WalletConnectSelectAccountCollectionCell.swift in Sources */,
 				2AF8850C271EE9310004565A /* PersonaExportPrivateKeyViewModel.swift in Sources */,
@@ -4238,6 +4240,7 @@
 				2DC5D896272574D600E351D3 /* InstalledWallet.swift in Sources */,
 				2D11F03E27894A58002CE232 /* ConnectSocialView.swift in Sources */,
 				2D40E6CE276AD32300C8C5FF /* WalletConnectSelectAccountViewModel.swift in Sources */,
+				2A2B4ED227E8B0B20097D50D /* RedPacketShareView.swift in Sources */,
 				5D770B1327DED70400539254 /* PersonaAvatarViewModel.swift in Sources */,
 				2AF885FE271EED7D0004565A /* ExamplePopControler.swift in Sources */,
 				2AF88563271EE9310004565A /* SendContactListTableViewCell.swift in Sources */,
@@ -4302,6 +4305,7 @@
 				6F785E36269445A00019079F /* ContactManager.swift in Sources */,
 				2D6677F627688FBE00528F4D /* WalletConnectServerError.swift in Sources */,
 				5D9988EC2653E2610070ED17 /* Strings.swift in Sources */,
+				2A2B4ED027E8B0B20097D50D /* SelectSocialAccountView.swift in Sources */,
 				2AF884C2271EE9300004565A /* MaskBrowser.swift in Sources */,
 				2A72F40027BE8185004A3F95 /* DBImageDecoderDecodingOptions.swift in Sources */,
 				5DB39E2B278694460025337C /* JSDocumentResourceManager.swift in Sources */,
@@ -4319,6 +4323,7 @@
 				2AF88578271EE9310004565A /* WalletListTableViewCellModel.swift in Sources */,
 				2AF88644271EEDF80004565A /* UICollectionView+extension.swift in Sources */,
 				0FACA3B22671DBEA00CB8AC0 /* StoredKeyExportType.swift in Sources */,
+				2A2B4ECD27E8B0B20097D50D /* LuckyDropHistoryView.swift in Sources */,
 				2AF88556271EE9310004565A /* SendTransactionViewController.swift in Sources */,
 				2AF885FC271EED7D0004565A /* SheetTransition.swift in Sources */,
 				2AF88646271EEDF80004565A /* SwiftUI+Color.swift in Sources */,
@@ -4396,6 +4401,7 @@
 				2A6ABBA72720053B00CC3AED /* SettingTableViewCell.swift in Sources */,
 				1FE54D5A269C19C10041C742 /* WalletCoreRequest.swift in Sources */,
 				2AF88504271EE9310004565A /* ProfileSocialPlatform+extension.swift in Sources */,
+				2A2B4ECF27E8B0B20097D50D /* ShareLuckyDropView.swift in Sources */,
 				2AF88513271EE9310004565A /* WalletDetailViewModel.swift in Sources */,
 				2A6ABBA52720053B00CC3AED /* LocalBackupViewModel.swift in Sources */,
 				2AF88649271EEDF80004565A /* Result+extension.swift in Sources */,
@@ -4411,7 +4417,6 @@
 				2A23A65027C4B67D00CC5AD9 /* SwiftUI+Asset.swift in Sources */,
 				5D7F5A5327B66C5600A007C5 /* PersonaKeyInfoPreview.swift in Sources */,
 				2AF884EC271EE9310004565A /* SizeMeasureModifier.swift in Sources */,
-				2A96349027A26A5C0019C4CA /* HappyRedPacketV4.swift in Sources */,
 				2AF88554271EE9310004565A /* SendConfirmViewModel.swift in Sources */,
 				1F3301D827D85B8400FA0652 /* AlertItemRepresentable.swift in Sources */,
 				2AF8857F271EE9310004565A /* WalletListHeader.swift in Sources */,
@@ -4497,7 +4502,6 @@
 				2AF8856F271EE9310004565A /* MnemonicVerifyFlowCollectionCell.swift in Sources */,
 				6F785E2F269305E20019079F /* RecentlyAddress.swift in Sources */,
 				2A6ABB832720053B00CC3AED /* SetPasswordViewModel.swift in Sources */,
-				1F57023D27A2AF8600C96909 /* RedPacketShareView.swift in Sources */,
 				5DE5E53A27E4424300F2B62A /* CGAffineTransform+extensiion.swift in Sources */,
 				2AF88570271EE9310004565A /* WordsVerifyProtocol.swift in Sources */,
 				2AF8858A271EE9310004565A /* SelectItemViewController.swift in Sources */,
@@ -4532,6 +4536,7 @@
 				2AF884D7271EE9310004565A /* MaskbookTabService.swift in Sources */,
 				41E5002A2797AEB500A73117 /* WebPublicAPIMessageResolver+DB.swift in Sources */,
 				1F37DF2027BDF715008F8ABE /* RestoreLocalFileValidationController.swift in Sources */,
+				2A2B4ECB27E8B0B20097D50D /* ShareLuckyDropPersonaView.swift in Sources */,
 				2AF8858D271EE9310004565A /* SelectActionViewModelProtocol.swift in Sources */,
 				2AF884EE271EE9310004565A /* IdentityEmptyViewController.swift in Sources */,
 				2AF88558271EE9310004565A /* AddContactViewController.swift in Sources */,
