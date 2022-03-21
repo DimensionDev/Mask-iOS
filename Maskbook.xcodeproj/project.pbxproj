@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E9390339CB97010944D0892 /* Pods_MaskbookTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCF053D72611A19F2C95BF05 /* Pods_MaskbookTests.framework */; };
 		0F07028826AFE77C00C04F77 /* DeletedDerivationPath+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F07028626AFE77C00C04F77 /* DeletedDerivationPath+CoreDataClass.swift */; };
 		0F07028926AFE77C00C04F77 /* DeletedDerivationPath+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F07028726AFE77C00C04F77 /* DeletedDerivationPath+CoreDataProperties.swift */; };
 		0F1A15A0265CE83900B5E83E /* WalletCoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1A159F265CE83900B5E83E /* WalletCoreService.swift */; };
@@ -153,12 +152,15 @@
 		1FEE1EA82784508A00697F81 /* EthereumTransaction+Signing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE1EA72784508A00697F81 /* EthereumTransaction+Signing.swift */; };
 		1FEE1EAA27845CEF00697F81 /* TransactionOptions+Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE1EA927845CEF00697F81 /* TransactionOptions+Address.swift */; };
 		1FEE1EAC27845E1F00697F81 /* Web3+signTX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE1EAB27845E1F00697F81 /* Web3+signTX.swift */; };
-		25B9A33A18D09073937F7C13 /* Pods_MaskWalletTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA410D1B7778E6489B615FDE /* Pods_MaskWalletTests.framework */; };
 		2A0C16AF2666713D0085524E /* StoredKeyImportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0C16AE2666713D0085524E /* StoredKeyImportType.swift */; };
 		2A18E7FB266C9D210045BC88 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A18E7FA266C9D210045BC88 /* AvatarView.swift */; };
 		2A23A64C27C499E800CC5AD9 /* Shape+Fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A23A64A27C499E800CC5AD9 /* Shape+Fill.swift */; };
 		2A23A64D27C499E800CC5AD9 /* KFImage+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A23A64B27C499E800CC5AD9 /* KFImage+Network.swift */; };
 		2A23A65027C4B67D00CC5AD9 /* SwiftUI+Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A23A64F27C4B67D00CC5AD9 /* SwiftUI+Asset.swift */; };
+		2A2B4EEA27E8D1850097D50D /* ABIContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4EE527E8D1850097D50D /* ABIContract.swift */; };
+		2A2B4EEB27E8D1850097D50D /* red-packet.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A2B4EE727E8D1850097D50D /* red-packet.json */; };
+		2A2B4EEC27E8D1850097D50D /* HappyRedPacketV4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4EE827E8D1850097D50D /* HappyRedPacketV4.swift */; };
+		2A2B4EED27E8D1850097D50D /* HappyRedPacketV4.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A2B4EE927E8D1850097D50D /* HappyRedPacketV4.json */; };
 		2A3050C526A01B370003EECC /* OpenSeaProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3050C326A01B370003EECC /* OpenSeaProvider.swift */; };
 		2A3050C626A01B370003EECC /* NFTAssetsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3050C426A01B370003EECC /* NFTAssetsModel.swift */; };
 		2A35603E265D008100FB1D3B /* FontStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A35603D265D008100FB1D3B /* FontStyles.swift */; };
@@ -233,9 +235,6 @@
 		2A72F40227BE8323004A3F95 /* ColletibleIconContentControllerHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A72F40127BE8323004A3F95 /* ColletibleIconContentControllerHandler.swift */; };
 		2A7310082685B83200C5354A /* PasswordFormItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7310072685B83200C5354A /* PasswordFormItemView.swift */; };
 		2A852ADF2721775F00EE7EEC /* MaskSocialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A852ADE2721775F00EE7EEC /* MaskSocialViewModel.swift */; };
-		2A96348F27A26A5C0019C4CA /* red-packet.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A96348D27A26A5B0019C4CA /* red-packet.json */; };
-		2A96349027A26A5C0019C4CA /* HappyRedPacketV4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A96348E27A26A5B0019C4CA /* HappyRedPacketV4.swift */; };
-		2A96349427A26ACE0019C4CA /* HappyRedPacketV4.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A96349327A26ACE0019C4CA /* HappyRedPacketV4.json */; };
 		2A9EF067275A053D00AA66A2 /* KeyboardHandlerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9EF066275A053D00AA66A2 /* KeyboardHandlerViewController.swift */; };
 		2ABA6A1827A50A6800C0F82B /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABA6A1727A50A6800C0F82B /* Logging.swift */; };
 		2ACA1E1227182F01000C0ECC /* PasswordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACA1E1127182F01000C0ECC /* PasswordTests.swift */; };
@@ -645,7 +644,6 @@
 		5DE5E53A27E4424300F2B62A /* CGAffineTransform+extensiion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5E53927E4424300F2B62A /* CGAffineTransform+extensiion.swift */; };
 		5DE5E53C27E468B400F2B62A /* PersonaAvatarActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5E53B27E468B400F2B62A /* PersonaAvatarActionViewModel.swift */; };
 		5DF1C30B27DA33EB003F26C1 /* FixUITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF1C30A27DA33EB003F26C1 /* FixUITableView.swift */; };
-		6936CABEC702BABE09CAD1D6 /* Pods_Maskbook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B22CF13FDEA7F9081377F7B5 /* Pods_Maskbook.framework */; };
 		6F07ABE1279022B80039D69D /* NFTCollectionStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE0279022B80039D69D /* NFTCollectionStatusModel.swift */; };
 		6F07ABE3279027E70039D69D /* NFTAssetPriceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE2279027E70039D69D /* NFTAssetPriceModel.swift */; };
 		6F07ABE5279697450039D69D /* NFTCollectionDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE4279697450039D69D /* NFTCollectionDetailTableViewCell.swift */; };
@@ -891,6 +889,10 @@
 		2A23A64A27C499E800CC5AD9 /* Shape+Fill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shape+Fill.swift"; sourceTree = "<group>"; };
 		2A23A64B27C499E800CC5AD9 /* KFImage+Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KFImage+Network.swift"; sourceTree = "<group>"; };
 		2A23A64F27C4B67D00CC5AD9 /* SwiftUI+Asset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Asset.swift"; sourceTree = "<group>"; };
+		2A2B4EE527E8D1850097D50D /* ABIContract.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ABIContract.swift; sourceTree = "<group>"; };
+		2A2B4EE727E8D1850097D50D /* red-packet.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "red-packet.json"; sourceTree = "<group>"; };
+		2A2B4EE827E8D1850097D50D /* HappyRedPacketV4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HappyRedPacketV4.swift; sourceTree = "<group>"; };
+		2A2B4EE927E8D1850097D50D /* HappyRedPacketV4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = HappyRedPacketV4.json; sourceTree = "<group>"; };
 		2A3050C326A01B370003EECC /* OpenSeaProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenSeaProvider.swift; sourceTree = "<group>"; };
 		2A3050C426A01B370003EECC /* NFTAssetsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFTAssetsModel.swift; sourceTree = "<group>"; };
 		2A35603D265D008100FB1D3B /* FontStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyles.swift; sourceTree = "<group>"; };
@@ -965,9 +967,6 @@
 		2A72F40127BE8323004A3F95 /* ColletibleIconContentControllerHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColletibleIconContentControllerHandler.swift; sourceTree = "<group>"; };
 		2A7310072685B83200C5354A /* PasswordFormItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFormItemView.swift; sourceTree = "<group>"; };
 		2A852ADE2721775F00EE7EEC /* MaskSocialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskSocialViewModel.swift; sourceTree = "<group>"; };
-		2A96348D27A26A5B0019C4CA /* red-packet.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "red-packet.json"; sourceTree = "<group>"; };
-		2A96348E27A26A5B0019C4CA /* HappyRedPacketV4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HappyRedPacketV4.swift; sourceTree = "<group>"; };
-		2A96349327A26ACE0019C4CA /* HappyRedPacketV4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = HappyRedPacketV4.json; sourceTree = "<group>"; };
 		2A9EF066275A053D00AA66A2 /* KeyboardHandlerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandlerViewController.swift; sourceTree = "<group>"; };
 		2ABA6A1727A50A6800C0F82B /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		2ACA1E1127182F01000C0ECC /* PasswordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTests.swift; sourceTree = "<group>"; };
@@ -1326,7 +1325,6 @@
 		5D069E0A27A16E2800054B4A /* TertiaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TertiaryButton.swift; sourceTree = "<group>"; };
 		5D11473627E2CDB200D4448C /* CropImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropImageViewController.swift; sourceTree = "<group>"; };
 		5D114FE427B256790092BEDC /* PersonaRecord+Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonaRecord+Identifier.swift"; sourceTree = "<group>"; };
-		5D1470E396AD706CE2B7052D /* Pods-MaskbookTests.release touchpreview.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskbookTests.release touchpreview.xcconfig"; path = "Target Support Files/Pods-MaskbookTests/Pods-MaskbookTests.release touchpreview.xcconfig"; sourceTree = "<group>"; };
 		5D2893E327D5DD0A0013FCB6 /* PersonaCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaCollectionCell.swift; sourceTree = "<group>"; };
 		5D2893E527D5E8A30013FCB6 /* PersonaCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaCollectionDataSource.swift; sourceTree = "<group>"; };
 		5D2C6F7327D88E190076096C /* GroupMaskSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMaskSegmentControl.swift; sourceTree = "<group>"; };
@@ -1373,7 +1371,6 @@
 		5DE5E53927E4424300F2B62A /* CGAffineTransform+extensiion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGAffineTransform+extensiion.swift"; sourceTree = "<group>"; };
 		5DE5E53B27E468B400F2B62A /* PersonaAvatarActionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaAvatarActionViewModel.swift; sourceTree = "<group>"; };
 		5DF1C30A27DA33EB003F26C1 /* FixUITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixUITableView.swift; sourceTree = "<group>"; };
-		5E5FB61CA8DEBD9BB0253DD3 /* Pods-MaskbookTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskbookTests.release.xcconfig"; path = "Target Support Files/Pods-MaskbookTests/Pods-MaskbookTests.release.xcconfig"; sourceTree = "<group>"; };
 		63B73757B44E765D9B53FC61 /* Pods-Maskbook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maskbook.debug.xcconfig"; path = "Target Support Files/Pods-Maskbook/Pods-Maskbook.debug.xcconfig"; sourceTree = "<group>"; };
 		6F07ABE0279022B80039D69D /* NFTCollectionStatusModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFTCollectionStatusModel.swift; sourceTree = "<group>"; };
 		6F07ABE2279027E70039D69D /* NFTAssetPriceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTAssetPriceModel.swift; sourceTree = "<group>"; };
@@ -1861,6 +1858,16 @@
 			path = SwiftUI;
 			sourceTree = "<group>";
 		};
+		2A2B4EE627E8D1850097D50D /* HappyRedPacketV4 */ = {
+			isa = PBXGroup;
+			children = (
+				2A2B4EE727E8D1850097D50D /* red-packet.json */,
+				2A2B4EE827E8D1850097D50D /* HappyRedPacketV4.swift */,
+				2A2B4EE927E8D1850097D50D /* HappyRedPacketV4.json */,
+			);
+			path = HappyRedPacketV4;
+			sourceTree = "<group>";
+		};
 		2A3050C226A01B370003EECC /* OpenSea */ = {
 			isa = PBXGroup;
 			children = (
@@ -2152,9 +2159,8 @@
 		2A96348C27A26A5B0019C4CA /* ABI */ = {
 			isa = PBXGroup;
 			children = (
-				2A96349327A26ACE0019C4CA /* HappyRedPacketV4.json */,
-				2A96348D27A26A5B0019C4CA /* red-packet.json */,
-				2A96348E27A26A5B0019C4CA /* HappyRedPacketV4.swift */,
+				2A2B4EE527E8D1850097D50D /* ABIContract.swift */,
+				2A2B4EE627E8D1850097D50D /* HappyRedPacketV4 */,
 			);
 			path = ABI;
 			sourceTree = "<group>";
@@ -3392,16 +3398,6 @@
 			path = Repository;
 			sourceTree = "<group>";
 		};
-		44AFA52A07427E4CA0DD5087 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				EA410D1B7778E6489B615FDE /* Pods_MaskWalletTests.framework */,
-				B22CF13FDEA7F9081377F7B5 /* Pods_Maskbook.framework */,
-				DCF053D72611A19F2C95BF05 /* Pods_MaskbookTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		5D11473527E2CD9C00D4448C /* CropImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -3847,9 +3843,9 @@
 				DBE99E362367DEA6000473BD /* Settings.bundle in Resources */,
 				0F641EF726870AA8002A4D33 /* Localizable.strings in Resources */,
 				1F8D692F2721549E001084D6 /* wallets.json in Resources */,
+				2A2B4EED27E8D1850097D50D /* HappyRedPacketV4.json in Resources */,
 				DBAAF49F22C35A7100017594 /* LaunchScreen.storyboard in Resources */,
-				2A96348F27A26A5C0019C4CA /* red-packet.json in Resources */,
-				2A96349427A26ACE0019C4CA /* HappyRedPacketV4.json in Resources */,
+				2A2B4EEB27E8D1850097D50D /* red-packet.json in Resources */,
 				DBAAF49C22C35A7100017594 /* Assets.xcassets in Resources */,
 				DBAAF49A22C35A7100017594 /* Main.storyboard in Resources */,
 				41829919277C816800F5417B /* GoogleService-Info.plist in Resources */,
@@ -4411,7 +4407,6 @@
 				2A23A65027C4B67D00CC5AD9 /* SwiftUI+Asset.swift in Sources */,
 				5D7F5A5327B66C5600A007C5 /* PersonaKeyInfoPreview.swift in Sources */,
 				2AF884EC271EE9310004565A /* SizeMeasureModifier.swift in Sources */,
-				2A96349027A26A5C0019C4CA /* HappyRedPacketV4.swift in Sources */,
 				2AF88554271EE9310004565A /* SendConfirmViewModel.swift in Sources */,
 				1F3301D827D85B8400FA0652 /* AlertItemRepresentable.swift in Sources */,
 				2AF8857F271EE9310004565A /* WalletListHeader.swift in Sources */,
@@ -4422,6 +4417,7 @@
 				0FACA3BA26720D9A00CB8AC0 /* ZerionAssetsProvider.swift in Sources */,
 				5DA5B6CB27D9F6260014780A /* UISearchBar+Height.swift in Sources */,
 				1FCBEE04273A6A71001C3637 /* RestoreWalletPasswordConfigController.swift in Sources */,
+				2A2B4EEA27E8D1850097D50D /* ABIContract.swift in Sources */,
 				0F2051A7265E14F300602A0C /* ControlContainableScrollViews.swift in Sources */,
 				2DBD0BA0278804540065A2B1 /* IdentityRecoveryViewModel.swift in Sources */,
 				2AF884E0271EE9310004565A /* PluginEnableAlertController.swift in Sources */,
@@ -4439,6 +4435,7 @@
 				2AF88533271EE9310004565A /* DerivationPathHeaderView.swift in Sources */,
 				5DE5E53C27E468B400F2B62A /* PersonaAvatarActionViewModel.swift in Sources */,
 				1F0363922779D223001E8A88 /* DecentralisedApplicationResolver.swift in Sources */,
+				2A2B4EEC27E8D1850097D50D /* HappyRedPacketV4.swift in Sources */,
 				1FCBEDF42738FF6C001C3637 /* RestoreWalletPasswordVerifyController.swift in Sources */,
 				2AF88616271EED7D0004565A /* MoveFromBottomModifier.swift in Sources */,
 				2A6ABBB12720053B00CC3AED /* SettingBackupViewController.swift in Sources */,
