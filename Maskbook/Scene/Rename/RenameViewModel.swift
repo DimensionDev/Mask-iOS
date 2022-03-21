@@ -11,13 +11,18 @@ import CoreDataStack
 import Foundation
 
 class RenameViewModel {
-    init(originalName: String, title: String, confirmAction: @escaping (String) -> Void) {
+    init(originalName: String, title: String, dismissOnConfirm: Bool = false, confirmAction: @escaping (String, RenameViewModel) -> Void) {
         self.confirmAction = confirmAction
         self.originalName = originalName
         self.title = title
+        self.dismissOnConfirm = dismissOnConfirm
     }
 
     var title: String
     let originalName: String
-    let confirmAction: (String) -> Void
+    let confirmAction: (String, RenameViewModel) -> Void
+    let dismissOnConfirm: Bool
+    var dismissSignal = PassthroughSubject<(() -> Void)?, Never>()
 }
+
+
