@@ -337,13 +337,9 @@ var user = __webpack_require__(95418);
 function resolveLastRecognizedIdentityInner(ref, cancel) {
     const selfSelector = (0,selector/* selfInfoSelectors */.qB)().handle;
     const assign = ()=>{
-        console.log("resolveLastRecognizedIdentityInner!!!");
         const handle = (0,selector/* selfInfoSelectors */.qB)().handle.evaluate();
         const nickname = (0,selector/* selfInfoSelectors */.qB)().name.evaluate();
         const avatar = (0,selector/* selfInfoSelectors */.qB)().userAvatar.evaluate();
-        console.log(handle);
-        console.log(nickname);
-        console.log(avatar);
         if (!(0,isNil/* default */.Z)(handle)) {
             ref.value = {
                 identifier: new src/* ProfileIdentifier */.WO(base/* twitterBase.networkIdentifier */.oQ.networkIdentifier, handle),
@@ -2406,10 +2402,8 @@ function NFTAvatarClip(props) {
         slug: ''
     } , loading: loadingNFT  } = (0,hooks/* useNFT */.e)((ref = avatarMetadata === null || avatarMetadata === void 0 ? void 0 : avatarMetadata.address) !== null && ref !== void 0 ? ref : '', (ref1 = avatarMetadata === null || avatarMetadata === void 0 ? void 0 : avatarMetadata.token_id) !== null && ref1 !== void 0 ? ref1 : '');
     const { amount , name , symbol , slug  } = value;
-    console.log("NFTAvatarClip1");
     if (!(avatarMetadata === null || avatarMetadata === void 0 ? void 0 : avatarMetadata.address) || !(avatarMetadata === null || avatarMetadata === void 0 ? void 0 : avatarMetadata.token_id)) return null;
     var ref2;
-    console.log("NFTAvatarClip2");
     return(/*#__PURE__*/ (0,jsx_runtime.jsxs)("svg", {
         className: classes.root,
         width: width,
@@ -2837,11 +2831,7 @@ function NFTAvatarClipInTwitter() {
     }, [
         location.pathname
     ]);
-    console.log("NFTAvatarClipInTwitter1");
-    console.log(size);
-    console.log(twitterId);
     if ((0,base_src/* isZero */.Fr)(size) || !twitterId) return null;
-    console.log("NFTAvatarClipInTwitter2");
     return(/*#__PURE__*/ (0,jsx_runtime.jsx)(NFTAvatarClip, {
         screenName: twitterId,
         width: size,

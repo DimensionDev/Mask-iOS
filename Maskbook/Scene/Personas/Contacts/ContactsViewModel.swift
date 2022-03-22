@@ -12,7 +12,7 @@ import CoreDataStack
 import Foundation
 import UIKit
 
-class ContactsViewViewModel {
+class ContactsViewModel {
     private var disposeBag = Set<AnyCancellable>()
 
     @InjectedProvider(\.personaManager)
@@ -33,6 +33,10 @@ class ContactsViewViewModel {
         }()
         return FetchedResultsPublisher(fetchResultController: fetchResultController)
     }
+    
+    var dataSource = CurrentValueSubject<[ProfileRecord], Never>([])
+    var searchString = CurrentValueSubject<String, Never>("")
+    var isSearching = CurrentValueSubject<Bool, Never>(false)
 
     init() {
         personaManager
@@ -44,11 +48,29 @@ class ContactsViewViewModel {
                     let relations = RelationRepository.queryRelations(personaIdentifier: personaIdentifier)
                     profileIdentifiers = relations.compactMap(\.profileIdentifier)
                 }
-                let publisher = ContactsViewViewModel.profileRecordPublisher(identifiers: profileIdentifiers)
+                let publisher = ContactsViewModel.profileRecordPublisher(identifiers: profileIdentifiers)
                 self?.profileRecordPublisher = publisher
                 return publisher
             }
             .assign(to: \.value, on: profileRecordsSubject)
+            .store(in: &disposeBag)
+        
+        Publishers.CombineLatest(searchString, profileRecordsSubject)
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                self.dataSource.value = self.profileRecordsSubject.value
+                    .filter { [weak self] profile in
+                        guard let text = self?.searchString.value else { return true }
+                        if text.isEmpty {
+                            return true
+                        }
+                        let isIdContains = profile.socialID.contains(text)
+                        if let nickname = profile.nickname {
+                            return nickname.contains(text) || isIdContains
+                        }
+                        return isIdContains
+                    }
+            }
             .store(in: &disposeBag)
     }
 }

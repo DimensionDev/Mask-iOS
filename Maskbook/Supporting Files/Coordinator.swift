@@ -67,6 +67,8 @@ class Coordinator {
         case welcome
         case mainTab(selectedTab: MainTabBarController.Tab)
         case persona
+        case personaAvatar
+        case cropImage(image: UIImage)
         case guide
         case termsOfService(walletStartType: WalletStartType)
         case biometryRecognition(walletStartType: WalletStartType)
@@ -209,6 +211,11 @@ class Coordinator {
         
         present(scene: .mainTab(selectedTab: .personas), transition: .modal(animated: false, adaptiveDelegate: maskSocialVC))
         
+        if !settings.hasShownGuide {
+            settings.hasShownGuide = true
+            present(scene: .guide, transition: .modal(animated: false, adaptiveDelegate: maskSocialVC))
+        }
+        
         // If all data (legacy wallets info and indexedDB data) has migrated to
         // native side, we do not need to wait for the extension JS scripts to
         // finish executing
@@ -342,7 +349,13 @@ extension Coordinator {
         
         case .persona:
             return PersonasViewController()
+            
+        case .personaAvatar:
+            return PersonaAvatarViewController()
 
+        case let .cropImage(image):
+            return CropImageViewController(image: image)
+            
         case .guide:
             return MaskHostViewController(rootView: GuideView() { [weak self] in
                 guard let window = self?.window else {

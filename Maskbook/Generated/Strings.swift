@@ -545,6 +545,14 @@ enum L10n {
       static var retry: String {
         return L10n.tr("Localizable", "Common.Controls.Retry")
       }
+      /// Save
+      static var save: String {
+        return L10n.tr("Localizable", "Common.Controls.Save")
+      }
+      /// Select from photos
+      static var selectFromPhoto: String {
+        return L10n.tr("Localizable", "Common.Controls.SelectFromPhoto")
+      }
       /// Sending...
       static var sending: String {
         return L10n.tr("Localizable", "Common.Controls.Sending")
@@ -560,6 +568,10 @@ enum L10n {
       /// Skip, download later
       static var skip: String {
         return L10n.tr("Localizable", "Common.Controls.Skip")
+      }
+      /// Take a photo
+      static var takePhoto: String {
+        return L10n.tr("Localizable", "Common.Controls.TakePhoto")
       }
       /// Try Again
       static var tryAgain: String {
@@ -1292,6 +1304,21 @@ enum L10n {
       }
     }
 
+    enum PersonaAvatar {
+      /// Crop & rotate
+      static var crop: String {
+        return L10n.tr("Localizable", "Scene.PersonaAvatar.Crop")
+      }
+      /// Remove Persona Avatar
+      static var removeAvatar: String {
+        return L10n.tr("Localizable", "Scene.PersonaAvatar.RemoveAvatar")
+      }
+      /// Set Persona Avatar
+      static var title: String {
+        return L10n.tr("Localizable", "Scene.PersonaAvatar.Title")
+      }
+    }
+
     enum PersonaContacts {
       /// Contact
       static var contact: String {
@@ -1338,7 +1365,7 @@ enum L10n {
       static var accounts: String {
         return L10n.tr("Localizable", "Scene.PersonaSocial.Accounts")
       }
-      /// add
+      /// Add
       static var add: String {
         return L10n.tr("Localizable", "Scene.PersonaSocial.Add")
       }
@@ -1400,7 +1427,7 @@ enum L10n {
       static var deleteTip: String {
         return L10n.tr("Localizable", "Scene.Personas.DeleteTip")
       }
-      /// Personas
+      /// Persona
       static var personas: String {
         return L10n.tr("Localizable", "Scene.Personas.Personas")
       }
@@ -1448,6 +1475,13 @@ enum L10n {
         /// Persona
         static var persona: String {
           return L10n.tr("Localizable", "Scene.Personas.Create.Persona")
+        }
+      }
+
+      enum Search {
+        /// Search
+        static var placeholder: String {
+          return L10n.tr("Localizable", "Scene.Personas.Search.Placeholder")
         }
       }
 
@@ -2774,7 +2808,7 @@ enum L10n {
     static var labs: String {
       return L10n.tr("Localizable", "Tab.Labs")
     }
-    /// Personas
+    /// Persona
     static var personas: String {
       return L10n.tr("Localizable", "Tab.Personas")
     }
