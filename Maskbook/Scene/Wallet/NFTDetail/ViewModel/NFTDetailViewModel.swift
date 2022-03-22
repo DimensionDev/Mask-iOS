@@ -63,7 +63,14 @@ class NFTDetailViewModel: NSObject {
             walletAssetManager.openSeaProvider.retrieveAssetsPrice(assetModel: token),
             walletAssetManager.openSeaProvider.retrieveCollectionStatus(assetModel: token))
             .receive(on: DispatchQueue.main)
-             .sink { _ in }
+             .sink {  completion in
+                 switch completion {
+                 case .finished: break
+
+                 case .failure(let error):
+                     print("Error: \(error)")
+                 }
+             }
              receiveValue: {[weak self] priceModel, statusModel in
                 guard var snp = self?.dataSource?.snapshot() else { return }
                 snp.appendItems([.nftDetail(collection: statusModel, floor: priceModel)], toSection: .nftDetail)
