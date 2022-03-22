@@ -81,7 +81,7 @@ struct HappyRedPacketV4: ABIContract {
         ).get(), let signedMsgBytes = Web3.Utils.hexToData(signedMsg) else {
             return nil
         }
-        let contractMethod = "claim"
+        let contractMethod = Functions.claim.rawValue
         let parameters: [AnyObject] = [ridBytes, signedMsgBytes, walletAddress] as [AnyObject]
         return await write(
             contractMethod,
@@ -91,7 +91,7 @@ struct HappyRedPacketV4: ABIContract {
     
     @MainActor
     func createRedPacket(param: CreateRedPacketInput) async -> String? {
-        let contractMethod = "refund"
+        let contractMethod = Functions.createRedPacket.rawValue
         let parameters = param.asArray
         return await write(
             contractMethod,
@@ -104,7 +104,7 @@ struct HappyRedPacketV4: ABIContract {
         guard let ridBytes = Web3.Utils.hexToData(rid)?.bytes else {
             return nil
         }
-        let contractMethod = "refund"
+        let contractMethod = Functions.refund.rawValue
         let parameters: [AnyObject] = [ridBytes] as [AnyObject]
         return await write(
             contractMethod,
