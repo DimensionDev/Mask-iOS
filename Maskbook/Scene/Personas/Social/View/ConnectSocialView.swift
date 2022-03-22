@@ -56,7 +56,7 @@ extension ConnectableSocialListViewController {
             let width = (UIScreen.main.bounds.width - 45) / 3
             NSLayoutConstraint.activate([
                 heightAnchor.constraint(equalToConstant: 100),
-                widthAnchor.constraint(equalToConstant: width)
+                widthAnchor.constraint(equalToConstant: width).priority(.required - 1)
             ])
         }
     
