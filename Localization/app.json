@@ -431,7 +431,7 @@
             "floor_price": "Floor Price",
             "save_photo":"Save to Photos",
             "collection_web":"View Collection Website",
-            "etherscan":"View on Etherscan",
+            "etherscan":"View on Etherscan"
         },
         "sendTransaction":{
             "send":{
