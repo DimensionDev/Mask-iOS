@@ -64,7 +64,7 @@ final class PersonasActionViewModel {
             let viewModel = RenameViewModel(
                 originalName: persona.nickname ?? "",
                 title: L10n.Scene.Personas.Action.rename
-            ) { [weak self] newName in
+            ) { [weak self] newName, _ in
                 guard let self = self else { return }
                 if self.personaManager.personaRecordsSubject.value.contains(where: {
                     $0.nickname == newName

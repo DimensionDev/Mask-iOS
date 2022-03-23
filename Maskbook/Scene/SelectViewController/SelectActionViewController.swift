@@ -18,6 +18,8 @@ class SelectActionViewController: UIViewController {
     
     private var disposeBag = Set<AnyCancellable>()
     
+    private var tableViewTop: NSLayoutConstraint!
+    
     init(viewModel: SelectActionViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -45,7 +47,8 @@ class SelectActionViewController: UIViewController {
         view.separatorStyle = .none
         view.delegate = self
         view.dataSource = self
-        view.register(SelectActionTableViewCell.self, forCellReuseIdentifier: String(describing: SelectActionTableViewCell.self))
+        view.register(SelectActionTableViewCell.self)
+        view.isScrollEnabled = false
         return view
     }()
     
@@ -78,8 +81,10 @@ class SelectActionViewController: UIViewController {
         }
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        let topConstant = (viewModel.title != nil) ? 71 : 40
+        tableViewTop = tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: CGFloat(topConstant))
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor),
+            tableViewTop,
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
@@ -115,10 +120,6 @@ extension SelectActionViewController: PanModalPresentable {
     }
     
     var longFormHeight: PanModalHeight {
-        if let _ = viewModel.title {
-            return .contentHeight(SelectActionViewController.rowHeight * CGFloat(viewModel.actionTitles.count) + 71)
-        } else {
-            return .contentHeight(SelectActionViewController.rowHeight * CGFloat(viewModel.actionTitles.count) + 58)
-        }
+        .contentHeight(SelectActionViewController.rowHeight * CGFloat(viewModel.actionTitles.count) + tableViewTop.constant)
     }
 }

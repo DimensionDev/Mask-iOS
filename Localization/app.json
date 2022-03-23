@@ -1,6 +1,6 @@
 {
     "tab": {
-        "personas": "Personas",
+        "personas": "Persona",
         "wallet": "Wallet",
         "labs": "Labs",
         "setting": "Setting"
@@ -171,6 +171,9 @@
             "download": "download",
             "skip": "Skip, download later",
             "download_next": "I downloaded, next",
+            "select_from_photo": "Select from photos",
+            "take_photo": "Take a photo",
+            "save": "Save",
             "move_data_now": "Move data now",
             "remind_me_later": "Remind me later"
         },
@@ -428,7 +431,7 @@
             "floor_price": "Floor Price",
             "save_photo":"Save to Photos",
             "collection_web":"View Collection Website",
-            "etherscan":"View on Etherscan",
+            "etherscan":"View on Etherscan"
         },
         "sendTransaction":{
             "send":{
@@ -504,7 +507,7 @@
             "password_demand": "Payment Password must be a combination of 2 categories out of numbers, letters and special characters with a length of 8-20 characters."
         },
         "personas": {
-            "personas": "Personas",
+            "personas": "Persona",
             "tabs": {
                 "social": "Social",
                 "post": "Post",
@@ -524,6 +527,9 @@
                 "persona": "Persona",
                 "create_persona": "Create Persona",
                 "input_persona_name": "Input persona name"
+            },
+            "search": {
+                "placeholder": "Search"
             },
             "delete": "Confirm to delete persona\n",
             "delete_tip": "If you haven’t backed up, please go to Settings - Backup and Recovery",
@@ -552,12 +558,17 @@
             "disconnect": "Disconnect",
             "connect_social_accounts": "Connect Social accounts",
             "accounts": "Accounts",
-            "connect_tips": "Select the social account to connect your persona. Enjoy a web 3.0 social expereince.",
-            "add": "add"
+            "connect_tips": "Connect persona to social media below",
+            "add": "Add"
         },
         "persona_download": {
             "identity_id": "Identity Code",
             "download_tips": "The QR code encrypts the identity code or private key of your persona. It’s recommended to print it. You can use Mask App to scan the QR code to login."
+        },
+        "persona_avatar": {
+            "title": "Set Persona Avatar",
+            "crop": "Crop & rotate",
+            "remove_avatar": "Remove Persona Avatar"
         },
         "wallet_balance": {
             "btn_swap": "Swap",

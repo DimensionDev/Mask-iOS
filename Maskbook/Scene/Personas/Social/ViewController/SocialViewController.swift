@@ -26,10 +26,8 @@ class SocialViewController: BaseViewController {
 
     private lazy var editButton: UIButton = {
         let button = HitTestExpandedButton(type: .custom)
-        button.titleLabel?.font = FontStyles.MH5
-        button.setTitleColor(Asset.Colors.Public.blue.color, for: .normal)
-        button.setTitle(L10n.Common.Controls.edit, for: .normal)
-        button.setTitle(L10n.Common.Controls.done, for: .selected)
+        button.setImage(Asset.Images.Scene.Personas.edit.image, for: .normal)
+        button.setImage(Asset.Images.Scene.Personas.done.image, for: .selected)
         NSLayoutConstraint.activate([
             button.heightAnchor.constraint(equalToConstant: 24),
             button.widthAnchor.constraint(equalToConstant: 48)

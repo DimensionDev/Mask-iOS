@@ -41,7 +41,7 @@ class PersonasViewController: BaseViewController {
 
     @InjectedProvider(\.mainCoordinator)
     private var coordinator
-    
+
     @InjectedProvider(\.personaManager)
     private var personaManager
 
@@ -49,54 +49,71 @@ class PersonasViewController: BaseViewController {
 
     let viewControllers = PersonaSubViewController.allCases.map(\.viewController)
     weak var socialViewController: SocialViewController?
+    weak var contactsViewController: ContactsViewController?
 
     lazy var segmentViewController: SegmentViewController = {
-        let segmentVC = SegmentViewController(items: items, viewControllers: viewControllers)
+        let segmentVC = SegmentViewController(items: items, viewControllers: viewControllers, style: .group)
         socialViewController = segmentVC.viewControllers.first as? SocialViewController
+        contactsViewController = segmentVC.viewControllers.last as? ContactsViewController
         return segmentVC
     }()
+    
+    var segmentTopConstraint: NSLayoutConstraint!
 
     lazy var connectTOSocialVC = ConnectableSocialListViewController()
 
-    lazy var titleStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 9
-        let imageView = UIImageView(image: Asset.Icon.Arrows.drop.image.withRenderingMode(.alwaysTemplate))
-        imageView.tintColor = Asset.Colors.Text.dark.color
-        imageView.contentMode = .scaleAspectFit
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(imageView)
-        return stackView
-    }()
-
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = FontStyles.BH4
-        label.textColor = Asset.Colors.Text.dark.color
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
     let scanButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setImage(Asset.Images.Scene.Balance.walletConnectScan.image, for: .normal)
         return button
     }()
 
+    private lazy var personaCollectionView: UICollectionView = {
+        let flowLayout = MnemonicVerifyCollectionFlowLayout()
+        flowLayout.itemSize = PersonaCollectionDataSource.itemSize
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.sideItemScale = 0.9
+        let view = ControlContainableCollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        view.backgroundColor = .clear
+        view.showsHorizontalScrollIndicator = false
+        view.showsVerticalScrollIndicator = false
+        view.layer.masksToBounds = false
+        view.clipsToBounds = true
+        return view
+    }()
+
+    lazy var horizontalDataSource = PersonaCollectionDataSource()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationItems()
+        setupPersonaCollectionView()
         setupSegmentViewController()
         setupConnectViewController()
         subscribeSignals()
         updateWithPersonaProfileState()
+        scrollToCurrentPersona()
+    }
+
+    func setupPersonaCollectionView() {
+        personaCollectionView.delegate = horizontalDataSource
+        personaCollectionView.dataSource = horizontalDataSource
+        personaCollectionView.register(PersonaCollectionCell.self)
+        personaCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(personaCollectionView)
+        NSLayoutConstraint.activate([
+            personaCollectionView.topAnchor.constraint(equalTo: view.readableContentGuide.topAnchor, constant: 24),
+            personaCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            personaCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            personaCollectionView.heightAnchor.constraint(equalToConstant: 122)
+        ])
     }
 
     func setupNavigationItems() {
+        title = L10n.Scene.Personas.personas
         navigationItem.largeTitleDisplayMode = .never
-        var leftBarButtonItems = [ .fixedSpace(14),
-                                   UIBarButtonItem(customView: scanButton)]
+        var leftBarButtonItems = [.fixedSpace(14),
+                                  UIBarButtonItem(customView: scanButton)]
         if DebugControl.isDebugEntryEnable {
             let debugEntryButton = UIBarButtonItem(customView: DebugEntryView())
             leftBarButtonItems.append(debugEntryButton)
@@ -111,13 +128,13 @@ class PersonasViewController: BaseViewController {
         segmentView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentView)
         segmentViewController.didMove(toParent: self)
+        segmentTopConstraint = segmentView.topAnchor.constraint(equalTo: view.readableContentGuide.topAnchor, constant: 146)
         NSLayoutConstraint.activate([
-            segmentView.topAnchor.constraint(equalTo: view.readableContentGuide.topAnchor),
+            segmentTopConstraint,
             segmentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             segmentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             segmentView.bottomAnchor.constraint(equalTo: view.readableContentGuide.bottomAnchor)
         ])
-        segmentViewController.segments.backgroundColor = Asset.Colors.Background.bar.color
     }
 
     func setupConnectViewController() {
@@ -127,7 +144,7 @@ class PersonasViewController: BaseViewController {
         view.addSubview(subView)
         segmentViewController.didMove(toParent: self)
         NSLayoutConstraint.activate([
-            subView.topAnchor.constraint(equalTo: view.readableContentGuide.topAnchor),
+            subView.topAnchor.constraint(equalTo: personaCollectionView.bottomAnchor),
             subView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             subView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             subView.bottomAnchor.constraint(equalTo: view.readableContentGuide.bottomAnchor)
@@ -142,58 +159,55 @@ class PersonasViewController: BaseViewController {
             }
             .store(in: &disposeBag)
 
-        titleStackView.gesture()
-            .sink { [weak self] _ in
-                self?.titleViewClicked()
-            }
-            .store(in: &disposeBag)
-        
         scanButton
             .cv.tap()
             .sink { [weak self] in
                 self?.scanAction()
             }
             .store(in: &disposeBag)
+        
+        contactsViewController?.viewModel.isSearching
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] isSearching in
+                guard let self = self else { return }
+                UIView.animate(withDuration: 0.3) {
+                    let offset = self.segmentViewController.view.frame.origin.y + SegmentViewController.segmentHeight - 24
+                    if isSearching {
+                        self.segmentTopConstraint.constant = 146 - offset
+                    } else {
+                        self.segmentTopConstraint.constant = 146
+                    }
+                    self.segmentViewController.segments.alpha = isSearching ? 0 : 1
+                    self.personaCollectionView.alpha = isSearching ? 0 : 1
+                    self.view.layoutIfNeeded()
+                }
+            })
+            .store(in: &disposeBag)
+        
+        personaManager.personaRecordsSubject
+            .sink { [weak self] _ in
+                self?.personaCollectionView.reloadData()
+            }
+            .store(in: &disposeBag)
     }
 
     func updateWithPersonaProfileState() {
-        if let persona = personaManager.currentPersona.value {
-            addTitleView(title: persona.nickname ?? persona.nonOptionalIdentifier)
-        }
         connectTOSocialVC.view.isHidden = !personaManager.currentProfiles.value.isEmpty
     }
 
-    func addTitleView(title: String) {
-        navigationItem.titleView = titleStackView
-        titleLabel.text = title
-    }
-
-    func removeTitleView() {
-        navigationItem.titleView = nil
+    func scrollToCurrentPersona() {
+        guard let persona = personaManager.currentPersona.value else { return }
+        let personas = personaManager.personaRecordsSubject.value
+        guard let index = personas.firstIndex(of: persona) else { return }
+        if index == 0 { return }
+        DispatchQueue.main.async {
+            self.personaCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredHorizontally, animated: false)
+        }
     }
 }
 
 extension PersonasViewController {
-    func personaNicknameDuplicated() {
-        let alertController = AlertController(
-            title: L10n.Common.Alert.PersonaNameDuplicated.title,
-            message: "",
-            confirmButtonText: L10n.Common.Controls.done,
-            imageType: .error
-        )
-        coordinator.present(
-            scene: .alertController(alertController: alertController),
-            transition: .alertController(completion: nil)
-        )
-    }
 
-    func titleViewClicked() {
-        coordinator.present(
-            scene: .personaAction(viewModel: PersonasActionViewModel()),
-            transition: .detail(animated: true)
-        )
-    }
-    
     func scanAction() {
         coordinator.present(scene: .commonScan, transition: .modal(animated: true))
     }
