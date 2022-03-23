@@ -88,12 +88,12 @@ class PersonaAvatarViewController: BaseViewController {
         }
         NSLayoutConstraint.activate([
             stack.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-            stack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22.5),
-            stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22.5),
+            stack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstraints.leading),
+            stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -LayoutConstraints.trailing),
             stack.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -57),
             avatarImageView.widthAnchor.constraint(equalTo: stack.widthAnchor)
         ])
-        avatarImageView.applyCornerRadius(radius: (UIScreen.main.bounds.width - 22.5 * 2) / 2.0, cornerCurve: .circular)
+        avatarImageView.applyCornerRadius(radius: (UIScreen.main.bounds.width - LayoutConstraints.horizontal * 2) / 2.0, cornerCurve: .circular)
         selectPhotoButton.addTarget(self, action: #selector(selectFromPhotosAction), for: .touchUpInside)
         takePhotoButton.addTarget(self, action: #selector(takePhotoAction), for: .touchUpInside)
         

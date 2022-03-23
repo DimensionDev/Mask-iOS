@@ -49,7 +49,7 @@ struct RemoteRestoreVerifyView: View {
                 stateSwitchView()
             }
         }
-        .padding(.horizontal, 22.5)
+        .padding(.horizontal, LayoutConstraints.horizontal)
         .background(Asset.Colors.Background.normal.asColor())
     }
 

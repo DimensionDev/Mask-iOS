@@ -46,7 +46,7 @@ class DerivationPathTableViewCell: UITableViewCell {
         view.axis = .horizontal
         view.distribution = .fillEqually
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: 8, left: 22, bottom: 8, right: 22)
+        view.layoutMargins = UIEdgeInsets(top: 8, left: LayoutConstraints.leading, bottom: 8, right: LayoutConstraints.trailing)
         
         let addressView = buildColumn(addressLabel, alignRight: false)
         let balanceView = buildColumn(balanceLabel, alignRight: false)

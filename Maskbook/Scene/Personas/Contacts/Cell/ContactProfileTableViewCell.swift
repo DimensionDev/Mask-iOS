@@ -163,8 +163,8 @@ class ContactProfileTableViewCell: UITableViewCell {
         }
         NSLayoutConstraint.activate([
             hStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            hStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 22.5),
-            hStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -22.5),
+            hStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstraints.leading),
+            hStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutConstraints.trailing),
             hStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
         ])
     }

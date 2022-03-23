@@ -168,9 +168,9 @@ private extension ImportKeystoreViewController {
         vStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             vStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            vStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
+            vStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstraints.leading),
             view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: vStack.bottomAnchor),
-            view.trailingAnchor.constraint(equalTo: vStack.trailingAnchor, constant: 22)
+            view.trailingAnchor.constraint(equalTo: vStack.trailingAnchor, constant: LayoutConstraints.trailing)
         ])
         
         view.gesture()

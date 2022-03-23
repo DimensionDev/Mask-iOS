@@ -20,7 +20,7 @@ class RenameViewController: UIViewController {
         view.axis = .vertical
         view.spacing = 8
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: 48, left: 22, bottom: 24, right: 22)
+        view.layoutMargins = UIEdgeInsets(top: 48, left: LayoutConstraints.leading, bottom: 24, right: LayoutConstraints.trailing)
         view.alignment = .fill
         
         nameLabel.translatesAutoresizingMaskIntoConstraints = false

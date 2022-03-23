@@ -113,7 +113,7 @@ class NFTCollectionDetailTableViewCell: UITableViewCell {
         backgroundColor = .clear
         contentView.addSubview(backView)
         backView.snp.makeConstraints { make in
-            make.edges.equalTo(contentView).inset(UIEdgeInsets(top: 22, left: 22, bottom: 22, right: 22))
+            make.edges.equalTo(contentView).inset(LayoutConstraints.horizontal)
             make.height.equalTo(160)
         }
         

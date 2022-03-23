@@ -51,7 +51,7 @@ struct GuideView: View {
                     .foregroundColor(Asset.Colors.Background.lightBlue.asColor())
             }
             .opacity(isLastOne ? 0 : 1)
-            .padding(.horizontal, 22.5)
+            .padding(.horizontal, LayoutConstraints.horizontal)
             .padding(.vertical, 8)
             .contentShape(Rectangle())
         }

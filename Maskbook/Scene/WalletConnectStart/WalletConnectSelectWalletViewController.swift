@@ -178,8 +178,8 @@ class WalletConnectSelectWalletViewController: UIViewController {
         view.addSubview(blockChainNetworkButtonsView)
         NSLayoutConstraint.activate([
             blockChainNetworkButtonsView.frameLayoutGuide.topAnchor.constraint(equalTo: view.topAnchor, constant: 17),
-            blockChainNetworkButtonsView.frameLayoutGuide.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 23),
-            blockChainNetworkButtonsView.frameLayoutGuide.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -23),
+            blockChainNetworkButtonsView.frameLayoutGuide.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstraints.leading),
+            blockChainNetworkButtonsView.frameLayoutGuide.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -LayoutConstraints.trailing),
             blockChainNetworkButtonsView.frameLayoutGuide.heightAnchor.constraint(equalToConstant: 36),
             blockChainNetworkButtonsView.contentLayoutGuide.widthAnchor.constraint(equalToConstant: CGFloat(blockChainNetworkButtons.count) * (blockChainButtonWidth + blockChainButtonSpace)),
             blockChainNetworkButtonsView.contentLayoutGuide.heightAnchor.constraint(equalTo: blockChainNetworkButtonsView.frameLayoutGuide.heightAnchor)
@@ -221,8 +221,8 @@ class WalletConnectSelectWalletViewController: UIViewController {
 
         view.addSubview(collectionView)
         NSLayoutConstraint.activate([
-            collectionView.frameLayoutGuide.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 23),
-            collectionView.frameLayoutGuide.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -23),
+            collectionView.frameLayoutGuide.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstraints.leading),
+            collectionView.frameLayoutGuide.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -LayoutConstraints.trailing),
             collectionView.frameLayoutGuide.topAnchor.constraint(
                 equalTo: blockChainNetworkButtonsView.bottomAnchor,
                 constant: 16),

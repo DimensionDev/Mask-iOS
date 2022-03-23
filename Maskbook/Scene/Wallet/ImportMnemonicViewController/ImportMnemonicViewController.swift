@@ -106,15 +106,15 @@ private extension ImportMnemonicViewController {
         textContainer.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             textContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            textContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
-            view.trailingAnchor.constraint(equalTo: textContainer.trailingAnchor, constant: 22)
+            textContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstraints.leading),
+            view.trailingAnchor.constraint(equalTo: textContainer.trailingAnchor, constant: LayoutConstraints.trailing)
         ])
         
         confirmButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             confirmButton.heightAnchor.constraint(equalToConstant: 52),
-            confirmButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
-            view.trailingAnchor.constraint(equalTo: confirmButton.trailingAnchor, constant: 22)
+            confirmButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstraints.leading),
+            view.trailingAnchor.constraint(equalTo: confirmButton.trailingAnchor, constant: LayoutConstraints.trailing)
         ])
         
         keyboardExpandView.snp.makeConstraints { make in

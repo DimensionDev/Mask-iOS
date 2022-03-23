@@ -27,7 +27,7 @@ class RecentlyHeaderView: UITableViewHeaderFooterView {
         view.alignment = .fill
         view.spacing = 0
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: 20, left: 22.5, bottom: 0, right: 22.5)
+        view.layoutMargins = UIEdgeInsets(top: 20, left: LayoutConstraints.leading, bottom: 0, right: LayoutConstraints.trailing)
 
         headImageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
