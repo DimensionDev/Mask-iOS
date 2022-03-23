@@ -13,6 +13,8 @@ import UIKit
 final class PlainMaskSegmentComtrol: UIView {
     var disposeBag = Set<AnyCancellable>()
     
+    var segmentHeight: CGFloat = 56
+    
     weak var delegate: MaskSegmentControlDelegate?
     
     let selectedIndex = CurrentValueSubject<Int, Never>(0)

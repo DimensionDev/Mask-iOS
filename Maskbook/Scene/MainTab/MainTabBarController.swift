@@ -111,6 +111,10 @@ extension MainTabBarController {
         navigationController.navigationBar.setAppearance()
         return navigationController
     }
+    
+    func navigationController(tab: Tab) -> UINavigationController? {
+        tabControllerMap[tab]
+    }
 
     func replace(tab: Tab, with controller: UIViewController, animated: Bool = false) {
         guard let navigationController = tabControllerMap[tab] else {
