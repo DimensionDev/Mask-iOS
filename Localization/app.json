@@ -173,7 +173,7 @@
             "download_next": "I downloaded, next",
             "select_from_photo": "Select from photos",
             "take_photo": "Take a photo",
-            "save": "Save"
+            "save": "Save",
             "move_data_now": "Move data now",
             "remind_me_later": "Remind me later"
         },
@@ -558,7 +558,7 @@
             "disconnect": "Disconnect",
             "connect_social_accounts": "Connect Social accounts",
             "accounts": "Accounts",
-            "connect_tips": "Select the social account to connect your persona. Enjoy a web 3.0 social expereince.",
+            "connect_tips": "Connect persona to social media below",
             "add": "Add"
         },
         "persona_download": {
