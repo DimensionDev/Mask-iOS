@@ -26,8 +26,8 @@ class ModalViewController: UIViewController {
         viewController.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             viewController.view.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            viewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
-            viewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22)
+            viewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstraints.leading),
+            viewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -LayoutConstraints.trailing)
         ])
         
         backgroundView.translatesAutoresizingMaskIntoConstraints = false

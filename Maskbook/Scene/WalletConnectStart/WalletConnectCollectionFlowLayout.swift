@@ -14,7 +14,7 @@ class WalletConnectCollectionFlowLayout: UICollectionViewFlowLayout {
     
     let collums: Int = 4
     
-    let sectionInsets = UIEdgeInsets(top: 20, left: 23.5, bottom: 60, right: 23.5)
+    let sectionInsets = UIEdgeInsets(top: 20, left: LayoutConstraints.leading, bottom: 60, right: LayoutConstraints.trailing)
     
     var attrsArray = [UICollectionViewLayoutAttributes]()
     

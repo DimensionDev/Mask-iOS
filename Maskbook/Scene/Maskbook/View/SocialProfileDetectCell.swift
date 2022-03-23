@@ -69,9 +69,9 @@ class SocialProfileDetectCell: UITableViewCell {
         bgView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             bgView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            bgView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 22.5),
+            bgView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstraints.leading),
             contentView.bottomAnchor.constraint(equalTo: bgView.bottomAnchor),
-            contentView.trailingAnchor.constraint(equalTo: bgView.trailingAnchor, constant: 22.5),
+            contentView.trailingAnchor.constraint(equalTo: bgView.trailingAnchor, constant: LayoutConstraints.trailing),
             bgView.heightAnchor.constraint(equalToConstant: 52)
         ])
 

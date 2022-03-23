@@ -98,7 +98,7 @@ class WalletConnectServerConfirmViewController: BaseViewController {
                 }
         }
         stack.isLayoutMarginsRelativeArrangement = true
-        stack.layoutMargins = UIEdgeInsets(top: 0, left: 22.5, bottom: 0, right: 22.5)
+        stack.layoutMargins = UIEdgeInsets(top: 0, left: LayoutConstraints.leading, bottom: 0, right: LayoutConstraints.trailing)
         
         return stack
     }()
@@ -208,7 +208,7 @@ class WalletConnectServerConfirmViewController: BaseViewController {
     
     func addContent() {
         let buttonSpace: CGFloat = 20
-        let buttonLeftMargin: CGFloat = 22.5
+        let buttonLeftMargin: CGFloat = LayoutConstraints.leading
         let buttonWidth = (UIScreen.main.bounds.width - buttonLeftMargin * 2 - buttonSpace) / 2
         let hStack = HStackView(spacing: 15, distribution: .fill, alignment: .center) {
             cancelButton

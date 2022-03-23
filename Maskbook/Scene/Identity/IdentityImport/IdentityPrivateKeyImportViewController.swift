@@ -106,22 +106,22 @@ private extension IdentityPrivateKeyImportViewController {
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             descriptionLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
-            descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
-            view.trailingAnchor.constraint(equalTo: descriptionLabel.trailingAnchor, constant: 22)
+            descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstraints.leading),
+            view.trailingAnchor.constraint(equalTo: descriptionLabel.trailingAnchor, constant: LayoutConstraints.trailing)
         ])
         
         textContainer.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             textContainer.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20),
-            textContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
-            view.trailingAnchor.constraint(equalTo: textContainer.trailingAnchor, constant: 22)
+            textContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstraints.leading),
+            view.trailingAnchor.constraint(equalTo: textContainer.trailingAnchor, constant: LayoutConstraints.trailing)
         ])
         
         confirmButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             confirmButton.heightAnchor.constraint(equalToConstant: 52),
-            confirmButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
-            view.trailingAnchor.constraint(equalTo: confirmButton.trailingAnchor, constant: 22)
+            confirmButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstraints.leading),
+            view.trailingAnchor.constraint(equalTo: confirmButton.trailingAnchor, constant: LayoutConstraints.trailing)
         ])
         
         keyboardExpandView.snp.makeConstraints { make in

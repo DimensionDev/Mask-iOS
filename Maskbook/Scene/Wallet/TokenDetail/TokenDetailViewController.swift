@@ -89,7 +89,7 @@ class TokenDetailViewController: BaseViewController {
         view.alignment = .center
         view.distribution = .fillEqually
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: 0, left: 22, bottom: 0, right: 22)
+        view.layoutMargins = UIEdgeInsets(top: 0, left: LayoutConstraints.leading, bottom: 0, right: LayoutConstraints.trailing)
         view.spacing = 12
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         receiveButton.translatesAutoresizingMaskIntoConstraints = false

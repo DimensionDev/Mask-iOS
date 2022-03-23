@@ -101,8 +101,8 @@ class ConnectableSocialListViewController: BaseViewController {
         
         NSLayoutConstraint.activate([
             vStack.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-            vStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
-            vStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
+            vStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstraints.leading),
+            vStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -LayoutConstraints.trailing),
             vStack.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -22)
         ])
     }

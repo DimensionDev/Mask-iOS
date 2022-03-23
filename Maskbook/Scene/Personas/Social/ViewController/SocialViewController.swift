@@ -72,8 +72,8 @@ class SocialViewController: BaseViewController {
         ])
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: header.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstraints.leading),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -LayoutConstraints.trailing),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
@@ -116,7 +116,7 @@ class SocialViewController: BaseViewController {
             editButton
         }.cv.apply {
             $0.isLayoutMarginsRelativeArrangement = true
-            $0.layoutMargins = UIEdgeInsets(top: 0, left: 23, bottom: 0, right: 23)
+            $0.layoutMargins = UIEdgeInsets(top: 0, left: LayoutConstraints.leading, bottom: 0, right: LayoutConstraints.trailing)
         }
         return hStack
     }

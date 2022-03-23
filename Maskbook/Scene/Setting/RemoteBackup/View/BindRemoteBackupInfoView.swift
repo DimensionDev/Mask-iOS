@@ -47,7 +47,7 @@ struct BindRemoteBackupInfoView: View {
             .frame(height: 54)
             .buttongStyle(viewModel.confirmEnabled)
         }
-        .padding(.horizontal, 22.5)
+        .padding(.horizontal, LayoutConstraints.horizontal)
         .background(Asset.Colors.Background.normal.asColor())
     }
 

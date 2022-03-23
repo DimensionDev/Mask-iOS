@@ -120,7 +120,7 @@ class SendTransactionViewController: BaseViewController {
         
         view.addSubview(toAddressLabel)
         toAddressLabel.snp.makeConstraints { make in
-            make.leading.equalTo(22.5)
+            make.leading.equalTo(LayoutConstraints.leading)
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(24)
         }
             
@@ -128,7 +128,7 @@ class SendTransactionViewController: BaseViewController {
         enterAddressTextField.snp.makeConstraints {make in
             make.left.equalTo(toAddressLabel)
             make.top.equalTo(toAddressLabel.snp.bottom).offset(8)
-            make.trailing.equalTo(-22.5)
+            make.trailing.equalTo(-LayoutConstraints.trailing)
             make.height.equalTo(54)
         }
         
@@ -142,8 +142,8 @@ class SendTransactionViewController: BaseViewController {
         
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
-            make.leading.equalTo(23)
-            make.trailing.equalTo(-23)
+            make.leading.equalTo(LayoutConstraints.leading)
+            make.trailing.equalTo(-LayoutConstraints.trailing)
             make.height.equalTo(54)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-24)
         }

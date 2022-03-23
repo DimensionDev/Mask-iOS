@@ -72,7 +72,7 @@ class TokenListTableViewCell: UITableViewCell {
         
         contentView.addSubview(containerView)
         containerView.snp.makeConstraints { make in
-            make.edges.equalTo(contentView).inset(UIEdgeInsets(top: 8, left: 22, bottom: 8, right: 22))
+            make.edges.equalTo(contentView).inset(UIEdgeInsets(top: 8, left: LayoutConstraints.leading, bottom: 8, right: LayoutConstraints.trailing))
         }
         
         containerView.addSubview(tokenIconImageView)

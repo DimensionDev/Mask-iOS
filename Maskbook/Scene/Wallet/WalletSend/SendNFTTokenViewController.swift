@@ -94,7 +94,7 @@ class SendNFTTokenViewController: BaseViewController {
         view.alignment = .fill
         view.spacing = 0
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: 16, left: 23, bottom: 0, right: 23)
+        view.layoutMargins = UIEdgeInsets(top: 16, left: LayoutConstraints.leading, bottom: 0, right: LayoutConstraints.trailing)
 
         nftTokenImageView.translatesAutoresizingMaskIntoConstraints = false
         gasStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -117,7 +117,7 @@ class SendNFTTokenViewController: BaseViewController {
         view.alignment = .center
         view.distribution = .equalCentering
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: 0, left: 22, bottom: 0, right: 22)
+        view.layoutMargins = UIEdgeInsets(top: 0, left: LayoutConstraints.leading, bottom: 0, right: LayoutConstraints.trailing)
         view.spacing = 20
         feeButton.translatesAutoresizingMaskIntoConstraints = false
         timeArriveButton.translatesAutoresizingMaskIntoConstraints = false
@@ -233,7 +233,7 @@ class SendNFTTokenViewController: BaseViewController {
         
         view.addSubview(toAddressLabel)
         toAddressLabel.snp.makeConstraints { make in
-            make.left.equalTo(23)
+            make.left.equalTo(LayoutConstraints.leading)
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(24)
         }
         
@@ -247,7 +247,7 @@ class SendNFTTokenViewController: BaseViewController {
         }
         
         contactButton.snp.makeConstraints { make in
-            make.right.equalTo(-23)
+            make.right.equalTo(-LayoutConstraints.trailing)
             make.height.equalTo(32)
             make.width.equalTo(32)
             make.centerY.equalTo(addressLabel.snp.centerY)
@@ -298,8 +298,8 @@ class SendNFTTokenViewController: BaseViewController {
         
         view.addSubview(sendButton)
         sendButton.snp.makeConstraints { make in
-            make.right.equalTo(-23)
-            make.left.equalTo(23)
+            make.right.equalTo(-LayoutConstraints.trailing)
+            make.left.equalTo(LayoutConstraints.leading)
             make.height.equalTo(54)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-24)
         }
