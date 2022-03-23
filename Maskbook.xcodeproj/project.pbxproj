@@ -516,7 +516,6 @@
 		2AFBEDE526E61D6400BD77B7 /* LoadingWithTextController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFBEDE426E61D6400BD77B7 /* LoadingWithTextController.swift */; };
 		2D00A5FE27953F2D0082E693 /* DebugEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D00A5FD27953F2D0082E693 /* DebugEntryView.swift */; };
 		2D00A600279546C80082E693 /* DebugControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D00A5FF279546C80082E693 /* DebugControl.swift */; };
-		2D11F03C27894A28002CE232 /* ConnectTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D11F03B27894A28002CE232 /* ConnectTipsView.swift */; };
 		2D11F03E27894A58002CE232 /* ConnectSocialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D11F03D27894A58002CE232 /* ConnectSocialView.swift */; };
 		2D11F04427895382002CE232 /* SocialAccountCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D11F04327895382002CE232 /* SocialAccountCollectionCell.swift */; };
 		2D11F0482789599D002CE232 /* SocialAccountAddCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D11F0472789599D002CE232 /* SocialAccountAddCollectionCell.swift */; };
@@ -1249,7 +1248,6 @@
 		2AFBEDE426E61D6400BD77B7 /* LoadingWithTextController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingWithTextController.swift; sourceTree = "<group>"; };
 		2D00A5FD27953F2D0082E693 /* DebugEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugEntryView.swift; sourceTree = "<group>"; };
 		2D00A5FF279546C80082E693 /* DebugControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugControl.swift; sourceTree = "<group>"; };
-		2D11F03B27894A28002CE232 /* ConnectTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectTipsView.swift; sourceTree = "<group>"; };
 		2D11F03D27894A58002CE232 /* ConnectSocialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectSocialView.swift; sourceTree = "<group>"; };
 		2D11F04327895382002CE232 /* SocialAccountCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAccountCollectionCell.swift; sourceTree = "<group>"; };
 		2D11F0472789599D002CE232 /* SocialAccountAddCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAccountAddCollectionCell.swift; sourceTree = "<group>"; };
@@ -3270,7 +3268,6 @@
 		2D11F03F27895315002CE232 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2D11F03B27894A28002CE232 /* ConnectTipsView.swift */,
 				2D11F03D27894A58002CE232 /* ConnectSocialView.swift */,
 			);
 			path = View;
@@ -4372,7 +4369,6 @@
 				0F41A05F260B2CFD000037B2 /* WalletAssetManager.swift in Sources */,
 				5DF1C30B27DA33EB003F26C1 /* FixUITableView.swift in Sources */,
 				2AF88585271EE9310004565A /* RenameViewModel.swift in Sources */,
-				2D11F03C27894A28002CE232 /* ConnectTipsView.swift in Sources */,
 				2A6ABB8F2720053B00CC3AED /* VerifyValidationCodeRequest.swift in Sources */,
 				2D40E6CA276AD30B00C8C5FF /* WalletConnectSelectAccountViewController.swift in Sources */,
 				2AF884C3271EE9300004565A /* MaskbookTab.swift in Sources */,

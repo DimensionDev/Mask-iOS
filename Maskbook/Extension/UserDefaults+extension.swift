@@ -82,7 +82,6 @@ final class UserDefaultSettings {
         case walletDisplayBlockChain
         
         case indexedDBDataMigrated
-        case connectTipsDidShown
         case beAwareOfPluginTip
         case jsResourceIsUsingBundle
         case jsDocumentResourceSelectedCommitHash
@@ -307,9 +306,6 @@ final class UserDefaultSettings {
     // Does the app have imported the legacy JS wallets
     @ReactiveUserDefault(key: Keys.legacyWalletsImported.rawValue, defaultValue: false)
     var legacyWalletsImported: Bool
-
-    @ReactiveUserDefault(key: Keys.connectTipsDidShown.rawValue, defaultValue: false)
-    var connectTipsDidShown: Bool
 
     @OptionalUserDefault(key: Keys.walletDisplayBlockChain.rawValue)
     var walletDisplayBlockchainString: String?
