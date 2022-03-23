@@ -37,8 +37,6 @@
 "Common.Alert.FaceIdActivateFail.Title" = "Activation fails";
 "Common.Alert.IdentifyCodeScreenshotWarning.Description" = "Simply taking a screenshot of identity code is not safe.";
 "Common.Alert.IdentifyCodeScreenshotWarning.Title" = "Warning";
-"Common.Alert.IdentityPhrase.Description" = "Your identity phrase is composed of randomly selected words. Please carefully write down each word in the order it appears.";
-"Common.Alert.IdentityPhrase.Title" = "Identity Phrase";
 "Common.Alert.KeychainAuthPrompt.Title" = "Authenticate to use your secrets";
 "Common.Alert.LocalBackup.BackupCompleted" = "Backup completed!";
 "Common.Alert.LocalBackup.BackupFailed" = "Backup failed!";
@@ -294,7 +292,7 @@ Invite friends to download Mask Network.";
 "Scene.PersonaSocial.Accounts" = "Accounts";
 "Scene.PersonaSocial.Add" = "Add";
 "Scene.PersonaSocial.ConnectSocialAccounts" = "Connect Social accounts";
-"Scene.PersonaSocial.ConnectTips" = "Connect persona to social media below";
+"Scene.PersonaSocial.ConnectTips" = "Connect persona to social networks below";
 "Scene.PersonaSocial.Disconnect" = "Disconnect";
 "Scene.PersonaSocial.Facebook" = "Facebook";
 "Scene.PersonaSocial.Instagram" = "Instagram";
