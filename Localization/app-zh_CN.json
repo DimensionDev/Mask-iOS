@@ -1,6 +1,6 @@
 {
     "tab": {
-        "personas": "角色",
+        "personas": "",
         "wallet": "钱包",
         "labs": "实验室",
         "setting": "设置"
@@ -71,9 +71,6 @@
             "change_backup_password_failed": {
                 "title": "备份密码修改失败！"
             },
-            "wallet_backup": {
-                "title": "已复制！"
-            },
             "identity_phrase": {
                 "title": "身份助记词",
                 "description": "您的身份助记词由随机选择的单词组成，请按单词出现的顺序仔细写下每个单词。"
@@ -82,9 +79,9 @@
                 "title": "提示",
                 "description": "仅仅依靠截图保存助记词是不安全的。"
             },
-            "identity_create": {
-                "title": "身份已创建！",
-                "description": "请妥善保管您的身份助记词。 您的身份助记词是您用户身份的唯一证明，也是您加密或解密社交信息的唯一基础。 "
+            "persona_create": {
+                "title": "",
+                "description": ""
             },
             "persona_logout": {
                 "title": "确认登出？",
@@ -132,6 +129,14 @@
             "scan_persona_exist": {
                 "title": "该身份已存在。",
                 "description": "该二维码对应的身份已存在。"
+            },
+            "wrong_folder": {
+                "title": "",
+                "description": ""
+            },
+            "backup_popup_binding_first": {
+                "title": "",
+                "description": ""
             }
         },
         "controls": {
@@ -165,14 +170,28 @@
             "edit": "编辑",
             "download": "下载",
             "skip": "跳过，稍后下载",
-            "download_next": "我已下载，下一步"
+            "download_next": "我已下载，下一步",
+            "select_from_photo": "",
+            "take_photo": "",
+            "save": "",
+            "move_data_now": "",
+            "remind_me_later": ""
         },
         "toast": {
-            "saved": "保存！"
+            "saved": "",
+            "copy": ""
         },
         "loading": "加载中..."
     },
     "scene": {
+        "guide": {
+            "skip": "",
+            "lets_start": "",
+            "description1": "",
+            "description2": "",
+            "description3": "",
+            "description4": ""
+        },
         "terms_of_service": {
             "title": "法律声明",
             "description": "请查看 Mask Network 的隐私政策与服务条款。",
@@ -408,7 +427,10 @@
         "NFT_Detail": {
             "list_price": "价格",
             "last_sale_Price": "最后售价",
-            "floor_price": "最低价格"
+            "floor_price": "最低价格",
+            "save_photo": "",
+            "collection_web": "",
+            "etherscan": ""
         },
         "sendTransaction": {
             "send": {
@@ -421,7 +443,10 @@
                 "Label_Password": "密码",
                 "btn_withoutPassword": "按住以发送",
                 "amount_error": "金额不足",
-                "password_error": "支付密码错误。"
+                "password_error": "支付密码错误。",
+                "gasFee_error": "",
+                "contact": "",
+                "recent": ""
             },
             "addContact": {
                 "btn_add": "添加联系人",
@@ -481,7 +506,7 @@
             "password_demand": "支付密码必须是数字、字母和特殊字符中的2个类别的组合，长度为 8-20 个字符。"
         },
         "personas": {
-            "personas": "角色",
+            "personas": "",
             "tabs": {
                 "social": "社交",
                 "post": "帖子",
@@ -501,6 +526,9 @@
                 "persona": "角色",
                 "create_persona": "创建角色",
                 "input_persona_name": "输入角色名称"
+            },
+            "search": {
+                "placeholder": ""
             },
             "delete": "确认删除该角色",
             "delete_tip": "如果您没有备份，请前往设置 - 备份和恢复进行备份",
@@ -529,12 +557,17 @@
             "disconnect": "断开连接",
             "connect_social_accounts": "连接社交账户",
             "accounts": "账户",
-            "connect_tips": "选择要连接您角色的社交账户。享受 web 3.0 的社交体验。",
-            "add": "添加"
+            "connect_tips": "",
+            "add": ""
         },
         "persona_download": {
             "identity_id": "身份代码",
             "download_tips": "二维码会加密您个人的身份码或私钥，建议打印它。您可以使用 Mask App 扫描二维码以登录。"
+        },
+        "persona_avatar": {
+            "title": "",
+            "crop": "",
+            "remove_avatar": ""
         },
         "wallet_balance": {
             "btn_swap": "兑换",
@@ -809,25 +842,31 @@
             "empty": "空的",
             "share_message_official": "我刚从@%s 在 %s 网络上认领了一个红包。关注@%s (mask.io) 来获取红包。\\n#mask_io #LuckyDrop\\n%s。",
             "share_message_unsupport_platform": "我刚从@%s 在 %s 网络上认领了一个红包。\\n%s。"
+        },
+        "move_backup_data": {
+            "title": "",
+            "description1": "",
+            "description2": "",
+            "description3": ""
         }
     },
     "chain": {
         "short_name": {
             "eth": "ETH",
-            "bsc": "BSC",
+            "bsc": "",
             "dot": "DOT",
             "polygon": "Polygon",
             "arbitrum": "Arbitrum",
-            "xdai": "xDai",
+            "xdai": "",
             "optimism": "Optimism"
         },
         "name": {
             "eth": "Ethereum",
-            "bsc": "Binance smart chain",
+            "bsc": "",
             "dot": "Polkadot",
             "polygon": "Polygon/Matic Network",
             "arbitrum": "Arbitrum",
-            "xdai": "xDai",
+            "xdai": "",
             "optimism": "Optimism"
         }
     }
