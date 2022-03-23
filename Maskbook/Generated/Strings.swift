@@ -1373,7 +1373,7 @@ enum L10n {
       static var connectSocialAccounts: String {
         return L10n.tr("Localizable", "Scene.PersonaSocial.ConnectSocialAccounts")
       }
-      /// Select the social account to connect your persona. Enjoy a web 3.0 social expereince.
+      /// Connect persona to social media below
       static var connectTips: String {
         return L10n.tr("Localizable", "Scene.PersonaSocial.ConnectTips")
       }
