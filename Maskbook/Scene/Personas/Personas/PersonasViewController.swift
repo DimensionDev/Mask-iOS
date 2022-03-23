@@ -207,18 +207,6 @@ class PersonasViewController: BaseViewController {
 }
 
 extension PersonasViewController {
-    func personaNicknameDuplicated() {
-        let alertController = AlertController(
-            title: L10n.Common.Alert.PersonaNameDuplicated.title,
-            message: "",
-            confirmButtonText: L10n.Common.Controls.done,
-            imageType: .error
-        )
-        coordinator.present(
-            scene: .alertController(alertController: alertController),
-            transition: .alertController(completion: nil)
-        )
-    }
 
     func scanAction() {
         coordinator.present(scene: .commonScan, transition: .modal(animated: true))
