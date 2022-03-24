@@ -49,11 +49,11 @@ struct GuideView: View {
                 Text(L10n.Scene.Guide.skip)
                     .font(FontStyles.bh5.font)
                     .foregroundColor(Asset.Colors.Background.lightBlue.asColor())
+                    .opacity(isLastOne ? 0 : 1)
+                    .padding(.horizontal, LayoutConstraints.horizontal)
+                    .padding(.vertical, 8)
+                    .contentShape(Rectangle())
             }
-            .opacity(isLastOne ? 0 : 1)
-            .padding(.horizontal, LayoutConstraints.horizontal)
-            .padding(.vertical, 8)
-            .contentShape(Rectangle())
         }
     }
     
