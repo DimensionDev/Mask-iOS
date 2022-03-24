@@ -12,15 +12,16 @@ struct PrimaryButton: View {
     let title: String
 
     var body: some View {
-        Asset.Colors.Background.blue.asColor()
-            .frame(height: 54)
-            .cornerRadius(8)
-            .overlay(
-                Button(action: action) {
-                    Text(title).font(FontStyles.bh5.font)
-                        .foregroundColor(Color.white)
-                }
-            )
+        Button(action: action) {
+            Text(title).frame(maxWidth: .infinity)
+        }
+        .font(FontStyles.bh5.font)
+        .foregroundColor(Color.white)
+        .padding()
+        .frame(height: 54)
+        .frame(maxWidth: .infinity)
+        .background(Asset.Colors.Background.blue.asColor())
+        .cornerRadius(8)
     }
 }
 
