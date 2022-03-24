@@ -277,12 +277,6 @@ class SendTransactionViewController: BaseViewController {
                 }
             }
             .store(in: &subscriptions)
-        
-        view.gesture()
-            .sink { [weak self] _ in
-                self?.view.endEditing(true)
-            }
-            .store(in: &subscriptions)
     }
     
     func handleForKeyboard() {
