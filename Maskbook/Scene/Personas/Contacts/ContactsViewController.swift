@@ -245,13 +245,11 @@ extension ContactsViewController: UISearchBarDelegate {
 
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)
-        MainTabBarController.currentTabBarController()?.navigationController(tab: .personas)?.setNavigationBarHidden(true, animated: true)
         viewModel.isSearching.value = true
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(false, animated: true)
-        MainTabBarController.currentTabBarController()?.navigationController(tab: .personas)?.setNavigationBarHidden(false, animated: true)
         searchBar.text = nil
         viewModel.searchString.value = ""
         viewModel.isSearching.value = false
