@@ -183,10 +183,10 @@
         "guide": {
             "skip": "Skip",
             "lets_start": "Let’s start",
-            "description1": "Your Portal to the New, Open Internet",
-            "description2": "Send encrypted messages on social media with persona",
-            "description3": "Multi-Chain wallet, compatible with WalletConnect",
-            "description4": "Back up in time, with cloud / local backup"
+            "description1": "Your Portal to the New,\nOpen Internet",
+            "description2": "Send Encrypted Messages\non Social Networks with Persona",
+            "description3": "Multi-Chain Wallet,\nCompatible with WalletConnect",
+            "description4": "Back up in Time,\nwith Cloud / Local Backup"
         },
         "terms_of_service": {
             "title": "Legal",
