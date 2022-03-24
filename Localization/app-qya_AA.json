@@ -71,10 +71,6 @@
             "change_backup_password_failed": {
                 "title": "crwdns13386:0crwdne13386:0"
             },
-            "identity_phrase": {
-                "title": "crwdns13390:0crwdne13390:0",
-                "description": "crwdns13392:0crwdne13392:0"
-            },
             "identify_code_screenshot_warning": {
                 "title": "crwdns13394:0crwdne13394:0",
                 "description": "crwdns13396:0crwdne13396:0"
@@ -557,7 +553,7 @@
             "disconnect": "crwdns13998:0crwdne13998:0",
             "connect_social_accounts": "crwdns14000:0crwdne14000:0",
             "accounts": "crwdns14002:0crwdne14002:0",
-            "connect_tips": "crwdns14688:0crwdne14688:0",
+            "connect_tips": "crwdns14788:0crwdne14788:0",
             "add": "crwdns14690:0crwdne14690:0"
         },
         "persona_download": {
