@@ -209,11 +209,15 @@ class Coordinator {
         window.rootViewController = naviVC
         window.makeKeyAndVisible()
         
-        present(scene: .mainTab(selectedTab: .personas), transition: .modal(animated: false, adaptiveDelegate: maskSocialVC))
-        
-        if !settings.hasShownGuide {
-            settings.hasShownGuide = true
-            present(scene: .guide, transition: .modal(animated: false, adaptiveDelegate: maskSocialVC))
+        if !settings.hasShownIdentityEmptyView1 {
+            settings.hasShownIdentityEmptyView1 = true
+            let vc = MaskHostViewController(rootView: IdentityEmptyView1())
+            vc.statusBarStyle = nil
+            let landingVC = NavigationController(rootViewController: vc)
+            landingVC.modalPresentationStyle = .fullScreen
+            UIApplication.getTopViewController()?.present(landingVC, animated: false, completion: nil)
+        } else {
+            present(scene: .mainTab(selectedTab: .personas), transition: .modal(animated: false, adaptiveDelegate: maskSocialVC))
         }
         
         // If all data (legacy wallets info and indexedDB data) has migrated to
@@ -236,7 +240,7 @@ class Coordinator {
         window.rootViewController = guideVC
         window.makeKeyAndVisible()
     }
-
+    
     // swiftlint:disable cyclomatic_complexity
     func present(scene: Scene, transition: Transition, from: UIViewController? = nil, completion: (() -> Void)? = nil) {
         let vc = get(scene: scene)
@@ -289,7 +293,7 @@ class Coordinator {
                 presentVC.present(vc, animated: false, completion: completion)
                 
             case let .replaceCurrentNavigation(tab, animated):
-                MainTabBarController.currentTabBarController()?.replace(tab: tab, with: vc, animated: animated)
+                replaceCurrentNavigation(tab: tab, animated: animated, viewController: vc)
 
             case let .replaceWalletTab(animated):
                 MainTabBarController.currentTabBarController()?.replace(tab: .wallet, with: vc, animated: animated)
@@ -319,6 +323,24 @@ class Coordinator {
         }
         
         completion?()
+    }
+    
+    private func replaceCurrentNavigation(tab: MainTabBarController.Tab, animated: Bool, viewController vc: UIViewController) {
+        guard MainTabBarController.currentTabBarController() == nil else {
+            MainTabBarController.currentTabBarController()?.replace(tab: tab, with: vc, animated: animated)
+            return
+        }
+        
+        // make sure that top view controller is `UIHostingController<IdentityEmptyView1>`
+        guard let _ = self.window?.rootViewController?.presentedViewController?.children.first as? UIHostingController<IdentityEmptyView1> else {
+            return
+        }
+        
+        self.window?.rootViewController?.dismiss(animated: false, completion: { [weak self] in
+            let navVC = self?.window?.rootViewController as? UINavigationController
+            let delegate = navVC?.children.first as? UIAdaptivePresentationControllerDelegate
+            self?.present(scene: .mainTab(selectedTab: .personas), transition: .modal(animated: true, adaptiveDelegate: delegate))
+        })
     }
     
     private func showPanModal(presentVC: UIViewController, vc: UIViewController) {

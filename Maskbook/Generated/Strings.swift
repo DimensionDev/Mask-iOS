@@ -1145,6 +1145,25 @@ enum L10n {
       }
     }
 
+    enum Landing {
+      /// Create a Persona
+      static var createAPersona: String {
+        return L10n.tr("Localizable", "Scene.Landing.CreateAPersona")
+      }
+      /// The portal to a new and open Internet
+      static var description: String {
+        return L10n.tr("Localizable", "Scene.Landing.Description")
+      }
+      /// Recover your Persona
+      static var recoverYourPersona: String {
+        return L10n.tr("Localizable", "Scene.Landing.RecoverYourPersona")
+      }
+      /// Synchronization
+      static var synchronization: String {
+        return L10n.tr("Localizable", "Scene.Landing.Synchronization")
+      }
+    }
+
     enum MnemonicVerify {
       /// Tap each word in the correct order.
       static var description: String {

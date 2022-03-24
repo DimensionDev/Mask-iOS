@@ -57,16 +57,17 @@ class PersonaCreateHandler {
     }
 
     func succeedInCreatingPersona(name: String) {
-        coordinator.present(scene: .persona, transition: .replaceCurrentNavigation(tab: .personas, animated: true)) {
-            let alertController = AlertController(title: L10n.Common.Alert.PersonaCreate.title,
-                                                  message: L10n.Common.Alert.PersonaCreate.description(name),
-                                                  confirmButtonText: L10n.Common.Controls.done,
-                                                  imageType: .success)
-            let message = self.titleAttributeString(name: name)
-            alertController.setAttributeMessage(attrMessage: message)
-            self.coordinator.present(scene: .alertController(alertController: alertController),
-                                     transition: .alertController(completion: nil))
-        }
+        let alertController = AlertController(title: L10n.Common.Alert.PersonaCreate.title,
+                                              message: L10n.Common.Alert.PersonaCreate.description(name),
+                                              confirmButtonText: L10n.Common.Controls.done,
+                                              imageType: .success,
+                                              confirmButtonClicked: { [weak self] _ in
+            self?.coordinator.present(scene: .persona, transition: .replaceCurrentNavigation(tab: .personas, animated: true))
+        })
+        let message = self.titleAttributeString(name: name)
+        alertController.setAttributeMessage(attrMessage: message)
+        self.coordinator.present(scene: .alertController(alertController: alertController),
+                                 transition: .alertController(completion: nil))
     }
 
     func titleAttributeString(name: String) -> NSAttributedString {

@@ -192,6 +192,12 @@
             "description3": "Multi-Chain wallet, compatible with WalletConnect",
             "description4": "Back up in time, with cloud / local backup"
         },
+        "landing": {
+            "create_a_persona": "Create a Persona",
+            "recover_your_persona": "Recover your Persona",
+            "synchronization": "Synchronization",
+            "description": "The portal to a new and open Internet"
+        },
         "terms_of_service": {
             "title": "Legal",
             "description": "Please review the Privacy Policy and Terms of Service of Mask Network.",

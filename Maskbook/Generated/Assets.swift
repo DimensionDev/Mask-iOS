@@ -195,6 +195,7 @@ internal enum Asset {
     internal enum Logo {
       internal static let largeMask = ImageAsset(name: "Icon/Logo/largeMask")
       internal static let littleMask = ImageAsset(name: "Icon/Logo/littleMask")
+      internal static let logoWithName = ImageAsset(name: "Icon/Logo/logoWithName")
       internal static let mask = ImageAsset(name: "Icon/Logo/mask")
       internal static let maskWithBorder = ImageAsset(name: "Icon/Logo/maskWithBorder")
     }

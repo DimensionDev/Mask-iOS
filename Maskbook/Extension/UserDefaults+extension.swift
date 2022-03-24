@@ -88,6 +88,7 @@ final class UserDefaultSettings {
         
         // if this flag return true, the `GuideView` should not be presented.
         case hasShownGuide
+        case hasShownIdentityEmptyView1
         
         case backupFileDetectDate
     }
@@ -112,6 +113,7 @@ final class UserDefaultSettings {
         backupAlertDate = nil
         indexedDBDataMigrated = false
         hasShownGuide = false
+        hasShownIdentityEmptyView1 = false
     }
 
     /// Indicates whether or not the user has seen the onboarding. Default value is **false**
@@ -331,6 +333,9 @@ final class UserDefaultSettings {
     
     @ReactiveUserDefault(key: Keys.hasShownGuide.rawValue, defaultValue: false)
     var hasShownGuide: Bool
+    
+    @ReactiveUserDefault(key: Keys.hasShownIdentityEmptyView1.rawValue, defaultValue: false)
+    var hasShownIdentityEmptyView1: Bool
     
     @OptionalUserDefault(key: Keys.backupFileDetectDate.rawValue)
     var backupFileDetectDate: Date?
