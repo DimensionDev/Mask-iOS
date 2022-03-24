@@ -173,11 +173,9 @@ class PersonasViewController: BaseViewController {
                 UIView.animate(withDuration: 0.3) {
                     MainTabBarController.currentTabBarController()?.navigationController(tab: .personas)?.setNavigationBarHidden(isSearching, animated: true)
                     self.segmentViewController.scrollView.isScrollEnabled = !isSearching
-                    if isSearching {
-                        self.segmentTopConstraint.constant =  -self.segmentViewController.segmentHeight
-                    } else {
-                        self.segmentTopConstraint.constant = 146
-                    }
+                    self.segmentTopConstraint.constant =  isSearching
+                    ? -self.segmentViewController.segmentHeight
+                    : 146
                     self.view.layoutIfNeeded()
                 }
             })
