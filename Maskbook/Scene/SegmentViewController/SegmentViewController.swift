@@ -80,7 +80,7 @@ class SegmentViewController: UIViewController {
         view.addSubview(segments)
         segments.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            segments.topAnchor.constraint(equalTo: view.readableContentGuide.topAnchor),
+            segments.topAnchor.constraint(equalTo: view.topAnchor),
             segments.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             segments.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             segments.heightAnchor.constraint(equalToConstant: segmentHeight)
