@@ -28,7 +28,7 @@ class NFTActionViewModel {
     private func generateMenuItems() -> [SectionItem] {
         var items = [SectionItem]()
         let saveItem = SectionItem.savephoto(title: L10n.Scene.NftDetail.savePhoto, imageUrl: token.imageUrl)
-        let websiteItem = SectionItem.website(title: L10n.Scene.NftDetail.collectionWeb, websiteUrl: token.permalink)
+        let websiteItem = SectionItem.website(title: L10n.Scene.NftDetail.collectionWeb, websiteUrl: token.collectionWebsite)
         let ethscanUrl = URL(string: "https://etherscan.io/nft/\(token.address ?? "")/\(token.tokenId ?? "")")
         let ethscanItem = SectionItem.ethscan(title: L10n.Scene.NftDetail.etherscan, ethscanUrl: ethscanUrl)
         items.append(saveItem)
