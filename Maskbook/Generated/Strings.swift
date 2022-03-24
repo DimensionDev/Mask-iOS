@@ -220,17 +220,6 @@ enum L10n {
         }
       }
 
-      enum IdentityPhrase {
-        /// Your identity phrase is composed of randomly selected words. Please carefully write down each word in the order it appears.
-        static var description: String {
-          return L10n.tr("Localizable", "Common.Alert.IdentityPhrase.Description")
-        }
-        /// Identity Phrase
-        static var title: String {
-          return L10n.tr("Localizable", "Common.Alert.IdentityPhrase.Title")
-        }
-      }
-
       enum KeychainAuthPrompt {
         /// Authenticate to use your secrets
         static var title: String {
@@ -1373,7 +1362,7 @@ enum L10n {
       static var connectSocialAccounts: String {
         return L10n.tr("Localizable", "Scene.PersonaSocial.ConnectSocialAccounts")
       }
-      /// Connect persona to social media below
+      /// Connect persona to social networks below
       static var connectTips: String {
         return L10n.tr("Localizable", "Scene.PersonaSocial.ConnectTips")
       }

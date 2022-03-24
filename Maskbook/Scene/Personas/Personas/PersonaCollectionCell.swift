@@ -136,7 +136,7 @@ class PersonaCollectionCell: UICollectionViewCell {
         configure()
     }
     
-    private lazy var backgroundLayer: CAGradientLayer = {
+    lazy var backgroundLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
         layer.colors = [
             Asset.Colors.Gradient.persona1.color.cgColor,
@@ -151,6 +151,10 @@ class PersonaCollectionCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        setupLayerFrame()
+    }
+    
+    func setupLayerFrame() {
         backgroundLayer.frame = stack.bounds
         let shadowLayer = shadowView.layer
         shadowLayer.shadowOpacity = 1
@@ -195,7 +199,6 @@ class PersonaCollectionCell: UICollectionViewCell {
         ])
         
         contentView.layer.insertSublayer(backgroundLayer, at: 0)
-        backgroundLayer.frame = stack.bounds
         
         moreButton
             .cv.tap()
@@ -210,6 +213,15 @@ class PersonaCollectionCell: UICollectionViewCell {
                 self?.delegate?.avatarClicked()
             }
             .store(in: &disposeBag)
+        
+        stack.publisher(for: \.bounds)
+            .didChange()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.setupLayerFrame()
+            }
+            .store(in: &disposeBag)
+        
     }
     
     func config(persona: PersonaRecord) {

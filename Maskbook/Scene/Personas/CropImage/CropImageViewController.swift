@@ -219,7 +219,7 @@ extension CropImageViewController {
         if let image = cropImage() {
             PersonaAvatarViewModel.saveImageForCurrentPersona(image: image)
         }
-        navigationController?.popViewController(animated: true)
+        navigationController?.popToRootViewController(animated: true)
     }
 
     @objc

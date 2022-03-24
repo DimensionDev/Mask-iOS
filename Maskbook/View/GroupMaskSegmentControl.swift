@@ -13,6 +13,8 @@ import UIKit
 final class GroupMaskSegmentControl: UIView {
     var disposeBag = Set<AnyCancellable>()
     
+    var segmentHeight: CGFloat = 59
+    
     weak var delegate: MaskSegmentControlDelegate?
     
     let selectedIndex = CurrentValueSubject<Int, Never>(0)
@@ -76,7 +78,7 @@ extension GroupMaskSegmentControl {
         stackView.distribution = .fillEqually
         addSubview(stackView)
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: topAnchor, constant: 1),
+            stackView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: LayoutConstraints.leading),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -LayoutConstraints.trailing),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -11)

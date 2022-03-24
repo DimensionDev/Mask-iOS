@@ -545,7 +545,7 @@ extension Coordinator {
         case .personaList:
             return PersonaListViewController()
 
-        case let .personaWelcome:
+        case .personaWelcome:
             let viewController = PersonaWelcomeViewController()
             return viewController
 

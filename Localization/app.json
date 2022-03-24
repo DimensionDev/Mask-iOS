@@ -71,10 +71,6 @@
             "change_backup_password_failed": {
                 "title": "Backup Password changed failed!"
             },
-            "identity_phrase": {
-                "title": "Identity Phrase",
-                "description": "Your identity phrase is composed of randomly selected words. Please carefully write down each word in the order it appears."
-            },
             "identify_code_screenshot_warning": {
                 "title": "Warning",
                 "description": "Simply taking a screenshot of identity code is not safe."
@@ -558,7 +554,7 @@
             "disconnect": "Disconnect",
             "connect_social_accounts": "Connect Social accounts",
             "accounts": "Accounts",
-            "connect_tips": "Connect persona to social media below",
+            "connect_tips": "Connect persona to social networks below",
             "add": "Add"
         },
         "persona_download": {

@@ -70,17 +70,6 @@ final class IdentityCreateViewController: BaseViewController {
         nextButton.isHidden = true
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        let alertController = AlertController(
-            title: L10n.Common.Alert.IdentityPhrase.title,
-            message: L10n.Common.Alert.IdentityPhrase.description,
-            confirmButtonText: L10n.Common.Controls.ok,
-            imageType: .warning
-        )
-        Coordinator.main.present(scene: .alertController(alertController: alertController), transition: .alertController(completion: nil))
-    }
-    
     override func buildContent() {
         let hstack = HStackView(spacing: 10) {
             iconImageView
