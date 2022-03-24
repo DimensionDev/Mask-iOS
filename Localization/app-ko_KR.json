@@ -71,10 +71,6 @@
             "change_backup_password_failed": {
                 "title": "백업 비밀번호 변경 실패"
             },
-            "identity_phrase": {
-                "title": "아이덴티티 문구",
-                "description": "아이덴티티 문구는 지정된 단어가 무작위로 구성되는 것입니다. 순서에 따라 단어들을 작어 두세요."
-            },
             "identify_code_screenshot_warning": {
                 "title": "주의",
                 "description": "캡처만 하면 안전하지 않습니다."
