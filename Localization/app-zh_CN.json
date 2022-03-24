@@ -506,7 +506,7 @@
             "password_demand": "支付密码必须是数字、字母和特殊字符中的2个类别的组合，长度为 8-20 个字符。"
         },
         "personas": {
-            "personas": "",
+            "personas": "角色",
             "tabs": {
                 "social": "社交",
                 "post": "帖子",
@@ -528,7 +528,7 @@
                 "input_persona_name": "输入角色名称"
             },
             "search": {
-                "placeholder": ""
+                "placeholder": "搜索"
             },
             "delete": "确认删除该角色",
             "delete_tip": "如果您没有备份，请前往设置 - 备份和恢复进行备份",
@@ -557,15 +557,15 @@
             "disconnect": "断开连接",
             "connect_social_accounts": "连接社交账户",
             "accounts": "账户",
-            "connect_tips": "",
-            "add": ""
+            "connect_tips": "将角色连接到下面的社交媒体",
+            "add": "添加"
         },
         "persona_download": {
             "identity_id": "身份代码",
             "download_tips": "二维码会加密您个人的身份码或私钥，建议打印它。您可以使用 Mask App 扫描二维码以登录。"
         },
         "persona_avatar": {
-            "title": "",
+            "title": "设置角色头像",
             "crop": "裁剪 & 旋转",
             "remove_avatar": "移除角色头像"
         },
@@ -846,8 +846,8 @@
         "move_backup_data": {
             "title": "请移动您的数据",
             "description1": "我们检测到您的 Mask Network 的沙盒目录中可能有重要的备份文档(.pdf, .bin)。",
-            "description2": "",
-            "description3": ""
+            "description2": "当您删除  Mask App 时，这些文档也将被删除。",
+            "description3": "为了数据安全，请将您的数据移动到一个更安全的文件夹。"
         }
     },
     "chain": {
