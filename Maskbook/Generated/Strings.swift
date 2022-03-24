@@ -987,19 +987,19 @@ enum L10n {
     }
 
     enum Guide {
-      /// Your Portal to the New, Open Internet
+      /// Your Portal to the New,\nOpen Internet
       static var description1: String {
         return L10n.tr("Localizable", "Scene.Guide.Description1")
       }
-      /// Send encrypted messages on social media with persona
+      /// Send Encrypted Messages\non Social Networks with Persona
       static var description2: String {
         return L10n.tr("Localizable", "Scene.Guide.Description2")
       }
-      /// Multi-Chain wallet, compatible with WalletConnect
+      /// Multi-Chain Wallet,\nCompatible with WalletConnect
       static var description3: String {
         return L10n.tr("Localizable", "Scene.Guide.Description3")
       }
-      /// Back up in time, with cloud / local backup
+      /// Back up in Time,\nwith Cloud / Local Backup
       static var description4: String {
         return L10n.tr("Localizable", "Scene.Guide.Description4")
       }

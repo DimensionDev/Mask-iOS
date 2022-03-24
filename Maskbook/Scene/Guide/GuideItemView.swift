@@ -46,7 +46,8 @@ struct GuideItemView: View {
             page.guideImage.resizable().aspectRatio(contentMode: .fit).frame(maxWidth: .infinity)
             Spacer().frame(height: textTopSpace)
             Text(page.title)
-                .font(FontStyles.mh4.font)
+                .font(.system(size: 18).weight(.heavy))
+                .lineSpacing(9)
                 .foregroundColor(Asset.Colors.Text.lighter.asColor())
                 .multilineTextAlignment(.center)
             if isLastOne {
@@ -55,7 +56,7 @@ struct GuideItemView: View {
                     dismiss?()
                 } label: {
                     Text(L10n.Scene.Guide.letsStart)
-                        .font(FontStyles.bh5.font)
+                        .font(FontStyles.mh4.font)
                         .foregroundColor(Asset.Colors.Public.blue.asColor())
                 }
                 .padding(.horizontal, 29)
