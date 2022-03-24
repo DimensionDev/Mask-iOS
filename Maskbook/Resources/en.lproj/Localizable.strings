@@ -37,8 +37,6 @@
 "Common.Alert.FaceIdActivateFail.Title" = "Activation fails";
 "Common.Alert.IdentifyCodeScreenshotWarning.Description" = "Simply taking a screenshot of identity code is not safe.";
 "Common.Alert.IdentifyCodeScreenshotWarning.Title" = "Warning";
-"Common.Alert.IdentityPhrase.Description" = "Your identity phrase is composed of randomly selected words. Please carefully write down each word in the order it appears.";
-"Common.Alert.IdentityPhrase.Title" = "Identity Phrase";
 "Common.Alert.KeychainAuthPrompt.Title" = "Authenticate to use your secrets";
 "Common.Alert.LocalBackup.BackupCompleted" = "Backup completed!";
 "Common.Alert.LocalBackup.BackupFailed" = "Backup failed!";
@@ -208,10 +206,14 @@ Clicking the confirm button means that you agree to bear the above possible risk
 "Scene.CreateWallet.SelectNetwork" = "Select Network";
 "Scene.CreateWallet.WalletName" = "Wallet Name";
 "Scene.CreateWallet.WalletNamePlaceholder" = "Name your wallet";
-"Scene.Guide.Description1" = "Your Portal to the New, Open Internet";
-"Scene.Guide.Description2" = "Send encrypted messages on social media with persona";
-"Scene.Guide.Description3" = "Multi-Chain wallet, compatible with WalletConnect";
-"Scene.Guide.Description4" = "Back up in time, with cloud / local backup";
+"Scene.Guide.Description1" = "Your Portal to the New,
+Open Internet";
+"Scene.Guide.Description2" = "Send Encrypted Messages
+on Social Networks with Persona";
+"Scene.Guide.Description3" = "Multi-Chain Wallet,
+Compatible with WalletConnect";
+"Scene.Guide.Description4" = "Back up in Time,
+with Cloud / Local Backup";
 "Scene.Guide.LetsStart" = "Let’s start";
 "Scene.Guide.Skip" = "Skip";
 "Scene.IdentifyVerify.Description" = "Tap each word in the correct order.";
@@ -294,7 +296,7 @@ Invite friends to download Mask Network.";
 "Scene.PersonaSocial.Accounts" = "Accounts";
 "Scene.PersonaSocial.Add" = "Add";
 "Scene.PersonaSocial.ConnectSocialAccounts" = "Connect Social accounts";
-"Scene.PersonaSocial.ConnectTips" = "Connect persona to social media below";
+"Scene.PersonaSocial.ConnectTips" = "Connect persona to social networks below";
 "Scene.PersonaSocial.Disconnect" = "Disconnect";
 "Scene.PersonaSocial.Facebook" = "Facebook";
 "Scene.PersonaSocial.Instagram" = "Instagram";

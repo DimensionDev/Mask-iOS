@@ -19,6 +19,7 @@ protocol MaskSegmentControl: UIView {
     var selectedIndex: CurrentValueSubject<Int, Never> { get }
     func setItems(items: [String])
     func selectedIndex(at index: Int, animated: Bool)
+    var segmentHeight: CGFloat { get }
 }
 
 enum MaskSegmentControlStyle {

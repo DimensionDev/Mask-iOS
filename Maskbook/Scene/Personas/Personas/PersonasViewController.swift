@@ -171,7 +171,7 @@ class PersonasViewController: BaseViewController {
             .sink(receiveValue: { [weak self] isSearching in
                 guard let self = self else { return }
                 UIView.animate(withDuration: 0.3) {
-                    let offset = self.segmentViewController.view.frame.origin.y + SegmentViewController.segmentHeight - 24
+                    let offset = self.segmentViewController.view.frame.origin.y + self.segmentViewController.segmentHeight - 24
                     if isSearching {
                         self.segmentTopConstraint.constant = 146 - offset
                     } else {
