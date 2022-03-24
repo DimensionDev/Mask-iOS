@@ -1,6 +1,6 @@
 {
     "tab": {
-        "personas": "",
+        "personas": "角色",
         "wallet": "钱包",
         "labs": "实验室",
         "setting": "设置"
@@ -80,8 +80,8 @@
                 "description": "仅仅依靠截图保存助记词是不安全的。"
             },
             "persona_create": {
-                "title": "",
-                "description": ""
+                "title": "成功 ",
+                "description": "您已成功创建您的角色%s。 "
             },
             "persona_logout": {
                 "title": "确认登出？",
@@ -131,12 +131,12 @@
                 "description": "该二维码对应的身份已存在。"
             },
             "wrong_folder": {
-                "title": "",
-                "description": ""
+                "title": "请选择另一个文件夹",
+                "description": "当你删除 Mask App 时，Mask Network 的沙盒目录也会被删除。为了您的数据安全，请保存到更安全的文件夹(非沙盒目录)"
             },
             "backup_popup_binding_first": {
-                "title": "",
-                "description": ""
+                "title": "绑定您的电子邮件或手机",
+                "description": "请在备份到云端之前绑定您的电子邮件或电话号码。"
             }
         },
         "controls": {
@@ -171,23 +171,23 @@
             "download": "下载",
             "skip": "跳过，稍后下载",
             "download_next": "我已下载，下一步",
-            "select_from_photo": "",
-            "take_photo": "",
-            "save": "",
-            "move_data_now": "",
-            "remind_me_later": ""
+            "select_from_photo": "图库中选择",
+            "take_photo": "拍照",
+            "save": "保存",
+            "move_data_now": "立即移动数据",
+            "remind_me_later": "稍后提醒我"
         },
         "toast": {
-            "saved": "",
-            "copy": ""
+            "saved": "已保存！",
+            "copy": "已复制！"
         },
         "loading": "加载中..."
     },
     "scene": {
         "guide": {
-            "skip": "",
-            "lets_start": "",
-            "description1": "",
+            "skip": "跳过",
+            "lets_start": "我们开始吧！",
+            "description1": "崭新，开放的Web 3.0 之门。",
             "description2": "",
             "description3": "",
             "description4": ""
@@ -566,8 +566,8 @@
         },
         "persona_avatar": {
             "title": "",
-            "crop": "",
-            "remove_avatar": ""
+            "crop": "裁剪 & 旋转",
+            "remove_avatar": "移除角色头像"
         },
         "wallet_balance": {
             "btn_swap": "兑换",
@@ -844,8 +844,8 @@
             "share_message_unsupport_platform": "我刚从@%s 在 %s 网络上认领了一个红包。\\n%s。"
         },
         "move_backup_data": {
-            "title": "",
-            "description1": "",
+            "title": "请移动您的数据",
+            "description1": "我们检测到您的 Mask Network 的沙盒目录中可能有重要的备份文档(.pdf, .bin)。",
             "description2": "",
             "description3": ""
         }
