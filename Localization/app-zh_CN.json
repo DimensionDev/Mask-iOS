@@ -71,10 +71,6 @@
             "change_backup_password_failed": {
                 "title": "备份密码修改失败！"
             },
-            "identity_phrase": {
-                "title": "身份助记词",
-                "description": "您的身份助记词由随机选择的单词组成，请按单词出现的顺序仔细写下每个单词。"
-            },
             "identify_code_screenshot_warning": {
                 "title": "提示",
                 "description": "仅仅依靠截图保存助记词是不安全的。"
@@ -557,7 +553,7 @@
             "disconnect": "断开连接",
             "connect_social_accounts": "连接社交账户",
             "accounts": "账户",
-            "connect_tips": "将角色连接到下面的社交媒体",
+            "connect_tips": "",
             "add": "添加"
         },
         "persona_download": {
