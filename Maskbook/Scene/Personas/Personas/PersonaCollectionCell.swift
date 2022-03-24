@@ -136,7 +136,7 @@ class PersonaCollectionCell: UICollectionViewCell {
         configure()
     }
     
-    lazy var backgroundLayer: CAGradientLayer = {
+    private lazy var backgroundLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
         layer.colors = [
             Asset.Colors.Gradient.persona1.color.cgColor,
