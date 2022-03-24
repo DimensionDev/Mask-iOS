@@ -125,8 +125,8 @@ class WalletAddrReceiveViewController: BaseViewController {
         
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
-            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 23),
-            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -23)
+            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstraints.leading),
+            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -LayoutConstraints.trailing)
         ])
         
         NSLayoutConstraint.activate([
@@ -210,8 +210,8 @@ class WalletAddrReceiveViewController: BaseViewController {
         NSLayoutConstraint.activate([
             shareButton.heightAnchor.constraint(equalToConstant: 54),
             shareButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -36),
-            shareButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 23),
-            shareButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -23)
+            shareButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstraints.leading),
+            shareButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -LayoutConstraints.trailing)
         ])
         
         addressTitleLabel.text = L10n.Scene.WalletReceive.yourAddress(token?.symbol ?? network.shortName)

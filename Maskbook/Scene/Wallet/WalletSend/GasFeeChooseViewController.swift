@@ -433,9 +433,9 @@ class GasFeeChooseViewController: UIViewController {
         backStackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(backStackView)
         NSLayoutConstraint.activate([
-            backStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
+            backStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstraints.leading),
             backStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
-            backStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
+            backStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -LayoutConstraints.trailing),
             backStackView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         ])
             

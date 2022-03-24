@@ -54,8 +54,8 @@ extension GroupMaskSegmentControl {
         addSubview(backgroundView)
         NSLayoutConstraint.activate([
             backgroundView.topAnchor.constraint(equalTo: topAnchor, constant: 1),
-            backgroundView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 23),
-            backgroundView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -23),
+            backgroundView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: LayoutConstraints.leading),
+            backgroundView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -LayoutConstraints.trailing),
             backgroundView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -11)
         ])
         
@@ -79,8 +79,8 @@ extension GroupMaskSegmentControl {
         addSubview(stackView)
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 23),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -23),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: LayoutConstraints.leading),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -LayoutConstraints.trailing),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -11)
         ])
     }

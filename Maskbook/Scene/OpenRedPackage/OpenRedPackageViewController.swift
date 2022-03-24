@@ -289,7 +289,7 @@ class OpenRedPackageViewController: BaseViewController {
                 }
         }
         vStack.isLayoutMarginsRelativeArrangement = true
-        vStack.layoutMargins = UIEdgeInsets(top: 38, left: 22.5, bottom: 40, right: 22.5)
+        vStack.layoutMargins = UIEdgeInsets(top: 38, left: LayoutConstraints.leading, bottom: 40, right: LayoutConstraints.trailing)
         vStack.setCustomSpacing(21, after: titleLabel)
         vStack.setCustomSpacing(16, after: redPackageView)
         vStack.setCustomSpacing(8, after: walletLabel)

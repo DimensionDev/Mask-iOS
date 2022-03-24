@@ -28,7 +28,7 @@ class WalletImportMultiChainCell: UITableViewCell {
         view.axis = .horizontal
         view.alignment = .center
         view.distribution = .fill
-        view.layoutMargins = UIEdgeInsets(top: 16, left: 22, bottom: 16, right: 22)
+        view.layoutMargins = UIEdgeInsets(top: 16, left: LayoutConstraints.leading, bottom: 16, right: LayoutConstraints.trailing)
         view.isLayoutMarginsRelativeArrangement = true
         view.spacing = 8
         return view

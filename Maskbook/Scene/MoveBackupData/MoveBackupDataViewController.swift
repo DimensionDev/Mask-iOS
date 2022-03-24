@@ -102,8 +102,8 @@ class MoveBackupDataViewController: BaseViewController {
         stack.setCustomSpacing(16, after: moveButton)
         NSLayoutConstraint.activate([
             stack.topAnchor.constraint(equalTo: view.topAnchor, constant: 48),
-            stack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22.5),
-            stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22.5),
+            stack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstraints.leading),
+            stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -LayoutConstraints.trailing),
             stack.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -58)
         ])
     }

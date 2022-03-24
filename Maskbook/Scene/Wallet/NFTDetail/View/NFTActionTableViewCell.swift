@@ -77,9 +77,9 @@ class NFTActionTableViewCell: UITableViewCell {
         bgView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             bgView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            bgView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 22.5),
+            bgView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstraints.leading),
             contentView.bottomAnchor.constraint(equalTo: bgView.bottomAnchor, constant: 8),
-            contentView.trailingAnchor.constraint(equalTo: bgView.trailingAnchor, constant: 22.5)
+            contentView.trailingAnchor.constraint(equalTo: bgView.trailingAnchor, constant: LayoutConstraints.trailing)
         ])
 
         stackView.translatesAutoresizingMaskIntoConstraints = false

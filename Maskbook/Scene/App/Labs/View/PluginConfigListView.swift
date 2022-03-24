@@ -19,7 +19,7 @@ struct PluginConfigListView: View {
                 LazyVStack(spacing: 12) {
                     ForEach(columnItems) { item in
                         PluginBlockView(viewModel: viewModel[item])
-                            .padding(.horizontal, 22.5)
+                            .padding(.horizontal, LayoutConstraints.horizontal)
                     }
                 }
 

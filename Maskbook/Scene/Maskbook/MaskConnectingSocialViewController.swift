@@ -85,12 +85,12 @@ class MaskConnectingSocialViewController: BaseViewController {
             NSLayoutConstraint.activate([
                 closeButton.widthAnchor.constraint(equalToConstant: 24),
                 closeButton.heightAnchor.constraint(equalToConstant: 24),
-                closeButton.trailingAnchor.constraint(equalTo: banner.trailingAnchor, constant: -22),
+                closeButton.trailingAnchor.constraint(equalTo: banner.trailingAnchor, constant: -LayoutConstraints.trailing),
                 closeButton.centerYAnchor.constraint(equalTo: banner.centerYAnchor)
             ])
             
             NSLayoutConstraint.activate([
-                hintLabel.leadingAnchor.constraint(equalTo: banner.leadingAnchor, constant: 22),
+                hintLabel.leadingAnchor.constraint(equalTo: banner.leadingAnchor, constant: LayoutConstraints.leading),
                 hintLabel.trailingAnchor.constraint(equalTo: closeButton.leadingAnchor, constant: -20),
                 hintLabel.topAnchor.constraint(equalTo: banner.topAnchor, constant: 12),
                 hintLabel.bottomAnchor.constraint(equalTo: banner.bottomAnchor, constant: -12)
