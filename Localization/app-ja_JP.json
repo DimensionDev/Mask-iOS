@@ -71,10 +71,6 @@
             "change_backup_password_failed": {
                 "title": ""
             },
-            "identity_phrase": {
-                "title": "",
-                "description": ""
-            },
             "identify_code_screenshot_warning": {
                 "title": "",
                 "description": ""
