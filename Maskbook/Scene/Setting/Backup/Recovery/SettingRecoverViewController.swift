@@ -28,7 +28,7 @@ class SettingRecoverViewController: UIViewController {
         view.axis = .vertical
         view.spacing = 8
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: 27, left: 22.5, bottom: 0, right: 22.5)
+        view.layoutMargins = UIEdgeInsets(top: 27, left: LayoutConstraints.leading, bottom: 0, right: LayoutConstraints.trailing)
         view.alignment = .fill
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false

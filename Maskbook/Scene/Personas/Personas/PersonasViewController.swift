@@ -171,14 +171,11 @@ class PersonasViewController: BaseViewController {
             .sink(receiveValue: { [weak self] isSearching in
                 guard let self = self else { return }
                 UIView.animate(withDuration: 0.3) {
-                    let offset = self.segmentViewController.view.frame.origin.y + SegmentViewController.segmentHeight - 24
-                    if isSearching {
-                        self.segmentTopConstraint.constant = 146 - offset
-                    } else {
-                        self.segmentTopConstraint.constant = 146
-                    }
-                    self.segmentViewController.segments.alpha = isSearching ? 0 : 1
-                    self.personaCollectionView.alpha = isSearching ? 0 : 1
+                    MainTabBarController.currentTabBarController()?.navigationController(tab: .personas)?.setNavigationBarHidden(isSearching, animated: true)
+                    self.segmentViewController.scrollView.isScrollEnabled = !isSearching
+                    self.segmentTopConstraint.constant =  isSearching
+                    ? -self.segmentViewController.segmentHeight
+                    : 146
                     self.view.layoutIfNeeded()
                 }
             })

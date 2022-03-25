@@ -168,6 +168,7 @@
 		2A36E2772757243C0075E95B /* ChangeBackupPasswordStep2ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A36E2752757243C0075E95B /* ChangeBackupPasswordStep2ViewModel.swift */; };
 		2A36E279275746750075E95B /* ChangePasswordStep1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A36E278275746740075E95B /* ChangePasswordStep1ViewController.swift */; };
 		2A4145F826D7880800708337 /* CryptoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4145F726D7880800708337 /* CryptoTests.swift */; };
+		2A442EBD27EAB05A006BF60F /* EdgesConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A442EBC27EAB05A006BF60F /* EdgesConstraints.swift */; };
 		2A5FAEA027CF7AD200D01250 /* GuideItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5FAE9D27CF7AD200D01250 /* GuideItemView.swift */; };
 		2A5FAEA227CF7AD200D01250 /* GuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5FAE9F27CF7AD200D01250 /* GuideView.swift */; };
 		2A5FAEA427CF7AEE00D01250 /* MaskHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5FAEA327CF7AEE00D01250 /* MaskHostViewController.swift */; };
@@ -899,6 +900,7 @@
 		2A36E2752757243C0075E95B /* ChangeBackupPasswordStep2ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeBackupPasswordStep2ViewModel.swift; sourceTree = "<group>"; };
 		2A36E278275746740075E95B /* ChangePasswordStep1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordStep1ViewController.swift; sourceTree = "<group>"; };
 		2A4145F726D7880800708337 /* CryptoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTests.swift; sourceTree = "<group>"; };
+		2A442EBC27EAB05A006BF60F /* EdgesConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgesConstraints.swift; sourceTree = "<group>"; };
 		2A5FAE9D27CF7AD200D01250 /* GuideItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideItemView.swift; sourceTree = "<group>"; };
 		2A5FAE9F27CF7AD200D01250 /* GuideView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideView.swift; sourceTree = "<group>"; };
 		2A5FAEA327CF7AEE00D01250 /* MaskHostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskHostViewController.swift; sourceTree = "<group>"; };
@@ -1883,6 +1885,7 @@
 			isa = PBXGroup;
 			children = (
 				2A35603D265D008100FB1D3B /* FontStyles.swift */,
+				2A442EBC27EAB05A006BF60F /* EdgesConstraints.swift */,
 			);
 			path = Styles;
 			sourceTree = "<group>";
@@ -4333,6 +4336,7 @@
 				2AF88566271EE9310004565A /* WalletDeleteViewModel.swift in Sources */,
 				2AF8855B271EE9310004565A /* GasFeeApi.swift in Sources */,
 				1FD24E1226BD267800D03599 /* InjectedValueKeys.swift in Sources */,
+				2A442EBD27EAB05A006BF60F /* EdgesConstraints.swift in Sources */,
 				2AF88575271EE9310004565A /* MnemonicVerifyViewModel.swift in Sources */,
 				2AF884F7271EE9310004565A /* WalletConnectCollectionFlowLayout.swift in Sources */,
 				2AF884CD271EE9300004565A /* MaskWebMessage.swift in Sources */,

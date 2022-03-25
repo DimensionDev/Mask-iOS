@@ -19,7 +19,7 @@ class PersonaCollectionDataSource: NSObject {
     @InjectedProvider(\.userDefaultSettings)
     private var userSetting
 
-    static var itemSize = CGSize(width: UIScreen.main.bounds.size.width - 23 * 2, height: 122)
+    static var itemSize = CGSize(width: UIScreen.main.bounds.size.width - LayoutConstraints.horizontal * 2, height: 122)
 }
 
 extension PersonaCollectionDataSource: UICollectionViewDataSource {
@@ -90,8 +90,13 @@ extension PersonaCollectionDataSource: PersonaCollectionCellDelegate {
     }
 
     func avatarClicked() {
-        let viewModel = PersonaAvatarActionViewModel()
-        mainCoordinator.present(scene: .selectActionViewController(viewModel: viewModel),
-                                transition: .panModel(animated: true))
+        if let _ = personaManager.currentPersona.value?.avatarData {
+            let viewModel = PersonaAvatarActionViewModel()
+            mainCoordinator.present(scene: .selectActionViewController(viewModel: viewModel),
+                                    transition: .panModel(animated: true))
+        } else {
+            mainCoordinator.present(scene: .personaAvatar,
+                                    transition: .detail(animated: true))
+        }
     }
 }

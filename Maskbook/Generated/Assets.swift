@@ -289,6 +289,7 @@ internal enum Asset {
       internal enum Nft {
         internal static let more = ImageAsset(name: "Images/Scene/NFT/More")
         internal static let ethscan = ImageAsset(name: "Images/Scene/NFT/ethscan")
+        internal static let opensea = ImageAsset(name: "Images/Scene/NFT/opensea")
         internal static let savephoto = ImageAsset(name: "Images/Scene/NFT/savephoto")
         internal static let website = ImageAsset(name: "Images/Scene/NFT/website")
       }

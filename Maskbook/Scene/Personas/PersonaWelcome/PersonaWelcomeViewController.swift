@@ -89,7 +89,7 @@ class PersonaWelcomeViewController: BaseViewController {
         }
 
         contentStack.isLayoutMarginsRelativeArrangement = true
-        contentStack.layoutMargins = UIEdgeInsets(top: 0, left: 22.5, bottom: 32, right: 22.5)
+        contentStack.layoutMargins = UIEdgeInsets(top: 0, left: LayoutConstraints.leading, bottom: 32, right: LayoutConstraints.trailing)
         contentStack.snp.makeConstraints {
             $0.top.equalTo(view.layoutMarginsGuide)
             $0.leading.equalTo(view.snp.leading)

@@ -267,9 +267,9 @@ class OpenSeaProvider {
         assetModel: Collectible
     ) -> AnyPublisher<NFTAssetPriceModel, Error> {
         let decoder = JSONDecoder()
-        let fetchTokenUrlComponents = URLComponents(url: baseURL.appendingPathComponent("asset/\(assetModel.address ?? "")/\(assetModel.tokenId ?? "")"),
+        var fetchTokenUrlComponents = URLComponents(url: baseURL.appendingPathComponent("asset/\(assetModel.address ?? "")/\(assetModel.tokenId ?? "")"),
                                                     resolvingAgainstBaseURL: false)!
-        
+        fetchTokenUrlComponents.queryItems = [URLQueryItem(name: "include_orders", value: "true") ]
         var fetchTokenRequest = URLRequest(url: fetchTokenUrlComponents.url!)
         fetchTokenRequest.setValue(APIKey.OPENSEA, forHTTPHeaderField: "x-api-key")
         let tokenPublisher =

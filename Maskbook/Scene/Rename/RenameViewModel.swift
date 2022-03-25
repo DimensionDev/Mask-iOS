@@ -11,7 +11,7 @@ import CoreDataStack
 import Foundation
 
 class RenameViewModel {
-    init(originalName: String, title: String, dismissOnConfirm: Bool = false, confirmAction: @escaping (String, RenameViewModel) -> Void) {
+    init(originalName: String, title: String, dismissOnConfirm: Bool = true, confirmAction: @escaping (String, RenameViewModel) -> Void) {
         self.confirmAction = confirmAction
         self.originalName = originalName
         self.title = title

@@ -15,7 +15,7 @@ class DerivationPathHeaderView: UITableViewHeaderFooterView {
         view.axis = .horizontal
         view.distribution = .fillEqually
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: 8, left: 22, bottom: 8, right: 22)
+        view.layoutMargins = UIEdgeInsets(top: 8, left: LayoutConstraints.leading, bottom: 8, right: LayoutConstraints.trailing)
         
         let address = L10n.Scene.WalletDerivationPath.headerAddress
         let balance = L10n.Scene.WalletDerivationPath.headerBalance(maskUserDefaults.network.mainToken?.symbol ?? "")

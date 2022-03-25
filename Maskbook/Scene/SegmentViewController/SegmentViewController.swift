@@ -11,7 +11,9 @@ import Foundation
 import UIKit
 
 class SegmentViewController: UIViewController {
-    static var segmentHeight: CGFloat = 56
+    var segmentHeight: CGFloat {
+        segments.segmentHeight
+    }
     
     var disposeBag = Set<AnyCancellable>()
     
@@ -78,10 +80,10 @@ class SegmentViewController: UIViewController {
         view.addSubview(segments)
         segments.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            segments.topAnchor.constraint(equalTo: view.readableContentGuide.topAnchor),
+            segments.topAnchor.constraint(equalTo: view.topAnchor),
             segments.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             segments.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            segments.heightAnchor.constraint(equalToConstant: Self.segmentHeight)
+            segments.heightAnchor.constraint(equalToConstant: segmentHeight)
         ])
         DispatchQueue.main.async {
             self.segments.selectedIndex(at: 0, animated: false)

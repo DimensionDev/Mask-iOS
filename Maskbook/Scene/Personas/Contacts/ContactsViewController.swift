@@ -70,6 +70,7 @@ class ContactsViewController: BaseViewController {
                           NSAttributedString.Key.foregroundColor: Asset.Colors.Text.dark.color]
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes,
                                                                                                           for: .normal)
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = L10n.Common.Controls.cancel
         return searchBar
     }()
 
