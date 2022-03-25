@@ -118,41 +118,40 @@ final class RemoteRestoreInfoViewModel: ObservableObject {
 
     func decryptRemoteFile() {
         guard let content = remoteContent.value else { return }
-        
+
         self.loadingState.send(.restoring)
         let localBackupPassword = vault.getValue(for: .backupPassword).setFailureType(to: Error.self)
         let decrypt = Crypto.decryptBackupToDataPublisher(
             password: remotePassword,
             account: verifyData.accountForCypt,
-            content: content)
-            .flatMap { [weak self] decryptedData -> AnyPublisher<MaskWebMessageResult, Error> in
-                guard let self = self else { return Empty().eraseToAnyPublisher() }
-                return self.restore(data: decryptedData)
-                    .eraseToAnyPublisher()
-            }
-            .subscribe(on: RunLoop.main)
+            content: content
+        )
+        .subscribe(on: DispatchQueue.global())
+
+        
         Publishers.Zip(localBackupPassword, decrypt)
             .receive(on: RunLoop.main)
             .sink { [weak self] completion in
                 switch completion {
                 case .finished:
                     break
-                    
+
                 case let .failure(error):
                     self?.tip = .incorrectBackupPassword
                     self?.loadingState.send(.restoreFailure(error: error))
                 }
-            } receiveValue: { [weak self] backupPassword, _ in
+            } receiveValue: { [weak self] backupPassword, data in
                 self?.tip = .none
-                if let backupPassword = backupPassword, backupPassword != self?.remotePassword {
-                    self?.loadingState.send(.syncCloudPassword)
-                } else {
-                    self?.loadingState.send(.restored)
-                }
+//                if let backupPassword = backupPassword, backupPassword != self?.remotePassword {
+//                    self?.loadingState.send(.syncCloudPassword)
+//                } else {
+//                    self?.loadingState.send(.restored)
+//                }
+                self?.loadingState.send(.restored(data))
             }
             .store(in: &restoreStorage)
     }
-    
+
     func restore(data: Data) -> AnyPublisher<MaskWebMessageResult, Error> {
         RestoreBackupMWEMessage.withPayload {
             .init(backupInfo: String(data: data, encoding: .utf8))
@@ -199,7 +198,7 @@ extension RemoteRestoreInfoViewModel {
         case retryLoadRestoreInfo
         
         case restoring
-        case restored
+        case restored(Data)
         case restoreFailure(error: Error)
         case syncCloudPassword
     }

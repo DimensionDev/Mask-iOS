@@ -90,29 +90,30 @@ final class RemoteRestoreInfoController: BaseViewController {
         case .loaded:
             self.loadingController.stopAnimation()
             
-        case .restored:
+        case let .restored(data):
             self.loadingController.stopAnimation()
-            Alert {
-                ImageItem(.success)
-                ContentTextItem(
-                    NSAttributedString(
-                        string: L10n.Scene.IdentityRestoreSigninSuccess.title,
-                        attributes: [
-                            .font: FontStyles.BH4,
-                            .foregroundColor: Asset.Colors.Text.dark.color
-                        ]
-                    )
-                )
-                DoneActionItem(
-                    .init(
-                        title: L10n.Common.Controls.done,
-                        action: { [weak self] in
-                            self?.login()
-                        }
-                    )
-                )
-            }
-            .show()
+            coordinator.present(scene: .localRestoreEncryptBackup(data, destination: .setting), transition: .detail(), completion: nil)
+//            Alert {
+//                ImageItem(.success)
+//                ContentTextItem(
+//                    NSAttributedString(
+//                        string: L10n.Scene.IdentityRestoreSigninSuccess.title,
+//                        attributes: [
+//                            .font: FontStyles.BH4,
+//                            .foregroundColor: Asset.Colors.Text.dark.color
+//                        ]
+//                    )
+//                )
+//                DoneActionItem(
+//                    .init(
+//                        title: L10n.Common.Controls.done,
+//                        action: { [weak self] in
+//                            self?.login()
+//                        }
+//                    )
+//                )
+//            }
+//            .show()
             
         case .restoreFailure:
             self.loadingController.stopAnimation()
