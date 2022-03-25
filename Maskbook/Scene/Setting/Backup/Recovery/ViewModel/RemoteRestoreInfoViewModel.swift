@@ -124,21 +124,10 @@ final class RemoteRestoreInfoViewModel: ObservableObject {
         let decrypt = Crypto.decryptBackupToDataPublisher(
             password: remotePassword,
             account: verifyData.accountForCypt,
-            content: content)
-            .flatMap { decryptedData -> AnyPublisher<(MaskWebMessageResult, Data), Error> in
-                let websignal = RestoreBackupMWEMessage
-                    .withPayload {
-                    .init(backupInfo: String(data: decryptedData, encoding: .utf8))
-                }
-                .eraseToAnyPublisher()
+            content: content
+        )
+        .subscribe(on: DispatchQueue.global())
 
-                let datasignal = Just(decryptedData)
-                    .setFailureType(to: Error.self)
-
-                return Publishers.CombineLatest(websignal, datasignal)
-                    .eraseToAnyPublisher()
-            }
-            .subscribe(on: RunLoop.main)
         
         Publishers.Zip(localBackupPassword, decrypt)
             .receive(on: RunLoop.main)
@@ -151,15 +140,13 @@ final class RemoteRestoreInfoViewModel: ObservableObject {
                     self?.tip = .incorrectBackupPassword
                     self?.loadingState.send(.restoreFailure(error: error))
                 }
-            } receiveValue: { [weak self] backupPassword, packedInfo in
+            } receiveValue: { [weak self] backupPassword, data in
                 self?.tip = .none
 //                if let backupPassword = backupPassword, backupPassword != self?.remotePassword {
 //                    self?.loadingState.send(.syncCloudPassword)
 //                } else {
 //                    self?.loadingState.send(.restored)
 //                }
-
-                let (_ ,data) = packedInfo
                 self?.loadingState.send(.restored(data))
             }
             .store(in: &restoreStorage)
