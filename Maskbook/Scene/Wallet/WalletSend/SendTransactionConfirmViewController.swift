@@ -303,7 +303,7 @@ class SendTransactionConfirmViewController: BaseViewController {
         view.addSubview(toAddressLabel)
         toAddressLabel.snp.makeConstraints { make in
             make.left.equalTo(LayoutConstraints.leading)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(24)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(LayoutConstraints.top)
         }
         
         view.addSubview(toAddressDetailLabel)

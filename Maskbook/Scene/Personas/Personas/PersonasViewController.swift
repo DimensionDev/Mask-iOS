@@ -102,7 +102,10 @@ class PersonasViewController: BaseViewController {
         personaCollectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(personaCollectionView)
         NSLayoutConstraint.activate([
-            personaCollectionView.topAnchor.constraint(equalTo: view.readableContentGuide.topAnchor, constant: 24),
+            personaCollectionView.topAnchor.constraint(
+                equalTo: view.readableContentGuide.topAnchor,
+                constant: LayoutConstraints.top
+            ),
             personaCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             personaCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             personaCollectionView.heightAnchor.constraint(equalToConstant: 122)

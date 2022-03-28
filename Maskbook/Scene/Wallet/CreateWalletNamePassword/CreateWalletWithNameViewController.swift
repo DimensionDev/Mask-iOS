@@ -106,7 +106,11 @@ extension CreateWalletWithNameViewController {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 24, left: LayoutConstraints.leading, bottom: 24, right: LayoutConstraints.trailing)
+        stackView.layoutMargins = UIEdgeInsets(
+            top: LayoutConstraints.top,
+            left: LayoutConstraints.leading,
+            bottom: 24,
+            right: LayoutConstraints.trailing)
         stackView.spacing = 8
         stackView.distribution = .fill
         

@@ -41,7 +41,7 @@ class PersonaActionViewController: BaseViewController {
         view.delegate = self
         view.dataSource = self
         view.register(GroupStyleTableViewCell.self)
-        view.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 0, right: 0)
+        view.contentInset = UIEdgeInsets(top: LayoutConstraints.top, left: 0, bottom: 0, right: 0)
         return view
     }()
     
