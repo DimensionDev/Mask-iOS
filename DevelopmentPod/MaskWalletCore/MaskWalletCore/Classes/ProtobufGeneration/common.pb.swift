@@ -43,6 +43,11 @@ public struct Api_GetVersionResp {
   public init() {}
 }
 
+#if swift(>=5.5) && canImport(_Concurrency)
+extension Api_GetVersionParam: @unchecked Sendable {}
+extension Api_GetVersionResp: @unchecked Sendable {}
+#endif  // swift(>=5.5) && canImport(_Concurrency)
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "api"

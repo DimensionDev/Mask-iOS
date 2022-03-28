@@ -233,6 +233,15 @@ public struct Api_StoredKeyAccountInfo {
   public init() {}
 }
 
+#if swift(>=5.5) && canImport(_Concurrency)
+extension Api_Coin: @unchecked Sendable {}
+extension Api_StoredKeyType: @unchecked Sendable {}
+extension Api_StoredKeyImportType: @unchecked Sendable {}
+extension Api_StoredKeyExportType: @unchecked Sendable {}
+extension Api_StoredKeyInfo: @unchecked Sendable {}
+extension Api_StoredKeyAccountInfo: @unchecked Sendable {}
+#endif  // swift(>=5.5) && canImport(_Concurrency)
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "api"

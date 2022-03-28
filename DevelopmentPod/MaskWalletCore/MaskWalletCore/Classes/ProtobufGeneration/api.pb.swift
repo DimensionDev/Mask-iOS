@@ -541,6 +541,14 @@ public struct Api_MWResponseError {
   public init() {}
 }
 
+#if swift(>=5.5) && canImport(_Concurrency)
+extension Api_MWRequest: @unchecked Sendable {}
+extension Api_MWRequest.OneOf_Request: @unchecked Sendable {}
+extension Api_MWResponse: @unchecked Sendable {}
+extension Api_MWResponse.OneOf_Response: @unchecked Sendable {}
+extension Api_MWResponseError: @unchecked Sendable {}
+#endif  // swift(>=5.5) && canImport(_Concurrency)
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "api"
@@ -576,165 +584,237 @@ extension Api_MWRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
       switch fieldNumber {
       case 1: try {
         var v: Api_LoadStoredKeyParam?
+        var hadOneofValue = false
         if let current = self.request {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .paramLoadStoredKey(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.request = .paramLoadStoredKey(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.request = .paramLoadStoredKey(v)
+        }
       }()
       case 2: try {
         var v: Api_CreateStoredKeyParam?
+        var hadOneofValue = false
         if let current = self.request {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .paramCreateStoredKey(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.request = .paramCreateStoredKey(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.request = .paramCreateStoredKey(v)
+        }
       }()
       case 3: try {
         var v: Api_ImportPrivateStoredKeyParam?
+        var hadOneofValue = false
         if let current = self.request {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .paramImportPrivateKey(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.request = .paramImportPrivateKey(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.request = .paramImportPrivateKey(v)
+        }
       }()
       case 4: try {
         var v: Api_ImportMnemonicStoredKeyParam?
+        var hadOneofValue = false
         if let current = self.request {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .paramImportMnemonic(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.request = .paramImportMnemonic(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.request = .paramImportMnemonic(v)
+        }
       }()
       case 5: try {
         var v: Api_ImportJSONStoredKeyParam?
+        var hadOneofValue = false
         if let current = self.request {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .paramImportJson(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.request = .paramImportJson(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.request = .paramImportJson(v)
+        }
       }()
       case 10: try {
         var v: Api_CreateStoredKeyNewAccountAtPathParam?
+        var hadOneofValue = false
         if let current = self.request {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .paramCreateAccountOfCoinAtPath(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.request = .paramCreateAccountOfCoinAtPath(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.request = .paramCreateAccountOfCoinAtPath(v)
+        }
       }()
       case 13: try {
         var v: Api_ExportKeyStorePrivateKeyParam?
+        var hadOneofValue = false
         if let current = self.request {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .paramExportPrivateKey(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.request = .paramExportPrivateKey(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.request = .paramExportPrivateKey(v)
+        }
       }()
       case 14: try {
         var v: Api_ExportKeyStorePrivateKeyOfPathParam?
+        var hadOneofValue = false
         if let current = self.request {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .paramExportPrivateKeyOfPath(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.request = .paramExportPrivateKeyOfPath(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.request = .paramExportPrivateKeyOfPath(v)
+        }
       }()
       case 15: try {
         var v: Api_ExportKeyStoreMnemonicParam?
+        var hadOneofValue = false
         if let current = self.request {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .paramExportMnemonic(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.request = .paramExportMnemonic(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.request = .paramExportMnemonic(v)
+        }
       }()
       case 16: try {
         var v: Api_ExportKeyStoreJSONOfAddressParam?
+        var hadOneofValue = false
         if let current = self.request {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .paramExportKeyStoreJsonOfAddress(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.request = .paramExportKeyStoreJsonOfAddress(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.request = .paramExportKeyStoreJsonOfAddress(v)
+        }
       }()
       case 17: try {
         var v: Api_ExportKeyStoreJSONOfPathParam?
+        var hadOneofValue = false
         if let current = self.request {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .paramExportKeyStoreJsonOfPath(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.request = .paramExportKeyStoreJsonOfPath(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.request = .paramExportKeyStoreJsonOfPath(v)
+        }
       }()
       case 18: try {
         var v: Api_UpdateStoredKeyPasswordParam?
+        var hadOneofValue = false
         if let current = self.request {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .paramUpdateKeyStorePassword(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.request = .paramUpdateKeyStorePassword(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.request = .paramUpdateKeyStorePassword(v)
+        }
       }()
       case 20: try {
         var v: Api_SignTransactionParam?
+        var hadOneofValue = false
         if let current = self.request {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .paramSignTransaction(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.request = .paramSignTransaction(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.request = .paramSignTransaction(v)
+        }
       }()
       case 21: try {
         var v: Api_GetVersionParam?
+        var hadOneofValue = false
         if let current = self.request {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .paramGetVersion(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.request = .paramGetVersion(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.request = .paramGetVersion(v)
+        }
       }()
       case 22: try {
         var v: Api_ValidateParam?
+        var hadOneofValue = false
         if let current = self.request {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .paramValidation(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.request = .paramValidation(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.request = .paramValidation(v)
+        }
       }()
       case 23: try {
         var v: Api_GetKeyStoreSupportImportTypeParam?
+        var hadOneofValue = false
         if let current = self.request {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .paramGetStoredKeyImportType(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.request = .paramGetStoredKeyImportType(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.request = .paramGetStoredKeyImportType(v)
+        }
       }()
       case 24: try {
         var v: Api_GetKeyStoreSupportExportTypeParam?
+        var hadOneofValue = false
         if let current = self.request {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .paramGetStoredKeyExportType(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.request = .paramGetStoredKeyExportType(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.request = .paramGetStoredKeyExportType(v)
+        }
       }()
       case 25: try {
         var v: Api_GenerateMnemonicParam?
+        var hadOneofValue = false
         if let current = self.request {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .paramGenerateMnemonic(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.request = .paramGenerateMnemonic(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.request = .paramGenerateMnemonic(v)
+        }
       }()
       default: break
       }
@@ -743,8 +823,9 @@ extension Api_MWRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     // The use of inline closures is to circumvent an issue where the compiler
-    // allocates stack space for every case branch when no optimizations are
-    // enabled. https://github.com/apple/swift-protobuf/issues/1034
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
     switch self.request {
     case .paramLoadStoredKey?: try {
       guard case .paramLoadStoredKey(let v)? = self.request else { preconditionFailure() }
@@ -860,156 +941,224 @@ extension Api_MWResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       switch fieldNumber {
       case 1: try {
         var v: Api_MWResponseError?
+        var hadOneofValue = false
         if let current = self.response {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .error(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.response = .error(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.response = .error(v)
+        }
       }()
       case 2: try {
         var v: Api_LoadStoredKeyResp?
+        var hadOneofValue = false
         if let current = self.response {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .respLoadStoredKey(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.response = .respLoadStoredKey(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.response = .respLoadStoredKey(v)
+        }
       }()
       case 3: try {
         var v: Api_CreateStoredKeyResp?
+        var hadOneofValue = false
         if let current = self.response {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .respCreateStoredKey(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.response = .respCreateStoredKey(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.response = .respCreateStoredKey(v)
+        }
       }()
       case 4: try {
         var v: Api_ImportPrivateStoredKeyResp?
+        var hadOneofValue = false
         if let current = self.response {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .respImportPrivateKey(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.response = .respImportPrivateKey(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.response = .respImportPrivateKey(v)
+        }
       }()
       case 5: try {
         var v: Api_ImportMnemonicStoredKeyResp?
+        var hadOneofValue = false
         if let current = self.response {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .respImportMnemonic(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.response = .respImportMnemonic(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.response = .respImportMnemonic(v)
+        }
       }()
       case 6: try {
         var v: Api_ImportJSONStoredKeyResp?
+        var hadOneofValue = false
         if let current = self.response {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .respImportJson(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.response = .respImportJson(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.response = .respImportJson(v)
+        }
       }()
       case 11: try {
         var v: Api_CreateStoredKeyNewAccountAtPathResp?
+        var hadOneofValue = false
         if let current = self.response {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .respCreateAccountOfCoinAtPath(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.response = .respCreateAccountOfCoinAtPath(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.response = .respCreateAccountOfCoinAtPath(v)
+        }
       }()
       case 14: try {
         var v: Api_ExportKeyStorePrivateKeyResp?
+        var hadOneofValue = false
         if let current = self.response {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .respExportPrivateKey(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.response = .respExportPrivateKey(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.response = .respExportPrivateKey(v)
+        }
       }()
       case 15: try {
         var v: Api_ExportKeyStoreMnemonicResp?
+        var hadOneofValue = false
         if let current = self.response {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .respExportMnemonic(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.response = .respExportMnemonic(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.response = .respExportMnemonic(v)
+        }
       }()
       case 16: try {
         var v: Api_ExportKeyStoreJSONResp?
+        var hadOneofValue = false
         if let current = self.response {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .respExportKeyStoreJson(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.response = .respExportKeyStoreJson(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.response = .respExportKeyStoreJson(v)
+        }
       }()
       case 17: try {
         var v: Api_UpdateStoredKeyPasswordResp?
+        var hadOneofValue = false
         if let current = self.response {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .respUpdateKeyStorePassword(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.response = .respUpdateKeyStorePassword(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.response = .respUpdateKeyStorePassword(v)
+        }
       }()
       case 19: try {
         var v: Api_SignTransactionResp?
+        var hadOneofValue = false
         if let current = self.response {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .respSignTransaction(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.response = .respSignTransaction(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.response = .respSignTransaction(v)
+        }
       }()
       case 20: try {
         var v: Api_GetVersionResp?
+        var hadOneofValue = false
         if let current = self.response {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .respGetVersion(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.response = .respGetVersion(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.response = .respGetVersion(v)
+        }
       }()
       case 21: try {
         var v: Api_ValidateResp?
+        var hadOneofValue = false
         if let current = self.response {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .respValidate(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.response = .respValidate(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.response = .respValidate(v)
+        }
       }()
       case 22: try {
         var v: Api_GetKeyStoreSupportImportTypeResp?
+        var hadOneofValue = false
         if let current = self.response {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .respGetStoredKeyImportType(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.response = .respGetStoredKeyImportType(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.response = .respGetStoredKeyImportType(v)
+        }
       }()
       case 23: try {
         var v: Api_GetKeyStoreSupportExportTypeResp?
+        var hadOneofValue = false
         if let current = self.response {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .respGetStoredKeyExportType(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.response = .respGetStoredKeyExportType(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.response = .respGetStoredKeyExportType(v)
+        }
       }()
       case 24: try {
         var v: Api_GenerateMnemonicResp?
+        var hadOneofValue = false
         if let current = self.response {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .respGenerateMnemonic(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.response = .respGenerateMnemonic(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.response = .respGenerateMnemonic(v)
+        }
       }()
       default: break
       }
@@ -1018,8 +1167,9 @@ extension Api_MWResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     // The use of inline closures is to circumvent an issue where the compiler
-    // allocates stack space for every case branch when no optimizations are
-    // enabled. https://github.com/apple/swift-protobuf/issues/1034
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
     switch self.response {
     case .error?: try {
       guard case .error(let v)? = self.response else { preconditionFailure() }
