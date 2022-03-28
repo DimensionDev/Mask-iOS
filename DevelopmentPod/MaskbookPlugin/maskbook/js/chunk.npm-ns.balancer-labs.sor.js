@@ -1,7 +1,7 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[211],{
 
-/***/ 95140:
+/***/ 42389:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -156,7 +156,7 @@ const address_1 = __webpack_require__(99747);
 const contracts_1 = __webpack_require__(58063);
 const solidity_1 = __webpack_require__(85396);
 const bignumber_1 = __webpack_require__(40199);
-const bmath_1 = __webpack_require__(95140);
+const bmath_1 = __webpack_require__(42389);
 const FACTORY_ADDRESS = '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f';
 const INIT_CODE_HASH = '0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f';
 function getAddress(tokenA, tokenB) {
@@ -234,7 +234,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const bignumber_1 = __webpack_require__(40199);
 const address_1 = __webpack_require__(99747);
-const bmath_1 = __webpack_require__(95140);
+const bmath_1 = __webpack_require__(42389);
 const disabled_tokens_json_1 = __importDefault(__webpack_require__(14511));
 function getLimitAmountSwap(poolPairData, swapType) {
     if (swapType === 'swapExactIn') {
@@ -689,7 +689,7 @@ exports.sortPoolsMostLiquid = helpers_1.sortPoolsMostLiquid;
 exports.getMarketSpotPrice = helpers_1.getMarketSpotPrice;
 var multicall_1 = __webpack_require__(85876);
 exports.getAllPoolDataOnChain = multicall_1.getAllPoolDataOnChain;
-const bmath = __importStar(__webpack_require__(95140));
+const bmath = __importStar(__webpack_require__(42389));
 exports.bmath = bmath;
 var costToken_1 = __webpack_require__(55543);
 exports.getCostOutputToken = costToken_1.getCostOutputToken;
@@ -723,7 +723,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const contracts_1 = __webpack_require__(58063);
-const bmath = __importStar(__webpack_require__(95140));
+const bmath = __importStar(__webpack_require__(42389));
 function getAllPoolDataOnChain(pools, multiAddress, provider) {
     return __awaiter(this, void 0, void 0, function* () {
         if (pools.pools.length === 0)
@@ -798,7 +798,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const isomorphic_fetch_1 = __importDefault(__webpack_require__(39060));
-const bmath = __importStar(__webpack_require__(95140));
+const bmath = __importStar(__webpack_require__(42389));
 class POOLS {
     getAllPublicSwapPools(URL) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -845,7 +845,7 @@ exports.POOLS = POOLS;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const helpers_1 = __webpack_require__(93256);
-const bmath_1 = __webpack_require__(95140);
+const bmath_1 = __webpack_require__(42389);
 const bignumber_1 = __webpack_require__(40199);
 const constants_1 = __webpack_require__(24769);
 // TODO give the option to choose a % of slippage beyond current price?
@@ -1337,7 +1337,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const bignumber_1 = __webpack_require__(40199);
-const bmath_1 = __webpack_require__(95140);
+const bmath_1 = __webpack_require__(42389);
 const sor = __importStar(__webpack_require__(15092));
 class SOR {
     constructor(Provider, GasPrice, MaxPools, ChainId, PoolsUrl) {

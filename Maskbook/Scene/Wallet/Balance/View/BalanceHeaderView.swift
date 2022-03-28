@@ -27,7 +27,9 @@ class BalanceHeaderView: UITableViewHeaderFooterView {
         }
     }
     
-    let segments = BalanceSegmentView()
+    let segments = BalanceSegmentView().cv.apply { view in
+        view.indicatorView.backgroundColor = Asset.Colors.Background.blue.color
+    }
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -41,13 +43,14 @@ class BalanceHeaderView: UITableViewHeaderFooterView {
     
     private func _init() {
         contentView.backgroundColor = Asset.Colors.Background.normal.color
+        contentView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: LayoutConstraints.leading, bottom: 10, trailing: LayoutConstraints.trailing)
         
         contentView.addSubview(segments)
         segments.backgroundColor = .clear
         segments.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             segments.topAnchor.constraint(equalTo: contentView.topAnchor),
-            segments.leadingAnchor.constraint(equalTo: contentView.readableContentGuide.leadingAnchor, constant: 2),
+            segments.leadingAnchor.constraint(equalTo: contentView.readableContentGuide.leadingAnchor),
             segments.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
         

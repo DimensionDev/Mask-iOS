@@ -14,7 +14,7 @@ class RecentlyAddressTableViewCell: UITableViewCell {
     private var addressslabel: UILabel = {
         let label = UILabel()
         label.textColor = Asset.Colors.Text.normal.color
-        label.font = FontStyles.MH7
+        label.font = FontStyles.RH7
         return label
     }()
 
@@ -31,14 +31,14 @@ class RecentlyAddressTableViewCell: UITableViewCell {
         view.alignment = .fill
         view.spacing = 0
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: 8, left: 23, bottom: 8, right: 23)
+        view.layoutMargins = UIEdgeInsets(top: 8, left: LayoutConstraints.leading, bottom: 8, right: LayoutConstraints.trailing)
 
         addressslabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addArrangedSubview(addressslabel)
         view.addArrangedSubview(nameLabel)
+        view.addArrangedSubview(addressslabel)
         
-        view.setCustomSpacing(2, after: addressslabel)
+        view.setCustomSpacing(2, after: nameLabel)
         return view
     }()
     

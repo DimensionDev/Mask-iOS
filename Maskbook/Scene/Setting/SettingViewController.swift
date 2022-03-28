@@ -165,8 +165,8 @@ extension SettingViewController: UITableViewDelegate {
         
         label.snp.makeConstraints { make in
             make.leading.equalTo(22)
-            make.top.equalTo(section == 0 ? 16 : 32)
-            make.bottom.equalTo(-28)
+            make.top.equalTo(section == 0 ? 28 : 32)
+            make.bottom.equalTo(-16)
         }
         return view
     }

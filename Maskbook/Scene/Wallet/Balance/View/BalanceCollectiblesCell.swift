@@ -25,8 +25,8 @@ extension BalanceCollectiblesCell {
 class BalanceCollectiblesCell: UITableViewCell {
     private lazy var container: UIView = {
         let view = UIView()
-        view.backgroundColor = Asset.Colors.Background.normal.color
-        view.layer.cornerRadius = 12
+        view.backgroundColor = Asset.Colors.Public.Background.dark.color
+        view.layer.cornerRadius = 8
         return view
     }()
     
@@ -57,7 +57,7 @@ class BalanceCollectiblesCell: UITableViewCell {
     
     private lazy var arrowButton: UIButton = {
         let button = HitTestExpandedButton()
-        button.setImage(Asset.Images.Scene.Balance.expandArrowDown.image, for: .normal)
+        button.setImage(Asset.Images.Scene.Balance.expandArrowRight.image, for: .normal)
         button.isUserInteractionEnabled = false
         button.setContentCompressionResistancePriority(.required, for: .horizontal)
         return button
@@ -81,13 +81,6 @@ class BalanceCollectiblesCell: UITableViewCell {
         stackView.addArrangedSubview(countLabel)
         stackView.addArrangedSubview(arrowButton)
         return stackView
-    }()
-    
-    // MARK: - Content
-    private lazy var nameLabel: UILabel = {
-        let label = UILabel()
-        label.font = FontStyles.MH5
-        return label
     }()
     
     private static let collectibleItemSpacing: CGFloat = 16
@@ -116,7 +109,7 @@ class BalanceCollectiblesCell: UITableViewCell {
         stackView.axis = .vertical
         stackView.spacing = 16
         stackView.alignment = .fill
-        stackView.layoutMargins = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+        stackView.layoutMargins = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
         stackView.isLayoutMarginsRelativeArrangement = true
         
         stackView.addArrangedSubview(titleStackView)
@@ -160,13 +153,13 @@ class BalanceCollectiblesCell: UITableViewCell {
         if !expandedENS {
             collectionViewHeight?.isActive = false
             collectionView.isHidden = true
-            arrowButton.setImage(Asset.Images.Scene.Balance.expandArrowDown.image, for: .normal)
+            arrowButton.setImage(Asset.Images.Scene.Balance.expandArrowRight.image, for: .normal)
         } else {
             let count = ceil(CGFloat(items.count) / Self.itemPerRow)
             collectionViewHeight?.constant = itemWidth * count + (count - 1) * Self.collectibleItemSpacing
             collectionViewHeight?.isActive = !items.isEmpty
             collectionView.isHidden = items.isEmpty
-            arrowButton.setImage(Asset.Images.Scene.Balance.expandArrowUp.image, for: .normal)
+            arrowButton.setImage(Asset.Images.Scene.Balance.expandArrowDown.image, for: .normal)
         }
         
         if let assetImageURLString = firstAsset.collectionImage {
@@ -190,10 +183,10 @@ extension BalanceCollectiblesCell {
         contentView.addSubview(container)
         
         container.snp.makeConstraints {
-            $0.leading.equalTo(contentView.readableContentGuide).offset(2)
-            $0.trailing.equalTo(contentView.readableContentGuide).offset(-2)
-            $0.top.equalTo(16)
-            $0.bottom.equalTo(0)
+            $0.leading.equalTo(contentView.readableContentGuide)
+            $0.trailing.equalTo(contentView.readableContentGuide)
+            $0.top.equalTo(6)
+            $0.bottom.equalTo(-6)
         }
         
         container.addSubview(containerStackView)

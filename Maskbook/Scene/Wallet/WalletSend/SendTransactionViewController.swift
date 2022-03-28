@@ -21,11 +21,9 @@ class SendTransactionViewController: BaseViewController {
     typealias ContactParam = Coordinator.Scene.WalletContactParam
     typealias SendTokenParam = Coordinator.Scene.SendTransactionParam
     let viewModel = ViewModel()
-    
     var sendParam: SendTokenParam?
-    
     var contactParam: ContactParam?
-    
+    let keyboardExpandView = UIView()
     var subscriptions: Set<AnyCancellable> = []
     let addressViewModel = AddressCheckViewModel()
     
@@ -45,17 +43,31 @@ class SendTransactionViewController: BaseViewController {
         textField.attributedPlaceholder = NSAttributedString(string: L10n.Scene.Sendtransaction.Send.placeholderAddress,
                                                              attributes: [.foregroundColor: Asset.Colors.Text.light.color,
                                                                           .font: FontStyles.BH5])
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 48, height: 52))
-        let imageView = UIImageView()
-        imageView.image = Asset.Images.Scene.SendTransaction.scan.image
-        paddingView.addSubview(imageView)
-        imageView.snp.makeConstraints { make in
-            make.centerY.equalTo(paddingView)
+        let rightView = UIView(frame: CGRect(x: 0, y: 0, width: 24, height: 52))
+        let rightImageView = UIImageView()
+        rightImageView.image = Asset.Images.Scene.SendTransaction.scan.image
+        rightView.addSubview(rightImageView)
+        rightImageView.snp.makeConstraints { make in
+            make.centerY.equalTo(rightView)
+            make.centerX.equalTo(rightView)
+            make.size.equalTo(CGSize(width: 24, height: 24))
+        }
+        textField.rightView = rightView
+        textField.rightViewMode = .always
+        
+        let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 48, height: 52))
+        let leftImageView = UIImageView()
+        leftImageView.image = Asset.Images.Scene.SendTransaction.search.image
+        leftView.addSubview(leftImageView)
+        leftImageView.snp.makeConstraints { make in
+            make.centerY.equalTo(leftView)
             make.left.equalTo(12)
             make.right.equalTo(-8)
             make.size.equalTo(CGSize(width: 24, height: 24))
         }
-        textField.leftView = paddingView
+        textField.leftView = leftView
+        textField.leftViewMode = .unlessEditing
+        
         return textField
     }()
     
@@ -70,7 +82,9 @@ class SendTransactionViewController: BaseViewController {
         tableView.backgroundColor = Asset.Colors.Background.normal.color
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
-        tableView.register(RecentlyAddressTableViewCell.self, forCellReuseIdentifier: String(describing: RecentlyAddressTableViewCell.self))
+        tableView.register(RecentlyAddressTableViewCell.self)
+        tableView.register(RecentlyPasteTableViewCell.self)
+        tableView.registerHeaderFooter(RecentlyHeaderView.self)
         tableView.delegate = self
         return tableView
     }()
@@ -78,16 +92,23 @@ class SendTransactionViewController: BaseViewController {
     lazy var dataSource: UITableViewDiffableDataSource<Section, Item> = {
         return UITableViewDiffableDataSource<Section, Item>(
             tableView: tableView) { tableView, indexPath, item in
-            let cell: RecentlyAddressTableViewCell = tableView.dequeCell(at: indexPath)
             switch item {
             case let .address(address):
+                let cell: RecentlyAddressTableViewCell = tableView.dequeCell(at: indexPath)
                 cell.setModel(name: nil, address: address)
+                return cell
 
             case let .contact(name, ensName, address):
+                let cell: RecentlyAddressTableViewCell = tableView.dequeCell(at: indexPath)
                 let displayAddress = ensName ?? address
                 cell.setModel(name: name, address: displayAddress ?? "")
+                return cell
+
+            case let .paste(address, ensName):
+                let cell: RecentlyPasteTableViewCell = tableView.dequeCell(at: indexPath)
+                cell.setModel(name: ensName, address: address)
+                return cell
             }
-            return cell
         }
     }()
         
@@ -96,7 +117,9 @@ class SendTransactionViewController: BaseViewController {
         
         setupNaviItems()
         setupSubViews()
+        setTableViewSource()
         setSubscriptions()
+        handleForKeyboard()
     }
     
     private func setupNaviItems() {    
@@ -109,34 +132,53 @@ class SendTransactionViewController: BaseViewController {
         
         view.addSubview(toAddressLabel)
         toAddressLabel.snp.makeConstraints { make in
-            make.left.equalTo(22.5)
+            make.leading.equalTo(LayoutConstraints.leading)
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(24)
         }
-        
-        view.addSubview(nextButton)
-        nextButton.snp.makeConstraints { make in
-            make.right.equalTo(-22.5)
-            make.height.equalTo(54)
-            make.width.equalTo(68)
-            make.top.equalTo(toAddressLabel.snp.bottom).offset(8)
-        }
-        
+            
         view.addSubview(enterAddressTextField)
         enterAddressTextField.snp.makeConstraints {make in
             make.left.equalTo(toAddressLabel)
-            make.top.bottom.equalTo(nextButton)
-            make.right.equalTo(nextButton.snp.left).offset(-12)
+            make.top.equalTo(toAddressLabel.snp.bottom).offset(8)
+            make.trailing.equalTo(-LayoutConstraints.trailing)
+            make.height.equalTo(54)
         }
         
         view.addSubview(tableView)
-
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(enterAddressTextField.snp.bottom).offset(16)
+            make.top.equalTo(enterAddressTextField.snp.bottom).offset(4)
             make.left.right.equalTo(view)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
-
         tableView.dataSource = dataSource
+        
+        view.addSubview(nextButton)
+        nextButton.snp.makeConstraints { make in
+            make.leading.equalTo(LayoutConstraints.leading)
+            make.trailing.equalTo(-LayoutConstraints.trailing)
+            make.height.equalTo(54)
+        }
+        
+        view.addSubview(keyboardExpandView)
+        keyboardExpandView.snp.makeConstraints { make in
+            make.top.equalTo(nextButton.snp.bottom).offset(8)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            make.height.equalTo(0)
+        }
+    }
+    
+    func setTableViewSource() {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+        let recentAddressItems = self.viewModel.generateRecentAddressCellItem()
+        let contactAddressItems = self.viewModel.generateContactCellItem()
+        snapshot.appendSections([.paste])
+        snapshot.appendSections([.search])
+        snapshot.appendSections([.contact])
+        snapshot.appendItems(contactAddressItems)
+        snapshot.appendSections([.address])
+        snapshot.appendItems(recentAddressItems)
+        self.dataSource.apply(snapshot, animatingDifferences: false)
     }
     
     func setSubscriptions() {
@@ -156,13 +198,32 @@ class SendTransactionViewController: BaseViewController {
             }
             .sink { [weak self] items in
                 guard let self = self else { return }
-                var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
-                snapshot.appendSections([.main])
-                snapshot.appendItems(items)
+                var snapshot = self.dataSource.snapshot()
+                snapshot.appendItems(items, toSection: .search)
                 self.dataSource.apply(snapshot, animatingDifferences: false)
             }
             .store(in: &subscriptions)
-    
+        
+        sharedPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] text in
+                guard let self = self else { return }
+                if text.isEmpty {
+                    let recentAddressItems = self.viewModel.generateRecentAddressCellItem()
+                    let contactAddressItems = self.viewModel.generateContactCellItem()
+                    var snapshot = self.dataSource.snapshot()
+                    snapshot.appendItems(contactAddressItems, toSection: .contact)
+                    snapshot.appendItems(recentAddressItems, toSection: .address)
+                    self.dataSource.apply(snapshot, animatingDifferences: false)
+                } else {
+                    let items = self.viewModel.generateCellItem(toSearch: text)
+                    var snapshot = self.dataSource.snapshot()
+                    snapshot.appendItems(items, toSection: .search)
+                    self.dataSource.apply(snapshot, animatingDifferences: false)
+                }
+            }
+            .store(in: &subscriptions)
+        
         enterAddressTextField.textPublisher()
             .receive(on: DispatchQueue.global())
             .map {[weak self] inputAddress in
@@ -187,22 +248,80 @@ class SendTransactionViewController: BaseViewController {
             }
             .store(in: &subscriptions)
         
-//        viewModel.cellItemPublisher.sink { [weak self] items in
-//            guard let self = self else { return } 
-//            var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
-//            snapshot.appendSections([.main])
-//            snapshot.appendItems(items)
-//            self.dataSource.apply(snapshot, animatingDifferences: false)
-//        }
-//        .store(in: &subscriptions)
-        
-        enterAddressTextField.leftView?.gesture()
+        enterAddressTextField.rightView?.gesture()
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: {[weak self] _ in
                 guard let self = self else { return }
                 Coordinator.main.present(scene: .scanBase(delegate: self), transition: .detail(animated: true))
             })
             .store(in: &subscriptions)
+        
+        viewModel.pasteStringPublisher
+            .sink { [weak self] pasteStr in
+                if WalletCoreHelper.validateAddress(address: pasteStr, chainType: maskUserDefaults.network.chain){
+                    guard let self = self else { return }
+                    guard let ens = ENS(web3: Web3.InfuraMainnetWeb3()) else { return }
+                    DispatchQueue.global().async {
+                        do {
+                            let ensName = try ens.getName(forNode: pasteStr.stripHexPrefix() + ".addr.reverse")
+                            DispatchQueue.main.async {
+                                let cellItem = self.viewModel.pasteCellItem(pasteText: pasteStr, ensName: ensName)
+                                var snapshot = self.dataSource.snapshot()
+                                snapshot.appendItems(cellItem, toSection: .paste)
+                                self.dataSource.apply(snapshot, animatingDifferences: false)
+                            }
+                        } catch {
+                            return
+                        }
+                    }
+                }
+            }
+            .store(in: &subscriptions)
+    }
+    
+    func handleForKeyboard() {
+        let endFrame = KeyboardResponderService.shared.endFrame.removeDuplicates()
+        let willShow = NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification, object: nil)
+        let willHide = NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification, object: nil)
+        Publishers.CombineLatest(willShow, endFrame).sink { notification, _ in
+            guard let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else {
+                return
+            }
+            guard let endFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+                return
+            }
+            UIView.animate(
+                withDuration: duration,
+                delay: 0,
+                options: .curveEaseIn) {
+                    self.keyboardExpandView.snp.remakeConstraints { make in
+                        make.top.equalTo(self.nextButton.snp.bottom).offset(8)
+                        make.leading.trailing.equalToSuperview()
+                        make.bottom.equalTo(self.view.snp.bottom)
+                        make.height.equalTo(endFrame.height)
+                        self.nextButton.layoutIfNeeded()
+                    }
+            }
+            self.view.layoutIfNeeded()
+        }.store(in: &subscriptions)
+        
+        Publishers.CombineLatest(willHide, endFrame).sink { notification, _ in
+            guard let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else {
+                return
+            }
+            UIView.animate(
+                withDuration: duration,
+                delay: 0,
+                options: .curveEaseIn) {
+                    self.keyboardExpandView.snp.remakeConstraints { make in
+                        make.top.equalTo(self.nextButton.snp.bottom).offset(8)
+                        make.leading.trailing.equalToSuperview()
+                        make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+                        make.height.equalTo(0)
+                    }
+            }
+            self.view.layoutIfNeeded()
+        }.store(in: &subscriptions)
     }
 }
 
@@ -296,17 +415,41 @@ extension SendTransactionViewController: UITableViewDelegate {
                         tokenId: id),
                     transition: .detail(animated: true))
             }
+            
+        case let .paste(address, _):
+            enterAddressTextField.text = ""
+            enterAddressTextField.insertText(address)
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let item = dataSource.itemIdentifier(for: indexPath) else { return 0 }
-        switch item {
-        case .contact:
-            return 54.0
-
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch self.dataSource.snapshot().sectionIdentifiers[section]{
         case .address:
-            return 34.0
+            return self.dataSource.snapshot().numberOfItems(inSection: .address) > 0 ? 44: 0
+            
+        case .contact:
+            return self.dataSource.snapshot().numberOfItems(inSection: .contact) > 0 ? 44: 0
+
+        default:
+            return 0
+        }
+    }
+
+    // swiftlint:disable force_cast
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        switch self.dataSource.snapshot().sectionIdentifiers[section]{
+        case .address:
+            let header = tableView.dequeueHeaderFooter(RecentlyHeaderView.self)
+            header?.setContent(text: L10n.Scene.Sendtransaction.Send.recent, image: Asset.Images.Scene.SendTransaction.recent.image)
+            return header
+            
+        case .contact:
+            let header = tableView.dequeueHeaderFooter(RecentlyHeaderView.self)
+            header?.setContent(text: L10n.Scene.Sendtransaction.Send.contact, image: Asset.Images.Scene.SendTransaction.contacts.image)
+            return header
+            
+        default:
+            return UIView()
         }
     }
 }
@@ -320,3 +463,4 @@ extension SendTransactionViewController: ScannerLineViewControllerDelegate {
         enterAddressTextField.insertText(address ?? "")
     }
 }
+

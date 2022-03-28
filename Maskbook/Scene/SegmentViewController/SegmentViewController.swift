@@ -11,12 +11,28 @@ import Foundation
 import UIKit
 
 class SegmentViewController: UIViewController {
+    var segmentHeight: CGFloat {
+        segments.segmentHeight
+    }
+    
     var disposeBag = Set<AnyCancellable>()
     
     var items: [String]
     var viewControllers: [UIViewController]
     
-    let segments = MaskSegmentControl()
+    var style: MaskSegmentControlStyle
+    
+    lazy var segments: MaskSegmentControl = {
+        switch style {
+        case .group:
+            let segments = GroupMaskSegmentControl()
+            return segments
+            
+        case .plain:
+            let segments = PlainMaskSegmentComtrol()
+            return segments
+        }
+    }()
     
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -32,9 +48,10 @@ class SegmentViewController: UIViewController {
         UIScreen.main.bounds.width
     }
     
-    required init(items: [String], viewControllers: [UIViewController]) {
+    required init(items: [String], viewControllers: [UIViewController], style: MaskSegmentControlStyle = .plain) {
         self.items = items
         self.viewControllers = viewControllers
+        self.style = style
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -60,19 +77,15 @@ class SegmentViewController: UIViewController {
     
     func setupSegmentControl() {
         segments.setItems(items: items)
-        segments.backgroundColor = Asset.Colors.Background.blurred.color
         view.addSubview(segments)
         segments.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            segments.topAnchor.constraint(equalTo: view.readableContentGuide.topAnchor),
+            segments.topAnchor.constraint(equalTo: view.topAnchor),
             segments.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             segments.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            segments.heightAnchor.constraint(equalToConstant: 56)
+            segments.heightAnchor.constraint(equalToConstant: segmentHeight)
         ])
         DispatchQueue.main.async {
-            self.segments.clipsToBounds = false
-            self.segments.layer.masksToBounds = false
-            self.segments.applyShadow(color: Asset.Colors.segmentShadow.color, alpha: 1, x: 0, y: 4, blur: 14, cornerRadius: 0, spread: 1)
             self.segments.selectedIndex(at: 0, animated: false)
         }
     }
@@ -106,19 +119,19 @@ class SegmentViewController: UIViewController {
     }
     
     func loadViewOfIndex(index: Int) {
-        let vc = self.viewControllers[index]
+        let vc = viewControllers[index]
         let subView = vc.view!
         if subView.superview == nil {
-            self.addChild(vc)
+            addChild(vc)
             subView.translatesAutoresizingMaskIntoConstraints = false
-            self.scrollView.addSubview(subView)
+            scrollView.addSubview(subView)
             vc.didMove(toParent: self)
 
             NSLayoutConstraint.activate([
-                subView.topAnchor.constraint(equalTo: self.scrollView.contentLayoutGuide.topAnchor),
-                subView.leadingAnchor.constraint(equalTo: self.scrollView.contentLayoutGuide.leadingAnchor, constant: CGFloat(index) * width),
+                subView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+                subView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor, constant: CGFloat(index) * width),
                 subView.widthAnchor.constraint(equalToConstant: width),
-                subView.heightAnchor.constraint(equalTo: self.scrollView.contentLayoutGuide.heightAnchor)
+                subView.heightAnchor.constraint(equalTo: scrollView.contentLayoutGuide.heightAnchor)
             ])
         }
     }
@@ -126,7 +139,7 @@ class SegmentViewController: UIViewController {
 
 extension SegmentViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.parent?.view.endEditing(true)
+        parent?.view.endEditing(true)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {

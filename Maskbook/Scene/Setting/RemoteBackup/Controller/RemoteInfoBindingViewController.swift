@@ -84,28 +84,28 @@ final class RemoteInfoBindingViewController: SheetAdapitveHostingController<Bind
     }
 
     private func showErrorAlert() {
-        Alert(items: {
-            AlertItem.image(.warning)
-            AlertItem.plainText(
+        Alert {
+            ImageItem(.warning)
+            PlainTextItem(
                 title: L10n.Common.Alert.BindRemoteInfo.title,
                 detail: L10n.Common.Alert.BindRemoteInfo.detail
             )
-            AlertItem.doneAction(.init(title: L10n.Common.Controls.ok))
-        })
+            DoneActionItem(.init(title: L10n.Common.Controls.ok))
+        }
         .show()
     }
 
     private func showBindingSucceedAlert() {
         let strategy = self.strategy
         self.dismiss(animated: true) {
-            Alert(items: {
-                AlertItem.image(.success)
-                AlertItem.plainText(
+            Alert {
+                ImageItem(.success)
+                PlainTextItem(
                     title: strategy.alertTitle,
                     detail: strategy.alertDetail
                 )
-                AlertItem.doneAction(.init(title: L10n.Common.Controls.done))
-            })
+                DoneActionItem(.init(title: L10n.Common.Controls.done))
+            }
             .show()
         }
     }

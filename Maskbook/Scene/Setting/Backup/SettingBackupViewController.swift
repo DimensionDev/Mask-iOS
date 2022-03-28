@@ -37,7 +37,7 @@ class SettingBackupViewController: UIViewController {
         view.axis = .vertical
         view.spacing = 8
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: 27, left: 22.5, bottom: 0, right: 22.5)
+        view.layoutMargins = UIEdgeInsets(top: 27, left: LayoutConstraints.leading, bottom: 0, right: LayoutConstraints.trailing)
         view.alignment = .fill
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -177,21 +177,14 @@ private extension SettingBackupViewController {
     }
 
     private func showBindingAlert() {
-        Alert(items: {
-            AlertItem.image(.warning)
-            AlertItem.plainText(
-                title: "Bind your email or phone",
-                detail: "Please bind your email or phone number before you back up to cloud. "
+        Alert {
+            ImageItem(.warning)
+            PlainTextItem(
+                title: L10n.Common.Alert.BackupPopupBindingFirst.title,
+                detail: L10n.Common.Alert.BackupPopupBindingFirst.description
             )
-            AlertItem.doneAction(
-                .init(
-                    title: L10n.Common.Controls.ok,
-                    action: {
-                        // bind email or phone
-                    }
-                )
-            )
-        })
+            DoneActionItem(.init(title: L10n.Common.Controls.ok))
+        }
         .show()
     }
 }

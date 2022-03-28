@@ -82,10 +82,14 @@ final class UserDefaultSettings {
         case walletDisplayBlockChain
         
         case indexedDBDataMigrated
-        case connectTipsDidShown
         case beAwareOfPluginTip
         case jsResourceIsUsingBundle
         case jsDocumentResourceSelectedCommitHash
+        
+        // if this flag return true, the `GuideView` should not be presented.
+        case hasShownGuide
+        
+        case backupFileDetectDate
     }
 
     func removeAll() {
@@ -107,6 +111,7 @@ final class UserDefaultSettings {
         backupDate = nil
         backupAlertDate = nil
         indexedDBDataMigrated = false
+        hasShownGuide = false
     }
 
     /// Indicates whether or not the user has seen the onboarding. Default value is **false**
@@ -302,9 +307,6 @@ final class UserDefaultSettings {
     @ReactiveUserDefault(key: Keys.legacyWalletsImported.rawValue, defaultValue: false)
     var legacyWalletsImported: Bool
 
-    @ReactiveUserDefault(key: Keys.connectTipsDidShown.rawValue, defaultValue: false)
-    var connectTipsDidShown: Bool
-
     @OptionalUserDefault(key: Keys.walletDisplayBlockChain.rawValue)
     var walletDisplayBlockchainString: String?
     var walletDisplayBlockchain: WalletDisplayBlockChainType {
@@ -327,12 +329,20 @@ final class UserDefaultSettings {
     @ReactiveUserDefault(key: Keys.jsResourceIsUsingBundle.rawValue, defaultValue: true)
     var jsResourceIsUsingBundle: Bool
     
+    @ReactiveUserDefault(key: Keys.hasShownGuide.rawValue, defaultValue: false)
+    var hasShownGuide: Bool
+    
+    @OptionalUserDefault(key: Keys.backupFileDetectDate.rawValue)
+    var backupFileDetectDate: Date?
 }
 
 extension UserDefaultSettings {
     func changeNetwork(network: BlockChainNetwork, address: String?) {
         defaultAccountAddress = address
         self.network = network
+        if self.walletDisplayBlockchain != .all {
+            self.walletDisplayBlockchain = .blockchain(network)
+        }
     }
 
     var networkPubisher: AnyPublisher<BlockChainNetwork, Never> {

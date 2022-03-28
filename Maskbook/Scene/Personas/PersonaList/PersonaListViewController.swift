@@ -76,7 +76,7 @@ extension PersonaListViewController {
     func showCreatePersonaViewController(cell: UIView?) {
         let viewModel = RenameViewModel(
             originalName: "",
-            title: L10n.Scene.Personas.Create.createPersona) { [weak self] name in
+            title: L10n.Scene.Personas.Create.createPersona) { [weak self] name, _ in
                 guard let self = self else { return }
                 if self.viewModel.titles.contains(name) {
                     self.dismiss(animated: false) {

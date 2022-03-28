@@ -287,7 +287,7 @@ extension BalanceViewModel: UITableViewDelegate {
             
         case .tokens,
                 .collectibles:
-            return 40
+            return 50
         }
     }
     
@@ -328,6 +328,13 @@ extension BalanceViewModel: UITableViewDelegate {
                                        symbol: token.symbol ?? "",
                                        logoURI: logoUrl,
                                        address: "")
+            guard let tokenBlockChain = BlockChainNetwork(chainId: Int(token.chainId),
+                                                          networkId: UInt64(token.networkId)) else {
+                return
+            }
+            if userSetting.network.networkId != token.networkId {
+                userSetting.network = tokenBlockChain
+            }
             Coordinator.main.present(scene: .tokenDetail(token: tokenModel), transition: .detail(animated: true))
             
         case .expand:

@@ -7,11 +7,10 @@
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
+  "Et": () => (/* binding */ SigningKey),
   "VW": () => (/* binding */ computePublicKey),
   "LO": () => (/* binding */ recoverPublicKey)
 });
-
-// UNUSED EXPORTS: SigningKey
 
 // EXTERNAL MODULE: ../../node_modules/.pnpm/bn.js@4.12.0/node_modules/bn.js/lib/bn.js
 var bn = __webpack_require__(28891);

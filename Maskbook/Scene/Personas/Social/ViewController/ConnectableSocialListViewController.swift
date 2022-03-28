@@ -29,7 +29,14 @@ class ConnectableSocialListViewController: BaseViewController {
         return label
     }()
     
-    private lazy var connectTipsView = ConnectableSocialListViewController.ConnectTipsView()
+    private lazy var connectTipsLabel: UILabel = {
+        let label = UILabel()
+        label.font = FontStyles.RH5
+        label.textColor = Asset.Colors.Text.normal.color
+        label.text = L10n.Scene.PersonaSocial.connectTips
+        label.textAlignment = .left
+        return label
+    }()
     
     private func tapToConnect(view: UIView, socialPlatform: ProfileSocialPlatform) {
         view.cv.tapGesture()
@@ -79,34 +86,23 @@ class ConnectableSocialListViewController: BaseViewController {
         }
         let vStack = VStackView {
             titleLabel
+            connectTipsLabel
             hStack1
             hStack2
             UStack.Spacer()
-            if !userSettings.connectTipsDidShown {
-                connectTipsView
-                    .cv.apply {
-                        NSLayoutConstraint.activate([
-                            $0.heightAnchor.constraint(equalToConstant: 83)
-                        ])
-                        $0.cv.tapGesture()
-                            .sink { [weak self] _ in
-                                self?.connectTipsView.isHidden = true
-                                self?.userSettings.connectTipsDidShown = true
-                            }
-                            .store(in: &self.disposeBag)
-                    }
-            }
         }
         vStack.setCustomSpacing(25, after: hStack1)
-        vStack.setCustomSpacing(26, after: titleLabel)
+        vStack.setCustomSpacing(12, after: titleLabel)
+        vStack.setCustomSpacing(24, after: connectTipsLabel)
+        
         view.withSubViews {
             vStack
         }
         
         NSLayoutConstraint.activate([
-            vStack.topAnchor.constraint(equalTo: view.topAnchor, constant: 26),
-            vStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
-            vStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
+            vStack.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            vStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstraints.leading),
+            vStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -LayoutConstraints.trailing),
             vStack.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -22)
         ])
     }

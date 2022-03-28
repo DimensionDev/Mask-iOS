@@ -6,7 +6,7 @@
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const bignumber_js_1 = __webpack_require__(6146);
+const bignumber_js_1 = __webpack_require__(42895);
 class Ar {
     constructor() {
         // Configure and assign the constructor function for the bignumber library.

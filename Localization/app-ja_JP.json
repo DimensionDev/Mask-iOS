@@ -113,6 +113,10 @@
                 "title": "",
                 "description": ""
             },
+            "download_identity_code": {
+                "title": "",
+                "description": ""
+            },
             "backup_tips_no_backup_password": {
                 "title": "",
                 "description": ""
@@ -162,6 +166,9 @@
             "download": "",
             "skip": "",
             "download_next": ""
+        },
+        "toast": {
+            "saved": ""
         },
         "loading": ""
     },
@@ -526,9 +533,6 @@
             "add": ""
         },
         "persona_download": {
-            "persona": "",
-            "mask_id": "",
-            "private_key": "",
             "identity_id": "",
             "download_tips": ""
         },
@@ -740,6 +744,7 @@
             "scan_q_r_code": "",
             "qr_code_tips": "",
             "tap_to_copy": "",
+            "no_wallets": "",
             "connecting": "",
             "connect_success": "",
             "scan": "",

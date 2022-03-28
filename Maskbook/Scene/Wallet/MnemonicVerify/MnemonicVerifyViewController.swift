@@ -193,7 +193,7 @@ extension MnemonicVerifyViewController {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 22.5, bottom: 32, right: 22.5)
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: LayoutConstraints.leading, bottom: 32, right: LayoutConstraints.trailing)
         stackView.spacing = 24
         stackView.distribution = .fill
         view.addSubview(stackView)

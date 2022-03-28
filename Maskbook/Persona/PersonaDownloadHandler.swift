@@ -23,6 +23,9 @@ class PersonaDownloadHandler: NSObject {
     
     @InjectedProvider(\.personaManager)
     var personaManager
+    
+    @InjectedProvider(\.mainCoordinator)
+    private var coordinator
 
     init(mnemonic: [String]) {
         self.personaMnemonic = mnemonic
@@ -126,10 +129,13 @@ extension PersonaDownloadHandler: UIDocumentPickerDelegate {
         defer {
             url.stopAccessingSecurityScopedResource()
         }
+        guard BackupFolderCheckService.checkAndAlert(url) else {
+            return
+        }
         var name: String
         if let personaIdentifier = personaIdentifier {
             name = PersonaManager.personaFor(identifier: personaIdentifier)?.nickname ?? ""
-        } else if self.personaMnemonic != nil {
+        } else if personaMnemonic != nil {
             name = personaManager.temporaryPersonaName ?? ""
         } else {
             name = ""
@@ -137,6 +143,12 @@ extension PersonaDownloadHandler: UIDocumentPickerDelegate {
         let fileName = "mask-persona-" + name + ".pdf"
         let pdfURL = url.appendingPathComponent(fileName)
         log.debug("write pdf to path \(pdfURL.absoluteString)", source: "persona")
-        pdfDocument?.write(to: pdfURL)
+        guard let pdfDocument = pdfDocument else { return }
+        let success = pdfDocument.write(to: pdfURL)
+        if success {
+            UIApplication.getTopViewController()?
+                .makeToast(message: L10n.Common.Toast.saved ,
+                           image: Asset.Images.Toast.check.image)
+        }
     }
 }

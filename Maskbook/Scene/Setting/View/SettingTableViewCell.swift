@@ -121,7 +121,7 @@ extension SettingTableViewCell {
         
         contentView.addSubview(roundBackgroundView)
         roundBackgroundView.snp.makeConstraints { make in
-            make.edges.equalTo(UIEdgeInsets(vertical: 0, horizontal: 22))
+            make.edges.equalTo(UIEdgeInsets(vertical: 0, horizontal: LayoutConstraints.horizontal))
         }
         
         let stackView = UIStackView()
@@ -130,7 +130,7 @@ extension SettingTableViewCell {
         stackView.alignment = .center
         stackView.spacing = 8
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 12, left: 22 + 12, bottom: 12, right: 22 + 22)
+        stackView.layoutMargins = UIEdgeInsets(top: 12, left: LayoutConstraints.leading + 12, bottom: 12, right: LayoutConstraints.trailing + 22)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(stackView)
         

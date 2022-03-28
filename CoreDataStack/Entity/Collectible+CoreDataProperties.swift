@@ -41,6 +41,7 @@ extension Collectible {
     @NSManaged public var collectionName: String?
     @NSManaged public var collectionImage: String?
     @NSManaged public var collectionSlug: String?
+    @NSManaged public var collectionWebsite: URL?
     @NSManaged public var enabled: Bool
 }
 

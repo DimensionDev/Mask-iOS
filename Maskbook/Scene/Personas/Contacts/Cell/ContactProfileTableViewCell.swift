@@ -8,6 +8,7 @@
 
 import UIKit
 import UStack
+import CoreDataStack
 
 class ContactProfileTableViewCell: UITableViewCell {
     private var avatarView: AvatarView = {
@@ -112,19 +113,18 @@ class ContactProfileTableViewCell: UITableViewCell {
         super.prepareForReuse()
     }
     
-    func config(profile: Profile) {
+    func config(profile: ProfileRecord) {
         socialIDLabel.text = profile.socialID
-        avatarView.title = profile.nickname ?? profile.identifier.components(separatedBy: "/").last
+        avatarView.title = profile.nickname ?? profile.nonOptionalIdentifier.components(separatedBy: "/").last
+        avatarView.setNetworkURL(url: profile.avatar)
         platformIcon.image = profile.socialPlatform.icon
         if profile.linkedPersona != nil {
             inviteButton.isHidden = true
-            platformIcon.isHidden = false
             nicknameLabel.text = profile.nickname
                 ?? profile.socialID
             maskIcon.isHidden = false
         } else {
             inviteButton.isHidden = false
-            platformIcon.isHidden = true
             nicknameLabel.text = profile.nickname
                 ?? profile.socialID
             maskIcon.isHidden = true
@@ -163,8 +163,8 @@ class ContactProfileTableViewCell: UITableViewCell {
         }
         NSLayoutConstraint.activate([
             hStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            hStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 22.5),
-            hStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -22.5),
+            hStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstraints.leading),
+            hStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutConstraints.trailing),
             hStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
         ])
     }

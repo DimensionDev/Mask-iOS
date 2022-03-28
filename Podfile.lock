@@ -141,7 +141,6 @@ PODS:
   - SwiftMsgPack (1.2.0)
   - SwiftProtobuf (1.18.0)
   - SwiftyJSON (5.0.1)
-  - "UITextField+Shake (1.2.1)"
   - UStack (2.2.1)
   - WalletConnectSwift (1.6.0):
     - CryptoSwift (~> 1.4)
@@ -192,11 +191,10 @@ DEPENDENCIES:
   - SwiftGen (~> 6.4.0)
   - SwiftLint (= 0.43.1)
   - SwiftMsgPack (from `https://github.com/malcommac/SwiftMsgPack.git`, branch `develop`)
-  - "UITextField+Shake (~> 1.2)"
   - UStack (~> 2.2.1)
   - WalletConnectSwift (from `https://github.com/DimensionDev/WalletConnectSwift.git`)
   - web3swift (from `https://github.com/DimensionDev/web3swift.git`)
-  - WebExtension-Shim (from `https://github.com/DimensionDev/WebExtension-Shim-iOS.git`, branch `dev/2.0`)
+  - WebExtension-Shim (from `https://github.com/DimensionDev/WebExtension-Shim-iOS.git`, tag `2.0`)
   - ZIPFoundation (~> 0.9)
 
 SPEC REPOS:
@@ -237,7 +235,6 @@ SPEC REPOS:
     - SwiftLint
     - SwiftProtobuf
     - SwiftyJSON
-    - "UITextField+Shake"
     - UStack
     - ZIPFoundation
 
@@ -258,8 +255,8 @@ EXTERNAL SOURCES:
   web3swift:
     :git: https://github.com/DimensionDev/web3swift.git
   WebExtension-Shim:
-    :branch: dev/2.0
     :git: https://github.com/DimensionDev/WebExtension-Shim-iOS.git
+    :tag: '2.0'
 
 CHECKOUT OPTIONS:
   SwiftMsgPack:
@@ -272,8 +269,8 @@ CHECKOUT OPTIONS:
     :commit: 229489fe14ef57c48a51c6205d39f8820f5e3f6a
     :git: https://github.com/DimensionDev/web3swift.git
   WebExtension-Shim:
-    :commit: 3a7edff4decdef34dcdcd9d0457e7cf830759d63
     :git: https://github.com/DimensionDev/WebExtension-Shim-iOS.git
+    :tag: '2.0'
 
 SPEC CHECKSUMS:
   Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
@@ -317,13 +314,12 @@ SPEC CHECKSUMS:
   SwiftMsgPack: 22fb26bb7c544075fdfba2badde0394898a8b775
   SwiftProtobuf: c3c12645230d9b09c72267e0de89468c5543bd86
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
-  "UITextField+Shake": 298ac5a0f239d731bdab999b19b628c956ca0ac3
   UStack: b406daaf569d798bd11fee94d06dadcdbcf2d295
   WalletConnectSwift: 1fbff8f5315bd8d41596773ca1b384aa873b6824
   web3swift: 22ac889fe28306c5d79704711f20b5ed4b21ba5e
   WebExtension-Shim: 11b071466c53f42097291eb176cf9bcc5fb9b050
   ZIPFoundation: ae5b4b813d216d3bf0a148773267fff14bd51d37
 
-PODFILE CHECKSUM: 737f4fa382e1c0141546a6a8ac684b05c35aba79
+PODFILE CHECKSUM: 849df65d8bbc19a1c205fe86972d43f9b7e072d8
 
 COCOAPODS: 1.11.2

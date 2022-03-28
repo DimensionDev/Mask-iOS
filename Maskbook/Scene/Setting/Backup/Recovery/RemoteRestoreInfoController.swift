@@ -90,29 +90,30 @@ final class RemoteRestoreInfoController: BaseViewController {
         case .loaded:
             self.loadingController.stopAnimation()
             
-        case .restored:
+        case let .restored(data):
             self.loadingController.stopAnimation()
-            Alert(items: {
-                AlertItem.image(.success)
-                AlertItem.contentText(
-                    NSAttributedString(
-                        string: L10n.Scene.IdentityRestoreSigninSuccess.title,
-                        attributes: [
-                            .font: FontStyles.BH4,
-                            .foregroundColor: Asset.Colors.Text.dark.color
-                        ]
-                    )
-                )
-                AlertItem.doneAction(
-                    .init(
-                        title: L10n.Common.Controls.done,
-                        action: { [weak self] in
-                            self?.login()
-                        }
-                    )
-                )
-            })
-            .show()
+            coordinator.present(scene: .localRestoreEncryptBackup(data, destination: .setting), transition: .detail(), completion: nil)
+//            Alert {
+//                ImageItem(.success)
+//                ContentTextItem(
+//                    NSAttributedString(
+//                        string: L10n.Scene.IdentityRestoreSigninSuccess.title,
+//                        attributes: [
+//                            .font: FontStyles.BH4,
+//                            .foregroundColor: Asset.Colors.Text.dark.color
+//                        ]
+//                    )
+//                )
+//                DoneActionItem(
+//                    .init(
+//                        title: L10n.Common.Controls.done,
+//                        action: { [weak self] in
+//                            self?.login()
+//                        }
+//                    )
+//                )
+//            }
+//            .show()
             
         case .restoreFailure:
             self.loadingController.stopAnimation()
@@ -122,9 +123,9 @@ final class RemoteRestoreInfoController: BaseViewController {
 
         case .retryLoadRestoreInfo:
             self.loadingController.stopAnimation()
-            Alert(items: {
-                AlertItem.image(.error)
-                AlertItem.tipWith(
+            Alert {
+                ImageItem(.error)
+                WithTipItem(
                     title: L10n.Scene.Restore.Titles.loadingFailed,
                     detail: NSAttributedString(
                         string: L10n.Scene.Restore.Tip.dataFailedToFetch,
@@ -134,21 +135,21 @@ final class RemoteRestoreInfoController: BaseViewController {
                         ]
                     )
                 )
-                AlertItem.cancelAndConfirm(
+                CancelAndConfirmItem(
                     cancel: .init(title: L10n.Common.Controls.cancel),
                     confirm: .init(
                         title: L10n.Common.Controls.tryAgain,
                         action: { [weak self] in self?.viewModel.loadRemoteData() }
                     )
                 )
-            })
+            }
             .show()
 
         case .retryLoadRestoreFile:
             self.loadingController.stopAnimation()
-            Alert(items: {
-                AlertItem.image(.error)
-                AlertItem.contentText(
+            Alert {
+                ImageItem(.error)
+                ContentTextItem(
                     NSAttributedString(
                         string: L10n.Scene.Restore.Tip.dataFailedToFetch,
                         attributes: [
@@ -157,7 +158,7 @@ final class RemoteRestoreInfoController: BaseViewController {
                         ]
                     )
                 )
-                AlertItem.doneAction(
+                DoneActionItem(
                     .init(
                         title: L10n.Common.Controls.tryAgain,
                         action: { [weak self] in
@@ -165,7 +166,7 @@ final class RemoteRestoreInfoController: BaseViewController {
                         }
                     )
                 )
-            })
+            }
             .show()
         }
     }
@@ -189,17 +190,17 @@ final class RemoteRestoreInfoController: BaseViewController {
         finalTip.append(restoeSucceedTip)
         finalTip.append(syncPasswordTip)
 
-        Alert(items: {
-            AlertItem.image(.success)
-            AlertItem.contentText(
+        Alert {
+            ImageItem(.success)
+            ContentTextItem(
                 finalTip,
                 alignment: .left
             )
-            AlertItem.cancelAndConfirm(
+            CancelAndConfirmItem(
                 cancel: .init(title: L10n.Common.Controls.cancel, action: { [weak self] in self?.login() }),
                 confirm: .init(title: L10n.Common.Controls.confirm, action: { [weak self] in self?.syncPasswordAndLogin() })
             )
-        })
+        }
         .show()
     }
     

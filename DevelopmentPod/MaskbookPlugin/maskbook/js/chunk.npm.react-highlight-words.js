@@ -1,6 +1,6 @@
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[2245],{
 
-/***/ 87624:
+/***/ 13864:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 module.exports =
@@ -1673,7 +1673,7 @@ module.exports =
 /* 14 */
 /***/ (function(module, exports) {
 
-	module.exports = __webpack_require__(76342);
+	module.exports = __webpack_require__(63423);
 
 /***/ }),
 /* 15 */

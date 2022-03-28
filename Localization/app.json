@@ -1,6 +1,6 @@
 {
     "tab": {
-        "personas": "Personas",
+        "personas": "Persona",
         "wallet": "Wallet",
         "labs": "Labs",
         "setting": "Setting"
@@ -71,20 +71,13 @@
             "change_backup_password_failed": {
                 "title": "Backup Password changed failed!"
             },
-            "wallet_backup": {
-                "title": "Copied!"
-            },
-            "identity_phrase": {
-                "title": "Identity Phrase",
-                "description": "Your identity phrase is composed of randomly selected words. Please carefully write down each word in the order it appears."
-            },
             "identify_code_screenshot_warning": {
                 "title": "Warning",
                 "description": "Simply taking a screenshot of identity code is not safe."
             },
-            "identity_create": {
-                "title": "Identity created!",
-                "description": "Please don’t forget your identity code. Your identity code is the only proof of your user identity and the only basis for you to encrypt or decrypt social activities. "
+            "persona_create": {
+                "title": "Successful ",
+                "description": "You have successfully created your persona %s. "
             },
             "persona_logout": {
                 "title": "Confirm to log out?",
@@ -113,6 +106,10 @@
                 "title": "Set up backup password ",
                 "description": "Please set up your %s before you export private key. "
             },
+            "download_identity_code": {
+                "title": "Set up backup password ",
+                "description": "Please set up your %s before you download persona QR code. "
+            },
             "backup_tips_no_backup_password": {
                 "title": " Set up backup password",
                 "description": "Please set up your %s before you back up."
@@ -128,6 +125,14 @@
             "scan_persona_exist": {
                 "title": "The persona already existed.",
                 "description": "The persona that corresponds with the QR code already existed."
+            },
+            "wrong_folder": {
+                "title": "Please select another folder",
+                "description": "When you delete Mask App, the Mask Network sandbox folder would also be deleted. For data security, please save to a more secure folder (non-sandbox)."
+            },
+            "backup_popup_binding_first": {
+                "title": "Bind your email or phone",
+                "description": "Please bind your email or phone number before you back up to cloud."
             }
         },
         "controls": {
@@ -161,11 +166,28 @@
             "edit": "Edit",
             "download": "download",
             "skip": "Skip, download later",
-            "download_next": "I downloaded, next"
+            "download_next": "I downloaded, next",
+            "select_from_photo": "Select from photos",
+            "take_photo": "Take a photo",
+            "save": "Save",
+            "move_data_now": "Move data now",
+            "remind_me_later": "Remind me later"
+        },
+        "toast": {
+            "saved": "Saved!",
+            "copy": "copied!"
         },
         "loading": "Loading..."
     },
     "scene": {
+        "guide": {
+            "skip": "Skip",
+            "lets_start": "Let’s start",
+            "description1": "Your Portal to the New,\nOpen Internet",
+            "description2": "Send Encrypted Messages\non Social Networks with Persona",
+            "description3": "Multi-Chain Wallet,\nCompatible with WalletConnect",
+            "description4": "Back up in Time,\nwith Cloud / Local Backup"
+        },
         "terms_of_service": {
             "title": "Legal",
             "description": "Please review the Privacy Policy and Terms of Service of Mask Network.",
@@ -402,7 +424,10 @@
          "NFT_Detail": {
             "list_price": "List Price",
             "last_sale_Price": "Last Sale Price",
-            "floor_price": "Floor Price"
+            "floor_price": "Floor Price",
+            "save_photo":"Save to Photos",
+            "collection_web":"View Collection Website",
+            "etherscan":"View on Etherscan"
         },
         "sendTransaction":{
             "send":{
@@ -415,7 +440,10 @@
         	    "Label_Password":"Password",
                 "btn_withoutPassword":"Hold to Send",
                 "amount_error":"Insufficient amount.",
-                "password_error":"Incorrect payment password."
+                "password_error":"Incorrect payment password.",
+                "gasFee_error": "Insufficient gas balance.",
+                "contact":"Contacts",
+                "recent":"Recent"
         	},
         	"addContact":{
         		"btn_add":"Add Contact",
@@ -475,7 +503,7 @@
             "password_demand": "Payment Password must be a combination of 2 categories out of numbers, letters and special characters with a length of 8-20 characters."
         },
         "personas": {
-            "personas": "Personas",
+            "personas": "Persona",
             "tabs": {
                 "social": "Social",
                 "post": "Post",
@@ -486,7 +514,7 @@
                 "change_add_persona": "Change or Add Persona",
                 "rename": "Rename",
                 "export_private_key": "Export Private Key",
-                "download": "Download Mnemonic",
+                "download": "Download Persona QR Code",
                 "backup": "Back Up",
                 "log_out": "Log Out",
                 "delete": "Delete"
@@ -495,6 +523,9 @@
                 "persona": "Persona",
                 "create_persona": "Create Persona",
                 "input_persona_name": "Input persona name"
+            },
+            "search": {
+                "placeholder": "Search"
             },
             "delete": "Confirm to delete persona\n",
             "delete_tip": "If you haven’t backed up, please go to Settings - Backup and Recovery",
@@ -523,15 +554,17 @@
             "disconnect": "Disconnect",
             "connect_social_accounts": "Connect Social accounts",
             "accounts": "Accounts",
-            "connect_tips": "Select the social account to connect your persona. Enjoy a web 3.0 social expereince.",
-            "add": "add"
+            "connect_tips": "Connect persona to social networks below",
+            "add": "Add"
         },
         "persona_download": {
-            "persona": "Persona:",
-            "mask_id": "MASK ID",
-            "private_key": "Private Key",
-            "identity_id": "Identity ID",
-            "download_tips": "This QR saves your identity code, please keep it safely. You can use Mask APP to scan QR to login persona. "
+            "identity_id": "Identity Code",
+            "download_tips": "The QR code encrypts the identity code or private key of your persona. It’s recommended to print it. You can use Mask App to scan the QR code to login."
+        },
+        "persona_avatar": {
+            "title": "Set Persona Avatar",
+            "crop": "Crop & rotate",
+            "remove_avatar": "Remove Persona Avatar"
         },
         "wallet_balance": {
             "btn_swap": "Swap",
@@ -741,6 +774,7 @@
             "scan_q_r_code": "Scan QR Code",
             "qr_code_tips": "Use a WalletConnect compatiable wallet\nto scan the QR Code",
             "tap_to_copy": "Tap to copy to clipboard",
+            "no_wallets": "You haven’t installed any available %s wallets for walletConnect",
             "connecting": "Connecting...",
             "connect_success": "Wallet Successfully Connected to Mask Network",
             "scan": "Scan the QR code",
@@ -805,25 +839,32 @@
             "empty": "Empty",
             "share_message_official": "I just claimed a lucky drop from %s on %s network. Follow %s (mask.io) to claim lucky drops.\n#mask_io #LuckyDrop\n%s",
             "share_message_unsupport_platform": "I just claimed a lucky drop from @%s on %s network. \n%s"
+        },
+        "move_backup_data": {
+            "title": "Please move your data",
+            "description1": "We have detected that there are probably important backup documents(.pdf, .bin) in your Mask Network Sandbox Folder.",
+            "description2": "When you delete Mask App, these documents would also be deleted.",
+            "description3": "For data safety, please move your data to a more secure folder."
+            
         }
     },
     "chain": {
         "short_name": {
             "eth": "ETH",
-            "bsc": "BSC",
+            "bsc": "BNB",
             "dot": "DOT",
             "polygon": "Polygon",
             "arbitrum": "Arbitrum",
-            "xdai": "xDai",
+            "xdai": "Gnosis",
             "optimism": "Optimism"
         },
         "name": {
             "eth": "Ethereum",
-            "bsc": "Binance smart chain",
+            "bsc": "BNB Chain",
             "dot": "Polkadot",
             "polygon": "Polygon/Matic Network",
             "arbitrum": "Arbitrum",
-            "xdai": "xDai",
+            "xdai": "Gnosis",
             "optimism": "Optimism"
         }
     }

@@ -113,6 +113,10 @@
                 "title": "",
                 "description": ""
             },
+            "download_identity_code": {
+                "title": "",
+                "description": ""
+            },
             "backup_tips_no_backup_password": {
                 "title": "",
                 "description": ""
@@ -162,6 +166,9 @@
             "download": "",
             "skip": "",
             "download_next": ""
+        },
+        "toast": {
+            "saved": ""
         },
         "loading": "로딩 중"
     },
@@ -526,9 +533,6 @@
             "add": ""
         },
         "persona_download": {
-            "persona": "",
-            "mask_id": "",
-            "private_key": "",
             "identity_id": "",
             "download_tips": ""
         },
@@ -740,6 +744,7 @@
             "scan_q_r_code": "QR 코드 스캔",
             "qr_code_tips": "WalletConnect와 호환성이 있는 월렛을 사용하여 QR 코드 스캔하세요.",
             "tap_to_copy": "탭하여 텍스트를 클립보드로 복사",
+            "no_wallets": "",
             "connecting": "연결 중…",
             "connect_success": "월렛은 Mask Network에 성공적으로 연결되었습니다",
             "scan": "QR코드 스캔",

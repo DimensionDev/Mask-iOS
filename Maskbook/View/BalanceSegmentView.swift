@@ -21,7 +21,7 @@ final class BalanceSegmentView: UIView {
     
     let selectedIndex = CurrentValueSubject<Int, Never>(0)
     
-    let maskTintColor = Asset.Colors.Public.blue.color
+    let maskTintColor = Asset.Colors.Text.dark.color
     
     var indicatorLeading: NSLayoutConstraint!
     
@@ -49,7 +49,7 @@ extension BalanceSegmentView {
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
         stackView.alignment = .top
-        stackView.spacing = 16
+        stackView.spacing = 24
         addSubview(stackView)
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor),
@@ -68,7 +68,7 @@ extension BalanceSegmentView {
         NSLayoutConstraint.activate([
             indicatorView.heightAnchor.constraint(equalToConstant: 3),
             indicatorView.widthAnchor.constraint(equalToConstant: 18),
-            indicatorView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -1.5),
+            indicatorView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5.5),
             indicatorLeading
         ])
     }
@@ -88,10 +88,11 @@ extension BalanceSegmentView {
             ])
             clickView.addSubview(label)
             NSLayoutConstraint.activate([
-                label.topAnchor.constraint(equalTo: clickView.topAnchor),
+                label.topAnchor.constraint(equalTo: clickView.topAnchor,
+                                           constant: 5.5),
                 label.leadingAnchor.constraint(equalTo: clickView.leadingAnchor),
                 label.trailingAnchor.constraint(equalTo: clickView.trailingAnchor),
-                label.heightAnchor.constraint(equalToConstant: 24)
+                label.heightAnchor.constraint(equalToConstant: 22)
             ])
             
             clickView.gesture()
@@ -110,13 +111,13 @@ extension BalanceSegmentView {
     func selectedIndex(index: Int, animated: Bool) {
         for (_index, label) in labels.enumerated() {
             if _index == index {
-                label.font = FontStyles.BH5
+                label.font = FontStyles.BH4
                 label.textColor = maskTintColor
                 indicatorLeading.isActive = false
                 indicatorLeading = self.indicatorView.centerXAnchor.constraint(equalTo: label.centerXAnchor)
                 indicatorLeading.isActive = true
             } else {
-                label.font = FontStyles.BH6
+                label.font = FontStyles.MH5
                 label.textColor = Asset.Colors.Text.normal.color
             }
             if animated {

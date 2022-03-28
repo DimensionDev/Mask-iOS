@@ -91,7 +91,7 @@ extension SetPasswordViewController {
     func setupSubviews() {
         stackView.axis = .vertical
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 22, bottom: 24, right: 22)
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: LayoutConstraints.leading, bottom: 24, right: LayoutConstraints.trailing)
         stackView.spacing = 8
         stackView.distribution = .fill
         

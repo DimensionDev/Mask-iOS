@@ -24,6 +24,8 @@ class Coordinator {
     @InjectedProvider(\.userDefaultSettings)
     private var settings
     
+    private var window: UIWindow?
+    
     enum FromEdge {
         case bottom
     }
@@ -65,6 +67,9 @@ class Coordinator {
         case welcome
         case mainTab(selectedTab: MainTabBarController.Tab)
         case persona
+        case personaAvatar
+        case cropImage(image: UIImage)
+        case guide
         case termsOfService(walletStartType: WalletStartType)
         case biometryRecognition(walletStartType: WalletStartType)
         case mnemonicWord(name: String?)
@@ -119,6 +124,7 @@ class Coordinator {
         case personaExportPrivateKey(personaIdentifier: String)
         case tokenDetail(token: MaskToken)
         case nftDetail(nftToken: Collectible)
+        case nftAction(nftToken: Collectible)
         case walletHistory
         case safariView(url: URL)
         case setPassword
@@ -185,21 +191,50 @@ class Coordinator {
             claimedAmount: BigUInt?,
             shareActionDelegate: RedPacketShareDelegate?
         )
+        case moveBackupData
         case debug
     }
 
     func setup(window: UIWindow) {
+        self.window = window
+        
+        guard settings.hasShownGuide else {
+            settings.hasShownGuide = true
+            showGuide(window: window)
+            return
+        }
+        
         let maskSocialVC = MaskSocialViewController(socialPlatform: settings.currentProfileSocialPlatform)
-        let naviVC = UINavigationController(rootViewController: maskSocialVC)
+        let naviVC = NavigationController(rootViewController: maskSocialVC)
         window.rootViewController = naviVC
         window.makeKeyAndVisible()
         
         present(scene: .mainTab(selectedTab: .personas), transition: .modal(animated: false, adaptiveDelegate: maskSocialVC))
         
-        let welcomeVC = WelcomeViewController()
-        welcomeVC.modalPresentationStyle = .fullScreen
-        welcomeVC.modalPresentationCapturesStatusBarAppearance = true
-        UIApplication.getTopViewController()?.present(welcomeVC, animated: false, completion: nil)
+        if !settings.hasShownGuide {
+            settings.hasShownGuide = true
+            present(scene: .guide, transition: .modal(animated: false, adaptiveDelegate: maskSocialVC))
+        }
+        
+        // If all data (legacy wallets info and indexedDB data) has migrated to
+        // native side, we do not need to wait for the extension JS scripts to
+        // finish executing
+        let needToWaitExtensionFinishLoaded =
+        !settings.legacyWalletsImported || !settings.indexedDBDataMigrated
+        if needToWaitExtensionFinishLoaded {
+            let welcomeVC = WelcomeViewController()
+            welcomeVC.modalPresentationStyle = .fullScreen
+            welcomeVC.modalPresentationCapturesStatusBarAppearance = true
+            UIApplication.getTopViewController()?.present(welcomeVC, animated: false, completion: nil)
+        }
+    }
+    
+    private func showGuide(window: UIWindow) {
+        let guideVC = MaskHostViewController(rootView: GuideView() { [weak self] in
+            self?.setup(window: window)
+        })
+        window.rootViewController = guideVC
+        window.makeKeyAndVisible()
     }
 
     // swiftlint:disable cyclomatic_complexity
@@ -245,6 +280,7 @@ class Coordinator {
 
             case let .modal(animated, delegate):
                 vc.presentationController?.delegate = delegate
+                vc.modalPresentationCapturesStatusBarAppearance = true
                 presentVC.present(vc, animated: animated, completion: completion)
 
             case let .alertController(completion):
@@ -313,7 +349,22 @@ extension Coordinator {
         
         case .persona:
             return PersonasViewController()
+            
+        case .personaAvatar:
+            return PersonaAvatarViewController()
 
+        case let .cropImage(image):
+            return CropImageViewController(image: image)
+            
+        case .guide:
+            return MaskHostViewController(rootView: GuideView() { [weak self] in
+                guard let window = self?.window else {
+                    assert(false, "GuideView can't be dismissed if window is nil.")
+                    return
+                }
+                self?.setup(window: window)
+            })
+            
         case let .termsOfService(walletStartType):
             let termsOfServiceViewController = TermsOfServiceViewController(walletStartType: walletStartType)
             return termsOfServiceViewController
@@ -494,7 +545,7 @@ extension Coordinator {
         case .personaList:
             return PersonaListViewController()
 
-        case let .personaWelcome:
+        case .personaWelcome:
             let viewController = PersonaWelcomeViewController()
             return viewController
 
@@ -511,6 +562,10 @@ extension Coordinator {
             let viewController = NFTDetailViewController(nftTokenModel: token)
             return viewController
 
+        case let .nftAction(token):
+            let viewController = NFTActionViewController(nftTokenModel: token)
+            return viewController
+            
         case .walletHistory:
             return WalletHistoryViewController()
             
@@ -605,7 +660,7 @@ extension Coordinator {
             
         case let .maskSocial(socialPlatform):
             let maskSocialVC = MaskSocialViewController(socialPlatform: socialPlatform)
-            let naviVC = UINavigationController(rootViewController: maskSocialVC)
+            let naviVC = NavigationController(rootViewController: maskSocialVC)
             return naviVC
             
         case let .maskConnectingSocial(socialPlatform, personaIdentifier):
@@ -708,6 +763,9 @@ extension Coordinator {
                 shareDelegate: shareActionDelegate
             )
         
+        case .moveBackupData:
+            return MoveBackupDataViewController()
+            
         case .debug:
             return UIHostingController(rootView: DebugView())
         }

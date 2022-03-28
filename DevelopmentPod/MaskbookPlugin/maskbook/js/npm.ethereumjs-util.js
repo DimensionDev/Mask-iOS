@@ -2747,6 +2747,1776 @@ var toPublicKey = function toPublicKey(x, y, compressed) {
 
 /***/ }),
 
+/***/ 60692:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.importPublic = exports.privateToPublic = exports.privateToAddress = exports.publicToAddress = exports.pubToAddress = exports.isValidPublic = exports.isValidPrivate = exports.isPrecompiled = exports.generateAddress2 = exports.generateAddress = exports.isValidChecksumAddress = exports.toChecksumAddress = exports.isZeroAddress = exports.isValidAddress = exports.zeroAddress = void 0;
+var assert = __webpack_require__(57579);
+var ethjsUtil = __webpack_require__(45479);
+var secp256k1 = __webpack_require__(16001);
+var BN = __webpack_require__(28891);
+var bytes_1 = __webpack_require__(97119);
+var hash_1 = __webpack_require__(60073);
+/**
+ * Returns a zero address.
+ */
+exports.zeroAddress = function () {
+    var addressLength = 20;
+    var addr = bytes_1.zeros(addressLength);
+    return bytes_1.bufferToHex(addr);
+};
+/**
+ * Checks if the address is a valid. Accepts checksummed addresses too.
+ */
+exports.isValidAddress = function (address) {
+    return /^0x[0-9a-fA-F]{40}$/.test(address);
+};
+/**
+ * Checks if a given address is a zero address.
+ */
+exports.isZeroAddress = function (address) {
+    var zeroAddr = exports.zeroAddress();
+    return zeroAddr === bytes_1.addHexPrefix(address);
+};
+/**
+ * Returns a checksummed address.
+ *
+ * If a eip1191ChainId is provided, the chainId will be included in the checksum calculation. This
+ * has the effect of checksummed addresses for one chain having invalid checksums for others.
+ * For more details, consult EIP-1191.
+ *
+ * WARNING: Checksums with and without the chainId will differ. As of 2019-06-26, the most commonly
+ * used variation in Ethereum was without the chainId. This may change in the future.
+ */
+exports.toChecksumAddress = function (address, eip1191ChainId) {
+    address = ethjsUtil.stripHexPrefix(address).toLowerCase();
+    var prefix = eip1191ChainId !== undefined ? eip1191ChainId.toString() + '0x' : '';
+    var hash = hash_1.keccak(prefix + address).toString('hex');
+    var ret = '0x';
+    for (var i = 0; i < address.length; i++) {
+        if (parseInt(hash[i], 16) >= 8) {
+            ret += address[i].toUpperCase();
+        }
+        else {
+            ret += address[i];
+        }
+    }
+    return ret;
+};
+/**
+ * Checks if the address is a valid checksummed address.
+ *
+ * See toChecksumAddress' documentation for details about the eip1191ChainId parameter.
+ */
+exports.isValidChecksumAddress = function (address, eip1191ChainId) {
+    return exports.isValidAddress(address) && exports.toChecksumAddress(address, eip1191ChainId) === address;
+};
+/**
+ * Generates an address of a newly created contract.
+ * @param from The address which is creating this new address
+ * @param nonce The nonce of the from account
+ */
+exports.generateAddress = function (from, nonce) {
+    from = bytes_1.toBuffer(from);
+    var nonceBN = new BN(nonce);
+    if (nonceBN.isZero()) {
+        // in RLP we want to encode null in the case of zero nonce
+        // read the RLP documentation for an answer if you dare
+        return hash_1.rlphash([from, null]).slice(-20);
+    }
+    // Only take the lower 160bits of the hash
+    return hash_1.rlphash([from, Buffer.from(nonceBN.toArray())]).slice(-20);
+};
+/**
+ * Generates an address for a contract created using CREATE2.
+ * @param from The address which is creating this new address
+ * @param salt A salt
+ * @param initCode The init code of the contract being created
+ */
+exports.generateAddress2 = function (from, salt, initCode) {
+    var fromBuf = bytes_1.toBuffer(from);
+    var saltBuf = bytes_1.toBuffer(salt);
+    var initCodeBuf = bytes_1.toBuffer(initCode);
+    assert(fromBuf.length === 20);
+    assert(saltBuf.length === 32);
+    var address = hash_1.keccak256(Buffer.concat([Buffer.from('ff', 'hex'), fromBuf, saltBuf, hash_1.keccak256(initCodeBuf)]));
+    return address.slice(-20);
+};
+/**
+ * Returns true if the supplied address belongs to a precompiled account (Byzantium).
+ */
+exports.isPrecompiled = function (address) {
+    var a = bytes_1.unpad(address);
+    return a.length === 1 && a[0] >= 1 && a[0] <= 8;
+};
+/**
+ * Checks if the private key satisfies the rules of the curve secp256k1.
+ */
+exports.isValidPrivate = function (privateKey) {
+    return secp256k1.privateKeyVerify(privateKey);
+};
+/**
+ * Checks if the public key satisfies the rules of the curve secp256k1
+ * and the requirements of Ethereum.
+ * @param publicKey The two points of an uncompressed key, unless sanitize is enabled
+ * @param sanitize Accept public keys in other formats
+ */
+exports.isValidPublic = function (publicKey, sanitize) {
+    if (sanitize === void 0) { sanitize = false; }
+    if (publicKey.length === 64) {
+        // Convert to SEC1 for secp256k1
+        return secp256k1.publicKeyVerify(Buffer.concat([Buffer.from([4]), publicKey]));
+    }
+    if (!sanitize) {
+        return false;
+    }
+    return secp256k1.publicKeyVerify(publicKey);
+};
+/**
+ * Returns the ethereum address of a given public key.
+ * Accepts "Ethereum public keys" and SEC1 encoded keys.
+ * @param pubKey The two points of an uncompressed key, unless sanitize is enabled
+ * @param sanitize Accept public keys in other formats
+ */
+exports.pubToAddress = function (pubKey, sanitize) {
+    if (sanitize === void 0) { sanitize = false; }
+    pubKey = bytes_1.toBuffer(pubKey);
+    if (sanitize && pubKey.length !== 64) {
+        pubKey = secp256k1.publicKeyConvert(pubKey, false).slice(1);
+    }
+    assert(pubKey.length === 64);
+    // Only take the lower 160bits of the hash
+    return hash_1.keccak(pubKey).slice(-20);
+};
+exports.publicToAddress = exports.pubToAddress;
+/**
+ * Returns the ethereum address of a given private key.
+ * @param privateKey A private key must be 256 bits wide
+ */
+exports.privateToAddress = function (privateKey) {
+    return exports.publicToAddress(exports.privateToPublic(privateKey));
+};
+/**
+ * Returns the ethereum public key of a given private key.
+ * @param privateKey A private key must be 256 bits wide
+ */
+exports.privateToPublic = function (privateKey) {
+    privateKey = bytes_1.toBuffer(privateKey);
+    // skip the type flag and use the X, Y points
+    return secp256k1.publicKeyCreate(privateKey, false).slice(1);
+};
+/**
+ * Converts a public key to the Ethereum format.
+ */
+exports.importPublic = function (publicKey) {
+    publicKey = bytes_1.toBuffer(publicKey);
+    if (publicKey.length !== 64) {
+        publicKey = secp256k1.publicKeyConvert(publicKey, false).slice(1);
+    }
+    return publicKey;
+};
+//# sourceMappingURL=account.js.map
+
+/***/ }),
+
+/***/ 97119:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.baToJSON = exports.addHexPrefix = exports.toUnsigned = exports.fromSigned = exports.bufferToHex = exports.bufferToInt = exports.toBuffer = exports.stripZeros = exports.unpad = exports.setLengthRight = exports.setLength = exports.setLengthLeft = exports.zeros = void 0;
+var ethjsUtil = __webpack_require__(45479);
+var BN = __webpack_require__(28891);
+/**
+ * Returns a buffer filled with 0s.
+ * @param bytes the number of bytes the buffer should be
+ */
+exports.zeros = function (bytes) {
+    return Buffer.allocUnsafe(bytes).fill(0);
+};
+/**
+ * Left Pads an `Array` or `Buffer` with leading zeros till it has `length` bytes.
+ * Or it truncates the beginning if it exceeds.
+ * @param msg the value to pad (Buffer|Array)
+ * @param length the number of bytes the output should be
+ * @param right whether to start padding form the left or right
+ * @return (Buffer|Array)
+ */
+exports.setLengthLeft = function (msg, length, right) {
+    if (right === void 0) { right = false; }
+    var buf = exports.zeros(length);
+    msg = exports.toBuffer(msg);
+    if (right) {
+        if (msg.length < length) {
+            msg.copy(buf);
+            return buf;
+        }
+        return msg.slice(0, length);
+    }
+    else {
+        if (msg.length < length) {
+            msg.copy(buf, length - msg.length);
+            return buf;
+        }
+        return msg.slice(-length);
+    }
+};
+exports.setLength = exports.setLengthLeft;
+/**
+ * Right Pads an `Array` or `Buffer` with leading zeros till it has `length` bytes.
+ * Or it truncates the beginning if it exceeds.
+ * @param msg the value to pad (Buffer|Array)
+ * @param length the number of bytes the output should be
+ * @return (Buffer|Array)
+ */
+exports.setLengthRight = function (msg, length) {
+    return exports.setLength(msg, length, true);
+};
+/**
+ * Trims leading zeros from a `Buffer` or an `Array`.
+ * @param a (Buffer|Array|String)
+ * @return (Buffer|Array|String)
+ */
+exports.unpad = function (a) {
+    a = ethjsUtil.stripHexPrefix(a);
+    var first = a[0];
+    while (a.length > 0 && first.toString() === '0') {
+        a = a.slice(1);
+        first = a[0];
+    }
+    return a;
+};
+exports.stripZeros = exports.unpad;
+/**
+ * Attempts to turn a value into a `Buffer`. As input it supports `Buffer`, `String`, `Number`, null/undefined, `BN` and other objects with a `toArray()` method.
+ * @param v the value
+ */
+exports.toBuffer = function (v) {
+    if (!Buffer.isBuffer(v)) {
+        if (Array.isArray(v)) {
+            v = Buffer.from(v);
+        }
+        else if (typeof v === 'string') {
+            if (ethjsUtil.isHexString(v)) {
+                v = Buffer.from(ethjsUtil.padToEven(ethjsUtil.stripHexPrefix(v)), 'hex');
+            }
+            else {
+                throw new Error("Cannot convert string to buffer. toBuffer only supports 0x-prefixed hex strings and this string was given: " + v);
+            }
+        }
+        else if (typeof v === 'number') {
+            v = ethjsUtil.intToBuffer(v);
+        }
+        else if (v === null || v === undefined) {
+            v = Buffer.allocUnsafe(0);
+        }
+        else if (BN.isBN(v)) {
+            v = v.toArrayLike(Buffer);
+        }
+        else if (v.toArray) {
+            // converts a BN to a Buffer
+            v = Buffer.from(v.toArray());
+        }
+        else {
+            throw new Error('invalid type');
+        }
+    }
+    return v;
+};
+/**
+ * Converts a `Buffer` to a `Number`.
+ * @param buf `Buffer` object to convert
+ * @throws If the input number exceeds 53 bits.
+ */
+exports.bufferToInt = function (buf) {
+    return new BN(exports.toBuffer(buf)).toNumber();
+};
+/**
+ * Converts a `Buffer` into a `0x`-prefixed hex `String`.
+ * @param buf `Buffer` object to convert
+ */
+exports.bufferToHex = function (buf) {
+    buf = exports.toBuffer(buf);
+    return '0x' + buf.toString('hex');
+};
+/**
+ * Interprets a `Buffer` as a signed integer and returns a `BN`. Assumes 256-bit numbers.
+ * @param num Signed integer value
+ */
+exports.fromSigned = function (num) {
+    return new BN(num).fromTwos(256);
+};
+/**
+ * Converts a `BN` to an unsigned integer and returns it as a `Buffer`. Assumes 256-bit numbers.
+ * @param num
+ */
+exports.toUnsigned = function (num) {
+    return Buffer.from(num.toTwos(256).toArray());
+};
+/**
+ * Adds "0x" to a given `String` if it does not already start with "0x".
+ */
+exports.addHexPrefix = function (str) {
+    if (typeof str !== 'string') {
+        return str;
+    }
+    return ethjsUtil.isHexPrefixed(str) ? str : '0x' + str;
+};
+/**
+ * Converts a `Buffer` or `Array` to JSON.
+ * @param ba (Buffer|Array)
+ * @return (Array|String|null)
+ */
+exports.baToJSON = function (ba) {
+    if (Buffer.isBuffer(ba)) {
+        return "0x" + ba.toString('hex');
+    }
+    else if (ba instanceof Array) {
+        var array = [];
+        for (var i = 0; i < ba.length; i++) {
+            array.push(exports.baToJSON(ba[i]));
+        }
+        return array;
+    }
+};
+//# sourceMappingURL=bytes.js.map
+
+/***/ }),
+
+/***/ 71391:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.KECCAK256_RLP = exports.KECCAK256_RLP_S = exports.KECCAK256_RLP_ARRAY = exports.KECCAK256_RLP_ARRAY_S = exports.KECCAK256_NULL = exports.KECCAK256_NULL_S = exports.TWO_POW256 = exports.MAX_INTEGER = void 0;
+var BN = __webpack_require__(28891);
+/**
+ * The max integer that this VM can handle
+ */
+exports.MAX_INTEGER = new BN('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 16);
+/**
+ * 2^256
+ */
+exports.TWO_POW256 = new BN('10000000000000000000000000000000000000000000000000000000000000000', 16);
+/**
+ * Keccak-256 hash of null
+ */
+exports.KECCAK256_NULL_S = 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470';
+/**
+ * Keccak-256 hash of null
+ */
+exports.KECCAK256_NULL = Buffer.from(exports.KECCAK256_NULL_S, 'hex');
+/**
+ * Keccak-256 of an RLP of an empty array
+ */
+exports.KECCAK256_RLP_ARRAY_S = '1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347';
+/**
+ * Keccak-256 of an RLP of an empty array
+ */
+exports.KECCAK256_RLP_ARRAY = Buffer.from(exports.KECCAK256_RLP_ARRAY_S, 'hex');
+/**
+ * Keccak-256 hash of the RLP of null
+ */
+exports.KECCAK256_RLP_S = '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421';
+/**
+ * Keccak-256 hash of the RLP of null
+ */
+exports.KECCAK256_RLP = Buffer.from(exports.KECCAK256_RLP_S, 'hex');
+//# sourceMappingURL=constants.js.map
+
+/***/ }),
+
+/***/ 60073:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.rlphash = exports.ripemd160 = exports.sha256 = exports.keccak256 = exports.keccak = void 0;
+var _a = __webpack_require__(74040), keccak224 = _a.keccak224, keccak384 = _a.keccak384, k256 = _a.keccak256, keccak512 = _a.keccak512;
+var createHash = __webpack_require__(20160);
+var ethjsUtil = __webpack_require__(45479);
+var rlp = __webpack_require__(11562);
+var bytes_1 = __webpack_require__(97119);
+/**
+ * Creates Keccak hash of the input
+ * @param a The input data (Buffer|Array|String|Number) If the string is a 0x-prefixed hex value
+ * it's interpreted as hexadecimal, otherwise as utf8.
+ * @param bits The Keccak width
+ */
+exports.keccak = function (a, bits) {
+    if (bits === void 0) { bits = 256; }
+    if (typeof a === 'string' && !ethjsUtil.isHexString(a)) {
+        a = Buffer.from(a, 'utf8');
+    }
+    else {
+        a = bytes_1.toBuffer(a);
+    }
+    if (!bits)
+        bits = 256;
+    switch (bits) {
+        case 224: {
+            return keccak224(a);
+        }
+        case 256: {
+            return k256(a);
+        }
+        case 384: {
+            return keccak384(a);
+        }
+        case 512: {
+            return keccak512(a);
+        }
+        default: {
+            throw new Error("Invald algorithm: keccak" + bits);
+        }
+    }
+};
+/**
+ * Creates Keccak-256 hash of the input, alias for keccak(a, 256).
+ * @param a The input data (Buffer|Array|String|Number)
+ */
+exports.keccak256 = function (a) {
+    return exports.keccak(a);
+};
+/**
+ * Creates SHA256 hash of the input.
+ * @param a The input data (Buffer|Array|String|Number)
+ */
+exports.sha256 = function (a) {
+    a = bytes_1.toBuffer(a);
+    return createHash('sha256')
+        .update(a)
+        .digest();
+};
+/**
+ * Creates RIPEMD160 hash of the input.
+ * @param a The input data (Buffer|Array|String|Number)
+ * @param padded Whether it should be padded to 256 bits or not
+ */
+exports.ripemd160 = function (a, padded) {
+    a = bytes_1.toBuffer(a);
+    var hash = createHash('rmd160')
+        .update(a)
+        .digest();
+    if (padded === true) {
+        return bytes_1.setLength(hash, 32);
+    }
+    else {
+        return hash;
+    }
+};
+/**
+ * Creates SHA-3 hash of the RLP encoded version of the input.
+ * @param a The input data
+ */
+exports.rlphash = function (a) {
+    return exports.keccak(rlp.encode(a));
+};
+//# sourceMappingURL=hash.js.map
+
+/***/ }),
+
+/***/ 62194:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.secp256k1 = exports.rlp = exports.BN = void 0;
+var secp256k1 = __webpack_require__(16001);
+exports.secp256k1 = secp256k1;
+var ethjsUtil = __webpack_require__(45479);
+var BN = __webpack_require__(28891);
+exports.BN = BN;
+var rlp = __webpack_require__(11562);
+exports.rlp = rlp;
+Object.assign(exports, ethjsUtil);
+/**
+ * Constants
+ */
+__exportStar(__webpack_require__(71391), exports);
+/**
+ * Public-key cryptography (secp256k1) and addresses
+ */
+__exportStar(__webpack_require__(60692), exports);
+/**
+ * Hash functions
+ */
+__exportStar(__webpack_require__(60073), exports);
+/**
+ * ECDSA signature
+ */
+__exportStar(__webpack_require__(83754), exports);
+/**
+ * Utilities for manipulating Buffers, byte arrays, etc.
+ */
+__exportStar(__webpack_require__(97119), exports);
+/**
+ * Function for definining properties on an object
+ */
+__exportStar(__webpack_require__(85737), exports);
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ 85737:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.defineProperties = void 0;
+var assert = __webpack_require__(57579);
+var ethjsUtil = __webpack_require__(45479);
+var rlp = __webpack_require__(11562);
+var bytes_1 = __webpack_require__(97119);
+/**
+ * Defines properties on a `Object`. It make the assumption that underlying data is binary.
+ * @param self the `Object` to define properties on
+ * @param fields an array fields to define. Fields can contain:
+ * * `name` - the name of the properties
+ * * `length` - the number of bytes the field can have
+ * * `allowLess` - if the field can be less than the length
+ * * `allowEmpty`
+ * @param data data to be validated against the definitions
+ * @deprecated
+ */
+exports.defineProperties = function (self, fields, data) {
+    self.raw = [];
+    self._fields = [];
+    // attach the `toJSON`
+    self.toJSON = function (label) {
+        if (label === void 0) { label = false; }
+        if (label) {
+            var obj_1 = {};
+            self._fields.forEach(function (field) {
+                obj_1[field] = "0x" + self[field].toString('hex');
+            });
+            return obj_1;
+        }
+        return bytes_1.baToJSON(self.raw);
+    };
+    self.serialize = function serialize() {
+        return rlp.encode(self.raw);
+    };
+    fields.forEach(function (field, i) {
+        self._fields.push(field.name);
+        function getter() {
+            return self.raw[i];
+        }
+        function setter(v) {
+            v = bytes_1.toBuffer(v);
+            if (v.toString('hex') === '00' && !field.allowZero) {
+                v = Buffer.allocUnsafe(0);
+            }
+            if (field.allowLess && field.length) {
+                v = bytes_1.stripZeros(v);
+                assert(field.length >= v.length, "The field " + field.name + " must not have more " + field.length + " bytes");
+            }
+            else if (!(field.allowZero && v.length === 0) && field.length) {
+                assert(field.length === v.length, "The field " + field.name + " must have byte length of " + field.length);
+            }
+            self.raw[i] = v;
+        }
+        Object.defineProperty(self, field.name, {
+            enumerable: true,
+            configurable: true,
+            get: getter,
+            set: setter,
+        });
+        if (field.default) {
+            self[field.name] = field.default;
+        }
+        // attach alias
+        if (field.alias) {
+            Object.defineProperty(self, field.alias, {
+                enumerable: false,
+                configurable: true,
+                set: setter,
+                get: getter,
+            });
+        }
+    });
+    // if the constuctor is passed data
+    if (data) {
+        if (typeof data === 'string') {
+            data = Buffer.from(ethjsUtil.stripHexPrefix(data), 'hex');
+        }
+        if (Buffer.isBuffer(data)) {
+            data = rlp.decode(data);
+        }
+        if (Array.isArray(data)) {
+            if (data.length > self._fields.length) {
+                throw new Error('wrong number of fields in data');
+            }
+            // make sure all the items are buffers
+            data.forEach(function (d, i) {
+                self[self._fields[i]] = bytes_1.toBuffer(d);
+            });
+        }
+        else if (typeof data === 'object') {
+            var keys_1 = Object.keys(data);
+            fields.forEach(function (field) {
+                if (keys_1.indexOf(field.name) !== -1)
+                    self[field.name] = data[field.name];
+                if (keys_1.indexOf(field.alias) !== -1)
+                    self[field.alias] = data[field.alias];
+            });
+        }
+        else {
+            throw new Error('invalid data');
+        }
+    }
+};
+//# sourceMappingURL=object.js.map
+
+/***/ }),
+
+/***/ 16001:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ecdhUnsafe = exports.ecdh = exports.recover = exports.verify = exports.sign = exports.signatureImportLax = exports.signatureImport = exports.signatureExport = exports.signatureNormalize = exports.publicKeyCombine = exports.publicKeyTweakMul = exports.publicKeyTweakAdd = exports.publicKeyVerify = exports.publicKeyConvert = exports.publicKeyCreate = exports.privateKeyTweakMul = exports.privateKeyTweakAdd = exports.privateKeyModInverse = exports.privateKeyNegate = exports.privateKeyImport = exports.privateKeyExport = exports.privateKeyVerify = void 0;
+var secp256k1 = __webpack_require__(74665);
+var secp256k1v3 = __webpack_require__(15446);
+var der = __webpack_require__(78137);
+/**
+ * Verify an ECDSA privateKey
+ * @method privateKeyVerify
+ * @param {Buffer} privateKey
+ * @return {boolean}
+ */
+exports.privateKeyVerify = function (privateKey) {
+    // secp256k1 v4 version throws when privateKey length is not 32
+    if (privateKey.length !== 32) {
+        return false;
+    }
+    return secp256k1.privateKeyVerify(Uint8Array.from(privateKey));
+};
+/**
+ * Export a privateKey in DER format
+ * @method privateKeyExport
+ * @param {Buffer} privateKey
+ * @param {boolean} compressed
+ * @return {boolean}
+ */
+exports.privateKeyExport = function (privateKey, compressed) {
+    // secp256k1 v4 version throws when privateKey length is not 32
+    if (privateKey.length !== 32) {
+        throw new RangeError('private key length is invalid');
+    }
+    var publicKey = secp256k1v3.privateKeyExport(privateKey, compressed);
+    return der.privateKeyExport(privateKey, publicKey, compressed);
+};
+/**
+ * Import a privateKey in DER format
+ * @method privateKeyImport
+ * @param {Buffer} privateKey
+ * @return {Buffer}
+ */
+exports.privateKeyImport = function (privateKey) {
+    // privateKeyImport method is not part of secp256k1 v4 package
+    // this implementation is based on v3
+    privateKey = der.privateKeyImport(privateKey);
+    if (privateKey !== null && privateKey.length === 32 && exports.privateKeyVerify(privateKey)) {
+        return privateKey;
+    }
+    throw new Error("couldn't import from DER format");
+};
+/**
+ * Negate a privateKey by subtracting it from the order of the curve's base point
+ * @method privateKeyNegate
+ * @param {Buffer} privateKey
+ * @return {Buffer}
+ */
+exports.privateKeyNegate = function (privateKey) {
+    return Buffer.from(secp256k1.privateKeyNegate(Uint8Array.from(privateKey)));
+};
+/**
+ * Compute the inverse of a privateKey (modulo the order of the curve's base point).
+ * @method privateKeyModInverse
+ * @param {Buffer} privateKey
+ * @return {Buffer}
+ */
+exports.privateKeyModInverse = function (privateKey) {
+    if (privateKey.length !== 32) {
+        throw new Error('private key length is invalid');
+    }
+    return Buffer.from(secp256k1v3.privateKeyModInverse(Uint8Array.from(privateKey)));
+};
+/**
+ * Tweak a privateKey by adding tweak to it.
+ * @method privateKeyTweakAdd
+ * @param {Buffer} privateKey
+ * @param {Buffer} tweak
+ * @return {Buffer}
+ */
+exports.privateKeyTweakAdd = function (privateKey, tweak) {
+    return Buffer.from(secp256k1.privateKeyTweakAdd(Uint8Array.from(privateKey), tweak));
+};
+/**
+ * Tweak a privateKey by multiplying it by a tweak.
+ * @method privateKeyTweakMul
+ * @param {Buffer} privateKey
+ * @param {Buffer} tweak
+ * @return {Buffer}
+ */
+exports.privateKeyTweakMul = function (privateKey, tweak) {
+    return Buffer.from(secp256k1.privateKeyTweakMul(Uint8Array.from(privateKey), Uint8Array.from(tweak)));
+};
+/**
+ * Compute the public key for a privateKey.
+ * @method publicKeyCreate
+ * @param {Buffer} privateKey
+ * @param {boolean} compressed
+ * @return {Buffer}
+ */
+exports.publicKeyCreate = function (privateKey, compressed) {
+    return Buffer.from(secp256k1.publicKeyCreate(Uint8Array.from(privateKey), compressed));
+};
+/**
+ * Convert a publicKey to compressed or uncompressed form.
+ * @method publicKeyConvert
+ * @param {Buffer} publicKey
+ * @param {boolean} compressed
+ * @return {Buffer}
+ */
+exports.publicKeyConvert = function (publicKey, compressed) {
+    return Buffer.from(secp256k1.publicKeyConvert(Uint8Array.from(publicKey), compressed));
+};
+/**
+ * Verify an ECDSA publicKey.
+ * @method publicKeyVerify
+ * @param {Buffer} publicKey
+ * @return {boolean}
+ */
+exports.publicKeyVerify = function (publicKey) {
+    // secp256k1 v4 version throws when publicKey length is not 33 or 65
+    if (publicKey.length !== 33 && publicKey.length !== 65) {
+        return false;
+    }
+    return secp256k1.publicKeyVerify(Uint8Array.from(publicKey));
+};
+/**
+ * Tweak a publicKey by adding tweak times the generator to it.
+ * @method publicKeyTweakAdd
+ * @param {Buffer} publicKey
+ * @param {Buffer} tweak
+ * @param {boolean} compressed
+ * @return {Buffer}
+ */
+exports.publicKeyTweakAdd = function (publicKey, tweak, compressed) {
+    return Buffer.from(secp256k1.publicKeyTweakAdd(Uint8Array.from(publicKey), Uint8Array.from(tweak), compressed));
+};
+/**
+ * Tweak a publicKey by multiplying it by a tweak value
+ * @method publicKeyTweakMul
+ * @param {Buffer} publicKey
+ * @param {Buffer} tweak
+ * @param {boolean} compressed
+ * @return {Buffer}
+ */
+exports.publicKeyTweakMul = function (publicKey, tweak, compressed) {
+    return Buffer.from(secp256k1.publicKeyTweakMul(Uint8Array.from(publicKey), Uint8Array.from(tweak), compressed));
+};
+/**
+ * Add a given publicKeys together.
+ * @method publicKeyCombine
+ * @param {Array<Buffer>} publicKeys
+ * @param {boolean} compressed
+ * @return {Buffer}
+ */
+exports.publicKeyCombine = function (publicKeys, compressed) {
+    var keys = [];
+    publicKeys.forEach(function (publicKey) {
+        keys.push(Uint8Array.from(publicKey));
+    });
+    return Buffer.from(secp256k1.publicKeyCombine(keys, compressed));
+};
+/**
+ * Convert a signature to a normalized lower-S form.
+ * @method signatureNormalize
+ * @param {Buffer} signature
+ * @return {Buffer}
+ */
+exports.signatureNormalize = function (signature) {
+    return Buffer.from(secp256k1.signatureNormalize(Uint8Array.from(signature)));
+};
+/**
+ * Serialize an ECDSA signature in DER format.
+ * @method signatureExport
+ * @param {Buffer} signature
+ * @return {Buffer}
+ */
+exports.signatureExport = function (signature) {
+    return Buffer.from(secp256k1.signatureExport(Uint8Array.from(signature)));
+};
+/**
+ * Parse a DER ECDSA signature (follow by [BIP66](https://github.com/bitcoin/bips/blob/master/bip-0066.mediawiki)).
+ * @method signatureImport
+ * @param {Buffer} signature
+ * @return {Buffer}
+ */
+exports.signatureImport = function (signature) {
+    return Buffer.from(secp256k1.signatureImport(Uint8Array.from(signature)));
+};
+/**
+ * Parse a DER ECDSA signature (not follow by [BIP66](https://github.com/bitcoin/bips/blob/master/bip-0066.mediawiki)).
+ * @method signatureImportLax
+ * @param {Buffer} signature
+ * @return {Buffer}
+ */
+exports.signatureImportLax = function (signature) {
+    // signatureImportLax method is not part of secp256k1 v4 package
+    // this implementation is based on v3
+    // ensure that signature is greater than 0
+    if (signature.length === 0) {
+        throw new RangeError('signature length is invalid');
+    }
+    var sigObj = der.signatureImportLax(signature);
+    if (sigObj === null) {
+        throw new Error("couldn't parse DER signature");
+    }
+    return secp256k1v3.signatureImport(sigObj);
+};
+/**
+ * Create an ECDSA signature. Always return low-S signature.
+ * @method sign
+ * @param {Buffer} message
+ * @param {Buffer} privateKey
+ * @param {Object} options
+ * @return {Buffer}
+ */
+exports.sign = function (message, privateKey, options) {
+    if (options === null) {
+        throw new TypeError('options should be an Object');
+    }
+    var signOptions = undefined;
+    if (options) {
+        signOptions = {};
+        if (options.data === null) {
+            // validate option.data length
+            throw new TypeError('options.data should be a Buffer');
+        }
+        if (options.data) {
+            if (options.data.length != 32) {
+                throw new RangeError('options.data length is invalid');
+            }
+            signOptions.data = new Uint8Array(options.data);
+        }
+        if (options.noncefn === null) {
+            throw new TypeError('options.noncefn should be a Function');
+        }
+        if (options.noncefn) {
+            // convert option.noncefn function signature
+            signOptions.noncefn = function (message, privateKey, algo, data, attempt) {
+                var bufferAlgo = algo != null ? Buffer.from(algo) : null;
+                var bufferData = data != null ? Buffer.from(data) : null;
+                var buffer = Buffer.from('');
+                if (options.noncefn) {
+                    buffer = options.noncefn(Buffer.from(message), Buffer.from(privateKey), bufferAlgo, bufferData, attempt);
+                }
+                return new Uint8Array(buffer);
+            };
+        }
+    }
+    var sig = secp256k1.ecdsaSign(Uint8Array.from(message), Uint8Array.from(privateKey), signOptions);
+    return {
+        signature: Buffer.from(sig.signature),
+        recovery: sig.recid,
+    };
+};
+/**
+ * Verify an ECDSA signature.
+ * @method verify
+ * @param {Buffer} message
+ * @param {Buffer} signature
+ * @param {Buffer} publicKey
+ * @return {boolean}
+ */
+exports.verify = function (message, signature, publicKey) {
+    return secp256k1.ecdsaVerify(Uint8Array.from(signature), Uint8Array.from(message), publicKey);
+};
+/**
+ * Recover an ECDSA public key from a signature.
+ * @method recover
+ * @param {Buffer} message
+ * @param {Buffer} signature
+ * @param {Number} recid
+ * @param {boolean} compressed
+ * @return {Buffer}
+ */
+exports.recover = function (message, signature, recid, compressed) {
+    return Buffer.from(secp256k1.ecdsaRecover(Uint8Array.from(signature), recid, Uint8Array.from(message), compressed));
+};
+/**
+ * Compute an EC Diffie-Hellman secret and applied sha256 to compressed public key.
+ * @method ecdh
+ * @param {Buffer} publicKey
+ * @param {Buffer} privateKey
+ * @return {Buffer}
+ */
+exports.ecdh = function (publicKey, privateKey) {
+    // note: secp256k1 v3 doesn't allow optional parameter
+    return Buffer.from(secp256k1.ecdh(Uint8Array.from(publicKey), Uint8Array.from(privateKey), {}));
+};
+exports.ecdhUnsafe = function (publicKey, privateKey, compressed) {
+    // ecdhUnsafe method is not part of secp256k1 v4 package
+    // this implementation is based on v3
+    // ensure valid publicKey length
+    if (publicKey.length !== 33 && publicKey.length !== 65) {
+        throw new RangeError('public key length is invalid');
+    }
+    // ensure valid privateKey length
+    if (privateKey.length !== 32) {
+        throw new RangeError('private key length is invalid');
+    }
+    return Buffer.from(secp256k1v3.ecdhUnsafe(Uint8Array.from(publicKey), Uint8Array.from(privateKey), compressed));
+};
+//# sourceMappingURL=secp256k1v3-adapter.js.map
+
+/***/ }),
+
+/***/ 78137:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+// This file is imported from secp256k1 v3
+// https://github.com/cryptocoinjs/secp256k1-node/blob/master/LICENSE
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var EC_PRIVKEY_EXPORT_DER_COMPRESSED = Buffer.from([
+    // begin
+    0x30,
+    0x81,
+    0xd3,
+    0x02,
+    0x01,
+    0x01,
+    0x04,
+    0x20,
+    // private key
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    // middle
+    0xa0,
+    0x81,
+    0x85,
+    0x30,
+    0x81,
+    0x82,
+    0x02,
+    0x01,
+    0x01,
+    0x30,
+    0x2c,
+    0x06,
+    0x07,
+    0x2a,
+    0x86,
+    0x48,
+    0xce,
+    0x3d,
+    0x01,
+    0x01,
+    0x02,
+    0x21,
+    0x00,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xfe,
+    0xff,
+    0xff,
+    0xfc,
+    0x2f,
+    0x30,
+    0x06,
+    0x04,
+    0x01,
+    0x00,
+    0x04,
+    0x01,
+    0x07,
+    0x04,
+    0x21,
+    0x02,
+    0x79,
+    0xbe,
+    0x66,
+    0x7e,
+    0xf9,
+    0xdc,
+    0xbb,
+    0xac,
+    0x55,
+    0xa0,
+    0x62,
+    0x95,
+    0xce,
+    0x87,
+    0x0b,
+    0x07,
+    0x02,
+    0x9b,
+    0xfc,
+    0xdb,
+    0x2d,
+    0xce,
+    0x28,
+    0xd9,
+    0x59,
+    0xf2,
+    0x81,
+    0x5b,
+    0x16,
+    0xf8,
+    0x17,
+    0x98,
+    0x02,
+    0x21,
+    0x00,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xfe,
+    0xba,
+    0xae,
+    0xdc,
+    0xe6,
+    0xaf,
+    0x48,
+    0xa0,
+    0x3b,
+    0xbf,
+    0xd2,
+    0x5e,
+    0x8c,
+    0xd0,
+    0x36,
+    0x41,
+    0x41,
+    0x02,
+    0x01,
+    0x01,
+    0xa1,
+    0x24,
+    0x03,
+    0x22,
+    0x00,
+    // public key
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+]);
+var EC_PRIVKEY_EXPORT_DER_UNCOMPRESSED = Buffer.from([
+    // begin
+    0x30,
+    0x82,
+    0x01,
+    0x13,
+    0x02,
+    0x01,
+    0x01,
+    0x04,
+    0x20,
+    // private key
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    // middle
+    0xa0,
+    0x81,
+    0xa5,
+    0x30,
+    0x81,
+    0xa2,
+    0x02,
+    0x01,
+    0x01,
+    0x30,
+    0x2c,
+    0x06,
+    0x07,
+    0x2a,
+    0x86,
+    0x48,
+    0xce,
+    0x3d,
+    0x01,
+    0x01,
+    0x02,
+    0x21,
+    0x00,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xfe,
+    0xff,
+    0xff,
+    0xfc,
+    0x2f,
+    0x30,
+    0x06,
+    0x04,
+    0x01,
+    0x00,
+    0x04,
+    0x01,
+    0x07,
+    0x04,
+    0x41,
+    0x04,
+    0x79,
+    0xbe,
+    0x66,
+    0x7e,
+    0xf9,
+    0xdc,
+    0xbb,
+    0xac,
+    0x55,
+    0xa0,
+    0x62,
+    0x95,
+    0xce,
+    0x87,
+    0x0b,
+    0x07,
+    0x02,
+    0x9b,
+    0xfc,
+    0xdb,
+    0x2d,
+    0xce,
+    0x28,
+    0xd9,
+    0x59,
+    0xf2,
+    0x81,
+    0x5b,
+    0x16,
+    0xf8,
+    0x17,
+    0x98,
+    0x48,
+    0x3a,
+    0xda,
+    0x77,
+    0x26,
+    0xa3,
+    0xc4,
+    0x65,
+    0x5d,
+    0xa4,
+    0xfb,
+    0xfc,
+    0x0e,
+    0x11,
+    0x08,
+    0xa8,
+    0xfd,
+    0x17,
+    0xb4,
+    0x48,
+    0xa6,
+    0x85,
+    0x54,
+    0x19,
+    0x9c,
+    0x47,
+    0xd0,
+    0x8f,
+    0xfb,
+    0x10,
+    0xd4,
+    0xb8,
+    0x02,
+    0x21,
+    0x00,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xff,
+    0xfe,
+    0xba,
+    0xae,
+    0xdc,
+    0xe6,
+    0xaf,
+    0x48,
+    0xa0,
+    0x3b,
+    0xbf,
+    0xd2,
+    0x5e,
+    0x8c,
+    0xd0,
+    0x36,
+    0x41,
+    0x41,
+    0x02,
+    0x01,
+    0x01,
+    0xa1,
+    0x44,
+    0x03,
+    0x42,
+    0x00,
+    // public key
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+]);
+exports.privateKeyExport = function (privateKey, publicKey, compressed) {
+    if (compressed === void 0) { compressed = true; }
+    var result = Buffer.from(compressed ? EC_PRIVKEY_EXPORT_DER_COMPRESSED : EC_PRIVKEY_EXPORT_DER_UNCOMPRESSED);
+    privateKey.copy(result, compressed ? 8 : 9);
+    publicKey.copy(result, compressed ? 181 : 214);
+    return result;
+};
+exports.privateKeyImport = function (privateKey) {
+    var length = privateKey.length;
+    // sequence header
+    var index = 0;
+    if (length < index + 1 || privateKey[index] !== 0x30)
+        return null;
+    index += 1;
+    // sequence length constructor
+    if (length < index + 1 || !(privateKey[index] & 0x80))
+        return null;
+    var lenb = privateKey[index] & 0x7f;
+    index += 1;
+    if (lenb < 1 || lenb > 2)
+        return null;
+    if (length < index + lenb)
+        return null;
+    // sequence length
+    var len = privateKey[index + lenb - 1] | (lenb > 1 ? privateKey[index + lenb - 2] << 8 : 0);
+    index += lenb;
+    if (length < index + len)
+        return null;
+    // sequence element 0: version number (=1)
+    if (length < index + 3 ||
+        privateKey[index] !== 0x02 ||
+        privateKey[index + 1] !== 0x01 ||
+        privateKey[index + 2] !== 0x01) {
+        return null;
+    }
+    index += 3;
+    // sequence element 1: octet string, up to 32 bytes
+    if (length < index + 2 ||
+        privateKey[index] !== 0x04 ||
+        privateKey[index + 1] > 0x20 ||
+        length < index + 2 + privateKey[index + 1]) {
+        return null;
+    }
+    return privateKey.slice(index + 2, index + 2 + privateKey[index + 1]);
+};
+exports.signatureImportLax = function (signature) {
+    var r = Buffer.alloc(32, 0);
+    var s = Buffer.alloc(32, 0);
+    var length = signature.length;
+    var index = 0;
+    // sequence tag byte
+    if (signature[index++] !== 0x30) {
+        return null;
+    }
+    // sequence length byte
+    var lenbyte = signature[index++];
+    if (lenbyte & 0x80) {
+        index += lenbyte - 0x80;
+        if (index > length) {
+            return null;
+        }
+    }
+    // sequence tag byte for r
+    if (signature[index++] !== 0x02) {
+        return null;
+    }
+    // length for r
+    var rlen = signature[index++];
+    if (rlen & 0x80) {
+        lenbyte = rlen - 0x80;
+        if (index + lenbyte > length) {
+            return null;
+        }
+        for (; lenbyte > 0 && signature[index] === 0x00; index += 1, lenbyte -= 1)
+            ;
+        for (rlen = 0; lenbyte > 0; index += 1, lenbyte -= 1)
+            rlen = (rlen << 8) + signature[index];
+    }
+    if (rlen > length - index) {
+        return null;
+    }
+    var rindex = index;
+    index += rlen;
+    // sequence tag byte for s
+    if (signature[index++] !== 0x02) {
+        return null;
+    }
+    // length for s
+    var slen = signature[index++];
+    if (slen & 0x80) {
+        lenbyte = slen - 0x80;
+        if (index + lenbyte > length) {
+            return null;
+        }
+        for (; lenbyte > 0 && signature[index] === 0x00; index += 1, lenbyte -= 1)
+            ;
+        for (slen = 0; lenbyte > 0; index += 1, lenbyte -= 1)
+            slen = (slen << 8) + signature[index];
+    }
+    if (slen > length - index) {
+        return null;
+    }
+    var sindex = index;
+    index += slen;
+    // ignore leading zeros in r
+    for (; rlen > 0 && signature[rindex] === 0x00; rlen -= 1, rindex += 1)
+        ;
+    // copy r value
+    if (rlen > 32) {
+        return null;
+    }
+    var rvalue = signature.slice(rindex, rindex + rlen);
+    rvalue.copy(r, 32 - rvalue.length);
+    // ignore leading zeros in s
+    for (; slen > 0 && signature[sindex] === 0x00; slen -= 1, sindex += 1)
+        ;
+    // copy s value
+    if (slen > 32) {
+        return null;
+    }
+    var svalue = signature.slice(sindex, sindex + slen);
+    svalue.copy(s, 32 - svalue.length);
+    return { r: r, s: s };
+};
+//# sourceMappingURL=der.js.map
+
+/***/ }),
+
+/***/ 15446:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+// This file is imported from secp256k1 v3
+// https://github.com/cryptocoinjs/secp256k1-node/blob/master/LICENSE
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var BN = __webpack_require__(28891);
+var EC = (__webpack_require__(75367).ec);
+var ec = new EC('secp256k1');
+var ecparams = ec.curve;
+exports.privateKeyExport = function (privateKey, compressed) {
+    if (compressed === void 0) { compressed = true; }
+    var d = new BN(privateKey);
+    if (d.ucmp(ecparams.n) >= 0) {
+        throw new Error("couldn't export to DER format");
+    }
+    var point = ec.g.mul(d);
+    return toPublicKey(point.getX(), point.getY(), compressed);
+};
+exports.privateKeyModInverse = function (privateKey) {
+    var bn = new BN(privateKey);
+    if (bn.ucmp(ecparams.n) >= 0 || bn.isZero()) {
+        throw new Error('private key range is invalid');
+    }
+    return bn.invm(ecparams.n).toArrayLike(Buffer, 'be', 32);
+};
+exports.signatureImport = function (sigObj) {
+    var r = new BN(sigObj.r);
+    if (r.ucmp(ecparams.n) >= 0) {
+        r = new BN(0);
+    }
+    var s = new BN(sigObj.s);
+    if (s.ucmp(ecparams.n) >= 0) {
+        s = new BN(0);
+    }
+    return Buffer.concat([r.toArrayLike(Buffer, 'be', 32), s.toArrayLike(Buffer, 'be', 32)]);
+};
+exports.ecdhUnsafe = function (publicKey, privateKey, compressed) {
+    if (compressed === void 0) { compressed = true; }
+    var point = ec.keyFromPublic(publicKey);
+    var scalar = new BN(privateKey);
+    if (scalar.ucmp(ecparams.n) >= 0 || scalar.isZero()) {
+        throw new Error('scalar was invalid (zero or overflow)');
+    }
+    var shared = point.pub.mul(scalar);
+    return toPublicKey(shared.getX(), shared.getY(), compressed);
+};
+var toPublicKey = function (x, y, compressed) {
+    var publicKey;
+    if (compressed) {
+        publicKey = Buffer.alloc(33);
+        publicKey[0] = y.isOdd() ? 0x03 : 0x02;
+        x.toArrayLike(Buffer, 'be', 32).copy(publicKey, 1);
+    }
+    else {
+        publicKey = Buffer.alloc(65);
+        publicKey[0] = 0x04;
+        x.toArrayLike(Buffer, 'be', 32).copy(publicKey, 1);
+        y.toArrayLike(Buffer, 'be', 32).copy(publicKey, 33);
+    }
+    return publicKey;
+};
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ 83754:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.hashPersonalMessage = exports.isValidSignature = exports.fromRpcSig = exports.toRpcSig = exports.ecrecover = exports.ecsign = void 0;
+var secp256k1 = __webpack_require__(16001);
+var BN = __webpack_require__(28891);
+var bytes_1 = __webpack_require__(97119);
+var hash_1 = __webpack_require__(60073);
+/**
+ * Returns the ECDSA signature of a message hash.
+ */
+exports.ecsign = function (msgHash, privateKey, chainId) {
+    var sig = secp256k1.sign(msgHash, privateKey);
+    var recovery = sig.recovery;
+    var ret = {
+        r: sig.signature.slice(0, 32),
+        s: sig.signature.slice(32, 64),
+        v: chainId ? recovery + (chainId * 2 + 35) : recovery + 27,
+    };
+    return ret;
+};
+/**
+ * ECDSA public key recovery from signature.
+ * @returns Recovered public key
+ */
+exports.ecrecover = function (msgHash, v, r, s, chainId) {
+    var signature = Buffer.concat([bytes_1.setLength(r, 32), bytes_1.setLength(s, 32)], 64);
+    var recovery = calculateSigRecovery(v, chainId);
+    if (!isValidSigRecovery(recovery)) {
+        throw new Error('Invalid signature v value');
+    }
+    var senderPubKey = secp256k1.recover(msgHash, signature, recovery);
+    return secp256k1.publicKeyConvert(senderPubKey, false).slice(1);
+};
+/**
+ * Convert signature parameters into the format of `eth_sign` RPC method.
+ * @returns Signature
+ */
+exports.toRpcSig = function (v, r, s, chainId) {
+    var recovery = calculateSigRecovery(v, chainId);
+    if (!isValidSigRecovery(recovery)) {
+        throw new Error('Invalid signature v value');
+    }
+    // geth (and the RPC eth_sign method) uses the 65 byte format used by Bitcoin
+    return bytes_1.bufferToHex(Buffer.concat([bytes_1.setLengthLeft(r, 32), bytes_1.setLengthLeft(s, 32), bytes_1.toBuffer(v)]));
+};
+/**
+ * Convert signature format of the `eth_sign` RPC method to signature parameters
+ * NOTE: all because of a bug in geth: https://github.com/ethereum/go-ethereum/issues/2053
+ */
+exports.fromRpcSig = function (sig) {
+    var buf = bytes_1.toBuffer(sig);
+    // NOTE: with potential introduction of chainId this might need to be updated
+    if (buf.length !== 65) {
+        throw new Error('Invalid signature length');
+    }
+    var v = buf[64];
+    // support both versions of `eth_sign` responses
+    if (v < 27) {
+        v += 27;
+    }
+    return {
+        v: v,
+        r: buf.slice(0, 32),
+        s: buf.slice(32, 64),
+    };
+};
+/**
+ * Validate a ECDSA signature.
+ * @param homesteadOrLater Indicates whether this is being used on either the homestead hardfork or a later one
+ */
+exports.isValidSignature = function (v, r, s, homesteadOrLater, chainId) {
+    if (homesteadOrLater === void 0) { homesteadOrLater = true; }
+    var SECP256K1_N_DIV_2 = new BN('7fffffffffffffffffffffffffffffff5d576e7357a4501ddfe92f46681b20a0', 16);
+    var SECP256K1_N = new BN('fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141', 16);
+    if (r.length !== 32 || s.length !== 32) {
+        return false;
+    }
+    if (!isValidSigRecovery(calculateSigRecovery(v, chainId))) {
+        return false;
+    }
+    var rBN = new BN(r);
+    var sBN = new BN(s);
+    if (rBN.isZero() || rBN.gt(SECP256K1_N) || sBN.isZero() || sBN.gt(SECP256K1_N)) {
+        return false;
+    }
+    if (homesteadOrLater && sBN.cmp(SECP256K1_N_DIV_2) === 1) {
+        return false;
+    }
+    return true;
+};
+/**
+ * Returns the keccak-256 hash of `message`, prefixed with the header used by the `eth_sign` RPC call.
+ * The output of this function can be fed into `ecsign` to produce the same signature as the `eth_sign`
+ * call for a given `message`, or fed to `ecrecover` along with a signature to recover the public key
+ * used to produce the signature.
+ */
+exports.hashPersonalMessage = function (message) {
+    var prefix = Buffer.from("\u0019Ethereum Signed Message:\n" + message.length.toString(), 'utf-8');
+    return hash_1.keccak(Buffer.concat([prefix, message]));
+};
+function calculateSigRecovery(v, chainId) {
+    return chainId ? v - (2 * chainId + 35) : v - 27;
+}
+function isValidSigRecovery(recovery) {
+    return recovery === 0 || recovery === 1;
+}
+//# sourceMappingURL=signature.js.map
+
+/***/ }),
+
 /***/ 63923:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
@@ -4133,30 +5903,11 @@ exports.toType = toType;
 
 /***/ }),
 
-/***/ 23180:
+/***/ 14636:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __read = (this && this.__read) || function (o, n) {
     var m = typeof Symbol === "function" && o[Symbol.iterator];
     if (!m) return o;
@@ -4179,23 +5930,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.isZeroAddress = exports.zeroAddress = exports.importPublic = exports.privateToAddress = exports.privateToPublic = exports.publicToAddress = exports.pubToAddress = exports.isValidPublic = exports.isValidPrivate = exports.generateAddress2 = exports.generateAddress = exports.isValidChecksumAddress = exports.toChecksumAddress = exports.isValidAddress = exports.Account = void 0;
 var assert_1 = __importDefault(__webpack_require__(57579));
-var bn_js_1 = __importDefault(__webpack_require__(35579));
-var rlp = __importStar(__webpack_require__(11562));
+var externals_1 = __webpack_require__(12971);
 var secp256k1_1 = __webpack_require__(74665);
-var internal_1 = __webpack_require__(66277);
-var constants_1 = __webpack_require__(93297);
-var bytes_1 = __webpack_require__(35269);
-var hash_1 = __webpack_require__(5781);
-var helpers_1 = __webpack_require__(11366);
-var types_1 = __webpack_require__(20002);
+var internal_1 = __webpack_require__(46482);
+var constants_1 = __webpack_require__(84861);
+var bytes_1 = __webpack_require__(46462);
+var hash_1 = __webpack_require__(26759);
+var helpers_1 = __webpack_require__(73429);
+var types_1 = __webpack_require__(79671);
 var Account = /** @class */ (function () {
     /**
      * This constructor assigns and validates the values.
      * Use the static factory methods to assist in creating an Account from varying data types.
      */
     function Account(nonce, balance, stateRoot, codeHash) {
-        if (nonce === void 0) { nonce = new bn_js_1.default(0); }
-        if (balance === void 0) { balance = new bn_js_1.default(0); }
+        if (nonce === void 0) { nonce = new externals_1.BN(0); }
+        if (balance === void 0) { balance = new externals_1.BN(0); }
         if (stateRoot === void 0) { stateRoot = constants_1.KECCAK256_RLP; }
         if (codeHash === void 0) { codeHash = constants_1.KECCAK256_NULL; }
         this.nonce = nonce;
@@ -4206,10 +5956,10 @@ var Account = /** @class */ (function () {
     }
     Account.fromAccountData = function (accountData) {
         var nonce = accountData.nonce, balance = accountData.balance, stateRoot = accountData.stateRoot, codeHash = accountData.codeHash;
-        return new Account(nonce ? new bn_js_1.default((0, bytes_1.toBuffer)(nonce)) : undefined, balance ? new bn_js_1.default((0, bytes_1.toBuffer)(balance)) : undefined, stateRoot ? (0, bytes_1.toBuffer)(stateRoot) : undefined, codeHash ? (0, bytes_1.toBuffer)(codeHash) : undefined);
+        return new Account(nonce ? new externals_1.BN((0, bytes_1.toBuffer)(nonce)) : undefined, balance ? new externals_1.BN((0, bytes_1.toBuffer)(balance)) : undefined, stateRoot ? (0, bytes_1.toBuffer)(stateRoot) : undefined, codeHash ? (0, bytes_1.toBuffer)(codeHash) : undefined);
     };
     Account.fromRlpSerializedAccount = function (serialized) {
-        var values = rlp.decode(serialized);
+        var values = externals_1.rlp.decode(serialized);
         if (!Array.isArray(values)) {
             throw new Error('Invalid serialized account input. Must be array');
         }
@@ -4217,13 +5967,13 @@ var Account = /** @class */ (function () {
     };
     Account.fromValuesArray = function (values) {
         var _a = __read(values, 4), nonce = _a[0], balance = _a[1], stateRoot = _a[2], codeHash = _a[3];
-        return new Account(new bn_js_1.default(nonce), new bn_js_1.default(balance), stateRoot, codeHash);
+        return new Account(new externals_1.BN(nonce), new externals_1.BN(balance), stateRoot, codeHash);
     };
     Account.prototype._validate = function () {
-        if (this.nonce.lt(new bn_js_1.default(0))) {
+        if (this.nonce.lt(new externals_1.BN(0))) {
             throw new Error('nonce must be greater than zero');
         }
-        if (this.balance.lt(new bn_js_1.default(0))) {
+        if (this.balance.lt(new externals_1.BN(0))) {
             throw new Error('balance must be greater than zero');
         }
         if (this.stateRoot.length !== 32) {
@@ -4248,7 +5998,7 @@ var Account = /** @class */ (function () {
      * Returns the RLP serialization of the account as a `Buffer`.
      */
     Account.prototype.serialize = function () {
-        return rlp.encode(this.raw());
+        return externals_1.rlp.encode(this.raw());
     };
     /**
      * Returns a `Boolean` determining if the account is a contract.
@@ -4330,7 +6080,7 @@ exports.isValidChecksumAddress = isValidChecksumAddress;
 var generateAddress = function (from, nonce) {
     (0, helpers_1.assertIsBuffer)(from);
     (0, helpers_1.assertIsBuffer)(nonce);
-    var nonceBN = new bn_js_1.default(nonce);
+    var nonceBN = new externals_1.BN(nonce);
     if (nonceBN.isZero()) {
         // in RLP we want to encode null in the case of zero nonce
         // read the RLP documentation for an answer if you dare
@@ -4456,7 +6206,7 @@ exports.isZeroAddress = isZeroAddress;
 
 /***/ }),
 
-/***/ 61192:
+/***/ 511:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
@@ -4467,9 +6217,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Address = void 0;
 var assert_1 = __importDefault(__webpack_require__(57579));
-var bn_js_1 = __importDefault(__webpack_require__(35579));
-var bytes_1 = __webpack_require__(35269);
-var account_1 = __webpack_require__(23180);
+var externals_1 = __webpack_require__(12971);
+var bytes_1 = __webpack_require__(46462);
+var account_1 = __webpack_require__(14636);
 var Address = /** @class */ (function () {
     function Address(buf) {
         (0, assert_1.default)(buf.length === 20, 'Invalid address length');
@@ -4513,7 +6263,7 @@ var Address = /** @class */ (function () {
      * @param nonce The nonce of the from account
      */
     Address.generate = function (from, nonce) {
-        (0, assert_1.default)(bn_js_1.default.isBN(nonce));
+        (0, assert_1.default)(externals_1.BN.isBN(nonce));
         return new Address((0, account_1.generateAddress)(from.buf, nonce.toArrayLike(Buffer)));
     };
     /**
@@ -4544,9 +6294,9 @@ var Address = /** @class */ (function () {
      * by EIP-1352
      */
     Address.prototype.isPrecompileOrSystemAddress = function () {
-        var addressBN = new bn_js_1.default(this.buf);
-        var rangeMin = new bn_js_1.default(0);
-        var rangeMax = new bn_js_1.default('ffff', 'hex');
+        var addressBN = new externals_1.BN(this.buf);
+        var rangeMin = new externals_1.BN(0);
+        var rangeMax = new externals_1.BN('ffff', 'hex');
         return addressBN.gte(rangeMin) && addressBN.lte(rangeMax);
     };
     /**
@@ -4568,19 +6318,43 @@ exports.Address = Address;
 
 /***/ }),
 
-/***/ 35269:
+/***/ 46462:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __values = (this && this.__values) || function(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+};
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.baToJSON = exports.toUtf8 = exports.addHexPrefix = exports.toUnsigned = exports.fromSigned = exports.bufferToHex = exports.bufferToInt = exports.toBuffer = exports.unpadHexString = exports.unpadArray = exports.unpadBuffer = exports.setLengthRight = exports.setLengthLeft = exports.zeros = exports.intToBuffer = exports.intToHex = void 0;
-var bn_js_1 = __importDefault(__webpack_require__(35579));
-var internal_1 = __webpack_require__(66277);
-var helpers_1 = __webpack_require__(11366);
+exports.bufArrToArr = exports.arrToBufArr = exports.validateNoLeadingZeroes = exports.baToJSON = exports.toUtf8 = exports.addHexPrefix = exports.toUnsigned = exports.fromSigned = exports.bufferToHex = exports.bufferToInt = exports.toBuffer = exports.unpadHexString = exports.unpadArray = exports.unpadBuffer = exports.setLengthRight = exports.setLengthLeft = exports.zeros = exports.intToBuffer = exports.intToHex = void 0;
+var externals_1 = __webpack_require__(12971);
+var internal_1 = __webpack_require__(46482);
+var helpers_1 = __webpack_require__(73429);
 /**
  * Converts a `Number` into a hex `String`
  * @param {Number} i
@@ -4588,9 +6362,9 @@ var helpers_1 = __webpack_require__(11366);
  */
 var intToHex = function (i) {
     if (!Number.isSafeInteger(i) || i < 0) {
-        throw new Error("Received an invalid integer type: " + i);
+        throw new Error("Received an invalid integer type: ".concat(i));
     }
-    return "0x" + i.toString(16);
+    return "0x".concat(i.toString(16));
 };
 exports.intToHex = intToHex;
 /**
@@ -4722,14 +6496,17 @@ var toBuffer = function (v) {
     }
     if (typeof v === 'string') {
         if (!(0, internal_1.isHexString)(v)) {
-            throw new Error("Cannot convert string to buffer. toBuffer only supports 0x-prefixed hex strings and this string was given: " + v);
+            throw new Error("Cannot convert string to buffer. toBuffer only supports 0x-prefixed hex strings and this string was given: ".concat(v));
         }
         return Buffer.from((0, internal_1.padToEven)((0, internal_1.stripHexPrefix)(v)), 'hex');
     }
     if (typeof v === 'number') {
         return (0, exports.intToBuffer)(v);
     }
-    if (bn_js_1.default.isBN(v)) {
+    if (externals_1.BN.isBN(v)) {
+        if (v.isNeg()) {
+            throw new Error("Cannot convert negative BN to buffer. Given: ".concat(v));
+        }
         return v.toArrayLike(Buffer);
     }
     if (v.toArray) {
@@ -4748,7 +6525,7 @@ exports.toBuffer = toBuffer;
  * @throws If the input number exceeds 53 bits.
  */
 var bufferToInt = function (buf) {
-    return new bn_js_1.default((0, exports.toBuffer)(buf)).toNumber();
+    return new externals_1.BN((0, exports.toBuffer)(buf)).toNumber();
 };
 exports.bufferToInt = bufferToInt;
 /**
@@ -4765,7 +6542,7 @@ exports.bufferToHex = bufferToHex;
  * @param num Signed integer value
  */
 var fromSigned = function (num) {
-    return new bn_js_1.default(num).fromTwos(256);
+    return new externals_1.BN(num).fromTwos(256);
 };
 exports.fromSigned = fromSigned;
 /**
@@ -4820,7 +6597,7 @@ exports.toUtf8 = toUtf8;
  */
 var baToJSON = function (ba) {
     if (Buffer.isBuffer(ba)) {
-        return "0x" + ba.toString('hex');
+        return "0x".concat(ba.toString('hex'));
     }
     else if (ba instanceof Array) {
         var array = [];
@@ -4831,29 +6608,76 @@ var baToJSON = function (ba) {
     }
 };
 exports.baToJSON = baToJSON;
+/**
+ * Checks provided Buffers for leading zeroes and throws if found.
+ *
+ * Examples:
+ *
+ * Valid values: 0x1, 0x, 0x01, 0x1234
+ * Invalid values: 0x0, 0x00, 0x001, 0x0001
+ *
+ * Note: This method is useful for validating that RLP encoded integers comply with the rule that all
+ * integer values encoded to RLP must be in the most compact form and contain no leading zero bytes
+ * @param values An object containing string keys and Buffer values
+ * @throws if any provided value is found to have leading zero bytes
+ */
+var validateNoLeadingZeroes = function (values) {
+    var e_1, _a;
+    try {
+        for (var _b = __values(Object.entries(values)), _c = _b.next(); !_c.done; _c = _b.next()) {
+            var _d = __read(_c.value, 2), k = _d[0], v = _d[1];
+            if (v !== undefined && v.length > 0 && v[0] === 0) {
+                throw new Error("".concat(k, " cannot have leading zeroes, received: ").concat(v.toString('hex')));
+            }
+        }
+    }
+    catch (e_1_1) { e_1 = { error: e_1_1 }; }
+    finally {
+        try {
+            if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+        }
+        finally { if (e_1) throw e_1.error; }
+    }
+};
+exports.validateNoLeadingZeroes = validateNoLeadingZeroes;
+function arrToBufArr(arr) {
+    if (!Array.isArray(arr)) {
+        return Buffer.from(arr);
+    }
+    return arr.map(function (a) { return arrToBufArr(a); });
+}
+exports.arrToBufArr = arrToBufArr;
+function bufArrToArr(arr) {
+    if (!Array.isArray(arr)) {
+        return Uint8Array.from(arr !== null && arr !== void 0 ? arr : []);
+    }
+    return arr.map(function (a) { return bufArrToArr(a); });
+}
+exports.bufArrToArr = bufArrToArr;
 //# sourceMappingURL=bytes.js.map
 
 /***/ }),
 
-/***/ 93297:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ 84861:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.KECCAK256_RLP = exports.KECCAK256_RLP_S = exports.KECCAK256_RLP_ARRAY = exports.KECCAK256_RLP_ARRAY_S = exports.KECCAK256_NULL = exports.KECCAK256_NULL_S = exports.TWO_POW256 = exports.MAX_INTEGER = void 0;
-var Buffer = (__webpack_require__(15313).Buffer);
-var bn_js_1 = __importDefault(__webpack_require__(35579));
+exports.KECCAK256_RLP = exports.KECCAK256_RLP_S = exports.KECCAK256_RLP_ARRAY = exports.KECCAK256_RLP_ARRAY_S = exports.KECCAK256_NULL = exports.KECCAK256_NULL_S = exports.TWO_POW256 = exports.MAX_INTEGER = exports.MAX_UINT64 = void 0;
+var buffer_1 = __webpack_require__(15313);
+var externals_1 = __webpack_require__(12971);
 /**
- * The max integer that this VM can handle
+ * 2^64-1
  */
-exports.MAX_INTEGER = new bn_js_1.default('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 16);
+exports.MAX_UINT64 = new externals_1.BN('ffffffffffffffff', 16);
+/**
+ * The max integer that the evm can handle (2^256-1)
+ */
+exports.MAX_INTEGER = new externals_1.BN('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 16);
 /**
  * 2^256
  */
-exports.TWO_POW256 = new bn_js_1.default('10000000000000000000000000000000000000000000000000000000000000000', 16);
+exports.TWO_POW256 = new externals_1.BN('10000000000000000000000000000000000000000000000000000000000000000', 16);
 /**
  * Keccak-256 hash of null
  */
@@ -4861,7 +6685,7 @@ exports.KECCAK256_NULL_S = 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfa
 /**
  * Keccak-256 hash of null
  */
-exports.KECCAK256_NULL = Buffer.from(exports.KECCAK256_NULL_S, 'hex');
+exports.KECCAK256_NULL = buffer_1.Buffer.from(exports.KECCAK256_NULL_S, 'hex');
 /**
  * Keccak-256 of an RLP of an empty array
  */
@@ -4869,7 +6693,7 @@ exports.KECCAK256_RLP_ARRAY_S = '1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a741
 /**
  * Keccak-256 of an RLP of an empty array
  */
-exports.KECCAK256_RLP_ARRAY = Buffer.from(exports.KECCAK256_RLP_ARRAY_S, 'hex');
+exports.KECCAK256_RLP_ARRAY = buffer_1.Buffer.from(exports.KECCAK256_RLP_ARRAY_S, 'hex');
 /**
  * Keccak-256 hash of the RLP of null
  */
@@ -4877,12 +6701,12 @@ exports.KECCAK256_RLP_S = '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622
 /**
  * Keccak-256 hash of the RLP of null
  */
-exports.KECCAK256_RLP = Buffer.from(exports.KECCAK256_RLP_S, 'hex');
+exports.KECCAK256_RLP = buffer_1.Buffer.from(exports.KECCAK256_RLP_S, 'hex');
 //# sourceMappingURL=constants.js.map
 
 /***/ }),
 
-/***/ 87179:
+/***/ 12971:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -4923,37 +6747,18 @@ exports.rlp = rlp;
 
 /***/ }),
 
-/***/ 5781:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ 26759:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.rlphash = exports.ripemd160FromArray = exports.ripemd160FromString = exports.ripemd160 = exports.sha256FromArray = exports.sha256FromString = exports.sha256 = exports.keccakFromArray = exports.keccakFromHexString = exports.keccakFromString = exports.keccak256 = exports.keccak = void 0;
 var keccak_1 = __webpack_require__(74040);
 var createHash = __webpack_require__(20160);
-var rlp = __importStar(__webpack_require__(11562));
-var bytes_1 = __webpack_require__(35269);
-var helpers_1 = __webpack_require__(11366);
+var externals_1 = __webpack_require__(12971);
+var bytes_1 = __webpack_require__(46462);
+var helpers_1 = __webpack_require__(73429);
 /**
  * Creates Keccak hash of a Buffer input
  * @param a The input data (Buffer)
@@ -4976,7 +6781,7 @@ var keccak = function (a, bits) {
             return (0, keccak_1.keccak512)(a);
         }
         default: {
-            throw new Error("Invald algorithm: keccak" + bits);
+            throw new Error("Invald algorithm: keccak".concat(bits));
         }
     }
 };
@@ -5108,28 +6913,28 @@ exports.ripemd160FromArray = ripemd160FromArray;
  * @param a The input data
  */
 var rlphash = function (a) {
-    return (0, exports.keccak)(rlp.encode(a));
+    return (0, exports.keccak)(externals_1.rlp.encode(a));
 };
 exports.rlphash = rlphash;
 //# sourceMappingURL=hash.js.map
 
 /***/ }),
 
-/***/ 11366:
+/***/ 73429:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.assertIsString = exports.assertIsArray = exports.assertIsBuffer = exports.assertIsHexString = void 0;
-var internal_1 = __webpack_require__(66277);
+var internal_1 = __webpack_require__(46482);
 /**
  * Throws if a string is not hex prefixed
  * @param {string} input string to check hex prefix of
  */
 var assertIsHexString = function (input) {
     if (!(0, internal_1.isHexString)(input)) {
-        var msg = "This method only supports 0x-prefixed hex strings but input was: " + input;
+        var msg = "This method only supports 0x-prefixed hex strings but input was: ".concat(input);
         throw new Error(msg);
     }
 };
@@ -5140,7 +6945,7 @@ exports.assertIsHexString = assertIsHexString;
  */
 var assertIsBuffer = function (input) {
     if (!Buffer.isBuffer(input)) {
-        var msg = "This method only supports Buffer but input was: " + input;
+        var msg = "This method only supports Buffer but input was: ".concat(input);
         throw new Error(msg);
     }
 };
@@ -5151,7 +6956,7 @@ exports.assertIsBuffer = assertIsBuffer;
  */
 var assertIsArray = function (input) {
     if (!Array.isArray(input)) {
-        var msg = "This method only supports number arrays but input was: " + input;
+        var msg = "This method only supports number arrays but input was: ".concat(input);
         throw new Error(msg);
     }
 };
@@ -5162,7 +6967,7 @@ exports.assertIsArray = assertIsArray;
  */
 var assertIsString = function (input) {
     if (typeof input !== 'string') {
-        var msg = "This method only supports strings but input was: " + input;
+        var msg = "This method only supports strings but input was: ".concat(input);
         throw new Error(msg);
     }
 };
@@ -5171,7 +6976,7 @@ exports.assertIsString = assertIsString;
 
 /***/ }),
 
-/***/ 39906:
+/***/ 5459:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -5190,43 +6995,43 @@ exports.isHexString = exports.getKeys = exports.fromAscii = exports.fromUtf8 = e
 /**
  * Constants
  */
-__exportStar(__webpack_require__(93297), exports);
+__exportStar(__webpack_require__(84861), exports);
 /**
  * Account class and helper functions
  */
-__exportStar(__webpack_require__(23180), exports);
+__exportStar(__webpack_require__(14636), exports);
 /**
  * Address type
  */
-__exportStar(__webpack_require__(61192), exports);
+__exportStar(__webpack_require__(511), exports);
 /**
  * Hash functions
  */
-__exportStar(__webpack_require__(5781), exports);
+__exportStar(__webpack_require__(26759), exports);
 /**
  * ECDSA signature
  */
-__exportStar(__webpack_require__(75664), exports);
+__exportStar(__webpack_require__(69875), exports);
 /**
  * Utilities for manipulating Buffers, byte arrays, etc.
  */
-__exportStar(__webpack_require__(35269), exports);
+__exportStar(__webpack_require__(46462), exports);
 /**
  * Function for definining properties on an object
  */
-__exportStar(__webpack_require__(67832), exports);
+__exportStar(__webpack_require__(18085), exports);
 /**
- * External exports (BN, rlp, secp256k1)
+ * External exports (BN, rlp)
  */
-__exportStar(__webpack_require__(87179), exports);
+__exportStar(__webpack_require__(12971), exports);
 /**
  * Helpful TypeScript types
  */
-__exportStar(__webpack_require__(20002), exports);
+__exportStar(__webpack_require__(79671), exports);
 /**
  * Export ethjs-util methods
  */
-var internal_1 = __webpack_require__(66277);
+var internal_1 = __webpack_require__(46482);
 Object.defineProperty(exports, "isHexPrefixed", ({ enumerable: true, get: function () { return internal_1.isHexPrefixed; } }));
 Object.defineProperty(exports, "stripHexPrefix", ({ enumerable: true, get: function () { return internal_1.stripHexPrefix; } }));
 Object.defineProperty(exports, "padToEven", ({ enumerable: true, get: function () { return internal_1.padToEven; } }));
@@ -5241,7 +7046,7 @@ Object.defineProperty(exports, "isHexString", ({ enumerable: true, get: function
 
 /***/ }),
 
-/***/ 66277:
+/***/ 46482:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
@@ -5279,7 +7084,7 @@ exports.isHexString = exports.getKeys = exports.fromAscii = exports.fromUtf8 = e
  */
 function isHexPrefixed(str) {
     if (typeof str !== 'string') {
-        throw new Error("[isHexPrefixed] input must be type 'string', received type " + typeof str);
+        throw new Error("[isHexPrefixed] input must be type 'string', received type ".concat(typeof str));
     }
     return str[0] === '0' && str[1] === 'x';
 }
@@ -5291,7 +7096,7 @@ exports.isHexPrefixed = isHexPrefixed;
  */
 var stripHexPrefix = function (str) {
     if (typeof str !== 'string')
-        throw new Error("[stripHexPrefix] input must be type 'string', received " + typeof str);
+        throw new Error("[stripHexPrefix] input must be type 'string', received ".concat(typeof str));
     return isHexPrefixed(str) ? str.slice(2) : str;
 };
 exports.stripHexPrefix = stripHexPrefix;
@@ -5303,10 +7108,10 @@ exports.stripHexPrefix = stripHexPrefix;
 function padToEven(value) {
     var a = value;
     if (typeof a !== 'string') {
-        throw new Error("[padToEven] value must be type 'string', received " + typeof a);
+        throw new Error("[padToEven] value must be type 'string', received ".concat(typeof a));
     }
     if (a.length % 2)
-        a = "0" + a;
+        a = "0".concat(a);
     return a;
 }
 exports.padToEven = padToEven;
@@ -5317,7 +7122,7 @@ exports.padToEven = padToEven;
  */
 function getBinarySize(str) {
     if (typeof str !== 'string') {
-        throw new Error("[getBinarySize] method requires input type 'string', recieved " + typeof str);
+        throw new Error("[getBinarySize] method requires input type 'string', recieved ".concat(typeof str));
     }
     return Buffer.byteLength(str, 'utf8');
 }
@@ -5332,10 +7137,10 @@ exports.getBinarySize = getBinarySize;
  */
 function arrayContainsArray(superset, subset, some) {
     if (Array.isArray(superset) !== true) {
-        throw new Error("[arrayContainsArray] method requires input 'superset' to be an array, got type '" + typeof superset + "'");
+        throw new Error("[arrayContainsArray] method requires input 'superset' to be an array, got type '".concat(typeof superset, "'"));
     }
     if (Array.isArray(subset) !== true) {
-        throw new Error("[arrayContainsArray] method requires input 'subset' to be an array, got type '" + typeof subset + "'");
+        throw new Error("[arrayContainsArray] method requires input 'subset' to be an array, got type '".concat(typeof subset, "'"));
     }
     return subset[some ? 'some' : 'every'](function (value) { return superset.indexOf(value) >= 0; });
 }
@@ -5368,7 +7173,7 @@ exports.toAscii = toAscii;
  */
 function fromUtf8(stringValue) {
     var str = Buffer.from(stringValue, 'utf8');
-    return "0x" + padToEven(str.toString('hex')).replace(/^0+|0+$/g, '');
+    return "0x".concat(padToEven(str.toString('hex')).replace(/^0+|0+$/g, ''));
 }
 exports.fromUtf8 = fromUtf8;
 /**
@@ -5383,9 +7188,9 @@ function fromAscii(stringValue) {
     for (var i = 0; i < stringValue.length; i++) {
         var code = stringValue.charCodeAt(i);
         var n = code.toString(16);
-        hex += n.length < 2 ? "0" + n : n;
+        hex += n.length < 2 ? "0".concat(n) : n;
     }
-    return "0x" + hex;
+    return "0x".concat(hex);
 }
 exports.fromAscii = fromAscii;
 /**
@@ -5401,10 +7206,10 @@ exports.fromAscii = fromAscii;
  */
 function getKeys(params, key, allowEmpty) {
     if (!Array.isArray(params)) {
-        throw new Error("[getKeys] method expects input 'params' to be an array, got " + typeof params);
+        throw new Error("[getKeys] method expects input 'params' to be an array, got ".concat(typeof params));
     }
     if (typeof key !== 'string') {
-        throw new Error("[getKeys] method expects input 'key' to be type 'string', got " + typeof params);
+        throw new Error("[getKeys] method expects input 'key' to be type 'string', got ".concat(typeof params));
     }
     var result = [];
     for (var i = 0; i < params.length; i++) {
@@ -5413,7 +7218,7 @@ function getKeys(params, key, allowEmpty) {
             value = '';
         }
         else if (typeof value !== 'string') {
-            throw new Error("invalid abi - expected type 'string', received " + typeof value);
+            throw new Error("invalid abi - expected type 'string', received ".concat(typeof value));
         }
         result.push(value);
     }
@@ -5439,39 +7244,20 @@ exports.isHexString = isHexString;
 
 /***/ }),
 
-/***/ 67832:
+/***/ 18085:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.defineProperties = void 0;
 var assert_1 = __importDefault(__webpack_require__(57579));
-var internal_1 = __webpack_require__(66277);
-var rlp = __importStar(__webpack_require__(11562));
-var bytes_1 = __webpack_require__(35269);
+var internal_1 = __webpack_require__(46482);
+var externals_1 = __webpack_require__(12971);
+var bytes_1 = __webpack_require__(46462);
 /**
  * Defines properties on a `Object`. It make the assumption that underlying data is binary.
  * @param self the `Object` to define properties on
@@ -5492,14 +7278,14 @@ var defineProperties = function (self, fields, data) {
         if (label) {
             var obj_1 = {};
             self._fields.forEach(function (field) {
-                obj_1[field] = "0x" + self[field].toString('hex');
+                obj_1[field] = "0x".concat(self[field].toString('hex'));
             });
             return obj_1;
         }
         return (0, bytes_1.baToJSON)(self.raw);
     };
     self.serialize = function serialize() {
-        return rlp.encode(self.raw);
+        return externals_1.rlp.encode(self.raw);
     };
     fields.forEach(function (field, i) {
         self._fields.push(field.name);
@@ -5513,10 +7299,10 @@ var defineProperties = function (self, fields, data) {
             }
             if (field.allowLess && field.length) {
                 v = (0, bytes_1.unpadBuffer)(v);
-                (0, assert_1.default)(field.length >= v.length, "The field " + field.name + " must not have more " + field.length + " bytes");
+                (0, assert_1.default)(field.length >= v.length, "The field ".concat(field.name, " must not have more ").concat(field.length, " bytes"));
             }
             else if (!(field.allowZero && v.length === 0) && field.length) {
-                (0, assert_1.default)(field.length === v.length, "The field " + field.name + " must have byte length of " + field.length);
+                (0, assert_1.default)(field.length === v.length, "The field ".concat(field.name, " must have byte length of ").concat(field.length));
             }
             self.raw[i] = v;
         }
@@ -5545,7 +7331,7 @@ var defineProperties = function (self, fields, data) {
             data = Buffer.from((0, internal_1.stripHexPrefix)(data), 'hex');
         }
         if (Buffer.isBuffer(data)) {
-            data = rlp.decode(data);
+            data = externals_1.rlp.decode(data);
         }
         if (Array.isArray(data)) {
             if (data.length > self._fields.length) {
@@ -5575,22 +7361,19 @@ exports.defineProperties = defineProperties;
 
 /***/ }),
 
-/***/ 75664:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ 69875:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.hashPersonalMessage = exports.isValidSignature = exports.fromRpcSig = exports.toCompactSig = exports.toRpcSig = exports.ecrecover = exports.ecsign = void 0;
 var secp256k1_1 = __webpack_require__(74665);
-var bn_js_1 = __importDefault(__webpack_require__(35579));
-var bytes_1 = __webpack_require__(35269);
-var hash_1 = __webpack_require__(5781);
-var helpers_1 = __webpack_require__(11366);
-var types_1 = __webpack_require__(20002);
+var externals_1 = __webpack_require__(12971);
+var bytes_1 = __webpack_require__(46462);
+var hash_1 = __webpack_require__(26759);
+var helpers_1 = __webpack_require__(73429);
+var types_1 = __webpack_require__(79671);
 function ecsign(msgHash, privateKey, chainId) {
     var _a = (0, secp256k1_1.ecdsaSign)(msgHash, privateKey), signature = _a.signature, recovery = _a.recid;
     var r = Buffer.from(signature.slice(0, 32));
@@ -5617,7 +7400,7 @@ function calculateSigRecovery(v, chainId) {
     return vBN.sub(chainIdBN.muln(2).addn(35));
 }
 function isValidSigRecovery(recovery) {
-    var rec = new bn_js_1.default(recovery);
+    var rec = new externals_1.BN(recovery);
     return rec.eqn(0) || rec.eqn(1);
 }
 /**
@@ -5706,16 +7489,16 @@ exports.fromRpcSig = fromRpcSig;
  */
 var isValidSignature = function (v, r, s, homesteadOrLater, chainId) {
     if (homesteadOrLater === void 0) { homesteadOrLater = true; }
-    var SECP256K1_N_DIV_2 = new bn_js_1.default('7fffffffffffffffffffffffffffffff5d576e7357a4501ddfe92f46681b20a0', 16);
-    var SECP256K1_N = new bn_js_1.default('fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141', 16);
+    var SECP256K1_N_DIV_2 = new externals_1.BN('7fffffffffffffffffffffffffffffff5d576e7357a4501ddfe92f46681b20a0', 16);
+    var SECP256K1_N = new externals_1.BN('fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141', 16);
     if (r.length !== 32 || s.length !== 32) {
         return false;
     }
     if (!isValidSigRecovery(calculateSigRecovery(v, chainId))) {
         return false;
     }
-    var rBN = new bn_js_1.default(r);
-    var sBN = new bn_js_1.default(s);
+    var rBN = new externals_1.BN(r);
+    var sBN = new externals_1.BN(s);
     if (rBN.isZero() || rBN.gt(SECP256K1_N) || sBN.isZero() || sBN.gt(SECP256K1_N)) {
         return false;
     }
@@ -5733,7 +7516,7 @@ exports.isValidSignature = isValidSignature;
  */
 var hashPersonalMessage = function (message) {
     (0, helpers_1.assertIsBuffer)(message);
-    var prefix = Buffer.from("\u0019Ethereum Signed Message:\n" + message.length, 'utf-8');
+    var prefix = Buffer.from("\u0019Ethereum Signed Message:\n".concat(message.length), 'utf-8');
     return (0, hash_1.keccak)(Buffer.concat([prefix, message]));
 };
 exports.hashPersonalMessage = hashPersonalMessage;
@@ -5741,24 +7524,21 @@ exports.hashPersonalMessage = hashPersonalMessage;
 
 /***/ }),
 
-/***/ 20002:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ 79671:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.toType = exports.TypeOutput = exports.bnToRlp = exports.bnToUnpaddedBuffer = exports.bnToHex = void 0;
-var bn_js_1 = __importDefault(__webpack_require__(35579));
-var internal_1 = __webpack_require__(66277);
-var bytes_1 = __webpack_require__(35269);
+var externals_1 = __webpack_require__(12971);
+var internal_1 = __webpack_require__(46482);
+var bytes_1 = __webpack_require__(46462);
 /**
  * Convert BN to 0x-prefixed hex string.
  */
 function bnToHex(value) {
-    return "0x" + value.toString(16);
+    return "0x".concat(value.toString(16));
 }
 exports.bnToHex = bnToHex;
 /**
@@ -5798,7 +7578,7 @@ function toType(input, outputType) {
         return undefined;
     }
     if (typeof input === 'string' && !(0, internal_1.isHexString)(input)) {
-        throw new Error("A string must be provided with a 0x-prefix, given: " + input);
+        throw new Error("A string must be provided with a 0x-prefix, given: ".concat(input));
     }
     else if (typeof input === 'number' && !Number.isSafeInteger(input)) {
         throw new Error('The provided number is greater than MAX_SAFE_INTEGER (please use an alternative input type)');
@@ -5808,11 +7588,11 @@ function toType(input, outputType) {
         return output;
     }
     else if (outputType === TypeOutput.BN) {
-        return new bn_js_1.default(output);
+        return new externals_1.BN(output);
     }
     else if (outputType === TypeOutput.Number) {
-        var bn = new bn_js_1.default(output);
-        var max = new bn_js_1.default(Number.MAX_SAFE_INTEGER.toString());
+        var bn = new externals_1.BN(output);
+        var max = new externals_1.BN(Number.MAX_SAFE_INTEGER.toString());
         if (bn.gt(max)) {
             throw new Error('The provided number is greater than MAX_SAFE_INTEGER (please use an alternative output type)');
         }
@@ -5820,7 +7600,7 @@ function toType(input, outputType) {
     }
     else {
         // outputType === TypeOutput.PrefixedHexString
-        return "0x" + output.toString('hex');
+        return "0x".concat(output.toString('hex'));
     }
 }
 exports.toType = toType;

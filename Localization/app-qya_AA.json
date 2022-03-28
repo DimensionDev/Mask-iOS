@@ -113,6 +113,10 @@
                 "title": "crwdns13424:0crwdne13424:0",
                 "description": "crwdns13426:0%scrwdne13426:0"
             },
+            "download_identity_code": {
+                "title": "crwdns14536:0crwdne14536:0",
+                "description": "crwdns14538:0%scrwdne14538:0"
+            },
             "backup_tips_no_backup_password": {
                 "title": "crwdns13428:0crwdne13428:0",
                 "description": "crwdns13430:0%scrwdne13430:0"
@@ -162,6 +166,9 @@
             "download": "crwdns13500:0crwdne13500:0",
             "skip": "crwdns13502:0crwdne13502:0",
             "download_next": "crwdns13504:0crwdne13504:0"
+        },
+        "toast": {
+            "saved": "crwdns14576:0crwdne14576:0"
         },
         "loading": "crwdns13506:0crwdne13506:0"
     },
@@ -485,7 +492,7 @@
                 "change_add_persona": "crwdns13946:0crwdne13946:0",
                 "rename": "crwdns13948:0crwdne13948:0",
                 "export_private_key": "crwdns13950:0crwdne13950:0",
-                "download": "crwdns13952:0crwdne13952:0",
+                "download": "crwdns14540:0crwdne14540:0",
                 "backup": "crwdns13954:0crwdne13954:0",
                 "log_out": "crwdns13956:0crwdne13956:0",
                 "delete": "crwdns13958:0crwdne13958:0"
@@ -526,11 +533,8 @@
             "add": "crwdns14006:0crwdne14006:0"
         },
         "persona_download": {
-            "persona": "crwdns14008:0crwdne14008:0",
-            "mask_id": "crwdns14010:0crwdne14010:0",
-            "private_key": "crwdns14012:0crwdne14012:0",
-            "identity_id": "crwdns14014:0crwdne14014:0",
-            "download_tips": "crwdns14016:0crwdne14016:0"
+            "identity_id": "crwdns14578:0crwdne14578:0",
+            "download_tips": "crwdns14580:0crwdne14580:0"
         },
         "wallet_balance": {
             "btn_swap": "crwdns14018:0crwdne14018:0",
@@ -740,6 +744,7 @@
             "scan_q_r_code": "crwdns14322:0crwdne14322:0",
             "qr_code_tips": "crwdns14324:0crwdne14324:0",
             "tap_to_copy": "crwdns14326:0crwdne14326:0",
+            "no_wallets": "crwdns14542:0%scrwdne14542:0",
             "connecting": "crwdns14328:0crwdne14328:0",
             "connect_success": "crwdns14330:0crwdne14330:0",
             "scan": "crwdns14332:0crwdne14332:0",

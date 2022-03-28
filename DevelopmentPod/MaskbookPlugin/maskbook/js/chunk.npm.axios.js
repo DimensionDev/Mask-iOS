@@ -1803,7 +1803,7 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(16126);
-axios.CancelToken = __webpack_require__(65095);
+axios.CancelToken = __webpack_require__(78813);
 axios.isCancel = __webpack_require__(26525);
 
 // Expose all/spread
@@ -1850,7 +1850,7 @@ module.exports = Cancel;
 
 /***/ }),
 
-/***/ 65095:
+/***/ 78813:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";

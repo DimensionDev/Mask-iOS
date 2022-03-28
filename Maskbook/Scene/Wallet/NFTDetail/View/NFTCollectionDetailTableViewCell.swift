@@ -13,6 +13,8 @@ import web3swift
 
 
 class NFTCollectionDetailTableViewCell: UITableViewCell {
+    var token: Collectible
+
     private var backView: UIView = {
         let view = UIView()
         view.applyCornerRadius(radius: 20)
@@ -44,8 +46,9 @@ class NFTCollectionDetailTableViewCell: UITableViewCell {
     
     private var moreButton: UIButton = {
         let button = UIButton(type: .system)
-        button.tintColor = Asset.Colors.AccountCard.nameText.color
-        button.setImage(Asset.Images.Scene.Balance.moreButton.image, for: .normal)
+        button.tintColor = Asset.Colors.Text.dark.color
+        button.setImage(Asset.Images.Scene.Nft.more.image, for: .normal)
+        button.addTarget(self, action: #selector(moreButtonDidClick(sender:)), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -94,11 +97,13 @@ class NFTCollectionDetailTableViewCell: UITableViewCell {
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        token = Collectible()
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initViews()
     }
     
     required init?(coder: NSCoder) {
+        token = Collectible()
         super.init(coder: coder)
         initViews()
     }
@@ -108,7 +113,7 @@ class NFTCollectionDetailTableViewCell: UITableViewCell {
         backgroundColor = .clear
         contentView.addSubview(backView)
         backView.snp.makeConstraints { make in
-            make.edges.equalTo(contentView).inset(UIEdgeInsets(top: 22, left: 22, bottom: 22, right: 22))
+            make.edges.equalTo(contentView).inset(LayoutConstraints.horizontal)
             make.height.equalTo(160)
         }
         
@@ -127,10 +132,10 @@ class NFTCollectionDetailTableViewCell: UITableViewCell {
         
         backView.addSubview(moreButton)
         moreButton.snp.makeConstraints {
-            $0.right.equalTo(-18)
+            $0.right.equalTo(-12)
             $0.top.equalTo(28)
-            $0.height.equalTo(32)
-            $0.width.equalTo(32)
+            $0.height.equalTo(24)
+            $0.width.equalTo(24)
         }
         
         backView.addSubview(collectionLabel)
@@ -171,7 +176,13 @@ class NFTCollectionDetailTableViewCell: UITableViewCell {
         }
     }
     
+    @objc
+    private func moreButtonDidClick(sender: UIButton) {
+        Coordinator.main.present(scene: .nftAction(nftToken: self.token), transition: .panModel(animated: true))
+    }
+    
     func setCollectionStauts(floor: NFTCollectionStatusModel, collection: NFTAssetPriceModel, token: Collectible){
+        self.token = token
         titleLabel.text = token.name
         collectionLabel.text = token.collectionName
         

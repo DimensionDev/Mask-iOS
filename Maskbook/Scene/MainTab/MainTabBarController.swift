@@ -13,7 +13,7 @@ import UIKit
 class MainTabBarController: UITabBarController {
     @InjectedProvider(\.userDefaultSettings)
     private var settings
-        
+    
     enum Tab: Int, CaseIterable {
         case personas
         case wallet
@@ -81,14 +81,6 @@ class MainTabBarController: UITabBarController {
 }
 
 extension MainTabBarController {
-    override var childForStatusBarStyle: UIViewController? {
-        // If selectedViewController is a UINavigationViewController, let its topViewController decide the status bar style
-        if let naviVC = selectedViewController as? UINavigationController {
-            return naviVC.topViewController
-        }
-        return selectedViewController
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         let tabBar = MaskTabBar()
@@ -118,6 +110,10 @@ extension MainTabBarController {
         navigationController.updateTabBarItem(for: tab)
         navigationController.navigationBar.setAppearance()
         return navigationController
+    }
+    
+    func navigationController(tab: Tab) -> UINavigationController? {
+        tabControllerMap[tab]
     }
 
     func replace(tab: Tab, with controller: UIViewController, animated: Bool = false) {

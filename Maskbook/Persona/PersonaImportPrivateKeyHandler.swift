@@ -7,6 +7,7 @@
 //
 
 import Combine
+import CoreDataStack
 import Foundation
 import SwiftMsgPack
 import SwiftyJSON
@@ -42,26 +43,44 @@ class PersonaImportPrivateKeyHandler {
             log.debug("private key error", source: "persona")
             return
         }
-        let personaRecords = PersonaRepository.queryPersonas(identifiers: nil).filter {
+        let personaRecord = PersonaRepository.queryPersonas(identifiers: nil).filter {
             guard let privateKey = $0.privateKey else { return false }
             guard let data = privateKey.data(using: .utf8) else { return false }
             let json = try? JSON(data: data)
             guard let dInPersona = json?["d"].string else { return false }
             return d == dInPersona
-        }
+        }.first
         
-        if !personaRecords.isEmpty {
-            let personaRecord = personaRecords[0]
-            guard let personaIdentifier = personaRecords[0].identifier else { return }
-            if scene == .userScan, !personaRecord.hasLogout {
+        if let personaRecord = personaRecord {
+            if !personaRecord.hasLogout {
                 showRestoreAlreadyExistedAlert()
+                return
+            }
+            let names = personaManager.personaRecordsSubject.value.map(\.nickname)
+            if let nickname = personaRecord.nickname, names.contains(nickname) {
+                let renameViewModel = RenameViewModel(
+                    originalName: "",
+                    title: L10n.Scene.Personas.Create.createPersona,
+                    dismissOnConfirm: false
+                ) { [weak self] name, viewModel in
+                    guard let self = self else { return }
+                    if names.contains(name) {
+                        self.personaNicknameDuplicated()
+                        return
+                    }
+                    viewModel.dismissSignal.send {
+                        PersonaRepository.updatePersonaNickname(identifier: personaRecord.nonOptionalIdentifier, nickname: name)
+                        self.setCurrentPersona(persona: personaRecord)
+                    }
+                }
+                
+                coordinator.present(
+                    scene: .rename(viewModel: renameViewModel),
+                    transition: .panModel(animated: true)
+                )
             } else {
-                showRestoreSuccessAlert()
+                setCurrentPersona(persona: personaRecord)
             }
-            if personaRecord.hasLogout {
-                PersonaRepository.logoutPersona(identifier: personaIdentifier, logout: false)
-            }
-            userSetting.currentPesonaIdentifier = personaIdentifier
         } else {
             switch scene {
             case .userInput:
@@ -73,12 +92,23 @@ class PersonaImportPrivateKeyHandler {
         }
     }
     
+    private func setCurrentPersona(persona: PersonaRecord) {
+        if persona.hasLogout {
+            PersonaRepository.logoutPersona(identifier: persona.nonOptionalIdentifier, logout: false)
+        }
+        userSetting.currentPesonaIdentifier = persona.nonOptionalIdentifier
+        showRestoreSuccessAlert()
+    }
+    
     private func restoreFromPrivateKey(privateKey: String) {
         PersonaManager.restoreFromPrivateKey(privateKey: privateKey)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { _ in
             }) { [weak self] result in
                 if result.isSuccess {
+                    if let identifier = result.result?.dictionaryValue["identifier"]?.stringValue {
+                        self?.userSetting.currentPesonaIdentifier = identifier
+                    }
                     self?.showRestoreSuccessAlert()
                 } else {
                     self?.showRestoreFailedAlert(errorMessage: result.error?.message)
@@ -89,31 +119,37 @@ class PersonaImportPrivateKeyHandler {
     
     private func showInputNameViewController(privateKey: String) {
         let titles = personaManager.personaRecordsSubject.value.map(\.nickname)
-        let viewModel = RenameViewModel(
+        let renameViewModel = RenameViewModel(
             originalName: "",
-            title: L10n.Scene.Personas.Create.createPersona
-        ) { [weak self] name in
+            title: L10n.Scene.Personas.Create.createPersona,
+            dismissOnConfirm: false
+        ) { [weak self] name, viewModel in
             guard let self = self else { return }
             if titles.contains(name) {
                 self.personaNicknameDuplicated()
                 return
             }
             
-            PersonaManager.restoreFromPrivateKey(privateKey: privateKey, nickname: name)
-                .receive(on: DispatchQueue.main)
-                .sink(receiveCompletion: { _ in
-                }) { [weak self] result in
-                    if result.isSuccess {
-                        self?.showRestoreSuccessAlert()
-                    } else {
-                        self?.showRestoreFailedAlert(errorMessage: result.error?.message)
+            viewModel.dismissSignal.send {
+                PersonaManager.restoreFromPrivateKey(privateKey: privateKey, nickname: name)
+                    .receive(on: DispatchQueue.main)
+                    .sink(receiveCompletion: { _ in
+                    }) { [weak self] result in
+                        if result.isSuccess {
+                            if let identifier = result.result?.dictionaryValue["identifier"]?.stringValue {
+                                self?.userSetting.currentPesonaIdentifier = identifier
+                            }
+                            self?.showRestoreSuccessAlert()
+                        } else {
+                            self?.showRestoreFailedAlert(errorMessage: result.error?.message)
+                        }
                     }
-                }
-                .store(in: &self.disposeBag)
+                    .store(in: &self.disposeBag)
+            }
         }
         
         coordinator.present(
-            scene: .rename(viewModel: viewModel),
+            scene: .rename(viewModel: renameViewModel),
             transition: .panModel(animated: true)
         )
     }

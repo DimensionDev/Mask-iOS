@@ -2,7 +2,7 @@
 //  PersonaRecord+CoreDataProperties.swift
 //  CoreDataStack
 //
-//  Created by Brad Gao on 2022/1/20.
+//  Created by xiaojian sun on 2022/3/18.
 //  Copyright © 2022 dimension. All rights reserved.
 //
 //
@@ -17,6 +17,7 @@ extension PersonaRecord {
         return NSFetchRequest<PersonaRecord>(entityName: "PersonaRecord")
     }
 
+    @NSManaged public var avatar: String?
     @NSManaged public var createdAt: Date?
     @NSManaged public var hasLogout: Bool
     @NSManaged public var identifier: String?
@@ -29,6 +30,7 @@ extension PersonaRecord {
     @NSManaged public var publicKey: String?
     @NSManaged public var updatedAt: Date?
     @NSManaged public var withPassword: Bool
+    @NSManaged public var avatarData: Data?
     @NSManaged public var linkedProfiles: NSSet?
 
 }

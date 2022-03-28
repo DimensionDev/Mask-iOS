@@ -35,7 +35,7 @@ class LocalBackupViewController: BaseViewController {
     lazy var vStack: UIStackView = {
         let view = UIStackView()
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: 24, left: 22, bottom: 16, right: 22)
+        view.layoutMargins = UIEdgeInsets(top: 24, left: LayoutConstraints.leading, bottom: 16, right: LayoutConstraints.trailing)
         view.axis = .vertical
         view.spacing = 16
         view.alignment = .fill
@@ -503,7 +503,9 @@ extension LocalBackupViewController: UIDocumentPickerDelegate {
             // Handle the failure here.
             return
         }
-        
+        guard BackupFolderCheckService.checkAndAlert(url) else {
+            return
+        }
         // Make sure you release the security-scoped resource when you finish.
         defer {
             viewModel.loading = .loading(text: L10n.Scene.Setting.LocalBackup.loadingText)

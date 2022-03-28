@@ -26,10 +26,8 @@ class SocialViewController: BaseViewController {
 
     private lazy var editButton: UIButton = {
         let button = HitTestExpandedButton(type: .custom)
-        button.titleLabel?.font = FontStyles.MH5
-        button.setTitleColor(Asset.Colors.Public.blue.color, for: .normal)
-        button.setTitle(L10n.Common.Controls.edit, for: .normal)
-        button.setTitle(L10n.Common.Controls.done, for: .selected)
+        button.setImage(Asset.Images.Scene.Personas.edit.image, for: .normal)
+        button.setImage(Asset.Images.Scene.Personas.done.image, for: .selected)
         NSLayoutConstraint.activate([
             button.heightAnchor.constraint(equalToConstant: 24),
             button.widthAnchor.constraint(equalToConstant: 48)
@@ -70,12 +68,12 @@ class SocialViewController: BaseViewController {
             header.topAnchor.constraint(equalTo: view.topAnchor),
             header.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             header.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            header.heightAnchor.constraint(equalToConstant: 64)
+            header.heightAnchor.constraint(equalToConstant: 40)
         ])
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: header.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
+            collectionView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: 8),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstraints.leading),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -LayoutConstraints.trailing),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
@@ -118,7 +116,7 @@ class SocialViewController: BaseViewController {
             editButton
         }.cv.apply {
             $0.isLayoutMarginsRelativeArrangement = true
-            $0.layoutMargins = UIEdgeInsets(top: 0, left: 23, bottom: 0, right: 23)
+            $0.layoutMargins = UIEdgeInsets(top: 0, left: LayoutConstraints.leading, bottom: 0, right: LayoutConstraints.trailing)
         }
         return hStack
     }
@@ -160,9 +158,7 @@ extension SocialViewController: UICollectionViewDataSource {
                 withReuseIdentifier: String(describing: SocialAccountCollectionCell.self),
                 for: indexPath) as! SocialAccountCollectionCell
             let profileRecord = personaManager.currentProfiles.value[indexPath.row - 1]
-            if let profile = Profile(fromRecord: profileRecord) {
-                cell.configWith(profile: profile)
-            }
+            cell.configWith(profile: profileRecord)
             cell.setEditMode(isEditing: collectionView.isEditing)
             cell.delegate = self
             return cell
@@ -171,8 +167,8 @@ extension SocialViewController: UICollectionViewDataSource {
 }
 
 extension SocialViewController: SocialAccountCollectionCellDelegate {
-    func deleteAction(profile: Profile) {
-        disConnectAction(profile: profile)
+    func deleteAction(profileIdentifier: String) {
+        disConnectAction(profileIdentifier: profileIdentifier)
     }
 }
 
@@ -197,7 +193,8 @@ extension SocialViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension SocialViewController {
-    func disConnectAction(profile: Profile) {
+    func disConnectAction(profileIdentifier: String) {
+        guard let profile = ProfileRepository.queryProfile(identifier: profileIdentifier) else { return }
         let alertController = AlertController(
             title: "",
             message: L10n.Common.Alert.DisconnectProfile.description,
@@ -209,7 +206,7 @@ extension SocialViewController {
                 // toggle edit mode
                 self.collectionView.isEditing = false
                 self.editButton.isSelected = false
-                ProfileRepository.detachProfile(identifier: profile.identifier)
+                ProfileRepository.detachProfile(identifier: profile.nonOptionalIdentifier)
             },
             cancelButtonClicked: nil)
         let keywords: String = {

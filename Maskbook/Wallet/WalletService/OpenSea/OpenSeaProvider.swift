@@ -16,7 +16,7 @@ class OpenSeaProvider {
     @InjectedProvider(\.userDefaultSettings)
     private var userSettings
     
-    public var refreshCompletionBlock: ((Error?) -> Void)?
+    var refreshCompletionBlock: ((Error?) -> Void)?
     
     private let callbackProcessQueue = DispatchQueue(label: "io.mask.opensea")
     private let baseURL: URL = URL(string: "https://api.opensea.io/api/v1/")!
@@ -132,19 +132,23 @@ class OpenSeaProvider {
         guard let address = maskUserDefaults.defaultAccountAddress else {
             return nil
         }
-//        let address = "0xEFF202eccb0066d0df9c11124E5f430E5ee11e82"
         
         let decoder = JSONDecoder()
+        var fetchTokenUrlComponents = URLComponents(
+            url: baseURL.appendingPathComponent("assets"),
+            resolvingAgainstBaseURL: false)
         
-        var fetchTokenUrlComponents = URLComponents(url: baseURL.appendingPathComponent("assets"),
-                                                    resolvingAgainstBaseURL: false)!
+        fetchTokenUrlComponents?.queryItems = [
+            URLQueryItem(name: "owner", value: address),
+            URLQueryItem(name: "order_direction", value: "desc"),
+            URLQueryItem(name: "offset", value: "\(offset)"),
+            URLQueryItem(name: "limit", value: "\(limit)")]
         
-        fetchTokenUrlComponents.queryItems = [URLQueryItem(name: "owner", value: address),
-                                              URLQueryItem(name: "order_direction", value: "desc"),
-                                              URLQueryItem(name: "offset", value: "\(offset)"),
-                                              URLQueryItem(name: "limit", value: "\(limit)")]
+        guard let requestUrl = fetchTokenUrlComponents?.url else {
+            return nil
+        }
         
-        var fetchTokenRequest = URLRequest(url: fetchTokenUrlComponents.url!)
+        var fetchTokenRequest = URLRequest(url: requestUrl)
         fetchTokenRequest.setValue(APIKey.OPENSEA, forHTTPHeaderField: "x-api-key")
         let tokenPublisher =
             session.dataTaskPublisher(for: fetchTokenRequest)
@@ -174,12 +178,10 @@ class OpenSeaProvider {
         
         // Only resolve ENS now.
         // Then save them into coredata.
-        let tempContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-        tempContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-        tempContext.parent = AppContext.shared.backgroundContext
+        let tempContext = AppContext.shared.backgroundContext
         
-        var excluedIdentifiers: [String] = []
         tempContext.performAndWait {
+            var excluedIdentifiers: [String] = []
             assets.forEach { nft in
                 let collectible = Collectible(nftModel: nft, network: network, context: tempContext)
                 if let account = WalletCoreStorage.getAccount(address: accountAddress, context: tempContext) {
@@ -190,17 +192,12 @@ class OpenSeaProvider {
                     excluedIdentifiers.append(identifier)
                 }
             }
-        }
-        tempContext.performAndWait {
+            
+            // Delete all Collectibles that are not in assets
+            cleanupCollectibles(address: accountAddress, exclued: excluedIdentifiers)
+            
             try? tempContext.saveOrRollback()
         }
-        
-        AppContext.shared.backgroundContext.performAndWait {
-            try? AppContext.shared.backgroundContext.saveOrRollback()
-        }
-        
-        // Delete all Collectibles that are not in assets
-        cleanupCollectibles(address: accountAddress, exclued: excluedIdentifiers)
         
         os_log(
             "%{public}s[%{public}ld], %{public}s: [nft] store finished, networkId: %ld}",
@@ -270,9 +267,9 @@ class OpenSeaProvider {
         assetModel: Collectible
     ) -> AnyPublisher<NFTAssetPriceModel, Error> {
         let decoder = JSONDecoder()
-        let fetchTokenUrlComponents = URLComponents(url: baseURL.appendingPathComponent("asset/\(assetModel.address ?? "")/\(assetModel.tokenId ?? "")"),
+        var fetchTokenUrlComponents = URLComponents(url: baseURL.appendingPathComponent("asset/\(assetModel.address ?? "")/\(assetModel.tokenId ?? "")"),
                                                     resolvingAgainstBaseURL: false)!
-        
+        fetchTokenUrlComponents.queryItems = [URLQueryItem(name: "include_orders", value: "true") ]
         var fetchTokenRequest = URLRequest(url: fetchTokenUrlComponents.url!)
         fetchTokenRequest.setValue(APIKey.OPENSEA, forHTTPHeaderField: "x-api-key")
         let tokenPublisher =

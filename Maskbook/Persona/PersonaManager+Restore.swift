@@ -24,7 +24,7 @@ extension PersonaManager {
     static func restoreFromPrivateKey(privateKey: String,
                                       nickname: String = "persona1") -> AnyPublisher<MaskWebMessageResult, Error> {
         let request = WebExtension.Persona.RestorePersonaPrivateKey.withPayload {
-            .init(privateKey: privateKey, nickname: nickname)
+            .init(privateKey: privateKey.base64URLUnescaped(), nickname: nickname)
         }
         return request
             .eraseToAnyPublisher()

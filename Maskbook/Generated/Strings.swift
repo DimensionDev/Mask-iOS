@@ -19,7 +19,7 @@ enum L10n {
       static var arbitrum: String {
         return L10n.tr("Localizable", "Chain.Name.Arbitrum")
       }
-      /// Binance smart chain
+      /// BNB Chain
       static var bsc: String {
         return L10n.tr("Localizable", "Chain.Name.Bsc")
       }
@@ -39,7 +39,7 @@ enum L10n {
       static var polygon: String {
         return L10n.tr("Localizable", "Chain.Name.Polygon")
       }
-      /// xDai
+      /// Gnosis
       static var xdai: String {
         return L10n.tr("Localizable", "Chain.Name.Xdai")
       }
@@ -50,7 +50,7 @@ enum L10n {
       static var arbitrum: String {
         return L10n.tr("Localizable", "Chain.ShortName.Arbitrum")
       }
-      /// BSC
+      /// BNB
       static var bsc: String {
         return L10n.tr("Localizable", "Chain.ShortName.Bsc")
       }
@@ -70,7 +70,7 @@ enum L10n {
       static var polygon: String {
         return L10n.tr("Localizable", "Chain.ShortName.Polygon")
       }
-      /// xDai
+      /// Gnosis
       static var xdai: String {
         return L10n.tr("Localizable", "Chain.ShortName.Xdai")
       }
@@ -84,6 +84,17 @@ enum L10n {
     }
 
     enum Alert {
+
+      enum BackupPopupBindingFirst {
+        /// Please bind your email or phone number before you back up to cloud.
+        static var description: String {
+          return L10n.tr("Localizable", "Common.Alert.BackupPopupBindingFirst.Description")
+        }
+        /// Bind your email or phone
+        static var title: String {
+          return L10n.tr("Localizable", "Common.Alert.BackupPopupBindingFirst.Title")
+        }
+      }
 
       enum BackupTipsNoBackupPassword {
         /// Please set up your %@ before you back up.
@@ -165,6 +176,17 @@ enum L10n {
         }
       }
 
+      enum DownloadIdentityCode {
+        /// Please set up your %@ before you download persona QR code. 
+        static func description(_ p1: String) -> String {
+          return L10n.tr("Localizable", "Common.Alert.DownloadIdentityCode.Description", p1)
+        }
+        /// Set up backup password 
+        static var title: String {
+          return L10n.tr("Localizable", "Common.Alert.DownloadIdentityCode.Title")
+        }
+      }
+
       enum ExportPrivateKey {
         /// Please set up your %@ before you export private key. 
         static func description(_ p1: String) -> String {
@@ -198,28 +220,6 @@ enum L10n {
         }
       }
 
-      enum IdentityCreate {
-        /// Please don’t forget your identity code. Your identity code is the only proof of your user identity and the only basis for you to encrypt or decrypt social activities. 
-        static var description: String {
-          return L10n.tr("Localizable", "Common.Alert.IdentityCreate.Description")
-        }
-        /// Identity created!
-        static var title: String {
-          return L10n.tr("Localizable", "Common.Alert.IdentityCreate.Title")
-        }
-      }
-
-      enum IdentityPhrase {
-        /// Your identity phrase is composed of randomly selected words. Please carefully write down each word in the order it appears.
-        static var description: String {
-          return L10n.tr("Localizable", "Common.Alert.IdentityPhrase.Description")
-        }
-        /// Identity Phrase
-        static var title: String {
-          return L10n.tr("Localizable", "Common.Alert.IdentityPhrase.Title")
-        }
-      }
-
       enum KeychainAuthPrompt {
         /// Authenticate to use your secrets
         static var title: String {
@@ -235,6 +235,17 @@ enum L10n {
         /// Backup failed!
         static var backupFailed: String {
           return L10n.tr("Localizable", "Common.Alert.LocalBackup.BackupFailed")
+        }
+      }
+
+      enum PersonaCreate {
+        /// You have successfully created your persona %@. 
+        static func description(_ p1: String) -> String {
+          return L10n.tr("Localizable", "Common.Alert.PersonaCreate.Description", p1)
+        }
+        /// Successful 
+        static var title: String {
+          return L10n.tr("Localizable", "Common.Alert.PersonaCreate.Title")
         }
       }
 
@@ -373,13 +384,6 @@ enum L10n {
         }
       }
 
-      enum WalletBackup {
-        /// Copied!
-        static var title: String {
-          return L10n.tr("Localizable", "Common.Alert.WalletBackup.Title")
-        }
-      }
-
       enum WalletCreateSuccess {
         /// In order to protect your funds against hackers and thieves, store this recovery phrase in a safe and secure place.
         static var description: String {
@@ -410,6 +414,17 @@ enum L10n {
         /// Import completed!
         static var alertTitleSuccess: String {
           return L10n.tr("Localizable", "Common.Alert.WalletImport.AlertTitleSuccess")
+        }
+      }
+
+      enum WrongFolder {
+        /// When you delete Mask App, the Mask Network sandbox folder would also be deleted. For data security, please save to a more secure folder (non-sandbox).
+        static var description: String {
+          return L10n.tr("Localizable", "Common.Alert.WrongFolder.Description")
+        }
+        /// Please select another folder
+        static var title: String {
+          return L10n.tr("Localizable", "Common.Alert.WrongFolder.Title")
         }
       }
     }
@@ -491,6 +506,10 @@ enum L10n {
       static var mergeToLocalData: String {
         return L10n.tr("Localizable", "Common.Controls.MergeToLocalData")
       }
+      /// Move data now
+      static var moveDataNow: String {
+        return L10n.tr("Localizable", "Common.Controls.MoveDataNow")
+      }
       /// Next
       static var next: String {
         return L10n.tr("Localizable", "Common.Controls.Next")
@@ -503,6 +522,10 @@ enum L10n {
       static var ok: String {
         return L10n.tr("Localizable", "Common.Controls.Ok")
       }
+      /// Remind me later
+      static var remindMeLater: String {
+        return L10n.tr("Localizable", "Common.Controls.RemindMeLater")
+      }
       /// Resend
       static var resend: String {
         return L10n.tr("Localizable", "Common.Controls.Resend")
@@ -510,6 +533,14 @@ enum L10n {
       /// Retry
       static var retry: String {
         return L10n.tr("Localizable", "Common.Controls.Retry")
+      }
+      /// Save
+      static var save: String {
+        return L10n.tr("Localizable", "Common.Controls.Save")
+      }
+      /// Select from photos
+      static var selectFromPhoto: String {
+        return L10n.tr("Localizable", "Common.Controls.SelectFromPhoto")
       }
       /// Sending...
       static var sending: String {
@@ -527,6 +558,10 @@ enum L10n {
       static var skip: String {
         return L10n.tr("Localizable", "Common.Controls.Skip")
       }
+      /// Take a photo
+      static var takePhoto: String {
+        return L10n.tr("Localizable", "Common.Controls.TakePhoto")
+      }
       /// Try Again
       static var tryAgain: String {
         return L10n.tr("Localizable", "Common.Controls.TryAgain")
@@ -538,6 +573,17 @@ enum L10n {
       /// Back
       static var webviewGoBack: String {
         return L10n.tr("Localizable", "Common.Controls.WebviewGoBack")
+      }
+    }
+
+    enum Toast {
+      /// copied!
+      static var copy: String {
+        return L10n.tr("Localizable", "Common.Toast.Copy")
+      }
+      /// Saved!
+      static var saved: String {
+        return L10n.tr("Localizable", "Common.Toast.Saved")
       }
     }
   }
@@ -940,6 +986,33 @@ enum L10n {
       }
     }
 
+    enum Guide {
+      /// Your Portal to the New,\nOpen Internet
+      static var description1: String {
+        return L10n.tr("Localizable", "Scene.Guide.Description1")
+      }
+      /// Send Encrypted Messages\non Social Networks with Persona
+      static var description2: String {
+        return L10n.tr("Localizable", "Scene.Guide.Description2")
+      }
+      /// Multi-Chain Wallet,\nCompatible with WalletConnect
+      static var description3: String {
+        return L10n.tr("Localizable", "Scene.Guide.Description3")
+      }
+      /// Back up in Time,\nwith Cloud / Local Backup
+      static var description4: String {
+        return L10n.tr("Localizable", "Scene.Guide.Description4")
+      }
+      /// Let’s start
+      static var letsStart: String {
+        return L10n.tr("Localizable", "Scene.Guide.LetsStart")
+      }
+      /// Skip
+      static var skip: String {
+        return L10n.tr("Localizable", "Scene.Guide.Skip")
+      }
+    }
+
     enum IdentifyVerify {
       /// Tap each word in the correct order.
       static var description: String {
@@ -1095,7 +1168,34 @@ enum L10n {
       }
     }
 
+    enum MoveBackupData {
+      /// We have detected that there are probably important backup documents(.pdf, .bin) in your Mask Network Sandbox Folder.
+      static var description1: String {
+        return L10n.tr("Localizable", "Scene.MoveBackupData.Description1")
+      }
+      /// When you delete Mask App, these documents would also be deleted.
+      static var description2: String {
+        return L10n.tr("Localizable", "Scene.MoveBackupData.Description2")
+      }
+      /// For data safety, please move your data to a more secure folder.
+      static var description3: String {
+        return L10n.tr("Localizable", "Scene.MoveBackupData.Description3")
+      }
+      /// Please move your data
+      static var title: String {
+        return L10n.tr("Localizable", "Scene.MoveBackupData.Title")
+      }
+    }
+
     enum NftDetail {
+      /// View Collection Website
+      static var collectionWeb: String {
+        return L10n.tr("Localizable", "Scene.NftDetail.CollectionWeb")
+      }
+      /// View on Etherscan
+      static var etherscan: String {
+        return L10n.tr("Localizable", "Scene.NftDetail.Etherscan")
+      }
       /// Floor Price
       static var floorPrice: String {
         return L10n.tr("Localizable", "Scene.NftDetail.FloorPrice")
@@ -1107,6 +1207,10 @@ enum L10n {
       /// List Price
       static var listPrice: String {
         return L10n.tr("Localizable", "Scene.NftDetail.ListPrice")
+      }
+      /// Save to Photos
+      static var savePhoto: String {
+        return L10n.tr("Localizable", "Scene.NftDetail.SavePhoto")
       }
     }
 
@@ -1189,6 +1293,21 @@ enum L10n {
       }
     }
 
+    enum PersonaAvatar {
+      /// Crop & rotate
+      static var crop: String {
+        return L10n.tr("Localizable", "Scene.PersonaAvatar.Crop")
+      }
+      /// Remove Persona Avatar
+      static var removeAvatar: String {
+        return L10n.tr("Localizable", "Scene.PersonaAvatar.RemoveAvatar")
+      }
+      /// Set Persona Avatar
+      static var title: String {
+        return L10n.tr("Localizable", "Scene.PersonaAvatar.Title")
+      }
+    }
+
     enum PersonaContacts {
       /// Contact
       static var contact: String {
@@ -1205,25 +1324,13 @@ enum L10n {
     }
 
     enum PersonaDownload {
-      /// This QR saves your identity code, please keep it safely. You can use Mask APP to scan QR to login persona. 
+      /// The QR code encrypts the identity code or private key of your persona. It’s recommended to print it. You can use Mask App to scan the QR code to login.
       static var downloadTips: String {
         return L10n.tr("Localizable", "Scene.PersonaDownload.DownloadTips")
       }
-      /// Identity ID
+      /// Identity Code
       static var identityId: String {
         return L10n.tr("Localizable", "Scene.PersonaDownload.IdentityId")
-      }
-      /// MASK ID
-      static var maskId: String {
-        return L10n.tr("Localizable", "Scene.PersonaDownload.MaskId")
-      }
-      /// Persona:
-      static var persona: String {
-        return L10n.tr("Localizable", "Scene.PersonaDownload.Persona")
-      }
-      /// Private Key
-      static var privateKey: String {
-        return L10n.tr("Localizable", "Scene.PersonaDownload.PrivateKey")
       }
     }
 
@@ -1247,7 +1354,7 @@ enum L10n {
       static var accounts: String {
         return L10n.tr("Localizable", "Scene.PersonaSocial.Accounts")
       }
-      /// add
+      /// Add
       static var add: String {
         return L10n.tr("Localizable", "Scene.PersonaSocial.Add")
       }
@@ -1255,7 +1362,7 @@ enum L10n {
       static var connectSocialAccounts: String {
         return L10n.tr("Localizable", "Scene.PersonaSocial.ConnectSocialAccounts")
       }
-      /// Select the social account to connect your persona. Enjoy a web 3.0 social expereince.
+      /// Connect persona to social networks below
       static var connectTips: String {
         return L10n.tr("Localizable", "Scene.PersonaSocial.ConnectTips")
       }
@@ -1309,7 +1416,7 @@ enum L10n {
       static var deleteTip: String {
         return L10n.tr("Localizable", "Scene.Personas.DeleteTip")
       }
-      /// Personas
+      /// Persona
       static var personas: String {
         return L10n.tr("Localizable", "Scene.Personas.Personas")
       }
@@ -1327,7 +1434,7 @@ enum L10n {
         static var delete: String {
           return L10n.tr("Localizable", "Scene.Personas.Action.Delete")
         }
-        /// Download Mnemonic
+        /// Download Persona QR Code
         static var download: String {
           return L10n.tr("Localizable", "Scene.Personas.Action.Download")
         }
@@ -1357,6 +1464,13 @@ enum L10n {
         /// Persona
         static var persona: String {
           return L10n.tr("Localizable", "Scene.Personas.Create.Persona")
+        }
+      }
+
+      enum Search {
+        /// Search
+        static var placeholder: String {
+          return L10n.tr("Localizable", "Scene.Personas.Search.Placeholder")
         }
       }
 
@@ -1719,6 +1833,14 @@ enum L10n {
         static var btnWithoutpassword: String {
           return L10n.tr("Localizable", "Scene.Sendtransaction.Send.BtnWithoutpassword")
         }
+        /// Contacts
+        static var contact: String {
+          return L10n.tr("Localizable", "Scene.Sendtransaction.Send.Contact")
+        }
+        /// Insufficient gas balance.
+        static var gasfeeError: String {
+          return L10n.tr("Localizable", "Scene.Sendtransaction.Send.GasfeeError")
+        }
         /// Amount
         static var labelAmount: String {
           return L10n.tr("Localizable", "Scene.Sendtransaction.Send.LabelAmount")
@@ -1738,6 +1860,10 @@ enum L10n {
         /// Ens or Address(0x...)
         static var placeholderAddress: String {
           return L10n.tr("Localizable", "Scene.Sendtransaction.Send.PlaceholderAddress")
+        }
+        /// Recent
+        static var recent: String {
+          return L10n.tr("Localizable", "Scene.Sendtransaction.Send.Recent")
         }
       }
 
@@ -2369,6 +2495,10 @@ enum L10n {
       static func networkNotSupport(_ p1: String) -> String {
         return L10n.tr("Localizable", "Scene.WalletConnect.NetworkNotSupport", p1)
       }
+      /// You haven’t installed any available %@ wallets for walletConnect
+      static func noWallets(_ p1: String) -> String {
+        return L10n.tr("Localizable", "Scene.WalletConnect.NoWallets", p1)
+      }
       /// Use a WalletConnect compatiable wallet\nto scan the QR Code
       static var qrCodeTips: String {
         return L10n.tr("Localizable", "Scene.WalletConnect.QrCodeTips")
@@ -2667,7 +2797,7 @@ enum L10n {
     static var labs: String {
       return L10n.tr("Localizable", "Tab.Labs")
     }
-    /// Personas
+    /// Persona
     static var personas: String {
       return L10n.tr("Localizable", "Tab.Personas")
     }

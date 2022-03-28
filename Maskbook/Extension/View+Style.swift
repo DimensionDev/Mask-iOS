@@ -24,7 +24,7 @@ extension View {
     }
 
     func sheetStyleWithPaddingAndBackground(bottomPadding: CGFloat = 24) -> some View {
-        self.padding(.horizontal, 22.5)
+        self.padding(.horizontal, LayoutConstraints.horizontal)
             .padding(.bottom, bottomPadding)
             .background(Asset.Colors.Background.normal.asColor())
     }
