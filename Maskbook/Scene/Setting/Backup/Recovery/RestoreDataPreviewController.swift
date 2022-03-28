@@ -20,7 +20,6 @@ final class RestoreDataPreviewController: BaseViewController {
         case root
         // pop to setting view
         case setting
-        case remoteRestoreAndLogin(strategy: RestoreCompletionStrategy)
     }
 
     private var cancelableStorage: Set<AnyCancellable> = []
@@ -91,36 +90,7 @@ final class RestoreDataPreviewController: BaseViewController {
                 self?.handleState(state)
             }
             .store(in: &cancelableStorage)
-        viewModel.walletPipeline
-            .sheetPipeline
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] pipeline in
-                guard let self = self else { return }
-                self.hideLoading()
-
-                switch pipeline {
-                case let .showWalletsInfo(decryptedData, restorefile, walletItems):
-                    self.showWalletsInfo(decryptedData, restorefile, walletItems)
-
-                case let .setupPaymentPassword(data, restorefile):
-                    self.setPaymentPassword(with: data, restorefile)
-
-                case let .verifyPaymentPassword(data, restorefile):
-                    self.verifyPaymentPassword(with: data, restorefile)
-
-                case .failedToParseRestoreFile:
-                    self.handleState(.failedLoadingData)
-                    
-                case .noWalletSecureFoundInRestoreFile:
-                    // For some legacy format backup file without wallet secure information, just ignore the wallets in it.
-                    self.handleState(.restoreSucceed)
-
-                case .restoreSucceed:
-                    self.coordinator.present(scene: .balance, transition: .replaceWalletTab())
-                    self.handleState(.restoreSucceed)
-                }
-            }
-            .store(in: &cancelableStorage)
+        buildWalletRestoreEvent(signalStorage: &cancelableStorage)
         viewModel.startPreparingData()
     }
 
@@ -132,10 +102,6 @@ final class RestoreDataPreviewController: BaseViewController {
         case .unsupportedFile:
             hideLoading()
             showAlertWhenFileParsingFailed()
-            
-        case .restoreSucceed:
-            hideLoading()
-            restoreComplete()
             
         case .failedLoadingData:
             hideLoading()
@@ -156,100 +122,6 @@ final class RestoreDataPreviewController: BaseViewController {
 
     private func startLoading() {
         loadingController.startAnimation()
-    }
-
-    private func login() {
-        self.coordinator.present(
-            scene: .persona,
-            transition: .replaceCurrentNavigation(tab: .personas)
-        )
-    }
-
-    private func syncPasswordAndLogin() {
-        guard case let .remoteRestoreAndLogin(strategy) = self.destination,
-              case let .suggestSyncing(remotePassword) = strategy else { return }
-        vault.publisherWhenUpdating(remotePassword, forKey: .backupPassword)
-            .receive(on: DispatchQueue.global())
-            .retry(3)
-            .replaceError(with: ())
-            .fireAndIgnore()
-            .store(in: &cancelableStorage)
-        login()
-    }
-
-    private func checkIfNeedSyncingPassword() {
-        let finalTip = NSMutableAttributedString()
-        let restoeSucceedTip = NSAttributedString(
-            string: L10n.Scene.Restore.Tip.remoteRestoreSucceed,
-            attributes: [
-                .font: FontStyles.MH5,
-                .foregroundColor: Asset.Colors.Text.normal.color
-            ]
-        )
-        let syncPasswordTip = NSAttributedString(
-            string: L10n.Scene.Restore.Tip.remoteRestoreSyncingPassword,
-            attributes: [
-                .font: FontStyles.MH5,
-                .foregroundColor: Asset.Colors.Public.blue.color
-            ]
-        )
-        finalTip.append(restoeSucceedTip)
-        finalTip.append(syncPasswordTip)
-
-        Alert {
-            ImageItem(.success)
-            ContentTextItem(
-                finalTip,
-                alignment: .left
-            )
-            CancelAndConfirmItem(
-                cancel: .init(title: L10n.Common.Controls.cancel, action: { [weak self] in self?.login() }),
-                confirm: .init(title: L10n.Common.Controls.confirm, action: { [weak self] in self?.syncPasswordAndLogin() })
-            )
-        }
-        .show()
-    }
-
-    private func restoreComplete() {
-        switch destination {
-        case let .remoteRestoreAndLogin(strategy):
-            switch strategy {
-            case .ignoreAndLogin:
-                login()
-
-            case .suggestSyncing:
-                checkIfNeedSyncingPassword()
-            }
-
-        case .root, .setting:
-            Alert {
-                ImageItem(.success)
-                WithTipItem(
-                    title: L10n.Scene.Restore.completion,
-                    detail: NSAttributedString(
-                        string: L10n.Scene.Restore.succeedDetail,
-                        attributes: [
-                            .font: FontStyles.BH5,
-                            .foregroundColor: Asset.Colors.Text.normal.color
-                        ]
-                    )
-                )
-                DoneActionItem(
-                    .init(
-                        title: L10n.Common.Controls.done,
-                        action: { [weak self] in
-                            guard let self = self else { return }
-                            switch self.destination {
-                            case .root: self.login()
-                            case .setting: self.navigationController?.popViewController(animated: true)
-                            default: break
-                            }
-                        }
-                    )
-                )
-            }
-            .show()
-        }
     }
 }
 
@@ -327,25 +199,50 @@ extension RestoreDataPreviewController {
 
 // MARK: wallet restore pipeline
 
-extension RestoreDataPreviewController {
-    private func showWalletsInfo(_ decryptedData: Data, _ restorefile: RestoreFile?, _ walletItems: [RestoreWalletItem]) {
-        let vc = RestoreWalletInfoController(items: walletItems) { [weak self] in
-            self?.viewModel.walletPipeline.setOrCheckPaymentPassword(for: decryptedData, restorefile: restorefile)
-        }
-        present(vc, animated: true, completion: nil)
+extension RestoreDataPreviewController: RestorePipelineExcutor {
+    var walletRestorePipline: WalletRestorePipeline { viewModel.walletPipeline }
+    var restoreCompletionStrategy: RestoreCompletionStrategy { .ignoreAndLogin }
+
+    func stoploading() {
+        hideLoading()
     }
 
-    private func setPaymentPassword(with decryptedData: Data, _ restorefile: RestoreFile?) {
-        let vc = RestoreWalletPasswordConfigController { [weak self] in
-            self?.viewModel.walletPipeline.sendRestoreMessage(data: decryptedData, restorefile: restorefile)
-        }
-        present(vc, animated: true, completion: nil)
+    func failedParsingRestorefile() {
+        self.handleState(.failedLoadingData)
     }
 
-    private func verifyPaymentPassword(with decryptedData: Data, _ restorefile: RestoreFile?) {
-        let vc = RestoreWalletPasswordVerifyController { [weak self] in
-            self?.viewModel.walletPipeline.sendRestoreMessage(data: decryptedData, restorefile: restorefile)
+    func restoreSucceed(selectMaintab: MainTabBarController.Tab) {
+        let tab: Coordinator.Scene? = {
+            switch selectMaintab {
+            case .personas: return Coordinator.Scene.persona
+            case .wallet: return Coordinator.Scene.balance
+            default: return nil
+            }
+        }()
+        guard let tab = tab else { return }
+
+        Alert {
+            ImageItem(.success)
+            WithTipItem(
+                title: L10n.Scene.Restore.completion,
+                detail: NSAttributedString(
+                    string: L10n.Scene.Restore.succeedDetail,
+                    attributes: [
+                        .font: FontStyles.BH5,
+                        .foregroundColor: Asset.Colors.Text.normal.color
+                    ]
+                )
+            )
+            DoneActionItem(
+                .init(
+                    title: L10n.Common.Controls.done,
+                    action: { [weak self] in
+                        self?.coordinator.present(scene: tab, transition: .replaceCurrentNavigation(tab: selectMaintab, selected: true))
+                        self?.navigationController?.popToRootViewController(animated: true)
+                    }
+                )
+            )
         }
-        present(vc, animated: true, completion: nil)
+        .show()
     }
 }
