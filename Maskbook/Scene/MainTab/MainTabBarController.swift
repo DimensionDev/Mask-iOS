@@ -164,15 +164,6 @@ extension MainTabBarController {
             tabBar.select(at: index, animated: false)
         }
     }
-
-    override var selectedIndex: Int {
-        willSet {
-            guard let tabBar = tabBar as? MaskTabBar else {
-                return
-            }
-            tabBar.select(at: selectedIndex, animated: false)
-        }
-    }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         guard let idx = tabBar.items?.firstIndex(of: item) else {

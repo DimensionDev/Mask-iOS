@@ -179,6 +179,7 @@ class PersonasViewController: BaseViewController {
                     self.segmentTopConstraint.constant =  isSearching
                     ? -self.segmentViewController.segmentHeight
                     : 146
+                    MainTabBarController.currentTabBarController()?.setTabBar(hidden: isSearching, animated: true)
                     self.view.layoutIfNeeded()
                 }
             })
