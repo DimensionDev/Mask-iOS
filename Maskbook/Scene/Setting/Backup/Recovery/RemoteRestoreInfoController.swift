@@ -171,18 +171,19 @@ extension RemoteRestoreInfoController: RestorePipelineExcutor {
     }
 
     func restoreSucceed(selectMaintab: MainTabBarController.Tab) {
-        let tab: Coordinator.Scene? = {
+        let login = { [weak self] in
             switch selectMaintab {
-            case .personas: return Coordinator.Scene.persona
-            case .wallet: return Coordinator.Scene.balance
-            default: return nil
-            }
-        }()
-        guard let tab = tab else { return }
+            case .wallet:
+                self?.coordinator.present(scene: .persona, transition: .replaceCurrentNavigation(tab: .personas))
+                self?.coordinator.present(scene: .balance, transition: .replaceCurrentNavigation(tab: selectMaintab, selected: true))
 
-        let login = {
-            self.coordinator.present(scene: tab, transition: .replaceCurrentNavigation(tab: selectMaintab, selected: true))
-            self.navigationController?.popToRootViewController(animated: true)
+            case .personas:
+                self?.coordinator.present(scene: .persona, transition: .replaceCurrentNavigation(tab: selectMaintab, selected: true))
+
+            default: break
+            }
+
+            self?.navigationController?.popToRootViewController(animated: true)
         }
         switch restoreCompletionStrategy {
         case .suggestSyncing:

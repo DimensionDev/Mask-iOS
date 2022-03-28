@@ -212,14 +212,20 @@ extension RestoreDataPreviewController: RestorePipelineExcutor {
     }
 
     func restoreSucceed(selectMaintab: MainTabBarController.Tab) {
-        let tab: Coordinator.Scene? = {
+        let login = { [weak self] in
             switch selectMaintab {
-            case .personas: return Coordinator.Scene.persona
-            case .wallet: return Coordinator.Scene.balance
-            default: return nil
+            case .wallet:
+                self?.coordinator.present(scene: .persona, transition: .replaceCurrentNavigation(tab: .personas))
+                self?.coordinator.present(scene: .balance, transition: .replaceCurrentNavigation(tab: selectMaintab, selected: true))
+
+            case .personas:
+                self?.coordinator.present(scene: .persona, transition: .replaceCurrentNavigation(tab: selectMaintab, selected: true))
+
+            default: break
             }
-        }()
-        guard let tab = tab else { return }
+
+            self?.navigationController?.popToRootViewController(animated: true)
+        }
 
         Alert {
             ImageItem(.success)
@@ -236,10 +242,7 @@ extension RestoreDataPreviewController: RestorePipelineExcutor {
             DoneActionItem(
                 .init(
                     title: L10n.Common.Controls.done,
-                    action: { [weak self] in
-                        self?.coordinator.present(scene: tab, transition: .replaceCurrentNavigation(tab: selectMaintab, selected: true))
-                        self?.navigationController?.popToRootViewController(animated: true)
-                    }
+                    action: { login() }
                 )
             )
         }
