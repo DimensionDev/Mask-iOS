@@ -119,6 +119,7 @@
 		1FC57EDA273129FC0060E89C /* BackupPreviewFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC57ED9273129FC0060E89C /* BackupPreviewFormatter.swift */; };
 		1FC638DD2726A172002D830B /* WalletBackupInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC638DC2726A172002D830B /* WalletBackupInfo.swift */; };
 		1FC638DF2727FF17002D830B /* WalletInfoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC638DE2727FF17002D830B /* WalletInfoProvider.swift */; };
+		1FC6D70427F1697900879ECE /* RestorePipelineExcutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6D70327F1697900879ECE /* RestorePipelineExcutor.swift */; };
 		1FCAD13027585FFF00F90A3E /* TransakIntegratingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCAD12F27585FFF00F90A3E /* TransakIntegratingController.swift */; };
 		1FCAD89127951026006D6B40 /* WKScriptMessage+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCAD89027951026006D6B40 /* WKScriptMessage+JSON.swift */; };
 		1FCAD8932796F509006D6B40 /* BackArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCAD8922796F509006D6B40 /* BackArrow.swift */; };
@@ -851,6 +852,7 @@
 		1FC57ED9273129FC0060E89C /* BackupPreviewFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupPreviewFormatter.swift; sourceTree = "<group>"; };
 		1FC638DC2726A172002D830B /* WalletBackupInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletBackupInfo.swift; sourceTree = "<group>"; };
 		1FC638DE2727FF17002D830B /* WalletInfoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletInfoProvider.swift; sourceTree = "<group>"; };
+		1FC6D70327F1697900879ECE /* RestorePipelineExcutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorePipelineExcutor.swift; sourceTree = "<group>"; };
 		1FCAD12F27585FFF00F90A3E /* TransakIntegratingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransakIntegratingController.swift; sourceTree = "<group>"; };
 		1FCAD89027951026006D6B40 /* WKScriptMessage+JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKScriptMessage+JSON.swift"; sourceTree = "<group>"; };
 		1FCAD8922796F509006D6B40 /* BackArrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackArrow.swift; sourceTree = "<group>"; };
@@ -1975,6 +1977,7 @@
 		2A6ABB372720053B00CC3AED /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				1FC6D70327F1697900879ECE /* RestorePipelineExcutor.swift */,
 				2A6ABB382720053B00CC3AED /* RemoteRestoreVerifyViewModel.swift */,
 				2A6ABB392720053B00CC3AED /* RemoteRestoreInfoViewModel.swift */,
 				2A6ABB3A2720053B00CC3AED /* RestoreFilePreviewViewModel.swift */,
@@ -4588,6 +4591,7 @@
 				0F31A15E273E33DF009D2E05 /* LegacyWalletInfo.swift in Sources */,
 				2A6ABB7E2720053B00CC3AED /* LanguageUpdateViewModel.swift in Sources */,
 				2AF88611271EED7D0004565A /* VersionNumber.swift in Sources */,
+				1FC6D70427F1697900879ECE /* RestorePipelineExcutor.swift in Sources */,
 				2AF88525271EE9310004565A /* WalletRenameViewModel.swift in Sources */,
 				2AF8850A271EE9310004565A /* PersonaListViewModel.swift in Sources */,
 				2ABA6A1827A50A6800C0F82B /* Logging.swift in Sources */,
