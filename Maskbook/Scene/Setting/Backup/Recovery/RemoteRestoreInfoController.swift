@@ -11,6 +11,8 @@ import SwiftUI
 import UIKit
 
 final class RemoteRestoreInfoController: BaseViewController {
+    typealias Failure = RemoteRestoreInfoViewModel.Failure
+
     @InjectedProvider(\.mainCoordinator)
     private var coordinator
 
@@ -68,16 +70,7 @@ final class RemoteRestoreInfoController: BaseViewController {
             }
             .store(in: &cancelableStorage)
 
-        Publishers.CombineLatest(
-            viewModel.restoreSucceedStrategy,
-            viewModel.remoteContent.compactMap { $0 }
-        )
-        .receive(on: DispatchQueue.main)
-        .sink { [weak self] strategy, restoreFile in
-            let sence = Coordinator.Scene.remoteRestore(restoreFile, strategy: strategy)
-            self?.coordinator.present(scene: sence, transition: .detail())
-        }
-        .store(in: &cancelableStorage)
+        self.buildWalletRestoreEvent(signalStorage: &cancelableStorage)
     }
 
     private func handleLoadingState(_ state: RemoteRestoreInfoViewModel.LoadingState) {
@@ -89,38 +82,11 @@ final class RemoteRestoreInfoController: BaseViewController {
 
         case .loaded:
             self.loadingController.stopAnimation()
-            
-        case .restored:
-            self.loadingController.stopAnimation()
-            Alert {
-                ImageItem(.success)
-                ContentTextItem(
-                    NSAttributedString(
-                        string: L10n.Scene.IdentityRestoreSigninSuccess.title,
-                        attributes: [
-                            .font: FontStyles.BH4,
-                            .foregroundColor: Asset.Colors.Text.dark.color
-                        ]
-                    )
-                )
-                DoneActionItem(
-                    .init(
-                        title: L10n.Common.Controls.done,
-                        action: { [weak self] in
-                            self?.login()
-                        }
-                    )
-                )
-            }
-            .show()
-            
-        case .restoreFailure:
-            self.loadingController.stopAnimation()
-            
-        case .syncCloudPassword:
-            synchronizePassword()
 
-        case .retryLoadRestoreInfo:
+        case .restoreFailed:
+            self.loadingController.stopAnimation()
+
+        case .reloadRemoteData:
             self.loadingController.stopAnimation()
             Alert {
                 ImageItem(.error)
@@ -144,7 +110,7 @@ final class RemoteRestoreInfoController: BaseViewController {
             }
             .show()
 
-        case .retryLoadRestoreFile:
+        case .reloadRestorefile:
             self.loadingController.stopAnimation()
             Alert {
                 ImageItem(.error)
@@ -169,50 +135,97 @@ final class RemoteRestoreInfoController: BaseViewController {
             .show()
         }
     }
-    
-    private func synchronizePassword() {
-        let finalTip = NSMutableAttributedString()
-        let restoeSucceedTip = NSAttributedString(
-            string: L10n.Scene.Restore.Tip.remoteRestoreSucceed,
-            attributes: [
-                .font: FontStyles.MH5,
-                .foregroundColor: Asset.Colors.Text.normal.color
-            ]
-        )
-        let syncPasswordTip = NSAttributedString(
-            string: L10n.Scene.Restore.Tip.remoteRestoreSyncingPassword,
-            attributes: [
-                .font: FontStyles.MH5,
-                .foregroundColor: Asset.Colors.Public.blue.color
-            ]
-        )
-        finalTip.append(restoeSucceedTip)
-        finalTip.append(syncPasswordTip)
+}
 
+extension RemoteRestoreInfoController: RestorePipelineExcutor {
+    var restoreCompletionStrategy: RestoreCompletionStrategy { viewModel.restoreSucceedStrategy }
+    var walletRestorePipline: WalletRestorePipeline { viewModel.walletPipeline }
+
+    func stoploading() {
+        self.loadingController.stopAnimation()
+    }
+
+    func failedParsingRestorefile() {
         Alert {
-            ImageItem(.success)
-            ContentTextItem(
-                finalTip,
-                alignment: .left
+            ImageItem(.warning)
+            WithTipItem(
+                title: L10n.Scene.Restore.Titles.unsupportRestoreData,
+                detail: NSAttributedString(
+                    string: L10n.Scene.Restore.checkUnsupportData,
+                    attributes: [
+                        .font: FontStyles.BH5,
+                        .foregroundColor: Asset.Colors.Text.normal.color
+                    ]
+                )
             )
-            CancelAndConfirmItem(
-                cancel: .init(title: L10n.Common.Controls.cancel, action: { [weak self] in self?.login() }),
-                confirm: .init(title: L10n.Common.Controls.confirm, action: { [weak self] in self?.syncPasswordAndLogin() })
+            DoneActionItem(
+                .init(
+                    title: L10n.Common.Controls.ok,
+                    action: { [weak self] in
+                        self?.navigationController?.popViewController(animated: true)
+                    }
+                )
             )
         }
         .show()
     }
-    
-    private func login() {
-        dismiss(animated: true, completion: nil)
-    }
 
-    private func syncPasswordAndLogin() {
-        vault.publisherWhenUpdating(viewModel.remotePassword, forKey: .backupPassword)
-            .receive(on: DispatchQueue.global())
-            .replaceError(with: ())
-            .fireAndIgnore()
-            .store(in: &cancelableStorage)
-        login()
+    func restoreSucceed(selectMaintab: MainTabBarController.Tab) {
+        let tab: Coordinator.Scene? = {
+            switch selectMaintab {
+            case .personas: return Coordinator.Scene.persona
+            case .wallet: return Coordinator.Scene.balance
+            default: return nil
+            }
+        }()
+        guard let tab = tab else { return }
+
+        let login = {
+            self.coordinator.present(scene: tab, transition: .replaceCurrentNavigation(tab: selectMaintab, selected: true))
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+        switch restoreCompletionStrategy {
+        case .suggestSyncing:
+            let finalTip = NSMutableAttributedString()
+            let restoeSucceedTip = NSAttributedString(
+                string: L10n.Scene.Restore.Tip.remoteRestoreSucceed,
+                attributes: [
+                    .font: FontStyles.MH5,
+                    .foregroundColor: Asset.Colors.Text.normal.color
+                ]
+            )
+            let syncPasswordTip = NSAttributedString(
+                string: L10n.Scene.Restore.Tip.remoteRestoreSyncingPassword,
+                attributes: [
+                    .font: FontStyles.MH5,
+                    .foregroundColor: Asset.Colors.Public.blue.color
+                ]
+            )
+            finalTip.append(restoeSucceedTip)
+            finalTip.append(syncPasswordTip)
+
+            Alert {
+                ImageItem(.success)
+                ContentTextItem(
+                    finalTip,
+                    alignment: .left
+                )
+                CancelAndConfirmItem(
+                    cancel: .init(title: L10n.Common.Controls.cancel, action: { login() }),
+                    confirm: .init(title: L10n.Common.Controls.confirm, action: { [weak self] in
+                        guard let self = self else { return }
+                        self.vault.publisherWhenUpdating(self.viewModel.remotePassword, forKey: .backupPassword)
+                            .receive(on: DispatchQueue.global())
+                            .replaceError(with: ())
+                            .fireAndIgnore()
+                            .store(in: &self.cancelableStorage)
+                        login()
+                    })
+                )
+            }
+            .show()
+
+        case .ignoreAndLogin: login()
+        }
     }
 }

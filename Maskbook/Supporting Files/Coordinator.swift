@@ -36,7 +36,7 @@ class Coordinator {
         case detail(animated: Bool = true)
         case panModel(animated: Bool = true)
         case alertController(completion: (() -> Void)? = nil)
-        case replaceCurrentNavigation(tab: MainTabBarController.Tab, animated: Bool = true)
+        case replaceCurrentNavigation(tab: MainTabBarController.Tab, animated: Bool = true, selected: Bool = false)
         case replaceWalletTab(animated: Bool = false)
         case popup
         case presentActivity(animated: Bool, from: UIView? = nil, completion: (() -> Void)? = nil)
@@ -166,7 +166,7 @@ class Coordinator {
         case localRestore(
             _ url: URL,
             destination: RestoreDataPreviewController.Destination)
-        case remoteRestore(_ data: Data, strategy: RestoreCompletionStrategy)
+//        case remoteRestore(_ data: Data, strategy: RestoreCompletionStrategy)
         case walletConnectStart
         case walletConnectConnecting
         case walletConnectFail
@@ -288,8 +288,8 @@ class Coordinator {
                 vc.modalPresentationCapturesStatusBarAppearance = true
                 presentVC.present(vc, animated: false, completion: completion)
                 
-            case let .replaceCurrentNavigation(tab, animated):
-                MainTabBarController.currentTabBarController()?.replace(tab: tab, with: vc, animated: animated)
+            case let .replaceCurrentNavigation(tab, animated, selected):
+                MainTabBarController.currentTabBarController()?.replace(tab: tab, with: vc, animated: animated, selected: selected)
 
             case let .replaceWalletTab(animated):
                 MainTabBarController.currentTabBarController()?.replace(tab: .wallet, with: vc, animated: animated)
@@ -690,9 +690,6 @@ extension Coordinator {
                 fileURL: fileURL,
                 completion: completion
             )
-
-        case let .remoteRestore(data, strategy):
-            return RestoreDataPreviewController(data, destination: .remoteRestoreAndLogin(strategy: strategy))
             
         case .walletConnectStart:
             return WalletConnectStartViewController()
