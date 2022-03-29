@@ -337,6 +337,13 @@ final class UserDefaultSettings {
 }
 
 extension UserDefaultSettings {
+    func setupHasShownGuideValue() {
+        guard hasShownGuide == false else { return }
+        if appVersion != "2.0.0" {
+            hasShownGuide = true
+        }
+    }
+    
     func changeNetwork(network: BlockChainNetwork, address: String?) {
         defaultAccountAddress = address
         self.network = network

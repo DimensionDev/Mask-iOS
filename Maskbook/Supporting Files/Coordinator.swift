@@ -69,7 +69,6 @@ class Coordinator {
         case persona
         case personaAvatar
         case cropImage(image: UIImage)
-        case guide
         case termsOfService(walletStartType: WalletStartType)
         case biometryRecognition(walletStartType: WalletStartType)
         case mnemonicWord(name: String?)
@@ -195,26 +194,20 @@ class Coordinator {
         case debug
     }
 
-    func setup(window: UIWindow) {
+    func setup(window: UIWindow, afterGuide: Bool = false) {
         self.window = window
         
-        guard settings.hasShownGuide else {
-            settings.hasShownGuide = true
+        if !afterGuide && !settings.hasShownGuide {
             showGuide(window: window)
             return
         }
-        
+
         let maskSocialVC = MaskSocialViewController(socialPlatform: settings.currentProfileSocialPlatform)
         let naviVC = NavigationController(rootViewController: maskSocialVC)
         window.rootViewController = naviVC
         window.makeKeyAndVisible()
         
         present(scene: .mainTab(selectedTab: .personas), transition: .modal(animated: false, adaptiveDelegate: maskSocialVC))
-        
-        if !settings.hasShownGuide {
-            settings.hasShownGuide = true
-            present(scene: .guide, transition: .modal(animated: false, adaptiveDelegate: maskSocialVC))
-        }
         
         // If all data (legacy wallets info and indexedDB data) has migrated to
         // native side, we do not need to wait for the extension JS scripts to
@@ -231,7 +224,12 @@ class Coordinator {
     
     private func showGuide(window: UIWindow) {
         let guideVC = MaskHostViewController(rootView: GuideView() { [weak self] in
-            self?.setup(window: window)
+            self?.setup(window: window, afterGuide: true)
+            DispatchQueue.main.async {
+                self?.present(scene: .emptyIdentity, transition: .detail(animated: false), completion: {
+                    self?.settings.hasShownGuide = true
+                })
+            }
         })
         window.rootViewController = guideVC
         window.makeKeyAndVisible()
@@ -355,15 +353,6 @@ extension Coordinator {
 
         case let .cropImage(image):
             return CropImageViewController(image: image)
-            
-        case .guide:
-            return MaskHostViewController(rootView: GuideView() { [weak self] in
-                guard let window = self?.window else {
-                    assert(false, "GuideView can't be dismissed if window is nil.")
-                    return
-                }
-                self?.setup(window: window)
-            })
             
         case let .termsOfService(walletStartType):
             let termsOfServiceViewController = TermsOfServiceViewController(walletStartType: walletStartType)
