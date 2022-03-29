@@ -24,8 +24,8 @@ var Skeleton = __webpack_require__(92093);
 var src = __webpack_require__(43021);
 // EXTERNAL MODULE: ../plugin-infra/src/index.ts
 var plugin_infra_src = __webpack_require__(63151);
-// EXTERNAL MODULE: ../typed-message/base/index.ts + 27 modules
-var typed_message_base = __webpack_require__(69492);
+// EXTERNAL MODULE: ../typed-message/base/index.ts + 2 modules
+var typed_message_base = __webpack_require__(65631);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var shared_base_src = __webpack_require__(79226);
 // EXTERNAL MODULE: ./src/plugins/FindTruman/context.ts

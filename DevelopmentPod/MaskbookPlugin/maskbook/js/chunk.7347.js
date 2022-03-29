@@ -34,19 +34,21 @@ const ArrowDownRound = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIcon */ .
 /* unused harmony export NetworkSelectorUI */
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(56561);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(74491);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(18287);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(56561);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(74491);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(18287);
 /* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(43021);
 /* harmony import */ var _shared__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(70609);
-/* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(98086);
-/* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(63541);
-/* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(95130);
+/* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(98086);
+/* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(63541);
+/* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(95130);
 /* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(63151);
 /* harmony import */ var _plugins_Wallet_settings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(63361);
-/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(39850);
-/* harmony import */ var _masknet_icons__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(60312);
-/* harmony import */ var _plugins_Wallet_messages__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(63081);
+/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(95367);
+/* harmony import */ var _masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(98193);
+/* harmony import */ var _masknet_icons__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(60312);
+/* harmony import */ var _plugins_Wallet_messages__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(63081);
+
 
 
 
@@ -99,16 +101,16 @@ const useStyles = (0,_masknet_theme__WEBPACK_IMPORTED_MODULE_2__/* .makeStyles *
 );
 const NetworkSelector = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.memo)(()=>{
     const networks = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_4__/* .getRegisteredWeb3Networks */ .Rm)();
-    const account = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_8__/* .useAccount */ .m)();
-    const chainId1 = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_9__/* .useChainId */ .xx)();
-    const providerType = (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_6__/* .useValueRef */ .E)(_plugins_Wallet_settings__WEBPACK_IMPORTED_MODULE_5__/* .currentProviderSettings */ .t1);
+    const account = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_9__/* .useAccount */ .m)();
+    const chainId1 = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_10__/* .useChainId */ .xx)();
+    const providerType = (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_7__/* .useValueRef */ .E)(_plugins_Wallet_settings__WEBPACK_IMPORTED_MODULE_5__/* .currentProviderSettings */ .t1);
     const onChainChange = (0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)(async (chainId)=>{
-        if (providerType === _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_10__/* .ProviderType.MaskWallet */ .lP.MaskWallet) {
-            await _plugins_Wallet_messages__WEBPACK_IMPORTED_MODULE_7__/* .WalletRPC.updateAccount */ .V.updateAccount({
+        if (providerType === _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_11__/* .ProviderType.MaskWallet */ .lP.MaskWallet) {
+            await _plugins_Wallet_messages__WEBPACK_IMPORTED_MODULE_8__/* .WalletRPC.updateAccount */ .V.updateAccount({
                 chainId
             });
         }
-        return _plugins_Wallet_messages__WEBPACK_IMPORTED_MODULE_7__/* .WalletRPC.updateMaskAccount */ .V.updateMaskAccount({
+        return _plugins_Wallet_messages__WEBPACK_IMPORTED_MODULE_8__/* .WalletRPC.updateMaskAccount */ .V.updateMaskAccount({
             chainId,
             account: _plugins_Wallet_settings__WEBPACK_IMPORTED_MODULE_5__/* .currentMaskWalletAccountSettings.value */ .T_.value
         });
@@ -132,7 +134,7 @@ const NetworkSelectorUI = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.me
     ).filter((x)=>_shared__WEBPACK_IMPORTED_MODULE_3__/* .Flags.support_testnet_switch */ .vU.support_testnet_switch ? true : x.isMainnet
     ).map((network)=>{
         const chainId = network.chainId;
-        return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z, {
+        return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z, {
             onClick: ()=>onChainChange(chainId)
             ,
             selected: chainId === currentNetwork.chainId,
@@ -143,7 +145,7 @@ const NetworkSelectorUI = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.me
                 }) : _shared__WEBPACK_IMPORTED_MODULE_3__/* .Flags.support_testnet_switch */ .vU.support_testnet_switch ? /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_masknet_shared__WEBPACK_IMPORTED_MODULE_6__/* .ChainIcon */ .fq, {
                     color: network.iconColor
                 }) : null,
-                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z, {
+                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z, {
                     sx: {
                         marginLeft: 1
                     },
@@ -158,7 +160,7 @@ const NetworkSelectorUI = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.me
     });
     return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         children: [
-            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z, {
+            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_14__/* ["default"] */ .Z, {
                 className: classes.root,
                 onClick: openMenu,
                 children: [
@@ -177,13 +179,13 @@ const NetworkSelectorUI = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.me
                                     color: currentNetwork.iconColor
                                 })
                             }),
-                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z, {
+                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z, {
                                 className: classes.title,
                                 children: currentNetwork.name
                             })
                         ]
                     }),
-                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_masknet_icons__WEBPACK_IMPORTED_MODULE_14__/* .ArrowDownRound */ .l, {
+                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_masknet_icons__WEBPACK_IMPORTED_MODULE_15__/* .ArrowDownRound */ .l, {
                         className: classes.arrow
                     })
                 ]
@@ -231,8 +233,8 @@ var useRecentTransactions = __webpack_require__(14417);
 var service = __webpack_require__(45925);
 // EXTERNAL MODULE: ../icons/general/Loading.tsx
 var Loading = __webpack_require__(16787);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
 // EXTERNAL MODULE: ../plugin-infra/src/index.ts
 var plugin_infra_src = __webpack_require__(63151);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/formatter.ts
@@ -243,8 +245,8 @@ var Stack = __webpack_require__(13152);
 var Box = __webpack_require__(18287);
 // EXTERNAL MODULE: ./src/extension/popups/components/NetworkSelector/index.tsx
 var NetworkSelector = __webpack_require__(1968);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 ;// CONCATENATED MODULE: ./src/extension/popups/components/WalletStateBar/index.tsx
 
 
@@ -419,8 +421,8 @@ function SwapBox() {
 var web3_context = __webpack_require__(60027);
 // EXTERNAL MODULE: ./src/plugins/Trader/trader/useTargetChainIdContext.ts
 var useTargetChainIdContext = __webpack_require__(84686);
-// EXTERNAL MODULE: ./src/plugins/Trader/trader/useAllProviderTradeContext.ts + 45 modules
-var useAllProviderTradeContext = __webpack_require__(35396);
+// EXTERNAL MODULE: ./src/plugins/Trader/trader/useAllProviderTradeContext.ts + 46 modules
+var useAllProviderTradeContext = __webpack_require__(95198);
 ;// CONCATENATED MODULE: ./src/extension/popups/pages/Swap/index.tsx
 
 
@@ -592,7 +594,8 @@ const resolveTradeProviderName = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_M
     [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.TRADERJOE */ .z4.TRADERJOE]: 'TraderJoe',
     [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.PANGOLIN */ .z4.PANGOLIN]: 'PangolinDex',
     [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.TRISOLARIS */ .z4.TRISOLARIS]: 'Trisolaris',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.WANNASWAP */ .z4.WANNASWAP]: 'WannaSwap'
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.WANNASWAP */ .z4.WANNASWAP]: 'WannaSwap',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.MDEX */ .z4.MDEX]: 'Mdex'
 }, (tradeProvider)=>{
     throw new Error(`Unknown provider type: ${tradeProvider}`);
 });

@@ -1,32 +1,13 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[7443],{
 
-/***/ 35845:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "L": () => (/* binding */ SearchResultBox)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
-/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63151);
-
-
-const PluginRenderer = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__/* .createInjectHooksRenderer */ .EK)(_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__/* .useActivatedPluginsSNSAdaptor.visibility.useNotMinimalMode */ .Pz.visibility.useNotMinimalMode, (x)=>x.SearchResultBox
-);
-function SearchResultBox(props) {
-    return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(PluginRenderer, {}));
-}
-
-
-/***/ }),
-
 /***/ 79208:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "n": () => (/* binding */ twitterEncoding)
 /* harmony export */ });
-/* harmony import */ var _masknet_encryption__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10491);
+/* harmony import */ var _masknet_encryption__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(57614);
 /* harmony import */ var lodash_unified__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(32139);
 
 
@@ -114,7 +95,7 @@ function regexMatchAll(str, regexp, index = 1) {
 /* harmony export */ });
 /* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(79226);
 /* harmony import */ var _social_network_utils_create_post_context__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13591);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(13573);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(93573);
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(74926);
 /* harmony import */ var _encoding__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(79208);
 /* harmony import */ var _utils_user__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(95418);
@@ -136,14 +117,6 @@ const twitterShared = {
         getProfilePage: (userId)=>`https://twitter.com/${userId}`
         ,
         isValidUsername: _utils_user__WEBPACK_IMPORTED_MODULE_5__/* .usernameValidator */ .S_,
-        publicKeyEncoding: {
-            encoder (text) {
-                return _encoding__WEBPACK_IMPORTED_MODULE_4__/* .twitterEncoding.publicKeyEncoder */ .n.publicKeyEncoder(text);
-            },
-            decoder (text) {
-                return _encoding__WEBPACK_IMPORTED_MODULE_4__/* .twitterEncoding.publicKeyDecoder */ .n.publicKeyDecoder(text);
-            }
-        },
         textPayloadPostProcessor: {
             encoder (text) {
                 return _encoding__WEBPACK_IMPORTED_MODULE_4__/* .twitterEncoding.payloadEncoder */ .n.payloadEncoder(text);
@@ -183,8 +156,6 @@ var social_network = __webpack_require__(61751);
 // EXTERNAL MODULE: ./src/social-network-adaptor/twitter.com/base.ts
 var base = __webpack_require__(74926);
 ;// CONCATENATED MODULE: ./src/social-network-adaptor/twitter.com/collecting/getSearchedKeyword.ts
-
-
 /**
  * Listing all possible pathnames start from /search that the search box will keep existing on twitter.
  * That means the keyword will not be cleaned and related components keep injecting.
@@ -199,7 +170,6 @@ var base = __webpack_require__(74926);
     '/i/keyboard_shortcuts', 
 ];
 function getSearchedKeywordAtTwitter() {
-    if (!(0,base/* isTwitter */.L3)(social_network/* activatedSocialNetworkUI */.LM)) return '';
     const params = new URLSearchParams(location.search);
     const hashTagMatched = location.pathname.match(/\/hashtag\/([\dA-Za-z]+)/);
     var ref;
@@ -221,8 +191,8 @@ var InitFriends = __webpack_require__(50814);
 var InitProfiles = __webpack_require__(49165);
 // EXTERNAL MODULE: ./src/utils/messages.ts
 var messages = __webpack_require__(2214);
-// EXTERNAL MODULE: ../typed-message/base/index.ts + 27 modules
-var typed_message_base = __webpack_require__(69492);
+// EXTERNAL MODULE: ../typed-message/base/index.ts + 2 modules
+var typed_message_base = __webpack_require__(65631);
 ;// CONCATENATED MODULE: ./src/social-network-adaptor/twitter.com/automation/openComposeBox.ts
 
 
@@ -454,30 +424,14 @@ const canonifyImgUrl = (url)=>{
     return parsed.href;
 };
 
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var src_utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var src_utils = __webpack_require__(93573);
 ;// CONCATENATED MODULE: ./src/social-network-adaptor/twitter.com/utils/fetch.ts
 
 
 
 
 
-
-/**
- * @example
- * parseNameArea("nickname@handle")
- */ const parseNameArea = (nameArea)=>{
-    const atIndex = nameArea.lastIndexOf('@');
-    const name = nameArea.slice(0, atIndex).replace(/\n+/g, '');
-    const handle = nameArea.slice(atIndex + 1).replace(/\n+/g, '');
-    return name && handle ? {
-        name,
-        handle
-    } : {
-        name: '',
-        handle: ''
-    };
-};
 const parseId = (t)=>{
     return (0,utils/* regexMatch */.ZB)(t, /status\/(\d+)/, 1);
 };
@@ -492,17 +446,23 @@ const postIdParser = (node)=>{
 const postNameParser = (node)=>{
     var ref;
     const tweetElement = (ref = node.querySelector('[data-testid="tweet"]')) !== null && ref !== void 0 ? ref : node;
-    const nameElement = (0,src_utils/* collectNodeText */.aW)(tweetElement.querySelector('a[role] div[id]'));
-    const nameElementInQuoted = (0,dom/* nthChild */.v)(tweetElement, 0, 0, 0, 0, 0);
-    const nameInQuoteTweet = nameElementInQuoted ? (0,src_utils/* collectNodeText */.aW)(nameElementInQuoted) : '';
-    var ref2;
-    return (ref2 = [
-        nameElement,
-        nameInQuoteTweet
-    ].filter((x)=>{
-        return x === null || x === void 0 ? void 0 : x.includes('@');
-    }).map(parseNameArea).find((r)=>r.name && r.handle
-    )) !== null && ref2 !== void 0 ? ref2 : {
+    const name = (0,src_utils/* collectNodeText */.aW)(tweetElement.querySelector('a:not([target]) > div > div[dir="auto"] > span'));
+    const handle = (0,src_utils/* collectNodeText */.aW)(tweetElement.querySelector('a[tabindex="-1"] span'));
+    if (name && handle) {
+        return {
+            name,
+            handle: handle.slice(1)
+        };
+    }
+    const quotedTweetName = (0,src_utils/* collectNodeText */.aW)(tweetElement.querySelector('div[role="link"] div[dir="auto"] > span'));
+    const quotedTweetHandle = (0,src_utils/* collectNodeText */.aW)(tweetElement.querySelector('div[role="link"] div[dir="ltr"] > span'));
+    if (quotedTweetName && quotedTweetHandle) {
+        return {
+            name: quotedTweetName,
+            handle: quotedTweetHandle.slice(1)
+        };
+    }
+    return {
         name: '',
         handle: ''
     };
@@ -865,8 +825,8 @@ function collectLinks(tweetNode, info, cancel) {
     }
 }
 
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/styles/createMuiStrictModeTheme.js
 var createMuiStrictModeTheme = __webpack_require__(7744);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/immer@9.0.12/node_modules/immer/dist/immer.esm.js
@@ -934,9 +894,9 @@ function startWatchThemeColor(signal) {
     });
 }
 function useThemeTwitterVariant(baseTheme) {
-    const primaryColor = (0,shared_src/* useValueRef */.E)(themeColorRef);
-    const primaryContrastColor = (0,shared_src/* useValueRef */.E)(textColorRef);
-    const backgroundColor = (0,shared_src/* useValueRef */.E)(backgroundColorRef);
+    const primaryColor = (0,dist/* useValueRef */.E)(themeColorRef);
+    const primaryContrastColor = (0,dist/* useValueRef */.E)(textColorRef);
+    const backgroundColor = (0,dist/* useValueRef */.E)(backgroundColorRef);
     return (0,react.useMemo)(()=>{
         const primaryColorRGB = (0,theme_tools/* fromRGB */.f2)(primaryColor);
         const primaryContrastColorRGB = (0,theme_tools/* fromRGB */.f2)(primaryContrastColor);
@@ -1127,7 +1087,8 @@ function useThemeTwitterVariant(baseTheme) {
                         backgroundColor: theme.palette.primary.main,
                         color: theme.palette.common.white,
                         '&:hover': {
-                            backgroundColor: (0,theme_src/* parseColor */.lu)(theme.palette.text.primary).setAlpha(0.1).toRgbString()
+                            backgroundColor: `${theme.palette.primary.main} !important`,
+                            opacity: 0.9
                         }
                     }
                 }
@@ -1391,6 +1352,7 @@ var ProfileTab = __webpack_require__(3925);
 
 
 
+
 function getStyleProps() {
     var ref;
     const EMPTY_STYLE = {};
@@ -1456,6 +1418,7 @@ const useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>{
 async function hideTwitterActivatedContent() {
     var ref;
     const eleTab = (ref = (0,selector/* searchProfileTabSelector */.Fe)().evaluate()) === null || ref === void 0 ? void 0 : ref.querySelector('div');
+    const loseConnectionEle = (0,selector/* searchProfileTabLoseConnectionPageSelector */.zA)().evaluate();
     if (!eleTab) return;
     const style = window.getComputedStyle(eleTab);
     // hide the activated indicator
@@ -1466,6 +1429,7 @@ async function hideTwitterActivatedContent() {
         const line = v.querySelector('div > div');
         line.style.display = 'none';
     });
+    if (loseConnectionEle) return;
     // hide the empty list indicator on the page
     const eleEmpty = (0,selector/* searchProfileEmptySelector */.YX)().evaluate();
     if (eleEmpty) eleEmpty.style.display = 'none';
@@ -1480,14 +1444,8 @@ async function hideTwitterActivatedContent() {
 function resetTwitterActivatedContent() {
     var ref;
     const eleTab = (ref = (0,selector/* searchProfileTabSelector */.Fe)().evaluate()) === null || ref === void 0 ? void 0 : ref.querySelector('div');
+    const loseConnectionEle = (0,selector/* searchProfileTabLoseConnectionPageSelector */.zA)().evaluate();
     if (!eleTab) return;
-    const eleEmpty = (0,selector/* searchProfileEmptySelector */.YX)().evaluate();
-    if (eleEmpty) eleEmpty.style.display = '';
-    const elePage = (0,selector/* searchProfileTabPageSelector */.xx)().evaluate();
-    if (elePage) {
-        elePage.style.visibility = 'visible';
-        elePage.style.height = 'auto';
-    }
     const tabList = (0,selector/* searchProfileTabListSelector */.JN)().evaluate();
     tabList.map((v)=>{
         const _v = v.querySelector('div');
@@ -1495,10 +1453,24 @@ function resetTwitterActivatedContent() {
         const line = v.querySelector('div > div');
         line.style.display = '';
     });
+    if (loseConnectionEle) return;
+    const eleEmpty = (0,selector/* searchProfileEmptySelector */.YX)().evaluate();
+    if (eleEmpty) eleEmpty.style.display = '';
+    const elePage = (0,selector/* searchProfileTabPageSelector */.xx)().evaluate();
+    if (elePage) {
+        elePage.style.visibility = 'visible';
+        elePage.style.height = 'auto';
+    }
 }
 function ProfileTabAtTwitter() {
     const { classes  } = useStyles();
-    return(/*#__PURE__*/ (0,jsx_runtime.jsx)(ProfileTab/* ProfileTab */.D, {
+    const [hidden, setHidden] = (0,react.useState)(false);
+    (0,react.useEffect)(()=>{
+        return src_utils/* MaskMessages.events.profileTabHidden.on */.ql.events.profileTabHidden.on((data)=>{
+            setHidden(data.hidden);
+        });
+    }, []);
+    return hidden ? null : /*#__PURE__*/ (0,jsx_runtime.jsx)(ProfileTab/* ProfileTab */.D, {
         title: "Web3",
         classes: classes,
         reset: resetTwitterActivatedContent,
@@ -1506,7 +1478,7 @@ function ProfileTabAtTwitter() {
         children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
             className: classes.line
         })
-    }));
+    });
 }
 function injectProfileTabAtTwitter(signal) {
     let tabInjected = false;
@@ -1548,6 +1520,21 @@ function injectProfileTabContentState(signal) {
     }).render(/*#__PURE__*/ (0,jsx_runtime.jsx)(ProfileTabContentAtTwitter, {}));
 }
 function injectProfileTabContentAtTwitter(signal) {
+    const contentLoseConnectionWatcher = new umd.MutationObserverWatcher((0,selector/* searchProfileTabLoseConnectionPageSelector */.zA)()).useForeach(()=>src_utils/* MaskMessages.events.profileTabHidden.sendToLocal */.ql.events.profileTabHidden.sendToLocal({
+            hidden: true
+        })
+    );
+    const contentContentWatcher = new umd.MutationObserverWatcher((0,selector/* searchProfileTabPageSelector */.xx)()).useForeach(()=>src_utils/* MaskMessages.events.profileTabHidden.sendToLocal */.ql.events.profileTabHidden.sendToLocal({
+            hidden: false
+        })
+    );
+    const ContentForEmptyWatcher = new umd.MutationObserverWatcher((0,selector/* searchProfileEmptySelector */.YX)()).useForeach(()=>src_utils/* MaskMessages.events.profileTabHidden.sendToLocal */.ql.events.profileTabHidden.sendToLocal({
+            hidden: false
+        })
+    );
+    (0,src_utils/* startWatch */.fy)(contentLoseConnectionWatcher, signal);
+    (0,src_utils/* startWatch */.fy)(contentContentWatcher, signal);
+    (0,src_utils/* startWatch */.fy)(ContentForEmptyWatcher, signal);
     injectProfileTabContentForEmptyState(signal);
     injectProfileTabContentState(signal);
 }
@@ -2289,20 +2276,11 @@ const NFTAvatarClip_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
             transform: 'scale(0.94) translate(7px, 6px)',
             strokeWidth: 6,
             stroke: '#00f8ff',
-            fill: 'none',
-            '@supports (translate: 0)': {
-                transform: 'none',
-                translate: '7px 6px'
-            }
+            fill: 'none'
         },
         borderPath: {
             transform: 'scale(0.98, 1.035) translate(3px, -2px)',
-            strokeWidth: 3,
-            '@supports (translate: 0)': {
-                transform: 'none',
-                scale: '0.98, 1.035',
-                translate: '3px, -2px'
-            }
+            strokeWidth: 3
         },
         background: {
             transform: 'scale(1, 1.05) translate(1px, -3px)',
@@ -2310,12 +2288,7 @@ const NFTAvatarClip_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
             strokeWidth: 30,
             stroke: 'black',
             strokeLinecap: 'round',
-            strokeLinejoin: 'round',
-            '@supports (translate: 0)': {
-                transform: 'none',
-                scale: '1, 1.5',
-                translate: '1px, -3px'
-            }
+            strokeLinejoin: 'round'
         },
         rainbowBorder: {
             animation: `${rainbowBorderKeyFrames} 6s linear infinite`,
@@ -2332,19 +2305,10 @@ const NFTAvatarClip_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
             }
         },
         price: {
-            transform: 'translate(0px, -5px) ',
-            '@supports (translate: 0)': {
-                transform: 'none',
-                translate: '0px, -5px'
-            }
+            transform: 'translate(0px, -5px) '
         },
         namePath: {
-            transform: 'scale(0.9) translate(10px, 10px)',
-            '@supports (translate: 0)': {
-                transform: 'none',
-                translate: '10px, 10px',
-                scale: 0.9
-            }
+            transform: 'scale(0.9) translate(10px, 10px)'
         }
     })
 );
@@ -2492,21 +2456,21 @@ function NFTAvatarClip(props) {
                         xlinkHref: `#${id}-border-path`,
                         className: classnames_default()(classes.rainbowBorder, classes.borderPath)
                     }),
-                    /*#__PURE__*/ (0,jsx_runtime.jsx)(NFTAvatarClip_Text, {
-                        xlinkHref: `#${id}-name-path`,
-                        fill: `url(#${id}-pattern)`,
-                        text: loading || loadingNFT ? 'loading...' : `${(0,Avatar_utils/* formatText */.RZ)(name, (ref2 = avatarMetadata === null || avatarMetadata === void 0 ? void 0 : avatarMetadata.token_id) !== null && ref2 !== void 0 ? ref2 : '')} ${slug.toLowerCase() === 'ens' ? 'ENS' : ''}`,
-                        classes: {
-                            root: classes.text
-                        }
+                    /*#__PURE__*/ (0,jsx_runtime.jsx)("g", {
+                        className: classes.text,
+                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(NFTAvatarClip_Text, {
+                            xlinkHref: `#${id}-name-path`,
+                            fill: `url(#${id}-pattern)`,
+                            text: loading || loadingNFT ? 'loading...' : `${(0,Avatar_utils/* formatText */.RZ)(name, (ref2 = avatarMetadata === null || avatarMetadata === void 0 ? void 0 : avatarMetadata.token_id) !== null && ref2 !== void 0 ? ref2 : '')} ${slug.toLowerCase() === 'ens' ? 'ENS' : ''}`
+                        })
                     }),
-                    /*#__PURE__*/ (0,jsx_runtime.jsx)(NFTAvatarClip_Text, {
-                        fill: `url(#${id}-pattern)`,
-                        xlinkHref: `#${id}-price-path`,
-                        classes: {
-                            root: classes.price
-                        },
-                        text: loading || loadingNFT ? '' : (0,Avatar_utils/* formatPrice */.T4)(amount, symbol)
+                    /*#__PURE__*/ (0,jsx_runtime.jsx)("g", {
+                        className: classes.price,
+                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(NFTAvatarClip_Text, {
+                            fill: `url(#${id}-pattern)`,
+                            xlinkHref: `#${id}-price-path`,
+                            text: loading || loadingNFT ? '' : (0,Avatar_utils/* formatPrice */.T4)(amount, symbol)
+                        })
                     })
                 ]
             })
@@ -2753,8 +2717,8 @@ async function injectUserNFTAvatarAtTweet(signal) {
     TweetNFTAvatar_(selector/* searchRetweetAvatarSelector */.bQ, signal);
 }
 
-// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
-var base_src = __webpack_require__(15091);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var base_src = __webpack_require__(26618);
 ;// CONCATENATED MODULE: ./src/social-network-adaptor/twitter.com/injection/NFT/NFTAvatarClip.tsx
 
 
@@ -3178,7 +3142,8 @@ const hasEditor = ()=>!!(0,_selector__WEBPACK_IMPORTED_MODULE_0__/* .postEditorD
 /* harmony export */   "wP": () => (/* binding */ searchEditProfileSelector),
 /* harmony export */   "xH": () => (/* binding */ composeAnchorTextSelector),
 /* harmony export */   "xx": () => (/* binding */ searchProfileTabPageSelector),
-/* harmony export */   "yR": () => (/* binding */ timelinePostContentSelector)
+/* harmony export */   "yR": () => (/* binding */ timelinePostContentSelector),
+/* harmony export */   "zA": () => (/* binding */ searchProfileTabLoseConnectionPageSelector)
 /* harmony export */ });
 /* unused harmony exports querySelector, searchProfileSelector, searchProfileActiveTabSelector, searchProfileActiveTabStatusLineSelector, searchProfileActiveTabLabelSelector, searchForegroundColorSelector, bioCardSelector, postEditorToolbarSelector, twitterMainAvatarSelector, searchProfileAvatarSelector, searchProfileAvatarParentSelector, searchAvatarSelectorInput, searchAvatarSelectorImage, searchUseCellSelector */
 /* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(44162);
@@ -3202,7 +3167,9 @@ const searchProfileSelector = ()=>querySelector('[aria-label][role="navigation"]
 ;
 const searchProfileTabListLastChildSelector = ()=>querySelector('[data-testid="primaryColumn"] div + [role="navigation"][aria-label] [data-testid="ScrollSnap-nextButtonWrapper"]')
 ;
-const searchProfileTabPageSelector = ()=>querySelector('[data-testid="primaryColumn"] [role="navigation"] + * > div:not([role="progressbar"])')
+const searchProfileTabPageSelector = ()=>querySelector('[data-testid="primaryColumn"] [role="navigation"] + * > div[aria-label]:not([role="progressbar"])')
+;
+const searchProfileTabLoseConnectionPageSelector = ()=>querySelector('[data-testid="primaryColumn"] [role="navigation"] + * > div[dir="auto"]:not([role="progressbar"])')
 ;
 const searchProfileEmptySelector = ()=>querySelector('[data-testid="primaryColumn"] [data-testid="emptyState"]')
 ;
@@ -3225,7 +3192,7 @@ const searchNewTweetButtonSelector = ()=>{
     if (q.evaluate()) return q;
     return querySelector('[data-testid="SideNav_NewTweet_Button"]');
 };
-const searchNickNameSelector = ()=>querySelector('[data-testid="UserProfileHeader_Items"]')
+const searchNickNameSelector = ()=>querySelector('[data-testid="tweet"] a:not([target]) > div > div[dir="auto"] > span > span')
 ;
 const searchAvatarSelector = ()=>querySelector('[data-testid="primaryColumn"] a[href$="/photo"] img[src*="profile_images"]')
 ;
@@ -3405,7 +3372,7 @@ const searchTwitterAvatarNFTLinkSelector = ()=>querySelector('a[href$="/nft"]')
 /* harmony export */ });
 /* harmony import */ var lodash_unified__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(32139);
 /* harmony import */ var _selector__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10735);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13573);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(93573);
 
 
 
@@ -3425,26 +3392,19 @@ const searchTwitterAvatarNFTLinkSelector = ()=>querySelector('a[href$="/nft"]')
     return true;
 };
 const getNickname = ()=>{
-    var ref, ref1, ref2, ref3;
-    const node = (ref = (0,_selector__WEBPACK_IMPORTED_MODULE_0__/* .searchNickNameSelector */ .rf)().evaluate()) === null || ref === void 0 ? void 0 : (ref1 = ref.parentElement) === null || ref1 === void 0 ? void 0 : (ref2 = ref1.parentElement) === null || ref2 === void 0 ? void 0 : (ref3 = ref2.firstChild) === null || ref3 === void 0 ? void 0 : ref3.nextSibling;
+    var ref;
+    const node = (ref = (0,_selector__WEBPACK_IMPORTED_MODULE_0__/* .searchNickNameSelector */ .rf)().evaluate()) === null || ref === void 0 ? void 0 : ref.querySelector('span span');
     if (!node) return '';
-    const nicknameNode = node.querySelector('div span');
-    if (!nicknameNode) return '';
-    return (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .collectNodeText */ .aW)(nicknameNode);
+    return (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .collectNodeText */ .aW)(node);
 };
 const getTwitterId = ()=>{
-    var ref, ref4, ref5, ref6, ref7, ref8, ref9, ref10, ref11;
-    const node = (ref = (0,_selector__WEBPACK_IMPORTED_MODULE_0__/* .searchNickNameSelector */ .rf)().evaluate()) === null || ref === void 0 ? void 0 : (ref4 = ref.parentElement) === null || ref4 === void 0 ? void 0 : (ref5 = ref4.parentElement) === null || ref5 === void 0 ? void 0 : (ref6 = ref5.firstChild) === null || ref6 === void 0 ? void 0 : (ref7 = ref6.nextSibling) === null || ref7 === void 0 ? void 0 : (ref8 = ref7.firstChild) === null || ref8 === void 0 ? void 0 : (ref9 = ref8.firstChild) === null || ref9 === void 0 ? void 0 : ref9.lastChild;
-    if (node) {
-        const twitterIdNode = node.querySelector('div span');
-        if (twitterIdNode) return twitterIdNode.innerHTML.trim().replace('@', '');
-    }
-    const ele = ((ref10 = (0,_selector__WEBPACK_IMPORTED_MODULE_0__/* .searchAvatarSelector */ .Ls)().evaluate()) === null || ref10 === void 0 ? void 0 : ref10.closest('a')) || ((ref11 = (0,_selector__WEBPACK_IMPORTED_MODULE_0__/* .searchNFTAvatarSelector */ .dA)().evaluate()) === null || ref11 === void 0 ? void 0 : ref11.closest('a'));
+    var ref, ref1;
+    const ele = ((ref = (0,_selector__WEBPACK_IMPORTED_MODULE_0__/* .searchAvatarSelector */ .Ls)().evaluate()) === null || ref === void 0 ? void 0 : ref.closest('a')) || ((ref1 = (0,_selector__WEBPACK_IMPORTED_MODULE_0__/* .searchNFTAvatarSelector */ .dA)().evaluate()) === null || ref1 === void 0 ? void 0 : ref1.closest('a'));
     if (ele) {
         const link = ele.getAttribute('href');
         if (link) {
-            var ref12;
-            const [, userId] = (ref12 = link.match(/^\/(\w+)\/(photo|nft)$/)) !== null && ref12 !== void 0 ? ref12 : [];
+            var ref2;
+            const [, userId] = (ref2 = link.match(/^\/(\w+)\/(photo|nft)$/)) !== null && ref2 !== void 0 ? ref2 : [];
             return userId;
         }
     }
@@ -3475,161 +3435,6 @@ const getAvatarId = (avatarURL)=>{
     if (!match) return '';
     return match[1];
 };
-
-
-/***/ }),
-
-/***/ 51682:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  "C": () => (/* binding */ injectPostReplacer)
-});
-
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(82798);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
-var react = __webpack_require__(63423);
-// EXTERNAL MODULE: ./src/utils/shadow-root/renderInShadowRoot.tsx
-var renderInShadowRoot = __webpack_require__(78632);
-// EXTERNAL MODULE: ./src/components/DataSource/usePostInfo.ts
-var usePostInfo = __webpack_require__(76262);
-// EXTERNAL MODULE: ../typed-message/base/index.ts + 27 modules
-var base = __webpack_require__(69492);
-// EXTERNAL MODULE: ../typed-message/dom/index.ts + 15 modules
-var dom = __webpack_require__(68876);
-// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
-var src = __webpack_require__(43021);
-// EXTERNAL MODULE: ./shared-ui/TypedMessageRender/context.tsx + 2 modules
-var context = __webpack_require__(53763);
-// EXTERNAL MODULE: ./src/components/DataSource/useActivatedUI.ts
-var useActivatedUI = __webpack_require__(41529);
-// EXTERNAL MODULE: ./src/social-network/ui.ts
-var ui = __webpack_require__(3787);
-;// CONCATENATED MODULE: ./src/components/InjectedComponents/PostReplacer.tsx
-
-
-
-
-
-
-
-
-
-const useStyles = (0,src/* makeStyles */.ZL)()({
-    root: {
-        overflowWrap: 'break-word'
-    }
-});
-function PostReplacer(props) {
-    var ref, ref1;
-    const { classes  } = useStyles();
-    const postMessage = usePostInfo/* usePostInfoDetails.rawMessage */.H9.rawMessage();
-    const author = usePostInfo/* usePostInfoDetails.author */.H9.author();
-    const currentProfile = (ref = (0,useActivatedUI/* useCurrentIdentity */.Ud)()) === null || ref === void 0 ? void 0 : ref.identifier;
-    const url = usePostInfo/* usePostInfoDetails.url */.H9.url();
-    const initialTransformationContext = (0,react.useMemo)(()=>{
-        return {
-            authorHint: author,
-            currentProfile,
-            postURL: url === null || url === void 0 ? void 0 : url.toString()
-        };
-    }, [
-        author,
-        currentProfile,
-        url
-    ]);
-    return(/*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
-        className: classes.root,
-        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(dom/* TextResizeContext.Provider */.FG.Provider, {
-            value: true,
-            children: /*#__PURE__*/ (0,jsx_runtime.jsx)(context/* TypedMessageRenderContext */.w, {
-                renderFragments: (ref1 = ui.activatedSocialNetworkUI === null || ui.activatedSocialNetworkUI === void 0 ? void 0 : ui.activatedSocialNetworkUI.customization.componentOverwrite) === null || ref1 === void 0 ? void 0 : ref1.RenderFragments,
-                context: initialTransformationContext,
-                children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Transformer, {
-                    ...props,
-                    message: postMessage
-                })
-            })
-        })
-    }));
-}
-function Transformer({ message , unzip , zip  }) {
-    const after = (0,dom/* useTransformedValue */.CB)(message);
-    const shouldReplace = (0,react.useMemo)(()=>{
-        const flatten = (0,base/* FlattenTypedMessage */.po)(message, base/* emptyTransformationContext */.vg);
-        if (!(0,base/* isTypedMessageEqual */.Hz)(flatten, after)) return true;
-        if (hasCashOrHashTag(after)) return true;
-        return false;
-    }, [
-        message,
-        after
-    ]);
-    (0,react.useEffect)(()=>{
-        if (shouldReplace) zip === null || zip === void 0 ? void 0 : zip();
-        else unzip === null || unzip === void 0 ? void 0 : unzip();
-        return ()=>{
-            return unzip === null || unzip === void 0 ? void 0 : unzip();
-        };
-    }, []);
-    if (shouldReplace) return(/*#__PURE__*/ (0,jsx_runtime.jsx)(dom/* TypedMessageRender */.Ot, {
-        message: after
-    }));
-    return null;
-}
-function hasCashOrHashTag(message) {
-    let result = false;
-    function visitor(node) {
-        if ((0,base/* isTypedMessageAnchor */.bj)(node)) {
-            if (node.category === 'cash' || node.category === 'hash') {
-                result = true;
-                return 'stop';
-            }
-        } else (0,base/* forEachTypedMessageChild */.ss)(node, visitor);
-    }
-    visitor(message);
-    (0,base/* forEachTypedMessageChild */.ss)(message, visitor);
-    return result;
-}
-
-// EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/noop.js
-var noop = __webpack_require__(21122);
-;// CONCATENATED MODULE: ./src/social-network/defaults/inject/PostReplacer.tsx
-
-
-
-
-
-
-function injectPostReplacer(config = {}) {
-    const PostReplacerDefault = /*#__PURE__*/ (0,react.memo)(function PostReplacerDefault(props) {
-        return(/*#__PURE__*/ (0,jsx_runtime.jsx)(PostReplacer, {
-            zip: props.zipPost,
-            unzip: props.unZipPost
-        }));
-    });
-    const { zipPost , unzipPost  } = config;
-    const zipPostF = zipPost || noop/* default */.Z;
-    const unzipPostF = unzipPost || noop/* default */.Z;
-    return function injectPostReplacer(current, signal) {
-        signal.addEventListener('abort', unzipPostF);
-        (0,renderInShadowRoot/* createReactRootShadowed */.o)(current.rootElement.afterShadow, {
-            key: 'post-replacer',
-            signal
-        }).render(/*#__PURE__*/ (0,jsx_runtime.jsx)(usePostInfo/* PostInfoProvider */.eT, {
-            post: current,
-            children: /*#__PURE__*/ (0,jsx_runtime.jsx)(PostReplacerDefault, {
-                zipPost: ()=>zipPostF(current.rootElement)
-                ,
-                unZipPost: ()=>unzipPostF(current.rootElement)
-                ,
-                ...current
-            })
-        }));
-    };
-}
 
 
 /***/ })

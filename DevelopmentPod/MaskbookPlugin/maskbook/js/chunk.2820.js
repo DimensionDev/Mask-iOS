@@ -411,7 +411,6 @@ exports.roundTo = roundTo;
 
 "use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "FT": () => (/* reexport safe */ _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__.FT),
 /* harmony export */   "H9": () => (/* reexport safe */ _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__.H9),
 /* harmony export */   "NH": () => (/* binding */ usePostClaimedAuthor),
 /* harmony export */   "Vc": () => (/* binding */ usePostLink),
@@ -473,12 +472,12 @@ var IconButton = __webpack_require__(87409);
 var Typography = __webpack_require__(74491);
 // EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
 var src = __webpack_require__(43021);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var shared_base_src = __webpack_require__(79226);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/Close.js
 var Close = __webpack_require__(41457);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/ArrowBackRounded.js
@@ -501,13 +500,7 @@ function DialogDismissIconUI(props) {
 
 // EXTERNAL MODULE: ./src/social-network/index.ts
 var social_network = __webpack_require__(61751);
-// EXTERNAL MODULE: ./src/social-network-adaptor/minds.com/base.ts
-var base = __webpack_require__(65375);
-// EXTERNAL MODULE: ./src/social-network-adaptor/facebook.com/base.ts
-var facebook_com_base = __webpack_require__(40543);
 ;// CONCATENATED MODULE: ./src/components/shared/InjectedDialog.tsx
-
-
 
 
 
@@ -533,7 +526,7 @@ const useStyles = (0,src/* makeStyles */.ZL)()((theme, { snsId  })=>({
             color: theme.palette.text.primary
         },
         paper: {
-            ...snsId === base/* MINDS_ID */.fN || snsId === facebook_com_base/* FACEBOOK_ID */.Iz ? {
+            ...snsId === shared_base_src/* EnhanceableSite.Minds */.Jk.Minds || snsId === shared_base_src/* EnhanceableSite.Facebook */.Jk.Facebook ? {
                 width: 'auto',
                 backgroundImage: 'none'
             } : {}
@@ -582,7 +575,7 @@ function InjectedDialog(props) {
                 },
                 ...rest,
                 ...extraProps,
-                children: /*#__PURE__*/ (0,jsx_runtime.jsxs)(shared_src/* ErrorBoundary */.SV, {
+                children: /*#__PURE__*/ (0,jsx_runtime.jsxs)(dist/* ErrorBoundary */.SV, {
                     children: [
                         title ? /*#__PURE__*/ (0,jsx_runtime.jsxs)(DialogTitle/* default */.Z, {
                             className: "dashboard-dialog-title-hook",
@@ -834,10 +827,10 @@ var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
 var Button = __webpack_require__(12463);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useAccount.ts
 var useAccount = __webpack_require__(98086);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 ;// CONCATENATED MODULE: ./src/plugins/Snapshot/SNSAdaptor/SnapshotCard.tsx
 
 
@@ -951,7 +944,7 @@ var Avatar = __webpack_require__(63190);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/date-fns@2.28.0/node_modules/date-fns/esm/format/index.js + 14 modules
 var format = __webpack_require__(57753);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useBlockie.ts
-var useBlockie = __webpack_require__(7811);
+var useBlockie = __webpack_require__(97535);
 ;// CONCATENATED MODULE: ./src/web3/UI/EthereumBlockie.tsx
 
 
@@ -1812,7 +1805,6 @@ function Content() {
                                             disablePortal: true
                                         },
                                         title: /*#__PURE__*/ (0,jsx_runtime.jsx)(Typography/* default */.Z, {
-                                            color: "textPrimary",
                                             children: result.choice
                                         }),
                                         placement: "top",
@@ -1952,7 +1944,7 @@ const VotesCard_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>{
             justifyContent: 'space-between',
             borderBottom: `1px solid ${theme.palette.divider}`
         },
-        anchorTopRight: {
+        badge: {
             transform: 'translateX(40px) translateY(2.5px)'
         },
         avatarWrapper: {
@@ -2000,7 +1992,7 @@ function VotesCard_Content() {
         title: /*#__PURE__*/ (0,jsx_runtime.jsx)(Badge/* default */.Z, {
             max: 9999999,
             classes: {
-                anchorOriginTopRightRectangular: classes.anchorTopRight
+                badge: classes.badge
             },
             badgeContent: votes.length,
             color: "primary",
@@ -2283,8 +2275,8 @@ function PostInspector(props) {
 
 // EXTERNAL MODULE: ./src/components/DataSource/usePostInfo.ts
 var usePostInfo = __webpack_require__(76262);
-// EXTERNAL MODULE: ../typed-message/base/index.ts + 27 modules
-var typed_message_base = __webpack_require__(69492);
+// EXTERNAL MODULE: ../typed-message/base/index.ts + 2 modules
+var typed_message_base = __webpack_require__(65631);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var shared_base_src = __webpack_require__(79226);
 ;// CONCATENATED MODULE: ./src/plugins/Snapshot/SNSAdaptor/index.tsx
@@ -2379,43 +2371,6 @@ const PluginSnapshotRPC = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__/
 
 /***/ }),
 
-/***/ 65375:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NE": () => (/* binding */ mindsBase),
-/* harmony export */   "Sf": () => (/* binding */ isMinds),
-/* harmony export */   "fN": () => (/* binding */ MINDS_ID),
-/* harmony export */   "fy": () => (/* binding */ mindsWorkerBase)
-/* harmony export */ });
-const MINDS_ID = 'minds.com';
-const origins = [
-    'https://www.minds.com/*',
-    'https://minds.com/*',
-    'https://cdn.minds.com/*'
-];
-const mindsBase = {
-    networkIdentifier: MINDS_ID,
-    name: 'minds',
-    declarativePermissions: {
-        origins
-    },
-    shouldActivate (location) {
-        return location.hostname.endsWith('minds.com');
-    }
-};
-function isMinds(ui) {
-    return ui.networkIdentifier === MINDS_ID;
-}
-const mindsWorkerBase = {
-    ...mindsBase,
-    gunNetworkHint: 'minds-'
-};
-
-
-/***/ }),
-
 /***/ 26340:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -2435,22 +2390,22 @@ var src = __webpack_require__(43021);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/classnames@2.3.1/node_modules/classnames/index.js
 var classnames = __webpack_require__(83849);
 var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ./src/extension/options-page/DashboardComponents/ActionButton.tsx
 var ActionButton = __webpack_require__(47906);
 // EXTERNAL MODULE: ./src/plugins/Wallet/messages.ts
 var messages = __webpack_require__(63081);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useAccount.ts
 var useAccount = __webpack_require__(98086);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useChainId.ts
 var useChainId = __webpack_require__(63541);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useNativeTokenBalance.ts
 var useNativeTokenBalance = __webpack_require__(1347);
-// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
-var base_src = __webpack_require__(15091);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var base_src = __webpack_require__(26618);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
 var react = __webpack_require__(63423);
 ;// CONCATENATED MODULE: ./src/plugins/Wallet/hooks/useWalletRiskWarningDialog.ts
@@ -2466,7 +2421,7 @@ const useWalletRiskWarningDialog = ()=>{
         else messages/* WalletRPC.getRiskWarningConfirmed */.V.getRiskWarningConfirmed(account).then((confirmed)=>setConfirmed(confirmed !== null && confirmed !== void 0 ? confirmed : false)
         );
     };
-    const { openDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.walletRiskWarningDialogUpdated */.R.events.walletRiskWarningDialogUpdated, fetchRiskWarningStatus);
+    const { openDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.walletRiskWarningDialogUpdated */.R.events.walletRiskWarningDialogUpdated, fetchRiskWarningStatus);
     (0,react.useEffect)(fetchRiskWarningStatus, [
         account
     ]);
@@ -2505,7 +2460,7 @@ function EthereumWalletConnectedBoundary(props) {
     const { isConfirmed: isRiskWarningConfirmed , openDialog: openRiskWarningDialog  } = useWalletRiskWarningDialog();
     // #endregion
     // #region remote controlled select provider dialog
-    const { openDialog: openSelectProviderDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.selectProviderDialogUpdated */.R.events.selectProviderDialogUpdated);
+    const { openDialog: openSelectProviderDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.selectProviderDialogUpdated */.R.events.selectProviderDialogUpdated);
     // #endregion
     if (!account) return(/*#__PURE__*/ (0,jsx_runtime.jsx)(Grid/* default */.ZP, {
         container: true,
@@ -2566,7 +2521,7 @@ function EthereumWalletConnectedBoundary(props) {
 
 /***/ }),
 
-/***/ 7811:
+/***/ 97535:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";

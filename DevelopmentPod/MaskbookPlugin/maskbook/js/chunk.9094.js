@@ -372,8 +372,8 @@ var flow = __webpack_require__(12084);
 var web3_providers_src = __webpack_require__(54492);
 // EXTERNAL MODULE: ../plugins/Flow/src/helpers/index.ts + 2 modules
 var helpers = __webpack_require__(45096);
-// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
-var base_src = __webpack_require__(15091);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var base_src = __webpack_require__(26618);
 ;// CONCATENATED MODULE: ../plugins/Flow/src/apis/getFungibleAssets.ts
 
 
@@ -477,8 +477,8 @@ function formatAddress(address, size = 0) {
 
 // EXTERNAL MODULE: ../plugin-infra/src/index.ts
 var src = __webpack_require__(63151);
-// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
-var base_src = __webpack_require__(15091);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var base_src = __webpack_require__(26618);
 ;// CONCATENATED MODULE: ../plugins/Flow/src/helpers/token.ts
 
 
@@ -541,8 +541,8 @@ var fcl_module = __webpack_require__(94268);
 const auth_namespaceObject = JSON.parse('{"ACCESS_NODE_API":{"Mainnet":"https://flow-access-mainnet.portto.io","Testnet":"https://access-testnet.onflow.org"},"DISCOVERY_WALLET":{"Mainnet":"https://flow-wallet.blocto.app/authn","Testnet":"https://flow-wallet-testnet.blocto.app/authn"},"CHALLENGE_HANDSHAKE":{"Mainnet":"https://flow-wallet.blocto.app/api/flow/authn","Testnet":"https://flow-wallet-testnet.blocto.app/api/flow/authn"},"MASK_APP_TITLE":{"Mainnet":"Mask Network","Testnet":"Mask Network (Dev)"},"MASK_APP_ICON":{"Mainnet":"https://dimensiondev.github.io/Mask-VI/assets/Logo/MB--Logo--Geo--ForceCircle--Blue.svg","Testnet":"https://dimensiondev.github.io/Mask-VI/assets/Logo/MB--Logo--Geo--ForceCircle--Blue.svg"}}');
 ;// CONCATENATED MODULE: ../web3-constants/flow/token.json
 const token_namespaceObject = JSON.parse('{"FLOW_ADDRESS":{"Mainnet":"0x1654653399040a61","Testnet":""},"FUSD_ADDRESS":{"Mainnet":"0x3c5959b568896393","Testnet":"0xe223d8a629e49c68"},"TETHER_ADDRESS":{"Mainnet":"0xcfdd90d4a00f7b5b","Testnet":""},"FUNGIBLE_TOKEN_ADDRESS":{"Mainnet":"0xf233dcee88fe0abe","Testnet":"0x9a0766d93b6608b7"}}');
-// EXTERNAL MODULE: ../web3-kit/src/index.ts + 3 modules
-var src = __webpack_require__(56166);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var src = __webpack_require__(26618);
 // EXTERNAL MODULE: ../web3-shared/flow/types.ts
 var types = __webpack_require__(81243);
 ;// CONCATENATED MODULE: ../web3-shared/flow/constants/index.ts

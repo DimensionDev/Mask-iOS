@@ -405,12 +405,12 @@ var formatter = __webpack_require__(22283);
 var shared_base_src = __webpack_require__(79226);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/head.js
 var head = __webpack_require__(29730);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
 // EXTERNAL MODULE: ./src/plugins/Wallet/messages.ts
 var messages = __webpack_require__(63081);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var src_utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var src_utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ./src/extension/popups/components/PasswordField/index.tsx
 var PasswordField = __webpack_require__(29502);
 // EXTERNAL MODULE: ./src/plugins/Wallet/settings.ts

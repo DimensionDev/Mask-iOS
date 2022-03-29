@@ -55,12 +55,12 @@ var IconButton = __webpack_require__(87409);
 var Typography = __webpack_require__(74491);
 // EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
 var src = __webpack_require__(43021);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var shared_base_src = __webpack_require__(79226);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/Close.js
 var Close = __webpack_require__(41457);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/ArrowBackRounded.js
@@ -83,13 +83,7 @@ function DialogDismissIconUI(props) {
 
 // EXTERNAL MODULE: ./src/social-network/index.ts
 var social_network = __webpack_require__(61751);
-// EXTERNAL MODULE: ./src/social-network-adaptor/minds.com/base.ts
-var base = __webpack_require__(65375);
-// EXTERNAL MODULE: ./src/social-network-adaptor/facebook.com/base.ts
-var facebook_com_base = __webpack_require__(40543);
 ;// CONCATENATED MODULE: ./src/components/shared/InjectedDialog.tsx
-
-
 
 
 
@@ -115,7 +109,7 @@ const useStyles = (0,src/* makeStyles */.ZL)()((theme, { snsId  })=>({
             color: theme.palette.text.primary
         },
         paper: {
-            ...snsId === base/* MINDS_ID */.fN || snsId === facebook_com_base/* FACEBOOK_ID */.Iz ? {
+            ...snsId === shared_base_src/* EnhanceableSite.Minds */.Jk.Minds || snsId === shared_base_src/* EnhanceableSite.Facebook */.Jk.Facebook ? {
                 width: 'auto',
                 backgroundImage: 'none'
             } : {}
@@ -164,7 +158,7 @@ function InjectedDialog(props) {
                 },
                 ...rest,
                 ...extraProps,
-                children: /*#__PURE__*/ (0,jsx_runtime.jsxs)(shared_src/* ErrorBoundary */.SV, {
+                children: /*#__PURE__*/ (0,jsx_runtime.jsxs)(dist/* ErrorBoundary */.SV, {
                     children: [
                         title ? /*#__PURE__*/ (0,jsx_runtime.jsxs)(DialogTitle/* default */.Z, {
                             className: "dashboard-dialog-title-hook",
@@ -288,8 +282,8 @@ var CardActions = __webpack_require__(6518);
 var ListItemButton = __webpack_require__(31262);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useMap.js
 var useMap = __webpack_require__(31425);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 ;// CONCATENATED MODULE: ./src/plugins/External/components/UnknownPluginLoadRequest.tsx
 
 
@@ -1676,8 +1670,8 @@ function ThirdPartyPluginCompositionEntry(props) {
 
 // EXTERNAL MODULE: ./src/plugins/External/messages.ts
 var messages = __webpack_require__(44274);
-// EXTERNAL MODULE: ../typed-message/base/index.ts + 27 modules
-var typed_message_base = __webpack_require__(69492);
+// EXTERNAL MODULE: ../typed-message/base/index.ts + 2 modules
+var typed_message_base = __webpack_require__(65631);
 ;// CONCATENATED MODULE: ./src/plugins/External/SNSAdaptor/index.tsx
 
 
@@ -1760,42 +1754,6 @@ function SNSAdaptor_parse(x) {
 
 
 const ExternalPluginMessages = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__/* .createPluginMessage */ .I4)('io.mask.external', _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .serializer */ .GM);
-
-
-/***/ }),
-
-/***/ 65375:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NE": () => (/* binding */ mindsBase),
-/* harmony export */   "Sf": () => (/* binding */ isMinds),
-/* harmony export */   "fN": () => (/* binding */ MINDS_ID),
-/* harmony export */   "fy": () => (/* binding */ mindsWorkerBase)
-/* harmony export */ });
-const MINDS_ID = 'minds.com';
-const origins = [
-    'https://www.minds.com/*',
-    'https://minds.com/*',
-    'https://cdn.minds.com/*'
-];
-const mindsBase = {
-    networkIdentifier: MINDS_ID,
-    name: 'minds',
-    declarativePermissions: {
-        origins
-    },
-    shouldActivate (location) {
-        return location.hostname.endsWith('minds.com');
-    }
-};
-function isMinds(ui) {
-    return ui.networkIdentifier === MINDS_ID;
-}
-const mindsWorkerBase = {
-    ...mindsBase,
-    gunNetworkHint: 'minds-'
-};
 
 
 /***/ })

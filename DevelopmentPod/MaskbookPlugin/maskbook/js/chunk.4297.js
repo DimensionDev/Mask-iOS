@@ -15,7 +15,7 @@
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
 /* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(44162);
 /* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(39850);
+/* harmony import */ var _masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(98193);
 /* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(79226);
 /* harmony import */ var _social_network__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(61751);
 /* harmony import */ var use_subscription__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(85848);
@@ -26,7 +26,7 @@
 
 
 function useFriendsList() {
-    const ref = (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(_social_network__WEBPACK_IMPORTED_MODULE_3__/* .globalUIState.friends */ .EJ.friends);
+    const ref = (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(_social_network__WEBPACK_IMPORTED_MODULE_3__/* .globalUIState.friends */ .EJ.friends);
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(()=>[
             ...ref.values()
         ]
@@ -39,14 +39,14 @@ const default_ = new _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_5__.Va
 });
 function useLastRecognizedIdentity() {
     var ref;
-    return (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(((ref = _social_network__WEBPACK_IMPORTED_MODULE_3__/* .activatedSocialNetworkUI.collecting.identityProvider */ .LM.collecting.identityProvider) === null || ref === void 0 ? void 0 : ref.recognized) || default_);
+    return (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(((ref = _social_network__WEBPACK_IMPORTED_MODULE_3__/* .activatedSocialNetworkUI.collecting.identityProvider */ .LM.collecting.identityProvider) === null || ref === void 0 ? void 0 : ref.recognized) || default_);
 }
 function useCurrentVisitingIdentity() {
     var ref;
-    return (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(((ref = _social_network__WEBPACK_IMPORTED_MODULE_3__/* .activatedSocialNetworkUI.collecting.currentVisitingIdentityProvider */ .LM.collecting.currentVisitingIdentityProvider) === null || ref === void 0 ? void 0 : ref.recognized) || default_);
+    return (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(((ref = _social_network__WEBPACK_IMPORTED_MODULE_3__/* .activatedSocialNetworkUI.collecting.currentVisitingIdentityProvider */ .LM.collecting.currentVisitingIdentityProvider) === null || ref === void 0 ? void 0 : ref.recognized) || default_);
 }
 function useMyIdentities() {
-    return (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(_social_network__WEBPACK_IMPORTED_MODULE_3__/* .globalUIState.profiles */ .EJ.profiles);
+    return (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(_social_network__WEBPACK_IMPORTED_MODULE_3__/* .globalUIState.profiles */ .EJ.profiles);
 }
 function useCurrentIdentity() {
     return (0,use_subscription__WEBPACK_IMPORTED_MODULE_4__.useSubscription)(CurrentIdentitySubscription);
@@ -141,14 +141,14 @@ var Typography = __webpack_require__(74491);
 var CircularProgress = __webpack_require__(83634);
 // EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
 var src = __webpack_require__(43021);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var shared_base_ui_dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/ExpandMore.js
 var ExpandMore = __webpack_require__(85050);
 // EXTERNAL MODULE: ./src/plugins/Wallet/messages.ts
 var messages = __webpack_require__(63081);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 ;// CONCATENATED MODULE: ./src/web3/UI/ERC721ContractSelectPanel.tsx
 
 
@@ -244,7 +244,7 @@ function ERC721ContractSelectPanel(props) {
     const loading = (loadingFromChain || loadingBalanceFromRemoteState !== useSocket/* SocketState.done */.d.done) && !balance;
     // #region select contract
     const [id] = (0,react.useState)(v4/* default */.Z);
-    const { setDialog: setNftContractDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.selectNftContractDialogUpdated */.R.events.selectNftContractDialogUpdated, (0,react.useCallback)((ev)=>{
+    const { setDialog: setNftContractDialog  } = (0,shared_base_ui_dist/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.selectNftContractDialogUpdated */.R.events.selectNftContractDialogUpdated, (0,react.useCallback)((ev)=>{
         if (ev.open || !ev.contract || ev.uuid !== id) return;
         onContractChange(ev.contract);
     }, [
@@ -348,8 +348,6 @@ function useAllowTestnet() {
     return (0,context/* useWeb3StateContext */.N9)().allowTestnet;
 }
 
-// EXTERNAL MODULE: ../web3-shared/evm/hooks/useAccount.ts
-var useAccount = __webpack_require__(98086);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useChainId.ts
 var useChainId = __webpack_require__(63541);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/chainDetailed.ts
@@ -358,16 +356,18 @@ var chainDetailed = __webpack_require__(22229);
 var types = __webpack_require__(95130);
 // EXTERNAL MODULE: ../web3-shared/evm/pipes/index.ts
 var pipes = __webpack_require__(83468);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../web3-shared/evm/utils/address.ts
+var address = __webpack_require__(66580);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+kit@0.0.0-20220223101101-4e6f3b9/node_modules/@dimensiondev/kit/esm/index.js + 2 modules
 var esm = __webpack_require__(66559);
 // EXTERNAL MODULE: ./src/extension/options-page/DashboardComponents/ActionButton.tsx
 var ActionButton = __webpack_require__(47906);
 // EXTERNAL MODULE: ./src/plugins/Wallet/settings.ts
 var settings = __webpack_require__(63361);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ./src/plugins/Wallet/messages.ts
 var messages = __webpack_require__(63081);
 // EXTERNAL MODULE: ./src/extension/service.ts
@@ -396,10 +396,10 @@ function EthereumChainBoundary(props) {
     const { t  } = (0,utils/* useI18N */.M1)();
     const pluginID = (0,plugin_infra_src/* usePluginIDContext */.Zn)();
     const plugin = (0,plugin_infra_src/* useActivatedPlugin */.Rc)(pluginID, 'any');
-    const account = (0,useAccount/* useAccount */.m)();
+    const account = (0,plugin_infra_src/* useAccount */.mA)();
     const chainId = (0,useChainId/* useChainId */.xx)();
     const allowTestnet = useAllowTestnet();
-    const providerType = (0,shared_src/* useValueRef */.E)(settings/* currentProviderSettings */.t1);
+    const providerType = (0,dist/* useValueRef */.E)(settings/* currentProviderSettings */.t1);
     const { noSwitchNetworkTip =false  } = props;
     const classes = (0,src/* useStylesExtends */.Bc)(useStyles(), props);
     const expectedChainId = props.chainId;
@@ -414,6 +414,14 @@ function EthereumChainBoundary(props) {
     var ref1;
     // is the actual chain id a valid one even if it does not match with the expected one?
     const isValid = (ref1 = props === null || props === void 0 ? void 0 : (ref = props.isValidChainId) === null || ref === void 0 ? void 0 : ref.call(props, actualChainId, expectedChainId)) !== null && ref1 !== void 0 ? ref1 : false;
+    const { openDialog: openSelectProviderDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.selectProviderDialogUpdated */.R.events.selectProviderDialogUpdated);
+    // #region connect wallet dialog
+    const { setDialog: setConnectWalletDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.connectWalletDialogUpdated */.R.events.connectWalletDialogUpdated, (ev)=>{
+        if (ev.open) return;
+    });
+    // #endregion
+    // request ethereum-compatible network
+    const networkType = (0,chainDetailed/* getNetworkTypeFromChainId */._T)(expectedChainId);
     const onSwitchChain = (0,react.useCallback)(async ()=>{
         // a short time loading makes the user fells better
         await (0,esm/* delay */.gw)(1000);
@@ -429,8 +437,6 @@ function EthereumChainBoundary(props) {
                 });
                 return;
             }
-            // request ethereum-compatible network
-            const networkType = (0,chainDetailed/* getNetworkTypeFromChainId */._T)(expectedChainId);
             if (!networkType) return;
             try {
                 const overrides = {
@@ -455,7 +461,15 @@ function EthereumChainBoundary(props) {
             settings_settings/* pluginIDSettings.value */.tR.value = plugin_infra_src/* NetworkPluginID.PLUGIN_EVM */.FF.PLUGIN_EVM;
         };
         if (!isChainMatched) await switchToChain();
-        if (!isPluginMatched) await switchToPlugin();
+        if (!isPluginMatched) {
+            await switchToPlugin();
+            if (!networkType || networkType !== types/* NetworkType.Ethereum */.td.Ethereum || (0,address/* isValidAddress */.At)(account)) return;
+            setConnectWalletDialog({
+                open: true,
+                providerType: types/* ProviderType.MetaMask */.lP.MetaMask,
+                networkType
+            });
+        }
     }, [
         account,
         isAllowed,
@@ -464,7 +478,6 @@ function EthereumChainBoundary(props) {
         providerType,
         expectedChainId
     ]);
-    const { openDialog: openSelectProviderDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.selectProviderDialogUpdated */.R.events.selectProviderDialogUpdated);
     const renderBox = (children)=>{
         return(/*#__PURE__*/ (0,jsx_runtime.jsx)(Box/* default */.Z, {
             className: props.className,
@@ -619,8 +632,8 @@ var Box = __webpack_require__(18287);
 var Typography = __webpack_require__(74491);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Chip/Chip.js + 1 modules
 var Chip = __webpack_require__(70644);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
 // EXTERNAL MODULE: ../plugin-infra/src/index.ts
 var plugin_infra_src = __webpack_require__(63151);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/CircularProgress/CircularProgress.js + 1 modules
@@ -631,8 +644,8 @@ var ExpandMore = __webpack_require__(85050);
 var Error = __webpack_require__(23670);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/noop.js
 var noop = __webpack_require__(21122);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 ;// CONCATENATED MODULE: ./src/web3/UI/SelectTokenChip.tsx
 
 

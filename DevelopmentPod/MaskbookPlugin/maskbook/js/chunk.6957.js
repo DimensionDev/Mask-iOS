@@ -296,8 +296,8 @@ var Card = __webpack_require__(22234);
 var src = __webpack_require__(43021);
 // EXTERNAL MODULE: ../web3-shared/evm/pipes/index.ts
 var pipes = __webpack_require__(83468);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
 var react = __webpack_require__(63423);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/MenuItem/MenuItem.js + 1 modules
@@ -310,8 +310,8 @@ var MoreHoriz = __webpack_require__(24183);
 var useChainId = __webpack_require__(63541);
 // EXTERNAL MODULE: ../web3-shared/evm/types/index.ts
 var types = __webpack_require__(95130);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/classnames@2.3.1/node_modules/classnames/index.js
 var classnames = __webpack_require__(83849);
 var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
@@ -720,6 +720,8 @@ var dist = __webpack_require__(99674);
 var useTokenTransferCallback = __webpack_require__(32004);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/formatter.ts
 var formatter = __webpack_require__(22283);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var shared_base_ui_dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ./src/components/shared/Image.tsx
 var Image = __webpack_require__(42783);
 // EXTERNAL MODULE: ./src/resources/MaskIcon.tsx
@@ -772,7 +774,7 @@ function DashboardWalletTransferDialogNFT(props) {
     ]);
     // #endregion
     // #region remote controlled transaction dialog
-    const { setDialog: setTransactionDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.transactionDialogUpdated */.R.events.transactionDialogUpdated, (0,react.useCallback)((ev)=>{
+    const { setDialog: setTransactionDialog  } = (0,shared_base_ui_dist/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.transactionDialogUpdated */.R.events.transactionDialogUpdated, (0,react.useCallback)((ev)=>{
         if (ev.open) return;
         resetTransferCallback();
         if (transferState.type !== types/* TransactionStateType.HASH */.n$.HASH) return;
@@ -1029,8 +1031,8 @@ __webpack_require__.d(__webpack_exports__, {
 var jsx_runtime = __webpack_require__(82798);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
 var react = __webpack_require__(63423);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ../web3-shared/evm/types/index.ts
 var types = __webpack_require__(95130);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useCollectibles.ts
@@ -1039,8 +1041,6 @@ var useCollectibles = __webpack_require__(63653);
 var useSocket = __webpack_require__(23070);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/address.ts
 var utils_address = __webpack_require__(66580);
-// EXTERNAL MODULE: ../web3-shared/evm/utils/formatter.ts
-var formatter = __webpack_require__(22283);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/styles/styled.js
 var styled = __webpack_require__(68435);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Button/Button.js
@@ -1054,11 +1054,11 @@ var Skeleton = __webpack_require__(92093);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Stack/Stack.js
 var Stack = __webpack_require__(13152);
 // EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
-var theme_src = __webpack_require__(43021);
+var src = __webpack_require__(43021);
 // EXTERNAL MODULE: ./src/plugins/Wallet/settings.ts
 var settings = __webpack_require__(63361);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ./src/extension/options-page/DashboardComponents/CollectibleList/CollectibleCard.tsx + 5 modules
 var CollectibleCard = __webpack_require__(65522);
 // EXTERNAL MODULE: ../plugins/Wallet/src/index.ts + 1 modules
@@ -1067,6 +1067,8 @@ var Wallet_src = __webpack_require__(89987);
 var Tooltip = __webpack_require__(72753);
 // EXTERNAL MODULE: ./src/components/shared/Image.tsx
 var Image = __webpack_require__(42783);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/classnames@2.3.1/node_modules/classnames/index.js
 var classnames = __webpack_require__(83849);
 var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
@@ -1079,7 +1081,7 @@ var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
 
 
 
-const useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
+const useStyles = (0,src/* makeStyles */.ZL)()((theme)=>({
         collectionWrap: {
             width: '24px',
             height: '24px',
@@ -1106,7 +1108,7 @@ const useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
 const CollectionIcon = /*#__PURE__*/ (0,react.memo)(({ collection , onClick , selectedCollection  })=>{
     const { classes  } = useStyles();
     if (!collection) {
-        return(/*#__PURE__*/ (0,jsx_runtime.jsx)(src/* TokenIcon */.T1, {
+        return(/*#__PURE__*/ (0,jsx_runtime.jsx)(shared_src/* TokenIcon */.T1, {
             classes: {
                 icon: classes.collectionImg
             },
@@ -1133,7 +1135,7 @@ const CollectionIcon = /*#__PURE__*/ (0,react.memo)(({ collection , onClick , se
                 component: "img",
                 className: classes.collectionImg,
                 src: collection.iconURL
-            }) : /*#__PURE__*/ (0,jsx_runtime.jsx)(src/* TokenIcon */.T1, {
+            }) : /*#__PURE__*/ (0,jsx_runtime.jsx)(shared_src/* TokenIcon */.T1, {
                 classes: {
                     icon: classes.collectionImg
                 },
@@ -1162,6 +1164,7 @@ var KeyboardArrowDown = __webpack_require__(55804);
 
 
 
+
 const CollectibleContext = /*#__PURE__*/ (0,react.createContext)(null);
 const AllNetworkButton = (0,styled/* default */.ZP)(Button/* default */.Z)(({ theme  })=>({
         display: 'inline-block',
@@ -1174,7 +1177,7 @@ const AllNetworkButton = (0,styled/* default */.ZP)(Button/* default */.Z)(({ th
         opacity: 0.5
     })
 );
-const CollectibleList_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
+const CollectibleList_useStyles = (0,src/* makeStyles */.ZL)()((theme)=>({
         root: {
             display: 'grid',
             flexWrap: 'wrap',
@@ -1276,7 +1279,7 @@ function CollectibleItem(props) {
 function CollectibleListUI(props) {
     const { provider , wallet , collectibles , loading , collectiblesRetry , error , readonly , hasRetry =true  } = props;
     const { t  } = (0,utils/* useI18N */.M1)();
-    const classes = (0,theme_src/* useStylesExtends */.Bc)(CollectibleList_useStyles(), props);
+    const classes = (0,src/* useStylesExtends */.Bc)(CollectibleList_useStyles(), props);
     (0,react.useEffect)(()=>Wallet_src/* WalletMessages.events.erc721TokensUpdated.on */.R$.events.erc721TokensUpdated.on(collectiblesRetry)
     );
     return(/*#__PURE__*/ (0,jsx_runtime.jsx)(CollectibleContext.Provider, {
@@ -1346,7 +1349,7 @@ function CollectibleListUI(props) {
 }
 function CollectibleList(props) {
     const { address , collectibles , error , loading , retry  } = props;
-    const provider = (0,src/* useValueRef */.E)(settings/* currentNonFungibleAssetDataProviderSettings */.uR);
+    const provider = (0,dist/* useValueRef */.E)(settings/* currentNonFungibleAssetDataProviderSettings */.uR);
     var _classes;
     const classes = (_classes = props.classes) !== null && _classes !== void 0 ? _classes : {};
     return(/*#__PURE__*/ (0,jsx_runtime.jsx)(CollectibleListUI, {
@@ -1427,7 +1430,9 @@ function CollectionList({ addressName , onSelectAddress  }) {
                         variant: "outlined",
                         size: "small",
                         children: [
-                            (0,formatter/* formatEthereumAddress */.j8)(addressName.label, 5),
+                            /*#__PURE__*/ (0,jsx_runtime.jsx)(shared_src/* ReversedAddress */.il, {
+                                address: addressName.resolvedAddress
+                            }),
                             /*#__PURE__*/ (0,jsx_runtime.jsx)(KeyboardArrowDown/* default */.Z, {})
                         ]
                     })
@@ -1487,7 +1492,9 @@ function CollectionList({ addressName , onSelectAddress  }) {
                             variant: "outlined",
                             size: "small",
                             children: [
-                                (0,formatter/* formatEthereumAddress */.j8)(addressName.label, 5),
+                                /*#__PURE__*/ (0,jsx_runtime.jsx)(shared_src/* ReversedAddress */.il, {
+                                    address: addressName.resolvedAddress
+                                }),
                                 /*#__PURE__*/ (0,jsx_runtime.jsx)(KeyboardArrowDown/* default */.Z, {})
                             ]
                         })
@@ -1962,8 +1969,8 @@ var useAccount = __webpack_require__(98086);
 var useERC20TokenContract = __webpack_require__(85894);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useTransactionState.ts
 var useTransactionState = __webpack_require__(15030);
-// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
-var src = __webpack_require__(15091);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var src = __webpack_require__(26618);
 ;// CONCATENATED MODULE: ../web3-shared/evm/hooks/useERC20TokenTransferCallback.ts
 
 

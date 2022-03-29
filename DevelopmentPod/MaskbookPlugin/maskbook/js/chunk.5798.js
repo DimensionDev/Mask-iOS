@@ -23,10 +23,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(14754);
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(22229);
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(22283);
-/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(39850);
+/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(95367);
 /* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(74491);
 /* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(86377);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(13573);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(93573);
 /* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(79226);
 /* harmony import */ var _mui_lab__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(16576);
 /* harmony import */ var _dimensiondev_kit__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(66559);
@@ -39,7 +39,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var web3_utils__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(83317);
 /* harmony import */ var web3_utils__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(web3_utils__WEBPACK_IMPORTED_MODULE_13__);
 /* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(63151);
-/* harmony import */ var _masknet_web3_shared_base__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(15091);
+/* harmony import */ var _masknet_web3_shared_base__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(26618);
 /* harmony import */ var _components_CopyIconButton__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(82666);
 
 

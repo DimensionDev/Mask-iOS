@@ -117,8 +117,8 @@ var Typography = __webpack_require__(74491);
 var useChainId = __webpack_require__(63541);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/chainDetailed.ts
 var chainDetailed = __webpack_require__(22229);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useWeb3.ts + 1 modules
 var useWeb3 = __webpack_require__(90495);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useNativeTokenDetailed.ts
@@ -160,8 +160,8 @@ var useTokenPrice = __webpack_require__(65327);
 var shared_base_src = __webpack_require__(79226);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/web3-utils@1.5.2/node_modules/web3-utils/lib/index.js
 var web3_utils_lib = __webpack_require__(83317);
-// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
-var base_src = __webpack_require__(15091);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var base_src = __webpack_require__(26618);
 ;// CONCATENATED MODULE: ./src/extension/popups/pages/Wallet/GasSetting/GasSetting1559.tsx
 
 

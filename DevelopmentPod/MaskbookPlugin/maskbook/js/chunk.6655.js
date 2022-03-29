@@ -234,22 +234,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
 /* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(43021);
 /* harmony import */ var _components_PageHeader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(88397);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(13573);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(92186);
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(1154);
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(1840);
-/* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(22283);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(93573);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(92186);
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(1154);
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(1840);
+/* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(22283);
 /* harmony import */ var _service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(45925);
 /* harmony import */ var _components_LoadingPlaceholder__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(75677);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(74491);
-/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(39850);
-/* harmony import */ var _hook_useHasPassword__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(4034);
-/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(56247);
-/* harmony import */ var _hooks_usePasswordForm__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(91421);
-/* harmony import */ var _components_PasswordField__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(29502);
-/* harmony import */ var _plugins_Wallet_messages__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(63081);
-/* harmony import */ var _mui_lab__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(16576);
-/* harmony import */ var _settings_settings__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(21202);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(74491);
+/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(95367);
+/* harmony import */ var _masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(98193);
+/* harmony import */ var _hook_useHasPassword__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(4034);
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(56247);
+/* harmony import */ var _hooks_usePasswordForm__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(91421);
+/* harmony import */ var _components_PasswordField__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(29502);
+/* harmony import */ var _plugins_Wallet_messages__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(63081);
+/* harmony import */ var _mui_lab__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(16576);
+/* harmony import */ var _settings_settings__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(21202);
+
 
 
 
@@ -324,20 +326,20 @@ const useStyles = (0,_masknet_theme__WEBPACK_IMPORTED_MODULE_2__/* .makeStyles *
 const WalletRecovery = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.memo)(()=>{
     const { t  } = (0,_utils__WEBPACK_IMPORTED_MODULE_4__/* .useI18N */ .M1)();
     const { classes  } = useStyles();
-    const location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_14__/* .useLocation */ .TH)();
-    const currentPersona = (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_7__/* .useValueRef */ .E)(_settings_settings__WEBPACK_IMPORTED_MODULE_13__/* .currentPersonaIdentifier */ .cn);
+    const location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_15__/* .useLocation */ .TH)();
+    const currentPersona = (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_8__/* .useValueRef */ .E)(_settings_settings__WEBPACK_IMPORTED_MODULE_14__/* .currentPersonaIdentifier */ .cn);
     const backupId = new URLSearchParams(location.search).get('backupId');
-    const { loading , value  } = (0,react_use__WEBPACK_IMPORTED_MODULE_15__/* ["default"] */ .Z)(async ()=>{
+    const { loading , value  } = (0,react_use__WEBPACK_IMPORTED_MODULE_16__/* ["default"] */ .Z)(async ()=>{
         if (backupId) return _service__WEBPACK_IMPORTED_MODULE_5__/* ["default"].Welcome.getUnconfirmedBackup */ .ZP.Welcome.getUnconfirmedBackup(backupId);
         return undefined;
     }, [
         backupId
     ]);
-    const { hasPassword , loading: getHasPasswordLoading  } = (0,_hook_useHasPassword__WEBPACK_IMPORTED_MODULE_8__/* .useHasPassword */ .T)();
-    const { control , handleSubmit , setError , formState: { errors , isValid  } , schema ,  } = (0,_hooks_usePasswordForm__WEBPACK_IMPORTED_MODULE_10__/* .usePasswordForm */ .a)();
-    const [{ loading: setPasswordLoading  }, handleSetPassword] = (0,react_use__WEBPACK_IMPORTED_MODULE_16__/* ["default"] */ .Z)(async (data)=>{
+    const { hasPassword , loading: getHasPasswordLoading  } = (0,_hook_useHasPassword__WEBPACK_IMPORTED_MODULE_9__/* .useHasPassword */ .T)();
+    const { control , handleSubmit , setError , formState: { errors , isValid  } , schema ,  } = (0,_hooks_usePasswordForm__WEBPACK_IMPORTED_MODULE_11__/* .usePasswordForm */ .a)();
+    const [{ loading: setPasswordLoading  }, handleSetPassword] = (0,react_use__WEBPACK_IMPORTED_MODULE_17__/* ["default"] */ .Z)(async (data)=>{
         try {
-            await _plugins_Wallet_messages__WEBPACK_IMPORTED_MODULE_12__/* .WalletRPC.setPassword */ .V.setPassword(data.password);
+            await _plugins_Wallet_messages__WEBPACK_IMPORTED_MODULE_13__/* .WalletRPC.setPassword */ .V.setPassword(data.password);
         } catch (error) {
             if (error instanceof Error) {
                 setError('password', {
@@ -349,7 +351,7 @@ const WalletRecovery = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.memo)
         setError
     ]);
     const onSubmit = handleSubmit(handleSetPassword);
-    const [{ loading: confirmLoading  }, onConfirm] = (0,react_use__WEBPACK_IMPORTED_MODULE_16__/* ["default"] */ .Z)(async ()=>{
+    const [{ loading: confirmLoading  }, onConfirm] = (0,react_use__WEBPACK_IMPORTED_MODULE_17__/* ["default"] */ .Z)(async ()=>{
         // If the payment password does not exist, set it first
         if (!hasPassword) {
             await onSubmit();
@@ -359,7 +361,7 @@ const WalletRecovery = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.memo)
             if (json) {
                 await _service__WEBPACK_IMPORTED_MODULE_5__/* ["default"].Welcome.restoreBackup */ .ZP.Welcome.restoreBackup(json);
                 // Set default wallet
-                if (json.wallets) await _plugins_Wallet_messages__WEBPACK_IMPORTED_MODULE_12__/* .WalletRPC.setDefaultWallet */ .V.setDefaultWallet();
+                if (json.wallets) await _plugins_Wallet_messages__WEBPACK_IMPORTED_MODULE_13__/* .WalletRPC.setDefaultWallet */ .V.setDefaultWallet();
                 // Send event after successful recovery
                 _utils__WEBPACK_IMPORTED_MODULE_4__/* .MaskMessages.events.restoreSuccess.sendToAll */ .ql.events.restoreSuccess.sendToAll(undefined);
                 await _service__WEBPACK_IMPORTED_MODULE_5__/* ["default"].Helper.removePopupWindow */ .ZP.Helper.removePopupWindow();
@@ -388,16 +390,16 @@ const WalletRecovery = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.memo)
                                 return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                     className: classes.wallet,
                                     children: [
-                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_17__/* ["default"] */ .Z, {
+                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_18__/* ["default"] */ .Z, {
                                             className: classes.label,
                                             children: wallet.name
                                         }),
-                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_17__/* ["default"] */ .Z, {
+                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_18__/* ["default"] */ .Z, {
                                             className: classes.address,
                                             children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_masknet_shared__WEBPACK_IMPORTED_MODULE_7__/* .FormattedAddress */ .Kv, {
                                                 address: wallet.address,
                                                 size: 16,
-                                                formatter: _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_18__/* .formatEthereumAddress */ .j8
+                                                formatter: _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_19__/* .formatEthereumAddress */ .j8
                                             })
                                         })
                                     ]
@@ -411,15 +413,15 @@ const WalletRecovery = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.memo)
                                             marginTop: 16
                                         },
                                         children: [
-                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_17__/* ["default"] */ .Z, {
+                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_18__/* ["default"] */ .Z, {
                                                 className: classes.label,
                                                 children: t('popups_wallet_set_up_payment_password')
                                             }),
-                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_hook_form__WEBPACK_IMPORTED_MODULE_9__/* .Controller */ .Qr, {
+                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_hook_form__WEBPACK_IMPORTED_MODULE_10__/* .Controller */ .Qr, {
                                                 control: control,
                                                 render: ({ field  })=>{
                                                     var ref, ref1;
-                                                    /*#__PURE__*/ return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components_PasswordField__WEBPACK_IMPORTED_MODULE_11__/* .PasswordField */ .Z, {
+                                                    /*#__PURE__*/ return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components_PasswordField__WEBPACK_IMPORTED_MODULE_12__/* .PasswordField */ .Z, {
                                                         ...field,
                                                         classes: {
                                                             root: classes.textField
@@ -433,10 +435,10 @@ const WalletRecovery = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.memo)
                                                 },
                                                 name: "password"
                                             }),
-                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_hook_form__WEBPACK_IMPORTED_MODULE_9__/* .Controller */ .Qr, {
+                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_hook_form__WEBPACK_IMPORTED_MODULE_10__/* .Controller */ .Qr, {
                                                 render: ({ field  })=>{
                                                     var ref, ref2;
-                                                    /*#__PURE__*/ return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components_PasswordField__WEBPACK_IMPORTED_MODULE_11__/* .PasswordField */ .Z, {
+                                                    /*#__PURE__*/ return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components_PasswordField__WEBPACK_IMPORTED_MODULE_12__/* .PasswordField */ .Z, {
                                                         classes: {
                                                             root: classes.textField
                                                         },
@@ -453,7 +455,7 @@ const WalletRecovery = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.memo)
                                             })
                                         ]
                                     }),
-                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_17__/* ["default"] */ .Z, {
+                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_18__/* ["default"] */ .Z, {
                                         className: classes.tips,
                                         children: t('popups_wallet_payment_password_tip')
                                     })
@@ -465,7 +467,7 @@ const WalletRecovery = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.memo)
             }),
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
                 className: classes.controller,
-                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_lab__WEBPACK_IMPORTED_MODULE_19__/* ["default"] */ .Z, {
+                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_lab__WEBPACK_IMPORTED_MODULE_20__/* ["default"] */ .Z, {
                     loading: setPasswordLoading || confirmLoading,
                     fullWidth: true,
                     loadingPosition: "end",
@@ -541,7 +543,7 @@ const PageHeader = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.memo)(({ 
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
 /* harmony import */ var zod__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(56382);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13573);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(93573);
 /* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(56247);
 /* harmony import */ var _hookform_resolvers_zod__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(75426);
 

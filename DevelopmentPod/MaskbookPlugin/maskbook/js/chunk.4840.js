@@ -76,8 +76,8 @@ var Tab = __webpack_require__(50585);
 var Tabs = __webpack_require__(40158);
 // EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
 var src = __webpack_require__(43021);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ../public-api/src/index.ts
 var public_api_src = __webpack_require__(48476);
 // EXTERNAL MODULE: ./src/plugins/Trader/pipes.ts
@@ -201,8 +201,8 @@ var TableHead = __webpack_require__(54311);
 var TableBody = __webpack_require__(14610);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Typography/Typography.js + 1 modules
 var Typography = __webpack_require__(74491);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/formatter.ts
 var formatter = __webpack_require__(22283);
 // EXTERNAL MODULE: ./src/plugins/Wallet/formatter.ts
@@ -649,6 +649,8 @@ function usePriceStats({ coinId , currency , days =PriceChartDaysControl/* Days.
     ]);
 }
 
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ./src/plugins/Trader/settings.ts
 var Trader_settings = __webpack_require__(75228);
 ;// CONCATENATED MODULE: ./src/plugins/Trader/trending/useCurrentDataProvider.ts
@@ -656,7 +658,7 @@ var Trader_settings = __webpack_require__(75228);
 
 
 function useCurrentDataProvider(availableDataProviders) {
-    const currentDataProvider = (0,shared_src/* useValueRef */.E)(Trader_settings/* currentDataProviderSettings */.gG);
+    const currentDataProvider = (0,dist/* useValueRef */.E)(Trader_settings/* currentDataProviderSettings */.gG);
     const [dataProvider, setDataProvider] = (0,react.useState)(currentDataProvider);
     // sync data provider
     (0,react.useEffect)(()=>{
@@ -671,8 +673,8 @@ function useCurrentDataProvider(availableDataProviders) {
 
 // EXTERNAL MODULE: ./src/plugins/Trader/SNSAdaptor/trader/Trader.tsx + 28 modules
 var Trader = __webpack_require__(81152);
-// EXTERNAL MODULE: ./src/plugins/Trader/trader/useAllProviderTradeContext.ts + 45 modules
-var useAllProviderTradeContext = __webpack_require__(35396);
+// EXTERNAL MODULE: ./src/plugins/Trader/trader/useAllProviderTradeContext.ts + 46 modules
+var useAllProviderTradeContext = __webpack_require__(95198);
 // EXTERNAL MODULE: ../plugin-infra/src/index.ts
 var plugin_infra_src = __webpack_require__(63151);
 ;// CONCATENATED MODULE: ./src/plugins/Trader/SNSAdaptor/trader/TradeView.tsx
@@ -1766,7 +1768,7 @@ var constants = __webpack_require__(43545);
 
 function useApprovedTokens(token_address) {
     const [approvedTokens, setApprovedTokens] = (0,react.useState)([]);
-    const tokens = (0,shared_src/* useValueRef */.E)(Trader_settings/* approvedTokensFromUniswap */.dm);
+    const tokens = (0,dist/* useValueRef */.E)(Trader_settings/* approvedTokensFromUniswap */.dm);
     const onApprove = (0,react.useCallback)(()=>{
         if (!token_address || !token_address.length) return;
         const parsed = JSON.parse(tokens);
@@ -1891,6 +1893,7 @@ function CoinSafetyAlert(props) {
 
 
 
+
 const TrendingViewDeck_useStyles = (0,src/* makeStyles */.ZL)()((theme)=>{
     return {
         root: {
@@ -1965,7 +1968,7 @@ function TrendingViewDeck(props) {
     );
     const account = (0,useAccount/* useAccount */.m)();
     const isAllowanceCoin = useTransakAllowanceCoin(coin1);
-    const { setDialog: setBuyDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(Transak_messages/* PluginTransakMessages.buyTokenDialogUpdated */.l.buyTokenDialogUpdated);
+    const { setDialog: setBuyDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(Transak_messages/* PluginTransakMessages.buyTokenDialogUpdated */.l.buyTokenDialogUpdated);
     const onBuyButtonClicked = (0,react.useCallback)(()=>{
         setBuyDialog({
             open: true,
@@ -1983,7 +1986,7 @@ function TrendingViewDeck(props) {
     }, []);
     // #endregion
     // #region switch between coins with the same symbol
-    const currentPreferredCoinIdSettings = (0,shared_src/* useValueRef */.E)((0,Trader_settings/* getCurrentPreferredCoinIdSettings */.Lc)(dataProvider));
+    const currentPreferredCoinIdSettings = (0,dist/* useValueRef */.E)((0,Trader_settings/* getCurrentPreferredCoinIdSettings */.Lc)(dataProvider));
     const onCoinMenuChange = (0,react.useCallback)((option)=>{
         const settings = JSON.parse(currentPreferredCoinIdSettings);
         settings[option.coin.symbol.toLowerCase()] = option.value;
@@ -2143,7 +2146,7 @@ function useAvailableCoins(type, keyword, dataProvider) {
 
 function usePreferredCoinId(keyword, dataProvider) {
     const keyword_ = keyword.toLowerCase();
-    const settings = (0,shared_src/* useValueRef */.E)((0,Trader_settings/* getCurrentPreferredCoinIdSettings */.Lc)(dataProvider));
+    const settings = (0,dist/* useValueRef */.E)((0,Trader_settings/* getCurrentPreferredCoinIdSettings */.Lc)(dataProvider));
     return (0,react.useMemo)(()=>{
         try {
             const parsedSettings = JSON.parse(settings);
@@ -2488,14 +2491,14 @@ function TrendingPopper(props) {
     // #region select token and provider dialog could be open by trending view
     const onFreezed = (0,react.useCallback)((ev)=>setFreezed(ev.open)
     , []);
-    (0,shared_src/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.transactionDialogUpdated */.R.events.transactionDialogUpdated, onFreezed);
-    (0,shared_src/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.walletStatusDialogUpdated */.R.events.walletStatusDialogUpdated, onFreezed);
-    (0,shared_src/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.selectProviderDialogUpdated */.R.events.selectProviderDialogUpdated, onFreezed);
-    (0,shared_src/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.selectTokenDialogUpdated */.R.events.selectTokenDialogUpdated, onFreezed);
-    (0,shared_src/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.selectWalletDialogUpdated */.R.events.selectWalletDialogUpdated, onFreezed);
-    (0,shared_src/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.walletConnectQRCodeDialogUpdated */.R.events.walletConnectQRCodeDialogUpdated, onFreezed);
-    (0,shared_src/* useRemoteControlledDialog */.F$)(Transak_messages/* PluginTransakMessages.buyTokenDialogUpdated */.l.buyTokenDialogUpdated, onFreezed);
-    (0,shared_src/* useRemoteControlledDialog */.F$)(messages/* PluginTraderMessages.swapSettingsUpdated */.A.swapSettingsUpdated, onFreezed);
+    (0,dist/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.transactionDialogUpdated */.R.events.transactionDialogUpdated, onFreezed);
+    (0,dist/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.walletStatusDialogUpdated */.R.events.walletStatusDialogUpdated, onFreezed);
+    (0,dist/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.selectProviderDialogUpdated */.R.events.selectProviderDialogUpdated, onFreezed);
+    (0,dist/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.selectTokenDialogUpdated */.R.events.selectTokenDialogUpdated, onFreezed);
+    (0,dist/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.selectWalletDialogUpdated */.R.events.selectWalletDialogUpdated, onFreezed);
+    (0,dist/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.walletConnectQRCodeDialogUpdated */.R.events.walletConnectQRCodeDialogUpdated, onFreezed);
+    (0,dist/* useRemoteControlledDialog */.F$)(Transak_messages/* PluginTransakMessages.buyTokenDialogUpdated */.l.buyTokenDialogUpdated, onFreezed);
+    (0,dist/* useRemoteControlledDialog */.F$)(messages/* PluginTraderMessages.swapSettingsUpdated */.A.swapSettingsUpdated, onFreezed);
     // #endregion
     // #region open or close popper
     // open popper from message center
@@ -2663,7 +2666,7 @@ const sns = {
 /* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(86377);
 /* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(74491);
 /* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(43021);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(13573);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(93573);
 
 
 
@@ -2739,12 +2742,12 @@ function FootnoteMenu(props) {
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(63541);
 /* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(68681);
 /* harmony import */ var _components_shared_InjectedDialog__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(57464);
-/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(39850);
-/* harmony import */ var _trader_useAllProviderTradeContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(35396);
+/* harmony import */ var _masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(98193);
+/* harmony import */ var _trader_useAllProviderTradeContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(95198);
 /* harmony import */ var _trader_useTargetChainIdContext__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(84686);
 /* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(61274);
 /* harmony import */ var _Trader__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(81152);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(13573);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(93573);
 /* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(43021);
 /* harmony import */ var _components_shared_WalletStatusBox__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(57393);
 /* harmony import */ var _components_shared_NetworkTab__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(6054);
@@ -2822,7 +2825,7 @@ function TraderDialog({ open , onClose  }) {
     const chainIdValid = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_14__/* .useChainIdValid */ .as)();
     const [traderProps, setTraderProps] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)();
     const [chainId, setChainId] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(currentChainId);
-    const { open: remoteOpen , closeDialog  } = (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_4__/* .useRemoteControlledDialog */ .F$)(_messages__WEBPACK_IMPORTED_MODULE_7__/* .PluginTraderMessages.swapDialogUpdated */ .A.swapDialogUpdated, (ev)=>{
+    const { open: remoteOpen , closeDialog  } = (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_4__/* .useRemoteControlledDialog */ .F$)(_messages__WEBPACK_IMPORTED_MODULE_7__/* .PluginTraderMessages.swapDialogUpdated */ .A.swapDialogUpdated, (ev)=>{
         if (ev === null || ev === void 0 ? void 0 : ev.traderProps) setTraderProps(ev.traderProps);
     });
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
@@ -3002,7 +3005,8 @@ const resolveTradeProviderName = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_M
     [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.TRADERJOE */ .z4.TRADERJOE]: 'TraderJoe',
     [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.PANGOLIN */ .z4.PANGOLIN]: 'PangolinDex',
     [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.TRISOLARIS */ .z4.TRISOLARIS]: 'Trisolaris',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.WANNASWAP */ .z4.WANNASWAP]: 'WannaSwap'
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.WANNASWAP */ .z4.WANNASWAP]: 'WannaSwap',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.MDEX */ .z4.MDEX]: 'Mdex'
 }, (tradeProvider)=>{
     throw new Error(`Unknown provider type: ${tradeProvider}`);
 });
@@ -3039,7 +3043,7 @@ const PluginTransakMessages = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Q": () => (/* binding */ formatElapsed)
 /* harmony export */ });
-/* harmony import */ var _shared_ui_locales_legacy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6900);
+/* harmony import */ var _shared_ui_locales_legacy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(28331);
 
 function formatElapsed(from) {
     const msPerMinute = 60 * 1000;

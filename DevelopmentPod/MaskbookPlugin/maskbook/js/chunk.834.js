@@ -266,7 +266,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _masknet_icons__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(57846);
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(51596);
 /* harmony import */ var _plugins_Wallet_messages__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(63081);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(13573);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(93573);
 /* harmony import */ var _components_PasswordField__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(29502);
 /* harmony import */ var _service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(45925);
 

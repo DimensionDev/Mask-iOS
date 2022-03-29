@@ -281,6 +281,8 @@ var useChainId = __webpack_require__(63541);
 var constants = __webpack_require__(24403);
 // EXTERNAL MODULE: ../web3-shared/evm/types/index.ts
 var types = __webpack_require__(95130);
+// EXTERNAL MODULE: ../web3-shared/evm/constants/tokens.ts
+var tokens = __webpack_require__(82406);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/token.ts
 var utils_token = __webpack_require__(11315);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/address.ts
@@ -289,8 +291,8 @@ var address = __webpack_require__(66580);
 var useFungibleTokenBalance = __webpack_require__(42624);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/formatter.ts
 var formatter = __webpack_require__(22283);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+kit@0.0.0-20220223101101-4e6f3b9/node_modules/@dimensiondev/kit/esm/index.js + 2 modules
 var esm = __webpack_require__(66559);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useAsync.js
@@ -354,8 +356,8 @@ function useGasConfig(chainId) {
 
 // EXTERNAL MODULE: ./src/plugins/Trader/types/index.ts + 2 modules
 var Trader_types = __webpack_require__(41391);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Chip/chipClasses.js
 var chipClasses = __webpack_require__(39235);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/TextField/TextField.js + 2 modules
@@ -366,6 +368,8 @@ var Box = __webpack_require__(18287);
 var Typography = __webpack_require__(74491);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Chip/Chip.js + 1 modules
 var Chip = __webpack_require__(70644);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
 // EXTERNAL MODULE: ./src/plugins/Wallet/hooks/useTokenPrice.ts
 var useTokenPrice = __webpack_require__(65327);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
@@ -575,8 +579,8 @@ var Collapse = __webpack_require__(79230);
 var IconButton = __webpack_require__(87409);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Tooltip/Tooltip.js + 1 modules
 var Tooltip = __webpack_require__(72753);
-// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
-var base_src = __webpack_require__(15091);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var base_src = __webpack_require__(26618);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/noop.js
 var noop = __webpack_require__(21122);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/head.js
@@ -656,8 +660,8 @@ var public_api_src = __webpack_require__(48476);
 var useTargetChainIdContext = __webpack_require__(84686);
 // EXTERNAL MODULE: ./src/plugins/Trader/settings.ts
 var settings = __webpack_require__(75228);
-// EXTERNAL MODULE: ./src/plugins/Trader/trader/useAllProviderTradeContext.ts + 45 modules
-var useAllProviderTradeContext = __webpack_require__(35396);
+// EXTERNAL MODULE: ./src/plugins/Trader/trader/useAllProviderTradeContext.ts + 46 modules
+var useAllProviderTradeContext = __webpack_require__(95198);
 ;// CONCATENATED MODULE: ./src/plugins/Trader/SNSAdaptor/trader/hooks/useGreatThanSlippageSetting.ts
 
 
@@ -665,7 +669,7 @@ var useAllProviderTradeContext = __webpack_require__(35396);
 
 
 const useGreatThanSlippageSetting = (priceImpact)=>{
-    const slippageSetting = (0,shared_src/* useValueRef */.E)(settings/* currentSlippageSettings */.It);
+    const slippageSetting = (0,dist/* useValueRef */.E)(settings/* currentSlippageSettings */.It);
     const { temporarySlippage  } = useAllProviderTradeContext/* AllProviderTradeContext.useContainer */.TX.useContainer();
     const slippage = temporarySlippage || slippageSetting;
     return (0,react.useMemo)(()=>(0,base_src/* isGreaterThan */.T1)((0,base_src/* multipliedBy */.$q)(priceImpact !== null && priceImpact !== void 0 ? priceImpact : 0, 10000).toFixed(0).replace(/\.?0+$/, ''), slippage)
@@ -961,6 +965,7 @@ var useUpdateEffect = __webpack_require__(1433);
 
 
 
+
 const TradeForm_useStyles = (0,src/* makeStyles */.ZL)()((theme, { isDashboard , isPopup  })=>{
     return {
         root: {
@@ -1126,7 +1131,7 @@ const TradeForm = /*#__PURE__*/ (0,react.memo)(({ wallet , trades , inputAmount 
     ]);
     // #endregion
     // #region remote controlled swap settings dialog
-    const { openDialog: openSwapSettingDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(Trader_messages/* PluginTraderMessages.swapSettingsUpdated */.A.swapSettingsUpdated);
+    const { openDialog: openSwapSettingDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(Trader_messages/* PluginTraderMessages.swapSettingsUpdated */.A.swapSettingsUpdated);
     // #endregion
     // #region form controls
     const inputTokenTradeAmount = (0,base_src/* rightShift */.pu)(inputAmount || '0', inputToken === null || inputToken === void 0 ? void 0 : inputToken.decimals);
@@ -1715,9 +1720,7 @@ function useTradeCallback_useTradeCallback(tradeComputed, gasConfig) {
             ...(0,pick/* default */.Z)(tradeComputed.trade_, [
                 'to',
                 'data',
-                'value',
-                'gas',
-                'gasPrice'
+                'value'
             ]),
             ...gasConfig
         };
@@ -1727,7 +1730,7 @@ function useTradeCallback_useTradeCallback(tradeComputed, gasConfig) {
     ]);
     const tradeCallback = (0,react.useCallback)(async ()=>{
         // validate config
-        if (!account || !config) {
+        if (!account || !config || !tradeComputed) {
             setTradeState({
                 type: types/* TransactionStateType.UNKNOWN */.n$.UNKNOWN
             });
@@ -1737,22 +1740,26 @@ function useTradeCallback_useTradeCallback(tradeComputed, gasConfig) {
         setTradeState({
             type: types/* TransactionStateType.WAIT_FOR_CONFIRMING */.n$.WAIT_FOR_CONFIRMING
         });
-        // estimate transaction
-        try {
-            await web3.eth.call(config);
-        } catch  {
-            // for some transactions will always fail if we do estimation before a kick to the chain
-            if (!confirm('Failed to estimated the transaction, which means it may be reverted on the chain, and your transaction fee will not return. Sure to continue?')) {
+        const config_ = {
+            ...config,
+            gas: await web3.eth.estimateGas({
+                from: account,
+                ...(0,pick/* default */.Z)(tradeComputed.trade_, [
+                    'to',
+                    'data',
+                    'value'
+                ])
+            }).catch((error)=>{
                 setTradeState({
                     type: types/* TransactionStateType.FAILED */.n$.FAILED,
-                    error: new Error('User denied the transaction.')
+                    error
                 });
-                return;
-            }
-        }
+                return 0;
+            })
+        };
         // send transaction and wait for hash
         return new Promise((resolve, reject)=>{
-            web3.eth.sendTransaction(config, (error, hash)=>{
+            web3.eth.sendTransaction(config_, (error, hash)=>{
                 if (error) {
                     setTradeState({
                         type: types/* TransactionStateType.FAILED */.n$.FAILED,
@@ -2381,6 +2388,8 @@ function trader_useTradeCallback_useTradeCallback(provider, tradeComputed, gasCo
             return uniswapV2Like;
         case public_api_src/* TradeProvider.TRISOLARIS */.z4.TRISOLARIS:
             return uniswapV2Like;
+        case public_api_src/* TradeProvider.MDEX */.z4.MDEX:
+            return uniswapV2Like;
         case public_api_src/* TradeProvider.ZRX */.z4.ZRX:
             return zrx;
         case public_api_src/* TradeProvider.BALANCER */.z4.BALANCER:
@@ -2455,6 +2464,7 @@ const CramIcon = (0,icons_utils/* createIcon */.I)('CramIcon', /*#__PURE__*/ (0,
 }), '0 0 24 24');
 
 ;// CONCATENATED MODULE: ./src/plugins/Trader/SNSAdaptor/trader/ConfirmDialog.tsx
+
 
 
 
@@ -2567,7 +2577,7 @@ function ConfirmDialogUI(props) {
     const { open , trade , wallet , inputToken , outputToken , onConfirm , onClose , gas , gasPrice  } = props;
     const [cacheTrade, setCacheTrade] = (0,react.useState)();
     const [priceUpdated, setPriceUpdated] = (0,react.useState)(false);
-    const currentSlippage = (0,shared_src/* useValueRef */.E)(settings/* currentSlippageSettings */.It);
+    const currentSlippage = (0,dist/* useValueRef */.E)(settings/* currentSlippageSettings */.It);
     const isDashboard = (0,shared_base_src/* isDashboardPage */.K2)();
     const classes = (0,src/* useStylesExtends */.Bc)(ConfirmDialog_useStyles({
         isDashboard
@@ -3747,13 +3757,13 @@ const WARNING_SLIPPAGE = 1000;
 function SettingsDialog(props) {
     const { t  } = (0,utils/* useI18N */.M1)();
     const classes = (0,src/* useStylesExtends */.Bc)(SettingsDialog_useStyles(), props);
-    const slippage = (0,shared_src/* useValueRef */.E)(settings/* currentSlippageSettings */.It);
+    const slippage = (0,dist/* useValueRef */.E)(settings/* currentSlippageSettings */.It);
     const chainId = (0,useChainId/* useChainId */.xx)();
     const [gasConfig1, setGasConfig] = (0,react.useState)();
     const [unconfirmedSlippage, setUnconfirmedSlippage] = (0,react.useState)(slippage);
     const [warningVisible, setWarningVisible] = (0,react.useState)(unconfirmedSlippage >= WARNING_SLIPPAGE);
     // #region remote controlled dialog
-    const { open , setDialog , closeDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(Trader_messages/* PluginTraderMessages.swapSettingsUpdated */.A.swapSettingsUpdated);
+    const { open , setDialog , closeDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(Trader_messages/* PluginTraderMessages.swapSettingsUpdated */.A.swapSettingsUpdated);
     // #endregion
     (0,react.useEffect)(()=>{
         setUnconfirmedSlippage(slippage);
@@ -3979,7 +3989,6 @@ function useUpdateBalance(chainId) {
 
 
 
-
 const Trader_useStyles = (0,src/* makeStyles */.ZL)()(()=>{
     return {
         root: {
@@ -4010,7 +4019,7 @@ function Trader(props) {
         if (!chainIdValid) return;
         dispatchTradeStore({
             type: useAllProviderTradeContext/* AllProviderTradeActionType.UPDATE_INPUT_TOKEN */.AF.UPDATE_INPUT_TOKEN,
-            token: chainId === types/* ChainId.Mainnet */.a_.Mainnet && (coin1 === null || coin1 === void 0 ? void 0 : coin1.is_mirrored) ? Trader_constants/* UST */.bi[types/* ChainId.Mainnet */.a_.Mainnet] : (0,utils_token/* createNativeToken */.$c)(chainId)
+            token: chainId === types/* ChainId.Mainnet */.a_.Mainnet && (coin1 === null || coin1 === void 0 ? void 0 : coin1.is_mirrored) ? tokens/* UST */.bi[types/* ChainId.Mainnet */.a_.Mainnet] : (0,utils_token/* createNativeToken */.$c)(chainId)
         });
     }, [
         chainId,
@@ -4115,7 +4124,7 @@ function Trader(props) {
         return x === null || x === void 0 ? void 0 : x.address;
     });
     const [focusedTokenPanelType, setFocusedTokenPanelType] = (0,react.useState)(Trader_types/* TokenPanelType.Input */.Vo.Input);
-    const { setDialog: setSelectTokenDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(Wallet_src/* WalletMessages.events.selectTokenDialogUpdated */.R$.events.selectTokenDialogUpdated, (0,react.useCallback)((ev)=>{
+    const { setDialog: setSelectTokenDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(Wallet_src/* WalletMessages.events.selectTokenDialogUpdated */.R$.events.selectTokenDialogUpdated, (0,react.useCallback)((ev)=>{
         if (ev.open || !ev.token || ev.uuid !== String(focusedTokenPanelType)) return;
         dispatchTradeStore({
             type: focusedTokenPanelType === Trader_types/* TokenPanelType.Input */.Vo.Input ? useAllProviderTradeContext/* AllProviderTradeActionType.UPDATE_INPUT_TOKEN */.AF.UPDATE_INPUT_TOKEN : useAllProviderTradeContext/* AllProviderTradeActionType.UPDATE_OUTPUT_TOKEN */.AF.UPDATE_OUTPUT_TOKEN,
@@ -4191,7 +4200,7 @@ function Trader(props) {
     ].join('\n') : '').toString();
     // #endregion
     // #region close the transaction dialog
-    const { setDialog: setTransactionDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(Wallet_src/* WalletMessages.events.transactionDialogUpdated */.R$.events.transactionDialogUpdated, (ev)=>{
+    const { setDialog: setTransactionDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(Wallet_src/* WalletMessages.events.transactionDialogUpdated */.R$.events.transactionDialogUpdated, (ev)=>{
         if (ev.open) return;
         if ((tradeState === null || tradeState === void 0 ? void 0 : tradeState.type) === types/* TransactionStateType.HASH */.n$.HASH) {
             dispatchTradeStore({
@@ -4427,14 +4436,16 @@ var bignumber = __webpack_require__(42263);
 var bignumber_default = /*#__PURE__*/__webpack_require__.n(bignumber);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@uniswap+sdk-core@3.0.1/node_modules/@uniswap/sdk-core/dist/sdk-core.esm.js
 var sdk_core_esm = __webpack_require__(59800);
+// EXTERNAL MODULE: ../web3-shared/evm/constants/tokens.ts
+var tokens = __webpack_require__(82406);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/address.ts
 var address = __webpack_require__(66580);
 // EXTERNAL MODULE: ../web3-shared/evm/types/index.ts
 var types = __webpack_require__(95130);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/formatter.ts
 var formatter = __webpack_require__(22283);
-// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
-var src = __webpack_require__(15091);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var src = __webpack_require__(26618);
 // EXTERNAL MODULE: ./src/plugins/Trader/constants/index.ts + 2 modules
 var constants = __webpack_require__(43545);
 ;// CONCATENATED MODULE: ./src/plugins/Trader/helpers/uniswap.ts
@@ -4491,7 +4502,7 @@ function toUniswapCurrency(chainId, token) {
     try {
         if (!token) return;
         const extendedEther = ExtendedEther.onChain(chainId);
-        const weth = toUniswapToken(chainId, constants/* WNATIVE */.FX[chainId]);
+        const weth = toUniswapToken(chainId, tokens/* WNATIVE */.FX[chainId]);
         if (weth && (0,address/* isSameAddress */.Wr)(token.address, weth.address)) return weth;
         return token.type === types/* EthereumTokenType.Native */.Dr.Native ? extendedEther : toUniswapToken(chainId, token);
     } catch  {
@@ -4555,7 +4566,7 @@ function isTradeBetter(tradeA, tradeB, minimumDelta = constants/* ZERO_PERCENT *
 }
 class ExtendedEther extends sdk_core_esm.Ether {
     get wrapped() {
-        if (this.chainId in constants/* WNATIVE */.FX) return ExtendedEther.wrapEther(this.chainId);
+        if (this.chainId in tokens/* WNATIVE */.FX) return ExtendedEther.wrapEther(this.chainId);
         throw new Error('Unsupported chain ID');
     }
     static onChain(chainId) {
@@ -4564,7 +4575,7 @@ class ExtendedEther extends sdk_core_esm.Ether {
     }
 }
 ExtendedEther._cachedEther = {};
-ExtendedEther.wrapEther = (0,memoize/* default */.Z)((chainId)=>toUniswapToken(chainId, constants/* WNATIVE */.FX[chainId])
+ExtendedEther.wrapEther = (0,memoize/* default */.Z)((chainId)=>toUniswapToken(chainId, tokens/* WNATIVE */.FX[chainId])
 );
 
 ;// CONCATENATED MODULE: ./src/plugins/Trader/helpers/trader.ts
@@ -4619,7 +4630,7 @@ const PluginTraderRPC = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__/* 
 /* harmony export */ });
 /* harmony import */ var _dimensiondev_kit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(66559);
 /* harmony import */ var _settings_createSettings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(91296);
-/* harmony import */ var _shared_ui_locales_legacy__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6900);
+/* harmony import */ var _shared_ui_locales_legacy__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(28331);
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(43545);
 /* harmony import */ var _masknet_public_api__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(48476);
 
@@ -4691,7 +4702,7 @@ const SUPPORTED_CHAIN_ID_LIST = [
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "i": () => (/* binding */ useTradeAmount)
 /* harmony export */ });
-/* harmony import */ var _masknet_web3_shared_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15091);
+/* harmony import */ var _masknet_web3_shared_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(26618);
 /* harmony import */ var bignumber_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(42263);
 /* harmony import */ var bignumber_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bignumber_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(63423);
@@ -4924,7 +4935,7 @@ const swapCallParameters = (trade, options, tradeProvider)=>{
 
 /***/ }),
 
-/***/ 35396:
+/***/ 95198:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 
@@ -4940,8 +4951,8 @@ __webpack_require__.d(__webpack_exports__, {
 var react = __webpack_require__(63423);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/misc.ts
 var misc = __webpack_require__(7454);
-// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
-var src = __webpack_require__(15091);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var src = __webpack_require__(26618);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useAsyncRetry.js
 var useAsyncRetry = __webpack_require__(28577);
 // EXTERNAL MODULE: ../web3-shared/evm/constants/constants.ts + 26 modules
@@ -5610,15 +5621,15 @@ var public_api_src = __webpack_require__(48476);
     ]);
 }
 
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var shared_base_ui_dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ./src/plugins/Trader/settings.ts
 var settings = __webpack_require__(75228);
 ;// CONCATENATED MODULE: ./src/plugins/Trader/trader/uniswap/useSingleHopOnly.ts
 
 
 function useSingleHopOnly() {
-    const singleHopOnly = (0,shared_src/* useValueRef */.E)(settings/* currentSingleHopOnlySettings */.DG);
+    const singleHopOnly = (0,shared_base_ui_dist/* useValueRef */.E)(settings/* currentSingleHopOnlySettings */.DG);
     return singleHopOnly;
 }
 
@@ -5967,7 +5978,7 @@ var clamp = __webpack_require__(8218);
 
 
 function useSlippageTolerance() {
-    const slippage_ = (0,shared_src/* useValueRef */.E)(settings/* currentSlippageSettings */.It);
+    const slippage_ = (0,shared_base_ui_dist/* useValueRef */.E)(settings/* currentSlippageSettings */.It);
     const slippage = (0,clamp/* default */.Z)(slippage_, Trader_constants/* SLIPPAGE_MIN */.Bq, Trader_constants/* SLIPPAGE_MAX */.Q9);
     return (0,helpers/* toUniswapPercent */.Su)(slippage, 10000);
 }
@@ -6134,6 +6145,24 @@ function useTradeGasLimit(trade, tradeProvider) {
     ]);
 }
 
+;// CONCATENATED MODULE: ./src/plugins/Trader/trader/uniswap/useUniswapV2Like.ts
+
+
+
+
+function useUniswapV2Like(tradeProviders, traderProvider, inputAmount_, inputToken, outputToken) {
+    const isTrader = tradeProviders.some((x)=>x === traderProvider
+    );
+    const trader_ = useV2Trade(traderProvider, Trader_types/* TradeStrategy.ExactIn */.tB.ExactIn, inputAmount_, '0', isTrader ? inputToken : undefined, isTrader ? outputToken : undefined);
+    const trader = useTradeComputed_useTradeComputed(trader_.value, inputToken, outputToken);
+    const traderEstimateGas = useTradeGasLimit(trader, traderProvider);
+    return {
+        trader_,
+        trader,
+        traderEstimateGas
+    };
+}
+
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+kit@0.0.0-20220223101101-4e6f3b9/node_modules/@dimensiondev/kit/esm/index.js + 2 modules
 var esm = __webpack_require__(66559);
 // EXTERNAL MODULE: ./src/plugins/Trader/messages.ts
@@ -6144,7 +6173,7 @@ var messages = __webpack_require__(61274);
 
 
 function useSlippageTolerance_useSlippageTolerance() {
-    const slippage_ = (0,shared_src/* useValueRef */.E)(settings/* currentSlippageSettings */.It);
+    const slippage_ = (0,shared_base_ui_dist/* useValueRef */.E)(settings/* currentSlippageSettings */.It);
     return (0,clamp/* default */.Z)(slippage_, Trader_constants/* SLIPPAGE_MIN */.Bq, Trader_constants/* SLIPPAGE_MAX */.Q9);
 }
 
@@ -6260,19 +6289,43 @@ function _0x_useTradeComputed_useTradeComputed(trade, strategy, inputToken, outp
 
 // EXTERNAL MODULE: ./src/plugins/Trader/trader/0x/constants.ts
 var _0x_constants = __webpack_require__(22072);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/pick.js + 1 modules
+var pick = __webpack_require__(46428);
 ;// CONCATENATED MODULE: ./src/plugins/Trader/trader/0x/useTradeGasLimit.ts
+
+
 
 
 
 
 function useTradeGasLimit_useTradeGasLimit(tradeComputed) {
     const { targetChainId  } = useTargetChainIdContext/* TargetChainIdContext.useContainer */.Z.useContainer();
-    return (0,react.useMemo)(()=>{
-        if (!(tradeComputed === null || tradeComputed === void 0 ? void 0 : tradeComputed.trade_) || !_0x_constants/* SUPPORTED_CHAIN_ID_LIST.includes */.E.includes(targetChainId)) return 0;
-        return new (bignumber_default())(tradeComputed.trade_.gas).toNumber();
+    const web3 = (0,useWeb3/* useWeb3 */.$)({
+        chainId: targetChainId
+    });
+    const account = (0,useAccount/* useAccount */.m)();
+    const config = (0,react.useMemo)(()=>{
+        if (!account || !(tradeComputed === null || tradeComputed === void 0 ? void 0 : tradeComputed.trade_)) return null;
+        return {
+            from: account,
+            ...(0,pick/* default */.Z)(tradeComputed.trade_, [
+                'to',
+                'data',
+                'value'
+            ])
+        };
+    }, [
+        account,
+        tradeComputed
+    ]);
+    return (0,useAsync/* default */.Z)(async ()=>{
+        if (!(tradeComputed === null || tradeComputed === void 0 ? void 0 : tradeComputed.trade_) || !_0x_constants/* SUPPORTED_CHAIN_ID_LIST.includes */.E.includes(targetChainId) || !config) return 0;
+        return web3.eth.estimateGas(config);
     }, [
         targetChainId,
-        tradeComputed
+        tradeComputed,
+        config,
+        web3
     ]);
 }
 
@@ -6408,7 +6461,7 @@ function balancer_useTradeGasLimit_useTradeGasLimit(trade) {
 
 
 function dodo_useSlippageTolerance_useSlippageTolerance() {
-    const slippage_ = (0,shared_src/* useValueRef */.E)(settings/* currentSlippageSettings */.It);
+    const slippage_ = (0,shared_base_ui_dist/* useValueRef */.E)(settings/* currentSlippageSettings */.It);
     return (0,clamp/* default */.Z)(slippage_, Trader_constants/* SLIPPAGE_MIN */.Bq, Trader_constants/* SLIPPAGE_MAX */.Q9);
 }
 
@@ -6504,8 +6557,6 @@ function dodo_useTradeComputed_useTradeComputed(trade, strategy, inputToken, out
     ]);
 }
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/pick.js + 1 modules
-var pick = __webpack_require__(46428);
 ;// CONCATENATED MODULE: ./src/plugins/Trader/trader/dodo/useTradeGasLimit.ts
 
 
@@ -6547,7 +6598,7 @@ function dodo_useTradeGasLimit_useTradeGasLimit(tradeComputed) {
 
 
 function bancor_useSlippageTolerance_useSlippageTolerance() {
-    const slippage_ = (0,shared_src/* useValueRef */.E)(settings/* currentSlippageSettings */.It);
+    const slippage_ = (0,shared_base_ui_dist/* useValueRef */.E)(settings/* currentSlippageSettings */.It);
     return (0,clamp/* default */.Z)(slippage_, Trader_constants/* SLIPPAGE_MIN */.Bq, Trader_constants/* SLIPPAGE_MAX */.Q9);
 }
 
@@ -6728,7 +6779,7 @@ function openocean_useTradeComputed_useTradeComputed(trade, strategy, inputToken
 
 
 function openocean_useSlippageTolerance_useSlippageTolerance() {
-    const slippage_ = (0,shared_src/* useValueRef */.E)(settings/* currentSlippageSettings */.It);
+    const slippage_ = (0,shared_base_ui_dist/* useValueRef */.E)(settings/* currentSlippageSettings */.It);
     return (0,clamp/* default */.Z)(slippage_, Trader_constants/* SLIPPAGE_MIN */.Bq, Trader_constants/* SLIPPAGE_MAX */.Q9);
 }
 
@@ -6911,6 +6962,7 @@ function useNativeTradeGasLimit(trade, chainId) {
 
 
 
+
 function useAllTradeComputed(inputAmount, inputToken, outputToken, temporarySlippage) {
     const { targetChainId  } = useTargetChainIdContext/* TargetChainIdContext.useContainer */.Z.useContainer();
     var ref;
@@ -6923,37 +6975,15 @@ function useAllTradeComputed(inputAmount, inputToken, outputToken, temporarySlip
     const nativeToken = useTradeComputed((_value = nativeToken_.value) !== null && _value !== void 0 ? _value : false, Trader_types/* TradeStrategy.ExactIn */.tB.ExactIn, inputAmount_, '0', inputToken, outputToken);
     const nativeTradeGasLimit = useNativeTradeGasLimit(nativeToken, targetChainId);
     // uniswap-v2
-    const uniswapV2_ = useV2Trade(public_api_src/* TradeProvider.UNISWAP_V2 */.z4.UNISWAP_V2, Trader_types/* TradeStrategy.ExactIn */.tB.ExactIn, inputAmount_, '0', tradeProviders.some((x)=>x === public_api_src/* TradeProvider.UNISWAP_V2 */.z4.UNISWAP_V2
-    ) ? inputToken : undefined, tradeProviders.some((x)=>x === public_api_src/* TradeProvider.UNISWAP_V2 */.z4.UNISWAP_V2
-    ) ? outputToken : undefined);
-    const uniswapV2 = useTradeComputed_useTradeComputed(uniswapV2_.value, tradeProviders.some((x)=>x === public_api_src/* TradeProvider.UNISWAP_V2 */.z4.UNISWAP_V2
-    ) ? inputToken : undefined, tradeProviders.some((x)=>x === public_api_src/* TradeProvider.UNISWAP_V2 */.z4.UNISWAP_V2
-    ) ? outputToken : undefined, temporarySlippage);
-    const uniswapV2EstimateGas = useTradeGasLimit(uniswapV2, public_api_src/* TradeProvider.UNISWAP_V2 */.z4.UNISWAP_V2);
+    const { trader_: uniswapV2_ , trader: uniswapV2 , traderEstimateGas: uniswapV2EstimateGas ,  } = useUniswapV2Like(tradeProviders, public_api_src/* TradeProvider.UNISWAP_V2 */.z4.UNISWAP_V2, inputAmount_, inputToken, outputToken);
     // sushi swap
-    const sushiSwap_ = useV2Trade(public_api_src/* TradeProvider.SUSHISWAP */.z4.SUSHISWAP, Trader_types/* TradeStrategy.ExactIn */.tB.ExactIn, inputAmount_, '0', tradeProviders.some((x)=>x === public_api_src/* TradeProvider.SUSHISWAP */.z4.SUSHISWAP
-    ) ? inputToken : undefined, tradeProviders.some((x)=>x === public_api_src/* TradeProvider.SUSHISWAP */.z4.SUSHISWAP
-    ) ? outputToken : undefined);
-    const sushiSwap = useTradeComputed_useTradeComputed(sushiSwap_.value, inputToken, outputToken, temporarySlippage);
-    const sushiSwapEstimateGas = useTradeGasLimit(sushiSwap, public_api_src/* TradeProvider.SUSHISWAP */.z4.SUSHISWAP);
+    const { trader_: sushiSwap_ , trader: sushiSwap , traderEstimateGas: sushiSwapEstimateGas ,  } = useUniswapV2Like(tradeProviders, public_api_src/* TradeProvider.SUSHISWAP */.z4.SUSHISWAP, inputAmount_, inputToken, outputToken);
     // sashimi swap
-    const sashimiSwap_ = useV2Trade(public_api_src/* TradeProvider.SASHIMISWAP */.z4.SASHIMISWAP, Trader_types/* TradeStrategy.ExactIn */.tB.ExactIn, inputAmount_, '0', tradeProviders.some((x)=>x === public_api_src/* TradeProvider.SASHIMISWAP */.z4.SASHIMISWAP
-    ) ? inputToken : undefined, tradeProviders.some((x)=>x === public_api_src/* TradeProvider.SASHIMISWAP */.z4.SASHIMISWAP
-    ) ? outputToken : undefined);
-    const sashimiSwap = useTradeComputed_useTradeComputed(sashimiSwap_.value, inputToken, outputToken, temporarySlippage);
-    const sashimiSwapEstimateGas = useTradeGasLimit(sashimiSwap, public_api_src/* TradeProvider.SASHIMISWAP */.z4.SASHIMISWAP);
+    const { trader_: sashimiSwap_ , trader: sashimiSwap , traderEstimateGas: sashimiSwapEstimateGas ,  } = useUniswapV2Like(tradeProviders, public_api_src/* TradeProvider.SASHIMISWAP */.z4.SASHIMISWAP, inputAmount_, inputToken, outputToken);
     // quick swap
-    const quickSwap_ = useV2Trade(public_api_src/* TradeProvider.QUICKSWAP */.z4.QUICKSWAP, Trader_types/* TradeStrategy.ExactIn */.tB.ExactIn, inputAmount_, '0', tradeProviders.some((x)=>x === public_api_src/* TradeProvider.QUICKSWAP */.z4.QUICKSWAP
-    ) ? inputToken : undefined, tradeProviders.some((x)=>x === public_api_src/* TradeProvider.QUICKSWAP */.z4.QUICKSWAP
-    ) ? outputToken : undefined);
-    const quickSwap = useTradeComputed_useTradeComputed(quickSwap_.value, inputToken, outputToken, temporarySlippage);
-    const quickSwapEstimateGas = useTradeGasLimit(quickSwap, public_api_src/* TradeProvider.QUICKSWAP */.z4.QUICKSWAP);
+    const { trader_: quickSwap_ , trader: quickSwap , traderEstimateGas: quickSwapEstimateGas ,  } = useUniswapV2Like(tradeProviders, public_api_src/* TradeProvider.QUICKSWAP */.z4.QUICKSWAP, inputAmount_, inputToken, outputToken);
     // pancake swap
-    const pancakeSwap_ = useV2Trade(public_api_src/* TradeProvider.PANCAKESWAP */.z4.PANCAKESWAP, Trader_types/* TradeStrategy.ExactIn */.tB.ExactIn, inputAmount_, '0', tradeProviders.some((x)=>x === public_api_src/* TradeProvider.PANCAKESWAP */.z4.PANCAKESWAP
-    ) ? inputToken : undefined, tradeProviders.some((x)=>x === public_api_src/* TradeProvider.PANCAKESWAP */.z4.PANCAKESWAP
-    ) ? outputToken : undefined);
-    const pancakeSwap = useTradeComputed_useTradeComputed(pancakeSwap_.value, inputToken, outputToken, temporarySlippage);
-    const pancakeSwapEstimateGas = useTradeGasLimit(pancakeSwap, public_api_src/* TradeProvider.PANCAKESWAP */.z4.PANCAKESWAP);
+    const { trader_: pancakeSwap_ , trader: pancakeSwap , traderEstimateGas: pancakeSwapEstimateGas ,  } = useUniswapV2Like(tradeProviders, public_api_src/* TradeProvider.PANCAKESWAP */.z4.PANCAKESWAP, inputAmount_, inputToken, outputToken);
     // uniswap-v3 like providers
     const uniswapV3_ = useV3Trade(Trader_types/* TradeStrategy.ExactIn */.tB.ExactIn, inputAmount_, '0', tradeProviders.some((x)=>x === public_api_src/* TradeProvider.UNISWAP_V3 */.z4.UNISWAP_V3
     ) ? inputToken : undefined, tradeProviders.some((x)=>x === public_api_src/* TradeProvider.UNISWAP_V3 */.z4.UNISWAP_V3
@@ -6989,34 +7019,20 @@ function useAllTradeComputed(inputAmount, inputToken, outputToken, temporarySlip
     const bancor = bancor_useTradeComputed_useTradeComputed((_value4 = bancor_.value) !== null && _value4 !== void 0 ? _value4 : null, Trader_types/* TradeStrategy.ExactIn */.tB.ExactIn, inputToken, outputToken);
     const bancorSwapEstimateGas = bancor_useTradeGasLimit_useTradeGasLimit(bancor);
     // traderjoe
-    const traderJoe_ = useV2Trade(public_api_src/* TradeProvider.TRADERJOE */.z4.TRADERJOE, Trader_types/* TradeStrategy.ExactIn */.tB.ExactIn, inputAmount_, '0', tradeProviders.some((x)=>x === public_api_src/* TradeProvider.TRADERJOE */.z4.TRADERJOE
-    ) ? inputToken : undefined, tradeProviders.some((x)=>x === public_api_src/* TradeProvider.TRADERJOE */.z4.TRADERJOE
-    ) ? outputToken : undefined);
-    const traderJoe = useTradeComputed_useTradeComputed(traderJoe_.value, inputToken, outputToken);
-    const traderJoeEstimateGas = useTradeGasLimit(traderJoe, public_api_src/* TradeProvider.TRADERJOE */.z4.TRADERJOE);
+    const { trader_: traderJoe_ , trader: traderJoe , traderEstimateGas: traderJoeEstimateGas ,  } = useUniswapV2Like(tradeProviders, public_api_src/* TradeProvider.TRADERJOE */.z4.TRADERJOE, inputAmount_, inputToken, outputToken);
     // pangolindex
-    const pangolindex_ = useV2Trade(public_api_src/* TradeProvider.PANGOLIN */.z4.PANGOLIN, Trader_types/* TradeStrategy.ExactIn */.tB.ExactIn, inputAmount_, '0', tradeProviders.some((x)=>x === public_api_src/* TradeProvider.PANGOLIN */.z4.PANGOLIN
-    ) ? inputToken : undefined, tradeProviders.some((x)=>x === public_api_src/* TradeProvider.PANGOLIN */.z4.PANGOLIN
-    ) ? outputToken : undefined);
-    const pangolindex = useTradeComputed_useTradeComputed(pangolindex_.value, inputToken, outputToken);
-    const pangolinEstimateGas = useTradeGasLimit(pangolindex, public_api_src/* TradeProvider.PANGOLIN */.z4.PANGOLIN);
+    const { trader_: pangolindex_ , trader: pangolindex , traderEstimateGas: pangolinEstimateGas ,  } = useUniswapV2Like(tradeProviders, public_api_src/* TradeProvider.PANGOLIN */.z4.PANGOLIN, inputAmount_, inputToken, outputToken);
     // openocean
     const openocean_ = openocean_useTrade_useTrade(Trader_types/* TradeStrategy.ExactIn */.tB.ExactIn, inputAmount_, '0', inputToken, outputToken, temporarySlippage);
     var _value5;
     const openocean = openocean_useTradeComputed_useTradeComputed((_value5 = openocean_.value) !== null && _value5 !== void 0 ? _value5 : null, Trader_types/* TradeStrategy.ExactIn */.tB.ExactIn, inputToken, outputToken);
     const openoceanSwapEstimateGas = openocean_useTradeGasLimit_useTradeGasLimit(openocean);
     // trisolaris
-    const trisolaris_ = useV2Trade(public_api_src/* TradeProvider.TRISOLARIS */.z4.TRISOLARIS, Trader_types/* TradeStrategy.ExactIn */.tB.ExactIn, inputAmount_, '0', tradeProviders.some((x)=>x === public_api_src/* TradeProvider.TRISOLARIS */.z4.TRISOLARIS
-    ) ? inputToken : undefined, tradeProviders.some((x)=>x === public_api_src/* TradeProvider.TRISOLARIS */.z4.TRISOLARIS
-    ) ? outputToken : undefined);
-    const trisolaris = useTradeComputed_useTradeComputed(trisolaris_.value, inputToken, outputToken);
-    const trisolarisEstimateGas = useTradeGasLimit(trisolaris, public_api_src/* TradeProvider.TRISOLARIS */.z4.TRISOLARIS);
+    const { trader_: trisolaris_ , trader: trisolaris , traderEstimateGas: trisolarisEstimateGas ,  } = useUniswapV2Like(tradeProviders, public_api_src/* TradeProvider.TRISOLARIS */.z4.TRISOLARIS, inputAmount_, inputToken, outputToken);
     // WannaSwap
-    const wannaswap_ = useV2Trade(public_api_src/* TradeProvider.WANNASWAP */.z4.WANNASWAP, Trader_types/* TradeStrategy.ExactIn */.tB.ExactIn, inputAmount_, '0', tradeProviders.some((x)=>x === public_api_src/* TradeProvider.WANNASWAP */.z4.WANNASWAP
-    ) ? inputToken : undefined, tradeProviders.some((x)=>x === public_api_src/* TradeProvider.WANNASWAP */.z4.WANNASWAP
-    ) ? outputToken : undefined);
-    const wannaswap = useTradeComputed_useTradeComputed(wannaswap_.value, inputToken, outputToken);
-    const wannaSwapEstimateGas = useTradeGasLimit(wannaswap, public_api_src/* TradeProvider.WANNASWAP */.z4.WANNASWAP);
+    const { trader_: wannaswap_ , trader: wannaswap , traderEstimateGas: wannaSwapEstimateGas ,  } = useUniswapV2Like(tradeProviders, public_api_src/* TradeProvider.WANNASWAP */.z4.WANNASWAP, inputAmount_, inputToken, outputToken);
+    // Mdex
+    const { trader_: mdex_ , trader: mdex , traderEstimateGas: mdexEstimateGas ,  } = useUniswapV2Like(tradeProviders, public_api_src/* TradeProvider.MDEX */.z4.MDEX, inputAmount_, inputToken, outputToken);
     const allTradeResult = [
         {
             provider: public_api_src/* TradeProvider.UNISWAP_V2 */.z4.UNISWAP_V2,
@@ -7058,10 +7074,7 @@ function useAllTradeComputed(inputAmount, inputToken, outputToken, temporarySlip
             provider: public_api_src/* TradeProvider.ZRX */.z4.ZRX,
             ...zrx_,
             value: zrx,
-            gas: {
-                value: zrxSwapEstimateGas,
-                loading: false
-            }
+            gas: zrxSwapEstimateGas
         },
         {
             provider: public_api_src/* TradeProvider.BALANCER */.z4.BALANCER,
@@ -7110,6 +7123,12 @@ function useAllTradeComputed(inputAmount, inputToken, outputToken, temporarySlip
             ...trisolaris_,
             value: trisolaris,
             gas: trisolarisEstimateGas
+        },
+        {
+            provider: public_api_src/* TradeProvider.MDEX */.z4.MDEX,
+            ...mdex_,
+            value: mdex,
+            gas: mdexEstimateGas
         }, 
     ];
     return nativeToken_.value ? tradeProviders.map((item)=>({
@@ -7333,6 +7352,18 @@ function useGetTradeContext(tradeProvider) {
                     ADDITIONAL_TOKENS: {},
                     CUSTOM_TOKENS: _constants__WEBPACK_IMPORTED_MODULE_2__/* .TRISOLARIS_CUSTOM_BASES */ .cp
                 };
+            case _masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.MDEX */ .z4.MDEX:
+                return {
+                    TYPE: tradeProvider,
+                    IS_UNISWAP_V2_LIKE: true,
+                    GRAPH_API: DEX_TRADE.MDEX_THEGRAPH,
+                    INIT_CODE_HASH: DEX_TRADE.MDEX_INIT_CODE_HASH,
+                    ROUTER_CONTRACT_ADDRESS: DEX_TRADE.MDEX_ROUTER_ADDRESS,
+                    FACTORY_CONTRACT_ADDRESS: DEX_TRADE.MDEX_FACTORY_ADDRESS,
+                    AGAINST_TOKENS: _constants__WEBPACK_IMPORTED_MODULE_2__/* .MDEX_BASE_AGAINST_TOKENS */ .R8,
+                    ADDITIONAL_TOKENS: {},
+                    CUSTOM_TOKENS: _constants__WEBPACK_IMPORTED_MODULE_2__/* .MDEX_CUSTOM_BASES */ .Pz
+                };
             case _masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.ZRX */ .z4.ZRX:
                 return {
                     TYPE: tradeProvider
@@ -7477,6 +7508,7 @@ var ZrxTradePool;
     ZrxTradePool["PangolinDex"] = "PangolinDex";
     ZrxTradePool["Trisolaris"] = "Trisolaris";
     ZrxTradePool["WannaSwap"] = "WannaSwap";
+    ZrxTradePool["Mdex"] = "Mdex";
 })(ZrxTradePool || (ZrxTradePool = {}));
 var TradeStrategy;
 (function(TradeStrategy) {
@@ -7593,6 +7625,33 @@ function useNativeTokenPrice(chainId, currencyType = _masknet_web3_shared_evm__W
 
 /***/ }),
 
+/***/ 53586:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "g": () => (/* binding */ useMulticallContract)
+});
+
+;// CONCATENATED MODULE: ../web3-contracts/abis/Multicall.json
+const Multicall_namespaceObject = JSON.parse('[{"inputs":[],"name":"getCurrentBlockTimestamp","outputs":[{"internalType":"uint256","name":"timestamp","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"addr","type":"address"}],"name":"getEthBalance","outputs":[{"internalType":"uint256","name":"balance","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"components":[{"internalType":"address","name":"target","type":"address"},{"internalType":"uint256","name":"gasLimit","type":"uint256"},{"internalType":"bytes","name":"callData","type":"bytes"}],"internalType":"struct UniswapInterfaceMulticall.Call[]","name":"calls","type":"tuple[]"}],"name":"multicall","outputs":[{"internalType":"uint256","name":"blockNumber","type":"uint256"},{"components":[{"internalType":"bool","name":"success","type":"bool"},{"internalType":"uint256","name":"gasUsed","type":"uint256"},{"internalType":"bytes","name":"returnData","type":"bytes"}],"internalType":"struct UniswapInterfaceMulticall.Result[]","name":"returnData","type":"tuple[]"}],"stateMutability":"nonpayable","type":"function"}]');
+// EXTERNAL MODULE: ../web3-shared/evm/constants/constants.ts + 26 modules
+var constants = __webpack_require__(24403);
+// EXTERNAL MODULE: ../web3-shared/evm/hooks/useContract.ts
+var useContract = __webpack_require__(42340);
+;// CONCATENATED MODULE: ../web3-shared/evm/contracts/useMulticallContract.ts
+
+
+
+function useMulticallContract(chainId) {
+    const { MULTICALL_ADDRESS  } = (0,constants/* useEthereumConstants */.HV)(chainId);
+    return (0,useContract/* useContract */.cq)(MULTICALL_ADDRESS, Multicall_namespaceObject);
+}
+
+
+/***/ }),
+
 /***/ 16025:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -7615,6 +7674,34 @@ var useContract = __webpack_require__(42340);
 function useNativeTokenWrapperContract(chainId) {
     const { WNATIVE_ADDRESS  } = (0,constants/* useTokenConstants */.kd)(chainId);
     return (0,useContract/* useContract */.cq)(WNATIVE_ADDRESS, WETH_namespaceObject);
+}
+
+
+/***/ }),
+
+/***/ 84198:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "O": () => (/* binding */ useBlockNumber)
+/* harmony export */ });
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(28577);
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63541);
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(90495);
+
+
+/**
+ * Get the current block number of current chain
+ */ function useBlockNumber(expectedChainId) {
+    const defaultChainId = (0,___WEBPACK_IMPORTED_MODULE_0__/* .useChainId */ .xx)();
+    const web3 = (0,___WEBPACK_IMPORTED_MODULE_1__/* .useWeb3 */ .$)({
+        chainId: expectedChainId !== null && expectedChainId !== void 0 ? expectedChainId : defaultChainId
+    });
+    return (0,react_use__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(async ()=>{
+        return web3.eth.getBlockNumber();
+    }, [
+        web3
+    ]);
 }
 
 
@@ -7646,6 +7733,272 @@ function useFungibleTokenBalance(type, address, chainId) {
         default:
             (0,_dimensiondev_kit__WEBPACK_IMPORTED_MODULE_0__/* .unreachable */ .t1)(type_);
     }
+}
+
+
+/***/ }),
+
+/***/ 55082:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "F_": () => (/* binding */ MulticallStateType),
+/* harmony export */   "_Y": () => (/* binding */ useMultipleContractSingleData),
+/* harmony export */   "es": () => (/* binding */ useSingleContractMultipleData)
+/* harmony export */ });
+/* unused harmony exports useMulticallCallback, useMulticallStateDecoded, useMultipleContractMultipleData */
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
+/* harmony import */ var _contracts_useMulticallContract__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(53586);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(11315);
+/* harmony import */ var _useWeb3__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(90495);
+/* harmony import */ var _useBlockNumber__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(84198);
+/* harmony import */ var _useChainId__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63541);
+
+
+
+
+
+
+// conservative, hard-coded estimate of the current block gas limit
+const CONSERVATIVE_BLOCK_GAS_LIMIT = 10000000;
+// the default value for calls that don't specify gasRequired
+const DEFAULT_GAS_REQUIRED = 200000;
+const DEFAULT_GAS_LIMIT = 1000000;
+// #endregion
+// #region cached results
+const cachedResults = {};
+function toCallKey(call) {
+    return call.join('-');
+}
+function getCallResult(call, chainId, blockNumber) {
+    const cache = cachedResults[chainId];
+    var ref;
+    const blockNumber_ = (ref = cache === null || cache === void 0 ? void 0 : cache.blockNumber) !== null && ref !== void 0 ? ref : 0;
+    if (blockNumber_ < blockNumber) return;
+    return cache.results[toCallKey(call)];
+}
+function setCallResult(call, result, chainId, blockNumber) {
+    var _chainId;
+    const cache = (_chainId = cachedResults[chainId]) !== null && _chainId !== void 0 ? _chainId : {
+        results: [],
+        blockNumber: 0
+    };
+    const blockNumber_ = cache.blockNumber;
+    if (blockNumber_ > blockNumber) return;
+    if (blockNumber_ < blockNumber) cache.blockNumber = blockNumber;
+    cache.results[toCallKey(call)] = result;
+    cachedResults[chainId] = cache;
+}
+// evenly distributes items among the chunks
+function chunkArray(items, gasLimit = CONSERVATIVE_BLOCK_GAS_LIMIT * 10) {
+    const chunks = [];
+    let currentChunk = [];
+    let currentChunkCumulativeGas = 0;
+    for (const item of items){
+        var ref;
+        // calculate the gas required by the current item
+        const gasRequired = (ref = item[1]) !== null && ref !== void 0 ? ref : DEFAULT_GAS_REQUIRED;
+        // if the current chunk is empty, or the current item wouldn't push it over the gas limit,
+        // append the current item and increment the cumulative gas
+        if (currentChunk.length === 0 || currentChunkCumulativeGas + gasRequired < gasLimit) {
+            currentChunk.push(item);
+            currentChunkCumulativeGas += gasRequired;
+        } else {
+            // otherwise, push the current chunk and create a new chunk
+            chunks.push(currentChunk);
+            currentChunk = [
+                item
+            ];
+            currentChunkCumulativeGas = gasRequired;
+        }
+    }
+    if (currentChunk.length > 0) chunks.push(currentChunk);
+    return chunks;
+}
+var MulticallStateType;
+(function(MulticallStateType) {
+    MulticallStateType[MulticallStateType["UNKNOWN"] = 0] = "UNKNOWN";
+    MulticallStateType[MulticallStateType[/** Wait for tx call */ "PENDING"] = 1] = "PENDING";
+    MulticallStateType[MulticallStateType[/** Tx call resolved */ "SUCCEED"] = 2] = "SUCCEED";
+    MulticallStateType[MulticallStateType[/** Tx call rejected */ "FAILED"] = 3] = "FAILED";
+})(MulticallStateType || (MulticallStateType = {}));
+/**
+ * The basic hook for fetching data from the Multicall contract
+ * @param calls
+ */ function useMulticallCallback(targetChainId, targetBlockNumber) {
+    const currentChainId = (0,_useChainId__WEBPACK_IMPORTED_MODULE_1__/* .useChainId */ .xx)();
+    const chainId = targetChainId !== null && targetChainId !== void 0 ? targetChainId : currentChainId;
+    const { value: defaultBlockNumber = 0  } = (0,_useBlockNumber__WEBPACK_IMPORTED_MODULE_2__/* .useBlockNumber */ .O)();
+    const blockNumber = targetBlockNumber !== null && targetBlockNumber !== void 0 ? targetBlockNumber : defaultBlockNumber;
+    const multicallContract = (0,_contracts_useMulticallContract__WEBPACK_IMPORTED_MODULE_3__/* .useMulticallContract */ .g)(chainId);
+    const [multicallState, setMulticallState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+        type: MulticallStateType.UNKNOWN
+    });
+    const multicallCallback = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(async (calls, overrides)=>{
+        if (calls.length === 0 || !multicallContract) {
+            setMulticallState({
+                type: MulticallStateType.UNKNOWN
+            });
+            return;
+        }
+        try {
+            setMulticallState({
+                type: MulticallStateType.PENDING
+            });
+            // filter out cached calls
+            const unresolvedCalls = calls.filter((call_)=>!getCallResult(call_, chainId, blockNumber)
+            );
+            // resolve the calls by chunks
+            if (unresolvedCalls.length) {
+                await Promise.all(chunkArray(unresolvedCalls).map(async (chunk)=>{
+                    // we don't mind the actual block number of the current call
+                    const { returnData  } = await multicallContract.methods.multicall(chunk).call(overrides);
+                    returnData.forEach((result, index)=>setCallResult(chunk[index], result, chainId, blockNumber)
+                    );
+                }));
+            }
+            var ref;
+            setMulticallState({
+                type: MulticallStateType.SUCCEED,
+                results: calls.map((call)=>(ref = getCallResult(call, chainId, blockNumber)) !== null && ref !== void 0 ? ref : [
+                        false,
+                        '0x0',
+                        '0x0'
+                    ]
+                )
+            });
+        } catch (error) {
+            if (error instanceof Error) {
+                setMulticallState({
+                    type: MulticallStateType.FAILED,
+                    error
+                });
+            }
+            throw error;
+        }
+    }, [
+        chainId,
+        blockNumber,
+        multicallContract
+    ]);
+    return [
+        multicallState,
+        multicallCallback
+    ];
+}
+// #endregion
+// #region useMulticallStateDecoded
+function useMulticallStateDecoded(contracts, names, state, chainId) {
+    const web3 = (0,_useWeb3__WEBPACK_IMPORTED_MODULE_4__/* .useWeb3 */ .$)({
+        chainId
+    });
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(()=>{
+        if (state.type !== MulticallStateType.SUCCEED) return [];
+        if (contracts.length !== state.results.length) return [];
+        return state.results.map(([succeed, gasUsed, result], index)=>{
+            var ref;
+            var ref1;
+            // the ignore formatter for better reading
+            // prettier-ignore
+            const outputs = (ref1 = (ref = contracts[index].options.jsonInterface.find(({ type , name  })=>type === 'function' && name === names[index]
+            )) === null || ref === void 0 ? void 0 : ref.outputs) !== null && ref1 !== void 0 ? ref1 : [];
+            try {
+                const value = (0,_utils__WEBPACK_IMPORTED_MODULE_5__/* .decodeOutputString */ .mO)(web3, outputs, result);
+                return {
+                    succeed,
+                    gasUsed,
+                    value,
+                    error: null
+                };
+            } catch (error) {
+                return {
+                    succeed: false,
+                    gasUsed,
+                    value: null,
+                    error
+                };
+            }
+        });
+    }, [
+        web3,
+        contracts.map((x)=>x.options.address
+        ).join(),
+        names.join(),
+        state
+    ]);
+}
+// #endregion
+function useSingleContractMultipleData(contract, names, callDatas, gasLimit = DEFAULT_GAS_LIMIT, chainId, blockNumber) {
+    const calls = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(()=>{
+        if (!contract) return [];
+        return callDatas.map((data, i)=>[
+                contract.options.address,
+                gasLimit,
+                contract.methods[names[i]](...data).encodeABI(), 
+            ]
+        );
+    }, [
+        contract === null || contract === void 0 ? void 0 : contract.options.address,
+        names.join(),
+        callDatas.flatMap((x)=>x
+        ).join()
+    ]);
+    const [state, callback] = useMulticallCallback(chainId, blockNumber);
+    const results = useMulticallStateDecoded(Array.from({
+        length: calls.length
+    }).fill(contract), names, state, chainId);
+    return [
+        results,
+        calls,
+        state,
+        callback
+    ];
+}
+function useMultipleContractSingleData(contracts, names, callData, chainId, blockNumber, gasLimit = DEFAULT_GAS_LIMIT) {
+    const calls = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(()=>contracts.map((contract, i)=>[
+                contract.options.address,
+                gasLimit,
+                contract.methods[names[i]](...callData).encodeABI(), 
+            ]
+        )
+    , [
+        contracts.map((x)=>x.options.address
+        ).join(),
+        names.join(),
+        callData.join()
+    ]);
+    const [state, callback] = useMulticallCallback(chainId, blockNumber);
+    const results = useMulticallStateDecoded(contracts, names, state, chainId);
+    return [
+        results,
+        calls,
+        state,
+        callback
+    ];
+}
+function useMultipleContractMultipleData(contracts, names, callDatas, gasLimit = DEFAULT_GAS_LIMIT, chainId) {
+    const calls = useMemo(()=>contracts.map((contract, i)=>[
+                contract.options.address,
+                gasLimit,
+                contract.methods[names[i]](callDatas[i]).encodeABI(), 
+            ]
+        )
+    , [
+        contracts.map((x)=>x.options.address
+        ).join(),
+        names.join(),
+        callDatas.flatMap((x)=>x
+        ).join(),
+        gasLimit
+    ]);
+    const [state, callback] = useMulticallCallback(chainId);
+    const results = useMulticallStateDecoded(contracts, names, state, chainId);
+    return [
+        results,
+        calls,
+        state,
+        callback
+    ];
 }
 
 

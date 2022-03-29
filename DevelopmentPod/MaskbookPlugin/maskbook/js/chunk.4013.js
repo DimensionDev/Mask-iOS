@@ -101,7 +101,7 @@ function getNormalizedScrollLeft(element, direction) {
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
 /* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(44162);
 /* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(39850);
+/* harmony import */ var _masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(98193);
 /* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(79226);
 /* harmony import */ var _social_network__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(61751);
 /* harmony import */ var use_subscription__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(85848);
@@ -112,7 +112,7 @@ function getNormalizedScrollLeft(element, direction) {
 
 
 function useFriendsList() {
-    const ref = (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(_social_network__WEBPACK_IMPORTED_MODULE_3__/* .globalUIState.friends */ .EJ.friends);
+    const ref = (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(_social_network__WEBPACK_IMPORTED_MODULE_3__/* .globalUIState.friends */ .EJ.friends);
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(()=>[
             ...ref.values()
         ]
@@ -125,14 +125,14 @@ const default_ = new _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_5__.Va
 });
 function useLastRecognizedIdentity() {
     var ref;
-    return (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(((ref = _social_network__WEBPACK_IMPORTED_MODULE_3__/* .activatedSocialNetworkUI.collecting.identityProvider */ .LM.collecting.identityProvider) === null || ref === void 0 ? void 0 : ref.recognized) || default_);
+    return (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(((ref = _social_network__WEBPACK_IMPORTED_MODULE_3__/* .activatedSocialNetworkUI.collecting.identityProvider */ .LM.collecting.identityProvider) === null || ref === void 0 ? void 0 : ref.recognized) || default_);
 }
 function useCurrentVisitingIdentity() {
     var ref;
-    return (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(((ref = _social_network__WEBPACK_IMPORTED_MODULE_3__/* .activatedSocialNetworkUI.collecting.currentVisitingIdentityProvider */ .LM.collecting.currentVisitingIdentityProvider) === null || ref === void 0 ? void 0 : ref.recognized) || default_);
+    return (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(((ref = _social_network__WEBPACK_IMPORTED_MODULE_3__/* .activatedSocialNetworkUI.collecting.currentVisitingIdentityProvider */ .LM.collecting.currentVisitingIdentityProvider) === null || ref === void 0 ? void 0 : ref.recognized) || default_);
 }
 function useMyIdentities() {
-    return (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(_social_network__WEBPACK_IMPORTED_MODULE_3__/* .globalUIState.profiles */ .EJ.profiles);
+    return (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(_social_network__WEBPACK_IMPORTED_MODULE_3__/* .globalUIState.profiles */ .EJ.profiles);
 }
 function useCurrentIdentity() {
     return (0,use_subscription__WEBPACK_IMPORTED_MODULE_4__.useSubscription)(CurrentIdentitySubscription);
@@ -291,12 +291,12 @@ var IconButton = __webpack_require__(87409);
 var Typography = __webpack_require__(74491);
 // EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
 var src = __webpack_require__(43021);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var shared_base_src = __webpack_require__(79226);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/Close.js
 var Close = __webpack_require__(41457);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/ArrowBackRounded.js
@@ -319,13 +319,7 @@ function DialogDismissIconUI(props) {
 
 // EXTERNAL MODULE: ./src/social-network/index.ts
 var social_network = __webpack_require__(61751);
-// EXTERNAL MODULE: ./src/social-network-adaptor/minds.com/base.ts
-var base = __webpack_require__(65375);
-// EXTERNAL MODULE: ./src/social-network-adaptor/facebook.com/base.ts
-var facebook_com_base = __webpack_require__(40543);
 ;// CONCATENATED MODULE: ./src/components/shared/InjectedDialog.tsx
-
-
 
 
 
@@ -351,7 +345,7 @@ const useStyles = (0,src/* makeStyles */.ZL)()((theme, { snsId  })=>({
             color: theme.palette.text.primary
         },
         paper: {
-            ...snsId === base/* MINDS_ID */.fN || snsId === facebook_com_base/* FACEBOOK_ID */.Iz ? {
+            ...snsId === shared_base_src/* EnhanceableSite.Minds */.Jk.Minds || snsId === shared_base_src/* EnhanceableSite.Facebook */.Jk.Facebook ? {
                 width: 'auto',
                 backgroundImage: 'none'
             } : {}
@@ -400,7 +394,7 @@ function InjectedDialog(props) {
                 },
                 ...rest,
                 ...extraProps,
-                children: /*#__PURE__*/ (0,jsx_runtime.jsxs)(shared_src/* ErrorBoundary */.SV, {
+                children: /*#__PURE__*/ (0,jsx_runtime.jsxs)(dist/* ErrorBoundary */.SV, {
                     children: [
                         title ? /*#__PURE__*/ (0,jsx_runtime.jsxs)(DialogTitle/* default */.Z, {
                             className: "dashboard-dialog-title-hook",
@@ -469,8 +463,8 @@ var jsx_runtime = __webpack_require__(82798);
 var base = __webpack_require__(69038);
 // EXTERNAL MODULE: ./src/plugins/Polls/constants.ts
 var constants = __webpack_require__(74440);
-// EXTERNAL MODULE: ../typed-message/base/index.ts + 27 modules
-var typed_message_base = __webpack_require__(69492);
+// EXTERNAL MODULE: ../typed-message/base/index.ts + 2 modules
+var typed_message_base = __webpack_require__(65631);
 ;// CONCATENATED MODULE: ./src/plugins/Polls/schema.json
 const schema_namespaceObject = JSON.parse('{"type":"object","additionalProperties":true,"properties":{"question":{"type":"string","title":"question"},"key":{"type":"string","title":"key"},"start_time":{"type":"number","title":"start_time"},"end_time":{"type":"number","title":"end_time"},"options":{"type":"array","title":"options"},"results":{"type":"array","title":"results"},"sender":{"type":"string","title":"sender"},"id":{"type":"string","title":"id"}},"required":["question","key","start_time","end_time","options","results","sender","id"]}');
 ;// CONCATENATED MODULE: ./src/plugins/Polls/helpers.ts
@@ -511,8 +505,8 @@ var src = __webpack_require__(43021);
 var Add = __webpack_require__(6107);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/date-fns@2.28.0/node_modules/date-fns/esm/add/index.js
 var add = __webpack_require__(80146);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ./src/components/shared/AbstractTab.tsx
 var AbstractTab = __webpack_require__(51758);
 // EXTERNAL MODULE: ./src/components/DataSource/useActivatedUI.ts
@@ -1165,44 +1159,8 @@ const sns = {
 
 
 const PollMessage = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__/* .createPluginMessage */ .I4)(_constants__WEBPACK_IMPORTED_MODULE_0__/* .PLUGIN_ID */ .Uu);
-const PluginPollRPC = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__/* .createPluginRPC */ .V8)(_constants__WEBPACK_IMPORTED_MODULE_0__/* .PLUGIN_ID */ .Uu, ()=>Promise.all(/* import() */[__webpack_require__.e(3693), __webpack_require__.e(4477), __webpack_require__.e(9702)]).then(__webpack_require__.bind(__webpack_require__, 35237))
+const PluginPollRPC = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__/* .createPluginRPC */ .V8)(_constants__WEBPACK_IMPORTED_MODULE_0__/* .PLUGIN_ID */ .Uu, ()=>Promise.all(/* import() */[__webpack_require__.e(3693), __webpack_require__.e(5237)]).then(__webpack_require__.bind(__webpack_require__, 35237))
 , PollMessage.rpc, true);
-
-
-/***/ }),
-
-/***/ 65375:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NE": () => (/* binding */ mindsBase),
-/* harmony export */   "Sf": () => (/* binding */ isMinds),
-/* harmony export */   "fN": () => (/* binding */ MINDS_ID),
-/* harmony export */   "fy": () => (/* binding */ mindsWorkerBase)
-/* harmony export */ });
-const MINDS_ID = 'minds.com';
-const origins = [
-    'https://www.minds.com/*',
-    'https://minds.com/*',
-    'https://cdn.minds.com/*'
-];
-const mindsBase = {
-    networkIdentifier: MINDS_ID,
-    name: 'minds',
-    declarativePermissions: {
-        origins
-    },
-    shouldActivate (location) {
-        return location.hostname.endsWith('minds.com');
-    }
-};
-function isMinds(ui) {
-    return ui.networkIdentifier === MINDS_ID;
-}
-const mindsWorkerBase = {
-    ...mindsBase,
-    gunNetworkHint: 'minds-'
-};
 
 
 /***/ })

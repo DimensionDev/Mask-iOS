@@ -204,10 +204,17 @@ setTimeout(()=>self.postMessage('Alive')
 
 ;// CONCATENATED MODULE: ./web-workers/wallet.ts
 
+async function load() {
+    if (false) {} else {
+        const { default: init , ...rest } = await __webpack_require__.e(/* import() */ 1077).then(__webpack_require__.bind(__webpack_require__, 22809));
+        // @ts-expect-error
+        await init();
+        return rest;
+    }
+}
 const promise = (async ()=>{
-    const { request , default: init  } = await __webpack_require__.e(/* import() */ 1077).then(__webpack_require__.bind(__webpack_require__, 22809));
+    const { request  } = await load();
     const { api  } = await Promise.all(/* import() */[__webpack_require__.e(1077), __webpack_require__.e(8117), __webpack_require__.e(4859)]).then(__webpack_require__.bind(__webpack_require__, 23015));
-    await init();
     return {
         request,
         api

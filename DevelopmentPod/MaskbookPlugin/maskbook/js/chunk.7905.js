@@ -106,8 +106,8 @@ var react = __webpack_require__(63423);
 var src = __webpack_require__(63151);
 // EXTERNAL MODULE: ./src/plugins/Furucombo/base.tsx
 var base = __webpack_require__(86365);
-// EXTERNAL MODULE: ../typed-message/base/index.ts + 27 modules
-var typed_message_base = __webpack_require__(69492);
+// EXTERNAL MODULE: ../typed-message/base/index.ts + 2 modules
+var typed_message_base = __webpack_require__(65631);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var shared_base_src = __webpack_require__(79226);
 // EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
@@ -205,8 +205,8 @@ function apyFormatter(num) {
     return (+num * 100).toFixed(2) + '%';
 }
 
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Box/Box.js
 var Box = __webpack_require__(18287);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/IconButton/IconButton.js + 1 modules
@@ -981,8 +981,6 @@ function useAllowTestnet() {
     return (0,context/* useWeb3StateContext */.N9)().allowTestnet;
 }
 
-// EXTERNAL MODULE: ../web3-shared/evm/hooks/useAccount.ts
-var useAccount = __webpack_require__(98086);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useChainId.ts
 var useChainId = __webpack_require__(63541);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/chainDetailed.ts
@@ -991,16 +989,18 @@ var chainDetailed = __webpack_require__(22229);
 var types = __webpack_require__(95130);
 // EXTERNAL MODULE: ../web3-shared/evm/pipes/index.ts
 var pipes = __webpack_require__(83468);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../web3-shared/evm/utils/address.ts
+var address = __webpack_require__(66580);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+kit@0.0.0-20220223101101-4e6f3b9/node_modules/@dimensiondev/kit/esm/index.js + 2 modules
 var esm = __webpack_require__(66559);
 // EXTERNAL MODULE: ./src/extension/options-page/DashboardComponents/ActionButton.tsx
 var ActionButton = __webpack_require__(47906);
 // EXTERNAL MODULE: ./src/plugins/Wallet/settings.ts
 var settings = __webpack_require__(63361);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ./src/plugins/Wallet/messages.ts
 var messages = __webpack_require__(63081);
 // EXTERNAL MODULE: ./src/extension/service.ts
@@ -1029,10 +1029,10 @@ function EthereumChainBoundary(props) {
     const { t  } = (0,utils/* useI18N */.M1)();
     const pluginID = (0,plugin_infra_src/* usePluginIDContext */.Zn)();
     const plugin = (0,plugin_infra_src/* useActivatedPlugin */.Rc)(pluginID, 'any');
-    const account = (0,useAccount/* useAccount */.m)();
+    const account = (0,plugin_infra_src/* useAccount */.mA)();
     const chainId = (0,useChainId/* useChainId */.xx)();
     const allowTestnet = useAllowTestnet();
-    const providerType = (0,shared_src/* useValueRef */.E)(settings/* currentProviderSettings */.t1);
+    const providerType = (0,dist/* useValueRef */.E)(settings/* currentProviderSettings */.t1);
     const { noSwitchNetworkTip =false  } = props;
     const classes = (0,src/* useStylesExtends */.Bc)(useStyles(), props);
     const expectedChainId = props.chainId;
@@ -1047,6 +1047,14 @@ function EthereumChainBoundary(props) {
     var ref1;
     // is the actual chain id a valid one even if it does not match with the expected one?
     const isValid = (ref1 = props === null || props === void 0 ? void 0 : (ref = props.isValidChainId) === null || ref === void 0 ? void 0 : ref.call(props, actualChainId, expectedChainId)) !== null && ref1 !== void 0 ? ref1 : false;
+    const { openDialog: openSelectProviderDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.selectProviderDialogUpdated */.R.events.selectProviderDialogUpdated);
+    // #region connect wallet dialog
+    const { setDialog: setConnectWalletDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.connectWalletDialogUpdated */.R.events.connectWalletDialogUpdated, (ev)=>{
+        if (ev.open) return;
+    });
+    // #endregion
+    // request ethereum-compatible network
+    const networkType = (0,chainDetailed/* getNetworkTypeFromChainId */._T)(expectedChainId);
     const onSwitchChain = (0,react.useCallback)(async ()=>{
         // a short time loading makes the user fells better
         await (0,esm/* delay */.gw)(1000);
@@ -1062,8 +1070,6 @@ function EthereumChainBoundary(props) {
                 });
                 return;
             }
-            // request ethereum-compatible network
-            const networkType = (0,chainDetailed/* getNetworkTypeFromChainId */._T)(expectedChainId);
             if (!networkType) return;
             try {
                 const overrides = {
@@ -1088,7 +1094,15 @@ function EthereumChainBoundary(props) {
             settings_settings/* pluginIDSettings.value */.tR.value = plugin_infra_src/* NetworkPluginID.PLUGIN_EVM */.FF.PLUGIN_EVM;
         };
         if (!isChainMatched) await switchToChain();
-        if (!isPluginMatched) await switchToPlugin();
+        if (!isPluginMatched) {
+            await switchToPlugin();
+            if (!networkType || networkType !== types/* NetworkType.Ethereum */.td.Ethereum || (0,address/* isValidAddress */.At)(account)) return;
+            setConnectWalletDialog({
+                open: true,
+                providerType: types/* ProviderType.MetaMask */.lP.MetaMask,
+                networkType
+            });
+        }
     }, [
         account,
         isAllowed,
@@ -1097,7 +1111,6 @@ function EthereumChainBoundary(props) {
         providerType,
         expectedChainId
     ]);
-    const { openDialog: openSelectProviderDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.selectProviderDialogUpdated */.R.events.selectProviderDialogUpdated);
     const renderBox = (children)=>{
         return(/*#__PURE__*/ (0,jsx_runtime.jsx)(Box/* default */.Z, {
             className: props.className,
