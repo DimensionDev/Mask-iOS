@@ -7,11 +7,18 @@
 //
 
 import SwiftUI
+import Combine
 
 typealias RedPacketType = RedPacket.RedPacketType
 
 struct LuckyDropTokens: View {
     @ObservedObject var viewModel: LuckyDropViewModel
+    
+    var maxColor: Color {
+        viewModel.maxButtonEnable ?
+         Asset.Colors.Public.blue.asColor() :
+         Asset.Colors.Text.normal.asColor()
+    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -38,6 +45,8 @@ struct LuckyDropTokens: View {
         .frame(height: 32)
     }
     
+    lazy var aa = $viewModel.amountPerShareStr
+    
     @ViewBuilder
     var tokenRow: some View {
         HStack(spacing: 0) {
@@ -46,19 +55,32 @@ struct LuckyDropTokens: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 24)
             Spacer().frame(width: 8)
-            Text("ETH").foregroundColor(Asset.Colors.Text.dark.asColor())
+            Text(viewModel.tokenStr).foregroundColor(Asset.Colors.Text.dark.asColor())
                 .font(FontStyles.bh5.font)
             Spacer().frame(width: 4)
             Asset.Icon.Arrows.down1.asImage()
-            Text(L10n.Plugins.Luckydrop.max).padding(.horizontal, 5.5)
-                .font(FontStyles.mh6.font)
-                .frame(height: 24)
-                .background(Asset.Colors.Background.infoBg.asColor().cornerRadius(4))
+            Button {
+                viewModel.maxAmount()
+            } label: {
+                Text(L10n.Plugins.Luckydrop.max).padding(.horizontal, 5.5)
+                    .font(FontStyles.mh6.font)
+                    .foregroundColor(maxColor)
+                    .frame(height: 24)
+                    .background(Asset.Colors.Background.infoBg.asColor().cornerRadius(4))
+            }
+            .disabled(!viewModel.maxButtonEnable)
             Spacer()
-            TextField(L10n.Plugins.Luckydrop.totalAmount, text: $viewModel.amountTotalShareStr)
-                .keyboardType(.numbersAndPunctuation)
-                .multilineTextAlignment(.trailing)
-                .frame(maxHeight: .infinity)
+            if viewModel.mode == .average {
+                TextField(L10n.Plugins.Luckydrop.totalAmount, text: $viewModel.amountPerShareStr)
+                    .keyboardType(.numbersAndPunctuation)
+                    .multilineTextAlignment(.trailing)
+                    .frame(maxHeight: .infinity)
+            } else {
+                TextField(L10n.Plugins.Luckydrop.totalAmount, text: $viewModel.amountTotalShareStr)
+                    .keyboardType(.numbersAndPunctuation)
+                    .multilineTextAlignment(.trailing)
+                    .frame(maxHeight: .infinity)
+            }
         }
         .frame(height: 52)
         .padding(.horizontal, 16)
@@ -73,7 +95,7 @@ struct LuckyDropTokens: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 24)
             Spacer().frame(width: 8)
-            Text("ETH").foregroundColor(Asset.Colors.Text.dark.asColor())
+            Text(L10n.Plugins.Luckydrop.quantity).foregroundColor(Asset.Colors.Text.dark.asColor())
                 .font(FontStyles.bh5.font)
             Spacer()
             TextField(L10n.Plugins.Luckydrop.enterQuantity, text: $viewModel.quantityStr)
@@ -90,6 +112,7 @@ struct LuckyDropTokens: View {
     var messageRow: some View {
         HStack(spacing: 0) {
             TextField(L10n.Plugins.Luckydrop.enterMessage, text: $viewModel.message)
+                .limitText($viewModel.message, maxLength: 30)
                 .frame(maxHeight: .infinity)
         }
         .frame(height: 52)

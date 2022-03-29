@@ -614,6 +614,10 @@ enum L10n {
       static var nft: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Nft")
       }
+      /// Quantity
+      static var quantity: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Quantity")
+      }
       /// Refund
       static var refund: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Refund")

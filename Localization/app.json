@@ -884,7 +884,8 @@
             "select-social-description": "Select the Social account to share the Lucky Drop.",
             "share-title": "Share Lucky Drop",
             "share-connect-persona": "Connect your Persona to social media before you share your lucky Drop.",
-            "share-create-persona": "To send lucky drop, please create a persona to connect to your social account."
+            "share-create-persona": "To send lucky drop, please create a persona to connect to your social account.",
+            "quantity": "Quantity"
         }
     }
 }
