@@ -425,7 +425,7 @@
             "last_sale_Price": "最后售价",
             "floor_price": "最低价格",
             "save_photo": "保存照片",
-            "collection_web": "",
+            "collection_web": "在浏览器中查看收藏品",
             "etherscan": "在 Etherscan 上查看"
         },
         "sendTransaction": {
