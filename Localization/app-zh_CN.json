@@ -836,8 +836,8 @@
             "refunded": "已退款",
             "refund": "退款",
             "empty": "空的",
-            "share_message_official": "我刚从@%s 在 %s 网络上认领了一个红包。关注@%s (mask.io) 来获取红包。\\n#mask_io #LuckyDrop\\n%s。",
-            "share_message_unsupport_platform": "我刚从@%s 在 %s 网络上认领了一个红包。\\n%s。"
+            "share_message_official": "",
+            "share_message_unsupport_platform": ""
         },
         "move_backup_data": {
             "title": "请移动您的数据",
