@@ -224,12 +224,10 @@ class Coordinator {
     
     private func showGuide(window: UIWindow) {
         let guideVC = MaskHostViewController(rootView: GuideView() { [weak self] in
-            self?.setup(window: window, afterGuide: true)
-            DispatchQueue.main.async {
-                self?.present(scene: .emptyIdentity, transition: .detail(animated: false), completion: {
-                    self?.settings.hasShownGuide = true
-                })
-            }
+        self?.setup(window: window, afterGuide: true)
+            self?.present(scene: .emptyIdentity, transition: .detail(animated: false), completion: {
+                self?.settings.hasShownGuide = true
+            })
         })
         window.rootViewController = guideVC
         window.makeKeyAndVisible()

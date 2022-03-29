@@ -47,6 +47,9 @@ class NavigationController: UINavigationController {
 
 extension NavigationController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        viewControllers.count > 1
+        if let lastVC = viewControllers.last as? BaseViewController {
+            return lastVC.interactivePopGestureRecognizerEnabled
+        }
+        return viewControllers.count > 1
     }
 }

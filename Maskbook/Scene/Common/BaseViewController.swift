@@ -17,6 +17,10 @@ class BaseViewController: UIViewController {
         return false
     }
     
+    var interactivePopGestureRecognizerEnabled: Bool {
+        return true
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         switch traitCollection.userInterfaceStyle {
         case .light: return .darkContent

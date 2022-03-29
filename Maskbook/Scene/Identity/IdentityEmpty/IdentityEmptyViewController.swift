@@ -13,6 +13,10 @@ import UStack
 
 final class IdentityEmptyViewController: BaseViewController {
     typealias Spacer = UStack.Spacer
+    
+    override var interactivePopGestureRecognizerEnabled: Bool {
+        false
+    }
 
     private var subscriptionSet = Set<AnyCancellable>()
     private var restoreSignalStorage = Set<AnyCancellable>()
