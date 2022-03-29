@@ -176,9 +176,7 @@ class CollectibleIconImageView: UIView {
             
         case .normalUrl(let url, let downsamplingSize):
             imageView.isHidden = false
-            imageView.setNetworkImage(url: url,
-                                      downsample: true,
-                                      downsamplingSize: downsamplingSize) { [weak self] result in
+            imageView.setNetworkImage(url: url, downsamplingSize: downsamplingSize) { [weak self] result in
                 guard case .failure = result else {
                     self?.hidePlaceholder()
                     return
@@ -199,8 +197,7 @@ class CollectibleIconImageView: UIView {
             svgWebView.isHidden = false
             svgWebView.isUserInteractionEnabled = true
             svgWebView.loadHTMLString(nftURL.nft3dHTML, baseURL: nil)
-            imageView.setNetworkImage(url: normalURL,
-                                      downsample: true) { [weak self] result in
+            imageView.setNetworkImage(url: normalURL) { [weak self] result in
                 guard case .failure = result else {
                     self?.hidePlaceholder()
                     return
@@ -210,8 +207,7 @@ class CollectibleIconImageView: UIView {
             
         case let .supportsVideo(imageUrl, nftURL):
             imageView.isHidden = false
-            imageView.setNetworkImage(url: imageUrl,
-                                      downsample: true) { [weak self] result in
+            imageView.setNetworkImage(url: imageUrl) { [weak self] result in
                 guard case .failure = result else {
                     self?.hidePlaceholder()
                     return

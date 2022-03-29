@@ -13,8 +13,6 @@ extension UIImageView {
     func setNetworkImage(
         url: String?,
         placeholder: UIImage? = Asset.Images.Scene.Balance.tokenIconPlaceholder.image,
-        cornerRadius: CGFloat? = nil,
-        downsample: Bool? = false,
         downsamplingSize: CGSize? = nil,
         completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) {
             guard let urlString = url, let url = URL(string: urlString) else {
@@ -22,16 +20,7 @@ extension UIImageView {
                 self.image = placeholder
                 return
             }
-            let processor: ImageProcessor = {
-                if downsample == true {
-                    return GifRoundCornerImageProcessor(cornerRadius: cornerRadius,
-                                                        targetSize: downsamplingSize)
-                } else if let cornerRadius = cornerRadius {
-                    return RoundCornerImageProcessor(cornerRadius: cornerRadius)
-                }
-                return DefaultImageProcessor.default
-            }()
-            
+            let processor = GifRoundCornerImageProcessor(cornerRadius: 20, targetSize: downsamplingSize)
             self.kf.indicatorType = .none
             self.kf.setImage(
                 with: url,
@@ -41,8 +30,7 @@ extension UIImageView {
                     .cacheSerializer(FormatIndicatedCacheSerializer.gif),
                     .scaleFactor(UIScreen.main.scale),
                     .transition(.fade(1))
-                ],
-                completionHandler: completionHandler)
+                ])
         }
 }
 
