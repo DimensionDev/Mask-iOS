@@ -36,7 +36,7 @@ const sns = {
 /* harmony export */   "s": () => (/* binding */ createWeb3State)
 /* harmony export */ });
 /* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(79226);
-/* harmony import */ var _masknet_web3_shared_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15091);
+/* harmony import */ var _masknet_web3_shared_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(26618);
 /* harmony import */ var _masknet_web3_shared_solana__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(87210);
 /* harmony import */ var _apis__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(46889);
 /* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(70569);

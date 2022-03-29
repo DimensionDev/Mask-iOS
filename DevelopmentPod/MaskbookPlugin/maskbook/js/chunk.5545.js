@@ -118,12 +118,12 @@ var IconButton = __webpack_require__(87409);
 var Typography = __webpack_require__(74491);
 // EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
 var src = __webpack_require__(43021);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var shared_base_src = __webpack_require__(79226);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/Close.js
 var Close = __webpack_require__(41457);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/ArrowBackRounded.js
@@ -146,13 +146,7 @@ function DialogDismissIconUI(props) {
 
 // EXTERNAL MODULE: ./src/social-network/index.ts
 var social_network = __webpack_require__(61751);
-// EXTERNAL MODULE: ./src/social-network-adaptor/minds.com/base.ts
-var base = __webpack_require__(65375);
-// EXTERNAL MODULE: ./src/social-network-adaptor/facebook.com/base.ts
-var facebook_com_base = __webpack_require__(40543);
 ;// CONCATENATED MODULE: ./src/components/shared/InjectedDialog.tsx
-
-
 
 
 
@@ -178,7 +172,7 @@ const useStyles = (0,src/* makeStyles */.ZL)()((theme, { snsId  })=>({
             color: theme.palette.text.primary
         },
         paper: {
-            ...snsId === base/* MINDS_ID */.fN || snsId === facebook_com_base/* FACEBOOK_ID */.Iz ? {
+            ...snsId === shared_base_src/* EnhanceableSite.Minds */.Jk.Minds || snsId === shared_base_src/* EnhanceableSite.Facebook */.Jk.Facebook ? {
                 width: 'auto',
                 backgroundImage: 'none'
             } : {}
@@ -227,7 +221,7 @@ function InjectedDialog(props) {
                 },
                 ...rest,
                 ...extraProps,
-                children: /*#__PURE__*/ (0,jsx_runtime.jsxs)(shared_src/* ErrorBoundary */.SV, {
+                children: /*#__PURE__*/ (0,jsx_runtime.jsxs)(dist/* ErrorBoundary */.SV, {
                     children: [
                         title ? /*#__PURE__*/ (0,jsx_runtime.jsxs)(DialogTitle/* default */.Z, {
                             className: "dashboard-dialog-title-hook",
@@ -324,8 +318,8 @@ var theme_src = __webpack_require__(43021);
 var Trans = __webpack_require__(92452);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/VerifiedUser.js
 var VerifiedUser = __webpack_require__(14371);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Card/Card.js + 1 modules
 var Card = __webpack_require__(22234);
 ;// CONCATENATED MODULE: ./src/plugins/CryptoartAI/SNSAdaptor/CollectibleTab.tsx
@@ -723,8 +717,8 @@ function useCollectibleState(token) {
 }
 const CollectibleState = (0,unstated_next/* createContainer */.f)(useCollectibleState);
 
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
 ;// CONCATENATED MODULE: ./src/plugins/CryptoartAI/SNSAdaptor/ArticleTab.tsx
 
 
@@ -1716,6 +1710,8 @@ var InjectedDialog = __webpack_require__(57464);
 var SelectTokenAmountPanel = __webpack_require__(71850);
 // EXTERNAL MODULE: ./src/web3/UI/EthereumWalletConnectedBoundary.tsx + 1 modules
 var EthereumWalletConnectedBoundary = __webpack_require__(26340);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var shared_base_ui_dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ./src/plugins/Wallet/messages.ts
 var messages = __webpack_require__(63081);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useTransactionState.ts
@@ -1747,8 +1743,8 @@ function useCryptoArtAI_Contract() {
     };
 }
 
-// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
-var base_src = __webpack_require__(15091);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var base_src = __webpack_require__(26618);
 ;// CONCATENATED MODULE: ./src/plugins/CryptoartAI/hooks/usePlaceBidCallback.ts
 
 
@@ -1982,7 +1978,7 @@ function MakeOfferDialog(props) {
         assetLink: assetLink,
         account: (0,base/* isTwitter */.L3)(social_network/* activatedSocialNetworkUI */.LM) ? t('twitter_account') : t('facebook_account')
     }) : '').toString();
-    const { setDialog: setTransactionDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.transactionDialogUpdated */.R.events.transactionDialogUpdated, (0,react.useCallback)((ev)=>{
+    const { setDialog: setTransactionDialog  } = (0,shared_base_ui_dist/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.transactionDialogUpdated */.R.events.transactionDialogUpdated, (0,react.useCallback)((ev)=>{
         if (!ev.open) {
             if (placeBidState.type === evm_types/* TransactionStateType.HASH */.n$.HASH) onClose();
             if (placeBidState.type === evm_types/* TransactionStateType.CONFIRMED */.n$.CONFIRMED) {
@@ -2313,7 +2309,7 @@ function CheckoutDialog(props) {
         assetLink: assetLink,
         account: (0,base/* isTwitter */.L3)(social_network/* activatedSocialNetworkUI */.LM) ? t('twitter_account') : t('facebook_account')
     }) : '').toString();
-    const { setDialog: setTransactionDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.transactionDialogUpdated */.R.events.transactionDialogUpdated, (0,react.useCallback)((ev)=>{
+    const { setDialog: setTransactionDialog  } = (0,shared_base_ui_dist/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.transactionDialogUpdated */.R.events.transactionDialogUpdated, (0,react.useCallback)((ev)=>{
         if (!ev.open) {
             if (purchaseState.type === evm_types/* TransactionStateType.HASH */.n$.HASH) onClose();
         }
@@ -2849,8 +2845,8 @@ function PostInspector(props) {
 
 // EXTERNAL MODULE: ./src/plugins/CryptoartAI/base.ts
 var CryptoartAI_base = __webpack_require__(91234);
-// EXTERNAL MODULE: ../typed-message/base/index.ts + 27 modules
-var typed_message_base = __webpack_require__(69492);
+// EXTERNAL MODULE: ../typed-message/base/index.ts + 2 modules
+var typed_message_base = __webpack_require__(65631);
 ;// CONCATENATED MODULE: ./src/plugins/CryptoartAI/SNSAdaptor/index.tsx
 
 
@@ -2896,7 +2892,7 @@ const sns = {
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
 /* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(32513);
-/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(39850);
+/* harmony import */ var _masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(98193);
 /* harmony import */ var _Wallet_messages__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(63081);
 /* harmony import */ var _web3_UI_TokenAmountPanel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(7897);
 
@@ -2910,7 +2906,7 @@ function SelectTokenAmountPanel(props) {
     const { amount , balance , token , disableNativeToken =false , disableSearchBar =false , onAmountChange , onTokenChange , FungibleTokenListProps , TokenAmountPanelProps ,  } = props;
     // #region select token
     const [id] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)((0,uuid__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)());
-    const { setDialog: setSelectTokenDialog  } = (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_2__/* .useRemoteControlledDialog */ .F$)(_Wallet_messages__WEBPACK_IMPORTED_MODULE_3__/* .WalletMessages.events.selectTokenDialogUpdated */ .R.events.selectTokenDialogUpdated, (0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)((ev)=>{
+    const { setDialog: setSelectTokenDialog  } = (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_2__/* .useRemoteControlledDialog */ .F$)(_Wallet_messages__WEBPACK_IMPORTED_MODULE_3__/* .WalletMessages.events.selectTokenDialogUpdated */ .R.events.selectTokenDialogUpdated, (0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)((ev)=>{
         if (ev.open || !ev.token || ev.uuid !== id) return;
         onTokenChange(ev.token);
     }, [
@@ -3033,7 +3029,7 @@ function Markdown(props) {
 /* harmony export */ });
 /* harmony import */ var web3_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(83317);
 /* harmony import */ var web3_utils__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(web3_utils__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _masknet_web3_shared_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15091);
+/* harmony import */ var _masknet_web3_shared_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(26618);
 /* harmony import */ var _useAccount__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(98086);
 /* harmony import */ var _contracts_useERC20TokenContract__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(85894);
 /* harmony import */ var _useChainId__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(63541);

@@ -43,8 +43,8 @@ var address = __webpack_require__(66580);
 var react_router = __webpack_require__(92186);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var shared_base_src = __webpack_require__(79226);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ./src/plugins/Wallet/messages.ts
 var messages = __webpack_require__(63081);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useCopyToClipboard.js + 1 modules
@@ -67,8 +67,8 @@ var ListItem = __webpack_require__(66552);
 var ListItemText = __webpack_require__(81396);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Typography/Typography.js + 1 modules
 var Typography = __webpack_require__(74491);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
 // EXTERNAL MODULE: ./src/extension/popups/components/CopyIconButton/index.tsx
 var CopyIconButton = __webpack_require__(82666);
 ;// CONCATENATED MODULE: ./src/extension/popups/pages/Wallet/SwitchWallet/WalletItem.tsx

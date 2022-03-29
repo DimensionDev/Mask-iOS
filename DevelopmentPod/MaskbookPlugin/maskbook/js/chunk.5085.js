@@ -300,8 +300,10 @@ var misc = __webpack_require__(7454);
 var types = __webpack_require__(95130);
 // EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
 var src = __webpack_require__(43021);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ../plugin-infra/src/index.ts
 var plugin_infra_src = __webpack_require__(63151);
 // EXTERNAL MODULE: ../dashboard/src/API.tsx
@@ -404,6 +406,7 @@ const useNetworkSelector = ()=>{
 
 
 
+
 const WalletStateBar_useStyles = (0,src/* makeStyles */.ZL)()((theme)=>({
         bar: {
             minWidth: 80,
@@ -454,8 +457,8 @@ const WalletStateBar = /*#__PURE__*/ (0,react.memo)(()=>{
     const { value: pendingTransactions = misc/* EMPTY_LIST */.r  } = (0,useRecentTransactions/* useRecentTransactions */.S)({
         status: types/* TransactionStatusType.NOT_DEPEND */.g8.NOT_DEPEND
     });
-    const { openDialog: openWalletStatusDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Wallet.events.walletStatusDialogUpdated */.yC.Wallet.events.walletStatusDialogUpdated);
-    const { openDialog: openConnectWalletDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Wallet.events.selectProviderDialogUpdated */.yC.Wallet.events.selectProviderDialogUpdated);
+    const { openDialog: openWalletStatusDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Wallet.events.walletStatusDialogUpdated */.yC.Wallet.events.walletStatusDialogUpdated);
+    const { openDialog: openConnectWalletDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Wallet.events.selectProviderDialogUpdated */.yC.Wallet.events.selectProviderDialogUpdated);
     const [menu, openMenu] = useNetworkSelector();
     const { value: domain  } = (0,plugin_infra_src/* useReverseAddress */.$q)(wallet === null || wallet === void 0 ? void 0 : wallet.address);
     if (!wallet) {
@@ -656,8 +659,8 @@ __webpack_require__.d(__webpack_exports__, {
 var jsx_runtime = __webpack_require__(82798);
 // EXTERNAL MODULE: ../plugin-infra/src/index.ts
 var src = __webpack_require__(63151);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var shared_base_src = __webpack_require__(79226);
 // EXTERNAL MODULE: ../web3-shared/evm/context/index.tsx
@@ -757,6 +760,8 @@ const EmptyPlaceholder = /*#__PURE__*/ (0,react.memo)(({ children  })=>{
 var LoadingPlaceholder = __webpack_require__(15116);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Tooltip/Tooltip.js + 1 modules
 var Tooltip = __webpack_require__(72753);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Link/Link.js + 1 modules
 var Link = __webpack_require__(86377);
 ;// CONCATENATED MODULE: ../dashboard/src/pages/Wallets/components/FungibleTokenTableRow/ChangeNetworkTip.tsx
@@ -811,8 +816,8 @@ var _USD;
 const getTokenUSDValue = (value)=>value ? Number.parseFloat((_USD = value[src/* CurrencyType.USD */.V2.USD]) !== null && _USD !== void 0 ? _USD : '') : 0
 ;
 
-// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
-var base_src = __webpack_require__(15091);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var base_src = __webpack_require__(26618);
 ;// CONCATENATED MODULE: ../dashboard/src/pages/Wallets/components/FungibleTokenTableRow/index.tsx
 
 
@@ -1098,7 +1103,7 @@ const FungibleTokenTable = /*#__PURE__*/ (0,react.memo)(({ selectedChainId  })=>
     const { portfolioProvider  } = (0,context/* useWeb3State */.dM)();
     const network = (0,src/* useNetworkDescriptor */.Vw)();
     const [tokenUpdateCount, setTokenUpdateCount] = (0,react.useState)(0);
-    const { setDialog: openSwapDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Swap.swapDialogUpdated */.yC.Swap.swapDialogUpdated);
+    const { setDialog: openSwapDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Swap.swapDialogUpdated */.yC.Swap.swapDialogUpdated);
     const { error: detailedTokensError , loading: detailedTokensLoading , value: detailedTokens ,  } = (0,useAsync/* default */.Z)(async ()=>{
         var ref;
         return Asset === null || Asset === void 0 ? void 0 : (ref = Asset.getFungibleAssets) === null || ref === void 0 ? void 0 : ref.call(Asset, account, portfolioProvider, network);
@@ -1541,7 +1546,7 @@ var useTokenTransferCallback = __webpack_require__(32004);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/Tune.js
 var Tune = __webpack_require__(6788);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/wallet.ts@1.0.1/node_modules/wallet.ts/dist/index.js
-var dist = __webpack_require__(99674);
+var wallet_ts_dist = __webpack_require__(99674);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useInterval.js
 var useInterval = __webpack_require__(62767);
 // EXTERNAL MODULE: ../plugins/Wallet/src/index.ts + 1 modules
@@ -1671,7 +1676,7 @@ const useGasConfig = (gasLimit, minGasLimit)=>{
     const { value: defaultGasPrice = '0'  } = (0,useGasPrice/* useGasPrice */.F)();
     const gasPrice = customGasPrice || defaultGasPrice;
     const { gasOptions  } = useGasOptions();
-    const { setDialog: setGasSettingDialog , closeDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(Wallet_src/* WalletMessages.events.gasSettingDialogUpdated */.R$.events.gasSettingDialogUpdated);
+    const { setDialog: setGasSettingDialog , closeDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(Wallet_src/* WalletMessages.events.gasSettingDialogUpdated */.R$.events.gasSettingDialogUpdated);
     (0,react.useEffect)(()=>closeDialog
     , [
         closeDialog
@@ -1783,6 +1788,7 @@ var Right = __webpack_require__(60681);
 
 
 
+
 const GAS_LIMIT = 21000;
 const TransferERC20 = /*#__PURE__*/ (0,react.memo)(({ token  })=>{
     var ref4, ref1;
@@ -1797,7 +1803,7 @@ const TransferERC20 = /*#__PURE__*/ (0,react.memo)(({ token  })=>{
     const [minPopoverWidth, setMinPopoverWidth] = (0,react.useState)(0);
     const network = (0,src/* useNetworkDescriptor */.Vw)();
     const [gasLimit_, setGasLimit_] = (0,react.useState)(0);
-    const { setDialog: setSelectToken  } = (0,shared_src/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Wallet.events.selectTokenDialogUpdated */.yC.Wallet.events.selectTokenDialogUpdated, (0,react.useCallback)((ev)=>{
+    const { setDialog: setSelectToken  } = (0,dist/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Wallet.events.selectTokenDialogUpdated */.yC.Wallet.events.selectTokenDialogUpdated, (0,react.useCallback)((ev)=>{
         if (ev.open || !ev.token || ev.uuid !== id) return;
         setSelectedToken(ev.token);
     }, [
@@ -1829,7 +1835,7 @@ const TransferERC20 = /*#__PURE__*/ (0,react.memo)(({ token  })=>{
     // #endregion
     // transfer amount
     const transferAmount = (0,base_src/* rightShift */.pu)(amount || '0', selectedToken.decimals).toFixed();
-    const erc20GasLimit = (0,useGasLimit/* useGasLimit */.x)(selectedToken.type === src/* TokenType.Fungible */.iv.Fungible ? selectedToken.symbol === ((ref4 = nativeToken.value) === null || ref4 === void 0 ? void 0 : ref4.symbol) ? types/* EthereumTokenType.Native */.Dr.Native : types/* EthereumTokenType.ERC20 */.Dr.ERC20 : selectedToken.type, selectedToken.address, transferAmount, dist.EthereumAddress.isValid(address) ? address : registeredAddress);
+    const erc20GasLimit = (0,useGasLimit/* useGasLimit */.x)(selectedToken.type === src/* TokenType.Fungible */.iv.Fungible ? selectedToken.symbol === ((ref4 = nativeToken.value) === null || ref4 === void 0 ? void 0 : ref4.symbol) ? types/* EthereumTokenType.Native */.Dr.Native : types/* EthereumTokenType.ERC20 */.Dr.ERC20 : selectedToken.type, selectedToken.address, transferAmount, wallet_ts_dist.EthereumAddress.isValid(address) ? address : registeredAddress);
     const { gasConfig , onCustomGasSetting , gasLimit , maxFee  } = useGasConfig(gasLimit_, GAS_LIMIT);
     const gasPrice = gasConfig.gasPrice || defaultGasPrice;
     (0,react.useEffect)(()=>{
@@ -1867,7 +1873,7 @@ const TransferERC20 = /*#__PURE__*/ (0,react.memo)(({ token  })=>{
     const [transferState, transferCallback, resetTransferCallback] = (0,useTokenTransferCallback/* useTokenTransferCallback */.z)(tokenType, selectedToken.address);
     const onTransfer = (0,react.useCallback)(async ()=>{
         var ref;
-        if (dist.EthereumAddress.isValid(address)) {
+        if (wallet_ts_dist.EthereumAddress.isValid(address)) {
             await transferCallback(transferAmount, address, gasConfig, memo1);
             return;
         } else if (Utils === null || Utils === void 0 ? void 0 : (ref = Utils.isValidDomain) === null || ref === void 0 ? void 0 : ref.call(Utils, address)) {
@@ -1894,7 +1900,7 @@ const TransferERC20 = /*#__PURE__*/ (0,react.memo)(({ token  })=>{
             symbol: (_symbol = selectedToken.symbol) !== null && _symbol !== void 0 ? _symbol : ''
         });
         if (!address) return t.wallets_transfer_error_address_absence();
-        if (!(dist.EthereumAddress.isValid(address) || (Utils === null || Utils === void 0 ? void 0 : (ref = Utils.isValidDomain) === null || ref === void 0 ? void 0 : ref.call(Utils, address)))) return t.wallets_transfer_error_invalid_address();
+        if (!(wallet_ts_dist.EthereumAddress.isValid(address) || (Utils === null || Utils === void 0 ? void 0 : (ref = Utils.isValidDomain) === null || ref === void 0 ? void 0 : ref.call(Utils, address)))) return t.wallets_transfer_error_invalid_address();
         if ((Utils === null || Utils === void 0 ? void 0 : (ref5 = Utils.isValidDomain) === null || ref5 === void 0 ? void 0 : ref5.call(Utils, address)) && (resolveDomainError || !registeredAddress)) {
             if ((network === null || network === void 0 ? void 0 : network.type) !== public_api_src/* NetworkType.Ethereum */.td.Ethereum) return t.wallet_transfer_error_no_ens_support();
             return t.wallet_transfer_error_no_address_has_been_set_name();
@@ -2433,6 +2439,7 @@ var TransferTab;
 
 
 
+
 const TransferERC721_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
         disabled: {
             opacity: 1
@@ -2461,7 +2468,7 @@ const TransferERC721 = /*#__PURE__*/ (0,react.memo)(()=>{
     const schema = zod_lib.z.object({
         recipient: zod_lib.z.string().refine((address)=>{
             var ref;
-            return dist.EthereumAddress.isValid(address) || (Utils === null || Utils === void 0 ? void 0 : (ref = Utils.isValidDomain) === null || ref === void 0 ? void 0 : ref.call(Utils, address));
+            return wallet_ts_dist.EthereumAddress.isValid(address) || (Utils === null || Utils === void 0 ? void 0 : (ref = Utils.isValidDomain) === null || ref === void 0 ? void 0 : ref.call(Utils, address));
         }, t.wallets_incorrect_address()),
         contract: zod_lib.z.string().min(1, t.wallets_collectible_contract_is_empty()),
         tokenId: zod_lib.z.string().min(1, t.wallets_collectible_token_id_is_empty())
@@ -2516,7 +2523,7 @@ const TransferERC721 = /*#__PURE__*/ (0,react.memo)(()=>{
         registeredAddress
     ]);
     // #endregion
-    const erc721GasLimit = (0,useGasLimit/* useGasLimit */.x)(types/* EthereumTokenType.ERC721 */.Dr.ERC721, contract === null || contract === void 0 ? void 0 : contract.address, undefined, dist.EthereumAddress.isValid(allFormFields.recipient) ? allFormFields.recipient : registeredAddress, allFormFields.tokenId);
+    const erc721GasLimit = (0,useGasLimit/* useGasLimit */.x)(types/* EthereumTokenType.ERC721 */.Dr.ERC721, contract === null || contract === void 0 ? void 0 : contract.address, undefined, wallet_ts_dist.EthereumAddress.isValid(allFormFields.recipient) ? allFormFields.recipient : registeredAddress, allFormFields.tokenId);
     (0,react.useEffect)(()=>{
         setGasLimit_(erc721GasLimit.value ? erc721GasLimit.value : TransferERC721_GAS_LIMIT);
     }, [
@@ -2538,7 +2545,7 @@ const TransferERC721 = /*#__PURE__*/ (0,react.memo)(()=>{
     ]);
     const gasFeeInUsd = (0,formatter/* formatWeiToEther */.yp)(gasFee).multipliedBy(nativeTokenPrice);
     // dialog
-    const { setDialog: setSelectContractDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(Wallet_src/* WalletMessages.events.selectNftContractDialogUpdated */.R$.events.selectNftContractDialogUpdated, (ev)=>{
+    const { setDialog: setSelectContractDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(Wallet_src/* WalletMessages.events.selectNftContractDialogUpdated */.R$.events.selectNftContractDialogUpdated, (ev)=>{
         if (ev.open || !ev.contract || ev.uuid !== id) return;
         if (!contract || contract && !(0,utils_address/* isSameAddress */.Wr)(contract.address, ev.contract.address)) {
             if (contract && defaultToken && !(0,utils_address/* isSameAddress */.Wr)(contract.address, defaultToken.contractDetailed.address)) {
@@ -2561,10 +2568,10 @@ const TransferERC721 = /*#__PURE__*/ (0,react.memo)(()=>{
     ]);
     const onTransfer = (0,react.useCallback)(async (data)=>{
         var ref;
-        if (dist.EthereumAddress.isValid(data.recipient)) {
+        if (wallet_ts_dist.EthereumAddress.isValid(data.recipient)) {
             await transferCallback(data.tokenId, data.recipient, gasConfig);
             return;
-        } else if ((Utils === null || Utils === void 0 ? void 0 : (ref = Utils.isValidDomain) === null || ref === void 0 ? void 0 : ref.call(Utils, data.recipient)) && dist.EthereumAddress.isValid(registeredAddress)) {
+        } else if ((Utils === null || Utils === void 0 ? void 0 : (ref = Utils.isValidDomain) === null || ref === void 0 ? void 0 : ref.call(Utils, data.recipient)) && wallet_ts_dist.EthereumAddress.isValid(registeredAddress)) {
             await transferCallback(data.tokenId, registeredAddress, gasConfig);
         }
         return;
@@ -3175,7 +3182,7 @@ const AddCollectibleDialog = /*#__PURE__*/ (0,react.memo)(({ open , onClose  })=
 const AddCollectibleDialogUI = /*#__PURE__*/ (0,react.memo)(({ open , onClose , onAddressChange , onTokenIdChange , onSubmit  })=>{
     const t = (0,locales/* useDashboardI18N */.x)();
     const schema = zod_lib.z.object({
-        address: zod_lib.z.string().min(1, t.wallets_collectible_field_contract_require()).refine((address)=>dist.EthereumAddress.isValid(address)
+        address: zod_lib.z.string().min(1, t.wallets_collectible_field_contract_require()).refine((address)=>wallet_ts_dist.EthereumAddress.isValid(address)
         , t.wallets_incorrect_address()),
         tokenId: zod_lib.z.string().min(1, t.wallets_collectible_field_token_id_require())
     });
@@ -3341,7 +3348,7 @@ const Assets = /*#__PURE__*/ (0,react.memo)(({ network  })=>{
     };
     const [currentTab, onChange, , setTab] = (0,theme_src/* useTabs */.YE)(AssetTab.Token, AssetTab.Collectibles);
     const [addCollectibleOpen, setAddCollectibleOpen] = (0,react.useState)(false);
-    const { setDialog: setSelectToken  } = (0,shared_src/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Wallet.events.selectTokenDialogUpdated */.yC.Wallet.events.selectTokenDialogUpdated);
+    const { setDialog: setSelectToken  } = (0,dist/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Wallet.events.selectTokenDialogUpdated */.yC.Wallet.events.selectTokenDialogUpdated);
     (0,react.useEffect)(()=>{
         setTab(AssetTab.Token);
     }, [
@@ -4378,9 +4385,9 @@ var useCopyToClipboard = __webpack_require__(35750);
 ;// CONCATENATED MODULE: ../dashboard/src/pages/Wallets/api.ts
 
 
-const [useCurrentCollectibleDataProvider] = (0,shared_src/* createGlobalState */.r8)(API/* Services.Settings.getCurrentCollectibleDataProvider */.K9.Settings.getCurrentCollectibleDataProvider, (x)=>API/* Messages.events.currentNonFungibleAssetDataProviderSettings.on */.Vm.events.currentNonFungibleAssetDataProviderSettings.on(x)
+const [useCurrentCollectibleDataProvider] = (0,dist/* createGlobalState */.r8)(API/* Services.Settings.getCurrentCollectibleDataProvider */.K9.Settings.getCurrentCollectibleDataProvider, (x)=>API/* Messages.events.currentNonFungibleAssetDataProviderSettings.on */.Vm.events.currentNonFungibleAssetDataProviderSettings.on(x)
 );
-const [useCurrentSelectedWalletNetwork] = (0,shared_src/* createGlobalState */.r8)(API/* Services.Settings.getCurrentSelectedWalletNetwork */.K9.Settings.getCurrentSelectedWalletNetwork, (x)=>API/* Messages.events.currentNetworkSettings.on */.Vm.events.currentNetworkSettings.on(x)
+const [useCurrentSelectedWalletNetwork] = (0,dist/* createGlobalState */.r8)(API/* Services.Settings.getCurrentSelectedWalletNetwork */.K9.Settings.getCurrentSelectedWalletNetwork, (x)=>API/* Messages.events.currentNetworkSettings.on */.Vm.events.currentNetworkSettings.on(x)
 );
 
 // EXTERNAL MODULE: ../web3-shared/evm/pipes/index.ts
@@ -4537,7 +4544,7 @@ const Container = (0,styled/* default */.ZP)('div')`
 `;
 function StartUp() {
     const t = (0,locales/* useDashboardI18N */.x)();
-    const { openDialog: openConnectWalletDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Wallet.events.selectProviderDialogUpdated */.yC.Wallet.events.selectProviderDialogUpdated);
+    const { openDialog: openConnectWalletDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Wallet.events.selectProviderDialogUpdated */.yC.Wallet.events.selectProviderDialogUpdated);
     return(/*#__PURE__*/ (0,jsx_runtime.jsx)(Container, {
         children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Paper/* default */.Z, {
             variant: "background",
@@ -4610,8 +4617,8 @@ function Wallets() {
     const networkDescriptor = (0,src/* useNetworkDescriptor */.Vw)();
     const pluginId = (0,src/* usePluginIDContext */.Zn)();
     const [selectedNetwork, setSelectedNetwork] = (0,react.useState)(networkDescriptor !== null && networkDescriptor !== void 0 ? networkDescriptor : null);
-    const { openDialog: openBuyDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Transak.buyTokenDialogUpdated */.yC.Transak.buyTokenDialogUpdated);
-    const { openDialog: openSwapDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Swap.swapDialogUpdated */.yC.Swap.swapDialogUpdated);
+    const { openDialog: openBuyDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Transak.buyTokenDialogUpdated */.yC.Transak.buyTokenDialogUpdated);
+    const { openDialog: openSwapDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Swap.swapDialogUpdated */.yC.Swap.swapDialogUpdated);
     const { value: detailedTokens  } = (0,useAsync/* default */.Z)(async ()=>{
         var ref;
         return Asset === null || Asset === void 0 ? void 0 : (ref = Asset.getFungibleAssets) === null || ref === void 0 ? void 0 : ref.call(Asset, account, portfolioProvider, network);
@@ -5196,7 +5203,7 @@ const UploadIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIcon */ .I)('
 /* harmony export */ });
 /* harmony import */ var web3_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(83317);
 /* harmony import */ var web3_utils__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(web3_utils__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _masknet_web3_shared_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15091);
+/* harmony import */ var _masknet_web3_shared_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(26618);
 /* harmony import */ var _useAccount__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(98086);
 /* harmony import */ var _contracts_useERC20TokenContract__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(85894);
 /* harmony import */ var _useChainId__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(63541);
@@ -5533,8 +5540,8 @@ var useAccount = __webpack_require__(98086);
 var useERC20TokenContract = __webpack_require__(85894);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useTransactionState.ts
 var useTransactionState = __webpack_require__(15030);
-// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
-var src = __webpack_require__(15091);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var src = __webpack_require__(26618);
 ;// CONCATENATED MODULE: ../web3-shared/evm/hooks/useERC20TokenTransferCallback.ts
 
 

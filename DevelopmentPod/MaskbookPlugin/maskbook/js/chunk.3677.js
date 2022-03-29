@@ -199,8 +199,8 @@ var jsx_runtime = __webpack_require__(82798);
 var react = __webpack_require__(63423);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+kit@0.0.0-20220223101101-4e6f3b9/node_modules/@dimensiondev/kit/esm/index.js + 2 modules
 var esm = __webpack_require__(66559);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ../web3-shared/evm/types/index.ts
 var types = __webpack_require__(95130);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/chainDetailed.ts
@@ -216,7 +216,7 @@ var messages = __webpack_require__(63081);
 
 function NetworkIconClickBait({ network , provider , children , onSubmit , onClick  }) {
     // #region connect wallet dialog
-    const { setDialog: setConnectWalletDialog  } = (0,src/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.connectWalletDialogUpdated */.R.events.connectWalletDialogUpdated, (ev)=>{
+    const { setDialog: setConnectWalletDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.connectWalletDialogUpdated */.R.events.connectWalletDialogUpdated, (ev)=>{
         if (ev.open) return;
         if (ev.result) onSubmit === null || onSubmit === void 0 ? void 0 : onSubmit(network, provider);
     });
@@ -264,7 +264,7 @@ function NetworkIconClickBait({ network , provider , children , onSubmit , onCli
 }
 
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
-var shared_base_src = __webpack_require__(79226);
+var src = __webpack_require__(79226);
 // EXTERNAL MODULE: ../web3-shared/evm/pipes/index.ts
 var pipes = __webpack_require__(83468);
 // EXTERNAL MODULE: ./src/plugins/EVM/hooks/index.ts + 8 modules
@@ -280,7 +280,7 @@ var hooks = __webpack_require__(38284);
 
 function ProviderIconClickBait({ network , provider , children , onClick , onSubmit  }) {
     // #region connect wallet dialog
-    const { setDialog: setConnectWalletDialog  } = (0,src/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.connectWalletDialogUpdated */.R.events.connectWalletDialogUpdated, (ev)=>{
+    const { setDialog: setConnectWalletDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.connectWalletDialogUpdated */.R.events.connectWalletDialogUpdated, (ev)=>{
         if (ev.open) return;
         if (ev.result) onSubmit === null || onSubmit === void 0 ? void 0 : onSubmit(network, provider);
     });
@@ -327,7 +327,7 @@ function ProviderIconClickBait({ network , provider , children , onClick , onSub
         onClick
     ]);
     // hide injected provider in dashboard
-    if ((0,chainDetailed/* isInjectedProvider */.sR)(providerType) && (0,shared_base_src/* isDashboardPage */.K2)()) return null;
+    if ((0,chainDetailed/* isInjectedProvider */.sR)(providerType) && (0,src/* isDashboardPage */.K2)()) return null;
     // hide fortmatic for some networks because of incomplete supporting
     if (providerType === types/* ProviderType.Fortmatic */.lP.Fortmatic && !(0,chainDetailed/* isFortmaticSupported */.qj)((0,chainDetailed/* getChainIdFromNetworkType */.EP)(networkType))) return null;
     // hide coin98 and fortmatic

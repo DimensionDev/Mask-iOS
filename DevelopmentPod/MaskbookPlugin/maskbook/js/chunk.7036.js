@@ -178,8 +178,8 @@ var DialogActions = __webpack_require__(72212);
 var Button = __webpack_require__(12463);
 // EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
 var src = __webpack_require__(43021);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/isNil.js
 var isNil = __webpack_require__(29330);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
@@ -778,8 +778,8 @@ const FileName = (props)=>{
 };
 
 // EXTERNAL MODULE: ../../node_modules/.pnpm/urlcat@2.0.4/node_modules/urlcat/dist/index.js
-var dist = __webpack_require__(19802);
-var dist_default = /*#__PURE__*/__webpack_require__.n(dist);
+var urlcat_dist = __webpack_require__(19802);
+var dist_default = /*#__PURE__*/__webpack_require__.n(urlcat_dist);
 ;// CONCATENATED MODULE: ../plugins/FileService/src/SNSAdaptor/components/Uploaded.tsx
 
 
@@ -1241,7 +1241,7 @@ const FileServiceDialog = (props)=>{
     const [uploading, setUploading] = (0,react.useState)(false);
     const [selectedFileInfo, setSelectedFileInfo] = (0,react.useState)(null);
     const { attachMetadata , dropMetadata  } = (0,plugin_infra_src/* useCompositionContext */.Cp)();
-    const { closeDialog: closeWalletStatusDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(Wallet_src/* WalletMessages.events.walletStatusDialogUpdated */.R$.events.walletStatusDialogUpdated);
+    const { closeDialog: closeWalletStatusDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(Wallet_src/* WalletMessages.events.walletStatusDialogUpdated */.R$.events.walletStatusDialogUpdated);
     const onInsert = ()=>{
         if ((0,isNil/* default */.Z)(selectedFileInfo)) {
             return;
@@ -1533,10 +1533,10 @@ function onAttachedFile(payload) {
 
 /* unsupported import.meta.webpackHot */ undefined && 0;
 const PluginFileServiceMessage = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__/* .createPluginMessage */ .I4)(_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__/* .PluginId.FileService */ .je.FileService);
-const PluginFileServiceRPC = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__/* .createPluginRPC */ .V8)(_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__/* .PluginId.FileService */ .je.FileService, ()=>Promise.all(/* import() */[__webpack_require__.e(2698), __webpack_require__.e(6316), __webpack_require__.e(8117), __webpack_require__.e(3147), __webpack_require__.e(5756), __webpack_require__.e(9278), __webpack_require__.e(3742), __webpack_require__.e(7372), __webpack_require__.e(1240), __webpack_require__.e(4038), __webpack_require__.e(3850), __webpack_require__.e(3708), __webpack_require__.e(2116), __webpack_require__.e(2514), __webpack_require__.e(1359)]).then(__webpack_require__.bind(__webpack_require__, 18586)).then(({ upload , setupDatabase , ...rest })=>rest
+const PluginFileServiceRPC = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__/* .createPluginRPC */ .V8)(_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__/* .PluginId.FileService */ .je.FileService, ()=>Promise.all(/* import() */[__webpack_require__.e(2698), __webpack_require__.e(8117), __webpack_require__.e(3147), __webpack_require__.e(5756), __webpack_require__.e(9278), __webpack_require__.e(6316), __webpack_require__.e(3742), __webpack_require__.e(7372), __webpack_require__.e(1240), __webpack_require__.e(4038), __webpack_require__.e(3850), __webpack_require__.e(3708), __webpack_require__.e(2116), __webpack_require__.e(2514), __webpack_require__.e(4859), __webpack_require__.e(6657)]).then(__webpack_require__.bind(__webpack_require__, 18586)).then(({ upload , setupDatabase , ...rest })=>rest
     )
 , PluginFileServiceMessage._);
-const PluginFileServiceRPCGenerator = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__/* .createPluginRPCGenerator */ .Sc)(_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__/* .PluginId.FileService */ .je.FileService, ()=>Promise.all(/* import() */[__webpack_require__.e(2698), __webpack_require__.e(6316), __webpack_require__.e(8117), __webpack_require__.e(3147), __webpack_require__.e(5756), __webpack_require__.e(9278), __webpack_require__.e(3742), __webpack_require__.e(7372), __webpack_require__.e(1240), __webpack_require__.e(4038), __webpack_require__.e(3850), __webpack_require__.e(3708), __webpack_require__.e(2116), __webpack_require__.e(2514), __webpack_require__.e(1359)]).then(__webpack_require__.bind(__webpack_require__, 18586)).then(({ upload  })=>({
+const PluginFileServiceRPCGenerator = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__/* .createPluginRPCGenerator */ .Sc)(_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__/* .PluginId.FileService */ .je.FileService, ()=>Promise.all(/* import() */[__webpack_require__.e(2698), __webpack_require__.e(8117), __webpack_require__.e(3147), __webpack_require__.e(5756), __webpack_require__.e(9278), __webpack_require__.e(6316), __webpack_require__.e(3742), __webpack_require__.e(7372), __webpack_require__.e(1240), __webpack_require__.e(4038), __webpack_require__.e(3850), __webpack_require__.e(3708), __webpack_require__.e(2116), __webpack_require__.e(2514), __webpack_require__.e(4859), __webpack_require__.e(6657)]).then(__webpack_require__.bind(__webpack_require__, 18586)).then(({ upload  })=>({
             upload
         })
     )
@@ -1586,8 +1586,8 @@ __webpack_require__.d(__webpack_exports__, {
   "u": () => (/* binding */ resolveGatewayAPI)
 });
 
-// EXTERNAL MODULE: ../typed-message/base/index.ts + 27 modules
-var base = __webpack_require__(69492);
+// EXTERNAL MODULE: ../typed-message/base/index.ts + 2 modules
+var base = __webpack_require__(65631);
 // EXTERNAL MODULE: ../plugins/FileService/src/constants.ts
 var constants = __webpack_require__(22562);
 // EXTERNAL MODULE: ../plugins/FileService/src/types.ts
@@ -1600,8 +1600,8 @@ const schema_v2_namespaceObject = JSON.parse('{"type":"object","additionalProper
 var isNil = __webpack_require__(29330);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+kit@0.0.0-20220223101101-4e6f3b9/node_modules/@dimensiondev/kit/esm/index.js + 2 modules
 var esm = __webpack_require__(66559);
-// EXTERNAL MODULE: ../web3-kit/src/index.ts + 3 modules
-var src = __webpack_require__(56166);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var src = __webpack_require__(26618);
 ;// CONCATENATED MODULE: ../plugins/FileService/src/helpers.ts
 
 

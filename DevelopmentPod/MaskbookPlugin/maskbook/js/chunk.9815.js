@@ -15,7 +15,7 @@
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
 /* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(44162);
 /* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(39850);
+/* harmony import */ var _masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(98193);
 /* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(79226);
 /* harmony import */ var _social_network__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(61751);
 /* harmony import */ var use_subscription__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(85848);
@@ -26,7 +26,7 @@
 
 
 function useFriendsList() {
-    const ref = (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(_social_network__WEBPACK_IMPORTED_MODULE_3__/* .globalUIState.friends */ .EJ.friends);
+    const ref = (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(_social_network__WEBPACK_IMPORTED_MODULE_3__/* .globalUIState.friends */ .EJ.friends);
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(()=>[
             ...ref.values()
         ]
@@ -39,14 +39,14 @@ const default_ = new _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_5__.Va
 });
 function useLastRecognizedIdentity() {
     var ref;
-    return (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(((ref = _social_network__WEBPACK_IMPORTED_MODULE_3__/* .activatedSocialNetworkUI.collecting.identityProvider */ .LM.collecting.identityProvider) === null || ref === void 0 ? void 0 : ref.recognized) || default_);
+    return (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(((ref = _social_network__WEBPACK_IMPORTED_MODULE_3__/* .activatedSocialNetworkUI.collecting.identityProvider */ .LM.collecting.identityProvider) === null || ref === void 0 ? void 0 : ref.recognized) || default_);
 }
 function useCurrentVisitingIdentity() {
     var ref;
-    return (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(((ref = _social_network__WEBPACK_IMPORTED_MODULE_3__/* .activatedSocialNetworkUI.collecting.currentVisitingIdentityProvider */ .LM.collecting.currentVisitingIdentityProvider) === null || ref === void 0 ? void 0 : ref.recognized) || default_);
+    return (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(((ref = _social_network__WEBPACK_IMPORTED_MODULE_3__/* .activatedSocialNetworkUI.collecting.currentVisitingIdentityProvider */ .LM.collecting.currentVisitingIdentityProvider) === null || ref === void 0 ? void 0 : ref.recognized) || default_);
 }
 function useMyIdentities() {
-    return (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(_social_network__WEBPACK_IMPORTED_MODULE_3__/* .globalUIState.profiles */ .EJ.profiles);
+    return (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_1__/* .useValueRef */ .E)(_social_network__WEBPACK_IMPORTED_MODULE_3__/* .globalUIState.profiles */ .EJ.profiles);
 }
 function useCurrentIdentity() {
     return (0,use_subscription__WEBPACK_IMPORTED_MODULE_4__.useSubscription)(CurrentIdentitySubscription);
@@ -106,12 +106,12 @@ var IconButton = __webpack_require__(87409);
 var Typography = __webpack_require__(74491);
 // EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
 var src = __webpack_require__(43021);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var shared_base_src = __webpack_require__(79226);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/Close.js
 var Close = __webpack_require__(41457);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/ArrowBackRounded.js
@@ -134,13 +134,7 @@ function DialogDismissIconUI(props) {
 
 // EXTERNAL MODULE: ./src/social-network/index.ts
 var social_network = __webpack_require__(61751);
-// EXTERNAL MODULE: ./src/social-network-adaptor/minds.com/base.ts
-var base = __webpack_require__(65375);
-// EXTERNAL MODULE: ./src/social-network-adaptor/facebook.com/base.ts
-var facebook_com_base = __webpack_require__(40543);
 ;// CONCATENATED MODULE: ./src/components/shared/InjectedDialog.tsx
-
-
 
 
 
@@ -166,7 +160,7 @@ const useStyles = (0,src/* makeStyles */.ZL)()((theme, { snsId  })=>({
             color: theme.palette.text.primary
         },
         paper: {
-            ...snsId === base/* MINDS_ID */.fN || snsId === facebook_com_base/* FACEBOOK_ID */.Iz ? {
+            ...snsId === shared_base_src/* EnhanceableSite.Minds */.Jk.Minds || snsId === shared_base_src/* EnhanceableSite.Facebook */.Jk.Facebook ? {
                 width: 'auto',
                 backgroundImage: 'none'
             } : {}
@@ -215,7 +209,7 @@ function InjectedDialog(props) {
                 },
                 ...rest,
                 ...extraProps,
-                children: /*#__PURE__*/ (0,jsx_runtime.jsxs)(shared_src/* ErrorBoundary */.SV, {
+                children: /*#__PURE__*/ (0,jsx_runtime.jsxs)(dist/* ErrorBoundary */.SV, {
                     children: [
                         title ? /*#__PURE__*/ (0,jsx_runtime.jsxs)(DialogTitle/* default */.Z, {
                             className: "dashboard-dialog-title-hook",
@@ -275,7 +269,7 @@ extraClasses) {
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
-/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(39850);
+/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(95367);
 /* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(43021);
 
 
@@ -362,18 +356,18 @@ var react = __webpack_require__(63423);
 var useTimeout = __webpack_require__(48757);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useAsync.js
 var useAsync = __webpack_require__(1154);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/DialogContent/DialogContent.js + 1 modules
 var DialogContent = __webpack_require__(68681);
 // EXTERNAL MODULE: ./src/plugins/Pets/messages.ts
 var messages = __webpack_require__(34740);
 // EXTERNAL MODULE: ./src/components/shared/InjectedDialog.tsx + 1 modules
 var InjectedDialog = __webpack_require__(57464);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
-var theme_src = __webpack_require__(43021);
+var src = __webpack_require__(43021);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Box/Box.js
 var Box = __webpack_require__(18287);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Typography/Typography.js + 1 modules
@@ -392,7 +386,7 @@ var constants = __webpack_require__(72214);
 
 
 
-const useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
+const useStyles = (0,src/* makeStyles */.ZL)()((theme)=>({
         root: {
             margin: theme.spacing(0, 2.5)
         },
@@ -517,7 +511,7 @@ var settings = __webpack_require__(30692);
 
 
 
-const PetSetDialog_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
+const PetSetDialog_useStyles = (0,src/* makeStyles */.ZL)()((theme)=>({
         desBox: {
             display: 'flex',
             justifyContent: 'space-between',
@@ -586,10 +580,10 @@ const PetSetDialog_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
 );
 function PetSetDialog({ configNFTs , onClose  }) {
     const { t  } = (0,utils/* useI18N */.M1)();
-    const classes = (0,theme_src/* useStylesExtends */.Bc)(PetSetDialog_useStyles(), {});
-    const { showSnackbar  } = (0,theme_src/* useCustomSnackbar */.Ii)();
+    const classes = (0,src/* useStylesExtends */.Bc)(PetSetDialog_useStyles(), {});
+    const { showSnackbar  } = (0,src/* useCustomSnackbar */.Ii)();
     const [loading, setLoading] = (0,react.useState)(false);
-    const checked = (0,src/* useValueRef */.E)(settings/* petShowSettings */.v);
+    const checked = (0,dist/* useValueRef */.E)(settings/* petShowSettings */.v);
     const [isReady, cancel] = (0,useTimeout/* default */.Z)(2000);
     const user = (0,hooks/* useUser */.aF)();
     const nfts = (0,hooks/* useNFTs */.a1)(user, configNFTs);
@@ -711,7 +705,7 @@ function PetSetDialog({ configNFTs , onClose  }) {
             },
             getOptionLabel: (option)=>option.name
             ,
-            PopperComponent: theme_src/* ShadowRootPopper */.sV,
+            PopperComponent: src/* ShadowRootPopper */.sV,
             PaperComponent: ({ children  })=>paperComponent(children)
             ,
             renderOption: (props, option)=>/*#__PURE__*/ (0,jsx_runtime.jsx)(MenuItem/* default */.Z, {
@@ -765,7 +759,7 @@ function PetSetDialog({ configNFTs , onClose  }) {
             ,
             PaperComponent: ({ children  })=>paperComponent(children)
             ,
-            PopperComponent: theme_src/* ShadowRootPopper */.sV,
+            PopperComponent: src/* ShadowRootPopper */.sV,
             renderOption: (props, option)=>/*#__PURE__*/ (0,jsx_runtime.jsxs)(Box/* default */.Z, {
                     component: "li",
                     className: classes.itemFix,
@@ -917,7 +911,7 @@ var PetFriendNFTStep;
 })(PetFriendNFTStep || (PetFriendNFTStep = {}));
 function PetDialog() {
     const { t  } = (0,utils/* useI18N */.M1)();
-    const { open , closeDialog  } = (0,src/* useRemoteControlledDialog */.F$)(messages/* PluginPetMessages.events.essayDialogUpdated */.s.events.essayDialogUpdated, ()=>{});
+    const { open , closeDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(messages/* PluginPetMessages.events.essayDialogUpdated */.s.events.essayDialogUpdated, ()=>{});
     const [step, setStep] = (0,react.useState)(PetFriendNFTStep.SetFriendNFT);
     const [configNFTs, setConfigNFTs] = (0,react.useState)(undefined);
     const [isReady, cancel] = (0,useTimeout/* default */.Z)(500);
@@ -960,7 +954,7 @@ function PetDialog() {
 /* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(74491);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(83849);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(13573);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(93573);
 /* harmony import */ var _ModelView__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(29047);
 
 
@@ -1387,7 +1381,7 @@ if (false) {}
 const PluginPetMessages = {
     events: (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__/* .createPluginMessage */ .I4)(_constants__WEBPACK_IMPORTED_MODULE_2__/* .PetsPluginID */ .Dt, _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .serializer */ .GM)
 };
-const PluginPetRPC = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__/* .createPluginRPC */ .V8)(_constants__WEBPACK_IMPORTED_MODULE_2__/* .PetsPluginID */ .Dt, ()=>Promise.all(/* import() */[__webpack_require__.e(2698), __webpack_require__.e(8000), __webpack_require__.e(1440), __webpack_require__.e(2162), __webpack_require__.e(8393), __webpack_require__.e(4227), __webpack_require__.e(4544), __webpack_require__.e(5737), __webpack_require__.e(3883), __webpack_require__.e(2299), __webpack_require__.e(6045), __webpack_require__.e(1077), __webpack_require__.e(2943), __webpack_require__.e(8117), __webpack_require__.e(5756), __webpack_require__.e(8492), __webpack_require__.e(7765), __webpack_require__.e(1305), __webpack_require__.e(5891), __webpack_require__.e(8936), __webpack_require__.e(6265), __webpack_require__.e(1246), __webpack_require__.e(7141), __webpack_require__.e(708), __webpack_require__.e(9447), __webpack_require__.e(1922), __webpack_require__.e(4074), __webpack_require__.e(7907)]).then(__webpack_require__.bind(__webpack_require__, 24895))
+const PluginPetRPC = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__/* .createPluginRPC */ .V8)(_constants__WEBPACK_IMPORTED_MODULE_2__/* .PetsPluginID */ .Dt, ()=>Promise.all(/* import() */[__webpack_require__.e(2698), __webpack_require__.e(4227), __webpack_require__.e(4544), __webpack_require__.e(5737), __webpack_require__.e(3883), __webpack_require__.e(2299), __webpack_require__.e(6045), __webpack_require__.e(1077), __webpack_require__.e(8117), __webpack_require__.e(2943), __webpack_require__.e(5756), __webpack_require__.e(8492), __webpack_require__.e(7765), __webpack_require__.e(1305), __webpack_require__.e(5891), __webpack_require__.e(8936), __webpack_require__.e(6265), __webpack_require__.e(1246), __webpack_require__.e(7141), __webpack_require__.e(708), __webpack_require__.e(9447), __webpack_require__.e(1922), __webpack_require__.e(4859), __webpack_require__.e(876), __webpack_require__.e(8138)]).then(__webpack_require__.bind(__webpack_require__, 24895))
 , PluginPetMessages.events.rpc);
 
 
@@ -1406,42 +1400,6 @@ const PluginPetRPC = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__/* .cr
 const petShowSettings = (0,_settings_createSettings__WEBPACK_IMPORTED_MODULE_0__/* .createGlobalSettings */ .TI)(`${_constants__WEBPACK_IMPORTED_MODULE_1__/* .PetsPluginID */ .Dt}+selectedClosePet`, true, {
     primary: ()=>'DO NOT DISPLAY IT IN UI'
 });
-
-
-/***/ }),
-
-/***/ 65375:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NE": () => (/* binding */ mindsBase),
-/* harmony export */   "Sf": () => (/* binding */ isMinds),
-/* harmony export */   "fN": () => (/* binding */ MINDS_ID),
-/* harmony export */   "fy": () => (/* binding */ mindsWorkerBase)
-/* harmony export */ });
-const MINDS_ID = 'minds.com';
-const origins = [
-    'https://www.minds.com/*',
-    'https://minds.com/*',
-    'https://cdn.minds.com/*'
-];
-const mindsBase = {
-    networkIdentifier: MINDS_ID,
-    name: 'minds',
-    declarativePermissions: {
-        origins
-    },
-    shouldActivate (location) {
-        return location.hostname.endsWith('minds.com');
-    }
-};
-function isMinds(ui) {
-    return ui.networkIdentifier === MINDS_ID;
-}
-const mindsWorkerBase = {
-    ...mindsBase,
-    gunNetworkHint: 'minds-'
-};
 
 
 /***/ }),

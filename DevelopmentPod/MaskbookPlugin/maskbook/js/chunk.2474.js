@@ -1571,8 +1571,10 @@ var ThemeProvider = __webpack_require__(13122);
 var CssBaseline = __webpack_require__(82679);
 // EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
 var src = __webpack_require__(43021);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ../plugin-infra/src/index.ts
 var plugin_infra_src = __webpack_require__(63151);
 // EXTERNAL MODULE: ../web3-shared/evm/context/index.tsx
@@ -1621,7 +1623,7 @@ var example_src = __webpack_require__(48770);
 
 
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@servie+events@3.0.0/node_modules/@servie/events/dist/index.js
-var dist = __webpack_require__(69260);
+var events_dist = __webpack_require__(69260);
 ;// CONCATENATED MODULE: ../dashboard/src/initialization/PluginHost.ts
 
 
@@ -1632,7 +1634,7 @@ var dist = __webpack_require__(69260);
 
 const PluginHost = {
     minimalMode: {
-        events: new dist/* Emitter */.Q5(),
+        events: new events_dist/* Emitter */.Q5(),
         isEnabled: (id)=>{
             return API/* Services.Settings.getPluginMinimalModeEnabled */.K9.Settings.getPluginMinimalModeEnabled(id);
         }
@@ -1737,7 +1739,7 @@ const DashboardFrame = /*#__PURE__*/ (0,react.memo)((props)=>{
                     xs: isLargeScreen ? 10 : 12,
                     children: /*#__PURE__*/ (0,jsx_runtime.jsx)(react.Suspense, {
                         fallback: null,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(shared_src/* ErrorBoundary */.SV, {
+                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(dist/* ErrorBoundary */.SV, {
                             children: props.children
                         })
                     })
@@ -1775,17 +1777,17 @@ const Wallets = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__we
 );
 const Setup = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(5638), __webpack_require__.e(7871), __webpack_require__.e(1557), __webpack_require__.e(3348)]).then(__webpack_require__.bind(__webpack_require__, 23348))
 );
-const SignUp = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(5638), __webpack_require__.e(2698), __webpack_require__.e(7871), __webpack_require__.e(8000), __webpack_require__.e(9759), __webpack_require__.e(4049), __webpack_require__.e(9259), __webpack_require__.e(9617), __webpack_require__.e(6694)]).then(__webpack_require__.bind(__webpack_require__, 36694))
+const SignUp = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(5638), __webpack_require__.e(2698), __webpack_require__.e(7871), __webpack_require__.e(9759), __webpack_require__.e(4049), __webpack_require__.e(9259), __webpack_require__.e(9617), __webpack_require__.e(6694)]).then(__webpack_require__.bind(__webpack_require__, 36694))
 );
-const SignIn = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(5638), __webpack_require__.e(9759), __webpack_require__.e(3294), __webpack_require__.e(6230), __webpack_require__.e(2598), __webpack_require__.e(6316), __webpack_require__.e(8693), __webpack_require__.e(936)]).then(__webpack_require__.bind(__webpack_require__, 40936))
+const SignIn = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(5638), __webpack_require__.e(9759), __webpack_require__.e(3294), __webpack_require__.e(6230), __webpack_require__.e(2598), __webpack_require__.e(8693), __webpack_require__.e(936)]).then(__webpack_require__.bind(__webpack_require__, 40936))
 );
 const PrivacyPolicy = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(5638), __webpack_require__.e(7871), __webpack_require__.e(1557), __webpack_require__.e(2302)]).then(__webpack_require__.bind(__webpack_require__, 22302))
 );
 const Welcome = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(5638), __webpack_require__.e(7871), __webpack_require__.e(1557), __webpack_require__.e(9682)]).then(__webpack_require__.bind(__webpack_require__, 59682))
 );
-const Personas = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(5638), __webpack_require__.e(2698), __webpack_require__.e(7871), __webpack_require__.e(8000), __webpack_require__.e(9759), __webpack_require__.e(2486), __webpack_require__.e(6230), __webpack_require__.e(2598), __webpack_require__.e(7696), __webpack_require__.e(4049), __webpack_require__.e(9259), __webpack_require__.e(9557), __webpack_require__.e(9617), __webpack_require__.e(8855), __webpack_require__.e(5092)]).then(__webpack_require__.bind(__webpack_require__, 89317))
+const Personas = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(5638), __webpack_require__.e(2698), __webpack_require__.e(7871), __webpack_require__.e(9759), __webpack_require__.e(2486), __webpack_require__.e(6230), __webpack_require__.e(2598), __webpack_require__.e(7696), __webpack_require__.e(4049), __webpack_require__.e(9259), __webpack_require__.e(9557), __webpack_require__.e(9617), __webpack_require__.e(8855), __webpack_require__.e(5092)]).then(__webpack_require__.bind(__webpack_require__, 89317))
 );
-const Settings = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(5638), __webpack_require__.e(7871), __webpack_require__.e(3294), __webpack_require__.e(6316), __webpack_require__.e(7696), __webpack_require__.e(9557), __webpack_require__.e(8693), __webpack_require__.e(7829)]).then(__webpack_require__.bind(__webpack_require__, 97829))
+const Settings = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(5638), __webpack_require__.e(7871), __webpack_require__.e(3294), __webpack_require__.e(7696), __webpack_require__.e(9557), __webpack_require__.e(8693), __webpack_require__.e(7829)]).then(__webpack_require__.bind(__webpack_require__, 97829))
 );
 const CreateWallet = /*#__PURE__*/ (0,react.lazy)(()=>__webpack_require__.e(/* import() */ 1336).then(__webpack_require__.bind(__webpack_require__, 41336))
 );
@@ -1859,8 +1861,8 @@ function routes_frame(x) {
 var chainDetailed = __webpack_require__(22229);
 // EXTERNAL MODULE: ../web3-shared/evm/types/index.ts
 var types = __webpack_require__(95130);
-// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
-var base_src = __webpack_require__(15091);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var base_src = __webpack_require__(26618);
 // EXTERNAL MODULE: ../web3-providers/src/index.ts + 2 modules
 var web3_providers_src = __webpack_require__(54492);
 ;// CONCATENATED MODULE: ../dashboard/src/web3/context.ts
@@ -1989,6 +1991,7 @@ var Web3State = __webpack_require__(36581);
 
 
 
+
 const PluginRender = (0,plugin_infra_src/* createInjectHooksRenderer */.EK)(plugin_infra_src/* useActivatedPluginsDashboard */.eE, (x)=>x.GlobalInjection
 );
 function DashboardRoot() {
@@ -2020,7 +2023,7 @@ function DashboardRoot() {
                     children: /*#__PURE__*/ (0,jsx_runtime.jsx)(ThemeProvider/* default */.Z, {
                         theme: theme,
                         children: /*#__PURE__*/ (0,jsx_runtime.jsx)(usePersonaContext/* PersonaContext.Provider */.m.Provider, {
-                            children: /*#__PURE__*/ (0,jsx_runtime.jsxs)(shared_src/* ErrorBoundary */.SV, {
+                            children: /*#__PURE__*/ (0,jsx_runtime.jsxs)(dist/* ErrorBoundary */.SV, {
                                 children: [
                                     /*#__PURE__*/ (0,jsx_runtime.jsx)(CssBaseline/* default */.ZP, {}),
                                     /*#__PURE__*/ (0,jsx_runtime.jsxs)(src/* CustomSnackbarProvider */.YO, {
@@ -2073,21 +2076,21 @@ function DashboardRoot() {
 /* harmony export */   "wp": () => (/* binding */ usePersonaAvatar)
 /* harmony export */ });
 /* unused harmony export revalidateSocialNetworkUIs */
-/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(39850);
+/* harmony import */ var _masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(98193);
 /* harmony import */ var _API__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(85971);
 
 
-const [useDefinedSocialNetworkUIs, revalidateSocialNetworkUIs] = (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_0__/* .createGlobalState */ .r8)(_API__WEBPACK_IMPORTED_MODULE_1__/* .Services.SocialNetwork.getDefinedSocialNetworkUIs */ .K9.SocialNetwork.getDefinedSocialNetworkUIs, ()=>()=>{}
+const [useDefinedSocialNetworkUIs, revalidateSocialNetworkUIs] = (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_0__/* .createGlobalState */ .r8)(_API__WEBPACK_IMPORTED_MODULE_1__/* .Services.SocialNetwork.getDefinedSocialNetworkUIs */ .K9.SocialNetwork.getDefinedSocialNetworkUIs, ()=>()=>{}
 );
-const [useOwnedPersonas] = (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_0__/* .createGlobalState */ .r8)(_API__WEBPACK_IMPORTED_MODULE_1__/* .Services.Identity.queryOwnedPersonaInformation */ .K9.Identity.queryOwnedPersonaInformation, (x)=>_API__WEBPACK_IMPORTED_MODULE_1__/* .Messages.events.ownPersonaChanged.on */ .Vm.events.ownPersonaChanged.on(x)
+const [useOwnedPersonas] = (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_0__/* .createGlobalState */ .r8)(_API__WEBPACK_IMPORTED_MODULE_1__/* .Services.Identity.queryOwnedPersonaInformation */ .K9.Identity.queryOwnedPersonaInformation, (x)=>_API__WEBPACK_IMPORTED_MODULE_1__/* .Messages.events.ownPersonaChanged.on */ .Vm.events.ownPersonaChanged.on(x)
 );
-const [useAppearance] = (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_0__/* .createGlobalState */ .r8)(_API__WEBPACK_IMPORTED_MODULE_1__/* .Services.Settings.getTheme */ .K9.Settings.getTheme, (x)=>_API__WEBPACK_IMPORTED_MODULE_1__/* .Messages.events.appearanceSettings.on */ .Vm.events.appearanceSettings.on(x)
+const [useAppearance] = (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_0__/* .createGlobalState */ .r8)(_API__WEBPACK_IMPORTED_MODULE_1__/* .Services.Settings.getTheme */ .K9.Settings.getTheme, (x)=>_API__WEBPACK_IMPORTED_MODULE_1__/* .Messages.events.appearanceSettings.on */ .Vm.events.appearanceSettings.on(x)
 );
-const [usePluginID] = (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_0__/* .createGlobalState */ .r8)(_API__WEBPACK_IMPORTED_MODULE_1__/* .Services.Settings.getPluginID */ .K9.Settings.getPluginID, (x)=>_API__WEBPACK_IMPORTED_MODULE_1__/* .Messages.events.pluginIDSettings.on */ .Vm.events.pluginIDSettings.on(x)
+const [usePluginID] = (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_0__/* .createGlobalState */ .r8)(_API__WEBPACK_IMPORTED_MODULE_1__/* .Services.Settings.getPluginID */ .K9.Settings.getPluginID, (x)=>_API__WEBPACK_IMPORTED_MODULE_1__/* .Messages.events.pluginIDSettings.on */ .Vm.events.pluginIDSettings.on(x)
 );
-const [useCurrentPersonaIdentifier] = (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_0__/* .createGlobalState */ .r8)(_API__WEBPACK_IMPORTED_MODULE_1__/* .Services.Settings.getCurrentPersonaIdentifier */ .K9.Settings.getCurrentPersonaIdentifier, (x)=>_API__WEBPACK_IMPORTED_MODULE_1__/* .Messages.events.currentPersonaIdentifier.on */ .Vm.events.currentPersonaIdentifier.on(x)
+const [useCurrentPersonaIdentifier] = (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_0__/* .createGlobalState */ .r8)(_API__WEBPACK_IMPORTED_MODULE_1__/* .Services.Settings.getCurrentPersonaIdentifier */ .K9.Settings.getCurrentPersonaIdentifier, (x)=>_API__WEBPACK_IMPORTED_MODULE_1__/* .Messages.events.currentPersonaIdentifier.on */ .Vm.events.currentPersonaIdentifier.on(x)
 );
-const [usePersonaAvatar] = (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_0__/* .createGlobalState */ .r8)(_API__WEBPACK_IMPORTED_MODULE_1__/* .Services.Identity.getCurrentPersonaAvatar */ .K9.Identity.getCurrentPersonaAvatar, (x)=>{
+const [usePersonaAvatar] = (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_0__/* .createGlobalState */ .r8)(_API__WEBPACK_IMPORTED_MODULE_1__/* .Services.Identity.getCurrentPersonaAvatar */ .K9.Identity.getCurrentPersonaAvatar, (x)=>{
     const a = _API__WEBPACK_IMPORTED_MODULE_1__/* .Messages.events.currentPersonaIdentifier.on */ .Vm.events.currentPersonaIdentifier.on(x);
     const b = _API__WEBPACK_IMPORTED_MODULE_1__/* .Messages.events.ownPersonaChanged.on */ .Vm.events.ownPersonaChanged.on(x);
     return ()=>void [

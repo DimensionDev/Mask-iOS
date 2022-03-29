@@ -20,8 +20,8 @@ var base = __webpack_require__(22775);
 var react = __webpack_require__(63423);
 // EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
 var src = __webpack_require__(43021);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ./src/plugins/Pets/hooks/index.ts + 3 modules
 var hooks = __webpack_require__(37759);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Box/Box.js
@@ -352,7 +352,7 @@ const Animate_useStyles = (0,src/* makeStyles */.ZL)()(()=>({
 );
 const AnimatePic = ()=>{
     const classes = (0,src/* useStylesExtends */.Bc)(Animate_useStyles(), {});
-    const petShow = (0,shared_src/* useValueRef */.E)(settings/* petShowSettings */.v);
+    const petShow = (0,dist/* useValueRef */.E)(settings/* petShowSettings */.v);
     const [start, setStart] = (0,react.useState)(true);
     const [refresh, setRefresh] = (0,react.useState)(0);
     const visitor = (0,hooks/* useCurrentVisitingUser */.qT)(refresh);

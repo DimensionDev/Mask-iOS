@@ -5,7 +5,6 @@
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "FT": () => (/* reexport safe */ _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__.FT),
 /* harmony export */   "H9": () => (/* reexport safe */ _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__.H9),
 /* harmony export */   "NH": () => (/* binding */ usePostClaimedAuthor),
 /* harmony export */   "Vc": () => (/* binding */ usePostLink),
@@ -54,8 +53,8 @@ var react = __webpack_require__(63423);
 var types = __webpack_require__(95130);
 // EXTERNAL MODULE: ../plugin-infra/src/index.ts
 var src = __webpack_require__(63151);
-// EXTERNAL MODULE: ../typed-message/base/index.ts + 27 modules
-var base = __webpack_require__(69492);
+// EXTERNAL MODULE: ../typed-message/base/index.ts + 2 modules
+var base = __webpack_require__(65631);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var shared_base_src = __webpack_require__(79226);
 // EXTERNAL MODULE: ./src/components/DataSource/usePostInfo.ts
@@ -78,10 +77,10 @@ var theme_src = __webpack_require__(43021);
 var QueryBuilder = __webpack_require__(8701);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/VerifiedUser.js
 var VerifiedUser = __webpack_require__(14371);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useAsyncRetry.js
 var useAsyncRetry = __webpack_require__(28577);
 // EXTERNAL MODULE: ./src/plugins/Gitcoin/messages.ts
@@ -95,8 +94,8 @@ function useGrant(id) {
 }
 
 // EXTERNAL MODULE: ../../node_modules/.pnpm/urlcat@2.0.4/node_modules/urlcat/dist/index.js
-var dist = __webpack_require__(19802);
-var dist_default = /*#__PURE__*/__webpack_require__.n(dist);
+var urlcat_dist = __webpack_require__(19802);
+var dist_default = /*#__PURE__*/__webpack_require__.n(urlcat_dist);
 ;// CONCATENATED MODULE: ./src/plugins/Gitcoin/SNSAdaptor/PreviewCard.tsx
 
 
@@ -176,7 +175,7 @@ function PreviewCard(props) {
     const { value: grant , error , loading , retry  } = useGrant(props.id);
     // #region the donation dialog
     const postLink = (0,usePostInfo/* usePostLink */.Vc)();
-    const { setDialog: setDonationDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(messages/* PluginGitcoinMessages.donationDialogUpdated */.y.donationDialogUpdated);
+    const { setDialog: setDonationDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(messages/* PluginGitcoinMessages.donationDialogUpdated */.y.donationDialogUpdated);
     const onDonate = (0,react.useCallback)(()=>{
         if (!grant) return;
         setDonationDialog({
@@ -371,8 +370,8 @@ var Wallet_messages = __webpack_require__(63081);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/bignumber.js@9.0.2/node_modules/bignumber.js/bignumber.js
 var bignumber = __webpack_require__(42263);
 var bignumber_default = /*#__PURE__*/__webpack_require__.n(bignumber);
-// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
-var base_src = __webpack_require__(15091);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var base_src = __webpack_require__(26618);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useTransactionState.ts
 var useTransactionState = __webpack_require__(15030);
 // EXTERNAL MODULE: ../web3-contracts/abis/BulkCheckout.json
@@ -544,7 +543,7 @@ function DonateDialog(props) {
     const nativeTokenDetailed = (0,useNativeTokenDetailed/* useNativeTokenDetailed */.J)();
     const { BULK_CHECKOUT_ADDRESS  } = (0,constants_constants/* useGitcoinConstants */.N_)();
     // #region remote controlled dialog
-    const { open , closeDialog: closeDonationDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(messages/* PluginGitcoinMessages.donationDialogUpdated */.y.donationDialogUpdated, (ev)=>{
+    const { open , closeDialog: closeDonationDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(messages/* PluginGitcoinMessages.donationDialogUpdated */.y.donationDialogUpdated, (ev)=>{
         if (!ev.open) return;
         setTitle(ev.title);
         setAddress(ev.address);
@@ -558,7 +557,7 @@ function DonateDialog(props) {
     // #endregion
     // #region select token dialog
     const [id] = (0,react.useState)((0,v4/* default */.Z)());
-    const { setDialog: setSelectTokenDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.selectTokenDialogUpdated */.R.events.selectTokenDialogUpdated, (0,react.useCallback)((ev)=>{
+    const { setDialog: setSelectTokenDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.selectTokenDialogUpdated */.R.events.selectTokenDialogUpdated, (0,react.useCallback)((ev)=>{
         if (ev.open || !ev.token || ev.uuid !== id) return;
         setToken(ev.token);
     }, [
@@ -595,7 +594,7 @@ function DonateDialog(props) {
         postLink, 
     ].join('\n') : '').toString();
     // close the transaction dialog
-    const { setDialog: setTransactionDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.transactionDialogUpdated */.R.events.transactionDialogUpdated, (ev)=>{
+    const { setDialog: setTransactionDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.transactionDialogUpdated */.R.events.transactionDialogUpdated, (ev)=>{
         if (ev.open) return;
         if (donateState.type === types/* TransactionStateType.HASH */.n$.HASH) setRawAmount('');
         resetDonateCallback();

@@ -967,8 +967,8 @@ const PersonaCreate = ()=>{
 
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/upperFirst.js + 1 modules
 var upperFirst = __webpack_require__(75272);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
 // EXTERNAL MODULE: ../dashboard/src/components/ActionCard/index.tsx
 var ActionCard = __webpack_require__(51475);
 ;// CONCATENATED MODULE: ../dashboard/src/pages/SignUp/steps/ConnectSocialMedia.tsx

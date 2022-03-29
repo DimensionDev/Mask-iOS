@@ -20,8 +20,8 @@ var types = __webpack_require__(95130);
 var base = __webpack_require__(86926);
 // EXTERNAL MODULE: ../plugins/RSS3/src/constants.ts
 var constants = __webpack_require__(14677);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var src = __webpack_require__(95367);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/misc.ts
 var misc = __webpack_require__(7454);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Typography/Typography.js + 1 modules

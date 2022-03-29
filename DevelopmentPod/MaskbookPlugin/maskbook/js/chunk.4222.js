@@ -702,7 +702,6 @@ if (true) {
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "FT": () => (/* reexport safe */ _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__.FT),
 /* harmony export */   "H9": () => (/* reexport safe */ _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__.H9),
 /* harmony export */   "NH": () => (/* binding */ usePostClaimedAuthor),
 /* harmony export */   "Vc": () => (/* binding */ usePostLink),
@@ -878,8 +877,8 @@ __webpack_require__.d(__webpack_exports__, {
   "Ay": () => (/* binding */ renderWithRedPacketNftMetadata)
 });
 
-// EXTERNAL MODULE: ../typed-message/base/index.ts + 27 modules
-var base = __webpack_require__(69492);
+// EXTERNAL MODULE: ../typed-message/base/index.ts + 2 modules
+var base = __webpack_require__(65631);
 // EXTERNAL MODULE: ./src/plugins/RedPacket/constants.ts
 var constants = __webpack_require__(29286);
 ;// CONCATENATED MODULE: ./src/plugins/RedPacket/schema.json
@@ -934,10 +933,10 @@ var react = __webpack_require__(63423);
 var DialogContent = __webpack_require__(68681);
 // EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
 var theme_src = __webpack_require__(43021);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ./src/components/shared/AbstractTab.tsx
 var AbstractTab = __webpack_require__(51758);
 ;// CONCATENATED MODULE: ./src/plugins/RedPacket/types.ts
@@ -976,8 +975,8 @@ var constants_constants = __webpack_require__(24403);
 var useNativeTokenDetailed = __webpack_require__(80955);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useFungibleTokenBalance.ts
 var useFungibleTokenBalance = __webpack_require__(42624);
-// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
-var base_src = __webpack_require__(15091);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var base_src = __webpack_require__(26618);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/omit.js + 3 modules
 var omit = __webpack_require__(96596);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/FormControl/FormControl.js + 1 modules
@@ -1087,7 +1086,7 @@ function RedPacketERC20Form(props) {
     const { value: nativeTokenDetailed  } = (0,useNativeTokenDetailed/* useNativeTokenDetailed */.J)();
     const [token = nativeTokenDetailed, setToken] = (0,react.useState)(origin === null || origin === void 0 ? void 0 : origin.token);
     const [id] = (0,react.useState)(v4/* default */.Z);
-    const { setDialog: setSelectTokenDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.selectTokenDialogUpdated */.R.events.selectTokenDialogUpdated, (0,react.useCallback)((ev)=>{
+    const { setDialog: setSelectTokenDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.selectTokenDialogUpdated */.R.events.selectTokenDialogUpdated, (0,react.useCallback)((ev)=>{
         if (ev.open || !ev.token || ev.uuid !== id) return;
         setToken(ev.token);
     }, [
@@ -1461,7 +1460,7 @@ var OpenInNew = __webpack_require__(86167);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Link/Link.js + 1 modules
 var Link = __webpack_require__(86377);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/wallet.ts@1.0.1/node_modules/wallet.ts/dist/index.js
-var dist = __webpack_require__(99674);
+var wallet_ts_dist = __webpack_require__(99674);
 ;// CONCATENATED MODULE: ./src/web3/UI/EthereumERC721TokenApprovedBoundary.tsx
 
 
@@ -1541,9 +1540,9 @@ function EthereumERC721TokenApprovedBoundary(props) {
         contractDetailed
     ]);
     const validationMessage = (0,react.useMemo)(()=>{
-        if (!(contractDetailed === null || contractDetailed === void 0 ? void 0 : contractDetailed.address) || !dist.EthereumAddress.isValid(contractDetailed === null || contractDetailed === void 0 ? void 0 : contractDetailed.address)) return t('plugin_wallet_select_a_nft_contract');
-        if (!owner || !dist.EthereumAddress.isValid(owner)) return t('plugin_wallet_select_a_nft_owner');
-        if (!operator || !dist.EthereumAddress.isValid(operator)) return t('plugin_wallet_select_a_nft_operator');
+        if (!(contractDetailed === null || contractDetailed === void 0 ? void 0 : contractDetailed.address) || !wallet_ts_dist.EthereumAddress.isValid(contractDetailed === null || contractDetailed === void 0 ? void 0 : contractDetailed.address)) return t('plugin_wallet_select_a_nft_contract');
+        if (!owner || !wallet_ts_dist.EthereumAddress.isValid(owner)) return t('plugin_wallet_select_a_nft_owner');
+        if (!operator || !wallet_ts_dist.EthereumAddress.isValid(operator)) return t('plugin_wallet_select_a_nft_operator');
         if (_validationMessage) return _validationMessage;
         return '';
     }, [
@@ -1711,6 +1710,8 @@ var Search = __webpack_require__(1325);
 var Trans = __webpack_require__(92452);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useUpdate.js
 var useUpdate = __webpack_require__(52781);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/findLastIndex.js
 var findLastIndex = __webpack_require__(86049);
 ;// CONCATENATED MODULE: ./src/plugins/RedPacket/SNSAdaptor/SelectNftTokenDialog.tsx
@@ -2561,7 +2562,7 @@ function useCreateNftRedpacketCallback(duration, message, name, contractAddress,
             });
             return;
         }
-        if (!contractAddress || !dist.EthereumAddress.isValid(contractAddress)) {
+        if (!contractAddress || !wallet_ts_dist.EthereumAddress.isValid(contractAddress)) {
             setCreateState === null || setCreateState === void 0 ? void 0 : setCreateState({
                 type: types/* TransactionStateType.FAILED */.n$.FAILED,
                 error: new Error('NFT contract is invalid')
@@ -2667,6 +2668,7 @@ function useCreateNftRedpacketCallback(duration, message, name, contractAddress,
 }
 
 ;// CONCATENATED MODULE: ./src/plugins/RedPacket/SNSAdaptor/RedpacketNftConfirmDialog.tsx
+
 
 
 
@@ -2825,7 +2827,7 @@ function RedpacketNftConfirmDialog(props) {
     const tokenIdList = tokenList.map((value)=>value.tokenId
     );
     const [createState, createCallback, resetCallback] = useCreateNftRedpacketCallback(duration, message, senderName, contract.address, tokenIdList);
-    const { closeDialog: closeWalletStatusDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.walletStatusDialogUpdated */.R.events.walletStatusDialogUpdated);
+    const { closeDialog: closeWalletStatusDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.walletStatusDialogUpdated */.R.events.walletStatusDialogUpdated);
     const isSending = [
         types/* TransactionStateType.WAIT_FOR_CONFIRMING */.n$.WAIT_FOR_CONFIRMING,
         types/* TransactionStateType.HASH */.n$.HASH
@@ -3682,8 +3684,8 @@ var useMediaQuery = __webpack_require__(90171);
 var Popper = __webpack_require__(24190);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useFungibleTokenDetailed.ts
 var useFungibleTokenDetailed = __webpack_require__(34082);
-// EXTERNAL MODULE: ./shared-ui/locales_legacy/index.ts + 3 modules
-var locales_legacy = __webpack_require__(6900);
+// EXTERNAL MODULE: ./shared-ui/locales_legacy/index.ts
+var locales_legacy = __webpack_require__(28331);
 ;// CONCATENATED MODULE: ./src/plugins/ITO/assets/formatDate.ts
 
 const dateTimeFormat = (date, includeTime = true)=>new Intl.DateTimeFormat(locales_legacy/* default.language */.Z.language, {
@@ -3899,6 +3901,7 @@ var nextDay = __webpack_require__(16162);
 
 
 
+
 const RedPacketInHistoryList_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>{
     const smallQuery = `@media (max-width: ${theme.breakpoints.values.sm}px)`;
     return {
@@ -4013,20 +4016,20 @@ const RedPacketInHistoryList_useStyles = (0,theme_src/* makeStyles */.ZL)()((the
         popper: {
             overflow: 'visible',
             backgroundColor: theme.palette.mode === 'light' ? 'rgba(15, 20, 25, 1)' : '#fff',
-            transform: 'translate(183px, -32px)',
+            transform: 'translate(134px, 66px)',
             borderRadius: 8,
             width: 328,
             padding: 10
         },
         arrow: {
             position: 'absolute',
-            bottom: 0,
-            right: 80,
+            top: -12,
+            right: 40,
             width: 0,
             height: 0,
             borderLeft: '6px solid transparent',
             borderRight: '6px solid transparent',
-            borderTop: `6px solid ${theme.palette.mode === 'light' ? 'rgba(15, 20, 25, 1)' : '#fff'}`,
+            borderBottom: `6px solid ${theme.palette.mode === 'light' ? 'rgba(15, 20, 25, 1)' : '#fff'}`,
             transform: 'translateY(6px)'
         },
         popperText: {
@@ -4066,7 +4069,7 @@ function RedPacketInHistoryList(props) {
     var _token;
     const historyToken = (_token = history.token) !== null && _token !== void 0 ? _token : tokenDetailed;
     // #region remote controlled transaction dialog
-    const { setDialog: setTransactionDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.transactionDialogUpdated */.R.events.transactionDialogUpdated);
+    const { setDialog: setTransactionDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.transactionDialogUpdated */.R.events.transactionDialogUpdated);
     (0,react.useEffect)(()=>{
         if (refundState.type === types/* TransactionStateType.UNKNOWN */.n$.UNKNOWN || !availability) return;
         if (refundState.type === types/* TransactionStateType.HASH */.n$.HASH) {
@@ -4648,6 +4651,7 @@ const NftList = ({ contract , statusList , tokenIds , className , ...rest })=>{
 
 
 
+
 const NftRedPacketHistoryItem_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>{
     const smallQuery = `@media (max-width: ${theme.breakpoints.values.sm}px)`;
     return {
@@ -4778,7 +4782,7 @@ const NftRedPacketHistoryItem = /*#__PURE__*/ (0,react.memo)(({ history , onSend
     const { classes  } = NftRedPacketHistoryItem_useStyles();
     const { computed: { canSend , isPasswordValid  } ,  } = useNftAvailabilityComputed(account, history.payload);
     const { value: contractDetailed  } = (0,useERC721ContractDetailed/* useERC721ContractDetailed */.P)(history.token_contract.address);
-    const { closeDialog: closeWalletStatusDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(Wallet_src/* WalletMessages.events.walletStatusDialogUpdated */.R$.events.walletStatusDialogUpdated);
+    const { closeDialog: closeWalletStatusDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(Wallet_src/* WalletMessages.events.walletStatusDialogUpdated */.R$.events.walletStatusDialogUpdated);
     const handleSend = (0,react.useCallback)(()=>{
         if (!(canSend && contractDetailed && isPasswordValid)) return;
         onSend(history, contractDetailed);
@@ -4968,7 +4972,7 @@ function NftRedPacketHistoryList({ onSend  }) {
     const containerRef = (0,react.useRef)(null);
     const [popperText, setPopperText] = (0,react.useState)('');
     const [anchorEl, setAnchorEl] = (0,react.useState)(null);
-    (0,shared_src/* useScrollBottomEvent */.S8)(containerRef, fetchMore);
+    (0,dist/* useScrollBottomEvent */.S8)(containerRef, fetchMore);
     const handleShowPopover = (anchor, text)=>{
         setAnchorEl(anchor);
         setPopperText(text);
@@ -5711,7 +5715,7 @@ function RedPacketDialog(props) {
     const currentIdentity = (0,useActivatedUI/* useCurrentIdentity */.Ud)();
     var _userId;
     const senderName = (_userId = currentIdentity === null || currentIdentity === void 0 ? void 0 : currentIdentity.identifier.userId) !== null && _userId !== void 0 ? _userId : currentIdentity === null || currentIdentity === void 0 ? void 0 : (ref2 = currentIdentity.linkedPersona) === null || ref2 === void 0 ? void 0 : ref2.nickname;
-    const { closeDialog: closeWalletStatusDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.walletStatusDialogUpdated */.R.events.walletStatusDialogUpdated);
+    const { closeDialog: closeWalletStatusDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.walletStatusDialogUpdated */.R.events.walletStatusDialogUpdated);
     const onCreateOrSelect = (0,react.useCallback)(async (payload)=>{
         if (payload.password === '') {
             if (payload.contract_version === 1) {
@@ -5762,7 +5766,7 @@ function RedPacketDialog(props) {
         createState
     ]);
     // #region remote controlled transaction dialog
-    const { setDialog: setTransactionDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.transactionDialogUpdated */.R.events.transactionDialogUpdated, (ev)=>{
+    const { setDialog: setTransactionDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.transactionDialogUpdated */.R.events.transactionDialogUpdated, (ev)=>{
         var ref;
         if (ev.open) return;
         // reset state
@@ -6178,7 +6182,7 @@ function OperationFooter({ canClaim , canRefund , claimState , refundState , sha
     const account = (0,useAccount/* useAccount */.m)();
     const chainIdValid = (0,useChainId/* useChainIdValid */.as)();
     // #region remote controlled select provider dialog
-    const { openDialog: openSelectProviderDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(Wallet_src/* WalletMessages.events.selectProviderDialogUpdated */.R$.events.selectProviderDialogUpdated);
+    const { openDialog: openSelectProviderDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(Wallet_src/* WalletMessages.events.selectProviderDialogUpdated */.R$.events.selectProviderDialogUpdated);
     // #endregion
     const handleShare = (0,react.useCallback)(()=>{
         if (!shareLink) return;
@@ -6296,7 +6300,7 @@ function RedPacket(props) {
     const shareLink = (ref2 = (_utils = social_network/* activatedSocialNetworkUI.utils */.LM.utils).getShareLinkURL) === null || ref2 === void 0 ? void 0 : ref2.call(_utils, (listOfStatus.includes(RedPacketStatus.claimed) || claimState.type === types/* TransactionStateType.CONFIRMED */.n$.CONFIRMED ? (0,twitter_com_base/* isTwitter */.L3)(social_network/* activatedSocialNetworkUI */.LM) || (0,facebook_com_base/* isFacebook */.DF)(social_network/* activatedSocialNetworkUI */.LM) ? t('plugin_red_packet_share_message_official_account', shareTextOption) : t('plugin_red_packet_share_message_not_twitter', shareTextOption) : (0,twitter_com_base/* isTwitter */.L3)(social_network/* activatedSocialNetworkUI */.LM) || (0,facebook_com_base/* isFacebook */.DF)(social_network/* activatedSocialNetworkUI */.LM) ? t('plugin_red_packet_share_unclaimed_message_official_account', shareTextOption) : t('plugin_red_packet_share_unclaimed_message_not_twitter', shareTextOption)).trim()).toString();
     const [refundState, refundCallback, resetRefundCallback] = useRefundCallback(payload.contract_version, account, payload.rpid);
     // close the transaction dialog
-    const { setDialog: setTransactionDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.transactionDialogUpdated */.R.events.transactionDialogUpdated);
+    const { setDialog: setTransactionDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(Wallet_messages/* WalletMessages.events.transactionDialogUpdated */.R.events.transactionDialogUpdated);
     // open the transaction dialog
     (0,react.useEffect)(()=>{
         const state = canClaim ? claimState : refundState;
@@ -7309,7 +7313,7 @@ function ERC20RedpacketBadge(props) {
 
 if (false) {}
 const RedPacketMessage = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__/* .createPluginMessage */ .I4)(_constants__WEBPACK_IMPORTED_MODULE_0__/* .RedPacketPluginID */ .jY);
-const RedPacketRPC = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__/* .createPluginRPC */ .V8)(_constants__WEBPACK_IMPORTED_MODULE_0__/* .RedPacketPluginID */ .jY, ()=>Promise.all(/* import() */[__webpack_require__.e(2698), __webpack_require__.e(8000), __webpack_require__.e(1440), __webpack_require__.e(2162), __webpack_require__.e(8393), __webpack_require__.e(4227), __webpack_require__.e(4544), __webpack_require__.e(5737), __webpack_require__.e(187), __webpack_require__.e(3883), __webpack_require__.e(2299), __webpack_require__.e(6045), __webpack_require__.e(1077), __webpack_require__.e(2943), __webpack_require__.e(8117), __webpack_require__.e(5756), __webpack_require__.e(8492), __webpack_require__.e(7765), __webpack_require__.e(1305), __webpack_require__.e(5891), __webpack_require__.e(8936), __webpack_require__.e(6265), __webpack_require__.e(1246), __webpack_require__.e(7141), __webpack_require__.e(708), __webpack_require__.e(9447), __webpack_require__.e(9492), __webpack_require__.e(1922), __webpack_require__.e(4074), __webpack_require__.e(4750)]).then(__webpack_require__.bind(__webpack_require__, 73166))
+const RedPacketRPC = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__/* .createPluginRPC */ .V8)(_constants__WEBPACK_IMPORTED_MODULE_0__/* .RedPacketPluginID */ .jY, ()=>Promise.all(/* import() */[__webpack_require__.e(2698), __webpack_require__.e(4227), __webpack_require__.e(4544), __webpack_require__.e(5737), __webpack_require__.e(187), __webpack_require__.e(3883), __webpack_require__.e(2299), __webpack_require__.e(6045), __webpack_require__.e(1077), __webpack_require__.e(8117), __webpack_require__.e(2943), __webpack_require__.e(5756), __webpack_require__.e(8492), __webpack_require__.e(7765), __webpack_require__.e(1305), __webpack_require__.e(5891), __webpack_require__.e(8936), __webpack_require__.e(6265), __webpack_require__.e(1246), __webpack_require__.e(7141), __webpack_require__.e(708), __webpack_require__.e(9447), __webpack_require__.e(1922), __webpack_require__.e(4859), __webpack_require__.e(876), __webpack_require__.e(8927), __webpack_require__.e(4059)]).then(__webpack_require__.bind(__webpack_require__, 73166))
 , RedPacketMessage.rpc);
 
 
@@ -7320,10 +7324,12 @@ const RedPacketRPC = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__/* .cr
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "NE": () => (/* binding */ mindsBase),
-/* harmony export */   "Sf": () => (/* binding */ isMinds),
 /* harmony export */   "fN": () => (/* binding */ MINDS_ID),
 /* harmony export */   "fy": () => (/* binding */ mindsWorkerBase)
 /* harmony export */ });
+/* unused harmony export isMinds */
+/* harmony import */ var _masknet_encryption__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(57614);
+
 const MINDS_ID = 'minds.com';
 const origins = [
     'https://www.minds.com/*',
@@ -7332,7 +7338,7 @@ const origins = [
 ];
 const mindsBase = {
     networkIdentifier: MINDS_ID,
-    name: 'minds',
+    encryptionNetwork: _masknet_encryption__WEBPACK_IMPORTED_MODULE_0__/* .SocialNetworkEnum.Minds */ .Gq.Minds,
     declarativePermissions: {
         origins
     },
@@ -7369,22 +7375,22 @@ var src = __webpack_require__(43021);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/classnames@2.3.1/node_modules/classnames/index.js
 var classnames = __webpack_require__(83849);
 var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ./src/extension/options-page/DashboardComponents/ActionButton.tsx
 var ActionButton = __webpack_require__(47906);
 // EXTERNAL MODULE: ./src/plugins/Wallet/messages.ts
 var messages = __webpack_require__(63081);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useAccount.ts
 var useAccount = __webpack_require__(98086);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useChainId.ts
 var useChainId = __webpack_require__(63541);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useNativeTokenBalance.ts
 var useNativeTokenBalance = __webpack_require__(1347);
-// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
-var base_src = __webpack_require__(15091);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var base_src = __webpack_require__(26618);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
 var react = __webpack_require__(63423);
 ;// CONCATENATED MODULE: ./src/plugins/Wallet/hooks/useWalletRiskWarningDialog.ts
@@ -7400,7 +7406,7 @@ const useWalletRiskWarningDialog = ()=>{
         else messages/* WalletRPC.getRiskWarningConfirmed */.V.getRiskWarningConfirmed(account).then((confirmed)=>setConfirmed(confirmed !== null && confirmed !== void 0 ? confirmed : false)
         );
     };
-    const { openDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.walletRiskWarningDialogUpdated */.R.events.walletRiskWarningDialogUpdated, fetchRiskWarningStatus);
+    const { openDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.walletRiskWarningDialogUpdated */.R.events.walletRiskWarningDialogUpdated, fetchRiskWarningStatus);
     (0,react.useEffect)(fetchRiskWarningStatus, [
         account
     ]);
@@ -7439,7 +7445,7 @@ function EthereumWalletConnectedBoundary(props) {
     const { isConfirmed: isRiskWarningConfirmed , openDialog: openRiskWarningDialog  } = useWalletRiskWarningDialog();
     // #endregion
     // #region remote controlled select provider dialog
-    const { openDialog: openSelectProviderDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.selectProviderDialogUpdated */.R.events.selectProviderDialogUpdated);
+    const { openDialog: openSelectProviderDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.selectProviderDialogUpdated */.R.events.selectProviderDialogUpdated);
     // #endregion
     if (!account) return(/*#__PURE__*/ (0,jsx_runtime.jsx)(Grid/* default */.ZP, {
         container: true,
