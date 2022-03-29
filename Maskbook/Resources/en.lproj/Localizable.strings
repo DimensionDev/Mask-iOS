@@ -270,10 +270,10 @@ separated by spaces";
 "Scene.OpenRedPackage.OnGoing" = "Ongoing";
 "Scene.OpenRedPackage.Refund" = "Refund";
 "Scene.OpenRedPackage.Refunded" = "Refunded";
-"Scene.OpenRedPackage.ShareMessageOfficial" = "I just claimed a lucky drop from %@ on %@ network. Follow %@ (mask.io) to claim lucky drops.
+"Scene.OpenRedPackage.ShareMessageOfficial" = "Hi friends, I just claimed a lucky drop sent by %@ on %@ network. Follow %@ (mask.io) to claim the lucky drops.
 #mask_io #LuckyDrop
 %@";
-"Scene.OpenRedPackage.ShareMessageUnsupportPlatform" = "I just claimed a lucky drop from @%@ on %@ network. 
+"Scene.OpenRedPackage.ShareMessageUnsupportPlatform" = "Hi friends, I just claimed a lucky drop sent by @%@ on %@ network. 
 %@";
 "Scene.OpenRedPackage.Shares" = "Shares";
 "Scene.OpenRedPackage.SwitchNetwork" = "Switch Network";

@@ -837,8 +837,8 @@
             "refunded":"Refunded",
             "refund":"Refund",
             "empty": "Empty",
-            "share_message_official": "I just claimed a lucky drop from %s on %s network. Follow %s (mask.io) to claim lucky drops.\n#mask_io #LuckyDrop\n%s",
-            "share_message_unsupport_platform": "I just claimed a lucky drop from @%s on %s network. \n%s"
+            "share_message_official": "Hi friends, I just claimed a lucky drop sent by %s on %s network. Follow %s (mask.io) to claim the lucky drops.\n#mask_io #LuckyDrop\n%s",
+            "share_message_unsupport_platform": "Hi friends, I just claimed a lucky drop sent by @%s on %s network. \n%s"
         },
         "move_backup_data": {
             "title": "Please move your data",
