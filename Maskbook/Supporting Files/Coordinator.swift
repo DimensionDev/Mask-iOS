@@ -190,6 +190,7 @@ class Coordinator {
             shareActionDelegate: RedPacketShareDelegate?
         )
         case moveBackupData
+        case luckyDrop
         case debug
     }
 
@@ -752,6 +753,9 @@ extension Coordinator {
         
         case .moveBackupData:
             return MoveBackupDataViewController()
+            
+        case .luckyDrop:
+            return UIHostingController(rootView: LuckyDropView())
             
         case .debug:
             return UIHostingController(rootView: DebugView())

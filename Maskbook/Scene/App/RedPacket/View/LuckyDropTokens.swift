@@ -8,24 +8,34 @@
 
 import SwiftUI
 
+typealias RedPacketType = RedPacket.RedPacketType
+
 struct LuckyDropTokens: View {
-    @State private var totalAmountStr: String = ""
-    @State private var quantityStr: String = ""
-    @State private var message: String = ""
+    @ObservedObject var viewModel: LuckyDropViewModel
     
     var body: some View {
         VStack(spacing: 0) {
-            VStack(spacing: 0) {
-                tokenRow
-                Spacer().frame(height: 16)
-                quantityRow
-                Spacer().frame(height: 16)
-                messageRow
-                Spacer().frame(height: 12)
-                transactionView
-            }
-            .padding(.horizontal, 16)
+            typeRow
+            Spacer().frame(height: 12)
+            quantityRow
+            Spacer().frame(height: 16)
+            tokenRow
+            Spacer().frame(height: 16)
+            messageRow
+            Spacer().frame(height: 12)
+            transactionView
         }
+        .padding(.top, 24)
+        .background(Asset.Colors.Background.normal.asColor())
+    }
+    
+    @ViewBuilder
+    var typeRow: some View {
+        HStack {
+            buildGroupButton(.average)
+            buildGroupButton(.random)
+        }
+        .frame(height: 32)
     }
     
     @ViewBuilder
@@ -41,14 +51,17 @@ struct LuckyDropTokens: View {
             Spacer().frame(width: 4)
             Asset.Icon.Arrows.down1.asImage()
             Text(L10n.Plugins.Luckydrop.max).padding(.horizontal, 5.5)
+                .font(FontStyles.mh6.font)
                 .frame(height: 24)
                 .background(Asset.Colors.Background.infoBg.asColor().cornerRadius(4))
             Spacer()
-            TextField(L10n.Plugins.Luckydrop.totalAmount, text: $totalAmountStr)
+            TextField(L10n.Plugins.Luckydrop.totalAmount, text: $viewModel.amountTotalShareStr)
+                .keyboardType(.numbersAndPunctuation)
                 .multilineTextAlignment(.trailing)
                 .frame(maxHeight: .infinity)
         }
         .frame(height: 52)
+        .padding(.horizontal, 16)
         .background(Asset.Colors.Background.dark.asColor().cornerRadius(8))
     }
     
@@ -63,21 +76,24 @@ struct LuckyDropTokens: View {
             Text("ETH").foregroundColor(Asset.Colors.Text.dark.asColor())
                 .font(FontStyles.bh5.font)
             Spacer()
-            TextField(L10n.Plugins.Luckydrop.enterQuantity, text: $quantityStr)
+            TextField(L10n.Plugins.Luckydrop.enterQuantity, text: $viewModel.quantityStr)
+                .keyboardType(.numberPad)
                 .multilineTextAlignment(.trailing)
                 .frame(maxHeight: .infinity)
         }
         .frame(height: 52)
+        .padding(.horizontal, 16)
         .background(Asset.Colors.Background.dark.asColor().cornerRadius(8))
     }
     
     @ViewBuilder
     var messageRow: some View {
         HStack(spacing: 0) {
-            TextField(L10n.Plugins.Luckydrop.enterMessage, text: $message)
+            TextField(L10n.Plugins.Luckydrop.enterMessage, text: $viewModel.message)
                 .frame(maxHeight: .infinity)
         }
         .frame(height: 52)
+        .padding(.horizontal, 16)
         .background(Asset.Colors.Background.dark.asColor().cornerRadius(8))
     }
     
@@ -89,7 +105,7 @@ struct LuckyDropTokens: View {
                     .font(FontStyles.mh5.font)
                     .foregroundColor(Asset.Colors.Text.normal.asColor())
                 Spacer()
-                Text("$18.8 (~32s)")
+                Text(viewModel.transactionInfoStr)
                     .font(FontStyles.bh6.font)
                     .foregroundColor(Asset.Colors.Text.dark.asColor())
                 Spacer().frame(width: 8)
@@ -106,10 +122,35 @@ struct LuckyDropTokens: View {
             .padding(.vertical, 32)
         }
     }
+    
+    @ViewBuilder
+    func buildGroupButton(_ mode: RedPacketType) -> some View {
+        Button {
+            viewModel.mode = mode
+        } label: {
+            HStack(spacing: 10) {
+                if viewModel.mode == mode {
+                    Asset.Icon.Cell.cellCheck.asImage()
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 24)
+                } else {
+                    Asset.Icon.Cell.cellUncheck.asImage()
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 24)
+                }
+                Text(mode.title)
+                    .font(FontStyles.bh5.font)
+                    .foregroundColor(Asset.Colors.Text.dark.asColor())
+                Spacer()
+            }
+        }
+    }
 }
 
 struct LuckyDropTokens_Previews: PreviewProvider {
     static var previews: some View {
-        LuckyDropTokens()
+        LuckyDropView()
     }
 }

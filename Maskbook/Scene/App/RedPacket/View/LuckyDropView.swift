@@ -12,30 +12,32 @@ struct LuckyDropView: View {
     @InjectedProvider(\.mainCoordinator)
     private var mainCoordinator
     
-    @State var segmentSize: CGSize = .zero
+    @StateObject var viewModel = LuckyDropViewModel()
     
     var body: some View {
         VStack(spacing: 0) {
-            VStack(spacing: 0) {
-                Spacer().frame(height: LayoutConstraints.top)
+            ScrollView {
                 LazyVStack(spacing: 0) {
+                    Spacer().frame(height: LayoutConstraints.top)
                     LuckyDropSegmentView()
                     tokensRow
                     PrimaryButton(action: {
                         mainCoordinator.present(scene: .pluginRiskWarning, transition: .popup)
                     }, title: L10n.Plugins.Luckydrop.Buttons.riskWarning)
                 }
-            }.padding(.horizontal, LayoutConstraints.horizontal)
-            Spacer()
+                .padding(.horizontal, LayoutConstraints.horizontal)
+            }
+            
             WalletBottomWidgetView()
                 .padding(.horizontal, 16)
         }
         .edgesIgnoringSafeArea(.bottom)
+        .background(Asset.Colors.Background.normal.asColor())
     }
     
     @ViewBuilder
     var tokensRow: some View {
-        LuckyDropTokens()
+        LuckyDropTokens(viewModel: viewModel)
     }
 }
 

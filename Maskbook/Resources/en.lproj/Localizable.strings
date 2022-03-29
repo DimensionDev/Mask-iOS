@@ -112,7 +112,9 @@
 "Common.Loading" = "Loading...";
 "Common.Toast.Copy" = "copied!";
 "Common.Toast.Saved" = "Saved!";
+"Plugins.Luckydrop.Buttons.Average" = "Average";
 "Plugins.Luckydrop.Buttons.Create-Persona" = "Create Persona";
+"Plugins.Luckydrop.Buttons.Random" = "Random";
 "Plugins.Luckydrop.Buttons.Recover-Persona" = "Recover Persona";
 "Plugins.Luckydrop.Buttons.Risk-Warning" = "Confirm Risk Warning";
 "Plugins.Luckydrop.Claimed" = "Claimed";

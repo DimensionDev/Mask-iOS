@@ -81,3 +81,17 @@ extension RedPacket {
         }
     }
 }
+
+extension RedPacket {
+    enum RedPacketType {
+        case average
+        case random
+        
+        var title: String {
+            switch self {
+            case .average: return L10n.Plugins.Luckydrop.Buttons.average
+            case .random: return L10n.Plugins.Luckydrop.Buttons.random
+            }
+        }
+    }
+}

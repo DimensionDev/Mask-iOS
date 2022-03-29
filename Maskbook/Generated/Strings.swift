@@ -652,9 +652,17 @@ enum L10n {
       }
 
       enum Buttons {
+        /// Average
+        static var average: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Average")
+        }
         /// Create Persona
         static var createPersona: String {
           return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Create-Persona")
+        }
+        /// Random
+        static var random: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Random")
         }
         /// Recover Persona
         static var recoverPersona: String {

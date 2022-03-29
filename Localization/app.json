@@ -866,7 +866,9 @@
             "buttons": {
                 "risk-warning": "Confirm Risk Warning",
                 "create-persona": "Create Persona",
-                "recover-persona": "Recover Persona"
+                "recover-persona": "Recover Persona",
+                "average": "Average",
+                "random": "Random"
             },
             "max": "MAX",
             "total-amount": "Total Amount",
