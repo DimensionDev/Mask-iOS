@@ -72,13 +72,13 @@ class PersonaAvatarViewController: BaseViewController {
             selectPhotoButton
                 .cv.apply {
                     NSLayoutConstraint.activate([
-                        $0.heightAnchor.constraint(equalToConstant: 46)
+                        $0.heightAnchor.constraint(equalToConstant: 48)
                     ])
                 }
             takePhotoButton
                 .cv.apply {
                     NSLayoutConstraint.activate([
-                        $0.heightAnchor.constraint(equalToConstant: 46)
+                        $0.heightAnchor.constraint(equalToConstant: 48)
                     ])
                 }
         }

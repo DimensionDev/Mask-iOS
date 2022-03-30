@@ -164,7 +164,7 @@ extension MainTabBarController {
             tabBar.select(at: index, animated: false)
         }
     }
-
+    
     override var selectedIndex: Int {
         willSet {
             guard let tabBar = tabBar as? MaskTabBar else {
