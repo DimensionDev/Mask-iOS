@@ -865,6 +865,7 @@
         "luckyDrop": {
             "buttons": {
                 "risk-warning": "Confirm Risk Warning",
+                "unlock-token": "Unlock %@",
                 "create-persona": "Create Persona",
                 "recover-persona": "Recover Persona",
                 "average": "Average",

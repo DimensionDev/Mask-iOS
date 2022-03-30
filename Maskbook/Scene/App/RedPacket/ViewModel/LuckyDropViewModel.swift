@@ -6,11 +6,13 @@
 //  Copyright © 2022 dimension. All rights reserved.
 //
 
-import Foundation
-import CoreDataStack
-import SwiftUI
-import Combine
 import BigInt
+import Combine
+import CoreDataStack
+import Foundation
+import SwiftUI
+import SwiftyJSON
+import web3swift
 
 class LuckyDropViewModel: NSObject, ObservableObject {
     @Published var quantityStr = ""
@@ -23,6 +25,7 @@ class LuckyDropViewModel: NSObject, ObservableObject {
     @Published var mode = RedPacket.RedPacketType.average
     @Published var token: Token?
     @Published var gasFeeItem: GasFeeCellItem?
+    @Published var buttonType: ConfirmButtonType = .send
     
     var gasFeeViewModel = GasFeeViewModel()
     
@@ -31,6 +34,7 @@ class LuckyDropViewModel: NSObject, ObservableObject {
     private var walletAssetManager: WalletAssetManager
     @InjectedProvider(\.userDefaultSettings)
     private var settings
+    private var nextButtonTypes: [ConfirmButtonType] = []
     
     var tokenStr: String {
         token?.name ?? ""
@@ -82,6 +86,24 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         }
     }
     
+    var contractInfo: JSON? {
+        if let redPacketConstantURL = Bundle.main.url(forResource: "red-packet", withExtension: "json"),
+           let data = try? Data(contentsOf: redPacketConstantURL) {
+            return try? JSON(data: data)
+        } else {
+            return nil
+        }
+    }
+    
+    var luckyDropAddressStr: String? {
+        let chainKey = maskUserDefaults.network.redPacketConstantKey
+        return contractInfo?["HAPPY_RED_PACKET_ADDRESS_V4"][chainKey].string
+    }
+    
+    var confirmTitle: String {
+        buttonType.title
+    }
+    
     override init() {
         super.init()
         let token = walletAssetManager.getMainToken(
@@ -98,6 +120,21 @@ class LuckyDropViewModel: NSObject, ObservableObject {
                 self?.gasFeeItem = gasFeeItem
             }
             .store(in: &disposeBag)
+        
+        // 1. unlock
+        settings.$passwordExpiredDate.sink { [weak self] _ in
+            guard let self = self else { return }
+            if self.settings.isPasswordExpried() && !self.nextButtonTypes.contains(.unlock) {
+                self.nextButtonTypes.insert(.unlock, at: 0)
+            } else if !self.settings.isPasswordExpried() && self.nextButtonTypes.contains(.unlock) {
+                self.nextButtonTypes.removeAll { type in
+                    type == .unlock
+                }
+            }
+        }
+        .store(in: &disposeBag)
+        processConfirmButtonTypes()
+        processNextButton()
     }
     
     func maxAmount() {
@@ -110,13 +147,81 @@ class LuckyDropViewModel: NSObject, ObservableObject {
             
         case .random:
             amountTotalShareStr = String.init(format: "%.6f", totalQuantity)
-            
         }
+    }
+    
+    private func processConfirmButtonTypes() {
+        // 2. confirm risk warnning
+        if settings.hasLuckyDropRiskConfirmed {
+            nextButtonTypes.append(.riskWarning)
+        }
+        
+        // 3. unlock tokens
+        processAproveButton()
+        
+        // 4. send
+        nextButtonTypes.append(.send)
+    }
+    
+    private func processNextButton() {
+        guard let type = nextButtonTypes.first else {
+            return
+        }
+        buttonType = type
+    }
+    
+    private func processAproveButton() {
+        guard let fromAddress = maskUserDefaults.defaultAccountAddress,
+              let originalOwner = EthereumAddress(fromAddress) else {
+                  return
+              }
+        guard let web3 = Web3ProviderFactory.provider else { return }
+        guard let contractAddressStr = token?.contractAddress,
+              let contractAddress = EthereumAddress(contractAddressStr) else {
+                  return
+              }
+        guard let luckyDropAddressStr = luckyDropAddressStr,
+              let luckyDropAddress = EthereumAddress(luckyDropAddressStr) else {
+                  return
+              }
+        let erc20 = ERC20(web3: web3, provider: web3.provider, address: contractAddress)
+        guard let allowance = try? erc20.getAllowance(originalOwner: originalOwner, delegate: luckyDropAddress) else {
+            return
+        }
+        guard allowance > 0 else {
+            return
+        }
+        
+        nextButtonTypes.append(.unlockToken)
+    }
+    
+    func removeButtonType(type: ConfirmButtonType) {
+        guard type != .send else { return }
+        nextButtonTypes.removeAll(where: { $0 == type })
+        processNextButton()
     }
 }
 
 extension LuckyDropViewModel: GasFeeBackDelegate {
     func getGasFeeAction(gasFeeModel: GasFeeCellItem) {
         gasFeeItem = gasFeeModel
+    }
+}
+
+extension LuckyDropViewModel {
+    enum ConfirmButtonType {
+        case unlock
+        case riskWarning
+        case unlockToken
+        case send
+        
+        var title: String {
+            switch self {
+            case .unlock: return L10n.Scene.WalletUnlock.title
+            case .riskWarning: return L10n.Plugins.Luckydrop.Buttons.riskWarning
+            case .unlockToken: return L10n.Scene.WalletUnlock.button
+            case .send: return L10n.Scene.WalletBalance.btnSend
+            }
+        }
     }
 }

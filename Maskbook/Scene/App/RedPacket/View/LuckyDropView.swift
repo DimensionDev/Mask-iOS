@@ -22,8 +22,23 @@ struct LuckyDropView: View {
                     LuckyDropSegmentView()
                     tokensRow
                     PrimaryButton(action: {
-                        mainCoordinator.present(scene: .pluginRiskWarning, transition: .popup)
-                    }, title: L10n.Plugins.Luckydrop.Buttons.riskWarning)
+                        switch viewModel.buttonType {
+                        case .unlock:
+                            Coordinator.main.present(
+                                scene: .walletUnlock(cancellable: true) { error in
+                                    viewModel.removeButtonType(type: .unlock)
+                                },
+                                transition: .modal(animated: true, adaptiveDelegate: nil)
+                            )
+                            
+                        case .riskWarning:
+                            mainCoordinator.present(scene: .pluginRiskWarning, transition: .popup)
+                            viewModel.removeButtonType(type: .riskWarning)
+                            
+                        case .unlockToken: return
+                        case .send: return
+                        }
+                    }, title: viewModel.confirmTitle)
                 }
                 .padding(.horizontal, LayoutConstraints.horizontal)
             }

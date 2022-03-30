@@ -91,6 +91,8 @@ final class UserDefaultSettings {
         case hasShownGuide
         
         case backupFileDetectDate
+        
+        case hasLuckyDropRiskConfirmed
     }
 
     func removeAll() {
@@ -245,7 +247,7 @@ final class UserDefaultSettings {
         self.recentlyAddresses = recentlyAddresses
     }
 
-    @OptionalUserDefault(key: .passwordExpiredDate)
+    @ReactiveUserDefault(key: .passwordExpiredDate, defaultValue: nil)
     var passwordExpiredDate: Date? {
         didSet {
             os_log(.debug, "[wallet-password] current expired date is: %s", passwordExpiredDate?.description ?? "nil")
@@ -258,6 +260,7 @@ final class UserDefaultSettings {
     }
 
     func isPasswordExpried() -> Bool {
+        return true
         guard let expiredDate = passwordExpiredDate else {
             return true
         }
@@ -338,6 +341,9 @@ final class UserDefaultSettings {
     
     @OptionalUserDefault(key: Keys.backupFileDetectDate.rawValue)
     var backupFileDetectDate: Date?
+    
+    @ReactiveUserDefault(key: Keys.hasLuckyDropRiskConfirmed.rawValue, defaultValue: false)
+    var hasLuckyDropRiskConfirmed: Bool
 }
 
 extension UserDefaultSettings {
