@@ -6,12 +6,16 @@
 //  Copyright © 2022 dimension. All rights reserved.
 //
 
+import BigInt
 import SwiftUI
 import Combine
 
 typealias RedPacketType = RedPacket.RedPacketType
 
 struct LuckyDropTokens: View {
+    @InjectedProvider(\.mainCoordinator)
+    private var mainCoordinator
+    
     @ObservedObject var viewModel: LuckyDropViewModel
     
     var maxColor: Color {
@@ -128,11 +132,23 @@ struct LuckyDropTokens: View {
                     .font(FontStyles.mh5.font)
                     .foregroundColor(Asset.Colors.Text.normal.asColor())
                 Spacer()
-                Text(viewModel.transactionInfoStr)
-                    .font(FontStyles.bh6.font)
-                    .foregroundColor(Asset.Colors.Text.dark.asColor())
-                Spacer().frame(width: 8)
-                Asset.Plugins.LuckyDrop.setting.asImage()
+                
+                Button {
+                    mainCoordinator.present(
+                        scene: .gasFee(
+                            delegate: viewModel,
+                            gasLimit: viewModel.gasLimit,
+                            viewModel: viewModel.gasFeeViewModel
+                        ),
+                        transition: .panModel(animated: true)
+                    )
+                } label: {
+                    Text(viewModel.gasFeeInfo)
+                        .font(FontStyles.bh6.font)
+                        .foregroundColor(Asset.Colors.Text.dark.asColor())
+                    Spacer().frame(width: 8)
+                    Asset.Plugins.LuckyDrop.setting.asImage()
+                }
             }
             HStack(spacing: 4) {
                 Text("10").font(FontStyles.bh1.font)

@@ -392,8 +392,8 @@ class GasFeeChooseViewController: UIViewController {
         $0.backgroundColor = Asset.Colors.Background.normal.color
     }
     
-    init() {
-        self.viewModel = ViewModel()
+    init(_ viewModel: ViewModel? = nil) {
+        self.viewModel = viewModel ?? ViewModel()
         super.init(nibName: nil, bundle: nil)
     }
      

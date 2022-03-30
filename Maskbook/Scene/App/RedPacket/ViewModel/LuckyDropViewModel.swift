@@ -9,24 +9,28 @@
 import Foundation
 import CoreDataStack
 import SwiftUI
+import Combine
+import BigInt
 
-class LuckyDropViewModel: ObservableObject {
-    @InjectedProvider(\.walletAssetManager)
-    private var walletAssetManager: WalletAssetManager
-    
-    @InjectedProvider(\.userDefaultSettings)
-    private var settings
-    
+class LuckyDropViewModel: NSObject, ObservableObject {
     @Published var quantityStr = ""
     // to be used in avaerage mode
     @Published var amountPerShareStr = ""
     // to be used in random mode
     @Published var amountTotalShareStr = ""
     @Published var message = ""
-    @Published var transactionInfoStr = "$18.8 (~32s)"
     @Published var totalAmountStr = ""
     @Published var mode = RedPacket.RedPacketType.average
     @Published var token: Token?
+    @Published var gasFeeItem: GasFeeCellItem?
+    
+    var gasFeeViewModel = GasFeeViewModel()
+    
+    private var disposeBag = Set<AnyCancellable>()
+    @InjectedProvider(\.walletAssetManager)
+    private var walletAssetManager: WalletAssetManager
+    @InjectedProvider(\.userDefaultSettings)
+    private var settings
     
     var tokenStr: String {
         token?.name ?? ""
@@ -39,13 +43,50 @@ class LuckyDropViewModel: ObservableObject {
         return quantity > 0 && amount > 0
     }
     
-    init() {
+    var gasFeeInfo: String {
+        guard let gasFeeItem = gasFeeItem else {
+            return ""
+        }
+        
+        guard let gasLimt = gasFeeViewModel.localGasFeeModel?.gasLimit else {
+            return ""
+        }
+        
+        guard let tokenPrice = token?.price as? Double else {
+            return ""
+        }
+        
+        let symbol = maskUserDefaults.currency.symbol
+        let gwei = gasFeeItem.gWei
+        let gasPrice = "~\(symbol)\(EthUtil.getGasFeeFiat(gwei: gwei, gasLimit: gasLimt, price: tokenPrice))"
+        let time = gasFeeItem.shortCostTime
+        
+        return "\(gasPrice) (\(time))"
+    }
+    
+    var gasLimit: BigUInt {
+        guard let gasLimitStr = gasFeeViewModel.gasFeePublisher.value?.gasLimit else {
+            return BigUInt(21_000)
+        }
+        return BigUInt(gasLimitStr) ?? BigUInt(21_000)
+    }
+    
+    override init() {
+        super.init()
         let token = walletAssetManager.getMainToken(
             network: settings.network,
             chainId: settings.network.chain.rawValue,
             networkId: Int(settings.network.networkId),
             context: AppContext.shared.coreDataStack.persistentContainer.viewContext)
         self.token = token
+        
+        gasFeeViewModel.refresh()
+        gasFeeViewModel.gasFeePublisher
+            .filter({ $0 != nil })
+            .prefix(1).sink { [weak self] gasFeeItem in
+                self?.gasFeeItem = gasFeeItem
+            }
+            .store(in: &disposeBag)
     }
     
     func maxAmount() {
@@ -60,5 +101,11 @@ class LuckyDropViewModel: ObservableObject {
             amountTotalShareStr = String.init(format: "%.6f", totalQuantity)
             
         }
+    }
+}
+
+extension LuckyDropViewModel: GasFeeBackDelegate {
+    func getGasFeeAction(gasFeeModel: GasFeeCellItem) {
+        gasFeeItem = gasFeeModel
     }
 }

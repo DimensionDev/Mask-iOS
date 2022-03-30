@@ -86,29 +86,34 @@ struct GasFeeCellItem: Hashable {
     var gWei: String
     var gasLimit: String
     var costTime: String
+    var shortCostTime: String
     
     init(gasFeeModel: GasFeeModel,
          type: ItemType) {
         switch type {
         case .low:
-                self.suggestedMaxFeePerGas = gasFeeModel.low.suggestedMaxFeePerGas
-                self.suggestedMaxPriorityFeePerGas = gasFeeModel.low.suggestedMaxPriorityFeePerGas
-                self.costTime = L10n.Scene.Sendtransaction.Sendconfirmpop.gasfeelow
-
+            self.suggestedMaxFeePerGas = gasFeeModel.low.suggestedMaxFeePerGas
+            self.suggestedMaxPriorityFeePerGas = gasFeeModel.low.suggestedMaxPriorityFeePerGas
+            self.costTime = L10n.Scene.Sendtransaction.Sendconfirmpop.gasfeelow
+            self.shortCostTime = "30s"
+            
         case .medium:
-                self.suggestedMaxFeePerGas = gasFeeModel.medium.suggestedMaxFeePerGas
-                self.suggestedMaxPriorityFeePerGas = gasFeeModel.medium.suggestedMaxPriorityFeePerGas
-                self.costTime = L10n.Scene.Sendtransaction.Sendconfirmpop.gasfeemedium
-
+            self.suggestedMaxFeePerGas = gasFeeModel.medium.suggestedMaxFeePerGas
+            self.suggestedMaxPriorityFeePerGas = gasFeeModel.medium.suggestedMaxPriorityFeePerGas
+            self.costTime = L10n.Scene.Sendtransaction.Sendconfirmpop.gasfeemedium
+            self.shortCostTime = "<30s"
+            
         case .high:
-                self.suggestedMaxFeePerGas = gasFeeModel.high.suggestedMaxFeePerGas
-                self.suggestedMaxPriorityFeePerGas = gasFeeModel.high.suggestedMaxPriorityFeePerGas
-                self.costTime = L10n.Scene.Sendtransaction.Sendconfirmpop.gasfeehigh
-
+            self.suggestedMaxFeePerGas = gasFeeModel.high.suggestedMaxFeePerGas
+            self.suggestedMaxPriorityFeePerGas = gasFeeModel.high.suggestedMaxPriorityFeePerGas
+            self.costTime = L10n.Scene.Sendtransaction.Sendconfirmpop.gasfeehigh
+            self.shortCostTime = "<15s"
+            
         default:
-                self.suggestedMaxFeePerGas = gasFeeModel.medium.suggestedMaxFeePerGas
-                self.suggestedMaxPriorityFeePerGas = gasFeeModel.medium.suggestedMaxPriorityFeePerGas
-                self.costTime = L10n.Scene.Sendtransaction.Sendconfirmpop.gasfeemedium
+            self.suggestedMaxFeePerGas = gasFeeModel.medium.suggestedMaxFeePerGas
+            self.suggestedMaxPriorityFeePerGas = gasFeeModel.medium.suggestedMaxPriorityFeePerGas
+            self.costTime = L10n.Scene.Sendtransaction.Sendconfirmpop.gasfeemedium
+            self.shortCostTime = "<30s"
         }
         self.estimatedBaseFee = gasFeeModel.estimatedBaseFee
         let gwei = NSDecimalNumber(string: estimatedBaseFee).adding(NSDecimalNumber(string: suggestedMaxPriorityFeePerGas))

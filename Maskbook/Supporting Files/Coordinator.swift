@@ -114,7 +114,7 @@ class Coordinator {
                                                 transaction: EthereumTransaction,
                                                 transactionOptions: TransactionOptions)
         case scanBase(delegate: ScannerLineViewControllerDelegate)
-        case gasFee(delegate: GasFeeBackDelegate?, gasLimit: BigUInt)
+        case gasFee(delegate: GasFeeBackDelegate?, gasLimit: BigUInt, viewModel: GasFeeViewModel? = nil)
         case rename(viewModel: RenameViewModel)
         case personaAction(viewModel: PersonasActionViewModel)
         case personaList
@@ -560,8 +560,8 @@ extension Coordinator {
         case let .safariView(url):
             return MaskSafariUtil.createSfSafariVC(url: url)
 
-        case let .gasFee(viewController, gasLimit):
-            let gasFee = GasFeeChooseViewController()
+        case let .gasFee(viewController, gasLimit, viewModel):
+            let gasFee = GasFeeChooseViewController(viewModel)
             gasFee.delegate = viewController
             gasFee.gasLimit = gasLimit
             return gasFee
