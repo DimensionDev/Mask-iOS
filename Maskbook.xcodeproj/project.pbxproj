@@ -618,7 +618,6 @@
 		5D61527327CF35FC001CB038 /* MoveBackupDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D61527227CF35FC001CB038 /* MoveBackupDataViewController.swift */; };
 		5D61527527CF3F91001CB038 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D61527427CF3F91001CB038 /* URL.swift */; };
 		5D61527927D06B7A001CB038 /* BackupFolderCheckService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D61527827D06B7A001CB038 /* BackupFolderCheckService.swift */; };
-		5D68E2A727F18CF3009AC193 /* UITabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D68E2A627F18CF3009AC193 /* UITabbarViewController.swift */; };
 		5D72F3C7265E3FE50073F6B9 /* KeyboardResponderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D72F3C6265E3FE50073F6B9 /* KeyboardResponderService.swift */; };
 		5D770B1127DED6F900539254 /* PersonaAvatarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D770B1027DED6F900539254 /* PersonaAvatarViewController.swift */; };
 		5D770B1327DED70400539254 /* PersonaAvatarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D770B1227DED70400539254 /* PersonaAvatarViewModel.swift */; };
@@ -1347,7 +1346,6 @@
 		5D61527227CF35FC001CB038 /* MoveBackupDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveBackupDataViewController.swift; sourceTree = "<group>"; };
 		5D61527427CF3F91001CB038 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		5D61527827D06B7A001CB038 /* BackupFolderCheckService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupFolderCheckService.swift; sourceTree = "<group>"; };
-		5D68E2A627F18CF3009AC193 /* UITabbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabbarViewController.swift; sourceTree = "<group>"; };
 		5D72F3C6265E3FE50073F6B9 /* KeyboardResponderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponderService.swift; sourceTree = "<group>"; };
 		5D770B1027DED6F900539254 /* PersonaAvatarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaAvatarViewController.swift; sourceTree = "<group>"; };
 		5D770B1227DED70400539254 /* PersonaAvatarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaAvatarViewModel.swift; sourceTree = "<group>"; };
@@ -3233,7 +3231,6 @@
 				5DE5E53927E4424300F2B62A /* CGAffineTransform+extensiion.swift */,
 				2AF8861B271EEDF80004565A /* Array+Safety.swift */,
 				2AF8861C271EEDF80004565A /* Publisher+extension.swift */,
-				5D68E2A627F18CF3009AC193 /* UITabbarViewController.swift */,
 				2AF8861D271EEDF80004565A /* NSLayoutConstraint.swift */,
 				2AF8861E271EEDF80004565A /* UIColor.swift */,
 				2AF8861F271EEDF80004565A /* UIImageView+Kingfisher.swift */,
@@ -4097,7 +4094,6 @@
 				1F3301DD27D860B600FA0652 /* ImageItem.swift in Sources */,
 				1F705FE327CF6AB9002A4A7E /* SpinWheelAnimator.swift in Sources */,
 				2AF8855D271EE9310004565A /* NetworkError.swift in Sources */,
-				5D68E2A727F18CF3009AC193 /* UITabbarViewController.swift in Sources */,
 				2AF88516271EE9310004565A /* SelectNetworkViewModel.swift in Sources */,
 				2AF88650271EEDF80004565A /* UIView+Shadow.swift in Sources */,
 				2A36E279275746750075E95B /* ChangePasswordStep1ViewController.swift in Sources */,
