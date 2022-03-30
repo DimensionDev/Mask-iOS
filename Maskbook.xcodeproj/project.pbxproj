@@ -639,6 +639,7 @@
 		5DB39E322786A8970025337C /* JSResourceSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E312786A8970025337C /* JSResourceSelectViewModel.swift */; };
 		5DCA069B27C75A8B007697C8 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCA069A27C75A8B007697C8 /* Toast.swift */; };
 		5DD1BBC227CF0843001DB330 /* Toast+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BBC127CF0843001DB330 /* Toast+Extension.swift */; };
+		5DD5A69627F407AB005952A0 /* String+Contains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD5A69527F407AB005952A0 /* String+Contains.swift */; };
 		5DE1D5A227A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE1D5A127A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift */; };
 		5DE2B10F27BA60AC002ACA54 /* View+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE2B10E27BA60AC002ACA54 /* View+Snapshot.swift */; };
 		5DE5395727473599005F4CEA /* PanModalPresentable+color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5395627473599005F4CEA /* PanModalPresentable+color.swift */; };
@@ -1367,6 +1368,7 @@
 		5DB39E312786A8970025337C /* JSResourceSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSResourceSelectViewModel.swift; sourceTree = "<group>"; };
 		5DCA069A27C75A8B007697C8 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		5DD1BBC127CF0843001DB330 /* Toast+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Toast+Extension.swift"; sourceTree = "<group>"; };
+		5DD5A69527F407AB005952A0 /* String+Contains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Contains.swift"; sourceTree = "<group>"; };
 		5DE1D5A127A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RedPacketInteractivePayload+Description.swift"; sourceTree = "<group>"; };
 		5DE2B10E27BA60AC002ACA54 /* View+Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Snapshot.swift"; sourceTree = "<group>"; };
 		5DE5395627473599005F4CEA /* PanModalPresentable+color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PanModalPresentable+color.swift"; sourceTree = "<group>"; };
@@ -3235,6 +3237,7 @@
 				2AF8861E271EEDF80004565A /* UIColor.swift */,
 				2AF8861F271EEDF80004565A /* UIImageView+Kingfisher.swift */,
 				2AF88620271EEDF80004565A /* String+Hex.swift */,
+				5DD5A69527F407AB005952A0 /* String+Contains.swift */,
 				2AF88621271EEDF80004565A /* UIButton+Padding.swift */,
 				2AF88622271EEDF80004565A /* String+Regex.swift */,
 				2AF88623271EEDF80004565A /* UITableView.swift */,
@@ -4041,6 +4044,7 @@
 				2AF884C5271EE9300004565A /* SocialProfileDetectCell.swift in Sources */,
 				2AF88641271EEDF80004565A /* String+Regex.swift in Sources */,
 				2D6677F727688FBE00528F4D /* WalletConnectSendResponseDelegate.swift in Sources */,
+				5DD5A69627F407AB005952A0 /* String+Contains.swift in Sources */,
 				1FCF0D5A27DF3B95007BF0E6 /* EmptyItem.swift in Sources */,
 				2A6ABBB52720053B00CC3AED /* MergeToLocalView.swift in Sources */,
 				1F58730F277C51A3005A7B11 /* DappScriptPayload.swift in Sources */,

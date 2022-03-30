@@ -64,9 +64,9 @@ class ContactsViewModel {
                         if text.isEmpty {
                             return true
                         }
-                        let isIdContains = profile.socialID.contains(text)
+                        let isIdContains = profile.socialID.containsIgnoreCase(string: text)
                         if let nickname = profile.nickname {
-                            return nickname.contains(text) || isIdContains
+                            return nickname.containsIgnoreCase(string: text) || isIdContains
                         }
                         return isIdContains
                     }
