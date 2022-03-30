@@ -193,15 +193,8 @@ class Coordinator {
         case moveBackupData
         case debug
     }
-
-    func setup(window: UIWindow, afterGuide: Bool = false) {
-        self.window = window
-        
-        if !afterGuide && !settings.hasShownGuide {
-            showGuide(window: window)
-            return
-        }
-
+    
+    func setupMainWindow(window: UIWindow) {
         let maskSocialVC = MaskSocialViewController(socialPlatform: settings.currentProfileSocialPlatform)
         let naviVC = NavigationController(rootViewController: maskSocialVC)
         window.rootViewController = naviVC
@@ -221,13 +214,23 @@ class Coordinator {
             UIApplication.getTopViewController()?.present(welcomeVC, animated: false, completion: nil)
         }
     }
+
+    func setup(window: UIWindow) {
+        self.window = window
+        
+        if !settings.hasShownGuide || !settings.didPresentWizard {
+            settings.hasShownGuide = true
+            settings.didPresentWizard = true
+            showGuide(window: window)
+            return
+        }
+        setupMainWindow(window: window)
+    }
     
     private func showGuide(window: UIWindow) {
         let guideVC = MaskHostViewController(rootView: GuideView() { [weak self] in
-        self?.setup(window: window, afterGuide: true)
-            self?.present(scene: .emptyIdentity, transition: .detail(animated: false), completion: {
-                self?.settings.hasShownGuide = true
-            })
+            self?.setupMainWindow(window: window)
+            self?.present(scene: .emptyIdentity, transition: .detail(animated: false))
         })
         window.rootViewController = guideVC
         window.makeKeyAndVisible()

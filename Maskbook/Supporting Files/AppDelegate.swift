@@ -91,8 +91,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        SplashViewController.didPresentWizard = false
 //        #endif
         
-        initilizeUserDefault()
-        
         // Coordinate to root
         #if DEBUG
         // use XCODE_RUNNING_FOR_PREVIEWS to detect preview proccess
@@ -105,6 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
 //        mainCoordinator.present(scene: .root(window: window, scene: .welcome), transition: .root)
 
+        initilizeUserDefault()
 
         // Enable orientation notification for QR scaner
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
@@ -199,7 +198,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate {
     private func initilizeUserDefault() {
-        userDefaultSettings.setupHasShownGuideValue()
         userDefaultSettings.appVersion = UIApplication.appVersion()
         userDefaultSettings.appBuild = UIApplication.appBuild()
         
