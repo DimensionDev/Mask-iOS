@@ -71,6 +71,17 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         return BigUInt(gasLimitStr) ?? BigUInt(21_000)
     }
     
+    var totalQuantity: String {
+        if mode == .average {
+            guard let quantity = Double(quantityStr) else { return "0.00" }
+            guard let amountPerShare = Double(amountPerShareStr) else { return "0.00" }
+            return String(format: "%.02f", quantity * amountPerShare)
+        } else {
+            guard let amountTotalShare = Double(amountTotalShareStr) else { return "0.00" }
+            return String(format: "%.02f", amountTotalShare)
+        }
+    }
+    
     override init() {
         super.init()
         let token = walletAssetManager.getMainToken(
