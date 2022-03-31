@@ -69,7 +69,13 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         
         let symbol = maskUserDefaults.currency.symbol
         let gwei = gasFeeItem.gWei
-        let gasPrice = "~\(symbol)\(EthUtil.getGasFeeFiat(gwei: gwei, gasLimit: gasLimt, price: tokenPrice))"
+        let gasPriceDoubleValue = Double(EthUtil.getGasFeeFiat(gwei: gwei, gasLimit: gasLimt, price: tokenPrice)) ?? 0
+        var gasPrice: String
+        if gasPriceDoubleValue < 0.01 {
+            gasPrice = "< \(symbol)0.01"
+        } else {
+            gasPrice = "~\(symbol)\(EthUtil.getGasFeeFiat(gwei: gwei, gasLimit: gasLimt, price: tokenPrice))"
+        }
         let time = gasFeeItem.shortCostTime
         
         return "\(gasPrice) (\(time))"
@@ -110,7 +116,16 @@ class LuckyDropViewModel: NSObject, ObservableObject {
     }
     
     var totalQuantity: String {
+        if totalQuantityDoubleValue < 0.01, totalQuantityDoubleValue > 0 {
+            return "< 0.01"
+        }
         return String(format: "%.02f", totalQuantityDoubleValue)
+    }
+    
+    var totalQuantityColor: Color {
+        totalQuantityDoubleValue == 0 ?
+            Asset.Colors.Text.normal.asColor() :
+            Asset.Colors.Text.dark.asColor()
     }
     
     var contractInfo: JSON? {
@@ -277,6 +292,12 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         processNextButton()
     }
     
+    func send() {
+        nextButtonTypes[.send] = false
+        nextButtonTypes[.sending] = true
+        processNextButton()
+    }
+    
     private func approveToken(password: String, network: BlockChainNetwork) {
         guard let fromAddress = maskUserDefaults.defaultAccountAddress,
               let fromAddressEthFormat = EthereumAddress(fromAddress) else {
@@ -349,7 +370,10 @@ extension LuckyDropViewModel {
         case riskWarning
         case unlockToken
         case unlockingToken
+        // TODO: send text
         case send
+        // TODO: sending text
+        case sending
         
         func title(token: Token?) -> String {
             switch self {
@@ -358,6 +382,7 @@ extension LuckyDropViewModel {
             case .unlockToken: return L10n.Plugins.Luckydrop.Buttons.unlockToken(token?.symbol ?? "")
             case .unlockingToken: return L10n.Plugins.Luckydrop.Buttons.unlockingToken
             case .send: return L10n.Scene.WalletBalance.btnSend
+            case .sending: return L10n.Scene.WalletBalance.btnSend
             }
         }
     }

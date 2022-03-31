@@ -37,7 +37,8 @@ struct LuckyDropView: View {
                             
                         case .unlockToken: viewModel.approveToken()
                         case .unlockingToken: break
-                        case .send: break
+                        case .send: break //TODO: send action
+                        case .sending: break
                         }
                     }, title: viewModel.confirmTitle, animating: viewModel.buttonAnimating)
                 }

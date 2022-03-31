@@ -162,7 +162,7 @@ struct LuckyDropTokens: View {
             }
             HStack(spacing: 4) {
                 Text(viewModel.totalQuantity).font(FontStyles.bh1.font)
-                    .foregroundColor(Asset.Colors.Text.dark.asColor())
+                    .foregroundColor(viewModel.totalQuantityColor)
                 Asset.Images.Scene.WalletList.Coins.ethSelected.asImage()
                     .resizable()
                     .aspectRatio(contentMode: .fit)
