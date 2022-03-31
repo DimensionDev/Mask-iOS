@@ -104,6 +104,10 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         buttonType.title
     }
     
+    var tokenURL: URL? {
+        URL(string: token?.logoUrl ?? "")
+    }
+    
     override init() {
         super.init()
         let token = walletAssetManager.getMainToken(
@@ -224,6 +228,16 @@ class LuckyDropViewModel: NSObject, ObservableObject {
 extension LuckyDropViewModel: GasFeeBackDelegate {
     func getGasFeeAction(gasFeeModel: GasFeeCellItem) {
         gasFeeItem = gasFeeModel
+    }
+}
+
+extension LuckyDropViewModel: ChooseTokenBackDelegate {
+    func chooseTokenAction(token: Token) {
+        self.token = token
+    }
+    
+    func chooseNFTTokenAction(token: Collectible) {
+        
     }
 }
 

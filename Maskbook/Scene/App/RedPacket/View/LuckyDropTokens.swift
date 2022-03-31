@@ -9,6 +9,7 @@
 import BigInt
 import SwiftUI
 import Combine
+import Kingfisher
 
 typealias RedPacketType = RedPacket.RedPacketType
 
@@ -49,20 +50,29 @@ struct LuckyDropTokens: View {
         .frame(height: 32)
     }
     
-    lazy var aa = $viewModel.amountPerShareStr
-    
     @ViewBuilder
     var tokenRow: some View {
         HStack(spacing: 0) {
-            Asset.Images.Scene.WalletList.Coins.ethSelected.asImage()
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 24)
-            Spacer().frame(width: 8)
-            Text(viewModel.tokenStr).foregroundColor(Asset.Colors.Text.dark.asColor())
-                .font(FontStyles.bh5.font)
-            Spacer().frame(width: 4)
-            Asset.Icon.Arrows.down1.asImage()
+            Button {
+                Coordinator.main.present(
+                    scene: .sendTransacationTokenlist(delegate: viewModel, isNftList: false),
+                    transition: .detail(animated: true)
+                )
+            } label: {
+                if let url = viewModel.tokenURL {
+                    KFImage(url)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 24)
+                        .cornerRadius(12)
+                }
+                Spacer().frame(width: 8)
+                Text(viewModel.tokenStr).foregroundColor(Asset.Colors.Text.dark.asColor())
+                    .font(FontStyles.bh5.font)
+                Spacer().frame(width: 4)
+                Asset.Icon.Arrows.down1.asImage()
+            }
+            
             Button {
                 viewModel.maxAmount()
             } label: {
