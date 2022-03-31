@@ -117,7 +117,8 @@
 "Plugins.Luckydrop.Buttons.Random" = "Random";
 "Plugins.Luckydrop.Buttons.Recover-Persona" = "Recover Persona";
 "Plugins.Luckydrop.Buttons.Risk-Warning" = "Confirm Risk Warning";
-"Plugins.Luckydrop.Buttons.Unlock-Token" = "Unlock %@";
+"Plugins.Luckydrop.Buttons.Unlock-Token" = "Approve %@";
+"Plugins.Luckydrop.Buttons.Unlocking-Token" = "Approving";
 "Plugins.Luckydrop.Claimed" = "Claimed";
 "Plugins.Luckydrop.End-Time" = "End Time";
 "Plugins.Luckydrop.Enter-Message" = "Enter attached message";

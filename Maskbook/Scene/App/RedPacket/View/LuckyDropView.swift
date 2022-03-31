@@ -35,10 +35,11 @@ struct LuckyDropView: View {
                             mainCoordinator.present(scene: .pluginRiskWarning, transition: .popup)
                             viewModel.removeButtonType(type: .riskWarning)
                             
-                        case .unlockToken: return
-                        case .send: return
+                        case .unlockToken: viewModel.approveToken()
+                        case .unlockingToken: break
+                        case .send: break
                         }
-                    }, title: viewModel.confirmTitle)
+                    }, title: viewModel.confirmTitle, animating: viewModel.buttonAnimating)
                 }
                 .padding(.horizontal, LayoutConstraints.horizontal)
             }

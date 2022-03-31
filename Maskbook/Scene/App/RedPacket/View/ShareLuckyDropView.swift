@@ -22,11 +22,11 @@ struct ShareLuckyDropView: View {
             Spacer().frame(height: 20)
             PrimaryButton(action: {
                 
-            }, title: L10n.Plugins.Luckydrop.Buttons.createPersona)
+            }, title: L10n.Plugins.Luckydrop.Buttons.createPersona, animating: false)
             Spacer().frame(height: 20)
             PrimaryButton(action: {
                 
-            }, title: L10n.Plugins.Luckydrop.Buttons.recoverPersona)
+            }, title: L10n.Plugins.Luckydrop.Buttons.recoverPersona, animating: false)
         }
         .padding(.horizontal, 20)
     }

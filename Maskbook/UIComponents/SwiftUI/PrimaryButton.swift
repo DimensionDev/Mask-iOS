@@ -11,13 +11,22 @@ import SwiftUI
 struct PrimaryButton: View {
     let action: () -> Void
     let title: String
+    let animating: Bool
     
     var body: some View {
         Button(action: action) {
-            Text(title).font(FontStyles.bh5.font)
-                .foregroundColor(Color.white)
-                .frame(maxWidth: .infinity)
-                .frame(height: 54)
+            HStack(spacing: 0) {
+                Spacer()
+                Text(title).font(FontStyles.bh5.font)
+                    .foregroundColor(Color.white)
+                    .frame(height: 54)
+                if animating {
+                    Spacer().frame(width: 8)
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                }
+                Spacer()
+            }
         }
         .background(Asset.Colors.Background.blue.asColor())
         .cornerRadius(8)
@@ -28,6 +37,6 @@ struct PrimaryButton_Previews: PreviewProvider {
     static var previews: some View {
         PrimaryButton(action: {
             
-        }, title: "Confirm Risk Warning")
+        }, title: "Confirm Risk Warning", animating: true)
     }
 }

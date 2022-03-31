@@ -258,10 +258,10 @@ final class UserDefaultSettings {
         passwordExpiredDate = Date().addingTimeInterval(30 * 60)
         os_log(.debug, "[wallet-password] reset wallet password expired date %s", passwordExpiredDate?.description ?? "nil")
     }
-
-    func isPasswordExpried() -> Bool {
-        return true
-        guard let expiredDate = passwordExpiredDate else {
+    
+    func isPasswordExpried(_ expiredDate: Date? = nil) -> Bool {
+        // fixed: Simultaneous accesses to 0x1068319f0, but modification requires exclusive access.
+        guard let expiredDate = expiredDate ?? passwordExpiredDate else {
             return true
         }
 

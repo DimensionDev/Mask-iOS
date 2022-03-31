@@ -676,9 +676,13 @@ enum L10n {
         static var riskWarning: String {
           return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Risk-Warning")
         }
-        /// Unlock %@
+        /// Approve %@
         static func unlockToken(_ p1: String) -> String {
           return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Unlock-Token", p1)
+        }
+        /// Approving
+        static var unlockingToken: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Unlocking-Token")
         }
       }
     }

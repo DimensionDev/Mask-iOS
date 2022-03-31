@@ -26,7 +26,7 @@ final class SendConfirmPopViewController: UIViewController {
     var vault
     var disposeBag = Set<AnyCancellable>()
     private var web3Request: MaskWeb3MessageRequest?
-    private weak var resolver: Resolver<String>?
+    private var resolver: Resolver<String>?
 
     weak var web3delegate: SendConfirmPopViewDelegate?
     
