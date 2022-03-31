@@ -153,14 +153,14 @@ class LuckyDropViewModel: NSObject, ObservableObject {
     private func processConfirmButtonTypes() {
         // 2. confirm risk warnning
         if settings.hasLuckyDropRiskConfirmed {
-            nextButtonTypes.append(.riskWarning)
+            insertButtonType(type: .riskWarning, afterType: .unlock)
         }
         
         // 3. unlock tokens
         processAproveButton()
         
         // 4. send
-        nextButtonTypes.append(.send)
+        insertButtonType(type: .send, afterType: .unlockToken)
     }
     
     private func processNextButton() {
@@ -185,20 +185,39 @@ class LuckyDropViewModel: NSObject, ObservableObject {
                   return
               }
         let erc20 = ERC20(web3: web3, provider: web3.provider, address: contractAddress)
-        guard let allowance = try? erc20.getAllowance(originalOwner: originalOwner, delegate: luckyDropAddress) else {
-            return
-        }
-        guard allowance > 0 else {
-            return
-        }
         
-        nextButtonTypes.append(.unlockToken)
+        Task {
+            guard let allowance = try? erc20.getAllowance(originalOwner: originalOwner, delegate: luckyDropAddress) else {
+                return
+            }
+            guard allowance > 0 else {
+                return
+            }
+            
+            await MainActor.run {
+                insertButtonType(type: .unlockToken, afterType: .riskWarning)
+            }
+        }
     }
     
     func removeButtonType(type: ConfirmButtonType) {
         guard type != .send else { return }
         nextButtonTypes.removeAll(where: { $0 == type })
         processNextButton()
+    }
+    
+    private func insertButtonType(type: ConfirmButtonType, afterType: ConfirmButtonType?) {
+        guard let afterType = afterType else {
+            nextButtonTypes.append(type)
+            return
+        }
+        
+        guard let index = nextButtonTypes.firstIndex(where: { $0 == afterType }) else {
+            nextButtonTypes.append(type)
+            return
+        }
+        
+        nextButtonTypes.insert(type, at: index + 1)
     }
 }
 
