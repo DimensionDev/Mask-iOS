@@ -121,19 +121,25 @@ extension LocalBackupViewModel {
     }
 
     func writeDataTo(url: URL) -> AnyPublisher<Void, Error> {
-        Publishers.CombineLatest3(
+        return Publishers.CombineLatest4(
             vault.getValue(for: .backupPassword).setFailureType(to: Error.self),
             getWalletInfo(),
             LazyFuture { [weak self] promise in
                 promise(.success(self?.backupData.value ?? .init()))
             }
             .setFailureType(to: Error.self)
+            .eraseToAnyPublisher(),
+            Just(()).asyncMap({ _ in
+                return await BackupDataGenerator.generate()
+            })
             .eraseToAnyPublisher()
         )
-        .tryMap { backupPassword, wallets, backup -> (String, [String: Any]) in
+        .tryMap { backupPassword, wallets, backup, nativeBackup -> (String, [String: Any]) in
             guard let password = backupPassword,
-                  let content = backup.merge(wallets)?.rawValue as? [String: Any] else {
-                      throw WriteBackupError.fail
+                  let content = backup.merge(nativeJson: nativeBackup,
+                                             wallets: wallets)?.rawValue as? [String: Any]
+            else {
+                throw WriteBackupError.fail
             }
             return (password, content)
         }
@@ -220,15 +226,19 @@ extension LocalBackupViewModel {
             vault.getValue(for: .backupPassword).setFailureType(to: Error.self),
             getWalletInfo(),
             Just(backupData.value).setFailureType(to: Error.self),
-            Just(cloudVerifyResult).setFailureType(to: Error.self)
+            Just(()).asyncMap({ _ in
+                return await BackupDataGenerator.generate()
+            })
+            .eraseToAnyPublisher()
         )
-        .tryMap { backupPassword, wallets, backup, cloudVerifyResult -> (String, [String: Any], CloudVerifyResult) in
-            guard let cloudVerifyResult = cloudVerifyResult else {
+        .tryMap { [weak self] backupPassword, wallets, backup, nativeJson -> (String, [String: Any], CloudVerifyResult) in
+            guard let cloudVerifyResult = self?.cloudVerifyResult else {
                 throw RemoteBackupError.invalidParam
             }
 
             guard let password = backupPassword,
-                  let content = backup.merge(wallets)?.rawValue as? [String: Any] else {
+                  let content = backup.merge(nativeJson: nativeJson,
+                                             wallets: wallets)?.rawValue as? [String: Any] else {
                     throw WriteBackupError.fail
             }
 
@@ -272,7 +282,7 @@ extension LocalBackupViewModel {
         _ backupPublisher: AnyPublisher<(MaskWebMessageResult, Int), Never>
     ) -> AnyPublisher<MaskWebMessageResult, Never> {
         backupPublisher.flatMap { result, _ -> AnyPublisher<MaskWebMessageResult, Never> in
-            GetBackupPreviewInfo.withPayload {
+            return GetBackupPreviewInfo.withPayload {
                 .init(backupInfo: result.result?.rawString())
             }
             .asAnyPublisher()
@@ -288,16 +298,18 @@ extension LocalBackupViewModel {
 
         var walletsSelected = false
 
-        func merge(_ wallets: [WalletBackupInfo]) -> JSON? {
+        func merge(nativeJson: JSON,
+                   wallets: [WalletBackupInfo]) -> JSON? {
+            let dataWithoutWallets = try? rawData?.merged(with: nativeJson)
             guard walletsSelected,
                   !wallets.isEmpty else {
-                return rawData
+                return dataWithoutWallets
             }
 
-            guard let json = wallets.wrappedIntoJSON() else {
-                return rawData
+            guard let walletsJson = wallets.wrappedIntoJSON() else {
+                return dataWithoutWallets
             }
-            return try? rawData?.merged(with: json)
+            return try? dataWithoutWallets?.merged(with: walletsJson)
         }
 
         var isWalletEmpty: Bool { nativeWalletsCount == 0 }

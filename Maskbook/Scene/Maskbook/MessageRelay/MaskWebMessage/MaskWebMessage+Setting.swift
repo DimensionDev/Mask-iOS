@@ -143,6 +143,7 @@ extension WebExtension.Setting {
             let noWallets: Bool
             let noPersonas: Bool
             let noProfiles: Bool
+            let noRelations: Bool
             let hasPrivateKeyOnly: Bool
         }
         
@@ -161,10 +162,11 @@ extension WebExtension.Setting {
 extension WebExtension.Setting.SettingsCreateBackup.BackupOptions {
     static var `default`: Self {
         .init(
-            noPosts: false,
+            noPosts: true,
             noWallets: true,
-            noPersonas: false,
-            noProfiles: false,
+            noPersonas: true,
+            noProfiles: true,
+            noRelations: true,
             hasPrivateKeyOnly: false
         )
     }

@@ -9,6 +9,7 @@
 import CoreData
 import CoreDataStack
 import Foundation
+import SwiftyJSON
 
 enum RelationRepository {
     static let viewContext = AppContext.shared.coreDataStack.persistentContainer.viewContext
@@ -105,4 +106,39 @@ enum RelationRepository {
         }
     }
     
+    static func getRelationshipCount() async -> Int {
+        await withCheckedContinuation { continuation in
+            let fetchRequest = RelationRecord.sortedFetchRequest
+            
+            var count = 0
+            backgroundContext.performAndWait {
+                count = (try? backgroundContext.count(for: fetchRequest)) ?? 0
+            }
+            continuation.resume(returning: count)
+        }
+    }
+    
+    static func getRelationBackup() async -> [JSON] {
+        await withCheckedContinuation { continuation in
+            var relations: [JSON] = []
+            let fetchRequest = RelationRecord.sortedFetchRequest
+            
+            backgroundContext.performAndWait {
+                if let relationRecords = try? backgroundContext.fetch(fetchRequest) {
+                    relations = relationRecords.compactMap { $0.getBackupJson() }
+                }
+            }
+            continuation.resume(returning: relations)
+        }
+    }
+}
+
+extension RelationRecord {
+    func getBackupJson() -> JSON? {
+        var backupDict = [String: Any]()
+        backupDict["favor"] = favor ? 1 : 0
+        backupDict["persona"] = personaIdentifier
+        backupDict["profile"] = profileIdentifier
+        return JSON(backupDict)
+    }
 }
