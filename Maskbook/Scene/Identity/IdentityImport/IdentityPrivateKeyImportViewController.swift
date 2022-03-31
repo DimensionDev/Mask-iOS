@@ -16,7 +16,7 @@ class IdentityPrivateKeyImportViewController: BaseViewController {
     @InjectedProvider(\.mainCoordinator)
     private var coordinator
     
-    private var personaImportPrivateKeyHandle = PersonaImportPrivateKeyHandler(scene: .userInput)
+    private var personaImportHandler = PersonaImportHandler(scene: .userInput)
     
     lazy var textView: UITextView = {
         let view = RSKPlaceholderTextView()
@@ -89,7 +89,8 @@ private extension IdentityPrivateKeyImportViewController {
         if text.isEmpty {
             return
         }
-        personaImportPrivateKeyHandle.restoreFromPrivateKey(text: text)
+        let personaImportItem = PersonaImportItem(type: .privateKey(privateKey: text))
+        personaImportHandler.checkExistAndRestore(from: personaImportItem)
     }
 }
 

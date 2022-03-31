@@ -538,7 +538,7 @@
 		2D6677FB27688FBE00528F4D /* WalletConnectUtils.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6677F327688FBE00528F4D /* WalletConnectUtils.swift.swift */; };
 		2D6677FC27688FBE00528F4D /* WalletConnectServerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6677F427688FBE00528F4D /* WalletConnectServerController.swift */; };
 		2D6E31DA2799638C00A70187 /* SchemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6E31D92799638C00A70187 /* SchemeService.swift */; };
-		2D6E31DD279974FD00A70187 /* PersonaImportPrivateKeyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6E31DC279974FD00A70187 /* PersonaImportPrivateKeyHandler.swift */; };
+		2D6E31DD279974FD00A70187 /* PersonaImportHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6E31DC279974FD00A70187 /* PersonaImportHandler.swift */; };
 		2D6F4B1526D3B60700F32200 /* ProfileSocialPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6F4B1426D3B60700F32200 /* ProfileSocialPlatform.swift */; };
 		2D86E0C627716ABE005D3710 /* WalletConnectSelectAccountCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D86E0C527716ABE005D3710 /* WalletConnectSelectAccountCollectionCell.swift */; };
 		2D8A5B56277AFD68000EB9F4 /* WalletConnectClientUIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8A5B55277AFD68000EB9F4 /* WalletConnectClientUIDelegate.swift */; };
@@ -640,6 +640,7 @@
 		5DCA069B27C75A8B007697C8 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCA069A27C75A8B007697C8 /* Toast.swift */; };
 		5DD1BBC227CF0843001DB330 /* Toast+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BBC127CF0843001DB330 /* Toast+Extension.swift */; };
 		5DD5A69627F407AB005952A0 /* String+Contains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD5A69527F407AB005952A0 /* String+Contains.swift */; };
+		5DD5A69827F53168005952A0 /* PersonaImportItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD5A69727F53168005952A0 /* PersonaImportItem.swift */; };
 		5DE1D5A227A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE1D5A127A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift */; };
 		5DE2B10F27BA60AC002ACA54 /* View+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE2B10E27BA60AC002ACA54 /* View+Snapshot.swift */; };
 		5DE5395727473599005F4CEA /* PanModalPresentable+color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5395627473599005F4CEA /* PanModalPresentable+color.swift */; };
@@ -1272,7 +1273,7 @@
 		2D6677F327688FBE00528F4D /* WalletConnectUtils.swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletConnectUtils.swift.swift; sourceTree = "<group>"; };
 		2D6677F427688FBE00528F4D /* WalletConnectServerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletConnectServerController.swift; sourceTree = "<group>"; };
 		2D6E31D92799638C00A70187 /* SchemeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemeService.swift; sourceTree = "<group>"; };
-		2D6E31DC279974FD00A70187 /* PersonaImportPrivateKeyHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaImportPrivateKeyHandler.swift; sourceTree = "<group>"; };
+		2D6E31DC279974FD00A70187 /* PersonaImportHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaImportHandler.swift; sourceTree = "<group>"; };
 		2D6F4B1426D3B60700F32200 /* ProfileSocialPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSocialPlatform.swift; sourceTree = "<group>"; };
 		2D86E0C527716ABE005D3710 /* WalletConnectSelectAccountCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletConnectSelectAccountCollectionCell.swift; sourceTree = "<group>"; };
 		2D8A5B55277AFD68000EB9F4 /* WalletConnectClientUIDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletConnectClientUIDelegate.swift; sourceTree = "<group>"; };
@@ -1369,6 +1370,7 @@
 		5DCA069A27C75A8B007697C8 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		5DD1BBC127CF0843001DB330 /* Toast+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Toast+Extension.swift"; sourceTree = "<group>"; };
 		5DD5A69527F407AB005952A0 /* String+Contains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Contains.swift"; sourceTree = "<group>"; };
+		5DD5A69727F53168005952A0 /* PersonaImportItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaImportItem.swift; sourceTree = "<group>"; };
 		5DE1D5A127A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RedPacketInteractivePayload+Description.swift"; sourceTree = "<group>"; };
 		5DE2B10E27BA60AC002ACA54 /* View+Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Snapshot.swift"; sourceTree = "<group>"; };
 		5DE5395627473599005F4CEA /* PanModalPresentable+color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PanModalPresentable+color.swift"; sourceTree = "<group>"; };
@@ -1691,7 +1693,8 @@
 				2AF88343271EE9300004565A /* PersonaManager+Restore.swift */,
 				2AF88344271EE9300004565A /* PersonaManager+Backup.swift */,
 				2AF88351271EE9300004565A /* PersonaManager.swift */,
-				2D6E31DC279974FD00A70187 /* PersonaImportPrivateKeyHandler.swift */,
+				2D6E31DC279974FD00A70187 /* PersonaImportHandler.swift */,
+				5DD5A69727F53168005952A0 /* PersonaImportItem.swift */,
 				5D7F5A5027B6531E00A007C5 /* PersonaCreateHandler.swift */,
 				5D9A88DB27BB4AE200879068 /* PersonaDownloadHandler.swift */,
 				5D7F5A5227B66C5600A007C5 /* PersonaKeyInfoPreview.swift */,
@@ -4156,6 +4159,7 @@
 				2AF884E2271EE9310004565A /* MarketDataproviderSheet.swift in Sources */,
 				2A6ABB902720053B00CC3AED /* MaskServiceRequest.swift in Sources */,
 				2AF884EB271EE9310004565A /* SwapProviderListView.swift in Sources */,
+				5DD5A69827F53168005952A0 /* PersonaImportItem.swift in Sources */,
 				0F2051AD265E325900602A0C /* MaskWalletAccount.swift in Sources */,
 				5D93DF9E267B2B5000A175BF /* MaskTextField.swift in Sources */,
 				2D86E0C627716ABE005D3710 /* WalletConnectSelectAccountCollectionCell.swift in Sources */,
@@ -4244,7 +4248,7 @@
 				5D770B1327DED70400539254 /* PersonaAvatarViewModel.swift in Sources */,
 				2AF885FE271EED7D0004565A /* ExamplePopControler.swift in Sources */,
 				2AF88563271EE9310004565A /* SendContactListTableViewCell.swift in Sources */,
-				2D6E31DD279974FD00A70187 /* PersonaImportPrivateKeyHandler.swift in Sources */,
+				2D6E31DD279974FD00A70187 /* PersonaImportHandler.swift in Sources */,
 				1F036397277ABB99001E8A88 /* LabsBrowserController.swift in Sources */,
 				1F3301E327D8631200FA0652 /* ContentTextItem.swift in Sources */,
 				2AF8851F271EE9310004565A /* TokenCardView.swift in Sources */,
