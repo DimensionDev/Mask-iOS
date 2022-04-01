@@ -237,6 +237,7 @@
 		2A72F40227BE8323004A3F95 /* ColletibleIconContentControllerHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A72F40127BE8323004A3F95 /* ColletibleIconContentControllerHandler.swift */; };
 		2A7310082685B83200C5354A /* PasswordFormItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7310072685B83200C5354A /* PasswordFormItemView.swift */; };
 		2A852ADF2721775F00EE7EEC /* MaskSocialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A852ADE2721775F00EE7EEC /* MaskSocialViewModel.swift */; };
+		2A94BDBC27F73A3B00928487 /* UserDefaultSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A94BDBB27F73A3B00928487 /* UserDefaultSettings.swift */; };
 		2A96348F27A26A5C0019C4CA /* red-packet.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A96348D27A26A5B0019C4CA /* red-packet.json */; };
 		2A96349027A26A5C0019C4CA /* HappyRedPacketV4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A96348E27A26A5B0019C4CA /* HappyRedPacketV4.swift */; };
 		2A96349427A26ACE0019C4CA /* HappyRedPacketV4.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A96349327A26ACE0019C4CA /* HappyRedPacketV4.json */; };
@@ -970,6 +971,7 @@
 		2A72F40127BE8323004A3F95 /* ColletibleIconContentControllerHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColletibleIconContentControllerHandler.swift; sourceTree = "<group>"; };
 		2A7310072685B83200C5354A /* PasswordFormItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFormItemView.swift; sourceTree = "<group>"; };
 		2A852ADE2721775F00EE7EEC /* MaskSocialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskSocialViewModel.swift; sourceTree = "<group>"; };
+		2A94BDBB27F73A3B00928487 /* UserDefaultSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultSettings.swift; sourceTree = "<group>"; };
 		2A96348D27A26A5B0019C4CA /* red-packet.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "red-packet.json"; sourceTree = "<group>"; };
 		2A96348E27A26A5B0019C4CA /* HappyRedPacketV4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HappyRedPacketV4.swift; sourceTree = "<group>"; };
 		2A96349327A26ACE0019C4CA /* HappyRedPacketV4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = HappyRedPacketV4.json; sourceTree = "<group>"; };
@@ -3586,6 +3588,7 @@
 				1FCCE38326D4C5AD00909A5B /* CloudRestoreVerifyTests.swift */,
 				2A4145F726D7880800708337 /* CryptoTests.swift */,
 				2ACA1E1127182F01000C0ECC /* PasswordTests.swift */,
+				2A94BDBB27F73A3B00928487 /* UserDefaultSettings.swift */,
 			);
 			path = MaskbookTests;
 			sourceTree = "<group>";
@@ -4621,6 +4624,7 @@
 				DBAAF4AA22C35A7100017594 /* MaskbookTests.swift in Sources */,
 				1FCCE38426D4C5AD00909A5B /* CloudRestoreVerifyTests.swift in Sources */,
 				2ACA1E1227182F01000C0ECC /* PasswordTests.swift in Sources */,
+				2A94BDBC27F73A3B00928487 /* UserDefaultSettings.swift in Sources */,
 				2A4145F826D7880800708337 /* CryptoTests.swift in Sources */,
 				1FE54D58269BF0140041C742 /* NSDiffableSourceSnapshotTests.swift in Sources */,
 			);

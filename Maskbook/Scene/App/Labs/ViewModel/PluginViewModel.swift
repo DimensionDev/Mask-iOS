@@ -72,7 +72,7 @@ final class PluginViewModel: ObservableObject {
     }
 
     private func syncPluginEnableStatus() {
-        if userSetting.pluginRiskWarningAwared {
+        if userSetting.hasRiskConfirmed {
             // if risk is awared, just need to notify js
             updatePluginStatus()
             return

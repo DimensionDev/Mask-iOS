@@ -158,7 +158,7 @@ final class PluginAlertViewController: AlertPopupController {
 
         confirmButton.cv.tap()
             .sink { [weak self] _ in
-                self?.userSettings.pluginRiskWarningAwared = true
+                self?.userSettings.hasRiskConfirmed = true
                 self?.hide()
             }
             .store(in: &subscriptionSet)

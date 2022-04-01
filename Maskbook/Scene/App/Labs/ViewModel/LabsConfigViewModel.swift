@@ -78,6 +78,15 @@ final class LabsConfigViewModel: ObservableObject {
 
     private func buildPluginRiskWarningEventStream() {
         let riskWarningSignal = userSetting.$pluginRiskWarningAwared
+            .compactMap { [weak self] accounts -> Bool in
+                // Avoiding to use `hasRiskConfirmed`.
+                // If use `hasRiskConfirmed` here will cause a crash as accessing `pluginRiskWarningAwared` simultaneously.
+                guard let self = self else { return false }
+                guard let address = self.userSetting.defaultAccountAddress else {
+                    return false
+                }
+                return accounts.contains(address)
+            }
             .asDriver()
             .share()
 

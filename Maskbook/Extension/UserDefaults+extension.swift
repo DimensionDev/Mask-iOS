@@ -91,8 +91,6 @@ final class UserDefaultSettings {
         case hasShownGuide
         
         case backupFileDetectDate
-        
-        case hasLuckyDropRiskConfirmed
     }
 
     func removeAll() {
@@ -269,8 +267,8 @@ final class UserDefaultSettings {
     }
 
     // Risk warning moved out from plugins view, temporarily set this default to true
-    @ReactiveUserDefault(key: .pluginRiskWarningAwared, defaultValue: true)
-    var pluginRiskWarningAwared: Bool
+    @ReactiveUserDefault(key: .pluginRiskWarningAwared, defaultValue: [])
+    var pluginRiskWarningAwared: [String]
 
     @ReactiveUserDefault(key: .hasBackupPassword, defaultValue: false)
     var hasBackupPassword: Bool
@@ -341,9 +339,6 @@ final class UserDefaultSettings {
     
     @OptionalUserDefault(key: Keys.backupFileDetectDate.rawValue)
     var backupFileDetectDate: Date?
-    
-    @ReactiveUserDefault(key: Keys.hasLuckyDropRiskConfirmed.rawValue, defaultValue: false)
-    var hasLuckyDropRiskConfirmed: Bool
 }
 
 extension UserDefaultSettings {
@@ -424,6 +419,24 @@ extension UserDefaultSettings {
             .removeDuplicates()
             .share()
             .eraseToAnyPublisher()
+    }
+    
+    var hasRiskConfirmed: Bool {
+        get {
+            guard let address = defaultAccountAddress else { return false }
+            return pluginRiskWarningAwared.contains(address)
+        }
+        
+        set {
+            guard let address = defaultAccountAddress else { return }
+            if newValue {
+                guard !pluginRiskWarningAwared.contains(address) else { return }
+                pluginRiskWarningAwared.append(address)
+            } else {
+                guard pluginRiskWarningAwared.contains(address) else { return }
+                pluginRiskWarningAwared.removeAll(where: { $0 == address })
+            }
+        }
     }
 }
 

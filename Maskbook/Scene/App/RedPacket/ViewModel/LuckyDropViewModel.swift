@@ -48,6 +48,10 @@ class LuckyDropViewModel: NSObject, ObservableObject {
     }
     
     var maxButtonEnable: Bool {
+        guard mode == .average else {
+            return true
+        }
+        
         guard let quantity = Int(quantityStr), let amount = token?.quantity?.doubleValue else {
             return false
         }
@@ -206,7 +210,7 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         }
         
         // 2. confirm risk warnning
-        if settings.hasLuckyDropRiskConfirmed {
+        if !settings.hasRiskConfirmed {
             nextButtonTypes[.riskWarning] = true
         }
         
