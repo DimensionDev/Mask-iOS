@@ -17,4 +17,23 @@ extension PersonaRecord {
         }
         return identifier
     }
+    
+    var privateKeyBase64String: String {
+        let originPersona = Persona(fromRecord: self)
+        return originPersona?.privateKey?.privateKeyBase64String ?? ""
+    }
+    
+    var qrCodeString: String {
+        var qrCodeString = "mask://persona/privatekey/" + privateKeyBase64String
+        if let nmemonic = mnemonic?
+            .data(using: .utf8)?
+            .base64EncodedString()
+        {
+            qrCodeString = "mask://persona/mnemonic/" + nmemonic
+        }
+        if let name = self.nickname, !name.isEmpty {
+            qrCodeString.append("?nickname=\(name)")
+        }
+        return qrCodeString
+    }
 }

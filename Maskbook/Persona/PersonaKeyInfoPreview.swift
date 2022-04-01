@@ -18,6 +18,7 @@ struct PersonaKeyInfoPreview: View {
     var maskId: String
     var privateKey: String
     var word: [String]?
+    var qrCodeString: String
 
     init(persona: PersonaRecord) {
         self.name = persona.nickname ?? ""
@@ -25,13 +26,13 @@ struct PersonaKeyInfoPreview: View {
             .split(separator: "/").last
             .flatMap { String($0) }
             ?? ""
-        let originPersona = Persona(fromRecord: persona)
-        self.privateKey = originPersona?.privateKey?.privateKeyBase64String ?? ""
+        self.privateKey = persona.privateKeyBase64String
 
         let mnemonic = persona.mnemonic
         self.word = mnemonic?
             .split(separator: " ")
             .map { String($0) }
+        self.qrCodeString = persona.qrCodeString
     }
 
     var body: some View {
@@ -84,7 +85,7 @@ struct PersonaKeyInfoPreview: View {
     @ViewBuilder
     func qrcodeImageView() -> some View {
         if let image = EFQRCode.generate(
-            for: "mask://persona/privatekey/" + privateKey,
+            for: qrCodeString,
             size: EFIntSize(width: 320, height: 320)
         ) {
             Image(uiImage: UIImage(cgImage: image))
