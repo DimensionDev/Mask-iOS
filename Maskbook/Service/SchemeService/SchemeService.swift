@@ -64,7 +64,11 @@ class SchemeService {
         if let para = url.queryParameters, let name = para["nickname"] {
             nickname = name
         }
-        let personaImportItem = PersonaImportItem(type: .mnemonic(mnemonic: url.lastPathComponent), name: nickname)
+        let mnemonic = Data(base64URLEncoded: url.lastPathComponent).flatMap {
+            String(data: $0, encoding: .utf8)
+        }
+        guard let mnemonic = mnemonic else { return }
+        let personaImportItem = PersonaImportItem(type: .mnemonic(mnemonic: mnemonic), name: nickname)
         personaImportHandler.checkExistAndRestore(from: personaImportItem)
     }
 }

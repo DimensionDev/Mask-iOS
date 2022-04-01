@@ -15,6 +15,10 @@ struct PersonaImportItem {
     
     var type: PersonaImportType
     var name: String?
+    
+    mutating func changeName(name: String) {
+        self.name = name
+    }
 }
 
 enum PersonaImportType {

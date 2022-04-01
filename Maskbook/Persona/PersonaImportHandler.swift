@@ -35,6 +35,18 @@ class PersonaImportHandler {
     
     private var disposeBag = Set<AnyCancellable>()
     
+    func checkExistAndRestore(from item: PersonaImportItem) {
+        if let personaRecord = currentPersonaRecord(for: item) {
+            if !personaRecord.hasLogout {
+                showRestoreAlreadyExistedAlert()
+                return
+            }
+            renameAndSetCurrentPersona(name: item.name, personaRecord: personaRecord)
+        } else {
+            renameNameAndRestorePersona(from: item)
+        }
+    }
+    
     private func currentPersonaRecord(for item: PersonaImportItem) -> PersonaRecord? {
         switch item.type {
         case .privateKey(let privateKey):
@@ -89,19 +101,8 @@ class PersonaImportHandler {
         }
     }
     
-    func checkExistAndRestore(from item: PersonaImportItem) {
-        if let personaRecord = currentPersonaRecord(for: item) {
-            if !personaRecord.hasLogout {
-                showRestoreAlreadyExistedAlert()
-                return
-            }
-            renameAndSetCurrentPersona(name: item.name, personaRecord: personaRecord)
-        } else {
-            renameNameAndRestorePersona(from: item)
-        }
-    }
-    
     private func renameNameAndRestorePersona(from item: PersonaImportItem) {
+        var item = item
         let names = personaManager.personaRecordsSubject.value.map(\.nickname)
         if let nickname = item.name, names.contains(nickname) {
             let renameViewModel = RenameViewModel(
@@ -114,7 +115,7 @@ class PersonaImportHandler {
                     self.personaNicknameDuplicated()
                     return
                 }
-                
+                item.changeName(name: name)
                 viewModel.dismissSignal.send { [weak self] in
                     self?.restore(from: item)
                 }

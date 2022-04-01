@@ -187,8 +187,16 @@ class PersonasViewController: BaseViewController {
             .store(in: &disposeBag)
         
         personaManager.personaRecordsSubject
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.personaCollectionView.reloadData()
+            }
+            .store(in: &disposeBag)
+        
+        personaManager.currentPersona
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.scrollToCurrentPersona()
             }
             .store(in: &disposeBag)
     }
