@@ -87,8 +87,8 @@ extension AppCoordinator: MaskCoordinator {
                 vc.modalPresentationCapturesStatusBarAppearance = true
                 presentVC.present(vc, animated: false, completion: completion)
 
-            case let .replaceCurrentNavigation(tab, animated):
-                MainTabBarController.currentTabBarController()?.replace(tab: tab, with: vc, animated: animated)
+            case let .replaceCurrentNavigation(tab, animated, select):
+                MainTabBarController.currentTabBarController()?.replace(tab: tab, with: vc, animated: animated, selected: select)
                 completion?()
 
             case let .replaceWalletTab(animated):
