@@ -16,7 +16,6 @@ import SwiftyJSON
 struct PersonaKeyInfoPreview: View {
     var name: String
     var maskId: String
-    var privateKey: String
     var word: [String]?
     var qrCodeString: String
 
@@ -26,7 +25,6 @@ struct PersonaKeyInfoPreview: View {
             .split(separator: "/").last
             .flatMap { String($0) }
             ?? ""
-        self.privateKey = persona.privateKeyBase64String
 
         let mnemonic = persona.mnemonic
         self.word = mnemonic?
