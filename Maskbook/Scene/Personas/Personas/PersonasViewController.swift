@@ -72,7 +72,8 @@ class PersonasViewController: BaseViewController {
         let flowLayout = MnemonicVerifyCollectionFlowLayout()
         flowLayout.itemSize = PersonaCollectionDataSource.itemSize
         flowLayout.scrollDirection = .horizontal
-        flowLayout.sideItemScale = 0.9
+        flowLayout.sideItemXScale = 0.94
+        flowLayout.sideItemYScale = 0.85
         let view = ControlContainableCollectionView(frame: .zero, collectionViewLayout: flowLayout)
         view.backgroundColor = .clear
         view.showsHorizontalScrollIndicator = false
