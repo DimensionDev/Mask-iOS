@@ -1770,6 +1770,8 @@
 				1FCF0D5927DF3B95007BF0E6 /* EmptyItem.swift */,
 			);
 			path = Alert;
+			sourceTree = "<group>";
+        };
 		1F35CA0E27BF989500E329AF /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
@@ -3147,7 +3149,6 @@
 		2AF885D6271EED7D0004565A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				1F3301D927D85B9B00FA0652 /* Alert */,
 				1F35CA0E27BF989500E329AF /* Coordinator */,
 				2A72F3FA27BE8184004A3F95 /* DBImage */,
 				2AF885D7271EED7D0004565A /* Popup */,
