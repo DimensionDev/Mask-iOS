@@ -20,6 +20,9 @@
 "Common.Alert.BindRemoteInfo.Title" = "Internet or server problems";
 "Common.Alert.BiometryIdActivate.Description" = "%@ has been enabled successfully.";
 "Common.Alert.BiometryIdActivate.Title" = "Activation successful";
+"Common.Alert.CameraAccess.Description" = "Please go to Settings to allow access.";
+"Common.Alert.CameraAccess.Title" = "Mask Network would like to
+access your camera";
 "Common.Alert.ChangeBackupPassword.Description" = "You have successfully changed your backup password.";
 "Common.Alert.ChangeBackupPassword.Title" = "Backup Password changed successfully!";
 "Common.Alert.ChangeBackupPasswordFailed.Title" = "Backup Password changed failed!";
@@ -84,10 +87,12 @@
 "Common.Controls.Confirm" = "Confirm";
 "Common.Controls.CreateWallet" = "Create Wallet";
 "Common.Controls.Done" = "Done";
+"Common.Controls.DontAllow" = "Don’t Allow";
 "Common.Controls.Download" = "download";
 "Common.Controls.DownloadNext" = "I downloaded, next";
 "Common.Controls.Edit" = "Edit";
 "Common.Controls.Enable" = "Enable";
+"Common.Controls.GoSettings" = "To Settings";
 "Common.Controls.IUnderstand" = "Understood";
 "Common.Controls.ImportWallet" = "Import Wallet";
 "Common.Controls.Invite" = "Invite";

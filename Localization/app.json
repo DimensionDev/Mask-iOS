@@ -133,6 +133,10 @@
             "backup_popup_binding_first": {
                 "title": "Bind your email or phone",
                 "description": "Please bind your email or phone number before you back up to cloud."
+            },
+            "camera_access": {
+                "title": "Mask Network would like to\naccess your camera",
+                "description": "Please go to Settings to allow access."
             }
         },
         "controls": {
@@ -171,7 +175,9 @@
             "take_photo": "Take a photo",
             "save": "Save",
             "move_data_now": "Move data now",
-            "remind_me_later": "Remind me later"
+            "remind_me_later": "Remind me later",
+            "go_settings": "To Settings",
+            "dont_allow": "Don’t Allow"
         },
         "toast": {
             "saved": "Saved!",
