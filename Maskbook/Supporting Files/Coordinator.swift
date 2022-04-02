@@ -219,7 +219,7 @@ class Coordinator {
     func setup(window: UIWindow) {
         self.window = window
         
-        if !settings.hasShownGuide || !settings.didPresentWizard {
+        if !settings.hasShownGuide && !settings.didPresentWizard {
             settings.hasShownGuide = true
             settings.didPresentWizard = true
             showGuide(window: window)

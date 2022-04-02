@@ -51,7 +51,7 @@ struct WelcomeIdentityEmptyView: View {
     }
 }
 
-struct IdentityEmptyView1_Previews: PreviewProvider {
+struct WelcomeIdentityEmptyView_Previews: PreviewProvider {
     static var previews: some View {
         WelcomeIdentityEmptyView()
     }
