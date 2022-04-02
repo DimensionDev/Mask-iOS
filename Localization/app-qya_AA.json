@@ -133,6 +133,10 @@
             "backup_popup_binding_first": {
                 "title": "crwdns14642:0crwdne14642:0",
                 "description": "crwdns14644:0crwdne14644:0"
+            },
+            "camera_access": {
+                "title": "crwdns14954:0crwdne14954:0",
+                "description": "crwdns14956:0crwdne14956:0"
             }
         },
         "controls": {
@@ -171,7 +175,9 @@
             "take_photo": "crwdns14648:0crwdne14648:0",
             "save": "crwdns14650:0crwdne14650:0",
             "move_data_now": "crwdns14652:0crwdne14652:0",
-            "remind_me_later": "crwdns14654:0crwdne14654:0"
+            "remind_me_later": "crwdns14654:0crwdne14654:0",
+            "go_settings": "crwdns14958:0crwdne14958:0",
+            "dont_allow": "crwdns14960:0crwdne14960:0"
         },
         "toast": {
             "saved": "crwdns14656:0crwdne14656:0",
@@ -187,6 +193,11 @@
             "description2": "crwdns14792:0crwdne14792:0",
             "description3": "crwdns14794:0crwdne14794:0",
             "description4": "crwdns14796:0crwdne14796:0"
+        },
+        "welcome_identity_empty": {
+            "create_a_persona": "crwdns14962:0crwdne14962:0",
+            "recover_your_persona": "crwdns14964:0crwdne14964:0",
+            "description": "crwdns14966:0crwdne14966:0"
         },
         "terms_of_service": {
             "title": "crwdns13508:0crwdne13508:0",
