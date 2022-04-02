@@ -188,14 +188,3 @@ extension WebExtension.Setting {
         var payload: BackupInfo?
     }
 }
-
-typealias GetRestorePreviewInfoMWEMessage = WebExtension.Setting.RestorePreviewInfo
-extension WebExtension.Setting {
-    struct RestorePreviewInfo: MWEMessage {
-        static let method: String = "settings_getBackupPreviewInfo"
-        struct BackupInfo: Codable {
-            let backupInfo: String?
-        }
-        var payload: BackupInfo?
-    }
-}

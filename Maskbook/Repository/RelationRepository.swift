@@ -131,6 +131,29 @@ enum RelationRepository {
             continuation.resume(returning: relations)
         }
     }
+    
+    static func restoreFromJson(_ json: JSON) throws {
+        var restoreError: Error?
+        backgroundContext.performAndWait {
+            for relation in json.arrayValue {
+                let relationRecord = RelationRecord(context: backgroundContext)
+                relationRecord.personaIdentifier = relation["persona"].string
+                relationRecord.profileIdentifier = relation[Relation.CodingKeys.profileIdentifier.rawValue].string
+                relationRecord.favor = relation[Relation.CodingKeys.favor.rawValue].boolValue
+                relationRecord.createdAt = Date()
+                relationRecord.updatedAt = Date()
+                
+                do {
+                    try backgroundContext.saveOrRollback()
+                } catch {
+                    restoreError = error
+                }
+            }
+        }
+        if let restoreError = restoreError {
+            throw restoreError
+        }
+    }
 }
 
 extension RelationRecord {

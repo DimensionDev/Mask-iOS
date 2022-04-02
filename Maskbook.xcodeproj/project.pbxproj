@@ -572,6 +572,7 @@
 		4168635327F434AE00F12DB2 /* BackupPreviewGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168635227F434AE00F12DB2 /* BackupPreviewGenerator.swift */; };
 		4168635527F4622600F12DB2 /* BackupDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168635427F4622600F12DB2 /* BackupDataGenerator.swift */; };
 		4168635727F58B2500F12DB2 /* AsyncPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168635627F58B2500F12DB2 /* AsyncPublisher.swift */; };
+		4168635927F6F0A000F12DB2 /* RecoverDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168635827F6F0A000F12DB2 /* RecoverDataManager.swift */; };
 		41829919277C816800F5417B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41829918277C816800F5417B /* GoogleService-Info.plist */; };
 		4182991A277C816800F5417B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41829918277C816800F5417B /* GoogleService-Info.plist */; };
 		4182991B277C816800F5417B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41829918277C816800F5417B /* GoogleService-Info.plist */; };
@@ -1307,6 +1308,7 @@
 		4168635227F434AE00F12DB2 /* BackupPreviewGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupPreviewGenerator.swift; sourceTree = "<group>"; };
 		4168635427F4622600F12DB2 /* BackupDataGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupDataGenerator.swift; sourceTree = "<group>"; };
 		4168635627F58B2500F12DB2 /* AsyncPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncPublisher.swift; sourceTree = "<group>"; };
+		4168635827F6F0A000F12DB2 /* RecoverDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoverDataManager.swift; sourceTree = "<group>"; };
 		41829918277C816800F5417B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		41E500082791361E00A73117 /* PersonaRecord+Managed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonaRecord+Managed.swift"; sourceTree = "<group>"; };
 		41E5000A2791CA9B00A73117 /* ProfileRecord+Managed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileRecord+Managed.swift"; sourceTree = "<group>"; };
@@ -3402,6 +3404,7 @@
 			children = (
 				4168635227F434AE00F12DB2 /* BackupPreviewGenerator.swift */,
 				4168635427F4622600F12DB2 /* BackupDataGenerator.swift */,
+				4168635827F6F0A000F12DB2 /* RecoverDataManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -4551,6 +4554,7 @@
 				2A6ABBA32720053B00CC3AED /* RemoteBackupUploadRequest.swift in Sources */,
 				2AF884D7271EE9310004565A /* MaskbookTabService.swift in Sources */,
 				41E5002A2797AEB500A73117 /* WebPublicAPIMessageResolver+DB.swift in Sources */,
+				4168635927F6F0A000F12DB2 /* RecoverDataManager.swift in Sources */,
 				1F37DF2027BDF715008F8ABE /* RestoreLocalFileValidationController.swift in Sources */,
 				2AF8858D271EE9310004565A /* SelectActionViewModelProtocol.swift in Sources */,
 				2AF884EE271EE9310004565A /* IdentityEmptyViewController.swift in Sources */,

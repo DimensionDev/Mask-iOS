@@ -188,6 +188,51 @@ enum ProfileRepository {
             continuation.resume(returning: profiles)
         }
     }
+    
+    static func restoreFromJson(_ json: JSON) throws {
+        var restoreError: Error?
+        backgroundContext.performAndWait {
+            for profile in json.arrayValue {
+                let newProfileRecord = ProfileRecord(context: backgroundContext)
+                let identifier = profile[Profile.CodingKeys.identifier.rawValue].string
+                newProfileRecord.identifier = identifier
+                newProfileRecord.nickname = profile[Profile.CodingKeys.nickname.rawValue].string
+                
+                if let validIdentifier = identifier,
+                   let socialPlatform = Profile.getSocialPlatformFromIdentifier(validIdentifier) {
+                    newProfileRecord.network = socialPlatform.url
+                }
+                
+                if let createdAt = profile[Profile.CodingKeys.createdAt.rawValue].double {
+                    newProfileRecord.createdAt = Date(timeIntervalSince1970: createdAt)
+                } else {
+                    newProfileRecord.createdAt = Date()
+                }
+                if let updatedAt = profile[Profile.CodingKeys.updatedAt.rawValue].double {
+                    newProfileRecord.updatedAt = Date(timeIntervalSince1970: updatedAt)
+                } else {
+                    newProfileRecord.updatedAt = Date()
+                }
+                
+                if let linkedPersonaIdentifier = profile[Profile.CodingKeys.linkedPersona.rawValue].string {
+                    if let persona = PersonaRepository.queryPersona(
+                        identifier: linkedPersonaIdentifier,
+                        context: backgroundContext) {
+                        newProfileRecord.linkedPersona = persona
+                    }
+                }
+                
+                do {
+                    try backgroundContext.saveOrRollback()
+                } catch {
+                    restoreError = error
+                }
+            }
+        }
+        if let restoreError = restoreError {
+            throw restoreError
+        }
+    }
 }
 
 extension ProfileRecord {

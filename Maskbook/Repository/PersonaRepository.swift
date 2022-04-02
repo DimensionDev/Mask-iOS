@@ -293,6 +293,66 @@ enum PersonaRepository {
             continuation.resume(returning: personas)
         }
     }
+    
+    static func restoreFromJson(_ json: JSON) throws {
+        var restoreError: Error?
+        backgroundContext.performAndWait {
+            for persona in json.arrayValue {
+                let newPersonaRecord = PersonaRecord(context: backgroundContext)
+                
+                newPersonaRecord.identifier = persona[Persona.CodingKeys.identifier.rawValue].string
+                newPersonaRecord.nickname = persona[Persona.CodingKeys.nickname.rawValue].string
+                let mnemonicJson = persona[Persona.CodingKeys.mnemonic.rawValue]
+                newPersonaRecord.mnemonic = mnemonicJson[Persona.Mnemonic.CodingKeys.words.rawValue].string
+                let mnemonicParameterJson = mnemonicJson[Persona.Mnemonic.CodingKeys.parameter.rawValue]
+                newPersonaRecord.path = mnemonicParameterJson[Persona.Mnemonic.Parameter.CodingKeys.path.rawValue].string
+                newPersonaRecord.withPassword = mnemonicParameterJson[Persona.Mnemonic.Parameter.CodingKeys.withPassword.rawValue].boolValue
+                
+                if persona[Persona.CodingKeys.privateKey.rawValue].dictionary != nil {
+                    newPersonaRecord.privateKey = persona[Persona.CodingKeys.privateKey.rawValue].rawString()
+                }
+                if persona[Persona.CodingKeys.publicKey.rawValue].dictionary != nil {
+                    newPersonaRecord.publicKey = persona[Persona.CodingKeys.publicKey.rawValue].rawString()
+                }
+                if persona[Persona.CodingKeys.localKey.rawValue].dictionary != nil {
+                    newPersonaRecord.privateKey = persona[Persona.CodingKeys.localKey.rawValue].rawString()
+                }
+                
+                newPersonaRecord.hasLogout = false
+                newPersonaRecord.initialized = false
+                
+                if let createdAt = persona[Persona.CodingKeys.createdAt.rawValue].double {
+                    newPersonaRecord.createdAt = Date(timeIntervalSince1970: createdAt)
+                } else {
+                    newPersonaRecord.createdAt = Date()
+                }
+                if let updatedAt = persona[Persona.CodingKeys.updatedAt.rawValue].double {
+                    newPersonaRecord.updatedAt = Date(timeIntervalSince1970: updatedAt)
+                } else {
+                    newPersonaRecord.updatedAt = Date()
+                }
+                
+                for linkedProfile in persona[Persona.CodingKeys.linkedProfiles.rawValue].arrayValue {
+                    if let linkedProfileIdentifier = linkedProfile.arrayValue.first?.string as? String {
+                        if let profileRecord = ProfileRepository.queryProfile(
+                            identifier: linkedProfileIdentifier,
+                            context: backgroundContext) {
+                            newPersonaRecord.addToLinkedProfiles(profileRecord)
+                        }
+                    }
+                }
+                
+                do {
+                    try backgroundContext.saveOrRollback()
+                } catch {
+                    restoreError = error
+                }
+            }
+        }
+        if let restoreError = restoreError {
+            throw restoreError
+        }
+    }
 }
 
 extension PersonaRecord {

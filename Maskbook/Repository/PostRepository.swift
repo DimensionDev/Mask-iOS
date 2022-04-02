@@ -170,6 +170,59 @@ enum PostRepository {
             continuation.resume(returning: posts)
         }
     }
+    
+    static func restoreFromJson(_ json: JSON) throws {
+        var restoreError: Error?
+        backgroundContext.performAndWait {
+            for post in json.arrayValue {
+                let postRecord = PostRecord(context: backgroundContext)
+                postRecord.identifier = post[Post.CodingKeys.identifier.rawValue].string
+                postRecord.encryptBy = post[Post.CodingKeys.encryptBy.rawValue].string
+                
+                if let postBy = post[Post.CodingKeys.postBy.rawValue].string {
+                    postRecord.postNetwork = ProfileRecord.getSocialPlatformFromIdentifier(postBy)?.url
+                    postRecord.postUserId = postBy.components(separatedBy: "/").last
+                } else {
+                    log.debug("no postBy in creating post", source: "Post")
+                }
+                
+                postRecord.postCryptoKeyRaw = try? post[Post.CodingKeys.postCryptoKey.rawValue].rawData()
+                postRecord.url = post[Post.CodingKeys.url.rawValue].string
+                postRecord.summary = post[Post.CodingKeys.summary.rawValue].string
+                
+                if let foundAt = post[Post.CodingKeys.foundAt.rawValue].double {
+                    postRecord.foundAt = Date(timeIntervalSince1970: foundAt)
+                } else {
+                    postRecord.foundAt = Date()
+                }
+                postRecord.createdAt = Date()
+                postRecord.updatedAt = Date()
+                
+                var recipientsDict = [String: Any]()
+                if let recipientsArray = post[Post.CodingKeys.recipients.rawValue].array {
+                    for recipientInfoJson in recipientsArray {
+                        if let recipientsInfoList = recipientInfoJson.array,
+                           recipientsInfoList.count >= 2 {
+                            if let recipientKey = recipientInfoJson[0].string {
+                                recipientsDict[recipientKey] = recipientInfoJson[1]
+                            }
+                        }
+                    }
+                }
+                postRecord.recipientsRaw = try? JSON(recipientsDict).rawData()
+                postRecord.interestedMetaRaw = try? post[Post.CodingKeys.interestedMeta.rawValue].rawData()
+                
+                do {
+                    try backgroundContext.saveOrRollback()
+                } catch {
+                    restoreError = error
+                }
+            }
+        }
+        if let restoreError = restoreError {
+            throw restoreError
+        }
+    }
 }
 
 extension PostRecord {
@@ -202,7 +255,11 @@ extension PostRecord {
         if let recipientsRaw = recipientsRaw,
            let recipientsJson = try? JSON(data: recipientsRaw)
         {
-            backupDict[Post.CodingKeys.recipients.rawValue] = recipientsJson.object
+            var recipientList = [[Any]]()
+            recipientsJson.dictionaryObject?.forEach {
+                recipientList.append([$0.key, $0.value])
+            }
+            backupDict[Post.CodingKeys.recipients.rawValue] = recipientList
         }
         
         // 6. interestedMeta
