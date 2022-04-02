@@ -129,6 +129,17 @@ enum L10n {
         }
       }
 
+      enum CameraAccess {
+        /// Please go to Settings to allow access.
+        static var description: String {
+          return L10n.tr("Localizable", "Common.Alert.CameraAccess.Description")
+        }
+        /// Mask Network would like to\naccess your camera
+        static var title: String {
+          return L10n.tr("Localizable", "Common.Alert.CameraAccess.Title")
+        }
+      }
+
       enum ChangeBackupPassword {
         /// You have successfully changed your backup password.
         static var description: String {
@@ -470,6 +481,10 @@ enum L10n {
       static var done: String {
         return L10n.tr("Localizable", "Common.Controls.Done")
       }
+      /// Don’t Allow
+      static var dontAllow: String {
+        return L10n.tr("Localizable", "Common.Controls.DontAllow")
+      }
       /// download
       static var download: String {
         return L10n.tr("Localizable", "Common.Controls.Download")
@@ -485,6 +500,10 @@ enum L10n {
       /// Enable
       static var enable: String {
         return L10n.tr("Localizable", "Common.Controls.Enable")
+      }
+      /// To Settings
+      static var goSettings: String {
+        return L10n.tr("Localizable", "Common.Controls.GoSettings")
       }
       /// Import Wallet
       static var importWallet: String {
@@ -2788,6 +2807,21 @@ enum L10n {
       /// Import Wallet
       static var walletsListImport: String {
         return L10n.tr("Localizable", "Scene.WalletsListAdd.WalletsListImport")
+      }
+    }
+
+    enum WelcomeIdentityEmpty {
+      /// Create a Persona
+      static var createAPersona: String {
+        return L10n.tr("Localizable", "Scene.WelcomeIdentityEmpty.CreateAPersona")
+      }
+      /// The portal to a new and open Internet
+      static var description: String {
+        return L10n.tr("Localizable", "Scene.WelcomeIdentityEmpty.Description")
+      }
+      /// Recover your Persona
+      static var recoverYourPersona: String {
+        return L10n.tr("Localizable", "Scene.WelcomeIdentityEmpty.RecoverYourPersona")
       }
     }
   }

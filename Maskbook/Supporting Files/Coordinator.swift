@@ -131,6 +131,7 @@ class Coordinator {
         case changePasswordStep2
         case receiveAddress(network: BlockChainNetwork, token: Token?, address: String)
         case emptyWallet
+        case welcomeEmptyIdentity
         case emptyIdentity
         case identityCreate
         case identityRecovery(from: IdentityRecoveryViewController.From)
@@ -218,7 +219,7 @@ class Coordinator {
     func setup(window: UIWindow) {
         self.window = window
         
-        if !settings.hasShownGuide || !settings.didPresentWizard {
+        if !settings.hasShownGuide && !settings.didPresentWizard {
             settings.hasShownGuide = true
             settings.didPresentWizard = true
             showGuide(window: window)
@@ -230,7 +231,7 @@ class Coordinator {
     private func showGuide(window: UIWindow) {
         let guideVC = MaskHostViewController(rootView: GuideView() { [weak self] in
             self?.setupMainWindow(window: window)
-            self?.present(scene: .emptyIdentity, transition: .detail(animated: false))
+            self?.present(scene: .welcomeEmptyIdentity, transition: .detail(animated: false))
         })
         window.rootViewController = guideVC
         window.makeKeyAndVisible()
@@ -591,6 +592,10 @@ extension Coordinator {
             let viewController = WalletEmptyViewController()
             return viewController
 
+        case .welcomeEmptyIdentity:
+            let vc = MaskHostViewController(rootView: WelcomeIdentityEmptyView())
+            return vc
+            
         case .emptyIdentity:
             let viewController = IdentityEmptyViewController()
             return viewController

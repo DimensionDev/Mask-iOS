@@ -173,6 +173,13 @@ extension PersonaAvatarViewController {
     
     @objc
     func takePhotoAction() {
-        present(cameraController, animated: true, completion: nil)
+        ScannerPermission.authorizeCameraWith { [weak self] isAuthorize in
+            guard let self = self else { return }
+            if isAuthorize {
+                self.present(self.cameraController, animated: true, completion: nil)
+            } else {
+                ScannerPermission.showCameraAccessAlert(coordinator: self.coordinator)
+            }
+        }
     }
 }

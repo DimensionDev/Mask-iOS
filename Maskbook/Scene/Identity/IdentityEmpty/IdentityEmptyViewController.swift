@@ -119,7 +119,14 @@ final class IdentityEmptyViewController: BaseViewController {
     }
 
     private func scanAction() {
-        coordinator.present(scene: .commonScan, transition: .modal(animated: true))
+        ScannerPermission.authorizeCameraWith { [weak self] isAuthorize in
+            guard let self = self else { return }
+            if isAuthorize {
+                self.coordinator.present(scene: .commonScan, transition: .modal(animated: true))
+            } else {
+                ScannerPermission.showCameraAccessAlert(coordinator: self.coordinator)
+            }
+        }
     }
 }
 
