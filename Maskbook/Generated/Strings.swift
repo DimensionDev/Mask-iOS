@@ -2790,6 +2790,21 @@ enum L10n {
         return L10n.tr("Localizable", "Scene.WalletsListAdd.WalletsListImport")
       }
     }
+
+    enum WelcomeIdentityEmpty {
+      /// Create a Persona
+      static var createAPersona: String {
+        return L10n.tr("Localizable", "Scene.WelcomeIdentityEmpty.CreateAPersona")
+      }
+      /// The portal to a new and open Internet
+      static var description: String {
+        return L10n.tr("Localizable", "Scene.WelcomeIdentityEmpty.Description")
+      }
+      /// Recover your Persona
+      static var recoverYourPersona: String {
+        return L10n.tr("Localizable", "Scene.WelcomeIdentityEmpty.RecoverYourPersona")
+      }
+    }
   }
 
   enum Tab {
