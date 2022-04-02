@@ -16,6 +16,7 @@ import web3swift
 import PromiseKit
 
 class LuckyDropViewModel: NSObject, ObservableObject {
+    // MARK: - Public property
     @Published var quantityStr = ""
     // to be used in avaerage mode
     @Published var amountPerShareStr = ""
@@ -29,19 +30,6 @@ class LuckyDropViewModel: NSObject, ObservableObject {
     @Published var buttonType: ConfirmButtonType = .send
     
     var gasFeeViewModel = GasFeeViewModel()
-    
-    private var disposeBag = Set<AnyCancellable>()
-    @InjectedProvider(\.walletAssetManager)
-    private var walletAssetManager: WalletAssetManager
-    @InjectedProvider(\.userDefaultSettings)
-    var settings
-    @InjectedProvider(\.vault)
-    var vault
-    @InjectedProvider(\.mainCoordinator)
-    private var mainCoordinator
-    
-    private var nextButtonTypes: [ConfirmButtonType: Bool] = [:]
-    private var lastTotalQuantity: Double?
     
     var tokenStr: String {
         token?.symbol ?? ""
@@ -102,32 +90,41 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         return gwei * (BigUInt(10).power(9))
     }
     
-    var totalQuantityDoubleValue: Double {
-        var result: Double
+    var totalQuantityDoubleValue: NSDecimalNumber {
+        var result: NSDecimalNumber
         if mode == .average {
-            guard let quantity = Double(quantityStr) else { return 0 }
-            guard let amountPerShare = Double(amountPerShareStr) else { return 0 }
-            result = quantity * amountPerShare
+            let quantity = NSDecimalNumber(string: quantityStr)
+            let amountPerShare = NSDecimalNumber(string: amountPerShareStr)
+            guard quantity != .notANumber && amountPerShare != .notANumber else {
+                return .zero
+            }
+            result = quantity.multiplying(by: amountPerShare)
         } else {
-            guard let amountTotalShare = Double(amountTotalShareStr) else { return 0 }
-            result = amountTotalShare
+            result = NSDecimalNumber(string: amountTotalShareStr)
         }
-        if lastTotalQuantity != result {
-            processAproveButton()
+        Task {
+            await MainActor.run {
+                processAproveButton()
+            }
         }
-        lastTotalQuantity = result
-        return result
+        return result != .notANumber ? result : .zero
     }
     
     var totalQuantity: String {
-        if totalQuantityDoubleValue < 0.01, totalQuantityDoubleValue > 0 {
+        let roundBehavior = NSDecimalNumberHandler(roundingMode: .plain, scale: 2, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
+        let result = totalQuantityDoubleValue.rounding(accordingToBehavior: roundBehavior)
+        guard result != .notANumber else {
+            return "0.00"
+        }
+        let doubleValue = totalQuantityDoubleValue.doubleValue
+        if doubleValue < 0.01, doubleValue > 0 {
             return "< 0.01"
         }
-        return String(format: "%.02f", totalQuantityDoubleValue)
+        return String(format: "%.2f", result.doubleValue)
     }
     
     var totalQuantityColor: Color {
-        totalQuantityDoubleValue == 0 ?
+        totalQuantityDoubleValue == .zero ?
             Asset.Colors.Text.normal.asColor() :
             Asset.Colors.Text.dark.asColor()
     }
@@ -158,6 +155,19 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         buttonType == .unlockingToken
     }
     
+    // MARK: - Private property
+    private var disposeBag = Set<AnyCancellable>()
+    @InjectedProvider(\.walletAssetManager)
+    private var walletAssetManager: WalletAssetManager
+    @InjectedProvider(\.userDefaultSettings)
+    private var settings
+    @InjectedProvider(\.vault)
+    private var vault
+    @InjectedProvider(\.mainCoordinator)
+    private var mainCoordinator
+    private var nextButtonTypes: [ConfirmButtonType: Bool] = [:]
+    
+    // MARK: - Public method
     override init() {
         super.init()
         let token = walletAssetManager.getMainToken(
@@ -191,18 +201,81 @@ class LuckyDropViewModel: NSObject, ObservableObject {
     }
     
     func maxAmount() {
-        guard let totalQuantity = token?.displayQuantity.doubleValue else { return }
+        guard let amount = token?.quantityNumber else { return }
         
         switch mode {
         case .average:
-            guard let quantity = Int(quantityStr) else { return }
-            amountPerShareStr = String.init(format: "%.6f", totalQuantity / Double(quantity))
+            let quantity = NSDecimalNumber(string: quantityStr)
+            guard quantity != .notANumber else {
+                amountPerShareStr = ""
+                return
+            }
+            let result = amount.dividing(by: quantity)
+            guard result != .notANumber else {
+                amountPerShareStr = ""
+                return
+            }
+            amountPerShareStr = result.stringValue
             
         case .random:
-            amountTotalShareStr = String.init(format: "%.6f", totalQuantity)
+            guard amount != .notANumber else {
+                amountTotalShareStr = ""
+                return
+            }
+            amountTotalShareStr = amount.stringValue
         }
     }
     
+    func removeButtonType(type: ConfirmButtonType) {
+        guard type != .send else { return }
+        nextButtonTypes[type] = false
+        processNextButton()
+    }
+    
+    func approveToken() {
+        vault.getWalletPassword()
+            .sink(receiveCompletion: { _ in }) { [weak self] password in
+                guard let self = self else { return }
+                self.approveToken(password: password, network: self.settings.network)
+            }
+            .store(in: &disposeBag)
+        
+        nextButtonTypes[.unlockToken] = false
+        nextButtonTypes[.unlockingToken] = true
+        processNextButton()
+    }
+    
+    func send() {
+        nextButtonTypes[.send] = false
+        nextButtonTypes[.sending] = true
+        processNextButton()
+    }
+    
+    func processAmountInput(value: String) {
+        // make sure only one '.' in `value`
+        if value.hasSuffix("0") { return }
+        if value.hasSuffix("."),
+           let firstIndex = value.firstIndex(of: "."),
+           let lastIndex = value.lastIndex(of: "."),
+           firstIndex == lastIndex {
+            return
+        }
+        let num = NSDecimalNumber(string: value)
+        let roundBehavior = NSDecimalNumberHandler(
+            roundingMode: .down,
+            scale: 18,
+            raiseOnExactness: false,
+            raiseOnOverflow: false,
+            raiseOnUnderflow: false,
+            raiseOnDivideByZero: false
+        )
+        let roundedNum = num.rounding(accordingToBehavior: roundBehavior)
+        let processed = roundedNum == .notANumber ? "" : roundedNum.stringValue
+        guard processed != value else { return }
+        amountPerShareStr = processed
+    }
+    
+    // MARK: - Private method
     private func processConfirmButtonTypes() {
         // cleanup `nextButtonTypes`
         ConfirmButtonType.allCases.filter({ $0 != .unlock }).forEach { [weak self] type in
@@ -260,7 +333,10 @@ class LuckyDropViewModel: NSObject, ObservableObject {
             guard let allowance = try? erc20.getAllowance(originalOwner: originalOwner, delegate: luckyDropAddress) else {
                 return
             }
-            log.debug("allowance \(Int(allowance)) send: \(totalQuantityDoubleValue) decimals: \(decimal)", source: "lucky drop")
+            
+            await MainActor.run {
+                log.debug("allowance \(Int(allowance)) send: \(totalQuantityDoubleValue) decimals: \(decimal)", source: "lucky drop")
+            }
             
             guard allowance < sendAmount else {
                 await updateUnlockTokenButton(false)
@@ -274,31 +350,6 @@ class LuckyDropViewModel: NSObject, ObservableObject {
     @MainActor
     private func updateUnlockTokenButton(_ value: Bool) {
         nextButtonTypes[.unlockToken] = value
-        processNextButton()
-    }
-    
-    func removeButtonType(type: ConfirmButtonType) {
-        guard type != .send else { return }
-        nextButtonTypes[type] = false
-        processNextButton()
-    }
-    
-    func approveToken() {
-        vault.getWalletPassword()
-            .sink(receiveCompletion: { _ in }) { [weak self] password in
-                guard let self = self else { return }
-                self.approveToken(password: password, network: self.settings.network)
-            }
-            .store(in: &disposeBag)
-        
-        nextButtonTypes[.unlockToken] = false
-        nextButtonTypes[.unlockingToken] = true
-        processNextButton()
-    }
-    
-    func send() {
-        nextButtonTypes[.send] = false
-        nextButtonTypes[.sending] = true
         processNextButton()
     }
     

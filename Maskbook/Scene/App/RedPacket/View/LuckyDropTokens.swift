@@ -61,6 +61,8 @@ struct LuckyDropTokens: View {
             } label: {
                 if let url = viewModel.tokenURL {
                     KFImage(url)
+                        .cancelOnDisappear(true)
+                        .loadImmediately()
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 24)
@@ -86,7 +88,11 @@ struct LuckyDropTokens: View {
             Spacer()
             if viewModel.mode == .average {
                 TextField(L10n.Plugins.Luckydrop.totalAmount, text: $viewModel.amountPerShareStr)
-                    .keyboardType(.numbersAndPunctuation)
+                    .onReceive(
+                        Just(viewModel.amountPerShareStr),
+                        perform: viewModel.processAmountInput
+                    )
+                    .keyboardType(.decimalPad)
                     .multilineTextAlignment(.trailing)
                     .frame(maxHeight: .infinity)
             } else {

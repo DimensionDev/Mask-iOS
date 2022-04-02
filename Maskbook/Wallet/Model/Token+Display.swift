@@ -21,6 +21,11 @@ public enum TokenType: String {
 }
 
 extension Token {
+    var quantityNumber: NSDecimalNumber {
+        guard let quantityValue = quantity else { return NSDecimalNumber.zero }
+        return quantityValue.dividing(by: NSDecimalNumber(mantissa: 1, exponent: decimal, isNegative: false))
+    }
+    
     var displayQuantity: NSDecimalNumber {
         guard let quantityValue = quantity else { return NSDecimalNumber.zero }
         let quantityInt = quantityValue.dividing(by: NSDecimalNumber(mantissa: 1, exponent: decimal, isNegative: false))
