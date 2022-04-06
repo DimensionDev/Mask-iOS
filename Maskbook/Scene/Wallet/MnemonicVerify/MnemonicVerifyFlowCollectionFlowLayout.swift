@@ -20,7 +20,8 @@ class MnemonicVerifyCollectionFlowLayout: UICollectionViewFlowLayout {
         var direction: UICollectionView.ScrollDirection
     }
 
-    var sideItemScale: CGFloat = 0.7
+    var sideItemXScale: CGFloat = 0.7
+    var sideItemYScale: CGFloat = 0.7
     var sideItemAlpha: CGFloat = 0.8
     var sideItemShift: CGFloat = 0.0
     var spacingMode = SpacingMode.overlap(visibleOffset: 40)
@@ -60,7 +61,7 @@ class MnemonicVerifyCollectionFlowLayout: UICollectionViewFlowLayout {
         self.sectionInset = UIEdgeInsets(top: yInset, left: xInset, bottom: yInset, right: xInset)
 
         let side = isHorizontal ? itemSize.width : itemSize.height
-        let scaledItemOffset = (side - side * sideItemScale) / 2
+        let scaledItemOffset = (side - side * sideItemXScale) / 2
         switch self.spacingMode {
         case .fixed(let spacing):
             self.minimumLineSpacing = spacing - scaledItemOffset
@@ -98,12 +99,12 @@ class MnemonicVerifyCollectionFlowLayout: UICollectionViewFlowLayout {
         let maxDistance = (isHorizontal ? itemSize.width : itemSize.height) + minimumLineSpacing
         let distance = min(abs(collectionCenter - normalizedCenter), maxDistance)
         let ratio = (maxDistance - distance) / maxDistance
-
         let alpha = ratio * (1 - sideItemAlpha) + sideItemAlpha
-        let scale = ratio * (1 - sideItemScale) + sideItemScale
+        let xScale = ratio * (1 - sideItemXScale) + sideItemXScale
+        let yScale = ratio * (1 - sideItemYScale) + sideItemYScale
         let shift = (1 - ratio) * sideItemShift
         attributes.alpha = alpha
-        attributes.transform3D = CATransform3DScale(CATransform3DIdentity, scale, scale, 1)
+        attributes.transform3D = CATransform3DScale(CATransform3DIdentity, xScale, yScale, 1)
         attributes.zIndex = Int(alpha * 10)
 
         if isHorizontal {
