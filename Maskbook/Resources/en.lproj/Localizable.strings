@@ -124,6 +124,7 @@
 "Plugins.Luckydrop.Enter-Message" = "Enter attached message";
 "Plugins.Luckydrop.Enter-Quantity" = "Enter quantity";
 "Plugins.Luckydrop.Max" = "MAX";
+"Plugins.Luckydrop.Max-Quantity-Error" = "The max quantity is 255.";
 "Plugins.Luckydrop.Nft" = "NFT";
 "Plugins.Luckydrop.Quantity" = "Quantity";
 "Plugins.Luckydrop.Refund" = "Refund";

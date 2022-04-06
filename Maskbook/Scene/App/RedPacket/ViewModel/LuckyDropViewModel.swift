@@ -155,6 +155,14 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         buttonType == .unlockingToken
     }
     
+    var showQuantityError: Bool {
+        let quantity = NSDecimalNumber(string: quantityStr)
+        guard quantity != .notANumber else {
+            return false
+        }
+        return quantity.doubleValue > 255
+    }
+    
     // MARK: - Private property
     private var disposeBag = Set<AnyCancellable>()
     @InjectedProvider(\.walletAssetManager)

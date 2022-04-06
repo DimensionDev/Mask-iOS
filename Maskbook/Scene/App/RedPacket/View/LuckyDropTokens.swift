@@ -109,23 +109,31 @@ struct LuckyDropTokens: View {
     
     @ViewBuilder
     var quantityRow: some View {
-        HStack(spacing: 0) {
-            Asset.Plugins.LuckyDrop.redPacket.asImage()
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 24)
-            Spacer().frame(width: 8)
-            Text(L10n.Plugins.Luckydrop.quantity).foregroundColor(Asset.Colors.Text.dark.asColor())
-                .font(FontStyles.bh5.font)
-            Spacer()
-            TextField(L10n.Plugins.Luckydrop.enterQuantity, text: $viewModel.quantityStr)
-                .keyboardType(.numberPad)
-                .multilineTextAlignment(.trailing)
-                .frame(maxHeight: .infinity)
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 0) {
+                Asset.Plugins.LuckyDrop.redPacket.asImage()
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 24)
+                Spacer().frame(width: 8)
+                Text(L10n.Plugins.Luckydrop.quantity).foregroundColor(Asset.Colors.Text.dark.asColor())
+                    .font(FontStyles.bh5.font)
+                Spacer()
+                TextField(L10n.Plugins.Luckydrop.enterQuantity, text: $viewModel.quantityStr)
+                    .keyboardType(.numberPad)
+                    .multilineTextAlignment(.trailing)
+                    .frame(maxHeight: .infinity)
+            }
+            .frame(height: 52)
+            .padding(.horizontal, 16)
+            .background(Asset.Colors.Background.dark.asColor().cornerRadius(8))
+            
+            if viewModel.showQuantityError {
+                Text(L10n.Plugins.Luckydrop.maxQuantityError)
+                    .font(FontStyles.rh6.font)
+                    .foregroundColor(Asset.Colors.Public.error.asColor())
+            }
         }
-        .frame(height: 52)
-        .padding(.horizontal, 16)
-        .background(Asset.Colors.Background.dark.asColor().cornerRadius(8))
     }
     
     @ViewBuilder

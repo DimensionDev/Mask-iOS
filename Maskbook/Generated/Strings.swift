@@ -610,6 +610,10 @@ enum L10n {
       static var max: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Max")
       }
+      /// The max quantity is 255.
+      static var maxQuantityError: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Max-Quantity-Error")
+      }
       /// NFT
       static var nft: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Nft")
