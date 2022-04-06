@@ -114,6 +114,9 @@
 "Common.Toast.Saved" = "Saved!";
 "Plugins.Luckydrop.Buttons.Average" = "Average";
 "Plugins.Luckydrop.Buttons.Create-Persona" = "Create Persona";
+"Plugins.Luckydrop.Buttons.Exceed-Max-Quantity" = "Enter Quantity(Max: 255)";
+"Plugins.Luckydrop.Buttons.Insufficient-Balance" = "Insufficient Balance";
+"Plugins.Luckydrop.Buttons.Insufficient-Gas" = "Insufficient Gas Amount";
 "Plugins.Luckydrop.Buttons.Random" = "Random";
 "Plugins.Luckydrop.Buttons.Recover-Persona" = "Recover Persona";
 "Plugins.Luckydrop.Buttons.Risk-Warning" = "Confirm Risk Warning";

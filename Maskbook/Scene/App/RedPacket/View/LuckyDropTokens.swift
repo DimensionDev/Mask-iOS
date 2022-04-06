@@ -175,12 +175,15 @@ struct LuckyDropTokens: View {
                 }
             }
             HStack(spacing: 4) {
-                Text(viewModel.totalQuantity).font(FontStyles.bh1.font)
+                Text(viewModel.totalQuantityStr).font(FontStyles.bh1.font)
                     .foregroundColor(viewModel.totalQuantityColor)
-                Asset.Images.Scene.WalletList.Coins.ethSelected.asImage()
+                KFImage(viewModel.tokenURL)
+                    .cancelOnDisappear(true)
+                    .loadImmediately()
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 32)
+                    .cornerRadius(16)
             }
             .padding(.vertical, 32)
         }

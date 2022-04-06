@@ -23,7 +23,6 @@ class LuckyDropViewModel: NSObject, ObservableObject {
     // to be used in random mode
     @Published var amountTotalShareStr = ""
     @Published var message = ""
-    @Published var totalAmountStr = ""
     @Published var mode = RedPacket.RedPacketType.average
     @Published var token: Token?
     @Published var gasFeeItem: GasFeeCellItem?
@@ -90,7 +89,7 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         return gwei * (BigUInt(10).power(9))
     }
     
-    var totalQuantityDoubleValue: NSDecimalNumber {
+    var totalQuantity: NSDecimalNumber {
         var result: NSDecimalNumber
         if mode == .average {
             let quantity = NSDecimalNumber(string: quantityStr)
@@ -102,21 +101,24 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         } else {
             result = NSDecimalNumber(string: amountTotalShareStr)
         }
-        Task {
-            await MainActor.run {
-                processAproveButton()
-            }
-        }
+//        Task {
+//            await MainActor.run {
+//                if let gasFeeItem = gasFeeItem {
+//                    processInsufficientBalanceButton(gasFeeItem: gasFeeItem)
+//                }
+//                processAproveButton()
+//            }
+//        }
         return result != .notANumber ? result : .zero
     }
     
-    var totalQuantity: String {
+    var totalQuantityStr: String {
         let roundBehavior = NSDecimalNumberHandler(roundingMode: .plain, scale: 2, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
-        let result = totalQuantityDoubleValue.rounding(accordingToBehavior: roundBehavior)
+        let result = totalQuantity.rounding(accordingToBehavior: roundBehavior)
         guard result != .notANumber else {
             return "0.00"
         }
-        let doubleValue = totalQuantityDoubleValue.doubleValue
+        let doubleValue = totalQuantity.doubleValue
         if doubleValue < 0.01, doubleValue > 0 {
             return "< 0.01"
         }
@@ -124,7 +126,7 @@ class LuckyDropViewModel: NSObject, ObservableObject {
     }
     
     var totalQuantityColor: Color {
-        totalQuantityDoubleValue == .zero ?
+        totalQuantity == .zero ?
             Asset.Colors.Text.normal.asColor() :
             Asset.Colors.Text.dark.asColor()
     }
@@ -147,12 +149,16 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         buttonType.title(token: token)
     }
     
+    var confirmEnable: Bool {
+        buttonType.isEnable
+    }
+    
     var tokenURL: URL? {
         URL(string: token?.logoUrl ?? "")
     }
     
     var buttonAnimating: Bool {
-        buttonType == .unlockingToken
+        buttonType.animating
     }
     
     var showQuantityError: Bool {
@@ -174,6 +180,32 @@ class LuckyDropViewModel: NSObject, ObservableObject {
     @InjectedProvider(\.mainCoordinator)
     private var mainCoordinator
     private var nextButtonTypes: [ConfirmButtonType: Bool] = [:]
+    lazy var totalQuantityPublisher: AnyPublisher<NSDecimalNumber, Never> = {
+        // average
+        let quantityPublisher = $quantityStr.compactMap {
+            NSDecimalNumber(string: $0)
+        }.filter { number in
+            number != .notANumber
+        }
+        let amountPerSharePublisher = $amountPerShareStr.compactMap {
+            NSDecimalNumber(string: $0)
+        }.filter { number in
+            number != .notANumber
+        }
+        let averageTotal = Publishers.CombineLatest(quantityPublisher, amountPerSharePublisher)
+            .compactMap {
+                NSDecimalNumber(value: $0.doubleValue * $1.doubleValue)
+            }
+        
+        // random
+        let randomTotal = $amountTotalShareStr.compactMap {
+            NSDecimalNumber(string: $0)
+        }.filter { number in
+            number != .notANumber
+        }
+        
+        return Publishers.Merge(averageTotal, randomTotal).eraseToAnyPublisher()
+    }()
     
     // MARK: - Public method
     override init() {
@@ -186,24 +218,11 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         self.token = token
         
         gasFeeViewModel.refresh()
-        gasFeeViewModel.gasFeePublisher
-            .filter({ $0 != nil })
-            .prefix(1).sink { [weak self] gasFeeItem in
-                self?.gasFeeItem = gasFeeItem
-            }
-            .store(in: &disposeBag)
         
-        // 1. unlock
-        settings.$passwordExpiredDate.sink { [weak self] expiredDate in
-            guard let self = self else { return }
-            
-            if self.settings.isPasswordExpried(expiredDate) && self.nextButtonTypes[.unlock] != true {
-                self.nextButtonTypes[.unlock] = true
-            } else if !self.settings.isPasswordExpried(expiredDate) && self.nextButtonTypes[.unlock] == true {
-                self.nextButtonTypes[.unlock] = false
-            }
-        }
-        .store(in: &disposeBag)
+        // It will only change after the user selects gasfee and is only used here to initialize the data.
+        gasFeeViewModel.gasFeePublisher.filter({ $0 != nil }).print("[confirmButton]====>").prefix(1).assign(to: \.gasFeeItem, on: self).store(in: &disposeBag)
+        
+        setupObserversForConfirmButton()
         processConfirmButtonTypes()
         processNextButton()
     }
@@ -295,10 +314,10 @@ class LuckyDropViewModel: NSObject, ObservableObject {
             nextButtonTypes[.riskWarning] = true
         }
         
-        // 3. unlock tokens
+        // 4. unlock tokens
         processAproveButton()
         
-        // 4. send
+        // 7. send
         nextButtonTypes[.send] = true
     }
     
@@ -333,7 +352,7 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         let erc20 = ERC20(web3: web3, provider: web3.provider, address: contractAddress)
         
         Task {
-            guard let sendAmount = Web3.Utils.parseToBigUInt("\(totalQuantityDoubleValue)", decimals: Int(decimal)) else {
+            guard let sendAmount = Web3.Utils.parseToBigUInt("\(totalQuantity)", decimals: Int(decimal)) else {
                 await updateUnlockTokenButton(false)
                 return
             }
@@ -343,7 +362,7 @@ class LuckyDropViewModel: NSObject, ObservableObject {
             }
             
             await MainActor.run {
-                log.debug("allowance \(Int(allowance)) send: \(totalQuantityDoubleValue) decimals: \(decimal)", source: "lucky drop")
+                log.debug("allowance \(Int(allowance)) send: \(totalQuantity) decimals: \(decimal)", source: "lucky drop")
             }
             
             guard allowance < sendAmount else {
@@ -352,6 +371,32 @@ class LuckyDropViewModel: NSObject, ObservableObject {
             }
             
             await updateUnlockTokenButton(true)
+        }
+    }
+    
+    // 3. insufficient gas amount
+    private func processInsufficientGasButton(gasFeeItem: GasFeeCellItem) {
+        let gasFee = gasFeeItem.gasFee
+        let gasFeeNumber = NSDecimalNumber(string: gasFee)
+        guard gasFeeNumber != .notANumber  else { return }
+        guard let amount = token?.quantityNumber else { return }
+        nextButtonTypes[.insufficientGas] = gasFeeNumber.doubleValue > amount.doubleValue
+    }
+    
+    // 5. insufficient balance
+    private func processInsufficientBalanceButton(gasFeeItem: GasFeeCellItem) {
+        let gasFee = gasFeeItem.gasFee
+        let gasFeeNumber = NSDecimalNumber(string: gasFee)
+        let totalAmount = totalQuantity
+        guard gasFeeNumber != .notANumber, totalAmount != .notANumber else { return }
+        guard let amount = token?.quantityNumber else { return }
+        
+        if token?.isMainToken == true {
+            nextButtonTypes[.insufficientBalance] = (gasFeeNumber.doubleValue + totalAmount.doubleValue) >
+            amount.doubleValue
+        } else {
+            nextButtonTypes[.insufficientBalance] = totalAmount.doubleValue >
+            amount.doubleValue
         }
     }
     
@@ -381,7 +426,7 @@ class LuckyDropViewModel: NSObject, ObservableObject {
                 let transacation = try erc20.approve(
                     from: fromAddressEthFormat,
                     spender: toAddressEthFormat,
-                    amount: "\(totalQuantityDoubleValue)"
+                    amount: "\(totalQuantity)"
                 )
                 let transacationResult = try transacation.assemble()
                 let (promise, resolver) = Promise<String>.pending()
@@ -407,6 +452,44 @@ class LuckyDropViewModel: NSObject, ObservableObject {
             }
         }
     }
+    
+    private func setupObserversForConfirmButton() {
+        totalQuantityPublisher.asDriver().sink { [weak self] totalSend in
+            self?.processAproveButton()
+            self?.processNextButton()
+        }
+        .store(in: &disposeBag)
+        
+        Publishers.CombineLatest(
+            $gasFeeItem.compactMap({ $0 }).print("[confirmButton]"),
+            totalQuantityPublisher.print("[confirmButton]")
+        ).sink { [weak self] gasFeeItem, totalQuantity in
+            self?.processInsufficientBalanceButton(gasFeeItem: gasFeeItem)
+            self?.processNextButton()
+        }
+        .store(in: &disposeBag)
+        
+        // 6. enter quantity (MAX: 255)
+        $quantityStr.sink { [weak self] quantity in
+            let quantity = NSDecimalNumber(string: quantity)
+            guard quantity != .notANumber else { return }
+            self?.nextButtonTypes[.exceedMaxQuantity] = self?.showQuantityError == true
+            self?.processNextButton()
+        }
+        .store(in: &disposeBag)
+        
+        // 1. unlock
+        settings.$passwordExpiredDate.sink { [weak self] expiredDate in
+            guard let self = self else { return }
+            
+            if self.settings.isPasswordExpried(expiredDate) && self.nextButtonTypes[.unlock] != true {
+                self.nextButtonTypes[.unlock] = true
+            } else if !self.settings.isPasswordExpried(expiredDate) && self.nextButtonTypes[.unlock] == true {
+                self.nextButtonTypes[.unlock] = false
+            }
+        }
+        .store(in: &disposeBag)
+    }
 }
 
 extension LuckyDropViewModel: GasFeeBackDelegate {
@@ -431,8 +514,11 @@ extension LuckyDropViewModel {
     enum ConfirmButtonType: CaseIterable, Codable {
         case unlock
         case riskWarning
+        case insufficientGas
         case unlockToken
         case unlockingToken
+        case insufficientBalance
+        case exceedMaxQuantity
         // TODO: send text
         case send
         // TODO: sending text
@@ -442,10 +528,33 @@ extension LuckyDropViewModel {
             switch self {
             case .unlock: return L10n.Scene.WalletUnlock.title
             case .riskWarning: return L10n.Plugins.Luckydrop.Buttons.riskWarning
+            case .insufficientGas: return L10n.Plugins.Luckydrop.Buttons.insufficientGas
             case .unlockToken: return L10n.Plugins.Luckydrop.Buttons.unlockToken(token?.symbol ?? "")
             case .unlockingToken: return L10n.Plugins.Luckydrop.Buttons.unlockingToken
+            case .insufficientBalance: return L10n.Plugins.Luckydrop.Buttons.insufficientBalance
+            case .exceedMaxQuantity: return L10n.Plugins.Luckydrop.Buttons.exceedMaxQuantity
             case .send: return L10n.Scene.WalletBalance.btnSend
             case .sending: return L10n.Scene.WalletBalance.btnSend
+            }
+        }
+        
+        var isEnable: Bool {
+            switch self {
+            case .unlock, .riskWarning, .unlockToken, .unlockingToken, .send, .sending:
+                return true
+                
+            default:
+                return false
+            }
+        }
+        
+        var animating: Bool {
+            switch self {
+            case .unlockingToken, .sending:
+                return true
+                
+            default:
+                return false
             }
         }
     }

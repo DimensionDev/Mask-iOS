@@ -870,7 +870,10 @@
                 "create-persona": "Create Persona",
                 "recover-persona": "Recover Persona",
                 "average": "Average",
-                "random": "Random"
+                "random": "Random",
+                "insufficient-gas": "Insufficient Gas Amount",
+                "insufficient-balance": "Insufficient Balance",
+                "exceed-max-quantity": "Enter Quantity(Max: 255)"
             },
             "max": "MAX",
             "total-amount": "Total Amount",

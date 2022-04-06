@@ -668,6 +668,18 @@ enum L10n {
         static var createPersona: String {
           return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Create-Persona")
         }
+        /// Enter Quantity(Max: 255)
+        static var exceedMaxQuantity: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Exceed-Max-Quantity")
+        }
+        /// Insufficient Balance
+        static var insufficientBalance: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Insufficient-Balance")
+        }
+        /// Insufficient Gas Amount
+        static var insufficientGas: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Insufficient-Gas")
+        }
         /// Random
         static var random: String {
           return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Random")

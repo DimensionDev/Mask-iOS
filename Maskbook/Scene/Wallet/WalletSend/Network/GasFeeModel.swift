@@ -88,6 +88,10 @@ struct GasFeeCellItem: Hashable {
     var costTime: String
     var shortCostTime: String
     
+    var gasFee: String {
+        EthUtil.getGasFeeToken(gwei: gWei, gasLimit: gasLimit)
+    }
+    
     init(gasFeeModel: GasFeeModel,
          type: ItemType) {
         switch type {

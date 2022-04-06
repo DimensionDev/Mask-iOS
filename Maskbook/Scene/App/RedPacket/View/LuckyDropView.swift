@@ -21,26 +21,32 @@ struct LuckyDropView: View {
                     Spacer().frame(height: LayoutConstraints.top)
                     LuckyDropSegmentView()
                     tokensRow
-                    PrimaryButton(action: {
-                        switch viewModel.buttonType {
-                        case .unlock:
-                            Coordinator.main.present(
-                                scene: .walletUnlock(cancellable: true) { error in
-                                    viewModel.removeButtonType(type: .unlock)
-                                },
-                                transition: .modal(animated: true, adaptiveDelegate: nil)
-                            )
-                            
-                        case .riskWarning:
-                            mainCoordinator.present(scene: .pluginRiskWarning, transition: .popup)
-                            viewModel.removeButtonType(type: .riskWarning)
-                            
-                        case .unlockToken: viewModel.approveToken()
-                        case .unlockingToken: break
-                        case .send: break //TODO: send action
-                        case .sending: break
-                        }
-                    }, title: viewModel.confirmTitle, animating: viewModel.buttonAnimating)
+                    PrimaryButton(
+                        action: {
+                            switch viewModel.buttonType {
+                            case .unlock:
+                                Coordinator.main.present(
+                                    scene: .walletUnlock(cancellable: true) { error in
+                                        viewModel.removeButtonType(type: .unlock)
+                                    },
+                                    transition: .modal(animated: true, adaptiveDelegate: nil)
+                                )
+                                
+                            case .riskWarning:
+                                mainCoordinator.present(scene: .pluginRiskWarning, transition: .popup)
+                                viewModel.removeButtonType(type: .riskWarning)
+                                
+                            case .unlockToken: viewModel.approveToken()
+                            case .unlockingToken: break
+                            case .send: break //TODO: send action
+                            case .sending: break
+                            default: break
+                            }
+                        },
+                        title: viewModel.confirmTitle,
+                        animating: viewModel.buttonAnimating,
+                        isEnable: viewModel.confirmEnable
+                    )
                 }
                 .padding(.horizontal, LayoutConstraints.horizontal)
             }
