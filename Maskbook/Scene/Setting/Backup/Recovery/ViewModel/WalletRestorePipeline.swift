@@ -107,25 +107,6 @@ final class WalletRestorePipeline {
             }
         }
         .store(in: &restorePipeStorage)
-//        vault.getValue(for: .walletPassword)
-//            .combineLatest(RecoverDataManager.performRestoreBackup(data))
-//            .sink { [weak self] password, result in
-//                if result {
-//                    // sync wallet info before send restoreSucceed
-//                    if let wallets = restorefile?.wallets, let password = password {
-//                        // if error occures send message otherwise send succeed message
-//                        if case .failure = self?.walletProvider.syncWallets(wallets, password: password) {
-//                            self?.walletRestoreSignal.send(.noWalletSecureFoundInRestoreFile)
-//                            return
-//                        }
-//                    }
-//                    let isWalletEmty = (restorefile?.wallets ?? []).isEmpty
-//                    self?.walletRestoreSignal.send(.restoreSucceed(withWallet: !isWalletEmty))
-//                } else {
-//                    self?.walletRestoreSignal.send(.failedToParseRestoreFile)
-//                }
-//            }
-//            .store(in: &restorePipeStorage)
     }
 
     private func nextPipeForOriginRestoreData(

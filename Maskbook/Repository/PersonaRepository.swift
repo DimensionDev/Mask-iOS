@@ -319,7 +319,7 @@ enum PersonaRepository {
                 }
                 
                 newPersonaRecord.hasLogout = false
-                newPersonaRecord.initialized = false
+                newPersonaRecord.initialized = true
                 
                 if let createdAt = persona[Persona.CodingKeys.createdAt.rawValue].double {
                     newPersonaRecord.createdAt = Date(timeIntervalSince1970: createdAt)
