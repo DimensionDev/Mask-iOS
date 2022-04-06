@@ -133,6 +133,10 @@
             "backup_popup_binding_first": {
                 "title": "",
                 "description": ""
+            },
+            "camera_access": {
+                "title": "",
+                "description": ""
             }
         },
         "controls": {
@@ -171,7 +175,9 @@
             "take_photo": "",
             "save": "",
             "move_data_now": "",
-            "remind_me_later": ""
+            "remind_me_later": "",
+            "go_settings": "",
+            "dont_allow": ""
         },
         "toast": {
             "saved": "",
@@ -187,6 +193,11 @@
             "description2": "",
             "description3": "",
             "description4": ""
+        },
+        "welcome_identity_empty": {
+            "create_a_persona": "",
+            "recover_your_persona": "",
+            "description": ""
         },
         "terms_of_service": {
             "title": "법적 고지",

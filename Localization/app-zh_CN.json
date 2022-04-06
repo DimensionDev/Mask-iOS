@@ -133,6 +133,10 @@
             "backup_popup_binding_first": {
                 "title": "绑定您的电子邮件或手机",
                 "description": "请在备份到云端之前绑定您的电子邮件或电话号码。"
+            },
+            "camera_access": {
+                "title": "Mask Network 想要获取\n您的相机权限",
+                "description": "请到系统设置里允许相机权限。"
             }
         },
         "controls": {
@@ -171,7 +175,9 @@
             "take_photo": "拍照",
             "save": "保存",
             "move_data_now": "立即移动数据",
-            "remind_me_later": "稍后提醒我"
+            "remind_me_later": "稍后提醒我",
+            "go_settings": "好",
+            "dont_allow": "不允许"
         },
         "toast": {
             "saved": "已保存！",
@@ -187,6 +193,11 @@
             "description2": "在社交网络上发送加密信息。",
             "description3": "多链钱包，支持 WalletConnect",
             "description4": "及时进行云端/本地备份"
+        },
+        "welcome_identity_empty": {
+            "create_a_persona": "创建角色",
+            "recover_your_persona": "恢复角色",
+            "description": "崭新，开放的Web 3.0 之门。"
         },
         "terms_of_service": {
             "title": "法律声明",
