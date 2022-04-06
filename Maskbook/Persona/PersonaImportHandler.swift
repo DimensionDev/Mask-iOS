@@ -49,7 +49,7 @@ class PersonaImportHandler {
     
     private func currentPersonaRecord(for item: PersonaImportItem) -> PersonaRecord? {
         switch item.type {
-        case .privateKey(let privateKey):
+        case let .privateKey(privateKey):
             let decodedData = Data(base64URLEncoded: privateKey)
 
             let unpackedData = try? decodedData?.unpack() as? [String: Any]
@@ -57,18 +57,16 @@ class PersonaImportHandler {
                 log.debug("private key error", source: "persona")
                 return nil
             }
-            let personaRecord = PersonaRepository.queryPersonas(identifiers: nil).filter {
-                guard let privateKey = $0.privateKey else { return false }
-                guard let data = privateKey.data(using: .utf8) else { return false }
-                let json = try? JSON(data: data)
-                guard let dInPersona = json?["d"].string else { return false }
-                return d == dInPersona
-            }.first
+            let personaRecord = PersonaRepository.queryPersonas(identifiers: nil)
+                .first(where: {
+                    d == $0.dKeyInPrivateKey
+                })
             return personaRecord
-        case .mnemonic(let mnemonic):
-            let personaRecord = PersonaRepository.queryPersonas(identifiers: nil).filter {
-                return $0.mnemonic == mnemonic
-            }.first
+        case let .mnemonic(mnemonic):
+            let personaRecord = PersonaRepository.queryPersonas(identifiers: nil)
+                .first(where: {
+                    mnemonic == $0.mnemonic
+                })
             return personaRecord
         }
     }
