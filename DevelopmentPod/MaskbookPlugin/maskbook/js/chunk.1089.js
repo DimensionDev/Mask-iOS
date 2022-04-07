@@ -12,8 +12,8 @@ __webpack_require__.d(__webpack_exports__, {
 
 // EXTERNAL MODULE: ./src/social-network/utils/create-post-context.ts + 1 modules
 var create_post_context = __webpack_require__(13591);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ./src/social-network-adaptor/minds.com/base.ts
 var base = __webpack_require__(65375);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/isNull.js
@@ -49,7 +49,6 @@ const mindsShared = {
         getProfilePage: ()=>'https://www.minds.com'
         ,
         isValidUsername: usernameValidator,
-        publicKeyEncoding: undefined,
         textPayloadPostProcessor: undefined,
         getPostURL,
         getShareLinkURL (message) {
@@ -98,20 +97,18 @@ __webpack_require__.d(__webpack_exports__, {
 
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+holoflows-kit@0.9.0-20210902104757-7c3d0d0_webextension-polyfill@0.8.0/node_modules/@dimensiondev/holoflows-kit/umd/index.cjs
 var umd = __webpack_require__(44162);
-// EXTERNAL MODULE: ../typed-message/base/index.ts + 27 modules
-var base = __webpack_require__(69492);
+// EXTERNAL MODULE: ../typed-message/base/index.ts + 2 modules
+var base = __webpack_require__(65631);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var src = __webpack_require__(79226);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/ts-results@3.3.0/node_modules/ts-results/esm/index.js
 var esm = __webpack_require__(79594);
 // EXTERNAL MODULE: ./src/social-network/index.ts
 var social_network = __webpack_require__(61751);
-// EXTERNAL MODULE: ./src/social-network-adaptor/facebook.com/base.ts
-var facebook_com_base = __webpack_require__(40543);
 ;// CONCATENATED MODULE: ./src/social-network-adaptor/facebook.com/utils/resolveFacebookLink.ts
 
 function resolveFacebookLink(link, id) {
-    return id === facebook_com_base/* FACEBOOK_ID */.Iz ? link.replace(/\?fbclid=[\S\s]*#/, '#') : link;
+    return id === src/* EnhanceableSite.Facebook */.Jk.Facebook ? link.replace(/\?fbclid=[\S\s]*#/, '#') : link;
 }
 
 ;// CONCATENATED MODULE: ./src/social-network/utils/create-post-context.ts
@@ -207,8 +204,15 @@ function createSNSAdaptorSpecializedPostContext(create) {
                 ;
             }
         });
+        const iv = new umd.ValueRef(null);
+        const isPublicShared = new umd.ValueRef(undefined);
+        const ownersAESKeyEncrypted = new umd.ValueRef(undefined);
+        const version = new umd.ValueRef(undefined);
         return {
-            ...author,
+            author: author.author,
+            avatarURL: author.avatarURL,
+            nickname: author.nickname,
+            snsID: author.snsID,
             get rootNode () {
                 return opt.rootElement.realCurrent;
             },
@@ -236,14 +240,17 @@ function createSNSAdaptorSpecializedPostContext(create) {
             rawMessagePiped: transformedPostContent,
             postContent: (0,src/* SubscriptionFromValueRef */.Jf)(postContent),
             containingMaskPayload: (0,src/* SubscriptionFromValueRef */.Jf)(postPayload),
-            decryptedPayloadForImage: new umd.ValueRef(null),
-            iv: new umd.ValueRef(null),
-            publicShared: (0,src/* SubscriptionDebug */.Y_)({
-                getCurrentValue: ()=>postPayload.value.map((val)=>val.version === -38 && val.sharedPublic
-                    ).unwrapOr(undefined)
-                ,
-                subscribe: (sub)=>postPayload.addListener(sub)
-            })
+            iv,
+            publicShared: (0,src/* SubscriptionFromValueRef */.Jf)(isPublicShared),
+            ownersKeyEncrypted: (0,src/* SubscriptionFromValueRef */.Jf)(ownersAESKeyEncrypted),
+            version: (0,src/* SubscriptionFromValueRef */.Jf)(version),
+            decryptedReport (opts) {
+                var ref;
+                if (opts.iv) iv.value = opts.iv;
+                if ((ref = opts.sharedPublic) === null || ref === void 0 ? void 0 : ref.some) isPublicShared.value = opts.sharedPublic.val;
+                if (opts.ownersAESKeyEncrypted) ownersAESKeyEncrypted.value = opts.ownersAESKeyEncrypted;
+                if (opts.version) version.value = opts.version;
+            }
         };
     };
 }

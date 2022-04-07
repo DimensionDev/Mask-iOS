@@ -12,14 +12,14 @@ __webpack_require__.d(__webpack_exports__, {
   "default": () => (/* binding */ CreateWallet)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router@6.0.0-beta.0_history@5.2.0+react@18.0.0-rc.0/node_modules/react-router/index.js
-var react_router = __webpack_require__(63552);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var src = __webpack_require__(92597);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router@6.2.2_react@18.0.0-rc.2/node_modules/react-router/index.js
+var react_router = __webpack_require__(92186);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var src = __webpack_require__(43021);
 ;// CONCATENATED MODULE: ../dashboard/src/components/CreateWalletFrame/index.tsx
 
 
@@ -53,7 +53,10 @@ const CreateMaskWalletFrame = /*#__PURE__*/ (0,react.memo)((props)=>{
     }));
 });
 
+// EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
+var shared_base_src = __webpack_require__(79226);
 ;// CONCATENATED MODULE: ../dashboard/src/pages/CreateMaskWallet/index.tsx
+
 
 
 
@@ -64,20 +67,21 @@ const CreateWalletForm = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import(
 );
 const CreateMnemonic = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(5638), __webpack_require__.e(2698), __webpack_require__.e(9759), __webpack_require__.e(9193)]).then(__webpack_require__.bind(__webpack_require__, 56901))
 );
+const r = (0,shared_base_src/* relativeRouteOf */.zD)(shared_base_src/* DashboardRoutes.CreateMaskWallet */.vq.CreateMaskWallet);
 function CreateWallet() {
     return(/*#__PURE__*/ (0,jsx_runtime.jsx)(CreateMaskWalletFrame, {
         children: /*#__PURE__*/ (0,jsx_runtime.jsxs)(react_router/* Routes */.Z5, {
             children: [
                 /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                    path: "/",
+                    path: "*",
                     element: /*#__PURE__*/ (0,jsx_runtime.jsx)(Welcome, {})
                 }),
                 /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                    path: "/form",
+                    path: r(shared_base_src/* DashboardRoutes.CreateMaskWalletForm */.vq.CreateMaskWalletForm),
                     element: /*#__PURE__*/ (0,jsx_runtime.jsx)(CreateWalletForm, {})
                 }),
                 /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                    path: "/mnemonic",
+                    path: r(shared_base_src/* DashboardRoutes.CreateMaskWalletMnemonic */.vq.CreateMaskWalletMnemonic),
                     element: /*#__PURE__*/ (0,jsx_runtime.jsx)(CreateMnemonic, {})
                 })
             ]

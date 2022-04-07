@@ -7,8 +7,8 @@
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/async-call-rpc@6.0.1/node_modules/async-call-rpc/out/base.min.mjs
-var base_min = __webpack_require__(51754);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/async-call-rpc@6.0.2/node_modules/async-call-rpc/out/base.min.mjs
+var base_min = __webpack_require__(45824);
 ;// CONCATENATED MODULE: ../mask-sdk/shared/serializer.ts
 
 const serializer = (0,base_min/* JSONSerialization */.mT)([
@@ -82,8 +82,8 @@ function createMaskSDKChannel(side) {
 
 
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/async-call-rpc@6.0.1/node_modules/async-call-rpc/out/full.js
-var full = __webpack_require__(40460);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/async-call-rpc@6.0.2/node_modules/async-call-rpc/out/full.js
+var full = __webpack_require__(74833);
 ;// CONCATENATED MODULE: ../mask-sdk/server/index.ts
 
 
@@ -97,8 +97,8 @@ function createMaskSDKServer(api, signal) {
     });
 }
 
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ./utils-pure/index.ts + 6 modules
 var utils_pure = __webpack_require__(6628);
 ;// CONCATENATED MODULE: ./src/extension/mask-sdk/hmr-sdk.ts
@@ -221,7 +221,7 @@ start();
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "M": () => (/* binding */ ExternalPluginMessages)
 /* harmony export */ });
-/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(27194);
+/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63151);
 /* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(79226);
 
 

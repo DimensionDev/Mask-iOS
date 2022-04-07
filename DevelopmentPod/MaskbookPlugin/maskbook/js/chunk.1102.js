@@ -10,8 +10,8 @@ __webpack_require__.d(__webpack_exports__, {
   "F": () => (/* binding */ s)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-hook-form@7.27.1_react@18.0.0-rc.0/node_modules/react-hook-form/dist/index.esm.mjs
-var index_esm = __webpack_require__(38447);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-hook-form@7.27.1_react@18.0.0-rc.2/node_modules/react-hook-form/dist/index.esm.mjs
+var index_esm = __webpack_require__(56247);
 ;// CONCATENATED MODULE: ../../node_modules/.pnpm/@hookform+resolvers@2.8.8_react-hook-form@7.27.1/node_modules/@hookform/resolvers/dist/resolvers.module.js
 var e=function(i,e,t){if(i&&"reportValidity"in i){var f=(0,index_esm/* get */.U2)(t,e);i.setCustomValidity(f&&f.message||""),i.reportValidity()}},resolvers_module_t=function(r,i){var t=function(t){var f=i.fields[t];f&&f.ref&&"reportValidity"in f.ref?e(f.ref,t,r):f.refs&&f.refs.forEach(function(i){return e(i,t,r)})};for(var f in i.fields)t(f)},f=function(e,f){f.shouldUseNativeValidation&&resolvers_module_t(e,f);var o={};for(var a in e){var n=(0,index_esm/* get */.U2)(f.fields,a);(0,index_esm/* set */.t8)(o,a,Object.assign(e[a],{ref:n&&n.ref}))}return o};
 //# sourceMappingURL=resolvers.module.js.map
@@ -29,7 +29,7 @@ var n=function(e,o){for(var n={};e.length;){var s=e[0],t=s.code,i=s.message,a=s.
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "t": () => (/* binding */ EyeIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -80,7 +80,7 @@ const EyeIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createPaletteAwareIcon
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "X": () => (/* binding */ EyeOffIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -113,10 +113,10 @@ const EyeOffIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createPaletteAwareI
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (/* binding */ PasswordField)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(76342);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(84179);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(91497);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(92332);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(87409);
 /* harmony import */ var _StyledInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(64702);
 /* harmony import */ var _masknet_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(34382);
 /* harmony import */ var _masknet_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(84258);
@@ -158,10 +158,10 @@ const PasswordField = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.memo)(
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "F": () => (/* binding */ StyledInput)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(76342);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(67182);
-/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(92597);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(15672);
+/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(43021);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(83849);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
 
@@ -230,27 +230,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(76342);
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(22572);
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(56838);
-/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(38447);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(28577);
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(1840);
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(56247);
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(95130);
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(22283);
-/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(92597);
+/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(43021);
 /* harmony import */ var _components_PageHeader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(88397);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(13573);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(93573);
 /* harmony import */ var _components_LoadingPlaceholder__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(75677);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(7280);
-/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(39850);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(74491);
+/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(95367);
 /* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(79226);
 /* harmony import */ var _hook_useHasPassword__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(4034);
 /* harmony import */ var _hooks_usePasswordForm__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(91421);
 /* harmony import */ var _components_PasswordField__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(29502);
 /* harmony import */ var _plugins_Wallet_messages__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(63081);
-/* harmony import */ var _mui_lab__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(17279);
+/* harmony import */ var _mui_lab__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(16576);
 /* harmony import */ var _service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(45925);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(22749);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(92186);
 
 
 
@@ -325,7 +325,7 @@ const useStyles = (0,_masknet_theme__WEBPACK_IMPORTED_MODULE_3__/* .makeStyles *
 const WalletRecovery = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.memo)(()=>{
     const { t  } = (0,_utils__WEBPACK_IMPORTED_MODULE_5__/* .useI18N */ .M1)();
     const { classes  } = useStyles();
-    const history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_14__/* .useHistory */ .k6)();
+    const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_14__/* .useNavigate */ .s0)();
     const { hasPassword , loading: getHasPasswordLoading  } = (0,_hook_useHasPassword__WEBPACK_IMPORTED_MODULE_9__/* .useHasPassword */ .T)();
     const { control , handleSubmit , setError , formState: { errors , isValid  } , schema ,  } = (0,_hooks_usePasswordForm__WEBPACK_IMPORTED_MODULE_10__/* .usePasswordForm */ .a)(!hasPassword);
     const { value: legacyWallets = [] , loading: getLegacyWalletsLoading  } = (0,react_use__WEBPACK_IMPORTED_MODULE_15__/* ["default"] */ .Z)(async ()=>{
@@ -365,7 +365,9 @@ const WalletRecovery = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.memo)
             if (await _plugins_Wallet_messages__WEBPACK_IMPORTED_MODULE_12__/* .WalletRPC.hasWallet */ .V.hasWallet(x.address)) await _plugins_Wallet_messages__WEBPACK_IMPORTED_MODULE_12__/* .WalletRPC.freezeLegacyWallet */ .V.freezeLegacyWallet(x.address);
         }));
         await _service__WEBPACK_IMPORTED_MODULE_13__/* ["default"].Helper.removePopupWindow */ .ZP.Helper.removePopupWindow();
-        history.replace(_masknet_shared_base__WEBPACK_IMPORTED_MODULE_8__/* .PopupRoutes.Wallet */ .mZ.Wallet);
+        navigate(_masknet_shared_base__WEBPACK_IMPORTED_MODULE_8__/* .PopupRoutes.Wallet */ .mZ.Wallet, {
+            replace: true
+        });
     }, [
         onSubmit,
         hasPassword,
@@ -495,10 +497,10 @@ const WalletRecovery = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.memo)
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "m": () => (/* binding */ PageHeader)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(76342);
-/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(92597);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(7280);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
+/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(43021);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(74491);
 /* harmony import */ var _components_NetworkSelector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(1968);
 
 
@@ -541,10 +543,10 @@ const PageHeader = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.memo)(({ 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "a": () => (/* binding */ usePasswordForm)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
 /* harmony import */ var zod__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(56382);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13573);
-/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(38447);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(93573);
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(56247);
 /* harmony import */ var _hookform_resolvers_zod__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(75426);
 
 

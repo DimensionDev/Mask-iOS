@@ -105,6 +105,13 @@ public struct Api_SignTransactionResp {
   public init() {}
 }
 
+#if swift(>=5.5) && canImport(_Concurrency)
+extension Api_SignTransactionParam: @unchecked Sendable {}
+extension Api_SignTransactionParam.OneOf_Input: @unchecked Sendable {}
+extension Api_SignTransactionResp: @unchecked Sendable {}
+extension Api_SignTransactionResp.OneOf_Output: @unchecked Sendable {}
+#endif  // swift(>=5.5) && canImport(_Concurrency)
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "api"
@@ -131,12 +138,16 @@ extension Api_SignTransactionParam: SwiftProtobuf.Message, SwiftProtobuf._Messag
       case 4: try { try decoder.decodeSingularEnumField(value: &self.coin) }()
       case 5: try {
         var v: Ethereum_SignInput?
+        var hadOneofValue = false
         if let current = self.input {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .signInput(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.input = .signInput(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.input = .signInput(v)
+        }
       }()
       default: break
       }
@@ -144,6 +155,10 @@ extension Api_SignTransactionParam: SwiftProtobuf.Message, SwiftProtobuf._Messag
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
     if !self.storedKeyData.isEmpty {
       try visitor.visitSingularBytesField(value: self.storedKeyData, fieldNumber: 1)
     }
@@ -156,9 +171,9 @@ extension Api_SignTransactionParam: SwiftProtobuf.Message, SwiftProtobuf._Messag
     if self.coin != .ethereum {
       try visitor.visitSingularEnumField(value: self.coin, fieldNumber: 4)
     }
-    if case .signInput(let v)? = self.input {
+    try { if case .signInput(let v)? = self.input {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
-    }
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -187,12 +202,16 @@ extension Api_SignTransactionResp: SwiftProtobuf.Message, SwiftProtobuf._Message
       switch fieldNumber {
       case 1: try {
         var v: Ethereum_SignOutput?
+        var hadOneofValue = false
         if let current = self.output {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .signOutput(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.output = .signOutput(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.output = .signOutput(v)
+        }
       }()
       default: break
       }
@@ -200,9 +219,13 @@ extension Api_SignTransactionResp: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if case .signOutput(let v)? = self.output {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if case .signOutput(let v)? = self.output {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    }
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 

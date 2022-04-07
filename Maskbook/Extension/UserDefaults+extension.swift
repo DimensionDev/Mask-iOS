@@ -82,7 +82,6 @@ final class UserDefaultSettings {
         case walletDisplayBlockChain
         
         case indexedDBDataMigrated
-        case connectTipsDidShown
         case beAwareOfPluginTip
         case jsResourceIsUsingBundle
         case jsDocumentResourceSelectedCommitHash
@@ -309,9 +308,6 @@ final class UserDefaultSettings {
     @ReactiveUserDefault(key: Keys.legacyWalletsImported.rawValue, defaultValue: false)
     var legacyWalletsImported: Bool
 
-    @ReactiveUserDefault(key: Keys.connectTipsDidShown.rawValue, defaultValue: false)
-    var connectTipsDidShown: Bool
-
     @OptionalUserDefault(key: Keys.walletDisplayBlockChain.rawValue)
     var walletDisplayBlockchainString: String?
     var walletDisplayBlockchain: WalletDisplayBlockChainType {
@@ -342,6 +338,7 @@ final class UserDefaultSettings {
 }
 
 extension UserDefaultSettings {
+    
     func changeNetwork(network: BlockChainNetwork, address: String?) {
         defaultAccountAddress = address
         self.network = network

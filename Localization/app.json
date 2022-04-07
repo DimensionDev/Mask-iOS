@@ -1,6 +1,6 @@
 {
     "tab": {
-        "personas": "Personas",
+        "personas": "Persona",
         "wallet": "Wallet",
         "labs": "Labs",
         "setting": "Setting"
@@ -71,10 +71,6 @@
             "change_backup_password_failed": {
                 "title": "Backup Password changed failed!"
             },
-            "identity_phrase": {
-                "title": "Identity Phrase",
-                "description": "Your identity phrase is composed of randomly selected words. Please carefully write down each word in the order it appears."
-            },
             "identify_code_screenshot_warning": {
                 "title": "Warning",
                 "description": "Simply taking a screenshot of identity code is not safe."
@@ -137,6 +133,10 @@
             "backup_popup_binding_first": {
                 "title": "Bind your email or phone",
                 "description": "Please bind your email or phone number before you back up to cloud."
+            },
+            "camera_access": {
+                "title": "Mask Network would like to\naccess your camera",
+                "description": "Please go to Settings to allow access."
             }
         },
         "controls": {
@@ -171,8 +171,13 @@
             "download": "download",
             "skip": "Skip, download later",
             "download_next": "I downloaded, next",
+            "select_from_photo": "Select from photos",
+            "take_photo": "Take a photo",
+            "save": "Save",
             "move_data_now": "Move data now",
-            "remind_me_later": "Remind me later"
+            "remind_me_later": "Remind me later",
+            "go_settings": "To Settings",
+            "dont_allow": "Don’t Allow"
         },
         "toast": {
             "saved": "Saved!",
@@ -184,10 +189,15 @@
         "guide": {
             "skip": "Skip",
             "lets_start": "Let’s start",
-            "description1": "Your Portal to the New, Open Internet",
-            "description2": "Send encrypted messages on social media with persona",
-            "description3": "Multi-Chain wallet, compatible with WalletConnect",
-            "description4": "Back up in time, with cloud / local backup"
+            "description1": "Your Portal to the New,\nOpen Internet",
+            "description2": "Send Encrypted Messages\non Social Networks with Persona",
+            "description3": "Multi-Chain Wallet,\nCompatible with WalletConnect",
+            "description4": "Back up in Time,\nwith Cloud / Local Backup"
+        },
+        "welcome_identity_empty": {
+            "create_a_persona": "Create a Persona",
+            "recover_your_persona": "Recover your Persona",
+            "description": "The portal to a new and open Internet"
         },
         "terms_of_service": {
             "title": "Legal",
@@ -428,7 +438,7 @@
             "floor_price": "Floor Price",
             "save_photo":"Save to Photos",
             "collection_web":"View Collection Website",
-            "etherscan":"View on Etherscan",
+            "etherscan":"View on Etherscan"
         },
         "sendTransaction":{
             "send":{
@@ -504,7 +514,7 @@
             "password_demand": "Payment Password must be a combination of 2 categories out of numbers, letters and special characters with a length of 8-20 characters."
         },
         "personas": {
-            "personas": "Personas",
+            "personas": "Persona",
             "tabs": {
                 "social": "Social",
                 "post": "Post",
@@ -524,6 +534,9 @@
                 "persona": "Persona",
                 "create_persona": "Create Persona",
                 "input_persona_name": "Input persona name"
+            },
+            "search": {
+                "placeholder": "Search"
             },
             "delete": "Confirm to delete persona\n",
             "delete_tip": "If you haven’t backed up, please go to Settings - Backup and Recovery",
@@ -552,12 +565,17 @@
             "disconnect": "Disconnect",
             "connect_social_accounts": "Connect Social accounts",
             "accounts": "Accounts",
-            "connect_tips": "Select the social account to connect your persona. Enjoy a web 3.0 social expereince.",
-            "add": "add"
+            "connect_tips": "Connect persona to social networks below",
+            "add": "Add"
         },
         "persona_download": {
             "identity_id": "Identity Code",
             "download_tips": "The QR code encrypts the identity code or private key of your persona. It’s recommended to print it. You can use Mask App to scan the QR code to login."
+        },
+        "persona_avatar": {
+            "title": "Set Persona Avatar",
+            "crop": "Crop & rotate",
+            "remove_avatar": "Remove Persona Avatar"
         },
         "wallet_balance": {
             "btn_swap": "Swap",
@@ -830,8 +848,8 @@
             "refunded":"Refunded",
             "refund":"Refund",
             "empty": "Empty",
-            "share_message_official": "I just claimed a lucky drop from %s on %s network. Follow %s (mask.io) to claim lucky drops.\n#mask_io #LuckyDrop\n%s",
-            "share_message_unsupport_platform": "I just claimed a lucky drop from @%s on %s network. \n%s"
+            "share_message_official": "Hi friends, I just claimed a lucky drop sent by %s on %s network. Follow %s (mask.io) to claim the lucky drops.\n#mask_io #LuckyDrop\n%s",
+            "share_message_unsupport_platform": "Hi friends, I just claimed a lucky drop sent by @%s on %s network. \n%s"
         },
         "move_backup_data": {
             "title": "Please move your data",

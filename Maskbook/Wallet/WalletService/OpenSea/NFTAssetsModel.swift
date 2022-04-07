@@ -193,5 +193,6 @@ extension Collectible {
         self.collectionName = assetModel.collection?.name
         self.collectionImage = assetModel.collection?.imageURL
         self.collectionSlug = assetModel.collection?.slug
+        self.collectionWebsite = URL(string: assetModel.collection?.externalURL ?? "")
     }
 }

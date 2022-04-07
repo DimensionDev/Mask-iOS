@@ -10,8 +10,8 @@ __webpack_require__.d(__webpack_exports__, {
   "F": () => (/* binding */ s)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-hook-form@7.27.1_react@18.0.0-rc.0/node_modules/react-hook-form/dist/index.esm.mjs
-var index_esm = __webpack_require__(38447);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-hook-form@7.27.1_react@18.0.0-rc.2/node_modules/react-hook-form/dist/index.esm.mjs
+var index_esm = __webpack_require__(56247);
 ;// CONCATENATED MODULE: ../../node_modules/.pnpm/@hookform+resolvers@2.8.8_react-hook-form@7.27.1/node_modules/@hookform/resolvers/dist/resolvers.module.js
 var e=function(i,e,t){if(i&&"reportValidity"in i){var f=(0,index_esm/* get */.U2)(t,e);i.setCustomValidity(f&&f.message||""),i.reportValidity()}},resolvers_module_t=function(r,i){var t=function(t){var f=i.fields[t];f&&f.ref&&"reportValidity"in f.ref?e(f.ref,t,r):f.refs&&f.refs.forEach(function(i){return e(i,t,r)})};for(var f in i.fields)t(f)},f=function(e,f){f.shouldUseNativeValidation&&resolvers_module_t(e,f);var o={};for(var a in e){var n=(0,index_esm/* get */.U2)(f.fields,a);(0,index_esm/* set */.t8)(o,a,Object.assign(e[a],{ref:n&&n.ref}))}return o};
 //# sourceMappingURL=resolvers.module.js.map
@@ -29,7 +29,7 @@ var n=function(e,o){for(var n={};e.length;){var s=e[0],t=s.code,i=s.message,a=s.
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "m": () => (/* binding */ RightIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -53,10 +53,10 @@ const RightIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIcon */ .I)('R
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "F": () => (/* binding */ StyledInput)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(76342);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(67182);
-/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(92597);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(15672);
+/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(43021);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(83849);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
 
@@ -129,16 +129,16 @@ __webpack_require__.d(__webpack_exports__, {
   "default": () => (/* binding */ Wallet_Transfer)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/MenuItem/MenuItem.js + 1 modules
-var MenuItem = __webpack_require__(88624);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Typography/Typography.js + 1 modules
-var Typography = __webpack_require__(7280);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var src = __webpack_require__(92597);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/MenuItem/MenuItem.js + 1 modules
+var MenuItem = __webpack_require__(56561);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Typography/Typography.js + 1 modules
+var Typography = __webpack_require__(74491);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var src = __webpack_require__(43021);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useChainId.ts
 var useChainId = __webpack_require__(63541);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useWallets.ts
@@ -149,14 +149,14 @@ var types = __webpack_require__(95130);
 var formatter = __webpack_require__(22283);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/chainDetailed.ts
 var chainDetailed = __webpack_require__(22229);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/unstated-next@1.1.0/node_modules/unstated-next/dist/unstated-next.mjs
 var unstated_next = __webpack_require__(44737);
 // EXTERNAL MODULE: ./src/extension/popups/pages/Wallet/hooks/useWalletContext.ts
 var useWalletContext = __webpack_require__(1130);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useWallet.ts
 var useWallet = __webpack_require__(51596);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useNetworkType.ts
@@ -173,8 +173,8 @@ var useFungibleTokenBalance = __webpack_require__(42624);
 var token = __webpack_require__(11315);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useTokenTransferCallback.ts + 3 modules
 var useTokenTransferCallback = __webpack_require__(32004);
-// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
-var base_src = __webpack_require__(15091);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var base_src = __webpack_require__(26618);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/zod@3.13.4/node_modules/zod/lib/index.mjs
 var lib = __webpack_require__(56382);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/wallet.ts@1.0.1/node_modules/wallet.ts/dist/index.js
@@ -182,30 +182,30 @@ var dist = __webpack_require__(99674);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/bignumber.js@9.0.2/node_modules/bignumber.js/bignumber.js
 var bignumber = __webpack_require__(42263);
 var bignumber_default = /*#__PURE__*/__webpack_require__.n(bignumber);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useAsync.js
-var useAsync = __webpack_require__(59302);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useUpdateEffect.js + 1 modules
-var useUpdateEffect = __webpack_require__(19669);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useAsyncFn.js
-var useAsyncFn = __webpack_require__(56838);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useAsync.js
+var useAsync = __webpack_require__(1154);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useUpdateEffect.js + 1 modules
+var useUpdateEffect = __webpack_require__(1433);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useAsyncFn.js
+var useAsyncFn = __webpack_require__(1840);
 // EXTERNAL MODULE: ./src/plugins/Wallet/messages.ts
 var messages = __webpack_require__(63081);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-hook-form@7.27.1_react@18.0.0-rc.0/node_modules/react-hook-form/dist/index.esm.mjs
-var index_esm = __webpack_require__(38447);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-hook-form@7.27.1_react@18.0.0-rc.2/node_modules/react-hook-form/dist/index.esm.mjs
+var index_esm = __webpack_require__(56247);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@hookform+resolvers@2.8.8_react-hook-form@7.27.1/node_modules/@hookform/resolvers/zod/dist/zod.module.js + 1 modules
 var zod_module = __webpack_require__(75426);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Collapse/Collapse.js + 1 modules
-var Collapse = __webpack_require__(16296);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Box/Box.js
-var Box = __webpack_require__(46486);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Link/Link.js + 1 modules
-var Link = __webpack_require__(98294);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Popover/Popover.js + 1 modules
-var Popover = __webpack_require__(49203);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Chip/Chip.js + 1 modules
-var Chip = __webpack_require__(3073);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Button/Button.js
-var Button = __webpack_require__(9744);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Collapse/Collapse.js + 1 modules
+var Collapse = __webpack_require__(79230);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Box/Box.js
+var Box = __webpack_require__(18287);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Link/Link.js + 1 modules
+var Link = __webpack_require__(86377);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Popover/Popover.js + 1 modules
+var Popover = __webpack_require__(99592);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Chip/Chip.js + 1 modules
+var Chip = __webpack_require__(70644);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Button/Button.js
+var Button = __webpack_require__(12463);
 // EXTERNAL MODULE: ./src/extension/popups/components/StyledInput/index.tsx
 var StyledInput = __webpack_require__(64702);
 // EXTERNAL MODULE: ../icons/general/Right.tsx
@@ -225,22 +225,22 @@ const UserIcon = (0,icons_utils/* createIcon */.I)('UserIcon', /*#__PURE__*/ (0,
     })
 }), '0 0 20 20');
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-feather@2.0.9_react@18.0.0-rc.0/node_modules/react-feather/dist/icons/chevron-down.js
-var chevron_down = __webpack_require__(52375);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-feather@2.0.9_react@18.0.0-rc.2/node_modules/react-feather/dist/icons/chevron-down.js
+var chevron_down = __webpack_require__(6839);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/noop.js
 var noop = __webpack_require__(21122);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.4.4_d06e3de907ce734e888a65f5db1d962e/node_modules/@mui/icons-material/esm/ExpandMore.js
-var ExpandMore = __webpack_require__(59915);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router@5.2.1_react@18.0.0-rc.0/node_modules/react-router/esm/react-router.js
-var react_router = __webpack_require__(22749);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+lab@5.0.0-alpha.71_6860626c1dd203d2615586c177a8991f/node_modules/@mui/lab/LoadingButton/LoadingButton.js + 1 modules
-var LoadingButton = __webpack_require__(17279);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/esm/ExpandMore.js
+var ExpandMore = __webpack_require__(6827);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router@6.2.2_react@18.0.0-rc.2/node_modules/react-router/index.js
+var react_router = __webpack_require__(92186);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+lab@5.0.0-alpha.72_154258abcf19999eeddd92026c0a2f6c/node_modules/@mui/lab/LoadingButton/LoadingButton.js + 1 modules
+var LoadingButton = __webpack_require__(16576);
 // EXTERNAL MODULE: ./src/plugins/Wallet/hooks/useTokenPrice.ts
 var useTokenPrice = __webpack_require__(65327);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/web3-utils@1.5.2/node_modules/web3-utils/lib/index.js
 var web3_utils_lib = __webpack_require__(83317);
-// EXTERNAL MODULE: ../plugin-infra/src/index.ts + 1 modules
-var plugin_infra_src = __webpack_require__(27194);
+// EXTERNAL MODULE: ../plugin-infra/src/index.ts
+var plugin_infra_src = __webpack_require__(63151);
 ;// CONCATENATED MODULE: ./src/extension/popups/pages/Wallet/Transfer/AccountItem.tsx
 
 
@@ -458,7 +458,7 @@ const Transfer1559 = /*#__PURE__*/ (0,react.memo)(({ selectedAsset , openAssetMe
     const wallet = (0,useWallet/* useWallet */.O)();
     const chainId = (0,useChainId/* useChainId */.xx)();
     const network = (0,useNetworkType/* useNetworkType */.b)();
-    const history = (0,react_router/* useHistory */.k6)();
+    const navigate = (0,react_router/* useNavigate */.s0)();
     const [minGasLimitContext, setMinGasLimitContext] = (0,react.useState)(0);
     const [addressTip, setAddressTip] = (0,react.useState)();
     const { value: nativeToken  } = (0,useNativeTokenDetailed/* useNativeTokenDetailed */.J)();
@@ -748,7 +748,7 @@ const Transfer1559 = /*#__PURE__*/ (0,react.memo)(({ selectedAsset , openAssetMe
                 handleMaxClick: handleMaxClick,
                 etherPrice: etherPrice,
                 selectedAsset: selectedAsset,
-                handleCancel: ()=>history.goBack()
+                handleCancel: ()=>navigate(-1)
                 ,
                 handleConfirm: methods.handleSubmit(onSubmit),
                 confirmLoading: loading,
@@ -1192,7 +1192,7 @@ const Prior1559Transfer = /*#__PURE__*/ (0,react.memo)(({ selectedAsset , openAs
     const wallet = (0,useWallet/* useWallet */.O)();
     const chainId = (0,useChainId/* useChainId */.xx)();
     const [minGasLimitContext, setMinGasLimitContext] = (0,react.useState)(0);
-    const history = (0,react_router/* useHistory */.k6)();
+    const navigate = (0,react_router/* useNavigate */.s0)();
     const [addressTip, setAddressTip] = (0,react.useState)();
     const schema = (0,react.useMemo)(()=>{
         return lib.z.object({
@@ -1383,7 +1383,7 @@ const Prior1559Transfer = /*#__PURE__*/ (0,react.memo)(({ selectedAsset , openAs
                 openAccountMenu: openMenu,
                 openAssetMenu: openAssetMenu,
                 handleMaxClick: handleMaxClick,
-                handleCancel: ()=>history.goBack()
+                handleCancel: ()=>navigate(-1)
                 ,
                 handleConfirm: methods.handleSubmit(onSubmit),
                 confirmLoading: loading,
@@ -1741,7 +1741,7 @@ const Transfer = /*#__PURE__*/ (0,react.memo)(()=>{
 /* harmony export */   "l": () => (/* binding */ useNativeTokenPrice),
 /* harmony export */   "p": () => (/* binding */ useTokenPrice)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
 /* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(79226);
 /* harmony import */ var _masknet_plugin_wallet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(89987);
 /* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(63081);
@@ -1826,7 +1826,7 @@ function useNativeTokenPrice(chainId, currencyType = _masknet_web3_shared_evm__W
 /* harmony export */ });
 /* harmony import */ var web3_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(83317);
 /* harmony import */ var web3_utils__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(web3_utils__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _masknet_web3_shared_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15091);
+/* harmony import */ var _masknet_web3_shared_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(26618);
 /* harmony import */ var _useAccount__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(98086);
 /* harmony import */ var _contracts_useERC20TokenContract__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(85894);
 /* harmony import */ var _useChainId__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(63541);
@@ -1903,7 +1903,7 @@ function useFungibleTokenBalance(type, address, chainId) {
 /* harmony import */ var _contracts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(21532);
 /* harmony import */ var _useAccount__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(98086);
 /* harmony import */ var _useWeb3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(90495);
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(59302);
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(1154);
 /* harmony import */ var _dimensiondev_kit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(66559);
 
 
@@ -1959,7 +1959,7 @@ function useGasLimit(type, contractAddress, amount, recipient, tokenId) {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "h": () => (/* binding */ useNativeTokenBalance)
 /* harmony export */ });
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(22572);
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(28577);
 /* harmony import */ var _useAccount__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(98086);
 /* harmony import */ var _useBalance__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(44068);
 
@@ -1996,8 +1996,8 @@ __webpack_require__.d(__webpack_exports__, {
 var esm = __webpack_require__(66559);
 // EXTERNAL MODULE: ../web3-shared/evm/types/index.ts
 var types = __webpack_require__(95130);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/wallet.ts@1.0.1/node_modules/wallet.ts/dist/index.js
 var dist = __webpack_require__(99674);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useAccount.ts
@@ -2006,8 +2006,8 @@ var useAccount = __webpack_require__(98086);
 var useERC20TokenContract = __webpack_require__(85894);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useTransactionState.ts
 var useTransactionState = __webpack_require__(15030);
-// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
-var src = __webpack_require__(15091);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var src = __webpack_require__(26618);
 ;// CONCATENATED MODULE: ../web3-shared/evm/hooks/useERC20TokenTransferCallback.ts
 
 
@@ -2325,7 +2325,7 @@ function useTokenTransferCallback(type, address) {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "p": () => (/* binding */ useTransactionState)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(95130);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(90609);
 

@@ -51,9 +51,9 @@ class NFTDetailViewController: BaseViewController {
     }()
     
     let receiveButton: UIButton = {
-        let button = PrimeryButton(title: L10n.Scene.WalletBalance.btnReceive)
+        let button = PrimeryButton(title: "Opensea")
         button.tintColor = Asset.Colors.Public.blue.color
-        button.setImage(Asset.Images.Scene.SendTransaction.receive.image, for: .normal)
+        button.setImage(Asset.Images.Scene.Nft.opensea.image, for: .normal)
         button.setInsets(forContentPadding: .zero, imageTitlePadding: 10)
         button.addTarget(self, action: #selector(receiveBtnClicked(_:)), for: .touchUpInside)
         return button
@@ -66,7 +66,7 @@ class NFTDetailViewController: BaseViewController {
         view.alignment = .center
         view.distribution = .fillEqually
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: 0, left: 22, bottom: 0, right: 22)
+        view.layoutMargins = UIEdgeInsets(top: 0, left: LayoutConstraints.leading, bottom: 0, right: LayoutConstraints.trailing)
         view.spacing = 12
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         receiveButton.translatesAutoresizingMaskIntoConstraints = false
@@ -170,12 +170,10 @@ class NFTDetailViewController: BaseViewController {
 extension NFTDetailViewController {
     @objc
     func receiveBtnClicked(_ sender: UIButton) {
-        Coordinator.main.present(
-            scene: .receiveAddress(
-                network: maskUserDefaults.network,
-                token: nil,
-                address: maskUserDefaults.defaultAccountAddress!),
-            transition: .detail(animated: true))
+        guard let url = viewModel.token.permalink else { return }
+
+        Coordinator.main.present(scene: .safariView(url: url), transition: .modal(animated: true))
+
     }
     
     @objc

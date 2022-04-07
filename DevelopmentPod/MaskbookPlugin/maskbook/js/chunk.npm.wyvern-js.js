@@ -3779,7 +3779,7 @@ exports.assert = __assign({}, assert_1.assert, { isValidSignature: function (ord
 
 /***/ }),
 
-/***/ 12463:
+/***/ 98221:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -3945,7 +3945,7 @@ exports.authenticatedProxyABI = [
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-var atomicizerABI_1 = __webpack_require__(12463);
+var atomicizerABI_1 = __webpack_require__(98221);
 var authenticatedProxyABI_1 = __webpack_require__(90187);
 var daoABI_1 = __webpack_require__(66149);
 var deployed_1 = __webpack_require__(35601);

@@ -43,7 +43,7 @@ class BalanceHeaderView: UITableViewHeaderFooterView {
     
     private func _init() {
         contentView.backgroundColor = Asset.Colors.Background.normal.color
-        contentView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 22.5, bottom: 10, trailing: 22.5)
+        contentView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: LayoutConstraints.leading, bottom: 10, trailing: LayoutConstraints.trailing)
         
         contentView.addSubview(segments)
         segments.backgroundColor = .clear

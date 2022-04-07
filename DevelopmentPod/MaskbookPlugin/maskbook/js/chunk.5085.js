@@ -1,6 +1,6 @@
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[5085],{
 
-/***/ 39362:
+/***/ 86533:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -9,10 +9,10 @@
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(97538);
 /* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(93086);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
-/* harmony import */ var _mui_material_Tabs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(49103);
-/* harmony import */ var _TabContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(38884);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(74750);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
+/* harmony import */ var _mui_material_Tabs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(40158);
+/* harmony import */ var _TabContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(10018);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(82798);
 
 
 const _excluded = ["children"];
@@ -183,13 +183,13 @@ module.exports = copy;
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "f": () => (/* binding */ ActionCard)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(24515);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(80672);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(46486);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(7280);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9744);
-/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8571);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(22234);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(13152);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(18287);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(74491);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(12463);
+/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(68435);
 
 
 
@@ -282,36 +282,38 @@ __webpack_require__.d(__webpack_exports__, {
 
 // UNUSED EXPORTS: WalletStateBarUI
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Button/Button.js
-var Button = __webpack_require__(9744);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Stack/Stack.js
-var Stack = __webpack_require__(80672);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Typography/Typography.js + 1 modules
-var Typography = __webpack_require__(7280);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Box/Box.js
-var Box = __webpack_require__(46486);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Button/Button.js
+var Button = __webpack_require__(12463);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Stack/Stack.js
+var Stack = __webpack_require__(13152);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Typography/Typography.js + 1 modules
+var Typography = __webpack_require__(74491);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Box/Box.js
+var Box = __webpack_require__(18287);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/misc.ts
 var misc = __webpack_require__(7454);
 // EXTERNAL MODULE: ../web3-shared/evm/types/index.ts
 var types = __webpack_require__(95130);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var src = __webpack_require__(92597);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
-// EXTERNAL MODULE: ../plugin-infra/src/index.ts + 1 modules
-var plugin_infra_src = __webpack_require__(27194);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var src = __webpack_require__(43021);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
+// EXTERNAL MODULE: ../plugin-infra/src/index.ts
+var plugin_infra_src = __webpack_require__(63151);
 // EXTERNAL MODULE: ../dashboard/src/API.tsx
 var API = __webpack_require__(85971);
 // EXTERNAL MODULE: ../dashboard/src/pages/Wallets/hooks/useRecentTransactions.ts
 var useRecentTransactions = __webpack_require__(71668);
 // EXTERNAL MODULE: ../dashboard/src/locales/index.ts
 var locales = __webpack_require__(21692);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/MenuItem/MenuItem.js + 1 modules
-var MenuItem = __webpack_require__(88624);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/MenuItem/MenuItem.js + 1 modules
+var MenuItem = __webpack_require__(56561);
 // EXTERNAL MODULE: ../icons/general/Success.tsx
 var Success = __webpack_require__(57214);
 ;// CONCATENATED MODULE: ../dashboard/src/pages/Wallets/components/WalletStateBar/useNetworkSelector.tsx
@@ -404,6 +406,7 @@ const useNetworkSelector = ()=>{
 
 
 
+
 const WalletStateBar_useStyles = (0,src/* makeStyles */.ZL)()((theme)=>({
         bar: {
             minWidth: 80,
@@ -454,8 +457,8 @@ const WalletStateBar = /*#__PURE__*/ (0,react.memo)(()=>{
     const { value: pendingTransactions = misc/* EMPTY_LIST */.r  } = (0,useRecentTransactions/* useRecentTransactions */.S)({
         status: types/* TransactionStatusType.NOT_DEPEND */.g8.NOT_DEPEND
     });
-    const { openDialog: openWalletStatusDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Wallet.events.walletStatusDialogUpdated */.yC.Wallet.events.walletStatusDialogUpdated);
-    const { openDialog: openConnectWalletDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Wallet.events.selectProviderDialogUpdated */.yC.Wallet.events.selectProviderDialogUpdated);
+    const { openDialog: openWalletStatusDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Wallet.events.walletStatusDialogUpdated */.yC.Wallet.events.walletStatusDialogUpdated);
+    const { openDialog: openConnectWalletDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Wallet.events.selectProviderDialogUpdated */.yC.Wallet.events.selectProviderDialogUpdated);
     const [menu, openMenu] = useNetworkSelector();
     const { value: domain  } = (0,plugin_infra_src/* useReverseAddress */.$q)(wallet === null || wallet === void 0 ? void 0 : wallet.address);
     if (!wallet) {
@@ -605,8 +608,8 @@ const WalletStateBarUI = ({ isPending , network , provider , wallet , domain , o
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "S": () => (/* binding */ useRecentTransactions)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(22572);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(28577);
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(98086);
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(63541);
 /* harmony import */ var _API__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(85971);
@@ -652,12 +655,12 @@ __webpack_require__.d(__webpack_exports__, {
   "default": () => (/* binding */ pages_Wallets)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../plugin-infra/src/index.ts + 1 modules
-var src = __webpack_require__(27194);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../plugin-infra/src/index.ts
+var src = __webpack_require__(63151);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var shared_base_src = __webpack_require__(79226);
 // EXTERNAL MODULE: ../web3-shared/evm/context/index.tsx
@@ -665,12 +668,12 @@ var context = __webpack_require__(67937);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/bignumber.js@9.0.2/node_modules/bignumber.js/bignumber.js
 var bignumber = __webpack_require__(42263);
 var bignumber_default = /*#__PURE__*/__webpack_require__.n(bignumber);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router@6.0.0-beta.0_history@5.2.0+react@18.0.0-rc.0/node_modules/react-router/index.js
-var react_router = __webpack_require__(63552);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useAsync.js
-var useAsync = __webpack_require__(59302);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router@6.2.2_react@18.0.0-rc.2/node_modules/react-router/index.js
+var react_router = __webpack_require__(92186);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useAsync.js
+var useAsync = __webpack_require__(1154);
 // EXTERNAL MODULE: ../dashboard/src/API.tsx
 var API = __webpack_require__(85971);
 // EXTERNAL MODULE: ../dashboard/src/components/PageFrame/index.tsx + 1 modules
@@ -679,34 +682,34 @@ var PageFrame = __webpack_require__(96449);
 var locales = __webpack_require__(21692);
 // EXTERNAL MODULE: ../dashboard/src/components/ContentContainer/index.tsx
 var ContentContainer = __webpack_require__(96621);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+lab@5.0.0-alpha.71_6860626c1dd203d2615586c177a8991f/node_modules/@mui/lab/TabContext/TabContext.js
-var TabContext = __webpack_require__(38884);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+lab@5.0.0-alpha.71_6860626c1dd203d2615586c177a8991f/node_modules/@mui/lab/TabList/TabList.js
-var TabList = __webpack_require__(39362);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+lab@5.0.0-alpha.71_6860626c1dd203d2615586c177a8991f/node_modules/@mui/lab/TabPanel/TabPanel.js + 1 modules
-var TabPanel = __webpack_require__(89338);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Box/Box.js
-var Box = __webpack_require__(46486);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Tab/Tab.js
-var Tab = __webpack_require__(80241);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Button/Button.js
-var Button = __webpack_require__(9744);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var theme_src = __webpack_require__(92597);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/TableContainer/TableContainer.js + 1 modules
-var TableContainer = __webpack_require__(51671);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Table/Table.js + 1 modules
-var Table = __webpack_require__(27238);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/TableHead/TableHead.js + 1 modules
-var TableHead = __webpack_require__(49010);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/TableRow/TableRow.js + 1 modules
-var TableRow = __webpack_require__(65619);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/TableCell/TableCell.js + 1 modules
-var TableCell = __webpack_require__(68119);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/TableBody/TableBody.js + 1 modules
-var TableBody = __webpack_require__(1585);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Typography/Typography.js + 1 modules
-var Typography = __webpack_require__(7280);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+lab@5.0.0-alpha.72_154258abcf19999eeddd92026c0a2f6c/node_modules/@mui/lab/TabContext/TabContext.js
+var TabContext = __webpack_require__(10018);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+lab@5.0.0-alpha.72_154258abcf19999eeddd92026c0a2f6c/node_modules/@mui/lab/TabList/TabList.js
+var TabList = __webpack_require__(86533);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+lab@5.0.0-alpha.72_154258abcf19999eeddd92026c0a2f6c/node_modules/@mui/lab/TabPanel/TabPanel.js + 1 modules
+var TabPanel = __webpack_require__(43221);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Box/Box.js
+var Box = __webpack_require__(18287);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Tab/Tab.js
+var Tab = __webpack_require__(50585);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Button/Button.js
+var Button = __webpack_require__(12463);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var theme_src = __webpack_require__(43021);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/TableContainer/TableContainer.js + 1 modules
+var TableContainer = __webpack_require__(50328);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Table/Table.js + 1 modules
+var Table = __webpack_require__(21859);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/TableHead/TableHead.js + 1 modules
+var TableHead = __webpack_require__(54311);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/TableRow/TableRow.js + 1 modules
+var TableRow = __webpack_require__(61379);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/TableCell/TableCell.js + 1 modules
+var TableCell = __webpack_require__(72863);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/TableBody/TableBody.js + 1 modules
+var TableBody = __webpack_require__(14610);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Typography/Typography.js + 1 modules
+var Typography = __webpack_require__(74491);
 // EXTERNAL MODULE: ../icons/general/Empty.tsx
 var Empty = __webpack_require__(63413);
 ;// CONCATENATED MODULE: ../dashboard/src/pages/Wallets/components/EmptyPlaceholder/index.tsx
@@ -755,10 +758,12 @@ const EmptyPlaceholder = /*#__PURE__*/ (0,react.memo)(({ children  })=>{
 
 // EXTERNAL MODULE: ../dashboard/src/components/LoadingPlaceholder/index.tsx
 var LoadingPlaceholder = __webpack_require__(15116);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Tooltip/Tooltip.js + 1 modules
-var Tooltip = __webpack_require__(8309);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Link/Link.js + 1 modules
-var Link = __webpack_require__(98294);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Tooltip/Tooltip.js + 1 modules
+var Tooltip = __webpack_require__(72753);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Link/Link.js + 1 modules
+var Link = __webpack_require__(86377);
 ;// CONCATENATED MODULE: ../dashboard/src/pages/Wallets/components/FungibleTokenTableRow/ChangeNetworkTip.tsx
 
 
@@ -811,8 +816,8 @@ var _USD;
 const getTokenUSDValue = (value)=>value ? Number.parseFloat((_USD = value[src/* CurrencyType.USD */.V2.USD]) !== null && _USD !== void 0 ? _USD : '') : 0
 ;
 
-// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
-var base_src = __webpack_require__(15091);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var base_src = __webpack_require__(26618);
 ;// CONCATENATED MODULE: ../dashboard/src/pages/Wallets/components/FungibleTokenTableRow/index.tsx
 
 
@@ -1098,7 +1103,7 @@ const FungibleTokenTable = /*#__PURE__*/ (0,react.memo)(({ selectedChainId  })=>
     const { portfolioProvider  } = (0,context/* useWeb3State */.dM)();
     const network = (0,src/* useNetworkDescriptor */.Vw)();
     const [tokenUpdateCount, setTokenUpdateCount] = (0,react.useState)(0);
-    const { setDialog: openSwapDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Swap.swapDialogUpdated */.yC.Swap.swapDialogUpdated);
+    const { setDialog: openSwapDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Swap.swapDialogUpdated */.yC.Swap.swapDialogUpdated);
     const { error: detailedTokensError , loading: detailedTokensLoading , value: detailedTokens ,  } = (0,useAsync/* default */.Z)(async ()=>{
         var ref;
         return Asset === null || Asset === void 0 ? void 0 : (ref = Asset.getFungibleAssets) === null || ref === void 0 ? void 0 : ref.call(Asset, account, portfolioProvider, network);
@@ -1220,10 +1225,10 @@ const TokenTableUI = /*#__PURE__*/ (0,react.memo)(({ onSwap , onSend , isLoading
     }));
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Stack/Stack.js
-var Stack = __webpack_require__(80672);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/TablePagination/TablePagination.js + 3 modules
-var TablePagination = __webpack_require__(31438);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Stack/Stack.js
+var Stack = __webpack_require__(13152);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/TablePagination/TablePagination.js + 3 modules
+var TablePagination = __webpack_require__(41962);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/misc.ts
 var misc = __webpack_require__(7454);
 // EXTERNAL MODULE: ../icons/brands/MiniMask.tsx
@@ -1295,8 +1300,8 @@ const CollectiblePlaceholder = /*#__PURE__*/ (0,react.memo)(({ chainId  })=>{
     }));
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useHoverDirty.js
-var useHoverDirty = __webpack_require__(86487);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useHoverDirty.js
+var useHoverDirty = __webpack_require__(21316);
 ;// CONCATENATED MODULE: ../dashboard/src/pages/Wallets/components/CollectibleCard/index.tsx
 
 
@@ -1510,12 +1515,12 @@ const CollectibleCard = /*#__PURE__*/ (0,react.memo)(({ chainId , token , onSend
     }));
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Popover/Popover.js + 1 modules
-var Popover = __webpack_require__(49203);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/IconButton/IconButton.js + 1 modules
-var IconButton = __webpack_require__(91497);
-// EXTERNAL MODULE: ../web3-shared/evm/constants/index.ts + 26 modules
-var constants = __webpack_require__(92211);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Popover/Popover.js + 1 modules
+var Popover = __webpack_require__(99592);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/IconButton/IconButton.js + 1 modules
+var IconButton = __webpack_require__(87409);
+// EXTERNAL MODULE: ../web3-shared/evm/constants/constants.ts + 26 modules
+var constants = __webpack_require__(24403);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useGasPrice.ts
 var useGasPrice = __webpack_require__(54265);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useChainId.ts
@@ -1538,12 +1543,12 @@ var formatter = __webpack_require__(22283);
 var utils_token = __webpack_require__(11315);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useTokenTransferCallback.ts + 3 modules
 var useTokenTransferCallback = __webpack_require__(32004);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.4.4_d06e3de907ce734e888a65f5db1d962e/node_modules/@mui/icons-material/Tune.js
-var Tune = __webpack_require__(45121);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/Tune.js
+var Tune = __webpack_require__(6788);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/wallet.ts@1.0.1/node_modules/wallet.ts/dist/index.js
-var dist = __webpack_require__(99674);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useInterval.js
-var useInterval = __webpack_require__(43509);
+var wallet_ts_dist = __webpack_require__(99674);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useInterval.js
+var useInterval = __webpack_require__(62767);
 // EXTERNAL MODULE: ../plugins/Wallet/src/index.ts + 1 modules
 var Wallet_src = __webpack_require__(89987);
 ;// CONCATENATED MODULE: ../dashboard/src/pages/Wallets/components/Transfer/useNativeTokenPrice.ts
@@ -1671,7 +1676,7 @@ const useGasConfig = (gasLimit, minGasLimit)=>{
     const { value: defaultGasPrice = '0'  } = (0,useGasPrice/* useGasPrice */.F)();
     const gasPrice = customGasPrice || defaultGasPrice;
     const { gasOptions  } = useGasOptions();
-    const { setDialog: setGasSettingDialog , closeDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(Wallet_src/* WalletMessages.events.gasSettingDialogUpdated */.R$.events.gasSettingDialogUpdated);
+    const { setDialog: setGasSettingDialog , closeDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(Wallet_src/* WalletMessages.events.gasSettingDialogUpdated */.R$.events.gasSettingDialogUpdated);
     (0,react.useEffect)(()=>closeDialog
     , [
         closeDialog
@@ -1757,13 +1762,14 @@ const useGasConfig = (gasLimit, minGasLimit)=>{
 
 // EXTERNAL MODULE: ../public-api/src/index.ts
 var public_api_src = __webpack_require__(48476);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useUpdateEffect.js + 1 modules
-var useUpdateEffect = __webpack_require__(19669);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useUpdateEffect.js + 1 modules
+var useUpdateEffect = __webpack_require__(1433);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/uuid@8.3.2/node_modules/uuid/dist/esm-browser/v4.js + 2 modules
 var v4 = __webpack_require__(32513);
 // EXTERNAL MODULE: ../icons/general/Right.tsx
 var Right = __webpack_require__(60681);
 ;// CONCATENATED MODULE: ../dashboard/src/pages/Wallets/components/Transfer/TransferERC20.tsx
+
 
 
 
@@ -1797,7 +1803,7 @@ const TransferERC20 = /*#__PURE__*/ (0,react.memo)(({ token  })=>{
     const [minPopoverWidth, setMinPopoverWidth] = (0,react.useState)(0);
     const network = (0,src/* useNetworkDescriptor */.Vw)();
     const [gasLimit_, setGasLimit_] = (0,react.useState)(0);
-    const { setDialog: setSelectToken  } = (0,shared_src/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Wallet.events.selectTokenDialogUpdated */.yC.Wallet.events.selectTokenDialogUpdated, (0,react.useCallback)((ev)=>{
+    const { setDialog: setSelectToken  } = (0,dist/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Wallet.events.selectTokenDialogUpdated */.yC.Wallet.events.selectTokenDialogUpdated, (0,react.useCallback)((ev)=>{
         if (ev.open || !ev.token || ev.uuid !== id) return;
         setSelectedToken(ev.token);
     }, [
@@ -1829,7 +1835,7 @@ const TransferERC20 = /*#__PURE__*/ (0,react.memo)(({ token  })=>{
     // #endregion
     // transfer amount
     const transferAmount = (0,base_src/* rightShift */.pu)(amount || '0', selectedToken.decimals).toFixed();
-    const erc20GasLimit = (0,useGasLimit/* useGasLimit */.x)(selectedToken.type === src/* TokenType.Fungible */.iv.Fungible ? selectedToken.symbol === ((ref4 = nativeToken.value) === null || ref4 === void 0 ? void 0 : ref4.symbol) ? types/* EthereumTokenType.Native */.Dr.Native : types/* EthereumTokenType.ERC20 */.Dr.ERC20 : selectedToken.type, selectedToken.address, transferAmount, dist.EthereumAddress.isValid(address) ? address : registeredAddress);
+    const erc20GasLimit = (0,useGasLimit/* useGasLimit */.x)(selectedToken.type === src/* TokenType.Fungible */.iv.Fungible ? selectedToken.symbol === ((ref4 = nativeToken.value) === null || ref4 === void 0 ? void 0 : ref4.symbol) ? types/* EthereumTokenType.Native */.Dr.Native : types/* EthereumTokenType.ERC20 */.Dr.ERC20 : selectedToken.type, selectedToken.address, transferAmount, wallet_ts_dist.EthereumAddress.isValid(address) ? address : registeredAddress);
     const { gasConfig , onCustomGasSetting , gasLimit , maxFee  } = useGasConfig(gasLimit_, GAS_LIMIT);
     const gasPrice = gasConfig.gasPrice || defaultGasPrice;
     (0,react.useEffect)(()=>{
@@ -1867,7 +1873,7 @@ const TransferERC20 = /*#__PURE__*/ (0,react.memo)(({ token  })=>{
     const [transferState, transferCallback, resetTransferCallback] = (0,useTokenTransferCallback/* useTokenTransferCallback */.z)(tokenType, selectedToken.address);
     const onTransfer = (0,react.useCallback)(async ()=>{
         var ref;
-        if (dist.EthereumAddress.isValid(address)) {
+        if (wallet_ts_dist.EthereumAddress.isValid(address)) {
             await transferCallback(transferAmount, address, gasConfig, memo1);
             return;
         } else if (Utils === null || Utils === void 0 ? void 0 : (ref = Utils.isValidDomain) === null || ref === void 0 ? void 0 : ref.call(Utils, address)) {
@@ -1894,7 +1900,7 @@ const TransferERC20 = /*#__PURE__*/ (0,react.memo)(({ token  })=>{
             symbol: (_symbol = selectedToken.symbol) !== null && _symbol !== void 0 ? _symbol : ''
         });
         if (!address) return t.wallets_transfer_error_address_absence();
-        if (!(dist.EthereumAddress.isValid(address) || (Utils === null || Utils === void 0 ? void 0 : (ref = Utils.isValidDomain) === null || ref === void 0 ? void 0 : ref.call(Utils, address)))) return t.wallets_transfer_error_invalid_address();
+        if (!(wallet_ts_dist.EthereumAddress.isValid(address) || (Utils === null || Utils === void 0 ? void 0 : (ref = Utils.isValidDomain) === null || ref === void 0 ? void 0 : ref.call(Utils, address)))) return t.wallets_transfer_error_invalid_address();
         if ((Utils === null || Utils === void 0 ? void 0 : (ref5 = Utils.isValidDomain) === null || ref5 === void 0 ? void 0 : ref5.call(Utils, address)) && (resolveDomainError || !registeredAddress)) {
             if ((network === null || network === void 0 ? void 0 : network.type) !== public_api_src/* NetworkType.Ethereum */.td.Ethereum) return t.wallet_transfer_error_no_ens_support();
             return t.wallet_transfer_error_no_address_has_been_set_name();
@@ -2152,16 +2158,16 @@ const TransferERC20 = /*#__PURE__*/ (0,react.memo)(({ token  })=>{
 
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useAccount.ts
 var useAccount = __webpack_require__(98086);
-// EXTERNAL MODULE: ../web3-shared/evm/hooks/useERC721TokenDetailedOwnerList.ts
-var useERC721TokenDetailedOwnerList = __webpack_require__(62043);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/ImageListItem/ImageListItem.js + 1 modules
-var ImageListItem = __webpack_require__(70380);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/ImageList/ImageList.js + 1 modules
-var ImageList = __webpack_require__(34931);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/ImageListItemBar/ImageListItemBar.js + 1 modules
-var ImageListItemBar = __webpack_require__(63153);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Checkbox/Checkbox.js + 4 modules
-var Checkbox = __webpack_require__(49950);
+// EXTERNAL MODULE: ../web3-providers/src/index.ts + 2 modules
+var web3_providers_src = __webpack_require__(54492);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/ImageListItem/ImageListItem.js + 1 modules
+var ImageListItem = __webpack_require__(87093);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/ImageList/ImageList.js + 1 modules
+var ImageList = __webpack_require__(10615);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/ImageListItemBar/ImageListItemBar.js + 1 modules
+var ImageListItemBar = __webpack_require__(79201);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Checkbox/Checkbox.js + 4 modules
+var Checkbox = __webpack_require__(34433);
 // EXTERNAL MODULE: ../icons/general/CheckboxBorder.tsx
 var CheckboxBorder = __webpack_require__(68637);
 // EXTERNAL MODULE: ../icons/general/Checkbox.tsx
@@ -2387,12 +2393,12 @@ const SelectNFTList = /*#__PURE__*/ (0,react.memo)(({ list , onSelect , selected
 
 // EXTERNAL MODULE: ../../node_modules/.pnpm/zod@3.13.4/node_modules/zod/lib/index.mjs
 var zod_lib = __webpack_require__(56382);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-hook-form@7.27.1_react@18.0.0-rc.0/node_modules/react-hook-form/dist/index.esm.mjs
-var index_esm = __webpack_require__(38447);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-hook-form@7.27.1_react@18.0.0-rc.2/node_modules/react-hook-form/dist/index.esm.mjs
+var index_esm = __webpack_require__(56247);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@hookform+resolvers@2.8.8_react-hook-form@7.27.1/node_modules/@hookform/resolvers/zod/dist/zod.module.js + 1 modules
 var zod_module = __webpack_require__(75426);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.4.4_d06e3de907ce734e888a65f5db1d962e/node_modules/@mui/icons-material/KeyboardArrowDown.js
-var KeyboardArrowDown = __webpack_require__(20005);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/KeyboardArrowDown.js
+var KeyboardArrowDown = __webpack_require__(55804);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/unionBy.js
 var unionBy = __webpack_require__(60398);
 ;// CONCATENATED MODULE: ../dashboard/src/pages/Wallets/components/Transfer/types.ts
@@ -2403,6 +2409,7 @@ var TransferTab;
 })(TransferTab || (TransferTab = {}));
 
 ;// CONCATENATED MODULE: ../dashboard/src/pages/Wallets/components/Transfer/TransferERC721.tsx
+
 
 
 
@@ -2461,7 +2468,7 @@ const TransferERC721 = /*#__PURE__*/ (0,react.memo)(()=>{
     const schema = zod_lib.z.object({
         recipient: zod_lib.z.string().refine((address)=>{
             var ref;
-            return dist.EthereumAddress.isValid(address) || (Utils === null || Utils === void 0 ? void 0 : (ref = Utils.isValidDomain) === null || ref === void 0 ? void 0 : ref.call(Utils, address));
+            return wallet_ts_dist.EthereumAddress.isValid(address) || (Utils === null || Utils === void 0 ? void 0 : (ref = Utils.isValidDomain) === null || ref === void 0 ? void 0 : ref.call(Utils, address));
         }, t.wallets_incorrect_address()),
         contract: zod_lib.z.string().min(1, t.wallets_collectible_contract_is_empty()),
         tokenId: zod_lib.z.string().min(1, t.wallets_collectible_token_id_is_empty())
@@ -2516,7 +2523,7 @@ const TransferERC721 = /*#__PURE__*/ (0,react.memo)(()=>{
         registeredAddress
     ]);
     // #endregion
-    const erc721GasLimit = (0,useGasLimit/* useGasLimit */.x)(types/* EthereumTokenType.ERC721 */.Dr.ERC721, contract === null || contract === void 0 ? void 0 : contract.address, undefined, dist.EthereumAddress.isValid(allFormFields.recipient) ? allFormFields.recipient : registeredAddress, allFormFields.tokenId);
+    const erc721GasLimit = (0,useGasLimit/* useGasLimit */.x)(types/* EthereumTokenType.ERC721 */.Dr.ERC721, contract === null || contract === void 0 ? void 0 : contract.address, undefined, wallet_ts_dist.EthereumAddress.isValid(allFormFields.recipient) ? allFormFields.recipient : registeredAddress, allFormFields.tokenId);
     (0,react.useEffect)(()=>{
         setGasLimit_(erc721GasLimit.value ? erc721GasLimit.value : TransferERC721_GAS_LIMIT);
     }, [
@@ -2538,7 +2545,7 @@ const TransferERC721 = /*#__PURE__*/ (0,react.memo)(()=>{
     ]);
     const gasFeeInUsd = (0,formatter/* formatWeiToEther */.yp)(gasFee).multipliedBy(nativeTokenPrice);
     // dialog
-    const { setDialog: setSelectContractDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(Wallet_src/* WalletMessages.events.selectNftContractDialogUpdated */.R$.events.selectNftContractDialogUpdated, (ev)=>{
+    const { setDialog: setSelectContractDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(Wallet_src/* WalletMessages.events.selectNftContractDialogUpdated */.R$.events.selectNftContractDialogUpdated, (ev)=>{
         if (ev.open || !ev.contract || ev.uuid !== id) return;
         if (!contract || contract && !(0,utils_address/* isSameAddress */.Wr)(contract.address, ev.contract.address)) {
             if (contract && defaultToken && !(0,utils_address/* isSameAddress */.Wr)(contract.address, defaultToken.contractDetailed.address)) {
@@ -2551,7 +2558,7 @@ const TransferERC721 = /*#__PURE__*/ (0,react.memo)(()=>{
             setValue('tokenId', '');
         }
     });
-    const { asyncRetry: { loading: loadingOwnerList  } , tokenDetailedOwnerList =[] , refreshing ,  } = (0,useERC721TokenDetailedOwnerList/* useERC721TokenDetailedOwnerList */.t)(contract, account);
+    const { asyncRetry: { loading: loadingOwnerList  } , tokenDetailedOwnerList =[] , refreshing ,  } = (0,web3_providers_src/* useERC721TokenDetailedOwnerList */.t9)(contract, account);
     (0,react.useEffect)(()=>{
         if (transferState.type === types/* TransactionStateType.HASH */.n$.HASH) {
             navigate(shared_base_src/* DashboardRoutes.WalletsHistory */.vq.WalletsHistory);
@@ -2561,10 +2568,10 @@ const TransferERC721 = /*#__PURE__*/ (0,react.memo)(()=>{
     ]);
     const onTransfer = (0,react.useCallback)(async (data)=>{
         var ref;
-        if (dist.EthereumAddress.isValid(data.recipient)) {
+        if (wallet_ts_dist.EthereumAddress.isValid(data.recipient)) {
             await transferCallback(data.tokenId, data.recipient, gasConfig);
             return;
-        } else if ((Utils === null || Utils === void 0 ? void 0 : (ref = Utils.isValidDomain) === null || ref === void 0 ? void 0 : ref.call(Utils, data.recipient)) && dist.EthereumAddress.isValid(registeredAddress)) {
+        } else if ((Utils === null || Utils === void 0 ? void 0 : (ref = Utils.isValidDomain) === null || ref === void 0 ? void 0 : ref.call(Utils, data.recipient)) && wallet_ts_dist.EthereumAddress.isValid(registeredAddress)) {
             await transferCallback(data.tokenId, registeredAddress, gasConfig);
         }
         return;
@@ -2931,8 +2938,8 @@ const Transfer = /*#__PURE__*/ (0,react.memo)(()=>{
     }));
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useAsyncRetry.js
-var esm_useAsyncRetry = __webpack_require__(22572);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useAsyncRetry.js
+var esm_useAsyncRetry = __webpack_require__(28577);
 ;// CONCATENATED MODULE: ../dashboard/src/pages/Wallets/components/CollectibleList/index.tsx
 
 
@@ -3113,10 +3120,10 @@ const CollectibleListUI = /*#__PURE__*/ (0,react.memo)(({ page , onPageChange , 
     }));
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/DialogContent/DialogContent.js + 1 modules
-var DialogContent = __webpack_require__(35437);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/DialogActions/DialogActions.js + 1 modules
-var DialogActions = __webpack_require__(10612);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/DialogContent/DialogContent.js + 1 modules
+var DialogContent = __webpack_require__(68681);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/DialogActions/DialogActions.js + 1 modules
+var DialogActions = __webpack_require__(72212);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useWallet.ts
 var useWallet = __webpack_require__(51596);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useERC721ContractDetailed.ts
@@ -3175,7 +3182,7 @@ const AddCollectibleDialog = /*#__PURE__*/ (0,react.memo)(({ open , onClose  })=
 const AddCollectibleDialogUI = /*#__PURE__*/ (0,react.memo)(({ open , onClose , onAddressChange , onTokenIdChange , onSubmit  })=>{
     const t = (0,locales/* useDashboardI18N */.x)();
     const schema = zod_lib.z.object({
-        address: zod_lib.z.string().min(1, t.wallets_collectible_field_contract_require()).refine((address)=>dist.EthereumAddress.isValid(address)
+        address: zod_lib.z.string().min(1, t.wallets_collectible_field_contract_require()).refine((address)=>wallet_ts_dist.EthereumAddress.isValid(address)
         , t.wallets_incorrect_address()),
         tokenId: zod_lib.z.string().min(1, t.wallets_collectible_field_token_id_require())
     });
@@ -3341,7 +3348,7 @@ const Assets = /*#__PURE__*/ (0,react.memo)(({ network  })=>{
     };
     const [currentTab, onChange, , setTab] = (0,theme_src/* useTabs */.YE)(AssetTab.Token, AssetTab.Collectibles);
     const [addCollectibleOpen, setAddCollectibleOpen] = (0,react.useState)(false);
-    const { setDialog: setSelectToken  } = (0,shared_src/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Wallet.events.selectTokenDialogUpdated */.yC.Wallet.events.selectTokenDialogUpdated);
+    const { setDialog: setSelectToken  } = (0,dist/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Wallet.events.selectTokenDialogUpdated */.yC.Wallet.events.selectTokenDialogUpdated);
     (0,react.useEffect)(()=>{
         setTab(AssetTab.Token);
     }, [
@@ -3498,10 +3505,10 @@ const SwapIcon = (0,utils/* createIcon */.I)('SwapIcon', /*#__PURE__*/ (0,jsx_ru
 
 // EXTERNAL MODULE: ../icons/general/Download.tsx
 var Download = __webpack_require__(1894);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/styles/styled.js
-var styled = __webpack_require__(8571);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Button/buttonClasses.js
-var buttonClasses = __webpack_require__(89691);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/styles/styled.js
+var styled = __webpack_require__(68435);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Button/buttonClasses.js
+var buttonClasses = __webpack_require__(58465);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/noop.js
 var noop = __webpack_require__(21122);
 ;// CONCATENATED MODULE: ../dashboard/src/pages/Wallets/hooks/useAddressBook.ts
@@ -4373,14 +4380,14 @@ const WalletQRCodeContainer = /*#__PURE__*/ (0,react.memo)((props)=>{
     }));
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useCopyToClipboard.js + 1 modules
-var useCopyToClipboard = __webpack_require__(17734);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useCopyToClipboard.js + 1 modules
+var useCopyToClipboard = __webpack_require__(35750);
 ;// CONCATENATED MODULE: ../dashboard/src/pages/Wallets/api.ts
 
 
-const [useCurrentCollectibleDataProvider] = (0,shared_src/* createGlobalState */.r8)(API/* Services.Settings.getCurrentCollectibleDataProvider */.K9.Settings.getCurrentCollectibleDataProvider, (x)=>API/* Messages.events.currentNonFungibleAssetDataProviderSettings.on */.Vm.events.currentNonFungibleAssetDataProviderSettings.on(x)
+const [useCurrentCollectibleDataProvider] = (0,dist/* createGlobalState */.r8)(API/* Services.Settings.getCurrentCollectibleDataProvider */.K9.Settings.getCurrentCollectibleDataProvider, (x)=>API/* Messages.events.currentNonFungibleAssetDataProviderSettings.on */.Vm.events.currentNonFungibleAssetDataProviderSettings.on(x)
 );
-const [useCurrentSelectedWalletNetwork] = (0,shared_src/* createGlobalState */.r8)(API/* Services.Settings.getCurrentSelectedWalletNetwork */.K9.Settings.getCurrentSelectedWalletNetwork, (x)=>API/* Messages.events.currentNetworkSettings.on */.Vm.events.currentNetworkSettings.on(x)
+const [useCurrentSelectedWalletNetwork] = (0,dist/* createGlobalState */.r8)(API/* Services.Settings.getCurrentSelectedWalletNetwork */.K9.Settings.getCurrentSelectedWalletNetwork, (x)=>API/* Messages.events.currentNetworkSettings.on */.Vm.events.currentNetworkSettings.on(x)
 );
 
 // EXTERNAL MODULE: ../web3-shared/evm/pipes/index.ts
@@ -4515,8 +4522,8 @@ const ReceiveDialogUI = /*#__PURE__*/ (0,react.memo)(({ open , currentNetworkTyp
 var WalletStateBar = __webpack_require__(61682);
 // EXTERNAL MODULE: ../icons/general/CloudLink.tsx
 var CloudLink = __webpack_require__(95923);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Paper/Paper.js
-var Paper = __webpack_require__(35428);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Paper/Paper.js
+var Paper = __webpack_require__(30592);
 // EXTERNAL MODULE: ../dashboard/src/components/ActionCard/index.tsx
 var ActionCard = __webpack_require__(51475);
 ;// CONCATENATED MODULE: ../dashboard/src/pages/Wallets/StartUp.tsx
@@ -4537,7 +4544,7 @@ const Container = (0,styled/* default */.ZP)('div')`
 `;
 function StartUp() {
     const t = (0,locales/* useDashboardI18N */.x)();
-    const { openDialog: openConnectWalletDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Wallet.events.selectProviderDialogUpdated */.yC.Wallet.events.selectProviderDialogUpdated);
+    const { openDialog: openConnectWalletDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Wallet.events.selectProviderDialogUpdated */.yC.Wallet.events.selectProviderDialogUpdated);
     return(/*#__PURE__*/ (0,jsx_runtime.jsx)(Container, {
         children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Paper/* default */.Z, {
             variant: "background",
@@ -4590,6 +4597,7 @@ function StartUp() {
 
 
 
+const r = (0,shared_base_src/* relativeRouteOf */.zD)(shared_base_src/* DashboardRoutes.Wallets */.vq.Wallets);
 function Wallets() {
     const wallet = (0,src/* useWallet */.Os)();
     const wallets = (0,src/* useWallets */.rB)();
@@ -4609,8 +4617,8 @@ function Wallets() {
     const networkDescriptor = (0,src/* useNetworkDescriptor */.Vw)();
     const pluginId = (0,src/* usePluginIDContext */.Zn)();
     const [selectedNetwork, setSelectedNetwork] = (0,react.useState)(networkDescriptor !== null && networkDescriptor !== void 0 ? networkDescriptor : null);
-    const { openDialog: openBuyDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Transak.buyTokenDialogUpdated */.yC.Transak.buyTokenDialogUpdated);
-    const { openDialog: openSwapDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Swap.swapDialogUpdated */.yC.Swap.swapDialogUpdated);
+    const { openDialog: openBuyDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Transak.buyTokenDialogUpdated */.yC.Transak.buyTokenDialogUpdated);
+    const { openDialog: openSwapDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Swap.swapDialogUpdated */.yC.Swap.swapDialogUpdated);
     const { value: detailedTokens  } = (0,useAsync/* default */.Z)(async ()=>{
         var ref;
         return Asset === null || Asset === void 0 ? void 0 : (ref = Asset.getFungibleAssets) === null || ref === void 0 ? void 0 : ref.call(Asset, account, portfolioProvider, network);
@@ -4698,17 +4706,17 @@ function Wallets() {
                     /*#__PURE__*/ (0,jsx_runtime.jsxs)(react_router/* Routes */.Z5, {
                         children: [
                             /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                                path: "/",
+                                path: "*",
                                 element: /*#__PURE__*/ (0,jsx_runtime.jsx)(Assets, {
                                     network: selectedNetwork
                                 })
                             }),
                             /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                                path: "transfer",
+                                path: r(shared_base_src/* DashboardRoutes.WalletsTransfer */.vq.WalletsTransfer),
                                 element: /*#__PURE__*/ (0,jsx_runtime.jsx)(Transfer, {})
                             }),
                             /*#__PURE__*/ (0,jsx_runtime.jsx)(react_router/* Route */.AW, {
-                                path: "history",
+                                path: r(shared_base_src/* DashboardRoutes.WalletsHistory */.vq.WalletsHistory),
                                 element: /*#__PURE__*/ (0,jsx_runtime.jsx)(History, {
                                     selectedChainId: (ref1 = selectedNetwork === null || selectedNetwork === void 0 ? void 0 : selectedNetwork.chainId) !== null && ref1 !== void 0 ? ref1 : currentChainId
                                 })
@@ -4740,7 +4748,7 @@ function Wallets() {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "j": () => (/* binding */ MaskWalletIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -4879,7 +4887,7 @@ const MaskWalletIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIcon */ .
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "q": () => (/* binding */ MiniMaskIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -4958,7 +4966,7 @@ const MiniMaskIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createPaletteAwar
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Y": () => (/* binding */ CheckedIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -4987,7 +4995,7 @@ const CheckedIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIcon */ .I)(
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "G": () => (/* binding */ CheckedBorderIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -5012,7 +5020,7 @@ const CheckedBorderIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIcon *
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "_": () => (/* binding */ CloudLinkIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -5074,7 +5082,7 @@ const CloudLinkIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIcon */ .I
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "_": () => (/* binding */ DownloadIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -5098,7 +5106,7 @@ const DownloadIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIcon */ .I)
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "m": () => (/* binding */ RightIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -5123,7 +5131,7 @@ const RightIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIcon */ .I)('R
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "t": () => (/* binding */ SuccessIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -5153,7 +5161,7 @@ const SuccessIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIcon */ .I)(
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "r": () => (/* binding */ UploadIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -5195,7 +5203,7 @@ const UploadIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIcon */ .I)('
 /* harmony export */ });
 /* harmony import */ var web3_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(83317);
 /* harmony import */ var web3_utils__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(web3_utils__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _masknet_web3_shared_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15091);
+/* harmony import */ var _masknet_web3_shared_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(26618);
 /* harmony import */ var _useAccount__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(98086);
 /* harmony import */ var _contracts_useERC20TokenContract__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(85894);
 /* harmony import */ var _useChainId__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(63541);
@@ -5237,14 +5245,14 @@ const UploadIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIcon */ .I)('
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "P": () => (/* binding */ useERC721ContractDetailed)
 /* harmony export */ });
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(22572);
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(28577);
 /* harmony import */ var wallet_ts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(99674);
 /* harmony import */ var wallet_ts__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(wallet_ts__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _useChainId__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63541);
 /* harmony import */ var _contracts_useERC721TokenContract__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(21532);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(78842);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(11315);
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(92211);
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(24403);
 
 
 
@@ -5305,9 +5313,9 @@ async function getERC721ContractDetailedFromOpensea(address, chainId, apiUrl) {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "_": () => (/* binding */ useERC721TokenDetailedCallback)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
 /* harmony import */ var _useERC721TokenDetailed__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(29129);
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(92211);
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(24403);
 /* harmony import */ var _contracts_useERC721TokenContract__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(21532);
 
 
@@ -5349,93 +5357,6 @@ function useERC721TokenDetailedCallback(contractDetailed) {
         setTokenId,
         erc721TokenDetailedCallback
     ];
-}
-
-
-/***/ }),
-
-/***/ 62043:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "t": () => (/* binding */ useERC721TokenDetailedOwnerList)
-/* harmony export */ });
-/* unused harmony export ERC721_ENUMERABLE_INTERFACE_ID */
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(22572);
-/* harmony import */ var wallet_ts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(99674);
-/* harmony import */ var wallet_ts__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(wallet_ts__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _contracts_useERC721TokenContract__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(21532);
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(92211);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(78842);
-/* harmony import */ var _useERC721TokenDetailed__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(29129);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(76342);
-/* harmony import */ var lodash_unified__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(18443);
-/* harmony import */ var _useChainId__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(63541);
-
-
-
-
-
-
-
-
-
-const ERC721_ENUMERABLE_INTERFACE_ID = '0x780e9d63';
-function useERC721TokenDetailedOwnerList(contractDetailed, owner) {
-    const { GET_ASSETS_URL  } = (0,_constants__WEBPACK_IMPORTED_MODULE_2__/* .useOpenseaAPIConstants */ .$Y)();
-    const chainId = (0,_useChainId__WEBPACK_IMPORTED_MODULE_3__/* .useChainId */ .xx)();
-    var ref;
-    const erc721TokenContract = (0,_contracts_useERC721TokenContract__WEBPACK_IMPORTED_MODULE_4__/* .useERC721TokenContract */ .n)((ref = contractDetailed === null || contractDetailed === void 0 ? void 0 : contractDetailed.address) !== null && ref !== void 0 ? ref : '');
-    const allListRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)([]);
-    const [refreshing, setRefreshing] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
-    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
-        setRefreshing(true);
-        clearTokenDetailedOwnerList();
-    }, [
-        owner,
-        contractDetailed === null || contractDetailed === void 0 ? void 0 : contractDetailed.address
-    ]);
-    const asyncRetry = (0,react_use__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)(async ()=>{
-        if (!erc721TokenContract || !(contractDetailed === null || contractDetailed === void 0 ? void 0 : contractDetailed.address) || !wallet_ts__WEBPACK_IMPORTED_MODULE_0__.EthereumAddress.isValid(contractDetailed === null || contractDetailed === void 0 ? void 0 : contractDetailed.address) || !owner) {
-            setRefreshing(false);
-            return;
-        }
-        const lists = await getERC721TokenDetailedOwnerListFromChain(erc721TokenContract, contractDetailed, owner);
-        allListRef.current = (0,lodash_unified__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z)([
-            ...allListRef.current,
-            ...lists
-        ], 'tokenId');
-        setRefreshing(false);
-    }, [
-        GET_ASSETS_URL,
-        contractDetailed,
-        owner,
-        chainId
-    ]);
-    const clearTokenDetailedOwnerList = ()=>allListRef.current = []
-    ;
-    return {
-        asyncRetry,
-        tokenDetailedOwnerList: allListRef.current,
-        clearTokenDetailedOwnerList,
-        refreshing
-    };
-}
-async function getERC721TokenDetailedOwnerListFromChain(erc721TokenContract, contractDetailed, owner) {
-    const isEnumerable = await (0,_utils__WEBPACK_IMPORTED_MODULE_7__/* .safeNonPayableTransactionCall */ .Y)(erc721TokenContract.methods.supportsInterface(ERC721_ENUMERABLE_INTERFACE_ID));
-    const balance = await (0,_utils__WEBPACK_IMPORTED_MODULE_7__/* .safeNonPayableTransactionCall */ .Y)(erc721TokenContract.methods.balanceOf(owner));
-    if (!isEnumerable || !balance) return [];
-    const allRequest = Array.from({
-        length: Number.parseInt(balance, 10)
-    }, async (_v, i)=>{
-        const tokenId = await (0,_utils__WEBPACK_IMPORTED_MODULE_7__/* .safeNonPayableTransactionCall */ .Y)(erc721TokenContract.methods.tokenOfOwnerByIndex(owner, i));
-        if (!tokenId) return;
-        return (0,_useERC721TokenDetailed__WEBPACK_IMPORTED_MODULE_8__/* .getERC721TokenDetailedFromChain */ .qY)(contractDetailed, erc721TokenContract, tokenId, owner, false);
-    });
-    return (await Promise.allSettled(allRequest)).map((x)=>x.status === 'fulfilled' ? x.value : undefined
-    ).filter((value)=>value
-    );
 }
 
 
@@ -5485,7 +5406,7 @@ function useFungibleTokenBalance(type, address, chainId) {
 /* harmony import */ var _contracts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(21532);
 /* harmony import */ var _useAccount__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(98086);
 /* harmony import */ var _useWeb3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(90495);
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(59302);
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(1154);
 /* harmony import */ var _dimensiondev_kit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(66559);
 
 
@@ -5542,7 +5463,7 @@ function useGasLimit(type, contractAddress, amount, recipient, tokenId) {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "F": () => (/* binding */ useGasPrice)
 /* harmony export */ });
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(22572);
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(28577);
 /* harmony import */ var _useWeb3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(90495);
 /* harmony import */ var _useChainId__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63541);
 
@@ -5571,7 +5492,7 @@ function useGasPrice() {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "h": () => (/* binding */ useNativeTokenBalance)
 /* harmony export */ });
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(22572);
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(28577);
 /* harmony import */ var _useAccount__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(98086);
 /* harmony import */ var _useBalance__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(44068);
 
@@ -5609,8 +5530,8 @@ __webpack_require__.d(__webpack_exports__, {
 var esm = __webpack_require__(66559);
 // EXTERNAL MODULE: ../web3-shared/evm/types/index.ts
 var types = __webpack_require__(95130);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/wallet.ts@1.0.1/node_modules/wallet.ts/dist/index.js
 var dist = __webpack_require__(99674);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useAccount.ts
@@ -5619,8 +5540,8 @@ var useAccount = __webpack_require__(98086);
 var useERC20TokenContract = __webpack_require__(85894);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useTransactionState.ts
 var useTransactionState = __webpack_require__(15030);
-// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
-var src = __webpack_require__(15091);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var src = __webpack_require__(26618);
 ;// CONCATENATED MODULE: ../web3-shared/evm/hooks/useERC20TokenTransferCallback.ts
 
 
@@ -5939,7 +5860,7 @@ function useTokenTransferCallback(type, address) {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "p": () => (/* binding */ useTransactionState)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(95130);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(90609);
 

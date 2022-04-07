@@ -24,8 +24,8 @@ __webpack_require__.d(__webpack_exports__, {
 var esm = __webpack_require__(66559);
 // EXTERNAL MODULE: ../web3-shared/evm/types/index.ts
 var types = __webpack_require__(95130);
-// EXTERNAL MODULE: ../web3-providers/src/index.ts
-var src = __webpack_require__(24524);
+// EXTERNAL MODULE: ../web3-providers/src/index.ts + 2 modules
+var src = __webpack_require__(54492);
 ;// CONCATENATED MODULE: ./src/plugins/EVM/services/Asset/index.ts
 
 
@@ -46,6 +46,8 @@ async function getAsset(options) {
             return src/* Rarible.getAsset */.e8.getAsset(options.address, options.tokenId, {
                 chainId: options.chainId
             });
+        case types/* NonFungibleAssetProvider.ZORA */.pI.ZORA:
+            return src/* Zora.getAsset */.eE.getAsset(options.address, options.tokenId);
         default:
             (0,esm/* unreachable */.t1)(options.provider);
     }
@@ -65,6 +67,8 @@ async function getOrders(options) {
             return src/* Rarible.getOrders */.e8.getOrders(address, tokenId, side, {
                 chainId
             });
+        case types/* NonFungibleAssetProvider.ZORA */.pI.ZORA:
+            return src/* Zora.getOrders */.eE.getOrders(address, tokenId, side);
         default:
             (0,esm/* unreachable */.t1)(provider);
     }
@@ -80,6 +84,8 @@ async function getListings(options) {
             return src/* Rarible.getListings */.e8.getListings(address, tokenId, {
                 chainId
             });
+        case types/* NonFungibleAssetProvider.ZORA */.pI.ZORA:
+            return src/* Zora.getListings */.eE.getListings(address, tokenId);
         default:
             (0,esm/* unreachable */.t1)(provider);
     }
@@ -97,6 +103,8 @@ async function getHistory(options) {
             return [];
         case types/* NonFungibleAssetProvider.RARIBLE */.pI.RARIBLE:
             return src/* Rarible.getHistory */.e8.getHistory(address, tokenId);
+        case types/* NonFungibleAssetProvider.ZORA */.pI.ZORA:
+            return src/* Zora.getHistory */.eE.getHistory(address, tokenId);
         default:
             (0,esm/* unreachable */.t1)(provider);
     }
@@ -114,6 +122,8 @@ async function getCollections(options) {
             return defaultPageableData;
         case types/* NonFungibleAssetProvider.NFTSCAN */.pI.NFTSCAN:
             return defaultPageableData;
+        case types/* NonFungibleAssetProvider.ZORA */.pI.ZORA:
+            return defaultPageableData;
         default:
             (0,esm/* unreachable */.t1)(provider);
     }
@@ -129,9 +139,11 @@ async function getNFT(options) {
         case types/* NonFungibleAssetProvider.OPENSEA */.pI.OPENSEA:
             return src/* OpenSea.getToken */.Nn.getToken(address, tokenId, chainId);
         case types/* NonFungibleAssetProvider.NFTSCAN */.pI.NFTSCAN:
-            return src/* NFTScan.getToken */.jo.getToken(address, tokenId, chainId);
+            return src/* NFTScan.getToken */.jo.getToken(address, tokenId);
         case types/* NonFungibleAssetProvider.RARIBLE */.pI.RARIBLE:
             return src/* Rarible.getToken */.e8.getToken(address, tokenId);
+        case types/* NonFungibleAssetProvider.ZORA */.pI.ZORA:
+            return src/* Zora.getToken */.eE.getToken(address, tokenId);
         default:
             (0,esm/* unreachable */.t1)(provider);
     }
@@ -142,6 +154,7 @@ async function getNFTBalance(options) {
         case types/* NonFungibleAssetProvider.RARIBLE */.pI.RARIBLE:
         case types/* NonFungibleAssetProvider.OPENSEA */.pI.OPENSEA:
         case types/* NonFungibleAssetProvider.NFTSCAN */.pI.NFTSCAN:
+        case types/* NonFungibleAssetProvider.ZORA */.pI.ZORA:
             return src/* NFTScan.getContractBalance */.jo.getContractBalance(address);
         default:
             (0,esm/* unreachable */.t1)(provider);
@@ -155,6 +168,8 @@ async function getNFTContract(options) {
             return src/* OpenSea.getContract */.Nn.getContract(contractAddress, chainId);
         case types/* NonFungibleAssetProvider.RARIBLE */.pI.RARIBLE:
             return;
+        case types/* NonFungibleAssetProvider.ZORA */.pI.ZORA:
+            return;
         default:
             (0,esm/* unreachable */.t1)(provider);
     }
@@ -167,6 +182,8 @@ async function getNFTsByPagination(options) {
         case types/* NonFungibleAssetProvider.NFTSCAN */.pI.NFTSCAN:
             return src/* NFTScan.getTokens */.jo.getTokens(from, options);
         case types/* NonFungibleAssetProvider.RARIBLE */.pI.RARIBLE:
+            return src/* Rarible.getTokens */.e8.getTokens(from, options);
+        case types/* NonFungibleAssetProvider.ZORA */.pI.ZORA:
             return src/* Rarible.getTokens */.e8.getTokens(from, options);
         default:
             (0,esm/* unreachable */.t1)(provider);

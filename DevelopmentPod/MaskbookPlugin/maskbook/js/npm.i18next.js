@@ -1,7 +1,7 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[8129],{
 
-/***/ 28676:
+/***/ 48427:
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -1726,10 +1726,10 @@ function parseFormatStr(formatStr) {
             rest = _opt$split2.slice(1);
 
         var val = rest.join(':');
+        if (!formatOptions[key.trim()]) formatOptions[key.trim()] = val.trim();
         if (val.trim() === 'false') formatOptions[key.trim()] = false;
         if (val.trim() === 'true') formatOptions[key.trim()] = true;
         if (!isNaN(val.trim())) formatOptions[key.trim()] = parseInt(val.trim(), 10);
-        if (!formatOptions[key.trim()]) formatOptions[key.trim()] = val.trim();
       });
     }
   }

@@ -11,10 +11,10 @@ import SwiftUI
 import UIKit
 
 class MaskHostViewController<Content: View>: UIHostingController<Content> {
-    var statusBarStyle: UIStatusBarStyle = .lightContent
+    var statusBarStyle: UIStatusBarStyle? = .lightContent
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        statusBarStyle
+        statusBarStyle ?? super.preferredStatusBarStyle
     }
     
     override func viewDidLayoutSubviews() {

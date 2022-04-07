@@ -132,16 +132,16 @@ __webpack_require__.d(__webpack_exports__, {
   "i": () => (/* reexport */ MnemonicReveal)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var src = __webpack_require__(92597);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Grid/Grid.js + 2 modules
-var Grid = __webpack_require__(11061);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useDrop.js
-var useDrop = __webpack_require__(14302);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var src = __webpack_require__(43021);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Grid/Grid.js + 2 modules
+var Grid = __webpack_require__(20333);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useDrop.js
+var useDrop = __webpack_require__(9536);
 ;// CONCATENATED MODULE: ../dashboard/src/components/Mnemonic/DesktopMnemonicConfirm.tsx
 
 
@@ -198,10 +198,10 @@ const DesktopMnemonicConfirm = /*#__PURE__*/ (0,react.memo)((props)=>{
     }));
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/styles/styled.js
-var styled = __webpack_require__(8571);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Typography/Typography.js + 1 modules
-var Typography = __webpack_require__(7280);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/styles/styled.js
+var styled = __webpack_require__(68435);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Typography/Typography.js + 1 modules
+var Typography = __webpack_require__(74491);
 ;// CONCATENATED MODULE: ../dashboard/src/components/Mnemonic/MnemonicReveal.tsx
 
 
@@ -252,8 +252,8 @@ function MnemonicReveal(props) {
 /* harmony export */   "h": () => (/* binding */ useMnemonicWordsPuzzle)
 /* harmony export */ });
 /* harmony import */ var lodash_unified__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(65535);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(22572);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(28577);
 /* harmony import */ var _mask_src_plugins_Wallet_messages__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63081);
 /**
  * TODO: use @packages/plugin-wallet instead
@@ -334,20 +334,20 @@ __webpack_require__.d(__webpack_exports__, {
   "default": () => (/* binding */ components_CreateMnemonic)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Typography/Typography.js + 1 modules
-var Typography = __webpack_require__(7280);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Box/Box.js
-var Box = __webpack_require__(46486);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Button/Button.js
-var Button = __webpack_require__(9744);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Alert/Alert.js + 4 modules
-var Alert = __webpack_require__(41567);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var src = __webpack_require__(92597);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Typography/Typography.js + 1 modules
+var Typography = __webpack_require__(74491);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Box/Box.js
+var Box = __webpack_require__(18287);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Button/Button.js
+var Button = __webpack_require__(12463);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Alert/Alert.js + 4 modules
+var Alert = __webpack_require__(39402);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var src = __webpack_require__(43021);
 // EXTERNAL MODULE: ../icons/general/Refresh.tsx
 var Refresh = __webpack_require__(96782);
 // EXTERNAL MODULE: ../icons/general/Info.tsx
@@ -358,26 +358,26 @@ var locales = __webpack_require__(21692);
 var types = __webpack_require__(95130);
 // EXTERNAL MODULE: ../dashboard/src/components/Mnemonic/index.tsx + 2 modules
 var Mnemonic = __webpack_require__(39900);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/styles/styled.js
-var styled = __webpack_require__(8571);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Dialog/Dialog.js + 1 modules
-var Dialog = __webpack_require__(99760);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/DialogTitle/DialogTitle.js
-var DialogTitle = __webpack_require__(7466);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/DialogContent/DialogContent.js + 1 modules
-var DialogContent = __webpack_require__(35437);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+lab@5.0.0-alpha.71_6860626c1dd203d2615586c177a8991f/node_modules/@mui/lab/LoadingButton/LoadingButton.js + 1 modules
-var LoadingButton = __webpack_require__(17279);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/styles/styled.js
+var styled = __webpack_require__(68435);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Dialog/Dialog.js + 1 modules
+var Dialog = __webpack_require__(24218);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/DialogTitle/DialogTitle.js
+var DialogTitle = __webpack_require__(18082);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/DialogContent/DialogContent.js + 1 modules
+var DialogContent = __webpack_require__(68681);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+lab@5.0.0-alpha.72_154258abcf19999eeddd92026c0a2f6c/node_modules/@mui/lab/LoadingButton/LoadingButton.js + 1 modules
+var LoadingButton = __webpack_require__(16576);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
 // EXTERNAL MODULE: ../icons/general/Success.tsx
 var Success = __webpack_require__(57214);
 // EXTERNAL MODULE: ../icons/general/Copy.tsx
 var Copy = __webpack_require__(45007);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useCopyToClipboard.js + 1 modules
-var useCopyToClipboard = __webpack_require__(17734);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router@6.0.0-beta.0_history@5.2.0+react@18.0.0-rc.0/node_modules/react-router/index.js
-var react_router = __webpack_require__(63552);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useCopyToClipboard.js + 1 modules
+var useCopyToClipboard = __webpack_require__(35750);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router@6.2.2_react@18.0.0-rc.2/node_modules/react-router/index.js
+var react_router = __webpack_require__(92186);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var shared_base_src = __webpack_require__(79226);
 ;// CONCATENATED MODULE: ../dashboard/src/pages/CreateMaskWallet/components/VerifyMnemonicDialog/index.tsx
@@ -567,12 +567,12 @@ const VerifyMnemonicDialogUI = /*#__PURE__*/ (0,react.memo)(({ matched , open , 
     }));
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useAsyncRetry.js
-var useAsyncRetry = __webpack_require__(22572);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useAsyncFn.js
-var useAsyncFn = __webpack_require__(56838);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router-dom@6.0.0-beta.0_154c53788755629e2430b224cbac559e/node_modules/react-router-dom/index.js
-var react_router_dom = __webpack_require__(93145);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useAsyncRetry.js
+var useAsyncRetry = __webpack_require__(28577);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useAsyncFn.js
+var useAsyncFn = __webpack_require__(1840);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router-dom@6.2.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-router-dom/index.js
+var react_router_dom = __webpack_require__(24336);
 // EXTERNAL MODULE: ../dashboard/src/API.tsx
 var API = __webpack_require__(85971);
 // EXTERNAL MODULE: ../plugins/Wallet/src/index.ts + 1 modules
@@ -819,7 +819,7 @@ const CreateMnemonicUI = /*#__PURE__*/ (0,react.memo)(({ words , onRefreshWords 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "T": () => (/* binding */ CopyIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -852,7 +852,7 @@ const CopyIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIcon */ .I)('co
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "s": () => (/* binding */ InfoIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -884,7 +884,7 @@ const InfoIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIcon */ .I)('In
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "D": () => (/* binding */ RefreshIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -905,7 +905,7 @@ const RefreshIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIcon */ .I)(
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "t": () => (/* binding */ SuccessIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 

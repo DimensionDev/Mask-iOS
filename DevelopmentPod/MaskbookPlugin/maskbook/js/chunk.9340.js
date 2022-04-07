@@ -8,7 +8,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(28864);
 /* harmony import */ var _UI_InvestDialog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(82491);
 

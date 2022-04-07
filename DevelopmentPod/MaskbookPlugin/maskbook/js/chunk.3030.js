@@ -10,8 +10,8 @@ __webpack_require__.d(__webpack_exports__, {
   "F": () => (/* binding */ s)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-hook-form@7.27.1_react@18.0.0-rc.0/node_modules/react-hook-form/dist/index.esm.mjs
-var index_esm = __webpack_require__(38447);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-hook-form@7.27.1_react@18.0.0-rc.2/node_modules/react-hook-form/dist/index.esm.mjs
+var index_esm = __webpack_require__(56247);
 ;// CONCATENATED MODULE: ../../node_modules/.pnpm/@hookform+resolvers@2.8.8_react-hook-form@7.27.1/node_modules/@hookform/resolvers/dist/resolvers.module.js
 var e=function(i,e,t){if(i&&"reportValidity"in i){var f=(0,index_esm/* get */.U2)(t,e);i.setCustomValidity(f&&f.message||""),i.reportValidity()}},resolvers_module_t=function(r,i){var t=function(t){var f=i.fields[t];f&&f.ref&&"reportValidity"in f.ref?e(f.ref,t,r):f.refs&&f.refs.forEach(function(i){return e(i,t,r)})};for(var f in i.fields)t(f)},f=function(e,f){f.shouldUseNativeValidation&&resolvers_module_t(e,f);var o={};for(var a in e){var n=(0,index_esm/* get */.U2)(f.fields,a);(0,index_esm/* set */.t8)(o,a,Object.assign(e[a],{ref:n&&n.ref}))}return o};
 //# sourceMappingURL=resolvers.module.js.map
@@ -29,10 +29,10 @@ var n=function(e,o){for(var n={};e.length;){var s=e[0],t=s.code,i=s.message,a=s.
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "F": () => (/* binding */ StyledInput)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(76342);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(67182);
-/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(92597);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(15672);
+/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(43021);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(83849);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
 
@@ -105,20 +105,20 @@ __webpack_require__.d(__webpack_exports__, {
   "default": () => (/* binding */ Wallet_GasSetting)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var src = __webpack_require__(92597);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Typography/Typography.js + 1 modules
-var Typography = __webpack_require__(7280);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var src = __webpack_require__(43021);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Typography/Typography.js + 1 modules
+var Typography = __webpack_require__(74491);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useChainId.ts
 var useChainId = __webpack_require__(63541);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/chainDetailed.ts
 var chainDetailed = __webpack_require__(22229);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useWeb3.ts + 1 modules
 var useWeb3 = __webpack_require__(90495);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useNativeTokenDetailed.ts
@@ -127,12 +127,12 @@ var useNativeTokenDetailed = __webpack_require__(80955);
 var types = __webpack_require__(95130);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/formatter.ts
 var formatter = __webpack_require__(22283);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useAsync.js
-var useAsync = __webpack_require__(59302);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useUpdateEffect.js + 1 modules
-var useUpdateEffect = __webpack_require__(19669);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useAsyncFn.js
-var useAsyncFn = __webpack_require__(56838);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useAsync.js
+var useAsync = __webpack_require__(1154);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useUpdateEffect.js + 1 modules
+var useUpdateEffect = __webpack_require__(1433);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useAsyncFn.js
+var useAsyncFn = __webpack_require__(1840);
 // EXTERNAL MODULE: ./src/plugins/Wallet/messages.ts
 var messages = __webpack_require__(63081);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/bignumber.js@9.0.2/node_modules/bignumber.js/bignumber.js
@@ -140,28 +140,28 @@ var bignumber = __webpack_require__(42263);
 var bignumber_default = /*#__PURE__*/__webpack_require__.n(bignumber);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/zod@3.13.4/node_modules/zod/lib/index.mjs
 var lib = __webpack_require__(56382);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-hook-form@7.27.1_react@18.0.0-rc.0/node_modules/react-hook-form/dist/index.esm.mjs
-var index_esm = __webpack_require__(38447);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-hook-form@7.27.1_react@18.0.0-rc.2/node_modules/react-hook-form/dist/index.esm.mjs
+var index_esm = __webpack_require__(56247);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@hookform+resolvers@2.8.8_react-hook-form@7.27.1/node_modules/@hookform/resolvers/zod/dist/zod.module.js + 1 modules
 var zod_module = __webpack_require__(75426);
 // EXTERNAL MODULE: ./src/extension/popups/components/StyledInput/index.tsx
 var StyledInput = __webpack_require__(64702);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+lab@5.0.0-alpha.71_6860626c1dd203d2615586c177a8991f/node_modules/@mui/lab/LoadingButton/LoadingButton.js + 1 modules
-var LoadingButton = __webpack_require__(17279);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+lab@5.0.0-alpha.72_154258abcf19999eeddd92026c0a2f6c/node_modules/@mui/lab/LoadingButton/LoadingButton.js + 1 modules
+var LoadingButton = __webpack_require__(16576);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/isEmpty.js
 var isEmpty = __webpack_require__(67127);
 // EXTERNAL MODULE: ./src/extension/popups/pages/Wallet/hooks/useUnConfirmedRequest.ts
 var useUnConfirmedRequest = __webpack_require__(31662);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router@5.2.1_react@18.0.0-rc.0/node_modules/react-router/esm/react-router.js
-var react_router = __webpack_require__(22749);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router@6.2.2_react@18.0.0-rc.2/node_modules/react-router/index.js
+var react_router = __webpack_require__(92186);
 // EXTERNAL MODULE: ./src/plugins/Wallet/hooks/useTokenPrice.ts
 var useTokenPrice = __webpack_require__(65327);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var shared_base_src = __webpack_require__(79226);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/web3-utils@1.5.2/node_modules/web3-utils/lib/index.js
 var web3_utils_lib = __webpack_require__(83317);
-// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
-var base_src = __webpack_require__(15091);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var base_src = __webpack_require__(26618);
 ;// CONCATENATED MODULE: ./src/extension/popups/pages/Wallet/GasSetting/GasSetting1559.tsx
 
 
@@ -266,7 +266,7 @@ const GasSetting1559 = /*#__PURE__*/ (0,react.memo)(()=>{
     const { classes  } = useStyles();
     const web3 = (0,useWeb3/* useWeb3 */.$)();
     const chainId = (0,useChainId/* useChainId */.xx)();
-    const history = (0,react_router/* useHistory */.k6)();
+    const navigate = (0,react_router/* useNavigate */.s0)();
     const [selected, setOption] = (0,react.useState)(null);
     const [getGasLimitError, setGetGasLimitError] = (0,react.useState)(false);
     const { value: nativeToken  } = (0,useNativeTokenDetailed/* useNativeTokenDetailed */.J)();
@@ -426,7 +426,7 @@ const GasSetting1559 = /*#__PURE__*/ (0,react.memo)(()=>{
             ...value.payload,
             params: config
         });
-        history.goBack();
+        navigate(-1);
     }, [
         value,
         history
@@ -469,7 +469,9 @@ const GasSetting1559 = /*#__PURE__*/ (0,react.memo)(()=>{
     // #region If the payload is consumed it needs to be redirected
     (0,useUpdateEffect/* default */.Z)(()=>{
         if (!value && !getValueLoading) {
-            history.replace(shared_base_src/* PopupRoutes.Wallet */.mZ.Wallet);
+            navigate(shared_base_src/* PopupRoutes.Wallet */.mZ.Wallet, {
+                replace: true
+            });
         }
     }, [
         value,
@@ -739,7 +741,7 @@ const Prior1559GasSetting = /*#__PURE__*/ (0,react.memo)(()=>{
     const chainId = (0,useChainId/* useChainId */.xx)();
     const { value , loading: getValueLoading  } = (0,useUnConfirmedRequest/* useUnconfirmedRequest */.d)();
     const [getGasLimitError, setGetGasLimitError] = (0,react.useState)(false);
-    const history = (0,react_router/* useHistory */.k6)();
+    const navigate = (0,react_router/* useNavigate */.s0)();
     const [selected, setOption] = (0,react.useState)(null);
     const { value: nativeToken  } = (0,useNativeTokenDetailed/* useNativeTokenDetailed */.J)();
     const nativeTokenPrice = (0,useTokenPrice/* useNativeTokenPrice */.l)(nativeToken === null || nativeToken === void 0 ? void 0 : nativeToken.chainId);
@@ -873,7 +875,7 @@ const Prior1559GasSetting = /*#__PURE__*/ (0,react.memo)(()=>{
             ...value.payload,
             params: config
         });
-        history.goBack();
+        navigate(-1);
     }, [
         value
     ]);
@@ -881,7 +883,9 @@ const Prior1559GasSetting = /*#__PURE__*/ (0,react.memo)(()=>{
     );
     (0,useUpdateEffect/* default */.Z)(()=>{
         if (!value && !getValueLoading) {
-            history.replace(shared_base_src/* PopupRoutes.Wallet */.mZ.Wallet);
+            navigate(shared_base_src/* PopupRoutes.Wallet */.mZ.Wallet, {
+                replace: true
+            });
         }
     }, [
         value,
@@ -1049,10 +1053,10 @@ const GasSetting = /*#__PURE__*/ (0,react.memo)(()=>{
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "d": () => (/* binding */ useUnconfirmedRequest)
 /* harmony export */ });
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(22572);
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(28577);
 /* harmony import */ var _plugins_Wallet_messages__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63081);
 /* harmony import */ var _service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(45925);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(76342);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(63423);
 /* harmony import */ var _masknet_plugin_wallet__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(89987);
 
 
@@ -1087,7 +1091,7 @@ const useUnconfirmedRequest = ()=>{
 /* harmony export */   "l": () => (/* binding */ useNativeTokenPrice),
 /* harmony export */   "p": () => (/* binding */ useTokenPrice)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76342);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
 /* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(79226);
 /* harmony import */ var _masknet_plugin_wallet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(89987);
 /* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(63081);

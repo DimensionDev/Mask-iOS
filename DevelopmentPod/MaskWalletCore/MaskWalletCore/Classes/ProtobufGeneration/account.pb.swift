@@ -72,6 +72,11 @@ public struct Api_CreateStoredKeyNewAccountAtPathResp {
   fileprivate var _storedKey: Api_StoredKeyInfo? = nil
 }
 
+#if swift(>=5.5) && canImport(_Concurrency)
+extension Api_CreateStoredKeyNewAccountAtPathParam: @unchecked Sendable {}
+extension Api_CreateStoredKeyNewAccountAtPathResp: @unchecked Sendable {}
+#endif  // swift(>=5.5) && canImport(_Concurrency)
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "api"
@@ -153,12 +158,16 @@ extension Api_CreateStoredKeyNewAccountAtPathResp: SwiftProtobuf.Message, SwiftP
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if let v = self._account {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._account {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    }
-    if let v = self._storedKey {
+    } }()
+    try { if let v = self._storedKey {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    }
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 

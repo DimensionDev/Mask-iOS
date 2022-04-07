@@ -122,7 +122,7 @@ class BalanceAccountCell: UITableViewCell {
         
         selectionStyle = .none
         backgroundColor = .clear
-        contentView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 22.5, bottom: 0, trailing: 22.5)
+        contentView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: LayoutConstraints.leading, bottom: 0, trailing: LayoutConstraints.trailing)
         
         accountCardView.delegate = self
         accountCardView.translatesAutoresizingMaskIntoConstraints = false
@@ -132,7 +132,10 @@ class BalanceAccountCell: UITableViewCell {
         contentView.addSubview(actionsStackView)
         
         NSLayoutConstraint.activate([
-            accountCardView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 15),
+            accountCardView.topAnchor.constraint(
+                equalTo: contentView.safeAreaLayoutGuide.topAnchor,
+                constant: LayoutConstraints.top
+            ),
             accountCardView.leadingAnchor.constraint(
                 equalTo: contentView.readableContentGuide.leadingAnchor),
             accountCardView.trailingAnchor.constraint(

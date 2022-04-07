@@ -95,7 +95,7 @@ final class RecoverySheetController: SheetViewController {
             $0.top.bottom.equalToSuperview()
                 .inset(25)
             $0.leading.trailing.equalToSuperview()
-                .inset(22.5)
+                .inset(LayoutConstraints.horizontal)
         }
     }
 

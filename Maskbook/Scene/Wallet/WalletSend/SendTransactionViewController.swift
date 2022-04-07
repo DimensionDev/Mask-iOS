@@ -21,11 +21,9 @@ class SendTransactionViewController: BaseViewController {
     typealias ContactParam = Coordinator.Scene.WalletContactParam
     typealias SendTokenParam = Coordinator.Scene.SendTransactionParam
     let viewModel = ViewModel()
-    
     var sendParam: SendTokenParam?
-    
     var contactParam: ContactParam?
-    
+    let keyboardExpandView = UIView()
     var subscriptions: Set<AnyCancellable> = []
     let addressViewModel = AddressCheckViewModel()
     
@@ -45,18 +43,31 @@ class SendTransactionViewController: BaseViewController {
         textField.attributedPlaceholder = NSAttributedString(string: L10n.Scene.Sendtransaction.Send.placeholderAddress,
                                                              attributes: [.foregroundColor: Asset.Colors.Text.light.color,
                                                                           .font: FontStyles.BH5])
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 48, height: 52))
-        let imageView = UIImageView()
-        imageView.image = Asset.Images.Scene.SendTransaction.scan.image
-        paddingView.addSubview(imageView)
-        imageView.snp.makeConstraints { make in
-            make.centerY.equalTo(paddingView)
-            make.leading.equalTo(8)
-            make.trailing.equalTo(-12)
+        let rightView = UIView(frame: CGRect(x: 0, y: 0, width: 24, height: 52))
+        let rightImageView = UIImageView()
+        rightImageView.image = Asset.Images.Scene.SendTransaction.scan.image
+        rightView.addSubview(rightImageView)
+        rightImageView.snp.makeConstraints { make in
+            make.centerY.equalTo(rightView)
+            make.centerX.equalTo(rightView)
             make.size.equalTo(CGSize(width: 24, height: 24))
         }
-        textField.rightView = paddingView
+        textField.rightView = rightView
         textField.rightViewMode = .always
+        
+        let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 48, height: 52))
+        let leftImageView = UIImageView()
+        leftImageView.image = Asset.Images.Scene.SendTransaction.search.image
+        leftView.addSubview(leftImageView)
+        leftImageView.snp.makeConstraints { make in
+            make.centerY.equalTo(leftView)
+            make.left.equalTo(12)
+            make.right.equalTo(-8)
+            make.size.equalTo(CGSize(width: 24, height: 24))
+        }
+        textField.leftView = leftView
+        textField.leftViewMode = .unlessEditing
+        
         return textField
     }()
     
@@ -108,6 +119,7 @@ class SendTransactionViewController: BaseViewController {
         setupSubViews()
         setTableViewSource()
         setSubscriptions()
+        handleForKeyboard()
     }
     
     private func setupNaviItems() {    
@@ -120,15 +132,15 @@ class SendTransactionViewController: BaseViewController {
         
         view.addSubview(toAddressLabel)
         toAddressLabel.snp.makeConstraints { make in
-            make.leading.equalTo(22.5)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(24)
+            make.leading.equalTo(LayoutConstraints.leading)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(LayoutConstraints.top)
         }
             
         view.addSubview(enterAddressTextField)
         enterAddressTextField.snp.makeConstraints {make in
             make.left.equalTo(toAddressLabel)
             make.top.equalTo(toAddressLabel.snp.bottom).offset(8)
-            make.trailing.equalTo(-22.5)
+            make.trailing.equalTo(-LayoutConstraints.trailing)
             make.height.equalTo(54)
         }
         
@@ -142,10 +154,17 @@ class SendTransactionViewController: BaseViewController {
         
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
-            make.leading.equalTo(23)
-            make.trailing.equalTo(-23)
+            make.leading.equalTo(LayoutConstraints.leading)
+            make.trailing.equalTo(-LayoutConstraints.trailing)
             make.height.equalTo(54)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-24)
+        }
+        
+        view.addSubview(keyboardExpandView)
+        keyboardExpandView.snp.makeConstraints { make in
+            make.top.equalTo(nextButton.snp.bottom).offset(8)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            make.height.equalTo(0)
         }
     }
     
@@ -258,6 +277,51 @@ class SendTransactionViewController: BaseViewController {
                 }
             }
             .store(in: &subscriptions)
+    }
+    
+    func handleForKeyboard() {
+        let endFrame = KeyboardResponderService.shared.endFrame.removeDuplicates()
+        let willShow = NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification, object: nil)
+        let willHide = NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification, object: nil)
+        Publishers.CombineLatest(willShow, endFrame).sink { notification, _ in
+            guard let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else {
+                return
+            }
+            guard let endFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+                return
+            }
+            UIView.animate(
+                withDuration: duration,
+                delay: 0,
+                options: .curveEaseIn) {
+                    self.keyboardExpandView.snp.remakeConstraints { make in
+                        make.top.equalTo(self.nextButton.snp.bottom).offset(8)
+                        make.leading.trailing.equalToSuperview()
+                        make.bottom.equalTo(self.view.snp.bottom)
+                        make.height.equalTo(endFrame.height)
+                        self.nextButton.layoutIfNeeded()
+                    }
+            }
+            self.view.layoutIfNeeded()
+        }.store(in: &subscriptions)
+        
+        Publishers.CombineLatest(willHide, endFrame).sink { notification, _ in
+            guard let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else {
+                return
+            }
+            UIView.animate(
+                withDuration: duration,
+                delay: 0,
+                options: .curveEaseIn) {
+                    self.keyboardExpandView.snp.remakeConstraints { make in
+                        make.top.equalTo(self.nextButton.snp.bottom).offset(8)
+                        make.leading.trailing.equalToSuperview()
+                        make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+                        make.height.equalTo(0)
+                    }
+            }
+            self.view.layoutIfNeeded()
+        }.store(in: &subscriptions)
     }
 }
 
@@ -399,3 +463,4 @@ extension SendTransactionViewController: ScannerLineViewControllerDelegate {
         enterAddressTextField.insertText(address ?? "")
     }
 }
+

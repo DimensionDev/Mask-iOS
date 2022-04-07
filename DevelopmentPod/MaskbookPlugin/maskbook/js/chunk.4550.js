@@ -2179,7 +2179,7 @@ module.exports = values;
 /* harmony export */   "q0": () => (/* binding */ resolveOpenSeaNetwork),
 /* harmony export */   "zu": () => (/* binding */ resolveTraitLinkOnOpenSea)
 /* harmony export */ });
-/* unused harmony exports resolveRaribleUserNetwork, resolveLinkOnOpenSea, resolveLinkOnRarible */
+/* unused harmony exports resolveRaribleUserNetwork, resolveLinkOnOpenSea, resolveLinkOnRarible, resolveLinkOnZora */
 /* harmony import */ var lodash_unified__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(35272);
 /* harmony import */ var opensea_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(37050);
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(88486);
@@ -2227,7 +2227,8 @@ const resolveOpenSeaNetwork = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODU
 const resolveCollectibleProviderName = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_4__/* .createLookupTableResolver */ .F)({
     [_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_6__/* .NonFungibleAssetProvider.OPENSEA */ .pI.OPENSEA]: 'OpenSea',
     [_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_6__/* .NonFungibleAssetProvider.RARIBLE */ .pI.RARIBLE]: 'Rarible',
-    [_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_6__/* .NonFungibleAssetProvider.NFTSCAN */ .pI.NFTSCAN]: 'NFTScan'
+    [_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_6__/* .NonFungibleAssetProvider.NFTSCAN */ .pI.NFTSCAN]: 'NFTScan',
+    [_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_6__/* .NonFungibleAssetProvider.ZORA */ .pI.ZORA]: 'Zora'
 }, (providerType)=>{
     throw new Error(`Unknown provider type: ${providerType}.`);
 });
@@ -2245,6 +2246,9 @@ const resolveLinkOnRarible = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODUL
     [_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_6__/* .ChainId.Rinkeby */ .a_.Rinkeby]: 'https://rinkeby.rarible.com',
     [_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_6__/* .ChainId.Ropsten */ .a_.Ropsten]: 'https://ropsten.rarible.com'
 }, 'https://rarible.com');
+const resolveLinkOnZora = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_4__/* .createLookupTableResolver */ .F)({
+    [_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_6__/* .ChainId.Mainnet */ .a_.Mainnet]: 'https://zora.co'
+}, 'https://zora.co');
 function resolveTraitLinkOnOpenSea(chainId, slug, search, value) {
     if (chainId === _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_6__/* .ChainId.Rinkeby */ .a_.Rinkeby) {
         return `https://testnets.opensea.io/assets/${slug}?search[stringTraits][0][name]=${search}&search[stringTraits][0][values][0]=${value}`;
@@ -2265,6 +2269,11 @@ function resolveAssetLinkOnCurrentProvider(chainId, address, id, provider) {
             });
         case _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_6__/* .NonFungibleAssetProvider.NFTSCAN */ .pI.NFTSCAN:
             return '';
+        case _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_6__/* .NonFungibleAssetProvider.ZORA */ .pI.ZORA:
+            return urlcat__WEBPACK_IMPORTED_MODULE_3___default()(resolveLinkOnZora(chainId), '/collections/:address/:id', {
+                address,
+                id
+            });
         default:
             return '';
     }
@@ -2277,6 +2286,8 @@ function resolveUserUrlOnCurrentProvider(chainId, address, provider, username) {
             return urlcat__WEBPACK_IMPORTED_MODULE_3___default()(resolveLinkOnOpenSea(chainId), `/${username !== null && username !== void 0 ? username : ''}`);
         case _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_6__/* .NonFungibleAssetProvider.NFTSCAN */ .pI.NFTSCAN:
             return '';
+        case _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_6__/* .NonFungibleAssetProvider.ZORA */ .pI.ZORA:
+            return urlcat__WEBPACK_IMPORTED_MODULE_3___default()(resolveLinkOnZora(chainId), `/${address}`);
         default:
             return '';
     }
@@ -2290,6 +2301,8 @@ function resolveAvatarLinkOnCurrentProvider(chainId, asset, provider) {
             var _token_address;
             return urlcat__WEBPACK_IMPORTED_MODULE_3___default()(resolveLinkOnRarible(chainId), `/collection/${(_token_address = asset.token_address) !== null && _token_address !== void 0 ? _token_address : ''}`);
         case _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_6__/* .NonFungibleAssetProvider.NFTSCAN */ .pI.NFTSCAN:
+            return '';
+        case _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_6__/* .NonFungibleAssetProvider.ZORA */ .pI.ZORA:
             return '';
         default:
             return '';

@@ -20,7 +20,7 @@ class RenameViewController: UIViewController {
         view.axis = .vertical
         view.spacing = 8
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: 48, left: 22, bottom: 24, right: 22)
+        view.layoutMargins = UIEdgeInsets(top: 48, left: LayoutConstraints.leading, bottom: 24, right: LayoutConstraints.trailing)
         view.alignment = .fill
         
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -129,6 +129,13 @@ private extension RenameViewController {
             }
             .store(in: &disposeBag)
         
+        viewModel.dismissSignal
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] completion in
+                self?.dismiss(animated: true, completion: completion)
+            })
+            .store(in: &disposeBag)
+        
         nameTextField.addTarget(self, action: #selector(onReturn), for: .primaryActionTriggered)
         renameButton.addTarget(self, action: #selector(onRenameClicked), for: .touchUpInside)
     }
@@ -143,8 +150,12 @@ private extension RenameViewController {
         guard let newName = self.nameTextField.text, !newName.isEmpty else {
             return
         }
-        dismiss(animated: true) {
-            self.viewModel.confirmAction(newName)
+        if viewModel.dismissOnConfirm {
+            dismiss(animated: true) {
+                self.viewModel.confirmAction(newName, self.viewModel)
+            }
+        } else {
+            self.viewModel.confirmAction(newName, self.viewModel)
         }
     }
 }

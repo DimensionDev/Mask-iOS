@@ -36,7 +36,11 @@ class UnlockViewController: AlertPopupController {
         view.axis = .vertical
         view.spacing = 8
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: 24, left: 22, bottom: 24, right: 22)
+        view.layoutMargins = UIEdgeInsets(
+            top: LayoutConstraints.top,
+            left: LayoutConstraints.leading,
+            bottom: 24,
+            right: LayoutConstraints.trailing)
         view.alignment = .fill
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false

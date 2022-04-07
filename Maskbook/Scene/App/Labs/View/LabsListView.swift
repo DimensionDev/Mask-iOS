@@ -17,8 +17,7 @@ struct LabsListView: View {
                         whenTapped: { plugin in
                             viewModel.pluginSignal.send(plugin)
                         }
-                    )
-                    .padding(.horizontal, 22.5)
+                    ).padding(.horizontal, LayoutConstraints.horizontal)
                 }
             }
         }

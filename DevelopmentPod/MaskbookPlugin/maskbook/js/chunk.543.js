@@ -8,13 +8,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _masknet_plugin_wallet__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(89987);
 /* harmony import */ var _SNSAdaptor_SelectTokenDialog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(54604);
 /* harmony import */ var _SNSAdaptor_SelectNftContractDialog__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(77620);
 /* harmony import */ var _SNSAdaptor_SelectProviderDialog__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(73164);
 /* harmony import */ var _SNSAdaptor_SelectWalletDialog__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(53165);
-/* harmony import */ var _SNSAdaptor_WalletConnectQRCodeDialog__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(92332);
+/* harmony import */ var _SNSAdaptor_WalletConnectQRCodeDialog__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(93691);
 /* harmony import */ var _SNSAdaptor_WalletStatusDialog__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(44940);
 /* harmony import */ var _SNSAdaptor_RenameWalletDialog__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(21567);
 /* harmony import */ var _SNSAdaptor_TransactionDialog__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(35214);

@@ -1952,6 +1952,547 @@ module.exports = self.fetch.bind(self);
 
 /***/ }),
 
+/***/ 92304:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var json = typeof JSON !== 'undefined' ? JSON : __webpack_require__(81758);
+
+module.exports = function (obj, opts) {
+    if (!opts) opts = {};
+    if (typeof opts === 'function') opts = { cmp: opts };
+    var space = opts.space || '';
+    if (typeof space === 'number') space = Array(space+1).join(' ');
+    var cycles = (typeof opts.cycles === 'boolean') ? opts.cycles : false;
+    var replacer = opts.replacer || function(key, value) { return value; };
+
+    var cmp = opts.cmp && (function (f) {
+        return function (node) {
+            return function (a, b) {
+                var aobj = { key: a, value: node[a] };
+                var bobj = { key: b, value: node[b] };
+                return f(aobj, bobj);
+            };
+        };
+    })(opts.cmp);
+
+    var seen = [];
+    return (function stringify (parent, key, node, level) {
+        var indent = space ? ('\n' + new Array(level + 1).join(space)) : '';
+        var colonSeparator = space ? ': ' : ':';
+
+        if (node && node.toJSON && typeof node.toJSON === 'function') {
+            node = node.toJSON();
+        }
+
+        node = replacer.call(parent, key, node);
+
+        if (node === undefined) {
+            return;
+        }
+        if (typeof node !== 'object' || node === null) {
+            return json.stringify(node);
+        }
+        if (isArray(node)) {
+            var out = [];
+            for (var i = 0; i < node.length; i++) {
+                var item = stringify(node, i, node[i], level+1) || json.stringify(null);
+                out.push(indent + space + item);
+            }
+            return '[' + out.join(',') + indent + ']';
+        }
+        else {
+            if (seen.indexOf(node) !== -1) {
+                if (cycles) return json.stringify('__cycle__');
+                throw new TypeError('Converting circular structure to JSON');
+            }
+            else seen.push(node);
+
+            var keys = objectKeys(node).sort(cmp && cmp(node));
+            var out = [];
+            for (var i = 0; i < keys.length; i++) {
+                var key = keys[i];
+                var value = stringify(node, key, node[key], level+1);
+
+                if(!value) continue;
+
+                var keyValue = json.stringify(key)
+                    + colonSeparator
+                    + value;
+                ;
+                out.push(indent + space + keyValue);
+            }
+            seen.splice(seen.indexOf(node), 1);
+            return '{' + out.join(',') + indent + '}';
+        }
+    })({ '': obj }, '', obj, 0);
+};
+
+var isArray = Array.isArray || function (x) {
+    return {}.toString.call(x) === '[object Array]';
+};
+
+var objectKeys = Object.keys || function (obj) {
+    var has = Object.prototype.hasOwnProperty || function () { return true };
+    var keys = [];
+    for (var key in obj) {
+        if (has.call(obj, key)) keys.push(key);
+    }
+    return keys;
+};
+
+
+/***/ }),
+
+/***/ 81758:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+exports.parse = __webpack_require__(65812);
+exports.stringify = __webpack_require__(98079);
+
+
+/***/ }),
+
+/***/ 65812:
+/***/ ((module) => {
+
+var at, // The index of the current character
+    ch, // The current character
+    escapee = {
+        '"':  '"',
+        '\\': '\\',
+        '/':  '/',
+        b:    '\b',
+        f:    '\f',
+        n:    '\n',
+        r:    '\r',
+        t:    '\t'
+    },
+    text,
+
+    error = function (m) {
+        // Call error when something is wrong.
+        throw {
+            name:    'SyntaxError',
+            message: m,
+            at:      at,
+            text:    text
+        };
+    },
+    
+    next = function (c) {
+        // If a c parameter is provided, verify that it matches the current character.
+        if (c && c !== ch) {
+            error("Expected '" + c + "' instead of '" + ch + "'");
+        }
+        
+        // Get the next character. When there are no more characters,
+        // return the empty string.
+        
+        ch = text.charAt(at);
+        at += 1;
+        return ch;
+    },
+    
+    number = function () {
+        // Parse a number value.
+        var number,
+            string = '';
+        
+        if (ch === '-') {
+            string = '-';
+            next('-');
+        }
+        while (ch >= '0' && ch <= '9') {
+            string += ch;
+            next();
+        }
+        if (ch === '.') {
+            string += '.';
+            while (next() && ch >= '0' && ch <= '9') {
+                string += ch;
+            }
+        }
+        if (ch === 'e' || ch === 'E') {
+            string += ch;
+            next();
+            if (ch === '-' || ch === '+') {
+                string += ch;
+                next();
+            }
+            while (ch >= '0' && ch <= '9') {
+                string += ch;
+                next();
+            }
+        }
+        number = +string;
+        if (!isFinite(number)) {
+            error("Bad number");
+        } else {
+            return number;
+        }
+    },
+    
+    string = function () {
+        // Parse a string value.
+        var hex,
+            i,
+            string = '',
+            uffff;
+        
+        // When parsing for string values, we must look for " and \ characters.
+        if (ch === '"') {
+            while (next()) {
+                if (ch === '"') {
+                    next();
+                    return string;
+                } else if (ch === '\\') {
+                    next();
+                    if (ch === 'u') {
+                        uffff = 0;
+                        for (i = 0; i < 4; i += 1) {
+                            hex = parseInt(next(), 16);
+                            if (!isFinite(hex)) {
+                                break;
+                            }
+                            uffff = uffff * 16 + hex;
+                        }
+                        string += String.fromCharCode(uffff);
+                    } else if (typeof escapee[ch] === 'string') {
+                        string += escapee[ch];
+                    } else {
+                        break;
+                    }
+                } else {
+                    string += ch;
+                }
+            }
+        }
+        error("Bad string");
+    },
+
+    white = function () {
+
+// Skip whitespace.
+
+        while (ch && ch <= ' ') {
+            next();
+        }
+    },
+
+    word = function () {
+
+// true, false, or null.
+
+        switch (ch) {
+        case 't':
+            next('t');
+            next('r');
+            next('u');
+            next('e');
+            return true;
+        case 'f':
+            next('f');
+            next('a');
+            next('l');
+            next('s');
+            next('e');
+            return false;
+        case 'n':
+            next('n');
+            next('u');
+            next('l');
+            next('l');
+            return null;
+        }
+        error("Unexpected '" + ch + "'");
+    },
+
+    value,  // Place holder for the value function.
+
+    array = function () {
+
+// Parse an array value.
+
+        var array = [];
+
+        if (ch === '[') {
+            next('[');
+            white();
+            if (ch === ']') {
+                next(']');
+                return array;   // empty array
+            }
+            while (ch) {
+                array.push(value());
+                white();
+                if (ch === ']') {
+                    next(']');
+                    return array;
+                }
+                next(',');
+                white();
+            }
+        }
+        error("Bad array");
+    },
+
+    object = function () {
+
+// Parse an object value.
+
+        var key,
+            object = {};
+
+        if (ch === '{') {
+            next('{');
+            white();
+            if (ch === '}') {
+                next('}');
+                return object;   // empty object
+            }
+            while (ch) {
+                key = string();
+                white();
+                next(':');
+                if (Object.hasOwnProperty.call(object, key)) {
+                    error('Duplicate key "' + key + '"');
+                }
+                object[key] = value();
+                white();
+                if (ch === '}') {
+                    next('}');
+                    return object;
+                }
+                next(',');
+                white();
+            }
+        }
+        error("Bad object");
+    };
+
+value = function () {
+
+// Parse a JSON value. It could be an object, an array, a string, a number,
+// or a word.
+
+    white();
+    switch (ch) {
+    case '{':
+        return object();
+    case '[':
+        return array();
+    case '"':
+        return string();
+    case '-':
+        return number();
+    default:
+        return ch >= '0' && ch <= '9' ? number() : word();
+    }
+};
+
+// Return the json_parse function. It will have access to all of the above
+// functions and variables.
+
+module.exports = function (source, reviver) {
+    var result;
+    
+    text = source;
+    at = 0;
+    ch = ' ';
+    result = value();
+    white();
+    if (ch) {
+        error("Syntax error");
+    }
+
+    // If there is a reviver function, we recursively walk the new structure,
+    // passing each name/value pair to the reviver function for possible
+    // transformation, starting with a temporary root object that holds the result
+    // in an empty key. If there is not a reviver function, we simply return the
+    // result.
+
+    return typeof reviver === 'function' ? (function walk(holder, key) {
+        var k, v, value = holder[key];
+        if (value && typeof value === 'object') {
+            for (k in value) {
+                if (Object.prototype.hasOwnProperty.call(value, k)) {
+                    v = walk(value, k);
+                    if (v !== undefined) {
+                        value[k] = v;
+                    } else {
+                        delete value[k];
+                    }
+                }
+            }
+        }
+        return reviver.call(holder, key, value);
+    }({'': result}, '')) : result;
+};
+
+
+/***/ }),
+
+/***/ 98079:
+/***/ ((module) => {
+
+var cx = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,
+    escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,
+    gap,
+    indent,
+    meta = {    // table of character substitutions
+        '\b': '\\b',
+        '\t': '\\t',
+        '\n': '\\n',
+        '\f': '\\f',
+        '\r': '\\r',
+        '"' : '\\"',
+        '\\': '\\\\'
+    },
+    rep;
+
+function quote(string) {
+    // If the string contains no control characters, no quote characters, and no
+    // backslash characters, then we can safely slap some quotes around it.
+    // Otherwise we must also replace the offending characters with safe escape
+    // sequences.
+    
+    escapable.lastIndex = 0;
+    return escapable.test(string) ? '"' + string.replace(escapable, function (a) {
+        var c = meta[a];
+        return typeof c === 'string' ? c :
+            '\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
+    }) + '"' : '"' + string + '"';
+}
+
+function str(key, holder) {
+    // Produce a string from holder[key].
+    var i,          // The loop counter.
+        k,          // The member key.
+        v,          // The member value.
+        length,
+        mind = gap,
+        partial,
+        value = holder[key];
+    
+    // If the value has a toJSON method, call it to obtain a replacement value.
+    if (value && typeof value === 'object' &&
+            typeof value.toJSON === 'function') {
+        value = value.toJSON(key);
+    }
+    
+    // If we were called with a replacer function, then call the replacer to
+    // obtain a replacement value.
+    if (typeof rep === 'function') {
+        value = rep.call(holder, key, value);
+    }
+    
+    // What happens next depends on the value's type.
+    switch (typeof value) {
+        case 'string':
+            return quote(value);
+        
+        case 'number':
+            // JSON numbers must be finite. Encode non-finite numbers as null.
+            return isFinite(value) ? String(value) : 'null';
+        
+        case 'boolean':
+        case 'null':
+            // If the value is a boolean or null, convert it to a string. Note:
+            // typeof null does not produce 'null'. The case is included here in
+            // the remote chance that this gets fixed someday.
+            return String(value);
+            
+        case 'object':
+            if (!value) return 'null';
+            gap += indent;
+            partial = [];
+            
+            // Array.isArray
+            if (Object.prototype.toString.apply(value) === '[object Array]') {
+                length = value.length;
+                for (i = 0; i < length; i += 1) {
+                    partial[i] = str(i, value) || 'null';
+                }
+                
+                // Join all of the elements together, separated with commas, and
+                // wrap them in brackets.
+                v = partial.length === 0 ? '[]' : gap ?
+                    '[\n' + gap + partial.join(',\n' + gap) + '\n' + mind + ']' :
+                    '[' + partial.join(',') + ']';
+                gap = mind;
+                return v;
+            }
+            
+            // If the replacer is an array, use it to select the members to be
+            // stringified.
+            if (rep && typeof rep === 'object') {
+                length = rep.length;
+                for (i = 0; i < length; i += 1) {
+                    k = rep[i];
+                    if (typeof k === 'string') {
+                        v = str(k, value);
+                        if (v) {
+                            partial.push(quote(k) + (gap ? ': ' : ':') + v);
+                        }
+                    }
+                }
+            }
+            else {
+                // Otherwise, iterate through all of the keys in the object.
+                for (k in value) {
+                    if (Object.prototype.hasOwnProperty.call(value, k)) {
+                        v = str(k, value);
+                        if (v) {
+                            partial.push(quote(k) + (gap ? ': ' : ':') + v);
+                        }
+                    }
+                }
+            }
+            
+        // Join all of the member texts together, separated with commas,
+        // and wrap them in braces.
+
+        v = partial.length === 0 ? '{}' : gap ?
+            '{\n' + gap + partial.join(',\n' + gap) + '\n' + mind + '}' :
+            '{' + partial.join(',') + '}';
+        gap = mind;
+        return v;
+    }
+}
+
+module.exports = function (value, replacer, space) {
+    var i;
+    gap = '';
+    indent = '';
+    
+    // If the space parameter is a number, make an indent string containing that
+    // many spaces.
+    if (typeof space === 'number') {
+        for (i = 0; i < space; i += 1) {
+            indent += ' ';
+        }
+    }
+    // If the space parameter is a string, it will be used as the indent string.
+    else if (typeof space === 'string') {
+        indent = space;
+    }
+
+    // If there is a replacer, it must be a function or an array.
+    // Otherwise, throw an error.
+    rep = replacer;
+    if (replacer && typeof replacer !== 'function'
+    && (typeof replacer !== 'object' || typeof replacer.length !== 'number')) {
+        throw new Error('JSON.stringify');
+    }
+    
+    // Make a fake root object containing our value under the key of ''.
+    // Return the result of stringifying the value.
+    return str('', {'': value});
+};
+
+
+/***/ }),
+
 /***/ 25534:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -1960,10 +2501,10 @@ module.exports = self.fetch.bind(self);
 /* harmony export */   "P": () => (/* binding */ PriceChartDaysControl),
 /* harmony export */   "h": () => (/* binding */ Days)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(98294);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(7280);
-/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(92597);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(86377);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(74491);
+/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(43021);
 /* harmony import */ var _pipes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(21957);
 
 
@@ -2042,203 +2583,44 @@ function PriceChartDaysControl(props) {
 /* harmony export */   "uM": () => (/* binding */ resolveTradeProviderName),
 /* harmony export */   "xo": () => (/* binding */ resolveDaysName)
 /* harmony export */ });
-/* unused harmony exports resolveCurrencyName, resolveTradeProviderLink, resolveTradePairLink, resolveUniswapWarningLevel, resolveUniswapWarningLevelColor, resolveZrxTradePoolName */
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(41391);
-/* harmony import */ var _masknet_public_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(48476);
-/* harmony import */ var _dimensiondev_kit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(66559);
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(43545);
-/* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(88486);
-/* harmony import */ var urlcat__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(19802);
-/* harmony import */ var urlcat__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(urlcat__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _masknet_public_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(48476);
+/* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(88486);
 
 
-
-
-
-
-function resolveCurrencyName(currency) {
-    return [
-        currency.name,
-        currency.symbol ? `"${currency.symbol}"` : '',
-        currency.description ? `(${currency.description})` : '', 
-    ].join(' ');
-}
-const resolveDataProviderName = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_5__/* .createLookupTableResolver */ .F)({
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .DataProvider.COIN_GECKO */ .FW.COIN_GECKO]: 'CoinGecko',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .DataProvider.COIN_MARKET_CAP */ .FW.COIN_MARKET_CAP]: 'CoinMarketCap',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .DataProvider.UNISWAP_INFO */ .FW.UNISWAP_INFO]: 'Uniswap Info'
+const resolveDataProviderName = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_1__/* .createLookupTableResolver */ .F)({
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .DataProvider.COIN_GECKO */ .FW.COIN_GECKO]: 'CoinGecko',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .DataProvider.COIN_MARKET_CAP */ .FW.COIN_MARKET_CAP]: 'CoinMarketCap',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .DataProvider.UNISWAP_INFO */ .FW.UNISWAP_INFO]: 'Uniswap Info'
 }, (dataProvider)=>{
     throw new Error(`Unknown data provider: ${dataProvider}`);
 });
-const resolveDataProviderLink = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_5__/* .createLookupTableResolver */ .F)({
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .DataProvider.COIN_GECKO */ .FW.COIN_GECKO]: 'https://www.coingecko.com/',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .DataProvider.COIN_MARKET_CAP */ .FW.COIN_MARKET_CAP]: 'https://coinmarketcap.com/',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .DataProvider.UNISWAP_INFO */ .FW.UNISWAP_INFO]: 'https://info.uniswap.org/'
+const resolveDataProviderLink = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_1__/* .createLookupTableResolver */ .F)({
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .DataProvider.COIN_GECKO */ .FW.COIN_GECKO]: 'https://www.coingecko.com/',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .DataProvider.COIN_MARKET_CAP */ .FW.COIN_MARKET_CAP]: 'https://coinmarketcap.com/',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .DataProvider.UNISWAP_INFO */ .FW.UNISWAP_INFO]: 'https://info.uniswap.org/'
 }, (dataProvider)=>{
     throw new Error(`Unknown data provider: ${dataProvider}`);
 });
-const resolveTradeProviderName = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_5__/* .createLookupTableResolver */ .F)({
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.UNISWAP_V2 */ .z4.UNISWAP_V2]: 'Uniswap V2',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.UNISWAP_V3 */ .z4.UNISWAP_V3]: 'Uniswap V3',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.ZRX */ .z4.ZRX]: '0x',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.SUSHISWAP */ .z4.SUSHISWAP]: 'SushiSwap',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.SASHIMISWAP */ .z4.SASHIMISWAP]: 'SashimiSwap',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.BALANCER */ .z4.BALANCER]: 'Balancer',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.QUICKSWAP */ .z4.QUICKSWAP]: 'QuickSwap',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.PANCAKESWAP */ .z4.PANCAKESWAP]: 'PancakeSwap',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.DODO */ .z4.DODO]: 'DODO',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.BANCOR */ .z4.BANCOR]: 'Bancor',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.OPENOCEAN */ .z4.OPENOCEAN]: 'OpenOcean',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.TRADERJOE */ .z4.TRADERJOE]: 'TraderJoe',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.PANGOLIN */ .z4.PANGOLIN]: 'PangolinDex',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.TRISOLARIS */ .z4.TRISOLARIS]: 'Trisolaris',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_1__/* .TradeProvider.WANNASWAP */ .z4.WANNASWAP]: 'WannaSwap'
+const resolveTradeProviderName = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_1__/* .createLookupTableResolver */ .F)({
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.UNISWAP_V2 */ .z4.UNISWAP_V2]: 'Uniswap V2',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.UNISWAP_V3 */ .z4.UNISWAP_V3]: 'Uniswap V3',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.ZRX */ .z4.ZRX]: '0x',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.SUSHISWAP */ .z4.SUSHISWAP]: 'SushiSwap',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.SASHIMISWAP */ .z4.SASHIMISWAP]: 'SashimiSwap',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.BALANCER */ .z4.BALANCER]: 'Balancer',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.QUICKSWAP */ .z4.QUICKSWAP]: 'QuickSwap',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.PANCAKESWAP */ .z4.PANCAKESWAP]: 'PancakeSwap',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.DODO */ .z4.DODO]: 'DODO',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.BANCOR */ .z4.BANCOR]: 'Bancor',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.OPENOCEAN */ .z4.OPENOCEAN]: 'OpenOcean',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.TRADERJOE */ .z4.TRADERJOE]: 'TraderJoe',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.PANGOLIN */ .z4.PANGOLIN]: 'PangolinDex',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.TRISOLARIS */ .z4.TRISOLARIS]: 'Trisolaris',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.WANNASWAP */ .z4.WANNASWAP]: 'WannaSwap',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.MDEX */ .z4.MDEX]: 'Mdex'
 }, (tradeProvider)=>{
     throw new Error(`Unknown provider type: ${tradeProvider}`);
 });
-function resolveTradeProviderLink(tradeProvider, networkType) {
-    switch(tradeProvider){
-        case TradeProvider.UNISWAP_V2:
-            return 'https://uniswap.org/';
-        case TradeProvider.UNISWAP_V3:
-            return 'https://uniswap.org/';
-        case TradeProvider.ZRX:
-            switch(networkType){
-                case NetworkType.Ethereum:
-                    return 'https://api.0x.org/';
-                case NetworkType.Binance:
-                    return 'https://bsc.api.0x.org/';
-                case NetworkType.Polygon:
-                    return 'https://polygon.api.0x.org/';
-                case NetworkType.Arbitrum:
-                    return 'https://aribitrum.api.0x.org/';
-                case NetworkType.xDai:
-                    return 'https://xdai.api.0x.org/';
-                case NetworkType.Celo:
-                    return 'https://celo.api.0x.org/';
-                case NetworkType.Fantom:
-                    return 'https://fantom.api.0x.org/';
-                case NetworkType.Avalanche:
-                    return 'https://avalanche.api.0x.org/';
-                case NetworkType.Aurora:
-                    return 'https://aurora.api.0x.org/';
-                case NetworkType.Boba:
-                case NetworkType.Fuse:
-                case NetworkType.Metis:
-                case NetworkType.Avalanche:
-                case NetworkType.Optimistic:
-                    console.error('To be implement network: ', networkType);
-                    return '';
-                default:
-                    safeUnreachable(networkType);
-                    return '';
-            }
-        case TradeProvider.SUSHISWAP:
-            return 'https://sushiswapclassic.org/';
-        case TradeProvider.SASHIMISWAP:
-            return 'https://sashimi.cool/';
-        case TradeProvider.BALANCER:
-            return 'https://balancer.exchange/';
-        case TradeProvider.QUICKSWAP:
-            return 'https://quickswap.exchange/';
-        case TradeProvider.PANCAKESWAP:
-            return 'https://exchange.pancakeswap.finance/#/swap';
-        case TradeProvider.DODO:
-            return 'https://app.dodoex.io';
-        case TradeProvider.BANCOR:
-            return 'https://app.bancor.network/eth/swap';
-        case TradeProvider.OPENOCEAN:
-            return 'https://openocean.finance/classic';
-        case TradeProvider.TRADERJOE:
-            return 'https://traderjoexyz.com/#/trade';
-        case TradeProvider.PANGOLIN:
-            return 'https://app.pangolin.exchange/#/swap';
-        case TradeProvider.TRISOLARIS:
-            return 'https://www.trisolaris.io/#/swap';
-        case TradeProvider.WANNASWAP:
-            return 'https://wannaswap.finance/exchange/swap';
-        default:
-            unreachable(tradeProvider);
-    }
-}
-function resolveTradePairLink(tradeProvider, address, networkType) {
-    switch(tradeProvider){
-        case TradeProvider.UNISWAP_V2:
-            return `https://v2.info.uniswap.org/pair/${address}`;
-        case TradeProvider.UNISWAP_V3:
-            return `https://info.uniswap.org/pair/${address}`;
-        case TradeProvider.ZRX:
-            return '';
-        case TradeProvider.DODO:
-            {
-                if (!networkNames[networkType]) {
-                    console.error('Unsupported network: ', networkType);
-                    return '';
-                }
-                return urlcat('https://app.dodoex.io/exchange/:address', {
-                    address,
-                    network: networkNames[networkType],
-                    forced: true
-                });
-            }
-        case TradeProvider.SUSHISWAP:
-            switch(networkType){
-                case NetworkType.Ethereum:
-                    return `https://analytics.sushi.com/pairs/${address}`;
-                case NetworkType.Binance:
-                    return `https://analytics-bsc.sushi.com/pairs/${address}`;
-                case NetworkType.Polygon:
-                    return `https://analytics-polygon.sushi.com/pairs/${address}`;
-                case NetworkType.Arbitrum:
-                    return `https://analytics-aribtrum.sushi.com/pairs/${address}`;
-                case NetworkType.xDai:
-                    return `https://analytics-xdai.sushi.com/pairs/${address}`;
-                case NetworkType.Celo:
-                    return `https://analytics-celo.sushi.com/pairs/${address}`;
-                case NetworkType.Fantom:
-                    return `https://analytics-ftm.sushi.com/pairs/${address}`;
-                case NetworkType.Avalanche:
-                    return `https://analytics-avx.sushi.com/pairs/${address}`;
-                case NetworkType.Aurora:
-                    return `https://analytics-aurora.sushi.com/pairs/${address}`;
-                case NetworkType.Boba:
-                case NetworkType.Fuse:
-                case NetworkType.Metis:
-                case NetworkType.Optimistic:
-                    console.error('To be implement network: ', networkType);
-                    return '';
-                default:
-                    safeUnreachable(networkType);
-                    return '';
-            }
-        case TradeProvider.SASHIMISWAP:
-            return `https://info.sashimi.cool/pair/${address}`;
-        case TradeProvider.BALANCER:
-            return `https://pools.balancer.exchange/#/pool/${address}/`;
-        case TradeProvider.QUICKSWAP:
-            return `https://info.quickswap.exchange/pair/${address}`;
-        case TradeProvider.PANCAKESWAP:
-            return `https://pancakeswap.info/pool/${address}`;
-        case TradeProvider.BANCOR:
-            // TODO - Bancor analytics should be available with V3
-            return '';
-        case TradeProvider.OPENOCEAN:
-            // TODO - OpenOcean
-            return '';
-        case TradeProvider.TRADERJOE:
-            return `https://analytics.traderjoexyz.com/pairs/${address}`;
-        case TradeProvider.PANGOLIN:
-            return `https://info.pangolin.exchange/pair/${address}`;
-        case TradeProvider.TRISOLARIS:
-            // TODO - add Trisolaris Analytics
-            return '';
-        case TradeProvider.WANNASWAP:
-            // TODO - add WannaSwap analytics
-            return '';
-        default:
-            unreachable(tradeProvider);
-    }
-}
 function resolveDaysName(days) {
     if (days === 0) return 'MAX';
     if (days >= 365) return `${Math.floor(days / 365)}y`;
@@ -2246,81 +2628,6 @@ function resolveDaysName(days) {
     if (days >= 7) return `${Math.floor(days / 7)}w`;
     return `${days}d`;
 }
-function resolveUniswapWarningLevel(priceImpact) {
-    const priceImpact_ = priceImpact.multipliedBy(BIPS_BASE);
-    if (priceImpact_.isGreaterThan(PRICE_IMPACT_NON_EXPERT_BLOCKED)) return WarningLevel.BLOCKED;
-    if (priceImpact_.isGreaterThan(PRICE_IMPACT_WITHOUT_FEE_CONFIRM_MIN)) return WarningLevel.CONFIRMATION_REQUIRED;
-    if (priceImpact_.isGreaterThan(PRICE_IMPACT_HIGH)) return WarningLevel.HIGH;
-    if (priceImpact_.isGreaterThan(PRICE_IMPACT_MEDIUM)) return WarningLevel.MEDIUM;
-    if (priceImpact_.isGreaterThan(PRICE_IMPACT_LOW)) return WarningLevel.LOW;
-    return WarningLevel.LOW;
-}
-const resolveUniswapWarningLevelColor = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_5__/* .createLookupTableResolver */ .F)({
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .WarningLevel.LOW */ .Os.LOW]: 'inherit',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .WarningLevel.MEDIUM */ .Os.MEDIUM]: '#f3841e',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .WarningLevel.HIGH */ .Os.HIGH]: '#f3841e',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .WarningLevel.CONFIRMATION_REQUIRED */ .Os.CONFIRMATION_REQUIRED]: '#ff6871',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .WarningLevel.BLOCKED */ .Os.BLOCKED]: '#ff6871'
-}, '#27ae60');
-const resolveZrxTradePoolName = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_5__/* .createLookupTableResolver */ .F)({
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.ZRX */ .Zy.ZRX]: '0x',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.ACryptoS */ .Zy.ACryptoS]: 'ACryptoS',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.ApeSwap */ .Zy.ApeSwap]: 'ApeSwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.BakerySwap */ .Zy.BakerySwap]: 'BakerySwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Balancer */ .Zy.Balancer]: 'Balancer',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.BalancerV2 */ .Zy.BalancerV2]: 'Balancer V2',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Bancor */ .Zy.Bancor]: 'Bancor',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Belt */ .Zy.Belt]: 'Belt',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.CafeSwap */ .Zy.CafeSwap]: 'CafeSwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.CheeseSwap */ .Zy.CheeseSwap]: 'CheeseSwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.ComethSwap */ .Zy.ComethSwap]: 'ComethSwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Component */ .Zy.Component]: 'Component',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Cream */ .Zy.Cream]: 'CREAM',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.CryptoCom */ .Zy.CryptoCom]: 'CryptoCom',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Curve */ .Zy.Curve]: 'Curve',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.CurveV2 */ .Zy.CurveV2]: 'Curve V2',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Dfyn */ .Zy.Dfyn]: 'Dfyn',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Dodo */ .Zy.Dodo]: 'DODO',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.DodoV2 */ .Zy.DodoV2]: 'DODO V2',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Ellipsis */ .Zy.Ellipsis]: 'Ellipsis',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Eth2Dai */ .Zy.Eth2Dai]: 'Eth2Dai',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.FirebirdOneSwap */ .Zy.FirebirdOneSwap]: 'FirebirdOneSwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.IronSwap */ .Zy.IronSwap]: 'IronSwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.JetSwap */ .Zy.JetSwap]: 'JetSwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.JulSwap */ .Zy.JulSwap]: 'JulSwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Kyber */ .Zy.Kyber]: 'Kyber',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.KyberDMM */ .Zy.KyberDMM]: 'KyberDMM',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Lido */ .Zy.Lido]: 'Lido',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Linkswap */ .Zy.Linkswap]: 'Linkswap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.LiquidityProvider */ .Zy.LiquidityProvider]: 'LiquidityProvider',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.MStable */ .Zy.MStable]: 'mStable',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.MakerPsm */ .Zy.MakerPsm]: 'MakerPsm',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Mesh */ .Zy.Mesh]: 'Mesh',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Mooniswap */ .Zy.Mooniswap]: 'Mooniswap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.MultiBridge */ .Zy.MultiBridge]: 'MultiBridge',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.MultiHop */ .Zy.MultiHop]: 'MultiHop',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Native */ .Zy.Native]: 'Native',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Nerve */ .Zy.Nerve]: 'Nerve',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Oasis */ .Zy.Oasis]: 'Oasis',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.PancakeSwap */ .Zy.PancakeSwap]: 'PancakeSwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.PancakeSwapV2 */ .Zy.PancakeSwapV2]: 'PancakeSwap V2',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.QuickSwap */ .Zy.QuickSwap]: 'QuickSwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Saddle */ .Zy.Saddle]: 'Saddle',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Shell */ .Zy.Shell]: 'Shell',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Smoothy */ .Zy.Smoothy]: 'Smoothy',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.SnowSwap */ .Zy.SnowSwap]: 'SnowSwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.SushiSwap */ .Zy.SushiSwap]: 'SushiSwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Swerve */ .Zy.Swerve]: 'Swerve',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Uniswap */ .Zy.Uniswap]: 'Uniswap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.UniswapV2 */ .Zy.UniswapV2]: 'Uniswap V2',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.UniswapV3 */ .Zy.UniswapV3]: 'Uniswap V3',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.WaultSwap */ .Zy.WaultSwap]: 'WaultSwap',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.xSigma */ .Zy.xSigma]: 'xSigma',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.TraderJoe */ .Zy.TraderJoe]: 'TraderJoe',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.PangolinDex */ .Zy.PangolinDex]: 'PangolinDex',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.Trisolaris */ .Zy.Trisolaris]: 'Trisolaris',
-    [_types__WEBPACK_IMPORTED_MODULE_0__/* .ZrxTradePool.WannaSwap */ .Zy.WannaSwap]: 'WannaSwap'
-}, 'Unknown');
 
 
 /***/ }),
@@ -2398,12 +2705,12 @@ async function swapQuote(request, networkType) {
 var sor_dist = __webpack_require__(15092);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+providers@5.4.2/node_modules/@ethersproject/providers/lib.esm/json-rpc-provider.js + 3 modules
 var json_rpc_provider = __webpack_require__(34110);
-// EXTERNAL MODULE: ../web3-shared/evm/constants/index.ts + 26 modules
-var evm_constants = __webpack_require__(92211);
+// EXTERNAL MODULE: ../web3-shared/evm/constants/constants.ts + 26 modules
+var constants_constants = __webpack_require__(24403);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/address.ts
 var address = __webpack_require__(66580);
-// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
-var src = __webpack_require__(15091);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var src = __webpack_require__(26618);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/memoize.js
 var memoize = __webpack_require__(77184);
 // EXTERNAL MODULE: ./src/plugins/Wallet/settings.ts
@@ -2444,7 +2751,7 @@ var flatten = __webpack_require__(62517);
 
 
 async function fetchFromEthereumBlocksSubgraph(query) {
-    const subgraphURL = (0,evm_constants/* getTrendingConstants */.$o)(settings/* currentChainIdSettings.value */.wU.value).ETHEREUM_BLOCKS_SUBGRAPH_URL;
+    const subgraphURL = (0,constants_constants/* getTrendingConstants */.$o)(settings/* currentChainIdSettings.value */.wU.value).ETHEREUM_BLOCKS_SUBGRAPH_URL;
     if (!subgraphURL) return null;
     const response = await fetch(subgraphURL, {
         method: 'POST',
@@ -2552,7 +2859,7 @@ async function fetchFromEthereumBlocksSubgraph(query) {
 
 
 async function fetchFromBalancerPoolSubgraph(query) {
-    const subgraphURL = (0,evm_constants/* getLBPConstants */.Hk)(settings/* currentChainIdSettings.value */.wU.value).BALANCER_POOLS_SUBGRAPH_URL;
+    const subgraphURL = (0,constants_constants/* getLBPConstants */.Hk)(settings/* currentChainIdSettings.value */.wU.value).BALANCER_POOLS_SUBGRAPH_URL;
     if (!subgraphURL) return null;
     const response = await fetch(subgraphURL, {
         method: 'POST',
@@ -2654,7 +2961,7 @@ async function fetchLBP_PoolTokens(poolId, blockNumbers) {
 
 // #region create cached SOR
 const createSOR_ = (0,memoize/* default */.Z)((chainId)=>{
-    const { RPC  } = (0,evm_constants/* getRPCConstants */.t0)(chainId);
+    const { RPC  } = (0,constants_constants/* getRPCConstants */.t0)(chainId);
     const providerURL = (0,head/* default */.Z)(RPC);
     if (!providerURL) throw new Error('Unknown chain id.');
     return new sor_dist.SOR(// we choose a fixed provider cause it's only used here.
@@ -2664,7 +2971,7 @@ const createSOR_ = (0,memoize/* default */.Z)((chainId)=>{
 function createSOR(chainId) {
     const sor = createSOR_(chainId);
     // update pools url when sor object was created or reused
-    sor.poolsUrl = `${(0,evm_constants/* getTraderConstants */.Gr)(chainId).BALANCER_POOLS_URL}?timestamp=${Date.now()}`;
+    sor.poolsUrl = `${(0,constants_constants/* getTraderConstants */.Gr)(chainId).BALANCER_POOLS_URL}?timestamp=${Date.now()}`;
     return sor;
 }
 // #endregion
@@ -2673,7 +2980,7 @@ async function updatePools(force = false, chainId) {
     const sor = createSOR(currentChainId);
     // this fetches all pools list from URL in constructor then onChain balances using Multicall
     if (!sor.isAllFetched || force) {
-        sor.poolsUrl = `${(0,evm_constants/* getTraderConstants */.Gr)(currentChainId).BALANCER_POOLS_URL}?timestamp=${Date.now()}`;
+        sor.poolsUrl = `${(0,constants_constants/* getTraderConstants */.Gr)(currentChainId).BALANCER_POOLS_URL}?timestamp=${Date.now()}`;
         await sor.fetchPools();
     }
 }
@@ -2809,7 +3116,8 @@ async function getAvailableTraderProviders(chainId) {
                 public_api_src/* TradeProvider.BALANCER */.z4.BALANCER,
                 public_api_src/* TradeProvider.DODO */.z4.DODO,
                 public_api_src/* TradeProvider.BANCOR */.z4.BANCOR,
-                public_api_src/* TradeProvider.OPENOCEAN */.z4.OPENOCEAN, 
+                public_api_src/* TradeProvider.OPENOCEAN */.z4.OPENOCEAN,
+                public_api_src/* TradeProvider.MDEX */.z4.MDEX, 
             ];
         case types/* NetworkType.Polygon */.td.Polygon:
             return [
@@ -2827,7 +3135,8 @@ async function getAvailableTraderProviders(chainId) {
                 public_api_src/* TradeProvider.SUSHISWAP */.z4.SUSHISWAP,
                 public_api_src/* TradeProvider.DODO */.z4.DODO,
                 public_api_src/* TradeProvider.ZRX */.z4.ZRX,
-                public_api_src/* TradeProvider.OPENOCEAN */.z4.OPENOCEAN, 
+                public_api_src/* TradeProvider.OPENOCEAN */.z4.OPENOCEAN,
+                public_api_src/* TradeProvider.MDEX */.z4.MDEX, 
             ];
         case types/* NetworkType.Arbitrum */.td.Arbitrum:
             return [
@@ -3041,7 +3350,7 @@ const PairFields = `
   }
 `;
 async function fetchFromUniswapV2Subgraph(query) {
-    const subgraphURL = (0,evm_constants/* getTrendingConstants */.$o)(settings/* currentChainIdSettings.value */.wU.value).UNISWAP_V2_SUBGRAPH_URL;
+    const subgraphURL = (0,constants_constants/* getTrendingConstants */.$o)(settings/* currentChainIdSettings.value */.wU.value).UNISWAP_V2_SUBGRAPH_URL;
     if (!subgraphURL) return null;
     const response = await fetch(subgraphURL, {
         method: 'POST',
@@ -3262,7 +3571,7 @@ async function fetchFromUniswapV2Subgraph(query) {
 
 
 async function fetchFromUniswapV2Health(query) {
-    const subgraphURL = (0,evm_constants/* getTrendingConstants */.$o)(settings/* currentChainIdSettings.value */.wU.value).UNISWAP_V2_HEALTH_URL;
+    const subgraphURL = (0,constants_constants/* getTrendingConstants */.$o)(settings/* currentChainIdSettings.value */.wU.value).UNISWAP_V2_HEALTH_URL;
     if (!subgraphURL) return null;
     const response = await fetch(subgraphURL, {
         method: 'POST',
@@ -3639,9 +3948,9 @@ const NETWORK_ID_MAP = {
 (0,esm/* getEnumAsArray */.Yl)(types/* NetworkType */.td).map(({ value: networkType  })=>{
     const chainId = (0,chainDetailed/* getChainIdFromNetworkType */.EP)(networkType);
     var _PLATFORM_ID;
-    NETWORK_ID_MAP[public_api_src/* DataProvider.COIN_GECKO */.FW.COIN_GECKO][networkType] = (_PLATFORM_ID = (0,evm_constants/* getCoinGeckoConstants */.V6)(chainId).PLATFORM_ID) !== null && _PLATFORM_ID !== void 0 ? _PLATFORM_ID : '';
+    NETWORK_ID_MAP[public_api_src/* DataProvider.COIN_GECKO */.FW.COIN_GECKO][networkType] = (_PLATFORM_ID = (0,constants_constants/* getCoinGeckoConstants */.V6)(chainId).PLATFORM_ID) !== null && _PLATFORM_ID !== void 0 ? _PLATFORM_ID : '';
     var _CHAIN_ID;
-    NETWORK_ID_MAP[public_api_src/* DataProvider.COIN_MARKET_CAP */.FW.COIN_MARKET_CAP][networkType] = (_CHAIN_ID = (0,evm_constants/* getCoinMarketCapConstants */.fN)(chainId).CHAIN_ID) !== null && _CHAIN_ID !== void 0 ? _CHAIN_ID : '';
+    NETWORK_ID_MAP[public_api_src/* DataProvider.COIN_MARKET_CAP */.FW.COIN_MARKET_CAP][networkType] = (_CHAIN_ID = (0,constants_constants/* getCoinMarketCapConstants */.fN)(chainId).CHAIN_ID) !== null && _CHAIN_ID !== void 0 ? _CHAIN_ID : '';
 });
 function resolveAlias(keyword, dataProvider) {
     var ref;
@@ -4248,7 +4557,7 @@ async function swapOO(request) {
         slippage: request.slippage,
         disabledDexIds: '',
         account: request.userAddr,
-        referrer: (ref4 = (0,evm_constants/* getOpenOceanConstants */.hc)(request.chainId).REFERRER_ADDRESS) === null || ref4 === void 0 ? void 0 : ref4.toLowerCase()
+        referrer: (ref4 = (0,constants_constants/* getOpenOceanConstants */.hc)(request.chainId).REFERRER_ADDRESS) === null || ref4 === void 0 ? void 0 : ref4.toLowerCase()
     }));
     const payload = await response.json();
     const { data , outAmount , minOutAmount , to , value , estimatedGas  } = payload;
@@ -4298,10 +4607,10 @@ async function swapOO(request) {
 __webpack_require__.d(__webpack_exports__, {
   "Qy": () => (/* reexport */ TagType),
   "Vo": () => (/* reexport */ TokenPanelType),
-  "tB": () => (/* reexport */ TradeStrategy),
-  "Os": () => (/* reexport */ WarningLevel),
-  "Zy": () => (/* reexport */ ZrxTradePool)
+  "tB": () => (/* reexport */ TradeStrategy)
 });
+
+// UNUSED EXPORTS: WarningLevel, ZrxTradePool
 
 ;// CONCATENATED MODULE: ./src/plugins/Trader/types/trader.ts
 var WarningLevel;
@@ -4371,6 +4680,7 @@ var ZrxTradePool;
     ZrxTradePool["PangolinDex"] = "PangolinDex";
     ZrxTradePool["Trisolaris"] = "Trisolaris";
     ZrxTradePool["WannaSwap"] = "WannaSwap";
+    ZrxTradePool["Mdex"] = "Mdex";
 })(ZrxTradePool || (ZrxTradePool = {}));
 var TradeStrategy;
 (function(TradeStrategy) {

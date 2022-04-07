@@ -8,21 +8,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(76342);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
 /* harmony import */ var _hooks_useUnConfirmedRequest__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(31662);
-/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(92597);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(7280);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(13573);
+/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(43021);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(74491);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(93573);
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(51596);
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(95130);
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(56838);
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(19669);
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(1840);
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(1433);
 /* harmony import */ var _service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(45925);
-/* harmony import */ var _mui_lab__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(17279);
+/* harmony import */ var _mui_lab__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(16576);
 /* harmony import */ var web3_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(83317);
 /* harmony import */ var web3_utils__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(web3_utils__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(22749);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(92186);
 /* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(79226);
 
 
@@ -108,7 +108,7 @@ const useStyles = (0,_masknet_theme__WEBPACK_IMPORTED_MODULE_3__/* .makeStyles *
 );
 const SignRequest = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.memo)(()=>{
     const { t  } = (0,_utils__WEBPACK_IMPORTED_MODULE_4__/* .useI18N */ .M1)();
-    const history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__/* .useHistory */ .k6)();
+    const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__/* .useNavigate */ .s0)();
     const location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__/* .useLocation */ .TH)();
     const { classes  } = useStyles();
     const { value , loading: requestLoading  } = (0,_hooks_useUnConfirmedRequest__WEBPACK_IMPORTED_MODULE_2__/* .useUnconfirmedRequest */ .d)();
@@ -151,13 +151,17 @@ const SignRequest = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.memo)(()
     const [{ loading: rejectLoading  }, handleReject] = (0,react_use__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)(async ()=>{
         if (!value) return;
         await _service__WEBPACK_IMPORTED_MODULE_5__/* ["default"].Ethereum.rejectRequest */ .ZP.Ethereum.rejectRequest(value.payload);
-        history.replace(_masknet_shared_base__WEBPACK_IMPORTED_MODULE_7__/* .PopupRoutes.Wallet */ .mZ.Wallet);
+        navigate(_masknet_shared_base__WEBPACK_IMPORTED_MODULE_7__/* .PopupRoutes.Wallet */ .mZ.Wallet, {
+            replace: true
+        });
     }, [
         value
     ]);
     (0,react_use__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z)(()=>{
         if (!value && !requestLoading) {
-            history.replace(_masknet_shared_base__WEBPACK_IMPORTED_MODULE_7__/* .PopupRoutes.Wallet */ .mZ.Wallet);
+            navigate(_masknet_shared_base__WEBPACK_IMPORTED_MODULE_7__/* .PopupRoutes.Wallet */ .mZ.Wallet, {
+                replace: true
+            });
         }
     }, [
         value,
@@ -242,10 +246,10 @@ const SignRequest = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.memo)(()
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "d": () => (/* binding */ useUnconfirmedRequest)
 /* harmony export */ });
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(22572);
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(28577);
 /* harmony import */ var _plugins_Wallet_messages__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63081);
 /* harmony import */ var _service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(45925);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(76342);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(63423);
 /* harmony import */ var _masknet_plugin_wallet__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(89987);
 
 

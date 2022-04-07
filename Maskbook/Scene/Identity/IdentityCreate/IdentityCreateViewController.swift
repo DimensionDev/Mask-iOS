@@ -70,17 +70,6 @@ final class IdentityCreateViewController: BaseViewController {
         nextButton.isHidden = true
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        let alertController = AlertController(
-            title: L10n.Common.Alert.IdentityPhrase.title,
-            message: L10n.Common.Alert.IdentityPhrase.description,
-            confirmButtonText: L10n.Common.Controls.ok,
-            imageType: .warning
-        )
-        Coordinator.main.present(scene: .alertController(alertController: alertController), transition: .alertController(completion: nil))
-    }
-    
     override func buildContent() {
         let hstack = HStackView(spacing: 10) {
             iconImageView
@@ -124,7 +113,7 @@ final class IdentityCreateViewController: BaseViewController {
             stackView
         }
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 22.5, bottom: 32, right: 22.5)
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: LayoutConstraints.leading, bottom: 32, right: LayoutConstraints.trailing)
         stackView.snp.makeConstraints {
             $0.top.equalTo(view.layoutMarginsGuide)
             $0.leading.equalTo(view.snp.leading)

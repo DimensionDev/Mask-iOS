@@ -71,20 +71,13 @@
             "change_backup_password_failed": {
                 "title": "备份密码修改失败！"
             },
-            "wallet_backup": {
-                "title": "已复制！"
-            },
-            "identity_phrase": {
-                "title": "身份助记词",
-                "description": "您的身份助记词由随机选择的单词组成，请按单词出现的顺序仔细写下每个单词。"
-            },
             "identify_code_screenshot_warning": {
                 "title": "提示",
                 "description": "仅仅依靠截图保存助记词是不安全的。"
             },
-            "identity_create": {
-                "title": "身份已创建！",
-                "description": "请妥善保管您的身份助记词。 您的身份助记词是您用户身份的唯一证明，也是您加密或解密社交信息的唯一基础。 "
+            "persona_create": {
+                "title": "成功 ",
+                "description": "您已成功创建您的角色%s。 "
             },
             "persona_logout": {
                 "title": "确认登出？",
@@ -132,6 +125,18 @@
             "scan_persona_exist": {
                 "title": "该身份已存在。",
                 "description": "该二维码对应的身份已存在。"
+            },
+            "wrong_folder": {
+                "title": "请选择另一个文件夹",
+                "description": "当你删除 Mask App 时，Mask Network 的沙盒目录也会被删除。为了您的数据安全，请保存到更安全的文件夹(非沙盒目录)"
+            },
+            "backup_popup_binding_first": {
+                "title": "绑定您的电子邮件或手机",
+                "description": "请在备份到云端之前绑定您的电子邮件或电话号码。"
+            },
+            "camera_access": {
+                "title": "Mask Network 想要获取\n您的相机权限",
+                "description": "请到系统设置里允许相机权限。"
             }
         },
         "controls": {
@@ -165,14 +170,35 @@
             "edit": "编辑",
             "download": "下载",
             "skip": "跳过，稍后下载",
-            "download_next": "我已下载，下一步"
+            "download_next": "我已下载，下一步",
+            "select_from_photo": "图库中选择",
+            "take_photo": "拍照",
+            "save": "保存",
+            "move_data_now": "立即移动数据",
+            "remind_me_later": "稍后提醒我",
+            "go_settings": "好",
+            "dont_allow": "不允许"
         },
         "toast": {
-            "saved": "保存！"
+            "saved": "已保存！",
+            "copy": "已复制！"
         },
         "loading": "加载中..."
     },
     "scene": {
+        "guide": {
+            "skip": "跳过",
+            "lets_start": "我们开始吧！",
+            "description1": "崭新，开放的Web 3.0 之门。",
+            "description2": "在社交网络上发送加密信息。",
+            "description3": "多链钱包，支持 WalletConnect",
+            "description4": "及时进行云端/本地备份"
+        },
+        "welcome_identity_empty": {
+            "create_a_persona": "创建角色",
+            "recover_your_persona": "恢复角色",
+            "description": "崭新，开放的Web 3.0 之门。"
+        },
         "terms_of_service": {
             "title": "法律声明",
             "description": "请查看 Mask Network 的隐私政策与服务条款。",
@@ -408,7 +434,10 @@
         "NFT_Detail": {
             "list_price": "价格",
             "last_sale_Price": "最后售价",
-            "floor_price": "最低价格"
+            "floor_price": "最低价格",
+            "save_photo": "保存照片",
+            "collection_web": "在浏览器中查看收藏品",
+            "etherscan": "在 Etherscan 上查看"
         },
         "sendTransaction": {
             "send": {
@@ -422,7 +451,9 @@
                 "btn_withoutPassword": "按住以发送",
                 "amount_error": "金额不足",
                 "password_error": "支付密码错误。",
-                "gasFee_error": "手续费不足。"
+                "gasFee_error": "Gas 余额不足.",
+                "contact": "联系人",
+                "recent": "最近"
             },
             "addContact": {
                 "btn_add": "添加联系人",
@@ -503,6 +534,9 @@
                 "create_persona": "创建角色",
                 "input_persona_name": "输入角色名称"
             },
+            "search": {
+                "placeholder": "搜索"
+            },
             "delete": "确认删除该角色",
             "delete_tip": "如果您没有备份，请前往设置 - 备份和恢复进行备份",
             "add_persona": "创建新角色"
@@ -530,12 +564,17 @@
             "disconnect": "断开连接",
             "connect_social_accounts": "连接社交账户",
             "accounts": "账户",
-            "connect_tips": "选择要连接您角色的社交账户。享受 web 3.0 的社交体验。",
+            "connect_tips": "将角色连接到下面的社交网络",
             "add": "添加"
         },
         "persona_download": {
             "identity_id": "身份代码",
             "download_tips": "二维码会加密您个人的身份码或私钥，建议打印它。您可以使用 Mask App 扫描二维码以登录。"
+        },
+        "persona_avatar": {
+            "title": "设置角色头像",
+            "crop": "裁剪 & 旋转",
+            "remove_avatar": "移除角色头像"
         },
         "wallet_balance": {
             "btn_swap": "兑换",
@@ -646,7 +685,7 @@
                 "dhedge": "DHEDGE"
             },
             "plugin_introduction": {
-                "transak": "Transak 支持通过60多种货币购买代币",
+                "transak": "Transak 支持通过60多种货币购买代币。",
                 "ito": "允许用户在Twitter上直接购买代币。",
                 "luckyDrop": "发送红包(Token/NFT)，给加密好友带来惊喜。",
                 "swap": "通过Dex购买代币，无需额外费用和限制。",
@@ -808,8 +847,14 @@
             "refunded": "已退款",
             "refund": "退款",
             "empty": "空的",
-            "share_message_official": "我刚从@%s 在 %s 网络上认领了一个红包。关注@%s (mask.io) 来获取红包。\\n#mask_io #LuckyDrop\\n%s。",
-            "share_message_unsupport_platform": "我刚从@%s 在 %s 网络上认领了一个红包。\\n%s。"
+            "share_message_official": "",
+            "share_message_unsupport_platform": ""
+        },
+        "move_backup_data": {
+            "title": "请移动您的数据",
+            "description1": "我们检测到您的 Mask Network 的沙盒目录中可能有重要的备份文档(.pdf, .bin)。",
+            "description2": "当您删除  Mask App 时，这些文档也将被删除。",
+            "description3": "为了数据安全，请将您的数据移动到一个更安全的文件夹。"
         }
     },
     "chain": {

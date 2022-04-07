@@ -7,7 +7,7 @@
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "t": () => (/* binding */ EyeIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -58,7 +58,7 @@ const EyeIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createPaletteAwareIcon
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "X": () => (/* binding */ EyeOffIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -91,10 +91,10 @@ const EyeOffIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createPaletteAwareI
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (/* binding */ PasswordField)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(76342);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(84179);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(91497);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(92332);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(87409);
 /* harmony import */ var _StyledInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(64702);
 /* harmony import */ var _masknet_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(34382);
 /* harmony import */ var _masknet_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(84258);
@@ -136,10 +136,10 @@ const PasswordField = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.memo)(
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "F": () => (/* binding */ StyledInput)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(76342);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(67182);
-/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(92597);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(15672);
+/* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(43021);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(83849);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
 
@@ -213,12 +213,12 @@ __webpack_require__.d(__webpack_exports__, {
   "default": () => (/* binding */ Personas_Logout)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var src = __webpack_require__(92597);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var src = __webpack_require__(43021);
 // EXTERNAL MODULE: ../icons/utils/index.tsx
 var utils = __webpack_require__(46098);
 ;// CONCATENATED MODULE: ../icons/general/Tip.tsx
@@ -238,26 +238,26 @@ const TipIcon = (0,utils/* createIcon */.I)('TipIcon', /*#__PURE__*/ (0,jsx_runt
 
 // EXTERNAL MODULE: ../icons/general/Masks.tsx
 var Masks = __webpack_require__(16789);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Typography/Typography.js + 1 modules
-var Typography = __webpack_require__(7280);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Button/Button.js
-var Button = __webpack_require__(9744);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var src_utils = __webpack_require__(13573);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useAsyncFn.js
-var useAsyncFn = __webpack_require__(56838);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Typography/Typography.js + 1 modules
+var Typography = __webpack_require__(74491);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Button/Button.js
+var Button = __webpack_require__(12463);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var src_utils = __webpack_require__(93573);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useAsyncFn.js
+var useAsyncFn = __webpack_require__(1840);
 // EXTERNAL MODULE: ./src/extension/popups/pages/Personas/hooks/usePersonaContext.ts
 var usePersonaContext = __webpack_require__(66707);
 // EXTERNAL MODULE: ./src/extension/service.ts
 var service = __webpack_require__(45925);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+lab@5.0.0-alpha.71_6860626c1dd203d2615586c177a8991f/node_modules/@mui/lab/LoadingButton/LoadingButton.js + 1 modules
-var LoadingButton = __webpack_require__(17279);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router@5.2.1_react@18.0.0-rc.0/node_modules/react-router/esm/react-router.js
-var react_router = __webpack_require__(22749);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+lab@5.0.0-alpha.72_154258abcf19999eeddd92026c0a2f6c/node_modules/@mui/lab/LoadingButton/LoadingButton.js + 1 modules
+var LoadingButton = __webpack_require__(16576);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router@6.2.2_react@18.0.0-rc.2/node_modules/react-router/index.js
+var react_router = __webpack_require__(92186);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var shared_base_src = __webpack_require__(79226);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
 // EXTERNAL MODULE: ./src/extension/popups/components/PasswordField/index.tsx
 var PasswordField = __webpack_require__(29502);
 ;// CONCATENATED MODULE: ./src/extension/popups/pages/Personas/Logout/index.tsx
@@ -346,7 +346,7 @@ const useStyles = (0,src/* makeStyles */.ZL)()((theme)=>({
 );
 const Logout = /*#__PURE__*/ (0,react.memo)(()=>{
     const { deletingPersona  } = usePersonaContext/* PersonaContext.useContainer */.m.useContainer();
-    const history = (0,react_router/* useHistory */.k6)();
+    const navigate = (0,react_router/* useNavigate */.s0)();
     const backupPassword = (0,react.useMemo)(()=>{
         try {
             const password = localStorage.getItem('backupPassword');
@@ -364,7 +364,9 @@ const Logout = /*#__PURE__*/ (0,react.memo)(()=>{
             const lastCreatedPersona = await service/* default.Identity.queryLastPersonaCreated */.ZP.Identity.queryLastPersonaCreated();
             if (lastCreatedPersona) await service/* default.Settings.setCurrentPersonaIdentifier */.ZP.Settings.setCurrentPersonaIdentifier(lastCreatedPersona.identifier);
         }
-        history.replace(shared_base_src/* PopupRoutes.Personas */.mZ.Personas);
+        navigate(shared_base_src/* PopupRoutes.Personas */.mZ.Personas, {
+            replace: true
+        });
     }, [
         deletingPersona,
         history
@@ -374,7 +376,7 @@ const Logout = /*#__PURE__*/ (0,react.memo)(()=>{
         backupPassword: backupPassword !== null && backupPassword !== void 0 ? backupPassword : '',
         loading: loading,
         onLogout: onLogout,
-        onCancel: ()=>history.goBack()
+        onCancel: ()=>navigate(-1)
     }));
 });
 const LogoutUI = /*#__PURE__*/ (0,react.memo)(({ backupPassword , loading , onLogout , onCancel , deletingPersona  })=>{

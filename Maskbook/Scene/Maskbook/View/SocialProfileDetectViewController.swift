@@ -195,9 +195,9 @@ class SocialProfileDetectViewController: UIViewController {
         connectButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             connectButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20),
-            connectButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22.5),
+            connectButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstraints.leading),
             connectButton.heightAnchor.constraint(equalToConstant: 54),
-            connectButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22.5),
+            connectButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -LayoutConstraints.trailing),
             connectButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -24)
         ])
         

@@ -94,6 +94,12 @@ internal enum Asset {
       internal static let blue2 = ColorAsset(name: "Colors/Gradient/blue2")
       internal static let guide1 = ColorAsset(name: "Colors/Gradient/guide1")
       internal static let guide2 = ColorAsset(name: "Colors/Gradient/guide2")
+      internal static let persona1 = ColorAsset(name: "Colors/Gradient/persona1")
+      internal static let persona2 = ColorAsset(name: "Colors/Gradient/persona2")
+      internal static let persona3 = ColorAsset(name: "Colors/Gradient/persona3")
+      internal static let persona4 = ColorAsset(name: "Colors/Gradient/persona4")
+      internal static let persona5 = ColorAsset(name: "Colors/Gradient/persona5")
+      internal static let persona6 = ColorAsset(name: "Colors/Gradient/persona6")
     }
     internal enum RedPackage {
       internal static let background = ColorAsset(name: "Colors/RedPackage/background")
@@ -178,6 +184,7 @@ internal enum Asset {
     internal enum Arrows {
       internal static let `right` = ImageAsset(name: "Icon/Arrows/Right")
       internal static let backArrow = ImageAsset(name: "Icon/Arrows/backArrow")
+      internal static let backArrowSmall = ImageAsset(name: "Icon/Arrows/backArrowSmall")
       internal static let celllRight = ImageAsset(name: "Icon/Arrows/celllRight")
       internal static let down = ImageAsset(name: "Icon/Arrows/down")
       internal static let down1 = ImageAsset(name: "Icon/Arrows/down1")
@@ -191,7 +198,9 @@ internal enum Asset {
     internal enum Logo {
       internal static let largeMask = ImageAsset(name: "Icon/Logo/largeMask")
       internal static let littleMask = ImageAsset(name: "Icon/Logo/littleMask")
+      internal static let logoWithName = ImageAsset(name: "Icon/Logo/logoWithName")
       internal static let mask = ImageAsset(name: "Icon/Logo/mask")
+      internal static let maskWithBorder = ImageAsset(name: "Icon/Logo/maskWithBorder")
     }
     internal static let close = ImageAsset(name: "Icon/close")
     internal static let insecureEye = ImageAsset(name: "Icon/insecureEye")
@@ -284,6 +293,7 @@ internal enum Asset {
       internal enum Nft {
         internal static let more = ImageAsset(name: "Images/Scene/NFT/More")
         internal static let ethscan = ImageAsset(name: "Images/Scene/NFT/ethscan")
+        internal static let opensea = ImageAsset(name: "Images/Scene/NFT/opensea")
         internal static let savephoto = ImageAsset(name: "Images/Scene/NFT/savephoto")
         internal static let website = ImageAsset(name: "Images/Scene/NFT/website")
       }
@@ -294,7 +304,9 @@ internal enum Asset {
         internal static let backup = ImageAsset(name: "Images/Scene/Personas/backup")
         internal static let changeOrAdd = ImageAsset(name: "Images/Scene/Personas/changeOrAdd")
         internal static let delete = ImageAsset(name: "Images/Scene/Personas/delete")
+        internal static let done = ImageAsset(name: "Images/Scene/Personas/done")
         internal static let download = ImageAsset(name: "Images/Scene/Personas/download")
+        internal static let edit = ImageAsset(name: "Images/Scene/Personas/edit")
         internal static let emptyContact = ImageAsset(name: "Images/Scene/Personas/emptyContact")
         internal static let emptyPersona = ImageAsset(name: "Images/Scene/Personas/emptyPersona")
         internal static let exportPrivateKey = ImageAsset(name: "Images/Scene/Personas/exportPrivateKey")
@@ -302,8 +314,14 @@ internal enum Asset {
         internal static let instagram = ImageAsset(name: "Images/Scene/Personas/instagram")
         internal static let logout = ImageAsset(name: "Images/Scene/Personas/logout")
         internal static let minds = ImageAsset(name: "Images/Scene/Personas/minds")
+        internal static let personaBG = ImageAsset(name: "Images/Scene/Personas/personaBG")
+        internal static let personaDefault = ImageAsset(name: "Images/Scene/Personas/personaDefault")
+        internal static let personaShadow = ImageAsset(name: "Images/Scene/Personas/personaShadow")
         internal static let recovery = ImageAsset(name: "Images/Scene/Personas/recovery")
+        internal static let removeAvatar = ImageAsset(name: "Images/Scene/Personas/removeAvatar")
         internal static let rename = ImageAsset(name: "Images/Scene/Personas/rename")
+        internal static let rotate = ImageAsset(name: "Images/Scene/Personas/rotate")
+        internal static let setAvatar = ImageAsset(name: "Images/Scene/Personas/setAvatar")
         internal static let twitter = ImageAsset(name: "Images/Scene/Personas/twitter")
         internal static let watermark = ImageAsset(name: "Images/Scene/Personas/watermark")
       }

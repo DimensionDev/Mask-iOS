@@ -29,7 +29,11 @@ class PersonaExportPrivateKeyViewController: BaseViewController {
         view.alignment = .fill
         view.spacing = 12
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: 24, left: 24, bottom: 16, right: 24)
+        view.layoutMargins = UIEdgeInsets(
+            top: LayoutConstraints.top,
+            left: LayoutConstraints.leading,
+            bottom: 16,
+            right: LayoutConstraints.trailing)
         
         textContainer.translatesAutoresizingMaskIntoConstraints = false
         tipsLabel.translatesAutoresizingMaskIntoConstraints = false

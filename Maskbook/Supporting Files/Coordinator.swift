@@ -36,7 +36,7 @@ class Coordinator {
         case detail(animated: Bool = true)
         case panModel(animated: Bool = true)
         case alertController(completion: (() -> Void)? = nil)
-        case replaceCurrentNavigation(tab: MainTabBarController.Tab, animated: Bool = true)
+        case replaceCurrentNavigation(tab: MainTabBarController.Tab, animated: Bool = true, selected: Bool = false)
         case replaceWalletTab(animated: Bool = false)
         case popup
         case presentActivity(animated: Bool, from: UIView? = nil, completion: (() -> Void)? = nil)
@@ -67,7 +67,8 @@ class Coordinator {
         case welcome
         case mainTab(selectedTab: MainTabBarController.Tab)
         case persona
-        case guide
+        case personaAvatar
+        case cropImage(image: UIImage)
         case termsOfService(walletStartType: WalletStartType)
         case biometryRecognition(walletStartType: WalletStartType)
         case mnemonicWord(name: String?)
@@ -130,6 +131,7 @@ class Coordinator {
         case changePasswordStep2
         case receiveAddress(network: BlockChainNetwork, token: Token?, address: String)
         case emptyWallet
+        case welcomeEmptyIdentity
         case emptyIdentity
         case identityCreate
         case identityRecovery(from: IdentityRecoveryViewController.From)
@@ -164,7 +166,7 @@ class Coordinator {
         case localRestore(
             _ url: URL,
             destination: RestoreDataPreviewController.Destination)
-        case remoteRestore(_ data: Data, strategy: RestoreCompletionStrategy)
+//        case remoteRestore(_ data: Data, strategy: RestoreCompletionStrategy)
         case walletConnectStart
         case walletConnectConnecting
         case walletConnectFail
@@ -193,16 +195,8 @@ class Coordinator {
         case luckyDrop
         case debug
     }
-
-    func setup(window: UIWindow) {
-        self.window = window
-        
-        guard settings.hasShownGuide else {
-            settings.hasShownGuide = true
-            showGuide(window: window)
-            return
-        }
-        
+    
+    func setupMainWindow(window: UIWindow) {
         let maskSocialVC = MaskSocialViewController(socialPlatform: settings.currentProfileSocialPlatform)
         let naviVC = NavigationController(rootViewController: maskSocialVC)
         window.rootViewController = naviVC
@@ -222,10 +216,23 @@ class Coordinator {
             UIApplication.getTopViewController()?.present(welcomeVC, animated: false, completion: nil)
         }
     }
+
+    func setup(window: UIWindow) {
+        self.window = window
+        
+        if !settings.hasShownGuide && !settings.didPresentWizard {
+            settings.hasShownGuide = true
+            settings.didPresentWizard = true
+            showGuide(window: window)
+            return
+        }
+        setupMainWindow(window: window)
+    }
     
     private func showGuide(window: UIWindow) {
         let guideVC = MaskHostViewController(rootView: GuideView() { [weak self] in
-            self?.setup(window: window)
+            self?.setupMainWindow(window: window)
+            self?.present(scene: .welcomeEmptyIdentity, transition: .detail(animated: false))
         })
         window.rootViewController = guideVC
         window.makeKeyAndVisible()
@@ -282,8 +289,8 @@ class Coordinator {
                 vc.modalPresentationCapturesStatusBarAppearance = true
                 presentVC.present(vc, animated: false, completion: completion)
                 
-            case let .replaceCurrentNavigation(tab, animated):
-                MainTabBarController.currentTabBarController()?.replace(tab: tab, with: vc, animated: animated)
+            case let .replaceCurrentNavigation(tab, animated, selected):
+                MainTabBarController.currentTabBarController()?.replace(tab: tab, with: vc, animated: animated, selected: selected)
 
             case let .replaceWalletTab(animated):
                 MainTabBarController.currentTabBarController()?.replace(tab: .wallet, with: vc, animated: animated)
@@ -343,15 +350,12 @@ extension Coordinator {
         
         case .persona:
             return PersonasViewController()
+            
+        case .personaAvatar:
+            return PersonaAvatarViewController()
 
-        case .guide:
-            return MaskHostViewController(rootView: GuideView() { [weak self] in
-                guard let window = self?.window else {
-                    assert(false, "GuideView can't be dismissed if window is nil.")
-                    return
-                }
-                self?.setup(window: window)
-            })
+        case let .cropImage(image):
+            return CropImageViewController(image: image)
             
         case let .termsOfService(walletStartType):
             let termsOfServiceViewController = TermsOfServiceViewController(walletStartType: walletStartType)
@@ -533,7 +537,7 @@ extension Coordinator {
         case .personaList:
             return PersonaListViewController()
 
-        case let .personaWelcome:
+        case .personaWelcome:
             let viewController = PersonaWelcomeViewController()
             return viewController
 
@@ -589,6 +593,10 @@ extension Coordinator {
             let viewController = WalletEmptyViewController()
             return viewController
 
+        case .welcomeEmptyIdentity:
+            let vc = MaskHostViewController(rootView: WelcomeIdentityEmptyView())
+            return vc
+            
         case .emptyIdentity:
             let viewController = IdentityEmptyViewController()
             return viewController
@@ -678,9 +686,6 @@ extension Coordinator {
                 fileURL: fileURL,
                 completion: completion
             )
-
-        case let .remoteRestore(data, strategy):
-            return RestoreDataPreviewController(data, destination: .remoteRestoreAndLogin(strategy: strategy))
             
         case .walletConnectStart:
             return WalletConnectStartViewController()

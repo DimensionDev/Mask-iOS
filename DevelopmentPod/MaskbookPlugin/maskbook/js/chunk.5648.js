@@ -8,7 +8,7 @@
 /* harmony export */   "U": () => (/* binding */ instagramShared)
 /* harmony export */ });
 /* harmony import */ var _social_network_utils_create_post_context__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13591);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13573);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(93573);
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(94869);
 
 
@@ -90,8 +90,8 @@ async function query() {
 var umd = __webpack_require__(44162);
 // EXTERNAL MODULE: ./src/social-network/utils.ts
 var utils = __webpack_require__(32665);
-// EXTERNAL MODULE: ../typed-message/base/index.ts + 27 modules
-var typed_message_base = __webpack_require__(69492);
+// EXTERNAL MODULE: ../typed-message/base/index.ts + 2 modules
+var typed_message_base = __webpack_require__(65631);
 // EXTERNAL MODULE: ./src/utils/watcher.ts
 var watcher = __webpack_require__(84749);
 // EXTERNAL MODULE: ./src/social-network/utils/create-post-context.ts + 1 modules
@@ -218,8 +218,6 @@ const searchProfileTabOtherArticlePageSelector = ()=>querySelector('[id="react-r
 ;
 const searchInstagramAvatarListSelector = ()=>querySelector('[role="dialog"] .piCib > div > form').closest(1).querySelector('button')
 ;
-const searchInstagramAvatarOpenFilesSelector = ()=>querySelector('[id="react-root"] button > img').closest(4).querySelector('form')
-;
 const searchInstagramSaveAvatarButtonSelector = ()=>querySelector('section > div > header > div > div:last-child > button')
 ;
 const searchInstagramAvatarSelector = ()=>querySelector('[id="react-root"] header img, img[data-testid="user-avatar"]')
@@ -228,8 +226,6 @@ const searchInstagramProfileAvatarButtonSelector = ()=>querySelector('[id="react
 ;
 const searchInstagramAvatarSettingDialog = ()=>querySelector('[id="react-root"]')
 ;
-const searchInstagramAvatarUploadLoadingSelector = ()=>querySelector('[id="react-root"] button').closest(1).querySelector('div[data-visualcompletion="loading-state"]')
-;
 const searchInstagramProfileSettingButtonSelector = ()=>querySelector('[id="react-root"] header button').closest(4).querySelector('section > div > div')
 ;
 const searchInstagramProfileEditButton = ()=>querySelector('[id="react-root"] a[href="/accounts/edit/"]')
@@ -237,10 +233,9 @@ const searchInstagramProfileEditButton = ()=>querySelector('[id="react-root"] a[
 const searchInstagramPostAvatarSelector = ()=>new umd.LiveSelector().querySelectorAll('[role="button"] > a > img[data-testid="user-avatar"]')
 ;
 
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var src_utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var src_utils = __webpack_require__(93573);
 ;// CONCATENATED MODULE: ./src/social-network-adaptor/instagram.com/utils/user.ts
-
 
 
 function getBioDescription() {
@@ -268,11 +263,6 @@ const getAvatar = ()=>{
     var ref;
     const imageURL = (ref = node.getAttribute('src')) !== null && ref !== void 0 ? ref : '';
     return imageURL.trim();
-};
-const clearStorages = ()=>{
-    shared_0/* InMemoryStorages.InstagramNFTEvent.storage.userId.setValue */.uU.InstagramNFTEvent.storage.userId.setValue('');
-    shared_0/* InMemoryStorages.InstagramNFTEvent.storage.address.setValue */.uU.InstagramNFTEvent.storage.address.setValue('');
-    shared_0/* InMemoryStorages.InstagramNFTEvent.storage.tokenId.setValue */.uU.InstagramNFTEvent.storage.tokenId.setValue('');
 };
 const INSTAGRAM_AVATAR_ID_MATCH = /(\w+).(?:png|jpg|gif|bmp)/;
 const getAvatarId = (avatarURL)=>{
@@ -337,16 +327,16 @@ const CurrentVisitingIdentityProviderInstagram = {
     }
 };
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var theme_src = __webpack_require__(92597);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var theme_src = __webpack_require__(43021);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
 // EXTERNAL MODULE: ./src/utils/hooks/useLocationChange.ts
 var useLocationChange = __webpack_require__(75995);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useLocation.js
-var useLocation = __webpack_require__(44719);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useLocation.js
+var useLocation = __webpack_require__(66944);
 ;// CONCATENATED MODULE: ./src/social-network-adaptor/instagram.com/injection/NFT/ProfileNFTAvatar.tsx
 
 
@@ -417,18 +407,14 @@ function NFTAvatarButtonInDialog() {
     }));
 }
 
-// EXTERNAL MODULE: ../plugin-infra/src/index.ts + 1 modules
-var plugin_infra_src = __webpack_require__(27194);
 // EXTERNAL MODULE: ./src/components/DataSource/useActivatedUI.ts
 var useActivatedUI = __webpack_require__(41529);
 // EXTERNAL MODULE: ./src/plugins/Avatar/hooks/index.ts + 2 modules
 var hooks = __webpack_require__(45255);
 // EXTERNAL MODULE: ./src/plugins/Avatar/constants.ts
 var constants = __webpack_require__(17692);
-// EXTERNAL MODULE: ./src/plugins/Avatar/messages.ts
-var messages = __webpack_require__(37867);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useWindowSize.js
-var useWindowSize = __webpack_require__(30865);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useWindowSize.js
+var useWindowSize = __webpack_require__(11485);
 // EXTERNAL MODULE: ./src/plugins/Avatar/SNSAdaptor/NFTBadge.tsx + 1 modules
 var NFTBadge = __webpack_require__(42509);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/max.js
@@ -436,11 +422,6 @@ var max = __webpack_require__(77218);
 // EXTERNAL MODULE: ./src/plugins/Avatar/SNSAdaptor/RainbowBox.tsx
 var RainbowBox = __webpack_require__(10593);
 ;// CONCATENATED MODULE: ./src/social-network-adaptor/instagram.com/injection/NFT/NFTAvatarInInstagram.tsx
-
-
-
-
-
 
 
 
@@ -484,7 +465,6 @@ const NFTAvatarInInstagram_useStyles = (0,theme_src/* makeStyles */.ZL)()(()=>({
 );
 function NFTAvatarInInstagram() {
     const { classes  } = NFTAvatarInInstagram_useStyles();
-    const wallet = (0,plugin_infra_src/* useWallet */.Os)();
     const [avatar, setAvatar] = (0,react.useState)();
     const identity = (0,useActivatedUI/* useCurrentVisitingIdentity */.fb)();
     const location = (0,useLocation/* default */.Z)();
@@ -511,56 +491,6 @@ function NFTAvatarInInstagram() {
         ]);
     }, [
         windowSize
-    ]);
-    (0,react.useEffect)(()=>{
-        const watcher = new umd.MutationObserverWatcher(searchInstagramAvatarUploadLoadingSelector()).addListener('onRemove', async ()=>{
-            const storages = shared_0/* InMemoryStorages.InstagramNFTEvent.storage */.uU.InstagramNFTEvent.storage;
-            if (!wallet) return;
-            if (storages.address.value && storages.userId.value && storages.tokenId.value) {
-                try {
-                    await (0,esm/* delay */.gw)(1000);
-                    const url = `${location.protocol}//${location.host}/${identity.identifier.userId}`;
-                    const response = await fetch(url);
-                    const htmlString = await response.text();
-                    const html = document.createElement('html');
-                    html.innerHTML = htmlString;
-                    const metaTag = html.querySelector('meta[property="og:image"]');
-                    if (!(metaTag === null || metaTag === void 0 ? void 0 : metaTag.content)) return;
-                    const avatarInfo = await messages/* PluginNFTAvatarRPC.saveNFTAvatar */.B.saveNFTAvatar(wallet.address, {
-                        userId: storages.userId.value,
-                        tokenId: storages.tokenId.value,
-                        address: storages.address.value,
-                        avatarId: getAvatarId(metaTag.content)
-                    }, identity.identifier.network, constants/* RSS3_KEY_SNS.INSTAGRAM */.vu.INSTAGRAM);
-                    if (!avatarInfo) {
-                        clearStorages();
-                        setAvatar(undefined);
-                        window.alert('Sorry, failed to save NFT Avatar. Please set again.');
-                        return;
-                    }
-                    setAvatar(avatarInfo);
-                    clearStorages();
-                    await messages/* PluginNFTAvatarRPC.clearCache */.B.clearCache(identity.identifier.userId, social_network/* activatedSocialNetworkUI.networkIdentifier */.LM.networkIdentifier, constants/* RSS3_KEY_SNS.INSTAGRAM */.vu.INSTAGRAM);
-                    // If the avatar is set successfully, reload the page
-                    window.location.reload();
-                } catch (error) {
-                    clearStorages();
-                    setAvatar(undefined);
-                    window.alert(error.message);
-                    return;
-                }
-            }
-        }).startWatch({
-            childList: true,
-            subtree: true,
-            attributes: true
-        });
-        return ()=>{
-            watcher.stopWatch();
-        };
-    }, [
-        identity,
-        wallet
     ]);
     (0,react.useEffect)(()=>{
         var ref4, ref1, ref2;
@@ -618,15 +548,24 @@ function NFTAvatarInInstagram() {
 var NFTAvatarButton = __webpack_require__(81179);
 // EXTERNAL MODULE: ./src/plugins/Avatar/utils/index.ts
 var Avatar_utils = __webpack_require__(23594);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useMount.js
-var useMount = __webpack_require__(43470);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useMount.js
+var useMount = __webpack_require__(69910);
 // EXTERNAL MODULE: ./src/components/shared/InjectedDialog.tsx + 1 modules
 var InjectedDialog = __webpack_require__(57464);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/DialogContent/DialogContent.js + 1 modules
-var DialogContent = __webpack_require__(35437);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/DialogContent/DialogContent.js + 1 modules
+var DialogContent = __webpack_require__(68681);
 // EXTERNAL MODULE: ./src/plugins/Avatar/SNSAdaptor/NFTAvatar.tsx + 2 modules
 var NFTAvatar = __webpack_require__(26176);
+// EXTERNAL MODULE: ../web3-providers/src/index.ts + 2 modules
+var web3_providers_src = __webpack_require__(54492);
+// EXTERNAL MODULE: ../plugin-infra/src/index.ts
+var plugin_infra_src = __webpack_require__(63151);
+// EXTERNAL MODULE: ./src/plugins/Avatar/messages.ts
+var messages = __webpack_require__(37867);
 ;// CONCATENATED MODULE: ./src/social-network-adaptor/instagram.com/injection/NFT/NFTAvatarSettingDialog.tsx
+
+
+
 
 
 
@@ -648,34 +587,54 @@ const NFTAvatarSettingDialog_useStyles = (0,theme_src/* makeStyles */.ZL)()(()=>
         }
     })
 );
-async function changeImageToActiveElements(image) {
-    var ref;
-    const imageBuffer = await image.arrayBuffer();
-    (0,sdk/* hookInputUploadOnce */.ed)('image/png', 'avatar.png', new Uint8Array(imageBuffer));
-    (ref = searchInstagramAvatarOpenFilesSelector().evaluate()) === null || ref === void 0 ? void 0 : ref.click();
-}
 function NFTAvatarSettingDialog() {
     const { t  } = (0,src_utils/* useI18N */.M1)();
     const [open, setOpen] = (0,react.useState)(false);
     const { classes  } = NFTAvatarSettingDialog_useStyles();
+    const wallet = (0,plugin_infra_src/* useWallet */.Os)();
     const identity = (0,useActivatedUI/* useCurrentVisitingIdentity */.fb)();
     const onChange = (0,react.useCallback)(async (token)=>{
-        var ref, ref1, ref2;
-        if (!token.info.imageURL) return;
-        const image = await (0,Avatar_utils/* toPNG */.mr)(token.info.imageURL);
-        if (!image) return;
-        await changeImageToActiveElements(image);
-        (ref = shared_0/* InMemoryStorages.InstagramNFTEvent */.uU.InstagramNFTEvent) === null || ref === void 0 ? void 0 : ref.storage.userId.setValue(identity.identifier.userId);
-        (ref1 = shared_0/* InMemoryStorages.InstagramNFTEvent */.uU.InstagramNFTEvent) === null || ref1 === void 0 ? void 0 : ref1.storage.address.setValue(token.contractDetailed.address);
-        (ref2 = shared_0/* InMemoryStorages.InstagramNFTEvent */.uU.InstagramNFTEvent) === null || ref2 === void 0 ? void 0 : ref2.storage.tokenId.setValue(token.tokenId);
-        setOpen(false);
+        try {
+            if (!token.info.imageURL) return;
+            const image = await (0,Avatar_utils/* toPNG */.mr)(token.info.imageURL);
+            if (!image || !wallet) return;
+            await web3_providers_src/* Instagram.uploadUserAvatar */.mr.uploadUserAvatar(image, identity.identifier.userId);
+            await (0,esm/* delay */.gw)(1000);
+            const url = `${location.protocol}//${location.host}/${identity.identifier.userId}`;
+            const response = await fetch(url);
+            const htmlString = await response.text();
+            const html = document.createElement('html');
+            html.innerHTML = htmlString;
+            const metaTag = html.querySelector('meta[property="og:image"]');
+            if (!(metaTag === null || metaTag === void 0 ? void 0 : metaTag.content)) return;
+            const avatarInfo = await messages/* PluginNFTAvatarRPC.saveNFTAvatar */.B.saveNFTAvatar(wallet.address, {
+                userId: identity.identifier.userId,
+                tokenId: token.tokenId,
+                address: token.contractDetailed.address,
+                avatarId: getAvatarId(metaTag.content)
+            }, identity.identifier.network, constants/* RSS3_KEY_SNS.INSTAGRAM */.vu.INSTAGRAM);
+            if (!avatarInfo) {
+                window.alert('Sorry, failed to save NFT Avatar. Please set again.');
+                setOpen(false);
+                return;
+            }
+            await messages/* PluginNFTAvatarRPC.clearCache */.B.clearCache(identity.identifier.userId, social_network/* activatedSocialNetworkUI.networkIdentifier */.LM.networkIdentifier, constants/* RSS3_KEY_SNS.INSTAGRAM */.vu.INSTAGRAM);
+            // If the avatar is set successfully, reload the page
+            window.location.reload();
+            setOpen(false);
+        } catch (error) {
+            if (error instanceof Error) {
+                window.alert(error.message);
+                return;
+            }
+        }
     }, [
-        identity
+        identity,
+        wallet
     ]);
     const onClose = (0,react.useCallback)(()=>setOpen(false)
     , []);
     (0,useMount/* default */.Z)(()=>{
-        clearStorages();
         return src_utils/* MaskMessages.events.nftAvatarSettingDialogUpdated.on */.ql.events.nftAvatarSettingDialogUpdated.on((data)=>setOpen(data.open)
         );
     });
@@ -1175,7 +1134,7 @@ const ui_provider_define = {
 /* harmony import */ var _automation_AttachImageToComposition__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(66991);
 /* harmony import */ var _inject_CommentBox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(86330);
 /* harmony import */ var _inject_Comments__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(84334);
-/* harmony import */ var _inject_PostInspector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(13360);
+/* harmony import */ var _inject_PostInspector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(97770);
 /* harmony import */ var _state_InitFriends__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(50814);
 /* harmony import */ var _state_InitProfiles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(49165);
 /* harmony import */ var _inject_PageInspector__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(89887);
@@ -1203,20 +1162,20 @@ __webpack_require__.d(__webpack_exports__, {
   "S": () => (/* binding */ injectCommentBoxDefaultFactory)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+holoflows-kit@0.9.0-20210902104757-7c3d0d0_webextension-polyfill@0.8.0/node_modules/@dimensiondev/holoflows-kit/umd/index.cjs
 var umd = __webpack_require__(44162);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var src = __webpack_require__(92597);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Box/Box.js
-var Box = __webpack_require__(46486);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/InputBase/InputBase.js
-var InputBase = __webpack_require__(13863);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var src = __webpack_require__(43021);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Box/Box.js
+var Box = __webpack_require__(18287);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/InputBase/InputBase.js
+var InputBase = __webpack_require__(59324);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ./src/social-network/index.ts
 var social_network = __webpack_require__(61751);
 // EXTERNAL MODULE: ./src/social-network-adaptor/minds.com/base.ts
@@ -1294,9 +1253,12 @@ var noop = __webpack_require__(21122);
 var messages = __webpack_require__(2214);
 // EXTERNAL MODULE: ./src/utils/watcher.ts
 var watcher = __webpack_require__(84749);
-// EXTERNAL MODULE: ../typed-message/base/index.ts + 27 modules
-var typed_message_base = __webpack_require__(69492);
+// EXTERNAL MODULE: ../typed-message/base/index.ts + 2 modules
+var typed_message_base = __webpack_require__(65631);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+kit@0.0.0-20220223101101-4e6f3b9/node_modules/@dimensiondev/kit/esm/index.js + 2 modules
+var esm = __webpack_require__(66559);
 ;// CONCATENATED MODULE: ./src/social-network/defaults/inject/CommentBox.tsx
+
 
 
 
@@ -1320,23 +1282,21 @@ const injectCommentBoxDefaultFactory = function(onPasteToCommentBox = defaultOnP
 , useCustomStyles = (0,src/* makeStyles */.ZL)()({}), mountPointCallback) {
     const CommentBoxUI = /*#__PURE__*/ (0,react.memo)(function CommentBoxUI({ dom  }) {
         const info = (0,usePostInfo/* usePostInfo */.oQ)();
-        const payload = usePostInfo/* usePostInfoDetails.containingMaskPayload */.H9.containingMaskPayload();
         const postContent = usePostInfo/* usePostInfoDetails.rawMessagePiped */.H9.rawMessagePiped();
         const { classes  } = useCustomStyles();
         const iv = usePostInfo/* usePostInfoDetails.iv */.H9.iv();
         const props = additionPropsToCommentBox(classes);
         const onCallback = (0,react.useCallback)(async (content)=>{
-            const postIV = iv || payload.unwrap().iv;
             const decryptedText = (0,typed_message_base/* extractTextFromTypedMessage */.Vc)(postContent).unwrap();
-            const encryptedComment = await service/* default.Crypto.encryptComment */.ZP.Crypto.encryptComment(postIV, decryptedText, content);
+            const encryptedComment = await service/* default.Crypto.encryptComment */.ZP.Crypto.encryptComment(new Uint8Array((0,esm/* decodeArrayBuffer */.xe)(iv)), decryptedText, content);
             onPasteToCommentBox(encryptedComment, info, dom).catch(console.error);
         }, [
-            payload,
             postContent,
             info,
             dom,
             iv
         ]);
+        if (!iv) return null;
         if (!postContent.items.length) return null;
         return(/*#__PURE__*/ (0,jsx_runtime.jsx)(CommentBox, {
             onSubmit: onCallback,
@@ -1380,30 +1340,32 @@ __webpack_require__.d(__webpack_exports__, {
   "M": () => (/* binding */ injectPostCommentsDefault)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+holoflows-kit@0.9.0-20210902104757-7c3d0d0_webextension-polyfill@0.8.0/node_modules/@dimensiondev/holoflows-kit/umd/index.cjs
 var umd = __webpack_require__(44162);
 // EXTERNAL MODULE: ./src/utils/shadow-root/renderInShadowRoot.tsx
 var renderInShadowRoot = __webpack_require__(78632);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var src = __webpack_require__(39850);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Chip/Chip.js + 1 modules
-var Chip = __webpack_require__(3073);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var theme_src = __webpack_require__(92597);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.4.4_d06e3de907ce734e888a65f5db1d962e/node_modules/@mui/icons-material/Lock.js
-var Lock = __webpack_require__(43257);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useAsync.js
-var useAsync = __webpack_require__(59302);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Chip/Chip.js + 1 modules
+var Chip = __webpack_require__(70644);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var src = __webpack_require__(43021);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/Lock.js
+var Lock = __webpack_require__(10111);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useAsync.js
+var useAsync = __webpack_require__(1154);
 // EXTERNAL MODULE: ./src/extension/service.ts
 var service = __webpack_require__(45925);
-// EXTERNAL MODULE: ../typed-message/base/index.ts + 27 modules
-var base = __webpack_require__(69492);
+// EXTERNAL MODULE: ../typed-message/base/index.ts + 2 modules
+var base = __webpack_require__(65631);
 // EXTERNAL MODULE: ./src/components/DataSource/usePostInfo.ts
 var usePostInfo = __webpack_require__(76262);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+kit@0.0.0-20220223101101-4e6f3b9/node_modules/@dimensiondev/kit/esm/index.js + 2 modules
+var esm = __webpack_require__(66559);
 ;// CONCATENATED MODULE: ./src/components/InjectedComponents/PostComments.tsx
 
 
@@ -1415,7 +1377,8 @@ var usePostInfo = __webpack_require__(76262);
 
 
 
-const useStyle = (0,theme_src/* makeStyles */.ZL)()({
+
+const useStyle = (0,src/* makeStyles */.ZL)()({
     root: {
         height: 'auto',
         width: 'calc(98% - 10px)',
@@ -1429,7 +1392,7 @@ const useStyle = (0,theme_src/* makeStyles */.ZL)()({
     }
 });
 function PostCommentDecrypted(props) {
-    const chipClasses = (0,theme_src/* useStylesExtends */.Bc)(useStyle(), props.ChipProps || {});
+    const chipClasses = (0,src/* useStylesExtends */.Bc)(useStyle(), props.ChipProps || {});
     return(/*#__PURE__*/ (0,jsx_runtime.jsx)(jsx_runtime.Fragment, {
         children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Chip/* default */.Z, {
             "data-testid": "comment_field",
@@ -1443,20 +1406,17 @@ function PostCommentDecrypted(props) {
 }
 function PostComment(props) {
     const { needZip  } = props;
-    const comment = (0,src/* useValueRef */.E)(props.comment);
+    const comment = (0,dist/* useValueRef */.E)(props.comment);
     const postContent = usePostInfo/* usePostInfoDetails.rawMessagePiped */.H9.rawMessagePiped();
-    const containingPayload = usePostInfo/* usePostInfoDetails.containingMaskPayload */.H9.containingMaskPayload();
     const iv = usePostInfo/* usePostInfoDetails.iv */.H9.iv();
-    const postIV = containingPayload.map((x)=>x.iv
-    ).unwrapOr(iv);
     const dec = (0,useAsync/* default */.Z)(async ()=>{
         const decryptedText = (0,base/* extractTextFromTypedMessage */.Vc)(postContent).unwrap();
-        if (!postIV || !decryptedText) throw new Error('Decrypt comment failed');
-        const result = await service/* default.Crypto.decryptComment */.ZP.Crypto.decryptComment(postIV, decryptedText, comment);
+        if (!iv || !decryptedText) throw new Error('Decrypt comment failed');
+        const result = await service/* default.Crypto.decryptComment */.ZP.Crypto.decryptComment(new Uint8Array((0,esm/* decodeArrayBuffer */.xe)(iv)), decryptedText, comment);
         if (result === null) throw new Error('Decrypt result empty');
         return result;
     }, [
-        postIV,
+        iv,
         postContent,
         comment
     ]);
@@ -1473,8 +1433,8 @@ function PostComment(props) {
 
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/noop.js
 var noop = __webpack_require__(21122);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ./src/utils/watcher.ts
 var watcher = __webpack_require__(84749);
 ;// CONCATENATED MODULE: ./src/social-network/defaults/inject/Comments.tsx
@@ -1491,7 +1451,7 @@ var watcher = __webpack_require__(84749);
 /**
  * Creat a default implementation of injectPostComments
  */ function injectPostCommentsDefault(config = {}, additionalPropsToPostComment = ()=>({})
-, useCustomStyles = (0,theme_src/* makeStyles */.ZL)()({})) {
+, useCustomStyles = (0,src/* makeStyles */.ZL)()({})) {
     const { needZip  } = config;
     const PostCommentDefault = /*#__PURE__*/ (0,react.memo)(function PostCommentDefault(props) {
         const { classes  } = useCustomStyles();
@@ -1534,161 +1494,6 @@ var watcher = __webpack_require__(84749);
         (0,watcher/* startWatch */.f)(commentWatcher, signal);
         return ()=>commentWatcher.stopWatch()
         ;
-    };
-}
-
-
-/***/ }),
-
-/***/ 51682:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  "C": () => (/* binding */ injectPostReplacer)
-});
-
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
-// EXTERNAL MODULE: ./src/utils/shadow-root/renderInShadowRoot.tsx
-var renderInShadowRoot = __webpack_require__(78632);
-// EXTERNAL MODULE: ./src/components/DataSource/usePostInfo.ts
-var usePostInfo = __webpack_require__(76262);
-// EXTERNAL MODULE: ../typed-message/base/index.ts + 27 modules
-var base = __webpack_require__(69492);
-// EXTERNAL MODULE: ../typed-message/dom/index.ts + 15 modules
-var dom = __webpack_require__(68876);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var src = __webpack_require__(92597);
-// EXTERNAL MODULE: ./shared-ui/TypedMessageRender/context.tsx + 2 modules
-var context = __webpack_require__(53763);
-// EXTERNAL MODULE: ./src/components/DataSource/useActivatedUI.ts
-var useActivatedUI = __webpack_require__(41529);
-// EXTERNAL MODULE: ./src/social-network/ui.ts
-var ui = __webpack_require__(3787);
-;// CONCATENATED MODULE: ./src/components/InjectedComponents/PostReplacer.tsx
-
-
-
-
-
-
-
-
-
-const useStyles = (0,src/* makeStyles */.ZL)()({
-    root: {
-        overflowWrap: 'break-word'
-    }
-});
-function PostReplacer(props) {
-    var ref, ref1;
-    const { classes  } = useStyles();
-    const postMessage = usePostInfo/* usePostInfoDetails.rawMessage */.H9.rawMessage();
-    const author = usePostInfo/* usePostInfoDetails.author */.H9.author();
-    const currentProfile = (ref = (0,useActivatedUI/* useCurrentIdentity */.Ud)()) === null || ref === void 0 ? void 0 : ref.identifier;
-    const url = usePostInfo/* usePostInfoDetails.url */.H9.url();
-    const initialTransformationContext = (0,react.useMemo)(()=>{
-        return {
-            authorHint: author,
-            currentProfile,
-            postURL: url === null || url === void 0 ? void 0 : url.toString()
-        };
-    }, [
-        author,
-        currentProfile,
-        url
-    ]);
-    return(/*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
-        className: classes.root,
-        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(dom/* TextResizeContext.Provider */.FG.Provider, {
-            value: true,
-            children: /*#__PURE__*/ (0,jsx_runtime.jsx)(context/* TypedMessageRenderContext */.w, {
-                renderFragments: (ref1 = ui.activatedSocialNetworkUI === null || ui.activatedSocialNetworkUI === void 0 ? void 0 : ui.activatedSocialNetworkUI.customization.componentOverwrite) === null || ref1 === void 0 ? void 0 : ref1.RenderFragments,
-                context: initialTransformationContext,
-                children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Transformer, {
-                    ...props,
-                    message: postMessage
-                })
-            })
-        })
-    }));
-}
-function Transformer({ message , unzip , zip  }) {
-    const after = (0,dom/* useTransformedValue */.CB)(message);
-    const shouldReplace = (0,react.useMemo)(()=>{
-        const flatten = (0,base/* FlattenTypedMessage */.po)(message, base/* emptyTransformationContext */.vg);
-        if (!(0,base/* isTypedMessageEqual */.Hz)(flatten, after)) return true;
-        if (hasCashOrHashTag(after)) return true;
-        return false;
-    }, [
-        message,
-        after
-    ]);
-    (0,react.useEffect)(()=>{
-        if (shouldReplace) zip === null || zip === void 0 ? void 0 : zip();
-        else unzip === null || unzip === void 0 ? void 0 : unzip();
-        return ()=>{
-            return unzip === null || unzip === void 0 ? void 0 : unzip();
-        };
-    }, []);
-    if (shouldReplace) return(/*#__PURE__*/ (0,jsx_runtime.jsx)(dom/* TypedMessageRender */.Ot, {
-        message: after
-    }));
-    return null;
-}
-function hasCashOrHashTag(message) {
-    let result = false;
-    function visitor(node) {
-        if ((0,base/* isTypedMessageAnchor */.bj)(node)) {
-            if (node.category === 'cash' || node.category === 'hash') {
-                result = true;
-                return 'stop';
-            }
-        } else (0,base/* forEachTypedMessageChild */.ss)(node, visitor);
-    }
-    visitor(message);
-    (0,base/* forEachTypedMessageChild */.ss)(message, visitor);
-    return result;
-}
-
-// EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/noop.js
-var noop = __webpack_require__(21122);
-;// CONCATENATED MODULE: ./src/social-network/defaults/inject/PostReplacer.tsx
-
-
-
-
-
-
-function injectPostReplacer(config = {}) {
-    const PostReplacerDefault = /*#__PURE__*/ (0,react.memo)(function PostReplacerDefault(props) {
-        return(/*#__PURE__*/ (0,jsx_runtime.jsx)(PostReplacer, {
-            zip: props.zipPost,
-            unzip: props.unZipPost
-        }));
-    });
-    const { zipPost , unzipPost  } = config;
-    const zipPostF = zipPost || noop/* default */.Z;
-    const unzipPostF = unzipPost || noop/* default */.Z;
-    return function injectPostReplacer(current, signal) {
-        signal.addEventListener('abort', unzipPostF);
-        (0,renderInShadowRoot/* createReactRootShadowed */.o)(current.rootElement.afterShadow, {
-            key: 'post-replacer',
-            signal
-        }).render(/*#__PURE__*/ (0,jsx_runtime.jsx)(usePostInfo/* PostInfoProvider */.eT, {
-            post: current,
-            children: /*#__PURE__*/ (0,jsx_runtime.jsx)(PostReplacerDefault, {
-                zipPost: ()=>zipPostF(current.rootElement)
-                ,
-                unZipPost: ()=>unzipPostF(current.rootElement)
-                ,
-                ...current
-            })
-        }));
     };
 }
 

@@ -48,7 +48,7 @@ class MainTabBarController: UITabBarController {
                     return PersonasViewController()
                 } else {
                     return IdentityEmptyViewController()
-                }        
+                }
 
             case .labs:
                 return LabsViewController()
@@ -69,7 +69,7 @@ class MainTabBarController: UITabBarController {
     var disposeBag = Set<AnyCancellable>()
 
     private var tabControllerMap: [Tab: UINavigationController] = [:]
-        
+
     init() {
         super.init(nibName: nil, bundle: nil)
     }
@@ -111,16 +111,26 @@ extension MainTabBarController {
         navigationController.navigationBar.setAppearance()
         return navigationController
     }
+    
+    func navigationController(tab: Tab) -> UINavigationController? {
+        tabControllerMap[tab]
+    }
 
-    func replace(tab: Tab, with controller: UIViewController, animated: Bool = false) {
+    func replace(tab: Tab, with controller: UIViewController, animated: Bool = false, selected: Bool = false) {
         guard let navigationController = tabControllerMap[tab] else {
             return
         }
 
         navigationController.setViewControllers([controller], animated: animated)
-        selectedIndex = selectedIndex
 
-        if tab.rawValue == selectedIndex, self.tabBar.isHidden {
+        if selected {
+            // replace navigation stack of tab and select tab
+            selectedIndex = tab.rawValue
+        } else {
+            // replace navigation stack of tab
+            selectedIndex = selectedIndex
+        }
+        if self.tabBar.isHidden {
             self.tabBar.isHidden = false
         }
     }
@@ -151,16 +161,16 @@ extension MainTabBarController {
             guard let tabBar = tabBar as? MaskTabBar, let index = viewControllers?.firstIndex(of: newValue) else {
                 return
             }
-            tabBar.select(itemAt: index, animated: false)
+            tabBar.select(at: index, animated: false)
         }
     }
-
+    
     override var selectedIndex: Int {
         willSet {
             guard let tabBar = tabBar as? MaskTabBar else {
                 return
             }
-            tabBar.select(itemAt: selectedIndex, animated: false)
+            tabBar.select(at: selectedIndex, animated: false)
         }
     }
     
@@ -173,7 +183,7 @@ extension MainTabBarController {
             delegate?.tabBarController?(self, didSelect: controller)
         }
     }
-        
+
     var barHeight: CGFloat {
         if let tabbar = tabBar as? MaskTabBar {
             return tabbar.barHeight + view.safeAreaInsets.bottom

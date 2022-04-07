@@ -13,6 +13,10 @@ import UStack
 
 final class IdentityEmptyViewController: BaseViewController {
     typealias Spacer = UStack.Spacer
+    
+    override var interactivePopGestureRecognizerEnabled: Bool {
+        false
+    }
 
     private var subscriptionSet = Set<AnyCancellable>()
     private var restoreSignalStorage = Set<AnyCancellable>()
@@ -75,7 +79,7 @@ final class IdentityEmptyViewController: BaseViewController {
         }
 
         contentStack.isLayoutMarginsRelativeArrangement = true
-        contentStack.layoutMargins = UIEdgeInsets(top: 10, left: 22.5, bottom: 32, right: 22.5)
+        contentStack.layoutMargins = UIEdgeInsets(top: 10, left: LayoutConstraints.leading, bottom: 32, right: LayoutConstraints.trailing)
         contentStack.snp.makeConstraints {
             $0.top.equalTo(view.layoutMarginsGuide)
             $0.leading.equalTo(view.snp.leading)
@@ -115,7 +119,14 @@ final class IdentityEmptyViewController: BaseViewController {
     }
 
     private func scanAction() {
-        coordinator.present(scene: .commonScan, transition: .modal(animated: true))
+        ScannerPermission.authorizeCameraWith { [weak self] isAuthorize in
+            guard let self = self else { return }
+            if isAuthorize {
+                self.coordinator.present(scene: .commonScan, transition: .modal(animated: true))
+            } else {
+                ScannerPermission.showCameraAccessAlert(coordinator: self.coordinator)
+            }
+        }
     }
 }
 

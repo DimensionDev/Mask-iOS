@@ -7,7 +7,7 @@
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "p": () => (/* binding */ DeleteIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -30,7 +30,7 @@ const DeleteIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIcon */ .I)('
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "d": () => (/* binding */ EditIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
@@ -52,12 +52,12 @@ const EditIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIcon */ .I)('Ed
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "P": () => (/* binding */ EnterDashboard)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(76342);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(46486);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(7280);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(18287);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(74491);
 /* harmony import */ var _hook_useEnterDashboard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(63434);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(13573);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(93573);
 
 
 
@@ -102,52 +102,52 @@ __webpack_require__.d(__webpack_exports__, {
   "default": () => (/* binding */ Home)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var src = __webpack_require__(92597);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var src = __webpack_require__(43021);
 // EXTERNAL MODULE: ./src/extension/popups/pages/Personas/hooks/usePersonaContext.ts
 var usePersonaContext = __webpack_require__(66707);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router@5.2.1_react@18.0.0-rc.0/node_modules/react-router/esm/react-router.js
-var react_router = __webpack_require__(22749);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-router@6.2.2_react@18.0.0-rc.2/node_modules/react-router/index.js
+var react_router = __webpack_require__(92186);
 // EXTERNAL MODULE: ../icons/general/Masks.tsx
 var Masks = __webpack_require__(16789);
 // EXTERNAL MODULE: ../icons/general/Edit.tsx
 var Edit = __webpack_require__(17514);
 // EXTERNAL MODULE: ../icons/general/Delete.tsx
 var Delete = __webpack_require__(25722);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Typography/Typography.js + 1 modules
-var Typography = __webpack_require__(7280);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Button/Button.js
-var Button = __webpack_require__(9744);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Typography/Typography.js + 1 modules
+var Typography = __webpack_require__(74491);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Button/Button.js
+var Button = __webpack_require__(12463);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var shared_base_src = __webpack_require__(79226);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-feather@2.0.9_react@18.0.0-rc.0/node_modules/react-feather/dist/icons/chevron-down.js
-var chevron_down = __webpack_require__(52375);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-feather@2.0.9_react@18.0.0-rc.0/node_modules/react-feather/dist/icons/chevron-up.js
-var chevron_up = __webpack_require__(21971);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/List/List.js + 1 modules
-var List = __webpack_require__(59216);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/ListItem/ListItem.js + 2 modules
-var ListItem = __webpack_require__(73268);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Link/Link.js + 1 modules
-var Link = __webpack_require__(98294);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Avatar/Avatar.js + 2 modules
-var Avatar = __webpack_require__(51364);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/ListItemText/ListItemText.js
-var ListItemText = __webpack_require__(10);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-feather@2.0.9_react@18.0.0-rc.2/node_modules/react-feather/dist/icons/chevron-down.js
+var chevron_down = __webpack_require__(6839);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-feather@2.0.9_react@18.0.0-rc.2/node_modules/react-feather/dist/icons/chevron-up.js
+var chevron_up = __webpack_require__(33983);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/List/List.js + 1 modules
+var List = __webpack_require__(66407);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/ListItem/ListItem.js + 2 modules
+var ListItem = __webpack_require__(66552);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Link/Link.js + 1 modules
+var Link = __webpack_require__(86377);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Avatar/Avatar.js + 2 modules
+var Avatar = __webpack_require__(63190);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/ListItemText/ListItemText.js
+var ListItemText = __webpack_require__(81396);
 // EXTERNAL MODULE: ./src/social-network/index.ts
 var social_network = __webpack_require__(61751);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/compact.js
 var compact = __webpack_require__(27862);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_757a802188413a36d4f24237d13b8e90/node_modules/react-use/esm/useAsyncFn.js
-var useAsyncFn = __webpack_require__(56838);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useAsyncFn.js
+var useAsyncFn = __webpack_require__(1840);
 // EXTERNAL MODULE: ./src/extension/service.ts
 var service = __webpack_require__(45925);
 // EXTERNAL MODULE: ../icons/utils/index.tsx
@@ -287,6 +287,7 @@ const GrayMasks = (0,icons_utils/* createIcon */.I)('GrayMasks', /*#__PURE__*/ (
 
 
 
+
 const useStyles = (0,src/* makeStyles */.ZL)()((theme)=>({
         list: {
             padding: '0 0 70px 0',
@@ -343,7 +344,7 @@ const ProfileList = /*#__PURE__*/ (0,react.memo)(()=>{
     const definedSocialNetworks = (0,compact/* default */.Z)([
         ...social_network/* definedSocialNetworkUIs.values */.LB.values()
     ].map(({ networkIdentifier  })=>{
-        if (networkIdentifier === 'localhost') return null;
+        if (networkIdentifier === shared_base_src/* EnhanceableSite.Localhost */.Jk.Localhost) return null;
         return networkIdentifier;
     }));
     const [, onConnect] = (0,useAsyncFn/* default */.Z)(async (networkIdentifier)=>{
@@ -450,8 +451,8 @@ const ProfileListUI = /*#__PURE__*/ (0,react.memo)(({ networks , profiles , onCo
 
 // EXTERNAL MODULE: ./src/extension/popups/components/EnterDashboard/index.tsx
 var EnterDashboard = __webpack_require__(30395);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/ListItemButton/ListItemButton.js
-var ListItemButton = __webpack_require__(58364);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/ListItemButton/ListItemButton.js
+var ListItemButton = __webpack_require__(31262);
 ;// CONCATENATED MODULE: ./src/extension/popups/pages/Personas/components/PersonaList/index.tsx
 
 
@@ -507,10 +508,10 @@ const PersonaList_useStyles = (0,src/* makeStyles */.ZL)()((theme)=>({
 );
 const PersonaList = /*#__PURE__*/ (0,react.memo)(()=>{
     const { personas , setDeletingPersona  } = usePersonaContext/* PersonaContext.useContainer */.m.useContainer();
-    const history = (0,react_router/* useHistory */.k6)();
+    const navigate = (0,react_router/* useNavigate */.s0)();
     const onLogout = (0,react.useCallback)((persona)=>{
         setDeletingPersona(persona);
-        history.push(shared_base_src/* PopupRoutes.Logout */.mZ.Logout);
+        navigate(shared_base_src/* PopupRoutes.Logout */.mZ.Logout);
     }, [
         setDeletingPersona
     ]);
@@ -669,8 +670,7 @@ const PersonaHome = /*#__PURE__*/ (0,react.memo)(()=>{
     const { classes  } = Home_useStyles();
     const [isExpand, setExpand] = (0,react.useState)(true);
     const { currentPersona , setDeletingPersona , personas  } = usePersonaContext/* PersonaContext.useContainer */.m.useContainer();
-    const history = (0,react_router/* useHistory */.k6)();
-    console.log(personas);
+    const navigate = (0,react_router/* useNavigate */.s0)();
     var _compressedPoint;
     return(/*#__PURE__*/ (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
         children: [
@@ -697,7 +697,7 @@ const PersonaHome = /*#__PURE__*/ (0,react.memo)(()=>{
                                                     currentPersona === null || currentPersona === void 0 ? void 0 : currentPersona.nickname,
                                                     /*#__PURE__*/ (0,jsx_runtime.jsx)(Edit/* EditIcon */.d, {
                                                         className: classes.editIcon,
-                                                        onClick: ()=>history.push(shared_base_src/* PopupRoutes.PersonaRename */.mZ.PersonaRename)
+                                                        onClick: ()=>navigate(shared_base_src/* PopupRoutes.PersonaRename */.mZ.PersonaRename)
                                                     })
                                                 ]
                                             }),
@@ -709,7 +709,7 @@ const PersonaHome = /*#__PURE__*/ (0,react.memo)(()=>{
                                                         className: classes.trashIcon,
                                                         onClick: ()=>{
                                                             setDeletingPersona(currentPersona);
-                                                            history.push(shared_base_src/* PopupRoutes.Logout */.mZ.Logout);
+                                                            navigate(shared_base_src/* PopupRoutes.Logout */.mZ.Logout);
                                                         }
                                                     })
                                                 ]

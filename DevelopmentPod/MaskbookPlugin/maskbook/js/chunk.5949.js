@@ -28,7 +28,7 @@ const worker = {
 /* harmony export */   "g": () => (/* binding */ PluginGitcoinRPC),
 /* harmony export */   "y": () => (/* binding */ PluginGitcoinMessages)
 /* harmony export */ });
-/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(27194);
+/* harmony import */ var _masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63151);
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(22045);
 
 

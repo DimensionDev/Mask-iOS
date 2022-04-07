@@ -1,6 +1,6 @@
 {
     "tab": {
-        "personas": "crwdns13320:0crwdne13320:0",
+        "personas": "crwdns14632:0crwdne14632:0",
         "wallet": "crwdns13322:0crwdne13322:0",
         "labs": "crwdns13324:0crwdne13324:0",
         "setting": "crwdns13326:0crwdne13326:0"
@@ -71,20 +71,13 @@
             "change_backup_password_failed": {
                 "title": "crwdns13386:0crwdne13386:0"
             },
-            "wallet_backup": {
-                "title": "crwdns13388:0crwdne13388:0"
-            },
-            "identity_phrase": {
-                "title": "crwdns13390:0crwdne13390:0",
-                "description": "crwdns13392:0crwdne13392:0"
-            },
             "identify_code_screenshot_warning": {
                 "title": "crwdns13394:0crwdne13394:0",
                 "description": "crwdns13396:0crwdne13396:0"
             },
-            "identity_create": {
-                "title": "crwdns13398:0crwdne13398:0",
-                "description": "crwdns13400:0crwdne13400:0"
+            "persona_create": {
+                "title": "crwdns14634:0crwdne14634:0",
+                "description": "crwdns14636:0%scrwdne14636:0"
             },
             "persona_logout": {
                 "title": "crwdns13402:0crwdne13402:0",
@@ -132,6 +125,18 @@
             "scan_persona_exist": {
                 "title": "crwdns13440:0crwdne13440:0",
                 "description": "crwdns13442:0crwdne13442:0"
+            },
+            "wrong_folder": {
+                "title": "crwdns14638:0crwdne14638:0",
+                "description": "crwdns14640:0crwdne14640:0"
+            },
+            "backup_popup_binding_first": {
+                "title": "crwdns14642:0crwdne14642:0",
+                "description": "crwdns14644:0crwdne14644:0"
+            },
+            "camera_access": {
+                "title": "crwdns14954:0crwdne14954:0",
+                "description": "crwdns14956:0crwdne14956:0"
             }
         },
         "controls": {
@@ -165,14 +170,35 @@
             "edit": "crwdns13498:0crwdne13498:0",
             "download": "crwdns13500:0crwdne13500:0",
             "skip": "crwdns13502:0crwdne13502:0",
-            "download_next": "crwdns13504:0crwdne13504:0"
+            "download_next": "crwdns13504:0crwdne13504:0",
+            "select_from_photo": "crwdns14646:0crwdne14646:0",
+            "take_photo": "crwdns14648:0crwdne14648:0",
+            "save": "crwdns14650:0crwdne14650:0",
+            "move_data_now": "crwdns14652:0crwdne14652:0",
+            "remind_me_later": "crwdns14654:0crwdne14654:0",
+            "go_settings": "crwdns14958:0crwdne14958:0",
+            "dont_allow": "crwdns14960:0crwdne14960:0"
         },
         "toast": {
-            "saved": "crwdns14576:0crwdne14576:0"
+            "saved": "crwdns14656:0crwdne14656:0",
+            "copy": "crwdns14658:0crwdne14658:0"
         },
         "loading": "crwdns13506:0crwdne13506:0"
     },
     "scene": {
+        "guide": {
+            "skip": "crwdns14660:0crwdne14660:0",
+            "lets_start": "crwdns14662:0crwdne14662:0",
+            "description1": "crwdns14790:0crwdne14790:0",
+            "description2": "crwdns14792:0crwdne14792:0",
+            "description3": "crwdns14794:0crwdne14794:0",
+            "description4": "crwdns14796:0crwdne14796:0"
+        },
+        "welcome_identity_empty": {
+            "create_a_persona": "crwdns14962:0crwdne14962:0",
+            "recover_your_persona": "crwdns14964:0crwdne14964:0",
+            "description": "crwdns14966:0crwdne14966:0"
+        },
         "terms_of_service": {
             "title": "crwdns13508:0crwdne13508:0",
             "description": "crwdns13510:0crwdne13510:0",
@@ -408,7 +434,10 @@
         "NFT_Detail": {
             "list_price": "crwdns13822:0crwdne13822:0",
             "last_sale_Price": "crwdns13824:0crwdne13824:0",
-            "floor_price": "crwdns13826:0crwdne13826:0"
+            "floor_price": "crwdns13826:0crwdne13826:0",
+            "save_photo": "crwdns14672:0crwdne14672:0",
+            "collection_web": "crwdns14674:0crwdne14674:0",
+            "etherscan": "crwdns14676:0crwdne14676:0"
         },
         "sendTransaction": {
             "send": {
@@ -421,7 +450,10 @@
                 "Label_Password": "crwdns13840:0crwdne13840:0",
                 "btn_withoutPassword": "crwdns13842:0crwdne13842:0",
                 "amount_error": "crwdns13844:0crwdne13844:0",
-                "password_error": "crwdns13846:0crwdne13846:0"
+                "password_error": "crwdns13846:0crwdne13846:0",
+                "gasFee_error": "crwdns14678:0crwdne14678:0",
+                "contact": "crwdns14680:0crwdne14680:0",
+                "recent": "crwdns14682:0crwdne14682:0"
             },
             "addContact": {
                 "btn_add": "crwdns13848:0crwdne13848:0",
@@ -481,7 +513,7 @@
             "password_demand": "crwdns13934:0crwdne13934:0"
         },
         "personas": {
-            "personas": "crwdns13936:0crwdne13936:0",
+            "personas": "crwdns14684:0crwdne14684:0",
             "tabs": {
                 "social": "crwdns13938:0crwdne13938:0",
                 "post": "crwdns13940:0crwdne13940:0",
@@ -501,6 +533,9 @@
                 "persona": "crwdns13960:0crwdne13960:0",
                 "create_persona": "crwdns13962:0crwdne13962:0",
                 "input_persona_name": "crwdns13964:0crwdne13964:0"
+            },
+            "search": {
+                "placeholder": "crwdns14686:0crwdne14686:0"
             },
             "delete": "crwdns13966:0crwdne13966:0",
             "delete_tip": "crwdns13968:0crwdne13968:0",
@@ -529,12 +564,17 @@
             "disconnect": "crwdns13998:0crwdne13998:0",
             "connect_social_accounts": "crwdns14000:0crwdne14000:0",
             "accounts": "crwdns14002:0crwdne14002:0",
-            "connect_tips": "crwdns14004:0crwdne14004:0",
-            "add": "crwdns14006:0crwdne14006:0"
+            "connect_tips": "crwdns14788:0crwdne14788:0",
+            "add": "crwdns14690:0crwdne14690:0"
         },
         "persona_download": {
             "identity_id": "crwdns14578:0crwdne14578:0",
             "download_tips": "crwdns14580:0crwdne14580:0"
+        },
+        "persona_avatar": {
+            "title": "crwdns14692:0crwdne14692:0",
+            "crop": "crwdns14694:0crwdne14694:0",
+            "remove_avatar": "crwdns14696:0crwdne14696:0"
         },
         "wallet_balance": {
             "btn_swap": "crwdns14018:0crwdne14018:0",
@@ -807,27 +847,33 @@
             "refunded": "crwdns14426:0crwdne14426:0",
             "refund": "crwdns14428:0crwdne14428:0",
             "empty": "crwdns14430:0crwdne14430:0",
-            "share_message_official": "crwdns14432:0%scrwdnd14432:0%scrwdnd14432:0%scrwdnd14432:0%scrwdne14432:0",
-            "share_message_unsupport_platform": "crwdns14434:0%scrwdnd14434:0%scrwdnd14434:0%scrwdne14434:0"
+            "share_message_official": "crwdns14800:0%scrwdnd14800:0%scrwdnd14800:0%scrwdnd14800:0%scrwdne14800:0",
+            "share_message_unsupport_platform": "crwdns14802:0%scrwdnd14802:0%scrwdnd14802:0%scrwdne14802:0"
+        },
+        "move_backup_data": {
+            "title": "crwdns14698:0crwdne14698:0",
+            "description1": "crwdns14700:0crwdne14700:0",
+            "description2": "crwdns14702:0crwdne14702:0",
+            "description3": "crwdns14704:0crwdne14704:0"
         }
     },
     "chain": {
         "short_name": {
             "eth": "crwdns14436:0crwdne14436:0",
-            "bsc": "crwdns14438:0crwdne14438:0",
+            "bsc": "crwdns14706:0crwdne14706:0",
             "dot": "crwdns14440:0crwdne14440:0",
             "polygon": "crwdns14442:0crwdne14442:0",
             "arbitrum": "crwdns14444:0crwdne14444:0",
-            "xdai": "crwdns14446:0crwdne14446:0",
+            "xdai": "crwdns14708:0crwdne14708:0",
             "optimism": "crwdns14448:0crwdne14448:0"
         },
         "name": {
             "eth": "crwdns14450:0crwdne14450:0",
-            "bsc": "crwdns14452:0crwdne14452:0",
+            "bsc": "crwdns14710:0crwdne14710:0",
             "dot": "crwdns14454:0crwdne14454:0",
             "polygon": "crwdns14456:0crwdne14456:0",
             "arbitrum": "crwdns14458:0crwdne14458:0",
-            "xdai": "crwdns14460:0crwdne14460:0",
+            "xdai": "crwdns14712:0crwdne14712:0",
             "optimism": "crwdns14462:0crwdne14462:0"
         }
     }

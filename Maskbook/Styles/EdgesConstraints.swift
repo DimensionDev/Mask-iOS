@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 enum LayoutConstraints {
-    static let top: CGFloat = 24
+    static let top: CGFloat = 20
     static let leading: CGFloat = 20
     static let trailing: CGFloat = 20
     static let horizontal: CGFloat = leading

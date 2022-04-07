@@ -7,7 +7,7 @@
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "n": () => (/* binding */ twitterEncoding)
 /* harmony export */ });
-/* harmony import */ var _masknet_encryption__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(96663);
+/* harmony import */ var _masknet_encryption__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(57614);
 /* harmony import */ var lodash_unified__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(32139);
 
 
@@ -95,7 +95,7 @@ function regexMatchAll(str, regexp, index = 1) {
 /* harmony export */ });
 /* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(79226);
 /* harmony import */ var _social_network_utils_create_post_context__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13591);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(13573);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(93573);
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(74926);
 /* harmony import */ var _encoding__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(79208);
 /* harmony import */ var _utils_user__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(95418);
@@ -117,14 +117,6 @@ const twitterShared = {
         getProfilePage: (userId)=>`https://twitter.com/${userId}`
         ,
         isValidUsername: _utils_user__WEBPACK_IMPORTED_MODULE_5__/* .usernameValidator */ .S_,
-        publicKeyEncoding: {
-            encoder (text) {
-                return _encoding__WEBPACK_IMPORTED_MODULE_4__/* .twitterEncoding.publicKeyEncoder */ .n.publicKeyEncoder(text);
-            },
-            decoder (text) {
-                return _encoding__WEBPACK_IMPORTED_MODULE_4__/* .twitterEncoding.publicKeyDecoder */ .n.publicKeyDecoder(text);
-            }
-        },
         textPayloadPostProcessor: {
             encoder (text) {
                 return _encoding__WEBPACK_IMPORTED_MODULE_4__/* .twitterEncoding.payloadEncoder */ .n.payloadEncoder(text);
@@ -238,7 +230,8 @@ const hasEditor = ()=>!!(0,_selector__WEBPACK_IMPORTED_MODULE_0__/* .postEditorD
 /* harmony export */   "wP": () => (/* binding */ searchEditProfileSelector),
 /* harmony export */   "xH": () => (/* binding */ composeAnchorTextSelector),
 /* harmony export */   "xx": () => (/* binding */ searchProfileTabPageSelector),
-/* harmony export */   "yR": () => (/* binding */ timelinePostContentSelector)
+/* harmony export */   "yR": () => (/* binding */ timelinePostContentSelector),
+/* harmony export */   "zA": () => (/* binding */ searchProfileTabLoseConnectionPageSelector)
 /* harmony export */ });
 /* unused harmony exports querySelector, searchProfileSelector, searchProfileActiveTabSelector, searchProfileActiveTabStatusLineSelector, searchProfileActiveTabLabelSelector, searchForegroundColorSelector, bioCardSelector, postEditorToolbarSelector, twitterMainAvatarSelector, searchProfileAvatarSelector, searchProfileAvatarParentSelector, searchAvatarSelectorInput, searchAvatarSelectorImage, searchUseCellSelector */
 /* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(44162);
@@ -262,7 +255,9 @@ const searchProfileSelector = ()=>querySelector('[aria-label][role="navigation"]
 ;
 const searchProfileTabListLastChildSelector = ()=>querySelector('[data-testid="primaryColumn"] div + [role="navigation"][aria-label] [data-testid="ScrollSnap-nextButtonWrapper"]')
 ;
-const searchProfileTabPageSelector = ()=>querySelector('[data-testid="primaryColumn"] [role="navigation"] + * div')
+const searchProfileTabPageSelector = ()=>querySelector('[data-testid="primaryColumn"] [role="navigation"] + * > div[aria-label]:not([role="progressbar"])')
+;
+const searchProfileTabLoseConnectionPageSelector = ()=>querySelector('[data-testid="primaryColumn"] [role="navigation"] + * > div[dir="auto"]:not([role="progressbar"])')
 ;
 const searchProfileEmptySelector = ()=>querySelector('[data-testid="primaryColumn"] [data-testid="emptyState"]')
 ;
@@ -285,7 +280,7 @@ const searchNewTweetButtonSelector = ()=>{
     if (q.evaluate()) return q;
     return querySelector('[data-testid="SideNav_NewTweet_Button"]');
 };
-const searchNickNameSelector = ()=>querySelector('[data-testid="UserProfileHeader_Items"]')
+const searchNickNameSelector = ()=>querySelector('[data-testid="tweet"] a:not([target]) > div > div[dir="auto"] > span > span')
 ;
 const searchAvatarSelector = ()=>querySelector('[data-testid="primaryColumn"] a[href$="/photo"] img[src*="profile_images"]')
 ;
@@ -465,7 +460,7 @@ const searchTwitterAvatarNFTLinkSelector = ()=>querySelector('a[href$="/nft"]')
 /* harmony export */ });
 /* harmony import */ var lodash_unified__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(32139);
 /* harmony import */ var _selector__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10735);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13573);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(93573);
 
 
 
@@ -485,26 +480,19 @@ const searchTwitterAvatarNFTLinkSelector = ()=>querySelector('a[href$="/nft"]')
     return true;
 };
 const getNickname = ()=>{
-    var ref, ref1, ref2, ref3;
-    const node = (ref = (0,_selector__WEBPACK_IMPORTED_MODULE_0__/* .searchNickNameSelector */ .rf)().evaluate()) === null || ref === void 0 ? void 0 : (ref1 = ref.parentElement) === null || ref1 === void 0 ? void 0 : (ref2 = ref1.parentElement) === null || ref2 === void 0 ? void 0 : (ref3 = ref2.firstChild) === null || ref3 === void 0 ? void 0 : ref3.nextSibling;
+    var ref;
+    const node = (ref = (0,_selector__WEBPACK_IMPORTED_MODULE_0__/* .searchNickNameSelector */ .rf)().evaluate()) === null || ref === void 0 ? void 0 : ref.querySelector('span span');
     if (!node) return '';
-    const nicknameNode = node.querySelector('div span');
-    if (!nicknameNode) return '';
-    return (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .collectNodeText */ .aW)(nicknameNode);
+    return (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .collectNodeText */ .aW)(node);
 };
 const getTwitterId = ()=>{
-    var ref, ref4, ref5, ref6, ref7, ref8, ref9, ref10, ref11;
-    const node = (ref = (0,_selector__WEBPACK_IMPORTED_MODULE_0__/* .searchNickNameSelector */ .rf)().evaluate()) === null || ref === void 0 ? void 0 : (ref4 = ref.parentElement) === null || ref4 === void 0 ? void 0 : (ref5 = ref4.parentElement) === null || ref5 === void 0 ? void 0 : (ref6 = ref5.firstChild) === null || ref6 === void 0 ? void 0 : (ref7 = ref6.nextSibling) === null || ref7 === void 0 ? void 0 : (ref8 = ref7.firstChild) === null || ref8 === void 0 ? void 0 : (ref9 = ref8.firstChild) === null || ref9 === void 0 ? void 0 : ref9.lastChild;
-    if (node) {
-        const twitterIdNode = node.querySelector('div span');
-        if (twitterIdNode) return twitterIdNode.innerHTML.trim().replace('@', '');
-    }
-    const ele = ((ref10 = (0,_selector__WEBPACK_IMPORTED_MODULE_0__/* .searchAvatarSelector */ .Ls)().evaluate()) === null || ref10 === void 0 ? void 0 : ref10.closest('a')) || ((ref11 = (0,_selector__WEBPACK_IMPORTED_MODULE_0__/* .searchNFTAvatarSelector */ .dA)().evaluate()) === null || ref11 === void 0 ? void 0 : ref11.closest('a'));
+    var ref, ref1;
+    const ele = ((ref = (0,_selector__WEBPACK_IMPORTED_MODULE_0__/* .searchAvatarSelector */ .Ls)().evaluate()) === null || ref === void 0 ? void 0 : ref.closest('a')) || ((ref1 = (0,_selector__WEBPACK_IMPORTED_MODULE_0__/* .searchNFTAvatarSelector */ .dA)().evaluate()) === null || ref1 === void 0 ? void 0 : ref1.closest('a'));
     if (ele) {
         const link = ele.getAttribute('href');
         if (link) {
-            var ref12;
-            const [, userId] = (ref12 = link.match(/^\/(\w+)\/(photo|nft)$/)) !== null && ref12 !== void 0 ? ref12 : [];
+            var ref2;
+            const [, userId] = (ref2 = link.match(/^\/(\w+)\/(photo|nft)$/)) !== null && ref2 !== void 0 ? ref2 : [];
             return userId;
         }
     }
@@ -572,20 +560,18 @@ __webpack_require__.d(__webpack_exports__, {
 
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+holoflows-kit@0.9.0-20210902104757-7c3d0d0_webextension-polyfill@0.8.0/node_modules/@dimensiondev/holoflows-kit/umd/index.cjs
 var umd = __webpack_require__(44162);
-// EXTERNAL MODULE: ../typed-message/base/index.ts + 27 modules
-var base = __webpack_require__(69492);
+// EXTERNAL MODULE: ../typed-message/base/index.ts + 2 modules
+var base = __webpack_require__(65631);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var src = __webpack_require__(79226);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/ts-results@3.3.0/node_modules/ts-results/esm/index.js
 var esm = __webpack_require__(79594);
 // EXTERNAL MODULE: ./src/social-network/index.ts
 var social_network = __webpack_require__(61751);
-// EXTERNAL MODULE: ./src/social-network-adaptor/facebook.com/base.ts
-var facebook_com_base = __webpack_require__(40543);
 ;// CONCATENATED MODULE: ./src/social-network-adaptor/facebook.com/utils/resolveFacebookLink.ts
 
 function resolveFacebookLink(link, id) {
-    return id === facebook_com_base/* FACEBOOK_ID */.Iz ? link.replace(/\?fbclid=[\S\s]*#/, '#') : link;
+    return id === src/* EnhanceableSite.Facebook */.Jk.Facebook ? link.replace(/\?fbclid=[\S\s]*#/, '#') : link;
 }
 
 ;// CONCATENATED MODULE: ./src/social-network/utils/create-post-context.ts
@@ -681,8 +667,15 @@ function createSNSAdaptorSpecializedPostContext(create) {
                 ;
             }
         });
+        const iv = new umd.ValueRef(null);
+        const isPublicShared = new umd.ValueRef(undefined);
+        const ownersAESKeyEncrypted = new umd.ValueRef(undefined);
+        const version = new umd.ValueRef(undefined);
         return {
-            ...author,
+            author: author.author,
+            avatarURL: author.avatarURL,
+            nickname: author.nickname,
+            snsID: author.snsID,
             get rootNode () {
                 return opt.rootElement.realCurrent;
             },
@@ -710,14 +703,17 @@ function createSNSAdaptorSpecializedPostContext(create) {
             rawMessagePiped: transformedPostContent,
             postContent: (0,src/* SubscriptionFromValueRef */.Jf)(postContent),
             containingMaskPayload: (0,src/* SubscriptionFromValueRef */.Jf)(postPayload),
-            decryptedPayloadForImage: new umd.ValueRef(null),
-            iv: new umd.ValueRef(null),
-            publicShared: (0,src/* SubscriptionDebug */.Y_)({
-                getCurrentValue: ()=>postPayload.value.map((val)=>val.version === -38 && val.sharedPublic
-                    ).unwrapOr(undefined)
-                ,
-                subscribe: (sub)=>postPayload.addListener(sub)
-            })
+            iv,
+            publicShared: (0,src/* SubscriptionFromValueRef */.Jf)(isPublicShared),
+            ownersKeyEncrypted: (0,src/* SubscriptionFromValueRef */.Jf)(ownersAESKeyEncrypted),
+            version: (0,src/* SubscriptionFromValueRef */.Jf)(version),
+            decryptedReport (opts) {
+                var ref;
+                if (opts.iv) iv.value = opts.iv;
+                if ((ref = opts.sharedPublic) === null || ref === void 0 ? void 0 : ref.some) isPublicShared.value = opts.sharedPublic.val;
+                if (opts.ownersAESKeyEncrypted) ownersAESKeyEncrypted.value = opts.ownersAESKeyEncrypted;
+                if (opts.version) version.value = opts.version;
+            }
         };
     };
 }

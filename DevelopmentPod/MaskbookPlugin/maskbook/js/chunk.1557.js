@@ -31,28 +31,28 @@ __webpack_require__.d(__webpack_exports__, {
   "X": () => (/* binding */ ColumnLayout)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(74750);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/styles/styled.js
-var styled = __webpack_require__(8571);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/styles/useTheme.js
-var useTheme = __webpack_require__(73322);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Dialog/Dialog.js + 1 modules
-var Dialog = __webpack_require__(99760);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Link/Link.js + 1 modules
-var Link_Link = __webpack_require__(98294);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Typography/Typography.js + 1 modules
-var Typography_Typography = __webpack_require__(7280);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Breadcrumbs/Breadcrumbs.js + 3 modules
-var Breadcrumbs = __webpack_require__(83832);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/IconButton/IconButton.js + 1 modules
-var IconButton = __webpack_require__(91497);
-// EXTERNAL MODULE: ../theme/src/index.ts + 3 modules
-var src = __webpack_require__(92597);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(82798);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/styles/styled.js
+var styled = __webpack_require__(68435);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/styles/useTheme.js
+var useTheme = __webpack_require__(99537);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Dialog/Dialog.js + 1 modules
+var Dialog = __webpack_require__(24218);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Link/Link.js + 1 modules
+var Link_Link = __webpack_require__(86377);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Typography/Typography.js + 1 modules
+var Typography_Typography = __webpack_require__(74491);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Breadcrumbs/Breadcrumbs.js + 3 modules
+var Breadcrumbs = __webpack_require__(56847);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/IconButton/IconButton.js + 1 modules
+var IconButton = __webpack_require__(87409);
+// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
+var src = __webpack_require__(43021);
 // EXTERNAL MODULE: ../dashboard/src/locales/index.ts
 var locales = __webpack_require__(21692);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/index.js
-var react = __webpack_require__(76342);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
+var react = __webpack_require__(63423);
 // EXTERNAL MODULE: ../icons/utils/index.tsx
 var utils = __webpack_require__(46098);
 ;// CONCATENATED MODULE: ../icons/brands/Discord.tsx
@@ -76,16 +76,16 @@ const MaskTextIcon = (0,utils/* createIcon */.I)('MaskText', /*#__PURE__*/ (0,js
     })
 }), '0 0 122 35');
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Avatar/Avatar.js + 2 modules
-var Avatar = __webpack_require__(51364);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.4.4_d06e3de907ce734e888a65f5db1d962e/node_modules/@mui/icons-material/Facebook.js
-var Facebook = __webpack_require__(5848);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.4.4_d06e3de907ce734e888a65f5db1d962e/node_modules/@mui/icons-material/GitHub.js
-var GitHub = __webpack_require__(75527);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.4.4_d06e3de907ce734e888a65f5db1d962e/node_modules/@mui/icons-material/Telegram.js
-var Telegram = __webpack_require__(72512);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.4.4_d06e3de907ce734e888a65f5db1d962e/node_modules/@mui/icons-material/Twitter.js
-var Twitter = __webpack_require__(7825);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Avatar/Avatar.js + 2 modules
+var Avatar = __webpack_require__(63190);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/Facebook.js
+var Facebook = __webpack_require__(65397);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/GitHub.js
+var GitHub = __webpack_require__(20289);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/Telegram.js
+var Telegram = __webpack_require__(82341);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/Twitter.js
+var Twitter = __webpack_require__(92291);
 ;// CONCATENATED MODULE: ../dashboard/src/components/FooterLine/Version.tsx
 
 
@@ -321,8 +321,8 @@ function About() {
     }));
 }
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.4.4_d06e3de907ce734e888a65f5db1d962e/node_modules/@mui/icons-material/esm/Close.js
-var Close = __webpack_require__(74060);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/esm/Close.js
+var Close = __webpack_require__(87857);
 ;// CONCATENATED MODULE: ../dashboard/src/components/FooterLine/index.tsx
 
 
@@ -427,7 +427,7 @@ const FooterLine = /*#__PURE__*/ (0,react.memo)(()=>{
         if ( true && !event.metaKey) {
             open(`${links/* DOWNLOAD_LINK_STABLE_PREFIX */.kP}/v${version}`);
         } else {
-            open(`${links/* DOWNLOAD_LINK_UNSTABLE_PREFIX */.Xe}/${"2617e1b04"}`);
+            open(`${links/* DOWNLOAD_LINK_UNSTABLE_PREFIX */.Xe}/${"e0815cc72"}`);
         }
     };
     return(/*#__PURE__*/ (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
@@ -452,7 +452,7 @@ const FooterLine = /*#__PURE__*/ (0,react.memo)(()=>{
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(FooterLinkButton, {
                         onClick: openVersionLink,
-                        title: "v1.29.12-2096-g2617e1b04",
+                        title: "v1.29.12-2203-ge0815cc72",
                         children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Version, {})
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(FooterLinkExternal, {
@@ -495,8 +495,8 @@ const FooterLine = /*#__PURE__*/ (0,react.memo)(()=>{
     }));
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.4.4_04cbc9cecf451fb80119a7777a08edb2/node_modules/@mui/material/Paper/Paper.js
-var Paper = __webpack_require__(35428);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Paper/Paper.js
+var Paper = __webpack_require__(30592);
 // EXTERNAL MODULE: ../icons/brands/MaskBanner.tsx
 var MaskBanner = __webpack_require__(39556);
 // EXTERNAL MODULE: ../icons/brands/Mask.tsx
@@ -560,7 +560,7 @@ const ColumnLayout = ({ haveFooter =true , children  })=>{
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "I": () => (/* binding */ MaskBlueIcon)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74750);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46098);
 
 
