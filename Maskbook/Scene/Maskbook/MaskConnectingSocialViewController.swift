@@ -186,11 +186,11 @@ extension MaskConnectingSocialViewController {
     
     private func setupNavigationBar() {
         navigationItem.title = socialPlatform.shortName
-        let dashboardBarButtonItem = UIBarButtonItem(image: Asset.Images.Scene.Social.iconMaskDashboard.image,
-                                                     style: .plain,
-                                                     target: self,
-                                                     action: #selector(dashboardBarButtonItem(_:)))
-        navigationItem.rightBarButtonItems = [.fixedSpace(14), dashboardBarButtonItem]
+        let button = UIButton(type: .custom)
+        button.setImage(Asset.Images.Scene.Social.iconMaskDashboard.image, for: .normal)
+        button.addTarget(self, action: #selector(dashboardBarButtonItem), for: .touchUpInside)
+        navigationItem.rightBarButtonItems = [.fixedSpace(14),
+                                              UIBarButtonItem(customView: button)]
     }
 
     private func loadSite(_ socialPlatform: ProfileSocialPlatform) {
@@ -416,7 +416,7 @@ extension MaskConnectingSocialViewController {
     }
     
     @objc
-    private func dashboardBarButtonItem(_ sender: UIBarButtonItem) {
+    private func dashboardBarButtonItem() {
         navigationController?.popViewController(animated: true)
     }
 }

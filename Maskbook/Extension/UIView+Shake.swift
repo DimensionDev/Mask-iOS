@@ -67,7 +67,6 @@ extension UIView {
     func shake() {
         shake(times: 5,
               direction: 1,
-              currentTimes: 0,
               delta: 5,
               interval: 0.03,
               shakeDirection: .horizontal,
