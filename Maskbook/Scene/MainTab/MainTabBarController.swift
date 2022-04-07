@@ -129,9 +129,9 @@ extension MainTabBarController {
         } else {
             // replace navigation stack of tab
             selectedIndex = selectedIndex
-            if tab.rawValue == selectedIndex, self.tabBar.isHidden {
-                self.tabBar.isHidden = false
-            }
+        }
+        if self.tabBar.isHidden {
+            self.tabBar.isHidden = false
         }
     }
     
