@@ -35,14 +35,14 @@ struct WelcomeIdentityEmptyView: View {
                         scene: .personaWelcome,
                         transition: .detail(animated: true)
                     )
-                }, title: L10n.Scene.WelcomeIdentityEmpty.createAPersona)
+                }, title: L10n.Scene.WelcomeIdentityEmpty.createAPersona, animating: false, isEnable: false)
                 
                 PrimaryButton(action: {
                     coordinator.present(
                         scene: .identityRecovery(from: .initilisation),
                         transition: .detail(animated: true)
                     )
-                }, title: L10n.Scene.WelcomeIdentityEmpty.recoverYourPersona)
+                }, title: L10n.Scene.WelcomeIdentityEmpty.recoverYourPersona, animating: false, isEnable: false)
             }
         }
         .padding(.horizontal, LayoutConstraints.horizontal)

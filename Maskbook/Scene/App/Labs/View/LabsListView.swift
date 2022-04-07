@@ -13,7 +13,7 @@ struct LabsListView: View {
                 ForEach(plugins) { plugin in
                     ItemView(
                         plugin: plugin,
-                        enabled: plugin == .transaction,
+                        enabled: plugin.isEnable,
                         whenTapped: { plugin in
                             viewModel.pluginSignal.send(plugin)
                         }
@@ -27,8 +27,8 @@ struct LabsListView: View {
     private var plugins: [PluginType] {
         [
             .transaction,
-            .ito,
             .luckyDrop,
+            .ito,
             .swap,
             .fileService
         ]

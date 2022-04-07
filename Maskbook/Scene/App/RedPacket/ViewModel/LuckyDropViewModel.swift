@@ -276,6 +276,19 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         nextButtonTypes[.send] = false
         nextButtonTypes[.sending] = true
         processNextButton()
+        
+//        let param = HappyRedPacketV4.CreateRedPacketInput(
+//            publicKey: <#T##EthereumAddress#>,
+//            number: <#T##BigUInt#>,
+//            ifrandom: <#T##Bool#>,
+//            duration: <#T##BigUInt#>,
+//            seed: <#T##[UInt8]#>,
+//            message: <#T##String#>,
+//            tokenType: <#T##BigUInt#>,
+//            tokenAddr: <#T##EthereumAddress#>,
+//            totalTokens: <#T##BigUInt#>
+//        )
+//        ABI.happyRedPacketV4.createRedPacket(param: HappyRedPacketV4.CreateRedPacketInput)
     }
     
     func processAmountInput(value: String) {

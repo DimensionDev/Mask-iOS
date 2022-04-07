@@ -37,9 +37,7 @@ struct LuckyDropView: View {
                                 viewModel.removeButtonType(type: .riskWarning)
                                 
                             case .unlockToken: viewModel.approveToken()
-                            case .unlockingToken: break
-                            case .send: break //TODO: send action
-                            case .sending: break
+                            case .send: viewModel.send()
                             default: break
                             }
                         },
