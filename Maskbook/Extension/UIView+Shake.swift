@@ -93,14 +93,15 @@ extension UIView {
                 } completion: { _ in
                     handler()
                 }
+            } else {
+                self.shake(times: times,
+                      direction: direction * -1,
+                      currentTimes: currentTimes + 1,
+                      delta: delta,
+                      interval: interval,
+                      shakeDirection: shakeDirection,
+                      handler: handler)
             }
         }
-        shake(times: times,
-              direction: direction * -1,
-              currentTimes: currentTimes + 1,
-              delta: delta,
-              interval: interval,
-              shakeDirection: shakeDirection,
-              handler: handler)
     }
 }
