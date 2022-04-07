@@ -10,6 +10,10 @@ jobs:
   deploy:
     runs-on: macos-latest
     steps:
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
       - uses: actions/checkout@v2
 
       - name: Set up ruby env
