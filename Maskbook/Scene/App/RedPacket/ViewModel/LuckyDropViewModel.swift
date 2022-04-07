@@ -18,10 +18,7 @@ import PromiseKit
 class LuckyDropViewModel: NSObject, ObservableObject {
     // MARK: - Public property
     @Published var quantityStr = ""
-    // to be used in avaerage mode
-    @Published var amountPerShareStr = ""
-    // to be used in random mode
-    @Published var amountTotalShareStr = ""
+    @Published var amountStr = ""
     @Published var message = ""
     @Published var mode = RedPacket.RedPacketType.average
     @Published var token: Token?
@@ -93,22 +90,14 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         var result: NSDecimalNumber
         if mode == .average {
             let quantity = NSDecimalNumber(string: quantityStr)
-            let amountPerShare = NSDecimalNumber(string: amountPerShareStr)
+            let amountPerShare = NSDecimalNumber(string: amountStr)
             guard quantity != .notANumber && amountPerShare != .notANumber else {
                 return .zero
             }
             result = quantity.multiplying(by: amountPerShare)
         } else {
-            result = NSDecimalNumber(string: amountTotalShareStr)
+            result = NSDecimalNumber(string: amountStr)
         }
-//        Task {
-//            await MainActor.run {
-//                if let gasFeeItem = gasFeeItem {
-//                    processInsufficientBalanceButton(gasFeeItem: gasFeeItem)
-//                }
-//                processAproveButton()
-//            }
-//        }
         return result != .notANumber ? result : .zero
     }
     
@@ -169,6 +158,14 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         return quantity.doubleValue > 255
     }
     
+    var amountPlaceholder: String {
+        if mode == .average {
+            return L10n.Plugins.Luckydrop.amountPerShare
+        } else {
+            return L10n.Plugins.Luckydrop.totalAmount
+        }
+    }
+    
     // MARK: - Private property
     private var disposeBag = Set<AnyCancellable>()
     @InjectedProvider(\.walletAssetManager)
@@ -181,30 +178,22 @@ class LuckyDropViewModel: NSObject, ObservableObject {
     private var mainCoordinator
     private var nextButtonTypes: [ConfirmButtonType: Bool] = [:]
     lazy var totalQuantityPublisher: AnyPublisher<NSDecimalNumber, Never> = {
-        // average
         let quantityPublisher = $quantityStr.compactMap {
             NSDecimalNumber(string: $0)
         }.filter { number in
             number != .notANumber
         }
-        let amountPerSharePublisher = $amountPerShareStr.compactMap {
+        let amountPerSharePublisher = $amountStr.compactMap {
             NSDecimalNumber(string: $0)
         }.filter { number in
             number != .notANumber
         }
         let averageTotal = Publishers.CombineLatest(quantityPublisher, amountPerSharePublisher)
-            .compactMap {
-                NSDecimalNumber(value: $0.doubleValue * $1.doubleValue)
-            }
-        
-        // random
-        let randomTotal = $amountTotalShareStr.compactMap {
-            NSDecimalNumber(string: $0)
-        }.filter { number in
-            number != .notANumber
+        .compactMap {
+            NSDecimalNumber(value: $0.doubleValue * $1.doubleValue)
         }
         
-        return Publishers.Merge(averageTotal, randomTotal).eraseToAnyPublisher()
+        return averageTotal.eraseToAnyPublisher()
     }()
     
     // MARK: - Public method
@@ -234,22 +223,22 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         case .average:
             let quantity = NSDecimalNumber(string: quantityStr)
             guard quantity != .notANumber else {
-                amountPerShareStr = ""
+                amountStr = ""
                 return
             }
             let result = amount.dividing(by: quantity)
             guard result != .notANumber else {
-                amountPerShareStr = ""
+                amountStr = ""
                 return
             }
-            amountPerShareStr = result.stringValue
+            amountStr = result.stringValue
             
         case .random:
             guard amount != .notANumber else {
-                amountTotalShareStr = ""
+                amountStr = ""
                 return
             }
-            amountTotalShareStr = amount.stringValue
+            amountStr = amount.stringValue
         }
     }
     
@@ -277,6 +266,16 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         nextButtonTypes[.sending] = true
         processNextButton()
         
+        /*
+         // seconds of 1 day
+         const duration = 60 * 60 * 24
+         
+         const seed = Math.random().toString(
+         seed: Web3Utils.sha3(seed)!
+         
+         // 不能小于1份
+         const isDivisible = !totalAmount.dividedBy(shares).isLessThan(1)
+         */
 //        let param = HappyRedPacketV4.CreateRedPacketInput(
 //            publicKey: <#T##EthereumAddress#>,
 //            number: <#T##BigUInt#>,
@@ -289,6 +288,8 @@ class LuckyDropViewModel: NSObject, ObservableObject {
 //            totalTokens: <#T##BigUInt#>
 //        )
 //        ABI.happyRedPacketV4.createRedPacket(param: HappyRedPacketV4.CreateRedPacketInput)
+        
+       // 默认message
     }
     
     func processAmountInput(value: String) {
@@ -312,7 +313,7 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         let roundedNum = num.rounding(accordingToBehavior: roundBehavior)
         let processed = roundedNum == .notANumber ? "" : roundedNum.stringValue
         guard processed != value else { return }
-        amountPerShareStr = processed
+        amountStr = processed
     }
     
     // MARK: - Private method

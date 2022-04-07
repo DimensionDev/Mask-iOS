@@ -118,6 +118,7 @@ access your camera";
 "Common.Loading" = "Loading...";
 "Common.Toast.Copy" = "copied!";
 "Common.Toast.Saved" = "Saved!";
+"Plugins.Luckydrop.Amount-Per-Share" = "Amount per share";
 "Plugins.Luckydrop.Buttons.Average" = "Average";
 "Plugins.Luckydrop.Buttons.Create-Persona" = "Create Persona";
 "Plugins.Luckydrop.Buttons.Exceed-Max-Quantity" = "Enter Quantity(Max: 255)";

@@ -86,21 +86,14 @@ struct LuckyDropTokens: View {
             }
             .disabled(!viewModel.maxButtonEnable)
             Spacer()
-            if viewModel.mode == .average {
-                TextField(L10n.Plugins.Luckydrop.totalAmount, text: $viewModel.amountPerShareStr)
-                    .onReceive(
-                        Just(viewModel.amountPerShareStr),
-                        perform: viewModel.processAmountInput
-                    )
-                    .keyboardType(.decimalPad)
-                    .multilineTextAlignment(.trailing)
-                    .frame(maxHeight: .infinity)
-            } else {
-                TextField(L10n.Plugins.Luckydrop.totalAmount, text: $viewModel.amountTotalShareStr)
-                    .keyboardType(.numbersAndPunctuation)
-                    .multilineTextAlignment(.trailing)
-                    .frame(maxHeight: .infinity)
-            }
+            TextField(viewModel.amountPlaceholder, text: $viewModel.amountStr)
+                .onReceive(
+                    Just(viewModel.amountStr),
+                    perform: viewModel.processAmountInput
+                )
+                .keyboardType(.decimalPad)
+                .multilineTextAlignment(.trailing)
+                .frame(maxHeight: .infinity)
         }
         .frame(height: 52)
         .padding(.horizontal, 16)

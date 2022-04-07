@@ -895,6 +895,7 @@
             },
             "max": "MAX",
             "total-amount": "Total Amount",
+            "amount-per-share": "Amount per share",
             "enter-quantity": "Enter quantity",
             "enter-message": "Enter attached message",
             "transaction-fee": "Transaction fee",
