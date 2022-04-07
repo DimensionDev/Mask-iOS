@@ -27,6 +27,7 @@ struct LuckyDropView: View {
                             case .unlock:
                                 Coordinator.main.present(
                                     scene: .walletUnlock(cancellable: true) { error in
+                                        guard error == nil else { return }
                                         viewModel.removeButtonType(type: .unlock)
                                     },
                                     transition: .modal(animated: true, adaptiveDelegate: nil)

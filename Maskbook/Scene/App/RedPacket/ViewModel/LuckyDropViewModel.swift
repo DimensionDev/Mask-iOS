@@ -21,9 +21,28 @@ class LuckyDropViewModel: NSObject, ObservableObject {
     @Published var amountStr = ""
     @Published var message = ""
     @Published var mode = RedPacket.RedPacketType.average
-    @Published var token: Token?
+    @Published var token: Token? {
+        didSet {
+            allowance = nil
+            guard token?.isMainToken != true else { return }
+            Task {
+                self.allowance = await self.getAllowance()
+            }
+        }
+    }
     @Published var gasFeeItem: GasFeeCellItem?
     @Published var buttonType: ConfirmButtonType = .send
+    @Published var allowance: BigUInt? = nil {
+        didSet {
+            // ERC20 Token should request allowance
+            nextButtonTypes[.requestAllowance] = token?.isMainToken != true && allowance == nil
+            // 4. check allowance of tokens in cases:
+            // - *change token
+            // - update total token
+            processAproveButton()
+            processNextButton()
+        }
+    }
     
     var gasFeeViewModel = GasFeeViewModel()
     
@@ -328,9 +347,6 @@ class LuckyDropViewModel: NSObject, ObservableObject {
             nextButtonTypes[.riskWarning] = true
         }
         
-        // 4. unlock tokens
-        processAproveButton()
-        
         // 7. send
         nextButtonTypes[.send] = true
     }
@@ -346,45 +362,51 @@ class LuckyDropViewModel: NSObject, ObservableObject {
     }
     
     private func processAproveButton() {
-        guard let fromAddress = maskUserDefaults.defaultAccountAddress,
-              let originalOwner = EthereumAddress(fromAddress) else {
-                  return
-              }
-        guard let web3 = Web3ProviderFactory.provider else { return }
-        guard let contractAddressStr = token?.contractAddress,
-              let contractAddress = EthereumAddress(contractAddressStr) else {
-                  return
-              }
-        guard let luckyDropAddressStr = luckyDropAddressStr,
-              let luckyDropAddress = EthereumAddress(luckyDropAddressStr) else {
-                  return
-              }
+        guard let allowance = allowance else {
+            updateUnlockTokenButton(false)
+            return
+        }
         guard let token = token else {
+            updateUnlockTokenButton(false)
             return
         }
         let decimal = token.decimal
+        guard let sendAmount = Web3.Utils.parseToBigUInt("\(totalQuantity)", decimals: Int(decimal)) else {
+            updateUnlockTokenButton(false)
+            return
+        }
+        guard allowance < sendAmount else {
+            updateUnlockTokenButton(false)
+            return
+        }
+        updateUnlockTokenButton(true)
+    }
+    
+    @MainActor
+    private func getAllowance() async -> BigUInt? {
+        guard let fromAddress = maskUserDefaults.defaultAccountAddress,
+              let originalOwner = EthereumAddress(fromAddress) else {
+                  return nil
+              }
+        guard let web3 = Web3ProviderFactory.provider else { return nil }
+        guard let contractAddressStr = token?.contractAddress,
+              let contractAddress = EthereumAddress(contractAddressStr) else {
+                  return nil
+              }
+        guard let luckyDropAddressStr = luckyDropAddressStr,
+              let luckyDropAddress = EthereumAddress(luckyDropAddressStr) else {
+                  return nil
+              }
         let erc20 = ERC20(web3: web3, provider: web3.provider, address: contractAddress)
         
-        Task {
-            guard let sendAmount = Web3.Utils.parseToBigUInt("\(totalQuantity)", decimals: Int(decimal)) else {
-                await updateUnlockTokenButton(false)
-                return
+        return await withCheckedContinuation { continuation in
+            Task.detached {
+                guard let allowance = try? erc20.getAllowance(originalOwner: originalOwner, delegate: luckyDropAddress) else {
+                    continuation.resume(returning: nil)
+                    return
+                }
+                continuation.resume(returning: allowance)
             }
-            
-            guard let allowance = try? erc20.getAllowance(originalOwner: originalOwner, delegate: luckyDropAddress) else {
-                return
-            }
-            
-            await MainActor.run {
-                log.debug("allowance \(Int(allowance)) send: \(totalQuantity) decimals: \(decimal)", source: "lucky drop")
-            }
-            
-            guard allowance < sendAmount else {
-                await updateUnlockTokenButton(false)
-                return
-            }
-            
-            await updateUnlockTokenButton(true)
         }
     }
     
@@ -414,7 +436,6 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         }
     }
     
-    @MainActor
     private func updateUnlockTokenButton(_ value: Bool) {
         nextButtonTypes[.unlockToken] = value
         processNextButton()
@@ -468,6 +489,21 @@ class LuckyDropViewModel: NSObject, ObservableObject {
     }
     
     private func setupObserversForConfirmButton() {
+        // 1. unlock
+        settings.$passwordExpiredDate.sink { [weak self] expiredDate in
+            guard let self = self else { return }
+            
+            if self.settings.isPasswordExpried(expiredDate) && self.nextButtonTypes[.unlock] != true {
+                self.nextButtonTypes[.unlock] = true
+            } else if !self.settings.isPasswordExpried(expiredDate) && self.nextButtonTypes[.unlock] == true {
+                self.nextButtonTypes[.unlock] = false
+            }
+        }
+        .store(in: &disposeBag)
+        
+        // 4. check allowance of tokens in cases:
+        // - change token
+        // - *update total token
         totalQuantityPublisher.asDriver().sink { [weak self] totalSend in
             self?.processAproveButton()
             self?.processNextButton()
@@ -475,8 +511,8 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         .store(in: &disposeBag)
         
         Publishers.CombineLatest(
-            $gasFeeItem.compactMap({ $0 }).print("[confirmButton]"),
-            totalQuantityPublisher.print("[confirmButton]")
+            $gasFeeItem.compactMap({ $0 }),
+            totalQuantityPublisher
         ).sink { [weak self] gasFeeItem, totalQuantity in
             self?.processInsufficientBalanceButton(gasFeeItem: gasFeeItem)
             self?.processNextButton()
@@ -491,18 +527,6 @@ class LuckyDropViewModel: NSObject, ObservableObject {
             self?.processNextButton()
         }
         .store(in: &disposeBag)
-        
-        // 1. unlock
-        settings.$passwordExpiredDate.sink { [weak self] expiredDate in
-            guard let self = self else { return }
-            
-            if self.settings.isPasswordExpried(expiredDate) && self.nextButtonTypes[.unlock] != true {
-                self.nextButtonTypes[.unlock] = true
-            } else if !self.settings.isPasswordExpried(expiredDate) && self.nextButtonTypes[.unlock] == true {
-                self.nextButtonTypes[.unlock] = false
-            }
-        }
-        .store(in: &disposeBag)
     }
 }
 
@@ -515,8 +539,6 @@ extension LuckyDropViewModel: GasFeeBackDelegate {
 extension LuckyDropViewModel: ChooseTokenBackDelegate {
     func chooseTokenAction(token: Token) {
         self.token = token
-        processConfirmButtonTypes()
-        processNextButton()
     }
     
     func chooseNFTTokenAction(token: Collectible) {
@@ -529,13 +551,13 @@ extension LuckyDropViewModel {
         case unlock
         case riskWarning
         case insufficientGas
+        case requestAllowance
         case unlockToken
         case unlockingToken
         case insufficientBalance
         case exceedMaxQuantity
         // TODO: send text
         case send
-        // TODO: sending text
         case sending
         
         func title(token: Token?) -> String {
@@ -543,6 +565,7 @@ extension LuckyDropViewModel {
             case .unlock: return L10n.Scene.WalletUnlock.title
             case .riskWarning: return L10n.Plugins.Luckydrop.Buttons.riskWarning
             case .insufficientGas: return L10n.Plugins.Luckydrop.Buttons.insufficientGas
+            case .requestAllowance: return ""
             case .unlockToken: return L10n.Plugins.Luckydrop.Buttons.unlockToken(token?.symbol ?? "")
             case .unlockingToken: return L10n.Plugins.Luckydrop.Buttons.unlockingToken
             case .insufficientBalance: return L10n.Plugins.Luckydrop.Buttons.insufficientBalance
@@ -564,7 +587,7 @@ extension LuckyDropViewModel {
         
         var animating: Bool {
             switch self {
-            case .unlockingToken, .sending:
+            case .unlockingToken, .sending, .requestAllowance:
                 return true
                 
             default:
