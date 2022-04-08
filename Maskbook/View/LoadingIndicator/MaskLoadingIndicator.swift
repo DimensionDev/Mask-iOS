@@ -64,10 +64,40 @@ final class MaskLoadingIndicator: NiblessView {
         layer.sublayers?.forEach { $0.removeFromSuperlayer() }
         layer.sublayers = nil
         let bounds = padding.isZero
-            ? frame
-            : frame.inset(by: UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding))
+        ? frame
+        : frame.inset(by: UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding))
 
         animator.startAnimation(for: self, layoutIn: bounds)
+    }
+}
+
+struct LoadingIndicator: UIViewRepresentable {
+    final class Coordinator {
+        var loading: Bool
+
+        init(loading: Bool) {
+            self.loading = loading
+        }
+    }
+
+    var loading: Bool
+
+    init(loading: Bool) {
+        self.loading = loading
+    }
+
+    func makeUIView(context: Context) -> MaskLoadingIndicator {
+        MaskLoadingIndicator()
+    }
+
+    func updateUIView(_ uiView: MaskLoadingIndicator, context: Context) {
+        context.coordinator.loading
+        ? uiView.startAnimation()
+        : uiView.stopAnimation()
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(loading: loading)
     }
 }
 
@@ -82,7 +112,6 @@ struct MaskLoadingIndicatorPreview: PreviewProvider {
             }
         }
         .previewLayout(.fixed(width: 32, height: 32))
-        .colorScheme(.dark)
     }
 }
 #endif

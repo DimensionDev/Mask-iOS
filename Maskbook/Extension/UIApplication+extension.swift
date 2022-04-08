@@ -12,4 +12,8 @@ extension UIApplication {
     var isRunningUnitTest: Bool {
         NSClassFromString("XCTestCase") != nil
     }
+
+    var isRunningPreivew: Bool {
+        ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
+    }
 }

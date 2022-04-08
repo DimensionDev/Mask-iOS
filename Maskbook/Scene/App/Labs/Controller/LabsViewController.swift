@@ -54,7 +54,9 @@ final class LabsViewController: BaseViewController {
 
     @objc
     fileprivate func configPluginSettings() {
-        self.coordinator.present(scene: .pluginConfiguration, transition: .detail())
+//        self.coordinator.present(scene: .pluginConfiguration, transition: .detail())
+
+        self.navigationController?.pushViewController(LuckDropHistoryController(), animated: true)
     }
 }
 

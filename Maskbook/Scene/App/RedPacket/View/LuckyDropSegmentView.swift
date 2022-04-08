@@ -29,7 +29,7 @@ struct LuckyDropSegmentView: View {
         .background(Asset.Colors.Background.selected.asColor().cornerRadius(8))
         .measureSize(to: $segmentSize)
     }
-    
+
     @ViewBuilder
     var segmentBackground: some View {
         Asset.Colors.Background.tab.asColor().cornerRadius(8)

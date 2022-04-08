@@ -83,10 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Disable section header padding on iOS 15
             UITableView.appearance().sectionHeaderTopPadding = 0
         }
-        
-        _ = AppContext.shared
-        walletAssetManager.connect()
-        
+
 //        #if DEBUG
 //        SplashViewController.didPresentWizard = false
 //        #endif
@@ -95,10 +92,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if DEBUG
         // use XCODE_RUNNING_FOR_PREVIEWS to detect preview proccess
         // skip complex logic for window to ensure preview work as expected
-        if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] != "1" {
+        if !application.isRunningPreivew {
+            _ = AppContext.shared
+            walletAssetManager.connect()
             mainCoordinator.setup(window: window)
         }
         #else
+        _ = AppContext.shared
+        walletAssetManager.connect()
         mainCoordinator.setup(window: window)
         #endif
 //        mainCoordinator.present(scene: .root(window: window, scene: .welcome), transition: .root)
