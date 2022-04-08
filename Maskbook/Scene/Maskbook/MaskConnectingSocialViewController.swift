@@ -184,6 +184,11 @@ extension MaskConnectingSocialViewController {
         loadSite(socialPlatform)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.post(name: Notification.Name.connectingViewWillDisappear, object: nil)
+    }
+    
     private func setupNavigationBar() {
         navigationItem.title = socialPlatform.shortName
         let button = UIButton(type: .custom)
