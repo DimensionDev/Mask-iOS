@@ -58,6 +58,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var disposeBag = Set<AnyCancellable>()
     
+    var isFisrtLaunch: Bool = false
+    
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
@@ -87,9 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = AppContext.shared
         walletAssetManager.connect()
         
-//        #if DEBUG
-//        SplashViewController.didPresentWizard = false
-//        #endif
+        initilizeUserDefault()
         
         // Coordinate to root
         #if DEBUG
@@ -101,9 +101,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #else
         mainCoordinator.setup(window: window)
         #endif
-//        mainCoordinator.present(scene: .root(window: window, scene: .welcome), transition: .root)
-
-        initilizeUserDefault()
 
         // Enable orientation notification for QR scaner
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
@@ -198,6 +195,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate {
     private func initilizeUserDefault() {
+        if userDefaultSettings.appVersion == "2.0.0" {
+            isFisrtLaunch = true
+        }
         userDefaultSettings.appVersion = UIApplication.appVersion()
         userDefaultSettings.appBuild = UIApplication.appBuild()
         

@@ -51,7 +51,6 @@ final class UserDefaultSettings {
     }
 
     enum Keys: String, CaseIterable {
-        case didPresentWizard = "did_present_wizard"
         case defaultAccountAddress = "mask_wallet_default_account_address"
         case enableBiometryID = "enable_biometry_id"
         case userInterfaceStyle = "user_interface_style"
@@ -86,9 +85,6 @@ final class UserDefaultSettings {
         case jsResourceIsUsingBundle
         case jsDocumentResourceSelectedCommitHash
         
-        // if this flag return true, the `GuideView` should not be presented.
-        case hasShownGuide
-        
         case backupFileDetectDate
     }
 
@@ -111,12 +107,7 @@ final class UserDefaultSettings {
         backupDate = nil
         backupAlertDate = nil
         indexedDBDataMigrated = false
-        hasShownGuide = false
     }
-
-    /// Indicates whether or not the user has seen the onboarding. Default value is **false**
-    @ReactiveUserDefault(key: .didPresentWizard, defaultValue: false)
-    var didPresentWizard: Bool
 
     @OptionalUserDefault(key: .defaultAccountAddress)
     var defaultAccountAddress: String?
@@ -328,9 +319,6 @@ final class UserDefaultSettings {
     
     @ReactiveUserDefault(key: Keys.jsResourceIsUsingBundle.rawValue, defaultValue: true)
     var jsResourceIsUsingBundle: Bool
-    
-    @ReactiveUserDefault(key: Keys.hasShownGuide.rawValue, defaultValue: false)
-    var hasShownGuide: Bool
     
     @OptionalUserDefault(key: Keys.backupFileDetectDate.rawValue)
     var backupFileDetectDate: Date?
