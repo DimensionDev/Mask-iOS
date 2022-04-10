@@ -577,6 +577,10 @@ enum L10n {
       static var skip: String {
         return L10n.tr("Localizable", "Common.Controls.Skip")
       }
+      /// Speed Up
+      static var speedUp: String {
+        return L10n.tr("Localizable", "Common.Controls.SpeedUp")
+      }
       /// Take a photo
       static var takePhoto: String {
         return L10n.tr("Localizable", "Common.Controls.TakePhoto")
@@ -1749,6 +1753,10 @@ enum L10n {
         /// Add Contact
         static var btnAdd: String {
           return L10n.tr("Localizable", "Scene.Sendtransaction.Addcontact.BtnAdd")
+        }
+        /// Pending...
+        static var pending: String {
+          return L10n.tr("Localizable", "Scene.Sendtransaction.Addcontact.Pending")
         }
         /// Name
         static var placeholderName: String {

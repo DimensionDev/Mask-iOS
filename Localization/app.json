@@ -177,7 +177,8 @@
             "move_data_now": "Move data now",
             "remind_me_later": "Remind me later",
             "go_settings": "To Settings",
-            "dont_allow": "Don’t Allow"
+            "dont_allow": "Don’t Allow",
+            "speed_up":"Speed Up"
         },
         "toast": {
             "saved": "Saved!",
@@ -458,7 +459,8 @@
         	},
         	"addContact":{
         		"btn_add":"Add Contact",
-        		"placeholder_name":"Name"
+        		"placeholder_name":"Name",
+                "pending":"Pending..."
         	},
             "tokenList":{
                 "title":"Search Token",

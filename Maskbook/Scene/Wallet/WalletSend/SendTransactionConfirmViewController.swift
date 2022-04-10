@@ -473,8 +473,11 @@ class SendTransactionConfirmViewController: BaseViewController {
                 guard let gasPrice = gasPrice else { return }
                 guard let price = gasFeeToken?.price else { return }
                 let gasFee = EthUtil.getGasFee(gwei: gasPrice, gasLimit: gasLimit, price: price.doubleValue)
-                self?.feeButton.setTitle("\(L10n.Scene.Sendtransaction.Gasprice.fee) :\(maskUserDefaults.currency.symbol)\(gasFee)", for: .normal)
-                
+                if NSDecimalNumber(string: gasFee).compare(NSDecimalNumber(string: "0.01")) == .orderedAscending {
+                    self?.feeButton.setTitle("\(L10n.Scene.Sendtransaction.Gasprice.fee) :\(maskUserDefaults.currency.symbol)< 0.01", for: .normal)
+                }else {
+                    self?.feeButton.setTitle("\(L10n.Scene.Sendtransaction.Gasprice.fee) :\(maskUserDefaults.currency.symbol)\(gasFee)", for: .normal)
+                }                
                 guard let totalAmount = gasFeeToken?.displayQuantity else { return }
                 guard let gas = Web3.Utils.formatToEthereumUnits(gasPrice * gasLimit, toUnits: .eth, decimals: 6) else { return }
                 let isShow = NSDecimalNumber(string: gas).compare(totalAmount) == .orderedDescending
@@ -539,7 +542,7 @@ class SendTransactionConfirmViewController: BaseViewController {
         
         if amount.isNotEmpty {
             Coordinator.main.present(
-                scene: .sendTransactionPopConfirm(sendConfirmViewModel: self.viewModel, toAddress: toAddress, amount: amount),
+                scene: .sendTransactionPopConfirm(sendConfirmViewModel: self.viewModel, toAddress: toAddress, amount: amount, nonce: nil),
                 transition: .panModel(animated: true))
         }
     }

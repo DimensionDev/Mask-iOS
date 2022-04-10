@@ -13,6 +13,8 @@ import PanModal
 import UIKit
 import UStack
 import web3swift
+import CoreDataStack
+import WebExtension_Shim
 
 enum SendStatus {
     case ready
@@ -44,6 +46,7 @@ final class SendTransactionCofirmPopViewController: UIViewController {
     var viewModel: ViewModel
     let toAddress: String?
     let amount: String
+    let nonce: BigUInt?
     
     var sendStatus: SendStatus = .ready {
         didSet {
@@ -98,7 +101,6 @@ final class SendTransactionCofirmPopViewController: UIViewController {
         label.textColor = Asset.Colors.Text.dark.color
         label.font = FontStyles.MH6
         label.snp.makeConstraints { $0.height.equalTo(24) }
-
         return label
     }()
     
@@ -258,10 +260,11 @@ final class SendTransactionCofirmPopViewController: UIViewController {
         $0.backgroundColor = Asset.Colors.Background.normal.color
     }
     
-    init(sendConfirmViewModel: SendConfirmViewModel, toAddress: String, amount: String) {
+    init(sendConfirmViewModel: SendConfirmViewModel, toAddress: String, amount: String, nonce: BigUInt?) {
         self.viewModel = SendTransactionConfirmViewModel(selectedToken: sendConfirmViewModel.selectedTokenPublisher.value, gasPrice: sendConfirmViewModel.gasPricePublisher.value, gasLimit: sendConfirmViewModel.gasLimitPublisher.value, gasFeeNetModel: sendConfirmViewModel.gasFeeNetModelTokenPublisher.value)
         self.toAddress = toAddress
         self.amount = amount
+        self.nonce = nonce
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -311,8 +314,15 @@ final class SendTransactionCofirmPopViewController: UIViewController {
                      self.gasFeeEthLabel.text = "\(costEth) \(maskUserDefaults.network.mainToken?.symbol ?? "")"
                      let tokenValue = NSDecimalNumber(string: self.viewModel.selectedTokenPublisher.value?.calculateAmountValue(quantity: self.amount))
                      let gasValue = NSDecimalNumber(string: EthUtil.getGasFee(gwei: gasPriceValue, gasLimit: gasLimitValue, price: token?.price as! Double))
+                     
                      let roundBehavior = NSDecimalNumberHandler(roundingMode: .plain, scale: 2, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
-                     self.totalPriceLabel.text = "\(maskUserDefaults.currency.symbol)\(tokenValue.adding(gasValue).rounding(accordingToBehavior: roundBehavior).stringValue)"
+                     let totalValue = tokenValue.adding(gasValue).rounding(accordingToBehavior: roundBehavior)
+                     if totalValue.compare(NSDecimalNumber(string: "0.01")) == .orderedAscending{
+                         self.totalPriceLabel.text = "\(maskUserDefaults.currency.symbol) < 0.01"
+                     } else{
+                         self.totalPriceLabel.text = "\(maskUserDefaults.currency.symbol)\(totalValue.stringValue)"
+                     }
+                  
                  }
                 .store(in: &disposeBag)
         
@@ -332,15 +342,48 @@ final class SendTransactionCofirmPopViewController: UIViewController {
     private func handleConfirmClicked(password: String) {
                 guard let fromAddress = maskUserDefaults.defaultAccountAddress  else { print("fromAddress is illegal"); return }
                 guard let toAddress = self.toAddress else { print("address is empty"); return }
+                guard let token = self.viewModel.selectedTokenPublisher.value else { return }
+
 
                 self.sendStatus = .sending
-                self.viewModel.sendTransaction(password: password, amount: self.amount, toAddress: toAddress, fromAddress: fromAddress) { [weak self] result in
+                
+        if (self.nonce != nil) {
+            self.viewModel.sendTransaction(password: password, amount: self.amount, toAddress: toAddress, fromAddress: fromAddress, nonce: self.nonce!) { [weak self] result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let txhash):
+                        self?.sendStatus = .sent
+                        let recentAddress = RecentlyAddress(address: toAddress, chainId: Int64(maskUserDefaults.network.networkId))
+                        maskUserDefaults.addRecentlyAddress(address: recentAddress)
+                        let transactionInfo = PendTransactionModel.TranscationInfo(gaslimit: self?.viewModel.gasLimitPublisher.value, gasPrice: self?.viewModel.gasPricePublisher.value, amount: self?.amount ?? "0", toAddress: toAddress, gasNetModel: self?.viewModel.gasFeeNetModelTokenPublisher.value, token: token)
+                        let history = TransactionHistory(txHash: txhash ?? "", asset: token, toAddress: toAddress, amount: self?.amount ?? "0")
+                        PendTransactionManager.shared.addPendTrancation(txHash: txhash ?? "", history: history, transcationInfo:transactionInfo, nonce: self?.nonce ?? BigUInt(0))
+                        self?.dismiss(animated: true, completion: {
+                            Coordinator.main.present(scene: .balance, transition: .replaceCurrentNavigation(tab: .wallet, animated: true)) {
+                                Coordinator.main.present(scene: .walletHistory, transition: .detail(animated: true))
+                            }
+                        })
+                        
+                    case .failure(let error):
+                        self?.sendStatus = .ready
+                        let alertController = AlertController(title: error.localizedDescription, message: "", confirmButtonText: L10n.Common.Controls.done, imageType: .error)
+                        Coordinator.main.present(scene: .alertController(alertController: alertController), transition: .alertController(completion: nil))
+                    }
+                }
+            }
+
+        } else {
+            Web3ProviderFactory.provider?.eth.getTransactionCountPromise(address: fromAddress).done({ nonce in
+                self.viewModel.sendTransaction(password: password, amount: self.amount, toAddress: toAddress, fromAddress: fromAddress, nonce: nonce) { [weak self] result in
                     DispatchQueue.main.async {
                         switch result {
-                        case .success:
+                        case .success(let txhash):
                             self?.sendStatus = .sent
                             let recentAddress = RecentlyAddress(address: toAddress, chainId: Int64(maskUserDefaults.network.networkId))
-                            maskUserDefaults.addRecentlyAddress(address: recentAddress)                            
+                            maskUserDefaults.addRecentlyAddress(address: recentAddress)
+                            let transactionInfo = PendTransactionModel.TranscationInfo(gaslimit: self?.viewModel.gasLimitPublisher.value, gasPrice: self?.viewModel.gasPricePublisher.value, amount: self?.amount ?? "0", toAddress: toAddress, gasNetModel: self?.viewModel.gasFeeNetModelTokenPublisher.value, token: token)
+                            let history = TransactionHistory(txHash: txhash ?? "", asset: token, toAddress: toAddress, amount: self?.amount ?? "0")
+                            PendTransactionManager.shared.addPendTrancation(txHash: txhash ?? "", history: history, transcationInfo:transactionInfo, nonce: nonce)
                             self?.dismiss(animated: true, completion: {
                                 Coordinator.main.present(scene: .balance, transition: .replaceCurrentNavigation(tab: .wallet, animated: true)) {
                                     Coordinator.main.present(scene: .walletHistory, transition: .detail(animated: true))
@@ -354,6 +397,8 @@ final class SendTransactionCofirmPopViewController: UIViewController {
                         }
                     }
                 }
+            })
+        }
     }
 }
 
@@ -419,3 +464,41 @@ extension SendTransactionCofirmPopViewController: PanModalPresentable {
         false
     }
 }
+
+// swiftlint:disable line_length
+extension TransactionHistory {
+    init(txHash: String,
+         asset: Token,
+         toAddress: String,
+         amount: String) {
+
+        self.id = txHash
+        self.type = .send
+        self.status = .pending
+        self.name = self.type.rawValue
+        self.gasFee = nil
+        self.gasPrice = nil
+        let time = Int(round(Date().timeIntervalSince1970))
+        self.timeAt = TimeInterval(time)
+        let historyAsset = TransactionHistory.Asset(assetCode: asset.identifier ?? "",
+                                                    decimals: Int(asset.decimal),
+                                                    iconUrl: URL(string: asset.logoUrl ?? ""),
+                                                    price: (asset.price ?? Decimal.zero as NSDecimalNumber) as Decimal,
+                                                    isDisplayable: true,
+                                                    isVerified: true,
+                                                    name: asset.name,
+                                                    symbol: asset.symbol ?? "",
+                                                    type: nil)
+        
+        let value = NSDecimalNumber(string: amount).multiplying(byPowerOf10: asset.decimal)
+        
+        let change = TransactionHistory.TransactionChange(asset: historyAsset,
+                                                          value:value as Decimal,
+                                                          address_from: maskUserDefaults.defaultAccountAddress ?? "",
+                                                          address_to: toAddress,
+                                                          price: historyAsset.price)
+        self.change = change
+    }
+}
+// swiftlint:enable line_length file_length
+

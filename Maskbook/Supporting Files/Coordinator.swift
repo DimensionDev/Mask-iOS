@@ -98,7 +98,7 @@ class Coordinator {
         case walletBackup(account: Account)
         case walletUnlock(cancellable: Bool, completion: ((Error?) -> Void)?)
         case sendTransaction(param: SendTransactionParam?)
-        case sendTransactionPopConfirm(sendConfirmViewModel: SendConfirmViewModel, toAddress: String, amount: String)
+        case sendTransactionPopConfirm(sendConfirmViewModel: SendConfirmViewModel, toAddress: String, amount: String, nonce: BigUInt?)
         case sendTransactionConfirm(param: WalletContactParam, tokenId: String?)
         case sendNFTTransactionConfirm(param: WalletContactParam, nftToken: Collectible)
         case addContact(param: WalletContactParam)
@@ -483,11 +483,13 @@ extension Coordinator {
         
         case let .sendTransactionPopConfirm(sendConfirmViewModel,
                                             toAddress,
-                                            amount):
+                                            amount,
+                                            nonce):
             let popVc = SendTransactionCofirmPopViewController(
                 sendConfirmViewModel: sendConfirmViewModel,
                 toAddress: toAddress,
-                amount: amount
+                amount: amount,
+                nonce: nonce
             )
             return popVc
             
