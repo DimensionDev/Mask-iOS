@@ -255,7 +255,11 @@ final class SendConfirmPopViewController: UIViewController {
     
     init(transaction: EthereumTransaction, transactionOptions: TransactionOptions, resolver: Resolver<String>?) {
         self.resolver = resolver
-        self.viewModel = SendConfirmPopViewModel(transaction: transaction, transactionOptions: transactionOptions, resolver: resolver)
+        self.viewModel = SendConfirmPopViewModel(
+            transaction: transaction,
+            transactionOptions: transactionOptions,
+            resolver: resolver
+        )
         super.init(nibName: nil, bundle: nil)
     }
     

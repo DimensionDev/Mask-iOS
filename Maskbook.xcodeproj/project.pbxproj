@@ -236,6 +236,7 @@
 		2ABA6A1827A50A6800C0F82B /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABA6A1727A50A6800C0F82B /* Logging.swift */; };
 		2ACA1E1227182F01000C0ECC /* PasswordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACA1E1127182F01000C0ECC /* PasswordTests.swift */; };
 		2ADF9B0627D899D80020D254 /* Dismissable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF9B0527D899D80020D254 /* Dismissable.swift */; };
+		2AF17F292802C393008B6365 /* token.json in Resources */ = {isa = PBXBuildFile; fileRef = 2AF17F282802C393008B6365 /* token.json */; };
 		2AF6C7B027FEA37200A9EA4A /* WalletBottomWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF6C7AE27FEA37200A9EA4A /* WalletBottomWidgetView.swift */; };
 		2AF6C7B127FEA37200A9EA4A /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF6C7AF27FEA37200A9EA4A /* PrimaryButton.swift */; };
 		2AF6C7C827FEA52700A9EA4A /* RedPacketShareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF6C7B427FEA52700A9EA4A /* RedPacketShareViewModel.swift */; };
@@ -986,6 +987,7 @@
 		2ABA6A1727A50A6800C0F82B /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		2ACA1E1127182F01000C0ECC /* PasswordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTests.swift; sourceTree = "<group>"; };
 		2ADF9B0527D899D80020D254 /* Dismissable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dismissable.swift; sourceTree = "<group>"; };
+		2AF17F282802C393008B6365 /* token.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = token.json; sourceTree = "<group>"; };
 		2AF6C7AE27FEA37200A9EA4A /* WalletBottomWidgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletBottomWidgetView.swift; sourceTree = "<group>"; };
 		2AF6C7AF27FEA37200A9EA4A /* PrimaryButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		2AF6C7B427FEA52700A9EA4A /* RedPacketShareViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedPacketShareViewModel.swift; sourceTree = "<group>"; };
@@ -1620,6 +1622,7 @@
 		0F83264326EB4E7800BF949B /* Web3 */ = {
 			isa = PBXGroup;
 			children = (
+				2AF17F262802C332008B6365 /* Constant */,
 				0F83264426EB4E8100BF949B /* Web3ProviderFactory.swift */,
 				6F25327927A2B0AA000C0D27 /* Web3TransactionReceipt.swift */,
 			);
@@ -2153,6 +2156,22 @@
 				2A2B4EE627E8D1850097D50D /* HappyRedPacketV4 */,
 			);
 			path = ABI;
+			sourceTree = "<group>";
+		};
+		2AF17F262802C332008B6365 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				2AF17F272802C34F008B6365 /* EVM */,
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
+		2AF17F272802C34F008B6365 /* EVM */ = {
+			isa = PBXGroup;
+			children = (
+				2AF17F282802C393008B6365 /* token.json */,
+			);
+			path = EVM;
 			sourceTree = "<group>";
 		};
 		2AF6C7AC27FEA37200A9EA4A /* UIComponents */ = {
@@ -3910,6 +3929,7 @@
 				DBE99E362367DEA6000473BD /* Settings.bundle in Resources */,
 				0F641EF726870AA8002A4D33 /* Localizable.strings in Resources */,
 				1F8D692F2721549E001084D6 /* wallets.json in Resources */,
+				2AF17F292802C393008B6365 /* token.json in Resources */,
 				2A2B4EED27E8D1850097D50D /* HappyRedPacketV4.json in Resources */,
 				DBAAF49F22C35A7100017594 /* LaunchScreen.storyboard in Resources */,
 				2A2B4EEB27E8D1850097D50D /* red-packet.json in Resources */,

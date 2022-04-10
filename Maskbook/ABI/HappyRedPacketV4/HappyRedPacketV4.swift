@@ -93,9 +93,12 @@ struct HappyRedPacketV4: ABIContract {
     func createRedPacket(param: CreateRedPacketInput) async -> String? {
         let contractMethod = Functions.createRedPacket.rawValue
         let parameters = param.asArray
+        var options = TransactionOptions()
+        options.value = param.tokenType == 0 ? param.totalTokens : BigUInt(0)
         return await write(
             contractMethod,
-            param: parameters
+            param: parameters,
+            options: options
         )
     }
     
@@ -193,6 +196,7 @@ extension HappyRedPacketV4 {
         let duration: BigUInt
         let seed: [UInt8]
         let message: String
+        let name: String
         let tokenType: BigUInt
         let tokenAddr: EthereumAddress
         let totalTokens: BigUInt
@@ -204,6 +208,7 @@ extension HappyRedPacketV4 {
             case duration = "_duration"
             case seed = "_seed"
             case message = "_message"
+            case name = "_name"
             case tokenType = "_token_type"
             case tokenAddr = "_token_addr"
             case totalTokens = "_total_tokens"
@@ -217,6 +222,7 @@ extension HappyRedPacketV4 {
                 duration as AnyObject,
                 seed as AnyObject,
                 message as AnyObject,
+                name as AnyObject,
                 tokenType as AnyObject,
                 tokenAddr as AnyObject,
                 totalTokens as AnyObject

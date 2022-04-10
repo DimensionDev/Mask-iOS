@@ -65,20 +65,25 @@ extension ABIContract {
             methodName,
             parameters: param ?? [],
             extraData: extraData ?? Data(),
-            transactionOptions: options ?? defaultOptions) else {
+            transactionOptions: defaultOptions.merge(options)) else {
                 return nil
             }
         
         let (promise, resolver) = Promise<String>.pending()
-        mainCoordinator.present(
-            scene: .maskSendResolverTransactionPopView(
-                resolver: resolver,
-                transaction: tx.transaction,
-                transactionOptions: tx.transactionOptions
-            ),
-            transition: .panModel(animated: true)
-        )
         return await Task {
+            guard let transaction = try? tx.assemble(transactionOptions: tx.transactionOptions) else {
+                return nil
+            }
+            await MainActor.run {
+                mainCoordinator.present(
+                    scene: .maskSendResolverTransactionPopView(
+                        resolver: resolver,
+                        transaction: transaction,
+                        transactionOptions: tx.transactionOptions
+                    ),
+                    transition: .panModel(animated: true)
+                )
+            }
             return try? promise.wait()
         }.value
     }

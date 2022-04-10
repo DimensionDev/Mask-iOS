@@ -87,10 +87,10 @@ struct LuckyDropTokens: View {
             .disabled(!viewModel.maxButtonEnable)
             Spacer()
             TextField(viewModel.amountPlaceholder, text: $viewModel.amountStr)
-                .onReceive(
-                    Just(viewModel.amountStr),
-                    perform: viewModel.processAmountInput
-                )
+//                .onReceive(
+//                    Just(viewModel.amountStr),
+//                    perform: viewModel.processAmountInput
+//                )
                 .keyboardType(.decimalPad)
                 .multilineTextAlignment(.trailing)
                 .frame(maxHeight: .infinity)
