@@ -28,14 +28,14 @@ struct LuckyDropView: View {
                                 Coordinator.main.present(
                                     scene: .walletUnlock(cancellable: true) { error in
                                         guard error == nil else { return }
-                                        viewModel.removeButtonType(type: .unlock)
+                                        viewModel.checkParam()
                                     },
                                     transition: .modal(animated: true, adaptiveDelegate: nil)
                                 )
                                 
                             case .riskWarning:
                                 mainCoordinator.present(scene: .pluginRiskWarning, transition: .popup)
-                                viewModel.removeButtonType(type: .riskWarning)
+                                viewModel.checkParam()
                                 
                             case .unlockToken: viewModel.approveToken()
                             case .send: viewModel.send()

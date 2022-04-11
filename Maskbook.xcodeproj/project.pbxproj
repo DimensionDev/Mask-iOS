@@ -146,7 +146,7 @@
 		1FEE1EA82784508A00697F81 /* EthereumTransaction+Signing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE1EA72784508A00697F81 /* EthereumTransaction+Signing.swift */; };
 		1FEE1EAA27845CEF00697F81 /* TransactionOptions+Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE1EA927845CEF00697F81 /* TransactionOptions+Address.swift */; };
 		1FEE1EAC27845E1F00697F81 /* Web3+signTX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE1EAB27845E1F00697F81 /* Web3+signTX.swift */; };
-		24A7EA4A81FE47DCB6A2FAB2 /* Pods_MaskbookTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D11D4701C366630429EF86D4 /* Pods_MaskbookTests.framework */; };
+		26F154F69835C3E4A1B606B5 /* Pods_MaskbookTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A768AE9966E6966462E8E2A /* Pods_MaskbookTests.framework */; };
 		2A0C16AF2666713D0085524E /* StoredKeyImportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0C16AE2666713D0085524E /* StoredKeyImportType.swift */; };
 		2A18E7FB266C9D210045BC88 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A18E7FA266C9D210045BC88 /* AvatarView.swift */; };
 		2A23A64C27C499E800CC5AD9 /* Shape+Fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A23A64A27C499E800CC5AD9 /* Shape+Fill.swift */; };
@@ -236,6 +236,7 @@
 		2ABA6A1827A50A6800C0F82B /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABA6A1727A50A6800C0F82B /* Logging.swift */; };
 		2ACA1E1227182F01000C0ECC /* PasswordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACA1E1127182F01000C0ECC /* PasswordTests.swift */; };
 		2ADF9B0627D899D80020D254 /* Dismissable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF9B0527D899D80020D254 /* Dismissable.swift */; };
+		2AF17F292802C393008B6365 /* token.json in Resources */ = {isa = PBXBuildFile; fileRef = 2AF17F282802C393008B6365 /* token.json */; };
 		2AF6C7B027FEA37200A9EA4A /* WalletBottomWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF6C7AE27FEA37200A9EA4A /* WalletBottomWidgetView.swift */; };
 		2AF6C7B127FEA37200A9EA4A /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF6C7AF27FEA37200A9EA4A /* PrimaryButton.swift */; };
 		2AF6C7C827FEA52700A9EA4A /* RedPacketShareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF6C7B427FEA52700A9EA4A /* RedPacketShareViewModel.swift */; };
@@ -674,7 +675,7 @@
 		6FA1112D27D0D19A0041B16A /* RecentlyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA1112C27D0D19A0041B16A /* RecentlyHeaderView.swift */; };
 		6FA623AD26D4C4630091FDFF /* NFTAssetEventsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA623AC26D4C4630091FDFF /* NFTAssetEventsModel.swift */; };
 		6FA623AF26D4D0540091FDFF /* NFTTransactionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA623AE26D4D0540091FDFF /* NFTTransactionHistory.swift */; };
-		BF493303D7BCDB85F88E43D6 /* Pods_Maskbook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 050072FE4C1AB5EC281ADFAA /* Pods_Maskbook.framework */; };
+		7EC31375C7139CD22991DADE /* Pods_Maskbook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33F2B0BBDEC08959CD553629 /* Pods_Maskbook.framework */; };
 		DB0B3A5D240F60AE00B1657D /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B3A5C240F60AE00B1657D /* Coordinator.swift */; };
 		DB9FF4932416477F0048E676 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9FF4922416477F0048E676 /* Fonts.swift */; };
 		DBAAF49522C35A7100017594 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAAF49422C35A7100017594 /* AppDelegate.swift */; };
@@ -683,7 +684,7 @@
 		DBAAF49F22C35A7100017594 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBAAF49D22C35A7100017594 /* LaunchScreen.storyboard */; };
 		DBAAF4AA22C35A7100017594 /* MaskbookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAAF4A922C35A7100017594 /* MaskbookTests.swift */; };
 		DBE99E362367DEA6000473BD /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DBE99E352367DEA6000473BD /* Settings.bundle */; };
-		FB3E53E8FEB9BF7459E21C06 /* Pods_MaskWalletTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAA941CB0D09C380676E80F6 /* Pods_MaskWalletTests.framework */; };
+		F6C82A99611DF010F2FACF3E /* Pods_MaskWalletTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A681B8B782176369E586431 /* Pods_MaskWalletTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -746,8 +747,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		04DFF401A0EAEC346605F0B9 /* Pods-MaskbookTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskbookTests.release.xcconfig"; path = "Target Support Files/Pods-MaskbookTests/Pods-MaskbookTests.release.xcconfig"; sourceTree = "<group>"; };
-		050072FE4C1AB5EC281ADFAA /* Pods_Maskbook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Maskbook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C950E99054BA34C34F1EC5C /* Pods-Maskbook.release touchpreview.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maskbook.release touchpreview.xcconfig"; path = "Target Support Files/Pods-Maskbook/Pods-Maskbook.release touchpreview.xcconfig"; sourceTree = "<group>"; };
 		0F07028626AFE77C00C04F77 /* DeletedDerivationPath+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeletedDerivationPath+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0F07028726AFE77C00C04F77 /* DeletedDerivationPath+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeletedDerivationPath+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0F1A159F265CE83900B5E83E /* WalletCoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCoreService.swift; sourceTree = "<group>"; };
@@ -825,7 +825,6 @@
 		0FFB224C2654E972005CAFFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0FFCF6CE26BA334300326B44 /* MaskWalletCoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskWalletCoreError.swift; sourceTree = "<group>"; };
 		0FFD85912660CF1400D391A9 /* Vault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vault.swift; sourceTree = "<group>"; };
-		14D28C016140399A6635BABE /* Pods-Maskbook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maskbook.release.xcconfig"; path = "Target Support Files/Pods-Maskbook/Pods-Maskbook.release.xcconfig"; sourceTree = "<group>"; };
 		1F0363912779D223001E8A88 /* DecentralisedApplicationResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecentralisedApplicationResolver.swift; sourceTree = "<group>"; };
 		1F036393277AB05F001E8A88 /* AnyDappResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyDappResolver.swift; sourceTree = "<group>"; };
 		1F036396277ABB99001E8A88 /* LabsBrowserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabsBrowserController.swift; sourceTree = "<group>"; };
@@ -897,6 +896,9 @@
 		1FEE1EA72784508A00697F81 /* EthereumTransaction+Signing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EthereumTransaction+Signing.swift"; sourceTree = "<group>"; };
 		1FEE1EA927845CEF00697F81 /* TransactionOptions+Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionOptions+Address.swift"; sourceTree = "<group>"; };
 		1FEE1EAB27845E1F00697F81 /* Web3+signTX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Web3+signTX.swift"; sourceTree = "<group>"; };
+		22D6FDD9627503F7E5EEBF0E /* Pods-MaskbookTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskbookTests.debug.xcconfig"; path = "Target Support Files/Pods-MaskbookTests/Pods-MaskbookTests.debug.xcconfig"; sourceTree = "<group>"; };
+		23AF59BA3EF3F1F3262313E3 /* Pods-MaskWalletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskWalletTests.debug.xcconfig"; path = "Target Support Files/Pods-MaskWalletTests/Pods-MaskWalletTests.debug.xcconfig"; sourceTree = "<group>"; };
+		28C9F93AB5A32923B0EA4D21 /* Pods-Maskbook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maskbook.release.xcconfig"; path = "Target Support Files/Pods-Maskbook/Pods-Maskbook.release.xcconfig"; sourceTree = "<group>"; };
 		2A0C16AE2666713D0085524E /* StoredKeyImportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredKeyImportType.swift; sourceTree = "<group>"; };
 		2A18E7FA266C9D210045BC88 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		2A23A64A27C499E800CC5AD9 /* Shape+Fill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shape+Fill.swift"; sourceTree = "<group>"; };
@@ -986,6 +988,7 @@
 		2ABA6A1727A50A6800C0F82B /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		2ACA1E1127182F01000C0ECC /* PasswordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTests.swift; sourceTree = "<group>"; };
 		2ADF9B0527D899D80020D254 /* Dismissable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dismissable.swift; sourceTree = "<group>"; };
+		2AF17F282802C393008B6365 /* token.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = token.json; sourceTree = "<group>"; };
 		2AF6C7AE27FEA37200A9EA4A /* WalletBottomWidgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletBottomWidgetView.swift; sourceTree = "<group>"; };
 		2AF6C7AF27FEA37200A9EA4A /* PrimaryButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		2AF6C7B427FEA52700A9EA4A /* RedPacketShareViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedPacketShareViewModel.swift; sourceTree = "<group>"; };
@@ -1279,6 +1282,7 @@
 		2AF88636271EEDF80004565A /* UITableView+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+extension.swift"; sourceTree = "<group>"; };
 		2AF88637271EEDF80004565A /* Array+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+extension.swift"; sourceTree = "<group>"; };
 		2AFBEDE426E61D6400BD77B7 /* LoadingWithTextController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingWithTextController.swift; sourceTree = "<group>"; };
+		2B816A3D0D16095129838AF8 /* Pods-Maskbook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maskbook.debug.xcconfig"; path = "Target Support Files/Pods-Maskbook/Pods-Maskbook.debug.xcconfig"; sourceTree = "<group>"; };
 		2D00A5FD27953F2D0082E693 /* DebugEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugEntryView.swift; sourceTree = "<group>"; };
 		2D00A5FF279546C80082E693 /* DebugControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugControl.swift; sourceTree = "<group>"; };
 		2D11F03D27894A58002CE232 /* ConnectSocialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectSocialView.swift; sourceTree = "<group>"; };
@@ -1330,6 +1334,8 @@
 		2DEDDEA62761ED7000D37A76 /* WalletConnectSession+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletConnectSession+CoreDataClass.swift"; sourceTree = "<group>"; };
 		2DEDDEA72761ED7000D37A76 /* WalletConnectSession+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletConnectSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2DEDDEAA2761EE7900D37A76 /* MaskClientMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskClientMeta.swift; sourceTree = "<group>"; };
+		33F2B0BBDEC08959CD553629 /* Pods_Maskbook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Maskbook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		34023D49E9BD05D9030C16F3 /* Pods-MaskbookTests.release touchpreview.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskbookTests.release touchpreview.xcconfig"; path = "Target Support Files/Pods-MaskbookTests/Pods-MaskbookTests.release touchpreview.xcconfig"; sourceTree = "<group>"; };
 		4156689227A53BA70051E0E7 /* ShareLinkGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareLinkGenerator.swift; sourceTree = "<group>"; };
 		4156689427A68B770051E0E7 /* JsonWebKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonWebKey.swift; sourceTree = "<group>"; };
 		41829918277C816800F5417B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -1355,9 +1361,7 @@
 		41E50049279BFB3600A73117 /* RelationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationRepository.swift; sourceTree = "<group>"; };
 		41E5004B279C319C00A73117 /* Relation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relation.swift; sourceTree = "<group>"; };
 		41E5004D27A11AFF00A73117 /* WebPublicApiMessageResolver+Plugins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebPublicApiMessageResolver+Plugins.swift"; sourceTree = "<group>"; };
-		43C0056303CE8B3FE20AA4E1 /* Pods-MaskWalletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskWalletTests.debug.xcconfig"; path = "Target Support Files/Pods-MaskWalletTests/Pods-MaskWalletTests.debug.xcconfig"; sourceTree = "<group>"; };
-		4906F450A6FECB60792F6EC0 /* Pods-MaskWalletTests.release touchpreview.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskWalletTests.release touchpreview.xcconfig"; path = "Target Support Files/Pods-MaskWalletTests/Pods-MaskWalletTests.release touchpreview.xcconfig"; sourceTree = "<group>"; };
-		5B4AC03EB66089BB62DF8D51 /* Pods-Maskbook.release touchpreview.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maskbook.release touchpreview.xcconfig"; path = "Target Support Files/Pods-Maskbook/Pods-Maskbook.release touchpreview.xcconfig"; sourceTree = "<group>"; };
+		5A681B8B782176369E586431 /* Pods_MaskWalletTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaskWalletTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D069E0A27A16E2800054B4A /* TertiaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TertiaryButton.swift; sourceTree = "<group>"; };
 		5D11473627E2CDB200D4448C /* CropImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropImageViewController.swift; sourceTree = "<group>"; };
 		5D114FE427B256790092BEDC /* PersonaRecord+Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonaRecord+Identifier.swift"; sourceTree = "<group>"; };
@@ -1423,9 +1427,9 @@
 		6FA1112C27D0D19A0041B16A /* RecentlyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyHeaderView.swift; sourceTree = "<group>"; };
 		6FA623AC26D4C4630091FDFF /* NFTAssetEventsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTAssetEventsModel.swift; sourceTree = "<group>"; };
 		6FA623AE26D4D0540091FDFF /* NFTTransactionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTTransactionHistory.swift; sourceTree = "<group>"; };
-		C7EE536B91C14D14F2790DC6 /* Pods-MaskWalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskWalletTests.release.xcconfig"; path = "Target Support Files/Pods-MaskWalletTests/Pods-MaskWalletTests.release.xcconfig"; sourceTree = "<group>"; };
-		D11D4701C366630429EF86D4 /* Pods_MaskbookTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaskbookTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D65DB754260ED6422361C11A /* Pods-Maskbook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maskbook.debug.xcconfig"; path = "Target Support Files/Pods-Maskbook/Pods-Maskbook.debug.xcconfig"; sourceTree = "<group>"; };
+		7008AA888982F1218B214A39 /* Pods-MaskWalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskWalletTests.release.xcconfig"; path = "Target Support Files/Pods-MaskWalletTests/Pods-MaskWalletTests.release.xcconfig"; sourceTree = "<group>"; };
+		7A768AE9966E6966462E8E2A /* Pods_MaskbookTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaskbookTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC41AF597AE2B4CC3A2304F5 /* Pods-MaskbookTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskbookTests.release.xcconfig"; path = "Target Support Files/Pods-MaskbookTests/Pods-MaskbookTests.release.xcconfig"; sourceTree = "<group>"; };
 		DB0B3A5C240F60AE00B1657D /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		DB9FF4922416477F0048E676 /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		DBAAF49122C35A7100017594 /* Maskbook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Maskbook.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1439,9 +1443,7 @@
 		DBAAF4AB22C35A7100017594 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBD9A51022EEE20A00C5D65F /* Maskbook.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Maskbook.entitlements; sourceTree = "<group>"; };
 		DBE99E352367DEA6000473BD /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		E13F846FBC2D75CFB36FAFC9 /* Pods-MaskbookTests.release touchpreview.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskbookTests.release touchpreview.xcconfig"; path = "Target Support Files/Pods-MaskbookTests/Pods-MaskbookTests.release touchpreview.xcconfig"; sourceTree = "<group>"; };
-		EAA941CB0D09C380676E80F6 /* Pods_MaskWalletTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaskWalletTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F475E7A3AADA38BD03615093 /* Pods-MaskbookTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskbookTests.debug.xcconfig"; path = "Target Support Files/Pods-MaskbookTests/Pods-MaskbookTests.debug.xcconfig"; sourceTree = "<group>"; };
+		EC024DD5E08DAC8B6BDBA250 /* Pods-MaskWalletTests.release touchpreview.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskWalletTests.release touchpreview.xcconfig"; path = "Target Support Files/Pods-MaskWalletTests/Pods-MaskWalletTests.release touchpreview.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1449,7 +1451,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB3E53E8FEB9BF7459E21C06 /* Pods_MaskWalletTests.framework in Frameworks */,
+				F6C82A99611DF010F2FACF3E /* Pods_MaskWalletTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1472,7 +1474,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FACA3B52671F31E00CB8AC0 /* CoreDataStack.framework in Frameworks */,
-				BF493303D7BCDB85F88E43D6 /* Pods_Maskbook.framework in Frameworks */,
+				7EC31375C7139CD22991DADE /* Pods_Maskbook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1480,7 +1482,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24A7EA4A81FE47DCB6A2FAB2 /* Pods_MaskbookTests.framework in Frameworks */,
+				26F154F69835C3E4A1B606B5 /* Pods_MaskbookTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1620,6 +1622,7 @@
 		0F83264326EB4E7800BF949B /* Web3 */ = {
 			isa = PBXGroup;
 			children = (
+				2AF17F262802C332008B6365 /* Constant */,
 				0F83264426EB4E8100BF949B /* Web3ProviderFactory.swift */,
 				6F25327927A2B0AA000C0D27 /* Web3TransactionReceipt.swift */,
 			);
@@ -2153,6 +2156,22 @@
 				2A2B4EE627E8D1850097D50D /* HappyRedPacketV4 */,
 			);
 			path = ABI;
+			sourceTree = "<group>";
+		};
+		2AF17F262802C332008B6365 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				2AF17F272802C34F008B6365 /* EVM */,
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
+		2AF17F272802C34F008B6365 /* EVM */ = {
+			isa = PBXGroup;
+			children = (
+				2AF17F282802C393008B6365 /* token.json */,
+			);
+			path = EVM;
 			sourceTree = "<group>";
 		};
 		2AF6C7AC27FEA37200A9EA4A /* UIComponents */ = {
@@ -3579,28 +3598,18 @@
 			path = Contact;
 			sourceTree = "<group>";
 		};
-		94CF3C44495229B0338DEFCD /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				EAA941CB0D09C380676E80F6 /* Pods_MaskWalletTests.framework */,
-				050072FE4C1AB5EC281ADFAA /* Pods_Maskbook.framework */,
-				D11D4701C366630429EF86D4 /* Pods_MaskbookTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		BC9663EAA57A6064887B02A8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				43C0056303CE8B3FE20AA4E1 /* Pods-MaskWalletTests.debug.xcconfig */,
-				C7EE536B91C14D14F2790DC6 /* Pods-MaskWalletTests.release.xcconfig */,
-				4906F450A6FECB60792F6EC0 /* Pods-MaskWalletTests.release touchpreview.xcconfig */,
-				D65DB754260ED6422361C11A /* Pods-Maskbook.debug.xcconfig */,
-				14D28C016140399A6635BABE /* Pods-Maskbook.release.xcconfig */,
-				5B4AC03EB66089BB62DF8D51 /* Pods-Maskbook.release touchpreview.xcconfig */,
-				F475E7A3AADA38BD03615093 /* Pods-MaskbookTests.debug.xcconfig */,
-				04DFF401A0EAEC346605F0B9 /* Pods-MaskbookTests.release.xcconfig */,
-				E13F846FBC2D75CFB36FAFC9 /* Pods-MaskbookTests.release touchpreview.xcconfig */,
+				23AF59BA3EF3F1F3262313E3 /* Pods-MaskWalletTests.debug.xcconfig */,
+				7008AA888982F1218B214A39 /* Pods-MaskWalletTests.release.xcconfig */,
+				EC024DD5E08DAC8B6BDBA250 /* Pods-MaskWalletTests.release touchpreview.xcconfig */,
+				2B816A3D0D16095129838AF8 /* Pods-Maskbook.debug.xcconfig */,
+				28C9F93AB5A32923B0EA4D21 /* Pods-Maskbook.release.xcconfig */,
+				0C950E99054BA34C34F1EC5C /* Pods-Maskbook.release touchpreview.xcconfig */,
+				22D6FDD9627503F7E5EEBF0E /* Pods-MaskbookTests.debug.xcconfig */,
+				AC41AF597AE2B4CC3A2304F5 /* Pods-MaskbookTests.release.xcconfig */,
+				34023D49E9BD05D9030C16F3 /* Pods-MaskbookTests.release touchpreview.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -3616,7 +3625,7 @@
 				0FFB22492654E972005CAFFA /* CoreDataStackTests */,
 				DBAAF49222C35A7100017594 /* Products */,
 				BC9663EAA57A6064887B02A8 /* Pods */,
-				94CF3C44495229B0338DEFCD /* Frameworks */,
+				FFAA86CE5A8496D7FD24A70E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -3707,6 +3716,16 @@
 			path = Generated;
 			sourceTree = "<group>";
 		};
+		FFAA86CE5A8496D7FD24A70E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5A681B8B782176369E586431 /* Pods_MaskWalletTests.framework */,
+				33F2B0BBDEC08959CD553629 /* Pods_Maskbook.framework */,
+				7A768AE9966E6966462E8E2A /* Pods_MaskbookTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -3724,7 +3743,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0F41A047260B1820000037B2 /* Build configuration list for PBXNativeTarget "MaskWalletTests" */;
 			buildPhases = (
-				E656F30A088CD0306ACF837F /* [CP] Check Pods Manifest.lock */,
+				8A99519CDB9CDE8F1F8D0002 /* [CP] Check Pods Manifest.lock */,
 				0F41A03C260B1820000037B2 /* Sources */,
 				0F41A03D260B1820000037B2 /* Frameworks */,
 				0F41A03E260B1820000037B2 /* Resources */,
@@ -3780,13 +3799,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DBAAF4AE22C35A7100017594 /* Build configuration list for PBXNativeTarget "Maskbook" */;
 			buildPhases = (
-				1D4EC052431BDDF263DEE310 /* [CP] Check Pods Manifest.lock */,
+				23D9BCEDC5B54B836CC4D4D3 /* [CP] Check Pods Manifest.lock */,
 				0F83264226E8B18B00BF949B /* ShellScript */,
 				DBAAF48D22C35A7100017594 /* Sources */,
 				DBAAF48E22C35A7100017594 /* Frameworks */,
 				DBAAF48F22C35A7100017594 /* Resources */,
 				0FFB22562654E972005CAFFA /* Embed Frameworks */,
-				C402AB1524F9E6150ECEAF95 /* [CP] Embed Pods Frameworks */,
+				D3022D32B3D67AE2B173072D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -3803,7 +3822,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DBAAF4B122C35A7100017594 /* Build configuration list for PBXNativeTarget "MaskbookTests" */;
 			buildPhases = (
-				370B4CEF334A53D34EB3AA05 /* [CP] Check Pods Manifest.lock */,
+				2C3476C1B4772441BA155549 /* [CP] Check Pods Manifest.lock */,
 				DBAAF4A122C35A7100017594 /* Sources */,
 				DBAAF4A222C35A7100017594 /* Frameworks */,
 				DBAAF4A322C35A7100017594 /* Resources */,
@@ -3910,6 +3929,7 @@
 				DBE99E362367DEA6000473BD /* Settings.bundle in Resources */,
 				0F641EF726870AA8002A4D33 /* Localizable.strings in Resources */,
 				1F8D692F2721549E001084D6 /* wallets.json in Resources */,
+				2AF17F292802C393008B6365 /* token.json in Resources */,
 				2A2B4EED27E8D1850097D50D /* HappyRedPacketV4.json in Resources */,
 				DBAAF49F22C35A7100017594 /* LaunchScreen.storyboard in Resources */,
 				2A2B4EEB27E8D1850097D50D /* red-packet.json in Resources */,
@@ -3947,7 +3967,7 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n$PODS_ROOT/SwiftGen/bin/swiftgen\n";
 		};
-		1D4EC052431BDDF263DEE310 /* [CP] Check Pods Manifest.lock */ = {
+		23D9BCEDC5B54B836CC4D4D3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3969,7 +3989,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		370B4CEF334A53D34EB3AA05 /* [CP] Check Pods Manifest.lock */ = {
+		2C3476C1B4772441BA155549 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3991,24 +4011,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C402AB1524F9E6150ECEAF95 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Maskbook/Pods-Maskbook-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Maskbook/Pods-Maskbook-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Maskbook/Pods-Maskbook-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E656F30A088CD0306ACF837F /* [CP] Check Pods Manifest.lock */ = {
+		8A99519CDB9CDE8F1F8D0002 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -4028,6 +4031,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D3022D32B3D67AE2B173072D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Maskbook/Pods-Maskbook-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Maskbook/Pods-Maskbook-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Maskbook/Pods-Maskbook-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -4803,7 +4823,7 @@
 /* Begin XCBuildConfiguration section */
 		0F41A048260B1820000037B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 43C0056303CE8B3FE20AA4E1 /* Pods-MaskWalletTests.debug.xcconfig */;
+			baseConfigurationReference = 23AF59BA3EF3F1F3262313E3 /* Pods-MaskWalletTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -4827,7 +4847,7 @@
 		};
 		0F41A049260B1820000037B2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C7EE536B91C14D14F2790DC6 /* Pods-MaskWalletTests.release.xcconfig */;
+			baseConfigurationReference = 7008AA888982F1218B214A39 /* Pods-MaskWalletTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -4851,7 +4871,7 @@
 		};
 		0F41A04A260B1820000037B2 /* Release TouchPreview */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4906F450A6FECB60792F6EC0 /* Pods-MaskWalletTests.release touchpreview.xcconfig */;
+			baseConfigurationReference = EC024DD5E08DAC8B6BDBA250 /* Pods-MaskWalletTests.release touchpreview.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -5102,7 +5122,7 @@
 		};
 		DB9FF4A22417BC9B0048E676 /* Release TouchPreview */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B4AC03EB66089BB62DF8D51 /* Pods-Maskbook.release touchpreview.xcconfig */;
+			baseConfigurationReference = 0C950E99054BA34C34F1EC5C /* Pods-Maskbook.release touchpreview.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -5171,7 +5191,7 @@
 		};
 		DB9FF4A32417BC9B0048E676 /* Release TouchPreview */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E13F846FBC2D75CFB36FAFC9 /* Pods-MaskbookTests.release touchpreview.xcconfig */;
+			baseConfigurationReference = 34023D49E9BD05D9030C16F3 /* Pods-MaskbookTests.release touchpreview.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -5318,7 +5338,7 @@
 		};
 		DBAAF4AF22C35A7100017594 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D65DB754260ED6422361C11A /* Pods-Maskbook.debug.xcconfig */;
+			baseConfigurationReference = 2B816A3D0D16095129838AF8 /* Pods-Maskbook.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -5387,7 +5407,7 @@
 		};
 		DBAAF4B022C35A7100017594 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 14D28C016140399A6635BABE /* Pods-Maskbook.release.xcconfig */;
+			baseConfigurationReference = 28C9F93AB5A32923B0EA4D21 /* Pods-Maskbook.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -5456,7 +5476,7 @@
 		};
 		DBAAF4B222C35A7100017594 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F475E7A3AADA38BD03615093 /* Pods-MaskbookTests.debug.xcconfig */;
+			baseConfigurationReference = 22D6FDD9627503F7E5EEBF0E /* Pods-MaskbookTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -5479,7 +5499,7 @@
 		};
 		DBAAF4B322C35A7100017594 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 04DFF401A0EAEC346605F0B9 /* Pods-MaskbookTests.release.xcconfig */;
+			baseConfigurationReference = AC41AF597AE2B4CC3A2304F5 /* Pods-MaskbookTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";

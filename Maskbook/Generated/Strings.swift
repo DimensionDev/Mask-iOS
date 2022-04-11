@@ -688,6 +688,10 @@ enum L10n {
         static var average: String {
           return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Average")
         }
+        /// Best Wishes!
+        static var bestWishes: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Best-Wishes")
+        }
         /// Create Persona
         static var createPersona: String {
           return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Create-Persona")
@@ -704,6 +708,34 @@ enum L10n {
         static var insufficientGas: String {
           return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Insufficient-Gas")
         }
+        /// The minimum amount for each share is %@ %@
+        static func minimumAmount(_ p1: String, _ p2: String) -> String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Minimum-Amount", p1, p2)
+        }
+        /// Connect a Wallet
+        static var noAccount: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.No-Account")
+        }
+        /// Enter Amount Per Share
+        static var noAmountPerShare: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.No-Amount-Per-Share")
+        }
+        /// Enter Attached Messege
+        static var noMessage: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.No-Message")
+        }
+        /// Enter share
+        static var noShare: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.No-Share")
+        }
+        /// Select a Token
+        static var noToken: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.No-Token")
+        }
+        /// Enter Total Amount
+        static var noTotalAmount: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.No-Total-Amount")
+        }
         /// Random
         static var random: String {
           return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Random")
@@ -715,6 +747,10 @@ enum L10n {
         /// Confirm Risk Warning
         static var riskWarning: String {
           return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Risk-Warning")
+        }
+        /// Send %@
+        static func send(_ p1: String) -> String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Send", p1)
         }
         /// Approve %@
         static func unlockToken(_ p1: String) -> String {

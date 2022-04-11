@@ -891,7 +891,16 @@
                 "random": "Random",
                 "insufficient-gas": "Insufficient Gas Amount",
                 "insufficient-balance": "Insufficient Balance",
-                "exceed-max-quantity": "Enter Quantity(Max: 255)"
+                "exceed-max-quantity": "Enter Quantity(Max: 255)",
+                "best-wishes": "Best Wishes!",
+                "no-token": "Select a Token",
+                "no-account": "Connect a Wallet",
+                "no-share": "Enter share",
+                "no-amount-per-share": "Enter Amount Per Share",
+                "no-total-amount": "Enter Total Amount",
+                "no-message": "Enter Attached Messege",
+                "minimum-amount": "The minimum amount for each share is %@ %@",
+                "send": "Send %@"
             },
             "max": "MAX",
             "total-amount": "Total Amount",
