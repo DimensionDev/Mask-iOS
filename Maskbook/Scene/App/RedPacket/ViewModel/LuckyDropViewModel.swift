@@ -99,7 +99,18 @@ class LuckyDropViewModel: NSObject, ObservableObject {
             guard quantity != .notANumber && amountPerShare != .notANumber else {
                 return .zero
             }
+            guard let decimal = token?.decimal else {
+                return .zero
+            }
             result = quantity.multiplying(by: amountPerShare)
+            let roundBehavior = NSDecimalNumberHandler(
+                roundingMode: .down,
+                scale: decimal,
+                raiseOnExactness: false,
+                raiseOnOverflow: false,
+                raiseOnUnderflow: false,
+                raiseOnDivideByZero: false)
+            result = result.rounding(accordingToBehavior: roundBehavior)
         } else {
             result = NSDecimalNumber(string: amountStr)
         }
@@ -184,24 +195,6 @@ class LuckyDropViewModel: NSObject, ObservableObject {
     @InjectedProvider(\.personaManager)
     private var personaManager
     private var checkApprovePromise: Promise<Void>?
-    lazy var totalQuantityPublisher: AnyPublisher<NSDecimalNumber, Never> = {
-        let quantityPublisher = $quantityStr.compactMap {
-            NSDecimalNumber(string: $0)
-        }.filter { number in
-            number != .notANumber
-        }
-        let amountPerSharePublisher = $amountStr.compactMap {
-            NSDecimalNumber(string: $0)
-        }.filter { number in
-            number != .notANumber
-        }
-        let averageTotal = Publishers.CombineLatest(quantityPublisher, amountPerSharePublisher)
-        .compactMap {
-            NSDecimalNumber(value: $0.doubleValue * $1.doubleValue)
-        }
-        
-        return averageTotal.eraseToAnyPublisher()
-    }()
     
     private var nativeTokenAddress: JSON? {
         guard let url = Bundle.main.url(forResource: "token", withExtension: "json"),
@@ -244,11 +237,18 @@ class LuckyDropViewModel: NSObject, ObservableObject {
                 return
             }
             let result = amount.dividing(by: quantity)
-            guard result != .notANumber else {
+            guard result != .notANumber, let decimal = token?.decimal else {
                 amountStr = ""
                 return
             }
-            amountStr = result.stringValue
+            let roundBehavior = NSDecimalNumberHandler(
+                roundingMode: .down,
+                scale: decimal,
+                raiseOnExactness: false,
+                raiseOnOverflow: false,
+                raiseOnUnderflow: false,
+                raiseOnDivideByZero: false)
+            amountStr = result.rounding(accordingToBehavior: roundBehavior).stringValue
             
         case .random:
             guard amount != .notANumber else {
@@ -322,7 +322,6 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         
         let senderName = profileNickName ?? personaManager.currentPersona.value?.identifier ?? "Unknown User"
         
-        // TODO: check param again
         let param = HappyRedPacketV4.CreateRedPacketInput(
             publicKey: publicKeyETH,
             number: number,
