@@ -91,6 +91,7 @@
 		1F37DF2427BDFA3D008F8ABE /* RestoreLocalFileValidationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37DF2327BDFA3D008F8ABE /* RestoreLocalFileValidationViewModel.swift */; };
 		1F48D38727FEEF3100A51B89 /* LuckDropHistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48D38627FEEF3100A51B89 /* LuckDropHistoryController.swift */; };
 		1F48D3892800154600A51B89 /* LuckDropHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48D3882800154600A51B89 /* LuckDropHistoryViewModel.swift */; };
+		1F48D38B2803F01E00A51B89 /* RedPackedHistoryPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48D38A2803F01E00A51B89 /* RedPackedHistoryPayload.swift */; };
 		1F58730F277C51A3005A7B11 /* DappScriptPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58730E277C51A3005A7B11 /* DappScriptPayload.swift */; };
 		1F705FE327CF6AB9002A4A7E /* SpinWheelAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */; };
 		1F8AD0CB26CA3AA000C9694F /* MaskLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AD0CA26CA3AA000C9694F /* MaskLoadingIndicator.swift */; };
@@ -842,6 +843,7 @@
 		1F37DF2327BDFA3D008F8ABE /* RestoreLocalFileValidationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreLocalFileValidationViewModel.swift; sourceTree = "<group>"; };
 		1F48D38627FEEF3100A51B89 /* LuckDropHistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuckDropHistoryController.swift; sourceTree = "<group>"; };
 		1F48D3882800154600A51B89 /* LuckDropHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuckDropHistoryViewModel.swift; sourceTree = "<group>"; };
+		1F48D38A2803F01E00A51B89 /* RedPackedHistoryPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPackedHistoryPayload.swift; sourceTree = "<group>"; };
 		1F58730E277C51A3005A7B11 /* DappScriptPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappScriptPayload.swift; sourceTree = "<group>"; };
 		1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinWheelAnimator.swift; sourceTree = "<group>"; };
 		1F8AD0CA26CA3AA000C9694F /* MaskLoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskLoadingIndicator.swift; sourceTree = "<group>"; };
@@ -2229,6 +2231,7 @@
 				2AF6C7BB27FEA52700A9EA4A /* RedPacketAvailability.swift */,
 				2AF6C7BC27FEA52700A9EA4A /* NftPacketPayload.swift */,
 				2AF6C7BD27FEA52700A9EA4A /* RedPacketInteractivePayload.swift */,
+				1F48D38A2803F01E00A51B89 /* RedPackedHistoryPayload.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4339,6 +4342,7 @@
 				2AF8851F271EE9310004565A /* TokenCardView.swift in Sources */,
 				2A6ABBB82720053B00CC3AED /* RemoteBackupActionsViewController.swift in Sources */,
 				2DA3FAB4273CDFBA0013A784 /* ChainInfo.swift in Sources */,
+				1F48D38B2803F01E00A51B89 /* RedPackedHistoryPayload.swift in Sources */,
 				5D3E364A27BE310C00FDCFDD /* PostRecord.swift in Sources */,
 				2D6677FA27688FBE00528F4D /* WCRequestsHandler.swift in Sources */,
 				0F2051B3265E3B2F00602A0C /* DerivationPath.swift in Sources */,
