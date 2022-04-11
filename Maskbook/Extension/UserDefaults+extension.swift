@@ -276,11 +276,11 @@ final class UserDefaultSettings {
         set { currentProfileSocialPlatformString = newValue.rawValue }
     }
 
-    @ReactiveUserDefault(key: Keys.appVersion.rawValue, defaultValue: "2.0.0")
-    var appVersion: String
+    @OptionalUserDefault(key: Keys.appVersion.rawValue)
+    var appVersion: String?
 
-    @ReactiveUserDefault(key: Keys.appBuild.rawValue, defaultValue: "98")
-    var appBuild: String
+    @OptionalUserDefault(key: Keys.appBuild.rawValue)
+    var appBuild: String?
 
     @OptionalUserDefault(key: Keys.remoteBackupEmail.rawValue)
     var remoteBackupEmail: String?

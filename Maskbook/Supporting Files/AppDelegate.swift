@@ -195,7 +195,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate {
     private func initilizeUserDefault() {
-        if userDefaultSettings.appVersion == "2.0.0" {
+        if userDefaultSettings.appVersion == nil {
             isFisrtLaunch = true
         }
         userDefaultSettings.appVersion = UIApplication.appVersion()
