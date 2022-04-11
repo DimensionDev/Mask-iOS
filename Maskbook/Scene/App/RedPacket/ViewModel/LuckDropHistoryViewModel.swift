@@ -63,7 +63,7 @@ final class LuckyDropHistoryViewModel {
             return
         }
 
-        let payload = try JSONDecoder().decode(AnyscanListOf<RedPacketHistoryInfo>, from: data)
+        let payload = try JSONDecoder().decode(AnyscanListOf<RedPacketHistoryInfo>.self, from: data)
 
         // TODO: combine RedPacketHistoryInfo and CreateRedPacketInput
     }

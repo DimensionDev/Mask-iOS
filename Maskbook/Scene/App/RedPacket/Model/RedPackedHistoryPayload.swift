@@ -2,7 +2,7 @@ import Foundation
 import BigInt
 
 /// Restful response for etherscan.io/bscscan.com/...
-struct AnyscanResponse<T: Codable> {
+struct AnyscanResponse<T: Codable>: Codable {
     let status: String
     let message: String
     let result: T
