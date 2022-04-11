@@ -25,9 +25,7 @@ struct BlockChainNetwork: Codable {
         self.init(chain: chain, networkId: networkId)
     }
 
-    static func `default`() -> Self {
-        BlockChainNetwork(chain: .ethereum, networkId: 1)
-    }
+    static func `default`() -> Self { .eth }
 
     static func ~= (lhs: BlockChainNetwork, rhs: BlockChainNetwork?) -> Bool {
         guard let rhs = rhs else { return false }

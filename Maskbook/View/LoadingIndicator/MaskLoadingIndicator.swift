@@ -74,30 +74,60 @@ final class MaskLoadingIndicator: NiblessView {
 struct LoadingIndicator: UIViewRepresentable {
     final class Coordinator {
         var loading: Bool
+        var preferredSize: CGSize
+        var animator: LoadingAnimatable
 
-        init(loading: Bool) {
+        init(
+            loading: Bool,
+            preferredSize: CGSize,
+            animator: LoadingAnimatable = .spinWheel
+        ) {
             self.loading = loading
+            self.preferredSize = preferredSize
+            self.animator = animator
         }
     }
 
     var loading: Bool
+    var preferredSize: CGSize
+    var animator: LoadingAnimatable
 
-    init(loading: Bool) {
+    init(
+        loading: Bool,
+        preferredSize: CGSize,
+        animator: LoadingAnimatable = .spinWheel
+    ) {
         self.loading = loading
+        self.preferredSize = preferredSize
+        self.animator = animator
     }
 
     func makeUIView(context: Context) -> MaskLoadingIndicator {
-        MaskLoadingIndicator()
+        let uiView = MaskLoadingIndicator(animator: context.coordinator.animator)
+
+        if uiView.bounds.size != context.coordinator.preferredSize {
+            var bounds = uiView.bounds
+            bounds.size = context.coordinator.preferredSize
+            uiView.bounds = bounds
+        }
+
+        return uiView
     }
 
     func updateUIView(_ uiView: MaskLoadingIndicator, context: Context) {
+        if uiView.bounds.size != context.coordinator.preferredSize {
+            var bounds = uiView.bounds
+            bounds.size = context.coordinator.preferredSize
+            uiView.bounds = bounds
+        }
+
         context.coordinator.loading
         ? uiView.startAnimation()
         : uiView.stopAnimation()
     }
 
     func makeCoordinator() -> Coordinator {
-        Coordinator(loading: loading)
+        Coordinator(loading: loading, preferredSize: preferredSize, animator: animator)
     }
 }
 

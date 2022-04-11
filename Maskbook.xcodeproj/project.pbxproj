@@ -2186,6 +2186,7 @@
 		2AF6C7B327FEA52700A9EA4A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				1F48D3882800154600A51B89 /* LuckDropHistoryViewModel.swift */,
 				2AF6C7B427FEA52700A9EA4A /* RedPacketShareViewModel.swift */,
 				2AF6C7B527FEA52700A9EA4A /* LuckyDropViewModel.swift */,
 			);
@@ -2396,7 +2397,6 @@
 				2AF8835D271EE9300004565A /* TradeProviderViewModel.swift */,
 				2AF8835E271EE9300004565A /* LabsPluginViewModel.swift */,
 				1FB862C9278BDFCE00CF345F /* LabsConfigViewModel.swift */,
-				1F48D3882800154600A51B89 /* LuckDropHistoryViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";

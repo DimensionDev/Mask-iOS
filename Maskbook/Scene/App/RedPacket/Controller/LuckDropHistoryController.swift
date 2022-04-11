@@ -48,43 +48,25 @@ where Item: Hashable,
       Item.RawValue == String {
 
     @Binding var selection: Item
-    private let nameSpace = "SegmentControl"
 
     var body: some View {
         GeometryReader { proxy in
-            let itemWidth = proxy.size.width / CGFloat(Item.allCases.count)
+            let count = CGFloat(Item.allCases.count)
+            let itemWidth = proxy.size.width / count
+            let delta: CGFloat = (proxy.size.width - itemWidth) / 2
+
             HStack(alignment: .center, spacing: 0) {
                 ForEach(Item.allCases, id: \.self) { item in
-                    Button(
-                        action: {
+                    Text(item.rawValue)
+                        .segmentStyle(isSelected: selection == item)
+                        .background(Color.clear)
+                        .frame(minWidth: itemWidth, minHeight: proxy.size.height)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
                             withAnimation {
                                 self.selection = item
                             }
-                        },
-                        label: {
-                            HStack{
-                                Spacer()
-                                    .onTapGesture {
-                                        guard selection != item else {
-                                            return
-                                        }
-                                        withAnimation {
-                                            self.selection = item
-                                        }
-                                    }
-                                Text(item.rawValue)
-                                    .segmentStyle(isSelected: selection == item)
-                                    .background(Color.clear)
-                                Spacer()
-                                    .onTapGesture {
-                                        withAnimation {
-                                            self.selection = item
-                                        }
-                                    }
-                            }
-                            .frame(height: proxy.size.height)
                         }
-                    )
                 }
             }
             .background(
@@ -97,13 +79,12 @@ where Item: Hashable,
                                 alignment: .center
                             )
                             .cornerRadius(8)
-                            .offset(x: -0.5 * itemWidth)
+                            .offset(x: -delta)
                             .offset(x: CGFloat(index(of: selection)) * itemWidth)
                     )
             )
             .cornerRadius(8)
         }
-        .coordinateSpace(name: nameSpace)
     }
 
     private func index(of item: Item) -> Int {
@@ -114,7 +95,7 @@ where Item: Hashable,
 extension Text {
     fileprivate func segmentStyle(isSelected: Bool) -> some View {
         self.font(FontStyles.bh5.font)
-            .accentColor(
+            .foregroundColor(
                 isSelected
                 ? Asset.Colors.Text.dark.asColor()
                 : Asset.Colors.Text.normal.asColor()

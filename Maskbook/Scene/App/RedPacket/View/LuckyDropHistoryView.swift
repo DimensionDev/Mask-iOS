@@ -36,8 +36,6 @@ struct LuckyDropHistoryView: View {
 struct LuckyDropHistoryRow: View {
     @State var loading = false
 
-    @State private var contentSize = CGSize.zero
-
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .top, spacing: 10) {
@@ -62,7 +60,6 @@ struct LuckyDropHistoryRow: View {
                     .frame(width: 84, height: 32)
                 }
                 .background(Asset.Colors.Background.blue.asColor().cornerRadius(8))
-
             }
 
             VStack(spacing: 3) {
@@ -98,7 +95,6 @@ struct LuckyDropHistoryRow: View {
                 .frame(maxWidth: .infinity)
             }
         }
-        .measureSize(to: $contentSize)
         .padding(.all, 12)
         .background(Asset.Colors.Background.dark.asColor())
         .cornerRadius(8)
@@ -126,16 +122,13 @@ struct LoadingText: View {
             Text(loading ? "" : text)
                 .font(FontStyles.bh6.font)
                 .foregroundColor(Color.white)
+                .zIndex(1)
 
             if loading {
-                ProgressView()
-                    .progressViewStyle(
-                        CircularProgressViewStyle(tint: .white)
-                    )
+                LoadingIndicator(loading: loading, preferredSize: indicatorSize)
                     .frame(width: indicatorSize.width, height: indicatorSize.height)
-//                LoadingIndicator(loading: true)
-//                    .colorScheme(.dark)
-//                    .frame(width: indicatorSize.width, height: indicatorSize.height)
+                    .colorScheme(.dark)
+                    .zIndex(2)
             }
         }
     }
