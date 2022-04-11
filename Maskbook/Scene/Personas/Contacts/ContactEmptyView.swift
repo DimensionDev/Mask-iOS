@@ -6,13 +6,12 @@
 //  Copyright © 2022 dimension. All rights reserved.
 //
 
+import CombineEvent
 import Foundation
 import UIKit
 import UStack
-import CombineEvent
 
 class ContactEmptyView: StackView {
-    
     func setSearchMode(isSearching: Bool) {
         if isSearching {
             emptyImageView.image = Asset.Images.Scene.Personas.search.image
@@ -23,18 +22,22 @@ class ContactEmptyView: StackView {
         }
         inviteButton.isHidden = isSearching
     }
-    
+
+    @InjectedProvider(\.mainCoordinator)
+    var mainCoordinator
+
     init() {
         super.init(frame: .zero)
         backgroundColor = .clear
         setupSubViews()
     }
-    
+
+    @available(*, unavailable)
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func setupSubViews() {
+
+    private func setupSubViews() {
         withSubViews {
             emptyView
         }
@@ -45,16 +48,16 @@ class ContactEmptyView: StackView {
             emptyView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }
-    
-    lazy var emptyView: UIStackView = VStackView(spacing: 24,
-                                                 distribution: StackView.Distribution.fill,
-                                                 alignment: StackView.Alignment.center) {
+
+    private lazy var emptyView: UIStackView = VStackView(spacing: 24,
+                                                         distribution: StackView.Distribution.fill,
+                                                         alignment: StackView.Alignment.center) {
         emptyImageView
         emptyTipsLabel
         inviteButton.cv.apply {
             NSLayoutConstraint.activate([
                 $0.heightAnchor.constraint(equalToConstant: 40),
-                $0.widthAnchor.constraint(equalToConstant: 128)
+                $0.widthAnchor.constraint(equalToConstant: 128),
             ])
         }
     }
@@ -84,14 +87,14 @@ class ContactEmptyView: StackView {
 
 extension ContactEmptyView {
     @objc
-    func shareAction(sender: UIView) {
+    private func shareAction(sender: UIView) {
         guard let url = URL(string: "https://mask.io/download-links/") else { return }
 
         let activityViewController = UIActivityViewController(
             activityItems: [url],
             applicationActivities: [DownloadMaskActivity(url: url)]
         )
-        Coordinator.main.present(scene: .activityViewController(
+        mainCoordinator.present(scene: .activityViewController(
             activityViewController: activityViewController,
             sourceView: nil,
             barButtonItem: nil

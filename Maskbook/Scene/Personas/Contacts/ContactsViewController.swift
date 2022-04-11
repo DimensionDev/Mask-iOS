@@ -16,7 +16,7 @@ class ContactsViewController: BaseViewController {
     static var searchBarHeight: CGFloat = 52
 
     static var tableHeaderHeight: CGFloat = 52 + 12
-    
+
     private var disposeBag = Set<AnyCancellable>()
 
     let viewModel = ContactsViewModel()
@@ -26,6 +26,9 @@ class ContactsViewController: BaseViewController {
 
     @InjectedProvider(\.personaManager)
     private var personaManager
+
+    @InjectedProvider(\.mainCoordinator)
+    private var mainCoordinator
 
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
@@ -68,9 +71,9 @@ class ContactsViewController: BaseViewController {
         view.register(ContactProfileTableViewCell.self)
         return view
     }()
-    
+
     private lazy var emptyView = ContactEmptyView()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
@@ -111,7 +114,6 @@ class ContactsViewController: BaseViewController {
     }
 
     func subscribeSignal() {
-
         viewModel.isSearching
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isSearching in
@@ -125,7 +127,7 @@ class ContactsViewController: BaseViewController {
                 self?.refreshTableView()
             }
             .store(in: &disposeBag)
-        
+
         viewModel.profileRecordsSubject
             .receive(on: DispatchQueue.main)
             .sink { [weak self] records in
@@ -193,7 +195,7 @@ extension ContactsViewController {
             activityItems: [url],
             applicationActivities: [DownloadMaskActivity(url: url)]
         )
-        Coordinator.main.present(scene: .activityViewController(
+        mainCoordinator.present(scene: .activityViewController(
             activityViewController: activityViewController,
             sourceView: nil,
             barButtonItem: nil
@@ -227,7 +229,7 @@ extension ContactsViewController: UISearchBarDelegate {
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
-    
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
