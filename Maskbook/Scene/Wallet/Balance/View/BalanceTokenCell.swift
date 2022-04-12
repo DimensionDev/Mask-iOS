@@ -75,8 +75,12 @@ class BalanceTokenCell: UITableViewCell {
         containerView.addSubview(tokenBalanceLabel)
         
         NSLayoutConstraint.activate([
-            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstraints.leading),
-            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutConstraints.trailing),
+            containerView.leadingAnchor.constraint(
+                equalTo: contentView.readableContentGuide.leadingAnchor
+            ),
+            containerView.trailingAnchor.constraint(
+                equalTo: contentView.readableContentGuide.trailingAnchor
+            ),
             containerView.topAnchor.constraint(equalTo: contentView.topAnchor,
                                                constant: 6),
             containerView.heightAnchor.constraint(equalToConstant: 63),

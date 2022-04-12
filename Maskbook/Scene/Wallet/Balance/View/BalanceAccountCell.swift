@@ -122,7 +122,6 @@ class BalanceAccountCell: UITableViewCell {
         
         selectionStyle = .none
         backgroundColor = .clear
-        contentView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: LayoutConstraints.leading, bottom: 0, trailing: LayoutConstraints.trailing)
         
         accountCardView.delegate = self
         accountCardView.translatesAutoresizingMaskIntoConstraints = false
@@ -136,10 +135,8 @@ class BalanceAccountCell: UITableViewCell {
                 equalTo: contentView.safeAreaLayoutGuide.topAnchor,
                 constant: LayoutConstraints.top
             ),
-            accountCardView.leadingAnchor.constraint(
-                equalTo: contentView.readableContentGuide.leadingAnchor),
-            accountCardView.trailingAnchor.constraint(
-                equalTo: contentView.readableContentGuide.trailingAnchor),
+            accountCardView.leadingAnchor.constraint(equalTo: contentView.readableContentGuide.leadingAnchor),
+            accountCardView.trailingAnchor.constraint(equalTo: contentView.readableContentGuide.trailingAnchor),
             accountCardView.heightAnchor.constraint(equalToConstant: 186)
         ])
         
