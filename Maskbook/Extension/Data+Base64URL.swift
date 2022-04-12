@@ -52,6 +52,10 @@ extension String {
             .replacingOccurrences(of: "/", with: "_")
             .replacingOccurrences(of: "=", with: "")
     }
+    
+    public func urlEncode() -> String? {
+        return addingPercentEncoding(withAllowedCharacters: CharacterSet(charactersIn: "!*'();:@&=+$,/?%#[]\" {}^|").inverted)
+    }
 
     /// Converts a base64-url encoded string to a base64 encoded string.
     ///
@@ -66,4 +70,5 @@ extension String {
     public mutating func base64URLEscape() {
         self = base64URLEscaped()
     }
+    
 }
