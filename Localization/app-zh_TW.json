@@ -553,6 +553,7 @@
         },
         "persona_contacts": {
             "empty_contacts_tips": "",
+            "search_contact_tips": "",
             "delete": "",
             "contact": "聯絡人"
         },
