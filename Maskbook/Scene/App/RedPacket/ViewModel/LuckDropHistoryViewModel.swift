@@ -104,53 +104,59 @@ final class LuckyDropHistoryViewModel {
             returning: [RedPacketPayload].self
         ) { taskGroup in
 
-            for payload in payloads[0..<3] {
+            for payload in payloads {
+                let id = payload.basic?.txid ?? ""
+                print("task start impl: ", id)
                 taskGroup.addTask {
                     // here txid is a garantee value
-                    var payload = payload
-                    let txid = payload.basic?.txid ?? ""
-                    let logFetchTask = Task { () -> EventLog? in
+                    // mark @MaskGroupActor for the closure to make it works
+                    async let task = Task.detached { @MaskGroupActor () -> RedPacketPayload? in
+                        var payload = payload
+                        let txid = payload.basic?.txid ?? ""
+
+                        // TODO: reimplement getTransactionReceipt
+                        // getTransactionReceipt is the bottle neck
+                        // it will wait to get log on a queue to cause uneffeciency to the async/await
                         guard let transactionResult = try? provider.eth.getTransactionReceipt(txid),
                               let log = transactionResult.logs.first(where: { $0.address == ethAddress }) else {
                             return nil
                         }
-                        return log
-                    }
 
-                    guard let log = await logFetchTask.value else {
-                        return nil
-                    }
-
-                    let json = self.contract.parse(eventlog: log, filter: .creationSuccess)
-                    guard let eventParam = SuccessEvent(json: json) else {
-                        return nil
-                    }
-
-                    payload.basic?.rpid = eventParam.id
-                    payload.basic?.creationTime = eventParam.creation_time.asDouble()
-                        .flatMap { $0 * 1000 } ?? 0
-
-                    let checkAvailability = await self.contract.checkAvailability(redPackageId: eventParam.id)
-                    payload.payload?.claimers = checkAvailability?.claimed
-                        .flatMap { $0.asInt() }
-                        .map {
-                            (0..<$0).map { _ in
-                                RedPacket.Claimer.init(address: "", name: "")
-                            }
+                        print("task log completed: ", id)
+                        let json = self.contract.parse(eventlog: log, filter: .creationSuccess)
+                        guard let eventParam = SuccessEvent(json: json) else {
+                            return nil
                         }
-                    payload.payload?.totalRemaining = checkAvailability?.balance.flatMap { String($0, radix: 10) }
 
-                    return payload
+                        payload.basic?.rpid = eventParam.id
+                        payload.basic?.creationTime = eventParam.creation_time.asDouble()
+                            .flatMap { $0 * 1000 } ?? 0
+
+                        let checkAvailability = await self.contract.checkAvailability(redPackageId: eventParam.id)
+                        print("task checkAvailability completed: ", id)
+                        payload.payload?.claimers = checkAvailability?.claimed
+                            .flatMap { $0.asInt() }
+                            .map { (0..<$0).map { _ in RedPacket.Claimer.init(address: "", name: "") } }
+                        payload.payload?.totalRemaining = checkAvailability?.balance.flatMap { String($0, radix: 10) }
+                        print("task completed: ", payload.basic?.txid ?? "")
+                        return payload
+                    }
+
+                    return await task.value
                 }
             }
 
             var results: [RedPacketPayload] = []
-            for await result in taskGroup {
+            guard !taskGroup.isCancelled else {
+                return results
+            }
+
+            while let result = await taskGroup.next() {
                 if let value = result {
                     results.append(value)
                 }
             }
-
+            print("task result completed: ", results.count)
             return results
         }
     }

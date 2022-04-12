@@ -67,7 +67,7 @@ struct HappyRedPacketV4: ABIContract {
             return nil
         }
         
-        return await Task {
+        return await Task.detached {
             guard let txResult = try? tx.call() else {
                 return nil
             }
