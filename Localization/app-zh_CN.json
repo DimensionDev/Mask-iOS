@@ -552,7 +552,8 @@
             "backup_recovery": "备份与恢复设置"
         },
         "persona_contacts": {
-            "empty_contacts_tips": "您还没有联系人。 \n邀请好友下载 Mask Network。",
+            "empty_contacts_tips": "",
+            "search_contact_tips": "",
             "delete": "确认删除",
             "contact": "联系人"
         },
