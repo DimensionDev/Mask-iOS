@@ -34,8 +34,8 @@ var theme_src = __webpack_require__(43021);
 var unstated_next = __webpack_require__(44737);
 // EXTERNAL MODULE: ./src/extension/popups/pages/Wallet/hooks/useWalletContext.ts
 var useWalletContext = __webpack_require__(1130);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
 // EXTERNAL MODULE: ../web3-shared/evm/types/index.ts
 var types = __webpack_require__(95130);
 ;// CONCATENATED MODULE: ./src/plugins/Wallet/helpers.ts
@@ -72,8 +72,8 @@ const getTokenUSDValue = (token)=>token.value ? Number.parseFloat(token.value[ty
 
 // EXTERNAL MODULE: ../icons/general/InteractionCircle.tsx
 var InteractionCircle = __webpack_require__(69976);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ./src/plugins/Transak/messages.ts
 var messages = __webpack_require__(18509);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useWallet.ts

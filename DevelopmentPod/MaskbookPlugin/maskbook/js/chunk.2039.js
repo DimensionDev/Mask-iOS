@@ -32,12 +32,12 @@ var IconButton = __webpack_require__(87409);
 var Typography = __webpack_require__(74491);
 // EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
 var src = __webpack_require__(43021);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var shared_base_src = __webpack_require__(79226);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/Close.js
 var Close = __webpack_require__(41457);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/ArrowBackRounded.js
@@ -60,13 +60,7 @@ function DialogDismissIconUI(props) {
 
 // EXTERNAL MODULE: ./src/social-network/index.ts
 var social_network = __webpack_require__(61751);
-// EXTERNAL MODULE: ./src/social-network-adaptor/minds.com/base.ts
-var base = __webpack_require__(65375);
-// EXTERNAL MODULE: ./src/social-network-adaptor/facebook.com/base.ts
-var facebook_com_base = __webpack_require__(40543);
 ;// CONCATENATED MODULE: ./src/components/shared/InjectedDialog.tsx
-
-
 
 
 
@@ -92,7 +86,7 @@ const useStyles = (0,src/* makeStyles */.ZL)()((theme, { snsId  })=>({
             color: theme.palette.text.primary
         },
         paper: {
-            ...snsId === base/* MINDS_ID */.fN || snsId === facebook_com_base/* FACEBOOK_ID */.Iz ? {
+            ...snsId === shared_base_src/* EnhanceableSite.Minds */.Jk.Minds || snsId === shared_base_src/* EnhanceableSite.Facebook */.Jk.Facebook ? {
                 width: 'auto',
                 backgroundImage: 'none'
             } : {}
@@ -141,7 +135,7 @@ function InjectedDialog(props) {
                 },
                 ...rest,
                 ...extraProps,
-                children: /*#__PURE__*/ (0,jsx_runtime.jsxs)(shared_src/* ErrorBoundary */.SV, {
+                children: /*#__PURE__*/ (0,jsx_runtime.jsxs)(dist/* ErrorBoundary */.SV, {
                     children: [
                         title ? /*#__PURE__*/ (0,jsx_runtime.jsxs)(DialogTitle/* default */.Z, {
                             className: "dashboard-dialog-title-hook",
@@ -223,8 +217,8 @@ const UnlockIcon = (0,utils/* createIcon */.I)('UnlockIcon', /*#__PURE__*/ (0,js
 var base = __webpack_require__(21830);
 // EXTERNAL MODULE: ./src/plugins/UnlockProtocol/constants.ts
 var constants = __webpack_require__(38003);
-// EXTERNAL MODULE: ../typed-message/base/index.ts + 27 modules
-var typed_message_base = __webpack_require__(69492);
+// EXTERNAL MODULE: ../typed-message/base/index.ts + 2 modules
+var typed_message_base = __webpack_require__(65631);
 ;// CONCATENATED MODULE: ./src/plugins/UnlockProtocol/schema.json
 const schema_namespaceObject = JSON.parse('{"type":"object","additionalProperties":true,"properties":{"iv":{"type":"string","title":"iv"},"unlockLocks":{"type":"array","additionalProperties":true,"title":"unlockLocks","properties":{"unlocklock":{"type":"string","title":"unlocklock"},"chainid":{"type":"number","title":"chainid"}}},"post":{"type":"string","title":"post"}}}');
 ;// CONCATENATED MODULE: ./src/plugins/UnlockProtocol/helpers.ts
@@ -252,8 +246,8 @@ var Button = __webpack_require__(12463);
 var react = __webpack_require__(63423);
 // EXTERNAL MODULE: ./src/components/shared/InjectedDialog.tsx + 1 modules
 var InjectedDialog = __webpack_require__(57464);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var src_utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var src_utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ./src/plugins/UnlockProtocol/messages.ts
 var messages = __webpack_require__(47048);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/fuse.js@6.5.3/node_modules/fuse.js/dist/fuse.esm.js
@@ -771,44 +765,8 @@ const sns = {
 
 
 const UnlockProtocolMessage = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__/* .createPluginMessage */ .I4)(_constants__WEBPACK_IMPORTED_MODULE_0__/* .pluginId */ .aw);
-const PluginUnlockProtocolRPC = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__/* .createPluginRPC */ .V8)(_constants__WEBPACK_IMPORTED_MODULE_0__/* .pluginId */ .aw, ()=>Promise.all(/* import() */[__webpack_require__.e(5229), __webpack_require__.e(551), __webpack_require__.e(3601)]).then(__webpack_require__.bind(__webpack_require__, 93601))
+const PluginUnlockProtocolRPC = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__/* .createPluginRPC */ .V8)(_constants__WEBPACK_IMPORTED_MODULE_0__/* .pluginId */ .aw, ()=>Promise.all(/* import() */[__webpack_require__.e(2118), __webpack_require__.e(3601)]).then(__webpack_require__.bind(__webpack_require__, 93601))
 , UnlockProtocolMessage.rpc);
-
-
-/***/ }),
-
-/***/ 65375:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NE": () => (/* binding */ mindsBase),
-/* harmony export */   "Sf": () => (/* binding */ isMinds),
-/* harmony export */   "fN": () => (/* binding */ MINDS_ID),
-/* harmony export */   "fy": () => (/* binding */ mindsWorkerBase)
-/* harmony export */ });
-const MINDS_ID = 'minds.com';
-const origins = [
-    'https://www.minds.com/*',
-    'https://minds.com/*',
-    'https://cdn.minds.com/*'
-];
-const mindsBase = {
-    networkIdentifier: MINDS_ID,
-    name: 'minds',
-    declarativePermissions: {
-        origins
-    },
-    shouldActivate (location) {
-        return location.hostname.endsWith('minds.com');
-    }
-};
-function isMinds(ui) {
-    return ui.networkIdentifier === MINDS_ID;
-}
-const mindsWorkerBase = {
-    ...mindsBase,
-    gunNetworkHint: 'minds-'
-};
 
 
 /***/ }),
@@ -842,8 +800,6 @@ function useAllowTestnet() {
     return (0,context/* useWeb3StateContext */.N9)().allowTestnet;
 }
 
-// EXTERNAL MODULE: ../web3-shared/evm/hooks/useAccount.ts
-var useAccount = __webpack_require__(98086);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useChainId.ts
 var useChainId = __webpack_require__(63541);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/chainDetailed.ts
@@ -852,16 +808,18 @@ var chainDetailed = __webpack_require__(22229);
 var types = __webpack_require__(95130);
 // EXTERNAL MODULE: ../web3-shared/evm/pipes/index.ts
 var pipes = __webpack_require__(83468);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../web3-shared/evm/utils/address.ts
+var address = __webpack_require__(66580);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+kit@0.0.0-20220223101101-4e6f3b9/node_modules/@dimensiondev/kit/esm/index.js + 2 modules
 var esm = __webpack_require__(66559);
 // EXTERNAL MODULE: ./src/extension/options-page/DashboardComponents/ActionButton.tsx
 var ActionButton = __webpack_require__(47906);
 // EXTERNAL MODULE: ./src/plugins/Wallet/settings.ts
 var settings = __webpack_require__(63361);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ./src/plugins/Wallet/messages.ts
 var messages = __webpack_require__(63081);
 // EXTERNAL MODULE: ./src/extension/service.ts
@@ -890,10 +848,10 @@ function EthereumChainBoundary(props) {
     const { t  } = (0,utils/* useI18N */.M1)();
     const pluginID = (0,plugin_infra_src/* usePluginIDContext */.Zn)();
     const plugin = (0,plugin_infra_src/* useActivatedPlugin */.Rc)(pluginID, 'any');
-    const account = (0,useAccount/* useAccount */.m)();
+    const account = (0,plugin_infra_src/* useAccount */.mA)();
     const chainId = (0,useChainId/* useChainId */.xx)();
     const allowTestnet = useAllowTestnet();
-    const providerType = (0,shared_src/* useValueRef */.E)(settings/* currentProviderSettings */.t1);
+    const providerType = (0,dist/* useValueRef */.E)(settings/* currentProviderSettings */.t1);
     const { noSwitchNetworkTip =false  } = props;
     const classes = (0,src/* useStylesExtends */.Bc)(useStyles(), props);
     const expectedChainId = props.chainId;
@@ -908,6 +866,14 @@ function EthereumChainBoundary(props) {
     var ref1;
     // is the actual chain id a valid one even if it does not match with the expected one?
     const isValid = (ref1 = props === null || props === void 0 ? void 0 : (ref = props.isValidChainId) === null || ref === void 0 ? void 0 : ref.call(props, actualChainId, expectedChainId)) !== null && ref1 !== void 0 ? ref1 : false;
+    const { openDialog: openSelectProviderDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.selectProviderDialogUpdated */.R.events.selectProviderDialogUpdated);
+    // #region connect wallet dialog
+    const { setDialog: setConnectWalletDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.connectWalletDialogUpdated */.R.events.connectWalletDialogUpdated, (ev)=>{
+        if (ev.open) return;
+    });
+    // #endregion
+    // request ethereum-compatible network
+    const networkType = (0,chainDetailed/* getNetworkTypeFromChainId */._T)(expectedChainId);
     const onSwitchChain = (0,react.useCallback)(async ()=>{
         // a short time loading makes the user fells better
         await (0,esm/* delay */.gw)(1000);
@@ -923,8 +889,6 @@ function EthereumChainBoundary(props) {
                 });
                 return;
             }
-            // request ethereum-compatible network
-            const networkType = (0,chainDetailed/* getNetworkTypeFromChainId */._T)(expectedChainId);
             if (!networkType) return;
             try {
                 const overrides = {
@@ -949,7 +913,15 @@ function EthereumChainBoundary(props) {
             settings_settings/* pluginIDSettings.value */.tR.value = plugin_infra_src/* NetworkPluginID.PLUGIN_EVM */.FF.PLUGIN_EVM;
         };
         if (!isChainMatched) await switchToChain();
-        if (!isPluginMatched) await switchToPlugin();
+        if (!isPluginMatched) {
+            await switchToPlugin();
+            if (!networkType || networkType !== types/* NetworkType.Ethereum */.td.Ethereum || (0,address/* isValidAddress */.At)(account)) return;
+            setConnectWalletDialog({
+                open: true,
+                providerType: types/* ProviderType.MetaMask */.lP.MetaMask,
+                networkType
+            });
+        }
     }, [
         account,
         isAllowed,
@@ -958,7 +930,6 @@ function EthereumChainBoundary(props) {
         providerType,
         expectedChainId
     ]);
-    const { openDialog: openSelectProviderDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.selectProviderDialogUpdated */.R.events.selectProviderDialogUpdated);
     const renderBox = (children)=>{
         return(/*#__PURE__*/ (0,jsx_runtime.jsx)(Box/* default */.Z, {
             className: props.className,

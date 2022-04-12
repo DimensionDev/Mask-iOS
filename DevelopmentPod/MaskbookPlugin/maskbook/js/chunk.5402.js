@@ -12,7 +12,7 @@
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(83849);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(74491);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(13573);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(93573);
 /* harmony import */ var _utils_hooks_useLocationChange__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(75995);
 
 
@@ -159,8 +159,8 @@ function PageTabItem(props) {
 
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Typography/Typography.js + 1 modules
 var Typography = __webpack_require__(74491);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 ;// CONCATENATED MODULE: ./src/components/InjectedComponents/PageTab.tsx
 
 
@@ -283,6 +283,13 @@ function ProfileTabContent(props) {
         setSelectedTab(undefined);
     }, [
         identity.identifier
+    ]);
+    (0,react.useEffect)(()=>{
+        return utils/* MaskMessages.events.profileTabHidden.on */.ql.events.profileTabHidden.on((data)=>{
+            if (data.hidden) setHidden(data.hidden);
+        });
+    }, [
+        identity
     ]);
     (0,react.useEffect)(()=>{
         return utils/* MaskMessages.events.profileTabUpdated.on */.ql.events.profileTabUpdated.on((data)=>{
@@ -445,8 +452,8 @@ var react = __webpack_require__(63423);
 var uniqBy = __webpack_require__(18443);
 // EXTERNAL MODULE: ../plugins/Wallet/src/index.ts + 1 modules
 var src = __webpack_require__(89987);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
 var theme_src = __webpack_require__(43021);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useChainId.ts
@@ -467,8 +474,8 @@ var Box = __webpack_require__(18287);
 var Typography = __webpack_require__(74491);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Button/Button.js
 var Button = __webpack_require__(12463);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ./src/web3/UI/EthereumChainBoundary.tsx + 1 modules
 var EthereumChainBoundary = __webpack_require__(13484);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useAccount.ts
@@ -652,7 +659,10 @@ function NFTImage(props) {
 
 // EXTERNAL MODULE: ../plugin-infra/src/index.ts
 var plugin_infra_src = __webpack_require__(63151);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
 ;// CONCATENATED MODULE: ./src/plugins/Avatar/SNSAdaptor/NFTAvatar.tsx
+
 
 
 
@@ -735,7 +745,6 @@ const NFTAvatar_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
     })
 );
 function NFTAvatar(props) {
-    var ref;
     const { onChange , hideWallet  } = props;
     const classes = (0,theme_src/* useStylesExtends */.Bc)(NFTAvatar_useStyles(), props);
     const account = (0,plugin_infra_src/* useAccount */.mA)();
@@ -763,7 +772,7 @@ function NFTAvatar(props) {
             )
         );
     }, []);
-    const { openDialog: openSelectProviderDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(src/* WalletMessages.events.selectProviderDialogUpdated */.R$.events.selectProviderDialogUpdated);
+    const { openDialog: openSelectProviderDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(src/* WalletMessages.events.selectProviderDialogUpdated */.R$.events.selectProviderDialogUpdated);
     const LoadStatus = Array.from({
         length: 8
     }).fill(0).map((_, i)=>/*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
@@ -810,7 +819,10 @@ function NFTAvatar(props) {
                                 children: [
                                     t('nft_wallet_label'),
                                     ": ",
-                                    (Utils === null || Utils === void 0 ? void 0 : (ref = Utils.formatAddress) === null || ref === void 0 ? void 0 : ref.call(Utils, account, 4)) || account,
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(shared_src/* ReversedAddress */.il, {
+                                        address: account,
+                                        size: 4
+                                    }),
                                     !hideWallet ? /*#__PURE__*/ (0,jsx_runtime.jsx)(Button/* default */.Z, {
                                         variant: "text",
                                         onClick: openSelectProviderDialog,
@@ -927,8 +939,8 @@ const GearSettingsIcon = (0,utils/* createIcon */.I)('GearSettingsIcon', /*#__PU
 var src = __webpack_require__(43021);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Typography/Typography.js + 1 modules
 var Typography = __webpack_require__(74491);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var src_utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var src_utils = __webpack_require__(93573);
 ;// CONCATENATED MODULE: ./src/plugins/Avatar/SNSAdaptor/NFTAvatarButton.tsx
 
 
@@ -1240,7 +1252,7 @@ function NFTBadge(props) {
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(83634);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(13573);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(93573);
 /* harmony import */ var _hooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(45255);
 /* harmony import */ var _RainbowBox__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(10593);
 /* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(43021);
@@ -1440,7 +1452,7 @@ function useNFTAvatar(userId, snsKey) {
 
 if (false) {}
 const NFTAvatarMessage = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__/* .createPluginMessage */ .I4)(_constants__WEBPACK_IMPORTED_MODULE_0__/* .PLUGIN_ID */ .Uu);
-const PluginNFTAvatarRPC = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__/* .createPluginRPC */ .V8)(_constants__WEBPACK_IMPORTED_MODULE_0__/* .PLUGIN_ID */ .Uu, ()=>Promise.all(/* import() */[__webpack_require__.e(2698), __webpack_require__.e(8000), __webpack_require__.e(1440), __webpack_require__.e(2162), __webpack_require__.e(8393), __webpack_require__.e(4227), __webpack_require__.e(4544), __webpack_require__.e(5737), __webpack_require__.e(3883), __webpack_require__.e(2299), __webpack_require__.e(6045), __webpack_require__.e(1077), __webpack_require__.e(2943), __webpack_require__.e(8117), __webpack_require__.e(5756), __webpack_require__.e(8492), __webpack_require__.e(7765), __webpack_require__.e(1305), __webpack_require__.e(5891), __webpack_require__.e(8936), __webpack_require__.e(6265), __webpack_require__.e(1246), __webpack_require__.e(7141), __webpack_require__.e(708), __webpack_require__.e(9447), __webpack_require__.e(4477), __webpack_require__.e(1922), __webpack_require__.e(4074), __webpack_require__.e(9654)]).then(__webpack_require__.bind(__webpack_require__, 21585))
+const PluginNFTAvatarRPC = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__/* .createPluginRPC */ .V8)(_constants__WEBPACK_IMPORTED_MODULE_0__/* .PLUGIN_ID */ .Uu, ()=>Promise.all(/* import() */[__webpack_require__.e(2698), __webpack_require__.e(4227), __webpack_require__.e(4544), __webpack_require__.e(5737), __webpack_require__.e(3883), __webpack_require__.e(2299), __webpack_require__.e(6045), __webpack_require__.e(1077), __webpack_require__.e(8117), __webpack_require__.e(2943), __webpack_require__.e(5756), __webpack_require__.e(8492), __webpack_require__.e(7765), __webpack_require__.e(1305), __webpack_require__.e(5891), __webpack_require__.e(8936), __webpack_require__.e(6265), __webpack_require__.e(1246), __webpack_require__.e(7141), __webpack_require__.e(708), __webpack_require__.e(9447), __webpack_require__.e(1922), __webpack_require__.e(4859), __webpack_require__.e(876), __webpack_require__.e(6012)]).then(__webpack_require__.bind(__webpack_require__, 21585))
 , NFTAvatarMessage.rpc);
 
 
@@ -1463,7 +1475,7 @@ const PluginNFTAvatarRPC = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_1__
 /* harmony import */ var _EVM_messages__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(50650);
 /* harmony import */ var _extension_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(45925);
 /* harmony import */ var _masknet_web3_providers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(54492);
-/* harmony import */ var _masknet_web3_shared_base__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(15091);
+/* harmony import */ var _masknet_web3_shared_base__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(26618);
 /* harmony import */ var bignumber_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(42263);
 /* harmony import */ var bignumber_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(bignumber_js__WEBPACK_IMPORTED_MODULE_4__);
 
@@ -1600,277 +1612,6 @@ function useLocationChange(handler) {
     }, [
         handler
     ]);
-}
-
-
-/***/ }),
-
-/***/ 13484:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  "T": () => (/* binding */ EthereumChainBoundary)
-});
-
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(82798);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
-var react = __webpack_require__(63423);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Box/Box.js
-var Box = __webpack_require__(18287);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Typography/Typography.js + 1 modules
-var Typography = __webpack_require__(74491);
-// EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
-var src = __webpack_require__(43021);
-// EXTERNAL MODULE: ../plugin-infra/src/index.ts
-var plugin_infra_src = __webpack_require__(63151);
-// EXTERNAL MODULE: ../web3-shared/evm/context/index.tsx
-var context = __webpack_require__(67937);
-;// CONCATENATED MODULE: ../web3-shared/evm/hooks/useAllowTestnet.ts
-
-function useAllowTestnet() {
-    return (0,context/* useWeb3StateContext */.N9)().allowTestnet;
-}
-
-// EXTERNAL MODULE: ../web3-shared/evm/hooks/useAccount.ts
-var useAccount = __webpack_require__(98086);
-// EXTERNAL MODULE: ../web3-shared/evm/hooks/useChainId.ts
-var useChainId = __webpack_require__(63541);
-// EXTERNAL MODULE: ../web3-shared/evm/utils/chainDetailed.ts
-var chainDetailed = __webpack_require__(22229);
-// EXTERNAL MODULE: ../web3-shared/evm/types/index.ts
-var types = __webpack_require__(95130);
-// EXTERNAL MODULE: ../web3-shared/evm/pipes/index.ts
-var pipes = __webpack_require__(83468);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@dimensiondev+kit@0.0.0-20220223101101-4e6f3b9/node_modules/@dimensiondev/kit/esm/index.js + 2 modules
-var esm = __webpack_require__(66559);
-// EXTERNAL MODULE: ./src/extension/options-page/DashboardComponents/ActionButton.tsx
-var ActionButton = __webpack_require__(47906);
-// EXTERNAL MODULE: ./src/plugins/Wallet/settings.ts
-var settings = __webpack_require__(63361);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
-// EXTERNAL MODULE: ./src/plugins/Wallet/messages.ts
-var messages = __webpack_require__(63081);
-// EXTERNAL MODULE: ./src/extension/service.ts
-var service = __webpack_require__(45925);
-// EXTERNAL MODULE: ./src/settings/settings.ts
-var settings_settings = __webpack_require__(21202);
-;// CONCATENATED MODULE: ./src/web3/UI/EthereumChainBoundary.tsx
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const useStyles = (0,src/* makeStyles */.ZL)()(()=>({})
-);
-function EthereumChainBoundary(props) {
-    var ref;
-    const { t  } = (0,utils/* useI18N */.M1)();
-    const pluginID = (0,plugin_infra_src/* usePluginIDContext */.Zn)();
-    const plugin = (0,plugin_infra_src/* useActivatedPlugin */.Rc)(pluginID, 'any');
-    const account = (0,useAccount/* useAccount */.m)();
-    const chainId = (0,useChainId/* useChainId */.xx)();
-    const allowTestnet = useAllowTestnet();
-    const providerType = (0,shared_src/* useValueRef */.E)(settings/* currentProviderSettings */.t1);
-    const { noSwitchNetworkTip =false  } = props;
-    const classes = (0,src/* useStylesExtends */.Bc)(useStyles(), props);
-    const expectedChainId = props.chainId;
-    const expectedNetwork = (0,chainDetailed/* getChainName */.qz)(expectedChainId);
-    const actualChainId = chainId;
-    const actualNetwork = (0,chainDetailed/* getChainName */.qz)(actualChainId);
-    // if false then it will not guide the user to switch the network
-    const isAllowed = (0,chainDetailed/* isChainIdValid */.Ji)(expectedChainId, allowTestnet) && !!account && providerType !== types/* ProviderType.Coin98 */.lP.Coin98;
-    // is the actual chain id matched with the expected one?
-    const isChainMatched = actualChainId === expectedChainId;
-    const isPluginMatched = pluginID === plugin_infra_src/* NetworkPluginID.PLUGIN_EVM */.FF.PLUGIN_EVM;
-    var ref1;
-    // is the actual chain id a valid one even if it does not match with the expected one?
-    const isValid = (ref1 = props === null || props === void 0 ? void 0 : (ref = props.isValidChainId) === null || ref === void 0 ? void 0 : ref.call(props, actualChainId, expectedChainId)) !== null && ref1 !== void 0 ? ref1 : false;
-    const onSwitchChain = (0,react.useCallback)(async ()=>{
-        // a short time loading makes the user fells better
-        await (0,esm/* delay */.gw)(1000);
-        if (!isAllowed) return;
-        const switchToChain = async ()=>{
-            // read the chain detailed from the built-in chain list
-            const chainDetailedCAIP = (0,chainDetailed/* getChainDetailedCAIP */.EX)(expectedChainId);
-            if (!chainDetailedCAIP) throw new Error('Unknown network type.');
-            // if mask wallet was used it can switch network automatically
-            if (providerType === types/* ProviderType.MaskWallet */.lP.MaskWallet) {
-                await messages/* WalletRPC.updateAccount */.V.updateAccount({
-                    chainId: expectedChainId
-                });
-                return;
-            }
-            // request ethereum-compatible network
-            const networkType = (0,chainDetailed/* getNetworkTypeFromChainId */._T)(expectedChainId);
-            if (!networkType) return;
-            try {
-                const overrides = {
-                    chainId: expectedChainId,
-                    providerType
-                };
-                await Promise.race([
-                    (async ()=>{
-                        await (0,esm/* delay */.gw)(30 /* seconds */  * 1000 /* milliseconds */ );
-                        throw new Error('Timeout!');
-                    })(),
-                    networkType === types/* NetworkType.Ethereum */.td.Ethereum ? service/* default.Ethereum.switchEthereumChain */.ZP.Ethereum.switchEthereumChain(expectedChainId, overrides) : service/* default.Ethereum.addEthereumChain */.ZP.Ethereum.addEthereumChain(chainDetailedCAIP, account, overrides), 
-                ]);
-                // recheck
-                const chainIdHex = await service/* default.Ethereum.getChainId */.ZP.Ethereum.getChainId(overrides);
-                if (Number.parseInt(chainIdHex, 16) !== expectedChainId) throw new Error('Failed to switch chain.');
-            } catch  {
-                throw new Error(`Switch Chain Error: Make sure your wallet is on the ${(0,pipes/* resolveNetworkName */.nW)(networkType)} network.`);
-            }
-        };
-        const switchToPlugin = async ()=>{
-            settings_settings/* pluginIDSettings.value */.tR.value = plugin_infra_src/* NetworkPluginID.PLUGIN_EVM */.FF.PLUGIN_EVM;
-        };
-        if (!isChainMatched) await switchToChain();
-        if (!isPluginMatched) await switchToPlugin();
-    }, [
-        account,
-        isAllowed,
-        isChainMatched,
-        isPluginMatched,
-        providerType,
-        expectedChainId
-    ]);
-    const { openDialog: openSelectProviderDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.selectProviderDialogUpdated */.R.events.selectProviderDialogUpdated);
-    const renderBox = (children)=>{
-        return(/*#__PURE__*/ (0,jsx_runtime.jsx)(Box/* default */.Z, {
-            className: props.className,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            sx: !props.disablePadding ? {
-                paddingTop: 1,
-                paddingBottom: 1
-            } : null,
-            children: children
-        }));
-    };
-    if (!account) return renderBox(/*#__PURE__*/ (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
-        children: [
-            /*#__PURE__*/ (0,jsx_runtime.jsx)(Typography/* default */.Z, {
-                color: "textPrimary",
-                children: /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
-                    children: t('plugin_wallet_connect_wallet_tip')
-                })
-            }),
-            !props.hiddenConnectButton ? /*#__PURE__*/ (0,jsx_runtime.jsx)(ActionButton/* default */.ZP, {
-                variant: "contained",
-                size: "small",
-                sx: {
-                    marginTop: 1.5
-                },
-                onClick: openSelectProviderDialog,
-                children: t('plugin_wallet_connect_wallet')
-            }) : null
-        ]
-    }));
-    if (isChainMatched && isPluginMatched || isValid) return(/*#__PURE__*/ (0,jsx_runtime.jsx)(jsx_runtime.Fragment, {
-        children: props.children
-    }));
-    if (!isAllowed) return renderBox(/*#__PURE__*/ (0,jsx_runtime.jsx)(Typography/* default */.Z, {
-        color: "textPrimary",
-        children: /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
-            children: t('plugin_wallet_not_available_on', {
-                network: actualNetwork
-            })
-        })
-    }));
-    if (pluginID !== plugin_infra_src/* NetworkPluginID.PLUGIN_EVM */.FF.PLUGIN_EVM) {
-        var ref2;
-        var ref3, _switchButtonStyle;
-        return renderBox(/*#__PURE__*/ (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
-            children: [
-                !noSwitchNetworkTip ? /*#__PURE__*/ (0,jsx_runtime.jsx)(Typography/* default */.Z, {
-                    color: "textPrimary",
-                    children: /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
-                        children: t('plugin_wallet_not_available_on', {
-                            network: (ref3 = plugin === null || plugin === void 0 ? void 0 : (ref2 = plugin.name) === null || ref2 === void 0 ? void 0 : ref2.fallback) !== null && ref3 !== void 0 ? ref3 : 'Unknown Plugin'
-                        })
-                    })
-                }) : null,
-                isAllowed ? /*#__PURE__*/ (0,jsx_runtime.jsx)(ActionButton/* ActionButtonPromise */.Zc, {
-                    variant: "contained",
-                    size: "small",
-                    className: classes.switchButton,
-                    sx: (_switchButtonStyle = props.switchButtonStyle) !== null && _switchButtonStyle !== void 0 ? _switchButtonStyle : {
-                        marginTop: 1.5
-                    },
-                    init: /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
-                        children: t('plugin_wallet_switch_network', {
-                            network: expectedNetwork
-                        })
-                    }),
-                    waiting: t('plugin_wallet_switch_network_under_going', {
-                        network: expectedNetwork
-                    }),
-                    complete: t('plugin_wallet_switch_network', {
-                        network: expectedNetwork
-                    }),
-                    failed: t('retry'),
-                    executor: onSwitchChain,
-                    completeOnClick: onSwitchChain,
-                    failedOnClick: "use executor",
-                    ...props.ActionButtonPromiseProps
-                }) : null
-            ]
-        }));
-    }
-    var _switchButtonStyle1;
-    return renderBox(/*#__PURE__*/ (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
-        children: [
-            !noSwitchNetworkTip ? /*#__PURE__*/ (0,jsx_runtime.jsx)(Typography/* default */.Z, {
-                color: "textPrimary",
-                children: /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
-                    children: t('plugin_wallet_not_available_on', {
-                        network: actualNetwork
-                    })
-                })
-            }) : null,
-            isAllowed ? /*#__PURE__*/ (0,jsx_runtime.jsx)(ActionButton/* ActionButtonPromise */.Zc, {
-                variant: "contained",
-                size: "small",
-                className: classes.switchButton,
-                sx: (_switchButtonStyle1 = props.switchButtonStyle) !== null && _switchButtonStyle1 !== void 0 ? _switchButtonStyle1 : {
-                    marginTop: 1.5
-                },
-                init: /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
-                    children: t('plugin_wallet_switch_network', {
-                        network: expectedNetwork
-                    })
-                }),
-                waiting: t('plugin_wallet_switch_network_under_going', {
-                    network: expectedNetwork
-                }),
-                complete: t('plugin_wallet_switch_network', {
-                    network: expectedNetwork
-                }),
-                failed: t('retry'),
-                executor: onSwitchChain,
-                completeOnClick: onSwitchChain,
-                failedOnClick: "use executor",
-                ...props.ActionButtonPromiseProps
-            }) : null
-        ]
-    }));
 }
 
 

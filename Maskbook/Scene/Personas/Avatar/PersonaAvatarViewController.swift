@@ -72,13 +72,13 @@ class PersonaAvatarViewController: BaseViewController {
             selectPhotoButton
                 .cv.apply {
                     NSLayoutConstraint.activate([
-                        $0.heightAnchor.constraint(equalToConstant: 46)
+                        $0.heightAnchor.constraint(equalToConstant: 48)
                     ])
                 }
             takePhotoButton
                 .cv.apply {
                     NSLayoutConstraint.activate([
-                        $0.heightAnchor.constraint(equalToConstant: 46)
+                        $0.heightAnchor.constraint(equalToConstant: 48)
                     ])
                 }
         }
@@ -173,6 +173,13 @@ extension PersonaAvatarViewController {
     
     @objc
     func takePhotoAction() {
-        present(cameraController, animated: true, completion: nil)
+        ScannerPermission.authorizeCameraWith { [weak self] isAuthorize in
+            guard let self = self else { return }
+            if isAuthorize {
+                self.present(self.cameraController, animated: true, completion: nil)
+            } else {
+                ScannerPermission.showCameraAccessAlert(coordinator: self.coordinator)
+            }
+        }
     }
 }

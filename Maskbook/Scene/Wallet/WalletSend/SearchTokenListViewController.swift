@@ -93,10 +93,10 @@ class SearchTokenListViewController: BaseViewController {
                 
         view.addSubview(searchTextField)
         searchTextField.snp.makeConstraints { make in
-            make.right.equalTo(-22)
-            make.left.equalTo(22)
+            make.right.equalTo(-LayoutConstraints.trailing)
+            make.left.equalTo(LayoutConstraints.leading)
             make.height.equalTo(52)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(24)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(LayoutConstraints.top)
         }
         
         view.addSubview(tableView)

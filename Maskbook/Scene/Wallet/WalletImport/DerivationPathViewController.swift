@@ -68,7 +68,11 @@ class DerivationPathViewController: BaseViewController {
         let view = UIStackView()
         view.axis = .vertical
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: 24, left: LayoutConstraints.leading, bottom: 24, right: LayoutConstraints.trailing)
+        view.layoutMargins = UIEdgeInsets(
+            top: LayoutConstraints.top,
+            left: LayoutConstraints.leading,
+            bottom: 24,
+            right: LayoutConstraints.trailing)
         
         view.addArrangedSubview(nextButton)
         return view

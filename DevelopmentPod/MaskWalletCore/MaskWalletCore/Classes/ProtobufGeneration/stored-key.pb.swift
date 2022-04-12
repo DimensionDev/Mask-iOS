@@ -291,6 +291,25 @@ public struct Api_GenerateMnemonicResp {
   public init() {}
 }
 
+#if swift(>=5.5) && canImport(_Concurrency)
+extension Api_GetKeyStoreSupportImportTypeParam: @unchecked Sendable {}
+extension Api_GetKeyStoreSupportImportTypeResp: @unchecked Sendable {}
+extension Api_LoadStoredKeyParam: @unchecked Sendable {}
+extension Api_LoadStoredKeyResp: @unchecked Sendable {}
+extension Api_CreateStoredKeyParam: @unchecked Sendable {}
+extension Api_CreateStoredKeyResp: @unchecked Sendable {}
+extension Api_ImportPrivateStoredKeyParam: @unchecked Sendable {}
+extension Api_ImportPrivateStoredKeyResp: @unchecked Sendable {}
+extension Api_ImportMnemonicStoredKeyParam: @unchecked Sendable {}
+extension Api_ImportMnemonicStoredKeyResp: @unchecked Sendable {}
+extension Api_ImportJSONStoredKeyParam: @unchecked Sendable {}
+extension Api_ImportJSONStoredKeyResp: @unchecked Sendable {}
+extension Api_UpdateStoredKeyPasswordParam: @unchecked Sendable {}
+extension Api_UpdateStoredKeyPasswordResp: @unchecked Sendable {}
+extension Api_GenerateMnemonicParam: @unchecked Sendable {}
+extension Api_GenerateMnemonicResp: @unchecked Sendable {}
+#endif  // swift(>=5.5) && canImport(_Concurrency)
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "api"
@@ -476,9 +495,13 @@ extension Api_CreateStoredKeyResp: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if let v = self._storedKey {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._storedKey {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    }
+    } }()
     if !self.mnemonic.isEmpty {
       try visitor.visitSingularStringField(value: self.mnemonic, fieldNumber: 2)
     }
@@ -562,9 +585,13 @@ extension Api_ImportPrivateStoredKeyResp: SwiftProtobuf.Message, SwiftProtobuf._
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if let v = self._storedKey {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._storedKey {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    }
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -632,9 +659,13 @@ extension Api_ImportMnemonicStoredKeyResp: SwiftProtobuf.Message, SwiftProtobuf.
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if let v = self._storedKey {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._storedKey {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    }
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -720,9 +751,13 @@ extension Api_ImportJSONStoredKeyResp: SwiftProtobuf.Message, SwiftProtobuf._Mes
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if let v = self._storedKey {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._storedKey {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    }
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -796,9 +831,13 @@ extension Api_UpdateStoredKeyPasswordResp: SwiftProtobuf.Message, SwiftProtobuf.
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if let v = self._storedKey {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._storedKey {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    }
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 

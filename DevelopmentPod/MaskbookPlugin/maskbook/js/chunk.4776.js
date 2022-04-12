@@ -111,7 +111,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_StyledInput__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(64702);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(92186);
 /* harmony import */ var _plugins_Wallet_messages__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(63081);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(13573);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(93573);
 /* harmony import */ var _hooks_useSetWalletNameForm__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(35647);
 
 

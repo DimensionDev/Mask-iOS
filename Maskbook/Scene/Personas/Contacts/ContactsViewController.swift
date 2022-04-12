@@ -213,6 +213,7 @@ extension ContactsViewController: UITableViewDelegate {
         } else {
             tableHeader.frame.origin = CGPoint(x: 0, y: tableView.contentOffset.y)
         }
+        searchBar.resignFirstResponder()
     }
 }
 
@@ -257,6 +258,10 @@ extension ContactsViewController: UISearchBarDelegate {
     }
 
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
 }

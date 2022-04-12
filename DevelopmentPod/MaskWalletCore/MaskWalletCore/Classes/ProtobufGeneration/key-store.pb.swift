@@ -173,6 +173,19 @@ public struct Api_ExportKeyStoreJSONResp {
   public init() {}
 }
 
+#if swift(>=5.5) && canImport(_Concurrency)
+extension Api_GetKeyStoreSupportExportTypeParam: @unchecked Sendable {}
+extension Api_GetKeyStoreSupportExportTypeResp: @unchecked Sendable {}
+extension Api_ExportKeyStorePrivateKeyParam: @unchecked Sendable {}
+extension Api_ExportKeyStorePrivateKeyOfPathParam: @unchecked Sendable {}
+extension Api_ExportKeyStorePrivateKeyResp: @unchecked Sendable {}
+extension Api_ExportKeyStoreMnemonicParam: @unchecked Sendable {}
+extension Api_ExportKeyStoreMnemonicResp: @unchecked Sendable {}
+extension Api_ExportKeyStoreJSONOfAddressParam: @unchecked Sendable {}
+extension Api_ExportKeyStoreJSONOfPathParam: @unchecked Sendable {}
+extension Api_ExportKeyStoreJSONResp: @unchecked Sendable {}
+#endif  // swift(>=5.5) && canImport(_Concurrency)
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "api"

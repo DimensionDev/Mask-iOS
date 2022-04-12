@@ -533,7 +533,7 @@ if (false) {}
 const PluginPetMessages = {
     events: (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__/* .createPluginMessage */ .I4)(_constants__WEBPACK_IMPORTED_MODULE_2__/* .PetsPluginID */ .Dt, _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .serializer */ .GM)
 };
-const PluginPetRPC = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__/* .createPluginRPC */ .V8)(_constants__WEBPACK_IMPORTED_MODULE_2__/* .PetsPluginID */ .Dt, ()=>Promise.all(/* import() */[__webpack_require__.e(2698), __webpack_require__.e(8000), __webpack_require__.e(1440), __webpack_require__.e(2162), __webpack_require__.e(8393), __webpack_require__.e(4227), __webpack_require__.e(4544), __webpack_require__.e(5737), __webpack_require__.e(3883), __webpack_require__.e(2299), __webpack_require__.e(6045), __webpack_require__.e(1077), __webpack_require__.e(2943), __webpack_require__.e(8117), __webpack_require__.e(5756), __webpack_require__.e(8492), __webpack_require__.e(7765), __webpack_require__.e(1305), __webpack_require__.e(5891), __webpack_require__.e(8936), __webpack_require__.e(6265), __webpack_require__.e(1246), __webpack_require__.e(7141), __webpack_require__.e(708), __webpack_require__.e(9447), __webpack_require__.e(1922), __webpack_require__.e(4074), __webpack_require__.e(7907)]).then(__webpack_require__.bind(__webpack_require__, 24895))
+const PluginPetRPC = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__/* .createPluginRPC */ .V8)(_constants__WEBPACK_IMPORTED_MODULE_2__/* .PetsPluginID */ .Dt, ()=>Promise.all(/* import() */[__webpack_require__.e(2698), __webpack_require__.e(4227), __webpack_require__.e(4544), __webpack_require__.e(5737), __webpack_require__.e(3883), __webpack_require__.e(2299), __webpack_require__.e(6045), __webpack_require__.e(1077), __webpack_require__.e(8117), __webpack_require__.e(2943), __webpack_require__.e(5756), __webpack_require__.e(8492), __webpack_require__.e(7765), __webpack_require__.e(1305), __webpack_require__.e(5891), __webpack_require__.e(8936), __webpack_require__.e(6265), __webpack_require__.e(1246), __webpack_require__.e(7141), __webpack_require__.e(708), __webpack_require__.e(9447), __webpack_require__.e(1922), __webpack_require__.e(4859), __webpack_require__.e(876), __webpack_require__.e(8138)]).then(__webpack_require__.bind(__webpack_require__, 24895))
 , PluginPetMessages.events.rpc);
 
 
@@ -552,12 +552,12 @@ const PluginPetRPC = (0,_masknet_plugin_infra__WEBPACK_IMPORTED_MODULE_0__/* .cr
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(63541);
 /* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(68681);
 /* harmony import */ var _components_shared_InjectedDialog__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(57464);
-/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(39850);
-/* harmony import */ var _trader_useAllProviderTradeContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(35396);
+/* harmony import */ var _masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(98193);
+/* harmony import */ var _trader_useAllProviderTradeContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(95198);
 /* harmony import */ var _trader_useTargetChainIdContext__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(84686);
 /* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(61274);
 /* harmony import */ var _Trader__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(81152);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(13573);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(93573);
 /* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(43021);
 /* harmony import */ var _components_shared_WalletStatusBox__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(57393);
 /* harmony import */ var _components_shared_NetworkTab__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(6054);
@@ -635,7 +635,7 @@ function TraderDialog({ open , onClose  }) {
     const chainIdValid = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_14__/* .useChainIdValid */ .as)();
     const [traderProps, setTraderProps] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)();
     const [chainId, setChainId] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(currentChainId);
-    const { open: remoteOpen , closeDialog  } = (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_4__/* .useRemoteControlledDialog */ .F$)(_messages__WEBPACK_IMPORTED_MODULE_7__/* .PluginTraderMessages.swapDialogUpdated */ .A.swapDialogUpdated, (ev)=>{
+    const { open: remoteOpen , closeDialog  } = (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_4__/* .useRemoteControlledDialog */ .F$)(_messages__WEBPACK_IMPORTED_MODULE_7__/* .PluginTraderMessages.swapDialogUpdated */ .A.swapDialogUpdated, (ev)=>{
         if (ev === null || ev === void 0 ? void 0 : ev.traderProps) setTraderProps(ev.traderProps);
     });
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
@@ -737,7 +737,8 @@ const resolveTradeProviderName = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_M
     [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.TRADERJOE */ .z4.TRADERJOE]: 'TraderJoe',
     [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.PANGOLIN */ .z4.PANGOLIN]: 'PangolinDex',
     [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.TRISOLARIS */ .z4.TRISOLARIS]: 'Trisolaris',
-    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.WANNASWAP */ .z4.WANNASWAP]: 'WannaSwap'
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.WANNASWAP */ .z4.WANNASWAP]: 'WannaSwap',
+    [_masknet_public_api__WEBPACK_IMPORTED_MODULE_0__/* .TradeProvider.MDEX */ .z4.MDEX]: 'Mdex'
 }, (tradeProvider)=>{
     throw new Error(`Unknown provider type: ${tradeProvider}`);
 });
@@ -797,8 +798,8 @@ var chainDetailed = __webpack_require__(22229);
 var types = __webpack_require__(95130);
 // EXTERNAL MODULE: ../web3-shared/evm/pipes/index.ts
 var pipes = __webpack_require__(83468);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ./src/components/shared/InjectedDialog.tsx + 1 modules
 var InjectedDialog = __webpack_require__(57464);
 // EXTERNAL MODULE: ./src/plugins/Wallet/messages.ts
@@ -815,12 +816,14 @@ var Typography = __webpack_require__(74491);
 var CircularProgress = __webpack_require__(83634);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Link/Link.js + 1 modules
 var Link = __webpack_require__(86377);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
 // EXTERNAL MODULE: ../plugin-infra/src/index.ts
 var plugin_infra_src = __webpack_require__(63151);
 // EXTERNAL MODULE: ./src/extension/options-page/DashboardComponents/ActionButton.tsx
 var ActionButton = __webpack_require__(47906);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 ;// CONCATENATED MODULE: ./src/resources/FlashIcon.tsx
 
 
@@ -1033,14 +1036,14 @@ function ConnectWalletDialog(props) {
     const [providerType, setProviderType] = (0,react.useState)();
     const [networkType, setNetworkType] = (0,react.useState)();
     // #region remote controlled dialog
-    const { open , setDialog: setConnectWalletDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.connectWalletDialogUpdated */.R.events.connectWalletDialogUpdated, (ev)=>{
+    const { open , setDialog: setConnectWalletDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.connectWalletDialogUpdated */.R.events.connectWalletDialogUpdated, (ev)=>{
         if (!ev.open) return;
         setProviderType(ev.providerType);
         setNetworkType(ev.networkType);
     });
     // #endregion
     // #region walletconnect
-    const { setDialog: setWalletConnectDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.walletConnectQRCodeDialogUpdated */.R.events.walletConnectQRCodeDialogUpdated);
+    const { setDialog: setWalletConnectDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.walletConnectQRCodeDialogUpdated */.R.events.walletConnectQRCodeDialogUpdated);
     // #endregion
     const connectTo = (0,react.useCallback)(async ()=>{
         if (!networkType) throw new Error('Unknown network type.');
@@ -1181,14 +1184,14 @@ var DialogContent = __webpack_require__(68681);
 var src = __webpack_require__(89987);
 // EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
 var theme_src = __webpack_require__(43021);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ../web3-shared/evm/types/index.ts
 var types = __webpack_require__(95130);
 // EXTERNAL MODULE: ./src/components/shared/InjectedDialog.tsx + 1 modules
 var InjectedDialog = __webpack_require__(57464);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useChainId.ts
 var useChainId = __webpack_require__(63541);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/chainDetailed.ts
@@ -1297,8 +1300,8 @@ const useGasSettingStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
     })
 );
 
-// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
-var base_src = __webpack_require__(15091);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var base_src = __webpack_require__(26618);
 ;// CONCATENATED MODULE: ./src/plugins/Wallet/SNSAdaptor/GasSettingDialog/GasSetting1559.tsx
 
 
@@ -1868,7 +1871,7 @@ const GasSettingDialog = ()=>{
     const [gasOption1, setGasOption] = (0,react.useState)(types/* GasOption.Medium */.TP.Medium);
     const [gasLimit1, setGasLimit] = (0,react.useState)(0);
     const [minGasLimit, setMinGasLimit] = (0,react.useState)(0);
-    const { open , closeDialog , setDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(src/* WalletMessages.events.gasSettingDialogUpdated */.R$.events.gasSettingDialogUpdated, (evt)=>{
+    const { open , closeDialog , setDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(src/* WalletMessages.events.gasSettingDialogUpdated */.R$.events.gasSettingDialogUpdated, (evt)=>{
         if (!evt.open) return;
         if (evt.gasOption) setGasOption(evt.gasOption);
         if (evt.gasLimit) setGasLimit(evt.gasLimit);
@@ -1913,15 +1916,17 @@ const GasSettingDialog = ()=>{
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(68681);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(15672);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(72212);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(12463);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(68681);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(15672);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(72212);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(12463);
 /* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(43021);
 /* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(63081);
 /* harmony import */ var _components_shared_InjectedDialog__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(57464);
 /* harmony import */ var _utils_i18n_next_ui__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(47930);
-/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(39850);
+/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(95367);
+/* harmony import */ var _masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(98193);
+
 
 
 
@@ -1946,7 +1951,7 @@ function WalletRenameWalletDialog() {
     const { classes  } = useStyles();
     const [name, setName] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('');
     const [wallet, setWallet] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
-    const { open , setDialog  } = (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_6__/* .useRemoteControlledDialog */ .F$)(_messages__WEBPACK_IMPORTED_MODULE_3__/* .WalletMessages.events.walletRenameDialogUpdated */ .R.events.walletRenameDialogUpdated);
+    const { open , setDialog  } = (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_7__/* .useRemoteControlledDialog */ .F$)(_messages__WEBPACK_IMPORTED_MODULE_3__/* .WalletMessages.events.walletRenameDialogUpdated */ .R.events.walletRenameDialogUpdated);
     _messages__WEBPACK_IMPORTED_MODULE_3__/* .WalletMessages.events.walletRenameDialogUpdated.on */ .R.events.walletRenameDialogUpdated.on((data)=>{
         var ref;
         if (!data.open) return;
@@ -1974,9 +1979,9 @@ function WalletRenameWalletDialog() {
         onClose: handleClose,
         maxWidth: "xs",
         children: [
-            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z, {
+            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z, {
                 className: classes.content,
-                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z, {
+                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z, {
                     label: t('wallet_rename'),
                     fullWidth: true,
                     autoFocus: true,
@@ -1990,17 +1995,17 @@ function WalletRenameWalletDialog() {
                     onKeyPress: (e)=>e.key === 'Enter' && handleRename()
                 })
             }),
-            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z, {
+            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z, {
                 className: classes.dialogActions,
                 children: [
-                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z, {
+                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z, {
                         fullWidth: true,
                         color: "inherit",
                         variant: "outlined",
                         onClick: handleClose,
                         children: t('confirm')
                     }),
-                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z, {
+                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z, {
                         className: classes.actionButton,
                         variant: "contained",
                         onClick: handleRename,
@@ -2027,7 +2032,7 @@ function WalletRenameWalletDialog() {
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
 /* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(28577);
-/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(39850);
+/* harmony import */ var _masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(98193);
 /* harmony import */ var _mui_system__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(5368);
 /* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(43021);
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(95130);
@@ -2037,7 +2042,7 @@ function WalletRenameWalletDialog() {
 /* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(79226);
 /* harmony import */ var _components_shared_InjectedDialog__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(57464);
 /* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(63081);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(13573);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(93573);
 
 
 
@@ -2065,7 +2070,7 @@ function RestoreLegacyWalletDialog() {
     const { t  } = (0,_utils__WEBPACK_IMPORTED_MODULE_7__/* .useI18N */ .M1)();
     const { classes  } = useStyles();
     // const navigate = useNavigate()
-    const { open , setDialog  } = (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_2__/* .useRemoteControlledDialog */ .F$)(_messages__WEBPACK_IMPORTED_MODULE_6__/* .WalletMessages.events.restoreLegacyWalletDialogUpdated */ .R.events.restoreLegacyWalletDialogUpdated);
+    const { open , setDialog  } = (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_2__/* .useRemoteControlledDialog */ .F$)(_messages__WEBPACK_IMPORTED_MODULE_6__/* .WalletMessages.events.restoreLegacyWalletDialogUpdated */ .R.events.restoreLegacyWalletDialogUpdated);
     const onClose = (0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)(()=>{
         setDialog({
             open: false
@@ -2144,7 +2149,7 @@ function RestoreLegacyWalletDialog() {
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(83849);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react_i18next__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(92452);
-/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(39850);
+/* harmony import */ var _masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(98193);
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(98086);
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(22283);
 /* harmony import */ var _mui_icons_material_PriorityHigh__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(23541);
@@ -2156,7 +2161,7 @@ function RestoreLegacyWalletDialog() {
 /* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(12463);
 /* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(43021);
 /* harmony import */ var _components_shared_InjectedDialog__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(57464);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(13573);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(93573);
 /* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(63081);
 /* harmony import */ var _extension_options_page_DashboardComponents_ActionButton__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(47906);
 
@@ -2223,7 +2228,7 @@ function WalletRiskWarningDialog() {
     const account = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_9__/* .useAccount */ .m)();
     const { showSnackbar  } = (0,_masknet_theme__WEBPACK_IMPORTED_MODULE_4__/* .useCustomSnackbar */ .Ii)();
     const isMobile = (0,_utils__WEBPACK_IMPORTED_MODULE_6__/* .useMatchXS */ .IN)();
-    const { open , setDialog  } = (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_3__/* .useRemoteControlledDialog */ .F$)(_messages__WEBPACK_IMPORTED_MODULE_7__/* .WalletMessages.events.walletRiskWarningDialogUpdated */ .R.events.walletRiskWarningDialogUpdated);
+    const { open , setDialog  } = (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_3__/* .useRemoteControlledDialog */ .F$)(_messages__WEBPACK_IMPORTED_MODULE_7__/* .WalletMessages.events.walletRiskWarningDialogUpdated */ .R.events.walletRiskWarningDialogUpdated);
     const onClose = (0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)(async ()=>{
         setDialog({
             open: false,
@@ -2416,12 +2421,12 @@ var pipes = __webpack_require__(83468);
 var InjectedDialog = __webpack_require__(57464);
 // EXTERNAL MODULE: ./src/plugins/Wallet/messages.ts
 var messages = __webpack_require__(63081);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/wallet.ts@1.0.1/node_modules/wallet.ts/dist/index.js
-var dist = __webpack_require__(99674);
+var wallet_ts_dist = __webpack_require__(99674);
 // EXTERNAL MODULE: ./src/extension/options-page/DashboardComponents/SearchInput.tsx
 var SearchInput = __webpack_require__(26042);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/OpenInNew.js
@@ -2538,7 +2543,7 @@ function SelectNftContractDialog(props) {
     const [keyword1, setKeyword] = (0,react.useState)('');
     const account = (0,useAccount/* useAccount */.m)();
     // #region remote controlled dialog
-    const { open , setDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.selectNftContractDialogUpdated */.R.events.selectNftContractDialogUpdated, (ev)=>{
+    const { open , setDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.selectNftContractDialogUpdated */.R.events.selectNftContractDialogUpdated, (ev)=>{
         if (!ev.open) return;
         setId(ev.uuid);
     });
@@ -2660,7 +2665,7 @@ function SelectNftContractDialog(props) {
 function SearchResultBox(props) {
     const { keyword , searchedTokenList , onSubmit , contractList  } = props;
     const { classes  } = useStyles();
-    const isValid = dist.EthereumAddress.isValid(keyword);
+    const isValid = wallet_ts_dist.EthereumAddress.isValid(keyword);
     const { value: contractDetailed , loading  } = (0,useERC721ContractDetailed/* useERC721ContractDetailed */.P)(keyword);
     const { t  } = (0,utils/* useI18N */.M1)();
     return(/*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
@@ -2767,12 +2772,12 @@ var react = __webpack_require__(63423);
 var src = __webpack_require__(43021);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/DialogContent/DialogContent.js + 1 modules
 var DialogContent = __webpack_require__(68681);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
 // EXTERNAL MODULE: ../plugin-infra/src/index.ts
 var plugin_infra_src = __webpack_require__(63151);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var shared_base_src = __webpack_require__(79226);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ./src/utils/i18n-next-ui.ts
 var i18n_next_ui = __webpack_require__(47930);
 // EXTERNAL MODULE: ./src/plugins/Wallet/messages.ts
@@ -2806,6 +2811,8 @@ const SelectedIcon = (0,utils/* createIcon */.I)('SelectedIcon', /*#__PURE__*/ (
     ]
 }), '0 0 16 16');
 
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Box/Box.js
 var Box = __webpack_require__(18287);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Typography/Typography.js + 1 modules
@@ -2816,8 +2823,8 @@ var List = __webpack_require__(66407);
 var ListItem = __webpack_require__(66552);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/head.js
 var head = __webpack_require__(29730);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var src_utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var src_utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Card/Card.js + 1 modules
 var Card = __webpack_require__(22234);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/ButtonBase/ButtonBase.js + 4 modules
@@ -3095,7 +3102,7 @@ function SelectProviderDialog(props) {
     const { t  } = (0,i18n_next_ui/* useI18N */.M)();
     const { classes  } = SelectProviderDialog_useStyles();
     // #region remote controlled dialog logic
-    const { open , closeDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.selectProviderDialogUpdated */.R.events.selectProviderDialogUpdated);
+    const { open , closeDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.selectProviderDialogUpdated */.R.events.selectProviderDialogUpdated);
     // #endregion
     // #region native app
     (0,react.useEffect)(()=>{
@@ -3108,7 +3115,7 @@ function SelectProviderDialog(props) {
     const isDashboard = (0,shared_base_src/* isDashboardPage */.K2)();
     const networks = (0,plugin_infra_src/* getRegisteredWeb3Networks */.Rm)();
     const providers = (0,plugin_infra_src/* getRegisteredWeb3Providers */.i8)();
-    const pluginID = (0,shared_src/* useValueRef */.E)(settings/* pluginIDSettings */.tR);
+    const pluginID = (0,dist/* useValueRef */.E)(settings/* pluginIDSettings */.tR);
     const network = (0,plugin_infra_src/* useNetworkDescriptor */.Vw)();
     const [undeterminedPluginID, setUndeterminedPluginID] = (0,react.useState)(pluginID);
     const [undeterminedNetworkID, setUndeterminedNetworkID] = (0,react.useState)(network === null || network === void 0 ? void 0 : network.ID);
@@ -3166,18 +3173,20 @@ function SelectProviderDialog(props) {
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(82798);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63423);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(90171);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(68681);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(90171);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(68681);
 /* harmony import */ var _masknet_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(43021);
-/* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(63541);
-/* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(24403);
+/* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(63541);
+/* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(24403);
 /* harmony import */ var _components_shared_InjectedDialog__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(57464);
 /* harmony import */ var _Wallet_messages__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(63081);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(13573);
-/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(39850);
-/* harmony import */ var _dimensiondev_kit__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(66559);
-/* harmony import */ var _social_network_adaptor_minds_com_base__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(65375);
-/* harmony import */ var _social_network__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(61751);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(93573);
+/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(95367);
+/* harmony import */ var _masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(98193);
+/* harmony import */ var _dimensiondev_kit__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(66559);
+/* harmony import */ var _social_network_adaptor_minds_com_base__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(65375);
+/* harmony import */ var _social_network__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(61751);
+
 
 
 
@@ -3192,7 +3201,7 @@ function SelectProviderDialog(props) {
 
 const useStyles = (0,_masknet_theme__WEBPACK_IMPORTED_MODULE_2__/* .makeStyles */ .ZL)()((theme, { snsId , isDashboard  })=>({
         content: {
-            ...snsId === _social_network_adaptor_minds_com_base__WEBPACK_IMPORTED_MODULE_8__/* .MINDS_ID */ .fN ? {
+            ...snsId === _social_network_adaptor_minds_com_base__WEBPACK_IMPORTED_MODULE_9__/* .MINDS_ID */ .fN ? {
                 minWidth: 552
             } : {},
             padding: theme.spacing(3),
@@ -3220,12 +3229,12 @@ function SelectTokenDialog(props) {
     const { t  } = (0,_utils__WEBPACK_IMPORTED_MODULE_5__/* .useI18N */ .M1)();
     const isDashboard = location.href.includes('dashboard.html');
     const classes = (0,_masknet_theme__WEBPACK_IMPORTED_MODULE_2__/* .useStylesExtends */ .Bc)(useStyles({
-        snsId: _social_network__WEBPACK_IMPORTED_MODULE_9__/* .activatedSocialNetworkUI.networkIdentifier */ .LM.networkIdentifier,
+        snsId: _social_network__WEBPACK_IMPORTED_MODULE_10__/* .activatedSocialNetworkUI.networkIdentifier */ .LM.networkIdentifier,
         isDashboard
     }), props);
-    const chainId = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_10__/* .useChainId */ .xx)();
-    const { NATIVE_TOKEN_ADDRESS  } = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_11__/* .useTokenConstants */ .kd)(chainId);
-    const isMdScreen = (0,_mui_material__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z)((theme)=>theme.breakpoints.down('md')
+    const chainId = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_11__/* .useChainId */ .xx)();
+    const { NATIVE_TOKEN_ADDRESS  } = (0,_masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_12__/* .useTokenConstants */ .kd)(chainId);
+    const isMdScreen = (0,_mui_material__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z)((theme)=>theme.breakpoints.down('md')
     );
     const [id, setId] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('');
     const [targetChainId, setChainId] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(chainId);
@@ -3241,7 +3250,7 @@ function SelectTokenDialog(props) {
             setRowSize(60);
         }
     }, []);
-    const { open , setDialog  } = (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_6__/* .useRemoteControlledDialog */ .F$)(_Wallet_messages__WEBPACK_IMPORTED_MODULE_4__/* .WalletMessages.events.selectTokenDialogUpdated */ .R.events.selectTokenDialogUpdated, (ev)=>{
+    const { open , setDialog  } = (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_7__/* .useRemoteControlledDialog */ .F$)(_Wallet_messages__WEBPACK_IMPORTED_MODULE_4__/* .WalletMessages.events.selectTokenDialogUpdated */ .R.events.selectTokenDialogUpdated, (ev)=>{
         if (!ev.open) return;
         setId(ev.uuid);
         var _disableNativeToken;
@@ -3259,7 +3268,7 @@ function SelectTokenDialog(props) {
             uuid: id,
             token
         });
-        await (0,_dimensiondev_kit__WEBPACK_IMPORTED_MODULE_7__/* .delay */ .gw)(300);
+        await (0,_dimensiondev_kit__WEBPACK_IMPORTED_MODULE_8__/* .delay */ .gw)(300);
     }, [
         id,
         setDialog
@@ -3269,7 +3278,7 @@ function SelectTokenDialog(props) {
             open: false,
             uuid: id
         });
-        await (0,_dimensiondev_kit__WEBPACK_IMPORTED_MODULE_7__/* .delay */ .gw)(300);
+        await (0,_dimensiondev_kit__WEBPACK_IMPORTED_MODULE_8__/* .delay */ .gw)(300);
     }, [
         id,
         setDialog
@@ -3280,7 +3289,7 @@ function SelectTokenDialog(props) {
         open: open,
         onClose: onClose,
         title: t('plugin_wallet_select_a_token'),
-        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z, {
+        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_14__/* ["default"] */ .Z, {
             classes: {
                 root: classes.content
             },
@@ -3349,12 +3358,12 @@ var useWallets = __webpack_require__(95219);
 var types = __webpack_require__(95130);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useWallet.ts
 var useWallet = __webpack_require__(51596);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var shared_base_src = __webpack_require__(79226);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ./src/plugins/Wallet/messages.ts
 var messages = __webpack_require__(63081);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/ListItemAvatar/ListItemAvatar.js + 1 modules
@@ -3370,7 +3379,7 @@ var ListItemButton = __webpack_require__(31262);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/Check.js
 var Check = __webpack_require__(17005);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useBlockie.ts
-var useBlockie = __webpack_require__(7811);
+var useBlockie = __webpack_require__(97535);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/formatter.ts
 var formatter = __webpack_require__(22283);
 ;// CONCATENATED MODULE: ./src/components/shared/SelectWallet/WalletInList.tsx
@@ -3467,7 +3476,7 @@ function SelectWalletDialogUI(props) {
     const selectedWallet = (0,useWallet/* useWallet */.O)();
     // #region remote controlled dialog logic
     const [networkType, setNetworkType] = (0,react.useState)();
-    const { open , closeDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.selectWalletDialogUpdated */.R.events.selectWalletDialogUpdated, (ev)=>{
+    const { open , closeDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.selectWalletDialogUpdated */.R.events.selectWalletDialogUpdated, (ev)=>{
         if (!ev.open) return;
         setNetworkType(ev.networkType);
     });
@@ -3549,8 +3558,8 @@ function SelectWalletDialog(props) {
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(63541);
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(95130);
 /* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(83468);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(13573);
-/* harmony import */ var _masknet_shared__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(39850);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(93573);
+/* harmony import */ var _masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(98193);
 /* harmony import */ var _components_shared_InjectedDialog__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(57464);
 /* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(63081);
 
@@ -3598,7 +3607,7 @@ function TransactionDialogUI(props) {
     const [shareLink, setShareLink] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('');
     const [summary, setSummary] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('');
     const [title, setTitle] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(t('plugin_wallet_transaction'));
-    const { open , closeDialog  } = (0,_masknet_shared__WEBPACK_IMPORTED_MODULE_4__/* .useRemoteControlledDialog */ .F$)(_messages__WEBPACK_IMPORTED_MODULE_6__/* .WalletMessages.events.transactionDialogUpdated */ .R.events.transactionDialogUpdated, (ev)=>{
+    const { open , closeDialog  } = (0,_masknet_shared_base_ui__WEBPACK_IMPORTED_MODULE_4__/* .useRemoteControlledDialog */ .F$)(_messages__WEBPACK_IMPORTED_MODULE_6__/* .WalletMessages.events.transactionDialogUpdated */ .R.events.transactionDialogUpdated, (ev)=>{
         if (ev.open) {
             setState(ev.state);
             var _summary;
@@ -3751,7 +3760,7 @@ function TransactionDialog(props) {
 /* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(63081);
 /* harmony import */ var _WalletStatusDialog_TransactionDescription__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(85066);
 /* harmony import */ var _extension_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(45925);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(13573);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(93573);
 
 
 
@@ -3921,10 +3930,10 @@ var DialogActions = __webpack_require__(72212);
 var Button = __webpack_require__(12463);
 // EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
 var src = __webpack_require__(43021);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ./src/plugins/Wallet/messages.ts
 var messages = __webpack_require__(63081);
 // EXTERNAL MODULE: ./src/extension/service.ts
@@ -4380,6 +4389,8 @@ const FirefoxPlatform = ({ uri  })=>{
 
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Grid/Grid.js + 2 modules
 var Grid = __webpack_require__(20333);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
 ;// CONCATENATED MODULE: ./src/plugins/Wallet/SNSAdaptor/WalletConnectQRCodeDialog/QRCodeModel.tsx
 
 
@@ -4459,7 +4470,7 @@ const WalletConnectQRCodeDialog_useStyles = (0,src/* makeStyles */.ZL)()({
 const WalletConnectQRCodeDialog = ()=>{
     const [uri, setURI] = (0,react.useState)('');
     // #region remote controlled dialog logic
-    const { open , closeDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.walletConnectQRCodeDialogUpdated */.R.events.walletConnectQRCodeDialogUpdated, (ev)=>ev.open && setURI(ev.uri)
+    const { open , closeDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.walletConnectQRCodeDialogUpdated */.R.events.walletConnectQRCodeDialogUpdated, (ev)=>ev.open && setURI(ev.uri)
     );
     // #endregion
     let mode = 'qrcode';
@@ -4551,14 +4562,14 @@ var useChainId = __webpack_require__(63541);
 var useNativeTokenDetailed = __webpack_require__(80955);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useERC20TokenDetailed.ts + 2 modules
 var useERC20TokenDetailed = __webpack_require__(14754);
-// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
-var src = __webpack_require__(15091);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var src = __webpack_require__(26618);
 // EXTERNAL MODULE: ../web3-shared/evm/constants/constants.ts + 26 modules
 var constants = __webpack_require__(24403);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/address.ts
 var utils_address = __webpack_require__(66580);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 ;// CONCATENATED MODULE: ./src/plugins/Wallet/SNSAdaptor/WalletStatusDialog/contractMethodDescription/getRedpacketDescription.tsx
 
 
@@ -4623,8 +4634,8 @@ function FillPoolDescription(props) {
     }));
 }
 
-// EXTERNAL MODULE: ./shared-ui/locales_legacy/index.ts + 3 modules
-var locales_legacy = __webpack_require__(6900);
+// EXTERNAL MODULE: ./shared-ui/locales_legacy/index.ts
+var locales_legacy = __webpack_require__(28331);
 ;// CONCATENATED MODULE: ./src/plugins/Wallet/SNSAdaptor/WalletStatusDialog/contractMethodDescription/getNFTRedpacketDescription.tsx
 
 
@@ -4772,18 +4783,18 @@ var Typography = __webpack_require__(74491);
 var DialogActions = __webpack_require__(72212);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+icons-material@5.5.0_a3cb2128d94074523de9af11c2410761/node_modules/@mui/icons-material/Error.js
 var icons_material_Error = __webpack_require__(23670);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useChainId.ts
 var useChainId = __webpack_require__(63541);
 // EXTERNAL MODULE: ../theme/src/index.ts + 2 modules
-var theme_src = __webpack_require__(43021);
+var src = __webpack_require__(43021);
 // EXTERNAL MODULE: ./src/components/shared/InjectedDialog.tsx + 1 modules
 var InjectedDialog = __webpack_require__(57464);
 // EXTERNAL MODULE: ./src/components/shared/WalletStatusBox.tsx
 var WalletStatusBox = __webpack_require__(57393);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ./src/plugins/Wallet/messages.ts
 var messages = __webpack_require__(63081);
 // EXTERNAL MODULE: ./src/utils/messages.ts
@@ -4815,6 +4826,8 @@ var uniq = __webpack_require__(78854);
 var flatten = __webpack_require__(62517);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/date-fns@2.28.0/node_modules/date-fns/esm/format/index.js + 14 modules
 var format = __webpack_require__(57753);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/CircularProgress/CircularProgress.js + 1 modules
 var CircularProgress = __webpack_require__(83634);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/List/List.js + 1 modules
@@ -4843,7 +4856,7 @@ var useAsyncRetry = __webpack_require__(28577);
 var json_stable_stringify = __webpack_require__(92304);
 var json_stable_stringify_default = /*#__PURE__*/__webpack_require__.n(json_stable_stringify);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/wallet.ts@1.0.1/node_modules/wallet.ts/dist/index.js
-var dist = __webpack_require__(99674);
+var wallet_ts_dist = __webpack_require__(99674);
 ;// CONCATENATED MODULE: ./src/plugins/ITO/Worker/apis/spaceStationGalaxy.ts
 
 
@@ -4879,7 +4892,7 @@ async function getClaimableTokenCount(address, id) {
         }
     }
     `);
-    if (!data || !dist.EthereumAddress.isValid(address)) return {
+    if (!data || !wallet_ts_dist.EthereumAddress.isValid(address)) return {
         maxCount: -1,
         usedCount: 0
     };
@@ -5190,7 +5203,7 @@ var ActionButton = __webpack_require__(47906);
 
 
 
-const useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
+const useStyles = (0,src/* makeStyles */.ZL)()((theme)=>({
         root: {
             color: '#fff',
             width: 496,
@@ -5466,7 +5479,7 @@ function ClaimItem(props) {
     const [claimState, claimCallback] = useSpaceStationContractClaimCallback(campaignInfo);
     const now = Date.now();
     const { classes  } = useStyles();
-    const { showSnackbar , closeSnackbar  } = (0,theme_src/* useCustomSnackbar */.Ii)();
+    const { showSnackbar , closeSnackbar  } = (0,src/* useCustomSnackbar */.Ii)();
     const snackbarOptions = {
         preventDuplicate: true,
         anchorOrigin: {
@@ -5653,7 +5666,8 @@ var EthereumChainBoundary = __webpack_require__(13484);
 
 
 
-const ClaimAllDialog_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme, props)=>{
+
+const ClaimAllDialog_useStyles = (0,src/* makeStyles */.ZL)()((theme, props)=>{
     const smallQuery = `@media (max-width: ${theme.breakpoints.values.sm}px)`;
     const isLight = theme.palette.mode === 'light';
     return {
@@ -5879,7 +5893,7 @@ function ClaimAllDialog(props) {
         claimCallback,
         chainId
     ]);
-    const { setDialog: setClaimTransactionDialog  } = (0,src/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.transactionDialogUpdated */.R.events.transactionDialogUpdated, (ev)=>{
+    const { setDialog: setClaimTransactionDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.transactionDialogUpdated */.R.events.transactionDialogUpdated, (ev)=>{
         if (ev.open) return;
         if (claimState.type === types/* TransactionStateType.CONFIRMED */.n$.CONFIRMED) {
             resetClaimCallback();
@@ -5920,7 +5934,7 @@ function ClaimAllDialog(props) {
         claimState,
         swappedTokens /* update tx dialog only if state changed */ 
     ]);
-    return(/*#__PURE__*/ (0,jsx_runtime.jsx)(theme_src/* SnackbarProvider */.wT, {
+    return(/*#__PURE__*/ (0,jsx_runtime.jsx)(src/* SnackbarProvider */.wT, {
         domRoot: DialogRef.current,
         classes: {
             variantSuccess: classes.snackbarSuccess,
@@ -5984,6 +5998,7 @@ function ClaimAllDialog(props) {
                                         switchButton: classes.claimAllButton
                                     },
                                     noSwitchNetworkTip: true,
+                                    disablePadding: true,
                                     switchButtonStyle: {
                                         minHeight: 'auto',
                                         width: '100%',
@@ -6005,7 +6020,7 @@ function ClaimAllDialog(props) {
                                                 types/* TransactionStateType.HASH */.n$.HASH,
                                                 types/* TransactionStateType.WAIT_FOR_CONFIRMING */.n$.WAIT_FOR_CONFIRMING, 
                                             ].includes(claimState.type),
-                                            size: "large",
+                                            size: "small",
                                             onClick: onClaimButtonClick,
                                             children: t1('plugin_ito_claim_all')
                                         })
@@ -6076,7 +6091,7 @@ function SwappedToken({ i , swappedToken , chainId  }) {
             }),
             /*#__PURE__*/ (0,jsx_runtime.jsx)(Typography/* default */.Z, {
                 className: classnames_default()(classes.cardContent, swappedToken.isClaimable ? classes.cardContentClaimable : classes.cardContentLocked),
-                children: /*#__PURE__*/ (0,jsx_runtime.jsx)(src/* FormattedBalance */.BV, {
+                children: /*#__PURE__*/ (0,jsx_runtime.jsx)(shared_src/* FormattedBalance */.BV, {
                     classes: {
                         balance: classes.tokenBalance,
                         symbol: classes.tokenSymbol
@@ -6098,7 +6113,7 @@ function SwappedToken({ i , swappedToken , chainId  }) {
 
 
 
-const EntrySecondLevelDialog_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
+const EntrySecondLevelDialog_useStyles = (0,src/* makeStyles */.ZL)()((theme)=>({
         content: {
             padding: theme.spacing(2, 3, 3),
             minHeight: 491
@@ -6152,8 +6167,8 @@ var chainDetailed = __webpack_require__(22229);
 var shared_base_src = __webpack_require__(79226);
 // EXTERNAL MODULE: ./utils-pure/index.ts + 6 modules
 var utils_pure = __webpack_require__(6628);
-// EXTERNAL MODULE: ./src/plugins/Trader/trader/useAllProviderTradeContext.ts + 45 modules
-var useAllProviderTradeContext = __webpack_require__(35396);
+// EXTERNAL MODULE: ./src/plugins/Trader/trader/useAllProviderTradeContext.ts + 46 modules
+var useAllProviderTradeContext = __webpack_require__(95198);
 // EXTERNAL MODULE: ./src/plugins/Trader/trader/useTargetChainIdContext.ts
 var useTargetChainIdContext = __webpack_require__(84686);
 ;// CONCATENATED MODULE: ./src/plugins/Savings/types.ts
@@ -6324,7 +6339,7 @@ const SavingsProtocols = [
 
 ;// CONCATENATED MODULE: ./src/plugins/Savings/SNSAdaptor/SavingsDialogStyles.tsx
 
-const SavingsDialogStyles_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme, { isDashboard  })=>({
+const SavingsDialogStyles_useStyles = (0,src/* makeStyles */.ZL)()((theme, { isDashboard  })=>({
         walletStatusBox: {
             width: 535,
             margin: '24px auto'
@@ -6340,7 +6355,7 @@ const SavingsDialogStyles_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme,
         tab: {
             height: 36,
             minHeight: 36,
-            backgroundColor: isDashboard ? `${theme_src/* MaskColorVar.primaryBackground2 */.ZN.primaryBackground2}!important` : undefined
+            backgroundColor: isDashboard ? `${src/* MaskColorVar.primaryBackground2 */.ZN.primaryBackground2}!important` : undefined
         },
         tabPaper: {
             backgroundColor: 'inherit'
@@ -6379,8 +6394,8 @@ const SavingsDialogStyles_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme,
 var Grid = __webpack_require__(20333);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useWeb3.ts + 1 modules
 var useWeb3 = __webpack_require__(90495);
-// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 4 modules
-var base_src = __webpack_require__(15091);
+// EXTERNAL MODULE: ../web3-shared/base/src/index.ts + 7 modules
+var base_src = __webpack_require__(26618);
 ;// CONCATENATED MODULE: ./src/plugins/Savings/SNSAdaptor/IconURL.tsx
 const IconURLs = {
     lido: new URL(/* asset import */ __webpack_require__(5337), __webpack_require__.b).toString(),
@@ -6399,7 +6414,7 @@ const IconURLs = {
 
 
 
-const SavingsTable_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme, props)=>({
+const SavingsTable_useStyles = (0,src/* makeStyles */.ZL)()((theme, props)=>({
         containerWrap: {
             fontFamily: theme.typography.fontFamily
         },
@@ -6569,7 +6584,7 @@ function SavingsTable({ chainId , tab , mappableProtocols , setSelectedProtocol 
                                 className: classes.tableCell,
                                 children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Typography/* default */.Z, {
                                     variant: "body1",
-                                    children: /*#__PURE__*/ (0,jsx_runtime.jsx)(src/* FormattedBalance */.BV, {
+                                    children: /*#__PURE__*/ (0,jsx_runtime.jsx)(shared_src/* FormattedBalance */.BV, {
                                         value: protocol.balance,
                                         decimals: protocol.decimals,
                                         significant: 6,
@@ -6621,7 +6636,7 @@ var useFungibleTokenBalance = __webpack_require__(42624);
 var useTokenPrice = __webpack_require__(65327);
 ;// CONCATENATED MODULE: ./src/plugins/Savings/SNSAdaptor/SavingsFormStyles.tsx
 
-const SavingsFormStyles_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme, props)=>({
+const SavingsFormStyles_useStyles = (0,src/* makeStyles */.ZL)()((theme, props)=>({
         containerWrap: {
             padding: '0 15px',
             fontFamily: theme.typography.fontFamily
@@ -6726,6 +6741,7 @@ var Trader_messages = __webpack_require__(61274);
 
 
 
+
 function SavingsForm({ chainId , selectedProtocol , tab , onClose  }) {
     const { t  } = (0,utils/* useI18N */.M1)();
     const { classes  } = SavingsFormStyles_useStyles();
@@ -6740,7 +6756,7 @@ function SavingsForm({ chainId , selectedProtocol , tab , onClose  }) {
     const [estimatedGas, setEstimatedGas] = (0,react.useState)(new (bignumber_default())('0'));
     const [loading, setLoading] = (0,react.useState)(false);
     const { value: nativeTokenBalance  } = (0,useFungibleTokenBalance/* useFungibleTokenBalance */.V)(types/* EthereumTokenType.Native */.Dr.Native, '', targetChainId);
-    const { setDialog: openSwapDialog  } = (0,src/* useRemoteControlledDialog */.F$)(Trader_messages/* PluginTraderMessages.swapDialogUpdated */.A.swapDialogUpdated);
+    const { setDialog: openSwapDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(Trader_messages/* PluginTraderMessages.swapDialogUpdated */.A.swapDialogUpdated);
     const onConvertClick = (0,react.useCallback)(()=>{
         const token = protocol.getFungibleTokenDetails(targetChainId);
         var _name, _symbol;
@@ -6818,7 +6834,7 @@ function SavingsForm({ chainId , selectedProtocol , tab , onClose  }) {
                 children: [
                     /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
                         className: classes.inputWrap,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(src/* TokenAmountPanel */.xl, {
+                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(shared_src/* TokenAmountPanel */.xl, {
                             amount: inputAmount,
                             maxAmount: balanceAsBN.minus(estimatedGas).toString(),
                             balance: balanceAsBN.toString(),
@@ -6848,7 +6864,7 @@ function SavingsForm({ chainId , selectedProtocol , tab , onClose  }) {
                         variant: "body2",
                         textAlign: "right",
                         className: classes.tokenValueUSD,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(src/* LoadingAnimation */.p6, {
+                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(shared_src/* LoadingAnimation */.p6, {
                             width: 16,
                             height: 16
                         })
@@ -6858,7 +6874,7 @@ function SavingsForm({ chainId , selectedProtocol , tab , onClose  }) {
                         className: classes.tokenValueUSD,
                         children: [
                             "≈ ",
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)(src/* FormattedCurrency */.bO, {
+                            /*#__PURE__*/ (0,jsx_runtime.jsx)(shared_src/* FormattedCurrency */.bO, {
                                 value: tokenValueUSD,
                                 sign: "$",
                                 formatter: formatter/* formatCurrency */.xG
@@ -7055,9 +7071,9 @@ function SavingsDialog({ open , onClose  }) {
                                         variant: "h5",
                                         textAlign: "center",
                                         children: t('plugin_no_protocol_available')
-                                    }) : /*#__PURE__*/ (0,jsx_runtime.jsxs)(theme_src/* FolderTabs */.Jc, {
+                                    }) : /*#__PURE__*/ (0,jsx_runtime.jsxs)(src/* FolderTabs */.Jc, {
                                         children: [
-                                            /*#__PURE__*/ (0,jsx_runtime.jsx)(theme_src/* FolderTabPanel */.pL, {
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)(src/* FolderTabPanel */.pL, {
                                                 label: "DEPOSIT",
                                                 children: /*#__PURE__*/ (0,jsx_runtime.jsx)(SavingsTable, {
                                                     chainId: chainId,
@@ -7067,7 +7083,7 @@ function SavingsDialog({ open , onClose  }) {
                                                     setTab: setTab
                                                 })
                                             }),
-                                            /*#__PURE__*/ (0,jsx_runtime.jsx)(theme_src/* FolderTabPanel */.pL, {
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)(src/* FolderTabPanel */.pL, {
                                                 label: "WITHDRAW",
                                                 children: /*#__PURE__*/ (0,jsx_runtime.jsx)(SavingsTable, {
                                                     chainId: chainId,
@@ -7117,7 +7133,7 @@ var context = __webpack_require__(69507);
 
 
 
-const PoapPanel_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme, props)=>({
+const PoapPanel_useStyles = (0,src/* makeStyles */.ZL)()((theme, props)=>({
         skeleton: {
             width: '100%',
             display: 'flex',
@@ -7254,7 +7270,7 @@ var getUnixTime = __webpack_require__(4975);
 
 
 
-const PartsPanel_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme, props)=>({
+const PartsPanel_useStyles = (0,src/* makeStyles */.ZL)()((theme, props)=>({
         skeleton: {
             display: 'flex',
             flexDirection: 'column',
@@ -7755,7 +7771,7 @@ var useERC721TokenContract = __webpack_require__(21532);
 
 
 
-const FusionFtg_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme, props)=>({
+const FusionFtg_useStyles = (0,src/* makeStyles */.ZL)()((theme, props)=>({
         box: {
             width: '200px',
             height: '200px',
@@ -7813,7 +7829,7 @@ function FusionFtg(props) {
 
 
 
-const FtgPanel_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
+const FtgPanel_useStyles = (0,src/* makeStyles */.ZL)()((theme)=>({
         ftgCover: {
             width: '150px',
             height: '150px',
@@ -8060,7 +8076,7 @@ function FusionItem(props) {
 
 
 
-const AssetsPanel_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
+const AssetsPanel_useStyles = (0,src/* makeStyles */.ZL)()((theme)=>({
         box: {
             display: 'flex',
             flexDirection: 'column'
@@ -8193,7 +8209,7 @@ var CompletionCard = __webpack_require__(42408);
 
 
 
-const ParticipatePanel_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme, props)=>({
+const ParticipatePanel_useStyles = (0,src/* makeStyles */.ZL)()((theme, props)=>({
         panel: {},
         cover: {
             width: '100%',
@@ -8296,7 +8312,7 @@ function ParticipateDialog(props) {
     const { account , open , onClose , onUpdate  } = props;
     const { classes  } = ParticipatePanel_useStyles();
     const { t  } = (0,react.useContext)(context/* FindTrumanContext */.c);
-    const [currentTab, onChange, tabs] = (0,theme_src/* useTabs */.YE)(ParticipationType.Critical, ParticipationType.NonCritical);
+    const [currentTab, onChange, tabs] = (0,src/* useTabs */.YE)(ParticipationType.Critical, ParticipationType.NonCritical);
     const [questions1, setQuestions] = (0,react.useState)();
     const updateQuestions = (0,react.useCallback)(async ()=>{
         if (!account) return;
@@ -8469,7 +8485,7 @@ function ParticipateDialog(props) {
     }));
 }
 function FindTrumanDialogTabs(props) {
-    const classes = (0,theme_src/* useStylesExtends */.Bc)(useTabsStyles({
+    const classes = (0,src/* useStylesExtends */.Bc)(useTabsStyles({
         columns: 'repeat(2, 50%)'
     }), props);
     const { t  } = (0,react.useContext)(context/* FindTrumanContext */.c);
@@ -8532,7 +8548,7 @@ var ArrowForwardRounded = __webpack_require__(54973);
 
 
 
-const IntroductionPanel_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
+const IntroductionPanel_useStyles = (0,src/* makeStyles */.ZL)()((theme)=>({
         section: {},
         bannerImg: {
             width: '40%',
@@ -8717,7 +8733,7 @@ function IntroductionPanel(props) {
 
 
 
-const FindTrumanDialog_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme, props)=>({
+const FindTrumanDialog_useStyles = (0,src/* makeStyles */.ZL)()((theme, props)=>({
         wrapper: {
             paddingBottom: '0px !important',
             paddingTop: '0px !important'
@@ -8751,7 +8767,7 @@ function FindTrumanDialog(props) {
     const { classes  } = FindTrumanDialog_useStyles();
     const account = (0,plugin_infra_src/* useAccount */.mA)();
     const { consts , t  } = (0,useConst/* useConst */.B)();
-    const [currentTab, onChange, tabs] = (0,theme_src/* useTabs */.YE)(FindTrumanDialogTab.Introduction, FindTrumanDialogTab.Assets, FindTrumanDialogTab.Participate);
+    const [currentTab, onChange, tabs] = (0,src/* useTabs */.YE)(FindTrumanDialogTab.Introduction, FindTrumanDialogTab.Assets, FindTrumanDialogTab.Participate);
     return(/*#__PURE__*/ (0,jsx_runtime.jsx)(context/* FindTrumanContext.Provider */.c.Provider, {
         value: {
             address: account,
@@ -8808,7 +8824,7 @@ function FindTrumanDialog(props) {
         })
     }));
 }
-const useTabsStyles = (0,theme_src/* makeStyles */.ZL)()((theme, props)=>({
+const useTabsStyles = (0,src/* makeStyles */.ZL)()((theme, props)=>({
         tab: {
             height: 36,
             minHeight: 36,
@@ -8863,7 +8879,7 @@ function getFindTrumanDialogTabName(t, type) {
     }
 }
 function FindTrumanDialog_FindTrumanDialogTabs(props) {
-    const classes = (0,theme_src/* useStylesExtends */.Bc)(useTabsStyles({
+    const classes = (0,src/* useStylesExtends */.Bc)(useTabsStyles({
         columns: 'repeat(3, 33.33%)'
     }), props);
     const { t  } = (0,react.useContext)(context/* FindTrumanContext */.c);
@@ -8914,7 +8930,7 @@ function FindTrumanDialog_FindTrumanDialogTabs(props) {
 
 
 
-const ApplicationBoard_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>{
+const ApplicationBoard_useStyles = (0,src/* makeStyles */.ZL)()((theme)=>{
     const smallQuery = `@media (max-width: ${theme.breakpoints.values.sm}px)`;
     return {
         abstractTabWrapper: {
@@ -9034,10 +9050,10 @@ function ApplicationBoard({ secondEntries , secondEntryChainTabs  }) {
     const { open: isSwapDialogOpen , onOpen: onSwapDialogOpen , onClose: onSwapDialogClose  } = (0,useControlledDialog/* useControlledDialog */.D)();
     // #endregion
     // #region Fiat on/off ramp
-    const { setDialog: setBuyDialog  } = (0,src/* useRemoteControlledDialog */.F$)(Transak_messages/* PluginTransakMessages.buyTokenDialogUpdated */.l.buyTokenDialogUpdated);
+    const { setDialog: setBuyDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(Transak_messages/* PluginTransakMessages.buyTokenDialogUpdated */.l.buyTokenDialogUpdated);
     // #endregion
     // #region pet friends
-    const { setDialog: setPetDialog  } = (0,src/* useRemoteControlledDialog */.F$)(Pets_messages/* PluginPetMessages.events.essayDialogUpdated */.s.events.essayDialogUpdated);
+    const { setDialog: setPetDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(Pets_messages/* PluginPetMessages.events.essayDialogUpdated */.s.events.essayDialogUpdated);
     // #endregion
     // #region second level entry dialog
     const { open: isSecondLevelEntryDialogOpen , onOpen: onSecondLevelEntryDialogOpen , onClose: onSecondLevelEntryDialogClose ,  } = (0,useControlledDialog/* useControlledDialog */.D)();
@@ -9183,7 +9199,7 @@ function ApplicationBoard({ secondEntries , secondEntryChainTabs  }) {
 
 
 
-const WalletStatusDialog_useStyles = (0,theme_src/* makeStyles */.ZL)()((theme)=>({
+const WalletStatusDialog_useStyles = (0,src/* makeStyles */.ZL)()((theme)=>({
         content: {
             padding: theme.spacing(2, 3, 3)
         },
@@ -9213,7 +9229,7 @@ function WalletStatusDialog(props) {
     const { classes  } = WalletStatusDialog_useStyles();
     const chainIdValid = (0,useChainId/* useChainIdValid */.as)();
     // #region remote controlled dialog logic
-    const { open , closeDialog: _closeDialog  } = (0,src/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.walletStatusDialogUpdated */.R.events.walletStatusDialogUpdated);
+    const { open , closeDialog: _closeDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(messages/* WalletMessages.events.walletStatusDialogUpdated */.R.events.walletStatusDialogUpdated);
     const closeDialog = (0,react.useCallback)(()=>{
         _closeDialog();
         utils_messages/* MaskMessages.events.requestComposition.sendToLocal */.q.events.requestComposition.sendToLocal({
@@ -9273,7 +9289,7 @@ function WalletStatusDialog(props) {
 
 /***/ }),
 
-/***/ 7811:
+/***/ 97535:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";

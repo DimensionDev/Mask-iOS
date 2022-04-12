@@ -132,7 +132,10 @@ class BalanceAccountCell: UITableViewCell {
         contentView.addSubview(actionsStackView)
         
         NSLayoutConstraint.activate([
-            accountCardView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 15),
+            accountCardView.topAnchor.constraint(
+                equalTo: contentView.safeAreaLayoutGuide.topAnchor,
+                constant: LayoutConstraints.top
+            ),
             accountCardView.leadingAnchor.constraint(
                 equalTo: contentView.readableContentGuide.leadingAnchor),
             accountCardView.trailingAnchor.constraint(

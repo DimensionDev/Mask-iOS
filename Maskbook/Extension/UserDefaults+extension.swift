@@ -337,6 +337,7 @@ final class UserDefaultSettings {
 }
 
 extension UserDefaultSettings {
+    
     func changeNetwork(network: BlockChainNetwork, address: String?) {
         defaultAccountAddress = address
         self.network = network

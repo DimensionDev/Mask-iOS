@@ -57,7 +57,7 @@ const EditIcon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .createIcon */ .I)('Ed
 /* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(18287);
 /* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(74491);
 /* harmony import */ var _hook_useEnterDashboard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(63434);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(13573);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(93573);
 
 
 
@@ -122,8 +122,8 @@ var Delete = __webpack_require__(25722);
 var Typography = __webpack_require__(74491);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Button/Button.js
 var Button = __webpack_require__(12463);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 4 modules
 var shared_base_src = __webpack_require__(79226);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/react-feather@2.0.9_react@18.0.0-rc.2/node_modules/react-feather/dist/icons/chevron-down.js
@@ -144,8 +144,8 @@ var ListItemText = __webpack_require__(81396);
 var social_network = __webpack_require__(61751);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/compact.js
 var compact = __webpack_require__(27862);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/react-use@17.3.2_bc22c48adf1a4e34a005159413cd72b5/node_modules/react-use/esm/useAsyncFn.js
 var useAsyncFn = __webpack_require__(1840);
 // EXTERNAL MODULE: ./src/extension/service.ts
@@ -287,6 +287,7 @@ const GrayMasks = (0,icons_utils/* createIcon */.I)('GrayMasks', /*#__PURE__*/ (
 
 
 
+
 const useStyles = (0,src/* makeStyles */.ZL)()((theme)=>({
         list: {
             padding: '0 0 70px 0',
@@ -343,7 +344,7 @@ const ProfileList = /*#__PURE__*/ (0,react.memo)(()=>{
     const definedSocialNetworks = (0,compact/* default */.Z)([
         ...social_network/* definedSocialNetworkUIs.values */.LB.values()
     ].map(({ networkIdentifier  })=>{
-        if (networkIdentifier === 'localhost') return null;
+        if (networkIdentifier === shared_base_src/* EnhanceableSite.Localhost */.Jk.Localhost) return null;
         return networkIdentifier;
     }));
     const [, onConnect] = (0,useAsyncFn/* default */.Z)(async (networkIdentifier)=>{

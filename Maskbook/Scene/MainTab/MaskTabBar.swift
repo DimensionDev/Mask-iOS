@@ -38,13 +38,11 @@ class MaskTabBar: UITabBar {
                 buttons.forEach { $0.setSelected(false) }
                 return
             }
-            guard let index = items?.firstIndex(of: newValue),
-                  index != NSNotFound
-            else {
+            guard let index = items?.firstIndex(of: newValue) else {
                 return
             }
 
-            select(itemAt: index, animated: false)
+            select(at: index, animated: false)
         }
     }
 
@@ -97,6 +95,8 @@ class MaskTabBar: UITabBar {
         button.addTarget(self, action: #selector(btnPressed), for: .touchUpInside)
         if selectedItem != nil, item === selectedItem {
             button.select()
+        } else {
+            button.deselect()
         }
         addSubview(button)
         return button
@@ -123,7 +123,7 @@ class MaskTabBar: UITabBar {
         delegate?.tabBar?(self, didSelect: item)
     }
 
-    func select(itemAt index: Int, animated: Bool = false) {
+    func select(at index: Int, animated: Bool = false) {
         guard index < buttons.count else {
             return
         }

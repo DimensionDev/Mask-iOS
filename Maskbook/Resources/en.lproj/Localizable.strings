@@ -20,6 +20,9 @@
 "Common.Alert.BindRemoteInfo.Title" = "Internet or server problems";
 "Common.Alert.BiometryIdActivate.Description" = "%@ has been enabled successfully.";
 "Common.Alert.BiometryIdActivate.Title" = "Activation successful";
+"Common.Alert.CameraAccess.Description" = "Please go to Settings to allow access.";
+"Common.Alert.CameraAccess.Title" = "Mask Network would like to
+access your camera";
 "Common.Alert.ChangeBackupPassword.Description" = "You have successfully changed your backup password.";
 "Common.Alert.ChangeBackupPassword.Title" = "Backup Password changed successfully!";
 "Common.Alert.ChangeBackupPasswordFailed.Title" = "Backup Password changed failed!";
@@ -84,10 +87,12 @@
 "Common.Controls.Confirm" = "Confirm";
 "Common.Controls.CreateWallet" = "Create Wallet";
 "Common.Controls.Done" = "Done";
+"Common.Controls.DontAllow" = "Don’t Allow";
 "Common.Controls.Download" = "download";
 "Common.Controls.DownloadNext" = "I downloaded, next";
 "Common.Controls.Edit" = "Edit";
 "Common.Controls.Enable" = "Enable";
+"Common.Controls.GoSettings" = "To Settings";
 "Common.Controls.IUnderstand" = "Understood";
 "Common.Controls.ImportWallet" = "Import Wallet";
 "Common.Controls.Invite" = "Invite";
@@ -270,10 +275,10 @@ separated by spaces";
 "Scene.OpenRedPackage.OnGoing" = "Ongoing";
 "Scene.OpenRedPackage.Refund" = "Refund";
 "Scene.OpenRedPackage.Refunded" = "Refunded";
-"Scene.OpenRedPackage.ShareMessageOfficial" = "I just claimed a lucky drop from %@ on %@ network. Follow %@ (mask.io) to claim lucky drops.
+"Scene.OpenRedPackage.ShareMessageOfficial" = "Hi friends, I just claimed a lucky drop sent by %@ on %@ network. Follow %@ (mask.io) to claim the lucky drops.
 #mask_io #LuckyDrop
 %@";
-"Scene.OpenRedPackage.ShareMessageUnsupportPlatform" = "I just claimed a lucky drop from @%@ on %@ network. 
+"Scene.OpenRedPackage.ShareMessageUnsupportPlatform" = "Hi friends, I just claimed a lucky drop sent by @%@ on %@ network. 
 %@";
 "Scene.OpenRedPackage.Shares" = "Shares";
 "Scene.OpenRedPackage.SwitchNetwork" = "Switch Network";
@@ -613,6 +618,9 @@ to scan the QR Code";
 "Scene.WalletUnlock.Title" = "Unlock Wallet";
 "Scene.WalletsListAdd.WalletsItemsAdd" = "Create a New Wallet";
 "Scene.WalletsListAdd.WalletsListImport" = "Import Wallet";
+"Scene.WelcomeIdentityEmpty.CreateAPersona" = "Create a Persona";
+"Scene.WelcomeIdentityEmpty.Description" = "The portal to a new and open Internet";
+"Scene.WelcomeIdentityEmpty.RecoverYourPersona" = "Recover your Persona";
 "Tab.Labs" = "Labs";
 "Tab.Personas" = "Persona";
 "Tab.Setting" = "Setting";

@@ -38,8 +38,8 @@ var ListItemText = __webpack_require__(81396);
 var DialogActions = __webpack_require__(72212);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Button/Button.js
 var Button = __webpack_require__(12463);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 ;// CONCATENATED MODULE: ./src/extension/popups/RequestPermission/RequestPermission.tsx
 
 

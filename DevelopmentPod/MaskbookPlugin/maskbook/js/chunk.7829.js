@@ -47,8 +47,6 @@ var Menu = __webpack_require__(69099);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/color@4.2.1/node_modules/color/index.js
 var color = __webpack_require__(49557);
 var color_default = /*#__PURE__*/__webpack_require__.n(color);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
 // EXTERNAL MODULE: ../dashboard/src/components/DashboardFrame/context.ts
 var context = __webpack_require__(14967);
 // EXTERNAL MODULE: ../dashboard/src/components/DashboardFrame/Navigation.tsx + 7 modules
@@ -57,6 +55,8 @@ var Navigation = __webpack_require__(2050);
 var MaskBanner = __webpack_require__(39556);
 // EXTERNAL MODULE: ../icons/brands/Mask.tsx
 var Mask = __webpack_require__(51192);
+// EXTERNAL MODULE: ../shared-base-ui/dist/index.js + 5 modules
+var dist = __webpack_require__(98193);
 // EXTERNAL MODULE: ../web3-shared/evm/hooks/useAccount.ts
 var useAccount = __webpack_require__(98086);
 // EXTERNAL MODULE: ../dashboard/src/API.tsx
@@ -98,19 +98,17 @@ const useStyles = (0,src/* makeStyles */.ZL)()((theme)=>({
         }
     })
 );
-const TWITTER_NETWORK = 'twitter.com';
-const TWITTER_ADDRESS = 'https://www.twitter.com';
 const FeaturePromotions = /*#__PURE__*/ (0,react.memo)(()=>{
     const { classes  } = useStyles();
     const navigate = (0,react_router/* useNavigate */.s0)();
     const account = (0,useAccount/* useAccount */.m)();
     const { currentPersona , connectPersona  } = usePersonaContext/* PersonaContext.useContainer */.m.useContainer();
-    const { setDialog: setBuyDialog  } = (0,shared_src/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Transak.buyTokenDialogUpdated */.yC.Transak.buyTokenDialogUpdated);
+    const { setDialog: setBuyDialog  } = (0,dist/* useRemoteControlledDialog */.F$)(API/* PluginMessages.Transak.buyTokenDialogUpdated */.yC.Transak.buyTokenDialogUpdated);
     const isConnectedTwitter = (0,react.useMemo)(()=>{
         if (!currentPersona) return false;
         const { linkedProfiles  } = currentPersona;
         if (linkedProfiles.length === 0) return false;
-        return !!linkedProfiles.find((profile)=>profile.identifier.network === TWITTER_NETWORK
+        return !!linkedProfiles.find((profile)=>profile.identifier.network === shared_base_src/* EnhanceableSite.Twitter */.Jk.Twitter
         );
     }, [
         currentPersona
@@ -127,13 +125,13 @@ const FeaturePromotions = /*#__PURE__*/ (0,react.memo)(()=>{
                 return;
             }
             if (isConnectedTwitter) {
-                await API/* Services.SocialNetwork.openSNSAndActivatePlugin */.K9.SocialNetwork.openSNSAndActivatePlugin(`${TWITTER_ADDRESS}/home`, pluginId);
+                await API/* Services.SocialNetwork.openSNSAndActivatePlugin */.K9.SocialNetwork.openSNSAndActivatePlugin('https://twitter.com/home', pluginId);
                 return;
             }
-            connectPersona(currentPersona.identifier, TWITTER_NETWORK);
+            connectPersona(currentPersona.identifier, shared_base_src/* EnhanceableSite.Twitter */.Jk.Twitter);
         }
     ;
-    const openMaskNetwork = ()=>window.open(`${TWITTER_ADDRESS}/realMaskNetwork`)
+    const openMaskNetwork = ()=>window.open('https://twitter.com/realMaskNetwork')
     ;
     return(/*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
         className: classes.container,
@@ -349,7 +347,7 @@ const PageFrame = /*#__PURE__*/ (0,react.memo)((props)=>{
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(ShapeHelper, {
                         children: /*#__PURE__*/ (0,jsx_runtime.jsx)(ContentContainer, {
-                            children: /*#__PURE__*/ (0,jsx_runtime.jsx)(shared_src/* ErrorBoundary */.SV, {
+                            children: /*#__PURE__*/ (0,jsx_runtime.jsx)(dist/* ErrorBoundary */.SV, {
                                 children: props.children
                             })
                         })

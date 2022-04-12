@@ -106,8 +106,8 @@ var Skeleton = __webpack_require__(92093);
 var CircularProgress = __webpack_require__(83634);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+material@5.5.0_daa021359a87c07543264c0518ec626c/node_modules/@mui/material/Checkbox/Checkbox.js + 4 modules
 var Checkbox = __webpack_require__(34433);
-// EXTERNAL MODULE: ../shared/src/index.ts
-var shared_src = __webpack_require__(39850);
+// EXTERNAL MODULE: ../shared/src/index.ts + 4 modules
+var shared_src = __webpack_require__(95367);
 // EXTERNAL MODULE: ../icons/general/CheckboxBorder.tsx
 var CheckboxBorder = __webpack_require__(68637);
 // EXTERNAL MODULE: ../icons/general/Checkbox.tsx
@@ -116,8 +116,8 @@ var general_Checkbox = __webpack_require__(27402);
 var useWeb3 = __webpack_require__(90495);
 // EXTERNAL MODULE: ../web3-shared/evm/utils/formatter.ts
 var formatter = __webpack_require__(22283);
-// EXTERNAL MODULE: ./src/utils/index.ts + 5 modules
-var utils = __webpack_require__(13573);
+// EXTERNAL MODULE: ./src/utils/index.ts + 7 modules
+var utils = __webpack_require__(93573);
 ;// CONCATENATED MODULE: ./src/extension/popups/pages/Wallet/components/DeriveWalletTable/index.tsx
 
 

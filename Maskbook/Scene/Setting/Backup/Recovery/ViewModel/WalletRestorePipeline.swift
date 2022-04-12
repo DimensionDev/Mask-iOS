@@ -52,8 +52,8 @@ final class WalletRestorePipeline {
                 case .noWalletSecureFoundInRestoreFile:
                     self.sheetPipeline.send(.noWalletSecureFoundInRestoreFile)
 
-                case .restoreSucceed:
-                    self.sheetPipeline.send(.restoreSucceed)
+                case let .restoreSucceed(withWallet):
+                    self.sheetPipeline.send(.restoreSucceed(withWallet: withWallet))
                 }
             }
             .store(in: &cancelableStorage)
@@ -92,12 +92,14 @@ final class WalletRestorePipeline {
                 if result.isSuccess {
                     // sync wallet info before send restoreSucceed
                     if let wallets = restorefile?.wallets, let password = password {
+                        // if error occures send message otherwise send succeed message
                         if case .failure = self?.walletProvider.syncWallets(wallets, password: password) {
                             self?.walletRestoreSignal.send(.noWalletSecureFoundInRestoreFile)
                             return
                         }
                     }
-                    self?.walletRestoreSignal.send(.restoreSucceed)
+                    let isWalletEmty = (restorefile?.wallets ?? []).isEmpty
+                    self?.walletRestoreSignal.send(.restoreSucceed(withWallet: !isWalletEmty))
                 } else {
                     self?.walletRestoreSignal.send(.failedToParseRestoreFile)
                 }
@@ -168,7 +170,7 @@ extension WalletRestorePipeline {
 
         case failedToParseRestoreFile
         case noWalletSecureFoundInRestoreFile
-        case restoreSucceed
+        case restoreSucceed(withWallet: Bool)
     }
 
     enum SheetPipeline {
@@ -178,7 +180,7 @@ extension WalletRestorePipeline {
 
         case failedToParseRestoreFile
         case noWalletSecureFoundInRestoreFile
-        case restoreSucceed
+        case restoreSucceed(withWallet: Bool)
     }
 }
 

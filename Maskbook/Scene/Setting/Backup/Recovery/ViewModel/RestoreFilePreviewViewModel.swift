@@ -155,7 +155,7 @@ extension RestoreFilePreviewViewModel {
         case unsupportedFile
         case fileDecoded(RestorePreviewResult)
         case failedLoadingData
-        case restoreSucceed
+
         case restoreFailed
     }
 }
