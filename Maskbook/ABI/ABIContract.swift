@@ -11,14 +11,42 @@ import PromiseKit
 import web3swift
 
 protocol ABIContract {
-    associatedtype Functions
-    associatedtype Events
+    associatedtype Functions: RawRepresentable
+    associatedtype Events: RawRepresentable
     
     var mainCoordinator: Coordinator { get }
     var contractAddress: EthereumAddress { get }
     var abiString: String { get }
     var abiVersion: Int { get }
     var userSetting: UserDefaultSettings { get }
+
+    var ethcontract: EthereumContract? { get }
+}
+
+extension ABIContract where Functions.RawValue == String {
+    func parse(input: String, for method: Functions) -> [String: Any] {
+        guard let contract = self.ethcontract else {
+            return [:]
+        }
+
+        let data = Data(hex: input)
+        return contract.decodeInputData(method.rawValue, data: data) ?? [:]
+    }
+}
+
+extension ABIContract where Events.RawValue == String {
+    func parse(eventlog: EventLog, filter: Events) -> [String: Any] {
+        guard let contract = self.ethcontract else {
+            return [:]
+        }
+
+        let result = contract.parseEvent(eventlog)
+
+        guard result.eventName == filter.rawValue else {
+            return [:]
+        }
+        return result.eventData ?? [:]
+    }
 }
 
 extension ABIContract {

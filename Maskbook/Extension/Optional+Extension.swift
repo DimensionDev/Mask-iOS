@@ -30,3 +30,21 @@ extension Optional where Wrapped == Bool {
         }
     }
 }
+
+extension Optional {
+    var isSome: Bool {
+        switch self {
+        case .none: return false
+        case .some: return true
+        }
+    }
+}
+
+extension Optional {
+    var isNone: Bool {
+        switch self {
+        case .none: return true
+        case .some: return false
+        }
+    }
+}

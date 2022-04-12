@@ -8,10 +8,14 @@ final class LuckDropHistoryController: BaseViewController {
         title = "History Records"
     }
 
+    lazy var viewModel = LuckyDropHistoryViewModel()
+    
     override func buildContent() {
         super.buildContent()
         LuckyDropHistoryView().asContent(in: self)
-
+        let value = Task.detached(priority: .high) {
+            try? await self.viewModel.fetch()
+        }
     }
 }
 

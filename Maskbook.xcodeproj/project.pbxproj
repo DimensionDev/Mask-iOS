@@ -92,6 +92,8 @@
 		1F48D38727FEEF3100A51B89 /* LuckDropHistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48D38627FEEF3100A51B89 /* LuckDropHistoryController.swift */; };
 		1F48D3892800154600A51B89 /* LuckDropHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48D3882800154600A51B89 /* LuckDropHistoryViewModel.swift */; };
 		1F48D38B2803F01E00A51B89 /* RedPackedHistoryPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48D38A2803F01E00A51B89 /* RedPackedHistoryPayload.swift */; };
+		1F48D38F2805199600A51B89 /* LuckyDropHistoryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48D38E2805199600A51B89 /* LuckyDropHistoryHelper.swift */; };
+		1F48D391280548C200A51B89 /* BigInt+Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48D390280548C200A51B89 /* BigInt+Conversion.swift */; };
 		1F58730F277C51A3005A7B11 /* DappScriptPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58730E277C51A3005A7B11 /* DappScriptPayload.swift */; };
 		1F705FE327CF6AB9002A4A7E /* SpinWheelAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */; };
 		1F8AD0CB26CA3AA000C9694F /* MaskLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AD0CA26CA3AA000C9694F /* MaskLoadingIndicator.swift */; };
@@ -844,6 +846,8 @@
 		1F48D38627FEEF3100A51B89 /* LuckDropHistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuckDropHistoryController.swift; sourceTree = "<group>"; };
 		1F48D3882800154600A51B89 /* LuckDropHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuckDropHistoryViewModel.swift; sourceTree = "<group>"; };
 		1F48D38A2803F01E00A51B89 /* RedPackedHistoryPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPackedHistoryPayload.swift; sourceTree = "<group>"; };
+		1F48D38E2805199600A51B89 /* LuckyDropHistoryHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuckyDropHistoryHelper.swift; sourceTree = "<group>"; };
+		1F48D390280548C200A51B89 /* BigInt+Conversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BigInt+Conversion.swift"; sourceTree = "<group>"; };
 		1F58730E277C51A3005A7B11 /* DappScriptPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappScriptPayload.swift; sourceTree = "<group>"; };
 		1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinWheelAnimator.swift; sourceTree = "<group>"; };
 		1F8AD0CA26CA3AA000C9694F /* MaskLoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskLoadingIndicator.swift; sourceTree = "<group>"; };
@@ -2210,6 +2214,7 @@
 				1F48D3882800154600A51B89 /* LuckDropHistoryViewModel.swift */,
 				2AF6C7B427FEA52700A9EA4A /* RedPacketShareViewModel.swift */,
 				2AF6C7B527FEA52700A9EA4A /* LuckyDropViewModel.swift */,
+				1F48D38E2805199600A51B89 /* LuckyDropHistoryHelper.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -3349,6 +3354,7 @@
 				5DE5395627473599005F4CEA /* PanModalPresentable+color.swift */,
 				41E50043279948D200A73117 /* Optional+Extension.swift */,
 				5DE2B10E27BA60AC002ACA54 /* View+Snapshot.swift */,
+				1F48D390280548C200A51B89 /* BigInt+Conversion.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -4357,6 +4363,7 @@
 				0F83264526EB4E8100BF949B /* Web3ProviderFactory.swift in Sources */,
 				2AF88537271EE9310004565A /* WalletImportViewController.swift in Sources */,
 				2AF88519271EE9310004565A /* PrimeryButton.swift in Sources */,
+				1F48D38F2805199600A51B89 /* LuckyDropHistoryHelper.swift in Sources */,
 				2AF88541271EE9310004565A /* BalanceHeaderView.swift in Sources */,
 				2AF884FC271EE9310004565A /* WalletConnectShowQRCodeViewController.swift in Sources */,
 				2AF884D9271EE9310004565A /* MaskSafariViewController.swift in Sources */,
@@ -4414,6 +4421,7 @@
 				41E50044279948D200A73117 /* Optional+Extension.swift in Sources */,
 				5D61527327CF35FC001CB038 /* MoveBackupDataViewController.swift in Sources */,
 				2AF88578271EE9310004565A /* WalletListTableViewCellModel.swift in Sources */,
+				1F48D391280548C200A51B89 /* BigInt+Conversion.swift in Sources */,
 				2AF88644271EEDF80004565A /* UICollectionView+extension.swift in Sources */,
 				0FACA3B22671DBEA00CB8AC0 /* StoredKeyExportType.swift in Sources */,
 				2AF88556271EE9310004565A /* SendTransactionViewController.swift in Sources */,

@@ -19,6 +19,12 @@ struct HappyRedPacketV4: ABIContract {
     
     @InjectedProvider(\.mainCoordinator)
     var mainCoordinator
+
+    private(set) var ethcontract: EthereumContract?
+
+    init() {
+        self.ethcontract = EthereumContract(abiString, at: contractAddress)
+    }
     
     private var contractInfo: JSON? {
         guard let redPacketConstantURL = Bundle.main.url(forResource: "red-packet", withExtension: "json"),
@@ -29,7 +35,7 @@ struct HappyRedPacketV4: ABIContract {
     }
     
     var contractAddress: EthereumAddress {
-        let chainKey = maskUserDefaults.network.redPacketConstantKey
+        let chainKey = userSetting.network.redPacketConstantKey
         guard let addressStr = contractInfo?["HAPPY_RED_PACKET_ADDRESS_V4"][chainKey].string,
               let address = EthereumAddress(addressStr) else {
                   assert(false, "It needs an address for HappyRedPacketV4 Contract.")
@@ -46,14 +52,14 @@ struct HappyRedPacketV4: ABIContract {
               }
         return content
     }
-    
+
     var abiVersion: Int {
         2
     }
     
     func checkAvailability(redPackageId: String) async -> CheckAvailabilityResult? {
         let contractMethod = Functions.checkAvailability.rawValue
-        let parameters: [AnyObject] = [redPackageId] as [AnyObject]
+        let parameters: [AnyObject] = [Data(hex: redPackageId)] as [AnyObject]
         guard let tx = read(
             contractMethod,
             param: parameters
@@ -70,7 +76,7 @@ struct HappyRedPacketV4: ABIContract {
             return result
         }.value
     }
-    
+
     @MainActor
     func claim(rid: String, password: String) async -> String? {
         guard let ridBytes = Web3.Utils.hexToData(rid)?.bytes else {
@@ -141,7 +147,7 @@ struct HappyRedPacketV4: ABIContract {
 }
 
 extension HappyRedPacketV4 {
-    enum Functions: String, CaseIterable {
+    enum Functions: String, CaseIterable, RawRepresentable {
         // readable fuctions
         case checkAvailability = "check_availability"
         // writable fuctions
@@ -150,7 +156,7 @@ extension HappyRedPacketV4 {
         case refund
     }
     
-    enum Events: String, CaseIterable {
+    enum Events: String, CaseIterable, RawRepresentable {
         case claimSuccess = "ClaimSuccess"
         case creationSuccess = "CreationSuccess"
         case refundSuccess = "RefundSuccess"
