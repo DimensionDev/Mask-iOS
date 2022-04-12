@@ -218,10 +218,8 @@ class Coordinator {
 
     func setup(window: UIWindow) {
         self.window = window
-        
-        if !settings.hasShownGuide && !settings.didPresentWizard {
-            settings.hasShownGuide = true
-            settings.didPresentWizard = true
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+           appDelegate.isFisrtLaunch {
             showGuide(window: window)
             return
         }
