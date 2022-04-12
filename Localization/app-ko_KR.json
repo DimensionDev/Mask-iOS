@@ -552,7 +552,8 @@
             "backup_recovery": "백업 및 복원"
         },
         "persona_contacts": {
-            "empty_contacts_tips": "암호 친구 아직 없습니다.\n친구를 초대하여 Mask Network를 다운받으세요.",
+            "empty_contacts_tips": "",
+            "search_contact_tips": "",
             "delete": "삭제 확인 ",
             "contact": "연락처"
         },
