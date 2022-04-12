@@ -75,17 +75,11 @@ class BalanceTokenCell: UITableViewCell {
         containerView.addSubview(tokenBalanceLabel)
         
         NSLayoutConstraint.activate([
-            containerView.leadingAnchor.constraint(
-                equalTo: contentView.readableContentGuide.leadingAnchor
-            ),
-            containerView.trailingAnchor.constraint(
-                equalTo: contentView.readableContentGuide.trailingAnchor
-            ),
-            containerView.topAnchor.constraint(equalTo: contentView.topAnchor,
-                                               constant: 6),
+            containerView.leadingAnchor.constraint(equalTo: contentView.readableContentGuide.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: contentView.readableContentGuide.trailingAnchor),
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6),
             containerView.heightAnchor.constraint(equalToConstant: 63),
-            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,
-                                                  constant: -6)
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6)
         ])
         
         NSLayoutConstraint.activate([
@@ -107,8 +101,7 @@ class BalanceTokenCell: UITableViewCell {
         NSLayoutConstraint.activate([
             tokenAmountlabel.leadingAnchor.constraint(equalTo: tokenNameLabel.leadingAnchor),
             tokenAmountlabel.bottomAnchor.constraint(equalTo: containerView.layoutMarginsGuide.bottomAnchor),
-            tokenAmountlabel.topAnchor.constraint(equalTo: tokenNameLabel.bottomAnchor,
-                                                  constant: 2)
+            tokenAmountlabel.topAnchor.constraint(equalTo: tokenNameLabel.bottomAnchor, constant: 2)
         ])
         
         tokenBalanceLabel.setContentCompressionResistancePriority(.required, for: .horizontal)

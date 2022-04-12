@@ -50,10 +50,7 @@ class BalanceHeaderView: UITableViewHeaderFooterView {
         NSLayoutConstraint.activate([
             segments.topAnchor.constraint(equalTo: contentView.topAnchor),
             segments.leadingAnchor.constraint(equalTo: contentView.readableContentGuide.leadingAnchor),
-            segments.bottomAnchor.constraint(
-                equalTo: contentView.bottomAnchor,
-                constant: -10
-            )
+            segments.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
         
         segments.setItems(items: BalanceHeaderType.allCases.map(\.title))
