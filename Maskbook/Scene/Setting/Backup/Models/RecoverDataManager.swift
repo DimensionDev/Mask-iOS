@@ -11,6 +11,9 @@ import Foundation
 import SwiftyJSON
 
 struct RecoverDataManager {
+    /// On Mask mobile apps, most data is stored on the mobile app's native database, while recovering data from backup files:
+    ///  1. We restore most (personas, profiles, relations, wallets, posts) data to mobile app's native database, then
+    ///  2. We `trim` all the `restored` info, then send rest data to JS.
     static func trimNativeInfo(_ originJson: JSON) -> String? {
         var json = originJson
         json["personas"] = []
@@ -40,10 +43,10 @@ struct RecoverDataManager {
                 throw RemoteRestoreInfoViewModel.Failure.failedParsingRestoreData
             }
             do {
-                try PersonaRepository.restoreFromJson(json["personas"] )
-                try ProfileRepository.restoreFromJson(json["profiles"] )
-                try PostRepository.restoreFromJson(json["posts"] )
-                try RelationRepository.restoreFromJson(json["relations"] )
+                try PersonaRepository.restoreFromJson(json["personas"])
+                try ProfileRepository.restoreFromJson(json["profiles"])
+                try PostRepository.restoreFromJson(json["posts"])
+                try RelationRepository.restoreFromJson(json["relations"])
             } catch {
                 throw error
             }

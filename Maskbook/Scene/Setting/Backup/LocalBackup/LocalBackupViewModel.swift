@@ -121,7 +121,7 @@ extension LocalBackupViewModel {
     }
 
     func writeDataTo(url: URL) -> AnyPublisher<Void, Error> {
-        return Publishers.CombineLatest4(
+        Publishers.CombineLatest4(
             vault.getValue(for: .backupPassword).setFailureType(to: Error.self),
             getWalletInfo(),
             LazyFuture { [weak self] promise in
