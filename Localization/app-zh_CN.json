@@ -552,8 +552,8 @@
             "backup_recovery": "备份与恢复设置"
         },
         "persona_contacts": {
-            "empty_contacts_tips": "",
-            "search_contact_tips": "",
+            "empty_contacts_tips": "社交媒体时间线上未捕捉到任何账户。\n邀请您的朋友下载 Mask Network",
+            "search_contact_tips": "未找到联系人。该账户可能未在社交媒体时间线上捕捉",
             "delete": "确认删除",
             "contact": "联系人"
         },
