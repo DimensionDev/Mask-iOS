@@ -552,7 +552,8 @@
             "backup_recovery": "crwdns13982:0crwdne13982:0"
         },
         "persona_contacts": {
-            "empty_contacts_tips": "crwdns13984:0crwdne13984:0",
+            "empty_contacts_tips": "crwdns16192:0crwdne16192:0",
+            "search_contact_tips": "crwdns16194:0crwdne16194:0",
             "delete": "crwdns13986:0crwdne13986:0",
             "contact": "crwdns13988:0crwdne13988:0"
         },
