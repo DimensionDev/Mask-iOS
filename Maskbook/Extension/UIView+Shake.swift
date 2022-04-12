@@ -67,7 +67,6 @@ extension UIView {
     func shake() {
         shake(times: 5,
               direction: 1,
-              currentTimes: 0,
               delta: 5,
               interval: 0.03,
               shakeDirection: .horizontal,
@@ -76,31 +75,27 @@ extension UIView {
 
     func shake(times: Int,
                direction: Int,
-               currentTimes: Int,
                delta: CGFloat,
                interval: TimeInterval,
                shakeDirection: ShakeDirection,
                handler: @escaping () -> Void)
     {
+        guard times > 0 else {
+            handler()
+            return
+        }
+
         UIView.animate(withDuration: interval) {
             self.transform = (shakeDirection == .horizontal) ?
                 CGAffineTransform(translationX: delta * CGFloat(direction), y: 0) :
                 CGAffineTransform(translationX: 0, y: delta * CGFloat(direction))
         } completion: { _ in
-            if currentTimes >= times {
-                UIView.animate(withDuration: interval) {
-                    self.transform = CGAffineTransform.identity
-                } completion: { _ in
-                    handler()
-                }
-            }
+            self.shake(times: times - 1,
+                  direction: direction * -1,
+                  delta: delta,
+                  interval: interval,
+                  shakeDirection: shakeDirection,
+                  handler: handler)
         }
-        shake(times: times,
-              direction: direction * -1,
-              currentTimes: currentTimes + 1,
-              delta: delta,
-              interval: interval,
-              shakeDirection: shakeDirection,
-              handler: handler)
     }
 }

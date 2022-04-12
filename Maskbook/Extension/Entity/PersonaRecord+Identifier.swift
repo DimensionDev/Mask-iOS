@@ -8,6 +8,7 @@
 
 import CoreDataStack
 import Foundation
+import SwiftyJSON
 
 extension PersonaRecord {
     var nonOptionalIdentifier: String {
@@ -16,5 +17,38 @@ extension PersonaRecord {
             fatalError()
         }
         return identifier
+    }
+
+    var privateKeyBase64String: String {
+        Persona(fromRecord: self)?
+            .privateKey?
+            .privateKeyBase64String
+            ?? ""
+    }
+
+    var qrCodeString: String {
+        var qrCodeString: String = {
+            if let nmemonic = mnemonic?
+                .data(using: .utf8)?
+                .base64EncodedString()
+            {
+                return "mask://persona/mnemonic/" + nmemonic
+            } else {
+                return "mask://persona/privatekey/" + privateKeyBase64String
+            }
+        }()
+        if let name = nickname, !name.isEmpty {
+            qrCodeString.append("?nickname=\(name)")
+        }
+        return qrCodeString
+    }
+
+    var dKeyInPrivateKey: String {
+        privateKey?
+            .data(using: .utf8)
+            .flatMap {
+                try? JSON(data: $0)["d"].string
+            }
+            ?? ""
     }
 }

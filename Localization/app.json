@@ -133,6 +133,10 @@
             "backup_popup_binding_first": {
                 "title": "Bind your email or phone",
                 "description": "Please bind your email or phone number before you back up to cloud."
+            },
+            "camera_access": {
+                "title": "Mask Network would like to\naccess your camera",
+                "description": "Please go to Settings to allow access."
             }
         },
         "controls": {
@@ -171,7 +175,9 @@
             "take_photo": "Take a photo",
             "save": "Save",
             "move_data_now": "Move data now",
-            "remind_me_later": "Remind me later"
+            "remind_me_later": "Remind me later",
+            "go_settings": "To Settings",
+            "dont_allow": "Don’t Allow"
         },
         "toast": {
             "saved": "Saved!",
@@ -187,6 +193,11 @@
             "description2": "Send Encrypted Messages\non Social Networks with Persona",
             "description3": "Multi-Chain Wallet,\nCompatible with WalletConnect",
             "description4": "Back up in Time,\nwith Cloud / Local Backup"
+        },
+        "welcome_identity_empty": {
+            "create_a_persona": "Create a Persona",
+            "recover_your_persona": "Recover your Persona",
+            "description": "The portal to a new and open Internet"
         },
         "terms_of_service": {
             "title": "Legal",
@@ -542,7 +553,8 @@
             "backup_recovery":"Backup and Recovery"
         },
         "persona_contacts": {
-            "empty_contacts_tips": "You don’t have encrypted friends. \nInvite friends to download Mask Network.",
+            "empty_contacts_tips": "No accounts captured on Timeline. \nInvite friends to download Mask Network.",
+            "search_contact_tips": "No contact found. This account may not \nbe captured on timeline.",
             "delete": "Confirm to delete ",
             "contact": "Contact"
         },

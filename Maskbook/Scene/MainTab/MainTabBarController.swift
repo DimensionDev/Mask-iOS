@@ -129,9 +129,9 @@ extension MainTabBarController {
         } else {
             // replace navigation stack of tab
             selectedIndex = selectedIndex
-            if tab.rawValue == selectedIndex, self.tabBar.isHidden {
-                self.tabBar.isHidden = false
-            }
+        }
+        if self.tabBar.isHidden {
+            self.tabBar.isHidden = false
         }
     }
     
@@ -164,7 +164,7 @@ extension MainTabBarController {
             tabBar.select(at: index, animated: false)
         }
     }
-
+    
     override var selectedIndex: Int {
         willSet {
             guard let tabBar = tabBar as? MaskTabBar else {

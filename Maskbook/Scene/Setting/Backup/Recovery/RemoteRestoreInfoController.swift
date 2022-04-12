@@ -174,8 +174,9 @@ extension RemoteRestoreInfoController: RestorePipelineExcutor {
         let login = { [weak self] in
             switch selectMaintab {
             case .wallet:
-                self?.coordinator.present(scene: .persona, transition: .replaceCurrentNavigation(tab: .personas))
-                self?.coordinator.present(scene: .balance, transition: .replaceCurrentNavigation(tab: selectMaintab, selected: true))
+                self?.coordinator.present(scene: .balance, transition: .replaceCurrentNavigation(tab: selectMaintab, selected: true), completion: {
+                    self?.coordinator.present(scene: .persona, transition: .replaceCurrentNavigation(tab: .personas))
+                })
 
             case .personas:
                 self?.coordinator.present(scene: .persona, transition: .replaceCurrentNavigation(tab: selectMaintab, selected: true))

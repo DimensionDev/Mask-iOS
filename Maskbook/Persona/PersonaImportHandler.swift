@@ -12,17 +12,17 @@ import Foundation
 import SwiftMsgPack
 import SwiftyJSON
 
-class PersonaImportPrivateKeyHandler {
-    enum ImportPrivateKeyScene: Int {
+class PersonaImportHandler {
+    enum ImportScene: Int {
         case userInput
         case userScan
     }
     
-    init(scene: ImportPrivateKeyScene) {
+    init(scene: ImportScene) {
         self.scene = scene
     }
     
-    private var scene: ImportPrivateKeyScene
+    private var scene: ImportScene
     
     @InjectedProvider(\.mainCoordinator)
     private var coordinator
@@ -35,60 +35,105 @@ class PersonaImportPrivateKeyHandler {
     
     private var disposeBag = Set<AnyCancellable>()
     
-    func restoreFromPrivateKey(text: String) {
-        let decodedData = Data(base64URLEncoded: text)
-
-        let unpackedData = try? decodedData?.unpack() as? [String: Any]
-        guard let d = unpackedData?["d"] as? String else {
-            log.debug("private key error", source: "persona")
-            return
-        }
-        let personaRecord = PersonaRepository.queryPersonas(identifiers: nil).filter {
-            guard let privateKey = $0.privateKey else { return false }
-            guard let data = privateKey.data(using: .utf8) else { return false }
-            let json = try? JSON(data: data)
-            guard let dInPersona = json?["d"].string else { return false }
-            return d == dInPersona
-        }.first
-        
-        if let personaRecord = personaRecord {
+    func checkExistAndRestore(from item: PersonaImportItem) {
+        if let personaRecord = currentPersonaRecord(for: item) {
             if !personaRecord.hasLogout {
                 showRestoreAlreadyExistedAlert()
                 return
             }
-            let names = personaManager.personaRecordsSubject.value.map(\.nickname)
-            if let nickname = personaRecord.nickname, names.contains(nickname) {
-                let renameViewModel = RenameViewModel(
-                    originalName: "",
-                    title: L10n.Scene.Personas.Create.createPersona,
-                    dismissOnConfirm: false
-                ) { [weak self] name, viewModel in
-                    guard let self = self else { return }
-                    if names.contains(name) {
-                        self.personaNicknameDuplicated()
-                        return
-                    }
-                    viewModel.dismissSignal.send {
-                        PersonaRepository.updatePersonaNickname(identifier: personaRecord.nonOptionalIdentifier, nickname: name)
-                        self.setCurrentPersona(persona: personaRecord)
-                    }
-                }
-                
-                coordinator.present(
-                    scene: .rename(viewModel: renameViewModel),
-                    transition: .panModel(animated: true)
-                )
-            } else {
-                setCurrentPersona(persona: personaRecord)
-            }
+            renameAndSetCurrentPersona(name: item.name, personaRecord: personaRecord)
         } else {
-            switch scene {
-            case .userInput:
-                restoreFromPrivateKey(privateKey: text)
-                
-            case .userScan:
-                showInputNameViewController(privateKey: text)
+            renameNameAndRestorePersona(from: item)
+        }
+    }
+    
+    private func currentPersonaRecord(for item: PersonaImportItem) -> PersonaRecord? {
+        switch item.type {
+        case let .privateKey(privateKey):
+            let decodedData = Data(base64URLEncoded: privateKey)
+
+            let unpackedData = try? decodedData?.unpack() as? [String: Any]
+            guard let d = unpackedData?["d"] as? String else {
+                log.debug("private key error", source: "persona")
+                return nil
             }
+            let personaRecord = PersonaRepository.queryPersonas(identifiers: nil)
+                .first(where: {
+                    d == $0.dKeyInPrivateKey
+                })
+            return personaRecord
+        case let .mnemonic(mnemonic):
+            let personaRecord = PersonaRepository.queryPersonas(identifiers: nil)
+                .first(where: {
+                    mnemonic == $0.mnemonic
+                })
+            return personaRecord
+        }
+    }
+    
+    private func renameAndSetCurrentPersona(name: String?, personaRecord: PersonaRecord) {
+        let names = personaManager.personaRecordsSubject.value.map(\.nickname)
+        if let nickname = name, names.contains(nickname) {
+            let renameViewModel = RenameViewModel(
+                originalName: "",
+                title: L10n.Scene.Personas.Create.createPersona,
+                dismissOnConfirm: false
+            ) { [weak self] name, viewModel in
+                guard let self = self else { return }
+                if names.contains(name) {
+                    self.personaNicknameDuplicated()
+                    return
+                }
+                viewModel.dismissSignal.send {
+                    PersonaRepository.updatePersonaNickname(identifier: personaRecord.nonOptionalIdentifier, nickname: name)
+                    self.setCurrentPersona(persona: personaRecord)
+                }
+            }
+            
+            coordinator.present(
+                scene: .rename(viewModel: renameViewModel),
+                transition: .panModel(animated: true)
+            )
+        } else {
+            setCurrentPersona(persona: personaRecord)
+        }
+    }
+    
+    private func renameNameAndRestorePersona(from item: PersonaImportItem) {
+        var item = item
+        let names = personaManager.personaRecordsSubject.value.map(\.nickname)
+        if let nickname = item.name, names.contains(nickname) {
+            let renameViewModel = RenameViewModel(
+                originalName: "",
+                title: L10n.Scene.Personas.Create.createPersona,
+                dismissOnConfirm: false
+            ) { [weak self] name, viewModel in
+                guard let self = self else { return }
+                if names.contains(name) {
+                    self.personaNicknameDuplicated()
+                    return
+                }
+                item.changeName(name: name)
+                viewModel.dismissSignal.send { [weak self] in
+                    self?.restore(from: item)
+                }
+            }
+            
+            coordinator.present(
+                scene: .rename(viewModel: renameViewModel),
+                transition: .panModel(animated: true)
+            )
+        } else {
+            restore(from: item)
+        }
+    }
+    
+    private func restore(from item: PersonaImportItem) {
+        switch item.type {
+        case let .mnemonic(mnemonic):
+            restoreFroMmnemonic(mnemonic: mnemonic, nickname: item.name)
+        case let .privateKey(privateKey):
+            restoreFromPrivateKey(privateKey: privateKey, nickname: item.name)
         }
     }
     
@@ -98,23 +143,6 @@ class PersonaImportPrivateKeyHandler {
         }
         userSetting.currentPesonaIdentifier = persona.nonOptionalIdentifier
         showRestoreSuccessAlert()
-    }
-    
-    private func restoreFromPrivateKey(privateKey: String) {
-        PersonaManager.restoreFromPrivateKey(privateKey: privateKey)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { _ in
-            }) { [weak self] result in
-                if result.isSuccess {
-                    if let identifier = result.result?.dictionaryValue["identifier"]?.stringValue {
-                        self?.userSetting.currentPesonaIdentifier = identifier
-                    }
-                    self?.showRestoreSuccessAlert()
-                } else {
-                    self?.showRestoreFailedAlert(errorMessage: result.error?.message)
-                }
-            }
-            .store(in: &disposeBag)
     }
     
     private func showInputNameViewController(privateKey: String) {
@@ -152,6 +180,40 @@ class PersonaImportPrivateKeyHandler {
             scene: .rename(viewModel: renameViewModel),
             transition: .panModel(animated: true)
         )
+    }
+    
+    private func restoreFromPrivateKey(privateKey: String, nickname: String?) {
+        PersonaManager.restoreFromPrivateKey(privateKey: privateKey, nickname: nickname ?? "persona1")
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { _ in
+            }) { [weak self] result in
+                if result.isSuccess {
+                    if let identifier = result.result?.dictionaryValue["identifier"]?.stringValue {
+                        self?.userSetting.currentPesonaIdentifier = identifier
+                    }
+                    self?.showRestoreSuccessAlert()
+                } else {
+                    self?.showRestoreFailedAlert(errorMessage: result.error?.message)
+                }
+            }
+            .store(in: &disposeBag)
+    }
+    
+    private func restoreFroMmnemonic(mnemonic: String, nickname: String?) {
+        PersonaManager.restoreFromMnemonic(mnemonic: mnemonic, nickname: nickname ?? "persona1")
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { _ in
+            }) { [weak self] result in
+                if result.isSuccess {
+                    if let identifier = result.result?.dictionaryValue["identifier"]?.stringValue {
+                        self?.userSetting.currentPesonaIdentifier = identifier
+                    }
+                    self?.showRestoreSuccessAlert()
+                } else {
+                    self?.showRestoreFailedAlert(errorMessage: result.error?.message)
+                }
+            }
+            .store(in: &disposeBag)
     }
     
     private func showRestoreSuccessAlert() {

@@ -72,7 +72,8 @@ class PersonasViewController: BaseViewController {
         let flowLayout = MnemonicVerifyCollectionFlowLayout()
         flowLayout.itemSize = PersonaCollectionDataSource.itemSize
         flowLayout.scrollDirection = .horizontal
-        flowLayout.sideItemScale = 0.9
+        flowLayout.sideItemXScale = 0.94
+        flowLayout.sideItemYScale = 0.85
         let view = ControlContainableCollectionView(frame: .zero, collectionViewLayout: flowLayout)
         view.backgroundColor = .clear
         view.showsHorizontalScrollIndicator = false
@@ -179,14 +180,24 @@ class PersonasViewController: BaseViewController {
                     self.segmentTopConstraint.constant =  isSearching
                     ? -self.segmentViewController.segmentHeight
                     : 146
+                    self.segmentViewController.segments.alpha = isSearching ? 0 : 1
+                    MainTabBarController.currentTabBarController()?.tabBar.isHidden = isSearching
                     self.view.layoutIfNeeded()
                 }
             })
             .store(in: &disposeBag)
         
         personaManager.personaRecordsSubject
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.personaCollectionView.reloadData()
+            }
+            .store(in: &disposeBag)
+        
+        personaManager.currentPersona
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.scrollToCurrentPersona()
             }
             .store(in: &disposeBag)
     }
@@ -209,6 +220,13 @@ class PersonasViewController: BaseViewController {
 extension PersonasViewController {
 
     func scanAction() {
-        coordinator.present(scene: .commonScan, transition: .modal(animated: true))
+        ScannerPermission.authorizeCameraWith { [weak self] isAuthorize in
+            guard let self = self else { return }
+            if isAuthorize {
+                self.coordinator.present(scene: .commonScan, transition: .modal(animated: true))
+            } else {
+                ScannerPermission.showCameraAccessAlert(coordinator: self.coordinator)
+            }
+        }
     }
 }
