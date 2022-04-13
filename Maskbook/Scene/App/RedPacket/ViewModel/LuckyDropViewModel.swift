@@ -29,6 +29,7 @@ class LuckyDropViewModel: NSObject, ObservableObject {
     
     // TODO: It needs to init `profileNickName` if create red packet from Social Platform.
     let profileNickName: String? = nil
+    let walletBottomViewModel = WalletBottomWidgetViewModel()
     
     var gasFeeViewModel = GasFeeViewModel()
     
@@ -221,7 +222,10 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         gasFeeViewModel.refresh()
         
         // It will only change after the user selects gasfee and is only used here to initialize the data.
-        gasFeeViewModel.gasFeePublisher.filter({ $0 != nil }).print("[confirmButton]====>").prefix(1).assign(to: \.gasFeeItem, on: self).store(in: &disposeBag)
+        gasFeeViewModel.gasFeePublisher.filter({ $0 != nil })
+            .prefix(1)
+            .assign(to: \.gasFeeItem, on: self)
+            .store(in: &disposeBag)
         
         setupObserversForConfirmButton()
     }
@@ -406,7 +410,6 @@ class LuckyDropViewModel: NSObject, ObservableObject {
                 guard let identifier = self.token?.identifier else {
                     return
                 }
-                log.debug("id: \(identifier) allowance: \(allowance)", source: "lucky drop")
                 if let allowance = allowance {
                     self.allowances[identifier] = allowance
                 } else {

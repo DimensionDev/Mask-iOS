@@ -50,7 +50,7 @@ struct LuckyDropView: View {
                 .padding(.horizontal, LayoutConstraints.horizontal)
             }
             
-            WalletBottomWidgetView()
+            WalletBottomWidgetView(viewModel: viewModel.walletBottomViewModel)
                 .padding(.horizontal, 16)
         }
         .edgesIgnoringSafeArea(.bottom)

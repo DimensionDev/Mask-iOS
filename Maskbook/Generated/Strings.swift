@@ -610,6 +610,10 @@ enum L10n {
   enum Plugins {
 
     enum Luckydrop {
+      /// Account
+      static var account: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Account")
+      }
       /// Amount per share
       static var amountPerShare: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Amount-Per-Share")
@@ -759,6 +763,21 @@ enum L10n {
         /// Approving
         static var unlockingToken: String {
           return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Unlocking-Token")
+        }
+      }
+
+      enum State {
+        /// Tx failed
+        static var failed: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.State.Failed")
+        }
+        /// Pending...
+        static var pending: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.State.Pending")
+        }
+        /// Tx Success
+        static var success: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.State.Success")
         }
       }
     }

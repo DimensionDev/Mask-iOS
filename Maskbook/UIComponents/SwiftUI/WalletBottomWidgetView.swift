@@ -9,6 +9,9 @@
 import SwiftUI
 
 struct WalletBottomWidgetView: View {
+    @ObservedObject
+    var viewModel: WalletBottomWidgetViewModel
+    
     var safeBottomArea: CGFloat {
         UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0
     }
@@ -31,16 +34,33 @@ struct WalletBottomWidgetView: View {
                 )
             Spacer().frame(width: 12)
             VStack(alignment: .leading, spacing: 4) {
-                Text("Account")
+                Text(L10n.Plugins.Luckydrop.account)
+                        .font(FontStyles.bh5.font)
+                        .foregroundColor(Asset.Colors.Text.dark.asColor())
                 HStack {
-                    Text("0x78er...7893")
+                    Text(viewModel.stateDescription)
+                        .lineLimit(1)
+                        .truncationMode(.middle)
+                        .frame(maxWidth: 92)
+                        .font(FontStyles.rh6.font)
+                        .foregroundColor(viewModel.state.stateColor)
                     Asset.Plugins.LuckyDrop.lock.asImage()
                 }
             }
             Asset.Icon.Arrows.down1.asImage()
             Spacer()
-            Text("0.22 ETH").font(FontStyles.bh4.font)
-                .foregroundColor(Asset.Colors.Text.dark.asColor())
+            if case .balance(let balance) = viewModel.detailType {
+                Text(balance)
+                    .font(FontStyles.bh4.font)
+                    .foregroundColor(Asset.Colors.Text.dark.asColor())
+            } else if case .transactionURL(let url) = viewModel.detailType, let url = url {
+                Button {
+                    Coordinator.main.present(scene: .safariView(url: url), transition: .modal(animated: true))
+                } label: {
+                    Asset.Plugins.LuckyDrop.share.asImage()
+                        .frame(width: 24, height: 24)
+                }
+            }
         }
         .padding(.vertical, 9.5)
         .padding(.bottom, safeBottomArea)
@@ -50,6 +70,6 @@ struct WalletBottomWidgetView: View {
 
 struct WalletBottomWidgetView_Previews: PreviewProvider {
     static var previews: some View {
-        WalletBottomWidgetView()
+        WalletBottomWidgetView(viewModel: WalletBottomWidgetViewModel())
     }
 }

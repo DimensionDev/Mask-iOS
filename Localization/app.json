@@ -902,6 +902,11 @@
                 "minimum-amount": "The minimum amount for each share is %@ %@",
                 "send": "Send %@"
             },
+            "state": {
+                "pending": "Pending...",
+                "failed": "Tx failed",
+                "success": "Tx Success"
+            },
             "max": "MAX",
             "total-amount": "Total Amount",
             "amount-per-share": "Amount per share",
@@ -919,7 +924,8 @@
             "share-connect-persona": "Connect your Persona to social media before you share your lucky Drop.",
             "share-create-persona": "To send lucky drop, please create a persona to connect to your social account.",
             "quantity": "Quantity",
-            "max-quantity-error": "The max quantity is 255."
+            "max-quantity-error": "The max quantity is 255.",
+            "account": "Account"
         }
     }
 }

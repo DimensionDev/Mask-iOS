@@ -453,6 +453,7 @@ internal enum Asset {
       internal static let lock = ImageAsset(name: "Plugins/LuckyDrop/lock")
       internal static let redPacket = ImageAsset(name: "Plugins/LuckyDrop/redPacket")
       internal static let setting = ImageAsset(name: "Plugins/LuckyDrop/setting")
+      internal static let share = ImageAsset(name: "Plugins/LuckyDrop/share")
     }
     internal static let checkMark = ImageAsset(name: "Plugins/checkMark")
     internal static let circleBackground = ColorAsset(name: "Plugins/circleBackground")
