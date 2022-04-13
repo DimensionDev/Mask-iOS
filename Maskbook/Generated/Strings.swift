@@ -1175,6 +1175,17 @@ enum L10n {
       }
     }
 
+    enum MaskScan {
+      /// Scan Persona or walletConnect QR Code
+      static var scanAll: String {
+        return L10n.tr("Localizable", "Scene.MaskScan.ScanAll")
+      }
+      /// Scan Persona QR Code
+      static var scanPersona: String {
+        return L10n.tr("Localizable", "Scene.MaskScan.ScanPersona")
+      }
+    }
+
     enum MnemonicVerify {
       /// Tap each word in the correct order.
       static var description: String {
@@ -2551,10 +2562,6 @@ enum L10n {
       /// This wallet address was connected with WalletConnect. Importing this wallet address automatically dis-connects the walletConnect account.
       static var replaceWalletConnectWallet: String {
         return L10n.tr("Localizable", "Scene.WalletConnect.ReplaceWalletConnectWallet")
-      }
-      /// Scan the QR code
-      static var scan: String {
-        return L10n.tr("Localizable", "Scene.WalletConnect.Scan")
       }
       /// Scan QR Code
       static var scanQRCode: String {

@@ -19,11 +19,12 @@ final class MaskScanViewController: UIViewController {
         self.restrictedScanType = restrictedScanType
         super.init(nibName: nil, bundle: nil)
     }
-    
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     @InjectedProvider(\.schemeService)
     private var schemeService
 
@@ -31,7 +32,7 @@ final class MaskScanViewController: UIViewController {
     private var coordinator
 
     var restrictedScanType: RestrictedScanType
-    
+
     lazy var scannerViewController = ScannerViewController()
 
     private lazy var scanBorderView: UIImageView = {
@@ -53,7 +54,6 @@ final class MaskScanViewController: UIViewController {
         label.font = FontStyles.MH6
         label.textColor = Asset.Colors.Text.lighter.color
         label.textAlignment = .center
-        label.text = L10n.Scene.WalletConnect.scan
         return label
     }()
 }
@@ -112,6 +112,13 @@ extension MaskScanViewController {
             hintTextLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             hintTextLabel.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
         ])
+
+        switch restrictedScanType {
+        case .common:
+            hintTextLabel.text = L10n.Scene.MaskScan.scanAll
+        case .onlyPersona:
+            hintTextLabel.text = L10n.Scene.MaskScan.scanPersona
+        }
     }
 
     override func viewDidLayoutSubviews() {
@@ -132,7 +139,8 @@ extension MaskScanViewController: ScannerViewControllerDelegate {
     func scannerViewController(_ scannerViewController: ScannerViewController,
 
                                didOutput readableObjects: [AVMetadataMachineReadableCodeObject],
-                               from connection: AVCaptureConnection) {
+                               from connection: AVCaptureConnection)
+    {
         #if !targetEnvironment(simulator)
         guard let rawCode = readableObjects.first,
               let code = scannerViewController.previewView.videoPreviewLayer
@@ -174,13 +182,13 @@ extension MaskScanViewController {
             message: L10n.Common.Alert.OnlyScanPersona.description,
             confirmButtonText: L10n.Common.Controls.ok,
             imageType: .error,
-            confirmButtonClicked:nil,
+            confirmButtonClicked: nil,
             cancelButtonClicked: nil)
         coordinator.present(
             scene: .alertController(alertController: alertController),
             transition: .alertController(completion: nil))
     }
-    
+
     private func showScanFailedAlert() {
         let alertController = AlertController(
             title: L10n.Common.Alert.ScanFailed.title,

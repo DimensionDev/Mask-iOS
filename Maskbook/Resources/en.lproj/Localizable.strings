@@ -252,6 +252,8 @@ separated by spaces";
 "Scene.IdentityRecovery.PrivateKeyButtonDescription" = "Recovering your persona.";
 "Scene.IdentityRecovery.Title" = "Recovery & Sign In";
 "Scene.IdentityRestoreSigninSuccess.Title" = "Restore & Sign In completed!";
+"Scene.MaskScan.ScanAll" = "Scan Persona or walletConnect QR Code";
+"Scene.MaskScan.ScanPersona" = "Scan Persona QR Code";
 "Scene.MnemonicVerify.Description" = "Tap each word in the correct order.";
 "Scene.MnemonicVerify.MnemonicError" = "The mnemonic is incorrect";
 "Scene.MnemonicVerify.MnemonicPrompt" = "Tap the middle to replace the word.";
@@ -565,7 +567,6 @@ Switch account to access another.";
 "Scene.WalletConnect.QrCodeTips" = "Use a WalletConnect compatiable wallet
 to scan the QR Code";
 "Scene.WalletConnect.ReplaceWalletConnectWallet" = "This wallet address was connected with WalletConnect. Importing this wallet address automatically dis-connects the walletConnect account.";
-"Scene.WalletConnect.Scan" = "Scan the QR code";
 "Scene.WalletConnect.ScanQRCode" = "Scan QR Code";
 "Scene.WalletConnect.SelectWallet" = "Select Wallet";
 "Scene.WalletConnect.TapToCopy" = "Tap to copy to clipboard";

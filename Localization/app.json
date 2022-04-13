@@ -787,6 +787,10 @@
                 "cloud_backup_password_hint": "To decrypt the cloud backup, enter the backup password you used when you backed up to cloud."
             }
         },
+        "mask_scan": {
+            "scan_persona": "Scan Persona QR Code",
+            "scan_all": "Scan Persona or walletConnect QR Code"
+        },
         "wallet_connect": {
             "wallet_connect": "WalletConnect",
             "select_wallet": "Select Wallet",
@@ -796,7 +800,6 @@
             "no_wallets": "You haven’t installed any available %s wallets for walletConnect",
             "connecting": "Connecting...",
             "connect_success": "Wallet Successfully Connected to Mask Network",
-            "scan": "Scan the QR code",
             "disconnect": "Disconnect",
             "connection_fail": "Connection failed.",
             "could_not_switch_blockchain_network_title": "Switching blockchain network not supported with WalletConnect",
