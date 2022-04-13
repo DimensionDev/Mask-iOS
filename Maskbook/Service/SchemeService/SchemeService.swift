@@ -85,6 +85,10 @@ class SchemeService {
         personaImportHandler.checkExistAndRestore(from: personaImportItem)
     }
     
+    
+    /// process url to URLEncoded string to avoid URL(string: string) be nil
+    /// - Parameter string: url
+    /// - Returns: URLEncoded string
     func personaMnemonicURLEscaped(string: String) -> String {
         var nicknameString: String?
         let prefix: String? = {
@@ -99,7 +103,7 @@ class SchemeService {
         if let prefix = prefix {
             let mnemonic = prefix.replacingOccurrences(of: Self.personaMenmonicPrefix + "/", with: "")
             let reconstructString = PersonaRecord.qrCodeMnemonic(mnemonicBase64: mnemonic)
-            if let nicknameString = nicknameString?.urlEncode() {
+            if let nicknameString = nicknameString?.usingPercentEncoding() {
                 return reconstructString + "?" + Self.nikenameKey + "=" + nicknameString
             } else {
                 return reconstructString

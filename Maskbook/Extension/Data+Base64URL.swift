@@ -53,7 +53,7 @@ extension String {
             .replacingOccurrences(of: "=", with: "")
     }
     
-    public func urlEncode() -> String? {
+    public func usingPercentEncoding() -> String? {
         return addingPercentEncoding(withAllowedCharacters: CharacterSet(charactersIn: "!*'();:@&=+$,/?%#[]\" {}^|").inverted)
     }
 
