@@ -164,7 +164,7 @@ final class IdentityEmptyViewController: BaseViewController {
             guard let self = self else { return }
             if isAuthorize {
                 let type: RestrictedScanType = self.isFirstLaunch ? .onlyPersona : .common
-                self.coordinator.present(scene: .commonScan(type: type), transition: .modal(animated: true))
+                self.coordinator.present(scene: .maskScan(type: type), transition: .modal(animated: true))
             } else {
                 ScannerPermission.showCameraAccessAlert(coordinator: self.coordinator)
             }

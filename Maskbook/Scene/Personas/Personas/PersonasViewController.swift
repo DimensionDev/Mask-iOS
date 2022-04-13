@@ -223,7 +223,7 @@ extension PersonasViewController {
         ScannerPermission.authorizeCameraWith { [weak self] isAuthorize in
             guard let self = self else { return }
             if isAuthorize {
-                self.coordinator.present(scene: .commonScan(type: .common), transition: .modal(animated: true))
+                self.coordinator.present(scene: .maskScan(type: .common), transition: .modal(animated: true))
             } else {
                 ScannerPermission.showCameraAccessAlert(coordinator: self.coordinator)
             }

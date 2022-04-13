@@ -189,7 +189,7 @@ extension MaskScanViewController {
             cancelButtonText: L10n.Common.Controls.cancel,
             imageType: .error,
             confirmButtonClicked: { _ in
-                self.coordinator.present(scene: .commonScan(type: .common), transition: .modal(animated: true))
+                self.coordinator.present(scene: .maskScan(type: .common), transition: .modal(animated: true))
             },
             cancelButtonClicked: nil)
         coordinator.present(

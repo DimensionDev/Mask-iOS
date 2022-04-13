@@ -170,7 +170,7 @@ class Coordinator {
         case walletConnectStart
         case walletConnectConnecting
         case walletConnectFail
-        case commonScan(type:RestrictedScanType)
+        case maskScan(type:RestrictedScanType)
         case walletConnectServerConfirm(viewModel: WalletConnectServerConfirmViewModel)
         case walletConnectDappList
         case walletConnectSelectAccount
@@ -693,7 +693,7 @@ extension Coordinator {
         case .walletConnectFail:
             return WalletConnectFailedViewController()
         
-        case let .commonScan(type):
+        case let .maskScan(type):
             return MaskScanViewController(restrictedScanType: type)
         
         case let .walletConnectServerConfirm(viewModel):
