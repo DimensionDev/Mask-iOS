@@ -93,9 +93,9 @@ class SchemeService {
         var nicknameString: String?
         let prefix: String? = {
             if string.contains("?") {
-                let array = string.split(separator: "?").map({String($0)})
-                nicknameString = array.last?.split(separator: "=").map({String($0)}).last
-                return array.first
+                let slices = string.split(separator: "?")
+                nicknameString = slices.last?.split(separator: "=").last.flatMap { String($0) }
+                return slices.first.flatMap { String($0) }
             } else {
                 return string
             }
