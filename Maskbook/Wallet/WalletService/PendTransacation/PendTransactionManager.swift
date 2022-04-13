@@ -15,8 +15,8 @@ class PendTransactionManager {
 
     private var pendList:[PendTransactionModel] = []
     private var timer: Timer?
-    var subscriptions: Set<AnyCancellable> = []
     public static let shared = PendTransactionManager()
+//    var pendingTxFinishEvents = PassthroughSubject<PendTransactionModel, TransactionHistory.TransactionStatus>()
     
     public var pendTransactions: CurrentValueSubject<[PendTransactionModel], Never> = CurrentValueSubject([])
 
@@ -24,12 +24,12 @@ class PendTransactionManager {
             timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
                 DispatchQueue.global().async {
                     guard let web3Provier = Web3ProviderFactory.provider?.eth else {
-                        self.timer?.invalidate()
+                        self.stop()
                         return
                     }
                     
                     if self.pendList.isEmpty {
-                        self.timer?.invalidate()
+                        self.stop()
                     }
                     
                     for (index, pendingTranscation) in self.pendList.enumerated() {

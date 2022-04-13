@@ -261,9 +261,9 @@ class TransactionCell: UITableViewCell {
         }
         
         if transaction.status == .pending {
-            refundStackView.isHidden = false
+            resendStackView.isHidden = false
         } else {
-            refundStackView.isHidden = true
+            resendStackView.isHidden = true
         }
         self.txHash = transaction.id
     }
@@ -280,15 +280,15 @@ extension TransactionCell {
         
         if let txToSpeedUp = result.first {
             
-            guard let toAddress = pendlistModel?.transactionInfo?.toAddress else { return }
-            guard let amount = pendlistModel?.transactionInfo?.amount else { return }
-            guard let gasPrice = pendlistModel?.transactionInfo?.gasPrice else { return }
-            guard let gasLimit = pendlistModel?.transactionInfo?.gaslimit else { return }
+            guard let toAddress = txToSpeedUp.transactionInfo?.toAddress else { return }
+            guard let amount = txToSpeedUp.transactionInfo?.amount else { return }
+            guard let gasPrice = txToSpeedUp.transactionInfo?.gasPrice else { return }
+            guard let gasLimit = txToSpeedUp.transactionInfo?.gaslimit else { return }
             
-            let confirmModel = SendConfirmViewModel(selectedToken: pendlistModel?.transactionInfo?.token, gasPrice: gasPrice * BigUInt(1.2), gasLimit: gasLimit, gasFeeNetModel: pendlistModel?.transactionInfo?.gasNetModel)
+            let confirmModel = SendConfirmViewModel(selectedToken: txToSpeedUp.transactionInfo?.token, gasPrice: gasPrice * BigUInt(1.2), gasLimit: gasLimit, gasFeeNetModel: txToSpeedUp.transactionInfo?.gasNetModel)
             
             Coordinator.main.present(
-                scene: .sendTransactionPopConfirm(sendConfirmViewModel: confirmModel, toAddress: toAddress, amount: amount, nonce: pendlistModel?.nonce),
+                scene: .sendTransactionPopConfirm(sendConfirmViewModel: confirmModel, toAddress: toAddress, amount: amount, nonce: txToSpeedUp.nonce),
                 transition: .panModel(animated: true))
         }
     }
@@ -301,21 +301,19 @@ extension TransactionCell {
             $0.networkId == maskUserDefaults.network.networkId
         }
         
-        if !result.isEmpty {
-            let pendlistModel = result.first
-            
+        if let txToSpeedUp = result.first {
+    
             guard let toAddress = maskUserDefaults.defaultAccountAddress else { return }
-            guard let gasPrice = pendlistModel?.transactionInfo?.gasPrice else { return }
-            guard let gasLimit = pendlistModel?.transactionInfo?.gaslimit else { return }
+            guard let gasPrice = txToSpeedUp.transactionInfo?.gasPrice else { return }
+            guard let gasLimit = txToSpeedUp.transactionInfo?.gaslimit else { return }
             
             let token  = WalletAssetManager.shared.getDefaultMainToken()
 
-            let confirmModel = SendConfirmViewModel(selectedToken: token, gasPrice: gasPrice * BigUInt(1.5), gasLimit: gasLimit, gasFeeNetModel: pendlistModel?.transactionInfo?.gasNetModel)
+            let confirmModel = SendConfirmViewModel(selectedToken: token, gasPrice: gasPrice * BigUInt(1.5), gasLimit: gasLimit, gasFeeNetModel: txToSpeedUp.transactionInfo?.gasNetModel)
             
             Coordinator.main.present(
-                scene: .sendTransactionPopConfirm(sendConfirmViewModel: confirmModel, toAddress: toAddress, amount: "0", nonce: pendlistModel?.nonce),
+                scene: .sendTransactionPopConfirm(sendConfirmViewModel: confirmModel, toAddress: toAddress, amount: "0", nonce: txToSpeedUp.nonce),
                 transition: .panModel(animated: true))
         }
-
     }
 }

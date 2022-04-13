@@ -347,7 +347,7 @@ final class SendTransactionCofirmPopViewController: UIViewController {
 
                 self.sendStatus = .sending
                 
-        if (self.nonce != nil) {
+        if let nonce = self.nonce {
             self.viewModel.sendTransaction(password: password, amount: self.amount, toAddress: toAddress, fromAddress: fromAddress, nonce: self.nonce!) { [weak self] result in
                 DispatchQueue.main.async {
                     switch result {
@@ -357,7 +357,7 @@ final class SendTransactionCofirmPopViewController: UIViewController {
                         maskUserDefaults.addRecentlyAddress(address: recentAddress)
                         let transactionInfo = PendTransactionModel.TranscationInfo(gaslimit: self?.viewModel.gasLimitPublisher.value, gasPrice: self?.viewModel.gasPricePublisher.value, amount: self?.amount ?? "0", toAddress: toAddress, gasNetModel: self?.viewModel.gasFeeNetModelTokenPublisher.value, token: token)
                         let history = TransactionHistory(txHash: txhash ?? "", asset: token, toAddress: toAddress, amount: self?.amount ?? "0")
-                        PendTransactionManager.shared.addPendTrancation(txHash: txhash ?? "", history: history, transcationInfo:transactionInfo, nonce: self?.nonce ?? BigUInt(0))
+                        PendTransactionManager.shared.addPendTrancation(txHash: txhash ?? "", history: history, transcationInfo:transactionInfo, nonce: nonce)
                         self?.dismiss(animated: true, completion: {
                             Coordinator.main.present(scene: .balance, transition: .replaceCurrentNavigation(tab: .wallet, animated: true)) {
                                 Coordinator.main.present(scene: .walletHistory, transition: .detail(animated: true))
