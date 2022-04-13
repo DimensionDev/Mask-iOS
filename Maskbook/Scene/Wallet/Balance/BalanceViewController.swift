@@ -220,7 +220,7 @@ class BalanceViewController: BaseViewController {
     }
     
     private func scanAction() {
-        Coordinator.main.present(scene: .commonScan, transition: .modal(animated: true))
+        Coordinator.main.present(scene: .commonScan(type: .common), transition: .modal(animated: true))
     }
 }
 

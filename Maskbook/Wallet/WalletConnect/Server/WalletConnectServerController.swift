@@ -16,12 +16,17 @@ import WalletConnectSwift
 
 protocol WalletConnectServerConfirmProcotol: AnyObject {
     func server(_ server: Server, shouldStart session: Session, completion: @escaping (Session.WalletInfo) -> Void)
+    
+    func noLocalWalletToConnect()
 }
 
 class WalletConnectServerController: ServerDelegate {
     fileprivate static let shared = WalletConnectServerController()
 
     private(set) var server: Server!
+    
+    @InjectedProvider(\.userDefaultSettings)
+    var userSetting
 
     var sessionsPublisher: FetchedResultsPublisher<WalletConnectSession> = {
         let fetchResultController: NSFetchedResultsController<WalletConnectSession> = {
@@ -78,6 +83,10 @@ class WalletConnectServerController: ServerDelegate {
 
     func connect(url: String) throws {
         guard let wcurl = WCURL(url) else { throw WalletConnectServerError.invalidWalletConnectURL }
+        guard userSetting.defaultAccountAddress != nil else {
+            confirmDelegate.noLocalWalletToConnect()
+            return
+        }
         do {
             try server.connect(to: wcurl)
             connectingSubject.send(wcurl)

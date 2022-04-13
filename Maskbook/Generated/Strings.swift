@@ -249,6 +249,28 @@ enum L10n {
         }
       }
 
+      enum NoLocalWalletForWalletconnect {
+        /// Unable to connect to walletConnect as there is no local wallet.
+        static var description: String {
+          return L10n.tr("Localizable", "Common.Alert.NoLocalWalletForWalletconnect.Description")
+        }
+        /// Unable to connect
+        static var title: String {
+          return L10n.tr("Localizable", "Common.Alert.NoLocalWalletForWalletconnect.Title")
+        }
+      }
+
+      enum OnlyScanPersona {
+        /// The QR code is not Persona QR Code.\nPlease scan Persona QR Code.
+        static var description: String {
+          return L10n.tr("Localizable", "Common.Alert.OnlyScanPersona.Description")
+        }
+        /// Please Scan Persona QR Code
+        static var title: String {
+          return L10n.tr("Localizable", "Common.Alert.OnlyScanPersona.Title")
+        }
+      }
+
       enum PersonaCreate {
         /// You have successfully created your persona %@. 
         static func description(_ p1: String) -> String {

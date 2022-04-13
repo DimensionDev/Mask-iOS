@@ -9,13 +9,29 @@
 import AVKit
 import UIKit
 
+enum RestrictedScanType {
+    case onlyPersona
+    case common
+}
+
 final class MaskScanViewController: UIViewController {
+    init(restrictedScanType: RestrictedScanType) {
+        self.restrictedScanType = restrictedScanType
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     @InjectedProvider(\.schemeService)
     private var schemeService
 
     @InjectedProvider(\.mainCoordinator)
     private var coordinator
 
+    var restrictedScanType: RestrictedScanType
+    
     lazy var scannerViewController = ScannerViewController()
 
     private lazy var scanBorderView: UIImageView = {
@@ -131,9 +147,17 @@ extension MaskScanViewController: ScannerViewControllerDelegate {
 
         if let url = code.stringValue {
             dismiss(animated: true) {
-                let success = self.schemeService.handleScheme(scheme: url)
-                if !success {
-                    self.showScanFailedAlert()
+                switch self.restrictedScanType {
+                case .onlyPersona:
+                    let success = self.schemeService.handleMaskPersonaScheme(scheme: url)
+                    if !success {
+                        self.showOnlyScanPersonaAlert()
+                    }
+                case .common:
+                    let success = self.schemeService.handleScheme(scheme: url)
+                    if !success {
+                        self.showScanFailedAlert()
+                    }
                 }
             }
         }
@@ -144,6 +168,19 @@ extension MaskScanViewController: ScannerViewControllerDelegate {
 }
 
 extension MaskScanViewController {
+    private func showOnlyScanPersonaAlert() {
+        let alertController = AlertController(
+            title: L10n.Common.Alert.OnlyScanPersona.title,
+            message: L10n.Common.Alert.OnlyScanPersona.description,
+            confirmButtonText: L10n.Common.Controls.ok,
+            imageType: .error,
+            confirmButtonClicked:nil,
+            cancelButtonClicked: nil)
+        coordinator.present(
+            scene: .alertController(alertController: alertController),
+            transition: .alertController(completion: nil))
+    }
+    
     private func showScanFailedAlert() {
         let alertController = AlertController(
             title: L10n.Common.Alert.ScanFailed.title,
@@ -152,7 +189,7 @@ extension MaskScanViewController {
             cancelButtonText: L10n.Common.Controls.cancel,
             imageType: .error,
             confirmButtonClicked: { _ in
-                self.coordinator.present(scene: .commonScan, transition: .modal(animated: true))
+                self.coordinator.present(scene: .commonScan(type: .common), transition: .modal(animated: true))
             },
             cancelButtonClicked: nil)
         coordinator.present(

@@ -45,6 +45,13 @@ class SchemeService {
     }
 
     func handleMaskScheme(scheme: String) -> Bool {
+        if scheme.hasPrefix("mask://persona") {
+            return handleMaskPersonaScheme(scheme: scheme)
+        }
+        return false
+    }
+    
+    func handleMaskPersonaScheme(scheme: String) -> Bool {
         if scheme.hasPrefix(Self.personaPrivateKeyPrefix) {
             handleMaskPersonaPrivateKey(scheme: scheme)
             return true

@@ -43,6 +43,11 @@ access your camera";
 "Common.Alert.KeychainAuthPrompt.Title" = "Authenticate to use your secrets";
 "Common.Alert.LocalBackup.BackupCompleted" = "Backup completed!";
 "Common.Alert.LocalBackup.BackupFailed" = "Backup failed!";
+"Common.Alert.NoLocalWalletForWalletconnect.Description" = "Unable to connect to walletConnect as there is no local wallet.";
+"Common.Alert.NoLocalWalletForWalletconnect.Title" = "Unable to connect";
+"Common.Alert.OnlyScanPersona.Description" = "The QR code is not Persona QR Code.
+Please scan Persona QR Code.";
+"Common.Alert.OnlyScanPersona.Title" = "Please Scan Persona QR Code";
 "Common.Alert.PersonaCreate.Description" = "You have successfully created your persona %@. ";
 "Common.Alert.PersonaCreate.Title" = "Successful ";
 "Common.Alert.PersonaLogout.Description" = "After logging out, your associated social accounts can no longer decrypt past encrypted messages.";
