@@ -55,7 +55,8 @@ class TokenDetailViewModel: NSObject {
                 return $0.history
             }
             return (pendingTransactions + displayTransactions).sorted{ $0.timeAt > $1.timeAt }
-        }.receive(on: RunLoop.main)
+        }
+        .receive(on: RunLoop.main)
             .sink { [weak self] transactions in
                 self?.refreshTableView(transactions: transactions)
             }
