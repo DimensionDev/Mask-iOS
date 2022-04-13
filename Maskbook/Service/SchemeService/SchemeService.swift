@@ -7,9 +7,14 @@
 //
 
 import Foundation
+import CoreDataStack
 
 class SchemeService {
     fileprivate static let shared = SchemeService()
+    
+    static let personaPrivateKeyPrefix = "mask://persona/privatekey"
+    static let personaMenmonicPrefix = "mask://persona/mnemonic"
+    static let nikenameKey = "nickname"
 
     @InjectedProvider(\.walletConnectServer)
     private var walletConnectServer
@@ -40,11 +45,11 @@ class SchemeService {
     }
 
     func handleMaskScheme(scheme: String) -> Bool {
-        if scheme.hasPrefix("mask://persona/privatekey") {
+        if scheme.hasPrefix(Self.personaPrivateKeyPrefix) {
             handleMaskPersonaPrivateKey(scheme: scheme)
             return true
         }
-        if scheme.hasPrefix("mask://persona/mnemonic") {
+        if scheme.hasPrefix(Self.personaMenmonicPrefix) {
             handleMaskPersonaMnemonic(scheme: scheme)
             return true
         }
@@ -59,9 +64,17 @@ class SchemeService {
     }
 
     func handleMaskPersonaMnemonic(scheme: String) {
-        guard let url = URL(string: scheme) else { return }
+        let url: URL? = {
+            if let url = URL(string: scheme) {
+                return url
+            } else {
+                let string = personaMnemonicURLEscaped(string: scheme)
+                return URL(string: string)
+            }
+        }()
+        guard let url = url else { return }
         var nickname: String?
-        if let para = url.queryParameters, let name = para["nickname"] {
+        if let para = url.queryParameters, let name = para[Self.nikenameKey] {
             nickname = name
         }
         let mnemonic = Data(base64URLEncoded: url.lastPathComponent).flatMap {
@@ -70,6 +83,34 @@ class SchemeService {
         guard let mnemonic = mnemonic else { return }
         let personaImportItem = PersonaImportItem(type: .mnemonic(mnemonic: mnemonic), name: nickname)
         personaImportHandler.checkExistAndRestore(from: personaImportItem)
+    }
+    
+    
+    /// process url to URLEncoded string to avoid URL(string: string) be nil
+    /// - Parameter string: url
+    /// - Returns: URLEncoded string
+    func personaMnemonicURLEscaped(string: String) -> String {
+        var nicknameString: String?
+        let prefix: String? = {
+            if string.contains("?") {
+                let slices = string.split(separator: "?")
+                nicknameString = slices.last?.split(separator: "=").last.flatMap { String($0) }
+                return slices.first.flatMap { String($0) }
+            } else {
+                return string
+            }
+        }()
+        if let prefix = prefix {
+            let mnemonic = prefix.replacingOccurrences(of: Self.personaMenmonicPrefix + "/", with: "")
+            let reconstructString = PersonaRecord.qrCodeMnemonic(mnemonicBase64: mnemonic)
+            if let nicknameString = nicknameString?.usingPercentEncoding() {
+                return reconstructString + "?" + Self.nikenameKey + "=" + nicknameString
+            } else {
+                return reconstructString
+            }
+        } else {
+            return string
+        }
     }
 }
 
