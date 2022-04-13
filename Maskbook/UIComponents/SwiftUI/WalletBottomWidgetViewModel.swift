@@ -105,7 +105,7 @@ class WalletBottomWidgetViewModel: ObservableObject {
     }
     
     private func requestInfoOfTransaction() {
-        
+        //  TODO: fail / success 5秒后回到normal
     }
 }
 
