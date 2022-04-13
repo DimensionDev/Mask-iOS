@@ -87,7 +87,7 @@ class TransactionCell: UITableViewCell {
         return label
     }()
     
-    private lazy var refundStackView = HStackView (spacing: 8) {
+    private lazy var resendStackView = HStackView (spacing: 8) {
         speedUpButton
         cancelButton
     }.cv.apply {
@@ -99,7 +99,7 @@ class TransactionCell: UITableViewCell {
     
     private lazy var contentStackView = VStackView (spacing: 6, alignment: .leading){
         typeNameLabel
-        refundStackView
+        resendStackView
     }
     
     lazy var cancelButton: SecondaryButton = {
