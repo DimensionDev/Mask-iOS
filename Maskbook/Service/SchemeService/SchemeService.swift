@@ -18,6 +18,9 @@ class SchemeService {
 
     @InjectedProvider(\.walletConnectServer)
     private var walletConnectServer
+    
+    @InjectedProvider(\.mainCoordinator)
+    var mainCoordinator
 
     private lazy var personaImportHandler = PersonaImportHandler(scene: .userScan)
 
@@ -31,6 +34,7 @@ class SchemeService {
     func handleScheme(scheme: String) -> Bool {
         if scheme.hasPrefix("wc:") {
             do {
+                switchSelected(tab: .wallet)
                 try walletConnectServer.connect(url: scheme)
                 return true
             } catch {
@@ -53,14 +57,20 @@ class SchemeService {
     
     func handleMaskPersonaScheme(scheme: String) -> Bool {
         if scheme.hasPrefix(Self.personaPrivateKeyPrefix) {
+            switchSelected(tab: .personas)
             handleMaskPersonaPrivateKey(scheme: scheme)
             return true
         }
         if scheme.hasPrefix(Self.personaMenmonicPrefix) {
+            switchSelected(tab: .personas)
             handleMaskPersonaMnemonic(scheme: scheme)
             return true
         }
         return false
+    }
+    
+    func switchSelected(tab: MainTabBarController.Tab) {
+        MainTabBarController.currentTabBarController()?.selectedIndex = tab.rawValue
     }
 
     func handleMaskPersonaPrivateKey(scheme: String) {
