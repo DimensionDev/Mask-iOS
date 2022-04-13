@@ -14,6 +14,7 @@ import SwiftUI
 class WalletBottomWidgetViewModel: ObservableObject {
     @Published var token: Token? = nil
     @Published var state: TransactionState = .normal
+    @Published var isLocked: Bool = true
     
     var displayBalance: String {
         guard let token = token else { return "" }
@@ -52,6 +53,9 @@ class WalletBottomWidgetViewModel: ObservableObject {
     @InjectedProvider(\.walletAssetManager)
     private var walletAssetManager: WalletAssetManager
     
+    @InjectedProvider(\.mainCoordinator)
+    var coordinator
+    
     private var disposeBag = Set<AnyCancellable>()
     
     private var transactionId: String?
@@ -70,6 +74,12 @@ class WalletBottomWidgetViewModel: ObservableObject {
             self.token = token
         }
         .store(in: &disposeBag)
+        
+        settings.$passwordExpiredDate.map { [weak self] date in
+            self?.settings.isPasswordExpried(date) != false
+        }
+        .assign(to: \.isLocked, on: self)
+        .store(in: &disposeBag)
     }
     
     func observeTransaction(id: String) {
@@ -77,6 +87,21 @@ class WalletBottomWidgetViewModel: ObservableObject {
         transactionId = id
         
         // TODO: request infomation of a transaction
+    }
+    
+    func switchAccount() {
+        guard !isLocked else {
+            coordinator.present(
+                scene: .walletUnlock(cancellable: true, completion: { error in }),
+                transition: .modal(animated: true, adaptiveDelegate: nil)
+            )
+            return
+        }
+        
+        coordinator.present(
+            scene: .redPackageSelectAccount,
+            transition: .panModel(animated: true)
+        )
     }
     
     private func requestInfoOfTransaction() {

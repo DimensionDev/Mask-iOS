@@ -18,36 +18,42 @@ struct WalletBottomWidgetView: View {
     
     var body: some View {
         HStack(spacing: 0) {
-            Asset.Icon.Logo.largeMask.asImage()
-                .resizable()
-                .frame(width: 32, height: 32)
-                .overlay(
-                    Asset.Images.Scene.WalletList.Coins.ethSelected.asImage()
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 13.47)
-                        .overlay(
-                            Capsule(style: .circular)
-                                .stroke(Color.white, style: StrokeStyle(lineWidth: 1))
-                        )
-                        .offset(x: 16, y: 9.265)
-                )
-            Spacer().frame(width: 12)
-            VStack(alignment: .leading, spacing: 4) {
-                Text(L10n.Plugins.Luckydrop.account)
-                        .font(FontStyles.bh5.font)
-                        .foregroundColor(Asset.Colors.Text.dark.asColor())
-                HStack {
-                    Text(viewModel.stateDescription)
-                        .lineLimit(1)
-                        .truncationMode(.middle)
-                        .frame(maxWidth: 92)
-                        .font(FontStyles.rh6.font)
-                        .foregroundColor(viewModel.state.stateColor)
-                    Asset.Plugins.LuckyDrop.lock.asImage()
+            Button {
+                viewModel.switchAccount()
+            } label: {
+                Asset.Icon.Logo.largeMask.asImage()
+                    .resizable()
+                    .frame(width: 32, height: 32)
+                    .overlay(
+                        Asset.Images.Scene.WalletList.Coins.ethSelected.asImage()
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 13.47)
+                            .overlay(
+                                Capsule(style: .circular)
+                                    .stroke(Color.white, style: StrokeStyle(lineWidth: 1))
+                            )
+                            .offset(x: 16, y: 9.265)
+                    )
+                Spacer().frame(width: 12)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(L10n.Plugins.Luckydrop.account)
+                            .font(FontStyles.bh5.font)
+                            .foregroundColor(Asset.Colors.Text.dark.asColor())
+                    HStack {
+                        Text(viewModel.stateDescription)
+                            .lineLimit(1)
+                            .truncationMode(.middle)
+                            .frame(maxWidth: 92)
+                            .font(FontStyles.rh6.font)
+                            .foregroundColor(viewModel.state.stateColor)
+                        if viewModel.isLocked {
+                            Asset.Plugins.LuckyDrop.lock.asImage()
+                        }
+                    }
                 }
+                Asset.Icon.Arrows.down1.asImage()
             }
-            Asset.Icon.Arrows.down1.asImage()
             Spacer()
             if case .balance(let balance) = viewModel.detailType {
                 Text(balance)
