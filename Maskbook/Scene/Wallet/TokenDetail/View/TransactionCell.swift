@@ -278,8 +278,7 @@ extension TransactionCell {
             $0.networkId == maskUserDefaults.network.networkId
         }
         
-        if !result.isEmpty {
-            let pendlistModel = result.first
+        if let txToSpeedUp = result.first {
             
             guard let toAddress = pendlistModel?.transactionInfo?.toAddress else { return }
             guard let amount = pendlistModel?.transactionInfo?.amount else { return }
