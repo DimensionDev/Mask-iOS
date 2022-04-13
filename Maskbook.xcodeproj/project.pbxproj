@@ -149,6 +149,8 @@
 		1FEE1EA82784508A00697F81 /* EthereumTransaction+Signing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE1EA72784508A00697F81 /* EthereumTransaction+Signing.swift */; };
 		1FEE1EAA27845CEF00697F81 /* TransactionOptions+Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE1EA927845CEF00697F81 /* TransactionOptions+Address.swift */; };
 		1FEE1EAC27845E1F00697F81 /* Web3+signTX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE1EAB27845E1F00697F81 /* Web3+signTX.swift */; };
+		1FF403F42806ACD000468F5C /* LuckDropHistory+BlockChainNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF403F32806ACD000468F5C /* LuckDropHistory+BlockChainNetwork.swift */; };
+		1FF403F62806AD8D00468F5C /* LuckyDropHistoryViewModel+TokenHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF403F52806AD8D00468F5C /* LuckyDropHistoryViewModel+TokenHistory.swift */; };
 		2937D922CA95E5739C9BF27F /* Pods_Maskbook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 463940F35F5F4C93A7DA52DE /* Pods_Maskbook.framework */; };
 		2A0C16AF2666713D0085524E /* StoredKeyImportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0C16AE2666713D0085524E /* StoredKeyImportType.swift */; };
 		2A18E7FB266C9D210045BC88 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A18E7FA266C9D210045BC88 /* AvatarView.swift */; };
@@ -904,6 +906,8 @@
 		1FEE1EA72784508A00697F81 /* EthereumTransaction+Signing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EthereumTransaction+Signing.swift"; sourceTree = "<group>"; };
 		1FEE1EA927845CEF00697F81 /* TransactionOptions+Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionOptions+Address.swift"; sourceTree = "<group>"; };
 		1FEE1EAB27845E1F00697F81 /* Web3+signTX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Web3+signTX.swift"; sourceTree = "<group>"; };
+		1FF403F32806ACD000468F5C /* LuckDropHistory+BlockChainNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LuckDropHistory+BlockChainNetwork.swift"; sourceTree = "<group>"; };
+		1FF403F52806AD8D00468F5C /* LuckyDropHistoryViewModel+TokenHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LuckyDropHistoryViewModel+TokenHistory.swift"; sourceTree = "<group>"; };
 		2A0C16AE2666713D0085524E /* StoredKeyImportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredKeyImportType.swift; sourceTree = "<group>"; };
 		2A18E7FA266C9D210045BC88 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		2A23A64A27C499E800CC5AD9 /* Shape+Fill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shape+Fill.swift"; sourceTree = "<group>"; };
@@ -2228,6 +2232,7 @@
 				2AF6C7B427FEA52700A9EA4A /* RedPacketShareViewModel.swift */,
 				2AF6C7B527FEA52700A9EA4A /* LuckyDropViewModel.swift */,
 				1F48D38E2805199600A51B89 /* LuckyDropHistoryHelper.swift */,
+				1FF403F52806AD8D00468F5C /* LuckyDropHistoryViewModel+TokenHistory.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2244,6 +2249,7 @@
 		2AF6C7B827FEA52700A9EA4A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1FF403F32806ACD000468F5C /* LuckDropHistory+BlockChainNetwork.swift */,
 				2AF6C7B927FEA52700A9EA4A /* RedPacket.swift */,
 				2AF6C7BA27FEA52700A9EA4A /* FungibleToken.swift */,
 				2AF6C7BB27FEA52700A9EA4A /* RedPacketAvailability.swift */,
@@ -4449,6 +4455,7 @@
 				0F41A19A260C7B75000037B2 /* ZerionMessageFactory.swift in Sources */,
 				2AF88566271EE9310004565A /* WalletDeleteViewModel.swift in Sources */,
 				2AF8855B271EE9310004565A /* GasFeeApi.swift in Sources */,
+				1FF403F42806ACD000468F5C /* LuckDropHistory+BlockChainNetwork.swift in Sources */,
 				1FD24E1226BD267800D03599 /* InjectedValueKeys.swift in Sources */,
 				2A442EBD27EAB05A006BF60F /* EdgesConstraints.swift in Sources */,
 				2AF88575271EE9310004565A /* MnemonicVerifyViewModel.swift in Sources */,
@@ -4581,6 +4588,7 @@
 				2A23A64C27C499E800CC5AD9 /* Shape+Fill.swift in Sources */,
 				2AF6C7B027FEA37200A9EA4A /* WalletBottomWidgetView.swift in Sources */,
 				1F8AD0D026CA3BAE00C9694F /* SpinBallAnimator.swift in Sources */,
+				1FF403F62806AD8D00468F5C /* LuckyDropHistoryViewModel+TokenHistory.swift in Sources */,
 				2AF88522271EE9310004565A /* ImportPrivateKeyViewController.swift in Sources */,
 				2AF8860B271EED7D0004565A /* PresentStyle.swift in Sources */,
 				0F2051A6265E14F300602A0C /* UIViewPreview.swift in Sources */,

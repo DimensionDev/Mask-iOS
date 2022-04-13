@@ -14,7 +14,7 @@ final class LuckDropHistoryController: BaseViewController {
         super.buildContent()
         LuckyDropHistoryView().asContent(in: self)
         let value = Task.detached(priority: .high) {
-            try? await self.viewModel.fetch()
+            try? await self.viewModel.fetchHistory()
         }
     }
 }

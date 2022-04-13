@@ -9,7 +9,11 @@
 import SwiftUI
 
 struct LuckyDropHistoryView: View {
-    @State var listKind: LuckDropKind = .token
+    @ObservedObject var viewModel: LuckyDropHistoryViewModel
+
+    init() {
+        _viewModel = ObservedObject(wrappedValue: LuckyDropHistoryViewModel())
+    }
     
     var body: some View {
         VStack(spacing: 20) {
@@ -21,7 +25,7 @@ struct LuckyDropHistoryView: View {
                                 .id(id)
                         }
                     } header: {
-                        SegmentControl(selection: $listKind)
+                        SegmentControl(selection: $viewModel.selection)
                             .frame(height: 48)
                     }
                 }
