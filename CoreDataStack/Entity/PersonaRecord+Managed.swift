@@ -44,6 +44,12 @@ extension PersonaRecord: Managed {
         return NSPredicate(format: "%K == %@", #keyPath(PersonaRecord.initialized), NSNumber(booleanLiteral: initialized))
     }
     
+    public static func hasLinkedProfiles() -> NSPredicate {
+        return NSPredicate(format: "%K.@count > 0",
+                           #keyPath(PersonaRecord.linkedProfiles),
+                           #keyPath(PersonaRecord.linkedProfiles))
+    }
+    
     public static func predicate(identifier: String?,
                                  hasPrivateKey: Bool?,
                                  hasLogout: Bool?,

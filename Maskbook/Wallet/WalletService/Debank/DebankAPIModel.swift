@@ -80,6 +80,26 @@ public struct DebankAPIModel {
         public struct RespDict: Decodable {
             let history_list: [History]
             let token_dict: [String: TransactionAsset]
+            let cate_dict: CateDict
+            let project_dict: [String: ProjectItem]
+        }
+        
+        public struct CateDict: Decodable {
+            let approve: CateDictItem
+            let receive: CateDictItem
+            let send: CateDictItem
+            let spot_trade: CateDictItem
+        }
+        
+        public struct CateDictItem: Decodable {
+            let id: String
+            let name: String
+        }
+        
+        public struct ProjectItem: Decodable {
+            let id: String
+            let log_url: String
+            let name: String
         }
         
         public struct TransactionAsset: Decodable {
