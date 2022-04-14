@@ -193,6 +193,11 @@ class Coordinator {
         )
         case moveBackupData
         case luckyDrop
+        case luckyDropConfirm(
+            redPacketInput: HappyRedPacketV4.CreateRedPacketInput,
+            transaction: EthereumTransaction,
+            completion: (String?, Error?) -> Void
+        )
         case debug
     }
     
@@ -761,6 +766,17 @@ extension Coordinator {
             
         case .luckyDrop:
             return UIHostingController(rootView: LuckyDropView())
+            
+        case .luckyDropConfirm(
+            let redPacketInput,
+            let transaction,
+            let completion
+        ):
+            return LuckyDropConfirmViewController(
+                redPacketInput: redPacketInput,
+                transaction: transaction,
+                completion: completion
+            )
             
         case .debug:
             return UIHostingController(rootView: DebugView())

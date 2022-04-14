@@ -22,7 +22,9 @@ struct LuckyDropView: View {
                     LuckyDropSegmentView()
                     tokensRow
                     PrimaryButton(
-                        action: {
+                        title: viewModel.confirmTitle,
+                        animating: viewModel.buttonAnimating,
+                        isEnable: viewModel.confirmEnable) {
                             switch viewModel.buttonType {
                             case .unlock:
                                 Coordinator.main.present(
@@ -41,11 +43,7 @@ struct LuckyDropView: View {
                             case .send: viewModel.send()
                             default: break
                             }
-                        },
-                        title: viewModel.confirmTitle,
-                        animating: viewModel.buttonAnimating,
-                        isEnable: viewModel.confirmEnable
-                    )
+                        }
                 }
                 .padding(.horizontal, LayoutConstraints.horizontal)
             }

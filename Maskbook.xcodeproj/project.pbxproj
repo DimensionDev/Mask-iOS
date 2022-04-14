@@ -172,6 +172,7 @@
 		2A5FAEA227CF7AD200D01250 /* GuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5FAE9F27CF7AD200D01250 /* GuideView.swift */; };
 		2A5FAEA427CF7AEE00D01250 /* MaskHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5FAEA327CF7AEE00D01250 /* MaskHostViewController.swift */; };
 		2A6788CD27EB6B4000CC2350 /* WelcomeIdentityEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6788CC27EB6B4000CC2350 /* WelcomeIdentityEmptyView.swift */; };
+		2A68BF6F2806F02400C91C6F /* RedPacketConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A68BF6E2806F02400C91C6F /* RedPacketConfirmView.swift */; };
 		2A6ABB7B2720053B00CC3AED /* SelectAppearanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6ABB292720053B00CC3AED /* SelectAppearanceViewModel.swift */; };
 		2A6ABB7C2720053B00CC3AED /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6ABB2A2720053B00CC3AED /* SettingViewModel.swift */; };
 		2A6ABB7D2720053B00CC3AED /* SelectDataSourceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6ABB2B2720053B00CC3AED /* SelectDataSourceViewModel.swift */; };
@@ -534,6 +535,8 @@
 		2AF88655271EEDF80004565A /* UITableView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF88636271EEDF80004565A /* UITableView+extension.swift */; };
 		2AF88656271EEDF80004565A /* Array+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF88637271EEDF80004565A /* Array+extension.swift */; };
 		2AFBEDE526E61D6400BD77B7 /* LoadingWithTextController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFBEDE426E61D6400BD77B7 /* LoadingWithTextController.swift */; };
+		2AFC0A072806F52600BD77B5 /* LuckyDropConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFC0A062806F52600BD77B5 /* LuckyDropConfirmViewController.swift */; };
+		2AFC0A092807BB7A00BD77B5 /* RedPacketConfirmViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFC0A082807BB7A00BD77B5 /* RedPacketConfirmViewModel.swift */; };
 		2D00A5FE27953F2D0082E693 /* DebugEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D00A5FD27953F2D0082E693 /* DebugEntryView.swift */; };
 		2D00A600279546C80082E693 /* DebugControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D00A5FF279546C80082E693 /* DebugControl.swift */; };
 		2D11F03E27894A58002CE232 /* ConnectSocialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D11F03D27894A58002CE232 /* ConnectSocialView.swift */; };
@@ -926,6 +929,7 @@
 		2A5FAE9F27CF7AD200D01250 /* GuideView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideView.swift; sourceTree = "<group>"; };
 		2A5FAEA327CF7AEE00D01250 /* MaskHostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskHostViewController.swift; sourceTree = "<group>"; };
 		2A6788CC27EB6B4000CC2350 /* WelcomeIdentityEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeIdentityEmptyView.swift; sourceTree = "<group>"; };
+		2A68BF6E2806F02400C91C6F /* RedPacketConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketConfirmView.swift; sourceTree = "<group>"; };
 		2A6ABB292720053B00CC3AED /* SelectAppearanceViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAppearanceViewModel.swift; sourceTree = "<group>"; };
 		2A6ABB2A2720053B00CC3AED /* SettingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		2A6ABB2B2720053B00CC3AED /* SelectDataSourceViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectDataSourceViewModel.swift; sourceTree = "<group>"; };
@@ -1288,6 +1292,8 @@
 		2AF88636271EEDF80004565A /* UITableView+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+extension.swift"; sourceTree = "<group>"; };
 		2AF88637271EEDF80004565A /* Array+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+extension.swift"; sourceTree = "<group>"; };
 		2AFBEDE426E61D6400BD77B7 /* LoadingWithTextController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingWithTextController.swift; sourceTree = "<group>"; };
+		2AFC0A062806F52600BD77B5 /* LuckyDropConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuckyDropConfirmViewController.swift; sourceTree = "<group>"; };
+		2AFC0A082807BB7A00BD77B5 /* RedPacketConfirmViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketConfirmViewModel.swift; sourceTree = "<group>"; };
 		2C1003447F4384364F7CAD0B /* Pods-Maskbook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maskbook.debug.xcconfig"; path = "Target Support Files/Pods-Maskbook/Pods-Maskbook.debug.xcconfig"; sourceTree = "<group>"; };
 		2D00A5FD27953F2D0082E693 /* DebugEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugEntryView.swift; sourceTree = "<group>"; };
 		2D00A5FF279546C80082E693 /* DebugControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugControl.swift; sourceTree = "<group>"; };
@@ -2228,6 +2234,7 @@
 				2AF6C7B427FEA52700A9EA4A /* RedPacketShareViewModel.swift */,
 				2AF6C7B527FEA52700A9EA4A /* LuckyDropViewModel.swift */,
 				1F48D38E2805199600A51B89 /* LuckyDropHistoryHelper.swift */,
+				2AFC0A082807BB7A00BD77B5 /* RedPacketConfirmViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2237,6 +2244,7 @@
 			children = (
 				2AF6C7B727FEA52700A9EA4A /* RedPacketShareSheet.swift */,
 				1F48D38627FEEF3100A51B89 /* LuckDropHistoryController.swift */,
+				2AFC0A062806F52600BD77B5 /* LuckyDropConfirmViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2266,6 +2274,7 @@
 				2AF6C7C527FEA52700A9EA4A /* LuckyDropView.swift */,
 				2AF6C7C627FEA52700A9EA4A /* TextLengthModifier.swift */,
 				2AF6C7C727FEA52700A9EA4A /* LuckyDropHistoryView.swift */,
+				2A68BF6E2806F02400C91C6F /* RedPacketConfirmView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4309,6 +4318,7 @@
 				1F3301E527D863DB00FA0652 /* DoneActionItem.swift in Sources */,
 				2AF88610271EED7D0004565A /* CryptoHelper.swift in Sources */,
 				2AF6C7D227FEA52800A9EA4A /* LuckyDropSegmentView.swift in Sources */,
+				2A68BF6F2806F02400C91C6F /* RedPacketConfirmView.swift in Sources */,
 				2AF88589271EE9310004565A /* MaskTabBar.swift in Sources */,
 				2AF884DA271EE9310004565A /* AlertController.swift in Sources */,
 				2AF88648271EEDF80004565A /* EthUtil.swift in Sources */,
@@ -4378,6 +4388,7 @@
 				1FEE1E9D277D902500697F81 /* DappScriptMethod.swift in Sources */,
 				2AF8853F271EE9310004565A /* BalanceCollectiblesCell.swift in Sources */,
 				2D8D3F5E26CF59C50094035F /* Profile.swift in Sources */,
+				2AFC0A072806F52600BD77B5 /* LuckyDropConfirmViewController.swift in Sources */,
 				2A6ABB8E2720053B00CC3AED /* RemoteBackupRequest.swift in Sources */,
 				2D27F5A627632BD1004FACCB /* WalletConnectDappListViewController.swift in Sources */,
 				2AF884C6271EE9300004565A /* SocialProfileDetectViewController.swift in Sources */,
@@ -4747,6 +4758,7 @@
 				2AF885D5271EE9320004565A /* DownloadMaskActivity.swift in Sources */,
 				2A6ABBBA2720059200CC3AED /* SettingViewController.swift in Sources */,
 				41E5002827955E5200A73117 /* ProfileRepository.swift in Sources */,
+				2AFC0A092807BB7A00BD77B5 /* RedPacketConfirmViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

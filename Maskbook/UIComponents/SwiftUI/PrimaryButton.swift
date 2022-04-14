@@ -49,12 +49,19 @@ struct PrimaryButton: View {
         .disabled(!isEnable)
         .cornerRadius(8)
     }
+    
+    init(title: String, animating: Bool = false, isEnable: Bool = true, action: @escaping () -> Void) {
+        self.title = title
+        self.animating = animating
+        self.isEnable = isEnable
+        self.action = action
+    }
 }
 
 struct PrimaryButton_Previews: PreviewProvider {
     static var previews: some View {
-        PrimaryButton(action: {
+        PrimaryButton(title: "Confirm Risk Warning", animating: true, isEnable: true) {
             
-        }, title: "Confirm Risk Warning", animating: true, isEnable: true)
+        }
     }
 }

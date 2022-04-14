@@ -907,6 +907,17 @@
                 "failed": "Tx failed",
                 "success": "Tx Success"
             },
+            "confirm": {
+                "wallet_account": "Wallet account",
+                "attached_message": "Attached message",
+                "split_mode": "Split mode",
+                "share": "Share",
+                "amount_per_share": "Amount per share",
+                "total_amount": "Total amount",
+                "transaction_fee": "Transaction fee",
+                "tips": "You can withdraw the remaining balance 24 hours after the Lucky Drop is sent.",
+                "title": "Confirm Your Lucky Drop"
+            },
             "max": "MAX",
             "total-amount": "Total Amount",
             "amount-per-share": "Amount per share",

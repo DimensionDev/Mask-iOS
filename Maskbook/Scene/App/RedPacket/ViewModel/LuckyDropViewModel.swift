@@ -349,32 +349,7 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         }
     }
     
-//    func processAmountInput(value: String) {
-//        // make sure only one '.' in `value`
-//        if value.hasSuffix("0") { return }
-//        if value.hasSuffix("."),
-//           let firstIndex = value.firstIndex(of: "."),
-//           let lastIndex = value.lastIndex(of: "."),
-//           firstIndex == lastIndex {
-//            return
-//        }
-//        let num = NSDecimalNumber(string: value)
-//        let roundBehavior = NSDecimalNumberHandler(
-//            roundingMode: .down,
-//            scale: token?.decimal ?? 18,
-//            raiseOnExactness: false,
-//            raiseOnOverflow: false,
-//            raiseOnUnderflow: false,
-//            raiseOnDivideByZero: false
-//        )
-//        let roundedNum = num.rounding(accordingToBehavior: roundBehavior)
-//        let processed = roundedNum == .notANumber ? "" : roundedNum.stringValue
-//        guard processed != value else { return }
-//        amountStr = processed
-//    }
-    
     // MARK: - Private method
-    
     @MainActor
     private func getAllowance() async -> BigUInt? {
         guard let fromAddress = maskUserDefaults.defaultAccountAddress,
