@@ -184,7 +184,7 @@ function populateTransaction(contract, fragment, args) {
             tx.type = ro.type;
         }
         if (ro.accessList != null) {
-            tx.accessList = (0,transactions_lib_esm.accessListify)(ro.accessList);
+            tx.accessList = (0,transactions_lib_esm/* accessListify */.z7)(ro.accessList);
         }
         // If there was no "gasLimit" override, but the ABI specifies a default, use it
         if (tx.gasLimit == null && fragment.gas != null) {

@@ -396,7 +396,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.serialize = exports.deserializeUnchecked = exports.deserialize = exports.struct = exports.Data = exports.extendBorsh = void 0;
 const web3_js_1 = __webpack_require__(29948);
-const borsh_1 = __webpack_require__(12050);
+const borsh_1 = __webpack_require__(42590);
 Object.defineProperty(exports, "deserializeUnchecked", ({ enumerable: true, get: function () { return borsh_1.deserializeUnchecked; } }));
 Object.defineProperty(exports, "serialize", ({ enumerable: true, get: function () { return borsh_1.serialize; } }));
 Object.defineProperty(exports, "deserialize", ({ enumerable: true, get: function () { return borsh_1.deserialize; } }));

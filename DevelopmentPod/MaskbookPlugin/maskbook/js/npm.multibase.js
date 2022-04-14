@@ -207,7 +207,7 @@ module.exports = function base64 (alphabet) {
 
 
 const Base = __webpack_require__(54133)
-const baseX = __webpack_require__(14375)
+const baseX = __webpack_require__(62116)
 const base16 = __webpack_require__(88129)
 const base32 = __webpack_require__(83175)
 const base64 = __webpack_require__(77243)
@@ -595,7 +595,7 @@ module.exports = function base64 (alphabet) {
 
 
 const Base = __webpack_require__(73391)
-const baseX = __webpack_require__(14375)
+const baseX = __webpack_require__(62116)
 const base16 = __webpack_require__(37093)
 const base32 = __webpack_require__(61662)
 const base64 = __webpack_require__(30618)
