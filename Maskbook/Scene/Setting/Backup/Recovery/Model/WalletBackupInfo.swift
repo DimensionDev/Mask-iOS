@@ -8,7 +8,7 @@ struct WalletBackupInfo: Codable {
     let address: String
     let createdAt: TimeInterval
     let updatedAt: TimeInterval
-    let passphrase: String
+    let passphrase: String?
     let mnemonic: Mnemonic?
     let privateKey: PrivateKey?
 

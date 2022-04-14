@@ -570,6 +570,10 @@
 		32DA89FF29B463CF8010221C /* Pods_MaskbookTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAEEDD9836F80A163641983 /* Pods_MaskbookTests.framework */; };
 		4156689327A53BA70051E0E7 /* ShareLinkGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156689227A53BA70051E0E7 /* ShareLinkGenerator.swift */; };
 		4156689527A68B770051E0E7 /* JsonWebKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156689427A68B770051E0E7 /* JsonWebKey.swift */; };
+		4168635327F434AE00F12DB2 /* BackupPreviewGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168635227F434AE00F12DB2 /* BackupPreviewGenerator.swift */; };
+		4168635527F4622600F12DB2 /* BackupDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168635427F4622600F12DB2 /* BackupDataGenerator.swift */; };
+		4168635727F58B2500F12DB2 /* AsyncPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168635627F58B2500F12DB2 /* AsyncPublisher.swift */; };
+		4168635927F6F0A000F12DB2 /* RecoverDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168635827F6F0A000F12DB2 /* RecoverDataManager.swift */; };
 		41829919277C816800F5417B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41829918277C816800F5417B /* GoogleService-Info.plist */; };
 		4182991A277C816800F5417B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41829918277C816800F5417B /* GoogleService-Info.plist */; };
 		4182991B277C816800F5417B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41829918277C816800F5417B /* GoogleService-Info.plist */; };
@@ -1306,6 +1310,10 @@
 		2DEDDEAA2761EE7900D37A76 /* MaskClientMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskClientMeta.swift; sourceTree = "<group>"; };
 		4156689227A53BA70051E0E7 /* ShareLinkGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareLinkGenerator.swift; sourceTree = "<group>"; };
 		4156689427A68B770051E0E7 /* JsonWebKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonWebKey.swift; sourceTree = "<group>"; };
+		4168635227F434AE00F12DB2 /* BackupPreviewGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupPreviewGenerator.swift; sourceTree = "<group>"; };
+		4168635427F4622600F12DB2 /* BackupDataGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupDataGenerator.swift; sourceTree = "<group>"; };
+		4168635627F58B2500F12DB2 /* AsyncPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncPublisher.swift; sourceTree = "<group>"; };
+		4168635827F6F0A000F12DB2 /* RecoverDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoverDataManager.swift; sourceTree = "<group>"; };
 		41829918277C816800F5417B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		41E500082791361E00A73117 /* PersonaRecord+Managed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonaRecord+Managed.swift"; sourceTree = "<group>"; };
 		41E5000A2791CA9B00A73117 /* ProfileRecord+Managed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileRecord+Managed.swift"; sourceTree = "<group>"; };
@@ -2144,6 +2152,7 @@
 		2A6ABB6F2720053B00CC3AED /* Backup */ = {
 			isa = PBXGroup;
 			children = (
+				4168634F27F4321B00F12DB2 /* Models */,
 				2A6ABB702720053B00CC3AED /* SettingBackupViewController.swift */,
 				2A6ABB5B2720053B00CC3AED /* LocalBackup */,
 				2A6ABB362720053B00CC3AED /* Recovery */,
@@ -3291,6 +3300,7 @@
 				5DE5395627473599005F4CEA /* PanModalPresentable+color.swift */,
 				41E50043279948D200A73117 /* Optional+Extension.swift */,
 				5DE2B10E27BA60AC002ACA54 /* View+Snapshot.swift */,
+				4168635627F58B2500F12DB2 /* AsyncPublisher.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -3414,6 +3424,16 @@
 				2DDCC84F269D2A2D00A14ED4 /* MaskToken.swift */,
 			);
 			path = MaskTokenList;
+			sourceTree = "<group>";
+		};
+		4168634F27F4321B00F12DB2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4168635227F434AE00F12DB2 /* BackupPreviewGenerator.swift */,
+				4168635427F4622600F12DB2 /* BackupDataGenerator.swift */,
+				4168635827F6F0A000F12DB2 /* RecoverDataManager.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		41E500102791CD2900A73117 /* Repository */ = {
@@ -4311,6 +4331,7 @@
 				5D84DC4D27B12B810009025E /* WebViewScrollViewDelegate.swift in Sources */,
 				1FEE1E99277D8FC500697F81 /* DappRPCResponse.swift in Sources */,
 				2AF8852C271EE9310004565A /* WalletBackupKeystoreViewController.swift in Sources */,
+				4168635527F4622600F12DB2 /* BackupDataGenerator.swift in Sources */,
 				5D7F5A5127B6531E00A007C5 /* PersonaCreateHandler.swift in Sources */,
 				6F25327C27C63168000C0D27 /* NFTActionTableViewCell.swift in Sources */,
 				2AF884DB271EE9310004565A /* DataProviderViewModel.swift in Sources */,
@@ -4442,6 +4463,8 @@
 				2A23A65027C4B67D00CC5AD9 /* SwiftUI+Asset.swift in Sources */,
 				5D7F5A5327B66C5600A007C5 /* PersonaKeyInfoPreview.swift in Sources */,
 				2AF884EC271EE9310004565A /* SizeMeasureModifier.swift in Sources */,
+				4168635727F58B2500F12DB2 /* AsyncPublisher.swift in Sources */,
+				4168635327F434AE00F12DB2 /* BackupPreviewGenerator.swift in Sources */,
 				2AF88554271EE9310004565A /* SendConfirmViewModel.swift in Sources */,
 				1F3301D827D85B8400FA0652 /* AlertItemRepresentable.swift in Sources */,
 				2AF8857F271EE9310004565A /* WalletListHeader.swift in Sources */,
@@ -4563,6 +4586,7 @@
 				2A6ABBA32720053B00CC3AED /* RemoteBackupUploadRequest.swift in Sources */,
 				2AF884D7271EE9310004565A /* MaskbookTabService.swift in Sources */,
 				41E5002A2797AEB500A73117 /* WebPublicAPIMessageResolver+DB.swift in Sources */,
+				4168635927F6F0A000F12DB2 /* RecoverDataManager.swift in Sources */,
 				1F37DF2027BDF715008F8ABE /* RestoreLocalFileValidationController.swift in Sources */,
 				2AF8858D271EE9310004565A /* SelectActionViewModelProtocol.swift in Sources */,
 				2AF884EE271EE9310004565A /* IdentityEmptyViewController.swift in Sources */,

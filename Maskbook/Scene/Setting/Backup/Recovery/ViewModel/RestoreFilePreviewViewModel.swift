@@ -9,6 +9,7 @@
 import Combine
 import Foundation
 import SwiftMsgPack
+import SwiftyJSON
 
 // swiftlint:disable array_init
 final class RestoreFilePreviewViewModel: ObservableObject {
@@ -48,6 +49,7 @@ final class RestoreFilePreviewViewModel: ObservableObject {
     func startPreparingData() {
         switch fileSource {
         case let .localFileURL(url, decryptSeed):
+            // Backup file is old un-encrypted json data, use js to do recovering
             if decryptSeed == nil {
                 LazyFuture<Data?, Never> { promise in
                     if let content = try? Data(contentsOf: url) {
@@ -112,33 +114,6 @@ final class RestoreFilePreviewViewModel: ObservableObject {
                 self?.parsingData()
             }
             .store(in: &fileHandlerStorage)
-    }
-
-    private func parsingData() {
-        let data = self.validRestoreData
-        let dataSignal = GetRestorePreviewInfoMWEMessage
-            .withPayload {
-                .init(backupInfo: String(data: data, encoding: .utf8))
-            }
-            .eraseToAnyPublisher()
-
-        let timerSignal = LazyFuture.delay(1).setFailureType(to: Error.self)
-
-        Publishers.CombineLatest(dataSignal, timerSignal)
-            .receive(on: DispatchQueue.main)
-            .flatMap { data, _ -> AnyPublisher<State, Error> in
-                return Just(data.state).setFailureType(to: Error.self).eraseToAnyPublisher()
-            }
-            .handleEvents(receiveOutput: { [weak self] state in
-                guard let self = self else { return }
-                guard case let .fileDecoded(data) = state else {
-                    return
-                }
-                self.restoreFile = data
-            })
-            .replaceError(with: .restoreFailed)
-            .bind(to: \.stateSignal, on: self)
-            .store(in: &cancelableStorage)
     }
 
     func restore() {
@@ -220,5 +195,32 @@ extension URL {
         }
         .receive(on: RunLoop.main)
         .eraseToAnyPublisher()
+    }
+}
+
+// MARK: Native restore function
+extension RestoreFilePreviewViewModel {
+    func parsingData() {
+        let data = self.validRestoreData
+        guard let json = try? JSON(data: data) else {
+            stateSignal.send(.restoreFailed)
+            return
+        }
+        
+        let personasCount = json["personas"].arrayValue.count
+        let profilesCount = json["profiles"].arrayValue.count
+        let postsCount = json["posts"].arrayValue.count
+        let filesCount = json["plugin"]["com.maskbook.fileservice"].arrayValue.count
+        let walletsCount = json["wallets"].arrayValue.count
+        let previewResult = RestorePreviewResult(
+            personas: personasCount,
+            accounts: profilesCount,
+            wallets: walletsCount,
+            contacts: profilesCount,
+            posts: postsCount,
+            files: filesCount
+        )
+        restoreFile = previewResult
+        stateSignal.send(.fileDecoded(previewResult))
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import Combine
+import CryptoKit
 import CryptoSwift
 import Foundation
 import SwiftMsgPack
