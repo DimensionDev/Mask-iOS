@@ -1,6 +1,6 @@
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[3883],{
 
-/***/ 43702:
+/***/ 86519:
 /***/ ((module) => {
 
 module.exports = function isBuffer(arg) {
@@ -551,7 +551,7 @@ function isPrimitive(arg) {
 }
 exports.isPrimitive = isPrimitive;
 
-exports.isBuffer = __webpack_require__(43702);
+exports.isBuffer = __webpack_require__(86519);
 
 function objectToString(o) {
   return Object.prototype.toString.call(o);

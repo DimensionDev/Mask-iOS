@@ -1,7 +1,7 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[4029],{
 
-/***/ 43723:
+/***/ 54168:
 /***/ ((module) => {
 
 /*
@@ -135,7 +135,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 49190:
+/***/ 84056:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /*
@@ -161,8 +161,8 @@ module.exports = {
  * @date 2017
  */
 
-var utils = __webpack_require__(83317);
-var Iban = __webpack_require__(67541);
+var utils = __webpack_require__(11627);
+var Iban = __webpack_require__(84390);
 /**
  * Will format the given storage key array values to hex strings.
  *
@@ -384,6 +384,9 @@ var outputTransactionReceiptFormatter = function (receipt) {
     if (Array.isArray(receipt.logs)) {
         receipt.logs = receipt.logs.map(outputLogFormatter);
     }
+    if (receipt.effectiveGasPrice) {
+        receipt.effectiveGasPrice = utils.hexToNumber(receipt.effectiveGasPrice);
+    }
     if (receipt.contractAddress) {
         receipt.contractAddress = utils.toChecksumAddress(receipt.contractAddress);
     }
@@ -419,6 +422,8 @@ var outputBlockFormatter = function (block) {
     }
     if (block.miner)
         block.miner = utils.toChecksumAddress(block.miner);
+    if (block.baseFeePerGas)
+        block.baseFeePerGas = utils.hexToNumber(block.baseFeePerGas);
     return block;
 };
 /**
@@ -584,7 +589,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 70222:
+/***/ 41032:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /*
@@ -609,8 +614,8 @@ module.exports = {
  * @date 2017
  */
 
-var errors = __webpack_require__(43723);
-var formatters = __webpack_require__(49190);
+var errors = __webpack_require__(54168);
+var formatters = __webpack_require__(84056);
 module.exports = {
     errors: errors,
     formatters: formatters

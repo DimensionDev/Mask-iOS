@@ -1,19 +1,19 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[2486],{
 
-/***/ 4380:
+/***/ 11652:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (/* binding */ useAutocomplete)
 /* harmony export */ });
 /* unused harmony export createFilterOptions */
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(97538);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(30114);
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(33413);
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(45720);
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(15128);
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(51911);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(86248);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(50141);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(34652);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(88536);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(53167);
 
 
 /* eslint-disable no-constant-condition */
@@ -1023,104 +1023,7 @@ function useAutocomplete(props) {
 
 /***/ }),
 
-/***/ 93469:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  "Z": () => (/* binding */ BackdropUnstyled_BackdropUnstyled)
-});
-
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.17.2/node_modules/@babel/runtime/helpers/esm/extends.js
-var esm_extends = __webpack_require__(97538);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.17.2/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
-var objectWithoutPropertiesLoose = __webpack_require__(93086);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
-var react = __webpack_require__(63423);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/clsx@1.1.1/node_modules/clsx/dist/clsx.m.js
-var clsx_m = __webpack_require__(25789);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/composeClasses/composeClasses.js
-var composeClasses = __webpack_require__(48301);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/utils/isHostComponent.js
-var isHostComponent = __webpack_require__(2370);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/generateUtilityClasses/generateUtilityClasses.js
-var generateUtilityClasses = __webpack_require__(6038);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/generateUtilityClass/generateUtilityClass.js
-var generateUtilityClass = __webpack_require__(53038);
-;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/BackdropUnstyled/backdropUnstyledClasses.js
-
-
-function getBackdropUtilityClass(slot) {
-  return (0,generateUtilityClass/* default */.Z)('MuiBackdrop', slot);
-}
-const backdropUnstyledClasses = (0,generateUtilityClasses/* default */.Z)('MuiBackdrop', ['root', 'invisible']);
-/* harmony default export */ const BackdropUnstyled_backdropUnstyledClasses = ((/* unused pure expression or super */ null && (backdropUnstyledClasses)));
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(82798);
-;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/BackdropUnstyled/BackdropUnstyled.js
-
-
-const _excluded = ["classes", "className", "invisible", "component", "components", "componentsProps", "theme"];
-
-
-
-
-
-
-
-
-const useUtilityClasses = ownerState => {
-  const {
-    classes,
-    invisible
-  } = ownerState;
-  const slots = {
-    root: ['root', invisible && 'invisible']
-  };
-  return (0,composeClasses/* default */.Z)(slots, getBackdropUtilityClass, classes);
-};
-
-const BackdropUnstyled = /*#__PURE__*/react.forwardRef(function BackdropUnstyled(props, ref) {
-  const {
-    classes: classesProp,
-    className,
-    invisible = false,
-    component = 'div',
-    components = {},
-    componentsProps = {},
-
-    /* eslint-disable react/prop-types */
-    theme
-  } = props,
-        other = (0,objectWithoutPropertiesLoose/* default */.Z)(props, _excluded);
-
-  const ownerState = (0,esm_extends/* default */.Z)({}, props, {
-    classes: classesProp,
-    invisible
-  });
-
-  const classes = useUtilityClasses(ownerState);
-  const Root = components.Root || component;
-  const rootProps = componentsProps.root || {};
-  return /*#__PURE__*/(0,jsx_runtime.jsx)(Root, (0,esm_extends/* default */.Z)({
-    "aria-hidden": true
-  }, rootProps, !(0,isHostComponent/* default */.Z)(Root) && {
-    as: component,
-    ownerState: (0,esm_extends/* default */.Z)({}, ownerState, rootProps.ownerState),
-    theme
-  }, {
-    ref: ref
-  }, other, {
-    className: (0,clsx_m["default"])(classes.root, rootProps.className, className)
-  }));
-});
- false ? 0 : void 0;
-/* harmony default export */ const BackdropUnstyled_BackdropUnstyled = (BackdropUnstyled);
-
-/***/ }),
-
-/***/ 87907:
+/***/ 86701:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 
@@ -1129,78 +1032,69 @@ __webpack_require__.d(__webpack_exports__, {
   "Z": () => (/* binding */ BadgeUnstyled_BadgeUnstyled)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.17.2/node_modules/@babel/runtime/helpers/esm/extends.js
-var esm_extends = __webpack_require__(97538);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.17.2/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
-var objectWithoutPropertiesLoose = __webpack_require__(93086);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
-var react = __webpack_require__(63423);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.17.9/node_modules/@babel/runtime/helpers/esm/extends.js
+var esm_extends = __webpack_require__(51911);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.17.9/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
+var objectWithoutPropertiesLoose = __webpack_require__(2633);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0/node_modules/react/index.js
+var react = __webpack_require__(86248);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/clsx@1.1.1/node_modules/clsx/dist/clsx.m.js
 var clsx_m = __webpack_require__(25789);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.2/node_modules/@mui/utils/esm/capitalize.js
-var capitalize = __webpack_require__(2714);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/composeClasses/composeClasses.js
-var composeClasses = __webpack_require__(48301);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/utils/appendOwnerState.js
-var appendOwnerState = __webpack_require__(23801);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.2/node_modules/@mui/utils/esm/usePreviousProps.js
-var usePreviousProps = __webpack_require__(30806);
-;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/BadgeUnstyled/useBadge.js
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.76_31fee5138b61bcdeb416e3946f47cd38/node_modules/@mui/base/composeClasses/composeClasses.js
+var composeClasses = __webpack_require__(44007);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.76_31fee5138b61bcdeb416e3946f47cd38/node_modules/@mui/base/utils/appendOwnerState.js
+var appendOwnerState = __webpack_require__(19506);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.6.1_react@18.0.0/node_modules/@mui/utils/esm/usePreviousProps.js
+var usePreviousProps = __webpack_require__(67044);
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.76_31fee5138b61bcdeb416e3946f47cd38/node_modules/@mui/base/BadgeUnstyled/useBadge.js
 
 function useBadge(props) {
   const {
-    anchorOrigin: anchorOriginProp = {
-      vertical: 'top',
-      horizontal: 'right'
-    },
     badgeContent: badgeContentProp,
     invisible: invisibleProp = false,
     max: maxProp = 99,
-    showZero = false,
-    variant: variantProp = 'standard'
+    showZero = false
   } = props;
   const prevProps = (0,usePreviousProps/* default */.Z)({
-    anchorOrigin: anchorOriginProp,
     badgeContent: badgeContentProp,
-    max: maxProp,
-    variant: variantProp
+    max: maxProp
   });
   let invisible = invisibleProp;
 
-  if (invisibleProp === false && (badgeContentProp === 0 && !showZero || badgeContentProp == null && variantProp !== 'dot')) {
+  if (invisibleProp === false && badgeContentProp === 0 && !showZero) {
     invisible = true;
   }
 
   const {
-    anchorOrigin = anchorOriginProp,
     badgeContent,
-    max = maxProp,
-    variant = variantProp
+    max = maxProp
   } = invisible ? prevProps : props;
-  let displayValue = '';
-
-  if (variant !== 'dot') {
-    displayValue = badgeContent && Number(badgeContent) > max ? `${max}+` : badgeContent;
-  }
-
+  const displayValue = badgeContent && Number(badgeContent) > max ? `${max}+` : badgeContent;
   return {
-    anchorOrigin,
     badgeContent,
     invisible,
     max,
-    variant,
     displayValue
   };
 }
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/BadgeUnstyled/badgeUnstyledClasses.js
-var badgeUnstyledClasses = __webpack_require__(41272);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(82798);
-;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/BadgeUnstyled/BadgeUnstyled.js
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.76_31fee5138b61bcdeb416e3946f47cd38/node_modules/@mui/base/generateUtilityClasses/generateUtilityClasses.js
+var generateUtilityClasses = __webpack_require__(94282);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.76_31fee5138b61bcdeb416e3946f47cd38/node_modules/@mui/base/generateUtilityClass/generateUtilityClass.js
+var generateUtilityClass = __webpack_require__(72755);
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.76_31fee5138b61bcdeb416e3946f47cd38/node_modules/@mui/base/BadgeUnstyled/badgeUnstyledClasses.js
 
 
-const _excluded = ["anchorOrigin", "classes", "badgeContent", "component", "children", "className", "components", "componentsProps", "invisible", "max", "showZero", "variant"];
+function getBadgeUtilityClass(slot) {
+  return (0,generateUtilityClass/* default */.Z)('BaseBadge', slot);
+}
+const badgeUnstyledClasses = (0,generateUtilityClasses/* default */.Z)('BaseBadge', ['root', 'badge', 'invisible']);
+/* harmony default export */ const BadgeUnstyled_badgeUnstyledClasses = ((/* unused pure expression or super */ null && (badgeUnstyledClasses)));
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(71999);
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.76_31fee5138b61bcdeb416e3946f47cd38/node_modules/@mui/base/BadgeUnstyled/BadgeUnstyled.js
 
+
+const _excluded = ["badgeContent", "component", "children", "className", "components", "componentsProps", "invisible", "max", "showZero"];
 
 
 
@@ -1213,56 +1107,40 @@ const _excluded = ["anchorOrigin", "classes", "badgeContent", "component", "chil
 
 const useUtilityClasses = ownerState => {
   const {
-    variant,
-    anchorOrigin,
-    invisible,
-    classes
+    invisible
   } = ownerState;
   const slots = {
     root: ['root'],
-    badge: ['badge', variant, `anchorOrigin${(0,capitalize/* default */.Z)(anchorOrigin.vertical)}${(0,capitalize/* default */.Z)(anchorOrigin.horizontal)}`, invisible && 'invisible']
+    badge: ['badge', invisible && 'invisible']
   };
-  return (0,composeClasses/* default */.Z)(slots, badgeUnstyledClasses/* getBadgeUtilityClass */.I, classes);
+  return (0,composeClasses/* default */.Z)(slots, getBadgeUtilityClass, undefined);
 };
 
 const BadgeUnstyled = /*#__PURE__*/react.forwardRef(function BadgeUnstyled(props, ref) {
   const {
-    anchorOrigin: anchorOriginProp = {
-      vertical: 'top',
-      horizontal: 'right'
-    },
-    classes: classesProp,
     component,
     children,
     className,
     components = {},
     componentsProps = {},
     max: maxProp = 99,
-    showZero = false,
-    variant: variantProp = 'standard'
+    showZero = false
   } = props,
         other = (0,objectWithoutPropertiesLoose/* default */.Z)(props, _excluded);
 
   const {
-    anchorOrigin,
     badgeContent,
     max,
-    variant,
     displayValue,
     invisible
   } = useBadge((0,esm_extends/* default */.Z)({}, props, {
-    anchorOrigin: anchorOriginProp,
-    max: maxProp,
-    variant: variantProp
+    max: maxProp
   }));
 
   const ownerState = (0,esm_extends/* default */.Z)({}, props, {
-    anchorOrigin,
     badgeContent,
-    classes: classesProp,
     invisible,
     max,
-    variant,
     showZero
   });
 
@@ -1286,36 +1164,17 @@ const BadgeUnstyled = /*#__PURE__*/react.forwardRef(function BadgeUnstyled(props
 
 /***/ }),
 
-/***/ 41272:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "I": () => (/* binding */ getBadgeUtilityClass),
-/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _generateUtilityClasses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6038);
-/* harmony import */ var _generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(53038);
-
-
-function getBadgeUtilityClass(slot) {
-  return (0,_generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)('MuiBadge', slot);
-}
-const badgeUnstyledClasses = (0,_generateUtilityClasses__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)('MuiBadge', ['root', 'badge', 'dot', 'standard', 'anchorOriginTopLeft', 'anchorOriginTopRight', 'anchorOriginBottomLeft', 'anchorOriginBottomRight', 'invisible']);
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (badgeUnstyledClasses);
-
-/***/ }),
-
-/***/ 56184:
+/***/ 22381:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(96865);
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(45720);
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(47240);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(82798);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(86248);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(77975);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(88536);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(70251);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(71999);
 
 
  // TODO: return `EventHandlerName extends `on${infer EventName}` ? Lowercase<EventName> : never` once generatePropTypes runs with TS 4.1
@@ -1336,12 +1195,11 @@ function clickedRootScrollbar(event, doc) {
  *
  * Demos:
  *
- * - [Click Away Listener](https://mui.com/components/click-away-listener/)
- * - [Menus](https://mui.com/components/menus/)
+ * - [Click Away Listener](https://mui.com/base/react-click-away-listener/)
  *
  * API:
  *
- * - [ClickAwayListener API](https://mui.com/api/click-away-listener/)
+ * - [ClickAwayListener API](https://mui.com/base/api/click-away-listener/)
  */
 function ClickAwayListener(props) {
   const {
@@ -1473,7 +1331,7 @@ if (false) {}
 
 /***/ }),
 
-/***/ 92635:
+/***/ 49192:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 
@@ -1482,33 +1340,33 @@ __webpack_require__.d(__webpack_exports__, {
   "Z": () => (/* binding */ ModalUnstyled_ModalUnstyled)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.17.2/node_modules/@babel/runtime/helpers/esm/extends.js
-var esm_extends = __webpack_require__(97538);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.17.2/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
-var objectWithoutPropertiesLoose = __webpack_require__(93086);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
-var react = __webpack_require__(63423);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.17.9/node_modules/@babel/runtime/helpers/esm/extends.js
+var esm_extends = __webpack_require__(51911);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.17.9/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
+var objectWithoutPropertiesLoose = __webpack_require__(2633);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0/node_modules/react/index.js
+var react = __webpack_require__(86248);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/clsx@1.1.1/node_modules/clsx/dist/clsx.m.js
 var clsx_m = __webpack_require__(25789);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.2/node_modules/@mui/utils/esm/useForkRef.js
-var useForkRef = __webpack_require__(96865);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.2/node_modules/@mui/utils/esm/ownerDocument.js
-var ownerDocument = __webpack_require__(47240);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.2/node_modules/@mui/utils/esm/useEventCallback.js
-var useEventCallback = __webpack_require__(45720);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.2/node_modules/@mui/utils/esm/createChainedFunction.js
-var createChainedFunction = __webpack_require__(4835);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/composeClasses/composeClasses.js
-var composeClasses = __webpack_require__(48301);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/utils/isHostComponent.js
-var isHostComponent = __webpack_require__(2370);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/Portal/Portal.js
-var Portal = __webpack_require__(35157);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.2/node_modules/@mui/utils/esm/ownerWindow.js
-var ownerWindow = __webpack_require__(92790);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.2/node_modules/@mui/utils/esm/getScrollbarSize.js
-var getScrollbarSize = __webpack_require__(51957);
-;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/ModalUnstyled/ModalManager.js
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.6.1_react@18.0.0/node_modules/@mui/utils/esm/useForkRef.js
+var useForkRef = __webpack_require__(77975);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.6.1_react@18.0.0/node_modules/@mui/utils/esm/ownerDocument.js
+var ownerDocument = __webpack_require__(70251);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.6.1_react@18.0.0/node_modules/@mui/utils/esm/useEventCallback.js
+var useEventCallback = __webpack_require__(88536);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.6.1_react@18.0.0/node_modules/@mui/utils/esm/createChainedFunction.js
+var createChainedFunction = __webpack_require__(30865);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.76_31fee5138b61bcdeb416e3946f47cd38/node_modules/@mui/base/composeClasses/composeClasses.js
+var composeClasses = __webpack_require__(44007);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.76_31fee5138b61bcdeb416e3946f47cd38/node_modules/@mui/base/utils/isHostComponent.js
+var isHostComponent = __webpack_require__(61112);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.76_31fee5138b61bcdeb416e3946f47cd38/node_modules/@mui/base/Portal/Portal.js
+var Portal = __webpack_require__(98321);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.6.1_react@18.0.0/node_modules/@mui/utils/esm/ownerWindow.js
+var ownerWindow = __webpack_require__(54675);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.6.1_react@18.0.0/node_modules/@mui/utils/esm/getScrollbarSize.js
+var getScrollbarSize = __webpack_require__(69567);
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.76_31fee5138b61bcdeb416e3946f47cd38/node_modules/@mui/base/ModalUnstyled/ModalManager.js
 
 
 // Is a vertical scrollbar displayed?
@@ -1734,10 +1592,10 @@ class ModalManager {
   }
 
 }
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(82798);
-;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/Unstable_TrapFocus/Unstable_TrapFocus.js
-/* eslint-disable @typescript-eslint/naming-convention, consistent-return, jsx-a11y/no-noninteractive-tabindex */
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(71999);
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.76_31fee5138b61bcdeb416e3946f47cd38/node_modules/@mui/base/TrapFocus/TrapFocus.js
+/* eslint-disable consistent-return, jsx-a11y/no-noninteractive-tabindex */
 
 
  // Inspired by https://github.com/focus-trap/tabbable
@@ -1827,7 +1685,7 @@ function defaultIsEnabled() {
  */
 
 
-function Unstable_TrapFocus(props) {
+function TrapFocus(props) {
   const {
     children,
     disableAutoFocus = false,
@@ -2034,12 +1892,12 @@ function Unstable_TrapFocus(props) {
 
 if (false) {}
 
-/* harmony default export */ const Unstable_TrapFocus_Unstable_TrapFocus = (Unstable_TrapFocus);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/generateUtilityClasses/generateUtilityClasses.js
-var generateUtilityClasses = __webpack_require__(6038);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/generateUtilityClass/generateUtilityClass.js
-var generateUtilityClass = __webpack_require__(53038);
-;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/ModalUnstyled/modalUnstyledClasses.js
+/* harmony default export */ const TrapFocus_TrapFocus = (TrapFocus);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.76_31fee5138b61bcdeb416e3946f47cd38/node_modules/@mui/base/generateUtilityClasses/generateUtilityClasses.js
+var generateUtilityClasses = __webpack_require__(94282);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.76_31fee5138b61bcdeb416e3946f47cd38/node_modules/@mui/base/generateUtilityClass/generateUtilityClass.js
+var generateUtilityClass = __webpack_require__(72755);
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.76_31fee5138b61bcdeb416e3946f47cd38/node_modules/@mui/base/ModalUnstyled/modalUnstyledClasses.js
 
 
 function getModalUtilityClass(slot) {
@@ -2047,7 +1905,7 @@ function getModalUtilityClass(slot) {
 }
 const modalUnstyledClasses = (0,generateUtilityClasses/* default */.Z)('MuiModal', ['root', 'hidden']);
 /* harmony default export */ const ModalUnstyled_modalUnstyledClasses = ((/* unused pure expression or super */ null && (modalUnstyledClasses)));
-;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/ModalUnstyled/ModalUnstyled.js
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.76_31fee5138b61bcdeb416e3946f47cd38/node_modules/@mui/base/ModalUnstyled/ModalUnstyled.js
 
 
 const _excluded = ["BackdropComponent", "BackdropProps", "children", "classes", "className", "closeAfterTransition", "component", "components", "componentsProps", "container", "disableAutoFocus", "disableEnforceFocus", "disableEscapeKeyDown", "disablePortal", "disableRestoreFocus", "disableScrollLock", "hideBackdrop", "keepMounted", "manager", "onBackdropClick", "onClose", "onKeyDown", "open", "theme", "onTransitionEnter", "onTransitionExited"];
@@ -2090,12 +1948,12 @@ const defaultManager = new ModalManager();
 /**
  * Modal is a lower-level construct that is leveraged by the following components:
  *
- * - [Dialog](/api/dialog/)
- * - [Drawer](/api/drawer/)
- * - [Menu](/api/menu/)
- * - [Popover](/api/popover/)
+ * - [Dialog](/material-ui/api/dialog/)
+ * - [Drawer](/material-ui/api/drawer/)
+ * - [Menu](/material-ui/api/menu/)
+ * - [Popover](/material-ui/api/popover/)
  *
- * If you are creating a modal dialog, you probably want to use the [Dialog](/api/dialog/) component
+ * If you are creating a modal dialog, you probably want to use the [Dialog](/material-ui/api/dialog/) component
  * rather than directly using Modal.
  *
  * This component shares many concepts with [react-overlays](https://react-bootstrap.github.io/react-overlays/#modals).
@@ -2305,9 +2163,10 @@ const ModalUnstyled = /*#__PURE__*/react.forwardRef(function ModalUnstyled(props
       onKeyDown: handleKeyDown,
       className: (0,clsx_m["default"])(classes.root, rootProps.className, className),
       children: [!hideBackdrop && BackdropComponent ? /*#__PURE__*/(0,jsx_runtime.jsx)(BackdropComponent, (0,esm_extends/* default */.Z)({
+        "aria-hidden": true,
         open: open,
         onClick: handleBackdropClick
-      }, BackdropProps)) : null, /*#__PURE__*/(0,jsx_runtime.jsx)(Unstable_TrapFocus_Unstable_TrapFocus, {
+      }, BackdropProps)) : null, /*#__PURE__*/(0,jsx_runtime.jsx)(TrapFocus_TrapFocus, {
         disableEnforceFocus: disableEnforceFocus,
         disableAutoFocus: disableAutoFocus,
         disableRestoreFocus: disableRestoreFocus,
@@ -2323,21 +2182,21 @@ const ModalUnstyled = /*#__PURE__*/react.forwardRef(function ModalUnstyled(props
 
 /***/ }),
 
-/***/ 20101:
+/***/ 18360:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(97538);
-/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(93086);
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(96865);
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(24477);
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(47240);
-/* harmony import */ var _popperjs_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(39416);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
-/* harmony import */ var _Portal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(35157);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(82798);
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(51911);
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2633);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(77975);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(58965);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(70251);
+/* harmony import */ var _popperjs_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(40200);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(86248);
+/* harmony import */ var _Portal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(98321);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(71999);
 
 
 const _excluded = ["anchorEl", "children", "direction", "disablePortal", "modifiers", "open", "ownerState", "placement", "popperOptions", "popperRef", "TransitionProps"],
@@ -2561,17 +2420,17 @@ const PopperUnstyled = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRe
 
 /***/ }),
 
-/***/ 35157:
+/***/ 98321:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(38936);
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(96865);
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(24477);
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(15128);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(86248);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(93463);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(77975);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(58965);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(53167);
 
 
 
@@ -2630,7 +2489,7 @@ if (false) {}
 
 /***/ }),
 
-/***/ 97921:
+/***/ 28529:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 
@@ -2639,39 +2498,39 @@ __webpack_require__.d(__webpack_exports__, {
   "Z": () => (/* binding */ SliderUnstyled_SliderUnstyled)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.17.2/node_modules/@babel/runtime/helpers/esm/extends.js
-var esm_extends = __webpack_require__(97538);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.17.2/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
-var objectWithoutPropertiesLoose = __webpack_require__(93086);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/index.js
-var react = __webpack_require__(63423);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.17.9/node_modules/@babel/runtime/helpers/esm/extends.js
+var esm_extends = __webpack_require__(51911);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.17.9/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
+var objectWithoutPropertiesLoose = __webpack_require__(2633);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0/node_modules/react/index.js
+var react = __webpack_require__(86248);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/clsx@1.1.1/node_modules/clsx/dist/clsx.m.js
 var clsx_m = __webpack_require__(25789);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/utils/appendOwnerState.js
-var appendOwnerState = __webpack_require__(23801);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/utils/isHostComponent.js
-var isHostComponent = __webpack_require__(2370);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/composeClasses/composeClasses.js
-var composeClasses = __webpack_require__(48301);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/SliderUnstyled/sliderUnstyledClasses.js
-var sliderUnstyledClasses = __webpack_require__(42147);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/SliderUnstyled/SliderValueLabelUnstyled.js
-var SliderValueLabelUnstyled = __webpack_require__(36064);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.2/node_modules/@mui/utils/esm/ownerDocument.js
-var ownerDocument = __webpack_require__(47240);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.2/node_modules/@mui/utils/esm/useControlled.js
-var useControlled = __webpack_require__(33413);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.2/node_modules/@mui/utils/esm/useIsFocusVisible.js
-var useIsFocusVisible = __webpack_require__(64029);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.2/node_modules/@mui/utils/esm/useForkRef.js
-var useForkRef = __webpack_require__(96865);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.2/node_modules/@mui/utils/esm/useEnhancedEffect.js
-var useEnhancedEffect = __webpack_require__(24477);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.2/node_modules/@mui/utils/esm/useEventCallback.js
-var useEventCallback = __webpack_require__(45720);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.4.4_react@18.0.0-rc.2/node_modules/@mui/utils/esm/visuallyHidden.js
-var visuallyHidden = __webpack_require__(33856);
-;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/SliderUnstyled/useSlider.js
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.76_31fee5138b61bcdeb416e3946f47cd38/node_modules/@mui/base/utils/appendOwnerState.js
+var appendOwnerState = __webpack_require__(19506);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.76_31fee5138b61bcdeb416e3946f47cd38/node_modules/@mui/base/utils/isHostComponent.js
+var isHostComponent = __webpack_require__(61112);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.76_31fee5138b61bcdeb416e3946f47cd38/node_modules/@mui/base/composeClasses/composeClasses.js
+var composeClasses = __webpack_require__(44007);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.76_31fee5138b61bcdeb416e3946f47cd38/node_modules/@mui/base/SliderUnstyled/sliderUnstyledClasses.js
+var sliderUnstyledClasses = __webpack_require__(24608);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.76_31fee5138b61bcdeb416e3946f47cd38/node_modules/@mui/base/SliderUnstyled/SliderValueLabelUnstyled.js
+var SliderValueLabelUnstyled = __webpack_require__(67830);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.6.1_react@18.0.0/node_modules/@mui/utils/esm/ownerDocument.js
+var ownerDocument = __webpack_require__(70251);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.6.1_react@18.0.0/node_modules/@mui/utils/esm/useControlled.js
+var useControlled = __webpack_require__(34652);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.6.1_react@18.0.0/node_modules/@mui/utils/esm/useIsFocusVisible.js
+var useIsFocusVisible = __webpack_require__(69697);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.6.1_react@18.0.0/node_modules/@mui/utils/esm/useForkRef.js
+var useForkRef = __webpack_require__(77975);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.6.1_react@18.0.0/node_modules/@mui/utils/esm/useEnhancedEffect.js
+var useEnhancedEffect = __webpack_require__(58965);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.6.1_react@18.0.0/node_modules/@mui/utils/esm/useEventCallback.js
+var useEventCallback = __webpack_require__(88536);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@mui+utils@5.6.1_react@18.0.0/node_modules/@mui/utils/esm/visuallyHidden.js
+var visuallyHidden = __webpack_require__(2169);
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.76_31fee5138b61bcdeb416e3946f47cd38/node_modules/@mui/base/SliderUnstyled/useSlider.js
 
 
 
@@ -3161,7 +3020,11 @@ function useSlider(props) {
     stopListening();
   });
   const handleTouchStart = (0,useEventCallback/* default */.Z)(nativeEvent => {
-    // If touch-action: none; is not supported we need to prevent the scroll manually.
+    if (disabled) {
+      return;
+    } // If touch-action: none; is not supported we need to prevent the scroll manually.
+
+
     if (!doesSupportTouchActionNone()) {
       nativeEvent.preventDefault();
     }
@@ -3232,6 +3095,10 @@ function useSlider(props) {
     var _otherHandlers$onMous;
 
     (_otherHandlers$onMous = otherHandlers.onMouseDown) == null ? void 0 : _otherHandlers$onMous.call(otherHandlers, event);
+
+    if (disabled) {
+      return;
+    }
 
     if (event.defaultPrevented) {
       return;
@@ -3361,9 +3228,9 @@ function useSlider(props) {
     trackLeap
   };
 }
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0-rc.2/node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(82798);
-;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.71_6236d03f59cecef7ce06debc7d75b196/node_modules/@mui/base/SliderUnstyled/SliderUnstyled.js
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(71999);
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@mui+base@5.0.0-alpha.76_31fee5138b61bcdeb416e3946f47cd38/node_modules/@mui/base/SliderUnstyled/SliderUnstyled.js
 
 
 const _excluded = ["aria-label", "aria-valuetext", "className", "component", "classes", "disableSwap", "disabled", "getAriaLabel", "getAriaValueText", "marks", "max", "min", "name", "onChange", "onChangeCommitted", "onMouseDown", "orientation", "scale", "step", "tabIndex", "track", "value", "valueLabelDisplay", "valueLabelFormat", "isRtl", "components", "componentsProps"];
@@ -3584,16 +3451,16 @@ const SliderUnstyled = /*#__PURE__*/react.forwardRef(function SliderUnstyled(pro
 
 /***/ }),
 
-/***/ 36064:
+/***/ 67830:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(86248);
 /* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(25789);
-/* harmony import */ var _sliderUnstyledClasses__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(42147);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(82798);
+/* harmony import */ var _sliderUnstyledClasses__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(24608);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(71999);
 
 
 
@@ -3648,15 +3515,15 @@ function SliderValueLabelUnstyled(props) {
 
 /***/ }),
 
-/***/ 42147:
+/***/ 24608:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   "k": () => (/* binding */ getSliderUtilityClass)
 /* harmony export */ });
-/* harmony import */ var _generateUtilityClasses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6038);
-/* harmony import */ var _generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(53038);
+/* harmony import */ var _generateUtilityClasses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(94282);
+/* harmony import */ var _generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(72755);
 
 
 function getSliderUtilityClass(slot) {
@@ -3667,20 +3534,20 @@ const sliderUnstyledClasses = (0,_generateUtilityClasses__WEBPACK_IMPORTED_MODUL
 
 /***/ }),
 
-/***/ 30651:
+/***/ 87626:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(97538);
-/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(93086);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(96865);
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(92790);
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(38847);
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(24477);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(82798);
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(51911);
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2633);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(86248);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(77975);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(54675);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(66384);
+/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(58965);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(71999);
 
 
 const _excluded = ["onChange", "maxRows", "minRows", "style", "value"];
@@ -3858,7 +3725,7 @@ const TextareaAutosize = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forward
 
 /***/ }),
 
-/***/ 88709:
+/***/ 42364:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -3889,7 +3756,7 @@ const ClassNameGenerator = createClassNameGenerator();
 
 /***/ }),
 
-/***/ 48301:
+/***/ 44007:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -3917,13 +3784,13 @@ function composeClasses(slots, getUtilityClass, classes) {
 
 /***/ }),
 
-/***/ 53038:
+/***/ 72755:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (/* binding */ generateUtilityClass)
 /* harmony export */ });
-/* harmony import */ var _className_ClassNameGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(88709);
+/* harmony import */ var _className_ClassNameGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(42364);
 
 const globalStateClassesMapping = {
   active: 'Mui-active',
@@ -3944,13 +3811,13 @@ function generateUtilityClass(componentName, slot) {
 
 /***/ }),
 
-/***/ 6038:
+/***/ 94282:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (/* binding */ generateUtilityClasses)
 /* harmony export */ });
-/* harmony import */ var _generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(53038);
+/* harmony import */ var _generateUtilityClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(72755);
 
 function generateUtilityClasses(componentName, slots) {
   const result = {};
@@ -3962,14 +3829,14 @@ function generateUtilityClasses(componentName, slots) {
 
 /***/ }),
 
-/***/ 23801:
+/***/ 19506:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (/* binding */ appendOwnerState)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(97538);
-/* harmony import */ var _isHostComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2370);
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(51911);
+/* harmony import */ var _isHostComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(61112);
 
 
 /**
@@ -3992,7 +3859,7 @@ function appendOwnerState(elementType, existingProps = {}, ownerState) {
 
 /***/ }),
 
-/***/ 2370:
+/***/ 61112:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {

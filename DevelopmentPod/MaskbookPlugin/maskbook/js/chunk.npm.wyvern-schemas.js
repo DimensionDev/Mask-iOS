@@ -68,7 +68,7 @@ exports.ENSNameBaseSchema = {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const Web3 = __webpack_require__(90582);
+const Web3 = __webpack_require__(75692);
 /* HACK */
 // @ts-ignore
 Web3.AbiType = {
@@ -87,7 +87,7 @@ var index_1 = __webpack_require__(70551);
 exports.schemas = index_1.schemas;
 var index_2 = __webpack_require__(86039);
 exports.tokens = index_2.tokens;
-var web3_1 = __webpack_require__(90582);
+var web3_1 = __webpack_require__(75692);
 exports.AbiType = web3_1.AbiType;
 //# sourceMappingURL=index.js.map
 
@@ -220,7 +220,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const Web3 = __webpack_require__(90582);
+const Web3 = __webpack_require__(75692);
 const types_1 = __webpack_require__(66395);
 exports.ContractRoleSchema = {
     version: 1,
@@ -301,7 +301,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const Web3 = __webpack_require__(90582);
+const Web3 = __webpack_require__(75692);
 const types_1 = __webpack_require__(66395);
 exports.ERC1155Schema = {
     version: 1,
@@ -391,7 +391,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const Web3 = __webpack_require__(90582);
+const Web3 = __webpack_require__(75692);
 const types_1 = __webpack_require__(66395);
 exports.ERC20Schema = {
     version: 1,
@@ -475,7 +475,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const Web3 = __webpack_require__(90582);
+const Web3 = __webpack_require__(75692);
 const types_1 = __webpack_require__(66395);
 exports.ERC721Schema = {
     version: 2,
@@ -574,7 +574,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const axios_1 = __webpack_require__(41049);
-const Web3 = __webpack_require__(90582);
+const Web3 = __webpack_require__(75692);
 const types_1 = __webpack_require__(66395);
 exports.CryptoKittiesSchema = {
     version: 1,
@@ -685,7 +685,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const Web3 = __webpack_require__(90582);
+const Web3 = __webpack_require__(75692);
 const types_1 = __webpack_require__(66395);
 exports.CryptoPunksSchema = {
     version: 1,
@@ -771,7 +771,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const Web3 = __webpack_require__(90582);
+const Web3 = __webpack_require__(75692);
 const ens_1 = __webpack_require__(46316);
 const types_1 = __webpack_require__(66395);
 exports.ENSNameSchema = Object.assign({}, ens_1.ENSNameBaseSchema, { version: 2, deploymentBlock: 3605331, name: 'ENSName', description: 'Ethereum Name Service Name (EIP 137)', thumbnail: 'https://ens.domains/img/ens.svg', website: 'https://github.com/ethereum/EIPs/blob/master/EIPS/eip-137.md', formatter: (asset) => __awaiter(this, void 0, void 0, function* () {
@@ -844,7 +844,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const web3_1 = __webpack_require__(90582);
+const web3_1 = __webpack_require__(75692);
 const ens_1 = __webpack_require__(46316);
 const types_1 = __webpack_require__(66395);
 exports.ENS_SHORT_NAME_AUCTION_ADDRESS = '0x699c7f511c9e2182e89f29b3bfb68bd327919d17';
@@ -916,7 +916,7 @@ exports.ENSShortNameAuctionSchema = Object.assign({}, ens_1.ENSNameBaseSchema, {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const Web3 = __webpack_require__(90582);
+const Web3 = __webpack_require__(75692);
 const types_1 = __webpack_require__(66395);
 const ERC1155_1 = __webpack_require__(83859);
 exports.EnjinItemSchema = Object.assign({}, ERC1155_1.ERC1155Schema, { version: 1, deploymentBlock: 0, name: 'Enjin', description: 'Items conforming to the Enjin implementation of the ERC1155 spec.', website: 'https://enjincoin.io/', functions: Object.assign({}, ERC1155_1.ERC1155Schema.functions, { ownerOf: asset => ({
@@ -967,7 +967,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const Web3 = __webpack_require__(90582);
+const Web3 = __webpack_require__(75692);
 const types_1 = __webpack_require__(66395);
 exports.OwnableContractSchema = {
     version: 1,
@@ -1106,7 +1106,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const Web3 = __webpack_require__(90582);
+const Web3 = __webpack_require__(75692);
 const types_1 = __webpack_require__(66395);
 exports.rinkebyCryptoKittiesSchema = {
     version: 1,
@@ -1270,7 +1270,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const Web3 = __webpack_require__(90582);
+const Web3 = __webpack_require__(75692);
 const ens_1 = __webpack_require__(46316);
 const types_1 = __webpack_require__(66395);
 exports.rinkebyENSNameSchema = Object.assign({}, ens_1.ENSNameBaseSchema, { version: 1, deploymentBlock: 0, name: 'ENSName', description: 'Rinkeby Ethereum Name Service (EIP 137)', thumbnail: 'https://ens.domains/img/ens.svg', website: 'https://github.com/ethereum/EIPs/blob/master/EIPS/eip-137.md', formatter: (asset) => __awaiter(this, void 0, void 0, function* () {
@@ -1330,7 +1330,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const web3_1 = __webpack_require__(90582);
+const web3_1 = __webpack_require__(75692);
 const ens_1 = __webpack_require__(46316);
 const types_1 = __webpack_require__(66395);
 exports.RINKEBY_ENS_SHORT_NAME_AUCTION_ADDRESS = '0x76b6481a334783be36f2fc35b8f0b9bc7835d57b';
@@ -1410,7 +1410,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const Web3 = __webpack_require__(90582);
+const Web3 = __webpack_require__(75692);
 const types_1 = __webpack_require__(66395);
 exports.rinkebyOwnableContractSchema = {
     version: 1,
@@ -1485,7 +1485,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const Web3 = __webpack_require__(90582);
+const Web3 = __webpack_require__(75692);
 const types_1 = __webpack_require__(66395);
 exports.testRinkebyNFTSchema = {
     version: 1,
@@ -2491,8 +2491,8 @@ exports.rinkebyTokens = {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const Web3 = __webpack_require__(90582);
-const types_1 = __webpack_require__(39904);
+const Web3 = __webpack_require__(75692);
+const types_1 = __webpack_require__(87265);
 exports.FunctionInputKind = types_1.FunctionInputKind;
 var Network;
 (function (Network) {

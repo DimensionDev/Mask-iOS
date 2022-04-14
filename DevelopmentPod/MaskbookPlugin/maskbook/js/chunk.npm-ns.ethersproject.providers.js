@@ -183,7 +183,7 @@ class Formatter {
         return formats;
     }
     accessList(accessList) {
-        return (0,transactions_lib_esm.accessListify)(accessList || []);
+        return (0,transactions_lib_esm/* accessListify */.z7)(accessList || []);
     }
     // Requires a BigNumberish that is within the IEEE754 safe integer range; returns a number
     // Strict! Used on input.
@@ -367,7 +367,7 @@ class Formatter {
         return result;
     }
     transaction(value) {
-        return (0,transactions_lib_esm.parse)(value);
+        return (0,transactions_lib_esm/* parse */.Qc)(value);
     }
     receiptLog(value) {
         return Formatter.check(this.formats.receiptLog, value);
@@ -2624,7 +2624,7 @@ class JsonRpcProvider extends BaseProvider {
             result[key] = (0,bytes_lib_esm.hexlify)(transaction[key]);
         });
         if (transaction.accessList) {
-            result["accessList"] = (0,transactions_lib_esm.accessListify)(transaction.accessList);
+            result["accessList"] = (0,transactions_lib_esm/* accessListify */.z7)(transaction.accessList);
         }
         return result;
     }

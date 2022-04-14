@@ -1,6 +1,6 @@
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[6160],{
 
-/***/ 56736:
+/***/ 33972:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -24,12 +24,12 @@
  * @date 2018
  */
 
-var config = __webpack_require__(65195);
-var formatters = (__webpack_require__(70222).formatters);
-var utils = __webpack_require__(83317);
-var Registry = __webpack_require__(34341);
-var ResolverMethodHandler = __webpack_require__(41553);
-var contenthash = __webpack_require__(77456);
+var config = __webpack_require__(60701);
+var formatters = (__webpack_require__(41032).formatters);
+var utils = __webpack_require__(11627);
+var Registry = __webpack_require__(7335);
+var ResolverMethodHandler = __webpack_require__(59184);
+var contenthash = __webpack_require__(18508);
 /**
  * Constructs a new instance of ENS
  *
@@ -497,7 +497,7 @@ module.exports = ENS;
 
 /***/ }),
 
-/***/ 65195:
+/***/ 60701:
 /***/ ((module) => {
 
 "use strict";
@@ -551,7 +551,7 @@ module.exports = config;
 
 /***/ }),
 
-/***/ 34341:
+/***/ 7335:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -575,13 +575,13 @@ module.exports = config;
  * @date 2018
  */
 
-var Contract = __webpack_require__(57226);
+var Contract = __webpack_require__(78741);
 var namehash = __webpack_require__(29079);
-var PromiEvent = __webpack_require__(39944);
-var formatters = (__webpack_require__(70222).formatters);
-var utils = __webpack_require__(83317);
-var REGISTRY_ABI = __webpack_require__(23642);
-var RESOLVER_ABI = __webpack_require__(55394);
+var PromiEvent = __webpack_require__(8398);
+var formatters = (__webpack_require__(41032).formatters);
+var utils = __webpack_require__(11627);
+var REGISTRY_ABI = __webpack_require__(2405);
+var RESOLVER_ABI = __webpack_require__(68242);
 /**
  * A wrapper around the ENS registry contract.
  *
@@ -1037,7 +1037,7 @@ module.exports = Registry;
 
 /***/ }),
 
-/***/ 92443:
+/***/ 82448:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1061,13 +1061,13 @@ module.exports = Registry;
  * @date 2018
  */
 
-var ENS = __webpack_require__(56736);
+var ENS = __webpack_require__(33972);
 module.exports = ENS;
 
 
 /***/ }),
 
-/***/ 41553:
+/***/ 59184:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1091,10 +1091,10 @@ module.exports = ENS;
  * @date 2018
  */
 
-var PromiEvent = __webpack_require__(39944);
+var PromiEvent = __webpack_require__(8398);
 var namehash = __webpack_require__(29079);
-var errors = (__webpack_require__(70222).errors);
-var interfaceIds = (__webpack_require__(65195).interfaceIds);
+var errors = (__webpack_require__(41032).errors);
+var interfaceIds = (__webpack_require__(60701).interfaceIds);
 /**
  * @param {Registry} registry
  * @constructor
@@ -1294,7 +1294,7 @@ module.exports = ResolverMethodHandler;
 
 /***/ }),
 
-/***/ 77456:
+/***/ 18508:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /*
@@ -1416,7 +1416,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 23642:
+/***/ 2405:
 /***/ ((module) => {
 
 "use strict";
@@ -1784,7 +1784,7 @@ module.exports = REGISTRY;
 
 /***/ }),
 
-/***/ 55394:
+/***/ 68242:
 /***/ ((module) => {
 
 "use strict";
