@@ -96,8 +96,11 @@ class SelectAccountViewController: BaseViewController {
     
     private lazy var editButton: UIButton = {
         let button = HitTestExpandedButton(type: .custom)
+        button.titleLabel?.font = FontStyles.BH5
         button.setTitle(L10n.Common.Controls.edit, for: .normal)
         button.setTitle(L10n.Common.Controls.done, for: .selected)
+        button.setTitleColor(Asset.Colors.Background.blue.color, for: .normal)
+        button.setTitleColor(Asset.Colors.Background.blue.color, for: .selected)
         return button
     }()
     
@@ -160,7 +163,7 @@ class SelectAccountViewController: BaseViewController {
         editButton.cv.tap()
             .sink { [weak self] in
                 guard let self = self else { return }
-                self.editButton.isSelected = self.editButton.isSelected
+                self.editButton.isSelected = !self.editButton.isSelected
                 self.viewModel.isEditing.value = self.editButton.isSelected
             }
             .store(in: &disposeBag)
