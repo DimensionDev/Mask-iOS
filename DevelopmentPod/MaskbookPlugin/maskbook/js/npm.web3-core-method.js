@@ -1,7 +1,7 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[2088],{
 
-/***/ 34023:
+/***/ 82481:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /*
@@ -27,12 +27,12 @@
  * @date 2017
  */
 
-var errors = (__webpack_require__(70222).errors);
-var formatters = (__webpack_require__(70222).formatters);
-var utils = __webpack_require__(83317);
-var promiEvent = __webpack_require__(39944);
-var Subscriptions = (__webpack_require__(84350).subscriptions);
-var EthersTransactionUtils = __webpack_require__(21190);
+var errors = (__webpack_require__(41032).errors);
+var formatters = (__webpack_require__(41032).formatters);
+var utils = __webpack_require__(11627);
+var promiEvent = __webpack_require__(8398);
+var Subscriptions = (__webpack_require__(70790).subscriptions);
+var EthersTransactionUtils = __webpack_require__(91004);
 var Method = function Method(options) {
     if (!options.call || !options.name) {
         throw new Error('When creating a method you need to provide at least the "name" and "call" property.');
@@ -53,6 +53,8 @@ var Method = function Method(options) {
     this.transactionBlockTimeout = options.transactionBlockTimeout || 50;
     this.transactionConfirmationBlocks = options.transactionConfirmationBlocks || 24;
     this.transactionPollingTimeout = options.transactionPollingTimeout || 750;
+    this.transactionPollingInterval = options.transactionPollingInterval || 1000;
+    this.blockHeaderTimeout = options.blockHeaderTimeout || 10; // 10 seconds
     this.defaultCommon = options.defaultCommon;
     this.defaultChain = options.defaultChain;
     this.defaultHardfork = options.defaultHardfork;
@@ -175,7 +177,7 @@ Method.prototype.toPayload = function (args) {
     return payload;
 };
 Method.prototype._confirmTransaction = function (defer, result, payload) {
-    var method = this, promiseResolved = false, canUnsubscribe = true, timeoutCount = 0, confirmationCount = 0, intervalId = null, lastBlock = null, receiptJSON = '', gasProvided = ((!!payload.params[0] && typeof payload.params[0] === 'object') && payload.params[0].gas) ? payload.params[0].gas : null, isContractDeployment = (!!payload.params[0] && typeof payload.params[0] === 'object') &&
+    var method = this, promiseResolved = false, canUnsubscribe = true, timeoutCount = 0, confirmationCount = 0, intervalId = null, blockHeaderTimeoutId = null, lastBlock = null, receiptJSON = '', gasProvided = ((!!payload.params[0] && typeof payload.params[0] === 'object') && payload.params[0].gas) ? payload.params[0].gas : null, isContractDeployment = (!!payload.params[0] && typeof payload.params[0] === 'object') &&
         payload.params[0].data &&
         payload.params[0].from &&
         !payload.params[0].to, hasBytecode = isContractDeployment && payload.params[0].data.length > 2;
@@ -236,6 +238,7 @@ Method.prototype._confirmTransaction = function (defer, result, payload) {
                 sub = {
                     unsubscribe: function () {
                         clearInterval(intervalId);
+                        clearTimeout(blockHeaderTimeoutId);
                     }
                 };
             }
@@ -442,23 +445,29 @@ Method.prototype._confirmTransaction = function (defer, result, payload) {
     };
     // start watching for confirmation depending on the support features of the provider
     var startWatching = function (existingReceipt) {
+        let blockHeaderArrived = false;
         const startInterval = () => {
-            intervalId = setInterval(checkConfirmation.bind(null, existingReceipt, true), 1000);
+            intervalId = setInterval(checkConfirmation.bind(null, existingReceipt, true), method.transactionPollingInterval);
         };
+        // If provider do not support event subscription use polling
         if (!this.requestManager.provider.on) {
-            startInterval();
+            return startInterval();
         }
-        else {
-            _ethereumCall.subscribe('newBlockHeaders', function (err, blockHeader, sub) {
-                if (err || !blockHeader) {
-                    // fall back to polling
-                    startInterval();
-                }
-                else {
-                    checkConfirmation(existingReceipt, false, err, blockHeader, sub);
-                }
-            });
-        }
+        // Subscribe to new block headers to look for tx receipt
+        _ethereumCall.subscribe('newBlockHeaders', function (err, blockHeader, sub) {
+            blockHeaderArrived = true;
+            if (err || !blockHeader) {
+                // fall back to polling
+                return startInterval();
+            }
+            checkConfirmation(existingReceipt, false, err, blockHeader, sub);
+        });
+        // Fallback to polling if tx receipt didn't arrived in "blockHeaderTimeout" [10 seconds]
+        blockHeaderTimeoutId = setTimeout(() => {
+            if (!blockHeaderArrived) {
+                startInterval();
+            }
+        }, this.blockHeaderTimeout * 1000);
     }.bind(this);
     // first check if we already have a confirmed transaction
     _ethereumCall.getTransactionReceipt(result)
@@ -688,7 +697,8 @@ function _handleTxPricing(method, tx) {
                 getGasPrice()
             ]).then(responses => {
                 const [block, gasPrice] = responses;
-                if (block && block.baseFeePerGas) {
+                if ((tx.type === '0x2' || tx.type === undefined) &&
+                    (block && block.baseFeePerGas)) {
                     // The network supports EIP-1559
                     // Taken from https://github.com/ethers-io/ethers.js/blob/ba6854bdd5a912fe873d5da494cb5c62c190adde/packages/abstract-provider/src.ts/index.ts#L230
                     let maxPriorityFeePerGas, maxFeePerGas;
@@ -700,7 +710,7 @@ function _handleTxPricing(method, tx) {
                         delete tx.gasPrice;
                     }
                     else {
-                        maxPriorityFeePerGas = tx.maxPriorityFeePerGas || '0x3B9ACA00'; // 1 Gwei
+                        maxPriorityFeePerGas = tx.maxPriorityFeePerGas || '0x9502F900'; // 2.5 Gwei
                         maxFeePerGas = tx.maxFeePerGas ||
                             utils.toHex(utils.toBN(block.baseFeePerGas)
                                 .mul(utils.toBN(2))

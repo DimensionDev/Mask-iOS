@@ -1,6 +1,6 @@
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[3693],{
 
-/***/ 74833:
+/***/ 30274:
 /***/ (function(__unused_webpack_module, exports) {
 
 /// <reference types="./full.d.ts" />
@@ -960,7 +960,7 @@
 
 /***/ }),
 
-/***/ 30858:
+/***/ 79329:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";

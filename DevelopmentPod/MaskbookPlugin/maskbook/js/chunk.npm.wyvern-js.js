@@ -3616,7 +3616,7 @@ exports.schemas = {
 
 /***/ }),
 
-/***/ 39904:
+/***/ 87265:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -3779,7 +3779,7 @@ exports.assert = __assign({}, assert_1.assert, { isValidSignature: function (ord
 
 /***/ }),
 
-/***/ 98221:
+/***/ 12463:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -3945,7 +3945,7 @@ exports.authenticatedProxyABI = [
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-var atomicizerABI_1 = __webpack_require__(98221);
+var atomicizerABI_1 = __webpack_require__(12463);
 var authenticatedProxyABI_1 = __webpack_require__(90187);
 var daoABI_1 = __webpack_require__(66149);
 var deployed_1 = __webpack_require__(35601);
@@ -4741,7 +4741,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var _ = __webpack_require__(39378);
-var types_1 = __webpack_require__(39904);
+var types_1 = __webpack_require__(87265);
 var constants_1 = __webpack_require__(8256);
 var contractCallErrorTransformer = function (error) {
     if (_.includes(error.message, constants_1.constants.INVALID_JUMP_PATTERN)) {
@@ -7175,7 +7175,7 @@ var BN = __webpack_require__(28891);
 var ethABI = __webpack_require__(60843);
 var ethUtil = __webpack_require__(95906);
 var _ = __webpack_require__(39378);
-var types_1 = __webpack_require__(39904);
+var types_1 = __webpack_require__(87265);
 exports.utils = {
     /**
      * Converts BigNumber instance to BN
@@ -7314,7 +7314,7 @@ var wyvern_exchange_1 = __webpack_require__(27500);
 var wyvern_proxy_registry_1 = __webpack_require__(15478);
 var wyvern_token_1 = __webpack_require__(47395);
 var schemas_1 = __webpack_require__(77910);
-var types_1 = __webpack_require__(39904);
+var types_1 = __webpack_require__(87265);
 var assert_1 = __webpack_require__(40444);
 var constants_1 = __webpack_require__(8256);
 var decorators_1 = __webpack_require__(58437);
@@ -11154,7 +11154,7 @@ exports.atomicizerABI = [
 
 /***/ }),
 
-/***/ 67595:
+/***/ 34740:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -11954,7 +11954,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var _ = __webpack_require__(39378);
 var types_1 = __webpack_require__(26126);
-var constants_1 = __webpack_require__(67595);
+var constants_1 = __webpack_require__(34740);
 var contractCallErrorTransformer = function (error) {
     if (_.includes(error.message, constants_1.constants.INVALID_JUMP_PATTERN)) {
         return new Error(types_1.WyvernProtocolError.InvalidJump);
@@ -14522,7 +14522,7 @@ var _ = __webpack_require__(39378);
 var types_1 = __webpack_require__(26126);
 var schemas_1 = __webpack_require__(48731);
 var assert_1 = __webpack_require__(29);
-var constants_1 = __webpack_require__(67595);
+var constants_1 = __webpack_require__(34740);
 var decorators_1 = __webpack_require__(92670);
 var signature_utils_1 = __webpack_require__(65381);
 var utils_2 = __webpack_require__(82378);
