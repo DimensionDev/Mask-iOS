@@ -393,8 +393,6 @@ var base = __webpack_require__(81148);
 var src = __webpack_require__(78144);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/ts-results@3.3.0/node_modules/ts-results/esm/index.js + 3 modules
 var ts_results_esm = __webpack_require__(48160);
-// EXTERNAL MODULE: ../encryption/src/payload/index.ts + 3 modules
-var payload = __webpack_require__(79807);
 // EXTERNAL MODULE: ../encryption/src/utils/index.ts + 1 modules
 var utils = __webpack_require__(62435);
 // EXTERNAL MODULE: ../encryption/src/encryption/DecryptionTypes.ts
@@ -402,7 +400,6 @@ var DecryptionTypes = __webpack_require__(24663);
 // EXTERNAL MODULE: ../encryption/src/encryption/v38-ecdh.ts
 var v38_ecdh = __webpack_require__(65096);
 ;// CONCATENATED MODULE: ../encryption/src/encryption/Decryption.ts
-
 
 
 
@@ -431,7 +428,7 @@ async function* decrypt(options, io) {
         if (AESKey.err) return yield new DecryptionTypes/* DecryptError */.G6(ErrorReasons.PayloadBroken, AESKey.val);
         if (iv.err) return yield new DecryptionTypes/* DecryptError */.G6(ErrorReasons.PayloadBroken, iv.val);
         // Not calling setPostCache here. It's public post and saving key is wasting storage space.
-        return yield* decryptWithPostAESKey(version, AESKey.val.key, iv.val, encrypted, options.onDecrypted);
+        return yield* decryptWithPostAESKey(version, AESKey.val, iv.val, encrypted, options.onDecrypted);
     } else if (encryption.type === 'E2E') {
         const { iv: _iv , ownersAESKeyEncrypted  } = encryption;
         if (_iv.err) return yield new DecryptionTypes/* DecryptError */.G6(ErrorReasons.PayloadBroken, _iv.val);
@@ -539,9 +536,9 @@ async function* decryptByECDH(version, io, possiblePostKeyIterator, ecdhProvider
             )
         );
         for (const [derivedKey, derivedKeyNewIV] of derivedKeys){
-            const possiblePostKey = await (0,src/* andThenAsync */.ps)((0,utils/* decryptWithAES */.PB)(payload/* AESAlgorithmEnum.A256GCM */.$y.A256GCM, derivedKey, derivedKeyNewIV, encryptedPostKey), postKeyDecoder);
+            const possiblePostKey = await (0,src/* andThenAsync */.ps)((0,utils/* decryptWithAES */.PB)(derivedKey, derivedKeyNewIV, encryptedPostKey), postKeyDecoder);
             if (possiblePostKey.err) continue;
-            const decrypted = await (0,utils/* decryptWithAES */.PB)(payload/* AESAlgorithmEnum.A256GCM */.$y.A256GCM, possiblePostKey.val, iv, encrypted);
+            const decrypted = await (0,utils/* decryptWithAES */.PB)(possiblePostKey.val, iv, encrypted);
             if (decrypted.err) continue;
             io.setPostKeyCache(possiblePostKey.val).catch(()=>{});
             // If we'd able to decrypt the raw message, we will stop here.
@@ -552,7 +549,7 @@ async function* decryptByECDH(version, io, possiblePostKeyIterator, ecdhProvider
     return void (yield new DecryptionTypes/* DecryptError */.G6(ErrorReasons.NotShareTarget, undefined));
 }
 async function* decryptWithPostAESKey(version, postAESKey, iv, encrypted, report) {
-    const { err , val  } = await (0,utils/* decryptWithAES */.PB)(payload/* AESAlgorithmEnum.A256GCM */.$y.A256GCM, postAESKey, iv, encrypted);
+    const { err , val  } = await (0,utils/* decryptWithAES */.PB)(postAESKey, iv, encrypted);
     if (err) return yield new DecryptionTypes/* DecryptError */.G6(ErrorReasons.DecryptFailed, val);
     return yield* parseTypedMessage(version, val, report);
 }
@@ -572,7 +569,7 @@ function importAESKeyFromJWKFromTextEncoder(aes_raw) {
         const aes_text = new TextDecoder().decode(aes_raw);
         const aes_jwk = JSON.parse(aes_text);
         if (!aes_jwk.key_ops.includes('decrypt')) aes_jwk.key_ops.push('decrypt');
-        return (await utils/* importAESFromJWK.AES_GCM_256 */.Bs.AES_GCM_256(aes_jwk)).unwrap();
+        return (await (0,utils/* importAES */.yj)(aes_jwk)).unwrap();
     });
 }
 function importAESKeyFromRaw(aes_raw) {
@@ -773,7 +770,6 @@ function getDimensionAsPNG(buf) {
 
 "use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "$y": () => (/* binding */ AESAlgorithmEnum),
 /* harmony export */   "Gq": () => (/* binding */ SocialNetworkEnum),
 /* harmony export */   "VC": () => (/* binding */ SocialNetworkEnumToProfileDomain),
 /* harmony export */   "qx": () => (/* binding */ EC_KeyCurveEnum)
@@ -788,10 +784,6 @@ var EC_KeyCurveEnum;
     EC_KeyCurveEnum[EC_KeyCurveEnum["secp256p1"] = 1] = "secp256p1";
     EC_KeyCurveEnum[EC_KeyCurveEnum["secp256k1"] = 2] = "secp256k1";
 })(EC_KeyCurveEnum || (EC_KeyCurveEnum = {}));
-var AESAlgorithmEnum;
-(function(AESAlgorithmEnum) {
-    AESAlgorithmEnum["A256GCM"] = "A256GCM";
-})(AESAlgorithmEnum || (AESAlgorithmEnum = {}));
 var SocialNetworkEnum;
 (function(SocialNetworkEnum) {
     SocialNetworkEnum[SocialNetworkEnum["Unknown"] = -1] = "Unknown";
@@ -881,7 +873,7 @@ function parseSignatureContainer(signatureContainer) {
 
 
 
-const import_AES_GCM_256 = _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .CheckedError.withErr */ .iD.withErr(_utils__WEBPACK_IMPORTED_MODULE_4__/* .importAESFromJWK.AES_GCM_256 */ .Bs.AES_GCM_256, _types__WEBPACK_IMPORTED_MODULE_3__/* .CryptoException.InvalidCryptoKey */ .H3.InvalidCryptoKey);
+const import_AES_GCM_256 = _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .CheckedError.withErr */ .iD.withErr(_utils__WEBPACK_IMPORTED_MODULE_4__/* .importAES */ .yj, _types__WEBPACK_IMPORTED_MODULE_3__/* .CryptoException.InvalidCryptoKey */ .H3.InvalidCryptoKey);
 /**
  * @internal
  * In payload version 38, the AES key is encrypted by this key.
@@ -950,8 +942,8 @@ function parseAuthor(network, id) {
 const decode = (0,_utils__WEBPACK_IMPORTED_MODULE_4__/* .decodeMessagePackF */ .mw)(_types__WEBPACK_IMPORTED_MODULE_0__/* .PayloadException.InvalidPayload */ .T6.InvalidPayload, _types__WEBPACK_IMPORTED_MODULE_0__/* .PayloadException.DecodeFailed */ .T6.DecodeFailed);
 const InvalidPayload = (msg)=>new _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .CheckedError */ .iD(_types__WEBPACK_IMPORTED_MODULE_0__/* .PayloadException.InvalidPayload */ .T6.InvalidPayload, msg).toErr()
 ;
-const importSpki = _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .CheckedError.withErr */ .iD.withErr(_utils__WEBPACK_IMPORTED_MODULE_4__/* .importEC_Key */ .OT, _types__WEBPACK_IMPORTED_MODULE_0__/* .CryptoException.InvalidCryptoKey */ .H3.InvalidCryptoKey);
-const importAES256 = _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .CheckedError.withErr */ .iD.withErr(_utils__WEBPACK_IMPORTED_MODULE_4__/* .importAESFromJWK */ .Bs, _types__WEBPACK_IMPORTED_MODULE_0__/* .CryptoException.InvalidCryptoKey */ .H3.InvalidCryptoKey);
+const importAES256 = _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .CheckedError.withErr */ .iD.withErr(_utils__WEBPACK_IMPORTED_MODULE_4__/* .importAES */ .yj, _types__WEBPACK_IMPORTED_MODULE_0__/* .CryptoException.InvalidCryptoKey */ .H3.InvalidCryptoKey);
+const importEC = _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .CheckedError.withErr */ .iD.withErr(_utils__WEBPACK_IMPORTED_MODULE_4__/* .importEC_Key */ .OT, _types__WEBPACK_IMPORTED_MODULE_0__/* .CryptoException.InvalidCryptoKey */ .H3.InvalidCryptoKey);
 async function parse37(input) {
     const signatureContainer = (0,_SignatureContainer__WEBPACK_IMPORTED_MODULE_6__/* .parseSignatureContainer */ .z)(input);
     if (signatureContainer.err) return signatureContainer;
@@ -1013,37 +1005,17 @@ async function parseEncryption(encryption) {
         ];
     }
 }
-function parseAES(aes1) {
-    return (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .andThenAsync */ .ps)((0,_types__WEBPACK_IMPORTED_MODULE_0__/* .assertArray */ .Wr)('aes', _types__WEBPACK_IMPORTED_MODULE_0__/* .CryptoException.InvalidCryptoKey */ .H3.InvalidCryptoKey)(aes1), async (aes)=>{
-        const [algr, k] = aes;
-        if (typeof k === 'string') {
-            if (algr === _payload_types__WEBPACK_IMPORTED_MODULE_3__/* .AESAlgorithmEnum.A256GCM */ .$y.A256GCM) {
-                const jwk = {
-                    ext: true,
-                    key_ops: [
-                        'encrypt',
-                        'decrypt'
-                    ],
-                    kty: 'oct',
-                    alg: algr,
-                    k
-                };
-                const key = await importAES256(jwk, algr);
-                if (key.err) return key;
-                return (0,ts_results__WEBPACK_IMPORTED_MODULE_2__.Ok)({
-                    algr,
-                    key: key.val
-                });
-            }
-        }
-        return new _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .CheckedError */ .iD(_types__WEBPACK_IMPORTED_MODULE_0__/* .CryptoException.UnsupportedAlgorithm */ .H3.UnsupportedAlgorithm, null).toErr();
-    });
+async function parseAES(aes) {
+    return (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .andThenAsync */ .ps)((0,_types__WEBPACK_IMPORTED_MODULE_0__/* .assertUint8Array */ .jY)(aes, 'aes', _types__WEBPACK_IMPORTED_MODULE_0__/* .CryptoException.InvalidCryptoKey */ .H3.InvalidCryptoKey), importAES256);
 }
 function importAsymmetryKey(algr, key1, name) {
     return (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .andThenAsync */ .ps)((0,_types__WEBPACK_IMPORTED_MODULE_0__/* .assertUint8Array */ .jY)(key1, name, _types__WEBPACK_IMPORTED_MODULE_0__/* .CryptoException.InvalidCryptoKey */ .H3.InvalidCryptoKey), async (pubKey)=>{
         if (typeof algr === 'number') {
             if (algr in _payload_types__WEBPACK_IMPORTED_MODULE_3__/* .EC_KeyCurveEnum */ .qx) {
-                const key = await importSpki(pubKey, algr);
+                if (algr === _payload_types__WEBPACK_IMPORTED_MODULE_3__/* .EC_KeyCurveEnum.secp256k1 */ .qx.secp256k1) {
+                    pubKey = (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .decompressSecp256k1KeyRaw */ .Yj)(pubKey);
+                }
+                const key = await importEC(pubKey, algr);
                 if (key.err) return key;
                 return (0,ts_results__WEBPACK_IMPORTED_MODULE_2__.Ok)({
                     algr,
@@ -1164,17 +1136,13 @@ async function decodePublicSharedAESKey(iv, encryptedKey) {
     if (encryptedKey.err) return encryptedKey;
     const publicSharedKey = await (0,_shared__WEBPACK_IMPORTED_MODULE_4__/* .get_v38PublicSharedCryptoKey */ .w)();
     if (publicSharedKey.err) return publicSharedKey;
-    const import_AES_GCM_256 = _masknet_shared_base__WEBPACK_IMPORTED_MODULE_6__/* .CheckedError.withErr */ .iD.withErr(_utils__WEBPACK_IMPORTED_MODULE_3__/* .importAESFromJWK.AES_GCM_256 */ .Bs.AES_GCM_256, _types__WEBPACK_IMPORTED_MODULE_1__/* .CryptoException.InvalidCryptoKey */ .H3.InvalidCryptoKey);
+    const import_AES_GCM_256 = _masknet_shared_base__WEBPACK_IMPORTED_MODULE_6__/* .CheckedError.withErr */ .iD.withErr(_utils__WEBPACK_IMPORTED_MODULE_3__/* .importAES */ .yj, _types__WEBPACK_IMPORTED_MODULE_1__/* .CryptoException.InvalidCryptoKey */ .H3.InvalidCryptoKey);
     const decrypt = _masknet_shared_base__WEBPACK_IMPORTED_MODULE_6__/* .CheckedError.withErr */ .iD.withErr(_utils__WEBPACK_IMPORTED_MODULE_3__/* .decryptWithAES */ .PB, _types__WEBPACK_IMPORTED_MODULE_1__/* .CryptoException.InvalidCryptoKey */ .H3.InvalidCryptoKey);
-    const jwk_in_u8arr = await decrypt(_payload__WEBPACK_IMPORTED_MODULE_0__/* .AESAlgorithmEnum.A256GCM */ .$y.A256GCM, publicSharedKey.val, iv.val, encryptedKey.val);
+    const jwk_in_u8arr = await decrypt(publicSharedKey.val, iv.val, encryptedKey.val);
     const jwk_in_text = await (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_6__/* .andThenAsync */ .ps)(jwk_in_u8arr, decodeTextCrypto);
     const jwk = await (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_6__/* .andThenAsync */ .ps)(jwk_in_text, JSONParse);
     const aes = await (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_6__/* .andThenAsync */ .ps)(jwk, import_AES_GCM_256);
-    return aes.map((key)=>({
-            algr: _payload__WEBPACK_IMPORTED_MODULE_0__/* .AESAlgorithmEnum.A256GCM */ .$y.A256GCM,
-            key
-        })
-    );
+    return aes;
 }
 async function decodeECDHPublicKey(compressedPublic) {
     const key = decodeUint8ArrayCrypto(compressedPublic).andThen((val)=>ts_results__WEBPACK_IMPORTED_MODULE_2__/* .Result.wrap */ .x4.wrap(()=>(0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_6__/* .decompressSecp256k1Point */ .pf)(val)
@@ -1559,10 +1527,6 @@ const message = new _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_2__.Web
     domain: 'services'
 });
 const log = {
-    beCalled: true,
-    localError: true,
-    remoteError: true,
-    sendLocalStack: true,
     type: 'pretty',
     requestReplay: "production" === 'development'
 };
@@ -2398,6 +2362,29 @@ var DashboardRoutes;
 
 /***/ }),
 
+/***/ 1174:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Y_": () => (/* binding */ relativeRouteOf),
+/* harmony export */   "mZ": () => (/* reexport safe */ _PopupRoutes__WEBPACK_IMPORTED_MODULE_0__.m),
+/* harmony export */   "vq": () => (/* reexport safe */ _DashboardRoutes__WEBPACK_IMPORTED_MODULE_1__.v)
+/* harmony export */ });
+/* harmony import */ var _PopupRoutes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(57602);
+/* harmony import */ var _DashboardRoutes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(19854);
+
+
+function relativeRouteOf(parent) {
+    return (child)=>{
+        if (!child.startsWith(parent)) throw new Error();
+        return child.slice(parent.length).replace(/^\//, '');
+    };
+}
+
+
+/***/ }),
+
 /***/ 77907:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -2553,8 +2540,10 @@ function fromHex(x) {
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
   "CH": () => (/* reexport */ ECKeyIdentifierFromJsonWebKey),
+  "xb": () => (/* reexport */ compressSecp256k1KeyRaw),
   "SH": () => (/* reexport */ compressSecp256k1Point),
   "qX": () => (/* reexport */ decompressSecp256k1Key),
+  "Yj": () => (/* reexport */ decompressSecp256k1KeyRaw),
   "pf": () => (/* reexport */ decompressSecp256k1Point),
   "dK": () => (/* reexport */ isSecp256k1Point),
   "Rx": () => (/* reexport */ isSecp256k1PrivateKey)
@@ -2617,6 +2606,16 @@ if (!isContentScript) {
         x: (0,convert/* toBase64URL */.wi)(x),
         y: (0,convert/* toBase64URL */.wi)(y)
     };
+}
+function compressSecp256k1KeyRaw(point) {
+    if (!secp256k1.isPoint(point)) throw new TypeError('Not a point on secp256k1!');
+    if (secp256k1.isPointCompressed(point)) return point;
+    return secp256k1.pointCompress(point, true);
+}
+function decompressSecp256k1KeyRaw(point) {
+    if (!secp256k1.isPoint(point)) throw new TypeError('Not a point on secp256k1!');
+    if (!secp256k1.isPointCompressed(point)) return point;
+    return secp256k1.pointCompress(point, false);
 }
 function compressSecp256k1Key(key) {
     const arr = compressSecp256k1Point(key.x, key.y);
@@ -3730,8 +3729,8 @@ function score(x) {
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, [5638,2698,7871,9759,3294,6739,4227,4544,2486,5737,3883,3758,187,8136,3147,8019,8712,2735,5687,5229,5464,444,6316,3693,1851,7822,7856,2118,400,3453,7849,5132,1440,12,2619,9227,5838,3142,5105,3846,2162,8129,5951,7512,2752,5178,6565,9744,2299,6160,4278,9197,8000,4960,102,253,572,9737,8547,8145,5313,4570,3981,9855,2088,551,2908,1696,3638,1555,9141,516,2974,3832,6067,159,79,4557,234,7070,4590,4586,2891,8393,5784,9566,4029,433,9697,1947,3619,2222,7088,9867,9808,6992,7358,9568], () => (__webpack_require__(3976)))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [5638,2698,7871,9759,3294,6739,4227,4544,2486,5737,3883,3758,187,8136,3147,8019,8712,2735,5687,5229,5464,444,6316,3693,1851,7822,7856,2118,400,3453,7849,5132,1440,12,2619,9227,5838,3142,5105,3846,2162,8129,5951,7512,2752,5178,6565,9744,2299,6160,4278,9197,8000,4960,102,253,572,9737,8547,8145,5313,4570,3981,9855,2088,551,2908,1696,3638,1555,9141,516,2974,3832,6067,159,79,4557,234,7070,4590,4586,2891,8393,5784,9566,4029,433,9697,1947,3619,2222,7088,9867,9808,6992,7358,9568], () => (__webpack_require__(42038)))
+/******/ 	__webpack_require__.O(undefined, [5638,2698,7871,9759,3294,6739,4227,4544,2486,5737,3883,3758,187,8136,3147,8019,8712,2735,5687,5229,5464,444,6316,3693,1851,7822,7856,2118,400,3453,7849,5132,1440,12,2619,9227,5838,3142,5105,3846,2162,8129,5951,7512,2752,5178,6565,9744,2299,6160,4278,9197,8000,4960,102,253,572,9737,8547,8145,5313,4570,3981,9855,2088,551,2908,1696,3638,1555,9141,516,2974,3832,6067,159,79,4557,234,7070,4590,4586,2891,8393,5784,9566,4029,433,9697,1947,3619,2222,5161,5954,6878,6992,7358,8689], () => (__webpack_require__(3976)))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [5638,2698,7871,9759,3294,6739,4227,4544,2486,5737,3883,3758,187,8136,3147,8019,8712,2735,5687,5229,5464,444,6316,3693,1851,7822,7856,2118,400,3453,7849,5132,1440,12,2619,9227,5838,3142,5105,3846,2162,8129,5951,7512,2752,5178,6565,9744,2299,6160,4278,9197,8000,4960,102,253,572,9737,8547,8145,5313,4570,3981,9855,2088,551,2908,1696,3638,1555,9141,516,2974,3832,6067,159,79,4557,234,7070,4590,4586,2891,8393,5784,9566,4029,433,9697,1947,3619,2222,5161,5954,6878,6992,7358,8689], () => (__webpack_require__(42038)))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

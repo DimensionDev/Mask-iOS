@@ -1157,13 +1157,13 @@ function CollectibleListUI(props) {
                     ]
                 }) : /*#__PURE__*/ (0,jsx_runtime.jsx)(Box/* default */.Z, {
                     className: classes.root,
-                    children: collectibles.map((x, i)=>/*#__PURE__*/ (0,jsx_runtime.jsx)(CollectibleItem, {
-                            renderOrder: i,
-                            token: x,
+                    children: collectibles.map((token, index)=>/*#__PURE__*/ (0,jsx_runtime.jsx)(CollectibleItem, {
+                            renderOrder: index,
+                            token: token,
                             provider: provider,
                             wallet: wallet,
                             readonly: readonly
-                        }, x.tokenId + x.contractDetailed.address)
+                        }, index)
                     )
                 })
             ]

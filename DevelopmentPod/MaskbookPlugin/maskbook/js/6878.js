@@ -1,5 +1,5 @@
 "use strict";
-(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[9808],{
+(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[6878],{
 
 /***/ 17902:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -766,50 +766,6 @@ const base = {
     },
     i18n: _locales_languages__WEBPACK_IMPORTED_MODULE_1__/* .languages */ .M
 };
-
-
-/***/ }),
-
-/***/ 57602:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "m": () => (/* binding */ PopupRoutes)
-/* harmony export */ });
-var PopupRoutes;
-(function(PopupRoutes) {
-    PopupRoutes["Root"] = '/';
-    PopupRoutes["Wallet"] = '/wallet';
-    PopupRoutes["ImportWallet"] = '/wallet/import';
-    PopupRoutes["AddDeriveWallet"] = '/wallet/addDerive';
-    PopupRoutes["WalletSettings"] = '/wallet/settings';
-    PopupRoutes["WalletRename"] = '/wallet/rename';
-    PopupRoutes["DeleteWallet"] = '/wallet/delete';
-    PopupRoutes["CreateWallet"] = '/wallet/create';
-    PopupRoutes["SwitchWallet"] = '/wallet/switch';
-    PopupRoutes["SelectWallet"] = '/wallet/select';
-    PopupRoutes["WalletRecovered"] = '/wallet/recovered';
-    PopupRoutes["LegacyWalletRecovered"] = '/wallet/legacy-recovered';
-    PopupRoutes["BackupWallet"] = '/wallet/backup';
-    PopupRoutes["AddToken"] = '/wallet/addToken';
-    PopupRoutes["WalletSignRequest"] = '/wallet/sign';
-    PopupRoutes["GasSetting"] = '/wallet/gas';
-    PopupRoutes["TokenDetail"] = '/wallet/tokenDetail';
-    PopupRoutes["ContractInteraction"] = '/wallet/contract-interaction';
-    PopupRoutes["Unlock"] = '/wallet/unlock';
-    PopupRoutes["Transfer"] = '/wallet/transfer';
-    PopupRoutes["SetPaymentPassword"] = '/wallet/password';
-    PopupRoutes["ReplaceTransaction"] = '/wallet/replace';
-    PopupRoutes["Personas"] = '/personas';
-    PopupRoutes["Logout"] = '/personas/logout';
-    PopupRoutes["PersonaRename"] = '/personas/rename';
-    PopupRoutes["PersonaSignRequest"] = '/personas/sign-request';
-    PopupRoutes["PermissionAwareRedirect"] = '/redirect';
-    PopupRoutes["RequestPermission"] = '/request-permission';
-    PopupRoutes["ThirdPartyRequestPermission"] = '/3rd-request-permission';
-    PopupRoutes["SignRequest"] = '/sign-request';
-    PopupRoutes["Swap"] = '/swap';
-})(PopupRoutes || (PopupRoutes = {}));
 
 
 /***/ }),

@@ -1,4 +1,4 @@
-(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[7088],{
+(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[5161],{
 
 /***/ 46641:
 /***/ ((module) => {
@@ -20850,7 +20850,7 @@ async function encrypt(options, io) {
     }
     const authorPublic = queryAuthorPublicKey(options.author, io);
     const encodedMessage = encodeMessage(options.version, options.message);
-    const encryptedMessage = encodedMessage.then((message)=>(0,_utils__WEBPACK_IMPORTED_MODULE_5__/* .encryptWithAES */ .l_)(_payload__WEBPACK_IMPORTED_MODULE_4__/* .AESAlgorithmEnum.A256GCM */ .$y.A256GCM, postKey, postIV, message)
+    const encryptedMessage = encodedMessage.then((message)=>(0,_utils__WEBPACK_IMPORTED_MODULE_5__/* .encryptWithAES */ .l_)(postKey, postIV, message)
     ).then((x)=>x.unwrap()
     );
     let encryption;
@@ -20859,10 +20859,7 @@ async function encrypt(options, io) {
         encryption = {
             iv: postIV,
             type: 'public',
-            AESKey: {
-                algr: _payload__WEBPACK_IMPORTED_MODULE_4__/* .AESAlgorithmEnum.A256GCM */ .$y.A256GCM,
-                key: postKey
-            }
+            AESKey: postKey
         };
     } else {
         const postKeyEncoded = encodePostKey(options.version, postKey);
@@ -20921,7 +20918,7 @@ async function e2e_v37(context, target, io) {
             'encrypt'
         ]);
         // Note: we're reusing iv in the post encryption.
-        const encryptedPostKey = await (0,_utils__WEBPACK_IMPORTED_MODULE_5__/* .encryptWithAES */ .l_)(_payload__WEBPACK_IMPORTED_MODULE_4__/* .AESAlgorithmEnum.A256GCM */ .$y.A256GCM, aes, postIV, await postKeyEncoded);
+        const encryptedPostKey = await (0,_utils__WEBPACK_IMPORTED_MODULE_5__/* .encryptWithAES */ .l_)(aes, postIV, await postKeyEncoded);
         return encryptedPostKey.unwrap();
     });
     const encryption = {
@@ -21071,11 +21068,9 @@ async function generateEC_KeyPair(io, kind) {
 /* harmony export */   "m": () => (/* binding */ v37_addReceiver)
 /* harmony export */ });
 /* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(78144);
-/* harmony import */ var _payload__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(79807);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(62435);
-/* harmony import */ var _EncryptionTypes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(65617);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(13740);
-
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(62435);
+/* harmony import */ var _EncryptionTypes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(65617);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(13740);
 
 
 
@@ -21083,9 +21078,9 @@ async function generateEC_KeyPair(io, kind) {
 /** @internal */ async function v37_addReceiver(firstTime, context, target, io) {
     const { getEphemeralKey , postIV , postKeyEncoded  } = context;
     const ecdh = Promise.allSettled(target.target.map(async (id)=>{
-        const iv = postIV || (0,_utils__WEBPACK_IMPORTED_MODULE_4__/* .fillIV */ .i)(io);
+        const iv = postIV || (0,_utils__WEBPACK_IMPORTED_MODULE_3__/* .fillIV */ .i)(io);
         const receiverPublicKey = id.isUnknown ? undefined : await io.queryPublicKey(id);
-        if (!receiverPublicKey) throw new _EncryptionTypes__WEBPACK_IMPORTED_MODULE_3__/* .EncryptError */ .x(_EncryptionTypes__WEBPACK_IMPORTED_MODULE_3__/* .EncryptErrorReasons.PublicKeyNotFound */ .U.PublicKeyNotFound);
+        if (!receiverPublicKey) throw new _EncryptionTypes__WEBPACK_IMPORTED_MODULE_2__/* .EncryptError */ .x(_EncryptionTypes__WEBPACK_IMPORTED_MODULE_2__/* .EncryptErrorReasons.PublicKeyNotFound */ .U.PublicKeyNotFound);
         const [ephemeralPublicKey, ephemeralPrivateKey] = await getEphemeralKey(receiverPublicKey.algr);
         const aes = await crypto.subtle.deriveKey({
             name: 'ECDH',
@@ -21097,7 +21092,7 @@ async function generateEC_KeyPair(io, kind) {
             'encrypt'
         ]);
         // Note: we're reusing iv in the post encryption.
-        const encryptedPostKey = await (0,_utils__WEBPACK_IMPORTED_MODULE_2__/* .encryptWithAES */ .l_)(_payload__WEBPACK_IMPORTED_MODULE_1__/* .AESAlgorithmEnum.A256GCM */ .$y.A256GCM, aes, iv, await postKeyEncoded);
+        const encryptedPostKey = await (0,_utils__WEBPACK_IMPORTED_MODULE_1__/* .encryptWithAES */ .l_)(aes, iv, await postKeyEncoded);
         const result = {
             encryptedPostKey: encryptedPostKey.unwrap(),
             target: id
@@ -21126,11 +21121,9 @@ async function generateEC_KeyPair(io, kind) {
 /* harmony export */ });
 /* harmony import */ var _dimensiondev_kit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(28807);
 /* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(78144);
-/* harmony import */ var _payload__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(79807);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(62435);
-/* harmony import */ var _EncryptionTypes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(65617);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(13740);
-
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(62435);
+/* harmony import */ var _EncryptionTypes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(65617);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(13740);
 
 
 
@@ -21183,13 +21176,13 @@ const IV = (0,_dimensiondev_kit__WEBPACK_IMPORTED_MODULE_0__/* .decodeArrayBuffe
     //     Note: Internal_AES is not returned by io.deriveAESKey_version38_or_older, it is internal algorithm of that method.
     const ecdh = Promise.allSettled(target.target.map(async (id)=>{
         const receiverPublicKey = id.isUnknown ? undefined : await io.queryPublicKey(id);
-        if (!receiverPublicKey) throw new _EncryptionTypes__WEBPACK_IMPORTED_MODULE_4__/* .EncryptError */ .x(_EncryptionTypes__WEBPACK_IMPORTED_MODULE_4__/* .EncryptErrorReasons.PublicKeyNotFound */ .U.PublicKeyNotFound);
-        const ivToBePublished = (0,_utils__WEBPACK_IMPORTED_MODULE_5__/* .fillIV */ .i)(io);
+        if (!receiverPublicKey) throw new _EncryptionTypes__WEBPACK_IMPORTED_MODULE_3__/* .EncryptError */ .x(_EncryptionTypes__WEBPACK_IMPORTED_MODULE_3__/* .EncryptErrorReasons.PublicKeyNotFound */ .U.PublicKeyNotFound);
+        const ivToBePublished = (0,_utils__WEBPACK_IMPORTED_MODULE_4__/* .fillIV */ .i)(io);
         const [[aes, iv]] = await deriveAESByECDH_version38OrOlderExtraSteps(async (e)=>[
                 await io.deriveAESKey(e)
             ]
         , receiverPublicKey.key, ivToBePublished);
-        const encryptedPostKey = await (0,_utils__WEBPACK_IMPORTED_MODULE_3__/* .encryptWithAES */ .l_)(_payload__WEBPACK_IMPORTED_MODULE_2__/* .AESAlgorithmEnum.A256GCM */ .$y.A256GCM, aes, iv, await postKeyEncoded);
+        const encryptedPostKey = await (0,_utils__WEBPACK_IMPORTED_MODULE_2__/* .encryptWithAES */ .l_)(aes, iv, await postKeyEncoded);
         return {
             ivToBePublished,
             encryptedPostKey: encryptedPostKey.unwrap(),
@@ -21214,7 +21207,6 @@ const IV = (0,_dimensiondev_kit__WEBPACK_IMPORTED_MODULE_0__/* .decodeArrayBuffe
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "$y": () => (/* reexport */ payload_types/* AESAlgorithmEnum */.$y),
   "qx": () => (/* reexport */ payload_types/* EC_KeyCurveEnum */.qx),
   "Gq": () => (/* reexport */ payload_types/* SocialNetworkEnum */.Gq),
   "VC": () => (/* reexport */ payload_types/* SocialNetworkEnumToProfileDomain */.VC),
@@ -21242,7 +21234,6 @@ var shared = __webpack_require__(31649);
 var src = __webpack_require__(78144);
 ;// CONCATENATED MODULE: ../encryption/src/payload_internal/version-38.encoder.ts
 /* eslint @dimensiondev/unicode-specific-set: ["error", { "only": "code" }] */ 
-
 
 
 
@@ -21292,7 +21283,7 @@ async function encodeAESKeyEncrypted(encryption) {
         const { AESKey , iv  } = encryption;
         const publicSharedKey = await (0,shared/* get_v38PublicSharedCryptoKey */.w)();
         if (publicSharedKey.err) return publicSharedKey;
-        const jwk = await (0,utils/* exportCryptoKeyToJWK */.nm)(AESKey.key);
+        const jwk = await (0,utils/* exportCryptoKeyToJWK */.nm)(AESKey);
         if (jwk.err) return jwk.mapErr((e)=>new src/* CheckedError */.iD(types/* CryptoException.InvalidCryptoKey */.H3.InvalidCryptoKey, e)
         );
         // There is no reason that these two steps will fail.
@@ -21302,7 +21293,7 @@ async function encodeAESKeyEncrypted(encryption) {
         // ? We use the Chrome order to keep the result stable.
         const text = `{"alg":"A256GCM","ext":true,"k":"${jwk.val.k}","key_ops":["decrypt","encrypt"],"kty":"oct"}`;
         const ab = (0,kit_esm/* encodeText */.YT)(text);
-        const encryptedKey = await (0,utils/* encryptWithAES */.l_)(payload_types/* AESAlgorithmEnum.A256GCM */.$y.A256GCM, publicSharedKey.val, iv, ab);
+        const encryptedKey = await (0,utils/* encryptWithAES */.l_)(publicSharedKey.val, iv, ab);
         if (encryptedKey.err) return encryptedKey.mapErr((e)=>new src/* CheckedError */.iD(types/* CryptoException.EncryptFailed */.H3.EncryptFailed, e)
         );
         return (0,esm.Ok)((0,kit_esm/* encodeArrayBuffer */.ll)(encryptedKey.val.slice()));
@@ -21326,7 +21317,11 @@ async function compressSecp256k1Key(key) {
 
 // EXTERNAL MODULE: ../encryption/src/payload_internal/version-37.parser.ts
 var version_37_parser = __webpack_require__(82719);
+// EXTERNAL MODULE: ../encryption/src/payload/types.ts
+var payload_types = __webpack_require__(12628);
 ;// CONCATENATED MODULE: ../encryption/src/payload_internal/version-37.encoder.ts
+
+
 
 
 var version_37_encoder_Index;
@@ -21351,12 +21346,13 @@ async function encode37(payload) {
     if (payload.authorPublicKey.some) {
         const { algr , key  } = payload.authorPublicKey.val;
         payload_arr[version_37_encoder_Index.authorPublicKeyAlgorithm] = algr;
-        const spki = await (0,utils/* exportCryptoKeyToSPKI */.Is)(key);
-        if (spki.ok) {
-            payload_arr[version_37_encoder_Index.authorPublicKey] = spki.val;
+        const raw = await (0,utils/* exportCryptoKeyToRaw */.bu)(key);
+        if (raw.ok) {
+            if (algr === payload_types/* EC_KeyCurveEnum.secp256k1 */.qx.secp256k1) payload_arr[version_37_encoder_Index.authorPublicKey] = (0,src/* compressSecp256k1KeyRaw */.f1)(raw.val);
+            else payload_arr[version_37_encoder_Index.authorPublicKey] = raw.val;
         } else {
             payload_arr[version_37_encoder_Index.authorPublicKey] = null;
-            warn(key, spki.err);
+            warn(key, raw.err);
         }
     }
     if (payload.encryption.type === 'E2E') {
@@ -21369,19 +21365,19 @@ async function encode37(payload) {
             keyMaterials
         ];
         for (const [alg, key] of ephemeralPublicKey.entries()){
-            const k = await (0,utils/* exportCryptoKeyToSPKI */.Is)(key);
+            const k = await (0,utils/* exportCryptoKeyToRaw */.bu)(key);
             if (k.err) warn(key, k.err);
-            else keyMaterials[alg] = k.val;
+            else {
+                if (alg === payload_types/* EC_KeyCurveEnum.secp256k1 */.qx.secp256k1) keyMaterials[alg] = (0,src/* compressSecp256k1KeyRaw */.f1)(k.val);
+                else keyMaterials[alg] = k.val;
+            }
         }
         payload_arr[version_37_encoder_Index.encryption] = subArr;
     } else {
         const { AESKey , iv  } = payload.encryption;
         const subArr = [
             0,
-            [
-                AESKey.algr,
-                (await crypto.subtle.exportKey('jwk', AESKey.key)).k
-            ],
+            new Uint8Array(await crypto.subtle.exportKey('raw', AESKey)),
             iv
         ];
         payload_arr[version_37_encoder_Index.encryption] = subArr;
@@ -21390,7 +21386,7 @@ async function encode37(payload) {
     return (0,esm.Ok)((0,utils/* encodeMessagePack */.Gg)(payload_arr));
 }
 function warn(key, err) {
-    console.warn('[@masknet/encryption] Failed to encode a public key object into spki format. key is', key, 'and the error is', err);
+    console.warn('[@masknet/encryption] Failed to export public key. key is', key, 'and the error is', err);
 }
 
 ;// CONCATENATED MODULE: ../encryption/src/payload_internal/index.ts
@@ -21404,8 +21400,6 @@ function warn(key, err) {
 
 // EXTERNAL MODULE: ../encryption/src/payload_internal/SignatureContainer.ts
 var SignatureContainer = __webpack_require__(48771);
-// EXTERNAL MODULE: ../encryption/src/payload/types.ts
-var payload_types = __webpack_require__(12628);
 ;// CONCATENATED MODULE: ../encryption/src/payload/index.ts
 
 
@@ -21521,12 +21515,10 @@ __webpack_require__.d(__webpack_exports__, {
   "Gg": () => (/* binding */ encodeMessagePack),
   "l_": () => (/* reexport */ encryptWithAES),
   "nm": () => (/* reexport */ exportCryptoKeyToJWK),
-  "Is": () => (/* reexport */ exportCryptoKeyToSPKI),
-  "Bs": () => (/* reexport */ importAESFromJWK),
+  "bu": () => (/* reexport */ exportCryptoKeyToRaw),
+  "yj": () => (/* reexport */ importAES),
   "OT": () => (/* reexport */ importEC_Key)
 });
-
-// UNUSED EXPORTS: exportCryptoKeyToRaw
 
 // EXTERNAL MODULE: ../shared-base/src/index.ts + 1 modules
 var src = __webpack_require__(78144);
@@ -21547,33 +21539,32 @@ var types = __webpack_require__(25209);
 
 
 
-function importAESFromJWK(key, kind) {
+function importAES(key) {
     return esm/* Result.wrapAsync */.x4.wrapAsync(()=>{
-        const param = {
-            [payload/* AESAlgorithmEnum.A256GCM */.$y.A256GCM]: {
+        if (key instanceof Uint8Array) {
+            return crypto.subtle.importKey('raw', key, {
                 name: 'AES-GCM',
                 length: 256
-            }
-        };
-        return crypto.subtle.importKey('jwk', key, param[kind], true, [
+            }, true, [
+                'encrypt',
+                'decrypt', 
+            ]);
+        }
+        return crypto.subtle.importKey('jwk', key, {
+            name: 'AES-GCM',
+            length: 256
+        }, true, [
             'encrypt',
-            'decrypt'
+            'decrypt', 
         ]);
     });
 }
-importAESFromJWK.AES_GCM_256 = (key)=>importAESFromJWK(key, payload/* AESAlgorithmEnum.A256GCM */.$y.A256GCM)
-;
 function exportCryptoKeyToJWK(key) {
     return esm/* Result.wrapAsync */.x4.wrapAsync(()=>crypto.subtle.exportKey('jwk', key)
     );
 }
-function exportCryptoKeyToSPKI(key) {
-    return esm/* Result.wrapAsync */.x4.wrapAsync(()=>crypto.subtle.exportKey('spki', key).then((x)=>new Uint8Array(x)
-        )
-    );
-}
 function exportCryptoKeyToRaw(key) {
-    return Result.wrapAsync(()=>crypto.subtle.exportKey('raw', key).then((x)=>new Uint8Array(x)
+    return esm/* Result.wrapAsync */.x4.wrapAsync(()=>crypto.subtle.exportKey('raw', key).then((x)=>new Uint8Array(x)
         )
     );
 }
@@ -21602,33 +21593,27 @@ function importEC_Key(key, kind) {
             DeriveKeyUsage
         ];
         if (key instanceof Uint8Array) {
-            return crypto.subtle.importKey('spki', key, ...args);
+            return crypto.subtle.importKey('raw', key, ...args);
         } else {
             return crypto.subtle.importKey('jwk', key, ...args);
         }
     });
 }
-function encryptWithAES(kind, key, iv, message) {
-    const param = {
-        [payload/* AESAlgorithmEnum.A256GCM */.$y.A256GCM]: {
+function encryptWithAES(key, iv, message) {
+    return esm/* Result.wrapAsync */.x4.wrapAsync(async ()=>{
+        const x = await crypto.subtle.encrypt({
             name: 'AES-GCM',
             iv
-        }
-    };
-    return esm/* Result.wrapAsync */.x4.wrapAsync(()=>{
-        return crypto.subtle.encrypt(param[kind], key, message).then((x)=>new Uint8Array(x)
-        );
+        }, key, message);
+        return new Uint8Array(x);
     });
 }
-function decryptWithAES(kind, key, iv, message) {
-    const param = {
-        [payload/* AESAlgorithmEnum.A256GCM */.$y.A256GCM]: {
+function decryptWithAES(key, iv, message) {
+    return esm/* Result.wrapAsync */.x4.wrapAsync(async ()=>{
+        return new Uint8Array(await crypto.subtle.decrypt({
             name: 'AES-GCM',
             iv
-        }
-    };
-    return esm/* Result.wrapAsync */.x4.wrapAsync(async ()=>{
-        return new Uint8Array(await crypto.subtle.decrypt(param[kind], key, message));
+        }, key, message));
     });
 }
 function assertIVLengthEq16(arrayBuffer) {
@@ -22515,12 +22500,12 @@ const buildInfoMarkdown = `## Build info
 - target: ${"safari"}
 - build: ${"stable"}
 - architecture: ${"app"}
-- BUILD_DATE: ${"2022-04-14T07:11:10.724Z"}
-- VERSION: ${"v1.29.12-2332-g80695da1a"}
+- BUILD_DATE: ${"2022-04-14T07:40:34.110Z"}
+- VERSION: ${"v1.29.12-2343-g7d3cd8499"}
 
 ## Git (${ true ? '*' : 0}):
 
-${"80695da1a"} (${"HEAD"}) on tag "${"v2.5.0"}"
+${"7d3cd8499"} (${"HEAD"}) on tag "${"v2.5.0"}"
 ${"https://github.com/DimensionDev/Maskbook"?.toLowerCase()?.includes('DimensionDev') ? '' : "https://github.com/DimensionDev/Maskbook"}`;
 
 // EXTERNAL MODULE: ./src/social-network/index.ts
@@ -26999,11 +26984,7 @@ const cache = new Map();
 
 
 const log = {
-    beCalled: true,
-    localError: true,
-    remoteError: true,
     requestReplay: true,
-    sendLocalStack: true,
     type: 'pretty'
 };
 function createPluginRPC(key, impl, message, /** Please set this to true if your implementation is a Proxy. */ exoticImplementation) {
@@ -29336,6 +29317,51 @@ async function andThenAsync(op, mapper) {
     if (op.err) return op;
     return mapper(op.val);
 }
+
+
+/***/ }),
+
+/***/ 57602:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "m": () => (/* binding */ PopupRoutes)
+/* harmony export */ });
+var PopupRoutes;
+(function(PopupRoutes) {
+    PopupRoutes["Root"] = '/';
+    PopupRoutes["Wallet"] = '/wallet';
+    PopupRoutes["ImportWallet"] = '/wallet/import';
+    PopupRoutes["AddDeriveWallet"] = '/wallet/addDerive';
+    PopupRoutes["WalletSettings"] = '/wallet/settings';
+    PopupRoutes["WalletRename"] = '/wallet/rename';
+    PopupRoutes["DeleteWallet"] = '/wallet/delete';
+    PopupRoutes["CreateWallet"] = '/wallet/create';
+    PopupRoutes["SwitchWallet"] = '/wallet/switch';
+    PopupRoutes["SelectWallet"] = '/wallet/select';
+    PopupRoutes["WalletRecovered"] = '/wallet/recovered';
+    PopupRoutes["LegacyWalletRecovered"] = '/wallet/legacy-recovered';
+    PopupRoutes["BackupWallet"] = '/wallet/backup';
+    PopupRoutes["AddToken"] = '/wallet/addToken';
+    PopupRoutes["WalletSignRequest"] = '/wallet/sign';
+    PopupRoutes["GasSetting"] = '/wallet/gas';
+    PopupRoutes["TokenDetail"] = '/wallet/tokenDetail';
+    PopupRoutes["ContractInteraction"] = '/wallet/contract-interaction';
+    PopupRoutes["Unlock"] = '/wallet/unlock';
+    PopupRoutes["Transfer"] = '/wallet/transfer';
+    PopupRoutes["SetPaymentPassword"] = '/wallet/password';
+    PopupRoutes["ReplaceTransaction"] = '/wallet/replace';
+    PopupRoutes["Personas"] = '/personas';
+    PopupRoutes["Logout"] = '/personas/logout';
+    PopupRoutes["PersonaRename"] = '/personas/rename';
+    PopupRoutes["PersonaSignRequest"] = '/personas/sign-request';
+    PopupRoutes["PermissionAwareRedirect"] = '/redirect';
+    PopupRoutes["RequestPermission"] = '/request-permission';
+    PopupRoutes["ThirdPartyRequestPermission"] = '/3rd-request-permission';
+    PopupRoutes["SignRequest"] = '/sign-request';
+    PopupRoutes["Swap"] = '/swap';
+})(PopupRoutes || (PopupRoutes = {}));
 
 
 /***/ }),
