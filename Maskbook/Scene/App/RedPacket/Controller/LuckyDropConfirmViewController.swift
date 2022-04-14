@@ -21,11 +21,15 @@ final class LuckyDropConfirmViewController: SheetViewController {
     private var viewModel: RedPacketConfirmViewModel
     
     init(
+        token: Token?,
+        gasFeeViewModel: GasFeeViewModel?,
         redPacketInput: HappyRedPacketV4.CreateRedPacketInput,
         transaction: EthereumTransaction,
         completion: ((String?, Error?) -> Void)?
     ) {
         viewModel = RedPacketConfirmViewModel(
+            token: token,
+            gasFeeViewModel: gasFeeViewModel,
             inputParam: redPacketInput,
             transaction: transaction,
             completion: completion

@@ -6,17 +6,19 @@
 //  Copyright © 2022 dimension. All rights reserved.
 //
 
+import BigInt
+import Combine
 import CoreDataStack
 import Foundation
 import web3swift
-import BigInt
 
 class RedPacketConfirmViewModel: NSObject, ObservableObject {
     @Published var address: String = ""
-    @Published var gasFee: String
+    @Published var gasFeeItem: GasFeeCellItem?
     @Published var inputParam: HappyRedPacketV4.CreateRedPacketInput?
     @Published var token: Token?
     
+    var gasFeeViewModel: GasFeeViewModel?
     var transaction: EthereumTransaction?
     var completion: ((String?, Error?) -> Void)?
     
@@ -90,17 +92,54 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
         return quantityInt.rounding(accordingToBehavior: roundBehavior).stringValue
     }
     
+    var gasFeeInfo: String {
+        guard let gasFeeItem = gasFeeItem else {
+            return ""
+        }
+        
+        guard let gasLimt = gasFeeViewModel?.localGasFeeModel?.gasLimit else {
+            return ""
+        }
+        
+        guard let tokenPrice = token?.price as? Double else {
+            return ""
+        }
+        
+        let symbol = maskUserDefaults.currency.symbol
+        let gwei = gasFeeItem.gWei
+        let gasPriceDoubleValue = Double(EthUtil.getGasFeeFiat(gwei: gwei, gasLimit: gasLimt, price: tokenPrice)) ?? 0
+        var gasPrice: String
+        if gasPriceDoubleValue < 0.01 {
+            gasPrice = "< \(symbol)0.01"
+        } else {
+            gasPrice = "~\(symbol)\(EthUtil.getGasFeeFiat(gwei: gwei, gasLimit: gasLimt, price: tokenPrice))"
+        }
+        let time = gasFeeItem.shortCostTime
+        
+        return "\(gasPrice) (\(time))"
+    }
+    
+    var gasLimit: BigUInt {
+        guard let gasLimitStr = gasFeeViewModel?.gasFeePublisher.value?.gasLimit else {
+            return BigUInt(21_000)
+        }
+        return BigUInt(gasLimitStr) ?? BigUInt(21_000)
+    }
+    
     @InjectedProvider(\.userDefaultSettings)
     private var settings
     private let viewContext = AppContext.shared.coreDataStack.persistentContainer.viewContext
+    private var disposeBag = Set<AnyCancellable>()
     
     init(
+        token: Token?,
+        gasFeeViewModel: GasFeeViewModel?,
         inputParam: HappyRedPacketV4.CreateRedPacketInput?,
         transaction: EthereumTransaction?,
         completion: ((String?, Error?) -> Void)?
     ) {
-        //TODO: gas fee
-        self.gasFee = ""
+        self.token = token
+        self.gasFeeViewModel = gasFeeViewModel
         self.inputParam = inputParam
         self.transaction = transaction
         self.completion = completion
@@ -108,12 +147,11 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
         super.init()
         
         self.address = settings.defaultAccountAddress ?? ""
-        
-        // for fetching a logoURL in token with address
-        let fetchRequest = Token.sortedFetchRequest
-        fetchRequest.predicate = Token.predicate(address: address)
-        fetchRequest.fetchLimit = 1
-        token = try? viewContext.fetch(fetchRequest).first
+        gasFeeViewModel?.confirmedGasFeePublisher
+            .removeDuplicates()
+            .filter({ $0 != nil })
+            .assign(to: \.gasFeeItem, on: self)
+            .store(in: &disposeBag)
     }
 }
 
@@ -144,6 +182,8 @@ class RedPacketConfirmViewModelMock: RedPacketConfirmViewModel {
     
     init() {
         super.init(
+            token: nil,
+            gasFeeViewModel: nil,
             inputParam: nil,
             transaction: nil,
             completion: nil)

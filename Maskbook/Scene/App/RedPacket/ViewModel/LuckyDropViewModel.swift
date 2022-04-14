@@ -222,8 +222,9 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         gasFeeViewModel.refresh()
         
         // It will only change after the user selects gasfee and is only used here to initialize the data.
-        gasFeeViewModel.gasFeePublisher.filter({ $0 != nil })
-            .prefix(1)
+        gasFeeViewModel.confirmedGasFeePublisher
+            .removeDuplicates()
+            .filter({ $0 != nil })
             .assign(to: \.gasFeeItem, on: self)
             .store(in: &disposeBag)
         
@@ -339,7 +340,11 @@ class LuckyDropViewModel: NSObject, ObservableObject {
             totalTokens: total)
         
         Task {
-            let tx = await ABI.happyRedPacketV4.createRedPacket(param: param)
+            let tx = await ABI.happyRedPacketV4.createRedPacket(
+                token: token,
+                gasFeeViewModel: gasFeeViewModel,
+                param: param
+            )
             log.debug("\(tx ?? "It's failed to create redPacket")", source: "create-red-packet")
             await MainActor.run {
                 // Show the loading animation and reset the `ComfirmButton`'s state.
@@ -605,12 +610,6 @@ class LuckyDropViewModel: NSObject, ObservableObject {
     
     func updateButton(state: ConfirmButtonType) {
         buttonType = state
-    }
-}
-
-extension LuckyDropViewModel: GasFeeBackDelegate {
-    func getGasFeeAction(gasFeeModel: GasFeeCellItem) {
-        gasFeeItem = gasFeeModel
     }
 }
 

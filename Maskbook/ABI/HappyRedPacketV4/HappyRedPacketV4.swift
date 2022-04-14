@@ -8,6 +8,7 @@
 
 import BigInt
 import Compression
+import CoreDataStack
 import Foundation
 import PromiseKit
 import SwiftyJSON
@@ -60,6 +61,8 @@ struct HappyRedPacketV4: ABIContract {
     @MainActor
     func write(
         _ methodName: String,
+        token: Token?,
+        gasFeeViewModel: GasFeeViewModel?,
         redPacketInput: CreateRedPacketInput,
         param: [AnyObject]? = nil,
         extraData: Data? = nil,
@@ -84,16 +87,18 @@ struct HappyRedPacketV4: ABIContract {
             Task.detached {
                 do {
                     let transaction = try tx.assemble(transactionOptions: tx.transactionOptions)
-                    let scene: Coordinator.Scene = .luckyDropConfirm(
-                        redPacketInput: redPacketInput,
-                        transaction: transaction) { tx, error in
-                            if let error = error {
-                                continuation.resume(with: .failure(error))
-                            } else {
-                                continuation.resume(with: .success(tx))
-                            }
-                        }
                     await MainActor.run {
+                        let scene: Coordinator.Scene = .luckyDropConfirm(
+                            token: token,
+                            gasFeeViewModel: gasFeeViewModel,
+                            redPacketInput: redPacketInput,
+                            transaction: transaction) { tx, error in
+                                if let error = error {
+                                    continuation.resume(with: .failure(error))
+                                } else {
+                                    continuation.resume(with: .success(tx))
+                                }
+                            }
                         self.mainCoordinator.present(
                             scene: scene,
                             transition: .modal()
@@ -145,13 +150,19 @@ struct HappyRedPacketV4: ABIContract {
     }
     
     @MainActor
-    func createRedPacket(param: CreateRedPacketInput) async -> String? {
+    func createRedPacket(
+        token: Token?,
+        gasFeeViewModel: GasFeeViewModel?,
+        param: CreateRedPacketInput
+    ) async -> String? {
         let contractMethod = Functions.createRedPacket.rawValue
         let parameters = param.asArray
         var options = TransactionOptions()
         options.value = param.tokenType == 0 ? param.totalTokens : BigUInt(0)
         return try? await write(
             contractMethod,
+            token: token,
+            gasFeeViewModel: gasFeeViewModel,
             redPacketInput: param,
             param: parameters,
             options: options)

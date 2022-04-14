@@ -23,6 +23,7 @@ extension GasFeeViewModel {
 class GasFeeViewModel: NSObject {
     private var disposeBag = Set<AnyCancellable>()
     let gasFeePublisher = CurrentValueSubject<GasFeeCellItem?, Never>(nil)
+    let confirmedGasFeePublisher = CurrentValueSubject<GasFeeCellItem?, Never>(nil)
     
     weak var collectionView: UICollectionView?
     weak var dataSource: UICollectionViewDiffableDataSource<Section, SectionItem>?
@@ -60,6 +61,7 @@ class GasFeeViewModel: NSObject {
                 let cellItem = GasFeeCellItem(gasFeeModel: model, type: .medium)
                 self?.localGasFeeModel = cellItem
                 self?.gasFeePublisher.value = cellItem
+                self?.confirmedGasFeePublisher.accept(cellItem)
                 self?.refresh(gasFeeModel: model)
             }
             .store(in: &disposeBag)

@@ -12,7 +12,8 @@ import CoreDataStack
 
 struct RedPacketConfirmView: View {
     @ObservedObject var viewModel: RedPacketConfirmViewModel
-    
+    @InjectedProvider(\.mainCoordinator) private var mainCoordinator
+   
     var tipsView: some View {
         HStack(spacing: 10) {
             Asset.Images.Scene.Social.connectHintBannerIcon.asImage()
@@ -63,7 +64,7 @@ struct RedPacketConfirmView: View {
                         value: viewModel.totalAmount
                     )
                 )
-                buildRow(title: L10n.Plugins.Luckydrop.Confirm.transactionFee, value: .gas(viewModel.gasFee))
+                buildRow(title: L10n.Plugins.Luckydrop.Confirm.transactionFee, value: .gas(viewModel.gasFeeInfo))
                 tipsView
             }
             PrimaryButton(title: L10n.Common.Controls.confirm) {
@@ -103,12 +104,23 @@ struct RedPacketConfirmView: View {
                         .fixedSize()
                 }
             } else if case .gas(let value) = value {
-                HStack(spacing: 4) {
-                    Text(value)
-                        .truncationMode(.middle)
-                        .font(FontStyles.bh6.font)
-                        .foregroundColor(Asset.Colors.Text.dark.asColor())
-                    Asset.Plugins.LuckyDrop.setting.asImage()
+                Button {
+                    mainCoordinator.present(
+                        scene: .gasFee(
+                            delegate: nil,
+                            gasLimit: viewModel.gasLimit,
+                            viewModel: viewModel.gasFeeViewModel
+                        ),
+                        transition: .panModel(animated: true)
+                    )
+                } label: {
+                    HStack(spacing: 4) {
+                        Text(value)
+                            .truncationMode(.middle)
+                            .font(FontStyles.bh6.font)
+                            .foregroundColor(Asset.Colors.Text.dark.asColor())
+                        Asset.Plugins.LuckyDrop.setting.asImage()
+                    }
                 }
             }
         }
