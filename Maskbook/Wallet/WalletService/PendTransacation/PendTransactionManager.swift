@@ -13,7 +13,7 @@ import BigInt
 
 class PendTransactionManager {
 
-    private var pendList:[PendTransactionModel] = []
+//    private var pendList:[PendTransactionModel] = []
     private var timer: Timer?
     public static let shared = PendTransactionManager()
 //    var pendingTxFinishEvents = PassthroughSubject<PendTransactionModel, TransactionHistory.TransactionStatus>()
@@ -23,21 +23,22 @@ class PendTransactionManager {
     private func start() {
             timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
                 DispatchQueue.global().async {
+                    var pendList = self.pendTransactions.value
                     guard let web3Provier = Web3ProviderFactory.provider?.eth else {
                         self.stop()
                         return
                     }
                     
-                    if self.pendList.isEmpty {
+                    if pendList.isEmpty {
                         self.stop()
                     }
                     
-                    for (index, pendingTranscation) in self.pendList.enumerated() {
+                    for (index, pendingTranscation) in pendList.enumerated() {
                         web3Provier.getTransactionReceiptPromise(pendingTranscation.txHash).done { transactionReceipt in
                             if transactionReceipt.status != .notYetProcessed {
-                                self.pendList.remove(at: index)
+                                pendList.remove(at: index)
                             }
-                            self.pendTransactions.send(self.pendList)
+                            self.pendTransactions.send(pendList)
                         }
                     }
                 }
@@ -51,6 +52,8 @@ class PendTransactionManager {
     public func addPendTrancation(txHash: String, history: TransactionHistory, transcationInfo: PendTransactionModel.TranscationInfo, nonce: BigUInt) {
         guard let address = maskUserDefaults.defaultAccountAddress else { return }
         
+        var pendList = self.pendTransactions.value
+
         if pendList.contains(where: { $0.txHash == txHash }) { return }
         pendList.append(PendTransactionModel(address: address, networkId: Int64(maskUserDefaults.network.networkId), txHash: txHash, history: history, transactionInfo: transcationInfo, nonce: nonce))
         self.pendTransactions.send(pendList)
