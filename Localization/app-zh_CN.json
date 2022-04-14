@@ -137,6 +137,14 @@
             "camera_access": {
                 "title": "Mask Network 想要获取\n您的相机权限",
                 "description": "请到系统设置里允许相机权限。"
+            },
+            "only_scan_persona": {
+                "title": "",
+                "description": ""
+            },
+            "no_local_wallet_for_walletconnect": {
+                "title": "",
+                "description": ""
             }
         },
         "controls": {
@@ -779,6 +787,10 @@
                 "cloud_backup_password_hint": "要解密云备份，请输入备份时使用的备份密码。"
             }
         },
+        "mask_scan": {
+            "scan_persona": "",
+            "scan_all": ""
+        },
         "wallet_connect": {
             "wallet_connect": "WalletConnect",
             "select_wallet": "选择钱包",
@@ -788,7 +800,6 @@
             "no_wallets": "您还没有安装任何可用的 %s 钱包用于 walletConnect",
             "connecting": "正在连接…",
             "connect_success": "钱包成功连接到 Mask Network",
-            "scan": "扫描二维码",
             "disconnect": "断开连接",
             "connection_fail": "连接失败。",
             "could_not_switch_blockchain_network_title": "WalletConnect 不支持切换区块链网络",
