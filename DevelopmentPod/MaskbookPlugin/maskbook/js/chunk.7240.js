@@ -59,11 +59,11 @@ function RequestPermission(props) {
                         subheader: /*#__PURE__*/ (0,jsx_runtime.jsx)(ListSubheader/* default */.Z, {
                             children: t('popups_sites')
                         }),
-                        children: origins?.map((x)=>/*#__PURE__*/ (0,jsx_runtime.jsx)(ListItem/* default */.ZP, {
+                        children: origins?.map((origin, key)=>/*#__PURE__*/ (0,jsx_runtime.jsx)(ListItem/* default */.ZP, {
                                 children: /*#__PURE__*/ (0,jsx_runtime.jsx)(ListItemText/* default */.Z, {
-                                    primary: x
+                                    primary: origin
                                 })
-                            }, x)
+                            }, key)
                         )
                     }) : null,
                     permissions?.length ? /*#__PURE__*/ (0,jsx_runtime.jsx)(List/* default */.Z, {
@@ -71,11 +71,11 @@ function RequestPermission(props) {
                         subheader: /*#__PURE__*/ (0,jsx_runtime.jsx)(ListSubheader/* default */.Z, {
                             children: t('popups_permissions')
                         }),
-                        children: permissions?.map((x)=>/*#__PURE__*/ (0,jsx_runtime.jsx)(ListItem/* default */.ZP, {
+                        children: permissions?.map((permission, key)=>/*#__PURE__*/ (0,jsx_runtime.jsx)(ListItem/* default */.ZP, {
                                 children: /*#__PURE__*/ (0,jsx_runtime.jsx)(ListItemText/* default */.Z, {
-                                    primary: x
+                                    primary: permission
                                 })
-                            }, x)
+                            }, key)
                         )
                     }) : null
                 ]

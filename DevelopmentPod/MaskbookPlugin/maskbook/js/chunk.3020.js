@@ -4795,13 +4795,12 @@ function ApplicationBoard() {
                     };
                 }) ?? []);
             }, []).sort((a, b)=>a.entry.defaultSortingPriority - b.entry.defaultSortingPriority
-            ).map((X, i)=>{
-                return /*#__PURE__*/ (0,jsx_runtime.jsx)(react.Fragment, {
-                    children: /*#__PURE__*/ (0,jsx_runtime.jsx)(X.entry.RenderEntryComponent, {
-                        disabled: !X.enabled
+            ).map(({ entry , enabled  }, index)=>/*#__PURE__*/ (0,jsx_runtime.jsx)(react.Fragment, {
+                    children: /*#__PURE__*/ (0,jsx_runtime.jsx)(entry.RenderEntryComponent, {
+                        disabled: !enabled
                     })
-                }, i + X.pluginId);
-            })
+                }, index)
+            )
         })
     });
 }

@@ -1,5 +1,5 @@
 "use strict";
-(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[4157],{
+(globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[3519],{
 
 /***/ 22445:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
@@ -44,8 +44,6 @@ var base = __webpack_require__(81148);
 var src = __webpack_require__(78144);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/ts-results@3.3.0/node_modules/ts-results/esm/index.js + 3 modules
 var ts_results_esm = __webpack_require__(48160);
-// EXTERNAL MODULE: ../encryption/src/payload/index.ts + 3 modules
-var payload = __webpack_require__(79807);
 // EXTERNAL MODULE: ../encryption/src/utils/index.ts + 1 modules
 var utils = __webpack_require__(62435);
 // EXTERNAL MODULE: ../encryption/src/encryption/DecryptionTypes.ts
@@ -53,7 +51,6 @@ var DecryptionTypes = __webpack_require__(24663);
 // EXTERNAL MODULE: ../encryption/src/encryption/v38-ecdh.ts
 var v38_ecdh = __webpack_require__(65096);
 ;// CONCATENATED MODULE: ../encryption/src/encryption/Decryption.ts
-
 
 
 
@@ -82,7 +79,7 @@ async function* decrypt(options, io) {
         if (AESKey.err) return yield new DecryptionTypes/* DecryptError */.G6(ErrorReasons.PayloadBroken, AESKey.val);
         if (iv.err) return yield new DecryptionTypes/* DecryptError */.G6(ErrorReasons.PayloadBroken, iv.val);
         // Not calling setPostCache here. It's public post and saving key is wasting storage space.
-        return yield* decryptWithPostAESKey(version, AESKey.val.key, iv.val, encrypted, options.onDecrypted);
+        return yield* decryptWithPostAESKey(version, AESKey.val, iv.val, encrypted, options.onDecrypted);
     } else if (encryption.type === 'E2E') {
         const { iv: _iv , ownersAESKeyEncrypted  } = encryption;
         if (_iv.err) return yield new DecryptionTypes/* DecryptError */.G6(ErrorReasons.PayloadBroken, _iv.val);
@@ -190,9 +187,9 @@ async function* decryptByECDH(version, io, possiblePostKeyIterator, ecdhProvider
             )
         );
         for (const [derivedKey, derivedKeyNewIV] of derivedKeys){
-            const possiblePostKey = await (0,src/* andThenAsync */.ps)((0,utils/* decryptWithAES */.PB)(payload/* AESAlgorithmEnum.A256GCM */.$y.A256GCM, derivedKey, derivedKeyNewIV, encryptedPostKey), postKeyDecoder);
+            const possiblePostKey = await (0,src/* andThenAsync */.ps)((0,utils/* decryptWithAES */.PB)(derivedKey, derivedKeyNewIV, encryptedPostKey), postKeyDecoder);
             if (possiblePostKey.err) continue;
-            const decrypted = await (0,utils/* decryptWithAES */.PB)(payload/* AESAlgorithmEnum.A256GCM */.$y.A256GCM, possiblePostKey.val, iv, encrypted);
+            const decrypted = await (0,utils/* decryptWithAES */.PB)(possiblePostKey.val, iv, encrypted);
             if (decrypted.err) continue;
             io.setPostKeyCache(possiblePostKey.val).catch(()=>{});
             // If we'd able to decrypt the raw message, we will stop here.
@@ -203,7 +200,7 @@ async function* decryptByECDH(version, io, possiblePostKeyIterator, ecdhProvider
     return void (yield new DecryptionTypes/* DecryptError */.G6(ErrorReasons.NotShareTarget, undefined));
 }
 async function* decryptWithPostAESKey(version, postAESKey, iv, encrypted, report) {
-    const { err , val  } = await (0,utils/* decryptWithAES */.PB)(payload/* AESAlgorithmEnum.A256GCM */.$y.A256GCM, postAESKey, iv, encrypted);
+    const { err , val  } = await (0,utils/* decryptWithAES */.PB)(postAESKey, iv, encrypted);
     if (err) return yield new DecryptionTypes/* DecryptError */.G6(ErrorReasons.DecryptFailed, val);
     return yield* parseTypedMessage(version, val, report);
 }
@@ -223,7 +220,7 @@ function importAESKeyFromJWKFromTextEncoder(aes_raw) {
         const aes_text = new TextDecoder().decode(aes_raw);
         const aes_jwk = JSON.parse(aes_text);
         if (!aes_jwk.key_ops.includes('decrypt')) aes_jwk.key_ops.push('decrypt');
-        return (await utils/* importAESFromJWK.AES_GCM_256 */.Bs.AES_GCM_256(aes_jwk)).unwrap();
+        return (await (0,utils/* importAES */.yj)(aes_jwk)).unwrap();
     });
 }
 function importAESKeyFromRaw(aes_raw) {
@@ -911,6 +908,28 @@ function useObservableValues(map) {
         openDialog,
         closeDialog,
         setDialog: onUpdateByLocal
+    };
+}
+
+
+/***/ }),
+
+/***/ 1174:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Y_": () => (/* binding */ relativeRouteOf),
+/* harmony export */   "mZ": () => (/* reexport safe */ _PopupRoutes__WEBPACK_IMPORTED_MODULE_0__.m),
+/* harmony export */   "vq": () => (/* reexport safe */ _DashboardRoutes__WEBPACK_IMPORTED_MODULE_1__.v)
+/* harmony export */ });
+/* harmony import */ var _PopupRoutes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(57602);
+/* harmony import */ var _DashboardRoutes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(19854);
+
+
+function relativeRouteOf(parent) {
+    return (child)=>{
+        if (!child.startsWith(parent)) throw new Error();
+        return child.slice(parent.length).replace(/^\//, '');
     };
 }
 

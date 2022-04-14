@@ -57,9 +57,9 @@ function ThirdPartyRequestPermission(props) {
                 }
             }),
             /*#__PURE__*/ (0,jsx_runtime.jsx)("ul", {
-                children: props.permissions.map((x)=>/*#__PURE__*/ (0,jsx_runtime.jsx)("li", {
-                        children: types/* ThirdPartyPluginPermission */.V[x]
-                    }, x)
+                children: props.permissions.map((permission, key)=>/*#__PURE__*/ (0,jsx_runtime.jsx)("li", {
+                        children: types/* ThirdPartyPluginPermission */.V[permission]
+                    }, key)
                 )
             }),
             /*#__PURE__*/ (0,jsx_runtime.jsx)("button", {
