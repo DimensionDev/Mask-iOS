@@ -53,10 +53,12 @@ struct RedPacketConfirmView: View {
                     title: L10n.Plugins.Luckydrop.Confirm.share,
                     value: .plain(viewModel.share)
                 )
-                buildRow(
-                    title: L10n.Plugins.Luckydrop.Confirm.amountPerShare,
-                    value: .plain(viewModel.amountPerShare)
-                )
+                if viewModel.amountPerShare.isNotEmpty {
+                    buildRow(
+                        title: L10n.Plugins.Luckydrop.Confirm.amountPerShare,
+                        value: .plain(viewModel.amountPerShare)
+                    )
+                }
                 buildRow(
                     title: L10n.Plugins.Luckydrop.Confirm.totalAmount,
                     value: .token(
