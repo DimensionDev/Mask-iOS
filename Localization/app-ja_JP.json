@@ -137,6 +137,14 @@
             "camera_access": {
                 "title": "",
                 "description": ""
+            },
+            "only_scan_persona": {
+                "title": "",
+                "description": ""
+            },
+            "no_local_wallet_for_walletconnect": {
+                "title": "",
+                "description": ""
             }
         },
         "controls": {
@@ -779,6 +787,10 @@
                 "cloud_backup_password_hint": ""
             }
         },
+        "mask_scan": {
+            "scan_persona": "",
+            "scan_all": ""
+        },
         "wallet_connect": {
             "wallet_connect": "",
             "select_wallet": "",
@@ -788,7 +800,6 @@
             "no_wallets": "",
             "connecting": "",
             "connect_success": "",
-            "scan": "",
             "disconnect": "",
             "connection_fail": "",
             "could_not_switch_blockchain_network_title": "",
