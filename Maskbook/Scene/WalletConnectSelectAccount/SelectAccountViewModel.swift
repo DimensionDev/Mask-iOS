@@ -11,12 +11,20 @@ import CoreData
 import CoreDataStack
 import Foundation
 
-class WalletConnectSelectAccountViewModel {
+class SelectAccountViewModel {
+    enum FunctionType {
+        case editEnable
+        case selectWithWalletConnect
+        case selectWithoutWalletConnect
+    }
+    
     typealias NetworkItem = WalletListViewModel.CoinItem
     typealias WalletsItem = WalletListViewModel.WalletsItem
     typealias WalletWrapType = WalletListViewModel.WalletWrapType
 
-    var showWalletConnect: Bool
+    var type: FunctionType
+    
+    var isEditing = CurrentValueSubject<Bool, Never>(false)
     
     @InjectedProvider(\.userDefaultSettings)
     private var userSetting
@@ -64,8 +72,8 @@ class WalletConnectSelectAccountViewModel {
     var getAllBalanceCancellable: AnyCancellable?
     var disposeBag = Set<AnyCancellable>()
 
-    init() {
-        showWalletConnect = false
+    init(type: FunctionType) {
+        self.type = type
         Publishers.CombineLatest(
             selectNetworkSubject.dropFirst().eraseToAnyPublisher(),
             UserDefaultSettings.shared.defaultAccountAddressPublisher.eraseToAnyPublisher()
@@ -74,13 +82,13 @@ class WalletConnectSelectAccountViewModel {
         .sink { [weak self] _, _ in
             guard let self = self else { return }
             self.getAllBalance()
-            self.generateMenuItems(accounts: self.accountsPublisher.value)
+            self.generateWalletAccountItems(accounts: self.accountsPublisher.value)
         }
         .store(in: &disposeBag)
 
         accountsPublisher
             .sink { [weak self] in
-                self?.generateMenuItems(accounts: $0)
+                self?.generateWalletAccountItems(accounts: $0)
             }
             .store(in: &disposeBag)
     }
@@ -96,11 +104,11 @@ class WalletConnectSelectAccountViewModel {
     }
 }
 
-extension WalletConnectSelectAccountViewModel {
-    private func generateMenuItems(accounts: [Account]) {
+extension SelectAccountViewModel {
+    private func generateWalletAccountItems(accounts: [Account]) {
         let network = selectNetworkSubject.value
         let defaultAccountAddress = userSetting.defaultAccountAddress
-        let showWalletConnect = showWalletConnect
+        let showWalletConnect = showWalletConnect()
         let items = accounts
             .filter { account in
                 guard let chain = ChainType(rawValue: Int(account.chainId)) else { return false }
@@ -129,5 +137,16 @@ extension WalletConnectSelectAccountViewModel {
                 return WalletsItem.account(data: data)
             }
         accountListSubject.value = items
+    }
+    
+    private func showWalletConnect() -> Bool {
+        switch type {
+        case .editEnable:
+            return true
+        case .selectWithWalletConnect:
+            return true
+        case .selectWithoutWalletConnect:
+            return false
+        }
     }
 }

@@ -9,22 +9,6 @@
 import UIKit
 
 extension UIColor {
-    static let separator: UIColor = ._systemGray
-}
-
-// MARK: - System
-// swiftlint:disable identifier_name no_underscore_in_identifier
-extension UIColor {
-    static let _label: UIColor = {
-        let _label = UIColor.black
-
-        if #available(iOS 13, *) {
-            return .label
-        } else {
-            return _label
-        }
-    }()
-
     static let _secondaryLabel: UIColor = {
         let _secondaryLabel = UIColor(displayP3Red: 60.0 / 255.0, green: 60.0 / 255.0, blue: 67.0 / 255.0, alpha: 0.6)
 
@@ -32,92 +16,6 @@ extension UIColor {
             return .secondaryLabel
         } else {
             return _secondaryLabel
-        }
-    }()
-
-    static let _tertiaryLabel: UIColor = {
-        let _tertiaryLabel = UIColor(displayP3Red: 60.0 / 255.0, green: 60.0 / 255.0, blue: 67.0 / 255.0, alpha: 0.3)
-
-        if #available(iOS 13, *) {
-            return .tertiaryLabel
-        } else {
-            return _tertiaryLabel
-        }
-    }()
-}
-
-extension UIColor {
-    static let _systemNavbarBg = UIColor(displayP3Red: 28.0 / 255.0, green: 104.0 / 255.0, blue: 243.0 / 255.0, alpha: 1.0)
-
-    static let _systemGray: UIColor = {
-        let _systemGray = UIColor(displayP3Red: 142.0 / 255.0, green: 142.0 / 255.0, blue: 147.0 / 255.0, alpha: 1.0)
-
-        if #available(iOS 13, *) {
-            return .systemGray
-        } else {
-            return _systemGray
-        }
-    }()
-
-    static let _systemGray2: UIColor = {
-        let _systemGray2 = UIColor(displayP3Red: 174.0 / 255.0, green: 174.0 / 255.0, blue: 178.0 / 255.0, alpha: 1.0)
-
-        if #available(iOS 13, *) {
-            return .systemGray2
-        } else {
-            return _systemGray2
-        }
-    }()
-
-    static let _systemGray3: UIColor = {
-        let _systemGray3 = UIColor(displayP3Red: 199.0 / 255.0, green: 199.0 / 255.0, blue: 204.0 / 255.0, alpha: 1.0)
-
-        if #available(iOS 13, *) {
-            return .systemGray3
-        } else {
-            return _systemGray3
-        }
-    }()
-
-    static let _systemGray4: UIColor = {
-        let _systemGray4 = UIColor(displayP3Red: 209.0 / 255.0, green: 209.0 / 255.0, blue: 214.0 / 255.0, alpha: 1.0)
-
-        if #available(iOS 13, *) {
-            return .systemGray4
-        } else {
-            return _systemGray4
-        }
-    }()
-
-    static let _systemGray5: UIColor = {
-        let _systemGray5 = UIColor(displayP3Red: 229.0 / 255.0, green: 229.0 / 255.0, blue: 234.0 / 255.0, alpha: 1.0)
-
-        if #available(iOS 13, *) {
-            return .systemGray5
-        } else {
-            return _systemGray5
-        }
-    }()
-
-    static let _systemGray6: UIColor = {
-        let _systemGray6 = UIColor(displayP3Red: 242.0 / 255.0, green: 242.0 / 255.0, blue: 247.0 / 255.0, alpha: 1.0)
-
-        if #available(iOS 13, *) {
-            return .systemGray6
-        } else {
-            return _systemGray6
-        }
-    }()
-}
-
-extension UIColor {
-    static let _systemBackground: UIColor = {
-        let _systemBackground = UIColor.white
-
-        if #available(iOS 13, *) {
-            return .systemBackground
-        } else {
-            return _systemBackground
         }
     }()
 
@@ -133,34 +31,75 @@ extension UIColor {
 }
 
 extension UIColor {
-    static let _systemGroupedBackground: UIColor = {
-        let _systemGroupedBackground = UIColor(displayP3Red: 242.0 / 255.0, green: 242.0 / 255.0, blue: 247.0 / 255.0, alpha: 1.0)
-
-        if #available(iOS 13, *) {
-            return .systemGroupedBackground
-        } else {
-            return _systemGroupedBackground
-        }
-    }()
-
-    static let _secondarySystemGroupedBackground: UIColor = {
-        let _secondarySystemGroupedBackground = UIColor.white
-
-        if #available(iOS 13, *) {
-            return .secondarySystemGroupedBackground
-        } else {
-            return _secondarySystemGroupedBackground
-        }
-    }()
-
-    static let _tertiarySystemGroupedBackground: UIColor = {
-        let _tertiarySystemGroupedBackground = UIColor(displayP3Red: 242.0 / 255.0, green: 242.0 / 255.0, blue: 247.0 / 255.0, alpha: 1.0)
-
-        if #available(iOS 13, *) {
-            return .tertiarySystemGroupedBackground
-        } else {
-            return _tertiarySystemGroupedBackground
-        }
-    }()
+    static let walletColors = [
+        Asset.Colors.WalletColor.color1.color,
+        Asset.Colors.WalletColor.color2.color,
+        Asset.Colors.WalletColor.color3.color,
+        Asset.Colors.WalletColor.color4.color,
+        Asset.Colors.WalletColor.color5.color,
+        Asset.Colors.WalletColor.color6.color
+    ]
+    func walletRandomColorHex() -> String? {
+        let index = Int.random(in: 1 ... 6)
+        return Self.walletColors[index].toHex
+    }
 }
-// swiftlint:enble identifier_name
+
+extension UIColor {
+    // MARK: - Initialization
+
+    convenience init?(hex: String) {
+        var hexNormalized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
+        hexNormalized = hexNormalized.replacingOccurrences(of: "#", with: "")
+
+        // Helpers
+        var rgb: UInt64 = 0
+        var r: CGFloat = 0.0
+        var g: CGFloat = 0.0
+        var b: CGFloat = 0.0
+        var a: CGFloat = 1.0
+        let length = hexNormalized.count
+
+        // Create Scanner
+        Scanner(string: hexNormalized).scanHexInt64(&rgb)
+
+        if length == 6 {
+            r = CGFloat((rgb & 0xFF0000) >> 16) / 255.0
+            g = CGFloat((rgb & 0x00FF00) >> 8) / 255.0
+            b = CGFloat(rgb & 0x0000FF) / 255.0
+
+        } else if length == 8 {
+            r = CGFloat((rgb & 0xFF000000) >> 24) / 255.0
+            g = CGFloat((rgb & 0x00FF0000) >> 16) / 255.0
+            b = CGFloat((rgb & 0x0000FF00) >> 8) / 255.0
+            a = CGFloat(rgb & 0x000000FF) / 255.0
+
+        } else {
+            return nil
+        }
+
+        self.init(red: r, green: g, blue: b, alpha: a)
+    }
+
+    var toHex: String? {
+        // Extract Components
+        guard let components = cgColor.components, components.count >= 3 else {
+            return nil
+        }
+
+        // Helpers
+        let r = Float(components[0])
+        let g = Float(components[1])
+        let b = Float(components[2])
+        var a = Float(1.0)
+
+        if components.count >= 4 {
+            a = Float(components[3])
+        }
+
+        // Create Hex String
+        let hex = String(format: "%02lX%02lX%02lX%02lX", lroundf(r * 255), lroundf(g * 255), lroundf(b * 255), lroundf(a * 255))
+
+        return hex
+    }
+}

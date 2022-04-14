@@ -385,7 +385,8 @@ extension Coordinator {
             return viewController
 
         case .walletList:
-            return WalletListViewController()
+            let viewModel = SelectAccountViewModel(type: .editEnable)
+            return SelectAccountViewController(viewModel: viewModel)
 
         case let .selectItemViewController(viewModel):
             return SelectItemViewController(viewModel: viewModel)
@@ -703,11 +704,12 @@ extension Coordinator {
             return WalletConnectDappListViewController()
             
         case .walletConnectSelectAccount:
-            return WalletConnectSelectAccountViewController()
+            let viewModel = SelectAccountViewModel(type: .selectWithoutWalletConnect)
+            return SelectAccountViewController(viewModel: viewModel)
             
         case .redPackageSelectAccount:
-            let vc = WalletConnectSelectAccountViewController()
-            vc.viewModel.showWalletConnect = true
+            let viewModel = SelectAccountViewModel(type: .selectWithWalletConnect)
+            let vc = SelectAccountViewController(viewModel: viewModel)
             return vc
             
         case .setupEmail:

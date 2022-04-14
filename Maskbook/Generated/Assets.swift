@@ -142,6 +142,14 @@ internal enum Asset {
       internal static let second = ColorAsset(name: "Colors/Twitter/second")
       internal static let strong = ColorAsset(name: "Colors/Twitter/strong")
     }
+    internal enum WalletColor {
+      internal static let color1 = ColorAsset(name: "Colors/WalletColor/Color1")
+      internal static let color2 = ColorAsset(name: "Colors/WalletColor/Color2")
+      internal static let color3 = ColorAsset(name: "Colors/WalletColor/Color3")
+      internal static let color4 = ColorAsset(name: "Colors/WalletColor/Color4")
+      internal static let color5 = ColorAsset(name: "Colors/WalletColor/Color5")
+      internal static let color6 = ColorAsset(name: "Colors/WalletColor/Color6")
+    }
     internal enum Public {
       internal static let blue = ColorAsset(name: "Colors/public/Blue")
       internal static let info = ColorAsset(name: "Colors/public/Info")

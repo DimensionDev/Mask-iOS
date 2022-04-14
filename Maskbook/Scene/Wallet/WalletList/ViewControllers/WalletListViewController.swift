@@ -104,7 +104,7 @@ class WalletListViewController: UIViewController {
                 switch item {
                 case let .account(data):
                     let cell: WalletListWalletTableViewCell = tableView.dequeCell(at: indexPath)
-                    cell.update(data: data)
+//                    cell.update(data: data)
                     cell.delegate = self
                     return cell
 

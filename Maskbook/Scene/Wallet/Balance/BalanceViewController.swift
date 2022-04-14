@@ -216,20 +216,22 @@ class BalanceViewController: BaseViewController {
     }
     
     private func showWalletListModal() {
-        Coordinator.main.present(scene: .walletList, transition: .detail(animated: true))
+        Coordinator.main.present(scene: .walletList, transition: .panModel(animated: true))
     }
     
     private func scanAction() {
-        Coordinator.main.present(scene: .maskScan(type: .common), transition: .modal(animated: true))
+//        Coordinator.main.present(scene: .maskScan(type: .common), transition: .modal(animated: true))
+        Coordinator.main.present(scene: .walletConnectSelectAccount, transition: .panModel(animated: true))
     }
 }
 
 extension BalanceViewController: BalanceAccountCellDelegate {
     func balanceAccountCell(cell: BalanceAccountCell, button: UIButton) {
-        guard let account = WalletCoreService.shared.getCurrentAccount() else { return }
-        Coordinator.main.present(
-            scene: .walletDetail(account: account, sourceView: button),
-            transition: .panModel(animated: true))
+//        guard let account = WalletCoreService.shared.getCurrentAccount() else { return }
+//        Coordinator.main.present(
+//            scene: .walletDetail(account: account, sourceView: button),
+//            transition: .panModel(animated: true))
+        Coordinator.main.present(scene: .redPackageSelectAccount, transition: .panModel(animated: true))
     }
 }
 
