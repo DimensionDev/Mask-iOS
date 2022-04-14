@@ -1638,13 +1638,15 @@ const PluginHost = {
         (0,shared_base_src/* createI18NBundle */.C9)(plugin, resource)(shared_base_src/* i18NextInstance */.BV);
     },
     createContext: (pluginID, signal)=>{
+        const currentPersonaSub = (0,shared_base_src/* createSubscriptionFromAsync */.Fd)(API/* Services.Settings.getCurrentPersonaIdentifier */.K9.Settings.getCurrentPersonaIdentifier, undefined, API/* Messages.events.currentPersonaIdentifier.on */.Vm.events.currentPersonaIdentifier.on, signal);
         return {
             createKVStorage (type, defaultValues) {
                 if (type === 'memory') return InMemoryStorages.Plugin.createSubScope(pluginID, defaultValues, signal);
                 else return PersistentStorages.Plugin.createSubScope(pluginID, defaultValues, signal);
             },
             personaSign: API/* Services.Identity.signWithPersona */.K9.Identity.signWithPersona,
-            walletSign: API/* Services.Ethereum.personalSign */.K9.Ethereum.personalSign
+            walletSign: API/* Services.Ethereum.personalSign */.K9.Ethereum.personalSign,
+            currentPersona: currentPersonaSub
         };
     }
 };

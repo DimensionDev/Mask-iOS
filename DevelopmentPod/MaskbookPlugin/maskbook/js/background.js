@@ -45,8 +45,6 @@ var base = __webpack_require__(81148);
 var src = __webpack_require__(78144);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/ts-results@3.3.0/node_modules/ts-results/esm/index.js + 3 modules
 var ts_results_esm = __webpack_require__(48160);
-// EXTERNAL MODULE: ../encryption/src/payload/index.ts + 3 modules
-var payload = __webpack_require__(79807);
 // EXTERNAL MODULE: ../encryption/src/utils/index.ts + 1 modules
 var utils = __webpack_require__(62435);
 // EXTERNAL MODULE: ../encryption/src/encryption/DecryptionTypes.ts
@@ -54,7 +52,6 @@ var DecryptionTypes = __webpack_require__(24663);
 // EXTERNAL MODULE: ../encryption/src/encryption/v38-ecdh.ts
 var v38_ecdh = __webpack_require__(65096);
 ;// CONCATENATED MODULE: ../encryption/src/encryption/Decryption.ts
-
 
 
 
@@ -83,7 +80,7 @@ async function* decrypt(options, io) {
         if (AESKey.err) return yield new DecryptionTypes/* DecryptError */.G6(ErrorReasons.PayloadBroken, AESKey.val);
         if (iv.err) return yield new DecryptionTypes/* DecryptError */.G6(ErrorReasons.PayloadBroken, iv.val);
         // Not calling setPostCache here. It's public post and saving key is wasting storage space.
-        return yield* decryptWithPostAESKey(version, AESKey.val.key, iv.val, encrypted, options.onDecrypted);
+        return yield* decryptWithPostAESKey(version, AESKey.val, iv.val, encrypted, options.onDecrypted);
     } else if (encryption.type === 'E2E') {
         const { iv: _iv , ownersAESKeyEncrypted  } = encryption;
         if (_iv.err) return yield new DecryptionTypes/* DecryptError */.G6(ErrorReasons.PayloadBroken, _iv.val);
@@ -191,9 +188,9 @@ async function* decryptByECDH(version, io, possiblePostKeyIterator, ecdhProvider
             )
         );
         for (const [derivedKey, derivedKeyNewIV] of derivedKeys){
-            const possiblePostKey = await (0,src/* andThenAsync */.ps)((0,utils/* decryptWithAES */.PB)(payload/* AESAlgorithmEnum.A256GCM */.$y.A256GCM, derivedKey, derivedKeyNewIV, encryptedPostKey), postKeyDecoder);
+            const possiblePostKey = await (0,src/* andThenAsync */.ps)((0,utils/* decryptWithAES */.PB)(derivedKey, derivedKeyNewIV, encryptedPostKey), postKeyDecoder);
             if (possiblePostKey.err) continue;
-            const decrypted = await (0,utils/* decryptWithAES */.PB)(payload/* AESAlgorithmEnum.A256GCM */.$y.A256GCM, possiblePostKey.val, iv, encrypted);
+            const decrypted = await (0,utils/* decryptWithAES */.PB)(possiblePostKey.val, iv, encrypted);
             if (decrypted.err) continue;
             io.setPostKeyCache(possiblePostKey.val).catch(()=>{});
             // If we'd able to decrypt the raw message, we will stop here.
@@ -204,7 +201,7 @@ async function* decryptByECDH(version, io, possiblePostKeyIterator, ecdhProvider
     return void (yield new DecryptionTypes/* DecryptError */.G6(ErrorReasons.NotShareTarget, undefined));
 }
 async function* decryptWithPostAESKey(version, postAESKey, iv, encrypted, report) {
-    const { err , val  } = await (0,utils/* decryptWithAES */.PB)(payload/* AESAlgorithmEnum.A256GCM */.$y.A256GCM, postAESKey, iv, encrypted);
+    const { err , val  } = await (0,utils/* decryptWithAES */.PB)(postAESKey, iv, encrypted);
     if (err) return yield new DecryptionTypes/* DecryptError */.G6(ErrorReasons.DecryptFailed, val);
     return yield* parseTypedMessage(version, val, report);
 }
@@ -224,7 +221,7 @@ function importAESKeyFromJWKFromTextEncoder(aes_raw) {
         const aes_text = new TextDecoder().decode(aes_raw);
         const aes_jwk = JSON.parse(aes_text);
         if (!aes_jwk.key_ops.includes('decrypt')) aes_jwk.key_ops.push('decrypt');
-        return (await utils/* importAESFromJWK.AES_GCM_256 */.Bs.AES_GCM_256(aes_jwk)).unwrap();
+        return (await (0,utils/* importAES */.yj)(aes_jwk)).unwrap();
     });
 }
 function importAESKeyFromRaw(aes_raw) {
@@ -907,7 +904,7 @@ if (true) {
 
 /***/ }),
 
-/***/ 91074:
+/***/ 6257:
 /***/ ((__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 
 
@@ -957,6 +954,543 @@ __webpack_require__.d(NotificationsToMobile_namespaceObject, {
   "default": () => (NotificationsToMobile)
 });
 
+// EXTERNAL MODULE: ../../node_modules/.pnpm/elliptic@6.5.4/node_modules/elliptic/lib/elliptic.js
+var elliptic = __webpack_require__(75367);
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@dimensiondev+secp256k1-webcrypto@1.0.0-20220412114204-be816df/node_modules/@dimensiondev/secp256k1-webcrypto/dist/key.js
+/** @internal */
+function createKeyMaterial(key, type, name, usage, extractable) {
+    return {
+        __proto__: null,
+        name,
+        type,
+        key,
+        extractable: !!extractable,
+        usage,
+    };
+}
+/** @internal */
+function usageToFlag(name, usageList, DOMException) {
+    let flag = 0 /* KeyUsages.None */;
+    for (const usage of usageList) {
+        if (name === 'ECDH') {
+            if (usage === 'deriveBits') {
+                flag |= 1 /* KeyUsages.deriveBits */;
+                continue;
+            }
+            else if (usage === 'deriveKey') {
+                flag |= 2 /* KeyUsages.deriveKey */;
+                continue;
+            }
+        }
+        else if (name === 'ECDSA') {
+            if (usage === 'sign') {
+                flag |= 4 /* KeyUsages.sign */;
+                continue;
+            }
+            else if (usage === 'verify') {
+                flag |= 8 /* KeyUsages.verify */;
+                continue;
+            }
+        }
+        throw new DOMException('Cannot create a key using the specified key usages.', 'SyntaxError');
+    }
+    if (flag === 0 /* KeyUsages.None */) {
+        throw new DOMException('Usages cannot be empty when creating a key.', 'SyntaxError');
+    }
+    // if (name === 'ECDSA' && flag !== (KeyUsages.sign | KeyUsages.verify)) {
+    //     throw new DOMException('Cannot create a key using the specified key usages.', 'SyntaxError')
+    // }
+    return flag;
+}
+/** @internal */
+function usageFromFlag(KeyMaterial) {
+    const { usage, name, type } = KeyMaterial;
+    if (name === 'ECDH') {
+        const result = [];
+        if (type === 'private')
+            return [];
+        if (usage & 2 /* KeyUsages.deriveKey */)
+            result.push('deriveKey');
+        if (usage & 1 /* KeyUsages.deriveBits */)
+            result.push('deriveBits');
+        return result;
+    }
+    else {
+        if (type === 'private')
+            return ['sign'];
+        return ['verify'];
+    }
+}
+//# sourceMappingURL=key.js.map
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@dimensiondev+secp256k1-webcrypto@1.0.0-20220412114204-be816df/node_modules/@dimensiondev/secp256k1-webcrypto/dist/memory.js
+
+/** @internal */
+function createMemory(nativeCryptoKey) {
+    var _a;
+    const nativeCryptoKeyGetter = nativeCryptoKey
+        ? (_a = Object.getOwnPropertyDescriptor(nativeCryptoKey.prototype, 'type')) === null || _a === void 0 ? void 0 : _a.get
+        : undefined;
+    const shimKeys = new WeakMap();
+    class CryptoKey {
+        constructor() {
+            throw new TypeError('Illegal constructor');
+        }
+        [Symbol.hasInstance](instance) {
+            if (shimKeys.has(instance))
+                return true;
+            if (isNativeCryptoKey(instance))
+                return true;
+            return false;
+        }
+        get algorithm() {
+            const { name } = get(this);
+            return { name, namedCurve: 'K-256' };
+        }
+        get extractable() {
+            return get(this).extractable;
+        }
+        get type() {
+            return get(this).type;
+        }
+        get usages() {
+            return usageFromFlag(get(this));
+        }
+    }
+    Object.defineProperty(CryptoKey, Symbol.toStringTag, { configurable: true, value: 'CryptoKey' });
+    function has(object) {
+        return shimKeys.has(object);
+    }
+    function get(instance) {
+        if (!shimKeys.has(instance))
+            throw new TypeError('Illegal invocation');
+        return shimKeys.get(instance);
+    }
+    function isNativeCryptoKey(instance) {
+        if (!nativeCryptoKeyGetter)
+            return false;
+        try {
+            nativeCryptoKeyGetter.call(instance);
+            return true;
+        }
+        catch (_a) {
+            return false;
+        }
+    }
+    function newKey(material) {
+        const key = Object.create(CryptoKey.prototype);
+        shimKeys.set(key, material);
+        return key;
+    }
+    return { has, get, CryptoKey, newKey };
+}
+//# sourceMappingURL=memory.js.map
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@dimensiondev+secp256k1-webcrypto@1.0.0-20220412114204-be816df/node_modules/@dimensiondev/secp256k1-webcrypto/dist/helper.js
+/** @internal */
+function isK256Alg(alg, acceptKind) {
+    try {
+        if (typeof alg !== 'object')
+            return;
+        if (alg === null)
+            return;
+        const { name, namedCurve } = alg;
+        if (namedCurve !== 'K-256')
+            return;
+        if (acceptKind === 'any') {
+            if (name === 'ECDH' || name === 'ECDSA')
+                return name;
+        }
+        else {
+            if (name === acceptKind)
+                return name;
+        }
+        return;
+    }
+    catch (_a) {
+        return;
+    }
+}
+/** @internal */
+function getHashAlg(alg) {
+    try {
+        const { name } = alg.hash;
+        if (name === 'SHA-256')
+            return name;
+        if (name === 'SHA-384')
+            return name;
+        if (name === 'SHA-512')
+            return name;
+        return;
+    }
+    catch (_a) {
+        return;
+    }
+}
+// https://github.com/PeculiarVentures/webcrypto-liner/blob/3a97b53b7f187f776ea5b23889e03c3f54654811/src/mechs/ec/crypto.ts#L56
+/** @internal */
+function b2a(buffer) {
+    const buf = new Uint8Array(buffer);
+    const res = [];
+    for (let i = 0; i < buf.length; i++) {
+        res.push(buf[i]);
+    }
+    return res;
+}
+/** @internal */
+function concat(...buf) {
+    const res = new Uint8Array(buf.map((item) => item.length).reduce((prev, cur) => prev + cur));
+    let offset = 0;
+    buf.forEach((item, index) => {
+        for (let i = 0; i < item.length; i++) {
+            res[offset + i] = item[i];
+        }
+        offset += item.length;
+    });
+    return res;
+}
+/** @internal */
+function hex2buffer(hexString, padded) {
+    if (hexString.length % 2) {
+        hexString = '0' + hexString;
+    }
+    let res = new Uint8Array(hexString.length / 2);
+    for (let i = 0; i < hexString.length; i++) {
+        const c = hexString.slice(i, ++i + 1);
+        res[(i - 1) / 2] = parseInt(c, 16);
+    }
+    // BN padding
+    if (padded) {
+        let len = res.length;
+        len = len > 32 ? (len > 48 ? 66 : 48) : 32;
+        if (res.length < len) {
+            res = concat(new Uint8Array(len - res.length), res);
+        }
+    }
+    return res;
+}
+/** @internal */
+function buffer2hex(buffer, padded) {
+    let res = '';
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < buffer.length; i++) {
+        const char = buffer[i].toString(16);
+        res += char.length % 2 ? '0' + char : char;
+    }
+    // BN padding
+    if (padded) {
+        let len = buffer.length;
+        len = len > 32 ? (len > 48 ? 66 : 48) : 32;
+        if (res.length / 2 < len) {
+            res = new Array(len * 2 - res.length + 1).join('0') + res;
+        }
+    }
+    return res;
+}
+//# sourceMappingURL=helper.js.map
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@dimensiondev+secp256k1-webcrypto@1.0.0-20220412114204-be816df/node_modules/@dimensiondev/secp256k1-webcrypto/dist/ec/sign.js
+
+function signK256(key, hash) {
+    if (key.type !== 'private')
+        throw new Error();
+    if (key.name !== 'ECDSA')
+        throw new Error();
+    const array = b2a(hash);
+    const sig = key.key.sign(array);
+    const hexSignature = buffer2hex(sig.r.toArray(), true) + buffer2hex(sig.s.toArray(), true);
+    return hex2buffer(hexSignature).buffer;
+}
+function verifyK256(key, hash, signature) {
+    if (key.name !== 'ECDSA')
+        throw new Error();
+    const sig = {
+        r: new Uint8Array(signature.slice(0, signature.byteLength / 2)),
+        s: new Uint8Array(signature.slice(signature.byteLength / 2)),
+    };
+    const array = b2a(hash);
+    return key.key.verify(array, sig);
+}
+//# sourceMappingURL=sign.js.map
+// EXTERNAL MODULE: ../../node_modules/.pnpm/pvtsutils@1.2.2/node_modules/pvtsutils/build/index.js
+var build = __webpack_require__(51765);
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@dimensiondev+secp256k1-webcrypto@1.0.0-20220412114204-be816df/node_modules/@dimensiondev/secp256k1-webcrypto/dist/ec/key.js
+
+
+
+
+const k256 = new elliptic.ec('secp256k1');
+/** @internal */
+function importK256(method, name, data, extractable, usage, DOMException) {
+    if (method === 'jwk')
+        return importK256JWK(name, data, extractable, usage, DOMException);
+    return importK256Raw(name, new Uint8Array(data), extractable, usage);
+}
+/** @internal */
+function exportK256(format, key) {
+    if (format === 'jwk')
+        return exportK256JWK(key);
+    return exportK256Raw(key);
+}
+/** @internal */
+function generateK256Pair(name, extractable, usageList, DOMException) {
+    const usage = usageToFlag(name, usageList, DOMException);
+    const key = k256.genKeyPair();
+    return {
+        pub: createKeyMaterial(key, 'public', name, usage, extractable),
+        priv: createKeyMaterial(key, 'private', name, usage, extractable),
+    };
+}
+// !!! raw format can never store private key.
+function importK256Raw(name, buffer, extractable, usage) {
+    const key = k256.keyFromPublic(new Uint8Array(buffer));
+    return createKeyMaterial(key, 'public', name, usage, extractable);
+}
+function exportK256Raw(key) {
+    if (!key.extractable)
+        throw new DOMException('key is not extractable', 'InvalidAccessError');
+    return new Uint8Array(key.key.getPublic('array')).buffer;
+}
+function importK256JWK(name, jwk, extractable, usage, DOMException) {
+    //#region verify
+    const { d, x, y, crv, kty } = jwk;
+    const key_ops = Array.from(jwk.key_ops || []);
+    if (kty !== 'EC')
+        throw new DOMException(`The required JWK member "kty" was missing`, 'DataError');
+    if (crv !== 'K-256')
+        throw new DOMException(`The required JWK member "crv" was missing`, 'DataError');
+    if (!x)
+        throw new DOMException(`The required JWK member "x" was missing`, 'DataError');
+    if (!y)
+        throw new DOMException(`The required JWK member "y" was missing`, 'DataError');
+    let isValidKeyUsage = true;
+    if (usage & 4 /* KeyUsages.sign */)
+        if (!key_ops.includes('sign'))
+            isValidKeyUsage = false;
+    if (usage & 8 /* KeyUsages.verify */)
+        if (!key_ops.includes('verify'))
+            isValidKeyUsage = false;
+    if (!isValidKeyUsage)
+        throw new DOMException('The JWK "key_ops" member was inconsistent with that specified by the Web Crypto call. The JWK usage must be a superset of those requested', 'DataError');
+    //#endregion
+    // 4 is the point format.
+    const point = concat([4], new Uint8Array(build.Convert.FromBase64Url(x)), new Uint8Array(build.Convert.FromBase64Url(y)));
+    const priv = d ? build.Convert.FromBase64Url(d) : undefined;
+    let ecKey;
+    if (priv)
+        ecKey = k256.keyFromPrivate(new Uint8Array(priv));
+    else
+        ecKey = k256.keyFromPublic(point);
+    return createKeyMaterial(ecKey, d ? 'private' : 'public', name, usage, extractable);
+}
+function exportK256JWK(key) {
+    if (!key.extractable)
+        throw new DOMException('key is not extractable', 'InvalidAccessError');
+    // ignore first '04'
+    const hexPub = key.key.getPublic('hex').slice(2);
+    const hexX = hexPub.slice(0, hexPub.length / 2);
+    const hexY = hexPub.slice(hexPub.length / 2, hexPub.length);
+    if (key.type === 'public') {
+        // public
+        const jwk = {
+            crv: 'K-256',
+            ext: true,
+            x: build.Convert.ToBase64Url(hex2buffer(hexX)),
+            y: build.Convert.ToBase64Url(hex2buffer(hexY)),
+            key_ops: usageFromFlag(key),
+            kty: 'EC',
+        };
+        return jwk;
+    }
+    else {
+        const jwk = {
+            crv: 'K-256',
+            ext: true,
+            d: build.Convert.ToBase64Url(hex2buffer(key.key.getPrivate('hex'))),
+            x: build.Convert.ToBase64Url(hex2buffer(hexX)),
+            y: build.Convert.ToBase64Url(hex2buffer(hexY)),
+            key_ops: usageFromFlag(key),
+            kty: 'EC',
+        };
+        return jwk;
+    }
+}
+//# sourceMappingURL=key.js.map
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@dimensiondev+secp256k1-webcrypto@1.0.0-20220412114204-be816df/node_modules/@dimensiondev/secp256k1-webcrypto/dist/ec/derive.js
+
+/** @internal */
+function deriveBitsK256(pub, priv, length) {
+    const derived = priv.key.derive(pub.key.getPublic());
+    let array = new Uint8Array(derived.toArray());
+    // Padding
+    let len = array.length;
+    len = len > 32 ? (len > 48 ? 66 : 48) : 32;
+    if (array.length < len) {
+        array = concat(new Uint8Array(len - array.length), array);
+    }
+    const buf = array.slice(0, length / 8).buffer;
+    return buf;
+}
+//# sourceMappingURL=derive.js.map
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@dimensiondev+secp256k1-webcrypto@1.0.0-20220412114204-be816df/node_modules/@dimensiondev/secp256k1-webcrypto/dist/core.js
+
+
+
+
+
+
+
+function createCrypto(nativeCrypto, nativeCryptoKey, DOMException) {
+    const [shimSubtle, SubtleCrypto, CryptoKey] = createSubtleClass(nativeCrypto, nativeCryptoKey, DOMException);
+    const [shimCrypto, Crypto] = createCryptoClass(nativeCrypto, shimSubtle);
+    function polyfill() {
+        Object.defineProperties(globalThis, {
+            // classes
+            Crypto: { value: Crypto, configurable: true, writable: true },
+            SubtleCrypto: { value: SubtleCrypto, configurable: true, writable: true },
+            CryptoKey: { value: CryptoKey, configurable: true, writable: true },
+            // instance
+            crypto: { value: shimCrypto, configurable: true, writable: true },
+        });
+    }
+    return [shimCrypto, { Crypto, CryptoKey, SubtleCrypto }, polyfill];
+}
+function createSubtleClass(nativeCrypto, nativeCryptoKey, DOMException) {
+    const nativeSubtle = nativeCrypto.subtle;
+    const { get, has, CryptoKey, newKey } = createMemory(nativeCryptoKey);
+    class SubtleCrypto {
+        constructor() {
+            throw new TypeError('Illegal constructor');
+        }
+    }
+    const subtleCryptoPrototype = {
+        //#region Not Wrapping methods
+        decrypt(algorithm, key, data) {
+            return nativeSubtle.decrypt(algorithm, key, data);
+        },
+        digest(algorithm, data) {
+            return nativeSubtle.digest(algorithm, data);
+        },
+        encrypt(algorithm, key, data) {
+            return nativeSubtle.encrypt(algorithm, key, data);
+        },
+        unwrapKey(format, wrappedKey, unwrappingKey, unwrapAlgorithm, unwrappedKeyAlgorithm, extractable, keyUsages) {
+            return nativeSubtle.unwrapKey(format, wrappedKey, unwrappingKey, unwrapAlgorithm, unwrappedKeyAlgorithm, extractable, keyUsages);
+        },
+        async wrapKey(format, key, wrappingKey, wrapAlgorithm) {
+            if (has(key)) {
+                throw new DOMException(`Failed to execute 'wrapKey' on 'SubtleCrypto': Algorithm: K-256 key does not support wrapping.`, 'NotSupportedError');
+            }
+            return nativeSubtle.wrapKey(format, key, wrappingKey, wrapAlgorithm);
+        },
+        //#endregion
+        //#region Derive
+        async deriveBits(algorithm, baseKey, length) {
+            if (has(baseKey)) {
+                return deriveBitsK256(get(algorithm.public), get(baseKey), length);
+            }
+            return nativeSubtle.deriveBits(algorithm, baseKey, length);
+        },
+        async deriveKey(algorithm, baseKey, derivedKeyType, extractable, keyUsages) {
+            if (has(baseKey)) {
+                const alg = algorithm;
+                const aes = derivedKeyType;
+                const bits = deriveBitsK256(get(alg.public), get(baseKey), aes.length);
+                return nativeSubtle.importKey('raw', bits, derivedKeyType, extractable, keyUsages);
+            }
+            return nativeSubtle.deriveKey(algorithm, baseKey, derivedKeyType, extractable, keyUsages);
+        },
+        //#endregion
+        //#region Sign & Verify
+        async sign(algorithm, key, data) {
+            if (has(key)) {
+                const hash = getHashAlg(algorithm);
+                if (!hash) {
+                    throw new DOMException(`Failed to execute 'sign' on 'SubtleCrypto': EcdsaParams: hash: Algorithm: Unrecognized name`, 'NotSupportedError');
+                }
+                const hashed = await nativeSubtle.digest(hash, data);
+                return signK256(get(key), hashed);
+            }
+            return nativeSubtle.sign(algorithm, key, data);
+        },
+        async verify(algorithm, key, signature, data) {
+            if (has(key)) {
+                const hash = getHashAlg(algorithm);
+                if (!hash)
+                    throw new DOMException(`Failed to execute 'verify' on 'SubtleCrypto': EcdsaParams: hash: Algorithm: Unrecognized name`, 'NotSupportedError');
+                const hashed = await nativeSubtle.digest(hash, data);
+                return verifyK256(get(key), hashed, new Uint8Array(signature));
+            }
+            return nativeSubtle.verify(algorithm, key, signature, data);
+        },
+        //#endregion
+        //#region Create, Import, Export
+        async generateKey(algorithm, extractable, keyUsages) {
+            const k256Name = isK256Alg(algorithm, 'any');
+            if (k256Name) {
+                const _ = generateK256Pair(k256Name, extractable, keyUsages, DOMException);
+                return { publicKey: newKey(_.pub), privateKey: newKey(_.priv) };
+            }
+            return nativeSubtle.generateKey(algorithm, extractable, keyUsages);
+        },
+        async importKey(format, keyData, algorithm, extractable, keyUsages) {
+            const k256Name = isK256Alg(algorithm, 'any');
+            if (k256Name) {
+                const usageFlag = usageToFlag(k256Name, keyUsages, DOMException);
+                if (format === 'pkcs8') {
+                    throw new DOMException('The key is not of the expected type', 'InvalidAccessError');
+                }
+                // TODO: support spki
+                if (format === 'spki') {
+                    throw new DOMException('spki export of K-256 keys is not supported', 'NotSupportedError');
+                }
+                if (format === 'jwk' || format === 'raw') {
+                    return newKey(importK256(format, k256Name, keyData, extractable, usageFlag, DOMException));
+                }
+                throw new TypeError('Invalid keyFormat argument');
+            }
+            return nativeSubtle.importKey(format, keyData, algorithm, extractable, keyUsages);
+        },
+        async exportKey(format, key) {
+            if (has(key)) {
+                if (format === 'pkcs8') {
+                    throw new DOMException('The key is not of the expected type', 'InvalidAccessError');
+                }
+                // TODO: support spki
+                if (format === 'spki') {
+                    throw new DOMException('spki export of K-256 keys is not supported', 'NotSupportedError');
+                }
+                if (format === 'jwk' || format === 'raw')
+                    return exportK256(format, get(key));
+                throw new TypeError('Invalid keyFormat argument');
+            }
+            return nativeSubtle.exportKey(format, key);
+        },
+        //#endregion
+    };
+    Object.defineProperty(subtleCryptoPrototype, Symbol.toStringTag, { configurable: true, value: 'SubtleCrypto' });
+    Object.defineProperties(SubtleCrypto.prototype, Object.getOwnPropertyDescriptors(subtleCryptoPrototype));
+    return [Object.create(subtleCryptoPrototype), SubtleCrypto, CryptoKey];
+}
+function createCryptoClass(nativeCrypto, shimSubtle) {
+    class Crypto {
+        constructor() {
+            throw new TypeError('Illegal constructor');
+        }
+    }
+    const cryptoPrototype = {
+        get subtle() {
+            return shimSubtle;
+        },
+        getRandomValues: (array) => nativeCrypto.getRandomValues(array),
+        randomUUID: () => nativeCrypto.randomUUID(),
+    };
+    Object.defineProperty(cryptoPrototype, Symbol.toStringTag, { configurable: true, value: 'Crypto' });
+    Object.defineProperties(Crypto.prototype, Object.getOwnPropertyDescriptors(cryptoPrototype));
+    return [Object.create(cryptoPrototype), Crypto];
+}
+//# sourceMappingURL=core.js.map
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@dimensiondev+secp256k1-webcrypto@1.0.0-20220412114204-be816df/node_modules/@dimensiondev/secp256k1-webcrypto/dist/web.js
+
+const [web_crypto, { Crypto, CryptoKey, SubtleCrypto }, polyfill] = createCrypto(globalThis.crypto, globalThis.CryptoKey, DOMException);
+//# sourceMappingURL=web.js.map
 // EXTERNAL MODULE: ./shared/kv-storage.ts
 var kv_storage = __webpack_require__(53340);
 // EXTERNAL MODULE: ./background/database/kv-storage.ts
@@ -964,6 +1498,8 @@ var database_kv_storage = __webpack_require__(74314);
 ;// CONCATENATED MODULE: ./background/setup.ts
 
 
+
+polyfill();
 (0,kv_storage/* setupMaskKVStorageBackend */.$e)(database_kv_storage/* indexedDB_KVStorageBackend */.E, database_kv_storage/* inMemory_KVStorageBackend */.c);
 
 // EXTERNAL MODULE: ./src/extension/service.ts
@@ -974,6 +1510,8 @@ var native_rpc = __webpack_require__(30246);
 var social_network_adaptor = __webpack_require__(6277);
 // EXTERNAL MODULE: ../plugin-infra/src/entry-background-worker.ts + 1 modules
 var entry_background_worker = __webpack_require__(17610);
+// EXTERNAL MODULE: ../shared-base/src/index.ts + 1 modules
+var src = __webpack_require__(78144);
 // EXTERNAL MODULE: ./shared/index.ts
 var shared = __webpack_require__(62481);
 // EXTERNAL MODULE: ./src/database/Plugin/index.ts + 2 modules
@@ -986,11 +1524,13 @@ var host = __webpack_require__(81064);
 
 
 
+
 /* harmony default export */ function StartPluginWorker(signal) {
     (0,entry_background_worker/* startPluginWorker */.Ht)((0,host/* createPluginHost */.R)(signal, createWorkerContext));
 };
 function createWorkerContext(pluginID, signal) {
     let storage = undefined;
+    const currentPersonaSub = (0,src/* createSubscriptionFromAsync */.Fd)(service/* Services.Settings.getCurrentPersonaIdentifier */.K9.Settings.getCurrentPersonaIdentifier, undefined, shared/* MaskMessages.events.currentPersonaIdentifier.on */.ql.events.currentPersonaIdentifier.on, signal);
     return {
         getDatabaseStorage () {
             return storage || (storage = (0,Plugin/* createPluginDatabase */.X2)(pluginID, signal));
@@ -1000,7 +1540,8 @@ function createWorkerContext(pluginID, signal) {
             else return shared/* PersistentStorages.Plugin.createSubScope */._H.Plugin.createSubScope(pluginID, defaultValues, signal);
         },
         personaSign: service/* Services.Identity.signWithPersona */.K9.Identity.signWithPersona,
-        walletSign: service/* Services.Ethereum.personalSign */.K9.Ethereum.personalSign
+        walletSign: service/* Services.Ethereum.personalSign */.K9.Ethereum.personalSign,
+        currentPersona: currentPersonaSub
     };
 }
 
@@ -1064,8 +1605,6 @@ if (false) {}
 
 // EXTERNAL MODULE: ./shared/flags.ts
 var flags = __webpack_require__(14209);
-// EXTERNAL MODULE: ../shared-base/src/index.ts + 1 modules
-var src = __webpack_require__(78144);
 ;// CONCATENATED MODULE: ./background/tasks/Cancellable/NewInstalled.ts
 // No meaning for this module to support hmr but I don't want to invalidate dependencies module by this reason.
 
@@ -1346,11 +1885,11 @@ if (false) {}
 ;// CONCATENATED MODULE: ./background/tasks/NotCancellable/PrintBuildFlags.ts
 console.log('Build info', {
     NODE_ENV: "production",
-    VERSION: "v1.29.12-2332-g80695da1a",
+    VERSION: "v1.29.12-2343-g7d3cd8499",
     TAG_NAME: "v2.5.0",
-    COMMIT_HASH: "80695da1a",
-    COMMIT_DATE: "2022-04-14T07:04:47.000Z",
-    BUILD_DATE: "2022-04-14T07:11:10.724Z",
+    COMMIT_HASH: "7d3cd8499",
+    COMMIT_DATE: "2022-04-14T07:34:29.000Z",
+    BUILD_DATE: "2022-04-14T07:40:34.110Z",
     REMOTE_URL: "https://github.com/DimensionDev/Maskbook",
     BRANCH_NAME: "HEAD",
     DIRTY: false,
@@ -1621,10 +2160,6 @@ const message = new _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_2__.Web
     domain: 'services'
 });
 const log = {
-    beCalled: true,
-    localError: true,
-    remoteError: true,
-    sendLocalStack: true,
     type: 'pretty',
     requestReplay: "production" === 'development'
 };
@@ -2039,6 +2574,10 @@ async function activateSocialNetworkUIInner(ui_deferred) {
     ui.injection.postAndReplyNFTAvatar?.(signal1);
     ui.injection.avatarClipNFT?.(signal1);
     (0,_masknet_plugin_infra_content_script__WEBPACK_IMPORTED_MODULE_7__/* .startPluginSNSAdaptor */ .D4)((0,_social_network_adaptor_utils__WEBPACK_IMPORTED_MODULE_8__/* .getCurrentSNSNetwork */ .G)(ui.networkIdentifier), (0,_plugin_infra_host__WEBPACK_IMPORTED_MODULE_9__/* .createPluginHost */ .R)(signal1, (pluginID, signal)=>{
+        const personaSub = (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_6__/* .createSubscriptionFromAsync */ .Fd)(_extension_service__WEBPACK_IMPORTED_MODULE_2__/* ["default"].Settings.getCurrentPersonaIdentifier */ .ZP.Settings.getCurrentPersonaIdentifier, undefined, _utils__WEBPACK_IMPORTED_MODULE_11__/* .MaskMessages.events.currentPersonaIdentifier.on */ .ql.events.currentPersonaIdentifier.on, signal);
+        const empty = new _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_15__.ValueRef(undefined);
+        const lastRecognizedSub = (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_6__/* .SubscriptionFromValueRef */ .Jf)(ui.collecting.identityProvider?.recognized || empty, signal);
+        const currentVisitingSub = (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_6__/* .SubscriptionFromValueRef */ .Jf)(ui.collecting.currentVisitingIdentityProvider?.recognized || empty, signal);
         return {
             createKVStorage (type, defaultValues) {
                 if (type === 'memory') return _shared__WEBPACK_IMPORTED_MODULE_3__/* .InMemoryStorages.Plugin.createSubScope */ .uU.Plugin.createSubScope(pluginID, defaultValues, signal);
@@ -2046,7 +2585,9 @@ async function activateSocialNetworkUIInner(ui_deferred) {
             },
             personaSign: _extension_service__WEBPACK_IMPORTED_MODULE_2__/* ["default"].Identity.signWithPersona */ .ZP.Identity.signWithPersona,
             walletSign: _extension_service__WEBPACK_IMPORTED_MODULE_2__/* ["default"].Ethereum.personalSign */ .ZP.Ethereum.personalSign,
-            currentPersona: (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_6__/* .createSubscriptionFromAsync */ .Fd)(_extension_service__WEBPACK_IMPORTED_MODULE_2__/* ["default"].Settings.getCurrentPersonaIdentifier */ .ZP.Settings.getCurrentPersonaIdentifier, undefined, _utils__WEBPACK_IMPORTED_MODULE_11__/* .MaskMessages.events.currentPersonaIdentifier.on */ .ql.events.currentPersonaIdentifier.on)
+            currentPersona: personaSub,
+            lastRecognizedProfile: lastRecognizedSub,
+            currentVisitingProfile: currentVisitingSub
         };
     }));
     (0,_utils__WEBPACK_IMPORTED_MODULE_11__/* .setupShadowRootPortal */ .Vc)();
@@ -2952,6 +3493,7 @@ __webpack_require__.d(__webpack_exports__, {
   "Y_": () => (/* reexport */ subscription/* SubscriptionDebug */.Y_),
   "Jf": () => (/* reexport */ subscription/* SubscriptionFromValueRef */.Jf),
   "ps": () => (/* reexport */ Results/* andThenAsync */.ps),
+  "f1": () => (/* reexport */ src_crypto/* compressSecp256k1KeyRaw */.xb),
   "SH": () => (/* reexport */ src_crypto/* compressSecp256k1Point */.SH),
   "qY": () => (/* reexport */ subscription/* createConstantSubscription */.qY),
   "C9": () => (/* reexport */ i18n/* createI18NBundle */.C9),
@@ -2961,6 +3503,7 @@ __webpack_require__.d(__webpack_exports__, {
   "X2": () => (/* reexport */ kv_storage/* createProxyKVStorageBackend */.X2),
   "Fd": () => (/* reexport */ subscription/* createSubscriptionFromAsync */.Fd),
   "qX": () => (/* reexport */ src_crypto/* decompressSecp256k1Key */.qX),
+  "Yj": () => (/* reexport */ src_crypto/* decompressSecp256k1KeyRaw */.Yj),
   "pf": () => (/* reexport */ src_crypto/* decompressSecp256k1Point */.pf),
   "Nb": () => (/* reexport */ personas/* formatPersonaFingerprint */.N),
   "mz": () => (/* reexport */ convert/* fromBase64URL */.mz),
@@ -4574,8 +5117,8 @@ var timeout = __webpack_require__(50579);
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, [5638,2698,7871,9759,3294,6739,4227,4544,2486,5737,3883,3758,187,8136,3147,8019,8712,2735,5687,5229,5464,444,6316,3693,1851,7822,7856,2118,400,3453,7849,5132,1440,12,2619,9227,5838,3142,5105,3846,2162,8129,5951,7512,2752,5178,6565,9744,2299,6160,4278,9197,8000,4960,102,253,572,9737,8547,8145,5313,4570,3981,9855,2088,551,2908,1696,3638,1555,9141,516,2974,3832,6067,159,79,4557,234,7070,4590,4586,2891,8393,5784,9566,4029,433,9697,1947,3619,2222,7088,9867,9808,8100,7358,6645], () => (__webpack_require__(91074)))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [5638,2698,7871,9759,3294,6739,4227,4544,2486,5737,3883,3758,187,8136,3147,8019,8712,2735,5687,5229,5464,444,6316,3693,1851,7822,7856,2118,400,3453,7849,5132,1440,12,2619,9227,5838,3142,5105,3846,2162,8129,5951,7512,2752,5178,6565,9744,2299,6160,4278,9197,8000,4960,102,253,572,9737,8547,8145,5313,4570,3981,9855,2088,551,2908,1696,3638,1555,9141,516,2974,3832,6067,159,79,4557,234,7070,4590,4586,2891,8393,5784,9566,4029,433,9697,1947,3619,2222,7088,9867,9808,8100,7358,6645], () => (__webpack_require__(42038)))
+/******/ 	__webpack_require__.O(undefined, [5638,2698,7871,9759,3294,6739,4227,4544,2486,5737,3883,3758,187,8136,3147,8019,8712,2735,5687,5229,5464,444,6316,3693,1851,7822,7856,2118,400,3453,7849,5132,1440,12,2619,9227,5838,3142,5105,3846,2162,8129,5951,7512,2752,5178,6565,9744,2299,6160,4278,9197,8000,4960,102,253,572,9737,8547,8145,5313,4570,3981,9855,2088,551,2908,1696,3638,1555,9141,516,2974,3832,6067,159,79,4557,234,7070,4590,4586,2891,8393,5784,9566,4029,433,9697,1947,3619,2222,5161,5954,6878,8100,7358,6645], () => (__webpack_require__(6257)))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [5638,2698,7871,9759,3294,6739,4227,4544,2486,5737,3883,3758,187,8136,3147,8019,8712,2735,5687,5229,5464,444,6316,3693,1851,7822,7856,2118,400,3453,7849,5132,1440,12,2619,9227,5838,3142,5105,3846,2162,8129,5951,7512,2752,5178,6565,9744,2299,6160,4278,9197,8000,4960,102,253,572,9737,8547,8145,5313,4570,3981,9855,2088,551,2908,1696,3638,1555,9141,516,2974,3832,6067,159,79,4557,234,7070,4590,4586,2891,8393,5784,9566,4029,433,9697,1947,3619,2222,5161,5954,6878,8100,7358,6645], () => (__webpack_require__(42038)))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

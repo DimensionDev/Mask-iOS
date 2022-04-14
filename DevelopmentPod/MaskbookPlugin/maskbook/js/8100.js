@@ -417,7 +417,6 @@ function getDimensionAsPNG(buf) {
 
 "use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "$y": () => (/* binding */ AESAlgorithmEnum),
 /* harmony export */   "Gq": () => (/* binding */ SocialNetworkEnum),
 /* harmony export */   "VC": () => (/* binding */ SocialNetworkEnumToProfileDomain),
 /* harmony export */   "qx": () => (/* binding */ EC_KeyCurveEnum)
@@ -432,10 +431,6 @@ var EC_KeyCurveEnum;
     EC_KeyCurveEnum[EC_KeyCurveEnum["secp256p1"] = 1] = "secp256p1";
     EC_KeyCurveEnum[EC_KeyCurveEnum["secp256k1"] = 2] = "secp256k1";
 })(EC_KeyCurveEnum || (EC_KeyCurveEnum = {}));
-var AESAlgorithmEnum;
-(function(AESAlgorithmEnum) {
-    AESAlgorithmEnum["A256GCM"] = "A256GCM";
-})(AESAlgorithmEnum || (AESAlgorithmEnum = {}));
 var SocialNetworkEnum;
 (function(SocialNetworkEnum) {
     SocialNetworkEnum[SocialNetworkEnum["Unknown"] = -1] = "Unknown";
@@ -525,7 +520,7 @@ function parseSignatureContainer(signatureContainer) {
 
 
 
-const import_AES_GCM_256 = _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .CheckedError.withErr */ .iD.withErr(_utils__WEBPACK_IMPORTED_MODULE_4__/* .importAESFromJWK.AES_GCM_256 */ .Bs.AES_GCM_256, _types__WEBPACK_IMPORTED_MODULE_3__/* .CryptoException.InvalidCryptoKey */ .H3.InvalidCryptoKey);
+const import_AES_GCM_256 = _masknet_shared_base__WEBPACK_IMPORTED_MODULE_0__/* .CheckedError.withErr */ .iD.withErr(_utils__WEBPACK_IMPORTED_MODULE_4__/* .importAES */ .yj, _types__WEBPACK_IMPORTED_MODULE_3__/* .CryptoException.InvalidCryptoKey */ .H3.InvalidCryptoKey);
 /**
  * @internal
  * In payload version 38, the AES key is encrypted by this key.
@@ -594,8 +589,8 @@ function parseAuthor(network, id) {
 const decode = (0,_utils__WEBPACK_IMPORTED_MODULE_4__/* .decodeMessagePackF */ .mw)(_types__WEBPACK_IMPORTED_MODULE_0__/* .PayloadException.InvalidPayload */ .T6.InvalidPayload, _types__WEBPACK_IMPORTED_MODULE_0__/* .PayloadException.DecodeFailed */ .T6.DecodeFailed);
 const InvalidPayload = (msg)=>new _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .CheckedError */ .iD(_types__WEBPACK_IMPORTED_MODULE_0__/* .PayloadException.InvalidPayload */ .T6.InvalidPayload, msg).toErr()
 ;
-const importSpki = _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .CheckedError.withErr */ .iD.withErr(_utils__WEBPACK_IMPORTED_MODULE_4__/* .importEC_Key */ .OT, _types__WEBPACK_IMPORTED_MODULE_0__/* .CryptoException.InvalidCryptoKey */ .H3.InvalidCryptoKey);
-const importAES256 = _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .CheckedError.withErr */ .iD.withErr(_utils__WEBPACK_IMPORTED_MODULE_4__/* .importAESFromJWK */ .Bs, _types__WEBPACK_IMPORTED_MODULE_0__/* .CryptoException.InvalidCryptoKey */ .H3.InvalidCryptoKey);
+const importAES256 = _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .CheckedError.withErr */ .iD.withErr(_utils__WEBPACK_IMPORTED_MODULE_4__/* .importAES */ .yj, _types__WEBPACK_IMPORTED_MODULE_0__/* .CryptoException.InvalidCryptoKey */ .H3.InvalidCryptoKey);
+const importEC = _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .CheckedError.withErr */ .iD.withErr(_utils__WEBPACK_IMPORTED_MODULE_4__/* .importEC_Key */ .OT, _types__WEBPACK_IMPORTED_MODULE_0__/* .CryptoException.InvalidCryptoKey */ .H3.InvalidCryptoKey);
 async function parse37(input) {
     const signatureContainer = (0,_SignatureContainer__WEBPACK_IMPORTED_MODULE_6__/* .parseSignatureContainer */ .z)(input);
     if (signatureContainer.err) return signatureContainer;
@@ -657,37 +652,17 @@ async function parseEncryption(encryption) {
         ];
     }
 }
-function parseAES(aes1) {
-    return (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .andThenAsync */ .ps)((0,_types__WEBPACK_IMPORTED_MODULE_0__/* .assertArray */ .Wr)('aes', _types__WEBPACK_IMPORTED_MODULE_0__/* .CryptoException.InvalidCryptoKey */ .H3.InvalidCryptoKey)(aes1), async (aes)=>{
-        const [algr, k] = aes;
-        if (typeof k === 'string') {
-            if (algr === _payload_types__WEBPACK_IMPORTED_MODULE_3__/* .AESAlgorithmEnum.A256GCM */ .$y.A256GCM) {
-                const jwk = {
-                    ext: true,
-                    key_ops: [
-                        'encrypt',
-                        'decrypt'
-                    ],
-                    kty: 'oct',
-                    alg: algr,
-                    k
-                };
-                const key = await importAES256(jwk, algr);
-                if (key.err) return key;
-                return (0,ts_results__WEBPACK_IMPORTED_MODULE_2__.Ok)({
-                    algr,
-                    key: key.val
-                });
-            }
-        }
-        return new _masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .CheckedError */ .iD(_types__WEBPACK_IMPORTED_MODULE_0__/* .CryptoException.UnsupportedAlgorithm */ .H3.UnsupportedAlgorithm, null).toErr();
-    });
+async function parseAES(aes) {
+    return (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .andThenAsync */ .ps)((0,_types__WEBPACK_IMPORTED_MODULE_0__/* .assertUint8Array */ .jY)(aes, 'aes', _types__WEBPACK_IMPORTED_MODULE_0__/* .CryptoException.InvalidCryptoKey */ .H3.InvalidCryptoKey), importAES256);
 }
 function importAsymmetryKey(algr, key1, name) {
     return (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .andThenAsync */ .ps)((0,_types__WEBPACK_IMPORTED_MODULE_0__/* .assertUint8Array */ .jY)(key1, name, _types__WEBPACK_IMPORTED_MODULE_0__/* .CryptoException.InvalidCryptoKey */ .H3.InvalidCryptoKey), async (pubKey)=>{
         if (typeof algr === 'number') {
             if (algr in _payload_types__WEBPACK_IMPORTED_MODULE_3__/* .EC_KeyCurveEnum */ .qx) {
-                const key = await importSpki(pubKey, algr);
+                if (algr === _payload_types__WEBPACK_IMPORTED_MODULE_3__/* .EC_KeyCurveEnum.secp256k1 */ .qx.secp256k1) {
+                    pubKey = (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_1__/* .decompressSecp256k1KeyRaw */ .Yj)(pubKey);
+                }
+                const key = await importEC(pubKey, algr);
                 if (key.err) return key;
                 return (0,ts_results__WEBPACK_IMPORTED_MODULE_2__.Ok)({
                     algr,
@@ -808,17 +783,13 @@ async function decodePublicSharedAESKey(iv, encryptedKey) {
     if (encryptedKey.err) return encryptedKey;
     const publicSharedKey = await (0,_shared__WEBPACK_IMPORTED_MODULE_4__/* .get_v38PublicSharedCryptoKey */ .w)();
     if (publicSharedKey.err) return publicSharedKey;
-    const import_AES_GCM_256 = _masknet_shared_base__WEBPACK_IMPORTED_MODULE_6__/* .CheckedError.withErr */ .iD.withErr(_utils__WEBPACK_IMPORTED_MODULE_3__/* .importAESFromJWK.AES_GCM_256 */ .Bs.AES_GCM_256, _types__WEBPACK_IMPORTED_MODULE_1__/* .CryptoException.InvalidCryptoKey */ .H3.InvalidCryptoKey);
+    const import_AES_GCM_256 = _masknet_shared_base__WEBPACK_IMPORTED_MODULE_6__/* .CheckedError.withErr */ .iD.withErr(_utils__WEBPACK_IMPORTED_MODULE_3__/* .importAES */ .yj, _types__WEBPACK_IMPORTED_MODULE_1__/* .CryptoException.InvalidCryptoKey */ .H3.InvalidCryptoKey);
     const decrypt = _masknet_shared_base__WEBPACK_IMPORTED_MODULE_6__/* .CheckedError.withErr */ .iD.withErr(_utils__WEBPACK_IMPORTED_MODULE_3__/* .decryptWithAES */ .PB, _types__WEBPACK_IMPORTED_MODULE_1__/* .CryptoException.InvalidCryptoKey */ .H3.InvalidCryptoKey);
-    const jwk_in_u8arr = await decrypt(_payload__WEBPACK_IMPORTED_MODULE_0__/* .AESAlgorithmEnum.A256GCM */ .$y.A256GCM, publicSharedKey.val, iv.val, encryptedKey.val);
+    const jwk_in_u8arr = await decrypt(publicSharedKey.val, iv.val, encryptedKey.val);
     const jwk_in_text = await (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_6__/* .andThenAsync */ .ps)(jwk_in_u8arr, decodeTextCrypto);
     const jwk = await (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_6__/* .andThenAsync */ .ps)(jwk_in_text, JSONParse);
     const aes = await (0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_6__/* .andThenAsync */ .ps)(jwk, import_AES_GCM_256);
-    return aes.map((key)=>({
-            algr: _payload__WEBPACK_IMPORTED_MODULE_0__/* .AESAlgorithmEnum.A256GCM */ .$y.A256GCM,
-            key
-        })
-    );
+    return aes;
 }
 async function decodeECDHPublicKey(compressedPublic) {
     const key = decodeUint8ArrayCrypto(compressedPublic).andThen((val)=>ts_results__WEBPACK_IMPORTED_MODULE_2__/* .Result.wrap */ .x4.wrap(()=>(0,_masknet_shared_base__WEBPACK_IMPORTED_MODULE_6__/* .decompressSecp256k1Point */ .pf)(val)
@@ -1431,8 +1402,10 @@ function fromHex(x) {
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
   "CH": () => (/* reexport */ ECKeyIdentifierFromJsonWebKey),
+  "xb": () => (/* reexport */ compressSecp256k1KeyRaw),
   "SH": () => (/* reexport */ compressSecp256k1Point),
   "qX": () => (/* reexport */ decompressSecp256k1Key),
+  "Yj": () => (/* reexport */ decompressSecp256k1KeyRaw),
   "pf": () => (/* reexport */ decompressSecp256k1Point),
   "dK": () => (/* reexport */ isSecp256k1Point),
   "Rx": () => (/* reexport */ isSecp256k1PrivateKey)
@@ -1495,6 +1468,16 @@ if (!isContentScript) {
         x: (0,convert/* toBase64URL */.wi)(x),
         y: (0,convert/* toBase64URL */.wi)(y)
     };
+}
+function compressSecp256k1KeyRaw(point) {
+    if (!secp256k1.isPoint(point)) throw new TypeError('Not a point on secp256k1!');
+    if (secp256k1.isPointCompressed(point)) return point;
+    return secp256k1.pointCompress(point, true);
+}
+function decompressSecp256k1KeyRaw(point) {
+    if (!secp256k1.isPoint(point)) throw new TypeError('Not a point on secp256k1!');
+    if (!secp256k1.isPointCompressed(point)) return point;
+    return secp256k1.pointCompress(point, false);
 }
 function compressSecp256k1Key(key) {
     const arr = compressSecp256k1Point(key.x, key.y);

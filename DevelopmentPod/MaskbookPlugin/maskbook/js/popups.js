@@ -1414,17 +1414,20 @@ var kv_storage = __webpack_require__(53340);
 
 
 
+
 setup_ui/* status.then */.i.then(()=>(0,utils/* createNormalReactRoot */.jv)(/*#__PURE__*/ (0,jsx_runtime.jsx)(Popups, {}))
 );
 // TODO: Should only load plugins when the page is plugin-aware.
 (0,entry_dashboard/* startPluginDashboard */.CB)((0,host/* createPluginHost */.R)(undefined, (pluginID, signal)=>{
+    const currentPersonaSub = (0,src/* createSubscriptionFromAsync */.Fd)(service/* Services.Settings.getCurrentPersonaIdentifier */.K9.Settings.getCurrentPersonaIdentifier, undefined, utils/* MaskMessages.events.currentPersonaIdentifier.on */.ql.events.currentPersonaIdentifier.on, signal);
     return {
         createKVStorage (type, defaultValues) {
             if (type === 'memory') return kv_storage/* InMemoryStorages.Plugin.createSubScope */.uU.Plugin.createSubScope(pluginID, defaultValues, signal);
             else return kv_storage/* PersistentStorages.Plugin.createSubScope */._H.Plugin.createSubScope(pluginID, defaultValues, signal);
         },
         personaSign: service/* Services.Identity.signWithPersona */.K9.Identity.signWithPersona,
-        walletSign: service/* Services.Ethereum.personalSign */.K9.Ethereum.personalSign
+        walletSign: service/* Services.Ethereum.personalSign */.K9.Ethereum.personalSign,
+        currentPersona: currentPersonaSub
     };
 }));
 
@@ -1454,10 +1457,6 @@ const message = new _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_2__.Web
     domain: 'services'
 });
 const log = {
-    beCalled: true,
-    localError: true,
-    remoteError: true,
-    sendLocalStack: true,
     type: 'pretty',
     requestReplay: "production" === 'development'
 };
@@ -2408,18 +2407,6 @@ var collectNodeText = __webpack_require__(86742);
 
 /***/ }),
 
-/***/ 32196:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "q": () => (/* reexport safe */ _shared__WEBPACK_IMPORTED_MODULE_0__.ql)
-/* harmony export */ });
-/* harmony import */ var _shared__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(62481);
-
-
-
-/***/ }),
-
 /***/ 55423:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -2982,50 +2969,6 @@ class ErrorBoundary extends react.Component {
 
 ;// CONCATENATED MODULE: ../shared-base-ui/src/components/index.ts
 
-
-
-/***/ }),
-
-/***/ 57602:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "m": () => (/* binding */ PopupRoutes)
-/* harmony export */ });
-var PopupRoutes;
-(function(PopupRoutes) {
-    PopupRoutes["Root"] = '/';
-    PopupRoutes["Wallet"] = '/wallet';
-    PopupRoutes["ImportWallet"] = '/wallet/import';
-    PopupRoutes["AddDeriveWallet"] = '/wallet/addDerive';
-    PopupRoutes["WalletSettings"] = '/wallet/settings';
-    PopupRoutes["WalletRename"] = '/wallet/rename';
-    PopupRoutes["DeleteWallet"] = '/wallet/delete';
-    PopupRoutes["CreateWallet"] = '/wallet/create';
-    PopupRoutes["SwitchWallet"] = '/wallet/switch';
-    PopupRoutes["SelectWallet"] = '/wallet/select';
-    PopupRoutes["WalletRecovered"] = '/wallet/recovered';
-    PopupRoutes["LegacyWalletRecovered"] = '/wallet/legacy-recovered';
-    PopupRoutes["BackupWallet"] = '/wallet/backup';
-    PopupRoutes["AddToken"] = '/wallet/addToken';
-    PopupRoutes["WalletSignRequest"] = '/wallet/sign';
-    PopupRoutes["GasSetting"] = '/wallet/gas';
-    PopupRoutes["TokenDetail"] = '/wallet/tokenDetail';
-    PopupRoutes["ContractInteraction"] = '/wallet/contract-interaction';
-    PopupRoutes["Unlock"] = '/wallet/unlock';
-    PopupRoutes["Transfer"] = '/wallet/transfer';
-    PopupRoutes["SetPaymentPassword"] = '/wallet/password';
-    PopupRoutes["ReplaceTransaction"] = '/wallet/replace';
-    PopupRoutes["Personas"] = '/personas';
-    PopupRoutes["Logout"] = '/personas/logout';
-    PopupRoutes["PersonaRename"] = '/personas/rename';
-    PopupRoutes["PersonaSignRequest"] = '/personas/sign-request';
-    PopupRoutes["PermissionAwareRedirect"] = '/redirect';
-    PopupRoutes["RequestPermission"] = '/request-permission';
-    PopupRoutes["ThirdPartyRequestPermission"] = '/3rd-request-permission';
-    PopupRoutes["SignRequest"] = '/sign-request';
-    PopupRoutes["Swap"] = '/swap';
-})(PopupRoutes || (PopupRoutes = {}));
 
 
 /***/ }),
@@ -5369,7 +5312,7 @@ function getNetworkName(chainId) {
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
 /******/ 			964: 0,
-/******/ 			9808: 0,
+/******/ 			6878: 0,
 /******/ 			7358: 0
 /******/ 		};
 /******/ 		
@@ -5457,8 +5400,8 @@ function getNetworkName(chainId) {
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, [5638,2698,7871,9759,3294,6739,4227,4544,2486,5737,3883,3758,187,8136,3147,8019,8712,2735,5687,5229,5464,444,6316,3693,1851,7822,7856,2118,400,3453,7849,5132,1440,12,2619,9227,5838,3142,5105,3846,2162,8129,5951,7512,2752,5178,6565,9744,2299,6160,4278,9197,8000,4960,102,253,572,9737,8547,8145,5313,4570,3981,9855,2088,551,2908,1696,3638,1555,9141,516,2974,3832,6067,159,79,4557,234,7070,4590,4586,2891,8393,5784,9566,4029,433,9697,1947,3619,2222,3617,4162,7088,9867,8100,6992,9568,4157], () => (__webpack_require__(60664)))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [5638,2698,7871,9759,3294,6739,4227,4544,2486,5737,3883,3758,187,8136,3147,8019,8712,2735,5687,5229,5464,444,6316,3693,1851,7822,7856,2118,400,3453,7849,5132,1440,12,2619,9227,5838,3142,5105,3846,2162,8129,5951,7512,2752,5178,6565,9744,2299,6160,4278,9197,8000,4960,102,253,572,9737,8547,8145,5313,4570,3981,9855,2088,551,2908,1696,3638,1555,9141,516,2974,3832,6067,159,79,4557,234,7070,4590,4586,2891,8393,5784,9566,4029,433,9697,1947,3619,2222,3617,4162,7088,9867,8100,6992,9568,4157], () => (__webpack_require__(42038)))
+/******/ 	__webpack_require__.O(undefined, [5638,2698,7871,9759,3294,6739,4227,4544,2486,5737,3883,3758,187,8136,3147,8019,8712,2735,5687,5229,5464,444,6316,3693,1851,7822,7856,2118,400,3453,7849,5132,1440,12,2619,9227,5838,3142,5105,3846,2162,8129,5951,7512,2752,5178,6565,9744,2299,6160,4278,9197,8000,4960,102,253,572,9737,8547,8145,5313,4570,3981,9855,2088,551,2908,1696,3638,1555,9141,516,2974,3832,6067,159,79,4557,234,7070,4590,4586,2891,8393,5784,9566,4029,433,9697,1947,3619,2222,3617,4162,5161,5954,8100,6992,8689,3519], () => (__webpack_require__(60664)))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [5638,2698,7871,9759,3294,6739,4227,4544,2486,5737,3883,3758,187,8136,3147,8019,8712,2735,5687,5229,5464,444,6316,3693,1851,7822,7856,2118,400,3453,7849,5132,1440,12,2619,9227,5838,3142,5105,3846,2162,8129,5951,7512,2752,5178,6565,9744,2299,6160,4278,9197,8000,4960,102,253,572,9737,8547,8145,5313,4570,3981,9855,2088,551,2908,1696,3638,1555,9141,516,2974,3832,6067,159,79,4557,234,7070,4590,4586,2891,8393,5784,9566,4029,433,9697,1947,3619,2222,3617,4162,5161,5954,8100,6992,8689,3519], () => (__webpack_require__(42038)))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

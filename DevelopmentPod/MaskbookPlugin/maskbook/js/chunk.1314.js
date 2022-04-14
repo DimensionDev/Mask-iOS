@@ -1635,6 +1635,7 @@ function Composition({ type ='timeline' , requireClipboardPermission  }) {
     // #endregion
     const UI = (0,react.useRef)(null);
     const networkSupport = social_network/* activatedSocialNetworkUI.injection.newPostComposition */.LM.injection.newPostComposition?.supportedOutputTypes;
+    const recipients = (0,useActivatedUI/* useFriendsList */.hg)();
     return /*#__PURE__*/ (0,jsx_runtime.jsx)(entry/* DialogStackingProvider */.yu, {
         children: /*#__PURE__*/ (0,jsx_runtime.jsx)(shared_src/* InjectedDialog */.Fl, {
             keepMounted: true,
@@ -1647,7 +1648,7 @@ function Composition({ type ='timeline' , requireClipboardPermission  }) {
                     hasClipboardPermission: hasClipboardPermission,
                     onRequestClipboardPermission: onRequestClipboardPermission,
                     requireClipboardPermission: requireClipboardPermission,
-                    recipients: (0,useActivatedUI/* useFriendsList */.hg)(),
+                    recipients: recipients,
                     maxLength: 560,
                     onSubmit: onSubmit_,
                     supportImageEncoding: networkSupport?.text ?? false,

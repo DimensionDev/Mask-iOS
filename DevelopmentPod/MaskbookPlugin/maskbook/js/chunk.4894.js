@@ -556,7 +556,8 @@ const CurrentVisitingIdentityProviderFacebook = {
 // Try to resolve my identities
 const myUsernameLiveSelectorPC = new umd.LiveSelector().querySelectorAll('[data-pagelet="LeftRail"] > [data-visualcompletion="ignore-dynamic"]:first-child > div:first-child > ul [role="link"]').filter((x)=>x.innerText
 );
-const myUsernameLiveSelectorMobile = new umd.LiveSelector().querySelector('#bookmarks_flyout .mSideMenu > div > ul > li:first-child a, #MComposer a');
+const myUsernameLiveSelectorMobile = new umd.LiveSelector().querySelector('#bookmarks_flyout .mSideMenu > div > ul > li:first-child a, #MComposer a') // #endregion
+;
 
 // EXTERNAL MODULE: ./src/social-network/defaults/state/InitFriends.ts
 var InitFriends = __webpack_require__(58903);

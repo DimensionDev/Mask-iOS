@@ -768,8 +768,7 @@ function TokenTab(props) {
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(Box/* default */.Z, {
                         className: classes.trait_content,
-                        children: asset.value.traits.map(({ trait_type , value  })=>{
-                            return /*#__PURE__*/ (0,jsx_runtime.jsx)(Link/* default */.Z, {
+                        children: asset.value.traits.map(({ trait_type , value  }, key)=>/*#__PURE__*/ (0,jsx_runtime.jsx)(Link/* default */.Z, {
                                 underline: "none",
                                 href: asset.value?.slug ? (0,Collectible_pipes/* resolveTraitLinkOnOpenSea */.zu)(chainId, asset.value.slug, trait_type, value) : '',
                                 target: "_blank",
@@ -789,8 +788,8 @@ function TokenTab(props) {
                                         })
                                     ]
                                 })
-                            }, trait_type + value);
-                        })
+                            }, key)
+                        )
                     })
                 ]
             }) : null,

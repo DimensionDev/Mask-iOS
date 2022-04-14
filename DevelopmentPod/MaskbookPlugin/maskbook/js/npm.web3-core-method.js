@@ -69,13 +69,13 @@ Method.prototype.setRequestManager = function (requestManager, accounts) {
 };
 Method.prototype.createFunction = function (requestManager, accounts) {
     var func = this.buildCall();
-    func.call = this.call;
+    Object.defineProperty(func, 'call', { configurable: true, writable: true, value: this.call });
     this.setRequestManager(requestManager || this.requestManager, accounts || this.accounts);
     return func;
 };
 Method.prototype.attachToObject = function (obj) {
     var func = this.buildCall();
-    func.call = this.call;
+    Object.defineProperty(func, 'call', { configurable: true, writable: true, value: this.call });
     var name = this.name.split('.');
     if (name.length > 1) {
         obj[name[0]] = obj[name[0]] || {};
