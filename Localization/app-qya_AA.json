@@ -137,6 +137,14 @@
             "camera_access": {
                 "title": "crwdns14954:0crwdne14954:0",
                 "description": "crwdns14956:0crwdne14956:0"
+            },
+            "only_scan_persona": {
+                "title": "crwdns16198:0crwdne16198:0",
+                "description": "crwdns16200:0crwdne16200:0"
+            },
+            "no_local_wallet_for_walletconnect": {
+                "title": "crwdns16202:0crwdne16202:0",
+                "description": "crwdns16204:0crwdne16204:0"
             }
         },
         "controls": {
@@ -779,6 +787,10 @@
                 "cloud_backup_password_hint": "crwdns14316:0crwdne14316:0"
             }
         },
+        "mask_scan": {
+            "scan_persona": "crwdns16206:0crwdne16206:0",
+            "scan_all": "crwdns16208:0crwdne16208:0"
+        },
         "wallet_connect": {
             "wallet_connect": "crwdns14318:0crwdne14318:0",
             "select_wallet": "crwdns14320:0crwdne14320:0",
@@ -788,7 +800,6 @@
             "no_wallets": "crwdns14542:0%scrwdne14542:0",
             "connecting": "crwdns14328:0crwdne14328:0",
             "connect_success": "crwdns14330:0crwdne14330:0",
-            "scan": "crwdns14332:0crwdne14332:0",
             "disconnect": "crwdns14334:0crwdne14334:0",
             "connection_fail": "crwdns14336:0crwdne14336:0",
             "could_not_switch_blockchain_network_title": "crwdns14338:0crwdne14338:0",
