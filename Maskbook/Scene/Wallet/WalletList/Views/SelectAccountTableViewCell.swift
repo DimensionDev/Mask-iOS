@@ -233,6 +233,9 @@ class SelectAccountTableViewCell: UITableViewCell {
         selectBackgroudView.isHidden = false
         avatar.title = data.name
         avatar.isHidden = data.isFromWalletConnect
+        if let colorHex = data.account.colorHex {
+            avatar.backgroundColor = UIColor(hex: colorHex)
+        }
         walletIconContainer.isHidden = !data.isFromWalletConnect
         if data.isFromWalletConnect {
             avatarIcon.image = Asset.Images.Scene.WalletConnect.walletConnect.image

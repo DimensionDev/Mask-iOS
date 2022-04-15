@@ -39,8 +39,9 @@ extension UIColor {
         Asset.Colors.WalletColor.color5.color,
         Asset.Colors.WalletColor.color6.color
     ]
-    func walletRandomColorHex() -> String? {
-        let index = Int.random(in: 1 ... 6)
+
+    static func walletRandomColorHex() -> String? {
+        let index = Int.random(in: 0 ... 5)
         return Self.walletColors[index].toHex
     }
 }

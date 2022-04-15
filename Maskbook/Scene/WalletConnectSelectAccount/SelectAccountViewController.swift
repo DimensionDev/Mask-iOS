@@ -239,7 +239,9 @@ extension SelectAccountViewController: UITableViewDelegate {
             userSetting.defaultAccountAddress = data.account.address
         }
         userSetting.network = viewModel.selectNetworkSubject.value
-        dismiss(animated: true, completion: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }
 

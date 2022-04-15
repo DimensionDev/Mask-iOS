@@ -75,8 +75,8 @@ class SelectAccountViewModel {
     init(type: FunctionType) {
         self.type = type
         Publishers.CombineLatest(
-            selectNetworkSubject.dropFirst().eraseToAnyPublisher(),
-            UserDefaultSettings.shared.defaultAccountAddressPublisher.eraseToAnyPublisher()
+            selectNetworkSubject.eraseToAnyPublisher(),
+            userSetting.defaultAccountAddressPublisher
         )
         .receive(on: RunLoop.main)
         .sink { [weak self] _, _ in
@@ -88,6 +88,7 @@ class SelectAccountViewModel {
 
         accountsPublisher
             .sink { [weak self] in
+                self?.batchUpdateColorForAccount(accounts: $0)
                 self?.generateWalletAccountItems(accounts: $0)
             }
             .store(in: &disposeBag)
@@ -197,6 +198,21 @@ extension SelectAccountViewModel {
 }
 
 extension SelectAccountViewModel {
+    private func batchUpdateColorForAccount(accounts: [Account]) {
+        let accountsWithoutColor = accounts.filter {
+            $0.colorHex == nil
+        }
+        if accountsWithoutColor.isEmpty {
+            return
+        }
+        AppContext.shared.coreDataStack.persistentContainer.viewContext
+            .perform {
+                for account in accountsWithoutColor {
+                    account.colorHex = UIColor.walletRandomColorHex()
+                }
+            }
+    }
+    
     private func generateWalletAccountItems(accounts: [Account]) {
         let network = selectNetworkSubject.value
         let defaultAccountAddress = userSetting.defaultAccountAddress

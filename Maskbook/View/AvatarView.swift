@@ -12,7 +12,6 @@ import Kingfisher
 class AvatarView: UIView {
     lazy var label: UILabel = {
         let view = UILabel()
-        view.textColor = Asset.Colors.Public.white.color
         return view
     }()
     
