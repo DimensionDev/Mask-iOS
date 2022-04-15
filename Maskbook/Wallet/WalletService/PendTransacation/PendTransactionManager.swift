@@ -16,7 +16,7 @@ class PendTransactionManager {
 //    private var pendList:[PendTransactionModel] = []
     private var timer: Timer?
     public static let shared = PendTransactionManager()
-//    var pendingTxFinishEvents = PassthroughSubject<PendTransactionModel, TransactionHistory.TransactionStatus>()
+    var pendingTxFinishEvents = PassthroughSubject<(transcation: PendTransactionModel, status: TransactionHistory.TransactionStatus), Error>()
     
     public var pendTransactions: CurrentValueSubject<[PendTransactionModel], Never> = CurrentValueSubject([])
 
@@ -35,6 +35,15 @@ class PendTransactionManager {
                     
                     for (index, pendingTranscation) in pendList.enumerated() {
                         web3Provier.getTransactionReceiptPromise(pendingTranscation.txHash).done { transactionReceipt in
+                            switch transactionReceipt.status {
+                                case .ok:
+                                    self.pendingTxFinishEvents.send((transcation: pendingTranscation, status: .confirmed))
+                                case .notYetProcessed:
+                                    self.pendingTxFinishEvents.send((transcation: pendingTranscation, status: .pending))
+                                case .failed:
+                                    self.pendingTxFinishEvents.send((transcation: pendingTranscation, status: .failed))
+                            }
+                            
                             if transactionReceipt.status != .notYetProcessed {
                                 pendList.remove(at: index)
                             }
