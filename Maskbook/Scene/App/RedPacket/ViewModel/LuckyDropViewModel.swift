@@ -346,7 +346,7 @@ class LuckyDropViewModel: NSObject, ObservableObject {
                 param: param
             )
             await MainActor.run {
-                log.debug("\(tx ?? "It's failed to create redPacket")", source: "create-red-packet")
+                log.debug("\(tx ?? "It's failed to create redPacket")", source: "lucky drop")
                 // TODO: send tx to be observed
                 // Show the loading animation and reset the `ComfirmButton`'s state.
                 buttonType = .requestAllowance

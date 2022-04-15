@@ -69,7 +69,11 @@ struct RedPacketConfirmView: View {
                 buildRow(title: L10n.Plugins.Luckydrop.Confirm.transactionFee, value: .gas(viewModel.gasFeeInfo))
                 tipsView
             }
-            PrimaryButton(title: L10n.Common.Controls.confirm) {
+            PrimaryButton(
+                title: L10n.Common.Controls.confirm,
+                animating: viewModel.isSending,
+                isEnable: !viewModel.isSending
+            ) {
                 viewModel.onConfirm()
             }
         }

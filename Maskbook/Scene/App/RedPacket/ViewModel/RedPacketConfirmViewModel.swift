@@ -16,6 +16,7 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
     @Published var gasFeeItem: GasFeeCellItem?
     @Published var inputParam: HappyRedPacketV4.CreateRedPacketInput?
     @Published var token: Token?
+    @Published var buttonState: ConfirmButtonState = .normal
     
     var gasFeeViewModel: GasFeeViewModel?
     var transaction: EthereumTransaction?
@@ -130,6 +131,10 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
         options?.from?.address ?? ""
     }
     
+    var isSending: Bool {
+        buttonState == .sending
+    }
+    
     @InjectedProvider(\.userDefaultSettings)
     private var settings
     @InjectedProvider(\.walletConnectClient)
@@ -164,14 +169,19 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
     }
     
     func onConfirm() {
+        buttonState = .sending
         vault.getWalletPassword()
             .sink(receiveCompletion: { _ in }) { [weak self] password in
                 self?.sendTransaction(password: password) { [weak self] result in
                     DispatchQueue.main.async {
                         switch result {
                         case .success(let txHash): self?.completion?(txHash, nil)
-                        case .failure(let error): self?.completion?(nil, error)
+                            
+                        case .failure(let error):
+                            log.error("send failed: \(error)", source: "lucky drop")
+                            self?.completion?(nil, error)
                         }
+                        self?.buttonState = .normal
                     }
                 }
             }
@@ -229,6 +239,13 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
                 network: maskUserDefaults.network,
                 completion)
         }
+    }
+}
+
+extension RedPacketConfirmViewModel {
+    enum ConfirmButtonState {
+        case normal
+        case sending
     }
 }
 
