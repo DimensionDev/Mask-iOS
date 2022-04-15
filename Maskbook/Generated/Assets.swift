@@ -210,6 +210,7 @@ internal enum Asset {
     internal enum Scene {
       internal enum Alert {
         internal static let error = ImageAsset(name: "Images/Scene/Alert/error")
+        internal static let redWarning = ImageAsset(name: "Images/Scene/Alert/red_warning")
         internal static let success = ImageAsset(name: "Images/Scene/Alert/success")
         internal static let warning = ImageAsset(name: "Images/Scene/Alert/warning")
       }
