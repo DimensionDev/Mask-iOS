@@ -10,6 +10,7 @@ import Combine
 import CoreData
 import CoreDataStack
 import Foundation
+import UIKit
 
 class SelectAccountViewModel {
     enum FunctionType {
@@ -18,9 +19,8 @@ class SelectAccountViewModel {
         case selectWithoutWalletConnect
     }
     
-    typealias NetworkItem = WalletListViewModel.CoinItem
-    typealias WalletsItem = WalletListViewModel.WalletsItem
-    typealias WalletWrapType = WalletListViewModel.WalletWrapType
+    typealias Item = WalletListViewModel.WalletsItem
+    typealias NetworkItem = SelectAccountViewModel.CoinItem
 
     var type: FunctionType
     
@@ -64,7 +64,7 @@ class SelectAccountViewModel {
     private func generateNetworkItems() -> [NetworkItem] {
         let items: [BlockChainNetwork] = BlockChainNetwork.supportedNetwork
         return items.map { network in
-            let networkItem = NetworkItem(chain: network, isSelected: false, isFirst: false, isLast: false)
+            let networkItem = NetworkItem(chain: network, isSelected: false)
             return networkItem
         }
     }
@@ -101,6 +101,98 @@ class SelectAccountViewModel {
             .createBalancePublisher(addresses: addresses)?
             .receive(on: DispatchQueue.main)
             .fireAndIgnore()
+    }
+}
+
+extension SelectAccountViewModel {
+    enum Section {
+        case main
+    }
+    
+    struct CoinItem: Hashable {
+        let chain: BlockChainNetwork
+        let isSelected: Bool
+        
+        var selectedImage: UIImage {
+            switch chain {
+            case .eth:
+                return Asset.Images.Scene.WalletList.Coins.ethSelected.image
+                
+            case .bsc:
+                return Asset.Images.Scene.WalletList.Coins.bscSelected.image
+                
+            case .polygon:
+                return Asset.Images.Scene.WalletList.Coins.polygonSelected.image
+                
+            case .arbitrum:
+                return Asset.Images.Scene.WalletList.Coins.arbitrumSelected.image
+                
+            case .xdai:
+                return Asset.Images.Scene.WalletList.Coins.xdaiSelected.image
+                
+            default:
+                return UIImage()
+            }
+        }
+        
+        var unselectedImage: UIImage {
+            switch chain {
+            case .eth:
+                return Asset.Images.Scene.WalletList.Coins.ethUnselected.image
+                
+            case .bsc:
+                return Asset.Images.Scene.WalletList.Coins.bscUnselected.image
+                
+            case .polygon:
+                return Asset.Images.Scene.WalletList.Coins.polygonUnselected.image
+                
+            case .arbitrum:
+                return Asset.Images.Scene.WalletList.Coins.arbitrumUnselected.image
+                
+            case .xdai:
+                return Asset.Images.Scene.WalletList.Coins.xdaiUnselected.image
+                
+            default:
+                return UIImage()
+            }
+        }
+        
+        var backgroundColor: UIColor {
+            switch chain {
+            case .eth:
+                return Asset.Colors.ChainColor.eth.color
+            case .bsc:
+                return Asset.Colors.ChainColor.bsc.color
+            case .polygon:
+                return Asset.Colors.ChainColor.matic.color
+            case .arbitrum:
+                return Asset.Colors.ChainColor.arbitrum.color
+            case .xdai:
+                return Asset.Colors.ChainColor.gnosis.color
+            default:
+                return UIColor.white
+            }
+        }
+    }
+
+    // swiftlint:disable enum_case_associated_values_count
+    enum WalletsItem: Hashable {
+        case account(data: WalletWrapType)
+
+        case add
+        case addWalletConnect
+    }
+
+    // swiftlint:enable enum_case_associated_values_count
+    
+    struct WalletWrapType: Hashable {
+        let name: String?
+        let account: Account
+        let network: BlockChainNetwork
+        let balance: NSDecimalNumber
+        let selected: Bool
+        let isImported: Bool
+        let isFromWalletConnect: Bool
     }
 }
 

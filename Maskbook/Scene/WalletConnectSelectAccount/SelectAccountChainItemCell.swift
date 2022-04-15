@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 class SelectAccountChainItemCell: UICollectionViewCell {
-    
     static let itemSize = CGSize(width: 75, height: 66)
     
     let chainIcon: UIImageView = {
@@ -61,8 +60,9 @@ class SelectAccountChainItemCell: UICollectionViewCell {
         ])
     }
     
-    func configWith(chain: WalletListViewModel.CoinItem, isSelected: Bool) {
+    func configWith(chain: SelectAccountViewModel.CoinItem, isSelected: Bool) {
         chainIcon.image = isSelected ? chain.selectedImage : chain.unselectedImage
         dotView.isHidden = !isSelected
+        dotView.backgroundColor = chain.backgroundColor
     }
 }

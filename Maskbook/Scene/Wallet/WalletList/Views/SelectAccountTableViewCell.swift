@@ -222,7 +222,7 @@ class SelectAccountTableViewCell: UITableViewCell {
         checkButton.isHidden = true
     }
     
-    private func update(data: WalletListViewModel.WalletWrapType) {
+    private func update(data: SelectAccountViewModel.WalletWrapType) {
         titleLabel.text = data.name
         update(
             quantity: data.balance.stringValue,
@@ -237,7 +237,8 @@ class SelectAccountTableViewCell: UITableViewCell {
         if data.isFromWalletConnect {
             avatarIcon.image = Asset.Images.Scene.WalletConnect.walletConnect.image
             if let name = data.account.session?.walletInfo?.peerMeta.name,
-               let walletEntry = WalletConnectClient.walletEntryWithName(name: name) {
+               let walletEntry = WalletConnectClient.walletEntryWithName(name: name)
+            {
                 walletIcon.isHidden = false
                 walletIcon.setNetworkImage(url: walletEntry.imageURL)
             } else {
@@ -245,13 +246,14 @@ class SelectAccountTableViewCell: UITableViewCell {
             }
         }
     }
-    func editaleUpdate(data: WalletListViewModel.WalletWrapType, isEditing: Bool) {
+
+    func editaleUpdate(data: SelectAccountViewModel.WalletWrapType, isEditing: Bool) {
         update(data: data)
         checkButton.isHidden = isEditing ? true : !data.selected
         moreButton.isHidden = !isEditing
     }
     
-    func noEditaleUpdate(data: WalletListViewModel.WalletWrapType) {
+    func noEditaleUpdate(data: SelectAccountViewModel.WalletWrapType) {
         update(data: data)
         checkButton.isHidden = !data.selected
         moreButton.isHidden = true
@@ -298,7 +300,6 @@ private extension SelectAccountTableViewCell {
 extension SelectAccountTableViewCell {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-            walletIcon.layer.borderColor = Asset.Colors.Background.normal.color.cgColor
+        walletIcon.layer.borderColor = Asset.Colors.Background.normal.color.cgColor
     }
 }
-

@@ -14,8 +14,8 @@ import UStack
 
 class SelectAccountViewController: BaseViewController {
     typealias ViewModel = SelectAccountViewModel
-    typealias Section = WalletListViewModel.Section
-    typealias Item = WalletListViewModel.WalletsItem
+    typealias Section = ViewModel.Section
+    typealias Item = ViewModel.WalletsItem
     
     let tableViewTopConstant = 154.0
     var tableViewBottomConstant = 88.0
@@ -26,6 +26,7 @@ class SelectAccountViewController: BaseViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -34,6 +35,9 @@ class SelectAccountViewController: BaseViewController {
     
     @InjectedProvider(\.userDefaultSettings)
     private var userSetting
+    
+    @InjectedProvider(\.mainCoordinator)
+    var mainCoordinator
     
     lazy var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
@@ -119,6 +123,7 @@ class SelectAccountViewController: BaseViewController {
                     case .selectWithoutWalletConnect, .selectWithWalletConnect:
                         cell.noEditaleUpdate(data: data)
                     }
+                    cell.delegate = self
                     return cell
                 
                 default:
@@ -238,6 +243,19 @@ extension SelectAccountViewController: UITableViewDelegate {
     }
 }
 
+extension SelectAccountViewController: SelectAccountTableViewCellDelegate {
+    func walletTableViewCell(cell: SelectAccountTableViewCell, moreBtnClicked: UIButton) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+
+        guard case let Item.account(data) = item else { return }
+        
+        mainCoordinator.present(
+            scene: .walletEdit(account: data.account, sourceView: moreBtnClicked),
+            transition: .panModel(animated: true))
+    }
+}
+
 extension SelectAccountViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.networkItems.count
@@ -245,7 +263,8 @@ extension SelectAccountViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: SelectAccountChainItemCell.self),
-                                                         for: indexPath) as? SelectAccountChainItemCell {
+                                                         for: indexPath) as? SelectAccountChainItemCell
+        {
             let chain = viewModel.networkItems[indexPath.item]
             let isSelected = chain.chain == viewModel.selectNetworkSubject.value
             cell.configWith(chain: chain, isSelected: isSelected)
@@ -266,19 +285,22 @@ extension SelectAccountViewController: UICollectionViewDelegate {
 extension SelectAccountViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
-                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat
+    {
         0
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat
+    {
         0
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+                        sizeForItemAt indexPath: IndexPath) -> CGSize
+    {
         SelectAccountChainItemCell.itemSize
     }
 }
