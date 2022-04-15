@@ -153,7 +153,7 @@ struct LuckyDropTokens: View {
                 Button {
                     mainCoordinator.present(
                         scene: .gasFee(
-                            delegate: viewModel,
+                            delegate: nil,
                             gasLimit: viewModel.gasLimit,
                             viewModel: viewModel.gasFeeViewModel
                         ),

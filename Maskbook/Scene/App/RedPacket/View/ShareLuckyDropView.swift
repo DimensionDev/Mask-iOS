@@ -20,13 +20,15 @@ struct ShareLuckyDropView: View {
                 .font(FontStyles.rh5.font)
                 .foregroundColor(Asset.Colors.Text.normal.asColor())
             Spacer().frame(height: 20)
-            PrimaryButton(action: {
-                
-            }, title: L10n.Plugins.Luckydrop.Buttons.createPersona, animating: false, isEnable: true)
+            PrimaryButton(
+                title: L10n.Plugins.Luckydrop.Buttons.createPersona,
+                animating: false,
+                isEnable: true) {}
             Spacer().frame(height: 20)
-            PrimaryButton(action: {
-                
-            }, title: L10n.Plugins.Luckydrop.Buttons.recoverPersona, animating: false, isEnable: true)
+            PrimaryButton(
+                title: L10n.Plugins.Luckydrop.Buttons.recoverPersona,
+                animating: false,
+                isEnable: true) {}
         }
         .padding(.horizontal, 20)
     }

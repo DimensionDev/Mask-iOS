@@ -193,6 +193,14 @@ class Coordinator {
         )
         case moveBackupData
         case luckyDrop
+        case luckyDropConfirm(
+            token: Token?,
+            gasFeeViewModel: GasFeeViewModel?,
+            redPacketInput: HappyRedPacketV4.CreateRedPacketInput,
+            transaction: EthereumTransaction,
+            options: TransactionOptions,
+            completion: (String?, Error?) -> Void
+        )
         case debug
     }
     
@@ -762,6 +770,23 @@ extension Coordinator {
         case .luckyDrop:
             return UIHostingController(rootView: LuckyDropView())
             
+        case .luckyDropConfirm(
+            let token,
+            let gasFeeViewModel,
+            let redPacketInput,
+            let transaction,
+            let options,
+            let completion
+        ):
+            return LuckyDropConfirmViewController(
+                token: token,
+                gasFeeViewModel: gasFeeViewModel,
+                redPacketInput: redPacketInput,
+                transaction: transaction,
+                options: options,
+                completion: completion
+            )
+            
         case .debug:
             return UIHostingController(rootView: DebugView())
         }
@@ -775,6 +800,10 @@ extension Coordinator {
         if let mainTabVC = keyWindow.rootViewController?.presentedViewController as? MainTabBarController {
             mainTabVC.dismiss(animated: animated, completion: nil)
         }
+    }
+    
+    func dismissTopViewController() {
+        UIApplication.getTopViewController()?.dismiss(animated: true, completion: nil)
     }
 }
 

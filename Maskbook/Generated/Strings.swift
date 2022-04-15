@@ -774,6 +774,45 @@ enum L10n {
         }
       }
 
+      enum Confirm {
+        /// Amount per share
+        static var amountPerShare: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Confirm.AmountPerShare")
+        }
+        /// Attached message
+        static var attachedMessage: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Confirm.AttachedMessage")
+        }
+        /// Share
+        static var share: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Confirm.Share")
+        }
+        /// Split mode
+        static var splitMode: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Confirm.SplitMode")
+        }
+        /// You can withdraw the remaining balance 24 hours after the Lucky Drop is sent.
+        static var tips: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Confirm.Tips")
+        }
+        /// Confirm Your Lucky Drop
+        static var title: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Confirm.Title")
+        }
+        /// Total amount
+        static var totalAmount: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Confirm.TotalAmount")
+        }
+        /// Transaction fee
+        static var transactionFee: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Confirm.TransactionFee")
+        }
+        /// Wallet account
+        static var walletAccount: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Confirm.WalletAccount")
+        }
+      }
+
       enum State {
         /// Tx failed
         static var failed: String {

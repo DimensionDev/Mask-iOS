@@ -8,6 +8,7 @@
 
 import BigInt
 import Compression
+import CoreDataStack
 import Foundation
 import PromiseKit
 import SwiftyJSON
@@ -57,6 +58,62 @@ struct HappyRedPacketV4: ABIContract {
         2
     }
     
+    @MainActor
+    func write(
+        _ methodName: String,
+        token: Token?,
+        gasFeeViewModel: GasFeeViewModel?,
+        redPacketInput: CreateRedPacketInput,
+        param: [AnyObject]? = nil,
+        extraData: Data? = nil,
+        options: TransactionOptions? = nil
+    ) async throws -> String? {
+        guard let contract = web3.contract(abiString, at: contractAddress, abiVersion: abiVersion) else {
+            return nil
+        }
+        var defaultOptions = TransactionOptions.defaultOptions
+        defaultOptions.from = walletAddress
+        defaultOptions.gasPrice = options?.gasPrice
+        defaultOptions.gasLimit = options?.gasLimit
+        guard let tx = contract.write(
+            methodName,
+            parameters: param ?? [],
+            extraData: extraData ?? Data(),
+            transactionOptions: defaultOptions.merge(options)) else {
+                return nil
+            }
+        
+        return try await withCheckedThrowingContinuation { continuation in
+            Task.detached {
+                do {
+                    let transaction = try tx.assemble(transactionOptions: tx.transactionOptions)
+                    await MainActor.run {
+                        let scene: Coordinator.Scene = .luckyDropConfirm(
+                            token: token,
+                            gasFeeViewModel: gasFeeViewModel,
+                            redPacketInput: redPacketInput,
+                            transaction: transaction,
+                            options: tx.transactionOptions
+                        ) { tx, error in
+                            if let error = error {
+                                continuation.resume(with: .failure(error))
+                            } else {
+                                continuation.resume(with: .success(tx))
+                                mainCoordinator.dismissTopViewController()
+                            }
+                        }
+                        mainCoordinator.present(
+                            scene: scene,
+                            transition: .modal()
+                        )
+                    }
+                } catch {
+                    continuation.resume(with: .failure(error))
+                }
+            }
+        }
+    }
+    
     func checkAvailability(redPackageId: String) async -> CheckAvailabilityResult? {
         let contractMethod = Functions.checkAvailability.rawValue
         let parameters: [AnyObject] = [Data(hex: redPackageId)] as [AnyObject]
@@ -96,16 +153,22 @@ struct HappyRedPacketV4: ABIContract {
     }
     
     @MainActor
-    func createRedPacket(param: CreateRedPacketInput) async -> String? {
+    func createRedPacket(
+        token: Token?,
+        gasFeeViewModel: GasFeeViewModel?,
+        param: CreateRedPacketInput
+    ) async -> String? {
         let contractMethod = Functions.createRedPacket.rawValue
         let parameters = param.asArray
         var options = TransactionOptions()
         options.value = param.tokenType == 0 ? param.totalTokens : BigUInt(0)
-        return await write(
+        return try? await write(
             contractMethod,
+            token: token,
+            gasFeeViewModel: gasFeeViewModel,
+            redPacketInput: param,
             param: parameters,
-            options: options
-        )
+            options: options)
     }
     
     @MainActor

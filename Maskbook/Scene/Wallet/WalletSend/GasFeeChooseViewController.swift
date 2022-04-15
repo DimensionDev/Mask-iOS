@@ -472,6 +472,8 @@ class GasFeeChooseViewController: UIViewController {
                 guard let item = self.viewModel.gasFeePublisher.value else {
                     return
                 }
+                // share the choose `item` to mutiple delegates
+                self.viewModel.confirmedGasFeePublisher.accept(item)
                 self.delegate?.getGasFeeAction(gasFeeModel: item)
                 self.dismiss(animated: true, completion: nil)
             }

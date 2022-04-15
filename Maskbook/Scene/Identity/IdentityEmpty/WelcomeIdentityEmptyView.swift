@@ -30,19 +30,19 @@ struct WelcomeIdentityEmptyView: View {
                 
                 Spacer()
                 
-                PrimaryButton(action: {
+                PrimaryButton(title: L10n.Scene.WelcomeIdentityEmpty.createAPersona) {
                     coordinator.present(
                         scene: .personaWelcome,
                         transition: .detail(animated: true)
                     )
-                }, title: L10n.Scene.WelcomeIdentityEmpty.createAPersona, animating: false, isEnable: false)
+                }
                 
-                PrimaryButton(action: {
+                PrimaryButton(title: L10n.Scene.WelcomeIdentityEmpty.recoverYourPersona) {
                     coordinator.present(
                         scene: .identityRecovery(from: .initilisation),
                         transition: .detail(animated: true)
                     )
-                }, title: L10n.Scene.WelcomeIdentityEmpty.recoverYourPersona, animating: false, isEnable: false)
+                }
             }
         }
         .padding(.horizontal, LayoutConstraints.horizontal)

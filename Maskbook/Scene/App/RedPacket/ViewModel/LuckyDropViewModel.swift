@@ -222,8 +222,9 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         gasFeeViewModel.refresh()
         
         // It will only change after the user selects gasfee and is only used here to initialize the data.
-        gasFeeViewModel.gasFeePublisher.filter({ $0 != nil })
-            .prefix(1)
+        gasFeeViewModel.confirmedGasFeePublisher
+            .removeDuplicates()
+            .filter({ $0 != nil })
             .assign(to: \.gasFeeItem, on: self)
             .store(in: &disposeBag)
         
@@ -339,9 +340,14 @@ class LuckyDropViewModel: NSObject, ObservableObject {
             totalTokens: total)
         
         Task {
-            let tx = await ABI.happyRedPacketV4.createRedPacket(param: param)
-            log.debug("\(tx ?? "It's failed to create redPacket")", source: "create-red-packet")
+            let tx = await ABI.happyRedPacketV4.createRedPacket(
+                token: token,
+                gasFeeViewModel: gasFeeViewModel,
+                param: param
+            )
             await MainActor.run {
+                log.debug("\(tx ?? "It's failed to create redPacket")", source: "lucky drop")
+                // TODO: send tx to be observed
                 // Show the loading animation and reset the `ComfirmButton`'s state.
                 buttonType = .requestAllowance
                 checkParam()
@@ -349,32 +355,7 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         }
     }
     
-//    func processAmountInput(value: String) {
-//        // make sure only one '.' in `value`
-//        if value.hasSuffix("0") { return }
-//        if value.hasSuffix("."),
-//           let firstIndex = value.firstIndex(of: "."),
-//           let lastIndex = value.lastIndex(of: "."),
-//           firstIndex == lastIndex {
-//            return
-//        }
-//        let num = NSDecimalNumber(string: value)
-//        let roundBehavior = NSDecimalNumberHandler(
-//            roundingMode: .down,
-//            scale: token?.decimal ?? 18,
-//            raiseOnExactness: false,
-//            raiseOnOverflow: false,
-//            raiseOnUnderflow: false,
-//            raiseOnDivideByZero: false
-//        )
-//        let roundedNum = num.rounding(accordingToBehavior: roundBehavior)
-//        let processed = roundedNum == .notANumber ? "" : roundedNum.stringValue
-//        guard processed != value else { return }
-//        amountStr = processed
-//    }
-    
     // MARK: - Private method
-    
     @MainActor
     private func getAllowance() async -> BigUInt? {
         guard let fromAddress = maskUserDefaults.defaultAccountAddress,
@@ -492,12 +473,9 @@ class LuckyDropViewModel: NSObject, ObservableObject {
     
     private func setupObserversForConfirmButton() {
         let publishers: [AnyPublisher<String, Never>] = [
-            settings.$passwordExpiredDate.map({
-                "\(String(describing: $0))"
-            }).eraseToAnyPublisher(),
-            settings.$defaultAccountAddress.map({
-                $0 ?? ""
-            }).eraseToAnyPublisher(),
+            settings.$passwordExpiredDate.map({ "\(String(describing: $0))" }).eraseToAnyPublisher(),
+            settings.$defaultAccountAddress.map({ $0 ?? "" }).eraseToAnyPublisher(),
+            settings.$pluginRiskWarningAwared.map({ _ in "" }).eraseToAnyPublisher(),
             $quantityStr.eraseToAnyPublisher(),
             $amountStr.eraseToAnyPublisher(),
             $message.eraseToAnyPublisher(),
@@ -633,15 +611,10 @@ class LuckyDropViewModel: NSObject, ObservableObject {
     }
 }
 
-extension LuckyDropViewModel: GasFeeBackDelegate {
-    func getGasFeeAction(gasFeeModel: GasFeeCellItem) {
-        gasFeeItem = gasFeeModel
-    }
-}
-
 extension LuckyDropViewModel: ChooseTokenBackDelegate {
     func chooseTokenAction(token: Token) {
         self.token = token
+        amountStr = ""
     }
     
     func chooseNFTTokenAction(token: Collectible) {

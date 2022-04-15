@@ -105,7 +105,7 @@ extension Token: Managed {
         return NSPredicate(format: "%K == %d", #keyPath(Token.chainId), chainId)
     }
     
-    static func predicate(address: String) -> NSPredicate {
+    public static func predicate(address: String) -> NSPredicate {
         return NSPredicate(format: "%K == %@", #keyPath(Token.account.address), address)
     }
     
