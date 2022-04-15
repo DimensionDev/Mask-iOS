@@ -20,15 +20,15 @@ class WalletBottomWidgetViewModel: ObservableObject {
         guard let token = token else { return "" }
         let symbol = token.symbol ?? ""
         
-        let displayBalance = token.displayBalance
-        guard displayBalance != .notANumber else {
+        let displayQuantity = token.roundQuantity(scale: 2)
+        guard displayQuantity != .notANumber else {
             return "0.00 \(symbol)"
         }
-        let doubleValue = displayBalance.doubleValue
+        let doubleValue = displayQuantity.doubleValue
         if doubleValue < 0.01, doubleValue > 0 {
             return "< 0.01 \(symbol)"
         }
-        return "\(displayBalance.stringValue) \(symbol)"
+        return "\(displayQuantity.stringValue) \(symbol)"
     }
     
     var transactionURL: URL? {
@@ -63,7 +63,7 @@ class WalletBottomWidgetViewModel: ObservableObject {
     private var address: String = ""
     
     init() {
-        settings.defaultAccountAddressPublisher.removeDuplicates().sink { [weak self] address in
+        settings.defaultAccountAddressPublisher.removeDuplicates().asDriver().sink { [weak self] address in
             guard let self = self else { return }
             self.address = address ?? ""
             let token = self.walletAssetManager.getMainToken(

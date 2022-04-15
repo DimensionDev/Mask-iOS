@@ -37,7 +37,6 @@ struct LuckyDropView: View {
                                 
                             case .riskWarning:
                                 mainCoordinator.present(scene: .pluginRiskWarning, transition: .popup)
-                                viewModel.checkParam()
                                 
                             case .unlockToken: viewModel.approveToken()
                             case .send: viewModel.send()

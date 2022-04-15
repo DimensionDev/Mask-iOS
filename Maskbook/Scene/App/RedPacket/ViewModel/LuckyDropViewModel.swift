@@ -473,12 +473,9 @@ class LuckyDropViewModel: NSObject, ObservableObject {
     
     private func setupObserversForConfirmButton() {
         let publishers: [AnyPublisher<String, Never>] = [
-            settings.$passwordExpiredDate.map({
-                "\(String(describing: $0))"
-            }).eraseToAnyPublisher(),
-            settings.$defaultAccountAddress.map({
-                $0 ?? ""
-            }).eraseToAnyPublisher(),
+            settings.$passwordExpiredDate.map({ "\(String(describing: $0))" }).eraseToAnyPublisher(),
+            settings.$defaultAccountAddress.map({ $0 ?? "" }).eraseToAnyPublisher(),
+            settings.$pluginRiskWarningAwared.map({ _ in "" }).eraseToAnyPublisher(),
             $quantityStr.eraseToAnyPublisher(),
             $amountStr.eraseToAnyPublisher(),
             $message.eraseToAnyPublisher(),
@@ -617,6 +614,7 @@ class LuckyDropViewModel: NSObject, ObservableObject {
 extension LuckyDropViewModel: ChooseTokenBackDelegate {
     func chooseTokenAction(token: Token) {
         self.token = token
+        amountStr = ""
     }
     
     func chooseNFTTokenAction(token: Collectible) {
