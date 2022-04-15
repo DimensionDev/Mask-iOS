@@ -39,6 +39,9 @@ class SelectAccountViewController: BaseViewController {
     @InjectedProvider(\.mainCoordinator)
     var mainCoordinator
     
+    @InjectedProvider(\.walletConnectClient)
+    internal var walletConnectClient
+    
     lazy var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
@@ -65,7 +68,7 @@ class SelectAccountViewController: BaseViewController {
         view.delegate = self
         view.translatesAutoresizingMaskIntoConstraints = false
         view.register(SelectAccountTableViewCell.self)
-        
+        view.register(WalletListAddWalletConnectCell.self)
         return view
     }()
     
@@ -125,9 +128,11 @@ class SelectAccountViewController: BaseViewController {
                     }
                     cell.delegate = self
                     return cell
-                
-                default:
-                    return UITableViewCell()
+                case .addWalletConnect:
+                    let cell: WalletListAddWalletConnectCell = tableView.dequeCell(at: indexPath)
+                    cell.titleLabel.text = L10n.Scene.WalletConnect.walletConnect
+                    cell.icon.image = Asset.Images.Scene.WalletConnect.walletConnect.image
+                    return cell
                 }
             }
     }()
@@ -234,13 +239,19 @@ extension SelectAccountViewController: PanModalPresentable {
 
 extension SelectAccountViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let account = viewModel.accountListSubject.value[indexPath.row]
-        if case let .account(data) = account {
-            userSetting.defaultAccountAddress = data.account.address
-        }
-        userSetting.network = viewModel.selectNetworkSubject.value
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
-            self.dismiss(animated: true, completion: nil)
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+        switch item {
+        case .addWalletConnect:
+            walletConnectClient.currentSelectedBlockchainNetworkSubject.value = viewModel.selectNetworkSubject.value
+            mainCoordinator.present(
+                scene: .walletConnectStart,
+                transition: .panModel(animated: true))
+            
+        case let .account(data):
+            WalletCoreService.shared.changeNetwork(network: data.network, account: data.account)
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
+                self.dismiss(animated: true, completion: nil)
+            }
         }
     }
 }

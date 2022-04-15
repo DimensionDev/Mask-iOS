@@ -180,7 +180,6 @@ extension SelectAccountViewModel {
     enum WalletsItem: Hashable {
         case account(data: WalletWrapType)
 
-        case add
         case addWalletConnect
     }
 
@@ -217,7 +216,7 @@ extension SelectAccountViewModel {
         let network = selectNetworkSubject.value
         let defaultAccountAddress = userSetting.defaultAccountAddress
         let showWalletConnect = showWalletConnect()
-        let items = accounts
+        var items = accounts
             .filter { account in
                 guard let chain = ChainType(rawValue: Int(account.chainId)) else { return false }
                 if account.fromWalletConnect {
@@ -244,6 +243,9 @@ extension SelectAccountViewModel {
                 )
                 return WalletsItem.account(data: data)
             }
+        if showAddWalletConnect() {
+            items.append(.addWalletConnect)
+        }
         accountListSubject.value = items
     }
     
@@ -253,6 +255,17 @@ extension SelectAccountViewModel {
             return true
         case .selectWithWalletConnect:
             return true
+        case .selectWithoutWalletConnect:
+            return false
+        }
+    }
+    
+    private func showAddWalletConnect() -> Bool {
+        switch type {
+        case .editEnable:
+            return true
+        case .selectWithWalletConnect:
+            return false
         case .selectWithoutWalletConnect:
             return false
         }
