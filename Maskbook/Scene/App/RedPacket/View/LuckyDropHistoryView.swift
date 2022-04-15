@@ -7,125 +7,199 @@
 //
 
 import SwiftUI
+import PullRefresh
 
 struct LuckyDropHistoryView: View {
     @ObservedObject var viewModel: LuckyDropHistoryViewModel
 
-    init() {
-        _viewModel = ObservedObject(wrappedValue: LuckyDropHistoryViewModel())
+    @State private var pullState = StateItem(state: .idle, progress: 0)
+
+    @State private var contentSize = CGSize.zero
+
+    init(viewModel: LuckyDropHistoryViewModel) {
+        _viewModel = ObservedObject(initialValue: viewModel)
+    }
+
+    private let segmentHeight: CGFloat = 48
+    private let rowSpacing: CGFloat = 16
+    private let spinnerSize: CGFloat = 26.67
+    private let pullSpinnerSize: CGFloat = 20
+    var emptySpace: CGFloat {
+        max(0, contentSize.height - LayoutConstraints.top - rowSpacing - segmentHeight)
     }
     
     var body: some View {
-        VStack(spacing: 20) {
-            ScrollView {
-                LazyVStack(spacing: 16, pinnedViews: [.sectionHeaders]) {
-                    Section {
-                        ForEach(0...10, id:\.self) { id in
-                            LuckyDropHistoryRow()
-                                .id(id)
+        let emptyHeight: CGFloat = emptySpace
+        LazyVStack(spacing: rowSpacing, pinnedViews: [.sectionHeaders]) {
+            Section {
+                switch viewModel.state {
+                case .empty:
+                        VStack(alignment: .center, spacing: 12) {
+                            Spacer()
+                            Asset.Images.Scene.Empty.emptyBox.asImage()
+                            Text(L10n.Common.empty)
+                                .font(.rh6)
+                                .foregroundColor(Asset.Colors.Text.light)
+                            Spacer()
                         }
-                    } header: {
-                        SegmentControl(selection: $viewModel.selection)
-                            .frame(height: 48)
-                    }
+                        .frame(height: emptyHeight)
+
+                case .loading:
+                        VStack(alignment: .center) {
+                            Spacer()
+                            LoadingIndicator(
+                                loading: true,
+                                preferredSize: .init(width: spinnerSize, height: spinnerSize)
+                            )
+                            .frame(width: spinnerSize, height: spinnerSize)
+                            Spacer()
+                        }
+                        .frame(height: emptyHeight)
+
+                case .idle: listContent
                 }
-                .padding(.horizontal, LayoutConstraints.horizontal)
+            } header: {
+                SegmentControl(selection: $viewModel.selection) {
+                    viewModel.displayData()
+                }
+                .frame(height: 48)
             }
         }
+        .padding(.horizontal, LayoutConstraints.horizontal)
+        .onRefresh(
+            pullthreshold: 32,
+            pullProgress: $pullState,
+            asyncAction: {
+                await self.viewModel.loadData()
+            },
+            pullAnimationView: {
+                LoadingIndicator(
+                    loading: true,
+                    preferredSize: .init(width: pullSpinnerSize, height: pullSpinnerSize)
+                )
+                .frame(width: pullSpinnerSize, height: pullSpinnerSize)
+        })
+        .measureSize(to: $contentSize)
         .padding(.top, LayoutConstraints.top)
         .background(Asset.Colors.Background.normal.asColor().ignoresSafeArea())
+    }
+
+    @ViewBuilder
+    private var listContent: some View {
+        switch viewModel.selection {
+        case .token:
+            ForEach(viewModel.tokenPayloads, id: \.id) { item in
+                LuckyDropHistoryRow(item: item)
+            }
+        case .nft:
+            VStack {
+                Color.clear
+                Spacer()
+            }
+        }
     }
 }
 
 struct LuckyDropHistoryRow: View {
     @State var loading = false
 
+    private let indicatorSize = CGSize.init(width: 16, height: 16)
+
+    @ObservedObject private var viewModel: LuckyDropHistoryTokenItemViewModel
+
+    init(item: LuckyDropHistoryViewModel.TokenPayload) {
+        _viewModel = ObservedObject(
+            initialValue: .init(
+                luckyDrop: item.payload,
+                checkAvailbility: item.checkAvailability
+            )
+        )
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .top, spacing: 10) {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("New Year Special Events")
-                        .font(FontStyles.bh5.font)
-                        .foregroundColor(Asset.Colors.Text.dark.asColor())
-                        .horizontallyFilled()
+                    Text(
+                        viewModel.luckyDrop.message.isEmpty
+                        ? L10n.Plugins.Luckydrop.pluginRedPacketBestWishes
+                        : viewModel.luckyDrop.message
+                    )
+                    .font(FontStyles.bh5.font)
+                    .foregroundColor(Asset.Colors.Text.dark.asColor())
+                    .horizontallyFilled()
 
-                    Text("2020/12/30 12:30 UTC+8")
+                    Text(viewModel.createdDate + " \(L10n.Scene.OpenRedPackage.created)")
                         .font(FontStyles.rh7.font)
                         .foregroundColor(Asset.Colors.Text.dark.asColor())
                 }
 
                 Button {
+                    // TODO: refund or share
                     loading.toggle()
                 } label: {
-                    LoadingText(
-                        loading: $loading,
-                        text: L10n.Plugins.Luckydrop.refund
-                    )
+                    loadingText
                     .frame(width: 84, height: 32)
                 }
-                .background(Asset.Colors.Background.blue.asColor().cornerRadius(8))
+                .disabled(false)
+                .background(
+                    true
+                    ? Asset.Colors.Background.blue.asColor()
+                    : Asset.Colors.Background.disable.asColor()
+                )
+                .cornerRadius(8)
             }
 
-            VStack(spacing: 3) {
+            VStack(alignment: .leading, spacing: 3) {
                 HStack(spacing: 4) {
                     Text(L10n.Plugins.Luckydrop.claimed)
                         .font(FontStyles.rh7.font)
                         .foregroundColor(Asset.Colors.Text.dark.asColor())
                         .layoutPriority(1)
 
-                    Text("1/3")
+                    Text(viewModel.claimedDetail)
                         .font(FontStyles.mh7.font)
                         .foregroundColor(Asset.Colors.Text.dark.asColor())
                 }
                 .horizontallyFilled()
 
                 HStack(spacing: 4) {
-                    Text("48333333333222233333.33/42221122218333333333331333.33")
+                    Text(viewModel.totalRemain)
                         .lineLimit(1)
                         .font(FontStyles.mh7.font)
                         .foregroundColor(Asset.Colors.Text.dark.asColor())
                         .layoutPriority(1)
 
-                    Text("DAI")
-                        .font(FontStyles.mh7.font)
-                        .foregroundColor(Asset.Colors.Text.dark.asColor())
-                        .layoutPriority(1)
+                    if let symbol = viewModel.token?.symbol {
+                        Text(symbol)
+                            .font(FontStyles.mh7.font)
+                            .foregroundColor(Asset.Colors.Text.dark.asColor())
+                            .layoutPriority(1)
+                    }
 
-                    Asset.Images.Scene.WalletList.Coins.ethSelected.asImage().resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 20)
-                        .layoutPriority(1)
+                    // TODO: icon
+
+                    //                    if let icon = viewModel.icon {
+                    //                        Asset.Images.Scene.Balance.Chain.eth.asImage()
+                    //                            .resizable()
+                    //                            .aspectRatio(contentMode: .fit)
+                    //                            .frame(width: 20, height: 20)
+                    //                            .layoutPriority(1)
+                    //                    }
                 }
-                .frame(maxWidth: .infinity)
             }
         }
         .padding(.all, 12)
         .background(Asset.Colors.Background.dark.asColor())
         .cornerRadius(8)
     }
-}
 
-struct LoadingText: View {
-    @Binding var loading: Bool
-
-    private let indicatorSize: CGSize
-    private let text: String
-
-    init(
-        loading: Binding<Bool>,
-        indicatorSize: CGSize = .init(width: 16, height: 16),
-        text: String
-    ) {
-        _loading = loading
-        self.indicatorSize = indicatorSize
-        self.text = text
-    }
-
-    var body: some View {
+    @ViewBuilder
+    private var loadingText: some View {
         ZStack {
-            Text(loading ? "" : text)
-                .font(FontStyles.bh6.font)
-                .foregroundColor(Color.white)
+            Text(loading ? "" : L10n.Plugins.Luckydrop.refund)
+                .font(.bh6)
+                .foregroundColor(.white)
                 .zIndex(1)
 
             if loading {
@@ -140,6 +214,22 @@ struct LoadingText: View {
 
 struct LuckyDropHistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        LuckyDropHistoryView()
+        //        LuckyDropHistoryRow(
+        //            item: .init(
+        //                checkAvailability: nil,
+        //                payload: .init(
+        //                    basic: .mock,
+        //                    payload: .mock
+        //                )
+        //            )
+        //        )
+        LoadingIndicator(loading: true, preferredSize: .init(width: 32, height: 32))
+            .frame(width: 32, height: 32)
+        //        VStack {
+        //            Asset.Images.Scene.Empty.emptyBox.asImage()
+        //            Text(L10n.Common.empty)
+        //                .font(.rh6)
+        //                .foregroundColor(Asset.Colors.Text.light)
+        //        }
     }
 }

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -151,6 +151,8 @@
 		1FEE1EAC27845E1F00697F81 /* Web3+signTX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE1EAB27845E1F00697F81 /* Web3+signTX.swift */; };
 		1FF403F42806ACD000468F5C /* LuckDropHistory+BlockChainNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF403F32806ACD000468F5C /* LuckDropHistory+BlockChainNetwork.swift */; };
 		1FF403F62806AD8D00468F5C /* LuckyDropHistoryViewModel+TokenHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF403F52806AD8D00468F5C /* LuckyDropHistoryViewModel+TokenHistory.swift */; };
+		1FF403F82806BD2D00468F5C /* LuckyDropHistoryItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF403F72806BD2D00468F5C /* LuckyDropHistoryItemViewModel.swift */; };
+		1FF404732809653F00468F5C /* PullRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 1FF404722809653F00468F5C /* PullRefresh */; };
 		2937D922CA95E5739C9BF27F /* Pods_Maskbook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 463940F35F5F4C93A7DA52DE /* Pods_Maskbook.framework */; };
 		2A0C16AF2666713D0085524E /* StoredKeyImportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0C16AE2666713D0085524E /* StoredKeyImportType.swift */; };
 		2A18E7FB266C9D210045BC88 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A18E7FA266C9D210045BC88 /* AvatarView.swift */; };
@@ -908,6 +910,7 @@
 		1FEE1EAB27845E1F00697F81 /* Web3+signTX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Web3+signTX.swift"; sourceTree = "<group>"; };
 		1FF403F32806ACD000468F5C /* LuckDropHistory+BlockChainNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LuckDropHistory+BlockChainNetwork.swift"; sourceTree = "<group>"; };
 		1FF403F52806AD8D00468F5C /* LuckyDropHistoryViewModel+TokenHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LuckyDropHistoryViewModel+TokenHistory.swift"; sourceTree = "<group>"; };
+		1FF403F72806BD2D00468F5C /* LuckyDropHistoryItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuckyDropHistoryItemViewModel.swift; sourceTree = "<group>"; };
 		2A0C16AE2666713D0085524E /* StoredKeyImportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredKeyImportType.swift; sourceTree = "<group>"; };
 		2A18E7FA266C9D210045BC88 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		2A23A64A27C499E800CC5AD9 /* Shape+Fill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shape+Fill.swift"; sourceTree = "<group>"; };
@@ -1487,6 +1490,7 @@
 			files = (
 				0FACA3B52671F31E00CB8AC0 /* CoreDataStack.framework in Frameworks */,
 				2937D922CA95E5739C9BF27F /* Pods_Maskbook.framework in Frameworks */,
+				1FF404732809653F00468F5C /* PullRefresh in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2233,6 +2237,7 @@
 				2AF6C7B527FEA52700A9EA4A /* LuckyDropViewModel.swift */,
 				1F48D38E2805199600A51B89 /* LuckyDropHistoryHelper.swift */,
 				1FF403F52806AD8D00468F5C /* LuckyDropHistoryViewModel+TokenHistory.swift */,
+				1FF403F72806BD2D00468F5C /* LuckyDropHistoryItemViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -3832,6 +3837,9 @@
 				0FACA3B82671F31E00CB8AC0 /* PBXTargetDependency */,
 			);
 			name = Maskbook;
+			packageProductDependencies = (
+				1FF404722809653F00468F5C /* PullRefresh */,
+			);
 			productName = Maskbook;
 			productReference = DBAAF49122C35A7100017594 /* Maskbook.app */;
 			productType = "com.apple.product-type.application";
@@ -3901,6 +3909,9 @@
 				"zh-Hans",
 			);
 			mainGroup = DBAAF48822C35A7100017594;
+			packageReferences = (
+				1FF404712809653F00468F5C /* XCRemoteSwiftPackageReference "Refresh" */,
+			);
 			productRefGroup = DBAAF49222C35A7100017594 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -4184,6 +4195,7 @@
 				2AF88612271EED7D0004565A /* LazyFuture.swift in Sources */,
 				2AF6C7CD27FEA52700A9EA4A /* RedPacketAvailability.swift in Sources */,
 				2AF88560271EE9310004565A /* GasFeeCustomCollectionViewCell.swift in Sources */,
+				1FF403F82806BD2D00468F5C /* LuckyDropHistoryItemViewModel.swift in Sources */,
 				2A6ABBA82720053B00CC3AED /* RemoteBackupVerifyViewModel.swift in Sources */,
 				2AF88588271EE9310004565A /* MaskTabBarButton.swift in Sources */,
 				0F1A15A0265CE83900B5E83E /* WalletCoreService.swift in Sources */,
@@ -5608,6 +5620,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1FF404712809653F00468F5C /* XCRemoteSwiftPackageReference "Refresh" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/foxsin10/Refresh.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1FF404722809653F00468F5C /* PullRefresh */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FF404712809653F00468F5C /* XCRemoteSwiftPackageReference "Refresh" */;
+			productName = PullRefresh;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		0F20519C265E125600602A0C /* Mask.xcdatamodeld */ = {

@@ -186,6 +186,36 @@ extension WalletAssetManager {
             return nil
         }
     }
+
+    func getToken(chainId: Int, networkId: Int) -> Token? {
+        let context = AppContext.shared.coreDataStack.persistentContainer.viewContext
+        do {
+            let fetchRequest = Token.sortedFetchRequest
+
+            let predicates = [
+                NSComparisonPredicate(
+                    leftExpression: .init(forKeyPath: \Token.chainId),
+                    rightExpression: .init(forConstantValue: Int64(chainId)),
+                    modifier: .direct,
+                    type: .equalTo,
+                    options: []
+                ),
+                NSComparisonPredicate(
+                    leftExpression: .init(forKeyPath: \Token.networkId),
+                    rightExpression: .init(forConstantValue: Int64(networkId)),
+                    modifier: .direct,
+                    type: .equalTo,
+                    options: []
+                ),
+            ]
+            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+            fetchRequest.fetchLimit = 1
+            let tokens = try context.fetch(fetchRequest)
+            return tokens.first
+        } catch {
+            return nil
+        }
+    }
     
     func getToken(address: String, name: String, chainId: Int, networkId: Int, context: NSManagedObjectContext) -> Token? {
         do {

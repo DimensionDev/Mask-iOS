@@ -12,15 +12,13 @@ final class LuckDropHistoryController: BaseViewController {
     
     override func buildContent() {
         super.buildContent()
-        LuckyDropHistoryView().asContent(in: self)
-        let value = Task.detached(priority: .high) {
-            try? await self.viewModel.fetchHistory()
-        }
+        LuckyDropHistoryView(viewModel: viewModel).asContent(in: self)
+//        viewModel.displayData()
     }
 }
 
 
-enum LuckDropKind: RawRepresentable, Hashable, Identifiable, CaseIterable {
+enum LuckDropKind: RawRepresentable, Hashable, Identifiable, CaseIterable, Sendable {
     case token
     case nft
 
@@ -54,6 +52,13 @@ where Item: Hashable,
 
     @Binding var selection: Item
 
+    private let tapAction: () -> Void
+
+    init(selection: Binding<Item>, onTapped action: @escaping () -> Void = {}) {
+        _selection = selection
+        tapAction = action
+    }
+
     var body: some View {
         GeometryReader { proxy in
             let count = CGFloat(Item.allCases.count)
@@ -68,9 +73,13 @@ where Item: Hashable,
                         .frame(minWidth: itemWidth, minHeight: proxy.size.height)
                         .contentShape(Rectangle())
                         .onTapGesture {
+                            guard self.selection != item else {
+                                return
+                            }
                             withAnimation {
                                 self.selection = item
                             }
+                            tapAction()
                         }
                 }
             }

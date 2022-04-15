@@ -1,8 +1,20 @@
 import Foundation
 
+import BigInt
+import web3swift
+
 extension LuckyDropHistoryViewModel {
+    struct TokenPayload {
+        let checkAvailability: HappyRedPacketV4.CheckAvailabilityResult?
+        let payload: RedPacketPayload
+
+        var id: String {
+            payload.basic?.txid ?? ""
+        }
+    }
+
     @MaskGroupActor
-    func fetchHistory() async throws -> [RedPacketPayload] {
+    func fetchTokenRedPacketHistory() async throws -> [TokenPayload] {
         // first get explore url, if return nil
         // display empty state
         guard let params = await self.getFetchParams() else {
@@ -38,7 +50,7 @@ extension LuckyDropHistoryViewModel {
             contract: contract,
             decoding: decoder,
             address: address,
-            networkName: networkName
+            networkName: networkName ?? ""
         )
 
         let ethAddress = EthereumAddress(contractAddress)
@@ -59,20 +71,20 @@ extension LuckyDropHistoryViewModel {
         }
 
         return await withTaskGroup(
-            of: RedPacketPayload?.self,
-            returning: [RedPacketPayload].self
+            of: TokenPayload?.self,
+            returning: [TokenPayload].self
         ) { taskGroup in
             for payload in payloads[0 ..< 6] {
                 taskGroup.addTask {
-                    // here txid is a garantee value
                     // mark @MaskGroupActor for the closure to make it works
-                    async let task = Task.detached { @MaskGroupActor () -> RedPacketPayload? in
+                    async let task = Task.detached { @MaskGroupActor () -> TokenPayload? in
                         var payload = payload
+                        // here txid is a garantee value
                         let txid = payload.basic?.txid ?? ""
 
-                        // TODO: reimplement getTransactionReceipt
-                        // getTransactionReceipt is the bottle neck
-                        // it will wait to get log on a queue to cause uneffeciency to the async/await
+                        // TODO: reimplement getTransactionReceipt and ReadTransaction.call with async/await
+                        // getTransactionReceipt adn tx.call is the bottle neck
+                        // it will wait to get log on a queue to cause uneffeciency compare to the async/await
                         // if use the down follow code to request eventlog, it is ok, but the checkAvailability will get stuck
                         // when the payloads is too much.
 
@@ -94,8 +106,7 @@ extension LuckyDropHistoryViewModel {
                         }
 
                         payload.basic?.rpid = eventParam.id
-                        payload.basic?.creationTime = eventParam.creation_time.asDouble()
-                            .flatMap { $0 * 1000 } ?? 0
+                        payload.basic?.creationTime = eventParam.creation_time.asDouble() ?? 0
 
                         let checkAvailability = await self.contract.checkAvailability(redPackageId: eventParam.id)
                         payload.payload?.claimers = checkAvailability?.claimed
@@ -103,14 +114,14 @@ extension LuckyDropHistoryViewModel {
                             .map { (0..<$0).map { _ in RedPacket.Claimer.init(address: "", name: "") } }
                         payload.payload?.totalRemaining = checkAvailability?.balance.flatMap { String($0, radix: 10) }
 
-                        return payload
+                        return TokenPayload.init(checkAvailability: checkAvailability, payload: payload)
                     }
 
                     return await task.value
                 }
             }
 
-            var results: [RedPacketPayload] = []
+            var results: [TokenPayload] = []
             guard !taskGroup.isCancelled else {
                 return results
             }
@@ -160,8 +171,7 @@ fileprivate extension Data {
                     isRandom: info.ifrandom,
                     total: info.total_tokens.description,
                     creationTime: 0,
-                    duration: info.duration.asDouble().flatMap { $0 * 1000 } ?? 0,
-                    // better use bigint
+                    duration: info.duration.asDouble() ?? 0,
                     blockNumber: Int(next.blockNumber)
                 )
 

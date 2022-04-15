@@ -127,3 +127,39 @@ extension RedPacket {
         }
     }
 }
+
+extension RedPacket.ChainId {
+    var nativeTokenAddress: String? {
+        switch self {
+        case .mainnet, .bsc, .arbitrum, .xDai, .matic: return  "0x0000000000000000000000000000000000000000"
+        case .celo: return "0x471ece3750da237f93b8e339c536989b8978a438"
+        default: return nil
+        }
+    }
+}
+
+extension RedPacket.Token {
+    static var eth: Self {
+        .init(
+            type: .native,
+            address: RedPacket.ChainId.mainnet.nativeTokenAddress ?? "",
+            chainId: .mainnet,
+            name: "Ether",
+            symbol: "ETH",
+            decimals: 18,
+            logoURI: nil
+        )
+    }
+
+    static var bsc: Self {
+        .init(
+            type: .native,
+            address: RedPacket.ChainId.mainnet.nativeTokenAddress ?? "",
+            chainId: .mainnet,
+            name: "Ether",
+            symbol: "ETH",
+            decimals: 18,
+            logoURI: nil
+        )
+    }
+}

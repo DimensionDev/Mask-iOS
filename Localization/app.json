@@ -183,7 +183,8 @@
             "saved": "Saved!",
             "copy": "copied!"
         },
-        "loading": "Loading..."
+        "loading": "Loading...",
+        "empty": "No records"
     },
     "scene": {
         "guide": {
@@ -845,6 +846,7 @@
             "on_going": "Ongoing",
             "expired": "Expired",
             "claimed": "Claimed",
+            "created": "Created",
             "refunded":"Refunded",
             "refund":"Refund",
             "empty": "Empty",
@@ -881,6 +883,7 @@
     },
     "plugins": {
         "luckyDrop": {
+            "plugin_red_packet_best_wishes": "Best Wishes!",
             "buttons": {
                 "risk-warning": "Confirm Risk Warning",
                 "unlock-token": "Approve %@",

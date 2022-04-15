@@ -78,6 +78,10 @@ enum L10n {
   }
 
   enum Common {
+    /// No records
+    static var empty: String {
+      return L10n.tr("Localizable", "Common.Empty")
+    }
     /// Loading...
     static var loading: String {
       return L10n.tr("Localizable", "Common.Loading")
@@ -645,6 +649,10 @@ enum L10n {
       /// NFT
       static var nft: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Nft")
+      }
+      /// Best Wishes!
+      static var pluginRedPacketBestWishes: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.PluginRedPacketBestWishes")
       }
       /// Quantity
       static var quantity: String {
@@ -1425,6 +1433,10 @@ enum L10n {
       /// Confirm Risk Warning
       static var confirmRiskWarning: String {
         return L10n.tr("Localizable", "Scene.OpenRedPackage.ConfirmRiskWarning")
+      }
+      /// Created
+      static var created: String {
+        return L10n.tr("Localizable", "Scene.OpenRedPackage.Created")
       }
       /// Empty
       static var empty: String {
