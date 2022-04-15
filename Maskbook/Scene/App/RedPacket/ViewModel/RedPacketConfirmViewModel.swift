@@ -13,7 +13,6 @@ import Foundation
 import web3swift
 
 class RedPacketConfirmViewModel: NSObject, ObservableObject {
-    @Published var address: String = ""
     @Published var gasFeeItem: GasFeeCellItem?
     @Published var inputParam: HappyRedPacketV4.CreateRedPacketInput?
     @Published var token: Token?
@@ -21,6 +20,7 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
     var gasFeeViewModel: GasFeeViewModel?
     var transaction: EthereumTransaction?
     var completion: ((String?, Error?) -> Void)?
+    var options: TransactionOptions?
     
     var tokenIconURL: URL? {
         guard let url = token?.logoUrl else { return nil }
@@ -126,8 +126,16 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
         return BigUInt(gasLimitStr) ?? BigUInt(21_000)
     }
     
+    var address: String {
+        options?.from?.address ?? ""
+    }
+    
     @InjectedProvider(\.userDefaultSettings)
     private var settings
+    @InjectedProvider(\.walletConnectClient)
+    private var walletConnectClient
+    @InjectedProvider(\.vault)
+    var vault
     private let viewContext = AppContext.shared.coreDataStack.persistentContainer.viewContext
     private var disposeBag = Set<AnyCancellable>()
     
@@ -136,22 +144,91 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
         gasFeeViewModel: GasFeeViewModel?,
         inputParam: HappyRedPacketV4.CreateRedPacketInput?,
         transaction: EthereumTransaction?,
+        options: TransactionOptions?,
         completion: ((String?, Error?) -> Void)?
     ) {
         self.token = token
         self.gasFeeViewModel = gasFeeViewModel
         self.inputParam = inputParam
+        self.options = options
         self.transaction = transaction
         self.completion = completion
         
         super.init()
         
-        self.address = settings.defaultAccountAddress ?? ""
         gasFeeViewModel?.confirmedGasFeePublisher
             .removeDuplicates()
             .filter({ $0 != nil })
             .assign(to: \.gasFeeItem, on: self)
             .store(in: &disposeBag)
+    }
+    
+    func onConfirm() {
+        vault.getWalletPassword()
+            .sink(receiveCompletion: { _ in }) { [weak self] password in
+                self?.sendTransaction(password: password) { [weak self] result in
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success(let txHash): self?.completion?(txHash, nil)
+                        case .failure(let error): self?.completion?(nil, error)
+                        }
+                    }
+                }
+            }
+            .store(in: &disposeBag)
+    }
+    
+    private func sendTransaction(
+        password: String,
+        _ completion: @escaping (Swift.Result<String, Error>) -> Void)
+    {
+        guard let transaction = transaction else {
+            completion(.failure(WalletSendError.contractError))
+            return
+        }
+
+        guard let fromAddress = options?.from?.address else {
+            completion(.failure(WalletSendError.addressError))
+            return
+        }
+
+        guard let fromAccount = WalletCoreService.shared.getAccount(address: fromAddress) else {
+            completion(.failure(WalletSendError.addressError))
+            return
+        }
+
+        guard let gasFeeItem = gasFeeItem else {
+            return
+        }
+        
+        guard var transactionOptions = options else {
+            return
+        }
+        if let gasLimit = BigUInt(gasFeeItem.gasLimit) {
+            transactionOptions.gasLimit = .manual(gasLimit)
+        } else {
+            transactionOptions.gasLimit = .automatic
+        }
+        
+        if fromAccount.fromWalletConnect {
+            walletConnectClient.signTransaction(transaction: transaction,
+                                                transactionOptions: transactionOptions,
+                                                completion)
+        } else {
+            let maxFeePerGas = Web3.Utils.parseToBigUInt(gasFeeItem.suggestedMaxFeePerGas, units: .Gwei)
+            let maxInclusionFeePerGas = Web3.Utils.parseToBigUInt(
+                gasFeeItem.suggestedMaxPriorityFeePerGas,
+                units: .Gwei
+            )
+            WalletSendHelper.sendTransactionWithWeb3(
+                password: password,
+                transaction: transaction,
+                transactionOptions: transactionOptions,
+                maxFeePerGas: maxFeePerGas == 0 ? nil : maxFeePerGas,
+                maxInclusionFeePerGas: maxInclusionFeePerGas == 0 ? nil : maxInclusionFeePerGas,
+                network: maskUserDefaults.network,
+                completion)
+        }
     }
 }
 
@@ -186,6 +263,7 @@ class RedPacketConfirmViewModelMock: RedPacketConfirmViewModel {
             gasFeeViewModel: nil,
             inputParam: nil,
             transaction: nil,
+            options: nil,
             completion: nil)
     }
 }

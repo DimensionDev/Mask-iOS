@@ -198,6 +198,7 @@ class Coordinator {
             gasFeeViewModel: GasFeeViewModel?,
             redPacketInput: HappyRedPacketV4.CreateRedPacketInput,
             transaction: EthereumTransaction,
+            options: TransactionOptions,
             completion: (String?, Error?) -> Void
         )
         case debug
@@ -774,6 +775,7 @@ extension Coordinator {
             let gasFeeViewModel,
             let redPacketInput,
             let transaction,
+            let options,
             let completion
         ):
             return LuckyDropConfirmViewController(
@@ -781,6 +783,7 @@ extension Coordinator {
                 gasFeeViewModel: gasFeeViewModel,
                 redPacketInput: redPacketInput,
                 transaction: transaction,
+                options: options,
                 completion: completion
             )
             
@@ -797,6 +800,10 @@ extension Coordinator {
         if let mainTabVC = keyWindow.rootViewController?.presentedViewController as? MainTabBarController {
             mainTabVC.dismiss(animated: animated, completion: nil)
         }
+    }
+    
+    func dismissTopViewController() {
+        UIApplication.getTopViewController()?.dismiss(animated: true, completion: nil)
     }
 }
 

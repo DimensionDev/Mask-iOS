@@ -92,14 +92,17 @@ struct HappyRedPacketV4: ABIContract {
                             token: token,
                             gasFeeViewModel: gasFeeViewModel,
                             redPacketInput: redPacketInput,
-                            transaction: transaction) { tx, error in
-                                if let error = error {
-                                    continuation.resume(with: .failure(error))
-                                } else {
-                                    continuation.resume(with: .success(tx))
-                                }
+                            transaction: transaction,
+                            options: tx.transactionOptions
+                        ) { tx, error in
+                            if let error = error {
+                                continuation.resume(with: .failure(error))
+                            } else {
+                                continuation.resume(with: .success(tx))
+                                mainCoordinator.dismissTopViewController()
                             }
-                        self.mainCoordinator.present(
+                        }
+                        mainCoordinator.present(
                             scene: scene,
                             transition: .modal()
                         )

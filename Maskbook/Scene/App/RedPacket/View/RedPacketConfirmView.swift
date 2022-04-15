@@ -70,6 +70,7 @@ struct RedPacketConfirmView: View {
                 tipsView
             }
             PrimaryButton(title: L10n.Common.Controls.confirm) {
+                viewModel.onConfirm()
             }
         }
         .padding(.horizontal)

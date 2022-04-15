@@ -345,8 +345,9 @@ class LuckyDropViewModel: NSObject, ObservableObject {
                 gasFeeViewModel: gasFeeViewModel,
                 param: param
             )
-            log.debug("\(tx ?? "It's failed to create redPacket")", source: "create-red-packet")
             await MainActor.run {
+                log.debug("\(tx ?? "It's failed to create redPacket")", source: "create-red-packet")
+                // TODO: send tx to be observed
                 // Show the loading animation and reset the `ComfirmButton`'s state.
                 buttonType = .requestAllowance
                 checkParam()
