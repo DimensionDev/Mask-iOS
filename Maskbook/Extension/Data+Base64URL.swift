@@ -66,4 +66,5 @@ extension String {
     public mutating func base64URLEscape() {
         self = base64URLEscaped()
     }
+    
 }

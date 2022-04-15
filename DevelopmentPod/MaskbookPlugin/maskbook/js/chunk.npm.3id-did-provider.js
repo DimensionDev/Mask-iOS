@@ -981,7 +981,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.toStableObject = exports.decodeBase64 = exports.encodeBase64 = exports.u8aToHex = exports.hexToU8A = exports.parseJWEKids = exports.decodeKey = exports.encodeKey = void 0;
-const fast_json_stable_stringify_1 = __importDefault(__webpack_require__(75687));
+const fast_json_stable_stringify_1 = __importDefault(__webpack_require__(34454));
 const u8a = __importStar(__webpack_require__(31605));
 const B16 = 'base16';
 const B64 = 'base64pad';

@@ -1,7 +1,7 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[6067],{
 
-/***/ 84173:
+/***/ 8659:
 /***/ ((module) => {
 
 /*
@@ -39,10 +39,6 @@ var getNetworkType = function (callback) {
             id === 1) {
             returnValue = 'main';
         }
-        if (genesis.hash === '0cd786a2425d16f152c658316c423e6ce1181e15c3295826d7c9904cba9ce303' &&
-            id === 2) {
-            returnValue = 'morden';
-        }
         if (genesis.hash === '0x41941023680923e0fe4d74a34bdac8141f2540e3ae90623718e47d66d1ca4a2d' &&
             id === 3) {
             returnValue = 'ropsten';
@@ -78,7 +74,7 @@ module.exports = getNetworkType;
 
 /***/ }),
 
-/***/ 72395:
+/***/ 19277:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /*
@@ -103,19 +99,19 @@ module.exports = getNetworkType;
  * @date 2017
  */
 
-var core = __webpack_require__(10833);
-var helpers = __webpack_require__(70222);
-var Subscriptions = (__webpack_require__(84350).subscriptions);
-var Method = __webpack_require__(34023);
-var utils = __webpack_require__(83317);
-var Net = __webpack_require__(76932);
-var ENS = __webpack_require__(92443);
-var Personal = __webpack_require__(33513);
-var BaseContract = __webpack_require__(57226);
-var Iban = __webpack_require__(67541);
-var Accounts = __webpack_require__(21044);
-var abi = __webpack_require__(24278);
-var getNetworkType = __webpack_require__(84173);
+var core = __webpack_require__(43702);
+var helpers = __webpack_require__(41032);
+var Subscriptions = (__webpack_require__(70790).subscriptions);
+var Method = __webpack_require__(82481);
+var utils = __webpack_require__(11627);
+var Net = __webpack_require__(88790);
+var ENS = __webpack_require__(82448);
+var Personal = __webpack_require__(41643);
+var BaseContract = __webpack_require__(78741);
+var Iban = __webpack_require__(84390);
+var Accounts = __webpack_require__(10738);
+var abi = __webpack_require__(9177);
+var getNetworkType = __webpack_require__(8659);
 var formatter = helpers.formatters;
 var blockCall = function (args) {
     return (typeof args[0] === 'string' && args[0].indexOf('0x') === 0) ? "eth_getBlockByHash" : "eth_getBlockByNumber";
@@ -162,6 +158,8 @@ var Eth = function Eth() {
     var transactionBlockTimeout = 50;
     var transactionConfirmationBlocks = 24;
     var transactionPollingTimeout = 750;
+    var transactionPollingInterval = 1000;
+    var blockHeaderTimeout = 10; // 10 seconds
     var maxListenersWarningThreshold = 100;
     var defaultChain, defaultHardfork, defaultCommon;
     Object.defineProperty(this, 'handleRevert', {
@@ -239,6 +237,21 @@ var Eth = function Eth() {
         },
         enumerable: true
     });
+    Object.defineProperty(this, 'transactionPollingInterval', {
+        get: function () {
+            return transactionPollingInterval;
+        },
+        set: function (val) {
+            transactionPollingInterval = val;
+            // also set on the Contract object
+            _this.Contract.transactionPollingInterval = transactionPollingInterval;
+            // update defaultBlock
+            methods.forEach(function (method) {
+                method.transactionPollingInterval = transactionPollingInterval;
+            });
+        },
+        enumerable: true
+    });
     Object.defineProperty(this, 'transactionConfirmationBlocks', {
         get: function () {
             return transactionConfirmationBlocks;
@@ -265,6 +278,21 @@ var Eth = function Eth() {
             // update defaultBlock
             methods.forEach(function (method) {
                 method.transactionBlockTimeout = transactionBlockTimeout;
+            });
+        },
+        enumerable: true
+    });
+    Object.defineProperty(this, 'blockHeaderTimeout', {
+        get: function () {
+            return blockHeaderTimeout;
+        },
+        set: function (val) {
+            blockHeaderTimeout = val;
+            // also set on the Contract object
+            _this.Contract.blockHeaderTimeout = blockHeaderTimeout;
+            // update defaultBlock
+            methods.forEach(function (method) {
+                method.blockHeaderTimeout = blockHeaderTimeout;
             });
         },
         enumerable: true
@@ -363,6 +391,8 @@ var Eth = function Eth() {
     this.Contract.transactionBlockTimeout = this.transactionBlockTimeout;
     this.Contract.transactionConfirmationBlocks = this.transactionConfirmationBlocks;
     this.Contract.transactionPollingTimeout = this.transactionPollingTimeout;
+    this.Contract.transactionPollingInterval = this.transactionPollingInterval;
+    this.Contract.blockHeaderTimeout = this.blockHeaderTimeout;
     this.Contract.handleRevert = this.handleRevert;
     this.Contract._requestManager = this._requestManager;
     this.Contract._ethAccounts = this.accounts;
@@ -415,7 +445,7 @@ var Eth = function Eth() {
             name: 'getFeeHistory',
             call: 'eth_feeHistory',
             params: 3,
-            inputFormatter: [utils.toNumber, formatter.inputBlockNumberFormatter, null]
+            inputFormatter: [utils.numberToHex, formatter.inputBlockNumberFormatter, null]
         }),
         new Method({
             name: 'getAccounts',
@@ -590,6 +620,12 @@ var Eth = function Eth() {
             params: 0,
             outputFormatter: formatter.outputTransactionFormatter
         }),
+        new Method({
+            name: 'createAccessList',
+            call: 'eth_createAccessList',
+            params: 2,
+            inputFormatter: [formatter.inputTransactionFormatter, formatter.inputDefaultBlockNumberFormatter],
+        }),
         // subscriptions
         new Subscriptions({
             name: 'subscribe',
@@ -672,6 +708,7 @@ var Eth = function Eth() {
         method.transactionBlockTimeout = _this.transactionBlockTimeout;
         method.transactionConfirmationBlocks = _this.transactionConfirmationBlocks;
         method.transactionPollingTimeout = _this.transactionPollingTimeout;
+        method.transactionPollingInterval = _this.transactionPollingInterval;
         method.handleRevert = _this.handleRevert;
     });
 };

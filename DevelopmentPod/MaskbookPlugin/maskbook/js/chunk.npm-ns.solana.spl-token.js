@@ -7612,6 +7612,3500 @@ class Token {
 //# sourceMappingURL=index.browser.esm.js.map
 
 
+/***/ }),
+
+/***/ 75095:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.approve = void 0;
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const index_1 = __webpack_require__(22228);
+const internal_1 = __webpack_require__(72231);
+/**
+ * Approve a delegate to transfer up to a maximum number of tokens from an account
+ *
+ * @param connection     Connection to use
+ * @param payer          Payer of the transaction fees
+ * @param account        Address of the token account
+ * @param delegate       Account authorized to transfer tokens from the account
+ * @param owner          Owner of the account
+ * @param amount         Maximum number of tokens the delegate may transfer
+ * @param multiSigners   Signing accounts if `owner` is a multisig
+ * @param confirmOptions Options for confirming the transaction
+ * @param programId      SPL Token program account
+ *
+ * @return Signature of the confirmed transaction
+ */
+function approve(connection, payer, account, delegate, owner, amount, multiSigners = [], confirmOptions, programId = constants_1.TOKEN_PROGRAM_ID) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const [ownerPublicKey, signers] = (0, internal_1.getSigners)(owner, multiSigners);
+        const transaction = new web3_js_1.Transaction().add((0, index_1.createApproveInstruction)(account, delegate, ownerPublicKey, amount, multiSigners, programId));
+        return yield (0, web3_js_1.sendAndConfirmTransaction)(connection, transaction, [payer, ...signers], confirmOptions);
+    });
+}
+exports.approve = approve;
+//# sourceMappingURL=approve.js.map
+
+/***/ }),
+
+/***/ 52266:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.approveChecked = void 0;
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const index_1 = __webpack_require__(22228);
+const internal_1 = __webpack_require__(72231);
+/**
+ * Approve a delegate to transfer up to a maximum number of tokens from an account, asserting the token mint and
+ * decimals
+ *
+ * @param connection     Connection to use
+ * @param payer          Payer of the transaction fees
+ * @param account        Address of the account
+ * @param delegate       Account authorized to perform a transfer tokens from the source account
+ * @param owner          Owner of the source account
+ * @param amount         Maximum number of tokens the delegate may transfer
+ * @param decimals       Number of decimals in approve amount
+ * @param multiSigners   Signing accounts if `owner` is a multisig
+ * @param confirmOptions Options for confirming the transaction
+ * @param programId      SPL Token program account
+ *
+ * @return Signature of the confirmed transaction
+ */
+function approveChecked(connection, payer, mint, account, delegate, owner, amount, decimals, multiSigners = [], confirmOptions, programId = constants_1.TOKEN_PROGRAM_ID) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const [ownerPublicKey, signers] = (0, internal_1.getSigners)(owner, multiSigners);
+        const transaction = new web3_js_1.Transaction().add((0, index_1.createApproveCheckedInstruction)(account, mint, delegate, ownerPublicKey, amount, decimals, multiSigners, programId));
+        return yield (0, web3_js_1.sendAndConfirmTransaction)(connection, transaction, [payer, ...signers], confirmOptions);
+    });
+}
+exports.approveChecked = approveChecked;
+//# sourceMappingURL=approveChecked.js.map
+
+/***/ }),
+
+/***/ 83278:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.burn = void 0;
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const index_1 = __webpack_require__(22228);
+const internal_1 = __webpack_require__(72231);
+/**
+ * Burn tokens from an account
+ *
+ * @param connection     Connection to use
+ * @param payer          Payer of the transaction fees
+ * @param account        Account to burn tokens from
+ * @param mint           Mint for the account
+ * @param owner          Account owner
+ * @param amount         Amount to burn
+ * @param multiSigners   Signing accounts if `owner` is a multisig
+ * @param confirmOptions Options for confirming the transaction
+ * @param programId      SPL Token program account
+ *
+ * @return Signature of the confirmed transaction
+ */
+function burn(connection, payer, account, mint, owner, amount, multiSigners = [], confirmOptions, programId = constants_1.TOKEN_PROGRAM_ID) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const [ownerPublicKey, signers] = (0, internal_1.getSigners)(owner, multiSigners);
+        const transaction = new web3_js_1.Transaction().add((0, index_1.createBurnInstruction)(account, mint, ownerPublicKey, amount, multiSigners, programId));
+        return yield (0, web3_js_1.sendAndConfirmTransaction)(connection, transaction, [payer, ...signers], confirmOptions);
+    });
+}
+exports.burn = burn;
+//# sourceMappingURL=burn.js.map
+
+/***/ }),
+
+/***/ 88749:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.burnChecked = void 0;
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const index_1 = __webpack_require__(22228);
+const internal_1 = __webpack_require__(72231);
+/**
+ * Burn tokens from an account, asserting the token mint and decimals
+ *
+ * @param connection     Connection to use
+ * @param payer          Payer of the transaction fees
+ * @param account        Account to burn tokens from
+ * @param mint           Mint for the account
+ * @param owner          Account owner
+ * @param amount         Amount to burn
+ * @param decimals       Number of decimals in amount to burn
+ * @param multiSigners   Signing accounts if `owner` is a multisig
+ * @param confirmOptions Options for confirming the transaction
+ * @param programId      SPL Token program account
+ *
+ * @return Signature of the confirmed transaction
+ */
+function burnChecked(connection, payer, account, mint, owner, amount, decimals, multiSigners = [], confirmOptions, programId = constants_1.TOKEN_PROGRAM_ID) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const [ownerPublicKey, signers] = (0, internal_1.getSigners)(owner, multiSigners);
+        const transaction = new web3_js_1.Transaction().add((0, index_1.createBurnCheckedInstruction)(account, mint, ownerPublicKey, amount, decimals, multiSigners, programId));
+        return yield (0, web3_js_1.sendAndConfirmTransaction)(connection, transaction, [payer, ...signers], confirmOptions);
+    });
+}
+exports.burnChecked = burnChecked;
+//# sourceMappingURL=burnChecked.js.map
+
+/***/ }),
+
+/***/ 63226:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.closeAccount = void 0;
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const index_1 = __webpack_require__(22228);
+const internal_1 = __webpack_require__(72231);
+/**
+ * Close a token account
+ *
+ * @param connection     Connection to use
+ * @param payer          Payer of the transaction fees
+ * @param account        Account to close
+ * @param destination    Account to receive the remaining balance of the closed account
+ * @param authority      Authority which is allowed to close the account
+ * @param multiSigners   Signing accounts if `authority` is a multisig
+ * @param confirmOptions Options for confirming the transaction
+ * @param programId      SPL Token program account
+ *
+ * @return Signature of the confirmed transaction
+ */
+function closeAccount(connection, payer, account, destination, authority, multiSigners = [], confirmOptions, programId = constants_1.TOKEN_PROGRAM_ID) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const [authorityPublicKey, signers] = (0, internal_1.getSigners)(authority, multiSigners);
+        const transaction = new web3_js_1.Transaction().add((0, index_1.createCloseAccountInstruction)(account, destination, authorityPublicKey, multiSigners, programId));
+        return yield (0, web3_js_1.sendAndConfirmTransaction)(connection, transaction, [payer, ...signers], confirmOptions);
+    });
+}
+exports.closeAccount = closeAccount;
+//# sourceMappingURL=closeAccount.js.map
+
+/***/ }),
+
+/***/ 48127:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.createAccount = void 0;
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const index_1 = __webpack_require__(22228);
+const index_2 = __webpack_require__(14621);
+const createAssociatedTokenAccount_1 = __webpack_require__(39420);
+/**
+ * Create and initialize a new token account
+ *
+ * @param connection     Connection to use
+ * @param payer          Payer of the transaction and initialization fees
+ * @param mint           Mint for the account
+ * @param owner          Owner of the new account
+ * @param keypair        Optional keypair, defaulting to the associated token account for the `mint` and `owner`
+ * @param confirmOptions Options for confirming the transaction
+ * @param programId      SPL Token program account
+ *
+ * @return Address of the new token account
+ */
+function createAccount(connection, payer, mint, owner, keypair, confirmOptions, programId = constants_1.TOKEN_PROGRAM_ID) {
+    return __awaiter(this, void 0, void 0, function* () {
+        // If a keypair isn't provided, create the associated token account and return its address
+        if (!keypair)
+            return yield (0, createAssociatedTokenAccount_1.createAssociatedTokenAccount)(connection, payer, mint, owner, confirmOptions, programId);
+        // Otherwise, create the account with the provided keypair and return its public key
+        const lamports = yield (0, index_2.getMinimumBalanceForRentExemptAccount)(connection);
+        const transaction = new web3_js_1.Transaction().add(web3_js_1.SystemProgram.createAccount({
+            fromPubkey: payer.publicKey,
+            newAccountPubkey: keypair.publicKey,
+            space: index_2.ACCOUNT_SIZE,
+            lamports,
+            programId,
+        }), (0, index_1.createInitializeAccountInstruction)(keypair.publicKey, mint, owner, programId));
+        yield (0, web3_js_1.sendAndConfirmTransaction)(connection, transaction, [payer, keypair], confirmOptions);
+        return keypair.publicKey;
+    });
+}
+exports.createAccount = createAccount;
+//# sourceMappingURL=createAccount.js.map
+
+/***/ }),
+
+/***/ 39420:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.createAssociatedTokenAccount = void 0;
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const index_1 = __webpack_require__(22228);
+const index_2 = __webpack_require__(14621);
+/**
+ * Create and initialize a new associated token account
+ *
+ * @param connection               Connection to use
+ * @param payer                    Payer of the transaction and initialization fees
+ * @param mint                     Mint for the account
+ * @param owner                    Owner of the new account
+ * @param confirmOptions           Options for confirming the transaction
+ * @param programId                SPL Token program account
+ * @param associatedTokenProgramId SPL Associated Token program account
+ *
+ * @return Address of the new associated token account
+ */
+function createAssociatedTokenAccount(connection, payer, mint, owner, confirmOptions, programId = constants_1.TOKEN_PROGRAM_ID, associatedTokenProgramId = constants_1.ASSOCIATED_TOKEN_PROGRAM_ID) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const associatedToken = yield (0, index_2.getAssociatedTokenAddress)(mint, owner, false, programId, associatedTokenProgramId);
+        const transaction = new web3_js_1.Transaction().add((0, index_1.createAssociatedTokenAccountInstruction)(payer.publicKey, associatedToken, owner, mint, programId, associatedTokenProgramId));
+        yield (0, web3_js_1.sendAndConfirmTransaction)(connection, transaction, [payer], confirmOptions);
+        return associatedToken;
+    });
+}
+exports.createAssociatedTokenAccount = createAssociatedTokenAccount;
+//# sourceMappingURL=createAssociatedTokenAccount.js.map
+
+/***/ }),
+
+/***/ 28175:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.createMint = void 0;
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const index_1 = __webpack_require__(22228);
+const index_2 = __webpack_require__(14621);
+/**
+ * Create and initialize a new mint
+ *
+ * @param connection      Connection to use
+ * @param payer           Payer of the transaction and initialization fees
+ * @param mintAuthority   Account or multisig that will control minting
+ * @param freezeAuthority Optional account or multisig that can freeze token accounts
+ * @param decimals        Location of the decimal place
+ * @param keypair         Optional keypair, defaulting to a new random one
+ * @param confirmOptions  Options for confirming the transaction
+ * @param programId       SPL Token program account
+ *
+ * @return Address of the new mint
+ */
+function createMint(connection, payer, mintAuthority, freezeAuthority, decimals, keypair = web3_js_1.Keypair.generate(), confirmOptions, programId = constants_1.TOKEN_PROGRAM_ID) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const lamports = yield (0, index_2.getMinimumBalanceForRentExemptMint)(connection);
+        const transaction = new web3_js_1.Transaction().add(web3_js_1.SystemProgram.createAccount({
+            fromPubkey: payer.publicKey,
+            newAccountPubkey: keypair.publicKey,
+            space: index_2.MINT_SIZE,
+            lamports,
+            programId,
+        }), (0, index_1.createInitializeMintInstruction)(keypair.publicKey, decimals, mintAuthority, freezeAuthority, programId));
+        yield (0, web3_js_1.sendAndConfirmTransaction)(connection, transaction, [payer, keypair], confirmOptions);
+        return keypair.publicKey;
+    });
+}
+exports.createMint = createMint;
+//# sourceMappingURL=createMint.js.map
+
+/***/ }),
+
+/***/ 58316:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.createMultisig = void 0;
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const index_1 = __webpack_require__(22228);
+const index_2 = __webpack_require__(14621);
+/**
+ * Create and initialize a new multisig
+ *
+ * @param connection     Connection to use
+ * @param payer          Payer of the transaction and initialization fees
+ * @param signers        Full set of signers
+ * @param m              Number of required signatures
+ * @param keypair        Optional keypair, defaulting to a new random one
+ * @param confirmOptions Options for confirming the transaction
+ * @param programId      SPL Token program account
+ *
+ * @return Address of the new multisig
+ */
+function createMultisig(connection, payer, signers, m, keypair = web3_js_1.Keypair.generate(), confirmOptions, programId = constants_1.TOKEN_PROGRAM_ID) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const lamports = yield (0, index_2.getMinimumBalanceForRentExemptMultisig)(connection);
+        const transaction = new web3_js_1.Transaction().add(web3_js_1.SystemProgram.createAccount({
+            fromPubkey: payer.publicKey,
+            newAccountPubkey: keypair.publicKey,
+            space: index_2.MULTISIG_SIZE,
+            lamports,
+            programId,
+        }), (0, index_1.createInitializeMultisigInstruction)(keypair.publicKey, signers, m, programId));
+        yield (0, web3_js_1.sendAndConfirmTransaction)(connection, transaction, [payer, keypair], confirmOptions);
+        return keypair.publicKey;
+    });
+}
+exports.createMultisig = createMultisig;
+//# sourceMappingURL=createMultisig.js.map
+
+/***/ }),
+
+/***/ 8594:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.createWrappedNativeAccount = void 0;
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const index_1 = __webpack_require__(22228);
+const index_2 = __webpack_require__(14621);
+const createAccount_1 = __webpack_require__(48127);
+/**
+ * Create, initialize, and fund a new wrapped native SOL account
+ *
+ * @param connection     Connection to use
+ * @param payer          Payer of the transaction and initialization fees
+ * @param owner          Owner of the new token account
+ * @param amount         Number of lamports to wrap
+ * @param keypair        Optional keypair, defaulting to the associated token account for the native mint and `owner`
+ * @param confirmOptions Options for confirming the transaction
+ * @param programId      SPL Token program account
+ *
+ * @return Address of the new wrapped native SOL account
+ */
+function createWrappedNativeAccount(connection, payer, owner, amount, keypair, confirmOptions, programId = constants_1.TOKEN_PROGRAM_ID) {
+    return __awaiter(this, void 0, void 0, function* () {
+        // If the amount provided is explicitly 0 or NaN, just create the account without funding it
+        if (!amount)
+            return yield (0, createAccount_1.createAccount)(connection, payer, constants_1.NATIVE_MINT, owner, keypair, confirmOptions, programId);
+        // If a keypair isn't provided, create the account at the owner's ATA for the native mint and return its address
+        if (!keypair) {
+            const associatedToken = yield (0, index_2.getAssociatedTokenAddress)(constants_1.NATIVE_MINT, owner, false, programId, constants_1.ASSOCIATED_TOKEN_PROGRAM_ID);
+            const transaction = new web3_js_1.Transaction().add((0, index_1.createAssociatedTokenAccountInstruction)(payer.publicKey, associatedToken, owner, constants_1.NATIVE_MINT, programId, constants_1.ASSOCIATED_TOKEN_PROGRAM_ID), web3_js_1.SystemProgram.transfer({
+                fromPubkey: payer.publicKey,
+                toPubkey: associatedToken,
+                lamports: amount,
+            }), (0, index_1.createSyncNativeInstruction)(associatedToken, programId));
+            yield (0, web3_js_1.sendAndConfirmTransaction)(connection, transaction, [payer], confirmOptions);
+            return associatedToken;
+        }
+        // Otherwise, create the account with the provided keypair and return its public key
+        const lamports = yield (0, index_2.getMinimumBalanceForRentExemptAccount)(connection);
+        const transaction = new web3_js_1.Transaction().add(web3_js_1.SystemProgram.createAccount({
+            fromPubkey: payer.publicKey,
+            newAccountPubkey: keypair.publicKey,
+            space: index_2.ACCOUNT_SIZE,
+            lamports,
+            programId,
+        }), web3_js_1.SystemProgram.transfer({
+            fromPubkey: payer.publicKey,
+            toPubkey: keypair.publicKey,
+            lamports: amount,
+        }), (0, index_1.createInitializeAccountInstruction)(keypair.publicKey, constants_1.NATIVE_MINT, owner, programId));
+        yield (0, web3_js_1.sendAndConfirmTransaction)(connection, transaction, [payer, keypair], confirmOptions);
+        return keypair.publicKey;
+    });
+}
+exports.createWrappedNativeAccount = createWrappedNativeAccount;
+//# sourceMappingURL=createWrappedNativeAccount.js.map
+
+/***/ }),
+
+/***/ 79507:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.freezeAccount = void 0;
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const index_1 = __webpack_require__(22228);
+const internal_1 = __webpack_require__(72231);
+/**
+ * Freeze a token account
+ *
+ * @param connection     Connection to use
+ * @param payer          Payer of the transaction fees
+ * @param account        Account to freeze
+ * @param mint           Mint for the account
+ * @param authority      Mint freeze authority
+ * @param multiSigners   Signing accounts if `authority` is a multisig
+ * @param confirmOptions Options for confirming the transaction
+ * @param programId      SPL Token program account
+ *
+ * @return Signature of the confirmed transaction
+ */
+function freezeAccount(connection, payer, account, mint, authority, multiSigners = [], confirmOptions, programId = constants_1.TOKEN_PROGRAM_ID) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const [authorityPublicKey, signers] = (0, internal_1.getSigners)(authority, multiSigners);
+        const transaction = new web3_js_1.Transaction().add((0, index_1.createFreezeAccountInstruction)(account, mint, authorityPublicKey, multiSigners, programId));
+        return yield (0, web3_js_1.sendAndConfirmTransaction)(connection, transaction, [payer, ...signers], confirmOptions);
+    });
+}
+exports.freezeAccount = freezeAccount;
+//# sourceMappingURL=freezeAccount.js.map
+
+/***/ }),
+
+/***/ 13630:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getOrCreateAssociatedTokenAccount = void 0;
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const errors_1 = __webpack_require__(43783);
+const index_1 = __webpack_require__(22228);
+const index_2 = __webpack_require__(14621);
+/**
+ * Retrieve the associated token account, or create it if it doesn't exist
+ *
+ * @param connection               Connection to use
+ * @param payer                    Payer of the transaction and initialization fees
+ * @param mint                     Mint associated with the account to set or verify
+ * @param owner                    Owner of the account to set or verify
+ * @param allowOwnerOffCurve       Allow the owner account to be a PDA (Program Derived Address)
+ * @param commitment               Desired level of commitment for querying the state
+ * @param confirmOptions           Options for confirming the transaction
+ * @param programId                SPL Token program account
+ * @param associatedTokenProgramId SPL Associated Token program account
+ *
+ * @return Address of the new associated token account
+ */
+function getOrCreateAssociatedTokenAccount(connection, payer, mint, owner, allowOwnerOffCurve = false, commitment, confirmOptions, programId = constants_1.TOKEN_PROGRAM_ID, associatedTokenProgramId = constants_1.ASSOCIATED_TOKEN_PROGRAM_ID) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const associatedToken = yield (0, index_2.getAssociatedTokenAddress)(mint, owner, allowOwnerOffCurve, programId, associatedTokenProgramId);
+        // This is the optimal logic, considering TX fee, client-side computation, RPC roundtrips and guaranteed idempotent.
+        // Sadly we can't do this atomically.
+        let account;
+        try {
+            account = yield (0, index_2.getAccount)(connection, associatedToken, commitment, programId);
+        }
+        catch (error) {
+            // TokenAccountNotFoundError can be possible if the associated address has already received some lamports,
+            // becoming a system account. Assuming program derived addressing is safe, this is the only case for the
+            // TokenInvalidAccountOwnerError in this code path.
+            if (error instanceof errors_1.TokenAccountNotFoundError || error instanceof errors_1.TokenInvalidAccountOwnerError) {
+                // As this isn't atomic, it's possible others can create associated accounts meanwhile.
+                try {
+                    const transaction = new web3_js_1.Transaction().add((0, index_1.createAssociatedTokenAccountInstruction)(payer.publicKey, associatedToken, owner, mint, programId, associatedTokenProgramId));
+                    yield (0, web3_js_1.sendAndConfirmTransaction)(connection, transaction, [payer], confirmOptions);
+                }
+                catch (error) {
+                    // Ignore all errors; for now there is no API-compatible way to selectively ignore the expected
+                    // instruction error if the associated account exists already.
+                }
+                // Now this should always succeed
+                account = yield (0, index_2.getAccount)(connection, associatedToken, commitment, programId);
+            }
+            else {
+                throw error;
+            }
+        }
+        if (!account.mint.equals(mint))
+            throw new errors_1.TokenInvalidMintError();
+        if (!account.owner.equals(owner))
+            throw new errors_1.TokenInvalidOwnerError();
+        return account;
+    });
+}
+exports.getOrCreateAssociatedTokenAccount = getOrCreateAssociatedTokenAccount;
+//# sourceMappingURL=getOrCreateAssociatedTokenAccount.js.map
+
+/***/ }),
+
+/***/ 21510:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+__exportStar(__webpack_require__(28175), exports);
+__exportStar(__webpack_require__(48127), exports);
+__exportStar(__webpack_require__(8594), exports);
+__exportStar(__webpack_require__(58316), exports);
+__exportStar(__webpack_require__(55456), exports);
+__exportStar(__webpack_require__(75095), exports);
+__exportStar(__webpack_require__(27879), exports);
+__exportStar(__webpack_require__(70347), exports);
+__exportStar(__webpack_require__(77167), exports);
+__exportStar(__webpack_require__(83278), exports);
+__exportStar(__webpack_require__(63226), exports);
+__exportStar(__webpack_require__(79507), exports);
+__exportStar(__webpack_require__(6877), exports);
+__exportStar(__webpack_require__(48130), exports);
+__exportStar(__webpack_require__(52266), exports);
+__exportStar(__webpack_require__(88063), exports);
+__exportStar(__webpack_require__(88749), exports);
+__exportStar(__webpack_require__(87246), exports);
+__exportStar(__webpack_require__(39420), exports);
+__exportStar(__webpack_require__(13630), exports);
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ 72231:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getSigners = void 0;
+const web3_js_1 = __webpack_require__(10948);
+/** @internal */
+function getSigners(signerOrMultisig, multiSigners) {
+    return signerOrMultisig instanceof web3_js_1.PublicKey
+        ? [signerOrMultisig, multiSigners]
+        : [signerOrMultisig.publicKey, [signerOrMultisig]];
+}
+exports.getSigners = getSigners;
+//# sourceMappingURL=internal.js.map
+
+/***/ }),
+
+/***/ 77167:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.mintTo = void 0;
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const index_1 = __webpack_require__(22228);
+const internal_1 = __webpack_require__(72231);
+/**
+ * Mint tokens to an account
+ *
+ * @param connection     Connection to use
+ * @param payer          Payer of the transaction fees
+ * @param mint           Mint for the account
+ * @param destination    Address of the account to mint to
+ * @param authority      Minting authority
+ * @param amount         Amount to mint
+ * @param multiSigners   Signing accounts if `authority` is a multisig
+ * @param confirmOptions Options for confirming the transaction
+ * @param programId      SPL Token program account
+ *
+ * @return Signature of the confirmed transaction
+ */
+function mintTo(connection, payer, mint, destination, authority, amount, multiSigners = [], confirmOptions, programId = constants_1.TOKEN_PROGRAM_ID) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const [authorityPublicKey, signers] = (0, internal_1.getSigners)(authority, multiSigners);
+        const transaction = new web3_js_1.Transaction().add((0, index_1.createMintToInstruction)(mint, destination, authorityPublicKey, amount, multiSigners, programId));
+        return yield (0, web3_js_1.sendAndConfirmTransaction)(connection, transaction, [payer, ...signers], confirmOptions);
+    });
+}
+exports.mintTo = mintTo;
+//# sourceMappingURL=mintTo.js.map
+
+/***/ }),
+
+/***/ 88063:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.mintToChecked = void 0;
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const index_1 = __webpack_require__(22228);
+const internal_1 = __webpack_require__(72231);
+/**
+ * Mint tokens to an account, asserting the token mint and decimals
+ *
+ * @param connection     Connection to use
+ * @param payer          Payer of the transaction fees
+ * @param mint           Mint for the account
+ * @param destination    Address of the account to mint to
+ * @param authority      Minting authority
+ * @param amount         Amount to mint
+ * @param decimals       Number of decimals in amount to mint
+ * @param multiSigners   Signing accounts if `authority` is a multisig
+ * @param confirmOptions Options for confirming the transaction
+ * @param programId      SPL Token program account
+ *
+ * @return Signature of the confirmed transaction
+ */
+function mintToChecked(connection, payer, mint, destination, authority, amount, decimals, multiSigners = [], confirmOptions, programId = constants_1.TOKEN_PROGRAM_ID) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const [authorityPublicKey, signers] = (0, internal_1.getSigners)(authority, multiSigners);
+        const transaction = new web3_js_1.Transaction().add((0, index_1.createMintToCheckedInstruction)(mint, destination, authorityPublicKey, amount, decimals, multiSigners, programId));
+        return yield (0, web3_js_1.sendAndConfirmTransaction)(connection, transaction, [payer, ...signers], confirmOptions);
+    });
+}
+exports.mintToChecked = mintToChecked;
+//# sourceMappingURL=mintToChecked.js.map
+
+/***/ }),
+
+/***/ 27879:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.revoke = void 0;
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const index_1 = __webpack_require__(22228);
+const internal_1 = __webpack_require__(72231);
+/**
+ * Revoke approval for the transfer of tokens from an account
+ *
+ * @param connection     Connection to use
+ * @param payer          Payer of the transaction fees
+ * @param account        Address of the token account
+ * @param owner          Owner of the account
+ * @param multiSigners   Signing accounts if `owner` is a multisig
+ * @param confirmOptions Options for confirming the transaction
+ * @param programId      SPL Token program account
+ *
+ * @return Signature of the confirmed transaction
+ */
+function revoke(connection, payer, account, owner, multiSigners = [], confirmOptions, programId = constants_1.TOKEN_PROGRAM_ID) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const [ownerPublicKey, signers] = (0, internal_1.getSigners)(owner, multiSigners);
+        const transaction = new web3_js_1.Transaction().add((0, index_1.createRevokeInstruction)(account, ownerPublicKey, multiSigners, programId));
+        return yield (0, web3_js_1.sendAndConfirmTransaction)(connection, transaction, [payer, ...signers], confirmOptions);
+    });
+}
+exports.revoke = revoke;
+//# sourceMappingURL=revoke.js.map
+
+/***/ }),
+
+/***/ 70347:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.setAuthority = void 0;
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const index_1 = __webpack_require__(22228);
+const internal_1 = __webpack_require__(72231);
+/**
+ * Assign a new authority to the account
+ *
+ * @param connection       Connection to use
+ * @param payer            Payer of the transaction fees
+ * @param account          Address of the account
+ * @param currentAuthority Current authority of the specified type
+ * @param authorityType    Type of authority to set
+ * @param newAuthority     New authority of the account
+ * @param multiSigners     Signing accounts if `currentAuthority` is a multisig
+ * @param confirmOptions   Options for confirming the transaction
+ * @param programId        SPL Token program account
+ *
+ * @return Signature of the confirmed transaction
+ */
+function setAuthority(connection, payer, account, currentAuthority, authorityType, newAuthority, multiSigners = [], confirmOptions, programId = constants_1.TOKEN_PROGRAM_ID) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const [currentAuthorityPublicKey, signers] = (0, internal_1.getSigners)(currentAuthority, multiSigners);
+        const transaction = new web3_js_1.Transaction().add((0, index_1.createSetAuthorityInstruction)(account, currentAuthorityPublicKey, authorityType, newAuthority, multiSigners, programId));
+        return yield (0, web3_js_1.sendAndConfirmTransaction)(connection, transaction, [payer, ...signers], confirmOptions);
+    });
+}
+exports.setAuthority = setAuthority;
+//# sourceMappingURL=setAuthority.js.map
+
+/***/ }),
+
+/***/ 87246:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.syncNative = void 0;
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const index_1 = __webpack_require__(22228);
+/**
+ * Sync the balance of a native SPL token account to the underlying system account's lamports
+ *
+ * @param connection     Connection to use
+ * @param payer          Payer of the transaction fees
+ * @param account        Native account to sync
+ * @param confirmOptions Options for confirming the transaction
+ * @param programId      SPL Token program account
+ *
+ * @return Signature of the confirmed transaction
+ */
+function syncNative(connection, payer, account, confirmOptions, programId = constants_1.TOKEN_PROGRAM_ID) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const transaction = new web3_js_1.Transaction().add((0, index_1.createSyncNativeInstruction)(account, programId));
+        return yield (0, web3_js_1.sendAndConfirmTransaction)(connection, transaction, [payer], confirmOptions);
+    });
+}
+exports.syncNative = syncNative;
+//# sourceMappingURL=syncNative.js.map
+
+/***/ }),
+
+/***/ 6877:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.thawAccount = void 0;
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const index_1 = __webpack_require__(22228);
+const internal_1 = __webpack_require__(72231);
+/**
+ * Thaw (unfreeze) a token account
+ *
+ * @param connection     Connection to use
+ * @param payer          Payer of the transaction fees
+ * @param account        Account to thaw
+ * @param mint           Mint for the account
+ * @param authority      Mint freeze authority
+ * @param multiSigners   Signing accounts if `authority` is a multisig
+ * @param confirmOptions Options for confirming the transaction
+ * @param programId      SPL Token program account
+ *
+ * @return Signature of the confirmed transaction
+ */
+function thawAccount(connection, payer, account, mint, authority, multiSigners = [], confirmOptions, programId = constants_1.TOKEN_PROGRAM_ID) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const [authorityPublicKey, signers] = (0, internal_1.getSigners)(authority, multiSigners);
+        const transaction = new web3_js_1.Transaction().add((0, index_1.createThawAccountInstruction)(account, mint, authorityPublicKey, multiSigners, programId));
+        return yield (0, web3_js_1.sendAndConfirmTransaction)(connection, transaction, [payer, ...signers], confirmOptions);
+    });
+}
+exports.thawAccount = thawAccount;
+//# sourceMappingURL=thawAccount.js.map
+
+/***/ }),
+
+/***/ 55456:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transfer = void 0;
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const index_1 = __webpack_require__(22228);
+const internal_1 = __webpack_require__(72231);
+/**
+ * Transfer tokens from one account to another
+ *
+ * @param connection     Connection to use
+ * @param payer          Payer of the transaction fees
+ * @param source         Source account
+ * @param destination    Destination account
+ * @param owner          Owner of the source account
+ * @param amount         Number of tokens to transfer
+ * @param multiSigners   Signing accounts if `owner` is a multisig
+ * @param confirmOptions Options for confirming the transaction
+ * @param programId      SPL Token program account
+ *
+ * @return Signature of the confirmed transaction
+ */
+function transfer(connection, payer, source, destination, owner, amount, multiSigners = [], confirmOptions, programId = constants_1.TOKEN_PROGRAM_ID) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const [ownerPublicKey, signers] = (0, internal_1.getSigners)(owner, multiSigners);
+        const transaction = new web3_js_1.Transaction().add((0, index_1.createTransferInstruction)(source, destination, ownerPublicKey, amount, multiSigners, programId));
+        return yield (0, web3_js_1.sendAndConfirmTransaction)(connection, transaction, [payer, ...signers], confirmOptions);
+    });
+}
+exports.transfer = transfer;
+//# sourceMappingURL=transfer.js.map
+
+/***/ }),
+
+/***/ 48130:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transferChecked = void 0;
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const index_1 = __webpack_require__(22228);
+const internal_1 = __webpack_require__(72231);
+/**
+ * Transfer tokens from one account to another, asserting the token mint and decimals
+ *
+ * @param connection     Connection to use
+ * @param payer          Payer of the transaction fees
+ * @param source         Source account
+ * @param mint           Mint for the account
+ * @param destination    Destination account
+ * @param owner          Owner of the source account
+ * @param amount         Number of tokens to transfer
+ * @param decimals       Number of decimals in transfer amount
+ * @param multiSigners   Signing accounts if `owner` is a multisig
+ * @param confirmOptions Options for confirming the transaction
+ * @param programId      SPL Token program account
+ *
+ * @return Signature of the confirmed transaction
+ */
+function transferChecked(connection, payer, source, mint, destination, owner, amount, decimals, multiSigners = [], confirmOptions, programId = constants_1.TOKEN_PROGRAM_ID) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const [ownerPublicKey, signers] = (0, internal_1.getSigners)(owner, multiSigners);
+        const transaction = new web3_js_1.Transaction().add((0, index_1.createTransferCheckedInstruction)(source, mint, destination, ownerPublicKey, amount, decimals, multiSigners, programId));
+        return yield (0, web3_js_1.sendAndConfirmTransaction)(connection, transaction, [payer, ...signers], confirmOptions);
+    });
+}
+exports.transferChecked = transferChecked;
+//# sourceMappingURL=transferChecked.js.map
+
+/***/ }),
+
+/***/ 28402:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.NATIVE_MINT = exports.ASSOCIATED_TOKEN_PROGRAM_ID = exports.TOKEN_PROGRAM_ID = void 0;
+const web3_js_1 = __webpack_require__(10948);
+/** Address of the SPL Token program */
+exports.TOKEN_PROGRAM_ID = new web3_js_1.PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA');
+/** Address of the SPL Associated Token Account program */
+exports.ASSOCIATED_TOKEN_PROGRAM_ID = new web3_js_1.PublicKey('ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL');
+/** Address of the special mint for wrapped native SOL */
+exports.NATIVE_MINT = new web3_js_1.PublicKey('So11111111111111111111111111111111111111112');
+//# sourceMappingURL=constants.js.map
+
+/***/ }),
+
+/***/ 43783:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.TokenInvalidInstructionTypeError = exports.TokenInvalidInstructionDataError = exports.TokenInvalidInstructionKeysError = exports.TokenInvalidInstructionProgramError = exports.TokenOwnerOffCurveError = exports.TokenInvalidOwnerError = exports.TokenInvalidMintError = exports.TokenInvalidAccountSizeError = exports.TokenInvalidAccountOwnerError = exports.TokenAccountNotFoundError = exports.TokenError = void 0;
+/** Base class for errors */
+class TokenError extends Error {
+    constructor(message) {
+        super(message);
+    }
+}
+exports.TokenError = TokenError;
+/** Thrown if an account is not found at the expected address */
+class TokenAccountNotFoundError extends TokenError {
+    constructor() {
+        super(...arguments);
+        this.name = 'TokenAccountNotFoundError';
+    }
+}
+exports.TokenAccountNotFoundError = TokenAccountNotFoundError;
+/** Thrown if a program state account is not owned by the expected token program */
+class TokenInvalidAccountOwnerError extends TokenError {
+    constructor() {
+        super(...arguments);
+        this.name = 'TokenInvalidAccountOwnerError';
+    }
+}
+exports.TokenInvalidAccountOwnerError = TokenInvalidAccountOwnerError;
+/** Thrown if the byte length of an program state account doesn't match the expected size */
+class TokenInvalidAccountSizeError extends TokenError {
+    constructor() {
+        super(...arguments);
+        this.name = 'TokenInvalidAccountSizeError';
+    }
+}
+exports.TokenInvalidAccountSizeError = TokenInvalidAccountSizeError;
+/** Thrown if the mint of a token account doesn't match the expected mint */
+class TokenInvalidMintError extends TokenError {
+    constructor() {
+        super(...arguments);
+        this.name = 'TokenInvalidMintError';
+    }
+}
+exports.TokenInvalidMintError = TokenInvalidMintError;
+/** Thrown if the owner of a token account doesn't match the expected owner */
+class TokenInvalidOwnerError extends TokenError {
+    constructor() {
+        super(...arguments);
+        this.name = 'TokenInvalidOwnerError';
+    }
+}
+exports.TokenInvalidOwnerError = TokenInvalidOwnerError;
+/** Thrown if the owner of a token account is a PDA (Program Derived Address) */
+class TokenOwnerOffCurveError extends TokenError {
+    constructor() {
+        super(...arguments);
+        this.name = 'TokenOwnerOffCurveError';
+    }
+}
+exports.TokenOwnerOffCurveError = TokenOwnerOffCurveError;
+/** Thrown if an instruction's program is invalid */
+class TokenInvalidInstructionProgramError extends TokenError {
+    constructor() {
+        super(...arguments);
+        this.name = 'TokenInvalidInstructionProgramError';
+    }
+}
+exports.TokenInvalidInstructionProgramError = TokenInvalidInstructionProgramError;
+/** Thrown if an instruction's keys are invalid */
+class TokenInvalidInstructionKeysError extends TokenError {
+    constructor() {
+        super(...arguments);
+        this.name = 'TokenInvalidInstructionKeysError';
+    }
+}
+exports.TokenInvalidInstructionKeysError = TokenInvalidInstructionKeysError;
+/** Thrown if an instruction's data is invalid */
+class TokenInvalidInstructionDataError extends TokenError {
+    constructor() {
+        super(...arguments);
+        this.name = 'TokenInvalidInstructionDataError';
+    }
+}
+exports.TokenInvalidInstructionDataError = TokenInvalidInstructionDataError;
+/** Thrown if an instruction's type is invalid */
+class TokenInvalidInstructionTypeError extends TokenError {
+    constructor() {
+        super(...arguments);
+        this.name = 'TokenInvalidInstructionTypeError';
+    }
+}
+exports.TokenInvalidInstructionTypeError = TokenInvalidInstructionTypeError;
+//# sourceMappingURL=errors.js.map
+
+/***/ }),
+
+/***/ 58884:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+__exportStar(__webpack_require__(22228), exports);
+__exportStar(__webpack_require__(14621), exports);
+__exportStar(__webpack_require__(21510), exports);
+__exportStar(__webpack_require__(28402), exports);
+__exportStar(__webpack_require__(43783), exports);
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ 48454:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.decodeApproveInstructionUnchecked = exports.decodeApproveInstruction = exports.createApproveInstruction = exports.approveInstructionData = void 0;
+const buffer_layout_1 = __webpack_require__(94313);
+const buffer_layout_utils_1 = __webpack_require__(3717);
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const errors_1 = __webpack_require__(43783);
+const internal_1 = __webpack_require__(53582);
+const types_1 = __webpack_require__(33884);
+/** TODO: docs */
+exports.approveInstructionData = (0, buffer_layout_1.struct)([(0, buffer_layout_1.u8)('instruction'), (0, buffer_layout_utils_1.u64)('amount')]);
+/**
+ * Construct an Approve instruction
+ *
+ * @param account      Account to set the delegate for
+ * @param delegate     Account authorized to transfer tokens from the account
+ * @param owner        Owner of the account
+ * @param amount       Maximum number of tokens the delegate may transfer
+ * @param multiSigners Signing accounts if `owner` is a multisig
+ * @param programId    SPL Token program account
+ *
+ * @return Instruction to add to a transaction
+ */
+function createApproveInstruction(account, delegate, owner, amount, multiSigners = [], programId = constants_1.TOKEN_PROGRAM_ID) {
+    const keys = (0, internal_1.addSigners)([
+        { pubkey: account, isSigner: false, isWritable: true },
+        { pubkey: delegate, isSigner: false, isWritable: false },
+    ], owner, multiSigners);
+    const data = Buffer.alloc(exports.approveInstructionData.span);
+    exports.approveInstructionData.encode({
+        instruction: types_1.TokenInstruction.Approve,
+        amount: BigInt(amount),
+    }, data);
+    return new web3_js_1.TransactionInstruction({ keys, programId, data });
+}
+exports.createApproveInstruction = createApproveInstruction;
+/**
+ * Decode an Approve instruction and validate it
+ *
+ * @param instruction Transaction instruction to decode
+ * @param programId   SPL Token program account
+ *
+ * @return Decoded, valid instruction
+ */
+function decodeApproveInstruction(instruction, programId = constants_1.TOKEN_PROGRAM_ID) {
+    if (!instruction.programId.equals(programId))
+        throw new errors_1.TokenInvalidInstructionProgramError();
+    if (instruction.data.length !== exports.approveInstructionData.span)
+        throw new errors_1.TokenInvalidInstructionDataError();
+    const { keys: { account, delegate, owner, multiSigners }, data, } = decodeApproveInstructionUnchecked(instruction);
+    if (data.instruction !== types_1.TokenInstruction.Approve)
+        throw new errors_1.TokenInvalidInstructionTypeError();
+    if (!account || !delegate || !owner)
+        throw new errors_1.TokenInvalidInstructionKeysError();
+    // TODO: key checks?
+    return {
+        programId,
+        keys: {
+            account,
+            delegate,
+            owner,
+            multiSigners,
+        },
+        data,
+    };
+}
+exports.decodeApproveInstruction = decodeApproveInstruction;
+/**
+ * Decode an Approve instruction without validating it
+ *
+ * @param instruction Transaction instruction to decode
+ *
+ * @return Decoded, non-validated instruction
+ */
+function decodeApproveInstructionUnchecked({ programId, keys: [account, delegate, owner, ...multiSigners], data, }) {
+    return {
+        programId,
+        keys: {
+            account,
+            delegate,
+            owner,
+            multiSigners,
+        },
+        data: exports.approveInstructionData.decode(data),
+    };
+}
+exports.decodeApproveInstructionUnchecked = decodeApproveInstructionUnchecked;
+//# sourceMappingURL=approve.js.map
+
+/***/ }),
+
+/***/ 79010:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.decodeApproveCheckedInstructionUnchecked = exports.decodeApproveCheckedInstruction = exports.createApproveCheckedInstruction = exports.approveCheckedInstructionData = void 0;
+const buffer_layout_1 = __webpack_require__(94313);
+const buffer_layout_utils_1 = __webpack_require__(3717);
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const errors_1 = __webpack_require__(43783);
+const internal_1 = __webpack_require__(53582);
+const types_1 = __webpack_require__(33884);
+/** TODO: docs */
+exports.approveCheckedInstructionData = (0, buffer_layout_1.struct)([
+    (0, buffer_layout_1.u8)('instruction'),
+    (0, buffer_layout_utils_1.u64)('amount'),
+    (0, buffer_layout_1.u8)('decimals'),
+]);
+/**
+ * Construct an ApproveChecked instruction
+ *
+ * @param account      Account to set the delegate for
+ * @param mint         Mint account
+ * @param delegate     Account authorized to transfer of tokens from the account
+ * @param owner        Owner of the account
+ * @param amount       Maximum number of tokens the delegate may transfer
+ * @param decimals     Number of decimals in approve amount
+ * @param multiSigners Signing accounts if `owner` is a multisig
+ * @param programId    SPL Token program account
+ *
+ * @return Instruction to add to a transaction
+ */
+function createApproveCheckedInstruction(account, mint, delegate, owner, amount, decimals, multiSigners = [], programId = constants_1.TOKEN_PROGRAM_ID) {
+    const keys = (0, internal_1.addSigners)([
+        { pubkey: account, isSigner: false, isWritable: true },
+        { pubkey: mint, isSigner: false, isWritable: false },
+        { pubkey: delegate, isSigner: false, isWritable: false },
+    ], owner, multiSigners);
+    const data = Buffer.alloc(exports.approveCheckedInstructionData.span);
+    exports.approveCheckedInstructionData.encode({
+        instruction: types_1.TokenInstruction.ApproveChecked,
+        amount: BigInt(amount),
+        decimals,
+    }, data);
+    return new web3_js_1.TransactionInstruction({ keys, programId, data });
+}
+exports.createApproveCheckedInstruction = createApproveCheckedInstruction;
+/**
+ * Decode an ApproveChecked instruction and validate it
+ *
+ * @param instruction Transaction instruction to decode
+ * @param programId   SPL Token program account
+ *
+ * @return Decoded, valid instruction
+ */
+function decodeApproveCheckedInstruction(instruction, programId = constants_1.TOKEN_PROGRAM_ID) {
+    if (!instruction.programId.equals(programId))
+        throw new errors_1.TokenInvalidInstructionProgramError();
+    if (instruction.data.length !== exports.approveCheckedInstructionData.span)
+        throw new errors_1.TokenInvalidInstructionDataError();
+    const { keys: { account, mint, delegate, owner, multiSigners }, data, } = decodeApproveCheckedInstructionUnchecked(instruction);
+    if (data.instruction !== types_1.TokenInstruction.ApproveChecked)
+        throw new errors_1.TokenInvalidInstructionTypeError();
+    if (!account || !mint || !delegate || !owner)
+        throw new errors_1.TokenInvalidInstructionKeysError();
+    // TODO: key checks?
+    return {
+        programId,
+        keys: {
+            account,
+            mint,
+            delegate,
+            owner,
+            multiSigners,
+        },
+        data,
+    };
+}
+exports.decodeApproveCheckedInstruction = decodeApproveCheckedInstruction;
+/**
+ * Decode an ApproveChecked instruction without validating it
+ *
+ * @param instruction Transaction instruction to decode
+ *
+ * @return Decoded, non-validated instruction
+ */
+function decodeApproveCheckedInstructionUnchecked({ programId, keys: [account, mint, delegate, owner, ...multiSigners], data, }) {
+    return {
+        programId,
+        keys: {
+            account,
+            mint,
+            delegate,
+            owner,
+            multiSigners,
+        },
+        data: exports.approveCheckedInstructionData.decode(data),
+    };
+}
+exports.decodeApproveCheckedInstructionUnchecked = decodeApproveCheckedInstructionUnchecked;
+//# sourceMappingURL=approveChecked.js.map
+
+/***/ }),
+
+/***/ 71931:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.createAssociatedTokenAccountInstruction = void 0;
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+/**
+ * Construct an AssociatedTokenAccount instruction
+ *
+ * @param payer                    Payer of the initialization fees
+ * @param associatedToken          New associated token account
+ * @param owner                    Owner of the new account
+ * @param mint                     Token mint account
+ * @param programId                SPL Token program account
+ * @param associatedTokenProgramId SPL Associated Token program account
+ *
+ * @return Instruction to add to a transaction
+ */
+function createAssociatedTokenAccountInstruction(payer, associatedToken, owner, mint, programId = constants_1.TOKEN_PROGRAM_ID, associatedTokenProgramId = constants_1.ASSOCIATED_TOKEN_PROGRAM_ID) {
+    const keys = [
+        { pubkey: payer, isSigner: true, isWritable: true },
+        { pubkey: associatedToken, isSigner: false, isWritable: true },
+        { pubkey: owner, isSigner: false, isWritable: false },
+        { pubkey: mint, isSigner: false, isWritable: false },
+        { pubkey: web3_js_1.SystemProgram.programId, isSigner: false, isWritable: false },
+        { pubkey: programId, isSigner: false, isWritable: false },
+        { pubkey: web3_js_1.SYSVAR_RENT_PUBKEY, isSigner: false, isWritable: false },
+    ];
+    return new web3_js_1.TransactionInstruction({
+        keys,
+        programId: associatedTokenProgramId,
+        data: Buffer.alloc(0),
+    });
+}
+exports.createAssociatedTokenAccountInstruction = createAssociatedTokenAccountInstruction;
+//# sourceMappingURL=associatedTokenAccount.js.map
+
+/***/ }),
+
+/***/ 68320:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.decodeBurnInstructionUnchecked = exports.decodeBurnInstruction = exports.createBurnInstruction = exports.burnInstructionData = void 0;
+const buffer_layout_1 = __webpack_require__(94313);
+const buffer_layout_utils_1 = __webpack_require__(3717);
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const errors_1 = __webpack_require__(43783);
+const internal_1 = __webpack_require__(53582);
+const types_1 = __webpack_require__(33884);
+/** TODO: docs */
+exports.burnInstructionData = (0, buffer_layout_1.struct)([(0, buffer_layout_1.u8)('instruction'), (0, buffer_layout_utils_1.u64)('amount')]);
+/**
+ * Construct a Burn instruction
+ *
+ * @param account      Account to burn tokens from
+ * @param mint         Mint for the account
+ * @param owner        Owner of the account
+ * @param amount       Number of tokens to burn
+ * @param multiSigners Signing accounts if `owner` is a multisig
+ * @param programId    SPL Token program account
+ *
+ * @return Instruction to add to a transaction
+ */
+function createBurnInstruction(account, mint, owner, amount, multiSigners = [], programId = constants_1.TOKEN_PROGRAM_ID) {
+    const keys = (0, internal_1.addSigners)([
+        { pubkey: account, isSigner: false, isWritable: true },
+        { pubkey: mint, isSigner: false, isWritable: true },
+    ], owner, multiSigners);
+    const data = Buffer.alloc(exports.burnInstructionData.span);
+    exports.burnInstructionData.encode({
+        instruction: types_1.TokenInstruction.Burn,
+        amount: BigInt(amount),
+    }, data);
+    return new web3_js_1.TransactionInstruction({ keys, programId, data });
+}
+exports.createBurnInstruction = createBurnInstruction;
+/**
+ * Decode a Burn instruction and validate it
+ *
+ * @param instruction Transaction instruction to decode
+ * @param programId   SPL Token program account
+ *
+ * @return Decoded, valid instruction
+ */
+function decodeBurnInstruction(instruction, programId = constants_1.TOKEN_PROGRAM_ID) {
+    if (!instruction.programId.equals(programId))
+        throw new errors_1.TokenInvalidInstructionProgramError();
+    if (instruction.data.length !== exports.burnInstructionData.span)
+        throw new errors_1.TokenInvalidInstructionDataError();
+    const { keys: { account, mint, owner, multiSigners }, data, } = decodeBurnInstructionUnchecked(instruction);
+    if (data.instruction !== types_1.TokenInstruction.Burn)
+        throw new errors_1.TokenInvalidInstructionTypeError();
+    if (!account || !mint || !owner)
+        throw new errors_1.TokenInvalidInstructionKeysError();
+    // TODO: key checks?
+    return {
+        programId,
+        keys: {
+            account,
+            mint,
+            owner,
+            multiSigners,
+        },
+        data,
+    };
+}
+exports.decodeBurnInstruction = decodeBurnInstruction;
+/**
+ * Decode a Burn instruction without validating it
+ *
+ * @param instruction Transaction instruction to decode
+ *
+ * @return Decoded, non-validated instruction
+ */
+function decodeBurnInstructionUnchecked({ programId, keys: [account, mint, owner, ...multiSigners], data, }) {
+    return {
+        programId,
+        keys: {
+            account,
+            mint,
+            owner,
+            multiSigners,
+        },
+        data: exports.burnInstructionData.decode(data),
+    };
+}
+exports.decodeBurnInstructionUnchecked = decodeBurnInstructionUnchecked;
+//# sourceMappingURL=burn.js.map
+
+/***/ }),
+
+/***/ 9541:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.decodeBurnCheckedInstructionUnchecked = exports.decodeBurnCheckedInstruction = exports.createBurnCheckedInstruction = exports.burnCheckedInstructionData = void 0;
+const buffer_layout_1 = __webpack_require__(94313);
+const buffer_layout_utils_1 = __webpack_require__(3717);
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const errors_1 = __webpack_require__(43783);
+const internal_1 = __webpack_require__(53582);
+const types_1 = __webpack_require__(33884);
+/** TODO: docs */
+exports.burnCheckedInstructionData = (0, buffer_layout_1.struct)([
+    (0, buffer_layout_1.u8)('instruction'),
+    (0, buffer_layout_utils_1.u64)('amount'),
+    (0, buffer_layout_1.u8)('decimals'),
+]);
+/**
+ * Construct a BurnChecked instruction
+ *
+ * @param mint         Mint for the account
+ * @param account      Account to burn tokens from
+ * @param owner        Owner of the account
+ * @param amount       Number of tokens to burn
+ * @param decimals     Number of decimals in burn amount
+ * @param multiSigners Signing accounts if `owner` is a multisig
+ * @param programId    SPL Token program account
+ *
+ * @return Instruction to add to a transaction
+ */
+function createBurnCheckedInstruction(account, mint, owner, amount, decimals, multiSigners = [], programId = constants_1.TOKEN_PROGRAM_ID) {
+    const keys = (0, internal_1.addSigners)([
+        { pubkey: account, isSigner: false, isWritable: true },
+        { pubkey: mint, isSigner: false, isWritable: true },
+    ], owner, multiSigners);
+    const data = Buffer.alloc(exports.burnCheckedInstructionData.span);
+    exports.burnCheckedInstructionData.encode({
+        instruction: types_1.TokenInstruction.BurnChecked,
+        amount: BigInt(amount),
+        decimals,
+    }, data);
+    return new web3_js_1.TransactionInstruction({ keys, programId, data });
+}
+exports.createBurnCheckedInstruction = createBurnCheckedInstruction;
+/**
+ * Decode a BurnChecked instruction and validate it
+ *
+ * @param instruction Transaction instruction to decode
+ * @param programId   SPL Token program account
+ *
+ * @return Decoded, valid instruction
+ */
+function decodeBurnCheckedInstruction(instruction, programId = constants_1.TOKEN_PROGRAM_ID) {
+    if (!instruction.programId.equals(programId))
+        throw new errors_1.TokenInvalidInstructionProgramError();
+    if (instruction.data.length !== exports.burnCheckedInstructionData.span)
+        throw new errors_1.TokenInvalidInstructionDataError();
+    const { keys: { account, mint, owner, multiSigners }, data, } = decodeBurnCheckedInstructionUnchecked(instruction);
+    if (data.instruction !== types_1.TokenInstruction.BurnChecked)
+        throw new errors_1.TokenInvalidInstructionTypeError();
+    if (!account || !mint || !owner)
+        throw new errors_1.TokenInvalidInstructionKeysError();
+    // TODO: key checks?
+    return {
+        programId,
+        keys: {
+            account,
+            mint,
+            owner,
+            multiSigners,
+        },
+        data,
+    };
+}
+exports.decodeBurnCheckedInstruction = decodeBurnCheckedInstruction;
+/**
+ * Decode a BurnChecked instruction without validating it
+ *
+ * @param instruction Transaction instruction to decode
+ *
+ * @return Decoded, non-validated instruction
+ */
+function decodeBurnCheckedInstructionUnchecked({ programId, keys: [account, mint, owner, ...multiSigners], data, }) {
+    return {
+        programId,
+        keys: {
+            account,
+            mint,
+            owner,
+            multiSigners,
+        },
+        data: exports.burnCheckedInstructionData.decode(data),
+    };
+}
+exports.decodeBurnCheckedInstructionUnchecked = decodeBurnCheckedInstructionUnchecked;
+//# sourceMappingURL=burnChecked.js.map
+
+/***/ }),
+
+/***/ 51317:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.decodeCloseAccountInstructionUnchecked = exports.decodeCloseAccountInstruction = exports.createCloseAccountInstruction = exports.closeAccountInstructionData = void 0;
+const buffer_layout_1 = __webpack_require__(94313);
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const errors_1 = __webpack_require__(43783);
+const internal_1 = __webpack_require__(53582);
+const types_1 = __webpack_require__(33884);
+/** TODO: docs */
+exports.closeAccountInstructionData = (0, buffer_layout_1.struct)([(0, buffer_layout_1.u8)('instruction')]);
+/**
+ * Construct a CloseAccount instruction
+ *
+ * @param account      Account to close
+ * @param destination  Account to receive the remaining balance of the closed account
+ * @param authority    Account close authority
+ * @param multiSigners Signing accounts if `authority` is a multisig
+ * @param programId    SPL Token program account
+ *
+ * @return Instruction to add to a transaction
+ */
+function createCloseAccountInstruction(account, destination, authority, multiSigners = [], programId = constants_1.TOKEN_PROGRAM_ID) {
+    const keys = (0, internal_1.addSigners)([
+        { pubkey: account, isSigner: false, isWritable: true },
+        { pubkey: destination, isSigner: false, isWritable: true },
+    ], authority, multiSigners);
+    const data = Buffer.alloc(exports.closeAccountInstructionData.span);
+    exports.closeAccountInstructionData.encode({ instruction: types_1.TokenInstruction.CloseAccount }, data);
+    return new web3_js_1.TransactionInstruction({ keys, programId, data });
+}
+exports.createCloseAccountInstruction = createCloseAccountInstruction;
+/**
+ * Decode a CloseAccount instruction and validate it
+ *
+ * @param instruction Transaction instruction to decode
+ * @param programId   SPL Token program account
+ *
+ * @return Decoded, valid instruction
+ */
+function decodeCloseAccountInstruction(instruction, programId = constants_1.TOKEN_PROGRAM_ID) {
+    if (!instruction.programId.equals(programId))
+        throw new errors_1.TokenInvalidInstructionProgramError();
+    if (instruction.data.length !== exports.closeAccountInstructionData.span)
+        throw new errors_1.TokenInvalidInstructionDataError();
+    const { keys: { account, destination, authority, multiSigners }, data, } = decodeCloseAccountInstructionUnchecked(instruction);
+    if (data.instruction !== types_1.TokenInstruction.CloseAccount)
+        throw new errors_1.TokenInvalidInstructionTypeError();
+    if (!account || !destination || !authority)
+        throw new errors_1.TokenInvalidInstructionKeysError();
+    // TODO: key checks?
+    return {
+        programId,
+        keys: {
+            account,
+            destination,
+            authority,
+            multiSigners,
+        },
+        data,
+    };
+}
+exports.decodeCloseAccountInstruction = decodeCloseAccountInstruction;
+/**
+ * Decode a CloseAccount instruction without validating it
+ *
+ * @param instruction Transaction instruction to decode
+ *
+ * @return Decoded, non-validated instruction
+ */
+function decodeCloseAccountInstructionUnchecked({ programId, keys: [account, destination, authority, ...multiSigners], data, }) {
+    return {
+        programId,
+        keys: {
+            account,
+            destination,
+            authority,
+            multiSigners,
+        },
+        data: exports.closeAccountInstructionData.decode(data),
+    };
+}
+exports.decodeCloseAccountInstructionUnchecked = decodeCloseAccountInstructionUnchecked;
+//# sourceMappingURL=closeAccount.js.map
+
+/***/ }),
+
+/***/ 63476:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.isSyncNativeInstruction = exports.isBurnCheckedInstruction = exports.isMintToCheckedInstruction = exports.isApproveCheckedInstruction = exports.isTransferCheckedInstruction = exports.isThawAccountInstruction = exports.isFreezeAccountInstruction = exports.isCloseAccountInstruction = exports.isBurnInstruction = exports.isMintToInstruction = exports.isSetAuthorityInstruction = exports.isRevokeInstruction = exports.isApproveInstruction = exports.isTransferInstruction = exports.isInitializeMultisigInstruction = exports.isInitializeAccountInstruction = exports.isInitializeMintInstruction = exports.decodeInstruction = void 0;
+const buffer_layout_1 = __webpack_require__(94313);
+const constants_1 = __webpack_require__(28402);
+const errors_1 = __webpack_require__(43783);
+const approve_1 = __webpack_require__(48454);
+const approveChecked_1 = __webpack_require__(79010);
+const burn_1 = __webpack_require__(68320);
+const burnChecked_1 = __webpack_require__(9541);
+const closeAccount_1 = __webpack_require__(51317);
+const freezeAccount_1 = __webpack_require__(40194);
+const initializeAccount_1 = __webpack_require__(51280);
+const initializeMint_1 = __webpack_require__(41884);
+const initializeMultisig_1 = __webpack_require__(97697);
+const mintTo_1 = __webpack_require__(26747);
+const mintToChecked_1 = __webpack_require__(18724);
+const revoke_1 = __webpack_require__(62718);
+const setAuthority_1 = __webpack_require__(89973);
+const syncNative_1 = __webpack_require__(2227);
+const thawAccount_1 = __webpack_require__(74340);
+const transfer_1 = __webpack_require__(22125);
+const transferChecked_1 = __webpack_require__(83802);
+const types_1 = __webpack_require__(33884);
+/** TODO: docs */
+function decodeInstruction(instruction, programId = constants_1.TOKEN_PROGRAM_ID) {
+    if (!instruction.data.length)
+        throw new errors_1.TokenInvalidInstructionDataError();
+    const type = (0, buffer_layout_1.u8)().decode(instruction.data);
+    if (type === types_1.TokenInstruction.InitializeMint)
+        return (0, initializeMint_1.decodeInitializeMintInstruction)(instruction, programId);
+    if (type === types_1.TokenInstruction.InitializeAccount)
+        return (0, initializeAccount_1.decodeInitializeAccountInstruction)(instruction, programId);
+    if (type === types_1.TokenInstruction.InitializeMultisig)
+        return (0, initializeMultisig_1.decodeInitializeMultisigInstruction)(instruction, programId);
+    if (type === types_1.TokenInstruction.Transfer)
+        return (0, transfer_1.decodeTransferInstruction)(instruction, programId);
+    if (type === types_1.TokenInstruction.Approve)
+        return (0, approve_1.decodeApproveInstruction)(instruction, programId);
+    if (type === types_1.TokenInstruction.Revoke)
+        return (0, revoke_1.decodeRevokeInstruction)(instruction, programId);
+    if (type === types_1.TokenInstruction.SetAuthority)
+        return (0, setAuthority_1.decodeSetAuthorityInstruction)(instruction, programId);
+    if (type === types_1.TokenInstruction.MintTo)
+        return (0, mintTo_1.decodeMintToInstruction)(instruction, programId);
+    if (type === types_1.TokenInstruction.Burn)
+        return (0, burn_1.decodeBurnInstruction)(instruction, programId);
+    if (type === types_1.TokenInstruction.CloseAccount)
+        return (0, closeAccount_1.decodeCloseAccountInstruction)(instruction, programId);
+    if (type === types_1.TokenInstruction.FreezeAccount)
+        return (0, freezeAccount_1.decodeFreezeAccountInstruction)(instruction, programId);
+    if (type === types_1.TokenInstruction.ThawAccount)
+        return (0, thawAccount_1.decodeThawAccountInstruction)(instruction, programId);
+    if (type === types_1.TokenInstruction.TransferChecked)
+        return (0, transferChecked_1.decodeTransferCheckedInstruction)(instruction, programId);
+    if (type === types_1.TokenInstruction.ApproveChecked)
+        return (0, approveChecked_1.decodeApproveCheckedInstruction)(instruction, programId);
+    if (type === types_1.TokenInstruction.MintToChecked)
+        return (0, mintToChecked_1.decodeMintToCheckedInstruction)(instruction, programId);
+    if (type === types_1.TokenInstruction.BurnChecked)
+        return (0, burnChecked_1.decodeBurnCheckedInstruction)(instruction, programId);
+    // TODO: implement
+    if (type === types_1.TokenInstruction.InitializeAccount2)
+        throw new errors_1.TokenInvalidInstructionTypeError();
+    if (type === types_1.TokenInstruction.SyncNative)
+        return (0, syncNative_1.decodeSyncNativeInstruction)(instruction, programId);
+    // TODO: implement
+    if (type === types_1.TokenInstruction.InitializeAccount3)
+        throw new errors_1.TokenInvalidInstructionTypeError();
+    // TODO: implement
+    if (type === types_1.TokenInstruction.InitializeMultisig2)
+        throw new errors_1.TokenInvalidInstructionTypeError();
+    // TODO: implement
+    if (type === types_1.TokenInstruction.InitializeMint2)
+        throw new errors_1.TokenInvalidInstructionTypeError();
+    throw new errors_1.TokenInvalidInstructionTypeError();
+}
+exports.decodeInstruction = decodeInstruction;
+/** TODO: docs */
+function isInitializeMintInstruction(decoded) {
+    return decoded.data.instruction === types_1.TokenInstruction.InitializeMint;
+}
+exports.isInitializeMintInstruction = isInitializeMintInstruction;
+/** TODO: docs */
+function isInitializeAccountInstruction(decoded) {
+    return decoded.data.instruction === types_1.TokenInstruction.InitializeAccount;
+}
+exports.isInitializeAccountInstruction = isInitializeAccountInstruction;
+/** TODO: docs */
+function isInitializeMultisigInstruction(decoded) {
+    return decoded.data.instruction === types_1.TokenInstruction.InitializeMultisig;
+}
+exports.isInitializeMultisigInstruction = isInitializeMultisigInstruction;
+/** TODO: docs */
+function isTransferInstruction(decoded) {
+    return decoded.data.instruction === types_1.TokenInstruction.Transfer;
+}
+exports.isTransferInstruction = isTransferInstruction;
+/** TODO: docs */
+function isApproveInstruction(decoded) {
+    return decoded.data.instruction === types_1.TokenInstruction.Approve;
+}
+exports.isApproveInstruction = isApproveInstruction;
+/** TODO: docs */
+function isRevokeInstruction(decoded) {
+    return decoded.data.instruction === types_1.TokenInstruction.Revoke;
+}
+exports.isRevokeInstruction = isRevokeInstruction;
+/** TODO: docs */
+function isSetAuthorityInstruction(decoded) {
+    return decoded.data.instruction === types_1.TokenInstruction.SetAuthority;
+}
+exports.isSetAuthorityInstruction = isSetAuthorityInstruction;
+/** TODO: docs */
+function isMintToInstruction(decoded) {
+    return decoded.data.instruction === types_1.TokenInstruction.MintTo;
+}
+exports.isMintToInstruction = isMintToInstruction;
+/** TODO: docs */
+function isBurnInstruction(decoded) {
+    return decoded.data.instruction === types_1.TokenInstruction.Burn;
+}
+exports.isBurnInstruction = isBurnInstruction;
+/** TODO: docs */
+function isCloseAccountInstruction(decoded) {
+    return decoded.data.instruction === types_1.TokenInstruction.CloseAccount;
+}
+exports.isCloseAccountInstruction = isCloseAccountInstruction;
+/** TODO: docs */
+function isFreezeAccountInstruction(decoded) {
+    return decoded.data.instruction === types_1.TokenInstruction.FreezeAccount;
+}
+exports.isFreezeAccountInstruction = isFreezeAccountInstruction;
+/** TODO: docs */
+function isThawAccountInstruction(decoded) {
+    return decoded.data.instruction === types_1.TokenInstruction.ThawAccount;
+}
+exports.isThawAccountInstruction = isThawAccountInstruction;
+/** TODO: docs */
+function isTransferCheckedInstruction(decoded) {
+    return decoded.data.instruction === types_1.TokenInstruction.TransferChecked;
+}
+exports.isTransferCheckedInstruction = isTransferCheckedInstruction;
+/** TODO: docs */
+function isApproveCheckedInstruction(decoded) {
+    return decoded.data.instruction === types_1.TokenInstruction.ApproveChecked;
+}
+exports.isApproveCheckedInstruction = isApproveCheckedInstruction;
+/** TODO: docs */
+function isMintToCheckedInstruction(decoded) {
+    return decoded.data.instruction === types_1.TokenInstruction.MintToChecked;
+}
+exports.isMintToCheckedInstruction = isMintToCheckedInstruction;
+/** TODO: docs */
+function isBurnCheckedInstruction(decoded) {
+    return decoded.data.instruction === types_1.TokenInstruction.BurnChecked;
+}
+exports.isBurnCheckedInstruction = isBurnCheckedInstruction;
+/** TODO: docs, implement */
+// export function isInitializeAccount2Instruction(
+//     decoded: DecodedInstruction
+// ): decoded is DecodedInitializeAccount2Instruction {
+//     return decoded.data.instruction === TokenInstruction.InitializeAccount2;
+// }
+/** TODO: docs */
+function isSyncNativeInstruction(decoded) {
+    return decoded.data.instruction === types_1.TokenInstruction.SyncNative;
+}
+exports.isSyncNativeInstruction = isSyncNativeInstruction;
+/** TODO: docs, implement */
+// export function isInitializeAccount3Instruction(
+//     decoded: DecodedInstruction
+// ): decoded is DecodedInitializeAccount3Instruction {
+//     return decoded.data.instruction === TokenInstruction.InitializeAccount3;
+// }
+/** TODO: docs, implement */
+// export function isInitializeMultisig2Instruction(
+//     decoded: DecodedInstruction
+// ): decoded is DecodedInitializeMultisig2Instruction {
+//     return decoded.data.instruction === TokenInstruction.InitializeMultisig2;
+// }
+/** TODO: docs, implement */
+// export function isInitializeMint2Instruction(
+//     decoded: DecodedInstruction
+// ): decoded is DecodedInitializeMint2Instruction {
+//     return decoded.data.instruction === TokenInstruction.InitializeMint2;
+// }
+//# sourceMappingURL=decode.js.map
+
+/***/ }),
+
+/***/ 40194:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.decodeFreezeAccountInstructionUnchecked = exports.decodeFreezeAccountInstruction = exports.createFreezeAccountInstruction = exports.freezeAccountInstructionData = void 0;
+const buffer_layout_1 = __webpack_require__(94313);
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const errors_1 = __webpack_require__(43783);
+const internal_1 = __webpack_require__(53582);
+const types_1 = __webpack_require__(33884);
+/** TODO: docs */
+exports.freezeAccountInstructionData = (0, buffer_layout_1.struct)([(0, buffer_layout_1.u8)('instruction')]);
+/**
+ * Construct a FreezeAccount instruction
+ *
+ * @param account      Account to freeze
+ * @param mint         Mint account
+ * @param authority    Mint freeze authority
+ * @param multiSigners Signing accounts if `authority` is a multisig
+ * @param programId    SPL Token program account
+ *
+ * @return Instruction to add to a transaction
+ */
+function createFreezeAccountInstruction(account, mint, authority, multiSigners = [], programId = constants_1.TOKEN_PROGRAM_ID) {
+    const keys = (0, internal_1.addSigners)([
+        { pubkey: account, isSigner: false, isWritable: true },
+        { pubkey: mint, isSigner: false, isWritable: false },
+    ], authority, multiSigners);
+    const data = Buffer.alloc(exports.freezeAccountInstructionData.span);
+    exports.freezeAccountInstructionData.encode({ instruction: types_1.TokenInstruction.FreezeAccount }, data);
+    return new web3_js_1.TransactionInstruction({ keys, programId, data });
+}
+exports.createFreezeAccountInstruction = createFreezeAccountInstruction;
+/**
+ * Decode a FreezeAccount instruction and validate it
+ *
+ * @param instruction Transaction instruction to decode
+ * @param programId   SPL Token program account
+ *
+ * @return Decoded, valid instruction
+ */
+function decodeFreezeAccountInstruction(instruction, programId = constants_1.TOKEN_PROGRAM_ID) {
+    if (!instruction.programId.equals(programId))
+        throw new errors_1.TokenInvalidInstructionProgramError();
+    if (instruction.data.length !== exports.freezeAccountInstructionData.span)
+        throw new errors_1.TokenInvalidInstructionDataError();
+    const { keys: { account, mint, authority, multiSigners }, data, } = decodeFreezeAccountInstructionUnchecked(instruction);
+    if (data.instruction !== types_1.TokenInstruction.FreezeAccount)
+        throw new errors_1.TokenInvalidInstructionTypeError();
+    if (!account || !mint || !authority)
+        throw new errors_1.TokenInvalidInstructionKeysError();
+    // TODO: key checks?
+    return {
+        programId,
+        keys: {
+            account,
+            mint,
+            authority,
+            multiSigners,
+        },
+        data,
+    };
+}
+exports.decodeFreezeAccountInstruction = decodeFreezeAccountInstruction;
+/**
+ * Decode a FreezeAccount instruction without validating it
+ *
+ * @param instruction Transaction instruction to decode
+ *
+ * @return Decoded, non-validated instruction
+ */
+function decodeFreezeAccountInstructionUnchecked({ programId, keys: [account, mint, authority, ...multiSigners], data, }) {
+    return {
+        programId,
+        keys: {
+            account,
+            mint,
+            authority,
+            multiSigners,
+        },
+        data: exports.freezeAccountInstructionData.decode(data),
+    };
+}
+exports.decodeFreezeAccountInstructionUnchecked = decodeFreezeAccountInstructionUnchecked;
+//# sourceMappingURL=freezeAccount.js.map
+
+/***/ }),
+
+/***/ 22228:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+__exportStar(__webpack_require__(33884), exports);
+__exportStar(__webpack_require__(41884), exports); //       0
+__exportStar(__webpack_require__(51280), exports); //    1
+__exportStar(__webpack_require__(97697), exports); //   2
+__exportStar(__webpack_require__(22125), exports); //             3
+__exportStar(__webpack_require__(48454), exports); //              4
+__exportStar(__webpack_require__(62718), exports); //               5
+__exportStar(__webpack_require__(89973), exports); //         6
+__exportStar(__webpack_require__(26747), exports); //               7
+__exportStar(__webpack_require__(68320), exports); //                 8
+__exportStar(__webpack_require__(51317), exports); //         9
+__exportStar(__webpack_require__(40194), exports); //       10
+__exportStar(__webpack_require__(74340), exports); //         11
+__exportStar(__webpack_require__(83802), exports); //     12
+__exportStar(__webpack_require__(79010), exports); //      13
+__exportStar(__webpack_require__(18724), exports); //       14
+__exportStar(__webpack_require__(9541), exports); //         15
+__exportStar(__webpack_require__(19518), exports); //  16
+__exportStar(__webpack_require__(2227), exports); //          17
+__exportStar(__webpack_require__(41074), exports); //  18
+__exportStar(__webpack_require__(97521), exports); // 19
+__exportStar(__webpack_require__(25957), exports); //     20
+__exportStar(__webpack_require__(63476), exports);
+__exportStar(__webpack_require__(71931), exports);
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ 51280:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.decodeInitializeAccountInstructionUnchecked = exports.decodeInitializeAccountInstruction = exports.createInitializeAccountInstruction = exports.initializeAccountInstructionData = void 0;
+const buffer_layout_1 = __webpack_require__(94313);
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const errors_1 = __webpack_require__(43783);
+const types_1 = __webpack_require__(33884);
+/** TODO: docs */
+exports.initializeAccountInstructionData = (0, buffer_layout_1.struct)([(0, buffer_layout_1.u8)('instruction')]);
+/**
+ * Construct an InitializeAccount instruction
+ *
+ * @param account   New token account
+ * @param mint      Mint account
+ * @param owner     Owner of the new account
+ * @param programId SPL Token program account
+ *
+ * @return Instruction to add to a transaction
+ */
+function createInitializeAccountInstruction(account, mint, owner, programId = constants_1.TOKEN_PROGRAM_ID) {
+    const keys = [
+        { pubkey: account, isSigner: false, isWritable: true },
+        { pubkey: mint, isSigner: false, isWritable: false },
+        { pubkey: owner, isSigner: false, isWritable: false },
+        { pubkey: web3_js_1.SYSVAR_RENT_PUBKEY, isSigner: false, isWritable: false },
+    ];
+    const data = Buffer.alloc(exports.initializeAccountInstructionData.span);
+    exports.initializeAccountInstructionData.encode({ instruction: types_1.TokenInstruction.InitializeAccount }, data);
+    return new web3_js_1.TransactionInstruction({ keys, programId, data });
+}
+exports.createInitializeAccountInstruction = createInitializeAccountInstruction;
+/**
+ * Decode an InitializeAccount instruction and validate it
+ *
+ * @param instruction Transaction instruction to decode
+ * @param programId   SPL Token program account
+ *
+ * @return Decoded, valid instruction
+ */
+function decodeInitializeAccountInstruction(instruction, programId = constants_1.TOKEN_PROGRAM_ID) {
+    if (!instruction.programId.equals(programId))
+        throw new errors_1.TokenInvalidInstructionProgramError();
+    if (instruction.data.length !== exports.initializeAccountInstructionData.span)
+        throw new errors_1.TokenInvalidInstructionDataError();
+    const { keys: { account, mint, owner, rent }, data, } = decodeInitializeAccountInstructionUnchecked(instruction);
+    if (data.instruction !== types_1.TokenInstruction.InitializeAccount)
+        throw new errors_1.TokenInvalidInstructionTypeError();
+    if (!account || !mint || !owner || !rent)
+        throw new errors_1.TokenInvalidInstructionKeysError();
+    // TODO: key checks?
+    return {
+        programId,
+        keys: {
+            account,
+            mint,
+            owner,
+            rent,
+        },
+        data,
+    };
+}
+exports.decodeInitializeAccountInstruction = decodeInitializeAccountInstruction;
+/**
+ * Decode an InitializeAccount instruction without validating it
+ *
+ * @param instruction Transaction instruction to decode
+ *
+ * @return Decoded, non-validated instruction
+ */
+function decodeInitializeAccountInstructionUnchecked({ programId, keys: [account, mint, owner, rent], data, }) {
+    return {
+        programId,
+        keys: {
+            account,
+            mint,
+            owner,
+            rent,
+        },
+        data: exports.initializeAccountInstructionData.decode(data),
+    };
+}
+exports.decodeInitializeAccountInstructionUnchecked = decodeInitializeAccountInstructionUnchecked;
+//# sourceMappingURL=initializeAccount.js.map
+
+/***/ }),
+
+/***/ 19518:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=initializeAccount2.js.map
+
+/***/ }),
+
+/***/ 41074:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=initializeAccount3.js.map
+
+/***/ }),
+
+/***/ 41884:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.decodeInitializeMintInstructionUnchecked = exports.decodeInitializeMintInstruction = exports.createInitializeMintInstruction = exports.initializeMintInstructionData = void 0;
+const buffer_layout_1 = __webpack_require__(94313);
+const buffer_layout_utils_1 = __webpack_require__(3717);
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const errors_1 = __webpack_require__(43783);
+const types_1 = __webpack_require__(33884);
+/** TODO: docs */
+exports.initializeMintInstructionData = (0, buffer_layout_1.struct)([
+    (0, buffer_layout_1.u8)('instruction'),
+    (0, buffer_layout_1.u8)('decimals'),
+    (0, buffer_layout_utils_1.publicKey)('mintAuthority'),
+    (0, buffer_layout_1.u8)('freezeAuthorityOption'),
+    (0, buffer_layout_utils_1.publicKey)('freezeAuthority'),
+]);
+/**
+ * Construct an InitializeMint instruction
+ *
+ * @param mint            Token mint account
+ * @param decimals        Number of decimals in token account amounts
+ * @param mintAuthority   Minting authority
+ * @param freezeAuthority Optional authority that can freeze token accounts
+ * @param programId       SPL Token program account
+ *
+ * @return Instruction to add to a transaction
+ */
+function createInitializeMintInstruction(mint, decimals, mintAuthority, freezeAuthority, programId = constants_1.TOKEN_PROGRAM_ID) {
+    const keys = [
+        { pubkey: mint, isSigner: false, isWritable: true },
+        { pubkey: web3_js_1.SYSVAR_RENT_PUBKEY, isSigner: false, isWritable: false },
+    ];
+    const data = Buffer.alloc(exports.initializeMintInstructionData.span);
+    exports.initializeMintInstructionData.encode({
+        instruction: types_1.TokenInstruction.InitializeMint,
+        decimals,
+        mintAuthority,
+        freezeAuthorityOption: freezeAuthority ? 1 : 0,
+        freezeAuthority: freezeAuthority || new web3_js_1.PublicKey(0),
+    }, data);
+    return new web3_js_1.TransactionInstruction({ keys, programId, data });
+}
+exports.createInitializeMintInstruction = createInitializeMintInstruction;
+/**
+ * Decode an InitializeMint instruction and validate it
+ *
+ * @param instruction Transaction instruction to decode
+ * @param programId   SPL Token program account
+ *
+ * @return Decoded, valid instruction
+ */
+function decodeInitializeMintInstruction(instruction, programId = constants_1.TOKEN_PROGRAM_ID) {
+    if (!instruction.programId.equals(programId))
+        throw new errors_1.TokenInvalidInstructionProgramError();
+    if (instruction.data.length !== exports.initializeMintInstructionData.span)
+        throw new errors_1.TokenInvalidInstructionDataError();
+    const { keys: { mint, rent }, data, } = decodeInitializeMintInstructionUnchecked(instruction);
+    if (data.instruction !== types_1.TokenInstruction.InitializeMint)
+        throw new errors_1.TokenInvalidInstructionTypeError();
+    if (!mint || !rent)
+        throw new errors_1.TokenInvalidInstructionKeysError();
+    // TODO: key checks?
+    return {
+        programId,
+        keys: {
+            mint,
+            rent,
+        },
+        data,
+    };
+}
+exports.decodeInitializeMintInstruction = decodeInitializeMintInstruction;
+/**
+ * Decode an InitializeMint instruction without validating it
+ *
+ * @param instruction Transaction instruction to decode
+ *
+ * @return Decoded, non-validated instruction
+ */
+function decodeInitializeMintInstructionUnchecked({ programId, keys: [mint, rent], data, }) {
+    const { instruction, decimals, mintAuthority, freezeAuthorityOption, freezeAuthority } = exports.initializeMintInstructionData.decode(data);
+    return {
+        programId,
+        keys: {
+            mint,
+            rent,
+        },
+        data: {
+            instruction,
+            decimals,
+            mintAuthority,
+            freezeAuthority: freezeAuthorityOption ? freezeAuthority : null,
+        },
+    };
+}
+exports.decodeInitializeMintInstructionUnchecked = decodeInitializeMintInstructionUnchecked;
+//# sourceMappingURL=initializeMint.js.map
+
+/***/ }),
+
+/***/ 25957:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=initializeMint2.js.map
+
+/***/ }),
+
+/***/ 97697:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.decodeInitializeMultisigInstructionUnchecked = exports.decodeInitializeMultisigInstruction = exports.createInitializeMultisigInstruction = exports.initializeMultisigInstructionData = void 0;
+const buffer_layout_1 = __webpack_require__(94313);
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const errors_1 = __webpack_require__(43783);
+const types_1 = __webpack_require__(33884);
+/** TODO: docs */
+exports.initializeMultisigInstructionData = (0, buffer_layout_1.struct)([
+    (0, buffer_layout_1.u8)('instruction'),
+    (0, buffer_layout_1.u8)('m'),
+]);
+/**
+ * Construct an InitializeMultisig instruction
+ *
+ * @param account   Multisig account
+ * @param signers   Full set of signers
+ * @param m         Number of required signatures
+ * @param programId SPL Token program account
+ *
+ * @return Instruction to add to a transaction
+ */
+function createInitializeMultisigInstruction(account, signers, m, programId = constants_1.TOKEN_PROGRAM_ID) {
+    const keys = [
+        { pubkey: account, isSigner: false, isWritable: true },
+        { pubkey: web3_js_1.SYSVAR_RENT_PUBKEY, isSigner: false, isWritable: false },
+    ];
+    for (const signer of signers) {
+        keys.push({ pubkey: signer, isSigner: false, isWritable: false });
+    }
+    const data = Buffer.alloc(exports.initializeMultisigInstructionData.span);
+    exports.initializeMultisigInstructionData.encode({
+        instruction: types_1.TokenInstruction.InitializeMultisig,
+        m,
+    }, data);
+    return new web3_js_1.TransactionInstruction({ keys, programId, data });
+}
+exports.createInitializeMultisigInstruction = createInitializeMultisigInstruction;
+/**
+ * Decode an InitializeMultisig instruction and validate it
+ *
+ * @param instruction Transaction instruction to decode
+ * @param programId   SPL Token program account
+ *
+ * @return Decoded, valid instruction
+ */
+function decodeInitializeMultisigInstruction(instruction, programId = constants_1.TOKEN_PROGRAM_ID) {
+    if (!instruction.programId.equals(programId))
+        throw new errors_1.TokenInvalidInstructionProgramError();
+    if (instruction.data.length !== exports.initializeMultisigInstructionData.span)
+        throw new errors_1.TokenInvalidInstructionDataError();
+    const { keys: { account, rent, signers }, data, } = decodeInitializeMultisigInstructionUnchecked(instruction);
+    if (data.instruction !== types_1.TokenInstruction.InitializeMultisig)
+        throw new errors_1.TokenInvalidInstructionTypeError();
+    if (!account || !rent || !signers.length)
+        throw new errors_1.TokenInvalidInstructionKeysError();
+    // TODO: key checks?
+    return {
+        programId,
+        keys: {
+            account,
+            rent,
+            signers,
+        },
+        data,
+    };
+}
+exports.decodeInitializeMultisigInstruction = decodeInitializeMultisigInstruction;
+/**
+ * Decode an InitializeMultisig instruction without validating it
+ *
+ * @param instruction Transaction instruction to decode
+ *
+ * @return Decoded, non-validated instruction
+ */
+function decodeInitializeMultisigInstructionUnchecked({ programId, keys: [account, rent, ...signers], data, }) {
+    return {
+        programId,
+        keys: {
+            account,
+            rent,
+            signers,
+        },
+        data: exports.initializeMultisigInstructionData.decode(data),
+    };
+}
+exports.decodeInitializeMultisigInstructionUnchecked = decodeInitializeMultisigInstructionUnchecked;
+//# sourceMappingURL=initializeMultisig.js.map
+
+/***/ }),
+
+/***/ 97521:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=initializeMultisig2.js.map
+
+/***/ }),
+
+/***/ 53582:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.addSigners = void 0;
+/** @internal */
+function addSigners(keys, ownerOrAuthority, multiSigners) {
+    if (multiSigners.length) {
+        keys.push({ pubkey: ownerOrAuthority, isSigner: false, isWritable: false });
+        for (const signer of multiSigners) {
+            keys.push({ pubkey: signer.publicKey, isSigner: true, isWritable: false });
+        }
+    }
+    else {
+        keys.push({ pubkey: ownerOrAuthority, isSigner: true, isWritable: false });
+    }
+    return keys;
+}
+exports.addSigners = addSigners;
+//# sourceMappingURL=internal.js.map
+
+/***/ }),
+
+/***/ 26747:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.decodeMintToInstructionUnchecked = exports.decodeMintToInstruction = exports.createMintToInstruction = exports.mintToInstructionData = void 0;
+const buffer_layout_1 = __webpack_require__(94313);
+const buffer_layout_utils_1 = __webpack_require__(3717);
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const errors_1 = __webpack_require__(43783);
+const internal_1 = __webpack_require__(53582);
+const types_1 = __webpack_require__(33884);
+/** TODO: docs */
+exports.mintToInstructionData = (0, buffer_layout_1.struct)([(0, buffer_layout_1.u8)('instruction'), (0, buffer_layout_utils_1.u64)('amount')]);
+/**
+ * Construct a MintTo instruction
+ *
+ * @param mint         Public key of the mint
+ * @param destination  Address of the token account to mint to
+ * @param authority    The mint authority
+ * @param amount       Amount to mint
+ * @param multiSigners Signing accounts if `authority` is a multisig
+ * @param programId    SPL Token program account
+ *
+ * @return Instruction to add to a transaction
+ */
+function createMintToInstruction(mint, destination, authority, amount, multiSigners = [], programId = constants_1.TOKEN_PROGRAM_ID) {
+    const keys = (0, internal_1.addSigners)([
+        { pubkey: mint, isSigner: false, isWritable: true },
+        { pubkey: destination, isSigner: false, isWritable: true },
+    ], authority, multiSigners);
+    const data = Buffer.alloc(exports.mintToInstructionData.span);
+    exports.mintToInstructionData.encode({
+        instruction: types_1.TokenInstruction.MintTo,
+        amount: BigInt(amount),
+    }, data);
+    return new web3_js_1.TransactionInstruction({ keys, programId, data });
+}
+exports.createMintToInstruction = createMintToInstruction;
+/**
+ * Decode a MintTo instruction and validate it
+ *
+ * @param instruction Transaction instruction to decode
+ * @param programId   SPL Token program account
+ *
+ * @return Decoded, valid instruction
+ */
+function decodeMintToInstruction(instruction, programId = constants_1.TOKEN_PROGRAM_ID) {
+    if (!instruction.programId.equals(programId))
+        throw new errors_1.TokenInvalidInstructionProgramError();
+    if (instruction.data.length !== exports.mintToInstructionData.span)
+        throw new errors_1.TokenInvalidInstructionDataError();
+    const { keys: { mint, destination, authority, multiSigners }, data, } = decodeMintToInstructionUnchecked(instruction);
+    if (data.instruction !== types_1.TokenInstruction.MintTo)
+        throw new errors_1.TokenInvalidInstructionTypeError();
+    if (!mint || !destination || !authority)
+        throw new errors_1.TokenInvalidInstructionKeysError();
+    // TODO: key checks?
+    return {
+        programId,
+        keys: {
+            mint,
+            destination,
+            authority,
+            multiSigners,
+        },
+        data,
+    };
+}
+exports.decodeMintToInstruction = decodeMintToInstruction;
+/**
+ * Decode a MintTo instruction without validating it
+ *
+ * @param instruction Transaction instruction to decode
+ *
+ * @return Decoded, non-validated instruction
+ */
+function decodeMintToInstructionUnchecked({ programId, keys: [mint, destination, authority, ...multiSigners], data, }) {
+    return {
+        programId,
+        keys: {
+            mint,
+            destination,
+            authority,
+            multiSigners,
+        },
+        data: exports.mintToInstructionData.decode(data),
+    };
+}
+exports.decodeMintToInstructionUnchecked = decodeMintToInstructionUnchecked;
+//# sourceMappingURL=mintTo.js.map
+
+/***/ }),
+
+/***/ 18724:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.decodeMintToCheckedInstructionUnchecked = exports.decodeMintToCheckedInstruction = exports.createMintToCheckedInstruction = exports.mintToCheckedInstructionData = void 0;
+const buffer_layout_1 = __webpack_require__(94313);
+const buffer_layout_utils_1 = __webpack_require__(3717);
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const errors_1 = __webpack_require__(43783);
+const internal_1 = __webpack_require__(53582);
+const types_1 = __webpack_require__(33884);
+/** TODO: docs */
+exports.mintToCheckedInstructionData = (0, buffer_layout_1.struct)([
+    (0, buffer_layout_1.u8)('instruction'),
+    (0, buffer_layout_utils_1.u64)('amount'),
+    (0, buffer_layout_1.u8)('decimals'),
+]);
+/**
+ * Construct a MintToChecked instruction
+ *
+ * @param mint         Public key of the mint
+ * @param destination  Address of the token account to mint to
+ * @param authority    The mint authority
+ * @param amount       Amount to mint
+ * @param decimals     Number of decimals in amount to mint
+ * @param multiSigners Signing accounts if `authority` is a multisig
+ * @param programId    SPL Token program account
+ *
+ * @return Instruction to add to a transaction
+ */
+function createMintToCheckedInstruction(mint, destination, authority, amount, decimals, multiSigners = [], programId = constants_1.TOKEN_PROGRAM_ID) {
+    const keys = (0, internal_1.addSigners)([
+        { pubkey: mint, isSigner: false, isWritable: true },
+        { pubkey: destination, isSigner: false, isWritable: true },
+    ], authority, multiSigners);
+    const data = Buffer.alloc(exports.mintToCheckedInstructionData.span);
+    exports.mintToCheckedInstructionData.encode({
+        instruction: types_1.TokenInstruction.MintToChecked,
+        amount: BigInt(amount),
+        decimals,
+    }, data);
+    return new web3_js_1.TransactionInstruction({ keys, programId, data });
+}
+exports.createMintToCheckedInstruction = createMintToCheckedInstruction;
+/**
+ * Decode a MintToChecked instruction and validate it
+ *
+ * @param instruction Transaction instruction to decode
+ * @param programId   SPL Token program account
+ *
+ * @return Decoded, valid instruction
+ */
+function decodeMintToCheckedInstruction(instruction, programId = constants_1.TOKEN_PROGRAM_ID) {
+    if (!instruction.programId.equals(programId))
+        throw new errors_1.TokenInvalidInstructionProgramError();
+    if (instruction.data.length !== exports.mintToCheckedInstructionData.span)
+        throw new errors_1.TokenInvalidInstructionDataError();
+    const { keys: { mint, destination, authority, multiSigners }, data, } = decodeMintToCheckedInstructionUnchecked(instruction);
+    if (data.instruction !== types_1.TokenInstruction.MintToChecked)
+        throw new errors_1.TokenInvalidInstructionTypeError();
+    if (!mint || !destination || !authority)
+        throw new errors_1.TokenInvalidInstructionKeysError();
+    // TODO: key checks?
+    return {
+        programId,
+        keys: {
+            mint,
+            destination,
+            authority,
+            multiSigners,
+        },
+        data,
+    };
+}
+exports.decodeMintToCheckedInstruction = decodeMintToCheckedInstruction;
+/**
+ * Decode a MintToChecked instruction without validating it
+ *
+ * @param instruction Transaction instruction to decode
+ *
+ * @return Decoded, non-validated instruction
+ */
+function decodeMintToCheckedInstructionUnchecked({ programId, keys: [mint, destination, authority, ...multiSigners], data, }) {
+    return {
+        programId,
+        keys: {
+            mint,
+            destination,
+            authority,
+            multiSigners,
+        },
+        data: exports.mintToCheckedInstructionData.decode(data),
+    };
+}
+exports.decodeMintToCheckedInstructionUnchecked = decodeMintToCheckedInstructionUnchecked;
+//# sourceMappingURL=mintToChecked.js.map
+
+/***/ }),
+
+/***/ 62718:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.decodeRevokeInstructionUnchecked = exports.decodeRevokeInstruction = exports.createRevokeInstruction = exports.revokeInstructionData = void 0;
+const buffer_layout_1 = __webpack_require__(94313);
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const errors_1 = __webpack_require__(43783);
+const internal_1 = __webpack_require__(53582);
+const types_1 = __webpack_require__(33884);
+/** TODO: docs */
+exports.revokeInstructionData = (0, buffer_layout_1.struct)([(0, buffer_layout_1.u8)('instruction')]);
+/**
+ * Construct a Revoke instruction
+ *
+ * @param account      Address of the token account
+ * @param owner        Owner of the account
+ * @param multiSigners Signing accounts if `owner` is a multisig
+ * @param programId    SPL Token program account
+ *
+ * @return Instruction to add to a transaction
+ */
+function createRevokeInstruction(account, owner, multiSigners = [], programId = constants_1.TOKEN_PROGRAM_ID) {
+    const keys = (0, internal_1.addSigners)([{ pubkey: account, isSigner: false, isWritable: true }], owner, multiSigners);
+    const data = Buffer.alloc(exports.revokeInstructionData.span);
+    exports.revokeInstructionData.encode({ instruction: types_1.TokenInstruction.Revoke }, data);
+    return new web3_js_1.TransactionInstruction({ keys, programId, data });
+}
+exports.createRevokeInstruction = createRevokeInstruction;
+/**
+ * Decode a Revoke instruction and validate it
+ *
+ * @param instruction Transaction instruction to decode
+ * @param programId   SPL Token program account
+ *
+ * @return Decoded, valid instruction
+ */
+function decodeRevokeInstruction(instruction, programId = constants_1.TOKEN_PROGRAM_ID) {
+    if (!instruction.programId.equals(programId))
+        throw new errors_1.TokenInvalidInstructionProgramError();
+    if (instruction.data.length !== exports.revokeInstructionData.span)
+        throw new errors_1.TokenInvalidInstructionDataError();
+    const { keys: { account, owner, multiSigners }, data, } = decodeRevokeInstructionUnchecked(instruction);
+    if (data.instruction !== types_1.TokenInstruction.Revoke)
+        throw new errors_1.TokenInvalidInstructionTypeError();
+    if (!account || !owner)
+        throw new errors_1.TokenInvalidInstructionKeysError();
+    // TODO: key checks?
+    return {
+        programId,
+        keys: {
+            account,
+            owner,
+            multiSigners,
+        },
+        data,
+    };
+}
+exports.decodeRevokeInstruction = decodeRevokeInstruction;
+/**
+ * Decode a Revoke instruction without validating it
+ *
+ * @param instruction Transaction instruction to decode
+ *
+ * @return Decoded, non-validated instruction
+ */
+function decodeRevokeInstructionUnchecked({ programId, keys: [account, owner, ...multiSigners], data, }) {
+    return {
+        programId,
+        keys: {
+            account,
+            owner,
+            multiSigners,
+        },
+        data: exports.revokeInstructionData.decode(data),
+    };
+}
+exports.decodeRevokeInstructionUnchecked = decodeRevokeInstructionUnchecked;
+//# sourceMappingURL=revoke.js.map
+
+/***/ }),
+
+/***/ 89973:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.decodeSetAuthorityInstructionUnchecked = exports.decodeSetAuthorityInstruction = exports.createSetAuthorityInstruction = exports.setAuthorityInstructionData = exports.AuthorityType = void 0;
+const buffer_layout_1 = __webpack_require__(94313);
+const buffer_layout_utils_1 = __webpack_require__(3717);
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const errors_1 = __webpack_require__(43783);
+const internal_1 = __webpack_require__(53582);
+const types_1 = __webpack_require__(33884);
+/** Authority types defined by the program */
+var AuthorityType;
+(function (AuthorityType) {
+    AuthorityType[AuthorityType["MintTokens"] = 0] = "MintTokens";
+    AuthorityType[AuthorityType["FreezeAccount"] = 1] = "FreezeAccount";
+    AuthorityType[AuthorityType["AccountOwner"] = 2] = "AccountOwner";
+    AuthorityType[AuthorityType["CloseAccount"] = 3] = "CloseAccount";
+})(AuthorityType = exports.AuthorityType || (exports.AuthorityType = {}));
+/** TODO: docs */
+exports.setAuthorityInstructionData = (0, buffer_layout_1.struct)([
+    (0, buffer_layout_1.u8)('instruction'),
+    (0, buffer_layout_1.u8)('authorityType'),
+    (0, buffer_layout_1.u8)('newAuthorityOption'),
+    (0, buffer_layout_utils_1.publicKey)('newAuthority'),
+]);
+/**
+ * Construct a SetAuthority instruction
+ *
+ * @param account          Address of the token account
+ * @param currentAuthority Current authority of the specified type
+ * @param authorityType    Type of authority to set
+ * @param newAuthority     New authority of the account
+ * @param multiSigners     Signing accounts if `currentAuthority` is a multisig
+ * @param programId        SPL Token program account
+ *
+ * @return Instruction to add to a transaction
+ */
+function createSetAuthorityInstruction(account, currentAuthority, authorityType, newAuthority, multiSigners = [], programId = constants_1.TOKEN_PROGRAM_ID) {
+    const keys = (0, internal_1.addSigners)([{ pubkey: account, isSigner: false, isWritable: true }], currentAuthority, multiSigners);
+    const data = Buffer.alloc(exports.setAuthorityInstructionData.span);
+    exports.setAuthorityInstructionData.encode({
+        instruction: types_1.TokenInstruction.SetAuthority,
+        authorityType,
+        newAuthorityOption: newAuthority ? 1 : 0,
+        newAuthority: newAuthority || new web3_js_1.PublicKey(0),
+    }, data);
+    return new web3_js_1.TransactionInstruction({ keys, programId, data });
+}
+exports.createSetAuthorityInstruction = createSetAuthorityInstruction;
+/**
+ * Decode a SetAuthority instruction and validate it
+ *
+ * @param instruction Transaction instruction to decode
+ * @param programId   SPL Token program account
+ *
+ * @return Decoded, valid instruction
+ */
+function decodeSetAuthorityInstruction(instruction, programId = constants_1.TOKEN_PROGRAM_ID) {
+    if (!instruction.programId.equals(programId))
+        throw new errors_1.TokenInvalidInstructionProgramError();
+    if (instruction.data.length !== exports.setAuthorityInstructionData.span)
+        throw new errors_1.TokenInvalidInstructionDataError();
+    const { keys: { account, currentAuthority, multiSigners }, data, } = decodeSetAuthorityInstructionUnchecked(instruction);
+    if (data.instruction !== types_1.TokenInstruction.SetAuthority)
+        throw new errors_1.TokenInvalidInstructionTypeError();
+    if (!account || !currentAuthority)
+        throw new errors_1.TokenInvalidInstructionKeysError();
+    // TODO: key checks?
+    return {
+        programId,
+        keys: {
+            account,
+            currentAuthority,
+            multiSigners,
+        },
+        data,
+    };
+}
+exports.decodeSetAuthorityInstruction = decodeSetAuthorityInstruction;
+/**
+ * Decode a SetAuthority instruction without validating it
+ *
+ * @param instruction Transaction instruction to decode
+ *
+ * @return Decoded, non-validated instruction
+ */
+function decodeSetAuthorityInstructionUnchecked({ programId, keys: [account, currentAuthority, ...multiSigners], data, }) {
+    const { instruction, authorityType, newAuthorityOption, newAuthority } = exports.setAuthorityInstructionData.decode(data);
+    return {
+        programId,
+        keys: {
+            account,
+            currentAuthority,
+            multiSigners,
+        },
+        data: {
+            instruction,
+            authorityType,
+            newAuthority: newAuthorityOption ? newAuthority : null,
+        },
+    };
+}
+exports.decodeSetAuthorityInstructionUnchecked = decodeSetAuthorityInstructionUnchecked;
+//# sourceMappingURL=setAuthority.js.map
+
+/***/ }),
+
+/***/ 2227:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.decodeSyncNativeInstructionUnchecked = exports.decodeSyncNativeInstruction = exports.createSyncNativeInstruction = exports.syncNativeInstructionData = void 0;
+const buffer_layout_1 = __webpack_require__(94313);
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const errors_1 = __webpack_require__(43783);
+const types_1 = __webpack_require__(33884);
+/** TODO: docs */
+exports.syncNativeInstructionData = (0, buffer_layout_1.struct)([(0, buffer_layout_1.u8)('instruction')]);
+/**
+ * Construct a SyncNative instruction
+ *
+ * @param account   Native account to sync lamports from
+ * @param programId SPL Token program account
+ *
+ * @return Instruction to add to a transaction
+ */
+function createSyncNativeInstruction(account, programId = constants_1.TOKEN_PROGRAM_ID) {
+    const keys = [{ pubkey: account, isSigner: false, isWritable: true }];
+    const data = Buffer.alloc(exports.syncNativeInstructionData.span);
+    exports.syncNativeInstructionData.encode({ instruction: types_1.TokenInstruction.SyncNative }, data);
+    return new web3_js_1.TransactionInstruction({ keys, programId, data });
+}
+exports.createSyncNativeInstruction = createSyncNativeInstruction;
+/**
+ * Decode a SyncNative instruction and validate it
+ *
+ * @param instruction Transaction instruction to decode
+ * @param programId   SPL Token program account
+ *
+ * @return Decoded, valid instruction
+ */
+function decodeSyncNativeInstruction(instruction, programId = constants_1.TOKEN_PROGRAM_ID) {
+    if (!instruction.programId.equals(programId))
+        throw new errors_1.TokenInvalidInstructionProgramError();
+    if (instruction.data.length !== exports.syncNativeInstructionData.span)
+        throw new errors_1.TokenInvalidInstructionDataError();
+    const { keys: { account }, data, } = decodeSyncNativeInstructionUnchecked(instruction);
+    if (data.instruction !== types_1.TokenInstruction.SyncNative)
+        throw new errors_1.TokenInvalidInstructionTypeError();
+    if (!account)
+        throw new errors_1.TokenInvalidInstructionKeysError();
+    // TODO: key checks?
+    return {
+        programId,
+        keys: {
+            account,
+        },
+        data,
+    };
+}
+exports.decodeSyncNativeInstruction = decodeSyncNativeInstruction;
+/**
+ * Decode a SyncNative instruction without validating it
+ *
+ * @param instruction Transaction instruction to decode
+ *
+ * @return Decoded, non-validated instruction
+ */
+function decodeSyncNativeInstructionUnchecked({ programId, keys: [account], data, }) {
+    return {
+        programId,
+        keys: {
+            account,
+        },
+        data: exports.syncNativeInstructionData.decode(data),
+    };
+}
+exports.decodeSyncNativeInstructionUnchecked = decodeSyncNativeInstructionUnchecked;
+//# sourceMappingURL=syncNative.js.map
+
+/***/ }),
+
+/***/ 74340:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.decodeThawAccountInstructionUnchecked = exports.decodeThawAccountInstruction = exports.createThawAccountInstruction = exports.thawAccountInstructionData = void 0;
+const buffer_layout_1 = __webpack_require__(94313);
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const errors_1 = __webpack_require__(43783);
+const internal_1 = __webpack_require__(53582);
+const types_1 = __webpack_require__(33884);
+/** TODO: docs */
+exports.thawAccountInstructionData = (0, buffer_layout_1.struct)([(0, buffer_layout_1.u8)('instruction')]);
+/**
+ * Construct a ThawAccount instruction
+ *
+ * @param account      Account to thaw
+ * @param mint         Mint account
+ * @param authority    Mint freeze authority
+ * @param multiSigners Signing accounts if `authority` is a multisig
+ * @param programId    SPL Token program account
+ *
+ * @return Instruction to add to a transaction
+ */
+function createThawAccountInstruction(account, mint, authority, multiSigners = [], programId = constants_1.TOKEN_PROGRAM_ID) {
+    const keys = (0, internal_1.addSigners)([
+        { pubkey: account, isSigner: false, isWritable: true },
+        { pubkey: mint, isSigner: false, isWritable: false },
+    ], authority, multiSigners);
+    const data = Buffer.alloc(exports.thawAccountInstructionData.span);
+    exports.thawAccountInstructionData.encode({ instruction: types_1.TokenInstruction.ThawAccount }, data);
+    return new web3_js_1.TransactionInstruction({ keys, programId, data });
+}
+exports.createThawAccountInstruction = createThawAccountInstruction;
+/**
+ * Decode a ThawAccount instruction and validate it
+ *
+ * @param instruction Transaction instruction to decode
+ * @param programId   SPL Token program account
+ *
+ * @return Decoded, valid instruction
+ */
+function decodeThawAccountInstruction(instruction, programId = constants_1.TOKEN_PROGRAM_ID) {
+    if (!instruction.programId.equals(programId))
+        throw new errors_1.TokenInvalidInstructionProgramError();
+    if (instruction.data.length !== exports.thawAccountInstructionData.span)
+        throw new errors_1.TokenInvalidInstructionDataError();
+    const { keys: { account, mint, authority, multiSigners }, data, } = decodeThawAccountInstructionUnchecked(instruction);
+    if (data.instruction !== types_1.TokenInstruction.ThawAccount)
+        throw new errors_1.TokenInvalidInstructionTypeError();
+    if (!account || !mint || !authority)
+        throw new errors_1.TokenInvalidInstructionKeysError();
+    // TODO: key checks?
+    return {
+        programId,
+        keys: {
+            account,
+            mint,
+            authority,
+            multiSigners,
+        },
+        data,
+    };
+}
+exports.decodeThawAccountInstruction = decodeThawAccountInstruction;
+/**
+ * Decode a ThawAccount instruction without validating it
+ *
+ * @param instruction Transaction instruction to decode
+ *
+ * @return Decoded, non-validated instruction
+ */
+function decodeThawAccountInstructionUnchecked({ programId, keys: [account, mint, authority, ...multiSigners], data, }) {
+    return {
+        programId,
+        keys: {
+            account,
+            mint,
+            authority,
+            multiSigners,
+        },
+        data: exports.thawAccountInstructionData.decode(data),
+    };
+}
+exports.decodeThawAccountInstructionUnchecked = decodeThawAccountInstructionUnchecked;
+//# sourceMappingURL=thawAccount.js.map
+
+/***/ }),
+
+/***/ 22125:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.decodeTransferInstructionUnchecked = exports.decodeTransferInstruction = exports.createTransferInstruction = exports.transferInstructionData = void 0;
+const buffer_layout_1 = __webpack_require__(94313);
+const buffer_layout_utils_1 = __webpack_require__(3717);
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const errors_1 = __webpack_require__(43783);
+const internal_1 = __webpack_require__(53582);
+const types_1 = __webpack_require__(33884);
+/** TODO: docs */
+exports.transferInstructionData = (0, buffer_layout_1.struct)([(0, buffer_layout_1.u8)('instruction'), (0, buffer_layout_utils_1.u64)('amount')]);
+/**
+ * Construct a Transfer instruction
+ *
+ * @param source       Source account
+ * @param destination  Destination account
+ * @param owner        Owner of the source account
+ * @param amount       Number of tokens to transfer
+ * @param multiSigners Signing accounts if `owner` is a multisig
+ * @param programId    SPL Token program account
+ *
+ * @return Instruction to add to a transaction
+ */
+function createTransferInstruction(source, destination, owner, amount, multiSigners = [], programId = constants_1.TOKEN_PROGRAM_ID) {
+    const keys = (0, internal_1.addSigners)([
+        { pubkey: source, isSigner: false, isWritable: true },
+        { pubkey: destination, isSigner: false, isWritable: true },
+    ], owner, multiSigners);
+    const data = Buffer.alloc(exports.transferInstructionData.span);
+    exports.transferInstructionData.encode({
+        instruction: types_1.TokenInstruction.Transfer,
+        amount: BigInt(amount),
+    }, data);
+    return new web3_js_1.TransactionInstruction({ keys, programId, data });
+}
+exports.createTransferInstruction = createTransferInstruction;
+/**
+ * Decode a Transfer instruction and validate it
+ *
+ * @param instruction Transaction instruction to decode
+ * @param programId   SPL Token program account
+ *
+ * @return Decoded, valid instruction
+ */
+function decodeTransferInstruction(instruction, programId = constants_1.TOKEN_PROGRAM_ID) {
+    if (!instruction.programId.equals(programId))
+        throw new errors_1.TokenInvalidInstructionProgramError();
+    if (instruction.data.length !== exports.transferInstructionData.span)
+        throw new errors_1.TokenInvalidInstructionDataError();
+    const { keys: { source, destination, owner, multiSigners }, data, } = decodeTransferInstructionUnchecked(instruction);
+    if (data.instruction !== types_1.TokenInstruction.Transfer)
+        throw new errors_1.TokenInvalidInstructionTypeError();
+    if (!source || !destination || !owner)
+        throw new errors_1.TokenInvalidInstructionKeysError();
+    // TODO: key checks?
+    return {
+        programId,
+        keys: {
+            source,
+            destination,
+            owner,
+            multiSigners,
+        },
+        data,
+    };
+}
+exports.decodeTransferInstruction = decodeTransferInstruction;
+/**
+ * Decode a Transfer instruction without validating it
+ *
+ * @param instruction Transaction instruction to decode
+ *
+ * @return Decoded, non-validated instruction
+ */
+function decodeTransferInstructionUnchecked({ programId, keys: [source, destination, owner, ...multiSigners], data, }) {
+    return {
+        programId,
+        keys: {
+            source,
+            destination,
+            owner,
+            multiSigners,
+        },
+        data: exports.transferInstructionData.decode(data),
+    };
+}
+exports.decodeTransferInstructionUnchecked = decodeTransferInstructionUnchecked;
+//# sourceMappingURL=transfer.js.map
+
+/***/ }),
+
+/***/ 83802:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.decodeTransferCheckedInstructionUnchecked = exports.decodeTransferCheckedInstruction = exports.createTransferCheckedInstruction = exports.transferCheckedInstructionData = void 0;
+const buffer_layout_1 = __webpack_require__(94313);
+const buffer_layout_utils_1 = __webpack_require__(3717);
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const errors_1 = __webpack_require__(43783);
+const internal_1 = __webpack_require__(53582);
+const types_1 = __webpack_require__(33884);
+/** TODO: docs */
+exports.transferCheckedInstructionData = (0, buffer_layout_1.struct)([
+    (0, buffer_layout_1.u8)('instruction'),
+    (0, buffer_layout_utils_1.u64)('amount'),
+    (0, buffer_layout_1.u8)('decimals'),
+]);
+/**
+ * Construct a TransferChecked instruction
+ *
+ * @param source       Source account
+ * @param mint         Mint account
+ * @param destination  Destination account
+ * @param owner        Owner of the source account
+ * @param amount       Number of tokens to transfer
+ * @param decimals     Number of decimals in transfer amount
+ * @param multiSigners Signing accounts if `owner` is a multisig
+ * @param programId    SPL Token program account
+ *
+ * @return Instruction to add to a transaction
+ */
+function createTransferCheckedInstruction(source, mint, destination, owner, amount, decimals, multiSigners = [], programId = constants_1.TOKEN_PROGRAM_ID) {
+    const keys = (0, internal_1.addSigners)([
+        { pubkey: source, isSigner: false, isWritable: true },
+        { pubkey: mint, isSigner: false, isWritable: false },
+        { pubkey: destination, isSigner: false, isWritable: true },
+    ], owner, multiSigners);
+    const data = Buffer.alloc(exports.transferCheckedInstructionData.span);
+    exports.transferCheckedInstructionData.encode({
+        instruction: types_1.TokenInstruction.TransferChecked,
+        amount: BigInt(amount),
+        decimals,
+    }, data);
+    return new web3_js_1.TransactionInstruction({ keys, programId, data });
+}
+exports.createTransferCheckedInstruction = createTransferCheckedInstruction;
+/**
+ * Decode a TransferChecked instruction and validate it
+ *
+ * @param instruction Transaction instruction to decode
+ * @param programId   SPL Token program account
+ *
+ * @return Decoded, valid instruction
+ */
+function decodeTransferCheckedInstruction(instruction, programId = constants_1.TOKEN_PROGRAM_ID) {
+    if (!instruction.programId.equals(programId))
+        throw new errors_1.TokenInvalidInstructionProgramError();
+    if (instruction.data.length !== exports.transferCheckedInstructionData.span)
+        throw new errors_1.TokenInvalidInstructionDataError();
+    const { keys: { source, mint, destination, owner, multiSigners }, data, } = decodeTransferCheckedInstructionUnchecked(instruction);
+    if (data.instruction !== types_1.TokenInstruction.TransferChecked)
+        throw new errors_1.TokenInvalidInstructionTypeError();
+    if (!source || !mint || !destination || !owner)
+        throw new errors_1.TokenInvalidInstructionKeysError();
+    // TODO: key checks?
+    return {
+        programId,
+        keys: {
+            source,
+            mint,
+            destination,
+            owner,
+            multiSigners,
+        },
+        data,
+    };
+}
+exports.decodeTransferCheckedInstruction = decodeTransferCheckedInstruction;
+/**
+ * Decode a TransferChecked instruction without validating it
+ *
+ * @param instruction Transaction instruction to decode
+ *
+ * @return Decoded, non-validated instruction
+ */
+function decodeTransferCheckedInstructionUnchecked({ programId, keys: [source, mint, destination, owner, ...multiSigners], data, }) {
+    return {
+        programId,
+        keys: {
+            source,
+            mint,
+            destination,
+            owner,
+            multiSigners,
+        },
+        data: exports.transferCheckedInstructionData.decode(data),
+    };
+}
+exports.decodeTransferCheckedInstructionUnchecked = decodeTransferCheckedInstructionUnchecked;
+//# sourceMappingURL=transferChecked.js.map
+
+/***/ }),
+
+/***/ 33884:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.TokenInstruction = void 0;
+/** Instructions defined by the program */
+var TokenInstruction;
+(function (TokenInstruction) {
+    TokenInstruction[TokenInstruction["InitializeMint"] = 0] = "InitializeMint";
+    TokenInstruction[TokenInstruction["InitializeAccount"] = 1] = "InitializeAccount";
+    TokenInstruction[TokenInstruction["InitializeMultisig"] = 2] = "InitializeMultisig";
+    TokenInstruction[TokenInstruction["Transfer"] = 3] = "Transfer";
+    TokenInstruction[TokenInstruction["Approve"] = 4] = "Approve";
+    TokenInstruction[TokenInstruction["Revoke"] = 5] = "Revoke";
+    TokenInstruction[TokenInstruction["SetAuthority"] = 6] = "SetAuthority";
+    TokenInstruction[TokenInstruction["MintTo"] = 7] = "MintTo";
+    TokenInstruction[TokenInstruction["Burn"] = 8] = "Burn";
+    TokenInstruction[TokenInstruction["CloseAccount"] = 9] = "CloseAccount";
+    TokenInstruction[TokenInstruction["FreezeAccount"] = 10] = "FreezeAccount";
+    TokenInstruction[TokenInstruction["ThawAccount"] = 11] = "ThawAccount";
+    TokenInstruction[TokenInstruction["TransferChecked"] = 12] = "TransferChecked";
+    TokenInstruction[TokenInstruction["ApproveChecked"] = 13] = "ApproveChecked";
+    TokenInstruction[TokenInstruction["MintToChecked"] = 14] = "MintToChecked";
+    TokenInstruction[TokenInstruction["BurnChecked"] = 15] = "BurnChecked";
+    TokenInstruction[TokenInstruction["InitializeAccount2"] = 16] = "InitializeAccount2";
+    TokenInstruction[TokenInstruction["SyncNative"] = 17] = "SyncNative";
+    TokenInstruction[TokenInstruction["InitializeAccount3"] = 18] = "InitializeAccount3";
+    TokenInstruction[TokenInstruction["InitializeMultisig2"] = 19] = "InitializeMultisig2";
+    TokenInstruction[TokenInstruction["InitializeMint2"] = 20] = "InitializeMint2";
+})(TokenInstruction = exports.TokenInstruction || (exports.TokenInstruction = {}));
+//# sourceMappingURL=types.js.map
+
+/***/ }),
+
+/***/ 65279:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getMinimumBalanceForRentExemptAccount = exports.getAccount = exports.ACCOUNT_SIZE = exports.AccountLayout = exports.AccountState = void 0;
+const buffer_layout_1 = __webpack_require__(94313);
+const buffer_layout_utils_1 = __webpack_require__(3717);
+const constants_1 = __webpack_require__(28402);
+const errors_1 = __webpack_require__(43783);
+/** Token account state as stored by the program */
+var AccountState;
+(function (AccountState) {
+    AccountState[AccountState["Uninitialized"] = 0] = "Uninitialized";
+    AccountState[AccountState["Initialized"] = 1] = "Initialized";
+    AccountState[AccountState["Frozen"] = 2] = "Frozen";
+})(AccountState = exports.AccountState || (exports.AccountState = {}));
+/** Buffer layout for de/serializing a token account */
+exports.AccountLayout = (0, buffer_layout_1.struct)([
+    (0, buffer_layout_utils_1.publicKey)('mint'),
+    (0, buffer_layout_utils_1.publicKey)('owner'),
+    (0, buffer_layout_utils_1.u64)('amount'),
+    (0, buffer_layout_1.u32)('delegateOption'),
+    (0, buffer_layout_utils_1.publicKey)('delegate'),
+    (0, buffer_layout_1.u8)('state'),
+    (0, buffer_layout_1.u32)('isNativeOption'),
+    (0, buffer_layout_utils_1.u64)('isNative'),
+    (0, buffer_layout_utils_1.u64)('delegatedAmount'),
+    (0, buffer_layout_1.u32)('closeAuthorityOption'),
+    (0, buffer_layout_utils_1.publicKey)('closeAuthority'),
+]);
+/** Byte length of a token account */
+exports.ACCOUNT_SIZE = exports.AccountLayout.span;
+/**
+ * Retrieve information about a token account
+ *
+ * @param connection Connection to use
+ * @param address    Token account
+ * @param commitment Desired level of commitment for querying the state
+ * @param programId  SPL Token program account
+ *
+ * @return Token account information
+ */
+function getAccount(connection, address, commitment, programId = constants_1.TOKEN_PROGRAM_ID) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const info = yield connection.getAccountInfo(address, commitment);
+        if (!info)
+            throw new errors_1.TokenAccountNotFoundError();
+        if (!info.owner.equals(programId))
+            throw new errors_1.TokenInvalidAccountOwnerError();
+        if (info.data.length != exports.ACCOUNT_SIZE)
+            throw new errors_1.TokenInvalidAccountSizeError();
+        const rawAccount = exports.AccountLayout.decode(info.data);
+        return {
+            address,
+            mint: rawAccount.mint,
+            owner: rawAccount.owner,
+            amount: rawAccount.amount,
+            delegate: rawAccount.delegateOption ? rawAccount.delegate : null,
+            delegatedAmount: rawAccount.delegatedAmount,
+            isInitialized: rawAccount.state !== AccountState.Uninitialized,
+            isFrozen: rawAccount.state === AccountState.Frozen,
+            isNative: !!rawAccount.isNativeOption,
+            rentExemptReserve: rawAccount.isNativeOption ? rawAccount.isNative : null,
+            closeAuthority: rawAccount.closeAuthorityOption ? rawAccount.closeAuthority : null,
+        };
+    });
+}
+exports.getAccount = getAccount;
+/** Get the minimum lamport balance for a token account to be rent exempt
+ *
+ * @param connection Connection to use
+ * @param commitment Desired level of commitment for querying the state
+ *
+ * @return Amount of lamports required
+ */
+function getMinimumBalanceForRentExemptAccount(connection, commitment) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return yield connection.getMinimumBalanceForRentExemption(exports.ACCOUNT_SIZE, commitment);
+    });
+}
+exports.getMinimumBalanceForRentExemptAccount = getMinimumBalanceForRentExemptAccount;
+//# sourceMappingURL=account.js.map
+
+/***/ }),
+
+/***/ 14621:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+__exportStar(__webpack_require__(65279), exports);
+__exportStar(__webpack_require__(66254), exports);
+__exportStar(__webpack_require__(95902), exports);
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ 66254:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getAssociatedTokenAddress = exports.getMinimumBalanceForRentExemptMint = exports.getMint = exports.MINT_SIZE = exports.MintLayout = void 0;
+const buffer_layout_1 = __webpack_require__(94313);
+const buffer_layout_utils_1 = __webpack_require__(3717);
+const web3_js_1 = __webpack_require__(10948);
+const constants_1 = __webpack_require__(28402);
+const errors_1 = __webpack_require__(43783);
+/** Buffer layout for de/serializing a mint */
+exports.MintLayout = (0, buffer_layout_1.struct)([
+    (0, buffer_layout_1.u32)('mintAuthorityOption'),
+    (0, buffer_layout_utils_1.publicKey)('mintAuthority'),
+    (0, buffer_layout_utils_1.u64)('supply'),
+    (0, buffer_layout_1.u8)('decimals'),
+    (0, buffer_layout_utils_1.bool)('isInitialized'),
+    (0, buffer_layout_1.u32)('freezeAuthorityOption'),
+    (0, buffer_layout_utils_1.publicKey)('freezeAuthority'),
+]);
+/** Byte length of a mint */
+exports.MINT_SIZE = exports.MintLayout.span;
+/**
+ * Retrieve information about a mint
+ *
+ * @param connection Connection to use
+ * @param address    Mint account
+ * @param commitment Desired level of commitment for querying the state
+ * @param programId  SPL Token program account
+ *
+ * @return Mint information
+ */
+function getMint(connection, address, commitment, programId = constants_1.TOKEN_PROGRAM_ID) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const info = yield connection.getAccountInfo(address, commitment);
+        if (!info)
+            throw new errors_1.TokenAccountNotFoundError();
+        if (!info.owner.equals(programId))
+            throw new errors_1.TokenInvalidAccountOwnerError();
+        if (info.data.length != exports.MINT_SIZE)
+            throw new errors_1.TokenInvalidAccountSizeError();
+        const rawMint = exports.MintLayout.decode(info.data);
+        return {
+            address,
+            mintAuthority: rawMint.mintAuthorityOption ? rawMint.mintAuthority : null,
+            supply: rawMint.supply,
+            decimals: rawMint.decimals,
+            isInitialized: rawMint.isInitialized,
+            freezeAuthority: rawMint.freezeAuthorityOption ? rawMint.freezeAuthority : null,
+        };
+    });
+}
+exports.getMint = getMint;
+/** Get the minimum lamport balance for a mint to be rent exempt
+ *
+ * @param connection Connection to use
+ * @param commitment Desired level of commitment for querying the state
+ *
+ * @return Amount of lamports required
+ */
+function getMinimumBalanceForRentExemptMint(connection, commitment) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return yield connection.getMinimumBalanceForRentExemption(exports.MINT_SIZE, commitment);
+    });
+}
+exports.getMinimumBalanceForRentExemptMint = getMinimumBalanceForRentExemptMint;
+/**
+ * Get the address of the associated token account for a given mint and owner
+ *
+ * @param mint                     Token mint account
+ * @param owner                    Owner of the new account
+ * @param allowOwnerOffCurve       Allow the owner account to be a PDA (Program Derived Address)
+ * @param programId                SPL Token program account
+ * @param associatedTokenProgramId SPL Associated Token program account
+ *
+ * @return Address of the associated token account
+ */
+function getAssociatedTokenAddress(mint, owner, allowOwnerOffCurve = false, programId = constants_1.TOKEN_PROGRAM_ID, associatedTokenProgramId = constants_1.ASSOCIATED_TOKEN_PROGRAM_ID) {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (!allowOwnerOffCurve && !web3_js_1.PublicKey.isOnCurve(owner.toBuffer()))
+            throw new errors_1.TokenOwnerOffCurveError();
+        const [address] = yield web3_js_1.PublicKey.findProgramAddress([owner.toBuffer(), programId.toBuffer(), mint.toBuffer()], associatedTokenProgramId);
+        return address;
+    });
+}
+exports.getAssociatedTokenAddress = getAssociatedTokenAddress;
+//# sourceMappingURL=mint.js.map
+
+/***/ }),
+
+/***/ 95902:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getMinimumBalanceForRentExemptMultisig = exports.getMultisig = exports.MULTISIG_SIZE = exports.MultisigLayout = void 0;
+const buffer_layout_1 = __webpack_require__(94313);
+const buffer_layout_utils_1 = __webpack_require__(3717);
+const constants_1 = __webpack_require__(28402);
+const errors_1 = __webpack_require__(43783);
+/** Buffer layout for de/serializing a multisig */
+exports.MultisigLayout = (0, buffer_layout_1.struct)([
+    (0, buffer_layout_1.u8)('m'),
+    (0, buffer_layout_1.u8)('n'),
+    (0, buffer_layout_utils_1.bool)('isInitialized'),
+    (0, buffer_layout_utils_1.publicKey)('signer1'),
+    (0, buffer_layout_utils_1.publicKey)('signer2'),
+    (0, buffer_layout_utils_1.publicKey)('signer3'),
+    (0, buffer_layout_utils_1.publicKey)('signer4'),
+    (0, buffer_layout_utils_1.publicKey)('signer5'),
+    (0, buffer_layout_utils_1.publicKey)('signer6'),
+    (0, buffer_layout_utils_1.publicKey)('signer7'),
+    (0, buffer_layout_utils_1.publicKey)('signer8'),
+    (0, buffer_layout_utils_1.publicKey)('signer9'),
+    (0, buffer_layout_utils_1.publicKey)('signer10'),
+    (0, buffer_layout_utils_1.publicKey)('signer11'),
+]);
+/** Byte length of a multisig */
+exports.MULTISIG_SIZE = exports.MultisigLayout.span;
+/**
+ * Retrieve information about a multisig
+ *
+ * @param connection Connection to use
+ * @param address    Multisig account
+ * @param commitment Desired level of commitment for querying the state
+ * @param programId  SPL Token program account
+ *
+ * @return Multisig information
+ */
+function getMultisig(connection, address, commitment, programId = constants_1.TOKEN_PROGRAM_ID) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const info = yield connection.getAccountInfo(address, commitment);
+        if (!info)
+            throw new errors_1.TokenAccountNotFoundError();
+        if (!info.owner.equals(programId))
+            throw new errors_1.TokenInvalidAccountOwnerError();
+        if (info.data.length != exports.MULTISIG_SIZE)
+            throw new errors_1.TokenInvalidAccountSizeError();
+        return Object.assign({ address }, exports.MultisigLayout.decode(info.data));
+    });
+}
+exports.getMultisig = getMultisig;
+/** Get the minimum lamport balance for a multisig to be rent exempt
+ *
+ * @param connection Connection to use
+ * @param commitment Desired level of commitment for querying the state
+ *
+ * @return Amount of lamports required
+ */
+function getMinimumBalanceForRentExemptMultisig(connection, commitment) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return yield connection.getMinimumBalanceForRentExemption(exports.MULTISIG_SIZE, commitment);
+    });
+}
+exports.getMinimumBalanceForRentExemptMultisig = getMinimumBalanceForRentExemptMultisig;
+//# sourceMappingURL=multisig.js.map
+
 /***/ })
 
 }]);

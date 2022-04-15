@@ -1,7 +1,7 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[5578],{
 
-/***/ 96151:
+/***/ 5742:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -95,7 +95,7 @@ bignumber_js_1.BigNumber.config({
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var promisify_1 = __webpack_require__(47726);
 exports.promisify = promisify_1.promisify;
-var address_utils_1 = __webpack_require__(96151);
+var address_utils_1 = __webpack_require__(5742);
 exports.addressUtils = address_utils_1.addressUtils;
 var class_utils_1 = __webpack_require__(51614);
 exports.classUtils = class_utils_1.classUtils;
@@ -290,7 +290,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 var types_1 = __webpack_require__(22407);
 var _ = __webpack_require__(39378);
 var Web3 = __webpack_require__(69906);
-var SolidityCoder = __webpack_require__(45191);
+var SolidityCoder = __webpack_require__(61928);
 var configured_bignumber_1 = __webpack_require__(85851);
 var AbiDecoder = /** @class */ (function () {
     function AbiDecoder(abiArrays) {
@@ -644,7 +644,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 var types_1 = __webpack_require__(22407);
 var _ = __webpack_require__(39378);
 var Web3 = __webpack_require__(69906);
-var SolidityCoder = __webpack_require__(45191);
+var SolidityCoder = __webpack_require__(61928);
 var configured_bignumber_1 = __webpack_require__(3421);
 var AbiDecoder = /** @class */ (function () {
     function AbiDecoder(abiArrays) {

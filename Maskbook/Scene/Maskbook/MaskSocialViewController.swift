@@ -70,6 +70,7 @@ extension MaskSocialViewController {
         
         setupNavigationBar()
         loadSite(socialPlatform)
+        observeNotifications()
         viewModel.backupReminder.sink { [weak self] _ in
             self?.alertBackup()
         }
@@ -88,15 +89,29 @@ extension MaskSocialViewController {
     
     private func setupNavigationBar() {
         navigationItem.title = socialPlatform.shortName
-        let dashboardBarButtonItem = UIBarButtonItem(image: Asset.Images.Scene.Social.iconMaskDashboard.image,
-                                                     style: .plain,
-                                                     target: self,
-                                                     action: #selector(dashboardBarButtonItem(_:)))
-        navigationItem.rightBarButtonItem = dashboardBarButtonItem
+        let button = UIButton(type: .custom)
+        button.setImage(Asset.Images.Scene.Social.iconMaskDashboard.image, for: .normal)
+        button.addTarget(self, action: #selector(dashboardBarButtonItem), for: .touchUpInside)
+        navigationItem.rightBarButtonItems = [.fixedSpace(14),
+                                              UIBarButtonItem(customView: button)]
+    }
+    
+    private func observeNotifications() {
+        NotificationCenter.default.publisher(for: Notification.Name.connectingViewWillDisappear)
+            .sink { [weak self] _ in
+                self?.reloadCurrentTab()
+            }
+            .store(in: &disposeBag)
+    }
+    
+    private func reloadCurrentTab() {
+        if let tabId = tabId, let tab = tabService.tabs[tabId] {
+            tab.reload()
+        }
     }
 
     @objc
-    private func dashboardBarButtonItem(_ sender: UIBarButtonItem) {
+    private func dashboardBarButtonItem() {
         coordinator.present(scene: .mainTab(selectedTab: .personas),
                             transition: .modal(animated: true,
                                                adaptiveDelegate: self))

@@ -28,17 +28,18 @@ extension PersonaRecord {
 
     var qrCodeString: String {
         var qrCodeString: String = {
-            if let nmemonic = mnemonic?
+            if let mnemonicBase64 = mnemonic?
                 .data(using: .utf8)?
                 .base64EncodedString()
+                .base64URLEscaped()
             {
-                return "mask://persona/mnemonic/" + nmemonic
+                return Self.qrCodeMnemonic(mnemonicBase64: mnemonicBase64)
             } else {
-                return "mask://persona/privatekey/" + privateKeyBase64String
+                return Self.qrCodePrivateKey(privateKeyBase64: privateKeyBase64String)
             }
         }()
         if let name = nickname, !name.isEmpty {
-            qrCodeString.append("?nickname=\(name)")
+            qrCodeString.append("?\(SchemeService.nikenameKey)=\(name)")
         }
         return qrCodeString
     }
@@ -50,5 +51,13 @@ extension PersonaRecord {
                 try? JSON(data: $0)["d"].string
             }
             ?? ""
+    }
+    
+    static func qrCodeMnemonic(mnemonicBase64: String) -> String {
+        SchemeService.personaMenmonicPrefix + "/" + mnemonicBase64
+    }
+    
+    static func qrCodePrivateKey(privateKeyBase64: String) -> String {
+        SchemeService.personaPrivateKeyPrefix + "/" + privateKeyBase64
     }
 }

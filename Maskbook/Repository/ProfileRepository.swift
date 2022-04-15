@@ -10,6 +10,7 @@ import CoreData
 import CoreDataStack
 import Foundation
 import Kingfisher
+import SwiftyJSON
 
 enum ProfileRepository {
     static let viewContext = AppContext.shared.coreDataStack.persistentContainer.viewContext
@@ -158,5 +159,94 @@ enum ProfileRepository {
             KingfisherManager.shared.retrieveImage(with: URL(string: avatar)!,
                                                    completionHandler: nil)
         }
+    }
+    
+    static func getProfilesCount() async -> Int {
+        await withCheckedContinuation { continuation in
+            let fetchRequest = ProfileRecord.sortedFetchRequest
+            fetchRequest.predicate = ProfileRecord.hasLinkedPersona()
+            
+            var count = 0
+            backgroundContext.performAndWait {
+                count = (try? backgroundContext.count(for: fetchRequest)) ?? 0
+            }
+            continuation.resume(returning: count)
+        }
+    }
+    
+    static func getProfilesForBackup() async -> [JSON] {
+        await withCheckedContinuation { continuation in
+            var profiles: [JSON] = []
+            let fetchRequest = ProfileRecord.sortedFetchRequest
+            fetchRequest.predicate = ProfileRecord.hasLinkedPersona()
+            
+            backgroundContext.performAndWait {
+                if let profileRecords = try? backgroundContext.fetch(fetchRequest) {
+                    profiles = profileRecords.compactMap { $0.getBackupJson() }
+                }
+            }
+            continuation.resume(returning: profiles)
+        }
+    }
+    
+    static func restoreFromJson(_ json: JSON) throws {
+        var restoreError: Error?
+        backgroundContext.performAndWait {
+            for profile in json.arrayValue {
+                let newProfileRecord = ProfileRecord(context: backgroundContext)
+                let identifier = profile[Profile.CodingKeys.identifier.rawValue].string
+                newProfileRecord.identifier = identifier
+                newProfileRecord.nickname = profile[Profile.CodingKeys.nickname.rawValue].string
+                
+                if let validIdentifier = identifier,
+                   let socialPlatform = Profile.getSocialPlatformFromIdentifier(validIdentifier) {
+                    newProfileRecord.network = socialPlatform.url
+                }
+                
+                if let createdAt = profile[Profile.CodingKeys.createdAt.rawValue].double {
+                    newProfileRecord.createdAt = Date(timeIntervalSince1970: createdAt)
+                } else {
+                    newProfileRecord.createdAt = Date()
+                }
+                if let updatedAt = profile[Profile.CodingKeys.updatedAt.rawValue].double {
+                    newProfileRecord.updatedAt = Date(timeIntervalSince1970: updatedAt)
+                } else {
+                    newProfileRecord.updatedAt = Date()
+                }
+                
+                if let linkedPersonaIdentifier = profile[Profile.CodingKeys.linkedPersona.rawValue].string {
+                    if let persona = PersonaRepository.queryPersona(
+                        identifier: linkedPersonaIdentifier,
+                        context: backgroundContext) {
+                        newProfileRecord.linkedPersona = persona
+                    }
+                }
+                
+                do {
+                    try backgroundContext.saveOrRollback()
+                } catch {
+                    restoreError = error
+                }
+            }
+        }
+        if let restoreError = restoreError {
+            throw restoreError
+        }
+    }
+}
+
+extension ProfileRecord {
+    func getBackupJson() -> JSON? {
+        guard identifier != nil else {
+            return nil
+        }
+        var backupDict = [String: Any]()
+        backupDict[Profile.CodingKeys.identifier.rawValue] = identifier
+        backupDict[Profile.CodingKeys.nickname.rawValue] = nickname
+        backupDict[Profile.CodingKeys.linkedPersona.rawValue] = linkedPersona?.identifier
+        backupDict[Profile.CodingKeys.createdAt.rawValue] = createdAt?.timeIntervalSince1970
+        backupDict[Profile.CodingKeys.updatedAt.rawValue] = updatedAt?.timeIntervalSince1970
+        
+        return JSON(backupDict)
     }
 }

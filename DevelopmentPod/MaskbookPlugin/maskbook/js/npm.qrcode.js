@@ -110,7 +110,7 @@ module.exports = function () {
  * and their number depends on the symbol version.
  */
 
-const getSymbolSize = (__webpack_require__(99835).getSymbolSize)
+const getSymbolSize = (__webpack_require__(79992).getSymbolSize)
 
 /**
  * Calculate the row/column coordinates of the center module of each alignment pattern
@@ -605,7 +605,7 @@ exports.from = function from (value, defaultValue) {
 /***/ 99543:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-const getSymbolSize = (__webpack_require__(99835).getSymbolSize)
+const getSymbolSize = (__webpack_require__(79992).getSymbolSize)
 const FINDER_PATTERN_SIZE = 7
 
 /**
@@ -634,7 +634,7 @@ exports.getPositions = function getPositions (version) {
 /***/ 23686:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-const Utils = __webpack_require__(99835)
+const Utils = __webpack_require__(79992)
 
 const G15 = (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0)
 const G15_MASK = (1 << 14) | (1 << 12) | (1 << 10) | (1 << 4) | (1 << 1)
@@ -747,7 +747,7 @@ exports.mul = function mul (x, y) {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 const Mode = __webpack_require__(2340)
-const Utils = __webpack_require__(99835)
+const Utils = __webpack_require__(79992)
 
 function KanjiData (data) {
   this.mode = Mode.KANJI
@@ -1341,7 +1341,7 @@ exports.generateECPolynomial = function generateECPolynomial (degree) {
 /***/ 21403:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-const Utils = __webpack_require__(99835)
+const Utils = __webpack_require__(79992)
 const ECLevel = __webpack_require__(15170)
 const BitBuffer = __webpack_require__(50827)
 const BitMatrix = __webpack_require__(92648)
@@ -1950,7 +1950,7 @@ const AlphanumericData = __webpack_require__(46556)
 const ByteData = __webpack_require__(92531)
 const KanjiData = __webpack_require__(44046)
 const Regex = __webpack_require__(78436)
-const Utils = __webpack_require__(99835)
+const Utils = __webpack_require__(79992)
 const dijkstra = __webpack_require__(61772)
 
 /**
@@ -2278,7 +2278,7 @@ exports.rawSplit = function rawSplit (data) {
 
 /***/ }),
 
-/***/ 99835:
+/***/ 79992:
 /***/ ((__unused_webpack_module, exports) => {
 
 let toSJISFunction
@@ -2367,7 +2367,7 @@ exports.isValid = function isValid (version) {
 /***/ 34940:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-const Utils = __webpack_require__(99835)
+const Utils = __webpack_require__(79992)
 const ECCode = __webpack_require__(84460)
 const ECLevel = __webpack_require__(15170)
 const Mode = __webpack_require__(2340)

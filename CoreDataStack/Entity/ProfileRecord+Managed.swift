@@ -30,6 +30,10 @@ extension ProfileRecord: Managed {
         return NSPredicate(format: "%K IN %@", #keyPath(ProfileRecord.identifier), identifiers)
     }
     
+    public static func hasLinkedPersona() -> NSPredicate {
+        return NSPredicate(format: "%K != nil", #keyPath(ProfileRecord.linkedPersona))
+    }
+    
     public static func predicate(identifier: String?,
                                  network: String?,
                                  nameContains: String?) -> NSPredicate? {

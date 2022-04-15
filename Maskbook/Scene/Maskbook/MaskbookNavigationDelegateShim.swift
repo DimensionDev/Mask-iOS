@@ -12,6 +12,7 @@ import WebKit
 
 public extension Notification.Name {
     static let extensionTabDidFinishLoad = Notification.Name(rawValue: "io.mask.notification.name.extensionTabDidFinishLoad")
+    static let connectingViewWillDisappear = Notification.Name(rawValue: "io.mask.notification.name.connectingViewWillDisappear")
 }
 
 protocol MaskbookNavigationDelegateShimDelegate: AnyObject {

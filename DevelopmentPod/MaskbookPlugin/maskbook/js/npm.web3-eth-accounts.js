@@ -1,7 +1,7 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[79],{
 
-/***/ 21044:
+/***/ 10738:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
@@ -27,20 +27,23 @@
  * @date 2017
  */
 
-var core = __webpack_require__(10833);
-var Method = __webpack_require__(34023);
+var core = __webpack_require__(43702);
+var Method = __webpack_require__(82481);
 var Account = __webpack_require__(48565);
-var Hash = __webpack_require__(67864);
 var cryp = (typeof __webpack_require__.g === 'undefined') ? __webpack_require__(69678) : __webpack_require__(69678);
 var scrypt = __webpack_require__(37508);
 var uuid = __webpack_require__(67565);
-var utils = __webpack_require__(83317);
-var helpers = __webpack_require__(70222);
-var { TransactionFactory } = __webpack_require__(79992);
-var Common = (__webpack_require__(88215)["default"]);
-var HardForks = (__webpack_require__(88215).Hardfork);
+var utils = __webpack_require__(11627);
+var helpers = __webpack_require__(41032);
+var { TransactionFactory } = __webpack_require__(91115);
+var Common = (__webpack_require__(85197)["default"]);
+var HardForks = (__webpack_require__(85197).Hardfork);
+var ethereumjsUtil = __webpack_require__(5459);
 var isNot = function (value) {
     return (typeof value === 'undefined') || value === null;
+};
+var isExist = function (value) {
+    return (typeof value !== 'undefined') && value !== null;
 };
 var Accounts = function Accounts() {
     var _this = this;
@@ -136,6 +139,21 @@ Accounts.prototype.signTransaction = function signTransaction(tx, privateKey, ca
         callback(error);
         return Promise.reject(error);
     }
+    if (isExist(tx.common) && isNot(tx.common.customChain)) {
+        error = new Error('If tx.common is provided it must have tx.common.customChain');
+        callback(error);
+        return Promise.reject(error);
+    }
+    if (isExist(tx.common) && isNot(tx.common.customChain.chainId)) {
+        error = new Error('If tx.common is provided it must have tx.common.customChain and tx.common.customChain.chainId');
+        callback(error);
+        return Promise.reject(error);
+    }
+    if (isExist(tx.common) && isExist(tx.common.customChain.chainId) && isExist(tx.chainId) && tx.chainId !== tx.common.customChain.chainId) {
+        error = new Error('Chain Id doesnt match in tx.chainId tx.common.customChain.chainId');
+        callback(error);
+        return Promise.reject(error);
+    }
     function signed(tx) {
         const error = _validateTransactionForSigning(tx);
         if (error) {
@@ -194,9 +212,9 @@ Accounts.prototype.signTransaction = function signTransaction(tx, privateKey, ca
             var transactionHash = utils.keccak256(rawTransaction);
             var result = {
                 messageHash: '0x' + Buffer.from(signedTx.getMessageToSign(true)).toString('hex'),
-                v: '0x' + Buffer.from(signedTx.v).toString('hex'),
-                r: '0x' + Buffer.from(signedTx.r).toString('hex'),
-                s: '0x' + Buffer.from(signedTx.s).toString('hex'),
+                v: '0x' + signedTx.v.toString('hex'),
+                r: '0x' + signedTx.r.toString('hex'),
+                s: '0x' + signedTx.s.toString('hex'),
                 rawTransaction: rawTransaction,
                 transactionHash: transactionHash
             };
@@ -220,20 +238,23 @@ Accounts.prototype.signTransaction = function signTransaction(tx, privateKey, ca
     }
     // Otherwise, get the missing info from the Ethereum Node
     return Promise.all([
-        isNot(tx.chainId) ? _this._ethereumCall.getChainId() : tx.chainId,
+        ((isNot(tx.common) || isNot(tx.common.customChain.chainId)) ? //tx.common.customChain.chainId is not optional inside tx.common if tx.common is provided
+            (isNot(tx.chainId) ? _this._ethereumCall.getChainId() : tx.chainId)
+            : undefined),
         isNot(tx.nonce) ? _this._ethereumCall.getTransactionCount(_this.privateKeyToAccount(privateKey).address) : tx.nonce,
         isNot(hasTxSigningOptions) ? _this._ethereumCall.getNetworkId() : 1,
         _handleTxPricing(_this, tx)
     ]).then(function (args) {
-        if (isNot(args[0]) || isNot(args[1]) || isNot(args[2]) || isNot(args[3])) {
+        const [txchainId, txnonce, txnetworkId, txgasInfo] = args;
+        if ((isNot(txchainId) && isNot(tx.common) && isNot(tx.common.customChain.chainId)) || isNot(txnonce) || isNot(txnetworkId) || isNot(txgasInfo)) {
             throw new Error('One of the values "chainId", "networkId", "gasPrice", or "nonce" couldn\'t be fetched: ' + JSON.stringify(args));
         }
         return signed({
             ...tx,
-            chainId: args[0],
-            nonce: args[1],
-            networkId: args[2],
-            ...args[3] // Will either be gasPrice or maxFeePerGas and maxPriorityFeePerGas
+            ...((isNot(tx.common) || isNot(tx.common.customChain.chainId)) ? { chainId: txchainId } : {}),
+            nonce: txnonce,
+            networkId: txnetworkId,
+            ...txgasInfo // Will either be gasPrice or maxFeePerGas and maxPriorityFeePerGas
         });
     });
 };
@@ -317,7 +338,7 @@ function _handleTxPricing(_this, tx) {
                             delete tx.gasPrice;
                         }
                         else {
-                            maxPriorityFeePerGas = tx.maxPriorityFeePerGas || '0x3B9ACA00'; // 1 Gwei
+                            maxPriorityFeePerGas = tx.maxPriorityFeePerGas || '0x9502F900'; // 2.5 Gwei
                             maxFeePerGas = tx.maxFeePerGas ||
                                 utils.toHex(utils.toBN(block.baseFeePerGas)
                                     .mul(utils.toBN(2))
@@ -354,7 +375,7 @@ Accounts.prototype.hashMessage = function hashMessage(data) {
     var preamble = '\x19Ethereum Signed Message:\n' + messageBytes.length;
     var preambleBuffer = Buffer.from(preamble);
     var ethMessage = Buffer.concat([preambleBuffer, messageBuffer]);
-    return Hash.keccak256s(ethMessage);
+    return ethereumjsUtil.bufferToHex(ethereumjsUtil.keccak256(ethMessage));
 };
 Accounts.prototype.sign = function sign(data, privateKey) {
     if (!privateKey.startsWith('0x')) {
@@ -608,7 +629,7 @@ if (!storageAvailable('localStorage')) {
 function storageAvailable(type) {
     var storage;
     try {
-        storage = window[type];
+        storage = self[type];
         var x = '__storage_test__';
         storage.setItem(x, x);
         storage.removeItem(x);

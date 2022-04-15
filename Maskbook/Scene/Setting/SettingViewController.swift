@@ -317,24 +317,25 @@ extension SettingViewController: UITableViewDelegate {
     private func showBackupData(sourceView: UIView?) {
         if !userSetting.hasBackupPassword {
             let words = L10n.Common.Alert.BackupTipsNoBackupPassword.description(L10n.Scene.Setting.BackupRecovery.backUpPassword)
-            let alertController = AlertController(
-                title: L10n.Common.Alert.BackupTipsNoBackupPassword.title,
-                message: words,
-                confirmButtonText: L10n.Common.Controls.ok,
-                imageType: .warning,
-                confirmButtonClicked: { _ in
-                },
-                cancelButtonClicked: nil
-            )
             let keyWords = L10n.Scene.Setting.BackupRecovery.backUpPassword
+            let attributedDetail = NSMutableAttributedString(string: words, attributes: [
+                .foregroundColor: Asset.Colors.Text.normal.color,
+                .font: FontStyles.rh5.uifont
+            ])
+            attributedDetail.addAttribute(color: Asset.Colors.Public.blue.color, keywords: keyWords)
 
-            let attributes = NSMutableAttributedString(string: words)
-            attributes.addAttribute(color: Asset.Colors.Public.blue.color, keywords: keyWords)
-            alertController.setAttributeMessage(attrMessage: attributes)
-            coordinator.present(
-                scene: .alertController(alertController: alertController),
-                transition: .alertController(completion: nil)
-            )
+            Alert {
+                ImageItem(.warning)
+                WithTipItem(title: L10n.Common.Alert.BackupTipsNoBackupPassword.title, detail: attributedDetail)
+                DoneActionItem(.init(title: L10n.Common.Controls.ok, action: {
+                    self.coordinator.present(
+                        scene: .setBackupPassword,
+                        transition: .panModel()
+                    )
+                }))
+            }
+            .show()
+
             feedbackGenerator.selectionChanged()
         } else {
             coordinator.present(scene: .chooseBackupStrategy, transition: .panModel(animated: true))

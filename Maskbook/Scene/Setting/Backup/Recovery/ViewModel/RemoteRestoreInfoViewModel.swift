@@ -65,7 +65,11 @@ final class RemoteRestoreInfoViewModel: ObservableObject {
         )
         .receive(on: DispatchQueue.global())
         .map { remotePassword, backupPassword in
-            remotePassword != backupPassword
+            guard let backupPassword = backupPassword else {
+                return .ignoreAndLogin
+            }
+
+            return remotePassword != backupPassword
                 ? RestoreCompletionStrategy.suggestSyncing(remotePassword: remotePassword)
                 : .ignoreAndLogin
         }
