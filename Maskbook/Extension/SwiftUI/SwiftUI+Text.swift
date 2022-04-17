@@ -42,3 +42,9 @@ enum TextCombine {
         return components
     }
 }
+
+extension View {
+    func applying<V: View>(@ViewBuilder _ builder: (Self) -> V) -> some View {
+        builder(self)
+    }
+}

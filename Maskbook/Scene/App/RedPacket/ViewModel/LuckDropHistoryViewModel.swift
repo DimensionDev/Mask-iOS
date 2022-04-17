@@ -4,6 +4,7 @@ import Foundation
 import BigInt
 import PullRefresh
 import web3swift
+import struct PullRefresh.InterActionState
 
 @globalActor
 struct MaskGroupActor {
@@ -30,13 +31,32 @@ final class LuckyDropHistoryViewModel: ObservableObject {
     @Published var tokenPayloads: [TokenPayload] = []
     @Published var nftPayloads: [NftRedPacketPayload] = []
     @Published var state = LoadingState.empty
+    @Published var pullState = InterActionState(state: .idle, progress: 0)
 
     private var cancelableStorage: Set<AnyCancellable> = []
+
+    private var dataFetchedSet = Set<LuckDropKind>()
+    private var tokenHistoryTask: Task<[TokenPayload], Error>?
+    private var nftHistoryTask: Task<[NftRedPacketPayload], Error>?
 
     init() {
         self.startBlock = usersettings.network.startBlock
         self.exploreAddress = usersettings.network.explorAddress
         self.apiKey = usersettings.network.apiKey
+
+        $pullState
+            .filter(\.isCanceled)
+            .removeDuplicates(by: { $0.state == $1.state && $0.isCanceled == $1.isCanceled })
+            .map(\.isCanceled)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                switch self.selection {
+                case .token: self.tokenHistoryTask?.cancel()
+                case .nft: self.nftHistoryTask?.cancel()
+                }
+            }
+            .store(in: &cancelableStorage)
     }
 
     @InjectedProvider(\.userDefaultSettings)
@@ -58,10 +78,7 @@ final class LuckyDropHistoryViewModel: ObservableObject {
 
     func displayData() {
         let listEmpty: Bool = {
-            switch selection {
-            case .token: return tokenPayloads.isEmpty
-            case .nft: return nftPayloads.isEmpty
-            }
+            !dataFetchedSet.contains(selection)
         }()
 
         if listEmpty {
@@ -82,12 +99,27 @@ final class LuckyDropHistoryViewModel: ObservableObject {
     }
 
     private func loadTokenHistory() async {
-        guard let history = try? await fetchTokenRedPacketHistory() else {
-            return
+        self.tokenHistoryTask?.cancel()
+        self.tokenHistoryTask = Task {
+            try await fetchTokenRedPacketHistory()
         }
-        self.tokenPayloads = history
-        guard self.selection == .token else { return }
-        self.state = history.isEmpty ? .empty : .idle
+
+        do {
+            let history = try await tokenHistoryTask?.value ?? []
+            self.tokenPayloads = history
+            dataFetchedSet.insert(.token)
+            guard self.selection == .token else { return }
+            self.state = history.isEmpty ? .empty : .idle
+        } catch is CancellationError {
+            if tokenPayloads.isEmpty {
+                self.state = .empty
+            }
+        } catch {
+            dataFetchedSet.insert(.token)
+            if tokenPayloads.isEmpty {
+                self.state = .empty
+            }
+        }
     }
 
     private func loadNFTHistory() async {

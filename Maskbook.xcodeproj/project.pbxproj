@@ -5639,7 +5639,7 @@
 			repositoryURL = "https://github.com/foxsin10/Refresh.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.1;
+				minimumVersion = 0.1.4;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

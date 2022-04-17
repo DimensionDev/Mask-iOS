@@ -12,10 +12,6 @@ import PullRefresh
 struct LuckyDropHistoryView: View {
     @ObservedObject var viewModel: LuckyDropHistoryViewModel
 
-    @State private var pullState = StateItem(state: .idle, progress: 0)
-
-    @State private var contentSize = CGSize.zero
-
     init(viewModel: LuckyDropHistoryViewModel) {
         _viewModel = ObservedObject(initialValue: viewModel)
     }
@@ -24,64 +20,69 @@ struct LuckyDropHistoryView: View {
     private let rowSpacing: CGFloat = 16
     private let spinnerSize: CGFloat = 26.67
     private let pullSpinnerSize: CGFloat = 20
-    var emptySpace: CGFloat {
-        max(0, contentSize.height - LayoutConstraints.top - rowSpacing - segmentHeight)
+
+    func emptySpace(by proxy: GeometryProxy) -> CGFloat {
+        max(0, proxy.frame(in: .local).height - LayoutConstraints.top - rowSpacing - segmentHeight)
     }
     
     var body: some View {
-        let emptyHeight: CGFloat = emptySpace
-        LazyVStack(spacing: rowSpacing, pinnedViews: [.sectionHeaders]) {
-            Section {
-                switch viewModel.state {
-                case .empty:
-                        VStack(alignment: .center, spacing: 12) {
-                            Spacer()
-                            Asset.Images.Scene.Empty.emptyBox.asImage()
-                            Text(L10n.Common.empty)
-                                .font(.rh6)
-                                .foregroundColor(Asset.Colors.Text.light)
-                            Spacer()
-                        }
-                        .frame(height: emptyHeight)
+        GeometryReader { proxy in
+            let emptyHeight = self.emptySpace(by: proxy)
+            LazyVStack(spacing: rowSpacing, pinnedViews: [.sectionHeaders]) {
+                Section {
+                    switch viewModel.state {
+                    case .empty:
+                            VStack(alignment: .center, spacing: 12) {
+                                Spacer()
+                                Asset.Images.Scene.Empty.emptyBox.asImage()
+                                Text(L10n.Common.empty)
+                                    .font(.rh6)
+                                    .foregroundColor(Asset.Colors.Text.light)
+                                Spacer()
+                            }
+                            .frame(height: emptyHeight)
 
-                case .loading:
-                        VStack(alignment: .center) {
-                            Spacer()
-                            LoadingIndicator(
-                                loading: true,
-                                preferredSize: .init(width: spinnerSize, height: spinnerSize)
-                            )
-                            .frame(width: spinnerSize, height: spinnerSize)
-                            Spacer()
-                        }
-                        .frame(height: emptyHeight)
+                    case .loading:
+                            VStack(alignment: .center) {
+                                Spacer()
+                                LoadingIndicator(
+                                    loading: true,
+                                    preferredSize: .init(width: spinnerSize, height: spinnerSize)
+                                )
+                                .frame(width: spinnerSize, height: spinnerSize)
+                                Spacer()
+                            }
+                            .frame(height: emptyHeight)
 
-                case .idle: listContent
+                    case .idle: listContent
+                    }
+                } header: {
+                    SegmentControl(selection: $viewModel.selection) {
+                        viewModel.displayData()
+                    }
+                    .frame(height: 48)
                 }
-            } header: {
-                SegmentControl(selection: $viewModel.selection) {
-                    viewModel.displayData()
-                }
-                .frame(height: 48)
             }
+            .padding(.horizontal, LayoutConstraints.horizontal)
+            .onRefresh(
+                pullthreshold: 32,
+                pullProgress: $viewModel.pullState,
+                onRefresh: { done in
+                    Task { @MainActor in
+                        await self.viewModel.loadData()
+                        done()
+                    }
+                },
+                pullAnimationView: {
+                    LoadingIndicator(
+                        loading: true,
+                        preferredSize: .init(width: pullSpinnerSize, height: pullSpinnerSize)
+                    )
+                    .frame(width: pullSpinnerSize, height: pullSpinnerSize)
+            })
+            .padding(.top, LayoutConstraints.top)
+            .background(Asset.Colors.Background.normal.asColor().ignoresSafeArea())
         }
-        .padding(.horizontal, LayoutConstraints.horizontal)
-        .onRefresh(
-            pullthreshold: 32,
-            pullProgress: $pullState,
-            asyncAction: {
-                await self.viewModel.loadData()
-            },
-            pullAnimationView: {
-                LoadingIndicator(
-                    loading: true,
-                    preferredSize: .init(width: pullSpinnerSize, height: pullSpinnerSize)
-                )
-                .frame(width: pullSpinnerSize, height: pullSpinnerSize)
-        })
-        .measureSize(to: $contentSize)
-        .padding(.top, LayoutConstraints.top)
-        .background(Asset.Colors.Background.normal.asColor().ignoresSafeArea())
     }
 
     @ViewBuilder
@@ -90,6 +91,7 @@ struct LuckyDropHistoryView: View {
         case .token:
             ForEach(viewModel.tokenPayloads, id: \.id) { item in
                 LuckyDropHistoryRow(item: item)
+//                    .redacted(reason: .placeholder)
             }
         case .nft:
             VStack {

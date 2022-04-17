@@ -38,11 +38,8 @@ extension LuckyDropHistoryViewModel {
         }
 
         let urlRequest = try URLRequest(url: url, method: .get)
-        try Task.checkCancellation()
         let (data, _)  = try await provider.provider.session.data(for: urlRequest)
-        guard !Task.isCancelled else {
-            return []
-        }
+        try Task.checkCancellation()
 
         let decoder = JSONDecoder()
 
@@ -70,12 +67,12 @@ extension LuckyDropHistoryViewModel {
             }
         }
 
-        return await withTaskGroup(
+        return try await withThrowingTaskGroup(
             of: TokenPayload?.self,
             returning: [TokenPayload].self
         ) { taskGroup in
             for payload in payloads[0 ..< 6] {
-                taskGroup.addTask {
+                _ = taskGroup.addTaskUnlessCancelled {
                     // mark @MaskGroupActor for the closure to make it works
                     async let task = Task.detached { @MaskGroupActor () -> TokenPayload? in
                         var payload = payload
@@ -95,6 +92,7 @@ extension LuckyDropHistoryViewModel {
 //                            return nil
 //                        }
 
+                        try Task.checkCancellation()
                         guard let transactionResult = try? provider.eth.getTransactionReceipt(txid),
                               let log = transactionResult.logs.first(where: { $0.address == ethAddress }) else {
                             return nil
@@ -108,6 +106,7 @@ extension LuckyDropHistoryViewModel {
                         payload.basic?.rpid = eventParam.id
                         payload.basic?.creationTime = eventParam.creation_time.asDouble() ?? 0
 
+                        try Task.checkCancellation()
                         let checkAvailability = await self.contract.checkAvailability(redPackageId: eventParam.id)
                         payload.payload?.claimers = checkAvailability?.claimed
                             .flatMap { $0.asInt() }
@@ -117,19 +116,22 @@ extension LuckyDropHistoryViewModel {
                         return TokenPayload.init(checkAvailability: checkAvailability, payload: payload)
                     }
 
-                    return await task.value
+                    return try await task.value
                 }
             }
 
             var results: [TokenPayload] = []
-            guard !taskGroup.isCancelled else {
-                return results
-            }
-
-            while let result = await taskGroup.next() {
-                if let value = result {
-                    results.append(value)
+            do  {
+                while let result = try await taskGroup.next() {
+                    if let value = result {
+                        results.append(value)
+                    }
                 }
+            } catch is CancellationError {
+                taskGroup.cancelAll()
+                throw CancellationError()
+            } catch {
+                // ignore
             }
 
             return results
