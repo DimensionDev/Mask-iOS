@@ -101,8 +101,7 @@ extension WalletListAddViewController: PanModalPresentable {
 extension WalletListAddViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
-        
-        self.dismiss(animated: true) {
+        let completion =  {
             switch item {
             case .createWallet:
                 Coordinator.main.present(scene: .createWalletWithName(walletStartType: .byCreate(name: nil)), transition: .detail(animated: true))
@@ -110,6 +109,12 @@ extension WalletListAddViewController: UITableViewDelegate {
             case .importWallet:
                 Coordinator.main.present(scene: .createWalletWithName(walletStartType: .byImport(name: nil, password: nil)), transition: .detail(animated: true))
             }
+        }
+        if let presentingVC = self.presentingViewController {
+            self.dismiss(animated: false)
+            presentingVC.dismiss(animated: true, completion: completion)
+        } else {
+            self.dismiss(animated: true, completion: completion)
         }
     }
 }
