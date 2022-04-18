@@ -165,6 +165,12 @@ class TransactionCell: UITableViewCell {
         _init()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        resendStackView.isHidden = true
+        statusLabel.text = nil
+    }
+    
     private func _init() {
         selectionStyle = .none
         backgroundColor = .clear
@@ -275,7 +281,7 @@ class TransactionCell: UITableViewCell {
         switch transaction.status {
         case .confirmed:
             resendStackView.isHidden = true
-            statusLabel.text = ""
+            statusLabel.text = nil
             
         case .pending:
             resendStackView.isHidden = false
