@@ -31,7 +31,6 @@ final class LuckyDropHistoryTokenItemViewModel: ObservableObject {
     init(luckyDrop: RedPacketPayload, checkAvailbility: CheckAvailabilityResult?) {
         self.luckyDrop = luckyDrop
         self.checkAvailabilityResult = checkAvailbility
-        
     }
 
     private func checkRedPacketStatus() {
@@ -108,12 +107,10 @@ final class LuckyDropHistoryTokenItemViewModel: ObservableObject {
         return "\(claimers.count) / \(share)"
     }
 
-    private(set) lazy var token: MaskToken? = {
-        settings.network.mainToken
-    }()
-
-    private(set) lazy var icon: String? = {
-        nil
+    private var token: RedPacket.FungibleToken? { luckyDrop.payload?.token }
+    
+    private(set) lazy var symbol: String = {
+        token?.symbol ?? ""
     }()
 
     private(set) lazy var totalRemain: String = {
@@ -127,8 +124,8 @@ final class LuckyDropHistoryTokenItemViewModel: ObservableObject {
         let decimal = token?.decimals ?? 18
 
         let claimed = total - remaining
-        let totalValue = EthUtil.calcAmount(amount: Decimal(total.asInt() ?? 0), decimals: decimal).stringValue
-        let claimedValue = EthUtil.calcAmount(amount: Decimal(claimed.asInt() ?? 0), decimals: decimal).stringValue
+        let totalValue = EthUtil.calcAmount(amount: Decimal(total.asDouble() ?? 0), decimals: decimal).stringValue
+        let claimedValue = EthUtil.calcAmount(amount: Decimal(claimed.asDouble() ?? 0), decimals: decimal).stringValue
 
         return "\(claimedValue) / \(totalValue)"
     }()

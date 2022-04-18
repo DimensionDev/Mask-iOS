@@ -23,7 +23,7 @@ struct RedPacketHistoryInfo: Codable {
     let gas: String
     let gasPrice: String
     let isError: String
-    let txreceiptStatus: String?
+    let txreceipt_status: String?
     let input: String
     let contractAddress: String
     let cumulativeGasUsed: String

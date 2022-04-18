@@ -24,6 +24,13 @@ enum EitherOr<T, V>: Codable where T: Codable, V: Codable {
         case let .either(value): try container.encode(value)
         }
     }
+    
+    var either: T? {
+        switch self {
+        case let .either(v): return v
+        default: return nil
+        }
+    }
 }
 
 enum DecodeError: Error {
@@ -125,6 +132,19 @@ extension RedPacket {
                 return token
             }
         }
+        
+        
+        var logoURL: String? {
+            guard let uri = self.token.logoURI else {
+                return nil
+            }
+            switch uri {
+            case let .either(url): return url
+            case let .or(uris): return uris.first
+            }
+        }
+        
+        var decimals: Int? { token.decimals }
     }
 }
 

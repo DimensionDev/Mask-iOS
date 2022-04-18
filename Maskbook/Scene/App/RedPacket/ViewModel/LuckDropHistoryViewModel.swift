@@ -30,7 +30,8 @@ final class LuckyDropHistoryViewModel: ObservableObject {
     @Published var tokenPayloads: [TokenPayload] = []
     @Published var nftPayloads: [NftRedPacketPayload] = []
     @Published var state = LoadingState.empty
-    @Published var pullState = InterActionState(state: .idle, progress: 0)
+    
+    var pullState = InterActionState(state: .idle, progress: 0)
 
     private var cancelableStorage: Set<AnyCancellable> = []
 
@@ -42,24 +43,26 @@ final class LuckyDropHistoryViewModel: ObservableObject {
         self.startBlock = usersettings.network.startBlock
         self.exploreAddress = usersettings.network.explorAddress
         self.apiKey = usersettings.network.apiKey
-
-        $pullState
-            .filter(\.isCanceled)
-            .removeDuplicates(by: { $0.state == $1.state && $0.isCanceled == $1.isCanceled })
-            .map(\.isCanceled)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                guard let self = self else { return }
-                switch self.selection {
-                case .token: self.tokenHistoryTask?.cancel()
-                case .nft: self.nftHistoryTask?.cancel()
-                }
+    }
+    
+    func checkPullState(_ pullState: InterActionState) {
+        defer { self.pullState  = pullState }
+        
+        if self.pullState.state == pullState.state,
+           self.pullState.isCanceled == pullState.isCanceled {
+            return
+        }
+        
+        if pullState.isCanceled {
+            switch self.selection {
+            case .token: self.tokenHistoryTask?.cancel()
+            case .nft: self.nftHistoryTask?.cancel()
             }
-            .store(in: &cancelableStorage)
+        }
     }
 
     @InjectedProvider(\.userDefaultSettings)
-    private var usersettings
+    var usersettings
 
     private var page = 1
     private var offset = 20
@@ -169,6 +172,7 @@ final class LuckyDropHistoryViewModel: ObservableObject {
 
     private func loadNFTHistory() async {
         try? await Task.sleep(nanoseconds: 2 * 1_000_000_000)
+        dataFetchedSet.insert(.nft)
         state = .empty
     }
 }

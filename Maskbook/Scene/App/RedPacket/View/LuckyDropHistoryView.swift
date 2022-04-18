@@ -7,7 +7,9 @@
 //
 
 import SwiftUI
+
 import PullRefresh
+import Kingfisher
 
 struct LuckyDropHistoryView: View {
     @ObservedObject var viewModel: LuckyDropHistoryViewModel
@@ -66,7 +68,12 @@ struct LuckyDropHistoryView: View {
             .padding(.horizontal, LayoutConstraints.horizontal)
             .onRefresh(
                 pullthreshold: 32,
-                pullProgress: $viewModel.pullState,
+                pullProgress: Binding(
+                    get: { viewModel.pullState },
+                    set: { value, _ in
+                        viewModel.checkPullState(value)
+                    }
+                ),
                 onRefresh: { done in
                     Task { @MainActor in
                         await self.viewModel.loadData()
@@ -107,6 +114,8 @@ struct LuckyDropHistoryView: View {
 
 struct LuckyDropHistoryRow: View {
     @State var loading = false
+    
+    @State private var image: Image?
 
     private let indicatorSize = CGSize.init(width: 16, height: 16)
 
@@ -168,30 +177,39 @@ struct LuckyDropHistoryRow: View {
                 }
                 .horizontallyFilled()
 
-                HStack(spacing: 4) {
+                HStack(alignment: .center, spacing: 4) {
                     Text(viewModel.totalRemain)
                         .lineLimit(1)
                         .font(FontStyles.mh7.font)
                         .foregroundColor(Asset.Colors.Text.dark.asColor())
                         .layoutPriority(1)
 
-                    if let symbol = viewModel.token?.symbol {
-                        Text(symbol)
-                            .font(FontStyles.mh7.font)
-                            .foregroundColor(Asset.Colors.Text.dark.asColor())
-                            .layoutPriority(1)
-                    }
 
-                    // TODO: icon
-
-                    //                    if let icon = viewModel.icon {
-                    //                        Asset.Images.Scene.Balance.Chain.eth.asImage()
-                    //                            .resizable()
-                    //                            .aspectRatio(contentMode: .fit)
-                    //                            .frame(width: 20, height: 20)
-                    //                            .layoutPriority(1)
-                    //                    }
+                    Text(viewModel.symbol)
+                        .font(FontStyles.mh7.font)
+                        .foregroundColor(Asset.Colors.Text.dark.asColor())
+                        .layoutPriority(1)
+                    
+                    
+                    KFImage.url(
+                        URL(string: viewModel.luckyDrop.payload?.token?.logoURL ?? ""),
+                        cacheKey: viewModel.luckyDrop.payload?.token?.logoURL ?? ""
+                    )
+//                    .setProcessors([])
+                    .resizable()
+//                    .onSuccess { result in
+//                        self.image = Image(uiImage: result.image)
+//                    }
+                    .cornerRadius(10)
+//                    .overlay(
+//                        image?
+//                            .resizable()
+//                            .frame(width: 20, height: 20)
+//                            .clipShape(Circle())
+//                    )
+                    .frame(width: 20, height: 20)
                 }
+//                .horizontallyFilled()
             }
         }
         .padding(.all, 12)

@@ -30,6 +30,7 @@ extension LuckyDropHistoryViewModel {
         let block = try await provider.blockNumber()
         let startBlock = await self.startBlock
         let apiKey = await self.apiKey
+        let networkId = await self.usersettings.network.networkId
 
         // build request
         guard let urlComponents = baseURL.buildURLComponents(apiKey: apiKey, address: address, startBlock: startBlock, endBlock: block),
@@ -66,7 +67,8 @@ extension LuckyDropHistoryViewModel {
                 self.creation_time = time
             }
         }
-
+        let builder  = FungibleTokenBuilder()
+        
         return try await withThrowingTaskGroup(
             of: TokenPayload?.self,
             returning: [TokenPayload].self
@@ -112,6 +114,10 @@ extension LuckyDropHistoryViewModel {
                             .flatMap { $0.asInt() }
                             .map { (0..<$0).map { _ in RedPacket.Claimer.init(address: "", name: "") } }
                         payload.payload?.totalRemaining = checkAvailability?.balance.flatMap { String($0, radix: 10) }
+                        
+                        let address = payload.payload?.tokenAddress ?? ""
+                        let token = await builder.buildToken(for: address, networkId: Int(networkId))
+                        payload.payload?.token = token
 
                         return TokenPayload.init(checkAvailability: checkAvailability, payload: payload)
                     }

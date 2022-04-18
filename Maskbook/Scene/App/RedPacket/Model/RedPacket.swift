@@ -113,7 +113,7 @@ extension RedPacket {
             let contractVersion: Double
             let network: String
             let tokenType: EthereumToken?
-            let token: FungibleToken?
+            var token: FungibleToken?
             let tokenAddress: String?
             var claimers: [Claimer]?
             var totalRemaining: String?

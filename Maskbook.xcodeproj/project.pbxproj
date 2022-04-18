@@ -108,6 +108,7 @@
 		1F9C60D726B101C6001C26D2 /* BlockChainNetworkRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9C60D626B101C6001C26D2 /* BlockChainNetworkRepresentable.swift */; };
 		1F9C60E926B793DE001C26D2 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9C60E826B793DE001C26D2 /* Assets.swift */; };
 		1F9C60ED26B7D262001C26D2 /* BlockChainNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9C60EC26B7D262001C26D2 /* BlockChainNetwork.swift */; };
+		1F9CEA77280D1A13007386B1 /* FungibleTokenBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9CEA76280D1A13007386B1 /* FungibleTokenBuilder.swift */; };
 		1FB8151727B65F9B00A2A3BE /* WKScriptMessageHandled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8151627B65F9B00A2A3BE /* WKScriptMessageHandled.swift */; };
 		1FB862C62787F33900CF345F /* PluginSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB862C52787F33900CF345F /* PluginSettingViewController.swift */; };
 		1FB862C82787F3C900CF345F /* LabsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB862C72787F3C900CF345F /* LabsListView.swift */; };
@@ -871,6 +872,7 @@
 		1F9C60D626B101C6001C26D2 /* BlockChainNetworkRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockChainNetworkRepresentable.swift; sourceTree = "<group>"; };
 		1F9C60E826B793DE001C26D2 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		1F9C60EC26B7D262001C26D2 /* BlockChainNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockChainNetwork.swift; sourceTree = "<group>"; };
+		1F9CEA76280D1A13007386B1 /* FungibleTokenBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FungibleTokenBuilder.swift; sourceTree = "<group>"; };
 		1FB8151627B65F9B00A2A3BE /* WKScriptMessageHandled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKScriptMessageHandled.swift; sourceTree = "<group>"; };
 		1FB862C52787F33900CF345F /* PluginSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginSettingViewController.swift; sourceTree = "<group>"; };
 		1FB862C72787F3C900CF345F /* LabsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabsListView.swift; sourceTree = "<group>"; };
@@ -2245,6 +2247,7 @@
 				1FF403F52806AD8D00468F5C /* LuckyDropHistoryViewModel+TokenHistory.swift */,
 				1FF403F72806BD2D00468F5C /* LuckyDropHistoryItemViewModel.swift */,
 				2AFC0A082807BB7A00BD77B5 /* RedPacketConfirmViewModel.swift */,
+				1F9CEA76280D1A13007386B1 /* FungibleTokenBuilder.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -4335,6 +4338,7 @@
 				2A6ABB982720053B00CC3AED /* RemoteRestoreInfoView.swift in Sources */,
 				1F3301E527D863DB00FA0652 /* DoneActionItem.swift in Sources */,
 				2AF88610271EED7D0004565A /* CryptoHelper.swift in Sources */,
+				1F9CEA77280D1A13007386B1 /* FungibleTokenBuilder.swift in Sources */,
 				2AF6C7D227FEA52800A9EA4A /* LuckyDropSegmentView.swift in Sources */,
 				2A68BF6F2806F02400C91C6F /* RedPacketConfirmView.swift in Sources */,
 				2AF88589271EE9310004565A /* MaskTabBar.swift in Sources */,
