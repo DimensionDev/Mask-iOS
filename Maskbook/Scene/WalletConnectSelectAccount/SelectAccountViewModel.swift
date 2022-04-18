@@ -19,7 +19,7 @@ class SelectAccountViewModel {
         case selectWithoutWalletConnect
     }
     
-    typealias Item = WalletListViewModel.WalletsItem
+    typealias Item = SelectAccountViewModel.WalletsItem
     typealias NetworkItem = SelectAccountViewModel.CoinItem
 
     var type: FunctionType
@@ -243,7 +243,7 @@ extension SelectAccountViewModel {
                 )
                 return WalletsItem.account(data: data)
             }
-        if showAddWalletConnect() {
+        if isShowAddWalletConnect() {
             items.append(.addWalletConnect)
         }
         accountListSubject.value = items
@@ -260,7 +260,18 @@ extension SelectAccountViewModel {
         }
     }
     
-    private func showAddWalletConnect() -> Bool {
+    private func isShowAddWalletConnect() -> Bool {
+        switch type {
+        case .editEnable:
+            return true
+        case .selectWithWalletConnect:
+            return false
+        case .selectWithoutWalletConnect:
+            return false
+        }
+    }
+    
+    func isShowAddWallet() -> Bool {
         switch type {
         case .editEnable:
             return true

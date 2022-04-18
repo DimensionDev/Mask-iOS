@@ -37,12 +37,12 @@ class SelectAccountViewController: BaseViewController {
     private var userSetting
     
     @InjectedProvider(\.mainCoordinator)
-    var mainCoordinator
+    private var mainCoordinator
     
     @InjectedProvider(\.walletConnectClient)
     internal var walletConnectClient
     
-    lazy var collectionView: UICollectionView = {
+    private lazy var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
         let view = ControlContainableCollectionView(frame: .zero, collectionViewLayout: flowLayout)
@@ -72,7 +72,41 @@ class SelectAccountViewController: BaseViewController {
         return view
     }()
     
-    lazy var titleView: UIView = {
+    private lazy var addWalletLabel: UILabel = {
+        let label = UILabel()
+        label.font = FontStyles.BH4
+        label.textColor = Asset.Colors.Text.dark.color
+        label.text = L10n.Scene.WalletList.walletsItemsAdd
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var addImageView: UIImageView = {
+        let image = Asset.Images.Scene.WalletAdd.add.image
+        let view = UIImageView(image: image)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            view.widthAnchor.constraint(equalToConstant: 24),
+            view.heightAnchor.constraint(equalToConstant: 24)
+        ])
+        return view
+    }()
+    
+    private lazy var addWalletView: HStackView = {
+        let addWalletView = HStackView {
+            addWalletLabel
+            Spacer()
+            addImageView
+        }
+        addWalletView.isLayoutMarginsRelativeArrangement = true
+        addWalletView.layoutMargins = UIEdgeInsets(top: 12, left: LayoutConstraints.leading, bottom: 20 + view.safeAreaInsets.bottom, right: LayoutConstraints.trailing)
+        addWalletView.backgroundColor = Asset.Colors.Background.normal.color
+        
+        return addWalletView
+    }()
+    
+    private lazy var titleView: UIView = {
         let view = UIView()
         view.withSubViews {
             titleLabel
@@ -91,7 +125,7 @@ class SelectAccountViewController: BaseViewController {
         return view
     }()
     
-    lazy var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = FontStyles.BH4
         label.textColor = Asset.Colors.Text.dark.color
@@ -113,7 +147,7 @@ class SelectAccountViewController: BaseViewController {
     
     // MARK: - Data
 
-    lazy var dataSource: UITableViewDiffableDataSource<Section, Item> = {
+    private lazy var dataSource: UITableViewDiffableDataSource<Section, Item> = {
         UITableViewDiffableDataSource<Section, Item>(
             tableView: tableView) { [weak self] tableView, indexPath, item in
                 guard let self = self else { return UITableViewCell() }
@@ -132,12 +166,13 @@ class SelectAccountViewController: BaseViewController {
                     let cell: WalletListAddWalletConnectCell = tableView.dequeCell(at: indexPath)
                     cell.titleLabel.text = L10n.Scene.WalletConnect.walletConnect
                     cell.icon.image = Asset.Images.Scene.WalletConnect.walletConnect.image
+                    cell.contentView.alpha = self.viewModel.isEditing.value ? 0.5 : 1
                     return cell
                 }
             }
     }()
     
-    var disposeBag = Set<AnyCancellable>()
+    private var disposeBag = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -166,15 +201,25 @@ class SelectAccountViewController: BaseViewController {
         viewModel.isEditing
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.tableView.reloadData()
+                guard let self = self else { return }
+                self.addWalletView.alpha = self.viewModel.isEditing.value ? 0.5 : 1
+                self.tableView.reloadData()
             }
             .store(in: &disposeBag)
         
-        editButton.cv.tap()
+        editButton
+            .cv.tap()
             .sink { [weak self] in
                 guard let self = self else { return }
                 self.editButton.isSelected = !self.editButton.isSelected
                 self.viewModel.isEditing.value = self.editButton.isSelected
+            }
+            .store(in: &disposeBag)
+        
+        addImageView
+            .cv.tapGesture()
+            .sink { [weak self] _ in
+                self?.mainCoordinator.present(scene: .walletListAdd, transition: .panModel(animated: true))
             }
             .store(in: &disposeBag)
     }
@@ -186,6 +231,7 @@ class SelectAccountViewController: BaseViewController {
             titleView
             tableView
             collectionView
+            addWalletView
         }
         
         NSLayoutConstraint.activate([
@@ -202,12 +248,28 @@ class SelectAccountViewController: BaseViewController {
             collectionView.heightAnchor.constraint(equalToConstant: 66)
         ])
         
+        let bottom: CGFloat = {
+            if let bottom = UIApplication.shared.windows.first(where: \.isKeyWindow)?.safeAreaInsets.bottom {
+                return bottom
+            }
+            return 0
+        }()
+        
+        NSLayoutConstraint.activate([
+            addWalletView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            addWalletView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            addWalletView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            addWalletView.heightAnchor.constraint(equalToConstant: 54 + bottom)
+        ])
+        
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo: addWalletView.topAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+        
+        addWalletView.isHidden = !viewModel.isShowAddWallet()
     }
     
     override func viewDidLayoutSubviews() {
@@ -220,7 +282,7 @@ class SelectAccountViewController: BaseViewController {
         addCollectionShadow()
     }
     
-    func addCollectionShadow() {
+    private func addCollectionShadow() {
         collectionView.applyShadow(color: Asset.Colors.Shadow.socialShadow.color, alpha: 1, x: 0, y: 6, blur: 12, cornerRadius: 0, spread: 0)
     }
 }
