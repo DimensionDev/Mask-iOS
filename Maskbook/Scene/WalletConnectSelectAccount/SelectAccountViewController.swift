@@ -203,7 +203,8 @@ class SelectAccountViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self = self else { return }
-                self.addWalletView.alpha = self.viewModel.isEditing.value ? 0.5 : 1
+                self.addWalletLabel.alpha = self.viewModel.isEditing.value ? 0.5 : 1
+                self.addImageView.alpha = self.viewModel.isEditing.value ? 0.5 : 1
                 self.tableView.reloadData()
             }
             .store(in: &disposeBag)
@@ -264,7 +265,7 @@ class SelectAccountViewController: BaseViewController {
             addWalletView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             addWalletView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             addWalletView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            addWalletView.heightAnchor.constraint(equalToConstant: 54 + bottom)
+            addWalletView.heightAnchor.constraint(equalToConstant: 54 + bottom).priority(.defaultHigh)
         ])
         
         NSLayoutConstraint.activate([
