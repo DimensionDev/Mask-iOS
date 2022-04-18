@@ -22,6 +22,7 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
     var transaction: EthereumTransaction?
     var completion: ((String?, Error?) -> Void)?
     var options: TransactionOptions?
+    var password: String?
     
     var tokenIconURL: URL? {
         guard let url = token?.logoUrl else { return nil }
@@ -144,19 +145,13 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
     private let viewContext = AppContext.shared.coreDataStack.persistentContainer.viewContext
     private var disposeBag = Set<AnyCancellable>()
     
-    init(
-        token: Token?,
-        gasFeeViewModel: GasFeeViewModel?,
-        inputParam: HappyRedPacketV4.CreateRedPacketInput?,
-        transaction: EthereumTransaction?,
-        options: TransactionOptions?,
-        completion: ((String?, Error?) -> Void)?
-    ) {
-        self.token = token
-        self.gasFeeViewModel = gasFeeViewModel
-        self.inputParam = inputParam
-        self.options = options
-        self.transaction = transaction
+    init(param: InitInput?, completion: ((String?, Error?) -> Void)?) {
+        self.token = param?.token
+        self.gasFeeViewModel = param?.gasFeeViewModel
+        self.inputParam = param?.inputParam
+        self.options = param?.options
+        self.transaction = param?.transaction
+        self.password = param?.password
         self.completion = completion
         
         super.init()
@@ -201,6 +196,11 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
             completion(.failure(WalletSendError.addressError))
             return
         }
+        
+        guard let ethFromAddress = EthereumAddress(fromAddress) else {
+            completion(.failure(WalletSendError.addressError))
+            return
+        }
 
         guard let fromAccount = WalletCoreService.shared.getAccount(address: fromAddress) else {
             completion(.failure(WalletSendError.addressError))
@@ -214,22 +214,47 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
         guard var transactionOptions = options else {
             return
         }
+        
+        guard let provider = Web3ProviderFactory.provider else {
+            return
+        }
+        
         if let gasLimit = BigUInt(gasFeeItem.gasLimit) {
             transactionOptions.gasLimit = .manual(gasLimit)
         } else {
             transactionOptions.gasLimit = .automatic
         }
         
+        guard let nonce = try? provider.eth.getTransactionCount(address: ethFromAddress) else {
+            return
+        }
+        
+        guard let privateKey = self.password else {
+            return
+        }
+        
+        // save `password` into `PluginStorage` before send a transaction
+        let chainNetwork = settings.network
+        PluginStorageRepository.save(
+            address: fromAddress,
+            chain: chainNetwork,
+            nonce: nonce.description,
+            password: privateKey
+        )
+        
         if fromAccount.fromWalletConnect {
-            walletConnectClient.signTransaction(transaction: transaction,
-                                                transactionOptions: transactionOptions,
-                                                completion)
+            walletConnectClient.signTransaction(
+                transaction: transaction,
+                transactionOptions: transactionOptions,
+                nonce: nonce,
+                completion)
         } else {
             let maxFeePerGas = Web3.Utils.parseToBigUInt(gasFeeItem.suggestedMaxFeePerGas, units: .Gwei)
             let maxInclusionFeePerGas = Web3.Utils.parseToBigUInt(
                 gasFeeItem.suggestedMaxPriorityFeePerGas,
                 units: .Gwei
             )
+            
             WalletSendHelper.sendTransactionWithWeb3(
                 password: password,
                 transaction: transaction,
@@ -237,6 +262,7 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
                 maxFeePerGas: maxFeePerGas == 0 ? nil : maxFeePerGas,
                 maxInclusionFeePerGas: maxInclusionFeePerGas == 0 ? nil : maxInclusionFeePerGas,
                 network: maskUserDefaults.network,
+                nonce: nonce,
                 completion)
         }
     }
@@ -246,6 +272,15 @@ extension RedPacketConfirmViewModel {
     enum ConfirmButtonState {
         case normal
         case sending
+    }
+    
+    struct InitInput {
+        let token: Token
+        let gasFeeViewModel: GasFeeViewModel
+        let inputParam: HappyRedPacketV4.CreateRedPacketInput
+        let transaction: EthereumTransaction
+        let options: TransactionOptions
+        let password: String
     }
 }
 
@@ -275,12 +310,6 @@ class RedPacketConfirmViewModelMock: RedPacketConfirmViewModel {
     }
     
     init() {
-        super.init(
-            token: nil,
-            gasFeeViewModel: nil,
-            inputParam: nil,
-            transaction: nil,
-            options: nil,
-            completion: nil)
+        super.init(param: nil, completion: nil)
     }
 }

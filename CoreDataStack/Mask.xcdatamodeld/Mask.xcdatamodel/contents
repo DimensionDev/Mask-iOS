@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21D62" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E258" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Account" representedClassName=".Account" syncable="YES">
         <attribute name="address" attributeType="String"/>
         <attribute name="chainId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -120,6 +119,19 @@
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="identifier"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="PluginStorage" representedClassName=".PluginStorage" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="key" optional="YES" attributeType="String"/>
+        <attribute name="lastModifiedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="pluginID" attributeType="String"/>
+        <attribute name="value" attributeType="Binary"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="key"/>
+                <constraint value="pluginID"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
@@ -244,5 +256,6 @@
         <element name="StoredKey" positionX="90" positionY="144" width="128" height="179"/>
         <element name="Token" positionX="-63" positionY="-18" width="128" height="254"/>
         <element name="WalletConnectSession" positionX="90" positionY="144" width="128" height="89"/>
+        <element name="PluginStorage" positionX="90" positionY="144" width="128" height="104"/>
     </elements>
 </model>

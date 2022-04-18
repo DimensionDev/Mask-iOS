@@ -343,7 +343,8 @@ class LuckyDropViewModel: NSObject, ObservableObject {
             let tx = await ABI.happyRedPacketV4.createRedPacket(
                 token: token,
                 gasFeeViewModel: gasFeeViewModel,
-                param: param
+                param: param,
+                password: privateKey.toHexString().addHexPrefix()
             )
             await MainActor.run {
                 log.debug("\(tx ?? "It's failed to create redPacket")", source: "lucky drop")

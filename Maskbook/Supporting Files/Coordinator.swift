@@ -195,11 +195,12 @@ class Coordinator {
         case moveBackupData
         case luckyDrop
         case luckyDropConfirm(
-            token: Token?,
-            gasFeeViewModel: GasFeeViewModel?,
+            token: Token,
+            gasFeeViewModel: GasFeeViewModel,
             redPacketInput: HappyRedPacketV4.CreateRedPacketInput,
             transaction: EthereumTransaction,
             options: TransactionOptions,
+            password: String,
             completion: (String?, Error?) -> Void
         )
         case debug
@@ -777,6 +778,7 @@ extension Coordinator {
             let redPacketInput,
             let transaction,
             let options,
+            let password,
             let completion
         ):
             return LuckyDropConfirmViewController(
@@ -785,6 +787,7 @@ extension Coordinator {
                 redPacketInput: redPacketInput,
                 transaction: transaction,
                 options: options,
+                password: password,
                 completion: completion
             )
             

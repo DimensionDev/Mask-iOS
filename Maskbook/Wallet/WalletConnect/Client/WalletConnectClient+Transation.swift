@@ -18,6 +18,7 @@ extension WalletConnectClient {
     func signTransaction(
         transaction: EthereumTransaction,
         transactionOptions: TransactionOptions,
+        nonce: BigUInt? = nil,
         _ completion: @escaping (Result<String, Error>) -> Void) {
         guard let wcUrl = session?.url else {
             return
@@ -35,8 +36,13 @@ extension WalletConnectClient {
         }
         DispatchQueue.global().async { [weak self] in
             do {
-                let nonce = try provider.eth.getTransactionCount(address: fromAddressEthFormat)
-                let nonceHex = nonce.serialize().toHexString().addHexPrefix()
+                var nonceTemp: BigUInt
+                if let nonce = nonce {
+                    nonceTemp = nonce
+                } else {
+                    nonceTemp = try provider.eth.getTransactionCount(address: fromAddressEthFormat)
+                }
+                let nonceHex = nonceTemp.serialize().toHexString().addHexPrefix()
                 var gasLimit: String
                 switch transactionOptions.gasLimit {
                 case .manual(let limit):

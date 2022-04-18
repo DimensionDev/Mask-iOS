@@ -61,9 +61,10 @@ struct HappyRedPacketV4: ABIContract {
     @MainActor
     func write(
         _ methodName: String,
-        token: Token?,
-        gasFeeViewModel: GasFeeViewModel?,
+        token: Token,
+        gasFeeViewModel: GasFeeViewModel,
         redPacketInput: CreateRedPacketInput,
+        password: String,
         param: [AnyObject]? = nil,
         extraData: Data? = nil,
         options: TransactionOptions? = nil
@@ -93,7 +94,8 @@ struct HappyRedPacketV4: ABIContract {
                             gasFeeViewModel: gasFeeViewModel,
                             redPacketInput: redPacketInput,
                             transaction: transaction,
-                            options: tx.transactionOptions
+                            options: tx.transactionOptions,
+                            password: password
                         ) { tx, error in
                             if let error = error {
                                 continuation.resume(with: .failure(error))
@@ -154,9 +156,10 @@ struct HappyRedPacketV4: ABIContract {
     
     @MainActor
     func createRedPacket(
-        token: Token?,
-        gasFeeViewModel: GasFeeViewModel?,
-        param: CreateRedPacketInput
+        token: Token,
+        gasFeeViewModel: GasFeeViewModel,
+        param: CreateRedPacketInput,
+        password: String
     ) async -> String? {
         let contractMethod = Functions.createRedPacket.rawValue
         let parameters = param.asArray
@@ -167,8 +170,10 @@ struct HappyRedPacketV4: ABIContract {
             token: token,
             gasFeeViewModel: gasFeeViewModel,
             redPacketInput: param,
+            password: password,
             param: parameters,
-            options: options)
+            options: options
+        )
     }
     
     @MainActor

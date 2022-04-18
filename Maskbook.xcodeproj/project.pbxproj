@@ -244,6 +244,9 @@
 		2A852ADF2721775F00EE7EEC /* MaskSocialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A852ADE2721775F00EE7EEC /* MaskSocialViewModel.swift */; };
 		2A9EF067275A053D00AA66A2 /* KeyboardHandlerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9EF066275A053D00AA66A2 /* KeyboardHandlerViewController.swift */; };
 		2AA64909280D848C00D38F09 /* ResponderChain in Frameworks */ = {isa = PBXBuildFile; productRef = 2AA64908280D848C00D38F09 /* ResponderChain */; };
+		2AA6490B280D9FAE00D38F09 /* PluginStorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA6490A280D9FAE00D38F09 /* PluginStorageRepository.swift */; };
+		2AA64916280DA76400D38F09 /* PluginStorage+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA64914280DA76400D38F09 /* PluginStorage+CoreDataClass.swift */; };
+		2AA64917280DA76400D38F09 /* PluginStorage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA64915280DA76400D38F09 /* PluginStorage+CoreDataProperties.swift */; };
 		2ABA6A1827A50A6800C0F82B /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABA6A1727A50A6800C0F82B /* Logging.swift */; };
 		2ACA1E1227182F01000C0ECC /* PasswordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACA1E1127182F01000C0ECC /* PasswordTests.swift */; };
 		2ADF9B0627D899D80020D254 /* Dismissable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF9B0527D899D80020D254 /* Dismissable.swift */; };
@@ -1005,6 +1008,9 @@
 		2A7310072685B83200C5354A /* PasswordFormItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFormItemView.swift; sourceTree = "<group>"; };
 		2A852ADE2721775F00EE7EEC /* MaskSocialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskSocialViewModel.swift; sourceTree = "<group>"; };
 		2A9EF066275A053D00AA66A2 /* KeyboardHandlerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandlerViewController.swift; sourceTree = "<group>"; };
+		2AA6490A280D9FAE00D38F09 /* PluginStorageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginStorageRepository.swift; sourceTree = "<group>"; };
+		2AA64914280DA76400D38F09 /* PluginStorage+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PluginStorage+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		2AA64915280DA76400D38F09 /* PluginStorage+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PluginStorage+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		2ABA6A1727A50A6800C0F82B /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		2ACA1E1127182F01000C0ECC /* PasswordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTests.swift; sourceTree = "<group>"; };
 		2ADF9B0527D899D80020D254 /* Dismissable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dismissable.swift; sourceTree = "<group>"; };
@@ -1668,6 +1674,8 @@
 		0FBC5AB1266759BC00328693 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				2AA64914280DA76400D38F09 /* PluginStorage+CoreDataClass.swift */,
+				2AA64915280DA76400D38F09 /* PluginStorage+CoreDataProperties.swift */,
 				5D3E364527BE2D0200FDCFDD /* PostRecord+CoreDataClass.swift */,
 				5D3E364627BE2D0200FDCFDD /* PostRecord+CoreDataProperties.swift */,
 				41E50037279946E400A73117 /* PersonaRecord+CoreDataClass.swift */,
@@ -3526,6 +3534,7 @@
 				41E50047279BFA5500A73117 /* IndexedDBDataMigrator.swift */,
 				41E50049279BFB3600A73117 /* RelationRepository.swift */,
 				5D3E364B27BF41DE00FDCFDD /* PostRepository.swift */,
+				2AA6490A280D9FAE00D38F09 /* PluginStorageRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -4112,6 +4121,7 @@
 			files = (
 				2DEDDEA92761ED7000D37A76 /* WalletConnectSession+CoreDataProperties.swift in Sources */,
 				0F93937626A7AE9400F7F608 /* Collectible+CoreDataProperties.swift in Sources */,
+				2AA64916280DA76400D38F09 /* PluginStorage+CoreDataClass.swift in Sources */,
 				2DC651F8271E6CAB00BABA9C /* LocalStorage+CoreDataClass.swift in Sources */,
 				41E5003E279946E400A73117 /* PersonaRecord+CoreDataProperties.swift in Sources */,
 				0F93937526A7AE9400F7F608 /* Collectible+CoreDataClass.swift in Sources */,
@@ -4129,6 +4139,7 @@
 				0FBC5AE92667723A00328693 /* Entity+Managed.swift in Sources */,
 				0FBC5AE42667614500328693 /* Managed.swift in Sources */,
 				0FBC5ADD26675B6F00328693 /* CoreDataStack.swift in Sources */,
+				2AA64917280DA76400D38F09 /* PluginStorage+CoreDataProperties.swift in Sources */,
 				1FE54D49269947640041C742 /* NSManagedContext+extension.swift in Sources */,
 				5D3E364727BE2D0200FDCFDD /* PostRecord+CoreDataClass.swift in Sources */,
 				2DC651F7271E6CAB00BABA9C /* BlobStorage+CoreDataProperties.swift in Sources */,
@@ -4636,6 +4647,7 @@
 				0FFCF6CF26BA334300326B44 /* MaskWalletCoreError.swift in Sources */,
 				0F2051B0265E340F00602A0C /* ChainType.swift in Sources */,
 				1FCBEDF22738EC26001C3637 /* WalletRestoreInfoViewModel.swift in Sources */,
+				2AA6490B280D9FAE00D38F09 /* PluginStorageRepository.swift in Sources */,
 				2AF88568271EE9310004565A /* CreateWalletSelectNetworkView.swift in Sources */,
 				0F506A7E272A35A500475E43 /* WalletCoreService+Backup.swift in Sources */,
 				2A6ABB7B2720053B00CC3AED /* SelectAppearanceViewModel.swift in Sources */,
