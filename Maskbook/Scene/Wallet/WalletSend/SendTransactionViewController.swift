@@ -66,7 +66,7 @@ class SendTransactionViewController: BaseViewController {
             make.size.equalTo(CGSize(width: 24, height: 24))
         }
         textField.leftView = leftView
-        textField.leftViewMode = .unlessEditing
+        textField.leftViewMode = .always
         
         return textField
     }()
