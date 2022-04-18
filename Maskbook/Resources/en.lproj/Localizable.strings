@@ -528,6 +528,8 @@ Switch account to access another.";
 "Scene.TokenDetail.SwitchNetwork" = "Switch Network Manually";
 "Scene.TokenDetail.WalletconnectSwitchNetworkAlert" = "The walletConnect wallet network is not the same as the asset network (%@). Please go to your wallet and switch to %@ and reconnect with walletConnect.";
 "Scene.TransactionHistory.NoTransaction" = "You don’t have any transaction records";
+"Scene.TransactionHistory.StatusFailed" = "Failed";
+"Scene.TransactionHistory.StatusPendind" = "Pending...";
 "Scene.WalletBackup.BtnCancel" = "Cancel";
 "Scene.WalletBackup.BtnCopy" = "Copy";
 "Scene.WalletBackup.KeystoreTips" = "Please remember your current payment password. Your current payment password is required for decryption when using the wallet Keystore for recovery.";

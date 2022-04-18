@@ -2402,6 +2402,14 @@ enum L10n {
       static var noTransaction: String {
         return L10n.tr("Localizable", "Scene.TransactionHistory.NoTransaction")
       }
+      /// Failed
+      static var statusFailed: String {
+        return L10n.tr("Localizable", "Scene.TransactionHistory.StatusFailed")
+      }
+      /// Pending...
+      static var statusPendind: String {
+        return L10n.tr("Localizable", "Scene.TransactionHistory.StatusPendind")
+      }
     }
 
     enum WalletBackup {

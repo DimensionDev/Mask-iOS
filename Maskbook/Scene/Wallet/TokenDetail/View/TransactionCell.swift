@@ -83,10 +83,19 @@ class TransactionCell: UITableViewCell {
         NSLayoutConstraint.activate([
             label.heightAnchor.constraint(equalToConstant: 24)
         ])
-
         return label
     }()
     
+    private var statusLabel: UILabel = {
+        let label = UILabel()
+        label.font = FontStyles.RH6
+        label.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            label.heightAnchor.constraint(equalToConstant: 24)
+        ])
+        return label
+    }()
+        
     private lazy var resendStackView = HStackView (spacing: 8) {
         speedUpButton
         cancelButton
@@ -98,7 +107,10 @@ class TransactionCell: UITableViewCell {
     }
     
     private lazy var contentStackView = VStackView (spacing: 6, alignment: .leading){
-        typeNameLabel
+        HStackView(spacing: 6){
+            typeNameLabel
+            statusLabel
+        }
         resendStackView
     }
     
@@ -260,11 +272,22 @@ class TransactionCell: UITableViewCell {
             tokenBalanceLabel.text = "\(maskUserDefaults.currency.symbol)\(balance)"
         }
         
-        if transaction.status == .pending {
-            resendStackView.isHidden = false
-        } else {
+        switch transaction.status {
+        case .confirmed:
             resendStackView.isHidden = true
+            statusLabel.text = ""
+            
+        case .pending:
+            resendStackView.isHidden = false
+            statusLabel.text = L10n.Scene.TransactionHistory.statusPendind
+            statusLabel.textColor = Asset.Colors.Public.warnings.color
+            
+        case .failed:
+            resendStackView.isHidden = true
+            statusLabel.text = L10n.Scene.TransactionHistory.statusFailed
+            statusLabel.textColor = Asset.Colors.Public.error.color
         }
+        
         self.txHash = transaction.id
     }
 }

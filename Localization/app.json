@@ -651,7 +651,9 @@
             "walletconnect_switch_network_alert": "The walletConnect wallet network is not the same as the asset network (%s). Please go to your wallet and switch to %s and reconnect with walletConnect."
         },
         "transaction_history": {
-            "no_transaction": "You don’t have any transaction records"
+            "no_transaction": "You don’t have any transaction records",
+            "status_pendind":"Pending...",
+            "status_failed":"Failed"
         },
         "wallet_receive": {
             "btn_share": "Share",
