@@ -28,10 +28,10 @@ final class RestoreDataPickerController: UIDocumentPickerViewController {
     init(destination: RestoreDataPreviewController.Destination, sender: UIView? = nil) {
         self.destination = destination
         self.sender = sender
-        if #available(iOS 15.0, *) {
-            // will crash on iOS 14.1
-            super.init(forOpeningContentTypes: [.plainText, .text, .content, .data, .archive], asCopy: true)
-        } else {
+        // if #available(iOS 15.2, *) {
+        //     // will crash on iOS 14.1
+        //     super.init(forOpeningContentTypes: [.plainText, .text, .content, .data, .archive], asCopy: true)
+        // } else {
             super.init(
                 documentTypes: [
                     "public.plain-text",
@@ -42,7 +42,7 @@ final class RestoreDataPickerController: UIDocumentPickerViewController {
                 ],
                 in: .open
             )
-        }
+        // }
     }
 
     @available(*, unavailable)
