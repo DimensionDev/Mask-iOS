@@ -85,10 +85,10 @@ public struct DebankAPIModel {
         }
         
         public struct CateDict: Decodable {
-            let approve: CateDictItem
-            let receive: CateDictItem
-            let send: CateDictItem
-            let spot_trade: CateDictItem
+            let approve: CateDictItem?
+            let receive: CateDictItem?
+            let send: CateDictItem?
+            let spot_trade: CateDictItem?
         }
         
         public struct CateDictItem: Decodable {
@@ -98,7 +98,7 @@ public struct DebankAPIModel {
         
         public struct ProjectItem: Decodable {
             let id: String
-            let log_url: String
+            let log_url: String?
             let name: String
         }
         
