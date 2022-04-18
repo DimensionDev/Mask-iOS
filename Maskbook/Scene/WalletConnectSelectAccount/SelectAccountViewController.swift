@@ -66,6 +66,7 @@ class SelectAccountViewController: BaseViewController {
         view.separatorStyle = .none
         view.contentInset = UIEdgeInsets(top: 14, left: 0, bottom: 0, right: 0)
         view.delegate = self
+        view.clipsToBounds = false
         view.translatesAutoresizingMaskIntoConstraints = false
         view.register(SelectAccountTableViewCell.self)
         view.register(WalletListAddWalletConnectCell.self)
@@ -219,7 +220,11 @@ class SelectAccountViewController: BaseViewController {
         addImageView
             .cv.tapGesture()
             .sink { [weak self] _ in
-                self?.mainCoordinator.present(scene: .walletListAdd, transition: .panModel(animated: true))
+                guard let self = self else { return }
+                if self.viewModel.isEditing.value {
+                    return
+                }
+                self.mainCoordinator.present(scene: .walletListAdd, transition: .panModel(animated: true))
             }
             .store(in: &disposeBag)
     }
@@ -265,10 +270,13 @@ class SelectAccountViewController: BaseViewController {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: addWalletView.topAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        
+        if viewModel.isShowAddWallet() {
+            tableView.bottomAnchor.constraint(equalTo: addWalletView.topAnchor).isActive = true
+        } else {
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        }
         addWalletView.isHidden = !viewModel.isShowAddWallet()
     }
     

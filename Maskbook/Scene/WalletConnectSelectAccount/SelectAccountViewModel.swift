@@ -215,7 +215,7 @@ extension SelectAccountViewModel {
     private func generateWalletAccountItems(accounts: [Account]) {
         let network = selectNetworkSubject.value
         let defaultAccountAddress = userSetting.defaultAccountAddress
-        let showWalletConnect = showWalletConnect()
+        let showWalletConnect = isShowWalletConnectWallets()
         var items = accounts
             .filter { account in
                 guard let chain = ChainType(rawValue: Int(account.chainId)) else { return false }
@@ -249,7 +249,7 @@ extension SelectAccountViewModel {
         accountListSubject.value = items
     }
     
-    private func showWalletConnect() -> Bool {
+    private func isShowWalletConnectWallets() -> Bool {
         switch type {
         case .editEnable:
             return true
