@@ -83,6 +83,9 @@ struct LuckyDropHistoryView: View {
             .padding(.top, LayoutConstraints.top)
             .background(Asset.Colors.Background.normal.asColor().ignoresSafeArea())
         }
+        .onAppear {
+            viewModel.displayData()
+        }
     }
 
     @ViewBuilder

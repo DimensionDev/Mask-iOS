@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/foxsin10/Refresh.git",
       "state" : {
-        "revision" : "c19c1260813ae96a3fb60ad8b33621852e4c3a22",
-        "version" : "0.1.4"
+        "revision" : "ada0cf60cd1dbf6cc24f6ab5db175ae76adb8e57",
+        "version" : "0.1.5"
       }
     }
   ],

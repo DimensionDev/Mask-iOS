@@ -27,7 +27,6 @@ final class LuckyDropHistoryViewModel: ObservableObject {
     let contract = HappyRedPacketV4()
 
     @Published var selection = LuckDropKind.token
-
     @Published var tokenPayloads: [TokenPayload] = []
     @Published var nftPayloads: [NftRedPacketPayload] = []
     @Published var state = LoadingState.empty
@@ -75,19 +74,28 @@ final class LuckyDropHistoryViewModel: ObservableObject {
         let networkName = self.usersettings.network.fullEvmName
         return (urlString, contractAddress, provider, address, networkName)
     }
+    
+    func payloadIsEmpty(for selection: LuckDropKind) -> Bool {
+        switch selection {
+        case .token: return tokenPayloads.isEmpty
+        case .nft: return nftPayloads.isEmpty
+        }
+    }
 
     func displayData() {
-        let listEmpty: Bool = {
-            !dataFetchedSet.contains(selection)
-        }()
+        let didRequest: Bool = dataFetchedSet.contains(selection)
 
-        if listEmpty {
+        if !didRequest {
             state = .loading
             Task {
                 await loadData()
             }
         } else {
-            state = .idle
+            if payloadIsEmpty(for: selection) {
+                state = .empty
+            } else {
+                state = .idle
+            }
         }
     }
 
@@ -99,31 +107,68 @@ final class LuckyDropHistoryViewModel: ObservableObject {
     }
 
     private func loadTokenHistory() async {
-        self.tokenHistoryTask?.cancel()
-        self.tokenHistoryTask = Task {
+        dataFetchedSet.insert(.token)
+        tokenHistoryTask?.cancel()
+        tokenHistoryTask = Task {
             try await fetchTokenRedPacketHistory()
         }
 
         do {
             let history = try await tokenHistoryTask?.value ?? []
-            self.tokenPayloads = history
-            dataFetchedSet.insert(.token)
-            guard self.selection == .token else { return }
-            self.state = history.isEmpty ? .empty : .idle
-        } catch is CancellationError {
+            
             if tokenPayloads.isEmpty {
-                self.state = .empty
+                tokenPayloads = history
+            } else {
+                if !history.isEmpty {
+                    tokenPayloads = history
+                }
             }
-        } catch {
-            dataFetchedSet.insert(.token)
-            if tokenPayloads.isEmpty {
-                self.state = .empty
+            
+            guard selection == .token else { return }
+            state = tokenPayloads.isEmpty ? .empty : .idle
+        } catch  {
+            guard selection == .token else {
+                return
             }
+            errorhandling(error, for: .token)
         }
+    }
+    
+    private func errorhandling(_ error: Error, for selection: LuckDropKind) {
+        // all handle with empty and idle state
+        if payloadIsEmpty(for: selection) {
+            state = .empty
+        } else {
+            state = .idle
+        }
+//        switch error {
+//        case _ as CancellationError:
+//            // cancel
+//
+//            if payloadIsEmpty(for: selection) {
+//                state = .empty
+//            } else {
+//                state = .idle
+//            }
+//
+//        case let e as NSError:
+//            guard e.code == -999 else {
+//                fallthrough
+//            }
+//
+//            // cancel
+//            if payloadIsEmpty(for: selection) {
+//                state = .empty
+//            } else {
+//                state = .idle
+//            }
+//
+//        default: break
+//        }
     }
 
     private func loadNFTHistory() async {
         try? await Task.sleep(nanoseconds: 2 * 1_000_000_000)
-        self.state = .empty
+        state = .empty
     }
 }
