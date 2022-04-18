@@ -220,7 +220,7 @@ extension WebPublicApiMessageResolver {
         }
         let mergePolicy = request.params?.options?.linkedProfileMergePolicy ?? .replace
         let deleteUndefinedFields = request.params?.options?.deleteUndefinedFields ?? false
-        let protectPk = request.params?.options?.protectPrivateKey ?? false
+        let protectPk = request.params?.options?.protectPrivateKey ?? true
         let createWhenNotExist = request.params?.options?.createWhenNotExist ?? false
         PersonaRepository.updatePersona(persona: newPersona,
                                         linkedProfileMergePolicy: mergePolicy,
