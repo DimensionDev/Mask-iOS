@@ -7,6 +7,7 @@
 //
 
 import BigInt
+import ResponderChain
 import SwiftUI
 import Combine
 import Kingfisher
@@ -17,6 +18,7 @@ struct LuckyDropTokens: View {
     @InjectedProvider(\.mainCoordinator)
     private var mainCoordinator
     
+    @EnvironmentObject var chain: ResponderChain
     @ObservedObject var viewModel: LuckyDropViewModel
     
     var maxColor: Color {
@@ -87,13 +89,10 @@ struct LuckyDropTokens: View {
             .disabled(!viewModel.maxButtonEnable)
             Spacer()
             TextField(viewModel.amountPlaceholder, text: $viewModel.amountStr)
-//                .onReceive(
-//                    Just(viewModel.amountStr),
-//                    perform: viewModel.processAmountInput
-//                )
                 .keyboardType(.decimalPad)
                 .multilineTextAlignment(.trailing)
                 .frame(maxHeight: .infinity)
+                .responderTag(TextFieldTag.amount)
         }
         .frame(height: 52)
         .padding(.horizontal, 16)
@@ -116,6 +115,7 @@ struct LuckyDropTokens: View {
                     .keyboardType(.numberPad)
                     .multilineTextAlignment(.trailing)
                     .frame(maxHeight: .infinity)
+                    .responderTag(TextFieldTag.quantity)
             }
             .frame(height: 52)
             .padding(.horizontal, 16)
@@ -135,6 +135,7 @@ struct LuckyDropTokens: View {
             TextField(L10n.Plugins.Luckydrop.enterMessage, text: $viewModel.message)
                 .limitText($viewModel.message, maxLength: 30)
                 .frame(maxHeight: .infinity)
+                .responderTag(TextFieldTag.message)
         }
         .frame(height: 52)
         .padding(.horizontal, 16)
@@ -151,6 +152,7 @@ struct LuckyDropTokens: View {
                 Spacer()
                 
                 Button {
+                    chain.firstResponder = nil
                     mainCoordinator.present(
                         scene: .gasFee(
                             delegate: nil,
@@ -205,6 +207,14 @@ struct LuckyDropTokens: View {
                 Spacer()
             }
         }
+    }
+}
+
+extension LuckyDropTokens {
+    enum TextFieldTag: String {
+        case quantity
+        case amount
+        case message
     }
 }
 

@@ -243,6 +243,7 @@
 		2A7310082685B83200C5354A /* PasswordFormItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7310072685B83200C5354A /* PasswordFormItemView.swift */; };
 		2A852ADF2721775F00EE7EEC /* MaskSocialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A852ADE2721775F00EE7EEC /* MaskSocialViewModel.swift */; };
 		2A9EF067275A053D00AA66A2 /* KeyboardHandlerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9EF066275A053D00AA66A2 /* KeyboardHandlerViewController.swift */; };
+		2AA64909280D848C00D38F09 /* ResponderChain in Frameworks */ = {isa = PBXBuildFile; productRef = 2AA64908280D848C00D38F09 /* ResponderChain */; };
 		2ABA6A1827A50A6800C0F82B /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABA6A1727A50A6800C0F82B /* Logging.swift */; };
 		2ACA1E1227182F01000C0ECC /* PasswordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACA1E1127182F01000C0ECC /* PasswordTests.swift */; };
 		2ADF9B0627D899D80020D254 /* Dismissable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF9B0527D899D80020D254 /* Dismissable.swift */; };
@@ -1499,6 +1500,7 @@
 				0FACA3B52671F31E00CB8AC0 /* CoreDataStack.framework in Frameworks */,
 				2937D922CA95E5739C9BF27F /* Pods_Maskbook.framework in Frameworks */,
 				1FF404732809653F00468F5C /* PullRefresh in Frameworks */,
+				2AA64909280D848C00D38F09 /* ResponderChain in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3851,6 +3853,7 @@
 			name = Maskbook;
 			packageProductDependencies = (
 				1FF404722809653F00468F5C /* PullRefresh */,
+				2AA64908280D848C00D38F09 /* ResponderChain */,
 			);
 			productName = Maskbook;
 			productReference = DBAAF49122C35A7100017594 /* Maskbook.app */;
@@ -3923,6 +3926,7 @@
 			mainGroup = DBAAF48822C35A7100017594;
 			packageReferences = (
 				1FF404712809653F00468F5C /* XCRemoteSwiftPackageReference "Refresh" */,
+				2AA64907280D848C00D38F09 /* XCRemoteSwiftPackageReference "ResponderChain" */,
 			);
 			productRefGroup = DBAAF49222C35A7100017594 /* Products */;
 			projectDirPath = "";
@@ -5646,6 +5650,14 @@
 				minimumVersion = 0.1.5;
 			};
 		};
+		2AA64907280D848C00D38F09 /* XCRemoteSwiftPackageReference "ResponderChain" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Amzd/ResponderChain.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -5653,6 +5665,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1FF404712809653F00468F5C /* XCRemoteSwiftPackageReference "Refresh" */;
 			productName = PullRefresh;
+		};
+		2AA64908280D848C00D38F09 /* ResponderChain */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2AA64907280D848C00D38F09 /* XCRemoteSwiftPackageReference "ResponderChain" */;
+			productName = ResponderChain;
 		};
 /* End XCSwiftPackageProductDependency section */
 

@@ -9,6 +9,7 @@ import BigInt
 import CoreDataStack
 import PanModal
 import PromiseKit
+import ResponderChain
 import SwiftUI
 import UIKit
 import WalletConnectSwift
@@ -768,7 +769,7 @@ extension Coordinator {
             return MoveBackupDataViewController()
             
         case .luckyDrop:
-            return UIHostingController(rootView: LuckyDropView())
+            return UIHostingController(rootView: LuckyDropView().withResponderChainForCurrentWindow())
             
         case .luckyDropConfirm(
             let token,

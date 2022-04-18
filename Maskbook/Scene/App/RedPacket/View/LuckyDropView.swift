@@ -7,9 +7,12 @@
 //
 
 import Combine
+import ResponderChain
 import SwiftUI
 
 struct LuckyDropView: View {
+    @EnvironmentObject var chain: ResponderChain
+
     @InjectedProvider(\.mainCoordinator)
     private var mainCoordinator
     
@@ -30,6 +33,9 @@ struct LuckyDropView: View {
             .background(Asset.Colors.Background.normal.asColor())
             .onAppear {
                 safeArea = geometry.safeAreaInsets
+            }
+            .onTapGesture {
+                chain.firstResponder = nil
             }
         }
     }
@@ -66,10 +72,13 @@ struct LuckyDropView: View {
                 .map { rect in
                     // To make sure that the animation play normally.
                     DispatchQueue.main.async {
-                        withAnimation(.easeOut(duration: 0.16)) {
-                            scrollView.scrollTo(idOfBottomViewToScroll)
+                        if chain.firstResponder == LuckyDropTokens.TextFieldTag.message {
+                            withAnimation(.easeOut(duration: 0.16)) {
+                                scrollView.scrollTo(idOfBottomViewToScroll)
+                            }
                         }
                     }
+                    
                     return rect.height
                     - safeArea.bottom
                     - 60.5 // wallet bottom view
@@ -91,6 +100,7 @@ struct LuckyDropView: View {
             title: viewModel.confirmTitle,
             animating: viewModel.buttonAnimating,
             isEnable: viewModel.confirmEnable) {
+                chain.firstResponder = nil
                 switch viewModel.buttonType {
                 case .unlock:
                     Coordinator.main.present(
