@@ -37,6 +37,7 @@ class Coordinator {
         case panModel(animated: Bool = true)
         case alertController(completion: (() -> Void)? = nil)
         case replaceCurrentNavigation(tab: MainTabBarController.Tab, animated: Bool = true, selected: Bool = false)
+        case replaceCurrentNavigationWithoutRoot(tab: MainTabBarController.Tab, animated: Bool = true)
         case replaceWalletTab(animated: Bool = false)
         case popup
         case presentActivity(animated: Bool, from: UIView? = nil, completion: (() -> Void)? = nil)
@@ -98,7 +99,7 @@ class Coordinator {
         case walletBackup(account: Account)
         case walletUnlock(cancellable: Bool, completion: ((Error?) -> Void)?)
         case sendTransaction(param: SendTransactionParam?)
-        case sendTransactionPopConfirm(sendConfirmViewModel: SendConfirmViewModel, toAddress: String, amount: String)
+        case sendTransactionPopConfirm(sendConfirmViewModel: SendConfirmViewModel, toAddress: String, amount: String, nonce: BigUInt?)
         case sendTransactionConfirm(param: WalletContactParam, tokenId: String?)
         case sendNFTTransactionConfirm(param: WalletContactParam, nftToken: Collectible)
         case addContact(param: WalletContactParam)
@@ -288,6 +289,12 @@ class Coordinator {
                 
             case let .replaceCurrentNavigation(tab, animated, selected):
                 MainTabBarController.currentTabBarController()?.replace(tab: tab, with: vc, animated: animated, selected: selected)
+                
+            case let .replaceCurrentNavigationWithoutRoot(tab, animated):
+                if let naviVc = MainTabBarController.currentTabBarController()?.navigationController(tab: tab),
+                   let rootVc = naviVc.viewControllers.first {
+                    naviVc.setViewControllers([rootVc, vc], animated: animated)
+                }
 
             case let .replaceWalletTab(animated):
                 MainTabBarController.currentTabBarController()?.replace(tab: .wallet, with: vc, animated: animated)
@@ -481,11 +488,13 @@ extension Coordinator {
         
         case let .sendTransactionPopConfirm(sendConfirmViewModel,
                                             toAddress,
-                                            amount):
+                                            amount,
+                                            nonce):
             let popVc = SendTransactionCofirmPopViewController(
                 sendConfirmViewModel: sendConfirmViewModel,
                 toAddress: toAddress,
-                amount: amount
+                amount: amount,
+                nonce: nonce
             )
             return popVc
             

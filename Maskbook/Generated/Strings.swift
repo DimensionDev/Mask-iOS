@@ -599,6 +599,10 @@ enum L10n {
       static var skip: String {
         return L10n.tr("Localizable", "Common.Controls.Skip")
       }
+      /// Speed Up
+      static var speedUp: String {
+        return L10n.tr("Localizable", "Common.Controls.SpeedUp")
+      }
       /// Take a photo
       static var takePhoto: String {
         return L10n.tr("Localizable", "Common.Controls.TakePhoto")
@@ -1787,6 +1791,10 @@ enum L10n {
         static var btnAdd: String {
           return L10n.tr("Localizable", "Scene.Sendtransaction.Addcontact.BtnAdd")
         }
+        /// Pending...
+        static var pending: String {
+          return L10n.tr("Localizable", "Scene.Sendtransaction.Addcontact.Pending")
+        }
         /// Name
         static var placeholderName: String {
           return L10n.tr("Localizable", "Scene.Sendtransaction.Addcontact.PlaceholderName")
@@ -2393,6 +2401,14 @@ enum L10n {
       /// You don’t have any transaction records
       static var noTransaction: String {
         return L10n.tr("Localizable", "Scene.TransactionHistory.NoTransaction")
+      }
+      /// Failed
+      static var statusFailed: String {
+        return L10n.tr("Localizable", "Scene.TransactionHistory.StatusFailed")
+      }
+      /// Pending...
+      static var statusPendind: String {
+        return L10n.tr("Localizable", "Scene.TransactionHistory.StatusPendind")
       }
     }
 
