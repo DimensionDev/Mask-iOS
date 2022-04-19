@@ -185,7 +185,8 @@
             "move_data_now": "crwdns14652:0crwdne14652:0",
             "remind_me_later": "crwdns14654:0crwdne14654:0",
             "go_settings": "crwdns14958:0crwdne14958:0",
-            "dont_allow": "crwdns14960:0crwdne14960:0"
+            "dont_allow": "crwdns14960:0crwdne14960:0",
+            "speed_up": "crwdns16210:0crwdne16210:0"
         },
         "toast": {
             "saved": "crwdns14656:0crwdne14656:0",
@@ -613,7 +614,9 @@
             "walletconnect_switch_network_alert": "crwdns14062:0%scrwdnd14062:0%scrwdne14062:0"
         },
         "transaction_history": {
-            "no_transaction": "crwdns14064:0crwdne14064:0"
+            "no_transaction": "crwdns14064:0crwdne14064:0",
+            "status_pendind": "crwdns16212:0crwdne16212:0",
+            "status_failed": "crwdns16214:0crwdne16214:0"
         },
         "wallet_receive": {
             "btn_share": "crwdns14066:0crwdne14066:0",
