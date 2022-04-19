@@ -627,7 +627,6 @@ extension SendTransactionConfirmViewController: GasFeeBackDelegate {
         }
         self.viewModel.gasPricePublisher.value = gwei * (BigUInt(10).power(9))
         self.viewModel.gasLimitPublisher.value = gasLimitValut
-        self.amountTextField.text = ""
         self.view.endEditing(true)
     }
 }

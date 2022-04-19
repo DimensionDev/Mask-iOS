@@ -359,9 +359,11 @@ final class SendTransactionCofirmPopViewController: UIViewController {
                         let history = TransactionHistory(txHash: txhash ?? "", asset: token, toAddress: toAddress, amount: self?.amount ?? "0")
                         PendTransactionManager.shared.addPendTrancation(txHash: txhash ?? "", history: history, transcationInfo:transactionInfo, nonce: nonce)
                         self?.dismiss(animated: true, completion: {
-                            Coordinator.main.present(scene: .balance, transition: .replaceCurrentNavigation(tab: .wallet, animated: true)) {
-                                Coordinator.main.present(scene: .walletHistory, transition: .detail(animated: true))
-                            }
+                            Coordinator.main.present(scene: .walletHistory,
+                                                     transition: .replaceCurrentNavigationWithoutRoot(tab: .wallet, animated: true))
+//                            Coordinator.main.present(scene: .balance, transition: .replaceCurrentNavigation(tab: .wallet, animated: true)) {
+//                                Coordinator.main.present(scene: .walletHistory, transition: .detail(animated: true))
+//                            }
                         })
                         
                     case .failure(let error):
@@ -385,9 +387,11 @@ final class SendTransactionCofirmPopViewController: UIViewController {
                             let history = TransactionHistory(txHash: txhash ?? "", asset: token, toAddress: toAddress, amount: self?.amount ?? "0")
                             PendTransactionManager.shared.addPendTrancation(txHash: txhash ?? "", history: history, transcationInfo:transactionInfo, nonce: nonce)
                             self?.dismiss(animated: true, completion: {
-                                Coordinator.main.present(scene: .balance, transition: .replaceCurrentNavigation(tab: .wallet, animated: true)) {
-                                    Coordinator.main.present(scene: .walletHistory, transition: .detail(animated: true))
-                                }
+                                Coordinator.main.present(scene: .walletHistory,
+                                                         transition: .replaceCurrentNavigationWithoutRoot(tab: .wallet, animated: true))
+//                                Coordinator.main.present(scene: .balance, transition: .replaceCurrentNavigation(tab: .wallet, animated: true)) {
+//                                    Coordinator.main.present(scene: .walletHistory, transition: .detail(animated: true))
+//                                }
                             })
                             
                         case .failure(let error):
