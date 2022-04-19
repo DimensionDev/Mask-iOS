@@ -193,7 +193,8 @@
         },
         "toast": {
             "saved": "Saved!",
-            "copy": "copied!"
+            "copy": "copied!",
+            "failed": "Failed"
         },
         "loading": "Loading..."
     },

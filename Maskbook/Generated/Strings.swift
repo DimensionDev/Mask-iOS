@@ -633,6 +633,10 @@ enum L10n {
       static var copy: String {
         return L10n.tr("Localizable", "Common.Toast.Copy")
       }
+      /// Failed
+      static var failed: String {
+        return L10n.tr("Localizable", "Common.Toast.Failed")
+      }
       /// Saved!
       static var saved: String {
         return L10n.tr("Localizable", "Common.Toast.Saved")

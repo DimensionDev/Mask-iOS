@@ -28,12 +28,8 @@ class NFTActionViewModel {
     private func generateMenuItems() -> [SectionItem] {
         var items = [SectionItem]()
                 
-        if let imageUrl = token.imageUrl?.absoluteString,
-           imageUrl.contains("lh3.googleusercontent"){
-            let saveItem = SectionItem.savephoto(title: L10n.Scene.NftDetail.savePhoto, imageUrl: token.imageUrl)
-            items.append(saveItem)
-        }
-     
+        let saveItem = SectionItem.savephoto(title: L10n.Scene.NftDetail.savePhoto, imageUrl: token.imageUrl)
+        items.append(saveItem)
         if let websiteUrl = token.collectionWebsite {
             let websiteItem = SectionItem.website(title: L10n.Scene.NftDetail.collectionWeb, websiteUrl: websiteUrl)
             items.append(websiteItem)
