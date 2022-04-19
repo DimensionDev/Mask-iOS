@@ -5,6 +5,8 @@ import BigInt
 import PullRefresh
 import web3swift
 import struct PullRefresh.InterActionState
+import UIKit
+import SwiftUI
 
 @globalActor
 struct MaskGroupActor {
@@ -13,6 +15,7 @@ struct MaskGroupActor {
 }
 
 @MainActor
+@dynamicMemberLookup
 final class LuckyDropHistoryViewModel: ObservableObject {
     enum LoadingState {
         case empty
@@ -31,7 +34,26 @@ final class LuckyDropHistoryViewModel: ObservableObject {
     @Published var nftPayloads: [NftRedPacketPayload] = []
     @Published var state = LoadingState.empty
     
-    var pullState = InterActionState(state: .idle, progress: 0)
+    var pullState = InterActionState(state: .idle, progress: 0) {
+        didSet {
+            guard oldValue.isCanceled != pullState.isCanceled,
+                  oldValue.state != pullState.state else {
+                return
+            }
+            checkPullState(pullState)
+        }
+    }
+    
+    subscript<Value>(dynamicMember keyPath: ReferenceWritableKeyPath<LuckyDropHistoryViewModel, Value>) -> Binding<Value> {
+        Binding(
+            get: {
+                self[keyPath: keyPath]
+            },
+            set: { value, _ in
+                self[keyPath: keyPath] = value
+            }
+        )
+    }
 
     private var cancelableStorage: Set<AnyCancellable> = []
 
@@ -51,13 +73,6 @@ final class LuckyDropHistoryViewModel: ObservableObject {
     }
     
     func checkPullState(_ pullState: InterActionState) {
-        defer { self.pullState  = pullState }
-        
-        if self.pullState.state == pullState.state,
-           self.pullState.isCanceled == pullState.isCanceled {
-            return
-        }
-        
         if pullState.isCanceled {
             switch self.selection {
             case .token: self.tokenHistoryTask?.cancel()

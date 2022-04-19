@@ -68,12 +68,7 @@ struct LuckyDropHistoryView: View {
             .padding(.horizontal, LayoutConstraints.horizontal)
             .onRefresh(
                 pullthreshold: 32,
-                pullProgress: Binding(
-                    get: { viewModel.pullState },
-                    set: { value, _ in
-                        viewModel.checkPullState(value)
-                    }
-                ),
+                pullProgress: $viewModel.pullState,
                 onRefresh: { done in
                     Task { @MainActor in
                         await self.viewModel.loadData()

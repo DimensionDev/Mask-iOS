@@ -88,7 +88,12 @@ extension RedPacketInteractivePayload {
             var claimedLargeThanTotal = false
             if let claimedIntValue = Int(availability.claimed),
                let totalIntValue = Int(availability.total) {
-                claimedLargeThanTotal = claimedIntValue < totalIntValue
+                if claimedIntValue == 0,
+                   totalIntValue == 0 {
+                    claimedLargeThanTotal = true
+                } else {
+                    claimedLargeThanTotal = claimedIntValue < totalIntValue
+                }
             }
             return isEmpty && claimedLargeThanTotal
         }()

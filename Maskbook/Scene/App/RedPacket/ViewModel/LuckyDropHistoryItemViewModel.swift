@@ -114,12 +114,13 @@ extension LuckyDropHistoryTokenItemViewModel {
 
         
         let state: RedPacketStatus? = {
-            if status.isEmpty {
-                return .empty
-            }
-            
+            // refund first, in case after refund claimed == 0, total == 0
             if status.isRefunded {
                 return .refunded
+            }
+            
+            if status.isEmpty {
+                return .empty
             }
             
             if status.isExpired {
