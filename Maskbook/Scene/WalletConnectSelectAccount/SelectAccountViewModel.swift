@@ -217,6 +217,7 @@ extension SelectAccountViewModel {
         let defaultAccountAddress = userSetting.defaultAccountAddress
         let showWalletConnect = isShowWalletConnectWallets()
         var items = accounts
+            .sorted(by: { ($0.fromWalletConnect ? 1 : 0) < ($1.fromWalletConnect ? 1 : 0) })
             .filter { account in
                 guard let chain = ChainType(rawValue: Int(account.chainId)) else { return false }
                 if account.fromWalletConnect {
@@ -244,7 +245,7 @@ extension SelectAccountViewModel {
                 return WalletsItem.account(data: data)
             }
         if isShowAddWalletConnect() {
-            items.append(.addWalletConnect)
+            items.append(WalletsItem.addWalletConnect)
         }
         accountListSubject.value = items
     }

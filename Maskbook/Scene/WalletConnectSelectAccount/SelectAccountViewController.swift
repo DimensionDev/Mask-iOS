@@ -42,6 +42,8 @@ class SelectAccountViewController: BaseViewController {
     @InjectedProvider(\.walletConnectClient)
     internal var walletConnectClient
     
+    private var collectionTopLayoutConstraint: NSLayoutConstraint!
+    
     private lazy var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
@@ -109,18 +111,19 @@ class SelectAccountViewController: BaseViewController {
     
     private lazy var titleView: UIView = {
         let view = UIView()
+        view.backgroundColor = Asset.Colors.Background.normal.color
         view.withSubViews {
             titleLabel
             editButton
         }
         NSLayoutConstraint.activate([
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            titleLabel.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 56),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
         NSLayoutConstraint.activate([
             editButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -LayoutConstraints.trailing),
-            editButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            editButton.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 56)
         ])
         
         return view
@@ -234,21 +237,22 @@ class SelectAccountViewController: BaseViewController {
         view.backgroundColor = Asset.Colors.Background.normal.color
         
         view.withSubViews {
-            titleView
             tableView
-            collectionView
             addWalletView
+            titleView
+            collectionView
         }
         
         NSLayoutConstraint.activate([
-            titleView.topAnchor.constraint(equalTo: view.topAnchor, constant: 44),
+            titleView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
             titleView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             titleView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            titleView.heightAnchor.constraint(equalToConstant: 24)
+            titleView.heightAnchor.constraint(equalToConstant: 88)
         ])
         
+        collectionTopLayoutConstraint = collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 88)
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 88),
+            collectionTopLayoutConstraint,
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.heightAnchor.constraint(equalToConstant: 66)
@@ -269,10 +273,11 @@ class SelectAccountViewController: BaseViewController {
         ])
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+        
         if viewModel.isShowAddWallet() {
             tableView.bottomAnchor.constraint(equalTo: addWalletView.topAnchor).isActive = true
         } else {
@@ -386,5 +391,14 @@ extension SelectAccountViewController: UICollectionViewDelegateFlowLayout {
                         sizeForItemAt indexPath: IndexPath) -> CGSize
     {
         SelectAccountChainItemCell.itemSize
+    }
+}
+
+extension SelectAccountViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        UIView.animate(withDuration: 0.1) {
+            self.collectionTopLayoutConstraint.constant = min(max(34, 88 - scrollView.contentOffset.y - scrollView.contentInset.top), 88)
+            self.view.layoutIfNeeded()
+        }
     }
 }
