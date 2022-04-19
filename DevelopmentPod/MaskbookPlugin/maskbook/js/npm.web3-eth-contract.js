@@ -1,7 +1,7 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[3981],{
 
-/***/ 57226:
+/***/ 78741:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /*
@@ -33,14 +33,14 @@
  * @date 2017
  */
 
-var core = __webpack_require__(10833);
-var Method = __webpack_require__(34023);
-var utils = __webpack_require__(83317);
-var Subscription = (__webpack_require__(84350).subscription);
-var formatters = (__webpack_require__(70222).formatters);
-var errors = (__webpack_require__(70222).errors);
-var promiEvent = __webpack_require__(39944);
-var abi = __webpack_require__(24278);
+var core = __webpack_require__(43702);
+var Method = __webpack_require__(82481);
+var utils = __webpack_require__(11627);
+var Subscription = (__webpack_require__(70790).subscription);
+var formatters = (__webpack_require__(41032).formatters);
+var errors = (__webpack_require__(41032).errors);
+var promiEvent = __webpack_require__(8398);
+var abi = __webpack_require__(9177);
 /**
  * Should be called to create new contract instance
  *
@@ -201,6 +201,18 @@ var Contract = function Contract(jsonInterface, address, options) {
         },
         enumerable: true
     });
+    Object.defineProperty(this, 'transactionPollingInterval', {
+        get: function () {
+            if (_this.options.transactionPollingInterval === 0) {
+                return _this.options.transactionPollingInterval;
+            }
+            return _this.options.transactionPollingInterval || this.constructor.transactionPollingInterval;
+        },
+        set: function (val) {
+            _this.options.transactionPollingInterval = val;
+        },
+        enumerable: true
+    });
     Object.defineProperty(this, 'transactionConfirmationBlocks', {
         get: function () {
             if (_this.options.transactionConfirmationBlocks === 0) {
@@ -222,6 +234,18 @@ var Contract = function Contract(jsonInterface, address, options) {
         },
         set: function (val) {
             _this.options.transactionBlockTimeout = val;
+        },
+        enumerable: true
+    });
+    Object.defineProperty(this, 'blockHeaderTimeout', {
+        get: function () {
+            if (_this.options.blockHeaderTimeout === 0) {
+                return _this.options.blockHeaderTimeout;
+            }
+            return _this.options.blockHeaderTimeout || this.constructor.blockHeaderTimeout;
+        },
+        set: function (val) {
+            _this.options.blockHeaderTimeout = val;
         },
         enumerable: true
     });
@@ -668,6 +692,7 @@ Contract.prototype._createTxObject = function _createTxObject() {
     txObject.send.request = this.parent._executeMethod.bind(txObject, 'send', true); // to make batch requests
     txObject.encodeABI = this.parent._encodeMethodABI.bind(txObject);
     txObject.estimateGas = this.parent._executeMethod.bind(txObject, 'estimate');
+    txObject.createAccessList = this.parent._executeMethod.bind(txObject, 'createAccessList');
     if (args && this.method.inputs && args.length !== this.method.inputs.length) {
         if (this.nextMethod) {
             return this.nextMethod.apply(null, args);
@@ -740,6 +765,22 @@ Contract.prototype._executeMethod = function _executeMethod() {
         return payload;
     }
     switch (args.type) {
+        case 'createAccessList':
+            // return error, if no "from" is specified
+            if (!utils.isAddress(args.options.from)) {
+                return utils._fireError(errors.ContractNoFromAddressDefinedError(), defer.eventEmitter, defer.reject, args.callback);
+            }
+            var createAccessList = (new Method({
+                name: 'createAccessList',
+                call: 'eth_createAccessList',
+                params: 2,
+                inputFormatter: [formatters.inputTransactionFormatter, formatters.inputDefaultBlockNumberFormatter],
+                requestManager: _this._parent._requestManager,
+                accounts: ethAccounts,
+                defaultAccount: _this._parent.defaultAccount,
+                defaultBlock: _this._parent.defaultBlock
+            })).createFunction();
+            return createAccessList(args.options, args.callback);
         case 'estimate':
             var estimateGas = (new Method({
                 name: 'estimateGas',
@@ -836,6 +877,7 @@ Contract.prototype._executeMethod = function _executeMethod() {
                 transactionBlockTimeout: _this._parent.transactionBlockTimeout,
                 transactionConfirmationBlocks: _this._parent.transactionConfirmationBlocks,
                 transactionPollingTimeout: _this._parent.transactionPollingTimeout,
+                transactionPollingInterval: _this._parent.transactionPollingInterval,
                 defaultCommon: _this._parent.defaultCommon,
                 defaultChain: _this._parent.defaultChain,
                 defaultHardfork: _this._parent.defaultHardfork,

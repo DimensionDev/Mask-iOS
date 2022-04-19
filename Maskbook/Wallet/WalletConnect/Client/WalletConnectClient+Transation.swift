@@ -95,7 +95,7 @@ extension WalletConnectClient {
         toAddress: String,
         fromAddress: String,
         network: BlockChainNetwork,
-        _ completion: @escaping (Result<EthereumTransaction?, Error>) -> Void) {
+        _ completion: @escaping (Result<String?, Error>) -> Void) {
         guard let wcUrl = session?.url else {
             completion(.failure(WalletSendError.walletConnectError))
             return

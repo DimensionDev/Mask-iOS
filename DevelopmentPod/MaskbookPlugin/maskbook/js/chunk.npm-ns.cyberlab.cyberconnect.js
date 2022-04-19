@@ -13,7 +13,7 @@ exports.C_ACCESS_TOKEN_KEY = 'CYBERCONNECT_ACCESS_TOKEN';
 
 /***/ }),
 
-/***/ 32135:
+/***/ 22229:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -55,7 +55,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.arrayBuffer2Hex = exports.signWithSigningKey = exports.getPublicKey = exports.getSigningKey = exports.hasSigningKey = exports.generateSigningKey = exports.rotateSigningKey = exports.clearSigningKeyByAddress = exports.clearSigningKey = exports.clear = exports.set = exports.get = void 0;
-var idb_1 = __webpack_require__(31637);
+var idb_1 = __webpack_require__(12581);
 var dbPromise = null;
 var SIGNKEY_KEY = 'signingKey_';
 if (typeof window !== 'undefined' && typeof window.indexedDB !== 'undefined') {
@@ -317,10 +317,10 @@ var queries_1 = __webpack_require__(8981);
 var error_1 = __webpack_require__(32571);
 var types_1 = __webpack_require__(96414);
 var utils_1 = __webpack_require__(80830);
-var stream_caip10_link_1 = __webpack_require__(6303);
+var stream_caip10_link_1 = __webpack_require__(89421);
 var _1 = __webpack_require__(70820);
 var constant_1 = __webpack_require__(91168);
-var crypto_1 = __webpack_require__(32135);
+var crypto_1 = __webpack_require__(22229);
 var CyberConnect = /** @class */ (function () {
     function CyberConnect(config) {
         this.address = '';

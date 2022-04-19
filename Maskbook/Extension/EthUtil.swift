@@ -49,12 +49,9 @@ enum EthUtil {
         let priceBigUInt = BigUInt(price)
         let gwei = gwei
         let gasFee = ( gwei * gasLimit) * priceBigUInt
-        if gasFee < BigUInt(1000000000000000) {
-            return "< 0.01"
-        } else {
-            guard let balString = Web3.Utils.formatToEthereumUnits(gasFee, toUnits: .eth, decimals: 2) else { return "" }
-            return balString
-        }
+        guard let balString = Web3.Utils.formatToEthereumUnits(gasFee, toUnits: .eth, decimals: 2) else { return "" }
+        return balString
+        
     }
     
     static func calculateTokenPrice(amount: String, tokenName: String? = nil) -> String {

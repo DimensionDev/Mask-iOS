@@ -12,7 +12,7 @@
 /* harmony export */   "q_": () => (/* binding */ createHashHistory)
 /* harmony export */ });
 /* unused harmony export createBrowserHistory */
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(97538);
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(51911);
 
 
 /**

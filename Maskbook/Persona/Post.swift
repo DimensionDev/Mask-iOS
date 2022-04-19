@@ -10,6 +10,20 @@ import Foundation
 import SwiftyJSON
 
 struct Post: Codable {
+    
+    enum CodingKeys: String, CodingKey
+    {
+        case identifier
+        case encryptBy
+        case postBy
+        case postCryptoKey
+        case url
+        case recipients
+        case interestedMeta
+        case summary
+        case foundAt
+    }
+    
     var identifier: String
     var encryptBy: String?
     var postBy: String?

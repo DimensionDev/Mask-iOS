@@ -8,6 +8,7 @@
 
 import Combine
 import Foundation
+import CryptoKit
 
 final class MergeToLocalViewModel: ObservableObject {
     @Published
@@ -33,7 +34,7 @@ final class MergeToLocalViewModel: ObservableObject {
                 guard let self = self else { return Empty().eraseToAnyPublisher() }
                 return self.decryptRemoteFile(password: password, data: data)
             }
-            .flatMap { [weak self] decryptedData -> AnyPublisher<MaskWebMessageResult, Error> in
+            .flatMap { [weak self] decryptedData -> AnyPublisher<Void, Error> in
                 guard let self = self else { return Empty().eraseToAnyPublisher() }
                 return self.restore(data: decryptedData)
                     .eraseToAnyPublisher()
@@ -71,11 +72,8 @@ final class MergeToLocalViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }
     
-    func restore(data: Data) -> AnyPublisher<MaskWebMessageResult, Error> {
-        RestoreBackupMWEMessage.withPayload {
-            .init(backupInfo: String(data: data, encoding: .utf8))
-        }
-        .eraseToAnyPublisher()
+    func restore(data: Data) -> AnyPublisher<Void, Error> {
+        RecoverDataManager.performRestoreBackup(data)
     }
 }
 

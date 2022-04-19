@@ -1,7 +1,7 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[2598],{
 
-/***/ 56247:
+/***/ 7631:
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -14,7 +14,7 @@
 /* harmony export */   "t8": () => (/* binding */ set)
 /* harmony export */ });
 /* unused harmony exports useController, useFieldArray, useFormState, useWatch */
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63423);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(86248);
 
 
 var isCheckBoxInput = (element) => element.type === 'checkbox';
@@ -39,7 +39,7 @@ var getNodeParentName = (name) => name.substring(0, name.search(/.\d/)) || name;
 
 var isNameInFieldArray = (names, name) => [...names].some((current) => getNodeParentName(name) === current);
 
-var compact = (value) => value.filter(Boolean);
+var compact = (value) => Array.isArray(value) ? value.filter(Boolean) : [];
 
 var isUndefined = (val) => val === undefined;
 
@@ -75,12 +75,6 @@ const INPUT_VALIDATION_RULES = {
     pattern: 'pattern',
     required: 'required',
     validate: 'validate',
-};
-
-var omit = (source, key) => {
-    const copy = Object.assign({}, source);
-    delete copy[key];
-    return copy;
 };
 
 const HookFormContext = react__WEBPACK_IMPORTED_MODULE_0__.createContext(null);
@@ -145,7 +139,10 @@ const useFormContext = () => react__WEBPACK_IMPORTED_MODULE_0__.useContext(HookF
  * }
  * ```
  */
-const FormProvider = (props) => (react__WEBPACK_IMPORTED_MODULE_0__.createElement(HookFormContext.Provider, { value: omit(props, 'children') }, props.children));
+const FormProvider = (props) => {
+    const { children, ...data } = props;
+    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(HookFormContext.Provider, { value: data }, props.children));
+};
 
 var getProxyFormState = (formState, _proxyFormState, localProxyFormState, isRoot = true) => {
     const result = {};
@@ -167,7 +164,7 @@ var getProxyFormState = (formState, _proxyFormState, localProxyFormState, isRoot
 var isEmptyObject = (value) => isObject(value) && !Object.keys(value).length;
 
 var shouldRenderFormState = (formStateData, _proxyFormState, isRoot) => {
-    const formState = omit(formStateData, 'name');
+    const { name, ...formState } = formStateData;
     return (isEmptyObject(formState) ||
         Object.keys(formState).length >= Object.keys(_proxyFormState).length ||
         Object.keys(formState).find((key) => _proxyFormState[key] ===
@@ -250,14 +247,20 @@ function useFormState(props) {
     const callback = react__WEBPACK_IMPORTED_MODULE_0__.useCallback((value) => _mounted.current &&
         shouldSubscribeByName(_name.current, value.name, exact) &&
         shouldRenderFormState(value, _localProxyFormState.current) &&
-        updateFormState(Object.assign(Object.assign({}, control._formState), value)), [control, exact]);
+        updateFormState({
+            ...control._formState,
+            ...value,
+        }), [control, exact]);
     useSubscribe({
         disabled,
         callback,
         subject: control._subjects.state,
     });
-    react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => () => {
-        _mounted.current = false;
+    react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
+        _mounted.current = true;
+        return () => {
+            _mounted.current = false;
+        };
     }, []);
     return getProxyFormState(formState, control._proxyFormState, _localProxyFormState.current, false);
 }
@@ -315,11 +318,12 @@ function useWatch(props) {
             const fieldValues = generateWatchOutput(_name.current, control._names, formState.values || control._formValues);
             updateValue(isUndefined(_name.current) ||
                 (isObject(fieldValues) && !objectHasFunction(fieldValues))
-                ? Object.assign({}, fieldValues) : Array.isArray(fieldValues)
-                ? [...fieldValues]
-                : isUndefined(fieldValues)
-                    ? defaultValue
-                    : fieldValues);
+                ? { ...fieldValues }
+                : Array.isArray(fieldValues)
+                    ? [...fieldValues]
+                    : isUndefined(fieldValues)
+                        ? defaultValue
+                        : fieldValues);
         }
     }, [control, exact, defaultValue]);
     useSubscribe({
@@ -374,7 +378,10 @@ function useController(props) {
         control,
         name,
     });
-    const _registerProps = react__WEBPACK_IMPORTED_MODULE_0__.useRef(control.register(name, Object.assign(Object.assign({}, props.rules), { value })));
+    const _registerProps = react__WEBPACK_IMPORTED_MODULE_0__.useRef(control.register(name, {
+        ...props.rules,
+        value,
+    }));
     react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
         const updateMounted = (name, value) => {
             const field = get(control._fields, name);
@@ -475,7 +482,14 @@ function useController(props) {
 const Controller = (props) => props.render(useController(props));
 
 var appendErrors = (name, validateAllFieldCriteria, errors, type, message) => validateAllFieldCriteria
-    ? Object.assign(Object.assign({}, errors[name]), { types: Object.assign(Object.assign({}, (errors[name] && errors[name].types ? errors[name].types : {})), { [type]: message || true }) }) : {};
+    ? {
+        ...errors[name],
+        types: {
+            ...(errors[name] && errors[name].types ? errors[name].types : {}),
+            [type]: message || true,
+        },
+    }
+    : {};
 
 var isKey = (value) => /^\w*$/.test(value);
 
@@ -508,8 +522,7 @@ const focusFieldBy = (fields, callback, fieldsNames) => {
     for (const key of fieldsNames || Object.keys(fields)) {
         const field = get(fields, key);
         if (field) {
-            const _f = field._f;
-            const current = omit(field, '_f');
+            const { _f, ...currentField } = field;
             if (_f && callback(_f.name)) {
                 if (_f.ref.focus && isUndefined(_f.ref.focus())) {
                     break;
@@ -519,8 +532,8 @@ const focusFieldBy = (fields, callback, fieldsNames) => {
                     break;
                 }
             }
-            else if (isObject(current)) {
-                focusFieldBy(current, callback);
+            else if (isObject(currentField)) {
+                focusFieldBy(currentField, callback);
             }
         }
     }
@@ -750,13 +763,14 @@ function useFieldArray(props) {
         }, false);
     };
     const update = (index, value) => {
-        const updatedFieldArrayValues = updateAt(control._getFieldArray(name), index, value);
+        const updateValue = cloneObject(value);
+        const updatedFieldArrayValues = updateAt(control._getFieldArray(name), index, updateValue);
         ids.current = [...updatedFieldArrayValues].map((item, i) => !item || i === index ? generateId() : ids.current[i]);
         updateValues(updatedFieldArrayValues);
         setFields([...updatedFieldArrayValues]);
         control._updateFieldArray(name, updatedFieldArrayValues, updateAt, {
             argA: index,
-            argB: value,
+            argB: updateValue,
         }, true, false);
     };
     const replace = (value) => {
@@ -805,7 +819,10 @@ function useFieldArray(props) {
         insert: React.useCallback(insert$1, [updateValues, name, control]),
         update: React.useCallback(update, [updateValues, name, control]),
         replace: React.useCallback(replace, [updateValues, name, control]),
-        fields: React.useMemo(() => fields.map((field, index) => (Object.assign(Object.assign({}, field), { [keyName]: ids.current[index] || generateId() }))), [fields, keyName]),
+        fields: React.useMemo(() => fields.map((field, index) => ({
+            ...field,
+            [keyName]: ids.current[index] || generateId(),
+        })), [fields, keyName]),
     };
 }
 
@@ -926,9 +943,7 @@ function unset(object, path) {
             if (currentPathsLength === index &&
                 ((isObject(objectRef) && isEmptyObject(objectRef)) ||
                     (Array.isArray(objectRef) &&
-                        !objectRef.filter((data) => (isObject(data) && !isEmptyObject(data)) ||
-                            isBoolean(data) ||
-                            (Array.isArray(data) && data.length)).length))) {
+                        !objectRef.filter((data) => !isUndefined(data)).length))) {
                 previousObjRef ? delete previousObjRef[item] : delete object[item];
             }
             previousObjRef = objectRef;
@@ -963,7 +978,7 @@ function getDirtyFieldsFromDefaultValues(data, formValues, dirtyFieldsFromValues
                     isPrimitive(dirtyFieldsFromValues[key])) {
                     dirtyFieldsFromValues[key] = Array.isArray(data[key])
                         ? markFieldsDirty(data[key], [])
-                        : Object.assign({}, markFieldsDirty(data[key]));
+                        : { ...markFieldsDirty(data[key]) };
                 }
                 else {
                     getDirtyFieldsFromDefaultValues(data[key], isNullOrUndefined(formValues) ? {} : formValues[key], dirtyFieldsFromValues[key]);
@@ -1173,8 +1188,12 @@ var validateField = async (field, inputValue, validateAllFieldCriteria, shouldUs
     const appendErrorsCurry = appendErrors.bind(null, name, validateAllFieldCriteria, error);
     const getMinMaxMessage = (exceedMax, maxLengthMessage, minLengthMessage, maxType = INPUT_VALIDATION_RULES.maxLength, minType = INPUT_VALIDATION_RULES.minLength) => {
         const message = exceedMax ? maxLengthMessage : minLengthMessage;
-        error[name] = Object.assign({ type: exceedMax ? maxType : minType, message,
-            ref }, appendErrorsCurry(exceedMax ? maxType : minType, message));
+        error[name] = {
+            type: exceedMax ? maxType : minType,
+            message,
+            ref,
+            ...appendErrorsCurry(exceedMax ? maxType : minType, message),
+        };
     };
     if (required &&
         ((!isRadioOrCheckbox && (isEmpty || isNullOrUndefined(inputValue))) ||
@@ -1185,7 +1204,12 @@ var validateField = async (field, inputValue, validateAllFieldCriteria, shouldUs
             ? { value: !!required, message: required }
             : getValueAndMessage(required);
         if (value) {
-            error[name] = Object.assign({ type: INPUT_VALIDATION_RULES.required, message, ref: inputRef }, appendErrorsCurry(INPUT_VALIDATION_RULES.required, message));
+            error[name] = {
+                type: INPUT_VALIDATION_RULES.required,
+                message,
+                ref: inputRef,
+                ...appendErrorsCurry(INPUT_VALIDATION_RULES.required, message),
+            };
             if (!validateAllFieldCriteria) {
                 setCustomValidity(message);
                 return error;
@@ -1241,8 +1265,12 @@ var validateField = async (field, inputValue, validateAllFieldCriteria, shouldUs
     if (pattern && !isEmpty && isString(inputValue)) {
         const { value: patternValue, message } = getValueAndMessage(pattern);
         if (isRegex(patternValue) && !inputValue.match(patternValue)) {
-            error[name] = Object.assign({ type: INPUT_VALIDATION_RULES.pattern, message,
-                ref }, appendErrorsCurry(INPUT_VALIDATION_RULES.pattern, message));
+            error[name] = {
+                type: INPUT_VALIDATION_RULES.pattern,
+                message,
+                ref,
+                ...appendErrorsCurry(INPUT_VALIDATION_RULES.pattern, message),
+            };
             if (!validateAllFieldCriteria) {
                 setCustomValidity(message);
                 return error;
@@ -1254,7 +1282,10 @@ var validateField = async (field, inputValue, validateAllFieldCriteria, shouldUs
             const result = await validate(inputValue);
             const validateError = getValidateError(result, inputRef);
             if (validateError) {
-                error[name] = Object.assign(Object.assign({}, validateError), appendErrorsCurry(INPUT_VALIDATION_RULES.validate, validateError.message));
+                error[name] = {
+                    ...validateError,
+                    ...appendErrorsCurry(INPUT_VALIDATION_RULES.validate, validateError.message),
+                };
                 if (!validateAllFieldCriteria) {
                     setCustomValidity(validateError.message);
                     return error;
@@ -1269,7 +1300,10 @@ var validateField = async (field, inputValue, validateAllFieldCriteria, shouldUs
                 }
                 const validateError = getValidateError(await validate[key](inputValue), inputRef, key);
                 if (validateError) {
-                    validationResult = Object.assign(Object.assign({}, validateError), appendErrorsCurry(key, validateError.message));
+                    validationResult = {
+                        ...validateError,
+                        ...appendErrorsCurry(key, validateError.message),
+                    };
                     setCustomValidity(validateError.message);
                     if (validateAllFieldCriteria) {
                         error[name] = validationResult;
@@ -1277,7 +1311,10 @@ var validateField = async (field, inputValue, validateAllFieldCriteria, shouldUs
                 }
             }
             if (!isEmptyObject(validationResult)) {
-                error[name] = Object.assign({ ref: inputRef }, validationResult);
+                error[name] = {
+                    ref: inputRef,
+                    ...validationResult,
+                };
                 if (!validateAllFieldCriteria) {
                     return error;
                 }
@@ -1294,7 +1331,10 @@ const defaultOptions = {
     shouldFocusError: true,
 };
 function createFormControl(props = {}) {
-    let _options = Object.assign(Object.assign({}, defaultOptions), props);
+    let _options = {
+        ...defaultOptions,
+        ...props,
+    };
     let _formState = {
         isDirty: false,
         isValidating: false,
@@ -1308,7 +1348,7 @@ function createFormControl(props = {}) {
         errors: {},
     };
     let _fields = {};
-    let _defaultValues = _options.defaultValues || {};
+    let _defaultValues = cloneObject(_options.defaultValues) || {};
     let _formValues = _options.shouldUnregister
         ? {}
         : cloneObject(_defaultValues);
@@ -1361,21 +1401,22 @@ function createFormControl(props = {}) {
         }
         return isValid;
     };
-    const _updateFieldArray = (name, values = [], method, args, shouldSetValues = true, shouldUpdateFieldsAndErrors = true) => {
+    const _updateFieldArray = (name, values = [], method, args, shouldSetValues = true, shouldUpdateFieldsAndState = true) => {
         if (args && method) {
             _stateFlags.action = true;
-            if (shouldUpdateFieldsAndErrors && Array.isArray(get(_fields, name))) {
+            if (shouldUpdateFieldsAndState && Array.isArray(get(_fields, name))) {
                 const fieldValues = method(get(_fields, name), args.argA, args.argB);
                 shouldSetValues && set(_fields, name, fieldValues);
             }
             if (_proxyFormState.errors &&
-                shouldUpdateFieldsAndErrors &&
+                shouldUpdateFieldsAndState &&
                 Array.isArray(get(_formState.errors, name))) {
                 const errors = method(get(_formState.errors, name), args.argA, args.argB);
                 shouldSetValues && set(_formState.errors, name, errors);
                 unsetEmptyArray(_formState.errors, name);
             }
             if (_proxyFormState.touchedFields &&
+                shouldUpdateFieldsAndState &&
                 Array.isArray(get(_formState.touchedFields, name))) {
                 const touchedFields = method(get(_formState.touchedFields, name), args.argA, args.argB);
                 shouldSetValues && set(_formState.touchedFields, name, touchedFields);
@@ -1461,8 +1502,16 @@ function createFormControl(props = {}) {
             !isEmptyObject(fieldState) ||
             shouldUpdateValid) &&
             !shouldSkipRender) {
-            const updatedFormState = Object.assign(Object.assign(Object.assign({}, fieldState), (shouldUpdateValid ? { isValid } : {})), { errors: _formState.errors, name });
-            _formState = Object.assign(Object.assign({}, _formState), updatedFormState);
+            const updatedFormState = {
+                ...fieldState,
+                ...(shouldUpdateValid ? { isValid } : {}),
+                errors: _formState.errors,
+                name,
+            };
+            _formState = {
+                ..._formState,
+                ...updatedFormState,
+            };
             _subjects.state.next(updatedFormState);
         }
         validateFields[name]--;
@@ -1475,7 +1524,7 @@ function createFormControl(props = {}) {
         }
     };
     const _executeSchema = async (name) => _options.resolver
-        ? await _options.resolver(Object.assign({}, _formValues), _options.context, getResolverOptions(name || _names.mount, _fields, _options.criteriaMode, _options.shouldUseNativeValidation))
+        ? await _options.resolver({ ..._formValues }, _options.context, getResolverOptions(name || _names.mount, _fields, _options.criteriaMode, _options.shouldUseNativeValidation))
         : {};
     const executeSchemaAndUpdateState = async (names) => {
         const { errors } = await _executeSchema();
@@ -1498,8 +1547,7 @@ function createFormControl(props = {}) {
         for (const name in fields) {
             const field = fields[name];
             if (field) {
-                const fieldReference = field._f;
-                const fieldValue = omit(field, '_f');
+                const { _f: fieldReference, ...fieldValue } = field;
                 if (fieldReference) {
                     const fieldError = await validateField(field, get(_formValues, fieldReference.name), shouldDisplayAllAssociatedErrors, _options.shouldUseNativeValidation);
                     if (fieldError[fieldReference.name]) {
@@ -1534,13 +1582,15 @@ function createFormControl(props = {}) {
     const _getDirty = (name, data) => (name && data && set(_formValues, name, data),
         !deepEqual(getValues(), _defaultValues));
     const _getWatch = (names, defaultValue, isGlobal) => {
-        const fieldValues = Object.assign({}, (_stateFlags.mount
-            ? _formValues
-            : isUndefined(defaultValue)
-                ? _defaultValues
-                : isString(names)
-                    ? { [names]: defaultValue }
-                    : defaultValue));
+        const fieldValues = {
+            ...(_stateFlags.mount
+                ? _formValues
+                : isUndefined(defaultValue)
+                    ? _defaultValues
+                    : isString(names)
+                        ? { [names]: defaultValue }
+                        : defaultValue),
+        };
         return generateWatchOutput(names, _names, fieldValues, isGlobal);
     };
     const _getFieldArray = (name) => compact(get(_stateFlags.mount ? _formValues : _defaultValues, name, props.shouldUnregister ? get(_defaultValues, name, []) : []));
@@ -1562,9 +1612,10 @@ function createFormControl(props = {}) {
                 else if (fieldReference.refs) {
                     if (isCheckBoxInput(fieldReference.ref)) {
                         fieldReference.refs.length > 1
-                            ? fieldReference.refs.forEach((checkboxRef) => (checkboxRef.checked = Array.isArray(fieldValue)
-                                ? !!fieldValue.find((data) => data === checkboxRef.value)
-                                : fieldValue === checkboxRef.value))
+                            ? fieldReference.refs.forEach((checkboxRef) => !checkboxRef.disabled &&
+                                (checkboxRef.checked = Array.isArray(fieldValue)
+                                    ? !!fieldValue.find((data) => data === checkboxRef.value)
+                                    : fieldValue === checkboxRef.value))
                             : fieldReference.refs[0] &&
                                 (fieldReference.refs[0].checked = !!fieldValue);
                     }
@@ -1665,7 +1716,7 @@ function createFormControl(props = {}) {
                 });
             if (shouldSkipValidation) {
                 return (shouldRender &&
-                    _subjects.state.next(Object.assign({ name }, (watched ? {} : fieldState))));
+                    _subjects.state.next({ name, ...(watched ? {} : fieldState) }));
             }
             !isBlurEvent && watched && _subjects.state.next({});
             validateFields[name] = validateFields[name] ? +1 : 1;
@@ -1684,7 +1735,8 @@ function createFormControl(props = {}) {
                 error = (await validateField(field, get(_formValues, name), shouldDisplayAllAssociatedErrors, _options.shouldUseNativeValidation))[name];
                 isValid = await _updateValid(true);
             }
-            field._f.deps && trigger(field._f.deps);
+            field._f.deps &&
+                trigger(field._f.deps);
             shouldRenderByError(false, name, isValid, error, fieldState);
         }
     };
@@ -1712,17 +1764,25 @@ function createFormControl(props = {}) {
         else {
             validationResult = isValid = await executeBuildInValidation(_fields);
         }
-        _subjects.state.next(Object.assign(Object.assign(Object.assign({}, (!isString(name) ||
-            (_proxyFormState.isValid && isValid !== _formState.isValid)
-            ? {}
-            : { name })), (_options.resolver ? { isValid } : {})), { errors: _formState.errors, isValidating: false }));
+        _subjects.state.next({
+            ...(!isString(name) ||
+                (_proxyFormState.isValid && isValid !== _formState.isValid)
+                ? {}
+                : { name }),
+            ...(_options.resolver ? { isValid } : {}),
+            errors: _formState.errors,
+            isValidating: false,
+        });
         options.shouldFocus &&
             !validationResult &&
             focusFieldBy(_fields, (key) => get(_formState.errors, key), name ? fieldNames : _names.mount);
         return validationResult;
     };
     const getValues = (fieldNames) => {
-        const values = Object.assign(Object.assign({}, _defaultValues), (_stateFlags.mount ? _formValues : {}));
+        const values = {
+            ..._defaultValues,
+            ...(_stateFlags.mount ? _formValues : {}),
+        };
         return isUndefined(fieldNames)
             ? values
             : isString(fieldNames)
@@ -1745,7 +1805,10 @@ function createFormControl(props = {}) {
     };
     const setError = (name, error, options) => {
         const ref = (get(_fields, name, { _f: {} })._f || {}).ref;
-        set(_formState.errors, name, Object.assign(Object.assign({}, error), { ref }));
+        set(_formState.errors, name, {
+            ...error,
+            ref,
+        });
         _subjects.state.next({
             name,
             errors: _formState.errors,
@@ -1776,14 +1839,22 @@ function createFormControl(props = {}) {
             }
         }
         _subjects.watch.next({});
-        _subjects.state.next(Object.assign(Object.assign({}, _formState), (!options.keepDirty ? {} : { isDirty: _getDirty() })));
+        _subjects.state.next({
+            ..._formState,
+            ...(!options.keepDirty ? {} : { isDirty: _getDirty() }),
+        });
         !options.keepIsValid && _updateValid();
     };
     const register = (name, options = {}) => {
         let field = get(_fields, name);
         const disabledIsDefined = isBoolean(options.disabled);
         set(_fields, name, {
-            _f: Object.assign(Object.assign(Object.assign({}, (field && field._f ? field._f : { ref: { name } })), { name, mount: true }), options),
+            _f: {
+                ...(field && field._f ? field._f : { ref: { name } }),
+                name,
+                mount: true,
+                ...options,
+            },
         });
         _names.mount.add(name);
         field
@@ -1792,17 +1863,22 @@ function createFormControl(props = {}) {
                     ? undefined
                     : get(_formValues, name, getFieldValue(field._f)))
             : updateValidAndValue(name, true, options.value);
-        return Object.assign(Object.assign(Object.assign({}, (disabledIsDefined ? { disabled: options.disabled } : {})), (_options.shouldUseNativeValidation
-            ? {
-                required: !!options.required,
-                min: getRuleValue(options.min),
-                max: getRuleValue(options.max),
-                minLength: getRuleValue(options.minLength),
-                maxLength: getRuleValue(options.maxLength),
-                pattern: getRuleValue(options.pattern),
-            }
-            : {})), { name,
-            onChange, onBlur: onChange, ref: (ref) => {
+        return {
+            ...(disabledIsDefined ? { disabled: options.disabled } : {}),
+            ...(_options.shouldUseNativeValidation
+                ? {
+                    required: !!options.required,
+                    min: getRuleValue(options.min),
+                    max: getRuleValue(options.max),
+                    minLength: getRuleValue(options.minLength),
+                    maxLength: getRuleValue(options.maxLength),
+                    pattern: getRuleValue(options.pattern),
+                }
+                : {}),
+            name,
+            onChange,
+            onBlur: onChange,
+            ref: (ref) => {
                 if (ref) {
                     register(name, options);
                     field = get(_fields, name);
@@ -1819,12 +1895,15 @@ function createFormControl(props = {}) {
                         return;
                     }
                     set(_fields, name, {
-                        _f: Object.assign(Object.assign({}, field._f), (radioOrCheckbox
-                            ? {
-                                refs: refs.concat(fieldRef).filter(live),
-                                ref: { type: fieldRef.type, name },
-                            }
-                            : { ref: fieldRef })),
+                        _f: {
+                            ...field._f,
+                            ...(radioOrCheckbox
+                                ? {
+                                    refs: [...refs.filter(live), fieldRef],
+                                    ref: { type: fieldRef.type, name },
+                                }
+                                : { ref: fieldRef }),
+                        },
                     });
                     updateValidAndValue(name, false, undefined, fieldRef);
                 }
@@ -1837,7 +1916,8 @@ function createFormControl(props = {}) {
                         !(isNameInFieldArray(_names.array, name) && _stateFlags.action) &&
                         _names.unMount.add(name);
                 }
-            } });
+            },
+        };
     };
     const handleSubmit = (onValid, onInvalid) => async (e) => {
         if (e) {
@@ -1868,7 +1948,7 @@ function createFormControl(props = {}) {
             }
             else {
                 if (onInvalid) {
-                    await onInvalid(Object.assign({}, _formState.errors), e);
+                    await onInvalid({ ..._formState.errors }, e);
                 }
                 _options.shouldFocusError &&
                     focusFieldBy(_fields, (key) => get(_formState.errors, key), _names.mount);
@@ -1911,7 +1991,7 @@ function createFormControl(props = {}) {
                 unset(_formState.errors, name);
                 _proxyFormState.isValid && _updateValid();
             }
-            _subjects.state.next(Object.assign({}, _formState));
+            _subjects.state.next({ ..._formState });
         }
     };
     const reset = (formValues, keepStateOptions = {}) => {
@@ -1979,7 +2059,10 @@ function createFormControl(props = {}) {
             dirtyFields: keepStateOptions.keepDirty
                 ? _formState.dirtyFields
                 : (keepStateOptions.keepDefaultValues && formValues
-                    ? Object.entries(formValues).reduce((previous, [key, value]) => (Object.assign(Object.assign({}, previous), { [key]: value !== get(_defaultValues, key) })), {})
+                    ? Object.entries(formValues).reduce((previous, [key, value]) => ({
+                        ...previous,
+                        [key]: value !== get(_defaultValues, key),
+                    }), {})
                     : {}),
             touchedFields: keepStateOptions.keepTouched
                 ? _formState.touchedFields
@@ -2041,7 +2124,10 @@ function createFormControl(props = {}) {
                 return _options;
             },
             set _options(value) {
-                _options = Object.assign(Object.assign({}, _options), value);
+                _options = {
+                    ..._options,
+                    ...value,
+                };
             },
         },
         trigger,
@@ -2107,13 +2193,19 @@ function useForm(props = {}) {
         _formControl.current.control._options = props;
     }
     else {
-        _formControl.current = Object.assign(Object.assign({}, createFormControl(props)), { formState });
+        _formControl.current = {
+            ...createFormControl(props),
+            formState,
+        };
     }
     const control = _formControl.current.control;
     const callback = react__WEBPACK_IMPORTED_MODULE_0__.useCallback((value) => {
         if (shouldRenderFormState(value, control._proxyFormState, true)) {
-            control._formState = Object.assign(Object.assign({}, control._formState), value);
-            updateFormState(Object.assign({}, control._formState));
+            control._formState = {
+                ...control._formState,
+                ...value,
+            };
+            updateFormState({ ...control._formState });
         }
     }, [control]);
     useSubscribe({
