@@ -112,7 +112,6 @@ struct LuckyDropHistoryView: View {
 }
 
 struct LuckyDropHistoryRow: View {
-    @State var loading = false
     private let indicatorSize = CGSize.init(width: 16, height: 16)
 
     @ObservedObject private var viewModel: LuckyDropHistoryTokenItemViewModel
@@ -219,13 +218,13 @@ struct LuckyDropHistoryRow: View {
     @ViewBuilder
     private var loadingText: some View {
         ZStack {
-            Text(loading ? "" : L10n.Plugins.Luckydrop.refund)
+            Text(viewModel.loading ? "" : viewModel.luckyDropState.title)
                 .font(.bh6)
                 .foregroundColor(.white)
                 .zIndex(1)
 
-            if loading {
-                LoadingIndicator(loading: loading, preferredSize: indicatorSize)
+            if viewModel.loading {
+                LoadingIndicator(loading: viewModel.loading, preferredSize: indicatorSize)
                     .frame(width: indicatorSize.width, height: indicatorSize.height)
                     .colorScheme(.dark)
                     .zIndex(2)
