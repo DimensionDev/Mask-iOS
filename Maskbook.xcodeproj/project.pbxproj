@@ -172,6 +172,9 @@
 		2A36E279275746750075E95B /* ChangePasswordStep1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A36E278275746740075E95B /* ChangePasswordStep1ViewController.swift */; };
 		2A4145F826D7880800708337 /* CryptoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4145F726D7880800708337 /* CryptoTests.swift */; };
 		2A4356CC280DEAC900FA9BF7 /* LuckyDropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4356CB280DEAC900FA9BF7 /* LuckyDropViewController.swift */; };
+		2A4356D0280E490D00FA9BF7 /* LuckyDropSuccessfullyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4356CF280E490D00FA9BF7 /* LuckyDropSuccessfullyView.swift */; };
+		2A4356D2280E4F0400FA9BF7 /* SheetViewAdapterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4356D1280E4F0400FA9BF7 /* SheetViewAdapterController.swift */; };
+		2A4356D6280E520200FA9BF7 /* LuckyDropSuccessfullyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4356D5280E520200FA9BF7 /* LuckyDropSuccessfullyViewModel.swift */; };
 		2A442EBD27EAB05A006BF60F /* EdgesConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A442EBC27EAB05A006BF60F /* EdgesConstraints.swift */; };
 		2A4B665528057191009877FC /* WalletBottomWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4B665428057191009877FC /* WalletBottomWidgetViewModel.swift */; };
 		2A5FAEA027CF7AD200D01250 /* GuideItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5FAE9D27CF7AD200D01250 /* GuideItemView.swift */; };
@@ -937,6 +940,9 @@
 		2A36E278275746740075E95B /* ChangePasswordStep1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordStep1ViewController.swift; sourceTree = "<group>"; };
 		2A4145F726D7880800708337 /* CryptoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTests.swift; sourceTree = "<group>"; };
 		2A4356CB280DEAC900FA9BF7 /* LuckyDropViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuckyDropViewController.swift; sourceTree = "<group>"; };
+		2A4356CF280E490D00FA9BF7 /* LuckyDropSuccessfullyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuckyDropSuccessfullyView.swift; sourceTree = "<group>"; };
+		2A4356D1280E4F0400FA9BF7 /* SheetViewAdapterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetViewAdapterController.swift; sourceTree = "<group>"; };
+		2A4356D5280E520200FA9BF7 /* LuckyDropSuccessfullyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuckyDropSuccessfullyViewModel.swift; sourceTree = "<group>"; };
 		2A442EBC27EAB05A006BF60F /* EdgesConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgesConstraints.swift; sourceTree = "<group>"; };
 		2A4B665428057191009877FC /* WalletBottomWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletBottomWidgetViewModel.swift; sourceTree = "<group>"; };
 		2A5FAE9D27CF7AD200D01250 /* GuideItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideItemView.swift; sourceTree = "<group>"; };
@@ -2258,6 +2264,7 @@
 				1FF403F72806BD2D00468F5C /* LuckyDropHistoryItemViewModel.swift */,
 				2AFC0A082807BB7A00BD77B5 /* RedPacketConfirmViewModel.swift */,
 				1F9CEA76280D1A13007386B1 /* FungibleTokenBuilder.swift */,
+				2A4356D5280E520200FA9BF7 /* LuckyDropSuccessfullyViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2300,6 +2307,7 @@
 				2AF6C7C627FEA52700A9EA4A /* TextLengthModifier.swift */,
 				2AF6C7C727FEA52700A9EA4A /* LuckyDropHistoryView.swift */,
 				2A68BF6E2806F02400C91C6F /* RedPacketConfirmView.swift */,
+				2A4356CF280E490D00FA9BF7 /* LuckyDropSuccessfullyView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3319,6 +3327,7 @@
 			isa = PBXGroup;
 			children = (
 				2AF885E4271EED7D0004565A /* SheetViewController.swift */,
+				2A4356D1280E4F0400FA9BF7 /* SheetViewAdapterController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4210,6 +4219,7 @@
 				2AF884C9271EE9300004565A /* PersonaManager+Backup.swift in Sources */,
 				2A6ABBA42720053B00CC3AED /* LocalBackupViewController.swift in Sources */,
 				2AF8854E271EE9310004565A /* AddressCheckViewModel.swift in Sources */,
+				2A4356D0280E490D00FA9BF7 /* LuckyDropSuccessfullyView.swift in Sources */,
 				2D6677F827688FBE00528F4D /* WalletConnectSession+Extension.swift in Sources */,
 				2AF8860D271EED7D0004565A /* ShadowWrapped.swift in Sources */,
 				5D069E0B27A16E2800054B4A /* TertiaryButton.swift in Sources */,
@@ -4347,6 +4357,7 @@
 				2A6ABB882720053B00CC3AED /* RestoreDataPickerController.swift in Sources */,
 				2AF88581271EE9310004565A /* WalletListAddWalletConnectCell.swift in Sources */,
 				2A6ABB942720053B00CC3AED /* RestoreFile.swift in Sources */,
+				2A4356D6280E520200FA9BF7 /* LuckyDropSuccessfullyViewModel.swift in Sources */,
 				2AF88564271EE9310004565A /* GasFeeStandardCollectionViewCell.swift in Sources */,
 				2AF6C7B127FEA37200A9EA4A /* PrimaryButton.swift in Sources */,
 				2A6ABB982720053B00CC3AED /* RemoteRestoreInfoView.swift in Sources */,
@@ -4439,6 +4450,7 @@
 				5D7F5A5127B6531E00A007C5 /* PersonaCreateHandler.swift in Sources */,
 				6F25327C27C63168000C0D27 /* NFTActionTableViewCell.swift in Sources */,
 				2AF884DB271EE9310004565A /* DataProviderViewModel.swift in Sources */,
+				2A4356D2280E4F0400FA9BF7 /* SheetViewAdapterController.swift in Sources */,
 				41E500122791CD3800A73117 /* PersonaRepository.swift in Sources */,
 				4156689527A68B770051E0E7 /* JsonWebKey.swift in Sources */,
 				2AF88551271EE9310004565A /* SendConfirmPopViewModel.swift in Sources */,
