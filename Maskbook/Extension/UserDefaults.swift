@@ -44,13 +44,6 @@ extension UserDefaults {
         UserDefaultSettings.shared.removeAll()
     }
 
-    // @available(*, deprecated, message: "use UserDefaultSettings.shared.didPresentWizard instead")
-    // Indicates whether or not the user has seen the onboarding. Default value is **false**
-    var didPresentWizard: Bool {
-        get { UserDefaultSettings.shared.didPresentWizard }
-        set { UserDefaultSettings.shared.didPresentWizard = newValue }
-    }
-
     // @available(*, deprecated, message: "use UserDefaultSettings.shared.defaultAccountAddress instead")
     var defaultAccountAddress: String? {
         UserDefaultSettings.shared.defaultAccountAddress
