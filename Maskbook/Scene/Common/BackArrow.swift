@@ -41,3 +41,33 @@ struct BackArrowViewPreview: PreviewProvider {
         .previewLayout(.fixed(width: 36, height: 36))
     }
 }
+
+struct CloseItemPreview: PreviewProvider {
+    static var previews: some View {
+        Group {
+            NavigationItemView(imageAsset: Asset.Plugins.LuckyDrop.Icon.close)
+                .frame(width: 36, height: 36)
+                .colorScheme(.dark)
+
+            NavigationItemView(imageAsset: Asset.Plugins.LuckyDrop.Icon.close)
+                .frame(width: 36, height: 36)
+        }
+        .background(Color.gray)
+        .previewLayout(.fixed(width: 36, height: 36))
+    }
+}
+
+struct HistoryItemPreview: PreviewProvider {
+    static var previews: some View {
+        Group {
+            NavigationItemView(imageAsset: Asset.Plugins.LuckyDrop.Icon.history)
+                .frame(width: 36, height: 36)
+                .colorScheme(.dark)
+
+            NavigationItemView(imageAsset: Asset.Plugins.LuckyDrop.Icon.history)
+                .frame(width: 36, height: 36)
+        }
+        .background(Color.gray)
+        .previewLayout(.fixed(width: 36, height: 36))
+    }
+}

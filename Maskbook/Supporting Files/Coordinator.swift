@@ -770,7 +770,10 @@ extension Coordinator {
             return MoveBackupDataViewController()
             
         case .luckyDrop:
-            return UIHostingController(rootView: LuckyDropView().withResponderChainForCurrentWindow())
+            let vc = LuckyDropViewController()
+            let nav = NavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .overFullScreen
+            return nav
             
         case .luckyDropConfirm(
             let token,

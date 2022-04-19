@@ -220,6 +220,6 @@ extension LuckyDropTokens {
 
 struct LuckyDropTokens_Previews: PreviewProvider {
     static var previews: some View {
-        LuckyDropView()
+        LuckyDropView(viewModel: LuckyDropViewModel())
     }
 }

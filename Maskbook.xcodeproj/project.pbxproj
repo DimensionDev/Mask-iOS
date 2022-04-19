@@ -171,6 +171,7 @@
 		2A36E2772757243C0075E95B /* ChangeBackupPasswordStep2ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A36E2752757243C0075E95B /* ChangeBackupPasswordStep2ViewModel.swift */; };
 		2A36E279275746750075E95B /* ChangePasswordStep1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A36E278275746740075E95B /* ChangePasswordStep1ViewController.swift */; };
 		2A4145F826D7880800708337 /* CryptoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4145F726D7880800708337 /* CryptoTests.swift */; };
+		2A4356CC280DEAC900FA9BF7 /* LuckyDropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4356CB280DEAC900FA9BF7 /* LuckyDropViewController.swift */; };
 		2A442EBD27EAB05A006BF60F /* EdgesConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A442EBC27EAB05A006BF60F /* EdgesConstraints.swift */; };
 		2A4B665528057191009877FC /* WalletBottomWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4B665428057191009877FC /* WalletBottomWidgetViewModel.swift */; };
 		2A5FAEA027CF7AD200D01250 /* GuideItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5FAE9D27CF7AD200D01250 /* GuideItemView.swift */; };
@@ -243,7 +244,6 @@
 		2A7310082685B83200C5354A /* PasswordFormItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7310072685B83200C5354A /* PasswordFormItemView.swift */; };
 		2A852ADF2721775F00EE7EEC /* MaskSocialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A852ADE2721775F00EE7EEC /* MaskSocialViewModel.swift */; };
 		2A9EF067275A053D00AA66A2 /* KeyboardHandlerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9EF066275A053D00AA66A2 /* KeyboardHandlerViewController.swift */; };
-		2AA64909280D848C00D38F09 /* ResponderChain in Frameworks */ = {isa = PBXBuildFile; productRef = 2AA64908280D848C00D38F09 /* ResponderChain */; };
 		2AA6490B280D9FAE00D38F09 /* PluginStorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA6490A280D9FAE00D38F09 /* PluginStorageRepository.swift */; };
 		2AA64916280DA76400D38F09 /* PluginStorage+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA64914280DA76400D38F09 /* PluginStorage+CoreDataClass.swift */; };
 		2AA64917280DA76400D38F09 /* PluginStorage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA64915280DA76400D38F09 /* PluginStorage+CoreDataProperties.swift */; };
@@ -936,6 +936,7 @@
 		2A36E2752757243C0075E95B /* ChangeBackupPasswordStep2ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeBackupPasswordStep2ViewModel.swift; sourceTree = "<group>"; };
 		2A36E278275746740075E95B /* ChangePasswordStep1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordStep1ViewController.swift; sourceTree = "<group>"; };
 		2A4145F726D7880800708337 /* CryptoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTests.swift; sourceTree = "<group>"; };
+		2A4356CB280DEAC900FA9BF7 /* LuckyDropViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuckyDropViewController.swift; sourceTree = "<group>"; };
 		2A442EBC27EAB05A006BF60F /* EdgesConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgesConstraints.swift; sourceTree = "<group>"; };
 		2A4B665428057191009877FC /* WalletBottomWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletBottomWidgetViewModel.swift; sourceTree = "<group>"; };
 		2A5FAE9D27CF7AD200D01250 /* GuideItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideItemView.swift; sourceTree = "<group>"; };
@@ -1506,7 +1507,6 @@
 				0FACA3B52671F31E00CB8AC0 /* CoreDataStack.framework in Frameworks */,
 				2937D922CA95E5739C9BF27F /* Pods_Maskbook.framework in Frameworks */,
 				1FF404732809653F00468F5C /* PullRefresh in Frameworks */,
-				2AA64909280D848C00D38F09 /* ResponderChain in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2268,6 +2268,7 @@
 				2AF6C7B727FEA52700A9EA4A /* RedPacketShareSheet.swift */,
 				1F48D38627FEEF3100A51B89 /* LuckDropHistoryController.swift */,
 				2AFC0A062806F52600BD77B5 /* LuckyDropConfirmViewController.swift */,
+				2A4356CB280DEAC900FA9BF7 /* LuckyDropViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3862,7 +3863,6 @@
 			name = Maskbook;
 			packageProductDependencies = (
 				1FF404722809653F00468F5C /* PullRefresh */,
-				2AA64908280D848C00D38F09 /* ResponderChain */,
 			);
 			productName = Maskbook;
 			productReference = DBAAF49122C35A7100017594 /* Maskbook.app */;
@@ -3935,7 +3935,6 @@
 			mainGroup = DBAAF48822C35A7100017594;
 			packageReferences = (
 				1FF404712809653F00468F5C /* XCRemoteSwiftPackageReference "Refresh" */,
-				2AA64907280D848C00D38F09 /* XCRemoteSwiftPackageReference "ResponderChain" */,
 			);
 			productRefGroup = DBAAF49222C35A7100017594 /* Products */;
 			projectDirPath = "";
@@ -4716,6 +4715,7 @@
 				2AF8851A271EE9310004565A /* SecondaryButton.swift in Sources */,
 				2AF88515271EE9310004565A /* WalletDetailTableViewCell.swift in Sources */,
 				2AF88587271EE9310004565A /* MainTabBarController.swift in Sources */,
+				2A4356CC280DEAC900FA9BF7 /* LuckyDropViewController.swift in Sources */,
 				2AF8854D271EE9310004565A /* GasFeeViewModel.swift in Sources */,
 				2AF6C7C927FEA52700A9EA4A /* LuckyDropViewModel.swift in Sources */,
 				2A6ABB852720053B00CC3AED /* RemoteRestoreVerifyViewModel.swift in Sources */,
@@ -5662,14 +5662,6 @@
 				minimumVersion = 0.1.5;
 			};
 		};
-		2AA64907280D848C00D38F09 /* XCRemoteSwiftPackageReference "ResponderChain" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Amzd/ResponderChain.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -5677,11 +5669,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1FF404712809653F00468F5C /* XCRemoteSwiftPackageReference "Refresh" */;
 			productName = PullRefresh;
-		};
-		2AA64908280D848C00D38F09 /* ResponderChain */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2AA64907280D848C00D38F09 /* XCRemoteSwiftPackageReference "ResponderChain" */;
-			productName = ResponderChain;
 		};
 /* End XCSwiftPackageProductDependency section */
 

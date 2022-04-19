@@ -12,13 +12,11 @@ import SwiftUI
 
 struct LuckyDropView: View {
     @EnvironmentObject var chain: ResponderChain
-
-    @InjectedProvider(\.mainCoordinator)
-    private var mainCoordinator
-    
+    @ObservedObject var viewModel = LuckyDropViewModel()
     @State var currentHeight: CGFloat = 0
     @State var safeArea: EdgeInsets = EdgeInsets()
-    @StateObject var viewModel = LuckyDropViewModel()
+    @InjectedProvider(\.mainCoordinator)
+    private var mainCoordinator
     let idOfBottomViewToScroll = "idOfBottomViewToScroll"
     
     var body: some View {
@@ -124,6 +122,6 @@ struct LuckyDropView: View {
 
 struct LuckyDropView_Previews: PreviewProvider {
     static var previews: some View {
-        LuckyDropView()
+        LuckyDropView(viewModel: LuckyDropViewModel())
     }
 }

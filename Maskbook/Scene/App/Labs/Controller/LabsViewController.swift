@@ -41,7 +41,7 @@ final class LabsViewController: BaseViewController {
                 guard let self = self else { return }
                 switch plugin {
                 case .transaction: self.handleTransak()
-                case .luckyDrop: self.coordinator.present(scene: .luckyDrop, transition: .detail(animated: true))
+                case .luckyDrop: self.coordinator.present(scene: .luckyDrop, transition: .modal(animated: true))
                 default: break
                 }
             }

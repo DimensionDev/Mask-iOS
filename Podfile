@@ -60,6 +60,7 @@ target 'Maskbook' do
   pod 'CombineExt'
   pod 'SwiftMsgPack', :git => 'https://github.com/malcommac/SwiftMsgPack.git', :branch => 'develop'
   pod 'WalletConnectSwift', :git => 'https://github.com/DimensionDev/WalletConnectSwift.git'
+  pod 'ResponderChain', '~> 1.1'
   
   pod 'Firebase/Analytics'
   
