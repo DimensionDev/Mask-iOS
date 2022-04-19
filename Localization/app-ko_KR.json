@@ -185,7 +185,8 @@
             "move_data_now": "",
             "remind_me_later": "",
             "go_settings": "",
-            "dont_allow": ""
+            "dont_allow": "",
+            "speed_up": ""
         },
         "toast": {
             "saved": "",
@@ -613,7 +614,9 @@
             "walletconnect_switch_network_alert": ""
         },
         "transaction_history": {
-            "no_transaction": ""
+            "no_transaction": "",
+            "status_pendind": "",
+            "status_failed": ""
         },
         "wallet_receive": {
             "btn_share": "공유",
