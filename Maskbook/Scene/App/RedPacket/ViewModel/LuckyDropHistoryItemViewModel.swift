@@ -27,77 +27,33 @@ final class LuckyDropHistoryTokenItemViewModel: ObservableObject {
 
     @InjectedProvider(\.walletAssetManager)
     private var walletAssetsManager
+    
+    @Published var luckyDropState: RedPacketStatus?
+    
+    @Published var loading: Bool = false
 
     init(luckyDrop: RedPacketPayload, checkAvailbility: CheckAvailabilityResult?) {
         self.luckyDrop = luckyDrop
         self.checkAvailabilityResult = checkAvailbility
+        checkRedPacketStatus()
     }
 
-    private func checkRedPacketStatus() {
-        guard let checkAbility = self.checkAvailabilityResult else {
-            // TODO: return invalid default status
-            return
-        }
-
-        let availibily = RedPacketAvailability(
-            tokenAddress: checkAbility.address?.address ?? "",
-            balance: checkAbility.balance.flatMap { String($0, radix: 10) } ?? "",
-            total: checkAbility.balance.flatMap { String($0, radix: 10) } ?? "",
-            claimed: checkAbility.claimed.flatMap { String($0, radix: 10) } ?? "",
-            expired: checkAbility.expired ?? true,
-            claimedAmount: checkAbility.claimedAmount.flatMap { String($0, radix: 10) } ?? ""
-        )
-
-        let interactivePayload = RedPacketInteractivePayload(
-            redpacketPayload: .either(luckyDrop),
-            availability: availibily,
-            postLink: .either("")
-        )
-
-        let network = settings.network
-        let address = settings.defaultAccountAddress ?? ""
-        let status = interactivePayload.parseStatus(accountAddress: address, network: network)
-
-        let state: RedPackedStatus = {
-//            {canSend
-//                                                    ? t('plugin_red_packet_history_send')
-//                                                    : refundState.type === TransactionStateType.HASH
-//                                                    ? t('plugin_red_packet_refunding')
-//                                                    : listOfStatus.includes(RedPacketStatus.empty)
-//                                                    ? t('plugin_red_packet_empty')
-//                                                    : t('plugin_red_packet_refund')}
-
-            if status.canSend {
-                return .send
-            } else {
-                // refund state == .HASH
-                if false {
-                    return .refunding
-                } else {
-                    if status.isEmpty {
-                        return .empty
-                    } else {
-                        return .refunded
-                    }
-                }
-            }
-
-            return .initial
-        }()
-        
-    }
-
-    private(set) lazy var createdDate: String = {
+    private(set) lazy var createdDateInfo: String = {
         guard let time = luckyDrop.basic?.creationTime else {
             return ""
         }
 
         let date = Date(timeIntervalSince1970: time)
-
-        guard let timeZone = TimeZone.current.abbreviation(for: date) else {
-            return formatter.string(from: date)
+        return formatter.string(from: date)
+    }()
+    
+    private(set) lazy var refundTip: String = {
+        guard let time = luckyDrop.basic?.creationTime, let duration = luckyDrop.basic?.duration else {
+            return ""
         }
-        return "\(formatter.string(from: date))"
+        
+        let date = Date(timeIntervalSince1970: time + duration)
+        return L10n.Plugins.Luckydrop.refundTip(formatter.string(from: date))
     }()
 
     var claimedDetail: String {
@@ -132,13 +88,112 @@ final class LuckyDropHistoryTokenItemViewModel: ObservableObject {
 }
 
 extension LuckyDropHistoryTokenItemViewModel {
-    enum RedPackedStatus {
-        case send
+    private func checkRedPacketStatus() {
+        guard let checkAbility = self.checkAvailabilityResult else {
+            return
+        }
+
+        let availibily = RedPacketAvailability(
+            tokenAddress: checkAbility.address?.address ?? "",
+            balance: checkAbility.balance.flatMap { String($0, radix: 10) } ?? "",
+            total: checkAbility.balance.flatMap { String($0, radix: 10) } ?? "",
+            claimed: checkAbility.claimed.flatMap { String($0, radix: 10) } ?? "",
+            expired: checkAbility.expired ?? true,
+            claimedAmount: checkAbility.claimedAmount.flatMap { String($0, radix: 10) } ?? ""
+        )
+
+        let interactivePayload = RedPacketInteractivePayload(
+            redpacketPayload: .either(luckyDrop),
+            availability: availibily,
+            postLink: .either("")
+        )
+
+        let network = settings.network
+        let address = settings.defaultAccountAddress ?? ""
+        let status = interactivePayload.parseStatus(accountAddress: address, network: network)
+
+        
+        let state: RedPacketStatus? = {
+            if status.isEmpty {
+                return .empty
+            }
+            
+            if status.isRefunded {
+                return .refunded
+            }
+            
+            if status.isExpired {
+                if status.canRefund {
+                    // refundable
+                    return .refunable
+                }
+                
+                return nil
+            } else {
+                return .sharable
+            }
+        }()
+        
+        self.luckyDropState = state
+    }
+    
+    func refund() {
+        guard let rid = luckyDrop.basic?.rpid else {
+            return
+        }
+        
+        loading.toggle()
+        
+        Task {
+            let value = await ABI.happyRedPacketV4.refund(rid: rid)
+            if value?.isEmpty ?? true {
+                luckyDropState = .refunable
+            } else {
+                luckyDropState = .refunded
+            }
+            loading.toggle()
+        }
+    }
+    
+    func share() {
+        // TODO: share
+    }
+}
+
+extension LuckyDropHistoryTokenItemViewModel {
+    enum RedPacketStatus {
         case refunded
+        case refunable
         case empty
         case sharable
-        case refunding
-        case initial
+    }
+}
+
+extension Optional where Wrapped == LuckyDropHistoryTokenItemViewModel.RedPacketStatus {
+    var enabled: Bool {
+        switch self {
+        case .empty, .refunded: return false
+        case .none: return false
+        default: return true
+        }
+    }
+    
+    var showActionButton: Bool {
+        self != .none
+    }
+    
+    var showRefundTip: Bool {
+        self == .sharable
+    }
+    
+    var title: String {
+        switch self {
+        case .refunded: return L10n.Scene.OpenRedPackage.refunded
+        case .refunable: return L10n.Scene.OpenRedPackage.refund
+        case .empty: return L10n.Scene.OpenRedPackage.empty
+        case .sharable: return L10n.Plugins.Luckydrop.Confirm.share
+        default: return ""
+        }
     }
 }
 

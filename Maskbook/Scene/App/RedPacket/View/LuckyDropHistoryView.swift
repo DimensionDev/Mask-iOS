@@ -101,7 +101,6 @@ struct LuckyDropHistoryView: View {
         case .token:
             ForEach(viewModel.tokenPayloads, id: \.id) { item in
                 LuckyDropHistoryRow(item: item)
-//                    .redacted(reason: .placeholder)
             }
         case .nft:
             VStack {
@@ -114,9 +113,6 @@ struct LuckyDropHistoryView: View {
 
 struct LuckyDropHistoryRow: View {
     @State var loading = false
-    
-    @State private var image: Image?
-
     private let indicatorSize = CGSize.init(width: 16, height: 16)
 
     @ObservedObject private var viewModel: LuckyDropHistoryTokenItemViewModel
@@ -143,25 +139,31 @@ struct LuckyDropHistoryRow: View {
                     .foregroundColor(Asset.Colors.Text.dark.asColor())
                     .horizontallyFilled()
 
-                    Text(viewModel.createdDate + " \(L10n.Scene.OpenRedPackage.created)")
+                    Text(viewModel.createdDateInfo + " \(L10n.Scene.OpenRedPackage.created)")
                         .font(FontStyles.rh7.font)
                         .foregroundColor(Asset.Colors.Text.dark.asColor())
                 }
-
-                Button {
-                    // TODO: refund or share
-                    loading.toggle()
-                } label: {
-                    loadingText
-                    .frame(width: 84, height: 32)
+                
+                if viewModel.luckyDropState.showActionButton {
+                    Button {
+                        switch viewModel.luckyDropState {
+                        case .sharable: viewModel.share()
+                        case .refunable: viewModel.refund()
+                        default: break
+                        }
+                        
+                    } label: {
+                        loadingText
+                        .frame(width: 84, height: 32)
+                    }
+                    .disabled(!viewModel.luckyDropState.enabled || viewModel.loading)
+                    .background(
+                        viewModel.luckyDropState.enabled
+                        ? Asset.Colors.Background.blue.asColor()
+                        : Asset.Colors.Background.disable.asColor()
+                    )
+                    .cornerRadius(8)
                 }
-                .disabled(false)
-                .background(
-                    true
-                    ? Asset.Colors.Background.blue.asColor()
-                    : Asset.Colors.Background.disable.asColor()
-                )
-                .cornerRadius(8)
             }
 
             VStack(alignment: .leading, spacing: 3) {
@@ -195,21 +197,18 @@ struct LuckyDropHistoryRow: View {
                         URL(string: viewModel.luckyDrop.payload?.token?.logoURL ?? ""),
                         cacheKey: viewModel.luckyDrop.payload?.token?.logoURL ?? ""
                     )
-//                    .setProcessors([])
+                    .cancelOnDisappear(true)
                     .resizable()
-//                    .onSuccess { result in
-//                        self.image = Image(uiImage: result.image)
-//                    }
                     .cornerRadius(10)
-//                    .overlay(
-//                        image?
-//                            .resizable()
-//                            .frame(width: 20, height: 20)
-//                            .clipShape(Circle())
-//                    )
                     .frame(width: 20, height: 20)
                 }
-//                .horizontallyFilled()
+            }
+            
+            if viewModel.luckyDropState.showRefundTip {
+                Text(viewModel.refundTip)
+                    .foregroundColor(Asset.Colors.Public.blue)
+                    .font(.mh7)
+                    .lineLimit(1)
             }
         }
         .padding(.all, 12)
@@ -232,27 +231,5 @@ struct LuckyDropHistoryRow: View {
                     .zIndex(2)
             }
         }
-    }
-}
-
-struct LuckyDropHistoryView_Previews: PreviewProvider {
-    static var previews: some View {
-        //        LuckyDropHistoryRow(
-        //            item: .init(
-        //                checkAvailability: nil,
-        //                payload: .init(
-        //                    basic: .mock,
-        //                    payload: .mock
-        //                )
-        //            )
-        //        )
-        LoadingIndicator(loading: true, preferredSize: .init(width: 32, height: 32))
-            .frame(width: 32, height: 32)
-        //        VStack {
-        //            Asset.Images.Scene.Empty.emptyBox.asImage()
-        //            Text(L10n.Common.empty)
-        //                .font(.rh6)
-        //                .foregroundColor(Asset.Colors.Text.light)
-        //        }
     }
 }

@@ -35,16 +35,12 @@ extension ABIContract where Functions.RawValue == String {
 }
 
 extension ABIContract where Events.RawValue == String {
-    func parse(eventlog: EventLog, filter: Events) -> [String: Any] {
+    func parse(eventlog: EventLog) -> [String: Any] {
         guard let contract = self.ethcontract else {
             return [:]
         }
 
         let result = contract.parseEvent(eventlog)
-
-        guard result.eventName == filter.rawValue else {
-            return [:]
-        }
         return result.eventData ?? [:]
     }
 }
@@ -119,4 +115,14 @@ extension ABIContract {
 
 enum ABI {
     static let happyRedPacketV4 = HappyRedPacketV4()
+}
+
+enum HappyRedPacketKey: InjectValueKey {
+    static var defaultInjectValue = ABI.happyRedPacketV4
+}
+
+extension InjectValues {
+    var happyRedPacket: HappyRedPacketV4 {
+        Self[HappyRedPacketKey.self]
+    }
 }

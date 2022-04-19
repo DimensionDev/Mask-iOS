@@ -45,6 +45,11 @@ final class LuckyDropHistoryViewModel: ObservableObject {
         self.apiKey = usersettings.network.apiKey
     }
     
+    deinit {
+        self.nftHistoryTask?.cancel()
+        self.tokenHistoryTask?.cancel()
+    }
+    
     func checkPullState(_ pullState: InterActionState) {
         defer { self.pullState  = pullState }
         
@@ -57,6 +62,12 @@ final class LuckyDropHistoryViewModel: ObservableObject {
             switch self.selection {
             case .token: self.tokenHistoryTask?.cancel()
             case .nft: self.nftHistoryTask?.cancel()
+            }
+            
+            if payloadIsEmpty(for: selection) {
+                state = .empty
+            } else {
+                state = .idle
             }
         }
     }
@@ -127,6 +138,8 @@ final class LuckyDropHistoryViewModel: ObservableObject {
                 }
             }
             
+            self.tokenHistoryTask = nil
+            
             guard selection == .token else { return }
             state = tokenPayloads.isEmpty ? .empty : .idle
         } catch  {
@@ -144,30 +157,6 @@ final class LuckyDropHistoryViewModel: ObservableObject {
         } else {
             state = .idle
         }
-//        switch error {
-//        case _ as CancellationError:
-//            // cancel
-//
-//            if payloadIsEmpty(for: selection) {
-//                state = .empty
-//            } else {
-//                state = .idle
-//            }
-//
-//        case let e as NSError:
-//            guard e.code == -999 else {
-//                fallthrough
-//            }
-//
-//            // cancel
-//            if payloadIsEmpty(for: selection) {
-//                state = .empty
-//            } else {
-//                state = .idle
-//            }
-//
-//        default: break
-//        }
     }
 
     private func loadNFTHistory() async {

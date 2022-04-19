@@ -452,8 +452,8 @@ internal enum Asset {
   internal enum Plugins {
     internal enum LuckyDrop {
       internal enum Icon {
-        internal static let close = ImageAsset(name: "Plugins/LuckyDrop/Icon/close")
-        internal static let history = ImageAsset(name: "Plugins/LuckyDrop/Icon/history")
+        internal static let close = ImageAsset(name: "Plugins/LuckyDrop/icon/close")
+        internal static let history = ImageAsset(name: "Plugins/LuckyDrop/icon/history")
       }
       internal static let lock = ImageAsset(name: "Plugins/LuckyDrop/lock")
       internal static let redPacket = ImageAsset(name: "Plugins/LuckyDrop/redPacket")

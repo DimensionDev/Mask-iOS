@@ -159,6 +159,7 @@ access your camera";
 "Plugins.Luckydrop.PluginRedPacketBestWishes" = "Best Wishes!";
 "Plugins.Luckydrop.Quantity" = "Quantity";
 "Plugins.Luckydrop.Refund" = "Refund";
+"Plugins.Luckydrop.RefundTip" = "Refund the unclaimed after %@";
 "Plugins.Luckydrop.Select-Social-Description" = "Select the Social account to share the Lucky Drop.";
 "Plugins.Luckydrop.Select-Social-Title" = "Select Social Account";
 "Plugins.Luckydrop.Share-Connect-Persona" = "Connect your Persona to social media before you share your lucky Drop.";

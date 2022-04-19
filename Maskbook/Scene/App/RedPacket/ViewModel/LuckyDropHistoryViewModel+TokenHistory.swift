@@ -25,13 +25,13 @@ extension LuckyDropHistoryViewModel {
         guard let baseURL = URL(string: urlString) else {
             return []
         }
-
-        // get endBlock
-        let block = try await provider.blockNumber()
         let startBlock = await self.startBlock
         let apiKey = await self.apiKey
         let networkId = await self.usersettings.network.networkId
-
+        let contract = self.contract
+        
+        // get endBlock
+        let block = try await provider.blockNumber()
         // build request
         guard let urlComponents = baseURL.buildURLComponents(apiKey: apiKey, address: address, startBlock: startBlock, endBlock: block),
               let url = urlComponents.url else {
@@ -73,7 +73,7 @@ extension LuckyDropHistoryViewModel {
             of: TokenPayload?.self,
             returning: [TokenPayload].self
         ) { taskGroup in
-            for payload in payloads[0 ..< 6] {
+            for payload in payloads {
                 _ = taskGroup.addTaskUnlessCancelled {
                     // mark @MaskGroupActor for the closure to make it works
                     async let task = Task.detached { @MaskGroupActor () -> TokenPayload? in
@@ -100,7 +100,7 @@ extension LuckyDropHistoryViewModel {
                             return nil
                         }
 
-                        let json = self.contract.parse(eventlog: log, filter: .creationSuccess)
+                        let json = contract.parse(eventlog: log)
                         guard let eventParam = SuccessEvent(json: json) else {
                             return nil
                         }
@@ -109,7 +109,7 @@ extension LuckyDropHistoryViewModel {
                         payload.basic?.creationTime = eventParam.creation_time.asDouble() ?? 0
 
                         try Task.checkCancellation()
-                        let checkAvailability = await self.contract.checkAvailability(redPackageId: eventParam.id)
+                        let checkAvailability = await contract.checkAvailability(redPackageId: eventParam.id)
                         payload.payload?.claimers = checkAvailability?.claimed
                             .flatMap { $0.asInt() }
                             .map { (0..<$0).map { _ in RedPacket.Claimer.init(address: "", name: "") } }
@@ -128,7 +128,8 @@ extension LuckyDropHistoryViewModel {
 
             var results: [TokenPayload] = []
             do  {
-                while let result = try await taskGroup.next() {
+                // use for loop to keep order
+                for try await result in taskGroup {
                     if let value = result {
                         results.append(value)
                     }

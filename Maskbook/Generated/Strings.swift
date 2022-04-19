@@ -662,6 +662,10 @@ enum L10n {
       static var refund: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Refund")
       }
+      /// Refund the unclaimed after %@
+      static func refundTip(_ p1: String) -> String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.RefundTip", p1)
+      }
       /// Select the Social account to share the Lucky Drop.
       static var selectSocialDescription: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Select-Social-Description")

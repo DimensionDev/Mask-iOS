@@ -81,7 +81,7 @@ class Predicate<S> : NSCompoundPredicate {
     }
 }
 
-func ==<S, E: Equatable>(lhs: KeyPath<S,E>, rhs: E) -> Predicate<S> {
+func == <S, E: Equatable>(lhs: KeyPath<S,E>, rhs: E) -> Predicate<S> {
     let predicate = NSComparisonPredicate(
             leftExpression: NSExpression(forKeyPath: lhs),
             rightExpression: NSExpression(forConstantValue: rhs),
