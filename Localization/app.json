@@ -145,6 +145,10 @@
             "no_local_wallet_for_walletconnect": {
                 "title": "Unable to connect",
                 "description": "Unable to connect to walletConnect as there is no local wallet."
+            },
+            "token_balance":{
+                "description": "You have 0 %s in your account to pay for transaction fees. Buy some %s or deposit from another account.",
+                "btn_confirm": "Buy %s" 
             }
         },
         "controls": {

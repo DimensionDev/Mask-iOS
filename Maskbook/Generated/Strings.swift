@@ -417,6 +417,17 @@ enum L10n {
         }
       }
 
+      enum TokenBalance {
+        /// Buy %@
+        static func btnConfirm(_ p1: String) -> String {
+          return L10n.tr("Localizable", "Common.Alert.TokenBalance.BtnConfirm", p1)
+        }
+        /// You have 0 %@ in your account to pay for transaction fees. Buy some %@ or deposit from another account.
+        static func description(_ p1: String, _ p2: String) -> String {
+          return L10n.tr("Localizable", "Common.Alert.TokenBalance.Description", p1, p2)
+        }
+      }
+
       enum WalletCreateSuccess {
         /// In order to protect your funds against hackers and thieves, store this recovery phrase in a safe and secure place.
         static var description: String {
