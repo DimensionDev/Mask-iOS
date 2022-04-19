@@ -22,7 +22,7 @@ public struct TransactionHistory: Hashable {
              deposit, withdraw, borrow, repay, stake, unstake, claim, unknown, swap, contractInteraction, transfer
     }
     
-    public enum TransactionStatus: String, Decodable {
+    public enum TransactionStatus: String, Codable {
         case confirmed, failed, pending
     }
     

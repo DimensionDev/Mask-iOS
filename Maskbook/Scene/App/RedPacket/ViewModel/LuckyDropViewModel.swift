@@ -348,11 +348,12 @@ class LuckyDropViewModel: NSObject, ObservableObject {
                 password: privateKey.toHexString().addHexPrefix()
             )
             await MainActor.run {
-                log.debug("\(tx ?? "It's failed to create redPacket")", source: "lucky drop")
-                // TODO: for hugo: send tx to be observed
                 // Show the loading animation and reset the `ComfirmButton`'s state.
                 buttonType = .requestAllowance
                 checkParam()
+                if let tx = tx {
+                    walletBottomViewModel.observeTransaction(txHash: tx)
+                }
                 
                 updateRedPacket(tx: tx, fromAddress: fromAddress)
             }

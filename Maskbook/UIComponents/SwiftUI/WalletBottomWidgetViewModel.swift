@@ -13,8 +13,19 @@ import SwiftUI
 
 class WalletBottomWidgetViewModel: ObservableObject {
     @Published var token: Token? = nil
-    @Published var state: TransactionState = .normal
     @Published var isLocked: Bool = true
+    @Published var txList = [String: TransactionStatus]()
+    
+    var state: TransactionState {
+        guard let status = txList[address]?.status else {
+            return .normal
+        }
+        switch status {
+        case .confirmed: return .success
+        case .failed: return .failed
+        case .pending: return .pending
+        }
+    }
     
     var displayBalance: String {
         guard let token = token else { return "" }
@@ -32,8 +43,8 @@ class WalletBottomWidgetViewModel: ObservableObject {
     }
     
     var transactionURL: URL? {
-        guard let transactionId = self.transactionId else { return nil }
-        guard let url = maskUserDefaults.network.getScanUrl(hash: transactionId) else {
+        guard let txHash = self.txHash else { return nil }
+        guard let url = maskUserDefaults.network.getScanUrl(hash: txHash) else {
             return nil
         }
         return url
@@ -58,7 +69,9 @@ class WalletBottomWidgetViewModel: ObservableObject {
     
     private var disposeBag = Set<AnyCancellable>()
     
-    private var transactionId: String?
+    private var txHash: String? {
+        txList[address]?.txHash
+    }
     
     private var address: String = ""
     
@@ -80,13 +93,36 @@ class WalletBottomWidgetViewModel: ObservableObject {
         }
         .assign(to: \.isLocked, on: self)
         .store(in: &disposeBag)
+        
+        PendTransactionManager.shared.pendingTxFinishEvents.asDriver().sink { _ in
+        } receiveValue: { [weak self] transcation, status in
+            guard let self = self else {
+                return
+            }
+            guard self.address == transcation.address, transcation.txHash == self.txList[self.address]?.txHash else {
+                return
+            }
+            guard var state = self.txList[self.address] else {
+                return
+            }
+            withAnimation {
+                state.status = status
+                self.txList[self.address] = state
+                switch status {
+                case .failed, .confirmed:
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                        self.txList.removeValue(forKey: transcation.address)
+                    }
+                    
+                default: break
+                }
+            }
+        }
+        .store(in: &disposeBag)
     }
     
-    func observeTransaction(id: String) {
-        state = .pending
-        transactionId = id
-        
-        // TODO: request infomation of a transaction
+    func observeTransaction(txHash: String) {
+        txList[address] = TransactionStatus(txHash: txHash, status: .pending)
     }
     
     func switchAccount() {
@@ -145,5 +181,10 @@ extension WalletBottomWidgetViewModel {
     enum DetailType {
         case balance(String)
         case transactionURL(URL?)
+    }
+    
+    struct TransactionStatus: Codable {
+        let txHash: String
+        var status: TransactionHistory.TransactionStatus
     }
 }
