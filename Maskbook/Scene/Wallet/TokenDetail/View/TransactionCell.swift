@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import UStack
+import BigInt
+
 
 extension ZerionAPIModel.Transaction.TransactionType {
     var displayTitle: String {
@@ -63,6 +66,8 @@ extension TransactionHistory.TransactionType {
 }
 
 class TransactionCell: UITableViewCell {
+
+    private var txHash: String?
     private var typeIconView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -75,7 +80,60 @@ class TransactionCell: UITableViewCell {
         label.textColor = Asset.Colors.Text.dark.color
         label.font = FontStyles.BH5
         label.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            label.heightAnchor.constraint(equalToConstant: 24)
+        ])
         return label
+    }()
+    
+    private var statusLabel: UILabel = {
+        let label = UILabel()
+        label.font = FontStyles.RH6
+        label.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            label.heightAnchor.constraint(equalToConstant: 24)
+        ])
+        return label
+    }()
+        
+    private lazy var resendStackView = HStackView (spacing: 8) {
+        speedUpButton
+        cancelButton
+    }.cv.apply {
+        $0.isHidden = true
+        NSLayoutConstraint.activate([
+            $0.heightAnchor.constraint(equalToConstant: 28)
+        ])
+    }
+    
+    private lazy var contentStackView = VStackView (spacing: 6, alignment: .leading){
+        HStackView(spacing: 6){
+            typeNameLabel
+            statusLabel
+        }
+        resendStackView
+    }
+    
+    lazy var cancelButton: SecondaryButton = {
+        let btn = SecondaryButton(title: L10n.Common.Controls.cancel)
+        btn.titleLabel?.font = FontStyles.RH10
+        btn.addTarget(self, action: #selector(cancelClicked(_:)), for: .touchUpInside)
+        NSLayoutConstraint.activate([
+            btn.heightAnchor.constraint(equalToConstant: 28),
+            btn.widthAnchor.constraint(equalToConstant: 62)
+        ])
+        return btn
+    }()
+    
+    lazy var speedUpButton: PrimeryButton = {
+        let btn = PrimeryButton(title: L10n.Common.Controls.speedUp)
+        btn.titleLabel?.font = FontStyles.RH10
+        btn.addTarget(self, action: #selector(speedUpClicked(_:)), for: .touchUpInside)
+        NSLayoutConstraint.activate([
+            btn.heightAnchor.constraint(equalToConstant: 28),
+            btn.widthAnchor.constraint(equalToConstant: 62)
+        ])
+        return btn
     }()
     
     private var tokenAmountlabel: UILabel = {
@@ -107,43 +165,53 @@ class TransactionCell: UITableViewCell {
         _init()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        resendStackView.isHidden = true
+        statusLabel.text = nil
+    }
+    
     private func _init() {
         selectionStyle = .none
         backgroundColor = .clear
         
-        contentView.addSubview(typeIconView)
-        contentView.addSubview(typeNameLabel)
-        contentView.addSubview(tokenAmountlabel)
-        contentView.addSubview(tokenBalanceLabel)
-        
+        contentView.withSubViews {
+            typeIconView
+            contentStackView
+            tokenAmountlabel
+            tokenBalanceLabel
+        }
+    
         NSLayoutConstraint.activate([
             typeIconView.leadingAnchor.constraint(equalTo: contentView.readableContentGuide.leadingAnchor, constant: 6),
-            typeIconView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 3.5),
+            typeIconView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             typeIconView.widthAnchor.constraint(equalToConstant: 38),
             typeIconView.heightAnchor.constraint(equalToConstant: 38)
         ])
         
-        typeNameLabel.setContentCompressionResistancePriority(.required - 1, for: .horizontal)
+        contentStackView.setContentCompressionResistancePriority(.required, for: .horizontal)
         NSLayoutConstraint.activate([
-            typeNameLabel.leadingAnchor.constraint(equalTo: typeIconView.trailingAnchor, constant: 8),
-            typeNameLabel.centerYAnchor.constraint(equalTo: typeIconView.centerYAnchor)
+            contentStackView.leadingAnchor.constraint(equalTo: typeIconView.trailingAnchor, constant: 8),
+            contentStackView.centerYAnchor.constraint(equalTo: typeIconView.centerYAnchor),
+            contentStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            contentStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
         
         tokenAmountlabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         NSLayoutConstraint.activate([
-            tokenAmountlabel.leadingAnchor.constraint(equalTo: typeNameLabel.trailingAnchor, constant: 16),
+            tokenAmountlabel.leadingAnchor.constraint(equalTo: contentStackView.trailingAnchor, constant: 16),
             tokenAmountlabel.trailingAnchor.constraint(equalTo: contentView.readableContentGuide.trailingAnchor, constant: -6),
-            tokenAmountlabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            tokenAmountlabel.topAnchor.constraint(equalTo: typeIconView.topAnchor, constant: -3.5),
             tokenAmountlabel.heightAnchor.constraint(equalToConstant: 21)
         ])
         
         tokenBalanceLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         NSLayoutConstraint.activate([
-            tokenBalanceLabel.leadingAnchor.constraint(equalTo: typeNameLabel.trailingAnchor, constant: 16),
+            tokenBalanceLabel.leadingAnchor.constraint(equalTo: contentStackView.trailingAnchor, constant: 16),
             tokenBalanceLabel.trailingAnchor.constraint(equalTo: contentView.readableContentGuide.trailingAnchor, constant: -6),
             tokenBalanceLabel.topAnchor.constraint(equalTo: tokenAmountlabel.bottomAnchor),
             tokenBalanceLabel.heightAnchor.constraint(equalToConstant: 24),
-            tokenBalanceLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
+            tokenBalanceLabel.bottomAnchor.constraint(equalTo: typeIconView.bottomAnchor, constant: 3.5)
         ])
     }
     
@@ -208,6 +276,73 @@ class TransactionCell: UITableViewCell {
             tokenAmountlabel.text = EthUtil.calcAmount(amount: changesAmount, decimals: changesDecimal).stringValue
             let balance = EthUtil.calcBalance(amount: changesAmount, decimals: changesDecimal, price: changesPrice).stringValue
             tokenBalanceLabel.text = "\(maskUserDefaults.currency.symbol)\(balance)"
+        }
+        
+        switch transaction.status {
+        case .confirmed:
+            resendStackView.isHidden = true
+            statusLabel.text = nil
+            
+        case .pending:
+            resendStackView.isHidden = false
+            statusLabel.text = L10n.Scene.TransactionHistory.statusPendind
+            statusLabel.textColor = Asset.Colors.Public.warnings.color
+            
+        case .failed:
+            resendStackView.isHidden = true
+            statusLabel.text = L10n.Scene.TransactionHistory.statusFailed
+            statusLabel.textColor = Asset.Colors.Public.error.color
+        }
+        
+        self.txHash = transaction.id
+    }
+}
+
+extension TransactionCell {
+    @objc
+    func speedUpClicked(_ sender: UIButton) {
+        let result = PendTransactionManager.shared.pendTransactions.value.filter {
+            $0.txHash == self.txHash &&
+            $0.address == maskUserDefaults.defaultAccountAddress &&
+            $0.networkId == maskUserDefaults.network.networkId
+        }
+        
+        if let txToSpeedUp = result.first {
+            
+            guard let toAddress = txToSpeedUp.transactionInfo?.toAddress else { return }
+            guard let amount = txToSpeedUp.transactionInfo?.amount else { return }
+            guard let gasPrice = txToSpeedUp.transactionInfo?.gasPrice else { return }
+            guard let gasLimit = txToSpeedUp.transactionInfo?.gaslimit else { return }
+            
+            let confirmModel = SendConfirmViewModel(selectedToken: txToSpeedUp.transactionInfo?.token, gasPrice: gasPrice * BigUInt(1.2), gasLimit: gasLimit, gasFeeNetModel: txToSpeedUp.transactionInfo?.gasNetModel)
+            
+            Coordinator.main.present(
+                scene: .sendTransactionPopConfirm(sendConfirmViewModel: confirmModel, toAddress: toAddress, amount: amount, nonce: txToSpeedUp.nonce),
+                transition: .panModel(animated: true))
+        }
+    }
+    
+    @objc
+    func cancelClicked(_ sender: UIButton) {
+        let result = PendTransactionManager.shared.pendTransactions.value.filter {
+            $0.txHash == self.txHash &&
+            $0.address == maskUserDefaults.defaultAccountAddress &&
+            $0.networkId == maskUserDefaults.network.networkId
+        }
+        
+        if let txToSpeedUp = result.first {
+    
+            guard let toAddress = maskUserDefaults.defaultAccountAddress else { return }
+            guard let gasPrice = txToSpeedUp.transactionInfo?.gasPrice else { return }
+            guard let gasLimit = txToSpeedUp.transactionInfo?.gaslimit else { return }
+            
+            let token  = WalletAssetManager.shared.getDefaultMainToken()
+
+            let confirmModel = SendConfirmViewModel(selectedToken: token, gasPrice: gasPrice * BigUInt(1.5), gasLimit: gasLimit, gasFeeNetModel: txToSpeedUp.transactionInfo?.gasNetModel)
+            
+            Coordinator.main.present(
+                scene: .sendTransactionPopConfirm(sendConfirmViewModel: confirmModel, toAddress: toAddress, amount: "0", nonce: txToSpeedUp.nonce),
+                transition: .panModel(animated: true))
         }
     }
 }

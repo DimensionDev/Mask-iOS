@@ -92,10 +92,19 @@ class WalletHistoryViewController: BaseViewController {
         setupNaviItems()
         setupSubviews()
         
-        WalletAssetManager.shared.transactions
+        Publishers.CombineLatest(WalletAssetManager.shared.transactions,
+                                 PendTransactionManager.shared.pendTransactions)
             .receive(on: DispatchQueue.main)
             .sink { _ in }
-        receiveValue: { [weak self] histories in
+        receiveValue: { [weak self] allTransactions, allPendingTransactions in
+            
+            let pendingTransactions = allPendingTransactions.filter {
+                $0.address == maskUserDefaults.defaultAccountAddress &&
+                $0.networkId == maskUserDefaults.network.networkId
+            }.compactMap {
+                return $0.history
+            }
+            let histories = (pendingTransactions + allTransactions).sorted{ $0.timeAt > $1.timeAt }
             self?.tableView.isHidden = histories.isEmpty
             self?.emptyView.isHidden = !histories.isEmpty
             self?.viewModel.refreshTableView(transactions: histories)
