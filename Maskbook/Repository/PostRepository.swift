@@ -12,6 +12,8 @@ import Foundation
 import SwiftyJSON
 
 enum PostRepository {
+    static let RECEIPIENT_EVERYONE = "everyone"
+    
     enum Mode: Int, Codable {
         case append = 0
         case override = 1
@@ -141,5 +143,138 @@ enum PostRepository {
             try? viewContext.saveOrRollback()
         }
         return PostRepository.queryPost(identifier: post.identifier)
+    }
+    
+    static func getPostCount() async -> Int {
+        await withCheckedContinuation { continuation in
+            let fetchRequest = PostRecord.sortedFetchRequest
+            
+            var count = 0
+            backgroundContext.performAndWait {
+                count = (try? backgroundContext.count(for: fetchRequest)) ?? 0
+            }
+            continuation.resume(returning: count)
+        }
+    }
+    
+    static func getPostsForBackup() async -> [JSON] {
+        await withCheckedContinuation { continuation in
+            var posts: [JSON] = []
+            let fetchRequest = PostRecord.sortedFetchRequest
+            
+            backgroundContext.performAndWait {
+                if let postRecords = try? backgroundContext.fetch(fetchRequest) {
+                    posts = postRecords.compactMap { $0.getBackupJson() }
+                }
+            }
+            continuation.resume(returning: posts)
+        }
+    }
+    
+    static func restoreFromJson(_ json: JSON) throws {
+        var restoreError: Error?
+        backgroundContext.performAndWait {
+            for post in json.arrayValue {
+                let postRecord = PostRecord(context: backgroundContext)
+                postRecord.identifier = post[Post.CodingKeys.identifier.rawValue].string
+                postRecord.encryptBy = post[Post.CodingKeys.encryptBy.rawValue].string
+                
+                if let postBy = post[Post.CodingKeys.postBy.rawValue].string {
+                    postRecord.postNetwork = ProfileRecord.getSocialPlatformFromIdentifier(postBy)?.url
+                    postRecord.postUserId = postBy.components(separatedBy: "/").last
+                } else {
+                    log.debug("no postBy in creating post", source: "Post")
+                }
+                
+                postRecord.postCryptoKeyRaw = try? post[Post.CodingKeys.postCryptoKey.rawValue].rawData()
+                postRecord.url = post[Post.CodingKeys.url.rawValue].string
+                postRecord.summary = post[Post.CodingKeys.summary.rawValue].string
+                
+                if let foundAt = post[Post.CodingKeys.foundAt.rawValue].double {
+                    postRecord.foundAt = Date(timeIntervalSince1970: foundAt)
+                } else {
+                    postRecord.foundAt = Date()
+                }
+                postRecord.createdAt = Date()
+                postRecord.updatedAt = Date()
+                
+                var recipientsDict = [String: Any]()
+                if let recipientsArray = post[Post.CodingKeys.recipients.rawValue].array {
+                    for recipientInfoJson in recipientsArray {
+                        if let recipientsInfoList = recipientInfoJson.array,
+                           recipientsInfoList.count >= 2 {
+                            if let recipientKey = recipientInfoJson[0].string {
+                                recipientsDict[recipientKey] = recipientInfoJson[1]
+                            }
+                        }
+                    }
+                }
+                postRecord.recipientsRaw = try? JSON(recipientsDict).rawData()
+                postRecord.interestedMetaRaw = try? post[Post.CodingKeys.interestedMeta.rawValue].rawData()
+                
+                do {
+                    try backgroundContext.saveOrRollback()
+                } catch {
+                    restoreError = error
+                }
+            }
+        }
+        if let restoreError = restoreError {
+            throw restoreError
+        }
+    }
+}
+
+extension PostRecord {
+    func getBackupJson() -> JSON? {
+        guard identifier != nil else {
+            return nil
+        }
+        var backupDict = [String: Any]()
+        
+        // 1. identifier
+        backupDict[Post.CodingKeys.identifier.rawValue] = identifier
+        
+        // 2. postCryptoKey
+        if let postCryptoKeyRaw = postCryptoKeyRaw,
+           let prostCryptoKeyJson = try? JSON(data: postCryptoKeyRaw) {
+            backupDict[Post.CodingKeys.postCryptoKey.rawValue] = prostCryptoKeyJson.object
+        }
+        
+        // 3. foundAt
+        backupDict[Post.CodingKeys.foundAt.rawValue] = createdAt?.timeIntervalSince1970
+        
+        // 4. postBy
+        if let postUserId = postUserId,
+           let postNetwork = postNetwork
+        {
+            backupDict[Post.CodingKeys.postBy.rawValue] = "person:\(postNetwork)/\(postUserId)"
+        }
+        
+        // 5. recipients
+        if let recipientsRaw = recipientsRaw,
+           let recipientsJson = try? JSON(data: recipientsRaw)
+        {
+            var recipientList = [[Any]]()
+            recipientsJson.dictionaryObject?.forEach {
+                recipientList.append([$0.key, $0.value])
+            }
+            backupDict[Post.CodingKeys.recipients.rawValue] = recipientList
+        }
+        
+        // 6. interestedMeta
+        if let interestedMetaRaw = interestedMetaRaw,
+           let interestedMetaJson = try? JSON(data: interestedMetaRaw)
+        {
+            backupDict[Post.CodingKeys.interestedMeta.rawValue] = interestedMetaJson.object
+        }
+        
+        // 7. summary
+        backupDict[Post.CodingKeys.summary.rawValue] = summary
+        
+        // 8. url
+        backupDict[Post.CodingKeys.url.rawValue] = url
+        
+        return JSON(backupDict)
     }
 }

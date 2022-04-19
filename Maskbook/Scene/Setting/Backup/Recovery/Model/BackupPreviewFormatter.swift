@@ -13,6 +13,18 @@ struct BackupPreviewFormatter {
         case email
         case createTime = "createdAt"
 
+        static var nativeItems: [Self] {
+            [
+                .personas,
+                .accounts,
+                .contacts,
+                .posts,
+                .relations,
+                .wallets,
+                .createTime
+            ]
+        }
+        
         var title: String {
             switch self {
             // ignore email and wallets for now
@@ -29,7 +41,7 @@ struct BackupPreviewFormatter {
         }
     }
 
-    func previewItems(of json: [String: JSON]) -> [(String, String)] {
+    static func previewItems(of json: [String: JSON]) -> [(String, String)] {
         var previewItems: [(String, String)] = []
 
         let numberFormatter = NumberFormatter()
@@ -43,18 +55,6 @@ struct BackupPreviewFormatter {
 
             switch item {
             case .email, .wallets: continue
-
-            case .createTime:
-                var itemValue = value.number?.stringValue ?? value.string ?? ""
-                guard let ts = Double(itemValue) else { continue }
-                let createdAt = Date(timeIntervalSince1970: ts / 1_000)
-                
-                let dateformatter = DateFormatter()
-                dateformatter.locale = Locale.current
-                dateformatter.dateFormat = "dd.MM.yyyy HH:mm:ss"
-
-                itemValue = dateformatter.string(from: createdAt)
-                previewItems.append((item.title, itemValue))
 
             default:
                 guard let count = value.number?.intValue else { continue }
