@@ -18,8 +18,15 @@ class SelectAccountViewController: BaseViewController {
     typealias Item = ViewModel.WalletsItem
     
     let tableViewTopConstant = 154.0
-    var tableViewBottomConstant = 88.0
-    let tableViewHeight = 85.0
+    private lazy var tableViewBottomConstant = (54 + safeAreaInsetsBottom)
+    let tableViewCellHeight = 85.0
+    
+    let safeAreaInsetsBottom: CGFloat = {
+        if let bottom = UIApplication.shared.windows.first(where: \.isKeyWindow)?.safeAreaInsets.bottom {
+            return bottom
+        }
+        return 0
+    }()
     
     init(viewModel: ViewModel) {
         self.viewModel = viewModel
@@ -62,7 +69,7 @@ class SelectAccountViewController: BaseViewController {
     lazy var tableView: UITableView = {
         let view = UITableView()
         view.backgroundColor = Asset.Colors.Background.normal.color
-        view.estimatedRowHeight = tableViewHeight
+        view.estimatedRowHeight = tableViewCellHeight
         view.rowHeight = UITableView.automaticDimension
         view.tableFooterView = UIView()
         view.separatorStyle = .none
@@ -105,7 +112,6 @@ class SelectAccountViewController: BaseViewController {
         addWalletView.isLayoutMarginsRelativeArrangement = true
         addWalletView.layoutMargins = UIEdgeInsets(top: 12, left: LayoutConstraints.leading, bottom: 20 + view.safeAreaInsets.bottom, right: LayoutConstraints.trailing)
         addWalletView.backgroundColor = Asset.Colors.Background.normal.color
-        
         return addWalletView
     }()
     
@@ -258,18 +264,11 @@ class SelectAccountViewController: BaseViewController {
             collectionView.heightAnchor.constraint(equalToConstant: 66)
         ])
         
-        let bottom: CGFloat = {
-            if let bottom = UIApplication.shared.windows.first(where: \.isKeyWindow)?.safeAreaInsets.bottom {
-                return bottom
-            }
-            return 0
-        }()
-        
         NSLayoutConstraint.activate([
             addWalletView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             addWalletView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             addWalletView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            addWalletView.heightAnchor.constraint(equalToConstant: 54 + bottom).priority(.defaultHigh)
+            addWalletView.heightAnchor.constraint(equalToConstant:  tableViewBottomConstant).priority(.defaultHigh)
         ])
         
         NSLayoutConstraint.activate([
@@ -308,8 +307,8 @@ extension SelectAccountViewController: PanModalPresentable {
     
     var longFormHeight: PanModalHeight {
         let bottom = viewModel.type == .editEnable ? tableViewBottomConstant : 0
-        let content = tableViewTopConstant + bottom + tableViewHeight * Double(viewModel.accountListSubject.value.count)
-        return .contentHeight(content)
+        let content = tableViewTopConstant + bottom + tableViewCellHeight * Double(viewModel.accountListSubject.value.count)
+        return .contentHeight(content - 32)
     }
 }
 
