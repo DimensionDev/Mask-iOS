@@ -182,7 +182,7 @@ class BalanceAccountCell: UITableViewCell {
         
         if let quantity = mainToken?.quantity {
             
-            if quantity.compare(NSDecimalNumber(integerLiteral: 0)) != .orderedDescending {
+            if quantity.compare(NSDecimalNumber.zero) == .orderedSame {
                  showBalanceNotEnoughAlert()
             } else {
                 Coordinator.main.present(
