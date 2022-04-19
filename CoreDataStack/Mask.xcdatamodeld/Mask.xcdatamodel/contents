@@ -127,7 +127,8 @@
         <attribute name="key" optional="YES" attributeType="String"/>
         <attribute name="lastModifiedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="pluginID" attributeType="String"/>
-        <attribute name="value" attributeType="Binary"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="value" attributeType="String"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="key"/>
@@ -249,6 +250,7 @@
         <element name="DeletedDerivationPath" positionX="90" positionY="144" width="128" height="59"/>
         <element name="LocalStorage" positionX="90" positionY="144" width="128" height="104"/>
         <element name="PersonaRecord" positionX="90" positionY="144" width="128" height="254"/>
+        <element name="PluginStorage" positionX="90" positionY="144" width="128" height="119"/>
         <element name="Portfolio" positionX="90" positionY="144" width="128" height="239"/>
         <element name="PostRecord" positionX="90" positionY="144" width="128" height="209"/>
         <element name="ProfileRecord" positionX="99" positionY="153" width="128" height="134"/>
@@ -256,6 +258,5 @@
         <element name="StoredKey" positionX="90" positionY="144" width="128" height="179"/>
         <element name="Token" positionX="-63" positionY="-18" width="128" height="254"/>
         <element name="WalletConnectSession" positionX="90" positionY="144" width="128" height="89"/>
-        <element name="PluginStorage" positionX="90" positionY="144" width="128" height="104"/>
     </elements>
 </model>

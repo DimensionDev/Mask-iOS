@@ -19,9 +19,10 @@ extension PluginStorage {
 
     @NSManaged public var createdAt: Date?
     @NSManaged public var pluginID: String?
+    @NSManaged public var type: String?
     @NSManaged public var key: String?
     @NSManaged public var lastModifiedDate: Date?
-    @NSManaged public var value: Data?
+    @NSManaged public var value: String?
 
 }
 

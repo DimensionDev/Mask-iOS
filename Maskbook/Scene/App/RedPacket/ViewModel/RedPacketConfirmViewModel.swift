@@ -235,11 +235,18 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
         
         // save `password` into `PluginStorage` before send a transaction
         let chainNetwork = settings.network
+        let record = PluginStorageRepository.RedPacketRecord(
+            id: UUID().uuidString,
+            post: nil,
+            password: privateKey,
+            txHash: nil,
+            type: PluginStorageRepository.PluginType.redPackage.rawValue
+        )
         PluginStorageRepository.save(
             address: fromAddress,
             chain: chainNetwork,
             nonce: nonce.description,
-            password: privateKey
+            record: record
         )
         
         if fromAccount.fromWalletConnect {
