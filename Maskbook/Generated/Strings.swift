@@ -253,6 +253,28 @@ enum L10n {
         }
       }
 
+      enum NoLocalWalletForWalletconnect {
+        /// Unable to connect to walletConnect as there is no local wallet.
+        static var description: String {
+          return L10n.tr("Localizable", "Common.Alert.NoLocalWalletForWalletconnect.Description")
+        }
+        /// Unable to connect
+        static var title: String {
+          return L10n.tr("Localizable", "Common.Alert.NoLocalWalletForWalletconnect.Title")
+        }
+      }
+
+      enum OnlyScanPersona {
+        /// The QR code is not Persona QR Code.\nPlease scan Persona QR Code.
+        static var description: String {
+          return L10n.tr("Localizable", "Common.Alert.OnlyScanPersona.Description")
+        }
+        /// Please Scan Persona QR Code
+        static var title: String {
+          return L10n.tr("Localizable", "Common.Alert.OnlyScanPersona.Title")
+        }
+      }
+
       enum PersonaCreate {
         /// You have successfully created your persona %@. 
         static func description(_ p1: String) -> String {
@@ -1377,6 +1399,17 @@ enum L10n {
       /// Restore & Sign In completed!
       static var title: String {
         return L10n.tr("Localizable", "Scene.IdentityRestoreSigninSuccess.Title")
+      }
+    }
+
+    enum MaskScan {
+      /// Scan Persona or walletConnect QR Code
+      static var scanAll: String {
+        return L10n.tr("Localizable", "Scene.MaskScan.ScanAll")
+      }
+      /// Scan Persona QR Code
+      static var scanPersona: String {
+        return L10n.tr("Localizable", "Scene.MaskScan.ScanPersona")
       }
     }
 
@@ -2760,10 +2793,6 @@ enum L10n {
       /// This wallet address was connected with WalletConnect. Importing this wallet address automatically dis-connects the walletConnect account.
       static var replaceWalletConnectWallet: String {
         return L10n.tr("Localizable", "Scene.WalletConnect.ReplaceWalletConnectWallet")
-      }
-      /// Scan the QR code
-      static var scan: String {
-        return L10n.tr("Localizable", "Scene.WalletConnect.Scan")
       }
       /// Scan QR Code
       static var scanQRCode: String {

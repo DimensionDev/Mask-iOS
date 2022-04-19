@@ -180,8 +180,7 @@
 		2A5FAEA027CF7AD200D01250 /* GuideItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5FAE9D27CF7AD200D01250 /* GuideItemView.swift */; };
 		2A5FAEA227CF7AD200D01250 /* GuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5FAE9F27CF7AD200D01250 /* GuideView.swift */; };
 		2A5FAEA427CF7AEE00D01250 /* MaskHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5FAEA327CF7AEE00D01250 /* MaskHostViewController.swift */; };
-		2A6788CD27EB6B4000CC2350 /* WelcomeIdentityEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6788CC27EB6B4000CC2350 /* WelcomeIdentityEmptyView.swift */; };
-		2A68BF6F2806F02400C91C6F /* RedPacketConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A68BF6E2806F02400C91C6F /* RedPacketConfirmView.swift */; };
+		2A6788D127EB6C8800CC2350 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6788D027EB6C8800CC2350 /* PrimaryButton.swift */; };
 		2A6ABB7B2720053B00CC3AED /* SelectAppearanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6ABB292720053B00CC3AED /* SelectAppearanceViewModel.swift */; };
 		2A6ABB7C2720053B00CC3AED /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6ABB2A2720053B00CC3AED /* SettingViewModel.swift */; };
 		2A6ABB7D2720053B00CC3AED /* SelectDataSourceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6ABB2B2720053B00CC3AED /* SelectDataSourceViewModel.swift */; };
@@ -949,8 +948,7 @@
 		2A5FAE9D27CF7AD200D01250 /* GuideItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideItemView.swift; sourceTree = "<group>"; };
 		2A5FAE9F27CF7AD200D01250 /* GuideView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideView.swift; sourceTree = "<group>"; };
 		2A5FAEA327CF7AEE00D01250 /* MaskHostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskHostViewController.swift; sourceTree = "<group>"; };
-		2A6788CC27EB6B4000CC2350 /* WelcomeIdentityEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeIdentityEmptyView.swift; sourceTree = "<group>"; };
-		2A68BF6E2806F02400C91C6F /* RedPacketConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketConfirmView.swift; sourceTree = "<group>"; };
+		2A6788D027EB6C8800CC2350 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		2A6ABB292720053B00CC3AED /* SelectAppearanceViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAppearanceViewModel.swift; sourceTree = "<group>"; };
 		2A6ABB2A2720053B00CC3AED /* SettingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		2A6ABB2B2720053B00CC3AED /* SelectDataSourceViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectDataSourceViewModel.swift; sourceTree = "<group>"; };
@@ -2538,7 +2536,6 @@
 		2AF88372271EE9300004565A /* IdentityEmpty */ = {
 			isa = PBXGroup;
 			children = (
-				2A6788CC27EB6B4000CC2350 /* WelcomeIdentityEmptyView.swift */,
 				2AF88373271EE9300004565A /* IdentityEmptyViewController.swift */,
 			);
 			path = IdentityEmpty;
@@ -4262,7 +4259,6 @@
 				2AF8857E271EE9310004565A /* WalletListTableViewCell.swift in Sources */,
 				2AF88535271EE9310004565A /* ImportItem.swift in Sources */,
 				2AF884FE271EE9310004565A /* ContactsViewController.swift in Sources */,
-				2A6788CD27EB6B4000CC2350 /* WelcomeIdentityEmptyView.swift in Sources */,
 				5D114FE527B256790092BEDC /* PersonaRecord+Identifier.swift in Sources */,
 				2AF8853C271EE9310004565A /* AccountCardView.swift in Sources */,
 				5D554EC6279FE58100D40848 /* OpenRedPackageViewController.swift in Sources */,

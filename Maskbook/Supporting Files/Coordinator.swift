@@ -171,7 +171,7 @@ class Coordinator {
         case walletConnectStart
         case walletConnectConnecting
         case walletConnectFail
-        case commonScan
+        case maskScan(type:RestrictedScanType)
         case walletConnectServerConfirm(viewModel: WalletConnectServerConfirmViewModel)
         case walletConnectDappList
         case walletConnectSelectAccount
@@ -602,8 +602,8 @@ extension Coordinator {
             return viewController
 
         case .welcomeEmptyIdentity:
-            let vc = MaskHostViewController(rootView: WelcomeIdentityEmptyView())
-            return vc
+            let viewController = IdentityEmptyViewController(isFirstLaunch: true)
+            return viewController
             
         case .emptyIdentity:
             let viewController = IdentityEmptyViewController()
@@ -704,8 +704,8 @@ extension Coordinator {
         case .walletConnectFail:
             return WalletConnectFailedViewController()
         
-        case .commonScan:
-            return MaskScanViewController()
+        case let .maskScan(type):
+            return MaskScanViewController(restrictedScanType: type)
         
         case let .walletConnectServerConfirm(viewModel):
             return WalletConnectServerConfirmViewController(viewModel: viewModel)

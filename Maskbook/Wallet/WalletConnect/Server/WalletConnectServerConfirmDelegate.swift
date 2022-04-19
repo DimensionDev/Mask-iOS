@@ -16,6 +16,9 @@ class WalletConnectServerConfirmDelegate: WalletConnectServerConfirmProcotol {
     @InjectedProvider(\.walletConnectServer)
     private var walletConnectServer
     
+    @InjectedProvider(\.mainCoordinator)
+    var mainCoordinator
+    
     func server(_ server: Server, shouldStart session: Session, completion: @escaping (Session.WalletInfo) -> Void) {
         let walletMeta = Session.ClientMeta.maskWalletMeta
         guard let _ = userSetting.defaultAccountAddress
@@ -39,7 +42,21 @@ class WalletConnectServerConfirmDelegate: WalletConnectServerConfirmProcotol {
             self?.walletConnectServer.denySession(clientMeta: walletMeta, completion: completion)
         }
         DispatchQueue.main.async {
-            Coordinator.main.present(scene: .walletConnectServerConfirm(viewModel: viewModel), transition: .panModel(animated: true))
+            self.mainCoordinator.present(scene: .walletConnectServerConfirm(viewModel: viewModel), transition: .panModel(animated: true))
         }
+    }
+    
+    func noLocalWalletToConnect() {
+        let alertController = AlertController(
+            title: L10n.Common.Alert.NoLocalWalletForWalletconnect.title,
+            message: L10n.Common.Alert.NoLocalWalletForWalletconnect.description,
+            confirmButtonText: L10n.Common.Controls.ok,
+            imageType: .error,
+            confirmButtonClicked:nil,
+            cancelButtonClicked: nil)
+        mainCoordinator.present(
+            scene: .alertController(alertController: alertController),
+            transition: .alertController(completion: nil))
+
     }
 }
