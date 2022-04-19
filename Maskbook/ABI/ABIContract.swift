@@ -105,7 +105,7 @@ extension ABIContract {
                         transaction: transaction,
                         transactionOptions: tx.transactionOptions
                     ),
-                    transition: .panModel(animated: true)
+                    transition: .panModel()
                 )
             }
             return try? promise.wait()

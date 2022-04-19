@@ -139,9 +139,10 @@ extension LuckyDropHistoryViewModel {
                 throw CancellationError()
             } catch {
                 // ignore
+                throw error
             }
 
-            return results
+            return results.sorted(by: { ($0.payload.basic?.creationTime ?? 0) > ($1.payload.basic?.creationTime ?? 0) })
         }
     }
 }
