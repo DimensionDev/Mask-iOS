@@ -680,6 +680,7 @@
 		5DE5395727473599005F4CEA /* PanModalPresentable+color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5395627473599005F4CEA /* PanModalPresentable+color.swift */; };
 		5DE5E53A27E4424300F2B62A /* CGAffineTransform+extensiion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5E53927E4424300F2B62A /* CGAffineTransform+extensiion.swift */; };
 		5DE5E53C27E468B400F2B62A /* PersonaAvatarActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5E53B27E468B400F2B62A /* PersonaAvatarActionViewModel.swift */; };
+		5DF07E0C27FD9CA400BECF15 /* ContactEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF07E0B27FD9CA400BECF15 /* ContactEmptyView.swift */; };
 		5DF1C30B27DA33EB003F26C1 /* FixUITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF1C30A27DA33EB003F26C1 /* FixUITableView.swift */; };
 		6F07ABE1279022B80039D69D /* NFTCollectionStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE0279022B80039D69D /* NFTCollectionStatusModel.swift */; };
 		6F07ABE3279027E70039D69D /* NFTAssetPriceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE2279027E70039D69D /* NFTAssetPriceModel.swift */; };
@@ -1446,6 +1447,7 @@
 		5DE5395627473599005F4CEA /* PanModalPresentable+color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PanModalPresentable+color.swift"; sourceTree = "<group>"; };
 		5DE5E53927E4424300F2B62A /* CGAffineTransform+extensiion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGAffineTransform+extensiion.swift"; sourceTree = "<group>"; };
 		5DE5E53B27E468B400F2B62A /* PersonaAvatarActionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaAvatarActionViewModel.swift; sourceTree = "<group>"; };
+		5DF07E0B27FD9CA400BECF15 /* ContactEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEmptyView.swift; sourceTree = "<group>"; };
 		5DF1C30A27DA33EB003F26C1 /* FixUITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixUITableView.swift; sourceTree = "<group>"; };
 		5EAA5B96B867151922056017 /* Pods-Maskbook.release touchpreview.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maskbook.release touchpreview.xcconfig"; path = "Target Support Files/Pods-Maskbook/Pods-Maskbook.release touchpreview.xcconfig"; sourceTree = "<group>"; };
 		6E9C51A1509D656AAC19E01D /* Pods-MaskWalletTests.release touchpreview.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskWalletTests.release touchpreview.xcconfig"; path = "Target Support Files/Pods-MaskWalletTests/Pods-MaskWalletTests.release touchpreview.xcconfig"; sourceTree = "<group>"; };
@@ -2618,6 +2620,7 @@
 			isa = PBXGroup;
 			children = (
 				2AF8838C271EE9300004565A /* ContactsViewController.swift */,
+				5DF07E0B27FD9CA400BECF15 /* ContactEmptyView.swift */,
 				2AF8838D271EE9300004565A /* Cell */,
 				2AF88390271EE9300004565A /* ContactsViewModel.swift */,
 				2AF8838F271EE9300004565A /* ContactActionViewModel.swift */,
@@ -4420,7 +4423,7 @@
 				2AF884D6271EE9310004565A /* Browser+ExternalTab.swift in Sources */,
 				1F036399277B287A001E8A88 /* DappScriptAdaptor.swift in Sources */,
 				6F25327A27A2B0AA000C0D27 /* Web3TransactionReceipt.swift in Sources */,
-				2AF6C7D527FEA52800A9EA4A /* ShareLuckyDropView.swift in Sources */,
+				5DF07E0C27FD9CA400BECF15 /* ContactEmptyView.swift in Sources */,
 				0F83264526EB4E8100BF949B /* Web3ProviderFactory.swift in Sources */,
 				2AF88537271EE9310004565A /* WalletImportViewController.swift in Sources */,
 				2AF88519271EE9310004565A /* PrimeryButton.swift in Sources */,

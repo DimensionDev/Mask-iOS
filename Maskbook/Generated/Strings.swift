@@ -1567,9 +1567,13 @@ enum L10n {
       static var delete: String {
         return L10n.tr("Localizable", "Scene.PersonaContacts.Delete")
       }
-      /// You don’t have encrypted friends. \nInvite friends to download Mask Network.
+      /// No accounts captured on Timeline. \nInvite friends to download Mask Network.
       static var emptyContactsTips: String {
         return L10n.tr("Localizable", "Scene.PersonaContacts.EmptyContactsTips")
+      }
+      /// No contact found. This account may not \nbe captured on timeline.
+      static var searchContactTips: String {
+        return L10n.tr("Localizable", "Scene.PersonaContacts.SearchContactTips")
       }
     }
 

@@ -554,7 +554,8 @@
             "backup_recovery":"Backup and Recovery"
         },
         "persona_contacts": {
-            "empty_contacts_tips": "You don’t have encrypted friends. \nInvite friends to download Mask Network.",
+            "empty_contacts_tips": "No accounts captured on Timeline. \nInvite friends to download Mask Network.",
+            "search_contact_tips": "No contact found. This account may not \nbe captured on timeline.",
             "delete": "Confirm to delete ",
             "contact": "Contact"
         },

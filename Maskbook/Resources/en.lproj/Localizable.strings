@@ -345,8 +345,10 @@ separated by spaces";
 "Scene.PersonaAvatar.Title" = "Set Persona Avatar";
 "Scene.PersonaContacts.Contact" = "Contact";
 "Scene.PersonaContacts.Delete" = "Confirm to delete ";
-"Scene.PersonaContacts.EmptyContactsTips" = "You don’t have encrypted friends. 
+"Scene.PersonaContacts.EmptyContactsTips" = "No accounts captured on Timeline. 
 Invite friends to download Mask Network.";
+"Scene.PersonaContacts.SearchContactTips" = "No contact found. This account may not 
+be captured on timeline.";
 "Scene.PersonaDownload.DownloadTips" = "The QR code encrypts the identity code or private key of your persona. It’s recommended to print it. You can use Mask App to scan the QR code to login.";
 "Scene.PersonaDownload.IdentityId" = "Identity Code";
 "Scene.PersonaExportPrivateKey.BackupRecovery" = "Backup and Recovery";
