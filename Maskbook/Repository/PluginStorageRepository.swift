@@ -58,31 +58,6 @@ extension PluginStorageRepository {
             try? context.saveOrRollback()
         }
     }
-    
-    static func queryRecord(
-        address: String,
-        chain: BlockChainNetwork,
-        txHash: String
-    ) -> RedPacketRecord? {
-        do {
-            let key = "\(address)-\(chain.chain.rawValue)-\(chain.networkId)-\(txHash)"
-            let context = viewContext
-            let fetchRequest = PluginStorage.fetchRequest()
-            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
-                \PluginStorage.pluginID == PluginID.redPackage.rawValue,
-                \PluginStorage.key == key
-            ])
-            fetchRequest.fetchLimit = 1
-            guard let json = try context.fetch(fetchRequest).first?.value,
-                  let data = json.data(using: .utf8) else {
-                return nil
-            }
-            return try? JSONDecoder().decode(RedPacketRecord.self, from: data)
-        } catch {
-            return nil
-        }
-    }
-
 
     /// Resturn RedPacketRecord
     /// - Parameters:
@@ -116,7 +91,7 @@ extension PluginStorageRepository {
     }
     
     static func update(address: String, chain: BlockChainNetwork, txHash: String, post: String) {
-        guard var record = queryRecord(address: address, chain: chain, txHash: txHash) else {
+        guard var record = queryRecord(address: address, chain: chain, tx: txHash) else {
             return
         }
         record.post = post
@@ -124,7 +99,7 @@ extension PluginStorageRepository {
     }
     
     static func queryPassword(address: String, chain: BlockChainNetwork, txHash: String) -> String? {
-        if let record = queryRecord(address: address, chain: chain, txHash: txHash) {
+        if let record = queryRecord(address: address, chain: chain, tx: txHash) {
             return record.password
         }
         return nil
