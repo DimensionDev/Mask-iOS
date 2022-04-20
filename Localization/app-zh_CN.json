@@ -108,7 +108,7 @@
             },
             "download_identity_code": {
                 "title": "设置备份密码 ",
-                "description": "请在下载身份二维码之前设置您的 %s。 "
+                "description": "请在下载角色二维码之前设置您的 %s。 "
             },
             "backup_tips_no_backup_password": {
                 "title": " 设置备份密码",
@@ -533,7 +533,7 @@
                 "change_add_persona": "更改或添加角色",
                 "rename": "重命名",
                 "export_private_key": "导出私钥",
-                "download": "下载身份二维码",
+                "download": "下载角色二维码",
                 "backup": "备份",
                 "log_out": "退出登录",
                 "delete": "删除"
