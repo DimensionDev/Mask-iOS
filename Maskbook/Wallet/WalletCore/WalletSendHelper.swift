@@ -285,7 +285,7 @@ class WalletSendHelper {
         maxInclusionFeePerGas: BigUInt?,
         network: BlockChainNetwork,
         nonce: BigUInt? = nil,
-        _ completion: @escaping (Result<String, Error>) -> Void) {
+        _ completion: @escaping (Result<(String, BigUInt), Error>) -> Void) {
             guard let provider = Web3ProviderFactory.provider else { completion(.failure(WalletSendError.unsupportedChainType))
                 return
             }
@@ -363,7 +363,7 @@ class WalletSendHelper {
                             do {
                                 let sendResult = try provider.eth.sendRawTransaction(rawTransaction, transacationEncodeData)
                                 DispatchQueue.main.async {
-                                    completion(.success(sendResult.hash))
+                                    completion(.success((sendResult.hash, nonceTemp)))
                                 }
                                 return
                             } catch {

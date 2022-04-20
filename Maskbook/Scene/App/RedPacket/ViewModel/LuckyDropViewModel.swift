@@ -349,7 +349,6 @@ class LuckyDropViewModel: NSObject, ObservableObject {
             tokenAddr: tokenAddressETH,
             totalTokens: total)
         
-        guard let fromAddress = settings.defaultAccountAddress else { return }
         Task {
             let tx = await ABI.happyRedPacketV4.createRedPacket(
                 token: token,
@@ -364,26 +363,7 @@ class LuckyDropViewModel: NSObject, ObservableObject {
                 if let tx = tx {
                     walletBottomViewModel.observeTransaction(txHash: tx)
                 }
-                
-                updateRedPacket(tx: tx, fromAddress: fromAddress)
             }
-        }
-    }
-    
-    private func updateRedPacket(tx: String?, fromAddress: String) {
-        guard let web3 = Web3ProviderFactory.provider,
-              let tx = tx
-        else {
-            return
-        }
-        let _ = web3.eth.getTransactionDetailsPromise(tx).done { [weak self] transaction in
-            guard let self = self else { return }
-            let nonce = transaction.transaction.nonce.description
-            PluginStorageRepository.update(
-                address: fromAddress,
-                chain: self.settings.network,
-                nonce: nonce,
-                txHash: tx)
         }
     }
     

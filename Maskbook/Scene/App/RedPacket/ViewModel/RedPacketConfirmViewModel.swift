@@ -241,10 +241,6 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
             transactionOptions.gasLimit = .automatic
         }
         
-        guard let nonce = try? provider.eth.getTransactionCount(address: ethFromAddress) else {
-            return
-        }
-        
         guard let privateKey = self.password else {
             return
         }
@@ -258,16 +254,17 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
             txHash: nil,
             type: PluginStorageRepository.PluginType.redPackage.rawValue
         )
-        PluginStorageRepository.save(
-            address: fromAddress,
-            chain: chainNetwork,
-            nonce: nonce.description,
-            record: record
-        )
         
-        let completionWrapper: (Swift.Result<String, Error>) -> Void = { [weak self] result in
+        let completionWrapper: (Swift.Result<(String, BigUInt), Error>) -> Void = { [weak self] result in
             switch result {
-            case .success(let txhash):
+            case .success((let txhash, let nonce)):
+                PluginStorageRepository.save(
+                    address: fromAddress,
+                    chain: chainNetwork,
+                    txHash: txhash,
+                    record: record
+                )
+                
                 guard let self = self else { return }
                 guard let gasFeeItem = self.gasFeeItem,
                       let gwei = BigUInt(gasFeeItem.gWei),
@@ -297,7 +294,7 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
                     history: history,
                     transcationInfo:transactionInfo,
                     nonce: nonce)
-                completion(result)
+                completion(.success(txhash))
                 
             case .failure(let error):
                 self?.buttonState = .normal
@@ -316,7 +313,6 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
             walletConnectClient.signTransaction(
                 transaction: transaction,
                 transactionOptions: transactionOptions,
-                nonce: nonce,
                 completionWrapper)
         } else {
             let maxFeePerGas = Web3.Utils.parseToBigUInt(gasFeeItem.suggestedMaxFeePerGas, units: .Gwei)
@@ -332,7 +328,6 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
                 maxFeePerGas: maxFeePerGas == 0 ? nil : maxFeePerGas,
                 maxInclusionFeePerGas: maxInclusionFeePerGas == 0 ? nil : maxInclusionFeePerGas,
                 network: maskUserDefaults.network,
-                nonce: nonce,
                 completionWrapper)
         }
     }

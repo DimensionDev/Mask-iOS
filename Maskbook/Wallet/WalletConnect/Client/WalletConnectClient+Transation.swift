@@ -19,7 +19,7 @@ extension WalletConnectClient {
         transaction: EthereumTransaction,
         transactionOptions: TransactionOptions,
         nonce: BigUInt? = nil,
-        _ completion: @escaping (Result<String, Error>) -> Void) {
+        _ completion: @escaping (Result<(String, BigUInt), Error>) -> Void) {
         guard let wcUrl = session?.url else {
             return
         }
@@ -75,7 +75,7 @@ extension WalletConnectClient {
                 WalletConnectClient.openInstalledWallet(with: fromAddress)
                 try client.eth_sendTransaction(url: wcUrl, transaction: wcTransaction) { response in
                     if let hashString = try? response.result(as: String.self) {
-                        completion(.success(hashString))
+                        completion(.success((hashString, nonceTemp)))
                     } else {
                         completion(.failure(WalletSendError.walletConnectError))
                     }

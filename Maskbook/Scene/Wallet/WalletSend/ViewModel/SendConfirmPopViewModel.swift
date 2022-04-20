@@ -121,10 +121,19 @@ class SendConfirmPopViewModel {
             return
         }
             
+        let completionWrapper: (Swift.Result<(String, BigUInt), Error>) -> Void = { result in
+            switch result {
+            case .success((let txHash, _)):
+                completion(.success(txHash))
+                
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
         if fromAccount.fromWalletConnect {
             walletConnectClient.signTransaction(transaction: transaction,
                                                 transactionOptions: transactionOptions,
-                                                completion)
+                                                completionWrapper)
         } else {
             WalletSendHelper.sendTransactionWithWeb3(password: password,
                                                      transaction: transaction,
@@ -132,7 +141,7 @@ class SendConfirmPopViewModel {
                                                      maxFeePerGas: maxFeePerGasPublisher.value,
                                                      maxInclusionFeePerGas: maxInclusionFeePerGasPublisher.value,
                                                      network: maskUserDefaults.network,
-                                                     completion)
+                                                     completionWrapper)
         }
     }
     

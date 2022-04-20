@@ -38,10 +38,10 @@ extension PluginStorageRepository {
     static func save(
         address: String,
         chain: BlockChainNetwork,
-        nonce: String,
+        txHash: String,
         record: RedPacketRecord
     ) {
-        let key = "\(address)-\(chain.chain.rawValue)-\(chain.networkId)-\(nonce)"
+        let key = "\(address)-\(chain.chain.rawValue)-\(chain.networkId)-\(txHash)"
         let context = viewContext
         context.performAndWait {
             let data = try? JSONEncoder().encode(record)
@@ -62,10 +62,10 @@ extension PluginStorageRepository {
     static func queryRecord(
         address: String,
         chain: BlockChainNetwork,
-        nonce: String
+        txHash: String
     ) -> RedPacketRecord? {
         do {
-            let key = "\(address)-\(chain.chain.rawValue)-\(chain.networkId)-\(nonce)"
+            let key = "\(address)-\(chain.chain.rawValue)-\(chain.networkId)-\(txHash)"
             let context = viewContext
             let fetchRequest = PluginStorage.fetchRequest()
             fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
@@ -115,24 +115,16 @@ extension PluginStorageRepository {
         }
     }
     
-    static func update(address: String, chain: BlockChainNetwork, nonce: String, post: String) {
-        guard var record = queryRecord(address: address, chain: chain, nonce: nonce) else {
+    static func update(address: String, chain: BlockChainNetwork, txHash: String, post: String) {
+        guard var record = queryRecord(address: address, chain: chain, txHash: txHash) else {
             return
         }
         record.post = post
-        save(address: address, chain: chain, nonce: nonce, record: record)
+        save(address: address, chain: chain, txHash: txHash, record: record)
     }
     
-    static func update(address: String, chain: BlockChainNetwork, nonce: String, txHash: String) {
-        guard var record = queryRecord(address: address, chain: chain, nonce: nonce) else {
-            return
-        }
-        record.txHash = txHash
-        save(address: address, chain: chain, nonce: nonce, record: record)
-    }
-    
-    static func queryPassword(address: String, chain: BlockChainNetwork, nonce: String) -> String? {
-        if let record = queryRecord(address: address, chain: chain, nonce: nonce) {
+    static func queryPassword(address: String, chain: BlockChainNetwork, txHash: String) -> String? {
+        if let record = queryRecord(address: address, chain: chain, txHash: txHash) {
             return record.password
         }
         return nil
