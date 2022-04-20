@@ -29,20 +29,4 @@ extension PersonaManager {
         return request
             .eraseToAnyPublisher()
     }
-    
-    static func restoreFromJson(jsonString: String) -> AnyPublisher<MaskWebMessageResult, Error> {
-        let request = WebExtension.Persona.RestorePersonaJson.withPayload {
-            WebExtension.Persona.BackUpPayload(backup: jsonString)
-        }
-        return request
-            .eraseToAnyPublisher()
-    }
-    
-    static func restoreFromBase64(base64String: String) -> AnyPublisher<MaskWebMessageResult, Error> {
-        let request = WebExtension.Persona.RestorePersonaBase64.withPayload {
-            WebExtension.Persona.BackUpPayload(backup: base64String)
-        }
-        return request
-            .eraseToAnyPublisher()
-    }
 }
