@@ -1,7 +1,7 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[9141],{
 
-/***/ 83256:
+/***/ 31388:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -30,8 +30,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GlobalStyles = void 0;
-const jsx_runtime_1 = __webpack_require__(82798);
-const reactEmotion = __importStar(__webpack_require__(59461));
+const jsx_runtime_1 = __webpack_require__(71999);
+const reactEmotion = __importStar(__webpack_require__(8465));
 function GlobalStyles(props) {
     const { styles } = props;
     return (0, jsx_runtime_1.jsx)(reactEmotion.Global, { styles: reactEmotion.css(styles) });
@@ -41,7 +41,7 @@ exports.GlobalStyles = GlobalStyles;
 
 /***/ }),
 
-/***/ 9440:
+/***/ 93263:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -50,8 +50,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TssCacheProvider = exports.useTssEmotionCache = exports.getTssDefaultEmotionCache = exports.getDoExistsTssDefaultEmotionCacheMemoizedValue = void 0;
-const jsx_runtime_1 = __webpack_require__(82798);
-const react_1 = __webpack_require__(63423);
+const jsx_runtime_1 = __webpack_require__(71999);
+const react_1 = __webpack_require__(86248);
 const cache_1 = __importDefault(__webpack_require__(20227));
 const { getDoExistsTssDefaultEmotionCacheMemoizedValue, getTssDefaultEmotionCache, reactContext, } = (() => {
     const propertyKey = "__tss-react_context";
@@ -112,18 +112,18 @@ exports.TssCacheProvider = TssCacheProvider;
 
 /***/ }),
 
-/***/ 45092:
+/***/ 76446:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.useCssAndCx = exports.createCssAndCx = void 0;
-const classnames_1 = __webpack_require__(8861);
-const serialize_1 = __webpack_require__(62565);
+const classnames_1 = __webpack_require__(18227);
+const serialize_1 = __webpack_require__(37961);
 const utils_1 = __webpack_require__(45477);
-const useGuaranteedMemo_1 = __webpack_require__(57514);
-const cache_1 = __webpack_require__(9440);
-const types_1 = __webpack_require__(26103);
+const useGuaranteedMemo_1 = __webpack_require__(94911);
+const cache_1 = __webpack_require__(93263);
+const types_1 = __webpack_require__(21400);
 exports.createCssAndCx = (() => {
     function merge(registered, css, className) {
         const registeredStyles = [];
@@ -220,7 +220,7 @@ const increaseSpecificityToTakePrecedenceOverMediaQuerries = (() => {
 
 /***/ }),
 
-/***/ 45365:
+/***/ 13442:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 var __webpack_unused_export__;
@@ -228,22 +228,22 @@ var __webpack_unused_export__;
 __webpack_unused_export__ = ({ value: true });
 __webpack_unused_export__ = exports.LW = __webpack_unused_export__ = __webpack_unused_export__ = exports.F4 = __webpack_unused_export__ = exports.a0 = __webpack_unused_export__ = __webpack_unused_export__ = void 0;
 /** @see <https://docs.tss-react.dev/api-references> */
-var cssAndCx_1 = __webpack_require__(45092);
+var cssAndCx_1 = __webpack_require__(76446);
 __webpack_unused_export__ = ({ enumerable: true, get: function () { return cssAndCx_1.useCssAndCx; } });
-var mergeClasses_1 = __webpack_require__(20494);
+var mergeClasses_1 = __webpack_require__(16846);
 __webpack_unused_export__ = ({ enumerable: true, get: function () { return mergeClasses_1.useMergedClasses; } });
-const makeStyles_1 = __webpack_require__(10507);
+const makeStyles_1 = __webpack_require__(9124);
 Object.defineProperty(exports, "a0", ({ enumerable: true, get: function () { return makeStyles_1.createMakeStyles; } }));
-const withStyles_1 = __webpack_require__(75282);
+const withStyles_1 = __webpack_require__(72003);
 __webpack_unused_export__ = ({ enumerable: true, get: function () { return withStyles_1.createWithStyles; } });
 /** @see <https://docs.tss-react.dev/api-references/keyframes> */
-var react_1 = __webpack_require__(59461);
+var react_1 = __webpack_require__(8465);
 Object.defineProperty(exports, "F4", ({ enumerable: true, get: function () { return react_1.keyframes; } }));
 /** @see <https://docs.tss-react.dev/api-references/globalstyles> */
-var GlobalStyles_1 = __webpack_require__(83256);
+var GlobalStyles_1 = __webpack_require__(31388);
 __webpack_unused_export__ = ({ enumerable: true, get: function () { return GlobalStyles_1.GlobalStyles; } });
 /** @see <https://docs.tss-react.dev/cache> */
-var cache_1 = __webpack_require__(9440);
+var cache_1 = __webpack_require__(93263);
 __webpack_unused_export__ = ({ enumerable: true, get: function () { return cache_1.getTssDefaultEmotionCache; } });
 Object.defineProperty(exports, "LW", ({ enumerable: true, get: function () { return cache_1.TssCacheProvider; } }));
 /** @see <https://docs.tss-react.dev/api-references/makestyles-usestyles> */
@@ -255,21 +255,22 @@ __webpack_unused_export__ = createMakeAndWithStyles;
 
 /***/ }),
 
-/***/ 10507:
+/***/ 9124:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.createMakeStyles = void 0;
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const react_1 = __webpack_require__(63423);
-const Object_fromEntries_1 = __webpack_require__(3348);
-const objectKeys_1 = __webpack_require__(32014);
-const cssAndCx_1 = __webpack_require__(45092);
-const getDependencyArrayRef_1 = __webpack_require__(50930);
-const typeGuard_1 = __webpack_require__(43107);
-const cache_1 = __webpack_require__(9440);
-const assert_1 = __webpack_require__(22730);
+const react_1 = __webpack_require__(86248);
+const Object_fromEntries_1 = __webpack_require__(35329);
+const objectKeys_1 = __webpack_require__(96894);
+const cssAndCx_1 = __webpack_require__(76446);
+const getDependencyArrayRef_1 = __webpack_require__(95243);
+const typeGuard_1 = __webpack_require__(81805);
+const cache_1 = __webpack_require__(93263);
+const assert_1 = __webpack_require__(17820);
+const mergeClasses_1 = __webpack_require__(16846);
 const getCounter = (() => {
     let counter = 0;
     return () => counter++;
@@ -288,11 +289,12 @@ function createMakeStyles(params) {
                 ? cssObjectByRuleNameOrGetCssObjectByRuleName
                 : () => cssObjectByRuleNameOrGetCssObjectByRuleName;
             const outerCounter = getCounter();
-            return function useStyles(params) {
+            return function useStyles(params, styleOverrides) {
+                var _a, _b;
                 const theme = useTheme();
                 const { css, cx } = (0, cssAndCx_1.useCssAndCx)();
                 const cache = (0, cache_1.useTssEmotionCache)();
-                return (0, react_1.useMemo)(() => {
+                let classes = (0, react_1.useMemo)(() => {
                     const refClassesCache = {};
                     const refClasses = typeof Proxy !== "undefined" &&
                         new Proxy({}, {
@@ -323,13 +325,54 @@ function createMakeStyles(params) {
                         classes[ruleName] =
                             refClassesCache[ruleName];
                     });
-                    return {
-                        classes,
-                        theme,
-                        css,
-                        cx,
-                    };
+                    return classes;
                 }, [cache, css, cx, theme, (0, getDependencyArrayRef_1.getDependencyArrayRef)(params)]);
+                const propsClasses = styleOverrides === null || styleOverrides === void 0 ? void 0 : styleOverrides.props.classes;
+                {
+                    classes = (0, react_1.useMemo)(() => (0, mergeClasses_1.mergeClasses)(classes, propsClasses, cx), [classes, (0, getDependencyArrayRef_1.getDependencyArrayRef)(propsClasses), cx]);
+                }
+                {
+                    let cssObjectByRuleNameOrGetCssObjectByRuleName = undefined;
+                    try {
+                        cssObjectByRuleNameOrGetCssObjectByRuleName =
+                            name !== undefined
+                                ? (_b = (_a = theme.components) === null || _a === void 0 ? void 0 : _a[name]) === null || _b === void 0 ? void 0 : _b.styleOverrides
+                                : undefined;
+                        // eslint-disable-next-line no-empty
+                    }
+                    catch (_c) { }
+                    const themeClasses = (0, react_1.useMemo)(() => {
+                        if (!cssObjectByRuleNameOrGetCssObjectByRuleName) {
+                            return undefined;
+                        }
+                        const themeClasses = {};
+                        for (const ruleName in cssObjectByRuleNameOrGetCssObjectByRuleName) {
+                            const cssObjectOrGetCssObject = cssObjectByRuleNameOrGetCssObjectByRuleName[ruleName];
+                            if (!(cssObjectOrGetCssObject instanceof Object)) {
+                                continue;
+                            }
+                            themeClasses[ruleName] = css(typeof cssObjectOrGetCssObject === "function"
+                                ? cssObjectOrGetCssObject(Object.assign({ theme, "ownerState": styleOverrides === null || styleOverrides === void 0 ? void 0 : styleOverrides.ownerState }, styleOverrides === null || styleOverrides === void 0 ? void 0 : styleOverrides.props))
+                                : cssObjectOrGetCssObject);
+                        }
+                        return themeClasses;
+                    }, [
+                        cssObjectByRuleNameOrGetCssObjectByRuleName ===
+                            undefined
+                            ? undefined
+                            : JSON.stringify(cssObjectByRuleNameOrGetCssObjectByRuleName),
+                        (0, getDependencyArrayRef_1.getDependencyArrayRef)(styleOverrides === null || styleOverrides === void 0 ? void 0 : styleOverrides.props),
+                        (0, getDependencyArrayRef_1.getDependencyArrayRef)(styleOverrides === null || styleOverrides === void 0 ? void 0 : styleOverrides.ownerState),
+                        css,
+                    ]);
+                    classes = (0, react_1.useMemo)(() => (0, mergeClasses_1.mergeClasses)(classes, themeClasses, cx), [classes, themeClasses, cx]);
+                }
+                return {
+                    classes,
+                    theme,
+                    css,
+                    cx,
+                };
             };
         };
     }
@@ -345,7 +388,7 @@ exports.createMakeStyles = createMakeStyles;
 
 /***/ }),
 
-/***/ 20494:
+/***/ 16846:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -353,13 +396,13 @@ exports.createMakeStyles = createMakeStyles;
 /* eslint-disable @typescript-eslint/no-explicit-any */
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.useMergedClasses = exports.mergeClasses = void 0;
-const objectKeys_1 = __webpack_require__(32014);
-const cssAndCx_1 = __webpack_require__(45092);
-const react_1 = __webpack_require__(63423);
+const objectKeys_1 = __webpack_require__(96894);
+const getDependencyArrayRef_1 = __webpack_require__(95243);
+const cssAndCx_1 = __webpack_require__(76446);
+const react_1 = __webpack_require__(86248);
 function mergeClasses(classesFromUseStyles, classesFromProps, cx) {
-    //NOTE: We use !(not) to be resilient for when it is used in withStyle
-    //where classes fromFromProps could diverge from the canonical type...
-    if (!classesFromProps) {
+    //NOTE: We use this test to be resilient in case classesFromProps is not of the expected type.
+    if (!(classesFromProps instanceof Object)) {
         return classesFromUseStyles;
     }
     const out = {};
@@ -380,14 +423,14 @@ function mergeClasses(classesFromUseStyles, classesFromProps, cx) {
 exports.mergeClasses = mergeClasses;
 function useMergedClasses(classes, classesOv) {
     const { cx } = (0, cssAndCx_1.useCssAndCx)();
-    return (0, react_1.useMemo)(() => mergeClasses(classes, classesOv, cx), [classes, classesOv, cx]);
+    return (0, react_1.useMemo)(() => mergeClasses(classes, classesOv, cx), [classes, (0, getDependencyArrayRef_1.getDependencyArrayRef)(classesOv), cx]);
 }
 exports.useMergedClasses = useMergedClasses;
 
 
 /***/ }),
 
-/***/ 22730:
+/***/ 17820:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -405,7 +448,7 @@ exports.assert = assert;
 
 /***/ }),
 
-/***/ 108:
+/***/ 34021:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -421,14 +464,14 @@ exports.capitalize = capitalize;
 
 /***/ }),
 
-/***/ 8861:
+/***/ 18227:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.classnames = void 0;
-const assert_1 = __webpack_require__(22730);
-const typeGuard_1 = __webpack_require__(43107);
+const assert_1 = __webpack_require__(17820);
+const typeGuard_1 = __webpack_require__(81805);
 /** Copy pasted from
  * https://github.com/emotion-js/emotion/blob/23f43ab9f24d44219b0b007a00f4ac681fe8712e/packages/react/src/class-names.js#L17-L63
  **/
@@ -477,7 +520,7 @@ exports.classnames = classnames;
 
 /***/ }),
 
-/***/ 50930:
+/***/ 95243:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -526,7 +569,7 @@ exports.getDependencyArrayRef = getDependencyArrayRef;
 
 /***/ }),
 
-/***/ 32014:
+/***/ 96894:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -542,7 +585,7 @@ exports.objectKeys = objectKeys;
 
 /***/ }),
 
-/***/ 3348:
+/***/ 35329:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -567,7 +610,7 @@ exports.objectFromEntries = !Object
 
 /***/ }),
 
-/***/ 43107:
+/***/ 81805:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -583,13 +626,13 @@ exports.typeGuard = typeGuard;
 
 /***/ }),
 
-/***/ 57514:
+/***/ 94911:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.useGuaranteedMemo = void 0;
-const react_1 = __webpack_require__(63423);
+const react_1 = __webpack_require__(86248);
 /** Like react's useMemo but with guarantee that the fn
  * won't be invoked again if deps hasn't change */
 function useGuaranteedMemo(fn, deps) {
@@ -609,7 +652,7 @@ exports.useGuaranteedMemo = useGuaranteedMemo;
 
 /***/ }),
 
-/***/ 26103:
+/***/ 21400:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -626,7 +669,7 @@ exports.matchCSSObject = matchCSSObject;
 
 /***/ }),
 
-/***/ 75282:
+/***/ 72003:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -643,12 +686,11 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.createWithStyles = void 0;
-const jsx_runtime_1 = __webpack_require__(82798);
+const jsx_runtime_1 = __webpack_require__(71999);
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const react_1 = __webpack_require__(63423);
-const makeStyles_1 = __webpack_require__(10507);
-const capitalize_1 = __webpack_require__(108);
-const mergeClasses_1 = __webpack_require__(20494);
+const react_1 = __webpack_require__(86248);
+const makeStyles_1 = __webpack_require__(9124);
+const capitalize_1 = __webpack_require__(34021);
 function createWithStyles(params) {
     const { useTheme } = params;
     const { makeStyles } = (0, makeStyles_1.createMakeStyles)({ useTheme });
@@ -675,10 +717,9 @@ function createWithStyles(params) {
             : incorporateMediaQueries(cssObjectByRuleNameOrGetCssObjectByRuleName));
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const Out = (0, react_1.forwardRef)(function (props, ref) {
-            const { className, classes: classesFromProps } = props, rest = __rest(props, ["className", "classes"]);
-            // eslint-disable-next-line prefer-const
-            let { classes, cx } = useStyles(props);
-            classes = (0, mergeClasses_1.useMergedClasses)(classes, classesFromProps || undefined);
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { className, classes: _classes } = props, rest = __rest(props, ["className", "classes"]);
+            const { classes, cx } = useStyles(props, { props });
             return ((0, jsx_runtime_1.jsx)(Component_, Object.assign({ ref: ref, className: cx(classes.root, className) }, (typeof Component === "string" ? {} : { classes }), rest)));
         });
         if (name !== undefined) {

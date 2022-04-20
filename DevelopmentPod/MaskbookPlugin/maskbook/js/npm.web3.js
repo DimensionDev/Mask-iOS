@@ -117,7 +117,7 @@ module.exports = SolidityTypeBytes;
 
 /***/ }),
 
-/***/ 45191:
+/***/ 61928:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /*
@@ -2415,7 +2415,7 @@ module.exports = Batch;
  */
 
 var utils = __webpack_require__(70472);
-var coder = __webpack_require__(45191);
+var coder = __webpack_require__(61928);
 var SolidityEvent = __webpack_require__(97774);
 var SolidityFunction = __webpack_require__(27100);
 var AllEvents = __webpack_require__(19960);
@@ -2782,7 +2782,7 @@ module.exports = {
  */
 
 var utils = __webpack_require__(70472);
-var coder = __webpack_require__(45191);
+var coder = __webpack_require__(61928);
 var formatters = __webpack_require__(95096);
 var sha3 = __webpack_require__(50224);
 var Filter = __webpack_require__(91023);
@@ -3621,7 +3621,7 @@ module.exports = {
  * @date 2015
  */
 
-var coder = __webpack_require__(45191);
+var coder = __webpack_require__(61928);
 var utils = __webpack_require__(70472);
 var errors = __webpack_require__(48048);
 var formatters = __webpack_require__(95096);
@@ -4880,7 +4880,7 @@ var c = __webpack_require__(66433);
 var Contract = __webpack_require__(65809);
 var watches = __webpack_require__(94995);
 var Filter = __webpack_require__(91023);
-var IsSyncing = __webpack_require__(74096);
+var IsSyncing = __webpack_require__(36300);
 var namereg = __webpack_require__(35949);
 var Iban = __webpack_require__(29995);
 var transfer = __webpack_require__(62544);
@@ -6290,7 +6290,7 @@ module.exports = Settings;
 
 /***/ }),
 
-/***/ 74096:
+/***/ 36300:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /*
@@ -6489,7 +6489,7 @@ module.exports = transfer;
 
 /***/ }),
 
-/***/ 90582:
+/***/ 75692:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -6520,14 +6520,14 @@ module.exports = transfer;
  * @date 2017
  */
 
-var version = (__webpack_require__(18168)/* .version */ .i8);
-var core = __webpack_require__(10833);
-var Eth = __webpack_require__(72395);
-var Net = __webpack_require__(76932);
-var Personal = __webpack_require__(33513);
-var Shh = __webpack_require__(63182);
-var Bzz = __webpack_require__(32007);
-var utils = __webpack_require__(83317);
+var version = (__webpack_require__(58681)/* .version */ .i8);
+var core = __webpack_require__(43702);
+var Eth = __webpack_require__(19277);
+var Net = __webpack_require__(88790);
+var Personal = __webpack_require__(41643);
+var Shh = __webpack_require__(90873);
+var Bzz = __webpack_require__(6839);
+var utils = __webpack_require__(11627);
 var Web3 = function Web3() {
     var _this = this;
     // sets _requestmanager etc
@@ -6595,11 +6595,11 @@ module.exports = {"version":"0.20.7"};
 
 /***/ }),
 
-/***/ 18168:
+/***/ 58681:
 /***/ ((module) => {
 
 "use strict";
-module.exports = {"i8":"1.5.2"};
+module.exports = {"i8":"1.7.3"};
 
 /***/ })
 
