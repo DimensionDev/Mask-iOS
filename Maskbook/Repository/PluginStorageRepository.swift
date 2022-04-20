@@ -73,13 +73,11 @@ extension PluginStorageRepository {
                 \PluginStorage.key == key
             ])
             fetchRequest.fetchLimit = 1
-            guard let json = try context.fetch(fetchRequest).first?.value else {
+            guard let json = try context.fetch(fetchRequest).first?.value,
+                  let data = json.data(using: .utf8) else {
                 return nil
             }
-            if let data = json.data(using: .utf8) {
-                return try? JSONDecoder().decode(RedPacketRecord.self, from: data)
-            }
-            return nil
+            return try? JSONDecoder().decode(RedPacketRecord.self, from: data)
         } catch {
             return nil
         }
@@ -106,13 +104,12 @@ extension PluginStorageRepository {
                 \PluginStorage.key == key
             ])
             fetchRequest.fetchLimit = 1
-            guard let json = try context.fetch(fetchRequest).first?.value else {
+            guard let json = try context.fetch(fetchRequest).first?.value,
+                  let data = json.data(using: .utf8) else {
                 return nil
             }
-            if let data = json.data(using: .utf8) {
-                return try? JSONDecoder().decode(RedPacketRecord.self, from: data)
-            }
-            return nil
+
+            return try JSONDecoder().decode(RedPacketRecord.self, from: data)
         } catch {
             return nil
         }
