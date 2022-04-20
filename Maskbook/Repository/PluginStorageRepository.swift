@@ -68,7 +68,43 @@ extension PluginStorageRepository {
             let key = "\(address)-\(chain.chain.rawValue)-\(chain.networkId)-\(nonce)"
             let context = viewContext
             let fetchRequest = PluginStorage.fetchRequest()
-            fetchRequest.predicate = PluginStorage.predicate(keys: [key], pluginID: PluginID.redPackage.rawValue)
+            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
+                \PluginStorage.pluginID == PluginID.redPackage.rawValue,
+                \PluginStorage.key == key
+            ])
+            fetchRequest.fetchLimit = 1
+            guard let json = try context.fetch(fetchRequest).first?.value else {
+                return nil
+            }
+            if let data = json.data(using: .utf8) {
+                return try? JSONDecoder().decode(RedPacketRecord.self, from: data)
+            }
+            return nil
+        } catch {
+            return nil
+        }
+    }
+
+
+    /// Resturn RedPacketRecord
+    /// - Parameters:
+    ///   - address: wallet address
+    ///   - chain: chain and netword
+    ///   - tx: redpacket txid (hash on block)
+    /// - Returns: RedPacketRecord
+    static func queryRecord(
+        address: String,
+        chain: BlockChainNetwork,
+        tx: String
+    ) -> RedPacketRecord? {
+        do {
+            let key = "\(address)-\(chain.rawValue)-\(tx)"
+            let context = viewContext
+            let fetchRequest = PluginStorage.fetchRequest()
+            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
+                \PluginStorage.pluginID == PluginID.redPackage.rawValue,
+                \PluginStorage.key == key
+            ])
             fetchRequest.fetchLimit = 1
             guard let json = try context.fetch(fetchRequest).first?.value else {
                 return nil

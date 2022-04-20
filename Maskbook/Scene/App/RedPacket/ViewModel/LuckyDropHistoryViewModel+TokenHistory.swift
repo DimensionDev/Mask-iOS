@@ -20,20 +20,21 @@ extension LuckyDropHistoryViewModel {
         guard let params = await self.getFetchParams() else {
             return []
         }
-        let (urlString, contractAddress, provider, address, networkName) = params
+        let (urlString, contractAddress, provider, walletAddress, networkName) = params
 
         guard let baseURL = URL(string: urlString) else {
             return []
         }
         let startBlock = await self.startBlock
         let apiKey = await self.apiKey
-        let networkId = await self.usersettings.network.networkId
+        let network = await self.usersettings.network
+        let networkId = network.networkId
         let contract = self.contract
         
         // get endBlock
         let block = try await provider.blockNumber()
         // build request
-        guard let urlComponents = baseURL.buildURLComponents(apiKey: apiKey, address: address, startBlock: startBlock, endBlock: block),
+        guard let urlComponents = baseURL.buildURLComponents(apiKey: apiKey, address: walletAddress, startBlock: startBlock, endBlock: block),
               let url = urlComponents.url else {
             return []
         }
@@ -47,9 +48,20 @@ extension LuckyDropHistoryViewModel {
         let payloads = try data.parseRedpacketPayload(
             contract: contract,
             decoding: decoder,
-            address: address,
+            address: walletAddress,
             networkName: networkName ?? ""
         )
+
+        // may be this should be fetched in a single request in case the payloads is huge
+        let passwords: [String: String] = await Task { @MainActor in
+            let passwords: [String: String] = payloads.reduce(into: [:]) {
+                if let txid = $1.basic?.txid, !txid.isEmpty,
+                   let record = PluginStorageRepository.queryRecord(address: walletAddress, chain: network, tx: txid) {
+                    $0[txid] = record.password
+                }
+            }
+            return passwords
+        }.value
 
         let ethAddress = EthereumAddress(contractAddress)
 
@@ -73,7 +85,7 @@ extension LuckyDropHistoryViewModel {
             of: TokenPayload?.self,
             returning: [TokenPayload].self
         ) { taskGroup in
-            for payload in payloads {
+            for payload in payloads[0 ..< 3] {
                 _ = taskGroup.addTaskUnlessCancelled {
                     // mark @MaskGroupActor for the closure to make it works
                     async let task = Task.detached { @MaskGroupActor () -> TokenPayload? in
@@ -118,6 +130,7 @@ extension LuckyDropHistoryViewModel {
                         let address = payload.payload?.tokenAddress ?? ""
                         let token = await builder.buildToken(for: address, networkId: Int(networkId))
                         payload.payload?.token = token
+                        payload.basic?.password = passwords[txid] ?? ""
 
                         return TokenPayload.init(checkAvailability: checkAvailability, payload: payload)
                     }

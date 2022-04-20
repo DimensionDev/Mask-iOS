@@ -96,6 +96,7 @@
 		1F58730F277C51A3005A7B11 /* DappScriptPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58730E277C51A3005A7B11 /* DappScriptPayload.swift */; };
 		1F705FE327CF6AB9002A4A7E /* SpinWheelAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */; };
 		1F7B766A280FD65C00444A9D /* MaskGroupActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7B7669280FD65C00444A9D /* MaskGroupActor.swift */; };
+		1F897E77280FF37F00B66355 /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F897E76280FF37F00B66355 /* Predicate.swift */; };
 		1F8AD0CB26CA3AA000C9694F /* MaskLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AD0CA26CA3AA000C9694F /* MaskLoadingIndicator.swift */; };
 		1F8AD0CE26CA3AFB00C9694F /* LoadingAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AD0CD26CA3AFB00C9694F /* LoadingAnimator.swift */; };
 		1F8AD0D026CA3BAE00C9694F /* SpinBallAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AD0CF26CA3BAE00C9694F /* SpinBallAnimator.swift */; };
@@ -872,6 +873,7 @@
 		1F58730E277C51A3005A7B11 /* DappScriptPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappScriptPayload.swift; sourceTree = "<group>"; };
 		1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinWheelAnimator.swift; sourceTree = "<group>"; };
 		1F7B7669280FD65C00444A9D /* MaskGroupActor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskGroupActor.swift; sourceTree = "<group>"; };
+		1F897E76280FF37F00B66355 /* Predicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Predicate.swift; sourceTree = "<group>"; };
 		1F8AD0CA26CA3AA000C9694F /* MaskLoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskLoadingIndicator.swift; sourceTree = "<group>"; };
 		1F8AD0CD26CA3AFB00C9694F /* LoadingAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimator.swift; sourceTree = "<group>"; };
 		1F8AD0CF26CA3BAE00C9694F /* SpinBallAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinBallAnimator.swift; sourceTree = "<group>"; };
@@ -3349,6 +3351,7 @@
 				2AF885F5271EED7D0004565A /* LAErrorHandler.swift */,
 				2D40A74C276848F8004B404C /* FetchedResultsPublisher.swift */,
 				2AF885F6271EED7D0004565A /* SwiftUI */,
+				1F897E76280FF37F00B66355 /* Predicate.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -4483,6 +4486,7 @@
 				0FE54FE42759C43100B32BD6 /* BalanceSegmentView.swift in Sources */,
 				0F9C043426725B250085342A /* Token+Display.swift in Sources */,
 				2AF885FD271EED7D0004565A /* WarningPopController.swift in Sources */,
+				1F897E77280FF37F00B66355 /* Predicate.swift in Sources */,
 				2AF88538271EE9310004565A /* DerivationPathTableViewCell.swift in Sources */,
 				5D84DC4D27B12B810009025E /* WebViewScrollViewDelegate.swift in Sources */,
 				1FEE1E99277D8FC500697F81 /* DappRPCResponse.swift in Sources */,

@@ -47,7 +47,7 @@ extension RedPacket {
         let contractAddress: String
         var rpid: String?
         let txid: String
-        let password: String
+        var password: String
         let shares: Int
         let isRandom: Bool
         let total: String

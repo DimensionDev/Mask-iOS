@@ -124,7 +124,7 @@ extension LuckyDropHistoryTokenItemViewModel {
                 
                 return nil
             } else {
-                return .sharable
+                return .sharable(hasPassword: !(luckyDrop.basic?.password.isEmpty ?? true))
             }
         }()
         
@@ -155,11 +155,11 @@ extension LuckyDropHistoryTokenItemViewModel {
 }
 
 extension LuckyDropHistoryTokenItemViewModel {
-    enum RedPacketStatus {
+    enum RedPacketStatus: Equatable {
         case refunded
         case refunable
         case empty
-        case sharable
+        case sharable(hasPassword: Bool)
     }
 }
 
@@ -168,6 +168,7 @@ extension Optional where Wrapped == LuckyDropHistoryTokenItemViewModel.RedPacket
         switch self {
         case .empty, .refunded: return false
         case .none: return false
+        case let .sharable(hasPassword): return hasPassword
         default: return true
         }
     }
@@ -177,7 +178,10 @@ extension Optional where Wrapped == LuckyDropHistoryTokenItemViewModel.RedPacket
     }
     
     var showRefundTip: Bool {
-        self == .sharable
+        guard case .sharable = self else {
+            return false
+        }
+        return true
     }
     
     var title: String {
