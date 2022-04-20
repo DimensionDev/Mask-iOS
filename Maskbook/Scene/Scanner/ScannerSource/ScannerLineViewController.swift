@@ -10,7 +10,7 @@ import AVFoundation
 import Foundation
 import UIKit
 
-public protocol ScannerLineViewControllerDelegate: NSObjectProtocol {
+public protocol ScannerLineViewControllerDelegate: AnyObject {
      func scanFinished(scanResult: ScanResult?, error: String?)
 }
 
