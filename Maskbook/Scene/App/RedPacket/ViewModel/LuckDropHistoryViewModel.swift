@@ -7,12 +7,6 @@ import PullRefresh
 import web3swift
 import struct PullRefresh.InterActionState
 
-@globalActor
-struct MaskGroupActor {
-  actor ActorType {}
-  static let shared: ActorType = ActorType()
-}
-
 @MainActor
 @dynamicMemberLookup
 final class LuckyDropHistoryViewModel: ObservableObject {
@@ -25,7 +19,7 @@ final class LuckyDropHistoryViewModel: ObservableObject {
     @InjectedProvider(\.userDefaultSettings)
     var usersettings
     private(set) var exploreAddress: String?
-    private(set) var startBlock: Int?
+    private(set) var startBlock: BigUInt?
     private(set) var apiKey: String?
 
     let contract = HappyRedPacketV4()
@@ -111,9 +105,7 @@ final class LuckyDropHistoryViewModel: ObservableObject {
 
         if !didRequest {
             state = .loading
-            Task {
-                await loadData()
-            }
+            Task { await loadData() }
         } else {
             if payloadIsEmpty(for: selection) {
                 state = .empty
@@ -139,9 +131,9 @@ extension LuckyDropHistoryViewModel {
             try await fetchTokenRedPacketHistory()
         }
 
-        do {
+        await displayData(on: .token) {
             let history = try await tokenHistoryTask?.value ?? []
-            
+
             if tokenPayloads.isEmpty {
                 tokenPayloads = history
             } else {
@@ -149,19 +141,40 @@ extension LuckyDropHistoryViewModel {
                     tokenPayloads = history
                 }
             }
-            
-            self.tokenHistoryTask = nil
-            
-            guard selection == .token else { return }
-            state = tokenPayloads.isEmpty ? .empty : .idle
-        } catch  {
-            guard selection == .token else {
-                return
-            }
-            errorhandling(error, for: .token)
+
+            tokenHistoryTask = nil
         }
     }
-    
+
+    private func loadNFTHistory() async {
+        dataFetchedSet.insert(.nft)
+        nftHistoryTask?.cancel()
+        nftHistoryTask = Task {
+            try? await Task.sleep(nanoseconds: 2 * 1_000_000_000)
+            return []
+        }
+
+        await displayData(on: .nft) {
+            nftHistoryTask = nil
+        }
+    }
+
+    private func displayData(on kind: LuckDropKind, action: () async throws -> Void) async {
+        do {
+            try await action()
+
+            guard selection == kind else {
+                return
+            }
+            state = payloadIsEmpty(for: kind) ? .empty : .idle
+        } catch {
+            guard selection == kind else {
+                return
+            }
+            errorhandling(error, for: kind)
+        }
+    }
+
     private func errorhandling(_ error: Error, for selection: LuckDropKind) {
         // all handle with empty and idle state
         if payloadIsEmpty(for: selection) {
@@ -169,11 +182,5 @@ extension LuckyDropHistoryViewModel {
         } else {
             state = .idle
         }
-    }
-
-    private func loadNFTHistory() async {
-        try? await Task.sleep(nanoseconds: 2 * 1_000_000_000)
-        dataFetchedSet.insert(.nft)
-        state = .empty
     }
 }

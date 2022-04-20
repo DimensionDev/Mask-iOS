@@ -5,7 +5,7 @@ final class LuckDropHistoryController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "History Records"
+        title = L10n.Plugins.Luckydrop.historyTitle
     }
 
     lazy var viewModel = LuckyDropHistoryViewModel()
@@ -13,7 +13,6 @@ final class LuckDropHistoryController: BaseViewController {
     override func buildContent() {
         super.buildContent()
         LuckyDropHistoryView(viewModel: viewModel).asContent(in: self)
-//        viewModel.displayData()
     }
 }
 

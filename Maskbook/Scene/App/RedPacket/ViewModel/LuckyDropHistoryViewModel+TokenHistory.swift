@@ -206,7 +206,7 @@ fileprivate extension Data {
 }
 
 fileprivate extension URL {
-    func buildURLComponents(apiKey: String?, address: String, page: Int = 0, offset: Int = 0, startBlock: Int?, endBlock: BigUInt?) -> URLComponents? {
+    func buildURLComponents(apiKey: String?, address: String, page: Int = 0, offset: Int = 0, startBlock: BigUInt?, endBlock: BigUInt?) -> URLComponents? {
         guard var url = URLComponents(url: self, resolvingAgainstBaseURL: false) else {
             return nil
         }
@@ -217,7 +217,7 @@ fileprivate extension URL {
             .init(name: "module", value: "account"),
             .init(name: "sort", value: "desc"),
             .init(name: "address", value: address),
-            .init(name: "startblock", value: startBlock.flatMap { "\($0)" }),
+            .init(name: "startblock", value: startBlock.flatMap { String.init($0) }),
             .init(name: "endblock", value: endBlock.flatMap { String.init($0) }),
 //            .init(name: "page", value: "\(page)"),
 //            .init(name: "offset", value: "\(offset)")

@@ -95,6 +95,7 @@
 		1F48D38F2805199600A51B89 /* LuckyDropHistoryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48D38E2805199600A51B89 /* LuckyDropHistoryHelper.swift */; };
 		1F58730F277C51A3005A7B11 /* DappScriptPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58730E277C51A3005A7B11 /* DappScriptPayload.swift */; };
 		1F705FE327CF6AB9002A4A7E /* SpinWheelAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */; };
+		1F7B766A280FD65C00444A9D /* MaskGroupActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7B7669280FD65C00444A9D /* MaskGroupActor.swift */; };
 		1F8AD0CB26CA3AA000C9694F /* MaskLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AD0CA26CA3AA000C9694F /* MaskLoadingIndicator.swift */; };
 		1F8AD0CE26CA3AFB00C9694F /* LoadingAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AD0CD26CA3AFB00C9694F /* LoadingAnimator.swift */; };
 		1F8AD0D026CA3BAE00C9694F /* SpinBallAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AD0CF26CA3BAE00C9694F /* SpinBallAnimator.swift */; };
@@ -870,6 +871,7 @@
 		1F48D38E2805199600A51B89 /* LuckyDropHistoryHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuckyDropHistoryHelper.swift; sourceTree = "<group>"; };
 		1F58730E277C51A3005A7B11 /* DappScriptPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappScriptPayload.swift; sourceTree = "<group>"; };
 		1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinWheelAnimator.swift; sourceTree = "<group>"; };
+		1F7B7669280FD65C00444A9D /* MaskGroupActor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskGroupActor.swift; sourceTree = "<group>"; };
 		1F8AD0CA26CA3AA000C9694F /* MaskLoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskLoadingIndicator.swift; sourceTree = "<group>"; };
 		1F8AD0CD26CA3AFB00C9694F /* LoadingAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimator.swift; sourceTree = "<group>"; };
 		1F8AD0CF26CA3BAE00C9694F /* SpinBallAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinBallAnimator.swift; sourceTree = "<group>"; };
@@ -3334,6 +3336,7 @@
 		2AF885D6271EED7D0004565A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1F7B7669280FD65C00444A9D /* MaskGroupActor.swift */,
 				1F3301D927D85B9B00FA0652 /* Alert */,
 				2A72F3FA27BE8184004A3F95 /* DBImage */,
 				2AF885D7271EED7D0004565A /* Popup */,
@@ -4583,6 +4586,7 @@
 				2D40E6CA276AD30B00C8C5FF /* WalletConnectSelectAccountViewController.swift in Sources */,
 				2AF884C3271EE9300004565A /* MaskbookTab.swift in Sources */,
 				2D11F04427895382002CE232 /* SocialAccountCollectionCell.swift in Sources */,
+				1F7B766A280FD65C00444A9D /* MaskGroupActor.swift in Sources */,
 				1FCCE39B26D7F09700909A5B /* SpinActivityAnimator.swift in Sources */,
 				2AF884BF271EE9300004565A /* PluginFactory.swift in Sources */,
 				2A5FAEA227CF7AD200D01250 /* GuideView.swift in Sources */,

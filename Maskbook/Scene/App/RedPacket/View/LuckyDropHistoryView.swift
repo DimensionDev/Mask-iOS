@@ -133,7 +133,7 @@ struct LuckyDropHistoryRow: View {
                     .foregroundColor(Asset.Colors.Text.dark.asColor())
                     .horizontallyFilled()
 
-                    Text(viewModel.createdDateInfo + " \(L10n.Scene.OpenRedPackage.created)")
+                    Text(viewModel.createdDateInfo + " \(L10n.Plugins.Luckydrop.created)")
                         .font(FontStyles.rh7.font)
                         .foregroundColor(Asset.Colors.Text.dark.asColor())
                 }

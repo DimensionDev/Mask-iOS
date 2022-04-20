@@ -989,7 +989,9 @@
             "quantity": "Quantity",
             "max-quantity-error": "The max quantity is 255.",
             "account": "Account",
-            "refund_tip": "Refund the unclaimed after %@"
+            "refund_tip": "Refund the unclaimed after %@",
+            "history_title": "History Records",
+            "created": "Created"
         }
     }
 }

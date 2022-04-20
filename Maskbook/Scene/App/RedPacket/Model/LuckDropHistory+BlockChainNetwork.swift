@@ -1,7 +1,9 @@
 import Foundation
 
+import BigInt
+
 extension BlockChainNetwork {
-    var startBlock: Int? {
+    var startBlock: BigUInt? {
         switch self {
         case .eth: return 12939427
         case .bsc: return 9657240

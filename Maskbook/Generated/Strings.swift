@@ -652,6 +652,10 @@ enum L10n {
       static var claimed: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Claimed")
       }
+      /// Created
+      static var created: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Created")
+      }
       /// End Time
       static var endTime: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.End-Time")
@@ -663,6 +667,10 @@ enum L10n {
       /// Enter quantity
       static var enterQuantity: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Enter-Quantity")
+      }
+      /// History Records
+      static var historyTitle: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.HistoryTitle")
       }
       /// MAX
       static var max: String {
@@ -1513,10 +1521,6 @@ enum L10n {
       /// Confirm Risk Warning
       static var confirmRiskWarning: String {
         return L10n.tr("Localizable", "Scene.OpenRedPackage.ConfirmRiskWarning")
-      }
-      /// Created
-      static var created: String {
-        return L10n.tr("Localizable", "Scene.OpenRedPackage.Created")
       }
       /// Empty
       static var empty: String {
