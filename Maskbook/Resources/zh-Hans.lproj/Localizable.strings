@@ -43,6 +43,10 @@
 "Common.Alert.KeychainAuthPrompt.Title" = "验证以使用您的密钥";
 "Common.Alert.LocalBackup.BackupCompleted" = "备份完成";
 "Common.Alert.LocalBackup.BackupFailed" = "备份失败！";
+"Common.Alert.NoLocalWalletForWalletconnect.Description" = "";
+"Common.Alert.NoLocalWalletForWalletconnect.Title" = "";
+"Common.Alert.OnlyScanPersona.Description" = "";
+"Common.Alert.OnlyScanPersona.Title" = "";
 "Common.Alert.PersonaCreate.Description" = "您已成功创建您的角色%@。 ";
 "Common.Alert.PersonaCreate.Title" = "成功 ";
 "Common.Alert.PersonaLogout.Description" = "登出身份后，与您的身份关联的社交账户将不能再解密过去的加密消息。";
@@ -111,6 +115,7 @@
 "Common.Controls.Sent" = "发送";
 "Common.Controls.Signout" = "退出登录";
 "Common.Controls.Skip" = "跳过，稍后下载";
+"Common.Controls.SpeedUp" = "";
 "Common.Controls.TakePhoto" = "拍照";
 "Common.Controls.TryAgain" = "重试";
 "Common.Controls.Verify" = "验证";
@@ -242,6 +247,8 @@ Clicking the confirm button means that you agree to bear the above possible risk
 "Scene.IdentityRecovery.PrivateKeyButtonDescription" = "正在恢复您的角色。";
 "Scene.IdentityRecovery.Title" = "恢复并登录";
 "Scene.IdentityRestoreSigninSuccess.Title" = "已成功恢复并登录！";
+"Scene.MaskScan.ScanAll" = "";
+"Scene.MaskScan.ScanPersona" = "";
 "Scene.MnemonicVerify.Description" = "请按照正确的顺序依次点击每个单词。";
 "Scene.MnemonicVerify.MnemonicError" = "助记词错误";
 "Scene.MnemonicVerify.MnemonicPrompt" = "点击已选择单词以替换另一个单词。";
@@ -283,8 +290,9 @@ Clicking the confirm button means that you agree to bear the above possible risk
 "Scene.PersonaAvatar.Title" = "设置角色头像";
 "Scene.PersonaContacts.Contact" = "联系人";
 "Scene.PersonaContacts.Delete" = "确认删除";
-"Scene.PersonaContacts.EmptyContactsTips" = "您还没有联系人。 
-邀请好友下载 Mask Network。";
+"Scene.PersonaContacts.EmptyContactsTips" = "社交媒体时间线上未捕捉到任何账户。
+邀请您的朋友下载 Mask Network";
+"Scene.PersonaContacts.SearchContactTips" = "未找到联系人。该账户可能未在社交媒体时间线上捕捉";
 "Scene.PersonaDownload.DownloadTips" = "二维码会加密您个人的身份码或私钥，建议打印它。您可以使用 Mask App 扫描二维码以登录。";
 "Scene.PersonaDownload.IdentityId" = "身份代码";
 "Scene.PersonaExportPrivateKey.BackupRecovery" = "备份与恢复设置";
@@ -508,6 +516,8 @@ Clicking the confirm button means that you agree to bear the above possible risk
 "Scene.TokenDetail.SwitchNetwork" = "手动切换网络";
 "Scene.TokenDetail.WalletconnectSwitchNetworkAlert" = "当前通过 WalletConnect 接入的钱包网络与该资产的网络 (%@) 不同，请去您的钱包切换至 %@ 网络，并通过 WalletConnect 重新连入。";
 "Scene.TransactionHistory.NoTransaction" = "没有查到您的近期交易记录";
+"Scene.TransactionHistory.StatusFailed" = "";
+"Scene.TransactionHistory.StatusPendind" = "";
 "Scene.WalletBackup.BtnCancel" = "取消";
 "Scene.WalletBackup.BtnCopy" = "复制";
 "Scene.WalletBackup.KeystoreTips" = "请记住您当前设置的密码。您需要使用该密码来从导出的 Keystore 恢复您的钱包。";
@@ -548,7 +558,6 @@ Clicking the confirm button means that you agree to bear the above possible risk
 "Scene.WalletConnect.NoWallets" = "您还没有安装任何可用的 %@ 钱包用于 walletConnect";
 "Scene.WalletConnect.QrCodeTips" = "使用支持 WalletConnect 的钱包扫码下面的二维码";
 "Scene.WalletConnect.ReplaceWalletConnectWallet" = "这个钱包地址已连接到 WaletConnect。导入这个钱包地址会自动断开 WaletConnect 账户的连接。";
-"Scene.WalletConnect.Scan" = "扫描二维码";
 "Scene.WalletConnect.ScanQRCode" = "扫描二维码";
 "Scene.WalletConnect.SelectWallet" = "选择钱包";
 "Scene.WalletConnect.TapToCopy" = "点击复制到剪贴板";
