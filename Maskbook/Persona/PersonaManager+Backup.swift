@@ -12,43 +12,10 @@ import SwiftyJSON
 import WebExtension_Shim
 
 extension PersonaManager {
-    static func backupMnemonic(identifier: String) -> AnyPublisher<String, Error> {
-        let request = WebExtension.Persona.BackupPersonaMnemonic.withPayload {
-            WebExtension.Persona.IdentifierPayload(identifier: identifier)
+    static func backupPrivateKey(identifier: String) -> String? {
+        guard let persona = PersonaRepository.queryPersona(identifier: identifier) else {
+            return nil
         }
-        return request
-            .eraseToAnyPublisher()
-            .compactMap(\.result?.string)
-            .eraseToAnyPublisher()
-    }
-
-    static func backupPrivateKey(identifier: String) -> AnyPublisher<String, Error> {
-        let request = WebExtension.Persona.BackupPersonaPrivateKey.withPayload {
-            WebExtension.Persona.IdentifierPayload(identifier: identifier)
-        }
-        return request
-            .eraseToAnyPublisher()
-            .compactMap(\.result?.string)
-            .eraseToAnyPublisher()
-    }
-    
-    static func backupJson(identifier: String) -> AnyPublisher<JSON, Error> {
-        let request = WebExtension.Persona.BackupPersonaJson.withPayload {
-            WebExtension.Persona.IdentifierPayload(identifier: identifier)
-        }
-        return request
-            .eraseToAnyPublisher()
-            .compactMap(\.result)
-            .eraseToAnyPublisher()
-    }
-    
-    static func backupBase64(identifier: String) -> AnyPublisher<String, Error> {
-        let request = WebExtension.Persona.BackupPersonaBase64.withPayload {
-            WebExtension.Persona.IdentifierPayload(identifier: identifier)
-        }
-        return request
-            .eraseToAnyPublisher()
-            .compactMap(\.result?.string)
-            .eraseToAnyPublisher()
+        return persona.privateKeyBase64String
     }
 }

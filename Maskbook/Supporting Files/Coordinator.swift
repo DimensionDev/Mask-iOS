@@ -549,9 +549,7 @@ extension Coordinator {
             return viewController
 
         case let .personaExportPrivateKey(personaIdentifier):
-            let viewModel = PersonaExportPrivateKeyViewModel(personaIdentifier: personaIdentifier)
-            let viewController = PersonaExportPrivateKeyViewController(viewModel: viewModel)
-            return viewController
+            return PersonaExportPrivateKeyViewController(personaIdentifier: personaIdentifier)
             
         case let .tokenDetail(token):
             let viewController = TokenDetailViewController(tokenModel: token)
