@@ -1,12 +1,11 @@
 import Combine
 import Foundation
+import struct SwiftUI.Binding
 
 import BigInt
 import PullRefresh
 import web3swift
 import struct PullRefresh.InterActionState
-import UIKit
-import SwiftUI
 
 @globalActor
 struct MaskGroupActor {
@@ -23,6 +22,8 @@ final class LuckyDropHistoryViewModel: ObservableObject {
         case idle
     }
 
+    @InjectedProvider(\.userDefaultSettings)
+    var usersettings
     private(set) var exploreAddress: String?
     private(set) var startBlock: Int?
     private(set) var apiKey: String?
@@ -43,17 +44,6 @@ final class LuckyDropHistoryViewModel: ObservableObject {
             checkPullState(pullState)
         }
     }
-    
-    subscript<Value>(dynamicMember keyPath: ReferenceWritableKeyPath<LuckyDropHistoryViewModel, Value>) -> Binding<Value> {
-        Binding(
-            get: {
-                self[keyPath: keyPath]
-            },
-            set: { value, _ in
-                self[keyPath: keyPath] = value
-            }
-        )
-    }
 
     private var cancelableStorage: Set<AnyCancellable> = []
 
@@ -71,8 +61,19 @@ final class LuckyDropHistoryViewModel: ObservableObject {
         self.nftHistoryTask?.cancel()
         self.tokenHistoryTask?.cancel()
     }
+
+    subscript<Value>(dynamicMember keyPath: ReferenceWritableKeyPath<LuckyDropHistoryViewModel, Value>) -> Binding<Value> {
+        Binding(
+            get: {
+                self[keyPath: keyPath]
+            },
+            set: { value, _ in
+                self[keyPath: keyPath] = value
+            }
+        )
+    }
     
-    func checkPullState(_ pullState: InterActionState) {
+    private func checkPullState(_ pullState: InterActionState) {
         if pullState.isCanceled {
             switch self.selection {
             case .token: self.tokenHistoryTask?.cancel()
@@ -87,12 +88,6 @@ final class LuckyDropHistoryViewModel: ObservableObject {
         }
     }
 
-    @InjectedProvider(\.userDefaultSettings)
-    var usersettings
-
-    private var page = 1
-    private var offset = 20
-
     func getFetchParams() async -> (exploreAddress: String, contractAddress: String, provider: web3, address: String, netWorkName: String?)? {
         guard let urlString = self.exploreAddress,
               let contractAddress = self.usersettings.network.redPacketAddressV4,
@@ -104,7 +99,7 @@ final class LuckyDropHistoryViewModel: ObservableObject {
         return (urlString, contractAddress, provider, address, networkName)
     }
     
-    func payloadIsEmpty(for selection: LuckDropKind) -> Bool {
+    private func payloadIsEmpty(for selection: LuckDropKind) -> Bool {
         switch selection {
         case .token: return tokenPayloads.isEmpty
         case .nft: return nftPayloads.isEmpty
@@ -134,7 +129,9 @@ final class LuckyDropHistoryViewModel: ObservableObject {
         case .nft: await loadNFTHistory()
         }
     }
+}
 
+extension LuckyDropHistoryViewModel {
     private func loadTokenHistory() async {
         dataFetchedSet.insert(.token)
         tokenHistoryTask?.cancel()

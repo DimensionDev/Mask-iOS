@@ -1,12 +1,5 @@
-//
-//  LuckyDropHistoryItemViewModel.swift
-//  Maskbook
-//
-//  Created by yzj on 2022/4/13.
-//  Copyright © 2022 dimension. All rights reserved.
-//
-
 import Foundation
+
 import BigInt
 
 final class LuckyDropHistoryTokenItemViewModel: ObservableObject {
@@ -114,7 +107,7 @@ extension LuckyDropHistoryTokenItemViewModel {
 
         
         let state: RedPacketStatus? = {
-            // refund first, in case after refund claimed == 0, total == 0
+            // refund first, in case after refund, also isEmpty
             if status.isRefunded {
                 return .refunded
             }
