@@ -137,6 +137,14 @@
             "camera_access": {
                 "title": "",
                 "description": ""
+            },
+            "only_scan_persona": {
+                "title": "",
+                "description": ""
+            },
+            "no_local_wallet_for_walletconnect": {
+                "title": "",
+                "description": ""
             }
         },
         "controls": {
@@ -177,7 +185,8 @@
             "move_data_now": "",
             "remind_me_later": "",
             "go_settings": "",
-            "dont_allow": ""
+            "dont_allow": "",
+            "speed_up": ""
         },
         "toast": {
             "saved": "",
@@ -553,6 +562,7 @@
         },
         "persona_contacts": {
             "empty_contacts_tips": "",
+            "search_contact_tips": "",
             "delete": "",
             "contact": "聯絡人"
         },
@@ -604,7 +614,9 @@
             "walletconnect_switch_network_alert": ""
         },
         "transaction_history": {
-            "no_transaction": ""
+            "no_transaction": "",
+            "status_pendind": "",
+            "status_failed": ""
         },
         "wallet_receive": {
             "btn_share": "分享",
@@ -778,6 +790,10 @@
                 "cloud_backup_password_hint": ""
             }
         },
+        "mask_scan": {
+            "scan_persona": "",
+            "scan_all": ""
+        },
         "wallet_connect": {
             "wallet_connect": "",
             "select_wallet": "",
@@ -787,7 +803,6 @@
             "no_wallets": "",
             "connecting": "",
             "connect_success": "",
-            "scan": "",
             "disconnect": "",
             "connection_fail": "",
             "could_not_switch_blockchain_network_title": "",
