@@ -362,10 +362,14 @@ class WalletSendHelper {
                             )
                             do {
                                 let sendResult = try provider.eth.sendRawTransaction(rawTransaction, transacationEncodeData)
-                                completion(.success(sendResult.hash))
+                                DispatchQueue.main.async {
+                                    completion(.success(sendResult.hash))
+                                }
                                 return
                             } catch {
-                                completion(.failure(WalletSendError.ethereumError(error)))
+                                DispatchQueue.main.async {
+                                    completion(.failure(WalletSendError.ethereumError(error)))
+                                }
                                 return
                             }
                         }

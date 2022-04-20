@@ -63,7 +63,7 @@ struct RedPacketConfirmView: View {
                     title: L10n.Plugins.Luckydrop.Confirm.totalAmount,
                     value: .token(
                         tokenURL: viewModel.tokenIconURL,
-                        value: viewModel.totalAmount
+                        value: viewModel.totalAmountDisplay
                     )
                 )
                 buildRow(title: L10n.Plugins.Luckydrop.Confirm.transactionFee, value: .gas(viewModel.gasFeeInfo))

@@ -75,7 +75,7 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
         return quantityInt.rounding(accordingToBehavior: roundBehavior).stringValue
     }
     
-    var totalAmount: String {
+    var totalAmountDisplay: String {
         guard let input = inputParam else {
             return ""
         }
@@ -92,6 +92,22 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
         }
         let roundBehavior = NSDecimalNumberHandler(roundingMode: .plain, scale: 4, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
         return quantityInt.rounding(accordingToBehavior: roundBehavior).stringValue
+    }
+    
+    var totalAmount: NSDecimalNumber {
+        guard let input = inputParam else {
+            return .zero
+        }
+        guard let decimals = token?.decimal else {
+            return .zero
+        }
+        let quantityValue = NSDecimalNumber(string: String(input.totalTokens))
+        guard quantityValue != .notANumber else {
+            return .zero
+        }
+        let quantityInt = quantityValue.dividing(by: NSDecimalNumber(mantissa: 1, exponent: decimals, isNegative: false))
+        let roundBehavior = NSDecimalNumberHandler(roundingMode: .plain, scale: 4, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
+        return quantityInt.rounding(accordingToBehavior: roundBehavior)
     }
     
     var gasFeeInfo: String {
@@ -249,12 +265,59 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
             record: record
         )
         
+        let completionWrapper: (Swift.Result<String, Error>) -> Void = { [weak self] result in
+            switch result {
+            case .success(let txhash):
+                guard let self = self else { return }
+                guard let gasFeeItem = self.gasFeeItem,
+                      let gwei = BigUInt(gasFeeItem.gWei),
+                      let gasLimit = BigUInt(gasFeeItem.gasLimit),
+                      let token = self.token
+                else {
+                    return
+                }
+                let to = transaction.to.address
+                let amount = self.totalAmount.stringValue
+                
+                let transactionInfo = PendTransactionModel.TranscationInfo(
+                    gaslimit: gasLimit,
+                    gasPrice: gwei * (BigUInt(10).power(9)),
+                    amount: amount,
+                    toAddress: to,
+                    gasNetModel: nil,
+                    token: token
+                )
+                let history = TransactionHistory(
+                    txHash: txhash,
+                    asset: token,
+                    toAddress: to,
+                    amount: amount)
+                PendTransactionManager.shared.addPendTrancation(
+                    txHash: txhash,
+                    history: history,
+                    transcationInfo:transactionInfo,
+                    nonce: nonce)
+                completion(result)
+                
+            case .failure(let error):
+                self?.buttonState = .normal
+                let alertController = AlertController(
+                    title: error.localizedDescription,
+                    message: "",
+                    confirmButtonText: L10n.Common.Controls.done,
+                    imageType: .error)
+                Coordinator.main.present(
+                    scene: .alertController(alertController: alertController),
+                    transition: .alertController(completion: nil)
+                )
+            }
+        }
         if fromAccount.fromWalletConnect {
             walletConnectClient.signTransaction(
                 transaction: transaction,
                 transactionOptions: transactionOptions,
                 nonce: nonce,
-                completion)
+                completionWrapper)
         } else {
             let maxFeePerGas = Web3.Utils.parseToBigUInt(gasFeeItem.suggestedMaxFeePerGas, units: .Gwei)
             let maxInclusionFeePerGas = Web3.Utils.parseToBigUInt(
@@ -270,7 +333,7 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
                 maxInclusionFeePerGas: maxInclusionFeePerGas == 0 ? nil : maxInclusionFeePerGas,
                 network: maskUserDefaults.network,
                 nonce: nonce,
-                completion)
+                completionWrapper)
         }
     }
 }
@@ -308,7 +371,7 @@ class RedPacketConfirmViewModelMock: RedPacketConfirmViewModel {
         "2.0000"
     }
     
-    override var totalAmount: String {
+    override var totalAmountDisplay: String {
         "2,000.0000 DAI"
     }
     
