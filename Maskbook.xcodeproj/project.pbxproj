@@ -315,7 +315,6 @@
 		2AF6C7CF27FEA52800A9EA4A /* RedPacketInteractivePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF6C7BD27FEA52700A9EA4A /* RedPacketInteractivePayload.swift */; };
 		2AF6C7D027FEA52800A9EA4A /* LuckyDropTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF6C7BF27FEA52700A9EA4A /* LuckyDropTokens.swift */; };
 		2AF6C7D127FEA52800A9EA4A /* SelectSocialAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF6C7C027FEA52700A9EA4A /* SelectSocialAccountView.swift */; };
-		2AF6C7D227FEA52800A9EA4A /* LuckyDropSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF6C7C127FEA52700A9EA4A /* LuckyDropSegmentView.swift */; };
 		2AF6C7D327FEA52800A9EA4A /* ShareLuckyDropPersonaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF6C7C227FEA52700A9EA4A /* ShareLuckyDropPersonaView.swift */; };
 		2AF6C7D427FEA52800A9EA4A /* RedPacketShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF6C7C327FEA52700A9EA4A /* RedPacketShareView.swift */; };
 		2AF6C7D627FEA52800A9EA4A /* LuckyDropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF6C7C527FEA52700A9EA4A /* LuckyDropView.swift */; };
@@ -1088,7 +1087,6 @@
 		2AF6C7BD27FEA52700A9EA4A /* RedPacketInteractivePayload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedPacketInteractivePayload.swift; sourceTree = "<group>"; };
 		2AF6C7BF27FEA52700A9EA4A /* LuckyDropTokens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuckyDropTokens.swift; sourceTree = "<group>"; };
 		2AF6C7C027FEA52700A9EA4A /* SelectSocialAccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectSocialAccountView.swift; sourceTree = "<group>"; };
-		2AF6C7C127FEA52700A9EA4A /* LuckyDropSegmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuckyDropSegmentView.swift; sourceTree = "<group>"; };
 		2AF6C7C227FEA52700A9EA4A /* ShareLuckyDropPersonaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareLuckyDropPersonaView.swift; sourceTree = "<group>"; };
 		2AF6C7C327FEA52700A9EA4A /* RedPacketShareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedPacketShareView.swift; sourceTree = "<group>"; };
 		2AF6C7C427FEA52700A9EA4A /* ShareLuckyDropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareLuckyDropView.swift; sourceTree = "<group>"; };
@@ -2381,7 +2379,6 @@
 				2AF6C7AE27FEA37200A9EA4A /* WalletBottomWidgetView.swift */,
 				2AF6C7BF27FEA52700A9EA4A /* LuckyDropTokens.swift */,
 				2AF6C7C027FEA52700A9EA4A /* SelectSocialAccountView.swift */,
-				2AF6C7C127FEA52700A9EA4A /* LuckyDropSegmentView.swift */,
 				2AF6C7C227FEA52700A9EA4A /* ShareLuckyDropPersonaView.swift */,
 				2A11B404280EB632003D88FC /* RedPacketConfirmView.swift */,
 				2AF6C7C327FEA52700A9EA4A /* RedPacketShareView.swift */,
@@ -4403,7 +4400,6 @@
 				2AF88610271EED7D0004565A /* CryptoHelper.swift in Sources */,
 				2AB5650F280F93D200C07A85 /* SwiftUI+Text.swift in Sources */,
 				1F9CEA77280D1A13007386B1 /* FungibleTokenBuilder.swift in Sources */,
-				2AF6C7D227FEA52800A9EA4A /* LuckyDropSegmentView.swift in Sources */,
 				2AF88589271EE9310004565A /* MaskTabBar.swift in Sources */,
 				2AF884DA271EE9310004565A /* AlertController.swift in Sources */,
 				2AF8857B271EE9310004565A /* WalletListCoinView.swift in Sources */,

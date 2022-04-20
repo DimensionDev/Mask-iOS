@@ -48,7 +48,9 @@ struct LuckyDropView: View {
             ScrollView {
                 LazyVStack(spacing: 0) {
                     Spacer().frame(height: LayoutConstraints.top)
-                    LuckyDropSegmentView()
+                    SegmentControl(selection: $viewModel.selection) {
+                    }
+                    .frame(height: 48)
                     tokensRow
                     confirmButton().id(idOfBottomViewToScroll)
                 }

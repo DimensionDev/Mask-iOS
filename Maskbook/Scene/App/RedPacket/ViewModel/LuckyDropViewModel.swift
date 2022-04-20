@@ -35,6 +35,7 @@ class LuckyDropViewModel: NSObject, ObservableObject {
     @Published var gasFeeItem: GasFeeCellItem?
     @Published var buttonType: ConfirmButtonType = .send
     @Published var allowances = [String: BigUInt]()
+    @Published var selection = LuckDropKind.token
     
     // TODO: It needs to init `profileNickName` if create red packet from Social Platform.
     let profileNickName: String? = nil
