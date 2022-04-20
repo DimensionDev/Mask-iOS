@@ -216,7 +216,7 @@ class BalanceViewController: BaseViewController {
     }
     
     private func showWalletListModal() {
-        Coordinator.main.present(scene: .walletList, transition: .detail(animated: true))
+        Coordinator.main.present(scene: .walletList, transition: .panModel(animated: true))
     }
     
     private func scanAction() {
