@@ -17,16 +17,10 @@ struct TextLengthModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .onReceive(Just(field), perform: { text in
-                let updatedField = String(
-                    field
-                        .enumerated()
-                        .filter { $0.offset < maxLength }
-                        .map { $0.element }
-                )
-                
-                if updatedField != field {
-                    field = updatedField
+                guard text.lengthOfBytes(using: .utf8) > maxLength else {
+                    return
                 }
+                field  = String(text.prefix(maxLength))
             })
     }
 }

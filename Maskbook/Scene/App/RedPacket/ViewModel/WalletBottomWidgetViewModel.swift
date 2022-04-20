@@ -117,6 +117,10 @@ class WalletBottomWidgetViewModel: ObservableObject {
                 default: break
                 }
             }
+            
+            if case .confirmed = status {
+                self.coordinator.present(scene: .luckyDropSuccessfully, transition: .modal())
+            }
         }
         .store(in: &disposeBag)
     }
@@ -138,10 +142,6 @@ class WalletBottomWidgetViewModel: ObservableObject {
             scene: .redPackageSelectAccount,
             transition: .panModel(animated: true)
         )
-    }
-    
-    private func requestInfoOfTransaction() {
-        //  TODO: fail / success 5秒后回到normal
     }
 }
 

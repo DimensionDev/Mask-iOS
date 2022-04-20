@@ -21,8 +21,17 @@ class LuckyDropViewModel: NSObject, ObservableObject {
     @Published var quantityStr = ""
     @Published var amountStr = ""
     @Published var message = L10n.Plugins.Luckydrop.Buttons.bestWishes
-    @Published var mode = RedPacket.RedPacketType.average
-    @Published var token: Token?
+    @Published var mode = RedPacket.RedPacketType.average {
+        didSet {
+            quantityStr = ""
+            amountStr = ""
+        }
+    }
+    @Published var token: Token? {
+        didSet {
+            amountStr = ""
+        }
+    }
     @Published var gasFeeItem: GasFeeCellItem?
     @Published var buttonType: ConfirmButtonType = .send
     @Published var allowances = [String: BigUInt]()
@@ -407,12 +416,15 @@ class LuckyDropViewModel: NSObject, ObservableObject {
     }
     
     private func getAndUpdateAllowances() {
+        guard let identifier = self.token?.identifier else {
+            return
+        }
+        guard self.allowances[identifier] == nil else {
+            return
+        }
         Task {
             let allowance = await self.getAllowance()
             await MainActor.run {
-                guard let identifier = self.token?.identifier else {
-                    return
-                }
                 if let allowance = allowance {
                     self.allowances[identifier] = allowance
                 } else {
@@ -439,10 +451,11 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         Task {
             let erc20 = ERC20(web3: web3, provider: web3.provider, address: tokenAddressETHFormat)
             do {
+                // FIXME: set `0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff` to method `approve`.
                 let transacation = try erc20.approve(
                     from: fromAddressEthFormat,
                     spender: toAddressEthFormat,
-                    amount: "\(totalQuantity)"
+                    amount: "\(UInt.max)"
                 )
                 let transacationResult = try transacation.assemble()
                 let (promise, resolver) = Promise<String>.pending()
@@ -507,7 +520,7 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         ]
         
         publishers.combineLatest()
-            .throttle(for: 0.1, scheduler: DispatchQueue.main, latest: true)
+            .debounce(for: .seconds(0.1), scheduler: RunLoop.main)
             .sink { [weak self] _ in
                 guard let self = self else {
                     return
@@ -515,6 +528,18 @@ class LuckyDropViewModel: NSObject, ObservableObject {
                 self.checkParam()
             }
             .store(in: &disposeBag)
+        
+        settings.$defaultAccountAddress.removeDuplicates().asDriver().sink { [weak self] fromAddress in
+            guard let self = self else { return }
+            guard self.token?.account?.address != fromAddress else { return }
+            let token = self.walletAssetManager.getMainToken(
+                network: self.settings.network,
+                chainId: self.settings.network.chain.rawValue,
+                networkId: Int(self.settings.network.networkId),
+                context: AppContext.shared.coreDataStack.persistentContainer.viewContext)
+            self.token = token
+        }
+        .store(in: &disposeBag)
     }
     
     func checkParam() {
@@ -636,7 +661,6 @@ class LuckyDropViewModel: NSObject, ObservableObject {
 extension LuckyDropViewModel: ChooseTokenBackDelegate {
     func chooseTokenAction(token: Token) {
         self.token = token
-        amountStr = ""
     }
     
     func chooseNFTTokenAction(token: Collectible) {

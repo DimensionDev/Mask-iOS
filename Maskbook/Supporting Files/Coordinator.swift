@@ -204,6 +204,7 @@ class Coordinator {
             password: String,
             completion: (String?, Error?) -> Void
         )
+        case luckyDropSuccessfully
         case debug
     }
     
@@ -800,6 +801,9 @@ extension Coordinator {
                 password: password,
                 completion: completion
             )
+        
+        case .luckyDropSuccessfully:
+            return SheetViewAdapterController(rootView: LuckyDropSuccessfullyView())
             
         case .debug:
             return UIHostingController(rootView: DebugView())
