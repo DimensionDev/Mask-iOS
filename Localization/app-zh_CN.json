@@ -139,12 +139,12 @@
                 "description": "请到系统设置里允许相机权限。"
             },
             "only_scan_persona": {
-                "title": "",
-                "description": ""
+                "title": "请扫描角色二维码",
+                "description": "二维码不是角色二维码。\n请扫描角色二维码。"
             },
             "no_local_wallet_for_walletconnect": {
-                "title": "",
-                "description": ""
+                "title": "无法连接",
+                "description": "无法连接到 walletConnect，因为没有本地钱包。"
             }
         },
         "controls": {
@@ -186,7 +186,7 @@
             "remind_me_later": "稍后提醒我",
             "go_settings": "好",
             "dont_allow": "不允许",
-            "speed_up": ""
+            "speed_up": "加速"
         },
         "toast": {
             "saved": "已保存！",
@@ -615,8 +615,8 @@
         },
         "transaction_history": {
             "no_transaction": "没有查到您的近期交易记录",
-            "status_pendind": "",
-            "status_failed": ""
+            "status_pendind": "确认中...",
+            "status_failed": "失败"
         },
         "wallet_receive": {
             "btn_share": "分享",
@@ -791,8 +791,8 @@
             }
         },
         "mask_scan": {
-            "scan_persona": "",
-            "scan_all": ""
+            "scan_persona": "请扫描角色二维码",
+            "scan_all": "扫描角色或 walletConnect 二维码"
         },
         "wallet_connect": {
             "wallet_connect": "WalletConnect",
@@ -862,8 +862,8 @@
             "refunded": "已退款",
             "refund": "退款",
             "empty": "空的",
-            "share_message_official": "",
-            "share_message_unsupport_platform": ""
+            "share_message_official": "朋友们，我刚刚在%s上领取了一个%s发送的红包，关注%s来领取这个红包。#mask_io #LuckyDrop %s",
+            "share_message_unsupport_platform": "朋友们，我刚刚在%s上领取了一个%s发送的红包"
         },
         "move_backup_data": {
             "title": "请移动您的数据",
