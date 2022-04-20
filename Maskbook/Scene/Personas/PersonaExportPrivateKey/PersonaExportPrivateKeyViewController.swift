@@ -10,8 +10,10 @@ import Combine
 import UIKit
 
 class PersonaExportPrivateKeyViewController: BaseViewController {
-    init(viewModel: PersonaExportPrivateKeyViewModel) {
-        self.viewModel = viewModel
+    private let personaIdentifier: String
+    
+    init(personaIdentifier: String) {
+        self.personaIdentifier = personaIdentifier
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -20,8 +22,6 @@ class PersonaExportPrivateKeyViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    let viewModel: PersonaExportPrivateKeyViewModel
-
     lazy var stackView: UIStackView = {
         let view = UIStackView()
         view.axis = .vertical
@@ -171,14 +171,8 @@ class PersonaExportPrivateKeyViewController: BaseViewController {
                 self?.onCopyButtonClicked()
             }
             .store(in: &disposeBag)
-            
-        viewModel.privateKeyPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { _ in
-            } receiveValue: { [weak self] json in
-                self?.textView.text = json
-            }
-            .store(in: &disposeBag)
+        
+        textView.text = PersonaManager.backupPrivateKey(identifier: personaIdentifier)
     }
     
     private func showSuccess() {

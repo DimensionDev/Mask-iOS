@@ -262,7 +262,6 @@
 		2AF884CB271EE9300004565A /* MaskWebMessage+Persona+Restore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF88347271EE9300004565A /* MaskWebMessage+Persona+Restore.swift */; };
 		2AF884CC271EE9300004565A /* MaskWebMessage+Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF88348271EE9300004565A /* MaskWebMessage+Setting.swift */; };
 		2AF884CD271EE9300004565A /* MaskWebMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF88349271EE9300004565A /* MaskWebMessage.swift */; };
-		2AF884CE271EE9300004565A /* MaskWebMessage+Persona+Backup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8834A271EE9300004565A /* MaskWebMessage+Persona+Backup.swift */; };
 		2AF884CF271EE9300004565A /* MaskWebMessage+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8834B271EE9300004565A /* MaskWebMessage+App.swift */; };
 		2AF884D1271EE9310004565A /* MaskWebMessage+SNSAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8834D271EE9300004565A /* MaskWebMessage+SNSAdaptor.swift */; };
 		2AF884D2271EE9310004565A /* MaskWebMessage+Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8834E271EE9300004565A /* MaskWebMessage+Wallet.swift */; };
@@ -318,7 +317,6 @@
 		2AF88509271EE9310004565A /* PersonaListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8839C271EE9300004565A /* PersonaListViewController.swift */; };
 		2AF8850A271EE9310004565A /* PersonaListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8839D271EE9300004565A /* PersonaListViewModel.swift */; };
 		2AF8850B271EE9310004565A /* PersonaExportPrivateKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8839F271EE9300004565A /* PersonaExportPrivateKeyViewController.swift */; };
-		2AF8850C271EE9310004565A /* PersonaExportPrivateKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF883A0271EE9300004565A /* PersonaExportPrivateKeyViewModel.swift */; };
 		2AF8850D271EE9310004565A /* PersonaWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF883A2271EE9300004565A /* PersonaWelcomeViewController.swift */; };
 		2AF8850E271EE9310004565A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF883A4271EE9300004565A /* BaseViewController.swift */; };
 		2AF8850F271EE9310004565A /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF883A5271EE9300004565A /* NavigationController.swift */; };
@@ -996,7 +994,6 @@
 		2AF88347271EE9300004565A /* MaskWebMessage+Persona+Restore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MaskWebMessage+Persona+Restore.swift"; sourceTree = "<group>"; };
 		2AF88348271EE9300004565A /* MaskWebMessage+Setting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MaskWebMessage+Setting.swift"; sourceTree = "<group>"; };
 		2AF88349271EE9300004565A /* MaskWebMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskWebMessage.swift; sourceTree = "<group>"; };
-		2AF8834A271EE9300004565A /* MaskWebMessage+Persona+Backup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MaskWebMessage+Persona+Backup.swift"; sourceTree = "<group>"; };
 		2AF8834B271EE9300004565A /* MaskWebMessage+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MaskWebMessage+App.swift"; sourceTree = "<group>"; };
 		2AF8834D271EE9300004565A /* MaskWebMessage+SNSAdaptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MaskWebMessage+SNSAdaptor.swift"; sourceTree = "<group>"; };
 		2AF8834E271EE9300004565A /* MaskWebMessage+Wallet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MaskWebMessage+Wallet.swift"; sourceTree = "<group>"; };
@@ -1052,7 +1049,6 @@
 		2AF8839C271EE9300004565A /* PersonaListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonaListViewController.swift; sourceTree = "<group>"; };
 		2AF8839D271EE9300004565A /* PersonaListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonaListViewModel.swift; sourceTree = "<group>"; };
 		2AF8839F271EE9300004565A /* PersonaExportPrivateKeyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonaExportPrivateKeyViewController.swift; sourceTree = "<group>"; };
-		2AF883A0271EE9300004565A /* PersonaExportPrivateKeyViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonaExportPrivateKeyViewModel.swift; sourceTree = "<group>"; };
 		2AF883A2271EE9300004565A /* PersonaWelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonaWelcomeViewController.swift; sourceTree = "<group>"; };
 		2AF883A4271EE9300004565A /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		2AF883A5271EE9300004565A /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -2313,7 +2309,6 @@
 				2AF88347271EE9300004565A /* MaskWebMessage+Persona+Restore.swift */,
 				2AF88348271EE9300004565A /* MaskWebMessage+Setting.swift */,
 				2AF88349271EE9300004565A /* MaskWebMessage.swift */,
-				2AF8834A271EE9300004565A /* MaskWebMessage+Persona+Backup.swift */,
 				2AF8834B271EE9300004565A /* MaskWebMessage+App.swift */,
 				2AF8834D271EE9300004565A /* MaskWebMessage+SNSAdaptor.swift */,
 				2AF8834E271EE9300004565A /* MaskWebMessage+Wallet.swift */,
@@ -2553,7 +2548,6 @@
 			isa = PBXGroup;
 			children = (
 				2AF8839F271EE9300004565A /* PersonaExportPrivateKeyViewController.swift */,
-				2AF883A0271EE9300004565A /* PersonaExportPrivateKeyViewModel.swift */,
 			);
 			path = PersonaExportPrivateKey;
 			sourceTree = "<group>";
@@ -4167,7 +4161,6 @@
 				0F2051AD265E325900602A0C /* MaskWalletAccount.swift in Sources */,
 				5D93DF9E267B2B5000A175BF /* MaskTextField.swift in Sources */,
 				2D86E0C627716ABE005D3710 /* SelectAccountChainItemCell.swift in Sources */,
-				2AF8850C271EE9310004565A /* PersonaExportPrivateKeyViewModel.swift in Sources */,
 				2AF8863B271EEDF80004565A /* Publisher+extension.swift in Sources */,
 				5D2893E627D5E8A30013FCB6 /* PersonaCollectionDataSource.swift in Sources */,
 				2A6ABB9F2720053B00CC3AED /* ChangeBackupPasswordViewController.swift in Sources */,
@@ -4417,7 +4410,6 @@
 				5DB39E302786A4E40025337C /* JSResourceSelectView.swift in Sources */,
 				2AF8850F271EE9310004565A /* NavigationController.swift in Sources */,
 				2D00A5FE27953F2D0082E693 /* DebugEntryView.swift in Sources */,
-				2AF884CE271EE9300004565A /* MaskWebMessage+Persona+Backup.swift in Sources */,
 				2AF8856A271EE9310004565A /* CreateWalletWithNameViewController.swift in Sources */,
 				6F25328427C773AB000C0D27 /* NFTActionViewModel.swift in Sources */,
 				2A23A65027C4B67D00CC5AD9 /* SwiftUI+Asset.swift in Sources */,

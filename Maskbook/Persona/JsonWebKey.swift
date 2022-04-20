@@ -22,7 +22,8 @@ struct JsonWebKey: Codable {
     let dp: String?
     let dq: String?
     let e: String?
-    let ext: Bool?
+    // `ext` from JavaScript could be `Bool` or `Int` type, since we do not care the value of `ext`, we could simply ignore it here
+//    let ext: Bool?
     let k: String?
     let key_ops: [String]?
     let kty: String?
