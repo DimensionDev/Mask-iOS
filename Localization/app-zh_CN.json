@@ -302,9 +302,9 @@
         "wallet_import": {
             "title": "导入钱包",
             "item_mnemonic_words": "助记词",
-            "item_mnemonic_words_desc": "助记符由多个单词组成，由空格分隔。",
+            "item_mnemonic_words_desc": "助记词由多个单词组成，由空格分隔。",
             "item_private_key": "私钥",
-            "item_private_key_desc": "文本格式私钥",
+            "item_private_key_desc": "明文私",
             "item_keystore": "Keystore",
             "item_keystore_desc": "已加密的 Keystore JSON"
         },
