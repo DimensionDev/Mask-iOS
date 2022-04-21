@@ -2465,10 +2465,10 @@ function detectOS(userAgentString) {
 }
 
 function getNodeVersion() {
-  var isNode = typeof process !== 'undefined' && "v17.9.0";
+  var isNode = typeof process !== 'undefined' && "v17.5.0";
   return isNode && {
     name: 'node',
-    version: "v17.9.0".slice(1),
+    version: "v17.5.0".slice(1),
     os: process.platform
   };
 }
@@ -2795,8 +2795,8 @@ function detectOS(ua) {
     return null;
 }
 function getNodeVersion() {
-    var isNode = typeof process !== 'undefined' && "v17.9.0";
-    return isNode ? new NodeInfo("v17.9.0".slice(1)) : null;
+    var isNode = typeof process !== 'undefined' && "v17.5.0";
+    return isNode ? new NodeInfo("v17.5.0".slice(1)) : null;
 }
 function createVersionParts(count) {
     var output = [];
@@ -4626,7 +4626,7 @@ var eos = __webpack_require__(59806)
 var fs = __webpack_require__(95985) // we only need fs to get the ReadStream and WriteStream prototypes
 
 var noop = function () {}
-var ancient = /^v?\.0/.test("v17.9.0")
+var ancient = /^v?\.0/.test("v17.5.0")
 
 var isFn = function (fn) {
   return typeof fn === 'function'
