@@ -9,6 +9,7 @@
 import Combine
 import Foundation
 import UIKit
+import UStack
 
 final class WalletListAddWalletConnectCell: UITableViewCell {
     var disposeBag = Set<AnyCancellable>()
@@ -77,38 +78,33 @@ extension WalletListAddWalletConnectCell {
         backgroundColor = .clear
         selectionStyle = .none
         applyCornerRadius(radius: 12)
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .fill
-        stackView.alignment = .center
-        stackView.spacing = 8
-        stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 22)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(stackView)
+        let hStack = HStackView(spacing: 8,
+                                distribution: .fill,
+                                alignment: .center, views: {
+            
+            icon
+            hTitleStackView
+            Spacer()
+            rightArrow
+        })
+        hStack.isLayoutMarginsRelativeArrangement = true
+        hStack.layoutMargins = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 22)
+        hStack.translatesAutoresizingMaskIntoConstraints = false
+        hStack.backgroundColor = Asset.Colors.Background.dark.color
+        hStack.applyRadius(radius: 8)
+        contentView.addSubview(hStack)
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            stackView.heightAnchor.constraint(equalToConstant: 69)
+            hStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            hStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstraints.leading),
+            hStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutConstraints.trailing),
+            hStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            hStack.heightAnchor.constraint(equalToConstant: 56).priority(.defaultHigh)
         ])
         
         NSLayoutConstraint.activate([
             icon.heightAnchor.constraint(equalToConstant: 32),
             icon.widthAnchor.constraint(equalToConstant: 32)
         ])
-        
-        icon.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(icon)
-        
-        hTitleStackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(hTitleStackView)
-        
-        rightArrow.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(rightArrow)
-        
-        rightArrow.image = Asset.Icon.Arrows.celllRight.image
     }
 }

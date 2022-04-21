@@ -32,13 +32,23 @@ class WalletHistoryViewModel: NSObject {
     
     override init() {
         super.init()
-        
-        walletAssetManager.transactions
-            .receive(on: RunLoop.main)
+
+        Publishers.CombineLatest(WalletAssetManager.shared.transactions,
+                                 PendTransactionManager.shared.pendTransactions)
+        .map { allTransactions, allPendingTransactions in
+            let pendingTransactions = allPendingTransactions.filter {
+                $0.address == maskUserDefaults.defaultAccountAddress &&
+                $0.networkId == maskUserDefaults.network.networkId
+            }.compactMap {
+                return $0.history
+            }
+            return (pendingTransactions + allTransactions).sorted{ $0.timeAt > $1.timeAt }
+        }.receive(on: RunLoop.main)
             .sink { [weak self] transactions in
                 self?.refreshTableView(transactions: transactions)
             }
             .store(in: &disposeBag)
+        
     }
     
     func refreshTableView(transactions: [TransactionHistory]) {

@@ -35,19 +35,28 @@ class TokenDetailViewModel: NSObject {
         self.token = token
         super.init()
         
-        WalletAssetManager.shared.transactions
-            .map { [weak self] allTransactions in
-                guard let `self` = self else { return [] }
-                let displayTransactions = allTransactions.filter { transaction in
-                    if let change = transaction.change, change.asset.symbol.caseInsensitiveCompare(self.token.symbol) == .orderedSame {
-                        return true
-                    } else {
-                        return token.isMainToken
-                    }
+        Publishers.CombineLatest(WalletAssetManager.shared.transactions,
+                                 PendTransactionManager.shared.pendTransactions)
+        .map { [weak self] allTransactions, allPendingTransactions in
+            guard let `self` = self else { return [] }
+            let displayTransactions = allTransactions.filter { transaction in
+                if let change = transaction.change, change.asset.symbol.caseInsensitiveCompare(self.token.symbol) == .orderedSame {
+                    return true
+                } else {
+                    return token.isMainToken
                 }
-                return displayTransactions
             }
-            .receive(on: RunLoop.main)
+            
+            let pendingTransactions = allPendingTransactions.filter {
+                $0.history.change?.asset.symbol.caseInsensitiveCompare(self.token.symbol) == .orderedSame &&
+                $0.address == maskUserDefaults.defaultAccountAddress &&
+                $0.networkId == maskUserDefaults.network.networkId
+            }.compactMap {
+                return $0.history
+            }
+            return (pendingTransactions + displayTransactions).sorted{ $0.timeAt > $1.timeAt }
+        }
+        .receive(on: RunLoop.main)
             .sink { [weak self] transactions in
                 self?.refreshTableView(transactions: transactions)
             }

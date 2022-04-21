@@ -132,8 +132,9 @@ class WalletSendHelper {
         amount: String,
         toAddress: String,
         fromAddress: String,
+        nonce: BigUInt,
         network: BlockChainNetwork,
-        _ completion: @escaping (Result<EthereumTransaction?, Error>) -> Void) {
+        _ completion: @escaping (Result<String?, Error>) -> Void) {
             guard let provider = Web3ProviderFactory.provider else { completion(.failure(WalletSendError.unsupportedChainType))
                 return
             }
@@ -157,8 +158,6 @@ class WalletSendHelper {
             if token.isMainToken {
                 DispatchQueue.global().async {
                     var transacation = EthereumTransaction(to: toAddressEthFormat, data: Data(), options: TransactionOptions.defaultOptions)
-                    do {
-                        let nonce = try provider.eth.getTransactionCount(address: fromAddressEthFormat)
                         var gasPriceHex: String = "0x0"
                         var maxInclusionFeePerGasHex: String = "0x0"
                         var maxFeePerGasHex: String = "0x0"
@@ -187,7 +186,7 @@ class WalletSendHelper {
                                 transacation = EthereumTransaction(nonce: nonce, gasPrice: gasPrice ?? BigUInt(0), gasLimit: gasLimit, to: toAddressEthFormat, value: Web3.Utils.parseToBigUInt(amount, units: .eth)!, data: data, v: BigUInt(v), r: BigUInt(r), s: BigUInt(s))
                                 do {
                                     let sendResult = try provider.eth.sendRawTransaction(transacation, transacationEncodeData)
-                                    completion(.success(sendResult.transaction))
+                                    completion(.success(sendResult.hash))
                                     return
                                 } catch {
                                     completion(.failure(WalletSendError.ethereumError(error)))
@@ -199,10 +198,6 @@ class WalletSendHelper {
                             completion(.failure(WalletSendError.ethereumError(error)))
                             return
                         }
-                    } catch {
-                        completion(.failure(WalletSendError.ethereumError(error)))
-                        return
-                    }
                 }
             } else {
                 guard let symbol = token.symbol else {
@@ -233,8 +228,6 @@ class WalletSendHelper {
                     
                     do {
                         let transacationResult = try transacation.assemble()
-                        do {
-                            let nonce = try provider.eth.getTransactionCount(address: fromAddressEthFormat)
                             var gasPriceHex: String = "0x0"
                             var maxInclusionFeePerGasHex: String = "0x0"
                             var maxFeePerGasHex: String = "0x0"
@@ -264,7 +257,7 @@ class WalletSendHelper {
                                     let rawTransaction = EthereumTransaction(nonce: nonce, gasPrice: gasPrice ?? BigUInt(0), gasLimit: gasLimit, to: contractAddressEthFormat, value: BigUInt(0), data: transacationResult.data, v: BigUInt(v), r: BigUInt(r), s: BigUInt(s))
                                     do {
                                         let sendResult = try provider.eth.sendRawTransaction(rawTransaction, transacationEncodeData)
-                                        completion(.success(sendResult.transaction))
+                                        completion(.success(sendResult.hash))
                                         return
                                     } catch {
                                         completion(.failure(WalletSendError.ethereumError(error)))
@@ -276,10 +269,6 @@ class WalletSendHelper {
                                 completion(.failure(WalletSendError.ethereumError(error)))
                                 return
                             }
-                        } catch {
-                            completion(.failure(WalletSendError.ethereumError(error)))
-                            return
-                        }
                     } catch {
                         completion(.failure(WalletSendError.ethereumError(error)))
                         return

@@ -10,7 +10,7 @@ import CoreDataStack
 import SnapKit
 import UIKit
 
-protocol BalanceCollectiblesCellDelegate: NSObjectProtocol {
+protocol BalanceCollectiblesCellDelegate: AnyObject {
     func balanceCollectiblesCellDelegate(nftToken: Collectible)
 }
 

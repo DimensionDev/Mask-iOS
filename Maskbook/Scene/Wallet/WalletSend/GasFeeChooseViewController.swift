@@ -15,7 +15,7 @@ import PanModal
 import UIKit
 import UStack
 
-protocol GasFeeBackDelegate: NSObjectProtocol {
+protocol GasFeeBackDelegate: AnyObject {
     func getGasFeeAction(gasFeeModel: GasFeeCellItem)
 }
 
