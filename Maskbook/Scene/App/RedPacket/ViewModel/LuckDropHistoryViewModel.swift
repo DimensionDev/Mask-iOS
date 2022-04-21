@@ -134,12 +134,8 @@ extension LuckyDropHistoryViewModel {
         await displayData(on: .token) {
             let history = try await tokenHistoryTask?.value ?? []
 
-            if tokenPayloads.isEmpty {
+            if !history.isEmpty {
                 tokenPayloads = history
-            } else {
-                if !history.isEmpty {
-                    tokenPayloads = history
-                }
             }
 
             tokenHistoryTask = nil
@@ -155,6 +151,10 @@ extension LuckyDropHistoryViewModel {
         }
 
         await displayData(on: .nft) {
+            let history = try await nftHistoryTask?.value ?? []
+            if !history.isEmpty {
+                nftPayloads = history
+            }
             nftHistoryTask = nil
         }
     }
