@@ -227,7 +227,27 @@ extension RemoteRestoreInfoController: RestorePipelineExcutor {
             }
             .show()
 
-        case .ignoreAndLogin: login()
+        case .ignoreAndLogin:
+            Alert {
+                ImageItem(.success)
+                WithTipItem(
+                    title: L10n.Scene.Restore.completion,
+                    detail: NSAttributedString(
+                        string: L10n.Scene.Restore.succeedDetail,
+                        attributes: [
+                            .font: FontStyles.BH5,
+                            .foregroundColor: Asset.Colors.Text.normal.color
+                        ]
+                    )
+                )
+                DoneActionItem(
+                    .init(
+                        title: L10n.Common.Controls.done,
+                        action: { login() }
+                    )
+                )
+            }
+            .show()
         }
     }
 }
