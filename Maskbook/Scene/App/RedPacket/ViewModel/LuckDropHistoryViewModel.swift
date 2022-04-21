@@ -8,7 +8,6 @@ import web3swift
 import struct PullRefresh.InterActionState
 
 @MainActor
-@dynamicMemberLookup
 final class LuckyDropHistoryViewModel: ObservableObject {
     enum LoadingState {
         case empty
@@ -30,13 +29,7 @@ final class LuckyDropHistoryViewModel: ObservableObject {
     @Published var state = LoadingState.empty
     
     var pullState = InterActionState(state: .idle, progress: 0) {
-        didSet {
-            guard oldValue.isCanceled != pullState.isCanceled,
-                  oldValue.state != pullState.state else {
-                return
-            }
-            checkPullState(pullState)
-        }
+        didSet { checkPullState(pullState) }
     }
 
     private var cancelableStorage: Set<AnyCancellable> = []
@@ -55,25 +48,35 @@ final class LuckyDropHistoryViewModel: ObservableObject {
         self.nftHistoryTask?.cancel()
         self.tokenHistoryTask?.cancel()
     }
-
-    subscript<Value>(dynamicMember keyPath: ReferenceWritableKeyPath<LuckyDropHistoryViewModel, Value>) -> Binding<Value> {
-        Binding(
-            get: {
-                self[keyPath: keyPath]
-            },
-            set: { value, _ in
-                self[keyPath: keyPath] = value
-            }
-        )
-    }
     
     private func checkPullState(_ pullState: InterActionState) {
         if pullState.isCanceled {
-            switch self.selection {
-            case .token: self.tokenHistoryTask?.cancel()
-            case .nft: self.nftHistoryTask?.cancel()
+            let isAlreadyCancelled: Bool = {
+                switch self.selection {
+                case .token:
+                    if tokenHistoryTask.isNone {
+                        return true
+                    } else {
+                        self.tokenHistoryTask?.cancel()
+                        self.tokenHistoryTask = nil
+                        return false
+                    }
+
+                case .nft:
+                    if nftHistoryTask.isNone {
+                        return true
+                    } else {
+                        tokenHistoryTask?.cancel()
+                        tokenHistoryTask = nil
+                        return false
+                    }
+                }
+            }()
+
+            guard !isAlreadyCancelled else {
+                return
             }
-            
+
             if payloadIsEmpty(for: selection) {
                 state = .empty
             } else {
