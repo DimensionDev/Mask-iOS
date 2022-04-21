@@ -52,6 +52,10 @@ extension LuckyDropHistoryViewModel {
             networkName: networkName ?? ""
         )
 
+        if payloads.isEmpty {
+            return []
+        }
+
         // may be this should be fetched in a single request in case the payloads is huge
         let passwords: [String: String] = await Task { @MainActor in
             let passwords: [String: String] = payloads.reduce(into: [:]) {
@@ -169,6 +173,9 @@ fileprivate extension Data {
     ) throws -> [RedPacketPayload] {
         do {
             let payload = try decoder.decode(AnyscanListOf<RedPacketHistoryInfo>.self, from: self)
+            if payload.result.isEmpty {
+                return []
+            }
             let lowcaseAddres = address.lowercased()
 
             return payload.result.compactMap { next in
