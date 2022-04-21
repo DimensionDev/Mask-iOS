@@ -116,9 +116,10 @@ extension NFTActionViewController: UITableViewDelegate {
                 var image: UIImage?
                 switch result {
                 case .success(let value): image = value.image
-                    
-                default:
-                    break
+                case .failure(_):
+                    self?.makeToast(message: L10n.Common.Toast.failed,
+                                    image: Asset.Images.Scene.Transaction.iconFail.image)
+
                 }
                 if let image = image {
                     self?.saveImageToPhotoLibrary(image: image)
@@ -161,12 +162,12 @@ extension NFTActionViewController {
             saveImage(image: img)
             
         case .notDetermined:
-                
             PHPhotoLibrary.requestAuthorization { [weak self] status in
                 if status == .authorized {
                     self?.saveImage(image: img)
                 } else {
-                    print("User denied")
+                    self?.makeToast(message: L10n.Common.Toast.failed,
+                                    image: Asset.Images.Scene.Transaction.iconFail.image)
                 }
             }
                 
@@ -176,6 +177,9 @@ extension NFTActionViewController {
                     UIApplication.shared.open(url, options: [:]) { isAccess in
                         if isAccess {
                             self.saveImageToPhotoLibrary(image: image)
+                        } else {
+                            self.makeToast(message: L10n.Common.Toast.failed,
+                                            image: Asset.Images.Scene.Transaction.iconFail.image)
                         }
                     }
                 }
@@ -194,7 +198,10 @@ extension NFTActionViewController {
                 if isSuccess {
                     self?.makeToast(message: L10n.Common.Toast.saved,
                                     image: Asset.Images.Toast.check.image)
-                } else {}
+                } else {
+                    self?.makeToast(message: L10n.Common.Toast.failed,
+                                    image: Asset.Images.Scene.Transaction.iconFail.image)
+                }
             }
         })
     }
