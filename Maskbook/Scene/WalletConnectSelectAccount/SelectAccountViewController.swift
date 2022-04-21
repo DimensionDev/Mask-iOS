@@ -397,7 +397,7 @@ extension SelectAccountViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         UIView.animate(withDuration: 0.1) {
             self.collectionTopLayoutConstraint.constant = min(max(34, 88 - scrollView.contentOffset.y - scrollView.contentInset.top), 88)
-            self.view.layoutIfNeeded()
+            self.collectionView.layoutIfNeeded()
         }
     }
 }
