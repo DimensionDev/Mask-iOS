@@ -747,13 +747,13 @@ const body = `\
 ## Environment
 
 User Agent: ${navigator.userAgent}
-Version: ${"v1.29.12-2343-g7d3cd8499"}
+Version: ${"v1.29.12-2344-g375d2b347"}
 Tag Name: ${"v2.5.0"}
-Build Date: ${"2022-04-14T07:40:34.110Z"}
-Commit Hash: ${"7d3cd8499"}
-Commit Date: ${"2022-04-14T07:34:29.000Z"}
-Remote URL: ${"https://github.com/DimensionDev/Maskbook"}
-Branch Name: ${"HEAD"}
+Build Date: ${"2022-04-20T09:20:23.090Z"}
+Commit Hash: ${"375d2b347"}
+Commit Date: ${"2022-04-20T09:14:57.000Z"}
+Remote URL: ${"git@github.com:DimensionDev/Maskbook.git"}
+Branch Name: ${"feat/sendRedpacketToNative"}
 
 ## Bug Info
 
@@ -782,13 +782,13 @@ var src = __webpack_require__(53242);
 
 const DEBUG_INFO = {
     'User Agent': navigator.userAgent,
-    'Mask Version': "v1.29.12-2343-g7d3cd8499",
+    'Mask Version': "v1.29.12-2344-g375d2b347",
     'Build Date': process.env.channel_DATE,
     'Tag Name': "v2.5.0",
-    'Commit Hash': "7d3cd8499",
-    'Commit Date': "2022-04-14T07:34:29.000Z",
-    'Remote URL': "https://github.com/DimensionDev/Maskbook",
-    'Branch Name': "HEAD",
+    'Commit Hash': "375d2b347",
+    'Commit Date': "2022-04-20T09:14:57.000Z",
+    'Remote URL': "git@github.com:DimensionDev/Maskbook.git",
+    'Branch Name': "feat/sendRedpacketToNative",
     Dirty: false,
     'Tag Dirty': true
 };
@@ -993,13 +993,13 @@ async function backupAll() {
     const payload = {
         buildInfo: {
             'user-agent': navigator.userAgent,
-            version: "v1.29.12-2343-g7d3cd8499",
-            'build-date': "2022-04-14T07:40:34.110Z",
+            version: "v1.29.12-2344-g375d2b347",
+            'build-date': "2022-04-20T09:20:23.090Z",
             'tag-name': "v2.5.0",
-            'commit-hash': "7d3cd8499",
-            'commit-date': "2022-04-14T07:34:29.000Z",
-            'remote-url': "https://github.com/DimensionDev/Maskbook",
-            'branch-name': "HEAD",
+            'commit-hash': "375d2b347",
+            'commit-date': "2022-04-20T09:14:57.000Z",
+            'remote-url': "git@github.com:DimensionDev/Maskbook.git",
+            'branch-name': "feat/sendRedpacketToNative",
             dirty: false,
             'tag-dirty': true
         },
@@ -1457,7 +1457,7 @@ const postEditorDraftContentSelector = ()=>{
         return querySelector('[contenteditable][aria-label][spellcheck],textarea[aria-label][spellcheck]');
     }
     if (isReplyPageSelector()) {
-        return querySelector('div[data-testid="tweetTextarea_0"]');
+        return querySelector('[data-testid="tweetTextarea_0"]');
     }
     return (isCompose() ? postEditorInPopupSelector() : postEditorInTimelineSelector()).querySelector('.public-DraftEditor-content, [contenteditable][aria-label][spellcheck]');
 };
