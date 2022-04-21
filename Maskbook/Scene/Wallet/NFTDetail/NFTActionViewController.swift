@@ -162,7 +162,6 @@ extension NFTActionViewController {
             saveImage(image: img)
             
         case .notDetermined:
-                
             PHPhotoLibrary.requestAuthorization { [weak self] status in
                 if status == .authorized {
                     self?.saveImage(image: img)
