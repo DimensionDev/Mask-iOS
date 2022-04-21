@@ -145,10 +145,6 @@
             "no_local_wallet_for_walletconnect": {
                 "title": "Unable to connect",
                 "description": "Unable to connect to walletConnect as there is no local wallet."
-            },
-            "token_balance":{
-                "description": "You have 0 %s in your account to pay for transaction fees. Buy some %s or deposit from another account.",
-                "btn_confirm": "Buy %s" 
             }
         },
         "controls": {
@@ -194,8 +190,7 @@
         },
         "toast": {
             "saved": "Saved!",
-            "copy": "copied!",
-            "failed": "Failed"
+            "copy": "copied!"
         },
         "loading": "Loading..."
     },
@@ -506,6 +501,42 @@
                 "gasFeeMedium":"Likely in < 30 seconds",
                 "gasFeeHigh":"Very likely in < 15 seconds"
             },
+            "addContact": {
+                "btn_add": "Add Contact",
+                "placeholder_name": "Name"
+            },
+            "tokenList": {
+                "title": "Search Token",
+                "placeholder": "Token name or contract address"
+            },
+            "gasPrice": {
+                "title": "Edit Gas Price",
+                "standard": "Standard",
+                "fast": "Fast",
+                "custom": "Custom",
+                "btn_confirm": "Confirm",
+                "fee": "Fee",
+                "arrives": "Arrives in",
+                "gasPrice": "Gas Price(Gwei)",
+                "gasLimit": "Gas Limit(gas)",
+                "maxPriorityFee": "Max priority fee(Gwei)",
+                "maxFee": "Max fee(Gwei)",
+                "costFee": "cost fee:",
+                "advancedBtn": "Advanced",
+                "gasLimit_error": "Gas limit must be at least ",
+                "maxPriorityFee_error_low": "Max pirority fee extremely low for network conditions.",
+                "maxPriorityFee_error_high": "Max fee too low for network conditions.",
+                "maxFee_error_low": "Max fee cannot be lower than max priority fee",
+                "maxFee_error_high": "Max fee is higher than necessary."
+            },
+            "sendConfirmPop": {
+                "gasFee": "Gas fee",
+                "total": "Total",
+                "edit": "Edit",
+                "gasFeeLow": "Maybe in 30 seconds",
+                "gasFeeMedium": "Likely in < 30 seconds",
+                "gasFeeHigh": "Very likely in < 15 seconds"
+            }
         },
         "set_password": {
             "title": "Set Up Payment Password",
