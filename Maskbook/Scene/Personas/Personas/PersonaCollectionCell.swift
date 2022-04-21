@@ -92,6 +92,12 @@ class PersonaCollectionCell: UICollectionViewCell {
     private lazy var stack: HStackView = {
         let identifierStackView = HStackView(spacing: 4, alignment: .top) {
             littleMaskView
+                .cv.apply {
+                    NSLayoutConstraint.activate([
+                        $0.heightAnchor.constraint(equalToConstant: 16),
+                        $0.widthAnchor.constraint(equalToConstant: 16)
+                    ])
+                }
             identifierLabel
         }
         

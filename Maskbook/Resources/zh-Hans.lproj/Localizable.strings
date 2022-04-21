@@ -590,9 +590,9 @@ Clicking the confirm button means that you agree to bear the above possible risk
 "Scene.WalletImport.ItemKeystore" = "Keystore";
 "Scene.WalletImport.ItemKeystoreDesc" = "已加密的 Keystore JSON";
 "Scene.WalletImport.ItemMnemonicWords" = "助记词";
-"Scene.WalletImport.ItemMnemonicWordsDesc" = "助记符由多个单词组成，由空格分隔。";
+"Scene.WalletImport.ItemMnemonicWordsDesc" = "助记词由多个单词组成，由空格分隔。";
 "Scene.WalletImport.ItemPrivateKey" = "私钥";
-"Scene.WalletImport.ItemPrivateKeyDesc" = "文本格式私钥";
+"Scene.WalletImport.ItemPrivateKeyDesc" = "明文私钥";
 "Scene.WalletImport.Title" = "导入钱包";
 "Scene.WalletKeystore.BtnConfirm" = "确定";
 "Scene.WalletKeystore.KeystorePlaceholder" = "Keystore 内容";
