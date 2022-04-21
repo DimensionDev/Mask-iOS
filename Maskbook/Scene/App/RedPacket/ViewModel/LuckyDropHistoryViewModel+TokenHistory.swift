@@ -98,10 +98,11 @@ extension LuckyDropHistoryViewModel {
                         let txid = payload.basic?.txid ?? ""
 
                         // TODO: reimplement getTransactionReceipt and ReadTransaction.call with async/await
-                        // getTransactionReceipt adn tx.call is the bottle neck
-                        // it will wait to get log on a queue to cause uneffeciency compare to the async/await
+                        // getTransactionReceipt and tx.call is the bottle neck
+                        // it will request log as a serial queue to cause uneffeciency
                         // if use the down follow code to request eventlog, it is ok, but the checkAvailability will get stuck
                         // when the payloads is too much.
+                        // web3Swift use PromiseKit to do network, but always do the work in a serial queue under the hood, this is not effecient
 
 //                        let request = JSONRPCRequestFabric.prepareRequest(.getTransactionReceipt, parameters: [txid])
 //                        let result: JSONRPCresponse? = try? await provider.post(request)
