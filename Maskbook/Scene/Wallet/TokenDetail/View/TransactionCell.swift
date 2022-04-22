@@ -314,8 +314,22 @@ extension TransactionCell {
             guard let gasPrice = txToSpeedUp.transactionInfo?.gasPrice else { return }
             guard let gasLimit = txToSpeedUp.transactionInfo?.gaslimit else { return }
             
-            let confirmModel = SendConfirmViewModel(selectedToken: txToSpeedUp.transactionInfo?.token, gasPrice: gasPrice * BigUInt(1.2), gasLimit: gasLimit, gasFeeNetModel: txToSpeedUp.transactionInfo?.gasNetModel)
+            var gasNetModel = txToSpeedUp.transactionInfo?.gasNetModel
+
+            if let maxFeePerGas = txToSpeedUp.transactionInfo?.gasNetModel?.suggestedMaxFeePerGas{
+                let gwei = NSDecimalNumber(string: maxFeePerGas).multiplying(by: NSDecimalNumber(string: "1.2"))
+                let roundBehavior = NSDecimalNumberHandler(roundingMode: .plain, scale: 0, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
+                gasNetModel?.suggestedMaxFeePerGas = gwei.rounding(accordingToBehavior: roundBehavior).stringValue
+            }
             
+            if let maxPriorityFee = txToSpeedUp.transactionInfo?.gasNetModel?.suggestedMaxPriorityFeePerGas{
+                let gwei = NSDecimalNumber(string: maxPriorityFee).multiplying(by: NSDecimalNumber(string: "1.2"))
+                let roundBehavior = NSDecimalNumberHandler(roundingMode: .plain, scale: 0, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
+                gasNetModel?.suggestedMaxPriorityFeePerGas = gwei.rounding(accordingToBehavior: roundBehavior).stringValue
+            }
+            
+            let confirmModel = SendConfirmViewModel(selectedToken: txToSpeedUp.transactionInfo?.token, gasPrice: gasPrice * BigUInt(12) / BigUInt(10), gasLimit: gasLimit, gasFeeNetModel: gasNetModel)
+                        
             Coordinator.main.present(
                 scene: .sendTransactionPopConfirm(sendConfirmViewModel: confirmModel, toAddress: toAddress, amount: amount, nonce: txToSpeedUp.nonce),
                 transition: .panModel(animated: true))
@@ -337,8 +351,22 @@ extension TransactionCell {
             guard let gasLimit = txToSpeedUp.transactionInfo?.gaslimit else { return }
             
             let token  = WalletAssetManager.shared.getDefaultMainToken()
+            
+            var gasNetModel = txToSpeedUp.transactionInfo?.gasNetModel
 
-            let confirmModel = SendConfirmViewModel(selectedToken: token, gasPrice: gasPrice * BigUInt(1.5), gasLimit: gasLimit, gasFeeNetModel: txToSpeedUp.transactionInfo?.gasNetModel)
+            if let maxFeePerGas = txToSpeedUp.transactionInfo?.gasNetModel?.suggestedMaxFeePerGas{
+                let gwei = NSDecimalNumber(string: maxFeePerGas).multiplying(by: NSDecimalNumber(string: "1.5"))
+                let roundBehavior = NSDecimalNumberHandler(roundingMode: .plain, scale: 0, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
+                gasNetModel?.suggestedMaxFeePerGas = gwei.rounding(accordingToBehavior: roundBehavior).stringValue
+            }
+            
+            if let maxPriorityFee = txToSpeedUp.transactionInfo?.gasNetModel?.suggestedMaxPriorityFeePerGas{
+                let gwei = NSDecimalNumber(string: maxPriorityFee).multiplying(by: NSDecimalNumber(string: "1.5"))
+                let roundBehavior = NSDecimalNumberHandler(roundingMode: .plain, scale: 0, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
+                gasNetModel?.suggestedMaxPriorityFeePerGas = gwei.rounding(accordingToBehavior: roundBehavior).stringValue
+            }
+
+            let confirmModel = SendConfirmViewModel(selectedToken: token, gasPrice: gasPrice * BigUInt(15) / BigUInt(10), gasLimit: gasLimit, gasFeeNetModel: gasNetModel)
             
             Coordinator.main.present(
                 scene: .sendTransactionPopConfirm(sendConfirmViewModel: confirmModel, toAddress: toAddress, amount: "0", nonce: txToSpeedUp.nonce),
