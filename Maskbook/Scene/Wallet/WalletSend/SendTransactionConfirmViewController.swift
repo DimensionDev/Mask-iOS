@@ -648,6 +648,7 @@ extension SendTransactionConfirmViewController {
     
     @objc
     func sendTransaction(_ sender: UIButton) {
+        self.view.endEditing(true)
         guard !self.viewModel.isShowBioIDPage.value else {
             verifyWithFaceId()
             return
