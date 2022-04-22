@@ -23,21 +23,23 @@ enum DAppService {
         }
     }
     
-    // FIXME: [hugo] 404 page not found
     static func sendRiskWarningConfirm(address: String, pluginId: String? = nil) {
-        let url = CloudHost.production.url
+#if DEBUG
+        let host = CloudHost.development.url
+#else
+        let host = CloudHost.production.url
+#endif
         let encoder = JSONEncoder()
-        var params = [
+        let params = [
             "address": address,
+            "plugin_id": pluginId ?? ""
         ]
-        if let pluginId = pluginId {
-            params["plugin_id"] = pluginId
-        }
         guard let requestData = try? encoder.encode(params) else {
             return
         }
         
         Task {
+            let url = host.appendingPathComponent("v1/risk_warning/confirm")
             var urlRequest = URLRequest(url: url, cachePolicy: .reloadIgnoringCacheData)
             urlRequest.httpMethod = "POST"
             urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
