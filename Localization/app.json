@@ -946,7 +946,7 @@
                 "exceed-max-quantity": "Enter Quantity(Max: 255)",
                 "best-wishes": "Best Wishes!",
                 "no-token": "Select a Token",
-                "no-account": "Connect a Wallet",
+                "no-account": "There is no wallet",
                 "no-share": "Enter share",
                 "no-amount-per-share": "Enter Amount Per Share",
                 "no-total-amount": "Enter Total Amount",
@@ -969,6 +969,9 @@
                 "transaction_fee": "Transaction fee",
                 "tips": "You can withdraw the remaining balance 24 hours after the Lucky Drop is sent.",
                 "title": "Confirm Your Lucky Drop"
+            },
+            "alert": {
+                "message_no_account": "You can’t select tokens as there is no wallet."
             },
             "max": "MAX",
             "total-amount": "Total Amount",

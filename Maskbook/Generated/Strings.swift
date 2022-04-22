@@ -733,6 +733,13 @@ enum L10n {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Transaction-Fee")
       }
 
+      enum Alert {
+        /// You can’t select tokens as there is no wallet.
+        static var messageNoAccount: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Alert.MessageNoAccount")
+        }
+      }
+
       enum Buttons {
         /// Average
         static var average: String {
@@ -762,7 +769,7 @@ enum L10n {
         static func minimumAmount(_ p1: String, _ p2: String) -> String {
           return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Minimum-Amount", p1, p2)
         }
-        /// Connect a Wallet
+        /// There is no wallet
         static var noAccount: String {
           return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.No-Account")
         }

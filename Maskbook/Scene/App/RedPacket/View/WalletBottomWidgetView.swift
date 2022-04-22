@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct WalletBottomWidgetView: View {
+    @InjectedProvider(\.userDefaultSettings)
+    private var settings
     @ObservedObject
     var viewModel: WalletBottomWidgetViewModel
     
@@ -19,6 +21,29 @@ struct WalletBottomWidgetView: View {
     var body: some View {
         HStack(spacing: 0) {
             Button {
+                guard settings.defaultAccountAddress != nil else {
+                    Alert {
+                        ImageItem(.error)
+                        WithTipItem(
+                            title: L10n.Plugins.Luckydrop.Buttons.noAccount,
+                            detail: NSAttributedString(
+                                string: L10n.Plugins.Luckydrop.Alert.messageNoAccount,
+                                attributes: [
+                                    .font: FontStyles.BH5,
+                                    .foregroundColor: Asset.Colors.Text.normal.color
+                                ]
+                            )
+                        )
+                        DoneActionItem(
+                            .init(
+                                title: L10n.Common.Controls.done,
+                                action: {}
+                            )
+                        )
+                    }
+                    .show()
+                    return
+                }
                 viewModel.switchAccount()
             } label: {
                 HStack(spacing: 0) {

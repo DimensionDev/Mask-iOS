@@ -17,6 +17,8 @@ typealias RedPacketType = RedPacket.RedPacketType
 struct LuckyDropTokens: View {
     @InjectedProvider(\.mainCoordinator)
     private var mainCoordinator
+    @InjectedProvider(\.userDefaultSettings)
+    private var settings
     
     @EnvironmentObject var chain: ResponderChain
     @ObservedObject var viewModel: LuckyDropViewModel
@@ -56,10 +58,7 @@ struct LuckyDropTokens: View {
     var tokenRow: some View {
         HStack(spacing: 0) {
             Button {
-                Coordinator.main.present(
-                    scene: .sendTransacationTokenlist(delegate: viewModel, isNftList: false),
-                    transition: .detail(animated: true)
-                )
+                selectToken()
             } label: {
                 if let url = viewModel.tokenURL {
                     KFImage(url)
@@ -207,6 +206,36 @@ struct LuckyDropTokens: View {
                 Spacer()
             }
         }
+    }
+    
+    func selectToken() {
+        guard settings.defaultAccountAddress != nil else {
+            Alert {
+                ImageItem(.error)
+                WithTipItem(
+                    title: L10n.Plugins.Luckydrop.Buttons.noAccount,
+                    detail: NSAttributedString(
+                        string: L10n.Plugins.Luckydrop.Alert.messageNoAccount,
+                        attributes: [
+                            .font: FontStyles.BH5,
+                            .foregroundColor: Asset.Colors.Text.normal.color
+                        ]
+                    )
+                )
+                DoneActionItem(
+                    .init(
+                        title: L10n.Common.Controls.done,
+                        action: {}
+                    )
+                )
+            }
+            .show()
+            return
+        }
+        mainCoordinator.present(
+            scene: .sendTransacationTokenlist(delegate: viewModel, isNftList: false),
+            transition: .detail(animated: true)
+        )
     }
 }
 

@@ -88,7 +88,7 @@ class WalletBottomWidgetViewModel: ObservableObject {
         }
         .store(in: &disposeBag)
         
-        settings.$passwordExpiredDate.map { [weak self] date in
+        settings.$passwordExpiredDate.asDriver().map { [weak self] date in
             self?.settings.isPasswordExpried(date) != false
         }
         .assign(to: \.isLocked, on: self)

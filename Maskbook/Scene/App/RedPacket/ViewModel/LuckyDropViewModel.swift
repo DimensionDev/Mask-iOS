@@ -527,21 +527,16 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         guard self.buttonType != .sending, self.buttonType != .unlockingToken else {
             return
         }
-        guard let gasFee = self.gasFeeItem?.gasFee else {
-            return
-        }
-        let gasFeeNumber = NSDecimalNumber(string: gasFee)
-        guard gasFeeNumber != .notANumber else {
+        
+        guard self.settings.defaultAccountAddress != nil else {
+            self.updateButton(state: .noAccount)
             return
         }
         
-        guard let nativeToken = self.walletAssetManager.getMainToken(
-            network: self.settings.network,
-            chainId: self.settings.network.chain.rawValue,
-            networkId: Int(self.settings.network.networkId),
-            context: AppContext.shared.coreDataStack.persistentContainer.viewContext) else {
-                return
-            }
+        guard let token = self.token else {
+            self.updateButton(state: .noToken)
+            return
+        }
         
         guard let date = self.settings.passwordExpiredDate, !self.settings.isPasswordExpried(date) else {
             self.updateButton(state: .unlock)
@@ -552,15 +547,22 @@ class LuckyDropViewModel: NSObject, ObservableObject {
             self.updateButton(state: .riskWarning)
             return
         }
-        guard let token = self.token else {
-            self.updateButton(state: .noToken)
-            return
-        }
-        guard self.settings.defaultAccountAddress != nil else {
-            self.updateButton(state: .noAmount)
-            return
-        }
         
+        guard let gasFee = self.gasFeeItem?.gasFee else {
+            return
+        }
+        let gasFeeNumber = NSDecimalNumber(string: gasFee)
+        guard gasFeeNumber != .notANumber else {
+            return
+        }
+        guard let nativeToken = self.walletAssetManager.getMainToken(
+            network: self.settings.network,
+            chainId: self.settings.network.chain.rawValue,
+            networkId: Int(self.settings.network.networkId),
+            context: AppContext.shared.coreDataStack.persistentContainer.viewContext) else {
+            self.updateButton(state: .insufficientGas)
+            return
+        }
         let balanceOfNativeToken = nativeToken.quantityNumber
         if gasFeeNumber.doubleValue > balanceOfNativeToken.doubleValue {
             self.updateButton(state: .insufficientGas)
@@ -651,11 +653,11 @@ extension LuckyDropViewModel: ChooseTokenBackDelegate {
 
 extension LuckyDropViewModel {
     enum ConfirmButtonType: CaseIterable, Codable {
+        case noAccount
+        case noToken
         case unlock
         case riskWarning
         case insufficientGas
-        case noToken
-        case noAccount
         case noQuantity
         case exceedMaxQuantity
         case noAmount
