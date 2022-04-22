@@ -66,14 +66,11 @@ struct LuckyDropHistoryView: View {
                 }
             }
             .padding(.horizontal, LayoutConstraints.horizontal)
-            .onRefresh(
+            .refreshable(
                 pullthreshold: 32,
                 pullProgress: $viewModel.pullState,
-                onRefresh: { done in
-                    Task { @MainActor in
-                        await self.viewModel.loadData()
-                        done()
-                    }
+                asyncAction: { @MainActor in
+                    await self.viewModel.loadData()
                 },
                 pullAnimationView: {
                     LoadingIndicator(
