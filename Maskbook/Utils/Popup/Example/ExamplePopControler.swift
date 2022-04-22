@@ -45,7 +45,7 @@ final class ExamplePopController: SheetViewController {
                     switch example {
                     case .warning: return WariningPopupController(presenter: .alert)
                     case .recovery: return RecoverySheetController(presenter: SheetPresenter(presentStyle: .translucent))
-                    case .pluginWarning: return PluginAlertViewController()
+                    case .pluginWarning: return PluginAlertViewController(pluginId: nil)
                     case .lodingIndicator: return LoadingIndicatorController()
                     }
                 }()

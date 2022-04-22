@@ -411,17 +411,15 @@ extension UserDefaultSettings {
             guard let address = defaultAccountAddress else { return false }
             return pluginRiskWarningAwared.contains(address)
         }
-        
-        set {
-            guard let address = defaultAccountAddress else { return }
-            if newValue {
-                guard !pluginRiskWarningAwared.contains(address) else { return }
-                pluginRiskWarningAwared.append(address)
-            } else {
-                guard pluginRiskWarningAwared.contains(address) else { return }
-                pluginRiskWarningAwared.removeAll(where: { $0 == address })
-            }
+    }
+    
+    func confirmRiskWarning(address: String, pluginId: String?) {
+        defer {
+            DAppService.sendRiskWarningConfirm(address: address, pluginId: pluginId)
         }
+        
+        guard !pluginRiskWarningAwared.contains(address) else { return }
+        pluginRiskWarningAwared.append(address)
     }
 }
 

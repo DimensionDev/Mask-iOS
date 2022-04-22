@@ -301,6 +301,7 @@
 		2AB56513280F93D200C07A85 /* Array+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB564DF280F93D200C07A85 /* Array+extension.swift */; };
 		2ABA6A1827A50A6800C0F82B /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABA6A1727A50A6800C0F82B /* Logging.swift */; };
 		2ACA1E1227182F01000C0ECC /* PasswordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACA1E1127182F01000C0ECC /* PasswordTests.swift */; };
+		2AD854EF281257D00064DDA5 /* DAppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD854EE281257D00064DDA5 /* DAppService.swift */; };
 		2ADF9B0627D899D80020D254 /* Dismissable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF9B0527D899D80020D254 /* Dismissable.swift */; };
 		2AF17F292802C393008B6365 /* token.json in Resources */ = {isa = PBXBuildFile; fileRef = 2AF17F282802C393008B6365 /* token.json */; };
 		2AF6C7B027FEA37200A9EA4A /* WalletBottomWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF6C7AE27FEA37200A9EA4A /* WalletBottomWidgetView.swift */; };
@@ -1077,6 +1078,7 @@
 		2AB564DF280F93D200C07A85 /* Array+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+extension.swift"; sourceTree = "<group>"; };
 		2ABA6A1727A50A6800C0F82B /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		2ACA1E1127182F01000C0ECC /* PasswordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTests.swift; sourceTree = "<group>"; };
+		2AD854EE281257D00064DDA5 /* DAppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAppService.swift; sourceTree = "<group>"; };
 		2ADF9B0527D899D80020D254 /* Dismissable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dismissable.swift; sourceTree = "<group>"; };
 		2AF17F282802C393008B6365 /* token.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = token.json; sourceTree = "<group>"; };
 		2AF6C7AE27FEA37200A9EA4A /* WalletBottomWidgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletBottomWidgetView.swift; sourceTree = "<group>"; };
@@ -1802,6 +1804,7 @@
 		1F03638F2779D20D001E8A88 /* DApp */ = {
 			isa = PBXGroup;
 			children = (
+				2AD854ED281257C10064DDA5 /* Service */,
 				1FEE1EA227844F6200697F81 /* Utils */,
 				1F036395277AB330001E8A88 /* Controller */,
 				1F0363902779D217001E8A88 /* Model */,
@@ -2276,6 +2279,14 @@
 				2AB564DD280F93D200C07A85 /* SwiftUI+Color.swift */,
 			);
 			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		2AD854ED281257C10064DDA5 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				2AD854EE281257D00064DDA5 /* DAppService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		2AF17F262802C332008B6365 /* Constant */ = {
@@ -3979,7 +3990,7 @@
 			);
 			mainGroup = DBAAF48822C35A7100017594;
 			packageReferences = (
-				1FF404712809653F00468F5C /* XCRemoteSwiftPackageReference "Refresh.git" */,
+				1FF404712809653F00468F5C /* XCRemoteSwiftPackageReference "Refresh" */,
 			);
 			productRefGroup = DBAAF49222C35A7100017594 /* Products */;
 			projectDirPath = "";
@@ -4654,6 +4665,7 @@
 				5D3E364C27BF41DE00FDCFDD /* PostRepository.swift in Sources */,
 				2AF88548271EE9310004565A /* WalletListAddViewModel.swift in Sources */,
 				2AF884F3271EE9310004565A /* IdentityCreateViewModel.swift in Sources */,
+				2AD854EF281257D00064DDA5 /* DAppService.swift in Sources */,
 				2AF88546271EE9310004565A /* ImportKeystoreViewController.swift in Sources */,
 				1FCBEDFC273A1004001C3637 /* SheetGestureInteractor.swift in Sources */,
 				2AF884E7271EE9310004565A /* SwitchButton.swift in Sources */,
@@ -5708,7 +5720,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1FF404712809653F00468F5C /* XCRemoteSwiftPackageReference "Refresh.git" */ = {
+		1FF404712809653F00468F5C /* XCRemoteSwiftPackageReference "Refresh" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/foxsin10/Refresh.git";
 			requirement = {
@@ -5721,7 +5733,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		1FF404722809653F00468F5C /* PullRefresh */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1FF404712809653F00468F5C /* XCRemoteSwiftPackageReference "Refresh.git" */;
+			package = 1FF404712809653F00468F5C /* XCRemoteSwiftPackageReference "Refresh" */;
 			productName = PullRefresh;
 		};
 /* End XCSwiftPackageProductDependency section */

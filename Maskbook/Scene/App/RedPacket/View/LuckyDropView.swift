@@ -112,7 +112,8 @@ struct LuckyDropView: View {
                     )
                     
                 case .riskWarning:
-                    mainCoordinator.present(scene: .pluginRiskWarning, transition: .popup)
+                    let pluginId = PluginStorageRepository.PluginID.redPackage.rawValue
+                    mainCoordinator.present(scene: .pluginRiskWarning(pluginId: pluginId), transition: .popup)
                     
                 case .unlockToken: viewModel.approveToken()
                 case .send: viewModel.send()

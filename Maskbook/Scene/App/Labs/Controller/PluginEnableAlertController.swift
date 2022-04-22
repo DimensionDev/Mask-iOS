@@ -22,6 +22,7 @@ final class PluginAlertViewController: AlertPopupController {
     private let textEdge = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
     private let maxTextContentHeight: CGFloat = 318
     private let iconSize: CGFloat = 60
+    private let pluginId: String?
 
     @InjectedProvider(\.userDefaultSettings)
     private var userSettings
@@ -30,7 +31,8 @@ final class PluginAlertViewController: AlertPopupController {
         userSettings.defaultAccountAddress ?? ""
     }
 
-    init() {
+    init(pluginId: String?) {
+        self.pluginId = pluginId
         super.init(presenter: .alert)
     }
 
@@ -158,8 +160,13 @@ final class PluginAlertViewController: AlertPopupController {
 
         confirmButton.cv.tap()
             .sink { [weak self] _ in
-                self?.userSettings.hasRiskConfirmed = true
-                self?.hide()
+                defer {
+                    self?.hide()
+                }
+                guard let address = self?.userSettings.defaultAccountAddress else {
+                    return
+                }
+                self?.userSettings.confirmRiskWarning(address: address, pluginId: self?.pluginId)
             }
             .store(in: &subscriptionSet)
 
@@ -191,7 +198,7 @@ import SwiftUI
 struct PluginAlertViewControllerPreview: PreviewProvider {
     static var previews: some SwiftUI.View {
         Preview {
-            PluginAlertViewController().view
+            PluginAlertViewController(pluginId: nil).view
         }
     }
 }
