@@ -637,7 +637,7 @@ const postEditorDraftContentSelector = ()=>{
         return querySelector('[contenteditable][aria-label][spellcheck],textarea[aria-label][spellcheck]');
     }
     if (isReplyPageSelector()) {
-        return querySelector('div[data-testid="tweetTextarea_0"]');
+        return querySelector('[data-testid="tweetTextarea_0"]');
     }
     return ((0,_postBox__WEBPACK_IMPORTED_MODULE_1__/* .isCompose */ .iv)() ? postEditorInPopupSelector() : postEditorInTimelineSelector()).querySelector('.public-DraftEditor-content, [contenteditable][aria-label][spellcheck]');
 };

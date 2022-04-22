@@ -16076,7 +16076,7 @@ var defaultEncoding
 if (__webpack_require__.g.process && __webpack_require__.g.process.browser) {
   defaultEncoding = 'utf-8'
 } else if (__webpack_require__.g.process && __webpack_require__.g.process.version) {
-  var pVersionMajor = parseInt("v17.9.0".split('.')[0].slice(1), 10)
+  var pVersionMajor = parseInt("v17.5.0".split('.')[0].slice(1), 10)
 
   defaultEncoding = pVersionMajor >= 6 ? 'utf-8' : 'binary'
 } else {
@@ -16253,8 +16253,8 @@ module.exports = function (thing, encoding, name) {
 
 
 if (typeof process === 'undefined' ||
-    !"v17.9.0" ||
-    "v17.9.0".indexOf('v0.') === 0 ||
+    !"v17.5.0" ||
+    "v17.5.0".indexOf('v0.') === 0 ||
      false && 0) {
   module.exports = { nextTick: nextTick };
 } else {
@@ -22500,13 +22500,13 @@ const buildInfoMarkdown = `## Build info
 - target: ${"safari"}
 - build: ${"stable"}
 - architecture: ${"app"}
-- BUILD_DATE: ${"2022-04-14T07:40:34.110Z"}
-- VERSION: ${"v1.29.12-2343-g7d3cd8499"}
+- BUILD_DATE: ${"2022-04-20T09:20:23.090Z"}
+- VERSION: ${"v1.29.12-2344-g375d2b347"}
 
 ## Git (${ true ? '*' : 0}):
 
-${"7d3cd8499"} (${"HEAD"}) on tag "${"v2.5.0"}"
-${"https://github.com/DimensionDev/Maskbook"?.toLowerCase()?.includes('DimensionDev') ? '' : "https://github.com/DimensionDev/Maskbook"}`;
+${"375d2b347"} (${"feat/sendRedpacketToNative"}) on tag "${"v2.5.0"}"
+${"git@github.com:DimensionDev/Maskbook.git"?.toLowerCase()?.includes('DimensionDev') ? '' : "git@github.com:DimensionDev/Maskbook.git"}`;
 
 // EXTERNAL MODULE: ./src/social-network/index.ts
 var social_network = __webpack_require__(3747);

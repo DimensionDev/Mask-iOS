@@ -12,7 +12,7 @@ import CoreDataStack
 import PanModal
 import UIKit
 
-protocol ChooseTokenBackDelegate: NSObjectProtocol {
+protocol ChooseTokenBackDelegate: AnyObject {
      func chooseTokenAction(token: Token)
      func chooseNFTTokenAction(token: Collectible)
 }

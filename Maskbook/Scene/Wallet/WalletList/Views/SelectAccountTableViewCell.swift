@@ -1,5 +1,5 @@
 //
-//  WalletListWalletTableViewCell.swift
+//  SelectAccountTableViewCell.swift
 //  Maskbook
 //
 //  Created by Hugo L on 2021/5/21.
@@ -10,12 +10,12 @@ import CoreDataStack
 import UIKit
 import WalletConnectSwift
 
-protocol WalletListWalletTableViewCellDelegate: AnyObject {
-    func walletTableViewCell(cell: WalletListWalletTableViewCell, moreBtnClicked: UIButton)
+protocol SelectAccountTableViewCellDelegate: AnyObject {
+    func walletTableViewCell(cell: SelectAccountTableViewCell, moreBtnClicked: UIButton)
 }
 
-class WalletListWalletTableViewCell: UITableViewCell {
-    lazy var selectBackgroudView: UIView = {
+class SelectAccountTableViewCell: UITableViewCell {
+    private lazy var selectBackgroudView: UIView = {
         let view = UIView()
         view.backgroundColor = Asset.Colors.Background.dark.color
         view.layer.cornerRadius = 12
@@ -25,18 +25,18 @@ class WalletListWalletTableViewCell: UITableViewCell {
         return view
     }()
     
-    lazy var avatar: AvatarView = {
+    private lazy var avatar: AvatarView = {
         let view = AvatarView(title: nil)
         view.applyCornerRadius(radius: 16, cornerCurve: .circular)
         return view
     }()
     
-    lazy var avatarIcon: UIImageView = {
+    private lazy var avatarIcon: UIImageView = {
         let imageView = UIImageView()
         return imageView
     }()
     
-    lazy var walletIconContainer: UIView = {
+    private lazy var walletIconContainer: UIView = {
         let view = UIView()
         avatarIcon.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(avatarIcon)
@@ -58,7 +58,7 @@ class WalletListWalletTableViewCell: UITableViewCell {
         return view
     }()
     
-    lazy var walletIcon: UIImageView = {
+    private lazy var walletIcon: UIImageView = {
         let imageView = UIImageView()
         imageView.applyCornerRadius(radius: 8)
         imageView.layer.borderWidth = 1.5
@@ -66,7 +66,7 @@ class WalletListWalletTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    lazy var avatarStackView: UIStackView = {
+    private lazy var avatarStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
         view.alignment = .center
@@ -87,7 +87,7 @@ class WalletListWalletTableViewCell: UITableViewCell {
         return view
     }()
     
-    lazy var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = FontStyles.BH5
         label.textColor = Asset.Colors.Text.dark.color
@@ -96,14 +96,14 @@ class WalletListWalletTableViewCell: UITableViewCell {
         return label
     }()
     
-    lazy var subtitleLabel: UILabel = {
+    private lazy var subtitleLabel: UILabel = {
         let label = UILabel()
         label.font = FontStyles.MH6
         label.textColor = Asset.Colors.Text.normal.color
         return label
     }()
     
-    lazy var importLabel: UIView = {
+    private lazy var importLabel: UIView = {
         let view = UIButton()
         view.isUserInteractionEnabled = false
         view.setTitle(L10n.Scene.WalletList.walletsListImport, for: .normal)
@@ -119,7 +119,7 @@ class WalletListWalletTableViewCell: UITableViewCell {
         return view
     }()
     
-    lazy var moreButton: UIButton = {
+    private lazy var moreButton: UIButton = {
         let btn = HitTestExpandedButton(type: .custom)
         btn.setImage(UIImage(systemName: "ellipsis"), for: .normal)
         btn.tintColor = Asset.Colors.Text.normal.color
@@ -132,7 +132,7 @@ class WalletListWalletTableViewCell: UITableViewCell {
         return btn
     }()
     
-    lazy var checkButton: UIButton = {
+    private lazy var checkButton: UIButton = {
         let btn = HitTestExpandedButton(type: .custom)
         btn.setImage(Asset.Icon.Cell.cellCheck.image, for: .normal)
         btn.tintColor = Asset.Colors.Text.normal.color
@@ -145,7 +145,7 @@ class WalletListWalletTableViewCell: UITableViewCell {
         return btn
     }()
     
-    lazy var hStackView0: UIStackView = {
+    private lazy var hStackView0: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
         view.alignment = .center
@@ -164,7 +164,7 @@ class WalletListWalletTableViewCell: UITableViewCell {
         return view
     }()
     
-    lazy var titleStackView: UIStackView = {
+    private lazy var titleStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
         view.alignment = .center
@@ -178,7 +178,7 @@ class WalletListWalletTableViewCell: UITableViewCell {
         return view
     }()
     
-    lazy var vStackView1: UIStackView = {
+    private lazy var vStackView1: UIStackView = {
         let view = UIStackView()
         view.axis = .vertical
         view.alignment = .leading
@@ -191,7 +191,7 @@ class WalletListWalletTableViewCell: UITableViewCell {
         return view
     }()
     
-    lazy var hStackView2: UIStackView = {
+    private lazy var hStackView2: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
         view.alignment = .center
@@ -201,7 +201,7 @@ class WalletListWalletTableViewCell: UITableViewCell {
         return view
     }()
     
-    weak var delegate: WalletListWalletTableViewCellDelegate?
+    weak var delegate: SelectAccountTableViewCellDelegate?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -222,24 +222,26 @@ class WalletListWalletTableViewCell: UITableViewCell {
         checkButton.isHidden = true
     }
     
-    func update(data: WalletListViewModel.WalletWrapType) {
+    private func update(data: SelectAccountViewModel.WalletWrapType) {
         titleLabel.text = data.name
-        moreButton.isHidden = false
-        checkButton.isHidden = true
         update(
             quantity: data.balance.stringValue,
             symbol: data.network.mainToken?.symbol
         )
         
         importLabel.isHidden = !data.isImported
-        selectBackgroudView.isHidden = !data.selected
+        selectBackgroudView.isHidden = false
         avatar.title = data.name
         avatar.isHidden = data.isFromWalletConnect
+        if let colorHex = data.account.colorHex {
+            avatar.backgroundColor = UIColor(hex: colorHex)
+        }
         walletIconContainer.isHidden = !data.isFromWalletConnect
         if data.isFromWalletConnect {
             avatarIcon.image = Asset.Images.Scene.WalletConnect.walletConnect.image
             if let name = data.account.session?.walletInfo?.peerMeta.name,
-               let walletEntry = WalletConnectClient.walletEntryWithName(name: name) {
+               let walletEntry = WalletConnectClient.walletEntryWithName(name: name)
+            {
                 walletIcon.isHidden = false
                 walletIcon.setNetworkImage(url: walletEntry.imageURL)
             } else {
@@ -247,15 +249,22 @@ class WalletListWalletTableViewCell: UITableViewCell {
             }
         }
     }
-    
-    func walletConnectUpdate(data: WalletListViewModel.WalletWrapType) {
+
+    func editaleUpdate(data: SelectAccountViewModel.WalletWrapType, isEditing: Bool) {
         update(data: data)
+        checkButton.isHidden = isEditing ? true : !data.selected
+        moreButton.isHidden = !isEditing
+    }
+    
+    func noEditaleUpdate(data: SelectAccountViewModel.WalletWrapType) {
+        update(data: data)
+        checkButton.isHidden = !data.selected
         moreButton.isHidden = true
     }
 }
 
-private extension WalletListWalletTableViewCell {
-    func setupUI() {
+private extension SelectAccountTableViewCell {
+    private func setupUI() {
         contentView.backgroundColor = Asset.Colors.Background.normal.color
         contentView.addSubview(selectBackgroudView)
         contentView.addSubview(hStackView0)
@@ -263,80 +272,37 @@ private extension WalletListWalletTableViewCell {
         selectBackgroudView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             selectBackgroudView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            selectBackgroudView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: selectBackgroudView.bottomAnchor, constant: 8),
-            contentView.trailingAnchor.constraint(equalTo: selectBackgroudView.trailingAnchor)
+            selectBackgroudView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstraints.leading),
+            selectBackgroudView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            selectBackgroudView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutConstraints.trailing)
         ])
         
         hStackView0.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             hStackView0.topAnchor.constraint(equalTo: contentView.topAnchor),
-            hStackView0.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: hStackView0.bottomAnchor),
-            contentView.trailingAnchor.constraint(equalTo: hStackView0.trailingAnchor)
+            hStackView0.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstraints.leading),
+            hStackView0.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            hStackView0.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutConstraints.trailing)
         ])
     }
     
-    func bindAction() {
-        moreButton.addTarget(self, action: #selector(onEditBtnDidClick), for: .touchUpInside)
+    private func bindAction() {
+        moreButton.addTarget(self, action: #selector(onMoreBtnDidClick), for: .touchUpInside)
     }
     
-    func update(quantity: String?, symbol: String?) {
+    private func update(quantity: String?, symbol: String?) {
         subtitleLabel.text = "\(quantity ?? "0") \(symbol ?? "")"
     }
 
     @objc
-    func onEditBtnDidClick() {
+    private func onMoreBtnDidClick() {
         delegate?.walletTableViewCell(cell: self, moreBtnClicked: moreButton)
     }
 }
 
-extension WalletListWalletTableViewCell {
+extension SelectAccountTableViewCell {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-            walletIcon.layer.borderColor = Asset.Colors.Background.normal.color.cgColor
+        walletIcon.layer.borderColor = Asset.Colors.Background.normal.color.cgColor
     }
 }
-
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-@available(iOS 13.0, *)
-struct WalletListWalletTableViewCellPreview: PreviewProvider {
-    static var previews: some SwiftUI.View {
-        Group {
-            UIViewPreview {
-                let cell = WalletListWalletTableViewCell(style: .default, reuseIdentifier: nil)
-                cell.titleLabel.text = "0xec4eec4eec4eec4eec4e1cd0"
-                cell.subtitleLabel.text = "0 ETH"
-                cell.selectBackgroudView.isHidden = false
-                cell.contentView.backgroundColor = .red
-                
-                cell.frame = CGRect(x: 0, y: 0, width: 272, height: 85)
-                return cell
-            }
-            .previewLayout(.fixed(width: 272, height: 85))
-            
-            UIViewPreview {
-                let cell = WalletListWalletTableViewCell(style: .default, reuseIdentifier: nil)
-                cell.titleLabel.text = "0xec4e...1cd0"
-                cell.subtitleLabel.text = "0 ETH"
-                cell.importLabel.isHidden = false
-                
-                cell.frame = CGRect(x: 0, y: 0, width: 272, height: 85)
-                return cell
-            }
-            .previewLayout(.fixed(width: 272, height: 85))
-
-            UIViewPreview {
-                let cell = WalletListWalletTableViewCell(style: .default, reuseIdentifier: nil)
-                cell.titleLabel.text = "0xec4e...1cd0"
-                cell.subtitleLabel.text = "0 ETH"
-                
-                cell.frame = CGRect(x: 0, y: 0, width: 272, height: 85)
-                return cell
-            }
-            .previewLayout(.fixed(width: 272, height: 85))
-        }
-    }
-}
-#endif

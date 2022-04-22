@@ -80,6 +80,13 @@ internal enum Asset {
       internal static let expandButtonBackground = ColorAsset(name: "Colors/Balances/expandButtonBackground")
       internal static let tokenBackground = ColorAsset(name: "Colors/Balances/tokenBackground")
     }
+    internal enum ChainColor {
+      internal static let arbitrum = ColorAsset(name: "Colors/ChainColor/arbitrum")
+      internal static let bsc = ColorAsset(name: "Colors/ChainColor/bsc")
+      internal static let eth = ColorAsset(name: "Colors/ChainColor/eth")
+      internal static let gnosis = ColorAsset(name: "Colors/ChainColor/gnosis")
+      internal static let matic = ColorAsset(name: "Colors/ChainColor/matic")
+    }
     internal enum ConnectTip {
       internal static let background1 = ColorAsset(name: "Colors/ConnectTip/background1")
       internal static let background2 = ColorAsset(name: "Colors/ConnectTip/background2")
@@ -142,6 +149,14 @@ internal enum Asset {
       internal static let mask = ColorAsset(name: "Colors/Twitter/mask")
       internal static let second = ColorAsset(name: "Colors/Twitter/second")
       internal static let strong = ColorAsset(name: "Colors/Twitter/strong")
+    }
+    internal enum WalletColor {
+      internal static let color1 = ColorAsset(name: "Colors/WalletColor/Color1")
+      internal static let color2 = ColorAsset(name: "Colors/WalletColor/Color2")
+      internal static let color3 = ColorAsset(name: "Colors/WalletColor/Color3")
+      internal static let color4 = ColorAsset(name: "Colors/WalletColor/Color4")
+      internal static let color5 = ColorAsset(name: "Colors/WalletColor/Color5")
+      internal static let color6 = ColorAsset(name: "Colors/WalletColor/Color6")
     }
     internal enum Public {
       internal static let blue = ColorAsset(name: "Colors/public/Blue")

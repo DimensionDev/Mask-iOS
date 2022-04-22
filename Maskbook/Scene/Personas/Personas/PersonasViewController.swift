@@ -210,7 +210,6 @@ class PersonasViewController: BaseViewController {
         guard let persona = personaManager.currentPersona.value else { return }
         let personas = personaManager.personaRecordsSubject.value
         guard let index = personas.firstIndex(of: persona) else { return }
-        if index == 0 { return }
         DispatchQueue.main.async {
             self.personaCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredHorizontally, animated: false)
         }

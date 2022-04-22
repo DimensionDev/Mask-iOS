@@ -9,12 +9,14 @@
 import Foundation
 import UIKit
 
-class WalletConnectSelectAccountCollectionCell: UICollectionViewCell {
+class SelectAccountChainItemCell: UICollectionViewCell {
+    static let itemSize = CGSize(width: 75, height: 66)
+    
     let chainIcon: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-        imageView.applyCornerRadius(radius: 23)
+        imageView.applyCornerRadius(radius: 20)
         return imageView
     }()
     
@@ -45,8 +47,8 @@ class WalletConnectSelectAccountCollectionCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             chainIcon.topAnchor.constraint(equalTo: contentView.topAnchor),
             chainIcon.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            chainIcon.heightAnchor.constraint(equalToConstant: 46),
-            chainIcon.widthAnchor.constraint(equalToConstant: 46)
+            chainIcon.heightAnchor.constraint(equalToConstant: 40),
+            chainIcon.widthAnchor.constraint(equalToConstant: 40)
         ])
 
         contentView.addSubview(dotView)
@@ -58,8 +60,9 @@ class WalletConnectSelectAccountCollectionCell: UICollectionViewCell {
         ])
     }
     
-    func configWith(chain: WalletListViewModel.CoinItem, isSelected: Bool) {
+    func configWith(chain: SelectAccountViewModel.CoinItem, isSelected: Bool) {
         chainIcon.image = isSelected ? chain.selectedImage : chain.unselectedImage
         dotView.isHidden = !isSelected
+        dotView.backgroundColor = chain.backgroundColor
     }
 }

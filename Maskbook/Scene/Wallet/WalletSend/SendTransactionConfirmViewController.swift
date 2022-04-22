@@ -28,6 +28,7 @@ class SendTransactionConfirmViewController: BaseViewController {
     let viewModel = SendConfirmViewModel()
     var toAddress: String?
     var disposeBag = Set<AnyCancellable>()
+    let keyboardExpandView = UIView()
     
     typealias ContactParam = Coordinator.Scene.WalletContactParam
     var param: ContactParam?
@@ -254,6 +255,7 @@ class SendTransactionConfirmViewController: BaseViewController {
         toAddressDetailLabel.text = toAddress
         getNetData()
         setSubscriptions()
+        handleForKeyboard()
     }
     // swiftlint:disable line_length
 
@@ -410,7 +412,14 @@ class SendTransactionConfirmViewController: BaseViewController {
             make.right.equalTo(-LayoutConstraints.trailing)
             make.left.equalTo(LayoutConstraints.leading)
             make.height.equalTo(54)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-24)
+        }
+        
+        view.addSubview(keyboardExpandView)
+        keyboardExpandView.snp.makeConstraints { make in
+            make.top.equalTo(sendButton.snp.bottom).offset(8)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            make.height.equalTo(0)
         }
     }
 
@@ -559,6 +568,51 @@ class SendTransactionConfirmViewController: BaseViewController {
             }
         }
     }
+    
+    func handleForKeyboard() {
+        let endFrame = KeyboardResponderService.shared.endFrame.removeDuplicates()
+        let willShow = NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification, object: nil)
+        let willHide = NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification, object: nil)
+        Publishers.CombineLatest(willShow, endFrame).sink { notification, _ in
+            guard let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else {
+                return
+            }
+            guard let endFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+                return
+            }
+            UIView.animate(
+                withDuration: duration,
+                delay: 0,
+                options: .curveEaseIn) {
+                    self.keyboardExpandView.snp.remakeConstraints { make in
+                        make.top.equalTo(self.sendButton.snp.bottom).offset(8)
+                        make.leading.trailing.equalToSuperview()
+                        make.bottom.equalTo(self.view.snp.bottom)
+                        make.height.equalTo(endFrame.height)
+                        self.sendButton.layoutIfNeeded()
+                    }
+            }
+            self.view.layoutIfNeeded()
+        }.store(in: &subscriptions)
+        
+        Publishers.CombineLatest(willHide, endFrame).sink { notification, _ in
+            guard let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else {
+                return
+            }
+            UIView.animate(
+                withDuration: duration,
+                delay: 0,
+                options: .curveEaseIn) {
+                    self.keyboardExpandView.snp.remakeConstraints { make in
+                        make.top.equalTo(self.sendButton.snp.bottom).offset(8)
+                        make.leading.trailing.equalToSuperview()
+                        make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+                        make.height.equalTo(0)
+                    }
+            }
+            self.view.layoutIfNeeded()
+        }.store(in: &subscriptions)
+    }
 }
 
 extension SendTransactionConfirmViewController {
@@ -594,6 +648,7 @@ extension SendTransactionConfirmViewController {
     
     @objc
     func sendTransaction(_ sender: UIButton) {
+        self.view.endEditing(true)
         guard !self.viewModel.isShowBioIDPage.value else {
             verifyWithFaceId()
             return

@@ -315,7 +315,7 @@ enum PersonaRepository {
                     newPersonaRecord.publicKey = persona[Persona.CodingKeys.publicKey.rawValue].rawString()
                 }
                 if persona[Persona.CodingKeys.localKey.rawValue].dictionary != nil {
-                    newPersonaRecord.privateKey = persona[Persona.CodingKeys.localKey.rawValue].rawString()
+                    newPersonaRecord.localKey = persona[Persona.CodingKeys.localKey.rawValue].rawString()
                 }
                 
                 newPersonaRecord.hasLogout = false

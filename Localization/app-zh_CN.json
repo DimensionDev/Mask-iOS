@@ -108,7 +108,7 @@
             },
             "download_identity_code": {
                 "title": "设置备份密码 ",
-                "description": "请在下载身份二维码之前设置您的 %s。 "
+                "description": "请在下载角色二维码之前设置您的 %s。 "
             },
             "backup_tips_no_backup_password": {
                 "title": " 设置备份密码",
@@ -137,6 +137,14 @@
             "camera_access": {
                 "title": "Mask Network 想要获取\n您的相机权限",
                 "description": "请到系统设置里允许相机权限。"
+            },
+            "only_scan_persona": {
+                "title": "请扫描角色二维码",
+                "description": "二维码不是角色二维码。\n请扫描角色二维码。"
+            },
+            "no_local_wallet_for_walletconnect": {
+                "title": "无法连接",
+                "description": "无法连接到 walletConnect，因为没有本地钱包。"
             }
         },
         "controls": {
@@ -177,7 +185,8 @@
             "move_data_now": "立即移动数据",
             "remind_me_later": "稍后提醒我",
             "go_settings": "好",
-            "dont_allow": "不允许"
+            "dont_allow": "不允许",
+            "speed_up": "加速"
         },
         "toast": {
             "saved": "已保存！",
@@ -293,9 +302,9 @@
         "wallet_import": {
             "title": "导入钱包",
             "item_mnemonic_words": "助记词",
-            "item_mnemonic_words_desc": "助记符由多个单词组成，由空格分隔。",
+            "item_mnemonic_words_desc": "助记词由多个单词组成，由空格分隔。",
             "item_private_key": "私钥",
-            "item_private_key_desc": "文本格式私钥",
+            "item_private_key_desc": "明文私钥",
             "item_keystore": "Keystore",
             "item_keystore_desc": "已加密的 Keystore JSON"
         },
@@ -524,7 +533,7 @@
                 "change_add_persona": "更改或添加角色",
                 "rename": "重命名",
                 "export_private_key": "导出私钥",
-                "download": "下载身份二维码",
+                "download": "下载角色二维码",
                 "backup": "备份",
                 "log_out": "退出登录",
                 "delete": "删除"
@@ -552,7 +561,8 @@
             "backup_recovery": "备份与恢复设置"
         },
         "persona_contacts": {
-            "empty_contacts_tips": "您还没有联系人。 \n邀请好友下载 Mask Network。",
+            "empty_contacts_tips": "社交媒体时间线上未捕捉到任何账户。\n邀请您的朋友下载 Mask Network",
+            "search_contact_tips": "未找到联系人。该账户可能未在社交媒体时间线上捕捉",
             "delete": "确认删除",
             "contact": "联系人"
         },
@@ -604,7 +614,9 @@
             "walletconnect_switch_network_alert": "当前通过 WalletConnect 接入的钱包网络与该资产的网络 (%s) 不同，请去您的钱包切换至 %s 网络，并通过 WalletConnect 重新连入。"
         },
         "transaction_history": {
-            "no_transaction": "没有查到您的近期交易记录"
+            "no_transaction": "没有查到您的近期交易记录",
+            "status_pendind": "确认中...",
+            "status_failed": "失败"
         },
         "wallet_receive": {
             "btn_share": "分享",
@@ -778,6 +790,10 @@
                 "cloud_backup_password_hint": "要解密云备份，请输入备份时使用的备份密码。"
             }
         },
+        "mask_scan": {
+            "scan_persona": "请扫描角色二维码",
+            "scan_all": "扫描角色或 walletConnect 二维码"
+        },
         "wallet_connect": {
             "wallet_connect": "WalletConnect",
             "select_wallet": "选择钱包",
@@ -787,7 +803,6 @@
             "no_wallets": "您还没有安装任何可用的 %s 钱包用于 walletConnect",
             "connecting": "正在连接…",
             "connect_success": "钱包成功连接到 Mask Network",
-            "scan": "扫描二维码",
             "disconnect": "断开连接",
             "connection_fail": "连接失败。",
             "could_not_switch_blockchain_network_title": "WalletConnect 不支持切换区块链网络",
@@ -847,8 +862,8 @@
             "refunded": "已退款",
             "refund": "退款",
             "empty": "空的",
-            "share_message_official": "",
-            "share_message_unsupport_platform": ""
+            "share_message_official": "朋友们，我刚刚在%s上领取了一个%s发送的红包，关注%s来领取这个红包。#mask_io #LuckyDrop %s",
+            "share_message_unsupport_platform": "朋友们，我刚刚在%s上领取了一个%s发送的红包"
         },
         "move_backup_data": {
             "title": "请移动您的数据",

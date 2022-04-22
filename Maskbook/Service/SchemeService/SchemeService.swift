@@ -73,18 +73,10 @@ class SchemeService {
         MainTabBarController.currentTabBarController()?.selectedIndex = tab.rawValue
     }
 
-    func handleMaskPersonaPrivateKey(scheme: String) {
-        if let text = scheme.components(separatedBy: "/").last {
-            let personaImportItem = PersonaImportItem(type: .privateKey(privateKey: text))
-            personaImportHandler.checkExistAndRestore(from: personaImportItem)
-        }
-    }
-
-    func handleMaskPersonaMnemonic(scheme: String) {
-        let string = scheme.replacingOccurrences(of: Self.personaMenmonicPrefix + "/", with: "")
+    func parseContentAndNickname(string: String) -> (String?, String?) {
         let seperator = "?" + Self.nikenameKey + "="
         var nickname: String?
-        let mnemonicBase64: String? = {
+        let contentBase64: String? = {
             if string.contains(seperator) {
                 let slices = string.components(separatedBy: seperator)
                 nickname = slices.last.flatMap { String($0) }
@@ -93,6 +85,20 @@ class SchemeService {
                 return string
             }
         }()
+        return (contentBase64, nickname)
+    }
+    func handleMaskPersonaPrivateKey(scheme: String) {
+        let string = scheme.replacingOccurrences(of: Self.personaPrivateKeyPrefix + "/", with: "")
+        let (privateKey, name) = parseContentAndNickname(string: string)
+        guard let privateKey = privateKey else { return }
+        let personaImportItem = PersonaImportItem(type: .privateKey(privateKey: privateKey), name: name)
+        personaImportHandler.checkExistAndRestore(from: personaImportItem)
+        
+    }
+
+    func handleMaskPersonaMnemonic(scheme: String) {
+        let string = scheme.replacingOccurrences(of: Self.personaMenmonicPrefix + "/", with: "")
+        let (mnemonicBase64, name) = parseContentAndNickname(string: string)
         let mnemonic = mnemonicBase64.flatMap {
             Data(base64URLEncoded: $0)
         }
@@ -103,7 +109,7 @@ class SchemeService {
             return
         }
 
-        let personaImportItem = PersonaImportItem(type: .mnemonic(mnemonic: mnemonic), name: nickname)
+        let personaImportItem = PersonaImportItem(type: .mnemonic(mnemonic: mnemonic), name: name)
         personaImportHandler.checkExistAndRestore(from: personaImportItem)
     }
 }
