@@ -314,6 +314,7 @@ extension SelectAccountViewController: PanModalPresentable {
 
 extension SelectAccountViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if viewModel.type == .editEnable && viewModel.isEditing.value { return }
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
         switch item {
         case .addWalletConnect:
