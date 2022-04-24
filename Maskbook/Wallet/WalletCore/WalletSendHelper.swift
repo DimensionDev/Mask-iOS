@@ -323,15 +323,14 @@ class WalletSendHelper {
                     default:
                         gasLimit = transaction.gasLimit
                     }
-                    var gasPriceHex: String = "0x0"
+                    
+                    var gasPrice: BigUInt = transaction.gasPrice
                     var maxInclusionFeePerGasHex: String = "0x0"
                     var maxFeePerGasHex: String = "0x0"
                     if maxFeePerGas == nil || maxInclusionFeePerGas == nil {
                         switch transactionOptions.gasPrice {
-                        case .manual(let gasPrice):
-                            gasPriceHex = gasPrice.serialize().toHexString().addHexPrefix()
-                        default:
-                            gasPriceHex = transaction.gasPrice.serialize().toHexString().addHexPrefix()
+                        case .manual(let value): gasPrice = value
+                        default: break
                         }
                     } else {
                          maxInclusionFeePerGasHex = maxInclusionFeePerGas!.serialize().toHexString().addHexPrefix()
@@ -341,10 +340,10 @@ class WalletSendHelper {
                     WalletCoreHelper.SignInput.eth(
                         chainId: Int64(maskUserDefaults.network.networkId),
                         nonce: nonceTemp.serialize().toHexString().addHexPrefix(),
-                        gasPrice: gasPriceHex,
+                        gasPrice: gasPrice.serialize().toHexStringWithPrefix(),
                         maxInclusionFeePerGas: maxInclusionFeePerGasHex,
                         maxFeePerGas: maxFeePerGasHex,
-                        gasLimit: gasLimit.serialize().toHexString().addHexPrefix(),
+                        gasLimit: gasLimit.serialize().toHexStringWithPrefix(),
                         amount: transaction.value?.serialize().toHexString().addHexPrefix() ?? "0x0",
                         toAddress: transaction.to.address,
                         payload: transaction.data)
@@ -356,7 +355,7 @@ class WalletSendHelper {
                         case let .eth(transacationEncodeData, v, r, s, _):
                             let rawTransaction = EthereumTransaction(
                                 nonce: nonceTemp,
-                                gasPrice: transaction.gasPrice,
+                                gasPrice: gasPrice,
                                 gasLimit: gasLimit,
                                 to: transaction.to,
                                 value: transaction.value ?? BigUInt(0),
