@@ -70,7 +70,6 @@ class Vault {
                 if let walletPasswordData = self.settings.walletPasswordData {
                     decrptedPassword = try Crypto.decrypt(input: walletPasswordData)
                 }
-                self.settings.resetPasswordExpiredDate()
                 
             case .backupPassword:
                 if let backupPasswordData = self.settings.backupPasswordData {
@@ -212,8 +211,14 @@ extension Vault {
                 let walletPassword = try self?.get(key: .walletPassword)
                 let result = password == walletPassword
                 // revert passwordExpiredDate if walletPassword verify is failed
-                if !result {
+                // FIXED: avoid crash when `passwordExpiredDate` is `nil`
+                if !result && passwordExpiredDate != nil {
                     self?.settings.passwordExpiredDate = passwordExpiredDate
+                }
+                
+                // To reset expired date of payment password only when get it successfully.
+                if result {
+                    self?.settings.resetPasswordExpiredDate()
                 }
                 promise(.success(result))
             } catch {

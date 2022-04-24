@@ -584,7 +584,7 @@ extension Coordinator {
         case let .gasFee(viewController, gasLimit, viewModel):
             let gasFee = GasFeeChooseViewController(viewModel)
             gasFee.delegate = viewController
-            gasFee.gasLimit = gasLimit
+            gasFee.viewModel.gasLimitPublisher.accept(gasLimit)
             return gasFee
 
         case .setPassword:

@@ -20,8 +20,8 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
     
     var gasFeeViewModel: GasFeeViewModel?
     var transaction: EthereumTransaction?
-    var completion: ((String?, Error?) -> Void)?
     var options: TransactionOptions?
+    var completion: ((String?, Error?) -> Void)?
     var password: String?
     
     var tokenIconURL: URL? {
@@ -138,10 +138,7 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
     }
     
     var gasLimit: BigUInt {
-        guard let gasLimitStr = gasFeeViewModel?.gasFeePublisher.value?.gasLimit else {
-            return BigUInt(21_000)
-        }
-        return BigUInt(gasLimitStr) ?? BigUInt(21_000)
+        gasFeeViewModel?.gasLimitPublisher.value ?? BigUInt(21_000)
     }
     
     var address: String {
@@ -177,6 +174,8 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
             .filter({ $0 != nil })
             .assign(to: \.gasFeeItem, on: self)
             .store(in: &disposeBag)
+        
+        requestEstimateGasLimit()
     }
     
     func onConfirm() {
@@ -212,11 +211,6 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
             completion(.failure(WalletSendError.addressError))
             return
         }
-        
-        guard let ethFromAddress = EthereumAddress(fromAddress) else {
-            completion(.failure(WalletSendError.addressError))
-            return
-        }
 
         guard let fromAccount = WalletCoreService.shared.getAccount(address: fromAddress) else {
             completion(.failure(WalletSendError.addressError))
@@ -231,14 +225,16 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
             return
         }
         
-        guard let provider = Web3ProviderFactory.provider else {
-            return
-        }
-        
         if let gasLimit = BigUInt(gasFeeItem.gasLimit) {
             transactionOptions.gasLimit = .manual(gasLimit)
         } else {
             transactionOptions.gasLimit = .automatic
+        }
+        
+        if let gasPrice = Web3.Utils.parseToBigUInt(gasFeeItem.gWei, units: .Gwei) {
+            transactionOptions.gasPrice = .manual(gasPrice)
+        } else {
+            transactionOptions.gasPrice = .automatic
         }
         
         guard let privateKey = self.password else {
@@ -330,6 +326,17 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
                 network: maskUserDefaults.network,
                 completionWrapper)
         }
+    }
+    
+    private func requestEstimateGasLimit() {
+        guard let web3Provier = Web3ProviderFactory.provider?.eth else { return }
+        guard let transaction = transaction else { return }
+        _ = web3Provier.estimateGasPromise(transaction, transactionOptions: options)
+            .done { [weak self] gaslimit in
+                self?.gasFeeViewModel?.gasLimitPublisher.accept(gaslimit)
+            }
+            .catch { _ in
+            }
     }
 }
 

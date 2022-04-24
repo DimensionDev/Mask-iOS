@@ -43,13 +43,21 @@ extension WalletConnectClient {
                     nonceTemp = try provider.eth.getTransactionCount(address: fromAddressEthFormat)
                 }
                 let nonceHex = nonceTemp.serialize().toHexString().addHexPrefix()
-                var gasLimit: String
+                var gasLimitStr: String
                 switch transactionOptions.gasLimit {
                 case .manual(let limit):
-                    gasLimit = limit.serialize().toHexString().addHexPrefix()
+                    gasLimitStr = limit.serialize().toHexString().addHexPrefix()
                         
                 default:
-                    gasLimit = transaction.gasLimit.serialize().toHexString().addHexPrefix()
+                    gasLimitStr = transaction.gasLimit.serialize().toHexString().addHexPrefix()
+                }
+                
+                var gasPriceStr: String
+                switch transactionOptions.gasPrice {
+                case .manual(let gasPrice):
+                    gasPriceStr = gasPrice.serialize().toHexString().addHexPrefix()
+                default:
+                    gasPriceStr = transaction.gasPrice.serialize().toHexString().addHexPrefix()
                 }
                 var chainId: String?
                 if let networkId = self?.userSetting.network.networkId {
@@ -59,8 +67,8 @@ extension WalletConnectClient {
                     Client.Transaction(from: fromAddress,
                                        to: transaction.to.address,
                                        data: transaction.data.toHexString().addHexPrefix(),
-                                       gas: gasLimit,
-                                       gasPrice: transaction.gasPrice.serialize().toHexString().addHexPrefix(),
+                                       gas: gasLimitStr,
+                                       gasPrice: gasPriceStr,
                                        value: transaction.value?.serialize().toHexString().addHexPrefix() ?? "0x0",
                                        nonce: nonceHex,
                                        type: nil,

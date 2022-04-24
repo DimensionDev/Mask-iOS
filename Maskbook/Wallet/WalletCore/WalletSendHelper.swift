@@ -327,7 +327,12 @@ class WalletSendHelper {
                     var maxInclusionFeePerGasHex: String = "0x0"
                     var maxFeePerGasHex: String = "0x0"
                     if maxFeePerGas == nil || maxInclusionFeePerGas == nil {
-                          gasPriceHex = transaction.gasPrice.serialize().toHexString().addHexPrefix()
+                        switch transactionOptions.gasPrice {
+                        case .manual(let gasPrice):
+                            gasPriceHex = gasPrice.serialize().toHexString().addHexPrefix()
+                        default:
+                            gasPriceHex = transaction.gasPrice.serialize().toHexString().addHexPrefix()
+                        }
                     } else {
                          maxInclusionFeePerGasHex = maxInclusionFeePerGas!.serialize().toHexString().addHexPrefix()
                          maxFeePerGasHex = maxFeePerGas!.serialize().toHexString().addHexPrefix()

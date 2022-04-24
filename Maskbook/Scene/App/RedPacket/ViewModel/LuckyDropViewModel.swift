@@ -321,7 +321,7 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         var tokenAddr: String = ""
         if token.isMainToken == true {
             let chainKey = maskUserDefaults.network.redPacketConstantKey
-            tokenAddr = nativeTokenAddress?[chainKey].string ?? ""
+            tokenAddr = nativeTokenAddress?[chainKey].string ?? "0x0000000000000000000000000000000000000000"
         } else if let address = token.contractAddress {
             tokenAddr = address
         }
@@ -400,7 +400,7 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         guard let identifier = self.token?.identifier else {
             return
         }
-        guard self.allowances[identifier] == nil else {
+        guard (self.allowances[identifier] ?? 0) == 0 else {
             return
         }
         Task {
@@ -408,6 +408,10 @@ class LuckyDropViewModel: NSObject, ObservableObject {
             await MainActor.run {
                 if let allowance = allowance {
                     self.allowances[identifier] = allowance
+                    if allowance > 0 {
+                        // set back `buttonType` to `.unlockToken`
+                        self.buttonType = .unlockToken
+                    }
                 } else {
                     self.allowances.removeValue(forKey: identifier)
                 }
@@ -478,7 +482,7 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         }
         log.debug("checkApproveStatus hash \(txHash)", source: "lucky drop")
         checkApprovePromise = web3Provier.getTransactionReceiptPromise(txHash).done {[weak self] transactionReceipt in
-            log.debug("checkApproveStatus hash \(txHash) status: \(transactionReceipt.status)", source: "lucky drop")
+            log.debug("checkApproveStatus1 hash \(txHash) status: \(transactionReceipt.status)", source: "lucky drop")
             guard transactionReceipt.status != .notYetProcessed else {
                 return
             }

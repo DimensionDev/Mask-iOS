@@ -32,7 +32,6 @@ class GasFeeChooseViewController: UIViewController {
     var viewModel: ViewModel
     
     var keyboardHeight: CGFloat?
-    var gasLimit: BigUInt!
     var keyboardManagerEnable = IQKeyboardManager.shared.enable
     private lazy var indicatorView = MaskLoadingIndicator()
     
@@ -392,8 +391,16 @@ class GasFeeChooseViewController: UIViewController {
         $0.backgroundColor = Asset.Colors.Background.normal.color
     }
     
-    init(_ viewModel: ViewModel? = nil) {
-        self.viewModel = viewModel ?? ViewModel()
+    private var gasLimit: BigUInt {
+        viewModel.gasLimitPublisher.value
+    }
+    
+    init(_ viewModel: ViewModel? = nil, gasLimit: BigUInt? = nil) {
+        let vm = viewModel ?? ViewModel()
+        if let gasLimit = gasLimit {
+            vm.gasLimitPublisher.accept(gasLimit)
+        }
+        self.viewModel = vm
         super.init(nibName: nil, bundle: nil)
     }
      
@@ -485,12 +492,13 @@ class GasFeeChooseViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] text in
                 guard let self = self else { return }
+                guard let gaslimit = BigUInt(text) else { return}
                 
                 guard let gwei = self.viewModel.localGasFeeModel?.gasLimit else { return }
                 let isShow = NSDecimalNumber(string: text).compare(NSDecimalNumber(string: gwei)) == .orderedAscending
                 self.gaslimitErrorLabel.isHidden = !isShow
                 
-                self.gasLimit = BigUInt(text)
+                self.viewModel.gasLimitPublisher.accept(gaslimit)
                 self.viewModel.gasFeePublisher.value?.gasLimit = text
                 self.viewModel.gasFeePublisher.value?.type = .custom
             }
@@ -537,14 +545,15 @@ class GasFeeChooseViewController: UIViewController {
             }
             .store(in: &disposeBag)
         
-        self.viewModel.gasFeePublisher
+        Publishers.CombineLatest(viewModel.gasFeePublisher, viewModel.gasLimitPublisher)
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] item in
+            .sink { [weak self] item, gasLimit in
                 guard let self = self else { return }
                 guard let item = item else { return }
                 guard let symbol = token?.symbol else { return }
 
-                self.gaslimitTextField.text = self.gasLimit.description
+                log.debug("gaslimit \(gasLimit.description)", source: "lucky drop")
+                self.gaslimitTextField.text = gasLimit.description
                 self.maxPriorityFeeTextField.text = item.suggestedMaxPriorityFeePerGas
                 self.maxFeeTextField.text = item.suggestedMaxFeePerGas
                 self.gWeiTextField.text = item.gWei
