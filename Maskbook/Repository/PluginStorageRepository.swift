@@ -41,7 +41,7 @@ extension PluginStorageRepository {
         txHash: String,
         record: RedPacketRecord
     ) {
-        let key = "\(address)-\(chain.chain.rawValue)-\(chain.networkId)-\(txHash)"
+        let key = generateKey(address: address, chain: chain, txHash: txHash)
         let context = viewContext
         context.performAndWait {
             let data = try? JSONEncoder().encode(record)
@@ -71,7 +71,7 @@ extension PluginStorageRepository {
         tx: String
     ) -> RedPacketRecord? {
         do {
-            let key = "\(address)-\(chain.rawValue)-\(tx)"
+            let key = generateKey(address: address, chain: chain, txHash: tx)
             let context = viewContext
             let fetchRequest = PluginStorage.fetchRequest()
             fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
@@ -103,5 +103,9 @@ extension PluginStorageRepository {
             return record.password
         }
         return nil
+    }
+    
+    private static func generateKey(address: String, chain: BlockChainNetwork, txHash: String) -> String {
+        "\(address)-\(chain.rawValue)-\(txHash)"
     }
 }

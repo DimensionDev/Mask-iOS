@@ -62,7 +62,7 @@ final class UserDefaultSettings {
         case evaluatedPolicyDomainState = "evaluated_policy_domain_state"
         case recentlyAddress
         case passwordExpiredDate = "password_expired_date"
-        case pluginRiskWarningAwared
+        case confirmedPluginRiskWarnings
         case hasBackupPassword
         case currentPersonaIdentifier = "current_persona_identifier"
         case currentProfileSocialPlatform = "current_profile_social_platform"
@@ -257,8 +257,8 @@ final class UserDefaultSettings {
     }
 
     // Risk warning moved out from plugins view, temporarily set this default to true
-    @ReactiveUserDefault(key: .pluginRiskWarningAwared, defaultValue: [])
-    var pluginRiskWarningAwared: [String]
+    @ReactiveUserDefault(key: .confirmedPluginRiskWarnings, defaultValue: [])
+    var confirmedPluginRiskWarnings: [String]
 
     @ReactiveUserDefault(key: .hasBackupPassword, defaultValue: false)
     var hasBackupPassword: Bool
@@ -409,7 +409,7 @@ extension UserDefaultSettings {
     var hasRiskConfirmed: Bool {
         get {
             guard let address = defaultAccountAddress else { return false }
-            return pluginRiskWarningAwared.contains(address)
+            return confirmedPluginRiskWarnings.contains(address)
         }
     }
     
@@ -418,8 +418,8 @@ extension UserDefaultSettings {
             DAppService.sendRiskWarningConfirm(address: address, pluginId: pluginId)
         }
         
-        guard !pluginRiskWarningAwared.contains(address) else { return }
-        pluginRiskWarningAwared.append(address)
+        guard !confirmedPluginRiskWarnings.contains(address) else { return }
+        confirmedPluginRiskWarnings.append(address)
     }
 }
 

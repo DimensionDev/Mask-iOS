@@ -495,7 +495,7 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         let publishers: [AnyPublisher<String, Never>] = [
             settings.$passwordExpiredDate.map({ "\(String(describing: $0))" }).eraseToAnyPublisher(),
             settings.$defaultAccountAddress.map({ $0 ?? "" }).eraseToAnyPublisher(),
-            settings.$pluginRiskWarningAwared.map({ _ in "" }).eraseToAnyPublisher(),
+            settings.$confirmedPluginRiskWarnings.map({ _ in "" }).eraseToAnyPublisher(),
             $quantityStr.eraseToAnyPublisher(),
             $amountStr.eraseToAnyPublisher(),
             $message.eraseToAnyPublisher(),
