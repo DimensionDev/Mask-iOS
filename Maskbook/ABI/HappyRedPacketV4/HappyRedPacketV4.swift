@@ -27,17 +27,8 @@ struct HappyRedPacketV4: ABIContract {
         self.ethcontract = EthereumContract(abiString, at: contractAddress)
     }
     
-    private var contractInfo: JSON? {
-        guard let redPacketConstantURL = Bundle.main.url(forResource: "red-packet", withExtension: "json"),
-              let data = try? Data(contentsOf: redPacketConstantURL) else {
-                  return nil
-              }
-        return try? JSON(data: data)
-    }
-    
     var contractAddress: EthereumAddress {
-        let chainKey = userSetting.network.redPacketConstantKey
-        guard let addressStr = contractInfo?["HAPPY_RED_PACKET_ADDRESS_V4"][chainKey].string,
+        guard let addressStr = userSetting.network.redPacketAddressV4,
               let address = EthereumAddress(addressStr) else {
                   assert(false, "It needs an address for HappyRedPacketV4 Contract.")
                   return EthereumAddress("")!
@@ -301,24 +292,6 @@ extension HappyRedPacketV4 {
                 tokenAddr as AnyObject,
                 totalTokens as AnyObject
             ]
-        }
-    }
-}
-
-extension BlockChainNetwork {
-    var redPacketConstantKey: String {
-        switch self {
-        case .eth: return "Mainnet"
-        case .rinkeby: return ""
-        case .bsc: return "BSC"
-        case .polygon: return "Matic"
-        case .polka: return ""
-        case .arbitrum: return "Arbitrum"
-        case .xdai: return "xDai"
-        case .optimism: return ""
-            
-        default:
-            return ""
         }
     }
 }

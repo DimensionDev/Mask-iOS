@@ -136,9 +136,7 @@
 		1FEE1EAC27845E1F00697F81 /* Web3+signTX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE1EAB27845E1F00697F81 /* Web3+signTX.swift */; };
 		2A0C16AF2666713D0085524E /* StoredKeyImportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0C16AE2666713D0085524E /* StoredKeyImportType.swift */; };
 		2A18E7FB266C9D210045BC88 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A18E7FA266C9D210045BC88 /* AvatarView.swift */; };
-		2A258F3A2814FE9E00E5A6AB /* token.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A258F392814FE9E00E5A6AB /* token.json */; };
 		2A2B4EEA27E8D1850097D50D /* ABIContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4EE527E8D1850097D50D /* ABIContract.swift */; };
-		2A2B4EEB27E8D1850097D50D /* red-packet.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A2B4EE727E8D1850097D50D /* red-packet.json */; };
 		2A2B4EEC27E8D1850097D50D /* HappyRedPacketV4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B4EE827E8D1850097D50D /* HappyRedPacketV4.swift */; };
 		2A2B4EED27E8D1850097D50D /* HappyRedPacketV4.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A2B4EE927E8D1850097D50D /* HappyRedPacketV4.json */; };
 		2A3050C526A01B370003EECC /* OpenSeaProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3050C326A01B370003EECC /* OpenSeaProvider.swift */; };
@@ -902,9 +900,7 @@
 		25FC5B4F5FB51A8EB2F599D7 /* Pods-Maskbook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maskbook.release.xcconfig"; path = "Target Support Files/Pods-Maskbook/Pods-Maskbook.release.xcconfig"; sourceTree = "<group>"; };
 		2A0C16AE2666713D0085524E /* StoredKeyImportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredKeyImportType.swift; sourceTree = "<group>"; };
 		2A18E7FA266C9D210045BC88 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
-		2A258F392814FE9E00E5A6AB /* token.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = token.json; sourceTree = "<group>"; };
 		2A2B4EE527E8D1850097D50D /* ABIContract.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ABIContract.swift; sourceTree = "<group>"; };
-		2A2B4EE727E8D1850097D50D /* red-packet.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "red-packet.json"; sourceTree = "<group>"; };
 		2A2B4EE827E8D1850097D50D /* HappyRedPacketV4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HappyRedPacketV4.swift; sourceTree = "<group>"; };
 		2A2B4EE927E8D1850097D50D /* HappyRedPacketV4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = HappyRedPacketV4.json; sourceTree = "<group>"; };
 		2A3050C326A01B370003EECC /* OpenSeaProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenSeaProvider.swift; sourceTree = "<group>"; };
@@ -1655,7 +1651,6 @@
 		0F83264326EB4E7800BF949B /* Web3 */ = {
 			isa = PBXGroup;
 			children = (
-				2A258F372814FE9E00E5A6AB /* Constant */,
 				0F83264426EB4E8100BF949B /* Web3ProviderFactory.swift */,
 				6F25327927A2B0AA000C0D27 /* Web3TransactionReceipt.swift */,
 			);
@@ -1900,26 +1895,9 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		2A258F372814FE9E00E5A6AB /* Constant */ = {
-			isa = PBXGroup;
-			children = (
-				2A258F382814FE9E00E5A6AB /* EVM */,
-			);
-			path = Constant;
-			sourceTree = "<group>";
-		};
-		2A258F382814FE9E00E5A6AB /* EVM */ = {
-			isa = PBXGroup;
-			children = (
-				2A258F392814FE9E00E5A6AB /* token.json */,
-			);
-			path = EVM;
-			sourceTree = "<group>";
-		};
 		2A2B4EE627E8D1850097D50D /* HappyRedPacketV4 */ = {
 			isa = PBXGroup;
 			children = (
-				2A2B4EE727E8D1850097D50D /* red-packet.json */,
 				2A2B4EE827E8D1850097D50D /* HappyRedPacketV4.swift */,
 				2A2B4EE927E8D1850097D50D /* HappyRedPacketV4.json */,
 			);
@@ -3982,10 +3960,8 @@
 				DBE99E362367DEA6000473BD /* Settings.bundle in Resources */,
 				0F641EF726870AA8002A4D33 /* Localizable.strings in Resources */,
 				1F8D692F2721549E001084D6 /* wallets.json in Resources */,
-				2A258F3A2814FE9E00E5A6AB /* token.json in Resources */,
 				2A2B4EED27E8D1850097D50D /* HappyRedPacketV4.json in Resources */,
 				DBAAF49F22C35A7100017594 /* LaunchScreen.storyboard in Resources */,
-				2A2B4EEB27E8D1850097D50D /* red-packet.json in Resources */,
 				DBAAF49C22C35A7100017594 /* Assets.xcassets in Resources */,
 				DBAAF49A22C35A7100017594 /* Main.storyboard in Resources */,
 				41829919277C816800F5417B /* GoogleService-Info.plist in Resources */,

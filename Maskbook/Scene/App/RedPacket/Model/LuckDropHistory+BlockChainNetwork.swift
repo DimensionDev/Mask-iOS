@@ -35,6 +35,10 @@ extension BlockChainNetwork {
         default: return nil
         }
     }
+    
+    var nativeTokenAddress: String {
+        "0x0000000000000000000000000000000000000000"
+    }
 
     var apiKey: String? {
         APIKey.keys[self]

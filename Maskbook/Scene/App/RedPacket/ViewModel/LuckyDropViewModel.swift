@@ -16,7 +16,7 @@ import web3swift
 import PromiseKit
 import CombineExt
 
-class LuckyDropViewModel: NSObject, ObservableObject {
+class LuckyDropViewModel: ObservableObject {
     // MARK: - Public property
     @Published var quantityStr = ""
     @Published var amountStr = ""
@@ -86,10 +86,7 @@ class LuckyDropViewModel: NSObject, ObservableObject {
     }
     
     var gasLimit: BigUInt {
-        guard let gasLimitStr = gasFeeViewModel.gasFeePublisher.value?.gasLimit else {
-            return BigUInt(21_000)
-        }
-        return BigUInt(gasLimitStr) ?? BigUInt(21_000)
+        gasFeeViewModel.gasLimitPublisher.value
     }
     
     var gasPrice: BigUInt? {
@@ -147,18 +144,8 @@ class LuckyDropViewModel: NSObject, ObservableObject {
             Asset.Colors.Text.dark.asColor()
     }
     
-    var contractInfo: JSON? {
-        if let redPacketConstantURL = Bundle.main.url(forResource: "red-packet", withExtension: "json"),
-           let data = try? Data(contentsOf: redPacketConstantURL) {
-            return try? JSON(data: data)
-        } else {
-            return nil
-        }
-    }
-    
     var luckyDropAddressStr: String? {
-        let chainKey = maskUserDefaults.network.redPacketConstantKey
-        return contractInfo?["HAPPY_RED_PACKET_ADDRESS_V4"][chainKey].string
+        return maskUserDefaults.network.redPacketAddressV4
     }
     
     var confirmTitle: String {
@@ -207,21 +194,8 @@ class LuckyDropViewModel: NSObject, ObservableObject {
     private var personaManager
     private var checkApprovePromise: Promise<Void>?
     
-    private var nativeTokenAddress: JSON? {
-        guard let url = Bundle.main.url(forResource: "token", withExtension: "json"),
-              let data = try? Data(contentsOf: url) else {
-                  return nil
-              }
-        guard let json = try? JSON(data: data) else {
-            return nil
-        }
-        
-        return json["NATIVE_TOKEN_ADDRESS"]
-    }
-    
     // MARK: - Public method
-    override init() {
-        super.init()
+    init() {
         let token = walletAssetManager.getMainToken(
             network: settings.network,
             chainId: settings.network.chain.rawValue,
@@ -320,8 +294,7 @@ class LuckyDropViewModel: NSObject, ObservableObject {
         // tokenAddr
         var tokenAddr: String = ""
         if token.isMainToken == true {
-            let chainKey = maskUserDefaults.network.redPacketConstantKey
-            tokenAddr = nativeTokenAddress?[chainKey].string ?? "0x0000000000000000000000000000000000000000"
+            tokenAddr = maskUserDefaults.network.nativeTokenAddress
         } else if let address = token.contractAddress {
             tokenAddr = address
         }
@@ -463,14 +436,12 @@ class LuckyDropViewModel: NSObject, ObservableObject {
                 
                 
             } catch {
-                Task {
-                    await MainActor.run {
-                        // This is just to make `checkParam` work properly.
-                        buttonType = .requestAllowance
-                        // continue to check param
-                        checkParam()
-                        log.error("error approve/revoke token", source: "lucky drop")
-                    }
+                Task { @MainActor in
+                    // This is just to make `checkParam` work properly.
+                    buttonType = .requestAllowance
+                    // continue to check param
+                    checkParam()
+                    log.error("error approve/revoke token", source: "lucky drop")
                 }
             }
         }
