@@ -14,9 +14,10 @@ import WebExtension_Shim
 extension PersonaManager {
 
     static func restoreFromPrivateKey(privateKey: String,
-                                      nickname: String = "persona1") -> AnyPublisher<MaskWebMessageResult, Error> {
+                                      nickname: String?) -> AnyPublisher<MaskWebMessageResult, Error> {
+        let name = nickname ?? "persona\(PersonaManager.shared.personaRecordsSubject.value.count + 1)"
         let request = WebExtension.Persona.RestorePersonaPrivateKey.withPayload {
-            .init(privateKey: privateKey.base64URLUnescaped(), nickname: nickname)
+            .init(privateKey: privateKey.base64URLUnescaped(), nickname: name)
         }
         return request
             .eraseToAnyPublisher()

@@ -56,14 +56,9 @@ class SchemeService {
     }
 
     func handleMaskPersonaScheme(scheme: String) -> Bool {
-        if scheme.hasPrefix(Self.personaPrivateKeyPrefix) {
+        if let item = personaImportItem(forPersonaScheme: scheme) {
             switchSelected(tab: .personas)
-            handleMaskPersonaPrivateKey(scheme: scheme)
-            return true
-        }
-        if scheme.hasPrefix(Self.personaMenmonicPrefix) {
-            switchSelected(tab: .personas)
-            handleMaskPersonaMnemonic(scheme: scheme)
+            personaImportHandler.checkExistAndRestore(from: item)
             return true
         }
         return false
@@ -87,16 +82,26 @@ class SchemeService {
         }()
         return (contentBase64, nickname)
     }
-    func handleMaskPersonaPrivateKey(scheme: String) {
-        let string = scheme.replacingOccurrences(of: Self.personaPrivateKeyPrefix + "/", with: "")
-        let (privateKey, name) = parseContentAndNickname(string: string)
-        guard let privateKey = privateKey else { return }
-        let personaImportItem = PersonaImportItem(type: .privateKey(privateKey: privateKey), name: name)
-        personaImportHandler.checkExistAndRestore(from: personaImportItem)
-        
+
+    func personaImportItem(forPersonaScheme personaScheme: String) -> PersonaImportItem? {
+        if personaScheme.contains(Self.personaPrivateKeyPrefix) {
+            return personaImportItem(forPrivateKey: personaScheme)
+        }
+
+        if personaScheme.contains(Self.personaMenmonicPrefix) {
+            return personaImportItem(forMnemonic: personaScheme)
+        }
+        return nil
     }
 
-    func handleMaskPersonaMnemonic(scheme: String) {
+    func personaImportItem(forPrivateKey scheme: String) -> PersonaImportItem? {
+        let string = scheme.replacingOccurrences(of: Self.personaPrivateKeyPrefix + "/", with: "")
+        let (privateKey, name) = parseContentAndNickname(string: string)
+        guard let privateKey = privateKey else { return nil }
+        return PersonaImportItem(type: .privateKey(privateKey: privateKey), name: name)
+    }
+
+    func personaImportItem(forMnemonic scheme: String) -> PersonaImportItem? {
         let string = scheme.replacingOccurrences(of: Self.personaMenmonicPrefix + "/", with: "")
         let (mnemonicBase64, name) = parseContentAndNickname(string: string)
         let mnemonic = mnemonicBase64.flatMap {
@@ -106,11 +111,10 @@ class SchemeService {
             String(data: $0, encoding: .utf8)
         }
         guard let mnemonic = mnemonic else {
-            return
+            return nil
         }
 
-        let personaImportItem = PersonaImportItem(type: .mnemonic(mnemonic: mnemonic), name: name)
-        personaImportHandler.checkExistAndRestore(from: personaImportItem)
+        return PersonaImportItem(type: .mnemonic(mnemonic: mnemonic), name: name)
     }
 }
 

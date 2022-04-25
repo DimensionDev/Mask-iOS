@@ -128,12 +128,18 @@ class PersonaImportHandler {
         }
     }
     
-    private func restore(from item: PersonaImportItem) {
+    func restore(from item: PersonaImportItem,
+                 completion: ((Bool) -> Void)? = nil)
+    {
         switch item.type {
         case let .mnemonic(mnemonic):
-            restoreFroMmnemonic(mnemonic: mnemonic, nickname: item.name)
+            restoreFroMmnemonic(mnemonic: mnemonic,
+                                nickname: item.name,
+                                completion: completion)
         case let .privateKey(privateKey):
-            restoreFromPrivateKey(privateKey: privateKey, nickname: item.name)
+            restoreFromPrivateKey(privateKey: privateKey,
+                                  nickname: item.name,
+                                  completion: completion)
         }
     }
     
@@ -182,11 +188,17 @@ class PersonaImportHandler {
         )
     }
     
-    private func restoreFromPrivateKey(privateKey: String, nickname: String?) {
-        PersonaManager.restoreFromPrivateKey(privateKey: privateKey, nickname: nickname ?? "persona1")
+    private func restoreFromPrivateKey(privateKey: String,
+                                       nickname: String?,
+                                       completion: ((Bool) -> Void)? = nil)
+    {
+        PersonaManager.restoreFromPrivateKey(privateKey: privateKey, nickname: nickname)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { _ in
             }) { [weak self] result in
+                if let completion = completion {
+                    completion(result.isSuccess)
+                }
                 if result.isSuccess {
                     if let identifier = result.result?.dictionaryValue["identifier"]?.stringValue {
                         self?.userSetting.currentPesonaIdentifier = identifier
@@ -199,13 +211,18 @@ class PersonaImportHandler {
             .store(in: &disposeBag)
     }
     
-    private func restoreFroMmnemonic(mnemonic: String, nickname: String?) {
+    private func restoreFroMmnemonic(mnemonic: String,
+                                     nickname: String?,
+                                     completion: ((Bool) -> Void)? = nil)
+    {
         let result = PersonaManager.createPersona(nickname: nickname, mnemonic: mnemonic)
         switch result {
         case let .success(identifier):
+            completion?(true)
             userSetting.currentPesonaIdentifier = identifier
             showRestoreSuccessAlert()
         case let .failure(error):
+            completion?(false)
             showRestoreFailedAlert(errorMessage: error.localizedDescription)
         }
     }
