@@ -12,14 +12,6 @@ import SwiftyJSON
 import WebExtension_Shim
 
 extension PersonaManager {
-    static func restoreFromMnemonic(mnemonic: String,
-                                    nickname: String = "persona1") -> AnyPublisher<MaskWebMessageResult, Error> {
-        let request = WebExtension.Persona.RestorePersonaMnemonic.withPayload {
-            WebExtension.Persona.RestorePersonaMnemonic.Payload(password: "", nickname: nickname, mnemonic: mnemonic)
-        }
-        return request
-            .eraseToAnyPublisher()
-    }
 
     static func restoreFromPrivateKey(privateKey: String,
                                       nickname: String = "persona1") -> AnyPublisher<MaskWebMessageResult, Error> {
