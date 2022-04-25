@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -351,7 +351,6 @@
 		2AD8561B2812875A0064DDA5 /* MaskHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD855E82812875A0064DDA5 /* MaskHostViewController.swift */; };
 		2AD8561C2812875A0064DDA5 /* SheetHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD855E92812875A0064DDA5 /* SheetHostingController.swift */; };
 		2AD8561D2812875A0064DDA5 /* ShakeAnimation.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD855EA2812875A0064DDA5 /* ShakeAnimation.swift.swift */; };
-		2AD85620281288910064DDA5 /* PullRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 2AD8561F281288910064DDA5 /* PullRefresh */; };
 		2AF884B6271EE9300004565A /* WalletConnectConnectingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF88329271EE9300004565A /* WalletConnectConnectingViewController.swift */; };
 		2AF884B7271EE9300004565A /* WallectConnectFloatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8832B271EE9300004565A /* WallectConnectFloatingView.swift */; };
 		2AF884BB271EE9300004565A /* MaskbookUIDelegateShim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF88332271EE9300004565A /* MaskbookUIDelegateShim.swift */; };
@@ -1501,7 +1500,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FACA3B52671F31E00CB8AC0 /* CoreDataStack.framework in Frameworks */,
-				2AD85620281288910064DDA5 /* PullRefresh in Frameworks */,
 				8FDC8DDFF558BED39CB11FF9 /* Pods_Maskbook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3840,7 +3838,6 @@
 			);
 			name = Maskbook;
 			packageProductDependencies = (
-				2AD8561F281288910064DDA5 /* PullRefresh */,
 			);
 			productName = Maskbook;
 			productReference = DBAAF49122C35A7100017594 /* Maskbook.app */;
@@ -3912,7 +3909,6 @@
 			);
 			mainGroup = DBAAF48822C35A7100017594;
 			packageReferences = (
-				2AD8561E281288910064DDA5 /* XCRemoteSwiftPackageReference "Refresh" */,
 			);
 			productRefGroup = DBAAF49222C35A7100017594 /* Products */;
 			projectDirPath = "";
@@ -5624,25 +5620,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		2AD8561E281288910064DDA5 /* XCRemoteSwiftPackageReference "Refresh" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/foxsin10/Refresh.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.8;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		2AD8561F281288910064DDA5 /* PullRefresh */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2AD8561E281288910064DDA5 /* XCRemoteSwiftPackageReference "Refresh" */;
-			productName = PullRefresh;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		0F20519C265E125600602A0C /* Mask.xcdatamodeld */ = {
