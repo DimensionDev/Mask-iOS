@@ -16,7 +16,8 @@ import web3swift
 import PromiseKit
 import CombineExt
 
-class LuckyDropViewModel: ObservableObject {
+@MainActor
+final class LuckyDropViewModel: ObservableObject {
     // MARK: - Public property
     @Published var quantityStr = ""
     @Published var amountStr = ""
@@ -41,6 +42,7 @@ class LuckyDropViewModel: ObservableObject {
     let profileNickName: String? = nil
     let walletBottomViewModel = WalletBottomWidgetViewModel()
     
+    private var timer: Timer?
     var gasFeeViewModel = GasFeeViewModel()
     
     var tokenStr: String {
@@ -139,9 +141,9 @@ class LuckyDropViewModel: ObservableObject {
     }
     
     var totalQuantityColor: Color {
-        totalQuantity == .zero ?
-            Asset.Colors.Text.normal.asColor() :
-            Asset.Colors.Text.dark.asColor()
+        totalQuantity == .zero
+        ? Asset.Colors.Text.normal.asColor()
+        : Asset.Colors.Text.dark.asColor()
     }
     
     var luckyDropAddressStr: String? {
@@ -192,7 +194,6 @@ class LuckyDropViewModel: ObservableObject {
     private var mainCoordinator
     @InjectedProvider(\.personaManager)
     private var personaManager
-    private var checkApprovePromise: Promise<Void>?
     
     // MARK: - Public method
     init() {
@@ -329,13 +330,12 @@ class LuckyDropViewModel: ObservableObject {
                 param: param,
                 password: privateKey.toHexString().addHexPrefix()
             )
-            await MainActor.run {
-                // Show the loading animation and reset the `ComfirmButton`'s state.
-                buttonType = .requestAllowance
-                checkParam()
-                if let tx = tx {
-                    walletBottomViewModel.observeTransaction(txHash: tx)
-                }
+
+            // Show the loading animation and reset the `ComfirmButton`'s state.
+            buttonType = .requestAllowance
+            checkParam()
+            if let tx = tx {
+                walletBottomViewModel.observeTransaction(txHash: tx)
             }
         }
     }
@@ -358,15 +358,12 @@ class LuckyDropViewModel: ObservableObject {
               }
         let erc20 = ERC20(web3: web3, provider: web3.provider, address: contractAddress)
         
-        return await withCheckedContinuation { continuation in
-            Task.detached {
-                guard let allowance = try? erc20.getAllowance(originalOwner: originalOwner, delegate: luckyDropAddress) else {
-                    continuation.resume(returning: nil)
-                    return
-                }
-                continuation.resume(returning: allowance)
+        return await Task.detached {
+            guard let allowance = try? erc20.getAllowance(originalOwner: originalOwner, delegate: luckyDropAddress) else {
+                return nil
             }
-        }
+            return allowance
+        }.value
     }
     
     private func getAndUpdateAllowances() {
@@ -378,16 +375,15 @@ class LuckyDropViewModel: ObservableObject {
         }
         Task {
             let allowance = await self.getAllowance()
-            await MainActor.run {
-                if let allowance = allowance {
-                    self.allowances[identifier] = allowance
-                    if allowance > 0 {
-                        // set back `buttonType` to `.unlockToken`
-                        self.buttonType = .unlockToken
-                    }
-                } else {
-                    self.allowances.removeValue(forKey: identifier)
+
+            if let allowance = allowance {
+                self.allowances[identifier] = allowance
+                if allowance > 0 {
+                    // set back `buttonType` to `.unlockToken`
+                    self.buttonType = .unlockToken
                 }
+            } else {
+                self.allowances.removeValue(forKey: identifier)
             }
         }
     }
@@ -395,21 +391,22 @@ class LuckyDropViewModel: ObservableObject {
     private func approveToken(password: String, network: BlockChainNetwork) {
         guard let fromAddress = maskUserDefaults.defaultAccountAddress,
               let fromAddressEthFormat = EthereumAddress(fromAddress) else {
-                  return
-              }
+            return
+        }
         guard let web3 = Web3ProviderFactory.provider else { return }
         guard let tokenAddress = token?.contractAddress,
               let tokenAddressETHFormat = EthereumAddress(tokenAddress) else {
-                  return
-              }
+            return
+        }
         guard let toAddress = luckyDropAddressStr,
               let toAddressEthFormat = EthereumAddress(toAddress) else {
                   return
               }
-        Task {
+        Task.detached {
             let erc20 = ERC20(web3: web3, provider: web3.provider, address: tokenAddressETHFormat)
             do {
                 // FIXME: set `0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff` to method `approve`.
+                // block thread
                 let transacation = try erc20.approve(
                     from: fromAddressEthFormat,
                     spender: toAddressEthFormat,
@@ -418,7 +415,7 @@ class LuckyDropViewModel: ObservableObject {
                 let transacationResult = try transacation.assemble()
                 let (promise, resolver) = Promise<String>.pending()
                 await MainActor.run {
-                    mainCoordinator.present(
+                    self.mainCoordinator.present(
                         scene: .maskSendResolverTransactionPopView(
                             resolver: resolver,
                             transaction: transacationResult,
@@ -427,20 +424,19 @@ class LuckyDropViewModel: ObservableObject {
                         transition: .panModel(animated: true)
                     )
                 }
+                // block thread
                 let hash = try promise.wait()
                 log.debug("approve/revoke hash \(hash)", source: "lucky drop")
                 
                 await MainActor.run {
-                    checkApproveStatus(txHash: hash)
+                    self.checkApproveStatus(txHash: hash)
                 }
-                
-                
             } catch {
-                Task { @MainActor in
+                await MainActor.run {
                     // This is just to make `checkParam` work properly.
-                    buttonType = .requestAllowance
+                    self.buttonType = .requestAllowance
                     // continue to check param
-                    checkParam()
+                    self.checkParam()
                     log.error("error approve/revoke token", source: "lucky drop")
                 }
             }
@@ -452,13 +448,16 @@ class LuckyDropViewModel: ObservableObject {
             return
         }
         log.debug("checkApproveStatus hash \(txHash)", source: "lucky drop")
-        checkApprovePromise = web3Provier.getTransactionReceiptPromise(txHash).done {[weak self] transactionReceipt in
-            log.debug("checkApproveStatus1 hash \(txHash) status: \(transactionReceipt.status)", source: "lucky drop")
-            guard transactionReceipt.status != .notYetProcessed else {
-                return
+        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] _ in
+            _ = web3Provier.getTransactionReceiptPromise(txHash).done {[weak self] transactionReceipt in
+                log.debug("checkApproveStatus1 hash \(txHash) status: \(transactionReceipt.status)", source: "lucky drop")
+                guard transactionReceipt.status != .notYetProcessed else {
+                    return
+                }
+                self?.getAndUpdateAllowances()
+                self?.timer?.invalidate()
+                self?.timer = nil
             }
-            self?.checkApprovePromise = nil
-            self?.getAndUpdateAllowances()
         }
     }
     

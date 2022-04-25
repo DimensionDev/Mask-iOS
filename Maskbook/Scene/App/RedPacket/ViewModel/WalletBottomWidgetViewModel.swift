@@ -127,6 +127,7 @@ class WalletBottomWidgetViewModel: ObservableObject {
     
     func observeTransaction(txHash: String) {
         txList[address] = TransactionStatus(txHash: txHash, status: .pending)
+        log.debug("observe txHash: \(txHash)", source: "lucky drop")
     }
     
     func switchAccount() {
