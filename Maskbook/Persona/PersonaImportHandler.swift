@@ -200,20 +200,14 @@ class PersonaImportHandler {
     }
     
     private func restoreFroMmnemonic(mnemonic: String, nickname: String?) {
-        PersonaManager.restoreFromMnemonic(mnemonic: mnemonic, nickname: nickname ?? "persona1")
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { _ in
-            }) { [weak self] result in
-                if result.isSuccess {
-                    if let identifier = result.result?.dictionaryValue["identifier"]?.stringValue {
-                        self?.userSetting.currentPesonaIdentifier = identifier
-                    }
-                    self?.showRestoreSuccessAlert()
-                } else {
-                    self?.showRestoreFailedAlert(errorMessage: result.error?.message)
-                }
-            }
-            .store(in: &disposeBag)
+        let result = PersonaManager.createPersona(nickname: nickname, mnemonic: mnemonic)
+        switch result {
+        case let .success(identifier):
+            userSetting.currentPesonaIdentifier = identifier
+            showRestoreSuccessAlert()
+        case let .failure(error):
+            showRestoreFailedAlert(errorMessage: error.localizedDescription)
+        }
     }
     
     private func showRestoreSuccessAlert() {
