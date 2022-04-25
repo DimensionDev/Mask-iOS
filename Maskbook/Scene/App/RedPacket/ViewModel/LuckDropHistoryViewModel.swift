@@ -3,9 +3,9 @@ import Foundation
 import struct SwiftUI.Binding
 
 import BigInt
-import PullRefresh
+import Pika
 import web3swift
-import struct PullRefresh.InterActionState
+import struct Pika.InterActionState
 
 @MainActor
 final class LuckyDropHistoryViewModel: ObservableObject {

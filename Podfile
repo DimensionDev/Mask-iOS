@@ -61,7 +61,8 @@ target 'Maskbook' do
   pod 'SwiftMsgPack', :git => 'https://github.com/malcommac/SwiftMsgPack.git', :branch => 'develop'
   pod 'WalletConnectSwift', :git => 'https://github.com/DimensionDev/WalletConnectSwift.git'
   pod 'ResponderChain', '~> 1.1'
-  
+  pod 'Pika', '0.1.8'
+
   pod 'Firebase/Analytics'
   
   target 'MaskbookTests' do

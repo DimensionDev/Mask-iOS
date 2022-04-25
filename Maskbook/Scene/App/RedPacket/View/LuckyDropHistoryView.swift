@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-import PullRefresh
+import Pika
 import Kingfisher
 
 struct LuckyDropHistoryView: View {

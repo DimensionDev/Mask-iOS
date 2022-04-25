@@ -122,6 +122,7 @@ PODS:
     - NVActivityIndicatorView/Presenter (= 4.7.0)
   - NVActivityIndicatorView/Presenter (4.7.0)
   - PanModal (1.2.7)
+  - Pika (0.1.8)
   - PromiseKit (6.8.5):
     - PromiseKit/CorePromise (= 6.8.5)
     - PromiseKit/Foundation (= 6.8.5)
@@ -192,6 +193,7 @@ DEPENDENCIES:
   - MaskLog (from `./DevelopmentPod/MaskLog`)
   - MaskWalletCore (from `./DevelopmentPod/MaskWalletCore`)
   - PanModal (from `./DevelopmentPod/PanModal`)
+  - Pika (= 0.1.8)
   - ResponderChain (~> 1.1)
   - RSKPlaceholderTextView (~> 6.0.0)
   - SnapKit (~> 5.0.0)
@@ -234,6 +236,7 @@ SPEC REPOS:
     - LookinServer
     - nanopb
     - NVActivityIndicatorView
+    - Pika
     - PromiseKit
     - PromisesObjC
     - ResponderChain
@@ -316,6 +319,7 @@ SPEC CHECKSUMS:
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   NVActivityIndicatorView: b19ddab2576f805cbe0fb2306cba3476e09a1dea
   PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
+  Pika: 735ac44f240b2154f174f4558e04cabe8a71f2c5
   PromiseKit: 9616b0afef31eae56ab9ce044c8ec2b8612a15cd
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   ResponderChain: 12e08eeb286e8ffe99112628aa701d8d6e72c638
@@ -336,6 +340,6 @@ SPEC CHECKSUMS:
   WebExtension-Shim: 11b071466c53f42097291eb176cf9bcc5fb9b050
   ZIPFoundation: ae5b4b813d216d3bf0a148773267fff14bd51d37
 
-PODFILE CHECKSUM: 1e3d2984a4e3838773b743f704fb0a290fa8db7f
+PODFILE CHECKSUM: 47d43193ea1c00e55d9f434cc08ea77839abffd2
 
 COCOAPODS: 1.11.3
