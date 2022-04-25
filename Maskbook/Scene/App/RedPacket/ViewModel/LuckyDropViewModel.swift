@@ -341,7 +341,6 @@ final class LuckyDropViewModel: ObservableObject {
     }
     
     // MARK: - Private method
-    @MainActor
     private func getAllowance() async -> BigUInt? {
         guard let fromAddress = maskUserDefaults.defaultAccountAddress,
               let originalOwner = EthereumAddress(fromAddress) else {
@@ -358,7 +357,7 @@ final class LuckyDropViewModel: ObservableObject {
               }
         let erc20 = ERC20(web3: web3, provider: web3.provider, address: contractAddress)
         
-        return await Task.detached {
+        return await Task { @MaskGroupActor in
             guard let allowance = try? erc20.getAllowance(originalOwner: originalOwner, delegate: luckyDropAddress) else {
                 return nil
             }
@@ -402,7 +401,7 @@ final class LuckyDropViewModel: ObservableObject {
               let toAddressEthFormat = EthereumAddress(toAddress) else {
                   return
               }
-        Task.detached {
+        Task { @MaskGroupActor in
             let erc20 = ERC20(web3: web3, provider: web3.provider, address: tokenAddressETHFormat)
             do {
                 // FIXME: set `0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff` to method `approve`.
