@@ -92,7 +92,7 @@ extension LuckyDropHistoryViewModel {
             for payload in payloads {
                 _ = taskGroup.addTaskUnlessCancelled {
                     // mark @MaskGroupActor for the closure to make it works
-                    async let task = Task.detached { @MaskGroupActor () -> TokenPayload? in
+                   let task = Task.detached { @MaskGroupActor () -> TokenPayload? in
                         var payload = payload
                         // here txid is a garantee value
                         let txid = payload.basic?.txid ?? ""
