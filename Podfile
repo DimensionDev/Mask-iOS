@@ -30,7 +30,7 @@ target 'Maskbook' do
   # Press
   pod "EUMTouchPointView"
   
-  pod 'Kingfisher', '~> 6.0'
+  pod 'Kingfisher', '~> 7.0'
   
   pod 'Socket.IO-Client-Swift', '~> 15.2.0'
   

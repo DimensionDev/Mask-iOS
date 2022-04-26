@@ -54,7 +54,7 @@ struct FungibleTokenBuilder {
             let context = AppContext.shared.coreDataStack.persistentContainer.viewContext
             fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
                 \Token.contractAddress == address.lowercased(),
-                 \Token.networkId == Int64(networkdId)
+                \Token.networkId == Int64(networkdId)
             ])
             
             fetchRequest.fetchLimit = 1
