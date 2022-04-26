@@ -357,7 +357,7 @@ final class LuckyDropViewModel: ObservableObject {
               }
         let erc20 = ERC20(web3: web3, provider: web3.provider, address: contractAddress)
         
-        return await Task { @MaskGroupActor in
+        return await Task.detached {
             guard let allowance = try? erc20.getAllowance(originalOwner: originalOwner, delegate: luckyDropAddress) else {
                 return nil
             }
@@ -401,7 +401,7 @@ final class LuckyDropViewModel: ObservableObject {
               let toAddressEthFormat = EthereumAddress(toAddress) else {
                   return
               }
-        Task { @MaskGroupActor in
+        Task.detached {
             let erc20 = ERC20(web3: web3, provider: web3.provider, address: tokenAddressETHFormat)
             do {
                 // FIXME: set `0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff` to method `approve`.
