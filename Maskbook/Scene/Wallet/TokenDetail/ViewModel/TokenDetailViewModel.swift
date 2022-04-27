@@ -29,6 +29,7 @@ class TokenDetailViewModel: NSObject {
     weak var tableView: UITableView?
     weak var dataSource: UITableViewDiffableDataSource<Section, SectionItem>?
     
+    public var cellItems: CurrentValueSubject<[TransactionHistory], Never> = CurrentValueSubject([])
     private var disposeBag = Set<AnyCancellable>()
     
     init(token: MaskToken) {
@@ -67,6 +68,7 @@ class TokenDetailViewModel: NSObject {
     
     func refreshTableView(transactions: [TransactionHistory]) {
         guard let dataSource = dataSource else { return }
+        self.cellItems.send(transactions)
         var newSnapshot = NSDiffableDataSourceSnapshot<Section, SectionItem>()
         newSnapshot.appendSections([.token])
         newSnapshot.appendItems([.token], toSection: .token)

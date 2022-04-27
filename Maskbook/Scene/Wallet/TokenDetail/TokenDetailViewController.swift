@@ -16,6 +16,7 @@ class TokenDetailViewController: BaseViewController {
     typealias Section = TokenDetailViewModel.Section
     typealias Item = TokenDetailViewModel.SectionItem
     typealias ViewModel = TokenDetailViewModel
+    var disposeBag = Set<AnyCancellable>()
     
     var viewModel: ViewModel
     
@@ -120,6 +121,7 @@ class TokenDetailViewController: BaseViewController {
         
         setupNaviItems()
         setupSubviews()
+        setSubscriptions()
     }
     
     private func setupNaviItems() {
@@ -156,6 +158,17 @@ class TokenDetailViewController: BaseViewController {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+    }
+    
+    func setSubscriptions() {
+        viewModel.cellItems.sink { [weak self] items in
+            if items.count == .zero {
+                self?.buttonContainerView.backgroundColor = Asset.Colors.Background.normal.color
+            } else {
+                self?.buttonContainerView.backgroundColor = Asset.Colors.Background.blur.color
+            }
+        }
+        .store(in: &disposeBag)
     }
 }
 
