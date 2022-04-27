@@ -10,13 +10,25 @@ import Foundation
 import SwiftyJSON
 
 public class MaskbookPluginHelper {
-
     static public var pluginBundle: Bundle {
-        let bundleURL = Bundle(for: MaskbookPluginHelper.self).bundleURL.appendingPathComponent("MaskbookPlugin.bundle")
+        #if SPM
+        let bundleURL = Bundle.module.bundleURL.appendingPathComponent("maskbook")
         return Bundle(url: bundleURL)!
+        #else
+        return Bundle.module
+        #endif
     }
 
 }
+
+#if !SPM
+extension Bundle {
+    static var module: Bundle {
+        let bundleURL = Bundle(for: MaskbookPluginHelper.self).bundleURL.appendingPathComponent("MaskbookPlugin.bundle")
+        return Bundle(url: bundleURL)!
+    }
+}
+#endif
 
 public class MaskbookPluginResources {
 
@@ -84,4 +96,3 @@ public class MaskbookPluginResources {
     }
 
 }
-

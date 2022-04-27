@@ -30,16 +30,16 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '9.0'
 
-  s.source_files = 'MaskWalletCore/Classes/**/*'
+  s.source_files = 'Sources/Classes/**/*'
   
   # s.resource_bundles = {
   #   'MaskWalletCore' => ['MaskWalletCore/Assets/*.png']
   # }
 
-  s.public_header_files = 'MaskWalletCore/Classes/**/*.h'
+  s.public_header_files = 'Sources/Classes/**/*.h'
   # Libraries that are a part of the pod.
   # https://guides.cocoapods.org/syntax/podspec.html#vendored_libraries
-  s.vendored_libraries = 'MaskWalletCore/Classes/libs/libmask_wallet_core_mobile.a'
+  s.vendored_libraries = 'Sources/Classes/libs/libmask_wallet_core_mobile.a'
   # s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'SwiftProtobuf', '~> 1.0'
 end

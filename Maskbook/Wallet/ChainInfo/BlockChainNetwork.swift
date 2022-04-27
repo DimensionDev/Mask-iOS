@@ -6,7 +6,7 @@
 //  Copyright © 2021 dimension. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import MaskWalletCore
 
 struct BlockChainNetwork: Codable {
