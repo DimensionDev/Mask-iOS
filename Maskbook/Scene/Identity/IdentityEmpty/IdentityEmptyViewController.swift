@@ -14,6 +14,17 @@ import UStack
 final class IdentityEmptyViewController: BaseViewController {
     typealias Spacer = UStack.Spacer
     
+    init(isFirstLaunch: Bool = false) {
+        self.isFirstLaunch = isFirstLaunch
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    var isFirstLaunch: Bool
+    
     override var interactivePopGestureRecognizerEnabled: Bool {
         false
     }
@@ -33,15 +44,20 @@ final class IdentityEmptyViewController: BaseViewController {
         return button
     }()
 
-    private lazy var logoView: UIView = {
+    private lazy var logoView: UIImageView = {
         let logoView = UIImageView()
-        logoView.image = Asset.Images.Scene.Personas.emptyPersona.image
         logoView.contentMode = .scaleAspectFit
-        logoView.snp.makeConstraints {
-            $0.height.equalTo(136)
-            $0.width.equalTo(214)
-        }
         return logoView
+    }()
+    
+    private lazy var logoLabel: UILabel = {
+        let label = UILabel()
+        label.text = L10n.Scene.WelcomeIdentityEmpty.description
+        label.textColor = Asset.Colors.Background.blue.color
+        label.textAlignment = .center
+        label.font = FontStyles.BH5
+        label.numberOfLines = 0
+        return label
     }()
 
     private lazy var logoContainer: UIView = {
@@ -55,12 +71,30 @@ final class IdentityEmptyViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = L10n.Scene.IdentityEmpty.title
         navigationItem.leftBarButtonItems = [.fixedSpace(14),
                                              UIBarButtonItem(customView: scanButton)]
         navigationItem.largeTitleDisplayMode = .never
+        if isFirstLaunch {
+            title = nil
+            logoView.image = Asset.Icon.Logo.logoWithName.image
+            logoView.snp.makeConstraints {
+                $0.height.equalTo(136)
+                $0.width.equalTo(114)
+            }
+            logoLabel.isHidden = false
+            createButton.setTitle(L10n.Scene.WelcomeIdentityEmpty.createAPersona, for: .normal)
+            recovertyOrSignInButton.setTitle(L10n.Scene.WelcomeIdentityEmpty.recoverYourPersona, for: .normal)
+        } else {
+            title = L10n.Scene.IdentityEmpty.title
+            logoView.image = Asset.Images.Scene.Personas.emptyPersona.image
+            logoView.snp.makeConstraints {
+                $0.height.equalTo(136)
+                $0.width.equalTo(214)
+            }
+            logoLabel.isHidden = true
+        }
     }
-
+    
     override func buildContent() {
         createButton.snp.makeConstraints { $0.height.equalTo(54) }
         recovertyOrSignInButton.snp.makeConstraints { $0.height.equalTo(54) }
@@ -91,8 +125,15 @@ final class IdentityEmptyViewController: BaseViewController {
     func buildLogoContainer() {
         logoContainer.withSubViews {
             logoView
+            logoLabel
         }
-        logoView.snp.makeConstraints { $0.center.equalTo(logoContainer.snp.center) }
+        logoView.snp.makeConstraints { $0.centerX.equalTo(logoContainer.snp.centerX)
+            $0.centerY.equalTo(logoContainer.snp.centerY).offset(-10)
+        }
+        
+        logoLabel.snp.makeConstraints { $0.centerX.equalTo(logoContainer.snp.centerX)
+            $0.top.equalTo(logoView.snp.bottom).offset(8)
+        }
     }
 
     override func buildEvent() {
@@ -119,7 +160,15 @@ final class IdentityEmptyViewController: BaseViewController {
     }
 
     private func scanAction() {
-        coordinator.present(scene: .commonScan, transition: .modal(animated: true))
+        ScannerPermission.authorizeCameraWith { [weak self] isAuthorize in
+            guard let self = self else { return }
+            if isAuthorize {
+                let type: RestrictedScanType = self.isFirstLaunch ? .onlyPersona : .common
+                self.coordinator.present(scene: .maskScan(type: type), transition: .modal(animated: true))
+            } else {
+                ScannerPermission.showCameraAccessAlert(coordinator: self.coordinator)
+            }
+        }
     }
 }
 

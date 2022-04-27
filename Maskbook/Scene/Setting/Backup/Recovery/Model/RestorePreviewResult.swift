@@ -25,6 +25,22 @@ struct RestorePreviewResult: Equatable {
         contacts = json?["contacts"].int
         posts = json?["posts"].int
     }
+    
+    init(
+        personas: Int?,
+        accounts: Int?,
+        wallets: Int?,
+        contacts: Int?,
+        posts: Int?,
+        files: Int?
+    ) {
+        self.personas = personas
+        self.accounts = accounts
+        self.wallets = wallets
+        self.contacts = contacts
+        self.posts = posts
+        self.files = files
+    }
 
     var isEmpty: Bool {
         personas == nil &&
@@ -53,6 +69,11 @@ extension RestorePreviewResult: RestoreItemProvider {
                 title: L10n.Scene.Restore.restoredAccount,
                 detail: "\(numberFormatter.string(from: accounts ?? 0))"
             ),
+            // contacts
+            PreviewItem(
+                title: L10n.Scene.Restore.restoredContacts,
+                detail: "\(numberFormatter.string(from: contacts ?? 0))"
+            ),
             // Encrypted post
             PreviewItem(
                 title: L10n.Scene.Restore.restoredPost,
@@ -62,11 +83,6 @@ extension RestorePreviewResult: RestoreItemProvider {
             PreviewItem(
                 title: L10n.Scene.Restore.restoredFiles,
                 detail: "\(numberFormatter.string(from: files ?? 0))"
-            ),
-            // contacts
-            PreviewItem(
-                title: L10n.Scene.Restore.restoredContacts,
-                detail: "\(numberFormatter.string(from: contacts ?? 0))"
             )
         ]
     }

@@ -21,7 +21,6 @@ class SendTransactionConfirmViewModel {
     let maxInclusionFeePerGasPublisher = CurrentValueSubject<BigUInt?, Never>(nil)
     let selectedTokenPublisher = CurrentValueSubject<Token?, Never>(nil)
     let gasFeeNetModelTokenPublisher = CurrentValueSubject<GasFeeCellItem?, Never>(nil)
-
     @InjectedProvider(\.walletConnectClient)
     private var walletConnectClient
     
@@ -37,7 +36,8 @@ class SendTransactionConfirmViewModel {
         amount: String,
         toAddress: String,
         fromAddress: String,
-        _ completion: @escaping (Result<EthereumTransaction?, Error>) -> Void) {
+        nonce: BigUInt,
+        _ completion: @escaping (Result<String?, Error>) -> Void) {
         guard let token = selectedTokenPublisher.value else {
             completion(.failure(WalletSendError.contractError))
             return
@@ -74,6 +74,7 @@ class SendTransactionConfirmViewModel {
                     amount: amount,
                     toAddress: toAddress,
                     fromAddress: fromAddress,
+                    nonce: nonce,
                     network: maskUserDefaults.network,
                     completion
                 )

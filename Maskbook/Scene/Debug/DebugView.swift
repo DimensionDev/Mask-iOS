@@ -20,11 +20,6 @@ struct DebugView: View {
             NavigationLink(destination: JSResourceSelectView()) {
                 Text("JSResourceSelect")
             }
-            if let persona = personaManager.currentPersona.value {
-                NavigationLink(destination: PersonaKeyInfoPreview(persona: persona)) {
-                    Text("download")
-                }
-            }
             Spacer()
         }
         .navigationTitle("Debug")

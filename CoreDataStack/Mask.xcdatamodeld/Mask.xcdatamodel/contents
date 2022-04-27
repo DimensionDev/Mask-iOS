@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21D62" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E230" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Account" representedClassName=".Account" syncable="YES">
         <attribute name="address" attributeType="String"/>
         <attribute name="chainId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="colorHex" optional="YES" attributeType="String"/>
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="derivationPath" attributeType="String"/>
         <attribute name="ensName" optional="YES" attributeType="String"/>
@@ -230,7 +230,7 @@
         </uniquenessConstraints>
     </entity>
     <elements>
-        <element name="Account" positionX="99" positionY="153" width="128" height="224"/>
+        <element name="Account" positionX="99" positionY="153" width="128" height="239"/>
         <element name="BlobStorage" positionX="99" positionY="153" width="128" height="119"/>
         <element name="Collectible" positionX="99" positionY="153" width="128" height="449"/>
         <element name="Contact" positionX="250.05859375" positionY="93.7265625" width="128" height="149"/>

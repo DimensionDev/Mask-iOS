@@ -72,5 +72,6 @@ class ContactsViewModel {
                     }
             }
             .store(in: &disposeBag)
+        self.searchString.value = ""
     }
 }

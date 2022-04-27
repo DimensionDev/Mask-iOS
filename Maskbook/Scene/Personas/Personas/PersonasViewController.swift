@@ -72,7 +72,8 @@ class PersonasViewController: BaseViewController {
         let flowLayout = MnemonicVerifyCollectionFlowLayout()
         flowLayout.itemSize = PersonaCollectionDataSource.itemSize
         flowLayout.scrollDirection = .horizontal
-        flowLayout.sideItemScale = 0.9
+        flowLayout.sideItemXScale = 0.94
+        flowLayout.sideItemYScale = 0.85
         let view = ControlContainableCollectionView(frame: .zero, collectionViewLayout: flowLayout)
         view.backgroundColor = .clear
         view.showsHorizontalScrollIndicator = false
@@ -187,8 +188,16 @@ class PersonasViewController: BaseViewController {
             .store(in: &disposeBag)
         
         personaManager.personaRecordsSubject
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.personaCollectionView.reloadData()
+            }
+            .store(in: &disposeBag)
+        
+        personaManager.currentPersona
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.scrollToCurrentPersona()
             }
             .store(in: &disposeBag)
     }
@@ -201,7 +210,6 @@ class PersonasViewController: BaseViewController {
         guard let persona = personaManager.currentPersona.value else { return }
         let personas = personaManager.personaRecordsSubject.value
         guard let index = personas.firstIndex(of: persona) else { return }
-        if index == 0 { return }
         DispatchQueue.main.async {
             self.personaCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredHorizontally, animated: false)
         }
@@ -211,6 +219,13 @@ class PersonasViewController: BaseViewController {
 extension PersonasViewController {
 
     func scanAction() {
-        coordinator.present(scene: .commonScan, transition: .modal(animated: true))
+        ScannerPermission.authorizeCameraWith { [weak self] isAuthorize in
+            guard let self = self else { return }
+            if isAuthorize {
+                self.coordinator.present(scene: .maskScan(type: .common), transition: .modal(animated: true))
+            } else {
+                ScannerPermission.showCameraAccessAlert(coordinator: self.coordinator)
+            }
+        }
     }
 }

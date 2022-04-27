@@ -230,13 +230,21 @@
         });
         return file
     }
+
+    function getError(message) {
+        try {
+            return { message: message.message }
+        } catch (e2) {
+            return { message: 'unknown error' }
+        }
+    }
     async function handlePromise(id, promise) {
         try {
             const data = await promise();
             sendEvent('resolvePromise', id, data);
         } catch (error) {
             // TODO:
-            sendEvent('rejectPromise', id, {});
+            sendEvent('rejectPromise', id, getError(error));
         }
     }
 
@@ -275,10 +283,12 @@
 
     const CapturedListeners = new WeakMap();
     // saving intrinsic of WeakMap, covert it from prototype method to own property.
-    CapturedListeners.get = CapturedListeners.get;
-    CapturedListeners.set = CapturedListeners.set;
-    CapturedListeners.delete = CapturedListeners.delete;
-    CapturedListeners.has = CapturedListeners.has;
+    Object.defineProperties(CapturedListeners, {
+        get: { value: WeakMap.prototype.get },
+        set: { value: WeakMap.prototype.set },
+        delete: { value: WeakMap.prototype.delete },
+        has: { value: WeakMap.prototype.has },
+    });
 
     redefineEventTargetPrototype(
         'addEventListener',
@@ -350,7 +360,7 @@
         overwrites = {},
     ) {
         let currentTarget = target;
-        const event = getMockedEvent(eventBase, () => currentTarget, overwrites);
+        const event = getMockedEvent(eventBase, () => (isTwitter() ? target : currentTarget), overwrites);
         // Note: in firefox, "event" is "Opaque". Displayed as an empty object.
         const type = eventBase.type;
         if (!CapturingEvents.has(type)) return warn("[@masknet/injected-script] Trying to send event didn't captured.")
@@ -487,8 +497,8 @@
         handlePromise(id, () => read(path).request(request));
     }
 
-    function execute(path, id) {
-        handlePromise(id, () => read(path)());
+    function execute(path, id, ...args) {
+        handlePromise(id, () => read(path)(...args));
     }
 
     function bindEvent(path, bridgeEvent, event) {
@@ -641,12 +651,16 @@
     });
 
     function setupChromium() {
+        let currentLocationHref = window.location.href;
         // Learn more about this hack from https://stackoverflow.com/a/52809105/1986338
         window.history.pushState = new no_xray_Proxy(history.pushState, {
             apply(target, thisArg, params) {
                 const val = apply(target, thisArg, params);
                 apply(dispatchEvent$1, window, [new no_xray_Event('pushstate')]);
-                apply(dispatchEvent$1, window, [new no_xray_Event('locationchange')]);
+                if (currentLocationHref !== window.location.href) {
+                    currentLocationHref = window.location.href;
+                    apply(dispatchEvent$1, window, [new no_xray_Event('locationchange')]);
+                }
                 return val
             },
         });
@@ -654,12 +668,17 @@
             apply(target, thisArg, params) {
                 const val = apply(target, thisArg, params);
                 apply(dispatchEvent$1, window, [new no_xray_Event('replacestate')]);
-                apply(dispatchEvent$1, window, [new no_xray_Event('locationchange')]);
+                if (currentLocationHref !== window.location.href) {
+                    currentLocationHref = window.location.href;
+                    apply(dispatchEvent$1, window, [new no_xray_Event('locationchange')]);
+                }
                 return val
             },
         });
 
         window.addEventListener('popstate', () => {
+            if (currentLocationHref === window.location.href) return
+            currentLocationHref = window.location.href;
             apply(dispatchEvent$1, window, [new no_xray_Event('locationchange')]);
         });
     }

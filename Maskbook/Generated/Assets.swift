@@ -79,6 +79,13 @@ internal enum Asset {
       internal static let expandButtonBackground = ColorAsset(name: "Colors/Balances/expandButtonBackground")
       internal static let tokenBackground = ColorAsset(name: "Colors/Balances/tokenBackground")
     }
+    internal enum ChainColor {
+      internal static let arbitrum = ColorAsset(name: "Colors/ChainColor/arbitrum")
+      internal static let bsc = ColorAsset(name: "Colors/ChainColor/bsc")
+      internal static let eth = ColorAsset(name: "Colors/ChainColor/eth")
+      internal static let gnosis = ColorAsset(name: "Colors/ChainColor/gnosis")
+      internal static let matic = ColorAsset(name: "Colors/ChainColor/matic")
+    }
     internal enum ConnectTip {
       internal static let background1 = ColorAsset(name: "Colors/ConnectTip/background1")
       internal static let background2 = ColorAsset(name: "Colors/ConnectTip/background2")
@@ -142,6 +149,14 @@ internal enum Asset {
       internal static let second = ColorAsset(name: "Colors/Twitter/second")
       internal static let strong = ColorAsset(name: "Colors/Twitter/strong")
     }
+    internal enum WalletColor {
+      internal static let color1 = ColorAsset(name: "Colors/WalletColor/Color1")
+      internal static let color2 = ColorAsset(name: "Colors/WalletColor/Color2")
+      internal static let color3 = ColorAsset(name: "Colors/WalletColor/Color3")
+      internal static let color4 = ColorAsset(name: "Colors/WalletColor/Color4")
+      internal static let color5 = ColorAsset(name: "Colors/WalletColor/Color5")
+      internal static let color6 = ColorAsset(name: "Colors/WalletColor/Color6")
+    }
     internal enum Public {
       internal static let blue = ColorAsset(name: "Colors/public/Blue")
       internal static let info = ColorAsset(name: "Colors/public/Info")
@@ -195,6 +210,7 @@ internal enum Asset {
     internal enum Logo {
       internal static let largeMask = ImageAsset(name: "Icon/Logo/largeMask")
       internal static let littleMask = ImageAsset(name: "Icon/Logo/littleMask")
+      internal static let logoWithName = ImageAsset(name: "Icon/Logo/logoWithName")
       internal static let mask = ImageAsset(name: "Icon/Logo/mask")
       internal static let maskWithBorder = ImageAsset(name: "Icon/Logo/maskWithBorder")
     }
@@ -317,6 +333,7 @@ internal enum Asset {
         internal static let removeAvatar = ImageAsset(name: "Images/Scene/Personas/removeAvatar")
         internal static let rename = ImageAsset(name: "Images/Scene/Personas/rename")
         internal static let rotate = ImageAsset(name: "Images/Scene/Personas/rotate")
+        internal static let search = ImageAsset(name: "Images/Scene/Personas/search")
         internal static let setAvatar = ImageAsset(name: "Images/Scene/Personas/setAvatar")
         internal static let twitter = ImageAsset(name: "Images/Scene/Personas/twitter")
         internal static let watermark = ImageAsset(name: "Images/Scene/Personas/watermark")

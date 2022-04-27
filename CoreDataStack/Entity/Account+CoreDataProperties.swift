@@ -2,8 +2,8 @@
 //  Account+CoreDataProperties.swift
 //  CoreDataStack
 //
-//  Created by BradGao on 2021/10/13.
-//  Copyright © 2021 dimension. All rights reserved.
+//  Created by xiaojian sun on 2022/4/14.
+//  Copyright © 2022 dimension. All rights reserved.
 //
 //
 
@@ -21,11 +21,12 @@ extension Account {
     @NSManaged public var chainId: Int64
     @NSManaged public var createdAt: Date?
     @NSManaged public var derivationPath: String?
+    @NSManaged public var ensName: String?
     @NSManaged public var extendedPublicKey: String?
     @NSManaged public var lastModifiedDate: Date?
     @NSManaged public var name: String?
-    @NSManaged public var ensName: String?
     @NSManaged public var sessionData: Data?
+    @NSManaged public var colorHex: String?
     @NSManaged public var collectibles: NSSet?
     @NSManaged public var ownedByStoredKey: StoredKey?
     @NSManaged public var portfolios: NSSet?

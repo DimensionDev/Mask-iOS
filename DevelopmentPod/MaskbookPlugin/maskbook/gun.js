@@ -1,4 +1,4 @@
-
+(() => {
 function init() {
     'use strict'
     // This log is required by Gun's license.
@@ -16,6 +16,7 @@ function init() {
         assign: globalThis.Object.assign,
     }
     const console = { log() {} }
+    const JSON = { parse: globalThis.JSON.parse, stringify: globalThis.JSON.stringify }
     function String() {
         return globalThis.String.apply(this, arguments)
     }
@@ -4720,4 +4721,5 @@ if (navigator.storage && navigator.storage.estimate) {
     }
 };
 globalThis.Gun = init().Gun;
+})();
 undefined;

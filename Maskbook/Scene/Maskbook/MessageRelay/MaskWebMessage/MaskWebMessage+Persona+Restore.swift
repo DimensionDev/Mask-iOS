@@ -22,20 +22,6 @@ extension WebExtension.Persona {
 }
 
 extension WebExtension.Persona {
-    struct RestorePersonaBase64: MWEMessage {
-        static let method: String = "persona_restoreFromBase64"
-        var payload: BackUpPayload?
-    }
-}
-
-extension WebExtension.Persona {
-    struct RestorePersonaJson: MWEMessage {
-        static let method: String = "persona_restoreFromJson"
-        var payload: BackUpPayload?
-    }
-}
-
-extension WebExtension.Persona {
     struct RestorePersonaPrivateKey: MWEMessage {
         static let method: String = "persona_restoreFromPrivateKey"
         struct Payload: Codable {

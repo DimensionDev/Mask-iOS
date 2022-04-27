@@ -174,8 +174,9 @@ extension RemoteRestoreInfoController: RestorePipelineExcutor {
         let login = { [weak self] in
             switch selectMaintab {
             case .wallet:
-                self?.coordinator.present(scene: .persona, transition: .replaceCurrentNavigation(tab: .personas))
-                self?.coordinator.present(scene: .balance, transition: .replaceCurrentNavigation(tab: selectMaintab, selected: true))
+                self?.coordinator.present(scene: .balance, transition: .replaceCurrentNavigation(tab: selectMaintab, selected: true), completion: {
+                    self?.coordinator.present(scene: .persona, transition: .replaceCurrentNavigation(tab: .personas))
+                })
 
             case .personas:
                 self?.coordinator.present(scene: .persona, transition: .replaceCurrentNavigation(tab: selectMaintab, selected: true))
@@ -226,7 +227,27 @@ extension RemoteRestoreInfoController: RestorePipelineExcutor {
             }
             .show()
 
-        case .ignoreAndLogin: login()
+        case .ignoreAndLogin:
+            Alert {
+                ImageItem(.success)
+                WithTipItem(
+                    title: L10n.Scene.Restore.completion,
+                    detail: NSAttributedString(
+                        string: L10n.Scene.Restore.succeedDetail,
+                        attributes: [
+                            .font: FontStyles.BH5,
+                            .foregroundColor: Asset.Colors.Text.normal.color
+                        ]
+                    )
+                )
+                DoneActionItem(
+                    .init(
+                        title: L10n.Common.Controls.done,
+                        action: { login() }
+                    )
+                )
+            }
+            .show()
         }
     }
 }

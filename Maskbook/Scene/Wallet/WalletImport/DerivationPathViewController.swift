@@ -175,15 +175,7 @@ class DerivationPathViewController: BaseViewController {
             message: "",
             confirmButtonText: L10n.Common.Controls.done,
             imageType: .success,
-            confirmButtonClicked: { _ in
-                let walletListVC = self.navigationController?.viewControllers.first(where: { vc in
-                    return vc.isKind(of: WalletListViewController.self)
-                })
-                if let walletListVC = walletListVC {
-                    self.navigationController?.popToViewController(walletListVC, animated: true)
-                    return
-                }
-                
+            confirmButtonClicked: { _ in                
                 Coordinator.main.present(scene: .balance, transition: .replaceCurrentNavigation(tab: .wallet, animated: true))
             }
         )

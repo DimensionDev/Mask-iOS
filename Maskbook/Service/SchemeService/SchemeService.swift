@@ -6,15 +6,23 @@
 //  Copyright © 2022 dimension. All rights reserved.
 //
 
+import CoreDataStack
 import Foundation
 
 class SchemeService {
     fileprivate static let shared = SchemeService()
 
+    static let personaPrivateKeyPrefix = "mask://persona/privatekey"
+    static let personaMenmonicPrefix = "mask://persona/mnemonic"
+    static let nikenameKey = "nickname"
+
     @InjectedProvider(\.walletConnectServer)
     private var walletConnectServer
-    
-    private lazy var personaImportPrivateKeyHandle = PersonaImportPrivateKeyHandler(scene: .userScan)
+
+    @InjectedProvider(\.mainCoordinator)
+    var mainCoordinator
+
+    private lazy var personaImportHandler = PersonaImportHandler(scene: .userScan)
 
     func handleURL(url: URL) {
         if url.absoluteString.contains("wc?uri=") {
@@ -22,10 +30,11 @@ class SchemeService {
             return
         }
     }
-    
+
     func handleScheme(scheme: String) -> Bool {
         if scheme.hasPrefix("wc:") {
             do {
+                switchSelected(tab: .wallet)
                 try walletConnectServer.connect(url: scheme)
                 return true
             } catch {
@@ -38,19 +47,70 @@ class SchemeService {
         }
         return false
     }
-    
+
     func handleMaskScheme(scheme: String) -> Bool {
-        if scheme.hasPrefix("mask://persona/privatekey") {
+        if scheme.hasPrefix("mask://persona") {
+            return handleMaskPersonaScheme(scheme: scheme)
+        }
+        return false
+    }
+
+    func handleMaskPersonaScheme(scheme: String) -> Bool {
+        if scheme.hasPrefix(Self.personaPrivateKeyPrefix) {
+            switchSelected(tab: .personas)
             handleMaskPersonaPrivateKey(scheme: scheme)
+            return true
+        }
+        if scheme.hasPrefix(Self.personaMenmonicPrefix) {
+            switchSelected(tab: .personas)
+            handleMaskPersonaMnemonic(scheme: scheme)
             return true
         }
         return false
     }
-    
+
+    func switchSelected(tab: MainTabBarController.Tab) {
+        MainTabBarController.currentTabBarController()?.selectedIndex = tab.rawValue
+    }
+
+    func parseContentAndNickname(string: String) -> (String?, String?) {
+        let seperator = "?" + Self.nikenameKey + "="
+        var nickname: String?
+        let contentBase64: String? = {
+            if string.contains(seperator) {
+                let slices = string.components(separatedBy: seperator)
+                nickname = slices.last.flatMap { String($0) }
+                return slices.first.flatMap { String($0) }
+            } else {
+                return string
+            }
+        }()
+        return (contentBase64, nickname)
+    }
     func handleMaskPersonaPrivateKey(scheme: String) {
-        if let text = scheme.components(separatedBy: "/").last {
-            personaImportPrivateKeyHandle.restoreFromPrivateKey(text: text)
+        let string = scheme.replacingOccurrences(of: Self.personaPrivateKeyPrefix + "/", with: "")
+        let (privateKey, name) = parseContentAndNickname(string: string)
+        guard let privateKey = privateKey else { return }
+        let personaImportItem = PersonaImportItem(type: .privateKey(privateKey: privateKey), name: name)
+        personaImportHandler.checkExistAndRestore(from: personaImportItem)
+        
+    }
+
+    func handleMaskPersonaMnemonic(scheme: String) {
+        let string = scheme.replacingOccurrences(of: Self.personaMenmonicPrefix + "/", with: "")
+        let (mnemonicBase64, name) = parseContentAndNickname(string: string)
+        let mnemonic = mnemonicBase64.flatMap {
+            Data(base64URLEncoded: $0)
         }
+        .flatMap {
+            String(data: $0, encoding: .utf8)
+        }
+        guard let mnemonic = mnemonic else {
+            return
+        }
+
+        let personaImportItem = PersonaImportItem(type: .mnemonic(mnemonic: mnemonic), name: name)
+        personaImportHandler.checkExistAndRestore(from: personaImportItem)
     }
 }
 

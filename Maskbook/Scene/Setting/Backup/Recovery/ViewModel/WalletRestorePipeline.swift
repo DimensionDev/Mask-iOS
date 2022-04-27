@@ -42,8 +42,8 @@ final class WalletRestorePipeline {
                     // show wallets item
                     self.sheetPipeline.send(.showWalletsInfo(decryptedData, restoreFile, walletItems))
 
-                case let .restoreMessage(message, restorefile):
-                    self.sendRestoreMessage(message: message, restorefile: restorefile)
+                case let .restoreMessage(backupData, restorefile):
+                    self.sendRestoreData(data: backupData, restorefile: restorefile)
 
                 case .failedToParseRestoreFile:
                     // show failure tips
@@ -85,26 +85,28 @@ final class WalletRestorePipeline {
         .store(in: &restorePipeStorage)
     }
 
-    private func sendRestoreMessage(message: RestoreBackupMWEMessage, restorefile: RestoreFile?) {
-        vault.getValue(for: .walletPassword)
-            .combineLatest(message.asAnyPublisher())
-            .sink { [weak self] password, result in
-                if result.isSuccess {
-                    // sync wallet info before send restoreSucceed
-                    if let wallets = restorefile?.wallets, let password = password {
-                        // if error occures send message otherwise send succeed message
-                        if case .failure = self?.walletProvider.syncWallets(wallets, password: password) {
-                            self?.walletRestoreSignal.send(.noWalletSecureFoundInRestoreFile)
-                            return
-                        }
+    private func sendRestoreData(data: Data, restorefile: RestoreFile?) {
+        Publishers.CombineLatest(vault.getValue(for: .walletPassword),
+                                 RecoverDataManager.performRestoreBackup(data)
+            .map { true }
+            .replaceError(with: false))
+        .sink { [weak self] password, result in
+            if result {
+                // sync wallet info before send restoreSucceed
+                if let wallets = restorefile?.wallets, let password = password {
+                    // if error occures send message otherwise send succeed message
+                    if case .failure = self?.walletProvider.syncWallets(wallets, password: password) {
+                        self?.walletRestoreSignal.send(.noWalletSecureFoundInRestoreFile)
+                        return
                     }
-                    let isWalletEmty = (restorefile?.wallets ?? []).isEmpty
-                    self?.walletRestoreSignal.send(.restoreSucceed(withWallet: !isWalletEmty))
-                } else {
-                    self?.walletRestoreSignal.send(.failedToParseRestoreFile)
                 }
+                let isWalletEmty = (restorefile?.wallets ?? []).isEmpty
+                self?.walletRestoreSignal.send(.restoreSucceed(withWallet: !isWalletEmty))
+            } else {
+                self?.walletRestoreSignal.send(.failedToParseRestoreFile)
             }
-            .store(in: &restorePipeStorage)
+        }
+        .store(in: &restorePipeStorage)
     }
 
     private func nextPipeForOriginRestoreData(
@@ -115,13 +117,10 @@ final class WalletRestorePipeline {
         guard let restorefile = restorefile else {
             return .failedToParseRestoreFile
         }
-
         let walletsInRestoreFile = restorefile.wallets ?? []
         if walletsInRestoreFile.isEmpty {
             return .restoreMessage(
-                RestoreBackupMWEMessage.withPayload {
-                    .init(backupInfo: String(data: decryptedData, encoding: .utf8))
-                },
+                decryptedData,
                 restorefile: restorefile
             )
         } else {
@@ -153,9 +152,7 @@ final class WalletRestorePipeline {
     func sendRestoreMessage(data: Data, restorefile: RestoreFile?) {
         self.walletRestoreSignal.send(
             .restoreMessage(
-                RestoreBackupMWEMessage.withPayload {
-                    .init(backupInfo: String(data: data, encoding: .utf8))
-                },
+                data,
                 restorefile: restorefile
             )
         )
@@ -166,7 +163,7 @@ extension WalletRestorePipeline {
     enum Pipeline {
         case startRestore(decryptedData: Data)
         case restoreFile(_ decryptedData: Data, _ restoreFile: RestoreFile?, _ items: [RestoreWalletItem])
-        case restoreMessage(RestoreBackupMWEMessage, restorefile: RestoreFile?)
+        case restoreMessage(Data, restorefile: RestoreFile?)
 
         case failedToParseRestoreFile
         case noWalletSecureFoundInRestoreFile

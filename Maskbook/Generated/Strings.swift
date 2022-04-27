@@ -129,6 +129,17 @@ enum L10n {
         }
       }
 
+      enum CameraAccess {
+        /// Please go to Settings to allow access.
+        static var description: String {
+          return L10n.tr("Localizable", "Common.Alert.CameraAccess.Description")
+        }
+        /// Mask Network would like to\naccess your camera
+        static var title: String {
+          return L10n.tr("Localizable", "Common.Alert.CameraAccess.Title")
+        }
+      }
+
       enum ChangeBackupPassword {
         /// You have successfully changed your backup password.
         static var description: String {
@@ -235,6 +246,28 @@ enum L10n {
         /// Backup failed!
         static var backupFailed: String {
           return L10n.tr("Localizable", "Common.Alert.LocalBackup.BackupFailed")
+        }
+      }
+
+      enum NoLocalWalletForWalletconnect {
+        /// Unable to connect to walletConnect as there is no local wallet.
+        static var description: String {
+          return L10n.tr("Localizable", "Common.Alert.NoLocalWalletForWalletconnect.Description")
+        }
+        /// Unable to connect
+        static var title: String {
+          return L10n.tr("Localizable", "Common.Alert.NoLocalWalletForWalletconnect.Title")
+        }
+      }
+
+      enum OnlyScanPersona {
+        /// The QR code is not Persona QR Code.\nPlease scan Persona QR Code.
+        static var description: String {
+          return L10n.tr("Localizable", "Common.Alert.OnlyScanPersona.Description")
+        }
+        /// Please Scan Persona QR Code
+        static var title: String {
+          return L10n.tr("Localizable", "Common.Alert.OnlyScanPersona.Title")
         }
       }
 
@@ -384,6 +417,17 @@ enum L10n {
         }
       }
 
+      enum TokenBalance {
+        /// Buy %@
+        static func btnConfirm(_ p1: String) -> String {
+          return L10n.tr("Localizable", "Common.Alert.TokenBalance.BtnConfirm", p1)
+        }
+        /// You have 0 %@ in your account to pay for transaction fees. Buy some %@ or deposit from another account.
+        static func description(_ p1: String, _ p2: String) -> String {
+          return L10n.tr("Localizable", "Common.Alert.TokenBalance.Description", p1, p2)
+        }
+      }
+
       enum WalletCreateSuccess {
         /// In order to protect your funds against hackers and thieves, store this recovery phrase in a safe and secure place.
         static var description: String {
@@ -470,6 +514,10 @@ enum L10n {
       static var done: String {
         return L10n.tr("Localizable", "Common.Controls.Done")
       }
+      /// Don’t Allow
+      static var dontAllow: String {
+        return L10n.tr("Localizable", "Common.Controls.DontAllow")
+      }
       /// download
       static var download: String {
         return L10n.tr("Localizable", "Common.Controls.Download")
@@ -485,6 +533,10 @@ enum L10n {
       /// Enable
       static var enable: String {
         return L10n.tr("Localizable", "Common.Controls.Enable")
+      }
+      /// To Settings
+      static var goSettings: String {
+        return L10n.tr("Localizable", "Common.Controls.GoSettings")
       }
       /// Import Wallet
       static var importWallet: String {
@@ -558,6 +610,10 @@ enum L10n {
       static var skip: String {
         return L10n.tr("Localizable", "Common.Controls.Skip")
       }
+      /// Speed Up
+      static var speedUp: String {
+        return L10n.tr("Localizable", "Common.Controls.SpeedUp")
+      }
       /// Take a photo
       static var takePhoto: String {
         return L10n.tr("Localizable", "Common.Controls.TakePhoto")
@@ -580,6 +636,10 @@ enum L10n {
       /// copied!
       static var copy: String {
         return L10n.tr("Localizable", "Common.Toast.Copy")
+      }
+      /// Failed
+      static var failed: String {
+        return L10n.tr("Localizable", "Common.Toast.Failed")
       }
       /// Saved!
       static var saved: String {
@@ -1134,6 +1194,17 @@ enum L10n {
       }
     }
 
+    enum MaskScan {
+      /// Scan Persona or walletConnect QR Code
+      static var scanAll: String {
+        return L10n.tr("Localizable", "Scene.MaskScan.ScanAll")
+      }
+      /// Scan Persona QR Code
+      static var scanPersona: String {
+        return L10n.tr("Localizable", "Scene.MaskScan.ScanPersona")
+      }
+    }
+
     enum MnemonicVerify {
       /// Tap each word in the correct order.
       static var description: String {
@@ -1317,9 +1388,13 @@ enum L10n {
       static var delete: String {
         return L10n.tr("Localizable", "Scene.PersonaContacts.Delete")
       }
-      /// You don’t have encrypted friends. \nInvite friends to download Mask Network.
+      /// No accounts captured on Timeline. \nInvite friends to download Mask Network.
       static var emptyContactsTips: String {
         return L10n.tr("Localizable", "Scene.PersonaContacts.EmptyContactsTips")
+      }
+      /// No contact found. This account may not \nbe captured on timeline.
+      static var searchContactTips: String {
+        return L10n.tr("Localizable", "Scene.PersonaContacts.SearchContactTips")
       }
     }
 
@@ -1730,6 +1805,10 @@ enum L10n {
         /// Add Contact
         static var btnAdd: String {
           return L10n.tr("Localizable", "Scene.Sendtransaction.Addcontact.BtnAdd")
+        }
+        /// Pending...
+        static var pending: String {
+          return L10n.tr("Localizable", "Scene.Sendtransaction.Addcontact.Pending")
         }
         /// Name
         static var placeholderName: String {
@@ -2338,6 +2417,14 @@ enum L10n {
       static var noTransaction: String {
         return L10n.tr("Localizable", "Scene.TransactionHistory.NoTransaction")
       }
+      /// Failed
+      static var statusFailed: String {
+        return L10n.tr("Localizable", "Scene.TransactionHistory.StatusFailed")
+      }
+      /// Pending...
+      static var statusPendind: String {
+        return L10n.tr("Localizable", "Scene.TransactionHistory.StatusPendind")
+      }
     }
 
     enum WalletBackup {
@@ -2506,10 +2593,6 @@ enum L10n {
       /// This wallet address was connected with WalletConnect. Importing this wallet address automatically dis-connects the walletConnect account.
       static var replaceWalletConnectWallet: String {
         return L10n.tr("Localizable", "Scene.WalletConnect.ReplaceWalletConnectWallet")
-      }
-      /// Scan the QR code
-      static var scan: String {
-        return L10n.tr("Localizable", "Scene.WalletConnect.Scan")
       }
       /// Scan QR Code
       static var scanQRCode: String {
@@ -2788,6 +2871,21 @@ enum L10n {
       /// Import Wallet
       static var walletsListImport: String {
         return L10n.tr("Localizable", "Scene.WalletsListAdd.WalletsListImport")
+      }
+    }
+
+    enum WelcomeIdentityEmpty {
+      /// Create a Persona
+      static var createAPersona: String {
+        return L10n.tr("Localizable", "Scene.WelcomeIdentityEmpty.CreateAPersona")
+      }
+      /// The portal to a new and open Internet
+      static var description: String {
+        return L10n.tr("Localizable", "Scene.WelcomeIdentityEmpty.Description")
+      }
+      /// Recover your Persona
+      static var recoverYourPersona: String {
+        return L10n.tr("Localizable", "Scene.WelcomeIdentityEmpty.RecoverYourPersona")
       }
     }
   }

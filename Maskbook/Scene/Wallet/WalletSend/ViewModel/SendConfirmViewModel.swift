@@ -35,4 +35,11 @@ class SendConfirmViewModel {
         self.selectedTokenPublisher.value = token
         self.gasFeeTokenTokenPublisher.value = token
     }
+    
+    init(selectedToken: Token?, gasPrice: BigUInt?, gasLimit: BigUInt, gasFeeNetModel: GasFeeCellItem?) {
+        self.gasLimitPublisher.value = gasLimit
+        self.gasPricePublisher.value = gasPrice
+        self.selectedTokenPublisher.value = selectedToken
+        self.gasFeeNetModelTokenPublisher.value = gasFeeNetModel
+    }
 }

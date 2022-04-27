@@ -16,7 +16,7 @@ class ContactsViewController: BaseViewController {
     static var searchBarHeight: CGFloat = 52
 
     static var tableHeaderHeight: CGFloat = 52 + 12
-    
+
     private var disposeBag = Set<AnyCancellable>()
 
     let viewModel = ContactsViewModel()
@@ -27,37 +27,8 @@ class ContactsViewController: BaseViewController {
     @InjectedProvider(\.personaManager)
     private var personaManager
 
-    private lazy var emptyView: UIStackView = VStackView(spacing: 24,
-                                                         distribution: StackView.Distribution.fill,
-                                                         alignment: StackView.Alignment.center) {
-        emptyImageView
-        emptyTipsLabel
-        inviteButton.cv.apply {
-            NSLayoutConstraint.activate([
-                $0.heightAnchor.constraint(equalToConstant: 40),
-                $0.widthAnchor.constraint(equalToConstant: 128)
-            ])
-        }
-    }
-
-    private lazy var emptyImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = Asset.Images.Scene.Personas.emptyContact.image
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-
-    private lazy var emptyTipsLabel: UILabel = {
-        let label = UILabel()
-        label.text = L10n.Scene.PersonaContacts.emptyContactsTips
-        label.textColor = Asset.Colors.Text.dark.color
-        label.font = FontStyles.MH6
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        return label
-    }()
-
-    private lazy var inviteButton = PrimeryButton(title: L10n.Common.Controls.invite)
+    @InjectedProvider(\.mainCoordinator)
+    private var mainCoordinator
 
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
@@ -101,8 +72,11 @@ class ContactsViewController: BaseViewController {
         return view
     }()
 
+    private lazy var emptyView = ContactEmptyView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTableView()
         showEmptyView()
         subscribeSignal()
         addSearchBar()
@@ -122,7 +96,7 @@ class ContactsViewController: BaseViewController {
         }
         NSLayoutConstraint.activate([
             emptyView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            emptyView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            emptyView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -10)
         ])
     }
 
@@ -140,18 +114,24 @@ class ContactsViewController: BaseViewController {
     }
 
     func subscribeSignal() {
-        inviteButton.cv.tap()
-            .sink { [weak self] _ in
-                guard let sender = self?.inviteButton else { return }
-                self?.shareAction(sender: sender)
+        viewModel.isSearching
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isSearching in
+                self?.emptyView.setSearchMode(isSearching: isSearching)
             }
             .store(in: &disposeBag)
-
         viewModel.dataSource
             .removeDuplicates()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.refreshTableView()
+            }
+            .store(in: &disposeBag)
+
+        viewModel.profileRecordsSubject
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] records in
+                self?.searchBar.alpha = records.isEmpty ? 0 : 1
             }
             .store(in: &disposeBag)
     }
@@ -165,18 +145,7 @@ class ContactsViewController: BaseViewController {
     }
 
     func refreshTableView() {
-        if !viewModel.profileRecordsSubject.value.isEmpty {
-            if tableView.superview == nil {
-                setupTableView()
-            }
-            tableView.reloadData()
-            emptyView.removeFromSuperview()
-        } else {
-            if emptyView.superview == nil {
-                showEmptyView()
-            }
-            tableView.removeFromSuperview()
-        }
+        emptyView.isHidden = !viewModel.dataSource.value.isEmpty
         tableView.reloadData()
     }
 
@@ -226,7 +195,7 @@ extension ContactsViewController {
             activityItems: [url],
             applicationActivities: [DownloadMaskActivity(url: url)]
         )
-        Coordinator.main.present(scene: .activityViewController(
+        mainCoordinator.present(scene: .activityViewController(
             activityViewController: activityViewController,
             sourceView: nil,
             barButtonItem: nil
@@ -260,7 +229,7 @@ extension ContactsViewController: UISearchBarDelegate {
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
-    
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }

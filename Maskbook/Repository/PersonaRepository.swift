@@ -10,6 +10,7 @@ import CoreData
 import CoreDataStack
 import Foundation
 import Kingfisher
+import SwiftyJSON
 
 enum LinkedProfileMergePolicy: Int, Codable {
     case replace = 0
@@ -241,5 +242,153 @@ enum PersonaRepository {
             try? viewContext.saveOrRollback()
         }
     }
+ 
+    static func getPersonaCount() async -> Int {
+        await withCheckedContinuation { continuation in
+            let fetchRequest = PersonaRecord.sortedFetchRequest
+            fetchRequest.predicate = PersonaRecord.predicate(initialized: true)
+            
+            var count = 0
+            backgroundContext.performAndWait {
+                count = (try? backgroundContext.count(for: fetchRequest)) ?? 0
+            }
+            continuation.resume(returning: count)
+        }
+    }
     
+    static func getAssociatedAccountsCount() async -> Int {
+        await withCheckedContinuation { continuation in
+            let fetchRequest = PersonaRecord.sortedFetchRequest
+            fetchRequest.predicate = PersonaRecord.hasLinkedProfiles()
+            fetchRequest.relationshipKeyPathsForPrefetching = ["linkedProfiles"]
+            
+            var count = 0
+            backgroundContext.performAndWait {
+                if let personasWithLinkedProfiels = try? backgroundContext.fetch(fetchRequest) {
+                    count = personasWithLinkedProfiels.reduce(0) { partialResult, record in
+                        partialResult + (record.linkedProfiles?.count ?? 0)
+                    }
+                }
+            }
+            continuation.resume(returning: count)
+        }
+    }
+    
+    static func getPersonasForBackup() async -> [JSON] {
+        await withCheckedContinuation { continuation in
+            var personas: [JSON] = []
+            let fetchRequest = PersonaRecord.sortedFetchRequest
+            fetchRequest.predicate = PersonaRecord.predicate(
+                identifier: nil,
+                hasPrivateKey: nil,
+                hasLogout: nil,
+                nameContains: nil,
+                initialized: true)
+            
+            backgroundContext.performAndWait {
+                if let personaRecords = try? backgroundContext.fetch(fetchRequest) {
+                    personas = personaRecords.compactMap { $0.getBackupJson() }
+                }
+            }
+            continuation.resume(returning: personas)
+        }
+    }
+    
+    static func restoreFromJson(_ json: JSON) throws {
+        var restoreError: Error?
+        backgroundContext.performAndWait {
+            for persona in json.arrayValue {
+                let newPersonaRecord = PersonaRecord(context: backgroundContext)
+                
+                newPersonaRecord.identifier = persona[Persona.CodingKeys.identifier.rawValue].string
+                newPersonaRecord.nickname = persona[Persona.CodingKeys.nickname.rawValue].string
+                let mnemonicJson = persona[Persona.CodingKeys.mnemonic.rawValue]
+                newPersonaRecord.mnemonic = mnemonicJson[Persona.Mnemonic.CodingKeys.words.rawValue].string
+                let mnemonicParameterJson = mnemonicJson[Persona.Mnemonic.CodingKeys.parameter.rawValue]
+                newPersonaRecord.path = mnemonicParameterJson[Persona.Mnemonic.Parameter.CodingKeys.path.rawValue].string
+                newPersonaRecord.withPassword = mnemonicParameterJson[Persona.Mnemonic.Parameter.CodingKeys.withPassword.rawValue].boolValue
+                
+                if persona[Persona.CodingKeys.privateKey.rawValue].dictionary != nil {
+                    newPersonaRecord.privateKey = persona[Persona.CodingKeys.privateKey.rawValue].rawString()
+                }
+                if persona[Persona.CodingKeys.publicKey.rawValue].dictionary != nil {
+                    newPersonaRecord.publicKey = persona[Persona.CodingKeys.publicKey.rawValue].rawString()
+                }
+                if persona[Persona.CodingKeys.localKey.rawValue].dictionary != nil {
+                    newPersonaRecord.localKey = persona[Persona.CodingKeys.localKey.rawValue].rawString()
+                }
+                
+                newPersonaRecord.hasLogout = false
+                newPersonaRecord.initialized = true
+                
+                if let createdAt = persona[Persona.CodingKeys.createdAt.rawValue].double {
+                    newPersonaRecord.createdAt = Date(timeIntervalSince1970: createdAt)
+                } else {
+                    newPersonaRecord.createdAt = Date()
+                }
+                if let updatedAt = persona[Persona.CodingKeys.updatedAt.rawValue].double {
+                    newPersonaRecord.updatedAt = Date(timeIntervalSince1970: updatedAt)
+                } else {
+                    newPersonaRecord.updatedAt = Date()
+                }
+                
+                for linkedProfile in persona[Persona.CodingKeys.linkedProfiles.rawValue].arrayValue {
+                    if let linkedProfileIdentifier = linkedProfile.arrayValue.first?.string as? String {
+                        if let profileRecord = ProfileRepository.queryProfile(
+                            identifier: linkedProfileIdentifier,
+                            context: backgroundContext) {
+                            newPersonaRecord.addToLinkedProfiles(profileRecord)
+                        }
+                    }
+                }
+                
+                do {
+                    try backgroundContext.saveOrRollback()
+                } catch {
+                    restoreError = error
+                }
+            }
+        }
+        if let restoreError = restoreError {
+            throw restoreError
+        }
+    }
+}
+
+extension PersonaRecord {
+    func getBackupJson() -> JSON? {
+        guard identifier != nil else {
+            return nil
+        }
+        var backupDict = [String: Any]()
+        backupDict[Persona.CodingKeys.identifier.rawValue] = identifier
+        backupDict[Persona.CodingKeys.nickname.rawValue] = nickname
+        if let privateKey = privateKey {
+            backupDict[Persona.CodingKeys.privateKey.rawValue] = JSON(parseJSON: privateKey)
+        }
+        if let publicKey = publicKey {
+            backupDict[Persona.CodingKeys.publicKey.rawValue] = JSON(parseJSON: publicKey)
+        }
+        if let localKey = localKey {
+            backupDict[Persona.CodingKeys.localKey.rawValue] = JSON(parseJSON: localKey)
+        }
+        if let mnemonic = mnemonic {
+            backupDict[Persona.CodingKeys.mnemonic.rawValue] = JSON(parseJSON: mnemonic)
+        }
+        
+        backupDict[Persona.CodingKeys.createdAt.rawValue] = createdAt?.timeIntervalSince1970
+        backupDict[Persona.CodingKeys.updatedAt.rawValue] = updatedAt?.timeIntervalSince1970
+        
+        var linkedProfilesArray = [[Any]]()
+        linkedProfiles?.forEach {
+            if let profile = $0 as? ProfileRecord,
+               let identifier = profile.identifier
+            {
+                linkedProfilesArray.append([identifier, ["connectionConfirmState": "confirmed"]])
+            }
+        }
+        backupDict[Persona.CodingKeys.linkedProfiles.rawValue] = linkedProfilesArray
+        
+        return JSON(backupDict)
+    }
 }

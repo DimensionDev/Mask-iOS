@@ -28,6 +28,7 @@ class SendTransactionConfirmViewController: BaseViewController {
     let viewModel = SendConfirmViewModel()
     var toAddress: String?
     var disposeBag = Set<AnyCancellable>()
+    let keyboardExpandView = UIView()
     
     typealias ContactParam = Coordinator.Scene.WalletContactParam
     var param: ContactParam?
@@ -254,6 +255,7 @@ class SendTransactionConfirmViewController: BaseViewController {
         toAddressDetailLabel.text = toAddress
         getNetData()
         setSubscriptions()
+        handleForKeyboard()
     }
     // swiftlint:disable line_length
 
@@ -410,7 +412,14 @@ class SendTransactionConfirmViewController: BaseViewController {
             make.right.equalTo(-LayoutConstraints.trailing)
             make.left.equalTo(LayoutConstraints.leading)
             make.height.equalTo(54)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-24)
+        }
+        
+        view.addSubview(keyboardExpandView)
+        keyboardExpandView.snp.makeConstraints { make in
+            make.top.equalTo(sendButton.snp.bottom).offset(8)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            make.height.equalTo(0)
         }
     }
 
@@ -473,8 +482,11 @@ class SendTransactionConfirmViewController: BaseViewController {
                 guard let gasPrice = gasPrice else { return }
                 guard let price = gasFeeToken?.price else { return }
                 let gasFee = EthUtil.getGasFee(gwei: gasPrice, gasLimit: gasLimit, price: price.doubleValue)
-                self?.feeButton.setTitle("\(L10n.Scene.Sendtransaction.Gasprice.fee) :\(maskUserDefaults.currency.symbol)\(gasFee)", for: .normal)
-                
+                if NSDecimalNumber(string: gasFee).compare(NSDecimalNumber(string: "0.01")) == .orderedAscending {
+                    self?.feeButton.setTitle("\(L10n.Scene.Sendtransaction.Gasprice.fee) :\(maskUserDefaults.currency.symbol)< 0.01", for: .normal)
+                }else {
+                    self?.feeButton.setTitle("\(L10n.Scene.Sendtransaction.Gasprice.fee) :\(maskUserDefaults.currency.symbol)\(gasFee)", for: .normal)
+                }                
                 guard let totalAmount = gasFeeToken?.displayQuantity else { return }
                 guard let gas = Web3.Utils.formatToEthereumUnits(gasPrice * gasLimit, toUnits: .eth, decimals: 6) else { return }
                 let isShow = NSDecimalNumber(string: gas).compare(totalAmount) == .orderedDescending
@@ -539,7 +551,7 @@ class SendTransactionConfirmViewController: BaseViewController {
         
         if amount.isNotEmpty {
             Coordinator.main.present(
-                scene: .sendTransactionPopConfirm(sendConfirmViewModel: self.viewModel, toAddress: toAddress, amount: amount),
+                scene: .sendTransactionPopConfirm(sendConfirmViewModel: self.viewModel, toAddress: toAddress, amount: amount, nonce: nil),
                 transition: .panModel(animated: true))
         }
     }
@@ -555,6 +567,51 @@ class SendTransactionConfirmViewController: BaseViewController {
                 self.viewModel.isShowBioIDPage.value = false
             }
         }
+    }
+    
+    func handleForKeyboard() {
+        let endFrame = KeyboardResponderService.shared.endFrame.removeDuplicates()
+        let willShow = NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification, object: nil)
+        let willHide = NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification, object: nil)
+        Publishers.CombineLatest(willShow, endFrame).sink { notification, _ in
+            guard let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else {
+                return
+            }
+            guard let endFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+                return
+            }
+            UIView.animate(
+                withDuration: duration,
+                delay: 0,
+                options: .curveEaseIn) {
+                    self.keyboardExpandView.snp.remakeConstraints { make in
+                        make.top.equalTo(self.sendButton.snp.bottom).offset(8)
+                        make.leading.trailing.equalToSuperview()
+                        make.bottom.equalTo(self.view.snp.bottom)
+                        make.height.equalTo(endFrame.height)
+                        self.sendButton.layoutIfNeeded()
+                    }
+            }
+            self.view.layoutIfNeeded()
+        }.store(in: &subscriptions)
+        
+        Publishers.CombineLatest(willHide, endFrame).sink { notification, _ in
+            guard let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else {
+                return
+            }
+            UIView.animate(
+                withDuration: duration,
+                delay: 0,
+                options: .curveEaseIn) {
+                    self.keyboardExpandView.snp.remakeConstraints { make in
+                        make.top.equalTo(self.sendButton.snp.bottom).offset(8)
+                        make.leading.trailing.equalToSuperview()
+                        make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+                        make.height.equalTo(0)
+                    }
+            }
+            self.view.layoutIfNeeded()
+        }.store(in: &subscriptions)
     }
 }
 
@@ -591,6 +648,7 @@ extension SendTransactionConfirmViewController {
     
     @objc
     func sendTransaction(_ sender: UIButton) {
+        self.view.endEditing(true)
         guard !self.viewModel.isShowBioIDPage.value else {
             verifyWithFaceId()
             return
@@ -624,7 +682,6 @@ extension SendTransactionConfirmViewController: GasFeeBackDelegate {
         }
         self.viewModel.gasPricePublisher.value = gwei * (BigUInt(10).power(9))
         self.viewModel.gasLimitPublisher.value = gasLimitValut
-        self.amountTextField.text = ""
         self.view.endEditing(true)
     }
 }

@@ -168,14 +168,6 @@ private extension ImportPrivateKeyViewController {
             confirmButtonText: L10n.Common.Controls.done,
             imageType: .success,
             confirmButtonClicked: { _ in
-                let walletListVC = self.navigationController?.viewControllers.first(where: { vc in
-                    return vc.isKind(of: WalletListViewController.self)
-                })
-                guard walletListVC == nil else {
-                    self.navigationController?.popToViewController(walletListVC!, animated: true)
-                    return
-                }
-                
                 Coordinator.main.present(scene: .balance, transition: .replaceCurrentNavigation(tab: .wallet, animated: true))            
             }
         )

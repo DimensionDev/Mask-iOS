@@ -14,7 +14,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _ceramicnetwork_stream_tile__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(52248);
 /* harmony import */ var _ceramicnetwork_stream_tile__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_ceramicnetwork_stream_tile__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _ceramicnetwork_stream_caip10_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6303);
+/* harmony import */ var _ceramicnetwork_stream_caip10_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(89421);
 /* harmony import */ var _ceramicnetwork_stream_caip10_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_ceramicnetwork_stream_caip10_link__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _ceramicstudio_idx_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(84665);
 /* harmony import */ var caip__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5937);

@@ -122,7 +122,6 @@ class BalanceAccountCell: UITableViewCell {
         
         selectionStyle = .none
         backgroundColor = .clear
-        contentView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: LayoutConstraints.leading, bottom: 0, trailing: LayoutConstraints.trailing)
         
         accountCardView.delegate = self
         accountCardView.translatesAutoresizingMaskIntoConstraints = false
@@ -136,10 +135,8 @@ class BalanceAccountCell: UITableViewCell {
                 equalTo: contentView.safeAreaLayoutGuide.topAnchor,
                 constant: LayoutConstraints.top
             ),
-            accountCardView.leadingAnchor.constraint(
-                equalTo: contentView.readableContentGuide.leadingAnchor),
-            accountCardView.trailingAnchor.constraint(
-                equalTo: contentView.readableContentGuide.trailingAnchor),
+            accountCardView.leadingAnchor.constraint(equalTo: contentView.readableContentGuide.leadingAnchor),
+            accountCardView.trailingAnchor.constraint(equalTo: contentView.readableContentGuide.trailingAnchor),
             accountCardView.heightAnchor.constraint(equalToConstant: 186)
         ])
         
@@ -180,9 +177,22 @@ class BalanceAccountCell: UITableViewCell {
     
     @objc
     private func sendButtonDidClicked() {
-        Coordinator.main.present(
-            scene: .sendTransaction(param: nil),
-            transition: .detail(animated: true))
+        
+        let mainToken = WalletAssetManager.shared.getDefaultMainToken()
+        
+        if let quantity = mainToken?.quantity {
+            
+            if quantity.compare(NSDecimalNumber.zero) == .orderedSame {
+                 showBalanceNotEnoughAlert()
+            } else {
+                Coordinator.main.present(
+                    scene: .sendTransaction(param: nil),
+                    transition: .detail(animated: true))
+            }
+        } else {
+            showBalanceNotEnoughAlert()
+        }
+
     }
     
     @objc
@@ -202,5 +212,29 @@ class BalanceAccountCell: UITableViewCell {
 extension BalanceAccountCell: AccountCardViewDelegate {
     func moreButtonDidClick(view: AccountCardView, button: UIButton) {
         self.delegate?.balanceAccountCell(cell: self, button: button)
+    }
+}
+
+extension BalanceAccountCell {
+    func showBalanceNotEnoughAlert() {
+        let mainToken = maskUserDefaults.network.mainToken
+        guard let symbol = mainToken?.symbol.uppercased() else { return }
+        
+        let des = L10n.Common.Alert.TokenBalance.description(symbol, symbol)
+        let btnConfirm = L10n.Common.Alert.TokenBalance.btnConfirm(symbol)
+        
+        let alertController = AlertController(
+            title: "",
+            message: des,
+            confirmButtonText: btnConfirm,
+            cancelButtonText: L10n.Common.Controls.cancel,
+            imageType: .warning,
+            confirmButtonClicked: { _ in
+                Coordinator.main.present(scene: .showTransakIntegration, transition: .modal())
+            },
+            cancelButtonClicked: nil)
+        Coordinator.main.present(scene: .alertController(alertController:
+                                                            alertController),
+                                 transition: .alertController(completion: nil))
     }
 }

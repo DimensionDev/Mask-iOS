@@ -31,8 +31,8 @@ extension ConnectableSocialListViewController {
                 titleLabel
             }
             NSLayoutConstraint.activate([
-                imageView.widthAnchor.constraint(equalToConstant: 48),
-                imageView.heightAnchor.constraint(equalToConstant: 48),
+                imageView.widthAnchor.constraint(equalToConstant: 64),
+                imageView.heightAnchor.constraint(equalToConstant: 64),
                 imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
                 imageView.topAnchor.constraint(equalTo: topAnchor, constant: 12)
             ])
@@ -53,9 +53,9 @@ extension ConnectableSocialListViewController {
         }
     
         func addSelfConstraints() {
-            let width = (UIScreen.main.bounds.width - 45) / 3
+            let width = (UIScreen.main.bounds.width - LayoutConstraints.leading * 2) / 3
             NSLayoutConstraint.activate([
-                heightAnchor.constraint(equalToConstant: 100),
+                heightAnchor.constraint(equalToConstant: 115),
                 widthAnchor.constraint(equalToConstant: width).priority(.required - 1)
             ])
         }

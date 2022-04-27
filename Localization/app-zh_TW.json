@@ -1,6 +1,6 @@
 {
     "tab": {
-        "personas": "角色",
+        "personas": "",
         "wallet": "錢包",
         "labs": "實驗功能",
         "setting": "設定"
@@ -71,18 +71,11 @@
             "change_backup_password_failed": {
                 "title": ""
             },
-            "wallet_backup": {
-                "title": "複製成功"
-            },
-            "identity_phrase": {
-                "title": "",
-                "description": ""
-            },
             "identify_code_screenshot_warning": {
                 "title": "警告",
                 "description": ""
             },
-            "identity_create": {
+            "persona_create": {
                 "title": "",
                 "description": ""
             },
@@ -132,6 +125,26 @@
             "scan_persona_exist": {
                 "title": "",
                 "description": ""
+            },
+            "wrong_folder": {
+                "title": "",
+                "description": ""
+            },
+            "backup_popup_binding_first": {
+                "title": "",
+                "description": ""
+            },
+            "camera_access": {
+                "title": "",
+                "description": ""
+            },
+            "only_scan_persona": {
+                "title": "",
+                "description": ""
+            },
+            "no_local_wallet_for_walletconnect": {
+                "title": "",
+                "description": ""
             }
         },
         "controls": {
@@ -165,14 +178,36 @@
             "edit": "",
             "download": "",
             "skip": "",
-            "download_next": ""
+            "download_next": "",
+            "select_from_photo": "",
+            "take_photo": "",
+            "save": "",
+            "move_data_now": "",
+            "remind_me_later": "",
+            "go_settings": "",
+            "dont_allow": "",
+            "speed_up": ""
         },
         "toast": {
-            "saved": ""
+            "saved": "",
+            "copy": ""
         },
         "loading": "讀取中…"
     },
     "scene": {
+        "guide": {
+            "skip": "",
+            "lets_start": "",
+            "description1": "",
+            "description2": "",
+            "description3": "",
+            "description4": ""
+        },
+        "welcome_identity_empty": {
+            "create_a_persona": "",
+            "recover_your_persona": "",
+            "description": ""
+        },
         "terms_of_service": {
             "title": "",
             "description": "",
@@ -408,7 +443,10 @@
         "NFT_Detail": {
             "list_price": "",
             "last_sale_Price": "",
-            "floor_price": ""
+            "floor_price": "",
+            "save_photo": "",
+            "collection_web": "",
+            "etherscan": ""
         },
         "sendTransaction": {
             "send": {
@@ -421,7 +459,10 @@
                 "Label_Password": "",
                 "btn_withoutPassword": "",
                 "amount_error": "",
-                "password_error": ""
+                "password_error": "",
+                "gasFee_error": "",
+                "contact": "",
+                "recent": ""
             },
             "addContact": {
                 "btn_add": "",
@@ -481,7 +522,7 @@
             "password_demand": ""
         },
         "personas": {
-            "personas": "角色",
+            "personas": "",
             "tabs": {
                 "social": "",
                 "post": "",
@@ -502,6 +543,9 @@
                 "create_persona": "建立角色",
                 "input_persona_name": ""
             },
+            "search": {
+                "placeholder": ""
+            },
             "delete": "",
             "delete_tip": "",
             "add_persona": ""
@@ -518,6 +562,7 @@
         },
         "persona_contacts": {
             "empty_contacts_tips": "",
+            "search_contact_tips": "",
             "delete": "",
             "contact": "聯絡人"
         },
@@ -535,6 +580,11 @@
         "persona_download": {
             "identity_id": "",
             "download_tips": ""
+        },
+        "persona_avatar": {
+            "title": "",
+            "crop": "",
+            "remove_avatar": ""
         },
         "wallet_balance": {
             "btn_swap": "交換",
@@ -564,7 +614,9 @@
             "walletconnect_switch_network_alert": ""
         },
         "transaction_history": {
-            "no_transaction": ""
+            "no_transaction": "",
+            "status_pendind": "",
+            "status_failed": ""
         },
         "wallet_receive": {
             "btn_share": "分享",
@@ -738,6 +790,10 @@
                 "cloud_backup_password_hint": ""
             }
         },
+        "mask_scan": {
+            "scan_persona": "",
+            "scan_all": ""
+        },
         "wallet_connect": {
             "wallet_connect": "",
             "select_wallet": "",
@@ -747,7 +803,6 @@
             "no_wallets": "",
             "connecting": "",
             "connect_success": "",
-            "scan": "",
             "disconnect": "",
             "connection_fail": "",
             "could_not_switch_blockchain_network_title": "",
@@ -809,6 +864,12 @@
             "empty": "",
             "share_message_official": "",
             "share_message_unsupport_platform": ""
+        },
+        "move_backup_data": {
+            "title": "",
+            "description1": "",
+            "description2": "",
+            "description3": ""
         }
     },
     "chain": {
