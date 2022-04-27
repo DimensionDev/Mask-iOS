@@ -1,11 +1,15 @@
 import XCTest
-@testable import MaskbookPlugin
+import MaskbookPlugin
+import SwiftyJSON
 
-final class MaskbookPluginTests: XCTestCase {
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(MaskbookPlugin().text, "Hello, World!")
+class MaskbookPluginTests: XCTestCase {
+
+    func testExample() {
+        let resources = MaskbookPluginResources()
+
+        XCTAssertEqual(MaskbookPluginResources.id, "eofkdgkhfoebecmamljfaepckoecjhib")
+        XCTAssertNotEqual(resources.manifest, JSON.null)
+        XCTAssert(resources.resources.dictionaryValue.isEmpty == false)
     }
+
 }
