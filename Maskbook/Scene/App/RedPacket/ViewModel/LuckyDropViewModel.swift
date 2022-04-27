@@ -412,24 +412,11 @@ final class LuckyDropViewModel: ObservableObject {
                     amount: "\(UInt.max)"
                 )
                 let transacationResult = try transacation.assemble()
-                let (promise, resolver) = Promise<String>.pending()
-                await MainActor.run {
-                    self.mainCoordinator.present(
-                        scene: .maskSendResolverTransactionPopView(
-                            resolver: resolver,
-                            transaction: transacationResult,
-                            transactionOptions: transacation.transactionOptions
-                        ),
-                        transition: .panModel(animated: true)
-                    )
-                }
-                // block thread
-                let hash = try promise.wait()
-                log.debug("approve/revoke hash \(hash)", source: "lucky drop")
-                
-                await MainActor.run {
-                    self.checkApproveStatus(txHash: hash)
-                }
+                let hashTX = try await self.presentTransactionPopView(
+                    transacationResult: transacationResult,
+                    transacation: transacation)
+                log.debug("approve/revoke hash \(hashTX)", source: "lucky drop")
+                await self.checkApproveStatus(txHash: hashTX)
             } catch {
                 await MainActor.run {
                     // This is just to make `checkParam` work properly.
@@ -439,6 +426,29 @@ final class LuckyDropViewModel: ObservableObject {
                     log.error("error approve/revoke token", source: "lucky drop")
                 }
             }
+        }
+    }
+    
+    private func presentTransactionPopView(
+        transacationResult: EthereumTransaction,
+        transacation: WriteTransaction
+    ) async throws -> String {
+        try await withCheckedThrowingContinuation { [weak self] continuation in
+            let comletion: ((Swift.Result<String, Error>) -> Void) = { result in
+                switch result {
+                case .success(let txHash): continuation.resume(returning: txHash)
+                case .failure(let error): continuation.resume(throwing: error)
+                }
+            }
+            
+            self?.mainCoordinator.present(
+                scene: .maskSendResolverTransactionPopView(
+                    completion: comletion,
+                    transaction: transacationResult,
+                    transactionOptions: transacation.transactionOptions
+                ),
+                transition: .panModel(animated: true)
+            )
         }
     }
     

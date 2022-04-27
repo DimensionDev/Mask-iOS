@@ -72,6 +72,7 @@ extension ABIContract {
         return tx
     }
     
+    @MainActor
     func write(
         _ methodName: String,
         param: [AnyObject]? = nil,
@@ -93,23 +94,37 @@ extension ABIContract {
                 return nil
             }
         
-        let (promise, resolver) = Promise<String>.pending()
-        return await Task {
+        return await Task.detached {
             guard let transaction = try? tx.assemble(transactionOptions: tx.transactionOptions) else {
                 return nil
             }
-            await MainActor.run {
-                mainCoordinator.present(
-                    scene: .maskSendResolverTransactionPopView(
-                        resolver: resolver,
-                        transaction: transaction,
-                        transactionOptions: tx.transactionOptions
-                    ),
-                    transition: .panModel()
-                )
-            }
-            return try? promise.wait()
+            return try? await self.presentTransactionPopView(transaction: transaction, tx: tx)
         }.value
+    }
+    
+    @MainActor
+    private func presentTransactionPopView(
+        transaction: EthereumTransaction,
+        tx: WriteTransaction
+    ) async throws -> String {
+        try await withCheckedThrowingContinuation { continuation in
+            mainCoordinator.present(
+                scene: .maskSendResolverTransactionPopView(
+                    completion: { result in
+                        switch result {
+                        case .success(let txHash):
+                            continuation.resume(returning: txHash)
+                            
+                        case .failure(let error):
+                            continuation.resume(throwing: error)
+                        }
+                    },
+                    transaction: transaction,
+                    transactionOptions: tx.transactionOptions
+                ),
+                transition: .panModel()
+            )
+        }
     }
 }
 

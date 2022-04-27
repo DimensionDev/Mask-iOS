@@ -26,7 +26,7 @@ final class SendConfirmPopViewController: UIViewController {
     var vault
     var disposeBag = Set<AnyCancellable>()
     private var web3Request: MaskWeb3MessageRequest?
-    private var resolver: Resolver<String>?
+    private var completion: ((Swift.Result<String, Error>) -> Void)?
 
     weak var web3delegate: SendConfirmPopViewDelegate?
     
@@ -253,12 +253,13 @@ final class SendConfirmPopViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
-    init(transaction: EthereumTransaction, transactionOptions: TransactionOptions, resolver: Resolver<String>?) {
-        self.resolver = resolver
+    init(transaction: EthereumTransaction,
+         transactionOptions: TransactionOptions,
+         completion: ((Swift.Result<String, Error>) -> Void)?) {
+        self.completion = completion
         self.viewModel = SendConfirmPopViewModel(
             transaction: transaction,
-            transactionOptions: transactionOptions,
-            resolver: resolver
+            transactionOptions: transactionOptions
         )
         super.init(nibName: nil, bundle: nil)
     }
@@ -360,8 +361,8 @@ final class SendConfirmPopViewController: UIViewController {
                            let response = try? Response(url: request.url, value: txHash, id: id) {
                             self.walletConnectDelegate?.walletConnectTransactionResponse(response: response)
                         }
-                        if let resolver = self.resolver {
-                            resolver.fulfill(txHash)
+                        if let completion = self.completion {
+                            completion(.success(txHash))
                         }
                         
                     case .failure(let error):
@@ -374,8 +375,8 @@ final class SendConfirmPopViewController: UIViewController {
                            let response = try? Response(request: request, error: .errorResponse) {
                             self.walletConnectDelegate?.walletConnectTransactionResponse(response: response)
                         }
-                        if let resolver = self.resolver {
-                            resolver.reject(error)
+                        if let completion = self.completion {
+                            completion(.failure(error))
                         }
                     }
                     DispatchQueue.main.async {
@@ -415,7 +416,9 @@ extension SendConfirmPopViewController {
         if let request = walletConnectRequest {
             walletConnectDelegate?.walletConnectTransactionResponse(response: .reject(request))
         }
-        resolver?.reject(WalletSendError.cancelled)
+        if let completion = completion {
+            completion(.failure(WalletSendError.cancelled))
+        }
         dismiss(animated: true, completion: nil)
     }
     

@@ -113,7 +113,7 @@ class Coordinator {
                                         transaction: EthereumTransaction,
                                         transactionOptions: TransactionOptions,
                                                      request: Request)
-        case maskSendResolverTransactionPopView(resolver: Resolver<String>?,
+        case maskSendResolverTransactionPopView(completion: ((Swift.Result<String, Error>) -> Void)?,
                                                 transaction: EthereumTransaction,
                                                 transactionOptions: TransactionOptions)
         case scanBase(delegate: ScannerLineViewControllerDelegate)
@@ -531,12 +531,12 @@ extension Coordinator {
             popVc.walletConnectDelegate = delegate
             return popVc
             
-        case let .maskSendResolverTransactionPopView(resolver,
+        case let .maskSendResolverTransactionPopView(completion,
                                                      transaction,
                                                      transactionOptions):
             let popVc = SendConfirmPopViewController(transaction: transaction,
                                                      transactionOptions: transactionOptions,
-                                                     resolver: resolver)
+                                                     completion: completion)
             return popVc
             
         case let .scanBase(viewController):
