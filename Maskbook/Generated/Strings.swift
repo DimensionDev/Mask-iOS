@@ -735,6 +735,10 @@ enum L10n {
       static var shareTitle: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Share-Title")
       }
+      /// Lucky Drop
+      static var title: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Title")
+      }
       /// Token
       static var token: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Token")

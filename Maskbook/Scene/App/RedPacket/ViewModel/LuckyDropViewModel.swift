@@ -73,7 +73,7 @@ final class LuckyDropViewModel: ObservableObject {
             return ""
         }
         
-        let symbol = maskUserDefaults.currency.symbol
+        let symbol = settings.currency.symbol
         let gwei = gasFeeItem.gWei
         let gasPriceDoubleValue = Double(EthUtil.getGasFeeFiat(gwei: gwei, gasLimit: gasLimt, price: tokenPrice)) ?? 0
         var gasPrice: String
@@ -147,7 +147,7 @@ final class LuckyDropViewModel: ObservableObject {
     }
     
     var luckyDropAddressStr: String? {
-        return maskUserDefaults.network.redPacketAddressV4
+        return settings.network.redPacketAddressV4
     }
     
     var confirmTitle: String {
@@ -295,7 +295,7 @@ final class LuckyDropViewModel: ObservableObject {
         // tokenAddr
         var tokenAddr: String = ""
         if token.isMainToken == true {
-            tokenAddr = maskUserDefaults.network.nativeTokenAddress
+            tokenAddr = settings.network.nativeTokenAddress
         } else if let address = token.contractAddress {
             tokenAddr = address
         }
@@ -342,7 +342,7 @@ final class LuckyDropViewModel: ObservableObject {
     
     // MARK: - Private method
     private func getAllowance() async -> BigUInt? {
-        guard let fromAddress = maskUserDefaults.defaultAccountAddress,
+        guard let fromAddress = settings.defaultAccountAddress,
               let originalOwner = EthereumAddress(fromAddress) else {
                   return nil
               }
@@ -388,7 +388,7 @@ final class LuckyDropViewModel: ObservableObject {
     }
     
     private func approveToken(password: String, network: BlockChainNetwork) {
-        guard let fromAddress = maskUserDefaults.defaultAccountAddress,
+        guard let fromAddress = settings.defaultAccountAddress,
               let fromAddressEthFormat = EthereumAddress(fromAddress) else {
             return
         }

@@ -12,7 +12,7 @@ import CoreDataStack
 import Foundation
 import web3swift
 
-class RedPacketConfirmViewModel: NSObject, ObservableObject {
+class RedPacketConfirmViewModel: ObservableObject {
     @Published var gasFeeItem: GasFeeCellItem?
     @Published var inputParam: HappyRedPacketV4.CreateRedPacketInput?
     @Published var token: Token?
@@ -123,7 +123,7 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
             return ""
         }
         
-        let symbol = maskUserDefaults.currency.symbol
+        let symbol = settings.currency.symbol
         let gwei = gasFeeItem.gWei
         let gasPriceDoubleValue = Double(EthUtil.getGasFeeFiat(gwei: gwei, gasLimit: gasLimt, price: tokenPrice)) ?? 0
         var gasPrice: String
@@ -166,8 +166,6 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
         self.transaction = param?.transaction
         self.password = param?.password
         self.completion = completion
-        
-        super.init()
         
         gasFeeViewModel?.confirmedGasFeePublisher
             .removeDuplicates()
@@ -323,7 +321,7 @@ class RedPacketConfirmViewModel: NSObject, ObservableObject {
                 transactionOptions: transactionOptions,
                 maxFeePerGas: maxFeePerGas == 0 ? nil : maxFeePerGas,
                 maxInclusionFeePerGas: maxInclusionFeePerGas == 0 ? nil : maxInclusionFeePerGas,
-                network: maskUserDefaults.network,
+                network: settings.network,
                 completionWrapper)
         }
     }

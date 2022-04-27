@@ -901,6 +901,7 @@
     },
     "plugins": {
         "luckyDrop": {
+            "title": "Lucky Drop",
             "plugin_red_packet_best_wishes": "Best Wishes!",
             "buttons": {
                 "risk-warning": "Confirm Risk Warning",
