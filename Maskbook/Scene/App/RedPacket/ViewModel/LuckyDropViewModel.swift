@@ -557,7 +557,7 @@ final class LuckyDropViewModel: ObservableObject {
             self.updateButton(state: .noQuantity)
             return
         }
-        guard quantity.doubleValue >= 0 else {
+        guard quantity.doubleValue > 0 else {
             self.updateButton(state: .noQuantity)
             return
         }
