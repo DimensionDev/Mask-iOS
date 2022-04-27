@@ -13,11 +13,7 @@ struct WalletBottomWidgetView: View {
     private var settings
     @ObservedObject
     var viewModel: WalletBottomWidgetViewModel
-    
-    var safeBottomArea: CGFloat {
-        UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0
-    }
-    
+   
     var body: some View {
         HStack(spacing: 0) {
             Button {

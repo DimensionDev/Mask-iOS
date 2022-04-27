@@ -73,7 +73,7 @@ final class LuckyDropViewModel: ObservableObject {
             return ""
         }
         
-        let symbol = maskUserDefaults.currency.symbol
+        let symbol = settings.currency.symbol
         let gwei = gasFeeItem.gWei
         let gasPriceDoubleValue = Double(EthUtil.getGasFeeFiat(gwei: gwei, gasLimit: gasLimt, price: tokenPrice)) ?? 0
         var gasPrice: String
@@ -147,7 +147,7 @@ final class LuckyDropViewModel: ObservableObject {
     }
     
     var luckyDropAddressStr: String? {
-        return maskUserDefaults.network.redPacketAddressV4
+        return settings.network.redPacketAddressV4
     }
     
     var confirmTitle: String {
@@ -295,7 +295,7 @@ final class LuckyDropViewModel: ObservableObject {
         // tokenAddr
         var tokenAddr: String = ""
         if token.isMainToken == true {
-            tokenAddr = maskUserDefaults.network.nativeTokenAddress
+            tokenAddr = settings.network.nativeTokenAddress
         } else if let address = token.contractAddress {
             tokenAddr = address
         }
@@ -342,7 +342,7 @@ final class LuckyDropViewModel: ObservableObject {
     
     // MARK: - Private method
     private func getAllowance() async -> BigUInt? {
-        guard let fromAddress = maskUserDefaults.defaultAccountAddress,
+        guard let fromAddress = settings.defaultAccountAddress,
               let originalOwner = EthereumAddress(fromAddress) else {
                   return nil
               }
@@ -357,7 +357,7 @@ final class LuckyDropViewModel: ObservableObject {
               }
         let erc20 = ERC20(web3: web3, provider: web3.provider, address: contractAddress)
         
-        return await Task { @MaskGroupActor in
+        return await Task.detached {
             guard let allowance = try? erc20.getAllowance(originalOwner: originalOwner, delegate: luckyDropAddress) else {
                 return nil
             }
@@ -388,7 +388,7 @@ final class LuckyDropViewModel: ObservableObject {
     }
     
     private func approveToken(password: String, network: BlockChainNetwork) {
-        guard let fromAddress = maskUserDefaults.defaultAccountAddress,
+        guard let fromAddress = settings.defaultAccountAddress,
               let fromAddressEthFormat = EthereumAddress(fromAddress) else {
             return
         }
@@ -401,7 +401,7 @@ final class LuckyDropViewModel: ObservableObject {
               let toAddressEthFormat = EthereumAddress(toAddress) else {
                   return
               }
-        Task { @MaskGroupActor in
+        Task.detached {
             let erc20 = ERC20(web3: web3, provider: web3.provider, address: tokenAddressETHFormat)
             do {
                 // FIXME: set `0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff` to method `approve`.

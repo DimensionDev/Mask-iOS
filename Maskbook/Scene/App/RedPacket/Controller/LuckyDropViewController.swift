@@ -19,6 +19,13 @@ class LuckyDropViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = L10n.Plugins.Luckydrop.title
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.setAppearance()
     }
 
     override func buildContent() {

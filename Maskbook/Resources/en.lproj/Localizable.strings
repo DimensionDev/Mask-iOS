@@ -180,6 +180,7 @@ Please scan Persona QR Code.";
 "Plugins.Luckydrop.State.Failed" = "Tx failed";
 "Plugins.Luckydrop.State.Pending" = "Pending...";
 "Plugins.Luckydrop.State.Success" = "Tx Success";
+"Plugins.Luckydrop.Title" = "Lucky Drop";
 "Plugins.Luckydrop.Token" = "Token";
 "Plugins.Luckydrop.Total-Amount" = "Total Amount";
 "Plugins.Luckydrop.Transaction-Fee" = "Transaction fee";
