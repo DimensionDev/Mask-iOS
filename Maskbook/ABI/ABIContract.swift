@@ -98,14 +98,17 @@ extension ABIContract {
             guard let transaction = try? tx.assemble(transactionOptions: tx.transactionOptions) else {
                 return nil
             }
-            return try? await self.presentTransactionPopView(transaction: transaction, tx: tx)
+            return try? await self.presentTransactionPopView(
+                transaction: transaction,
+                transactionOptions: tx.transactionOptions
+            )
         }.value
     }
     
     @MainActor
     private func presentTransactionPopView(
         transaction: EthereumTransaction,
-        tx: WriteTransaction
+        transactionOptions: TransactionOptions
     ) async throws -> String {
         try await withCheckedThrowingContinuation { continuation in
             mainCoordinator.present(
@@ -120,7 +123,7 @@ extension ABIContract {
                         }
                     },
                     transaction: transaction,
-                    transactionOptions: tx.transactionOptions
+                    transactionOptions: transactionOptions
                 ),
                 transition: .panModel()
             )

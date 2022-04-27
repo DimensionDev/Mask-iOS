@@ -414,7 +414,8 @@ final class LuckyDropViewModel: ObservableObject {
                 let transacationResult = try transacation.assemble()
                 let hashTX = try await self.presentTransactionPopView(
                     transacationResult: transacationResult,
-                    transacation: transacation)
+                    transactionOptions: transacation.transactionOptions
+                )
                 log.debug("approve/revoke hash \(hashTX)", source: "lucky drop")
                 await self.checkApproveStatus(txHash: hashTX)
             } catch {
@@ -431,7 +432,7 @@ final class LuckyDropViewModel: ObservableObject {
     
     private func presentTransactionPopView(
         transacationResult: EthereumTransaction,
-        transacation: WriteTransaction
+        transactionOptions: TransactionOptions
     ) async throws -> String {
         try await withCheckedThrowingContinuation { [weak self] continuation in
             let comletion: ((Swift.Result<String, Error>) -> Void) = { result in
@@ -445,7 +446,7 @@ final class LuckyDropViewModel: ObservableObject {
                 scene: .maskSendResolverTransactionPopView(
                     completion: comletion,
                     transaction: transacationResult,
-                    transactionOptions: transacation.transactionOptions
+                    transactionOptions: transactionOptions
                 ),
                 transition: .panModel(animated: true)
             )
