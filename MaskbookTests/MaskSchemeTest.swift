@@ -64,7 +64,7 @@ class MaskSchemeTest: XCTestCase {
         guard case let .mnemonic(mnemonic) = item.type else {
             return
         }
-        let result = PersonaManager.createPersona(nickname: item.name ?? "nickname", mnemonic: mnemonic)
+        let result = PersonaManager.createPersona(nickname: item.name, mnemonic: mnemonic)
         guard case let .success(personaIdentifier) = result else {
             XCTAssert(false, "persona create failed")
             return

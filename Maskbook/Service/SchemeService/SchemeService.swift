@@ -84,12 +84,11 @@ class SchemeService {
     }
 
     func personaImportItem(forPersonaScheme personaScheme: String) -> PersonaImportItem? {
-        if personaScheme.contains(Self.personaPrivateKeyPrefix) {
-            return personaImportItem(forPrivateKey: personaScheme)
-        }
-
         if personaScheme.contains(Self.personaMenmonicPrefix) {
             return personaImportItem(forMnemonic: personaScheme)
+        }
+        if personaScheme.contains(Self.personaPrivateKeyPrefix) {
+            return personaImportItem(forPrivateKey: personaScheme)
         }
         return nil
     }
