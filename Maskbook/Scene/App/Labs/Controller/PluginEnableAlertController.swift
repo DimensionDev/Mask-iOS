@@ -160,9 +160,7 @@ final class PluginAlertViewController: AlertPopupController {
 
         confirmButton.cv.tap()
             .sink { [weak self] _ in
-                defer {
-                    self?.hide()
-                }
+                defer { self?.hide() }
                 guard let address = self?.userSettings.defaultAccountAddress else {
                     return
                 }
@@ -170,10 +168,16 @@ final class PluginAlertViewController: AlertPopupController {
             }
             .store(in: &subscriptionSet)
 
-        let limitSize = warningTextView.contentSize.height + self.textEdge.bottom
         warningTextView
             .publisher(for: \.contentOffset)
-            .map { $0.y >= limitSize }
+            .map { [weak self] offset -> Bool in
+                guard let self = self else { return false }
+                let limitSize = self.warningTextView.contentSize.height - self.warningTextView.frame.height
+                guard limitSize > 0 else {
+                    return false
+                }
+                return offset.y >= limitSize
+            }
             .sink { [weak self] value in
                 guard let self = self else { return }
                 if self.confirmButton.isEnabled { return }
