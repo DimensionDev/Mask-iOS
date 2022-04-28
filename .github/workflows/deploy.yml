@@ -24,9 +24,9 @@ jobs:
           p12-file-base64: ${{ secrets.IOS_DIST_SIGNING_KEY }}
           p12-password: ${{ secrets.IOS_DIST_SIGNING_KEY_PASSWORD }}
 
-      - uses: fwal/setup-swift@v1
-        with:
-          swift-version: "5.6.0"
+      # - uses: fwal/setup-swift@v1
+      #   with:
+      #     swift-version: "5.6.0"
 
       # - name: Setup Cocoapods
       #   uses: maxim-lobanov/setup-cocoapods@v1
