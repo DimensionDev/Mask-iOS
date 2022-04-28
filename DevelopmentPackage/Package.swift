@@ -115,5 +115,6 @@ let package = Package(
                 .define("SPM")
             ]
         )
-    ]
+    ],
+    swiftLanguageVersions: [.v5]
 )
