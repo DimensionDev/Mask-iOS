@@ -14,7 +14,7 @@ import UIKit
 import UStack
 import web3swift
 import CoreDataStack
-import WebExtension_Shim
+import WebExtension_Shim_Swift
 
 enum SendStatus {
     case ready

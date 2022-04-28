@@ -8,12 +8,12 @@
 
 import AlamofireNetworkActivityLogger
 import Combine
-import ConsolePrint
+//import ConsolePrint
 import Firebase
 import IQKeyboardManagerSwift
 import os
 import UIKit
-import WebExtension_Shim
+import WebExtension_Shim_Swift
 
 #if TouchPreview
 import EUMTouchPointView

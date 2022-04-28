@@ -6,6 +6,7 @@
 //  Copyright © 2021 dimension. All rights reserved.
 //
 
+import Foundation
 import SwiftyJSON
 
 struct RestoreFile: Codable {

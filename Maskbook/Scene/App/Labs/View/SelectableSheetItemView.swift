@@ -8,7 +8,7 @@
 
 import Combine
 import SwiftUI
-import WebExtension_Shim
+import WebExtension_Shim_Swift
 
 struct SelectableSheetItemView<T: PluginSelecteableItem>: View {
     @ObservedObject

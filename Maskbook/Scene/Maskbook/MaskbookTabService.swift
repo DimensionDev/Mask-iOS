@@ -8,7 +8,7 @@
 
 import Foundation
 import os
-import WebExtension_Shim
+import WebExtension_Shim_Swift
 
 final class MaskbookTabService {
     @InjectedProvider(\.userDefaultSettings)

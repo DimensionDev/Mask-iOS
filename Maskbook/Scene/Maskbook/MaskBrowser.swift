@@ -12,7 +12,7 @@ import MaskbookPlugin
 import OSLog
 import SafariServices
 import SwiftyJSON
-import WebExtension_Shim
+import WebExtension_Shim_Swift
 import WebKit
 
 class MaskBrowser {

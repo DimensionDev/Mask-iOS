@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import WebExtension_Shim
+import WebExtension_Shim_Swift
 
 protocol PluginSelecteableItem {
     var icon: String { get }

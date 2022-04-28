@@ -8,7 +8,7 @@
 
 import Foundation
 import SwiftyJSON
-import WebExtension_Shim
+import WebExtension_Shim_Swift
 
 enum MaskMessageTarget: RawRepresentable, Codable {
     case background

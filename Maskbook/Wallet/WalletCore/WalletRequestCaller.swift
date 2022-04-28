@@ -9,6 +9,7 @@
 import Combine
 import Foundation
 import MaskWalletCore
+import MaskWalletCoreMobile
 import os
 
 protocol RequestCaller {

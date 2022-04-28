@@ -9,7 +9,7 @@
 import Combine
 import SnapKit
 import UIKit
-import WebExtension_Shim
+import WebExtension_Shim_Swift
 
 class WelcomeViewController: BaseViewController {
     private(set) var indicatorView = MaskLoadingIndicator()

@@ -8,7 +8,7 @@
 
 import Foundation
 import MaskbookPlugin
-import WebExtension_Shim
+import WebExtension_Shim_Swift
 import WebKit
 
 extension Plugin {

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import WebExtension_Shim
+import WebExtension_Shim_Swift
 
 extension WebExtension.Setting {
     struct AppSuspendedMessage: MWEMessage {

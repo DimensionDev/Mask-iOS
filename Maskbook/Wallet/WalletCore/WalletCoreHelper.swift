@@ -8,6 +8,7 @@
 import CoreData
 import CoreDataStack
 import MaskWalletCore
+import MaskWalletCoreMobile
 import OSLog
 import web3swift
 
