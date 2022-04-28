@@ -3822,22 +3822,22 @@
 			);
 			mainGroup = DBAAF48822C35A7100017594;
 			packageReferences = (
-				1FB30150281A477F0081F3C4 /* XCRemoteSwiftPackageReference "WalletConnectSwift.git" */,
-				1FB30153281A47BD0081F3C4 /* XCRemoteSwiftPackageReference "RSKPlaceholderTextView.git" */,
-				1FB30156281A480C0081F3C4 /* XCRemoteSwiftPackageReference "SwiftMsgPack.git" */,
-				1FB30159281A49860081F3C4 /* XCRemoteSwiftPackageReference "Kingfisher.git" */,
-				1FB3015C281A49BD0081F3C4 /* XCRemoteSwiftPackageReference "socket.io-client-swift.git" */,
-				1FB3015F281A49CD0081F3C4 /* XCRemoteSwiftPackageReference "web3swift.git" */,
-				1FB30162281A49DD0081F3C4 /* XCRemoteSwiftPackageReference "BMPlayer.git" */,
-				1FB30165281A49F40081F3C4 /* XCRemoteSwiftPackageReference "AlamofireNetworkActivityLogger.git" */,
-				1FB30168281A4A620081F3C4 /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */,
-				1FB3016B281A4A7D0081F3C4 /* XCRemoteSwiftPackageReference "KeychainAccess.git" */,
-				1FB3016E281A4A8E0081F3C4 /* XCRemoteSwiftPackageReference "EFQRCode.git" */,
-				1FB30171281A4AA00081F3C4 /* XCRemoteSwiftPackageReference "ZIPFoundation.git" */,
-				1FB30174281A4AB10081F3C4 /* XCRemoteSwiftPackageReference "UStack.git" */,
-				1FB30177281A4ABF0081F3C4 /* XCRemoteSwiftPackageReference "CombineEvent.git" */,
-				1FB3017A281A4B620081F3C4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */,
-				1FB3017D281A4C370081F3C4 /* XCRemoteSwiftPackageReference "Alamofire.git" */,
+				1FB30150281A477F0081F3C4 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */,
+				1FB30153281A47BD0081F3C4 /* XCRemoteSwiftPackageReference "RSKPlaceholderTextView" */,
+				1FB30156281A480C0081F3C4 /* XCRemoteSwiftPackageReference "SwiftMsgPack" */,
+				1FB30159281A49860081F3C4 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				1FB3015C281A49BD0081F3C4 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
+				1FB3015F281A49CD0081F3C4 /* XCRemoteSwiftPackageReference "web3swift" */,
+				1FB30162281A49DD0081F3C4 /* XCRemoteSwiftPackageReference "BMPlayer" */,
+				1FB30165281A49F40081F3C4 /* XCRemoteSwiftPackageReference "AlamofireNetworkActivityLogger" */,
+				1FB30168281A4A620081F3C4 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				1FB3016B281A4A7D0081F3C4 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				1FB3016E281A4A8E0081F3C4 /* XCRemoteSwiftPackageReference "EFQRCode" */,
+				1FB30171281A4AA00081F3C4 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
+				1FB30174281A4AB10081F3C4 /* XCRemoteSwiftPackageReference "UStack" */,
+				1FB30177281A4ABF0081F3C4 /* XCRemoteSwiftPackageReference "CombineEvent" */,
+				1FB3017A281A4B620081F3C4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				1FB3017D281A4C370081F3C4 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = DBAAF49222C35A7100017594 /* Products */;
 			projectDirPath = "";
@@ -4759,11 +4759,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CODE_SIGN_IDENTITY = "Apple Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 7LFDZ96332;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -5143,8 +5143,8 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Maskbook/Maskbook.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 7LFDZ96332;
 				ENABLE_BITCODE = YES;
@@ -5158,7 +5158,7 @@
 				OTHER_LDFLAGS = "-Objc";
 				PRODUCT_BUNDLE_IDENTIFIER = io.maskbook.maskbook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Mask Network iOS";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -5274,7 +5274,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1FB30150281A477F0081F3C4 /* XCRemoteSwiftPackageReference "WalletConnectSwift.git" */ = {
+		1FB30150281A477F0081F3C4 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/DimensionDev/WalletConnectSwift.git";
 			requirement = {
@@ -5282,7 +5282,7 @@
 				kind = branch;
 			};
 		};
-		1FB30153281A47BD0081F3C4 /* XCRemoteSwiftPackageReference "RSKPlaceholderTextView.git" */ = {
+		1FB30153281A47BD0081F3C4 /* XCRemoteSwiftPackageReference "RSKPlaceholderTextView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ruslanskorb/RSKPlaceholderTextView.git";
 			requirement = {
@@ -5290,7 +5290,7 @@
 				minimumVersion = 6.0.0;
 			};
 		};
-		1FB30156281A480C0081F3C4 /* XCRemoteSwiftPackageReference "SwiftMsgPack.git" */ = {
+		1FB30156281A480C0081F3C4 /* XCRemoteSwiftPackageReference "SwiftMsgPack" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/malcommac/SwiftMsgPack.git";
 			requirement = {
@@ -5298,7 +5298,7 @@
 				kind = branch;
 			};
 		};
-		1FB30159281A49860081F3C4 /* XCRemoteSwiftPackageReference "Kingfisher.git" */ = {
+		1FB30159281A49860081F3C4 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
@@ -5306,7 +5306,7 @@
 				minimumVersion = 7.0.0;
 			};
 		};
-		1FB3015C281A49BD0081F3C4 /* XCRemoteSwiftPackageReference "socket.io-client-swift.git" */ = {
+		1FB3015C281A49BD0081F3C4 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
 			requirement = {
@@ -5314,7 +5314,7 @@
 				version = 15.2.0;
 			};
 		};
-		1FB3015F281A49CD0081F3C4 /* XCRemoteSwiftPackageReference "web3swift.git" */ = {
+		1FB3015F281A49CD0081F3C4 /* XCRemoteSwiftPackageReference "web3swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/DimensionDev/web3swift.git";
 			requirement = {
@@ -5322,7 +5322,7 @@
 				kind = branch;
 			};
 		};
-		1FB30162281A49DD0081F3C4 /* XCRemoteSwiftPackageReference "BMPlayer.git" */ = {
+		1FB30162281A49DD0081F3C4 /* XCRemoteSwiftPackageReference "BMPlayer" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/rursache/BMPlayer.git";
 			requirement = {
@@ -5330,7 +5330,7 @@
 				kind = branch;
 			};
 		};
-		1FB30165281A49F40081F3C4 /* XCRemoteSwiftPackageReference "AlamofireNetworkActivityLogger.git" */ = {
+		1FB30165281A49F40081F3C4 /* XCRemoteSwiftPackageReference "AlamofireNetworkActivityLogger" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/konkab/AlamofireNetworkActivityLogger.git";
 			requirement = {
@@ -5338,7 +5338,7 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		1FB30168281A4A620081F3C4 /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */ = {
+		1FB30168281A4A620081F3C4 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
 			requirement = {
@@ -5346,7 +5346,7 @@
 				version = 6.5.9;
 			};
 		};
-		1FB3016B281A4A7D0081F3C4 /* XCRemoteSwiftPackageReference "KeychainAccess.git" */ = {
+		1FB3016B281A4A7D0081F3C4 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess.git";
 			requirement = {
@@ -5354,7 +5354,7 @@
 				minimumVersion = 4.2.0;
 			};
 		};
-		1FB3016E281A4A8E0081F3C4 /* XCRemoteSwiftPackageReference "EFQRCode.git" */ = {
+		1FB3016E281A4A8E0081F3C4 /* XCRemoteSwiftPackageReference "EFQRCode" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/EFPrefix/EFQRCode.git";
 			requirement = {
@@ -5362,7 +5362,7 @@
 				minimumVersion = 6.0.0;
 			};
 		};
-		1FB30171281A4AA00081F3C4 /* XCRemoteSwiftPackageReference "ZIPFoundation.git" */ = {
+		1FB30171281A4AA00081F3C4 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/weichsel/ZIPFoundation.git";
 			requirement = {
@@ -5370,7 +5370,7 @@
 				minimumVersion = 0.9.9;
 			};
 		};
-		1FB30174281A4AB10081F3C4 /* XCRemoteSwiftPackageReference "UStack.git" */ = {
+		1FB30174281A4AB10081F3C4 /* XCRemoteSwiftPackageReference "UStack" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/foxsin10/UStack.git";
 			requirement = {
@@ -5378,7 +5378,7 @@
 				minimumVersion = 2.0.0;
 			};
 		};
-		1FB30177281A4ABF0081F3C4 /* XCRemoteSwiftPackageReference "CombineEvent.git" */ = {
+		1FB30177281A4ABF0081F3C4 /* XCRemoteSwiftPackageReference "CombineEvent" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/foxsin10/CombineEvent.git";
 			requirement = {
@@ -5386,7 +5386,7 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		1FB3017A281A4B620081F3C4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */ = {
+		1FB3017A281A4B620081F3C4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
@@ -5394,7 +5394,7 @@
 				minimumVersion = 8.0.0;
 			};
 		};
-		1FB3017D281A4C370081F3C4 /* XCRemoteSwiftPackageReference "Alamofire.git" */ = {
+		1FB3017D281A4C370081F3C4 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
@@ -5427,82 +5427,82 @@
 		};
 		1FB30151281A477F0081F3C4 /* WalletConnectSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1FB30150281A477F0081F3C4 /* XCRemoteSwiftPackageReference "WalletConnectSwift.git" */;
+			package = 1FB30150281A477F0081F3C4 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */;
 			productName = WalletConnectSwift;
 		};
 		1FB30154281A47BD0081F3C4 /* RSKPlaceholderTextView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1FB30153281A47BD0081F3C4 /* XCRemoteSwiftPackageReference "RSKPlaceholderTextView.git" */;
+			package = 1FB30153281A47BD0081F3C4 /* XCRemoteSwiftPackageReference "RSKPlaceholderTextView" */;
 			productName = RSKPlaceholderTextView;
 		};
 		1FB30157281A480C0081F3C4 /* SwiftMsgPack */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1FB30156281A480C0081F3C4 /* XCRemoteSwiftPackageReference "SwiftMsgPack.git" */;
+			package = 1FB30156281A480C0081F3C4 /* XCRemoteSwiftPackageReference "SwiftMsgPack" */;
 			productName = SwiftMsgPack;
 		};
 		1FB3015A281A49860081F3C4 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1FB30159281A49860081F3C4 /* XCRemoteSwiftPackageReference "Kingfisher.git" */;
+			package = 1FB30159281A49860081F3C4 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
 		1FB3015D281A49BD0081F3C4 /* SocketIO */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1FB3015C281A49BD0081F3C4 /* XCRemoteSwiftPackageReference "socket.io-client-swift.git" */;
+			package = 1FB3015C281A49BD0081F3C4 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
 			productName = SocketIO;
 		};
 		1FB30160281A49CD0081F3C4 /* web3swift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1FB3015F281A49CD0081F3C4 /* XCRemoteSwiftPackageReference "web3swift.git" */;
+			package = 1FB3015F281A49CD0081F3C4 /* XCRemoteSwiftPackageReference "web3swift" */;
 			productName = web3swift;
 		};
 		1FB30163281A49DD0081F3C4 /* BMPlayer */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1FB30162281A49DD0081F3C4 /* XCRemoteSwiftPackageReference "BMPlayer.git" */;
+			package = 1FB30162281A49DD0081F3C4 /* XCRemoteSwiftPackageReference "BMPlayer" */;
 			productName = BMPlayer;
 		};
 		1FB30166281A49F40081F3C4 /* AlamofireNetworkActivityLogger */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1FB30165281A49F40081F3C4 /* XCRemoteSwiftPackageReference "AlamofireNetworkActivityLogger.git" */;
+			package = 1FB30165281A49F40081F3C4 /* XCRemoteSwiftPackageReference "AlamofireNetworkActivityLogger" */;
 			productName = AlamofireNetworkActivityLogger;
 		};
 		1FB30169281A4A620081F3C4 /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1FB30168281A4A620081F3C4 /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */;
+			package = 1FB30168281A4A620081F3C4 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
 		};
 		1FB3016C281A4A7D0081F3C4 /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1FB3016B281A4A7D0081F3C4 /* XCRemoteSwiftPackageReference "KeychainAccess.git" */;
+			package = 1FB3016B281A4A7D0081F3C4 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
 		};
 		1FB3016F281A4A8E0081F3C4 /* EFQRCode */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1FB3016E281A4A8E0081F3C4 /* XCRemoteSwiftPackageReference "EFQRCode.git" */;
+			package = 1FB3016E281A4A8E0081F3C4 /* XCRemoteSwiftPackageReference "EFQRCode" */;
 			productName = EFQRCode;
 		};
 		1FB30172281A4AA00081F3C4 /* ZIPFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1FB30171281A4AA00081F3C4 /* XCRemoteSwiftPackageReference "ZIPFoundation.git" */;
+			package = 1FB30171281A4AA00081F3C4 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
 			productName = ZIPFoundation;
 		};
 		1FB30175281A4AB10081F3C4 /* UStack */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1FB30174281A4AB10081F3C4 /* XCRemoteSwiftPackageReference "UStack.git" */;
+			package = 1FB30174281A4AB10081F3C4 /* XCRemoteSwiftPackageReference "UStack" */;
 			productName = UStack;
 		};
 		1FB30178281A4ABF0081F3C4 /* CombineEvent */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1FB30177281A4ABF0081F3C4 /* XCRemoteSwiftPackageReference "CombineEvent.git" */;
+			package = 1FB30177281A4ABF0081F3C4 /* XCRemoteSwiftPackageReference "CombineEvent" */;
 			productName = CombineEvent;
 		};
 		1FB3017B281A4B620081F3C4 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1FB3017A281A4B620081F3C4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */;
+			package = 1FB3017A281A4B620081F3C4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalytics;
 		};
 		1FB3017E281A4C370081F3C4 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1FB3017D281A4C370081F3C4 /* XCRemoteSwiftPackageReference "Alamofire.git" */;
+			package = 1FB3017D281A4C370081F3C4 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
