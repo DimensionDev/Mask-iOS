@@ -11,7 +11,7 @@ import CoreData
 import CoreDataStack
 import Foundation
 import SwiftyJSON
-import WebExtension_Shim
+import WebExtension_Shim_Swift
 
 class PersonaManager {
     internal static let shared = PersonaManager()

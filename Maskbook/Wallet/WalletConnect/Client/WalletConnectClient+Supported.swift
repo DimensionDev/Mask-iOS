@@ -7,7 +7,9 @@
 //
 
 import Combine
+import UIKit
 import Foundation
+
 import WalletConnectSwift
 
 extension WalletConnectClient {

@@ -14,7 +14,7 @@ import OSLog
 import SocketIO
 import SwiftyJSON
 import WalletConnectSwift
-import WebExtension_Shim
+import WebExtension_Shim_Swift
 
 final class LocalBackupViewModel {
     enum WriteBackupError: Error {

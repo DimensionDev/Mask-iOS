@@ -1,5 +1,5 @@
 import Foundation
-import WebExtension_Shim
+import WebExtension_Shim_Swift
 
 enum EitherOr<T, V>: Codable where T: Codable, V: Codable {
     case either(T)

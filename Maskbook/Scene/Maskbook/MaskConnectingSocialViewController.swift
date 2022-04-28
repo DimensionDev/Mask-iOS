@@ -11,7 +11,7 @@ import CoreDataStack
 import SafariServices
 import SwiftyJSON
 import UIKit
-import WebExtension_Shim
+import WebExtension_Shim_Swift
 import WebKit
 
 // swiftlint:disable file_length

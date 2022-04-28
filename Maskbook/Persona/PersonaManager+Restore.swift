@@ -9,7 +9,7 @@
 import Combine
 import Foundation
 import SwiftyJSON
-import WebExtension_Shim
+import WebExtension_Shim_Swift
 
 extension PersonaManager {
     static func restoreFromMnemonic(mnemonic: String,

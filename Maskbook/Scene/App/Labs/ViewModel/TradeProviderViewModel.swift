@@ -1,6 +1,6 @@
 import Combine
 import SwiftUI
-import WebExtension_Shim
+import WebExtension_Shim_Swift
 
 final class TradeProviderViewModel: ObservableObject {
     typealias TradeProvider = WebExtension.Setting.TradeProvider

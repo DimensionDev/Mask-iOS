@@ -9,7 +9,7 @@
 import Combine
 import os
 import UIKit
-import WebExtension_Shim
+import WebExtension_Shim_Swift
 import WebKit
 
 final class MaskbookTab: NSObject {

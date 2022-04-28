@@ -1,3 +1,5 @@
+import Foundation
+
 import BigInt
 import web3swift
 

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import WebExtension_Shim
+import WebExtension_Shim_Swift
 
 typealias GetPluginStatusMWEMessage = WebExtension.App.GetIsPluginEnabled
 typealias SetPluginStatusMWEMessage = WebExtension.App.SetPluginStatus

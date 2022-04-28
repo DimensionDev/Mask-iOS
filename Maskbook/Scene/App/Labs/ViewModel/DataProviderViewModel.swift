@@ -6,8 +6,10 @@
 //  Copyright © 2021 dimension. All rights reserved.
 //
 
+import Foundation
+
 import Combine
-import WebExtension_Shim
+import WebExtension_Shim_Swift
 
 final class DataProviderViewModel: ObservableObject {
     typealias DataProvider = WebExtension.Setting.DataProvider

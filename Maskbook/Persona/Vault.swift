@@ -6,6 +6,8 @@
 //  Copyright © 2021 dimension. All rights reserved.
 //
 
+import Foundation
+
 import Combine
 import KeychainAccess
 

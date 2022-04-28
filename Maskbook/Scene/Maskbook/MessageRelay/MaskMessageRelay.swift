@@ -9,7 +9,7 @@
 import Combine
 import Foundation
 import OSLog
-import WebExtension_Shim
+import WebExtension_Shim_Swift
 import WebKit
 
 enum MaskMessageRelayError: Error {

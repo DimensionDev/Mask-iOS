@@ -8,7 +8,7 @@
 
 import CryptoSwift
 import Foundation
-import WebExtension_Shim
+import WebExtension_Shim_Swift
 
 enum JSResourceType {
     case bundle

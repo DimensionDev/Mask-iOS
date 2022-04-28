@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import WebExtension_Shim
+import WebExtension_Shim_Swift
 import WebKit
 
 struct MaskPublicApiResponse<T: Encodable>: Encodable {

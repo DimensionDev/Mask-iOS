@@ -12,7 +12,7 @@ import OSLog
 import PromiseKit
 import SwiftyJSON
 import web3swift
-import WebExtension_Shim
+import WebExtension_Shim_Swift
 import WebKit
 
 struct MaskWeb3MessageRequest: Decodable {
