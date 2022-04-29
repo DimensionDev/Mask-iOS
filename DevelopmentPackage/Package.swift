@@ -42,7 +42,8 @@ let package = Package(
             dependencies: [
                 .product(name: "SwiftyJSON", package: "SwiftyJSON"),
                 "MaskbookPlugin",
-//                "WebExtension-Shim"
+                "MaskWalletCore",
+                "WebExtension-Shim-Swift",
             ]
         ),
 
@@ -53,17 +54,24 @@ let package = Package(
                 .product(name: "SwiftyJSON", package: "SwiftyJSON"),
                 .product(name: "Alamofire", package: "Alamofire")
             ],
-            path: "Sources/WebExtension-Shim/WebExtension-Shim-Swift/Sources",
+            path: "Sources/WebExtension-Shim/WebExtension-Shim-Swift",
             resources: [
+                // do not use 'Resources' to name the resources folder
                 // use copy to keep folder structure
                 // use / at the end of path to handle all file under path
-                .copy("../Resources/")
+                .copy("./Scripts/")
+            ],
+            swiftSettings: [
+                .define("SPM")
             ]
         ),
         .target(
             name: "WebExtension-Shim-Objc",
             path: "Sources/WebExtension-Shim/WebExtension-Shim-Objc",
-            publicHeadersPath: "./"
+            publicHeadersPath: "include",
+            cSettings: [
+                .headerSearchPath(".")
+            ]
         ),
 
         // PanModal

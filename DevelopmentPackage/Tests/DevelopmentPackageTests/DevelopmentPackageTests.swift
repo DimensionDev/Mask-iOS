@@ -17,8 +17,7 @@ final class DevelopmentPackageTests: XCTestCase {
         // results.
 //        XCTAssertEqual(DevelopmentPackage().text, "Hello, World!")
         
-        let coin = Api_Coin.polkadot
-
+        let _ = Api_Coin.polkadot
         let slice = RustByteSlice.init()
         rust_free(slice)
     }
@@ -29,6 +28,12 @@ final class DevelopmentPackageTests: XCTestCase {
         XCTAssertEqual(MaskbookPluginResources.id, "eofkdgkhfoebecmamljfaepckoecjhib")
         XCTAssertNotEqual(resources.manifest, JSON.null)
         XCTAssert(resources.resources.dictionaryValue.isEmpty == false)
+    }
+
+    func testWebExtension() throws {
+        let webextension = JSResources.javascript(named: "webextension-shim") ?? ""
+
+        XCTAssertEqual(webextension.isEmpty, false)
     }
 }
 
