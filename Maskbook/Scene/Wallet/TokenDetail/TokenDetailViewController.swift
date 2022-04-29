@@ -16,6 +16,7 @@ class TokenDetailViewController: BaseViewController {
     typealias Section = TokenDetailViewModel.Section
     typealias Item = TokenDetailViewModel.SectionItem
     typealias ViewModel = TokenDetailViewModel
+    var disposeBag = Set<AnyCancellable>()
     
     var viewModel: ViewModel
     
@@ -170,6 +171,7 @@ class TokenDetailViewController: BaseViewController {
             }
             .asDriver()
             .assign(to: \.buttonContainerView.backgroundColor, on: self)
+            .store(in: &disposeBag)
     }
 }
 
