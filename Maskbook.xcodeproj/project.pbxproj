@@ -627,6 +627,8 @@
 		5D9A88DC27BB4AE200879068 /* PersonaDownloadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A88DB27BB4AE200879068 /* PersonaDownloadHandler.swift */; };
 		5DA5B6CB27D9F6260014780A /* UISearchBar+Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA5B6CA27D9F6260014780A /* UISearchBar+Height.swift */; };
 		5DAC90B727C5D0B100BAFB23 /* UIView+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAC90B627C5D0B100BAFB23 /* UIView+Shake.swift */; };
+		5DAF3FBC2815498900CADB80 /* Api_JWKResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAF3FBB2815498900CADB80 /* Api_JWKResp.swift */; };
+		5DAF3FB92814E80600CADB80 /* MaskSchemeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAF3FB82814E80600CADB80 /* MaskSchemeTest.swift */; };
 		5DB39E2B278694460025337C /* JSDocumentResourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2A278694460025337C /* JSDocumentResourceManager.swift */; };
 		5DB39E2E27869F6C0025337C /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2D27869F6C0025337C /* DebugView.swift */; };
 		5DB39E302786A4E40025337C /* JSResourceSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2F2786A4E40025337C /* JSResourceSelectView.swift */; };
@@ -1354,6 +1356,8 @@
 		5D9A88DB27BB4AE200879068 /* PersonaDownloadHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaDownloadHandler.swift; sourceTree = "<group>"; };
 		5DA5B6CA27D9F6260014780A /* UISearchBar+Height.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Height.swift"; sourceTree = "<group>"; };
 		5DAC90B627C5D0B100BAFB23 /* UIView+Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shake.swift"; sourceTree = "<group>"; };
+		5DAF3FBB2815498900CADB80 /* Api_JWKResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api_JWKResp.swift; sourceTree = "<group>"; };
+		5DAF3FB82814E80600CADB80 /* MaskSchemeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskSchemeTest.swift; sourceTree = "<group>"; };
 		5DB39E2A278694460025337C /* JSDocumentResourceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSDocumentResourceManager.swift; sourceTree = "<group>"; };
 		5DB39E2D27869F6C0025337C /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		5DB39E2F2786A4E40025337C /* JSResourceSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSResourceSelectView.swift; sourceTree = "<group>"; };
@@ -3204,6 +3208,7 @@
 		2AF88618271EEDF80004565A /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				5DAF3FBA2815497500CADB80 /* MaskWalletCore */,
 				2A23A64E27C4B66B00CC5AD9 /* SwiftUI */,
 				2DC5D89C272574FA00E351D3 /* Entity */,
 				2AF88619271EEDF80004565A /* UIApplication+extension.swift */,
@@ -3480,6 +3485,14 @@
 			path = Avatar;
 			sourceTree = "<group>";
 		};
+		5DAF3FBA2815497500CADB80 /* MaskWalletCore */ = {
+			isa = PBXGroup;
+			children = (
+				5DAF3FBB2815498900CADB80 /* Api_JWKResp.swift */,
+			);
+			path = MaskWalletCore;
+			sourceTree = "<group>";
+		};
 		5DB0F14B26FB1CFA0084F37E /* WalletConnect */ = {
 			isa = PBXGroup;
 			children = (
@@ -3610,6 +3623,7 @@
 				1FCCE38326D4C5AD00909A5B /* CloudRestoreVerifyTests.swift */,
 				2A4145F726D7880800708337 /* CryptoTests.swift */,
 				2ACA1E1127182F01000C0ECC /* PasswordTests.swift */,
+				5DAF3FB82814E80600CADB80 /* MaskSchemeTest.swift */,
 			);
 			path = MaskbookTests;
 			sourceTree = "<group>";
@@ -4096,6 +4110,7 @@
 				2D6677F927688FBE00528F4D /* WalletConnectEthereumTransaction.swift in Sources */,
 				2AF88543271EE9310004565A /* BiometryRecognitionViewModel.swift in Sources */,
 				2AF884C4271EE9300004565A /* SocialProfileDetectViewModel.swift in Sources */,
+				5DAF3FBC2815498900CADB80 /* Api_JWKResp.swift in Sources */,
 				1F9C60E926B793DE001C26D2 /* Assets.swift in Sources */,
 				1F3301DD27D860B600FA0652 /* ImageItem.swift in Sources */,
 				1F705FE327CF6AB9002A4A7E /* SpinWheelAnimator.swift in Sources */,
@@ -4644,6 +4659,7 @@
 			files = (
 				DBAAF4AA22C35A7100017594 /* MaskbookTests.swift in Sources */,
 				1FCCE38426D4C5AD00909A5B /* CloudRestoreVerifyTests.swift in Sources */,
+				5DAF3FB92814E80600CADB80 /* MaskSchemeTest.swift in Sources */,
 				2ACA1E1227182F01000C0ECC /* PasswordTests.swift in Sources */,
 				2A4145F826D7880800708337 /* CryptoTests.swift in Sources */,
 				1FE54D58269BF0140041C742 /* NSDiffableSourceSnapshotTests.swift in Sources */,

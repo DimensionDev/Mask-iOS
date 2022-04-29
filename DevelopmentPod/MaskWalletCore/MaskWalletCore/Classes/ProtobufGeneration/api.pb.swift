@@ -171,6 +171,14 @@ public struct Api_MWRequest {
     set {request = .paramGenerateMnemonic(newValue)}
   }
 
+  public var paramGeneratePersona: Api_PersonaGenerationParam {
+    get {
+      if case .paramGeneratePersona(let v)? = request {return v}
+      return Api_PersonaGenerationParam()
+    }
+    set {request = .paramGeneratePersona(newValue)}
+  }
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public enum OneOf_Request: Equatable {
@@ -192,6 +200,7 @@ public struct Api_MWRequest {
     case paramGetStoredKeyImportType(Api_GetKeyStoreSupportImportTypeParam)
     case paramGetStoredKeyExportType(Api_GetKeyStoreSupportExportTypeParam)
     case paramGenerateMnemonic(Api_GenerateMnemonicParam)
+    case paramGeneratePersona(Api_PersonaGenerationParam)
 
   #if !swift(>=4.1)
     public static func ==(lhs: Api_MWRequest.OneOf_Request, rhs: Api_MWRequest.OneOf_Request) -> Bool {
@@ -269,6 +278,10 @@ public struct Api_MWRequest {
       }()
       case (.paramGenerateMnemonic, .paramGenerateMnemonic): return {
         guard case .paramGenerateMnemonic(let l) = lhs, case .paramGenerateMnemonic(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.paramGeneratePersona, .paramGeneratePersona): return {
+        guard case .paramGeneratePersona(let l) = lhs, case .paramGeneratePersona(let r) = rhs else { preconditionFailure() }
         return l == r
       }()
       default: return false
@@ -423,6 +436,14 @@ public struct Api_MWResponse {
     set {response = .respGenerateMnemonic(newValue)}
   }
 
+  public var respGeneratePersona: Api_PersonaGenerationResp {
+    get {
+      if case .respGeneratePersona(let v)? = response {return v}
+      return Api_PersonaGenerationResp()
+    }
+    set {response = .respGeneratePersona(newValue)}
+  }
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public enum OneOf_Response: Equatable {
@@ -443,6 +464,7 @@ public struct Api_MWResponse {
     case respGetStoredKeyImportType(Api_GetKeyStoreSupportImportTypeResp)
     case respGetStoredKeyExportType(Api_GetKeyStoreSupportExportTypeResp)
     case respGenerateMnemonic(Api_GenerateMnemonicResp)
+    case respGeneratePersona(Api_PersonaGenerationResp)
 
   #if !swift(>=4.1)
     public static func ==(lhs: Api_MWResponse.OneOf_Response, rhs: Api_MWResponse.OneOf_Response) -> Bool {
@@ -518,6 +540,10 @@ public struct Api_MWResponse {
         guard case .respGenerateMnemonic(let l) = lhs, case .respGenerateMnemonic(let r) = rhs else { preconditionFailure() }
         return l == r
       }()
+      case (.respGeneratePersona, .respGeneratePersona): return {
+        guard case .respGeneratePersona(let l) = lhs, case .respGeneratePersona(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
       default: return false
       }
     }
@@ -574,6 +600,7 @@ extension Api_MWRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
     23: .standard(proto: "param_get_stored_key_import_type"),
     24: .standard(proto: "param_get_stored_key_export_type"),
     25: .standard(proto: "param_generate_mnemonic"),
+    26: .standard(proto: "param_generate_persona"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -816,6 +843,19 @@ extension Api_MWRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.request = .paramGenerateMnemonic(v)
         }
       }()
+      case 26: try {
+        var v: Api_PersonaGenerationParam?
+        var hadOneofValue = false
+        if let current = self.request {
+          hadOneofValue = true
+          if case .paramGeneratePersona(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.request = .paramGeneratePersona(v)
+        }
+      }()
       default: break
       }
     }
@@ -899,6 +939,10 @@ extension Api_MWRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
       guard case .paramGenerateMnemonic(let v)? = self.request else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 25)
     }()
+    case .paramGeneratePersona?: try {
+      guard case .paramGeneratePersona(let v)? = self.request else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 26)
+    }()
     case nil: break
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -931,6 +975,7 @@ extension Api_MWResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     22: .standard(proto: "resp_get_stored_key_import_type"),
     23: .standard(proto: "resp_get_stored_key_export_type"),
     24: .standard(proto: "resp_generate_mnemonic"),
+    25: .standard(proto: "resp_generate_persona"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -1160,6 +1205,19 @@ extension Api_MWResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
           self.response = .respGenerateMnemonic(v)
         }
       }()
+      case 25: try {
+        var v: Api_PersonaGenerationResp?
+        var hadOneofValue = false
+        if let current = self.response {
+          hadOneofValue = true
+          if case .respGeneratePersona(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.response = .respGeneratePersona(v)
+        }
+      }()
       default: break
       }
     }
@@ -1238,6 +1296,10 @@ extension Api_MWResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     case .respGenerateMnemonic?: try {
       guard case .respGenerateMnemonic(let v)? = self.response else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 24)
+    }()
+    case .respGeneratePersona?: try {
+      guard case .respGeneratePersona(let v)? = self.response else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 25)
     }()
     case nil: break
     }
