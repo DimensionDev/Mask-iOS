@@ -25,7 +25,6 @@ struct LuckyDropView: View {
                 contentView()
                 
                 WalletBottomWidgetView(viewModel: viewModel.walletBottomViewModel)
-                    .padding(.horizontal, 16)
             }
             .ignoresSafeArea(.keyboard, edges: .bottom)
             .background(Asset.Colors.Background.normal.asColor())

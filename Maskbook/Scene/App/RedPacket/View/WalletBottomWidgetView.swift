@@ -94,7 +94,8 @@ struct WalletBottomWidgetView: View {
             }
         }
         .padding(.vertical, 9.5)
-        .background(Asset.Colors.Background.normal.asColor())
+        .padding(.horizontal, 16)
+        .background(Asset.Colors.Background.blur.asColor())
     }
 }
 
