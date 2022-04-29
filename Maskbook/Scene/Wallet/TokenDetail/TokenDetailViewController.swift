@@ -16,7 +16,6 @@ class TokenDetailViewController: BaseViewController {
     typealias Section = TokenDetailViewModel.Section
     typealias Item = TokenDetailViewModel.SectionItem
     typealias ViewModel = TokenDetailViewModel
-    var disposeBag = Set<AnyCancellable>()
     
     var viewModel: ViewModel
     
@@ -161,14 +160,16 @@ class TokenDetailViewController: BaseViewController {
     }
     
     func setSubscriptions() {
-        viewModel.cellItems.sink { [weak self] items in
-            if items.count == .zero {
-                self?.buttonContainerView.backgroundColor = Asset.Colors.Background.normal.color
-            } else {
-                self?.buttonContainerView.backgroundColor = Asset.Colors.Background.blur.color
+        viewModel.cellItems
+            .map(\.isEmpty)
+            .removeDuplicates()
+            .map {
+                $0
+                ? Asset.Colors.Background.normal.color
+                : Asset.Colors.Background.blur.color
             }
-        }
-        .store(in: &disposeBag)
+            .asDriver()
+            .assign(to: \.buttonContainerView.backgroundColor, on: self)
     }
 }
 

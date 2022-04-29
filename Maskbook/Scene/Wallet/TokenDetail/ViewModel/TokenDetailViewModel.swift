@@ -29,7 +29,7 @@ class TokenDetailViewModel: NSObject {
     weak var tableView: UITableView?
     weak var dataSource: UITableViewDiffableDataSource<Section, SectionItem>?
     
-    public var cellItems: CurrentValueSubject<[TransactionHistory], Never> = CurrentValueSubject([])
+    var cellItems: CurrentValueSubject<[TransactionHistory], Never> = CurrentValueSubject([])
     private var disposeBag = Set<AnyCancellable>()
     
     init(token: MaskToken) {
