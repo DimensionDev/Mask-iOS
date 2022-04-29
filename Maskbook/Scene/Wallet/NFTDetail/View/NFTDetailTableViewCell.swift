@@ -14,7 +14,6 @@ class NFTDetailTableViewCell: UITableViewCell {
     
     private lazy var tokenImageView: CollectibleIconImageView = {
         let view = CollectibleIconImageView()
-        view.placeholder = .view(emptyView)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
