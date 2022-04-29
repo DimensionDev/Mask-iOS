@@ -85,9 +85,9 @@ class PersonaManager {
         }
     }
     
-    static func nonrepeatingName(name: String?, fromNames: [String]) -> String {
+    static func nonrepeatingName(name: String?, withNames: [String]) -> String {
         let name = name ?? "persona"
-        let names = fromNames
+        let names = withNames
         if !names.contains(name) {
             return name
         }

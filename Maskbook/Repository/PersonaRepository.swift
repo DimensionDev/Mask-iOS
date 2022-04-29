@@ -309,7 +309,7 @@ enum PersonaRepository {
         @InjectedProvider(\.personaManager)
         var personaManager
         
-        var names = personaManager.personaRecordsSubject.value.compactMap(\.nickname)
+        var usedNames = personaManager.personaRecordsSubject.value.compactMap(\.nickname)
         
         backgroundContext.performAndWait {
             for persona in json.arrayValue {
@@ -318,9 +318,9 @@ enum PersonaRepository {
                 newPersonaRecord.identifier = persona[Persona.CodingKeys.identifier.rawValue].string
                 
                 let name = persona[Persona.CodingKeys.nickname.rawValue].string
-                let newName = PersonaManager.nonrepeatingName(name: name, fromNames: names)
-                names.append(newName)
-                newPersonaRecord.nickname = newName
+                let newUsedName = PersonaManager.nonrepeatingName(name: name, withNames: usedNames)
+                usedNames.append(newUsedName)
+                newPersonaRecord.nickname = newUsedName
                 
                 let mnemonicJson = persona[Persona.CodingKeys.mnemonic.rawValue]
                 newPersonaRecord.mnemonic = mnemonicJson[Persona.Mnemonic.CodingKeys.words.rawValue].string
