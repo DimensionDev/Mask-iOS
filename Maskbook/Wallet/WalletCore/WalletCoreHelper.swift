@@ -92,7 +92,7 @@ extension Account {
 }
 
 class WalletCoreHelper {
-    private class func sendRequestToRustLib(_ req: Api_MWRequest) -> Result<Api_MWResponse, Error> {
+    class func sendRequestToRustLib(_ req: Api_MWRequest) -> Result<Api_MWResponse, Error> {
         do {
             let reqData = try req.serializedData()
             let res = try reqData.withUnsafeBytes { unsafeBytes -> Result<Api_MWResponse, Error> in

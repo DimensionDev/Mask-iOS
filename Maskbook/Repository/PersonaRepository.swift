@@ -11,6 +11,7 @@ import CoreDataStack
 import Foundation
 import Kingfisher
 import SwiftyJSON
+import MaskWalletCore
 
 enum LinkedProfileMergePolicy: Int, Codable {
     case replace = 0
@@ -47,6 +48,30 @@ enum PersonaRepository {
             newPersonaRecord.updatedAt = Date(timeIntervalSince1970: persona.updatedAt)
             try? context.saveOrRollback()
         }
+    }
+    
+    static func createPersona(persona: Api_PersonaGenerationResp,
+                              nickname: String,
+                              mnemonic: String,
+                              path: String,
+                              context: NSManagedObjectContext) -> String {
+        context.performAndWait {
+            let newPersonaRecord = PersonaRecord(context: context)
+            newPersonaRecord.identifier = persona.identifier
+            newPersonaRecord.nickname = nickname
+            newPersonaRecord.mnemonic = mnemonic
+            newPersonaRecord.path = path
+            newPersonaRecord.withPassword = false
+            newPersonaRecord.privateKey = persona.privateKey.jsonString
+            newPersonaRecord.publicKey = persona.publicKey.jsonString
+            newPersonaRecord.localKey = persona.localKey.jsonString
+            newPersonaRecord.hasLogout = false
+            newPersonaRecord.initialized = true
+            newPersonaRecord.createdAt = Date()
+            newPersonaRecord.updatedAt = Date()
+            try? context.saveOrRollback()
+        }
+        return persona.identifier
     }
     
     static func queryPersona(identifier: String,

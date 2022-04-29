@@ -88,23 +88,20 @@ private extension IdentityMnemonicImportViewController {
         if text.isEmpty {
             return
         }
-        PersonaManager.restoreFromMnemonic(mnemonic: text)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { _ in
-            }) { [weak self] result in
-                    if result.isSuccess {
-                        self?.restoreSuccess()
-                    } else {
-                        self?.restoreFailed(result: result)
-                    }
-            }
-            .store(in: &disposeBag)
+        let result = PersonaManager.createPersona(nickname: nil, mnemonic: text)
+        switch result {
+        case .success:
+            restoreSuccess()
+        case let .failure(error):
+            restoreFailed(errorMessage: error.localizedDescription)
+        }
     }
     
     func restoreSuccess() {
         coordinator.present(scene: .persona,
                             transition: .replaceCurrentNavigation(tab: .personas, animated: true),
-                            from: nil) {
+                            from: nil)
+        {
             let alertController = AlertController(title: L10n.Scene.Restore.Titles.restoreSucceed,
                                                   message: L10n.Scene.IdentityRestoreSigninSuccess.title,
                                                   confirmButtonText: L10n.Common.Controls.done,
@@ -114,8 +111,8 @@ private extension IdentityMnemonicImportViewController {
         }
     }
     
-    func restoreFailed(result: MaskWebMessageResult) {
-        if let errorMessage = result.error?.message {
+    func restoreFailed(errorMessage: String?) {
+        if let errorMessage = errorMessage {
             let alertController = AlertController(title: errorMessage,
                                                   message: "",
                                                   confirmButtonText: L10n.Common.Controls.done,
@@ -185,7 +182,8 @@ private extension IdentityMnemonicImportViewController {
             UIView.animate(
                 withDuration: duration,
                 delay: 0,
-                options: .curveEaseIn) {
+                options: .curveEaseIn)
+            {
                     self.keyboardExpandView.snp.remakeConstraints { make in
                         make.top.equalTo(self.confirmButton.snp.bottom).offset(16)
                         make.leading.trailing.equalToSuperview()
@@ -193,7 +191,7 @@ private extension IdentityMnemonicImportViewController {
                         make.height.equalTo(endFrame.height)
                         self.confirmButton.layoutIfNeeded()
                     }
-            }
+                }
             self.view.layoutIfNeeded()
         }.store(in: &disposeBag)
         
@@ -204,14 +202,15 @@ private extension IdentityMnemonicImportViewController {
             UIView.animate(
                 withDuration: duration,
                 delay: 0,
-                options: .curveEaseIn) {
+                options: .curveEaseIn)
+            {
                     self.keyboardExpandView.snp.remakeConstraints { make in
                         make.top.equalTo(self.confirmButton.snp.bottom).offset(16)
                         make.leading.trailing.equalToSuperview()
                         make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
                         make.height.equalTo(0)
                     }
-            }
+                }
             self.view.layoutIfNeeded()
         }.store(in: &disposeBag)
     }

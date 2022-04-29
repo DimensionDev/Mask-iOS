@@ -49,21 +49,16 @@ class PersonaDownloadHandler: NSObject {
     
     func createTempPersona(mnemonic: [String]) {
         guard let tempName = personaManager.temporaryPersonaName else { return }
-        PersonaManager.createPersona(nickname: tempName,
-                                     mnemonic: mnemonic.joined(separator: " "))
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { _ in
-            }) { [weak self] result in
-                if result.isSuccess {
-                    if let identifier = result.result?.dictionaryValue["identifier"]?.stringValue {
-                        if let image = self?.generateImage(personaIdentifier: identifier) {
-                            self?.generatePDF(image: image)
-                        }
-                        PersonaRepository.deletePersona(identifier: identifier)
-                    }
-                }
+        let result = PersonaManager.createPersona(nickname: tempName, mnemonic: mnemonic.joined(separator: " "))
+        switch result {
+        case let .success(identifier):
+            if let image = generateImage(personaIdentifier: identifier) {
+                generatePDF(image: image)
             }
-            .store(in: &disposeBag)
+            PersonaRepository.deletePersona(identifier: identifier)
+        case let .failure(error):
+            print(error)
+        }
     }
     
     func generateImage(personaIdentifier: String) -> UIImage? {
