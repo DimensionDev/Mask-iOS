@@ -10,6 +10,7 @@ import Combine
 import CoreData
 import CoreDataStack
 import Foundation
+import MaskWalletCore
 import SwiftyJSON
 import WebExtension_Shim
 
@@ -111,7 +112,7 @@ class PersonaManager {
         PersonaRepository.updatePersonaNickname(identifier: identifier, nickname: nickname)
     }
     
-    static func createPersona(nickname: String, mnemonic: String = "") -> AnyPublisher<MaskWebMessageResult, Error> {
+    static func createPersona(nickname: String?, mnemonic: String = "") -> Result<String, Error> {
         let words: String
         if mnemonic.isEmpty {
             let result = WalletCoreHelper.generateMnemonic()
@@ -121,23 +122,38 @@ class PersonaManager {
                 
             case let .failure(error):
                 print(error)
-                return Fail(error: error)
-                    .eraseToAnyPublisher()
+                return .failure(error)
             }
         } else {
             words = mnemonic
         }
-        let request = WebExtension.Persona.CreatePersonaByMnemonic.withPayload {
-            WebExtension.Persona.CreatePersonaByMnemonic.Payload(mnemonic: words, nickname: nickname, password: "")
+        let name = nickname ?? "persona\(PersonaManager.shared.personaRecordsSubject.value.count + 1)"
+        
+        var req = Api_MWRequest()
+        var param = Api_PersonaGenerationParam()
+        let path = DerivationPath(purpose: 44, coin: 60, account: 0, change: 0, address: 0)
+        param.mnemonic = words
+        param.password = ""
+        param.path = path.description
+        param.curve = .secp256K1
+        var option = Api_EncryptOption()
+        option.version = .v38
+        param.option = option
+        req.paramGeneratePersona = param
+        let resp = WalletCoreHelper.sendRequestToRustLib(req)
+        switch resp {
+        case let .success(response):
+            let personaPara = response.respGeneratePersona
+            let personaIdentifier = PersonaRepository.createPersona(persona: personaPara,
+                                                                    nickname: name,
+                                                                    mnemonic: mnemonic,
+                                                                    path: path.description,
+                                                                    context: AppContext.shared.coreDataStack.persistentContainer.viewContext)
+            return .success(personaIdentifier)
+        case let .failure(error):
+            print(error)
+            return .failure(error)
         }
-        return request
-            .eraseToAnyPublisher()
-            .handleEvents(receiveOutput: { result in
-                if result.isFailure {
-                    log.debug("[create persona] failed. \(result.error?.message ?? "")", source: "persona")
-                }
-            })
-            .eraseToAnyPublisher()
     }
     
     static func personaRecordFor(identifier: String) -> PersonaRecord? {

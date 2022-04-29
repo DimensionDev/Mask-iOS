@@ -29,20 +29,14 @@ class PersonaCreateHandler {
             return
         }
 
-        PersonaManager.createPersona(nickname: name, mnemonic: mnemonic)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { _ in
-            }) { [weak self] result in
-                if result.isSuccess {
-                    if let identifier = result.result?.dictionaryValue["identifier"]?.stringValue {
-                        self?.userSetting.currentPesonaIdentifier = identifier
-                    }
-                    self?.succeedInCreatingPersona(name: name)
-                } else {
-                    self?.failedInCreatingPersona(result: result)
-                }
-            }
-            .store(in: &disposeBag)
+        let result = PersonaManager.createPersona(nickname: name, mnemonic: mnemonic)
+        switch result {
+        case let .success(identifier):
+            userSetting.currentPesonaIdentifier = identifier
+            succeedInCreatingPersona(name: name)
+        case let .failure(error):
+            failedInCreatingPersona(errorMessage: error.localizedDescription)
+        }
     }
 
     func personaNicknameDuplicated() {
@@ -80,8 +74,8 @@ class PersonaCreateHandler {
         return attributeString
     }
 
-    func failedInCreatingPersona(result: MaskWebMessageResult) {
-        if let errorMessage = result.error?.message {
+    func failedInCreatingPersona(errorMessage: String?) {
+        if let errorMessage = errorMessage {
             let alertController = AlertController(title: errorMessage,
                                                   message: "",
                                                   confirmButtonText: L10n.Common.Controls.done,

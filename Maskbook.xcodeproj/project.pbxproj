@@ -210,6 +210,7 @@
 		2A6ABBBA2720059200CC3AED /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6ABBB92720059200CC3AED /* SettingViewController.swift */; };
 		2A72F40227BE8323004A3F95 /* ColletibleIconContentControllerHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A72F40127BE8323004A3F95 /* ColletibleIconContentControllerHandler.swift */; };
 		2A7310082685B83200C5354A /* PasswordFormItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7310072685B83200C5354A /* PasswordFormItemView.swift */; };
+		2A741F34281BCC870023A116 /* Api_JWKResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A741F33281BCC870023A116 /* Api_JWKResp.swift */; };
 		2A852ADF2721775F00EE7EEC /* MaskSocialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A852ADE2721775F00EE7EEC /* MaskSocialViewModel.swift */; };
 		2A9EF067275A053D00AA66A2 /* KeyboardHandlerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9EF066275A053D00AA66A2 /* KeyboardHandlerViewController.swift */; };
 		2ACA1E1227182F01000C0ECC /* PasswordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACA1E1127182F01000C0ECC /* PasswordTests.swift */; };
@@ -661,6 +662,7 @@
 		5D9988EC2653E2610070ED17 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9988EB2653E2610070ED17 /* Strings.swift */; };
 		5D99DEC926788A7A006E345D /* MaskSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D99DEC826788A7A006E345D /* MaskSegmentControl.swift */; };
 		5D9A88DC27BB4AE200879068 /* PersonaDownloadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A88DB27BB4AE200879068 /* PersonaDownloadHandler.swift */; };
+		5DAF3FB92814E80600CADB80 /* MaskSchemeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAF3FB82814E80600CADB80 /* MaskSchemeTest.swift */; };
 		5DB39E2B278694460025337C /* JSDocumentResourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2A278694460025337C /* JSDocumentResourceManager.swift */; };
 		5DB39E2E27869F6C0025337C /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2D27869F6C0025337C /* DebugView.swift */; };
 		5DB39E302786A4E40025337C /* JSResourceSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2F2786A4E40025337C /* JSResourceSelectView.swift */; };
@@ -973,6 +975,7 @@
 		2A6ABBB92720059200CC3AED /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		2A72F40127BE8323004A3F95 /* ColletibleIconContentControllerHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColletibleIconContentControllerHandler.swift; sourceTree = "<group>"; };
 		2A7310072685B83200C5354A /* PasswordFormItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFormItemView.swift; sourceTree = "<group>"; };
+		2A741F33281BCC870023A116 /* Api_JWKResp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Api_JWKResp.swift; sourceTree = "<group>"; };
 		2A852ADE2721775F00EE7EEC /* MaskSocialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskSocialViewModel.swift; sourceTree = "<group>"; };
 		2A9EF066275A053D00AA66A2 /* KeyboardHandlerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandlerViewController.swift; sourceTree = "<group>"; };
 		2ACA1E1127182F01000C0ECC /* PasswordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTests.swift; sourceTree = "<group>"; };
@@ -1424,6 +1427,7 @@
 		5D9988EB2653E2610070ED17 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		5D99DEC826788A7A006E345D /* MaskSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskSegmentControl.swift; sourceTree = "<group>"; };
 		5D9A88DB27BB4AE200879068 /* PersonaDownloadHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaDownloadHandler.swift; sourceTree = "<group>"; };
+		5DAF3FB82814E80600CADB80 /* MaskSchemeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskSchemeTest.swift; sourceTree = "<group>"; };
 		5DB39E2A278694460025337C /* JSDocumentResourceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSDocumentResourceManager.swift; sourceTree = "<group>"; };
 		5DB39E2D27869F6C0025337C /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		5DB39E2F2786A4E40025337C /* JSResourceSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSResourceSelectView.swift; sourceTree = "<group>"; };
@@ -2199,6 +2203,14 @@
 			path = RemoteBackupActions;
 			sourceTree = "<group>";
 		};
+		2A741F32281BCC870023A116 /* MaskWalletCore */ = {
+			isa = PBXGroup;
+			children = (
+				2A741F33281BCC870023A116 /* Api_JWKResp.swift */,
+			);
+			path = MaskWalletCore;
+			sourceTree = "<group>";
+		};
 		2A96348C27A26A5B0019C4CA /* ABI */ = {
 			isa = PBXGroup;
 			children = (
@@ -2236,6 +2248,7 @@
 		2AD8552F281284940064DDA5 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				2A741F32281BCC870023A116 /* MaskWalletCore */,
 				2AD8553D281284940064DDA5 /* Entity */,
 				2AD85560281284940064DDA5 /* SwiftUI */,
 				2AD85530281284940064DDA5 /* String+Contains.swift */,
@@ -3711,6 +3724,7 @@
 				1FCCE38326D4C5AD00909A5B /* CloudRestoreVerifyTests.swift */,
 				2A4145F726D7880800708337 /* CryptoTests.swift */,
 				2ACA1E1127182F01000C0ECC /* PasswordTests.swift */,
+				5DAF3FB82814E80600CADB80 /* MaskSchemeTest.swift */,
 			);
 			path = MaskbookTests;
 			sourceTree = "<group>";
@@ -4317,6 +4331,7 @@
 				2AF88532271EE9310004565A /* WalletImportViewModel.swift in Sources */,
 				2A6ABB882720053B00CC3AED /* RestoreDataPickerController.swift in Sources */,
 				2AF88581271EE9310004565A /* WalletListAddWalletConnectCell.swift in Sources */,
+				2A741F34281BCC870023A116 /* Api_JWKResp.swift in Sources */,
 				2A6ABB942720053B00CC3AED /* RestoreFile.swift in Sources */,
 				2AF88564271EE9310004565A /* GasFeeStandardCollectionViewCell.swift in Sources */,
 				2A6ABB982720053B00CC3AED /* RemoteRestoreInfoView.swift in Sources */,
@@ -4780,6 +4795,7 @@
 			files = (
 				DBAAF4AA22C35A7100017594 /* MaskbookTests.swift in Sources */,
 				1FCCE38426D4C5AD00909A5B /* CloudRestoreVerifyTests.swift in Sources */,
+				5DAF3FB92814E80600CADB80 /* MaskSchemeTest.swift in Sources */,
 				2ACA1E1227182F01000C0ECC /* PasswordTests.swift in Sources */,
 				2A4145F826D7880800708337 /* CryptoTests.swift in Sources */,
 				1FE54D58269BF0140041C742 /* NSDiffableSourceSnapshotTests.swift in Sources */,

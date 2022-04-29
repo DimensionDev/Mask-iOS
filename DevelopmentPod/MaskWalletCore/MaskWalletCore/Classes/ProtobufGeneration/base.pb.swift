@@ -233,6 +233,58 @@ public struct Api_StoredKeyAccountInfo {
   public init() {}
 }
 
+public struct Api_EncryptOption {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var version: Api_EncryptOption.Version = .v37
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public enum Version: SwiftProtobuf.Enum {
+    public typealias RawValue = Int
+    case v37 // = 0
+    case v38 // = 1
+    case UNRECOGNIZED(Int)
+
+    public init() {
+      self = .v37
+    }
+
+    public init?(rawValue: Int) {
+      switch rawValue {
+      case 0: self = .v37
+      case 1: self = .v38
+      default: self = .UNRECOGNIZED(rawValue)
+      }
+    }
+
+    public var rawValue: Int {
+      switch self {
+      case .v37: return 0
+      case .v38: return 1
+      case .UNRECOGNIZED(let i): return i
+      }
+    }
+
+  }
+
+  public init() {}
+}
+
+#if swift(>=4.2)
+
+extension Api_EncryptOption.Version: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static var allCases: [Api_EncryptOption.Version] = [
+    .v37,
+    .v38,
+  ]
+}
+
+#endif  // swift(>=4.2)
+
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Api_Coin: @unchecked Sendable {}
 extension Api_StoredKeyType: @unchecked Sendable {}
@@ -240,6 +292,8 @@ extension Api_StoredKeyImportType: @unchecked Sendable {}
 extension Api_StoredKeyExportType: @unchecked Sendable {}
 extension Api_StoredKeyInfo: @unchecked Sendable {}
 extension Api_StoredKeyAccountInfo: @unchecked Sendable {}
+extension Api_EncryptOption: @unchecked Sendable {}
+extension Api_EncryptOption.Version: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -381,4 +435,43 @@ extension Api_StoredKeyAccountInfo: SwiftProtobuf.Message, SwiftProtobuf._Messag
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
+}
+
+extension Api_EncryptOption: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".EncryptOption"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "version"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularEnumField(value: &self.version) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.version != .v37 {
+      try visitor.visitSingularEnumField(value: self.version, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Api_EncryptOption, rhs: Api_EncryptOption) -> Bool {
+    if lhs.version != rhs.version {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Api_EncryptOption.Version: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "V37"),
+    1: .same(proto: "V38"),
+  ]
 }

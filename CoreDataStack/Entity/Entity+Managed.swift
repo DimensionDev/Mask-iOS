@@ -42,7 +42,8 @@ extension StoredKey: Managed {
 
 extension Account: Managed {
     public static var defaultSortDescriptors: [NSSortDescriptor] {
-        return [NSSortDescriptor(keyPath: \Account.lastModifiedDate, ascending: false)]
+        // DebankAPI will change lastModifiedDate, So defaultSortDescriptors have a uncertain order, change to createdAt
+        return [NSSortDescriptor(keyPath: \Account.createdAt, ascending: false)]
     }
     
     public static func predicate(address: String) -> NSPredicate {
