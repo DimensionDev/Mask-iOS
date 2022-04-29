@@ -8,6 +8,7 @@
 
 import UIKit
 import UStack
+import SwiftUI
 
 final class MaskLoadingIndicator: NiblessView {
     private let animator: LoadingAnimatable
