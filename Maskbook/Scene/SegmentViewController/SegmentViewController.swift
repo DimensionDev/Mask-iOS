@@ -72,19 +72,30 @@ class SegmentViewController: UIViewController {
         setupSegmentControl()
         addScrollView()
         setupViewControllers()
-        view.bringSubviewToFront(segments)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        NSLayoutConstraint.activate([
+            segments.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            segments.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            segments.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            segments.heightAnchor.constraint(equalToConstant: segmentHeight)
+        ])
+        NSLayoutConstraint.activate([
+            scrollView.frameLayoutGuide.topAnchor.constraint(equalTo: segments.bottomAnchor),
+            scrollView.frameLayoutGuide.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.frameLayoutGuide.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.frameLayoutGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollView.contentLayoutGuide.heightAnchor.constraint(equalTo: scrollView.frameLayoutGuide.heightAnchor),
+            scrollView.contentLayoutGuide.widthAnchor.constraint(equalToConstant: CGFloat(viewControllers.count) * width)
+        ])
     }
     
     func setupSegmentControl() {
         segments.setItems(items: items)
         view.addSubview(segments)
         segments.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            segments.topAnchor.constraint(equalTo: view.topAnchor),
-            segments.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            segments.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            segments.heightAnchor.constraint(equalToConstant: segmentHeight)
-        ])
         DispatchQueue.main.async {
             self.segments.selectedIndex(at: 0, animated: false)
         }
@@ -94,14 +105,6 @@ class SegmentViewController: UIViewController {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.delegate = self
         view.addSubview(scrollView)
-        NSLayoutConstraint.activate([
-            scrollView.frameLayoutGuide.topAnchor.constraint(equalTo: segments.bottomAnchor),
-            scrollView.frameLayoutGuide.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.frameLayoutGuide.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.frameLayoutGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            scrollView.contentLayoutGuide.heightAnchor.constraint(equalTo: scrollView.frameLayoutGuide.heightAnchor),
-            scrollView.contentLayoutGuide.widthAnchor.constraint(equalToConstant: CGFloat(viewControllers.count) * width)
-        ])
     }
     
     func setupViewControllers() {
