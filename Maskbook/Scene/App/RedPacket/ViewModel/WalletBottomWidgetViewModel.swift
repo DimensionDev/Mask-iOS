@@ -58,6 +58,20 @@ class WalletBottomWidgetViewModel: ObservableObject {
         state.detail(balance: displayBalance, txURL: transactionURL)
     }
     
+    var currentChainNetwork: Image? {
+        guard let token = token else {
+            return nil
+        }
+
+        guard let tokenBlockChain = BlockChainNetwork(
+            chainId: Int(token.chainId),
+            networkId: UInt64(token.networkId)) else {
+            return nil
+        }
+        
+        return tokenBlockChain.selectedIconAsImage
+    }
+    
     @InjectedProvider(\.userDefaultSettings)
     private var settings
     
@@ -76,13 +90,16 @@ class WalletBottomWidgetViewModel: ObservableObject {
     private var address: String = ""
     
     init() {
-        settings.defaultAccountAddressPublisher.removeDuplicates().asDriver().sink { [weak self] address in
+        Publishers.CombineLatest(
+            settings.defaultAccountAddressPublisher.removeDuplicates(),
+            settings.networkPubisher.removeDuplicates()
+        ).asDriver().sink { [weak self] address, network in
             guard let self = self else { return }
             self.address = address ?? ""
             let token = self.walletAssetManager.getMainToken(
-                network: self.settings.network,
-                chainId: self.settings.network.chain.rawValue,
-                networkId: Int(self.settings.network.networkId),
+                network: network,
+                chainId: network.chain.rawValue,
+                networkId: Int(network.networkId),
                 context: AppContext.shared.coreDataStack.persistentContainer.viewContext)
             self.token = token
         }

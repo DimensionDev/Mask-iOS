@@ -8,6 +8,7 @@
 
 import Foundation
 import MaskWalletCore
+import SwiftUI
 
 struct BlockChainNetwork: Codable {
     let networkId: UInt64
@@ -110,6 +111,22 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
         case .arbitrum: return Asset.Images.Scene.WalletList.Coins.arbitrumSelected.image
         case .xdai: return Asset.Images.Scene.WalletList.Coins.xdaiSelected.image
         case .optimism: return Asset.Images.Scene.WalletList.Coins.optimismSelected.image
+
+        default:
+            return nil
+        }
+    }
+    
+    var selectedIconAsImage: SwiftUI.Image? {
+        switch self {
+        case .eth: return Asset.Images.Scene.WalletList.Coins.ethSelected.asImage()
+        case .rinkeby: return Asset.Images.Scene.WalletList.Coins.ethSelected.asImage()
+        case .bsc: return Asset.Images.Scene.WalletList.Coins.bscSelected.asImage()
+        case .polygon: return Asset.Images.Scene.WalletList.Coins.polygonSelected.asImage()
+        case .polka: return nil
+        case .arbitrum: return Asset.Images.Scene.WalletList.Coins.arbitrumSelected.asImage()
+        case .xdai: return Asset.Images.Scene.WalletList.Coins.xdaiSelected.asImage()
+        case .optimism: return Asset.Images.Scene.WalletList.Coins.optimismSelected.asImage()
 
         default:
             return nil

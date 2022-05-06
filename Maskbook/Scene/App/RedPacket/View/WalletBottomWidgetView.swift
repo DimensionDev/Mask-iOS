@@ -47,7 +47,7 @@ struct WalletBottomWidgetView: View {
                         .resizable()
                         .frame(width: 32, height: 32)
                         .overlay(
-                            Asset.Images.Scene.WalletList.Coins.ethSelected.asImage()
+                            viewModel.currentChainNetwork?
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 13.47)
