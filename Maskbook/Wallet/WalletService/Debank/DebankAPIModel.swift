@@ -157,6 +157,31 @@ public struct DebankAPIModel {
                 let spender: String
                 let value: Decimal
                 let token_id: String
+                
+                public init(from decoder: Decoder) throws {
+                    let container = try decoder.container(keyedBy: CodingKeys.self)
+                    spender = try container.decode(String.self, forKey: .spender)
+                    
+                    if #available(iOS 15, *) {
+                        value = try container.decode(Decimal.self, forKey: .value)
+                    } else {
+                        // FIXME: crash in ios 14.1 when decode `Approve`
+                        // https://github.com/apple/swift-corelibs-foundation/issues/3965
+                        let doubleValue = try container.decode(Double.self, forKey: .value)
+                        let maxMantissa = Double(UInt64.max).nextDown
+                        if doubleValue <= maxMantissa {
+                            value = Decimal(doubleValue)
+                        } else {
+                            value = Decimal(maxMantissa)
+                        }
+                    }
+                    
+                    token_id = try container.decode(String.self, forKey: .token_id)
+                }
+                
+                enum CodingKeys: String, CodingKey {
+                    case spender, value, token_id
+                }
             }
             
             public struct SpotTrade: Decodable {
