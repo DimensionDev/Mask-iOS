@@ -197,12 +197,20 @@ final class LuckyDropViewModel: ObservableObject {
     
     // MARK: - Public method
     init() {
-        let token = walletAssetManager.getMainToken(
-            network: settings.network,
-            chainId: settings.network.chain.rawValue,
-            networkId: Int(settings.network.networkId),
-            context: AppContext.shared.coreDataStack.persistentContainer.viewContext)
-        self.token = token
+        Publishers.CombineLatest3(
+            settings.defaultAccountAddressPublisher.removeDuplicates(),
+            settings.networkPubisher.removeDuplicates(),
+            walletAssetManager.activateProvider.nativeTokenSubject.prepend(())
+        ).asDriver().sink { [weak self] _, network, _ in
+            guard let self = self else { return }
+            let token = self.walletAssetManager.getMainToken(
+                network: network,
+                chainId: network.chain.rawValue,
+                networkId: Int(network.networkId),
+                context: AppContext.shared.coreDataStack.persistentContainer.viewContext)
+            self.token = token
+        }
+        .store(in: &disposeBag)
         
         gasFeeViewModel.refresh()
         

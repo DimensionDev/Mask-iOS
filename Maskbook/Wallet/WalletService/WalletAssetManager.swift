@@ -19,7 +19,7 @@ public class WalletAssetManager {
     
     public var transactions: CurrentValueSubject<[TransactionHistory], Never> = CurrentValueSubject([])
     
-    var activateProvider: WalletAssetProvider {
+    var activateProvider: DebankProvider {
         willSet {
             maskUserDefaults.walletAssetProviderType = newValue.type
         }

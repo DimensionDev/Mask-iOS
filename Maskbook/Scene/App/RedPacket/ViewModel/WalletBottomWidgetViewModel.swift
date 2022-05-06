@@ -90,10 +90,11 @@ class WalletBottomWidgetViewModel: ObservableObject {
     private var address: String = ""
     
     init() {
-        Publishers.CombineLatest(
+        Publishers.CombineLatest3(
             settings.defaultAccountAddressPublisher.removeDuplicates(),
-            settings.networkPubisher.removeDuplicates()
-        ).asDriver().sink { [weak self] address, network in
+            settings.networkPubisher.removeDuplicates(),
+            walletAssetManager.activateProvider.nativeTokenSubject.prepend(())
+        ).asDriver().sink { [weak self] address, network, _ in
             guard let self = self else { return }
             self.address = address ?? ""
             let token = self.walletAssetManager.getMainToken(
