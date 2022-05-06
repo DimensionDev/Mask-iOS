@@ -17,7 +17,7 @@ struct LuckyDropView: View {
     @State var safeArea: EdgeInsets = EdgeInsets()
     @InjectedProvider(\.mainCoordinator)
     private var mainCoordinator
-    let idOfBottomViewToScroll = "idOfBottomViewToScroll"
+    private let idOfBottomViewToScroll = "idOfBottomViewToScroll"
     
     var body: some View {
         GeometryReader { geometry in
@@ -46,11 +46,14 @@ struct LuckyDropView: View {
         ScrollViewReader { scrollView in
             ScrollView {
                 LazyVStack(spacing: 0) {
-                    Spacer().frame(height: LayoutConstraints.top)
-                    SegmentControl(selection: $viewModel.selection) {
-                    }
-                    .frame(height: 48)
+//                    Spacer().frame(height: LayoutConstraints.top)
+                    
+//                    SegmentControl(selection: $viewModel.selection) {
+//                    }
+//                    .frame(height: 48)
+                    
                     tokensRow
+                    
                     confirmButton().id(idOfBottomViewToScroll)
                 }
                 .padding(.horizontal, LayoutConstraints.horizontal)

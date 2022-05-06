@@ -59,10 +59,10 @@ struct LuckyDropHistoryView: View {
                     case .idle: listContent
                     }
                 } header: {
-                    SegmentControl(selection: $viewModel.selection) {
-                        viewModel.displayData()
-                    }
-                    .frame(height: 48)
+//                    SegmentControl(selection: $viewModel.selection) {
+//                        viewModel.displayData()
+//                    }
+//                    .frame(height: 48)
                 }
             }
             .padding(.horizontal, LayoutConstraints.horizontal)
