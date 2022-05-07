@@ -93,6 +93,7 @@ extension MaskSocialViewController {
                         needReload = false
                     }
                 }
+                self.lastProfileIdentifier = profile.identifier
                 if self.cookieSwitcher.needReloadWebView {
                     self.cookieSwitcher.needReloadWebView = false
                     needReload = true
@@ -171,7 +172,7 @@ extension MaskSocialViewController {
     }
 
     func switchTo(socialPlatform: ProfileSocialPlatform) async {
-        let webConfig = await cookieSwitcher.setNewCookies()
+        await cookieSwitcher.setNewCookies()
         if let tabId = tabId, let tab = maskBrowser.browser.tabs.remove(id: tabId) {
             tabService.resign(for: tab)
         }
@@ -180,8 +181,7 @@ extension MaskSocialViewController {
         let tab = maskBrowser.browser.tabs.create(
             options: WebExtension.Browser.Tabs.Create.Options(active: false, url: platformUrl.absoluteString),
             tabDelegate: self,
-            tabDownloadDelegate: self,
-            webViewConfiguration: webConfig
+            tabDownloadDelegate: self
         )
         let maskbookTab = tabService.register(for: tab)
         tabId = maskbookTab.tabID

@@ -25,20 +25,17 @@ class CookieSwitcher {
     }
     
     func saveOldCookieToProfile(profileIdentifier: String) async {
-//        var cookies = HTTPCookieStorage.shared.cookies ?? []
         let cookiesInDataStore =  await WKWebsiteDataStore.default().httpCookieStore.allCookies()
-//        cookies.append(contentsOf: cookiesInDataStore)
         ProfileRepository.updateProfileCookies(identifier: profileIdentifier, cookies: cookiesInDataStore)
     }
     
-    func setNewCookies() async -> WKWebViewConfiguration? {
+    func setNewCookies() async {
         if let cookies = personaManager.currentProfile.value?
                     .cookiesData?.toCookies()
         {
-            await CookieSwitcher.switchToCookie(cookies: cookies)
-            return await CookieSwitcher.configurationWithCookie()
+            await CookieSwitcher.cleanAllCookies()
+            _ = await CookieSwitcher.configurationWithCookie(cookies: cookies)
         }
-        return nil
     }
     
     @MainActor
@@ -51,25 +48,12 @@ class CookieSwitcher {
             await WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record])
         }
     }
-    
-    private static func switchToCookie(cookies: [HTTPCookie]) async {
-        await cleanAllCookies()
-        for cookie in cookies {
-            HTTPCookieStorage.shared.setCookie(cookie)
-        }
-    }
 }
 
 extension CookieSwitcher {
     
     @MainActor
-    private static func configurationWithCookie() async -> WKWebViewConfiguration {
-        let config = WKWebViewConfiguration()
-        config.processPool = WKProcessPool()
-        guard let cookies = HTTPCookieStorage.shared.cookies else {
-            return config
-        }
-        
+    private static func configurationWithCookie(cookies: [HTTPCookie]) async -> Int {
         return await withCheckedContinuation { continuation in
             let dataStore = WKWebsiteDataStore.default()
             let waitGroup = DispatchGroup()
@@ -78,9 +62,8 @@ extension CookieSwitcher {
                 dataStore.httpCookieStore.setCookie(cookie) { waitGroup.leave() }
             }
             waitGroup.notify(queue: DispatchQueue.main) {
-                config.websiteDataStore = dataStore
+                continuation.resume(returning: 0)
             }
-            continuation.resume(returning: config)
         }
     }
     
