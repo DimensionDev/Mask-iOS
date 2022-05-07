@@ -69,7 +69,7 @@ class MaskbookTests: XCTestCase {
 
 
     func testDebankAPIModle() {
-        guard #unavailable(iOS 15) else {
+        guard #available(iOS 14, *) else {
             return
         }
         // related issue [se-13837]
