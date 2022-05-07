@@ -28,6 +28,9 @@ class MaskSocialViewController: BaseViewController {
 
     @InjectedProvider(\.personaManager)
     private var personaManager
+    
+    @InjectedProvider(\.cookieSwitcher)
+    private var cookieSwitcher
 
     @InjectedProvider(\.maskMessageRelay)
     private var maskMessageRelay: MaskMessageRelay
@@ -90,8 +93,8 @@ extension MaskSocialViewController {
                         needReload = false
                     }
                 }
-                if CookieSwitcher.shared.needReloadWebView {
-                    CookieSwitcher.shared.needReloadWebView = false
+                if self.cookieSwitcher.needReloadWebView {
+                    self.cookieSwitcher.needReloadWebView = false
                     needReload = true
                 }
                 if needReload {
@@ -168,7 +171,7 @@ extension MaskSocialViewController {
     }
 
     func switchTo(socialPlatform: ProfileSocialPlatform) async {
-        let webConfig = await CookieSwitcher.shared.setNewCookies()
+        let webConfig = await cookieSwitcher.setNewCookies()
         if let tabId = tabId, let tab = maskBrowser.browser.tabs.remove(id: tabId) {
             tabService.resign(for: tab)
         }

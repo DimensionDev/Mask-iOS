@@ -36,6 +36,9 @@ class MaskConnectingSocialViewController: BaseViewController {
     @InjectedProvider(\.personaManager)
     private var personaManager
     
+    @InjectedProvider(\.cookieSwitcher)
+    private var cookieSwitcher
+    
     private let decoder = JSONDecoder()
     
     private lazy var webViewScrollDelegate = WebViewScrollViewDelegate(navigationController: self.navigationController)
@@ -206,9 +209,9 @@ extension MaskConnectingSocialViewController {
     }
     
     private func switchTo(socialPlatform: ProfileSocialPlatform) async {
-        await CookieSwitcher.shared.saveOldCookieToCurrentProfile()
+        await cookieSwitcher.saveOldCookieToCurrentProfile()
         await CookieSwitcher.cleanAllCookies()
-        CookieSwitcher.shared.needReloadWebView = true
+        cookieSwitcher.needReloadWebView = true
         let config = CookieSwitcher.newConfiguration()
         let platformUrl = socialPlatform.homeUrl
 
@@ -289,7 +292,7 @@ extension MaskConnectingSocialViewController: SocialProfileDetectViewControllerD
             }
             if let identifier = profiles[safeIndex: 0]?.identifier {
                 Task.detached(priority: .userInitiated) { @MainActor in
-                    await CookieSwitcher.shared.saveOldCookieToProfile(profileIdentifier: identifier)
+                    await self.cookieSwitcher.saveOldCookieToProfile(profileIdentifier: identifier)
                 }
             }
             guard let tabId = self.tabId else { return }

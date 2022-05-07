@@ -20,6 +20,9 @@ class SocialViewController: BaseViewController {
     
     @InjectedProvider(\.userDefaultSettings)
     var userSetting
+    
+    @InjectedProvider(\.cookieSwitcher)
+    private var cookieSwitcher
 
     @InjectedProvider(\.mainCoordinator)
     private var coordinator: Coordinator
@@ -136,7 +139,7 @@ extension SocialViewController: UICollectionViewDelegate {
                 Task.detached(priority: .userInitiated) { @MainActor in
                     if let currentIdentifier = self.personaManager.currentProfile.value?.identifier,
                        profile.identifier != currentIdentifier {
-                        await CookieSwitcher.shared.saveOldCookieToCurrentProfile()
+                        await self.cookieSwitcher.saveOldCookieToCurrentProfile()
                     }
                     self.personaManager.currentPersona.value?.selectedProfile = profileRecord
                     self.userSetting.currentProfileSocialPlatform = profile.socialPlatform

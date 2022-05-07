@@ -12,7 +12,7 @@ import WebKit
 @MainActor
 class CookieSwitcher {
 
-    static let shared = CookieSwitcher()
+    fileprivate static let shared = CookieSwitcher()
     
     var needReloadWebView = false
     @InjectedProvider(\.personaManager)
@@ -89,5 +89,15 @@ extension CookieSwitcher {
         let config = WKWebViewConfiguration()
         config.processPool = WKProcessPool()
         return config
+    }
+}
+
+private enum CookieSwitcherInjectValueKey: InjectValueKey {
+    static var defaultInjectValue = CookieSwitcher.shared
+}
+
+extension InjectValues {
+    var cookieSwitcher: CookieSwitcher {
+        Self[CookieSwitcherInjectValueKey.self]
     }
 }
