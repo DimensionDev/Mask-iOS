@@ -212,14 +212,12 @@ extension MaskConnectingSocialViewController {
         await cookieSwitcher.saveOldCookieToCurrentProfile()
         await CookieSwitcher.cleanAllCookies()
         cookieSwitcher.needReloadWebView = true
-        let config = CookieSwitcher.newConfiguration()
         let platformUrl = socialPlatform.homeUrl
 
         let tab = maskBrowser.browser.tabs.create(
             options: WebExtension.Browser.Tabs.Create.Options(active: false, url: platformUrl.absoluteString),
             tabDelegate: self,
-            tabDownloadDelegate: self,
-            webViewConfiguration: config
+            tabDownloadDelegate: self
         )
         let maskbookTab = tabService.register(for: tab)
         tabId = maskbookTab.tabID

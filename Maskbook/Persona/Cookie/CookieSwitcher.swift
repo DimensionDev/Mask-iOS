@@ -66,13 +66,6 @@ extension CookieSwitcher {
             }
         }
     }
-    
-    @MainActor
-    static func newConfiguration() -> WKWebViewConfiguration {
-        let config = WKWebViewConfiguration()
-        config.processPool = WKProcessPool()
-        return config
-    }
 }
 
 private enum CookieSwitcherInjectValueKey: InjectValueKey {
