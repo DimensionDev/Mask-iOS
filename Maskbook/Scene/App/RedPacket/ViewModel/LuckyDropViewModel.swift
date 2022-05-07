@@ -225,7 +225,14 @@ final class LuckyDropViewModel: ObservableObject {
     }
     
     func maxAmount() {
-        guard let amount = token?.quantityNumber else { return }
+        guard let token = token else { return }
+        var amount = token.quantityNumber
+        if token.isMainToken == true, let gasFee = self.gasFeeItem?.gasFee {
+            let gasFeeNumber = NSDecimalNumber(string: gasFee)
+            if gasFeeNumber != .notANumber {
+                amount = amount.subtracting(gasFeeNumber)
+            }
+        }
         
         switch mode {
         case .average:
@@ -235,7 +242,8 @@ final class LuckyDropViewModel: ObservableObject {
                 return
             }
             let result = amount.dividing(by: quantity)
-            guard result != .notANumber, let decimal = token?.decimal else {
+            let decimal = token.decimal
+            guard result != .notANumber else {
                 amountStr = ""
                 return
             }
