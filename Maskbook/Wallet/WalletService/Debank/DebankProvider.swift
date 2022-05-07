@@ -495,7 +495,7 @@ extension Token {
         }
         self.init(context: context)
         self.contractAddress = debankToken.id
-        self.price = NSDecimalNumber(decimal: debankToken.price ?? Decimal.zero)
+        self.price = debankToken.price.decimalNumber
         self.decimal = Int16(debankToken.decimals)
         self.chainId = Int64(blockchain.chain.rawValue)
         self.logoUrl = debankToken.logoUrl?.absoluteString
@@ -503,7 +503,7 @@ extension Token {
         self.symbol = debankToken.symbol
         self.networkId = Int64(blockchain.networkId)
         let decimalNumber = NSDecimalNumber(mantissa: 1, exponent: Int16(debankToken.decimals), isNegative: false)
-        let amountNumber = NSDecimalNumber(decimal: debankToken.amount ?? .zero)
+        let amountNumber = debankToken.amount.decimalNumber
         let amountWithDecimal = amountNumber.multiplying(by: decimalNumber)
         self.quantity = amountWithDecimal
         self.identifier = Token.createIdentifier(
@@ -571,7 +571,7 @@ extension Portfolio {
         self.currency = Currency.usd.rawValue
         self.chainId = Int64(blockchain.chain.rawValue)
         self.networkId = Int64(blockchain.networkId)
-        self.assetsValue = NSDecimalNumber(decimal: debankChainPortfolio.usdValue).floatValue
+        self.assetsValue = debankChainPortfolio.usdValue.decimalNumber.floatValue
     }
 }
 
@@ -622,14 +622,13 @@ extension TransactionHistory {
             self.type = txType
         }
         
-        self.gasFee = NSDecimalNumber(decimal: transaction.tx?.eth_gas_fee ?? 0).multiplying(by: NSDecimalNumber(mantissa: 1, exponent: Int16(18), isNegative: false)).decimalValue
+        self.gasFee = (transaction.tx?.eth_gas_fee.decimalNumber ?? .zero).multiplying(by: NSDecimalNumber(mantissa: 1, exponent: Int16(18), isNegative: false)).decimalValue
         
         let price: NSDecimalNumber = {
-            if transaction.tx?.eth_gas_fee == .zero {
+            guard let tx = transaction.tx else {
                 return .zero
             }
-            return NSDecimalNumber(decimal: transaction.tx?
-                                            .usd_gas_fee ?? 0).dividing(by: NSDecimalNumber(decimal: transaction.tx?.eth_gas_fee ?? 1))
+            return tx.usd_gas_fee.decimalNumber.dividing(by: tx.eth_gas_fee.decimalNumber)
         }()
         self.gasPrice = price.decimalValue
         self.timeAt = TimeInterval(transaction.time_at ?? 0)
@@ -638,22 +637,22 @@ extension TransactionHistory {
             let historyAsset = TransactionHistory.Asset(assetCode: asset.id,
                                                         decimals: decimals,
                                                         iconUrl: asset.logoUrl,
-                                                        price: asset.price ?? Decimal.zero,
+                                                        price: asset.price.decimalNumber.decimalValue,
                                                         isDisplayable: asset.isVerified ?? false,
                                                         isVerified: asset.isVerified ?? false,
                                                         name: asset.name,
                                                         symbol: asset.symbol,
                                                         type: nil)
             if let send = transaction.sends?.first {
-                let sendAmount = NSDecimalNumber(decimal: send.amount).multiplying(by: NSDecimalNumber(mantissa: 1, exponent: Int16(asset.decimals ?? 1), isNegative: false)).decimalValue
+                let sendAmount = send.amount.decimalNumber.multiplying(by: NSDecimalNumber(mantissa: 1, exponent: Int16(asset.decimals ?? 1), isNegative: false)).decimalValue
                 let change = TransactionHistory.TransactionChange(asset: historyAsset, value: sendAmount, address_from: transaction.tx?.from_addr ?? "", address_to: send.to_addr, price: historyAsset.price)
                 self.change = change
             } else if let receive = transaction.receives?.first {
-                let receiveAmount = NSDecimalNumber(decimal: receive.amount).multiplying(by: NSDecimalNumber(mantissa: 1, exponent: Int16(decimals), isNegative: false)).decimalValue
+                let receiveAmount = receive.amount.decimalNumber.multiplying(by: NSDecimalNumber(mantissa: 1, exponent: Int16(decimals), isNegative: false)).decimalValue
                 let change = TransactionHistory.TransactionChange(asset: historyAsset, value: receiveAmount, address_from: receive.from_addr, address_to: transaction.tx?.from_addr ?? "", price: historyAsset.price)
                 self.change = change
             } else if let approve = transaction.token_approve {
-                let approveAmount = NSDecimalNumber(decimal: approve.value).multiplying(by: NSDecimalNumber(mantissa: 1, exponent: Int16(decimals), isNegative: false)).decimalValue
+                let approveAmount = approve.value.decimalNumber.multiplying(by: NSDecimalNumber(mantissa: 1, exponent: Int16(decimals), isNegative: false)).decimalValue
                 let change = TransactionHistory.TransactionChange(asset: historyAsset, value: approveAmount, address_from: transaction.tx?.from_addr ?? "", address_to: approve.spender, price: historyAsset.price)
                 self.change = change
             } else {

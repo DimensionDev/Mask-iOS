@@ -10,7 +10,8 @@ import Foundation
 
 public struct DebankAPIModel {
     public struct Portfolio: Decodable {
-        let totalUsdValue: Decimal
+        @DecimalConverted
+        var totalUsdValue: EitherOr<Decimal, String>
         let chainList: [ChainPortfolio]
         
         enum CodingKeys: String, CodingKey {
@@ -25,7 +26,8 @@ public struct DebankAPIModel {
             let nativeTokenId: String?
             let logoUrl: String?
             let wrappedTokenId: String?
-            let usdValue: Decimal
+            @DecimalConverted
+            var usdValue: EitherOr<Decimal, String>
             
             enum CodingKeys: String, CodingKey {
                 case id
@@ -48,12 +50,14 @@ public struct DebankAPIModel {
         let optimizedSymbol: String?
         let decimals: Int
         let logoUrl: URL?
-        let price: Decimal?
+        @DecimalConverted
+        var price: EitherOr<Decimal, String>
         let isVerified: Bool?
         let isCore: Bool?
         let isWallet: Bool
         let timeAt: TimeInterval?
-        let amount: Decimal?
+        @DecimalConverted
+        var amount: EitherOr<Decimal, String>
         
         enum CodingKeys: String, CodingKey {
             case id
@@ -111,12 +115,14 @@ public struct DebankAPIModel {
             let optimizedSymbol: String?
             let decimals: Int?
             let logoUrl: URL?
-            let price: Decimal?
+            @DecimalConverted
+            var price: EitherOr<Decimal, String>
             let isVerified: Bool?
             let isCore: Bool?
             let isWallet: Bool?
             let timeAt: TimeInterval?
-            let amount: Decimal?
+            @DecimalConverted
+            var amount: EitherOr<Decimal, String>
             
             enum CodingKeys: String, CodingKey {
                 case id
@@ -142,40 +148,55 @@ public struct DebankAPIModel {
             }
             
             public struct Receive: Decodable {
-                let amount: Decimal
+                @DecimalConverted
+                var amount: EitherOr<Decimal, String>
                 let from_addr: String
                 let token_id: String
             }
             
             public struct Send: Decodable {
-                let amount: Decimal
+                @DecimalConverted
+                var amount: EitherOr<Decimal, String>
                 let to_addr: String
                 let token_id: String
             }
             
             public struct Approve: Decodable {
                 let spender: String
-                let value: Decimal
+                @DecimalConverted
+                var value: EitherOr<Decimal, String>
                 let token_id: String
+
+
+                init(spender: String, value: EitherOr<Decimal, String>, tokenId: String) {
+                    self.spender = spender
+                    self.token_id = tokenId
+                    _value = .init(value: value)
+                }
             }
             
             public struct SpotTrade: Decodable {
                 let dex_id: String?
-                let pay_token_amount: Decimal
+                @DecimalConverted
+                var pay_token_amount: EitherOr<Decimal, String>
                 let pay_token_id: String
-                let receive_token_amount: Decimal
+                @DecimalConverted
+                var receive_token_amount: EitherOr<Decimal, String>
                 let receive_token_id: String
             }
             
             public struct Tx: Decodable {
-                let eth_gas_fee: Decimal?
+                @DecimalConverted
+                var eth_gas_fee: EitherOr<Decimal, String>
                 let from_addr: String?
                 let name: String?
 //                let params: [String]?
                 let status: Int?
                 let to_addr: String?
-                let usd_gas_fee: Decimal?
-                let value: Decimal?
+                @DecimalConverted
+                var usd_gas_fee: EitherOr<Decimal, String>
+                @DecimalConverted
+                var value: EitherOr<Decimal, String>
             }
             
             let cate_id: String?
@@ -216,5 +237,45 @@ extension BlockChainNetwork {
             }
         }
         return nil
+    }
+}
+
+@propertyWrapper
+struct DecimalConverted: Decodable {
+    let wrappedValue: EitherOr<Decimal, String>
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+
+        if #available(iOS 15, *) {
+            let value = try container.decode(Decimal.self)
+            wrappedValue = .either(value)
+        } else {
+            let doubleValue = try container.decode(Double.self)
+            wrappedValue = .or("\(doubleValue)")
+        }
+    }
+
+    init(value: EitherOr<Decimal, String>) {
+        wrappedValue = value
+    }
+}
+
+
+extension EitherOr where T == Decimal, V == String {
+    var decimalNumber: NSDecimalNumber {
+        switch self {
+        case let .either(decimal): return NSDecimalNumber(decimal: decimal)
+        case let .or(string): return NSDecimalNumber(string: string)
+        }
+    }
+}
+
+extension KeyedDecodingContainer {
+    func decode(
+        _ type: DecimalConverted.Type,
+        forKey key: Key
+    ) throws -> DecimalConverted {
+        return try decodeIfPresent(type, forKey: key) ?? DecimalConverted(value: .either(.zero))
     }
 }
