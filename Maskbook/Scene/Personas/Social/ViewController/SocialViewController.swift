@@ -133,8 +133,15 @@ extension SocialViewController: UICollectionViewDelegate {
         } else {
             let profileRecord = personaManager.currentProfiles.value[indexPath.row - 1]
             if let profile = Profile(fromRecord: profileRecord) {
-                userSetting.currentProfileSocialPlatform = profile.socialPlatform
-                dismissMainTabBarController()
+                Task.detached(priority: .userInitiated) { @MainActor in
+                    if let currentIdentifier = self.personaManager.currentProfile.value?.identifier,
+                       profile.identifier != currentIdentifier {
+                        await CookieSwitcher.shared.saveOldCookieToCurrentProfile()
+                    }
+                    self.personaManager.currentPersona.value?.selectedProfile = profileRecord
+                    self.userSetting.currentProfileSocialPlatform = profile.socialPlatform
+                    self.dismissMainTabBarController()
+                }
             }
         }
     }

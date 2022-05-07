@@ -39,6 +39,7 @@ class PersonaManager {
     }()
 
     let currentPersona = CurrentValueSubject<PersonaRecord?, Never>(nil)
+    let currentProfile = CurrentValueSubject<ProfileRecord?, Never>(nil)
     let currentProfiles = CurrentValueSubject<[ProfileRecord], Never>([])
     
     // temporary store a persona name here
@@ -74,6 +75,14 @@ class PersonaManager {
                 } ?? []
             }
             .assign(to: \.currentProfiles.value, on: self)
+            .store(in: &disposeBag)
+        
+        currentPersona
+            .receive(on: DispatchQueue.main)
+            .map({
+                $0?.selectedProfile
+            })
+            .assign(to: \.currentProfile.value, on: self)
             .store(in: &disposeBag)
         
         if let currentPersonaIdentifier = settings.currentPesonaIdentifier,
