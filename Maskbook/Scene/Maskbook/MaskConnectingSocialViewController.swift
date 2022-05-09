@@ -291,6 +291,8 @@ extension MaskConnectingSocialViewController: SocialProfileDetectViewControllerD
             if let identifier = profiles[safeIndex: 0]?.identifier {
                 Task.detached(priority: .userInitiated) { @MainActor in
                     await self.cookieSwitcher.saveOldCookieToProfile(profileIdentifier: identifier)
+                    let profileRecord = ProfileRepository.queryProfile(identifier: identifier)
+                    self.personaManager.currentPersona.value?.selectedProfile = profileRecord
                 }
             }
             guard let tabId = self.tabId else { return }
