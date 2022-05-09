@@ -18,6 +18,8 @@ class CookieSwitcher {
     @InjectedProvider(\.personaManager)
     private var personaManager
     
+    let dataStore = WKWebsiteDataStore.default()
+    
     func saveOldCookieToCurrentProfile() async {
         if let profile = personaManager.currentProfile.value, !needReloadWebView {
            await saveOldCookieToProfile(profileIdentifier: profile.nonOptionalIdentifier)
@@ -25,7 +27,7 @@ class CookieSwitcher {
     }
     
     func saveOldCookieToProfile(profileIdentifier: String) async {
-        let cookiesInDataStore =  await WKWebsiteDataStore.default().httpCookieStore.allCookies()
+        let cookiesInDataStore =  await dataStore.httpCookieStore.allCookies()
         ProfileRepository.updateProfileCookies(identifier: profileIdentifier, cookies: cookiesInDataStore)
     }
     
@@ -34,18 +36,17 @@ class CookieSwitcher {
                     .cookiesData?.toCookies()
         {
             await CookieSwitcher.cleanAllCookies()
-            _ = await CookieSwitcher.configurationWithCookie(cookies: cookies)
+            await CookieSwitcher.setCookieToWebsiteDataStore(cookies: cookies)
         }
     }
     
     @MainActor
     static func cleanAllCookies() async {
         HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
-        print("All cookies deleted")
 
-        let records = await WKWebsiteDataStore.default().dataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes())
+        let records = await dataStore.dataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes())
         for record in records {
-            await WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record])
+            await dataStore.removeData(ofTypes: record.dataTypes, for: [record])
         }
     }
 }
@@ -53,17 +54,10 @@ class CookieSwitcher {
 extension CookieSwitcher {
     
     @MainActor
-    private static func configurationWithCookie(cookies: [HTTPCookie]) async -> Int {
-        return await withCheckedContinuation { continuation in
-            let dataStore = WKWebsiteDataStore.default()
-            let waitGroup = DispatchGroup()
-            for cookie in cookies {
-                waitGroup.enter()
-                dataStore.httpCookieStore.setCookie(cookie) { waitGroup.leave() }
-            }
-            waitGroup.notify(queue: DispatchQueue.main) {
-                continuation.resume(returning: 0)
-            }
+    private static func setCookieToWebsiteDataStore(cookies: [HTTPCookie]) async {
+        let dataStore = WKWebsiteDataStore.default()
+        for cookie in cookies {
+           await dataStore.httpCookieStore.setCookie(cookie)
         }
     }
 }

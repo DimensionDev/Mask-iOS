@@ -339,9 +339,7 @@ extension MaskSocialViewController: MaskbookNavigationDelegateShimDelegate {
 }
 
 extension MaskSocialViewController: UIAdaptivePresentationControllerDelegate {
-    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
-        print("")
-    }
+    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {}
 
     func adaptivePresentationStyle(for controller: UIPresentationController,
                                    traitCollection: UITraitCollection)
