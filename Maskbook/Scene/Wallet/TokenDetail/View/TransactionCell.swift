@@ -66,6 +66,31 @@ extension TransactionHistory.TransactionType {
 }
 
 class TransactionCell: UITableViewCell {
+    
+    enum actionType {
+        case speedUp
+        case cancel
+        
+        var gasRatio: NSDecimalNumber {
+            switch self {
+            case .speedUp:
+                return NSDecimalNumber(value: 1.2)
+                
+            case .cancel:
+                return NSDecimalNumber(value: 1.5)
+            }
+        }
+        
+        var gasRatioBigUInt: Int {
+            switch self {
+            case .speedUp:
+                return 12
+                
+            case .cancel:
+                return 15
+            }
+        }
+    }
 
     private var txHash: String?
     private var typeIconView: UIImageView = {
@@ -299,8 +324,8 @@ class TransactionCell: UITableViewCell {
 }
 
 extension TransactionCell {
-    @objc
-    func speedUpClicked(_ sender: UIButton) {
+    
+    func gasAction(type: actionType) {
         let result = PendTransactionManager.shared.pendTransactions.value.filter {
             $0.txHash == self.txHash &&
             $0.address == maskUserDefaults.defaultAccountAddress &&
@@ -310,39 +335,49 @@ extension TransactionCell {
         if let txToSpeedUp = result.first {
             
             guard let toAddress = txToSpeedUp.transactionInfo?.toAddress else { return }
+            guard let toAddressCancel = maskUserDefaults.defaultAccountAddress else { return }
             guard let amount = txToSpeedUp.transactionInfo?.amount else { return }
             guard let gasPrice = txToSpeedUp.transactionInfo?.gasPrice else { return }
             guard let gasLimit = txToSpeedUp.transactionInfo?.gaslimit else { return }
             
-            let confirmModel = SendConfirmViewModel(selectedToken: txToSpeedUp.transactionInfo?.token, gasPrice: gasPrice * BigUInt(1.2), gasLimit: gasLimit, gasFeeNetModel: txToSpeedUp.transactionInfo?.gasNetModel)
+            var gasNetModel = txToSpeedUp.transactionInfo?.gasNetModel
+
+            if let maxFeePerGas = txToSpeedUp.transactionInfo?.gasNetModel?.suggestedMaxFeePerGas {
+                let gwei = NSDecimalNumber(string: maxFeePerGas).multiplying(by: type.gasRatio)
+                let roundBehavior = NSDecimalNumberHandler(roundingMode: .plain, scale: 0, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
+                gasNetModel?.suggestedMaxFeePerGas = gwei.rounding(accordingToBehavior: roundBehavior).stringValue
+            }
             
-            Coordinator.main.present(
-                scene: .sendTransactionPopConfirm(sendConfirmViewModel: confirmModel, toAddress: toAddress, amount: amount, nonce: txToSpeedUp.nonce),
-                transition: .panModel(animated: true))
+            if let maxPriorityFee = txToSpeedUp.transactionInfo?.gasNetModel?.suggestedMaxPriorityFeePerGas {
+                let gwei = NSDecimalNumber(string: maxPriorityFee).multiplying(by: type.gasRatio)
+                let roundBehavior = NSDecimalNumberHandler(roundingMode: .plain, scale: 0, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
+                gasNetModel?.suggestedMaxPriorityFeePerGas = gwei.rounding(accordingToBehavior: roundBehavior).stringValue
+            }
+            let confirmModel = SendConfirmViewModel(selectedToken: txToSpeedUp.transactionInfo?.token, gasPrice: gasPrice * BigUInt(type.gasRatioBigUInt) / BigUInt(10), gasLimit: gasLimit, gasFeeNetModel: gasNetModel)
+            
+            switch type {
+            case .speedUp:
+                Coordinator.main.present(
+                    scene: .sendTransactionPopConfirm(sendConfirmViewModel: confirmModel, toAddress: toAddress, amount: amount, nonce: txToSpeedUp.nonce),
+                    transition: .panModel(animated: true))
+            case .cancel:
+                Coordinator.main.present(
+                    scene: .sendTransactionPopConfirm(sendConfirmViewModel: confirmModel, toAddress: toAddressCancel, amount: "0", nonce: txToSpeedUp.nonce),
+                    transition: .panModel(animated: true))
+            }
+                        
+
         }
+
+    }
+    
+    @objc
+    func speedUpClicked(_ sender: UIButton) {
+        gasAction(type: .speedUp)
     }
     
     @objc
     func cancelClicked(_ sender: UIButton) {
-        let result = PendTransactionManager.shared.pendTransactions.value.filter {
-            $0.txHash == self.txHash &&
-            $0.address == maskUserDefaults.defaultAccountAddress &&
-            $0.networkId == maskUserDefaults.network.networkId
-        }
-        
-        if let txToSpeedUp = result.first {
-    
-            guard let toAddress = maskUserDefaults.defaultAccountAddress else { return }
-            guard let gasPrice = txToSpeedUp.transactionInfo?.gasPrice else { return }
-            guard let gasLimit = txToSpeedUp.transactionInfo?.gaslimit else { return }
-            
-            let token  = WalletAssetManager.shared.getDefaultMainToken()
-
-            let confirmModel = SendConfirmViewModel(selectedToken: token, gasPrice: gasPrice * BigUInt(1.5), gasLimit: gasLimit, gasFeeNetModel: txToSpeedUp.transactionInfo?.gasNetModel)
-            
-            Coordinator.main.present(
-                scene: .sendTransactionPopConfirm(sendConfirmViewModel: confirmModel, toAddress: toAddress, amount: "0", nonce: txToSpeedUp.nonce),
-                transition: .panModel(animated: true))
-        }
+        gasAction(type: .cancel)
     }
 }
