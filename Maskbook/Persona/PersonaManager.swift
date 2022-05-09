@@ -86,6 +86,21 @@ class PersonaManager {
         }
     }
     
+    static func nonrepeatingName(name: String?, withNames: [String]) -> String {
+        let name = name ?? "persona"
+        let names = withNames
+        if !names.contains(name) {
+            return name
+        }
+        var newName: String = name
+        var count = 1
+        while (names.contains(newName)) {
+            newName = name + "(\(count))"
+            count = count + 1
+        }
+        return newName
+    }
+    
     private func setCurrentPersonaIdentifierToWeb(identifier: String) {
         let request = WebExtension.Persona.SetCurrentPersonaIdenfitier.withPayload {
             .init(identifier: identifier)
