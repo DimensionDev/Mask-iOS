@@ -117,7 +117,7 @@
         <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="withPassword" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <relationship name="linkedProfiles" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="ProfileRecord" inverseName="linkedPersona" inverseEntity="ProfileRecord"/>
-        <relationship name="selectedProfile" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProfileRecord"/>
+        <relationship name="selectedProfile" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="ProfileRecord"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="identifier"/>
