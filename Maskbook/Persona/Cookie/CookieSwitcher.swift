@@ -43,7 +43,7 @@ class CookieSwitcher {
     @MainActor
     static func cleanAllCookies() async {
         HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
-
+        let dataStore = WKWebsiteDataStore.default()
         let records = await dataStore.dataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes())
         for record in records {
             await dataStore.removeData(ofTypes: record.dataTypes, for: [record])
