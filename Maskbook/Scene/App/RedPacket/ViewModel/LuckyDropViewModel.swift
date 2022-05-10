@@ -128,16 +128,7 @@ final class LuckyDropViewModel: ObservableObject {
     }
     
     var totalQuantityStr: String {
-        let roundBehavior = NSDecimalNumberHandler(roundingMode: .plain, scale: 2, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
-        let result = totalQuantity.rounding(accordingToBehavior: roundBehavior)
-        guard result != .notANumber else {
-            return "0.00"
-        }
-        let doubleValue = totalQuantity.doubleValue
-        if doubleValue < 0.01, doubleValue > 0 {
-            return "< 0.01"
-        }
-        return String(format: "%.2f", result.doubleValue)
+        totalQuantity.displayBalance
     }
     
     var totalQuantityColor: Color {
