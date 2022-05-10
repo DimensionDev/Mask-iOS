@@ -42,7 +42,7 @@ enum PostRepository {
             postRecord.summary = post.summary
             
             if let foundAt = post.foundAt {
-                postRecord.foundAt = Date(timeIntervalSince1970: foundAt / 1_000)
+                postRecord.foundAt = Date(milliseconds: foundAt)
             } else {
                 log.debug("no foundAt in creating post", source: "Persona")
             }
@@ -72,7 +72,7 @@ enum PostRepository {
             postRecord.summary = summary
         }
         if let foundAt = post.foundAt {
-            postRecord.foundAt = Date(timeIntervalSince1970: foundAt / 1_000)
+            postRecord.foundAt = Date(milliseconds: foundAt)
         }
         if let interestedMetaData = try? post.interestedMeta?.rawData() {
             postRecord.interestedMetaRaw = interestedMetaData
@@ -191,7 +191,7 @@ enum PostRepository {
                 postRecord.summary = post[Post.CodingKeys.summary.rawValue].string
                 
                 if let foundAt = post[Post.CodingKeys.foundAt.rawValue].double {
-                    postRecord.foundAt = Date(timeIntervalSince1970: foundAt)
+                    postRecord.foundAt = Date(milliseconds: foundAt)
                 } else {
                     postRecord.foundAt = Date()
                 }
@@ -242,7 +242,7 @@ extension PostRecord {
         }
         
         // 3. foundAt
-        backupDict[Post.CodingKeys.foundAt.rawValue] = createdAt?.timeIntervalSince1970
+        backupDict[Post.CodingKeys.foundAt.rawValue] = createdAt?.millisecondsSince1970
         
         // 4. postBy
         if let postUserId = postUserId,

@@ -23,8 +23,8 @@ enum ProfileRepository {
             newProfileRecord.identifier = profile.identifier
             newProfileRecord.nickname = profile.nickname
             newProfileRecord.network = profile.network
-            newProfileRecord.createdAt = Date(timeIntervalSince1970: profile.createdAt)
-            newProfileRecord.updatedAt = Date(timeIntervalSince1970: profile.updatedAt)
+            newProfileRecord.createdAt = Date(milliseconds: profile.createdAt)
+            newProfileRecord.updatedAt = Date(milliseconds: profile.updatedAt)
             if let linkedPersonaIdentifier = profile.linkedPersona {
                 if let persona = PersonaRepository.queryPersona(identifier: linkedPersonaIdentifier,
                                                                 context: context) {
@@ -204,12 +204,12 @@ enum ProfileRepository {
                 }
                 
                 if let createdAt = profile[Profile.CodingKeys.createdAt.rawValue].double {
-                    newProfileRecord.createdAt = Date(timeIntervalSince1970: createdAt)
+                    newProfileRecord.createdAt = Date(milliseconds: createdAt)
                 } else {
                     newProfileRecord.createdAt = Date()
                 }
                 if let updatedAt = profile[Profile.CodingKeys.updatedAt.rawValue].double {
-                    newProfileRecord.updatedAt = Date(timeIntervalSince1970: updatedAt)
+                    newProfileRecord.updatedAt = Date(milliseconds: updatedAt)
                 } else {
                     newProfileRecord.updatedAt = Date()
                 }
@@ -244,8 +244,8 @@ extension ProfileRecord {
         backupDict[Profile.CodingKeys.identifier.rawValue] = identifier
         backupDict[Profile.CodingKeys.nickname.rawValue] = nickname
         backupDict[Profile.CodingKeys.linkedPersona.rawValue] = linkedPersona?.identifier
-        backupDict[Profile.CodingKeys.createdAt.rawValue] = createdAt?.timeIntervalSince1970
-        backupDict[Profile.CodingKeys.updatedAt.rawValue] = updatedAt?.timeIntervalSince1970
+        backupDict[Profile.CodingKeys.createdAt.rawValue] = createdAt?.millisecondsSince1970
+        backupDict[Profile.CodingKeys.updatedAt.rawValue] = updatedAt?.millisecondsSince1970
         
         return JSON(backupDict)
     }

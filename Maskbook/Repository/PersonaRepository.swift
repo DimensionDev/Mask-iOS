@@ -45,8 +45,8 @@ enum PersonaRepository {
             let profileRecords = ProfileRepository.queryProfiles(identifiers: profileIdentifiers,
                                                                  context: context)
             newPersonaRecord.addToLinkedProfiles(NSSet(array: profileRecords))
-            newPersonaRecord.createdAt = Date(timeIntervalSince1970: persona.createdAt)
-            newPersonaRecord.updatedAt = Date(timeIntervalSince1970: persona.updatedAt)
+            newPersonaRecord.createdAt = Date(milliseconds: persona.createdAt)
+            newPersonaRecord.updatedAt = Date(milliseconds: persona.updatedAt)
             try? context.saveOrRollback()
         }
     }
@@ -367,12 +367,12 @@ enum PersonaRepository {
                 newPersonaRecord.initialized = true
                 
                 if let createdAt = persona[Persona.CodingKeys.createdAt.rawValue].double {
-                    newPersonaRecord.createdAt = Date(timeIntervalSince1970: createdAt)
+                    newPersonaRecord.createdAt = Date(milliseconds: createdAt)
                 } else {
                     newPersonaRecord.createdAt = Date()
                 }
                 if let updatedAt = persona[Persona.CodingKeys.updatedAt.rawValue].double {
-                    newPersonaRecord.updatedAt = Date(timeIntervalSince1970: updatedAt)
+                    newPersonaRecord.updatedAt = Date(milliseconds: updatedAt)
                 } else {
                     newPersonaRecord.updatedAt = Date()
                 }
@@ -422,8 +422,8 @@ extension PersonaRecord {
             backupDict[Persona.CodingKeys.mnemonic.rawValue] = JSON(parseJSON: mnemonic)
         }
         
-        backupDict[Persona.CodingKeys.createdAt.rawValue] = createdAt?.timeIntervalSince1970
-        backupDict[Persona.CodingKeys.updatedAt.rawValue] = updatedAt?.timeIntervalSince1970
+        backupDict[Persona.CodingKeys.createdAt.rawValue] = createdAt?.millisecondsSince1970
+        backupDict[Persona.CodingKeys.updatedAt.rawValue] = updatedAt?.millisecondsSince1970
         
         var linkedProfilesArray = [[Any]]()
         linkedProfiles?.forEach {

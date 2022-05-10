@@ -556,6 +556,7 @@
 		2DEDDEA92761ED7000D37A76 /* WalletConnectSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEDDEA72761ED7000D37A76 /* WalletConnectSession+CoreDataProperties.swift */; };
 		2DEDDEAB2761EE7900D37A76 /* MaskClientMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEDDEAA2761EE7900D37A76 /* MaskClientMeta.swift */; };
 		32DA89FF29B463CF8010221C /* Pods_MaskbookTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAEEDD9836F80A163641983 /* Pods_MaskbookTests.framework */; };
+		410F7FDC282A10A0007DB3A7 /* Date+Milliseconds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410F7FDB282A10A0007DB3A7 /* Date+Milliseconds.swift */; };
 		4156689327A53BA70051E0E7 /* ShareLinkGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156689227A53BA70051E0E7 /* ShareLinkGenerator.swift */; };
 		4156689527A68B770051E0E7 /* JsonWebKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156689427A68B770051E0E7 /* JsonWebKey.swift */; };
 		4168635327F434AE00F12DB2 /* BackupPreviewGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168635227F434AE00F12DB2 /* BackupPreviewGenerator.swift */; };
@@ -627,8 +628,8 @@
 		5D9A88DC27BB4AE200879068 /* PersonaDownloadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A88DB27BB4AE200879068 /* PersonaDownloadHandler.swift */; };
 		5DA5B6CB27D9F6260014780A /* UISearchBar+Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA5B6CA27D9F6260014780A /* UISearchBar+Height.swift */; };
 		5DAC90B727C5D0B100BAFB23 /* UIView+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAC90B627C5D0B100BAFB23 /* UIView+Shake.swift */; };
-		5DAF3FBC2815498900CADB80 /* Api_JWKResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAF3FBB2815498900CADB80 /* Api_JWKResp.swift */; };
 		5DAF3FB92814E80600CADB80 /* MaskSchemeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAF3FB82814E80600CADB80 /* MaskSchemeTest.swift */; };
+		5DAF3FBC2815498900CADB80 /* Api_JWKResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAF3FBB2815498900CADB80 /* Api_JWKResp.swift */; };
 		5DB39E2B278694460025337C /* JSDocumentResourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2A278694460025337C /* JSDocumentResourceManager.swift */; };
 		5DB39E2E27869F6C0025337C /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2D27869F6C0025337C /* DebugView.swift */; };
 		5DB39E302786A4E40025337C /* JSResourceSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2F2786A4E40025337C /* JSResourceSelectView.swift */; };
@@ -1289,6 +1290,7 @@
 		2DEDDEA62761ED7000D37A76 /* WalletConnectSession+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletConnectSession+CoreDataClass.swift"; sourceTree = "<group>"; };
 		2DEDDEA72761ED7000D37A76 /* WalletConnectSession+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletConnectSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2DEDDEAA2761EE7900D37A76 /* MaskClientMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskClientMeta.swift; sourceTree = "<group>"; };
+		410F7FDB282A10A0007DB3A7 /* Date+Milliseconds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Milliseconds.swift"; sourceTree = "<group>"; };
 		4156689227A53BA70051E0E7 /* ShareLinkGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareLinkGenerator.swift; sourceTree = "<group>"; };
 		4156689427A68B770051E0E7 /* JsonWebKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonWebKey.swift; sourceTree = "<group>"; };
 		4168635227F434AE00F12DB2 /* BackupPreviewGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupPreviewGenerator.swift; sourceTree = "<group>"; };
@@ -1356,8 +1358,8 @@
 		5D9A88DB27BB4AE200879068 /* PersonaDownloadHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaDownloadHandler.swift; sourceTree = "<group>"; };
 		5DA5B6CA27D9F6260014780A /* UISearchBar+Height.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Height.swift"; sourceTree = "<group>"; };
 		5DAC90B627C5D0B100BAFB23 /* UIView+Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shake.swift"; sourceTree = "<group>"; };
-		5DAF3FBB2815498900CADB80 /* Api_JWKResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api_JWKResp.swift; sourceTree = "<group>"; };
 		5DAF3FB82814E80600CADB80 /* MaskSchemeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskSchemeTest.swift; sourceTree = "<group>"; };
+		5DAF3FBB2815498900CADB80 /* Api_JWKResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api_JWKResp.swift; sourceTree = "<group>"; };
 		5DB39E2A278694460025337C /* JSDocumentResourceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSDocumentResourceManager.swift; sourceTree = "<group>"; };
 		5DB39E2D27869F6C0025337C /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		5DB39E2F2786A4E40025337C /* JSResourceSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSResourceSelectView.swift; sourceTree = "<group>"; };
@@ -3253,6 +3255,7 @@
 				41E50043279948D200A73117 /* Optional+Extension.swift */,
 				5DE2B10E27BA60AC002ACA54 /* View+Snapshot.swift */,
 				4168635627F58B2500F12DB2 /* AsyncPublisher.swift */,
+				410F7FDB282A10A0007DB3A7 /* Date+Milliseconds.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -4420,6 +4423,7 @@
 				2A6ABBA52720053B00CC3AED /* LocalBackupViewModel.swift in Sources */,
 				2AF88649271EEDF80004565A /* Result+extension.swift in Sources */,
 				2AF884D1271EE9310004565A /* MaskWebMessage+SNSAdaptor.swift in Sources */,
+				410F7FDC282A10A0007DB3A7 /* Date+Milliseconds.swift in Sources */,
 				5DE1D5A227A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift in Sources */,
 				2A6ABB842720053B00CC3AED /* BackupPasswordVerifyViewController.swift in Sources */,
 				5DB39E302786A4E40025337C /* JSResourceSelectView.swift in Sources */,
