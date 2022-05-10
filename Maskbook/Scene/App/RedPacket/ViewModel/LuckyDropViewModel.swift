@@ -601,13 +601,12 @@ final class LuckyDropViewModel: ObservableObject {
         }
         
         if token.isMainToken {
-            if (gasFeeNumber.doubleValue + totalAmount.doubleValue) >
-                tokenAmount.doubleValue {
+            if case .orderedDescending = gasFeeNumber.adding(totalAmount).compare(tokenAmount) {
                 self.updateButton(state: .insufficientBalance)
                 return
             }
         } else {
-            if totalAmount.doubleValue > tokenAmount.doubleValue {
+            if case .orderedDescending = totalAmount.compare(tokenAmount) {
                 self.updateButton(state: .insufficientBalance)
                 return
             }
