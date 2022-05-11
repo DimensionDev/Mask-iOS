@@ -592,6 +592,7 @@
 		5D069E0B27A16E2800054B4A /* TertiaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D069E0A27A16E2800054B4A /* TertiaryButton.swift */; };
 		5D11473727E2CDB200D4448C /* CropImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D11473627E2CDB200D4448C /* CropImageViewController.swift */; };
 		5D114FE527B256790092BEDC /* PersonaRecord+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D114FE427B256790092BEDC /* PersonaRecord+Identifier.swift */; };
+		5D13008A2824E2A300F5B6CA /* CookieSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1300892824E2A300F5B6CA /* CookieSwitcher.swift */; };
 		5D2893E427D5DD0A0013FCB6 /* PersonaCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2893E327D5DD0A0013FCB6 /* PersonaCollectionCell.swift */; };
 		5D2893E627D5E8A30013FCB6 /* PersonaCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2893E527D5E8A30013FCB6 /* PersonaCollectionDataSource.swift */; };
 		5D2C6F7427D88E190076096C /* GroupMaskSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2C6F7327D88E190076096C /* GroupMaskSegmentControl.swift */; };
@@ -627,8 +628,10 @@
 		5D9A88DC27BB4AE200879068 /* PersonaDownloadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A88DB27BB4AE200879068 /* PersonaDownloadHandler.swift */; };
 		5DA5B6CB27D9F6260014780A /* UISearchBar+Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA5B6CA27D9F6260014780A /* UISearchBar+Height.swift */; };
 		5DAC90B727C5D0B100BAFB23 /* UIView+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAC90B627C5D0B100BAFB23 /* UIView+Shake.swift */; };
-		5DAF3FBC2815498900CADB80 /* Api_JWKResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAF3FBB2815498900CADB80 /* Api_JWKResp.swift */; };
+		5DAD9C1E2823CF7200F6E230 /* Cookie+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD9C1D2823CF7200F6E230 /* Cookie+extension.swift */; };
+		5DAD9C202823D0F000F6E230 /* Cookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD9C1F2823D0F000F6E230 /* Cookie.swift */; };
 		5DAF3FB92814E80600CADB80 /* MaskSchemeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAF3FB82814E80600CADB80 /* MaskSchemeTest.swift */; };
+		5DAF3FBC2815498900CADB80 /* Api_JWKResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAF3FBB2815498900CADB80 /* Api_JWKResp.swift */; };
 		5DB39E2B278694460025337C /* JSDocumentResourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2A278694460025337C /* JSDocumentResourceManager.swift */; };
 		5DB39E2E27869F6C0025337C /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2D27869F6C0025337C /* DebugView.swift */; };
 		5DB39E302786A4E40025337C /* JSResourceSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2F2786A4E40025337C /* JSResourceSelectView.swift */; };
@@ -1321,6 +1324,7 @@
 		5D069E0A27A16E2800054B4A /* TertiaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TertiaryButton.swift; sourceTree = "<group>"; };
 		5D11473627E2CDB200D4448C /* CropImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropImageViewController.swift; sourceTree = "<group>"; };
 		5D114FE427B256790092BEDC /* PersonaRecord+Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonaRecord+Identifier.swift"; sourceTree = "<group>"; };
+		5D1300892824E2A300F5B6CA /* CookieSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieSwitcher.swift; sourceTree = "<group>"; };
 		5D2893E327D5DD0A0013FCB6 /* PersonaCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaCollectionCell.swift; sourceTree = "<group>"; };
 		5D2893E527D5E8A30013FCB6 /* PersonaCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaCollectionDataSource.swift; sourceTree = "<group>"; };
 		5D2C6F7327D88E190076096C /* GroupMaskSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMaskSegmentControl.swift; sourceTree = "<group>"; };
@@ -1356,8 +1360,10 @@
 		5D9A88DB27BB4AE200879068 /* PersonaDownloadHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaDownloadHandler.swift; sourceTree = "<group>"; };
 		5DA5B6CA27D9F6260014780A /* UISearchBar+Height.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Height.swift"; sourceTree = "<group>"; };
 		5DAC90B627C5D0B100BAFB23 /* UIView+Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shake.swift"; sourceTree = "<group>"; };
-		5DAF3FBB2815498900CADB80 /* Api_JWKResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api_JWKResp.swift; sourceTree = "<group>"; };
+		5DAD9C1D2823CF7200F6E230 /* Cookie+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cookie+extension.swift"; sourceTree = "<group>"; };
+		5DAD9C1F2823D0F000F6E230 /* Cookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cookie.swift; sourceTree = "<group>"; };
 		5DAF3FB82814E80600CADB80 /* MaskSchemeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskSchemeTest.swift; sourceTree = "<group>"; };
+		5DAF3FBB2815498900CADB80 /* Api_JWKResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api_JWKResp.swift; sourceTree = "<group>"; };
 		5DB39E2A278694460025337C /* JSDocumentResourceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSDocumentResourceManager.swift; sourceTree = "<group>"; };
 		5DB39E2D27869F6C0025337C /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		5DB39E2F2786A4E40025337C /* JSResourceSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSResourceSelectView.swift; sourceTree = "<group>"; };
@@ -1683,6 +1689,7 @@
 		0FFD85902660CEF100D391A9 /* Persona */ = {
 			isa = PBXGroup;
 			children = (
+				5DAD9C1C2823C5AB00F6E230 /* Cookie */,
 				0FFD85912660CF1400D391A9 /* Vault.swift */,
 				5D93DFA1267B3F2E00A175BF /* Persona.swift */,
 				2D8D3F5D26CF59C50094035F /* Profile.swift */,
@@ -3485,6 +3492,16 @@
 			path = Avatar;
 			sourceTree = "<group>";
 		};
+		5DAD9C1C2823C5AB00F6E230 /* Cookie */ = {
+			isa = PBXGroup;
+			children = (
+				5DAD9C1D2823CF7200F6E230 /* Cookie+extension.swift */,
+				5D1300892824E2A300F5B6CA /* CookieSwitcher.swift */,
+				5DAD9C1F2823D0F000F6E230 /* Cookie.swift */,
+			);
+			path = Cookie;
+			sourceTree = "<group>";
+		};
 		5DAF3FBA2815497500CADB80 /* MaskWalletCore */ = {
 			isa = PBXGroup;
 			children = (
@@ -4228,6 +4245,7 @@
 				2AF88589271EE9310004565A /* MaskTabBar.swift in Sources */,
 				2AF884DA271EE9310004565A /* AlertController.swift in Sources */,
 				2AF88648271EEDF80004565A /* EthUtil.swift in Sources */,
+				5DAD9C1E2823CF7200F6E230 /* Cookie+extension.swift in Sources */,
 				2AF88605271EED7D0004565A /* AlertBuilder.swift in Sources */,
 				1F8D691D27211626001084D6 /* RemoteBackupBindMobilePhoneStrategy.swift in Sources */,
 				1FB862CA278BDFCE00CF345F /* LabsConfigViewModel.swift in Sources */,
@@ -4271,6 +4289,7 @@
 				2A6ABB932720053B00CC3AED /* RestorePreviewResult.swift in Sources */,
 				2AF885D2271EE9320004565A /* ScannerBackView.swift in Sources */,
 				2AF8853D271EE9310004565A /* BalanceTokenCell.swift in Sources */,
+				5DAD9C202823D0F000F6E230 /* Cookie.swift in Sources */,
 				2A6ABB8A2720053B00CC3AED /* RestoreRetryAlertController.swift in Sources */,
 				2AF884D6271EE9310004565A /* Browser+ExternalTab.swift in Sources */,
 				1F036399277B287A001E8A88 /* DappScriptAdaptor.swift in Sources */,
@@ -4552,6 +4571,7 @@
 				2AF884D7271EE9310004565A /* MaskbookTabService.swift in Sources */,
 				41E5002A2797AEB500A73117 /* WebPublicAPIMessageResolver+DB.swift in Sources */,
 				4168635927F6F0A000F12DB2 /* RecoverDataManager.swift in Sources */,
+				5D13008A2824E2A300F5B6CA /* CookieSwitcher.swift in Sources */,
 				1F37DF2027BDF715008F8ABE /* RestoreLocalFileValidationController.swift in Sources */,
 				2AF8858D271EE9310004565A /* SelectActionViewModelProtocol.swift in Sources */,
 				2AF884EE271EE9310004565A /* IdentityEmptyViewController.swift in Sources */,

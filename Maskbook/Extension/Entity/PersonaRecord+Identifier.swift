@@ -52,11 +52,11 @@ extension PersonaRecord {
             }
             ?? ""
     }
-    
+
     static func qrCodeMnemonic(mnemonicBase64: String) -> String {
         SchemeService.personaMenmonicPrefix + "/" + mnemonicBase64
     }
-    
+
     static func qrCodePrivateKey(privateKeyBase64: String) -> String {
         SchemeService.personaPrivateKeyPrefix + "/" + privateKeyBase64
     }

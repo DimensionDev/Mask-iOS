@@ -145,7 +145,7 @@ class Coordinator {
         case chooseBackupStrategy
         case backupReminder
         case remoteBackupGetVerifyCode
-        case maskSocial(socialPlatform: ProfileSocialPlatform)
+        case maskSocial
         case maskConnectingSocial(socialPlatform: ProfileSocialPlatform, personaIdentifier: String?)
         case detectProfiles(
             profiles: [SocialProfile],
@@ -197,7 +197,7 @@ class Coordinator {
     }
     
     func setupMainWindow(window: UIWindow) {
-        let maskSocialVC = MaskSocialViewController(socialPlatform: settings.currentProfileSocialPlatform)
+        let maskSocialVC = MaskSocialViewController()
         let naviVC = NavigationController(rootViewController: maskSocialVC)
         window.rootViewController = naviVC
         window.makeKeyAndVisible()
@@ -659,8 +659,8 @@ extension Coordinator {
         case let .localRestore(url, destination):
             return RestoreDataPreviewController(url, destination: destination)
             
-        case let .maskSocial(socialPlatform):
-            let maskSocialVC = MaskSocialViewController(socialPlatform: socialPlatform)
+        case let .maskSocial:
+            let maskSocialVC = MaskSocialViewController()
             let naviVC = NavigationController(rootViewController: maskSocialVC)
             return naviVC
             

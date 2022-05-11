@@ -36,6 +36,9 @@ class MaskConnectingSocialViewController: BaseViewController {
     @InjectedProvider(\.personaManager)
     private var personaManager
     
+    @InjectedProvider(\.cookieSwitcher)
+    private var cookieSwitcher
+    
     private let decoder = JSONDecoder()
     
     private lazy var webViewScrollDelegate = WebViewScrollViewDelegate(navigationController: self.navigationController)
@@ -103,8 +106,9 @@ class MaskConnectingSocialViewController: BaseViewController {
         @objc
         private func closeButtonDidClicked() {
             if let viewController = socialViewController,
-                let topConstraint = viewController.containerViewTopConstraint,
-               let containerView = viewController.containerView {
+               let topConstraint = viewController.containerViewTopConstraint,
+               let containerView = viewController.containerView
+            {
                 NSLayoutConstraint.deactivate([topConstraint])
                 let newTopConstraint = containerView.topAnchor.constraint(equalTo: viewController.view!.safeAreaLayoutGuide.topAnchor)
                 socialViewController?.containerViewTopConstraint = newTopConstraint
@@ -199,16 +203,22 @@ extension MaskConnectingSocialViewController {
     }
 
     private func loadSite(_ socialPlatform: ProfileSocialPlatform) {
-        switchTo(socialPlatform: socialPlatform)
+        Task.detached(priority: .userInitiated) { @MainActor in
+            await self.switchTo(socialPlatform: socialPlatform)
+        }
     }
     
-    private func switchTo(socialPlatform: ProfileSocialPlatform) {
+    private func switchTo(socialPlatform: ProfileSocialPlatform) async {
+        await cookieSwitcher.saveOldCookieToCurrentProfile()
+        await CookieSwitcher.cleanAllCookies()
+        cookieSwitcher.needReloadWebView = true
         let platformUrl = socialPlatform.homeUrl
 
         let tab = maskBrowser.browser.tabs.create(
             options: WebExtension.Browser.Tabs.Create.Options(active: false, url: platformUrl.absoluteString),
             tabDelegate: self,
-            tabDownloadDelegate: self)
+            tabDownloadDelegate: self
+        )
         let maskbookTab = tabService.register(for: tab)
         tabId = maskbookTab.tabID
         containerView = maskbookTab.containerView
@@ -268,6 +278,7 @@ extension MaskConnectingSocialViewController {
 }
 
 // MARK: - SocialProfileDetectViewControllerDelegate
+
 extension MaskConnectingSocialViewController: SocialProfileDetectViewControllerDelegate {
     func socialProfileDetectViewController(_ controller: SocialProfileDetectViewController, didConnect profiles: [SocialProfile]) {
         controller.dismiss(animated: true, completion: nil)
@@ -277,6 +288,13 @@ extension MaskConnectingSocialViewController: SocialProfileDetectViewControllerD
                 PersonaManager.attachProfile(personaIdentifier: personaIdentifier,
                                              profileIdentifier: $0.identifier)
             }
+            if let identifier = profiles[safeIndex: 0]?.identifier {
+                Task.detached(priority: .userInitiated) { @MainActor in
+                    await self.cookieSwitcher.saveOldCookieToProfile(profileIdentifier: identifier)
+                    let profileRecord = ProfileRepository.queryProfile(identifier: identifier)
+                    self.personaManager.currentPersona.value?.selectedProfile = profileRecord
+                }
+            }
             guard let tabId = self.tabId else { return }
             self.tabService.tabs[tabId]?.reload()
             self.connectViewModel.updateHintLabelConnected(profiles: profiles)
@@ -285,6 +303,7 @@ extension MaskConnectingSocialViewController: SocialProfileDetectViewControllerD
 }
 
 // MARK: - TabDelegate
+
 extension MaskConnectingSocialViewController: TabDelegate {
     func uiDelegateShim(for tab: Tab) -> WKUIDelegateShim? {
         let maskbookTab = tabService.register(for: tab)
@@ -299,7 +318,7 @@ extension MaskConnectingSocialViewController: TabDelegate {
     }
 
     func customScriptMessageHandlerNames(for tab: Tab) -> [String] {
-        return [MaskBrowser.maskbookJsonRPCScheme]
+        [MaskBrowser.maskbookJsonRPCScheme]
     }
 
     func tab(_ tab: Tab, shouldOpenExternallyForURL url: URL) -> Bool {
@@ -354,19 +373,20 @@ extension MaskConnectingSocialViewController: TabDelegate {
     }
 
     func tab(_ tab: Tab, localStorageManagerForExtension id: String) -> LocalStorageManager? {
-        return LocalStorageManager(delegate: AppContext.shared.webExtensionCoreDataStackBridge, extensionID: id)
+        LocalStorageManager(delegate: AppContext.shared.webExtensionCoreDataStackBridge, extensionID: id)
     }
 
     func tab(_ tab: Tab, pluginResourceProviderForURL url: URL) -> PluginResourceProvider? {
         switch url.scheme {
         case "holoflows-extension": return maskBrowser.jsResourceManager
-        case "holoflows-blob":      return maskBrowser.blobResourceManager
-        default:                    return nil
+        case "holoflows-blob": return maskBrowser.blobResourceManager
+        default: return nil
         }
     }
 }
 
 // MARK: - TabDownloadsDelegate
+
 extension MaskConnectingSocialViewController: TabDownloadsDelegate {
     func tab(_ tab: Tab, didDownloadBlobWithOptions options: WebExtension.Browser.Downloads.Download.Options, result: Result<(Data, URLResponse), Error>) {
         guard let (data, _) = try? result.get() else {
@@ -394,28 +414,31 @@ extension MaskConnectingSocialViewController: TabDownloadsDelegate {
 }
 
 // MARK: - MaskbookUIDelegateShimDelegate
+
 extension MaskConnectingSocialViewController: MaskbookUIDelegateShimDelegate {
     func maskbookViewController() -> UIViewController? {
         self
     }
 
-    func navigationDidChange(url: URL?) { }
+    func navigationDidChange(url: URL?) {}
 }
 
 // MARK: - MaskbookNavigationDelegateShimDelegate
+
 extension MaskConnectingSocialViewController: MaskbookNavigationDelegateShimDelegate {
     func contentPlugin() -> Plugin {
         maskBrowser.contentScriptPlugin
     }
     
-    func navigationDidFinish(_ webView: WKWebView, navigation: WKNavigation) { }
+    func navigationDidFinish(_ webView: WKWebView, navigation: WKNavigation) {}
 }
+
 // swiftlint:enable file_length
 
 extension MaskConnectingSocialViewController {
     @objc
     override func prepareLeftNavigationItems() {
-        self.navigationItem.leftBarButtonItems = [
+        navigationItem.leftBarButtonItems = [
             .fixedSpace(14)
         ]
     }
@@ -428,7 +451,8 @@ extension MaskConnectingSocialViewController {
 
 extension MaskConnectingSocialViewController: WebMessageResolverDelegate {
     func webPublicApiMessageResolver(resolver: WebPublicApiMessageResolver,
-                                     profilesDetect profileIdentifiers: [String]) {
+                                     profilesDetect profileIdentifiers: [String])
+    {
         guard let personaRecord = personaManager.currentPersona.value else {
             return
         }
@@ -439,7 +463,7 @@ extension MaskConnectingSocialViewController: WebMessageResolverDelegate {
             else { return nil }
             if persona.linkedProfiles.contains(where: { identifier, details in
                 identifier == detectIdentifier &&
-                details.connectionConfirmState == .confirmed
+                    details.connectionConfirmState == .confirmed
             }) {
                 profile.connected = true
             }

@@ -31,6 +31,13 @@ extension ProfileRecord {
         return Self.getSocialPlatformFromIdentifier(nonOptionalIdentifier) ?? .twitter
     }
     
+    var httpCookies: [HTTPCookie] {
+        cookiesData.flatMap {
+            $0.toCookies()
+        }
+            ?? []
+    }
+    
     static func getSocialPlatformFromIdentifier(_ identifier: String) -> ProfileSocialPlatform? {
         guard let platformString = identifier.components(separatedBy: "/").first else {
             return nil
