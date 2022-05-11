@@ -31,15 +31,9 @@ class WalletBottomWidgetViewModel: ObservableObject {
         guard let token = token else { return "" }
         let symbol = token.symbol ?? ""
         
-        let displayQuantity = token.roundQuantity(scale: 2)
-        guard displayQuantity != .notANumber else {
-            return "0.00 \(symbol)"
-        }
-        let doubleValue = displayQuantity.doubleValue
-        if doubleValue < 0.01, doubleValue > 0 {
-            return "< 0.01 \(symbol)"
-        }
-        return "\(displayQuantity.stringValue) \(symbol)"
+        let displayQuantity = token.quantityNumber
+        let displayBalance = displayQuantity.displayBalance
+        return "\(displayBalance) \(symbol)"
     }
     
     var transactionURL: URL? {

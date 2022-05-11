@@ -146,6 +146,8 @@
 		2A36E279275746750075E95B /* ChangePasswordStep1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A36E278275746740075E95B /* ChangePasswordStep1ViewController.swift */; };
 		2A4145F826D7880800708337 /* CryptoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4145F726D7880800708337 /* CryptoTests.swift */; };
 		2A442EBD27EAB05A006BF60F /* EdgesConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A442EBC27EAB05A006BF60F /* EdgesConstraints.swift */; };
+		2A46B3BB282A9D1600F2A262 /* NSDecimalNumber+BalancePrecision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A46B3BA282A9D1600F2A262 /* NSDecimalNumber+BalancePrecision.swift */; };
+		2A46B3BF282AA05600F2A262 /* DispalyBalancePrecisionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A46B3BE282AA05600F2A262 /* DispalyBalancePrecisionTests.swift */; };
 		2A5FAEA027CF7AD200D01250 /* GuideItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5FAE9D27CF7AD200D01250 /* GuideItemView.swift */; };
 		2A5FAEA227CF7AD200D01250 /* GuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5FAE9F27CF7AD200D01250 /* GuideView.swift */; };
 		2A6788D127EB6C8800CC2350 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6788D027EB6C8800CC2350 /* PrimaryButton.swift */; };
@@ -910,6 +912,8 @@
 		2A36E278275746740075E95B /* ChangePasswordStep1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordStep1ViewController.swift; sourceTree = "<group>"; };
 		2A4145F726D7880800708337 /* CryptoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTests.swift; sourceTree = "<group>"; };
 		2A442EBC27EAB05A006BF60F /* EdgesConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgesConstraints.swift; sourceTree = "<group>"; };
+		2A46B3BA282A9D1600F2A262 /* NSDecimalNumber+BalancePrecision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDecimalNumber+BalancePrecision.swift"; sourceTree = "<group>"; };
+		2A46B3BE282AA05600F2A262 /* DispalyBalancePrecisionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispalyBalancePrecisionTests.swift; sourceTree = "<group>"; };
 		2A5FAE9D27CF7AD200D01250 /* GuideItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideItemView.swift; sourceTree = "<group>"; };
 		2A5FAE9F27CF7AD200D01250 /* GuideView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideView.swift; sourceTree = "<group>"; };
 		2A6788D027EB6C8800CC2350 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
@@ -2231,6 +2235,7 @@
 				2AD855222812841C0064DDA5 /* LuckyDropHistoryHelper.swift */,
 				2AD855232812841C0064DDA5 /* LuckyDropHistoryViewModel+TokenHistory.swift */,
 				2AD855242812841C0064DDA5 /* FungibleTokenBuilder.swift */,
+				2A46B3BA282A9D1600F2A262 /* NSDecimalNumber+BalancePrecision.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -3725,6 +3730,7 @@
 				2A4145F726D7880800708337 /* CryptoTests.swift */,
 				2ACA1E1127182F01000C0ECC /* PasswordTests.swift */,
 				5DAF3FB82814E80600CADB80 /* MaskSchemeTest.swift */,
+				2A46B3BE282AA05600F2A262 /* DispalyBalancePrecisionTests.swift */,
 			);
 			path = MaskbookTests;
 			sourceTree = "<group>";
@@ -4394,6 +4400,7 @@
 				2AD855FF2812875A0064DDA5 /* Logging.swift in Sources */,
 				2D2F5901278997E800F3002D /* ConnectableSocialListPanModelController.swift in Sources */,
 				2AF8852F271EE9310004565A /* WalletBackupViewModel.swift in Sources */,
+				2A46B3BB282A9D1600F2A262 /* NSDecimalNumber+BalancePrecision.swift in Sources */,
 				1FEE1E9D277D902500697F81 /* DappScriptMethod.swift in Sources */,
 				2AF8853F271EE9310004565A /* BalanceCollectiblesCell.swift in Sources */,
 				2D8D3F5E26CF59C50094035F /* Profile.swift in Sources */,
@@ -4794,6 +4801,7 @@
 				5DAF3FB92814E80600CADB80 /* MaskSchemeTest.swift in Sources */,
 				2ACA1E1227182F01000C0ECC /* PasswordTests.swift in Sources */,
 				2A4145F826D7880800708337 /* CryptoTests.swift in Sources */,
+				2A46B3BF282AA05600F2A262 /* DispalyBalancePrecisionTests.swift in Sources */,
 				1FE54D58269BF0140041C742 /* NSDiffableSourceSnapshotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
