@@ -224,6 +224,10 @@ final class LuckyDropViewModel: ObservableObject {
                 amount = amount.subtracting(gasFeeNumber)
             }
         }
+        // prevent negative value due to too high gas fee
+        if amount.doubleValue < 0 {
+            amount = .zero
+        }
         
         switch mode {
         case .average:
