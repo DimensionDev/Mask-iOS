@@ -23,7 +23,8 @@ enum PersonaRepository {
     static let backgroundContext = AppContext.shared.backgroundContext
     
     static func createPersona(persona: Persona,
-                              context: NSManagedObjectContext) {
+                              context: NSManagedObjectContext)
+    {
         context.performAndWait {
             let newPersonaRecord = PersonaRecord(context: context)
             newPersonaRecord.identifier = persona.identifier
@@ -40,7 +41,7 @@ enum PersonaRepository {
                 print("persona uninitialized is \(persona.uninitialized)")
                 print("Persona initialized is \(!(persona.uninitialized ?? true))")
             }
-            let profileIdentifiers = persona.linkedProfiles.map { $0.key }
+            let profileIdentifiers = persona.linkedProfiles.map(\.key)
             let profileRecords = ProfileRepository.queryProfiles(identifiers: profileIdentifiers,
                                                                  context: context)
             newPersonaRecord.addToLinkedProfiles(NSSet(array: profileRecords))
@@ -80,7 +81,8 @@ enum PersonaRepository {
                              nameContains: String? = nil,
                              initialized: Bool? = nil,
                              pageOption: PageOption? = nil,
-                             context: NSManagedObjectContext? = viewContext) -> PersonaRecord? {
+                             context: NSManagedObjectContext? = viewContext) -> PersonaRecord?
+    {
         do {
             let queryContext = context ?? viewContext
             let fetchRequest = PersonaRecord.sortedFetchRequest
@@ -107,7 +109,8 @@ enum PersonaRepository {
                               nameContains: String? = nil,
                               initialized: Bool? = nil,
                               pageOption: PageOption? = nil,
-                              context: NSManagedObjectContext? = viewContext) -> [PersonaRecord] {
+                              context: NSManagedObjectContext? = viewContext) -> [PersonaRecord]
+    {
         do {
             let queryContext = context ?? viewContext
             let fetchRequest = PersonaRepository.queryPersonasFetchRequest(identifiers: identifiers,
@@ -127,7 +130,8 @@ enum PersonaRepository {
                                           hasLogout: Bool? = nil,
                                           nameContains: String? = nil,
                                           initialized: Bool? = nil,
-                                          pageOption: PageOption? = nil) -> NSFetchRequest<PersonaRecord> {
+                                          pageOption: PageOption? = nil) -> NSFetchRequest<PersonaRecord>
+    {
         let fetchRequest = PersonaRecord.sortedFetchRequest
         fetchRequest.predicate = PersonaRecord.predicate(
             identifiers: identifiers,
@@ -143,7 +147,8 @@ enum PersonaRepository {
     }
     
     static func updatePersonaNickname(identifier: String,
-                                      nickname: String?) {
+                                      nickname: String?)
+    {
         if let persona = Self.queryPersona(identifier: identifier) {
             persona.nickname = nickname
             try? viewContext.saveOrRollback()
@@ -155,7 +160,8 @@ enum PersonaRepository {
                               linkedProfileMergePolicy: LinkedProfileMergePolicy,
                               deleteUndefinedFields: Bool,
                               protectPrivateKey: Bool,
-                              createWhenNotExist: Bool) {
+                              createWhenNotExist: Bool)
+    {
         let toUpdatePersona = Self.queryPersona(identifier: persona.identifier)
         if toUpdatePersona == nil {
             if createWhenNotExist {
@@ -198,7 +204,7 @@ enum PersonaRepository {
         }
         switch linkedProfileMergePolicy {
         case .replace:
-            let profileIdentifiers = persona.linkedProfiles.map { $0.key }
+            let profileIdentifiers = persona.linkedProfiles.map(\.key)
             let profiles = ProfileRepository.queryProfiles(identifiers: profileIdentifiers)
             if let exisitingLinkedProfiles = toUpdatePersona?.linkedProfiles {
                 toUpdatePersona?.removeFromLinkedProfiles(exisitingLinkedProfiles)
@@ -206,16 +212,18 @@ enum PersonaRepository {
             toUpdatePersona?.addToLinkedProfiles(NSSet(array: profiles))
             
         case .merge:
-            let profileIdentifiers = persona.linkedProfiles.map { $0.key }
+            let profileIdentifiers = persona.linkedProfiles.map(\.key)
             let profiles = ProfileRepository.queryProfiles(identifiers: profileIdentifiers)
             toUpdatePersona?.addToLinkedProfiles(NSSet(array: profiles))
         }
         try? viewContext.saveOrRollback()
     }
+
     // swiftlint:enable cyclomatic_complexity
     
     static func logoutPersona(identifier: String,
-                              logout: Bool) {
+                              logout: Bool)
+    {
         guard let toUpdatePersona = Self.queryPersona(identifier: identifier) else {
             return
         }
@@ -224,30 +232,31 @@ enum PersonaRepository {
     }
     
     static func deletePersona(identifier: String,
-                              safeDelete: Bool? = false) {
+                              safeDelete: Bool? = false)
+    {
         do {
             guard let toDeletePersona = Self.queryPersona(identifier: identifier) else {
                 return
             }
             if safeDelete == true,
                let privateKey = toDeletePersona.privateKey,
-               !privateKey.isEmpty {
+               !privateKey.isEmpty
+            {
                 // When `safeDelete` is true, and the persona DO have the private key, do not delete
                 return
             }
             if let linkedProfiles = toDeletePersona.linkedProfiles {
                 for profile in linkedProfiles {
                     if let profileRecord = profile as? ProfileRecord,
-                       let toDeleteProfileIdentifier = profileRecord.identifier {
+                       let toDeleteProfileIdentifier = profileRecord.identifier
+                    {
                         ProfileRepository.detachProfile(identifier: toDeleteProfileIdentifier)
                     }
                 }
             }
             viewContext.delete(toDeletePersona)
             try viewContext.saveOrRollback()
-        } catch {
-            
-        }
+        } catch {}
     }
     
     static func updatePersonaAvatar(identifier: String, avatar: String) {
@@ -261,7 +270,8 @@ enum PersonaRepository {
     }
     
     static func updatePersonaAvatarData(identifier: String,
-                                      avatarData: Data?) {
+                                        avatarData: Data?)
+    {
         if let persona = Self.queryPersona(identifier: identifier) {
             persona.avatarData = avatarData
             try? viewContext.saveOrRollback()
@@ -321,12 +331,22 @@ enum PersonaRepository {
     
     static func restoreFromJson(_ json: JSON) throws {
         var restoreError: Error?
+        @InjectedProvider(\.personaManager)
+        var personaManager
+        
+        var usedNames = personaManager.personaRecordsSubject.value.compactMap(\.nickname)
+        
         backgroundContext.performAndWait {
             for persona in json.arrayValue {
                 let newPersonaRecord = PersonaRecord(context: backgroundContext)
                 
                 newPersonaRecord.identifier = persona[Persona.CodingKeys.identifier.rawValue].string
-                newPersonaRecord.nickname = persona[Persona.CodingKeys.nickname.rawValue].string
+                
+                let name = persona[Persona.CodingKeys.nickname.rawValue].string
+                let newUsedName = PersonaManager.nonrepeatingName(name: name, withNames: usedNames)
+                usedNames.append(newUsedName)
+                newPersonaRecord.nickname = newUsedName
+                
                 let mnemonicJson = persona[Persona.CodingKeys.mnemonic.rawValue]
                 newPersonaRecord.mnemonic = mnemonicJson[Persona.Mnemonic.CodingKeys.words.rawValue].string
                 let mnemonicParameterJson = mnemonicJson[Persona.Mnemonic.CodingKeys.parameter.rawValue]
@@ -361,7 +381,8 @@ enum PersonaRepository {
                     if let linkedProfileIdentifier = linkedProfile.arrayValue.first?.string as? String {
                         if let profileRecord = ProfileRepository.queryProfile(
                             identifier: linkedProfileIdentifier,
-                            context: backgroundContext) {
+                            context: backgroundContext)
+                        {
                             newPersonaRecord.addToLinkedProfiles(profileRecord)
                         }
                     }

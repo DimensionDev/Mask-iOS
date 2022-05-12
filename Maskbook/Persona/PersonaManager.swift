@@ -39,6 +39,7 @@ class PersonaManager {
     }()
 
     let currentPersona = CurrentValueSubject<PersonaRecord?, Never>(nil)
+    let currentProfile = CurrentValueSubject<ProfileRecord?, Never>(nil)
     let currentProfiles = CurrentValueSubject<[ProfileRecord], Never>([])
     
     // temporary store a persona name here
@@ -76,6 +77,14 @@ class PersonaManager {
             .assign(to: \.currentProfiles.value, on: self)
             .store(in: &disposeBag)
         
+        currentPersona
+            .receive(on: DispatchQueue.main)
+            .map({
+                $0?.selectedProfile
+            })
+            .assign(to: \.currentProfile.value, on: self)
+            .store(in: &disposeBag)
+        
         if let currentPersonaIdentifier = settings.currentPesonaIdentifier,
            let currentPersonaRecord = PersonaRepository.queryPersona(identifier: currentPersonaIdentifier),
            currentPersonaRecord.hasLogout == false
@@ -84,6 +93,21 @@ class PersonaManager {
         } else {
             settings.currentPesonaIdentifier = personaRecordsSubject.value.first?.identifier
         }
+    }
+    
+    static func nonrepeatingName(name: String?, withNames: [String]) -> String {
+        let name = name ?? "persona"
+        let names = withNames
+        if !names.contains(name) {
+            return name
+        }
+        var newName: String = name
+        var count = 1
+        while (names.contains(newName)) {
+            newName = name + "(\(count))"
+            count = count + 1
+        }
+        return newName
     }
     
     private func setCurrentPersonaIdentifierToWeb(identifier: String) {

@@ -53,7 +53,8 @@ private extension WalletBackupViewController {
         
         self.addChild(segmentController)
         view.addSubview(segmentController.view)
-        
+        segmentController.didMove(toParent: self)
+
         segmentController.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             segmentController.view.topAnchor.constraint(equalTo: view.topAnchor),

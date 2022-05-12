@@ -99,6 +99,15 @@ enum ProfileRepository {
         toUpdateProfile?.updatedAt = Date()
     }
     
+    static func updateProfileCookies(identifier: String,
+                                     cookies:[HTTPCookie]?) {
+        if let profile = Self.queryProfile(identifier: identifier),
+           let cookies = cookies {
+            profile.cookiesData = cookies.cookiesToData()
+            try? viewContext.saveOrRollback()
+        }
+    }
+    
     static func removeProfile(identifier: String) {
         if let profile = Self.queryProfile(identifier: identifier) {
             viewContext.delete(profile)

@@ -23,12 +23,6 @@ extension UIViewController {
     func dismissMainTabBarController() {
         let rootVC = UIApplication.shared.windows.first(where: \.isKeyWindow)?.rootViewController
         rootVC?.presentedViewController?.dismiss(animated: true, completion: nil)
-        
-        if let maskSocialVC = (rootVC as? UINavigationController)?.viewControllers.first as? MaskSocialViewController {
-            guard UserDefaultSettings.shared.currentProfileSocialPlatform != maskSocialVC.socialPlatform else { return }
-            maskSocialVC.socialPlatform = UserDefaultSettings.shared.currentProfileSocialPlatform
-            maskSocialVC.switchTo(socialPlatform: UserDefaultSettings.shared.currentProfileSocialPlatform )
-        }
     }
 }
 

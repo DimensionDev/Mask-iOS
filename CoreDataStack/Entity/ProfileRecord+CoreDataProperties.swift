@@ -2,7 +2,7 @@
 //  ProfileRecord+CoreDataProperties.swift
 //  CoreDataStack
 //
-//  Created by xiaojian sun on 2022/2/16.
+//  Created by xiaojian sun on 2022/5/6.
 //  Copyright © 2022 dimension. All rights reserved.
 //
 //
@@ -17,12 +17,13 @@ extension ProfileRecord {
         return NSFetchRequest<ProfileRecord>(entityName: "ProfileRecord")
     }
 
+    @NSManaged public var avatar: String?
     @NSManaged public var createdAt: Date?
     @NSManaged public var identifier: String?
     @NSManaged public var network: String?
     @NSManaged public var nickname: String?
     @NSManaged public var updatedAt: Date?
-    @NSManaged public var avatar: String?
+    @NSManaged public var cookiesData: Data?
     @NSManaged public var linkedPersona: PersonaRecord?
 
 }

@@ -215,6 +215,49 @@
 		2A852ADF2721775F00EE7EEC /* MaskSocialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A852ADE2721775F00EE7EEC /* MaskSocialViewModel.swift */; };
 		2A9EF067275A053D00AA66A2 /* KeyboardHandlerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9EF066275A053D00AA66A2 /* KeyboardHandlerViewController.swift */; };
 		2ACA1E1227182F01000C0ECC /* PasswordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACA1E1127182F01000C0ECC /* PasswordTests.swift */; };
+		2AD31E46282D367700CB3D49 /* NSMutableAttributedString+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E1B282D367500CB3D49 /* NSMutableAttributedString+extension.swift */; };
+		2AD31E47282D367700CB3D49 /* BigInt+Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E1C282D367500CB3D49 /* BigInt+Conversion.swift */; };
+		2AD31E48282D367700CB3D49 /* NSDiffableDataSourceSnapshot+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E1D282D367500CB3D49 /* NSDiffableDataSourceSnapshot+extension.swift */; };
+		2AD31E49282D367700CB3D49 /* UICollectionView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E1E282D367500CB3D49 /* UICollectionView+extension.swift */; };
+		2AD31E4A282D367700CB3D49 /* Array+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E1F282D367500CB3D49 /* Array+extension.swift */; };
+		2AD31E4B282D367700CB3D49 /* UIControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E20282D367500CB3D49 /* UIControl.swift */; };
+		2AD31E4C282D367700CB3D49 /* UIButton+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E21282D367600CB3D49 /* UIButton+Padding.swift */; };
+		2AD31E4D282D367700CB3D49 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E22282D367600CB3D49 /* UIImage.swift */; };
+		2AD31E4E282D367700CB3D49 /* UISearchBar+Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E23282D367600CB3D49 /* UISearchBar+Height.swift */; };
+		2AD31E4F282D367700CB3D49 /* UIView+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E24282D367600CB3D49 /* UIView+Shake.swift */; };
+		2AD31E50282D367700CB3D49 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E25282D367600CB3D49 /* URL.swift */; };
+		2AD31E51282D367700CB3D49 /* View+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E26282D367600CB3D49 /* View+Style.swift */; };
+		2AD31E52282D367700CB3D49 /* UIApplication+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E27282D367600CB3D49 /* UIApplication+extension.swift */; };
+		2AD31E53282D367700CB3D49 /* PanModalPresentable+color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E28282D367600CB3D49 /* PanModalPresentable+color.swift */; };
+		2AD31E54282D367700CB3D49 /* UIImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E29282D367600CB3D49 /* UIImageView+Kingfisher.swift */; };
+		2AD31E55282D367700CB3D49 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E2A282D367600CB3D49 /* UIColor.swift */; };
+		2AD31E56282D367700CB3D49 /* Result+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E2B282D367600CB3D49 /* Result+extension.swift */; };
+		2AD31E57282D367700CB3D49 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E2C282D367600CB3D49 /* UINavigationBar.swift */; };
+		2AD31E58282D367700CB3D49 /* UIView+Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E2D282D367600CB3D49 /* UIView+Gesture.swift */; };
+		2AD31E59282D367700CB3D49 /* Managed+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E2E282D367600CB3D49 /* Managed+extension.swift */; };
+		2AD31E5A282D367700CB3D49 /* String+Contains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E2F282D367600CB3D49 /* String+Contains.swift */; };
+		2AD31E5B282D367700CB3D49 /* UserDefaults+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E30282D367600CB3D49 /* UserDefaults+extension.swift */; };
+		2AD31E5C282D367700CB3D49 /* Array+Safety.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E31282D367600CB3D49 /* Array+Safety.swift */; };
+		2AD31E5D282D367700CB3D49 /* View+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E32282D367600CB3D49 /* View+Snapshot.swift */; };
+		2AD31E5E282D367700CB3D49 /* NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E33282D367600CB3D49 /* NSLayoutConstraint.swift */; };
+		2AD31E5F282D367700CB3D49 /* UITableView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E34282D367600CB3D49 /* UITableView+extension.swift */; };
+		2AD31E60282D367700CB3D49 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E35282D367600CB3D49 /* UITableView.swift */; };
+		2AD31E61282D367700CB3D49 /* EthUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E36282D367600CB3D49 /* EthUtil.swift */; };
+		2AD31E62282D367700CB3D49 /* Numeric+currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E37282D367600CB3D49 /* Numeric+currency.swift */; };
+		2AD31E63282D367700CB3D49 /* UIViewController+SocialBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E38282D367600CB3D49 /* UIViewController+SocialBack.swift */; };
+		2AD31E64282D367700CB3D49 /* AsyncPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E39282D367700CB3D49 /* AsyncPublisher.swift */; };
+		2AD31E65282D367700CB3D49 /* Optional+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E3A282D367700CB3D49 /* Optional+Extension.swift */; };
+		2AD31E66282D367700CB3D49 /* CurrentSubject+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E3B282D367700CB3D49 /* CurrentSubject+extension.swift */; };
+		2AD31E67282D367700CB3D49 /* CGAffineTransform+extensiion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E3C282D367700CB3D49 /* CGAffineTransform+extensiion.swift */; };
+		2AD31E68282D367700CB3D49 /* Data+Base64URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E3D282D367700CB3D49 /* Data+Base64URL.swift */; };
+		2AD31E69282D367700CB3D49 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E3E282D367700CB3D49 /* UIApplication.swift */; };
+		2AD31E6A282D367700CB3D49 /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E3F282D367700CB3D49 /* UIView+Shadow.swift */; };
+		2AD31E6B282D367700CB3D49 /* String+Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E40282D367700CB3D49 /* String+Regex.swift */; };
+		2AD31E6C282D367700CB3D49 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E41282D367700CB3D49 /* UserDefaults.swift */; };
+		2AD31E6D282D367700CB3D49 /* Publisher+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E42282D367700CB3D49 /* Publisher+extension.swift */; };
+		2AD31E6E282D367700CB3D49 /* Date+Compare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E43282D367700CB3D49 /* Date+Compare.swift */; };
+		2AD31E6F282D367700CB3D49 /* String+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E44282D367700CB3D49 /* String+Hex.swift */; };
+		2AD31E70282D367700CB3D49 /* AVCaptureVideoOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD31E45282D367700CB3D49 /* AVCaptureVideoOrientation.swift */; };
 		2AD854F5281281B50064DDA5 /* DAppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD854F4281281B50064DDA5 /* DAppService.swift */; };
 		2AD854F8281282190064DDA5 /* PluginStorage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD854F6281282180064DDA5 /* PluginStorage+CoreDataProperties.swift */; };
 		2AD854F9281282190064DDA5 /* PluginStorage+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD854F7281282190064DDA5 /* PluginStorage+CoreDataClass.swift */; };
@@ -242,58 +285,15 @@
 		2AD8552C2812841C0064DDA5 /* LuckyDropHistoryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD855222812841C0064DDA5 /* LuckyDropHistoryHelper.swift */; };
 		2AD8552D2812841C0064DDA5 /* LuckyDropHistoryViewModel+TokenHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD855232812841C0064DDA5 /* LuckyDropHistoryViewModel+TokenHistory.swift */; };
 		2AD8552E2812841C0064DDA5 /* FungibleTokenBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD855242812841C0064DDA5 /* FungibleTokenBuilder.swift */; };
-		2AD85566281284940064DDA5 /* String+Contains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85530281284940064DDA5 /* String+Contains.swift */; };
-		2AD85567281284940064DDA5 /* UIApplication+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85531281284940064DDA5 /* UIApplication+extension.swift */; };
-		2AD85568281284940064DDA5 /* CGAffineTransform+extensiion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85532281284940064DDA5 /* CGAffineTransform+extensiion.swift */; };
-		2AD85569281284940064DDA5 /* Array+Safety.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85533281284940064DDA5 /* Array+Safety.swift */; };
-		2AD8556A281284940064DDA5 /* Publisher+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85534281284940064DDA5 /* Publisher+extension.swift */; };
-		2AD8556B281284940064DDA5 /* View+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85535281284940064DDA5 /* View+Snapshot.swift */; };
-		2AD8556C281284940064DDA5 /* Managed+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85536281284940064DDA5 /* Managed+extension.swift */; };
-		2AD8556D281284940064DDA5 /* PanModalPresentable+color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85537281284940064DDA5 /* PanModalPresentable+color.swift */; };
-		2AD8556E281284940064DDA5 /* NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85538281284940064DDA5 /* NSLayoutConstraint.swift */; };
-		2AD8556F281284940064DDA5 /* Optional+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85539281284940064DDA5 /* Optional+Extension.swift */; };
-		2AD85570281284940064DDA5 /* AsyncPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD8553A281284940064DDA5 /* AsyncPublisher.swift */; };
-		2AD85571281284940064DDA5 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD8553B281284940064DDA5 /* UIColor.swift */; };
-		2AD85572281284940064DDA5 /* UIImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD8553C281284940064DDA5 /* UIImageView+Kingfisher.swift */; };
 		2AD85573281284940064DDA5 /* PersonaRecord+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD8553E281284940064DDA5 /* PersonaRecord+Identifier.swift */; };
 		2AD85574281284940064DDA5 /* LocalStorage+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD8553F281284940064DDA5 /* LocalStorage+extension.swift */; };
 		2AD85575281284940064DDA5 /* ProfileRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85540281284940064DDA5 /* ProfileRecord.swift */; };
 		2AD85576281284940064DDA5 /* Account+WalletConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85541281284940064DDA5 /* Account+WalletConnect.swift */; };
 		2AD85577281284940064DDA5 /* PostRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85542281284940064DDA5 /* PostRecord.swift */; };
 		2AD85578281284940064DDA5 /* BlobStorage+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85543281284940064DDA5 /* BlobStorage+extension.swift */; };
-		2AD85579281284940064DDA5 /* String+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85544281284940064DDA5 /* String+Hex.swift */; };
-		2AD8557A281284940064DDA5 /* Data+Base64URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85545281284940064DDA5 /* Data+Base64URL.swift */; };
-		2AD8557B281284940064DDA5 /* UIButton+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85546281284940064DDA5 /* UIButton+Padding.swift */; };
-		2AD8557C281284940064DDA5 /* BigInt+Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85547281284940064DDA5 /* BigInt+Conversion.swift */; };
-		2AD8557D281284940064DDA5 /* UISearchBar+Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85548281284940064DDA5 /* UISearchBar+Height.swift */; };
-		2AD8557E281284940064DDA5 /* NSMutableAttributedString+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85549281284940064DDA5 /* NSMutableAttributedString+extension.swift */; };
-		2AD8557F281284940064DDA5 /* String+Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD8554A281284940064DDA5 /* String+Regex.swift */; };
-		2AD85580281284940064DDA5 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD8554B281284940064DDA5 /* UITableView.swift */; };
-		2AD85581281284940064DDA5 /* UIViewController+SocialBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD8554C281284940064DDA5 /* UIViewController+SocialBack.swift */; };
-		2AD85582281284940064DDA5 /* UICollectionView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD8554D281284940064DDA5 /* UICollectionView+extension.swift */; };
-		2AD85583281284940064DDA5 /* Date+Compare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD8554E281284940064DDA5 /* Date+Compare.swift */; };
-		2AD85584281284940064DDA5 /* UserDefaults+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD8554F281284940064DDA5 /* UserDefaults+extension.swift */; };
-		2AD85585281284940064DDA5 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85550281284940064DDA5 /* URL.swift */; };
-		2AD85586281284940064DDA5 /* EthUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85551281284940064DDA5 /* EthUtil.swift */; };
-		2AD85587281284940064DDA5 /* Result+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85552281284940064DDA5 /* Result+extension.swift */; };
-		2AD85588281284940064DDA5 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85553281284940064DDA5 /* UserDefaults.swift */; };
-		2AD85589281284940064DDA5 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85554281284940064DDA5 /* UIImage.swift */; };
-		2AD8558A281284940064DDA5 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85555281284940064DDA5 /* UINavigationBar.swift */; };
-		2AD8558B281284940064DDA5 /* View+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85556281284940064DDA5 /* View+Style.swift */; };
-		2AD8558C281284940064DDA5 /* Numeric+currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85557281284940064DDA5 /* Numeric+currency.swift */; };
-		2AD8558D281284940064DDA5 /* NSDiffableDataSourceSnapshot+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85558281284940064DDA5 /* NSDiffableDataSourceSnapshot+extension.swift */; };
-		2AD8558E281284940064DDA5 /* UIView+Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85559281284940064DDA5 /* UIView+Gesture.swift */; };
-		2AD8558F281284940064DDA5 /* UIView+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD8555A281284940064DDA5 /* UIView+Shake.swift */; };
-		2AD85590281284940064DDA5 /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD8555B281284940064DDA5 /* UIView+Shadow.swift */; };
-		2AD85591281284940064DDA5 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD8555C281284940064DDA5 /* UIApplication.swift */; };
-		2AD85592281284940064DDA5 /* CurrentSubject+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD8555D281284940064DDA5 /* CurrentSubject+extension.swift */; };
-		2AD85593281284940064DDA5 /* UIControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD8555E281284940064DDA5 /* UIControl.swift */; };
-		2AD85594281284940064DDA5 /* AVCaptureVideoOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD8555F281284940064DDA5 /* AVCaptureVideoOrientation.swift */; };
 		2AD85595281284940064DDA5 /* SwiftUI+Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85561281284940064DDA5 /* SwiftUI+Text.swift */; };
 		2AD85596281284940064DDA5 /* SwiftUI+Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85562281284940064DDA5 /* SwiftUI+Asset.swift */; };
 		2AD85597281284940064DDA5 /* SwiftUI+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85563281284940064DDA5 /* SwiftUI+Color.swift */; };
-		2AD85598281284940064DDA5 /* UITableView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85564281284940064DDA5 /* UITableView+extension.swift */; };
-		2AD85599281284940064DDA5 /* Array+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD85565281284940064DDA5 /* Array+extension.swift */; };
 		2AD8559D281285520064DDA5 /* PluginStorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD8559C281285520064DDA5 /* PluginStorageRepository.swift */; };
 		2AD855A6281285D10064DDA5 /* RedPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD8559F281285D00064DDA5 /* RedPacket.swift */; };
 		2AD855A7281285D10064DDA5 /* FungibleToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD855A0281285D00064DDA5 /* FungibleToken.swift */; };
@@ -633,6 +633,7 @@
 		41E5004E27A11AFF00A73117 /* WebPublicApiMessageResolver+Plugins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E5004D27A11AFF00A73117 /* WebPublicApiMessageResolver+Plugins.swift */; };
 		5D069E0B27A16E2800054B4A /* TertiaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D069E0A27A16E2800054B4A /* TertiaryButton.swift */; };
 		5D11473727E2CDB200D4448C /* CropImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D11473627E2CDB200D4448C /* CropImageViewController.swift */; };
+		5D13008A2824E2A300F5B6CA /* CookieSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1300892824E2A300F5B6CA /* CookieSwitcher.swift */; };
 		5D2893E427D5DD0A0013FCB6 /* PersonaCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2893E327D5DD0A0013FCB6 /* PersonaCollectionCell.swift */; };
 		5D2893E627D5E8A30013FCB6 /* PersonaCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2893E527D5E8A30013FCB6 /* PersonaCollectionDataSource.swift */; };
 		5D2C6F7427D88E190076096C /* GroupMaskSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2C6F7327D88E190076096C /* GroupMaskSegmentControl.swift */; };
@@ -663,6 +664,8 @@
 		5D9988EC2653E2610070ED17 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9988EB2653E2610070ED17 /* Strings.swift */; };
 		5D99DEC926788A7A006E345D /* MaskSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D99DEC826788A7A006E345D /* MaskSegmentControl.swift */; };
 		5D9A88DC27BB4AE200879068 /* PersonaDownloadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A88DB27BB4AE200879068 /* PersonaDownloadHandler.swift */; };
+		5DAD9C1E2823CF7200F6E230 /* Cookie+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD9C1D2823CF7200F6E230 /* Cookie+extension.swift */; };
+		5DAD9C202823D0F000F6E230 /* Cookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD9C1F2823D0F000F6E230 /* Cookie.swift */; };
 		5DAF3FB92814E80600CADB80 /* MaskSchemeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAF3FB82814E80600CADB80 /* MaskSchemeTest.swift */; };
 		5DB39E2B278694460025337C /* JSDocumentResourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2A278694460025337C /* JSDocumentResourceManager.swift */; };
 		5DB39E2E27869F6C0025337C /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2D27869F6C0025337C /* DebugView.swift */; };
@@ -981,6 +984,49 @@
 		2A852ADE2721775F00EE7EEC /* MaskSocialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskSocialViewModel.swift; sourceTree = "<group>"; };
 		2A9EF066275A053D00AA66A2 /* KeyboardHandlerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandlerViewController.swift; sourceTree = "<group>"; };
 		2ACA1E1127182F01000C0ECC /* PasswordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTests.swift; sourceTree = "<group>"; };
+		2AD31E1B282D367500CB3D49 /* NSMutableAttributedString+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+extension.swift"; sourceTree = "<group>"; };
+		2AD31E1C282D367500CB3D49 /* BigInt+Conversion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BigInt+Conversion.swift"; sourceTree = "<group>"; };
+		2AD31E1D282D367500CB3D49 /* NSDiffableDataSourceSnapshot+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDiffableDataSourceSnapshot+extension.swift"; sourceTree = "<group>"; };
+		2AD31E1E282D367500CB3D49 /* UICollectionView+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+extension.swift"; sourceTree = "<group>"; };
+		2AD31E1F282D367500CB3D49 /* Array+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+extension.swift"; sourceTree = "<group>"; };
+		2AD31E20282D367500CB3D49 /* UIControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIControl.swift; sourceTree = "<group>"; };
+		2AD31E21282D367600CB3D49 /* UIButton+Padding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Padding.swift"; sourceTree = "<group>"; };
+		2AD31E22282D367600CB3D49 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		2AD31E23282D367600CB3D49 /* UISearchBar+Height.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Height.swift"; sourceTree = "<group>"; };
+		2AD31E24282D367600CB3D49 /* UIView+Shake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Shake.swift"; sourceTree = "<group>"; };
+		2AD31E25282D367600CB3D49 /* URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
+		2AD31E26282D367600CB3D49 /* View+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Style.swift"; sourceTree = "<group>"; };
+		2AD31E27282D367600CB3D49 /* UIApplication+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+extension.swift"; sourceTree = "<group>"; };
+		2AD31E28282D367600CB3D49 /* PanModalPresentable+color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PanModalPresentable+color.swift"; sourceTree = "<group>"; };
+		2AD31E29282D367600CB3D49 /* UIImageView+Kingfisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Kingfisher.swift"; sourceTree = "<group>"; };
+		2AD31E2A282D367600CB3D49 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		2AD31E2B282D367600CB3D49 /* Result+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Result+extension.swift"; sourceTree = "<group>"; };
+		2AD31E2C282D367600CB3D49 /* UINavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationBar.swift; sourceTree = "<group>"; };
+		2AD31E2D282D367600CB3D49 /* UIView+Gesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Gesture.swift"; sourceTree = "<group>"; };
+		2AD31E2E282D367600CB3D49 /* Managed+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Managed+extension.swift"; sourceTree = "<group>"; };
+		2AD31E2F282D367600CB3D49 /* String+Contains.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Contains.swift"; sourceTree = "<group>"; };
+		2AD31E30282D367600CB3D49 /* UserDefaults+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+extension.swift"; sourceTree = "<group>"; };
+		2AD31E31282D367600CB3D49 /* Array+Safety.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Safety.swift"; sourceTree = "<group>"; };
+		2AD31E32282D367600CB3D49 /* View+Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Snapshot.swift"; sourceTree = "<group>"; };
+		2AD31E33282D367600CB3D49 /* NSLayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraint.swift; sourceTree = "<group>"; };
+		2AD31E34282D367600CB3D49 /* UITableView+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+extension.swift"; sourceTree = "<group>"; };
+		2AD31E35282D367600CB3D49 /* UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
+		2AD31E36282D367600CB3D49 /* EthUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthUtil.swift; sourceTree = "<group>"; };
+		2AD31E37282D367600CB3D49 /* Numeric+currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Numeric+currency.swift"; sourceTree = "<group>"; };
+		2AD31E38282D367600CB3D49 /* UIViewController+SocialBack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+SocialBack.swift"; sourceTree = "<group>"; };
+		2AD31E39282D367700CB3D49 /* AsyncPublisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncPublisher.swift; sourceTree = "<group>"; };
+		2AD31E3A282D367700CB3D49 /* Optional+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Extension.swift"; sourceTree = "<group>"; };
+		2AD31E3B282D367700CB3D49 /* CurrentSubject+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CurrentSubject+extension.swift"; sourceTree = "<group>"; };
+		2AD31E3C282D367700CB3D49 /* CGAffineTransform+extensiion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGAffineTransform+extensiion.swift"; sourceTree = "<group>"; };
+		2AD31E3D282D367700CB3D49 /* Data+Base64URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Base64URL.swift"; sourceTree = "<group>"; };
+		2AD31E3E282D367700CB3D49 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		2AD31E3F282D367700CB3D49 /* UIView+Shadow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow.swift"; sourceTree = "<group>"; };
+		2AD31E40282D367700CB3D49 /* String+Regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Regex.swift"; sourceTree = "<group>"; };
+		2AD31E41282D367700CB3D49 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		2AD31E42282D367700CB3D49 /* Publisher+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Publisher+extension.swift"; sourceTree = "<group>"; };
+		2AD31E43282D367700CB3D49 /* Date+Compare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Compare.swift"; sourceTree = "<group>"; };
+		2AD31E44282D367700CB3D49 /* String+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Hex.swift"; sourceTree = "<group>"; };
+		2AD31E45282D367700CB3D49 /* AVCaptureVideoOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVCaptureVideoOrientation.swift; sourceTree = "<group>"; };
 		2AD854F4281281B50064DDA5 /* DAppService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAppService.swift; sourceTree = "<group>"; };
 		2AD854F6281282180064DDA5 /* PluginStorage+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PluginStorage+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2AD854F7281282190064DDA5 /* PluginStorage+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PluginStorage+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -1008,58 +1054,15 @@
 		2AD855222812841C0064DDA5 /* LuckyDropHistoryHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuckyDropHistoryHelper.swift; sourceTree = "<group>"; };
 		2AD855232812841C0064DDA5 /* LuckyDropHistoryViewModel+TokenHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LuckyDropHistoryViewModel+TokenHistory.swift"; sourceTree = "<group>"; };
 		2AD855242812841C0064DDA5 /* FungibleTokenBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FungibleTokenBuilder.swift; sourceTree = "<group>"; };
-		2AD85530281284940064DDA5 /* String+Contains.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Contains.swift"; sourceTree = "<group>"; };
-		2AD85531281284940064DDA5 /* UIApplication+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+extension.swift"; sourceTree = "<group>"; };
-		2AD85532281284940064DDA5 /* CGAffineTransform+extensiion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGAffineTransform+extensiion.swift"; sourceTree = "<group>"; };
-		2AD85533281284940064DDA5 /* Array+Safety.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Safety.swift"; sourceTree = "<group>"; };
-		2AD85534281284940064DDA5 /* Publisher+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Publisher+extension.swift"; sourceTree = "<group>"; };
-		2AD85535281284940064DDA5 /* View+Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Snapshot.swift"; sourceTree = "<group>"; };
-		2AD85536281284940064DDA5 /* Managed+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Managed+extension.swift"; sourceTree = "<group>"; };
-		2AD85537281284940064DDA5 /* PanModalPresentable+color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PanModalPresentable+color.swift"; sourceTree = "<group>"; };
-		2AD85538281284940064DDA5 /* NSLayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraint.swift; sourceTree = "<group>"; };
-		2AD85539281284940064DDA5 /* Optional+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Extension.swift"; sourceTree = "<group>"; };
-		2AD8553A281284940064DDA5 /* AsyncPublisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncPublisher.swift; sourceTree = "<group>"; };
-		2AD8553B281284940064DDA5 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
-		2AD8553C281284940064DDA5 /* UIImageView+Kingfisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Kingfisher.swift"; sourceTree = "<group>"; };
 		2AD8553E281284940064DDA5 /* PersonaRecord+Identifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PersonaRecord+Identifier.swift"; sourceTree = "<group>"; };
 		2AD8553F281284940064DDA5 /* LocalStorage+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LocalStorage+extension.swift"; sourceTree = "<group>"; };
 		2AD85540281284940064DDA5 /* ProfileRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileRecord.swift; sourceTree = "<group>"; };
 		2AD85541281284940064DDA5 /* Account+WalletConnect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Account+WalletConnect.swift"; sourceTree = "<group>"; };
 		2AD85542281284940064DDA5 /* PostRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostRecord.swift; sourceTree = "<group>"; };
 		2AD85543281284940064DDA5 /* BlobStorage+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BlobStorage+extension.swift"; sourceTree = "<group>"; };
-		2AD85544281284940064DDA5 /* String+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Hex.swift"; sourceTree = "<group>"; };
-		2AD85545281284940064DDA5 /* Data+Base64URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Base64URL.swift"; sourceTree = "<group>"; };
-		2AD85546281284940064DDA5 /* UIButton+Padding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Padding.swift"; sourceTree = "<group>"; };
-		2AD85547281284940064DDA5 /* BigInt+Conversion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BigInt+Conversion.swift"; sourceTree = "<group>"; };
-		2AD85548281284940064DDA5 /* UISearchBar+Height.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Height.swift"; sourceTree = "<group>"; };
-		2AD85549281284940064DDA5 /* NSMutableAttributedString+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+extension.swift"; sourceTree = "<group>"; };
-		2AD8554A281284940064DDA5 /* String+Regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Regex.swift"; sourceTree = "<group>"; };
-		2AD8554B281284940064DDA5 /* UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
-		2AD8554C281284940064DDA5 /* UIViewController+SocialBack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+SocialBack.swift"; sourceTree = "<group>"; };
-		2AD8554D281284940064DDA5 /* UICollectionView+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+extension.swift"; sourceTree = "<group>"; };
-		2AD8554E281284940064DDA5 /* Date+Compare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Compare.swift"; sourceTree = "<group>"; };
-		2AD8554F281284940064DDA5 /* UserDefaults+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+extension.swift"; sourceTree = "<group>"; };
-		2AD85550281284940064DDA5 /* URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
-		2AD85551281284940064DDA5 /* EthUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthUtil.swift; sourceTree = "<group>"; };
-		2AD85552281284940064DDA5 /* Result+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Result+extension.swift"; sourceTree = "<group>"; };
-		2AD85553281284940064DDA5 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
-		2AD85554281284940064DDA5 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
-		2AD85555281284940064DDA5 /* UINavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationBar.swift; sourceTree = "<group>"; };
-		2AD85556281284940064DDA5 /* View+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Style.swift"; sourceTree = "<group>"; };
-		2AD85557281284940064DDA5 /* Numeric+currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Numeric+currency.swift"; sourceTree = "<group>"; };
-		2AD85558281284940064DDA5 /* NSDiffableDataSourceSnapshot+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDiffableDataSourceSnapshot+extension.swift"; sourceTree = "<group>"; };
-		2AD85559281284940064DDA5 /* UIView+Gesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Gesture.swift"; sourceTree = "<group>"; };
-		2AD8555A281284940064DDA5 /* UIView+Shake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Shake.swift"; sourceTree = "<group>"; };
-		2AD8555B281284940064DDA5 /* UIView+Shadow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow.swift"; sourceTree = "<group>"; };
-		2AD8555C281284940064DDA5 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
-		2AD8555D281284940064DDA5 /* CurrentSubject+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CurrentSubject+extension.swift"; sourceTree = "<group>"; };
-		2AD8555E281284940064DDA5 /* UIControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIControl.swift; sourceTree = "<group>"; };
-		2AD8555F281284940064DDA5 /* AVCaptureVideoOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVCaptureVideoOrientation.swift; sourceTree = "<group>"; };
 		2AD85561281284940064DDA5 /* SwiftUI+Text.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Text.swift"; sourceTree = "<group>"; };
 		2AD85562281284940064DDA5 /* SwiftUI+Asset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Asset.swift"; sourceTree = "<group>"; };
 		2AD85563281284940064DDA5 /* SwiftUI+Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Color.swift"; sourceTree = "<group>"; };
-		2AD85564281284940064DDA5 /* UITableView+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+extension.swift"; sourceTree = "<group>"; };
-		2AD85565281284940064DDA5 /* Array+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+extension.swift"; sourceTree = "<group>"; };
 		2AD8559C281285520064DDA5 /* PluginStorageRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginStorageRepository.swift; sourceTree = "<group>"; };
 		2AD8559F281285D00064DDA5 /* RedPacket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedPacket.swift; sourceTree = "<group>"; };
 		2AD855A0281285D00064DDA5 /* FungibleToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FungibleToken.swift; sourceTree = "<group>"; };
@@ -1399,6 +1402,7 @@
 		55809563EA247839B70CF58B /* Pods-MaskWalletTests.release touchpreview.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskWalletTests.release touchpreview.xcconfig"; path = "Target Support Files/Pods-MaskWalletTests/Pods-MaskWalletTests.release touchpreview.xcconfig"; sourceTree = "<group>"; };
 		5D069E0A27A16E2800054B4A /* TertiaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TertiaryButton.swift; sourceTree = "<group>"; };
 		5D11473627E2CDB200D4448C /* CropImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropImageViewController.swift; sourceTree = "<group>"; };
+		5D1300892824E2A300F5B6CA /* CookieSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieSwitcher.swift; sourceTree = "<group>"; };
 		5D2893E327D5DD0A0013FCB6 /* PersonaCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaCollectionCell.swift; sourceTree = "<group>"; };
 		5D2893E527D5E8A30013FCB6 /* PersonaCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaCollectionDataSource.swift; sourceTree = "<group>"; };
 		5D2C6F7327D88E190076096C /* GroupMaskSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMaskSegmentControl.swift; sourceTree = "<group>"; };
@@ -1429,6 +1433,8 @@
 		5D9988EB2653E2610070ED17 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		5D99DEC826788A7A006E345D /* MaskSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskSegmentControl.swift; sourceTree = "<group>"; };
 		5D9A88DB27BB4AE200879068 /* PersonaDownloadHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaDownloadHandler.swift; sourceTree = "<group>"; };
+		5DAD9C1D2823CF7200F6E230 /* Cookie+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cookie+extension.swift"; sourceTree = "<group>"; };
+		5DAD9C1F2823D0F000F6E230 /* Cookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cookie.swift; sourceTree = "<group>"; };
 		5DAF3FB82814E80600CADB80 /* MaskSchemeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskSchemeTest.swift; sourceTree = "<group>"; };
 		5DB39E2A278694460025337C /* JSDocumentResourceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSDocumentResourceManager.swift; sourceTree = "<group>"; };
 		5DB39E2D27869F6C0025337C /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
@@ -1751,6 +1757,7 @@
 		0FFD85902660CEF100D391A9 /* Persona */ = {
 			isa = PBXGroup;
 			children = (
+				5DAD9C1C2823C5AB00F6E230 /* Cookie */,
 				0FFD85912660CF1400D391A9 /* Vault.swift */,
 				5D93DFA1267B3F2E00A175BF /* Persona.swift */,
 				2D8D3F5D26CF59C50094035F /* Profile.swift */,
@@ -2246,49 +2253,49 @@
 				2A741F32281BCC870023A116 /* MaskWalletCore */,
 				2AD8553D281284940064DDA5 /* Entity */,
 				2AD85560281284940064DDA5 /* SwiftUI */,
-				2AD85530281284940064DDA5 /* String+Contains.swift */,
-				2AD85531281284940064DDA5 /* UIApplication+extension.swift */,
-				2AD85532281284940064DDA5 /* CGAffineTransform+extensiion.swift */,
-				2AD85533281284940064DDA5 /* Array+Safety.swift */,
-				2AD85534281284940064DDA5 /* Publisher+extension.swift */,
-				2AD85535281284940064DDA5 /* View+Snapshot.swift */,
-				2AD85536281284940064DDA5 /* Managed+extension.swift */,
-				2AD85537281284940064DDA5 /* PanModalPresentable+color.swift */,
-				2AD85538281284940064DDA5 /* NSLayoutConstraint.swift */,
-				2AD85539281284940064DDA5 /* Optional+Extension.swift */,
-				2AD8553A281284940064DDA5 /* AsyncPublisher.swift */,
-				2AD8553B281284940064DDA5 /* UIColor.swift */,
-				2AD8553C281284940064DDA5 /* UIImageView+Kingfisher.swift */,
-				2AD85544281284940064DDA5 /* String+Hex.swift */,
-				2AD85545281284940064DDA5 /* Data+Base64URL.swift */,
-				2AD85546281284940064DDA5 /* UIButton+Padding.swift */,
-				2AD85547281284940064DDA5 /* BigInt+Conversion.swift */,
-				2AD85548281284940064DDA5 /* UISearchBar+Height.swift */,
-				2AD85549281284940064DDA5 /* NSMutableAttributedString+extension.swift */,
-				2AD8554A281284940064DDA5 /* String+Regex.swift */,
-				2AD8554B281284940064DDA5 /* UITableView.swift */,
-				2AD8554C281284940064DDA5 /* UIViewController+SocialBack.swift */,
-				2AD8554D281284940064DDA5 /* UICollectionView+extension.swift */,
-				2AD8554E281284940064DDA5 /* Date+Compare.swift */,
-				2AD8554F281284940064DDA5 /* UserDefaults+extension.swift */,
-				2AD85550281284940064DDA5 /* URL.swift */,
-				2AD85551281284940064DDA5 /* EthUtil.swift */,
-				2AD85552281284940064DDA5 /* Result+extension.swift */,
-				2AD85553281284940064DDA5 /* UserDefaults.swift */,
-				2AD85554281284940064DDA5 /* UIImage.swift */,
-				2AD85555281284940064DDA5 /* UINavigationBar.swift */,
-				2AD85556281284940064DDA5 /* View+Style.swift */,
-				2AD85557281284940064DDA5 /* Numeric+currency.swift */,
-				2AD85558281284940064DDA5 /* NSDiffableDataSourceSnapshot+extension.swift */,
-				2AD85559281284940064DDA5 /* UIView+Gesture.swift */,
-				2AD8555A281284940064DDA5 /* UIView+Shake.swift */,
-				2AD8555B281284940064DDA5 /* UIView+Shadow.swift */,
-				2AD8555C281284940064DDA5 /* UIApplication.swift */,
-				2AD8555D281284940064DDA5 /* CurrentSubject+extension.swift */,
-				2AD8555E281284940064DDA5 /* UIControl.swift */,
-				2AD8555F281284940064DDA5 /* AVCaptureVideoOrientation.swift */,
-				2AD85564281284940064DDA5 /* UITableView+extension.swift */,
-				2AD85565281284940064DDA5 /* Array+extension.swift */,
+				2AD31E1F282D367500CB3D49 /* Array+extension.swift */,
+				2AD31E31282D367600CB3D49 /* Array+Safety.swift */,
+				2AD31E39282D367700CB3D49 /* AsyncPublisher.swift */,
+				2AD31E45282D367700CB3D49 /* AVCaptureVideoOrientation.swift */,
+				2AD31E1C282D367500CB3D49 /* BigInt+Conversion.swift */,
+				2AD31E3C282D367700CB3D49 /* CGAffineTransform+extensiion.swift */,
+				2AD31E3B282D367700CB3D49 /* CurrentSubject+extension.swift */,
+				2AD31E3D282D367700CB3D49 /* Data+Base64URL.swift */,
+				2AD31E43282D367700CB3D49 /* Date+Compare.swift */,
+				2AD31E36282D367600CB3D49 /* EthUtil.swift */,
+				2AD31E2E282D367600CB3D49 /* Managed+extension.swift */,
+				2AD31E1D282D367500CB3D49 /* NSDiffableDataSourceSnapshot+extension.swift */,
+				2AD31E33282D367600CB3D49 /* NSLayoutConstraint.swift */,
+				2AD31E1B282D367500CB3D49 /* NSMutableAttributedString+extension.swift */,
+				2AD31E37282D367600CB3D49 /* Numeric+currency.swift */,
+				2AD31E3A282D367700CB3D49 /* Optional+Extension.swift */,
+				2AD31E28282D367600CB3D49 /* PanModalPresentable+color.swift */,
+				2AD31E42282D367700CB3D49 /* Publisher+extension.swift */,
+				2AD31E2B282D367600CB3D49 /* Result+extension.swift */,
+				2AD31E2F282D367600CB3D49 /* String+Contains.swift */,
+				2AD31E44282D367700CB3D49 /* String+Hex.swift */,
+				2AD31E40282D367700CB3D49 /* String+Regex.swift */,
+				2AD31E3E282D367700CB3D49 /* UIApplication.swift */,
+				2AD31E27282D367600CB3D49 /* UIApplication+extension.swift */,
+				2AD31E21282D367600CB3D49 /* UIButton+Padding.swift */,
+				2AD31E1E282D367500CB3D49 /* UICollectionView+extension.swift */,
+				2AD31E2A282D367600CB3D49 /* UIColor.swift */,
+				2AD31E20282D367500CB3D49 /* UIControl.swift */,
+				2AD31E22282D367600CB3D49 /* UIImage.swift */,
+				2AD31E29282D367600CB3D49 /* UIImageView+Kingfisher.swift */,
+				2AD31E2C282D367600CB3D49 /* UINavigationBar.swift */,
+				2AD31E23282D367600CB3D49 /* UISearchBar+Height.swift */,
+				2AD31E35282D367600CB3D49 /* UITableView.swift */,
+				2AD31E34282D367600CB3D49 /* UITableView+extension.swift */,
+				2AD31E2D282D367600CB3D49 /* UIView+Gesture.swift */,
+				2AD31E3F282D367700CB3D49 /* UIView+Shadow.swift */,
+				2AD31E24282D367600CB3D49 /* UIView+Shake.swift */,
+				2AD31E38282D367600CB3D49 /* UIViewController+SocialBack.swift */,
+				2AD31E25282D367600CB3D49 /* URL.swift */,
+				2AD31E41282D367700CB3D49 /* UserDefaults.swift */,
+				2AD31E30282D367600CB3D49 /* UserDefaults+extension.swift */,
+				2AD31E32282D367600CB3D49 /* View+Snapshot.swift */,
+				2AD31E26282D367600CB3D49 /* View+Style.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -3609,6 +3616,16 @@
 			path = Avatar;
 			sourceTree = "<group>";
 		};
+		5DAD9C1C2823C5AB00F6E230 /* Cookie */ = {
+			isa = PBXGroup;
+			children = (
+				5DAD9C1D2823CF7200F6E230 /* Cookie+extension.swift */,
+				5D1300892824E2A300F5B6CA /* CookieSwitcher.swift */,
+				5DAD9C1F2823D0F000F6E230 /* Cookie.swift */,
+			);
+			path = Cookie;
+			sourceTree = "<group>";
+		};
 		5DB0F14B26FB1CFA0084F37E /* WalletConnect */ = {
 			isa = PBXGroup;
 			children = (
@@ -4166,6 +4183,7 @@
 				41E5004E27A11AFF00A73117 /* WebPublicApiMessageResolver+Plugins.swift in Sources */,
 				2AF884C5271EE9300004565A /* SocialProfileDetectCell.swift in Sources */,
 				2D6677F727688FBE00528F4D /* WalletConnectSendResponseDelegate.swift in Sources */,
+				2AD31E60282D367700CB3D49 /* UITableView.swift in Sources */,
 				2AD855252812841C0064DDA5 /* RedPacketShareViewModel.swift in Sources */,
 				2A6ABBB52720053B00CC3AED /* MergeToLocalView.swift in Sources */,
 				1F58730F277C51A3005A7B11 /* DappScriptPayload.swift in Sources */,
@@ -4175,23 +4193,22 @@
 				0FBC5AE72667700400328693 /* AppContext.swift in Sources */,
 				2AD85595281284940064DDA5 /* SwiftUI+Text.swift in Sources */,
 				5DB39E2E27869F6C0025337C /* DebugView.swift in Sources */,
+				2AD31E68282D367700CB3D49 /* Data+Base64URL.swift in Sources */,
 				2AD856172812875A0064DDA5 /* AttributedText.swift in Sources */,
-				2AD8556C281284940064DDA5 /* Managed+extension.swift in Sources */,
 				2AF884DE271EE9310004565A /* LabsPluginViewModel.swift in Sources */,
 				2AF884E3271EE9310004565A /* WebExtension.Setting+extension.swift in Sources */,
 				2AF8858C271EE9310004565A /* SelectActionTableViewCell.swift in Sources */,
 				0F31A1642742B3A1009D2E05 /* WalletMultiChainCell.swift in Sources */,
-				2AD8557C281284940064DDA5 /* BigInt+Conversion.swift in Sources */,
 				2AF884EA271EE9310004565A /* PluginBlockView.swift in Sources */,
 				6FA1112B27D0BB3E0041B16A /* RecentlyPasteTableViewCell.swift in Sources */,
 				2A6ABBA22720053B00CC3AED /* RemoteBackupUploadFileRequest.swift in Sources */,
 				1FC638DF2727FF17002D830B /* WalletInfoProvider.swift in Sources */,
 				2AF884CF271EE9300004565A /* MaskWebMessage+App.swift in Sources */,
-				2AD8557F281284940064DDA5 /* String+Regex.swift in Sources */,
 				2AF884E4271EE9310004565A /* SelectableSheetItemView.swift in Sources */,
 				2AD855F22812875A0064DDA5 /* SheetPresenter.swift in Sources */,
 				2A6ABB7C2720053B00CC3AED /* SettingViewModel.swift in Sources */,
 				2AF88544271EE9310004565A /* WalletEmptyViewController.swift in Sources */,
+				2AD31E61282D367700CB3D49 /* EthUtil.swift in Sources */,
 				2AF884BB271EE9300004565A /* MaskbookUIDelegateShim.swift in Sources */,
 				2AF884C9271EE9300004565A /* PersonaManager+Backup.swift in Sources */,
 				2A6ABBA42720053B00CC3AED /* LocalBackupViewController.swift in Sources */,
@@ -4208,7 +4225,6 @@
 				6F07ABE1279022B80039D69D /* NFTCollectionStatusModel.swift in Sources */,
 				2AF88560271EE9310004565A /* GasFeeCustomCollectionViewCell.swift in Sources */,
 				2A6ABBA82720053B00CC3AED /* RemoteBackupVerifyViewModel.swift in Sources */,
-				2AD85584281284940064DDA5 /* UserDefaults+extension.swift in Sources */,
 				2AF88588271EE9310004565A /* MaskTabBarButton.swift in Sources */,
 				0F1A15A0265CE83900B5E83E /* WalletCoreService.swift in Sources */,
 				2AD855FE2812875A0064DDA5 /* LocalAuthentication.swift in Sources */,
@@ -4235,23 +4251,26 @@
 				2AF884FE271EE9310004565A /* ContactsViewController.swift in Sources */,
 				2AF8853C271EE9310004565A /* AccountCardView.swift in Sources */,
 				5D554EC6279FE58100D40848 /* OpenRedPackageViewController.swift in Sources */,
+				2AD31E47282D367700CB3D49 /* BigInt+Conversion.swift in Sources */,
 				DB0B3A5D240F60AE00B1657D /* Coordinator.swift in Sources */,
 				2AF88572271EE9310004565A /* MnemonicVerifyWordCollectionDataSource.swift in Sources */,
+				2AD31E6B282D367700CB3D49 /* String+Regex.swift in Sources */,
+				2AD31E65282D367700CB3D49 /* Optional+Extension.swift in Sources */,
 				2AF884ED271EE9310004565A /* PluginConfigListView.swift in Sources */,
-				2AD85591281284940064DDA5 /* UIApplication.swift in Sources */,
 				2AF884DD271EE9310004565A /* TradeProviderViewModel.swift in Sources */,
 				2AF884DF271EE9310004565A /* TradeProviderSheet.swift in Sources */,
 				2AF8856E271EE9310004565A /* WalletEditViewModel.swift in Sources */,
 				2A6ABBAD2720053B00CC3AED /* RemoteBackpVerifyStrategy.swift in Sources */,
 				1FE54D5C269C1A4E0041C742 /* WalletRequestCaller.swift in Sources */,
 				2AF884DC271EE9310004565A /* PluginViewModel.swift in Sources */,
-				2AD85598281284940064DDA5 /* UITableView+extension.swift in Sources */,
 				41E50048279BFA5500A73117 /* IndexedDBDataMigrator.swift in Sources */,
 				1F9C60D526AFF9CB001C26D2 /* InjectValues.swift in Sources */,
 				41E50036279932AE00A73117 /* WebPublicAPIParam.swift in Sources */,
 				2AD856072812875A0064DDA5 /* ContentTextItem.swift in Sources */,
+				2AD31E5D282D367700CB3D49 /* View+Snapshot.swift in Sources */,
 				41E5004A279BFB3600A73117 /* RelationRepository.swift in Sources */,
 				2DDCC850269D2A2D00A14ED4 /* MaskToken.swift in Sources */,
+				2AD31E5A282D367700CB3D49 /* String+Contains.swift in Sources */,
 				2A6ABB8B2720053B00CC3AED /* RemoteRestoreVerifyController.swift in Sources */,
 				2A9EF067275A053D00AA66A2 /* KeyboardHandlerViewController.swift in Sources */,
 				2AF884C8271EE9300004565A /* PersonaManager+Restore.swift in Sources */,
@@ -4264,15 +4283,18 @@
 				2AD855FA2812875A0064DDA5 /* ShadowShapeView.swift in Sources */,
 				5D4AD18926560B02002D5380 /* HitTestExpandedButton.swift in Sources */,
 				2AD8560F2812875A0064DDA5 /* DBImageDecoder+UIKit.swift in Sources */,
+				2AD31E51282D367700CB3D49 /* View+Style.swift in Sources */,
 				1F1CCF5E2736162F004E8835 /* WalletRestorePipeline.swift in Sources */,
 				2AF8851E271EE9310004565A /* TransactionHeaderView.swift in Sources */,
 				1F8AD0CB26CA3AA000C9694F /* MaskLoadingIndicator.swift in Sources */,
+				2AD31E46282D367700CB3D49 /* NSMutableAttributedString+extension.swift in Sources */,
 				2A6ABBA62720053B00CC3AED /* PanModelSettingTableViewCell.swift in Sources */,
 				2AD855292812841C0064DDA5 /* LuckyDropViewModel.swift in Sources */,
 				2AF8855E271EE9310004565A /* SendTransactionConfirmViewController.swift in Sources */,
 				2AF88571271EE9310004565A /* MnemonicVerifyViewController.swift in Sources */,
 				2AF884BE271EE9300004565A /* MaskbookNavigationDelegateShim.swift in Sources */,
 				2A6ABBB72720053B00CC3AED /* RemoteBackupActionsViewModel.swift in Sources */,
+				2AD31E62282D367700CB3D49 /* Numeric+currency.swift in Sources */,
 				2AF8854C271EE9310004565A /* NFTDetailViewController.swift in Sources */,
 				2AD855A6281285D10064DDA5 /* RedPacket.swift in Sources */,
 				0F641F12268C0E73002A4D33 /* DebankAPIModel.swift in Sources */,
@@ -4282,25 +4304,24 @@
 				2AF884E2271EE9310004565A /* MarketDataproviderSheet.swift in Sources */,
 				2A6ABB902720053B00CC3AED /* MaskServiceRequest.swift in Sources */,
 				2AF884EB271EE9310004565A /* SwapProviderListView.swift in Sources */,
-				2AD8558B281284940064DDA5 /* View+Style.swift in Sources */,
 				5DD5A69827F53168005952A0 /* PersonaImportItem.swift in Sources */,
+				2AD31E6E282D367700CB3D49 /* Date+Compare.swift in Sources */,
 				0F2051AD265E325900602A0C /* MaskWalletAccount.swift in Sources */,
 				5D93DF9E267B2B5000A175BF /* MaskTextField.swift in Sources */,
 				2D86E0C627716ABE005D3710 /* SelectAccountChainItemCell.swift in Sources */,
-				2AD85585281284940064DDA5 /* URL.swift in Sources */,
+				2AD31E56282D367700CB3D49 /* Result+extension.swift in Sources */,
 				5D2893E627D5E8A30013FCB6 /* PersonaCollectionDataSource.swift in Sources */,
+				2AD31E6D282D367700CB3D49 /* Publisher+extension.swift in Sources */,
 				2A6ABB9F2720053B00CC3AED /* ChangeBackupPasswordViewController.swift in Sources */,
 				5D2893E427D5DD0A0013FCB6 /* PersonaCollectionCell.swift in Sources */,
+				2AD31E6F282D367700CB3D49 /* String+Hex.swift in Sources */,
 				2AF88502271EE9310004565A /* PersonasActionViewModel.swift in Sources */,
 				2AF88552271EE9310004565A /* SendTransactionConfirmViewModel.swift in Sources */,
 				5D554EC8279FE58D00D40848 /* OpenRedPackageViewModel.swift in Sources */,
 				1FEE1E9B277D8FDD00697F81 /* DappError.swift in Sources */,
-				2AD85569281284940064DDA5 /* Array+Safety.swift in Sources */,
 				2D27F5A927633109004FACCB /* WalletConnectDappCell.swift in Sources */,
-				2AD85571281284940064DDA5 /* UIColor.swift in Sources */,
 				1FCBEDFA273902CD001C3637 /* WalletRestoreVerifyViewModel.swift in Sources */,
 				2A6ABB862720053B00CC3AED /* RemoteRestoreInfoViewModel.swift in Sources */,
-				2AD85568281284940064DDA5 /* CGAffineTransform+extensiion.swift in Sources */,
 				41E5002E2798430900A73117 /* WebPublicApiMessageResolver+UI.swift in Sources */,
 				2AF884FB271EE9310004565A /* WalletConnectSelectWalletViewController.swift in Sources */,
 				2A6ABB9C2720053B00CC3AED /* RestoreDataDiffView.swift in Sources */,
@@ -4313,15 +4334,12 @@
 				2AF884BC271EE9300004565A /* Web3MessageResolver.swift in Sources */,
 				6F25328227C72883000C0D27 /* NFTActionViewController.swift in Sources */,
 				2AF8854B271EE9310004565A /* NFTDetailTableViewCell.swift in Sources */,
-				2AD8558F281284940064DDA5 /* UIView+Shake.swift in Sources */,
 				2DC5D898272574D600E351D3 /* WalletConnectClient+Transation.swift in Sources */,
 				2AF885D0271EE9320004565A /* ScannerHandler.swift in Sources */,
 				2AD8552A2812841C0064DDA5 /* LuckDropHistoryViewModel.swift in Sources */,
 				2A6ABBA02720053B00CC3AED /* ChangePasswordViewController.swift in Sources */,
-				2AD8556F281284940064DDA5 /* Optional+Extension.swift in Sources */,
 				2A35603E265D008100FB1D3B /* FontStyles.swift in Sources */,
 				2A6ABB9A2720053B00CC3AED /* CustomTextField.swift in Sources */,
-				2AD8558D281284940064DDA5 /* NSDiffableDataSourceSnapshot+extension.swift in Sources */,
 				1FEE1EA627844FF500697F81 /* URLSession+Async.swift in Sources */,
 				2A6ABB812720053B00CC3AED /* SetBackupPasswordViewController.swift in Sources */,
 				2AD8552C2812841C0064DDA5 /* LuckyDropHistoryHelper.swift in Sources */,
@@ -4329,7 +4347,6 @@
 				2AD8561C2812875A0064DDA5 /* SheetHostingController.swift in Sources */,
 				2A6ABB972720053B00CC3AED /* CloudRestoreVerifyView+extension.swift in Sources */,
 				2A6ABB7D2720053B00CC3AED /* SelectDataSourceViewModel.swift in Sources */,
-				2AD85593281284940064DDA5 /* UIControl.swift in Sources */,
 				2AF88532271EE9310004565A /* WalletImportViewModel.swift in Sources */,
 				2A6ABB882720053B00CC3AED /* RestoreDataPickerController.swift in Sources */,
 				2AF88581271EE9310004565A /* WalletListAddWalletConnectCell.swift in Sources */,
@@ -4338,9 +4355,8 @@
 				2AF88564271EE9310004565A /* GasFeeStandardCollectionViewCell.swift in Sources */,
 				2A6ABB982720053B00CC3AED /* RemoteRestoreInfoView.swift in Sources */,
 				2AF88589271EE9310004565A /* MaskTabBar.swift in Sources */,
-				2AD85599281284940064DDA5 /* Array+extension.swift in Sources */,
 				2AF884DA271EE9310004565A /* AlertController.swift in Sources */,
-				2AD8558C281284940064DDA5 /* Numeric+currency.swift in Sources */,
+				5DAD9C1E2823CF7200F6E230 /* Cookie+extension.swift in Sources */,
 				1F8D691D27211626001084D6 /* RemoteBackupBindMobilePhoneStrategy.swift in Sources */,
 				2AD856192812875A0064DDA5 /* Dismissable.swift in Sources */,
 				1FB862CA278BDFCE00CF345F /* LabsConfigViewModel.swift in Sources */,
@@ -4381,12 +4397,14 @@
 				2D6677FA27688FBE00528F4D /* WCRequestsHandler.swift in Sources */,
 				0F2051B3265E3B2F00602A0C /* DerivationPath.swift in Sources */,
 				2A6ABB932720053B00CC3AED /* RestorePreviewResult.swift in Sources */,
-				2AD8556A281284940064DDA5 /* Publisher+extension.swift in Sources */,
 				2AF885D2271EE9320004565A /* ScannerBackView.swift in Sources */,
 				2AF8853D271EE9310004565A /* BalanceTokenCell.swift in Sources */,
+				5DAD9C202823D0F000F6E230 /* Cookie.swift in Sources */,
 				2A6ABB8A2720053B00CC3AED /* RestoreRetryAlertController.swift in Sources */,
 				2AF884D6271EE9310004565A /* Browser+ExternalTab.swift in Sources */,
+				2AD31E50282D367700CB3D49 /* URL.swift in Sources */,
 				1F036399277B287A001E8A88 /* DappScriptAdaptor.swift in Sources */,
+				2AD31E5B282D367700CB3D49 /* UserDefaults+extension.swift in Sources */,
 				6F25327A27A2B0AA000C0D27 /* Web3TransactionReceipt.swift in Sources */,
 				2AD8560E2812875A0064DDA5 /* VersionNumber.swift in Sources */,
 				5DF07E0C27FD9CA400BECF15 /* ContactEmptyView.swift in Sources */,
@@ -4397,6 +4415,7 @@
 				2AF884FC271EE9310004565A /* WalletConnectShowQRCodeViewController.swift in Sources */,
 				2AF884D9271EE9310004565A /* MaskSafariViewController.swift in Sources */,
 				41E50046279AAD4000A73117 /* IndexedDBAllRecord.swift in Sources */,
+				2AD31E6A282D367700CB3D49 /* UIView+Shadow.swift in Sources */,
 				2AD855FF2812875A0064DDA5 /* Logging.swift in Sources */,
 				2D2F5901278997E800F3002D /* ConnectableSocialListPanModelController.swift in Sources */,
 				2AF8852F271EE9310004565A /* WalletBackupViewModel.swift in Sources */,
@@ -4414,6 +4433,7 @@
 				5D84DC4D27B12B810009025E /* WebViewScrollViewDelegate.swift in Sources */,
 				1FEE1E99277D8FC500697F81 /* DappRPCResponse.swift in Sources */,
 				2AF8852C271EE9310004565A /* WalletBackupKeystoreViewController.swift in Sources */,
+				2AD31E55282D367700CB3D49 /* UIColor.swift in Sources */,
 				4168635527F4622600F12DB2 /* BackupDataGenerator.swift in Sources */,
 				5D7F5A5127B6531E00A007C5 /* PersonaCreateHandler.swift in Sources */,
 				6F25327C27C63168000C0D27 /* NFTActionTableViewCell.swift in Sources */,
@@ -4424,18 +4444,20 @@
 				5DCA069B27C75A8B007697C8 /* Toast.swift in Sources */,
 				2AF884C7271EE9300004565A /* WebViewNavigationFailureDescriptionView.swift in Sources */,
 				2A6788D127EB6C8800CC2350 /* PrimaryButton.swift in Sources */,
-				2AD8556E281284940064DDA5 /* NSLayoutConstraint.swift in Sources */,
 				2AF8856D271EE9310004565A /* WalletEditViewController.swift in Sources */,
 				2AF8855F271EE9310004565A /* SearchTokenListViewController.swift in Sources */,
 				2AF88574271EE9310004565A /* MnemonicVerifyFlowCollectionFlowLayout.swift in Sources */,
+				2AD31E49282D367700CB3D49 /* UICollectionView+extension.swift in Sources */,
 				2AF884D5271EE9310004565A /* PersonaManager.swift in Sources */,
 				2AD85500281282A20064DDA5 /* LuckDropHistoryController.swift in Sources */,
 				1FC57EDA273129FC0060E89C /* BackupPreviewFormatter.swift in Sources */,
+				2AD31E63282D367700CB3D49 /* UIViewController+SocialBack.swift in Sources */,
 				2AD855EB2812875A0064DDA5 /* KeyboardSheetTransition.swift in Sources */,
 				2A5FAEA027CF7AD200D01250 /* GuideItemView.swift in Sources */,
 				0F41A195260C6310000037B2 /* ZerionAPIModel.swift in Sources */,
 				2AD856032812875A0064DDA5 /* Predicate.swift in Sources */,
 				2AD856132812875A0064DDA5 /* LAErrorHandler.swift in Sources */,
+				2AD31E5C282D367700CB3D49 /* Array+Safety.swift in Sources */,
 				2AD855AA281285D10064DDA5 /* NftPacketPayload.swift in Sources */,
 				6F785E36269445A00019079F /* ContactManager.swift in Sources */,
 				2D6677F627688FBE00528F4D /* WalletConnectServerError.swift in Sources */,
@@ -4449,7 +4471,6 @@
 				2A6ABB802720053B00CC3AED /* SetBackupPasswordViewModel.swift in Sources */,
 				2D6E31DA2799638C00A70187 /* SchemeService.swift in Sources */,
 				2A6ABBA12720053B00CC3AED /* ChangePasswordViewModel.swift in Sources */,
-				2AD85583281284940064DDA5 /* Date+Compare.swift in Sources */,
 				5D46250F2808184C002007D0 /* SelectAccountTableViewCell.swift in Sources */,
 				2AF8856C271EE9310004565A /* UnlockViewController.swift in Sources */,
 				2AD855EF2812875A0064DDA5 /* LoadingIndicatorController.swift in Sources */,
@@ -4459,7 +4480,9 @@
 				2AF8854F271EE9310004565A /* SendNftTokenViewModel.swift in Sources */,
 				2AF8856B271EE9310004565A /* UnlockViewModel.swift in Sources */,
 				2AD855FD2812875A0064DDA5 /* ShadowWrapped.swift in Sources */,
+				2AD31E59282D367700CB3D49 /* Managed+extension.swift in Sources */,
 				2A7310082685B83200C5354A /* PasswordFormItemView.swift in Sources */,
+				2AD31E4C282D367700CB3D49 /* UIButton+Padding.swift in Sources */,
 				2AF88562271EE9310004565A /* TokenListTableViewCell.swift in Sources */,
 				0FE54FE8275C4D0E00B32BD6 /* BalanceViewModel+TokenSort.swift in Sources */,
 				2AF88539271EE9310004565A /* BalanceViewModel.swift in Sources */,
@@ -4471,6 +4494,7 @@
 				2AF88511271EE9310004565A /* SegmentViewController.swift in Sources */,
 				0F41A19A260C7B75000037B2 /* ZerionMessageFactory.swift in Sources */,
 				2AD855F92812875A0064DDA5 /* PathBuilder.swift in Sources */,
+				2AD31E54282D367700CB3D49 /* UIImageView+Kingfisher.swift in Sources */,
 				2AD856062812875A0064DDA5 /* AlertBuilder.swift in Sources */,
 				2AF88566271EE9310004565A /* WalletDeleteViewModel.swift in Sources */,
 				2AD85517281283170064DDA5 /* RedPacketShareView.swift in Sources */,
@@ -4487,6 +4511,7 @@
 				2D6F4B1526D3B60700F32200 /* ProfileSocialPlatform.swift in Sources */,
 				2AF88530271EE9310004565A /* WalletBackupKeystoreViewModel.swift in Sources */,
 				5D9A88DC27BB4AE200879068 /* PersonaDownloadHandler.swift in Sources */,
+				2AD31E4A282D367700CB3D49 /* Array+extension.swift in Sources */,
 				1FEE1EA82784508A00697F81 /* EthereumTransaction+Signing.swift in Sources */,
 				1FEE1EAA27845CEF00697F81 /* TransactionOptions+Address.swift in Sources */,
 				2AD855F82812875A0064DDA5 /* PopupViewController.swift in Sources */,
@@ -4498,12 +4523,11 @@
 				2A6ABBAB2720053B00CC3AED /* BindRemoteBackupInfoViewModel.swift in Sources */,
 				2AF884F5271EE9310004565A /* IdentityRecoveryViewController.swift in Sources */,
 				2A6ABBB32720053B00CC3AED /* SPasswordFormItemView.swift in Sources */,
-				2AD85581281284940064DDA5 /* UIViewController+SocialBack.swift in Sources */,
 				2A3050C626A01B370003EECC /* NFTAssetsModel.swift in Sources */,
 				2AF884CC271EE9300004565A /* MaskWebMessage+Setting.swift in Sources */,
-				2AD85579281284940064DDA5 /* String+Hex.swift in Sources */,
 				2AF88550271EE9310004565A /* SearchTokenListViewModel.swift in Sources */,
 				2AD855A7281285D10064DDA5 /* FungibleToken.swift in Sources */,
+				2AD31E52282D367700CB3D49 /* UIApplication+extension.swift in Sources */,
 				2AF88526271EE9310004565A /* WalletRenameViewController.swift in Sources */,
 				2AF88527271EE9310004565A /* KeyboardHandler.swift in Sources */,
 				2AF8855C271EE9310004565A /* GasFeeModel.swift in Sources */,
@@ -4520,25 +4544,28 @@
 				2A6ABB8F2720053B00CC3AED /* VerifyValidationCodeRequest.swift in Sources */,
 				2D40E6CA276AD30B00C8C5FF /* SelectAccountViewController.swift in Sources */,
 				2AD855AC281285D10064DDA5 /* RedPacketInteractivePayload.swift in Sources */,
+				2AD31E70282D367700CB3D49 /* AVCaptureVideoOrientation.swift in Sources */,
 				2AF884C3271EE9300004565A /* MaskbookTab.swift in Sources */,
 				2D11F04427895382002CE232 /* SocialAccountCollectionCell.swift in Sources */,
 				1FCCE39B26D7F09700909A5B /* SpinActivityAnimator.swift in Sources */,
 				2AF884BF271EE9300004565A /* PluginFactory.swift in Sources */,
 				2A5FAEA227CF7AD200D01250 /* GuideView.swift in Sources */,
-				2AD85592281284940064DDA5 /* CurrentSubject+extension.swift in Sources */,
 				1FCBEDF62738FFEB001C3637 /* RestoreWalletPasswordVertifyView.swift in Sources */,
 				2AF884BD271EE9300004565A /* WebPublicApiMessageResolver.swift in Sources */,
 				5D3E365027BF706500FDCFDD /* Post.swift in Sources */,
 				2AF884C1271EE9300004565A /* MaskConnectingSocialViewController.swift in Sources */,
 				1FC638DD2726A172002D830B /* WalletBackupInfo.swift in Sources */,
+				2AD31E66282D367700CB3D49 /* CurrentSubject+extension.swift in Sources */,
 				2DC5D899272574D600E351D3 /* WalletConnectClient+Supported.swift in Sources */,
 				2AF8852A271EE9310004565A /* MnemonicWordViewModel.swift in Sources */,
 				2AF88536271EE9310004565A /* DerivationPathViewController.swift in Sources */,
 				2AF885D1271EE9320004565A /* ScanLineAnimationView.swift in Sources */,
 				2AF88517271EE9310004565A /* SelectNetworkViewController.swift in Sources */,
 				2A6ABBA72720053B00CC3AED /* SettingTableViewCell.swift in Sources */,
+				2AD31E64282D367700CB3D49 /* AsyncPublisher.swift in Sources */,
 				2AD8561A2812875A0064DDA5 /* MoveFromBottomModifier.swift in Sources */,
 				1FE54D5A269C19C10041C742 /* WalletCoreRequest.swift in Sources */,
+				2AD31E6C282D367700CB3D49 /* UserDefaults.swift in Sources */,
 				2AD855282812841C0064DDA5 /* WalletBottomWidgetViewModel.swift in Sources */,
 				2AF88504271EE9310004565A /* ProfileSocialPlatform+extension.swift in Sources */,
 				2AF88513271EE9310004565A /* WalletDetailViewModel.swift in Sources */,
@@ -4556,6 +4583,7 @@
 				5D7F5A5327B66C5600A007C5 /* PersonaKeyInfoPreview.swift in Sources */,
 				2AF884EC271EE9310004565A /* SizeMeasureModifier.swift in Sources */,
 				2AD85575281284940064DDA5 /* ProfileRecord.swift in Sources */,
+				2AD31E4F282D367700CB3D49 /* UIView+Shake.swift in Sources */,
 				2AD856012812875A0064DDA5 /* FetchedResultsPublisher.swift in Sources */,
 				4168635327F434AE00F12DB2 /* BackupPreviewGenerator.swift in Sources */,
 				2AF88554271EE9310004565A /* SendConfirmViewModel.swift in Sources */,
@@ -4565,7 +4593,6 @@
 				2DC5D897272574D600E351D3 /* WalletConnectClient.swift in Sources */,
 				5D2C6F7427D88E190076096C /* GroupMaskSegmentControl.swift in Sources */,
 				2AF88506271EE9310004565A /* SocialViewController.swift in Sources */,
-				2AD85582281284940064DDA5 /* UICollectionView+extension.swift in Sources */,
 				2AD856122812875A0064DDA5 /* LazyFuture.swift in Sources */,
 				0FACA3BA26720D9A00CB8AC0 /* ZerionAssetsProvider.swift in Sources */,
 				1FCBEE04273A6A71001C3637 /* RestoreWalletPasswordConfigController.swift in Sources */,
@@ -4582,10 +4609,8 @@
 				2A6ABBB62720053B00CC3AED /* RemoteBackupActionsView.swift in Sources */,
 				4156689327A53BA70051E0E7 /* ShareLinkGenerator.swift in Sources */,
 				2AF88533271EE9310004565A /* DerivationPathHeaderView.swift in Sources */,
-				2AD8557B281284940064DDA5 /* UIButton+Padding.swift in Sources */,
 				5DE5E53C27E468B400F2B62A /* PersonaAvatarActionViewModel.swift in Sources */,
 				2AD856152812875A0064DDA5 /* Shape+Fill.swift in Sources */,
-				2AD85567281284940064DDA5 /* UIApplication+extension.swift in Sources */,
 				1F0363922779D223001E8A88 /* DecentralisedApplicationResolver.swift in Sources */,
 				2AD85513281283170064DDA5 /* TextLengthModifier.swift in Sources */,
 				2A2B4EEC27E8D1850097D50D /* HappyRedPacketV4.swift in Sources */,
@@ -4595,7 +4620,6 @@
 				1FCAD13027585FFF00F90A3E /* TransakIntegratingController.swift in Sources */,
 				5D3E364C27BF41DE00FDCFDD /* PostRepository.swift in Sources */,
 				2AF88548271EE9310004565A /* WalletListAddViewModel.swift in Sources */,
-				2AD8557E281284940064DDA5 /* NSMutableAttributedString+extension.swift in Sources */,
 				2AF884F3271EE9310004565A /* IdentityCreateViewModel.swift in Sources */,
 				2AD85514281283170064DDA5 /* RedPacketConfirmView.swift in Sources */,
 				2AF88546271EE9310004565A /* ImportKeystoreViewController.swift in Sources */,
@@ -4605,7 +4629,6 @@
 				6F07ABE5279697450039D69D /* NFTCollectionDetailTableViewCell.swift in Sources */,
 				2AF88555271EE9310004565A /* SendNFTTokenViewController.swift in Sources */,
 				2DBD0BA22788346F0065A2B1 /* ConnectableSocialListViewController.swift in Sources */,
-				2AD8556D281284940064DDA5 /* PanModalPresentable+color.swift in Sources */,
 				0F5810912733CDFB0040B4EC /* MaskWebMessage+IndexDB.swift in Sources */,
 				2D6677FB27688FBE00528F4D /* WalletConnectUtils.swift.swift in Sources */,
 				2AD85597281284940064DDA5 /* SwiftUI+Color.swift in Sources */,
@@ -4626,6 +4649,7 @@
 				2AF88549271EE9310004565A /* NFTDetailViewModel.swift in Sources */,
 				2AF88553271EE9310004565A /* RecentlyAddressViewModel.swift in Sources */,
 				6FA623AF26D4D0540091FDFF /* NFTTransactionHistory.swift in Sources */,
+				2AD31E4B282D367700CB3D49 /* UIControl.swift in Sources */,
 				5D99DEC926788A7A006E345D /* MaskSegmentControl.swift in Sources */,
 				2AF88531271EE9310004565A /* DerivationPathsViewModel.swift in Sources */,
 				2AF88542271EE9310004565A /* BiometryRecognitionViewController.swift in Sources */,
@@ -4638,12 +4662,12 @@
 				1FCBEE02273A4DFE001C3637 /* WalletRestorePasswordConfigViewModel.swift in Sources */,
 				2AF88521271EE9310004565A /* WalletAddrReceiveViewController.swift in Sources */,
 				2A3050C526A01B370003EECC /* OpenSeaProvider.swift in Sources */,
+				2AD31E48282D367700CB3D49 /* NSDiffableDataSourceSnapshot+extension.swift in Sources */,
 				0F4961092728FD5F00F16313 /* CollectibleIconImageView.swift in Sources */,
 				2AF884B6271EE9300004565A /* WalletConnectConnectingViewController.swift in Sources */,
 				2AF88528271EE9310004565A /* MnemonicWordCollectionCell.swift in Sources */,
 				2AF8856F271EE9310004565A /* MnemonicVerifyFlowCollectionCell.swift in Sources */,
 				6F785E2F269305E20019079F /* RecentlyAddress.swift in Sources */,
-				2AD85566281284940064DDA5 /* String+Contains.swift in Sources */,
 				2A6ABB832720053B00CC3AED /* SetPasswordViewModel.swift in Sources */,
 				2AF88570271EE9310004565A /* WordsVerifyProtocol.swift in Sources */,
 				2AF8858A271EE9310004565A /* SelectItemViewController.swift in Sources */,
@@ -4653,7 +4677,6 @@
 				2AF885D3271EE9320004565A /* ScannerLineViewController.swift in Sources */,
 				1FB862C82787F3C900CF345F /* LabsListView.swift in Sources */,
 				2AF884F6271EE9310004565A /* WelcomeViewController.swift in Sources */,
-				2AD85588281284940064DDA5 /* UserDefaults.swift in Sources */,
 				2AD856082812875A0064DDA5 /* DoneActionItem.swift in Sources */,
 				2AF88565271EE9310004565A /* ModalViewController.swift in Sources */,
 				2AF88545271EE9310004565A /* WalletStartType.swift in Sources */,
@@ -4667,11 +4690,10 @@
 				2AF8851C271EE9310004565A /* TokenDetailTokenCell.swift in Sources */,
 				1F8D6919272115F1001084D6 /* RemoteInfoBindingViewController.swift in Sources */,
 				DBAAF49522C35A7100017594 /* AppDelegate.swift in Sources */,
+				2AD31E5F282D367700CB3D49 /* UITableView+extension.swift in Sources */,
 				2AD8560D2812875A0064DDA5 /* AlertItemRepresentable.swift in Sources */,
-				2AD85594281284940064DDA5 /* AVCaptureVideoOrientation.swift in Sources */,
 				2AF8853E271EE9310004565A /* BalanceExpandCell.swift in Sources */,
 				2AD856042812875A0064DDA5 /* MaskGroupActor.swift in Sources */,
-				2AD8556B281284940064DDA5 /* View+Snapshot.swift in Sources */,
 				2AF884FA271EE9310004565A /* WalletConnectSelectWalletViewModel.swift in Sources */,
 				2AF884E5271EE9310004565A /* PluginType.swift in Sources */,
 				1FB8151727B65F9B00A2A3BE /* WKScriptMessageHandled.swift in Sources */,
@@ -4681,10 +4703,10 @@
 				2A6ABBA32720053B00CC3AED /* RemoteBackupUploadRequest.swift in Sources */,
 				2AF884D7271EE9310004565A /* MaskbookTabService.swift in Sources */,
 				2AD855F12812875A0064DDA5 /* RecoverySheetController.swift in Sources */,
-				2AD8558E281284940064DDA5 /* UIView+Gesture.swift in Sources */,
 				41E5002A2797AEB500A73117 /* WebPublicAPIMessageResolver+DB.swift in Sources */,
 				4168635927F6F0A000F12DB2 /* RecoverDataManager.swift in Sources */,
-				2AD85580281284940064DDA5 /* UITableView.swift in Sources */,
+				5D13008A2824E2A300F5B6CA /* CookieSwitcher.swift in Sources */,
+				2AD31E5E282D367700CB3D49 /* NSLayoutConstraint.swift in Sources */,
 				1F37DF2027BDF715008F8ABE /* RestoreLocalFileValidationController.swift in Sources */,
 				2AF8858D271EE9310004565A /* SelectActionViewModelProtocol.swift in Sources */,
 				2AF884EE271EE9310004565A /* IdentityEmptyViewController.swift in Sources */,
@@ -4708,24 +4730,22 @@
 				2AF88587271EE9310004565A /* MainTabBarController.swift in Sources */,
 				2AF8854D271EE9310004565A /* GasFeeViewModel.swift in Sources */,
 				2AD856162812875A0064DDA5 /* KFImage+Network.swift in Sources */,
-				2AD8557A281284940064DDA5 /* Data+Base64URL.swift in Sources */,
 				2A6ABB852720053B00CC3AED /* RemoteRestoreVerifyViewModel.swift in Sources */,
 				2A6ABB892720053B00CC3AED /* RestoreDataPreviewController.swift in Sources */,
 				0FB3CCE9271185D00072B787 /* SocialIconBackBarItem.swift in Sources */,
 				2AF8851B271EE9310004565A /* TokenDetailViewModel.swift in Sources */,
+				2AD31E4E282D367700CB3D49 /* UISearchBar+Height.swift in Sources */,
 				2A0C16AF2666713D0085524E /* StoredKeyImportType.swift in Sources */,
 				2AF88582271EE9310004565A /* TermsOfServiceViewController.swift in Sources */,
 				2AF884F2271EE9310004565A /* IdentityMnemonicImportViewController.swift in Sources */,
 				5D93DFA2267B3F2E00A175BF /* Persona.swift in Sources */,
-				2AD85589281284940064DDA5 /* UIImage.swift in Sources */,
-				2AD85587281284940064DDA5 /* Result+extension.swift in Sources */,
-				2AD85586281284940064DDA5 /* EthUtil.swift in Sources */,
 				2AD856182812875A0064DDA5 /* SheetContainerModifier.swift in Sources */,
 				0F641F10268B0237002A4D33 /* MaskError.swift in Sources */,
 				2AF884FF271EE9310004565A /* ContactProfileTableViewCell.swift in Sources */,
 				1F9C60D726B101C6001C26D2 /* BlockChainNetworkRepresentable.swift in Sources */,
 				2AF88576271EE9310004565A /* MnemonicVerifyFlowCollectionDataSource.swift in Sources */,
 				5DB39E322786A8970025337C /* JSResourceSelectViewModel.swift in Sources */,
+				2AD31E67282D367700CB3D49 /* CGAffineTransform+extensiion.swift in Sources */,
 				0FFD85922660CF1400D391A9 /* Vault.swift in Sources */,
 				41E5002C2797C1F700A73117 /* MaskMessageResolverProtocol.swift in Sources */,
 				6FA623AD26D4C4630091FDFF /* NFTAssetEventsModel.swift in Sources */,
@@ -4743,31 +4763,31 @@
 				2AD855F02812875A0064DDA5 /* AlertPopupController.swift in Sources */,
 				2AF8855A271EE9310004565A /* GasFeeChooseViewController.swift in Sources */,
 				2AD8550D281283170064DDA5 /* ShareLuckyDropPersonaView.swift in Sources */,
+				2AD31E53282D367700CB3D49 /* PanModalPresentable+color.swift in Sources */,
 				2AD85576281284940064DDA5 /* Account+WalletConnect.swift in Sources */,
 				2AF884E1271EE9310004565A /* LabsViewController.swift in Sources */,
 				0F2051A9265E271500602A0C /* WalletCoreStorage.swift in Sources */,
 				0F31A15E273E33DF009D2E05 /* LegacyWalletInfo.swift in Sources */,
 				2AD856142812875A0064DDA5 /* SheetGestureInteractor.swift in Sources */,
 				2A6ABB7E2720053B00CC3AED /* LanguageUpdateViewModel.swift in Sources */,
-				2AD8557D281284940064DDA5 /* UISearchBar+Height.swift in Sources */,
 				1FC6D70427F1697900879ECE /* RestorePipelineExcutor.swift in Sources */,
 				2AF88525271EE9310004565A /* WalletRenameViewModel.swift in Sources */,
 				2AF8850A271EE9310004565A /* PersonaListViewModel.swift in Sources */,
 				2AF88534271EE9310004565A /* WalletImportTableViewCell.swift in Sources */,
 				2AD854F5281281B50064DDA5 /* DAppService.swift in Sources */,
 				2AF8850D271EE9310004565A /* PersonaWelcomeViewController.swift in Sources */,
-				2AD85570281284940064DDA5 /* AsyncPublisher.swift in Sources */,
 				1FCBEDEE2738BFA1001C3637 /* WalletRestorePreview.swift in Sources */,
-				2AD85590281284940064DDA5 /* UIView+Shadow.swift in Sources */,
 				2AF884E6271EE9310004565A /* ScrollPositionModifier.swift in Sources */,
+				2AD31E57282D367700CB3D49 /* UINavigationBar.swift in Sources */,
 				1FEE1EA127843D7700697F81 /* EthereumTransaction+Dictionary.swift in Sources */,
+				2AD31E58282D367700CB3D49 /* UIView+Gesture.swift in Sources */,
 				2D335462275E39130075099C /* WalletConnectServerConfirmViewController.swift in Sources */,
 				DB9FF4932416477F0048E676 /* Fonts.swift in Sources */,
-				2AD8558A281284940064DDA5 /* UINavigationBar.swift in Sources */,
 				2AF8858E271EE9310004565A /* SelectItemViewModelProtocol.swift in Sources */,
 				2A852ADF2721775F00EE7EEC /* MaskSocialViewModel.swift in Sources */,
 				2AF884F9271EE9310004565A /* WalletConnectWalletCell.swift in Sources */,
 				2AF88510271EE9310004565A /* WalletConnectFailedViewController.swift in Sources */,
+				2AD31E4D282D367700CB3D49 /* UIImage.swift in Sources */,
 				0FB3CCE7270D7BD90072B787 /* Secrets.swift in Sources */,
 				2AF88547271EE9310004565A /* WalletListAddViewController.swift in Sources */,
 				2AD855A8281285D10064DDA5 /* RedPacketAvailability.swift in Sources */,
@@ -4781,11 +4801,11 @@
 				1F37DF2427BDFA3D008F8ABE /* RestoreLocalFileValidationViewModel.swift in Sources */,
 				2A6ABB9D2720053B00CC3AED /* RemoteRestoreInfoController.swift in Sources */,
 				2A6ABBAC2720053B00CC3AED /* RemoteBackupEmailVerifyStrategy.swift in Sources */,
-				2AD85572281284940064DDA5 /* UIImageView+Kingfisher.swift in Sources */,
 				2DBD0B9E2787FF9C0065A2B1 /* GroupStyleTableViewCell.swift in Sources */,
 				2AF884D3271EE9310004565A /* MaskWebMessage+Persona.swift in Sources */,
 				2A36E2762757243C0075E95B /* ChangeBackupPasswordStep2ViewController.swift in Sources */,
 				2AF884C0271EE9300004565A /* MaskSocialViewController.swift in Sources */,
+				2AD31E69282D367700CB3D49 /* UIApplication.swift in Sources */,
 				2AF885D5271EE9320004565A /* DownloadMaskActivity.swift in Sources */,
 				2A6ABBBA2720059200CC3AED /* SettingViewController.swift in Sources */,
 				41E5002827955E5200A73117 /* ProfileRepository.swift in Sources */,

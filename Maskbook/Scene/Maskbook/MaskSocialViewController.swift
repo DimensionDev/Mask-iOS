@@ -14,49 +14,53 @@ import WebExtension_Shim
 import WebKit
 
 class MaskSocialViewController: BaseViewController {
-    var socialPlatform: ProfileSocialPlatform
-    
+
     private var tabId: MaskbookTab.TabID?
-    
+
     @InjectedProvider(\.maskBrowser)
     var maskBrowser: MaskBrowser
 
     @InjectedProvider(\.tabService)
     private var tabService: MaskbookTabService
-    
+
     @InjectedProvider(\.mainCoordinator)
     private var coordinator: Coordinator
+
+    @InjectedProvider(\.personaManager)
+    private var personaManager
     
+    @InjectedProvider(\.cookieSwitcher)
+    private var cookieSwitcher
+
     @InjectedProvider(\.maskMessageRelay)
     private var maskMessageRelay: MaskMessageRelay
-    
+
     @InjectedProvider(\.userDefaultSettings)
     private var settings
-    
+
     private lazy var webViewScrollDelegate = WebViewScrollViewDelegate(navigationController: self.navigationController)
-    
-    lazy var webPublicApisMessageResolver: WebPublicApiMessageResolver = {
-        return WebPublicApiMessageResolver(webView: nil)
-    }()
-    
+
+    lazy var webPublicApisMessageResolver: WebPublicApiMessageResolver = .init(webView: nil)
+
     private let decoder = JSONDecoder()
-    
+
 //    private var latestDetectedProfile = CurrentValueSubject<SocialProfile?, Never>(nil)
-    
+
 //    private var didPresentLoginAlertPopup = false
     private var disposeBag = Set<AnyCancellable>()
     private let viewModel = MaskSocialViewModel()
     
-    init(socialPlatform: ProfileSocialPlatform) {
-        self.socialPlatform = socialPlatform
+    var lastProfileIdentifier: String?
+
+    init() {
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     deinit {
         if let tabId = tabId, let tab = maskBrowser.browser.tabs.remove(id: tabId) {
             tabService.resign(for: tab)
@@ -67,35 +71,63 @@ class MaskSocialViewController: BaseViewController {
 extension MaskSocialViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupNavigationBar()
-        loadSite(socialPlatform)
+        loadSite()
         observeNotifications()
+        subscribeSignal()
+    }
+
+    func subscribeSignal() {
         viewModel.backupReminder.sink { [weak self] _ in
             self?.alertBackup()
         }
         .store(in: &disposeBag)
+
+        personaManager.currentProfile
+            .sink { [weak self] profile in
+                guard let self = self else { return }
+                guard let profile = profile else { return }
+                var needReload: Bool = true
+                if let lastProfileIdentifier = self.lastProfileIdentifier {
+                    if lastProfileIdentifier == profile.identifier {
+                        needReload = false
+                    }
+                }
+                self.lastProfileIdentifier = profile.identifier
+                if self.cookieSwitcher.needReloadWebView {
+                    self.cookieSwitcher.needReloadWebView = false
+                    needReload = true
+                }
+                if needReload {
+                    Task.detached(priority: .userInitiated) { @MainActor in
+                        self.refreshTitle()
+                       await self.switchTo(socialPlatform: self.settings.currentProfileSocialPlatform)
+                    }
+                }
+            }
+            .store(in: &disposeBag)
     }
-    
+
+    func refreshTitle() {
+        if let platform = personaManager.currentProfile.value?.socialPlatform {
+            navigationItem.title = platform.shortName
+        }
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         viewModel.checkIfNeedBackup()
     }
-    
-    func refreshTitle() {
-        navigationItem.title = socialPlatform.shortName
-    }
-    
+
     private func setupNavigationBar() {
-        navigationItem.title = socialPlatform.shortName
         let button = UIButton(type: .custom)
         button.setImage(Asset.Images.Scene.Social.iconMaskDashboard.image, for: .normal)
         button.addTarget(self, action: #selector(dashboardBarButtonItem), for: .touchUpInside)
         navigationItem.rightBarButtonItems = [.fixedSpace(14),
                                               UIBarButtonItem(customView: button)]
     }
-    
+
     private func observeNotifications() {
         NotificationCenter.default.publisher(for: Notification.Name.connectingViewWillDisappear)
             .sink { [weak self] _ in
@@ -103,7 +135,7 @@ extension MaskSocialViewController {
             }
             .store(in: &disposeBag)
     }
-    
+
     private func reloadCurrentTab() {
         if let tabId = tabId, let tab = tabService.tabs[tabId] {
             tab.reload()
@@ -116,28 +148,31 @@ extension MaskSocialViewController {
                             transition: .modal(animated: true,
                                                adaptiveDelegate: self))
     }
-    
+
     @objc
     private func refreshBarButtonItemDidClicked() {
         if let tabId = tabId {
             tabService.tabs[tabId]?.reload()
         }
     }
-    
-    private func loadSite(_ socialPlatform: ProfileSocialPlatform) {
-        self.socialPlatform = socialPlatform
-        switchTo(socialPlatform: socialPlatform)
+
+    private func loadSite() {
+        Task.detached(priority: .userInitiated) { @MainActor in
+            if let platform = self.personaManager.currentProfile.value?.socialPlatform {
+                await self.switchTo(socialPlatform: platform)
+            }
+        }
     }
-    
+
     private func alertBackup() {
         coordinator.present(
             scene: .backupReminder,
             transition: .panModel(animated: true)
         )
     }
-    
-    func switchTo(socialPlatform: ProfileSocialPlatform) {
-        refreshTitle()
+
+    func switchTo(socialPlatform: ProfileSocialPlatform) async {
+        await cookieSwitcher.setNewCookies()
         if let tabId = tabId, let tab = maskBrowser.browser.tabs.remove(id: tabId) {
             tabService.resign(for: tab)
         }
@@ -146,7 +181,8 @@ extension MaskSocialViewController {
         let tab = maskBrowser.browser.tabs.create(
             options: WebExtension.Browser.Tabs.Create.Options(active: false, url: platformUrl.absoluteString),
             tabDelegate: self,
-            tabDownloadDelegate: self)
+            tabDownloadDelegate: self
+        )
         let maskbookTab = tabService.register(for: tab)
         tabId = maskbookTab.tabID
         view.addSubview(maskbookTab.containerView)
@@ -157,7 +193,7 @@ extension MaskSocialViewController {
             maskbookTab.containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             maskbookTab.containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        
+
         maskbookTab.maskbookUIDelegateShim.delegate = self
         maskbookTab.maskbookNavigationDelegateShim.delegate = self
         maskbookTab.tab?.webView.scrollView.delegate = webViewScrollDelegate
@@ -165,6 +201,7 @@ extension MaskSocialViewController {
 }
 
 // MARK: - TabDelegate
+
 extension MaskSocialViewController: TabDelegate {
     func uiDelegateShim(for tab: Tab) -> WKUIDelegateShim? {
         let maskbookTab = tabService.register(for: tab)
@@ -179,7 +216,7 @@ extension MaskSocialViewController: TabDelegate {
     }
 
     func customScriptMessageHandlerNames(for tab: Tab) -> [String] {
-        return [MaskBrowser.maskbookJsonRPCScheme]
+        [MaskBrowser.maskbookJsonRPCScheme]
     }
 
     func tab(_ tab: Tab, shouldOpenExternallyForURL url: URL) -> Bool {
@@ -241,19 +278,20 @@ extension MaskSocialViewController: TabDelegate {
     }
 
     func tab(_ tab: Tab, localStorageManagerForExtension id: String) -> LocalStorageManager? {
-        return LocalStorageManager(delegate: AppContext.shared.webExtensionCoreDataStackBridge, extensionID: id)
+        LocalStorageManager(delegate: AppContext.shared.webExtensionCoreDataStackBridge, extensionID: id)
     }
 
     func tab(_ tab: Tab, pluginResourceProviderForURL url: URL) -> PluginResourceProvider? {
         switch url.scheme {
         case "holoflows-extension": return maskBrowser.jsResourceManager
-        case "holoflows-blob":      return maskBrowser.blobResourceManager
-        default:                    return nil
+        case "holoflows-blob": return maskBrowser.blobResourceManager
+        default: return nil
         }
     }
 }
 
 // MARK: - TabDownloadsDelegate
+
 extension MaskSocialViewController: TabDownloadsDelegate {
     func tab(_ tab: Tab, didDownloadBlobWithOptions options: WebExtension.Browser.Downloads.Download.Options, result: Result<(Data, URLResponse), Error>) {
         guard let (data, _) = try? result.get() else {
@@ -281,34 +319,33 @@ extension MaskSocialViewController: TabDownloadsDelegate {
 }
 
 // MARK: - MaskbookUIDelegateShimDelegate
+
 extension MaskSocialViewController: MaskbookUIDelegateShimDelegate {
     func maskbookViewController() -> UIViewController? {
         self
     }
 
-    func navigationDidChange(url: URL?) { }
+    func navigationDidChange(url: URL?) {}
 }
 
 // MARK: - MaskbookNavigationDelegateShimDelegate
+
 extension MaskSocialViewController: MaskbookNavigationDelegateShimDelegate {
     func contentPlugin() -> Plugin {
         maskBrowser.contentScriptPlugin
     }
-    
-    func navigationDidFinish(_ webView: WKWebView, navigation: WKNavigation) { }
+
+    func navigationDidFinish(_ webView: WKWebView, navigation: WKNavigation) {}
 }
 
 extension MaskSocialViewController: UIAdaptivePresentationControllerDelegate {
-    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
-        guard settings.currentProfileSocialPlatform != socialPlatform else { return }
-        socialPlatform = settings.currentProfileSocialPlatform
-        switchTo(socialPlatform: settings.currentProfileSocialPlatform )
-    }
-    
+    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {}
+
     func adaptivePresentationStyle(for controller: UIPresentationController,
                                    traitCollection: UITraitCollection)
-    -> UIModalPresentationStyle {
-        return .overFullScreen
+        -> UIModalPresentationStyle
+    {
+        .overFullScreen
     }
 }
 
@@ -316,6 +353,6 @@ extension MaskSocialViewController {
     // remove backButton on this controller in any scene
     @objc
     override func prepareLeftNavigationItems() {
-        self.navigationItem.leftBarButtonItems = []
+        navigationItem.leftBarButtonItems = []
     }
 }
