@@ -314,7 +314,14 @@ extension SelectAccountViewController: PanModalPresentable {
 
 extension SelectAccountViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if viewModel.type == .editEnable && viewModel.isEditing.value { return }
+        if viewModel.type == .editEnable && viewModel.isEditing.value {
+            guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+            guard case let Item.account(data) = item else { return }
+            mainCoordinator.present(
+                scene: .walletEdit(account: data.account, sourceView: nil),
+                transition: .panModel(animated: true))
+            return
+        }
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
         switch item {
         case .addWalletConnect:

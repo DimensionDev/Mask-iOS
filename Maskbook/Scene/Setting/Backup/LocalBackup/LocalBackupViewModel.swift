@@ -203,7 +203,7 @@ extension LocalBackupViewModel {
             type = .phone
         }
 
-        let abstract = personaManager.personaRecordsSubject.value.compactMap { $0.nickname }.joined(separator: ",")
+        let abstract = personaManager.personaRecordsSubject.value.compactMap { $0.nickname }.joined(separator: ", ")
         let request = RemoteBackupUploadRequest(
             accountType: type,
             account: cloudVerifyResult.accountContent,
