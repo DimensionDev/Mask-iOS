@@ -48,7 +48,6 @@ class NFTCollectionDetailTableViewCell: UITableViewCell {
         let button = UIButton(type: .system)
         button.tintColor = Asset.Colors.Text.dark.color
         button.setImage(Asset.Images.Scene.Nft.more.image, for: .normal)
-        button.addTarget(self, action: #selector(moreButtonDidClick(sender:)), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -174,6 +173,8 @@ class NFTCollectionDetailTableViewCell: UITableViewCell {
             $0.right.equalTo(floorPriceLabel)
             $0.top.equalTo(priceETHLabel)
         }
+        moreButton.addTarget(self, action: #selector(moreButtonDidClick(sender:)), for: .touchUpInside)
+
     }
     
     @objc
