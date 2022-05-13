@@ -30,7 +30,7 @@ class SendTransactionViewController: BaseViewController {
     @InjectedProvider(\.walletAssetManager)
     private var walletAssetManager
     
-    let toAddressLabel: UILabel = {
+    lazy var toAddressLabel: UILabel = {
         let label = UILabel()
         label.textColor = Asset.Colors.Text.normal.color
         label.font = FontStyles.BH5
@@ -38,7 +38,7 @@ class SendTransactionViewController: BaseViewController {
         return label
     }()
     
-    let enterAddressTextField: MaskTextField = {
+    lazy var enterAddressTextField: MaskTextField = {
         let textField = MaskTextField()
         textField.attributedPlaceholder = NSAttributedString(string: L10n.Scene.Sendtransaction.Send.placeholderAddress,
                                                              attributes: [.foregroundColor: Asset.Colors.Text.light.color,
@@ -71,7 +71,7 @@ class SendTransactionViewController: BaseViewController {
         return textField
     }()
     
-    let nextButton: PrimeryButton = {
+    lazy var nextButton: PrimeryButton = {
         let btn = PrimeryButton(title: L10n.Scene.Sendtransaction.Send.btnNext)
         btn.addTarget(self, action: #selector(nextClicked(_:)), for: .touchUpInside)
         return btn

@@ -37,10 +37,12 @@ enum PersonaRepository {
             newPersonaRecord.localKey = persona.localKey?.rawString
             newPersonaRecord.hasLogout = persona.hasLogout ?? false
             newPersonaRecord.initialized = !(persona.uninitialized ?? false)
+            #if DEBUG
             if persona.privateKey != nil {
-                print("persona uninitialized is \(persona.uninitialized)")
+                print("persona uninitialized is \(persona.uninitialized ?? true)")
                 print("Persona initialized is \(!(persona.uninitialized ?? true))")
             }
+            #endif
             let profileIdentifiers = persona.linkedProfiles.map(\.key)
             let profileRecords = ProfileRepository.queryProfiles(identifiers: profileIdentifiers,
                                                                  context: context)

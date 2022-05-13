@@ -132,7 +132,7 @@ class PersonaImportHandler {
     {
         switch item.type {
         case let .mnemonic(mnemonic):
-            _ = restoreFroMmnemonic(mnemonic: mnemonic,
+            restoreFroMmnemonic(mnemonic: mnemonic,
                                 nickname: item.name)
         case let .privateKey(privateKey):
             restoreFromPrivateKey(privateKey: privateKey,

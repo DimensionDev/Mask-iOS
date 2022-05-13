@@ -39,13 +39,13 @@ class SendNFTTokenViewController: BaseViewController {
         return label
     }()
     
-    let addressLabel: UILabel = {
+    lazy var addressLabel: UILabel = {
         let label = UILabel()
         label.textColor = Asset.Colors.Text.dark.color
         return label
     }()
     
-    let contactButton: UIButton = {
+    lazy var contactButton: UIButton = {
         let button = UIButton()
         let image = Asset.Images.Scene.SendTransaction.addUser.image
         button.setImage(image, for: .normal)
@@ -143,7 +143,7 @@ class SendNFTTokenViewController: BaseViewController {
         return view
     }()
     
-    let feeButton: UIButton = {
+    lazy var feeButton: UIButton = {
         let button = UIButton(type: .custom)
         button.backgroundColor = Asset.Colors.Background.blue.color
         button.applyCornerRadius(radius: 13)
@@ -156,7 +156,7 @@ class SendNFTTokenViewController: BaseViewController {
         return button
     }()
     
-    let timeArriveButton: UIButton = {
+    lazy var timeArriveButton: UIButton = {
         let button = UIButton(type: .custom)
         button.backgroundColor = Asset.Colors.Background.blue.color
         button.applyCornerRadius(radius: 13)
@@ -170,7 +170,7 @@ class SendNFTTokenViewController: BaseViewController {
         return button
     }()
     
-    let sendButton: PrimeryButton =  {
+    lazy var sendButton: PrimeryButton =  {
         let button = PrimeryButton(title: L10n.Scene.Sendtransaction.Send.btnSend)
         button.tintColor = Asset.Colors.AccountCard.nameText.color
         button.setImage(Asset.Images.Scene.SendTransaction.upload.image, for: .normal)

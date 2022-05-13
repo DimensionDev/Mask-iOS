@@ -34,7 +34,7 @@ class SendTransactionConfirmViewController: BaseViewController {
     var param: ContactParam?
     var tokenId: String?
 
-    let toAddressLabel: UILabel = {
+    lazy var toAddressLabel: UILabel = {
         let label = UILabel()
         label.textColor = Asset.Colors.Text.normal.color
         label.font = FontStyles.BH5
@@ -42,7 +42,7 @@ class SendTransactionConfirmViewController: BaseViewController {
         return label
     }()
     
-    let toAddressDetailLabel: UILabel = {
+    lazy var toAddressDetailLabel: UILabel = {
         let label = UILabel()
         label.textColor = Asset.Colors.Text.dark.color
         label.font = FontStyles.BH5
@@ -50,7 +50,7 @@ class SendTransactionConfirmViewController: BaseViewController {
         return label
     }()
     
-    let contactButton: UIButton = {
+    lazy var contactButton: UIButton = {
         let button = UIButton()
         let image = Asset.Images.Scene.SendTransaction.addUser.image
         button.setImage(image, for: .normal)
@@ -70,34 +70,34 @@ class SendTransactionConfirmViewController: BaseViewController {
         return imageView
     }()
     
-    private var tokenNameLabel: UILabel = {
+    private lazy var tokenNameLabel: UILabel = {
         let label = UILabel()
         label.textColor = Asset.Colors.Text.dark.color
         label.font = FontStyles.BH5
         return label
     }()
     
-    private var tokenAmountlabel: UILabel = {
+    private lazy var tokenAmountlabel: UILabel = {
         let label = UILabel()
         label.textColor = Asset.Colors.Text.normal.color
         label.font = FontStyles.MH6
         return label
     }()
     
-    let arrowImageView: UIImageView = {
+    lazy var arrowImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = Asset.Icon.Arrows.celllRight.image
         return imageView
     }()
     
-    let chooseTokenBtn: UIButton = {
+    lazy var chooseTokenBtn: UIButton = {
         let button = UIButton(type: .custom)
         button.backgroundColor = .clear
         button .addTarget(self, action: #selector(chooseTokenClick(_:)), for: .touchUpInside)
         return button
     }()
     
-    let amountLabel: UILabel = {
+    lazy var amountLabel: UILabel = {
         let label = UILabel()
         label.textColor = Asset.Colors.Text.normal.color
         label.font = FontStyles.BH5
@@ -105,7 +105,7 @@ class SendTransactionConfirmViewController: BaseViewController {
         return label
     }()
     
-    let amountTextField: MaskTextField = {
+    lazy var amountTextField: MaskTextField = {
         let textField = MaskTextField()
         
         textField.autocapitalizationType = .none
@@ -119,7 +119,7 @@ class SendTransactionConfirmViewController: BaseViewController {
         return textField
     }()
     
-    let maxButton: SecondaryButton = {
+    lazy var maxButton: SecondaryButton = {
         let btn = SecondaryButton(title: L10n.Scene.Sendtransaction.Send.btnMax)
         btn.addTarget(self, action: #selector(maxBtnClicked(_:)), for: .touchUpInside)
         return btn
@@ -167,7 +167,7 @@ class SendTransactionConfirmViewController: BaseViewController {
         return view
     }()
     
-    let amountErrorLabel: UILabel = {
+    lazy var amountErrorLabel: UILabel = {
         let label = UILabel()
         label.font = FontStyles.MH6
         label.textColor = Asset.Colors.Public.error.color
@@ -181,7 +181,7 @@ class SendTransactionConfirmViewController: BaseViewController {
         return view
     }()
     
-    let feeButton: UIButton = {
+    lazy var feeButton: UIButton = {
         let button = UIButton(type: .custom)
         button.backgroundColor = Asset.Colors.Background.blue.color
         button.applyCornerRadius(radius: 13)
@@ -194,7 +194,7 @@ class SendTransactionConfirmViewController: BaseViewController {
         return button
     }()
     
-    let timeArriveButton: UIButton = {
+    lazy var timeArriveButton: UIButton = {
         let button = UIButton(type: .custom)
         button.backgroundColor = Asset.Colors.Background.blue.color
         button.applyCornerRadius(radius: 13)
@@ -208,13 +208,13 @@ class SendTransactionConfirmViewController: BaseViewController {
         return button
     }()
     
-    let warningImage: UIImageView = {
+    lazy var warningImage: UIImageView = {
          let image = UIImageView()
          image.image = Asset.Images.Scene.Alert.warning.image
          return image
      }()
 
-     let warningLabel: UILabel = {
+    lazy var warningLabel: UILabel = {
          let label = UILabel()
          label.font = FontStyles.MH7
          label.textColor = Asset.Colors.Public.warnings.color
@@ -230,7 +230,7 @@ class SendTransactionConfirmViewController: BaseViewController {
          return view
      }()
     
-    let sendButton: PrimeryButton =  {
+    lazy var sendButton: PrimeryButton =  {
         let button = PrimeryButton(title: L10n.Scene.Sendtransaction.Send.btnSend)
         button.tintColor = Asset.Colors.AccountCard.nameText.color
         button.setImage(Asset.Images.Scene.SendTransaction.upload.image, for: .normal)

@@ -42,7 +42,7 @@ class TermsOfServiceViewController: BaseViewController {
         return imageView
     }()
     
-    let serviceAgreementButton: UIButton = {
+    lazy var serviceAgreementButton: UIButton = {
         let button = UIButton(type: .custom)
         button .addTarget(self, action: #selector(serviceAgreementClick(_:)), for: .touchUpInside)
         return button

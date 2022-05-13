@@ -659,7 +659,7 @@ extension Coordinator {
         case let .localRestore(url, destination):
             return RestoreDataPreviewController(url, destination: destination)
             
-        case let .maskSocial:
+        case .maskSocial:
             let maskSocialVC = MaskSocialViewController()
             let naviVC = NavigationController(rootViewController: maskSocialVC)
             return naviVC
