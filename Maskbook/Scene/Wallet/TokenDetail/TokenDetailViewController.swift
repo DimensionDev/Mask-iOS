@@ -56,7 +56,7 @@ class TokenDetailViewController: BaseViewController {
         }
     }()
     
-    let sendButton: UIButton = {
+    lazy var sendButton: UIButton = {
         let button = PrimeryButton(title: L10n.Scene.Sendtransaction.Send.btnSend)
         button.tintColor = Asset.Colors.Public.warnings.color
         button.setImage(Asset.Images.Scene.SendTransaction.upload.image, for: .normal)
@@ -67,7 +67,7 @@ class TokenDetailViewController: BaseViewController {
         return button
     }()
     
-    let receiveButton: UIButton = {
+    lazy var receiveButton: UIButton = {
         let button = PrimeryButton(title: L10n.Scene.WalletBalance.btnReceive)
         button.tintColor = Asset.Colors.Public.blue.color
         button.setImage(Asset.Images.Scene.SendTransaction.receive.image, for: .normal)

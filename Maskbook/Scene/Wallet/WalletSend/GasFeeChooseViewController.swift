@@ -374,7 +374,7 @@ class GasFeeChooseViewController: UIViewController {
         $0.isHidden = true
     }
     
-    let confirmButton: PrimeryButton = {
+    lazy var confirmButton: PrimeryButton = {
         let btn = PrimeryButton(title: L10n.Scene.Sendtransaction.Gasprice.btnConfirm)
         btn.addTarget(self, action: #selector(confirmClicked(_:)), for: .touchUpInside)
         NSLayoutConstraint.activate([
