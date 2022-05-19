@@ -78,6 +78,10 @@ enum L10n {
   }
 
   enum Common {
+    /// No records
+    static var empty: String {
+      return L10n.tr("Localizable", "Common.Empty")
+    }
     /// Loading...
     static var loading: String {
       return L10n.tr("Localizable", "Common.Loading")
@@ -644,6 +648,248 @@ enum L10n {
       /// Saved!
       static var saved: String {
         return L10n.tr("Localizable", "Common.Toast.Saved")
+      }
+    }
+  }
+
+  enum Plugins {
+
+    enum Luckydrop {
+      /// Account
+      static var account: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Account")
+      }
+      /// Amount per share
+      static var amountPerShare: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Amount-Per-Share")
+      }
+      /// Claimed
+      static var claimed: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Claimed")
+      }
+      /// Created
+      static var created: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Created")
+      }
+      /// End Time
+      static var endTime: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.End-Time")
+      }
+      /// Enter attached message
+      static var enterMessage: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Enter-Message")
+      }
+      /// Enter quantity
+      static var enterQuantity: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Enter-Quantity")
+      }
+      /// History Records
+      static var historyTitle: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.HistoryTitle")
+      }
+      /// MAX
+      static var max: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Max")
+      }
+      /// The max quantity is 255.
+      static var maxQuantityError: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Max-Quantity-Error")
+      }
+      /// NFT
+      static var nft: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Nft")
+      }
+      /// Best Wishes!
+      static var pluginRedPacketBestWishes: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.PluginRedPacketBestWishes")
+      }
+      /// Quantity
+      static var quantity: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Quantity")
+      }
+      /// Refund
+      static var refund: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Refund")
+      }
+      /// Refund the unclaimed after %@
+      static func refundTip(_ p1: String) -> String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.RefundTip", p1)
+      }
+      /// Select the Social account to share the Lucky Drop.
+      static var selectSocialDescription: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Select-Social-Description")
+      }
+      /// Select Social Account
+      static var selectSocialTitle: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Select-Social-Title")
+      }
+      /// Connect your Persona to social media before you share your lucky Drop.
+      static var shareConnectPersona: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Share-Connect-Persona")
+      }
+      /// To send lucky drop, please create a persona to connect to your social account.
+      static var shareCreatePersona: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Share-Create-Persona")
+      }
+      /// Share Lucky Drop
+      static var shareTitle: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Share-Title")
+      }
+      /// Lucky Drop
+      static var title: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Title")
+      }
+      /// Token
+      static var token: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Token")
+      }
+      /// Total Amount
+      static var totalAmount: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Total-Amount")
+      }
+      /// Transaction fee
+      static var transactionFee: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Transaction-Fee")
+      }
+
+      enum Alert {
+        /// You can’t select tokens as there is no wallet.
+        static var messageNoAccount: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Alert.MessageNoAccount")
+        }
+      }
+
+      enum Buttons {
+        /// Average
+        static var average: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Average")
+        }
+        /// Best Wishes!
+        static var bestWishes: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Best-Wishes")
+        }
+        /// Create Persona
+        static var createPersona: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Create-Persona")
+        }
+        /// Enter Quantity(Max: 255)
+        static var exceedMaxQuantity: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Exceed-Max-Quantity")
+        }
+        /// Insufficient Balance
+        static var insufficientBalance: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Insufficient-Balance")
+        }
+        /// Insufficient Gas Amount
+        static var insufficientGas: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Insufficient-Gas")
+        }
+        /// The minimum amount for each share is %@ %@
+        static func minimumAmount(_ p1: String, _ p2: String) -> String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Minimum-Amount", p1, p2)
+        }
+        /// There is no wallet
+        static var noAccount: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.No-Account")
+        }
+        /// Enter Amount Per Share
+        static var noAmountPerShare: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.No-Amount-Per-Share")
+        }
+        /// Enter Attached Messege
+        static var noMessage: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.No-Message")
+        }
+        /// Enter share
+        static var noShare: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.No-Share")
+        }
+        /// Select a Token
+        static var noToken: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.No-Token")
+        }
+        /// Enter Total Amount
+        static var noTotalAmount: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.No-Total-Amount")
+        }
+        /// Random
+        static var random: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Random")
+        }
+        /// Recover Persona
+        static var recoverPersona: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Recover-Persona")
+        }
+        /// Confirm Risk Warning
+        static var riskWarning: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Risk-Warning")
+        }
+        /// Send %@
+        static func send(_ p1: String) -> String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Send", p1)
+        }
+        /// Approve %@
+        static func unlockToken(_ p1: String) -> String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Unlock-Token", p1)
+        }
+        /// Approving
+        static var unlockingToken: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Unlocking-Token")
+        }
+      }
+
+      enum Confirm {
+        /// Amount per share
+        static var amountPerShare: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Confirm.AmountPerShare")
+        }
+        /// Attached message
+        static var attachedMessage: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Confirm.AttachedMessage")
+        }
+        /// Share
+        static var share: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Confirm.Share")
+        }
+        /// Split mode
+        static var splitMode: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Confirm.SplitMode")
+        }
+        /// You can withdraw the remaining balance 24 hours after the Lucky Drop is sent.
+        static var tips: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Confirm.Tips")
+        }
+        /// Confirm Your Lucky Drop
+        static var title: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Confirm.Title")
+        }
+        /// Total amount
+        static var totalAmount: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Confirm.TotalAmount")
+        }
+        /// Transaction fee
+        static var transactionFee: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Confirm.TransactionFee")
+        }
+        /// Wallet account
+        static var walletAccount: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Confirm.WalletAccount")
+        }
+      }
+
+      enum State {
+        /// Tx failed
+        static var failed: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.State.Failed")
+        }
+        /// Pending...
+        static var pending: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.State.Pending")
+        }
+        /// Tx Success
+        static var success: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.State.Success")
+        }
       }
     }
   }

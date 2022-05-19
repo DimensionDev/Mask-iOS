@@ -38,7 +38,8 @@ extension MaskServiceRequest {
         )
         .publishResponse(
             using: DecodableResponseSerializer<ResponseType>(
-                emptyResponseCodes: emptyResponseCodes, emptyRequestMethods: [httpMethod]
+                emptyResponseCodes: emptyResponseCodes,
+                emptyRequestMethods: [httpMethod]
             )
         )
         .result()

@@ -6,7 +6,9 @@
 //  Copyright © 2021 dimension. All rights reserved.
 //
 
+import BigInt
 import Combine
+import web3swift
 import UIKit
 
 // swiftlint:disable line_length
@@ -23,15 +25,13 @@ extension GasFeeViewModel {
 class GasFeeViewModel: NSObject {
     private var disposeBag = Set<AnyCancellable>()
     let gasFeePublisher = CurrentValueSubject<GasFeeCellItem?, Never>(nil)
+    let confirmedGasFeePublisher = CurrentValueSubject<GasFeeCellItem?, Never>(nil)
+    let gasLimitPublisher = CurrentValueSubject<BigUInt, Never>(BigUInt(21_000))
     
     weak var collectionView: UICollectionView?
     weak var dataSource: UICollectionViewDiffableDataSource<Section, SectionItem>?
     var indicatorView = MaskLoadingIndicator()
     var localGasFeeModel: GasFeeCellItem?
-    
-    override init() {
-        super.init()
-    }
     
     func refresh(gasFeeModel: GasFeeModel) {
         guard let dataSource = dataSource else { return }
@@ -60,6 +60,7 @@ class GasFeeViewModel: NSObject {
                 let cellItem = GasFeeCellItem(gasFeeModel: model, type: .medium)
                 self?.localGasFeeModel = cellItem
                 self?.gasFeePublisher.value = cellItem
+                self?.confirmedGasFeePublisher.accept(cellItem)
                 self?.refresh(gasFeeModel: model)
             }
             .store(in: &disposeBag)

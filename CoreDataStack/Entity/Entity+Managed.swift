@@ -106,7 +106,7 @@ extension Token: Managed {
         return NSPredicate(format: "%K == %d", #keyPath(Token.chainId), chainId)
     }
     
-    static func predicate(address: String) -> NSPredicate {
+    public static func predicate(address: String) -> NSPredicate {
         return NSPredicate(format: "%K == %@", #keyPath(Token.account.address), address)
     }
     
@@ -520,5 +520,41 @@ extension WalletConnectSession: Managed {
         super.willSave()
         
         setPrimitiveValue(Date(), forKey: #keyPath(WalletConnectSession.lastModifiedDate))
+    }
+}
+
+
+extension PluginStorage: Managed {
+    public static var defaultSortDescriptors: [NSSortDescriptor] {
+        return [NSSortDescriptor(keyPath: \PluginStorage.lastModifiedDate, ascending: false)]
+    }
+    
+    static func predicate(keys: [String]) -> NSPredicate {
+        return NSPredicate(format: "%K IN %@", #keyPath(PluginStorage.key), keys)
+    }
+    
+    public static func predicate(pluginID: String) -> NSPredicate {
+        return NSPredicate(format: "%K == %@", #keyPath(PluginStorage.pluginID), pluginID)
+    }
+    
+    public static func predicate(keys: [String], pluginID: String) -> NSPredicate {
+        let predicates = [
+            predicate(keys: keys),
+            predicate(pluginID: pluginID)
+        ]
+        return NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+    }
+
+    override public func awakeFromInsert() {
+        super.awakeFromInsert()
+        
+        setPrimitiveValue(Date(), forKey: #keyPath(PluginStorage.createdAt))
+        setPrimitiveValue(Date(), forKey: #keyPath(PluginStorage.lastModifiedDate))
+    }
+    
+    override public func willSave() {
+        super.willSave()
+        
+        setPrimitiveValue(Date(), forKey: #keyPath(PluginStorage.lastModifiedDate))
     }
 }

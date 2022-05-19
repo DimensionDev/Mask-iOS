@@ -63,6 +63,7 @@ internal enum Asset {
       internal static let dark = ColorAsset(name: "Colors/Background/dark")
       internal static let disable = ColorAsset(name: "Colors/Background/disable")
       internal static let gradient = ColorAsset(name: "Colors/Background/gradient")
+      internal static let infoBg = ColorAsset(name: "Colors/Background/info-bg")
       internal static let light = ColorAsset(name: "Colors/Background/light")
       internal static let lightBlue = ColorAsset(name: "Colors/Background/lightBlue")
       internal static let mask = ColorAsset(name: "Colors/Background/mask")
@@ -201,11 +202,13 @@ internal enum Asset {
       internal static let backArrowSmall = ImageAsset(name: "Icon/Arrows/backArrowSmall")
       internal static let celllRight = ImageAsset(name: "Icon/Arrows/celllRight")
       internal static let down = ImageAsset(name: "Icon/Arrows/down")
+      internal static let down1 = ImageAsset(name: "Icon/Arrows/down1")
       internal static let drop = ImageAsset(name: "Icon/Arrows/drop")
       internal static let `left` = ImageAsset(name: "Icon/Arrows/left")
     }
     internal enum Cell {
       internal static let cellCheck = ImageAsset(name: "Icon/Cell/cellCheck")
+      internal static let cellUncheck = ImageAsset(name: "Icon/Cell/cellUncheck")
     }
     internal enum Logo {
       internal static let largeMask = ImageAsset(name: "Icon/Logo/largeMask")
@@ -222,6 +225,7 @@ internal enum Asset {
     internal enum Scene {
       internal enum Alert {
         internal static let error = ImageAsset(name: "Images/Scene/Alert/error")
+        internal static let redWarning = ImageAsset(name: "Images/Scene/Alert/red_warning")
         internal static let success = ImageAsset(name: "Images/Scene/Alert/success")
         internal static let warning = ImageAsset(name: "Images/Scene/Alert/warning")
       }
@@ -462,6 +466,17 @@ internal enum Asset {
     }
   }
   internal enum Plugins {
+    internal enum LuckyDrop {
+      internal enum Icon {
+        internal static let close = ImageAsset(name: "Plugins/LuckyDrop/icon/close")
+        internal static let history = ImageAsset(name: "Plugins/LuckyDrop/icon/history")
+      }
+      internal static let lock = ImageAsset(name: "Plugins/LuckyDrop/lock")
+      internal static let redPacket = ImageAsset(name: "Plugins/LuckyDrop/redPacket")
+      internal static let setting = ImageAsset(name: "Plugins/LuckyDrop/setting")
+      internal static let share = ImageAsset(name: "Plugins/LuckyDrop/share")
+      internal static let success = ImageAsset(name: "Plugins/LuckyDrop/success")
+    }
     internal static let checkMark = ImageAsset(name: "Plugins/checkMark")
     internal static let circleBackground = ColorAsset(name: "Plugins/circleBackground")
     internal static let closeSquare = ImageAsset(name: "Plugins/closeSquare")

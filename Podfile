@@ -30,7 +30,7 @@ target 'Maskbook' do
   # Press
   pod "EUMTouchPointView"
   
-  pod 'Kingfisher', '~> 6.0'
+  pod 'Kingfisher', '~> 7.0'
   
   pod 'Socket.IO-Client-Swift', '~> 15.2.0'
   
@@ -57,9 +57,12 @@ target 'Maskbook' do
   
   pod 'UStack', '~> 2.2.1'
   pod 'CombineEvent', '~> 1.0.0'
+  pod 'CombineExt'
   pod 'SwiftMsgPack', :git => 'https://github.com/malcommac/SwiftMsgPack.git', :branch => 'develop'
   pod 'WalletConnectSwift', :git => 'https://github.com/DimensionDev/WalletConnectSwift.git'
-  
+  pod 'ResponderChain', '~> 1.1'
+  pod 'Pika', '0.1.8'
+
   pod 'Firebase/Analytics'
   
   target 'MaskbookTests' do

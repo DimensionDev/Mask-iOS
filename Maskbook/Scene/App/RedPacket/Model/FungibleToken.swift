@@ -24,6 +24,13 @@ enum EitherOr<T, V>: Codable where T: Codable, V: Codable {
         case let .either(value): try container.encode(value)
         }
     }
+    
+    var either: T? {
+        switch self {
+        case let .either(v): return v
+        default: return nil
+        }
+    }
 }
 
 enum DecodeError: Error {
@@ -125,5 +132,54 @@ extension RedPacket {
                 return token
             }
         }
+        
+        
+        var logoURL: String? {
+            guard let uri = self.token.logoURI else {
+                return nil
+            }
+            switch uri {
+            case let .either(url): return url
+            case let .or(uris): return uris.first
+            }
+        }
+        
+        var decimals: Int? { token.decimals }
+    }
+}
+
+extension RedPacket.ChainId {
+    var nativeTokenAddress: String? {
+        switch self {
+        case .mainnet, .bsc, .arbitrum, .xDai, .matic: return  "0x0000000000000000000000000000000000000000"
+        case .celo: return "0x471ece3750da237f93b8e339c536989b8978a438"
+        default: return nil
+        }
+    }
+}
+
+extension RedPacket.Token {
+    static var eth: Self {
+        .init(
+            type: .native,
+            address: RedPacket.ChainId.mainnet.nativeTokenAddress ?? "",
+            chainId: .mainnet,
+            name: "Ether",
+            symbol: "ETH",
+            decimals: 18,
+            logoURI: nil
+        )
+    }
+
+    static var bsc: Self {
+        .init(
+            type: .native,
+            address: RedPacket.ChainId.mainnet.nativeTokenAddress ?? "",
+            chainId: .mainnet,
+            name: "Ether",
+            symbol: "ETH",
+            decimals: 18,
+            logoURI: nil
+        )
     }
 }

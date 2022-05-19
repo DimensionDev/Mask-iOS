@@ -9,6 +9,7 @@ import BigInt
 import CoreDataStack
 import PanModal
 import PromiseKit
+import ResponderChain
 import SwiftUI
 import UIKit
 import WalletConnectSwift
@@ -112,11 +113,11 @@ class Coordinator {
                                         transaction: EthereumTransaction,
                                         transactionOptions: TransactionOptions,
                                                      request: Request)
-        case maskSendResolverTransactionPopView(resolver: Resolver<String>?,
+        case maskSendResolverTransactionPopView(completion: ((Swift.Result<String, Error>) -> Void)?,
                                                 transaction: EthereumTransaction,
                                                 transactionOptions: TransactionOptions)
         case scanBase(delegate: ScannerLineViewControllerDelegate)
-        case gasFee(delegate: GasFeeBackDelegate?, gasLimit: BigUInt)
+        case gasFee(delegate: GasFeeBackDelegate?, gasLimit: BigUInt, viewModel: GasFeeViewModel? = nil)
         case rename(viewModel: RenameViewModel)
         case personaAction(viewModel: PersonasActionViewModel)
         case personaList
@@ -139,7 +140,7 @@ class Coordinator {
         case identityMnemonicImport
         case identityPrivateKeyImport
         case derivationPath(name: String?, mnemonic: String)
-        case pluginRiskWarning
+        case pluginRiskWarning(pluginId: String?)
         case backupPasswordVerify(verifyPassedCompletion: () -> Void)
         case localBackup(type: LocalBackupViewModel.BackupType, cloudVerifyResult: CloudVerifyResult? = nil)
         case chooseBackupStrategy
@@ -193,6 +194,17 @@ class Coordinator {
             shareActionDelegate: RedPacketShareDelegate?
         )
         case moveBackupData
+        case luckyDrop
+        case luckyDropConfirm(
+            token: Token,
+            gasFeeViewModel: GasFeeViewModel,
+            redPacketInput: HappyRedPacketV4.CreateRedPacketInput,
+            transaction: EthereumTransaction,
+            options: TransactionOptions,
+            password: String,
+            completion: (String?, Error?) -> Void
+        )
+        case luckyDropSuccessfully
         case debug
     }
     
@@ -519,12 +531,12 @@ extension Coordinator {
             popVc.walletConnectDelegate = delegate
             return popVc
             
-        case let .maskSendResolverTransactionPopView(resolver,
+        case let .maskSendResolverTransactionPopView(completion,
                                                      transaction,
                                                      transactionOptions):
             let popVc = SendConfirmPopViewController(transaction: transaction,
                                                      transactionOptions: transactionOptions,
-                                                     resolver: resolver)
+                                                     completion: completion)
             return popVc
             
         case let .scanBase(viewController):
@@ -535,8 +547,8 @@ extension Coordinator {
         case let .rename(viewModel):
             return RenameViewController(viewModel: viewModel)
 
-        case .pluginRiskWarning:
-            return PluginAlertViewController()
+        case .pluginRiskWarning(let pluginId):
+            return PluginAlertViewController(pluginId: pluginId)
 
         case let .personaAction(viewModel):
             return PersonaActionViewController(viewModel: viewModel)
@@ -569,10 +581,10 @@ extension Coordinator {
         case let .safariView(url):
             return MaskSafariUtil.createSfSafariVC(url: url)
 
-        case let .gasFee(viewController, gasLimit):
-            let gasFee = GasFeeChooseViewController()
+        case let .gasFee(viewController, gasLimit, viewModel):
+            let gasFee = GasFeeChooseViewController(viewModel)
             gasFee.delegate = viewController
-            gasFee.gasLimit = gasLimit
+            gasFee.viewModel.gasLimitPublisher.accept(gasLimit)
             return gasFee
 
         case .setPassword:
@@ -765,6 +777,34 @@ extension Coordinator {
         case .moveBackupData:
             return MoveBackupDataViewController()
             
+        case .luckyDrop:
+            let vc = LuckyDropViewController()
+            let nav = NavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .overFullScreen
+            return nav
+            
+        case .luckyDropConfirm(
+            let token,
+            let gasFeeViewModel,
+            let redPacketInput,
+            let transaction,
+            let options,
+            let password,
+            let completion
+        ):
+            return LuckyDropConfirmViewController(
+                token: token,
+                gasFeeViewModel: gasFeeViewModel,
+                redPacketInput: redPacketInput,
+                transaction: transaction,
+                options: options,
+                password: password,
+                completion: completion
+            )
+        
+        case .luckyDropSuccessfully:
+            return SheetViewAdapterController(rootView: LuckyDropSuccessfullyView())
+            
         case .debug:
             return UIHostingController(rootView: DebugView())
         }
@@ -778,6 +818,10 @@ extension Coordinator {
         if let mainTabVC = keyWindow.rootViewController?.presentedViewController as? MainTabBarController {
             mainTabVC.dismiss(animated: animated, completion: nil)
         }
+    }
+    
+    func dismissTopViewController() {
+        UIApplication.getTopViewController()?.dismiss(animated: true, completion: nil)
     }
 }
 

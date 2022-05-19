@@ -8,6 +8,7 @@
 
 import BigInt
 import Compression
+import CoreDataStack
 import Foundation
 import PromiseKit
 import SwiftyJSON
@@ -19,18 +20,15 @@ struct HappyRedPacketV4: ABIContract {
     
     @InjectedProvider(\.mainCoordinator)
     var mainCoordinator
-    
-    private var contractInfo: JSON? {
-        guard let redPacketConstantURL = Bundle.main.url(forResource: "red-packet", withExtension: "json"),
-              let data = try? Data(contentsOf: redPacketConstantURL) else {
-                  return nil
-              }
-        return try? JSON(data: data)
+
+    private(set) var ethcontract: EthereumContract?
+
+    init() {
+        self.ethcontract = EthereumContract(abiString, at: contractAddress)
     }
     
     var contractAddress: EthereumAddress {
-        let chainKey = maskUserDefaults.network.redPacketConstantKey
-        guard let addressStr = contractInfo?["HAPPY_RED_PACKET_ADDRESS_V4"][chainKey].string,
+        guard let addressStr = userSetting.network.redPacketAddressV4,
               let address = EthereumAddress(addressStr) else {
                   assert(false, "It needs an address for HappyRedPacketV4 Contract.")
                   return EthereumAddress("")!
@@ -46,14 +44,72 @@ struct HappyRedPacketV4: ABIContract {
               }
         return content
     }
-    
+
     var abiVersion: Int {
         2
     }
     
+    @MainActor
+    func write(
+        _ methodName: String,
+        token: Token,
+        gasFeeViewModel: GasFeeViewModel,
+        redPacketInput: CreateRedPacketInput,
+        password: String,
+        param: [AnyObject]? = nil,
+        extraData: Data? = nil,
+        options: TransactionOptions? = nil
+    ) async throws -> String? {
+        guard let contract = web3.contract(abiString, at: contractAddress, abiVersion: abiVersion) else {
+            return nil
+        }
+        var defaultOptions = TransactionOptions.defaultOptions
+        defaultOptions.from = walletAddress
+        defaultOptions.gasPrice = options?.gasPrice
+        defaultOptions.gasLimit = options?.gasLimit
+        guard let tx = contract.write(
+            methodName,
+            parameters: param ?? [],
+            extraData: extraData ?? Data(),
+            transactionOptions: defaultOptions.merge(options)) else {
+                return nil
+            }
+        
+        return try await withCheckedThrowingContinuation { continuation in
+            Task.detached {
+                do {
+                    let transaction = try tx.assemble(transactionOptions: tx.transactionOptions)
+                    await MainActor.run {
+                        let scene: Coordinator.Scene = .luckyDropConfirm(
+                            token: token,
+                            gasFeeViewModel: gasFeeViewModel,
+                            redPacketInput: redPacketInput,
+                            transaction: transaction,
+                            options: tx.transactionOptions,
+                            password: password
+                        ) { tx, error in
+                            if let error = error {
+                                continuation.resume(with: .failure(error))
+                            } else {
+                                continuation.resume(with: .success(tx))
+                                mainCoordinator.dismissTopViewController()
+                            }
+                        }
+                        mainCoordinator.present(
+                            scene: scene,
+                            transition: .modal()
+                        )
+                    }
+                } catch {
+                    continuation.resume(with: .failure(error))
+                }
+            }
+        }
+    }
+    
     func checkAvailability(redPackageId: String) async -> CheckAvailabilityResult? {
         let contractMethod = Functions.checkAvailability.rawValue
-        let parameters: [AnyObject] = [redPackageId] as [AnyObject]
+        let parameters: [AnyObject] = [Data(hex: redPackageId)] as [AnyObject]
         guard let tx = read(
             contractMethod,
             param: parameters
@@ -61,7 +117,7 @@ struct HappyRedPacketV4: ABIContract {
             return nil
         }
         
-        return await Task {
+        return await Task.detached {
             guard let txResult = try? tx.call() else {
                 return nil
             }
@@ -70,7 +126,7 @@ struct HappyRedPacketV4: ABIContract {
             return result
         }.value
     }
-    
+
     @MainActor
     func claim(rid: String, password: String) async -> String? {
         guard let ridBytes = Web3.Utils.hexToData(rid)?.bytes else {
@@ -90,12 +146,24 @@ struct HappyRedPacketV4: ABIContract {
     }
     
     @MainActor
-    func createRedPacket(param: CreateRedPacketInput) async -> String? {
+    func createRedPacket(
+        token: Token,
+        gasFeeViewModel: GasFeeViewModel,
+        param: CreateRedPacketInput,
+        password: String
+    ) async -> String? {
         let contractMethod = Functions.createRedPacket.rawValue
         let parameters = param.asArray
-        return await write(
+        var options = TransactionOptions()
+        options.value = param.tokenType == 0 ? param.totalTokens : BigUInt(0)
+        return try? await write(
             contractMethod,
-            param: parameters
+            token: token,
+            gasFeeViewModel: gasFeeViewModel,
+            redPacketInput: param,
+            password: password,
+            param: parameters,
+            options: options
         )
     }
     
@@ -138,7 +206,7 @@ struct HappyRedPacketV4: ABIContract {
 }
 
 extension HappyRedPacketV4 {
-    enum Functions: String, CaseIterable {
+    enum Functions: String, CaseIterable, RawRepresentable {
         // readable fuctions
         case checkAvailability = "check_availability"
         // writable fuctions
@@ -147,7 +215,7 @@ extension HappyRedPacketV4 {
         case refund
     }
     
-    enum Events: String, CaseIterable {
+    enum Events: String, CaseIterable, RawRepresentable {
         case claimSuccess = "ClaimSuccess"
         case creationSuccess = "CreationSuccess"
         case refundSuccess = "RefundSuccess"
@@ -193,6 +261,7 @@ extension HappyRedPacketV4 {
         let duration: BigUInt
         let seed: [UInt8]
         let message: String
+        let name: String
         let tokenType: BigUInt
         let tokenAddr: EthereumAddress
         let totalTokens: BigUInt
@@ -204,6 +273,7 @@ extension HappyRedPacketV4 {
             case duration = "_duration"
             case seed = "_seed"
             case message = "_message"
+            case name = "_name"
             case tokenType = "_token_type"
             case tokenAddr = "_token_addr"
             case totalTokens = "_total_tokens"
@@ -217,28 +287,11 @@ extension HappyRedPacketV4 {
                 duration as AnyObject,
                 seed as AnyObject,
                 message as AnyObject,
+                name as AnyObject,
                 tokenType as AnyObject,
                 tokenAddr as AnyObject,
                 totalTokens as AnyObject
             ]
-        }
-    }
-}
-
-extension BlockChainNetwork {
-    var redPacketConstantKey: String {
-        switch self {
-        case .eth: return "Mainnet"
-        case .rinkeby: return ""
-        case .bsc: return "BSC"
-        case .polygon: return "Matic"
-        case .polka: return ""
-        case .arbitrum: return "Arbitrum"
-        case .xdai: return "xDai"
-        case .optimism: return ""
-            
-        default:
-            return ""
         }
     }
 }

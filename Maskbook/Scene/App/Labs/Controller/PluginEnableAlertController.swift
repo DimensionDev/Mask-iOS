@@ -22,6 +22,7 @@ final class PluginAlertViewController: AlertPopupController {
     private let textEdge = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
     private let maxTextContentHeight: CGFloat = 318
     private let iconSize: CGFloat = 60
+    private let pluginId: String?
 
     @InjectedProvider(\.userDefaultSettings)
     private var userSettings
@@ -30,11 +31,12 @@ final class PluginAlertViewController: AlertPopupController {
         userSettings.defaultAccountAddress ?? ""
     }
 
-    init() {
+    init(pluginId: String?) {
+        self.pluginId = pluginId
         super.init(presenter: .alert)
     }
 
-    private lazy var warningIcon = UIImageView(image: Asset.Images.Scene.Alert.warning.image).cv.apply { view in
+    private lazy var warningIcon = UIImageView(image: Asset.Images.Scene.Alert.redWarning.image).cv.apply { view in
         view.snp.makeConstraints { $0.size.equalTo(self.iconSize) }
     }
     private lazy var iconSpacerOne = Spacer()
@@ -44,13 +46,13 @@ final class PluginAlertViewController: AlertPopupController {
         label.text = L10n.Scene.App.riskwarningTitle
         label.font = FontStyles.BH4
         label.textAlignment = .center
-        label.textColor = Asset.Colors.Text.dark.color
+        label.textColor = Asset.Colors.Public.error.color
     }
 
     private lazy var warningTextView = UITextView().cv.apply { view in
         view.text = L10n.Scene.App.riskwarning
         view.font = FontStyles.MH6
-        view.textColor = Asset.Colors.Text.normal.color
+        view.textColor = Asset.Colors.Public.error.color
         view.backgroundColor = Asset.Colors.Background.dark.color
         view.textContainerInset = self.textEdge
         view.isEditable = false
@@ -78,7 +80,7 @@ final class PluginAlertViewController: AlertPopupController {
 
     private lazy var cancelButton = UIButton().cv.apply { button in
         button.applyCornerRadius(radius: self.buttongCorner)
-        button.backgroundColor = Asset.Colors.Background.blue.color
+        button.backgroundColor = Asset.Colors.Background.blue1.color
         button.setTitle(L10n.Common.Controls.cancel, for: .normal)
         button.setTitleColor(Asset.Colors.Text.link.color, for: .normal)
         button.snp.makeConstraints { $0.height.equalTo(self.buttonHeight) }
@@ -158,15 +160,24 @@ final class PluginAlertViewController: AlertPopupController {
 
         confirmButton.cv.tap()
             .sink { [weak self] _ in
-                self?.userSettings.pluginRiskWarningAwared = true
-                self?.hide()
+                defer { self?.hide() }
+                guard let address = self?.userSettings.defaultAccountAddress else {
+                    return
+                }
+                self?.userSettings.confirmRiskWarning(address: address, pluginId: self?.pluginId)
             }
             .store(in: &subscriptionSet)
 
-        let limitSize = warningTextView.contentSize.height + self.textEdge.bottom
         warningTextView
             .publisher(for: \.contentOffset)
-            .map { $0.y >= limitSize }
+            .map { [weak self] offset -> Bool in
+                guard let self = self else { return false }
+                let limitSize = self.warningTextView.contentSize.height - self.warningTextView.frame.height
+                guard limitSize > 0 else {
+                    return false
+                }
+                return offset.y >= limitSize
+            }
             .sink { [weak self] value in
                 guard let self = self else { return }
                 if self.confirmButton.isEnabled { return }
@@ -191,7 +202,7 @@ import SwiftUI
 struct PluginAlertViewControllerPreview: PreviewProvider {
     static var previews: some SwiftUI.View {
         Preview {
-            PluginAlertViewController().view
+            PluginAlertViewController(pluginId: nil).view
         }
     }
 }

@@ -10,6 +10,7 @@ import Alamofire
 import Combine
 import CoreData
 import CoreDataStack
+import SwiftyJSON
 
 // swiftlint:disable file_length
 
@@ -17,6 +18,9 @@ public class DebankProvider: WalletAssetProvider {
     private lazy var timer = Timer.publish(every: 12, on: .main, in: .default)
         .autoconnect()
         .share()
+    
+    @InjectedProvider(\.userDefaultSettings)
+    private var settings
         
     private var disposeBag = Set<AnyCancellable>()
     
@@ -38,6 +42,8 @@ public class DebankProvider: WalletAssetProvider {
     }
     
     public weak var delegate: WalletAssetProviderDelegate?
+    
+    public var nativeTokenSubject = PassthroughSubject<Void, Never>()
     
     public func connect() {
         guard maskUserDefaults.defaultAccountAddress != nil else {
@@ -85,6 +91,27 @@ public class DebankProvider: WalletAssetProvider {
                 })
                 .store(in: &self.disposeBag)
         }
+        
+        // 切换完network之后请求 native token
+        settings.networkPubisher.removeDuplicates().flatMapLatest { [weak self] network -> AnyPublisher<DebankAPIModel.DebankToken?, Never> in
+            guard let self = self,
+                  let detailPublisher = self.tokenDetailPublisher(network: network) else {
+                return Just(nil).eraseToAnyPublisher()
+            }
+            guard WalletAssetManager.shared.getMainToken(
+                network: network,
+                chainId: network.chain.rawValue,
+                networkId: Int(network.networkId),
+                context: AppContext.shared.coreDataStack.persistentContainer.viewContext
+            ) == nil else {
+                return Just(nil).eraseToAnyPublisher()
+            }
+            return detailPublisher.replaceError(with: nil).eraseToAnyPublisher()
+        }.sink { [weak self] debankToken in
+            guard let debankToken = debankToken else { return }
+            guard let self = self else { return }
+            self.parseDebankToken(debankToken: debankToken)
+        }.store(in: &self.disposeBag)
     }
     
     public func disconnect() {
@@ -179,6 +206,42 @@ public class DebankProvider: WalletAssetProvider {
 }
 
 extension DebankProvider {
+    private func tokenDetailPublisher(network: BlockChainNetwork) -> AnyPublisher<DebankAPIModel.DebankToken?, Error>? {
+        guard let name = network.debankName else {
+            return nil
+        }
+        guard let debankUrl = URL(string: "https://openapi.debank.com/v1") else {
+            return nil
+        }
+        
+        let decoder = JSONDecoder()
+        
+        guard var fetchTokenUrlComponents = URLComponents(
+            url: debankUrl.appendingPathComponent("token"),
+            resolvingAgainstBaseURL: false) else {
+            return nil
+        }
+        
+        fetchTokenUrlComponents.queryItems = [
+            URLQueryItem(name: "id", value: name),
+            URLQueryItem(name: "chain_id", value: name)
+        ]
+        guard let url = fetchTokenUrlComponents.url else {
+            return nil
+        }
+        let fetchTokenRequest = URLRequest(url: url)
+        return session.dataTaskPublisher(for: fetchTokenRequest)
+            .tryMap { element -> Data in
+                guard let httpResponse = element.response as? HTTPURLResponse,
+                      httpResponse.statusCode == 200 else {
+                    throw URLError(.badServerResponse)
+                }
+                return element.data
+            }
+            .decode(type: DebankAPIModel.DebankToken?.self, decoder: decoder)
+            .eraseToAnyPublisher()
+    }
+    
     private func createURLPublisher() -> AnyPublisher<([DebankAPIModel.DebankToken], DebankAPIModel.Portfolio?), Never>? {
         guard let address = maskUserDefaults.defaultAccountAddress else {
             return nil
@@ -312,6 +375,39 @@ extension DebankProvider {
                 account.addOrUpdatePortfolio(with: portfolio)
                 try? AppContext.shared.coreDataStack.persistentContainer.viewContext.saveOrRollback()
             }
+        }
+    }
+    
+    private func parseDebankToken(debankToken: DebankAPIModel.DebankToken) {
+        DispatchQueue.global().async {
+            let tempContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+            tempContext.parent = AppContext.shared.backgroundContext
+            tempContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+            var tokenIDs = [String]()
+            tempContext.performAndWait {
+                guard let accountAddress = maskUserDefaults.defaultAccountAddress else { return }
+                guard debankToken.isVerified ?? false else { return }
+                if let token = Token(debankToken: debankToken,
+                                     account: accountAddress,
+                                     source: self.type,
+                                     context: tempContext) {
+                    if let account = WalletCoreStorage.getAccount(address: accountAddress, context: tempContext) {
+                        token.account = account
+                    }
+                    if let tokenIdentifier = token.identifier {
+                        tokenIDs.append(tokenIdentifier)
+                    }
+                }
+                do {
+                    try tempContext.saveOrRollback()
+                    self.nativeTokenSubject.send()
+                } catch {}
+            }
+            
+            self.delegate?.didReceived(type: self.type,
+                                       tokenIDs: tokenIDs,
+                                       action: AssetActionType.received,
+                                       newObjectContext: tempContext)
         }
     }
     

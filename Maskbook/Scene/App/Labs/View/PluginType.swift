@@ -21,6 +21,16 @@ enum PluginType: String {
     case gitcoin
     case valuables
     case dhedge
+    
+    var isEnable: Bool {
+        switch self {
+        case .transaction, .luckyDrop:
+            return true
+            
+        default:
+            return false
+        }
+    }
 }
 
 extension PluginType: CaseIterable {}

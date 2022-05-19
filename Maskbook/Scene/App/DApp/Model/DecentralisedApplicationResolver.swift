@@ -239,11 +239,33 @@ extension DecentralisedApplicationResolver {
 
 extension DecentralisedApplicationResolver {
     private func urlRequest<T>(for url: URL, and dappRequest: DappRPCRequest<T>) throws -> URLRequest where T: Encodable {
+        try web3?.urlRequest(params: dappRequest) ?? URLRequest(url: url)
+    }
+
+    func asyncPost<T, V>(
+        _ request: DappRPCRequest<T>
+    ) async -> DappRPCResponse<V> where T: Encodable, V: Decodable {
+
+        guard let web3 = self.web3 else {
+            return DappRPCResponse<V>.init(error: DappError.invalidWeb3)
+        }
+
+        do {
+            return try await web3.post(request, decoder: self.decoder)
+        } catch {
+            return .init(error: DappError.invalidWeb3)
+        }
+    }
+}
+
+extension web3 {
+    func urlRequest<T>(params: T, method: String = "POST") throws -> URLRequest where T: Encodable {
+        let url = self.provider.url
         let encoder = JSONEncoder()
-        let requestData = try encoder.encode(dappRequest)
+        let requestData = try encoder.encode(params)
 
         var urlRequest = URLRequest(url: url, cachePolicy: .reloadIgnoringCacheData)
-        urlRequest.httpMethod = "POST"
+        urlRequest.httpMethod = method
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
         urlRequest.httpBody = requestData
@@ -251,20 +273,14 @@ extension DecentralisedApplicationResolver {
         return urlRequest
     }
 
-    func asyncPost<T, V>(
-        _ request: DappRPCRequest<T>
-    ) async -> DappRPCResponse<V> where T: Encodable, V: Decodable {
-        guard let url = self.web3?.provider.url,
-              let session = web3?.provider.session else {
-                  return .init(error: .invalidWeb3)
-        }
+    func post<T, V>(
+        _ request: T,
+        decoder: JSONDecoder = .init()
+    ) async throws -> V where T: Encodable, V: Decodable {
+        let session = provider.session
 
-        do {
-            let urlRequest = try self.urlRequest(for: url, and: request)
-            let (data, _) = try await session.data(for: urlRequest)
-            return try self.decoder.decode(DappRPCResponse<V>.self, from: data)
-        } catch {
-            return .init(error: error)
-        }
+        let urlRequest = try self.urlRequest(params: request)
+        let (data, _) = try await session.data(for: urlRequest)
+        return try decoder.decode(V.self, from: data)
     }
 }

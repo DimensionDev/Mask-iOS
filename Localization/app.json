@@ -197,7 +197,8 @@
             "copy": "copied!",
             "failed": "Failed"
         },
-        "loading": "Loading..."
+        "loading": "Loading...",
+        "empty": "No records"
     },
     "scene": {
         "guide": {
@@ -896,6 +897,74 @@
             "arbitrum": "Arbitrum",
             "xdai": "Gnosis",
             "optimism": "Optimism"
+        }
+    },
+    "plugins": {
+        "luckyDrop": {
+            "title": "Lucky Drop",
+            "plugin_red_packet_best_wishes": "Best Wishes!",
+            "buttons": {
+                "risk-warning": "Confirm Risk Warning",
+                "unlock-token": "Approve %@",
+                "unlocking-token": "Approving",
+                "create-persona": "Create Persona",
+                "recover-persona": "Recover Persona",
+                "average": "Average",
+                "random": "Random",
+                "insufficient-gas": "Insufficient Gas Amount",
+                "insufficient-balance": "Insufficient Balance",
+                "exceed-max-quantity": "Enter Quantity(Max: 255)",
+                "best-wishes": "Best Wishes!",
+                "no-token": "Select a Token",
+                "no-account": "There is no wallet",
+                "no-share": "Enter share",
+                "no-amount-per-share": "Enter Amount Per Share",
+                "no-total-amount": "Enter Total Amount",
+                "no-message": "Enter Attached Messege",
+                "minimum-amount": "The minimum amount for each share is %@ %@",
+                "send": "Send %@"
+            },
+            "state": {
+                "pending": "Pending...",
+                "failed": "Tx failed",
+                "success": "Tx Success"
+            },
+            "confirm": {
+                "wallet_account": "Wallet account",
+                "attached_message": "Attached message",
+                "split_mode": "Split mode",
+                "share": "Share",
+                "amount_per_share": "Amount per share",
+                "total_amount": "Total amount",
+                "transaction_fee": "Transaction fee",
+                "tips": "You can withdraw the remaining balance 24 hours after the Lucky Drop is sent.",
+                "title": "Confirm Your Lucky Drop"
+            },
+            "alert": {
+                "message_no_account": "You can’t select tokens as there is no wallet."
+            },
+            "max": "MAX",
+            "total-amount": "Total Amount",
+            "amount-per-share": "Amount per share",
+            "enter-quantity": "Enter quantity",
+            "enter-message": "Enter attached message",
+            "transaction-fee": "Transaction fee",
+            "end-time": "End Time",
+            "claimed": "Claimed",
+            "refund": "Refund",
+            "token": "Token",
+            "nft": "NFT",
+            "select-social-title": "Select Social Account",
+            "select-social-description": "Select the Social account to share the Lucky Drop.",
+            "share-title": "Share Lucky Drop",
+            "share-connect-persona": "Connect your Persona to social media before you share your lucky Drop.",
+            "share-create-persona": "To send lucky drop, please create a persona to connect to your social account.",
+            "quantity": "Quantity",
+            "max-quantity-error": "The max quantity is 255.",
+            "account": "Account",
+            "refund_tip": "Refund the unclaimed after %@",
+            "history_title": "History Records",
+            "created": "Created"
         }
     }
 }

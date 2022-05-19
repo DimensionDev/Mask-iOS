@@ -284,7 +284,8 @@ class WalletSendHelper {
         maxFeePerGas: BigUInt?,
         maxInclusionFeePerGas: BigUInt?,
         network: BlockChainNetwork,
-        _ completion: @escaping (Result<String, Error>) -> Void) {
+        nonce: BigUInt? = nil,
+        _ completion: @escaping (Result<(String, BigUInt), Error>) -> Void) {
             guard let provider = Web3ProviderFactory.provider else { completion(.failure(WalletSendError.unsupportedChainType))
                 return
             }
@@ -307,7 +308,13 @@ class WalletSendHelper {
 
             DispatchQueue.global().async {
                 do {
-                    let nonce = try provider.eth.getTransactionCount(address: fromAddressEthFormat)
+                    var nonceTemp: BigUInt
+                    if let nonce = nonce {
+                        nonceTemp = nonce
+                    } else {
+                        nonceTemp = try provider.eth.getTransactionCount(address: fromAddressEthFormat)
+                    }
+                    
                     var gasLimit: BigUInt
                     switch transactionOptions.gasLimit {
                     case .limited(let gas):
@@ -316,11 +323,15 @@ class WalletSendHelper {
                     default:
                         gasLimit = transaction.gasLimit
                     }
-                    var gasPriceHex: String = "0x0"
+                    
+                    var gasPrice: BigUInt = transaction.gasPrice
                     var maxInclusionFeePerGasHex: String = "0x0"
                     var maxFeePerGasHex: String = "0x0"
                     if maxFeePerGas == nil || maxInclusionFeePerGas == nil {
-                          gasPriceHex = transaction.gasPrice.serialize().toHexString().addHexPrefix()
+                        switch transactionOptions.gasPrice {
+                        case .manual(let value): gasPrice = value
+                        default: break
+                        }
                     } else {
                          maxInclusionFeePerGasHex = maxInclusionFeePerGas!.serialize().toHexString().addHexPrefix()
                          maxFeePerGasHex = maxFeePerGas!.serialize().toHexString().addHexPrefix()
@@ -328,11 +339,11 @@ class WalletSendHelper {
                     let signInput =
                     WalletCoreHelper.SignInput.eth(
                         chainId: Int64(maskUserDefaults.network.networkId),
-                        nonce: nonce.serialize().toHexString().addHexPrefix(),
-                        gasPrice: gasPriceHex,
+                        nonce: nonceTemp.serialize().toHexString().addHexPrefix(),
+                        gasPrice: gasPrice.serialize().toHexStringWithPrefix(),
                         maxInclusionFeePerGas: maxInclusionFeePerGasHex,
                         maxFeePerGas: maxFeePerGasHex,
-                        gasLimit: gasLimit.serialize().toHexString().addHexPrefix(),
+                        gasLimit: gasLimit.serialize().toHexStringWithPrefix(),
                         amount: transaction.value?.serialize().toHexString().addHexPrefix() ?? "0x0",
                         toAddress: transaction.to.address,
                         payload: transaction.data)
@@ -342,13 +353,27 @@ class WalletSendHelper {
                     case .success(let signOutput):
                         switch signOutput {
                         case let .eth(transacationEncodeData, v, r, s, _):
-                            let rawTransaction = EthereumTransaction(nonce: nonce, gasPrice: transaction.gasPrice, gasLimit: gasLimit, to: transaction.to, value: transaction.value ?? BigUInt(0), data: transaction.data, v: BigUInt(v), r: BigUInt(r), s: BigUInt(s))
+                            let rawTransaction = EthereumTransaction(
+                                nonce: nonceTemp,
+                                gasPrice: gasPrice,
+                                gasLimit: gasLimit,
+                                to: transaction.to,
+                                value: transaction.value ?? BigUInt(0),
+                                data: transaction.data,
+                                v: BigUInt(v),
+                                r: BigUInt(r),
+                                s: BigUInt(s)
+                            )
                             do {
                                 let sendResult = try provider.eth.sendRawTransaction(rawTransaction, transacationEncodeData)
-                                completion(.success(sendResult.hash))
+                                DispatchQueue.main.async {
+                                    completion(.success((sendResult.hash, nonceTemp)))
+                                }
                                 return
                             } catch {
-                                completion(.failure(WalletSendError.ethereumError(error)))
+                                DispatchQueue.main.async {
+                                    completion(.failure(WalletSendError.ethereumError(error)))
+                                }
                                 return
                             }
                         }

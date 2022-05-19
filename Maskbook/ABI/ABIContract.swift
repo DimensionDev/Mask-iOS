@@ -11,14 +11,38 @@ import PromiseKit
 import web3swift
 
 protocol ABIContract {
-    associatedtype Functions
-    associatedtype Events
+    associatedtype Functions: RawRepresentable
+    associatedtype Events: RawRepresentable
     
     var mainCoordinator: Coordinator { get }
     var contractAddress: EthereumAddress { get }
     var abiString: String { get }
     var abiVersion: Int { get }
     var userSetting: UserDefaultSettings { get }
+
+    var ethcontract: EthereumContract? { get }
+}
+
+extension ABIContract where Functions.RawValue == String {
+    func parse(input: String, for method: Functions) -> [String: Any] {
+        guard let contract = self.ethcontract else {
+            return [:]
+        }
+
+        let data = Data(hex: input)
+        return contract.decodeInputData(method.rawValue, data: data) ?? [:]
+    }
+}
+
+extension ABIContract where Events.RawValue == String {
+    func parse(eventlog: EventLog) -> [String: Any] {
+        guard let contract = self.ethcontract else {
+            return [:]
+        }
+
+        let result = contract.parseEvent(eventlog)
+        return result.eventData ?? [:]
+    }
 }
 
 extension ABIContract {
@@ -48,6 +72,7 @@ extension ABIContract {
         return tx
     }
     
+    @MainActor
     func write(
         _ methodName: String,
         param: [AnyObject]? = nil,
@@ -65,25 +90,57 @@ extension ABIContract {
             methodName,
             parameters: param ?? [],
             extraData: extraData ?? Data(),
-            transactionOptions: options ?? defaultOptions) else {
+            transactionOptions: defaultOptions.merge(options)) else {
                 return nil
             }
         
-        let (promise, resolver) = Promise<String>.pending()
-        mainCoordinator.present(
-            scene: .maskSendResolverTransactionPopView(
-                resolver: resolver,
-                transaction: tx.transaction,
+        return await Task.detached {
+            guard let transaction = try? tx.assemble(transactionOptions: tx.transactionOptions) else {
+                return nil
+            }
+            return try? await self.presentTransactionPopView(
+                transaction: transaction,
                 transactionOptions: tx.transactionOptions
-            ),
-            transition: .panModel(animated: true)
-        )
-        return await Task {
-            return try? promise.wait()
+            )
         }.value
+    }
+    
+    @MainActor
+    private func presentTransactionPopView(
+        transaction: EthereumTransaction,
+        transactionOptions: TransactionOptions
+    ) async throws -> String {
+        try await withCheckedThrowingContinuation { continuation in
+            mainCoordinator.present(
+                scene: .maskSendResolverTransactionPopView(
+                    completion: { result in
+                        switch result {
+                        case .success(let txHash):
+                            continuation.resume(returning: txHash)
+                            
+                        case .failure(let error):
+                            continuation.resume(throwing: error)
+                        }
+                    },
+                    transaction: transaction,
+                    transactionOptions: transactionOptions
+                ),
+                transition: .panModel()
+            )
+        }
     }
 }
 
 enum ABI {
     static let happyRedPacketV4 = HappyRedPacketV4()
+}
+
+enum HappyRedPacketKey: InjectValueKey {
+    static var defaultInjectValue = ABI.happyRedPacketV4
+}
+
+extension InjectValues {
+    var happyRedPacket: HappyRedPacketV4 {
+        Self[HappyRedPacketKey.self]
+    }
 }

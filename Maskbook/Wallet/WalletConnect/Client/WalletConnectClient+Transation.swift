@@ -18,7 +18,8 @@ extension WalletConnectClient {
     func signTransaction(
         transaction: EthereumTransaction,
         transactionOptions: TransactionOptions,
-        _ completion: @escaping (Result<String, Error>) -> Void) {
+        nonce: BigUInt? = nil,
+        _ completion: @escaping (Result<(String, BigUInt), Error>) -> Void) {
         guard let wcUrl = session?.url else {
             return
         }
@@ -35,15 +36,28 @@ extension WalletConnectClient {
         }
         DispatchQueue.global().async { [weak self] in
             do {
-                let nonce = try provider.eth.getTransactionCount(address: fromAddressEthFormat)
-                let nonceHex = nonce.serialize().toHexString().addHexPrefix()
-                var gasLimit: String
+                var nonceTemp: BigUInt
+                if let nonce = nonce {
+                    nonceTemp = nonce
+                } else {
+                    nonceTemp = try provider.eth.getTransactionCount(address: fromAddressEthFormat)
+                }
+                let nonceHex = nonceTemp.serialize().toHexString().addHexPrefix()
+                var gasLimitStr: String
                 switch transactionOptions.gasLimit {
                 case .manual(let limit):
-                    gasLimit = limit.serialize().toHexString().addHexPrefix()
+                    gasLimitStr = limit.serialize().toHexString().addHexPrefix()
                         
                 default:
-                    gasLimit = transaction.gasLimit.serialize().toHexString().addHexPrefix()
+                    gasLimitStr = transaction.gasLimit.serialize().toHexString().addHexPrefix()
+                }
+                
+                var gasPriceStr: String
+                switch transactionOptions.gasPrice {
+                case .manual(let gasPrice):
+                    gasPriceStr = gasPrice.serialize().toHexString().addHexPrefix()
+                default:
+                    gasPriceStr = transaction.gasPrice.serialize().toHexString().addHexPrefix()
                 }
                 var chainId: String?
                 if let networkId = self?.userSetting.network.networkId {
@@ -53,8 +67,8 @@ extension WalletConnectClient {
                     Client.Transaction(from: fromAddress,
                                        to: transaction.to.address,
                                        data: transaction.data.toHexString().addHexPrefix(),
-                                       gas: gasLimit,
-                                       gasPrice: transaction.gasPrice.serialize().toHexString().addHexPrefix(),
+                                       gas: gasLimitStr,
+                                       gasPrice: gasPriceStr,
                                        value: transaction.value?.serialize().toHexString().addHexPrefix() ?? "0x0",
                                        nonce: nonceHex,
                                        type: nil,
@@ -69,7 +83,7 @@ extension WalletConnectClient {
                 WalletConnectClient.openInstalledWallet(with: fromAddress)
                 try client.eth_sendTransaction(url: wcUrl, transaction: wcTransaction) { response in
                     if let hashString = try? response.result(as: String.self) {
-                        completion(.success(hashString))
+                        completion(.success((hashString, nonceTemp)))
                     } else {
                         completion(.failure(WalletSendError.walletConnectError))
                     }

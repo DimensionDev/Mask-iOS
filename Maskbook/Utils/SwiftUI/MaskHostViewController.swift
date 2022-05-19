@@ -16,4 +16,9 @@ class MaskHostViewController<Content: View>: UIHostingController<Content> {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         statusBarStyle ?? super.preferredStatusBarStyle
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.view.invalidateIntrinsicContentSize()
+    }
 }

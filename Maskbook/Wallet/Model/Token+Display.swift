@@ -21,11 +21,13 @@ public enum TokenType: String {
 }
 
 extension Token {
-    var displayQuantity: NSDecimalNumber {
+    var quantityNumber: NSDecimalNumber {
         guard let quantityValue = quantity else { return NSDecimalNumber.zero }
-        let quantityInt = quantityValue.dividing(by: NSDecimalNumber(mantissa: 1, exponent: decimal, isNegative: false))
-        let roundBehavior = NSDecimalNumberHandler(roundingMode: .plain, scale: 6, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
-        return quantityInt.rounding(accordingToBehavior: roundBehavior)
+        return quantityValue.dividing(by: NSDecimalNumber(mantissa: 1, exponent: decimal, isNegative: false))
+    }
+    
+    var displayQuantity: NSDecimalNumber {
+        roundQuantity(scale: 6)
     }
     
     var displayBalance: NSDecimalNumber {
@@ -34,6 +36,13 @@ extension Token {
         let balance = quantityInt.multiplying(by: priceValue)
         let roundBehavior = NSDecimalNumberHandler(roundingMode: .plain, scale: 2, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
         return balance.rounding(accordingToBehavior: roundBehavior)
+    }
+    
+    func roundQuantity(scale: Int16) -> NSDecimalNumber {
+        guard let quantityValue = quantity else { return NSDecimalNumber.zero }
+        let quantityInt = quantityValue.dividing(by: NSDecimalNumber(mantissa: 1, exponent: decimal, isNegative: false))
+        let roundBehavior = NSDecimalNumberHandler(roundingMode: .plain, scale: scale, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
+        return quantityInt.rounding(accordingToBehavior: roundBehavior)
     }
     
     func calculateAmountValue(quantity: String) -> String {

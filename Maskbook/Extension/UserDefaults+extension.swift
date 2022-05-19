@@ -62,7 +62,7 @@ final class UserDefaultSettings {
         case evaluatedPolicyDomainState = "evaluated_policy_domain_state"
         case recentlyAddress
         case passwordExpiredDate = "password_expired_date"
-        case pluginRiskWarningAwared
+        case confirmedPluginRiskWarnings
         case hasBackupPassword
         case currentPersonaIdentifier = "current_persona_identifier"
         case currentProfileSocialPlatform = "current_profile_social_platform"
@@ -235,7 +235,7 @@ final class UserDefaultSettings {
         self.recentlyAddresses = recentlyAddresses
     }
 
-    @OptionalUserDefault(key: .passwordExpiredDate)
+    @ReactiveUserDefault(key: .passwordExpiredDate, defaultValue: nil)
     var passwordExpiredDate: Date? {
         didSet {
             os_log(.debug, "[wallet-password] current expired date is: %s", passwordExpiredDate?.description ?? "nil")
@@ -246,9 +246,10 @@ final class UserDefaultSettings {
         passwordExpiredDate = Date().addingTimeInterval(30 * 60)
         os_log(.debug, "[wallet-password] reset wallet password expired date %s", passwordExpiredDate?.description ?? "nil")
     }
-
-    func isPasswordExpried() -> Bool {
-        guard let expiredDate = passwordExpiredDate else {
+    
+    func isPasswordExpried(_ expiredDate: Date? = nil) -> Bool {
+        // fixed: Simultaneous accesses to 0x1068319f0, but modification requires exclusive access.
+        guard let expiredDate = expiredDate ?? passwordExpiredDate else {
             return true
         }
 
@@ -256,8 +257,8 @@ final class UserDefaultSettings {
     }
 
     // Risk warning moved out from plugins view, temporarily set this default to true
-    @ReactiveUserDefault(key: .pluginRiskWarningAwared, defaultValue: true)
-    var pluginRiskWarningAwared: Bool
+    @ReactiveUserDefault(key: .confirmedPluginRiskWarnings, defaultValue: [])
+    var confirmedPluginRiskWarnings: [String]
 
     @ReactiveUserDefault(key: .hasBackupPassword, defaultValue: false)
     var hasBackupPassword: Bool
@@ -403,6 +404,22 @@ extension UserDefaultSettings {
             .removeDuplicates()
             .share()
             .eraseToAnyPublisher()
+    }
+    
+    var hasRiskConfirmed: Bool {
+        get {
+            guard let address = defaultAccountAddress else { return false }
+            return confirmedPluginRiskWarnings.contains(address)
+        }
+    }
+    
+    func confirmRiskWarning(address: String, pluginId: String?) {
+        defer {
+            DAppService.sendRiskWarningConfirm(address: address, pluginId: pluginId)
+        }
+        
+        guard !confirmedPluginRiskWarnings.contains(address) else { return }
+        confirmedPluginRiskWarnings.append(address)
     }
 }
 

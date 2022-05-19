@@ -9,6 +9,14 @@ extension Text {
     init(@TextCombine builder: () -> [Text]) {
         self = builder().reduce(into: Text(""), { $0 = $0 + $1 })
     }
+
+    func font(_ fontStyle: FontStyles) -> Text {
+        self.font(fontStyle.font)
+    }
+
+    func foregroundColor(_ colorAsset: ColorAsset) -> Text {
+        self.foregroundColor(colorAsset.asColor())
+    }
 }
 
 extension View {
@@ -32,5 +40,11 @@ extension View {
 enum TextCombine {
     static func buildBlock(_ components: Text...) -> [Text] {
         return components
+    }
+}
+
+extension View {
+    func applying<V: View>(@ViewBuilder _ builder: (Self) -> V) -> some View {
+        builder(self)
     }
 }
