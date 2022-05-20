@@ -144,6 +144,7 @@ internal enum Asset {
       }
     }
     internal enum Twitter {
+      internal static let inputBg = ColorAsset(name: "Colors/Twitter/Input-bg")
       internal static let blue = ColorAsset(name: "Colors/Twitter/blue")
       internal static let buttonText = ColorAsset(name: "Colors/Twitter/buttonText")
       internal static let main = ColorAsset(name: "Colors/Twitter/main")
@@ -283,6 +284,9 @@ internal enum Asset {
       internal enum BiometryRecognition {
         internal static let facialRecognition = ImageAsset(name: "Images/Scene/BiometryRecognition/facialRecognition")
         internal static let touchIDRecognition = ImageAsset(name: "Images/Scene/BiometryRecognition/touchIDRecognition")
+      }
+      internal enum Compose {
+        internal static let close = ImageAsset(name: "Images/Scene/Compose/close")
       }
       internal enum Empty {
         internal static let emptyBox = ImageAsset(name: "Images/Scene/Empty/EmptyBox")

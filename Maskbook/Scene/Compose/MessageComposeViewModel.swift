@@ -8,7 +8,16 @@ final class MessageComposeViewModel: ObservableObject {
     
     @Published
     var message = ""
+    
+    @Published
+    var showPlaceHolder = true
+    let placeHolder1 = "What do you want to encrypt?"
+    let placeHolder2 = "Text goes here..."
+    
 
+    @Published
+    var pluginContent:[MessageComposePluginContent] = []
+    
     @Published
     var recipient: Recipient = .all
     

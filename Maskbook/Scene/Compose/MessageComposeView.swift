@@ -11,10 +11,12 @@ struct MessageComposeView: View {
         UITextView.appearance().backgroundColor = Asset.Colors.Twitter.buttonText.color
     }
 
-    
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             navigationBarView()
+            if !viewModel.pluginContent.isEmpty {
+                pluginsContainer()
+            }
             messageInputView()
             Spacer()
             pluginsToolBar()
@@ -25,7 +27,7 @@ struct MessageComposeView: View {
         .padding(.bottom, 24)
         .navigationBarHidden(true)
     }
-    
+
     private func navigationBarView() -> some View {
         HStack {
             Button(
@@ -59,30 +61,95 @@ struct MessageComposeView: View {
         }
         .frame(height: 48)
     }
-    
+
     private func messageInputView() -> some View {
-        VStack(spacing: 0) {
+        ZStack(alignment: .topLeading) {
             TextEditor(text: $viewModel.message)
                 .foregroundColor(Color.black)
-                .font(FontStyles.rh7.font)
+                .font(FontStyles.mh5.font)
                 .lineSpacing(5)
                 .padding(.vertical, 8)
                 .background(Asset.Colors.Twitter.buttonText.asColor())
-                .frame(height: 278)
+                .frame(height: 278, alignment: .leading)
                 .cornerRadius(8)
                 .onChange(of: viewModel.message) { _ in
                 }
-
+                .onTapGesture {
+                    if viewModel.showPlaceHolder {
+                        viewModel.showPlaceHolder.toggle()
+                    }
+                }
+            Text(viewModel.placeHolder1)
+                .foregroundColor(Asset.Colors.Twitter.second.asColor())
+                .font(FontStyles.mh5.font)
+                .padding(.leading, 5)
+                .padding(.top, 8)
+                .opacity(viewModel.showPlaceHolder ? 1 : 0)
             Spacer()
         }
     }
-    
-    private func pluginsToolBar() -> some View {
-        Text("ddddddddddddddddddddd")
+
+    private func pluginsContainer() -> some View {
+        VStack {
+            ForEach($viewModel.pluginContent) { $pluginContent in
+                HStack {
+                    Spacer()
+                    pluginContentItem(plugin: pluginContent)
+                    Spacer()
+                }
+            }
+        }
     }
-    
+
+    private func pluginsToolBar() -> some View {
+        HStack {
+            pluginToolItem(plugin: .luckyDrop)
+            pluginToolItem(plugin: .fileService)
+        }
+    }
+
     private func bottomToolBar() -> some View {
         Text("ddddddddddddddddddddd")
+    }
+
+    private func pluginContentItem(plugin: MessageComposePluginContent) -> some View {
+        HStack(alignment: .center) {
+            Image(plugin.type.icon)
+                .resizable()
+                .frame(width: 24, height: 24, alignment: .leading)
+            Text(plugin.title)
+            Button(action: {
+                viewModel.pluginContent.removeAll {
+                    $0.id == plugin.id
+                }
+            }, label: {
+                Asset.Images.Scene.Compose.close.asImage()
+                    .resizable()
+                    .frame(width: 24, height: 24, alignment: .leading)
+            })
+        }
+        .foregroundColor(Asset.Colors.Twitter.strong.asColor())
+        .padding()
+        .background(Asset.Colors.Twitter.inputBg.asColor())
+        .frame(height: 50, alignment: .center)
+        .cornerRadius(25)
+    }
+
+    private func pluginToolItem(plugin: PluginType) -> some View {
+        Button(action: {
+            let content = MessageComposePluginContent(title: "new \(plugin.name)", type: plugin)
+            viewModel.pluginContent.append(content)
+        }, label: {
+            Image(plugin.icon)
+                .resizable()
+                .frame(width: 24, height: 24, alignment: .leading)
+            Text(plugin.name)
+        })
+        .foregroundColor(Asset.Colors.Twitter.strong.asColor())
+        .padding()
+        .background(Asset.Colors.Twitter.inputBg.asColor())
+        .frame(height: 40, alignment: .leading)
+        .cornerRadius(20)
     }
 }
 
