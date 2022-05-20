@@ -22,9 +22,9 @@ final class MessageComposeViewModel: ObservableObject {
     var encryptButtonEnable = true
     
     init() {
-        $message
+        Publishers.CombineLatest($message,$pluginContent)
             .map({
-                $0.isEmpty
+                $0.isEmpty && $1.isEmpty
             })
             .assign(to: \.encryptButtonEnable, on: self)
             .store(in: &disposeBag)
