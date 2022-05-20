@@ -36,14 +36,14 @@ struct MessageComposeView: View {
                 },
                 label: {
                     HStack {
-                        Text("Cancel")
+                        Text(L10n.Common.Controls.cancel)
                             .font(FontStyles.mh5.font)
                             .foregroundColor(Asset.Colors.Twitter.blue.asColor())
                     }
                 }
             )
             Spacer()
-            Text("Mask: Compose")
+            Text(L10n.Scene.MessageCompose.title)
                 .font(FontStyles.bh4.font)
                 .foregroundColor(Asset.Colors.Twitter.strong.asColor())
             Spacer()
@@ -51,7 +51,7 @@ struct MessageComposeView: View {
                 action: {},
                 label: {
                     HStack {
-                        Text("Encrypt")
+                        Text(L10n.Scene.MessageCompose.encrypt)
                             .font(FontStyles.mh5.font)
                             .foregroundColor(Asset.Colors.Twitter.blue.asColor())
                     }
@@ -79,7 +79,7 @@ struct MessageComposeView: View {
                         viewModel.showPlaceHolder.toggle()
                     }
                 }
-            Text(viewModel.placeHolder1)
+            Text(L10n.Scene.MessageCompose.placeholder)
                 .foregroundColor(Asset.Colors.Twitter.second.asColor())
                 .font(FontStyles.mh5.font)
                 .padding(.leading, 5)

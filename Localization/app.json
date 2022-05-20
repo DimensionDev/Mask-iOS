@@ -469,12 +469,12 @@
                 "gasFee_error": "Insufficient gas balance.",
                 "contact":"Contacts",
                 "recent":"Recent"
-        	},
-        	"addContact":{
-        		"btn_add":"Add Contact",
-        		"placeholder_name":"Name",
+        },
+        "addContact":{
+            "btn_add":"Add Contact",
+            "placeholder_name":"Name",
                 "pending":"Pending..."
-        	},
+            },
             "tokenList":{
                 "title":"Search Token",
                 "placeholder":"Token name or contract address"
@@ -506,7 +506,7 @@
                 "gasFeeLow":"Maybe in 30 seconds",
                 "gasFeeMedium":"Likely in < 30 seconds",
                 "gasFeeHigh":"Very likely in < 15 seconds"
-            },
+            }
         },
         "set_password": {
             "title": "Set Up Payment Password",
@@ -877,6 +877,11 @@
             "description1": "We have detected that there are probably important backup documents(.pdf, .bin) in your Mask Network Sandbox Folder.",
             "description2": "When you delete Mask App, these documents would also be deleted.",
             "description3": "For data safety, please move your data to a more secure folder."
+        },
+        "message_compose": {
+            "title": "Compose",
+            "encrypt": "Encrypt",
+            "placeholder": "What do you want to encrypt?"
         }
     },
     "chain": {

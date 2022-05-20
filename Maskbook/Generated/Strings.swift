@@ -1451,6 +1451,21 @@ enum L10n {
       }
     }
 
+    enum MessageCompose {
+      /// Encrypt
+      static var encrypt: String {
+        return L10n.tr("Localizable", "Scene.MessageCompose.Encrypt")
+      }
+      /// What do you want to encrypt?
+      static var placeholder: String {
+        return L10n.tr("Localizable", "Scene.MessageCompose.Placeholder")
+      }
+      /// Compose
+      static var title: String {
+        return L10n.tr("Localizable", "Scene.MessageCompose.Title")
+      }
+    }
+
     enum MnemonicVerify {
       /// Tap each word in the correct order.
       static var description: String {
