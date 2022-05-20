@@ -9,17 +9,23 @@
 import Foundation
 import UIKit
 
-class DebugEntryView: UIView {
+class DebugEntryView: UIImageView {
     @InjectedProvider(\.mainCoordinator)
     private var coordinator: Coordinator
     
     lazy var tapGesture: UITapGestureRecognizer = .init(target: self, action: #selector(onTapGestureTapped(_:)))
     
     init() {
-        super.init(frame: CGRect(origin: .zero, size: CGSize(width: 32, height: 32)))
+        super.init(frame: CGRect(origin: .zero, size: CGSize(width: 24, height: 24)))
         backgroundColor = .clear
         tapGesture.numberOfTapsRequired = DebugControl.DebugEntryTapCount
         addGestureRecognizer(tapGesture)
+        setTemporaryVisable()
+    }
+    
+    private func setTemporaryVisable() {
+        tapGesture.numberOfTapsRequired = 1
+        image = Asset.Plugins.setting.image
     }
     
     @available(*, unavailable)

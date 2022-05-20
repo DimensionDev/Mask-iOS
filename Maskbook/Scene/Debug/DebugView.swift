@@ -20,6 +20,9 @@ struct DebugView: View {
             NavigationLink(destination: JSResourceSelectView()) {
                 Text("JSResourceSelect")
             }
+            NavigationLink(destination: MessageComposeView(viewModel: MessageComposeViewModel())) {
+                Text("MessageCompose")
+            }
             Spacer()
         }
         .navigationTitle("Debug")

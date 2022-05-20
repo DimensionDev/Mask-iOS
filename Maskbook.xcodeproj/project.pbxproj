@@ -632,6 +632,8 @@
 		41E5004C279C319C00A73117 /* Relation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E5004B279C319C00A73117 /* Relation.swift */; };
 		41E5004E27A11AFF00A73117 /* WebPublicApiMessageResolver+Plugins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E5004D27A11AFF00A73117 /* WebPublicApiMessageResolver+Plugins.swift */; };
 		5D069E0B27A16E2800054B4A /* TertiaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D069E0A27A16E2800054B4A /* TertiaryButton.swift */; };
+		5D0ADACF28363E2D0022D5BD /* MessageComposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0ADACC28363E2D0022D5BD /* MessageComposeView.swift */; };
+		5D0ADAD028363E2D0022D5BD /* MessageComposeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0ADACD28363E2D0022D5BD /* MessageComposeViewModel.swift */; };
 		5D11473727E2CDB200D4448C /* CropImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D11473627E2CDB200D4448C /* CropImageViewController.swift */; };
 		5D13008A2824E2A300F5B6CA /* CookieSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1300892824E2A300F5B6CA /* CookieSwitcher.swift */; };
 		5D2893E427D5DD0A0013FCB6 /* PersonaCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2893E327D5DD0A0013FCB6 /* PersonaCollectionCell.swift */; };
@@ -1401,6 +1403,8 @@
 		4FBBD1BFB54C5A3868A6A402 /* Pods-Maskbook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maskbook.debug.xcconfig"; path = "Target Support Files/Pods-Maskbook/Pods-Maskbook.debug.xcconfig"; sourceTree = "<group>"; };
 		55809563EA247839B70CF58B /* Pods-MaskWalletTests.release touchpreview.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskWalletTests.release touchpreview.xcconfig"; path = "Target Support Files/Pods-MaskWalletTests/Pods-MaskWalletTests.release touchpreview.xcconfig"; sourceTree = "<group>"; };
 		5D069E0A27A16E2800054B4A /* TertiaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TertiaryButton.swift; sourceTree = "<group>"; };
+		5D0ADACC28363E2D0022D5BD /* MessageComposeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageComposeView.swift; sourceTree = "<group>"; };
+		5D0ADACD28363E2D0022D5BD /* MessageComposeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageComposeViewModel.swift; sourceTree = "<group>"; };
 		5D11473627E2CDB200D4448C /* CropImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropImageViewController.swift; sourceTree = "<group>"; };
 		5D1300892824E2A300F5B6CA /* CookieSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieSwitcher.swift; sourceTree = "<group>"; };
 		5D2893E327D5DD0A0013FCB6 /* PersonaCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaCollectionCell.swift; sourceTree = "<group>"; };
@@ -2478,6 +2482,7 @@
 		2AF88327271EE9300004565A /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				5D0ADACB28363E0B0022D5BD /* Compose */,
 				5D61526F27CF28A6001CB038 /* MoveBackupData */,
 				5D554EC4279FE55400D40848 /* OpenRedPackage */,
 				5DB39E2C27869F390025337C /* Debug */,
@@ -3532,6 +3537,15 @@
 			path = Repository;
 			sourceTree = "<group>";
 		};
+		5D0ADACB28363E0B0022D5BD /* Compose */ = {
+			isa = PBXGroup;
+			children = (
+				5D0ADACC28363E2D0022D5BD /* MessageComposeView.swift */,
+				5D0ADACD28363E2D0022D5BD /* MessageComposeViewModel.swift */,
+			);
+			path = Compose;
+			sourceTree = "<group>";
+		};
 		5D11473527E2CD9C00D4448C /* CropImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -4545,6 +4559,7 @@
 				2D40E6CA276AD30B00C8C5FF /* SelectAccountViewController.swift in Sources */,
 				2AD855AC281285D10064DDA5 /* RedPacketInteractivePayload.swift in Sources */,
 				2AD31E70282D367700CB3D49 /* AVCaptureVideoOrientation.swift in Sources */,
+				5D0ADAD028363E2D0022D5BD /* MessageComposeViewModel.swift in Sources */,
 				2AF884C3271EE9300004565A /* MaskbookTab.swift in Sources */,
 				2D11F04427895382002CE232 /* SocialAccountCollectionCell.swift in Sources */,
 				1FCCE39B26D7F09700909A5B /* SpinActivityAnimator.swift in Sources */,
@@ -4567,6 +4582,7 @@
 				1FE54D5A269C19C10041C742 /* WalletCoreRequest.swift in Sources */,
 				2AD31E6C282D367700CB3D49 /* UserDefaults.swift in Sources */,
 				2AD855282812841C0064DDA5 /* WalletBottomWidgetViewModel.swift in Sources */,
+				5D0ADACF28363E2D0022D5BD /* MessageComposeView.swift in Sources */,
 				2AF88504271EE9310004565A /* ProfileSocialPlatform+extension.swift in Sources */,
 				2AF88513271EE9310004565A /* WalletDetailViewModel.swift in Sources */,
 				2A6ABBA52720053B00CC3AED /* LocalBackupViewModel.swift in Sources */,
