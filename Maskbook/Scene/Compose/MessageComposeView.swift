@@ -20,7 +20,7 @@ struct MessageComposeView: View {
             pluginsToolBar()
             bottomToolBar()
         }
-        .background(Color.white)
+        .background(Asset.Colors.Twitter.buttonText.asColor())
         .padding(.horizontal, 20)
         .padding(.bottom, 24)
         .navigationBarHidden(true)

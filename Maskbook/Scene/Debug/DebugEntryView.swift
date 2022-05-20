@@ -20,7 +20,7 @@ class DebugEntryView: UIImageView {
         backgroundColor = .clear
         tapGesture.numberOfTapsRequired = DebugControl.DebugEntryTapCount
         addGestureRecognizer(tapGesture)
-        setTemporaryVisable()
+//        setTemporaryVisable()
     }
     
     private func setTemporaryVisable() {

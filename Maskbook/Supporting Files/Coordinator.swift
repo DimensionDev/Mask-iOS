@@ -205,6 +205,7 @@ class Coordinator {
             completion: (String?, Error?) -> Void
         )
         case luckyDropSuccessfully
+        case messageCompose
         case debug
     }
     
@@ -804,6 +805,10 @@ extension Coordinator {
         
         case .luckyDropSuccessfully:
             return SheetViewAdapterController(rootView: LuckyDropSuccessfullyView())
+            
+        case .messageCompose:
+            let viewModel = MessageComposeViewModel()
+            return MaskHostViewController(rootView: MessageComposeView(viewModel: viewModel))
             
         case .debug:
             return UIHostingController(rootView: DebugView())
