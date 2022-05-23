@@ -296,7 +296,7 @@ class SelectAccountViewController: BaseViewController {
     }
     
     private func addCollectionShadow() {
-        collectionView.applyShadow(color: Asset.Colors.Shadow.socialShadow.color, alpha: 1, x: 0, y: 6, blur: 12, cornerRadius: 0, spread: 0)
+        collectionView.applyShadow(color: Asset.Colors.Shadow.socialShadow.color, alpha: 1, x: 0, y: 12, blur: 12, cornerRadius: 0, spread: 0)
     }
 }
 
