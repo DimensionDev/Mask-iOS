@@ -11,25 +11,12 @@ import SwiftUI
 struct DebugView: View {
     @Environment(\.presentationMode)
     private var presentationMode
-
     @InjectedProvider(\.personaManager)
     private var personaManager
-
-    @State private var isPresented = false
-
     var body: some View {
         VStack(alignment: .leading) {
             NavigationLink(destination: JSResourceSelectView()) {
                 Text("JSResourceSelect")
-            }
-            Button(
-                action: {
-                    isPresented.toggle()
-                },
-                label: { Text("MessageCompose") }
-            )
-            .fullScreenCover(isPresented: $isPresented) {
-                MessageComposeView(viewModel: MessageComposeViewModel())
             }
             Spacer()
         }
