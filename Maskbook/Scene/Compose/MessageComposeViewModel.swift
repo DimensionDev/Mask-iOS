@@ -30,6 +30,11 @@ final class MessageComposeViewModel: ObservableObject {
             }
             .assign(to: \.encryptButtonEnable, on: self)
             .store(in: &disposeBag)
+        
+        $message
+            .map(\.isEmpty)
+            .assign(to: \.showPlaceHolder, on: self)
+            .store(in: &disposeBag)
     }
     
     func append(newPluginContent: MessageComposePluginContent) {

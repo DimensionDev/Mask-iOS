@@ -72,18 +72,11 @@ struct MessageComposeView: View {
                 .background(Asset.Colors.Twitter.buttonText.asColor())
                 .frame(height: 278, alignment: .leading)
                 .cornerRadius(8)
-                .onChange(of: viewModel.message) { _ in
-                }
-                .onTapGesture {
-                    if viewModel.showPlaceHolder {
-                        viewModel.showPlaceHolder.toggle()
-                    }
-                }
             Text(L10n.Scene.MessageCompose.placeholder)
                 .foregroundColor(Asset.Colors.Twitter.second.asColor())
                 .font(FontStyles.mh5.font)
-                .padding(.leading, 5)
-                .padding(.top, 8)
+                .padding(.leading, 8)
+                .padding(.top, 16)
                 .opacity(viewModel.showPlaceHolder ? 1 : 0)
             Spacer()
         }
