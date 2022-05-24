@@ -33,15 +33,17 @@ class PendTransactionManager {
                         self.stop()
                     }
                     
-                    for (index, pendingTranscation) in pendList.enumerated() {
-                        web3Provier.getTransactionReceiptPromise(pendingTranscation.txHash).done { transactionReceipt in
+                    for (index, pendingTransaction) in pendList.enumerated() {
+                        web3Provier.getTransactionReceiptPromise(pendingTransaction.txHash).done { transactionReceipt in
+                            var transaction = pendingTransaction
+                            transaction.transactionReceipt = transactionReceipt
                             switch transactionReceipt.status {
                                 case .ok:
-                                    self.pendingTxFinishEvents.send((transcation: pendingTranscation, status: .confirmed))
+                                    self.pendingTxFinishEvents.send((transcation: transaction, status: .confirmed))
                                 case .notYetProcessed:
-                                    self.pendingTxFinishEvents.send((transcation: pendingTranscation, status: .pending))
+                                    self.pendingTxFinishEvents.send((transcation: transaction, status: .pending))
                                 case .failed:
-                                    self.pendingTxFinishEvents.send((transcation: pendingTranscation, status: .failed))
+                                    self.pendingTxFinishEvents.send((transcation: transaction, status: .failed))
                             }
                             
                             if transactionReceipt.status != .notYetProcessed {

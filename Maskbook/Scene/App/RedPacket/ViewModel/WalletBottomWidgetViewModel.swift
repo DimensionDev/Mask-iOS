@@ -9,6 +9,7 @@
 import Combine
 import CoreDataStack
 import Foundation
+import web3swift
 import SwiftUI
 
 class WalletBottomWidgetViewModel: ObservableObject {
@@ -111,6 +112,11 @@ class WalletBottomWidgetViewModel: ObservableObject {
             guard let self = self else {
                 return
             }
+            
+            Task {
+                await self.updateRedPacketRecord(transcation: transcation)
+            }
+            
             guard self.address == transcation.address, transcation.txHash == self.txList[self.address]?.txHash else {
                 return
             }
@@ -135,6 +141,41 @@ class WalletBottomWidgetViewModel: ObservableObject {
             }
         }
         .store(in: &disposeBag)
+    }
+    
+    @MainActor
+    func updateRedPacketRecord(transcation: PendTransactionModel) async {
+        // update record
+        guard let transactionResult = transcation.transactionReceipt,
+            let log = transactionResult.logs.first(where: { $0.address == ABI.happyRedPacketV4.contractAddress }) else {
+            return
+        }
+        let json = ABI.happyRedPacketV4.parse(eventlog: log)
+        guard let eventParam = HappyRedPacketV4.SuccessEvent(json: json),
+            let chainId = transcation.transactionInfo?.token.chainId,
+            let networkId = transcation.transactionInfo?.token.networkId,
+            let network = BlockChainNetwork(chainId: Int(chainId), networkId: UInt64(networkId)) else {
+            return
+        }
+        
+        guard var payload = PluginStorageRepository.queryRecord(
+            address: transcation.address,
+            chain: network,
+            tx: transcation.txHash) else {
+            return
+        }
+        payload.basic?.rpid = eventParam.id
+        payload.basic?.creationTime = eventParam.creation_time.asDouble() ?? 0
+        
+        let checkAvailability = await ABI.happyRedPacketV4.checkAvailability(redPackageId: eventParam.id)
+        payload.payload?.totalRemaining = checkAvailability?.balance.flatMap { String($0, radix: 10) }
+        
+        PluginStorageRepository.save(
+            address: transcation.address,
+            chain: network,
+            txHash: transcation.txHash,
+            record: payload
+        )
     }
     
     func observeTransaction(txHash: String) {

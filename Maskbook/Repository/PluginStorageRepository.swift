@@ -30,8 +30,12 @@ extension PluginStorageRepository {
         address: String,
         chain: BlockChainNetwork,
         txHash: String,
-        record: RedPacketPayload
+        record: RedPacketPayload?
     ) {
+        guard let record = record else {
+            return
+        }
+
         let key = generateKey(address: address, chain: chain, txHash: txHash)
         let context = viewContext
         context.performAndWait {
@@ -75,7 +79,7 @@ extension PluginStorageRepository {
                 return nil
             }
 
-            return try JSONDecoder().decode(RedPacketPayload.self, from: data)
+           return try JSONDecoder().decode(RedPacketPayload.self, from: data)
         } catch {
             return nil
         }

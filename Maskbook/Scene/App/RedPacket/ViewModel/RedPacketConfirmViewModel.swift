@@ -268,16 +268,18 @@ class RedPacketConfirmViewModel: ObservableObject {
                 completion(.success(txhash))
                 
             case .failure(let error):
-                self?.buttonState = .normal
-                let alertController = AlertController(
-                    title: error.localizedDescription,
-                    message: "",
-                    confirmButtonText: L10n.Common.Controls.done,
-                    imageType: .error)
-                Coordinator.main.present(
-                    scene: .alertController(alertController: alertController),
-                    transition: .alertController(completion: nil)
-                )
+                DispatchQueue.main.async {
+                    self?.buttonState = .normal
+                    let alertController = AlertController(
+                        title: "",
+                        message: error.errorDescription,
+                        confirmButtonText: L10n.Common.Controls.done,
+                        imageType: .error)
+                    Coordinator.main.present(
+                        scene: .alertController(alertController: alertController),
+                        transition: .alertController(completion: nil)
+                    )
+                }
             }
         }
         if fromAccount.fromWalletConnect {

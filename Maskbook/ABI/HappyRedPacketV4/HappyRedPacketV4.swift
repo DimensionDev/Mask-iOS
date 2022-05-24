@@ -220,6 +220,20 @@ extension HappyRedPacketV4 {
         case refundSuccess = "RefundSuccess"
     }
     
+    struct SuccessEvent {
+        let id: String
+        let creation_time: BigUInt
+
+        init?(json: [String: Any]) {
+            guard let data = json["id"] as? Data,
+                  let time = json["creation_time"] as? BigUInt else {
+                return nil
+            }
+            self.id = data.toHexString()
+            self.creation_time = time
+        }
+    }
+    
     struct CheckAvailabilityResult: Codable {
         let address: EthereumAddress?
         let balance: BigUInt?
