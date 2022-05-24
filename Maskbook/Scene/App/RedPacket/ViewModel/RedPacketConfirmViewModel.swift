@@ -22,7 +22,6 @@ class RedPacketConfirmViewModel: ObservableObject {
     var transaction: EthereumTransaction?
     var options: TransactionOptions?
     var completion: ((String?, Error?) -> Void)?
-    var password: String?
     
     var tokenIconURL: URL? {
         guard let url = token?.logoUrl else { return nil }
@@ -164,7 +163,6 @@ class RedPacketConfirmViewModel: ObservableObject {
         self.inputParam = param?.inputParam
         self.options = param?.options
         self.transaction = param?.transaction
-        self.password = param?.password
         self.completion = completion
         
         gasFeeViewModel?.confirmedGasFeePublisher
@@ -235,30 +233,9 @@ class RedPacketConfirmViewModel: ObservableObject {
             transactionOptions.gasPrice = .automatic
         }
         
-        guard let privateKey = self.password else {
-            return
-        }
-        
-        // save `password` into `PluginStorage` before send a transaction
-        let chainNetwork = settings.network
-        let record = PluginStorageRepository.RedPacketRecord(
-            id: UUID().uuidString,
-            post: nil,
-            password: privateKey,
-            txHash: nil,
-            type: PluginStorageRepository.PluginType.redPackage.rawValue
-        )
-        
         let completionWrapper: (Swift.Result<(String, BigUInt), Error>) -> Void = { [weak self] result in
             switch result {
             case .success((let txhash, let nonce)):
-                PluginStorageRepository.save(
-                    address: fromAddress,
-                    chain: chainNetwork,
-                    txHash: txhash,
-                    record: record
-                )
-                
                 guard let self = self else { return }
                 guard let gasFeeItem = self.gasFeeItem,
                       let gwei = BigUInt(gasFeeItem.gWei),
@@ -350,7 +327,6 @@ extension RedPacketConfirmViewModel {
         let inputParam: HappyRedPacketV4.CreateRedPacketInput
         let transaction: EthereumTransaction
         let options: TransactionOptions
-        let password: String
     }
 }
 

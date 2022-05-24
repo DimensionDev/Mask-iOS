@@ -85,8 +85,7 @@ struct HappyRedPacketV4: ABIContract {
                             gasFeeViewModel: gasFeeViewModel,
                             redPacketInput: redPacketInput,
                             transaction: transaction,
-                            options: tx.transactionOptions,
-                            password: password
+                            options: tx.transactionOptions
                         ) { tx, error in
                             if let error = error {
                                 continuation.resume(with: .failure(error))

@@ -201,7 +201,6 @@ class Coordinator {
             redPacketInput: HappyRedPacketV4.CreateRedPacketInput,
             transaction: EthereumTransaction,
             options: TransactionOptions,
-            password: String,
             completion: (String?, Error?) -> Void
         )
         case luckyDropSuccessfully
@@ -789,7 +788,6 @@ extension Coordinator {
             let redPacketInput,
             let transaction,
             let options,
-            let password,
             let completion
         ):
             return LuckyDropConfirmViewController(
@@ -798,7 +796,6 @@ extension Coordinator {
                 redPacketInput: redPacketInput,
                 transaction: transaction,
                 options: options,
-                password: password,
                 completion: completion
             )
         
