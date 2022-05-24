@@ -3,7 +3,6 @@ import Combine
 import SwiftUI
 
 final class MessageComposeViewModel: ObservableObject {
-    
     private var disposeBag = Set<AnyCancellable>()
     
     @Published
@@ -13,7 +12,7 @@ final class MessageComposeViewModel: ObservableObject {
     var showPlaceHolder = true
 
     @Published
-    private(set) var pluginContents:[MessageComposePluginContent] = []
+    private(set) var pluginContents: [MessageComposePluginContent] = []
     
     @Published
     var recipient: Recipient = .all
@@ -25,10 +24,10 @@ final class MessageComposeViewModel: ObservableObject {
     var mainCoordinator
     
     init() {
-        Publishers.CombineLatest($message,$pluginContents)
-            .map({
+        Publishers.CombineLatest($message, $pluginContents)
+            .map {
                 $0.isEmpty && $1.isEmpty
-            })
+            }
             .assign(to: \.encryptButtonEnable, on: self)
             .store(in: &disposeBag)
     }

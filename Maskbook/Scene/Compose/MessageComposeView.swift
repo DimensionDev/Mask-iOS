@@ -109,7 +109,7 @@ struct MessageComposeView: View {
     }
 
     private func bottomToolBar() -> some View {
-        Text("ddddddddddddddddddddd")
+        Text("todo Everyone can see")
     }
 
     private func pluginContentItem(pluginContent: MessageComposePluginContent) -> some View {
@@ -144,9 +144,11 @@ struct MessageComposeView: View {
         })
         .foregroundColor(Asset.Colors.Twitter.strong.asColor())
         .padding()
-        .background(Asset.Colors.Twitter.inputBg.asColor())
         .frame(height: 40, alignment: .leading)
-        .cornerRadius(20)
+        .overlay(
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(Asset.Colors.Twitter.line2.asColor(), lineWidth: 0.5)
+        )
     }
 }
 
