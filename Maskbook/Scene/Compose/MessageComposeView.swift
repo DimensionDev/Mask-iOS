@@ -14,7 +14,7 @@ struct MessageComposeView: View {
     var body: some View {
         VStack(alignment: .leading) {
             navigationBarView()
-            if !viewModel.pluginContent.isEmpty {
+            if !viewModel.pluginContents.isEmpty {
                 pluginsContainer()
             }
             messageInputView()
@@ -91,10 +91,10 @@ struct MessageComposeView: View {
 
     private func pluginsContainer() -> some View {
         VStack {
-            ForEach($viewModel.pluginContent) { $pluginContent in
+            ForEach(viewModel.pluginContents) { pluginContent in
                 HStack {
                     Spacer()
-                    pluginContentItem(plugin: pluginContent)
+                    pluginContentItem(pluginContent: pluginContent)
                     Spacer()
                 }
             }
@@ -112,16 +112,14 @@ struct MessageComposeView: View {
         Text("ddddddddddddddddddddd")
     }
 
-    private func pluginContentItem(plugin: MessageComposePluginContent) -> some View {
+    private func pluginContentItem(pluginContent: MessageComposePluginContent) -> some View {
         HStack(alignment: .center) {
-            Image(plugin.type.icon)
+            Image(pluginContent.type.icon)
                 .resizable()
                 .frame(width: 24, height: 24, alignment: .leading)
-            Text(plugin.title)
+            Text(pluginContent.title)
             Button(action: {
-                viewModel.pluginContent.removeAll {
-                    $0.id == plugin.id
-                }
+                viewModel.remove(pluginContent: pluginContent)
             }, label: {
                 Asset.Images.Scene.Compose.close.asImage()
                     .resizable()
@@ -137,8 +135,7 @@ struct MessageComposeView: View {
 
     private func pluginToolItem(plugin: PluginType) -> some View {
         Button(action: {
-            let content = MessageComposePluginContent(title: "new \(plugin.name)", type: plugin)
-            viewModel.pluginContent.append(content)
+            viewModel.pluginAddClicked(plugin: plugin)
         }, label: {
             Image(plugin.icon)
                 .resizable()
