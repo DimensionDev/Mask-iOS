@@ -9,7 +9,6 @@
 import Combine
 import CoreDataStack
 import Foundation
-import SwiftMsgPack
 import SwiftyJSON
 
 class PersonaImportHandler {

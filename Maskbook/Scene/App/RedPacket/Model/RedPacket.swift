@@ -88,6 +88,12 @@ extension RedPacket {
             payload = try? container.decode(Payload.self)
         }
 
+        func encode(to encoder: Encoder) throws {
+            var container = encoder.singleValueContainer()
+            try container.encode(basic)
+            try container.encode(payload)
+        }
+
         struct Payload: Codable {
             init(
                 sender: RedPacket.Sender,

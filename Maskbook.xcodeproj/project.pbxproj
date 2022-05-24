@@ -119,6 +119,7 @@
 		1FCCE38426D4C5AD00909A5B /* CloudRestoreVerifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCCE38326D4C5AD00909A5B /* CloudRestoreVerifyTests.swift */; };
 		1FCCE39B26D7F09700909A5B /* SpinActivityAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCCE39A26D7F09700909A5B /* SpinActivityAnimator.swift */; };
 		1FD24E1226BD267800D03599 /* InjectedValueKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD24E1126BD267800D03599 /* InjectedValueKeys.swift */; };
+		1FD91A8A283CCBA4000766FB /* PluginMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD91A89283CCBA4000766FB /* PluginMeta.swift */; };
 		1FE54D49269947640041C742 /* NSManagedContext+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE54D48269947640041C742 /* NSManagedContext+extension.swift */; };
 		1FE54D56269BEFE90041C742 /* CoreDataStackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFB224A2654E972005CAFFA /* CoreDataStackTests.swift */; };
 		1FE54D58269BF0140041C742 /* NSDiffableSourceSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE54D57269BF0140041C742 /* NSDiffableSourceSnapshotTests.swift */; };
@@ -892,6 +893,7 @@
 		1FCCE38326D4C5AD00909A5B /* CloudRestoreVerifyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudRestoreVerifyTests.swift; sourceTree = "<group>"; };
 		1FCCE39A26D7F09700909A5B /* SpinActivityAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinActivityAnimator.swift; sourceTree = "<group>"; };
 		1FD24E1126BD267800D03599 /* InjectedValueKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectedValueKeys.swift; sourceTree = "<group>"; };
+		1FD91A89283CCBA4000766FB /* PluginMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginMeta.swift; sourceTree = "<group>"; };
 		1FE54D48269947640041C742 /* NSManagedContext+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedContext+extension.swift"; sourceTree = "<group>"; };
 		1FE54D57269BF0140041C742 /* NSDiffableSourceSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSDiffableSourceSnapshotTests.swift; sourceTree = "<group>"; };
 		1FE54D59269C19C10041C742 /* WalletCoreRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCoreRequest.swift; sourceTree = "<group>"; };
@@ -1546,6 +1548,7 @@
 				6F702B252695B52900B72703 /* WalletSendHelper.swift */,
 				0FFCF6CE26BA334300326B44 /* MaskWalletCoreError.swift */,
 				0F506A7D272A35A500475E43 /* WalletCoreService+Backup.swift */,
+				1FD91A89283CCBA4000766FB /* PluginMeta.swift */,
 			);
 			path = WalletCore;
 			sourceTree = "<group>";
@@ -4700,6 +4703,7 @@
 				2AD856082812875A0064DDA5 /* DoneActionItem.swift in Sources */,
 				2AF88565271EE9310004565A /* ModalViewController.swift in Sources */,
 				2AF88545271EE9310004565A /* WalletStartType.swift in Sources */,
+				1FD91A8A283CCBA4000766FB /* PluginMeta.swift in Sources */,
 				2DEDDEAB2761EE7900D37A76 /* MaskClientMeta.swift in Sources */,
 				2AD855F32812875A0064DDA5 /* SheetViewAdapterController.swift in Sources */,
 				0F41A088260B39EF000037B2 /* WalletAssetObserver.swift in Sources */,
