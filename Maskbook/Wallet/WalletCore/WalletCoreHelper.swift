@@ -10,6 +10,7 @@ import CoreDataStack
 import MaskWalletCore
 import OSLog
 import web3swift
+import SwiftProtobuf
 
 // swiftlint:disable file_length
 extension WalletCoreError: LocalizedError {
@@ -606,7 +607,27 @@ extension WalletCoreHelper {
         }
     }
 
-    class func encryptPostV38(content: String, metas: [PluginMeta]) -> Result<String, Error> {
+    /// Encrypt plugin metas and text content
+    /// - Parameters:
+    ///   - content: text content
+    ///   - aauthorID: user id
+    ///   - authorKeyData: raw data of user public key
+    ///   - network: network identifier
+    ///   - metas: plugin metas
+    ///   - version: api version
+    /// - Returns: encrypted content
+    class func encryptPost(
+        content: String,
+        authorID: String?,
+        authorKeyData: Data?,
+        network: String?,
+        metas: [PluginMeta],
+        version: EncryptionVersion = .v38
+    ) -> Result<String, Error> {
+        if version == .v37 {
+            return .failure(WalletCoreError.requestParamError)
+        }
+
         let encrtptingMessage: String? = {
             if metas.isEmpty {
                 return content
@@ -618,14 +639,38 @@ extension WalletCoreHelper {
             return "\(metaString)\(seperator)\(content)"
         }()
 
-        guard let encrtptingMessage = encrtptingMessage,
-              let message = encrtptingMessage.data(using: .utf8) else {
+        guard let encrtptingMessage = encrtptingMessage else {
             return .failure(WalletCoreError.requestParamError)
         }
 
-        // TODO: pass messge to rust lib
+        return sendRequest(
+            bindWith: \.paramPostEncryption,
+            paramBuilder:
+                Api_PostEncryptionParam.with { param in
+                    switch version {
+                    case .v37: param.version = .v37
+                    case .v38: param.version = .v38
+                    }
 
-        fatalError("Import new rust wallet core")
+                    param.content = encrtptingMessage
+                    param.authorPublicKeyAlgr = .secp256K1Algr
+                    if let data = authorKeyData {
+                        param.authorPublicKeyData = data
+                    }
+
+                    if let id = authorID {
+                        param.authorUserID = id
+                    }
+
+                    if let network = network {
+                        param.network = network
+                    }
+                }
+            ,
+            map: { response in
+                response.respPostEncryption.content
+            }
+        )
     }
 
     class func sendRequest<T>(
@@ -635,6 +680,20 @@ extension WalletCoreHelper {
         var req = Api_MWRequest()
         do {
             try requestConfiguration(&req)
+            return sendRequestToRustLib(req).map(map)
+        } catch {
+            return .failure(error)
+        }
+    }
+
+    class func sendRequest<T, V: Message>(
+        bindWith keyPath: WritableKeyPath<Api_MWRequest, V>,
+        paramBuilder: @autoclosure () throws -> V,
+        map: (Api_MWResponse) -> T
+    ) -> Result<T, Error> {
+        var req = Api_MWRequest()
+        do {
+            req[keyPath: keyPath] = try paramBuilder()
             return sendRequestToRustLib(req).map(map)
         } catch {
             return .failure(error)

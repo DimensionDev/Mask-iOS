@@ -8,6 +8,11 @@
 
 import Foundation
 
+enum EncryptionVersion {
+    case v37
+    case v38
+}
+
 enum PluginMeta: Codable {
     case redPacket(key: String, value: RedPacketPayload)
 
