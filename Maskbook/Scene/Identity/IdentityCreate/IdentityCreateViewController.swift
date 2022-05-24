@@ -95,7 +95,7 @@ final class IdentityCreateViewController: BaseViewController {
             collectionView
                 .cv.apply {
                     $0.snp.makeConstraints {
-                        $0.height.equalTo(240)
+                        $0.height.equalTo(348)
                     }
                 }
             hstack
@@ -190,21 +190,21 @@ extension IdentityCreateViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat
     {
-        11
+        12
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat
     {
-        16
+        12
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        CGSize(width: (view.frame.width - 68) / 3, height: 48)
+        CGSize(width: (view.frame.width - 52) / 2, height: 48)
     }
 }
 
