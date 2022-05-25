@@ -910,6 +910,10 @@
     "plugins": {
         "luckyDrop": {
             "title": "Lucky Drop",
+            "twitte-or-facebook-template": "Hi, claim this lucky drop with #mask_io @%s %s",
+            "twitter_account": "realMaskNetwork",
+            "facebook_account": "masknetwork",
+            "social-media-template": "Hi, claim this lucky drop with #mask_io %s",
             "plugin_red_packet_best_wishes": "Best Wishes!",
             "buttons": {
                 "risk-warning": "Confirm Risk Warning",

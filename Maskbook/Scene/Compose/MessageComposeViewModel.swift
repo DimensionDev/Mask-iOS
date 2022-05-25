@@ -23,13 +23,13 @@ final class MessageComposeViewModel: ObservableObject {
     var encryptButtonEnable = true
     
     @InjectedProvider(\.mainCoordinator)
-    var mainCoordinator
+    private var mainCoordinator
     
     @InjectedProvider(\.personaManager)
     private var personaManager
     
     @InjectedProvider(\.userDefaultSettings)
-    var userSetting
+    private var userSetting
     
     init() {
         Publishers.CombineLatest($message, $pluginContents)
@@ -86,22 +86,33 @@ extension MessageComposeViewModel {
             authorKeyData = persona?.publicKey?.getRawData()
         }
         let socialPlatform = personaManager.currentProfile.value?.socialPlatform
-        let network = socialPlatform?.url
-        guard var  encrtypedMessage = try? WalletCoreHelper.encryptPost(
+        let authorId = personaManager.currentPersona.value?.identifier
+        
+        guard let encrtypedMessage = try? WalletCoreHelper.encryptPost(
             content: message,
-            authorID: personaManager.currentPersona.value?.identifier,
+            authorID: authorId,
             authorKeyData: authorKeyData,
-            network: network,
+            network: socialPlatform,
             metas: pluginContents).get() else {
+            // TODO: Error handling
             return
         }
 
-        // text trimming before post to twitter
-        if socialPlatform == .twitter {
-            encrtypedMessage = WalletCoreHelper.twitterEncoder(content: encrtypedMessage)
-        }
+        let finalPostText: String = {
+            switch socialPlatform {
+            case .twitter:
+                return L10n.Plugins.Luckydrop
+                    .twitteOrFacebookTemplate(L10n.Plugins.Luckydrop.twitterAccount, encrtypedMessage)
 
-        // TODO: add i18n prefix
+            case .facebook:
+                return L10n.Plugins.Luckydrop
+                    .twitteOrFacebookTemplate(L10n.Plugins.Luckydrop.facebookAccount, encrtypedMessage)
+
+            default: return L10n.Plugins.Luckydrop.socialMediaTemplate(encrtypedMessage)
+            }
+        }()
+
+        // TODO: past final text to twitter compose
     }
 }
 
