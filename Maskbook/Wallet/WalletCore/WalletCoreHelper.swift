@@ -715,7 +715,8 @@ extension WalletCoreHelper {
     }
     
     class func twitterEncoder(content: String) -> String {
-        return content.replaceFirst(of: "\u{1F3BC}", with: "%20")
+        return "https://mask.io/?PostData_v1=" +
+                       content.replaceFirst(of: "\u{1F3BC}", with: "%20")
                       .replaceFirst(of: ":||", with: "%40")
                       .replaceFirst(of: "=", with: "_")
                       .replaceFirst(of: "+", with: "-")
