@@ -691,6 +691,12 @@
 		6F53A8E627FECAF3002465C8 /* PendTransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F53A8E527FECAF3002465C8 /* PendTransactionModel.swift */; };
 		6F53A8E827FECD6B002465C8 /* PendTransactionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F53A8E727FECD6B002465C8 /* PendTransactionManager.swift */; };
 		6F702B262695B52900B72703 /* WalletSendHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F702B252695B52900B72703 /* WalletSendHelper.swift */; };
+		6F782A98283B61670068E123 /* SelectContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F782A97283B61670068E123 /* SelectContactViewController.swift */; };
+		6F782A9A283B617C0068E123 /* SelectContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F782A99283B617C0068E123 /* SelectContactTableViewCell.swift */; };
+		6F782A9C283B648F0068E123 /* SelectContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F782A9B283B648F0068E123 /* SelectContactViewModel.swift */; };
+		6F782A9F283C819E0068E123 /* SearchPersonaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F782A9E283C819E0068E123 /* SearchPersonaViewController.swift */; };
+		6F782AA1283C81B20068E123 /* SearchPersonaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F782AA0283C81B20068E123 /* SearchPersonaTableViewCell.swift */; };
+		6F782AA3283C83B70068E123 /* SearchPersonaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F782AA2283C83B70068E123 /* SearchPersonaViewModel.swift */; };
 		6F785E2F269305E20019079F /* RecentlyAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F785E2E269305E20019079F /* RecentlyAddress.swift */; };
 		6F785E36269445A00019079F /* ContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F785E35269445A00019079F /* ContactManager.swift */; };
 		6FA1112B27D0BB3E0041B16A /* RecentlyPasteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA1112A27D0BB3D0041B16A /* RecentlyPasteTableViewCell.swift */; };
@@ -1465,6 +1471,12 @@
 		6F53A8E527FECAF3002465C8 /* PendTransactionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendTransactionModel.swift; sourceTree = "<group>"; };
 		6F53A8E727FECD6B002465C8 /* PendTransactionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendTransactionManager.swift; sourceTree = "<group>"; };
 		6F702B252695B52900B72703 /* WalletSendHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSendHelper.swift; sourceTree = "<group>"; };
+		6F782A97283B61670068E123 /* SelectContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectContactViewController.swift; sourceTree = "<group>"; };
+		6F782A99283B617C0068E123 /* SelectContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectContactTableViewCell.swift; sourceTree = "<group>"; };
+		6F782A9B283B648F0068E123 /* SelectContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectContactViewModel.swift; sourceTree = "<group>"; };
+		6F782A9E283C819E0068E123 /* SearchPersonaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPersonaViewController.swift; sourceTree = "<group>"; };
+		6F782AA0283C81B20068E123 /* SearchPersonaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPersonaTableViewCell.swift; sourceTree = "<group>"; };
+		6F782AA2283C83B70068E123 /* SearchPersonaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPersonaViewModel.swift; sourceTree = "<group>"; };
 		6F785E2E269305E20019079F /* RecentlyAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyAddress.swift; sourceTree = "<group>"; };
 		6F785E35269445A00019079F /* ContactManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactManager.swift; sourceTree = "<group>"; };
 		6FA1112A27D0BB3D0041B16A /* RecentlyPasteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyPasteTableViewCell.swift; sourceTree = "<group>"; };
@@ -3204,6 +3216,8 @@
 		2AF88403271EE9300004565A /* WalletSend */ = {
 			isa = PBXGroup;
 			children = (
+				6F782A9D283C81400068E123 /* SearchPersona */,
+				6F782A96283B35070068E123 /* SelectPersona */,
 				2AF88410271EE9300004565A /* AddContactViewController.swift */,
 				2AF88412271EE9300004565A /* GasFeeChooseViewController.swift */,
 				2AF88418271EE9300004565A /* SearchTokenListViewController.swift */,
@@ -3672,6 +3686,26 @@
 				6F53A8E727FECD6B002465C8 /* PendTransactionManager.swift */,
 			);
 			path = PendTransacation;
+			sourceTree = "<group>";
+		};
+		6F782A96283B35070068E123 /* SelectPersona */ = {
+			isa = PBXGroup;
+			children = (
+				6F782A97283B61670068E123 /* SelectContactViewController.swift */,
+				6F782A99283B617C0068E123 /* SelectContactTableViewCell.swift */,
+				6F782A9B283B648F0068E123 /* SelectContactViewModel.swift */,
+			);
+			path = SelectPersona;
+			sourceTree = "<group>";
+		};
+		6F782A9D283C81400068E123 /* SearchPersona */ = {
+			isa = PBXGroup;
+			children = (
+				6F782A9E283C819E0068E123 /* SearchPersonaViewController.swift */,
+				6F782AA0283C81B20068E123 /* SearchPersonaTableViewCell.swift */,
+				6F782AA2283C83B70068E123 /* SearchPersonaViewModel.swift */,
+			);
+			path = SearchPersona;
 			sourceTree = "<group>";
 		};
 		6F785E34269445320019079F /* Contact */ = {
@@ -4240,12 +4274,15 @@
 				0FEA5D0B26944923009ED058 /* TransactionHistory.swift in Sources */,
 				2AD855F52812875A0064DDA5 /* PresentationController.swift in Sources */,
 				5D2C6F7627D899EB0076096C /* PlainMaskSegmentComtrol.swift in Sources */,
+				6F782AA3283C83B70068E123 /* SearchPersonaViewModel.swift in Sources */,
 				6F07ABE1279022B80039D69D /* NFTCollectionStatusModel.swift in Sources */,
 				2AF88560271EE9310004565A /* GasFeeCustomCollectionViewCell.swift in Sources */,
 				2A6ABBA82720053B00CC3AED /* RemoteBackupVerifyViewModel.swift in Sources */,
 				2AF88588271EE9310004565A /* MaskTabBarButton.swift in Sources */,
+				6F782A9F283C819E0068E123 /* SearchPersonaViewController.swift in Sources */,
 				0F1A15A0265CE83900B5E83E /* WalletCoreService.swift in Sources */,
 				2AD855FE2812875A0064DDA5 /* LocalAuthentication.swift in Sources */,
+				6F782A98283B61670068E123 /* SelectContactViewController.swift in Sources */,
 				1F036394277AB05F001E8A88 /* AnyDappResolver.swift in Sources */,
 				1FCAD8932796F509006D6B40 /* BackArrow.swift in Sources */,
 				2D6677F927688FBE00528F4D /* WalletConnectEthereumTransaction.swift in Sources */,
@@ -4278,6 +4315,7 @@
 				2AF884DD271EE9310004565A /* TradeProviderViewModel.swift in Sources */,
 				2AF884DF271EE9310004565A /* TradeProviderSheet.swift in Sources */,
 				2AF8856E271EE9310004565A /* WalletEditViewModel.swift in Sources */,
+				6F782A9A283B617C0068E123 /* SelectContactTableViewCell.swift in Sources */,
 				2A6ABBAD2720053B00CC3AED /* RemoteBackpVerifyStrategy.swift in Sources */,
 				1FE54D5C269C1A4E0041C742 /* WalletRequestCaller.swift in Sources */,
 				2AF884DC271EE9310004565A /* PluginViewModel.swift in Sources */,
@@ -4326,6 +4364,7 @@
 				2AD31E6E282D367700CB3D49 /* Date+Compare.swift in Sources */,
 				0F2051AD265E325900602A0C /* MaskWalletAccount.swift in Sources */,
 				5D93DF9E267B2B5000A175BF /* MaskTextField.swift in Sources */,
+				6F782AA1283C81B20068E123 /* SearchPersonaTableViewCell.swift in Sources */,
 				2D86E0C627716ABE005D3710 /* SelectAccountChainItemCell.swift in Sources */,
 				2AD31E56282D367700CB3D49 /* Result+extension.swift in Sources */,
 				5D2893E627D5E8A30013FCB6 /* PersonaCollectionDataSource.swift in Sources */,
@@ -4707,6 +4746,7 @@
 				2AD8559D281285520064DDA5 /* PluginStorageRepository.swift in Sources */,
 				2A6ABB992720053B00CC3AED /* RemoteRestoreVerifyView.swift in Sources */,
 				2AD85577281284940064DDA5 /* PostRecord.swift in Sources */,
+				6F782A9C283B648F0068E123 /* SelectContactViewModel.swift in Sources */,
 				2AF8851C271EE9310004565A /* TokenDetailTokenCell.swift in Sources */,
 				1F8D6919272115F1001084D6 /* RemoteInfoBindingViewController.swift in Sources */,
 				DBAAF49522C35A7100017594 /* AppDelegate.swift in Sources */,
