@@ -677,7 +677,7 @@ extension WalletCoreHelper {
             ,
             map: { response in
                 needTwitterEncoder
-                ? Self.twitterEncode(content: response.respPostEncryption.content)
+                ? Self.twitterEncoder(content: response.respPostEncryption.content)
                 : response.respPostEncryption.content
             }
         )
@@ -724,8 +724,9 @@ extension WalletCoreHelper {
         }
     }
     
-    class func twitterEncode(content: String) -> String {
-        return content.replaceFirst(of: "\u{1F3BC}", with: "%20")
+    class func twitterEncoder(content: String) -> String {
+        return "https://mask.io/?PostData_v1=" +
+                       content.replaceFirst(of: "\u{1F3BC}", with: "%20")
                       .replaceFirst(of: ":||", with: "%40")
                       .replaceFirst(of: "=", with: "_")
                       .replaceFirst(of: "+", with: "-")
