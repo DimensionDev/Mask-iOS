@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import web3swift
 
 enum EncryptionVersion {
     case v37
@@ -32,7 +33,21 @@ enum PluginMeta: Codable {
 
     var title: String {
         switch self {
-        case let .redPacket(_, value): return value.payload?.sender.message ?? ""
+        case let .redPacket(_, value):
+            let totalStr = value.basic?.total ?? "0"
+            let token = value.payload?.token
+            let senderName = value.senderName
+            let symbol = token?.symbol ?? token?.token.name ?? "Token"
+            
+            var total = totalStr
+            let totalNumber = NSDecimalNumber(string: totalStr)
+            if totalNumber != .notANumber, let decimal = token?.decimals {
+                total = totalNumber.dividing(by: NSDecimalNumber(
+                    mantissa: 1, exponent: Int16(decimal), isNegative: false)
+                ).stringValue
+            }
+            let title = "A Lucky Drop with \(total) $\(symbol) from \(senderName)"
+            return title
         }
     }
 }

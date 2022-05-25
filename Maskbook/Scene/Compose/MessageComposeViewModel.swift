@@ -1,6 +1,8 @@
 import Alamofire
+import BigInt
 import Combine
 import SwiftUI
+import web3swift
 
 final class MessageComposeViewModel: ObservableObject {
     private var disposeBag = Set<AnyCancellable>()
@@ -51,7 +53,12 @@ final class MessageComposeViewModel: ObservableObject {
     func pluginAddClicked(plugin: PluginType) {
         switch plugin {
         case .luckyDrop:
-            mainCoordinator.present(scene: .luckyDrop, transition: .modal(animated: true))
+            mainCoordinator.present(scene: .luckyDrop(source: .composer, callback: { @MainActor [weak self] payload in
+                let meta = PluginMeta.redPacket(key: PluginType.luckyDrop.postEncryptionKey, value: payload)
+                self?.pluginContents.append(meta)
+                
+                self?.mainCoordinator.dismissTopViewController()
+            }), transition: .modal(animated: true))
         default:
             print("message compose \(plugin) add did clicked")
         }
@@ -68,7 +75,12 @@ extension MessageComposeViewModel {
 
     func encryptContent() {
         // TODO: get authorID, authorKeyData and network
-        let encrtypedMessage = WalletCoreHelper.encryptPost(content: message, authorID: nil, authorKeyData: nil, network: nil, metas: pluginContents)
+        let encrtypedMessage = WalletCoreHelper.encryptPost(
+            content: message,
+            authorID: nil,
+            authorKeyData: nil,
+            network: nil,
+            metas: pluginContents)
 
         // TODO: text trimming before post to twitter
 

@@ -194,7 +194,7 @@ class Coordinator {
             shareActionDelegate: RedPacketShareDelegate?
         )
         case moveBackupData
-        case luckyDrop
+        case luckyDrop(source: LuckyDropViewModel.Source, callback: (@MainActor (RedPacketPayload) -> Void)? = nil)
         case luckyDropConfirm(
             token: Token,
             gasFeeViewModel: GasFeeViewModel,
@@ -777,8 +777,8 @@ extension Coordinator {
         case .moveBackupData:
             return MoveBackupDataViewController()
             
-        case .luckyDrop:
-            let vc = LuckyDropViewController()
+        case let .luckyDrop(source, callback):
+            let vc = LuckyDropViewController(source: source, callback: callback)
             let nav = NavigationController(rootViewController: vc)
             nav.modalPresentationStyle = .overFullScreen
             return nav

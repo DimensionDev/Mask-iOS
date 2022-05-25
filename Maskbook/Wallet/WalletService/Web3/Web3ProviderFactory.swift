@@ -13,7 +13,7 @@ import web3swift
 enum Web3ProviderFactory {
     fileprivate static let rpcUrlDict: [BlockChainNetwork: String] = [
         .bsc: "https://bsc-dataseed.binance.org/",
-        .polygon: "https://polygon-rpc.com/",
+        .polygon: "https://rpc-mainnet.matic.network/",
         .arbitrum: "https://arb1.arbitrum.io/rpc",
         .xdai: "https://rpc.xdaichain.com"
     ]
