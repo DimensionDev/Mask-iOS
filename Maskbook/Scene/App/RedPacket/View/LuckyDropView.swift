@@ -12,7 +12,7 @@ import SwiftUI
 
 struct LuckyDropView: View {
     @EnvironmentObject var chain: ResponderChain
-    @ObservedObject var viewModel = LuckyDropViewModel()
+    @ObservedObject var viewModel: LuckyDropViewModel
     @State var currentHeight: CGFloat = 0
     @State var safeArea: EdgeInsets = EdgeInsets()
     @InjectedProvider(\.mainCoordinator)
@@ -129,6 +129,6 @@ struct LuckyDropView: View {
 
 struct LuckyDropView_Previews: PreviewProvider {
     static var previews: some View {
-        LuckyDropView(viewModel: LuckyDropViewModel())
+        LuckyDropView(viewModel: LuckyDropViewModel(source: .lab, callback: nil))
     }
 }

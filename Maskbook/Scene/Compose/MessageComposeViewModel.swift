@@ -1,6 +1,8 @@
 import Alamofire
+import BigInt
 import Combine
 import SwiftUI
+import web3swift
 
 final class MessageComposeViewModel: ObservableObject {
     private var disposeBag = Set<AnyCancellable>()
@@ -51,7 +53,19 @@ final class MessageComposeViewModel: ObservableObject {
     func pluginAddClicked(plugin: PluginType) {
         switch plugin {
         case .luckyDrop:
-            mainCoordinator.present(scene: .luckyDrop, transition: .modal(animated: true))
+            mainCoordinator.present(scene: .luckyDrop(source: .composer, callback: { @MainActor [weak self] payload in
+                let totalStr = payload.basic?.total ?? "0"
+                let token = payload.payload?.token
+                let senderName = payload.senderName
+                let symbol = token?.symbol ?? token?.token.name ?? "Token"
+                let total = Web3Utils.parseToBigUInt(totalStr, decimals: token?.decimals ?? 0)
+                let title = "A Lucky Drop with \(total?.description ?? "0") $\(symbol) from \(senderName)"
+                let meta = PluginMeta.redPacket(key: PluginType.luckyDrop.postEncryptionKey, value: payload)
+                let pluginContent = MessageComposePluginContent(title: title, payload: meta)
+                self?.pluginContents.append(pluginContent)
+                
+                self?.mainCoordinator.dismissTopViewController()
+            }), transition: .modal(animated: true))
         default:
             print("message compose \(plugin) add did clicked")
         }
