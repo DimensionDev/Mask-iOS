@@ -25,6 +25,12 @@ final class MessageComposeViewModel: ObservableObject {
     @InjectedProvider(\.mainCoordinator)
     var mainCoordinator
     
+    @InjectedProvider(\.personaManager)
+    private var personaManager
+    
+    @InjectedProvider(\.userDefaultSettings)
+    var userSetting
+    
     init() {
         Publishers.CombineLatest($message, $pluginContents)
             .map {
@@ -74,15 +80,26 @@ extension MessageComposeViewModel {
     }
 
     func encryptContent() {
-        // TODO: get authorID, authorKeyData and network
-        let encrtypedMessage = WalletCoreHelper.encryptPost(
+        var authorKeyData: Data? = nil
+        if let personaRecord = personaManager.currentPersona.value {
+            let persona = Persona(fromRecord: personaRecord)
+            authorKeyData = persona?.publicKey?.getRawData()
+        }
+        let socialPlatform = personaManager.currentProfile.value?.socialPlatform
+        let network = socialPlatform?.url
+        guard var  encrtypedMessage = try? WalletCoreHelper.encryptPost(
             content: message,
-            authorID: nil,
-            authorKeyData: nil,
-            network: nil,
-            metas: pluginContents)
+            authorID: personaManager.currentPersona.value?.identifier,
+            authorKeyData: authorKeyData,
+            network: network,
+            metas: pluginContents).get() else {
+            return
+        }
 
-        // TODO: text trimming before post to twitter
+        // text trimming before post to twitter
+        if socialPlatform == .twitter {
+            encrtypedMessage = WalletCoreHelper.twitterEncoder(content: encrtypedMessage)
+        }
 
         // TODO: add i18n prefix
     }
