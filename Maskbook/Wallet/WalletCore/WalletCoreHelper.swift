@@ -620,7 +620,7 @@ extension WalletCoreHelper {
         content: String,
         authorID: String?,
         authorKeyData: Data?,
-        network: String?,
+        network: ProfileSocialPlatform?,
         metas: [PluginMeta],
         version: EncryptionVersion = .v38
     ) -> Result<String, Error> {
@@ -628,7 +628,7 @@ extension WalletCoreHelper {
             return .failure(WalletCoreError.requestParamError)
         }
 
-        let encrtptingMessage: String? = {
+        let encryptingMessage: String? = {
             if metas.isEmpty {
                 return content
             }
@@ -639,9 +639,17 @@ extension WalletCoreHelper {
             return "\(metaString)\(seperator)\(content)"
         }()
 
-        guard let encrtptingMessage = encrtptingMessage else {
+        guard let encryptingMessage = encryptingMessage else {
             return .failure(WalletCoreError.requestParamError)
         }
+
+        let needTwitterEncoder: Bool = {
+            guard let platform = network else {
+                return false
+            }
+
+            return platform == .twitter
+        }()
 
         return sendRequest(
             bindWith: \.paramPostEncryption,
@@ -652,7 +660,7 @@ extension WalletCoreHelper {
                     case .v38: param.version = .v38
                     }
 
-                    param.content = encrtptingMessage
+                    param.content = encryptingMessage
                     param.authorPublicKeyAlgr = .secp256K1Algr
                     if let data = authorKeyData {
                         param.authorPublicKeyData = data
@@ -663,12 +671,14 @@ extension WalletCoreHelper {
                     }
 
                     if let network = network {
-                        param.network = network
+                        param.network = network.url
                     }
                 }
             ,
             map: { response in
-                response.respPostEncryption.content
+                needTwitterEncoder
+                ? Self.twitterEncoder(content: response.respPostEncryption.content)
+                : response.respPostEncryption.content
             }
         )
     }

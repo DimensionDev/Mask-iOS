@@ -120,6 +120,15 @@ extension RedPacket {
             }
         }
         
+        func encode(to encoder: Encoder) throws {
+            var contianer = encoder.singleValueContainer()
+            do {
+                try contianer.encode(token)
+            } catch {
+                log.error("\(error)")
+            }
+        }
+        
         var token: Token {
             switch self {
             case .erc20Token(let token):

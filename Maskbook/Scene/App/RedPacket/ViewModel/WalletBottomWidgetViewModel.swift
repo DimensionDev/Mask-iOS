@@ -84,7 +84,13 @@ class WalletBottomWidgetViewModel: ObservableObject {
     
     private var address: String = ""
     
-    init() {
+    let source: LuckyDropViewModel.Source
+    let callback: (@MainActor (RedPacketPayload) -> Void)?
+    
+    init(source: LuckyDropViewModel.Source, callback: (@MainActor (RedPacketPayload) -> Void)?) {
+        self.source = source
+        self.callback = callback
+        
         Publishers.CombineLatest3(
             settings.defaultAccountAddressPublisher.removeDuplicates(),
             settings.networkPubisher.removeDuplicates(),
@@ -109,20 +115,18 @@ class WalletBottomWidgetViewModel: ObservableObject {
         
         PendTransactionManager.shared.pendingTxFinishEvents.asDriver().sink { _ in
         } receiveValue: { [weak self] transcation, status in
-            guard let self = self else {
+            guard let self = self else { return }
+            guard self.address == transcation.address, transcation.txHash == self.txList[self.address]?.txHash,
+                  var state = self.txList[self.address] else {
+                // If the transaction is not in the list of listeners, the local data needs to be updated as well.
+                Task {
+                    if case .confirmed = status {
+                        await self.updateRedPacketRecord(transcation: transcation)
+                    }
+                }
                 return
             }
             
-            Task {
-                await self.updateRedPacketRecord(transcation: transcation)
-            }
-            
-            guard self.address == transcation.address, transcation.txHash == self.txList[self.address]?.txHash else {
-                return
-            }
-            guard var state = self.txList[self.address] else {
-                return
-            }
             withAnimation {
                 state.status = status
                 self.txList[self.address] = state
@@ -137,7 +141,24 @@ class WalletBottomWidgetViewModel: ObservableObject {
             }
             
             if case .confirmed = status {
-                self.coordinator.present(scene: .luckyDropSuccessfully, transition: .modal())
+                if case .lab = source {
+                    self.coordinator.present(scene: .luckyDropSuccessfully, transition: .modal())
+                }
+                
+                Task {
+                    await self.updateRedPacketRecord(transcation: transcation)
+                    
+                    guard let chainId = transcation.transactionInfo?.token.chainId,
+                          let networkId = transcation.transactionInfo?.token.networkId,
+                          let network = BlockChainNetwork(chainId: Int(chainId), networkId: UInt64(networkId)),
+                          let payload = PluginStorageRepository.queryRecord(
+                            address: transcation.address,
+                            chain: network,
+                            tx: transcation.txHash) else {
+                        return
+                    }
+                    await callback?(payload)
+                }
             }
         }
         .store(in: &disposeBag)

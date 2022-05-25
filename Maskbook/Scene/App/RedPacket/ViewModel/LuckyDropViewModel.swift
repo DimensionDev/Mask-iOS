@@ -40,9 +40,7 @@ final class LuckyDropViewModel: ObservableObject {
     @Published var allowances = [String: BigUInt]()
     @Published var selection = LuckDropKind.token
     
-    // TODO: It needs to init `profileNickName` if create red packet from Social Platform.
-    let profileNickName: String? = nil
-    let walletBottomViewModel = WalletBottomWidgetViewModel()
+    let walletBottomViewModel: WalletBottomWidgetViewModel
     
     private var timer: Timer?
     var gasFeeViewModel = GasFeeViewModel()
@@ -188,8 +186,15 @@ final class LuckyDropViewModel: ObservableObject {
     @InjectedProvider(\.personaManager)
     private var personaManager
     
+    let source: Source
+    let callback: (@MainActor (RedPacketPayload) -> Void)?
+    
     // MARK: - Public method
-    init() {
+    init(source: Source, callback: (@MainActor (RedPacketPayload) -> Void)?) {
+        self.source = source
+        self.callback = callback
+        walletBottomViewModel = WalletBottomWidgetViewModel(source: source, callback: callback)
+        
         Publishers.CombineLatest3(
             settings.defaultAccountAddressPublisher.removeDuplicates(),
             settings.networkPubisher.removeDuplicates(),
@@ -322,7 +327,9 @@ final class LuckyDropViewModel: ObservableObject {
             return
         }
         
-        let senderName = profileNickName ?? personaManager.currentPersona.value?.identifier ?? "Unknown User"
+        let senderName = personaManager.currentProfile.value?.nickname
+            ?? personaManager.currentPersona.value?.identifier
+            ?? "Unknown User"
         
         let param = HappyRedPacketV4.CreateRedPacketInput(
             publicKey: publicKeyETH,
@@ -703,6 +710,13 @@ extension LuckyDropViewModel: ChooseTokenBackDelegate {
 }
 
 extension LuckyDropViewModel {
+    enum Source {
+        // 1. need to check if has a persona
+        // 2. popup an alert to share
+        case lab
+        case composer
+    }
+    
     enum ConfirmButtonType: CaseIterable, Codable {
         case noAccount
         case noToken

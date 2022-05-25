@@ -11,12 +11,25 @@ import Foundation
 import SwiftUI
 
 class LuckyDropViewController: BaseViewController {
-    private lazy var viewModel = LuckyDropViewModel()
+    private let viewModel: LuckyDropViewModel
     private(set) var cancelableStorage: Set<AnyCancellable> = []
 
     @InjectedProvider(\.mainCoordinator)
     private var coordinator
-
+    
+    let luckyView: LuckyDropView
+    
+    init(source: LuckyDropViewModel.Source, callback: (@MainActor (RedPacketPayload) -> Void)?) {
+        viewModel = LuckyDropViewModel(source: source, callback: callback)
+        luckyView = LuckyDropView(viewModel: viewModel)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = L10n.Plugins.Luckydrop.title
@@ -30,8 +43,7 @@ class LuckyDropViewController: BaseViewController {
 
     override func buildContent() {
         super.buildContent()
-        let luckyView = LuckyDropView().withResponderChainForCurrentWindow()
-        let controller = UIHostingController(rootView: luckyView)
+        let controller = UIHostingController(rootView: luckyView.withResponderChainForCurrentWindow())
         self.addChild(controller)
         self.view.addSubview(controller.view)
         controller.view.snp.makeConstraints { $0.edges.equalToSuperview() }

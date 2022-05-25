@@ -119,6 +119,7 @@ extension RedPacket {
 
             try container.encodeIfPresent(basic?.contractAddress, forKey: .contractAddress)
             try container.encodeIfPresent(basic?.rpid, forKey: .rpid)
+            try container.encodeIfPresent(basic?.txid, forKey: .txid)
             try container.encodeIfPresent(basic?.password, forKey: .password)
             try container.encodeIfPresent(basic?.shares, forKey: .shares)
             try container.encodeIfPresent(basic?.isRandom, forKey: .isRandom)

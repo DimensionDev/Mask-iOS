@@ -683,6 +683,10 @@ enum L10n {
       static var enterQuantity: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Enter-Quantity")
       }
+      /// masknetwork
+      static var facebookAccount: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.FacebookAccount")
+      }
       /// History Records
       static var historyTitle: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.HistoryTitle")
@@ -735,6 +739,10 @@ enum L10n {
       static var shareTitle: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Share-Title")
       }
+      /// Hi, claim this lucky drop with #mask_io %@
+      static func socialMediaTemplate(_ p1: String) -> String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Social-Media-Template", p1)
+      }
       /// Lucky Drop
       static var title: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Title")
@@ -750,6 +758,14 @@ enum L10n {
       /// Transaction fee
       static var transactionFee: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Transaction-Fee")
+      }
+      /// Hi, claim this lucky drop with #mask_io @%@ %@
+      static func twitteOrFacebookTemplate(_ p1: String, _ p2: String) -> String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Twitte-Or-Facebook-Template", p1, p2)
+      }
+      /// realMaskNetwork
+      static var twitterAccount: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.TwitterAccount")
       }
 
       enum Alert {
