@@ -12,7 +12,7 @@ final class MessageComposeViewModel: ObservableObject {
     var showPlaceHolder = true
 
     @Published
-    private(set) var pluginContents: [MessageComposePluginContent] = []
+    private(set) var pluginContents: [PluginMeta] = []
     
     @Published
     var recipient: Recipient = .everyone
@@ -37,12 +37,12 @@ final class MessageComposeViewModel: ObservableObject {
             .store(in: &disposeBag)
     }
     
-    func append(newPluginContent: MessageComposePluginContent) {
+    func append(newPluginContent: PluginMeta) {
         pluginContents.removeAll()
         pluginContents.append(newPluginContent)
     }
     
-    func remove(pluginContent: MessageComposePluginContent) {
+    func remove(pluginContent: PluginMeta) {
         pluginContents.removeAll {
             $0.id == pluginContent.id
         }
@@ -55,6 +55,24 @@ final class MessageComposeViewModel: ObservableObject {
         default:
             print("message compose \(plugin) add did clicked")
         }
+    }
+}
+
+extension MessageComposeViewModel {
+    func addRedPacketMeta(_ payload: RedPacketPayload) {
+        let key = PluginType.luckyDrop.postEncryptionKey
+        let meta = PluginMeta.redPacket(key: key, value: payload)
+
+        append(newPluginContent: meta)
+    }
+
+    func encryptContent() {
+        // TODO: get authorID, authorKeyData and network
+        let encrtypedMessage = WalletCoreHelper.encryptPost(content: message, authorID: nil, authorKeyData: nil, network: nil, metas: pluginContents)
+
+        // TODO: text trimming before post to twitter
+
+        // TODO: add i18n prefix
     }
 }
 

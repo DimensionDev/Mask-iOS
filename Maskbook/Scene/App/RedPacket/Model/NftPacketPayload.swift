@@ -42,6 +42,45 @@ extension RedPacket {
             payload = try? container.decode(Payload.self)
         }
 
+        enum CodingKyes: String, CodingKey {
+            case contractAddress = "contract_address"
+            case rpid
+            case txid
+            case password
+            case shares
+            case isRandom = "is_random"
+            case total
+            case creationTime = "creation_time"
+            case duration
+            case blockNumber = "block_number"
+
+            case sender
+            case contractVersion = "contract_version"
+            case network
+            case tokenType = "token_type"
+            case token
+        }
+
+        func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKyes.self)
+
+            try container.encodeIfPresent(basic?.contractAddress, forKey: .contractAddress)
+            try container.encodeIfPresent(basic?.rpid, forKey: .rpid)
+            try container.encodeIfPresent(basic?.password, forKey: .password)
+            try container.encodeIfPresent(basic?.shares, forKey: .shares)
+            try container.encodeIfPresent(basic?.isRandom, forKey: .isRandom)
+            try container.encodeIfPresent(basic?.total, forKey: .total)
+            try container.encodeIfPresent(basic?.creationTime, forKey: .creationTime)
+            try container.encodeIfPresent(basic?.duration, forKey: .duration)
+            try container.encodeIfPresent(basic?.blockNumber, forKey: .blockNumber)
+
+            try container.encodeIfPresent(payload?.sender, forKey: .sender)
+            try container.encodeIfPresent(payload?.contractVersion, forKey: .contractVersion)
+            try container.encodeIfPresent(payload?.network, forKey: .network)
+            try container.encodeIfPresent(payload?.tokenType, forKey: .tokenType)
+            try container.encodeIfPresent(payload?.token, forKey: .token)
+        }
+
         struct Payload: Codable {
             let sender: Sender
             let contractVersion: Double

@@ -23,6 +23,26 @@ enum PluginMeta: Codable {
             try container.encode([key: value])
         }
     }
+
+    var plugin: PluginType {
+        switch self {
+        case .redPacket: return .luckyDrop
+        }
+    }
+
+    var title: String {
+        switch self {
+        case let .redPacket(_, value): return value.payload?.sender.message ?? ""
+        }
+    }
+}
+
+extension PluginMeta: Identifiable {
+    var id: String {
+        switch self {
+        case let .redPacket(key, value): return "\(key)\(value.basic?.txid ?? "")"
+        }
+    }
 }
 
 enum StringFormat {
