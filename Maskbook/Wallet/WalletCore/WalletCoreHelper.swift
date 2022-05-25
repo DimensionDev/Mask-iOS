@@ -713,5 +713,13 @@ extension WalletCoreHelper {
             return .failure(error)
         }
     }
+    
+    class func twitterEncoder(content: String) -> String {
+        return content.replaceFirst(of: "\u{1F3BC}", with: "%20")
+                      .replaceFirst(of: ":||", with: "%40")
+                      .replaceFirst(of: "=", with: "_")
+                      .replaceFirst(of: "+", with: "-")
+                      .replacingOccurrences(of: "|", with: ".")
+    }
 }
 // swiftlint:enable file_length
