@@ -208,6 +208,16 @@ class Coordinator {
         case debug
     }
     
+    func getMaskSocialViewController() -> MaskSocialViewController? {
+        let rootVC = window?.rootViewController
+        if let nav = rootVC as? UINavigationController {
+            return nav.topViewController as? MaskSocialViewController
+        } else {
+            window?.rootViewController as? MaskSocialViewController
+        }
+        return nil
+    }
+    
     func setupMainWindow(window: UIWindow) {
         let maskSocialVC = MaskSocialViewController()
         let naviVC = NavigationController(rootViewController: maskSocialVC)
