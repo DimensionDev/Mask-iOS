@@ -29,6 +29,12 @@ enum PluginMeta: Codable {
         case .redPacket: return .luckyDrop
         }
     }
+
+    var title: String {
+        switch self {
+        case let .redPacket(_, value): return value.payload?.sender.message ?? ""
+        }
+    }
 }
 
 extension PluginMeta: Identifiable {

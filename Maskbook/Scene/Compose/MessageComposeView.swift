@@ -12,27 +12,27 @@ struct MessageComposeView: View {
     }
 
     var body: some View {
-        ZStack {
-            Asset.Colors.Twitter.buttonText.asColor()
-                    .ignoresSafeArea()
-            VStack(alignment: .leading) {
-                navigationBarView()
-                if !viewModel.pluginContents.isEmpty {
-                    pluginsContainer()
-                }
-                messageInputView()
-                Spacer()
-                pluginsToolBar()
-                Spacer().frame(height: 12)
-                Divider()
-                    .frame(maxWidth: .infinity, idealHeight: 0.5)
-                    .background(Asset.Colors.Twitter.line2.asColor())
-                Spacer().frame(height: 12)
-                bottomToolBar()
+        VStack(alignment: .leading) {
+            navigationBarView()
+            if !viewModel.pluginContents.isEmpty {
+                pluginsContainer()
             }
-            .padding(.horizontal, 20)
-            .padding(.bottom, 12)
+            messageInputView()
+            Spacer()
+            pluginsToolBar()
+            Spacer().frame(height: 12)
+            Divider()
+                .frame(maxWidth: .infinity, idealHeight: 0.5)
+                .background(Asset.Colors.Twitter.line2.asColor())
+            Spacer().frame(height: 12)
+            bottomToolBar()
         }
+        .padding(.horizontal, 20)
+        .padding(.bottom, 12)
+        .background(
+            Asset.Colors.Twitter.buttonText.asColor()
+                .ignoresSafeArea()
+        )
         .navigationBarHidden(true)
     }
 
@@ -71,24 +71,26 @@ struct MessageComposeView: View {
     }
 
     private func messageInputView() -> some View {
-        ZStack(alignment: .topLeading) {
-            TextEditor(text: $viewModel.message)
-                .foregroundColor(Color.black)
-                .font(FontStyles.mh5.font)
-                .lineSpacing(5)
-                .padding(.vertical, 8)
-                .background(Asset.Colors.Twitter.buttonText.asColor())
-                .frame(height: 278, alignment: .leading)
-                .cornerRadius(8)
-            Text(L10n.Scene.MessageCompose.placeholder)
-                .foregroundColor(Asset.Colors.Twitter.second.asColor())
-                .font(FontStyles.mh5.font)
-                .padding(.leading, 8)
-                .padding(.top, 16)
-                .opacity(viewModel.showPlaceHolder ? 1 : 0)
-                .allowsHitTesting(false)
-            Spacer()
-        }
+        TextEditor(text: $viewModel.message)
+            .foregroundColor(Color.black)
+            .font(FontStyles.mh5.font)
+            .lineSpacing(5)
+            .padding(.vertical, 8)
+            .background(Asset.Colors.Twitter.buttonText.asColor())
+            .frame(height: 278, alignment: .leading)
+            .cornerRadius(8)
+            .overlay(
+                Text(L10n.Scene.MessageCompose.placeholder)
+                    .foregroundColor(Asset.Colors.Twitter.second.asColor())
+                    .font(FontStyles.mh5.font)
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(0)
+                    .padding(.leading, 8)
+                    .padding(.top, 16)
+                    .opacity(viewModel.showPlaceHolder ? 1 : 0)
+                    .allowsHitTesting(false),
+                alignment: .topLeading
+            )
     }
 
     private func pluginsContainer() -> some View {
@@ -121,9 +123,9 @@ struct MessageComposeView: View {
         }
     }
 
-    private func pluginContentItem(pluginContent: MessageComposePluginContent) -> some View {
+    private func pluginContentItem(pluginContent: PluginMeta) -> some View {
         HStack(alignment: .center) {
-            Image(pluginContent.type.icon)
+            Image(pluginContent.plugin.icon)
                 .resizable()
                 .frame(width: 24, height: 24, alignment: .leading)
             Text(pluginContent.title)

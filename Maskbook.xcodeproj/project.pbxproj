@@ -638,7 +638,6 @@
 		5D069E0B27A16E2800054B4A /* TertiaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D069E0A27A16E2800054B4A /* TertiaryButton.swift */; };
 		5D0ADACF28363E2D0022D5BD /* MessageComposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0ADACC28363E2D0022D5BD /* MessageComposeView.swift */; };
 		5D0ADAD028363E2D0022D5BD /* MessageComposeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0ADACD28363E2D0022D5BD /* MessageComposeViewModel.swift */; };
-		5D0ADAD82837805F0022D5BD /* MessageComposePluginContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0ADAD72837805F0022D5BD /* MessageComposePluginContent.swift */; };
 		5D11473727E2CDB200D4448C /* CropImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D11473627E2CDB200D4448C /* CropImageViewController.swift */; };
 		5D13008A2824E2A300F5B6CA /* CookieSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1300892824E2A300F5B6CA /* CookieSwitcher.swift */; };
 		5D2893E427D5DD0A0013FCB6 /* PersonaCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2893E327D5DD0A0013FCB6 /* PersonaCollectionCell.swift */; };
@@ -1405,7 +1404,6 @@
 		5D069E0A27A16E2800054B4A /* TertiaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TertiaryButton.swift; sourceTree = "<group>"; };
 		5D0ADACC28363E2D0022D5BD /* MessageComposeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageComposeView.swift; sourceTree = "<group>"; };
 		5D0ADACD28363E2D0022D5BD /* MessageComposeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageComposeViewModel.swift; sourceTree = "<group>"; };
-		5D0ADAD72837805F0022D5BD /* MessageComposePluginContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageComposePluginContent.swift; sourceTree = "<group>"; };
 		5D11473627E2CDB200D4448C /* CropImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropImageViewController.swift; sourceTree = "<group>"; };
 		5D1300892824E2A300F5B6CA /* CookieSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieSwitcher.swift; sourceTree = "<group>"; };
 		5D2893E327D5DD0A0013FCB6 /* PersonaCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaCollectionCell.swift; sourceTree = "<group>"; };
@@ -3546,7 +3544,6 @@
 			isa = PBXGroup;
 			children = (
 				5D0ADACC28363E2D0022D5BD /* MessageComposeView.swift */,
-				5D0ADAD72837805F0022D5BD /* MessageComposePluginContent.swift */,
 				5D0ADACD28363E2D0022D5BD /* MessageComposeViewModel.swift */,
 			);
 			path = Compose;
@@ -4235,7 +4232,6 @@
 				2AD855ED2812875A0064DDA5 /* WarningPopController.swift in Sources */,
 				2AF8854E271EE9310004565A /* AddressCheckViewModel.swift in Sources */,
 				2AD85573281284940064DDA5 /* PersonaRecord+Identifier.swift in Sources */,
-				5D0ADAD82837805F0022D5BD /* MessageComposePluginContent.swift in Sources */,
 				2D6677F827688FBE00528F4D /* WalletConnectSession+Extension.swift in Sources */,
 				5D069E0B27A16E2800054B4A /* TertiaryButton.swift in Sources */,
 				5D61527927D06B7A001CB038 /* BackupFolderCheckService.swift in Sources */,
