@@ -92,7 +92,7 @@ extension MessageComposeViewModel {
             content: message,
             authorID: authorId,
             authorKeyData: authorKeyData,
-            network: socialPlatform,
+            socialPlatForm: socialPlatform,
             metas: pluginContents).get() else {
             // TODO: Error handling
             return
