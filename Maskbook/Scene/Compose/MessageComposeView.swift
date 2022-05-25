@@ -14,7 +14,7 @@ struct MessageComposeView: View {
     var body: some View {
         VStack(alignment: .leading) {
             navigationBarView()
-            if !viewModel.pluginContent.isEmpty {
+            if !viewModel.pluginContents.isEmpty {
                 pluginsContainer()
             }
             messageInputView()
@@ -72,18 +72,11 @@ struct MessageComposeView: View {
                 .background(Asset.Colors.Twitter.buttonText.asColor())
                 .frame(height: 278, alignment: .leading)
                 .cornerRadius(8)
-                .onChange(of: viewModel.message) { _ in
-                }
-                .onTapGesture {
-                    if viewModel.showPlaceHolder {
-                        viewModel.showPlaceHolder.toggle()
-                    }
-                }
             Text(L10n.Scene.MessageCompose.placeholder)
                 .foregroundColor(Asset.Colors.Twitter.second.asColor())
                 .font(FontStyles.mh5.font)
-                .padding(.leading, 5)
-                .padding(.top, 8)
+                .padding(.leading, 8)
+                .padding(.top, 16)
                 .opacity(viewModel.showPlaceHolder ? 1 : 0)
             Spacer()
         }
@@ -91,10 +84,10 @@ struct MessageComposeView: View {
 
     private func pluginsContainer() -> some View {
         VStack {
-            ForEach($viewModel.pluginContent) { $pluginContent in
+            ForEach(viewModel.pluginContents) { pluginContent in
                 HStack {
                     Spacer()
-                    pluginContentItem(plugin: pluginContent)
+                    pluginContentItem(pluginContent: pluginContent)
                     Spacer()
                 }
             }
@@ -109,19 +102,17 @@ struct MessageComposeView: View {
     }
 
     private func bottomToolBar() -> some View {
-        Text("ddddddddddddddddddddd")
+        Text("todo Everyone can see")
     }
 
-    private func pluginContentItem(plugin: MessageComposePluginContent) -> some View {
+    private func pluginContentItem(pluginContent: MessageComposePluginContent) -> some View {
         HStack(alignment: .center) {
-            Image(plugin.type.icon)
+            Image(pluginContent.type.icon)
                 .resizable()
                 .frame(width: 24, height: 24, alignment: .leading)
-            Text(plugin.title)
+            Text(pluginContent.title)
             Button(action: {
-                viewModel.pluginContent.removeAll {
-                    $0.id == plugin.id
-                }
+                viewModel.remove(pluginContent: pluginContent)
             }, label: {
                 Asset.Images.Scene.Compose.close.asImage()
                     .resizable()
@@ -137,8 +128,7 @@ struct MessageComposeView: View {
 
     private func pluginToolItem(plugin: PluginType) -> some View {
         Button(action: {
-            let content = MessageComposePluginContent(title: "new \(plugin.name)", type: plugin)
-            viewModel.pluginContent.append(content)
+            viewModel.pluginAddClicked(plugin: plugin)
         }, label: {
             Image(plugin.icon)
                 .resizable()
@@ -147,9 +137,11 @@ struct MessageComposeView: View {
         })
         .foregroundColor(Asset.Colors.Twitter.strong.asColor())
         .padding()
-        .background(Asset.Colors.Twitter.inputBg.asColor())
         .frame(height: 40, alignment: .leading)
-        .cornerRadius(20)
+        .overlay(
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(Asset.Colors.Twitter.line2.asColor(), lineWidth: 0.5)
+        )
     }
 }
 

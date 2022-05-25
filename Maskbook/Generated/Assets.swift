@@ -147,6 +147,7 @@ internal enum Asset {
       internal static let inputBg = ColorAsset(name: "Colors/Twitter/Input-bg")
       internal static let blue = ColorAsset(name: "Colors/Twitter/blue")
       internal static let buttonText = ColorAsset(name: "Colors/Twitter/buttonText")
+      internal static let line2 = ColorAsset(name: "Colors/Twitter/line2")
       internal static let main = ColorAsset(name: "Colors/Twitter/main")
       internal static let mask = ColorAsset(name: "Colors/Twitter/mask")
       internal static let second = ColorAsset(name: "Colors/Twitter/second")

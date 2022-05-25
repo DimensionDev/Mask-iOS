@@ -8,23 +8,23 @@
 
 import Foundation
 
-struct MessageComposePluginContent {
-    init(title: String, type: PluginType) {
-        self.title = title
-        self.type = type
-        self.id = Self.generatId(title: title, type: type)
-    }
-    
-    let title: String
-    let type: PluginType
-    let id: String
+protocol MessageComposePluginContentPayload {
+    var basic: Codable { get }
+    var payload: Codable { get }
 }
 
-extension MessageComposePluginContent: Identifiable {
-    static func generatId(title: String, type: PluginType) -> String {
-        var hasher = Hasher()
-        hasher.combine(title)
-        hasher.combine(type)
-        return String(hasher.finalize())
+struct MessageComposePluginContent {
+    init(id: String, title: String, payload: MessageComposePluginContentPayload, type: PluginType) {
+        self.id = id
+        self.title = title
+        self.payload = payload
+        self.type = type
     }
+
+    let id: String
+    let title: String
+    let payload: MessageComposePluginContentPayload
+    let type: PluginType
 }
+
+extension MessageComposePluginContent: Identifiable {}

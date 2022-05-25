@@ -16,6 +16,8 @@ import web3swift
 import PromiseKit
 import CombineExt
 
+typealias FungibleToken = RedPacket.FungibleToken
+
 @MainActor
 final class LuckyDropViewModel: ObservableObject {
     // MARK: - Public property
@@ -334,7 +336,10 @@ final class LuckyDropViewModel: ObservableObject {
             tokenAddr: tokenAddressETH,
             totalTokens: total)
         
+        let fungibleTokenBuilder = FungibleTokenBuilder()
+        let fungibleToken = fungibleTokenBuilder.buildToken(with: token)
         Task {
+            let password = privateKey.toHexString().addHexPrefix()
             let tx = await ABI.happyRedPacketV4.createRedPacket(
                 token: token,
                 gasFeeViewModel: gasFeeViewModel,
@@ -347,11 +352,63 @@ final class LuckyDropViewModel: ObservableObject {
             checkParam()
             if let tx = tx {
                 walletBottomViewModel.observeTransaction(txHash: tx)
+                saveRedPacket(txHash: tx, password: password, token: fungibleToken)
             }
         }
     }
     
     // MARK: - Private method
+    private func saveRedPacket(txHash: String, password: String, token: FungibleToken?) {
+        do {
+            guard let w3Provider = settings.network.w3Provider,
+                    let address = settings.defaultAccountAddress,
+                    let token = token,
+                    let contractAddress = settings.network.redPacketAddressV4,
+                    let networkName = settings.network.fullEvmName else {
+                return
+            }
+            let transaction = try w3Provider.eth.getTransactionDetails(txHash)
+            let data = transaction.transaction.data.toHexString()
+            let kvpair = ABI.happyRedPacketV4.parse(input: data, for: .createRedPacket)
+            let redpacketInfo = RedPacketHistoryInfo.CreateRedpacketParam(json: kvpair)
+            
+            guard let info = redpacketInfo else { return }
+
+            let basic = RedPacket.Basic(
+                contractAddress: contractAddress,
+                rpid: "",
+                txid: txHash,
+                password: password,
+                shares: info.number.asInt() ?? 0,
+                isRandom: info.ifrandom,
+                total: info.total_tokens.description,
+                creationTime: 0,
+                duration: info.duration.asDouble() ?? 0,
+                blockNumber: Int(transaction.blockNumber ?? 0)
+            )
+
+            let packetPayload = RedPacket.RedPacketPayload.Payload.init(
+                sender: .init(address: address, name: info.name, message: info.message),
+                contractVersion: 4,
+                network: networkName,
+                tokenType: info.token_type.asInt().flatMap { .init(rawValue: $0) },
+                token: token,
+                tokenAddress: info.token_addr,
+                claimers: [],
+                totalRemaining: nil
+            )
+            let payload = RedPacketPayload.init(basic: basic, payload: packetPayload)
+            PluginStorageRepository.save(
+                address: address,
+                chain: settings.network,
+                txHash: txHash,
+                payload: payload
+            )
+        } catch {
+            log.error("\(error)")
+        }
+    }
+    
     private func getAllowance() async -> BigUInt? {
         guard let fromAddress = settings.defaultAccountAddress,
               let originalOwner = EthereumAddress(fromAddress) else {
@@ -713,6 +770,35 @@ extension LuckyDropViewModel {
             default:
                 return false
             }
+        }
+    }
+}
+
+extension FungibleTokenBuilder {
+    func buildToken(with token: Token) -> FungibleToken? {
+        var tokenType: RedPacket.EthereumToken? = nil
+        switch token.tokenType {
+        case .native: tokenType = .native
+        case .erc20: tokenType = .erc20
+        }
+        guard let type = tokenType else {
+            return nil
+        }
+        guard let redPacketChainId = RedPacket.ChainId(rawValue: Int(token.networkId)) else {
+            return nil
+        }
+        let redPacketToken = RedPacket.Token(
+            type: type,
+            address: token.contractAddress ?? "",
+            chainId: redPacketChainId,
+            name: token.name ?? "",
+            symbol: token.symbol ?? "",
+            decimals: Int(token.decimal),
+            logoURI: .either(token.logoUrl ?? ""))
+        switch redPacketToken.type {
+        case .erc20: return .erc20Token(redPacketToken)
+        case .native: return .nativeToken(redPacketToken)
+        default: return nil
         }
     }
 }

@@ -47,7 +47,7 @@ class MnemonicWordCollectionCell: UICollectionViewCell {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 8
-        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 0)
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 26, bottom: 0, right: 0)
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.distribution = .fill
         stackView.alignment = .center

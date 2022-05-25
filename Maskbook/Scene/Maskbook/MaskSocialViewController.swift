@@ -355,12 +355,14 @@ extension MaskSocialViewController {
     @objc
     override func prepareLeftNavigationItems() {
         navigationItem.leftBarButtonItems = []
+#if DEBUG
         setTemporaryVisableDebug()
+#endif
     }
     
     private func setTemporaryVisableDebug() {
         let button = NavigationItemView(imageAsset: Asset.Plugins.setting) {
-            self.coordinator.present(scene: .messageCompose, transition: .modal(animated: true, adaptiveDelegate: self))
+            self.coordinator.present(scene: .messageCompose(pluginContent: nil), transition: .modal(animated: true, adaptiveDelegate: self))
         }
 
         self.navigationItem.leftBarButtonItems = [
