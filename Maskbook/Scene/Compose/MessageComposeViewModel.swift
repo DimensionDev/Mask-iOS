@@ -15,7 +15,7 @@ final class MessageComposeViewModel: ObservableObject {
     private(set) var pluginContents: [MessageComposePluginContent] = []
     
     @Published
-    var recipient: Recipient = .all
+    var recipient: Recipient = .everyone
     
     @Published
     var encryptButtonEnable = true
@@ -60,20 +60,24 @@ final class MessageComposeViewModel: ObservableObject {
 
 extension MessageComposeViewModel {
     enum Recipient: String, Equatable, CaseIterable {
-        case all
-        case my
-        case specificUser
+        case everyone
+        case onlyMe
+        case specialContacts
 
         var title: String {
             switch self {
-            case .all: return "Everyone can see"
-            case .my: return "My"
-            case .specificUser: return "Specific the mask user"
+            case .everyone: return L10n.Scene.MessageCompose.everyone
+            case .onlyMe: return L10n.Scene.MessageCompose.onlyMe
+            case .specialContacts: return L10n.Scene.MessageCompose.specialContacts
             }
         }
         
-        var icon: Image? {
-            nil
+        var iconName: String {
+            switch self {
+            case .everyone: return Asset.Images.Scene.Compose.everyone.name
+            case .onlyMe: return Asset.Images.Scene.Compose.onlyMe.name
+            case .specialContacts: return Asset.Images.Scene.Compose.specialContacts.name
+            }
         }
     }
 }

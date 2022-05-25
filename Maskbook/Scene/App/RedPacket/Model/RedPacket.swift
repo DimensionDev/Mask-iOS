@@ -80,6 +80,11 @@ extension RedPacket {
 
         var basic: Basic?
         var payload: Payload?
+        
+        enum CodingKeys: String, CodingKey {
+            case basic
+            case payload
+        }
 
         init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: RedPacketPayload.CodingKeys.self)

@@ -12,19 +12,27 @@ struct MessageComposeView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading) {
-            navigationBarView()
-            if !viewModel.pluginContents.isEmpty {
-                pluginsContainer()
+        ZStack {
+            Asset.Colors.Twitter.buttonText.asColor()
+                    .ignoresSafeArea()
+            VStack(alignment: .leading) {
+                navigationBarView()
+                if !viewModel.pluginContents.isEmpty {
+                    pluginsContainer()
+                }
+                messageInputView()
+                Spacer()
+                pluginsToolBar()
+                Spacer().frame(height: 12)
+                Divider()
+                    .frame(maxWidth: .infinity, idealHeight: 0.5)
+                    .background(Asset.Colors.Twitter.line2.asColor())
+                Spacer().frame(height: 12)
+                bottomToolBar()
             }
-            messageInputView()
-            Spacer()
-            pluginsToolBar()
-            bottomToolBar()
+            .padding(.horizontal, 20)
+            .padding(.bottom, 12)
         }
-        .background(Asset.Colors.Twitter.buttonText.asColor())
-        .padding(.horizontal, 20)
-        .padding(.bottom, 24)
         .navigationBarHidden(true)
     }
 
@@ -78,6 +86,7 @@ struct MessageComposeView: View {
                 .padding(.leading, 8)
                 .padding(.top, 16)
                 .opacity(viewModel.showPlaceHolder ? 1 : 0)
+                .allowsHitTesting(false)
             Spacer()
         }
     }
@@ -102,7 +111,14 @@ struct MessageComposeView: View {
     }
 
     private func bottomToolBar() -> some View {
-        Text("todo Everyone can see")
+        HStack {
+            Image(viewModel.recipient.iconName)
+                .resizable()
+                .frame(width: 18, height: 18, alignment: .leading)
+            Text(viewModel.recipient.title)
+                .font(FontStyles.rh7.font)
+                .foregroundColor(Asset.Colors.Twitter.blue.asColor())
+        }
     }
 
     private func pluginContentItem(pluginContent: MessageComposePluginContent) -> some View {
