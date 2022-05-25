@@ -156,10 +156,10 @@ struct MessageComposeView: View {
         .foregroundColor(Asset.Colors.Twitter.strong.asColor())
         .padding()
         .frame(height: 40, alignment: .leading)
-        .overlay(
+        .clipShape(
             RoundedRectangle(cornerRadius: 20)
-                .stroke(Asset.Colors.Twitter.line2.asColor(), lineWidth: 0.5)
         )
+        .border(Asset.Colors.Twitter.line2.asColor(), width: 0.5)
     }
 }
 

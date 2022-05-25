@@ -204,7 +204,7 @@ class Coordinator {
             completion: (String?, Error?) -> Void
         )
         case luckyDropSuccessfully
-        case messageCompose
+        case messageCompose(PluginMeta? = nil)
         case debug
     }
     
@@ -803,8 +803,11 @@ extension Coordinator {
         case .luckyDropSuccessfully:
             return SheetViewAdapterController(rootView: LuckyDropSuccessfullyView())
             
-        case .messageCompose:
+        case let .messageCompose(meta):
             let viewModel = MessageComposeViewModel()
+            if let pluginMeta = meta {
+                viewModel.append(newPluginContent: pluginMeta)
+            }
             return MaskHostViewController(rootView: MessageComposeView(viewModel: viewModel))
             
         case .debug:
