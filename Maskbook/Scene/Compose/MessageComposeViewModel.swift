@@ -59,6 +59,25 @@ final class MessageComposeViewModel: ObservableObject {
 }
 
 extension MessageComposeViewModel {
+    func addRedPacketMeta(_ payload: RedPacketPayload) {
+        let key = PluginType.luckyDrop.postEncryptionKey
+        let meta = PluginMeta.redPacket(key: key, value: payload)
+
+        // TODO: i18n
+        append(newPluginContent: .init(title: "lucky drop", payload: meta))
+    }
+
+    func encryptContent() {
+        // TODO: get authorID, authorKeyData and network
+        let encrtypedMessage = WalletCoreHelper.encryptPost(content: message, authorID: nil, authorKeyData: nil, network: nil, metas: pluginContents.map(\.payload))
+
+        // TODO: text trimming before post to twitter
+
+        // TODO: add i18n prefix
+    }
+}
+
+extension MessageComposeViewModel {
     enum Recipient: String, Equatable, CaseIterable {
         case everyone
         case onlyMe

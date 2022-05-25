@@ -8,23 +8,19 @@
 
 import Foundation
 
-protocol MessageComposePluginContentPayload {
-    var basic: Codable { get }
-    var payload: Codable { get }
-}
-
 struct MessageComposePluginContent {
-    init(id: String, title: String, payload: MessageComposePluginContentPayload, type: PluginType) {
-        self.id = id
+    init(title: String, payload: PluginMeta) {
         self.title = title
         self.payload = payload
-        self.type = type
     }
 
-    let id: String
     let title: String
-    let payload: MessageComposePluginContentPayload
-    let type: PluginType
+    let payload: PluginMeta
+    var type: PluginType {
+        payload.plugin
+    }
 }
 
-extension MessageComposePluginContent: Identifiable {}
+extension MessageComposePluginContent: Identifiable {
+    var id: String { payload.id }
+}
