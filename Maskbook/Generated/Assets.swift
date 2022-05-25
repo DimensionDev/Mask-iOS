@@ -211,6 +211,7 @@ internal enum Asset {
     }
     internal enum Cell {
       internal static let cellCheck = ImageAsset(name: "Icon/Cell/cellCheck")
+      internal static let cellTwitterCheck = ImageAsset(name: "Icon/Cell/cellTwitterCheck")
       internal static let cellUncheck = ImageAsset(name: "Icon/Cell/cellUncheck")
     }
     internal enum Logo {
@@ -347,6 +348,7 @@ internal enum Asset {
         internal static let rename = ImageAsset(name: "Images/Scene/Personas/rename")
         internal static let rotate = ImageAsset(name: "Images/Scene/Personas/rotate")
         internal static let search = ImageAsset(name: "Images/Scene/Personas/search")
+        internal static let searchTwitter = ImageAsset(name: "Images/Scene/Personas/searchTwitter")
         internal static let setAvatar = ImageAsset(name: "Images/Scene/Personas/setAvatar")
         internal static let twitter = ImageAsset(name: "Images/Scene/Personas/twitter")
         internal static let watermark = ImageAsset(name: "Images/Scene/Personas/watermark")
