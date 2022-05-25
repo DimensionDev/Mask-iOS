@@ -76,6 +76,9 @@ class WalletBottomWidgetViewModel: ObservableObject {
     @InjectedProvider(\.mainCoordinator)
     var coordinator
     
+    @InjectedProvider(\.personaManager)
+    var personaManager
+    
     private var disposeBag = Set<AnyCancellable>()
     
     private var txHash: String? {
@@ -142,7 +145,12 @@ class WalletBottomWidgetViewModel: ObservableObject {
             
             if case .confirmed = status {
                 if case .lab = source {
-                    self.coordinator.present(scene: .luckyDropSuccessfully, transition: .modal())
+                    self.coordinator.present(
+                        scene: .luckyDropSuccessfully(callback: { [weak self] in
+                            self?.shareRedPacket(transcation: transcation)
+                        }),
+                        transition: .modal()
+                    )
                 }
                 
                 Task {
@@ -152,7 +160,6 @@ class WalletBottomWidgetViewModel: ObservableObject {
                           let networkId = transcation.transactionInfo?.token.networkId,
                           let network = BlockChainNetwork(chainId: Int(chainId), networkId: UInt64(networkId)),
                           let payload = PluginStorageRepository.queryRecord(
-                            address: transcation.address,
                             chain: network,
                             tx: transcation.txHash) else {
                         return
@@ -162,6 +169,29 @@ class WalletBottomWidgetViewModel: ObservableObject {
             }
         }
         .store(in: &disposeBag)
+    }
+    
+    @MainActor
+    func shareRedPacket(transcation: PendTransactionModel) {
+        if personaManager.currentProfile.value != nil {
+            // open composer directly
+            guard let chainId = transcation.transactionInfo?.token.chainId,
+                  let networkId = transcation.transactionInfo?.token.networkId,
+                  let network = BlockChainNetwork(chainId: Int(chainId), networkId: UInt64(networkId)),
+                  let payload = PluginStorageRepository.queryRecord(
+                    chain: network,
+                    tx: transcation.txHash) else {
+                return
+            }
+            let meta = PluginMeta.redPacket(key: PluginType.luckyDrop.postEncryptionKey, value: payload)
+            coordinator.present(scene: .messageCompose(meta), transition: .modal(animated: true))
+        } else if personaManager.currentPersona.value == nil {
+            // create a persona, then share manually
+            coordinator.present(scene: .luckyDropCreatePersona(callback: nil), transition: .modal())
+        } else if personaManager.currentProfile.value == nil {
+            // create a profile, then share manually
+            coordinator.present(scene: .luckyDropCreateProfile, transition: .modal())
+        }
     }
     
     @MainActor
@@ -180,7 +210,6 @@ class WalletBottomWidgetViewModel: ObservableObject {
         }
         
         guard var payload = PluginStorageRepository.queryRecord(
-            address: transcation.address,
             chain: network,
             tx: transcation.txHash) else {
             return
@@ -192,7 +221,6 @@ class WalletBottomWidgetViewModel: ObservableObject {
         payload.payload?.totalRemaining = checkAvailability?.balance.flatMap { String($0, radix: 10) }
         
         PluginStorageRepository.save(
-            address: transcation.address,
             chain: network,
             txHash: transcation.txHash,
             payload: payload
