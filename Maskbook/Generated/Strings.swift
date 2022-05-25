@@ -1456,9 +1456,21 @@ enum L10n {
       static var encrypt: String {
         return L10n.tr("Localizable", "Scene.MessageCompose.Encrypt")
       }
+      /// Everyone can see
+      static var everyone: String {
+        return L10n.tr("Localizable", "Scene.MessageCompose.Everyone")
+      }
+      /// Only me
+      static var onlyMe: String {
+        return L10n.tr("Localizable", "Scene.MessageCompose.OnlyMe")
+      }
       /// What do you want to encrypt?
       static var placeholder: String {
         return L10n.tr("Localizable", "Scene.MessageCompose.Placeholder")
+      }
+      /// Special Contacts can see
+      static var specialContacts: String {
+        return L10n.tr("Localizable", "Scene.MessageCompose.SpecialContacts")
       }
       /// Compose
       static var title: String {

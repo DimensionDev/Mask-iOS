@@ -288,6 +288,9 @@ internal enum Asset {
       }
       internal enum Compose {
         internal static let close = ImageAsset(name: "Images/Scene/Compose/close")
+        internal static let everyone = ImageAsset(name: "Images/Scene/Compose/everyone")
+        internal static let onlyMe = ImageAsset(name: "Images/Scene/Compose/onlyMe")
+        internal static let specialContacts = ImageAsset(name: "Images/Scene/Compose/specialContacts")
       }
       internal enum Empty {
         internal static let emptyBox = ImageAsset(name: "Images/Scene/Empty/EmptyBox")

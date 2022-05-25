@@ -881,7 +881,10 @@
         "message_compose": {
             "title": "Compose",
             "encrypt": "Encrypt",
-            "placeholder": "What do you want to encrypt?"
+            "placeholder": "What do you want to encrypt?",
+            "Everyone": "Everyone can see",
+            "only_me": "Only me",
+            "special_contacts": "Special Contacts can see"
         }
     },
     "chain": {
