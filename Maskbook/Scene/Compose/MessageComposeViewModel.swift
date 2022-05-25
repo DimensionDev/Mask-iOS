@@ -75,7 +75,12 @@ extension MessageComposeViewModel {
 
     func encryptContent() {
         // TODO: get authorID, authorKeyData and network
-        let encrtypedMessage = WalletCoreHelper.encryptPost(content: message, authorID: nil, authorKeyData: nil, network: nil, metas: pluginContents)
+        let encrtypedMessage = WalletCoreHelper.encryptPost(
+            content: message,
+            authorID: nil,
+            authorKeyData: nil,
+            network: nil,
+            metas: pluginContents)
 
         // TODO: text trimming before post to twitter
 
