@@ -402,7 +402,7 @@ final class LuckyDropViewModel: ObservableObject {
                 address: address,
                 chain: settings.network,
                 txHash: txHash,
-                record: payload
+                payload: payload
             )
         } catch {
             log.error("\(error)")

@@ -174,7 +174,7 @@ class WalletBottomWidgetViewModel: ObservableObject {
             address: transcation.address,
             chain: network,
             txHash: transcation.txHash,
-            record: payload
+            payload: payload
         )
     }
     

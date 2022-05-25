@@ -30,16 +30,16 @@ extension PluginStorageRepository {
         address: String,
         chain: BlockChainNetwork,
         txHash: String,
-        record: RedPacketPayload?
+        payload: RedPacketPayload?
     ) {
-        guard let record = record else {
+        guard let payload = payload else {
             return
         }
 
         let key = generateKey(address: address, chain: chain, txHash: txHash)
         let context = viewContext
         context.performAndWait {
-            let data = try? JSONEncoder().encode(record)
+            let data = try? JSONEncoder().encode(payload)
             var json: String?
             if let data = data {
                 json = String(data: data, encoding: .utf8)
