@@ -85,8 +85,7 @@ struct HappyRedPacketV4: ABIContract {
                             gasFeeViewModel: gasFeeViewModel,
                             redPacketInput: redPacketInput,
                             transaction: transaction,
-                            options: tx.transactionOptions,
-                            password: password
+                            options: tx.transactionOptions
                         ) { tx, error in
                             if let error = error {
                                 continuation.resume(with: .failure(error))
@@ -219,6 +218,20 @@ extension HappyRedPacketV4 {
         case claimSuccess = "ClaimSuccess"
         case creationSuccess = "CreationSuccess"
         case refundSuccess = "RefundSuccess"
+    }
+    
+    struct SuccessEvent {
+        let id: String
+        let creation_time: BigUInt
+
+        init?(json: [String: Any]) {
+            guard let data = json["id"] as? Data,
+                  let time = json["creation_time"] as? BigUInt else {
+                return nil
+            }
+            self.id = data.toHexString()
+            self.creation_time = time
+        }
     }
     
     struct CheckAvailabilityResult: Codable {

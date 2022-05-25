@@ -26,7 +26,6 @@ final class LuckyDropConfirmViewController: SheetViewController {
         redPacketInput: HappyRedPacketV4.CreateRedPacketInput,
         transaction: EthereumTransaction,
         options: TransactionOptions,
-        password: String,
         completion: ((String?, Error?) -> Void)?
     ) {
         let param = RedPacketConfirmViewModel.InitInput(
@@ -34,8 +33,7 @@ final class LuckyDropConfirmViewController: SheetViewController {
             gasFeeViewModel: gasFeeViewModel,
             inputParam: redPacketInput,
             transaction: transaction,
-            options: options,
-            password: password
+            options: options
         )
         viewModel = RedPacketConfirmViewModel(param: param, completion: completion)
         super.init(presenter: SheetPresenter(

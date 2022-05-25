@@ -82,10 +82,10 @@ extension RedPacket {
         var payload: Payload?
 
         init(from decoder: Decoder) throws {
-            let container = try decoder.singleValueContainer()
+            let container = try decoder.container(keyedBy: RedPacketPayload.CodingKeys.self)
             // use try? to avoid decoding error
-            basic = try? container.decode(Basic.self)
-            payload = try? container.decode(Payload.self)
+            basic = try? container.decode(Basic.self, forKey: .basic)
+            payload = try? container.decode(Payload.self, forKey: .payload)
         }
 
         func encode(to encoder: Encoder) throws {
@@ -113,6 +113,19 @@ extension RedPacket {
                 self.tokenAddress = tokenAddress
                 self.claimers = claimers
                 self.totalRemaining = totalRemaining
+            }
+            
+            init(from decoder: Decoder) throws {
+                let container = try decoder.container(keyedBy: Payload.CodingKeys.self)
+                // use try? to avoid decoding error
+                sender = try container.decode(Sender.self, forKey: .sender)
+                contractVersion = try container.decode(Double.self, forKey: .contractVersion)
+                network = try container.decode(String.self, forKey: .network)
+                tokenType = try? container.decode(EthereumToken.self, forKey: .tokenType)
+                token = try? container.decode(FungibleToken.self, forKey: .token)
+                tokenAddress = try? container.decode(String.self, forKey: .tokenAddress)
+                claimers = try? container.decode([Claimer].self, forKey: .claimers)
+                totalRemaining = try? container.decode(String.self, forKey: .totalRemaining)
             }
 
             let sender: Sender
