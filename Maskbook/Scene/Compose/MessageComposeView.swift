@@ -5,7 +5,7 @@ struct MessageComposeView: View {
     private var viewModel: MessageComposeViewModel
 
     @Environment(\.presentationMode) var presentationMode
-
+    
     init(viewModel: MessageComposeViewModel) {
         self.viewModel = viewModel
         UITextView.appearance().backgroundColor = Asset.Colors.Twitter.buttonText.color
@@ -79,7 +79,7 @@ struct MessageComposeView: View {
             .lineSpacing(5)
             .padding(.vertical, 8)
             .background(Asset.Colors.Twitter.buttonText.asColor())
-            .frame(height: .infinity, alignment: .leading)
+            .frame(maxHeight: .infinity, alignment: .leading)
             .cornerRadius(8)
             .overlay(
                 Text(L10n.Scene.MessageCompose.placeholder)
