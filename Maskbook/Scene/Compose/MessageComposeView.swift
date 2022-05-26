@@ -18,7 +18,6 @@ struct MessageComposeView: View {
                 pluginsContainer()
             }
             messageInputView()
-            Spacer()
             pluginsToolBar()
             Spacer().frame(height: 12)
             Divider()
@@ -75,12 +74,12 @@ struct MessageComposeView: View {
 
     private func messageInputView() -> some View {
         TextEditor(text: $viewModel.message)
-            .foregroundColor(Color.black)
+            .foregroundColor(Asset.Colors.Twitter.strong.asColor())
             .font(FontStyles.mh5.font)
             .lineSpacing(5)
             .padding(.vertical, 8)
             .background(Asset.Colors.Twitter.buttonText.asColor())
-            .frame(height: 278, alignment: .leading)
+            .frame(height: .infinity, alignment: .leading)
             .cornerRadius(8)
             .overlay(
                 Text(L10n.Scene.MessageCompose.placeholder)
