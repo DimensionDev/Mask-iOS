@@ -55,7 +55,14 @@ class PersonaCreateHandler {
             let alertController = AlertController(title: L10n.Common.Alert.PersonaCreate.title,
                                                   message: L10n.Common.Alert.PersonaCreate.description(name),
                                                   confirmButtonText: L10n.Common.Controls.done,
-                                                  imageType: .success)
+                                                  imageType: .success,
+                                                  confirmButtonClicked: {
+                                                      _ in
+                                                      if self.coordinator.topViewController is IdentityCreateViewController {
+                                                          self.coordinator.topViewController?.dismiss(animated: true)
+                                                      }
+                                                  },
+                                                  cancelButtonClicked: nil)
             let message = self.titleAttributeString(name: name)
             alertController.setAttributeMessage(attrMessage: message)
             self.coordinator.present(scene: .alertController(alertController: alertController),

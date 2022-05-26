@@ -17,6 +17,8 @@ class WalletBottomWidgetViewModel: ObservableObject {
     @Published var isLocked: Bool = true
     @Published var txList = [String: TransactionStatus]()
     
+    let pluginMetaShareViewModel = PluginMetaShareViewModel()
+    
     var state: TransactionState {
         guard let status = txList[address]?.status else {
             return .normal
@@ -147,7 +149,7 @@ class WalletBottomWidgetViewModel: ObservableObject {
                 if case .lab = source {
                     self.coordinator.present(
                         scene: .luckyDropSuccessfully(callback: { [weak self] in
-                            self?.shareRedPacket(transcation: transcation)
+                            self?.pluginMetaShareViewModel.shareRedPacket(transcation: transcation)
                         }),
                         transition: .modal()
                     )
@@ -169,29 +171,6 @@ class WalletBottomWidgetViewModel: ObservableObject {
             }
         }
         .store(in: &disposeBag)
-    }
-    
-    @MainActor
-    func shareRedPacket(transcation: PendTransactionModel) {
-        if personaManager.currentProfile.value?.linkedPersona != nil {
-            // open composer directly
-            guard let chainId = transcation.transactionInfo?.token.chainId,
-                  let networkId = transcation.transactionInfo?.token.networkId,
-                  let network = BlockChainNetwork(chainId: Int(chainId), networkId: UInt64(networkId)),
-                  let payload = PluginStorageRepository.queryRecord(
-                    chain: network,
-                    tx: transcation.txHash) else {
-                return
-            }
-            let meta = PluginMeta.redPacket(payload)
-            coordinator.present(scene: .messageCompose(meta), transition: .modal(animated: true))
-        } else if personaManager.currentPersona.value == nil {
-            // create a persona, then share manually
-            coordinator.present(scene: .luckyDropCreatePersona(callback: nil), transition: .modal())
-        } else if personaManager.currentProfile.value?.linkedPersona == nil {
-            // create a profile, then share manually
-            coordinator.present(scene: .luckyDropCreateProfile, transition: .modal())
-        }
     }
     
     @MainActor
