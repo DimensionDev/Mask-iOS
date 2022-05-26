@@ -15,13 +15,13 @@ enum EncryptionVersion {
 }
 
 enum PluginMeta: Codable {
-    case redPacket(key: String, value: RedPacketPayload)
+    case redPacket(RedPacketPayload)
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
-        case let .redPacket(key, value):
-            try container.encode([key: value])
+        case let .redPacket(value):
+            try container.encode(value)
         }
     }
 
@@ -31,9 +31,15 @@ enum PluginMeta: Codable {
         }
     }
 
+    var key: String {
+        switch self {
+        case .redPacket: return PluginType.luckyDrop.postEncryptionKey
+        }
+    }
+
     var title: String {
         switch self {
-        case let .redPacket(_, value):
+        case let .redPacket(value):
             let totalStr = value.basic?.total ?? "0"
             let token = value.payload?.token
             let senderName = value.senderName
@@ -55,7 +61,7 @@ enum PluginMeta: Codable {
 extension PluginMeta: Identifiable {
     var id: String {
         switch self {
-        case let .redPacket(key, value): return "\(key)\(value.basic?.txid ?? "")"
+        case let .redPacket(value): return "\(value.basic?.txid ?? "")"
         }
     }
 }
@@ -65,15 +71,15 @@ enum StringFormat {
 }
 
 extension Array where Element == PluginMeta {
+    // convert to js format
     func stringfy(format: StringFormat = .json) -> String? {
         switch format {
         case .json:
             let encoder = JSONEncoder()
-            guard let rawData = try? encoder.encode(self) else {
-                return nil
-            }
+            let data = self.reduce(into: [:], { $0[$1.key] = $1 })
 
-            return String(data: rawData, encoding: .utf8)
+            return (try? encoder.encode(data))
+                .flatMap { String(data: $0, encoding: .utf8) }
         }
     }
 }

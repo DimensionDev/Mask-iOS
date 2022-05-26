@@ -67,7 +67,8 @@ struct MessageComposeView: View {
                     }
                 }
             )
-            .opacity(viewModel.encryptButtonEnable ? 0.3 : 1)
+            .disabled(!viewModel.encryptButtonEnable)
+            .opacity(viewModel.encryptButtonEnable ? 1 : 0.3)
         }
         .frame(height: 48)
     }
@@ -158,10 +159,10 @@ struct MessageComposeView: View {
         .foregroundColor(Asset.Colors.Twitter.strong.asColor())
         .padding()
         .frame(height: 40, alignment: .leading)
-        .clipShape(
+        .overlay(
             RoundedRectangle(cornerRadius: 20)
+                .stroke(Asset.Colors.Twitter.line2.asColor(), lineWidth: 0.5)
         )
-        .border(Asset.Colors.Twitter.line2.asColor(), width: 0.5)
     }
 }
 

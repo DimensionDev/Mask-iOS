@@ -32,27 +32,28 @@ final class MessageComposeViewModel: ObservableObject {
     private var userSetting
     
     init() {
-        Publishers.CombineLatest($message, $pluginContents)
-            .map {
-                $0.isEmpty && $1.isEmpty
-            }
+        let messageSignal = $message.map(\.isEmpty)
+            .share()
+
+        messageSignal
+            .map { !$0 }
             .assign(to: \.encryptButtonEnable, on: self)
             .store(in: &disposeBag)
         
-        $message
-            .map(\.isEmpty)
+        messageSignal
             .assign(to: \.showPlaceHolder, on: self)
             .store(in: &disposeBag)
     }
     
     func append(newPluginContent: PluginMeta) {
-        pluginContents.removeAll()
+        // Note: there always be only one plugin of it's kind
+        pluginContents.removeAll(where: { $0.key == newPluginContent.key })
         pluginContents.append(newPluginContent)
     }
     
     func remove(pluginContent: PluginMeta) {
         pluginContents.removeAll {
-            $0.id == pluginContent.id
+            $0.key == pluginContent.key
         }
     }
     
@@ -60,7 +61,7 @@ final class MessageComposeViewModel: ObservableObject {
         switch plugin {
         case .luckyDrop:
             mainCoordinator.present(scene: .luckyDrop(source: .composer, callback: { @MainActor [weak self] payload in
-                let meta = PluginMeta.redPacket(key: PluginType.luckyDrop.postEncryptionKey, value: payload)
+                let meta = PluginMeta.redPacket(payload)
                 self?.pluginContents.append(meta)
                 
                 self?.mainCoordinator.dismissTopViewController()
@@ -73,8 +74,7 @@ final class MessageComposeViewModel: ObservableObject {
 
 extension MessageComposeViewModel {
     func addRedPacketMeta(_ payload: RedPacketPayload) {
-        let key = PluginType.luckyDrop.postEncryptionKey
-        let meta = PluginMeta.redPacket(key: key, value: payload)
+        let meta = PluginMeta.redPacket(payload)
 
         append(newPluginContent: meta)
     }

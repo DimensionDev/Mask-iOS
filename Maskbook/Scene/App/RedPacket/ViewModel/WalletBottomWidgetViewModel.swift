@@ -183,7 +183,7 @@ class WalletBottomWidgetViewModel: ObservableObject {
                     tx: transcation.txHash) else {
                 return
             }
-            let meta = PluginMeta.redPacket(key: PluginType.luckyDrop.postEncryptionKey, value: payload)
+            let meta = PluginMeta.redPacket(payload)
             coordinator.present(scene: .messageCompose(meta), transition: .modal(animated: true))
         } else if personaManager.currentPersona.value == nil {
             // create a persona, then share manually

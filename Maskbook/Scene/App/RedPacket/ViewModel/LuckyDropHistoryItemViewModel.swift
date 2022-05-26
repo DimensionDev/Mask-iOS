@@ -153,7 +153,7 @@ extension LuckyDropHistoryTokenItemViewModel {
     }
     
     func share() {
-        let meta = PluginMeta.redPacket(key: PluginType.luckyDrop.postEncryptionKey, value: luckyDrop)
+        let meta = PluginMeta.redPacket(luckyDrop)
         coordinator.present(scene: .messageCompose(meta), transition: .modal(animated: true))
     }
 }
