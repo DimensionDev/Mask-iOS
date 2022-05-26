@@ -173,7 +173,7 @@ class WalletBottomWidgetViewModel: ObservableObject {
     
     @MainActor
     func shareRedPacket(transcation: PendTransactionModel) {
-        if personaManager.currentProfile.value != nil {
+        if personaManager.currentProfile.value?.linkedPersona != nil {
             // open composer directly
             guard let chainId = transcation.transactionInfo?.token.chainId,
                   let networkId = transcation.transactionInfo?.token.networkId,
@@ -188,7 +188,7 @@ class WalletBottomWidgetViewModel: ObservableObject {
         } else if personaManager.currentPersona.value == nil {
             // create a persona, then share manually
             coordinator.present(scene: .luckyDropCreatePersona(callback: nil), transition: .modal())
-        } else if personaManager.currentProfile.value == nil {
+        } else if personaManager.currentProfile.value?.linkedPersona == nil {
             // create a profile, then share manually
             coordinator.present(scene: .luckyDropCreateProfile, transition: .modal())
         }
