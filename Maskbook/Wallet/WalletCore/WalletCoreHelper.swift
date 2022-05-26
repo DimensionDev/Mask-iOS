@@ -610,8 +610,8 @@ extension WalletCoreHelper {
     /// Encrypt plugin metas and text content
     /// - Parameters:
     ///   - content: text content
-    ///   - aauthorID: user id
-    ///   - authorKeyData: raw data of user public key
+    ///   - authorID: user identifier, combined with social platform and user id, eg: "twitter.com/xxx"
+    ///   - authorKeyData: raw data of user public key, eg: `getRawData` of `JsonWebKey`
     ///   - socialPlatForm: social platform identifier
     ///   - metas: plugin metas
     ///   - version: api version
@@ -635,8 +635,7 @@ extension WalletCoreHelper {
             guard let metaString = metas.stringfy() else {
                 return nil
             }
-            let seperator = "\u{1F9E9}"
-            return "\(metaString)\(seperator)\(content)"
+            return "\(metaString)\u{1F9E9}\(content)"
         }()
 
         guard let encryptingMessage = encryptingMessage else {

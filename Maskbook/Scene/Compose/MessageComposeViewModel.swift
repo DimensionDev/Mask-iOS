@@ -86,8 +86,9 @@ extension MessageComposeViewModel {
             authorKeyData = persona?.publicKey?.getRawData()
         }
         let socialPlatform = personaManager.currentProfile.value?.socialPlatform
-        let authorId = personaManager.currentPersona.value?.identifier
-        
+        let authorId = personaManager.currentProfile.value?.identifier
+            .flatMap { $0.clip(first: "person:".count) }
+
         guard let encrtypedMessage = try? WalletCoreHelper.encryptPost(
             content: message,
             authorID: authorId,
@@ -142,5 +143,20 @@ extension MessageComposeViewModel {
             case .specialContacts: return Asset.Images.Scene.Compose.specialContacts.name
             }
         }
+    }
+}
+
+extension String {
+    func clip(first count: Int) -> String? {
+        let starIndex = self.startIndex
+        let endIndex = self.endIndex
+
+        guard let clipIndex = index(starIndex, offsetBy: count, limitedBy: endIndex) else {
+            return nil
+        }
+
+        let subs = self[clipIndex...]
+
+        return String(subs)
     }
 }

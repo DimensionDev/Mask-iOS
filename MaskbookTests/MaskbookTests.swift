@@ -32,6 +32,20 @@ class MaskbookTests: XCTestCase {
         }
     }
 
+    func testStringClip() {
+        let userId = "twitter.com/ttqeeqqeeq"
+        let testString = "person:twitter.com/ttqeeqqeeq"
+        let result = testString.clip(first: "person:".count)
+        XCTAssertEqual(userId, result)
+
+        XCTAssertFalse(userId == testString.clip(first: (testString + "1").count))
+
+        let empty = ""
+        let emptyTestString = "person:"
+        let emptyResult = emptyTestString.clip(first: "person:".count)
+        XCTAssertEqual(empty, emptyResult)
+    }
+
     func testContentScript() {
         let bundle = Bundle(for: Tab.self)
         let plugin = MaskbookPluginResources()
