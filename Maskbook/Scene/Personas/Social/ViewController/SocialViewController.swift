@@ -141,7 +141,10 @@ extension SocialViewController: UICollectionViewDelegate {
                        profile.identifier != currentIdentifier {
                         await self.cookieSwitcher.saveOldCookieToCurrentProfile()
                     }
-                    self.personaManager.currentPersona.value?.selectedProfile = profileRecord
+                    self.personaManager.currentPersona.value?.identifier
+                        .flatMap({
+                            PersonaRepository.updateSelectedProfile(identifier: $0, profile: profileRecord)
+                        })
                     self.userSetting.currentProfileSocialPlatform = profile.socialPlatform
                     self.dismissMainTabBarController()
                 }
