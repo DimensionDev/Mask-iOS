@@ -21,6 +21,9 @@ final class LuckyDropHistoryTokenItemViewModel: ObservableObject {
     @InjectedProvider(\.walletAssetManager)
     private var walletAssetsManager
     
+    @InjectedProvider(\.mainCoordinator)
+    var coordinator
+    
     @Published var luckyDropState: RedPacketStatus?
     
     @Published var loading: Bool = false
@@ -150,7 +153,8 @@ extension LuckyDropHistoryTokenItemViewModel {
     }
     
     func share() {
-        // TODO: share
+        let meta = PluginMeta.redPacket(key: PluginType.luckyDrop.postEncryptionKey, value: luckyDrop)
+        coordinator.present(scene: .messageCompose(meta), transition: .modal(animated: true))
     }
 }
 

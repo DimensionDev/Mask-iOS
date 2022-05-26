@@ -725,12 +725,12 @@ extension WalletCoreHelper {
     }
     
     class func twitterEncode(content: String) -> String {
-        return "https://mask.io/?PostData_v1=" +
-                       content.replaceFirst(of: "\u{1F3BC}", with: "%20")
+        let encryptContent = content.replaceFirst(of: "\u{1F3BC}", with: "%20")
                       .replaceFirst(of: ":||", with: "%40")
                       .replaceFirst(of: "=", with: "_")
                       .replaceFirst(of: "+", with: "-")
                       .replacingOccurrences(of: "|", with: ".")
+        return "https://mask.io/?PostData_v1=\(encryptContent)"
     }
 }
 // swiftlint:enable file_length

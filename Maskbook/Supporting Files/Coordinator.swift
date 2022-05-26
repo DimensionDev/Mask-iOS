@@ -27,13 +27,17 @@ class Coordinator {
     
     private var window: UIWindow?
     
+    var topViewController: UIViewController? {
+        UIApplication.getTopViewController()
+    }
+    
     enum FromEdge {
         case bottom
     }
 
     enum Transition {
         case root
-        case modal(animated: Bool = true, adaptiveDelegate: UIAdaptivePresentationControllerDelegate? = nil)
+        case modal(wapperNav: Bool = false, animated: Bool = true, adaptiveDelegate: UIAdaptivePresentationControllerDelegate? = nil)
         case detail(animated: Bool = true)
         case panModel(animated: Bool = true)
         case alertController(completion: (() -> Void)? = nil)
@@ -203,9 +207,20 @@ class Coordinator {
             options: TransactionOptions,
             completion: (String?, Error?) -> Void
         )
-        case luckyDropSuccessfully
+        case luckyDropSuccessfully(callback: (@MainActor () -> Void)?)
+        case luckyDropCreatePersona(callback: (@MainActor () -> Void)?)
+        case luckyDropCreateProfile
         case messageCompose(PluginMeta? = nil)
         case debug
+    }
+    
+    func getMaskSocialViewController() -> MaskSocialViewController? {
+        let rootVC = window?.rootViewController
+        if let nav = rootVC as? UINavigationController {
+            return nav.topViewController as? MaskSocialViewController
+        } else {
+            return window?.rootViewController as? MaskSocialViewController
+        }
     }
     
     func setupMainWindow(window: UIWindow) {
@@ -289,10 +304,14 @@ class Coordinator {
                 }()
                 showPanModal(presentVC: presenter, vc: vc)
 
-            case let .modal(animated, delegate):
-                vc.presentationController?.delegate = delegate
-                vc.modalPresentationCapturesStatusBarAppearance = true
-                presentVC.present(vc, animated: animated, completion: completion)
+            case let .modal(wapperNav, animated, delegate):
+                var viewController = vc
+                if wapperNav {
+                    viewController = NavigationController(rootViewController: viewController)
+                }
+                viewController.presentationController?.delegate = delegate
+                viewController.modalPresentationCapturesStatusBarAppearance = true
+                presentVC.present(viewController, animated: animated, completion: completion)
 
             case let .alertController(completion):
                 vc.modalPresentationStyle = .overFullScreen
@@ -800,8 +819,16 @@ extension Coordinator {
                 completion: completion
             )
         
-        case .luckyDropSuccessfully:
-            return SheetViewAdapterController(rootView: LuckyDropSuccessfullyView())
+        case let .luckyDropSuccessfully(callback):
+            let viewModel = LuckyDropSuccessfullyViewModel(callback: callback)
+            return SheetViewAdapterController(rootView: LuckyDropSuccessfullyView(viewModel: viewModel))
+            
+        case let .luckyDropCreatePersona(callback):
+            let viewModel = ShareLuckyDropViewViewModel(callback: callback)
+            return SheetViewAdapterController(rootView: ShareLuckyDropView(viewModel: viewModel))
+            
+        case .luckyDropCreateProfile:
+            return SheetViewAdapterController(rootView: ShareLuckyDropPersonaView())
             
         case let .messageCompose(meta):
             let viewModel = MessageComposeViewModel()
@@ -837,6 +864,16 @@ enum CoordinatorInjectKey: InjectValueKey {
 extension InjectValues {
     var mainCoordinator: Coordinator {
         Self[CoordinatorInjectKey.self]
+    }
+}
+
+class FullScreenAdaptive: NSObject, UIAdaptivePresentationControllerDelegate {
+    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {}
+    
+    func adaptivePresentationStyle(
+        for controller: UIPresentationController,
+        traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+            .overFullScreen
     }
 }
 // swiftlint:enable file_length

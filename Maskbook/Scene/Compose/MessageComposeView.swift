@@ -56,7 +56,9 @@ struct MessageComposeView: View {
                 .foregroundColor(Asset.Colors.Twitter.strong.asColor())
             Spacer()
             Button(
-                action: {},
+                action: {
+                    viewModel.encryptContent()
+                },
                 label: {
                     HStack {
                         Text(L10n.Scene.MessageCompose.encrypt)

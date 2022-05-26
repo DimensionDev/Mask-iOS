@@ -114,6 +114,17 @@ extension MaskSocialViewController {
             navigationItem.title = platform.shortName
         }
     }
+    
+    func openComposer(message: String) {
+        guard personaManager.currentProfile.value?.socialPlatform == .twitter,
+            let tabId = tabId,
+            let tab = tabService.tabs[tabId]?.tab,
+            let url = URL(string: "https://twitter.com/intent/tweet?text=\(message)") else {
+            return
+        }
+        let request = URLRequest(url: url)
+        tab.webView.load(request)
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

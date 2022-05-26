@@ -9,6 +9,12 @@
 import SwiftUI
 
 struct ShareLuckyDropPersonaView: View {
+    @InjectedProvider(\.mainCoordinator)
+    var coordinator
+    
+    @InjectedProvider(\.personaManager)
+    private var personaManager
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(L10n.Plugins.Luckydrop.shareTitle)
@@ -22,13 +28,34 @@ struct ShareLuckyDropPersonaView: View {
             Spacer().frame(height: 20)
             HStack(spacing: 0) {
                 SocialPlatformView(platform: .twitter)
+                    .onTapGesture {
+                        didClick(platform: .twitter)
+                    }
                 Spacer()
-                SocialPlatformView(platform: .twitter)
+                SocialPlatformView(platform: .facebook)
+                    .onTapGesture {
+                        didClick(platform: .facebook)
+                    }
                 Spacer()
-                SocialPlatformView(platform: .twitter)
+                SocialPlatformView(platform: .instagram)
+                    .onTapGesture {
+                        didClick(platform: .instagram)
+                    }
             }
         }
         .padding(.horizontal, 20)
+    }
+    
+    func didClick(platform: ProfileSocialPlatform) {
+        guard let persona = personaManager.currentPersona.value else {
+            return
+        }
+        coordinator.present(
+            scene: .maskConnectingSocial(
+                socialPlatform: platform, personaIdentifier: persona.nonOptionalIdentifier
+            ),
+            transition: .modal(wapperNav: true, animated: true)
+        )
     }
 }
 
@@ -40,13 +67,12 @@ struct SocialPlatformView: View {
             platform.iconImage
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 48)
+                .frame(width: 64)
             Text(platform.shortName)
                 .font(FontStyles.mh7.font)
                 .foregroundColor(Asset.Colors.Text.dark.asColor())
         }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 12)
+        .frame(width: 100, height: 100, alignment: .center)
     }
 }
 

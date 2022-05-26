@@ -365,8 +365,42 @@ final class LuckyDropViewModel: ObservableObject {
     }
     
     // MARK: - Private method
+    private func saveSafely(txHash: String, password: String) {
+        let basic = RedPacket.Basic(
+            contractAddress: "",
+            rpid: "",
+            txid: txHash,
+            password: password,
+            shares: 0,
+            isRandom: true,
+            total: "",
+            creationTime: 0,
+            duration: 0,
+            blockNumber: 0
+        )
+
+        let packetPayload = RedPacket.RedPacketPayload.Payload.init(
+            sender: .init(address: "", name: "", message: ""),
+            contractVersion: 4,
+            network: "",
+            tokenType: nil,
+            token: nil,
+            tokenAddress: nil,
+            claimers: [],
+            totalRemaining: nil
+        )
+        let payload = RedPacketPayload.init(basic: basic, payload: packetPayload)
+        PluginStorageRepository.save(
+            chain: settings.network,
+            txHash: txHash,
+            payload: payload
+        )
+    }
     private func saveRedPacket(txHash: String, password: String, token: FungibleToken?) {
         do {
+            // Make sure you don't lose password.
+            saveSafely(txHash: txHash, password: password)
+            
             guard let w3Provider = settings.network.w3Provider,
                     let address = settings.defaultAccountAddress,
                     let token = token,
@@ -406,7 +440,6 @@ final class LuckyDropViewModel: ObservableObject {
             )
             let payload = RedPacketPayload.init(basic: basic, payload: packetPayload)
             PluginStorageRepository.save(
-                address: address,
                 chain: settings.network,
                 txHash: txHash,
                 payload: payload

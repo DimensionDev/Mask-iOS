@@ -60,7 +60,7 @@ extension LuckyDropHistoryViewModel {
         let passwords: [String: String] = await Task { @MainActor in
             let passwords: [String: String] = payloads.reduce(into: [:]) {
                 if let txid = $1.basic?.txid, !txid.isEmpty,
-                   let record = PluginStorageRepository.queryRecord(address: walletAddress, chain: network, tx: txid) {
+                   let record = PluginStorageRepository.queryRecord(chain: network, tx: txid) {
                     $0[txid] = record.basic?.password ?? ""
                 }
             }
