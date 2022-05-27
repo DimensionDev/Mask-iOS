@@ -4,6 +4,8 @@ import BigInt
 import web3swift
 
 extension LuckyDropHistoryViewModel {
+    typealias SuccessEvent = HappyRedPacketV4.SuccessEvent
+    
     struct TokenPayload {
         let checkAvailability: HappyRedPacketV4.CheckAvailabilityResult?
         let payload: RedPacketPayload
@@ -68,21 +70,6 @@ extension LuckyDropHistoryViewModel {
         }.value
 
         let ethAddress = EthereumAddress(contractAddress)
-
-        struct SuccessEvent {
-            let id: String
-            let creation_time: BigUInt
-
-            init?(json: [String: Any]) {
-                guard let data = json["id"] as? Data,
-                      let time = json["creation_time"] as? BigUInt else {
-                    return nil
-                }
-
-                self.id = data.toHexString().addHexPrefix()
-                self.creation_time = time
-            }
-        }
         let builder  = FungibleTokenBuilder()
         
         return try await withThrowingTaskGroup(
