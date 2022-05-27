@@ -679,6 +679,10 @@ final class LuckyDropViewModel: ObservableObject {
             self.updateButton(state: .noAmount)
             return
         }
+        guard amount.doubleValue > 0 else {
+            self.updateButton(state: .noAmount)
+            return
+        }
         
         // insufficientBalance
         let tokenAmount = token.quantityNumber
