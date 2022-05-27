@@ -57,6 +57,9 @@ final class MessageComposeViewModel: ObservableObject {
         }
     }
     
+    func dismiss() {
+        mainCoordinator.topViewController?.dismiss(animated: true)
+    }
     func pluginAddClicked(plugin: PluginType) {
         switch plugin {
         case .luckyDrop:

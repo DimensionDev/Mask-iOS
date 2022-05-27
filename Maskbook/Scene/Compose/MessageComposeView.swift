@@ -3,8 +3,6 @@ import SwiftUI
 struct MessageComposeView: View {
     @ObservedObject
     private var viewModel: MessageComposeViewModel
-
-    @Environment(\.presentationMode) var presentationMode
     
     init(viewModel: MessageComposeViewModel) {
         self.viewModel = viewModel
@@ -39,7 +37,7 @@ struct MessageComposeView: View {
         HStack {
             Button(
                 action: {
-                    presentationMode.wrappedValue.dismiss()
+                    viewModel.dismiss()
                 },
                 label: {
                     HStack {
