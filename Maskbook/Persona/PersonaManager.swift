@@ -42,6 +42,11 @@ class PersonaManager {
     let currentProfile = CurrentValueSubject<ProfileRecord?, Never>(nil)
     let currentProfiles = CurrentValueSubject<[ProfileRecord], Never>([])
     
+    var currentTwitterProfiles: [ProfileRecord] {
+        currentProfiles.value.filter {
+            $0.socialPlatform == .twitter
+        }
+    }
     // temporary store a persona name here
     var temporaryPersonaName: String?
     
@@ -98,6 +103,12 @@ class PersonaManager {
         } else {
             settings.currentPesonaIdentifier = personaRecordsSubject.value.first?.identifier
         }
+    }
+    
+    func setProfileSelected(profile: ProfileRecord) {
+        guard let identifier = currentPersona.value?.identifier else { return }
+        PersonaRepository.updateSelectedProfile(identifier: identifier, profile: profile)
+        settings.currentProfileSocialPlatform = profile.socialPlatform
     }
     
     private static func setAProfileAsSelected(personaIdentifier: String, profiles: [ProfileRecord]) {

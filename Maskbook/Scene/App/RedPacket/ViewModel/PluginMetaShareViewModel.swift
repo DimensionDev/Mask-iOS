@@ -14,11 +14,11 @@ class PluginMetaShareViewModel {
 
     @InjectedProvider(\.personaManager)
     private var personaManager
+    
+    var shareMeta: PluginMeta?
 
     @MainActor
     func shareRedPacket(transcation: PendTransactionModel) {
-        guard showGuideWhenNoPersonaOrProfile() else { return }
-
         // open composer directly
         guard let chainId = transcation.transactionInfo?.token.chainId,
               let networkId = transcation.transactionInfo?.token.networkId,
@@ -29,29 +29,56 @@ class PluginMetaShareViewModel {
         else {
             return
         }
+        
         let meta = PluginMeta.redPacket(payload)
+        self.shareMeta = meta
+        guard showGuideWhenNoPersonaOrProfile() else { return }
+
         coordinator.present(scene: .messageCompose(meta), transition: .modal(animated: true))
     }
     
     @MainActor
     func shareRedPacket(payload: RedPacketPayload) {
-        guard showGuideWhenNoPersonaOrProfile() else { return }
-        
         let meta = PluginMeta.redPacket(payload)
+        self.shareMeta = meta
+        guard showGuideWhenNoPersonaOrProfile() else { return }
         coordinator.present(scene: .messageCompose(meta), transition: .modal(animated: true))
+    }
+    
+    private func reShare() {
+        if let shareMeta = shareMeta {
+            coordinator.topViewController?.dismiss(animated: true, completion: {
+                self.coordinator.present(scene: .messageCompose(shareMeta), transition: .modal(animated: true))
+            })
+        }
     }
 
     private func showGuideWhenNoPersonaOrProfile() -> Bool {
-        if personaManager.currentPersona.value == nil {
+        guard let persona = personaManager.currentPersona.value else {
             // create a persona, then share manually
             coordinator.present(scene: .luckyDropCreatePersona(callback: nil), transition: .modal())
             return false
         }
-        if personaManager.currentProfile.value?.linkedPersona == nil {
+        
+        let currentTwitterProfiles = personaManager.currentTwitterProfiles
+        if currentTwitterProfiles.isEmpty {
             // create a profile, then share manually
-            coordinator.present(scene: .luckyDropCreateProfile, transition: .modal())
+            coordinator.present(
+                scene: .maskConnectingSocial(
+                    socialPlatform: .twitter, personaIdentifier: persona.nonOptionalIdentifier
+                ),
+                transition: .modal(wapperNav: true, animated: true)
+            )
+            return false
+        } else if currentTwitterProfiles.count == 1 {
+            // to share to twitter ,force select the only twitter profile
+            personaManager.setProfileSelected(profile: currentTwitterProfiles[0])
+            return true
+        } else {
+            coordinator.present(scene: .luckDropSelectProfile(callback: {[weak self] in
+                self?.reShare()
+            }), transition: .modal())
             return false
         }
-        return true
     }
 }

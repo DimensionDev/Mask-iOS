@@ -18,9 +18,6 @@ class SocialViewController: BaseViewController {
     @InjectedProvider(\.personaManager)
     private var personaManager
     
-    @InjectedProvider(\.userDefaultSettings)
-    var userSetting
-    
     @InjectedProvider(\.cookieSwitcher)
     private var cookieSwitcher
 
@@ -141,11 +138,7 @@ extension SocialViewController: UICollectionViewDelegate {
                        profile.identifier != currentIdentifier {
                         await self.cookieSwitcher.saveOldCookieToCurrentProfile()
                     }
-                    self.personaManager.currentPersona.value?.identifier
-                        .flatMap({
-                            PersonaRepository.updateSelectedProfile(identifier: $0, profile: profileRecord)
-                        })
-                    self.userSetting.currentProfileSocialPlatform = profile.socialPlatform
+                    self.personaManager.setProfileSelected(profile:profileRecord)
                     self.dismissMainTabBarController()
                 }
             }

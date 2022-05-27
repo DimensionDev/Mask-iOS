@@ -448,10 +448,7 @@ extension MaskConnectingSocialViewController {
         guard let navi = navigationController else { return }
         if navi.viewControllers[0] == self {
             // presented
-            let presentingVC = presentingViewController
-            dismiss(animated: true) {
-                presentingVC?.dismiss(animated: true)
-            }
+            dismiss(animated: true)
         } else {
             // pushed
             navi.popViewController(animated: true)

@@ -7,8 +7,16 @@
 //
 
 import SwiftUI
+import CoreDataStack
+import Kingfisher
 
 struct SelectSocialAccountView: View {
+    
+    @InjectedProvider(\.personaManager)
+    private var personaManager
+    
+    var viewModel: ShareLuckyDropSelectProfileViewModel
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(L10n.Plugins.Luckydrop.selectSocialTitle)
@@ -20,12 +28,16 @@ struct SelectSocialAccountView: View {
                 .font(FontStyles.rh5.font)
                 .foregroundColor(Asset.Colors.Text.normal.asColor())
             Spacer().frame(height: 20)
-            HStack(spacing: 0) {
-                SocialAccountView()
-                Spacer()
-                SocialAccountView()
-                Spacer()
-                SocialAccountView()
+            
+            ScrollView {
+                HStack(spacing: 16) {
+                    ForEach(personaManager.currentTwitterProfiles) { profile in
+                        SocialAccountView(profile: profile)
+                            .onTapGesture {
+                                viewModel.selectProfile(profile: profile)
+                            }
+                    }
+                }
             }
         }
         .padding(.horizontal, 20)
@@ -33,13 +45,23 @@ struct SelectSocialAccountView: View {
 }
 
 struct SocialAccountView: View {
+    
+    var profile: ProfileRecord
     var body: some View {
-        VStack(spacing: 6) {
-            Asset.Icon.Logo.largeMask.asImage().resizable()
-                .aspectRatio(contentMode: .fit)
+        VStack(alignment: .center, spacing: 6) {
+            KFImage.url(
+                URL(string: profile.avatar ?? ""),
+                cacheKey: profile.avatar ?? ""
+            )
+            .placeholder({
+                Asset.Icon.Logo.largeMask.asImage()
+            })
+            .resizable()
+            .aspectRatio(contentMode: .fit)
                 .frame(width: 64)
+                .clipShape(Circle())
                 .overlay(
-                    Asset.Images.Scene.WalletList.Coins.ethSelected.asImage()
+                    Image(ProfileSocialPlatform.twitter.iconName)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 20)
@@ -49,16 +71,18 @@ struct SocialAccountView: View {
                         )
                         .offset(x: 32, y: 22)
                 )
-            Text("JayJay").font(FontStyles.mh7.font)
+            Text(profile.nickname ?? profile.socialID).font(FontStyles.mh7.font)
+                .lineLimit(1)
                 .foregroundColor(Asset.Colors.Text.dark.asColor())
         }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 12)
+        .frame(width: (UIScreen.main.bounds.size.width - 40 - 32)/3, height: 115)
     }
+    
+
 }
 
 struct SelectSocialAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        SelectSocialAccountView()
+        SelectSocialAccountView(viewModel: ShareLuckyDropSelectProfileViewModel(callback: nil))
     }
 }
