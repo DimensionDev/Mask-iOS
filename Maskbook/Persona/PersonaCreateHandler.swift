@@ -58,15 +58,23 @@ class PersonaCreateHandler {
                                                   imageType: .success,
                                                   confirmButtonClicked: {
                                                       _ in
-                                                      if self.coordinator.topViewController is IdentityCreateViewController {
-                                                          self.coordinator.topViewController?.dismiss(animated: true)
-                                                      }
+                                                      self.dismissWhenIdentityCreateBeingPresented()
                                                   },
                                                   cancelButtonClicked: nil)
             let message = self.titleAttributeString(name: name)
             alertController.setAttributeMessage(attrMessage: message)
             self.coordinator.present(scene: .alertController(alertController: alertController),
                                      transition: .alertController(completion: nil))
+        }
+    }
+
+    func dismissWhenIdentityCreateBeingPresented() {
+        if coordinator.topViewController is IdentityCreateViewController {
+            let identityCreateVC = coordinator.topViewController
+            let presenting = identityCreateVC?.presentingViewController
+            identityCreateVC?.dismiss(animated: true, completion: {
+                presenting?.dismiss(animated: true)
+            })
         }
     }
 

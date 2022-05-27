@@ -17,7 +17,7 @@ class PluginMetaShareViewModel {
 
     @MainActor
     func shareRedPacket(transcation: PendTransactionModel) {
-        guard hasPersonaOrProfileToShare() else { return }
+        guard showGuideWhenNoPersonaOrProfile() else { return }
 
         // open composer directly
         guard let chainId = transcation.transactionInfo?.token.chainId,
@@ -35,13 +35,13 @@ class PluginMetaShareViewModel {
     
     @MainActor
     func shareRedPacket(payload: RedPacketPayload) {
-        guard hasPersonaOrProfileToShare() else { return }
+        guard showGuideWhenNoPersonaOrProfile() else { return }
         
         let meta = PluginMeta.redPacket(payload)
         coordinator.present(scene: .messageCompose(meta), transition: .modal(animated: true))
     }
 
-    private func hasPersonaOrProfileToShare() -> Bool {
+    private func showGuideWhenNoPersonaOrProfile() -> Bool {
         if personaManager.currentPersona.value == nil {
             // create a persona, then share manually
             coordinator.present(scene: .luckyDropCreatePersona(callback: nil), transition: .modal())
