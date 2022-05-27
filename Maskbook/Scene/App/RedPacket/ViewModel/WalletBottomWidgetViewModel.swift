@@ -193,7 +193,7 @@ class WalletBottomWidgetViewModel: ObservableObject {
             tx: transcation.txHash) else {
             return
         }
-        payload.basic?.rpid = eventParam.id
+        payload.basic?.rpid = "0x\(eventParam.id)"
         payload.basic?.creationTime = eventParam.creation_time.asDouble() ?? 0
         
         let checkAvailability = await ABI.happyRedPacketV4.checkAvailability(redPackageId: eventParam.id)

@@ -910,10 +910,12 @@
   "plugins": {
     "luckyDrop": {
       "title": "Lucky Drop",
-      "twitte-or-facebook-template": "This tweet is encrypted with #mask_io (@%s). 📪🔑\n\nInstall %s to decrypt it.",
       "twitter_account": "realMaskNetwork",
       "facebook_account": "masknetwork",
+      "twitter-or-facebook-template": "This tweet is encrypted with #mask_io (@%s). 📪🔑\n\nInstall %s to decrypt it.",
       "social-media-template": "This tweet is encrypted with #mask_io (@realMaskNetwork). 📪🔑\n\nInstall %s to decrypt it.",
+      "twitter-or-facebook-redpacket-template": "Hi, claim this lucky drop with #mask_io @%s %s",
+      "social-media-redpacket-template": "Hi, claim this lucky drop with #mask_io %s",
       "plugin_red_packet_best_wishes": "Best Wishes!",
       "buttons": {
         "risk-warning": "Confirm Risk Warning",
