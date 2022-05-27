@@ -79,7 +79,7 @@ extension LuckyDropHistoryViewModel {
                     return nil
                 }
 
-                self.id = data.toHexString()
+                self.id = data.toHexString().addHexPrefix()
                 self.creation_time = time
             }
         }
@@ -122,7 +122,7 @@ extension LuckyDropHistoryViewModel {
                             return nil
                         }
 
-                        payload.basic?.rpid = "0x\(eventParam.id)"
+                        payload.basic?.rpid = eventParam.id
                         payload.basic?.creationTime = eventParam.creation_time.asDouble() ?? 0
 
                         try Task.checkCancellation()
