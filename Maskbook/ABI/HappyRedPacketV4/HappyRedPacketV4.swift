@@ -229,7 +229,7 @@ extension HappyRedPacketV4 {
                   let time = json["creation_time"] as? BigUInt else {
                 return nil
             }
-            self.id = data.toHexString()
+            self.id = data.toHexString().addHexPrefix()
             self.creation_time = time
         }
     }

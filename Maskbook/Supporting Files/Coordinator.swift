@@ -210,6 +210,7 @@ class Coordinator {
         case luckyDropSuccessfully(callback: (@MainActor () -> Void)?)
         case luckyDropCreatePersona(callback: (@MainActor () -> Void)?)
         case luckyDropCreateProfile
+        case luckDropSelectProfile(callback: (@MainActor () -> Void)?)
         case messageCompose(PluginMeta? = nil)
         case composeSelectContact(viewModel: SelectContactViewModel)
         case debug
@@ -829,7 +830,11 @@ extension Coordinator {
             return SheetViewAdapterController(rootView: ShareLuckyDropView(viewModel: viewModel))
             
         case .luckyDropCreateProfile:
-            return SheetViewAdapterController(rootView: ShareLuckyDropPersonaView())
+            return SheetViewAdapterController(rootView: ShareLuckyDropConnectPersonaView())
+            
+        case let .luckDropSelectProfile(callback):
+            let viewModel = ShareLuckyDropSelectProfileViewModel(callback: callback)
+            return SheetViewAdapterController(rootView: SelectSocialAccountView(viewModel: viewModel))
             
         case let .messageCompose(meta):
             let viewModel = MessageComposeViewModel()

@@ -14,6 +14,9 @@ final class LuckyDropHistoryTokenItemViewModel: ObservableObject {
         formatter.locale = Locale.current
         return formatter
     }()
+    
+    private let pluginMetaShareViewModel = PluginMetaShareViewModel()
+
 
     @InjectedProvider(\.userDefaultSettings)
     private var settings
@@ -152,9 +155,9 @@ extension LuckyDropHistoryTokenItemViewModel {
         }
     }
     
+    @MainActor
     func share() {
-        let meta = PluginMeta.redPacket(luckyDrop)
-        coordinator.present(scene: .messageCompose(meta), transition: .modal(animated: true))
+        pluginMetaShareViewModel.shareRedPacket(payload: luckyDrop)
     }
 }
 

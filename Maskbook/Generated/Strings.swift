@@ -740,6 +740,10 @@ enum L10n {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Share-Title")
       }
       /// Hi, claim this lucky drop with #mask_io %@
+      static func socialMediaRedpacketTemplate(_ p1: String) -> String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Social-Media-Redpacket-Template", p1)
+      }
+      /// This tweet is encrypted with #mask_io (@realMaskNetwork). 📪🔑\n\nInstall %@ to decrypt it.
       static func socialMediaTemplate(_ p1: String) -> String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Social-Media-Template", p1)
       }
@@ -760,8 +764,12 @@ enum L10n {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Transaction-Fee")
       }
       /// Hi, claim this lucky drop with #mask_io @%@ %@
-      static func twitteOrFacebookTemplate(_ p1: String, _ p2: String) -> String {
-        return L10n.tr("Localizable", "Plugins.Luckydrop.Twitte-Or-Facebook-Template", p1, p2)
+      static func twitterOrFacebookRedpacketTemplate(_ p1: String, _ p2: String) -> String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Twitter-Or-Facebook-Redpacket-Template", p1, p2)
+      }
+      /// This tweet is encrypted with #mask_io (@%@). 📪🔑\n\nInstall %@ to decrypt it.
+      static func twitterOrFacebookTemplate(_ p1: String, _ p2: String) -> String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Twitter-Or-Facebook-Template", p1, p2)
       }
       /// realMaskNetwork
       static var twitterAccount: String {

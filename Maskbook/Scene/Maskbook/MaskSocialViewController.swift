@@ -376,9 +376,7 @@ extension MaskSocialViewController {
     @objc
     override func prepareLeftNavigationItems() {
         navigationItem.leftBarButtonItems = []
-#if DEBUG
         setTemporaryVisableDebug()
-#endif
     }
     
     private func setTemporaryVisableDebug() {

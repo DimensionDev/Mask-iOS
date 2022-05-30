@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ShareLuckyDropPersonaView: View {
+struct ShareLuckyDropConnectPersonaView: View {
     @InjectedProvider(\.mainCoordinator)
     var coordinator
     
@@ -78,6 +78,6 @@ struct SocialPlatformView: View {
 
 struct ShareLuckyDropPersonaView_Previews: PreviewProvider {
     static var previews: some View {
-        ShareLuckyDropPersonaView()
+        ShareLuckyDropConnectPersonaView()
     }
 }

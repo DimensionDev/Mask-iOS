@@ -71,7 +71,6 @@ enum StringFormat {
 }
 
 extension Array where Element == PluginMeta {
-    /// convert to js format
     /// the results string will be in this format:
     /// """
     ///  {
@@ -79,6 +78,7 @@ extension Array where Element == PluginMeta {
     ///    "com.maskbook.file_service:2": { JSONObject ... }
     ///  }
     /// """
+    /// convert the array to dictionary and serilize into json string
     func stringfy(format: StringFormat = .json) -> String? {
         switch format {
         case .json:

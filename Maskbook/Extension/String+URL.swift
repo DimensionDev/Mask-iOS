@@ -10,8 +10,8 @@ import Foundation
 
 extension String {
     func urlEncode() -> String? {
-        let encodeUrlString = self.addingPercentEncoding(withAllowedCharacters:
-            .urlQueryAllowed)
+        let characterset = NSCharacterSet(charactersIn: " !*'();:@&=+$,/?%#[]\n").inverted
+        let encodeUrlString = self.addingPercentEncoding(withAllowedCharacters: characterset)
         return encodeUrlString
     }
      

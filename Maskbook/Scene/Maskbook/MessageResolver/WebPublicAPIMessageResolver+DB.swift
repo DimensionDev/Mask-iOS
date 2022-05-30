@@ -307,6 +307,10 @@ extension WebPublicApiMessageResolver {
             return false
         }
         ProfileRepository.removeProfile(identifier: identifier)
+        if personaManager.currentProfile.value?.identifier == identifier {
+            personaManager.currentProfile.value = nil
+            personaManager.currentPersona.value?.selectedProfile = nil
+        }
         sendResponseToWebView(response: true, id: request.id)
         return true
     }

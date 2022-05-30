@@ -18,7 +18,7 @@ class SelectAccountViewController: BaseViewController {
     typealias Item = ViewModel.WalletsItem
     
     let tableViewTopConstant = 154.0
-    private lazy var tableViewBottomConstant = (54 + safeAreaInsetsBottom)
+    private lazy var tableViewBottomConstant = 54.0
     let tableViewCellHeight = 85.0
     
     let safeAreaInsetsBottom: CGFloat = {
@@ -306,7 +306,7 @@ extension SelectAccountViewController: PanModalPresentable {
     }
     
     var longFormHeight: PanModalHeight {
-        let bottom = viewModel.type == .editEnable ? tableViewBottomConstant : 0
+        let bottom = (viewModel.type == .editEnable ? tableViewBottomConstant : 0) + safeAreaInsetsBottom
         let content = tableViewTopConstant + bottom + tableViewCellHeight * Double(viewModel.accountListSubject.value.count)
         return .contentHeight(content - 32)
     }

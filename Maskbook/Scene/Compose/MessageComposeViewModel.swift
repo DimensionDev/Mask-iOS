@@ -57,6 +57,9 @@ final class MessageComposeViewModel: ObservableObject {
         }
     }
     
+    func dismiss() {
+        mainCoordinator.topViewController?.dismiss(animated: true)
+    }
     func pluginAddClicked(plugin: PluginType) {
         switch plugin {
         case .luckyDrop:
@@ -86,8 +89,9 @@ extension MessageComposeViewModel {
             authorKeyData = persona?.publicKey?.getRawData()
         }
         let socialPlatform = personaManager.currentProfile.value?.socialPlatform
-        let authorId = personaManager.currentPersona.value?.identifier
-        
+        let authorId = personaManager.currentProfile.value?.identifier
+            .flatMap { $0.clip(first: "person:".count) }
+
         guard let encrtypedMessage = try? WalletCoreHelper.encryptPost(
             content: message,
             authorID: authorId,
@@ -98,25 +102,40 @@ extension MessageComposeViewModel {
             return
         }
 
-        let finalPostText: String = {
-            switch socialPlatform {
-            case .twitter:
-                return L10n.Plugins.Luckydrop
-                    .twitteOrFacebookTemplate(L10n.Plugins.Luckydrop.twitterAccount, encrtypedMessage)
-
-            case .facebook:
-                return L10n.Plugins.Luckydrop
-                    .twitteOrFacebookTemplate(L10n.Plugins.Luckydrop.facebookAccount, encrtypedMessage)
-
-            default: return L10n.Plugins.Luckydrop.socialMediaTemplate(encrtypedMessage)
-            }
-        }()
-
+        let finalPostText = getShareText(encrtypedMessage: encrtypedMessage)
+        
+        log.debug("\(finalPostText)", source: "share")
         // past final text to twitter compose
         if socialPlatform == .twitter {
             let maskSocialViewController = mainCoordinator.getMaskSocialViewController()
             maskSocialViewController?.openComposer(message: finalPostText.urlEncode() ?? "")
-            mainCoordinator.getMaskSocialViewController()?.dismiss(animated: true)
+            maskSocialViewController?.dismiss(animated: true)
+        }
+    }
+    
+    private func getShareText(encrtypedMessage: String) -> String {
+        let socialPlatform = personaManager.currentProfile.value?.socialPlatform
+        let twitterAccount = L10n.Plugins.Luckydrop.twitterAccount
+        let facebookAccount = L10n.Plugins.Luckydrop.twitterAccount
+        guard pluginContents.first(where: { meta in
+            if case .redPacket = meta {
+                return true
+            } else {
+                return false
+            }
+        }) != nil else {
+            // only encrypt message
+            switch socialPlatform {
+            case .twitter: return L10n.Plugins.Luckydrop.twitterOrFacebookTemplate(twitterAccount, encrtypedMessage)
+            case .facebook: return L10n.Plugins.Luckydrop.twitterOrFacebookTemplate(facebookAccount, encrtypedMessage)
+            default: return L10n.Plugins.Luckydrop.socialMediaTemplate(encrtypedMessage)
+            }
+        }
+        
+        switch socialPlatform {
+        case .twitter: return L10n.Plugins.Luckydrop.twitterOrFacebookRedpacketTemplate(twitterAccount, encrtypedMessage)
+        case .facebook: return L10n.Plugins.Luckydrop.twitterOrFacebookRedpacketTemplate(facebookAccount, encrtypedMessage)
+        default: return L10n.Plugins.Luckydrop.socialMediaRedpacketTemplate(encrtypedMessage)
         }
     }
 }
@@ -142,5 +161,20 @@ extension MessageComposeViewModel {
             case .specialContacts: return Asset.Images.Scene.Compose.specialContacts.name
             }
         }
+    }
+}
+
+extension String {
+    func clip(first count: Int) -> String? {
+        let starIndex = self.startIndex
+        let endIndex = self.endIndex
+
+        guard let clipIndex = index(starIndex, offsetBy: count, limitedBy: endIndex) else {
+            return nil
+        }
+
+        let subs = self[clipIndex...]
+
+        return String(subs)
     }
 }
