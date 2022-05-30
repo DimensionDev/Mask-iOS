@@ -327,8 +327,8 @@ final class LuckyDropViewModel: ObservableObject {
             return
         }
         
-        let senderName = personaManager.currentProfile.value?.nickname
-            ?? personaManager.currentPersona.value?.identifier
+        let senderName = personaManager.currentProfile.value?.userName
+            ?? personaManager.currentPersona.value?.nickname
             ?? "Unknown User"
         
         let param = HappyRedPacketV4.CreateRedPacketInput(
