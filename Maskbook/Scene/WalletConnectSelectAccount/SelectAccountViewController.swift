@@ -191,7 +191,7 @@ class SelectAccountViewController: BaseViewController {
     }
     
     private func bindViewModel() {
-        viewModel.accountListSubject
+        viewModel.accountListOfSelectedChainSubject
             .sink { [weak self] items in
                 guard let self = self else { return }
                 var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
@@ -277,12 +277,13 @@ class SelectAccountViewController: BaseViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
-        if viewModel.isShowAddWallet() {
+        if viewModel.isShowAddWallet {
             tableView.bottomAnchor.constraint(equalTo: addWalletView.topAnchor).isActive = true
         } else {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         }
-        addWalletView.isHidden = !viewModel.isShowAddWallet()
+        addWalletView.isHidden = !viewModel.isShowAddWallet
+        editButton.isHidden = !viewModel.isEditEnable
     }
     
     override func viewDidLayoutSubviews() {
@@ -306,8 +307,8 @@ extension SelectAccountViewController: PanModalPresentable {
     }
     
     var longFormHeight: PanModalHeight {
-        let bottom = (viewModel.type == .editEnable ? tableViewBottomConstant : 0) + safeAreaInsetsBottom
-        let content = tableViewTopConstant + bottom + tableViewCellHeight * Double(viewModel.accountListSubject.value.count)
+        let bottom = (viewModel.isShowAddWallet ? tableViewBottomConstant : 0) + safeAreaInsetsBottom
+        let content = tableViewTopConstant + bottom + tableViewCellHeight *  Double(viewModel.maxAccountsNum)
         return .contentHeight(content - 32)
     }
 }

@@ -108,7 +108,7 @@ struct MessageComposeView: View {
     private func pluginsToolBar() -> some View {
         HStack {
             pluginToolItem(plugin: .luckyDrop)
-            pluginToolItem(plugin: .fileService)
+//            pluginToolItem(plugin: .fileService)
         }
     }
 
