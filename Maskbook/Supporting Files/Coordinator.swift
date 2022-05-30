@@ -843,7 +843,7 @@ extension Coordinator {
             if let pluginMeta = meta {
                 viewModel.append(newPluginContent: pluginMeta)
             }
-            return MaskHostViewController(rootView: MessageComposeView(viewModel: viewModel).withResponderChainForCurrentWindow())
+            return MaskHostViewController(rootView: MessageComposeView(viewModel: viewModel))
 
         case .debug:
             return UIHostingController(rootView: DebugView())

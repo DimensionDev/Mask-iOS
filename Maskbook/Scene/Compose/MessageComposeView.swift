@@ -1,12 +1,9 @@
 import SwiftUI
-import ResponderChain
+import Introspect
 
 struct MessageComposeView: View {
     @ObservedObject
     private var viewModel: MessageComposeViewModel
-
-    @EnvironmentObject
-    private var chain: ResponderChain
     
     init(viewModel: MessageComposeViewModel) {
         self.viewModel = viewModel
@@ -39,11 +36,6 @@ struct MessageComposeView: View {
                 .ignoresSafeArea()
         )
         .navigationBarHidden(true)
-        .onAppear {
-            DispatchQueue.main.async {
-                chain.firstResponder = Tag.editor
-            }
-        }
     }
 
     private func navigationBarView() -> some View {
@@ -104,7 +96,11 @@ struct MessageComposeView: View {
                     .allowsHitTesting(false),
                 alignment: .topLeading
             )
-            .responderTag(Tag.editor)
+            .introspect(selector: TargetViewSelector.siblingContaining) { (view: UITextView) in
+                if !view.isFirstResponder {
+                    view.becomeFirstResponder()
+                }
+            }
     }
 
     private func pluginsContainer() -> some View {
