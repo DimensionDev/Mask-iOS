@@ -31,3 +31,12 @@ extension ProfileRecord {
 extension ProfileRecord : Identifiable {
 
 }
+
+extension ProfileRecord {
+    public var userName: String? {
+        guard let substring = identifier?.split(separator: "/").last as? Substring else {
+            return nil
+        }
+        return String(substring)
+    }
+}

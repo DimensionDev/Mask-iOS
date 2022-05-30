@@ -262,10 +262,10 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
     var fullEvmName: String? {
         switch rawValue {
         case .eth: return "Ethereum Mainnet"
-        case .bsc: return "Binance Smart Chain Mainnet"
+        case .bsc: return "BNB Chain Mainnet"
         case .polygon: return "Matic Mainnet"
         case .arbitrum: return "Arbitrum One"
-        case .xdai: return "xDai Chain"
+        case .xdai: return "Gnosis Chain"
         case .optimism: return "Optimistic Ethereum"
         case .rinkeby: return "Ethereum Testnet Rinkeby"
         default: return nil
