@@ -215,13 +215,12 @@ extension SelectAccountViewModel {
     private func generateWalletAccountItems(accounts: [Account]) {
         let network = selectNetworkSubject.value
         let defaultAccountAddress = userSetting.defaultAccountAddress
-        let showWalletConnect = isShowWalletConnectWallets()
         var items = accounts
             .sorted(by: { ($0.fromWalletConnect ? 1 : 0) < ($1.fromWalletConnect ? 1 : 0) })
             .filter { account in
                 guard let chain = ChainType(rawValue: Int(account.chainId)) else { return false }
                 if account.fromWalletConnect {
-                    if !showWalletConnect {
+                    if !isShowWalletConnectWallets {
                         return false
                     }
                     guard let netwrokIDFromSession = account.netwrokIDFromSession else { return false }
@@ -244,13 +243,13 @@ extension SelectAccountViewModel {
                 )
                 return WalletsItem.account(data: data)
             }
-        if isShowAddWalletConnect() {
+        if isShowAddWalletConnect {
             items.append(WalletsItem.addWalletConnect)
         }
         accountListSubject.value = items
     }
     
-    private func isShowWalletConnectWallets() -> Bool {
+    private var isShowWalletConnectWallets: Bool {
         switch type {
         case .editEnable:
             return true
@@ -261,7 +260,7 @@ extension SelectAccountViewModel {
         }
     }
     
-    private func isShowAddWalletConnect() -> Bool {
+    private var isShowAddWalletConnect: Bool {
         switch type {
         case .editEnable:
             return true
@@ -272,7 +271,7 @@ extension SelectAccountViewModel {
         }
     }
     
-    func isShowAddWallet() -> Bool {
+    var isShowAddWallet: Bool {
         switch type {
         case .editEnable:
             return true
@@ -282,4 +281,17 @@ extension SelectAccountViewModel {
             return false
         }
     }
+    
+    var isEditEnable: Bool {
+        switch type {
+        case .editEnable:
+            return true
+        case .selectWithWalletConnect:
+            return false
+        case .selectWithoutWalletConnect:
+            return false
+        }
+    }
+    
+    
 }

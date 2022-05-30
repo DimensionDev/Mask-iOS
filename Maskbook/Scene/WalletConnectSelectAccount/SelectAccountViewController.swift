@@ -277,12 +277,13 @@ class SelectAccountViewController: BaseViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
-        if viewModel.isShowAddWallet() {
+        if viewModel.isShowAddWallet {
             tableView.bottomAnchor.constraint(equalTo: addWalletView.topAnchor).isActive = true
         } else {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         }
-        addWalletView.isHidden = !viewModel.isShowAddWallet()
+        addWalletView.isHidden = !viewModel.isShowAddWallet
+        editButton.isHidden = !viewModel.isEditEnable
     }
     
     override func viewDidLayoutSubviews() {
