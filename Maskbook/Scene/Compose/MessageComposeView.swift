@@ -1,12 +1,20 @@
 import SwiftUI
+import ResponderChain
 
 struct MessageComposeView: View {
     @ObservedObject
     private var viewModel: MessageComposeViewModel
+
+    @EnvironmentObject
+    private var chain: ResponderChain
     
     init(viewModel: MessageComposeViewModel) {
         self.viewModel = viewModel
         UITextView.appearance().backgroundColor = Asset.Colors.Twitter.buttonText.color
+    }
+
+    enum Tag: Hashable {
+        case editor
     }
 
     var body: some View {
@@ -31,6 +39,11 @@ struct MessageComposeView: View {
                 .ignoresSafeArea()
         )
         .navigationBarHidden(true)
+        .onAppear {
+            DispatchQueue.main.async {
+                chain.firstResponder = Tag.editor
+            }
+        }
     }
 
     private func navigationBarView() -> some View {
@@ -91,6 +104,7 @@ struct MessageComposeView: View {
                     .allowsHitTesting(false),
                 alignment: .topLeading
             )
+            .responderTag(Tag.editor)
     }
 
     private func pluginsContainer() -> some View {
