@@ -55,6 +55,8 @@ class MaskSocialViewController: BaseViewController {
     var lastProfileIdentifier: String?
     
     private var composeButton = NativeComposeButton()
+    
+    static let composeUrl:String = "https://mobile.twitter.com/compose/tweet"
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -211,10 +213,17 @@ extension MaskSocialViewController {
             maskbookTab.containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             maskbookTab.containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-
+        
         maskbookTab.maskbookUIDelegateShim.delegate = self
         maskbookTab.maskbookNavigationDelegateShim.delegate = self
         maskbookTab.tab?.webView.scrollView.delegate = webViewScrollDelegate
+        
+        maskbookTab.tab?.webView.publisher(for: \.url)
+            .sink(receiveValue: {[weak self] webUrl in
+                guard let url = webUrl?.absoluteString else { return }
+                self?.composeButton.isHidden = !(url == MaskSocialViewController.composeUrl)
+            })
+            .store(in: &disposeBag)
     }
 }
 
@@ -407,9 +416,7 @@ extension MaskSocialViewController {
                 self?.coordinator.present(scene: .messageCompose(), transition: .modal(animated: true, adaptiveDelegate: self))
             }
             .store(in: &disposeBag)
-        }
-        composeButton.isHidden = true
-        
+        }        
     }
     
     func handleForKeyboard() {
