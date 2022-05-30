@@ -123,6 +123,8 @@ struct MessageComposeView: View {
             Text(viewModel.recipient.title)
                 .font(FontStyles.rh7.font)
                 .foregroundColor(Asset.Colors.Twitter.blue.asColor())
+        }.onTapGesture {
+
         }
     }
 

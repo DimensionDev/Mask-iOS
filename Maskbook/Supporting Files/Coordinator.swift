@@ -211,6 +211,7 @@ class Coordinator {
         case luckyDropCreatePersona(callback: (@MainActor () -> Void)?)
         case luckyDropCreateProfile
         case messageCompose(PluginMeta? = nil)
+        case composeSelectContact(viewModel: SelectContactViewModel)
         case debug
     }
     
@@ -839,6 +840,8 @@ extension Coordinator {
             
         case .debug:
             return UIHostingController(rootView: DebugView())
+        case let .composeSelectContact(selectContactViewModel):
+            return SelectContactViewController(viewModel: selectContactViewModel)
         }
     }
     // swiftlint:enable cyclomatic_complexity function_body_length

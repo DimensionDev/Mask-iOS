@@ -190,7 +190,8 @@
       "remind_me_later": "Remind me later",
       "go_settings": "To Settings",
       "dont_allow": "Don’t Allow",
-      "speed_up": "Speed Up"
+      "speed_up": "Speed Up",
+      "compose": "Send encrypted post"
     },
     "toast": {
       "saved": "Saved!",

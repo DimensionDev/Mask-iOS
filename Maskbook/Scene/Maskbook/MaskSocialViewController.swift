@@ -12,6 +12,8 @@ import SwiftyJSON
 import UIKit
 import WebExtension_Shim
 import WebKit
+import SwiftUI
+import SnapKit
 
 class MaskSocialViewController: BaseViewController {
 
@@ -51,6 +53,8 @@ class MaskSocialViewController: BaseViewController {
     private let viewModel = MaskSocialViewModel()
     
     var lastProfileIdentifier: String?
+    
+    private var composeButton = NativeComposeButton()
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -76,6 +80,8 @@ extension MaskSocialViewController {
         loadSite()
         observeNotifications()
         subscribeSignal()
+        addNativaComposeButton()
+        handleForKeyboard()
     }
 
     func subscribeSignal() {
@@ -337,7 +343,9 @@ extension MaskSocialViewController: MaskbookUIDelegateShimDelegate {
         self
     }
 
-    func navigationDidChange(url: URL?) {}
+    func navigationDidChange(url: URL?) {
+        
+    }
 }
 
 // MARK: - MaskbookNavigationDelegateShimDelegate
@@ -347,7 +355,9 @@ extension MaskSocialViewController: MaskbookNavigationDelegateShimDelegate {
         maskBrowser.contentScriptPlugin
     }
 
-    func navigationDidFinish(_ webView: WKWebView, navigation: WKNavigation) {}
+    func navigationDidFinish(_ webView: WKWebView, navigation: WKNavigation) {
+        
+    }
 }
 
 extension MaskSocialViewController: UIAdaptivePresentationControllerDelegate {
@@ -381,4 +391,69 @@ extension MaskSocialViewController {
             UIBarButtonItem(customView: button.asUIView())
         ]
     }
+}
+
+extension MaskSocialViewController {
+        
+    func addNativaComposeButton() {
+        composeButton = NativeComposeButton()
+        
+        if let view = self.navigationController?.view {
+            view.addSubview(composeButton)
+            composeButton.snp.makeConstraints { make in
+                make.centerX.equalTo(view)
+                make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-10)
+                make.height.equalTo(40)
+            }
+            composeButton.gesture().sink { [weak self] _ in
+                self?.coordinator.present(scene: .messageCompose(), transition: .modal(animated: true, adaptiveDelegate: self))
+            }
+            .store(in: &disposeBag)
+        }
+        composeButton.isHidden = true
+        
+    }
+    
+    func handleForKeyboard() {
+        let endFrame = KeyboardResponderService.shared.endFrame.removeDuplicates()
+        let willShow = NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification, object: nil)
+        let willHide = NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification, object: nil)
+        Publishers.CombineLatest(willShow, endFrame).sink { notification, _ in
+            guard let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else {
+                return
+            }
+            guard let endFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+                return
+            }
+            UIView.animate(
+                withDuration: duration,
+                delay: 0,
+                options: .curveEaseIn) {
+                    self.composeButton.snp.remakeConstraints { make in
+                        make.centerX.equalTo(self.view)
+                        make.bottom.equalTo(self.view.snp.bottom).offset(-10 - endFrame.height)
+                        make.height.equalTo(40)
+                    }
+            }
+            self.view.layoutIfNeeded()
+        }.store(in: &disposeBag)
+        
+        Publishers.CombineLatest(willHide, endFrame).sink { notification, _ in
+            guard let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else {
+                return
+            }
+            UIView.animate(
+                withDuration: duration,
+                delay: 0,
+                options: .curveEaseIn) {
+                    self.composeButton.snp.remakeConstraints { make in
+                        make.centerX.equalTo(self.view)
+                        make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-10)
+                        make.height.equalTo(40)
+                    }
+            }
+            self.view.layoutIfNeeded()
+        }.store(in: &disposeBag)
+    }
+    
 }
