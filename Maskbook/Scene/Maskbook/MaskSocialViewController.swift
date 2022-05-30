@@ -77,7 +77,6 @@ class MaskSocialViewController: BaseViewController {
 extension MaskSocialViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        prepareLeftNavigationItems()
         setupNavigationBar()
         loadSite()
         observeNotifications()
@@ -385,18 +384,6 @@ extension MaskSocialViewController {
     @objc
     override func prepareLeftNavigationItems() {
         navigationItem.leftBarButtonItems = []
-        setTemporaryVisableDebug()
-    }
-    
-    private func setTemporaryVisableDebug() {
-        let button = NavigationItemView(imageAsset: Asset.Plugins.setting) {
-            self.coordinator.present(scene: .messageCompose(), transition: .modal(animated: true, adaptiveDelegate: self))
-        }
-
-        self.navigationItem.leftBarButtonItems = [
-            .fixedSpace(14),
-            UIBarButtonItem(customView: button.asUIView())
-        ]
     }
 }
 
