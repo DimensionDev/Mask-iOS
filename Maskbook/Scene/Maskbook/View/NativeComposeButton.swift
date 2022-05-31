@@ -22,7 +22,9 @@ class NativeComposeButton: UIView {
     
     func initView() {
         self.applyRadius(radius: 20)
-        self.layer.borderWidth = 0.5
+        self.applyShadow(color: Asset.Colors.Public.blue.color, alpha: 1, x: 0, y: 4, blur: 8)
+        self.applyShadow(color: Asset.Colors.Public.blue.color, alpha: 1, x: 0, y: -4, blur: 4)
+        self.layer.borderWidth = 1
         self.layer.borderColor = Asset.Colors.Public.blue.color.cgColor
         addSubview(hStackView)
         hStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -37,7 +39,7 @@ class NativeComposeButton: UIView {
     
     private lazy var logoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = Asset.Splash.A.logo.image
+        imageView.image = Asset.Images.Scene.Compose.logo.image
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -68,7 +70,7 @@ class NativeComposeButton: UIView {
     }()
     
     private lazy var hStackView = HStackView(spacing: 4) {
-        Spacer()
+        Spacer(width: 4)
         logoImageView
         titleLabel
         arrowImageView
