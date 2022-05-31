@@ -1,5 +1,4 @@
 import SwiftUI
-import Introspect
 
 struct MessageComposeView: View {
     @ObservedObject
@@ -96,11 +95,7 @@ struct MessageComposeView: View {
                     .allowsHitTesting(false),
                 alignment: .topLeading
             )
-            .introspect(selector: TargetViewSelector.siblingContaining) { (view: UITextView) in
-                if !view.isFirstResponder {
-                    view.becomeFirstResponder()
-                }
-            }
+            .focusTextView()
     }
 
     private func pluginsContainer() -> some View {
