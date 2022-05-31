@@ -68,14 +68,24 @@ extension WalletCoreService {
             )
         }
         do {
-            let privateKeyInfo = try generateWalletBackupPrivKeyInfo(account: account, password: password).get()
-            let backupInfo = WalletBackupInfo(name: name,
-                                              address: address,
-                                              createdAt: createdAt,
-                                              updateAt: updatedAt,
-                                              passphrase: "",
-                                              mnemonic: mnemonic,
-                                              privateKey: privateKeyInfo)
+            func privateKey(for mnemonic: WalletBackupInfo.Mnemonic?) throws -> WalletBackupInfo.PrivateKey? {
+                mnemonic.isNone
+                ? try generateWalletBackupPrivKeyInfo(account: account, password: password).get()
+                : nil
+            }
+
+            let privateKey = try privateKey(for: mnemonic)
+            // since
+            let backupInfo = WalletBackupInfo(
+                name: name,
+                address: address,
+                createdAt: createdAt,
+                updateAt: updatedAt,
+                passphrase: "",
+                mnemonic: mnemonic,
+                privateKey: privateKey
+            )
+
             return .success(backupInfo)
         } catch {
             return .failure(error)
