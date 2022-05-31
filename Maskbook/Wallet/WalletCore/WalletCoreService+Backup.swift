@@ -29,7 +29,7 @@ extension WalletCoreService {
                             account: account,
                             password: password,
                             context: backgroundContext)
-                            .get()
+                        .get()
                     }
             } catch {
                 coreDataError = error
@@ -54,8 +54,8 @@ extension WalletCoreService {
               let address = account.address,
               let createdAt = account.createdAt?.timeIntervalSince1970,
               let updatedAt = account.lastModifiedDate?.timeIntervalSince1970 else {
-                  return .failure(WalletCoreError.coreDataError)
-              }
+            return .failure(WalletCoreError.coreDataError)
+        }
         var mnemonic: WalletBackupInfo.Mnemonic?
         if storedKey.type == StoredKeyType.mnemonic.rawValue {
             guard let mnemonicString = try? exportMnemonic(password: password, account: account).get() else {
@@ -99,13 +99,28 @@ extension WalletCoreService {
             guard let privateKeyData = Data.fromHex(privateKey) else {
                 throw MaskWalletCoreError.invalidPrivateKey
             }
-            
+
+            let (x, y): (String, String) = {
+                if let pub = SECP256K1.privateToPublic(privateKey: privateKeyData), pub.count == 65 {
+                    let pubx = pub[1..<33]
+                    let puby = pub[33...]
+                    let x = pubx.base64URLEncodedString()
+                    let y = puby.base64URLEncodedString()
+
+                    return (x, y)
+                }
+
+                return ("", "")
+            }()
+
             let privateKeyInfo = WalletBackupInfo.PrivateKey(
                 crv: "K-256",
-                x: "",
-                y: "",
-                keyOps: ["deriveKey",
-                         "deriveBits"],
+                x: x,
+                y: y,
+                keyOps: [
+                    "deriveKey",
+                    "deriveBits"
+                ],
                 kty: "EC",
                 d: privateKeyData.base64URLEncodedString())
             return .success(privateKeyInfo)
