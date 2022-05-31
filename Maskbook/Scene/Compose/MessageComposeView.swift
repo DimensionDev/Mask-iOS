@@ -9,6 +9,10 @@ struct MessageComposeView: View {
         UITextView.appearance().backgroundColor = Asset.Colors.Twitter.buttonText.color
     }
 
+    enum Tag: Hashable {
+        case editor
+    }
+
     var body: some View {
         VStack(alignment: .leading) {
             navigationBarView()
@@ -91,6 +95,7 @@ struct MessageComposeView: View {
                     .allowsHitTesting(false),
                 alignment: .topLeading
             )
+            .focusTextView()
     }
 
     private func pluginsContainer() -> some View {

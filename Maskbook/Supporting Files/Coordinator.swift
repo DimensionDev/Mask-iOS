@@ -15,6 +15,8 @@ import UIKit
 import WalletConnectSwift
 import web3swift
 
+import ResponderChain
+
 // swiftlint:disable file_length
 class Coordinator {
     static let main = Coordinator()
@@ -842,7 +844,7 @@ extension Coordinator {
                 viewModel.append(newPluginContent: pluginMeta)
             }
             return MaskHostViewController(rootView: MessageComposeView(viewModel: viewModel))
-            
+
         case .debug:
             return UIHostingController(rootView: DebugView())
         case let .composeSelectContact(selectContactViewModel):

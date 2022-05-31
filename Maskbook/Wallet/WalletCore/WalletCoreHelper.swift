@@ -649,6 +649,8 @@ extension WalletCoreHelper {
 
             return platform == .twitter
         }()
+        
+        log.debug("encryptingMessage: \(encryptingMessage)", source: "share")
 
         return sendRequest(
             bindWith: \.paramPostEncryption,

@@ -120,6 +120,7 @@
 		1FCCE39B26D7F09700909A5B /* SpinActivityAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCCE39A26D7F09700909A5B /* SpinActivityAnimator.swift */; };
 		1FD24E1226BD267800D03599 /* InjectedValueKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD24E1126BD267800D03599 /* InjectedValueKeys.swift */; };
 		1FD91A8A283CCBA4000766FB /* PluginMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD91A89283CCBA4000766FB /* PluginMeta.swift */; };
+		1FD91A922845BD57000766FB /* SwiftUI+Focused.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD91A912845BD57000766FB /* SwiftUI+Focused.swift */; };
 		1FE54D49269947640041C742 /* NSManagedContext+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE54D48269947640041C742 /* NSManagedContext+extension.swift */; };
 		1FE54D56269BEFE90041C742 /* CoreDataStackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFB224A2654E972005CAFFA /* CoreDataStackTests.swift */; };
 		1FE54D58269BF0140041C742 /* NSDiffableSourceSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE54D57269BF0140041C742 /* NSDiffableSourceSnapshotTests.swift */; };
@@ -151,6 +152,7 @@
 		2A46B3BF282AA05600F2A262 /* DispalyBalancePrecisionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A46B3BE282AA05600F2A262 /* DispalyBalancePrecisionTests.swift */; };
 		2A470B07283E45F0009B49EA /* String+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A470B06283E45F0009B49EA /* String+URL.swift */; };
 		2A470B09283E5B53009B49EA /* ShareLuckyDropViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A470B08283E5B53009B49EA /* ShareLuckyDropViewModel.swift */; };
+		2A49E15228449F820084208E /* Substring+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A49E15128449F820084208E /* Substring+String.swift */; };
 		2A5FAEA027CF7AD200D01250 /* GuideItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5FAE9D27CF7AD200D01250 /* GuideItemView.swift */; };
 		2A5FAEA227CF7AD200D01250 /* GuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5FAE9F27CF7AD200D01250 /* GuideView.swift */; };
 		2A6788D127EB6C8800CC2350 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6788D027EB6C8800CC2350 /* PrimaryButton.swift */; };
@@ -905,6 +907,7 @@
 		1FCCE39A26D7F09700909A5B /* SpinActivityAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinActivityAnimator.swift; sourceTree = "<group>"; };
 		1FD24E1126BD267800D03599 /* InjectedValueKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectedValueKeys.swift; sourceTree = "<group>"; };
 		1FD91A89283CCBA4000766FB /* PluginMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginMeta.swift; sourceTree = "<group>"; };
+		1FD91A912845BD57000766FB /* SwiftUI+Focused.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Focused.swift"; sourceTree = "<group>"; };
 		1FE54D48269947640041C742 /* NSManagedContext+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedContext+extension.swift"; sourceTree = "<group>"; };
 		1FE54D57269BF0140041C742 /* NSDiffableSourceSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSDiffableSourceSnapshotTests.swift; sourceTree = "<group>"; };
 		1FE54D59269C19C10041C742 /* WalletCoreRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCoreRequest.swift; sourceTree = "<group>"; };
@@ -935,6 +938,7 @@
 		2A46B3BE282AA05600F2A262 /* DispalyBalancePrecisionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispalyBalancePrecisionTests.swift; sourceTree = "<group>"; };
 		2A470B06283E45F0009B49EA /* String+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+URL.swift"; sourceTree = "<group>"; };
 		2A470B08283E5B53009B49EA /* ShareLuckyDropViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareLuckyDropViewModel.swift; sourceTree = "<group>"; };
+		2A49E15128449F820084208E /* Substring+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Substring+String.swift"; sourceTree = "<group>"; };
 		2A51C402D2B57AE47C22025C /* Pods-Maskbook.release touchpreview.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maskbook.release touchpreview.xcconfig"; path = "Target Support Files/Pods-Maskbook/Pods-Maskbook.release touchpreview.xcconfig"; sourceTree = "<group>"; };
 		2A5FAE9D27CF7AD200D01250 /* GuideItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideItemView.swift; sourceTree = "<group>"; };
 		2A5FAE9F27CF7AD200D01250 /* GuideView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideView.swift; sourceTree = "<group>"; };
@@ -2329,6 +2333,7 @@
 				2AD31E32282D367600CB3D49 /* View+Snapshot.swift */,
 				2AD31E26282D367600CB3D49 /* View+Style.swift */,
 				2A470B06283E45F0009B49EA /* String+URL.swift */,
+				2A49E15128449F820084208E /* Substring+String.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2352,6 +2357,7 @@
 				2AD85561281284940064DDA5 /* SwiftUI+Text.swift */,
 				2AD85562281284940064DDA5 /* SwiftUI+Asset.swift */,
 				2AD85563281284940064DDA5 /* SwiftUI+Color.swift */,
+				1FD91A912845BD57000766FB /* SwiftUI+Focused.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -4302,6 +4308,7 @@
 				2D6677F927688FBE00528F4D /* WalletConnectEthereumTransaction.swift in Sources */,
 				2AF88543271EE9310004565A /* BiometryRecognitionViewModel.swift in Sources */,
 				2AF884C4271EE9300004565A /* SocialProfileDetectViewModel.swift in Sources */,
+				1FD91A922845BD57000766FB /* SwiftUI+Focused.swift in Sources */,
 				1F9C60E926B793DE001C26D2 /* Assets.swift in Sources */,
 				2AD85512281283170064DDA5 /* LuckyDropTokens.swift in Sources */,
 				1F705FE327CF6AB9002A4A7E /* SpinWheelAnimator.swift in Sources */,
@@ -4748,6 +4755,7 @@
 				2AF88570271EE9310004565A /* WordsVerifyProtocol.swift in Sources */,
 				2AF8858A271EE9310004565A /* SelectItemViewController.swift in Sources */,
 				2AFBEDE526E61D6400BD77B7 /* LoadingWithTextController.swift in Sources */,
+				2A49E15228449F820084208E /* Substring+String.swift in Sources */,
 				2AF88503271EE9310004565A /* PersonaActionViewController.swift in Sources */,
 				2A18E7FB266C9D210045BC88 /* AvatarView.swift in Sources */,
 				2AF885D3271EE9320004565A /* ScannerLineViewController.swift in Sources */,
@@ -5294,12 +5302,12 @@
 				DEVELOPMENT_TEAM = 7LFDZ96332;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Maskbook/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.9.0;
+				MARKETING_VERSION = 2.8.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -5508,12 +5516,12 @@
 				DEVELOPMENT_TEAM = 7LFDZ96332;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Maskbook/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.9.0;
+				MARKETING_VERSION = 2.8.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -5576,12 +5584,12 @@
 				DEVELOPMENT_TEAM = 7LFDZ96332;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Maskbook/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.9.0;
+				MARKETING_VERSION = 2.8.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
