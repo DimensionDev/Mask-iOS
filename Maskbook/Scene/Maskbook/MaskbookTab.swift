@@ -85,7 +85,6 @@ final class MaskbookTab: NSObject {
 
         // setup observer
         tab.webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: [.initial, .new], context: nil)
-        tab.webView.addObserver(self, forKeyPath: #keyPath(WKWebView.url), options: [.new, .old], context: nil)
         
         viewModel.requestURLString
             .assign(to: \.requestURLLabel.text, on: webViewNavigationFailureDescriptionView)
