@@ -218,6 +218,10 @@ extension Crypto: CombineCompatible {
         LazyFuture { promise in
             do {
                 let result = try self.decryptBackup(password: password, account: account, content: content)
+                guard JSONSerialization.isValidJSONObject(result) else {
+                    promise(.failure(MaskError.invalidBackupData))
+                    return
+                }
                 let data = try JSONSerialization.data(withJSONObject: result, options: .sortedKeys)
                 promise(.success(data))
             } catch {

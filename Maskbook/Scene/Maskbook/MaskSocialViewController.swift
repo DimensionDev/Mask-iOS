@@ -43,6 +43,7 @@ class MaskSocialViewController: BaseViewController {
     private lazy var webViewScrollDelegate = WebViewScrollViewDelegate(navigationController: self.navigationController)
 
     lazy var webPublicApisMessageResolver: WebPublicApiMessageResolver = .init(webView: nil)
+    weak var delegate: WebMessageResolverDelegate?
 
     private let decoder = JSONDecoder()
 
@@ -379,6 +380,19 @@ extension MaskSocialViewController: UIAdaptivePresentationControllerDelegate {
     }
 }
 
+// MARK: - WebMessageResolverDelegate
+
+extension MaskSocialViewController: WebMessageResolverDelegate {
+    func webPublicApiMessageResolver(resolver: WebPublicApiMessageResolver,
+                                     profilesDetect profileIdentifiers: [String]){}
+    
+    func webNotifyCompositionRequested(resolver: WebPublicApiMessageResolver,
+                                       notifyComposition: CompositionRequestParam){
+        composeButton.isHidden = notifyComposition.open
+    }
+
+}
+
 extension MaskSocialViewController {
     // remove backButton on this controller in any scene
     @objc
@@ -390,8 +404,8 @@ extension MaskSocialViewController {
 extension MaskSocialViewController {
         
     func addNativaComposeButton() {
+        webPublicApisMessageResolver.delegate = self
         composeButton = NativeComposeButton()
-        
         if let view = self.navigationController?.view {
             view.addSubview(composeButton)
             composeButton.snp.makeConstraints { make in

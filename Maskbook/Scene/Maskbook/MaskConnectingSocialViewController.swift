@@ -480,4 +480,7 @@ extension MaskConnectingSocialViewController: WebMessageResolverDelegate {
         }
         connectViewModel.latestDetectedProfile.accept(profiles)
     }
+    
+    func webNotifyCompositionRequested(resolver: WebPublicApiMessageResolver,
+                                       notifyComposition: CompositionRequestParam){}
 }

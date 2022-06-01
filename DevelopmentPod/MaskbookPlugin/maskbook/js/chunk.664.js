@@ -6534,7 +6534,7 @@ function RedPacket(props) {
                 claimState: claimState,
                 refundState: refundState,
                 onShare: handleShare,
-                onClaimOrRefund: onClaimOrRefund
+                onClaimOrRefund: native_rpc/* hasNativeAPI */._ ? onClaimOrRefundOnNative : onClaimOrRefund
             })
         ]
     });

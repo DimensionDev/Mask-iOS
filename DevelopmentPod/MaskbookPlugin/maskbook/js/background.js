@@ -1885,13 +1885,13 @@ if (false) {}
 ;// CONCATENATED MODULE: ./background/tasks/NotCancellable/PrintBuildFlags.ts
 console.log('Build info', {
     NODE_ENV: "production",
-    VERSION: "v1.29.12-2344-g375d2b347",
+    VERSION: "v1.29.12-2348-g181e22679",
     TAG_NAME: "v2.5.0",
-    COMMIT_HASH: "375d2b347",
-    COMMIT_DATE: "2022-04-20T09:14:57.000Z",
-    BUILD_DATE: "2022-04-20T09:20:23.090Z",
+    COMMIT_HASH: "181e22679",
+    COMMIT_DATE: "2022-06-01T07:46:29.000Z",
+    BUILD_DATE: "2022-06-01T07:52:48.068Z",
     REMOTE_URL: "git@github.com:DimensionDev/Maskbook.git",
-    BRANCH_NAME: "feat/sendRedpacketToNative",
+    BRANCH_NAME: "feat/mobile",
     DIRTY: false,
     TAG_DIRTY: true
 });

@@ -1567,7 +1567,10 @@ async function pasteImage(relatedTextPayload, encrypted, template, reason) {
     });
 }
 
+// EXTERNAL MODULE: ./shared/native-rpc/index.ts + 1 modules
+var native_rpc = __webpack_require__(30246);
 ;// CONCATENATED MODULE: ./src/components/CompositionDialog/Composition.tsx
+
 
 
 
@@ -1620,6 +1623,12 @@ function Composition({ type ='timeline' , requireClipboardPermission  }) {
         type
     ]);
     (0,react.useEffect)(()=>{
+        if (native_rpc/* hasNativeAPI */._) {
+            native_rpc/* nativeAPI */.Nz?.api.notify_composition_requested({
+                reason: reason1,
+                open: open1
+            });
+        }
         if (!open1) return;
         return utils/* MaskMessages.events.replaceComposition.on */.ql.events.replaceComposition.on((message)=>{
             const ui = UI.current;
