@@ -67,6 +67,16 @@ extension RestoreFile {
         case json
         case bin
     }
+
+    static func converTimeInterval(_ anyValue: Any) -> TimeInterval? {
+        if let value = anyValue as? UInt64 {
+            return TimeInterval(value) / 1000
+        } else if let value = anyValue as? TimeInterval {
+            return value
+        } else {
+            return nil
+        }
+    }
 }
 
 extension RestoreFile {
@@ -77,9 +87,10 @@ extension RestoreFile {
         let type: String
 
         init(from json: [String: Any]) {
-            createdAt = json[CodingKeys.createdAt.stringValue].flatMap { $0 as? TimeInterval }
-                .flatMap { $0 / 1000 }
+            createdAt = json[CodingKeys.createdAt.stringValue]
+                .flatMap { RestoreFile.converTimeInterval($0) }
                 .flatMap { Date(timeIntervalSince1970: $0) } ?? Date()
+
             maskbookVersion = json[CodingKeys.maskbookVersion.stringValue] as? String ?? ""
             version = json[CodingKeys.version.stringValue] as? Int ?? 0
             type = json[CodingKeys.type.stringValue] as? String ?? ""
@@ -121,12 +132,10 @@ extension RestoreFile {
 
         init(from json: [String: Any]) {
             createdAt = json[CodingKeys.createdAt.stringValue]
-                .flatMap { $0 as? TimeInterval }
-                .flatMap { $0 / 1000 }
+                .flatMap(RestoreFile.converTimeInterval) ?? 0
 
             updatedAt = json[CodingKeys.updatedAt.stringValue]
-                .flatMap { $0 as? TimeInterval }
-                .flatMap { $0 / 1000 }
+                .flatMap(RestoreFile.converTimeInterval) ?? 0
 
             identifier = json[CodingKeys.identifier.stringValue] as? String
             nickname = json[CodingKeys.nickname.stringValue] as? String
@@ -201,7 +210,8 @@ extension RestoreFile {
         let postCryptoKey: LocalKey?
 
         init(from json:[String: Any]) {
-            foundAt = json[CodingKeys.foundAt.stringValue] as? TimeInterval ?? 0
+            foundAt = json[CodingKeys.foundAt.stringValue]
+                .flatMap(RestoreFile.converTimeInterval) ?? 0
             identifier = json[CodingKeys.identifier.stringValue] as? String ?? ""
             postBy = json[CodingKeys.postBy.stringValue] as? String ?? ""
             recipientGroups = json[CodingKeys.recipientGroups.stringValue] as? [String] ?? []
@@ -240,7 +250,9 @@ extension RestoreFile {
         }
 
         init(from json: [String: Any]) {
-            time = json[CodingKeys.time.stringValue] as? TimeInterval ?? 0
+            time = json[CodingKeys.time.stringValue]
+                .flatMap(RestoreFile.converTimeInterval) ?? 0
+
             recipientType = json[CodingKeys.recipientType.stringValue]
                 .flatMap { $0 as? String }
                 .flatMap { RecipientType.init(rawValue: $0) } ?? .direct
