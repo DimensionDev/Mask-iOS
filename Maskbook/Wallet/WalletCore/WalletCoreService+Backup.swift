@@ -74,16 +74,38 @@ extension WalletCoreService {
                 : nil
             }
 
-            let privateKey = try privateKey(for: mnemonic)
+            let originalKey = try privateKey(for: mnemonic)
+            let publicKey: WalletBackupInfo.PrivateKey? = originalKey.flatMap {
+                .init(
+                    crv: $0.crv,
+                    x: $0.x,
+                    y: $0.y,
+                    keyOps: $0.keyOps,
+                    kty: $0.kty
+                )
+            }
+
+            let privateKey: WalletBackupInfo.PrivateKey? = originalKey.flatMap {
+                .init(
+                    crv: $0.crv,
+                    x: $0.x,
+                    y: $0.y,
+                    keyOps: $0.keyOps,
+                    kty: $0.kty,
+                    d: $0.d
+                )
+            }
+
             // since
             let backupInfo = WalletBackupInfo(
                 name: name,
                 address: address,
                 createdAt: createdAt,
                 updateAt: updatedAt,
-                passphrase: nil,
+                passphrase: "",
                 mnemonic: mnemonic,
-                privateKey: privateKey
+                privateKey: privateKey,
+                publicKey: publicKey
             )
 
             return .success(backupInfo)
