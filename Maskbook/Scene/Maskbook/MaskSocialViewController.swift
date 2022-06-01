@@ -41,6 +41,7 @@ class MaskSocialViewController: BaseViewController {
     private lazy var webViewScrollDelegate = WebViewScrollViewDelegate(navigationController: self.navigationController)
 
     lazy var webPublicApisMessageResolver: WebPublicApiMessageResolver = .init(webView: nil)
+    weak var delegate: WebMessageResolverDelegate?
 
     private let decoder = JSONDecoder()
 
@@ -78,6 +79,7 @@ extension MaskSocialViewController {
     }
 
     func subscribeSignal() {
+        webPublicApisMessageResolver.delegate = self
         viewModel.backupReminder.sink { [weak self] _ in
             self?.alertBackup()
         }
@@ -347,6 +349,19 @@ extension MaskSocialViewController: UIAdaptivePresentationControllerDelegate {
     {
         .overFullScreen
     }
+}
+
+// MARK: - WebMessageResolverDelegate
+
+extension MaskSocialViewController: WebMessageResolverDelegate {
+    func webPublicApiMessageResolver(resolver: WebPublicApiMessageResolver,
+                                     profilesDetect profileIdentifiers: [String]){}
+    
+    func webNotifyCompositionRequested(resolver: WebPublicApiMessageResolver,
+                                       notifyComposition: CompositionRequestParam){
+        
+    }
+
 }
 
 extension MaskSocialViewController {

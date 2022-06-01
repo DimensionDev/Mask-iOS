@@ -14,6 +14,8 @@ import WebKit
 protocol WebMessageResolverDelegate: AnyObject {
     func webPublicApiMessageResolver(resolver: WebPublicApiMessageResolver,
                                      profilesDetect profileIdentifiers: [String])
+    func webNotifyCompositionRequested(resolver: WebPublicApiMessageResolver,
+                                       notifyComposition: CompositionRequestParam)
 }
 
 class WebPublicApiMessageResolver: MaskMessageResolver {
@@ -229,9 +231,8 @@ class WebPublicApiMessageResolver: MaskMessageResolver {
             
         case .notify_composition_requested:
             if let param = notifyCompositionRequested(messageData: messageData) {
-                let composeWillOpen = param.open
-                let composeChangeReason = param.reason
-                // @hydraCy
+                delegate?.webNotifyCompositionRequested(resolver: self,
+                                                        notifyComposition: param)
             }
         }
         
