@@ -49,6 +49,25 @@ enum WalletSendError: Error {
 }
 
 // swiftlint:disable force_cast
+extension Web3Error {
+    var errorDescription: String? {
+        switch self {
+        case .inputError(let desc):
+            return desc
+        case .nodeError(let desc):
+            return desc
+        case .processingError(let desc):
+            return desc
+        case .keystoreError(let err):
+            return err.errorDescription
+        case .generalError(let err):
+            return err.errorDescription
+        default:
+            return localizedDescription
+        }
+    }
+}
+
 extension WalletSendError: LocalizedError {
     public var errorDescription: String? {
         // TODO: i18n
@@ -63,7 +82,7 @@ extension WalletSendError: LocalizedError {
             return "Invalid address"
             
         case .ethereumError(let error):
-            return (error as? Web3Error)?.errorDescription ?? ""
+            return error.errorDescription
             
         case .walletConnectError:
             return "Fail to connect with WalletConnect"

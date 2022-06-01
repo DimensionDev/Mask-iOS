@@ -33,25 +33,33 @@ class PendTransactionManager {
                         self.stop()
                     }
                     
-                    for (index, pendingTransaction) in pendList.enumerated() {
-                        web3Provier.getTransactionReceiptPromise(pendingTransaction.txHash).done { transactionReceipt in
-                            var transaction = pendingTransaction
-                            transaction.transactionReceipt = transactionReceipt
-                            switch transactionReceipt.status {
+                    var removed: [PendTransactionModel] = []
+                    for pendingTransaction in pendList {
+                        _ = web3Provier.getTransactionReceiptPromise(pendingTransaction.txHash)
+                            .done { transactionReceipt in
+                                var transaction = pendingTransaction
+                                transaction.transactionReceipt = transactionReceipt
+                                switch transactionReceipt.status {
                                 case .ok:
                                     self.pendingTxFinishEvents.send((transcation: transaction, status: .confirmed))
                                 case .notYetProcessed:
                                     self.pendingTxFinishEvents.send((transcation: transaction, status: .pending))
                                 case .failed:
                                     self.pendingTxFinishEvents.send((transcation: transaction, status: .failed))
+                                }
+                                
+                                if transactionReceipt.status != .notYetProcessed {
+                                    removed.append(pendingTransaction)
+                                }
                             }
-                            
-                            if transactionReceipt.status != .notYetProcessed {
-                                pendList.remove(at: index)
-                            }
-                            self.pendTransactions.send(pendList)
+                    }
+                    // FIXED: Never delete elements during iteration.
+                    pendList.removeAll { pendTransaction in
+                        removed.contains { removedTransaction in
+                            removedTransaction.txHash == pendTransaction.txHash
                         }
                     }
+                    self.pendTransactions.send(pendList)
                 }
             }
     }

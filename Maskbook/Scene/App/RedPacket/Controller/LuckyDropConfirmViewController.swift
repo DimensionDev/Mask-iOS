@@ -40,8 +40,8 @@ final class LuckyDropConfirmViewController: SheetViewController {
             presentStyle: .translucent,
             transition: KeyboardSheetTransition())
         )
-        self.dismissAction = {
-            completion?(nil, LuckyDropConfirmError.cancel)
+        self.dismissAction = { [weak self] in
+            self?.viewModel.completion?(nil, LuckyDropConfirmError.cancel)
         }
     }
     
@@ -53,6 +53,14 @@ final class LuckyDropConfirmViewController: SheetViewController {
 
     override func buildEvent() {
         super.buildEvent()
+        
+        viewModel
+            .$buttonState
+            .map({ state in
+                state != .sending
+            })
+            .assign(to: \.dissmissOnTap, on: self)
+            .store(in: &disposeBag)
     }
 }
 

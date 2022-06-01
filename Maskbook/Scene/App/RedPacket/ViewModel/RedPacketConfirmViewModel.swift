@@ -181,11 +181,14 @@ class RedPacketConfirmViewModel: ObservableObject {
                 self?.sendTransaction(password: password) { [weak self] result in
                     DispatchQueue.main.async {
                         switch result {
-                        case .success(let txHash): self?.completion?(txHash, nil)
+                        case .success(let txHash):
+                            self?.completion?(txHash, nil)
+                            self?.completion = nil
                             
                         case .failure(let error):
                             log.error("send failed: \(error)", source: "lucky drop")
                             self?.completion?(nil, error)
+                            self?.completion = nil
                         }
                         self?.buttonState = .normal
                     }

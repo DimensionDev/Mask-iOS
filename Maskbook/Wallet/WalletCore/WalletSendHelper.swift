@@ -312,7 +312,7 @@ class WalletSendHelper {
                     if let nonce = nonce {
                         nonceTemp = nonce
                     } else {
-                        nonceTemp = try provider.eth.getTransactionCount(address: fromAddressEthFormat)
+                        nonceTemp = try provider.eth.getTransactionCount(address: fromAddressEthFormat, onBlock: "pending")
                     }
                     
                     var gasLimit: BigUInt
