@@ -9,7 +9,6 @@
 import BigInt
 import CoreDataStack
 import EFQRCode
-import SwiftMsgPack
 import SwiftUI
 import SwiftyJSON
 

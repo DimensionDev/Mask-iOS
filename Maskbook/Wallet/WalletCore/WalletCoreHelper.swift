@@ -10,6 +10,7 @@ import CoreDataStack
 import MaskWalletCore
 import OSLog
 import web3swift
+import SwiftProtobuf
 
 // swiftlint:disable file_length
 extension WalletCoreError: LocalizedError {
@@ -549,33 +550,28 @@ extension WalletCoreHelper {
         chainType: ChainType,
         derivationPath: String,
         storedKeyData: Data) -> Result<String, Error> {
-            var param = Api_CreateStoredKeyNewAccountAtPathParam()
-            param.password = password
-            param.name = name
-            switch chainType {
-            case .ethereum:
-                param.coin = Api_Coin.ethereum
-                
-            case .polkadot:
+            guard chainType == .ethereum else {
                 return .failure(WalletCoreError.unsupportedChainType)
             }
-            param.storedKeyData = storedKeyData
-            param.derivationPath = derivationPath
-            
-            var req = Api_MWRequest()
-            req.paramCreateAccountOfCoinAtPath = param
-            
-            let resp = sendRequestToRustLib(req)
-            switch resp {
-            case .success(let response):
-                if let address = WalletCoreStorage.getAccount(address: response.respCreateAccountOfCoinAtPath.account.address)?.address {
-                    return .success(address)
+
+            return sendRequest(
+                requestConfiguration: { request in
+                    var param = Api_CreateStoredKeyNewAccountAtPathParam()
+                    param.password = password
+                    param.name = name
+                    param.coin = .ethereum
+                    param.storedKeyData = storedKeyData
+                    param.derivationPath = derivationPath
+
+                    request.paramCreateAccountOfCoinAtPath = param
+                },
+                flatMap: { response in
+                    if let address = WalletCoreStorage.getAccount(address: response.respCreateAccountOfCoinAtPath.account.address)?.address {
+                        return .success(address)
+                    }
+                    return .success(response.respCreateAccountOfCoinAtPath.account.address)
                 }
-                return .success(response.respCreateAccountOfCoinAtPath.account.address)
-                
-            case .failure(let error):
-                return .failure(error)
-            }
+            )
         }
     
     class func signMessage(message: String, fromAddress: String, _ completion: @escaping (Result<String, Error>) -> Void) {
@@ -609,6 +605,133 @@ extension WalletCoreHelper {
             completion(.failure(error))
             return
         }
+    }
+
+    /// Encrypt plugin metas and text content
+    /// - Parameters:
+    ///   - content: text content
+    ///   - authorID: user identifier, combined with social platform and user id, eg: "twitter.com/xxx"
+    ///   - authorKeyData: raw data of user public key, eg: `getRawData` of `JsonWebKey`
+    ///   - socialPlatForm: social platform identifier
+    ///   - metas: plugin metas
+    ///   - version: api version
+    /// - Returns: encrypted content
+    class func encryptPost(
+        content: String,
+        authorID: String?,
+        authorKeyData: Data?,
+        socialPlatForm: ProfileSocialPlatform?,
+        metas: [PluginMeta],
+        version: EncryptionVersion = .v38
+    ) -> Result<String, Error> {
+        if version == .v37 {
+            return .failure(WalletCoreError.requestParamError)
+        }
+
+        let encryptingMessage: String? = {
+            if metas.isEmpty {
+                return content
+            }
+            guard let metaString = metas.stringfy() else {
+                return nil
+            }
+            return "\(metaString)\u{1F9E9}\(content)"
+        }()
+
+        guard let encryptingMessage = encryptingMessage else {
+            return .failure(WalletCoreError.requestParamError)
+        }
+
+        let needTwitterEncoder: Bool = {
+            guard let platform = socialPlatForm else {
+                return false
+            }
+
+            return platform == .twitter
+        }()
+        
+        log.debug("encryptingMessage: \(encryptingMessage)", source: "share")
+
+        return sendRequest(
+            bindWith: \.paramPostEncryption,
+            paramBuilder:
+                Api_PostEncryptionParam.with { param in
+                    switch version {
+                    case .v37: param.version = .v37
+                    case .v38: param.version = .v38
+                    }
+
+                    param.content = encryptingMessage
+                    param.authorPublicKeyAlgr = .secp256K1Algr
+                    if let data = authorKeyData {
+                        param.authorPublicKeyData = data
+                    }
+
+                    if let id = authorID {
+                        param.authorUserID = id
+                    }
+
+                    if let network = socialPlatForm {
+                        param.network = network.url
+                    }
+                }
+            ,
+            map: { response in
+                needTwitterEncoder
+                ? Self.twitterEncode(content: response.respPostEncryption.content)
+                : response.respPostEncryption.content
+            }
+        )
+    }
+
+    class func sendRequest<T>(
+        requestConfiguration: (inout Api_MWRequest) throws -> Void,
+        map: (Api_MWResponse) -> T
+    ) -> Result<T, Error> {
+        var req = Api_MWRequest()
+        do {
+            try requestConfiguration(&req)
+            return sendRequestToRustLib(req).map(map)
+        } catch {
+            return .failure(error)
+        }
+    }
+
+    class func sendRequest<T, V: Message>(
+        bindWith keyPath: WritableKeyPath<Api_MWRequest, V>,
+        paramBuilder: @autoclosure () throws -> V,
+        map: (Api_MWResponse) -> T
+    ) -> Result<T, Error> {
+        var req = Api_MWRequest()
+        do {
+            req[keyPath: keyPath] = try paramBuilder()
+            return sendRequestToRustLib(req).map(map)
+        } catch {
+            return .failure(error)
+        }
+    }
+
+    class func sendRequest<T>(
+        requestConfiguration: (inout Api_MWRequest) throws -> Void,
+        flatMap: (Api_MWResponse) -> Result<T, Error>
+    ) -> Result<T, Error> {
+        var req = Api_MWRequest()
+        do {
+            try requestConfiguration(&req)
+            let resp = sendRequestToRustLib(req).flatMap(flatMap)
+            return resp
+        } catch {
+            return .failure(error)
+        }
+    }
+    
+    class func twitterEncode(content: String) -> String {
+        let encryptContent = content.replaceFirst(of: "\u{1F3BC}", with: "%20")
+                      .replaceFirst(of: ":||", with: "%40")
+                      .replaceFirst(of: "=", with: "_")
+                      .replaceFirst(of: "+", with: "-")
+                      .replacingOccurrences(of: "|", with: ".")
+        return "https://mask.io/?PostData_v1=\(encryptContent)"
     }
 }
 // swiftlint:enable file_length

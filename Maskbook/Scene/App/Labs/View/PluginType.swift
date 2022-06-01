@@ -31,6 +31,30 @@ enum PluginType: String {
             return false
         }
     }
+
+    /// plugin encrytption key
+    var postEncryptionKey: String {
+
+        let index: Int =  {
+            switch self {
+            case .ito: return 0
+            case .luckyDrop: return 1
+            case .fileService: return 2
+            default: return -1
+            }
+        }()
+
+        let prefix: String = {
+            switch self {
+            case .ito: return "ito"
+            case .luckyDrop: return "red_packet"
+            case .fileService: return "file_service"
+            default: return ""
+            }
+        }()
+
+        return "com.maskbook.\(prefix):\(index)"
+    }
 }
 
 extension PluginType: CaseIterable {}

@@ -15,6 +15,8 @@ import UIKit
 import WalletConnectSwift
 import web3swift
 
+import ResponderChain
+
 // swiftlint:disable file_length
 class Coordinator {
     static let main = Coordinator()
@@ -27,13 +29,17 @@ class Coordinator {
     
     private var window: UIWindow?
     
+    var topViewController: UIViewController? {
+        UIApplication.getTopViewController()
+    }
+    
     enum FromEdge {
         case bottom
     }
 
     enum Transition {
         case root
-        case modal(animated: Bool = true, adaptiveDelegate: UIAdaptivePresentationControllerDelegate? = nil)
+        case modal(wapperNav: Bool = false, animated: Bool = true, adaptiveDelegate: UIAdaptivePresentationControllerDelegate? = nil)
         case detail(animated: Bool = true)
         case panModel(animated: Bool = true)
         case alertController(completion: (() -> Void)? = nil)
@@ -194,18 +200,31 @@ class Coordinator {
             shareActionDelegate: RedPacketShareDelegate?
         )
         case moveBackupData
-        case luckyDrop
+        case luckyDrop(source: LuckyDropViewModel.Source, callback: (@MainActor (RedPacketPayload) -> Void)? = nil)
         case luckyDropConfirm(
             token: Token,
             gasFeeViewModel: GasFeeViewModel,
             redPacketInput: HappyRedPacketV4.CreateRedPacketInput,
             transaction: EthereumTransaction,
             options: TransactionOptions,
-            password: String,
             completion: (String?, Error?) -> Void
         )
-        case luckyDropSuccessfully
+        case luckyDropSuccessfully(callback: (@MainActor () -> Void)?)
+        case luckyDropCreatePersona(callback: (@MainActor () -> Void)?)
+        case luckyDropCreateProfile
+        case luckDropSelectProfile(callback: (@MainActor () -> Void)?)
+        case messageCompose(PluginMeta? = nil)
+        case composeSelectContact(viewModel: SelectContactViewModel)
         case debug
+    }
+    
+    func getMaskSocialViewController() -> MaskSocialViewController? {
+        let rootVC = window?.rootViewController
+        if let nav = rootVC as? UINavigationController {
+            return nav.topViewController as? MaskSocialViewController
+        } else {
+            return window?.rootViewController as? MaskSocialViewController
+        }
     }
     
     func setupMainWindow(window: UIWindow) {
@@ -289,10 +308,14 @@ class Coordinator {
                 }()
                 showPanModal(presentVC: presenter, vc: vc)
 
-            case let .modal(animated, delegate):
-                vc.presentationController?.delegate = delegate
-                vc.modalPresentationCapturesStatusBarAppearance = true
-                presentVC.present(vc, animated: animated, completion: completion)
+            case let .modal(wapperNav, animated, delegate):
+                var viewController = vc
+                if wapperNav {
+                    viewController = NavigationController(rootViewController: viewController)
+                }
+                viewController.presentationController?.delegate = delegate
+                viewController.modalPresentationCapturesStatusBarAppearance = true
+                presentVC.present(viewController, animated: animated, completion: completion)
 
             case let .alertController(completion):
                 vc.modalPresentationStyle = .overFullScreen
@@ -777,8 +800,8 @@ extension Coordinator {
         case .moveBackupData:
             return MoveBackupDataViewController()
             
-        case .luckyDrop:
-            let vc = LuckyDropViewController()
+        case let .luckyDrop(source, callback):
+            let vc = LuckyDropViewController(source: source, callback: callback)
             let nav = NavigationController(rootViewController: vc)
             nav.modalPresentationStyle = .overFullScreen
             return nav
@@ -789,7 +812,6 @@ extension Coordinator {
             let redPacketInput,
             let transaction,
             let options,
-            let password,
             let completion
         ):
             return LuckyDropConfirmViewController(
@@ -798,15 +820,35 @@ extension Coordinator {
                 redPacketInput: redPacketInput,
                 transaction: transaction,
                 options: options,
-                password: password,
                 completion: completion
             )
         
-        case .luckyDropSuccessfully:
-            return SheetViewAdapterController(rootView: LuckyDropSuccessfullyView())
+        case let .luckyDropSuccessfully(callback):
+            let viewModel = LuckyDropSuccessfullyViewModel(callback: callback)
+            return SheetViewAdapterController(rootView: LuckyDropSuccessfullyView(viewModel: viewModel))
             
+        case let .luckyDropCreatePersona(callback):
+            let viewModel = ShareLuckyDropViewViewModel(callback: callback)
+            return SheetViewAdapterController(rootView: ShareLuckyDropView(viewModel: viewModel))
+            
+        case .luckyDropCreateProfile:
+            return SheetViewAdapterController(rootView: ShareLuckyDropConnectPersonaView())
+            
+        case let .luckDropSelectProfile(callback):
+            let viewModel = ShareLuckyDropSelectProfileViewModel(callback: callback)
+            return SheetViewAdapterController(rootView: SelectSocialAccountView(viewModel: viewModel))
+            
+        case let .messageCompose(meta):
+            let viewModel = MessageComposeViewModel()
+            if let pluginMeta = meta {
+                viewModel.append(newPluginContent: pluginMeta)
+            }
+            return MaskHostViewController(rootView: MessageComposeView(viewModel: viewModel))
+
         case .debug:
             return UIHostingController(rootView: DebugView())
+        case let .composeSelectContact(selectContactViewModel):
+            return SelectContactViewController(viewModel: selectContactViewModel)
         }
     }
     // swiftlint:enable cyclomatic_complexity function_body_length
@@ -832,6 +874,16 @@ enum CoordinatorInjectKey: InjectValueKey {
 extension InjectValues {
     var mainCoordinator: Coordinator {
         Self[CoordinatorInjectKey.self]
+    }
+}
+
+class FullScreenAdaptive: NSObject, UIAdaptivePresentationControllerDelegate {
+    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {}
+    
+    func adaptivePresentationStyle(
+        for controller: UIPresentationController,
+        traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+            .overFullScreen
     }
 }
 // swiftlint:enable file_length

@@ -9,6 +9,9 @@
 import SwiftUI
 
 struct ShareLuckyDropView: View {
+    @ObservedObject
+    var viewModel: ShareLuckyDropViewViewModel
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(L10n.Plugins.Luckydrop.shareTitle)
@@ -23,12 +26,26 @@ struct ShareLuckyDropView: View {
             PrimaryButton(
                 title: L10n.Plugins.Luckydrop.Buttons.createPersona,
                 animating: false,
-                isEnable: true) {}
+                isEnable: true) {
+                    viewModel.coordinator.present(
+                        scene: .personaWelcome,
+                        transition: .modal(
+                            wapperNav: true, animated: true
+                        )
+                    )
+                }
             Spacer().frame(height: 20)
             PrimaryButton(
                 title: L10n.Plugins.Luckydrop.Buttons.recoverPersona,
                 animating: false,
-                isEnable: true) {}
+                isEnable: true) {
+                    viewModel.coordinator.present(
+                        scene: .identityRecovery(from: .initilisation),
+                        transition: .modal(
+                            wapperNav: true, animated: true
+                        )
+                    )
+                }
         }
         .padding(.horizontal, 20)
     }
@@ -36,6 +53,6 @@ struct ShareLuckyDropView: View {
 
 struct ShareLuckyDropView_Previews: PreviewProvider {
     static var previews: some View {
-        ShareLuckyDropView()
+        ShareLuckyDropView(viewModel: ShareLuckyDropViewViewModel(callback: nil))
     }
 }

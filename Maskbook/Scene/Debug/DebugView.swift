@@ -11,10 +11,8 @@ import SwiftUI
 struct DebugView: View {
     @Environment(\.presentationMode)
     private var presentationMode
-    
     @InjectedProvider(\.personaManager)
     private var personaManager
-    
     var body: some View {
         VStack(alignment: .leading) {
             NavigationLink(destination: JSResourceSelectView()) {

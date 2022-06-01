@@ -481,19 +481,17 @@ class AccountCardView: UIView {
         if let account = account {
             setAddress(account: account)
             updateDisplayAddress()
-            Publishers.CombineLatest3(
-                account.publisher(for: \.name).eraseToAnyPublisher(),
-                UserDefaultSettings.shared.displayBlockChainPublisher.eraseToAnyPublisher(),
-                UserDefaultPublishers.network.eraseToAnyPublisher()
-            )
+            
+            account.publisher(for: \.name).eraseToAnyPublisher()
+                .combineLatest(             UserDefaultSettings.shared.displayBlockChainPublisher.eraseToAnyPublisher())
                 .receive(on: DispatchQueue.main)
-                .sink { [weak self] name, displayBlockChain, networkType in
+                .sink { [weak self] name, displayBlockChain in
                     self?.updateBlockChainButtonStatus(currentBlockChain: displayBlockChain)
                     self?.updateBackground(isWalletConnect: account.fromWalletConnect,
                                            displayBlockchain: displayBlockChain)
                     self?.nameLabel.text = name
-                    self?.networkLabel.text = networkType.shortName.lowercased().capitalized
-                    self?.networkIcon.image = networkType.smallIcon?.withTintColor(Asset.Colors.AccountCard.nameText.color)
+                    self?.networkLabel.text = self?.userSetting.network.shortName.lowercased().capitalized
+                    self?.networkIcon.image = self?.userSetting.network.smallIcon?.withTintColor(Asset.Colors.AccountCard.nameText.color)
                 }
                 .store(in: &disposeBag)
         } else {

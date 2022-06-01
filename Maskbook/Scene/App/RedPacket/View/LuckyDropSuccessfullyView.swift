@@ -9,7 +9,8 @@
 import SwiftUI
 
 struct LuckyDropSuccessfullyView: View {
-    @StateObject private var viewModel = LuckyDropSuccessfullyViewModel()
+    @ObservedObject
+    var viewModel: LuckyDropSuccessfullyViewModel
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
@@ -27,7 +28,7 @@ struct LuckyDropSuccessfullyView: View {
                     .foregroundColor(Asset.Colors.Text.normal.asColor())
             Spacer().frame(height: 20)
             PrimaryButton(title: "Share to social media") {
-                
+                viewModel.callback?()
             }
         }
         .padding(.horizontal)
@@ -36,6 +37,6 @@ struct LuckyDropSuccessfullyView: View {
 
 struct LuckyDropSuccessfullyView_Previews: PreviewProvider {
     static var previews: some View {
-        LuckyDropSuccessfullyView()
+        LuckyDropSuccessfullyView(viewModel: LuckyDropSuccessfullyViewModel(callback: nil))
     }
 }

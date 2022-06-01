@@ -192,6 +192,46 @@ extension Api_StoredKeyExportType: CaseIterable {
 
 #endif  // swift(>=4.2)
 
+public enum Api_Curve: SwiftProtobuf.Enum {
+  public typealias RawValue = Int
+  case secp256K1 // = 0
+  case ed25519 // = 1
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .secp256K1
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .secp256K1
+    case 1: self = .ed25519
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .secp256K1: return 0
+    case .ed25519: return 1
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+}
+
+#if swift(>=4.2)
+
+extension Api_Curve: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static var allCases: [Api_Curve] = [
+    .secp256K1,
+    .ed25519,
+  ]
+}
+
+#endif  // swift(>=4.2)
+
 public struct Api_StoredKeyInfo {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -290,6 +330,7 @@ extension Api_Coin: @unchecked Sendable {}
 extension Api_StoredKeyType: @unchecked Sendable {}
 extension Api_StoredKeyImportType: @unchecked Sendable {}
 extension Api_StoredKeyExportType: @unchecked Sendable {}
+extension Api_Curve: @unchecked Sendable {}
 extension Api_StoredKeyInfo: @unchecked Sendable {}
 extension Api_StoredKeyAccountInfo: @unchecked Sendable {}
 extension Api_EncryptOption: @unchecked Sendable {}
@@ -328,6 +369,13 @@ extension Api_StoredKeyExportType: SwiftProtobuf._ProtoNameProviding {
     0: .same(proto: "PrivateKeyExportType"),
     1: .same(proto: "MnemonicExportType"),
     2: .same(proto: "KeyStoreJSONExportType"),
+  ]
+}
+
+extension Api_Curve: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "Secp256k1"),
+    1: .same(proto: "Ed25519"),
   ]
 }
 

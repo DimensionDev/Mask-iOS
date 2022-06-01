@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct GuideView: View {
-    @Environment(\.presentationMode) var presentationMode
     @State private var page: Int = 0
     let dismiss: (() -> Void)?
     

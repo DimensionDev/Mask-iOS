@@ -9,12 +9,15 @@
 import Combine
 import CoreDataStack
 import Foundation
+import web3swift
 import SwiftUI
 
 class WalletBottomWidgetViewModel: ObservableObject {
     @Published var token: Token? = nil
     @Published var isLocked: Bool = true
     @Published var txList = [String: TransactionStatus]()
+    
+    let pluginMetaShareViewModel = PluginMetaShareViewModel()
     
     var state: TransactionState {
         guard let status = txList[address]?.status else {
@@ -75,6 +78,9 @@ class WalletBottomWidgetViewModel: ObservableObject {
     @InjectedProvider(\.mainCoordinator)
     var coordinator
     
+    @InjectedProvider(\.personaManager)
+    var personaManager
+    
     private var disposeBag = Set<AnyCancellable>()
     
     private var txHash: String? {
@@ -83,7 +89,13 @@ class WalletBottomWidgetViewModel: ObservableObject {
     
     private var address: String = ""
     
-    init() {
+    let source: LuckyDropViewModel.Source
+    let callback: (@MainActor (RedPacketPayload) -> Void)?
+    
+    init(source: LuckyDropViewModel.Source, callback: (@MainActor (RedPacketPayload) -> Void)?) {
+        self.source = source
+        self.callback = callback
+        
         Publishers.CombineLatest3(
             settings.defaultAccountAddressPublisher.removeDuplicates(),
             settings.networkPubisher.removeDuplicates(),
@@ -108,15 +120,18 @@ class WalletBottomWidgetViewModel: ObservableObject {
         
         PendTransactionManager.shared.pendingTxFinishEvents.asDriver().sink { _ in
         } receiveValue: { [weak self] transcation, status in
-            guard let self = self else {
+            guard let self = self else { return }
+            guard self.address == transcation.address, transcation.txHash == self.txList[self.address]?.txHash,
+                  var state = self.txList[self.address] else {
+                // If the transaction is not in the list of listeners, the local data needs to be updated as well.
+                Task {
+                    if case .confirmed = status {
+                        await self.updateRedPacketRecord(transcation: transcation)
+                    }
+                }
                 return
             }
-            guard self.address == transcation.address, transcation.txHash == self.txList[self.address]?.txHash else {
-                return
-            }
-            guard var state = self.txList[self.address] else {
-                return
-            }
+            
             withAnimation {
                 state.status = status
                 self.txList[self.address] = state
@@ -131,10 +146,64 @@ class WalletBottomWidgetViewModel: ObservableObject {
             }
             
             if case .confirmed = status {
-                self.coordinator.present(scene: .luckyDropSuccessfully, transition: .modal())
+                if case .lab = source {
+                    self.coordinator.present(
+                        scene: .luckyDropSuccessfully(callback: { [weak self] in
+                            self?.pluginMetaShareViewModel.shareRedPacket(transcation: transcation)
+                        }),
+                        transition: .modal()
+                    )
+                }
+                
+                Task {
+                    await self.updateRedPacketRecord(transcation: transcation)
+                    
+                    guard let chainId = transcation.transactionInfo?.token.chainId,
+                          let networkId = transcation.transactionInfo?.token.networkId,
+                          let network = BlockChainNetwork(chainId: Int(chainId), networkId: UInt64(networkId)),
+                          let payload = PluginStorageRepository.queryRecord(
+                            chain: network,
+                            tx: transcation.txHash) else {
+                        return
+                    }
+                    await callback?(payload)
+                }
             }
         }
         .store(in: &disposeBag)
+    }
+    
+    @MainActor
+    func updateRedPacketRecord(transcation: PendTransactionModel) async {
+        // update record
+        guard let transactionResult = transcation.transactionReceipt,
+            let log = transactionResult.logs.first(where: { $0.address == ABI.happyRedPacketV4.contractAddress }) else {
+            return
+        }
+        let json = ABI.happyRedPacketV4.parse(eventlog: log)
+        guard let eventParam = HappyRedPacketV4.SuccessEvent(json: json),
+            let chainId = transcation.transactionInfo?.token.chainId,
+            let networkId = transcation.transactionInfo?.token.networkId,
+            let network = BlockChainNetwork(chainId: Int(chainId), networkId: UInt64(networkId)) else {
+            return
+        }
+        
+        guard var payload = PluginStorageRepository.queryRecord(
+            chain: network,
+            tx: transcation.txHash) else {
+            return
+        }
+        payload.basic?.rpid = eventParam.id
+        payload.basic?.creationTime = eventParam.creation_time.asDouble() ?? 0
+        
+        let checkAvailability = await ABI.happyRedPacketV4.checkAvailability(redPackageId: eventParam.id)
+        payload.payload?.totalRemaining = checkAvailability?.balance.flatMap { String($0, radix: 10) }
+        
+        PluginStorageRepository.save(
+            chain: network,
+            txHash: transcation.txHash,
+            payload: payload
+        )
     }
     
     func observeTransaction(txHash: String) {

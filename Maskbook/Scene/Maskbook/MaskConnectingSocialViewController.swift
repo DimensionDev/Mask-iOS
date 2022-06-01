@@ -445,7 +445,16 @@ extension MaskConnectingSocialViewController {
     
     @objc
     private func dashboardBarButtonItem() {
-        navigationController?.popViewController(animated: true)
+        guard let navi = navigationController else { return }
+        if navi.viewControllers[0] == self {
+            // presented
+            dismiss(animated: true)
+        } else {
+            // pushed
+            navi.popViewController(animated: true)
+            return
+        }
+        
     }
 }
 

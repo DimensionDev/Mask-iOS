@@ -157,6 +157,15 @@ enum PersonaRepository {
         }
     }
     
+    static func updateSelectedProfile(identifier: String,
+                                      profile: ProfileRecord)
+    {
+        if let persona = Self.queryPersona(identifier: identifier) {
+            persona.selectedProfile = profile
+            try? viewContext.saveOrRollback()
+        }
+    }
+    
     // swiftlint:disable cyclomatic_complexity
     static func updatePersona(persona: Persona,
                               linkedProfileMergePolicy: LinkedProfileMergePolicy,

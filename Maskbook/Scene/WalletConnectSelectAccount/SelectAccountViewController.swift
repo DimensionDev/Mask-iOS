@@ -18,7 +18,7 @@ class SelectAccountViewController: BaseViewController {
     typealias Item = ViewModel.WalletsItem
     
     let tableViewTopConstant = 154.0
-    private lazy var tableViewBottomConstant = (54 + safeAreaInsetsBottom)
+    private lazy var tableViewBottomConstant = 54.0
     let tableViewCellHeight = 85.0
     
     let safeAreaInsetsBottom: CGFloat = {
@@ -191,7 +191,7 @@ class SelectAccountViewController: BaseViewController {
     }
     
     private func bindViewModel() {
-        viewModel.accountListSubject
+        viewModel.accountListOfSelectedChainSubject
             .sink { [weak self] items in
                 guard let self = self else { return }
                 var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
@@ -277,12 +277,13 @@ class SelectAccountViewController: BaseViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
-        if viewModel.isShowAddWallet() {
+        if viewModel.isShowAddWallet {
             tableView.bottomAnchor.constraint(equalTo: addWalletView.topAnchor).isActive = true
         } else {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         }
-        addWalletView.isHidden = !viewModel.isShowAddWallet()
+        addWalletView.isHidden = !viewModel.isShowAddWallet
+        editButton.isHidden = !viewModel.isEditEnable
     }
     
     override func viewDidLayoutSubviews() {
@@ -296,7 +297,7 @@ class SelectAccountViewController: BaseViewController {
     }
     
     private func addCollectionShadow() {
-        collectionView.applyShadow(color: Asset.Colors.Shadow.socialShadow.color, alpha: 1, x: 0, y: 6, blur: 12, cornerRadius: 0, spread: 0)
+        collectionView.applyShadow(color: Asset.Colors.Shadow.socialShadow.color, alpha: 1, x: 0, y: 12, blur: 12, cornerRadius: 0, spread: 0)
     }
 }
 
@@ -306,8 +307,8 @@ extension SelectAccountViewController: PanModalPresentable {
     }
     
     var longFormHeight: PanModalHeight {
-        let bottom = viewModel.type == .editEnable ? tableViewBottomConstant : 0
-        let content = tableViewTopConstant + bottom + tableViewCellHeight * Double(viewModel.accountListSubject.value.count)
+        let bottom = (viewModel.isShowAddWallet ? tableViewBottomConstant : 0) + safeAreaInsetsBottom
+        let content = tableViewTopConstant + bottom + tableViewCellHeight *  Double(viewModel.maxAccountsNum)
         return .contentHeight(content - 32)
     }
 }

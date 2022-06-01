@@ -79,4 +79,16 @@ extension WalletSendError: LocalizedError {
         }
     }
 }
+
+extension Error {
+    var errorDescription: String? {
+        guard localizedDescription.isEmpty else {
+            return localizedDescription
+        }
+        guard let e = self as? WalletSendError else {
+            return localizedDescription
+        }
+        return e.errorDescription
+    }
+}
 // swiftlint:enable force_cast
