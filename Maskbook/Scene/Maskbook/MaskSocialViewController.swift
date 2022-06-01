@@ -388,9 +388,10 @@ extension MaskSocialViewController: WebMessageResolverDelegate {
     
     func webNotifyCompositionRequested(resolver: WebPublicApiMessageResolver,
                                        notifyComposition: CompositionRequestParam){
-        composeButton.isHidden = notifyComposition.open
+        if notifyComposition.reason == "popup"{
+            composeButton.isHidden = notifyComposition.open
+        }
     }
-
 }
 
 extension MaskSocialViewController {
