@@ -87,7 +87,6 @@ extension MaskSocialViewController {
     }
 
     func subscribeSignal() {
-        webPublicApisMessageResolver.delegate = self
         viewModel.backupReminder.sink { [weak self] _ in
             self?.alertBackup()
         }
@@ -389,7 +388,7 @@ extension MaskSocialViewController: WebMessageResolverDelegate {
     
     func webNotifyCompositionRequested(resolver: WebPublicApiMessageResolver,
                                        notifyComposition: CompositionRequestParam){
-        
+        composeButton.isHidden = notifyComposition.open
     }
 
 }
@@ -405,8 +404,8 @@ extension MaskSocialViewController {
 extension MaskSocialViewController {
         
     func addNativaComposeButton() {
+        webPublicApisMessageResolver.delegate = self
         composeButton = NativeComposeButton()
-        
         if let view = self.navigationController?.view {
             view.addSubview(composeButton)
             composeButton.snp.makeConstraints { make in
