@@ -21,51 +21,56 @@ class PendTransactionManager {
     public var pendTransactions: CurrentValueSubject<[PendTransactionModel], Never> = CurrentValueSubject([])
 
     private func start() {
-            timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
-                DispatchQueue.global().async {
-                    var pendList = self.pendTransactions.value
-                    guard let web3Provier = Web3ProviderFactory.provider?.eth else {
-                        self.stop()
-                        return
-                    }
-                    
-                    if pendList.isEmpty {
-                        self.stop()
-                    }
-                    
-                    var removed: [PendTransactionModel] = []
-                    for pendingTransaction in pendList {
-                        _ = web3Provier.getTransactionReceiptPromise(pendingTransaction.txHash)
-                            .done { transactionReceipt in
-                                var transaction = pendingTransaction
-                                transaction.transactionReceipt = transactionReceipt
-                                switch transactionReceipt.status {
-                                case .ok:
-                                    self.pendingTxFinishEvents.send((transcation: transaction, status: .confirmed))
-                                case .notYetProcessed:
-                                    self.pendingTxFinishEvents.send((transcation: transaction, status: .pending))
-                                case .failed:
-                                    self.pendingTxFinishEvents.send((transcation: transaction, status: .failed))
-                                }
-                                
-                                if transactionReceipt.status != .notYetProcessed {
-                                    removed.append(pendingTransaction)
-                                }
-                            }
-                    }
-                    // FIXED: Never delete elements during iteration.
-                    pendList.removeAll { pendTransaction in
-                        removed.contains { removedTransaction in
-                            removedTransaction.txHash == pendTransaction.txHash
+        guard timer?.isValid != true else {
+            return
+        }
+        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
+            DispatchQueue.global().async { [weak self] in
+                guard let self = self else { return }
+                var pendList = self.pendTransactions.value
+                guard let web3Provier = Web3ProviderFactory.provider?.eth else {
+                    self.stop()
+                    return
+                }
+                
+                if pendList.isEmpty {
+                    self.stop()
+                }
+                
+                var removed: [PendTransactionModel] = []
+                for pendingTransaction in pendList {
+                    web3Provier.getTransactionReceiptPromise(pendingTransaction.txHash).done { transactionReceipt in
+                        var transaction = pendingTransaction
+                        transaction.transactionReceipt = transactionReceipt
+                        switch transactionReceipt.status {
+                        case .ok:
+                            self.pendingTxFinishEvents.send((transcation: transaction, status: .confirmed))
+                        case .notYetProcessed:
+                            self.pendingTxFinishEvents.send((transcation: transaction, status: .pending))
+                        case .failed:
+                            self.pendingTxFinishEvents.send((transcation: transaction, status: .failed))
+                        }
+                        
+                        if transactionReceipt.status != .notYetProcessed {
+                            removed.append(pendingTransaction)
                         }
                     }
-                    self.pendTransactions.send(pendList)
                 }
+                // FIXED: Never delete elements during iteration.
+                pendList.removeAll { pendTransaction in
+                    removed.contains { removedTransaction in
+                        removedTransaction.txHash == pendTransaction.txHash
+                    }
+                }
+                self.pendTransactions.send(pendList)
             }
+        }
     }
     
     private func stop() {
         timer?.invalidate()
+        timer = nil
     }
     
     public func addPendTrancation(txHash: String, history: TransactionHistory, transcationInfo: PendTransactionModel.TranscationInfo, nonce: BigUInt) {
