@@ -11,6 +11,7 @@ import web3swift
 
 enum MaskError: Error {
     case invalidPassword
+    case invalidBackupData
 }
 
 extension MaskError: LocalizedError {
@@ -18,6 +19,9 @@ extension MaskError: LocalizedError {
         switch self {
         case .invalidPassword:
             return "Invalid password"
+        
+        case .invalidBackupData:
+            return "Invalid Backup Data"
         }
     }
 }
