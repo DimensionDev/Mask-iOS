@@ -29,6 +29,21 @@ struct WalletBackupInfo: Codable {
         self.mnemonic = mnemonic
         self.privateKey = privateKey
     }
+
+    init(from json: [String: Any]) {
+        name = json[CodingKeys.name.stringValue] as? String ?? ""
+        address = json[CodingKeys.address.stringValue] as? String ?? ""
+        createdAt = json[CodingKeys.createdAt.stringValue] as? TimeInterval ?? 0
+        updatedAt = json[CodingKeys.updatedAt.stringValue] as? TimeInterval ?? 0
+        passphrase = json[CodingKeys.passphrase.stringValue] as? String
+        mnemonic = json[CodingKeys.mnemonic.stringValue]
+            .flatMap { $0 as? [String: Any] }
+            .flatMap { Mnemonic(from: $0) }
+
+        privateKey = json[CodingKeys.privateKey.stringValue]
+            .flatMap { $0 as? [String: Any] }
+            .flatMap { PrivateKey(from: json) }
+    }
 }
 
 // MARK: - Mnemonic
@@ -36,15 +51,46 @@ extension WalletBackupInfo {
     struct Mnemonic: Codable {
         let words: String
         let parameter: Parameter
+
+        init(from json: [String: Any]) {
+            words = json[CodingKeys.words.stringValue] as? String ?? ""
+            let param = json[CodingKeys.parameter.stringValue] as? [String: Any] ?? [:]
+            parameter = Parameter(from: param)
+        }
+
+        init(words: String, parameter: Parameter) {
+            self.words = words
+            self.parameter = parameter
+        }
     }
 
     // MARK: - Parameter
     struct Parameter: Codable {
         let path: String
+        let withPassword: Bool?
+
+        init(from json: [String: Any]) {
+            path =  json[CodingKeys.path.stringValue] as? String ?? ""
+            withPassword = json[CodingKeys.withPassword.stringValue] as? Bool
+        }
+
+        init(path: String, withPassword: Bool? = nil) {
+            self.path = path
+            self.withPassword = withPassword
+        }
     }
 
     // MARK: - PrivateKey
     struct PrivateKey: Codable {
+        init(crv: String, x: String, y: String, keyOps: [String], kty: String, d: String) {
+            self.crv = crv
+            self.x = x
+            self.y = y
+            self.keyOps = keyOps
+            self.kty = kty
+            self.d = d
+        }
+
         let crv: String
         let x, y: String
         let keyOps: [String]
@@ -55,6 +101,17 @@ extension WalletBackupInfo {
             case keyOps = "key_ops"
             case kty, d
         }
+
+        init(from json: [String: Any]) {
+            d = json[CodingKeys.d.stringValue] as? String ?? ""
+            x = json[CodingKeys.x.stringValue] as? String ?? ""
+            y = json[CodingKeys.y.stringValue] as? String ?? ""
+            kty = json[CodingKeys.kty.stringValue] as? String ?? ""
+            crv = json[CodingKeys.crv.stringValue] as? String ?? ""
+            keyOps = json[CodingKeys.keyOps.stringValue] as? [String] ?? []
+        }
+
+
     }
 
     func asBackupJSON() -> [String: Any]? {

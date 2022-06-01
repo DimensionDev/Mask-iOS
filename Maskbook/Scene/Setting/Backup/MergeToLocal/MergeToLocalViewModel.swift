@@ -62,7 +62,7 @@ final class MergeToLocalViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }
     
-    func decryptRemoteFile(password: String, data: Data) -> AnyPublisher<Data, Error> {
+    private func decryptRemoteFile(password: String, data: Data) -> AnyPublisher<Data, Error> {
         // swiftlint:disable array_init
         Crypto.decryptBackupToDataPublisher(
             password: password,

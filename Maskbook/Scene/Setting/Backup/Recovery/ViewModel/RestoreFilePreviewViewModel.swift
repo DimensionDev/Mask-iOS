@@ -202,11 +202,11 @@ extension URL {
 extension RestoreFilePreviewViewModel {
     func parsingData() {
         let data = self.validRestoreData
-        guard let json = try? JSON(data: data) else {
+        guard let json = data.asCompatibleBackupJSON() else {
             stateSignal.send(.restoreFailed)
             return
         }
-        
+
         let personasCount = json["personas"].arrayValue.count
         let profilesCount = json["profiles"].arrayValue.count
         let postsCount = json["posts"].arrayValue.count
