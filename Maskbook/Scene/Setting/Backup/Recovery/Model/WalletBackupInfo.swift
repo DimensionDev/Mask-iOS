@@ -1,5 +1,4 @@
 import Foundation
-import SocketIO
 import SwiftyJSON
 
 // MARK: - WalletBackupInfo
@@ -42,7 +41,7 @@ struct WalletBackupInfo: Codable {
 
         privateKey = json[CodingKeys.privateKey.stringValue]
             .flatMap { $0 as? [String: Any] }
-            .flatMap { PrivateKey(from: json) }
+            .flatMap { PrivateKey(from: $0) }
     }
 }
 
@@ -67,14 +66,15 @@ extension WalletBackupInfo {
     // MARK: - Parameter
     struct Parameter: Codable {
         let path: String
-        let withPassword: Bool?
+        // must have value, to make the situation that mnenomic exist and private key is nil reasonable
+        let withPassword: Bool
 
         init(from json: [String: Any]) {
             path =  json[CodingKeys.path.stringValue] as? String ?? ""
-            withPassword = json[CodingKeys.withPassword.stringValue] as? Bool
+            withPassword = json[CodingKeys.withPassword.stringValue] as? Bool ?? false
         }
 
-        init(path: String, withPassword: Bool? = nil) {
+        init(path: String, withPassword: Bool = false) {
             self.path = path
             self.withPassword = withPassword
         }
