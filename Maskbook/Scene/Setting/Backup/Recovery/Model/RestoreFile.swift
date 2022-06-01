@@ -285,8 +285,7 @@ extension RestoreFile {
         let identifier: String
         let linkedPersona: String
 
-
-        enum CodineKeys: String, CodingKey {
+        private enum CodingKeys: String, CodingKey {
             case createdAt
             case updatedAt
             case nickName = "nickname"
