@@ -81,7 +81,7 @@ extension WalletCoreService {
                 address: address,
                 createdAt: createdAt,
                 updateAt: updatedAt,
-                passphrase: "",
+                passphrase: nil,
                 mnemonic: mnemonic,
                 privateKey: privateKey
             )

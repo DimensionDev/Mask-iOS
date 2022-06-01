@@ -16,7 +16,7 @@ struct WalletBackupInfo: Codable {
         address: String = "",
         createdAt: TimeInterval = 0,
         updateAt: TimeInterval = 0,
-        passphrase: String = "",
+        passphrase: String? = nil,
         mnemonic: Mnemonic? = nil,
         privateKey: PrivateKey? = nil
     ) {
@@ -32,8 +32,12 @@ struct WalletBackupInfo: Codable {
     init(from json: [String: Any]) {
         name = json[CodingKeys.name.stringValue] as? String ?? ""
         address = json[CodingKeys.address.stringValue] as? String ?? ""
-        createdAt = json[CodingKeys.createdAt.stringValue] as? TimeInterval ?? 0
-        updatedAt = json[CodingKeys.updatedAt.stringValue] as? TimeInterval ?? 0
+        createdAt = json[CodingKeys.createdAt.stringValue]
+            .flatMap(RestoreFile.converTimeInterval) ?? 0
+
+        updatedAt = json[CodingKeys.updatedAt.stringValue]
+            .flatMap(RestoreFile.converTimeInterval) ?? 0
+
         passphrase = json[CodingKeys.passphrase.stringValue] as? String
         mnemonic = json[CodingKeys.mnemonic.stringValue]
             .flatMap { $0 as? [String: Any] }
