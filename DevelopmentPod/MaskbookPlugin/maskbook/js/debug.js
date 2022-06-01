@@ -747,13 +747,13 @@ const body = `\
 ## Environment
 
 User Agent: ${navigator.userAgent}
-Version: ${"v1.29.12-2344-g375d2b347"}
+Version: ${"v1.29.12-2348-g181e22679"}
 Tag Name: ${"v2.5.0"}
-Build Date: ${"2022-04-20T09:20:23.090Z"}
-Commit Hash: ${"375d2b347"}
-Commit Date: ${"2022-04-20T09:14:57.000Z"}
+Build Date: ${"2022-06-01T07:52:48.068Z"}
+Commit Hash: ${"181e22679"}
+Commit Date: ${"2022-06-01T07:46:29.000Z"}
 Remote URL: ${"git@github.com:DimensionDev/Maskbook.git"}
-Branch Name: ${"feat/sendRedpacketToNative"}
+Branch Name: ${"feat/mobile"}
 
 ## Bug Info
 
@@ -782,13 +782,13 @@ var src = __webpack_require__(53242);
 
 const DEBUG_INFO = {
     'User Agent': navigator.userAgent,
-    'Mask Version': "v1.29.12-2344-g375d2b347",
+    'Mask Version': "v1.29.12-2348-g181e22679",
     'Build Date': process.env.channel_DATE,
     'Tag Name': "v2.5.0",
-    'Commit Hash': "375d2b347",
-    'Commit Date': "2022-04-20T09:14:57.000Z",
+    'Commit Hash': "181e22679",
+    'Commit Date': "2022-06-01T07:46:29.000Z",
     'Remote URL': "git@github.com:DimensionDev/Maskbook.git",
-    'Branch Name': "feat/sendRedpacketToNative",
+    'Branch Name': "feat/mobile",
     Dirty: false,
     'Tag Dirty': true
 };
@@ -993,13 +993,13 @@ async function backupAll() {
     const payload = {
         buildInfo: {
             'user-agent': navigator.userAgent,
-            version: "v1.29.12-2344-g375d2b347",
-            'build-date': "2022-04-20T09:20:23.090Z",
+            version: "v1.29.12-2348-g181e22679",
+            'build-date': "2022-06-01T07:52:48.068Z",
             'tag-name': "v2.5.0",
-            'commit-hash': "375d2b347",
-            'commit-date': "2022-04-20T09:14:57.000Z",
+            'commit-hash': "181e22679",
+            'commit-date': "2022-06-01T07:46:29.000Z",
             'remote-url': "git@github.com:DimensionDev/Maskbook.git",
-            'branch-name': "feat/sendRedpacketToNative",
+            'branch-name': "feat/mobile",
             dirty: false,
             'tag-dirty': true
         },

@@ -101,6 +101,14 @@ extension MaskbookNavigationDelegateShim {
         delegate?.navigationDidChange(url: navigationAction.request.url)
     }
     
+    func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
+        print("")
+    }
+    
+    func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
+        print("")
+    }
+    
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation) {
     }
     

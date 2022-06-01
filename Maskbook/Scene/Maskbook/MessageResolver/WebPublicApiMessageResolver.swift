@@ -54,6 +54,7 @@ class WebPublicApiMessageResolver: MaskMessageResolver {
         case claimOrRefundRedpacket
         
         case notify_visible_detected_profile_changed
+        case notify_composition_requested
     }
     
     @InjectedProvider(\.mainCoordinator)
@@ -225,7 +226,15 @@ class WebPublicApiMessageResolver: MaskMessageResolver {
                 delegate?.webPublicApiMessageResolver(resolver: self,
                                                       profilesDetect: profileIdentifiers)
             }
+            
+        case .notify_composition_requested:
+            if let param = notifyCompositionRequested(messageData: messageData) {
+                let composeWillOpen = param.open
+                let composeChangeReason = param.reason
+                // @hydraCy
+            }
         }
+        
         if !parseSuccess {
             sendResponseToWebView(response: false, id: requestId)
         }
