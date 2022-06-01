@@ -306,8 +306,10 @@ extension RestoreFile {
         }
 
         init(from json: [String: Any]) {
-            createdAt = json[CodingKeys.createdAt.stringValue] as? TimeInterval ?? 0
-            updatedAt = json[CodingKeys.updatedAt.stringValue] as? TimeInterval ?? 0
+            createdAt = json[CodingKeys.createdAt.stringValue]
+                .flatMap(RestoreFile.converTimeInterval) ?? 0
+            updatedAt = json[CodingKeys.updatedAt.stringValue]
+                .flatMap(RestoreFile.converTimeInterval) ?? 0
             nickName = json[CodingKeys.nickName.stringValue] as? String ?? ""
             identifier = json[CodingKeys.identifier.stringValue] as? String ?? ""
             linkedPersona = json[CodingKeys.linkedPersona.stringValue] as? String ?? ""
