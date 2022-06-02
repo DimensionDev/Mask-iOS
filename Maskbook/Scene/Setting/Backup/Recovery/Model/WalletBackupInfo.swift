@@ -100,6 +100,7 @@ extension WalletBackupInfo {
             self.keyOps = keyOps
             self.kty = kty
             self.d = d
+            ext = true
         }
 
         let crv: String
@@ -107,11 +108,13 @@ extension WalletBackupInfo {
         let keyOps: [String]
         let kty: String
         let d: String?
+        let ext: Bool?
 
         enum CodingKeys: String, CodingKey {
             case crv, x, y
             case keyOps = "key_ops"
             case kty, d
+            case ext
         }
 
         init(from json: [String: Any]) {
@@ -121,6 +124,7 @@ extension WalletBackupInfo {
             kty = json[CodingKeys.kty.stringValue] as? String ?? ""
             crv = json[CodingKeys.crv.stringValue] as? String ?? ""
             keyOps = json[CodingKeys.keyOps.stringValue] as? [String] ?? []
+            ext = json[CodingKeys.ext.stringValue] as? Bool ?? true
         }
     }
 
