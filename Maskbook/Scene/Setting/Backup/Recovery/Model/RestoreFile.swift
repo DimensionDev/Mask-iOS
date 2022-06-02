@@ -112,7 +112,8 @@ extension RestoreFile {
             let d: String?
             let x: String?
             let y: String?
-            let ext: Bool?
+            @BoolConvertedWithInt
+            var ext: Bool?
             let key_ops: [String]?
             let kty: String?
             let crv: String?
@@ -124,7 +125,7 @@ extension RestoreFile {
                 kty = json[CodingKeys.kty.stringValue] as? String
                 crv = json[CodingKeys.crv.stringValue] as? String
                 key_ops = json[CodingKeys.key_ops.stringValue] as? [String]
-                ext = json[CodingKeys.ext.stringValue] as? Bool
+                _ext = BoolConvertedWithInt(json: json, key: CodingKeys.ext.stringValue)
             }
         }
 
@@ -162,28 +163,33 @@ extension RestoreFile {
 
     struct LocalKey: Codable {
         let alg: String?
-        let ext: Bool?
+
         let k: String?
         let key_ops: [String]?
         let kty: String?
+
+        @BoolConvertedWithInt
+        var ext: Bool?
 
         init(from json:[String: Any]) {
             k = json[CodingKeys.k.stringValue] as? String
             alg = json[CodingKeys.alg.stringValue] as? String
             kty = json[CodingKeys.kty.stringValue] as? String
             key_ops = json[CodingKeys.key_ops.stringValue] as? [String]
-            ext = json[CodingKeys.ext.stringValue] as? Bool
+            _ext = BoolConvertedWithInt(json: json, key: CodingKeys.ext.stringValue)
         }
     }
 
     struct Mnemonic: Codable {
         struct Parameter: Codable {
             let path: String
-            let withPassword: Bool?
+
+            @BoolConvertedWithInt
+            var withPassword: Bool?
 
             init(from json: [String: Any]) {
                 path =  json[CodingKeys.path.stringValue] as? String ?? ""
-                withPassword = json[CodingKeys.withPassword.stringValue] as? Bool
+                _withPassword = BoolConvertedWithInt(json: json, key: CodingKeys.withPassword.stringValue)
             }
         }
 
