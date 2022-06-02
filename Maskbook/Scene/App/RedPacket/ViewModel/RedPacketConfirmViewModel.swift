@@ -263,7 +263,7 @@ class RedPacketConfirmViewModel: ObservableObject {
                     asset: token,
                     toAddress: to,
                     amount: amount)
-                PendTransactionManager.shared.addPendTrancation(
+                PendTransactionManager.shared.addPendingTrancation(
                     txHash: txhash,
                     history: history,
                     transcationInfo:transactionInfo,
