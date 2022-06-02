@@ -7,9 +7,7 @@ struct RestoreFile: Codable {
     let personas: [Persona]?
     let posts: [Post]?
     let profiles: [Profile]?
-
     let wallets: [WalletBackupInfo]?
-
 
     init(from json: [String: Any]) {
         meta = json[CodingKeys.meta.stringValue]
