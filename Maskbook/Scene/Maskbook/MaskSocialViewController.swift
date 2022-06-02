@@ -57,7 +57,7 @@ class MaskSocialViewController: BaseViewController {
     
     private var composeButton = NativeComposeButton()
     
-    static let composeUrl:String = "https://mobile.twitter.com/compose/tweet"
+    static let composeUrl:String = "compose/tweet"
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -221,7 +221,7 @@ extension MaskSocialViewController {
         maskbookTab.tab?.webView.publisher(for: \.url)
             .sink(receiveValue: {[weak self] webUrl in
                 guard let url = webUrl?.absoluteString else { return }
-                self?.composeButton.isHidden = !(url == MaskSocialViewController.composeUrl)
+                self?.composeButton.isHidden = !url.hasSuffix(MaskSocialViewController.composeUrl)
             })
             .store(in: &disposeBag)
     }
@@ -407,6 +407,7 @@ extension MaskSocialViewController {
     func addNativaComposeButton() {
         webPublicApisMessageResolver.delegate = self
         composeButton = NativeComposeButton()
+        composeButton.isHidden = true
         if let view = self.navigationController?.view {
             view.addSubview(composeButton)
             composeButton.snp.makeConstraints { make in
