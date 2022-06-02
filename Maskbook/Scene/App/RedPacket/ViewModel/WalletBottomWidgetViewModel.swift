@@ -118,7 +118,7 @@ class WalletBottomWidgetViewModel: ObservableObject {
         .assign(to: \.isLocked, on: self)
         .store(in: &disposeBag)
         
-        PendTransactionManager.shared.pendingTxFinishEvents.asDriver().sink { _ in
+        PendingTransactionManager.shared.pendingTxFinishEvents.asDriver().sink { _ in
         } receiveValue: { [weak self] transcation, status in
             guard let self = self else { return }
             guard self.address == transcation.address, transcation.txHash == self.txList[self.address]?.txHash,
@@ -174,7 +174,7 @@ class WalletBottomWidgetViewModel: ObservableObject {
     }
     
     @MainActor
-    func updateRedPacketRecord(transcation: PendTransactionModel) async {
+    func updateRedPacketRecord(transcation: PendingTransaction) async {
         // update record
         guard let transactionResult = transcation.transactionReceipt,
             let log = transactionResult.logs.first(where: { $0.address == ABI.happyRedPacketV4.contractAddress }) else {

@@ -37,7 +37,7 @@ class TokenDetailViewModel: NSObject {
         super.init()
         
         Publishers.CombineLatest(WalletAssetManager.shared.transactions,
-                                 PendTransactionManager.shared.pendTransactions)
+                                 PendingTransactionManager.shared.pendingTransactions)
         .map { [weak self] allTransactions, allPendingTransactions in
             guard let `self` = self else { return [] }
             let displayTransactions = allTransactions.filter { transaction in

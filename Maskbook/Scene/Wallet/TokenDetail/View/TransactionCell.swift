@@ -301,7 +301,7 @@ class TransactionCell: UITableViewCell {
 extension TransactionCell {
     @objc
     func speedUpClicked(_ sender: UIButton) {
-        let result = PendTransactionManager.shared.pendTransactions.value.filter {
+        let result = PendingTransactionManager.shared.pendingTransactions.value.filter {
             $0.txHash == self.txHash &&
             $0.address == maskUserDefaults.defaultAccountAddress &&
             $0.networkId == maskUserDefaults.network.networkId
@@ -324,7 +324,7 @@ extension TransactionCell {
     
     @objc
     func cancelClicked(_ sender: UIButton) {
-        let result = PendTransactionManager.shared.pendTransactions.value.filter {
+        let result = PendingTransactionManager.shared.pendingTransactions.value.filter {
             $0.txHash == self.txHash &&
             $0.address == maskUserDefaults.defaultAccountAddress &&
             $0.networkId == maskUserDefaults.network.networkId

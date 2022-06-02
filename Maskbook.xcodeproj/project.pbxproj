@@ -695,8 +695,8 @@
 		6F25327C27C63168000C0D27 /* NFTActionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F25327B27C63164000C0D27 /* NFTActionTableViewCell.swift */; };
 		6F25328227C72883000C0D27 /* NFTActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F25328127C72883000C0D27 /* NFTActionViewController.swift */; };
 		6F25328427C773AB000C0D27 /* NFTActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F25328327C773AB000C0D27 /* NFTActionViewModel.swift */; };
-		6F53A8E627FECAF3002465C8 /* PendTransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F53A8E527FECAF3002465C8 /* PendTransactionModel.swift */; };
-		6F53A8E827FECD6B002465C8 /* PendTransactionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F53A8E727FECD6B002465C8 /* PendTransactionManager.swift */; };
+		6F53A8E627FECAF3002465C8 /* PendingTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F53A8E527FECAF3002465C8 /* PendingTransaction.swift */; };
+		6F53A8E827FECD6B002465C8 /* PendingTransactionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F53A8E727FECD6B002465C8 /* PendingTransactionManager.swift */; };
 		6F702B262695B52900B72703 /* WalletSendHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F702B252695B52900B72703 /* WalletSendHelper.swift */; };
 		6F782A98283B61670068E123 /* SelectContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F782A97283B61670068E123 /* SelectContactViewController.swift */; };
 		6F782A9A283B617C0068E123 /* SelectContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F782A99283B617C0068E123 /* SelectContactTableViewCell.swift */; };
@@ -1478,8 +1478,8 @@
 		6F25327B27C63164000C0D27 /* NFTActionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTActionTableViewCell.swift; sourceTree = "<group>"; };
 		6F25328127C72883000C0D27 /* NFTActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTActionViewController.swift; sourceTree = "<group>"; };
 		6F25328327C773AB000C0D27 /* NFTActionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTActionViewModel.swift; sourceTree = "<group>"; };
-		6F53A8E527FECAF3002465C8 /* PendTransactionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendTransactionModel.swift; sourceTree = "<group>"; };
-		6F53A8E727FECD6B002465C8 /* PendTransactionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendTransactionManager.swift; sourceTree = "<group>"; };
+		6F53A8E527FECAF3002465C8 /* PendingTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTransaction.swift; sourceTree = "<group>"; };
+		6F53A8E727FECD6B002465C8 /* PendingTransactionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTransactionManager.swift; sourceTree = "<group>"; };
 		6F702B252695B52900B72703 /* WalletSendHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSendHelper.swift; sourceTree = "<group>"; };
 		6F782A97283B61670068E123 /* SelectContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectContactViewController.swift; sourceTree = "<group>"; };
 		6F782A99283B617C0068E123 /* SelectContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectContactTableViewCell.swift; sourceTree = "<group>"; };
@@ -3693,8 +3693,8 @@
 		6F53A8E227FECA98002465C8 /* PendTransacation */ = {
 			isa = PBXGroup;
 			children = (
-				6F53A8E527FECAF3002465C8 /* PendTransactionModel.swift */,
-				6F53A8E727FECD6B002465C8 /* PendTransactionManager.swift */,
+				6F53A8E527FECAF3002465C8 /* PendingTransaction.swift */,
+				6F53A8E727FECD6B002465C8 /* PendingTransactionManager.swift */,
 			);
 			path = PendTransacation;
 			sourceTree = "<group>";
@@ -4768,7 +4768,7 @@
 				2DEDDEAB2761EE7900D37A76 /* MaskClientMeta.swift in Sources */,
 				2AD855F32812875A0064DDA5 /* SheetViewAdapterController.swift in Sources */,
 				0F41A088260B39EF000037B2 /* WalletAssetObserver.swift in Sources */,
-				6F53A8E827FECD6B002465C8 /* PendTransactionManager.swift in Sources */,
+				6F53A8E827FECD6B002465C8 /* PendingTransactionManager.swift in Sources */,
 				2AD8559D281285520064DDA5 /* PluginStorageRepository.swift in Sources */,
 				2A6ABB992720053B00CC3AED /* RemoteRestoreVerifyView.swift in Sources */,
 				2AD85577281284940064DDA5 /* PostRecord.swift in Sources */,
@@ -4803,7 +4803,7 @@
 				2A6ABB8D2720053B00CC3AED /* RestoreItemProvider.swift in Sources */,
 				2AD856102812875A0064DDA5 /* DBImageDecoder.swift in Sources */,
 				1FEE1EAC27845E1F00697F81 /* Web3+signTX.swift in Sources */,
-				6F53A8E627FECAF3002465C8 /* PendTransactionModel.swift in Sources */,
+				6F53A8E627FECAF3002465C8 /* PendingTransaction.swift in Sources */,
 				0FAF2F502669D25A00C1B577 /* Currency.swift in Sources */,
 				5D770B1127DED6F900539254 /* PersonaAvatarViewController.swift in Sources */,
 				2AF88583271EE9310004565A /* WalletHistoryViewController.swift in Sources */,
