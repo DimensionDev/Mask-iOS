@@ -11,7 +11,7 @@ import web3swift
 import BigInt
 import CoreDataStack
 
-struct PendTransactionModel {
+struct PendingTransaction {
     var address: String
     var networkId: Int64
     var transactionReceipt: TransactionReceipt?

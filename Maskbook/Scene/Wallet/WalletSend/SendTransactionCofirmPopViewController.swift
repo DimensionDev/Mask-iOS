@@ -355,9 +355,9 @@ final class SendTransactionCofirmPopViewController: UIViewController {
                         self?.sendStatus = .sent
                         let recentAddress = RecentlyAddress(address: toAddress, chainId: Int64(maskUserDefaults.network.networkId))
                         maskUserDefaults.addRecentlyAddress(address: recentAddress)
-                        let transactionInfo = PendTransactionModel.TranscationInfo(gaslimit: self?.viewModel.gasLimitPublisher.value, gasPrice: self?.viewModel.gasPricePublisher.value, amount: self?.amount ?? "0", toAddress: toAddress, gasNetModel: self?.viewModel.gasFeeNetModelTokenPublisher.value, token: token)
+                        let transactionInfo = PendingTransaction.TranscationInfo(gaslimit: self?.viewModel.gasLimitPublisher.value, gasPrice: self?.viewModel.gasPricePublisher.value, amount: self?.amount ?? "0", toAddress: toAddress, gasNetModel: self?.viewModel.gasFeeNetModelTokenPublisher.value, token: token)
                         let history = TransactionHistory(txHash: txhash ?? "", asset: token, toAddress: toAddress, amount: self?.amount ?? "0")
-                        PendTransactionManager.shared.addPendingTrancation(txHash: txhash ?? "", history: history, transcationInfo:transactionInfo, nonce: nonce)
+                        PendingTransactionManager.shared.addPendingTrancation(txHash: txhash ?? "", history: history, transcationInfo:transactionInfo, nonce: nonce)
                         self?.dismiss(animated: true, completion: {
                             Coordinator.main.present(scene: .walletHistory,
                                                      transition: .replaceCurrentNavigationWithoutRoot(tab: .wallet, animated: true))
@@ -383,9 +383,9 @@ final class SendTransactionCofirmPopViewController: UIViewController {
                             self?.sendStatus = .sent
                             let recentAddress = RecentlyAddress(address: toAddress, chainId: Int64(maskUserDefaults.network.networkId))
                             maskUserDefaults.addRecentlyAddress(address: recentAddress)
-                            let transactionInfo = PendTransactionModel.TranscationInfo(gaslimit: self?.viewModel.gasLimitPublisher.value, gasPrice: self?.viewModel.gasPricePublisher.value, amount: self?.amount ?? "0", toAddress: toAddress, gasNetModel: self?.viewModel.gasFeeNetModelTokenPublisher.value, token: token)
+                            let transactionInfo = PendingTransaction.TranscationInfo(gaslimit: self?.viewModel.gasLimitPublisher.value, gasPrice: self?.viewModel.gasPricePublisher.value, amount: self?.amount ?? "0", toAddress: toAddress, gasNetModel: self?.viewModel.gasFeeNetModelTokenPublisher.value, token: token)
                             let history = TransactionHistory(txHash: txhash ?? "", asset: token, toAddress: toAddress, amount: self?.amount ?? "0")
-                            PendTransactionManager.shared.addPendingTrancation(txHash: txhash ?? "", history: history, transcationInfo:transactionInfo, nonce: nonce)
+                            PendingTransactionManager.shared.addPendingTrancation(txHash: txhash ?? "", history: history, transcationInfo:transactionInfo, nonce: nonce)
                             self?.dismiss(animated: true, completion: {
                                 Coordinator.main.present(scene: .walletHistory,
                                                          transition: .replaceCurrentNavigationWithoutRoot(tab: .wallet, animated: true))

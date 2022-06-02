@@ -18,7 +18,7 @@ class PluginMetaShareViewModel {
     var shareMeta: PluginMeta?
 
     @MainActor
-    func shareRedPacket(transcation: PendTransactionModel) {
+    func shareRedPacket(transcation: PendingTransaction) {
         // open composer directly
         guard let chainId = transcation.transactionInfo?.token.chainId,
               let networkId = transcation.transactionInfo?.token.networkId,
