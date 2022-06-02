@@ -11,6 +11,7 @@ import CryptoKit
 import CryptoSwift
 import Foundation
 import SwiftMsgPack
+import SwiftyJSON
 
 enum SupportedVersions {
     case version0
@@ -31,7 +32,7 @@ enum Crypto {
         case unknownFormat
         case wrongCheckSum
     }
-    
+
     // generate PBKDF2 key
     static func generateKeyWith(_ password: String) throws -> ([UInt8]?, [UInt8]) {
         // commend line below to make Unit tests finish fast.
@@ -49,7 +50,7 @@ enum Crypto {
         }
         return (key, iv)
     }
-    
+
     static func generateKeyWith(_ password: String, iv: [UInt8]) throws -> [UInt8]? {
         // commend line below to make Unit tests finish fast.
         // return Data(base64Encoded: "3pOq7RIEa0ovLyEtPFrKCLlHJ12E8vhnPA51nNWZxPQ=")?.bytes ?? []
@@ -65,7 +66,7 @@ enum Crypto {
         }
         return key
     }
-    
+
     // encrypt content
     static func encryptBackup(password: String, account: String, content: [String: Any]) throws -> Data {
         let account = account.lowercased()
@@ -75,31 +76,31 @@ enum Crypto {
         let paramIV = try randomIV()
         let gcm = GCM(iv: paramIV, mode: .combined)
         let aes = try AES(key: key, blockMode: gcm, padding: .noPadding)
-        
+
         var fileData = Data()
         try fileData.pack(content)
         let encrypted = try aes.encrypt(fileData.bytes)
-        
+
         var mergedData = Data()
         try mergedData.pack([Data(pbkdf2IV), Data(paramIV), Data(encrypted)])
-        
+
         let container = box(version: .version0, data: mergedData)
         return container
     }
-    
+
     // decrypt content
-    static func decryptBackup(password: String, account: String, content: Data) throws -> [String: Any] {
+    static func decryptBackup(password: String, account: String, content: Data) throws -> Data {
         let account = account.lowercased()
         let mergedData = try unbox(version: .version0, data: content)
-        
+
         guard let encryptedArray = try mergedData.unpack() as? [Any],
               encryptedArray.count == 3,
               let pbkdf2IV: Data = encryptedArray[0] as? Data,
               let paramIV: Data = encryptedArray[1] as? Data,
               let encrypted: Data = encryptedArray[2] as? Data else {
-                  throw CryptoError.unknownFormat
-              }
-        
+            throw CryptoError.unknownFormat
+        }
+
         let computedPassword = account + password
         guard let generateKey = try generateKeyWith(computedPassword, iv: pbkdf2IV.bytes) else {
             throw CryptoError.invalidKey
@@ -107,48 +108,45 @@ enum Crypto {
         let gcm = GCM(iv: paramIV.bytes, mode: .combined)
         let aes = try AES(key: generateKey, blockMode: gcm, padding: .noPadding)
         let packedFileBytes = try aes.decrypt(encrypted.bytes)
-        guard let dictionary = try Data(packedFileBytes).unpack() as? [String: Any] else {
-            throw CryptoError.unknownFormat
-        }
-        return dictionary
+        return Data(packedFileBytes)
     }
-    
+
     static func box(version: SupportedVersions, data: Data) -> Data {
         var rtnData = Data()
         let versionData = version.data
         let checksum = data.sha256()
-        
+
         rtnData.append(versionData)
         rtnData.append(data)
         rtnData.append(checksum)
         return rtnData
     }
-    
+
     static func unbox(version: SupportedVersions, data: Data) throws -> Data {
         guard data.starts(with: version.data) else {
             throw CryptoError.unknownFormat
         }
-        
+
         let checkSumLength = 32
         guard let range = Range(NSRange(
             location: version.data.count,
             length: data.count - checkSumLength - version.data.count)) else {
-                throw CryptoError.unknownFormat
-            }
+            throw CryptoError.unknownFormat
+        }
         let encrypted = data.subdata(in: range)
         let checksum = encrypted.sha256()
         let checksumEncode = data.suffix(checkSumLength)
-        
+
         if checksum != checksumEncode {
             throw CryptoError.wrongCheckSum
         }
         return encrypted
     }
-    
+
     static func randomIV() throws -> [UInt8] {
         return try randomData(length: 16)
     }
-    
+
     static func randomData(length: Int) throws -> [UInt8] {
         var paramIV = [UInt8](repeating: 0, count: length)
         let status = SecRandomCopyBytes(kSecRandomDefault, paramIV.count, &paramIV)
@@ -170,7 +168,7 @@ extension Crypto {
             throw error
         }
     }
-    
+
     static func decrypt(input: Data) throws -> String? {
         do {
             let aes = try AES(key: Secret.SECRET_USERDEFAULT_KEY, iv: Secret.SECRET_USERDEFAULT_IV)
@@ -197,14 +195,16 @@ extension Crypto: CombineCompatible {
         .receive(on: RunLoop.main)
         .eraseToAnyPublisher()
     }
-    
-    static func decryptBackupPublisher(password: String, account: String, content: Data)
-    -> AnyPublisher<[String: Any], Error> {
+
+    static func decryptBackupToDataPublisher(password: String, account: String, content: Data)
+    -> AnyPublisher<Data, Error> {
         LazyFuture { promise in
             do {
+                // this is a msgpack format data
                 let result = try self.decryptBackup(password: password, account: account, content: content)
                 promise(.success(result))
             } catch {
+                print(error)
                 promise(.failure(error))
             }
         }
@@ -212,24 +212,21 @@ extension Crypto: CombineCompatible {
         .receive(on: RunLoop.main)
         .eraseToAnyPublisher()
     }
+}
 
-    static func decryptBackupToDataPublisher(password: String, account: String, content: Data)
-    -> AnyPublisher<Data, Error> {
-        LazyFuture { promise in
-            do {
-                let result = try self.decryptBackup(password: password, account: account, content: content)
-                guard JSONSerialization.isValidJSONObject(result) else {
-                    promise(.failure(MaskError.invalidBackupData))
-                    return
-                }
-                let data = try JSONSerialization.data(withJSONObject: result, options: .sortedKeys)
-                promise(.success(data))
-            } catch {
-                promise(.failure(error))
+extension Data {
+    func asCompatibleBackupJSON() -> JSON? {
+        // to be compatiable with both json format and msgpack format
+        // we have to do this
+        if JSONSerialization.isValidJSONObject(self) {
+            return try? JSON(data: self)
+        } else {
+            // data will be a msgpack format
+            guard let jsonObject = try? self.unpack() as? [String: Any] else {
+                return nil
             }
+
+            return JSON(jsonObject)
         }
-        .subscribe(on: DispatchQueue.global())
-        .receive(on: RunLoop.main)
-        .eraseToAnyPublisher()
     }
 }

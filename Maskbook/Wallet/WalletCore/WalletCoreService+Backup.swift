@@ -29,7 +29,7 @@ extension WalletCoreService {
                             account: account,
                             password: password,
                             context: backgroundContext)
-                            .get()
+                        .get()
                     }
             } catch {
                 coreDataError = error
@@ -54,8 +54,8 @@ extension WalletCoreService {
               let address = account.address,
               let createdAt = account.createdAt?.timeIntervalSince1970,
               let updatedAt = account.lastModifiedDate?.timeIntervalSince1970 else {
-                  return .failure(WalletCoreError.coreDataError)
-              }
+            return .failure(WalletCoreError.coreDataError)
+        }
         var mnemonic: WalletBackupInfo.Mnemonic?
         if storedKey.type == StoredKeyType.mnemonic.rawValue {
             guard let mnemonicString = try? exportMnemonic(password: password, account: account).get() else {
@@ -68,14 +68,46 @@ extension WalletCoreService {
             )
         }
         do {
-            let privateKeyInfo = try generateWalletBackupPrivKeyInfo(account: account, password: password).get()
-            let backupInfo = WalletBackupInfo(name: name,
-                                              address: address,
-                                              createdAt: createdAt,
-                                              updateAt: updatedAt,
-                                              passphrase: "",
-                                              mnemonic: mnemonic,
-                                              privateKey: privateKeyInfo)
+            func privateKey(for mnemonic: WalletBackupInfo.Mnemonic?) throws -> WalletBackupInfo.PrivateKey? {
+                mnemonic.isNone
+                ? try generateWalletBackupPrivKeyInfo(account: account, password: password).get()
+                : nil
+            }
+
+            let originalKey = try privateKey(for: mnemonic)
+            let publicKey: WalletBackupInfo.PrivateKey? = originalKey.flatMap {
+                .init(
+                    crv: $0.crv,
+                    x: $0.x,
+                    y: $0.y,
+                    keyOps: $0.keyOps,
+                    kty: $0.kty
+                )
+            }
+
+            let privateKey: WalletBackupInfo.PrivateKey? = originalKey.flatMap {
+                .init(
+                    crv: $0.crv,
+                    x: $0.x,
+                    y: $0.y,
+                    keyOps: $0.keyOps,
+                    kty: $0.kty,
+                    d: $0.d
+                )
+            }
+
+            // since
+            let backupInfo = WalletBackupInfo(
+                name: name,
+                address: address,
+                createdAt: createdAt,
+                updateAt: updatedAt,
+                passphrase: "",
+                mnemonic: mnemonic,
+                privateKey: privateKey,
+                publicKey: publicKey
+            )
+
             return .success(backupInfo)
         } catch {
             return .failure(error)
@@ -89,13 +121,28 @@ extension WalletCoreService {
             guard let privateKeyData = Data.fromHex(privateKey) else {
                 throw MaskWalletCoreError.invalidPrivateKey
             }
-            
+
+            let (x, y): (String, String) = {
+                if let pub = SECP256K1.privateToPublic(privateKey: privateKeyData), pub.count == 65 {
+                    let pubx = pub[1..<33]
+                    let puby = pub[33...]
+                    let x = pubx.base64URLEncodedString()
+                    let y = puby.base64URLEncodedString()
+
+                    return (x, y)
+                }
+
+                return ("", "")
+            }()
+
             let privateKeyInfo = WalletBackupInfo.PrivateKey(
                 crv: "K-256",
-                x: "",
-                y: "",
-                keyOps: ["deriveKey",
-                         "deriveBits"],
+                x: x,
+                y: y,
+                keyOps: [
+                    "deriveKey",
+                    "deriveBits"
+                ],
                 kty: "EC",
                 d: privateKeyData.base64URLEncodedString())
             return .success(privateKeyInfo)

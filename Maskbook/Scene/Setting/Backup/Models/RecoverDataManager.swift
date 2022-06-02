@@ -26,10 +26,11 @@ struct RecoverDataManager {
     }
     
     static func performRestoreBackup(_ data: Data) -> AnyPublisher<Void, Error> {
-        guard let json = try? JSON(data: data) else {
+        guard let json = data.asCompatibleBackupJSON() else {
             return Fail(error: RemoteRestoreInfoViewModel.Failure.failedParsingRestoreData)
                 .eraseToAnyPublisher()
         }
+
         guard let trimmedString = trimNativeInfo(json) else {
             return Fail(error: RemoteRestoreInfoViewModel.Failure.failedParsingRestoreData)
                 .eraseToAnyPublisher()
