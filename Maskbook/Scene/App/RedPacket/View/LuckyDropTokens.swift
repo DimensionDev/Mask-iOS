@@ -63,7 +63,6 @@ struct LuckyDropTokens: View {
                 if let url = viewModel.tokenURL {
                     KFImage(url)
                         .cancelOnDisappear(true)
-                        .loadImmediately()
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 24)
@@ -87,7 +86,14 @@ struct LuckyDropTokens: View {
             }
             .disabled(!viewModel.maxButtonEnable)
             Spacer()
-            TextField(viewModel.amountPlaceholder, text: $viewModel.amountStr)
+            TextField("", text: $viewModel.amountStr)
+                .placeholder(when: viewModel.amountStr.isEmpty, alignment: .trailing, placeholder: {
+                    Text(viewModel.amountPlaceholder)
+                        .font(FontStyles.mh5.font)
+                        .foregroundColor(Asset.Colors.Text.light.asColor())
+                })
+                .font(FontStyles.bh5.font)
+                .foregroundColor(Asset.Colors.Text.dark.asColor())
                 .keyboardType(.decimalPad)
                 .multilineTextAlignment(.trailing)
                 .frame(maxHeight: .infinity)
@@ -107,10 +113,18 @@ struct LuckyDropTokens: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 24)
                 Spacer().frame(width: 8)
-                Text(L10n.Plugins.Luckydrop.quantity).foregroundColor(Asset.Colors.Text.dark.asColor())
+                Text(L10n.Plugins.Luckydrop.quantity)
+                    .foregroundColor(Asset.Colors.Text.dark.asColor())
                     .font(FontStyles.bh5.font)
                 Spacer()
-                TextField(L10n.Plugins.Luckydrop.enterQuantity, text: $viewModel.quantityStr)
+                TextField("", text: $viewModel.quantityStr)
+                    .placeholder(when: viewModel.quantityStr.isEmpty, alignment: .trailing, placeholder: {
+                        Text(L10n.Plugins.Luckydrop.enterQuantity)
+                            .font(FontStyles.mh5.font)
+                            .foregroundColor(Asset.Colors.Text.light.asColor())
+                    })
+                    .font(FontStyles.bh5.font)
+                    .foregroundColor(Asset.Colors.Text.dark.asColor())
                     .keyboardType(.numberPad)
                     .multilineTextAlignment(.trailing)
                     .frame(maxHeight: .infinity)
@@ -131,7 +145,14 @@ struct LuckyDropTokens: View {
     @ViewBuilder
     var messageRow: some View {
         HStack(spacing: 0) {
-            TextField(L10n.Plugins.Luckydrop.enterMessage, text: $viewModel.message)
+            TextField("", text: $viewModel.message)
+                .placeholder(when: viewModel.message.isEmpty, alignment: .trailing, placeholder: {
+                    Text(L10n.Plugins.Luckydrop.enterMessage)
+                        .font(FontStyles.mh5.font)
+                        .foregroundColor(Asset.Colors.Text.light.asColor())
+                })
+                .font(FontStyles.bh5.font)
+                .foregroundColor(Asset.Colors.Text.dark.asColor())
                 .limitText($viewModel.message, maxLength: 30)
                 .frame(maxHeight: .infinity)
                 .responderTag(TextFieldTag.message)
@@ -202,7 +223,11 @@ struct LuckyDropTokens: View {
                 }
                 Text(mode.title)
                     .font(FontStyles.bh5.font)
-                    .foregroundColor(Asset.Colors.Text.dark.asColor())
+                    .foregroundColor(
+                        viewModel.mode == mode
+                        ? Asset.Colors.Text.dark.asColor()
+                        : Asset.Colors.Text.normal.asColor()
+                    )
                 Spacer()
             }
         }
