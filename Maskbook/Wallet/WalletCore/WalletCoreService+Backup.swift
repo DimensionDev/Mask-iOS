@@ -102,6 +102,7 @@ extension WalletCoreService {
                 address: address,
                 createdAt: createdAt,
                 updateAt: updatedAt,
+                passphrase: "",
                 mnemonic: mnemonic,
                 privateKey: privateKey,
                 publicKey: publicKey

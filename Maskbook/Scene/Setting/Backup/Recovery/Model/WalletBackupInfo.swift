@@ -78,17 +78,16 @@ extension WalletBackupInfo {
     struct Parameter: Codable {
         let path: String
         // must have value, to make the situation that mnenomic exist and private key is nil reasonable
-        @BoolConvertedWithInt
-        var withPassword: Bool?
+        let withPassword: Bool?
 
         init(from json: [String: Any]) {
             path =  json[CodingKeys.path.stringValue] as? String ?? ""
-            _withPassword = BoolConvertedWithInt(json: json, key: CodingKeys.withPassword.stringValue)
+            withPassword = json[CodingKeys.withPassword.stringValue] as? Bool ?? false
         }
 
         init(path: String, withPassword: Bool = false) {
             self.path = path
-            _withPassword = BoolConvertedWithInt(withPassword)
+            self.withPassword = withPassword
         }
     }
 
@@ -101,7 +100,7 @@ extension WalletBackupInfo {
             self.keyOps = keyOps
             self.kty = kty
             self.d = d
-            _ext = BoolConvertedWithInt(true)
+            ext = true
         }
 
         let crv: String
@@ -109,8 +108,7 @@ extension WalletBackupInfo {
         let keyOps: [String]
         let kty: String
         let d: String?
-        @BoolConvertedWithInt
-        var ext: Bool?
+        let ext: Bool?
 
         enum CodingKeys: String, CodingKey {
             case crv, x, y
@@ -126,7 +124,7 @@ extension WalletBackupInfo {
             kty = json[CodingKeys.kty.stringValue] as? String ?? ""
             crv = json[CodingKeys.crv.stringValue] as? String ?? ""
             keyOps = json[CodingKeys.keyOps.stringValue] as? [String] ?? []
-            _ext = BoolConvertedWithInt(json: json, key: CodingKeys.ext.stringValue)
+            ext = json[CodingKeys.ext.stringValue] as? Bool ?? true
         }
     }
 
