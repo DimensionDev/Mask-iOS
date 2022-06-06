@@ -5,27 +5,29 @@ import SwiftyJSON
 struct WalletBackupInfo: Codable {
     let name: String
     let address: String
-    let createdAt: TimeInterval
-    let updatedAt: TimeInterval
+    @BackupValueCompatiableFrom<UInt64, TimeInterval>
+    private(set) var createdAt: TimeInterval?
+    @BackupValueCompatiableFrom<UInt64, TimeInterval>
+    private(set) var updatedAt: TimeInterval?
     let passphrase: String?
     let mnemonic: Mnemonic?
-    let privateKey: PrivateKey?
-    let publicKey: PrivateKey?
+    let privateKey: JWK?
+    let publicKey: JWK?
 
     init(
         name: String = "",
         address: String = "",
         createdAt: TimeInterval = 0,
         updateAt: TimeInterval = 0,
-        passphrase: String? = nil,
+        passphrase: String? = "",
         mnemonic: Mnemonic? = nil,
-        privateKey: PrivateKey? = nil,
-        publicKey: PrivateKey? = nil
+        privateKey: JWK? = nil,
+        publicKey: JWK? = nil
     ) {
         self.name = name
         self.address = address
-        self.createdAt = createdAt
-        self.updatedAt = updateAt
+        _createdAt = BackupValueCompatiableFrom<UInt64, TimeInterval>(createdAt)
+        _updatedAt = BackupValueCompatiableFrom<UInt64, TimeInterval>(updateAt)
         self.passphrase = passphrase
         self.mnemonic = mnemonic
         self.privateKey = privateKey
@@ -35,11 +37,15 @@ struct WalletBackupInfo: Codable {
     init(from json: [String: Any]) {
         name = json[CodingKeys.name.stringValue] as? String ?? ""
         address = json[CodingKeys.address.stringValue] as? String ?? ""
-        createdAt = json[CodingKeys.createdAt.stringValue]
-            .flatMap(RestoreFile.converTimeInterval) ?? 0
+        _createdAt = BackupValueCompatiableFrom<UInt64, TimeInterval>(
+            json[CodingKeys.createdAt.stringValue]
+                .flatMap(RestoreFile.converTimeInterval) ?? 0
+        )
 
-        updatedAt = json[CodingKeys.updatedAt.stringValue]
-            .flatMap(RestoreFile.converTimeInterval) ?? 0
+        _updatedAt = BackupValueCompatiableFrom<UInt64, TimeInterval>(
+            json[CodingKeys.updatedAt.stringValue]
+                .flatMap(RestoreFile.converTimeInterval) ?? 0
+        )
 
         passphrase = json[CodingKeys.passphrase.stringValue] as? String
         mnemonic = json[CodingKeys.mnemonic.stringValue]
@@ -48,11 +54,11 @@ struct WalletBackupInfo: Codable {
 
         privateKey = json[CodingKeys.privateKey.stringValue]
             .flatMap { $0 as? [String: Any] }
-            .flatMap { PrivateKey(from: $0) }
+            .flatMap { JWK(from: $0) }
 
         publicKey = json[CodingKeys.publicKey.stringValue]
             .flatMap { $0 as? [String: Any] }
-            .flatMap { PrivateKey(from: $0) }
+            .flatMap { JWK(from: $0) }
     }
 }
 
@@ -78,21 +84,22 @@ extension WalletBackupInfo {
     struct Parameter: Codable {
         let path: String
         // must have value, to make the situation that mnenomic exist and private key is nil reasonable
-        let withPassword: Bool?
-
-        init(from json: [String: Any]) {
-            path =  json[CodingKeys.path.stringValue] as? String ?? ""
-            withPassword = json[CodingKeys.withPassword.stringValue] as? Bool ?? false
-        }
+        @BackupValueCompatiableFrom<Never, Bool>
+        var withPassword: Bool?
 
         init(path: String, withPassword: Bool = false) {
             self.path = path
-            self.withPassword = withPassword
+            _withPassword = BackupValueCompatiableFrom<Never, Bool>(withPassword)
+        }
+
+        init(from json: [String: Any]) {
+            path =  json[CodingKeys.path.stringValue] as? String ?? ""
+            _withPassword = BackupValueCompatiableFrom<Never, Bool>(json[CodingKeys.withPassword.stringValue] as? Bool ?? false)
         }
     }
 
     // MARK: - PrivateKey
-    struct PrivateKey: Codable {
+    struct JWK: Codable {
         init(crv: String, x: String, y: String, keyOps: [String], kty: String, d: String? = nil) {
             self.crv = crv
             self.x = x
@@ -100,7 +107,7 @@ extension WalletBackupInfo {
             self.keyOps = keyOps
             self.kty = kty
             self.d = d
-            ext = true
+            _ext = BackupValueCompatiableFrom<Never, Bool>(true)
         }
 
         let crv: String
@@ -108,7 +115,9 @@ extension WalletBackupInfo {
         let keyOps: [String]
         let kty: String
         let d: String?
-        let ext: Bool?
+
+        @BackupValueCompatiableFrom<Never, Bool>
+        private(set) var ext: Bool?
 
         enum CodingKeys: String, CodingKey {
             case crv, x, y
@@ -124,14 +133,14 @@ extension WalletBackupInfo {
             kty = json[CodingKeys.kty.stringValue] as? String ?? ""
             crv = json[CodingKeys.crv.stringValue] as? String ?? ""
             keyOps = json[CodingKeys.keyOps.stringValue] as? [String] ?? []
-            ext = json[CodingKeys.ext.stringValue] as? Bool ?? true
+            _ext = BackupValueCompatiableFrom<Never, Bool>(json[CodingKeys.ext.stringValue] as? Bool ?? true)
         }
     }
 
     func asBackupJSON() -> [String: Any]? {
         { try? JSONEncoder().encode(self) }()
-        .flatMap { try? JSONSerialization.jsonObject(with: $0, options: .mutableContainers) }
-        .flatMap { $0 as? [String: Any] }
+            .flatMap { try? JSONSerialization.jsonObject(with: $0, options: .mutableContainers) }
+            .flatMap { $0 as? [String: Any] }
     }
 
     func merged(into json: [String: Any]) -> [String: Any] {
