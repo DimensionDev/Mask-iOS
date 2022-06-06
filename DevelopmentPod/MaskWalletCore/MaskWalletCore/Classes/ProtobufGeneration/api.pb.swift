@@ -179,6 +179,14 @@ public struct Api_MWRequest {
     set {request = .paramGeneratePersona(newValue)}
   }
 
+  public var paramPostEncryption: Api_PostEncryptionParam {
+    get {
+      if case .paramPostEncryption(let v)? = request {return v}
+      return Api_PostEncryptionParam()
+    }
+    set {request = .paramPostEncryption(newValue)}
+  }
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public enum OneOf_Request: Equatable {
@@ -201,6 +209,7 @@ public struct Api_MWRequest {
     case paramGetStoredKeyExportType(Api_GetKeyStoreSupportExportTypeParam)
     case paramGenerateMnemonic(Api_GenerateMnemonicParam)
     case paramGeneratePersona(Api_PersonaGenerationParam)
+    case paramPostEncryption(Api_PostEncryptionParam)
 
   #if !swift(>=4.1)
     public static func ==(lhs: Api_MWRequest.OneOf_Request, rhs: Api_MWRequest.OneOf_Request) -> Bool {
@@ -282,6 +291,10 @@ public struct Api_MWRequest {
       }()
       case (.paramGeneratePersona, .paramGeneratePersona): return {
         guard case .paramGeneratePersona(let l) = lhs, case .paramGeneratePersona(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.paramPostEncryption, .paramPostEncryption): return {
+        guard case .paramPostEncryption(let l) = lhs, case .paramPostEncryption(let r) = rhs else { preconditionFailure() }
         return l == r
       }()
       default: return false
@@ -444,6 +457,14 @@ public struct Api_MWResponse {
     set {response = .respGeneratePersona(newValue)}
   }
 
+  public var respPostEncryption: Api_PostEncrypedResp {
+    get {
+      if case .respPostEncryption(let v)? = response {return v}
+      return Api_PostEncrypedResp()
+    }
+    set {response = .respPostEncryption(newValue)}
+  }
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public enum OneOf_Response: Equatable {
@@ -465,6 +486,7 @@ public struct Api_MWResponse {
     case respGetStoredKeyExportType(Api_GetKeyStoreSupportExportTypeResp)
     case respGenerateMnemonic(Api_GenerateMnemonicResp)
     case respGeneratePersona(Api_PersonaGenerationResp)
+    case respPostEncryption(Api_PostEncrypedResp)
 
   #if !swift(>=4.1)
     public static func ==(lhs: Api_MWResponse.OneOf_Response, rhs: Api_MWResponse.OneOf_Response) -> Bool {
@@ -544,6 +566,10 @@ public struct Api_MWResponse {
         guard case .respGeneratePersona(let l) = lhs, case .respGeneratePersona(let r) = rhs else { preconditionFailure() }
         return l == r
       }()
+      case (.respPostEncryption, .respPostEncryption): return {
+        guard case .respPostEncryption(let l) = lhs, case .respPostEncryption(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
       default: return false
       }
     }
@@ -601,6 +627,7 @@ extension Api_MWRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
     24: .standard(proto: "param_get_stored_key_export_type"),
     25: .standard(proto: "param_generate_mnemonic"),
     26: .standard(proto: "param_generate_persona"),
+    27: .standard(proto: "param_post_encryption"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -856,6 +883,19 @@ extension Api_MWRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.request = .paramGeneratePersona(v)
         }
       }()
+      case 27: try {
+        var v: Api_PostEncryptionParam?
+        var hadOneofValue = false
+        if let current = self.request {
+          hadOneofValue = true
+          if case .paramPostEncryption(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.request = .paramPostEncryption(v)
+        }
+      }()
       default: break
       }
     }
@@ -943,6 +983,10 @@ extension Api_MWRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
       guard case .paramGeneratePersona(let v)? = self.request else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 26)
     }()
+    case .paramPostEncryption?: try {
+      guard case .paramPostEncryption(let v)? = self.request else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 27)
+    }()
     case nil: break
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -976,6 +1020,7 @@ extension Api_MWResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     23: .standard(proto: "resp_get_stored_key_export_type"),
     24: .standard(proto: "resp_generate_mnemonic"),
     25: .standard(proto: "resp_generate_persona"),
+    26: .standard(proto: "resp_post_encryption"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -1218,6 +1263,19 @@ extension Api_MWResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
           self.response = .respGeneratePersona(v)
         }
       }()
+      case 26: try {
+        var v: Api_PostEncrypedResp?
+        var hadOneofValue = false
+        if let current = self.response {
+          hadOneofValue = true
+          if case .respPostEncryption(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.response = .respPostEncryption(v)
+        }
+      }()
       default: break
       }
     }
@@ -1300,6 +1358,10 @@ extension Api_MWResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     case .respGeneratePersona?: try {
       guard case .respGeneratePersona(let v)? = self.response else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 25)
+    }()
+    case .respPostEncryption?: try {
+      guard case .respPostEncryption(let v)? = self.response else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 26)
     }()
     case nil: break
     }

@@ -78,7 +78,7 @@ extension WalletBackupInfo {
     struct Parameter: Codable {
         let path: String
         // must have value, to make the situation that mnenomic exist and private key is nil reasonable
-        let withPassword: Bool
+        let withPassword: Bool?
 
         init(from json: [String: Any]) {
             path =  json[CodingKeys.path.stringValue] as? String ?? ""

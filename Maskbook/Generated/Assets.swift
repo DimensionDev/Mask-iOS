@@ -144,7 +144,10 @@ internal enum Asset {
       }
     }
     internal enum Twitter {
+      internal static let inputBg = ColorAsset(name: "Colors/Twitter/Input-bg")
+      internal static let blue = ColorAsset(name: "Colors/Twitter/blue")
       internal static let buttonText = ColorAsset(name: "Colors/Twitter/buttonText")
+      internal static let line2 = ColorAsset(name: "Colors/Twitter/line2")
       internal static let main = ColorAsset(name: "Colors/Twitter/main")
       internal static let mask = ColorAsset(name: "Colors/Twitter/mask")
       internal static let second = ColorAsset(name: "Colors/Twitter/second")
@@ -208,6 +211,7 @@ internal enum Asset {
     }
     internal enum Cell {
       internal static let cellCheck = ImageAsset(name: "Icon/Cell/cellCheck")
+      internal static let cellTwitterCheck = ImageAsset(name: "Icon/Cell/cellTwitterCheck")
       internal static let cellUncheck = ImageAsset(name: "Icon/Cell/cellUncheck")
     }
     internal enum Logo {
@@ -283,6 +287,13 @@ internal enum Asset {
         internal static let facialRecognition = ImageAsset(name: "Images/Scene/BiometryRecognition/facialRecognition")
         internal static let touchIDRecognition = ImageAsset(name: "Images/Scene/BiometryRecognition/touchIDRecognition")
       }
+      internal enum Compose {
+        internal static let close = ImageAsset(name: "Images/Scene/Compose/close")
+        internal static let everyone = ImageAsset(name: "Images/Scene/Compose/everyone")
+        internal static let logo = ImageAsset(name: "Images/Scene/Compose/logo")
+        internal static let onlyMe = ImageAsset(name: "Images/Scene/Compose/onlyMe")
+        internal static let specialContacts = ImageAsset(name: "Images/Scene/Compose/specialContacts")
+      }
       internal enum Empty {
         internal static let emptyBox = ImageAsset(name: "Images/Scene/Empty/EmptyBox")
       }
@@ -338,6 +349,7 @@ internal enum Asset {
         internal static let rename = ImageAsset(name: "Images/Scene/Personas/rename")
         internal static let rotate = ImageAsset(name: "Images/Scene/Personas/rotate")
         internal static let search = ImageAsset(name: "Images/Scene/Personas/search")
+        internal static let searchTwitter = ImageAsset(name: "Images/Scene/Personas/searchTwitter")
         internal static let setAvatar = ImageAsset(name: "Images/Scene/Personas/setAvatar")
         internal static let twitter = ImageAsset(name: "Images/Scene/Personas/twitter")
         internal static let watermark = ImageAsset(name: "Images/Scene/Personas/watermark")

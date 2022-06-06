@@ -164,6 +164,7 @@ Please scan Persona QR Code.";
 "Plugins.Luckydrop.End-Time" = "End Time";
 "Plugins.Luckydrop.Enter-Message" = "Enter attached message";
 "Plugins.Luckydrop.Enter-Quantity" = "Enter quantity";
+"Plugins.Luckydrop.FacebookAccount" = "masknetwork";
 "Plugins.Luckydrop.HistoryTitle" = "History Records";
 "Plugins.Luckydrop.Max" = "MAX";
 "Plugins.Luckydrop.Max-Quantity-Error" = "The max quantity is 255.";
@@ -177,6 +178,10 @@ Please scan Persona QR Code.";
 "Plugins.Luckydrop.Share-Connect-Persona" = "Connect your Persona to social media before you share your lucky Drop.";
 "Plugins.Luckydrop.Share-Create-Persona" = "To send lucky drop, please create a persona to connect to your social account.";
 "Plugins.Luckydrop.Share-Title" = "Share Lucky Drop";
+"Plugins.Luckydrop.Social-Media-Redpacket-Template" = "Hi, claim this lucky drop with #mask_io %@";
+"Plugins.Luckydrop.Social-Media-Template" = "This tweet is encrypted with #mask_io (@realMaskNetwork). 📪🔑
+
+Install %@ to decrypt it.";
 "Plugins.Luckydrop.State.Failed" = "Tx failed";
 "Plugins.Luckydrop.State.Pending" = "Pending...";
 "Plugins.Luckydrop.State.Success" = "Tx Success";
@@ -184,6 +189,11 @@ Please scan Persona QR Code.";
 "Plugins.Luckydrop.Token" = "Token";
 "Plugins.Luckydrop.Total-Amount" = "Total Amount";
 "Plugins.Luckydrop.Transaction-Fee" = "Transaction fee";
+"Plugins.Luckydrop.Twitter-Or-Facebook-Redpacket-Template" = "Hi, claim this lucky drop with #mask_io @%@ %@";
+"Plugins.Luckydrop.Twitter-Or-Facebook-Template" = "This tweet is encrypted with #mask_io (@%@). 📪🔑
+
+Install %@ to decrypt it.";
+"Plugins.Luckydrop.TwitterAccount" = "realMaskNetwork";
 "Scene.App.GoodLuckNextTime" = "Better Luck next time";
 "Scene.App.MarketTrendSource" = "Market trend source";
 "Scene.App.PluginIntroduction.FileService" = "Decentralized file storage for users.";
@@ -315,6 +325,12 @@ separated by spaces";
 "Scene.IdentityRestoreSigninSuccess.Title" = "Restore & Sign In completed!";
 "Scene.MaskScan.ScanAll" = "Scan Persona or walletConnect QR Code";
 "Scene.MaskScan.ScanPersona" = "Scan Persona QR Code";
+"Scene.MessageCompose.Encrypt" = "Encrypt";
+"Scene.MessageCompose.Everyone" = "Everyone can see";
+"Scene.MessageCompose.OnlyMe" = "Only me";
+"Scene.MessageCompose.Placeholder" = "What do you want to encrypt?";
+"Scene.MessageCompose.SpecialContacts" = "Special Contacts can see";
+"Scene.MessageCompose.Title" = "Compose";
 "Scene.MnemonicVerify.Description" = "Tap each word in the correct order.";
 "Scene.MnemonicVerify.MnemonicError" = "The mnemonic is incorrect";
 "Scene.MnemonicVerify.MnemonicPrompt" = "Tap the middle to replace the word.";

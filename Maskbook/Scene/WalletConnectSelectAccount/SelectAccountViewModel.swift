@@ -32,9 +32,11 @@ class SelectAccountViewModel {
     @InjectedProvider(\.walletAssetManager)
     private var walletAssetManager: WalletAssetManager
 
-    let accountListSubject = CurrentValueSubject<[WalletsItem], Never>([])
+    let accountListOfSelectedChainSubject = CurrentValueSubject<[WalletsItem], Never>([])
+    
+    var maxAccountsNum: Int = 0
 
-    private lazy var accountsPublisher: FetchedResultsPublisher<Account> = {
+    private lazy var accountsOfAllChainPublisher: FetchedResultsPublisher<Account> = {
         let fetchResultController: NSFetchedResultsController<Account> = {
             let controller = NSFetchedResultsController(
                 fetchRequest: Account.withRequest { fetchRequest in
@@ -82,14 +84,16 @@ class SelectAccountViewModel {
         .sink { [weak self] _, _ in
             guard let self = self else { return }
             self.getAllBalance()
-            self.generateWalletAccountItems(accounts: self.accountsPublisher.value)
+            self.generateWalletAccountItems(accounts: self.accountsOfAllChainPublisher.value)
         }
         .store(in: &disposeBag)
 
-        accountsPublisher
+        accountsOfAllChainPublisher
             .sink { [weak self] in
-                self?.batchUpdateColorForAccount(accounts: $0)
-                self?.generateWalletAccountItems(accounts: $0)
+                guard let self = self else { return }
+                self.maxAccountsNum = self.maxWalletAccountNumbers(accounts: $0)
+                self.batchUpdateColorForAccount(accounts: $0)
+                self.generateWalletAccountItems(accounts: $0)
             }
             .store(in: &disposeBag)
     }
@@ -215,20 +219,8 @@ extension SelectAccountViewModel {
     private func generateWalletAccountItems(accounts: [Account]) {
         let network = selectNetworkSubject.value
         let defaultAccountAddress = userSetting.defaultAccountAddress
-        let showWalletConnect = isShowWalletConnectWallets()
-        var items = accounts
-            .sorted(by: { ($0.fromWalletConnect ? 1 : 0) < ($1.fromWalletConnect ? 1 : 0) })
-            .filter { account in
-                guard let chain = ChainType(rawValue: Int(account.chainId)) else { return false }
-                if account.fromWalletConnect {
-                    if !showWalletConnect {
-                        return false
-                    }
-                    guard let netwrokIDFromSession = account.netwrokIDFromSession else { return false }
-                    if netwrokIDFromSession != network.networkId { return false }
-                }
-                return chain == network.chain
-            }
+        var items = accountsFilteredByWalletConnect(accounts: accounts,
+                                                    network: network)
             .compactMap { item -> WalletsItem? in
                 let tokens = item.tokens as? Set<Token>
                 let mainToken = tokens?.first { $0.networkId == network.networkId && $0.isMainToken }
@@ -244,13 +236,39 @@ extension SelectAccountViewModel {
                 )
                 return WalletsItem.account(data: data)
             }
-        if isShowAddWalletConnect() {
+        if isShowAddWalletConnect {
             items.append(WalletsItem.addWalletConnect)
         }
-        accountListSubject.value = items
+        accountListOfSelectedChainSubject.value = items
     }
     
-    private func isShowWalletConnectWallets() -> Bool {
+    private func accountsFilteredByWalletConnect(accounts: [Account],
+                                                 network: BlockChainNetwork) -> [Account]
+    {
+        accounts
+            .sorted(by: { ($0.fromWalletConnect ? 1 : 0) < ($1.fromWalletConnect ? 1 : 0) })
+            .filter { account in
+                guard let chain = ChainType(rawValue: Int(account.chainId)) else { return false }
+                if account.fromWalletConnect {
+                    if !isShowWalletConnectWallets {
+                        return false
+                    }
+                    guard let netwrokIDFromSession = account.netwrokIDFromSession else { return false }
+                    if netwrokIDFromSession != network.networkId { return false }
+                }
+                return chain == network.chain
+            }
+    }
+    
+    func maxWalletAccountNumbers(accounts: [Account]) -> Int {
+        networkItems.map {
+            accountsFilteredByWalletConnect(accounts: accounts, network: $0.chain).count
+            + (isShowAddWalletConnect ? 1 : 0)
+        }
+        .max()!
+    }
+    
+    private var isShowWalletConnectWallets: Bool {
         switch type {
         case .editEnable:
             return true
@@ -261,7 +279,7 @@ extension SelectAccountViewModel {
         }
     }
     
-    private func isShowAddWalletConnect() -> Bool {
+    private var isShowAddWalletConnect: Bool {
         switch type {
         case .editEnable:
             return true
@@ -272,7 +290,18 @@ extension SelectAccountViewModel {
         }
     }
     
-    func isShowAddWallet() -> Bool {
+    var isShowAddWallet: Bool {
+        switch type {
+        case .editEnable:
+            return true
+        case .selectWithWalletConnect:
+            return false
+        case .selectWithoutWalletConnect:
+            return false
+        }
+    }
+    
+    var isEditEnable: Bool {
         switch type {
         case .editEnable:
             return true

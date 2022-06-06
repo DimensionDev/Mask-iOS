@@ -12,6 +12,11 @@ import UIKit
 // MARK: - Persona methods handler
 typealias RedPacketInteractiveRequest = WebPublicApiMessageRequest<RedPacketInteractivePayload>
 
+struct CompositionRequestParam: Decodable {
+    let open: Bool
+    let reason: String
+}
+
 extension WebPublicApiMessageResolver {
     @discardableResult
     func notifyRedpacket(messageData: Data) -> Bool {
@@ -51,6 +56,15 @@ extension WebPublicApiMessageResolver {
                             transition: .panModel(animated: true))
         
         return true
+    }
+    
+    @discardableResult
+    func notifyCompositionRequested(messageData: Data) -> CompositionRequestParam? {
+        guard let request = try? decoder.decode(WebPublicApiMessageRequest<CompositionRequestParam>.self, from: messageData),
+              let payload = request.params else {
+            return nil
+        }
+        return payload
     }
 }
 

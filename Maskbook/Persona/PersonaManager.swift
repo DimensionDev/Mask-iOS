@@ -42,6 +42,11 @@ class PersonaManager {
     let currentProfile = CurrentValueSubject<ProfileRecord?, Never>(nil)
     let currentProfiles = CurrentValueSubject<[ProfileRecord], Never>([])
     
+    var currentTwitterProfiles: [ProfileRecord] {
+        currentProfiles.value.filter {
+            $0.socialPlatform == .twitter
+        }
+    }
     // temporary store a persona name here
     var temporaryPersonaName: String?
     
@@ -69,19 +74,24 @@ class PersonaManager {
             .receive(on: DispatchQueue.main)
             .map {
                 guard let persona = $0 else { return [] }
-                return persona.linkedProfiles?.compactMap {
+                let profiles: [ProfileRecord] = persona.linkedProfiles?.compactMap {
                     guard let profile = $0 as? ProfileRecord else { return nil }
                     return profile
                 } ?? []
+                if persona.selectedProfile == nil, !profiles.isEmpty {
+                    Self.setAProfileAsSelected(personaIdentifier: persona.nonOptionalIdentifier,
+                                               profiles: profiles)
+                }
+                return profiles
             }
             .assign(to: \.currentProfiles.value, on: self)
             .store(in: &disposeBag)
         
         currentPersona
             .receive(on: DispatchQueue.main)
-            .map({
+            .map {
                 $0?.selectedProfile
-            })
+            }
             .assign(to: \.currentProfile.value, on: self)
             .store(in: &disposeBag)
         
@@ -95,6 +105,25 @@ class PersonaManager {
         }
     }
     
+    func setProfileSelected(profile: ProfileRecord) {
+        guard let identifier = currentPersona.value?.identifier else { return }
+        PersonaRepository.updateSelectedProfile(identifier: identifier, profile: profile)
+        settings.currentProfileSocialPlatform = profile.socialPlatform
+    }
+    
+    private static func setAProfileAsSelected(personaIdentifier: String, profiles: [ProfileRecord]) {
+        let profile: ProfileRecord = {
+            if let profle = profiles.first(where: {
+                $0.socialPlatform == .twitter
+            }) {
+                return profle
+            }
+            return profiles[0]
+        }()
+        
+        PersonaRepository.updateSelectedProfile(identifier: personaIdentifier, profile: profile)
+    }
+    
     static func nonrepeatingName(name: String?, withNames: [String]) -> String {
         let name = name ?? "persona"
         let names = withNames
@@ -103,7 +132,7 @@ class PersonaManager {
         }
         var newName: String = name
         var count = 1
-        while (names.contains(newName)) {
+        while names.contains(newName) {
             newName = name + "(\(count))"
             count = count + 1
         }

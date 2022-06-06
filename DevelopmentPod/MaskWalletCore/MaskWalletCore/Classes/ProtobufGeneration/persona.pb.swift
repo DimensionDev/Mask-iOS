@@ -32,7 +32,7 @@ public struct Api_PersonaGenerationParam {
 
   public var path: String = String()
 
-  public var curve: Api_PersonaGenerationParam.Curve = .secp256K1
+  public var curve: Api_Curve = .secp256K1
 
   public var option: Api_EncryptOption {
     get {return _option ?? Api_EncryptOption()}
@@ -45,50 +45,10 @@ public struct Api_PersonaGenerationParam {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum Curve: SwiftProtobuf.Enum {
-    public typealias RawValue = Int
-    case secp256K1 // = 0
-    case ed25519 // = 1
-    case UNRECOGNIZED(Int)
-
-    public init() {
-      self = .secp256K1
-    }
-
-    public init?(rawValue: Int) {
-      switch rawValue {
-      case 0: self = .secp256K1
-      case 1: self = .ed25519
-      default: self = .UNRECOGNIZED(rawValue)
-      }
-    }
-
-    public var rawValue: Int {
-      switch self {
-      case .secp256K1: return 0
-      case .ed25519: return 1
-      case .UNRECOGNIZED(let i): return i
-      }
-    }
-
-  }
-
   public init() {}
 
   fileprivate var _option: Api_EncryptOption? = nil
 }
-
-#if swift(>=4.2)
-
-extension Api_PersonaGenerationParam.Curve: CaseIterable {
-  // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static var allCases: [Api_PersonaGenerationParam.Curve] = [
-    .secp256K1,
-    .ed25519,
-  ]
-}
-
-#endif  // swift(>=4.2)
 
 public struct Api_PersonaGenerationResp {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
@@ -198,7 +158,6 @@ public struct Api_AesJWKResp {
 
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Api_PersonaGenerationParam: @unchecked Sendable {}
-extension Api_PersonaGenerationParam.Curve: @unchecked Sendable {}
 extension Api_PersonaGenerationResp: @unchecked Sendable {}
 extension Api_JWKResp: @unchecked Sendable {}
 extension Api_AesJWKResp: @unchecked Sendable {}
@@ -266,13 +225,6 @@ extension Api_PersonaGenerationParam: SwiftProtobuf.Message, SwiftProtobuf._Mess
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
-}
-
-extension Api_PersonaGenerationParam.Curve: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "Secp256k1"),
-    1: .same(proto: "Ed25519"),
-  ]
 }
 
 extension Api_PersonaGenerationResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {

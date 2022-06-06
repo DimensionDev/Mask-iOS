@@ -84,7 +84,7 @@ final class MaskbookTab: NSObject {
         ])
 
         // setup observer
-        tab.webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: [.initial, .new], context: nil)
+        tab.webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: [.initial, .new, .old], context: nil)
         
         viewModel.requestURLString
             .assign(to: \.requestURLLabel.text, on: webViewNavigationFailureDescriptionView)
@@ -119,7 +119,7 @@ extension MaskbookTab {
 
         let progress = Float(tab.webView.estimatedProgress)
         progressView.setProgress(progress, animated: progress >= self.progressView.progress)
-
+        print(tab.webView.url?.absoluteURL)
         if progress == 1 {
             UIView.animate(withDuration: 0.3) { [weak self] in
                 self?.progressView.alpha = 0.0

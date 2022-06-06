@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftMsgPack
+import web3swift
 
 struct JsonWebKey: Codable {
     struct RsaOtherPrimesInfo: Codable {
@@ -78,5 +79,20 @@ extension JsonWebKey {
 
     var privateKeyBase64String: String? {
         privateKeyPackedData?.base64EncodedString()
+    }
+}
+
+extension JsonWebKey {
+    func getRawData() -> Data? {
+        guard let x = x, let y = y else {
+            return nil
+        }
+        let xBase64 = Data(x.utf8).base64EncodedString()
+        let yBase64 = Data(y.utf8).base64EncodedString()
+        guard let xData = Data(base64Encoded: xBase64),
+              let yData = Data(base64Encoded: yBase64) else {
+            return nil
+        }
+        return SECP256K1.combineSerializedPublicKeys(keys: [xData, yData], outputCompressed: true)
     }
 }

@@ -25,7 +25,6 @@ final class ControlContainableScrollView: UIScrollView {
             && !(view is UISwitch) {
             return true
         }
-        
         return super.touchesShouldCancel(in: view)
     }
 }

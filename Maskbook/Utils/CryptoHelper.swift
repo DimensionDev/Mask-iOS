@@ -212,10 +212,6 @@ extension Crypto: CombineCompatible {
         .receive(on: RunLoop.main)
         .eraseToAnyPublisher()
     }
-
-    static func compatiableConvert(_ data: Data) -> JSON? {
-        data.asCompatibleBackupJSON()
-    }
 }
 
 extension Data {

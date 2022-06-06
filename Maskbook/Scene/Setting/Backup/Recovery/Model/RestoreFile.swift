@@ -124,7 +124,7 @@ extension RestoreFile {
                 kty = json[CodingKeys.kty.stringValue] as? String
                 crv = json[CodingKeys.crv.stringValue] as? String
                 key_ops = json[CodingKeys.key_ops.stringValue] as? [String]
-                ext = json[CodingKeys.ext.stringValue] as? Bool
+                ext = json[CodingKeys.ext.stringValue] as? Bool ?? true
             }
         }
 
@@ -162,17 +162,19 @@ extension RestoreFile {
 
     struct LocalKey: Codable {
         let alg: String?
-        let ext: Bool?
+
         let k: String?
         let key_ops: [String]?
         let kty: String?
+
+        let ext: Bool?
 
         init(from json:[String: Any]) {
             k = json[CodingKeys.k.stringValue] as? String
             alg = json[CodingKeys.alg.stringValue] as? String
             kty = json[CodingKeys.kty.stringValue] as? String
             key_ops = json[CodingKeys.key_ops.stringValue] as? [String]
-            ext = json[CodingKeys.ext.stringValue] as? Bool
+            ext = json[CodingKeys.ext.stringValue] as? Bool ?? true
         }
     }
 
@@ -183,7 +185,7 @@ extension RestoreFile {
 
             init(from json: [String: Any]) {
                 path =  json[CodingKeys.path.stringValue] as? String ?? ""
-                withPassword = json[CodingKeys.withPassword.stringValue] as? Bool
+                withPassword = json[CodingKeys.withPassword.stringValue] as? Bool ?? false
             }
         }
 

@@ -22,7 +22,6 @@ class RedPacketConfirmViewModel: ObservableObject {
     var transaction: EthereumTransaction?
     var options: TransactionOptions?
     var completion: ((String?, Error?) -> Void)?
-    var password: String?
     
     var tokenIconURL: URL? {
         guard let url = token?.logoUrl else { return nil }
@@ -164,7 +163,6 @@ class RedPacketConfirmViewModel: ObservableObject {
         self.inputParam = param?.inputParam
         self.options = param?.options
         self.transaction = param?.transaction
-        self.password = param?.password
         self.completion = completion
         
         gasFeeViewModel?.confirmedGasFeePublisher
@@ -183,11 +181,14 @@ class RedPacketConfirmViewModel: ObservableObject {
                 self?.sendTransaction(password: password) { [weak self] result in
                     DispatchQueue.main.async {
                         switch result {
-                        case .success(let txHash): self?.completion?(txHash, nil)
+                        case .success(let txHash):
+                            self?.completion?(txHash, nil)
+                            self?.completion = nil
                             
                         case .failure(let error):
                             log.error("send failed: \(error)", source: "lucky drop")
                             self?.completion?(nil, error)
+                            self?.completion = nil
                         }
                         self?.buttonState = .normal
                     }
@@ -235,30 +236,9 @@ class RedPacketConfirmViewModel: ObservableObject {
             transactionOptions.gasPrice = .automatic
         }
         
-        guard let privateKey = self.password else {
-            return
-        }
-        
-        // save `password` into `PluginStorage` before send a transaction
-        let chainNetwork = settings.network
-        let record = PluginStorageRepository.RedPacketRecord(
-            id: UUID().uuidString,
-            post: nil,
-            password: privateKey,
-            txHash: nil,
-            type: PluginStorageRepository.PluginType.redPackage.rawValue
-        )
-        
         let completionWrapper: (Swift.Result<(String, BigUInt), Error>) -> Void = { [weak self] result in
             switch result {
             case .success((let txhash, let nonce)):
-                PluginStorageRepository.save(
-                    address: fromAddress,
-                    chain: chainNetwork,
-                    txHash: txhash,
-                    record: record
-                )
-                
                 guard let self = self else { return }
                 guard let gasFeeItem = self.gasFeeItem,
                       let gwei = BigUInt(gasFeeItem.gWei),
@@ -270,7 +250,7 @@ class RedPacketConfirmViewModel: ObservableObject {
                 let to = transaction.to.address
                 let amount = self.totalAmount.stringValue
                 
-                let transactionInfo = PendTransactionModel.TranscationInfo(
+                let transactionInfo = PendingTransaction.TranscationInfo(
                     gaslimit: gasLimit,
                     gasPrice: gwei * (BigUInt(10).power(9)),
                     amount: amount,
@@ -283,7 +263,7 @@ class RedPacketConfirmViewModel: ObservableObject {
                     asset: token,
                     toAddress: to,
                     amount: amount)
-                PendTransactionManager.shared.addPendTrancation(
+                PendingTransactionManager.shared.addPendingTrancation(
                     txHash: txhash,
                     history: history,
                     transcationInfo:transactionInfo,
@@ -291,16 +271,18 @@ class RedPacketConfirmViewModel: ObservableObject {
                 completion(.success(txhash))
                 
             case .failure(let error):
-                self?.buttonState = .normal
-                let alertController = AlertController(
-                    title: error.localizedDescription,
-                    message: "",
-                    confirmButtonText: L10n.Common.Controls.done,
-                    imageType: .error)
-                Coordinator.main.present(
-                    scene: .alertController(alertController: alertController),
-                    transition: .alertController(completion: nil)
-                )
+                DispatchQueue.main.async {
+                    self?.buttonState = .normal
+                    let alertController = AlertController(
+                        title: "",
+                        message: error.errorDescription,
+                        confirmButtonText: L10n.Common.Controls.done,
+                        imageType: .error)
+                    Coordinator.main.present(
+                        scene: .alertController(alertController: alertController),
+                        transition: .alertController(completion: nil)
+                    )
+                }
             }
         }
         if fromAccount.fromWalletConnect {
@@ -350,7 +332,6 @@ extension RedPacketConfirmViewModel {
         let inputParam: HappyRedPacketV4.CreateRedPacketInput
         let transaction: EthereumTransaction
         let options: TransactionOptions
-        let password: String
     }
 }
 

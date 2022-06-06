@@ -12,6 +12,8 @@ import SwiftyJSON
 import UIKit
 import WebExtension_Shim
 import WebKit
+import SwiftUI
+import SnapKit
 
 class MaskSocialViewController: BaseViewController {
 
@@ -41,6 +43,7 @@ class MaskSocialViewController: BaseViewController {
     private lazy var webViewScrollDelegate = WebViewScrollViewDelegate(navigationController: self.navigationController)
 
     lazy var webPublicApisMessageResolver: WebPublicApiMessageResolver = .init(webView: nil)
+    weak var delegate: WebMessageResolverDelegate?
 
     private let decoder = JSONDecoder()
 
@@ -51,6 +54,10 @@ class MaskSocialViewController: BaseViewController {
     private let viewModel = MaskSocialViewModel()
     
     var lastProfileIdentifier: String?
+    
+    private var composeButton = NativeComposeButton()
+    
+    static let composeUrl:String = "compose/tweet"
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -75,6 +82,8 @@ extension MaskSocialViewController {
         loadSite()
         observeNotifications()
         subscribeSignal()
+        addNativaComposeButton()
+        handleForKeyboard()
     }
 
     func subscribeSignal() {
@@ -112,6 +121,17 @@ extension MaskSocialViewController {
         if let platform = personaManager.currentProfile.value?.socialPlatform {
             navigationItem.title = platform.shortName
         }
+    }
+    
+    func openComposer(message: String) {
+        guard personaManager.currentProfile.value?.socialPlatform == .twitter,
+            let tabId = tabId,
+            let tab = tabService.tabs[tabId]?.tab,
+            let url = URL(string: "https://twitter.com/intent/tweet?text=\(message)") else {
+            return
+        }
+        let request = URLRequest(url: url)
+        tab.webView.load(request)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -193,10 +213,17 @@ extension MaskSocialViewController {
             maskbookTab.containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             maskbookTab.containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-
+        
         maskbookTab.maskbookUIDelegateShim.delegate = self
         maskbookTab.maskbookNavigationDelegateShim.delegate = self
         maskbookTab.tab?.webView.scrollView.delegate = webViewScrollDelegate
+        
+        maskbookTab.tab?.webView.publisher(for: \.url)
+            .sink(receiveValue: {[weak self] webUrl in
+                guard let url = webUrl?.absoluteString else { return }
+                self?.composeButton.isHidden = !url.hasSuffix(MaskSocialViewController.composeUrl)
+            })
+            .store(in: &disposeBag)
     }
 }
 
@@ -325,7 +352,9 @@ extension MaskSocialViewController: MaskbookUIDelegateShimDelegate {
         self
     }
 
-    func navigationDidChange(url: URL?) {}
+    func navigationDidChange(url: URL?) {
+        
+    }
 }
 
 // MARK: - MaskbookNavigationDelegateShimDelegate
@@ -335,7 +364,9 @@ extension MaskSocialViewController: MaskbookNavigationDelegateShimDelegate {
         maskBrowser.contentScriptPlugin
     }
 
-    func navigationDidFinish(_ webView: WKWebView, navigation: WKNavigation) {}
+    func navigationDidFinish(_ webView: WKWebView, navigation: WKNavigation) {
+        
+    }
 }
 
 extension MaskSocialViewController: UIAdaptivePresentationControllerDelegate {
@@ -349,10 +380,88 @@ extension MaskSocialViewController: UIAdaptivePresentationControllerDelegate {
     }
 }
 
+// MARK: - WebMessageResolverDelegate
+
+extension MaskSocialViewController: WebMessageResolverDelegate {
+    func webPublicApiMessageResolver(resolver: WebPublicApiMessageResolver,
+                                     profilesDetect profileIdentifiers: [String]){}
+    
+    func webNotifyCompositionRequested(resolver: WebPublicApiMessageResolver,
+                                       notifyComposition: CompositionRequestParam){
+        if notifyComposition.reason == "popup"{
+            composeButton.isHidden = notifyComposition.open
+        }
+    }
+}
+
 extension MaskSocialViewController {
     // remove backButton on this controller in any scene
     @objc
     override func prepareLeftNavigationItems() {
         navigationItem.leftBarButtonItems = []
     }
+}
+
+extension MaskSocialViewController {
+        
+    func addNativaComposeButton() {
+        webPublicApisMessageResolver.delegate = self
+        composeButton = NativeComposeButton()
+        composeButton.isHidden = true
+        if let view = self.navigationController?.view {
+            view.addSubview(composeButton)
+            composeButton.snp.makeConstraints { make in
+                make.centerX.equalTo(view)
+                make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-10)
+                make.height.equalTo(40)
+            }
+            composeButton.gesture().sink { [weak self] _ in
+                self?.coordinator.present(scene: .messageCompose(), transition: .modal(animated: true, adaptiveDelegate: self))
+            }
+            .store(in: &disposeBag)
+        }        
+    }
+    
+    func handleForKeyboard() {
+        let endFrame = KeyboardResponderService.shared.endFrame.removeDuplicates()
+        let willShow = NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification, object: nil)
+        let willHide = NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification, object: nil)
+        Publishers.CombineLatest(willShow, endFrame).sink { notification, _ in
+            guard let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else {
+                return
+            }
+            guard let endFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+                return
+            }
+            UIView.animate(
+                withDuration: duration,
+                delay: 0,
+                options: .curveEaseIn) {
+                    self.composeButton.snp.remakeConstraints { make in
+                        make.centerX.equalTo(self.view)
+                        make.bottom.equalTo(self.view.snp.bottom).offset(-10 - endFrame.height)
+                        make.height.equalTo(40)
+                    }
+            }
+            self.view.layoutIfNeeded()
+        }.store(in: &disposeBag)
+        
+        Publishers.CombineLatest(willHide, endFrame).sink { notification, _ in
+            guard let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else {
+                return
+            }
+            UIView.animate(
+                withDuration: duration,
+                delay: 0,
+                options: .curveEaseIn) {
+                    self.composeButton.snp.remakeConstraints { make in
+                        make.centerX.equalTo(self.view)
+                        make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-10)
+                        make.height.equalTo(40)
+                    }
+            }
+            self.view.layoutIfNeeded()
+        }.store(in: &disposeBag)
+    }
+    
 }
