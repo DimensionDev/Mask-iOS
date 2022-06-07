@@ -27,7 +27,6 @@ extension FileServiceViewController {
         let button = NavigationItemView(imageAsset: Asset.Plugins.closeSquare) { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
-        .frame(width: 36, height: 36)
 
         self.navigationItem.rightBarButtonItems = [
             .fixedSpace(14),
@@ -40,7 +39,6 @@ extension FileServiceViewController {
         let settings = NavigationItemView(imageAsset: Asset.Plugins.LuckyDrop.setting) { [weak self] in
             self?.configUploadOption()
         }
-        .frame(width: 36, height: 36)
 
         self.navigationItem.leftBarButtonItems = [
             .fixedSpace(14),
