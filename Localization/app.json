@@ -909,6 +909,28 @@
     }
   },
   "plugins": {
+    "file_service": {
+        "setting_title": "Upload Settings",
+        "service_title": "Service Protocols",
+        "other_option": "Other Options",
+        "arweave": "Arweave",
+        "ipfs": "IPFS",
+        "swarm": "Swarm",
+        "encrypt": "Make it encrypted",
+        "mesoncdn": "Use Meson CDN",
+        "onboard": {
+            "step_one": "Decentralized file storage with Arweave, IPFS and Swarm.",
+            "step_two": "Tap [Settings] to select a protocol and adjust encryption settings.",
+            "step_three": "Upload your file for permanent storage, share with friends.",
+            "step_four": "Free Web3 file service, brought to you by Mask Network."
+        }
+    },
+    "policy": {
+        "reviewed": "I have reviewed",
+        "privacy": "the privacy policy",
+        "and": "and",
+        "upload_terms": "terms of service. Upload now."
+    },
     "luckyDrop": {
       "title": "Lucky Drop",
       "twitter_account": "realMaskNetwork",

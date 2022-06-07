@@ -222,6 +222,7 @@ internal enum Asset {
       internal static let maskWithBorder = ImageAsset(name: "Icon/Logo/maskWithBorder")
     }
     internal static let close = ImageAsset(name: "Icon/close")
+    internal static let faq = ImageAsset(name: "Icon/faq")
     internal static let insecureEye = ImageAsset(name: "Icon/insecureEye")
     internal static let secureEye = ImageAsset(name: "Icon/secureEye")
   }
@@ -478,6 +479,13 @@ internal enum Asset {
     }
   }
   internal enum Plugins {
+    internal enum FileService {
+      internal static let onboardFour = ImageAsset(name: "Plugins/FileService/onboardFour")
+      internal static let onboardOne = ImageAsset(name: "Plugins/FileService/onboardOne")
+      internal static let onboardThree = ImageAsset(name: "Plugins/FileService/onboardThree")
+      internal static let onboardTwo = ImageAsset(name: "Plugins/FileService/onboardTwo")
+      internal static let uploadBackground = ImageAsset(name: "Plugins/FileService/uploadBackground")
+    }
     internal enum LuckyDrop {
       internal enum Icon {
         internal static let close = ImageAsset(name: "Plugins/LuckyDrop/icon/close")
