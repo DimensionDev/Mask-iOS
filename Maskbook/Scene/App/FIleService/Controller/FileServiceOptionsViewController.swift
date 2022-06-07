@@ -19,7 +19,6 @@ extension FileServiceOptionViewController {
         let button = NavigationItemView(imageAsset: Asset.Icon.faq) { [weak self] in
             // TODO: file service faq
         }
-        .frame(width: 36, height: 36)
 
         self.navigationItem.rightBarButtonItems = [
             .fixedSpace(14),
