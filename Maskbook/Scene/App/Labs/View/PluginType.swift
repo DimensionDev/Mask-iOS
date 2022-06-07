@@ -24,7 +24,7 @@ enum PluginType: String {
     
     var isEnable: Bool {
         switch self {
-        case .transaction, .luckyDrop:
+        case .transaction, .luckyDrop, .fileService:
             return true
             
         default:

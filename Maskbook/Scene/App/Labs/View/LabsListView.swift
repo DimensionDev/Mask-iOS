@@ -28,9 +28,9 @@ struct LabsListView: View {
         [
             .luckyDrop,
             .transaction,
+            .fileService,
             .ito,
-            .swap,
-            .fileService
+            .swap
         ]
     }
 }

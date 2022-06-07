@@ -39,7 +39,7 @@ struct SwitchButton: View {
                 .offset(x: enabled ? offsetMargin : -offsetMargin)
         )
         .onTapGesture { enabled.toggle() }
-        .animation(.spring())
+        .animation(.spring(), value: enabled)
     }
 }
 

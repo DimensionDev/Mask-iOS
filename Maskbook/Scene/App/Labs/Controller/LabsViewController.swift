@@ -46,6 +46,12 @@ final class LabsViewController: BaseViewController {
                         scene: .luckyDrop(source: .lab, callback: nil),
                         transition: .modal(animated: true)
                     )
+
+                case .fileService:
+                    self.coordinator.present(
+                        scene: .fileService,
+                        transition: .detail()
+                    )
                 default: break
                 }
             }
@@ -56,7 +62,6 @@ final class LabsViewController: BaseViewController {
         self.coordinator.present(scene: .showTransakIntegration, transition: .modal())
     }
 
-    @objc
     fileprivate func configPluginSettings() {
         self.coordinator.present(scene: .pluginConfiguration, transition: .detail())
     }

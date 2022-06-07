@@ -83,6 +83,9 @@
 		1F37DF2427BDFA3D008F8ABE /* RestoreLocalFileValidationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37DF2327BDFA3D008F8ABE /* RestoreLocalFileValidationViewModel.swift */; };
 		1F57023A27A27E4900C96909 /* RedPacketShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F57023927A27E4900C96909 /* RedPacketShareSheet.swift */; };
 		1F58730F277C51A3005A7B11 /* DappScriptPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58730E277C51A3005A7B11 /* DappScriptPayload.swift */; };
+		1F5B5ED5284F224500F6AD98 /* FileServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5ED4284F224500F6AD98 /* FileServiceViewController.swift */; };
+		1F5B5ED7284F2F4600F6AD98 /* FileServiceOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5ED6284F2F4600F6AD98 /* FileServiceOptionsViewController.swift */; };
+		1F5B5EDA284F3B9500F6AD98 /* FileServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5ED9284F3B9500F6AD98 /* FileServiceView.swift */; };
 		1F705FE327CF6AB9002A4A7E /* SpinWheelAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */; };
 		1F8AD0CB26CA3AA000C9694F /* MaskLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AD0CA26CA3AA000C9694F /* MaskLoadingIndicator.swift */; };
 		1F8AD0CE26CA3AFB00C9694F /* LoadingAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AD0CD26CA3AFB00C9694F /* LoadingAnimator.swift */; };
@@ -118,8 +121,13 @@
 		1FCBEE04273A6A71001C3637 /* RestoreWalletPasswordConfigController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBEE03273A6A71001C3637 /* RestoreWalletPasswordConfigController.swift */; };
 		1FCCE38426D4C5AD00909A5B /* CloudRestoreVerifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCCE38326D4C5AD00909A5B /* CloudRestoreVerifyTests.swift */; };
 		1FCCE39B26D7F09700909A5B /* SpinActivityAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCCE39A26D7F09700909A5B /* SpinActivityAnimator.swift */; };
+		1FD19593284E03530047B431 /* FileServiceOnBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD19592284E03530047B431 /* FileServiceOnBoardView.swift */; };
+		1FD19595284E05470047B431 /* OnBoardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD19594284E05470047B431 /* OnBoardItem.swift */; };
+		1FD19597284E059C0047B431 /* WalkThroughBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD19596284E059C0047B431 /* WalkThroughBoard.swift */; };
+		1FD19599284E0E430047B431 /* FileServiceOnBoardItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD19598284E0E430047B431 /* FileServiceOnBoardItemView.swift */; };
 		1FD24E1226BD267800D03599 /* InjectedValueKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD24E1126BD267800D03599 /* InjectedValueKeys.swift */; };
 		1FD91A8A283CCBA4000766FB /* PluginMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD91A89283CCBA4000766FB /* PluginMeta.swift */; };
+		1FD91A8E2844A252000766FB /* FileServiceOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD91A8D2844A252000766FB /* FileServiceOptionView.swift */; };
 		1FD91A922845BD57000766FB /* SwiftUI+Focused.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD91A912845BD57000766FB /* SwiftUI+Focused.swift */; };
 		1FE54D49269947640041C742 /* NSManagedContext+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE54D48269947640041C742 /* NSManagedContext+extension.swift */; };
 		1FE54D56269BEFE90041C742 /* CoreDataStackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFB224A2654E972005CAFFA /* CoreDataStackTests.swift */; };
@@ -870,6 +878,9 @@
 		1F37DF2327BDFA3D008F8ABE /* RestoreLocalFileValidationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreLocalFileValidationViewModel.swift; sourceTree = "<group>"; };
 		1F57023927A27E4900C96909 /* RedPacketShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketShareSheet.swift; sourceTree = "<group>"; };
 		1F58730E277C51A3005A7B11 /* DappScriptPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappScriptPayload.swift; sourceTree = "<group>"; };
+		1F5B5ED4284F224500F6AD98 /* FileServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceViewController.swift; sourceTree = "<group>"; };
+		1F5B5ED6284F2F4600F6AD98 /* FileServiceOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceOptionsViewController.swift; sourceTree = "<group>"; };
+		1F5B5ED9284F3B9500F6AD98 /* FileServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceView.swift; sourceTree = "<group>"; };
 		1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinWheelAnimator.swift; sourceTree = "<group>"; };
 		1F8AD0CA26CA3AA000C9694F /* MaskLoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskLoadingIndicator.swift; sourceTree = "<group>"; };
 		1F8AD0CD26CA3AFB00C9694F /* LoadingAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimator.swift; sourceTree = "<group>"; };
@@ -905,8 +916,13 @@
 		1FCBEE03273A6A71001C3637 /* RestoreWalletPasswordConfigController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreWalletPasswordConfigController.swift; sourceTree = "<group>"; };
 		1FCCE38326D4C5AD00909A5B /* CloudRestoreVerifyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudRestoreVerifyTests.swift; sourceTree = "<group>"; };
 		1FCCE39A26D7F09700909A5B /* SpinActivityAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinActivityAnimator.swift; sourceTree = "<group>"; };
+		1FD19592284E03530047B431 /* FileServiceOnBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceOnBoardView.swift; sourceTree = "<group>"; };
+		1FD19594284E05470047B431 /* OnBoardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardItem.swift; sourceTree = "<group>"; };
+		1FD19596284E059C0047B431 /* WalkThroughBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkThroughBoard.swift; sourceTree = "<group>"; };
+		1FD19598284E0E430047B431 /* FileServiceOnBoardItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceOnBoardItemView.swift; sourceTree = "<group>"; };
 		1FD24E1126BD267800D03599 /* InjectedValueKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectedValueKeys.swift; sourceTree = "<group>"; };
 		1FD91A89283CCBA4000766FB /* PluginMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginMeta.swift; sourceTree = "<group>"; };
+		1FD91A8D2844A252000766FB /* FileServiceOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceOptionView.swift; sourceTree = "<group>"; };
 		1FD91A912845BD57000766FB /* SwiftUI+Focused.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Focused.swift"; sourceTree = "<group>"; };
 		1FE54D48269947640041C742 /* NSManagedContext+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedContext+extension.swift"; sourceTree = "<group>"; };
 		1FE54D57269BF0140041C742 /* NSDiffableSourceSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSDiffableSourceSnapshotTests.swift; sourceTree = "<group>"; };
@@ -1886,6 +1902,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		1F5B5ED8284F31E500F6AD98 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1F5B5ED4284F224500F6AD98 /* FileServiceViewController.swift */,
+				1F5B5ED6284F2F4600F6AD98 /* FileServiceOptionsViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		1F721093279E901900B8BF76 /* RedPacket */ = {
 			isa = PBXGroup;
 			children = (
@@ -1917,6 +1942,26 @@
 				1FD24E1126BD267800D03599 /* InjectedValueKeys.swift */,
 			);
 			path = InjectedValues;
+			sourceTree = "<group>";
+		};
+		1FD91A8B28447146000766FB /* FIleService */ = {
+			isa = PBXGroup;
+			children = (
+				1F5B5ED8284F31E500F6AD98 /* Controller */,
+				1FD91A8C2844A06E000766FB /* View */,
+			);
+			path = FIleService;
+			sourceTree = "<group>";
+		};
+		1FD91A8C2844A06E000766FB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1FD91A8D2844A252000766FB /* FileServiceOptionView.swift */,
+				1FD19592284E03530047B431 /* FileServiceOnBoardView.swift */,
+				1FD19598284E0E430047B431 /* FileServiceOnBoardItemView.swift */,
+				1F5B5ED9284F3B9500F6AD98 /* FileServiceView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		1FEE1EA227844F6200697F81 /* Utils */ = {
@@ -2504,6 +2549,8 @@
 				2AD855E82812875A0064DDA5 /* MaskHostViewController.swift */,
 				2AD855E92812875A0064DDA5 /* SheetHostingController.swift */,
 				2AD855EA2812875A0064DDA5 /* ShakeAnimation.swift.swift */,
+				1FD19594284E05470047B431 /* OnBoardItem.swift */,
+				1FD19596284E059C0047B431 /* WalkThroughBoard.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -2670,6 +2717,7 @@
 		2AF88359271EE9300004565A /* App */ = {
 			isa = PBXGroup;
 			children = (
+				1FD91A8B28447146000766FB /* FIleService */,
 				1F721093279E901900B8BF76 /* RedPacket */,
 				1F03638F2779D20D001E8A88 /* DApp */,
 				1F03638E2779D200001E8A88 /* Labs */,
@@ -4330,6 +4378,7 @@
 				2AF884FE271EE9310004565A /* ContactsViewController.swift in Sources */,
 				2AF8853C271EE9310004565A /* AccountCardView.swift in Sources */,
 				5D554EC6279FE58100D40848 /* OpenRedPackageViewController.swift in Sources */,
+				1FD19597284E059C0047B431 /* WalkThroughBoard.swift in Sources */,
 				2AD31E47282D367700CB3D49 /* BigInt+Conversion.swift in Sources */,
 				DB0B3A5D240F60AE00B1657D /* Coordinator.swift in Sources */,
 				2AF88572271EE9310004565A /* MnemonicVerifyWordCollectionDataSource.swift in Sources */,
@@ -4417,6 +4466,7 @@
 				2AF8854B271EE9310004565A /* NFTDetailTableViewCell.swift in Sources */,
 				2DC5D898272574D600E351D3 /* WalletConnectClient+Transation.swift in Sources */,
 				2AF885D0271EE9320004565A /* ScannerHandler.swift in Sources */,
+				1FD19599284E0E430047B431 /* FileServiceOnBoardItemView.swift in Sources */,
 				2AD8552A2812841C0064DDA5 /* LuckDropHistoryViewModel.swift in Sources */,
 				2A6ABBA02720053B00CC3AED /* ChangePasswordViewController.swift in Sources */,
 				2A35603E265D008100FB1D3B /* FontStyles.swift in Sources */,
@@ -4544,6 +4594,7 @@
 				2D6677F627688FBE00528F4D /* WalletConnectServerError.swift in Sources */,
 				5D9988EC2653E2610070ED17 /* Strings.swift in Sources */,
 				2AF884C2271EE9300004565A /* MaskBrowser.swift in Sources */,
+				1FD19595284E05470047B431 /* OnBoardItem.swift in Sources */,
 				5DB39E2B278694460025337C /* JSDocumentResourceManager.swift in Sources */,
 				2AD85515281283170064DDA5 /* WalletBottomWidgetView.swift in Sources */,
 				2AD855262812841C0064DDA5 /* RedPacketConfirmViewModel.swift in Sources */,
@@ -4607,6 +4658,7 @@
 				2A3050C626A01B370003EECC /* NFTAssetsModel.swift in Sources */,
 				2AF884CC271EE9300004565A /* MaskWebMessage+Setting.swift in Sources */,
 				2AF88550271EE9310004565A /* SearchTokenListViewModel.swift in Sources */,
+				1FD19593284E03530047B431 /* FileServiceOnBoardView.swift in Sources */,
 				2AD855A7281285D10064DDA5 /* FungibleToken.swift in Sources */,
 				2AD31E52282D367700CB3D49 /* UIApplication+extension.swift in Sources */,
 				2AF88526271EE9310004565A /* WalletRenameViewController.swift in Sources */,
@@ -4634,6 +4686,7 @@
 				2AF884BF271EE9300004565A /* PluginFactory.swift in Sources */,
 				2A5FAEA227CF7AD200D01250 /* GuideView.swift in Sources */,
 				1FCBEDF62738FFEB001C3637 /* RestoreWalletPasswordVertifyView.swift in Sources */,
+				1FD91A8E2844A252000766FB /* FileServiceOptionView.swift in Sources */,
 				2AF884BD271EE9300004565A /* WebPublicApiMessageResolver.swift in Sources */,
 				5D3E365027BF706500FDCFDD /* Post.swift in Sources */,
 				2AF884C1271EE9300004565A /* MaskConnectingSocialViewController.swift in Sources */,
@@ -4648,6 +4701,7 @@
 				2AD31E64282D367700CB3D49 /* AsyncPublisher.swift in Sources */,
 				2AD8561A2812875A0064DDA5 /* MoveFromBottomModifier.swift in Sources */,
 				1FE54D5A269C19C10041C742 /* WalletCoreRequest.swift in Sources */,
+				1F5B5ED7284F2F4600F6AD98 /* FileServiceOptionsViewController.swift in Sources */,
 				2AD31E6C282D367700CB3D49 /* UserDefaults.swift in Sources */,
 				2AD855282812841C0064DDA5 /* WalletBottomWidgetViewModel.swift in Sources */,
 				2AD589B82848C22900CF8C9B /* SwiftUI+Placeholder.swift in Sources */,
@@ -4844,6 +4898,7 @@
 				2AF88501271EE9310004565A /* ContactsViewModel.swift in Sources */,
 				2AD8550E281283170064DDA5 /* SelectSocialAccountView.swift in Sources */,
 				2D6677F527688FBE00528F4D /* WalletConnectServerConfirmDelegate.swift in Sources */,
+				1F5B5ED5284F224500F6AD98 /* FileServiceViewController.swift in Sources */,
 				0F31A1622742AA43009D2E05 /* WalletImportMultiChainAlert.swift in Sources */,
 				2AF88567271EE9310004565A /* WalletDeleteViewController.swift in Sources */,
 				2AD8552B2812841C0064DDA5 /* LuckyDropHistoryItemViewModel.swift in Sources */,
@@ -4885,6 +4940,7 @@
 				2DC5D895272574D600E351D3 /* WalletConnectClient+Extensions.swift in Sources */,
 				2AF8852E271EE9310004565A /* WalletBackupViewController.swift in Sources */,
 				2A72F40227BE8323004A3F95 /* ColletibleIconContentControllerHandler.swift in Sources */,
+				1F5B5EDA284F3B9500F6AD98 /* FileServiceView.swift in Sources */,
 				1F57023A27A27E4900C96909 /* RedPacketShareSheet.swift in Sources */,
 				5DD1BBC227CF0843001DB330 /* Toast+Extension.swift in Sources */,
 				2AF88584271EE9310004565A /* WalletHistoryViewModel.swift in Sources */,
