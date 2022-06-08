@@ -23,7 +23,7 @@ struct DebugView: View {
         .navigationTitle("Debug")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: NavigationItemView(imageAsset: Asset.Icon.Arrows.backArrow) {
+        .navigationBarItems(leading: NavigationBarItemView(imageAsset: Asset.Icon.Arrows.backArrow) {
             presentationMode.wrappedValue.dismiss()
         })
     }
