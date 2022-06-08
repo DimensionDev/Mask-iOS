@@ -133,6 +133,11 @@ Please scan Persona QR Code.";
 "Plugins.FileService.Arweave" = "Arweave";
 "Plugins.FileService.Encrypt" = "Make it encrypted";
 "Plugins.FileService.Ipfs" = "IPFS";
+"Plugins.FileService.LocalFileSource.TakePhotos" = "Take Photos";
+"Plugins.FileService.LocalFileSource.UploadFile" = "Upload File";
+"Plugins.FileService.LocalFileSource.UploadPhotos" = "Upload Photos";
+"Plugins.FileService.LocalFileSource.UploadTips" = "The size limit is 10.5MB
+The upload can’t be cancelled.";
 "Plugins.FileService.Mesoncdn" = "Use Meson CDN";
 "Plugins.FileService.Onboard.StepFour" = "Free Web3 file service, brought to you by Mask Network.";
 "Plugins.FileService.Onboard.StepOne" = "Decentralized file storage with Arweave, IPFS and Swarm.";

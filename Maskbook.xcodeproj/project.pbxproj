@@ -690,6 +690,8 @@
 		5DB39E2E27869F6C0025337C /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2D27869F6C0025337C /* DebugView.swift */; };
 		5DB39E302786A4E40025337C /* JSResourceSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2F2786A4E40025337C /* JSResourceSelectView.swift */; };
 		5DB39E322786A8970025337C /* JSResourceSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E312786A8970025337C /* JSResourceSelectViewModel.swift */; };
+		5DBDA4D2285083B200FBC921 /* FileServiceSelectFileSourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBDA4D1285083B200FBC921 /* FileServiceSelectFileSourceViewController.swift */; };
+		5DBDA4D4285083F000FBC921 /* FileServiceSelectFileSourceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBDA4D3285083F000FBC921 /* FileServiceSelectFileSourceView.swift */; };
 		5DCA069B27C75A8B007697C8 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCA069A27C75A8B007697C8 /* Toast.swift */; };
 		5DD1BBC227CF0843001DB330 /* Toast+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BBC127CF0843001DB330 /* Toast+Extension.swift */; };
 		5DD5A69827F53168005952A0 /* PersonaImportItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD5A69727F53168005952A0 /* PersonaImportItem.swift */; };
@@ -1487,6 +1489,8 @@
 		5DB39E2D27869F6C0025337C /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		5DB39E2F2786A4E40025337C /* JSResourceSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSResourceSelectView.swift; sourceTree = "<group>"; };
 		5DB39E312786A8970025337C /* JSResourceSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSResourceSelectViewModel.swift; sourceTree = "<group>"; };
+		5DBDA4D1285083B200FBC921 /* FileServiceSelectFileSourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceSelectFileSourceViewController.swift; sourceTree = "<group>"; };
+		5DBDA4D3285083F000FBC921 /* FileServiceSelectFileSourceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceSelectFileSourceView.swift; sourceTree = "<group>"; };
 		5DCA069A27C75A8B007697C8 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		5DD1BBC127CF0843001DB330 /* Toast+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Toast+Extension.swift"; sourceTree = "<group>"; };
 		5DD5A69727F53168005952A0 /* PersonaImportItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaImportItem.swift; sourceTree = "<group>"; };
@@ -1909,6 +1913,7 @@
 			children = (
 				1F5B5ED4284F224500F6AD98 /* FileServiceViewController.swift */,
 				1F5B5ED6284F2F4600F6AD98 /* FileServiceOptionsViewController.swift */,
+				5DBDA4D1285083B200FBC921 /* FileServiceSelectFileSourceViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1971,6 +1976,7 @@
 				1FD19592284E03530047B431 /* FileServiceOnBoardView.swift */,
 				1FD19598284E0E430047B431 /* FileServiceOnBoardItemView.swift */,
 				1F5B5ED9284F3B9500F6AD98 /* FileServiceView.swift */,
+				5DBDA4D3285083F000FBC921 /* FileServiceSelectFileSourceView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4706,6 +4712,7 @@
 				2DC5D899272574D600E351D3 /* WalletConnectClient+Supported.swift in Sources */,
 				2AF8852A271EE9310004565A /* MnemonicWordViewModel.swift in Sources */,
 				2AF88536271EE9310004565A /* DerivationPathViewController.swift in Sources */,
+				5DBDA4D2285083B200FBC921 /* FileServiceSelectFileSourceViewController.swift in Sources */,
 				2AF885D1271EE9320004565A /* ScanLineAnimationView.swift in Sources */,
 				2AF88517271EE9310004565A /* SelectNetworkViewController.swift in Sources */,
 				2A6ABBA72720053B00CC3AED /* SettingTableViewCell.swift in Sources */,
@@ -4918,6 +4925,7 @@
 				2D00A600279546C80082E693 /* DebugControl.swift in Sources */,
 				2AF884E8271EE9310004565A /* PluginIconView.swift in Sources */,
 				2AD855F02812875A0064DDA5 /* AlertPopupController.swift in Sources */,
+				5DBDA4D4285083F000FBC921 /* FileServiceSelectFileSourceView.swift in Sources */,
 				2AF8855A271EE9310004565A /* GasFeeChooseViewController.swift in Sources */,
 				2AD8550D281283170064DDA5 /* ShareLuckyDropConnectPersonaView.swift in Sources */,
 				2AD31E53282D367700CB3D49 /* PanModalPresentable+color.swift in Sources */,

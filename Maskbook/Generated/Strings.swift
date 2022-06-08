@@ -696,6 +696,25 @@ enum L10n {
         return L10n.tr("Localizable", "Plugins.FileService.Swarm")
       }
 
+      enum LocalFileSource {
+        /// Take Photos
+        static var takePhotos: String {
+          return L10n.tr("Localizable", "Plugins.FileService.LocalFileSource.TakePhotos")
+        }
+        /// Upload File
+        static var uploadFile: String {
+          return L10n.tr("Localizable", "Plugins.FileService.LocalFileSource.UploadFile")
+        }
+        /// Upload Photos
+        static var uploadPhotos: String {
+          return L10n.tr("Localizable", "Plugins.FileService.LocalFileSource.UploadPhotos")
+        }
+        /// The size limit is 10.5MB\nThe upload can’t be cancelled.
+        static var uploadTips: String {
+          return L10n.tr("Localizable", "Plugins.FileService.LocalFileSource.UploadTips")
+        }
+      }
+
       enum Onboard {
         /// Free Web3 file service, brought to you by Mask Network.
         static var stepFour: String {

@@ -924,6 +924,12 @@
         "step_two": "Tap [Settings] to select a protocol and adjust encryption settings.",
         "step_three": "Upload your file for permanent storage, share with friends.",
         "step_four": "Free Web3 file service, brought to you by Mask Network."
+      },
+      "local_file_source": {
+        "take_photos": "Take Photos",
+        "upload_photos": "Upload Photos",
+        "upload_file": "Upload File",
+        "upload_tips": "The size limit is 10.5MB\nThe upload can’t be cancelled."
       }
     },
     "policy": {
