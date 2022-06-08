@@ -87,6 +87,7 @@
 		1F5B5ED7284F2F4600F6AD98 /* FileServiceOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5ED6284F2F4600F6AD98 /* FileServiceOptionsViewController.swift */; };
 		1F5B5EDA284F3B9500F6AD98 /* FileServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5ED9284F3B9500F6AD98 /* FileServiceView.swift */; };
 		1F5B5EDD285080B700F6AD98 /* FileServiceUploadOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EDC285080B700F6AD98 /* FileServiceUploadOption.swift */; };
+		1F5B5EDF28508FD400F6AD98 /* FileServiceUploadingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EDE28508FD400F6AD98 /* FileServiceUploadingItemView.swift */; };
 		1F705FE327CF6AB9002A4A7E /* SpinWheelAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */; };
 		1F8AD0CB26CA3AA000C9694F /* MaskLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AD0CA26CA3AA000C9694F /* MaskLoadingIndicator.swift */; };
 		1F8AD0CE26CA3AFB00C9694F /* LoadingAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AD0CD26CA3AFB00C9694F /* LoadingAnimator.swift */; };
@@ -883,6 +884,7 @@
 		1F5B5ED6284F2F4600F6AD98 /* FileServiceOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceOptionsViewController.swift; sourceTree = "<group>"; };
 		1F5B5ED9284F3B9500F6AD98 /* FileServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceView.swift; sourceTree = "<group>"; };
 		1F5B5EDC285080B700F6AD98 /* FileServiceUploadOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceUploadOption.swift; sourceTree = "<group>"; };
+		1F5B5EDE28508FD400F6AD98 /* FileServiceUploadingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceUploadingItemView.swift; sourceTree = "<group>"; };
 		1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinWheelAnimator.swift; sourceTree = "<group>"; };
 		1F8AD0CA26CA3AA000C9694F /* MaskLoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskLoadingIndicator.swift; sourceTree = "<group>"; };
 		1F8AD0CD26CA3AFB00C9694F /* LoadingAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimator.swift; sourceTree = "<group>"; };
@@ -1971,6 +1973,7 @@
 				1FD19592284E03530047B431 /* FileServiceOnBoardView.swift */,
 				1FD19598284E0E430047B431 /* FileServiceOnBoardItemView.swift */,
 				1F5B5ED9284F3B9500F6AD98 /* FileServiceView.swift */,
+				1F5B5EDE28508FD400F6AD98 /* FileServiceUploadingItemView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4425,6 +4428,7 @@
 				2AD8560F2812875A0064DDA5 /* DBImageDecoder+UIKit.swift in Sources */,
 				2AD31E51282D367700CB3D49 /* View+Style.swift in Sources */,
 				1F1CCF5E2736162F004E8835 /* WalletRestorePipeline.swift in Sources */,
+				1F5B5EDF28508FD400F6AD98 /* FileServiceUploadingItemView.swift in Sources */,
 				2AF8851E271EE9310004565A /* TransactionHeaderView.swift in Sources */,
 				1F8AD0CB26CA3AA000C9694F /* MaskLoadingIndicator.swift in Sources */,
 				2AD31E46282D367700CB3D49 /* NSMutableAttributedString+extension.swift in Sources */,
