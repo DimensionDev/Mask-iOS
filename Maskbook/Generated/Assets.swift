@@ -99,6 +99,7 @@ internal enum Asset {
     internal enum Gradient {
       internal static let blue1 = ColorAsset(name: "Colors/Gradient/blue1")
       internal static let blue2 = ColorAsset(name: "Colors/Gradient/blue2")
+      internal static let blur = ColorAsset(name: "Colors/Gradient/blur")
       internal static let guide1 = ColorAsset(name: "Colors/Gradient/guide1")
       internal static let guide2 = ColorAsset(name: "Colors/Gradient/guide2")
       internal static let persona1 = ColorAsset(name: "Colors/Gradient/persona1")
@@ -480,6 +481,7 @@ internal enum Asset {
   }
   internal enum Plugins {
     internal enum FileService {
+      internal static let folder = ImageAsset(name: "Plugins/FileService/folder")
       internal static let onboardFour = ImageAsset(name: "Plugins/FileService/onboardFour")
       internal static let onboardOne = ImageAsset(name: "Plugins/FileService/onboardOne")
       internal static let onboardThree = ImageAsset(name: "Plugins/FileService/onboardThree")

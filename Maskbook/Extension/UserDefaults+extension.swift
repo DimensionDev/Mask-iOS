@@ -84,7 +84,7 @@ final class UserDefaultSettings {
         case beAwareOfPluginTip
         case jsResourceIsUsingBundle
         case jsDocumentResourceSelectedCommitHash
-        
+
         case backupFileDetectDate
     }
 
@@ -170,7 +170,7 @@ final class UserDefaultSettings {
         set { currencyString = newValue.rawValue }
     }
 
-    @ReactiveUserDefault(key: Keys.indexedDBDataMigrated.rawValue, defaultValue: false)
+    @ReactiveUserDefault(key: .indexedDBDataMigrated, defaultValue: false)
     var indexedDBDataMigrated: Bool
     
     @ReactiveUserDefault(key: .currency, defaultValue: Currency.usd.rawValue)
@@ -277,29 +277,29 @@ final class UserDefaultSettings {
         set { currentProfileSocialPlatformString = newValue.rawValue }
     }
 
-    @OptionalUserDefault(key: Keys.appVersion.rawValue)
+    @OptionalUserDefault(key: .appVersion)
     var appVersion: String?
 
-    @OptionalUserDefault(key: Keys.appBuild.rawValue)
+    @OptionalUserDefault(key: .appBuild)
     var appBuild: String?
 
-    @OptionalUserDefault(key: Keys.remoteBackupEmail.rawValue)
+    @OptionalUserDefault(key: .remoteBackupEmail)
     var remoteBackupEmail: String?
 
-    @OptionalUserDefault(key: Keys.remoteBackupPhoneNumber.rawValue)
+    @OptionalUserDefault(key: .remoteBackupPhoneNumber)
     var remoteBackupPhoneNumber: String?
 
-    @OptionalUserDefault(key: Keys.backupDate.rawValue)
+    @OptionalUserDefault(key: .backupDate)
     var backupDate: Date?
 
-    @OptionalUserDefault(key: Keys.backupAlertDate.rawValue)
+    @OptionalUserDefault(key: .backupAlertDate)
     var backupAlertDate: Date?
 
     // Does the app have imported the legacy JS wallets
-    @ReactiveUserDefault(key: Keys.legacyWalletsImported.rawValue, defaultValue: false)
+    @ReactiveUserDefault(key: .legacyWalletsImported, defaultValue: false)
     var legacyWalletsImported: Bool
 
-    @OptionalUserDefault(key: Keys.walletDisplayBlockChain.rawValue)
+    @OptionalUserDefault(key: .walletDisplayBlockChain)
     var walletDisplayBlockchainString: String?
     var walletDisplayBlockchain: WalletDisplayBlockChainType {
         get {
@@ -315,13 +315,13 @@ final class UserDefaultSettings {
         }
     }
     
-    @ReactiveUserDefault(key: Keys.jsDocumentResourceSelectedCommitHash.rawValue, defaultValue: "")
+    @ReactiveUserDefault(key: .jsDocumentResourceSelectedCommitHash, defaultValue: "")
     var jsDocumentResourceSelectedCommitHash: String
     
-    @ReactiveUserDefault(key: Keys.jsResourceIsUsingBundle.rawValue, defaultValue: true)
+    @ReactiveUserDefault(key: .jsResourceIsUsingBundle, defaultValue: true)
     var jsResourceIsUsingBundle: Bool
     
-    @OptionalUserDefault(key: Keys.backupFileDetectDate.rawValue)
+    @OptionalUserDefault(key: .backupFileDetectDate)
     var backupFileDetectDate: Date?
 }
 

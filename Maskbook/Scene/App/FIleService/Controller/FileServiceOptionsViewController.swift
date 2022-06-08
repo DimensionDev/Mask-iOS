@@ -16,7 +16,7 @@ final class FileServiceOptionViewController: BaseViewController {
 extension FileServiceOptionViewController {
     @objc
     override func prepareRightNavigationItems() {
-        let button = NavigationItemView(imageAsset: Asset.Icon.faq) { [weak self] in
+        let button = NavigationBarItemView(imageAsset: Asset.Icon.faq) { [weak self] in
             // TODO: file service faq
         }
 
