@@ -126,6 +126,7 @@ Please scan Persona QR Code.";
 "Common.Controls.WebviewGoBack" = "Back";
 "Common.Empty" = "No records";
 "Common.Loading" = "Loading...";
+"Common.SearchPlaceHolder" = "Search";
 "Common.Toast.Copy" = "copied!";
 "Common.Toast.Failed" = "Failed";
 "Common.Toast.Saved" = "Saved!";

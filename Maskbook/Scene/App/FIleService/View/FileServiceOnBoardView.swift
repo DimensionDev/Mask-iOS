@@ -2,6 +2,11 @@ import Foundation
 import SwiftUI
 
 struct FileServiceOnBoardView: View {
+    private let uploadAction: () -> Void
+    init(uploacAction: @escaping () -> Void = {}) {
+        self.uploadAction = uploacAction
+    }
+
     var body: some View {
         let config = LayouConfiguration(
             indicatorOffset: .init(x: 0, y: 45),
@@ -20,9 +25,7 @@ struct FileServiceOnBoardView: View {
                     .frame(width: proxy.size.width, height: 100 + proxy.safeAreaInsets.bottom)
                     .overlay(policyView.offset(y: -proxy.safeAreaInsets.bottom / 2), alignment: .center)
                     .offset(y: proxy.safeAreaInsets.bottom)
-                    .onTapGesture {
-                        print("tap tap")
-                    }
+                    .onTapGesture { uploadAction() }
                 ,
                 alignment: .bottom
             )

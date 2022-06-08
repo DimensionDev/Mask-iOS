@@ -86,6 +86,10 @@ enum L10n {
     static var loading: String {
       return L10n.tr("Localizable", "Common.Loading")
     }
+    /// Search
+    static var searchPlaceHolder: String {
+      return L10n.tr("Localizable", "Common.SearchPlaceHolder")
+    }
 
     enum Alert {
 

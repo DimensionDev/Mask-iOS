@@ -1,14 +1,14 @@
 import SwiftUI
 
 struct FileServiceOptionView: View {
-    typealias Service = FileServiceOption.Service
-    typealias Option = FileServiceOption.Option
+    typealias Service = FileServiceUploadOption.Service
+    typealias Option = FileServiceUploadOption.Option
 
-    @State var fileServiceOption: FileServiceOption = .init()
+    @State var fileServiceOption: FileServiceUploadOption = .init()
 
-    private let optionHandler: (FileServiceOption) -> Void
+    private let optionHandler: (FileServiceUploadOption) -> Void
 
-    init(_ optionHandler: @escaping (FileServiceOption) -> Void) {
+    init(_ optionHandler: @escaping (FileServiceUploadOption) -> Void) {
         self.optionHandler = optionHandler
     }
 
@@ -21,7 +21,7 @@ struct FileServiceOptionView: View {
                     pinnedViews: [.sectionHeaders]
                 ) {
                     Section {
-                        ForEach(FileServiceOption.Service.allCases) { item in
+                        ForEach(Service.allCases) { item in
                             Row<Service>(title: item.rawValue, item: item, style: .service, selection: $fileServiceOption.service)
                         }
                     } header: {
@@ -122,58 +122,9 @@ fileprivate struct Row<Selection: Equatable>: View {
     }
 }
 
-struct FileServiceOption {
-    enum Service: String, Hashable, CaseIterable, Identifiable {
-        case arweave = "Arweave"
-        case ipfs = "IPFS"
-        case swarm = "Swarm"
-
-        var options: [Option] {
-            switch self {
-            case .arweave: return [.encrypt, .mesoncdn]
-            case .ipfs: return [.encrypt]
-            case .swarm: return [.encrypt]
-            }
-        }
-
-        var id: String { self.rawValue }
-    }
-
-    enum Option: String, Hashable, Identifiable {
-        case encrypt
-        case mesoncdn
-
-        var title: String {
-            switch self {
-            case .encrypt: return L10n.Plugins.FileService.encrypt
-            case .mesoncdn: return L10n.Plugins.FileService.mesoncdn
-            }
-        }
-
-        var id: String { self.rawValue }
-    }
-
-    var service: Service {
-        didSet {
-            // set option to encrypt when service change
-            if option != .encrypt {
-                option = .encrypt
-            }
-        }
-    }
-
-    var option: Option
-
-    init(service: Service = .arweave, option: Option = .encrypt) {
-        self.service = service
-        self.option = option
-    }
-}
-
-
-struct FileServiceView_Preview: PreviewProvider {
+struct FileServiceOptionView_Preview: PreviewProvider {
     static var previews: some SwiftUI.View {
         FileServiceOptionView { _ in }
-            .preferredColorScheme(.dark)
+            .colorScheme(.dark)
     }
 }

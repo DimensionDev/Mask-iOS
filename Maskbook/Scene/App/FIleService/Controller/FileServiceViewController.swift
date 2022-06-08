@@ -9,7 +9,7 @@ final class FileServiceViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = L10n.Scene.App.Plugins.fileService
-        FileServiceOnBoardView().asContent(in: self)
+        FileServiceView().asContent(in: self)
     }
 
 
@@ -24,7 +24,7 @@ final class FileServiceViewController: BaseViewController {
 extension FileServiceViewController {
     @objc
     override func prepareRightNavigationItems() {
-        let button = NavigationItemView(imageAsset: Asset.Plugins.closeSquare) { [weak self] in
+        let button = NavigationBarItemView(imageAsset: Asset.Plugins.closeSquare) { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
 
@@ -36,7 +36,7 @@ extension FileServiceViewController {
 
     @objc
     override func prepareLeftNavigationItems() {
-        let settings = NavigationItemView(imageAsset: Asset.Plugins.LuckyDrop.setting) { [weak self] in
+        let settings = NavigationBarItemView(imageAsset: Asset.Plugins.LuckyDrop.setting) { [weak self] in
             self?.configUploadOption()
         }
 
