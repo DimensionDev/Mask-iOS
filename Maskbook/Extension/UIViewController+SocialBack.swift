@@ -39,7 +39,7 @@ extension UIViewController: NavigationItemConfigable {
 
     @objc
     func prepareLeftNavigationItems() {
-        let backView = NavigationItemView(imageAsset: Asset.Icon.Arrows.backArrow) {
+        let backView = NavigationBarItemView(imageAsset: Asset.Icon.Arrows.backArrow) {
             self.navigationController?.popViewController(animated: true)
         }
         navigationItem.leftBarButtonItems = [

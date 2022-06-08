@@ -70,7 +70,7 @@ final class LabsViewController: BaseViewController {
 extension LabsViewController {
     @objc
     override func prepareRightNavigationItems() {
-        let button = NavigationItemView(imageAsset: Asset.Plugins.setting) {
+        let button = NavigationBarItemView(imageAsset: Asset.Plugins.setting) {
             self.configPluginSettings()
         }
 

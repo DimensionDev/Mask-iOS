@@ -70,10 +70,10 @@ class LuckyDropViewController: BaseViewController {
 extension LuckyDropViewController {
     @objc
     override func prepareRightNavigationItems() {
-        let closeButton = NavigationItemView(imageAsset: Asset.Plugins.LuckyDrop.Icon.close) {
+        let closeButton = NavigationBarItemView(imageAsset: Asset.Plugins.LuckyDrop.Icon.close) {
             self.onClose()
         }
-        let historyButton = NavigationItemView(imageAsset: Asset.Plugins.LuckyDrop.Icon.history) {
+        let historyButton = NavigationBarItemView(imageAsset: Asset.Plugins.LuckyDrop.Icon.history) {
             self.onShowHistory()
         }
         self.navigationItem.rightBarButtonItems = [
