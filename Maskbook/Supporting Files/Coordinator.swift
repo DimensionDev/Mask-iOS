@@ -214,7 +214,8 @@ class Coordinator {
         case luckyDropCreateProfile
         case luckDropSelectProfile(callback: (@MainActor () -> Void)?)
         case messageCompose(PluginMeta? = nil)
-        case composeSelectContact(viewModel: SelectContactViewModel)
+        case composeSelectContact(viewModel: SelectContactViewModel, delegate: MessageComposeViewModel)
+        case composeSelectPersona(viewController: SelectContactViewController)
         case debug
     }
     
@@ -847,8 +848,12 @@ extension Coordinator {
 
         case .debug:
             return UIHostingController(rootView: DebugView())
-        case let .composeSelectContact(selectContactViewModel):
-            return SelectContactViewController(viewModel: selectContactViewModel)
+        case let .composeSelectContact(selectContactViewModel, delegate):
+            return SelectContactViewController(viewModel: selectContactViewModel, delegate: delegate)
+        case let .composeSelectPersona(viewController):
+            let searchPersonaVc = SearchPersonaViewController()
+            searchPersonaVc.delegate = viewController
+            return searchPersonaVc
         }
     }
     // swiftlint:enable cyclomatic_complexity function_body_length

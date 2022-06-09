@@ -886,6 +886,14 @@
       "Everyone": "Everyone can see",
       "only_me": "Only me",
       "special_contacts": "Special Contacts can see"
+    },
+    "compose_type": {
+      "title": "Who can see your post?",
+      "everyone": "Everyone",
+      "everyone_content": "Every twitter user can see.",
+      "only_me": "Only me",
+      "only_me_content": "Only I can see it.",
+      "special_contacts": "Specific Contacts"
     }
   },
   "chain": {
