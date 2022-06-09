@@ -216,7 +216,7 @@ extension Crypto: CombineCompatible {
 
 extension Data {
     func asCompatibleBackupJSON() -> JSON? {
-        // to be compatiable with both json format and msgpack format
+        // to be compatiable with multiple versions of back file
         // we have to do this
         if JSONSerialization.isValidJSONObject(self) {
             return try? JSON(data: self)
@@ -226,6 +226,9 @@ extension Data {
                 return nil
             }
 
+            // Data.asCompatibleBackupJSON is used for local repositories to convert data through [String: Any],
+            // in which may contain unkeyeddata, eg: `[["person:facebook.com\\/xxx.t.me",{"connectionConfirmState":"confirmed"}]]`
+            // so we can only use  JSON.init(_ object: Any) here, in which will skip json validation
             return JSON(jsonObject)
         }
     }

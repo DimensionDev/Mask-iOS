@@ -95,9 +95,7 @@ extension SelectContactViewController: UITableViewDelegate {
             mainCoordinator.present(scene: .composeSelectPersona(viewController: self), transition: .panModel(animated: true))
         } else {
             self.delegate?.returnContactType(type: contactType ?? .everyone, contacts: [])
-            dismiss(animated: true) {
-                
-            }
+            dismiss(animated: true)
         }
     }
 }

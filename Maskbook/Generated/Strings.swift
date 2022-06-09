@@ -86,6 +86,10 @@ enum L10n {
     static var loading: String {
       return L10n.tr("Localizable", "Common.Loading")
     }
+    /// Search
+    static var searchPlaceHolder: String {
+      return L10n.tr("Localizable", "Common.SearchPlaceHolder")
+    }
 
     enum Alert {
 
@@ -506,6 +510,10 @@ enum L10n {
       static var clear: String {
         return L10n.tr("Localizable", "Common.Controls.Clear")
       }
+      /// Send encrypted post
+      static var compose: String {
+        return L10n.tr("Localizable", "Common.Controls.Compose")
+      }
       /// Confirm
       static var confirm: String {
         return L10n.tr("Localizable", "Common.Controls.Confirm")
@@ -653,6 +661,60 @@ enum L10n {
   }
 
   enum Plugins {
+
+    enum FileService {
+      /// Arweave
+      static var arweave: String {
+        return L10n.tr("Localizable", "Plugins.FileService.Arweave")
+      }
+      /// Make it encrypted
+      static var encrypt: String {
+        return L10n.tr("Localizable", "Plugins.FileService.Encrypt")
+      }
+      /// IPFS
+      static var ipfs: String {
+        return L10n.tr("Localizable", "Plugins.FileService.Ipfs")
+      }
+      /// Use Meson CDN
+      static var mesoncdn: String {
+        return L10n.tr("Localizable", "Plugins.FileService.Mesoncdn")
+      }
+      /// Other Options
+      static var otherOption: String {
+        return L10n.tr("Localizable", "Plugins.FileService.OtherOption")
+      }
+      /// Service Protocols
+      static var serviceTitle: String {
+        return L10n.tr("Localizable", "Plugins.FileService.ServiceTitle")
+      }
+      /// Upload Settings
+      static var settingTitle: String {
+        return L10n.tr("Localizable", "Plugins.FileService.SettingTitle")
+      }
+      /// Swarm
+      static var swarm: String {
+        return L10n.tr("Localizable", "Plugins.FileService.Swarm")
+      }
+
+      enum Onboard {
+        /// Free Web3 file service, brought to you by Mask Network.
+        static var stepFour: String {
+          return L10n.tr("Localizable", "Plugins.FileService.Onboard.StepFour")
+        }
+        /// Decentralized file storage with Arweave, IPFS and Swarm.
+        static var stepOne: String {
+          return L10n.tr("Localizable", "Plugins.FileService.Onboard.StepOne")
+        }
+        /// Upload your file for permanent storage, share with friends.
+        static var stepThree: String {
+          return L10n.tr("Localizable", "Plugins.FileService.Onboard.StepThree")
+        }
+        /// Tap [Settings] to select a protocol and adjust encryption settings.
+        static var stepTwo: String {
+          return L10n.tr("Localizable", "Plugins.FileService.Onboard.StepTwo")
+        }
+      }
+    }
 
     enum Luckydrop {
       /// Account
@@ -914,6 +976,25 @@ enum L10n {
         static var success: String {
           return L10n.tr("Localizable", "Plugins.Luckydrop.State.Success")
         }
+      }
+    }
+
+    enum Policy {
+      /// and
+      static var and: String {
+        return L10n.tr("Localizable", "Plugins.Policy.And")
+      }
+      /// the privacy policy
+      static var privacy: String {
+        return L10n.tr("Localizable", "Plugins.Policy.Privacy")
+      }
+      /// I have reviewed
+      static var reviewed: String {
+        return L10n.tr("Localizable", "Plugins.Policy.Reviewed")
+      }
+      /// terms of service. Upload now.
+      static var uploadTerms: String {
+        return L10n.tr("Localizable", "Plugins.Policy.UploadTerms")
       }
     }
   }

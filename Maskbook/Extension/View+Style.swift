@@ -1,8 +1,8 @@
 import SwiftUI
 
 extension View {
-    func whiteRadiusBackgroundView() -> some View {
-        self.frame(height: 52)
+    func whiteRadiusBackgroundView(height: CGFloat = 52) -> some View {
+        self.frame(height: height)
             .padding(.horizontal, 12)
             .background(Asset.Colors.Background.dark.asColor())
             .cornerRadius(8)

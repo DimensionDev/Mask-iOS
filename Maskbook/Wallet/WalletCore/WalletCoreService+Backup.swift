@@ -68,14 +68,14 @@ extension WalletCoreService {
             )
         }
         do {
-            func privateKey(for mnemonic: WalletBackupInfo.Mnemonic?) throws -> WalletBackupInfo.PrivateKey? {
+            func privateKey(for mnemonic: WalletBackupInfo.Mnemonic?) throws -> WalletBackupInfo.JWK? {
                 mnemonic.isNone
                 ? try generateWalletBackupPrivKeyInfo(account: account, password: password).get()
                 : nil
             }
 
             let originalKey = try privateKey(for: mnemonic)
-            let publicKey: WalletBackupInfo.PrivateKey? = originalKey.flatMap {
+            let publicKey: WalletBackupInfo.JWK? = originalKey.flatMap {
                 .init(
                     crv: $0.crv,
                     x: $0.x,
@@ -85,7 +85,7 @@ extension WalletCoreService {
                 )
             }
 
-            let privateKey: WalletBackupInfo.PrivateKey? = originalKey.flatMap {
+            let privateKey: WalletBackupInfo.JWK? = originalKey.flatMap {
                 .init(
                     crv: $0.crv,
                     x: $0.x,
@@ -115,7 +115,7 @@ extension WalletCoreService {
     }
     
     private func generateWalletBackupPrivKeyInfo(account: Account,
-                                                 password: String) -> Result<WalletBackupInfo.PrivateKey, Error> {
+                                                 password: String) -> Result<WalletBackupInfo.JWK, Error> {
         do {
             let privateKey = try exportPrivateKey(password: password, account: account).get()
             guard let privateKeyData = Data.fromHex(privateKey) else {
@@ -135,7 +135,7 @@ extension WalletCoreService {
                 return ("", "")
             }()
 
-            let privateKeyInfo = WalletBackupInfo.PrivateKey(
+            let privateKeyInfo = WalletBackupInfo.JWK(
                 crv: "K-256",
                 x: x,
                 y: y,
