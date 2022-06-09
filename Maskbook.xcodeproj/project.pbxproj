@@ -88,6 +88,10 @@
 		1F5B5EDA284F3B9500F6AD98 /* FileServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5ED9284F3B9500F6AD98 /* FileServiceView.swift */; };
 		1F5B5EDD285080B700F6AD98 /* FileServiceUploadOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EDC285080B700F6AD98 /* FileServiceUploadOption.swift */; };
 		1F5B5EDF28508FD400F6AD98 /* FileServiceUploadingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EDE28508FD400F6AD98 /* FileServiceUploadingItemView.swift */; };
+		1F5B5EE12851C6F700F6AD98 /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EE02851C6F700F6AD98 /* Predicate.swift */; };
+		1F5B5EEE2851D0E400F6AD98 /* UploadFile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EEC2851D0E400F6AD98 /* UploadFile+CoreDataClass.swift */; };
+		1F5B5EEF2851D0E400F6AD98 /* UploadFile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EED2851D0E400F6AD98 /* UploadFile+CoreDataProperties.swift */; };
+		1F5B5EF12851D13A00F6AD98 /* FileServiceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EF02851D13A00F6AD98 /* FileServiceRepository.swift */; };
 		1F705FE327CF6AB9002A4A7E /* SpinWheelAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */; };
 		1F8AD0CB26CA3AA000C9694F /* MaskLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AD0CA26CA3AA000C9694F /* MaskLoadingIndicator.swift */; };
 		1F8AD0CE26CA3AFB00C9694F /* LoadingAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AD0CD26CA3AFB00C9694F /* LoadingAnimator.swift */; };
@@ -342,7 +346,6 @@
 		2AD856002812875A0064DDA5 /* MaskWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD855C92812875A0064DDA5 /* MaskWrapper.swift */; };
 		2AD856012812875A0064DDA5 /* FetchedResultsPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD855CA2812875A0064DDA5 /* FetchedResultsPublisher.swift */; };
 		2AD856022812875A0064DDA5 /* CryptoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD855CB2812875A0064DDA5 /* CryptoHelper.swift */; };
-		2AD856032812875A0064DDA5 /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD855CC2812875A0064DDA5 /* Predicate.swift */; };
 		2AD856042812875A0064DDA5 /* MaskGroupActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD855CD2812875A0064DDA5 /* MaskGroupActor.swift */; };
 		2AD856052812875A0064DDA5 /* PlainTextItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD855CF2812875A0064DDA5 /* PlainTextItem.swift */; };
 		2AD856062812875A0064DDA5 /* AlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD855D02812875A0064DDA5 /* AlertBuilder.swift */; };
@@ -885,6 +888,10 @@
 		1F5B5ED9284F3B9500F6AD98 /* FileServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceView.swift; sourceTree = "<group>"; };
 		1F5B5EDC285080B700F6AD98 /* FileServiceUploadOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceUploadOption.swift; sourceTree = "<group>"; };
 		1F5B5EDE28508FD400F6AD98 /* FileServiceUploadingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceUploadingItemView.swift; sourceTree = "<group>"; };
+		1F5B5EE02851C6F700F6AD98 /* Predicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Predicate.swift; sourceTree = "<group>"; };
+		1F5B5EEC2851D0E400F6AD98 /* UploadFile+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadFile+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		1F5B5EED2851D0E400F6AD98 /* UploadFile+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadFile+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		1F5B5EF02851D13A00F6AD98 /* FileServiceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceRepository.swift; sourceTree = "<group>"; };
 		1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinWheelAnimator.swift; sourceTree = "<group>"; };
 		1F8AD0CA26CA3AA000C9694F /* MaskLoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskLoadingIndicator.swift; sourceTree = "<group>"; };
 		1F8AD0CD26CA3AFB00C9694F /* LoadingAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimator.swift; sourceTree = "<group>"; };
@@ -1140,7 +1147,6 @@
 		2AD855C92812875A0064DDA5 /* MaskWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskWrapper.swift; sourceTree = "<group>"; };
 		2AD855CA2812875A0064DDA5 /* FetchedResultsPublisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsPublisher.swift; sourceTree = "<group>"; };
 		2AD855CB2812875A0064DDA5 /* CryptoHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoHelper.swift; sourceTree = "<group>"; };
-		2AD855CC2812875A0064DDA5 /* Predicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Predicate.swift; sourceTree = "<group>"; };
 		2AD855CD2812875A0064DDA5 /* MaskGroupActor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskGroupActor.swift; sourceTree = "<group>"; };
 		2AD855CF2812875A0064DDA5 /* PlainTextItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlainTextItem.swift; sourceTree = "<group>"; };
 		2AD855D02812875A0064DDA5 /* AlertBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertBuilder.swift; sourceTree = "<group>"; };
@@ -1727,6 +1733,8 @@
 		0FBC5AB1266759BC00328693 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				1F5B5EEC2851D0E400F6AD98 /* UploadFile+CoreDataClass.swift */,
+				1F5B5EED2851D0E400F6AD98 /* UploadFile+CoreDataProperties.swift */,
 				5D3E364527BE2D0200FDCFDD /* PostRecord+CoreDataClass.swift */,
 				5D3E364627BE2D0200FDCFDD /* PostRecord+CoreDataProperties.swift */,
 				41E50037279946E400A73117 /* PersonaRecord+CoreDataClass.swift */,
@@ -1771,6 +1779,7 @@
 			children = (
 				0FBC5ADB26675B0F00328693 /* URL.swift */,
 				0FBC5AE02667611300328693 /* NSManagedObjectContext.swift */,
+				1F5B5EE02851C6F700F6AD98 /* Predicate.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2450,7 +2459,6 @@
 				2AD855C92812875A0064DDA5 /* MaskWrapper.swift */,
 				2AD855CA2812875A0064DDA5 /* FetchedResultsPublisher.swift */,
 				2AD855CB2812875A0064DDA5 /* CryptoHelper.swift */,
-				2AD855CC2812875A0064DDA5 /* Predicate.swift */,
 				2AD855CD2812875A0064DDA5 /* MaskGroupActor.swift */,
 				2AD855D82812875A0064DDA5 /* VersionNumber.swift */,
 				2AD855DD2812875A0064DDA5 /* LazyFuture.swift */,
@@ -3626,6 +3634,7 @@
 				41E50049279BFB3600A73117 /* RelationRepository.swift */,
 				2AD8559C281285520064DDA5 /* PluginStorageRepository.swift */,
 				5D3E364B27BF41DE00FDCFDD /* PostRepository.swift */,
+				1F5B5EF02851D13A00F6AD98 /* FileServiceRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -4260,12 +4269,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F5B5EEF2851D0E400F6AD98 /* UploadFile+CoreDataProperties.swift in Sources */,
 				2DEDDEA92761ED7000D37A76 /* WalletConnectSession+CoreDataProperties.swift in Sources */,
 				0F93937626A7AE9400F7F608 /* Collectible+CoreDataProperties.swift in Sources */,
 				2DC651F8271E6CAB00BABA9C /* LocalStorage+CoreDataClass.swift in Sources */,
 				41E5003E279946E400A73117 /* PersonaRecord+CoreDataProperties.swift in Sources */,
 				0F93937526A7AE9400F7F608 /* Collectible+CoreDataClass.swift in Sources */,
 				0FAF2F4C26678AC300C1B577 /* Mask.xcdatamodeld in Sources */,
+				1F5B5EEE2851D0E400F6AD98 /* UploadFile+CoreDataClass.swift in Sources */,
 				41E5003D279946E400A73117 /* PersonaRecord+CoreDataClass.swift in Sources */,
 				0F93936D26A7AE9400F7F608 /* Token+CoreDataClass.swift in Sources */,
 				0F93937726A7AE9400F7F608 /* Contact+CoreDataClass.swift in Sources */,
@@ -4297,6 +4308,7 @@
 				0F07028926AFE77C00C04F77 /* DeletedDerivationPath+CoreDataProperties.swift in Sources */,
 				0F93936F26A7AE9400F7F608 /* StoredKey+CoreDataClass.swift in Sources */,
 				5D3E364827BE2D0200FDCFDD /* PostRecord+CoreDataProperties.swift in Sources */,
+				1F5B5EE12851C6F700F6AD98 /* Predicate.swift in Sources */,
 				0F93937426A7AE9400F7F608 /* Account+CoreDataProperties.swift in Sources */,
 				0FBC5AE12667611300328693 /* NSManagedObjectContext.swift in Sources */,
 				41E50042279946E400A73117 /* RelationRecord+CoreDataProperties.swift in Sources */,
@@ -4450,6 +4462,7 @@
 				2AF884EB271EE9310004565A /* SwapProviderListView.swift in Sources */,
 				5DD5A69827F53168005952A0 /* PersonaImportItem.swift in Sources */,
 				2AD31E6E282D367700CB3D49 /* Date+Compare.swift in Sources */,
+				1F5B5EF12851D13A00F6AD98 /* FileServiceRepository.swift in Sources */,
 				0F2051AD265E325900602A0C /* MaskWalletAccount.swift in Sources */,
 				5D93DF9E267B2B5000A175BF /* MaskTextField.swift in Sources */,
 				6F782AA1283C81B20068E123 /* SearchPersonaTableViewCell.swift in Sources */,
@@ -4601,7 +4614,6 @@
 				2AD855EB2812875A0064DDA5 /* KeyboardSheetTransition.swift in Sources */,
 				2A5FAEA027CF7AD200D01250 /* GuideItemView.swift in Sources */,
 				0F41A195260C6310000037B2 /* ZerionAPIModel.swift in Sources */,
-				2AD856032812875A0064DDA5 /* Predicate.swift in Sources */,
 				2AD856132812875A0064DDA5 /* LAErrorHandler.swift in Sources */,
 				2AD31E5C282D367700CB3D49 /* Array+Safety.swift in Sources */,
 				2AD855AA281285D10064DDA5 /* NftPacketPayload.swift in Sources */,

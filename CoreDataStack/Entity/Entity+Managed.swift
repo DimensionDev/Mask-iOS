@@ -530,19 +530,18 @@ extension PluginStorage: Managed {
     }
     
     static func predicate(keys: [String]) -> NSPredicate {
-        return NSPredicate(format: "%K IN %@", #keyPath(PluginStorage.key), keys)
+        \PluginStorage.key --> Set(keys)
     }
     
     public static func predicate(pluginID: String) -> NSPredicate {
-        return NSPredicate(format: "%K == %@", #keyPath(PluginStorage.pluginID), pluginID)
+        \PluginStorage.pluginID == pluginID
     }
     
     public static func predicate(keys: [String], pluginID: String) -> NSPredicate {
-        let predicates = [
-            predicate(keys: keys),
-            predicate(pluginID: pluginID)
-        ]
-        return NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+        NSCompoundPredicate(andPredicateWithSubpredicates: [
+            \PluginStorage.key --> Set(keys),
+            \PluginStorage.pluginID == pluginID
+        ])
     }
 
     override public func awakeFromInsert() {
@@ -556,5 +555,11 @@ extension PluginStorage: Managed {
         super.willSave()
         
         setPrimitiveValue(Date(), forKey: #keyPath(PluginStorage.lastModifiedDate))
+    }
+}
+
+extension UploadFile: Managed {
+    public static var defaultSortDescriptors: [NSSortDescriptor] {
+        [NSSortDescriptor(keyPath: \UploadFile.uploadedDate, ascending: false)]
     }
 }

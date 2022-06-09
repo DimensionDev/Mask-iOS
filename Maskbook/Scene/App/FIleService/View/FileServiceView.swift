@@ -1,6 +1,8 @@
 import Combine
 import SwiftUI
 
+import CoreDataStack
+
 struct FileServiceView: View {
     @ObservedObject
     private var viewModel = FileServiceOnboardViewModel()
@@ -147,7 +149,9 @@ final class FileServiceOnboardViewModel: ObservableObject {
 
     private var cancelableStorage: Set<AnyCancellable> = []
 
-    init() {}
+    init() {
+        let records: [UploadFile] = FileServiceRepository.getRecords()
+    }
 
     func addRandomItem() {
         let alongText = "Some file to upload, and arweave, and ipfs"
