@@ -114,7 +114,20 @@ extension MessageComposeViewModel {
                 // TODO: Error handling
                 return
             }
-            e2eParam = WalletCoreHelper.EncryptPostE2EParam(localKey: localKey, target: [:], authorPrivateKey: authorPrivateKeyData)
+            var target = [String: Data]()
+            if case let .specialContacts(profiles) = recipient {
+                profiles.forEach {
+                    if let persona = $0.linkedPersona {
+                        let publicKeyData = Persona(fromRecord: persona)?.publicKey?.getRawData()
+                        let identifier = persona.identifier
+                        if let publicKeyData = publicKeyData,
+                           let identifier = identifier {
+                            target[identifier] = publicKeyData
+                        }
+                    }
+                }
+            }
+            e2eParam = WalletCoreHelper.EncryptPostE2EParam(localKey: localKey, target: target, authorPrivateKey: authorPrivateKeyData)
         }
 
         guard let encrtypedMessage = try? WalletCoreHelper.encryptPost(
@@ -169,10 +182,10 @@ extension MessageComposeViewModel {
 }
 
 extension MessageComposeViewModel {
-    enum Recipient: String, Equatable, CaseIterable {
+    enum Recipient: Equatable, CaseIterable {
         case everyone
         case onlyMe
-        case specialContacts
+        case specialContacts([ProfileRecord])
 
         var title: String {
             switch self {
@@ -188,6 +201,10 @@ extension MessageComposeViewModel {
             case .onlyMe: return Asset.Images.Scene.Compose.onlyMe.name
             case .specialContacts: return Asset.Images.Scene.Compose.specialContacts.name
             }
+        }
+        
+        static var allCases: [MessageComposeViewModel.Recipient] {
+            [.everyone, .onlyMe, .specialContacts([])]
         }
     }
 }

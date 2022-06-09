@@ -91,7 +91,7 @@ extension SelectContactViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let contactType = viewModel.contactTypes[safeIndex: indexPath.row]
         
-        if contactType == .specialContacts{
+        if case .specialContacts = contactType  {
             mainCoordinator.present(scene: .composeSelectPersona(viewController: self), transition: .panModel(animated: true))
         } else {
             self.delegate?.returnContactType(type: contactType ?? .everyone, contacts: [])
@@ -126,7 +126,7 @@ extension SelectContactViewController: PanModalPresentable {
 
 extension SelectContactViewController:SearchContactsDelegate {
     func returnContacts(contacts:[ProfileRecord]?){
-        self.delegate?.returnContactType(type: .specialContacts, contacts: contacts)
+        self.delegate?.returnContactType(type: .specialContacts(contacts ?? []), contacts: contacts)
         dismiss(animated: true)
     }
 }

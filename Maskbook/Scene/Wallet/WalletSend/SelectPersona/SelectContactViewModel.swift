@@ -20,7 +20,7 @@ class SelectContactViewModel: NSObject {
     let titles: [String] = ["Everyone","Only me","Specific Contacts"]
     let content: [String] = ["Every twitter user can see.","Only I can see it.",""]
     let cellTypes: [CellType] = [.normal,.normal,.clickable]
-    let contactTypes: [MessageComposeViewModel.Recipient] = [.everyone, .onlyMe, .specialContacts]
+    let contactTypes: [MessageComposeViewModel.Recipient] = [.everyone, .onlyMe, .specialContacts([])]
     var selectedContactType: MessageComposeViewModel.Recipient = .everyone
     
     func select(index: Int) {
