@@ -99,8 +99,8 @@ class SearchPersonaTableViewCell: UITableViewCell {
         ])
     }
     
-    func update(model: ProfileRecord,selectedProfile:[ProfileRecord]){
-        titleLabel.text = model.socialID
+    func update(model: PersonaRecord,selectedProfile:[PersonaRecord]){
+        titleLabel.text = model.nickname
         photoImageView.title = model.nickname ?? model.nonOptionalIdentifier.components(separatedBy: "/").last
         photoImageView.setNetworkURL(url: model.avatar)
         contentLabel.text = model.identifier?.split(separator: "/").last.flatMap({ String($0) })

@@ -17,7 +17,7 @@ import CoreDataStack
 
 
 protocol SearchContactsDelegate{
-    func returnContacts(contacts:[ProfileRecord]?)
+    func returnContacts(contacts:[PersonaRecord]?)
 }
 
 class SearchPersonaViewController: UIViewController {

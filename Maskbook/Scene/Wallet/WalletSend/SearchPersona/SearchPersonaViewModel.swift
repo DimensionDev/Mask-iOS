@@ -19,15 +19,44 @@ class SearchPersonaViewModel{
     @InjectedProvider(\.personaManager)
     private var personaManager
 
-    var profileRecordsSubject = CurrentValueSubject<[ProfileRecord], Never>([])
+    var profileRecordsSubject = CurrentValueSubject<[PersonaRecord], Never>([])
 
-    private var profileRecordPublisher: FetchedResultsPublisher<ProfileRecord>?    
-    var dataSource = CurrentValueSubject<[ProfileRecord], Never>([])
-    var selectedProfile = CurrentValueSubject<[ProfileRecord], Never>([])
+    private var profileRecordPublisher: FetchedResultsPublisher<ProfileRecord>?
+    private static func profileRecordPublisher(identifiers: [String]) -> FetchedResultsPublisher<ProfileRecord> {
+        let fetchResultController: NSFetchedResultsController<ProfileRecord> = {
+            let controller = NSFetchedResultsController<ProfileRecord>(
+                fetchRequest: ProfileRepository.queryProfilesFetchRequest(identifiers: identifiers),
+                managedObjectContext: AppContext.shared.coreDataStack.persistentContainer.viewContext,
+                sectionNameKeyPath: nil,
+                cacheName: nil
+            )
+            return controller
+        }()
+        return FetchedResultsPublisher(fetchResultController: fetchResultController)
+    }
+    var dataSource = CurrentValueSubject<[PersonaRecord], Never>([])
+    var selectedProfile = CurrentValueSubject<[PersonaRecord], Never>([])
     var searchString = CurrentValueSubject<String, Never>("")
     
     init() {
-        profileRecordsSubject = personaManager.currentProfiles
+        personaManager
+            .currentPersona
+            .receive(on: DispatchQueue.main)
+            .flatMap { [weak self] personaRecord -> FetchedResultsPublisher<ProfileRecord> in
+                var profileIdentifiers = [String]()
+                if let personaIdentifier = personaRecord?.identifier {
+                    let relations = RelationRepository.queryRelations(personaIdentifier: personaIdentifier)
+                    profileIdentifiers = relations.compactMap(\.profileIdentifier)
+                }
+                let publisher = SearchPersonaViewModel.profileRecordPublisher(identifiers: profileIdentifiers)
+                self?.profileRecordPublisher = publisher
+                return publisher
+            }
+            .sink(receiveValue: {[weak self] profiles in
+                self?.profileRecordsSubject.value = profiles.compactMap{ $0.linkedPersona}
+            })
+            .store(in: &disposeBag)
+        
         Publishers.CombineLatest(searchString, profileRecordsSubject)
             .sink { [weak self] _ in
                 guard let self = self else { return }
@@ -37,14 +66,14 @@ class SearchPersonaViewModel{
                         if text.isEmpty {
                             return true
                         }
-                        let isIdContains = profile.socialID.containsIgnoreCase(string: text)
+                        let isIdContains = profile.identifier?.containsIgnoreCase(string: text)
                         if let nickname = profile.nickname {
-                            return nickname.containsIgnoreCase(string: text) || isIdContains
+                            return nickname.containsIgnoreCase(string: text) || (isIdContains != nil)
                         }
-                        return isIdContains
+                        return isIdContains ?? false
                     }
             }
             .store(in: &disposeBag)
-        self.searchString.value = ""
+             self.searchString.value = ""
     }
 }

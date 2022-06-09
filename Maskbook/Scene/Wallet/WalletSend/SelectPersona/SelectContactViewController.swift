@@ -15,7 +15,7 @@ import UIKit
 import CoreDataStack
 
 protocol SelectComposeContactTypeDelegate{
-    func returnContactType(type: MessageComposeViewModel.Recipient, contacts:[ProfileRecord]?)
+    func returnContactType(type: MessageComposeViewModel.Recipient, contacts:[PersonaRecord]?)
 }
 
 class SelectContactViewController: UIViewController {
@@ -125,8 +125,8 @@ extension SelectContactViewController: PanModalPresentable {
 }
 
 extension SelectContactViewController:SearchContactsDelegate {
-    func returnContacts(contacts:[ProfileRecord]?){
+    func returnContacts(contacts:[PersonaRecord]?){
         self.delegate?.returnContactType(type: .specialContacts, contacts: contacts)
-        dismiss(animated: true)
+        dismissMainTabBarController()
     }
 }

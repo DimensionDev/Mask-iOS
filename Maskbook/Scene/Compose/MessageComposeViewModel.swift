@@ -208,7 +208,7 @@ extension String {
 }
 
 extension MessageComposeViewModel: SelectComposeContactTypeDelegate {
-    func returnContactType(type: MessageComposeViewModel.Recipient, contacts:[ProfileRecord]?){
+    func returnContactType(type: MessageComposeViewModel.Recipient, contacts:[PersonaRecord]?){
         recipient = type
     }    
 }
