@@ -17,7 +17,7 @@ class SelectContactTableViewCell: UITableViewCell {
         view.layer.cornerRadius = 12
         view.clipsToBounds = true
         view.layer.borderColor = Asset.Colors.Background.normal.color.cgColor
-        view.layer.borderWidth = 1
+        view.layer.borderWidth = 0.5
         return view
     }()
     

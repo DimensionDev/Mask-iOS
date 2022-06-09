@@ -21,25 +21,13 @@ class SearchPersonaViewModel{
 
     var profileRecordsSubject = CurrentValueSubject<[ProfileRecord], Never>([])
 
-    private var profileRecordPublisher: FetchedResultsPublisher<ProfileRecord>?
-    private static func profileRecordPublisher(identifiers: [String]) -> FetchedResultsPublisher<ProfileRecord> {
-        let fetchResultController: NSFetchedResultsController<ProfileRecord> = {
-            let controller = NSFetchedResultsController<ProfileRecord>(
-                fetchRequest: ProfileRepository.queryProfilesFetchRequest(identifiers: identifiers),
-                managedObjectContext: AppContext.shared.coreDataStack.persistentContainer.viewContext,
-                sectionNameKeyPath: nil,
-                cacheName: nil
-            )
-            return controller
-        }()
-        return FetchedResultsPublisher(fetchResultController: fetchResultController)
-    }
-    
+    private var profileRecordPublisher: FetchedResultsPublisher<ProfileRecord>?    
     var dataSource = CurrentValueSubject<[ProfileRecord], Never>([])
     var selectedProfile = CurrentValueSubject<[ProfileRecord], Never>([])
     var searchString = CurrentValueSubject<String, Never>("")
     
     init() {
+        profileRecordsSubject = personaManager.currentProfiles
         Publishers.CombineLatest(searchString, profileRecordsSubject)
             .sink { [weak self] _ in
                 guard let self = self else { return }
