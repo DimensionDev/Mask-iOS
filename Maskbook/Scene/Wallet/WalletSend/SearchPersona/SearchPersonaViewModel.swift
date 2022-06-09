@@ -40,22 +40,6 @@ class SearchPersonaViewModel{
     var searchString = CurrentValueSubject<String, Never>("")
     
     init() {
-        personaManager
-            .currentPersona
-            .receive(on: DispatchQueue.main)
-            .flatMap { [weak self] personaRecord -> FetchedResultsPublisher<ProfileRecord> in
-                var profileIdentifiers = [String]()
-                if let personaIdentifier = personaRecord?.identifier {
-                    let relations = RelationRepository.queryRelations(personaIdentifier: personaIdentifier)
-                    profileIdentifiers = relations.compactMap(\.profileIdentifier)
-                }
-                let publisher = SearchPersonaViewModel.profileRecordPublisher(identifiers: profileIdentifiers)
-                self?.profileRecordPublisher = publisher
-                return publisher
-            }
-            .assign(to: \.value, on: profileRecordsSubject)
-            .store(in: &disposeBag)
-        
         Publishers.CombineLatest(searchString, profileRecordsSubject)
             .sink { [weak self] _ in
                 guard let self = self else { return }
