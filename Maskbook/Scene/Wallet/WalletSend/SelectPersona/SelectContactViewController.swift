@@ -126,6 +126,6 @@ extension SelectContactViewController: PanModalPresentable {
 extension SelectContactViewController:SearchContactsDelegate {
     func returnContacts(contacts:[ProfileRecord]?){
         self.delegate?.returnContactType(type: .specialContacts, contacts: contacts)
-        dismiss(animated: true)
+        dismissMainTabBarController()
     }
 }
