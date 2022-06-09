@@ -38,7 +38,6 @@ class SelectContactTableViewCell: UITableViewCell {
     lazy var checkImageView: UIImageView = {
         let image = Asset.Icon.Cell.cellUncheck.image
         let view = UIImageView(image: image)
-        view.isHidden = true
         view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(equalToConstant: 24),
@@ -49,22 +48,26 @@ class SelectContactTableViewCell: UITableViewCell {
     
     lazy var arrowImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = Asset.Icon.Arrows.celllRight.image
+        imageView.image = Asset.Plugins.selectedArrow.image
+        NSLayoutConstraint.activate([
+            imageView.widthAnchor.constraint(equalToConstant: 12),
+            imageView.heightAnchor.constraint(equalToConstant: 12)
+        ])
         return imageView
     }()
     
-    private lazy var vStackView = VStackView(spacing: 2) {
+    private lazy var vStackView = VStackView {
         titleLabel
         contentLabel
     }
     
-    private lazy var hStackView = HStackView {
+    private lazy var hStackView = HStackView (alignment: .center){
         Spacer(width: 14)
         checkImageView
+        Spacer(width: 10)
         vStackView
-        Spacer(width: 8)
         arrowImageView
+        Spacer(width: 14)
     }
     
     override func awakeFromNib() {

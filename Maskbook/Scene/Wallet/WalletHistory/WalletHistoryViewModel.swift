@@ -34,7 +34,7 @@ class WalletHistoryViewModel: NSObject {
         super.init()
 
         Publishers.CombineLatest(WalletAssetManager.shared.transactions,
-                                 PendTransactionManager.shared.pendTransactions)
+                                 PendingTransactionManager.shared.pendingTransactions)
         .map { allTransactions, allPendingTransactions in
             let pendingTransactions = allPendingTransactions.filter {
                 $0.address == maskUserDefaults.defaultAccountAddress &&

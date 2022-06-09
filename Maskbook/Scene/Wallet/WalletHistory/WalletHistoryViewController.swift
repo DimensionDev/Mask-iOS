@@ -93,7 +93,7 @@ class WalletHistoryViewController: BaseViewController {
         setupSubviews()
         
         Publishers.CombineLatest(WalletAssetManager.shared.transactions,
-                                 PendTransactionManager.shared.pendTransactions)
+                                 PendingTransactionManager.shared.pendingTransactions)
             .receive(on: DispatchQueue.main)
             .sink { _ in }
         receiveValue: { [weak self] allTransactions, allPendingTransactions in

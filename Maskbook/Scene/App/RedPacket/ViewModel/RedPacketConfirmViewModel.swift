@@ -250,7 +250,7 @@ class RedPacketConfirmViewModel: ObservableObject {
                 let to = transaction.to.address
                 let amount = self.totalAmount.stringValue
                 
-                let transactionInfo = PendTransactionModel.TranscationInfo(
+                let transactionInfo = PendingTransaction.TranscationInfo(
                     gaslimit: gasLimit,
                     gasPrice: gwei * (BigUInt(10).power(9)),
                     amount: amount,
@@ -263,7 +263,7 @@ class RedPacketConfirmViewModel: ObservableObject {
                     asset: token,
                     toAddress: to,
                     amount: amount)
-                PendTransactionManager.shared.addPendTrancation(
+                PendingTransactionManager.shared.addPendingTrancation(
                     txHash: txhash,
                     history: history,
                     transcationInfo:transactionInfo,

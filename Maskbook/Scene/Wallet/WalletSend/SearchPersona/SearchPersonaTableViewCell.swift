@@ -8,12 +8,12 @@
 
 import UIKit
 import UStack
+import CoreDataStack
 
 class SearchPersonaTableViewCell: UITableViewCell {
     
-    lazy var photoImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+    lazy var photoImageView: AvatarView = {
+        let imageView = AvatarView(title: "")
         imageView.applyRadius(radius: 19)
         NSLayoutConstraint.activate([
             imageView.heightAnchor.constraint(equalToConstant: 38),
@@ -39,7 +39,6 @@ class SearchPersonaTableViewCell: UITableViewCell {
     lazy var checkImageView: UIImageView = {
         let image = Asset.Icon.Cell.cellUncheck.image
         let view = UIImageView(image: image)
-        view.isHidden = true
         view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(equalToConstant: 24),
@@ -55,10 +54,12 @@ class SearchPersonaTableViewCell: UITableViewCell {
         contentLabel
     }
     
-    private lazy var hStackView = HStackView {
+    private lazy var hStackView = HStackView(alignment: .center) {
         photoImageView
-        checkImageView
+        Spacer(width: 8)
         vStackView
+        Spacer(width: 10)
+        checkImageView
     }
     
     override func awakeFromNib() {
@@ -96,5 +97,18 @@ class SearchPersonaTableViewCell: UITableViewCell {
             hStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
             hStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
+    }
+    
+    func update(model: ProfileRecord,selectedProfile:[ProfileRecord]){
+        titleLabel.text = model.socialID
+        photoImageView.title = model.nickname ?? model.nonOptionalIdentifier.components(separatedBy: "/").last
+        photoImageView.setNetworkURL(url: model.avatar)
+        contentLabel.text = model.identifier?.split(separator: "/").last.flatMap({ String($0) })
+        
+        if selectedProfile.contains(model){
+            checkImageView.image = Asset.Icon.Cell.cellTwitterCheck.image
+        } else {
+            checkImageView.image = Asset.Icon.Cell.cellUncheck.image
+        }
     }
 }

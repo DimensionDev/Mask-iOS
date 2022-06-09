@@ -62,7 +62,7 @@ final class WalletRestorePipeline {
     private func parseRestoreFile(from data: Data) {
         Publishers.CombineLatest(
             LazyFuture<RestoreFile?, Never> { promise in
-                let result = try? JSONDecoder().decode(RestoreFile.self, from: data)
+                let result = RestoreFile.from(data: data)
                 promise(.success(result))
             },
             walletProvider.getAllNativeWallets().map { $0.map { $0.address } }

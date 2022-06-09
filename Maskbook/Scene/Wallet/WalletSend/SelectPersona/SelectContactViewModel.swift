@@ -16,9 +16,11 @@ extension SelectContactViewModel {
 }
 
 class SelectContactViewModel: NSObject {
-    var titles: [String] = []
-    var content: [String] = []
+    //l10n
+    var titles: [String] = ["Everyone","Only me","Specific Contacts"]
+    var content: [String] = ["Every twitter user can see.","Only I can see it.",""]
     var cellTypes: [cellType] = [.normal,.normal,.clickable]
+    var contactTypes: [MessageComposeViewModel.Recipient] = [.everyone,.onlyMe,.specialContacts]
     var selectedIndex: Int = 0
     
     func select(index: Int) {
