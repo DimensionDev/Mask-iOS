@@ -78,6 +78,7 @@ final class MessageComposeViewModel: ObservableObject {
     }
     func selectContactButtonClick() {
         let viewModel = SelectContactViewModel()
+        viewModel.selectedContactType = recipient
         mainCoordinator.present(scene: .composeSelectContact(viewModel: viewModel, delegate: self), transition: .panModel(animated: true))
     }
 }
@@ -90,30 +91,40 @@ extension MessageComposeViewModel {
     }
 
     func encryptContent() {
+        let isPublic = recipient == .everyone
         var authorKeyData: Data? = nil
         var authorPrivateKeyData: Data?
         var localKey: Data?
-        var e2eParam: Api_E2EEncryptParam?
+        var e2eParam: WalletCoreHelper.EncryptPostE2EParam?
         if let personaRecord = personaManager.currentPersona.value {
             let persona = Persona(fromRecord: personaRecord)
             authorKeyData = persona?.publicKey?.getRawData()
             authorPrivateKeyData = Data(base64URLEncoded: personaRecord.dKeyInPrivateKey)
-            localKey = Data(base64URLEncoded: (persona?.localKey?.k)!)
+            if let validLocalKey = persona?.localKey?.k {
+                localKey = Data(base64URLEncoded: validLocalKey)
+            }
         }
         let socialPlatform = personaManager.currentProfile.value?.socialPlatform
         let authorId: String? = personaManager.currentProfile.value?.identifier
             .flatMap { $0.clip(first: "person:".count) }
         let authorName = authorId?.components(separatedBy: "/").last
-        
+        if !isPublic {
+            guard let authorPrivateKeyData = authorPrivateKeyData,
+                  let localKey = localKey else {
+                // TODO: Error handling
+                return
+            }
+            e2eParam = WalletCoreHelper.EncryptPostE2EParam(localKey: localKey, target: [:], authorPrivateKey: authorPrivateKeyData)
+        }
 
         guard let encrtypedMessage = try? WalletCoreHelper.encryptPost(
-            isPublic: false,
+            isPublic: isPublic,
             content: message,
             authorID: authorName,
             authorKeyData: authorKeyData,
-            socialPlatForm: socialPlatform,
+            socialPlatform: socialPlatform,
             metas: pluginContents,
-            e2eParam: WalletCoreHelper.EncryptPostE2EParam(localKey: localKey!, target: [:], authorPrivateKey: authorPrivateKeyData!)
+            e2eParam: e2eParam
         ).get() else {
             // TODO: Error handling
             return
@@ -196,9 +207,9 @@ extension String {
     }
 }
 
-extension MessageComposeViewModel:SelectComposeContactTypeDelegate {
+extension MessageComposeViewModel: SelectComposeContactTypeDelegate {
     func returnContactType(type: MessageComposeViewModel.Recipient, contacts:[ProfileRecord]?){
-        
+        recipient = type
     }    
 }
 

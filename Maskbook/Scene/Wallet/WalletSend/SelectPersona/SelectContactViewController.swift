@@ -107,7 +107,8 @@ extension SelectContactViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: SelectContactTableViewCell = tableView.dequeCell(at: indexPath)
-        cell.update(index: indexPath.row, selected: viewModel.selectedIndex == indexPath.row, viewModel: viewModel)
+        let selectedIndex = viewModel.contactTypes.firstIndex(of: viewModel.selectedContactType) ?? 0
+        cell.update(index: indexPath.row, selected: selectedIndex == indexPath.row, viewModel: viewModel)
         return cell
     }
     // swiftlint:enable force_cast

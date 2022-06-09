@@ -627,7 +627,7 @@ extension WalletCoreHelper {
         content: String,
         authorID: String?,
         authorKeyData: Data?,
-        socialPlatForm: ProfileSocialPlatform?,
+        socialPlatform: ProfileSocialPlatform?,
         metas: [PluginMeta],
         e2eParam: EncryptPostE2EParam?,
         version: EncryptionVersion = .v38
@@ -651,7 +651,7 @@ extension WalletCoreHelper {
         }
 
         let needTwitterEncoder: Bool = {
-            guard let platform = socialPlatForm else {
+            guard let platform = socialPlatform else {
                 return false
             }
 
@@ -679,7 +679,7 @@ extension WalletCoreHelper {
                         param.authorUserID = id
                     }
 
-                    if let network = socialPlatForm {
+                    if let network = socialPlatform {
                         param.network = network.url
                     }
                     
