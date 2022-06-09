@@ -22,9 +22,8 @@ struct FileServiceUploadFileItem {
 }
 
 class FileServiceSelectFileHandler: NSObject {
-    
     typealias Item = FileServiceSelectFileSourceViewModel.LocalFileSourceItem
-    
+
     init(delegate: FileServiceSelectFileDelegate) {
         self.delegate = delegate
     }
@@ -101,7 +100,7 @@ class FileServiceSelectFileHandler: NSObject {
             assertionFailure("can't get jpeg data from image")
         }
     }
-    
+
     func showFileTooLargeAlert() {
         let alertController = AlertController(title: L10n.Common.Alert.FileServiceFileTooLarge.title,
                                               message: L10n.Common.Alert.FileServiceFileTooLarge.description,
@@ -125,41 +124,58 @@ class FileServiceSelectFileHandler: NSObject {
         let fileItem = FileServiceUploadFileItem(data: data, fileName: url.lastPathComponent)
         delegate.didGetFile(fileItem: fileItem)
     }
-}
 
-extension FileServiceSelectFileHandler: PHPickerViewControllerDelegate {
-    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        DispatchQueue.main.async {
-            guard let itemProvider = results.first?.itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) else {
-                picker.dismiss(animated: true, completion: {})
-                return
-            }
-            itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
-                guard let self = self else { return }
-                DispatchQueue.main.async {
-                    guard let image = image as? UIImage else {
-                        picker.dismiss(animated: true, completion: {
-                            if let errorDescription = error?.localizedDescription {
-                                let alertController = AlertController(
-                                    title: errorDescription,
-                                    message: "",
-                                    confirmButtonText: L10n.Common.Controls.done,
-                                    imageType: .error)
-                                self.coordinator.present(
-                                    scene: .alertController(alertController: alertController),
-                                    transition: .alertController(completion: nil))
-                            }
-                        })
-                        return
+    func loadImage(result: PHPickerResult) async -> Result<UIImage, Error> {
+        let itemProvider = result.itemProvider
+        guard itemProvider.canLoadObject(ofClass: UIImage.self) else {
+            return Result.failure(ImageLoadError.cannotLoad)
+        }
+        return await withCheckedContinuation { continuation in
+            itemProvider.loadObject(ofClass: UIImage.self) { image, error in
+                if let image = image as? UIImage {
+                    continuation.resume(returning: Result.success(image))
+                } else {
+                    if let error = error {
+                        continuation.resume(returning: Result.failure(error))
                     }
-                    picker.dismiss(animated: true, completion: {
-                        self.didGetImage(image: image)
-                    })
                 }
             }
         }
     }
-    
+}
+
+enum ImageLoadError: Error {
+    case cannotLoad
+}
+
+extension FileServiceSelectFileHandler: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        Task {
+            if let pickerResult = results.first {
+                let imageResult = await loadImage(result: pickerResult)
+                await MainActor.run { [weak self] in
+                    guard let self = self else { return }
+                    switch imageResult {
+                    case let .success(image):
+                        picker.dismiss(animated: true, completion: {
+                            self.didGetImage(image: image)
+                        })
+                    case let .failure(error):
+                        picker.dismiss(animated: true, completion: {
+                            let alertController = AlertController(
+                                title: error.localizedDescription,
+                                message: "",
+                                confirmButtonText: L10n.Common.Controls.done,
+                                imageType: .error)
+                            self.coordinator.present(
+                                scene: .alertController(alertController: alertController),
+                                transition: .alertController(completion: nil))
+                        })
+                    }
+                }
+            }
+        }
+    }
 }
 
 extension FileServiceSelectFileHandler: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
