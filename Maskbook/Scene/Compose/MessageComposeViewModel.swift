@@ -3,6 +3,7 @@ import BigInt
 import Combine
 import SwiftUI
 import web3swift
+import MaskWalletCore
 
 final class MessageComposeViewModel: ObservableObject {
     private var disposeBag = Set<AnyCancellable>()
@@ -84,20 +85,30 @@ extension MessageComposeViewModel {
 
     func encryptContent() {
         var authorKeyData: Data? = nil
+        var authorPrivateKeyData: Data?
+        var localKey: Data?
+        var e2eParam: Api_E2EEncryptParam?
         if let personaRecord = personaManager.currentPersona.value {
             let persona = Persona(fromRecord: personaRecord)
             authorKeyData = persona?.publicKey?.getRawData()
+            authorPrivateKeyData = Data(base64URLEncoded: personaRecord.dKeyInPrivateKey)
+            localKey = Data(base64URLEncoded: (persona?.localKey?.k)!)
         }
         let socialPlatform = personaManager.currentProfile.value?.socialPlatform
-        let authorId = personaManager.currentProfile.value?.identifier
+        let authorId: String? = personaManager.currentProfile.value?.identifier
             .flatMap { $0.clip(first: "person:".count) }
+        let authorName = authorId?.components(separatedBy: "/").last
+        
 
         guard let encrtypedMessage = try? WalletCoreHelper.encryptPost(
+            isPublic: false,
             content: message,
-            authorID: authorId,
+            authorID: authorName,
             authorKeyData: authorKeyData,
             socialPlatForm: socialPlatform,
-            metas: pluginContents).get() else {
+            metas: pluginContents,
+            e2eParam: WalletCoreHelper.EncryptPostE2EParam(localKey: localKey!, target: [:], authorPrivateKey: authorPrivateKeyData!)
+        ).get() else {
             // TODO: Error handling
             return
         }

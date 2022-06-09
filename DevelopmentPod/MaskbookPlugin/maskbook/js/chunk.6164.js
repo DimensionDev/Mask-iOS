@@ -425,7 +425,7 @@ const FooterLine = /*#__PURE__*/ (0,react.memo)(()=>{
         if ( true && !event.metaKey) {
             (0,src/* openWindow */.xw)(`${links/* DOWNLOAD_LINK_STABLE_PREFIX */.kP}/v${version}`);
         } else {
-            (0,src/* openWindow */.xw)(`${links/* DOWNLOAD_LINK_UNSTABLE_PREFIX */.Xe}/${"181e22679"}`);
+            (0,src/* openWindow */.xw)(`${links/* DOWNLOAD_LINK_UNSTABLE_PREFIX */.Xe}/${"7e70696f5"}`);
         }
     };
     return /*#__PURE__*/ (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
@@ -450,7 +450,7 @@ const FooterLine = /*#__PURE__*/ (0,react.memo)(()=>{
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(FooterLinkButton, {
                         onClick: openVersionLink,
-                        title: "v1.29.12-2348-g181e22679",
+                        title: "v1.29.12-2349-g7e70696f5",
                         children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Version, {})
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(FooterLinkExternal, {

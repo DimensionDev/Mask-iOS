@@ -889,7 +889,7 @@ if (true) {
              * but webpack will do constant folding
              */ // @ts-ignore
         // eslint-disable-next-line no-useless-concat
-        __webpack_require__.e(/* import() */ 8699).then(__webpack_require__.bind(__webpack_require__, 98699)).then((x)=>x.MaskNetworkAPI
+        Promise.all(/* import() */[__webpack_require__.e(5449), __webpack_require__.e(8699)]).then(__webpack_require__.bind(__webpack_require__, 98699)).then((x)=>x.MaskNetworkAPI
         ), {
             ...options,
             channel: new iOSWebkitChannel()
@@ -1885,11 +1885,11 @@ if (false) {}
 ;// CONCATENATED MODULE: ./background/tasks/NotCancellable/PrintBuildFlags.ts
 console.log('Build info', {
     NODE_ENV: "production",
-    VERSION: "v1.29.12-2348-g181e22679",
+    VERSION: "v1.29.12-2349-g7e70696f5",
     TAG_NAME: "v2.5.0",
-    COMMIT_HASH: "181e22679",
-    COMMIT_DATE: "2022-06-01T07:46:29.000Z",
-    BUILD_DATE: "2022-06-01T07:52:48.068Z",
+    COMMIT_HASH: "7e70696f5",
+    COMMIT_DATE: "2022-06-02T07:51:08.000Z",
+    BUILD_DATE: "2022-06-02T07:57:32.679Z",
     REMOTE_URL: "git@github.com:DimensionDev/Maskbook.git",
     BRANCH_NAME: "feat/mobile",
     DIRTY: false,
@@ -2164,7 +2164,7 @@ const log = {
     requestReplay: "production" === 'development'
 };
 const Services = {
-    Crypto: add(()=>Promise.all(/* import() */[__webpack_require__.e(6739), __webpack_require__.e(2943), __webpack_require__.e(7691), __webpack_require__.e(7075)]).then(__webpack_require__.bind(__webpack_require__, 67075))
+    Crypto: add(()=>Promise.all(/* import() */[__webpack_require__.e(6739), __webpack_require__.e(2943), __webpack_require__.e(5449), __webpack_require__.e(7075)]).then(__webpack_require__.bind(__webpack_require__, 67075))
     , 'Crypto'),
     Identity: add(()=>Promise.all(/* import() */[__webpack_require__.e(2698), __webpack_require__.e(3294), __webpack_require__.e(6739), __webpack_require__.e(4227), __webpack_require__.e(4544), __webpack_require__.e(5737), __webpack_require__.e(3883), __webpack_require__.e(6045), __webpack_require__.e(1077), __webpack_require__.e(8117), __webpack_require__.e(2943), __webpack_require__.e(5756), __webpack_require__.e(8492), __webpack_require__.e(7765), __webpack_require__.e(1305), __webpack_require__.e(5891), __webpack_require__.e(8936), __webpack_require__.e(6265), __webpack_require__.e(1246), __webpack_require__.e(7141), __webpack_require__.e(708), __webpack_require__.e(9447), __webpack_require__.e(7764), __webpack_require__.e(4859), __webpack_require__.e(8563), __webpack_require__.e(1064), __webpack_require__.e(7025)]).then(__webpack_require__.bind(__webpack_require__, 17865))
     , 'Identity'),
@@ -2182,7 +2182,7 @@ const Services = {
     , 'ThirdPartyPlugin')
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Services);
-const ServicesWithProgress = add(()=>Promise.all(/* import() */[__webpack_require__.e(7691), __webpack_require__.e(5114)]).then(__webpack_require__.bind(__webpack_require__, 45114))
+const ServicesWithProgress = add(()=>Promise.all(/* import() */[__webpack_require__.e(5449), __webpack_require__.e(5114)]).then(__webpack_require__.bind(__webpack_require__, 45114))
 , 'ServicesWithProgress', true);
 if (false) {}
 /**

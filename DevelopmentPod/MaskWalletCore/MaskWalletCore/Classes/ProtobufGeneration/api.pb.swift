@@ -457,10 +457,10 @@ public struct Api_MWResponse {
     set {response = .respGeneratePersona(newValue)}
   }
 
-  public var respPostEncryption: Api_PostEncrypedResp {
+  public var respPostEncryption: Api_PostEncryptedResp {
     get {
       if case .respPostEncryption(let v)? = response {return v}
-      return Api_PostEncrypedResp()
+      return Api_PostEncryptedResp()
     }
     set {response = .respPostEncryption(newValue)}
   }
@@ -486,7 +486,7 @@ public struct Api_MWResponse {
     case respGetStoredKeyExportType(Api_GetKeyStoreSupportExportTypeResp)
     case respGenerateMnemonic(Api_GenerateMnemonicResp)
     case respGeneratePersona(Api_PersonaGenerationResp)
-    case respPostEncryption(Api_PostEncrypedResp)
+    case respPostEncryption(Api_PostEncryptedResp)
 
   #if !swift(>=4.1)
     public static func ==(lhs: Api_MWResponse.OneOf_Response, rhs: Api_MWResponse.OneOf_Response) -> Bool {
@@ -1264,7 +1264,7 @@ extension Api_MWResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
         }
       }()
       case 26: try {
-        var v: Api_PostEncrypedResp?
+        var v: Api_PostEncryptedResp?
         var hadOneofValue = false
         if let current = self.response {
           hadOneofValue = true

@@ -606,6 +606,12 @@ extension WalletCoreHelper {
             return
         }
     }
+    
+    struct EncryptPostE2EParam {
+        let localKey: Data
+        let target: [String: Data]
+        let authorPrivateKey: Data
+    }
 
     /// Encrypt plugin metas and text content
     /// - Parameters:
@@ -617,11 +623,13 @@ extension WalletCoreHelper {
     ///   - version: api version
     /// - Returns: encrypted content
     class func encryptPost(
+        isPublic: Bool,
         content: String,
         authorID: String?,
         authorKeyData: Data?,
         socialPlatForm: ProfileSocialPlatform?,
         metas: [PluginMeta],
+        e2eParam: EncryptPostE2EParam?,
         version: EncryptionVersion = .v38
     ) -> Result<String, Error> {
         if version == .v37 {
@@ -673,6 +681,16 @@ extension WalletCoreHelper {
 
                     if let network = socialPlatForm {
                         param.network = network.url
+                    }
+                    
+                    param.isPlublic = isPublic
+                    if let e2eParam = e2eParam {
+                        var e2eMCParam = Api_E2EEncryptParam()
+                        e2eMCParam.localKeyData = e2eParam.localKey
+                        e2eMCParam.target = [:]
+                        e2eMCParam.authorPrivateKey = e2eParam.authorPrivateKey
+                        
+                        param.param = e2eMCParam
                     }
                 }
             ,

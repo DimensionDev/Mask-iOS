@@ -69,6 +69,10 @@ public struct Api_PostEncryptionParam {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  public var version: Api_EncryptOption.Version = .v37
+
+  public var isPlublic: Bool = false
+
   public var content: String = String()
 
   public var network: String {
@@ -107,7 +111,14 @@ public struct Api_PostEncryptionParam {
   /// Clears the value of `authorPublicKeyAlgr`. Subsequent reads from it will return its default value.
   public mutating func clearAuthorPublicKeyAlgr() {self._authorPublicKeyAlgr = nil}
 
-  public var version: Api_EncryptOption.Version = .v37
+  public var param: Api_E2EEncryptParam {
+    get {return _param ?? Api_E2EEncryptParam()}
+    set {_param = newValue}
+  }
+  /// Returns true if `param` has been explicitly set.
+  public var hasParam: Bool {return self._param != nil}
+  /// Clears the value of `param`. Subsequent reads from it will return its default value.
+  public mutating func clearParam() {self._param = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -117,14 +128,50 @@ public struct Api_PostEncryptionParam {
   fileprivate var _authorPublicKeyData: Data? = nil
   fileprivate var _authorUserID: String? = nil
   fileprivate var _authorPublicKeyAlgr: Api_PublicKeyAlgorithm? = nil
+  fileprivate var _param: Api_E2EEncryptParam? = nil
 }
 
-public struct Api_PostEncrypedResp {
+public struct Api_E2EEncryptionResult {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var iv: Data {
+    get {return _iv ?? Data()}
+    set {_iv = newValue}
+  }
+  /// Returns true if `iv` has been explicitly set.
+  public var hasIv: Bool {return self._iv != nil}
+  /// Clears the value of `iv`. Subsequent reads from it will return its default value.
+  public mutating func clearIv() {self._iv = nil}
+
+  public var encryptedPostKeyData: Data = Data()
+
+  public var ephemeralPublicKeyData: Data {
+    get {return _ephemeralPublicKeyData ?? Data()}
+    set {_ephemeralPublicKeyData = newValue}
+  }
+  /// Returns true if `ephemeralPublicKeyData` has been explicitly set.
+  public var hasEphemeralPublicKeyData: Bool {return self._ephemeralPublicKeyData != nil}
+  /// Clears the value of `ephemeralPublicKeyData`. Subsequent reads from it will return its default value.
+  public mutating func clearEphemeralPublicKeyData() {self._ephemeralPublicKeyData = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _iv: Data? = nil
+  fileprivate var _ephemeralPublicKeyData: Data? = nil
+}
+
+public struct Api_PostEncryptedResp {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
   public var content: String = String()
+
+  public var results: Dictionary<String,Api_E2EEncryptionResult> = [:]
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -134,7 +181,8 @@ public struct Api_PostEncrypedResp {
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Api_PublicKeyAlgorithm: @unchecked Sendable {}
 extension Api_PostEncryptionParam: @unchecked Sendable {}
-extension Api_PostEncrypedResp: @unchecked Sendable {}
+extension Api_E2EEncryptionResult: @unchecked Sendable {}
+extension Api_PostEncryptedResp: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -152,12 +200,14 @@ extension Api_PublicKeyAlgorithm: SwiftProtobuf._ProtoNameProviding {
 extension Api_PostEncryptionParam: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".PostEncryptionParam"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "content"),
-    2: .same(proto: "network"),
-    3: .same(proto: "authorPublicKeyData"),
-    4: .same(proto: "authorUserId"),
-    5: .same(proto: "authorPublicKeyAlgr"),
-    6: .same(proto: "version"),
+    1: .same(proto: "version"),
+    2: .same(proto: "isPlublic"),
+    3: .same(proto: "content"),
+    4: .same(proto: "network"),
+    5: .same(proto: "authorPublicKeyData"),
+    6: .same(proto: "authorUserId"),
+    7: .same(proto: "authorPublicKeyAlgr"),
+    8: .same(proto: "param"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -166,12 +216,14 @@ extension Api_PostEncryptionParam: SwiftProtobuf.Message, SwiftProtobuf._Message
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.content) }()
-      case 2: try { try decoder.decodeSingularStringField(value: &self._network) }()
-      case 3: try { try decoder.decodeSingularBytesField(value: &self._authorPublicKeyData) }()
-      case 4: try { try decoder.decodeSingularStringField(value: &self._authorUserID) }()
-      case 5: try { try decoder.decodeSingularEnumField(value: &self._authorPublicKeyAlgr) }()
-      case 6: try { try decoder.decodeSingularEnumField(value: &self.version) }()
+      case 1: try { try decoder.decodeSingularEnumField(value: &self.version) }()
+      case 2: try { try decoder.decodeSingularBoolField(value: &self.isPlublic) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.content) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self._network) }()
+      case 5: try { try decoder.decodeSingularBytesField(value: &self._authorPublicKeyData) }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self._authorUserID) }()
+      case 7: try { try decoder.decodeSingularEnumField(value: &self._authorPublicKeyAlgr) }()
+      case 8: try { try decoder.decodeSingularMessageField(value: &self._param) }()
       default: break
       }
     }
@@ -182,43 +234,100 @@ extension Api_PostEncryptionParam: SwiftProtobuf.Message, SwiftProtobuf._Message
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
+    if self.version != .v37 {
+      try visitor.visitSingularEnumField(value: self.version, fieldNumber: 1)
+    }
+    if self.isPlublic != false {
+      try visitor.visitSingularBoolField(value: self.isPlublic, fieldNumber: 2)
+    }
     if !self.content.isEmpty {
-      try visitor.visitSingularStringField(value: self.content, fieldNumber: 1)
+      try visitor.visitSingularStringField(value: self.content, fieldNumber: 3)
     }
     try { if let v = self._network {
-      try visitor.visitSingularStringField(value: v, fieldNumber: 2)
-    } }()
-    try { if let v = self._authorPublicKeyData {
-      try visitor.visitSingularBytesField(value: v, fieldNumber: 3)
-    } }()
-    try { if let v = self._authorUserID {
       try visitor.visitSingularStringField(value: v, fieldNumber: 4)
     } }()
-    try { if let v = self._authorPublicKeyAlgr {
-      try visitor.visitSingularEnumField(value: v, fieldNumber: 5)
+    try { if let v = self._authorPublicKeyData {
+      try visitor.visitSingularBytesField(value: v, fieldNumber: 5)
     } }()
-    if self.version != .v37 {
-      try visitor.visitSingularEnumField(value: self.version, fieldNumber: 6)
-    }
+    try { if let v = self._authorUserID {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 6)
+    } }()
+    try { if let v = self._authorPublicKeyAlgr {
+      try visitor.visitSingularEnumField(value: v, fieldNumber: 7)
+    } }()
+    try { if let v = self._param {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Api_PostEncryptionParam, rhs: Api_PostEncryptionParam) -> Bool {
+    if lhs.version != rhs.version {return false}
+    if lhs.isPlublic != rhs.isPlublic {return false}
     if lhs.content != rhs.content {return false}
     if lhs._network != rhs._network {return false}
     if lhs._authorPublicKeyData != rhs._authorPublicKeyData {return false}
     if lhs._authorUserID != rhs._authorUserID {return false}
     if lhs._authorPublicKeyAlgr != rhs._authorPublicKeyAlgr {return false}
-    if lhs.version != rhs.version {return false}
+    if lhs._param != rhs._param {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Api_PostEncrypedResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".PostEncrypedResp"
+extension Api_E2EEncryptionResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".E2EEncryptionResult"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "iv"),
+    2: .same(proto: "encryptedPostKeyData"),
+    3: .same(proto: "ephemeralPublicKeyData"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularBytesField(value: &self._iv) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.encryptedPostKeyData) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self._ephemeralPublicKeyData) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._iv {
+      try visitor.visitSingularBytesField(value: v, fieldNumber: 1)
+    } }()
+    if !self.encryptedPostKeyData.isEmpty {
+      try visitor.visitSingularBytesField(value: self.encryptedPostKeyData, fieldNumber: 2)
+    }
+    try { if let v = self._ephemeralPublicKeyData {
+      try visitor.visitSingularBytesField(value: v, fieldNumber: 3)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Api_E2EEncryptionResult, rhs: Api_E2EEncryptionResult) -> Bool {
+    if lhs._iv != rhs._iv {return false}
+    if lhs.encryptedPostKeyData != rhs.encryptedPostKeyData {return false}
+    if lhs._ephemeralPublicKeyData != rhs._ephemeralPublicKeyData {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Api_PostEncryptedResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".PostEncryptedResp"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "content"),
+    2: .same(proto: "results"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -228,6 +337,7 @@ extension Api_PostEncrypedResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.content) }()
+      case 2: try { try decoder.decodeMapField(fieldType: SwiftProtobuf._ProtobufMessageMap<SwiftProtobuf.ProtobufString,Api_E2EEncryptionResult>.self, value: &self.results) }()
       default: break
       }
     }
@@ -237,11 +347,15 @@ extension Api_PostEncrypedResp: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     if !self.content.isEmpty {
       try visitor.visitSingularStringField(value: self.content, fieldNumber: 1)
     }
+    if !self.results.isEmpty {
+      try visitor.visitMapField(fieldType: SwiftProtobuf._ProtobufMessageMap<SwiftProtobuf.ProtobufString,Api_E2EEncryptionResult>.self, value: self.results, fieldNumber: 2)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Api_PostEncrypedResp, rhs: Api_PostEncrypedResp) -> Bool {
+  public static func ==(lhs: Api_PostEncryptedResp, rhs: Api_PostEncryptedResp) -> Bool {
     if lhs.content != rhs.content {return false}
+    if lhs.results != rhs.results {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

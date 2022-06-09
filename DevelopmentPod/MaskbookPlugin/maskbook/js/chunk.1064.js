@@ -833,6 +833,129 @@ function relationRecordOutDB(x) {
 } // #endregion
 
 
+/***/ }),
+
+/***/ 96182:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Ns": () => (/* binding */ createDBAccessWithAsyncUpgrade),
+/* harmony export */   "Z_": () => (/* binding */ createDBAccess),
+/* harmony export */   "_X": () => (/* binding */ createTransaction)
+/* harmony export */ });
+/* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(85646);
+/* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _shared__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(62481);
+
+
+const iOSFix =  true ? __webpack_require__.e(/* import() */ 426).then(__webpack_require__.bind(__webpack_require__, 40426)).then(({ default: ready  })=>ready()
+) : 0;
+function createDBAccess(opener) {
+    let db = undefined;
+    if (true) {
+        // iOS bug: indexedDB dies randomly
+        _shared__WEBPACK_IMPORTED_MODULE_0__/* .MaskMessages.events.mobile_app_suspended.on */ .ql.events.mobile_app_suspended.on(clean);
+        setInterval(clean, /** 1 min */ 1000 * 60);
+    }
+    function clean() {
+        if (db) {
+            db.close();
+            db.addEventListener('close', ()=>db = undefined
+            , {
+                once: true
+            });
+        }
+        db = undefined;
+    }
+    return async ()=>{
+        await iOSFix;
+        (0,_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_1__.assertEnvironment)(_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_1__.Environment.ManifestBackground);
+        if (db) {
+            try {
+                // try if the db still open
+                const t = db.transaction([
+                    db.objectStoreNames[0]
+                ], 'readonly', {});
+                t.commit();
+                return db;
+            } catch  {
+                clean();
+            }
+        }
+        db = await opener();
+        db.addEventListener('close', clean, {
+            once: true
+        });
+        db.addEventListener('error', clean, {
+            once: true
+        });
+        return db;
+    };
+}
+function createDBAccessWithAsyncUpgrade(firstVersionThatRequiresAsyncUpgrade, latestVersion, opener, asyncUpgradePrepare) {
+    let db = undefined;
+    if (true) {
+        // iOS bug: indexedDB dies randomly
+        _shared__WEBPACK_IMPORTED_MODULE_0__/* .MaskMessages.events.mobile_app_suspended.on */ .ql.events.mobile_app_suspended.on(clean);
+        setInterval(clean, /** 1 min */ 1000 * 60);
+    }
+    function clean() {
+        if (db) {
+            db.close();
+            db.addEventListener('close', ()=>pendingOpen = db = undefined
+            , {
+                once: true
+            });
+        }
+        pendingOpen = db = undefined;
+    }
+    let pendingOpen;
+    async function open() {
+        await iOSFix;
+        (0,_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_1__.assertEnvironment)(_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_1__.Environment.ManifestBackground);
+        if (db?.version === latestVersion) return db;
+        let currentVersion = firstVersionThatRequiresAsyncUpgrade;
+        let lastVersionData = undefined;
+        while(currentVersion < latestVersion){
+            try {
+                db = await opener(currentVersion, lastVersionData);
+                // if the open success, the stored version is small or eq than currentTryOpenVersion
+                // let's call the prepare function to do all the async jobs
+                lastVersionData = await asyncUpgradePrepare(db);
+            } catch (error) {
+                if (currentVersion >= latestVersion) throw error;
+            // if the stored database version is bigger than the currentTryOpenVersion
+            // It will fail and we just move to next version
+            }
+            currentVersion += 1;
+            db?.close();
+            db = undefined;
+        }
+        db = await opener(currentVersion, lastVersionData);
+        db.addEventListener('close', (e)=>db = undefined
+        , {
+            once: true
+        });
+        if (!db) throw new Error('Invalid state');
+        return db;
+    }
+    return ()=>{
+        // Share a Promise to prevent async upgrade for multiple times
+        if (pendingOpen) return pendingOpen;
+        const promise = pendingOpen = open();
+        promise.catch(()=>pendingOpen = undefined
+        );
+        return promise;
+    };
+}
+function createTransaction(db, mode) {
+    // It must be a high order function to infer the type of UsedStoreName correctly.
+    return (...storeNames)=>{
+        return db.transaction(storeNames, mode);
+    };
+}
+
+
 /***/ })
 
 }]);
