@@ -216,6 +216,8 @@ class Coordinator {
         case messageCompose(PluginMeta? = nil)
         case composeSelectContact(viewModel: SelectContactViewModel, delegate: MessageComposeViewModel)
         case composeSelectPersona(viewController: SelectContactViewController)
+        case fileService
+        case fileServiceOptions
         case debug
     }
     
@@ -854,6 +856,9 @@ extension Coordinator {
             let searchPersonaVc = SearchPersonaViewController()
             searchPersonaVc.delegate = viewController
             return searchPersonaVc
+        case .fileService: return FileServiceViewController()
+        case .fileServiceOptions: return FileServiceOptionViewController()
+
         }
     }
     // swiftlint:enable cyclomatic_complexity function_body_length

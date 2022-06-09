@@ -1,17 +1,17 @@
 import SwiftUI
 
-struct NavigationItemView: View {
-    let whenTapped: () -> Void
+struct NavigationBarItemView: View {
+    let tapped: () -> Void
 
     private let iconName: String
 
-    init(iconName: String, whenTapped: @escaping () -> Void = {}) {
-        self.whenTapped = whenTapped
+    init(iconName: String, when tapped: @escaping () -> Void = {}) {
+        self.tapped = tapped
         self.iconName = iconName
     }
 
-    init(imageAsset: ImageAsset, whenTapped: @escaping () -> Void = {}) {
-        self.init(iconName: imageAsset.name, whenTapped: whenTapped)
+    init(imageAsset: ImageAsset, when tapped: @escaping () -> Void = {}) {
+        self.init(iconName: imageAsset.name, when: tapped)
     }
 
     var body: some View {
@@ -23,18 +23,18 @@ struct NavigationItemView: View {
                     .renderingMode(.template)
                     .foregroundColor(Asset.Colors.Text.dark.asColor())
             )
-            .onTapGesture { whenTapped() }
+            .onTapGesture { tapped() }
     }
 }
 
 struct BackArrowViewPreview: PreviewProvider {
     static var previews: some View {
         Group {
-            NavigationItemView(imageAsset: Asset.Icon.Arrows.backArrow)
+            NavigationBarItemView(imageAsset: Asset.Icon.Arrows.backArrow)
                 .frame(width: 36, height: 36)
                 .colorScheme(.dark)
 
-            NavigationItemView(imageAsset: Asset.Icon.Arrows.backArrow)
+            NavigationBarItemView(imageAsset: Asset.Icon.Arrows.backArrow)
                 .frame(width: 36, height: 36)
         }
         .background(Color.gray)
@@ -45,11 +45,11 @@ struct BackArrowViewPreview: PreviewProvider {
 struct CloseItemPreview: PreviewProvider {
     static var previews: some View {
         Group {
-            NavigationItemView(imageAsset: Asset.Plugins.LuckyDrop.Icon.close)
+            NavigationBarItemView(imageAsset: Asset.Plugins.LuckyDrop.Icon.close)
                 .frame(width: 36, height: 36)
                 .colorScheme(.dark)
 
-            NavigationItemView(imageAsset: Asset.Plugins.LuckyDrop.Icon.close)
+            NavigationBarItemView(imageAsset: Asset.Plugins.LuckyDrop.Icon.close)
                 .frame(width: 36, height: 36)
         }
         .background(Color.gray)
@@ -60,11 +60,11 @@ struct CloseItemPreview: PreviewProvider {
 struct HistoryItemPreview: PreviewProvider {
     static var previews: some View {
         Group {
-            NavigationItemView(imageAsset: Asset.Plugins.LuckyDrop.Icon.history)
+            NavigationBarItemView(imageAsset: Asset.Plugins.LuckyDrop.Icon.history)
                 .frame(width: 36, height: 36)
                 .colorScheme(.dark)
 
-            NavigationItemView(imageAsset: Asset.Plugins.LuckyDrop.Icon.history)
+            NavigationBarItemView(imageAsset: Asset.Plugins.LuckyDrop.Icon.history)
                 .frame(width: 36, height: 36)
         }
         .background(Color.gray)

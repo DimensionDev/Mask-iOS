@@ -5,6 +5,7 @@ import SwiftUI
 import web3swift
 import CoreDataStack
 
+
 final class MessageComposeViewModel: ObservableObject {
     private var disposeBag = Set<AnyCancellable>()
     
@@ -44,7 +45,6 @@ final class MessageComposeViewModel: ObservableObject {
         messageSignal
             .assign(to: \.showPlaceHolder, on: self)
             .store(in: &disposeBag)
-        
     }
     
     func append(newPluginContent: PluginMeta) {
@@ -75,7 +75,6 @@ final class MessageComposeViewModel: ObservableObject {
             print("message compose \(plugin) add did clicked")
         }
     }
-    
     func selectContactButtonClick() {
         let viewModel = SelectContactViewModel()
         mainCoordinator.present(scene: .composeSelectContact(viewModel: viewModel, delegate: self), transition: .panModel(animated: true))
@@ -191,3 +190,4 @@ extension MessageComposeViewModel:SelectComposeContactTypeDelegate {
         
     }    
 }
+

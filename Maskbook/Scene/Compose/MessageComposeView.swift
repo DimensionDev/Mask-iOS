@@ -126,7 +126,7 @@ struct MessageComposeView: View {
                 .font(FontStyles.rh7.font)
                 .foregroundColor(Asset.Colors.Twitter.blue.asColor())
         }.onTapGesture {
-             viewModel.selectContactButtonClick()
+            viewModel.selectContactButtonClick()
         }
     }
 

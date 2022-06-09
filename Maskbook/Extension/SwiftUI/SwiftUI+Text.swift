@@ -20,19 +20,27 @@ extension Text {
 }
 
 extension View {
-    func horizontallyFilled() -> some View {
-        HStack(spacing: 0) {
-            self
-            Spacer()
-        }
-    }
+     func horizontallyFilled(alignment: HorizontalAlignment = .leading) -> some View {
+         HStack(spacing: 0) {
+             switch alignment {
+             case .trailing:
+                 Spacer()
+                 self
+
+             case .center:
+                 Spacer()
+                 self
+                 Spacer()
+
+             default:
+                 self
+                 Spacer()
+             }
+         }
+     }
 
     func horizontallyCenterred() -> some View {
-        HStack(spacing: 0) {
-            Spacer()
-            self
-            Spacer()
-        }
+        horizontallyFilled(alignment: .center)
     }
 }
 

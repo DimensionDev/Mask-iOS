@@ -321,9 +321,6 @@ class MaskbookTests: XCTestCase {
             return
         }
 
-        let json = data.asCompatibleBackupJSON()
-        XCTAssert(json.isSome)
-
         do {
             let model = try JSONDecoder().decode(RestoreFile.self, from: data)
             print(model)
@@ -331,6 +328,43 @@ class MaskbookTests: XCTestCase {
         } catch {
             print(error)
             XCTFail(error.localizedDescription)
+        }
+    }
+
+    func testCustomDictionaryDecoding() {
+        let json = """
+        ["person:facebook.com\\/hedley.pritchard",{"reason":[{"at":1601218773818,"group":"group:facebook.com\\/suji.yan.me\\/_default_friends_group_","type":"group"}]}]
+        """
+
+        do {
+            let data = try JSONDecoder().decode([RestoreFile.StringKey: RestoreFile.Recipient].self, from: json.data(using: .utf8)!)
+            print(data)
+            XCTAssert(data.isEmpty == false)
+
+            let rawData = try JSONEncoder().encode(data)
+            let rawString = String(data: rawData, encoding: .utf8)
+
+            XCTAssert(json == rawString)
+        } catch {
+            XCTFail("Recipient decode failed")
+        }
+
+
+        let profileData = """
+        ["person:facebook.com\\/xxx.t.me",{"connectionConfirmState":"confirmed"}]
+        """
+
+        do {
+            let data = try JSONDecoder().decode([RestoreFile.StringKey: RestoreFile.LinkedProfile].self, from: profileData.data(using: .utf8)!)
+            print(data)
+            XCTAssert(data.isEmpty == false)
+
+            let json = try JSONEncoder().encode(data)
+            let rawString = String(data: json, encoding: .utf8)
+
+            XCTAssert(profileData == rawString)
+        } catch {
+            XCTFail("LinkedProfile decode failed")
         }
     }
 }
