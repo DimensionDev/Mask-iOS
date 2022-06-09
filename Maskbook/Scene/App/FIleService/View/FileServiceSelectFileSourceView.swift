@@ -8,33 +8,14 @@
 
 import SwiftUI
 
-enum FileServiceLocalFileSourceItem: CaseIterable {
-    case camera
-    case photo
-    case file
-
-    var imageName: String {
-        switch self {
-        case .camera: return Asset.Plugins.FileService.uplodaCamera.name
-        case .photo: return Asset.Plugins.FileService.uplodaPhotos.name
-        case .file: return Asset.Plugins.FileService.uploadFile.name
-        }
-    }
-
-    var title: String {
-        switch self {
-        case .camera: return L10n.Plugins.FileService.LocalFileSource.takePhotos
-        case .photo: return L10n.Plugins.FileService.LocalFileSource.uploadPhotos
-        case .file: return L10n.Plugins.FileService.LocalFileSource.uploadFile
-        }
-    }
-}
-
 struct FileServiceSelectFileSourceView: View {
+
+    let viewModel:FileServiceSelectFileSourceViewModel
+    
     var body: some View {
-        VStack(alignment: .leading) {
-            Spacer().frame(height: 44)
-            ForEach(FileServiceLocalFileSourceItem.allCases, id: \.self) { item in
+        VStack {
+            Spacer().frame(height: 64)
+            ForEach(FileServiceSelectFileSourceViewModel.LocalFileSourceItem.allCases, id: \.self) { item in
                     localFileSourceItemView(item: item)
                 }
             Spacer().frame(height: 20)
@@ -44,7 +25,7 @@ struct FileServiceSelectFileSourceView: View {
         .padding(.horizontal, 20)
     }
     
-    func localFileSourceItemView(item: FileServiceLocalFileSourceItem) -> some View {
+    func localFileSourceItemView(item: FileServiceSelectFileSourceViewModel.LocalFileSourceItem) -> some View {
         HStack {
             Image(item.imageName)
                 .resizable()
@@ -62,6 +43,10 @@ struct FileServiceSelectFileSourceView: View {
             Asset.Colors.Background.dark.asColor()
                 .clipShape(RoundedRectangle(cornerRadius: 8.0, style: .continuous))
         )
+        .onTapGesture {
+            viewModel.select(item: item)
+        }
+        
     }
     
     func tipsView() -> some View {
@@ -87,7 +72,7 @@ struct FileServiceSelectFileSourceView: View {
 
 struct FileServiceSelectFileTypeView_Previews: PreviewProvider {
     static var previews: some View {
-        FileServiceSelectFileSourceView()
+        FileServiceSelectFileSourceView(viewModel: FileServiceSelectFileSourceViewModel())
             .background(Asset.Colors.Background.normal.asColor())
     }
 }

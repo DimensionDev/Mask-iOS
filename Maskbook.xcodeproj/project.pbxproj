@@ -662,6 +662,7 @@
 		5D3E365027BF706500FDCFDD /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3E364F27BF706500FDCFDD /* Post.swift */; };
 		5D3F361A27A1524B007FDD8C /* RedPackageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3F361927A1524B007FDD8C /* RedPackageView.swift */; };
 		5D46250F2808184C002007D0 /* SelectAccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D46250E2808184C002007D0 /* SelectAccountTableViewCell.swift */; };
+		5D474972285191EF00D3E7E6 /* FileServiceSelectFileSourceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D474971285191EF00D3E7E6 /* FileServiceSelectFileSourceViewModel.swift */; };
 		5D4AD18926560B02002D5380 /* HitTestExpandedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4AD18826560B02002D5380 /* HitTestExpandedButton.swift */; };
 		5D5475B327E351A200B6712A /* ZoomScaleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5475B227E351A200B6712A /* ZoomScaleImageView.swift */; };
 		5D554EC6279FE58100D40848 /* OpenRedPackageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D554EC5279FE58100D40848 /* OpenRedPackageViewController.swift */; };
@@ -1461,6 +1462,7 @@
 		5D3E364F27BF706500FDCFDD /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		5D3F361927A1524B007FDD8C /* RedPackageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPackageView.swift; sourceTree = "<group>"; };
 		5D46250E2808184C002007D0 /* SelectAccountTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectAccountTableViewCell.swift; path = Maskbook/Scene/Wallet/WalletList/Views/SelectAccountTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		5D474971285191EF00D3E7E6 /* FileServiceSelectFileSourceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceSelectFileSourceViewModel.swift; sourceTree = "<group>"; };
 		5D4AD18826560B02002D5380 /* HitTestExpandedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HitTestExpandedButton.swift; sourceTree = "<group>"; };
 		5D5475B227E351A200B6712A /* ZoomScaleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomScaleImageView.swift; sourceTree = "<group>"; };
 		5D554EC5279FE58100D40848 /* OpenRedPackageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenRedPackageViewController.swift; sourceTree = "<group>"; };
@@ -1962,6 +1964,7 @@
 		1FD91A8B28447146000766FB /* FIleService */ = {
 			isa = PBXGroup;
 			children = (
+				5D474970285191DC00D3E7E6 /* ViewModel */,
 				1F5B5EDB2850809800F6AD98 /* Model */,
 				1F5B5ED8284F31E500F6AD98 /* Controller */,
 				1FD91A8C2844A06E000766FB /* View */,
@@ -3660,6 +3663,14 @@
 			path = Personas;
 			sourceTree = "<group>";
 		};
+		5D474970285191DC00D3E7E6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5D474971285191EF00D3E7E6 /* FileServiceSelectFileSourceViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		5D4AD18726560B02002D5380 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -4507,6 +4518,7 @@
 				5DAD9C1E2823CF7200F6E230 /* Cookie+extension.swift in Sources */,
 				1F8D691D27211626001084D6 /* RemoteBackupBindMobilePhoneStrategy.swift in Sources */,
 				2AD856192812875A0064DDA5 /* Dismissable.swift in Sources */,
+				5D474972285191EF00D3E7E6 /* FileServiceSelectFileSourceViewModel.swift in Sources */,
 				1FB862CA278BDFCE00CF345F /* LabsConfigViewModel.swift in Sources */,
 				1FB862C62787F33900CF345F /* PluginSettingViewController.swift in Sources */,
 				2AF8854A271EE9310004565A /* NFTTransactionTableViewCell.swift in Sources */,

@@ -14,7 +14,7 @@ final class FileServiceSelectFileSourceViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        FileServiceSelectFileSourceView()
+        FileServiceSelectFileSourceView(viewModel: FileServiceSelectFileSourceViewModel())
         .asContent(in: self)
     }
 }

@@ -87,6 +87,7 @@ class Coordinator {
         case selectItemViewController(viewModel: SelectItemViewModelProtocol)
         case selectActionViewController(viewModel: SelectActionViewModelProtocol)
         case alertController(alertController: AlertController)
+        case viewController(viewController: UIViewController)
         case activityViewController(
             activityViewController: UIActivityViewController,
             sourceView: UIView?,
@@ -215,6 +216,7 @@ class Coordinator {
         case luckDropSelectProfile(callback: (@MainActor () -> Void)?)
         case fileService
         case fileServiceOptions
+        case fileServiceLocalFileSource
         case messageCompose(PluginMeta? = nil)
         case composeSelectContact(viewModel: SelectContactViewModel)
         case debug
@@ -447,6 +449,9 @@ extension Coordinator {
                 )
             }
             return alertController
+        
+        case let .viewController(viewController):
+            return viewController
 
         case let .activityViewController(activityViewController, sourceView, barButtonItem):
             activityViewController.popoverPresentationController?.sourceView = sourceView
@@ -853,6 +858,7 @@ extension Coordinator {
             return SelectContactViewController(viewModel: selectContactViewModel)
         case .fileService: return FileServiceViewController()
         case .fileServiceOptions: return FileServiceOptionViewController()
+        case .fileServiceLocalFileSource: return FileServiceSelectFileSourceViewController()
         }
     }
     // swiftlint:enable cyclomatic_complexity function_body_length
@@ -866,8 +872,8 @@ extension Coordinator {
         }
     }
     
-    func dismissTopViewController() {
-        UIApplication.getTopViewController()?.dismiss(animated: true, completion: nil)
+    func dismissTopViewController(animated: Bool = true, completion: (() -> Void)? = nil) {
+        UIApplication.getTopViewController()?.dismiss(animated: animated, completion: completion)
     }
 }
 
