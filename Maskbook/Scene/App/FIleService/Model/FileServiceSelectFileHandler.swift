@@ -135,9 +135,7 @@ class FileServiceSelectFileHandler: NSObject {
                 if let image = image as? UIImage {
                     continuation.resume(returning: Result.success(image))
                 } else {
-                    if let error = error {
-                        continuation.resume(returning: Result.failure(error))
-                    }
+                    continuation.resume(returning: Result.failure(error ?? ImageLoadError.cannotLoad))
                 }
             }
         }
