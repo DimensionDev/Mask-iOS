@@ -1,0 +1,188 @@
+//
+//  FileServiceSelectFileDelegate.swift
+//  Maskbook
+//
+//  Created by xiaojian sun on 2022/6/9.
+//  Copyright © 2022 dimension. All rights reserved.
+//
+
+import Foundation
+
+import PhotosUI
+import UIKit
+import WebExtension_Shim
+
+protocol FileServiceSelectFileDelegate {
+    func didGetImage(image: UIImage, fileURL: URL, fileName: String)
+    func didGetFile(url: URL)
+}
+
+class FileServiceSelectFileHandler: NSObject {
+    init(delegate: FileServiceSelectFileDelegate) {
+        self.delegate = delegate
+    }
+
+    @InjectedProvider(\.mainCoordinator)
+    private var coordinator
+
+    var uploadFolder: URL {
+        let path = URL.documents.appendingPathComponent("fileServiceUpload")
+        var isDirectory: ObjCBool = true
+        if !FileManager.default.fileExists(atPath: path.path, isDirectory: &isDirectory) {
+            try? FileManager.default.createDirectory(at: path, withIntermediateDirectories: true)
+        }
+        return path
+    }
+
+    var delegate: FileServiceSelectFileDelegate
+    private(set) lazy var imagePicker: PHPickerViewController = {
+        var configuration = PHPickerConfiguration()
+        configuration.filter = .images
+        configuration.selectionLimit = 1
+
+        let imagePicker = PHPickerViewController(configuration: configuration)
+        imagePicker.delegate = self
+        return imagePicker
+    }()
+
+    private(set) lazy var cameraController: UIImagePickerController = {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.sourceType = .camera
+        imagePickerController.delegate = self
+        return imagePickerController
+    }()
+
+    private(set) lazy var documentPicker: UIDocumentPickerViewController = {
+        if #available(iOS 15.0, *) {
+            return UIDocumentPickerViewController(forOpeningContentTypes: [.data])
+        } else {
+            return UIDocumentPickerViewController(documentTypes: ["public.data"], in: .open)
+        }
+    }()
+
+    func select(item: FileServiceSelectFileSourceViewModel.LocalFileSourceItem) {
+        coordinator.dismissTopViewController(animated: false) {
+            switch item {
+            case .camera:
+                self.takePhotoAction()
+            case .photo:
+                self.selectFromPhotosAction()
+            case .file:
+                self.selectFormFilesAction()
+            }
+        }
+    }
+
+    func randomNameForImage() -> String {
+        let randomString = UUID().uuidString
+        return "userImage" + String(randomString.prefix(5)) + ".jpg"
+    }
+
+    func saveImageToLocal(image: UIImage) {
+        if let pngData = image.jpeg(UIImage.JPEGQuality.high), !pngData.isEmpty {
+            let fileName = randomNameForImage()
+            let path = uploadFolder.appendingPathComponent(fileName)
+            try? pngData.write(to: path)
+            delegate.didGetImage(image: image, fileURL: path, fileName: fileName)
+        } else {
+            assertionFailure("can't get jpeg data from image")
+        }
+    }
+
+    func didGetImage(image: UIImage) {
+        saveImageToLocal(image: image)
+    }
+
+    func didGetFile(url: URL) {
+        delegate.didGetFile(url: url)
+    }
+}
+
+extension FileServiceSelectFileHandler: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        DispatchQueue.main.async {
+            guard let itemProvider = results.first?.itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) else {
+                picker.dismiss(animated: true, completion: {})
+                return
+            }
+            itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
+                guard let self = self else { return }
+                DispatchQueue.main.async {
+                    guard let image = image as? UIImage else {
+                        picker.dismiss(animated: true, completion: {
+                            if let errorDescription = error?.localizedDescription {
+                                let alertController = AlertController(
+                                    title: errorDescription,
+                                    message: "",
+                                    confirmButtonText: L10n.Common.Controls.done,
+                                    imageType: .error)
+                                self.coordinator.present(
+                                    scene: .alertController(alertController: alertController),
+                                    transition: .alertController(completion: nil))
+                            }
+                        })
+                        return
+                    }
+                    picker.dismiss(animated: true, completion: {
+                        self.didGetImage(image: image)
+                    })
+                }
+            }
+        }
+    }
+}
+
+extension FileServiceSelectFileHandler: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        picker.dismiss(animated: true) {
+            guard let image = info[.originalImage] as? UIImage else { return }
+            self.didGetImage(image: image)
+        }
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension FileServiceSelectFileHandler: UIDocumentPickerDelegate {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+        // Start accessing a security-scoped resource.
+        guard url.startAccessingSecurityScopedResource() else {
+            // Handle the failure here.
+            return
+        }
+        defer {
+            url.stopAccessingSecurityScopedResource()
+        }
+        didGetFile(url: url)
+    }
+}
+
+extension FileServiceSelectFileHandler {
+    func selectFromPhotosAction() {
+        coordinator.present(scene: .viewController(viewController: imagePicker),
+                            transition: .modal(wapperNav: false,
+                                               animated: true))
+    }
+
+    func takePhotoAction() {
+        ScannerPermission.authorizeCameraWith { [weak self] isAuthorize in
+            guard let self = self else { return }
+            if isAuthorize {
+                self.coordinator.present(scene: .viewController(viewController: self.cameraController),
+                                         transition: .modal(wapperNav: false,
+                                                            animated: true))
+            } else {
+                ScannerPermission.showCameraAccessAlert(coordinator: self.coordinator)
+            }
+        }
+    }
+
+    func selectFormFilesAction() {
+        documentPicker.delegate = self
+        coordinator.present(scene: .viewController(viewController: documentPicker),
+                            transition: .modal(wapperNav: false,
+                                               animated: true))
+    }
+}

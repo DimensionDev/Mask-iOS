@@ -216,7 +216,7 @@ class Coordinator {
         case luckDropSelectProfile(callback: (@MainActor () -> Void)?)
         case fileService
         case fileServiceOptions
-        case fileServiceLocalFileSource
+        case fileServiceLocalFileSource(selectFileHandler: FileServiceSelectFileHandler)
         case messageCompose(PluginMeta? = nil)
         case composeSelectContact(viewModel: SelectContactViewModel)
         case debug
@@ -854,11 +854,18 @@ extension Coordinator {
 
         case .debug:
             return UIHostingController(rootView: DebugView())
+            
         case let .composeSelectContact(selectContactViewModel):
             return SelectContactViewController(viewModel: selectContactViewModel)
-        case .fileService: return FileServiceViewController()
-        case .fileServiceOptions: return FileServiceOptionViewController()
-        case .fileServiceLocalFileSource: return FileServiceSelectFileSourceViewController()
+            
+        case .fileService:
+            return FileServiceViewController()
+            
+        case .fileServiceOptions:
+            return FileServiceOptionViewController()
+            
+        case let .fileServiceLocalFileSource(selectFileHandler):
+            return FileServiceSelectFileSourceViewController(selectFileHandler: selectFileHandler)
         }
     }
     // swiftlint:enable cyclomatic_complexity function_body_length

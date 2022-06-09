@@ -149,6 +149,8 @@ final class FileServiceOnboardViewModel: ObservableObject {
     
     @InjectedProvider(\.mainCoordinator)
     private var coordinator
+    
+    private lazy var selectFileHandler = FileServiceSelectFileHandler(delegate: self)
 
     init() {}
 
@@ -169,7 +171,17 @@ final class FileServiceOnboardViewModel: ObservableObject {
     }
     
     func addFromLocalfiles() {
-        coordinator.present(scene: .fileServiceLocalFileSource, transition: .panModel(animated: true))
+        coordinator.present(scene: .fileServiceLocalFileSource(selectFileHandler: selectFileHandler), transition: .panModel(animated: true))
+    }
+}
+
+extension FileServiceOnboardViewModel: FileServiceSelectFileDelegate {
+    func didGetImage(image: UIImage, fileURL: URL, fileName: String) {
+        
+    }
+    
+    func didGetFile(url: URL) {
+        
     }
 }
 

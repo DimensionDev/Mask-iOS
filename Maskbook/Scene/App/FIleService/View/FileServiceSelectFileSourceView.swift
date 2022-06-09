@@ -9,22 +9,21 @@
 import SwiftUI
 
 struct FileServiceSelectFileSourceView: View {
+    let viewModel: FileServiceSelectFileSourceViewModel
 
-    let viewModel:FileServiceSelectFileSourceViewModel
-    
     var body: some View {
         VStack {
             Spacer().frame(height: 64)
             ForEach(FileServiceSelectFileSourceViewModel.LocalFileSourceItem.allCases, id: \.self) { item in
-                    localFileSourceItemView(item: item)
-                }
+                localFileSourceItemView(item: item)
+            }
             Spacer().frame(height: 20)
             tipsView()
             Spacer().frame(height: 54)
         }
         .padding(.horizontal, 20)
     }
-    
+
     func localFileSourceItemView(item: FileServiceSelectFileSourceViewModel.LocalFileSourceItem) -> some View {
         HStack {
             Image(item.imageName)
@@ -46,9 +45,8 @@ struct FileServiceSelectFileSourceView: View {
         .onTapGesture {
             viewModel.select(item: item)
         }
-        
     }
-    
+
     func tipsView() -> some View {
         HStack {
             Image(Asset.Plugins.FileService.infoCircle.name)
@@ -67,12 +65,5 @@ struct FileServiceSelectFileSourceView: View {
             Asset.Colors.Public.infoBg.asColor().opacity(1)
                 .clipShape(RoundedRectangle(cornerRadius: 8.0, style: .continuous))
         )
-    }
-}
-
-struct FileServiceSelectFileTypeView_Previews: PreviewProvider {
-    static var previews: some View {
-        FileServiceSelectFileSourceView(viewModel: FileServiceSelectFileSourceViewModel())
-            .background(Asset.Colors.Background.normal.asColor())
     }
 }

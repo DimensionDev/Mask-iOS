@@ -7,15 +7,27 @@
 //
 
 import Foundation
-import SwiftUI
 import PanModal
+import SwiftUI
 
 final class FileServiceSelectFileSourceViewController: BaseViewController {
+    init(selectFileHandler: FileServiceSelectFileHandler) {
+        self.selectFileHandler = selectFileHandler
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    let selectFileHandler: FileServiceSelectFileHandler
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        FileServiceSelectFileSourceView(viewModel: FileServiceSelectFileSourceViewModel())
-        .asContent(in: self)
+
+        FileServiceSelectFileSourceView(viewModel: FileServiceSelectFileSourceViewModel(selectFileHandler: selectFileHandler))
+            .asContent(in: self)
     }
 }
 
