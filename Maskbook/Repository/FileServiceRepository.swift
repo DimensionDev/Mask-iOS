@@ -7,7 +7,7 @@ enum FileServiceRepository {
 
     static func getRecords<T: NSManagedObject & Managed>(
         pageOption: PageOption = .init(pageSize: 20, pageOffset: 0),
-        predicateBuilder builder: @escaping @autoclosure () -> NSPredicate? = nil ,
+        filterBy builder: @escaping @autoclosure () -> NSPredicate? = nil ,
         context: NSManagedObjectContext? = viewContext
     ) -> [T] {
         do {
@@ -28,18 +28,16 @@ enum FileServiceRepository {
         }
     }
 
-    static func updateRecord<T: NSManagedObject & Managed>(
-        predicateBuilder builder: @escaping @autoclosure () -> NSPredicate,
+    static func updateOrInsertRecord<T: NSManagedObject & Managed>(
+        filterBy builder: @escaping @autoclosure () -> NSPredicate,
         updateBy transform: @escaping (T) -> Void,
         context: NSManagedObjectContext = viewContext
     ) {
         context.performAndWait {
-            guard let record: T = getRecords(
+            let record: T = getRecords(
                 pageOption: .init(pageSize: 1, pageOffset: 0),
-                predicateBuilder: builder()
-            ).first else {
-                return
-            }
+                filterBy: builder()
+            ).first ?? T(context: context)
 
             transform(record)
 

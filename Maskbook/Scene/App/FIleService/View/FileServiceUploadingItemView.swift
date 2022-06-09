@@ -1,22 +1,22 @@
 import SwiftUI
 
-struct FileServiceUploadingItem {
+struct FileServiceUploadingItem: Equatable {
     init(
         fileName: String,
         state: FileServiceUploadingItem.State,
         totalBytes: Int,
         uploadedBytes: Int,
-        uploadDateText: String? = nil
+        uploadDate: Date? = nil
     ) {
         self.fileName = fileName
         self.state = state
         self.totalBytes = totalBytes
         self.uploadedBytes = uploadedBytes
-        self.uploadDateText = uploadDateText
+        self.uploadDate = uploadDate
     }
 
-    enum State: String {
-        case preparing
+    enum State: Int64 {
+        case preparing = 0
         case uploading
         case uploaded
         case failed
@@ -29,13 +29,17 @@ struct FileServiceUploadingItem {
             case .failed: return ""
             }
         }
+
+        var isUploaded: Bool {
+            self == .uploaded
+        }
     }
 
     let fileName: String
     let state: State
     let totalBytes: Int
     let uploadedBytes: Int
-    let uploadDateText: String?
+    let uploadDate: Date?
 
     func fileSizeText(of size: Int) -> String {
         if size == 0 { return "0.0 kb" }
@@ -71,13 +75,30 @@ struct FileServiceUploadingItem {
             return "\(uploadingText)/\(totalText)"
         }
     }
+
+    var uploadDateText: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale.current
+        formatter.dateFormat = "yyyy-MM-dd HH:mm::ss"
+
+        return formatter.string(from: uploadDate ?? Date())
+    }
 }
 
 struct FileServiceUploadingItemView: View {
-    @Binding var item: FileServiceUploadingItem
+    @Binding var item: FileServiceUploadingItem?
 
     var body: some View {
+        Group {
+            if let item = item {
+                content(of: item)
+            } else {
+                Color.clear
+            }
+        }
+    }
 
+    func content(of item: FileServiceUploadingItem) -> some View {
         VStack(alignment: .leading, spacing: 4) {
             HStack(spacing: 12) {
                 Image(Asset.Plugins.FileService.folder)
@@ -92,8 +113,8 @@ struct FileServiceUploadingItemView: View {
                         .lineLimit(1)
                         .multilineTextAlignment(.leading)
 
-                    if item.state == .uploaded, let date = item.uploadDateText {
-                        Text(date)
+                    if item.state == .uploaded, item.uploadDate.isSome {
+                        Text(item.uploadDateText)
                             .font(.mh7)
                             .foregroundColor(Asset.Colors.Text.normal)
                             .lineLimit(1)
@@ -170,20 +191,26 @@ struct FileServiceUploadingItemView: View {
     }
 
     private var progressView: some View {
-        GeometryReader { proxy in
-            Asset.Colors.Background.selected.asColor()
-                .cornerRadius(3)
-                .overlay(
-                    Asset.Colors.Public.success.asColor()
-                        .frame(width: proxy.size.width * item.progress)
-                        .cornerRadius(3),
-                    alignment: .leading
-                )
-                .frame(
-                    width: proxy.size.width
-                )
+        Group {
+            if let item = item {
+                GeometryReader { proxy in
+                    Asset.Colors.Background.selected.asColor()
+                        .cornerRadius(3)
+                        .overlay(
+                            Asset.Colors.Public.success.asColor()
+                                .frame(width: proxy.size.width * item.progress)
+                                .cornerRadius(3),
+                            alignment: .leading
+                        )
+                        .frame(
+                            width: proxy.size.width
+                        )
+                }
+                .frame(height: 6)
+            } else {
+                Color.clear
+            }
         }
-        .frame(height: 6)
     }
 
     func dropItem() {
@@ -226,7 +253,7 @@ extension FileServiceUploadingItem {
             state: .uploaded,
             totalBytes: 3072 * 1024,
             uploadedBytes: 3072 * 1024,
-            uploadDateText: "2012-09-40 12:12:10"
+            uploadDate: Date()
         )
     }
 }

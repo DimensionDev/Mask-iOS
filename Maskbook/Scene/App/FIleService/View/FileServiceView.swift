@@ -137,6 +137,9 @@ final class FileServiceOnboardViewModel: ObservableObject {
     @Published
     var searchText: String = ""
 
+    @Published
+    var uploadingItem: FileServiceUploadingItem?
+
     var showOnboard: Bool { items.isEmpty }
 
     var visibleItems: [String] {
@@ -151,6 +154,25 @@ final class FileServiceOnboardViewModel: ObservableObject {
 
     init() {
         let records: [UploadFile] = FileServiceRepository.getRecords()
+
+        $uploadingItem
+            .compactMap { $0 }
+            .removeAllDuplicates()
+            .filter(\.state.isUploaded)
+            .receive(on: DispatchQueue.main)
+            .sink { value in
+                FileServiceRepository.updateOrInsertRecord(
+                    filterBy: \UploadFile.name == value.fileName,
+                    updateBy: { (item: UploadFile) in
+                        item.name = value.fileName
+                        item.uploadState = value.state.rawValue
+                        item.uploadedDate = value.uploadDate
+//                        item.fileType =
+//                        item.content
+                    }
+                )
+            }
+            .store(in: &cancelableStorage)
     }
 
     func addRandomItem() {

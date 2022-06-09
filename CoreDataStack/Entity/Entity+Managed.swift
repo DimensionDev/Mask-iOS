@@ -536,7 +536,7 @@ extension PluginStorage: Managed {
     public static func predicate(pluginID: String) -> NSPredicate {
         \PluginStorage.pluginID == pluginID
     }
-    
+
     public static func predicate(keys: [String], pluginID: String) -> NSPredicate {
         NSCompoundPredicate(andPredicateWithSubpredicates: [
             \PluginStorage.key --> Set(keys),

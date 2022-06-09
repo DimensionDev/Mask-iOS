@@ -2,7 +2,6 @@ import SwiftUI
 import UIKit
 
 final class FileServiceViewController: BaseViewController {
-
     @InjectedProvider(\.mainCoordinator)
     private var coordinator
 
@@ -11,7 +10,6 @@ final class FileServiceViewController: BaseViewController {
         title = L10n.Scene.App.Plugins.fileService
         FileServiceView().asContent(in: self)
     }
-
 
     private func configUploadOption() {
         coordinator.present(

@@ -12,7 +12,7 @@ extension UploadFile {
     @NSManaged public var content: Data?
     @NSManaged public var uploadedDate: Date?
     @NSManaged public var uploadState: Int64
-
+    @NSManaged public var fileType: Int64
 }
 
 extension UploadFile : Identifiable {}
