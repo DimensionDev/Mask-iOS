@@ -16,7 +16,7 @@ class FileServiceSelectFileSourceViewModel {
     
     let selectFileHandler: FileServiceSelectFileHandler
     
-    func select(item: FileServiceSelectFileSourceViewModel.LocalFileSourceItem) {
+    func select(item: LocalFileSourceItem) {
         selectFileHandler.select(item: item)
     }
 }

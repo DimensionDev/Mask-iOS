@@ -38,6 +38,8 @@ access your camera";
 "Common.Alert.ExportPrivateKey.Title" = "Set up backup password ";
 "Common.Alert.FaceIdActivateFail.Description" = "Fail to enable Face id.";
 "Common.Alert.FaceIdActivateFail.Title" = "Activation fails";
+"Common.Alert.FileServiceFileTooLarge.Description" = "The file exceeds the size limit of 10.5 MB. ";
+"Common.Alert.FileServiceFileTooLarge.Title" = "File size is too large";
 "Common.Alert.IdentifyCodeScreenshotWarning.Description" = "Simply taking a screenshot of identity code is not safe.";
 "Common.Alert.IdentifyCodeScreenshotWarning.Title" = "Warning";
 "Common.Alert.KeychainAuthPrompt.Title" = "Authenticate to use your secrets";

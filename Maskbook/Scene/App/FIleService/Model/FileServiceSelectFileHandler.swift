@@ -13,15 +13,23 @@ import UIKit
 import WebExtension_Shim
 
 protocol FileServiceSelectFileDelegate {
-    func didGetImage(image: UIImage, fileURL: URL, fileName: String)
-    func didGetFile(url: URL)
+    func didGetFile(fileItem: FileServiceUploadFileItem)
+}
+
+struct FileServiceUploadFileItem {
+    let data: Data
+    let fileName: String
 }
 
 class FileServiceSelectFileHandler: NSObject {
+    
+    typealias Item = FileServiceSelectFileSourceViewModel.LocalFileSourceItem
+    
     init(delegate: FileServiceSelectFileDelegate) {
         self.delegate = delegate
     }
 
+    let fileSizeLimit = 11_010_048
     @InjectedProvider(\.mainCoordinator)
     private var coordinator
 
@@ -60,7 +68,7 @@ class FileServiceSelectFileHandler: NSObject {
         }
     }()
 
-    func select(item: FileServiceSelectFileSourceViewModel.LocalFileSourceItem) {
+    func select(item: Item) {
         coordinator.dismissTopViewController(animated: false) {
             switch item {
             case .camera:
@@ -75,18 +83,32 @@ class FileServiceSelectFileHandler: NSObject {
 
     func randomNameForImage() -> String {
         let randomString = UUID().uuidString
-        return "userImage" + String(randomString.prefix(5)) + ".jpg"
+        return "IMG" + String(randomString.prefix(5)) + ".jpg"
     }
 
     func saveImageToLocal(image: UIImage) {
         if let pngData = image.jpeg(UIImage.JPEGQuality.high), !pngData.isEmpty {
+            if Int64(pngData.count) > fileSizeLimit {
+                showFileTooLargeAlert()
+                return
+            }
             let fileName = randomNameForImage()
             let path = uploadFolder.appendingPathComponent(fileName)
             try? pngData.write(to: path)
-            delegate.didGetImage(image: image, fileURL: path, fileName: fileName)
+            let fileItem = FileServiceUploadFileItem(data: pngData, fileName: fileName)
+            delegate.didGetFile(fileItem: fileItem)
         } else {
             assertionFailure("can't get jpeg data from image")
         }
+    }
+    
+    func showFileTooLargeAlert() {
+        let alertController = AlertController(title: L10n.Common.Alert.FileServiceFileTooLarge.title,
+                                              message: L10n.Common.Alert.FileServiceFileTooLarge.description,
+                                              confirmButtonText: L10n.Common.Controls.ok,
+                                              imageType: .error)
+        coordinator.present(scene: .alertController(alertController: alertController),
+                            transition: .alertController(completion: nil))
     }
 
     func didGetImage(image: UIImage) {
@@ -94,7 +116,14 @@ class FileServiceSelectFileHandler: NSObject {
     }
 
     func didGetFile(url: URL) {
-        delegate.didGetFile(url: url)
+        let data = try? Data(contentsOf: url)
+        guard let data = data else { return }
+        if Int64(data.count) > fileSizeLimit {
+            showFileTooLargeAlert()
+            return
+        }
+        let fileItem = FileServiceUploadFileItem(data: data, fileName: url.lastPathComponent)
+        delegate.didGetFile(fileItem: fileItem)
     }
 }
 
@@ -130,6 +159,7 @@ extension FileServiceSelectFileHandler: PHPickerViewControllerDelegate {
             }
         }
     }
+    
 }
 
 extension FileServiceSelectFileHandler: UIImagePickerControllerDelegate & UINavigationControllerDelegate {

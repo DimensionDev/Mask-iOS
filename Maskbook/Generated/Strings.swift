@@ -228,6 +228,17 @@ enum L10n {
         }
       }
 
+      enum FileServiceFileTooLarge {
+        /// The file exceeds the size limit of 10.5 MB. 
+        static var description: String {
+          return L10n.tr("Localizable", "Common.Alert.FileServiceFileTooLarge.Description")
+        }
+        /// File size is too large
+        static var title: String {
+          return L10n.tr("Localizable", "Common.Alert.FileServiceFileTooLarge.Title")
+        }
+      }
+
       enum IdentifyCodeScreenshotWarning {
         /// Simply taking a screenshot of identity code is not safe.
         static var description: String {

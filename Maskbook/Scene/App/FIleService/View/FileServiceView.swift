@@ -171,16 +171,12 @@ final class FileServiceOnboardViewModel: ObservableObject {
     }
     
     func addFromLocalfiles() {
-        coordinator.present(scene: .fileServiceLocalFileSource(selectFileHandler: selectFileHandler), transition: .panModel(animated: true))
+        coordinator.present(scene: .fileServiceLocalFileSource(selectFileHandler: selectFileHandler), transition: .panModel())
     }
 }
 
 extension FileServiceOnboardViewModel: FileServiceSelectFileDelegate {
-    func didGetImage(image: UIImage, fileURL: URL, fileName: String) {
-        
-    }
-    
-    func didGetFile(url: URL) {
+    func didGetFile(fileItem: FileServiceUploadFileItem) {
         
     }
 }

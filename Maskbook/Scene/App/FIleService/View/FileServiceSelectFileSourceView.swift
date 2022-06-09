@@ -9,12 +9,14 @@
 import SwiftUI
 
 struct FileServiceSelectFileSourceView: View {
+    typealias Item = FileServiceSelectFileSourceViewModel.LocalFileSourceItem
+    
     let viewModel: FileServiceSelectFileSourceViewModel
 
     var body: some View {
         VStack {
             Spacer().frame(height: 64)
-            ForEach(FileServiceSelectFileSourceViewModel.LocalFileSourceItem.allCases, id: \.self) { item in
+            ForEach(Item.allCases, id: \.self) { item in
                 localFileSourceItemView(item: item)
             }
             Spacer().frame(height: 20)
@@ -24,7 +26,7 @@ struct FileServiceSelectFileSourceView: View {
         .padding(.horizontal, 20)
     }
 
-    func localFileSourceItemView(item: FileServiceSelectFileSourceViewModel.LocalFileSourceItem) -> some View {
+    func localFileSourceItemView(item: Item) -> some View {
         HStack {
             Image(item.imageName)
                 .resizable()
@@ -62,7 +64,7 @@ struct FileServiceSelectFileSourceView: View {
             Spacer()
         }
         .background(
-            Asset.Colors.Public.infoBg.asColor().opacity(1)
+            Asset.Colors.Public.infoBg.asColor()
                 .clipShape(RoundedRectangle(cornerRadius: 8.0, style: .continuous))
         )
     }
