@@ -53,7 +53,7 @@ class SearchPersonaViewModel{
                 return publisher
             }
             .sink(receiveValue: {[weak self] profiles in
-                self?.profileRecordsSubject.value = profiles.compactMap{ $0.linkedPersona}
+                self?.profileRecordsSubject.value = profiles.compactMap{ $0.linkedPersona }
             })
             .store(in: &disposeBag)
         
