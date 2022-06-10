@@ -32,15 +32,6 @@ class FileServiceSelectFileHandler: NSObject {
     @InjectedProvider(\.mainCoordinator)
     private var coordinator
 
-    var uploadFolder: URL {
-        let path = URL.documents.appendingPathComponent("fileServiceUpload")
-        var isDirectory: ObjCBool = true
-        if !FileManager.default.fileExists(atPath: path.path, isDirectory: &isDirectory) {
-            try? FileManager.default.createDirectory(at: path, withIntermediateDirectories: true)
-        }
-        return path
-    }
-
     var delegate: FileServiceSelectFileDelegate
     private(set) lazy var imagePicker: PHPickerViewController = {
         var configuration = PHPickerConfiguration()
@@ -92,8 +83,6 @@ class FileServiceSelectFileHandler: NSObject {
                 return
             }
             let fileName = randomNameForImage()
-            let path = uploadFolder.appendingPathComponent(fileName)
-            try? pngData.write(to: path)
             let fileItem = FileServiceUploadFileItem(data: pngData, fileName: fileName)
             delegate.didGetFile(fileItem: fileItem)
         } else {
@@ -145,6 +134,7 @@ class FileServiceSelectFileHandler: NSObject {
 enum ImageLoadError: Error {
     case cannotLoad
 }
+
 extension ImageLoadError: LocalizedError {
     public var errorDescription: String? {
         switch self {
@@ -156,33 +146,30 @@ extension ImageLoadError: LocalizedError {
 
 extension FileServiceSelectFileHandler: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        Task {
-            if let pickerResult = results.first {
-                let imageResult = await loadImage(result: pickerResult)
-                await MainActor.run { [weak self] in
-                    guard let self = self else { return }
-                    switch imageResult {
-                    case let .success(image):
-                        picker.dismiss(animated: true, completion: {
-                            self.didGetImage(image: image)
-                        })
-                    case let .failure(error):
-                        picker.dismiss(animated: true, completion: {
-                            let alertController = AlertController(
-                                title: error.localizedDescription,
-                                message: "",
-                                confirmButtonText: L10n.Common.Controls.done,
-                                imageType: .error)
-                            self.coordinator.present(
-                                scene: .alertController(alertController: alertController),
-                                transition: .alertController(completion: nil))
-                        })
-                    }
-                }
-            } else {
-                await MainActor.run {
-                    picker.dismiss(animated: true, completion: nil)
-                }
+        Task { @MainActor in
+            guard let pickerResult = results.first else {
+                picker.dismiss(animated: true, completion: nil)
+                return
+            }
+            let imageResult = await Task.detached {
+                await self.loadImage(result: pickerResult)
+            }.value
+            
+            switch imageResult {
+            case let .success(image):
+                self.didGetImage(image: image)
+                picker.dismiss(animated: true, completion: nil)
+            case let .failure(error):
+                picker.dismiss(animated: true, completion: {
+                    let alertController = AlertController(
+                        title: error.localizedDescription,
+                        message: "",
+                        confirmButtonText: L10n.Common.Controls.done,
+                        imageType: .error)
+                    self.coordinator.present(
+                        scene: .alertController(alertController: alertController),
+                        transition: .alertController(completion: nil))
+                })
             }
         }
     }
