@@ -87,7 +87,6 @@ class Coordinator {
         case selectItemViewController(viewModel: SelectItemViewModelProtocol)
         case selectActionViewController(viewModel: SelectActionViewModelProtocol)
         case alertController(alertController: AlertController)
-        case viewController(viewController: UIViewController)
         case activityViewController(
             activityViewController: UIActivityViewController,
             sourceView: UIView?,
@@ -449,9 +448,6 @@ extension Coordinator {
                 )
             }
             return alertController
-        
-        case let .viewController(viewController):
-            return viewController
 
         case let .activityViewController(activityViewController, sourceView, barButtonItem):
             activityViewController.popoverPresentationController?.sourceView = sourceView

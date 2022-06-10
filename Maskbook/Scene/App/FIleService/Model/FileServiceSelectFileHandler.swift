@@ -145,6 +145,14 @@ class FileServiceSelectFileHandler: NSObject {
 enum ImageLoadError: Error {
     case cannotLoad
 }
+extension ImageLoadError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .cannotLoad:
+            return "Cannot load image"
+        }
+    }
+}
 
 extension FileServiceSelectFileHandler: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
@@ -205,18 +213,14 @@ extension FileServiceSelectFileHandler: UIDocumentPickerDelegate {
 
 extension FileServiceSelectFileHandler {
     func selectFromPhotosAction() {
-        coordinator.present(scene: .viewController(viewController: imagePicker),
-                            transition: .modal(wapperNav: false,
-                                               animated: true))
+        coordinator.topViewController?.present(imagePicker, animated: true)
     }
 
     func takePhotoAction() {
         ScannerPermission.authorizeCameraWith { [weak self] isAuthorize in
             guard let self = self else { return }
             if isAuthorize {
-                self.coordinator.present(scene: .viewController(viewController: self.cameraController),
-                                         transition: .modal(wapperNav: false,
-                                                            animated: true))
+                self.coordinator.topViewController?.present(self.cameraController, animated: true)
             } else {
                 ScannerPermission.showCameraAccessAlert(coordinator: self.coordinator)
             }
@@ -225,8 +229,6 @@ extension FileServiceSelectFileHandler {
 
     func selectFormFilesAction() {
         documentPicker.delegate = self
-        coordinator.present(scene: .viewController(viewController: documentPicker),
-                            transition: .modal(wapperNav: false,
-                                               animated: true))
+        coordinator.topViewController?.present(documentPicker, animated: true)
     }
 }
