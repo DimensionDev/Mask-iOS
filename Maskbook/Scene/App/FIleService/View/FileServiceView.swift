@@ -30,7 +30,7 @@ struct FileServiceView: View {
 
     private var uploadButton: some View {
         Button(
-            action: { viewModel.addRandomItem() },
+            action: { viewModel.addFromLocalfiles() },
             label: {
                 LinearGradient(
                     stops: [
@@ -146,6 +146,11 @@ final class FileServiceOnboardViewModel: ObservableObject {
     }
 
     private var cancelableStorage: Set<AnyCancellable> = []
+    
+    @InjectedProvider(\.mainCoordinator)
+    private var coordinator
+    
+    private lazy var selectFileHandler = FileServiceSelectFileHandler(delegate: self)
 
     init() {}
 
@@ -163,6 +168,16 @@ final class FileServiceOnboardViewModel: ObservableObject {
         items = Set(newItems)
             .union(items)
             .map { $0 }
+    }
+    
+    func addFromLocalfiles() {
+        coordinator.present(scene: .fileServiceLocalFileSource(selectFileHandler: selectFileHandler), transition: .panModel())
+    }
+}
+
+extension FileServiceOnboardViewModel: FileServiceSelectFileDelegate {
+    func didGetFile(fileItem: FileServiceUploadFileItem) {
+        
     }
 }
 

@@ -228,6 +228,17 @@ enum L10n {
         }
       }
 
+      enum FileServiceFileTooLarge {
+        /// The file exceeds the size limit of 10.5 MB. 
+        static var description: String {
+          return L10n.tr("Localizable", "Common.Alert.FileServiceFileTooLarge.Description")
+        }
+        /// File size is too large
+        static var title: String {
+          return L10n.tr("Localizable", "Common.Alert.FileServiceFileTooLarge.Title")
+        }
+      }
+
       enum IdentifyCodeScreenshotWarning {
         /// Simply taking a screenshot of identity code is not safe.
         static var description: String {
@@ -694,6 +705,25 @@ enum L10n {
       /// Swarm
       static var swarm: String {
         return L10n.tr("Localizable", "Plugins.FileService.Swarm")
+      }
+
+      enum LocalFileSource {
+        /// Take Photos
+        static var takePhotos: String {
+          return L10n.tr("Localizable", "Plugins.FileService.LocalFileSource.TakePhotos")
+        }
+        /// Upload File
+        static var uploadFile: String {
+          return L10n.tr("Localizable", "Plugins.FileService.LocalFileSource.UploadFile")
+        }
+        /// Upload Photos
+        static var uploadPhotos: String {
+          return L10n.tr("Localizable", "Plugins.FileService.LocalFileSource.UploadPhotos")
+        }
+        /// The size limit is 10.5MB\nThe upload can’t be cancelled.
+        static var uploadTips: String {
+          return L10n.tr("Localizable", "Plugins.FileService.LocalFileSource.UploadTips")
+        }
       }
 
       enum Onboard {
