@@ -179,6 +179,10 @@ extension FileServiceSelectFileHandler: PHPickerViewControllerDelegate {
                         })
                     }
                 }
+            } else {
+                await MainActor.run {
+                    picker.dismiss(animated: true, completion: nil)
+                }
             }
         }
     }
