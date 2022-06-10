@@ -10,7 +10,6 @@ import UIKit
 import UStack
 
 class SelectContactTableViewCell: UITableViewCell {
-    
     lazy var bgView: UIView = {
         let view = UIView()
         view.backgroundColor = Asset.Colors.Background.normal.color
@@ -61,7 +60,7 @@ class SelectContactTableViewCell: UITableViewCell {
         contentLabel
     }
     
-    private lazy var hStackView = HStackView (alignment: .center){
+    private lazy var hStackView = HStackView(alignment: .center) {
         Spacer(width: 14)
         checkImageView
         Spacer(width: 10)
@@ -81,6 +80,7 @@ class SelectContactTableViewCell: UITableViewCell {
         setupUI()
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -95,11 +95,11 @@ class SelectContactTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func update(index :Int, selected: Bool, viewModel: SelectContactViewModel){
+    func update(index: Int, selected: Bool, viewModel: SelectContactViewModel) {
         titleLabel.text = viewModel.titles[index]
         contentLabel.text = viewModel.content[index]
         checkImageView.image = selected ? Asset.Icon.Cell.cellTwitterCheck.image : Asset.Icon.Cell.cellUncheck.image
-        bgView.layer.borderColor = selected ? Asset.Colors.Twitter.blue.color.cgColor :Asset.Colors.Twitter.second.color.cgColor
+        bgView.layer.borderColor = selected ? Asset.Colors.Twitter.blue.color.cgColor : Asset.Colors.Twitter.second.color.cgColor
         arrowImageView.isHidden = viewModel.cellTypes[index] == .normal
     }
     

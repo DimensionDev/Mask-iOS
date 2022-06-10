@@ -12,8 +12,7 @@ import CoreDataStack
 import Foundation
 import UIKit
 
-class SearchPersonaViewModel{
-
+class SearchPersonaViewModel {
     private var disposeBag = Set<AnyCancellable>()
 
     @InjectedProvider(\.personaManager)
@@ -34,10 +33,11 @@ class SearchPersonaViewModel{
         }()
         return FetchedResultsPublisher(fetchResultController: fetchResultController)
     }
+
     var dataSource = CurrentValueSubject<[PersonaRecord], Never>([])
     var selectedProfile = CurrentValueSubject<[PersonaRecord], Never>([])
     var searchString = CurrentValueSubject<String, Never>("")
-    
+
     init() {
         personaManager
             .currentPersona
@@ -52,11 +52,11 @@ class SearchPersonaViewModel{
                 self?.profileRecordPublisher = publisher
                 return publisher
             }
-            .sink(receiveValue: {[weak self] profiles in
-                self?.profileRecordsSubject.value = profiles.compactMap{ $0.linkedPersona }
+            .sink(receiveValue: { [weak self] profiles in
+                self?.profileRecordsSubject.value = profiles.compactMap { $0.linkedPersona }
             })
             .store(in: &disposeBag)
-        
+
         Publishers.CombineLatest(searchString, profileRecordsSubject)
             .sink { [weak self] _ in
                 guard let self = self else { return }
@@ -74,6 +74,6 @@ class SearchPersonaViewModel{
                     }
             }
             .store(in: &disposeBag)
-             self.searchString.value = ""
+        searchString.value = ""
     }
 }
