@@ -34,7 +34,6 @@ enum PluginType: String {
 
     /// plugin encrytption key
     var postEncryptionKey: String {
-
         let index: Int =  {
             switch self {
             case .ito: return 0

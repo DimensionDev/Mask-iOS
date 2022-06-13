@@ -16,24 +16,30 @@ enum EncryptionVersion {
 
 enum PluginMeta: Codable {
     case redPacket(RedPacketPayload)
+    case fileService(FileServiceUploadResult)
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
         case let .redPacket(value):
             try container.encode(value)
+
+        case .fileService:
+            return
         }
     }
 
     var plugin: PluginType {
         switch self {
         case .redPacket: return .luckyDrop
+        case .fileService: return .fileService
         }
     }
 
     var key: String {
         switch self {
         case .redPacket: return PluginType.luckyDrop.postEncryptionKey
+        case .fileService: return PluginType.fileService.postEncryptionKey
         }
     }
 
@@ -54,6 +60,9 @@ enum PluginMeta: Codable {
             }
             let title = "A Lucky Drop with \(total) $\(symbol) from \(senderName)"
             return title
+
+        case let .fileService(value):
+            return "Attached File: \(value.name)"
         }
     }
 }
@@ -62,6 +71,7 @@ extension PluginMeta: Identifiable {
     var id: String {
         switch self {
         case let .redPacket(value): return "\(value.basic?.txid ?? "")"
+        case .fileService: return "\(UUID())"
         }
     }
 }

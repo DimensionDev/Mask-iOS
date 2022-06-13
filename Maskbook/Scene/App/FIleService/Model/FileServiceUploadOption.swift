@@ -46,4 +46,29 @@ struct FileServiceUploadOption {
         self.service = service
         self.option = option
     }
+
+    init?(_ stringValue: String) {
+        let components = stringValue.components(separatedBy: ",")
+        guard let service = Service(rawValue: components.first ?? ""),
+              let option = Option(rawValue: components.last ?? "") else {
+            return nil
+        }
+
+        self.service = service
+        self.option = option
+    }
+
+    func asString() -> String {
+        [service.rawValue, option.rawValue].joined(separator: ",")
+    }
+}
+
+extension FileServiceUploadOption {
+    static var `default`: FileServiceUploadOption {
+        .init(service: .arweave, option: .encrypt)
+    }
+
+    static var defaultOption: String {
+        [Service.arweave.rawValue, Option.encrypt.rawValue].joined(separator: ",")
+    }
 }

@@ -560,6 +560,6 @@ extension PluginStorage: Managed {
 
 extension UploadFile: Managed {
     public static var defaultSortDescriptors: [NSSortDescriptor] {
-        [NSSortDescriptor(keyPath: \UploadFile.uploadedDate, ascending: false)]
+        [NSSortDescriptor(keyPath: \UploadFile.createdAt, ascending: false)]
     }
 }

@@ -6,7 +6,7 @@ enum FileServiceRepository {
     static let viewContext = AppContext.shared.coreDataStack.persistentContainer.viewContext
 
     static func getRecords<T: NSManagedObject & Managed>(
-        pageOption: PageOption = .init(pageSize: 20, pageOffset: 0),
+        pageOption: PageOption? = nil,
         filterBy builder: @escaping @autoclosure () -> NSPredicate? = nil ,
         context: NSManagedObjectContext? = viewContext
     ) -> [T] {
@@ -18,8 +18,10 @@ enum FileServiceRepository {
                 fetchRequest.predicate = predicate
             }
 
-            fetchRequest.fetchLimit = pageOption.pageSize
-            fetchRequest.fetchOffset = pageOption.pageOffset
+            if let pageOption = pageOption {
+                fetchRequest.fetchLimit = pageOption.pageSize
+                fetchRequest.fetchOffset = pageOption.pageOffset
+            }
 
             let records = try queryContext.fetch(fetchRequest)
             return records
@@ -28,19 +30,22 @@ enum FileServiceRepository {
         }
     }
 
+    static func getRecords<T: NSManagedObject & Managed, V>(
+        pageOption: PageOption? = nil,
+        transform: @escaping (T) -> V,
+        filterBy builder: @escaping @autoclosure () -> NSPredicate? = nil,
+        context: NSManagedObjectContext? = viewContext
+    ) -> [V] {
+        let results: [T] = getRecords(pageOption: pageOption, filterBy: builder(), context: context)
+        return results.map(transform)
+    }
+
     static func updateOrInsertRecord<T: NSManagedObject & Managed>(
-        filterBy builder: @escaping @autoclosure () -> NSPredicate,
         updateBy transform: @escaping (T) -> Void,
         context: NSManagedObjectContext = viewContext
     ) {
         context.performAndWait {
-            let record: T = getRecords(
-                pageOption: .init(pageSize: 1, pageOffset: 0),
-                filterBy: builder()
-            ).first ?? T(context: context)
-
-            transform(record)
-
+            transform(T(context: context))
             try? context.saveOrRollback()
         }
     }
@@ -62,5 +67,55 @@ enum FileServiceRepository {
             context.delete(record)
             try? context.saveOrRollback()
         }
+    }
+
+    static func deleteAll<T: NSManagedObject & Managed>(
+        object type: T.Type = T.self,
+        context: NSManagedObjectContext = viewContext
+    ) {
+        context.performAndWait {
+            let records: [T] = getRecords(
+                pageOption: .init(pageSize: 20, pageOffset: 0),
+                context: context
+            )
+
+            for record in records {
+                context.delete(record)
+            }
+            try? context.saveOrRollback()
+        }
+    }
+}
+
+extension UploadFile {
+    func asStructItem() -> FileServiceUploadingItem {
+        .init(
+            fileName: name ?? "",
+            provider: provider ?? "",
+            state: .init(rawValue: uploadState) ?? .failed,
+            content: content ?? Data(),
+            uploadedBytes: 0,
+            uploadDate: createdAt,
+            tx: .init(
+                id: id ?? "",
+                key: key ?? "",
+                landingTxID: landingTxID ?? "",
+                payloadTxID: payloadTxID ?? "",
+                progress: 0
+            )
+        )
+    }
+
+    func update(from item: FileServiceUploadingItem) {
+        self.name = item.fileName
+        self.provider = item.provider
+        self.uploadState = item.state.rawValue
+        self.createdAt = item.uploadDate
+        self.fileType = item.fileType.rawValue
+        self.content = item.content
+        self.id = item.tx?.id
+        self.key = item.tx?.key
+        self.landingTxID = item.tx?.landingTxID
+        self.payloadTxID = item.tx?.payloadTxID
     }
 }

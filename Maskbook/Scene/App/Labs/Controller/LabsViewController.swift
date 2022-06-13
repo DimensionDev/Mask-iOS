@@ -50,7 +50,7 @@ final class LabsViewController: BaseViewController {
                 case .fileService:
                     self.coordinator.present(
                         scene: .fileService,
-                        transition: .detail()
+                        transition: .modal()
                     )
                 default: break
                 }

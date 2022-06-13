@@ -484,11 +484,15 @@ internal enum Asset {
   internal enum Plugins {
     internal enum FileService {
       internal static let folder = ImageAsset(name: "Plugins/FileService/folder")
+      internal static let infoCircle = ImageAsset(name: "Plugins/FileService/infoCircle")
       internal static let onboardFour = ImageAsset(name: "Plugins/FileService/onboardFour")
       internal static let onboardOne = ImageAsset(name: "Plugins/FileService/onboardOne")
       internal static let onboardThree = ImageAsset(name: "Plugins/FileService/onboardThree")
       internal static let onboardTwo = ImageAsset(name: "Plugins/FileService/onboardTwo")
       internal static let uploadBackground = ImageAsset(name: "Plugins/FileService/uploadBackground")
+      internal static let uploadFile = ImageAsset(name: "Plugins/FileService/uploadFile")
+      internal static let uplodaCamera = ImageAsset(name: "Plugins/FileService/uplodaCamera")
+      internal static let uplodaPhotos = ImageAsset(name: "Plugins/FileService/uplodaPhotos")
     }
     internal enum LuckyDrop {
       internal enum Icon {
