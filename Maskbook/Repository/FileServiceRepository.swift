@@ -41,11 +41,26 @@ enum FileServiceRepository {
 
             transform(record)
 
-            try? viewContext.saveOrRollback()
+            try? context.saveOrRollback()
         }
     }
 
-    static func predicate(byName name: String) -> NSPredicate {
-        \UploadFile.name == name
+    static func delete<T: NSManagedObject & Managed>(
+        object type: T.Type = T.self,
+        filterBy builder: @escaping @autoclosure () -> NSPredicate,
+        context: NSManagedObjectContext = viewContext
+    ) {
+        context.performAndWait {
+            guard let record: T = getRecords(
+                pageOption: .init(pageSize: 1, pageOffset: 0),
+                filterBy: builder(),
+                context: context
+            ).first else {
+                return
+            }
+
+            context.delete(record)
+            try? context.saveOrRollback()
+        }
     }
 }

@@ -190,6 +190,13 @@ final class FileServiceOnboardViewModel: ObservableObject {
             .union(items)
             .map { $0 }
     }
+
+    func remove(_ item: FileServiceUploadingItem) {
+        FileServiceRepository.delete(
+            object: UploadFile.self,
+            filterBy: \UploadFile.name == item.fileName
+        )
+    }
 }
 
 struct FileServiceView_Preview: PreviewProvider {
