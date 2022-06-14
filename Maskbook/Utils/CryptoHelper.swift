@@ -50,6 +50,19 @@ enum Crypto {
         }
         return (key, iv)
     }
+    
+    // generate PBKDF2 key
+    static func generateKeyWith(_ passphrase: [UInt8], salt: [UInt8]) throws -> [UInt8]? {
+        guard let key = try? PKCS5.PBKDF2(
+            password: passphrase,
+            salt: salt,
+            iterations: 1_000,
+            keyLength: 32,
+            variant: .sha2(SHA2.Variant.sha256)).calculate() else {
+            return nil
+        }
+        return key
+    }
 
     static func generateKeyWith(_ password: String, iv: [UInt8]) throws -> [UInt8]? {
         // commend line below to make Unit tests finish fast.
