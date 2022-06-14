@@ -64,7 +64,7 @@ target 'Maskbook' do
   pod 'Pika', '0.1.8'
 
   pod 'Firebase/Analytics'
-  
+  pod 'JOSESwift', '~> 2.3'
   target 'MaskbookTests' do
     inherit! :search_paths
     # Pods for testing

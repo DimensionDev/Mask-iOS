@@ -102,6 +102,7 @@ PODS:
     - GoogleUtilities/Logger
   - Introspect (0.1.2)
   - IQKeyboardManagerSwift (6.3.0)
+  - JOSESwift (2.4.0)
   - KeychainAccess (4.2.2)
   - Kingfisher (7.2.0)
   - KMPageControl (0.0.3)
@@ -184,6 +185,7 @@ DEPENDENCIES:
   - Firebase/Analytics
   - FLEX
   - IQKeyboardManagerSwift (= 6.3.0)
+  - JOSESwift (~> 2.3)
   - KeychainAccess (~> 4.2)
   - Kingfisher (~> 7.0)
   - KMPageControl (~> 0.0.2)
@@ -230,6 +232,7 @@ SPEC REPOS:
     - GoogleUtilities
     - Introspect
     - IQKeyboardManagerSwift
+    - JOSESwift
     - KeychainAccess
     - Kingfisher
     - KMPageControl
@@ -309,6 +312,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: 684ee790a24f73ebb2d1d966e9711c203f2a4237
   Introspect: 85a29d2c5ee4d3d15469ad0b75fd8839f3e72674
   IQKeyboardManagerSwift: a8228c257614af98743b4cd8584637025f36358f
+  JOSESwift: 7ff178bb9173ff42c6e990929a9f2fa702a34f69
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
   Kingfisher: 3ac0b75b155cabc0e544877d1a4deea29feece92
   KMPageControl: a64de2397e18d277434f553ed2222f62aad3fa28
@@ -340,6 +344,6 @@ SPEC CHECKSUMS:
   WebExtension-Shim: 11b071466c53f42097291eb176cf9bcc5fb9b050
   ZIPFoundation: ae5b4b813d216d3bf0a148773267fff14bd51d37
 
-PODFILE CHECKSUM: 5dbde9cbeae577812c3b5962db8a8b0288c45e8f
+PODFILE CHECKSUM: 1f352612836cc1f3c6047f21f4ea47f443f5cc54
 
 COCOAPODS: 1.11.3

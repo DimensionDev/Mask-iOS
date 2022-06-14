@@ -19,6 +19,14 @@ protocol FileServiceSelectFileDelegate {
 struct FileServiceUploadFileItem {
     let data: Data
     let fileName: String
+    
+    var fileNameWithoutExt: String {
+        return fileName.components(separatedBy:".").first ?? fileName
+    }
+    
+    var fileExt: String? {
+        return fileName.components(separatedBy:".").last
+    }
 }
 
 class FileServiceSelectFileHandler: NSObject {
@@ -52,7 +60,7 @@ class FileServiceSelectFileHandler: NSObject {
 
     private(set) lazy var documentPicker: UIDocumentPickerViewController = {
         if #available(iOS 15.0, *) {
-            return UIDocumentPickerViewController(forOpeningContentTypes: [.data])
+            return UIDocumentPickerViewController(forOpeningContentTypes: [.text,.data, .item, .jpeg, .pdf, .png])
         } else {
             return UIDocumentPickerViewController(documentTypes: ["public.data"], in: .open)
         }

@@ -139,6 +139,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         FirebaseApp.configure()
+        
+        Task {
+            let fileItem = FileServiceUploadFileItem(data: "<h1>Hello World!</h1>".data(using: .utf8)!, fileName: "123.zip")
+            let data = try await ArweaveUploader().upload(fileItem: fileItem)
+        }
         return true
     }
     

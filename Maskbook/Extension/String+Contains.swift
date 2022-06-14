@@ -21,4 +21,8 @@ extension String {
         return self
       }
     }
+    
+    var uint8Array: [UInt8] {
+        Array(utf8)
+    }
 }

@@ -152,6 +152,8 @@ final class FileServiceOnboardViewModel: ObservableObject {
     
     private lazy var selectFileHandler = FileServiceSelectFileHandler(delegate: self)
 
+    private lazy var arweaveUploader = ArweaveUploader()
+    
     init() {}
 
     func addRandomItem() {
@@ -177,7 +179,10 @@ final class FileServiceOnboardViewModel: ObservableObject {
 
 extension FileServiceOnboardViewModel: FileServiceSelectFileDelegate {
     func didGetFile(fileItem: FileServiceUploadFileItem) {
-        
+        Task {
+            let data = try await arweaveUploader.upload(fileItem:fileItem)
+            print(data)
+        }
     }
 }
 
