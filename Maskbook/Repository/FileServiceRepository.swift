@@ -94,6 +94,7 @@ extension UploadFile {
             content: Data(),
             uploadedBytes: 0,
             uploadDate: createdAt,
+            mime: nil, // use nil as all UploadFile is uploaded
             tx: FileServiceTranscation(
                 id: id ?? "",
                 key: key ?? "",

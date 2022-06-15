@@ -64,9 +64,7 @@ final class FileServiceViewModel: ObservableObject {
         $draftItem
             .compactMap { $0 }
             .removeDuplicates()
-            .filter {
-                $0.state == .failed || $0.state == .uploaded
-            }
+            .filter { $0.state == .uploaded }
             .receive(on: DispatchQueue.main)
             .sink { (value: FileServiceUploadingItem) in
                 FileServiceRepository.updateOrInsertRecord(
@@ -162,8 +160,10 @@ final class FileServiceViewModel: ObservableObject {
     }
 
     private func chooseUploader(by option: FileServiceUploadOption) -> any FileServiceUploadHandler {
-        // TODO: choose implmentation
-        MockUploadingHandler()
+        switch option.service {
+        case .arweave: return ArweaveUploadHandler()
+        case .ipfs: return IPFSUploadHandler()
+        }
     }
 }
 
