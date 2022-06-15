@@ -541,7 +541,7 @@ enum L10n {
       static var dontAllow: String {
         return L10n.tr("Localizable", "Common.Controls.DontAllow")
       }
-      /// download
+      /// Download
       static var download: String {
         return L10n.tr("Localizable", "Common.Controls.Download")
       }
@@ -596,6 +596,10 @@ enum L10n {
       /// Ok
       static var ok: String {
         return L10n.tr("Localizable", "Common.Controls.Ok")
+      }
+      /// Post to twitter
+      static var postToTwitter: String {
+        return L10n.tr("Localizable", "Common.Controls.PostToTwitter")
       }
       /// Remind me later
       static var remindMeLater: String {

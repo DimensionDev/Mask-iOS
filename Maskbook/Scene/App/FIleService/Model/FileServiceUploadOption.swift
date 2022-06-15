@@ -2,15 +2,22 @@ import Foundation
 
 struct FileServiceUploadOption {
     enum Service: String, Hashable, CaseIterable, Identifiable {
-        case arweave = "Arweave"
-        case ipfs = "IPFS"
-        case swarm = "Swarm"
+        case arweave
+        case ipfs
+//        case swarm
 
         var options: [Option] {
             switch self {
             case .arweave: return [.encrypt, .mesoncdn]
             case .ipfs: return [.encrypt]
-            case .swarm: return [.encrypt]
+//            case .swarm: return [.encrypt]
+            }
+        }
+
+        var title: String {
+            switch self {
+            case .arweave: return "Arweave"
+            case .ipfs: return "IPFS"
             }
         }
 
@@ -31,44 +38,46 @@ struct FileServiceUploadOption {
         var id: String { self.rawValue }
     }
 
-    var service: Service {
-        didSet {
-            // set option to encrypt when service change
-            if option != .encrypt {
-                option = .encrypt
-            }
-        }
-    }
+    var service: Service
+    var encrypted: Bool
+    var useMesonCDN: Bool
 
-    var option: Option
-
-    init(service: Service = .arweave, option: Option = .encrypt) {
+    init(
+        service: Service = .arweave,
+        encrypted: Bool = true,
+        useMesonCDN: Bool = false
+    ) {
         self.service = service
-        self.option = option
+        self.encrypted = encrypted
+        self.useMesonCDN = useMesonCDN
     }
 
     init?(_ stringValue: String) {
         let components = stringValue.components(separatedBy: ",")
-        guard let service = Service(rawValue: components.first ?? ""),
-              let option = Option(rawValue: components.last ?? "") else {
+
+        guard components.count == 3,
+              let service = Service(rawValue: components.first ?? ""),
+              let encrypted = Bool.init(components[1]),
+              let useMesonCDN = Bool.init(components.last ?? "") else {
             return nil
         }
 
         self.service = service
-        self.option = option
+        self.encrypted = encrypted
+        self.useMesonCDN = useMesonCDN
     }
 
     func asString() -> String {
-        [service.rawValue, option.rawValue].joined(separator: ",")
+        "\(self.service.rawValue),\(encrypted ? "1" : "0"),\(useMesonCDN ? "1" : "0")"
     }
 }
 
 extension FileServiceUploadOption {
     static var `default`: FileServiceUploadOption {
-        .init(service: .arweave, option: .encrypt)
+        .init(service: .arweave)
     }
 
     static var defaultOption: String {
-        [Service.arweave.rawValue, Option.encrypt.rawValue].joined(separator: ",")
+        "\(Service.arweave.rawValue),\("1"),\("0")"
     }
 }

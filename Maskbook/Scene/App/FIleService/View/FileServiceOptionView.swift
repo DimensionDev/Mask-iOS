@@ -22,7 +22,7 @@ struct FileServiceOptionView: View {
                 ) {
                     Section {
                         ForEach(Service.allCases) { item in
-                            Row<Service>(title: item.rawValue, item: item, style: .service, selection: $fileServiceOption.service)
+                            Row<Service>(title: item.title, item: item, style: .service, selection: $fileServiceOption.service)
                         }
                     } header: {
                         Text(L10n.Plugins.FileService.serviceTitle)
@@ -33,14 +33,18 @@ struct FileServiceOptionView: View {
                     }
 
                     Section {
-                        ForEach(fileServiceOption.service.options) { item in
-                            Row<Option>(
-                                title: item.title,
-                                item: item,
-                                style: .option,
-                                selection: $fileServiceOption.option
+                        SelectionRow(
+                            title: Option.encrypt.title,
+                            selected: $fileServiceOption.encrypted
+                        )
+
+                        if fileServiceOption.service == .arweave {
+                            SelectionRow(
+                                title: Option.mesoncdn.title,
+                                selected: $fileServiceOption.useMesonCDN
                             )
                         }
+
                     } header: {
                         Text(L10n.Plugins.FileService.otherOption)
                             .font(.bh3)
@@ -116,6 +120,34 @@ fileprivate struct Row<Selection: Equatable>: View {
                         ? Asset.Images.Scene.WalletList.check.asImage()
                         : Asset.Images.Scene.WalletList.unchecked.asImage()
                     }
+                }
+                .padding(.horizontal, 12)
+            )
+    }
+}
+
+fileprivate struct SelectionRow: View {
+    let title: String
+
+    @Binding var selected: Bool
+
+    var body: some View {
+        RoundedRectangle(cornerRadius: 12)
+            .onTapGesture {
+                selected.toggle()
+            }
+            .foregroundColor(Asset.Colors.Background.dark.asColor())
+            .frame(height: 56)
+            .overlay(
+                HStack(spacing: 4) {
+                    Text(title)
+                        .font(.bh5)
+                        .foregroundColor(Asset.Colors.Text.dark)
+                        .horizontallyFilled()
+
+                    selected
+                    ? Asset.Images.Scene.WalletList.check.asImage()
+                    : Asset.Images.Scene.WalletList.unchecked.asImage()
                 }
                 .padding(.horizontal, 12)
             )

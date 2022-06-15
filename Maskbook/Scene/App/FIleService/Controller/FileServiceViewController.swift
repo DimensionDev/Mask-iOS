@@ -21,6 +21,7 @@ final class FileServiceViewController: BaseViewController {
             switch action {
             case .choseFile: self?.choseFile()
             case let .share(value): self?.share(value)
+            case let .viewDetail(value): self?.viewDetail(of: value)
             }
         }
     }
@@ -31,6 +32,13 @@ final class FileServiceViewController: BaseViewController {
 
     private func choseFile() {
         coordinator.present(scene: .fileServiceLocalFileSource(selectFileHandler: selectFileHandler), transition: .panModel())
+    }
+
+    private func viewDetail(of item: FileServiceUploadingItem) {
+        coordinator.present(
+            scene: .fileServiceDetail(item),
+            transition: .detail()
+        )
     }
 
     private func configUploadOption() {

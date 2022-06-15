@@ -216,6 +216,7 @@ class Coordinator {
         case fileService
         case fileServiceOptions
         case fileServiceLocalFileSource(selectFileHandler: FileServiceSelectFileHandler)
+        case fileServiceDetail(FileServiceUploadingItem)
         case messageCompose(PluginMeta? = nil)
         case composeSelectContact(viewModel: SelectContactViewModel)
         case debug
@@ -864,6 +865,9 @@ extension Coordinator {
             
         case let .fileServiceLocalFileSource(selectFileHandler):
             return FileServiceSelectFileSourceViewController(selectFileHandler: selectFileHandler)
+
+        case let .fileServiceDetail(value):
+            return FileServiceDetailViewController(item: value)
         }
     }
     // swiftlint:enable cyclomatic_complexity function_body_length

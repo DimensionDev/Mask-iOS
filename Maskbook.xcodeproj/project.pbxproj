@@ -79,6 +79,7 @@
 		1F036399277B287A001E8A88 /* DappScriptAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F036398277B287A001E8A88 /* DappScriptAdaptor.swift */; };
 		1F1762722859B3F8008BE93E /* ArweaveUploadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1762712859B3F8008BE93E /* ArweaveUploadHandler.swift */; };
 		1F1762742859B40D008BE93E /* IPFSUploadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1762732859B40D008BE93E /* IPFSUploadHandler.swift */; };
+		1F1762762859BB18008BE93E /* FileServiceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1762752859BB18008BE93E /* FileServiceDetailViewController.swift */; };
 		1F1CCF5E2736162F004E8835 /* WalletRestorePipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CCF5D2736162F004E8835 /* WalletRestorePipeline.swift */; };
 		1F37DF2027BDF715008F8ABE /* RestoreLocalFileValidationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37DF1F27BDF715008F8ABE /* RestoreLocalFileValidationController.swift */; };
 		1F37DF2227BDF94F008F8ABE /* RestoreLocalFileValidationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37DF2127BDF94F008F8ABE /* RestoreLocalFileValidationView.swift */; };
@@ -901,6 +902,7 @@
 		1F036398277B287A001E8A88 /* DappScriptAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappScriptAdaptor.swift; sourceTree = "<group>"; };
 		1F1762712859B3F8008BE93E /* ArweaveUploadHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArweaveUploadHandler.swift; sourceTree = "<group>"; };
 		1F1762732859B40D008BE93E /* IPFSUploadHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPFSUploadHandler.swift; sourceTree = "<group>"; };
+		1F1762752859BB18008BE93E /* FileServiceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceDetailViewController.swift; sourceTree = "<group>"; };
 		1F1CCF5D2736162F004E8835 /* WalletRestorePipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletRestorePipeline.swift; sourceTree = "<group>"; };
 		1F37DF1F27BDF715008F8ABE /* RestoreLocalFileValidationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreLocalFileValidationController.swift; sourceTree = "<group>"; };
 		1F37DF2127BDF94F008F8ABE /* RestoreLocalFileValidationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreLocalFileValidationView.swift; sourceTree = "<group>"; };
@@ -1965,6 +1967,7 @@
 				1F5B5ED4284F224500F6AD98 /* FileServiceViewController.swift */,
 				1F5B5ED6284F2F4600F6AD98 /* FileServiceOptionsViewController.swift */,
 				5DBDA4D1285083B200FBC921 /* FileServiceSelectFileSourceViewController.swift */,
+				1F1762752859BB18008BE93E /* FileServiceDetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4988,6 +4991,7 @@
 				2AD31E5E282D367700CB3D49 /* NSLayoutConstraint.swift in Sources */,
 				1F37DF2027BDF715008F8ABE /* RestoreLocalFileValidationController.swift in Sources */,
 				2AF8858D271EE9310004565A /* SelectActionViewModelProtocol.swift in Sources */,
+				1F1762762859BB18008BE93E /* FileServiceDetailViewController.swift in Sources */,
 				2AF884EE271EE9310004565A /* IdentityEmptyViewController.swift in Sources */,
 				2AF88558271EE9310004565A /* AddContactViewController.swift in Sources */,
 				2AD855F62812875A0064DDA5 /* RoundCornerView.swift in Sources */,

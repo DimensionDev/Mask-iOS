@@ -119,7 +119,7 @@ extension FileServiceView {
                                 FileServiceUploadingItemView(
                                     value,
                                     onDelete: { item in
-                                        self.viewModel.remove(item)
+                                        self.viewModel.draftItem = nil
                                     },
                                     onShare: { item in
                                         self.viewModel.share(item)
@@ -141,6 +141,12 @@ extension FileServiceView {
                                         )
                                 }
                                 .whiteRadiusBackgroundView(height: 48)
+                                .onTapGesture {
+//                                    guard let tx = value.tx, tx.isFinished else {
+//                                        return
+//                                    }
+                                    viewModel.actionSignal(.viewDetail(value))
+                                }
                             }
                         }
                     }

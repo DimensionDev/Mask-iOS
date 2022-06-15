@@ -8,6 +8,7 @@ final class FileServiceViewModel: ObservableObject {
     enum Action {
         case choseFile
         case share(FileServiceUploadResult)
+        case viewDetail(FileServiceUploadingItem)
     }
 
     @Published
@@ -117,6 +118,7 @@ final class FileServiceViewModel: ObservableObject {
         draftItem = .init(
             fileName: fileItem.fileName,
             provider: uploadOption.value.service.rawValue.lowercased(),
+            fileType: fileItem.fileType,
             state: .preparing,
             content: fileItem.data,
             uploadedBytes: 0

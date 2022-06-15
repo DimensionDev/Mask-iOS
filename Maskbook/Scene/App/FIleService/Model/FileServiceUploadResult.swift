@@ -54,10 +54,6 @@ struct FileServiceTranscation: Hashable {
             return false
         }
 
-        if progress != 1 {
-            return false
-        }
-
         return true
     }
 }

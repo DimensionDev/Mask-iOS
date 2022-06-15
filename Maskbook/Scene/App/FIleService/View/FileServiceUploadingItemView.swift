@@ -24,7 +24,7 @@ struct FileServiceUploadingItemView: View {
             }
         }
     }
-    
+
     func content(of item: FileServiceUploadingItem) -> some View {
         VStack(alignment: .leading, spacing: 4) {
             HStack(spacing: 12) {
@@ -171,6 +171,7 @@ extension FileServiceUploadingItem {
         .init(
             fileName: "Rosecoke.png",
             provider: "arweave",
+            fileType: .file,
             state: .uploading,
             content: Data.init(count: 3072 * 1024),
             uploadedBytes: 1024 * 1024
