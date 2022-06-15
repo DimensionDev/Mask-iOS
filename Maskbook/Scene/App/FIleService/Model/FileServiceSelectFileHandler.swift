@@ -53,7 +53,7 @@ class FileServiceSelectFileHandler: NSObject {
 
     private(set) lazy var documentPicker: UIDocumentPickerViewController = {
         if #available(iOS 15.0, *) {
-            return UIDocumentPickerViewController(forOpeningContentTypes: [.data])
+            return UIDocumentPickerViewController(forOpeningContentTypes: [.text,.data, .item, .jpeg, .pdf, .png])
         } else {
             return UIDocumentPickerViewController(documentTypes: ["public.data"], in: .open)
         }

@@ -89,6 +89,14 @@ struct FileServiceUploadingItem: Hashable {
     var isFailed: Bool {
         state != .uploaded
     }
+
+    var fileNameWithoutExt: String {
+        return fileName.components(separatedBy:".").first ?? fileName
+    }
+
+    var fileExt: String? {
+        return fileName.components(separatedBy:".").last
+    }
 }
 
 extension FileServiceUploadingItem: CustomStringConvertible {
