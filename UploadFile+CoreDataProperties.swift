@@ -8,7 +8,6 @@ extension UploadFile {
         return NSFetchRequest<UploadFile>(entityName: "UploadFile")
     }
 
-    @NSManaged public var uploadState: Int64
     @NSManaged public var fileType: Int64
 
     @NSManaged public var name: String?

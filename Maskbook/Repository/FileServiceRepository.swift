@@ -90,7 +90,7 @@ extension UploadFile {
             fileName: name ?? "",
             provider: provider ?? "",
             fileType: FileServiceUploadingItem.ItemType(rawValue: fileType) ?? .image,
-            state: .init(rawValue: uploadState) ?? .failed,
+            state: .uploaded,
             content: Data(),
             uploadedBytes: 0,
             uploadDate: createdAt,

@@ -121,7 +121,8 @@ final class FileServiceViewModel: ObservableObject {
             fileType: fileItem.fileType,
             state: .preparing,
             content: fileItem.data,
-            uploadedBytes: 0
+            uploadedBytes: 0,
+            mime: fileItem.mime
         )
         uploadDraft()
     }
