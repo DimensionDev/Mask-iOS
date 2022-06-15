@@ -33,7 +33,8 @@ struct AttachmentOptions {
 
 extension AttachmentOptions {
     var mime: String {
-        self.type ?? Self.defaultType
+//        self.type ?? Self.defaultType
+        "text/plain"
     }
 }
 
@@ -76,20 +77,22 @@ extension AttachmentOptions {
             try packData.pack(payload)
             return [Self.magic_header.data(using: .utf8)!,
                     packData]
-                .compactMap { $0 }
                 .combined
         } else {
             let payload = [
                 "version": 0,
                 "mime": mime,
+                "algorithm": nil,
+                "salt": nil,
+                "keyHash": nil,
+                "metadata": nil,
                 "block": block,
                 "blockHash": block.sha256()
-            ] as [String: Any]
+            ] as [String: Any?]
             var packData = Data()
             try packData.pack(payload)
             return [Self.magic_header.data(using: .utf8)!,
                     packData]
-                .compactMap { $0 }
                 .combined
         }
     }

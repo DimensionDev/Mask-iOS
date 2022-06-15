@@ -9,11 +9,6 @@
 import Foundation
 import CryptoKit
 
-public struct Chunks {
-    let data_root: Data
-    let chunks: [Chunk]
-    let proofs: [Proof]
-}
 
 struct Chunk {
     let dataHash: Data

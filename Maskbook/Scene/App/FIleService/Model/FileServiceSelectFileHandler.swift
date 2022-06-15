@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import MobileCoreServices
 import PhotosUI
 import UIKit
 import WebExtension_Shim
@@ -20,6 +20,11 @@ struct FileServiceSelectedFileItem {
     let data: Data
     let fileName: String
     let fileType: FileServiceUploadingItem.ItemType
+    let mime: String
+
+    var fileNameWithoutExt: String {
+        fileName.components(separatedBy: ".").first ?? fileName
+    }
 }
 
 class FileServiceSelectFileHandler: NSObject {
@@ -53,7 +58,7 @@ class FileServiceSelectFileHandler: NSObject {
 
     private(set) lazy var documentPicker: UIDocumentPickerViewController = {
         if #available(iOS 15.0, *) {
-            return UIDocumentPickerViewController(forOpeningContentTypes: [.text,.data, .item, .jpeg, .pdf, .png])
+            return UIDocumentPickerViewController(forOpeningContentTypes: [.text, .data, .item, .jpeg, .pdf, .png])
         } else {
             return UIDocumentPickerViewController(documentTypes: ["public.data"], in: .open)
         }
@@ -84,7 +89,10 @@ class FileServiceSelectFileHandler: NSObject {
                 return
             }
             let fileName = randomNameForImage()
-            let fileItem = FileServiceSelectedFileItem(data: pngData, fileName: fileName, fileType: .image)
+            let fileItem = FileServiceSelectedFileItem(data: pngData,
+                                                       fileName: fileName,
+                                                       fileType: .image,
+                                                       mime: "image/jpeg")
             delegate.didGetFile(fileItem: fileItem)
         } else {
             assertionFailure("can't get jpeg data from image")
@@ -111,8 +119,25 @@ class FileServiceSelectFileHandler: NSObject {
             showFileTooLargeAlert()
             return
         }
-        let fileItem = FileServiceSelectedFileItem(data: data, fileName: url.lastPathComponent, fileType: .file)
+
+        let mimeType = mimeTypeForPath(path: url.absoluteString)
+        let fileItem = FileServiceSelectedFileItem(data: data,
+                                                   fileName: url.lastPathComponent,
+                                                   fileType: .file,
+                                                   mime: mimeType)
         delegate.didGetFile(fileItem: fileItem)
+    }
+    
+    func mimeTypeForPath(path: String) -> String {
+        let url = NSURL(fileURLWithPath: path)
+        let pathExtension = url.pathExtension
+
+        if let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension! as NSString, nil)?.takeRetainedValue() {
+            if let mimetype = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType)?.takeRetainedValue() {
+                return mimetype as String
+            }
+        }
+        return "application/octet-stream"
     }
 
     func loadImage(result: PHPickerResult) async -> Result<UIImage, Error> {
@@ -155,7 +180,7 @@ extension FileServiceSelectFileHandler: PHPickerViewControllerDelegate {
             let imageResult = await Task.detached {
                 await self.loadImage(result: pickerResult)
             }.value
-            
+
             switch imageResult {
             case let .success(image):
                 self.didGetImage(image: image)
