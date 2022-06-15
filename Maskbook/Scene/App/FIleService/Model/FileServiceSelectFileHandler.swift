@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import MobileCoreServices
 import PhotosUI
 import UIKit
 import WebExtension_Shim
@@ -120,26 +119,13 @@ class FileServiceSelectFileHandler: NSObject {
             return
         }
 
-        let mimeType = mimeTypeForPath(path: url.absoluteString)
         let fileItem = FileServiceSelectedFileItem(data: data,
                                                    fileName: url.lastPathComponent,
-                                                   fileType: .file,
-                                                   mime: mimeType)
+                                                   fileType: url.containsImage ? .image : .file,
+                                                   mime: url.mimeType())
         delegate.didGetFile(fileItem: fileItem)
     }
     
-    func mimeTypeForPath(path: String) -> String {
-        let url = NSURL(fileURLWithPath: path)
-        let pathExtension = url.pathExtension
-
-        if let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension! as NSString, nil)?.takeRetainedValue() {
-            if let mimetype = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType)?.takeRetainedValue() {
-                return mimetype as String
-            }
-        }
-        return "application/octet-stream"
-    }
-
     func loadImage(result: PHPickerResult) async -> Result<UIImage, Error> {
         let itemProvider = result.itemProvider
         guard itemProvider.canLoadObject(ofClass: UIImage.self) else {

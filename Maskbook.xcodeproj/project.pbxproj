@@ -718,7 +718,6 @@
 		5DC018412859BE84004973CA /* Arweave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC018382859BE84004973CA /* Arweave.swift */; };
 		5DC018422859BE84004973CA /* ArweaveHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC018392859BE84004973CA /* ArweaveHttpClient.swift */; };
 		5DC018432859BE84004973CA /* KeyUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC0183A2859BE84004973CA /* KeyUtilities.swift */; };
-		5DC018452859DE1B004973CA /* ArweaveUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC018442859DE1B004973CA /* ArweaveUploader.swift */; };
 		5DCA069B27C75A8B007697C8 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCA069A27C75A8B007697C8 /* Toast.swift */; };
 		5DD1BBC227CF0843001DB330 /* Toast+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BBC127CF0843001DB330 /* Toast+Extension.swift */; };
 		5DD5A69827F53168005952A0 /* PersonaImportItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD5A69727F53168005952A0 /* PersonaImportItem.swift */; };
@@ -1544,7 +1543,6 @@
 		5DC018382859BE84004973CA /* Arweave.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arweave.swift; sourceTree = "<group>"; };
 		5DC018392859BE84004973CA /* ArweaveHttpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArweaveHttpClient.swift; sourceTree = "<group>"; };
 		5DC0183A2859BE84004973CA /* KeyUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyUtilities.swift; sourceTree = "<group>"; };
-		5DC018442859DE1B004973CA /* ArweaveUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArweaveUploader.swift; sourceTree = "<group>"; };
 		5DCA069A27C75A8B007697C8 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		5DD1BBC127CF0843001DB330 /* Toast+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Toast+Extension.swift"; sourceTree = "<group>"; };
 		5DD5A69727F53168005952A0 /* PersonaImportItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaImportItem.swift; sourceTree = "<group>"; };
@@ -3704,7 +3702,6 @@
 			isa = PBXGroup;
 			children = (
 				5DC018372859BE84004973CA /* API */,
-				5DC018442859DE1B004973CA /* ArweaveUploader.swift */,
 				5DC018342859BE83004973CA /* ArweaveAmount.swift */,
 				5DC018312859BE83004973CA /* NonNegative.swift */,
 				5DC0183A2859BE84004973CA /* KeyUtilities.swift */,
@@ -4431,7 +4428,6 @@
 				41E5004E27A11AFF00A73117 /* WebPublicApiMessageResolver+Plugins.swift in Sources */,
 				2AF884C5271EE9300004565A /* SocialProfileDetectCell.swift in Sources */,
 				2D6677F727688FBE00528F4D /* WalletConnectSendResponseDelegate.swift in Sources */,
-				5DC018452859DE1B004973CA /* ArweaveUploader.swift in Sources */,
 				2AD31E60282D367700CB3D49 /* UITableView.swift in Sources */,
 				2AD855252812841C0064DDA5 /* RedPacketShareViewModel.swift in Sources */,
 				2A6ABBB52720053B00CC3AED /* MergeToLocalView.swift in Sources */,
