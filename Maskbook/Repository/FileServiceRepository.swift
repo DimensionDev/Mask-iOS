@@ -74,10 +74,7 @@ enum FileServiceRepository {
         context: NSManagedObjectContext = viewContext
     ) {
         context.performAndWait {
-            let records: [T] = getRecords(
-                pageOption: .init(pageSize: 20, pageOffset: 0),
-                context: context
-            )
+            let records: [T] = getRecords()
 
             for record in records {
                 context.delete(record)
@@ -93,10 +90,10 @@ extension UploadFile {
             fileName: name ?? "",
             provider: provider ?? "",
             state: .init(rawValue: uploadState) ?? .failed,
-            content: content ?? Data(),
+            content: Data(),
             uploadedBytes: 0,
             uploadDate: createdAt,
-            tx: .init(
+            tx: FileServiceTranscation(
                 id: id ?? "",
                 key: key ?? "",
                 landingTxID: landingTxID ?? "",
@@ -109,10 +106,8 @@ extension UploadFile {
     func update(from item: FileServiceUploadingItem) {
         self.name = item.fileName
         self.provider = item.provider
-        self.uploadState = item.state.rawValue
         self.createdAt = item.uploadDate
         self.fileType = item.fileType.rawValue
-        self.content = item.content
         self.id = item.tx?.id
         self.key = item.tx?.key
         self.landingTxID = item.tx?.landingTxID
