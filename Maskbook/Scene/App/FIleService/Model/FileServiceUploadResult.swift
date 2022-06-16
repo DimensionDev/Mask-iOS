@@ -3,7 +3,7 @@ import Foundation
 struct FileServiceUploadResult: Codable {
     let createdAt: Date
     let id: String
-    let key: String
+    let key: String?
     let landingTxID: String
     let name: String
     let payloadTxID: String
@@ -27,11 +27,11 @@ struct FileServiceTranscation: Hashable {
         self.progress = progress
     }
 
-    let id: String
-    let key: String
-    let landingTxID: String
-    let payloadTxID: String
-    let progress: Double
+    var id: String
+    var key: String?
+    var landingTxID: String
+    var payloadTxID: String
+    var progress: Double
 
     static func progress(_ value: Double) -> FileServiceTranscation {
         self.init(id: "", key: "", landingTxID: "", payloadTxID: "", progress: value)
@@ -39,10 +39,6 @@ struct FileServiceTranscation: Hashable {
 
     var isFinished: Bool {
         if id.isEmpty {
-            return false
-        }
-
-        if key.isEmpty {
             return false
         }
 
