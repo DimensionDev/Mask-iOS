@@ -55,7 +55,7 @@ struct FileServiceUploadingItemView: View {
                         label: {
                             Asset.Colors.Public.blue.asColor()
                                 .overlay(
-                                    Text("Post")
+                                    Text(L10n.Plugins.FileService.post)
                                         .font(.bh6)
                                         .foregroundColor(.white)
                                 )
@@ -68,7 +68,7 @@ struct FileServiceUploadingItemView: View {
             
             switch item.state {
             case .failed:
-                Text("Failed to upload due to network conditions or other problems.")
+                Text(L10n.Plugins.FileService.failureTip)
                     .font(.mh7)
                     .foregroundColor(Asset.Colors.Public.error)
                     .lineSpacing(4)

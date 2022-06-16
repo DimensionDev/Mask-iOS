@@ -686,6 +686,10 @@ enum L10n {
       static var encrypt: String {
         return L10n.tr("Localizable", "Plugins.FileService.Encrypt")
       }
+      /// Failed to upload due to network conditions or other problems.
+      static var failureTip: String {
+        return L10n.tr("Localizable", "Plugins.FileService.FailureTip")
+      }
       /// IPFS
       static var ipfs: String {
         return L10n.tr("Localizable", "Plugins.FileService.Ipfs")
@@ -698,6 +702,14 @@ enum L10n {
       static var otherOption: String {
         return L10n.tr("Localizable", "Plugins.FileService.OtherOption")
       }
+      /// Post
+      static var post: String {
+        return L10n.tr("Localizable", "Plugins.FileService.Post")
+      }
+      /// Preparing...
+      static var preparing: String {
+        return L10n.tr("Localizable", "Plugins.FileService.Preparing")
+      }
       /// Service Protocols
       static var serviceTitle: String {
         return L10n.tr("Localizable", "Plugins.FileService.ServiceTitle")
@@ -709,6 +721,14 @@ enum L10n {
       /// Swarm
       static var swarm: String {
         return L10n.tr("Localizable", "Plugins.FileService.Swarm")
+      }
+      /// Uploaded
+      static var uploaded: String {
+        return L10n.tr("Localizable", "Plugins.FileService.Uploaded")
+      }
+      /// Uploading...
+      static var uploading: String {
+        return L10n.tr("Localizable", "Plugins.FileService.Uploading")
       }
 
       enum LocalFileSource {

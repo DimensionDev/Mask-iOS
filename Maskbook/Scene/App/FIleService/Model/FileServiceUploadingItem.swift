@@ -32,9 +32,9 @@ struct FileServiceUploadingItem: Hashable {
 
         var detailText: String {
             switch self {
-            case .preparing: return "Preparing..."
-            case .uploading: return "Uploading..."
-            case .uploaded: return "Uploaded"
+            case .preparing: return L10n.Plugins.FileService.preparing
+            case .uploading: return L10n.Plugins.FileService.uploading
+            case .uploaded: return L10n.Plugins.FileService.uploaded
             case .failed: return ""
             }
         }
