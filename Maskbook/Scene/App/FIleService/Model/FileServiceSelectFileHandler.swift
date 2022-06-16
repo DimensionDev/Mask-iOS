@@ -45,6 +45,7 @@ class FileServiceSelectFileHandler: NSObject {
 
         let imagePicker = PHPickerViewController(configuration: configuration)
         imagePicker.delegate = self
+        imagePicker.modalPresentationStyle = .fullScreen
         return imagePicker
     }()
 
@@ -52,15 +53,20 @@ class FileServiceSelectFileHandler: NSObject {
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = .camera
         imagePickerController.delegate = self
+        imagePickerController.modalPresentationStyle = .fullScreen
         return imagePickerController
     }()
 
     private(set) lazy var documentPicker: UIDocumentPickerViewController = {
-        if #available(iOS 15.0, *) {
-            return UIDocumentPickerViewController(forOpeningContentTypes: [.text, .data, .item, .jpeg, .pdf, .png])
-        } else {
-            return UIDocumentPickerViewController(documentTypes: ["public.data"], in: .open)
-        }
+        let picker: UIDocumentPickerViewController = {
+            if #available(iOS 15.0, *) {
+                return UIDocumentPickerViewController(forOpeningContentTypes: [.text, .data, .item, .jpeg, .pdf, .png])
+            } else {
+                return UIDocumentPickerViewController(documentTypes: ["public.data"], in: .open)
+            }
+        }()
+        picker.modalPresentationStyle = .fullScreen
+        return picker
     }()
 
     func select(item: Item) {

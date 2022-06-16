@@ -31,7 +31,10 @@ final class FileServiceViewController: BaseViewController {
     }
 
     private func choseFile() {
-        coordinator.present(scene: .fileServiceLocalFileSource(selectFileHandler: selectFileHandler), transition: .panModel())
+        coordinator.present(
+            scene: .fileServiceLocalFileSource(selectFileHandler: selectFileHandler),
+            transition: .panModel()
+        )
     }
 
     private func viewDetail(of item: FileServiceUploadingItem) {
