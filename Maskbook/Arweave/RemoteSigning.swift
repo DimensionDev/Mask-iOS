@@ -30,7 +30,7 @@ class RemoteSigning {
     }
     
     static func signing(transaction: inout ArweaveTransaction) async throws {
-        let signatureBody = try await transaction.getSignatureBody()
+        let signatureBody = try await transaction.remoteSignatureBody()
         let responseData = try await Self.remoteSignatureRequest(body: signatureBody)
         let responseJson = JSON(responseData)
         transaction.setRemoteSignature(response: responseJson)

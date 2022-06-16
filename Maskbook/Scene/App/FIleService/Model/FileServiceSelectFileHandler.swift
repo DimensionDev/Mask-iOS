@@ -7,25 +7,22 @@
 //
 
 import Foundation
-
 import PhotosUI
 import UIKit
 import WebExtension_Shim
 
 protocol FileServiceSelectFileDelegate {
-    func didGetFile(fileItem: FileServiceUploadFileItem)
+    func didGetFile(fileItem: FileServiceSelectedFileItem)
 }
 
-struct FileServiceUploadFileItem {
+struct FileServiceSelectedFileItem {
     let data: Data
     let fileName: String
-    
+    let fileType: FileServiceUploadingItem.ItemType
+    let mime: String
+
     var fileNameWithoutExt: String {
-        return fileName.components(separatedBy:".").first ?? fileName
-    }
-    
-    var fileExt: String? {
-        return fileName.components(separatedBy:".").last
+        fileName.components(separatedBy: ".").first ?? fileName
     }
 }
 
@@ -48,6 +45,7 @@ class FileServiceSelectFileHandler: NSObject {
 
         let imagePicker = PHPickerViewController(configuration: configuration)
         imagePicker.delegate = self
+        imagePicker.modalPresentationStyle = .fullScreen
         return imagePicker
     }()
 
@@ -55,15 +53,20 @@ class FileServiceSelectFileHandler: NSObject {
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = .camera
         imagePickerController.delegate = self
+        imagePickerController.modalPresentationStyle = .fullScreen
         return imagePickerController
     }()
 
     private(set) lazy var documentPicker: UIDocumentPickerViewController = {
-        if #available(iOS 15.0, *) {
-            return UIDocumentPickerViewController(forOpeningContentTypes: [.text,.data, .item, .jpeg, .pdf, .png])
-        } else {
-            return UIDocumentPickerViewController(documentTypes: ["public.data"], in: .open)
-        }
+        let picker: UIDocumentPickerViewController = {
+            if #available(iOS 15.0, *) {
+                return UIDocumentPickerViewController(forOpeningContentTypes: [.text, .data, .item, .jpeg, .pdf, .png])
+            } else {
+                return UIDocumentPickerViewController(documentTypes: ["public.data"], in: .open)
+            }
+        }()
+        picker.modalPresentationStyle = .fullScreen
+        return picker
     }()
 
     func select(item: Item) {
@@ -91,7 +94,10 @@ class FileServiceSelectFileHandler: NSObject {
                 return
             }
             let fileName = randomNameForImage()
-            let fileItem = FileServiceUploadFileItem(data: pngData, fileName: fileName)
+            let fileItem = FileServiceSelectedFileItem(data: pngData,
+                                                       fileName: fileName,
+                                                       fileType: .image,
+                                                       mime: "image/jpeg")
             delegate.didGetFile(fileItem: fileItem)
         } else {
             assertionFailure("can't get jpeg data from image")
@@ -118,10 +124,14 @@ class FileServiceSelectFileHandler: NSObject {
             showFileTooLargeAlert()
             return
         }
-        let fileItem = FileServiceUploadFileItem(data: data, fileName: url.lastPathComponent)
+
+        let fileItem = FileServiceSelectedFileItem(data: data,
+                                                   fileName: url.lastPathComponent,
+                                                   fileType: url.containsImage ? .image : .file,
+                                                   mime: url.mimeType())
         delegate.didGetFile(fileItem: fileItem)
     }
-
+    
     func loadImage(result: PHPickerResult) async -> Result<UIImage, Error> {
         let itemProvider = result.itemProvider
         guard itemProvider.canLoadObject(ofClass: UIImage.self) else {
@@ -162,7 +172,7 @@ extension FileServiceSelectFileHandler: PHPickerViewControllerDelegate {
             let imageResult = await Task.detached {
                 await self.loadImage(result: pickerResult)
             }.value
-            
+
             switch imageResult {
             case let .success(image):
                 self.didGetImage(image: image)

@@ -1,13 +1,17 @@
 import SwiftUI
 
 final class FileServiceOptionViewController: BaseViewController {
+
+    @InjectedProvider(\.userDefaultSettings)
+    private var settings
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = L10n.Plugins.FileService.settingTitle
 
-        FileServiceOptionView { option in
-
+        FileServiceOptionView { [weak self] option in
+            self?.settings.fileServiceUploadOption = option.asString()
         }
         .asContent(in: self)
     }

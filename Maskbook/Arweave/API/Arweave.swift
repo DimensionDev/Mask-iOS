@@ -5,6 +5,8 @@ public struct Arweave {
     private init() {}
     public static var baseUrl = URL(string: "https://arweave.net")!
     
+    public static let landingURL = URL(string: "https://files.r2d2.to/partner/arweave/landing-page.html")!
+    
     func request(for route: Route) -> Request {
         return Request(route: route)
     }

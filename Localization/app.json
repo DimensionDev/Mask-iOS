@@ -184,7 +184,7 @@
       "back_up": "Back up",
       "resend": "Resend",
       "edit": "Edit",
-      "download": "download",
+      "download": "Download",
       "skip": "Skip, download later",
       "download_next": "I downloaded, next",
       "select_from_photo": "Select from photos",
@@ -195,7 +195,8 @@
       "go_settings": "To Settings",
       "dont_allow": "Don’t Allow",
       "speed_up": "Speed Up",
-      "compose": "Send encrypted post"
+      "compose": "Send encrypted post",
+      "post_to_twitter": "Post to twitter"
     },
     "toast": {
       "saved": "Saved!",
@@ -934,7 +935,12 @@
         "upload_photos": "Upload Photos",
         "upload_file": "Upload File",
         "upload_tips": "The size limit is 10.5MB\nThe upload can’t be cancelled."
-      }
+      },
+      "failure_tip": "Failed to upload due to network conditions or other problems.",
+      "post": "Post",
+      "preparing": "Preparing...",
+      "uploading": "Uploading...",
+      "uploaded": "Uploaded"
     },
     "policy": {
       "reviewed": "I have reviewed",

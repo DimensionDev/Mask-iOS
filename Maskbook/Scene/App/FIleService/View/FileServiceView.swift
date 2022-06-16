@@ -3,14 +3,18 @@ import SwiftUI
 
 struct FileServiceView: View {
     @ObservedObject
-    private var viewModel = FileServiceOnboardViewModel()
+    private var viewModel: FileServiceViewModel
+
+    init(viewModel: FileServiceViewModel) {
+        self.viewModel = viewModel
+    }
 
     var body: some View {
         VStack {
             if viewModel.showOnboard {
                 FileServiceOnBoardView {
-                    // start upload
-                    viewModel.addRandomItem()
+                    // start uploading
+                    viewModel.actionSignal(.choseFile)
                 }
             } else {
                 // file list view
@@ -20,7 +24,9 @@ struct FileServiceView: View {
         }
         .overlay(
             Group {
-                if !viewModel.showOnboard {
+                if viewModel.showOnboard || viewModel.isUploading {
+                    Color.clear
+                } else {
                     uploadButton
                 }
             },
@@ -30,7 +36,7 @@ struct FileServiceView: View {
 
     private var uploadButton: some View {
         Button(
-            action: { viewModel.addFromLocalfiles() },
+            action: { viewModel.actionSignal(.choseFile) },
             label: {
                 LinearGradient(
                     stops: [
@@ -66,9 +72,9 @@ struct FileServiceView: View {
 extension FileServiceView {
     struct UploadFileList: View {
         @ObservedObject
-        private var viewModel: FileServiceOnboardViewModel
+        private var viewModel: FileServiceViewModel
 
-        init(viewModel: FileServiceOnboardViewModel) {
+        init(viewModel: FileServiceViewModel) {
             _viewModel = .init(initialValue: viewModel)
         }
 
@@ -86,12 +92,14 @@ extension FileServiceView {
                     )
                 }
                 .whiteRadiusBackgroundView(height: 48)
+                .layoutPriority(2)
 
                 ScrollView {
                     list
                 }
 
                 Spacer()
+                    .layoutPriority(0)
             }
             .padding(.top, 20)
             .padding(.horizontal, 20)
@@ -106,20 +114,40 @@ extension FileServiceView {
                 content: {
                     Section {
                         ForEach(viewModel.visibleItems, id: \.self) { item in
-                            HStack(spacing: 8) {
-                                Asset.Plugins.FileService.folder.asImage()
+                            switch item {
+                            case let .draft(value):
+                                FileServiceUploadingItemView(
+                                    value,
+                                    onDelete: { item in
+                                        self.viewModel.draftItem = nil
+                                    },
+                                    onShare: { item in
+                                        self.viewModel.share(item)
+                                    }
+                                )
 
-                                Text(item)
-                                    .font(.bh5)
-                                    .foregroundColor(Asset.Colors.Text.dark)
-                                    .horizontallyFilled()
+                            case let .archive(value):
+                                HStack(spacing: 8) {
+                                    Asset.Plugins.FileService.folder.asImage()
 
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(
-                                        Asset.Colors.Text.normal.asColor()
-                                    )
+                                    Text(value.fileName)
+                                        .font(.bh5)
+                                        .foregroundColor(Asset.Colors.Text.dark)
+                                        .horizontallyFilled()
+
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(
+                                            Asset.Colors.Text.normal.asColor()
+                                        )
+                                }
+                                .whiteRadiusBackgroundView(height: 48)
+                                .onTapGesture {
+//                                    guard let tx = value.tx, tx.isFinished else {
+//                                        return
+//                                    }
+                                    viewModel.actionSignal(.viewDetail(value))
+                                }
                             }
-                            .whiteRadiusBackgroundView(height: 48)
                         }
                     }
                 }
@@ -128,68 +156,8 @@ extension FileServiceView {
     }
 }
 
-final class FileServiceOnboardViewModel: ObservableObject {
-    @Published
-    var items: [String] = []
-
-    @Published
-    var searchText: String = ""
-
-    var showOnboard: Bool { items.isEmpty }
-
-    var visibleItems: [String] {
-        if searchText.isEmpty {
-            return items
-        } else {
-            return items.filter { $0.contains(searchText) }
-        }
-    }
-
-    private var cancelableStorage: Set<AnyCancellable> = []
-
-    @InjectedProvider(\.mainCoordinator)
-    private var coordinator
-
-    private lazy var selectFileHandler = FileServiceSelectFileHandler(delegate: self)
-
-    private lazy var arweaveUploader = ArweaveUploader()
-
-    private lazy var ipfsUploader = IPFSUploader()
-
-    init() {}
-
-    func addRandomItem() {
-        let alongText = "Some file to upload, and arweave, and ipfs"
-        let range = 0 ..< Int.random(in: 0 ... 4)
-
-        let newItems: [String] = range.compactMap { _ in
-            alongText
-                .randomElement()
-                .flatMap { String($0) }
-        }
-        .filter { !$0.isEmpty }
-
-        items = Set(newItems)
-            .union(items)
-            .map { $0 }
-    }
-
-    func addFromLocalfiles() {
-        coordinator.present(scene: .fileServiceLocalFileSource(selectFileHandler: selectFileHandler), transition: .panModel())
-    }
-}
-
-extension FileServiceOnboardViewModel: FileServiceSelectFileDelegate {
-    func didGetFile(fileItem: FileServiceUploadFileItem) {
-        Task {
-            let payloadTxID = try await ipfsUploader.makeAttachment(fileItem: fileItem)
-            print("payloadTxID = " + payloadTxID)
-        }
-    }
-}
-
 struct FileServiceView_Preview: PreviewProvider {
     static var previews: some SwiftUI.View {
-        FileServiceView()
+        FileServiceView(viewModel: .init())
     }
 }

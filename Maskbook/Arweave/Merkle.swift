@@ -9,11 +9,6 @@
 import Foundation
 import CryptoKit
 
-public struct Chunks {
-    let data_root: Data
-    let chunks: [Chunk]
-    let proofs: [Proof]
-}
 
 struct Chunk {
     let dataHash: Data
@@ -98,7 +93,7 @@ func chunkData(data: Data) -> [Chunk] {
         rest = rest.subdata(in: (chunkSize <= 0 ? 0 : chunkSize - 1)..<rest.count)
     }
     
-    let lastChunk = Chunk(dataHash: SHA256.hash(data: rest).data, minByteRange: cursor, maxByteRange: cursor + rest.count)
+    let lastChunk = Chunk(dataHash: hash(data: rest), minByteRange: cursor, maxByteRange: cursor + rest.count)
     chunks.append(lastChunk)
     return chunks
 }
@@ -106,11 +101,12 @@ func chunkData(data: Data) -> [Chunk] {
 func generateLeaves(chunks: [Chunk]) -> [LeafNode] {
     return chunks.map { chunk in
         var idData = [Data]()
-        idData.append(chunk.dataHash)
-        idData.append(intToBuffer(note: chunk.maxByteRange))
+        idData.append(hash(data: chunk.dataHash))
+        idData.append(hash(data: intToBuffer(note: chunk.maxByteRange)))
+        let id = hashId(data: idData)
         
         return LeafNode(
-            id: hashId(data: idData),
+            id: id,
             dataHash: chunk.dataHash,
             minByteRange: chunk.minByteRange,
             maxByteRange: chunk.maxByteRange
@@ -123,13 +119,17 @@ func hashId(data: [Data]) -> Data {
     return Data(SHA256.hash(data: allBuffers))
 }
 
+func hash(data: Data) -> Data {
+    return Data(SHA256.hash(data: data))
+}
+
 func intToBuffer(note: Int) -> Data {
     var note = note
     var buffer = Data(capacity: NOTE_SIZE)
     
-    for i in stride(from: buffer.count - 1, through: 0, by: -1) {
+    for _ in stride(from: NOTE_SIZE - 1, through: 0, by: -1) {
         let byte = note % 256
-        buffer[i] = UInt8(byte)
+        buffer.insert(UInt8(byte), at: 0)
         note = (note - byte) / 256
     }
     
@@ -139,12 +139,18 @@ func intToBuffer(note: Int) -> Data {
 // of leafs or branches
 func buildLayers(nodes: [MerkelNode], level: Int = 0) -> MerkelNode {
     if nodes.count < 2 {
-        return hashBranch(left: nodes[0])
+        return nodes[0]
     }
     
     var nextLayer = [MerkelNode]()
     for i in stride(from: 0, to: nodes.count, by: 2) {
-        nextLayer.append(hashBranch(left: nodes[i], right: nodes[i + 1]))
+        let node2: MerkelNode? = {
+            if i + 1 < nodes.count {
+                return nodes[i + 1]
+            }
+            return nil
+        }()
+        nextLayer.append(hashBranch(left: nodes[i], right: node2))
     }
     
     return buildLayers(nodes: nextLayer, level: level + 1)
@@ -213,14 +219,7 @@ func resolveBranchProofs(node: MerkelNode, proof: Data = Data(), depth: Int = 0)
 
 func hashBranch(left: MerkelNode, right: MerkelNode? = nil) -> MerkelNode {
     if right == nil {
-        return BranchNode(
-                id: hashId(data: [
-                hashId(data: [left.id]),
-                hashId(data: [intToBuffer(note: left.maxByteRange)]),
-            ]),
-            byteRange: left.maxByteRange,
-            maxByteRange: left.maxByteRange,
-            leftChild: left)
+        return left
     }
     
     let branch = BranchNode(

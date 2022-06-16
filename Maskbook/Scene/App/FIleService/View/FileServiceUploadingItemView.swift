@@ -1,83 +1,31 @@
 import SwiftUI
 
-struct FileServiceUploadingItem {
+struct FileServiceUploadingItemView: View {
+    private let item: FileServiceUploadingItem
+    private let onDelete: (FileServiceUploadingItem) -> Void
+    private let onShare: (FileServiceUploadingItem) -> Void
+    
     init(
-        fileName: String,
-        state: FileServiceUploadingItem.State,
-        totalBytes: Int,
-        uploadedBytes: Int,
-        uploadDateText: String? = nil
+        _ item: FileServiceUploadingItem,
+        onDelete: @escaping (FileServiceUploadingItem) -> Void,
+        onShare: @escaping (FileServiceUploadingItem) -> Void
     ) {
-        self.fileName = fileName
-        self.state = state
-        self.totalBytes = totalBytes
-        self.uploadedBytes = uploadedBytes
-        self.uploadDateText = uploadDateText
+        self.item = item
+        self.onShare = onShare
+        self.onDelete = onDelete
     }
-
-    enum State: String {
-        case preparing
-        case uploading
-        case uploaded
-        case failed
-
-        var detailText: String {
-            switch self {
-            case .preparing: return "Preparing..."
-            case .uploading: return "Uploading..."
-            case .uploaded: return "Uploaded"
-            case .failed: return ""
+    
+    var body: some View {
+        Group {
+            if let item = item {
+                content(of: item)
+            } else {
+                Color.clear
             }
         }
     }
 
-    let fileName: String
-    let state: State
-    let totalBytes: Int
-    let uploadedBytes: Int
-    let uploadDateText: String?
-
-    func fileSizeText(of size: Int) -> String {
-        if size == 0 { return "0.0 kb" }
-        let fileSize = Double(size)
-        let kb = fileSize / 1_024
-        guard kb >= 1_024 else {
-            return String(format: "%.1f KB", kb)
-        }
-
-        let mb = kb / 1_024
-        guard mb >= 1_024 else {
-            return String(format: "%.1f MB", mb)
-        }
-
-        let gb = mb / 1_024
-        return String(format: "%.1f GB", gb)
-    }
-
-    var progress: CGFloat {
-        guard totalBytes > 0 else {
-            return 0
-        }
-
-        return CGFloat(uploadedBytes) / CGFloat(totalBytes)
-    }
-
-    var progressFileText: String {
-        switch self.state {
-        case .failed, .preparing: return ""
-        case .uploading, .uploaded:
-            let uploadingText = fileSizeText(of: uploadedBytes)
-            let totalText = fileSizeText(of: totalBytes)
-            return "\(uploadingText)/\(totalText)"
-        }
-    }
-}
-
-struct FileServiceUploadingItemView: View {
-    @Binding var item: FileServiceUploadingItem
-
-    var body: some View {
-
+    func content(of item: FileServiceUploadingItem) -> some View {
         VStack(alignment: .leading, spacing: 4) {
             HStack(spacing: 12) {
                 Image(Asset.Plugins.FileService.folder)
@@ -91,23 +39,23 @@ struct FileServiceUploadingItemView: View {
                         .foregroundColor(Asset.Colors.Text.dark)
                         .lineLimit(1)
                         .multilineTextAlignment(.leading)
-
-                    if item.state == .uploaded, let date = item.uploadDateText {
-                        Text(date)
+                    
+                    if item.state == .uploaded, item.uploadDate.isSome {
+                        Text(item.uploadDateText)
                             .font(.mh7)
                             .foregroundColor(Asset.Colors.Text.normal)
                             .lineLimit(1)
                             .horizontallyFilled()
                     }
                 }
-
+                
                 if item.state == .uploaded {
                     Button(
-                        action: {},
+                        action: { onShare(item) },
                         label: {
                             Asset.Colors.Public.blue.asColor()
                                 .overlay(
-                                    Text("Post")
+                                    Text(L10n.Plugins.FileService.post)
                                         .font(.bh6)
                                         .foregroundColor(.white)
                                 )
@@ -117,30 +65,30 @@ struct FileServiceUploadingItemView: View {
                     )
                 }
             }
-
+            
             switch item.state {
             case .failed:
-                Text("Failed to upload due to network conditions or other problems.")
+                Text(L10n.Plugins.FileService.failureTip)
                     .font(.mh7)
                     .foregroundColor(Asset.Colors.Public.error)
                     .lineSpacing(4)
                     .layoutPriority(1)
                     .horizontallyFilled()
-
+                
             default:
                 VStack(alignment: .leading, spacing: 4) {
                     HStack {
                         Text(item.state.detailText)
                             .font(.mh5)
                             .foregroundColor(Asset.Colors.Text.normal)
-
+                        
                         Spacer()
-
+                        
                         Text(item.progressFileText)
                             .font(.rh6)
                             .foregroundColor(Asset.Colors.Text.normal)
                     }
-
+                    
                     progressView
                 }
             }
@@ -170,24 +118,30 @@ struct FileServiceUploadingItemView: View {
     }
 
     private var progressView: some View {
-        GeometryReader { proxy in
-            Asset.Colors.Background.selected.asColor()
-                .cornerRadius(3)
-                .overlay(
-                    Asset.Colors.Public.success.asColor()
-                        .frame(width: proxy.size.width * item.progress)
-                        .cornerRadius(3),
-                    alignment: .leading
-                )
-                .frame(
-                    width: proxy.size.width
-                )
+        Group {
+            if let item = item {
+                GeometryReader { proxy in
+                    Asset.Colors.Background.selected.asColor()
+                        .cornerRadius(3)
+                        .overlay(
+                            Asset.Colors.Public.success.asColor()
+                                .frame(width: proxy.size.width * item.progress)
+                                .cornerRadius(3),
+                            alignment: .leading
+                        )
+                        .frame(
+                            width: proxy.size.width
+                        )
+                }
+                .frame(height: 6)
+            } else {
+                Color.clear
+            }
         }
-        .frame(height: 6)
     }
-
-    func dropItem() {
-
+    
+    private func dropItem() {
+        self.onDelete(item)
     }
 }
 
@@ -196,38 +150,53 @@ extension FileServiceUploadingItem {
     static var preparing: Self {
         .init(
             fileName: "Rosecoke.png",
+            provider: "arweave",
             state: .preparing,
-            totalBytes: 3072 * 1024,
+            content: Data.init(count: 3072 * 1024),
             uploadedBytes: 0
         )
     }
-
+    
     static var failed: Self {
         .init(
             fileName: "Rosecoke.png",
+            provider: "arweave",
             state: .failed,
-            totalBytes: 3072 * 1024,
+            content: Data.init(count: 3072 * 1024),
             uploadedBytes: 0
         )
     }
-
+    
     static var uploading: Self {
         .init(
             fileName: "Rosecoke.png",
+            provider: "arweave",
+            fileType: .file,
             state: .uploading,
-            totalBytes: 3072 * 1024,
+            content: Data.init(count: 3072 * 1024),
             uploadedBytes: 1024 * 1024
         )
     }
-
+    
     static var uploaded: Self {
         .init(
             fileName: "Rosecoke.png",
+            provider: "arweave",
             state: .uploaded,
-            totalBytes: 3072 * 1024,
+            content: Data.init(count: 3072 * 1024),
             uploadedBytes: 3072 * 1024,
-            uploadDateText: "2012-09-40 12:12:10"
+            uploadDate: Date()
         )
+    }
+    
+    static var shuffle: Self {
+        let index = Int.random(in: 0 ... 3)
+        return [
+            .preparing,
+            .uploading,
+            .uploaded,
+            .failed
+        ][index]
     }
 }
 
@@ -239,7 +208,9 @@ struct UploadingItemView_preview: PreviewProvider {
         VStack {
             ForEach(items, id: \.state) {
                 FileServiceUploadingItemView(
-                    item: .constant($0)
+                    $0,
+                    onDelete: { _ in },
+                    onShare: { _ in }
                 )
             }
         }

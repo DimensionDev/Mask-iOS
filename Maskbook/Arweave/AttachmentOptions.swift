@@ -12,7 +12,7 @@ import Foundation
 import SwiftMsgPack
 
 struct AttachmentOptions {
-    internal init(encrypted: Bool, type: String?, block: Data, name: String) {
+    init(encrypted: Bool, type: String?, block: Data, name: String) {
         self.key = encrypted ? AttachmentOptions.generateRandomKey() : nil
         self.type = type
         self.block = block
@@ -33,7 +33,8 @@ struct AttachmentOptions {
 
 extension AttachmentOptions {
     var mime: String {
-        self.type ?? Self.defaultType
+//        self.type ?? Self.defaultType
+        "text/plain"
     }
 }
 
@@ -76,20 +77,22 @@ extension AttachmentOptions {
             try packData.pack(payload)
             return [Self.magic_header.data(using: .utf8)!,
                     packData]
-                .compactMap { $0 }
                 .combined
         } else {
             let payload = [
                 "version": 0,
                 "mime": mime,
+                "algorithm": nil,
+                "salt": nil,
+                "keyHash": nil,
+                "metadata": nil,
                 "block": block,
                 "blockHash": block.sha256()
-            ] as [String: Any]
+            ] as [String: Any?]
             var packData = Data()
             try packData.pack(payload)
             return [Self.magic_header.data(using: .utf8)!,
                     packData]
-                .compactMap { $0 }
                 .combined
         }
     }
@@ -101,4 +104,5 @@ extension AttachmentOptions {
         transaction.tags.append(tag)
         return transaction
     }
+    
 }

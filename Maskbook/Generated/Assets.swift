@@ -484,6 +484,7 @@ internal enum Asset {
   internal enum Plugins {
     internal enum FileService {
       internal static let folder = ImageAsset(name: "Plugins/FileService/folder")
+      internal static let imagePlaceholder = ImageAsset(name: "Plugins/FileService/image_placeholder")
       internal static let infoCircle = ImageAsset(name: "Plugins/FileService/infoCircle")
       internal static let onboardFour = ImageAsset(name: "Plugins/FileService/onboardFour")
       internal static let onboardOne = ImageAsset(name: "Plugins/FileService/onboardOne")
