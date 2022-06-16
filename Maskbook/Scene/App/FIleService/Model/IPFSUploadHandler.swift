@@ -25,7 +25,6 @@ struct IPFSUploadHandler: FileServiceUploadHandler {
         _ item: FileServiceUploadingItem,
         option: FileServiceUploadOption
     ) -> AsyncThrowingStream<FileServiceTranscation, Error> {
-        // TODO: ArweaveUploadHandler
         .init { continuation in
             Task.detached {
                 var tx = FileServiceTranscation.progress(0)
