@@ -48,6 +48,11 @@ enum WalletSendError: Error {
     case cancelled
 }
 
+enum FileServiceError: Error {
+    case encryptDataError
+    case ipfsUploadError
+}
+
 // swiftlint:disable force_cast
 extension Web3Error {
     var errorDescription: String? {

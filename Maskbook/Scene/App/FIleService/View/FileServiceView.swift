@@ -146,32 +146,34 @@ final class FileServiceOnboardViewModel: ObservableObject {
     }
 
     private var cancelableStorage: Set<AnyCancellable> = []
-    
+
     @InjectedProvider(\.mainCoordinator)
     private var coordinator
-    
+
     private lazy var selectFileHandler = FileServiceSelectFileHandler(delegate: self)
 
     private lazy var arweaveUploader = ArweaveUploader()
-    
+
+    private lazy var ipfsUploader = IPFSUploader()
+
     init() {}
 
     func addRandomItem() {
         let alongText = "Some file to upload, and arweave, and ipfs"
-        let range = 0 ..<  Int.random(in: 0 ... 4)
+        let range = 0 ..< Int.random(in: 0 ... 4)
 
         let newItems: [String] = range.compactMap { _ in
             alongText
                 .randomElement()
                 .flatMap { String($0) }
         }
-            .filter { !$0.isEmpty }
+        .filter { !$0.isEmpty }
 
         items = Set(newItems)
             .union(items)
             .map { $0 }
     }
-    
+
     func addFromLocalfiles() {
         coordinator.present(scene: .fileServiceLocalFileSource(selectFileHandler: selectFileHandler), transition: .panModel())
     }
@@ -180,8 +182,8 @@ final class FileServiceOnboardViewModel: ObservableObject {
 extension FileServiceOnboardViewModel: FileServiceSelectFileDelegate {
     func didGetFile(fileItem: FileServiceUploadFileItem) {
         Task {
-            let data = try await arweaveUploader.upload(fileItem:fileItem)
-            print(data)
+            let payloadTxID = try await ipfsUploader.makeAttachment(fileItem: fileItem)
+            print("payloadTxID = " + payloadTxID)
         }
     }
 }

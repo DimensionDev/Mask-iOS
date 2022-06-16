@@ -1,4 +1,4 @@
-source 'https://cdn.cocoapods.org/'
+source 'https://github.com/CocoaPods/Specs.git'
 
 platform :ios, '13.0'
 
@@ -45,6 +45,8 @@ target 'Maskbook' do
   # Web3
   pod 'BigInt', '~> 5.2'
   pod 'web3swift', :git => 'https://github.com/DimensionDev/web3swift.git'
+  pod 'IpfsLiteApi'
+
   #UI
   pod 'SnapKit', '~> 5.0.0'
   #debug
