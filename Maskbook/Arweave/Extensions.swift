@@ -49,3 +49,14 @@ extension Date {
         return dateFormatter.string(from: self)
     }
 }
+
+extension Dictionary {
+    func asString() -> String {
+      do {
+        let data = try JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
+        return String(data: data, encoding: String.Encoding.utf8) ?? ""
+      } catch {
+        return ""
+      }
+    }
+}

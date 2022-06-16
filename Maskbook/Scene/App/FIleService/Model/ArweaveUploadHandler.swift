@@ -9,7 +9,6 @@
 import CryptoKit
 import CryptoSwift
 import Foundation
-import SwiftyJSON
 
 struct ArweaveUploadHandler: FileServiceUploadHandler {
     func upload(
@@ -65,7 +64,7 @@ struct ArweaveUploadHandler: FileServiceUploadHandler {
             "signed": try? makeFileKeySigned(fileKey: tx.key),
             "createdAt": Date().toISOString()
         ]
-        let jsonString = JSON(dic).stringValue
+        let jsonString = dic.asString()
         let request = URLRequest(url: Arweave.landingURL)
         let (data, response) = try await URLSession.shared.data(for: request)
         let httpResponse = response as? HTTPURLResponse
