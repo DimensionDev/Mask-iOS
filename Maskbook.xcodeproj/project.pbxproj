@@ -747,7 +747,6 @@
 		6FA1112D27D0D19A0041B16A /* RecentlyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA1112C27D0D19A0041B16A /* RecentlyHeaderView.swift */; };
 		6FA623AD26D4C4630091FDFF /* NFTAssetEventsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA623AC26D4C4630091FDFF /* NFTAssetEventsModel.swift */; };
 		6FA623AF26D4D0540091FDFF /* NFTTransactionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA623AE26D4D0540091FDFF /* NFTTransactionHistory.swift */; };
-		6FD5D2432859B94000E18CB0 /* IPFSUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD5D2422859B94000E18CB0 /* IPFSUploader.swift */; };
 		6FE12922283FB4A50034A8EB /* NativeComposeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE12921283FB4A50034A8EB /* NativeComposeButton.swift */; };
 		8400ED6AB1B2A67C3EC3E610 /* Pods_MaskWalletTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23BD16DA0358C0BF3EFB0A90 /* Pods_MaskWalletTests.framework */; };
 		CDD837F244786450DE5B1618 /* Pods_MaskbookTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1FEE81EA8E85DFBBA3A80E3 /* Pods_MaskbookTests.framework */; };
@@ -1583,7 +1582,6 @@
 		6FA1112C27D0D19A0041B16A /* RecentlyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyHeaderView.swift; sourceTree = "<group>"; };
 		6FA623AC26D4C4630091FDFF /* NFTAssetEventsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTAssetEventsModel.swift; sourceTree = "<group>"; };
 		6FA623AE26D4D0540091FDFF /* NFTTransactionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTTransactionHistory.swift; sourceTree = "<group>"; };
-		6FD5D2422859B94000E18CB0 /* IPFSUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPFSUploader.swift; sourceTree = "<group>"; };
 		6FE12921283FB4A50034A8EB /* NativeComposeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeComposeButton.swift; sourceTree = "<group>"; };
 		92CD9AEF4F07E3F62F99D022 /* Pods-Maskbook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maskbook.release.xcconfig"; path = "Target Support Files/Pods-Maskbook/Pods-Maskbook.release.xcconfig"; sourceTree = "<group>"; };
 		B0621415731D01571185F91F /* Pods-MaskWalletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskWalletTests.debug.xcconfig"; path = "Target Support Files/Pods-MaskWalletTests/Pods-MaskWalletTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -3908,14 +3906,6 @@
 			path = Contact;
 			sourceTree = "<group>";
 		};
-		6FD5D2412859B82100E18CB0 /* IPFS */ = {
-			isa = PBXGroup;
-			children = (
-				6FD5D2422859B94000E18CB0 /* IPFSUploader.swift */,
-			);
-			path = IPFS;
-			sourceTree = "<group>";
-		};
 		BC9663EAA57A6064887B02A8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -3972,7 +3962,6 @@
 		DBAAF49322C35A7100017594 /* Maskbook */ = {
 			isa = PBXGroup;
 			children = (
-				6FD5D2412859B82100E18CB0 /* IPFS */,
 				5D06F587285313F600640D00 /* Arweave */,
 				2A6788CE27EB6C6800CC2350 /* UIComponents */,
 				2A96348C27A26A5B0019C4CA /* ABI */,
@@ -4798,7 +4787,6 @@
 				2A6ABBB42720053B00CC3AED /* MergeToLocalViewController.swift in Sources */,
 				5D3F361A27A1524B007FDD8C /* RedPackageView.swift in Sources */,
 				2AF8858B271EE9310004565A /* SelectActionViewController.swift in Sources */,
-				6FD5D2432859B94000E18CB0 /* IPFSUploader.swift in Sources */,
 				2A6ABBAA2720053B00CC3AED /* RemoteBackupVerifyViewController.swift in Sources */,
 				2D6F4B1526D3B60700F32200 /* ProfileSocialPlatform.swift in Sources */,
 				2AF88530271EE9310004565A /* WalletBackupKeystoreViewModel.swift in Sources */,
