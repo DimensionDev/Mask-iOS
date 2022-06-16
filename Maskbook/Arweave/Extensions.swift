@@ -6,8 +6,8 @@
 //  Copyright © 2022 dimension. All rights reserved.
 //
 
-import Foundation
 import CryptoKit
+import Foundation
 
 extension Digest {
     var bytes: [UInt8] { Array(makeIterator()) }
@@ -23,18 +23,6 @@ extension String {
 extension Array where Element == Data {
     var combined: Data {
        reduce(.init(), +)
-    }
-}
-
-extension Data {
-    func toHexString10() -> String {
-        `lazy`.reduce(into: "") {
-        var s = String($1, radix: 10)
-        if s.count == 1 {
-          s = "0" + s
-        }
-        $0 += "," + s
-      }
     }
 }
 

@@ -1,5 +1,5 @@
-import Foundation
 import CryptoKit
+import Foundation
 import SwiftyJSON
 
 public struct Chunks {
@@ -12,9 +12,7 @@ public typealias TransactionId = String
 public typealias Base64EncodedString = String
 
 public extension ArweaveTransaction {
-
     struct PriceRequest {
-        
         public init(bytes: Int = 0, target: ArweaveAddress? = nil) {
             self.bytes = bytes
             self.target = target
@@ -95,7 +93,7 @@ public extension ArweaveTransaction {
     mutating private func signatureBody() async throws -> Data {
         
         if data_root.isEmpty {
-            prepareChunks(data: self.rawData)
+            prepareChunks(data: rawData)
         }
         
         let last_tx = try await ArweaveTransaction.anchor()
@@ -122,18 +120,18 @@ public extension ArweaveTransaction {
         self.data = rawData.base64URLEncodedString()
                 
         let priceAmount = try await ArweaveTransaction.price(for: priceRequest)
-        self.reward = String(describing: priceAmount)
+        reward = String(describing: priceAmount)
         
         let array = [
             String(format.rawValue).data(using: .utf8),
             Data(base64URLEncoded: owner),
-            Data(base64URLEncoded: target.base64URLEncoded),
+            Data(base64URLEncoded: target),
             quantity.data(using: .utf8),
             reward.data(using: .utf8),
-            Data(base64URLEncoded: last_tx.base64URLEncoded),
+            Data(base64URLEncoded: last_tx.base64URLUnescaped()),
             tagData(),
             data_size.data(using: .utf8),
-            Data(base64URLEncoded: data_root.base64URLEncoded)
+            Data(base64URLEncoded: data_root)
         ] as [Any?]
         var data = Data()
         _ = try? data.pack(array)
@@ -172,12 +170,12 @@ public extension ArweaveTransaction {
 
 public extension ArweaveTransaction {
     mutating func prepareChunks(data: Data) {
-        if chunks == nil && data.count > 0 {
+        if chunks == nil, data.count > 0 {
             chunks = generateTransactionChunks(data: data)
             data_root = chunks!.data_root.base64URLEncodedString()
         }
         
-        if chunks == nil && data.count == 0 {
+        if chunks == nil, data.count == 0 {
             chunks = Chunks(data_root: Data(), chunks: [], proofs: [])
             data_root = ""
         }
@@ -196,7 +194,6 @@ public extension ArweaveTransaction {
     }
 
     static func status(of txId: TransactionId) async throws -> ArweaveTransaction.Status {
-
         let target = Arweave.shared.request(for: .transactionStatus(id: txId))
         let response = try await ArweaveHttpClient.request(target)
         
@@ -224,7 +221,7 @@ public extension ArweaveTransaction {
     static func anchor() async throws -> String {
         let target = Arweave.shared.request(for: .txAnchor)
         let response = try await ArweaveHttpClient.request(target)
-        
+
         let anchor = String(decoding: response.data, as: UTF8.self)
         return anchor
     }

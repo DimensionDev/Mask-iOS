@@ -12,7 +12,7 @@ import Foundation
 import SwiftMsgPack
 
 struct AttachmentOptions {
-    internal init(encrypted: Bool, type: String?, block: Data, name: String) {
+    init(encrypted: Bool, type: String?, block: Data, name: String) {
         self.key = encrypted ? AttachmentOptions.generateRandomKey() : nil
         self.type = type
         self.block = block
