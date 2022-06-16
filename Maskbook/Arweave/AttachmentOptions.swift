@@ -34,8 +34,7 @@ struct AttachmentOptions {
 
 extension AttachmentOptions {
     var mime: String {
-//        self.type ?? Self.defaultType
-        "text/plain"
+        self.type ?? Self.defaultType
     }
 }
 
