@@ -72,19 +72,23 @@ struct FileServiceFAQView: View {
             )
         ]
 
-        ScrollView(.vertical, showsIndicators: false) {
-            VStack(spacing: 32) {
-                ForEach(items, id: \.content) { item in
-                    DisclosureGroup(isExpanded: item.binding) {
-                        groupContent(of: item.content, url: item.url)
-                    } label: {
-                        groupLabel(of: item.label)
+        VStack {
+            ScrollView(.vertical, showsIndicators: false) {
+                LazyVStack(spacing: 32) {
+                    ForEach(items, id: \.content) { item in
+                        DisclosureGroup(isExpanded: item.binding) {
+                            groupContent(of: item.content, url: item.url)
+                        } label: {
+                            groupLabel(of: item.label)
+                        }
+                        .accentColor(Asset.Colors.Text.normal.asColor())
                     }
-                    .accentColor(Asset.Colors.Text.normal.asColor())
                 }
             }
         }
+        .padding(.top, 16)
         .padding(.horizontal, 20)
+        .background(Asset.Colors.Background.normal.asColor())
     }
 
     private func groupContent(of text: String, url: String) -> some View {
