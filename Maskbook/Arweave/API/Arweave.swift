@@ -7,6 +7,8 @@ public struct Arweave {
     
     public static let landingURL = URL(string: "https://files.r2d2.to/partner/arweave/landing-page.html")!
     
+    public static let mesonCDNURL = URL(string: "https://coldcdn.com/api/cdn/9m5pde")!
+    
     func request(for route: Route) -> Request {
         return Request(route: route)
     }

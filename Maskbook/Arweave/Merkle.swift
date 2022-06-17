@@ -87,10 +87,10 @@ func chunkData(data: Data) -> [Chunk] {
         }
         
         let chunk = rest.subdata(in: 0 ..< chunkSize)
-        let dataHash = SHA256.hash(data: chunk)
+        let dataHash = hash(data: chunk)
         cursor += chunk.count
-        chunks.append(Chunk(dataHash: dataHash.data, minByteRange: cursor - chunk.count, maxByteRange: cursor))
-        rest = rest.subdata(in: (chunkSize <= 0 ? 0 : chunkSize - 1)..<rest.count)
+        chunks.append(Chunk(dataHash: dataHash, minByteRange: cursor - chunk.count, maxByteRange: cursor))
+        rest = rest.subdata(in: (chunkSize <= 0 ? 0 : chunkSize)..<rest.count)
     }
     
     let lastChunk = Chunk(dataHash: hash(data: rest), minByteRange: cursor, maxByteRange: cursor + rest.count)

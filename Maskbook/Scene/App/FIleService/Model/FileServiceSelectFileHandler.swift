@@ -87,7 +87,7 @@ class FileServiceSelectFileHandler: NSObject {
         return "IMG" + String(randomString.prefix(5)) + ".jpg"
     }
 
-    func saveImageToLocal(image: UIImage) {
+    func didGetImage(image: UIImage) {
         if let pngData = image.jpeg(UIImage.JPEGQuality.high), !pngData.isEmpty {
             if Int64(pngData.count) > fileSizeLimit {
                 showFileTooLargeAlert()
@@ -111,10 +111,6 @@ class FileServiceSelectFileHandler: NSObject {
                                               imageType: .error)
         coordinator.present(scene: .alertController(alertController: alertController),
                             transition: .alertController(completion: nil))
-    }
-
-    func didGetImage(image: UIImage) {
-        saveImageToLocal(image: image)
     }
 
     func didGetFile(url: URL) {

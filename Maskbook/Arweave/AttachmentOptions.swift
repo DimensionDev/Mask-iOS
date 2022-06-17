@@ -26,15 +26,15 @@ struct AttachmentOptions {
 
     static let keyTable = "ABDEFGHJKMNPQRTWXYadefhijkmnprstuvwxyz03478"
 
-    static let magic_header = "MASKBOOK-ATTACHMENT"
+    
+    static let magic_header_data = "MASKBOOK-ATTACHMENT".data(using: .utf8)!
 
     static let defaultType = "application/octet-stream"
 }
 
 extension AttachmentOptions {
     var mime: String {
-//        self.type ?? Self.defaultType
-        "text/plain"
+        self.type ?? Self.defaultType
     }
 }
 
@@ -75,7 +75,7 @@ extension AttachmentOptions {
             ] as [String: Any]
             var packData = Data()
             try packData.pack(payload)
-            return [Self.magic_header.data(using: .utf8)!,
+            return [Self.magic_header_data,
                     packData]
                 .combined
         } else {
@@ -91,18 +91,10 @@ extension AttachmentOptions {
             ] as [String: Any?]
             var packData = Data()
             try packData.pack(payload)
-            return [Self.magic_header.data(using: .utf8)!,
+            return [Self.magic_header_data,
                     packData]
                 .combined
         }
-    }
-
-    func toTransaction() throws -> ArweaveTransaction {
-        let encryptData = try encryptedData()
-        var transaction = ArweaveTransaction(data: encryptData)
-        let tag = ArweaveTransaction.Tag(name: "Content-Type", value: Self.defaultType)
-        transaction.tags.append(tag)
-        return transaction
     }
     
 }
