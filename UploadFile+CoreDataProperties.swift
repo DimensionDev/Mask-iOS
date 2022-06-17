@@ -9,6 +9,7 @@ extension UploadFile {
     }
 
     @NSManaged public var fileType: Int64
+    @NSManaged public var fileSize: Double
 
     @NSManaged public var name: String?
     @NSManaged public var createdAt: Date?
