@@ -73,6 +73,7 @@ struct IPFSUploadHandler: FileServiceUploadHandler {
         }
         guard let replacedData = htmlText
             .replacingOccurrences(of: "__METADATA__", with: jsonString)
+            .replacingOccurrences(of: "Arweave", with: "IPFS")
             .data(using: .utf8)
         else {
             throw "encode html error"
