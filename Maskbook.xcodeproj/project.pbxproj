@@ -80,6 +80,7 @@
 		1F1762722859B3F8008BE93E /* ArweaveUploadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1762712859B3F8008BE93E /* ArweaveUploadHandler.swift */; };
 		1F1762742859B40D008BE93E /* IPFSUploadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1762732859B40D008BE93E /* IPFSUploadHandler.swift */; };
 		1F1762762859BB18008BE93E /* FileServiceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1762752859BB18008BE93E /* FileServiceDetailViewController.swift */; };
+		1F176278285C36B4008BE93E /* FileServiceFAQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F176277285C36B4008BE93E /* FileServiceFAQViewController.swift */; };
 		1F1CCF5E2736162F004E8835 /* WalletRestorePipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CCF5D2736162F004E8835 /* WalletRestorePipeline.swift */; };
 		1F37DF2027BDF715008F8ABE /* RestoreLocalFileValidationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37DF1F27BDF715008F8ABE /* RestoreLocalFileValidationController.swift */; };
 		1F37DF2227BDF94F008F8ABE /* RestoreLocalFileValidationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37DF2127BDF94F008F8ABE /* RestoreLocalFileValidationView.swift */; };
@@ -914,6 +915,7 @@
 		1F1762712859B3F8008BE93E /* ArweaveUploadHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArweaveUploadHandler.swift; sourceTree = "<group>"; };
 		1F1762732859B40D008BE93E /* IPFSUploadHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPFSUploadHandler.swift; sourceTree = "<group>"; };
 		1F1762752859BB18008BE93E /* FileServiceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceDetailViewController.swift; sourceTree = "<group>"; };
+		1F176277285C36B4008BE93E /* FileServiceFAQViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceFAQViewController.swift; sourceTree = "<group>"; };
 		1F1CCF5D2736162F004E8835 /* WalletRestorePipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletRestorePipeline.swift; sourceTree = "<group>"; };
 		1F37DF1F27BDF715008F8ABE /* RestoreLocalFileValidationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreLocalFileValidationController.swift; sourceTree = "<group>"; };
 		1F37DF2127BDF94F008F8ABE /* RestoreLocalFileValidationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreLocalFileValidationView.swift; sourceTree = "<group>"; };
@@ -1981,6 +1983,7 @@
 				1F5B5ED6284F2F4600F6AD98 /* FileServiceOptionsViewController.swift */,
 				5DBDA4D1285083B200FBC921 /* FileServiceSelectFileSourceViewController.swift */,
 				1F1762752859BB18008BE93E /* FileServiceDetailViewController.swift */,
+				1F176277285C36B4008BE93E /* FileServiceFAQViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4601,6 +4604,7 @@
 				2A6ABB9C2720053B00CC3AED /* RestoreDataDiffView.swift in Sources */,
 				0F31A15C273E11EB009D2E05 /* WalletDisplayBlockChainType.swift in Sources */,
 				2AF884D2271EE9310004565A /* MaskWebMessage+Wallet.swift in Sources */,
+				1F176278285C36B4008BE93E /* FileServiceFAQViewController.swift in Sources */,
 				0F1A15A2265CE93B00B5E83E /* WalletCoreHelper.swift in Sources */,
 				2AF88520271EE9310004565A /* TokenDetailViewController.swift in Sources */,
 				0FE54FE62759E88700B32BD6 /* EmptyTokenCell.swift in Sources */,
