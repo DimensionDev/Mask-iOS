@@ -53,7 +53,7 @@ extension Date {
 extension Dictionary {
     func asString() -> String {
       do {
-        let data = try JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
+        let data = try JSONSerialization.data(withJSONObject: self, options: .withoutEscapingSlashes)
         return String(data: data, encoding: String.Encoding.utf8) ?? ""
       } catch {
         return ""

@@ -76,7 +76,7 @@ class ArweaveUploader {
             "link": link,
             "signed": try? Self.makeFileKeySigned(fileKey: tx.key),
             "createdAt": Date().toISOString()
-        ]
+        ] as [String: Any?]
         let jsonString = dic.asString()
         let request = URLRequest(url: Arweave.landingURL)
         let (data, response) = try await URLSession.shared.data(for: request)
@@ -97,25 +97,20 @@ class ArweaveUploader {
         return try await makePayload(data: replacedData, type: "text/html")
     }
     
-    static func makeFileKeySigned(fileKey: String?) throws -> String? {
+    static func makeFileKeySigned(fileKey: String?) throws -> [String] {
         guard let encodedKey = fileKey?.data(using: .utf8) else {
             throw "key not exist"
         }
-        let generatedKey: [UInt8] = try Crypto.randomData(length: 64)
+//        let generatedKey: [UInt8] = try Crypto.randomData(length: 64)
+        let generatedKey: [UInt8] = Data(base64Encoded: "9YsZfTJUn+yQ725s5vtk7otfs8yXc3hPC4uU0nN57/UUifJAe1B1t1BDf0yv7RZGCKWOlNnOOb4YuSNT6ZKn5g==")!.bytes
         let hmac = HMAC(key: generatedKey, variant: HMAC.Variant.sha2(SHA2.Variant.sha256))
         let signed = try hmac.authenticate(encodedKey.bytes)
-
-
         let signedB64 = encodeArrayBuffer(data: Data(signed))
         let generatedKeyB64 = encodeArrayBuffer(data: Data(generatedKey))
-        return signedB64 + generatedKeyB64
+        return [signedB64, generatedKeyB64]
     }
     
     static func encodeArrayBuffer(data: Data) -> String {
-        var encoded = ""
-        for code in data.bytes {
-            encoded += String(UnicodeScalar(code))
-        }
-        return encoded.data(using: .utf8)!.base64EncodedString()
+        return data.base64EncodedString()
     }
 }
