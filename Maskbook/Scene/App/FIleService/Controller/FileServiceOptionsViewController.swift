@@ -5,6 +5,9 @@ final class FileServiceOptionViewController: BaseViewController {
     @InjectedProvider(\.userDefaultSettings)
     private var settings
 
+    @InjectedProvider(\.mainCoordinator)
+    private var coordinator
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,7 +24,7 @@ extension FileServiceOptionViewController {
     @objc
     override func prepareRightNavigationItems() {
         let button = NavigationBarItemView(imageAsset: Asset.Icon.faq) { [weak self] in
-            // TODO: file service faq
+            self?.coordinator.present(scene: .fileServiceFAQ, transition: .detail())
         }
 
         self.navigationItem.rightBarButtonItems = [
