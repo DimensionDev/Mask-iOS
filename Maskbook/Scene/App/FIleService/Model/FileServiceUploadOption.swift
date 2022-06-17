@@ -56,11 +56,11 @@ struct FileServiceUploadOption {
         let components = stringValue.components(separatedBy: ",")
 
         guard components.count == 3,
-              let service = Service(rawValue: components.first ?? ""),
-              let encrypted = Bool.init(components[1]),
-              let useMesonCDN = Bool.init(components.last ?? "") else {
+              let service = Service(rawValue: components.first ?? "") else {
             return nil
         }
+        let encrypted = components[1] == "1"
+        let useMesonCDN = components.last == "1"
 
         self.service = service
         self.encrypted = encrypted

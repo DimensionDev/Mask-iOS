@@ -4,12 +4,19 @@ struct FileServiceOptionView: View {
     typealias Service = FileServiceUploadOption.Service
     typealias Option = FileServiceUploadOption.Option
 
-    @State var fileServiceOption: FileServiceUploadOption = .init()
+    @State
+    private var fileServiceOption: FileServiceUploadOption
 
     private let optionHandler: (FileServiceUploadOption) -> Void
 
     init(_ optionHandler: @escaping (FileServiceUploadOption) -> Void) {
         self.optionHandler = optionHandler
+
+        @InjectedProvider(\.userDefaultSettings)
+        var setting;
+
+        let option = FileServiceUploadOption(setting.fileServiceUploadOption) ?? .default
+        _fileServiceOption = .init(initialValue: option)
     }
 
     var body: some View {
