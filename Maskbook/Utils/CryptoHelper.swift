@@ -57,8 +57,8 @@ enum Crypto {
             password: passphrase,
             salt: salt,
             iterations: 1_000,
-            keyLength: 32,
-            variant: .sha2(SHA2.Variant.sha256)).calculate() else {
+            keyLength: 16,
+            variant: .sha256).calculate() else {
             return nil
         }
         return key

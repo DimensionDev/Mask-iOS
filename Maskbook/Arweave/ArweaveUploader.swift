@@ -9,6 +9,7 @@
 import Foundation
 import CryptoSwift
 
+
 class ArweaveUploader {
     init(item: FileServiceUploadingItem,
          option: FileServiceUploadOption,
@@ -26,10 +27,10 @@ class ArweaveUploader {
     let continuation: AsyncThrowingStream<FileServiceTranscation, Error>.Continuation
     
     func startUpload() async throws {
-        tx.id = encodeArrayBuffer(data: hash(data: item.content))
+        tx.id = Self.encodeArrayBuffer(data: hash(data: item.content))
         
         continuation.yield(tx)
-        let attachment = AttachmentOptions(encrypted: false,
+        let attachment = AttachmentOptions(encrypted: option.encrypted,
                                            type: item.mime,
                                            block: item.content,
                                            name: item.fileName)
@@ -73,7 +74,7 @@ class ArweaveUploader {
             "size": "\(item.content.count)",
             "provider": "arweave",
             "link": link,
-            "signed": try? makeFileKeySigned(fileKey: tx.key),
+            "signed": try? Self.makeFileKeySigned(fileKey: tx.key),
             "createdAt": Date().toISOString()
         ]
         let jsonString = dic.asString()
@@ -96,29 +97,25 @@ class ArweaveUploader {
         return try await makePayload(data: replacedData, type: "text/html")
     }
     
-    func makeFileKeySigned(fileKey: String?) throws -> String? {
-        guard let fileKey = fileKey else {
-            return nil
+    static func makeFileKeySigned(fileKey: String?) throws -> String? {
+        guard let encodedKey = fileKey?.data(using: .utf8) else {
+            throw "key not exist"
         }
-        let keyData = fileKey.data(using: .utf8)
-        guard let keyData = keyData else { return nil }
-        let generateKey = try Crypto.randomIV()
-        let hmac = HMAC(key: generateKey, variant: HMAC.Variant.sha2(SHA2.Variant.sha256))
-        let signed = try hmac.authenticate(keyData.bytes)
-        let data = [
-            Data(generateKey),
-            Data(signed)
-        ]
-        .combined
-        
-        return encodeArrayBuffer(data: data)
+        let generatedKey: [UInt8] = try Crypto.randomData(length: 64)
+        let hmac = HMAC(key: generatedKey, variant: HMAC.Variant.sha2(SHA2.Variant.sha256))
+        let signed = try hmac.authenticate(encodedKey.bytes)
+
+
+        let signedB64 = encodeArrayBuffer(data: Data(signed))
+        let generatedKeyB64 = encodeArrayBuffer(data: Data(generatedKey))
+        return signedB64 + generatedKeyB64
     }
     
-    func encodeArrayBuffer(data: Data) -> String {
+    static func encodeArrayBuffer(data: Data) -> String {
         var encoded = ""
         for code in data.bytes {
             encoded += String(UnicodeScalar(code))
         }
-        return encoded
+        return encoded.data(using: .utf8)!.base64EncodedString()
     }
 }

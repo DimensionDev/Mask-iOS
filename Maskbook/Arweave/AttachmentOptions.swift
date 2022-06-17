@@ -54,25 +54,29 @@ extension AttachmentOptions {
         if let passphrase = key {
             let salt = try Crypto.randomData(length: 8)
             let iv = try Crypto.randomData(length: 12)
+
             let generatedKey = try Crypto.generateKeyWith(passphrase.uint8Array, salt: salt)
+            let tagLength = 128
             guard let generatedKey = generatedKey else { return Data() }
-            let gcm = GCM(iv: iv, tagLength: 128, mode: .combined)
+            let gcm = GCM(iv: iv, tagLength: tagLength, mode: .combined)
             let aes = try AES(key: generatedKey, blockMode: gcm, padding: .noPadding)
-            let fileData = try aes.encrypt(self.block.bytes)
+            let encrypted = try aes.encrypt(self.block.bytes)
+            let encryptedData = Data(encrypted)
             let algorithm = [
                 "name": "AES-GCM",
-                "iv": iv,
-                "tagLength": 128
+                "iv": Data(iv),
+                "tagLength": tagLength
             ] as [String: Any]
             let payload = [
                 "version": 0,
                 "mime": mime,
+                "metadata": nil,
                 "algorithm": algorithm,
-                "salt": salt,
-                "keyHash": passphrase.uint8Array.sha256(),
-                "block": Data(fileData),
-                "blockHash": fileData.sha256()
-            ] as [String: Any]
+                "salt": Data(salt),
+                "keyHash": hash(data: Data(passphrase.uint8Array)),
+                "block": encryptedData,
+                "blockHash": hash(data: encryptedData)
+            ] as [String: Any?]
             var packData = Data()
             try packData.pack(payload)
             return [Self.magic_header_data,
@@ -82,13 +86,9 @@ extension AttachmentOptions {
             let payload = [
                 "version": 0,
                 "mime": mime,
-                "algorithm": nil,
-                "salt": nil,
-                "keyHash": nil,
-                "metadata": nil,
                 "block": block,
                 "blockHash": block.sha256()
-            ] as [String: Any?]
+            ] as [String: Any]
             var packData = Data()
             try packData.pack(payload)
             return [Self.magic_header_data,
