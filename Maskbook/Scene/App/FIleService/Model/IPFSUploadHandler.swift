@@ -28,7 +28,7 @@ struct IPFSUploadHandler: FileServiceUploadHandler {
         .init { continuation in
             Task.detached {
                 var tx = FileServiceTranscation.progress(0)
-                tx.id = encodeArrayBuffer(data: hash(data: item.content))
+                tx.id = Self.encodeArrayBuffer(data: item.content.hashData())
                 
                 continuation.yield(tx)
                 let attachment = AttachmentOptions(encrypted: false,
@@ -57,9 +57,9 @@ struct IPFSUploadHandler: FileServiceUploadHandler {
             "size": "\(item.content.count)",
             "provider": "ipfs",
             "link": link,
-            "signed": try? makeFileKeySigned(fileKey: tx.key),
+            "signed": try? Self.makeFileKeySigned(fileKey: tx.key),
             "createdAt": Date().toISOString()
-        ]
+        ] as [String: Any?]
         let jsonString = dic.asString()
         let request = URLRequest(url: Arweave.landingURL)
         let (data, response) = try await URLSession.shared.data(for: request)
@@ -94,29 +94,19 @@ struct IPFSUploadHandler: FileServiceUploadHandler {
         }
     }
     
-    func makeFileKeySigned(fileKey: String?) throws -> String? {
-        guard let fileKey = fileKey else {
-            return nil
+    static func makeFileKeySigned(fileKey: String?) throws -> [String] {
+        guard let encodedKey = fileKey?.data(using: .utf8) else {
+            throw "key not exist"
         }
-        let keyData = fileKey.data(using: .utf8)
-        guard let keyData = keyData else { return nil }
-        let generateKey = try Crypto.randomIV()
-        let hmac = HMAC(key: generateKey, variant: HMAC.Variant.sha2(SHA2.Variant.sha256))
-        let signed = try hmac.authenticate(keyData.bytes)
-        let data = [
-            Data(generateKey),
-            Data(signed)
-        ]
-        .combined
-        
-        return encodeArrayBuffer(data: data)
+        let generatedKey: [UInt8] = try Crypto.randomData(length: 64)
+        let hmac = HMAC(key: generatedKey, variant: HMAC.Variant.sha2(SHA2.Variant.sha256))
+        let signed = try hmac.authenticate(encodedKey.bytes)
+        let signedB64 = encodeArrayBuffer(data: Data(signed))
+        let generatedKeyB64 = encodeArrayBuffer(data: Data(generatedKey))
+        return [signedB64, generatedKeyB64]
     }
     
-    func encodeArrayBuffer(data: Data) -> String {
-        var encoded = ""
-        for code in data.bytes {
-            encoded += String(UnicodeScalar(code))
-        }
-        return encoded
+    static func encodeArrayBuffer(data: Data) -> String {
+        data.base64EncodedString()
     }
 }
