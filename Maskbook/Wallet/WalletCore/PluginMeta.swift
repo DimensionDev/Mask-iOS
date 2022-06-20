@@ -93,6 +93,7 @@ extension Array where Element == PluginMeta {
         switch format {
         case .json:
             let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
             let data = self.reduce(into: [:], { $0[$1.key] = $1 })
 
             return (try? encoder.encode(data))
