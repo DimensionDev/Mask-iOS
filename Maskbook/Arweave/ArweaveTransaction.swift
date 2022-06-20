@@ -13,13 +13,11 @@ public typealias Base64EncodedString = String
 
 public extension ArweaveTransaction {
     struct PriceRequest {
-        public init(bytes: Int = 0, target: ArweaveAddress? = nil) {
+        public init(bytes: Int = 0) {
             self.bytes = bytes
-            self.target = target
         }
         
         public var bytes: Int = 0
-        public var target: ArweaveAddress?
     }
 
     struct Tag: Codable {
@@ -27,8 +25,8 @@ public extension ArweaveTransaction {
         public let value: String
 
         public init(name: String, value: String) {
-            self.name = name.base64URLEncoded
-            self.value = value.base64URLEncoded
+            self.name = name.base64URLEncodedString
+            self.value = value.base64URLEncodedString
         }
     }
 }
@@ -58,7 +56,7 @@ public struct ArweaveTransaction: Codable {
     }
 
     public var priceRequest: PriceRequest {
-        PriceRequest(bytes: rawData.count, target: ArweaveAddress(address: target))
+        PriceRequest(bytes: rawData.count)
     }
 
     public var rawData = Data()
@@ -76,11 +74,6 @@ public extension ArweaveTransaction {
         self.owner = APIKey.arweaveOwner
     }
 
-    init(amount: ArweaveAmount, target: ArweaveAddress) {
-        self.quantity = String(describing: amount)
-        self.target = target.address
-    }
-
     func commit(delegate: URLSessionTaskDelegate? = nil) async throws -> HttpResponse {
         guard !signature.isEmpty else {
             throw "Missing signature on transaction."
@@ -88,27 +81,6 @@ public extension ArweaveTransaction {
 
         let commit = Arweave.shared.request(for: .commit(self))
         return try await ArweaveHttpClient.request(commit, delegate: delegate)
-    }
-
-    mutating private func signatureBody() async throws -> Data {
-        
-        if data_root.isEmpty {
-            prepareChunks(data: rawData)
-        }
-        
-        let last_tx = try await ArweaveTransaction.anchor()
-        
-        return deepHash(buffers: [
-            withUnsafeBytes(of: format) { Data($0) },
-            Data(base64URLEncoded: owner),
-            Data(base64URLEncoded: target),
-            quantity.data(using: .utf8),
-            reward.data(using: .utf8),
-            Data(base64URLEncoded: last_tx),
-            tags.combined.data(using: .utf8),
-            withUnsafeBytes(of: data_size) { Data($0) },
-            Data(base64URLEncoded: data_root)
-        ].compactMap { $0 })
     }
     
     mutating func remoteSignatureBody() async throws -> Data {
@@ -190,20 +162,6 @@ public extension ArweaveTransaction {
         let target = Arweave.shared.request(for: .transactionData(id: txId))
         let response = try await ArweaveHttpClient.request(target)
         return String(decoding: response.data, as: UTF8.self)
-    }
-
-    static func status(of txId: TransactionId) async throws -> ArweaveTransaction.Status {
-        let target = Arweave.shared.request(for: .transactionStatus(id: txId))
-        let response = try await ArweaveHttpClient.request(target)
-        
-        var status: ArweaveTransaction.Status
-        if response.statusCode == 200 {
-            let data = try JSONDecoder().decode(ArweaveTransaction.Status.Data.self, from: response.data)
-            status = .accepted(data: data)
-        } else {
-            status = ArweaveTransaction.Status(rawValue: .status(response.statusCode))!
-        }
-        return status
     }
 
     static func price(for request: ArweaveTransaction.PriceRequest) async throws -> ArweaveAmount {

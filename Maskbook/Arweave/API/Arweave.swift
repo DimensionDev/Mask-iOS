@@ -19,8 +19,6 @@ enum Route {
     case transaction(id: TransactionId)
     case transactionData(id: TransactionId)
     case transactionStatus(id: TransactionId)
-    case lastTransactionId(walletAddress: ArweaveAddress)
-    case walletBalance(walletAddress: ArweaveAddress)
     case reward(ArweaveTransaction.PriceRequest)
     case commit(ArweaveTransaction)
 }
@@ -41,16 +39,8 @@ extension Arweave {
                 return "/tx/\(id)/data"
             case let .transactionStatus(id):
                 return "/tx/\(id)/status"
-            case let .lastTransactionId(walletAddress):
-                return "/wallet/\(walletAddress)/last_tx"
-            case let .walletBalance(walletAddress):
-                return "/wallet/\(walletAddress)/balance"
             case let .reward(request):
-                var path = "/price/\(String(request.bytes))"
-                if let target = request.target {
-                    path.append("/\(target.address)")
-                }
-                return path
+                return "/price/\(String(request.bytes))"
             case .commit:
                 return "/tx"
             }
