@@ -683,6 +683,8 @@
 		5D554EC6279FE58100D40848 /* OpenRedPackageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D554EC5279FE58100D40848 /* OpenRedPackageViewController.swift */; };
 		5D554EC8279FE58D00D40848 /* OpenRedPackageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D554EC7279FE58D00D40848 /* OpenRedPackageViewModel.swift */; };
 		5D598E37285B67CF006D1E4B /* ArweaveUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D598E36285B67CF006D1E4B /* ArweaveUploader.swift */; };
+		5D598E3928600D00006D1E4B /* FileServiceUploadProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D598E3828600D00006D1E4B /* FileServiceUploadProgress.swift */; };
+		5D598E3B28601873006D1E4B /* Data+Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D598E3A28601873006D1E4B /* Data+Hash.swift */; };
 		5D61527127CF35E2001CB038 /* MoveBackupDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D61527027CF35E2001CB038 /* MoveBackupDataViewModel.swift */; };
 		5D61527327CF35FC001CB038 /* MoveBackupDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D61527227CF35FC001CB038 /* MoveBackupDataViewController.swift */; };
 		5D61527927D06B7A001CB038 /* BackupFolderCheckService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D61527827D06B7A001CB038 /* BackupFolderCheckService.swift */; };
@@ -1510,6 +1512,8 @@
 		5D554EC5279FE58100D40848 /* OpenRedPackageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenRedPackageViewController.swift; sourceTree = "<group>"; };
 		5D554EC7279FE58D00D40848 /* OpenRedPackageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenRedPackageViewModel.swift; sourceTree = "<group>"; };
 		5D598E36285B67CF006D1E4B /* ArweaveUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArweaveUploader.swift; sourceTree = "<group>"; };
+		5D598E3828600D00006D1E4B /* FileServiceUploadProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceUploadProgress.swift; sourceTree = "<group>"; };
+		5D598E3A28601873006D1E4B /* Data+Hash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Hash.swift"; sourceTree = "<group>"; };
 		5D61527027CF35E2001CB038 /* MoveBackupDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveBackupDataViewModel.swift; sourceTree = "<group>"; };
 		5D61527227CF35FC001CB038 /* MoveBackupDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveBackupDataViewController.swift; sourceTree = "<group>"; };
 		5D61527827D06B7A001CB038 /* BackupFolderCheckService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupFolderCheckService.swift; sourceTree = "<group>"; };
@@ -2430,6 +2434,7 @@
 				2AD31E3C282D367700CB3D49 /* CGAffineTransform+extensiion.swift */,
 				2AD31E3B282D367700CB3D49 /* CurrentSubject+extension.swift */,
 				2AD31E3D282D367700CB3D49 /* Data+Base64URL.swift */,
+				5D598E3A28601873006D1E4B /* Data+Hash.swift */,
 				2AD31E43282D367700CB3D49 /* Date+Compare.swift */,
 				2AD31E36282D367600CB3D49 /* EthUtil.swift */,
 				2AD31E2E282D367600CB3D49 /* Managed+extension.swift */,
@@ -3714,6 +3719,7 @@
 				5DC018352859BE84004973CA /* ArweaveStatus.swift */,
 				5DC018362859BE84004973CA /* ArweaveTransaction.swift */,
 				5D598E36285B67CF006D1E4B /* ArweaveUploader.swift */,
+				5D598E3828600D00006D1E4B /* FileServiceUploadProgress.swift */,
 				5DC018322859BE83004973CA /* ArweaveWallet.swift */,
 				5DC0181828598969004973CA /* RemoteSigning.swift */,
 				5D06F59B28531B8B00640D00 /* AttachmentOptions.swift */,
@@ -4902,6 +4908,7 @@
 				5DE5E53C27E468B400F2B62A /* PersonaAvatarActionViewModel.swift in Sources */,
 				2AD856152812875A0064DDA5 /* Shape+Fill.swift in Sources */,
 				1F0363922779D223001E8A88 /* DecentralisedApplicationResolver.swift in Sources */,
+				5D598E3B28601873006D1E4B /* Data+Hash.swift in Sources */,
 				2AD85513281283170064DDA5 /* TextLengthModifier.swift in Sources */,
 				2A2B4EEC27E8D1850097D50D /* HappyRedPacketV4.swift in Sources */,
 				1FCBEDF42738FF6C001C3637 /* RestoreWalletPasswordVerifyController.swift in Sources */,
@@ -5037,6 +5044,7 @@
 				2AF884F2271EE9310004565A /* IdentityMnemonicImportViewController.swift in Sources */,
 				5D93DFA2267B3F2E00A175BF /* Persona.swift in Sources */,
 				2AD856182812875A0064DDA5 /* SheetContainerModifier.swift in Sources */,
+				5D598E3928600D00006D1E4B /* FileServiceUploadProgress.swift in Sources */,
 				0F641F10268B0237002A4D33 /* MaskError.swift in Sources */,
 				2AF884FF271EE9310004565A /* ContactProfileTableViewCell.swift in Sources */,
 				1F9C60D726B101C6001C26D2 /* BlockChainNetworkRepresentable.swift in Sources */,

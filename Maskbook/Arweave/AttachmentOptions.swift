@@ -73,9 +73,9 @@ extension AttachmentOptions {
                 "metadata": nil,
                 "algorithm": algorithm,
                 "salt": Data(salt),
-                "keyHash": hash(data: Data(passphrase.uint8Array)),
+                "keyHash": Data(passphrase.uint8Array).hashData(),
                 "block": encryptedData,
-                "blockHash": hash(data: encryptedData)
+                "blockHash": encryptedData.hashData()
             ] as [String: Any?]
             var packData = Data()
             try packData.pack(payload)
