@@ -714,14 +714,11 @@
 		5DC0181728597908004973CA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC0181628597908004973CA /* Extensions.swift */; };
 		5DC0181928598969004973CA /* RemoteSigning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC0181828598969004973CA /* RemoteSigning.swift */; };
 		5DC0183B2859BE84004973CA /* NonNegative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC018312859BE83004973CA /* NonNegative.swift */; };
-		5DC0183C2859BE84004973CA /* ArweaveWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC018322859BE83004973CA /* ArweaveWallet.swift */; };
 		5DC0183D2859BE84004973CA /* Merkle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC018332859BE83004973CA /* Merkle.swift */; };
 		5DC0183E2859BE84004973CA /* ArweaveAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC018342859BE83004973CA /* ArweaveAmount.swift */; };
-		5DC0183F2859BE84004973CA /* ArweaveStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC018352859BE84004973CA /* ArweaveStatus.swift */; };
 		5DC018402859BE84004973CA /* ArweaveTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC018362859BE84004973CA /* ArweaveTransaction.swift */; };
 		5DC018412859BE84004973CA /* Arweave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC018382859BE84004973CA /* Arweave.swift */; };
 		5DC018422859BE84004973CA /* ArweaveHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC018392859BE84004973CA /* ArweaveHttpClient.swift */; };
-		5DC018432859BE84004973CA /* KeyUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC0183A2859BE84004973CA /* KeyUtilities.swift */; };
 		5DCA069B27C75A8B007697C8 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCA069A27C75A8B007697C8 /* Toast.swift */; };
 		5DD1BBC227CF0843001DB330 /* Toast+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BBC127CF0843001DB330 /* Toast+Extension.swift */; };
 		5DD5A69827F53168005952A0 /* PersonaImportItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD5A69727F53168005952A0 /* PersonaImportItem.swift */; };
@@ -1552,14 +1549,11 @@
 		5DC0181628597908004973CA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		5DC0181828598969004973CA /* RemoteSigning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteSigning.swift; sourceTree = "<group>"; };
 		5DC018312859BE83004973CA /* NonNegative.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonNegative.swift; sourceTree = "<group>"; };
-		5DC018322859BE83004973CA /* ArweaveWallet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArweaveWallet.swift; sourceTree = "<group>"; };
 		5DC018332859BE83004973CA /* Merkle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Merkle.swift; sourceTree = "<group>"; };
 		5DC018342859BE83004973CA /* ArweaveAmount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArweaveAmount.swift; sourceTree = "<group>"; };
-		5DC018352859BE84004973CA /* ArweaveStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArweaveStatus.swift; sourceTree = "<group>"; };
 		5DC018362859BE84004973CA /* ArweaveTransaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArweaveTransaction.swift; sourceTree = "<group>"; };
 		5DC018382859BE84004973CA /* Arweave.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arweave.swift; sourceTree = "<group>"; };
 		5DC018392859BE84004973CA /* ArweaveHttpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArweaveHttpClient.swift; sourceTree = "<group>"; };
-		5DC0183A2859BE84004973CA /* KeyUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyUtilities.swift; sourceTree = "<group>"; };
 		5DCA069A27C75A8B007697C8 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		5DD1BBC127CF0843001DB330 /* Toast+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Toast+Extension.swift"; sourceTree = "<group>"; };
 		5DD5A69727F53168005952A0 /* PersonaImportItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaImportItem.swift; sourceTree = "<group>"; };
@@ -3723,13 +3717,10 @@
 				5DC018372859BE84004973CA /* API */,
 				5DC018342859BE83004973CA /* ArweaveAmount.swift */,
 				5DC018312859BE83004973CA /* NonNegative.swift */,
-				5DC0183A2859BE84004973CA /* KeyUtilities.swift */,
 				5DC018332859BE83004973CA /* Merkle.swift */,
-				5DC018352859BE84004973CA /* ArweaveStatus.swift */,
 				5DC018362859BE84004973CA /* ArweaveTransaction.swift */,
 				5D598E36285B67CF006D1E4B /* ArweaveUploader.swift */,
 				5D598E3828600D00006D1E4B /* FileServiceUploadProgress.swift */,
-				5DC018322859BE83004973CA /* ArweaveWallet.swift */,
 				5DC0181828598969004973CA /* RemoteSigning.swift */,
 				5D06F59B28531B8B00640D00 /* AttachmentOptions.swift */,
 				5DC0181628597908004973CA /* Extensions.swift */,
@@ -4748,7 +4739,6 @@
 				2A5FAEA027CF7AD200D01250 /* GuideItemView.swift in Sources */,
 				0F41A195260C6310000037B2 /* ZerionAPIModel.swift in Sources */,
 				2AD856132812875A0064DDA5 /* LAErrorHandler.swift in Sources */,
-				5DC018432859BE84004973CA /* KeyUtilities.swift in Sources */,
 				2AD31E5C282D367700CB3D49 /* Array+Safety.swift in Sources */,
 				2AD855AA281285D10064DDA5 /* NftPacketPayload.swift in Sources */,
 				6F785E36269445A00019079F /* ContactManager.swift in Sources */,
@@ -4789,7 +4779,6 @@
 				2AD855F92812875A0064DDA5 /* PathBuilder.swift in Sources */,
 				2AD31E54282D367700CB3D49 /* UIImageView+Kingfisher.swift in Sources */,
 				2AD856062812875A0064DDA5 /* AlertBuilder.swift in Sources */,
-				5DC0183F2859BE84004973CA /* ArweaveStatus.swift in Sources */,
 				2AF88566271EE9310004565A /* WalletDeleteViewModel.swift in Sources */,
 				2AD85517281283170064DDA5 /* RedPacketShareView.swift in Sources */,
 				2AF8855B271EE9310004565A /* GasFeeApi.swift in Sources */,
@@ -5004,7 +4993,6 @@
 				2AD31E5F282D367700CB3D49 /* UITableView+extension.swift in Sources */,
 				2AD8560D2812875A0064DDA5 /* AlertItemRepresentable.swift in Sources */,
 				2AF8853E271EE9310004565A /* BalanceExpandCell.swift in Sources */,
-				5DC0183C2859BE84004973CA /* ArweaveWallet.swift in Sources */,
 				2AD856042812875A0064DDA5 /* MaskGroupActor.swift in Sources */,
 				2AF884FA271EE9310004565A /* WalletConnectSelectWalletViewModel.swift in Sources */,
 				2AF884E5271EE9310004565A /* PluginType.swift in Sources */,
