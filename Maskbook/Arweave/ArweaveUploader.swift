@@ -6,15 +6,15 @@
 //  Copyright © 2022 dimension. All rights reserved.
 //
 
-import Foundation
 import CryptoSwift
+import Foundation
 
-
-class ArweaveUploader {
+class ArweaveUploader: NSObject {
     init(item: FileServiceUploadingItem,
          option: FileServiceUploadOption,
          tx: FileServiceTranscation = FileServiceTranscation.progress(0),
-         continuation: AsyncThrowingStream<FileServiceTranscation, Error>.Continuation) {
+         continuation: AsyncThrowingStream<FileServiceTranscation, Error>.Continuation)
+    {
         self.item = item
         self.option = option
         self.tx = tx
@@ -24,10 +24,12 @@ class ArweaveUploader {
     let item: FileServiceUploadingItem
     let option: FileServiceUploadOption
     var tx = FileServiceTranscation.progress(0)
+    var progress = FileServiceUploadProgress()
+    
     let continuation: AsyncThrowingStream<FileServiceTranscation, Error>.Continuation
     
     func startUpload() async throws {
-        tx.id = Self.encodeArrayBuffer(data: hash(data: item.content))
+        tx.id = Self.encodeArrayBuffer(data: item.content.hashData())
         
         continuation.yield(tx)
         let attachment = AttachmentOptions(encrypted: option.encrypted,
@@ -37,31 +39,30 @@ class ArweaveUploader {
         tx.key = attachment.key
         let payloadID = try await makeAttachment(attachment: attachment)
         tx.payloadTxID = payloadID
-        tx.progress = 0.5
+        tx.progress = progress.progressForCurrentStage(stage: .htmlDownloading)
         continuation.yield(tx)
         let landingTxID = try await uploadLandingPage()
         tx.landingTxID = landingTxID
-        tx.progress = 1.0
+        tx.progress = progress.progressForCurrentStage(stage: .uploadFinish)
         continuation.yield(tx)
         continuation.finish()
     }
     
     func makeAttachment(attachment: AttachmentOptions) async throws -> String {
         let data = try attachment.encryptedData()
-        return try await makePayload(data: data, type: "application/octet-stream")
+        return try await makePayload(data: data, type: "application/octet-stream", delegate: self)
     }
     
-    func makePayload(data: Data, type: String) async throws -> String {
+    func makePayload(data: Data, type: String, delegate: URLSessionTaskDelegate? = nil) async throws -> String {
         var transaction = ArweaveTransaction(data: data)
         let tag = ArweaveTransaction.Tag(name: "Content-Type", value: type)
         transaction.tags.append(tag)
         try await RemoteSigning.signing(transaction: &transaction)
-        _ = try await transaction.commit()
+        _ = try await transaction.commit(delegate: delegate)
         return transaction.id
     }
     
-    func uploadLandingPage() async throws -> String
-    {
+    func uploadLandingPage() async throws -> String {
         let link: String = {
             if option.useMesonCDN {
                 return Arweave.baseUrl.absoluteString + "/" + tx.payloadTxID
@@ -76,7 +77,7 @@ class ArweaveUploader {
             "link": link,
             "signed": try? Self.makeFileKeySigned(fileKey: tx.key),
             "createdAt": Date().toISOString()
-        ]
+        ] as [String: Any?]
         let jsonString = dic.asString()
         let request = URLRequest(url: Arweave.landingURL)
         let (data, response) = try await URLSession.shared.data(for: request)
@@ -94,28 +95,41 @@ class ArweaveUploader {
         else {
             throw "encode html error"
         }
-        return try await makePayload(data: replacedData, type: "text/html")
+        tx.progress = progress.progressForCurrentStage(stage: .htmlUploading)
+        let txid = try await makePayload(data: replacedData, type: "text/html")
+        print("upload succeed")
+        if let key = tx.key {
+            print(Arweave.baseUrl.absoluteString + "/" + txid + "#" + key)
+        } else {
+            print(Arweave.baseUrl.absoluteString + "/" + txid)
+        }
+        return txid
     }
     
-    static func makeFileKeySigned(fileKey: String?) throws -> String? {
+    static func makeFileKeySigned(fileKey: String?) throws -> [String] {
         guard let encodedKey = fileKey?.data(using: .utf8) else {
             throw "key not exist"
         }
         let generatedKey: [UInt8] = try Crypto.randomData(length: 64)
         let hmac = HMAC(key: generatedKey, variant: HMAC.Variant.sha2(SHA2.Variant.sha256))
         let signed = try hmac.authenticate(encodedKey.bytes)
-
-
         let signedB64 = encodeArrayBuffer(data: Data(signed))
         let generatedKeyB64 = encodeArrayBuffer(data: Data(generatedKey))
-        return signedB64 + generatedKeyB64
+        return [signedB64, generatedKeyB64]
     }
     
     static func encodeArrayBuffer(data: Data) -> String {
-        var encoded = ""
-        for code in data.bytes {
-            encoded += String(UnicodeScalar(code))
-        }
-        return encoded.data(using: .utf8)!.base64EncodedString()
+        data.base64EncodedString()
+    }
+}
+
+extension ArweaveUploader: URLSessionTaskDelegate {
+    func urlSession(_ session: URLSession,
+                    task: URLSessionTask,
+                    didSendBodyData bytesSent: Int64,
+                    totalBytesSent: Int64,
+                    totalBytesExpectedToSend: Int64) {
+        tx.progress = progress.progressForCurrentStage(stage: .filePayloadUploading(totalBytesSent: Double(totalBytesSent), totalBytesExpectedToSend: Double(totalBytesExpectedToSend)))
+        continuation.yield(tx)
     }
 }

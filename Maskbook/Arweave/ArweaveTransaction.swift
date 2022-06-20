@@ -81,13 +81,13 @@ public extension ArweaveTransaction {
         self.target = target.address
     }
 
-    func commit() async throws -> HttpResponse {
+    func commit(delegate: URLSessionTaskDelegate? = nil) async throws -> HttpResponse {
         guard !signature.isEmpty else {
             throw "Missing signature on transaction."
         }
 
         let commit = Arweave.shared.request(for: .commit(self))
-        return try await ArweaveHttpClient.request(commit)
+        return try await ArweaveHttpClient.request(commit, delegate: delegate)
     }
 
     mutating private func signatureBody() async throws -> Data {
@@ -139,7 +139,6 @@ public extension ArweaveTransaction {
     }
     
     mutating func setRemoteSignature(response: JSON) {
-        print(response)
         let dic = response.dictionaryValue
         if let signature = dic["signature"]?.stringValue {
             self.signature = signature
@@ -171,7 +170,7 @@ public extension ArweaveTransaction {
 public extension ArweaveTransaction {
     mutating func prepareChunks(data: Data) {
         if chunks == nil, data.count > 0 {
-            chunks = generateTransactionChunks(data: data)
+            chunks = MerkelTools.generateTransactionChunks(data: data)
             data_root = chunks!.data_root.base64URLEncodedString()
         }
         

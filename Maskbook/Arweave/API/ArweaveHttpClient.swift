@@ -9,7 +9,7 @@ public struct HttpResponse {
 
 struct ArweaveHttpClient {
 
-    static func request(_ target: Arweave.Request) async throws -> HttpResponse {
+    static func request(_ target: Arweave.Request, delegate: URLSessionTaskDelegate? = nil) async throws -> HttpResponse {
         
         var request = URLRequest(url: target.url)
         request.httpMethod = target.method
@@ -18,7 +18,7 @@ struct ArweaveHttpClient {
             request.allHTTPHeaderFields = target.headers
         }
         
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (data, response) = try await Self.urlSession(for: request, delegate: delegate)
         
         let httpResponse = response as? HTTPURLResponse
         let statusCode = httpResponse?.statusCode ?? 0
@@ -29,5 +29,13 @@ struct ArweaveHttpClient {
         }
         
         return HttpResponse(data: data, statusCode: statusCode)
+    }
+    
+    static func urlSession(for request: URLRequest, delegate: URLSessionTaskDelegate? = nil) async throws -> (Data, URLResponse) {
+        if #available(iOS 15.0, *) {
+            return try await URLSession.shared.data(for: request, delegate: delegate)
+        } else {
+            return try await URLSession.shared.data(for: request)
+        }
     }
 }

@@ -24,8 +24,8 @@ enum PluginMeta: Codable {
         case let .redPacket(value):
             try container.encode(value)
 
-        case .fileService:
-            return
+        case let .fileService(value):
+            try container.encode(value)
         }
     }
 
@@ -62,7 +62,7 @@ enum PluginMeta: Codable {
             return title
 
         case let .fileService(value):
-            return "Attached File: \(value.name)"
+            return "Attached File: \(value.name) (\(Double(value.size).fileSizeText))"
         }
     }
 }
