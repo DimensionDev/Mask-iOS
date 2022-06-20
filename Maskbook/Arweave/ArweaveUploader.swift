@@ -96,14 +96,8 @@ class ArweaveUploader: NSObject {
             throw "encode html error"
         }
         tx.progress = progress.progressForCurrentStage(stage: .htmlUploading)
-        let txid = try await makePayload(data: replacedData, type: "text/html")
-        print("upload succeed")
-        if let key = tx.key {
-            print(Arweave.baseUrl.absoluteString + "/" + txid + "#" + key)
-        } else {
-            print(Arweave.baseUrl.absoluteString + "/" + txid)
-        }
-        return txid
+        continuation.yield(tx)
+        return try await makePayload(data: replacedData, type: "text/html")
     }
     
     static func makeFileKeySigned(fileKey: String?) throws -> [String] {
