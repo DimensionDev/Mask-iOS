@@ -1,3 +1,5 @@
+import CryptoKit
+import CryptoSwift
 import Foundation
 
 protocol FileServiceUploadHandler {
@@ -5,6 +7,89 @@ protocol FileServiceUploadHandler {
         _ item: FileServiceUploadingItem,
         option: FileServiceUploadOption
     ) -> AsyncThrowingStream<FileServiceTranscation, Error>
+
+    func makePayload(data: Data, type: String, delegate: URLSessionTaskDelegate?) async throws -> String
+    func buildLink(for payloadTxID: String) -> String
+    func replace(_ html: String,  with text: String) throws -> Data
+    func landingPage(item: FileServiceUploadingItem, tx: FileServiceTranscation) async throws -> String
+}
+
+// MARK: common function
+extension FileServiceUploadHandler {
+    func encodeArrayBuffer(_ data: Data) -> String {
+        data.base64EncodedString()
+    }
+
+    func makeFileKeySigned(fileKey: String?) throws -> [String] {
+        guard let encodedKey = fileKey?.data(using: .utf8) else {
+            throw "key not exist"
+        }
+        let generatedKey: [UInt8] = try Crypto.randomData(length: 64)
+        let hmac = HMAC(key: generatedKey, variant: HMAC.Variant.sha2(SHA2.Variant.sha256))
+        let signed = try hmac.authenticate(encodedKey.bytes)
+        let signedB64 = encodeArrayBuffer(Data(signed))
+        let generatedKeyB64 = encodeArrayBuffer(Data(generatedKey))
+        return [signedB64, generatedKeyB64]
+    }
+
+    func formattedPayload(from item: FileServiceUploadingItem, payloadTxID: String, fileKey: String?) -> String {
+        let dic: [String: Any?] = [
+            "name": item.fileName,
+            "size": "\(item.content.count)",
+            "provider": item.provider,
+            "link": buildLink(for: payloadTxID),
+            "signed": try? makeFileKeySigned(fileKey: fileKey),
+            "createdAt": (item.uploadDate ?? Date()).toISOString()
+        ]
+
+        return dic.asString()
+    }
+
+    func landingHTML() async throws -> String {
+        // use same Arweave.landingURL`s html
+        // and replace __METADATA__ parts if needed
+        let request = URLRequest(url: Arweave.landingURL)
+        let (data, response) = try await URLSession.shared.data(for: request)
+        let httpResponse = response as? HTTPURLResponse
+        let statusCode = httpResponse?.statusCode ?? 0
+        if statusCode != 200 {
+            throw "Bad response code \(statusCode)"
+        }
+        guard let htmlText = String(data: data, encoding: .utf8) else {
+            throw "wrong html content"
+        }
+
+        return htmlText
+    }
+}
+
+// MARK: default impl
+extension FileServiceUploadHandler {
+    func makePayload(
+        data: Data,
+        type: String = "",
+        delegate: URLSessionTaskDelegate? = nil
+    ) async throws -> String { "" }
+
+    func buildLink(for payloadTxID: String) -> String { "" }
+
+    func replace(_ html: String,  with text: String) throws -> Data  {
+        guard let replacedData = html
+            .replacingOccurrences(of: "__METADATA__", with: text)
+            .data(using: .utf8)
+        else {
+            throw "encode html error"
+        }
+
+        return replacedData
+    }
+
+    func landingPage(item: FileServiceUploadingItem, tx: FileServiceTranscation) async throws -> String {
+        let jsonString = formattedPayload(from: item, payloadTxID: tx.payloadTxID, fileKey: tx.key)
+        let htmlText = try await landingHTML()
+        let replacedData = try replace(htmlText, with: jsonString)
+        return try await makePayload(data: replacedData)
+    }
 }
 
 struct MockUploadingHandler: FileServiceUploadHandler {
