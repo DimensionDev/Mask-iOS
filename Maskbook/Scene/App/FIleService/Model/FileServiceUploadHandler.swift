@@ -9,9 +9,13 @@ protocol FileServiceUploadHandler {
     ) -> AsyncThrowingStream<FileServiceTranscation, Error>
 
     func makePayload(data: Data, type: String, delegate: URLSessionTaskDelegate?) async throws -> String
-    func buildLink(for payloadTxID: String) -> String
+    func buildLink(for payloadTxID: String, option: FileServiceUploadOption) -> String
     func replace(_ html: String,  with text: String) throws -> Data
-    func landingPage(item: FileServiceUploadingItem, tx: FileServiceTranscation) async throws -> String
+    func landingPage(
+        item: FileServiceUploadingItem,
+        option: FileServiceUploadOption,
+        tx: FileServiceTranscation
+    ) async throws -> String
 }
 
 // MARK: common function
@@ -32,14 +36,18 @@ extension FileServiceUploadHandler {
         return [signedB64, generatedKeyB64]
     }
 
-    func formattedPayload(from item: FileServiceUploadingItem, payloadTxID: String, fileKey: String?) -> String {
+    func formattedPayload(
+        from item: FileServiceUploadingItem,
+        option: FileServiceUploadOption,
+        tx: FileServiceTranscation
+    ) -> String {
         let dic: [String: Any?] = [
             "name": item.fileName,
             "size": "\(item.content.count)",
             "provider": item.provider,
-            "link": buildLink(for: payloadTxID),
-            "signed": try? makeFileKeySigned(fileKey: fileKey),
-            "createdAt": (item.uploadDate ?? Date()).toISOString()
+            "link": buildLink(for: tx.payloadTxID, option: option),
+            "signed": try? makeFileKeySigned(fileKey: tx.key),
+            "createdAt": Date().toISOString()
         ]
 
         return dic.asString()
@@ -71,7 +79,7 @@ extension FileServiceUploadHandler {
         delegate: URLSessionTaskDelegate? = nil
     ) async throws -> String { "" }
 
-    func buildLink(for payloadTxID: String) -> String { "" }
+    func buildLink(for payloadTxID: String, option: FileServiceUploadOption) -> String { "" }
 
     func replace(_ html: String,  with text: String) throws -> Data  {
         guard let replacedData = html
@@ -84,8 +92,16 @@ extension FileServiceUploadHandler {
         return replacedData
     }
 
-    func landingPage(item: FileServiceUploadingItem, tx: FileServiceTranscation) async throws -> String {
-        let jsonString = formattedPayload(from: item, payloadTxID: tx.payloadTxID, fileKey: tx.key)
+    func landingPage(
+        item: FileServiceUploadingItem,
+        option: FileServiceUploadOption,
+        tx: FileServiceTranscation
+    ) async throws -> String {
+        let jsonString = formattedPayload(
+            from: item,
+            option: option,
+            tx: tx
+        )
         let htmlText = try await landingHTML()
         let replacedData = try replace(htmlText, with: jsonString)
         return try await makePayload(data: replacedData)

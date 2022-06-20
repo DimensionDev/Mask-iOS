@@ -49,7 +49,7 @@ extension IPFSUploadHandler: FileServiceUploadHandler {
 
                 // get landing page and upload the html
                 // and get landingTxID
-                let landingTxID = try await landingPage(item: item, tx: tx)
+                let landingTxID = try await landingPage(item: item, option: option, tx: tx)
                 tx.landingTxID = landingTxID
                 tx.progress = 1.0
                 continuation.yield(tx)
@@ -58,8 +58,16 @@ extension IPFSUploadHandler: FileServiceUploadHandler {
         }
     }
 
-    func landingPage(item: FileServiceUploadingItem, tx: FileServiceTranscation) async throws -> String {
-        let jsonString = formattedPayload(from: item, payloadTxID: tx.payloadTxID, fileKey: tx.key)
+    func landingPage(
+        item: FileServiceUploadingItem,
+        option: FileServiceUploadOption,
+        tx: FileServiceTranscation
+    ) async throws -> String {
+        if tx.payloadTxID.isEmpty {
+            throw "payloadTxID is empty"
+        }
+
+        let jsonString = formattedPayload(from: item, option: option, tx: tx)
         let htmlText = try await landingHTML()
         let replacedData = try replace(htmlText, with: jsonString)
         return try await makePayload(data: replacedData)
@@ -94,7 +102,7 @@ extension IPFSUploadHandler: FileServiceUploadHandler {
         return replacedData
     }
 
-    func buildLink(for payloadTxID: String) -> String {
+    func buildLink(for payloadTxID: String, option: FileServiceUploadOption) -> String {
         "https://ipfs.infura.io/ipfs/" + payloadTxID
     }
 }

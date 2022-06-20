@@ -137,10 +137,17 @@ final class FileServiceViewModel: ObservableObject {
             do {
                 for try await value in stream {
                     let didFinish = value.progress == 1
+                    let state: FileServiceUploadingItem.State = {
+                        if value.progress == 0 {
+                            return .preparing
+                        } else {
+                            return didFinish ? .uploaded : .uploading
+                        }
+                    }()
                     self.draftItem = .init(
                         fileName: item.fileName,
                         provider: option.service.rawValue.lowercased(),
-                        state: didFinish ? .uploaded : .uploading,
+                        state: state,
                         content: item.content,
                         uploadedBytes: value.progress * item.totalBytes,
                         uploadDate: didFinish ? Date() : nil,
