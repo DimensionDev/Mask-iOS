@@ -9,14 +9,13 @@
 import Foundation
 import CryptoKit
 
-
 struct Chunk {
     let dataHash: Data
     let minByteRange: Int
     let maxByteRange: Int
 }
 
-class BranchNode: MerkelNode {
+final class BranchNode: MerkelNode {
     var id: Data
     var type: BranchOrLeaf = BranchOrLeaf.branch
     let byteRange: Int
@@ -33,7 +32,7 @@ class BranchNode: MerkelNode {
     }
 }
 
-class LeafNode: MerkelNode {
+final class LeafNode: MerkelNode {
     var id: Data
     let dataHash: Data
     var type: BranchOrLeaf = BranchOrLeaf.leaf

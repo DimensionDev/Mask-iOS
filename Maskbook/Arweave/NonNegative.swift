@@ -2,7 +2,7 @@ import Foundation
 
 @propertyWrapper
 public struct NonNegative<T: Numeric & Comparable>: Equatable {
-    var value: T
+    private(set) var value: T
 
     public var wrappedValue: T {
         get { value }

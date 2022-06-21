@@ -71,7 +71,7 @@ extension PluginMeta: Identifiable {
     var id: String {
         switch self {
         case let .redPacket(value): return "\(value.basic?.txid ?? "")"
-        case .fileService: return "\(UUID())"
+        case let .fileService(value): return value.id
         }
     }
 }

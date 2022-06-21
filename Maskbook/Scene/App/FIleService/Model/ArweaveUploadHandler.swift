@@ -8,11 +8,63 @@ struct ArweaveUploadHandler: FileServiceUploadHandler {
     ) -> AsyncThrowingStream<FileServiceTranscation, Error> {
         .init { continuation in
             Task.detached {
-                let uploader = ArweaveUploader(item: item,
-                                               option: option,
-                                               continuation: continuation)
-                try await uploader.startUpload()
-//                try await self._upload(item, option: option, continuation: continuation)
+                typealias Stage = FileServiceUploadProgress.Stage
+                var tx = FileServiceTranscation.progress(0)
+                var totalBytes: Double = 0
+
+                tx.id = encodeArrayBuffer(item.content.hashData())
+                continuation.yield(tx)
+
+                let attachment = AttachmentOptions(
+                    encrypted: option.encrypted,
+                    type: item.mime,
+                    block: item.content,
+                    name: item.fileName
+                )
+                tx.key = attachment.key
+                let data = try attachment.encryptedData()
+                // all event is on the Task's thread
+                let taskDelegate = Delegate()
+                let signal = taskDelegate
+                    .uploadData
+                    .share()
+
+                signal
+                    .map { Double($0.1) }
+                    .removeDuplicates()
+                    .sink { value in
+                        totalBytes = value
+                    }
+                    .store(in: &taskDelegate.cancelableStorage)
+
+                signal
+                    .map { (sentBytes, totalBytes) -> Double in
+                        let total = Double(totalBytes)
+                        let stage = Stage.filePayloadUploading(
+                            totalBytesSent: Double(sentBytes),
+                            totalBytesExpectedToSend: total
+                        )
+                        return stage.progress(with: total)
+                    }
+                    .removeDuplicates()
+                    .sink { progress in
+                        tx.progress = progress
+                        continuation.yield(tx)
+                    }
+                    .store(in: &taskDelegate.cancelableStorage)
+                tx.payloadTxID = try await makePayload(
+                    data: data,
+                    type: "application/octet-stream",
+                    delegate: taskDelegate
+                )
+                tx.progress = Stage.htmlDownloading.progress(with: totalBytes)
+                continuation.yield(tx)
+
+                tx.landingTxID = try await landingPage(item: item, option: option, tx: tx)
+                // skip htmlUploading as it doesn't mater
+                tx.progress = Stage.uploadFinish.progress(with: totalBytes)
+                continuation.yield(tx)
+                continuation.finish()
             }
         }
     }
@@ -51,73 +103,6 @@ struct ArweaveUploadHandler: FileServiceUploadHandler {
         } else {
             return Arweave.mesonCDNURL.absoluteString + "/" + payloadTxID
         }
-    }
-}
-
-extension ArweaveUploadHandler {
-    private func _upload(
-        _ item: FileServiceUploadingItem,
-        option: FileServiceUploadOption,
-        continuation: AsyncThrowingStream<FileServiceTranscation, Error>.Continuation
-    ) async throws {
-        typealias Stage = FileServiceUploadProgress.Stage
-        var tx = FileServiceTranscation.progress(0)
-        var totalBytes: Double = 0
-
-        tx.id = encodeArrayBuffer(item.content.hashData())
-        continuation.yield(tx)
-
-        let attachment = AttachmentOptions(
-            encrypted: option.encrypted,
-            type: item.mime,
-            block: item.content,
-            name: item.fileName
-        )
-        tx.key = attachment.key
-        let data = try attachment.encryptedData()
-        // all event is on the Task's thread
-        // if we move the function body into `func upload(:option:) -> AsyncThrowingStream<FileServiceTranscation, Error>`
-        let taskDelegate = Delegate()
-        let signal = taskDelegate
-            .uploadData
-            .share()
-
-        signal
-            .map { Double($0.1) }
-            .removeDuplicates()
-            .sink { value in
-                totalBytes = value
-            }
-            .store(in: &taskDelegate.cancelableStorage)
-
-        signal
-            .map { (sentBytes, totalBytes) -> Double in
-                let total = Double(totalBytes)
-                let stage = Stage.filePayloadUploading(
-                    totalBytesSent: Double(sentBytes),
-                    totalBytesExpectedToSend: total
-                )
-                return stage.progress(with: total)
-            }
-            .removeDuplicates()
-            .sink { progress in
-                tx.progress = progress
-                continuation.yield(tx)
-            }
-            .store(in: &taskDelegate.cancelableStorage)
-        tx.payloadTxID = try await makePayload(
-            data: data,
-            type: "application/octet-stream",
-            delegate: taskDelegate
-        )
-        tx.progress = Stage.htmlDownloading.progress(with: totalBytes)
-        continuation.yield(tx)
-
-        tx.landingTxID = try await landingPage(item: item, option: option, tx: tx)
-        // skip htmlUploading as it doesn't mater
-        tx.progress = Stage.uploadFinish.progress(with: totalBytes)
-        continuation.yield(tx)
-        continuation.finish()
     }
 }
 

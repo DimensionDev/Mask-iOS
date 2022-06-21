@@ -17,7 +17,7 @@ struct IPFSUploadHandler {
         do {
             let _ = try IpfsLiteApi.launch(documentsPath.path, debug: false, lowMem: true)
         } catch {
-            print(error)
+            print("IPFSUploadHandler error:", error)
         }
     }
 }
