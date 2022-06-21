@@ -15,6 +15,7 @@ final class FileServiceOptionViewController: BaseViewController {
 
         FileServiceOptionView { [weak self] option in
             self?.settings.fileServiceUploadOption = option.asString()
+            self?.navigationController?.popViewController(animated: true)
         }
         .asContent(in: self)
     }
