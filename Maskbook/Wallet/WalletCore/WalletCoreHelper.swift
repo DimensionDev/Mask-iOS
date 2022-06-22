@@ -612,6 +612,17 @@ extension WalletCoreHelper {
         let target: [String: Data]
         let authorPrivateKey: Data
     }
+    
+    struct EncryptionResult {
+        struct E2EEncryptionResult {
+            let encryptedPostKeyData: Data
+            let iv: Data?
+        }
+        let output: String
+        let postIdentifier: String
+        let postKey: Data
+        let e2eResult: [String: E2EEncryptionResult]
+    }
 
     /// Encrypt plugin metas and text content
     /// - Parameters:
@@ -627,11 +638,11 @@ extension WalletCoreHelper {
         content: String,
         authorID: String?,
         authorKeyData: Data?,
-        socialPlatform: ProfileSocialPlatform?,
+        socialPlatform: ProfileSocialPlatform,
         metas: [PluginMeta],
         e2eParam: EncryptPostE2EParam?,
         version: EncryptionVersion = .v38
-    ) -> Result<String, Error> {
+    ) -> Result<EncryptionResult, Error> {
         if version == .v37 {
             return .failure(WalletCoreError.requestParamError)
         }
@@ -650,13 +661,7 @@ extension WalletCoreHelper {
             return .failure(WalletCoreError.requestParamError)
         }
 
-        let needTwitterEncoder: Bool = {
-            guard let platform = socialPlatform else {
-                return false
-            }
-
-            return platform == .twitter
-        }()
+        let needTwitterEncoder = socialPlatform == .twitter
         
         log.debug("encryptingMessage: \(encryptingMessage)", source: "share")
 
@@ -679,15 +684,13 @@ extension WalletCoreHelper {
                         param.authorUserID = id
                     }
 
-                    if let network = socialPlatform {
-                        param.network = network.url
-                    }
+                    param.network = socialPlatform.url
                     
                     param.isPlublic = isPublic
                     if let e2eParam = e2eParam {
                         var e2eMCParam = Api_E2EEncryptParam()
                         e2eMCParam.localKeyData = e2eParam.localKey
-                        e2eMCParam.target = [:]
+                        e2eMCParam.target = e2eParam.target
                         e2eMCParam.authorPrivateKey = e2eParam.authorPrivateKey
                         
                         param.param = e2eMCParam
@@ -695,9 +698,19 @@ extension WalletCoreHelper {
                 }
             ,
             map: { response in
-                needTwitterEncoder
+                let output = needTwitterEncoder
                 ? Self.twitterEncode(content: response.respPostEncryption.content)
                 : response.respPostEncryption.content
+                let postIdentifier = response.respPostEncryption.postIdentifier
+                let postKey = response.respPostEncryption.postKey
+                let e2eResult = response.respPostEncryption.results.mapValues { e2eResult in
+                    return EncryptionResult.E2EEncryptionResult(encryptedPostKeyData: e2eResult.encryptedPostKeyData,
+                                                                iv: e2eResult.iv)
+                }
+                return EncryptionResult(output: output,
+                                        postIdentifier: postIdentifier,
+                                        postKey: postKey,
+                                        e2eResult: e2eResult)
             }
         )
     }

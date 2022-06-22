@@ -75,6 +75,7 @@ extension WebExtension {
     enum Profile {}
     enum SNSAdaptor { }
     enum Wallet { }
+    enum Encryption { }
 }
 
 struct MaskWebMessageResult: Codable {

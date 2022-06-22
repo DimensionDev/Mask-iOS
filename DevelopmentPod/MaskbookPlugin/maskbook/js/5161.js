@@ -22500,12 +22500,12 @@ const buildInfoMarkdown = `## Build info
 - target: ${"safari"}
 - build: ${"stable"}
 - architecture: ${"app"}
-- BUILD_DATE: ${"2022-06-02T07:57:32.679Z"}
-- VERSION: ${"v1.29.12-2349-g7e70696f5"}
+- BUILD_DATE: ${"2022-06-10T07:34:58.455Z"}
+- VERSION: ${"v1.29.12-2350-g43c1c2a66"}
 
 ## Git (${ true ? '*' : 0}):
 
-${"7e70696f5"} (${"feat/mobile"}) on tag "${"v2.5.0"}"
+${"43c1c2a66"} (${"feat/mobile"}) on tag "${"v2.5.0"}"
 ${"git@github.com:DimensionDev/Maskbook.git"?.toLowerCase()?.includes('DimensionDev') ? '' : "git@github.com:DimensionDev/Maskbook.git"}`;
 
 // EXTERNAL MODULE: ./src/social-network/index.ts

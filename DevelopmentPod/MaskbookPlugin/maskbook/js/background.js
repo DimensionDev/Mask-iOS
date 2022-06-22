@@ -1885,11 +1885,11 @@ if (false) {}
 ;// CONCATENATED MODULE: ./background/tasks/NotCancellable/PrintBuildFlags.ts
 console.log('Build info', {
     NODE_ENV: "production",
-    VERSION: "v1.29.12-2349-g7e70696f5",
+    VERSION: "v1.29.12-2350-g43c1c2a66",
     TAG_NAME: "v2.5.0",
-    COMMIT_HASH: "7e70696f5",
-    COMMIT_DATE: "2022-06-02T07:51:08.000Z",
-    BUILD_DATE: "2022-06-02T07:57:32.679Z",
+    COMMIT_HASH: "43c1c2a66",
+    COMMIT_DATE: "2022-06-10T07:28:19.000Z",
+    BUILD_DATE: "2022-06-10T07:34:58.455Z",
     REMOTE_URL: "git@github.com:DimensionDev/Maskbook.git",
     BRANCH_NAME: "feat/mobile",
     DIRTY: false,

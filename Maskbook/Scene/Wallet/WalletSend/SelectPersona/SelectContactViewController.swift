@@ -15,7 +15,7 @@ import UIKit
 import CoreDataStack
 
 protocol SelectComposeContactTypeDelegate{
-    func returnContactType(type: MessageComposeViewModel.Recipient, contacts:[PersonaRecord]?)
+    func returnContactType(type: MessageComposeViewModel.Recipient)
 }
 
 class SelectContactViewController: UIViewController {
@@ -94,7 +94,7 @@ extension SelectContactViewController: UITableViewDelegate {
         if case .specialContacts = contactType  {
             mainCoordinator.present(scene: .composeSelectPersona(viewController: self), transition: .panModel(animated: true))
         } else {
-            self.delegate?.returnContactType(type: contactType ?? .everyone, contacts: [])
+            self.delegate?.returnContactType(type: contactType ?? .everyone)
             dismiss(animated: true)
         }
     }
@@ -126,7 +126,7 @@ extension SelectContactViewController: PanModalPresentable {
 
 extension SelectContactViewController:SearchContactsDelegate {
     func returnContacts(contacts:[PersonaRecord]?){
-        self.delegate?.returnContactType(type: .specialContacts, contacts: contacts)
+        self.delegate?.returnContactType(type: .specialContacts(contacts ?? []))
         dismissMainTabBarController()
     }
 }

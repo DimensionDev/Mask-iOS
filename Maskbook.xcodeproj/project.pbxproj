@@ -615,6 +615,7 @@
 		2DEDDEA82761ED7000D37A76 /* WalletConnectSession+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEDDEA62761ED7000D37A76 /* WalletConnectSession+CoreDataClass.swift */; };
 		2DEDDEA92761ED7000D37A76 /* WalletConnectSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEDDEA72761ED7000D37A76 /* WalletConnectSession+CoreDataProperties.swift */; };
 		2DEDDEAB2761EE7900D37A76 /* MaskClientMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEDDEAA2761EE7900D37A76 /* MaskClientMeta.swift */; };
+		41046E41285313C20052ECDA /* MaskWebMessage+Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41046E40285313C20052ECDA /* MaskWebMessage+Encryption.swift */; };
 		4156689327A53BA70051E0E7 /* ShareLinkGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156689227A53BA70051E0E7 /* ShareLinkGenerator.swift */; };
 		4156689527A68B770051E0E7 /* JsonWebKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156689427A68B770051E0E7 /* JsonWebKey.swift */; };
 		4168635327F434AE00F12DB2 /* BackupPreviewGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4168635227F434AE00F12DB2 /* BackupPreviewGenerator.swift */; };
@@ -1414,6 +1415,7 @@
 		2DEDDEA72761ED7000D37A76 /* WalletConnectSession+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletConnectSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2DEDDEAA2761EE7900D37A76 /* MaskClientMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskClientMeta.swift; sourceTree = "<group>"; };
 		38EDB00BEE146CBE1A4FD713 /* Pods-MaskbookTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskbookTests.release.xcconfig"; path = "Target Support Files/Pods-MaskbookTests/Pods-MaskbookTests.release.xcconfig"; sourceTree = "<group>"; };
+		41046E40285313C20052ECDA /* MaskWebMessage+Encryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MaskWebMessage+Encryption.swift"; sourceTree = "<group>"; };
 		4156689227A53BA70051E0E7 /* ShareLinkGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareLinkGenerator.swift; sourceTree = "<group>"; };
 		4156689427A68B770051E0E7 /* JsonWebKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonWebKey.swift; sourceTree = "<group>"; };
 		4168635227F434AE00F12DB2 /* BackupPreviewGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupPreviewGenerator.swift; sourceTree = "<group>"; };
@@ -2705,6 +2707,7 @@
 				2AF8834E271EE9300004565A /* MaskWebMessage+Wallet.swift */,
 				2AF8834F271EE9300004565A /* MaskWebMessage+Persona.swift */,
 				0F5810902733CDFB0040B4EC /* MaskWebMessage+IndexDB.swift */,
+				41046E40285313C20052ECDA /* MaskWebMessage+Encryption.swift */,
 			);
 			path = MaskWebMessage;
 			sourceTree = "<group>";
@@ -4457,6 +4460,7 @@
 				5D2893E427D5DD0A0013FCB6 /* PersonaCollectionCell.swift in Sources */,
 				2AD31E6F282D367700CB3D49 /* String+Hex.swift in Sources */,
 				2AF88502271EE9310004565A /* PersonasActionViewModel.swift in Sources */,
+				41046E41285313C20052ECDA /* MaskWebMessage+Encryption.swift in Sources */,
 				2AF88552271EE9310004565A /* SendTransactionConfirmViewModel.swift in Sources */,
 				5D554EC8279FE58D00D40848 /* OpenRedPackageViewModel.swift in Sources */,
 				1FEE1E9B277D8FDD00697F81 /* DappError.swift in Sources */,

@@ -747,11 +747,11 @@ const body = `\
 ## Environment
 
 User Agent: ${navigator.userAgent}
-Version: ${"v1.29.12-2349-g7e70696f5"}
+Version: ${"v1.29.12-2350-g43c1c2a66"}
 Tag Name: ${"v2.5.0"}
-Build Date: ${"2022-06-02T07:57:32.679Z"}
-Commit Hash: ${"7e70696f5"}
-Commit Date: ${"2022-06-02T07:51:08.000Z"}
+Build Date: ${"2022-06-10T07:34:58.455Z"}
+Commit Hash: ${"43c1c2a66"}
+Commit Date: ${"2022-06-10T07:28:19.000Z"}
 Remote URL: ${"git@github.com:DimensionDev/Maskbook.git"}
 Branch Name: ${"feat/mobile"}
 
@@ -782,11 +782,11 @@ var src = __webpack_require__(53242);
 
 const DEBUG_INFO = {
     'User Agent': navigator.userAgent,
-    'Mask Version': "v1.29.12-2349-g7e70696f5",
+    'Mask Version': "v1.29.12-2350-g43c1c2a66",
     'Build Date': process.env.channel_DATE,
     'Tag Name': "v2.5.0",
-    'Commit Hash': "7e70696f5",
-    'Commit Date': "2022-06-02T07:51:08.000Z",
+    'Commit Hash': "43c1c2a66",
+    'Commit Date': "2022-06-10T07:28:19.000Z",
     'Remote URL': "git@github.com:DimensionDev/Maskbook.git",
     'Branch Name': "feat/mobile",
     Dirty: false,
@@ -993,11 +993,11 @@ async function backupAll() {
     const payload = {
         buildInfo: {
             'user-agent': navigator.userAgent,
-            version: "v1.29.12-2349-g7e70696f5",
-            'build-date': "2022-06-02T07:57:32.679Z",
+            version: "v1.29.12-2350-g43c1c2a66",
+            'build-date': "2022-06-10T07:34:58.455Z",
             'tag-name': "v2.5.0",
-            'commit-hash': "7e70696f5",
-            'commit-date': "2022-06-02T07:51:08.000Z",
+            'commit-hash': "43c1c2a66",
+            'commit-date': "2022-06-10T07:28:19.000Z",
             'remote-url': "git@github.com:DimensionDev/Maskbook.git",
             'branch-name': "feat/mobile",
             dirty: false,

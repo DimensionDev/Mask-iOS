@@ -903,7 +903,10 @@ const MaskNetworkAPI = {
                 ivToBePublished: new Uint8Array((0,_dimensiondev_kit__WEBPACK_IMPORTED_MODULE_1__/* .decodeArrayBuffer */ .xe)(result.ivToBePublished)),
                 target: identifier
             };
-            receiverKeys.set(identifier, key);
+            const fullfilledResult = {
+                value: key
+            };
+            receiverKeys.set(identifier, fullfilledResult);
         }
         await (0,_background_network_gun_encryption_queryPostKey__WEBPACK_IMPORTED_MODULE_9__/* .publishPostAESKey_version39Or38 */ .U4)(-38, postIVData, networkHint, receiverKeys);
     }

@@ -75,14 +75,7 @@ public struct Api_PostEncryptionParam {
 
   public var content: String = String()
 
-  public var network: String {
-    get {return _network ?? String()}
-    set {_network = newValue}
-  }
-  /// Returns true if `network` has been explicitly set.
-  public var hasNetwork: Bool {return self._network != nil}
-  /// Clears the value of `network`. Subsequent reads from it will return its default value.
-  public mutating func clearNetwork() {self._network = nil}
+  public var network: String = String()
 
   public var authorPublicKeyData: Data {
     get {return _authorPublicKeyData ?? Data()}
@@ -124,7 +117,6 @@ public struct Api_PostEncryptionParam {
 
   public init() {}
 
-  fileprivate var _network: String? = nil
   fileprivate var _authorPublicKeyData: Data? = nil
   fileprivate var _authorUserID: String? = nil
   fileprivate var _authorPublicKeyAlgr: Api_PublicKeyAlgorithm? = nil
@@ -170,6 +162,10 @@ public struct Api_PostEncryptedResp {
   // methods supported on all messages.
 
   public var content: String = String()
+
+  public var postIdentifier: String = String()
+
+  public var postKey: Data = Data()
 
   public var results: Dictionary<String,Api_E2EEncryptionResult> = [:]
 
@@ -219,7 +215,7 @@ extension Api_PostEncryptionParam: SwiftProtobuf.Message, SwiftProtobuf._Message
       case 1: try { try decoder.decodeSingularEnumField(value: &self.version) }()
       case 2: try { try decoder.decodeSingularBoolField(value: &self.isPlublic) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.content) }()
-      case 4: try { try decoder.decodeSingularStringField(value: &self._network) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.network) }()
       case 5: try { try decoder.decodeSingularBytesField(value: &self._authorPublicKeyData) }()
       case 6: try { try decoder.decodeSingularStringField(value: &self._authorUserID) }()
       case 7: try { try decoder.decodeSingularEnumField(value: &self._authorPublicKeyAlgr) }()
@@ -243,9 +239,9 @@ extension Api_PostEncryptionParam: SwiftProtobuf.Message, SwiftProtobuf._Message
     if !self.content.isEmpty {
       try visitor.visitSingularStringField(value: self.content, fieldNumber: 3)
     }
-    try { if let v = self._network {
-      try visitor.visitSingularStringField(value: v, fieldNumber: 4)
-    } }()
+    if !self.network.isEmpty {
+      try visitor.visitSingularStringField(value: self.network, fieldNumber: 4)
+    }
     try { if let v = self._authorPublicKeyData {
       try visitor.visitSingularBytesField(value: v, fieldNumber: 5)
     } }()
@@ -265,7 +261,7 @@ extension Api_PostEncryptionParam: SwiftProtobuf.Message, SwiftProtobuf._Message
     if lhs.version != rhs.version {return false}
     if lhs.isPlublic != rhs.isPlublic {return false}
     if lhs.content != rhs.content {return false}
-    if lhs._network != rhs._network {return false}
+    if lhs.network != rhs.network {return false}
     if lhs._authorPublicKeyData != rhs._authorPublicKeyData {return false}
     if lhs._authorUserID != rhs._authorUserID {return false}
     if lhs._authorPublicKeyAlgr != rhs._authorPublicKeyAlgr {return false}
@@ -327,7 +323,9 @@ extension Api_PostEncryptedResp: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   public static let protoMessageName: String = _protobuf_package + ".PostEncryptedResp"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "content"),
-    2: .same(proto: "results"),
+    2: .same(proto: "postIdentifier"),
+    3: .same(proto: "postKey"),
+    4: .same(proto: "results"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -337,7 +335,9 @@ extension Api_PostEncryptedResp: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.content) }()
-      case 2: try { try decoder.decodeMapField(fieldType: SwiftProtobuf._ProtobufMessageMap<SwiftProtobuf.ProtobufString,Api_E2EEncryptionResult>.self, value: &self.results) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.postIdentifier) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.postKey) }()
+      case 4: try { try decoder.decodeMapField(fieldType: SwiftProtobuf._ProtobufMessageMap<SwiftProtobuf.ProtobufString,Api_E2EEncryptionResult>.self, value: &self.results) }()
       default: break
       }
     }
@@ -347,14 +347,22 @@ extension Api_PostEncryptedResp: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     if !self.content.isEmpty {
       try visitor.visitSingularStringField(value: self.content, fieldNumber: 1)
     }
+    if !self.postIdentifier.isEmpty {
+      try visitor.visitSingularStringField(value: self.postIdentifier, fieldNumber: 2)
+    }
+    if !self.postKey.isEmpty {
+      try visitor.visitSingularBytesField(value: self.postKey, fieldNumber: 3)
+    }
     if !self.results.isEmpty {
-      try visitor.visitMapField(fieldType: SwiftProtobuf._ProtobufMessageMap<SwiftProtobuf.ProtobufString,Api_E2EEncryptionResult>.self, value: self.results, fieldNumber: 2)
+      try visitor.visitMapField(fieldType: SwiftProtobuf._ProtobufMessageMap<SwiftProtobuf.ProtobufString,Api_E2EEncryptionResult>.self, value: self.results, fieldNumber: 4)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Api_PostEncryptedResp, rhs: Api_PostEncryptedResp) -> Bool {
     if lhs.content != rhs.content {return false}
+    if lhs.postIdentifier != rhs.postIdentifier {return false}
+    if lhs.postKey != rhs.postKey {return false}
     if lhs.results != rhs.results {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true

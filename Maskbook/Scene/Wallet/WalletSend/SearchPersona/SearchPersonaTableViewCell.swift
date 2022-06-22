@@ -100,9 +100,11 @@ class SearchPersonaTableViewCell: UITableViewCell {
     }
     
     func update(model: PersonaRecord,selectedProfile:[PersonaRecord]){
-        titleLabel.text = model.nickname
-        photoImageView.title = model.nickname ?? model.nonOptionalIdentifier.components(separatedBy: "/").last
-        photoImageView.setNetworkURL(url: model.avatar)
+        let profileRecord = model.linkedProfiles?.first(where: { _ in
+            true
+        }) as? ProfileRecord
+        titleLabel.text = profileRecord?.socialID
+        photoImageView.setNetworkURL(url: profileRecord?.avatar)
         contentLabel.text = model.identifier?.split(separator: "/").last.flatMap({ String($0) })
         
         if selectedProfile.contains(model){
