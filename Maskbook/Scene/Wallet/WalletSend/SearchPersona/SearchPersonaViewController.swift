@@ -9,15 +9,14 @@
 import UIKit
 
 import Combine
+import CoreDataStack
 import Foundation
 import PanModal
 import UIKit
 import UStack
-import CoreDataStack
 
-
-protocol SearchContactsDelegate{
-    func returnContacts(contacts:[PersonaRecord]?)
+protocol SearchContactsDelegate {
+    func returnContacts(contacts: [PersonaRecord]?)
 }
 
 class SearchPersonaViewController: UIViewController {
@@ -31,6 +30,7 @@ class SearchPersonaViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -65,7 +65,7 @@ class SearchPersonaViewController: UIViewController {
         return button
     }()
     
-    private lazy var headStackView = HStackView() {
+    private lazy var headStackView = HStackView {
         backButton
         titleLabel
         doneButton
@@ -84,13 +84,13 @@ class SearchPersonaViewController: UIViewController {
         let button = UIButton(type: .custom)
         button.setTitleColor(Asset.Colors.Twitter.blue.color, for: .normal)
         button.titleLabel?.font = FontStyles.MH5
-        //l10
+        // l10
         button.setTitle("Select All", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    private lazy var infoStackView = HStackView() {
+    private lazy var infoStackView = HStackView {
         contactAmountLabel
         selectAllButton
     }
@@ -135,7 +135,7 @@ class SearchPersonaViewController: UIViewController {
         return view
     }()
     
-    lazy var backStackView =  VStackView() {
+    lazy var backStackView = VStackView {
         Spacer(height: 40)
         headStackView
         Spacer(height: 20)
@@ -161,11 +161,11 @@ class SearchPersonaViewController: UIViewController {
             backStackView.topAnchor.constraint(equalTo: view.topAnchor),
             backStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstraints.leading),
             backStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -LayoutConstraints.trailing),
-            backStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            backStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
     
-    private func buildSubscriptions(){
+    private func buildSubscriptions() {
         searchTextField.textPublisher()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] searchText in
@@ -190,7 +190,6 @@ class SearchPersonaViewController: UIViewController {
                 self.viewModel.selectedProfile.value.removeAll()
                 self.viewModel.selectedProfile.value = self.viewModel.profileRecordsSubject.value
                 self.tableView.reloadData()
-
             }
             .store(in: &disposeBag)
         
@@ -208,18 +207,17 @@ class SearchPersonaViewController: UIViewController {
             .sink { [weak self] profileRecords in
                 self?.contactAmountLabel.text = "\(profileRecords.count) contacts"
             }.store(in: &disposeBag)
-  
     }
 }
 
 extension SearchPersonaViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let profileRecord = viewModel.dataSource.value[safeIndex: indexPath.row] {
-            if viewModel.selectedProfile.value.contains(profileRecord){
-                viewModel.selectedProfile.value = viewModel.selectedProfile.value.filter{ $0 != profileRecord }
+            if viewModel.selectedProfile.value.contains(profileRecord) {
+                viewModel.selectedProfile.value = viewModel.selectedProfile.value.filter { $0 != profileRecord }
             } else {
                 viewModel.selectedProfile.value.append(profileRecord)
-            }            
+            }
         }
         tableView.reloadData()
     }

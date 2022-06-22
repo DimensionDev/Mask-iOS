@@ -22,7 +22,7 @@ class SelectContactViewModel: NSObject {
     let cellTypes: [CellType] = [.normal,.normal,.clickable]
     let contactTypes: [MessageComposeViewModel.Recipient] = [.everyone, .onlyMe, .specialContacts([])]
     var selectedContactType: MessageComposeViewModel.Recipient = .everyone
-    
+
     func select(index: Int) {
         selectedContactType = contactTypes[index]
     }

@@ -9,10 +9,10 @@
 import UIKit
 
 import Combine
+import CoreDataStack
 import Foundation
 import PanModal
 import UIKit
-import CoreDataStack
 
 protocol SelectComposeContactTypeDelegate{
     func returnContactType(type: MessageComposeViewModel.Recipient)
@@ -21,22 +21,23 @@ protocol SelectComposeContactTypeDelegate{
 class SelectContactViewController: UIViewController {
     var viewModel: SelectContactViewModel
     var delegate: SelectComposeContactTypeDelegate?
-    
+
     @InjectedProvider(\.mainCoordinator)
     private var mainCoordinator
-    
+
     static let rowHeight: CGFloat = 90
-    
+
     init(viewModel: SelectContactViewModel, delegate: SelectComposeContactTypeDelegate) {
         self.viewModel = viewModel
         self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
     }
-    
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = FontStyles.BH4
@@ -58,17 +59,17 @@ class SelectContactViewController: UIViewController {
         view.register(SelectContactTableViewCell.self, forCellReuseIdentifier: String(describing: SelectContactTableViewCell.self))
         return view
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
-    
+
     private func setupUI() {
         view.backgroundColor = Asset.Colors.Background.normal.color
         view.addSubview(titleLabel)
         view.addSubview(tableView)
-        
+
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 40),
@@ -76,7 +77,6 @@ class SelectContactViewController: UIViewController {
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
 
-        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
@@ -118,7 +118,7 @@ extension SelectContactViewController: PanModalPresentable {
     var panScrollable: UIScrollView? {
         nil
     }
-    
+
     var longFormHeight: PanModalHeight {
         .contentHeight(SelectContactViewController.rowHeight * CGFloat(viewModel.titles.count) + 58)
     }

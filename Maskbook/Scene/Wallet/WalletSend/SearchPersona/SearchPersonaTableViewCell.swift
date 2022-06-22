@@ -6,12 +6,11 @@
 //  Copyright © 2022 dimension. All rights reserved.
 //
 
+import CoreDataStack
 import UIKit
 import UStack
-import CoreDataStack
 
 class SearchPersonaTableViewCell: UITableViewCell {
-    
     lazy var photoImageView: AvatarView = {
         let imageView = AvatarView(title: "")
         imageView.applyRadius(radius: 19)
@@ -47,8 +46,6 @@ class SearchPersonaTableViewCell: UITableViewCell {
         return view
     }()
     
-
-    
     private lazy var vStackView = VStackView(spacing: 2) {
         titleLabel
         contentLabel
@@ -72,6 +69,7 @@ class SearchPersonaTableViewCell: UITableViewCell {
         setupUI()
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -107,7 +105,7 @@ class SearchPersonaTableViewCell: UITableViewCell {
         photoImageView.setNetworkURL(url: profileRecord?.avatar)
         contentLabel.text = model.identifier?.split(separator: "/").last.flatMap({ String($0) })
         
-        if selectedProfile.contains(model){
+        if selectedProfile.contains(model) {
             checkImageView.image = Asset.Icon.Cell.cellTwitterCheck.image
         } else {
             checkImageView.image = Asset.Icon.Cell.cellUncheck.image
