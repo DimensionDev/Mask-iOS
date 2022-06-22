@@ -1,15 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "symbols3.png",
+      "filename" : "camera.pdf",
       "idiom" : "universal"
     }
   ],
   "info" : {
     "author" : "xcode",
     "version" : 1
-  },
-  "properties" : {
-    "preserves-vector-representation" : true
   }
 }

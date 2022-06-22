@@ -202,15 +202,16 @@ class PersonasViewController: BaseViewController {
     
     func updateSegmentTopConstraint(isSearching: Bool) {
         let constant: CGFloat = {
-            if #available(iOS 15, *) {
-                return isSearching
-                ? -100
-                : 146
-            } else {
-                return isSearching
-                ? -self.segmentViewController.segmentHeight
-                : 146
-            }
+            let searchingMargin: CGFloat = {
+                if #available(iOS 15, *) {
+                    return -100
+                } else {
+                    return -self.segmentViewController.segmentHeight
+                }
+            }()
+            return isSearching
+            ? searchingMargin
+            : 146
         }()
         self.segmentTopConstraint.constant = constant
     }

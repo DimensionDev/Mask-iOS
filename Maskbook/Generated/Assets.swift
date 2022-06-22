@@ -110,6 +110,9 @@ internal enum Asset {
       internal static let persona4 = ColorAsset(name: "Colors/Gradient/persona4")
       internal static let persona5 = ColorAsset(name: "Colors/Gradient/persona5")
       internal static let persona6 = ColorAsset(name: "Colors/Gradient/persona6")
+      internal static let personaBorder1 = ColorAsset(name: "Colors/Gradient/personaBorder1")
+      internal static let personaBorder2 = ColorAsset(name: "Colors/Gradient/personaBorder2")
+      internal static let personaBorder3 = ColorAsset(name: "Colors/Gradient/personaBorder3")
     }
     internal enum RedPackage {
       internal static let background = ColorAsset(name: "Colors/RedPackage/background")
@@ -333,6 +336,7 @@ internal enum Asset {
         internal static let add = ImageAsset(name: "Images/Scene/Personas/add")
         internal static let addUser = ImageAsset(name: "Images/Scene/Personas/addUser")
         internal static let backup = ImageAsset(name: "Images/Scene/Personas/backup")
+        internal static let camera = ImageAsset(name: "Images/Scene/Personas/camera")
         internal static let changeOrAdd = ImageAsset(name: "Images/Scene/Personas/changeOrAdd")
         internal static let delete = ImageAsset(name: "Images/Scene/Personas/delete")
         internal static let done = ImageAsset(name: "Images/Scene/Personas/done")
