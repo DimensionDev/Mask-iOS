@@ -177,10 +177,8 @@ class PersonasViewController: BaseViewController {
                 UIView.animate(withDuration: 0.3) {
                     MainTabBarController.currentTabBarController()?.navigationController(tab: .personas)?.setNavigationBarHidden(isSearching, animated: true)
                     self.segmentViewController.scrollView.isScrollEnabled = !isSearching
-                    self.segmentTopConstraint.constant =  isSearching
-                    ? -self.segmentViewController.segmentHeight
-                    : 146
                     self.segmentViewController.segments.alpha = isSearching ? 0 : 1
+                    self.updateSegmentTopConstraint(isSearching: isSearching)
                     MainTabBarController.currentTabBarController()?.tabBar.isHidden = isSearching
                     self.view.layoutIfNeeded()
                 }
@@ -200,6 +198,22 @@ class PersonasViewController: BaseViewController {
                 self?.scrollToCurrentPersona()
             }
             .store(in: &disposeBag)
+    }
+    
+    func updateSegmentTopConstraint(isSearching: Bool) {
+        let constant: CGFloat = {
+            let searchingMargin: CGFloat = {
+                if #available(iOS 15, *) {
+                    return -100
+                } else {
+                    return -self.segmentViewController.segmentHeight
+                }
+            }()
+            return isSearching
+            ? searchingMargin
+            : 146
+        }()
+        self.segmentTopConstraint.constant = constant
     }
 
     func updateWithPersonaProfileState() {

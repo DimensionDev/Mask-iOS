@@ -184,7 +184,7 @@
       "back_up": "Back up",
       "resend": "Resend",
       "edit": "Edit",
-      "download": "download",
+      "download": "Download",
       "skip": "Skip, download later",
       "download_next": "I downloaded, next",
       "select_from_photo": "Select from photos",
@@ -195,7 +195,8 @@
       "go_settings": "To Settings",
       "dont_allow": "Don’t Allow",
       "speed_up": "Speed Up",
-      "compose": "Send encrypted post"
+      "compose": "Send encrypted post",
+      "post_to_twitter": "Post to twitter"
     },
     "toast": {
       "saved": "Saved!",
@@ -934,6 +935,22 @@
         "upload_photos": "Upload Photos",
         "upload_file": "Upload File",
         "upload_tips": "The size limit is 10.5MB\nThe upload can’t be cancelled."
+      },
+      "failure_tip": "Failed to upload due to network conditions or other problems.",
+      "post": "Post",
+      "preparing": "Preparing...",
+      "uploading": "Uploading...",
+      "uploaded": "Uploaded",
+      "faq": {
+        "what_is_file_service": "What is Web3 File Service?",
+        "file_service": "Web3 File Service is a decentralized storage service that allows users to store files on the blockchain in an immutable and permanent way. Mask Network provides this service by working with reputable file storage protocols, including IPFS, Arweave, Swarm and Meson Network and supports file types like .pdf, .doc, .mp3, .mp4 among other formats, with the maximum file format being 10.4 mb.\n\nUpon uploading a file, an exclusive link will be generated, embedded with metadata, including the on-chain file storage location. Please note that anyone with the link can download it. Users are given the option to change the privacy settings of their file, if they want it to be public or encrypted on social platforms. This ensures that users have autonomy over their files and how they are stored, serving the decentralized file management function.",
+        "what_is_meson_cdn": "What is Meson CDN?",
+        "meson_cdn": "As a decentralized Content Delivery Network (CDN), Meson CDN optimizes the file and content delivery processes. The service is supported by over 36,000 nodes incentivized to serve content on Arweave Network.\n\nIntegrated with Arweave Network as the storage layer, Meson Network operates as a cache layer that focuses on the distribution of data. Unlike centralized services like Cloudflare and Amazon Web Services, Meson Network offers a cheaper alternative to individuals who are looking to send or receive files.",
+        "what_is_arweave": "What is Arweave Network?",
+        "arweave": "Arweave Network is lightweight and sustainable file storage protocol. Paying for storage fee on Arweave once allows lifelong access to Arweave’s database and encryption schemes.",
+        "what_is_ipfs": "What is IPFS?",
+        "ipfs":"IPFS is a decentralized transmision protocol, based on smart contracts for storage and monetized with a pay-as-you-go model. IPFS assigns a unique hash value to each file, such that even if the content of 2 files is only different by 1 bit, the hash value will be different.",
+        "learn_more":"Learn more"
       }
     },
     "policy": {

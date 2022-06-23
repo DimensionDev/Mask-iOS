@@ -136,6 +136,7 @@ struct MessageComposeView: View {
                 .resizable()
                 .frame(width: 24, height: 24, alignment: .leading)
             Text(pluginContent.title)
+                .truncationMode(.middle)
             Button(action: {
                 viewModel.remove(pluginContent: pluginContent)
             }, label: {

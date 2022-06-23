@@ -541,7 +541,7 @@ enum L10n {
       static var dontAllow: String {
         return L10n.tr("Localizable", "Common.Controls.DontAllow")
       }
-      /// download
+      /// Download
       static var download: String {
         return L10n.tr("Localizable", "Common.Controls.Download")
       }
@@ -596,6 +596,10 @@ enum L10n {
       /// Ok
       static var ok: String {
         return L10n.tr("Localizable", "Common.Controls.Ok")
+      }
+      /// Post to twitter
+      static var postToTwitter: String {
+        return L10n.tr("Localizable", "Common.Controls.PostToTwitter")
       }
       /// Remind me later
       static var remindMeLater: String {
@@ -682,6 +686,10 @@ enum L10n {
       static var encrypt: String {
         return L10n.tr("Localizable", "Plugins.FileService.Encrypt")
       }
+      /// Failed to upload due to network conditions or other problems.
+      static var failureTip: String {
+        return L10n.tr("Localizable", "Plugins.FileService.FailureTip")
+      }
       /// IPFS
       static var ipfs: String {
         return L10n.tr("Localizable", "Plugins.FileService.Ipfs")
@@ -694,6 +702,14 @@ enum L10n {
       static var otherOption: String {
         return L10n.tr("Localizable", "Plugins.FileService.OtherOption")
       }
+      /// Post
+      static var post: String {
+        return L10n.tr("Localizable", "Plugins.FileService.Post")
+      }
+      /// Preparing...
+      static var preparing: String {
+        return L10n.tr("Localizable", "Plugins.FileService.Preparing")
+      }
       /// Service Protocols
       static var serviceTitle: String {
         return L10n.tr("Localizable", "Plugins.FileService.ServiceTitle")
@@ -705,6 +721,53 @@ enum L10n {
       /// Swarm
       static var swarm: String {
         return L10n.tr("Localizable", "Plugins.FileService.Swarm")
+      }
+      /// Uploaded
+      static var uploaded: String {
+        return L10n.tr("Localizable", "Plugins.FileService.Uploaded")
+      }
+      /// Uploading...
+      static var uploading: String {
+        return L10n.tr("Localizable", "Plugins.FileService.Uploading")
+      }
+
+      enum Faq {
+        /// Arweave Network is lightweight and sustainable file storage protocol. Paying for storage fee on Arweave once allows lifelong access to Arweave’s database and encryption schemes.
+        static var arweave: String {
+          return L10n.tr("Localizable", "Plugins.FileService.Faq.Arweave")
+        }
+        /// Web3 File Service is a decentralized storage service that allows users to store files on the blockchain in an immutable and permanent way. Mask Network provides this service by working with reputable file storage protocols, including IPFS, Arweave, Swarm and Meson Network and supports file types like .pdf, .doc, .mp3, .mp4 among other formats, with the maximum file format being 10.4 mb.\n\nUpon uploading a file, an exclusive link will be generated, embedded with metadata, including the on-chain file storage location. Please note that anyone with the link can download it. Users are given the option to change the privacy settings of their file, if they want it to be public or encrypted on social platforms. This ensures that users have autonomy over their files and how they are stored, serving the decentralized file management function.
+        static var fileService: String {
+          return L10n.tr("Localizable", "Plugins.FileService.Faq.FileService")
+        }
+        /// IPFS is a decentralized transmision protocol, based on smart contracts for storage and monetized with a pay-as-you-go model. IPFS assigns a unique hash value to each file, such that even if the content of 2 files is only different by 1 bit, the hash value will be different.
+        static var ipfs: String {
+          return L10n.tr("Localizable", "Plugins.FileService.Faq.Ipfs")
+        }
+        /// Learn more
+        static var learnMore: String {
+          return L10n.tr("Localizable", "Plugins.FileService.Faq.LearnMore")
+        }
+        /// As a decentralized Content Delivery Network (CDN), Meson CDN optimizes the file and content delivery processes. The service is supported by over 36,000 nodes incentivized to serve content on Arweave Network.\n\nIntegrated with Arweave Network as the storage layer, Meson Network operates as a cache layer that focuses on the distribution of data. Unlike centralized services like Cloudflare and Amazon Web Services, Meson Network offers a cheaper alternative to individuals who are looking to send or receive files.
+        static var mesonCdn: String {
+          return L10n.tr("Localizable", "Plugins.FileService.Faq.MesonCdn")
+        }
+        /// What is Arweave Network?
+        static var whatIsArweave: String {
+          return L10n.tr("Localizable", "Plugins.FileService.Faq.WhatIsArweave")
+        }
+        /// What is Web3 File Service?
+        static var whatIsFileService: String {
+          return L10n.tr("Localizable", "Plugins.FileService.Faq.WhatIsFileService")
+        }
+        /// What is IPFS?
+        static var whatIsIpfs: String {
+          return L10n.tr("Localizable", "Plugins.FileService.Faq.WhatIsIpfs")
+        }
+        /// What is Meson CDN?
+        static var whatIsMesonCdn: String {
+          return L10n.tr("Localizable", "Plugins.FileService.Faq.WhatIsMesonCdn")
+        }
       }
 
       enum LocalFileSource {

@@ -86,6 +86,7 @@ final class UserDefaultSettings {
         case jsDocumentResourceSelectedCommitHash
 
         case backupFileDetectDate
+        case fileServiceUploadOption
     }
 
     func removeAll() {
@@ -107,6 +108,8 @@ final class UserDefaultSettings {
         backupDate = nil
         backupAlertDate = nil
         indexedDBDataMigrated = false
+
+        fileServiceUploadOption = FileServiceUploadOption.defaultOption
     }
 
     @OptionalUserDefault(key: .defaultAccountAddress)
@@ -323,9 +326,22 @@ final class UserDefaultSettings {
     
     @OptionalUserDefault(key: .backupFileDetectDate)
     var backupFileDetectDate: Date?
+
+    @ReactiveUserDefault(
+        key: .fileServiceUploadOption,
+        defaultValue: FileServiceUploadOption.defaultOption
+    )
+    var fileServiceUploadOption: String
 }
 
 extension UserDefaultSettings {
+    var fileServiceUploadOptionPublisher: AnyPublisher<FileServiceUploadOption, Never> {
+        $fileServiceUploadOption
+            .removeDuplicates()
+            .compactMap(FileServiceUploadOption.init)
+            .share()
+            .eraseToAnyPublisher()
+    }
     
     func changeNetwork(network: BlockChainNetwork, address: String?) {
         defaultAccountAddress = address

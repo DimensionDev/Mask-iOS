@@ -1,6 +1,6 @@
 import Foundation
 
-class Predicate<S> : NSCompoundPredicate {
+public final class Predicate<S> : NSCompoundPredicate {
     fileprivate init(from predicate: NSPredicate) {
         super.init(type: .and, subpredicates: [predicate])
     }
@@ -14,7 +14,7 @@ class Predicate<S> : NSCompoundPredicate {
     }
 }
 
-func == <S, E: Equatable>(lhs: KeyPath<S,E>, rhs: E) -> Predicate<S> {
+public func == <S, E: Equatable>(lhs: KeyPath<S,E>, rhs: E) -> Predicate<S> {
     let predicate = NSComparisonPredicate(
             leftExpression: NSExpression(forKeyPath: lhs),
             rightExpression: NSExpression(forConstantValue: rhs),
@@ -27,7 +27,7 @@ func == <S, E: Equatable>(lhs: KeyPath<S,E>, rhs: E) -> Predicate<S> {
 }
 
 infix operator -->: AdditionPrecedence
-func --> <S, E: Hashable>(lhs: KeyPath<S, E>, rhs: Set<E>) -> Predicate<S> {
+public func --> <S, E: Hashable>(lhs: KeyPath<S, E>, rhs: Set<E>) -> Predicate<S> {
     let predicate = NSComparisonPredicate(
             leftExpression: NSExpression(forKeyPath: lhs),
             rightExpression: NSExpression(forConstantValue: rhs),

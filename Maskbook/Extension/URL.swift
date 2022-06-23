@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import MobileCoreServices
+
 extension URL {
 
     static var documents: URL {
@@ -24,5 +26,25 @@ extension URL {
         return queryItems.reduce(into: [:]) { (result, item) in
             result[item.name] = item.value
         }
+    }
+}
+
+extension URL {
+    var containsImage: Bool {
+        let mimeType = self.mimeType()
+        guard let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, mimeType as CFString, nil)?.takeRetainedValue() else {
+            return false
+        }
+        return UTTypeConformsTo(uti, kUTTypeImage)
+    }
+    
+    func mimeType() -> String {
+        let pathExtension = self.pathExtension
+        if let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension as NSString, nil)?.takeRetainedValue() {
+            if let mimetype = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType)?.takeRetainedValue() {
+                return mimetype as String
+            }
+        }
+        return "application/octet-stream"
     }
 }
