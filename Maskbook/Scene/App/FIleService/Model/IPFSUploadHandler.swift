@@ -36,7 +36,7 @@ extension IPFSUploadHandler: FileServiceUploadHandler {
 
                 // make attachment and get file key
                 // and get payloadTxID
-                let attachment = AttachmentOptions(encrypted: false,
+                let attachment = AttachmentOptions(encrypted: option.encrypted,
                                                    type: item.mime,
                                                    block: item.content,
                                                    name: item.fileName)

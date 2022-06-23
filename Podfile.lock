@@ -819,20 +819,11 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - abseil
-    - BoringSSL-GRPC
-    - gRPC
-    - gRPC-Core
-    - grpc-ipfs-lite
-    - gRPC-ProtoRPC
-    - gRPC-RxLibrary
-    - IpfsLiteApi
-    - Libuv-gRPC
-    - Protobuf
-  trunk:
     - Alamofire
     - AlamofireNetworkActivityLogger
     - BigInt
     - BMPlayer
+    - BoringSSL-GRPC
     - CombineEvent
     - CombineExt
     - ConsolePrint
@@ -848,17 +839,25 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
+    - gRPC
+    - gRPC-Core
+    - grpc-ipfs-lite
+    - gRPC-ProtoRPC
+    - gRPC-RxLibrary
     - Introspect
+    - IpfsLiteApi
     - IQKeyboardManagerSwift
     - KeychainAccess
     - Kingfisher
     - KMPageControl
+    - Libuv-gRPC
     - LookinServer
     - nanopb
     - NVActivityIndicatorView
     - Pika
     - PromiseKit
     - PromisesObjC
+    - Protobuf
     - ResponderChain
     - RSKPlaceholderTextView
     - secp256k1.c
