@@ -96,17 +96,10 @@ struct FileServiceUploadingItemView: View {
         .overlay(
             Group {
                 if item.state == .failed {
-                    Asset.Colors.Background.closeGray.asColor()
-                        .clipShape(Circle())
-                        .overlay(
-                            Image(Asset.Plugins.closeSquare)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .foregroundColor(.white)
-                                .frame(width: 16, height: 16)
-                        )
+                    Image(systemName: "xmark.circle.fill")
+                        .resizable()
+                        .foregroundColor(Asset.Colors.Text.normal.asColor())
                         .frame(width: 20, height: 20)
-                        .offset(y: 2)
                         .onTapGesture { self.dropItem() }
                 }
             },

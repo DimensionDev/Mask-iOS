@@ -45,6 +45,14 @@ class PluginMetaShareViewModel {
         coordinator.present(scene: .messageCompose(meta), transition: .modal(animated: true))
     }
     
+    @MainActor
+    func postFileService(fileServiceResult: FileServiceUploadResult) {
+        let meta = PluginMeta.fileService(fileServiceResult)
+        self.shareMeta = meta
+        guard showGuideWhenNoPersonaOrProfile() else { return }
+        coordinator.present(scene: .messageCompose(meta), transition: .modal(animated: true))
+    }
+    
     private func reShare() {
         if let shareMeta = shareMeta {
             coordinator.topViewController?.dismiss(animated: true, completion: {

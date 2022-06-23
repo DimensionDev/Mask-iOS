@@ -2,33 +2,33 @@ import Combine
 import SwiftUI
 
 struct FileServiceView: View {
-    @ObservedObject
+    @StateObject
     private var viewModel: FileServiceViewModel
 
     init(viewModel: FileServiceViewModel) {
-        self.viewModel = viewModel
+        _viewModel = .init(wrappedValue: viewModel)
     }
 
     var body: some View {
         VStack {
-            if viewModel.showOnboard {
-                FileServiceOnBoardView {
-                    // start uploading
-                    viewModel.actionSignal(.choseFile)
-                }
-            } else {
+//            if viewModel.showOnboard {
+//                FileServiceOnBoardView {
+//                    // start uploading
+//                    viewModel.actionSignal(.choseFile)
+//                }
+//            } else {
                 // file list view
                 UploadFileList(viewModel: viewModel)
                     .ignoresSafeArea(.container, edges: .bottom)
-            }
+//            }
         }
         .overlay(
             Group {
-                if viewModel.showOnboard || viewModel.isUploading {
-                    Color.clear
-                } else {
+//                if viewModel.showOnboard || viewModel.isUploading {
+//                    Color.clear
+//                } else {
                     uploadButton
-                }
+//                }
             },
             alignment: .bottomTrailing
         )
@@ -54,8 +54,8 @@ struct FileServiceView: View {
                 )
                 .rotationEffect(.init(degrees: 337.55))
                 .rotationEffect(.init(degrees: 180))
-                .frame(width: 48, height: 48)
-                .cornerRadius(24)
+                .frame(width: 56, height: 56)
+                .cornerRadius(28)
                 .overlay(
                     Image(systemName: "plus")
                         .resizable()
@@ -65,17 +65,18 @@ struct FileServiceView: View {
                 )
             }
         )
-        .offset(x: -20)
+        .shadow(color: Asset.Colors.Public.s1.asColor(), radius: 12, x: 0, y: 6)
+        .offset(x: -20, y: -20)
     }
 }
 
 extension FileServiceView {
     struct UploadFileList: View {
-        @ObservedObject
+        @StateObject
         private var viewModel: FileServiceViewModel
 
         init(viewModel: FileServiceViewModel) {
-            _viewModel = .init(initialValue: viewModel)
+            _viewModel = .init(wrappedValue: viewModel)
         }
 
         var body: some View {
@@ -90,6 +91,11 @@ extension FileServiceView {
                         L10n.Common.searchPlaceHolder,
                         text: $viewModel.searchText
                     )
+
+                    Image(systemName: "xmark.circle.fill")
+                        .opacity(viewModel.searchText.isEmpty ? 0 : 1)
+                        .foregroundColor(Asset.Colors.Text.light.asColor())
+                        .onTapGesture { viewModel.searchText = "" }
                 }
                 .whiteRadiusBackgroundView(height: 48)
                 .layoutPriority(2)
@@ -140,11 +146,11 @@ extension FileServiceView {
                                             Asset.Colors.Text.normal.asColor()
                                         )
                                 }
-                                .whiteRadiusBackgroundView(height: 48)
+                                .whiteRadiusBackgroundView(height: 56)
                                 .onTapGesture {
-//                                    guard let tx = value.tx, tx.isFinished else {
-//                                        return
-//                                    }
+                                    guard let tx = value.tx, tx.isFinished else {
+                                        return
+                                    }
                                     viewModel.actionSignal(.viewDetail(value))
                                 }
                             }
