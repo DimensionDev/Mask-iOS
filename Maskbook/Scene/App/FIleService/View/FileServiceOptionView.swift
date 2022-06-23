@@ -77,7 +77,7 @@ struct FileServiceOptionView: View {
             .frame(height: 54)
         }
         .padding(.horizontal, 20)
-        .padding(.top, 20)
+        .padding(.vertical, 20)
         .background(Asset.Colors.Background.normal.asColor())
     }
 }

@@ -28,8 +28,7 @@ final class FileServiceDetailViewController: BaseViewController {
                 guard let self = self else { return }
                 switch action {
                 case .share: self.share()
-                case .download:
-                    break
+                case .download: self.download()
                 }
             }
         )
@@ -94,25 +93,21 @@ struct FileServiceDetailView: View {
         VStack(spacing: 16) {
             Spacer()
 
-            VStack {
-                switch item.fileType {
-                case .image:
-                    Image(Asset.Plugins.FileService.imagePlaceholder)
+            VStack(spacing: 40) {
+                Image(Asset.Plugins.FileService.folder)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 134, height: 134)
 
-                case .file:
-                    Image(Asset.Plugins.FileService.folder)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 134, height: 134)
+                VStack(spacing: 4) {
+                    Text(item.fileName)
+                        .font(.bh4)
+                        .foregroundColor(Asset.Colors.Text.dark)
+
+                    Text(item.uploadDateText)
+                        .font(.mh7)
+                        .foregroundColor(Asset.Colors.Text.normal)
                 }
-
-                Text(item.fileName)
-                    .font(.bh4)
-                    .foregroundColor(Asset.Colors.Text.dark)
-
-                Text(item.uploadDateText)
-                    .font(.mh7)
-                    .foregroundColor(Asset.Colors.Text.normal)
             }
 
             Spacer()
@@ -146,6 +141,7 @@ struct FileServiceDetailView: View {
             )
         }
         .padding(.horizontal, 20)
+        .padding(.bottom, 20)
     }
 }
 

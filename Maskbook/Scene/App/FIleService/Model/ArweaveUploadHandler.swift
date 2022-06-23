@@ -104,6 +104,16 @@ struct ArweaveUploadHandler: FileServiceUploadHandler {
             return Arweave.mesonCDNURL.absoluteString + "/" + payloadTxID
         }
     }
+
+    func replace(_ html: String, with text: String) throws -> Data {
+        guard let data = html
+            .replacingOccurrences(of: "__METADATA__", with: text)
+            .data(using: .utf8) else {
+            throw "encode html error"
+        }
+
+        return data
+    }
 }
 
 extension ArweaveUploadHandler {
