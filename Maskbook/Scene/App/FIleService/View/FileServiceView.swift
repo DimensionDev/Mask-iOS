@@ -11,24 +11,24 @@ struct FileServiceView: View {
 
     var body: some View {
         VStack {
-//            if viewModel.showOnboard {
-//                FileServiceOnBoardView {
-//                    // start uploading
-//                    viewModel.actionSignal(.choseFile)
-//                }
-//            } else {
+            if viewModel.showOnboard {
+                FileServiceOnBoardView {
+                    // start uploading
+                    viewModel.actionSignal(.choseFile)
+                }
+            } else {
                 // file list view
                 UploadFileList(viewModel: viewModel)
                     .ignoresSafeArea(.container, edges: .bottom)
-//            }
+            }
         }
         .overlay(
             Group {
-//                if viewModel.showOnboard || viewModel.isUploading {
-//                    Color.clear
-//                } else {
+                if viewModel.showOnboard || viewModel.isUploading {
+                    Color.clear
+                } else {
                     uploadButton
-//                }
+                }
             },
             alignment: .bottomTrailing
         )
@@ -105,15 +105,13 @@ extension FileServiceView {
                 }
 
                 Spacer()
-                    .layoutPriority(0)
             }
             .padding(.top, 20)
             .padding(.horizontal, 20)
         }
 
         private var list: some View {
-            LazyVGrid(
-                columns: [.init(.flexible(), spacing: 16, alignment: .center)],
+            LazyVStack(
                 alignment: .center,
                 spacing: 16,
                 pinnedViews: [.sectionHeaders],
@@ -141,7 +139,7 @@ extension FileServiceView {
                                         .foregroundColor(Asset.Colors.Text.dark)
                                         .horizontallyFilled()
 
-                                    Image(systemName: "chevron.right")
+                                    Image(Asset.Plugins.pluginArrow)
                                         .foregroundColor(
                                             Asset.Colors.Text.normal.asColor()
                                         )
