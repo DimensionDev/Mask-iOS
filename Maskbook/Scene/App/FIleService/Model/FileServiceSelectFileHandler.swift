@@ -60,9 +60,9 @@ class FileServiceSelectFileHandler: NSObject {
     private(set) lazy var documentPicker: UIDocumentPickerViewController = {
         let picker: UIDocumentPickerViewController = {
             if #available(iOS 15.0, *) {
-                return UIDocumentPickerViewController(forOpeningContentTypes: [.text, .data, .item, .jpeg, .pdf, .png])
+                return UIDocumentPickerViewController(forOpeningContentTypes: allOpeningContentTypes())
             } else {
-                return UIDocumentPickerViewController(documentTypes: ["public.data"], in: .open)
+                return UIDocumentPickerViewController(documentTypes: allDocumentTypes(), in: .open)
             }
         }()
         picker.modalPresentationStyle = .fullScreen
@@ -235,5 +235,15 @@ extension FileServiceSelectFileHandler {
     func selectFormFilesAction() {
         documentPicker.delegate = self
         coordinator.topViewController?.present(documentPicker, animated: true)
+    }
+}
+
+extension FileServiceSelectFileHandler {
+    func allDocumentTypes() -> [String] {
+        ["public.data","public.content","public.audiovisual-content","public.movie","public.audiovisual-content","public.video","public.audio","public.text","public.data","public.zip-archive","com.pkware.zip-archive","public.composite-content","public.text"]
+    }
+    
+    func allOpeningContentTypes() -> [UTType] {
+        [.image, .movie, .video, .mp3, .audio, .quickTimeMovie, .mpeg, .mpeg2Video, .mpeg2TransportStream, .mpeg4Movie, .mpeg4Audio, .appleProtectedMPEG4Audio, .appleProtectedMPEG4Video, .avi, .aiff, .wav, .midi, .livePhoto, .tiff, .gif, .icns]
     }
 }
