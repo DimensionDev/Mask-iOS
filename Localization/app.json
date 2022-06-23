@@ -957,7 +957,8 @@
       "reviewed": "I have reviewed",
       "privacy": "the privacy policy",
       "and": "and",
-      "upload_terms": "terms of service. Upload now."
+      "upload_terms": "terms of service.",
+      "start_upload": "Upload now"
     },
     "luckyDrop": {
       "title": "Lucky Drop",
