@@ -244,6 +244,6 @@ extension FileServiceSelectFileHandler {
     }
     
     func allOpeningContentTypes() -> [UTType] {
-        [.image, .movie, .video, .mp3, .audio, .quickTimeMovie, .mpeg, .mpeg2Video, .mpeg2TransportStream, .mpeg4Movie, .mpeg4Audio, .appleProtectedMPEG4Audio, .appleProtectedMPEG4Video, .avi, .aiff, .wav, .midi, .livePhoto, .tiff, .gif, .icns]
+        [.text, .data, .content, .item, .zip, .jpeg, .pdf, .png, .image, .movie, .video, .mp3, .audio, .quickTimeMovie, .mpeg, .mpeg2Video, .mpeg2TransportStream, .mpeg4Movie, .mpeg4Audio, .appleProtectedMPEG4Audio, .appleProtectedMPEG4Video, .avi, .aiff, .wav, .midi, .livePhoto, .heic, .heif, .tiff, .gif, .icns]
     }
 }

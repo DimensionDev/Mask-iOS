@@ -8,6 +8,8 @@ final class FileServiceViewController: BaseViewController {
     private lazy var selectFileHandler = FileServiceSelectFileHandler(delegate: self)
 
     private lazy var viewModel = FileServiceViewModel()
+    
+    private lazy var shareViewModel = PluginMetaShareViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +29,7 @@ final class FileServiceViewController: BaseViewController {
     }
 
     private func share(_ item: FileServiceUploadResult) {
-        coordinator.present(scene: .messageCompose(.fileService(item)), transition: .modal())
+        shareViewModel.postFileService(fileServiceResult: item)
     }
 
     private func choseFile() {

@@ -7,6 +7,8 @@ final class FileServiceDetailViewController: BaseViewController {
 
     @InjectedProvider(\.mainCoordinator)
     private var coordinator
+    
+    private lazy var shareViewModel = PluginMetaShareViewModel()
 
     init(item: FileServiceUploadingItem) {
         self.fileServiceItem = item
@@ -40,11 +42,7 @@ final class FileServiceDetailViewController: BaseViewController {
             log.info("FileServiceUploadResult get a nil value")
             return
         }
-
-        coordinator.present(
-            scene: .messageCompose(.fileService(shareItem)),
-            transition: .modal()
-        )
+        shareViewModel.postFileService(fileServiceResult: shareItem)
     }
 
     private func download() {
