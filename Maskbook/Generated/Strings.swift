@@ -1085,7 +1085,11 @@ enum L10n {
       static var reviewed: String {
         return L10n.tr("Localizable", "Plugins.Policy.Reviewed")
       }
-      /// terms of service. Upload now.
+      /// Upload now
+      static var startUpload: String {
+        return L10n.tr("Localizable", "Plugins.Policy.StartUpload")
+      }
+      /// terms of service.
       static var uploadTerms: String {
         return L10n.tr("Localizable", "Plugins.Policy.UploadTerms")
       }

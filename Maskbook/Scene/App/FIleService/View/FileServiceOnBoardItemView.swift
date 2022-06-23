@@ -18,21 +18,13 @@ struct FileServiceOnBoardItemView: View, OnBoardItemView {
                 .font(.bh3)
                 .foregroundColor(Asset.Colors.Text.dark)
                 .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity)
                 .horizontallyCenterred()
+
+            Spacer()
         }
         .padding(.horizontal, 20)
         .padding(.top, 96)
-        .overlay(
-            GeometryReader { proxy in
-                Color.clear
-                    .preference(
-                        key: IndicatorOffsetKey.self,
-                        value: proxy.size.height
-                    )
-                    .frame(width: 1)
-            },
-            alignment: .bottom
-        )
     }
 }
 
