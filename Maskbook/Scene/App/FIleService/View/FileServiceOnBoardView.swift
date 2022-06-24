@@ -5,13 +5,17 @@ import SwiftUI
 import Introspect
 
 struct FileServiceOnBoardView: View {
-    private let uploadAction: () -> Void
+    enum Action {
+        case upload
+        case showPolicy
+    }
+    private let action: (Action) -> Void
 
     @StateObject
     private var viewModel = TimerViewModel()
 
-    init(uploacAction: @escaping () -> Void = {}) {
-        self.uploadAction = uploacAction
+    init(action: @escaping (Action) -> Void = { _ in }) {
+        self.action = action
     }
 
     @GestureState
@@ -103,7 +107,6 @@ struct FileServiceOnBoardView: View {
                             .renderingMode(.template)
                             .foregroundColor(.white)
                             .frame(width: 16, height: 16)
-
                     }
                 }
                 .onTapGesture {
@@ -111,12 +114,13 @@ struct FileServiceOnBoardView: View {
                 }
 
                 policyText
-                    .alignmentGuide(.top, computeValue: { $0[.top] })
+                    .onTapGesture { action(.showPolicy) }
+
                 Spacer()
             }
 
             Button(
-                action: { uploadAction() },
+                action: { action(.upload) },
                 label: {
                     Color.white
                         .frame(height: 56)

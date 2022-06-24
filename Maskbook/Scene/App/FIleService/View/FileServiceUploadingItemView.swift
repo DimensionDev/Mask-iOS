@@ -105,7 +105,9 @@ struct FileServiceUploadingItemView: View {
             },
             alignment: .topTrailing
         )
-        .padding(.all, 12)
+        .padding(.top, 12)
+        .padding(.horizontal, 12)
+        .padding(.bottom, 16)
         .background(Asset.Colors.Background.dark.asColor())
         .cornerRadius(8)
     }

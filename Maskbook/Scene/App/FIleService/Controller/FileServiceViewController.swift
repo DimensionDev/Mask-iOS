@@ -21,6 +21,7 @@ final class FileServiceViewController: BaseViewController {
         super.buildEvent()
         viewModel.configActionSignal { [weak self] action in
             switch action {
+            case .showPolicy: self?.showPolicy()
             case .choseFile: self?.choseFile()
             case let .share(value): self?.share(value)
             case let .viewDetail(value): self?.viewDetail(of: value)
@@ -50,6 +51,17 @@ final class FileServiceViewController: BaseViewController {
         coordinator.present(
             scene: .fileServiceOptions,
             transition: .detail()
+        )
+    }
+
+    private func showPolicy() {
+        guard let url = URL(string: "https://legal.mask.io/maskbook/privacy-policy-ios.html") else {
+            return
+        }
+
+        coordinator.present(
+            scene: .safariView(url: url),
+            transition: .modal()
         )
     }
 }
