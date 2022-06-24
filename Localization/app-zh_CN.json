@@ -148,7 +148,7 @@
       },
       "token_balance": {
         "description": "",
-        "btn_confirm": ""
+        "btn_confirm": "购买 %s"
       },
       "file_service_file_too_large": {
         "title": "文件尺寸过大",
@@ -195,8 +195,8 @@
       "go_settings": "好",
       "dont_allow": "不允许",
       "speed_up": "加速",
-      "compose": "",
-      "post_to_twitter": ""
+      "compose": "发送加密帖子",
+      "post_to_twitter": "发布到 Twitter"
     },
     "toast": {
       "saved": "已保存！",
@@ -480,7 +480,7 @@
       "addContact": {
         "btn_add": "添加联系人",
         "placeholder_name": "名称",
-        "pending": ""
+        "pending": "确认中..."
       },
       "tokenList": {
         "title": "搜索代币",
@@ -887,11 +887,11 @@
     },
     "message_compose": {
       "title": "",
-      "encrypt": "",
-      "placeholder": "",
-      "Everyone": "",
+      "encrypt": "加密",
+      "placeholder": "您想要加密什么信息？",
+      "Everyone": "所有人可见",
       "only_me": "仅自己",
-      "special_contacts": ""
+      "special_contacts": "指定联系人可见"
     }
   },
   "chain": {
@@ -916,72 +916,73 @@
   },
   "plugins": {
     "file_service": {
-      "setting_title": "",
-      "service_title": "",
-      "other_option": "",
-      "arweave": "",
-      "ipfs": "",
-      "swarm": "",
-      "encrypt": "",
-      "mesoncdn": "",
+      "setting_title": "上传设置",
+      "service_title": "用户服务协议",
+      "other_option": "其它选项",
+      "arweave": "Arweave",
+      "ipfs": "IPFS",
+      "swarm": "Swarm",
+      "encrypt": "进行加密",
+      "mesoncdn": "使用Meson CDN",
       "onboard": {
-        "step_one": "",
+        "step_one": "Arweave, IPFS 和 Swarm 去中心化文件存储。",
         "step_two": "",
-        "step_three": "",
-        "step_four": ""
+        "step_three": "上传您的文件进行永久存储，与好友分享。",
+        "step_four": "由 Mask Network 带给您的免费 Web3 文件服务。"
       },
       "local_file_source": {
         "take_photos": "拍照",
         "upload_photos": "上传照片",
         "upload_file": "上传文件",
-        "upload_tips": ""
+        "upload_tips": "大小限制为 10.5MB。\n上传无法取消。"
       },
-      "failure_tip": "",
+      "failure_tip": "由于网络条件或其他问题，上传失败。",
       "post": "",
-      "preparing": "",
-      "uploading": "",
-      "uploaded": "",
+      "preparing": "准备中...",
+      "uploading": "正在上传...",
+      "uploaded": "已上传",
       "faq": {
-        "what_is_file_service": "",
+        "what_is_file_service": "什么是 Web3 文件服务？",
         "file_service": "",
-        "what_is_meson_cdn": "",
+        "what_is_meson_cdn": "Meson CDN是什么？",
         "meson_cdn": "",
-        "what_is_arweave": "",
+        "what_is_arweave": "什么是 Arweave 网络？",
         "arweave": "",
-        "what_is_ipfs": "",
+        "what_is_ipfs": "什么是 IPFS？",
         "ipfs": "",
-        "learn_more": ""
+        "learn_more": "了解更多"
       }
     },
     "policy": {
       "reviewed": "",
-      "privacy": "",
+      "privacy": "隐私政策",
       "and": "",
-      "upload_terms": ""
+      "upload_terms": "",
+      "start_upload": ""
     },
     "luckyDrop": {
-      "title": "",
-      "twitter_account": "",
-      "facebook_account": "",
+      "title": "红包",
+      "twitter_account": "realMaskNetwork",
+      "facebook_account": "masknetwork",
       "twitter-or-facebook-template": "",
       "social-media-template": "",
       "twitter-or-facebook-redpacket-template": "",
       "social-media-redpacket-template": "",
       "plugin_red_packet_best_wishes": "",
       "buttons": {
-        "risk-warning": "",
+        "risk-warning": "确认风险提示",
         "unlock-token": "",
         "unlocking-token": "",
         "create-persona": "创建角色",
         "recover-persona": "恢复角色",
-        "average": "",
-        "random": "",
-        "insufficient-gas": "",
-        "insufficient-balance": "",
-        "exceed-max-quantity": "",
+        "average": "平均",
+        "random": "随机",
+        "insufficient-gas": "Gas 数量不足",
+        "insufficient-balance": "余额不足",
+        "exceed-max-quantity": "输入数量(最大：255)",
         "best-wishes": "",
-        "no-token": "",
-        "no-account": "",
+        "no-token": "选择 Token",
+        "no-account": "没有钱包",
         "no-share": "",
         "no-amount-per-share": "",
         "no-total-amount": "",
@@ -1001,12 +1002,12 @@
         "share": "",
         "amount_per_share": "",
         "total_amount": "",
-        "transaction_fee": "",
+        "transaction_fee": "交易手续费",
         "tips": "",
-        "title": ""
+        "title": "确认您的红包"
       },
       "alert": {
-        "message_no_account": ""
+        "message_no_account": "您不能选择 Token，因为没有钱包。"
       },
       "max": "",
       "total-amount": "",
