@@ -3,6 +3,16 @@
     {
       "filename" : "Filter.pdf",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Frame 2391.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {

@@ -26,6 +26,7 @@ struct RemoteRestoreInfoView: View {
             Text(L10n.Scene.Restore.Tip.cloudBackupPasswordHint)
                 .font(FontStyles.rh6.font)
                 .foregroundColor(Asset.Colors.Public.info.asColor())
+                .frame(maxWidth: .infinity)
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 10)
