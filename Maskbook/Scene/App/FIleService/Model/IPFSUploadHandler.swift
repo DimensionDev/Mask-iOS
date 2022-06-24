@@ -1,24 +1,14 @@
 import CryptoKit
 import CryptoSwift
 import Foundation
-import IpfsLiteApi
+import IPFSClientKit
+import web3swift
 
 struct IPFSUploadHandler {
-    init() {
-        let fileManager = FileManager.default
-        let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("ipfs-lite")
-        let exist = fileManager.fileExists(atPath: documentsPath.path)
+    let client: IPFSClient?
 
-        if !exist {
-            try! fileManager.createDirectory(atPath: documentsPath.path,
-                                             
-                                             withIntermediateDirectories: true, attributes: nil)
-        }
-        do {
-            let _ = try IpfsLiteApi.launch(documentsPath.path, debug: false, lowMem: true)
-        } catch {
-            print("IPFSUploadHandler error:", error)
-        }
+    init() {
+        client = try? IPFSClient(host: "ipfs.infura.io", port: 5001, ssl: true)
     }
 }
 
@@ -73,19 +63,19 @@ extension IPFSUploadHandler: FileServiceUploadHandler {
         return try await makePayload(data: replacedData)
     }
 
-    @MainActor
     func makePayload(
         data: Data,
         type: String = "",
         delegate: URLSessionTaskDelegate? = nil
     ) async throws -> String {
+        
         return await withCheckedContinuation { continuation in
-            IpfsLiteApi.instance().addFile(fromInput: InputStream(data: data), params: TTEAddParams()) { callback, _ in
-                if let callback = callback {
-                    continuation.resume(returning: callback.block.cid)
-                } else {
-                    continuation.resume(returning: "")
+            do {
+                try client?.add(data) { nodes in
+                    continuation.resume(returning: nodes.first?.hash?.value.base58EncodedString ?? "")
                 }
+            } catch {
+                continuation.resume(returning: "")
             }
         }
     }

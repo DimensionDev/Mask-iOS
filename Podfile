@@ -45,7 +45,7 @@ target 'Maskbook' do
   # Web3
   pod 'BigInt', '~> 5.2'
   pod 'web3swift', :git => 'https://github.com/DimensionDev/web3swift.git'
-  pod 'IpfsLiteApi'
+  pod 'IPFSClientKit'
 
   #UI
   pod 'SnapKit', '~> 5.0.0'

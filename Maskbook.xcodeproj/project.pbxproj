@@ -4126,6 +4126,8 @@
 				0FACA3B82671F31E00CB8AC0 /* PBXTargetDependency */,
 			);
 			name = Maskbook;
+			packageProductDependencies = (
+			);
 			productName = Maskbook;
 			productReference = DBAAF49122C35A7100017594 /* Maskbook.app */;
 			productType = "com.apple.product-type.application";
@@ -4195,6 +4197,8 @@
 				"zh-Hans",
 			);
 			mainGroup = DBAAF48822C35A7100017594;
+			packageReferences = (
+			);
 			productRefGroup = DBAAF49222C35A7100017594 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
