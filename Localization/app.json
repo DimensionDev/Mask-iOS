@@ -937,7 +937,7 @@
         "upload_tips": "The size limit is 10.5MB\nThe upload can’t be cancelled."
       },
       "failure_tip": "Failed to upload due to network conditions or other problems.",
-      "post": "Post",
+      "post": "Share",
       "preparing": "Preparing...",
       "uploading": "Uploading...",
       "uploaded": "Uploaded",
@@ -957,7 +957,8 @@
       "reviewed": "I have reviewed",
       "privacy": "the privacy policy",
       "and": "and",
-      "upload_terms": "terms of service. Upload now."
+      "upload_terms": "terms of service.",
+      "start_upload": "Upload now"
     },
     "luckyDrop": {
       "title": "Lucky Drop",
