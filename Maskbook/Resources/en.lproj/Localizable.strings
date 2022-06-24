@@ -153,7 +153,7 @@ Integrated with Arweave Network as the storage layer, Meson Network operates as 
 "Plugins.FileService.LocalFileSource.TakePhotos" = "Take Photos";
 "Plugins.FileService.LocalFileSource.UploadFile" = "Upload File";
 "Plugins.FileService.LocalFileSource.UploadPhotos" = "Upload Photos";
-"Plugins.FileService.LocalFileSource.UploadTips" = "The size limit is 10.5MB
+"Plugins.FileService.LocalFileSource.UploadTips" = "The size limit is 10.5MB.
 The upload can’t be cancelled.";
 "Plugins.FileService.Mesoncdn" = "Use Meson CDN";
 "Plugins.FileService.Onboard.StepFour" = "Free Web3 file service, brought to you by Mask Network.";

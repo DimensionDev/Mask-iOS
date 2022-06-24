@@ -783,7 +783,7 @@ enum L10n {
         static var uploadPhotos: String {
           return L10n.tr("Localizable", "Plugins.FileService.LocalFileSource.UploadPhotos")
         }
-        /// The size limit is 10.5MB\nThe upload can’t be cancelled.
+        /// The size limit is 10.5MB.\nThe upload can’t be cancelled.
         static var uploadTips: String {
           return L10n.tr("Localizable", "Plugins.FileService.LocalFileSource.UploadTips")
         }
