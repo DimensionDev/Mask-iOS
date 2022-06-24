@@ -10,21 +10,24 @@ struct FileServiceOnBoardItemView: View, OnBoardItemView {
     }
 
     var body: some View {
-        VStack(alignment: .center, spacing: 24) {
-            Image(item.imageName)
-                .frame(width: 240, height: 240)
+        VStack(alignment: .center) {
+            Spacer()
+            
+            VStack(spacing: 24) {
+                Image(item.imageName)
+                    .frame(width: 240, height: 240)
 
-            Text(item.detailString)
-                .font(.bh3)
-                .foregroundColor(Asset.Colors.Text.dark)
-                .multilineTextAlignment(.center)
-                .frame(maxWidth: .infinity)
-                .horizontallyCenterred()
+                Text(item.detailString)
+                    .font(.bh3)
+                    .foregroundColor(Asset.Colors.Text.dark)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity)
+                    .horizontallyCenterred()
+            }
 
             Spacer()
         }
         .padding(.horizontal, 20)
-        .padding(.top, 96)
     }
 }
 

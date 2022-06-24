@@ -12,9 +12,11 @@ struct FileServiceView: View {
     var body: some View {
         VStack {
             if viewModel.showOnboard {
-                FileServiceOnBoardView {
-                    // start uploading
-                    viewModel.actionSignal(.choseFile)
+                FileServiceOnBoardView { action in
+                    switch action {
+                    case .upload: viewModel.actionSignal(.choseFile)
+                    case .showPolicy: viewModel.actionSignal(.showPolicy)
+                    }
                 }
             } else {
                 // file list view
