@@ -161,6 +161,7 @@ struct FileServiceDetailView: View {
     }
 }
 
+#if DEBUG
 struct FileServiceDetailView_Preview: PreviewProvider {
     static var previews: some View {
         FileServiceDetailView(
@@ -169,3 +170,4 @@ struct FileServiceDetailView_Preview: PreviewProvider {
         )
     }
 }
+#endif
