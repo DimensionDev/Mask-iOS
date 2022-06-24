@@ -33,6 +33,7 @@ class PluginMetaShareViewModel {
         let meta = PluginMeta.redPacket(payload)
         self.shareMeta = meta
         guard showGuideWhenNoPersonaOrProfile() else { return }
+        guard let rpid = payload.basic?.rpid, rpid.isNotEmpty else { return }
 
         coordinator.present(scene: .messageCompose(meta), transition: .modal(animated: true))
     }
