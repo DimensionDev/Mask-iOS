@@ -996,8 +996,8 @@
         "success": ""
       },
       "confirm": {
-        "wallet_account": "",
-        "attached_message": "",
+        "wallet_account": "钱包账户",
+        "attached_message": "附加信息",
         "split_mode": "",
         "share": "",
         "amount_per_share": "",
@@ -1009,7 +1009,7 @@
       "alert": {
         "message_no_account": "您不能选择 Token，因为没有钱包。"
       },
-      "max": "",
+      "max": "最大",
       "total-amount": "",
       "amount-per-share": "",
       "enter-quantity": "",
@@ -1018,18 +1018,18 @@
       "end-time": "",
       "claimed": "",
       "refund": "",
-      "token": "",
+      "token": "Token",
       "nft": "",
       "select-social-title": "连接社交账户",
       "select-social-description": "",
-      "share-title": "",
-      "share-connect-persona": "",
+      "share-title": "分享红包",
+      "share-connect-persona": "在分享您的红包之前，将您的 Persona 连接到社交媒体。",
       "share-create-persona": "",
-      "quantity": "",
-      "max-quantity-error": "",
+      "quantity": "数量",
+      "max-quantity-error": "最大数量为255。",
       "account": "",
       "refund_tip": "",
-      "history_title": "",
+      "history_title": "历史记录",
       "created": ""
     }
   }
