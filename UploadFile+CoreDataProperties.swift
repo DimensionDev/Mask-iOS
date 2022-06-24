@@ -18,6 +18,8 @@ extension UploadFile {
     @NSManaged public var landingTxID: String?
     @NSManaged public var payloadTxID: String?
     @NSManaged public var provider: String?
+
+    @NSManaged public var content: Data?
 }
 
 extension UploadFile : Identifiable {}
