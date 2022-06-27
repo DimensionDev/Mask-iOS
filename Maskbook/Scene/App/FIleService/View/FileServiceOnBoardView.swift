@@ -7,7 +7,6 @@ import Introspect
 struct FileServiceOnBoardView: View {
     enum Action {
         case upload
-        case showPolicy
     }
     private let action: (Action) -> Void
 
@@ -17,9 +16,6 @@ struct FileServiceOnBoardView: View {
     init(action: @escaping (Action) -> Void = { _ in }) {
         self.action = action
     }
-
-    @GestureState
-    var offset: CGPoint = .zero
 
     var body: some View {
         GeometryReader { proxy in
@@ -63,37 +59,56 @@ struct FileServiceOnBoardView: View {
     }
 
     private var policyText: some View {
-        Text {
-            Text("\(L10n.Plugins.Policy.reviewed) ")
-                .font(.mh7)
-                .foregroundColor(
-                    Asset.Colors.Text.dark.asColor().opacity(0.5)
-                )
-            
-            Text("\(L10n.Plugins.Policy.privacy) ")
-                .font(.bh7)
-                .foregroundColor(
-                    Asset.Colors.Text.dark.asColor()
+        TappableText(
+            attributedString: {
+                let final = NSMutableAttributedString(
+                    string: "\(L10n.Plugins.Policy.reviewed) ",
+                    attributes: [
+                        .font: FontStyles.mh7.uifont,
+                        .foregroundColor:  Asset.Colors.Text.dark.color.withAlphaComponent(0.5)
+                    ]
                 )
 
-            Text("\(L10n.Plugins.Policy.and) ")
-                .font(.mh7)
-                .foregroundColor(
-                    Asset.Colors.Text.dark.asColor().opacity(0.5)
+                let policy = NSMutableAttributedString(
+                    string: "\(L10n.Plugins.Policy.privacy) ",
+                    attributes: [
+                        .font: FontStyles.bh7.uifont,
+                        .foregroundColor:  Asset.Colors.Text.dark.color,
+                        .link: URL(string: "https://legal.mask.io/arweave/file-service/privacy-policy-uploader.html")!
+                    ]
                 )
 
-            Text("\(L10n.Plugins.Policy.uploadTerms)")
-                .font(.bh7)
-                .foregroundColor(
-                    Asset.Colors.Text.dark.asColor()
+                let and = NSAttributedString(
+                    string: "\(L10n.Plugins.Policy.and) ",
+                    attributes: [
+                        .font: FontStyles.mh7.uifont,
+                        .foregroundColor:  Asset.Colors.Text.dark.color.withAlphaComponent(0.5)
+                    ]
                 )
-        }
+
+                let service = NSMutableAttributedString(
+                    string: L10n.Plugins.Policy.uploadTerms,
+                    attributes: [
+                        .font: FontStyles.bh7.uifont,
+                        .foregroundColor:  Asset.Colors.Text.dark.color,
+                        .link: URL(string: "https://legal.mask.io/arweave/file-service/plugin-terms.html")!
+                    ]
+                )
+
+                final.append(policy)
+                final.append(and)
+                final.append(service)
+
+                return final
+            }
+        )
+        .offset(y: -3)
         .lineSpacing(3)
         .colorScheme(.dark)
     }
 
     private var policyAgreeView: some View {
-        HStack(alignment: .top) {
+        HStack(alignment: .firstTextBaseline) {
             Group {
                 if viewModel.fileServicePolicyAccepted {
                     Color.white
@@ -115,7 +130,6 @@ struct FileServiceOnBoardView: View {
             }
 
             policyText
-                .onTapGesture { action(.showPolicy) }
 
             Spacer()
         }

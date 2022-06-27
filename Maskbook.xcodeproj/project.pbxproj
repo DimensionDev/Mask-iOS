@@ -99,6 +99,7 @@
 		1F5B5EF32858299800F6AD98 /* FileServiceUploadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EF22858299800F6AD98 /* FileServiceUploadHandler.swift */; };
 		1F5B5EF528582F3400F6AD98 /* FileServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EF428582F3400F6AD98 /* FileServiceViewModel.swift */; };
 		1F705FE327CF6AB9002A4A7E /* SpinWheelAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */; };
+		1F7C5E742869DD3200D00AF4 /* TappableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7C5E732869DD3200D00AF4 /* TappableText.swift */; };
 		1F8AD0CB26CA3AA000C9694F /* MaskLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AD0CA26CA3AA000C9694F /* MaskLoadingIndicator.swift */; };
 		1F8AD0CE26CA3AFB00C9694F /* LoadingAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AD0CD26CA3AFB00C9694F /* LoadingAnimator.swift */; };
 		1F8AD0D026CA3BAE00C9694F /* SpinBallAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AD0CF26CA3BAE00C9694F /* SpinBallAnimator.swift */; };
@@ -933,6 +934,7 @@
 		1F5B5EF22858299800F6AD98 /* FileServiceUploadHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceUploadHandler.swift; sourceTree = "<group>"; };
 		1F5B5EF428582F3400F6AD98 /* FileServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceViewModel.swift; sourceTree = "<group>"; };
 		1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinWheelAnimator.swift; sourceTree = "<group>"; };
+		1F7C5E732869DD3200D00AF4 /* TappableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableText.swift; sourceTree = "<group>"; };
 		1F8AD0CA26CA3AA000C9694F /* MaskLoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskLoadingIndicator.swift; sourceTree = "<group>"; };
 		1F8AD0CD26CA3AFB00C9694F /* LoadingAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimator.swift; sourceTree = "<group>"; };
 		1F8AD0CF26CA3BAE00C9694F /* SpinBallAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinBallAnimator.swift; sourceTree = "<group>"; };
@@ -2054,6 +2056,7 @@
 				1F5B5ED9284F3B9500F6AD98 /* FileServiceView.swift */,
 				5DBDA4D3285083F000FBC921 /* FileServiceSelectFileSourceView.swift */,
 				1F5B5EDE28508FD400F6AD98 /* FileServiceUploadingItemView.swift */,
+				1F7C5E732869DD3200D00AF4 /* TappableText.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4601,6 +4604,7 @@
 				2A6ABB9C2720053B00CC3AED /* RestoreDataDiffView.swift in Sources */,
 				0F31A15C273E11EB009D2E05 /* WalletDisplayBlockChainType.swift in Sources */,
 				2AF884D2271EE9310004565A /* MaskWebMessage+Wallet.swift in Sources */,
+				1F7C5E742869DD3200D00AF4 /* TappableText.swift in Sources */,
 				1F176278285C36B4008BE93E /* FileServiceFAQViewController.swift in Sources */,
 				0F1A15A2265CE93B00B5E83E /* WalletCoreHelper.swift in Sources */,
 				2AF88520271EE9310004565A /* TokenDetailViewController.swift in Sources */,
