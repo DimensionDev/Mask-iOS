@@ -42,7 +42,7 @@ enum WalletSendError: Error {
     case passwordError
     case addressError
     case ethereumError(Error)
-    case walletConnectError
+    case walletConnectError(Error? = nil)
     case contractError
     case amountError
     case cancelled
@@ -92,8 +92,11 @@ extension WalletSendError: LocalizedError {
             }
             return error.errorDescription
             
-        case .walletConnectError:
-            return "Fail to connect with WalletConnect"
+        case .walletConnectError(let connectError):
+            guard let error = connectError else {
+                return "Fail to connect with WalletConnect"
+            }
+            return error.errorDescription
 
         case .contractError:
             return "Unsupported coin type"
