@@ -26,23 +26,32 @@ struct FileServiceOnBoardView: View {
             ScrollViewReader { scrollProxy in
                 ScrollView(.horizontal) {
                     LazyHStack(spacing: 0) {
-                        ForEach(FileServiceOnBoardItem.allCases, id: \.self) { item in
-                            FileServiceOnBoardItemView(item: item)
+                        ForEach(viewModel.totalItems, id: \.self) { item in
+                            FileServiceOnBoardItemView(item: item.content)
                                 .id(item)
                                 .frame(width: proxy.size.width, height: proxy.size.height)
                         }
                     }
                 }
                 .introspectScrollView { scrollView in
-                    scrollView.decelerationRate = .fast
                     scrollView.isDirectionalLockEnabled = true
                     scrollView.isPagingEnabled = true
+                    scrollView.delegate = viewModel
                 }
                 .frame(width: proxy.size.width, height: proxy.size.height)
                 .onChange(of: viewModel.item) { newValue in
-                    withAnimation(.easeInOut(duration: 1)) {
-                        scrollProxy.scrollTo(newValue, anchor: .center)
+                    if newValue.index > viewModel.maxIndex {
+                        let targetValue = viewModel.restartItem()
+                        scrollProxy.scrollTo(targetValue, anchor: .center)
+                        viewModel.item = targetValue
+                    } else {
+                        withAnimation(.easeInOut(duration: 1)) {
+                            scrollProxy.scrollTo(newValue, anchor: .center)
+                        }
                     }
+                }
+                .onAppear {
+                    scrollProxy.scrollTo(viewModel.item)
                 }
             }
             .overlay(
@@ -145,12 +154,41 @@ struct FileServiceOnBoardView: View {
         .padding(.horizontal, 20)
     }
 
-    final class TimerViewModel: ObservableObject {
-        @Published var item = FileServiceOnBoardItem.one
+    final class TimerViewModel: NSObject, ObservableObject, UIScrollViewDelegate {
+        @Published var item = Item.init(index: 0, content: .init(index: 0))
         @Published var checkBoxSelected = false
+
+        @Published
+        private(set) var totalItems: [Item] = []
+
+        let maxIndex: Int
+
+        private var restartIndex: Int {
+            maxIndex / 2 - 1
+        }
+
+        private let dupilcateGroups = 25
+        private let groupItemCount: Int = FileServiceOnBoardItem.allCases.count
+
         private(set) var cancelableStorage: Set<AnyCancellable> = []
 
-        init() {}
+        struct Item: Hashable, Identifiable {
+            let index: Int
+            let content: FileServiceOnBoardItem
+
+            var id: String {
+                "\(index)\(content)"
+            }
+        }
+
+         override init() {
+             maxIndex = dupilcateGroups * groupItemCount
+             super.init()
+             self.totalItems = (0 ..< maxIndex).map {
+                 Item(index: $0, content: FileServiceOnBoardItem(index: $0))
+             }
+             item = restartItem()
+        }
 
         func startTimer() {
             cancelableStorage = []
@@ -159,9 +197,49 @@ struct FileServiceOnBoardView: View {
                 .receive(on: RunLoop.main)
                 .sink { [weak self] _ in
                     guard let self = self else { return }
-                    self.item = self.item.next
+                    self.item = .init(index: self.item.index + 1, content: self.item.content.next)
                 }
                 .store(in: &cancelableStorage)
+        }
+
+        func restartItem() -> Item {
+            func restartIndex() -> Int {
+                var middle = maxIndex / 2
+                while middle > 0 {
+                    switch middle % groupItemCount {
+                    case 0: return middle
+                    default: middle -= 1
+                    }
+                }
+
+                return 0
+            }
+
+            let index = restartIndex()
+            let content = FileServiceOnBoardItem(index: index)
+            return .init(index: index, content: content)
+        }
+
+        func stopTimer() {
+            cancelableStorage = []
+        }
+
+        func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+            stopTimer()
+        }
+
+        func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+            startTimer()
+        }
+
+        func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+            guard scrollView.frame.width > 0 else {
+                return
+            }
+            let frameWidth = scrollView.frame.width
+            let index = Int(scrollView.contentOffset.x / frameWidth)
+            let targetValue = Item(index: index, content: .init(index: index))
+            item <| targetValue
         }
     }
 }
