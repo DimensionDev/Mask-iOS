@@ -1,34 +1,62 @@
+import Combine
 import Foundation
 import SwiftUI
 
+import Introspect
+
 struct FileServiceOnBoardView: View {
-    private let uploadAction: () -> Void
-    init(uploacAction: @escaping () -> Void = {}) {
-        self.uploadAction = uploacAction
+    enum Action {
+        case upload
+        case showPolicy
+    }
+    private let action: (Action) -> Void
+
+    @StateObject
+    private var viewModel = TimerViewModel()
+
+    init(action: @escaping (Action) -> Void = { _ in }) {
+        self.action = action
     }
 
-    var body: some View {
-        let config = LayouConfiguration(
-            indicatorOffset: .init(x: 0, y: 45),
-            indicatorColor: Asset.Colors.Public.blue
-        )
+    @GestureState
+    var offset: CGPoint = .zero
 
+    var body: some View {
         GeometryReader { proxy in
-            WalkThroughBoard<FileServiceOnBoardItemView>(
-                startItem: .one,
-                configuration: .constant(config)
-            )
+            ScrollViewReader { scrollProxy in
+                ScrollView(.horizontal) {
+                    LazyHStack(spacing: 0) {
+                        ForEach(FileServiceOnBoardItem.allCases, id: \.self) { item in
+                            FileServiceOnBoardItemView(item: item)
+                                .id(item)
+                                .frame(width: proxy.size.width, height: proxy.size.height)
+                        }
+                    }
+                }
+                .introspectScrollView { scrollView in
+                    scrollView.decelerationRate = .fast
+                    scrollView.isDirectionalLockEnabled = true
+                    scrollView.isPagingEnabled = true
+                }
+                .frame(width: proxy.size.width, height: proxy.size.height)
+                .onChange(of: viewModel.item) { newValue in
+                    withAnimation(.easeInOut(duration: 1)) {
+                        scrollProxy.scrollTo(newValue, anchor: .center)
+                    }
+                }
+            }
             .overlay(
                 Image(Asset.Plugins.FileService.uploadBackground)
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: proxy.size.width, height: 100 + proxy.safeAreaInsets.bottom)
-                    .overlay(policyView.offset(y: -proxy.safeAreaInsets.bottom / 2), alignment: .center)
+                    .frame(width: proxy.size.width, height: 138 + proxy.safeAreaInsets.bottom)
+                    .overlay(policyView, alignment: .top)
                     .offset(y: proxy.safeAreaInsets.bottom)
-                    .onTapGesture { uploadAction() }
                 ,
                 alignment: .bottom
             )
+            .onAppear {
+                viewModel.startTimer()
+            }
         }
     }
 
@@ -63,13 +91,89 @@ struct FileServiceOnBoardView: View {
     }
 
     private var policyView: some View {
-        HStack {
-            policyText
+        VStack(spacing: 20) {
+            HStack(alignment: .top) {
+                Group {
+                    if viewModel.checkBoxSelected {
+                        Color.white
+                            .frame(width: 16, height: 16)
+                            .cornerRadius(4)
+                            .overlay(
+                                Image(Asset.Plugins.checkMark)
+                            )
+                    } else {
+                        Asset.Images.Scene.WalletList.unchecked.asImage()
+                            .resizable()
+                            .renderingMode(.template)
+                            .foregroundColor(.white)
+                            .frame(width: 16, height: 16)
+                    }
+                }
+                .onTapGesture {
+                    viewModel.checkBoxSelected.toggle()
+                }
+
+                policyText
+                    .onTapGesture { action(.showPolicy) }
+
+                Spacer()
+            }
+
+            Button(
+                action: { action(.upload) },
+                label: {
+                    Color.white
+                        .frame(height: 56)
+                        .cornerRadius(8)
+                        .opacity(
+                            viewModel.checkBoxSelected
+                            ? 1
+                            : 0.5
+                        )
+                        .overlay(
+                            Text(L10n.Plugins.Policy.startUpload)
+                                .font(.bh5)
+                                .foregroundColor(Asset.Colors.Public.blue)
+                        )
+                }
+            )
+            .disabled(!viewModel.checkBoxSelected)
+
             Spacer()
-            Image(Asset.Icon.Arrows.backArrowSmall)
-                .rotationEffect(.init(degrees: 180))
         }
+        .padding(.top, 20)
         .padding(.horizontal, 20)
+    }
+
+    final class TimerViewModel: ObservableObject {
+        @Published var item = FileServiceOnBoardItem.one
+        @Published var checkBoxSelected = false
+        private(set) var cancelableStorage: Set<AnyCancellable> = []
+
+        init() {}
+
+        func startTimer() {
+            cancelableStorage = []
+            Timer.publish(every: 2, on: .main, in: .common)
+                .autoconnect()
+                .receive(on: RunLoop.main)
+                .sink { [weak self] _ in
+                    guard let self = self else { return }
+                    self.item = self.item.next
+                }
+                .store(in: &cancelableStorage)
+        }
+    }
+}
+
+extension FileServiceOnBoardItem {
+    var next: Self {
+        switch self {
+        case .one: return .two
+        case .two: return .three
+        case .three: return .four
+        case .four: return .one
+        }
     }
 }
 

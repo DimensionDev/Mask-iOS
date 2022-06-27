@@ -93,7 +93,7 @@ class PersonaCollectionCell: UICollectionViewCell {
             view.heightAnchor.constraint(equalToConstant: 20),
             view.widthAnchor.constraint(equalToConstant: 20)
         ])
-        view.applyCornerRadius(radius: 10)
+        view.applyCornerRadius(radius: 10, cornerCurve: .circular)
         view.layer.borderWidth = 1.5
         return view
     }()

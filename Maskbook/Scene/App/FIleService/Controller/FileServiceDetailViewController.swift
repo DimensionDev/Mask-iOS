@@ -67,7 +67,7 @@ final class FileServiceDetailViewController: BaseViewController {
         }
         coordinator.present(
             scene: .safariView(url: url),
-            transition: .detail()
+            transition: .modal()
         )
     }
 }
@@ -88,58 +88,76 @@ struct FileServiceDetailView: View {
     }
 
     var body: some View {
-        VStack(spacing: 16) {
-            Spacer()
+        GeometryReader { proxy in
+            VStack(spacing: 16) {
+                Spacer()
 
-            VStack(spacing: 40) {
-                Image(Asset.Plugins.FileService.folder)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 134, height: 134)
+                VStack(alignment: .center, spacing: item.fileType == .image ? 12 : 40) {
+                    switch item.fileType {
+                    case .image:
+                        if let uiImage = UIImage.init(data: item.content) {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(maxWidth: proxy.size.width - 40, maxHeight: 200)
+                        } else {
+                            Image(Asset.Plugins.FileService.imagePlaceholder)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: proxy.size.width - 40, height: 200)
+                        }
 
-                VStack(spacing: 4) {
-                    Text(item.fileName)
-                        .font(.bh4)
-                        .foregroundColor(Asset.Colors.Text.dark)
+                    case .file:
+                        Image(Asset.Plugins.FileService.folder)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 134, height: 134)
+                    }
 
-                    Text(item.uploadDateText)
-                        .font(.mh7)
-                        .foregroundColor(Asset.Colors.Text.normal)
+                    VStack(spacing: 4) {
+                        Text(item.fileName)
+                            .font(.bh4)
+                            .foregroundColor(Asset.Colors.Text.dark)
+
+                        Text(item.uploadDateText)
+                            .font(.mh7)
+                            .foregroundColor(Asset.Colors.Text.normal)
+                    }
                 }
+
+                Spacer()
+
+                Button(
+                    action: { actionSignal(.share) },
+                    label: {
+                        Asset.Colors.Public.blue.asColor()
+                            .cornerRadius(8)
+                            .frame(height: 54)
+                            .overlay(
+                                Text(L10n.Common.Controls.postToTwitter)
+                                    .font(.bh5)
+                                    .foregroundColor(.white)
+                            )
+                    }
+                )
+
+                Button(
+                    action: { actionSignal(.download) },
+                    label: {
+                        Asset.Colors.Public.blue.asColor()
+                            .cornerRadius(8)
+                            .frame(height: 54)
+                            .overlay(
+                                Text(L10n.Common.Controls.download)
+                                    .font(.bh5)
+                                    .foregroundColor(.white)
+                            )
+                    }
+                )
             }
-
-            Spacer()
-
-            Button(
-                action: { actionSignal(.share) },
-                label: {
-                    Asset.Colors.Public.blue.asColor()
-                        .cornerRadius(8)
-                        .frame(height: 54)
-                        .overlay(
-                            Text(L10n.Common.Controls.postToTwitter)
-                                .font(.bh5)
-                                .foregroundColor(.white)
-                        )
-                }
-            )
-
-            Button(
-                action: { actionSignal(.download) },
-                label: {
-                    Asset.Colors.Public.blue.asColor()
-                        .cornerRadius(8)
-                        .frame(height: 54)
-                        .overlay(
-                            Text(L10n.Common.Controls.download)
-                                .font(.bh5)
-                                .foregroundColor(.white)
-                        )
-                }
-            )
+            .padding(.horizontal, 20)
+            .padding(.bottom, 20)
         }
-        .padding(.horizontal, 20)
-        .padding(.bottom, 20)
     }
 }
 

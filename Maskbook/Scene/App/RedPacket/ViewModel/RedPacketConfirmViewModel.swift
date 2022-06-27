@@ -176,30 +176,24 @@ class RedPacketConfirmViewModel: ObservableObject {
     
     func onConfirm() {
         buttonState = .sending
-        vault.getWalletPassword()
-            .sink(receiveCompletion: { _ in }) { [weak self] password in
-                self?.sendTransaction(password: password) { [weak self] result in
-                    DispatchQueue.main.async {
-                        switch result {
-                        case .success(let txHash):
-                            self?.completion?(txHash, nil)
-                            self?.completion = nil
-                            
-                        case .failure(let error):
-                            log.error("send failed: \(error)", source: "lucky drop")
-                            self?.completion?(nil, error)
-                            self?.completion = nil
-                        }
-                        self?.buttonState = .normal
-                    }
+        sendTransaction() { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let txHash):
+                    self?.completion?(txHash, nil)
+                    self?.completion = nil
+                    
+                case .failure(let error):
+                    log.error("send failed: \(error)", source: "lucky drop")
+                    self?.completion?(nil, error)
+                    self?.completion = nil
                 }
+                self?.buttonState = .normal
             }
-            .store(in: &disposeBag)
+        }
     }
     
-    private func sendTransaction(
-        password: String,
-        _ completion: @escaping (Swift.Result<String, Error>) -> Void)
+    private func sendTransaction(_ completion: @escaping (Swift.Result<String, Error>) -> Void)
     {
         guard let transaction = transaction else {
             completion(.failure(WalletSendError.contractError))
@@ -297,14 +291,21 @@ class RedPacketConfirmViewModel: ObservableObject {
                 units: .Gwei
             )
             
-            WalletSendHelper.sendTransactionWithWeb3(
-                password: password,
-                transaction: transaction,
-                transactionOptions: transactionOptions,
-                maxFeePerGas: maxFeePerGas == 0 ? nil : maxFeePerGas,
-                maxInclusionFeePerGas: maxInclusionFeePerGas == 0 ? nil : maxInclusionFeePerGas,
-                network: settings.network,
-                completionWrapper)
+            vault.getWalletPassword()
+            .sink(receiveCompletion: { _ in }) { [weak self] password in
+                // should run in main thread!
+                guard let self = self else { return }
+                
+                WalletSendHelper.sendTransactionWithWeb3(
+                    password: password,
+                    transaction: transaction,
+                    transactionOptions: transactionOptions,
+                    maxFeePerGas: maxFeePerGas == 0 ? nil : maxFeePerGas,
+                    maxInclusionFeePerGas: maxInclusionFeePerGas == 0 ? nil : maxInclusionFeePerGas,
+                    network: self.settings.network,
+                    completionWrapper)
+            }
+            .store(in: &disposeBag)
         }
     }
     

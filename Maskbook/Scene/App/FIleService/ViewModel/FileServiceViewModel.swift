@@ -7,6 +7,7 @@ import CoreDataStack
 final class FileServiceViewModel: ObservableObject {
     enum Action {
         case choseFile
+        case showPolicy
         case share(FileServiceUploadResult)
         case viewDetail(FileServiceUploadingItem)
     }
@@ -61,17 +62,43 @@ final class FileServiceViewModel: ObservableObject {
 
     init() {
         refreshList()
-        $draftItem
+        let drafeSignal = $draftItem
             .compactMap { $0 }
             .removeDuplicates()
             .filter { $0.state == .uploaded }
             .receive(on: DispatchQueue.main)
+            .share()
+
+            drafeSignal
             .sink { (value: FileServiceUploadingItem) in
                 FileServiceRepository.updateOrInsertRecord(
                     updateBy: { (item: UploadFile) in
                         item.update(from: value)
                     }
                 )
+            }
+            .store(in: &cancelableStorage)
+
+        drafeSignal
+            .delay(for: .seconds(5), scheduler: DispatchQueue.main)
+            .sink { [weak self] uploadItem in
+                guard let self = self else { return }
+                guard let item = self.draftItem else {
+                    return
+                }
+
+                // in case there is a new uploading
+                guard let txid = uploadItem.tx?.id,
+                      let itemID = item.tx?.id,
+                      txid == itemID else {
+                    return
+                }
+
+
+                if item.state == .uploaded {
+                    self.draftItem = nil
+                    self.refreshList()
+                }
             }
             .store(in: &cancelableStorage)
 

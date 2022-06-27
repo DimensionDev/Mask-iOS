@@ -68,7 +68,6 @@ extension IPFSUploadHandler: FileServiceUploadHandler {
         type: String = "",
         delegate: URLSessionTaskDelegate? = nil
     ) async throws -> String {
-        
         return await withCheckedContinuation { continuation in
             do {
                 try client?.add(data) { nodes in

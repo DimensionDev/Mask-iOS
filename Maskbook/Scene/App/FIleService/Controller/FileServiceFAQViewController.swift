@@ -84,11 +84,12 @@ struct FileServiceFAQView: View {
                         .accentColor(Asset.Colors.Text.normal.asColor())
                     }
                 }
+
+                .padding(.horizontal, 20)
             }
         }
         .padding(.top, 16)
-        .padding(.horizontal, 20)
-        .background(Asset.Colors.Background.normal.asColor())
+        .background(Asset.Colors.Background.normal.asColor().ignoresSafeArea())
     }
 
     private func groupContent(of text: String, url: String) -> some View {

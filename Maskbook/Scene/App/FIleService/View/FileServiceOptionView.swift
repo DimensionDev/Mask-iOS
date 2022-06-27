@@ -152,12 +152,16 @@ fileprivate struct SelectionRow: View {
                         .foregroundColor(Asset.Colors.Text.dark)
                         .horizontallyFilled()
 
-                    selected
-                    ? Asset.Images.Scene.WalletList.check.asImage()
-                    : Asset.Images.Scene.WalletList.unchecked.asImage()
+                    checkBox
                 }
                 .padding(.horizontal, 12)
             )
+    }
+
+    private var checkBox: some View {
+        selected
+        ? Asset.Plugins.FileService.checkSquare.asImage()
+        : Asset.Images.Scene.WalletList.unchecked.asImage()
     }
 }
 

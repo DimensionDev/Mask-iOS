@@ -74,7 +74,11 @@ class ImportKeystoreViewController: BaseViewController {
         view.alignment = .fill
         view.spacing = 0
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: 32, left: 16, bottom: 16, right: 16)
+        view.layoutMargins = UIEdgeInsets(
+            top: 32,
+            left: LayoutConstraints.leading,
+            bottom: 16,
+            right: LayoutConstraints.trailing)
         
         textContainer.translatesAutoresizingMaskIntoConstraints = false
         passwordTitleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -168,9 +172,9 @@ private extension ImportKeystoreViewController {
         vStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             vStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            vStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstraints.leading),
+            vStack.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: vStack.bottomAnchor),
-            view.trailingAnchor.constraint(equalTo: vStack.trailingAnchor, constant: LayoutConstraints.trailing)
+            view.trailingAnchor.constraint(equalTo: vStack.trailingAnchor)
         ])
         
         view.gesture()
