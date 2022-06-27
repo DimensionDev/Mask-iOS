@@ -935,8 +935,8 @@
         "upload_photos": "上传照片",
         "upload_file": "上传文件",
         "upload_tips": "大小限制为10.5MB。\n上传无法取消。",
-        "save_to_album": "",
-        "save_to_folder": ""
+        "save_to_album": "保存到相册",
+        "save_to_folder": "保存到文件夹"
       },
       "failure_tip": "由于网络条件或其他问题，上传失败。",
       "post": "分享",
