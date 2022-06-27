@@ -934,7 +934,9 @@
         "take_photos": "",
         "upload_photos": "",
         "upload_file": "",
-        "upload_tips": ""
+        "upload_tips": "",
+        "save_to_album": "",
+        "save_to_folder": ""
       },
       "failure_tip": "",
       "post": "",
