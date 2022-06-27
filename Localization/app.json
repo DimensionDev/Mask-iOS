@@ -934,7 +934,9 @@
         "take_photos": "Take Photos",
         "upload_photos": "Upload Photos",
         "upload_file": "Upload File",
-        "upload_tips": "The size limit is 10.5MB.\nThe upload can’t be cancelled."
+        "upload_tips": "The size limit is 10.5MB.\nThe upload can’t be cancelled.",
+        "save_to_album": "Save into the album",
+        "save_to_folder": "Save to folder"
       },
       "failure_tip": "Failed to upload due to network conditions or other problems.",
       "post": "Share",
