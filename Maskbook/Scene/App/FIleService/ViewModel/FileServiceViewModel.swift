@@ -7,7 +7,6 @@ import CoreDataStack
 final class FileServiceViewModel: ObservableObject {
     enum Action {
         case choseFile
-        case showPolicy
         case share(FileServiceUploadResult)
         case viewDetail(FileServiceUploadingItem)
     }

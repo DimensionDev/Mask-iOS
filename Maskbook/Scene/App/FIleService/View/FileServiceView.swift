@@ -15,7 +15,6 @@ struct FileServiceView: View {
                 FileServiceOnBoardView { action in
                     switch action {
                     case .upload: viewModel.actionSignal(.choseFile)
-                    case .showPolicy: viewModel.actionSignal(.showPolicy)
                     }
                 }
             } else {
