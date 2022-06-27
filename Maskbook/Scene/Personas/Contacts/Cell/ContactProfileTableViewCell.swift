@@ -48,11 +48,11 @@ class ContactProfileTableViewCell: UITableViewCell {
     private let maskIcon: UIImageView = {
         let imageView = UIImageView()
         NSLayoutConstraint.activate([
-            imageView.heightAnchor.constraint(equalToConstant: 20),
-            imageView.widthAnchor.constraint(equalToConstant: 20)
+            imageView.heightAnchor.constraint(equalToConstant: 16),
+            imageView.widthAnchor.constraint(equalToConstant: 16)
         ])
         imageView.image = Asset.Icon.Logo.littleMask.image
-        imageView.applyRadius(radius: 10)
+        imageView.applyRadius(radius: 8)
         return imageView
     }()
     

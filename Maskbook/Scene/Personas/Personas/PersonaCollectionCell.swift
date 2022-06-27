@@ -35,6 +35,11 @@ class PersonaCollectionCell: UICollectionViewCell {
     ]
     
     static let graidentColors = [colors1, colors2, colors3]
+    static let borderColors = [
+        Asset.Colors.Gradient.personaBorder1.color.cgColor,
+        Asset.Colors.Gradient.personaBorder2.color.cgColor,
+        Asset.Colors.Gradient.personaBorder3.color.cgColor
+    ]
     
     private lazy var disposeBag = Set<AnyCancellable>()
     
@@ -52,12 +57,45 @@ class PersonaCollectionCell: UICollectionViewCell {
         return view
     }()
     
+    private lazy var avatarContainerView: UIView = {
+        let view = UIView()
+        view.withSubViews {
+            avatarImageView
+            cameraView
+        }
+        NSLayoutConstraint.activate([
+            avatarImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            avatarImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0)
+        ])
+        NSLayoutConstraint.activate([
+            cameraView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            cameraView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        return view
+    }()
+    
     private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.image = Asset.Images.Scene.Personas.personaDefault.image
         imageView.applyCornerRadius(radius: 28)
+        NSLayoutConstraint.activate([
+            imageView.heightAnchor.constraint(equalToConstant: 56),
+            imageView.widthAnchor.constraint(equalToConstant: 56)
+        ])
         return imageView
+    }()
+    
+    private lazy var cameraView: UIImageView = {
+        let view = UIImageView()
+        view.image = Asset.Images.Scene.Personas.camera.image
+        NSLayoutConstraint.activate([
+            view.heightAnchor.constraint(equalToConstant: 20),
+            view.widthAnchor.constraint(equalToConstant: 20)
+        ])
+        view.applyCornerRadius(radius: 10, cornerCurve: .circular)
+        view.layer.borderWidth = 1.5
+        return view
     }()
     
     private lazy var nameLabel: UILabel = {
@@ -75,13 +113,6 @@ class PersonaCollectionCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var littleMaskView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = Asset.Icon.Logo.maskWithBorder.image
-        return imageView
-    }()
-    
     private lazy var moreButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = Asset.Colors.AccountCard.nameText.color
@@ -90,28 +121,17 @@ class PersonaCollectionCell: UICollectionViewCell {
     }()
     
     private lazy var stack: HStackView = {
-        let identifierStackView = HStackView(spacing: 4, alignment: .top) {
-            littleMaskView
-                .cv.apply {
-                    NSLayoutConstraint.activate([
-                        $0.heightAnchor.constraint(equalToConstant: 16),
-                        $0.widthAnchor.constraint(equalToConstant: 16)
-                    ])
-                }
+        let infoStack = VStackView(spacing: 4) {
+            nameLabel
             identifierLabel
         }
         
-        let infoStack = VStackView(spacing: 4) {
-            nameLabel
-            identifierStackView
-        }
-        
         let stack = HStackView(spacing: 12, alignment: .center) {
-            avatarImageView
+            avatarContainerView
                 .cv.apply {
                     NSLayoutConstraint.activate([
                         $0.heightAnchor.constraint(equalToConstant: 56),
-                        $0.widthAnchor.constraint(equalToConstant: 56)
+                        $0.widthAnchor.constraint(equalToConstant: 64)
                     ])
                 }
             infoStack
@@ -227,14 +247,14 @@ class PersonaCollectionCell: UICollectionViewCell {
                 self?.setupLayerFrame()
             }
             .store(in: &disposeBag)
-        
     }
     
     func config(persona: PersonaRecord) {
         nameLabel.text = persona.nickname
-        identifierLabel.text = persona.identifier?.split(separator: "/").last.flatMap({ String($0) })
+        identifierLabel.text = persona.identifier?.split(separator: "/").last.flatMap { String($0) }
         if let data = persona.avatarData,
-           let image = UIImage(data: data) {
+           let image = UIImage(data: data)
+        {
             avatarImageView.image = image
         } else {
             avatarImageView.image = Asset.Images.Scene.Personas.personaDefault.image
@@ -244,5 +264,6 @@ class PersonaCollectionCell: UICollectionViewCell {
     func applyGradient(index: Int) {
         let index = index % 3
         backgroundLayer.colors = Self.graidentColors[index]
+        cameraView.layer.borderColor = Self.borderColors[index]
     }
 }

@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Close Square.pdf",
+      "filename" : "wrong.pdf",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Close Square-1.pdf",
+      "filename" : "wrong-1.pdf",
       "idiom" : "universal"
     }
   ],

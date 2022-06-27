@@ -218,6 +218,11 @@ class Coordinator {
         case composeSelectPersona(viewController: SelectContactViewController)
         case fileService
         case fileServiceOptions
+        case fileServiceLocalFileSource(selectFileHandler: FileServiceSelectFileHandler)
+        case fileServiceDetail(FileServiceUploadingItem)
+        case fileServiceFAQ
+        case messageCompose(PluginMeta? = nil)
+        case composeSelectContact(viewModel: SelectContactViewModel)
         case debug
     }
     
@@ -850,15 +855,30 @@ extension Coordinator {
 
         case .debug:
             return UIHostingController(rootView: DebugView())
+            
         case let .composeSelectContact(selectContactViewModel, delegate):
             return SelectContactViewController(viewModel: selectContactViewModel, delegate: delegate)
+          
         case let .composeSelectPersona(viewController):
             let searchPersonaVc = SearchPersonaViewController()
             searchPersonaVc.delegate = viewController
             return searchPersonaVc
-        case .fileService: return FileServiceViewController()
-        case .fileServiceOptions: return FileServiceOptionViewController()
+            
+        case .fileService:
+            let nav = NavigationController(rootViewController: FileServiceViewController())
+            nav.modalPresentationStyle = .overFullScreen
+            return nav
+            
+        case .fileServiceOptions:
+            return FileServiceOptionViewController()
+            
+        case let .fileServiceLocalFileSource(selectFileHandler):
+            return FileServiceSelectFileSourceViewController(selectFileHandler: selectFileHandler)
 
+        case let .fileServiceDetail(value):
+            return FileServiceDetailViewController(item: value)
+
+        case .fileServiceFAQ: return FileServiceFAQViewController()
         }
     }
     // swiftlint:enable cyclomatic_complexity function_body_length
@@ -872,8 +892,8 @@ extension Coordinator {
         }
     }
     
-    func dismissTopViewController() {
-        UIApplication.getTopViewController()?.dismiss(animated: true, completion: nil)
+    func dismissTopViewController(animated: Bool = true, completion: (() -> Void)? = nil) {
+        UIApplication.getTopViewController()?.dismiss(animated: animated, completion: completion)
     }
 }
 

@@ -87,14 +87,17 @@ extension JsonWebKey {
         guard let x = x, let y = y else {
             return nil
         }
+        // as x, y must be base64 encoded string, just use it to get data
         guard let xData = Data(base64URLEncoded: x),
               let yData = Data(base64URLEncoded: y) else {
             return nil
         }
-        var publicKeyData = Data()
-        publicKeyData.append(0x04)
-        publicKeyData.append(contentsOf: xData)
-        publicKeyData.append(contentsOf: yData)
-        return SECP256K1.combineSerializedPublicKeys(keys: [publicKeyData], outputCompressed: true)
+
+        var key = Data()
+        key.insert(0x04, at: 0)
+        key.append(xData)
+        key.append(yData)
+
+        return SECP256K1.combineSerializedPublicKeys(keys: [key], outputCompressed: true)
     }
 }

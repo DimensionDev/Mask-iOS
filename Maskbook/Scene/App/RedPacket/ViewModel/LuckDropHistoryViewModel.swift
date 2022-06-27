@@ -108,7 +108,7 @@ final class LuckyDropHistoryViewModel: ObservableObject {
 
         if !didRequest {
             state = .loading
-            Task { await loadData() }
+            Task.detached { await self.loadData() }
         } else {
             if payloadIsEmpty(for: selection) {
                 state = .empty
@@ -130,8 +130,8 @@ extension LuckyDropHistoryViewModel {
     private func loadTokenHistory() async {
         dataFetchedSet.insert(.token)
         tokenHistoryTask?.cancel()
-        tokenHistoryTask = Task {
-            try await fetchTokenRedPacketHistory()
+        tokenHistoryTask = Task.detached {
+            try await self.fetchTokenRedPacketHistory()
         }
 
         await displayData(on: .token) {

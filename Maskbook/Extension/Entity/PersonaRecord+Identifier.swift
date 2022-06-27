@@ -18,6 +18,10 @@ extension PersonaRecord {
         }
         return identifier
     }
+    
+    var displayIdentifier: String? {
+        identifier?.split(separator: "/").last.flatMap({ String($0).replacingOccurrences(of: "\n", with: "") })
+    }
 
     var privateKeyBase64String: String {
         Persona(fromRecord: self)?

@@ -1,0 +1,54 @@
+//
+//  Extensions.swift
+//  Maskbook
+//
+//  Created by xiaojian sun on 2022/6/15.
+//  Copyright © 2022 dimension. All rights reserved.
+//
+
+import CryptoKit
+import Foundation
+
+extension String {
+    var base64URLEncodedString: String {
+        Data(utf8).base64URLEncodedString()
+    }
+}
+
+extension Array where Element == Data {
+    var combined: Data {
+       reduce(.init(), +)
+    }
+}
+
+extension StringProtocol {
+    subscript(offset: Int) -> Character {
+        self[index(startIndex, offsetBy: offset)]
+    }
+}
+
+extension String {
+    var uint8Array: [UInt8] {
+        Array(utf8)
+    }
+}
+
+extension Date {
+    func toISOString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        return dateFormatter.string(from: self)
+    }
+}
+
+extension Dictionary {
+    func asString() -> String {
+      do {
+        let data = try JSONSerialization.data(withJSONObject: self, options: .withoutEscapingSlashes)
+        return String(data: data, encoding: String.Encoding.utf8) ?? ""
+      } catch {
+        return ""
+      }
+    }
+}

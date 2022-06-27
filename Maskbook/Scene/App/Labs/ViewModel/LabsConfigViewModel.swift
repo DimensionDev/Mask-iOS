@@ -18,6 +18,9 @@ final class LabsConfigViewModel: ObservableObject {
     @InjectedProvider(\.userDefaultSettings)
     private var userSetting
 
+    @InjectedProvider(\.mainCoordinator)
+    private var mainCoordinator
+
     private var pluginAlreadEnabled = false
 
     /// The first plugin user attempt to enable
@@ -71,7 +74,10 @@ final class LabsConfigViewModel: ObservableObject {
                       !self.pluginAlreadEnabled else { return }
                 // record plugin user is attempting to enable
                 self.cachedEnablePlugin = enabledPlugin
-//                self.mainCoordinator.present(scene: .pluginRiskWarning, transition: .popup)
+                self.mainCoordinator.present(
+                    scene: .pluginRiskWarning(pluginId: enabledPlugin.plugin.id),
+                    transition: .popup
+                )
             }
             .store(in: &subscriptionSet)
     }

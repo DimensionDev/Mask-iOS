@@ -87,7 +87,8 @@ class ContactsViewController: BaseViewController {
         let insets = UIEdgeInsets(top: Self.tableHeaderHeight, left: 0, bottom: 0, right: 0)
         tableView.scrollIndicatorInsets = insets
         tableView.contentInset = insets
-        tableView.contentOffset = CGPoint(x: 0, y: -Self.tableHeaderHeight)
+        tableView.contentOffset = CGPoint(x: 0, y: -Self.tableHeaderHeight - self.tableView.adjustedContentInset.top)
+        
     }
 
     func showEmptyView() {

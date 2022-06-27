@@ -1,6 +1,6 @@
 import SwiftUI
 
-private struct TransformRectKey: PreferenceKey {
+struct TransformRectKey: PreferenceKey {
     static var defaultValue: ScrollOffset?
 
     static func reduce(value: inout ScrollOffset?, nextValue: () -> ScrollOffset?) {
@@ -16,7 +16,7 @@ struct IndicatorOffsetKey: PreferenceKey {
     }
 }
 
-private struct ScrollOffset: Equatable {
+struct ScrollOffset: Equatable {
     let rect: CGRect
     let index: Int
 
@@ -33,15 +33,17 @@ private struct ScrollOffset: Equatable {
 
 struct LayouConfiguration {
     let indicatorOffset: CGPoint
-
     let indicatorColor: ColorAsset
+    let showIndicator: Bool
 
     init(
+        showIndicator: Bool = true,
         indicatorOffset: CGPoint = .zero,
         indicatorColor: ColorAsset = Asset.Colors.Background.lightBlue
     ) {
         self.indicatorOffset = indicatorOffset
         self.indicatorColor = indicatorColor
+        self.showIndicator = showIndicator
     }
 }
 
@@ -106,11 +108,16 @@ struct WalkThroughBoard<V: OnBoardItemView & View>: View {
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
             .overlay(
-                capsuleIndicator,
+                Group {
+                    if configuration.showIndicator {
+                        capsuleIndicator
+                    }
+                }
+                // use to move indicator
+                .offset(y: -bottomPadding)
+                ,
                 alignment: .bottom
             )
-            // use to move indicator
-            .padding(.bottom, bottomPadding)
         }
     }
 

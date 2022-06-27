@@ -33,6 +33,7 @@ class PluginMetaShareViewModel {
         let meta = PluginMeta.redPacket(payload)
         self.shareMeta = meta
         guard showGuideWhenNoPersonaOrProfile() else { return }
+        guard let rpid = payload.basic?.rpid, rpid.isNotEmpty else { return }
 
         coordinator.present(scene: .messageCompose(meta), transition: .modal(animated: true))
     }
@@ -40,6 +41,14 @@ class PluginMetaShareViewModel {
     @MainActor
     func shareRedPacket(payload: RedPacketPayload) {
         let meta = PluginMeta.redPacket(payload)
+        self.shareMeta = meta
+        guard showGuideWhenNoPersonaOrProfile() else { return }
+        coordinator.present(scene: .messageCompose(meta), transition: .modal(animated: true))
+    }
+    
+    @MainActor
+    func postFileService(fileServiceResult: FileServiceUploadResult) {
+        let meta = PluginMeta.fileService(fileServiceResult)
         self.shareMeta = meta
         guard showGuideWhenNoPersonaOrProfile() else { return }
         coordinator.present(scene: .messageCompose(meta), transition: .modal(animated: true))

@@ -34,7 +34,6 @@ enum PluginType: String {
 
     /// plugin encrytption key
     var postEncryptionKey: String {
-
         let index: Int =  {
             switch self {
             case .ito: return 0
@@ -48,7 +47,7 @@ enum PluginType: String {
             switch self {
             case .ito: return "ito"
             case .luckyDrop: return "red_packet"
-            case .fileService: return "file_service"
+            case .fileService: return "fileservice"
             default: return ""
             }
         }()

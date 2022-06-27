@@ -86,6 +86,7 @@ final class UserDefaultSettings {
         case jsDocumentResourceSelectedCommitHash
 
         case backupFileDetectDate
+        case fileServiceUploadOption
     }
 
     func removeAll() {
@@ -107,6 +108,8 @@ final class UserDefaultSettings {
         backupDate = nil
         backupAlertDate = nil
         indexedDBDataMigrated = false
+
+        fileServiceUploadOption = FileServiceUploadOption.defaultOption
     }
 
     @OptionalUserDefault(key: .defaultAccountAddress)
@@ -250,7 +253,10 @@ final class UserDefaultSettings {
     func isPasswordExpried(_ expiredDate: Date? = nil) -> Bool {
         // fixed: Simultaneous accesses to 0x1068319f0, but modification requires exclusive access.
         guard let expiredDate = expiredDate ?? passwordExpiredDate else {
-            return true
+            // No payment password means it will not expire.
+            // An expiration date will be set once the payment password is set.
+            // For example, if you connect via wallet connect without a payment password, the payment password will not expire.
+            return false
         }
 
         return expiredDate < Date()
@@ -323,9 +329,22 @@ final class UserDefaultSettings {
     
     @OptionalUserDefault(key: .backupFileDetectDate)
     var backupFileDetectDate: Date?
+
+    @ReactiveUserDefault(
+        key: .fileServiceUploadOption,
+        defaultValue: FileServiceUploadOption.defaultOption
+    )
+    var fileServiceUploadOption: String
 }
 
 extension UserDefaultSettings {
+    var fileServiceUploadOptionPublisher: AnyPublisher<FileServiceUploadOption, Never> {
+        $fileServiceUploadOption
+            .removeDuplicates()
+            .compactMap(FileServiceUploadOption.init)
+            .share()
+            .eraseToAnyPublisher()
+    }
     
     func changeNetwork(network: BlockChainNetwork, address: String?) {
         defaultAccountAddress = address

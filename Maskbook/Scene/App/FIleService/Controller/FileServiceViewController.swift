@@ -2,16 +2,50 @@ import SwiftUI
 import UIKit
 
 final class FileServiceViewController: BaseViewController {
-
     @InjectedProvider(\.mainCoordinator)
     private var coordinator
+
+    private lazy var selectFileHandler = FileServiceSelectFileHandler(delegate: self)
+
+    private lazy var viewModel = FileServiceViewModel()
+    
+    private lazy var shareViewModel = PluginMetaShareViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = L10n.Scene.App.Plugins.fileService
-        FileServiceView().asContent(in: self)
+        FileServiceView(viewModel: viewModel).asContent(in: self)
     }
 
+    override func buildEvent() {
+        super.buildEvent()
+        viewModel.configActionSignal { [weak self] action in
+            switch action {
+            case .showPolicy: self?.showPolicy()
+            case .choseFile: self?.choseFile()
+            case let .share(value): self?.share(value)
+            case let .viewDetail(value): self?.viewDetail(of: value)
+            }
+        }
+    }
+
+    private func share(_ item: FileServiceUploadResult) {
+        shareViewModel.postFileService(fileServiceResult: item)
+    }
+
+    private func choseFile() {
+        coordinator.present(
+            scene: .fileServiceLocalFileSource(selectFileHandler: selectFileHandler),
+            transition: .panModel()
+        )
+    }
+
+    private func viewDetail(of item: FileServiceUploadingItem) {
+        coordinator.present(
+            scene: .fileServiceDetail(item),
+            transition: .detail()
+        )
+    }
 
     private func configUploadOption() {
         coordinator.present(
@@ -19,23 +53,28 @@ final class FileServiceViewController: BaseViewController {
             transition: .detail()
         )
     }
+
+    private func showPolicy() {
+        guard let url = URL(string: "https://legal.mask.io/maskbook/privacy-policy-ios.html") else {
+            return
+        }
+
+        coordinator.present(
+            scene: .safariView(url: url),
+            transition: .modal()
+        )
+    }
+}
+
+extension FileServiceViewController: FileServiceSelectFileDelegate {
+    func didGetFile(fileItem: FileServiceSelectedFileItem) {
+        viewModel.tryUploading(fileItem)
+    }
 }
 
 extension FileServiceViewController {
     @objc
     override func prepareRightNavigationItems() {
-        let button = NavigationBarItemView(imageAsset: Asset.Plugins.closeSquare) { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }
-
-        self.navigationItem.rightBarButtonItems = [
-            .fixedSpace(14),
-            UIBarButtonItem(customView: button.asUIView())
-        ]
-    }
-
-    @objc
-    override func prepareLeftNavigationItems() {
         let settings = NavigationBarItemView(imageAsset: Asset.Plugins.LuckyDrop.setting) { [weak self] in
             self?.configUploadOption()
         }
@@ -43,6 +82,15 @@ extension FileServiceViewController {
         self.navigationItem.leftBarButtonItems = [
             .fixedSpace(14),
             UIBarButtonItem(customView: settings.asUIView())
+        ]
+
+        let button = NavigationBarItemView(imageAsset: Asset.Plugins.closeSquare) { [weak self] in
+            self?.navigationController?.dismiss(animated: true)
+        }
+
+        self.navigationItem.rightBarButtonItems = [
+            .fixedSpace(14),
+            UIBarButtonItem(customView: button.asUIView())
         ]
     }
 }

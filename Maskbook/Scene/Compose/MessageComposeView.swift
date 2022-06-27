@@ -51,11 +51,15 @@ struct MessageComposeView: View {
                     }
                 }
             )
+
             Spacer()
+
             Text(L10n.Scene.MessageCompose.title)
                 .font(FontStyles.bh4.font)
                 .foregroundColor(Asset.Colors.Twitter.strong.asColor())
+
             Spacer()
+
             Button(
                 action: {
                     viewModel.encryptContent()
@@ -132,16 +136,30 @@ struct MessageComposeView: View {
 
     private func pluginContentItem(pluginContent: PluginMeta) -> some View {
         HStack(alignment: .center) {
-            Image(pluginContent.plugin.icon)
-                .resizable()
-                .frame(width: 24, height: 24, alignment: .leading)
+            switch pluginContent.plugin {
+            case .fileService:
+                Asset.Plugins.FileService.folder.asImage()
+                    .resizable()
+                    .frame(width: 24, height: 24)
+
+            default:
+                Image(pluginContent.plugin.icon)
+                    .resizable()
+                    .frame(width: 24, height: 24)
+            }
+
             Text(pluginContent.title)
+                .font(.bh5)
+                .truncationMode(.middle)
+
+            Spacer()
+
             Button(action: {
                 viewModel.remove(pluginContent: pluginContent)
             }, label: {
                 Asset.Images.Scene.Compose.close.asImage()
                     .resizable()
-                    .frame(width: 24, height: 24, alignment: .leading)
+                    .frame(width: 24, height: 24)
             })
         }
         .foregroundColor(Asset.Colors.Twitter.strong.asColor())
@@ -171,7 +189,33 @@ struct MessageComposeView: View {
 }
 
 struct EncryptedMessageEditorView_Previews: PreviewProvider {
+    static var previewModel: MessageComposeViewModel = {
+        let viewModel = MessageComposeViewModel()
+        viewModel.append(
+            newPluginContent: .fileService(
+                .init(
+                    createdAt: Date(),
+                    id: "daqqxxx",
+                    key: nil,
+                    landingTxID: "qeee111",
+                    name: "file.png",
+                    payloadTxID: "1311313",
+                    provider: "arweave",
+                    size: 23222112,
+                    type: "file"
+                )
+            )
+        )
+
+//        viewModel.append(
+//            newPluginContent: .redPacket(
+//                RedPacketPayload.init(basic: nil, payload: nil)
+//            )
+//        )
+        return viewModel
+    }()
+
     static var previews: some View {
-        MessageComposeView(viewModel: MessageComposeViewModel())
+        MessageComposeView(viewModel: Self.previewModel)
     }
 }

@@ -15,7 +15,6 @@ extension LuckyDropHistoryViewModel {
         }
     }
 
-    @MaskGroupActor
     func fetchTokenRedPacketHistory() async throws -> [TokenPayload] {
         // first get explore url, if return nil
         // display empty state
@@ -27,9 +26,9 @@ extension LuckyDropHistoryViewModel {
         guard let baseURL = URL(string: urlString) else {
             return []
         }
-        let startBlock = await self.startBlock
-        let apiKey = await self.apiKey
-        let network = await self.usersettings.network
+        let startBlock = self.startBlock
+        let apiKey = self.apiKey
+        let network = self.usersettings.network
         let networkId = network.networkId
         let contract = self.contract
         
@@ -79,6 +78,7 @@ extension LuckyDropHistoryViewModel {
             for payload in payloads {
                 _ = taskGroup.addTaskUnlessCancelled {
                     // mark @MaskGroupActor for the closure to make it works
+                    // for `provider.eth.getTransactionReceipt(txid)` needs to be synchronous
                    let task = Task.detached { @MaskGroupActor () -> TokenPayload? in
                         var payload = payload
                         // here txid is a garantee value

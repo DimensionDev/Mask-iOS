@@ -620,7 +620,8 @@ final class LuckyDropViewModel: ObservableObject {
             return
         }
         
-        guard self.settings.defaultAccountAddress != nil else {
+        guard let fromAddress = self.settings.defaultAccountAddress,
+              let fromAccount = WalletCoreService.shared.getAccount(address: fromAddress) else {
             self.updateButton(state: .noAccount)
             return
         }
@@ -630,9 +631,12 @@ final class LuckyDropViewModel: ObservableObject {
             return
         }
         
-        guard let date = self.settings.passwordExpiredDate, !self.settings.isPasswordExpried(date) else {
-            self.updateButton(state: .unlock)
-            return
+        // Only check payment password for wallet which created by Maskbook.
+        if !fromAccount.fromWalletConnect {
+            guard let date = self.settings.passwordExpiredDate, !self.settings.isPasswordExpried(date) else {
+                self.updateButton(state: .unlock)
+                return
+            }
         }
              
         guard self.settings.hasRiskConfirmed else {

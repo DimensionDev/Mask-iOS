@@ -16,11 +16,15 @@ enum EncryptionVersion {
 
 enum PluginMeta: Codable {
     case redPacket(RedPacketPayload)
+    case fileService(FileServiceUploadResult)
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
         case let .redPacket(value):
+            try container.encode(value)
+
+        case let .fileService(value):
             try container.encode(value)
         }
     }
@@ -28,12 +32,14 @@ enum PluginMeta: Codable {
     var plugin: PluginType {
         switch self {
         case .redPacket: return .luckyDrop
+        case .fileService: return .fileService
         }
     }
 
     var key: String {
         switch self {
         case .redPacket: return PluginType.luckyDrop.postEncryptionKey
+        case .fileService: return PluginType.fileService.postEncryptionKey
         }
     }
 
@@ -54,6 +60,9 @@ enum PluginMeta: Codable {
             }
             let title = "A Lucky Drop with \(total) $\(symbol) from \(senderName)"
             return title
+
+        case let .fileService(value):
+            return "Attached File: \(value.name) (\(Double(value.size).fileSizeText))"
         }
     }
 }
@@ -62,6 +71,7 @@ extension PluginMeta: Identifiable {
     var id: String {
         switch self {
         case let .redPacket(value): return "\(value.basic?.txid ?? "")"
+        case let .fileService(value): return value.id
         }
     }
 }
@@ -83,6 +93,7 @@ extension Array where Element == PluginMeta {
         switch format {
         case .json:
             let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
             let data = self.reduce(into: [:], { $0[$1.key] = $1 })
 
             return (try? encoder.encode(data))

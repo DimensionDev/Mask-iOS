@@ -59,6 +59,7 @@ internal enum Asset {
       internal static let blue1 = ColorAsset(name: "Colors/Background/blue1")
       internal static let blur = ColorAsset(name: "Colors/Background/blur")
       internal static let blurred = ColorAsset(name: "Colors/Background/blurred")
+      internal static let closeGray = ColorAsset(name: "Colors/Background/closeGray")
       internal static let container = ColorAsset(name: "Colors/Background/container")
       internal static let dark = ColorAsset(name: "Colors/Background/dark")
       internal static let disable = ColorAsset(name: "Colors/Background/disable")
@@ -100,6 +101,7 @@ internal enum Asset {
       internal static let blue1 = ColorAsset(name: "Colors/Gradient/blue1")
       internal static let blue2 = ColorAsset(name: "Colors/Gradient/blue2")
       internal static let blur = ColorAsset(name: "Colors/Gradient/blur")
+      internal static let blur1 = ColorAsset(name: "Colors/Gradient/blur1")
       internal static let guide1 = ColorAsset(name: "Colors/Gradient/guide1")
       internal static let guide2 = ColorAsset(name: "Colors/Gradient/guide2")
       internal static let persona1 = ColorAsset(name: "Colors/Gradient/persona1")
@@ -108,6 +110,9 @@ internal enum Asset {
       internal static let persona4 = ColorAsset(name: "Colors/Gradient/persona4")
       internal static let persona5 = ColorAsset(name: "Colors/Gradient/persona5")
       internal static let persona6 = ColorAsset(name: "Colors/Gradient/persona6")
+      internal static let personaBorder1 = ColorAsset(name: "Colors/Gradient/personaBorder1")
+      internal static let personaBorder2 = ColorAsset(name: "Colors/Gradient/personaBorder2")
+      internal static let personaBorder3 = ColorAsset(name: "Colors/Gradient/personaBorder3")
     }
     internal enum RedPackage {
       internal static let background = ColorAsset(name: "Colors/RedPackage/background")
@@ -331,6 +336,7 @@ internal enum Asset {
         internal static let add = ImageAsset(name: "Images/Scene/Personas/add")
         internal static let addUser = ImageAsset(name: "Images/Scene/Personas/addUser")
         internal static let backup = ImageAsset(name: "Images/Scene/Personas/backup")
+        internal static let camera = ImageAsset(name: "Images/Scene/Personas/camera")
         internal static let changeOrAdd = ImageAsset(name: "Images/Scene/Personas/changeOrAdd")
         internal static let delete = ImageAsset(name: "Images/Scene/Personas/delete")
         internal static let done = ImageAsset(name: "Images/Scene/Personas/done")
@@ -481,12 +487,18 @@ internal enum Asset {
   }
   internal enum Plugins {
     internal enum FileService {
+      internal static let checkSquare = ImageAsset(name: "Plugins/FileService/check_square")
       internal static let folder = ImageAsset(name: "Plugins/FileService/folder")
+      internal static let imagePlaceholder = ImageAsset(name: "Plugins/FileService/image_placeholder")
+      internal static let infoCircle = ImageAsset(name: "Plugins/FileService/infoCircle")
       internal static let onboardFour = ImageAsset(name: "Plugins/FileService/onboardFour")
       internal static let onboardOne = ImageAsset(name: "Plugins/FileService/onboardOne")
       internal static let onboardThree = ImageAsset(name: "Plugins/FileService/onboardThree")
       internal static let onboardTwo = ImageAsset(name: "Plugins/FileService/onboardTwo")
       internal static let uploadBackground = ImageAsset(name: "Plugins/FileService/uploadBackground")
+      internal static let uploadFile = ImageAsset(name: "Plugins/FileService/upload_file")
+      internal static let uplodaCamera = ImageAsset(name: "Plugins/FileService/uplodaCamera")
+      internal static let uplodaPhotos = ImageAsset(name: "Plugins/FileService/uplodaPhotos")
     }
     internal enum LuckyDrop {
       internal enum Icon {
