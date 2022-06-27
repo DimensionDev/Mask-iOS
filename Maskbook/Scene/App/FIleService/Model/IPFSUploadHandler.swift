@@ -68,13 +68,13 @@ extension IPFSUploadHandler: FileServiceUploadHandler {
         type: String = "",
         delegate: URLSessionTaskDelegate? = nil
     ) async throws -> String {
-        return await withCheckedContinuation { continuation in
+        return try await withCheckedThrowingContinuation { continuation in
             do {
                 try client?.add(data) { nodes in
                     continuation.resume(returning: nodes.first?.hash?.value.base58EncodedString ?? "")
                 }
             } catch {
-                continuation.resume(returning: "")
+                continuation.resume(throwing: error)
             }
         }
     }
