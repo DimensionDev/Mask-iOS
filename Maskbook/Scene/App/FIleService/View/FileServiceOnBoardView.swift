@@ -14,9 +14,6 @@ struct FileServiceOnBoardView: View {
     @StateObject
     private var viewModel = TimerViewModel()
 
-    @AppStorage("com.mask.io.fileService.plugin")
-    private var fileServicePolicyAccepted = false
-
     init(action: @escaping (Action) -> Void = { _ in }) {
         self.action = action
     }
@@ -98,7 +95,7 @@ struct FileServiceOnBoardView: View {
     private var policyAgreeView: some View {
         HStack(alignment: .top) {
             Group {
-                if fileServicePolicyAccepted {
+                if viewModel.fileServicePolicyAccepted {
                     Color.white
                         .frame(width: 16, height: 16)
                         .cornerRadius(4)
@@ -114,7 +111,7 @@ struct FileServiceOnBoardView: View {
                 }
             }
             .onTapGesture {
-                fileServicePolicyAccepted.toggle()
+                viewModel.fileServicePolicyAccepted.toggle()
             }
 
             policyText
@@ -135,7 +132,7 @@ struct FileServiceOnBoardView: View {
                         .frame(height: 56)
                         .cornerRadius(8)
                         .opacity(
-                            !fileServicePolicyAccepted
+                            viewModel.fileServicePolicyAccepted
                             ? 1
                             : 0.5
                         )
@@ -146,7 +143,7 @@ struct FileServiceOnBoardView: View {
                         )
                 }
             )
-            .disabled(!fileServicePolicyAccepted)
+            .disabled(!viewModel.fileServicePolicyAccepted)
 
             Spacer()
         }
@@ -160,11 +157,23 @@ struct FileServiceOnBoardView: View {
         private(set) var totalItems: [Item] = []
         let maxIndex: Int
 
-        private let dupilcateGroups = 3
+        private let dupilcateGroups = 25
         private let groupItemCount = FileServiceOnBoardItem.allCases.count
 
         weak var scrollView: UIScrollView?
         private(set) var cancelableStorage: Set<AnyCancellable> = []
+        private var combineStorage: Set<AnyCancellable> = []
+
+        //  AppStorage is a little delay for check box action
+        // so we use fileServicePolicyAccepted instead
+        var fileServicePolicyAccepted: Bool {
+            get { setting.fileServicePolicyAccepted }
+            set { setting.fileServicePolicyAccepted = newValue }
+        }
+
+
+        @InjectedProvider(\.userDefaultSettings)
+        private var setting
 
         private(set) var scrollViewDidScroll = false
 
@@ -200,6 +209,13 @@ struct FileServiceOnBoardView: View {
             self.totalItems = (0 ..< maxIndex).map {
                 Item(index: $0, animated: true, content: FileServiceOnBoardItem(index: $0))
             }
+
+            setting.$fileServicePolicyAccepted
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] _ in
+                    self?.objectWillChange.send()
+                }
+                .store(in: &combineStorage)
         }
 
         func startTimer() {
@@ -213,6 +229,8 @@ struct FileServiceOnBoardView: View {
                     let targetValue = Item.init(index: targetIndex, animated: true, content: .init(index: targetIndex))
                     self.item = targetValue
 
+                    // as `onChange(of:)` modifier will merge the change of `self.item`
+                    // only trigger the last scroll, we delay the check for 0.25 s
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                         self.timerCheckIfNeedToUpdateTargetIndex(targetIndex)
                     }
