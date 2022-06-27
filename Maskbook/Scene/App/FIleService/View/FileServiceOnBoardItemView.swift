@@ -24,6 +24,7 @@ struct FileServiceOnBoardItemView: View, OnBoardItemView {
                     .frame(maxWidth: .infinity)
                     .horizontallyCenterred()
             }
+            .offset(y: -48)
 
             Spacer()
         }
@@ -52,6 +53,17 @@ enum FileServiceOnBoardItem {
         case .two: return L10n.Plugins.FileService.Onboard.stepTwo
         case .three: return L10n.Plugins.FileService.Onboard.stepThree
         case .four: return L10n.Plugins.FileService.Onboard.stepFour
+        }
+    }
+
+    init(index: Int) {
+        let value = index % Self.allCases.count
+
+        switch value {
+        case 0: self = .one
+        case 1: self = .two
+        case 2: self = .three
+        default: self = .four
         }
     }
 }
