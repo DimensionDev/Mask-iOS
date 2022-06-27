@@ -14,7 +14,7 @@ struct FileServiceOnBoardView: View {
     @StateObject
     private var viewModel = TimerViewModel()
 
-    @AppStorage("com.mask.io.fileService")
+    @AppStorage("com.mask.io.fileService.plugin")
     private var fileServicePolicyAccepted = false
 
     init(action: @escaping (Action) -> Void = { _ in }) {
@@ -117,25 +117,19 @@ struct FileServiceOnBoardView: View {
                 fileServicePolicyAccepted.toggle()
             }
 
+            policyText
+                .onTapGesture { action(.showPolicy) }
+
             Spacer()
         }
     }
 
     private var policyView: some View {
         VStack(spacing: 20) {
-            if fileServicePolicyAccepted {
-                Spacer()
-            } else {
-                policyAgreeView
-            }
+            policyAgreeView
 
             Button(
-                action: {
-                    if !fileServicePolicyAccepted {
-                        fileServicePolicyAccepted = true
-                    }
-                    action(.upload)
-                },
+                action: { action(.upload) },
                 label: {
                     Color.white
                         .frame(height: 56)

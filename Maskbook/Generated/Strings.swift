@@ -702,7 +702,7 @@ enum L10n {
       static var otherOption: String {
         return L10n.tr("Localizable", "Plugins.FileService.OtherOption")
       }
-      /// Post
+      /// Share
       static var post: String {
         return L10n.tr("Localizable", "Plugins.FileService.Post")
       }
@@ -771,6 +771,14 @@ enum L10n {
       }
 
       enum LocalFileSource {
+        /// Save into the album
+        static var saveToAlbum: String {
+          return L10n.tr("Localizable", "Plugins.FileService.LocalFileSource.SaveToAlbum")
+        }
+        /// Save to folder
+        static var saveToFolder: String {
+          return L10n.tr("Localizable", "Plugins.FileService.LocalFileSource.SaveToFolder")
+        }
         /// Take Photos
         static var takePhotos: String {
           return L10n.tr("Localizable", "Plugins.FileService.LocalFileSource.TakePhotos")

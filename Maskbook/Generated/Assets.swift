@@ -495,6 +495,7 @@ internal enum Asset {
       internal static let onboardOne = ImageAsset(name: "Plugins/FileService/onboardOne")
       internal static let onboardThree = ImageAsset(name: "Plugins/FileService/onboardThree")
       internal static let onboardTwo = ImageAsset(name: "Plugins/FileService/onboardTwo")
+      internal static let sendFile = ImageAsset(name: "Plugins/FileService/send_file")
       internal static let uploadBackground = ImageAsset(name: "Plugins/FileService/uploadBackground")
       internal static let uploadFile = ImageAsset(name: "Plugins/FileService/upload_file")
       internal static let uplodaCamera = ImageAsset(name: "Plugins/FileService/uplodaCamera")

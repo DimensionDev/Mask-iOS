@@ -46,29 +46,32 @@ final class FileServiceDetailViewController: BaseViewController {
     }
 
     private func download() {
-        typealias Service = FileServiceUploadOption.Service
-        let urlPrefixs: [Service: String] = [
-            .arweave: "https://arweave.net",
-            .ipfs: "https://infura-ipfs.io/ipfs"
-        ]
-        guard let landingId = fileServiceItem.tx?.landingTxID,
-              let service = Service.init(rawValue: fileServiceItem.provider),
-              let baseurl = urlPrefixs[service] else {
-            return
-        }
+//        typealias Service = FileServiceUploadOption.Service
+//        let urlPrefixs: [Service: String] = [
+//            .arweave: "https://arweave.net",
+//            .ipfs: "https://infura-ipfs.io/ipfs"
+//        ]
+//        guard let landingId = fileServiceItem.tx?.landingTxID,
+//              let service = Service.init(rawValue: fileServiceItem.provider),
+//              let baseurl = urlPrefixs[service] else {
+//            return
+//        }
+//
+//        let key = fileServiceItem.tx?.key ?? ""
+//        let url = key.isEmpty
+//        ? "\(baseurl)/\(landingId)"
+//        : "\(baseurl)/\(landingId)#\(key)"
+//
+//        guard let url = URL.init(string: url) else {
+//            return
+//        }
+//        coordinator.present(
+//            scene: .safariView(url: url),
+//            transition: .modal()
+//        )
 
-        let key = fileServiceItem.tx?.key ?? ""
-        let url = key.isEmpty
-        ? "\(baseurl)/\(landingId)"
-        : "\(baseurl)/\(landingId)#\(key)"
-
-        guard let url = URL.init(string: url) else {
-            return
-        }
-        coordinator.present(
-            scene: .safariView(url: url),
-            transition: .modal()
-        )
+        let controller = FileServiceSaveFileController(file: .init(fileType: fileServiceItem.fileType, content: fileServiceItem.content))
+        self.present(controller, animated: true)
     }
 }
 

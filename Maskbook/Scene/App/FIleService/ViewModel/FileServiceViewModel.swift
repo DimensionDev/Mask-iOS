@@ -174,6 +174,7 @@ final class FileServiceViewModel: ObservableObject {
                     self.draftItem = .init(
                         fileName: item.fileName,
                         provider: option.service.rawValue.lowercased(),
+                        fileType: item.fileType,
                         state: state,
                         content: item.content,
                         uploadedBytes: value.progress * item.totalBytes,
@@ -185,6 +186,7 @@ final class FileServiceViewModel: ObservableObject {
                 self.draftItem = .init(
                     fileName: item.fileName,
                     provider: option.service.rawValue.lowercased(),
+                    fileType: item.fileType,
                     state: .failed,
                     content: item.content,
                     uploadedBytes: 0

@@ -115,6 +115,7 @@
 		1FB862C62787F33900CF345F /* PluginSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB862C52787F33900CF345F /* PluginSettingViewController.swift */; };
 		1FB862C82787F3C900CF345F /* LabsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB862C72787F3C900CF345F /* LabsListView.swift */; };
 		1FB862CA278BDFCE00CF345F /* LabsConfigViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB862C9278BDFCE00CF345F /* LabsConfigViewModel.swift */; };
+		1FC1A0EE28698DED00984A2E /* FileServiceSaveFileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC1A0ED28698DED00984A2E /* FileServiceSaveFileController.swift */; };
 		1FC2B7942858A34C00570348 /* FileServiceUploadResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC2B7932858A34C00570348 /* FileServiceUploadResult.swift */; };
 		1FC2B7962858C5BF00570348 /* FileServiceUploadingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC2B7952858C5BF00570348 /* FileServiceUploadingItem.swift */; };
 		1FC57EDA273129FC0060E89C /* BackupPreviewFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC57ED9273129FC0060E89C /* BackupPreviewFormatter.swift */; };
@@ -948,6 +949,7 @@
 		1FB862C52787F33900CF345F /* PluginSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginSettingViewController.swift; sourceTree = "<group>"; };
 		1FB862C72787F3C900CF345F /* LabsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabsListView.swift; sourceTree = "<group>"; };
 		1FB862C9278BDFCE00CF345F /* LabsConfigViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabsConfigViewModel.swift; sourceTree = "<group>"; };
+		1FC1A0ED28698DED00984A2E /* FileServiceSaveFileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceSaveFileController.swift; sourceTree = "<group>"; };
 		1FC2B7932858A34C00570348 /* FileServiceUploadResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceUploadResult.swift; sourceTree = "<group>"; };
 		1FC2B7952858C5BF00570348 /* FileServiceUploadingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceUploadingItem.swift; sourceTree = "<group>"; };
 		1FC57ED9273129FC0060E89C /* BackupPreviewFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupPreviewFormatter.swift; sourceTree = "<group>"; };
@@ -1980,6 +1982,7 @@
 				5DBDA4D1285083B200FBC921 /* FileServiceSelectFileSourceViewController.swift */,
 				1F1762752859BB18008BE93E /* FileServiceDetailViewController.swift */,
 				1F176277285C36B4008BE93E /* FileServiceFAQViewController.swift */,
+				1FC1A0ED28698DED00984A2E /* FileServiceSaveFileController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4553,6 +4556,7 @@
 				5D4749742851D28E00D3E7E6 /* FileServiceSelectFileHandler.swift in Sources */,
 				1F1CCF5E2736162F004E8835 /* WalletRestorePipeline.swift in Sources */,
 				1F5B5EDF28508FD400F6AD98 /* FileServiceUploadingItemView.swift in Sources */,
+				1FC1A0EE28698DED00984A2E /* FileServiceSaveFileController.swift in Sources */,
 				2AF8851E271EE9310004565A /* TransactionHeaderView.swift in Sources */,
 				1F8AD0CB26CA3AA000C9694F /* MaskLoadingIndicator.swift in Sources */,
 				2AD31E46282D367700CB3D49 /* NSMutableAttributedString+extension.swift in Sources */,
