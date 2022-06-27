@@ -147,7 +147,7 @@
         "description": "无法连接到 walletConnect，因为没有本地钱包。"
       },
       "token_balance": {
-        "description": "",
+        "description": "您的账户中有0 %s 用于支付交易费用。购买一些 %s 或从另一个账户转入。",
         "btn_confirm": "购买 %s"
       },
       "file_service_file_too_large": {
@@ -886,7 +886,7 @@
       "description3": "为了数据安全，请将您的数据移动到一个更安全的文件夹。"
     },
     "message_compose": {
-      "title": "",
+      "title": "发帖",
       "encrypt": "加密",
       "placeholder": "您想要加密什么信息？",
       "Everyone": "所有人可见",
@@ -926,7 +926,7 @@
       "mesoncdn": "使用Meson CDN",
       "onboard": {
         "step_one": "Arweave, IPFS 和 Swarm 去中心化文件存储。",
-        "step_two": "",
+        "step_two": "点击 [Settings] 选择协议并调整加密设置。",
         "step_three": "上传您的文件进行永久存储，与好友分享。",
         "step_four": "由 Mask Network 带给您的免费 Web3 文件服务。"
       },
@@ -934,45 +934,45 @@
         "take_photos": "拍照",
         "upload_photos": "上传照片",
         "upload_file": "上传文件",
-        "upload_tips": ""
+        "upload_tips": "大小限制为10.5MB。\n上传无法取消。"
       },
       "failure_tip": "由于网络条件或其他问题，上传失败。",
-      "post": "",
+      "post": "分享",
       "preparing": "准备中...",
       "uploading": "正在上传...",
       "uploaded": "已上传",
       "faq": {
         "what_is_file_service": "什么是 Web3 文件服务？",
-        "file_service": "",
+        "file_service": "Web3文件服务是一个去中心化的存储服务，用户可以以不可变和永久的方式将文件存储在区块链上。 Mask Network提供此服务的方式是使用信誉好的文件存储协议，包括IPFS、Arweeve、Swart 和 Meson 网络，支持类似的文件类型为 .pdf, .doc, .mp3, .mp4，最大文件格式为10.4MB。\n\n上传文件后，将生成一个嵌入了元数据的链接，包括在链上的文件存储位置。 请注意，任何有此链接的人都可以下载。 如果用户希望文件公开或在社交平台上加密，用户可以选择更改其文件的隐私设置。 这确保了用户对自己的文件和他们的存储方式拥有自主权，为去中心化的文件管理功能服务。",
         "what_is_meson_cdn": "Meson CDN是什么？",
-        "meson_cdn": "",
+        "meson_cdn": "作为一个去中心化的内容交付网络(CDN)，Meson CDN优化了文件和内容交付过程。 这项服务得到超过36 000个节点的奖励支持，以提供Arweeve Network上的内容。\n\n集成到Arweeve 网络作为存储层，Meson 网络作为一个集中于数据分布的缓存层。 与Cloudflare和Amazon Web Services等集中服务不同的是，Meson Network为那些想要发送或接收文件的个人提供了更便宜的替代办法。",
         "what_is_arweave": "什么是 Arweave 网络？",
-        "arweave": "",
+        "arweave": "Arweeve Network 是一个轻量和可持续的文件存储协议。在Arweeve 上支付存储费一次允许终身访问Arweeve 的数据库和加密方案。",
         "what_is_ipfs": "什么是 IPFS？",
-        "ipfs": "",
+        "ipfs": "IPFS 是一种去中心化的转售协议，其基础是智能的存储合同和现收现付模式。 IPFS 为每个文件分配一个唯一的哈希值， 这样，即使2个文件的内容只存在1位的差异，散列值也会不同。",
         "learn_more": "了解更多"
       }
     },
     "policy": {
-      "reviewed": "",
+      "reviewed": "我已审核",
       "privacy": "隐私政策",
-      "and": "",
-      "upload_terms": "",
-      "start_upload": ""
+      "and": "和",
+      "upload_terms": "服务条款.",
+      "start_upload": "立即上传"
     },
     "luckyDrop": {
       "title": "红包",
       "twitter_account": "realMaskNetwork",
       "facebook_account": "masknetwork",
-      "twitter-or-facebook-template": "",
-      "social-media-template": "",
-      "twitter-or-facebook-redpacket-template": "",
-      "social-media-redpacket-template": "",
-      "plugin_red_packet_best_wishes": "",
+      "twitter-or-facebook-template": "此推文使用#mask_io (@%s) 加密。📪🔑\n\n请安装 %s 进行解密。",
+      "social-media-template": "此推文使用#mask_io (@realMaskNetwork) 加密。📪🔑\n\n请安装 %s 进行解密。",
+      "twitter-or-facebook-redpacket-template": "使用 #mask_io 来认领这个红包！@%s %s",
+      "social-media-redpacket-template": "使用 #mask_io 来认领这个红包！@%s",
+      "plugin_red_packet_best_wishes": "祝好运！",
       "buttons": {
         "risk-warning": "确认风险提示",
-        "unlock-token": "",
-        "unlocking-token": "",
+        "unlock-token": "批准 %@",
+        "unlocking-token": "授权中",
         "create-persona": "创建角色",
         "recover-persona": "恢复角色",
         "average": "平均",
@@ -980,57 +980,57 @@
         "insufficient-gas": "Gas 数量不足",
         "insufficient-balance": "余额不足",
         "exceed-max-quantity": "输入数量(最大：255)",
-        "best-wishes": "",
+        "best-wishes": "祝好运！",
         "no-token": "选择 Token",
         "no-account": "没有钱包",
-        "no-share": "",
-        "no-amount-per-share": "",
-        "no-total-amount": "",
-        "no-message": "",
-        "minimum-amount": "",
-        "send": ""
+        "no-share": "输入份数",
+        "no-amount-per-share": "输入每份金额",
+        "no-total-amount": "请输入红包总金额",
+        "no-message": "输入附加消息",
+        "minimum-amount": "每个份额的最小金额为 %@ %@",
+        "send": "发送 %@"
       },
       "state": {
-        "pending": "",
-        "failed": "",
-        "success": ""
+        "pending": "确认中...",
+        "failed": "交易失败",
+        "success": "交易成功"
       },
       "confirm": {
         "wallet_account": "钱包账户",
         "attached_message": "附加信息",
-        "split_mode": "",
-        "share": "",
-        "amount_per_share": "",
-        "total_amount": "",
+        "split_mode": "分享模式",
+        "share": "分享",
+        "amount_per_share": "单个份额",
+        "total_amount": "总金额",
         "transaction_fee": "交易手续费",
-        "tips": "",
+        "tips": "你可以在红包发送的24小时后提取红包余额。",
         "title": "确认您的红包"
       },
       "alert": {
         "message_no_account": "您不能选择 Token，因为没有钱包。"
       },
       "max": "最大",
-      "total-amount": "",
-      "amount-per-share": "",
-      "enter-quantity": "",
-      "enter-message": "",
-      "transaction-fee": "",
-      "end-time": "",
-      "claimed": "",
-      "refund": "",
+      "total-amount": "总数",
+      "amount-per-share": "单个份额",
+      "enter-quantity": "请输入红包个数",
+      "enter-message": "输入附加消息",
+      "transaction-fee": "交易手续费",
+      "end-time": "结束时间",
+      "claimed": "已认领",
+      "refund": "退款",
       "token": "Token",
-      "nft": "",
+      "nft": "NFT",
       "select-social-title": "连接社交账户",
-      "select-social-description": "",
+      "select-social-description": "选择分享红包的社交账号。",
       "share-title": "分享红包",
       "share-connect-persona": "在分享您的红包之前，将您的 Persona 连接到社交媒体。",
-      "share-create-persona": "",
+      "share-create-persona": "若要发送红包，请创建一个 Persona 来连接到您的社交账户。",
       "quantity": "数量",
       "max-quantity-error": "最大数量为255。",
-      "account": "",
-      "refund_tip": "",
+      "account": "账号",
+      "refund_tip": "在 %@ 之后退还未认领的红包",
       "history_title": "历史记录",
-      "created": ""
+      "created": "创建"
     }
   }
 }
