@@ -934,7 +934,7 @@
         "take_photos": "拍照",
         "upload_photos": "上传照片",
         "upload_file": "上传文件",
-        "upload_tips": "大小限制为 10.5MB。\n上传无法取消。"
+        "upload_tips": ""
       },
       "failure_tip": "由于网络条件或其他问题，上传失败。",
       "post": "",
