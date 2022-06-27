@@ -221,8 +221,6 @@ class Coordinator {
         case fileServiceLocalFileSource(selectFileHandler: FileServiceSelectFileHandler)
         case fileServiceDetail(FileServiceUploadingItem)
         case fileServiceFAQ
-        case messageCompose(PluginMeta? = nil)
-        case composeSelectContact(viewModel: SelectContactViewModel)
         case debug
     }
     
