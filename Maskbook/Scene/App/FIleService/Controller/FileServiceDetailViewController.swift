@@ -1,6 +1,5 @@
 import SwiftUI
 import UIKit
-import WebExtension_Shim
 
 final class FileServiceDetailViewController: BaseViewController {
     let fileServiceItem: FileServiceUploadingItem
