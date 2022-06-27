@@ -15,7 +15,7 @@ import UStack
 class ContactsViewController: BaseViewController {
     static var searchBarHeight: CGFloat = 52
 
-    static var tableHeaderHeight: CGFloat = 52 + 12
+    static var tableHeaderHeight: CGFloat = 52 + 22
 
     private var disposeBag = Set<AnyCancellable>()
 
@@ -33,7 +33,7 @@ class ContactsViewController: BaseViewController {
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.placeholder = L10n.Scene.Personas.Search.placeholder
+        searchBar.placeholder = "  " + L10n.Scene.Personas.Search.placeholder
         searchBar.delegate = self
         searchBar.searchBarStyle = .minimal
         searchBar.update(height: Self.searchBarHeight, color: Asset.Colors.Background.dark.color, radius: 10)
@@ -42,6 +42,11 @@ class ContactsViewController: BaseViewController {
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes,
                                                                                                           for: .normal)
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = L10n.Common.Controls.cancel
+        
+        UILabel.appearance(whenContainedInInstancesOf: [UISearchBar.self]).font = FontStyles.MH7
+        UILabel.appearance(whenContainedInInstancesOf: [UISearchBar.self]).textColor = Asset.Colors.Text.light.color
+        
+        searchBar.setLeftImage(Asset.Images.Scene.Personas.searchBar.image, with: 10)
         return searchBar
     }()
 
@@ -50,10 +55,9 @@ class ContactsViewController: BaseViewController {
         view.backgroundColor = Asset.Colors.Background.normal.color
         view.addSubview(searchBar)
         NSLayoutConstraint.activate([
-            searchBar.topAnchor.constraint(equalTo: view.topAnchor),
+            searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
             searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
-            searchBar.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -12),
             searchBar.heightAnchor.constraint(equalToConstant: Self.searchBarHeight)
         ])
         return view

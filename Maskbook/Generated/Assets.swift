@@ -357,6 +357,7 @@ internal enum Asset {
         internal static let rename = ImageAsset(name: "Images/Scene/Personas/rename")
         internal static let rotate = ImageAsset(name: "Images/Scene/Personas/rotate")
         internal static let search = ImageAsset(name: "Images/Scene/Personas/search")
+        internal static let searchBar = ImageAsset(name: "Images/Scene/Personas/searchBar")
         internal static let searchTwitter = ImageAsset(name: "Images/Scene/Personas/searchTwitter")
         internal static let setAvatar = ImageAsset(name: "Images/Scene/Personas/setAvatar")
         internal static let twitter = ImageAsset(name: "Images/Scene/Personas/twitter")
