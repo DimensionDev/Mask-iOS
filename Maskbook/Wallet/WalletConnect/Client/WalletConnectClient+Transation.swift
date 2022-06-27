@@ -77,15 +77,17 @@ extension WalletConnectClient {
                                        maxPriorityFeePerGas: nil,
                                        maxFeePerGas: nil)
                 guard let client = self?.client else {
-                    completion(.failure(WalletSendError.walletConnectError))
+                    completion(.failure(WalletSendError.walletConnectError()))
                     return
                 }
                 WalletConnectClient.openInstalledWallet(with: fromAddress)
                 try client.eth_sendTransaction(url: wcUrl, transaction: wcTransaction) { response in
                     if let hashString = try? response.result(as: String.self) {
                         completion(.success((hashString, nonceTemp)))
+                    } else if let error = response.error {
+                        completion(.failure(WalletSendError.walletConnectError(error)))
                     } else {
-                        completion(.failure(WalletSendError.walletConnectError))
+                        completion(.failure(WalletSendError.walletConnectError()))
                     }
                 }
             } catch {
@@ -105,7 +107,7 @@ extension WalletConnectClient {
         network: BlockChainNetwork,
         _ completion: @escaping (Result<String?, Error>) -> Void) {
         guard let wcUrl = session?.url else {
-            completion(.failure(WalletSendError.walletConnectError))
+            completion(.failure(WalletSendError.walletConnectError()))
             return
         }
             
@@ -140,15 +142,17 @@ extension WalletConnectClient {
                                            maxPriorityFeePerGas: nil,
                                            maxFeePerGas: nil)
                     guard let client = self?.client else {
-                        completion(.failure(WalletSendError.walletConnectError))
+                        completion(.failure(WalletSendError.walletConnectError()))
                         return
                     }
                     WalletConnectClient.openInstalledWallet(with: fromAddress)
                     try client.eth_sendTransaction(url: wcUrl, transaction: wcTransaction) { response in
                         if let _ = try? response.result(as: String.self) {
                             completion(.success(nil))
+                        } else if let error = response.error {
+                            completion(.failure(WalletSendError.walletConnectError(error)))
                         } else {
-                            completion(.failure(WalletSendError.walletConnectError))
+                            completion(.failure(WalletSendError.walletConnectError()))
                         }
                     }
                 } catch {
@@ -202,13 +206,15 @@ extension WalletConnectClient {
                                                maxPriorityFeePerGas: nil,
                                                maxFeePerGas: nil)
                         guard let client = self?.client else {
-                            completion(.failure(WalletSendError.walletConnectError))
+                            completion(.failure(WalletSendError.walletConnectError()))
                             return
                         }
                         WalletConnectClient.openInstalledWallet(with: fromAddress)
                         try client.eth_sendTransaction(url: wcUrl, transaction: wcTransaction) { response in
                             if let _ = try? response.result(as: String.self) {
                                 completion(.success(nil))
+                            } else if let error = response.error {
+                                completion(.failure(WalletSendError.walletConnectError(error)))
                             } else {
                                 completion(.failure(WalletSendError.contractError))
                             }
@@ -235,7 +241,7 @@ extension WalletConnectClient {
         network: BlockChainNetwork,
         _ completion: @escaping (Result<EthereumTransaction?, Error>) -> Void) {
         guard let wcUrl = session?.url else {
-            completion(.failure(WalletSendError.walletConnectError))
+            completion(.failure(WalletSendError.walletConnectError()))
             return
         }
             
@@ -295,13 +301,15 @@ extension WalletConnectClient {
                                            maxPriorityFeePerGas: nil,
                                            maxFeePerGas: nil)
                     guard let client = self?.client else {
-                        completion(.failure(WalletSendError.walletConnectError))
+                        completion(.failure(WalletSendError.walletConnectError()))
                         return
                     }
                     WalletConnectClient.openInstalledWallet(with: fromAddress)
                     try client.eth_sendTransaction(url: wcUrl, transaction: wcTransaction) { response in
                         if let _ = try? response.result(as: String.self) {
                             completion(.success(nil))
+                        } else if let error = response.error {
+                            completion(.failure(WalletSendError.walletConnectError(error)))
                         } else {
                             completion(.failure(WalletSendError.contractError))
                         }
@@ -322,18 +330,20 @@ extension WalletConnectClient {
         fromAddress: String,
         _ completion: @escaping (Result<String, Error>) -> Void) {
             guard let wcUrl = session?.url else {
-                completion(.failure(WalletSendError.walletConnectError))
+                completion(.failure(WalletSendError.walletConnectError()))
                 return
             }
             do {
                 guard let client = self.client else {
-                    completion(.failure(WalletSendError.walletConnectError))
+                    completion(.failure(WalletSendError.walletConnectError()))
                     return
                 }
                 WalletConnectClient.openInstalledWallet(with: fromAddress)
                 try client.personal_sign(url: wcUrl, message: message, account: fromAddress, completion: { response in
                     if let signature = try? response.result(as: String.self) {
                         completion(.success(signature))
+                    } else if let error = response.error {
+                        completion(.failure(WalletSendError.walletConnectError(error)))
                     } else {
                         completion(.failure(WalletSendError.contractError))
                     }
