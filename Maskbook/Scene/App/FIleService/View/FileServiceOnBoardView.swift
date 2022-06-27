@@ -154,7 +154,7 @@ struct FileServiceOnBoardView: View {
         .padding(.horizontal, 20)
     }
 
-    final class TimerViewModel: NSObject, ObservableObject, UIScrollViewDelegate {
+    private final class TimerViewModel: NSObject, ObservableObject, UIScrollViewDelegate {
         @Published var item = Item.init(index: 0, content: .init(index: 0))
         @Published var checkBoxSelected = false
 
@@ -220,7 +220,7 @@ struct FileServiceOnBoardView: View {
             return .init(index: index, content: content)
         }
 
-        func stopTimer() {
+        private func stopTimer() {
             cancelableStorage = []
         }
 
