@@ -1,895 +1,1036 @@
 {
-    "tab": {
-        "personas": "角色",
-        "wallet": "钱包",
+  "tab": {
+    "personas": "角色",
+    "wallet": "钱包",
+    "labs": "实验室",
+    "setting": "设置"
+  },
+  "common": {
+    "alert": {
+      "biometry_id_activate": {
+        "title": "启用成功",
+        "description": "%s 已成功启用。"
+      },
+      "face_id_activate_fail": {
+        "title": "启用失败",
+        "description": "启用面容ID失败。"
+      },
+      "keychain_auth_prompt": {
+        "title": "验证以使用您的密钥"
+      },
+      "recovery_key": {
+        "title": "请小心保存您的恢复密钥",
+        "description": "您的助记词由随机选择的单词组成，请按单词出现的顺序仔细写下每个单词。"
+      },
+      "recovery_key_warning": {
+        "title": "提示",
+        "description": "仅仅依靠截图保存助记词是不安全的。"
+      },
+      "recovery_key_tips": {
+        "title": "请妥善存储您的恢复密钥",
+        "description": "您的助记词由随机选择的单词组成，请按单词出现的顺序仔细写下每个单词。"
+      },
+      "wallet_create_success": {
+        "title": "完美！",
+        "description": "为了保护您的资产免受黑客和盗窃者的侵害，请将此恢复短语保存在一个安全可靠的地方。"
+      },
+      "wallet_derive_success": {
+        "title": "完美！",
+        "description": "新钱包创建成功"
+      },
+      "wallet_import": {
+        "alert_title_success": "导入完成！",
+        "alert_title_fail": "错误!"
+      },
+      "signout": {
+        "title": "您确定吗？",
+        "description": "Mask Network 不会保存您的任何数据。 请记住您的账户和密码，并在退出之前及时备份您的数据。"
+      },
+      "set_password": {
+        "title": "支付密码设置成功！",
+        "description": "您的支付密码已设置成功。"
+      },
+      "change_password": {
+        "title": "密码修改成功！",
+        "description": "您的支付密码已修改成功。"
+      },
+      "change_password_failed": {
+        "title": "密码修改失败！"
+      },
+      "setup_backup_password": {
+        "title": "备份密码设置成功！",
+        "description": "您的备份密码已设置成功。"
+      },
+      "setup_backup_password_failed": {
+        "title": "备份密码设置失败！"
+      },
+      "change_backup_password": {
+        "title": "备份密码修改成功！",
+        "description": "您的备份密码已修改成功。"
+      },
+      "change_backup_password_failed": {
+        "title": "备份密码修改失败！"
+      },
+      "identify_code_screenshot_warning": {
+        "title": "提示",
+        "description": "仅仅依靠截图保存助记词是不安全的。"
+      },
+      "persona_create": {
+        "title": "成功 ",
+        "description": "您已成功创建您的角色%s。 "
+      },
+      "persona_logout": {
+        "title": "确认登出？",
+        "description": "登出身份后，与您的身份关联的社交账户将不能再解密过去的加密消息。"
+      },
+      "persona_name_duplicated": {
+        "title": "此用户名已被使用"
+      },
+      "local_backup": {
+        "backup_completed": "备份完成",
+        "backup_failed": "备份失败！"
+      },
+      "setting": {
+        "warning_backup_data_titile": "请在备份之前设置密码",
+        "warning_backup_data_description": "请在备份之前设置您的备份密码。"
+      },
+      "disconnect_profile": {
+        "title": "断开社交账户 \n %s",
+        "description": "您确定要断开连接账户 ？ 断开连接后，此账户将无法解密解密 Mask Network 的信息。"
+      },
+      "bind_remote_info": {
+        "title": "出现了一些问题",
+        "detail": "无法验证，请重试"
+      },
+      "export_private_key": {
+        "title": "设置备份密码 ",
+        "description": "请在导出私钥之前设置您的 %s。 "
+      },
+      "download_identity_code": {
+        "title": "设置备份密码 ",
+        "description": "请在下载角色二维码之前设置您的 %s。 "
+      },
+      "backup_tips_no_backup_password": {
+        "title": " 设置备份密码",
+        "description": "请在备份前设置您的 %s。"
+      },
+      "scan_failed": {
+        "title": "扫描失败",
+        "description": "无法识别二维码。"
+      },
+      "scan_persona_success": {
+        "title": "成功 ",
+        "description": "您已成功导入您的身份。 "
+      },
+      "scan_persona_exist": {
+        "title": "该身份已存在。",
+        "description": "该二维码对应的身份已存在。"
+      },
+      "wrong_folder": {
+        "title": "请选择另一个文件夹",
+        "description": "当你删除 Mask App 时，Mask Network 的沙盒目录也会被删除。为了您的数据安全，请保存到更安全的文件夹(非沙盒目录)"
+      },
+      "backup_popup_binding_first": {
+        "title": "绑定您的电子邮件或手机",
+        "description": "请在备份到云端之前绑定您的电子邮件或电话号码。"
+      },
+      "camera_access": {
+        "title": "Mask Network 想要获取\n您的相机权限",
+        "description": "请到系统设置里允许相机权限。"
+      },
+      "only_scan_persona": {
+        "title": "请扫描角色二维码",
+        "description": "二维码不是角色二维码。\n请扫描角色二维码。"
+      },
+      "no_local_wallet_for_walletconnect": {
+        "title": "无法连接",
+        "description": "无法连接到 walletConnect，因为没有本地钱包。"
+      },
+      "token_balance": {
+        "description": "您的账户中有0 %s 用于支付交易费用。购买一些 %s 或从另一个账户转入。",
+        "btn_confirm": "购买 %s"
+      },
+      "file_service_file_too_large": {
+        "title": "文件尺寸过大",
+        "description": "文件的大小超出10.5MB的限制 "
+      }
+    },
+    "controls": {
+      "create_wallet": "创建钱包",
+      "import_wallet": "导入钱包",
+      "accept": "同意",
+      "enable": "开启",
+      "no_thanks": "不用了",
+      "done": "完成",
+      "ok": "好",
+      "i_understand": "我已理解",
+      "verify": "验证",
+      "confirm": "确定",
+      "sending": "发送中...",
+      "sent": "发送",
+      "clear": "清空",
+      "next": "下一步",
+      "signout": "退出登录",
+      "cancel": "取消",
+      "change": "修改",
+      "invite": "邀请",
+      "try_again": "重试",
+      "retry": "重试",
+      "webview_go_back": "后退",
+      "merge_and_back_up": "合并后备份",
+      "merge_to_local_data": "合并至本地数据",
+      "back_up_to_cloud": "备份至云端",
+      "back_up_locally": "备份到本地",
+      "back_up": "备份",
+      "resend": "重新发送",
+      "edit": "编辑",
+      "download": "下载",
+      "skip": "跳过，稍后下载",
+      "download_next": "我已下载，下一步",
+      "select_from_photo": "图库中选择",
+      "take_photo": "拍照",
+      "save": "保存",
+      "move_data_now": "立即移动数据",
+      "remind_me_later": "稍后提醒我",
+      "go_settings": "好",
+      "dont_allow": "不允许",
+      "speed_up": "加速",
+      "compose": "发送加密帖子",
+      "post_to_twitter": "发布到 Twitter"
+    },
+    "toast": {
+      "saved": "已保存！",
+      "copy": "已复制！",
+      "failed": "失败"
+    },
+    "loading": "加载中...",
+    "empty": "没有记录",
+    "search_place_holder": "搜索"
+  },
+  "scene": {
+    "guide": {
+      "skip": "跳过",
+      "lets_start": "我们开始吧！",
+      "description1": "崭新，开放的Web 3.0 之门。",
+      "description2": "在社交网络上发送加密信息。",
+      "description3": "多链钱包，支持 WalletConnect",
+      "description4": "及时进行云端/本地备份"
+    },
+    "welcome_identity_empty": {
+      "create_a_persona": "创建角色",
+      "recover_your_persona": "恢复角色",
+      "description": "崭新，开放的Web 3.0 之门。"
+    },
+    "terms_of_service": {
+      "title": "法律声明",
+      "description": "请查看 Mask Network 的隐私政策与服务条款。",
+      "service_agreement": "服务协议"
+    },
+    "create_wallet": {
+      "wallet_name": "钱包名称",
+      "wallet_name_placeholder": "为您的钱包命名",
+      "enter_password": "请输入密码",
+      "password_error": "密码不正确",
+      "select_network": "选择网络",
+      "multichain_wallet_title": "多链钱包",
+      "multichain_wallet_description": "我们的 EVM 兼容钱包支持以下区块链网络："
+    },
+    "biometry_recognition": {
+      "face_id": {
+        "title": "使用 面容 ID 解锁",
+        "description": "通过设置面容 ID 快速解锁 Mask Network。"
+      },
+      "touch_id": {
+        "title": "使用 Touch ID 解锁",
+        "description": "通过设置 Touch ID 快速解锁 Mask Network。"
+      }
+    },
+    "biometry_id": {
+      "face_id": "面容 ID",
+      "touch_id": "Touch ID",
+      "face_id_reason": "Mask Network 需要使用面容 ID 来保护您的钱包",
+      "touch_id_reason": "Mask Network 需要 Touch ID 来保护您的钱包",
+      "passcode_notSet": "由于未在该设备上设置密码，认证无法启动。",
+      "biometry_not_enrolled": "由于未在该设备上找到%s注册认证，认证无法启动。",
+      "biometry_lockout": "认证失败。由于已经失败 %s 次，%s已经锁定。需要使用密码解锁%s。",
+      "biometry_not_available": "Mask Network 需要您的%s认证。请前往该设备的设置 -> Mask Network 打开",
+      "biometry_has_changed": "您的%s已被更改，%s将被关闭"
+    },
+    "wallet_detail": {
+      "wallet_items_rename": "重命名钱包",
+      "wallet_items_backup": "备份",
+      "wallet_items_delete": "删除",
+      "wallet_title_change": "修改",
+      "wallet_items_history": "交易记录"
+    },
+    "wallet_list": {
+      "title": "切换钱包",
+      "wallets_items_create": "创建新钱包",
+      "wallets_items_import": "导入钱包\n",
+      "wallets_items_add": "添加新的钱包",
+      "wallets_list_import": "已导入"
+    },
+    "mnemonic_word": {
+      "title": "助记词",
+      "description": "请写下每一个单词。"
+    },
+    "mnemonic_verify": {
+      "title": "验证您的助记词",
+      "description": "请按照正确的顺序依次点击每个单词。",
+      "words_title": "请按照正确的顺序依次点击每个单词。",
+      "mnemonic_error": "助记词错误",
+      "mnemonic_prompt": "点击已选择单词以替换另一个单词。"
+    },
+    "select_network": {},
+    "wallets_list_add": {
+      "wallets_items_add": "创建新钱包",
+      "wallets_list_import": "导入钱包"
+    },
+    "wallet_rename": {
+      "name_title": "钱包名称",
+      "placeholder": "为您的钱包命名",
+      "rename_button": "重命名"
+    },
+    "wallet_delete": {
+      "title": "删除钱包",
+      "content": "您确定要删除这个钱包吗？如果没有助记词或私钥，您的钱包将无法恢复。",
+      "password": "密码",
+      "placeholder": "密码",
+      "btn_cancel": "取消",
+      "btn_delete": "删除"
+    },
+    "wallet_backup": {
+      "title": "备份钱包",
+      "tab_keystore": "Keystore",
+      "tab_private_key": "私钥",
+      "keystore_tips": "请记住您当前设置的密码。您需要使用该密码来从导出的 Keystore 恢复您的钱包。",
+      "private_key_tips": "使用该私钥可以直接恢复您的钱包，请不要让任何人得到您的私钥。",
+      "btn_cancel": "取消",
+      "btn_copy": "复制"
+    },
+    "wallet_edit": {
+      "item_rename": "重命名钱包",
+      "item_delete": "删除钱包"
+    },
+    "wallet_import": {
+      "title": "导入钱包",
+      "item_mnemonic_words": "助记词",
+      "item_mnemonic_words_desc": "助记词由多个单词组成，由空格分隔。",
+      "item_private_key": "私钥",
+      "item_private_key_desc": "明文私钥",
+      "item_keystore": "Keystore",
+      "item_keystore_desc": "已加密的 Keystore JSON"
+    },
+    "wallet_derivation_path": {
+      "title": "派生路径",
+      "header_address": "地址",
+      "header_balance": "余额 (%@)",
+      "header_operation": "操作",
+      "operation_add": "添加",
+      "operation_added": "已添加"
+    },
+    "wallet_mnemonic": {
+      "title": "助记词",
+      "btn_confirm": "确定",
+      "placeholder": "请输入以空格分隔的助记词"
+    },
+    "wallet_private_key": {
+      "title": "私钥",
+      "btn_confirm": "确定",
+      "placeholder": "输入私钥"
+    },
+    "wallet_keystore": {
+      "title": "Keystore",
+      "btn_confirm": "确定",
+      "password_placeholder": "钱包密码",
+      "keystore_placeholder": "Keystore 内容"
+    },
+    "setting": {
+      "general": {
+        "title": "通用",
+        "language": "语言",
+        "appearance": "外观",
+        "data_source": "数据源",
+        "sync_with_plug": "与插件同步",
+        "setup_payment_password": "设置支付密码",
+        "change_payment_password": "修改密码",
+        "unlock_wallet_with_face_id": "面容 ID",
+        "unlock_wallet_with_touch_id": "指纹 ID"
+      },
+      "backup_recovery": {
+        "title": "备份与恢复设置",
+        "restore_data": "恢复数据",
+        "back_up_data": "备份数据",
+        "back_up_password": "备份密码",
+        "back_up_password_empty": "请设置备份密码",
+        "change_backup_password": "修改备份密码",
+        "back_up_password_validation_tip": "请输入您在加密备份文件时使用的备份密码。 ",
+        "wrong_password": "密码错误"
+      },
+      "profile": {
+        "title": "个人信息",
+        "email": "邮箱地址",
+        "email_empty": "请绑定您的电子邮箱",
+        "phone_number": "电话号码",
+        "phone_number_empty": "请绑定您的手机号码",
+        "log_out": "退出登录"
+      },
+      "detail": {
+        "automatic": "自动",
+        "light": "浅色",
+        "dark": "深色"
+      },
+      "backup_data": {
+        "title": "备份数据",
+        "no_backup_title": "您还没有备份",
+        "subtitle": "您最近的备份是 %@。",
+        "backup_icloud": "备份到云端",
+        "backup_manually": "手动备份"
+      },
+      "recovery": {
+        "title": "备份与恢复",
+        "backup_icloud": "从云端备份或恢复",
+        "backup_manually": "从 iPhone 备份或恢复"
+      },
+      "local_backup": {
+        "title": "备份到本地",
+        "local_wallet": "本地钱包",
+        "loading_text": "正在备份…"
+      },
+      "remote_backup": {
+        "title": "备份至云端"
+      },
+      "bind_phone_number": {
+        "title": "绑定手机号码",
+        "sub_title": "手机号码"
+      },
+      "change_phone_number": {
+        "title": "修改手机号码",
+        "sub_title": "新的手机号码",
+        "tips": "要更改您的手机号码，您需要验证您当前的手机号码。"
+      },
+      "bind_email": {
+        "title": "绑定电子邮件地址",
+        "sub_title": "电子邮件地址"
+      },
+      "change_email": {
+        "title": "更改电子邮件地址",
+        "sub_title": "新电子邮件地址",
+        "tips": "要更改电子邮件地址，请验证您当前的电子邮件地址。"
+      },
+      "bind_remote_info": {
+        "setup_email_title": "成功绑定电子邮件地址！",
+        "change_email_title": "已成功更改电子邮件地址！",
+        "setup_phone_number_title": "成功绑定手机号码！",
+        "change_phone_number_title": "已成功更改手机号码！",
+        "setup_email_detail": "您已成功绑定电子邮件地址！",
+        "change_email_detail": "您已成功修改电子邮件地址！",
+        "setup_phone_number_detail": "您已成功绑定手机号码！",
+        "change_phone_number_detail": "您已成功修改手机号码！"
+      },
+      "validation_code": "验证码",
+      "validation_code_mismatch": "验证码错误",
+      "validation_code_via_email": "验证码已通过电子邮件发送至",
+      "validation_code_via_mobile_phone": "验证码已通过短信发送至"
+    },
+    "backup_password_verify": {
+      "title": "备份密码"
+    },
+    "set_backup_password": {
+      "title": "设置备份密码",
+      "backup_password": "备份密码",
+      "confirm_backup_password": "请确认备份密码",
+      "tips": "备份密码必须为 8 到 20 个字符，并且至少包含一个数字、一个大写字母、一个小写字母和特殊字符。",
+      "error_inconsistent_password": "密码不一致"
+    },
+    "change_backup_password": {
+      "title": "修改备份密码",
+      "sub_title": "请确认您当前的备份密码",
+      "backup_password": "备份密码",
+      "new_backup_password": "新备份密码",
+      "confirm_backup_password": "再次输入新密码",
+      "tips": "备份密码必须为 8 到 20 个字符，并且至少包含一个数字、一个大写字母、一个小写字母和特殊字符。",
+      "error_incorrect_password": "备份密码错误",
+      "error_inconsistent_password": "密码不一致"
+    },
+    "NFT_Detail": {
+      "list_price": "价格",
+      "last_sale_Price": "最后售价",
+      "floor_price": "最低价格",
+      "save_photo": "保存照片",
+      "collection_web": "在浏览器中查看收藏品",
+      "etherscan": "在 Etherscan 上查看"
+    },
+    "sendTransaction": {
+      "send": {
+        "placeholder_address": "ENS或地址(0x...)",
+        "Label_To": "至",
+        "label_Amount": "数额",
+        "btn_max": "最大",
+        "btn_send": "发送​​",
+        "btn_Next": "下一步",
+        "Label_Password": "密码",
+        "btn_withoutPassword": "按住以发送",
+        "amount_error": "金额不足",
+        "password_error": "支付密码错误。",
+        "gasFee_error": "Gas 余额不足.",
+        "contact": "联系人",
+        "recent": "最近"
+      },
+      "addContact": {
+        "btn_add": "添加联系人",
+        "placeholder_name": "名称",
+        "pending": "确认中..."
+      },
+      "tokenList": {
+        "title": "搜索代币",
+        "placeholder": "代币名称或合约地址"
+      },
+      "gasPrice": {
+        "title": "Gas Price",
+        "standard": "标准",
+        "fast": "快速",
+        "custom": "自定义",
+        "btn_confirm": "确定",
+        "fee": "费用",
+        "arrives": "到账",
+        "gasPrice": "燃料价格(Gwei)",
+        "gasLimit": "燃料限制(Gwei)",
+        "maxPriorityFee": "Max priority fee(Gwei)",
+        "maxFee": "Max fee(Gwei)",
+        "costFee": "费用:",
+        "advancedBtn": "高级选项",
+        "gasLimit_error": "Gas limit 必须至少",
+        "maxPriorityFee_error_low": "Max pirority fee 在当前网络环境下过低",
+        "maxPriorityFee_error_high": "Max fee 在当前网络环境下过低",
+        "maxFee_error_low": "Max fee 不能低于 Max priority fee",
+        "maxFee_error_high": "Max fee 高于必要值"
+      },
+      "sendConfirmPop": {
+        "gasFee": "燃料费",
+        "total": "总计",
+        "edit": "修改",
+        "gasFeeLow": "约30秒",
+        "gasFeeMedium": "可能小于30秒",
+        "gasFeeHigh": "很有可能小于15秒"
+      }
+    },
+    "set_password": {
+      "title": "设置支付密码",
+      "payment_password": "支付密码",
+      "repeat_payment_password": "再次输入支付密码",
+      "password_invalid": "支付密码必须是数字、字母和特殊字符中的2个类别的组合，长度为 8-20 个字符。",
+      "confirm_payment_password": "使用新支付密码",
+      "input_payment_password": "输入支付密码",
+      "failed_updating_password": "更新支付密码失败"
+    },
+    "change_password": {
+      "title": "修改支付密码",
+      "sub_title": "请确认您当前的支付密码",
+      "failed_loading_password": "加载支付密码失败",
+      "password": "支付密码",
+      "new_password": "新支付密码",
+      "confirm_Password": "再次输入新支付密码",
+      "incorrect_password": "密码不正确",
+      "password_not_match": "密码不一致",
+      "password_demand": "支付密码必须是数字、字母和特殊字符中的2个类别的组合，长度为 8-20 个字符。"
+    },
+    "personas": {
+      "personas": "角色",
+      "tabs": {
+        "social": "社交",
+        "post": "帖子",
+        "contacts": "联系人",
+        "group": "用户组"
+      },
+      "action": {
+        "change_add_persona": "更改或添加角色",
+        "rename": "重命名",
+        "export_private_key": "导出私钥",
+        "download": "下载角色二维码",
+        "backup": "备份",
+        "log_out": "退出登录",
+        "delete": "删除"
+      },
+      "create": {
+        "persona": "角色",
+        "create_persona": "创建角色",
+        "input_persona_name": "输入角色名称"
+      },
+      "search": {
+        "placeholder": "搜索"
+      },
+      "delete": "确认删除该角色",
+      "delete_tip": "如果您没有备份，请前往设置 - 备份和恢复进行备份",
+      "add_persona": "创建新角色"
+    },
+    "persona_welcome": {
+      "title": "欢迎进入 Mask Network！",
+      "description": "创建角色并连接社交账户",
+      "persona": "角色"
+    },
+    "persona_export_private_key": {
+      "title": "导出私钥",
+      "tips": "此导出仅用于导出私钥。我们不导出任何其他数据。如果您需要导入更多数据，请前往设置： ",
+      "backup_recovery": "备份与恢复设置"
+    },
+    "persona_contacts": {
+      "empty_contacts_tips": "社交媒体时间线上未捕捉到任何账户。\n邀请您的朋友下载 Mask Network",
+      "search_contact_tips": "未找到联系人。该账户可能未在社交媒体时间线上捕捉",
+      "delete": "确认删除",
+      "contact": "联系人"
+    },
+    "persona_social": {
+      "twitter": "推特",
+      "facebook": "脸书",
+      "instagram": "Instagram",
+      "minds": "Minds",
+      "disconnect": "断开连接",
+      "connect_social_accounts": "连接社交账户",
+      "accounts": "账户",
+      "connect_tips": "将角色连接到下面的社交网络",
+      "add": "添加"
+    },
+    "persona_download": {
+      "identity_id": "身份代码",
+      "download_tips": "二维码会加密您个人的身份码或私钥，建议打印它。您可以使用 Mask App 扫描二维码以登录。"
+    },
+    "persona_avatar": {
+      "title": "设置角色头像",
+      "crop": "裁剪 & 旋转",
+      "remove_avatar": "移除角色头像"
+    },
+    "wallet_balance": {
+      "btn_swap": "兑换",
+      "btn_Send": "发送",
+      "btn_receive": "接收",
+      "header_title_collectibles": "收藏品",
+      "date_today": "今天",
+      "date_yestoday": "昨天",
+      "date_thisMonth": "本月",
+      "date_lastMonth": "上个月",
+      "transaction_received": "收到",
+      "transaction_approve": "批准",
+      "transaction_send": "发送",
+      "transaction_swap": "兑换",
+      "transaction_deposit": "存款",
+      "transaction_cancel": "取消",
+      "transaction_action_title": "在 %s",
+      "transaction_action_view": "在 %s 上查看",
+      "balance_expand_all": "全部资产",
+      "balance_expand_less": "收起",
+      "header_title_tokens": "代币",
+      "empty_token": "你还没有代币",
+      "empty_collectibles": "您还没有收藏品"
+    },
+    "token_detail": {
+      "switch_network": "手动切换网络",
+      "walletconnect_switch_network_alert": "当前通过 WalletConnect 接入的钱包网络与该资产的网络 (%s) 不同，请去您的钱包切换至 %s 网络，并通过 WalletConnect 重新连入。"
+    },
+    "transaction_history": {
+      "no_transaction": "没有查到您的近期交易记录",
+      "status_pendind": "确认中...",
+      "status_failed": "失败"
+    },
+    "wallet_receive": {
+      "btn_share": "分享",
+      "your_address": "您的 %@ 地址"
+    },
+    "wallet_unlock": {
+      "title": "解锁钱包",
+      "button": "解锁"
+    },
+    "identity_empty": {
+      "title": "角色",
+      "create_an_identity": "创建角色",
+      "recovery_sign_in": "恢复角色"
+    },
+    "identity_create": {
+      "title": "创建身份",
+      "description": "下载您的身份代码。",
+      "identity_tips": "身份代码用于生成您的身份。"
+    },
+    "identify_verify": {
+      "title": "验证身份助记词",
+      "description": "请按照正确的顺序依次点击每个单词。",
+      "identity_error": "输入的身份助记词错误"
+    },
+    "identity_recovery": {
+      "title": "恢复并登录",
+      "identity_button": "身份代码",
+      "identity_button_description": "正在恢复您的角色。",
+      "private_key_button": "私钥",
+      "private_key_button_description": "正在恢复您的角色。",
+      "local_backup_recovery_button": "本地备份与恢复",
+      "local_backup_recovery_button_description": "恢复您的角色和钱包(如果备份)。",
+      "cloud_backup_recovery_button_title": "云端备份与恢复",
+      "cloud_backup_recovery_button_description": "用电子邮件或电话号码恢复您的角色和钱包(如果备份)。"
+    },
+    "identity_mnemonic_import": {
+      "title": "身份",
+      "description": "身份代码只能回复您的角色。",
+      "placeholder": "请输入12个助记词单词，以空格隔开"
+    },
+    "identity_privatekey_import": {
+      "title": "私钥",
+      "description": "身份代码的私钥只能恢复您的角色",
+      "placeholder": "输入您的私钥"
+    },
+    "Identity_restore_signin_success": {
+      "title": "已成功恢复并登录！"
+    },
+    "app": {
+      "title": {
         "labs": "实验室",
-        "setting": "设置"
+        "plugins_setting": "插件设置",
+        "red_packet_share": "分享"
+      },
+      "red_packet_claimed": "%s 已认领",
+      "good_luck_next_time": "祝您下次好运",
+      "market_trend_source": "市场趋势信息源",
+      "wallet_address": "钱包地址",
+      "riskwarning": "Dear User,\n\nWhen using any wallet-related plugins in Mask Network, please confirm to accept the following usage risks:\n\nMask Network provides non-commercial free services. The plug-ins are provided by community members and other excellent third-party DApp teams. Due to the freedom of the decentralized network and other uncertain risk factors, users are requested to properly protect their sensitive information such as wallet mnemonic words and private keys. Please be cautious when conducting any blockchain contract interaction. The risks caused by any third-party DApps (plug-ins) are borne by the third-party DApps themselves.\n\nClicking the confirm button means that you agree to bear the above possible risks.",
+      "riskwarning_title": "风险提示",
+      "swap_option_source": "交换源",
+      "swap_network_source": {
+        "eth": "ETH 网络",
+        "poly": "Polygon/Matic 网络",
+        "bsc": "BSC 网络"
+      },
+      "plugins": {
+        "file_service": "File Service",
+        "ito": "ITO",
+        "lucy_drop": "Lucky Drop",
+        "swap": "Swap",
+        "transaction": "Transak",
+        "market_trend": "Market Trend",
+        "snapshot": "Snapshot",
+        "collectibles": "Collectibles",
+        "gitcoin": "Gitcoin",
+        "valuables": "Valuables",
+        "dhedge": "DHEDGE"
+      },
+      "plugin_introduction": {
+        "transak": "Transak 支持通过60多种货币购买代币。",
+        "ito": "允许用户在Twitter上直接购买代币。",
+        "luckyDrop": "发送红包(Token/NFT)，给加密好友带来惊喜。",
+        "swap": "通过Dex购买代币，无需额外费用和限制。",
+        "file_service": "为用户提供去中心化文档存储功能。"
+      },
+      "plugin_tip": "如果您关闭了一个插件，当浏览社交媒体时，插件功能将无法在时间线上生效。"
     },
-    "common": {
-        "alert": {
-            "biometry_id_activate": {
-                "title": "启用成功",
-                "description": "%s 已成功启用。"
-            },
-            "face_id_activate_fail": {
-                "title": "启用失败",
-                "description": "启用面容ID失败。"
-            },
-            "keychain_auth_prompt": {
-                "title": "验证以使用您的密钥"
-            },
-            "recovery_key": {
-                "title": "请小心保存您的恢复密钥",
-                "description": "您的助记词由随机选择的单词组成，请按单词出现的顺序仔细写下每个单词。"
-            },
-            "recovery_key_warning": {
-                "title": "提示",
-                "description": "仅仅依靠截图保存助记词是不安全的。"
-            },
-            "recovery_key_tips": {
-                "title": "请妥善存储您的恢复密钥",
-                "description": "您的助记词由随机选择的单词组成，请按单词出现的顺序仔细写下每个单词。"
-            },
-            "wallet_create_success": {
-                "title": "完美！",
-                "description": "为了保护您的资产免受黑客和盗窃者的侵害，请将此恢复短语保存在一个安全可靠的地方。"
-            },
-            "wallet_derive_success": {
-                "title": "完美！",
-                "description": "新钱包创建成功"
-            },
-            "wallet_import": {
-                "alert_title_success": "导入完成！",
-                "alert_title_fail": "错误!"
-            },
-            "signout": {
-                "title": "您确定吗？",
-                "description": "Mask Network 不会保存您的任何数据。 请记住您的账户和密码，并在退出之前及时备份您的数据。"
-            },
-            "set_password": {
-                "title": "支付密码设置成功！",
-                "description": "您的支付密码已设置成功。"
-            },
-            "change_password": {
-                "title": "密码修改成功！",
-                "description": "您的支付密码已修改成功。"
-            },
-            "change_password_failed": {
-                "title": "密码修改失败！"
-            },
-            "setup_backup_password": {
-                "title": "备份密码设置成功！",
-                "description": "您的备份密码已设置成功。"
-            },
-            "setup_backup_password_failed": {
-                "title": "备份密码设置失败！"
-            },
-            "change_backup_password": {
-                "title": "备份密码修改成功！",
-                "description": "您的备份密码已修改成功。"
-            },
-            "change_backup_password_failed": {
-                "title": "备份密码修改失败！"
-            },
-            "identify_code_screenshot_warning": {
-                "title": "提示",
-                "description": "仅仅依靠截图保存助记词是不安全的。"
-            },
-            "persona_create": {
-                "title": "成功 ",
-                "description": "您已成功创建您的角色%s。 "
-            },
-            "persona_logout": {
-                "title": "确认登出？",
-                "description": "登出身份后，与您的身份关联的社交账户将不能再解密过去的加密消息。"
-            },
-            "persona_name_duplicated": {
-                "title": "此用户名已被使用"
-            },
-            "local_backup": {
-                "backup_completed": "备份完成",
-                "backup_failed": "备份失败！"
-            },
-            "setting": {
-                "warning_backup_data_titile": "请在备份之前设置密码",
-                "warning_backup_data_description": "请在备份之前设置您的备份密码。"
-            },
-            "disconnect_profile": {
-                "title": "断开社交账户 \n %s",
-                "description": "您确定要断开连接账户 ？ 断开连接后，此账户将无法解密解密 Mask Network 的信息。"
-            },
-            "bind_remote_info": {
-                "title": "出现了一些问题",
-                "detail": "无法验证，请重试"
-            },
-            "export_private_key": {
-                "title": "设置备份密码 ",
-                "description": "请在导出私钥之前设置您的 %s。 "
-            },
-            "download_identity_code": {
-                "title": "设置备份密码 ",
-                "description": "请在下载角色二维码之前设置您的 %s。 "
-            },
-            "backup_tips_no_backup_password": {
-                "title": " 设置备份密码",
-                "description": "请在备份前设置您的 %s。"
-            },
-            "scan_failed": {
-                "title": "扫描失败",
-                "description": "无法识别二维码。"
-            },
-            "scan_persona_success": {
-                "title": "成功 ",
-                "description": "您已成功导入您的身份。 "
-            },
-            "scan_persona_exist": {
-                "title": "该身份已存在。",
-                "description": "该二维码对应的身份已存在。"
-            },
-            "wrong_folder": {
-                "title": "请选择另一个文件夹",
-                "description": "当你删除 Mask App 时，Mask Network 的沙盒目录也会被删除。为了您的数据安全，请保存到更安全的文件夹(非沙盒目录)"
-            },
-            "backup_popup_binding_first": {
-                "title": "绑定您的电子邮件或手机",
-                "description": "请在备份到云端之前绑定您的电子邮件或电话号码。"
-            },
-            "camera_access": {
-                "title": "Mask Network 想要获取\n您的相机权限",
-                "description": "请到系统设置里允许相机权限。"
-            },
-            "only_scan_persona": {
-                "title": "请扫描角色二维码",
-                "description": "二维码不是角色二维码。\n请扫描角色二维码。"
-            },
-            "no_local_wallet_for_walletconnect": {
-                "title": "无法连接",
-                "description": "无法连接到 walletConnect，因为没有本地钱包。"
-            }
-        },
-        "controls": {
-            "create_wallet": "创建钱包",
-            "import_wallet": "导入钱包",
-            "accept": "同意",
-            "enable": "开启",
-            "no_thanks": "不用了",
-            "done": "完成",
-            "ok": "好",
-            "i_understand": "我已理解",
-            "verify": "验证",
-            "confirm": "确定",
-            "sending": "发送中...",
-            "sent": "发送",
-            "clear": "清空",
-            "next": "下一步",
-            "signout": "退出登录",
-            "cancel": "取消",
-            "change": "修改",
-            "invite": "邀请",
-            "try_again": "重试",
-            "retry": "重试",
-            "webview_go_back": "后退",
-            "merge_and_back_up": "合并后备份",
-            "merge_to_local_data": "合并至本地数据",
-            "back_up_to_cloud": "备份至云端",
-            "back_up_locally": "备份到本地",
-            "back_up": "备份",
-            "resend": "重新发送",
-            "edit": "编辑",
-            "download": "下载",
-            "skip": "跳过，稍后下载",
-            "download_next": "我已下载，下一步",
-            "select_from_photo": "图库中选择",
-            "take_photo": "拍照",
-            "save": "保存",
-            "move_data_now": "立即移动数据",
-            "remind_me_later": "稍后提醒我",
-            "go_settings": "好",
-            "dont_allow": "不允许",
-            "speed_up": "加速"
-        },
-        "toast": {
-            "saved": "已保存！",
-            "copy": "已复制！"
-        },
-        "loading": "加载中..."
+    "social": {
+      "login_in_to_continue": "登陆以继续",
+      "login_in_notify": "请先登录推特，我们将引导您完成接下来的步骤来连接 Mask Network。",
+      "i_understand": "我明白了",
+      "title": "首页",
+      "connect_button_title": "连接",
+      "profile_select_title": "选择用户名",
+      "connected": "已连接",
+      "connect_hint": "登录到 %s 以连接",
+      "connect_hint_logged_in": "%s 已连接。\n切换账户以连接另一个账户。",
+      "connect_to_mask_network": "连接到 Mask Network",
+      "account_already_connected": "账户已连接",
+      "connect_stop": "",
+      "error": {
+        "fail_to_connect": "连接账户失败"
+      }
     },
-    "scene": {
-        "guide": {
-            "skip": "跳过",
-            "lets_start": "我们开始吧！",
-            "description1": "崭新，开放的Web 3.0 之门。",
-            "description2": "在社交网络上发送加密信息。",
-            "description3": "多链钱包，支持 WalletConnect",
-            "description4": "及时进行云端/本地备份"
-        },
-        "welcome_identity_empty": {
-            "create_a_persona": "创建角色",
-            "recover_your_persona": "恢复角色",
-            "description": "崭新，开放的Web 3.0 之门。"
-        },
-        "terms_of_service": {
-            "title": "法律声明",
-            "description": "请查看 Mask Network 的隐私政策与服务条款。",
-            "service_agreement": "服务协议"
-        },
-        "create_wallet": {
-            "wallet_name": "钱包名称",
-            "wallet_name_placeholder": "为您的钱包命名",
-            "enter_password": "请输入密码",
-            "password_error": "密码不正确",
-            "select_network": "选择网络",
-            "multichain_wallet_title": "多链钱包",
-            "multichain_wallet_description": "我们的 EVM 兼容钱包支持以下区块链网络："
-        },
-        "biometry_recognition": {
-            "face_id": {
-                "title": "使用 面容 ID 解锁",
-                "description": "通过设置面容 ID 快速解锁 Mask Network。"
-            },
-            "touch_id": {
-                "title": "使用 Touch ID 解锁",
-                "description": "通过设置 Touch ID 快速解锁 Mask Network。"
-            }
-        },
-        "biometry_id": {
-            "face_id": "面容 ID",
-            "touch_id": "Touch ID",
-            "face_id_reason": "Mask Network 需要使用面容 ID 来保护您的钱包",
-            "touch_id_reason": "Mask Network 需要 Touch ID 来保护您的钱包",
-            "passcode_notSet": "由于未在该设备上设置密码，认证无法启动。",
-            "biometry_not_enrolled": "由于未在该设备上找到%s注册认证，认证无法启动。",
-            "biometry_lockout": "认证失败。由于已经失败 %s 次，%s已经锁定。需要使用密码解锁%s。",
-            "biometry_not_available": "Mask Network 需要您的%s认证。请前往该设备的设置 -> Mask Network 打开",
-            "biometry_has_changed": "您的%s已被更改，%s将被关闭"
-        },
-        "wallet_detail": {
-            "wallet_items_rename": "重命名钱包",
-            "wallet_items_backup": "备份",
-            "wallet_items_delete": "删除",
-            "wallet_title_change": "修改",
-            "wallet_items_history": "交易记录"
-        },
-        "wallet_list": {
-            "title": "切换钱包",
-            "wallets_items_create": "创建新钱包",
-            "wallets_items_import": "导入钱包\n",
-            "wallets_items_add": "添加新的钱包",
-            "wallets_list_import": "已导入"
-        },
-        "mnemonic_word": {
-            "title": "助记词",
-            "description": "请写下每一个单词。"
-        },
-        "mnemonic_verify": {
-            "title": "验证您的助记词",
-            "description": "请按照正确的顺序依次点击每个单词。",
-            "words_title": "请按照正确的顺序依次点击每个单词。",
-            "mnemonic_error": "助记词错误",
-            "mnemonic_prompt": "点击已选择单词以替换另一个单词。"
-        },
-        "select_network": {},
-        "wallets_list_add": {
-            "wallets_items_add": "创建新钱包",
-            "wallets_list_import": "导入钱包"
-        },
-        "wallet_rename": {
-            "name_title": "钱包名称",
-            "placeholder": "为您的钱包命名",
-            "rename_button": "重命名"
-        },
-        "wallet_delete": {
-            "title": "删除钱包",
-            "content": "您确定要删除这个钱包吗？如果没有助记词或私钥，您的钱包将无法恢复。",
-            "password": "密码",
-            "placeholder": "密码",
-            "btn_cancel": "取消",
-            "btn_delete": "删除"
-        },
-        "wallet_backup": {
-            "title": "备份钱包",
-            "tab_keystore": "Keystore",
-            "tab_private_key": "私钥",
-            "keystore_tips": "请记住您当前设置的密码。您需要使用该密码来从导出的 Keystore 恢复您的钱包。",
-            "private_key_tips": "使用该私钥可以直接恢复您的钱包，请不要让任何人得到您的私钥。",
-            "btn_cancel": "取消",
-            "btn_copy": "复制"
-        },
-        "wallet_edit": {
-            "item_rename": "重命名钱包",
-            "item_delete": "删除钱包"
-        },
-        "wallet_import": {
-            "title": "导入钱包",
-            "item_mnemonic_words": "助记词",
-            "item_mnemonic_words_desc": "助记词由多个单词组成，由空格分隔。",
-            "item_private_key": "私钥",
-            "item_private_key_desc": "明文私钥",
-            "item_keystore": "Keystore",
-            "item_keystore_desc": "已加密的 Keystore JSON"
-        },
-        "wallet_derivation_path": {
-            "title": "派生路径",
-            "header_address": "地址",
-            "header_balance": "余额 (%@)",
-            "header_operation": "操作",
-            "operation_add": "添加",
-            "operation_added": "已添加"
-        },
-        "wallet_mnemonic": {
-            "title": "助记词",
-            "btn_confirm": "确定",
-            "placeholder": "请输入以空格分隔的助记词"
-        },
-        "wallet_private_key": {
-            "title": "私钥",
-            "btn_confirm": "确定",
-            "placeholder": "输入私钥"
-        },
-        "wallet_keystore": {
-            "title": "Keystore",
-            "btn_confirm": "确定",
-            "password_placeholder": "钱包密码",
-            "keystore_placeholder": "Keystore 内容"
-        },
-        "setting": {
-            "general": {
-                "title": "通用",
-                "language": "语言",
-                "appearance": "外观",
-                "data_source": "数据源",
-                "sync_with_plug": "与插件同步",
-                "setup_payment_password": "设置支付密码",
-                "change_payment_password": "修改密码",
-                "unlock_wallet_with_face_id": "面容 ID",
-                "unlock_wallet_with_touch_id": "指纹 ID"
-            },
-            "backup_recovery": {
-                "title": "备份与恢复设置",
-                "restore_data": "恢复数据",
-                "back_up_data": "备份数据",
-                "back_up_password": "备份密码",
-                "back_up_password_empty": "请设置备份密码",
-                "change_backup_password": "修改备份密码",
-                "back_up_password_validation_tip": "请输入您在加密备份文件时使用的备份密码。 ",
-                "wrong_password": "密码错误"
-            },
-            "profile": {
-                "title": "个人信息",
-                "email": "邮箱地址",
-                "email_empty": "请绑定您的电子邮箱",
-                "phone_number": "电话号码",
-                "phone_number_empty": "请绑定您的手机号码",
-                "log_out": "退出登录"
-            },
-            "detail": {
-                "automatic": "自动",
-                "light": "浅色",
-                "dark": "深色"
-            },
-            "backup_data": {
-                "title": "备份数据",
-                "no_backup_title": "您还没有备份",
-                "subtitle": "您最近的备份是 %@。",
-                "backup_icloud": "备份到云端",
-                "backup_manually": "手动备份"
-            },
-            "recovery": {
-                "title": "备份与恢复",
-                "backup_icloud": "从云端备份或恢复",
-                "backup_manually": "从 iPhone 备份或恢复"
-            },
-            "local_backup": {
-                "title": "备份到本地",
-                "local_wallet": "本地钱包",
-                "loading_text": "正在备份…"
-            },
-            "remote_backup": {
-                "title": "备份至云端"
-            },
-            "bind_phone_number": {
-                "title": "绑定手机号码",
-                "sub_title": "手机号码"
-            },
-            "change_phone_number": {
-                "title": "修改手机号码",
-                "sub_title": "新的手机号码",
-                "tips": "要更改您的手机号码，您需要验证您当前的手机号码。"
-            },
-            "bind_email": {
-                "title": "绑定电子邮件地址",
-                "sub_title": "电子邮件地址"
-            },
-            "change_email": {
-                "title": "更改电子邮件地址",
-                "sub_title": "新电子邮件地址",
-                "tips": "要更改电子邮件地址，请验证您当前的电子邮件地址。"
-            },
-            "bind_remote_info": {
-                "setup_email_title": "成功绑定电子邮件地址！",
-                "change_email_title": "已成功更改电子邮件地址！",
-                "setup_phone_number_title": "成功绑定手机号码！",
-                "change_phone_number_title": "已成功更改手机号码！",
-                "setup_email_detail": "您已成功绑定电子邮件地址！",
-                "change_email_detail": "您已成功修改电子邮件地址！",
-                "setup_phone_number_detail": "您已成功绑定手机号码！",
-                "change_phone_number_detail": "您已成功修改手机号码！"
-            },
-            "validation_code": "验证码",
-            "validation_code_mismatch": "验证码错误",
-            "validation_code_via_email": "验证码已通过电子邮件发送至",
-            "validation_code_via_mobile_phone": "验证码已通过短信发送至"
-        },
-        "backup_password_verify": {
-            "title": "备份密码"
-        },
-        "set_backup_password": {
-            "title": "设置备份密码",
-            "backup_password": "备份密码",
-            "confirm_backup_password": "请确认备份密码",
-            "tips": "备份密码必须为 8 到 20 个字符，并且至少包含一个数字、一个大写字母、一个小写字母和特殊字符。",
-            "error_inconsistent_password": "密码不一致"
-        },
-        "change_backup_password": {
-            "title": "修改备份密码",
-            "sub_title": "请确认您当前的备份密码",
-            "backup_password": "备份密码",
-            "new_backup_password": "新备份密码",
-            "confirm_backup_password": "再次输入新密码",
-            "tips": "备份密码必须为 8 到 20 个字符，并且至少包含一个数字、一个大写字母、一个小写字母和特殊字符。",
-            "error_incorrect_password": "备份密码错误",
-            "error_inconsistent_password": "密码不一致"
-        },
-        "NFT_Detail": {
-            "list_price": "价格",
-            "last_sale_Price": "最后售价",
-            "floor_price": "最低价格",
-            "save_photo": "保存照片",
-            "collection_web": "在浏览器中查看收藏品",
-            "etherscan": "在 Etherscan 上查看"
-        },
-        "sendTransaction": {
-            "send": {
-                "placeholder_address": "ENS或地址(0x...)",
-                "Label_To": "至",
-                "label_Amount": "数额",
-                "btn_max": "最大",
-                "btn_send": "发送​​",
-                "btn_Next": "下一步",
-                "Label_Password": "密码",
-                "btn_withoutPassword": "按住以发送",
-                "amount_error": "金额不足",
-                "password_error": "支付密码错误。",
-                "gasFee_error": "Gas 余额不足.",
-                "contact": "联系人",
-                "recent": "最近"
-            },
-            "addContact": {
-                "btn_add": "添加联系人",
-                "placeholder_name": "名称"
-            },
-            "tokenList": {
-                "title": "搜索代币",
-                "placeholder": "代币名称或合约地址"
-            },
-            "gasPrice": {
-                "title": "Gas Price",
-                "standard": "标准",
-                "fast": "快速",
-                "custom": "自定义",
-                "btn_confirm": "确定",
-                "fee": "费用",
-                "arrives": "到账",
-                "gasPrice": "燃料价格(Gwei)",
-                "gasLimit": "燃料限制(Gwei)",
-                "maxPriorityFee": "Max priority fee(Gwei)",
-                "maxFee": "Max fee(Gwei)",
-                "costFee": "费用:",
-                "advancedBtn": "高级选项",
-                "gasLimit_error": "Gas limit 必须至少",
-                "maxPriorityFee_error_low": "Max pirority fee 在当前网络环境下过低",
-                "maxPriorityFee_error_high": "Max fee 在当前网络环境下过低",
-                "maxFee_error_low": "Max fee 不能低于 Max priority fee",
-                "maxFee_error_high": "Max fee 高于必要值"
-            },
-            "sendConfirmPop": {
-                "gasFee": "燃料费",
-                "total": "总计",
-                "edit": "修改",
-                "gasFeeLow": "约30秒",
-                "gasFeeMedium": "可能小于30秒",
-                "gasFeeHigh": "很有可能小于15秒"
-            }
-        },
-        "set_password": {
-            "title": "设置支付密码",
-            "payment_password": "支付密码",
-            "repeat_payment_password": "再次输入支付密码",
-            "password_invalid": "支付密码必须是数字、字母和特殊字符中的2个类别的组合，长度为 8-20 个字符。",
-            "confirm_payment_password": "使用新支付密码",
-            "input_payment_password": "输入支付密码",
-            "failed_updating_password": "更新支付密码失败"
-        },
-        "change_password": {
-            "title": "修改支付密码",
-            "sub_title": "请确认您当前的支付密码",
-            "failed_loading_password": "加载支付密码失败",
-            "password": "支付密码",
-            "new_password": "新支付密码",
-            "confirm_Password": "再次输入新支付密码",
-            "incorrect_password": "密码不正确",
-            "password_not_match": "密码不一致",
-            "password_demand": "支付密码必须是数字、字母和特殊字符中的2个类别的组合，长度为 8-20 个字符。"
-        },
-        "personas": {
-            "personas": "角色",
-            "tabs": {
-                "social": "社交",
-                "post": "帖子",
-                "contacts": "联系人",
-                "group": "用户组"
-            },
-            "action": {
-                "change_add_persona": "更改或添加角色",
-                "rename": "重命名",
-                "export_private_key": "导出私钥",
-                "download": "下载角色二维码",
-                "backup": "备份",
-                "log_out": "退出登录",
-                "delete": "删除"
-            },
-            "create": {
-                "persona": "角色",
-                "create_persona": "创建角色",
-                "input_persona_name": "输入角色名称"
-            },
-            "search": {
-                "placeholder": "搜索"
-            },
-            "delete": "确认删除该角色",
-            "delete_tip": "如果您没有备份，请前往设置 - 备份和恢复进行备份",
-            "add_persona": "创建新角色"
-        },
-        "persona_welcome": {
-            "title": "欢迎进入 Mask Network！",
-            "description": "创建角色并连接社交账户",
-            "persona": "角色"
-        },
-        "persona_export_private_key": {
-            "title": "导出私钥",
-            "tips": "此导出仅用于导出私钥。我们不导出任何其他数据。如果您需要导入更多数据，请前往设置： ",
-            "backup_recovery": "备份与恢复设置"
-        },
-        "persona_contacts": {
-            "empty_contacts_tips": "社交媒体时间线上未捕捉到任何账户。\n邀请您的朋友下载 Mask Network",
-            "search_contact_tips": "未找到联系人。该账户可能未在社交媒体时间线上捕捉",
-            "delete": "确认删除",
-            "contact": "联系人"
-        },
-        "persona_social": {
-            "twitter": "推特",
-            "facebook": "脸书",
-            "instagram": "Instagram",
-            "minds": "Minds",
-            "disconnect": "断开连接",
-            "connect_social_accounts": "连接社交账户",
-            "accounts": "账户",
-            "connect_tips": "将角色连接到下面的社交网络",
-            "add": "添加"
-        },
-        "persona_download": {
-            "identity_id": "身份代码",
-            "download_tips": "二维码会加密您个人的身份码或私钥，建议打印它。您可以使用 Mask App 扫描二维码以登录。"
-        },
-        "persona_avatar": {
-            "title": "设置角色头像",
-            "crop": "裁剪 & 旋转",
-            "remove_avatar": "移除角色头像"
-        },
-        "wallet_balance": {
-            "btn_swap": "兑换",
-            "btn_Send": "发送",
-            "btn_receive": "接收",
-            "header_title_collectibles": "收藏品",
-            "date_today": "今天",
-            "date_yestoday": "昨天",
-            "date_thisMonth": "本月",
-            "date_lastMonth": "上个月",
-            "transaction_received": "收到",
-            "transaction_approve": "批准",
-            "transaction_send": "发送",
-            "transaction_swap": "兑换",
-            "transaction_deposit": "存款",
-            "transaction_cancel": "取消",
-            "transaction_action_title": "在 %s",
-            "transaction_action_view": "在 %s 上查看",
-            "balance_expand_all": "全部资产",
-            "balance_expand_less": "收起",
-            "header_title_tokens": "代币",
-            "empty_token": "你还没有代币",
-            "empty_collectibles": "您还没有收藏品"
-        },
-        "token_detail": {
-            "switch_network": "手动切换网络",
-            "walletconnect_switch_network_alert": "当前通过 WalletConnect 接入的钱包网络与该资产的网络 (%s) 不同，请去您的钱包切换至 %s 网络，并通过 WalletConnect 重新连入。"
-        },
-        "transaction_history": {
-            "no_transaction": "没有查到您的近期交易记录",
-            "status_pendind": "确认中...",
-            "status_failed": "失败"
-        },
-        "wallet_receive": {
-            "btn_share": "分享",
-            "your_address": "您的 %@ 地址"
-        },
-        "wallet_unlock": {
-            "title": "解锁钱包",
-            "button": "解锁"
-        },
-        "identity_empty": {
-            "title": "角色",
-            "create_an_identity": "创建角色",
-            "recovery_sign_in": "恢复角色"
-        },
-        "identity_create": {
-            "title": "创建身份",
-            "description": "下载您的身份代码。",
-            "identity_tips": "身份代码用于生成您的身份。"
-        },
-        "identify_verify": {
-            "title": "验证身份助记词",
-            "description": "请按照正确的顺序依次点击每个单词。",
-            "identity_error": "输入的身份助记词错误"
-        },
-        "identity_recovery": {
-            "title": "恢复并登录",
-            "identity_button": "身份代码",
-            "identity_button_description": "正在恢复您的角色。",
-            "private_key_button": "私钥",
-            "private_key_button_description": "正在恢复您的角色。",
-            "local_backup_recovery_button": "本地备份与恢复",
-            "local_backup_recovery_button_description": "恢复您的角色和钱包(如果备份)。",
-            "cloud_backup_recovery_button_title": "云端备份与恢复",
-            "cloud_backup_recovery_button_description": "用电子邮件或电话号码恢复您的角色和钱包(如果备份)。"
-        },
-        "identity_mnemonic_import": {
-            "title": "身份",
-            "description": "身份代码只能回复您的角色。",
-            "placeholder": "请输入12个助记词单词，以空格隔开"
-        },
-        "identity_privatekey_import": {
-            "title": "私钥",
-            "description": "身份代码的私钥只能恢复您的角色",
-            "placeholder": "输入您的私钥"
-        },
-        "Identity_restore_signin_success": {
-            "title": "已成功恢复并登录！"
-        },
-        "app": {
-            "title": {
-                "labs": "实验室",
-                "plugins_setting": "插件设置",
-                "red_packet_share": "分享"
-            },
-            "red_packet_claimed": "%s 已认领",
-            "good_luck_next_time": "祝您下次好运",
-            "market_trend_source": "市场趋势信息源",
-            "wallet_address": "钱包地址",
-            "riskwarning": "Dear User,\n\nWhen using any wallet-related plugins in Mask Network, please confirm to accept the following usage risks:\n\nMask Network provides non-commercial free services. The plug-ins are provided by community members and other excellent third-party DApp teams. Due to the freedom of the decentralized network and other uncertain risk factors, users are requested to properly protect their sensitive information such as wallet mnemonic words and private keys. Please be cautious when conducting any blockchain contract interaction. The risks caused by any third-party DApps (plug-ins) are borne by the third-party DApps themselves.\n\nClicking the confirm button means that you agree to bear the above possible risks.",
-            "riskwarning_title": "风险提示",
-            "swap_option_source": "交换源",
-            "swap_network_source": {
-                "eth": "ETH 网络",
-                "poly": "Polygon/Matic 网络",
-                "bsc": "BSC 网络"
-            },
-            "plugins": {
-                "file_service": "File Service",
-                "ito": "ITO",
-                "lucy_drop": "Lucky Drop",
-                "swap": "Swap",
-                "transaction": "Transak",
-                "market_trend": "Market Trend",
-                "snapshot": "Snapshot",
-                "collectibles": "Collectibles",
-                "gitcoin": "Gitcoin",
-                "valuables": "Valuables",
-                "dhedge": "DHEDGE"
-            },
-            "plugin_introduction": {
-                "transak": "Transak 支持通过60多种货币购买代币。",
-                "ito": "允许用户在Twitter上直接购买代币。",
-                "luckyDrop": "发送红包(Token/NFT)，给加密好友带来惊喜。",
-                "swap": "通过Dex购买代币，无需额外费用和限制。",
-                "file_service": "为用户提供去中心化文档存储功能。"
-            },
-            "plugin_tip": "如果您关闭了一个插件，当浏览社交媒体时，插件功能将无法在时间线上生效。"
-        },
-        "social": {
-            "login_in_to_continue": "登陆以继续",
-            "login_in_notify": "请先登录推特，我们将引导您完成接下来的步骤来连接 Mask Network。",
-            "i_understand": "我明白了",
-            "title": "首页",
-            "connect_button_title": "连接",
-            "profile_select_title": "选择用户名",
-            "connected": "已连接",
-            "connect_hint": "登录到 %s 以连接",
-            "connect_hint_logged_in": "%s 已连接。\n切换账户以连接另一个账户。",
-            "connect_to_mask_network": "连接到 Mask Network",
-            "account_already_connected": "账户已连接",
-            "connect_stop": "",
-            "error": {
-                "fail_to_connect": "连接账户失败"
-            }
-        },
-        "share": {
-            "shareLink": "分享 Mask Network 连接："
-        },
-        "restore": {
-            "titles": {
-                "restore_buckup": "恢复备份",
-                "restore_remote_backup": "恢复云端备份",
-                "recovery_with_email": "通过电子邮件恢复",
-                "recovery_with_mobile": "通过电话号码恢复",
-                "restore_succeed": "恢复成功",
-                "restore_failed": "恢复失败",
-                "native_wallets": "要恢复的钱包",
-                "unsupport_restore_data": "不支持的数据备份格式",
-                "loading_failed": "加载失败",
-                "verify_wallet_password": "验证支付密码"
-            },
-            "buttonTitles": {
-                "backup": "恢复备份",
-                "restore": "恢复",
-                "next": "下一步",
-                "confirm": "确定",
-                "resend": "重新发送",
-                "email": "通过手机号恢复",
-                "mobile": "通过电子邮件恢复"
-            },
-            "succeed_detail": "恢复并登录完成。",
-            "completion": "恢复已完成。",
-            "failed_detail": "恢复失败，我们无法恢复您的备份。",
-            "input_placeholder": {
-                "email": "请输入您的电子邮件地址"
-            },
-            "check_unsupport_data": "请检查您的数据备份。",
-            "restore_created_date": "备份时间",
-            "restored_post": "加密的文章",
-            "restored_account": "关联账户",
-            "restored_persona": "角色",
-            "restored_files": "文件",
-            "restored_contacts": "联系人",
-            "restored_relations": "关系",
-            "wallet_existed": "已存在",
-            "input_title": {
-                "remote_backup_password": "云端备份密码",
-                "email": "电子邮件",
-                "validationcode": "验证码",
-                "mobile": "手机号码",
-                "payment_password": "支付密码 "
-            },
-            "tip": {
-                "data_failed_to_fetch": "请尝试重新加载数据。",
-                "failed_to_download_file": "下载远端文件失败。",
-                "incorrect_backup_password": "云端备份密码错误",
-                "invalid_email_address": "电子邮件地址错误",
-                "invalid_mobile_number": "手机号码错误",
-                "email_validationcode": "验证码已经通过电子邮件发送至",
-                "mobile_validationcode": "验证码已通过短信发送至",
-                "incorrect_validationcode": "验证码错误",
-                "invalid_validationcode": "验证码无效",
-                "validationcode_five_minutes": "验证码不正确，请在5分钟后重试",
-                "validationcode_ten_minutes": "验证码不正确，请在10分钟后重试",
-                "validationcode_thirty_minutes": "验证码不正确，请在 30 分钟后重试",
-                "validationcode_one_hour": "验证码不正确，请在1小时后重试",
-                "validationcode_twentyfour_hours": "验证码不正确，请在 24 小时后重试",
-                "failed_loading_remotefile": "下载恢复文件失败，请重试",
-                "remote_restore_succeed": "您已成功验证您的云端密码，备份已经上传。 ",
-                "remote_restore_syncing_password": "为了统一备份密码，您想要将您的云端密码与本地密码同步吗？",
-                "cloud_backup_password_hint": "要解密云备份，请输入备份时使用的备份密码。"
-            }
-        },
-        "mask_scan": {
-            "scan_persona": "请扫描角色二维码",
-            "scan_all": "扫描角色或 walletConnect 二维码"
-        },
-        "wallet_connect": {
-            "wallet_connect": "WalletConnect",
-            "select_wallet": "选择钱包",
-            "scan_q_r_code": "扫描二维码",
-            "qr_code_tips": "使用支持 WalletConnect 的钱包扫码下面的二维码",
-            "tap_to_copy": "点击复制到剪贴板",
-            "no_wallets": "您还没有安装任何可用的 %s 钱包用于 walletConnect",
-            "connecting": "正在连接…",
-            "connect_success": "钱包成功连接到 Mask Network",
-            "disconnect": "断开连接",
-            "connection_fail": "连接失败。",
-            "could_not_switch_blockchain_network_title": "WalletConnect 不支持切换区块链网络",
-            "could_not_switch_blockchain_network_message": "请尝试使用本地钱包，然后再切换区块链网络",
-            "network_not_match": "当前网络 %s 与您正在连接的网络 %s 不同。您想要将切换当前网络为 %s 吗？",
-            "network_not_support": "Mask Network 目前不支持钱包网络 %s 。我们无法连接您的钱包。请手动切换您的钱包网络。",
-            "address_exist": "该钱包地址已经存在",
-            "replace_wallet_connect_wallet": "这个钱包地址已连接到 WaletConnect。导入这个钱包地址会自动断开 WaletConnect 账户的连接。"
-        },
-        "wallet_connect_server": {
-            "want_to_connect": "%s 想要连接到你的钱包",
-            "connected_apps": "已连接的应用",
-            "connect": "连接",
-            "wallet_connect_notification": "Wallet Connect 请求交易",
-            "switch_wallet": "切换钱包"
-        },
-        "backup": {
-            "remote_backup_actions_view": {
-                "tips": "已存在云端备份， 您可以选择在备份之前先合并这个云备份到您的本地数据，或者直接备份。"
-            },
-            "merge_to_local": {
-                "title": "合并后备份",
-                "merge_failed_message": "合并云端备份失败！"
-            },
-            "validation_code": "验证码",
-            "with_phone": "使用手机号码备份",
-            "with_email": "使用电子邮箱地址备份",
-            "tips_phone": "验证码已通过短信发送至 ",
-            "tips_email": "验证码已经通过电子邮件发送至 ",
-            "backup_verify_field_email": "电子邮件地址",
-            "backup_verify_field_phone": "手机号码",
-            "backup_verify_title_email": "通过电子邮件地址备份",
-            "backup_verify_title_phone": "通过手机号码备份",
-            "restore_created_date": "创建时间",
-            "restored_post": "加密的文章",
-            "restored_account": "关联账户",
-            "restored_persona": "角色",
-            "restored_files": "文件",
-            "restored_contacts": "联系人",
-            "restored_relations": "关系"
-        },
-        "open_red_package": {
-            "title": "红包",
-            "wallet": "钱包",
-            "claim": "认领",
-            "claiming": "认领中",
-            "switch_network": "切换网络",
-            "confirm_risk_warning": "确认风险提示",
-            "wrong_network": "网络错误",
-            "total": "总额",
-            "ends": "结束时间",
-            "from": "从: @",
-            "shares": "份额",
-            "on_going": "进行中",
-            "expired": "已过期",
-            "claimed": "已认领",
-            "refunded": "已退款",
-            "refund": "退款",
-            "empty": "空的",
-            "share_message_official": "朋友们，我刚刚在%s上领取了一个%s发送的红包，关注%s来领取这个红包。#mask_io #LuckyDrop %s",
-            "share_message_unsupport_platform": "朋友们，我刚刚在%s上领取了一个%s发送的红包"
-        },
-        "move_backup_data": {
-            "title": "请移动您的数据",
-            "description1": "我们检测到您的 Mask Network 的沙盒目录中可能有重要的备份文档(.pdf, .bin)。",
-            "description2": "当您删除  Mask App 时，这些文档也将被删除。",
-            "description3": "为了数据安全，请将您的数据移动到一个更安全的文件夹。"
-        }
+    "share": {
+      "shareLink": "分享 Mask Network 连接："
     },
-    "chain": {
-        "short_name": {
-            "eth": "ETH",
-            "bsc": "BNB",
-            "dot": "DOT",
-            "polygon": "Polygon",
-            "arbitrum": "Arbitrum",
-            "xdai": "Gnosis",
-            "optimism": "Optimism"
-        },
-        "name": {
-            "eth": "Ethereum",
-            "bsc": "BNB Chain",
-            "dot": "Polkadot",
-            "polygon": "Polygon/Matic Network",
-            "arbitrum": "Arbitrum",
-            "xdai": "Gnosis",
-            "optimism": "Optimism"
-        }
+    "restore": {
+      "titles": {
+        "restore_buckup": "恢复备份",
+        "restore_remote_backup": "恢复云端备份",
+        "recovery_with_email": "通过电子邮件恢复",
+        "recovery_with_mobile": "通过电话号码恢复",
+        "restore_succeed": "恢复成功",
+        "restore_failed": "恢复失败",
+        "native_wallets": "要恢复的钱包",
+        "unsupport_restore_data": "不支持的数据备份格式",
+        "loading_failed": "加载失败",
+        "verify_wallet_password": "验证支付密码"
+      },
+      "buttonTitles": {
+        "backup": "恢复备份",
+        "restore": "恢复",
+        "next": "下一步",
+        "confirm": "确定",
+        "resend": "重新发送",
+        "email": "通过手机号恢复",
+        "mobile": "通过电子邮件恢复"
+      },
+      "succeed_detail": "恢复并登录完成。",
+      "completion": "恢复已完成。",
+      "failed_detail": "恢复失败，我们无法恢复您的备份。",
+      "input_placeholder": {
+        "email": "请输入您的电子邮件地址"
+      },
+      "check_unsupport_data": "请检查您的数据备份。",
+      "restore_created_date": "备份时间",
+      "restored_post": "加密的文章",
+      "restored_account": "关联账户",
+      "restored_persona": "角色",
+      "restored_files": "文件",
+      "restored_contacts": "联系人",
+      "restored_relations": "关系",
+      "wallet_existed": "已存在",
+      "input_title": {
+        "remote_backup_password": "云端备份密码",
+        "email": "电子邮件",
+        "validationcode": "验证码",
+        "mobile": "手机号码",
+        "payment_password": "支付密码 "
+      },
+      "tip": {
+        "data_failed_to_fetch": "请尝试重新加载数据。",
+        "failed_to_download_file": "下载远端文件失败。",
+        "incorrect_backup_password": "云端备份密码错误",
+        "invalid_email_address": "电子邮件地址错误",
+        "invalid_mobile_number": "手机号码错误",
+        "email_validationcode": "验证码已经通过电子邮件发送至",
+        "mobile_validationcode": "验证码已通过短信发送至",
+        "incorrect_validationcode": "验证码错误",
+        "invalid_validationcode": "验证码无效",
+        "validationcode_five_minutes": "验证码不正确，请在5分钟后重试",
+        "validationcode_ten_minutes": "验证码不正确，请在10分钟后重试",
+        "validationcode_thirty_minutes": "验证码不正确，请在 30 分钟后重试",
+        "validationcode_one_hour": "验证码不正确，请在1小时后重试",
+        "validationcode_twentyfour_hours": "验证码不正确，请在 24 小时后重试",
+        "failed_loading_remotefile": "下载恢复文件失败，请重试",
+        "remote_restore_succeed": "您已成功验证您的云端密码，备份已经上传。 ",
+        "remote_restore_syncing_password": "为了统一备份密码，您想要将您的云端密码与本地密码同步吗？",
+        "cloud_backup_password_hint": "要解密云备份，请输入备份时使用的备份密码。"
+      }
+    },
+    "mask_scan": {
+      "scan_persona": "请扫描角色二维码",
+      "scan_all": "扫描角色或 walletConnect 二维码"
+    },
+    "wallet_connect": {
+      "wallet_connect": "WalletConnect",
+      "select_wallet": "选择钱包",
+      "scan_q_r_code": "扫描二维码",
+      "qr_code_tips": "使用支持 WalletConnect 的钱包扫码下面的二维码",
+      "tap_to_copy": "点击复制到剪贴板",
+      "no_wallets": "您还没有安装任何可用的 %s 钱包用于 walletConnect",
+      "connecting": "正在连接…",
+      "connect_success": "钱包成功连接到 Mask Network",
+      "disconnect": "断开连接",
+      "connection_fail": "连接失败。",
+      "could_not_switch_blockchain_network_title": "WalletConnect 不支持切换区块链网络",
+      "could_not_switch_blockchain_network_message": "请尝试使用本地钱包，然后再切换区块链网络",
+      "network_not_match": "当前网络 %s 与您正在连接的网络 %s 不同。您想要将切换当前网络为 %s 吗？",
+      "network_not_support": "Mask Network 目前不支持钱包网络 %s 。我们无法连接您的钱包。请手动切换您的钱包网络。",
+      "address_exist": "该钱包地址已经存在",
+      "replace_wallet_connect_wallet": "这个钱包地址已连接到 WaletConnect。导入这个钱包地址会自动断开 WaletConnect 账户的连接。"
+    },
+    "wallet_connect_server": {
+      "want_to_connect": "%s 想要连接到你的钱包",
+      "connected_apps": "已连接的应用",
+      "connect": "连接",
+      "wallet_connect_notification": "Wallet Connect 请求交易",
+      "switch_wallet": "切换钱包"
+    },
+    "backup": {
+      "remote_backup_actions_view": {
+        "tips": "已存在云端备份， 您可以选择在备份之前先合并这个云备份到您的本地数据，或者直接备份。"
+      },
+      "merge_to_local": {
+        "title": "合并后备份",
+        "merge_failed_message": "合并云端备份失败！"
+      },
+      "validation_code": "验证码",
+      "with_phone": "使用手机号码备份",
+      "with_email": "使用电子邮箱地址备份",
+      "tips_phone": "验证码已通过短信发送至 ",
+      "tips_email": "验证码已经通过电子邮件发送至 ",
+      "backup_verify_field_email": "电子邮件地址",
+      "backup_verify_field_phone": "手机号码",
+      "backup_verify_title_email": "通过电子邮件地址备份",
+      "backup_verify_title_phone": "通过手机号码备份",
+      "restore_created_date": "创建时间",
+      "restored_post": "加密的文章",
+      "restored_account": "关联账户",
+      "restored_persona": "角色",
+      "restored_files": "文件",
+      "restored_contacts": "联系人",
+      "restored_relations": "关系"
+    },
+    "open_red_package": {
+      "title": "红包",
+      "wallet": "钱包",
+      "claim": "认领",
+      "claiming": "认领中",
+      "switch_network": "切换网络",
+      "confirm_risk_warning": "确认风险提示",
+      "wrong_network": "网络错误",
+      "total": "总额",
+      "ends": "结束时间",
+      "from": "从: @",
+      "shares": "份额",
+      "on_going": "进行中",
+      "expired": "已过期",
+      "claimed": "已认领",
+      "refunded": "已退款",
+      "refund": "退款",
+      "empty": "空的",
+      "share_message_official": "朋友们，我刚刚在%s上领取了一个%s发送的红包，关注%s来领取这个红包。#mask_io #LuckyDrop %s",
+      "share_message_unsupport_platform": "朋友们，我刚刚在%s上领取了一个%s发送的红包"
+    },
+    "move_backup_data": {
+      "title": "请移动您的数据",
+      "description1": "我们检测到您的 Mask Network 的沙盒目录中可能有重要的备份文档(.pdf, .bin)。",
+      "description2": "当您删除  Mask App 时，这些文档也将被删除。",
+      "description3": "为了数据安全，请将您的数据移动到一个更安全的文件夹。"
+    },
+    "message_compose": {
+      "title": "发帖",
+      "encrypt": "加密",
+      "placeholder": "您想要加密什么信息？",
+      "Everyone": "所有人可见",
+      "only_me": "仅自己",
+      "special_contacts": "指定联系人可见"
     }
+  },
+  "chain": {
+    "short_name": {
+      "eth": "ETH",
+      "bsc": "BNB",
+      "dot": "DOT",
+      "polygon": "Polygon",
+      "arbitrum": "Arbitrum",
+      "xdai": "Gnosis",
+      "optimism": "Optimism"
+    },
+    "name": {
+      "eth": "Ethereum",
+      "bsc": "BNB Chain",
+      "dot": "Polkadot",
+      "polygon": "Polygon/Matic Network",
+      "arbitrum": "Arbitrum",
+      "xdai": "Gnosis",
+      "optimism": "Optimism"
+    }
+  },
+  "plugins": {
+    "file_service": {
+      "setting_title": "上传设置",
+      "service_title": "用户服务协议",
+      "other_option": "其它选项",
+      "arweave": "Arweave",
+      "ipfs": "IPFS",
+      "swarm": "Swarm",
+      "encrypt": "进行加密",
+      "mesoncdn": "使用Meson CDN",
+      "onboard": {
+        "step_one": "Arweave, IPFS 和 Swarm 去中心化文件存储。",
+        "step_two": "点击 [Settings] 选择协议并调整加密设置。",
+        "step_three": "上传您的文件进行永久存储，与好友分享。",
+        "step_four": "由 Mask Network 带给您的免费 Web3 文件服务。"
+      },
+      "local_file_source": {
+        "take_photos": "拍照",
+        "upload_photos": "上传照片",
+        "upload_file": "上传文件",
+        "upload_tips": "大小限制为10.5MB。\n上传无法取消。"
+      },
+      "failure_tip": "由于网络条件或其他问题，上传失败。",
+      "post": "分享",
+      "preparing": "准备中...",
+      "uploading": "正在上传...",
+      "uploaded": "已上传",
+      "faq": {
+        "what_is_file_service": "什么是 Web3 文件服务？",
+        "file_service": "Web3文件服务是一个去中心化的存储服务，用户可以以不可变和永久的方式将文件存储在区块链上。 Mask Network提供此服务的方式是使用信誉好的文件存储协议，包括IPFS、Arweeve、Swart 和 Meson 网络，支持类似的文件类型为 .pdf, .doc, .mp3, .mp4，最大文件格式为10.4MB。\n\n上传文件后，将生成一个嵌入了元数据的链接，包括在链上的文件存储位置。 请注意，任何有此链接的人都可以下载。 如果用户希望文件公开或在社交平台上加密，用户可以选择更改其文件的隐私设置。 这确保了用户对自己的文件和他们的存储方式拥有自主权，为去中心化的文件管理功能服务。",
+        "what_is_meson_cdn": "Meson CDN是什么？",
+        "meson_cdn": "作为一个去中心化的内容交付网络(CDN)，Meson CDN优化了文件和内容交付过程。 这项服务得到超过36 000个节点的奖励支持，以提供Arweeve Network上的内容。\n\n集成到Arweeve 网络作为存储层，Meson 网络作为一个集中于数据分布的缓存层。 与Cloudflare和Amazon Web Services等集中服务不同的是，Meson Network为那些想要发送或接收文件的个人提供了更便宜的替代办法。",
+        "what_is_arweave": "什么是 Arweave 网络？",
+        "arweave": "Arweeve Network 是一个轻量和可持续的文件存储协议。在Arweeve 上支付存储费一次允许终身访问Arweeve 的数据库和加密方案。",
+        "what_is_ipfs": "什么是 IPFS？",
+        "ipfs": "IPFS 是一种去中心化的转售协议，其基础是智能的存储合同和现收现付模式。 IPFS 为每个文件分配一个唯一的哈希值， 这样，即使2个文件的内容只存在1位的差异，散列值也会不同。",
+        "learn_more": "了解更多"
+      }
+    },
+    "policy": {
+      "reviewed": "我已审核",
+      "privacy": "隐私政策",
+      "and": "和",
+      "upload_terms": "服务条款.",
+      "start_upload": "立即上传"
+    },
+    "luckyDrop": {
+      "title": "红包",
+      "twitter_account": "realMaskNetwork",
+      "facebook_account": "masknetwork",
+      "twitter-or-facebook-template": "此推文使用#mask_io (@%s) 加密。📪🔑\n\n请安装 %s 进行解密。",
+      "social-media-template": "此推文使用#mask_io (@realMaskNetwork) 加密。📪🔑\n\n请安装 %s 进行解密。",
+      "twitter-or-facebook-redpacket-template": "使用 #mask_io 来认领这个红包！@%s %s",
+      "social-media-redpacket-template": "使用 #mask_io 来认领这个红包！@%s",
+      "plugin_red_packet_best_wishes": "祝好运！",
+      "buttons": {
+        "risk-warning": "确认风险提示",
+        "unlock-token": "批准 %@",
+        "unlocking-token": "授权中",
+        "create-persona": "创建角色",
+        "recover-persona": "恢复角色",
+        "average": "平均",
+        "random": "随机",
+        "insufficient-gas": "Gas 数量不足",
+        "insufficient-balance": "余额不足",
+        "exceed-max-quantity": "输入数量(最大：255)",
+        "best-wishes": "祝好运！",
+        "no-token": "选择 Token",
+        "no-account": "没有钱包",
+        "no-share": "输入份数",
+        "no-amount-per-share": "输入每份金额",
+        "no-total-amount": "请输入红包总金额",
+        "no-message": "输入附加消息",
+        "minimum-amount": "每个份额的最小金额为 %@ %@",
+        "send": "发送 %@"
+      },
+      "state": {
+        "pending": "确认中...",
+        "failed": "交易失败",
+        "success": "交易成功"
+      },
+      "confirm": {
+        "wallet_account": "钱包账户",
+        "attached_message": "附加信息",
+        "split_mode": "分享模式",
+        "share": "分享",
+        "amount_per_share": "单个份额",
+        "total_amount": "总金额",
+        "transaction_fee": "交易手续费",
+        "tips": "你可以在红包发送的24小时后提取红包余额。",
+        "title": "确认您的红包"
+      },
+      "alert": {
+        "message_no_account": "您不能选择 Token，因为没有钱包。"
+      },
+      "max": "最大",
+      "total-amount": "总数",
+      "amount-per-share": "单个份额",
+      "enter-quantity": "请输入红包个数",
+      "enter-message": "输入附加消息",
+      "transaction-fee": "交易手续费",
+      "end-time": "结束时间",
+      "claimed": "已认领",
+      "refund": "退款",
+      "token": "Token",
+      "nft": "NFT",
+      "select-social-title": "连接社交账户",
+      "select-social-description": "选择分享红包的社交账号。",
+      "share-title": "分享红包",
+      "share-connect-persona": "在分享您的红包之前，将您的 Persona 连接到社交媒体。",
+      "share-create-persona": "若要发送红包，请创建一个 Persona 来连接到您的社交账户。",
+      "quantity": "数量",
+      "max-quantity-error": "最大数量为255。",
+      "account": "账号",
+      "refund_tip": "在 %@ 之后退还未认领的红包",
+      "history_title": "历史记录",
+      "created": "创建"
+    }
+  }
 }
