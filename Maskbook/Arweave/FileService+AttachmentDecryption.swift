@@ -109,6 +109,15 @@ extension FileService {
         }
         let count = encryptedData.count
         let tagLengthDevided = tagLength / 8
+
+        if encryptedData.isEmpty {
+            throw "empty encryptedData"
+        }
+
+        guard tagLengthDevided > 1 else {
+            throw "invalid encryptedData structure"
+        }
+
         let tag = Array(encryptedData.bytes[count - tagLengthDevided ... count - 1])
         let gcm = GCM(iv: iv, authenticationTag: tag, mode: .combined)
         let aes = try AES(key: generatedKey, blockMode: gcm, padding: .noPadding)
