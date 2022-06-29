@@ -6,7 +6,6 @@
 //  Copyright © 2022 dimension. All rights reserved.
 //
 
-import CryptoKit
 import CryptoSwift
 import Foundation
 import SwiftMsgPack
@@ -54,7 +53,6 @@ extension AttachmentOptions {
         let aes = try AES(key: generatedKey, blockMode: gcm, padding: .noPadding)
         let encrypted = try aes.encrypt(self.block.bytes)
         let encryptedData = Data(encrypted)
-
         return encryptedData
     }
 
@@ -65,6 +63,8 @@ extension AttachmentOptions {
             let iv = try Crypto.randomData(length: 12)
             let encryptedData = try encrtypedData(for: passphrase, tagLength: tagLength, salt: salt, iv: iv)
 
+            let decryptedData = try AttachmentDecrypt.decryptData(encrypedData: encryptedData, key: passphrase, iv: Data(iv), tagLength: tagLength)
+            print(decryptedData)
             let algorithm: [String: Any] = [
                 "name": "AES-GCM",
                 "iv": Data(iv),
