@@ -325,6 +325,75 @@ extension Api_EncryptOption.Version: CaseIterable {
 
 #endif  // swift(>=4.2)
 
+public struct Api_JWK {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var crv: String = String()
+
+  public var ext: Bool = false
+
+  public var x: String = String()
+
+  public var y: String = String()
+
+  public var keyOps: [String] = []
+
+  public var kty: String = String()
+
+  public var d: String {
+    get {return _d ?? String()}
+    set {_d = newValue}
+  }
+  /// Returns true if `d` has been explicitly set.
+  public var hasD: Bool {return self._d != nil}
+  /// Clears the value of `d`. Subsequent reads from it will return its default value.
+  public mutating func clearD() {self._d = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _d: String? = nil
+}
+
+public struct Api_AesJWK {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var alg: String = String()
+
+  public var ext: Bool = false
+
+  public var k: String = String()
+
+  public var keyOps: [String] = []
+
+  public var kty: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Api_E2EEncryptParam {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var localKeyData: Data = Data()
+
+  public var target: Dictionary<String,Data> = [:]
+
+  public var authorPrivateKey: Data = Data()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Api_Coin: @unchecked Sendable {}
 extension Api_StoredKeyType: @unchecked Sendable {}
@@ -335,6 +404,9 @@ extension Api_StoredKeyInfo: @unchecked Sendable {}
 extension Api_StoredKeyAccountInfo: @unchecked Sendable {}
 extension Api_EncryptOption: @unchecked Sendable {}
 extension Api_EncryptOption.Version: @unchecked Sendable {}
+extension Api_JWK: @unchecked Sendable {}
+extension Api_AesJWK: @unchecked Sendable {}
+extension Api_E2EEncryptParam: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -522,4 +594,176 @@ extension Api_EncryptOption.Version: SwiftProtobuf._ProtoNameProviding {
     0: .same(proto: "V37"),
     1: .same(proto: "V38"),
   ]
+}
+
+extension Api_JWK: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".JWK"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "crv"),
+    3: .same(proto: "ext"),
+    4: .same(proto: "x"),
+    5: .same(proto: "y"),
+    6: .standard(proto: "key_ops"),
+    7: .same(proto: "kty"),
+    8: .same(proto: "d"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.crv) }()
+      case 3: try { try decoder.decodeSingularBoolField(value: &self.ext) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.x) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.y) }()
+      case 6: try { try decoder.decodeRepeatedStringField(value: &self.keyOps) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self.kty) }()
+      case 8: try { try decoder.decodeSingularStringField(value: &self._d) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.crv.isEmpty {
+      try visitor.visitSingularStringField(value: self.crv, fieldNumber: 1)
+    }
+    if self.ext != false {
+      try visitor.visitSingularBoolField(value: self.ext, fieldNumber: 3)
+    }
+    if !self.x.isEmpty {
+      try visitor.visitSingularStringField(value: self.x, fieldNumber: 4)
+    }
+    if !self.y.isEmpty {
+      try visitor.visitSingularStringField(value: self.y, fieldNumber: 5)
+    }
+    if !self.keyOps.isEmpty {
+      try visitor.visitRepeatedStringField(value: self.keyOps, fieldNumber: 6)
+    }
+    if !self.kty.isEmpty {
+      try visitor.visitSingularStringField(value: self.kty, fieldNumber: 7)
+    }
+    try { if let v = self._d {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 8)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Api_JWK, rhs: Api_JWK) -> Bool {
+    if lhs.crv != rhs.crv {return false}
+    if lhs.ext != rhs.ext {return false}
+    if lhs.x != rhs.x {return false}
+    if lhs.y != rhs.y {return false}
+    if lhs.keyOps != rhs.keyOps {return false}
+    if lhs.kty != rhs.kty {return false}
+    if lhs._d != rhs._d {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Api_AesJWK: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".AesJWK"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "alg"),
+    2: .same(proto: "ext"),
+    3: .same(proto: "k"),
+    4: .standard(proto: "key_ops"),
+    5: .same(proto: "kty"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.alg) }()
+      case 2: try { try decoder.decodeSingularBoolField(value: &self.ext) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.k) }()
+      case 4: try { try decoder.decodeRepeatedStringField(value: &self.keyOps) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.kty) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.alg.isEmpty {
+      try visitor.visitSingularStringField(value: self.alg, fieldNumber: 1)
+    }
+    if self.ext != false {
+      try visitor.visitSingularBoolField(value: self.ext, fieldNumber: 2)
+    }
+    if !self.k.isEmpty {
+      try visitor.visitSingularStringField(value: self.k, fieldNumber: 3)
+    }
+    if !self.keyOps.isEmpty {
+      try visitor.visitRepeatedStringField(value: self.keyOps, fieldNumber: 4)
+    }
+    if !self.kty.isEmpty {
+      try visitor.visitSingularStringField(value: self.kty, fieldNumber: 5)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Api_AesJWK, rhs: Api_AesJWK) -> Bool {
+    if lhs.alg != rhs.alg {return false}
+    if lhs.ext != rhs.ext {return false}
+    if lhs.k != rhs.k {return false}
+    if lhs.keyOps != rhs.keyOps {return false}
+    if lhs.kty != rhs.kty {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Api_E2EEncryptParam: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".E2EEncryptParam"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "localKeyData"),
+    2: .same(proto: "target"),
+    3: .same(proto: "authorPrivateKey"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.localKeyData) }()
+      case 2: try { try decoder.decodeMapField(fieldType: SwiftProtobuf._ProtobufMap<SwiftProtobuf.ProtobufString,SwiftProtobuf.ProtobufBytes>.self, value: &self.target) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.authorPrivateKey) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.localKeyData.isEmpty {
+      try visitor.visitSingularBytesField(value: self.localKeyData, fieldNumber: 1)
+    }
+    if !self.target.isEmpty {
+      try visitor.visitMapField(fieldType: SwiftProtobuf._ProtobufMap<SwiftProtobuf.ProtobufString,SwiftProtobuf.ProtobufBytes>.self, value: self.target, fieldNumber: 2)
+    }
+    if !self.authorPrivateKey.isEmpty {
+      try visitor.visitSingularBytesField(value: self.authorPrivateKey, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Api_E2EEncryptParam, rhs: Api_E2EEncryptParam) -> Bool {
+    if lhs.localKeyData != rhs.localKeyData {return false}
+    if lhs.target != rhs.target {return false}
+    if lhs.authorPrivateKey != rhs.authorPrivateKey {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
 }

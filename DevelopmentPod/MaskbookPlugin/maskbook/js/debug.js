@@ -747,11 +747,11 @@ const body = `\
 ## Environment
 
 User Agent: ${navigator.userAgent}
-Version: ${"v1.29.12-2348-g181e22679"}
+Version: ${"v1.29.12-2350-g43c1c2a66"}
 Tag Name: ${"v2.5.0"}
-Build Date: ${"2022-06-01T07:52:48.068Z"}
-Commit Hash: ${"181e22679"}
-Commit Date: ${"2022-06-01T07:46:29.000Z"}
+Build Date: ${"2022-06-10T07:34:58.455Z"}
+Commit Hash: ${"43c1c2a66"}
+Commit Date: ${"2022-06-10T07:28:19.000Z"}
 Remote URL: ${"git@github.com:DimensionDev/Maskbook.git"}
 Branch Name: ${"feat/mobile"}
 
@@ -782,11 +782,11 @@ var src = __webpack_require__(53242);
 
 const DEBUG_INFO = {
     'User Agent': navigator.userAgent,
-    'Mask Version': "v1.29.12-2348-g181e22679",
+    'Mask Version': "v1.29.12-2350-g43c1c2a66",
     'Build Date': process.env.channel_DATE,
     'Tag Name': "v2.5.0",
-    'Commit Hash': "181e22679",
-    'Commit Date': "2022-06-01T07:46:29.000Z",
+    'Commit Hash': "43c1c2a66",
+    'Commit Date': "2022-06-10T07:28:19.000Z",
     'Remote URL': "git@github.com:DimensionDev/Maskbook.git",
     'Branch Name': "feat/mobile",
     Dirty: false,
@@ -993,11 +993,11 @@ async function backupAll() {
     const payload = {
         buildInfo: {
             'user-agent': navigator.userAgent,
-            version: "v1.29.12-2348-g181e22679",
-            'build-date': "2022-06-01T07:52:48.068Z",
+            version: "v1.29.12-2350-g43c1c2a66",
+            'build-date': "2022-06-10T07:34:58.455Z",
             'tag-name': "v2.5.0",
-            'commit-hash': "181e22679",
-            'commit-date': "2022-06-01T07:46:29.000Z",
+            'commit-hash': "43c1c2a66",
+            'commit-date': "2022-06-10T07:28:19.000Z",
             'remote-url': "git@github.com:DimensionDev/Maskbook.git",
             'branch-name': "feat/mobile",
             dirty: false,
@@ -1057,7 +1057,7 @@ const log = {
     requestReplay: "production" === 'development'
 };
 const Services = {
-    Crypto: add(()=>Promise.all(/* import() */[__webpack_require__.e(6739), __webpack_require__.e(2943), __webpack_require__.e(7691), __webpack_require__.e(7075)]).then(__webpack_require__.bind(__webpack_require__, 67075))
+    Crypto: add(()=>Promise.all(/* import() */[__webpack_require__.e(6739), __webpack_require__.e(2943), __webpack_require__.e(5449), __webpack_require__.e(7075)]).then(__webpack_require__.bind(__webpack_require__, 67075))
     , 'Crypto'),
     Identity: add(()=>Promise.all(/* import() */[__webpack_require__.e(2698), __webpack_require__.e(3294), __webpack_require__.e(6739), __webpack_require__.e(4227), __webpack_require__.e(4544), __webpack_require__.e(5737), __webpack_require__.e(3883), __webpack_require__.e(6045), __webpack_require__.e(1077), __webpack_require__.e(8117), __webpack_require__.e(2943), __webpack_require__.e(5756), __webpack_require__.e(8492), __webpack_require__.e(7765), __webpack_require__.e(1305), __webpack_require__.e(5891), __webpack_require__.e(8936), __webpack_require__.e(6265), __webpack_require__.e(1246), __webpack_require__.e(7141), __webpack_require__.e(708), __webpack_require__.e(9447), __webpack_require__.e(7764), __webpack_require__.e(4859), __webpack_require__.e(8563), __webpack_require__.e(1064), __webpack_require__.e(7025)]).then(__webpack_require__.bind(__webpack_require__, 17865))
     , 'Identity'),
@@ -1075,7 +1075,7 @@ const Services = {
     , 'ThirdPartyPlugin')
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Services);
-const ServicesWithProgress = add(()=>Promise.all(/* import() */[__webpack_require__.e(7691), __webpack_require__.e(5114)]).then(__webpack_require__.bind(__webpack_require__, 45114))
+const ServicesWithProgress = add(()=>Promise.all(/* import() */[__webpack_require__.e(5449), __webpack_require__.e(5114)]).then(__webpack_require__.bind(__webpack_require__, 45114))
 , 'ServicesWithProgress', true);
 if (false) {}
 /**

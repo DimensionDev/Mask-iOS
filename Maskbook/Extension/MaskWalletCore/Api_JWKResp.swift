@@ -10,7 +10,7 @@ import Foundation
 import MaskWalletCore
 import SwiftyJSON
 
-extension Api_JWKResp {
+extension Api_JWK {
     var jsonString: String? {
         var json = JSON()
         json["crv"] = JSON(rawValue: crv) ?? []
@@ -23,7 +23,7 @@ extension Api_JWKResp {
     }
 }
 
-extension Api_AesJWKResp {
+extension Api_AesJWK {
     var jsonString: String? {
         var json = JSON()
         json["alg"] = JSON(rawValue: alg) ?? []

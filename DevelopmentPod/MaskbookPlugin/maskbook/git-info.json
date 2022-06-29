@@ -1,9 +1,9 @@
 {
-    "BUILD_DATE": "2022-06-01T07:53:01.847Z",
-    "VERSION": "v1.29.12-2348-g181e22679",
+    "BUILD_DATE": "2022-06-10T07:35:16.065Z",
+    "VERSION": "v1.29.12-2350-g43c1c2a66",
     "TAG_NAME": "v2.5.0",
-    "COMMIT_HASH": "181e22679",
-    "COMMIT_DATE": "2022-06-01T07:46:29.000Z",
+    "COMMIT_HASH": "43c1c2a66",
+    "COMMIT_DATE": "2022-06-10T07:28:19.000Z",
     "REMOTE_URL": "git@github.com:DimensionDev/Maskbook.git",
     "BRANCH_NAME": "feat/mobile",
     "DIRTY": false,

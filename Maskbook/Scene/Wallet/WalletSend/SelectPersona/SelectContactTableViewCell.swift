@@ -10,14 +10,13 @@ import UIKit
 import UStack
 
 class SelectContactTableViewCell: UITableViewCell {
-    
     lazy var bgView: UIView = {
         let view = UIView()
         view.backgroundColor = Asset.Colors.Background.normal.color
         view.layer.cornerRadius = 12
         view.clipsToBounds = true
         view.layer.borderColor = Asset.Colors.Background.normal.color.cgColor
-        view.layer.borderWidth = 1
+        view.layer.borderWidth = 0.5
         return view
     }()
     
@@ -38,7 +37,6 @@ class SelectContactTableViewCell: UITableViewCell {
     lazy var checkImageView: UIImageView = {
         let image = Asset.Icon.Cell.cellUncheck.image
         let view = UIImageView(image: image)
-        view.isHidden = true
         view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(equalToConstant: 24),
@@ -49,22 +47,26 @@ class SelectContactTableViewCell: UITableViewCell {
     
     lazy var arrowImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = Asset.Icon.Arrows.celllRight.image
+        imageView.image = Asset.Plugins.selectedArrow.image
+        NSLayoutConstraint.activate([
+            imageView.widthAnchor.constraint(equalToConstant: 12),
+            imageView.heightAnchor.constraint(equalToConstant: 12)
+        ])
         return imageView
     }()
     
-    private lazy var vStackView = VStackView(spacing: 2) {
+    private lazy var vStackView = VStackView {
         titleLabel
         contentLabel
     }
     
-    private lazy var hStackView = HStackView {
+    private lazy var hStackView = HStackView(alignment: .center) {
         Spacer(width: 14)
         checkImageView
+        Spacer(width: 10)
         vStackView
-        Spacer(width: 8)
         arrowImageView
+        Spacer(width: 14)
     }
     
     override func awakeFromNib() {
@@ -78,6 +80,7 @@ class SelectContactTableViewCell: UITableViewCell {
         setupUI()
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -92,11 +95,11 @@ class SelectContactTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func update(index :Int, selected: Bool, viewModel: SelectContactViewModel){
+    func update(index: Int, selected: Bool, viewModel: SelectContactViewModel) {
         titleLabel.text = viewModel.titles[index]
         contentLabel.text = viewModel.content[index]
         checkImageView.image = selected ? Asset.Icon.Cell.cellTwitterCheck.image : Asset.Icon.Cell.cellUncheck.image
-        bgView.layer.borderColor = selected ? Asset.Colors.Twitter.blue.color.cgColor :Asset.Colors.Twitter.second.color.cgColor
+        bgView.layer.borderColor = selected ? Asset.Colors.Twitter.blue.color.cgColor : Asset.Colors.Twitter.second.color.cgColor
         arrowImageView.isHidden = viewModel.cellTypes[index] == .normal
     }
     

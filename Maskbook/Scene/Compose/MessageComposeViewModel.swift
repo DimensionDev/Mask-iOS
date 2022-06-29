@@ -3,6 +3,10 @@ import BigInt
 import Combine
 import SwiftUI
 import web3swift
+import MaskWalletCore
+import CoreDataStack
+import WebExtension_Shim
+
 
 final class MessageComposeViewModel: ObservableObject {
     private var disposeBag = Set<AnyCancellable>()
@@ -73,6 +77,11 @@ final class MessageComposeViewModel: ObservableObject {
             print("message compose \(plugin) add did clicked")
         }
     }
+    func selectContactButtonClick() {
+        let viewModel = SelectContactViewModel()
+        viewModel.selectedContactType = recipient
+        mainCoordinator.present(scene: .composeSelectContact(viewModel: viewModel, delegate: self), transition: .panModel(animated: true))
+    }
 }
 
 extension MessageComposeViewModel {
@@ -83,26 +92,63 @@ extension MessageComposeViewModel {
     }
 
     func encryptContent() {
+        let isPublic = recipient == .everyone
         var authorKeyData: Data? = nil
+        var authorPrivateKeyData: Data?
+        var localKey: Data?
+        var e2eParam: WalletCoreHelper.EncryptPostE2EParam?
         if let personaRecord = personaManager.currentPersona.value {
             let persona = Persona(fromRecord: personaRecord)
             authorKeyData = persona?.publicKey?.getRawData()
+            authorPrivateKeyData = Data(base64URLEncoded: personaRecord.dKeyInPrivateKey)
+            if let validLocalKey = persona?.localKey?.k {
+                localKey = Data(base64URLEncoded: validLocalKey)
+            }
         }
-        let socialPlatform = personaManager.currentProfile.value?.socialPlatform
-        let authorId = personaManager.currentProfile.value?.identifier
+        let socialPlatform = personaManager.currentProfile.value?.socialPlatform ?? .twitter
+        let authorId: String? = personaManager.currentProfile.value?.identifier
             .flatMap { $0.clip(first: "person:".count) }
+        let authorName = authorId?.components(separatedBy: "/").last
+        if !isPublic {
+            guard let authorPrivateKeyData = authorPrivateKeyData,
+                  let localKey = localKey else {
+                // TODO: Error handling
+                return
+            }
+            var target = [String: Data]()
+            if case let .specialContacts(personaRecords) = recipient {
+                personaRecords.forEach {
+                    let publicKeyData = Persona(fromRecord: $0)?.publicKey?.getRawData()
+                    let profile = $0.linkedProfiles?.first(where: { _ in
+                        true
+                    }) as? ProfileRecord
+                    let identifier = profile?.identifier
+                    if let publicKeyData = publicKeyData,
+                       let identifier = identifier {
+                        target[identifier] = publicKeyData
+                    }
+                }
+            }
+            e2eParam = WalletCoreHelper.EncryptPostE2EParam(localKey: localKey, target: target, authorPrivateKey: authorPrivateKeyData)
+        }
 
-        guard let encrtypedMessage = try? WalletCoreHelper.encryptPost(
+        guard let encryptionResult = try? WalletCoreHelper.encryptPost(
+            isPublic: isPublic,
             content: message,
-            authorID: authorId,
+            authorID: authorName,
             authorKeyData: authorKeyData,
-            socialPlatForm: socialPlatform,
-            metas: pluginContents).get() else {
+            socialPlatform: socialPlatform,
+            metas: pluginContents,
+            e2eParam: e2eParam
+        ).get() else {
             // TODO: Error handling
             return
         }
 
-        let finalPostText = getShareText(encrtypedMessage: encrtypedMessage)
+        let finalPostText = getShareText(encrtypedMessage: encryptionResult.output)
+        if !isPublic {
+            publishE2EResult(encryptionResult, platform: socialPlatform)
+        }
         
         log.debug("\(finalPostText)", source: "share")
         // past final text to twitter compose
@@ -111,6 +157,48 @@ extension MessageComposeViewModel {
             maskSocialViewController?.openComposer(message: finalPostText.urlEncode() ?? "")
             maskSocialViewController?.dismiss(animated: true)
         }
+    }
+    
+    private func publishE2EResult(_ result: WalletCoreHelper.EncryptionResult,
+                                  platform: ProfileSocialPlatform) {
+        guard let postIVOrigin = result.postIdentifier.components(separatedBy: "/").last else {
+            return
+        }
+        let base64PostIV = postIVOrigin.replacingOccurrences(of: "|", with: "/")
+//        guard let postIVData = Data(base64Encoded: base64PostIV) else {
+//            return
+//        }
+        let networkHint = platform.url
+        typealias MWE2eResult = WebExtension.Encryption.PublishE2EResultMessage.Payload.EncryptionResultE2E
+        var e2eResult = [MWE2eResult]()
+        
+        for (identifier, v) in result.e2eResult {
+            let encryptPostKey = v.encryptedPostKeyData.base64EncodedString()
+            let ivToBePublished = v.iv?.base64EncodedString() ?? ""
+            let result = MWE2eResult(target: identifier, encryptedPostKey: encryptPostKey, ivToBePublished: ivToBePublished)
+            e2eResult.append(result)
+        }
+        let request = WebExtension.Encryption.PublishE2EResultMessage.withPayload {
+            .init(postIV: base64PostIV,
+                  networkHint: networkHint,
+                  e2eResult: e2eResult)
+        }
+        request
+            .eraseToAnyPublisher()
+            .sink { completion in
+                switch completion {
+                case let .failure(error):
+                    log.debug("set current identifier error \(String(describing: error))", source: "persona")
+                    
+                case .finished:
+                    log.debug("set current identifier finished", source: "persona")
+                }
+            } receiveValue: { result in
+                if let error = result.error {
+                    log.debug("set current identifier error \(String(describing: error.message))", source: "persona")
+                }
+            }
+            .store(in: &disposeBag)
     }
     
     private func getShareText(encrtypedMessage: String) -> String {
@@ -141,10 +229,10 @@ extension MessageComposeViewModel {
 }
 
 extension MessageComposeViewModel {
-    enum Recipient: String, Equatable, CaseIterable {
+    enum Recipient: Equatable, CaseIterable {
         case everyone
         case onlyMe
-        case specialContacts
+        case specialContacts([PersonaRecord])
 
         var title: String {
             switch self {
@@ -160,6 +248,10 @@ extension MessageComposeViewModel {
             case .onlyMe: return Asset.Images.Scene.Compose.onlyMe.name
             case .specialContacts: return Asset.Images.Scene.Compose.specialContacts.name
             }
+        }
+        
+        static var allCases: [MessageComposeViewModel.Recipient] {
+            [.everyone, .onlyMe, .specialContacts([])]
         }
     }
 }
@@ -178,3 +270,10 @@ extension String {
         return String(subs)
     }
 }
+
+extension MessageComposeViewModel: SelectComposeContactTypeDelegate {
+    func returnContactType(type: MessageComposeViewModel.Recipient){
+        recipient = type
+    }    
+}
+

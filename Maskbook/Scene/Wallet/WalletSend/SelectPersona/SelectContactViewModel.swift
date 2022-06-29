@@ -9,19 +9,21 @@
 import UIKit
 
 extension SelectContactViewModel {
-    enum cellType {
+    enum CellType {
         case normal
         case clickable
     }
 }
 
 class SelectContactViewModel: NSObject {
-    var titles: [String] = []
-    var content: [String] = []
-    var cellTypes: [cellType] = [.normal,.normal,.clickable]
-    var selectedIndex: Int = 0
-    
+    //l10n
+    let titles: [String] = ["Everyone","Only me","Specific Contacts"]
+    let content: [String] = ["Every twitter user can see.","Only I can see it.",""]
+    let cellTypes: [CellType] = [.normal,.normal,.clickable]
+    let contactTypes: [MessageComposeViewModel.Recipient] = [.everyone, .onlyMe, .specialContacts([])]
+    var selectedContactType: MessageComposeViewModel.Recipient = .everyone
+
     func select(index: Int) {
-         selectedIndex = index 
+        selectedContactType = contactTypes[index]
     }
 }

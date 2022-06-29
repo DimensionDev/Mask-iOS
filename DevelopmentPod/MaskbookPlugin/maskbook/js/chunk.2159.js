@@ -325,7 +325,7 @@ if (true) {
              * but webpack will do constant folding
              */ // @ts-ignore
         // eslint-disable-next-line no-useless-concat
-        __webpack_require__.e(/* import() */ 8699).then(__webpack_require__.bind(__webpack_require__, 98699)).then((x)=>x.MaskNetworkAPI
+        Promise.all(/* import() */[__webpack_require__.e(5449), __webpack_require__.e(8699)]).then(__webpack_require__.bind(__webpack_require__, 98699)).then((x)=>x.MaskNetworkAPI
         ), {
             ...options,
             channel: new iOSWebkitChannel()

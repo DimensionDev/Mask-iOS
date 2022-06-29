@@ -532,6 +532,7 @@ internal enum Asset {
     internal static let pluginArrow = ImageAsset(name: "Plugins/pluginArrow")
     internal static let quickSwap = ImageAsset(name: "Plugins/quickSwap")
     internal static let selected = ColorAsset(name: "Plugins/selected")
+    internal static let selectedArrow = ImageAsset(name: "Plugins/selectedArrow")
     internal static let setting = ImageAsset(name: "Plugins/setting")
     internal static let settingColor = ColorAsset(name: "Plugins/settingColor")
     internal static let snapshot = ImageAsset(name: "Plugins/snapshot")

@@ -46,7 +46,6 @@ final class LabsViewController: BaseViewController {
                         scene: .luckyDrop(source: .lab, callback: nil),
                         transition: .modal(animated: true)
                     )
-
                 case .fileService:
                     self.coordinator.present(
                         scene: .fileService,

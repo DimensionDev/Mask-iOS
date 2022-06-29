@@ -552,16 +552,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var json_stable_stringify__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(92304);
 /* harmony import */ var json_stable_stringify__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(json_stable_stringify__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _dimensiondev_kit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(28807);
-/* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(85646);
-/* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(85646);
+/* harmony import */ var _dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _masknet_shared_base__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(78144);
 /* harmony import */ var _social_network_define__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(57601);
 /* harmony import */ var _settings_settings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(80917);
 /* harmony import */ var _extension_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(5027);
 /* harmony import */ var _masknet_plugin_wallet__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(19841);
 /* harmony import */ var _plugins_Wallet_messages__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(84797);
-/* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(65506);
+/* harmony import */ var _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(65506);
 /* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(32196);
+/* harmony import */ var _background_network_gun_encryption_queryPostKey__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(25449);
+
 
 
 
@@ -831,7 +833,7 @@ const MaskNetworkAPI = {
     wallet_updateEthereumAccount: async ({ account  })=>{
         await _plugins_Wallet_messages__WEBPACK_IMPORTED_MODULE_7__/* .WalletRPC.updateAccount */ .V.updateAccount({
             account,
-            providerType: _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_9__/* .ProviderType.MaskWallet */ .lP.MaskWallet
+            providerType: _masknet_web3_shared_evm__WEBPACK_IMPORTED_MODULE_10__/* .ProviderType.MaskWallet */ .lP.MaskWallet
         });
         _masknet_plugin_wallet__WEBPACK_IMPORTED_MODULE_6__/* .WalletMessages.events.walletsUpdated.sendToAll */ .R$.events.walletsUpdated.sendToAll();
     },
@@ -890,11 +892,28 @@ const MaskNetworkAPI = {
                 })
             )
         };
+    },
+    publish_e2eResult_to_gun: async ({ postIV , networkHint , e2eResult  })=>{
+        const postIVData = new Uint8Array((0,_dimensiondev_kit__WEBPACK_IMPORTED_MODULE_1__/* .decodeArrayBuffer */ .xe)(postIV));
+        const receiverKeys = new _masknet_shared_base__WEBPACK_IMPORTED_MODULE_2__/* .IdentifierMap */ .qD(new Map(), _masknet_shared_base__WEBPACK_IMPORTED_MODULE_2__/* .ProfileIdentifier */ .WO);
+        for (const result of e2eResult){
+            const identifier = stringToProfileIdentifier(result.target);
+            const key = {
+                encryptedPostKey: new Uint8Array((0,_dimensiondev_kit__WEBPACK_IMPORTED_MODULE_1__/* .decodeArrayBuffer */ .xe)(result.encryptedPostKey)),
+                ivToBePublished: new Uint8Array((0,_dimensiondev_kit__WEBPACK_IMPORTED_MODULE_1__/* .decodeArrayBuffer */ .xe)(result.ivToBePublished)),
+                target: identifier
+            };
+            const fullfilledResult = {
+                value: key
+            };
+            receiverKeys.set(identifier, fullfilledResult);
+        }
+        await (0,_background_network_gun_encryption_queryPostKey__WEBPACK_IMPORTED_MODULE_9__/* .publishPostAESKey_version39Or38 */ .U4)(-38, postIVData, networkHint, receiverKeys);
     }
 };
 function wrapWithAssert(env, f) {
     return (...args)=>{
-        (0,_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_10__.assertEnvironment)(env);
+        (0,_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_11__.assertEnvironment)(env);
         return f(...args);
     };
 }
@@ -903,9 +922,9 @@ try {
         const key = _key;
         const f = MaskNetworkAPI[key];
         if (key.startsWith('SNSAdaptor_')) {
-            MaskNetworkAPI[key] = wrapWithAssert(_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_10__.Environment.ContentScript, f);
+            MaskNetworkAPI[key] = wrapWithAssert(_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_11__.Environment.ContentScript, f);
         } else {
-            MaskNetworkAPI[key] = wrapWithAssert(_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_10__.Environment.ManifestBackground, f);
+            MaskNetworkAPI[key] = wrapWithAssert(_dimensiondev_holoflows_kit__WEBPACK_IMPORTED_MODULE_11__.Environment.ManifestBackground, f);
         }
     }
 } catch  {}
