@@ -60,15 +60,18 @@ class CryptoTests: XCTestCase {
         let ex = expectation(description: "testFileServiceDecryption")
         Task.detached {
             let content = "sample".data(using: .utf8)!
-            let attachment = AttachmentOptions(
-                encrypted: false,
-                type: "text/html",
-                block: content,
-                name: "sample.text"
-            )
-            let data = try attachment.encryptedData()
-            let decryptData = try await FileService.decryptAttachment(data, key: attachment.key)
-            assert(decryptData == content)
+            for encryption in [true, false] {
+                let attachment = AttachmentOptions(
+                    encrypted: encryption,
+                    type: "text/html",
+                    block: content,
+                    name: "sample.text"
+                )
+                let data = try attachment.encryptedData()
+                let decryptData = try await FileService.decryptAttachment(data, key: attachment.key)
+                assert(decryptData == content)
+            }
+
             ex.fulfill()
         }
 
