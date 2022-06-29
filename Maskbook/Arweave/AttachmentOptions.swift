@@ -63,8 +63,6 @@ extension AttachmentOptions {
             let iv = try Crypto.randomData(length: 12)
             let encryptedData = try encrtypedData(for: passphrase, tagLength: tagLength, salt: salt, iv: iv)
 
-            let decryptedData = try AttachmentDecrypt.decryptData(encrypedData: encryptedData, key: passphrase, iv: Data(iv), tagLength: tagLength)
-            print(decryptedData)
             let algorithm: [String: Any] = [
                 "name": "AES-GCM",
                 "iv": Data(iv),

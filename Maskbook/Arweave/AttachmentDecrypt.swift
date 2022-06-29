@@ -59,30 +59,37 @@ class AttachmentDecrypt {
             guard let iv = algorithm["iv"] as? Data else {
                 throw "no iv in algorithm iv key"
             }
+            guard let salt = unpackedData["salt"] as? Data else {
+                throw "no salt in salt key"
+            }
             guard let tagLength = algorithm["tagLength"] as? UInt8 else {
                 throw "no tagLength in algorithm tagLength key"
             }
-            return try Self.decryptData(encrypedData: block,
+            return try Self.decryptData(encryptedData: block,
                                         key: passphrase,
-                                        iv: iv,
-                                        tagLength: Int(tagLength))
+                                        tagLength: Int(tagLength),
+                                        iv: iv.bytes,
+                                        salt: salt.bytes)
         } else {
             return block
         }
     }
 
-    static func decryptData(encrypedData: Data,
-                                    key: String,
-                                    iv: Data,
-                                    tagLength: Int) throws -> Data
+    static func decryptData(encryptedData: Data,
+                            key: String,
+                            tagLength: Int,
+                            iv: [UInt8],
+                            salt: [UInt8]) throws -> Data
     {
-        let salt = try Crypto.randomData(length: 8)
         guard let generatedKey = try Crypto.generateKeyWith(key.uint8Array, salt: salt) else {
             throw "generate key error"
         }
-        let gcm = GCM(iv: iv.bytes, tagLength: tagLength, mode: .combined)
+        let count = encryptedData.count
+        let tagLengthDevided = tagLength/8
+        let tag = Array(encryptedData.bytes[count - tagLengthDevided ... count - 1])
+        let gcm = GCM(iv: iv, authenticationTag: tag, mode: .combined)
         let aes = try AES(key: generatedKey, blockMode: gcm, padding: .noPadding)
-        let decrypted = try aes.decrypt(encrypedData.bytes)
+        let decrypted = try aes.decrypt(encryptedData.bytes)
         return Data(decrypted)
     }
 }
