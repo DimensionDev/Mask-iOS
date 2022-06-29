@@ -91,8 +91,8 @@ struct HappyRedPacketV4: ABIContract {
                                 continuation.resume(with: .failure(error))
                             } else {
                                 continuation.resume(with: .success(tx))
-                                mainCoordinator.dismissTopViewController()
                             }
+                            mainCoordinator.dismissTopViewController()
                         }
                         mainCoordinator.present(
                             scene: scene,
