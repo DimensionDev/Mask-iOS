@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _stablelib_ed25519__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(96068);
 /* harmony import */ var did_jwt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(80317);
-/* harmony import */ var fast_json_stable_stringify__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(34454);
+/* harmony import */ var fast_json_stable_stringify__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(75687);
 /* harmony import */ var fast_json_stable_stringify__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(fast_json_stable_stringify__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var rpc_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(34034);
 /* harmony import */ var uint8arrays__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(31605);

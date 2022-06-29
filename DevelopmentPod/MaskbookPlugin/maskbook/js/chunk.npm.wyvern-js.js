@@ -1,7 +1,7 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[2261],{
 
-/***/ 11921:
+/***/ 25529:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -52,7 +52,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var utils_1 = __webpack_require__(17839);
-var base_contract_1 = __webpack_require__(48514);
+var base_contract_1 = __webpack_require__(72519);
 var AuthenticatedProxyContract = /** @class */ (function (_super) {
     __extends(AuthenticatedProxyContract, _super);
     function AuthenticatedProxyContract(web3ContractInstance, defaults) {
@@ -400,7 +400,7 @@ exports.AuthenticatedProxyContract = AuthenticatedProxyContract;
 
 /***/ }),
 
-/***/ 48514:
+/***/ 72519:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -480,7 +480,7 @@ exports.BaseContract = BaseContract;
 
 /***/ }),
 
-/***/ 91408:
+/***/ 24980:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -531,7 +531,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var utils_1 = __webpack_require__(17839);
-var base_contract_1 = __webpack_require__(48514);
+var base_contract_1 = __webpack_require__(72519);
 var WyvernAtomicizerContract = /** @class */ (function (_super) {
     __extends(WyvernAtomicizerContract, _super);
     function WyvernAtomicizerContract(web3ContractInstance, defaults) {
@@ -591,7 +591,7 @@ exports.WyvernAtomicizerContract = WyvernAtomicizerContract;
 
 /***/ }),
 
-/***/ 96216:
+/***/ 48604:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -642,7 +642,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var utils_1 = __webpack_require__(17839);
-var base_contract_1 = __webpack_require__(48514);
+var base_contract_1 = __webpack_require__(72519);
 var WyvernDAOContract = /** @class */ (function (_super) {
     __extends(WyvernDAOContract, _super);
     function WyvernDAOContract(web3ContractInstance, defaults) {
@@ -1314,7 +1314,7 @@ exports.WyvernDAOContract = WyvernDAOContract;
 
 /***/ }),
 
-/***/ 27500:
+/***/ 45789:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -1365,7 +1365,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var utils_1 = __webpack_require__(17839);
-var base_contract_1 = __webpack_require__(48514);
+var base_contract_1 = __webpack_require__(72519);
 var WyvernExchangeContract = /** @class */ (function (_super) {
     __extends(WyvernExchangeContract, _super);
     function WyvernExchangeContract(web3ContractInstance, defaults) {
@@ -2208,7 +2208,7 @@ exports.WyvernExchangeContract = WyvernExchangeContract;
 
 /***/ }),
 
-/***/ 15478:
+/***/ 92103:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -2259,7 +2259,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var utils_1 = __webpack_require__(17839);
-var base_contract_1 = __webpack_require__(48514);
+var base_contract_1 = __webpack_require__(72519);
 var WyvernProxyRegistryContract = /** @class */ (function (_super) {
     __extends(WyvernProxyRegistryContract, _super);
     function WyvernProxyRegistryContract(web3ContractInstance, defaults) {
@@ -2733,7 +2733,7 @@ exports.WyvernProxyRegistryContract = WyvernProxyRegistryContract;
 
 /***/ }),
 
-/***/ 47395:
+/***/ 95508:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -2784,7 +2784,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var utils_1 = __webpack_require__(17839);
-var base_contract_1 = __webpack_require__(48514);
+var base_contract_1 = __webpack_require__(72519);
 var WyvernTokenContract = /** @class */ (function (_super) {
     __extends(WyvernTokenContract, _super);
     function WyvernTokenContract(web3ContractInstance, defaults) {
@@ -3519,18 +3519,18 @@ exports.WyvernTokenContract = WyvernTokenContract;
 
 /***/ }),
 
-/***/ 96577:
+/***/ 80684:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-var wyvernProtocol_1 = __webpack_require__(49257);
+var wyvernProtocol_1 = __webpack_require__(73484);
 exports.WyvernProtocol = wyvernProtocol_1.WyvernProtocol;
 //# sourceMappingURL=index.js.map
 
 /***/ }),
 
-/***/ 77910:
+/***/ 55798:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -3616,7 +3616,7 @@ exports.schemas = {
 
 /***/ }),
 
-/***/ 87265:
+/***/ 40667:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -3689,7 +3689,7 @@ var FunctionOutputKind;
 
 /***/ }),
 
-/***/ 40444:
+/***/ 65402:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -3740,7 +3740,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var assert_1 = __webpack_require__(55254);
 var _ = __webpack_require__(39378);
-var signature_utils_1 = __webpack_require__(47710);
+var signature_utils_1 = __webpack_require__(86473);
 exports.assert = __assign({}, assert_1.assert, { isValidSignature: function (orderHash, ecSignature, signerAddress) {
         var isValidSignature = signature_utils_1.signatureUtils.isValidSignature(orderHash, ecSignature, signerAddress);
         this.assert(isValidSignature, "Expected order with hash '" + orderHash + "' to have a valid signature");
@@ -3779,7 +3779,7 @@ exports.assert = __assign({}, assert_1.assert, { isValidSignature: function (ord
 
 /***/ }),
 
-/***/ 12463:
+/***/ 79597:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -3817,7 +3817,7 @@ exports.atomicizerABI = [
 
 /***/ }),
 
-/***/ 90187:
+/***/ 47892:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -3940,18 +3940,18 @@ exports.authenticatedProxyABI = [
 
 /***/ }),
 
-/***/ 8256:
+/***/ 26273:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-var atomicizerABI_1 = __webpack_require__(12463);
-var authenticatedProxyABI_1 = __webpack_require__(90187);
-var daoABI_1 = __webpack_require__(66149);
-var deployed_1 = __webpack_require__(35601);
-var exchangeABI_1 = __webpack_require__(58918);
-var proxyRegistryABI_1 = __webpack_require__(48636);
-var tokenABI_1 = __webpack_require__(81184);
+var atomicizerABI_1 = __webpack_require__(79597);
+var authenticatedProxyABI_1 = __webpack_require__(47892);
+var daoABI_1 = __webpack_require__(73554);
+var deployed_1 = __webpack_require__(83766);
+var exchangeABI_1 = __webpack_require__(97968);
+var proxyRegistryABI_1 = __webpack_require__(36898);
+var tokenABI_1 = __webpack_require__(3533);
 exports.constants = {
     NULL_ADDRESS: '0x0000000000000000000000000000000000000000',
     INVALID_JUMP_PATTERN: 'invalid JUMP at',
@@ -3971,7 +3971,7 @@ exports.constants = {
 
 /***/ }),
 
-/***/ 66149:
+/***/ 73554:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -4699,7 +4699,7 @@ exports.daoABI = [
 
 /***/ }),
 
-/***/ 58437:
+/***/ 77796:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -4741,8 +4741,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var _ = __webpack_require__(39378);
-var types_1 = __webpack_require__(87265);
-var constants_1 = __webpack_require__(8256);
+var types_1 = __webpack_require__(40667);
+var constants_1 = __webpack_require__(26273);
 var contractCallErrorTransformer = function (error) {
     if (_.includes(error.message, constants_1.constants.INVALID_JUMP_PATTERN)) {
         return new Error(types_1.WyvernProtocolError.InvalidJump);
@@ -4830,7 +4830,7 @@ exports.decorators = {
 
 /***/ }),
 
-/***/ 35601:
+/***/ 83766:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -4890,7 +4890,7 @@ exports.deployed = {
 
 /***/ }),
 
-/***/ 58918:
+/***/ 97968:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -6097,7 +6097,7 @@ exports.exchangeABI = [
 
 /***/ }),
 
-/***/ 48636:
+/***/ 36898:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -6364,7 +6364,7 @@ exports.proxyRegistryABI = [
 
 /***/ }),
 
-/***/ 47710:
+/***/ 86473:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -6414,7 +6414,7 @@ exports.signatureUtils = {
 
 /***/ }),
 
-/***/ 81184:
+/***/ 3533:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -7163,7 +7163,7 @@ exports.tokenABI = [
 
 /***/ }),
 
-/***/ 64454:
+/***/ 36676:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
@@ -7172,10 +7172,10 @@ exports.tokenABI = [
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var utils_1 = __webpack_require__(17839);
 var BN = __webpack_require__(28891);
-var ethABI = __webpack_require__(60843);
+var ethABI = __webpack_require__(10734);
 var ethUtil = __webpack_require__(95906);
 var _ = __webpack_require__(39378);
-var types_1 = __webpack_require__(87265);
+var types_1 = __webpack_require__(40667);
 exports.utils = {
     /**
      * Converts BigNumber instance to BN
@@ -7246,7 +7246,7 @@ exports.utils = {
 
 /***/ }),
 
-/***/ 49257:
+/***/ 73484:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
@@ -7304,22 +7304,22 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 var json_schemas_1 = __webpack_require__(31373);
 var utils_1 = __webpack_require__(17839);
 var web3_wrapper_1 = __webpack_require__(34408);
-var ethABI = __webpack_require__(60843);
+var ethABI = __webpack_require__(10734);
 var ethUtil = __webpack_require__(95906);
 var _ = __webpack_require__(39378);
-var authenticated_proxy_1 = __webpack_require__(11921);
-var wyvern_atomicizer_1 = __webpack_require__(91408);
-var wyvern_d_a_o_1 = __webpack_require__(96216);
-var wyvern_exchange_1 = __webpack_require__(27500);
-var wyvern_proxy_registry_1 = __webpack_require__(15478);
-var wyvern_token_1 = __webpack_require__(47395);
-var schemas_1 = __webpack_require__(77910);
-var types_1 = __webpack_require__(87265);
-var assert_1 = __webpack_require__(40444);
-var constants_1 = __webpack_require__(8256);
-var decorators_1 = __webpack_require__(58437);
-var signature_utils_1 = __webpack_require__(47710);
-var utils_2 = __webpack_require__(64454);
+var authenticated_proxy_1 = __webpack_require__(25529);
+var wyvern_atomicizer_1 = __webpack_require__(24980);
+var wyvern_d_a_o_1 = __webpack_require__(48604);
+var wyvern_exchange_1 = __webpack_require__(45789);
+var wyvern_proxy_registry_1 = __webpack_require__(92103);
+var wyvern_token_1 = __webpack_require__(95508);
+var schemas_1 = __webpack_require__(55798);
+var types_1 = __webpack_require__(40667);
+var assert_1 = __webpack_require__(65402);
+var constants_1 = __webpack_require__(26273);
+var decorators_1 = __webpack_require__(77796);
+var signature_utils_1 = __webpack_require__(86473);
+var utils_2 = __webpack_require__(36676);
 var WyvernProtocol = /** @class */ (function () {
     function WyvernProtocol(provider, config) {
         assert_1.assert.isWeb3Provider('provider', provider);
@@ -7737,7 +7737,7 @@ exports.WyvernProtocol = WyvernProtocol;
 
 /***/ }),
 
-/***/ 85862:
+/***/ 18610:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -7817,7 +7817,7 @@ exports.BaseContract = BaseContract;
 
 /***/ }),
 
-/***/ 41788:
+/***/ 4616:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -7868,7 +7868,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var utils_1 = __webpack_require__(17839);
-var base_contract_1 = __webpack_require__(85862);
+var base_contract_1 = __webpack_require__(18610);
 var WyvernAtomicizerContract = /** @class */ (function (_super) {
     __extends(WyvernAtomicizerContract, _super);
     function WyvernAtomicizerContract(web3ContractInstance, defaults) {
@@ -7928,7 +7928,7 @@ exports.WyvernAtomicizerContract = WyvernAtomicizerContract;
 
 /***/ }),
 
-/***/ 18070:
+/***/ 60614:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -7979,7 +7979,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var utils_1 = __webpack_require__(17839);
-var base_contract_1 = __webpack_require__(85862);
+var base_contract_1 = __webpack_require__(18610);
 var WyvernDAOContract = /** @class */ (function (_super) {
     __extends(WyvernDAOContract, _super);
     function WyvernDAOContract(web3ContractInstance, defaults) {
@@ -8651,7 +8651,7 @@ exports.WyvernDAOContract = WyvernDAOContract;
 
 /***/ }),
 
-/***/ 24724:
+/***/ 47532:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -8702,7 +8702,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var utils_1 = __webpack_require__(17839);
-var base_contract_1 = __webpack_require__(85862);
+var base_contract_1 = __webpack_require__(18610);
 var WyvernExchangeContract = /** @class */ (function (_super) {
     __extends(WyvernExchangeContract, _super);
     function WyvernExchangeContract(web3ContractInstance, defaults) {
@@ -9545,7 +9545,7 @@ exports.WyvernExchangeContract = WyvernExchangeContract;
 
 /***/ }),
 
-/***/ 30586:
+/***/ 21028:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -9596,7 +9596,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var utils_1 = __webpack_require__(17839);
-var base_contract_1 = __webpack_require__(85862);
+var base_contract_1 = __webpack_require__(18610);
 var WyvernProxyRegistryContract = /** @class */ (function (_super) {
     __extends(WyvernProxyRegistryContract, _super);
     function WyvernProxyRegistryContract(web3ContractInstance, defaults) {
@@ -10070,7 +10070,7 @@ exports.WyvernProxyRegistryContract = WyvernProxyRegistryContract;
 
 /***/ }),
 
-/***/ 30814:
+/***/ 89842:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -10121,7 +10121,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var utils_1 = __webpack_require__(17839);
-var base_contract_1 = __webpack_require__(85862);
+var base_contract_1 = __webpack_require__(18610);
 var WyvernTokenContract = /** @class */ (function (_super) {
     __extends(WyvernTokenContract, _super);
     function WyvernTokenContract(web3ContractInstance, defaults) {
@@ -10856,18 +10856,18 @@ exports.WyvernTokenContract = WyvernTokenContract;
 
 /***/ }),
 
-/***/ 20544:
+/***/ 98306:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-var wyvernProtocol_1 = __webpack_require__(74526);
+var wyvernProtocol_1 = __webpack_require__(71103);
 exports.WyvernProtocol = wyvernProtocol_1.WyvernProtocol;
 //# sourceMappingURL=index.js.map
 
 /***/ }),
 
-/***/ 48731:
+/***/ 22175:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -10953,7 +10953,7 @@ exports.schemas = {
 
 /***/ }),
 
-/***/ 26126:
+/***/ 94786:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -11026,7 +11026,7 @@ var FunctionOutputKind;
 
 /***/ }),
 
-/***/ 29:
+/***/ 16269:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -11077,7 +11077,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var assert_1 = __webpack_require__(55254);
 var _ = __webpack_require__(39378);
-var signature_utils_1 = __webpack_require__(65381);
+var signature_utils_1 = __webpack_require__(62583);
 exports.assert = __assign({}, assert_1.assert, { isValidSignature: function (orderHash, ecSignature, signerAddress) {
         var isValidSignature = signature_utils_1.signatureUtils.isValidSignature(orderHash, ecSignature, signerAddress);
         this.assert(isValidSignature, "Expected order with hash '" + orderHash + "' to have a valid signature");
@@ -11116,7 +11116,7 @@ exports.assert = __assign({}, assert_1.assert, { isValidSignature: function (ord
 
 /***/ }),
 
-/***/ 38569:
+/***/ 88507:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -11154,17 +11154,17 @@ exports.atomicizerABI = [
 
 /***/ }),
 
-/***/ 34740:
+/***/ 7980:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-var atomicizerABI_1 = __webpack_require__(38569);
-var daoABI_1 = __webpack_require__(72283);
-var deployed_1 = __webpack_require__(40620);
-var exchangeABI_1 = __webpack_require__(74012);
-var proxyRegistryABI_1 = __webpack_require__(44214);
-var tokenABI_1 = __webpack_require__(10649);
+var atomicizerABI_1 = __webpack_require__(88507);
+var daoABI_1 = __webpack_require__(36625);
+var deployed_1 = __webpack_require__(6921);
+var exchangeABI_1 = __webpack_require__(51191);
+var proxyRegistryABI_1 = __webpack_require__(96829);
+var tokenABI_1 = __webpack_require__(54256);
 exports.constants = {
     NULL_ADDRESS: '0x0000000000000000000000000000000000000000',
     INVALID_JUMP_PATTERN: 'invalid JUMP at',
@@ -11183,7 +11183,7 @@ exports.constants = {
 
 /***/ }),
 
-/***/ 72283:
+/***/ 36625:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -11911,7 +11911,7 @@ exports.daoABI = [
 
 /***/ }),
 
-/***/ 92670:
+/***/ 43202:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -11953,8 +11953,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var _ = __webpack_require__(39378);
-var types_1 = __webpack_require__(26126);
-var constants_1 = __webpack_require__(34740);
+var types_1 = __webpack_require__(94786);
+var constants_1 = __webpack_require__(7980);
 var contractCallErrorTransformer = function (error) {
     if (_.includes(error.message, constants_1.constants.INVALID_JUMP_PATTERN)) {
         return new Error(types_1.WyvernProtocolError.InvalidJump);
@@ -12042,7 +12042,7 @@ exports.decorators = {
 
 /***/ }),
 
-/***/ 40620:
+/***/ 6921:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -12102,7 +12102,7 @@ exports.deployed = {
 
 /***/ }),
 
-/***/ 74012:
+/***/ 51191:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -13309,7 +13309,7 @@ exports.exchangeABI = [
 
 /***/ }),
 
-/***/ 44214:
+/***/ 96829:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -13576,7 +13576,7 @@ exports.proxyRegistryABI = [
 
 /***/ }),
 
-/***/ 65381:
+/***/ 62583:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -13626,7 +13626,7 @@ exports.signatureUtils = {
 
 /***/ }),
 
-/***/ 10649:
+/***/ 54256:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -14375,7 +14375,7 @@ exports.tokenABI = [
 
 /***/ }),
 
-/***/ 82378:
+/***/ 70018:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
@@ -14384,10 +14384,10 @@ exports.tokenABI = [
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var utils_1 = __webpack_require__(17839);
 var BN = __webpack_require__(28891);
-var ethABI = __webpack_require__(60843);
+var ethABI = __webpack_require__(10734);
 var ethUtil = __webpack_require__(95906);
 var _ = __webpack_require__(39378);
-var types_1 = __webpack_require__(26126);
+var types_1 = __webpack_require__(94786);
 exports.utils = {
     /**
      * Converts BigNumber instance to BN
@@ -14458,7 +14458,7 @@ exports.utils = {
 
 /***/ }),
 
-/***/ 74526:
+/***/ 71103:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
@@ -14516,21 +14516,21 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 var json_schemas_1 = __webpack_require__(31373);
 var utils_1 = __webpack_require__(17839);
 var web3_wrapper_1 = __webpack_require__(34408);
-var ethABI = __webpack_require__(60843);
+var ethABI = __webpack_require__(10734);
 var ethUtil = __webpack_require__(95906);
 var _ = __webpack_require__(39378);
-var types_1 = __webpack_require__(26126);
-var schemas_1 = __webpack_require__(48731);
-var assert_1 = __webpack_require__(29);
-var constants_1 = __webpack_require__(34740);
-var decorators_1 = __webpack_require__(92670);
-var signature_utils_1 = __webpack_require__(65381);
-var utils_2 = __webpack_require__(82378);
-var wyvern_atomicizer_1 = __webpack_require__(41788);
-var wyvern_d_a_o_1 = __webpack_require__(18070);
-var wyvern_exchange_1 = __webpack_require__(24724);
-var wyvern_proxy_registry_1 = __webpack_require__(30586);
-var wyvern_token_1 = __webpack_require__(30814);
+var types_1 = __webpack_require__(94786);
+var schemas_1 = __webpack_require__(22175);
+var assert_1 = __webpack_require__(16269);
+var constants_1 = __webpack_require__(7980);
+var decorators_1 = __webpack_require__(43202);
+var signature_utils_1 = __webpack_require__(62583);
+var utils_2 = __webpack_require__(70018);
+var wyvern_atomicizer_1 = __webpack_require__(4616);
+var wyvern_d_a_o_1 = __webpack_require__(60614);
+var wyvern_exchange_1 = __webpack_require__(47532);
+var wyvern_proxy_registry_1 = __webpack_require__(21028);
+var wyvern_token_1 = __webpack_require__(89842);
 var WyvernProtocol = /** @class */ (function () {
     function WyvernProtocol(provider, config) {
         assert_1.assert.isWeb3Provider('provider', provider);

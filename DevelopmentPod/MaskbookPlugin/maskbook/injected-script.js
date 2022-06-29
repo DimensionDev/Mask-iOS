@@ -59,34 +59,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     const { parse, stringify } = JSON;
     const { isArray } = Array;
     function encodeEvent(key, args) {
@@ -243,7 +215,6 @@
             const data = await promise();
             sendEvent('resolvePromise', id, data);
         } catch (error) {
-            // TODO:
             sendEvent('rejectPromise', id, getError(error));
         }
     }
@@ -472,6 +443,8 @@
         dispatchEventRaw(getDocumentActiveElement(), e, { clipboardData: dt });
     }
 
+    function _optionalChain$1(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }
+
     const hasListened = { __proto__: null };
     const { has } = Reflect;
     const { Promise: Promise$1, setTimeout: setTimeout$1 } = window;
@@ -483,14 +456,27 @@
         const fragments = apply(split, path, ['.' ]);
         let result = window;
         while (fragments.length !== 0) {
-            const key = apply(shift, fragments, []);
-            result = key ? result[key] : result;
+            try {
+                const key = apply(shift, fragments, []);
+                result = key ? result[key] : result;
+            } catch (e) {
+                return
+            }
         }
         return result
     }
 
     function access(path, id, property) {
-        handlePromise(id, () => read(path)[property]);
+        handlePromise(id, () => {
+            const item = read(path)[property];
+
+            // the public key cannot transfer correctly between pages, since stringify it manually
+            if (path === 'solflare' && property === 'publicKey') {
+                return item.toBase58()
+            }
+
+            return item
+        });
     }
 
     function callRequest(path, id, request) {
@@ -504,19 +490,25 @@
     function bindEvent(path, bridgeEvent, event) {
         if (hasListened[event]) return
         hasListened[event] = true;
-        read(path).on(
+        _optionalChain$1([read, 'call', _ => _(path), 'optionalAccess', _2 => _2.on, 'call', _3 => _3(
             event,
             clone_into((...args) => {
-                sendEvent(bridgeEvent, event, args);
+                // TODO: type unsound
+                sendEvent(bridgeEvent, path, event, args);
             }),
-        );
+        )]);
     }
 
     function untilInner(name) {
         if (has(window, name)) return apply(resolve, Promise$1, [true])
-        return new Promise$1((r) => {
+
+        let restCheckTimes = 150; // 30s
+
+        return new Promise$1((resolve) => {
             function check() {
-                if (has(window, name)) return r(true)
+                restCheckTimes -= 1;
+                if (restCheckTimes < 0) return
+                if (has(window, name)) return resolve(true)
                 apply(setTimeout$1, window, [check, 200]);
             }
             check();
@@ -606,43 +598,19 @@
             case 'resolvePromise':
                 return
 
-            // solana
-            case 'solanaBridgeRequestListen':
-                return apply(bindEvent, null, ['solana', 'solanaBridgeOnEvent', ...r[1]])
-            case 'solanaBridgeExecute':
-                return apply(execute, null, [...r[1]])
-            case 'solanaBridgeSendRequest':
-                return apply(callRequest, null, ['solana', ...r[1]])
-            case 'solanaBridgePrimitiveAccess':
-                return apply(access, null, ['solana', ...r[1]])
-            case 'untilSolanaBridgeOnline':
-                return apply(until, null, ['solana', ...r[1]])
-            case 'solanaBridgeOnEvent':
+            // web3
+            case 'web3BridgeBindEvent':
+                return apply(bindEvent, null, r[1])
+            case 'web3BridgeEmitEvent':
                 return
-
-            // ethereum
-            case 'ethBridgeRequestListen':
-                return apply(bindEvent, null, ['ethereum', 'ethBridgeOnEvent', ...r[1]])
-            case 'ethBridgeSendRequest':
-                return apply(callRequest, null, ['ethereum', ...r[1]])
-            case 'ethBridgePrimitiveAccess':
-                return apply(access, null, ['ethereum', ...r[1]])
-            case 'untilEthBridgeOnline':
-                return apply(until, null, ['ethereum', ...r[1]])
-            case 'ethBridgeOnEvent':
-                return
-
-            // coin98
-            case 'coin98BridgeRequestListen':
-                return apply(bindEvent, null, ['coin98.provider', 'coin98BridgeOnEvent', ...r[1]])
-            case 'coin98BridgeSendRequest':
-                return apply(callRequest, null, ['coin98.provider', ...r[1]])
-            case 'coin98BridgePrimitiveAccess':
-                return apply(access, null, ['coin98.provider', ...r[1]])
-            case 'untilCoin98BridgeOnline':
-                return apply(until, null, ['coin98', ...r[1]])
-            case 'coin98BridgeOnEvent':
-                return
+            case 'web3BridgeSendRequest':
+                return apply(callRequest, null, r[1])
+            case 'web3BridgePrimitiveAccess':
+                return apply(access, null, r[1])
+            case 'web3UntilBridgeOnline':
+                return apply(until, null, r[1])
+            case 'web3BridgeExecute':
+                return apply(execute, null, r[1])
 
             default:
                 const neverEvent = r[0];

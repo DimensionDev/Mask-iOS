@@ -1,14 +1,14 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[4586],{
 
-/***/ 95878:
+/***/ 51344:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "a": () => (/* binding */ I18nextProvider)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(86248);
-/* harmony import */ var _context__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(60147);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(58757);
+/* harmony import */ var _context__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(94282);
 
 
 function I18nextProvider(_ref) {
@@ -28,7 +28,7 @@ function I18nextProvider(_ref) {
 
 /***/ }),
 
-/***/ 31008:
+/***/ 62266:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -38,11 +38,11 @@ function I18nextProvider(_ref) {
 /* harmony import */ var _babel_runtime_helpers_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(53767);
 /* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(68789);
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(28076);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(86248);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(58757);
 /* harmony import */ var html_parse_stringify__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(883);
 /* harmony import */ var html_escaper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(15333);
-/* harmony import */ var _context__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(60147);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3603);
+/* harmony import */ var _context__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(94282);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(72418);
 
 
 
@@ -322,7 +322,7 @@ function Trans(_ref) {
 
 /***/ }),
 
-/***/ 60147:
+/***/ 94282:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -336,7 +336,7 @@ function Trans(_ref) {
 /* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(67585);
 /* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(57517);
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(28076);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(86248);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(58757);
 
 
 
@@ -435,7 +435,7 @@ function getInitialProps() {
 
 /***/ }),
 
-/***/ 43966:
+/***/ 43133:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -443,9 +443,9 @@ function getInitialProps() {
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(80046);
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(28076);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(86248);
-/* harmony import */ var _context__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(60147);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3603);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(58757);
+/* harmony import */ var _context__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(94282);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(72418);
 
 
 
@@ -554,7 +554,7 @@ function useTranslation(ns) {
 
 /***/ }),
 
-/***/ 3603:
+/***/ 72418:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -606,12 +606,6 @@ function loadNamespaces(i18n, ns, cb) {
 
 function oldI18nextHasLoadedNamespace(ns, i18n) {
   var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
-  if (!i18n.languages || !i18n.languages.length) {
-    warnOnce('i18n.languages were undefined or empty', i18n.languages);
-    return true;
-  }
-
   var lng = i18n.languages[0];
   var fallbackLng = i18n.options ? i18n.options.fallbackLng : false;
   var lastLng = i18n.languages[i18n.languages.length - 1];
@@ -631,6 +625,12 @@ function oldI18nextHasLoadedNamespace(ns, i18n) {
 
 function hasLoadedNamespace(ns, i18n) {
   var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+  if (!i18n.languages || !i18n.languages.length) {
+    warnOnce('i18n.languages were undefined or empty', i18n.languages);
+    return true;
+  }
+
   var isNewerI18next = i18n.options.ignoreJSONStructure !== undefined;
 
   if (!isNewerI18next) {

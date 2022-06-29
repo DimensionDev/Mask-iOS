@@ -1,6 +1,6 @@
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[6191],{
 
-/***/ 58379:
+/***/ 28881:
 /***/ (function(module) {
 
 (function (global, factory) {

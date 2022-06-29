@@ -7,20 +7,20 @@
 var __webpack_unused_export__;
 
 
-var _interopRequireDefault = __webpack_require__(45914);
+var _interopRequireDefault = __webpack_require__(89837);
 
 __webpack_unused_export__ = ({
   value: true
 });
 exports.K = void 0;
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(68566));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(33250));
 
-var _inherits2 = _interopRequireDefault(__webpack_require__(71212));
+var _inherits2 = _interopRequireDefault(__webpack_require__(31190));
 
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(95056));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(76707));
 
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(21618));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(24752));
 
 var _websocket = _interopRequireDefault(__webpack_require__(80778));
 
@@ -76,28 +76,28 @@ exports.K = Client;
  */
 
 
-var _interopRequireDefault = __webpack_require__(45914);
+var _interopRequireDefault = __webpack_require__(89837);
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports["default"] = void 0;
 
-var _regenerator = _interopRequireDefault(__webpack_require__(54238));
+var _regenerator = _interopRequireDefault(__webpack_require__(62699));
 
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(65765));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(61576));
 
-var _typeof2 = _interopRequireDefault(__webpack_require__(40018));
+var _typeof2 = _interopRequireDefault(__webpack_require__(75684));
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(68566));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(33250));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(23539));
+var _createClass2 = _interopRequireDefault(__webpack_require__(96840));
 
-var _inherits2 = _interopRequireDefault(__webpack_require__(71212));
+var _inherits2 = _interopRequireDefault(__webpack_require__(31190));
 
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(95056));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(76707));
 
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(21618));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(24752));
 
 var _eventemitter = __webpack_require__(21883);
 
@@ -563,22 +563,22 @@ exports["default"] = CommonClient;
  */
 
 
-var _interopRequireDefault = __webpack_require__(45914);
+var _interopRequireDefault = __webpack_require__(89837);
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports["default"] = _default;
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(68566));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(33250));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(23539));
+var _createClass2 = _interopRequireDefault(__webpack_require__(96840));
 
-var _inherits2 = _interopRequireDefault(__webpack_require__(71212));
+var _inherits2 = _interopRequireDefault(__webpack_require__(31190));
 
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(95056));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(76707));
 
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(21618));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(24752));
 
 var _eventemitter = __webpack_require__(21883);
 

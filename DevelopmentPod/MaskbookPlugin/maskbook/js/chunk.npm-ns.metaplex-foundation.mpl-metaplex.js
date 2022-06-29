@@ -8,7 +8,7 @@
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.MetaplexProgram = exports.MetaplexKey = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 var MetaplexKey;
 (function (MetaplexKey) {
     MetaplexKey[MetaplexKey["Uninitialized"] = 0] = "Uninitialized";
@@ -58,7 +58,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AuctionManager = exports.AuctionManagerV2Data = exports.AuctionManagerStateV2 = exports.AuctionManagerStatus = void 0;
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const bn_js_1 = __importDefault(__webpack_require__(28891));
 const bs58_1 = __importDefault(__webpack_require__(91945));
 const BidRedemptionTicket_1 = __webpack_require__(52287);
@@ -218,7 +218,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AuctionWinnerTokenTypeTracker = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const bn_js_1 = __importDefault(__webpack_require__(28891));
 const buffer_1 = __webpack_require__(15313);
 const MetaplexProgram_1 = __webpack_require__(52845);
@@ -343,7 +343,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PayoutTicket = exports.PayoutTicketData = void 0;
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const bs58_1 = __importDefault(__webpack_require__(91945));
 const mpl_core_1 = __webpack_require__(78654);
 const MetaplexProgram_1 = __webpack_require__(52845);
@@ -417,7 +417,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PrizeTrackingTicket = exports.PrizeTrackingTicketData = void 0;
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const mpl_core_1 = __webpack_require__(78654);
 const MetaplexProgram_1 = __webpack_require__(52845);
 const buffer_1 = __webpack_require__(15313);
@@ -485,7 +485,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SafetyDepositConfig = exports.NonWinningConstraint = exports.WinningConstraint = exports.WinningConfigType = void 0;
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const bn_js_1 = __importDefault(__webpack_require__(28891));
 const bs58_1 = __importDefault(__webpack_require__(91945));
 const mpl_core_1 = __webpack_require__(78654);
@@ -617,7 +617,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Store = exports.StoreData = void 0;
 const mpl_core_1 = __webpack_require__(78654);
 const MetaplexProgram_1 = __webpack_require__(52845);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const bs58_1 = __importDefault(__webpack_require__(91945));
 const WhitelistedCreator_1 = __webpack_require__(55918);
 const AuctionManager_1 = __webpack_require__(17101);
@@ -720,7 +720,7 @@ var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.StoreConfig = exports.StoreConfigData = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const buffer_1 = __webpack_require__(15313);
 const MetaplexProgram_1 = __webpack_require__(52845);
 class StoreConfigData extends mpl_core_1.Borsh.Data {
@@ -785,7 +785,7 @@ exports.WhitelistedCreator = exports.WhitelistedCreatorData = void 0;
 const mpl_core_1 = __webpack_require__(78654);
 const MetaplexProgram_1 = __webpack_require__(52845);
 const buffer_1 = __webpack_require__(15313);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 class WhitelistedCreatorData extends mpl_core_1.Borsh.Data {
     constructor(args) {
         super(args);
@@ -871,7 +871,7 @@ exports.ClaimBid = exports.ClaimBidArgs = void 0;
 const mpl_core_1 = __webpack_require__(78654);
 const mpl_auction_1 = __webpack_require__(87017);
 const spl_token_1 = __webpack_require__(23434);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const MetaplexProgram_1 = __webpack_require__(52845);
 class ClaimBidArgs extends mpl_core_1.Borsh.Data {
     constructor() {
@@ -977,7 +977,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.EndAuction = exports.EndAuctionArgs = void 0;
 const bn_js_1 = __importDefault(__webpack_require__(28891));
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const mpl_auction_1 = __webpack_require__(87017);
 const MetaplexProgram_1 = __webpack_require__(52845);
 class EndAuctionArgs extends mpl_core_1.Borsh.Data {
@@ -1056,7 +1056,7 @@ var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.InitAuctionManagerV2 = exports.InitAuctionManagerV2Args = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const bn_js_1 = __importDefault(__webpack_require__(28891));
 const MetaplexProgram_1 = __webpack_require__(52845);
 class InitAuctionManagerV2Args extends mpl_core_1.Borsh.Data {
@@ -1154,7 +1154,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.RedeemBid = exports.RedeemUnusedWinningConfigItemsAsAuctioneerArgs = exports.ProxyCallAddress = exports.RedeemBidArgs = void 0;
 const mpl_core_1 = __webpack_require__(78654);
 const spl_token_1 = __webpack_require__(23434);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const mpl_token_metadata_1 = __webpack_require__(65007);
 const mpl_token_vault_1 = __webpack_require__(17945);
 const MetaplexProgram_1 = __webpack_require__(52845);
@@ -1332,7 +1332,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.RedeemFullRightsTransferBid = exports.RedeemFullRightsTransferBidArgs = void 0;
 const mpl_core_1 = __webpack_require__(78654);
 const spl_token_1 = __webpack_require__(23434);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const mpl_token_metadata_1 = __webpack_require__(65007);
 const mpl_token_vault_1 = __webpack_require__(17945);
 const MetaplexProgram_1 = __webpack_require__(52845);
@@ -1491,7 +1491,7 @@ const mpl_core_1 = __webpack_require__(78654);
 const mpl_token_metadata_1 = __webpack_require__(65007);
 const mpl_token_vault_1 = __webpack_require__(17945);
 const spl_token_1 = __webpack_require__(23434);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const MetaplexProgram_1 = __webpack_require__(52845);
 class RedeemParticipationBidV3Args extends mpl_core_1.Borsh.Data {
     constructor() {
@@ -1680,7 +1680,7 @@ const mpl_core_1 = __webpack_require__(78654);
 const mpl_token_vault_1 = __webpack_require__(17945);
 const mpl_token_metadata_1 = __webpack_require__(65007);
 const spl_token_1 = __webpack_require__(23434);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const MetaplexProgram_1 = __webpack_require__(52845);
 class RedeemPrintingV2BidArgs extends mpl_core_1.Borsh.Data {
     constructor() {
@@ -1853,7 +1853,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SetStore = exports.SetStoreArgs = void 0;
 const mpl_core_1 = __webpack_require__(78654);
 const spl_token_1 = __webpack_require__(23434);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const mpl_token_metadata_1 = __webpack_require__(65007);
 const mpl_token_vault_1 = __webpack_require__(17945);
 const mpl_auction_1 = __webpack_require__(87017);
@@ -1938,7 +1938,7 @@ var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SetStoreV2 = exports.SetStoreV2Args = void 0;
 const spl_token_1 = __webpack_require__(23434);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const mpl_core_1 = __webpack_require__(78654);
 const mpl_token_vault_1 = __webpack_require__(17945);
 const mpl_token_metadata_1 = __webpack_require__(65007);
@@ -2030,7 +2030,7 @@ var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SetWhitelistedCreator = exports.SetWhitelistedCreatorArgs = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const MetaplexProgram_1 = __webpack_require__(52845);
 class SetWhitelistedCreatorArgs extends mpl_core_1.Borsh.Data {
     constructor() {
@@ -2106,7 +2106,7 @@ var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.StartAuction = exports.StartAuctionArgs = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const mpl_auction_1 = __webpack_require__(87017);
 const MetaplexProgram_1 = __webpack_require__(52845);
 class StartAuctionArgs extends mpl_core_1.Borsh.Data {

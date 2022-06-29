@@ -2759,7 +2759,7 @@ var ethjsUtil = __webpack_require__(45479);
 var secp256k1 = __webpack_require__(16001);
 var BN = __webpack_require__(28891);
 var bytes_1 = __webpack_require__(97119);
-var hash_1 = __webpack_require__(32946);
+var hash_1 = __webpack_require__(60073);
 /**
  * Returns a zero address.
  */
@@ -3131,7 +3131,7 @@ exports.KECCAK256_RLP = Buffer.from(exports.KECCAK256_RLP_S, 'hex');
 
 /***/ }),
 
-/***/ 32946:
+/***/ 60073:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
@@ -3257,7 +3257,7 @@ __exportStar(__webpack_require__(60692), exports);
 /**
  * Hash functions
  */
-__exportStar(__webpack_require__(32946), exports);
+__exportStar(__webpack_require__(60073), exports);
 /**
  * ECDSA signature
  */
@@ -4413,7 +4413,7 @@ exports.hashPersonalMessage = exports.isValidSignature = exports.fromRpcSig = ex
 var secp256k1 = __webpack_require__(16001);
 var BN = __webpack_require__(28891);
 var bytes_1 = __webpack_require__(97119);
-var hash_1 = __webpack_require__(32946);
+var hash_1 = __webpack_require__(60073);
 /**
  * Returns the ECDSA signature of a message hash.
  */

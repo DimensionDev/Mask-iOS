@@ -1,7 +1,7 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[5578],{
 
-/***/ 5742:
+/***/ 96151:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -95,7 +95,7 @@ bignumber_js_1.BigNumber.config({
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var promisify_1 = __webpack_require__(47726);
 exports.promisify = promisify_1.promisify;
-var address_utils_1 = __webpack_require__(5742);
+var address_utils_1 = __webpack_require__(96151);
 exports.addressUtils = address_utils_1.addressUtils;
 var class_utils_1 = __webpack_require__(51614);
 exports.classUtils = class_utils_1.classUtils;
