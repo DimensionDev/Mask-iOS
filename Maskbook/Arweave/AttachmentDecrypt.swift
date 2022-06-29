@@ -12,7 +12,7 @@ import SwiftMsgPack
 import SwiftUI
 
 class AttachmentDecrypt {
-    static func downloadFile(payloadID: String, provider: String, key: String?) async throws -> Data? {
+    static func downloadOriginFileContent(payloadID: String, provider: String, key: String?) async throws -> Data? {
         typealias Service = FileServiceUploadOption.Service
         let urlPrefixs: [Service: String] = [
             .arweave: Arweave.baseUrl.absoluteString,
@@ -28,8 +28,7 @@ class AttachmentDecrypt {
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = "GET"
         let (_, response) = try await URLSession.shared.data(for: request)
-        let downloadUrl = response.url
-        if let downloadUrl = downloadUrl, downloadUrl.absoluteString != url {
+        if let downloadUrl = response.url, downloadUrl.absoluteString != url {
             var downloadRequest = URLRequest(url: downloadUrl)
             downloadRequest.httpMethod = "GET"
             let (data, response) = try await URLSession.shared.data(for: downloadRequest)
@@ -85,7 +84,7 @@ class AttachmentDecrypt {
             throw "generate key error"
         }
         let count = encryptedData.count
-        let tagLengthDevided = tagLength/8
+        let tagLengthDevided = tagLength / 8
         let tag = Array(encryptedData.bytes[count - tagLengthDevided ... count - 1])
         let gcm = GCM(iv: iv, authenticationTag: tag, mode: .combined)
         let aes = try AES(key: generatedKey, blockMode: gcm, padding: .noPadding)
