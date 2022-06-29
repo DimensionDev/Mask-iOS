@@ -153,7 +153,7 @@ struct HappyRedPacketV4: ABIContract {
     ) async -> String? {
         let contractMethod = Functions.createRedPacket.rawValue
         let parameters = param.asArray
-        var options = TransactionOptions()
+        var options = TransactionOptions.defaultOptions
         options.value = param.tokenType == 0 ? param.totalTokens : BigUInt(0)
         return try? await write(
             contractMethod,

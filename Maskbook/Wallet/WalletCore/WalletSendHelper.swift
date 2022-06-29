@@ -97,9 +97,10 @@ class WalletSendHelper {
                     case .success(let signOutput):
                         switch signOutput {
                         case let .eth(transacationEncodeData, v, r, s, _):
-                            let rawTransaction = EthereumTransaction(nonce: nonce, gasPrice: gasPrice ?? BigUInt(0), gasLimit: gasLimit, to: contractAddressEthFormat, value: BigUInt(0), data: transacationResult.data, v: BigUInt(v), r: BigUInt(r), s: BigUInt(s))
+                            var rawTransaction = EthereumTransaction(nonce: nonce, gasPrice: gasPrice ?? BigUInt(0), gasLimit: gasLimit, to: contractAddressEthFormat, value: BigUInt(0), data: transacationResult.data, v: BigUInt(v), r: BigUInt(r), s: BigUInt(s))
                             do {
-                                let sendResult = try provider.eth.sendRawTransaction(rawTransaction, transacationEncodeData)
+                                rawTransaction.data = transacationEncodeData
+                                let sendResult = try provider.eth.sendRawTransaction(rawTransaction)
                                 completion(.success(sendResult.transaction))
                                 return
                             } catch {
@@ -157,7 +158,8 @@ class WalletSendHelper {
             
             if token.isMainToken {
                 DispatchQueue.global().async {
-                    var transacation = EthereumTransaction(to: toAddressEthFormat, data: Data(), options: TransactionOptions.defaultOptions)
+                    var transacation = EthereumTransaction(to: toAddressEthFormat, data: Data())
+                    transacation.applyOptions(TransactionOptions.defaultOptions)
                         var gasPriceHex: String = "0x0"
                         var maxInclusionFeePerGasHex: String = "0x0"
                         var maxFeePerGasHex: String = "0x0"
@@ -185,7 +187,8 @@ class WalletSendHelper {
                             case let .eth(transacationEncodeData, v, r, s, data):
                                 transacation = EthereumTransaction(nonce: nonce, gasPrice: gasPrice ?? BigUInt(0), gasLimit: gasLimit, to: toAddressEthFormat, value: Web3.Utils.parseToBigUInt(amount, units: .eth)!, data: data, v: BigUInt(v), r: BigUInt(r), s: BigUInt(s))
                                 do {
-                                    let sendResult = try provider.eth.sendRawTransaction(transacation, transacationEncodeData)
+                                    transacation.data = transacationEncodeData
+                                    let sendResult = try provider.eth.sendRawTransaction(transacation)
                                     completion(.success(sendResult.hash))
                                     return
                                 } catch {
@@ -254,9 +257,10 @@ class WalletSendHelper {
                             case .success(let signOutput):
                                 switch signOutput {
                                 case let .eth(transacationEncodeData, v, r, s, _):
-                                    let rawTransaction = EthereumTransaction(nonce: nonce, gasPrice: gasPrice ?? BigUInt(0), gasLimit: gasLimit, to: contractAddressEthFormat, value: BigUInt(0), data: transacationResult.data, v: BigUInt(v), r: BigUInt(r), s: BigUInt(s))
+                                    var rawTransaction = EthereumTransaction(nonce: nonce, gasPrice: gasPrice ?? BigUInt(0), gasLimit: gasLimit, to: contractAddressEthFormat, value: BigUInt(0), data: transacationResult.data, v: BigUInt(v), r: BigUInt(r), s: BigUInt(s))
                                     do {
-                                        let sendResult = try provider.eth.sendRawTransaction(rawTransaction, transacationEncodeData)
+                                        rawTransaction.data = transacationEncodeData
+                                        let sendResult = try provider.eth.sendRawTransaction(transacationEncodeData)
                                         completion(.success(sendResult.hash))
                                         return
                                     } catch {
@@ -344,7 +348,7 @@ class WalletSendHelper {
                         maxInclusionFeePerGas: maxInclusionFeePerGasHex,
                         maxFeePerGas: maxFeePerGasHex,
                         gasLimit: gasLimit.serialize().toHexStringWithPrefix(),
-                        amount: transaction.value?.serialize().toHexString().addHexPrefix() ?? "0x0",
+                        amount: transaction.value.serialize().toHexString().addHexPrefix(),
                         toAddress: transaction.to.address,
                         payload: transaction.data)
                     let result =
@@ -353,19 +357,20 @@ class WalletSendHelper {
                     case .success(let signOutput):
                         switch signOutput {
                         case let .eth(transacationEncodeData, v, r, s, _):
-                            let rawTransaction = EthereumTransaction(
+                            var rawTransaction = EthereumTransaction(
                                 nonce: nonceTemp,
                                 gasPrice: gasPrice,
                                 gasLimit: gasLimit,
                                 to: transaction.to,
-                                value: transaction.value ?? BigUInt(0),
+                                value: transaction.value,
                                 data: transaction.data,
                                 v: BigUInt(v),
                                 r: BigUInt(r),
                                 s: BigUInt(s)
                             )
                             do {
-                                let sendResult = try provider.eth.sendRawTransaction(rawTransaction, transacationEncodeData)
+                                rawTransaction.data = transacationEncodeData
+                                let sendResult = try provider.eth.sendRawTransaction(rawTransaction)
                                 DispatchQueue.main.async {
                                     completion(.success((sendResult.hash, nonceTemp)))
                                 }

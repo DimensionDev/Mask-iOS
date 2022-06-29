@@ -32,7 +32,7 @@ target 'Maskbook' do
   
   pod 'Kingfisher', '~> 7.0'
   
-  pod 'Socket.IO-Client-Swift', '~> 15.2.0'
+  pod 'Socket.IO-Client-Swift', '~> 16.0'
   
   pod 'IQKeyboardManagerSwift', '6.3.0'
   
@@ -44,7 +44,7 @@ target 'Maskbook' do
   
   # Web3
   pod 'BigInt', '~> 5.2'
-  pod 'web3swift', :git => 'https://github.com/DimensionDev/web3swift.git'
+  pod 'web3swift', :git => 'https://github.com/DimensionDev/web3swift.git', :branch => 'develop'
   pod 'IPFSClientKit'
 
   #UI

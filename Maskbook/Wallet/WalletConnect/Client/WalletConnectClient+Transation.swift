@@ -69,7 +69,7 @@ extension WalletConnectClient {
                                        data: transaction.data.toHexString().addHexPrefix(),
                                        gas: gasLimitStr,
                                        gasPrice: gasPriceStr,
-                                       value: transaction.value?.serialize().toHexString().addHexPrefix() ?? "0x0",
+                                       value: transaction.value.serialize().toHexString().addHexPrefix(),
                                        nonce: nonceHex,
                                        type: nil,
                                        accessList: nil,
@@ -77,21 +77,27 @@ extension WalletConnectClient {
                                        maxPriorityFeePerGas: nil,
                                        maxFeePerGas: nil)
                 guard let client = self?.client else {
-                    completion(.failure(WalletSendError.walletConnectError()))
-                    return
-                }
-                WalletConnectClient.openInstalledWallet(with: fromAddress)
-                try client.eth_sendTransaction(url: wcUrl, transaction: wcTransaction) { response in
-                    if let hashString = try? response.result(as: String.self) {
-                        completion(.success((hashString, nonceTemp)))
-                    } else if let error = response.error {
-                        completion(.failure(WalletSendError.walletConnectError(error)))
-                    } else {
+                    DispatchQueue.main.async {
                         completion(.failure(WalletSendError.walletConnectError()))
                     }
+                    return
                 }
+                try client.eth_sendTransaction(url: wcUrl, transaction: wcTransaction) { response in
+                    DispatchQueue.main.async {
+                        if let hashString = try? response.result(as: String.self) {
+                            completion(.success((hashString, nonceTemp)))
+                        } else if let error = response.error {
+                            completion(.failure(WalletSendError.walletConnectError(error)))
+                        } else {
+                            completion(.failure(WalletSendError.walletConnectError()))
+                        }
+                    }
+                }
+                WalletConnectClient.openInstalledWallet(with: fromAddress)
             } catch {
-                completion(.failure(WalletSendError.ethereumError(error)))
+                DispatchQueue.main.async {
+                    completion(.failure(WalletSendError.ethereumError(error)))
+                }
                 return
             }
         }

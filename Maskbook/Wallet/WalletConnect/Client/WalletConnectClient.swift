@@ -122,10 +122,16 @@ class WalletConnectClient {
 }
 
 extension WalletConnectClient: ClientDelegate {
-    func client(_ client: Client, didFailToConnect url: WCURL) {
+    func _client(_ client: Client, didFailToConnect url: WCURL) {
         if isStartingNewConnection {
             didFailToConnectSubject.send((client: client, url: url))
             isStartingNewConnection = false
+        }
+    }
+    
+    func client(_ client: Client, didFailToConnect url: WCURL) {
+        DispatchQueue.main.async {
+            self._client(client, didFailToConnect: url)
         }
     }
     
@@ -133,7 +139,7 @@ extension WalletConnectClient: ClientDelegate {
         // do nothing
     }
     
-    func client(_ client: Client, didConnect session: Session) {
+    func _client(_ client: Client, didConnect session: Session) {
         self.session = session
         
         guard let approved = session.walletInfo?.approved else {
@@ -182,6 +188,13 @@ extension WalletConnectClient: ClientDelegate {
             if isAddressSame {
                 setWalletConnectAccountToDefaultAccount(network: networkFromSession, address: address)
             }
+        }
+    }
+    
+    
+    func client(_ client: Client, didConnect session: Session) {
+        DispatchQueue.main.async {
+            self._client(client, didConnect: session)
         }
     }
     
