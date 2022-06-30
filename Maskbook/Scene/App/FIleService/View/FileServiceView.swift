@@ -15,7 +15,6 @@ struct FileServiceView: View {
                 FileServiceOnBoardView { action in
                     switch action {
                     case .upload: viewModel.actionSignal(.choseFile)
-                    case .showPolicy: viewModel.actionSignal(.showPolicy)
                     }
                 }
             } else {
@@ -55,14 +54,13 @@ struct FileServiceView: View {
                     endPoint: .init(x: 0, y: 1)
                 )
                 .rotationEffect(.init(degrees: 337.55))
-                .rotationEffect(.init(degrees: 180))
                 .frame(width: 56, height: 56)
                 .cornerRadius(28)
                 .overlay(
-                    Image(systemName: "plus")
+                    Image(Asset.Plugins.FileService.sendFile)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: 24, height: 24)
+                        .frame(width: 37.33, height: 37.33)
                         .foregroundColor(.white)
                 )
             }
@@ -136,10 +134,18 @@ extension FileServiceView {
                                 HStack(spacing: 8) {
                                     Asset.Plugins.FileService.folder.asImage()
 
-                                    Text(value.fileName)
-                                        .font(.bh5)
-                                        .foregroundColor(Asset.Colors.Text.dark)
-                                        .horizontallyFilled()
+                                    VStack(alignment: .leading, spacing: 0) {
+                                        Text(value.fileName)
+                                            .font(.bh5)
+                                            .foregroundColor(Asset.Colors.Text.dark)
+                                            .lineLimit(1)
+                                            .horizontallyFilled()
+
+                                        Text(value.uploadDateText.split(separator: " ").first ?? "")
+                                            .font(.mh7)
+                                            .foregroundColor(Asset.Colors.Text.normal)
+                                            .lineLimit(1)
+                                    }
 
                                     Image(Asset.Plugins.pluginArrow)
                                         .foregroundColor(

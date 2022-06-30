@@ -99,6 +99,7 @@
 		1F5B5EF32858299800F6AD98 /* FileServiceUploadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EF22858299800F6AD98 /* FileServiceUploadHandler.swift */; };
 		1F5B5EF528582F3400F6AD98 /* FileServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EF428582F3400F6AD98 /* FileServiceViewModel.swift */; };
 		1F705FE327CF6AB9002A4A7E /* SpinWheelAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */; };
+		1F7C5E742869DD3200D00AF4 /* TappableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7C5E732869DD3200D00AF4 /* TappableText.swift */; };
 		1F8AD0CB26CA3AA000C9694F /* MaskLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AD0CA26CA3AA000C9694F /* MaskLoadingIndicator.swift */; };
 		1F8AD0CE26CA3AFB00C9694F /* LoadingAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AD0CD26CA3AFB00C9694F /* LoadingAnimator.swift */; };
 		1F8AD0D026CA3BAE00C9694F /* SpinBallAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AD0CF26CA3BAE00C9694F /* SpinBallAnimator.swift */; };
@@ -115,6 +116,7 @@
 		1FB862C62787F33900CF345F /* PluginSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB862C52787F33900CF345F /* PluginSettingViewController.swift */; };
 		1FB862C82787F3C900CF345F /* LabsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB862C72787F3C900CF345F /* LabsListView.swift */; };
 		1FB862CA278BDFCE00CF345F /* LabsConfigViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB862C9278BDFCE00CF345F /* LabsConfigViewModel.swift */; };
+		1FC1A0EE28698DED00984A2E /* FileServiceSaveFileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC1A0ED28698DED00984A2E /* FileServiceSaveFileController.swift */; };
 		1FC2B7942858A34C00570348 /* FileServiceUploadResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC2B7932858A34C00570348 /* FileServiceUploadResult.swift */; };
 		1FC2B7962858C5BF00570348 /* FileServiceUploadingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC2B7952858C5BF00570348 /* FileServiceUploadingItem.swift */; };
 		1FC57EDA273129FC0060E89C /* BackupPreviewFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC57ED9273129FC0060E89C /* BackupPreviewFormatter.swift */; };
@@ -721,6 +723,7 @@
 		5DCA069B27C75A8B007697C8 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCA069A27C75A8B007697C8 /* Toast.swift */; };
 		5DD1BBC227CF0843001DB330 /* Toast+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BBC127CF0843001DB330 /* Toast+Extension.swift */; };
 		5DD5A69827F53168005952A0 /* PersonaImportItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD5A69727F53168005952A0 /* PersonaImportItem.swift */; };
+		5DD91242286B068B00E2000F /* FileService+AttachmentDecryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD91241286B068B00E2000F /* FileService+AttachmentDecryption.swift */; };
 		5DE1D5A227A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE1D5A127A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift */; };
 		5DE5E53C27E468B400F2B62A /* PersonaAvatarActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5E53B27E468B400F2B62A /* PersonaAvatarActionViewModel.swift */; };
 		5DF07E0C27FD9CA400BECF15 /* ContactEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF07E0B27FD9CA400BECF15 /* ContactEmptyView.swift */; };
@@ -932,6 +935,7 @@
 		1F5B5EF22858299800F6AD98 /* FileServiceUploadHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceUploadHandler.swift; sourceTree = "<group>"; };
 		1F5B5EF428582F3400F6AD98 /* FileServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceViewModel.swift; sourceTree = "<group>"; };
 		1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinWheelAnimator.swift; sourceTree = "<group>"; };
+		1F7C5E732869DD3200D00AF4 /* TappableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableText.swift; sourceTree = "<group>"; };
 		1F8AD0CA26CA3AA000C9694F /* MaskLoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskLoadingIndicator.swift; sourceTree = "<group>"; };
 		1F8AD0CD26CA3AFB00C9694F /* LoadingAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimator.swift; sourceTree = "<group>"; };
 		1F8AD0CF26CA3BAE00C9694F /* SpinBallAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinBallAnimator.swift; sourceTree = "<group>"; };
@@ -948,6 +952,7 @@
 		1FB862C52787F33900CF345F /* PluginSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginSettingViewController.swift; sourceTree = "<group>"; };
 		1FB862C72787F3C900CF345F /* LabsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabsListView.swift; sourceTree = "<group>"; };
 		1FB862C9278BDFCE00CF345F /* LabsConfigViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabsConfigViewModel.swift; sourceTree = "<group>"; };
+		1FC1A0ED28698DED00984A2E /* FileServiceSaveFileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceSaveFileController.swift; sourceTree = "<group>"; };
 		1FC2B7932858A34C00570348 /* FileServiceUploadResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceUploadResult.swift; sourceTree = "<group>"; };
 		1FC2B7952858C5BF00570348 /* FileServiceUploadingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceUploadingItem.swift; sourceTree = "<group>"; };
 		1FC57ED9273129FC0060E89C /* BackupPreviewFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupPreviewFormatter.swift; sourceTree = "<group>"; };
@@ -1555,6 +1560,7 @@
 		5DCA069A27C75A8B007697C8 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		5DD1BBC127CF0843001DB330 /* Toast+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Toast+Extension.swift"; sourceTree = "<group>"; };
 		5DD5A69727F53168005952A0 /* PersonaImportItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaImportItem.swift; sourceTree = "<group>"; };
+		5DD91241286B068B00E2000F /* FileService+AttachmentDecryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileService+AttachmentDecryption.swift"; sourceTree = "<group>"; };
 		5DE1D5A127A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RedPacketInteractivePayload+Description.swift"; sourceTree = "<group>"; };
 		5DE5E53B27E468B400F2B62A /* PersonaAvatarActionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaAvatarActionViewModel.swift; sourceTree = "<group>"; };
 		5DF07E0B27FD9CA400BECF15 /* ContactEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEmptyView.swift; sourceTree = "<group>"; };
@@ -1980,6 +1986,7 @@
 				5DBDA4D1285083B200FBC921 /* FileServiceSelectFileSourceViewController.swift */,
 				1F1762752859BB18008BE93E /* FileServiceDetailViewController.swift */,
 				1F176277285C36B4008BE93E /* FileServiceFAQViewController.swift */,
+				1FC1A0ED28698DED00984A2E /* FileServiceSaveFileController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2051,6 +2058,7 @@
 				1F5B5ED9284F3B9500F6AD98 /* FileServiceView.swift */,
 				5DBDA4D3285083F000FBC921 /* FileServiceSelectFileSourceView.swift */,
 				1F5B5EDE28508FD400F6AD98 /* FileServiceUploadingItemView.swift */,
+				1F7C5E732869DD3200D00AF4 /* TappableText.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3720,6 +3728,7 @@
 				5D598E3828600D00006D1E4B /* FileServiceUploadProgress.swift */,
 				5DC0181828598969004973CA /* RemoteSigning.swift */,
 				5D06F59B28531B8B00640D00 /* AttachmentOptions.swift */,
+				5DD91241286B068B00E2000F /* FileService+AttachmentDecryption.swift */,
 				5DC0181628597908004973CA /* Extensions.swift */,
 			);
 			path = Arweave;
@@ -4553,6 +4562,7 @@
 				5D4749742851D28E00D3E7E6 /* FileServiceSelectFileHandler.swift in Sources */,
 				1F1CCF5E2736162F004E8835 /* WalletRestorePipeline.swift in Sources */,
 				1F5B5EDF28508FD400F6AD98 /* FileServiceUploadingItemView.swift in Sources */,
+				1FC1A0EE28698DED00984A2E /* FileServiceSaveFileController.swift in Sources */,
 				2AF8851E271EE9310004565A /* TransactionHeaderView.swift in Sources */,
 				1F8AD0CB26CA3AA000C9694F /* MaskLoadingIndicator.swift in Sources */,
 				2AD31E46282D367700CB3D49 /* NSMutableAttributedString+extension.swift in Sources */,
@@ -4597,6 +4607,7 @@
 				2A6ABB9C2720053B00CC3AED /* RestoreDataDiffView.swift in Sources */,
 				0F31A15C273E11EB009D2E05 /* WalletDisplayBlockChainType.swift in Sources */,
 				2AF884D2271EE9310004565A /* MaskWebMessage+Wallet.swift in Sources */,
+				1F7C5E742869DD3200D00AF4 /* TappableText.swift in Sources */,
 				1F176278285C36B4008BE93E /* FileServiceFAQViewController.swift in Sources */,
 				0F1A15A2265CE93B00B5E83E /* WalletCoreHelper.swift in Sources */,
 				2AF88520271EE9310004565A /* TokenDetailViewController.swift in Sources */,
@@ -4938,6 +4949,7 @@
 				2AD85511281283170064DDA5 /* LuckyDropSuccessfullyView.swift in Sources */,
 				2AD856052812875A0064DDA5 /* PlainTextItem.swift in Sources */,
 				2AF884FD271EE9310004565A /* PersonasViewController.swift in Sources */,
+				5DD91242286B068B00E2000F /* FileService+AttachmentDecryption.swift in Sources */,
 				2AF88549271EE9310004565A /* NFTDetailViewModel.swift in Sources */,
 				2AF88553271EE9310004565A /* RecentlyAddressViewModel.swift in Sources */,
 				6FA623AF26D4D0540091FDFF /* NFTTransactionHistory.swift in Sources */,
@@ -5526,7 +5538,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.8.1;
+				MARKETING_VERSION = 2.9.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -5741,7 +5753,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.8.1;
+				MARKETING_VERSION = 2.9.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -5809,7 +5821,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.8.1;
+				MARKETING_VERSION = 2.9.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

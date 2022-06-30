@@ -55,4 +55,26 @@ class CryptoTests: XCTestCase {
             XCTAssert(false, "Decrypt failed")
         }
     }
+
+    func testFileServiceDecryption() {
+        let ex = expectation(description: "testFileServiceDecryption")
+        Task.detached {
+            let content = "sample".data(using: .utf8)!
+            for encryption in [true, false] {
+                let attachment = AttachmentOptions(
+                    encrypted: encryption,
+                    type: "text/html",
+                    block: content,
+                    name: "sample.text"
+                )
+                let data = try attachment.encryptedData()
+                let decryptData = try await FileService.decryptAttachment(data, key: attachment.key)
+                assert(decryptData == content)
+            }
+
+            ex.fulfill()
+        }
+
+        wait(for: [ex], timeout: 60)
+    }
 }

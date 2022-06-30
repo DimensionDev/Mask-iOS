@@ -84,6 +84,7 @@ final class UserDefaultSettings {
         case beAwareOfPluginTip
         case jsResourceIsUsingBundle
         case jsDocumentResourceSelectedCommitHash
+        case fileServicePolicyAccepted
 
         case backupFileDetectDate
         case fileServiceUploadOption
@@ -109,6 +110,7 @@ final class UserDefaultSettings {
         backupAlertDate = nil
         indexedDBDataMigrated = false
 
+        fileServicePolicyAccepted = false
         fileServiceUploadOption = FileServiceUploadOption.defaultOption
     }
 
@@ -335,6 +337,9 @@ final class UserDefaultSettings {
         defaultValue: FileServiceUploadOption.defaultOption
     )
     var fileServiceUploadOption: String
+
+    @ReactiveUserDefault(key: .fileServicePolicyAccepted, defaultValue: false)
+    var fileServicePolicyAccepted: Bool
 }
 
 extension UserDefaultSettings {

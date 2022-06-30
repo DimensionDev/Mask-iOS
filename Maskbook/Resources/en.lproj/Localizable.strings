@@ -150,6 +150,8 @@ Integrated with Arweave Network as the storage layer, Meson Network operates as 
 "Plugins.FileService.Faq.WhatIsIpfs" = "What is IPFS?";
 "Plugins.FileService.Faq.WhatIsMesonCdn" = "What is Meson CDN?";
 "Plugins.FileService.Ipfs" = "IPFS";
+"Plugins.FileService.LocalFileSource.SaveToAlbum" = "Save into the album";
+"Plugins.FileService.LocalFileSource.SaveToFolder" = "Save to folder";
 "Plugins.FileService.LocalFileSource.TakePhotos" = "Take Photos";
 "Plugins.FileService.LocalFileSource.UploadFile" = "Upload File";
 "Plugins.FileService.LocalFileSource.UploadPhotos" = "Upload Photos";
@@ -161,7 +163,7 @@ The upload can’t be cancelled.";
 "Plugins.FileService.Onboard.StepThree" = "Upload your file for permanent storage, share with friends.";
 "Plugins.FileService.Onboard.StepTwo" = "Tap [Settings] to select a protocol and adjust encryption settings.";
 "Plugins.FileService.OtherOption" = "Other Options";
-"Plugins.FileService.Post" = "Post";
+"Plugins.FileService.Post" = "Share";
 "Plugins.FileService.Preparing" = "Preparing...";
 "Plugins.FileService.ServiceTitle" = "Service Protocols";
 "Plugins.FileService.SettingTitle" = "Upload Settings";

@@ -7,7 +7,6 @@ import CoreDataStack
 final class FileServiceViewModel: ObservableObject {
     enum Action {
         case choseFile
-        case showPolicy
         case share(FileServiceUploadResult)
         case viewDetail(FileServiceUploadingItem)
     }
@@ -174,6 +173,7 @@ final class FileServiceViewModel: ObservableObject {
                     self.draftItem = .init(
                         fileName: item.fileName,
                         provider: option.service.rawValue.lowercased(),
+                        fileType: item.fileType,
                         state: state,
                         content: item.content,
                         uploadedBytes: value.progress * item.totalBytes,
@@ -185,6 +185,7 @@ final class FileServiceViewModel: ObservableObject {
                 self.draftItem = .init(
                     fileName: item.fileName,
                     provider: option.service.rawValue.lowercased(),
+                    fileType: item.fileType,
                     state: .failed,
                     content: item.content,
                     uploadedBytes: 0
