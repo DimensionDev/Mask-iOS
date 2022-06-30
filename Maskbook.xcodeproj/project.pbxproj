@@ -723,6 +723,7 @@
 		5DCA069B27C75A8B007697C8 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCA069A27C75A8B007697C8 /* Toast.swift */; };
 		5DD1BBC227CF0843001DB330 /* Toast+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BBC127CF0843001DB330 /* Toast+Extension.swift */; };
 		5DD5A69827F53168005952A0 /* PersonaImportItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD5A69727F53168005952A0 /* PersonaImportItem.swift */; };
+		5DD91242286B068B00E2000F /* FileService+AttachmentDecryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD91241286B068B00E2000F /* FileService+AttachmentDecryption.swift */; };
 		5DE1D5A227A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE1D5A127A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift */; };
 		5DE5E53C27E468B400F2B62A /* PersonaAvatarActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5E53B27E468B400F2B62A /* PersonaAvatarActionViewModel.swift */; };
 		5DF07E0C27FD9CA400BECF15 /* ContactEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF07E0B27FD9CA400BECF15 /* ContactEmptyView.swift */; };
@@ -1559,6 +1560,7 @@
 		5DCA069A27C75A8B007697C8 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		5DD1BBC127CF0843001DB330 /* Toast+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Toast+Extension.swift"; sourceTree = "<group>"; };
 		5DD5A69727F53168005952A0 /* PersonaImportItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaImportItem.swift; sourceTree = "<group>"; };
+		5DD91241286B068B00E2000F /* FileService+AttachmentDecryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileService+AttachmentDecryption.swift"; sourceTree = "<group>"; };
 		5DE1D5A127A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RedPacketInteractivePayload+Description.swift"; sourceTree = "<group>"; };
 		5DE5E53B27E468B400F2B62A /* PersonaAvatarActionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaAvatarActionViewModel.swift; sourceTree = "<group>"; };
 		5DF07E0B27FD9CA400BECF15 /* ContactEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEmptyView.swift; sourceTree = "<group>"; };
@@ -3726,6 +3728,7 @@
 				5D598E3828600D00006D1E4B /* FileServiceUploadProgress.swift */,
 				5DC0181828598969004973CA /* RemoteSigning.swift */,
 				5D06F59B28531B8B00640D00 /* AttachmentOptions.swift */,
+				5DD91241286B068B00E2000F /* FileService+AttachmentDecryption.swift */,
 				5DC0181628597908004973CA /* Extensions.swift */,
 			);
 			path = Arweave;
@@ -4946,6 +4949,7 @@
 				2AD85511281283170064DDA5 /* LuckyDropSuccessfullyView.swift in Sources */,
 				2AD856052812875A0064DDA5 /* PlainTextItem.swift in Sources */,
 				2AF884FD271EE9310004565A /* PersonasViewController.swift in Sources */,
+				5DD91242286B068B00E2000F /* FileService+AttachmentDecryption.swift in Sources */,
 				2AF88549271EE9310004565A /* NFTDetailViewModel.swift in Sources */,
 				2AF88553271EE9310004565A /* RecentlyAddressViewModel.swift in Sources */,
 				6FA623AF26D4D0540091FDFF /* NFTTransactionHistory.swift in Sources */,

@@ -3,7 +3,7 @@ import Foundation
 public struct Arweave {
     static let shared = Arweave()
     private init() {}
-    public static var baseUrl = URL(string: "https://arweave.net")!
+    public static var baseURL = URL(string: "https://arweave.net")!
     
     public static let landingURL = URL(string: "https://files.r2d2.to/partner/arweave/landing-page.html")!
     
@@ -47,7 +47,7 @@ extension Arweave {
         }
         
         var url: URL {
-            baseUrl.appendingPathComponent(path)
+            baseURL.appendingPathComponent(path)
         }
         
         var method: String {
