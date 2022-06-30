@@ -925,10 +925,9 @@
       "encrypt": "Make it encrypted",
       "mesoncdn": "Use Meson CDN",
       "onboard": {
-        "step_one": "Decentralized file storage with Arweave, IPFS and Swarm.",
-        "step_two": "Tap [Settings] to select a protocol and adjust encryption settings.",
-        "step_three": "Upload your file for permanent storage, share with friends.",
-        "step_four": "Free Web3 file service, brought to you by Mask Network."
+        "step_one": "Free to use Web3 File service, upload and store files permanently.",
+        "step_two": "Decentralized storage service, powered by IPFS, Arweave, Starm and Meson Network.",
+        "step_three": "No restrictions on traditional social platforms, easy to upload and share files with friends."
       },
       "local_file_source": {
         "take_photos": "Take Photos",

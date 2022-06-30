@@ -178,8 +178,7 @@ extension FileServiceOnBoardItem {
         switch self {
         case .one: return .two
         case .two: return .three
-        case .three: return .four
-        case .four: return .one
+        case .three: return .one
         }
     }
 }

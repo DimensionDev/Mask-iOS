@@ -49,14 +49,12 @@ enum FileServiceOnBoardItem {
     case one
     case two
     case three
-    case four
 
     var imageName: String {
         switch self {
         case .one: return Asset.Plugins.FileService.onboardOne.name
         case .two: return Asset.Plugins.FileService.onboardTwo.name
         case .three: return Asset.Plugins.FileService.onboardThree.name
-        case .four: return Asset.Plugins.FileService.onboardFour.name
         }
     }
 
@@ -65,7 +63,6 @@ enum FileServiceOnBoardItem {
         case .one: return L10n.Plugins.FileService.Onboard.stepOne
         case .two: return L10n.Plugins.FileService.Onboard.stepTwo
         case .three: return L10n.Plugins.FileService.Onboard.stepThree
-        case .four: return L10n.Plugins.FileService.Onboard.stepFour
         }
     }
 
@@ -75,8 +72,7 @@ enum FileServiceOnBoardItem {
         switch value {
         case 0: self = .one
         case 1: self = .two
-        case 2: self = .three
-        default: self = .four
+        default: self = .three
         }
     }
 }
@@ -95,7 +91,6 @@ extension FileServiceOnBoardItem: OnBoardItem {
         case .one: return 0
         case .two: return 1
         case .three: return 2
-        case .four: return 3
         }
     }
 }

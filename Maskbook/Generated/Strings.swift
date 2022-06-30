@@ -798,19 +798,15 @@ enum L10n {
       }
 
       enum Onboard {
-        /// Free Web3 file service, brought to you by Mask Network.
-        static var stepFour: String {
-          return L10n.tr("Localizable", "Plugins.FileService.Onboard.StepFour")
-        }
-        /// Decentralized file storage with Arweave, IPFS and Swarm.
+        /// Free to use Web3 File service, upload and store files permanently.
         static var stepOne: String {
           return L10n.tr("Localizable", "Plugins.FileService.Onboard.StepOne")
         }
-        /// Upload your file for permanent storage, share with friends.
+        /// No restrictions on traditional social platforms, easy to upload and share files with friends.
         static var stepThree: String {
           return L10n.tr("Localizable", "Plugins.FileService.Onboard.StepThree")
         }
-        /// Tap [Settings] to select a protocol and adjust encryption settings.
+        /// Decentralized storage service, powered by IPFS, Arweave, Starm and Meson Network.
         static var stepTwo: String {
           return L10n.tr("Localizable", "Plugins.FileService.Onboard.StepTwo")
         }

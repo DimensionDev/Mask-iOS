@@ -158,10 +158,9 @@ Integrated with Arweave Network as the storage layer, Meson Network operates as 
 "Plugins.FileService.LocalFileSource.UploadTips" = "The size limit is 10.5MB.
 The upload can’t be cancelled.";
 "Plugins.FileService.Mesoncdn" = "Use Meson CDN";
-"Plugins.FileService.Onboard.StepFour" = "Free Web3 file service, brought to you by Mask Network.";
-"Plugins.FileService.Onboard.StepOne" = "Decentralized file storage with Arweave, IPFS and Swarm.";
-"Plugins.FileService.Onboard.StepThree" = "Upload your file for permanent storage, share with friends.";
-"Plugins.FileService.Onboard.StepTwo" = "Tap [Settings] to select a protocol and adjust encryption settings.";
+"Plugins.FileService.Onboard.StepOne" = "Free to use Web3 File service, upload and store files permanently.";
+"Plugins.FileService.Onboard.StepThree" = "No restrictions on traditional social platforms, easy to upload and share files with friends.";
+"Plugins.FileService.Onboard.StepTwo" = "Decentralized storage service, powered by IPFS, Arweave, Starm and Meson Network.";
 "Plugins.FileService.OtherOption" = "Other Options";
 "Plugins.FileService.Post" = "Share";
 "Plugins.FileService.Preparing" = "Preparing...";
