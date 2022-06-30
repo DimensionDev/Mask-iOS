@@ -9,6 +9,8 @@ struct FileServiceOnBoardItemView: View, OnBoardItemView {
         self.item = item
     }
 
+    private let contentOffsetY: CGFloat = 48
+
     var body: some View {
         VStack(alignment: .center) {
             Spacer()
@@ -24,7 +26,18 @@ struct FileServiceOnBoardItemView: View, OnBoardItemView {
                     .frame(maxWidth: .infinity)
                     .horizontallyCenterred()
             }
-            .offset(y: -48)
+            .offset(y: -contentOffsetY)
+            .overlay(
+                GeometryReader { proxy in
+                    Color.clear
+                          .preference(
+                              key: IndicatorOffsetKey.self,
+                              value: proxy.frame(in: .global).maxY - contentOffsetY
+                          )
+                          .frame(width: 1)
+                },
+                alignment: .bottom
+            )
 
             Spacer()
         }
