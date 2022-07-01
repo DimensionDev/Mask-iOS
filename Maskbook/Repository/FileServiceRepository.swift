@@ -91,10 +91,11 @@ extension UploadFile {
             provider: provider ?? "",
             fileType: FileServiceUploadingItem.ItemType(rawValue: fileType) ?? .image,
             state: .uploaded,
-            content: content ?? Data(count: Int(fileSize)),
+            content: content ?? Data(),
+            totalBytes: fileSize,
             uploadedBytes: 0,
             uploadDate: createdAt,
-            mime: nil, // use nil as all UploadFile is uploaded
+            mime: mime ?? "",
             tx: FileServiceTranscation(
                 id: id ?? "",
                 key: key ?? "",

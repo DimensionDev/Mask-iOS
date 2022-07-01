@@ -93,8 +93,6 @@
 		1F5B5EDD285080B700F6AD98 /* FileServiceUploadOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EDC285080B700F6AD98 /* FileServiceUploadOption.swift */; };
 		1F5B5EDF28508FD400F6AD98 /* FileServiceUploadingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EDE28508FD400F6AD98 /* FileServiceUploadingItemView.swift */; };
 		1F5B5EE12851C6F700F6AD98 /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EE02851C6F700F6AD98 /* Predicate.swift */; };
-		1F5B5EEE2851D0E400F6AD98 /* UploadFile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EEC2851D0E400F6AD98 /* UploadFile+CoreDataClass.swift */; };
-		1F5B5EEF2851D0E400F6AD98 /* UploadFile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EED2851D0E400F6AD98 /* UploadFile+CoreDataProperties.swift */; };
 		1F5B5EF12851D13A00F6AD98 /* FileServiceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EF02851D13A00F6AD98 /* FileServiceRepository.swift */; };
 		1F5B5EF32858299800F6AD98 /* FileServiceUploadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EF22858299800F6AD98 /* FileServiceUploadHandler.swift */; };
 		1F5B5EF528582F3400F6AD98 /* FileServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EF428582F3400F6AD98 /* FileServiceViewModel.swift */; };
@@ -732,6 +730,8 @@
 		5DF8CD00286EDB5C006A4048 /* FileServiceDownloadingPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8CCFF286EDB5C006A4048 /* FileServiceDownloadingPreview.swift */; };
 		5DF8CD02286EDCE5006A4048 /* FileServiceDownloadFailPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8CD01286EDCE5006A4048 /* FileServiceDownloadFailPreview.swift */; };
 		5DF8CD04286EDD31006A4048 /* FileServiceGeneralPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8CD03286EDD31006A4048 /* FileServiceGeneralPreview.swift */; };
+		5DF8CD07286EEE10006A4048 /* UploadFile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8CD05286EEE10006A4048 /* UploadFile+CoreDataClass.swift */; };
+		5DF8CD08286EEE10006A4048 /* UploadFile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8CD06286EEE10006A4048 /* UploadFile+CoreDataProperties.swift */; };
 		6F07ABE1279022B80039D69D /* NFTCollectionStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE0279022B80039D69D /* NFTCollectionStatusModel.swift */; };
 		6F07ABE3279027E70039D69D /* NFTAssetPriceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE2279027E70039D69D /* NFTAssetPriceModel.swift */; };
 		6F07ABE5279697450039D69D /* NFTCollectionDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE4279697450039D69D /* NFTCollectionDetailTableViewCell.swift */; };
@@ -933,8 +933,6 @@
 		1F5B5EDC285080B700F6AD98 /* FileServiceUploadOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceUploadOption.swift; sourceTree = "<group>"; };
 		1F5B5EDE28508FD400F6AD98 /* FileServiceUploadingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceUploadingItemView.swift; sourceTree = "<group>"; };
 		1F5B5EE02851C6F700F6AD98 /* Predicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Predicate.swift; sourceTree = "<group>"; };
-		1F5B5EEC2851D0E400F6AD98 /* UploadFile+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadFile+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		1F5B5EED2851D0E400F6AD98 /* UploadFile+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadFile+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		1F5B5EF02851D13A00F6AD98 /* FileServiceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceRepository.swift; sourceTree = "<group>"; };
 		1F5B5EF22858299800F6AD98 /* FileServiceUploadHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceUploadHandler.swift; sourceTree = "<group>"; };
 		1F5B5EF428582F3400F6AD98 /* FileServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceViewModel.swift; sourceTree = "<group>"; };
@@ -1573,6 +1571,8 @@
 		5DF8CCFF286EDB5C006A4048 /* FileServiceDownloadingPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceDownloadingPreview.swift; sourceTree = "<group>"; };
 		5DF8CD01286EDCE5006A4048 /* FileServiceDownloadFailPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceDownloadFailPreview.swift; sourceTree = "<group>"; };
 		5DF8CD03286EDD31006A4048 /* FileServiceGeneralPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceGeneralPreview.swift; sourceTree = "<group>"; };
+		5DF8CD05286EEE10006A4048 /* UploadFile+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadFile+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5DF8CD06286EEE10006A4048 /* UploadFile+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadFile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		68890DD0D41F3FA5AB78B97A /* Pods-Maskbook.release touchpreview.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maskbook.release touchpreview.xcconfig"; path = "Target Support Files/Pods-Maskbook/Pods-Maskbook.release touchpreview.xcconfig"; sourceTree = "<group>"; };
 		6F07ABE0279022B80039D69D /* NFTCollectionStatusModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFTCollectionStatusModel.swift; sourceTree = "<group>"; };
 		6F07ABE2279027E70039D69D /* NFTAssetPriceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTAssetPriceModel.swift; sourceTree = "<group>"; };
@@ -1804,8 +1804,8 @@
 		0FBC5AB1266759BC00328693 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				1F5B5EEC2851D0E400F6AD98 /* UploadFile+CoreDataClass.swift */,
-				1F5B5EED2851D0E400F6AD98 /* UploadFile+CoreDataProperties.swift */,
+				5DF8CD05286EEE10006A4048 /* UploadFile+CoreDataClass.swift */,
+				5DF8CD06286EEE10006A4048 /* UploadFile+CoreDataProperties.swift */,
 				5D3E364527BE2D0200FDCFDD /* PostRecord+CoreDataClass.swift */,
 				5D3E364627BE2D0200FDCFDD /* PostRecord+CoreDataProperties.swift */,
 				41E50037279946E400A73117 /* PersonaRecord+CoreDataClass.swift */,
@@ -4396,16 +4396,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F5B5EEF2851D0E400F6AD98 /* UploadFile+CoreDataProperties.swift in Sources */,
 				2DEDDEA92761ED7000D37A76 /* WalletConnectSession+CoreDataProperties.swift in Sources */,
 				0F93937626A7AE9400F7F608 /* Collectible+CoreDataProperties.swift in Sources */,
 				2DC651F8271E6CAB00BABA9C /* LocalStorage+CoreDataClass.swift in Sources */,
 				41E5003E279946E400A73117 /* PersonaRecord+CoreDataProperties.swift in Sources */,
 				0F93937526A7AE9400F7F608 /* Collectible+CoreDataClass.swift in Sources */,
 				0FAF2F4C26678AC300C1B577 /* Mask.xcdatamodeld in Sources */,
-				1F5B5EEE2851D0E400F6AD98 /* UploadFile+CoreDataClass.swift in Sources */,
 				41E5003D279946E400A73117 /* PersonaRecord+CoreDataClass.swift in Sources */,
 				0F93936D26A7AE9400F7F608 /* Token+CoreDataClass.swift in Sources */,
+				5DF8CD07286EEE10006A4048 /* UploadFile+CoreDataClass.swift in Sources */,
 				0F93937726A7AE9400F7F608 /* Contact+CoreDataClass.swift in Sources */,
 				2DC651F6271E6CAB00BABA9C /* BlobStorage+CoreDataClass.swift in Sources */,
 				0F93937826A7AE9400F7F608 /* Contact+CoreDataProperties.swift in Sources */,
@@ -4426,6 +4425,7 @@
 				5D3E364E27BF503000FDCFDD /* PostRecord+Managed.swift in Sources */,
 				0FBC5ADC26675B0F00328693 /* URL.swift in Sources */,
 				2DC651F9271E6CAB00BABA9C /* LocalStorage+CoreDataProperties.swift in Sources */,
+				5DF8CD08286EEE10006A4048 /* UploadFile+CoreDataProperties.swift in Sources */,
 				0F07028826AFE77C00C04F77 /* DeletedDerivationPath+CoreDataClass.swift in Sources */,
 				41E500092791361E00A73117 /* PersonaRecord+Managed.swift in Sources */,
 				0F93937326A7AE9400F7F608 /* Account+CoreDataClass.swift in Sources */,

@@ -34,7 +34,7 @@ class FileServiceDetailViewModel : ObservableObject {
     
     @MainActor
     func save() {
-        guard let content = item.dataDownloadFromTX else {
+        guard let content = item.contentDownloadFromTX else {
             return
         }
         let controller = FileServiceSaveFileController(item: item)
@@ -49,7 +49,7 @@ class FileServiceDetailViewModel : ObservableObject {
         Task {
             do {
                 let data = try await FileService.getAttachment(payloadID: tx.payloadTxID, provider: item.provider, key: tx.key)
-                item.dataDownloadFromTX = data
+                item.contentDownloadFromTX = data
                 state = .downloaded
             } catch(let e) {
                 log.debug("\(e)")

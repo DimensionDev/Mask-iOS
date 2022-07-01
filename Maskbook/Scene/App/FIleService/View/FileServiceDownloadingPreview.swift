@@ -24,7 +24,7 @@ struct FileServiceDownloadingPreview: View {
             Text(item.fileName)
                 .font(.bh4)
                 .foregroundColor(Asset.Colors.Text.dark)
-            Text(item.uploadDateText)
+            Text(item.totalBytes.fileSizeText)
                 .font(.mh7)
                 .foregroundColor(Asset.Colors.Text.normal)
         }

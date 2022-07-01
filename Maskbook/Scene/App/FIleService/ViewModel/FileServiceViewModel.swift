@@ -145,6 +145,7 @@ final class FileServiceViewModel: ObservableObject {
             fileType: fileItem.fileType,
             state: .preparing,
             content: fileItem.data,
+            totalBytes: Double(fileItem.data.count),
             uploadedBytes: 0,
             mime: fileItem.mime
         )
@@ -176,6 +177,7 @@ final class FileServiceViewModel: ObservableObject {
                         fileType: item.fileType,
                         state: state,
                         content: item.content,
+                        totalBytes: Double(item.content.count),
                         uploadedBytes: value.progress * item.totalBytes,
                         uploadDate: didFinish ? Date() : nil,
                         tx: value
@@ -188,6 +190,7 @@ final class FileServiceViewModel: ObservableObject {
                     fileType: item.fileType,
                     state: .failed,
                     content: item.content,
+                    totalBytes: Double(item.content.count),
                     uploadedBytes: 0
                 )
             }

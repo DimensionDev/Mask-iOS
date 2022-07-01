@@ -25,7 +25,7 @@ final class FileServiceSaveFileController: SheetViewController {
             switch action {
             case .saveToAlbum:
                 guard self.viewModel.item.fileType == .image,
-                      let data = self.viewModel.item.dataDownloadFromTX,
+                      let data = self.viewModel.item.contentDownloadFromTX,
                       let image = UIImage(data: data) else {
                     return
                 }
@@ -68,7 +68,7 @@ extension FileServiceSaveFileController: UIDocumentPickerDelegate {
         }
 
         let fileUrl = url.appendingPathComponent(viewModel.item.fileName)
-        guard let data = viewModel.item.dataDownloadFromTX else {
+        guard let data = viewModel.item.contentDownloadFromTX else {
             return
         }
         try? data.write(to: fileUrl)
