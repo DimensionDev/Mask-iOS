@@ -50,6 +50,34 @@ class WalletConnectStartViewController: BaseViewController {
         ])
         setupSegmentViewController()
         _ = walletConnectClient.connect()
+        
+        let isFromEmptyView = WalletCoreService.shared.getAllAccounts().isEmpty
+        walletConnectClient.didConnectSubject
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _, _ in
+                guard let self = self else { return }
+                self.dismiss(animated: true) {
+                    guard isFromEmptyView else { return }
+                    Coordinator.main.present(
+                        scene: .balance,
+                        transition: .replaceCurrentNavigation(tab: .wallet, animated: true)
+                    )
+                }
+            }
+            .store(in: &disposeBag)
+        
+        walletConnectClient.didFailToConnectSubject
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _, _ in
+                guard let self = self else { return }
+                self.dismiss(animated: true) {
+                    Coordinator.main.present(
+                        scene: .walletConnectFail,
+                        transition: .panModel(animated: true)
+                    )
+                }
+            }
+            .store(in: &disposeBag)
     }
 
     func setupSegmentViewController() {
