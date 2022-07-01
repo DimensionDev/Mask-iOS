@@ -18,13 +18,15 @@ struct FileServiceTranscation: Hashable {
         key: String,
         landingTxID: String,
         payloadTxID: String,
-        progress: Double
+        progress: Double,
+        state: FileServiceUploadingItem.State
     ) {
         self.id = id
         self.key = key
         self.landingTxID = landingTxID
         self.payloadTxID = payloadTxID
         self.progress = progress
+        self.state = state
     }
 
     var id: String
@@ -32,9 +34,10 @@ struct FileServiceTranscation: Hashable {
     var landingTxID: String
     var payloadTxID: String
     var progress: Double
+    var state: FileServiceUploadingItem.State
 
     static func progress(_ value: Double) -> FileServiceTranscation {
-        self.init(id: "", key: "", landingTxID: "", payloadTxID: "", progress: value)
+        self.init(id: "", key: "", landingTxID: "", payloadTxID: "", progress: value, state: .encrypting)
     }
 
     var isFinished: Bool {

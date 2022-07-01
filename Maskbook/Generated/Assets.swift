@@ -98,6 +98,10 @@ internal enum Asset {
       }
     }
     internal enum Gradient {
+      internal static let _050919 = ColorAsset(name: "Colors/Gradient/050919")
+      internal static let d6E9Ff = ColorAsset(name: "Colors/Gradient/D6E9FF")
+      internal static let ebf2Ff = ColorAsset(name: "Colors/Gradient/EBF2FF")
+      internal static let f2F8Ff = ColorAsset(name: "Colors/Gradient/F2F8FF")
       internal static let blue1 = ColorAsset(name: "Colors/Gradient/blue1")
       internal static let blue2 = ColorAsset(name: "Colors/Gradient/blue2")
       internal static let blur = ColorAsset(name: "Colors/Gradient/blur")
@@ -496,7 +500,9 @@ internal enum Asset {
       internal static let onboardOne = ImageAsset(name: "Plugins/FileService/onboardOne")
       internal static let onboardThree = ImageAsset(name: "Plugins/FileService/onboardThree")
       internal static let onboardTwo = ImageAsset(name: "Plugins/FileService/onboardTwo")
+      internal static let retry = ImageAsset(name: "Plugins/FileService/retry")
       internal static let sendFile = ImageAsset(name: "Plugins/FileService/send_file")
+      internal static let share = ImageAsset(name: "Plugins/FileService/share")
       internal static let uploadBackground = ImageAsset(name: "Plugins/FileService/uploadBackground")
       internal static let uploadFile = ImageAsset(name: "Plugins/FileService/upload_file")
       internal static let uplodaCamera = ImageAsset(name: "Plugins/FileService/uplodaCamera")

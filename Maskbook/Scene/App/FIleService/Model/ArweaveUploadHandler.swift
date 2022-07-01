@@ -12,7 +12,8 @@ struct ArweaveUploadHandler: FileServiceUploadHandler {
                 var tx = FileServiceTranscation.progress(0)
                 var totalBytes: Double = 0
 
-                tx.id = encodeArrayBuffer(item.content.hashData())
+                tx.id = self.encodeArrayBuffer(item.content.hashData())
+                tx.state = .encrypting
                 continuation.yield(tx)
 
                 let attachment = AttachmentOptions(
@@ -49,20 +50,23 @@ struct ArweaveUploadHandler: FileServiceUploadHandler {
                     .removeDuplicates()
                     .sink { progress in
                         tx.progress = progress
+                        tx.state = .uploading
                         continuation.yield(tx)
                     }
                     .store(in: &taskDelegate.cancelableStorage)
-                tx.payloadTxID = try await makePayload(
+                tx.payloadTxID = try await self.makePayload(
                     data: data,
                     type: "application/octet-stream",
                     delegate: taskDelegate
                 )
                 tx.progress = Stage.htmlDownloading.progress(with: totalBytes)
+                tx.state = .uploading
                 continuation.yield(tx)
 
-                tx.landingTxID = try await landingPage(item: item, option: option, tx: tx)
+                tx.landingTxID = try await self.landingPage(item: item, option: option, tx: tx)
                 // skip htmlUploading as it doesn't mater
                 tx.progress = Stage.uploadFinish.progress(with: totalBytes)
+                tx.state = .uploaded
                 continuation.yield(tx)
                 continuation.finish()
             }

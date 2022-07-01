@@ -39,7 +39,7 @@ extension IPFSUploadHandler: FileServiceUploadHandler {
 
                 // get landing page and upload the html
                 // and get landingTxID
-                let landingTxID = try await landingPage(item: item, option: option, tx: tx)
+                let landingTxID = try await self.landingPage(item: item, option: option, tx: tx)
                 tx.landingTxID = landingTxID
                 tx.progress = 1.0
                 continuation.yield(tx)

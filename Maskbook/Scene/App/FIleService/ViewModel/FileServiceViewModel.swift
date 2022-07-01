@@ -12,7 +12,12 @@ final class FileServiceViewModel: ObservableObject {
     }
 
     @Published
-    var items: [FileServiceUploadingItem] = []
+    var items: [FileServiceUploadingItem] = [
+        .preparing,
+        .uploaded,
+        .uploading,
+        .failed
+    ]
 
     @Published
     var searchText: String = ""
@@ -42,16 +47,8 @@ final class FileServiceViewModel: ObservableObject {
         return true
     }
 
-    var visibleItems: [Item] {
-        let allItems: [Item] = {
-            if let item = draftItem {
-                return [.draft(item)] + items.map { .archive($0) }
-            } else {
-                return items.map { .archive($0) }
-            }
-        }()
-
-        return allItems
+    var visibleItems: [FileServiceUploadingItem] {
+        items
             .filter { searchText.isEmpty || $0.fileName.contains(searchText) }
     }
 
@@ -112,12 +109,12 @@ final class FileServiceViewModel: ObservableObject {
     }
 
     private func refreshList() {
-        items = FileServiceRepository
-            .getRecords(
-                transform: { (file: UploadFile) in
-                    file.asStructItem()
-                }
-            )
+//        items = FileServiceRepository
+//            .getRecords(
+//                transform: { (file: UploadFile) in
+//                    file.asStructItem()
+//                }
+//            )
     }
 
     func configActionSignal(_ actionSignal: @escaping (Action) -> Void) {
@@ -143,7 +140,7 @@ final class FileServiceViewModel: ObservableObject {
             fileName: fileItem.fileName,
             provider: uploadOption.value.service.rawValue.lowercased(),
             fileType: fileItem.fileType,
-            state: .preparing,
+            state: .encrypting,
             content: fileItem.data,
             uploadedBytes: 0,
             mime: fileItem.mime
@@ -162,19 +159,12 @@ final class FileServiceViewModel: ObservableObject {
         Task { @MainActor in
             do {
                 for try await value in stream {
-                    let didFinish = value.progress == 1
-                    let state: FileServiceUploadingItem.State = {
-                        if value.progress == 0 {
-                            return .preparing
-                        } else {
-                            return didFinish ? .uploaded : .uploading
-                        }
-                    }()
+                    let didFinish = value.state == .uploaded
                     self.draftItem = .init(
                         fileName: item.fileName,
                         provider: option.service.rawValue.lowercased(),
                         fileType: item.fileType,
-                        state: state,
+                        state: value.state,
                         content: item.content,
                         uploadedBytes: value.progress * item.totalBytes,
                         uploadDate: didFinish ? Date() : nil,
@@ -188,7 +178,7 @@ final class FileServiceViewModel: ObservableObject {
                     fileType: item.fileType,
                     state: .failed,
                     content: item.content,
-                    uploadedBytes: 0
+                    uploadedBytes: self.draftItem?.uploadedBytes ?? 0
                 )
             }
         }

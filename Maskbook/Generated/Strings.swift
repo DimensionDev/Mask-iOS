@@ -686,6 +686,14 @@ enum L10n {
       static var encrypt: String {
         return L10n.tr("Localizable", "Plugins.FileService.Encrypt")
       }
+      /// Encrypting
+      static var encrypting: String {
+        return L10n.tr("Localizable", "Plugins.FileService.Encrypting")
+      }
+      /// Failed
+      static var failed: String {
+        return L10n.tr("Localizable", "Plugins.FileService.Failed")
+      }
       /// Failed to upload due to network conditions or other problems.
       static var failureTip: String {
         return L10n.tr("Localizable", "Plugins.FileService.FailureTip")

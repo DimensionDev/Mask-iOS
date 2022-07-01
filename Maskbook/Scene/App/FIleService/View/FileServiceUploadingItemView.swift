@@ -1,142 +1,144 @@
 import SwiftUI
 
 struct FileServiceUploadingItemView: View {
+
+    enum Event {
+        case share(FileServiceUploadingItem)
+        case remove(FileServiceUploadingItem)
+        case reTry(FileServiceUploadingItem)
+    }
+
     private let item: FileServiceUploadingItem
-    private let onDelete: (FileServiceUploadingItem) -> Void
-    private let onShare: (FileServiceUploadingItem) -> Void
+    private let onEvent: (Event) -> Void
     
     init(
         _ item: FileServiceUploadingItem,
-        onDelete: @escaping (FileServiceUploadingItem) -> Void,
-        onShare: @escaping (FileServiceUploadingItem) -> Void
+        onEvent: @escaping (Event) -> Void
     ) {
         self.item = item
-        self.onShare = onShare
-        self.onDelete = onDelete
+        self.onEvent = onEvent
     }
     
     var body: some View {
-        Group {
-            if let item = item {
-                content(of: item)
-            } else {
-                Color.clear
-            }
-        }
+        content(of: item)
+            .colorScheme(.light)
     }
 
     func content(of item: FileServiceUploadingItem) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
-            HStack(spacing: 12) {
-                Image(Asset.Plugins.FileService.folder)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 56, height: 56)
+        HStack(spacing: 12) {
+            Image(Asset.Plugins.FileService.folder)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 32, height: 32)
 
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(item.fileName)
-                        .font(.bh4)
-                        .foregroundColor(Asset.Colors.Text.dark)
-                        .lineLimit(1)
-                        .multilineTextAlignment(.leading)
-                    
-                    if item.state == .uploaded, item.uploadDate.isSome {
-                        Text(item.uploadDateText)
-                            .font(.mh7)
-                            .foregroundColor(Asset.Colors.Text.normal)
-                            .lineLimit(1)
-                            .horizontallyFilled()
-                    }
-                }
-                
-                if item.state == .uploaded {
-                    Button(
-                        action: { onShare(item) },
-                        label: {
-                            Asset.Colors.Public.blue.asColor()
-                                .overlay(
-                                    Text(L10n.Plugins.FileService.post)
-                                        .font(.bh6)
-                                        .foregroundColor(.white)
-                                )
-                                .frame(width: 78, height: 32)
-                                .cornerRadius(8)
-                        }
+            VStack(alignment: .leading, spacing: 4) {
+                Text(item.fileName)
+                    .font(.bh4)
+                    .foregroundColor(Asset.Colors.Text.dark)
+                    .lineLimit(1)
+                    .multilineTextAlignment(.leading)
+
+
+                Text(item.state.detailText)
+                    .font(.rh7)
+                    .foregroundColor(
+                        item.state == .failed
+                        ? Asset.Colors.Public.error.asColor()
+                        : Asset.Colors.Text.normal.asColor()
                     )
-                }
-            }
-            
-            switch item.state {
-            case .failed:
-                Text(L10n.Plugins.FileService.failureTip)
-                    .font(.mh7)
-                    .foregroundColor(Asset.Colors.Public.error)
-                    .lineSpacing(4)
-                    .layoutPriority(1)
                     .horizontallyFilled()
-                
-            default:
-                VStack(alignment: .leading, spacing: 4) {
-                    HStack {
-                        Text(item.state.detailText)
-                            .font(.mh5)
-                            .foregroundColor(Asset.Colors.Text.normal)
-                        
-                        Spacer()
-                        
-                        Text(item.progressFileText)
-                            .font(.rh6)
-                            .foregroundColor(Asset.Colors.Text.normal)
-                    }
-                    
-                    progressView
-                }
+
+                progressView
             }
+
+            HStack(spacing: 20) {
+                Button(
+                    action: {
+                        switch item.state {
+                        case .uploading, .encrypting: break
+                        case .failed: onEvent(.reTry(item))
+                        case .uploaded: onEvent(.share(item))
+                        }
+                    },
+                    label: {
+                        switch item.state {
+                        case .uploaded:
+                            Image(Asset.Plugins.FileService.share)
+                                .renderingMode(.template)
+                                .foregroundColor(Asset.Colors.Text.dark.asColor())
+
+                        default:
+                            Image(Asset.Plugins.FileService.retry)
+                                .renderingMode(.template)
+                                .foregroundColor(Asset.Colors.Text.dark.asColor())
+                        }
+                    }
+                )
+
+                Button(
+                    action: { onEvent(.remove(item)) },
+                    label: {
+                        Image(Asset.Plugins.closeSquare)
+                            .renderingMode(.template)
+                            .foregroundColor(Asset.Colors.Text.dark.asColor())
+
+                    }
+                )
+            }
+            .opacity(item.state.isInterActive ? 1 : 0)
+            .disabled(!item.state.isInterActive)
         }
-        .overlay(
-            Group {
-                if item.state == .failed {
-                    Image(systemName: "xmark.circle.fill")
-                        .resizable()
-                        .foregroundColor(Asset.Colors.Text.normal.asColor())
-                        .frame(width: 20, height: 20)
-                        .onTapGesture { self.dropItem() }
-                }
-            },
-            alignment: .topTrailing
-        )
-        .padding(.top, 12)
-        .padding(.horizontal, 12)
-        .padding(.bottom, 16)
-        .background(Asset.Colors.Background.dark.asColor())
+
+        .padding(.all, 12)
+        .background(backGroundGradient)
         .cornerRadius(8)
     }
 
+    private var backGroundGradient: some View {
+        LinearGradient(
+            stops: [
+                .init(
+                    color: Asset.Colors.Gradient.d6E9Ff.asColor(),
+                    location: 0
+                ),
+                .init(
+                    color: Asset.Colors.Gradient.ebf2Ff.asColor(),
+                    location: 1
+                )
+            ],
+            startPoint: .init(x: 0, y: 0),
+            endPoint: .init(x: 0, y: 1)
+        )
+    }
+
     private var progressView: some View {
-        Group {
-            if let item = item {
-                GeometryReader { proxy in
-                    Asset.Colors.Background.selected.asColor()
-                        .cornerRadius(3)
-                        .overlay(
-                            Asset.Colors.Public.success.asColor()
-                                .frame(width: proxy.size.width * item.progress)
-                                .cornerRadius(3),
-                            alignment: .leading
-                        )
-                        .frame(
-                            width: proxy.size.width
-                        )
-                }
-                .frame(height: 6)
-            } else {
-                Color.clear
-            }
+        GeometryReader { proxy in
+            Asset.Colors.Public.white.asColor()
+                .cornerRadius(3)
+                .overlay(
+                    Asset.Colors.Public.success.asColor()
+                        .frame(width: proxy.size.width * item.progress)
+                        .cornerRadius(3),
+                    alignment: .leading
+                )
+                .frame(
+                    width: proxy.size.width
+                )
         }
+        .frame(height: 6)
     }
     
     private func dropItem() {
-        self.onDelete(item)
+        self.onEvent(.remove(item))
+    }
+}
+
+extension FileServiceUploadingItem.State {
+    fileprivate var isInterActive: Bool {
+        switch self {
+        case .failed, .uploaded: return true
+        case .encrypting, .uploading: return false
+        }
     }
 }
 
@@ -146,7 +148,7 @@ extension FileServiceUploadingItem {
         .init(
             fileName: "Rosecoke.png",
             provider: "arweave",
-            state: .preparing,
+            state: .encrypting,
             content: Data.init(count: 3072 * 1024),
             uploadedBytes: 0
         )
@@ -158,7 +160,7 @@ extension FileServiceUploadingItem {
             provider: "arweave",
             state: .failed,
             content: Data.init(count: 3072 * 1024),
-            uploadedBytes: 0
+            uploadedBytes: 3072 * 1024 * 0.5
         )
     }
     
@@ -180,7 +182,15 @@ extension FileServiceUploadingItem {
             state: .uploaded,
             content: Data.init(count: 3072 * 1024),
             uploadedBytes: 3072 * 1024,
-            uploadDate: Date()
+            uploadDate: Date(),
+            tx: .init(
+                id: "1133--1131",
+                key: "qeraqeqDDDdqe-_Dqeg",
+                landingTxID: "131",
+                payloadTxID: "1313",
+                progress: 1,
+                state: .uploaded
+            )
         )
     }
     
@@ -204,8 +214,7 @@ struct UploadingItemView_preview: PreviewProvider {
             ForEach(items, id: \.state) {
                 FileServiceUploadingItemView(
                     $0,
-                    onDelete: { _ in },
-                    onShare: { _ in }
+                    onEvent: { _ in }
                 )
             }
         }

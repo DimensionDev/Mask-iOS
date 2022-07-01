@@ -100,7 +100,8 @@ extension UploadFile {
                 key: key ?? "",
                 landingTxID: landingTxID ?? "",
                 payloadTxID: payloadTxID ?? "",
-                progress: 0
+                progress: 0,
+                state: .uploaded
             )
         )
     }

@@ -25,17 +25,17 @@ struct FileServiceUploadingItem: Hashable {
     }
 
     enum State: Int64, Hashable {
-        case preparing = 0
+        case encrypting = 0
         case uploading
         case uploaded
         case failed
 
         var detailText: String {
             switch self {
-            case .preparing: return L10n.Plugins.FileService.preparing
             case .uploading: return L10n.Plugins.FileService.uploading
             case .uploaded: return L10n.Plugins.FileService.uploaded
-            case .failed: return ""
+            case .encrypting: return L10n.Plugins.FileService.encrypting
+            case .failed: return L10n.Plugins.FileService.failed
             }
         }
 
@@ -74,7 +74,7 @@ struct FileServiceUploadingItem: Hashable {
 
     var progressFileText: String {
         switch self.state {
-        case .failed, .preparing: return ""
+        case .failed, .encrypting: return ""
         case .uploading, .uploaded:
             let uploadingText = uploadedBytes.fileSizeText
             let totalText = totalBytes.fileSizeText
