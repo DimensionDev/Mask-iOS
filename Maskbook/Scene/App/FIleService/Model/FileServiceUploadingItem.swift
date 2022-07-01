@@ -59,6 +59,8 @@ struct FileServiceUploadingItem: Hashable {
 
     let mime: String?
     let tx: FileServiceTranscation?
+    
+    var dataDownloadFromTX: Data? = nil
 
     var totalBytes: Double {
         Double(content.count)

@@ -4,11 +4,6 @@ import UIKit
 final class FileServiceDetailViewController: BaseViewController {
     let fileServiceItem: FileServiceUploadingItem
 
-    @InjectedProvider(\.mainCoordinator)
-    private var coordinator
-    
-    private lazy var shareViewModel = PluginMetaShareViewModel()
-
     init(item: FileServiceUploadingItem) {
         self.fileServiceItem = item
         super.init(nibName: nil, bundle: nil)
@@ -23,114 +18,41 @@ final class FileServiceDetailViewController: BaseViewController {
         super.viewDidLoad()
         title = fileServiceItem.fileName
 
+        let viewModel = FileServiceDetailViewModel(item: fileServiceItem)
         FileServiceDetailView(
-            item: fileServiceItem,
-            action: { [weak self] action in
-                guard let self = self else { return }
-                switch action {
-                case .share: self.share()
-                case .download: self.download()
-                }
-            }
+            viewModel: viewModel
         )
         .asContent(in: self)
-    }
-
-    private func share() {
-        guard let shareItem = FileServiceUploadResult.from(fileServiceItem) else {
-            log.info("FileServiceUploadResult get a nil value")
-            return
-        }
-        shareViewModel.postFileService(fileServiceResult: shareItem)
-    }
-
-    private func download() {
-//        typealias Service = FileServiceUploadOption.Service
-//        let urlPrefixs: [Service: String] = [
-//            .arweave: "https://arweave.net",
-//            .ipfs: "https://infura-ipfs.io/ipfs"
-//        ]
-//        guard let landingId = fileServiceItem.tx?.landingTxID,
-//              let service = Service.init(rawValue: fileServiceItem.provider),
-//              let baseurl = urlPrefixs[service] else {
-//            return
-//        }
-//
-//        let key = fileServiceItem.tx?.key ?? ""
-//        let url = key.isEmpty
-//        ? "\(baseurl)/\(landingId)"
-//        : "\(baseurl)/\(landingId)#\(key)"
-//
-//        guard let url = URL.init(string: url) else {
-//            return
-//        }
-//        coordinator.present(
-//            scene: .safariView(url: url),
-//            transition: .modal()
-//        )
-
-        let controller = FileServiceSaveFileController(file: .init(fileType: fileServiceItem.fileType, content: fileServiceItem.content))
-        self.present(controller, animated: true)
     }
 }
 
 struct FileServiceDetailView: View {
-    enum Action {
-        case download
-        case share
-    }
 
-    let item: FileServiceUploadingItem
+    @StateObject
+    var viewModel: FileServiceDetailViewModel
 
-    let actionSignal: (Action) -> Void
-
-    init(item: FileServiceUploadingItem, action: @escaping (Action) -> Void) {
-        self.item = item
-        self.actionSignal = action
+    init(viewModel: FileServiceDetailViewModel) {
+        _viewModel = .init(wrappedValue: viewModel)
     }
 
     var body: some View {
         GeometryReader { proxy in
             VStack(spacing: 16) {
                 Spacer()
-
-                VStack(alignment: .center, spacing: item.fileType == .image ? 12 : 40) {
-                    switch item.fileType {
-                    case .image:
-                        if let uiImage = UIImage.init(data: item.content) {
-                            Image(uiImage: uiImage)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(maxWidth: proxy.size.width - 40, maxHeight: 200)
-                        } else {
-                            Image(Asset.Plugins.FileService.imagePlaceholder)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: proxy.size.width - 40, height: 200)
-                        }
-
-                    case .file:
-                        Image(Asset.Plugins.FileService.folder)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 134, height: 134)
-                    }
-
-                    VStack(spacing: 4) {
-                        Text(item.fileName)
-                            .font(.bh4)
-                            .foregroundColor(Asset.Colors.Text.dark)
-
-                        Text(item.uploadDateText)
-                            .font(.mh7)
-                            .foregroundColor(Asset.Colors.Text.normal)
-                    }
+                switch viewModel.state {
+                case .downloading:
+                    FileServiceDownloadingPreview(item: viewModel.item)
+                case .downloadFail:
+                    FileServiceDownloadFailPreview(item: viewModel.item)
+                case .downloaded:
+                    FileServiceGeneralPreview(item: viewModel.item)
                 }
-
                 Spacer()
 
                 Button(
-                    action: { actionSignal(.share) },
+                    action: {
+                        viewModel.share()
+                    },
                     label: {
                         Asset.Colors.Public.blue.asColor()
                             .cornerRadius(8)
@@ -144,13 +66,13 @@ struct FileServiceDetailView: View {
                 )
 
                 Button(
-                    action: { actionSignal(.download) },
+                    action: { viewModel.save() },
                     label: {
                         Asset.Colors.Public.blue.asColor()
                             .cornerRadius(8)
                             .frame(height: 54)
                             .overlay(
-                                Text(L10n.Common.Controls.download)
+                                Text(L10n.Common.Controls.save)
                                     .font(.bh5)
                                     .foregroundColor(.white)
                             )
@@ -167,8 +89,7 @@ struct FileServiceDetailView: View {
 struct FileServiceDetailView_Preview: PreviewProvider {
     static var previews: some View {
         FileServiceDetailView(
-            item: .uploaded,
-            action: { _ in }
+            viewModel: FileServiceDetailViewModel(item: .uploaded)
         )
     }
 }

@@ -2,15 +2,11 @@ import Foundation
 import SwiftUI
 
 final class FileServiceSaveFileController: SheetViewController {
-    struct File {
-        let fileType: FileServiceUploadingItem.ItemType
-        let content: Data
-    }
 
     private let viewModel: ViewModel
 
-    init(file: File) {
-        self.viewModel = .init(file: file)
+    init(item: FileServiceUploadingItem) {
+        self.viewModel = .init(item: item)
         super.init(presenter: SheetPresenter(
             presentStyle: .translucent,
             transition: KeyboardSheetTransition())
@@ -28,8 +24,9 @@ final class FileServiceSaveFileController: SheetViewController {
             guard let self = self else { return }
             switch action {
             case .saveToAlbum:
-                guard self.viewModel.file.fileType == .image,
-                      let image = UIImage(data: self.viewModel.file.content) else {
+                guard self.viewModel.item.fileType == .image,
+                      let data = self.viewModel.item.dataDownloadFromTX,
+                      let image = UIImage(data: data) else {
                     return
                 }
                 UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.albumSave), nil)
@@ -70,7 +67,11 @@ extension FileServiceSaveFileController: UIDocumentPickerDelegate {
             url.stopAccessingSecurityScopedResource()
         }
 
-        try? self.viewModel.file.content.write(to: url)
+        let fileUrl = url.appendingPathComponent(viewModel.item.fileName)
+        guard let data = viewModel.item.dataDownloadFromTX else {
+            return
+        }
+        try? data.write(to: fileUrl)
 
         self.hide()
     }
@@ -83,11 +84,11 @@ extension FileServiceSaveFileController {
         case saveToFolder
         }
 
-        let file: File
+        let item: FileServiceUploadingItem
         var action: (Action) -> Void = { _ in }
 
-        init(file: File) {
-            self.file = file
+        init(item: FileServiceUploadingItem) {
+            self.item = item
         }
     }
 
@@ -113,7 +114,7 @@ extension FileServiceSaveFileController {
                                     .font(.bh5)
                                     .foregroundColor(
                                         Asset.Colors.Text.dark.asColor().opacity(
-                                            viewModel.file.fileType == .image
+                                            viewModel.item.fileType == .image
                                             ? 1
                                             : 0.5
                                         )
@@ -124,7 +125,7 @@ extension FileServiceSaveFileController {
                             )
                     }
                 )
-                .disabled(viewModel.file.fileType == .file)
+                .disabled(viewModel.item.fileType == .file)
 
                 Button(
                     action: { self.viewModel.action(.saveToFolder) },
@@ -155,7 +156,7 @@ import UStack
 struct FileServiceSaveFileController_Preview: PreviewProvider {
     static var previews: some SwiftUI.View {
         Preview {
-            FileServiceSaveFileController(file: .init(fileType: .file, content: Data())).view
+            FileServiceSaveFileController(item: .uploaded).view
         }
     }
 }
