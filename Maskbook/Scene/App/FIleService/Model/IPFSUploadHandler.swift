@@ -70,8 +70,12 @@ extension IPFSUploadHandler: FileServiceUploadHandler {
     ) async throws -> String {
         return try await withCheckedThrowingContinuation { continuation in
             do {
-                try client?.add(data) { nodes in
-                    continuation.resume(returning: nodes.first?.hash?.value.base58EncodedString ?? "")
+                guard let client = client else { return continuation.resume(throwing: FileServiceError.ipfsUploadError) }
+                try client.add(data) { nodes in
+                    guard let cid = nodes.first?.hash?.value.base58EncodedString else {
+                        return continuation.resume(throwing: FileServiceError.ipfsUploadError)
+                    }
+                    continuation.resume(returning: cid)
                 }
             } catch {
                 continuation.resume(throwing: error)
