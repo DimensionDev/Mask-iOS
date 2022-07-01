@@ -13,6 +13,9 @@ struct FileServiceOnBoardView: View {
     @StateObject
     private var viewModel = ViewModel()
 
+    @State
+    private var textHeight: CGFloat = 0
+
     init(action: @escaping (Action) -> Void = { _ in }) {
         self.action = action
     }
@@ -24,7 +27,8 @@ struct FileServiceOnBoardView: View {
                     indicatorOffset: .init(x: 0, y: 20),
                     indicatorColor: Asset.Colors.Public.blue
                 ),
-                geoProxy: proxy
+                geoProxy: proxy,
+                itemBuilder: { FileServiceOnBoardItem(index: $0) }
             ) { item in
                 FileServiceOnBoardItemView(item: item.content)
             }
@@ -43,6 +47,9 @@ struct FileServiceOnBoardView: View {
 
     private var policyText: some View {
         TappableText(
+            preferredContentSize: { size in
+                textHeight = size.height
+            },
             attributedString: {
                 let final = NSMutableAttributedString(
                     string: "\(L10n.Plugins.Policy.reviewed) ",
@@ -88,10 +95,11 @@ struct FileServiceOnBoardView: View {
         .offset(y: -3)
         .lineSpacing(3)
         .colorScheme(.dark)
+        .frame(height: textHeight)
     }
 
     private var policyAgreeView: some View {
-        HStack(alignment: .firstTextBaseline) {
+        HStack(alignment: .firstTextBaseline, spacing: 8) {
             Group {
                 if viewModel.fileServicePolicyAccepted {
                     Color.white

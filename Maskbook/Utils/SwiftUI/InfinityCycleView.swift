@@ -10,11 +10,13 @@ struct InfinityCycleView<V: OnBoardItemView & View>: View {
     init(
         configuration: LayouConfiguration = .init(),
         geoProxy: GeometryProxy,
+        itemBuilder: @escaping (Int) -> V.Item,
         @ViewBuilder build: @escaping (Item<V.Item>) -> V
     ) {
         self.configuration = configuration
         self.proxy = geoProxy
         self.content = build
+        _viewModel = .init(wrappedValue: .init(itemBuilder: itemBuilder))
     }
 
     // MARK: Internal
@@ -88,7 +90,9 @@ struct InfinityCycleView<V: OnBoardItemView & View>: View {
     private final class TimerViewModel<V: OnBoardItem>: NSObject, ObservableObject, UIScrollViewDelegate {
         // MARK: Lifecycle
 
-        override init() {
+        let itemBuilder: (Int) -> V
+
+        init(itemBuilder: @escaping (Int) -> V) {
             let groupItemCount = V.allCases.count
             let maxIndex = dupilcateGroups * groupItemCount
             let startIndex: Int = {
@@ -102,7 +106,8 @@ struct InfinityCycleView<V: OnBoardItemView & View>: View {
 
                 return 0
             }()
-            let content = V(index: startIndex)
+            let content = itemBuilder(startIndex)
+            self.itemBuilder = itemBuilder
             self.item = .init(index: startIndex, animated: false, content: content)
             self.maxIndex = maxIndex
 
@@ -140,7 +145,7 @@ struct InfinityCycleView<V: OnBoardItemView & View>: View {
                     let targetValue = Item<V>.init(index: targetIndex, animated: true, content: .init(index: targetIndex))
                     self.item = targetValue
 
-                    withAnimation {
+                    withTransaction(.init(animation: .default)) {
                         self.scrolloffsetX = CGFloat(targetValue.index % V.allCases.count) * self.contentSize.width
                     }
 
@@ -209,7 +214,7 @@ struct InfinityCycleView<V: OnBoardItemView & View>: View {
 
         // MARK: Private
 
-        private let dupilcateGroups = 3
+        private let dupilcateGroups = 25
         private let groupItemCount = V.allCases.count
 
         private var cancelableStorage: Set<AnyCancellable> = []
@@ -220,7 +225,7 @@ struct InfinityCycleView<V: OnBoardItemView & View>: View {
             return .init(index: index, animated: false, content: content)
         }
 
-        private func updateTargetItem(currentIndex: Int, animateFlag: Bool? = nil) {
+        private func updateTargetItem(currentIndex: Int) {
             switch currentIndex {
             case (maxIndex - 1)...:
                 let restartIndex = restartIndex() + groupItemCount - 1
@@ -276,6 +281,7 @@ struct InfinityCycleView<V: OnBoardItemView & View>: View {
 
     private let configuration: LayouConfiguration
     private let proxy: GeometryProxy
+
     @StateObject
-    private var viewModel = TimerViewModel<V.Item>()
+    private var viewModel: TimerViewModel<V.Item>
 }

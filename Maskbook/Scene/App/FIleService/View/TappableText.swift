@@ -2,8 +2,14 @@ import Foundation
 import SwiftUI
 
 struct TappableText: UIViewRepresentable {
-    init(attributedString: @escaping () -> NSAttributedString) {
+    let preferredContentSize: (CGSize) -> Void
+
+    init(
+        preferredContentSize: @escaping (CGSize) -> Void,
+        attributedString: @escaping () -> NSAttributedString
+    ) {
         self.attributedString = attributedString()
+        self.preferredContentSize = preferredContentSize
     }
 
     final class Coordinator: NSObject, UITextViewDelegate {
@@ -20,7 +26,11 @@ struct TappableText: UIViewRepresentable {
         }
     }
 
-    func updateUIView(_ uiView: UITextView, context: Context) {}
+    func updateUIView(_ uiView: UITextView, context: Context) {
+        Task(priority: .high) { @MainActor in 
+            self.preferredContentSize(uiView.contentSize)
+        }
+    }
 
     func makeUIView(context: Context) -> UITextView {
         let textView = TappableTextView()
@@ -31,7 +41,12 @@ struct TappableText: UIViewRepresentable {
         textView.attributedText = context.coordinator.attributedString
         textView.delegate = context.coordinator
         textView.backgroundColor = .clear
+        // hide default blue link color
         textView.linkTextAttributes = [:]
+
+        textView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        textView.setContentHuggingPriority(.defaultLow, for: .vertical)
+
         return textView
     }
 
