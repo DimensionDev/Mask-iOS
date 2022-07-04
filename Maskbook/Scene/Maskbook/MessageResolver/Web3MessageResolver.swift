@@ -54,7 +54,7 @@ class Web3MessageResolver: MaskMessageResolver {
         }
         DispatchQueue.global().async {
             guard let w3Provider = Web3ProviderFactory.provider else {
-                os_log("%{public}s[%{public}ld], %{public}s: unsupport blockchain network: %{public}",
+                os_log("%{public}s[%{public}ld], %{public}s: unsupport blockchain network: %{public}s",
                        ((#file as NSString).lastPathComponent),
                        #line,
                        #function,
@@ -132,7 +132,7 @@ class Web3MessageResolver: MaskMessageResolver {
                     .wait()
                 self?.sendResponseToWebView(response: JSON(respData), id: request.id)
             } catch {
-                os_log("%{public}s[%{public}ld], %{public}s: send web3 request fail: %{public}",
+                os_log("%{public}s[%{public}ld], %{public}s: send web3 request fail: %{public}s",
                        ((#file as NSString).lastPathComponent),
                        #line,
                        #function,

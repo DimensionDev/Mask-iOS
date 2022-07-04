@@ -123,9 +123,8 @@ class WalletConnectClient {
 
 extension WalletConnectClient: ClientDelegate {
     func client(_ client: Client, didFailToConnect url: WCURL) {
-        if isStartingNewConnection {
-            didFailToConnectSubject.send((client: client, url: url))
-            isStartingNewConnection = false
+        DispatchQueue.main.async {
+            self._client(client, didFailToConnect: url)
         }
     }
     
@@ -134,6 +133,34 @@ extension WalletConnectClient: ClientDelegate {
     }
     
     func client(_ client: Client, didConnect session: Session) {
+        DispatchQueue.main.async {
+            self._client(client, didConnect: session)
+        }
+    }
+    
+    func client(_ client: Client, didDisconnect session: Session) {
+        DispatchQueue.main.async {
+            self.didDisconnectSubject.send((client: client, session: session))
+            self.session = nil
+            self.removeAccountFromSession(session: session)
+        }
+    }
+    
+    func client(_ client: Client, didUpdate session: Session) {
+        // This doc says `wc_sessionUpdate` will be called when the session is killed by the Wallet, when it provides new accounts or when it changes the active chain id.
+        // https://docs.walletconnect.com/tech-spec#session-update
+        // Method `didDisconnect` will be called if wallet disconnect.
+        log.debug("didUpdate \(session)", source: "WC:wallet-connect")
+    }
+    
+    func _client(_ client: Client, didFailToConnect url: WCURL) {
+        if isStartingNewConnection {
+            didFailToConnectSubject.send((client: client, url: url))
+            isStartingNewConnection = false
+        }
+    }
+    
+    func _client(_ client: Client, didConnect session: Session) {
         self.session = session
         
         guard let approved = session.walletInfo?.approved else {
@@ -250,16 +277,6 @@ extension WalletConnectClient: ClientDelegate {
                 self.delegate.showReplaceWalletConnectWalletAlert()
             }
         }
-    }
-    
-    func client(_ client: Client, didDisconnect session: Session) {
-        didDisconnectSubject.send((client: client, session: session))
-        self.session = nil
-        removeAccountFromSession(session: session)
-    }
-    
-    func client(_ client: Client, didUpdate session: Session) {
-        // do nothing
     }
 }
 

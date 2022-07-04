@@ -282,7 +282,8 @@ class SendTransactionConfirmViewController: BaseViewController {
             var defaultOptions = TransactionOptions.defaultOptions
             defaultOptions.from = fromAddress
             defaultOptions.gasPrice = .manual(BigUInt(0))
-            let transacation = EthereumTransaction(to: receiveAddress, data: Data(), options: defaultOptions)
+            var transacation = EthereumTransaction(to: receiveAddress, data: Data())
+            transacation.applyOptions(defaultOptions)
             when(fulfilled: web3Provier.estimateGasPromise(transacation, transactionOptions: defaultOptions), web3Provier.getGasPricePromise())
                 .done { gasLimit, gasPrice in
                 self.viewModel.gasPricePublisher.value = gasPrice
