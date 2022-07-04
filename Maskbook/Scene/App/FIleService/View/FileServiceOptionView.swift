@@ -15,8 +15,7 @@ struct FileServiceOptionView: View {
         @InjectedProvider(\.userDefaultSettings)
         var setting;
 
-        let option = FileServiceUploadOption(setting.fileServiceUploadOption) ?? .default
-        _fileServiceOption = .init(initialValue: option)
+        _fileServiceOption = .init(initialValue: .default)
     }
 
     var body: some View {

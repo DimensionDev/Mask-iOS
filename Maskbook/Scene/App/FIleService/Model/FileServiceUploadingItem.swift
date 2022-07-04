@@ -11,6 +11,7 @@ struct FileServiceUploadingItem: Hashable {
         uploadedBytes: Double,
         uploadDate: Date? = nil,
         mime: String? = nil,
+        option: FileServiceUploadOption,
         tx: FileServiceTranscation? = nil
     ) {
         self.fileName = fileName
@@ -20,6 +21,7 @@ struct FileServiceUploadingItem: Hashable {
         self.uploadedBytes = uploadedBytes
         self.uploadDate = uploadDate
         self.fileType = fileType
+        self.option = option
         self.tx = tx
         self.mime = mime
     }
@@ -58,6 +60,7 @@ struct FileServiceUploadingItem: Hashable {
     let fileType: ItemType
 
     let mime: String?
+    let option: FileServiceUploadOption
     let tx: FileServiceTranscation?
 
     var totalBytes: Double {

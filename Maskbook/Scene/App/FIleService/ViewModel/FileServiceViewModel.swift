@@ -5,6 +5,54 @@ import SwiftUI
 import CoreDataStack
 
 final class FileServiceViewModel: ObservableObject {
+    // MARK: Lifecycle
+
+    init() {
+        FileServiceRepository.deleteAll(object: UploadFile.self)
+
+        @InjectedProvider(\.fileServiceUploadManager)
+        var manager;
+        _uploadManager = .init(initialValue: manager)
+
+        settings.fileServicePolicyAccepted = false
+        settings.onBoardFeatures = ""
+        refreshList()
+
+        Publishers
+            .CombineLatest(
+                settings.$fileServicePolicyAccepted,
+                settings.$onBoardFeatures
+                    .map { $0.contains("\(OnBoardFeature.fileService.rawValue)") }
+            )
+            .receive(on: DispatchQueue.main)
+            .map {  !($0 && $1) }
+            .assign(to: \.showOnboard, on: self)
+            .store(in: &cancelableStorage)
+
+        uploadManager
+            .newUploadedItem
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] item in
+                self?.items.insert(item, at: 0)
+            }
+            .store(in: &cancelableStorage)
+    }
+
+    deinit {
+        if settings.fileServicePolicyAccepted {
+            settings.checkOnBoardFeature(.fileService)
+        }
+
+        uploadManager.isVisible = false
+    }
+
+    var isVisible: Bool {
+        get { uploadManager.isVisible }
+        set { uploadManager.isVisible = newValue }
+    }
+
+    // MARK: Internal
+
     enum Action {
         case choseFile
         case share(FileServiceUploadResult)
@@ -12,39 +60,18 @@ final class FileServiceViewModel: ObservableObject {
     }
 
     @Published
-    var items: [FileServiceUploadingItem] = [
-        .preparing,
-        .uploaded,
-        .uploading,
-        .failed
-    ]
+    var items: [FileServiceUploadingItem] = []
 
     @Published
     var searchText: String = ""
 
     @Published
-    var draftItem: FileServiceUploadingItem? {
-        didSet {
-            // update list when starting uploading a new item
-            if oldValue != nil, draftItem != nil {
-                refreshList()
-            }
-        }
-    }
+    var showOnboard: Bool = false
 
-    private var uploadOption = CurrentValueSubject<FileServiceUploadOption, Never>(.default)
+    private(set) var actionSignal: (Action) -> Void = { _ in }
 
-    var showOnboard: Bool { items.isEmpty && draftItem.isNone }
-
-    // there can be only a single uploading item
-    // so when uploading, use this flag to hide the plus button
-    var isUploading: Bool {
-        guard let item = draftItem,
-              item.state != .uploaded else {
-            return false
-        }
-
-        return true
+    var allowUploading: Bool {
+        uploadManager.allowUploading && settings.fileServicePolicyAccepted
     }
 
     var visibleItems: [FileServiceUploadingItem] {
@@ -52,177 +79,71 @@ final class FileServiceViewModel: ObservableObject {
             .filter { searchText.isEmpty || $0.fileName.contains(searchText) }
     }
 
-    private var cancelableStorage: Set<AnyCancellable> = []
-
-    private(set) var actionSignal: (Action) -> Void = { _ in }
-
-    init() {
-        refreshList()
-        let drafeSignal = $draftItem
-            .compactMap { $0 }
-            .removeDuplicates()
-            .filter { $0.state == .uploaded }
-            .receive(on: DispatchQueue.main)
-            .share()
-
-            drafeSignal
-            .sink { (value: FileServiceUploadingItem) in
-                FileServiceRepository.updateOrInsertRecord(
-                    updateBy: { (item: UploadFile) in
-                        item.update(from: value)
-                    }
-                )
-            }
-            .store(in: &cancelableStorage)
-
-        drafeSignal
-            .delay(for: .seconds(5), scheduler: DispatchQueue.main)
-            .sink { [weak self] uploadItem in
-                guard let self = self else { return }
-                guard let item = self.draftItem else {
-                    return
-                }
-
-                // in case there is a new uploading
-                guard let txid = uploadItem.tx?.id,
-                      let itemID = item.tx?.id,
-                      txid == itemID else {
-                    return
-                }
-
-
-                if item.state == .uploaded {
-                    self.draftItem = nil
-                    self.refreshList()
-                }
-            }
-            .store(in: &cancelableStorage)
-
-        @InjectedProvider(\.userDefaultSettings)
-        var settings;
-
-        settings
-            .fileServiceUploadOptionPublisher
-            .receive(on: DispatchQueue.main)
-            .bind(to: \.uploadOption, on: self)
-            .store(in: &cancelableStorage)
-    }
-
-    private func refreshList() {
-//        items = FileServiceRepository
-//            .getRecords(
-//                transform: { (file: UploadFile) in
-//                    file.asStructItem()
-//                }
-//            )
+    var uploadingItems: [FileServiceUploadViewModel] {
+        uploadManager.uploadingItems
     }
 
     func configActionSignal(_ actionSignal: @escaping (Action) -> Void) {
         self.actionSignal = actionSignal
     }
 
+    // MARK: Private
+
+    private var uploadOption = CurrentValueSubject<FileServiceUploadOption, Never>(.default)
+
+    private var cancelableStorage: Set<AnyCancellable> = []
+
+    @InjectedProvider(\.userDefaultSettings)
+    private var settings
+
+    @Published
+    private var uploadManager: FileServiceUploadManager
+
+    private func refreshList() {
+        items = FileServiceRepository
+            .getRecords(
+                transform: { (file: UploadFile) in
+                    file.asStructItem()
+                }
+            )
+            .filter { $0.uploadDate.isSome }
+    }
+}
+
+// MARK: Uploading
+
+extension FileServiceViewModel {
     func remove(_ item: FileServiceUploadingItem) {
-        FileServiceRepository.delete(
-            object: UploadFile.self,
-            filterBy: \UploadFile.name == item.fileName
-        )
+        uploadManager.remove(item)
+        objectWillChange.send()
     }
 
     func share(_ item: FileServiceUploadingItem) {
         guard let value = FileServiceUploadResult.from(item) else {
             return
         }
-        self.actionSignal(.share(value))
+        actionSignal(.share(value))
+    }
+
+    func retryUploading(_ item: FileServiceUploadingItem) {
+        uploadManager.retryUploading(item)
     }
 
     func tryUploading(_ fileItem: FileServiceSelectedFileItem) {
-        draftItem = .init(
+        let item: FileServiceUploadingItem = .init(
             fileName: fileItem.fileName,
             provider: uploadOption.value.service.rawValue.lowercased(),
             fileType: fileItem.fileType,
-            state: .encrypting,
+            state: .failed,
             content: fileItem.data,
-            uploadedBytes: 0,
-            mime: fileItem.mime
+            uploadedBytes: Double(fileItem.data.bytes.count) * 0.5,
+            mime: fileItem.mime,
+            option: .init()
         )
-        uploadDraft()
-    }
-
-    private func uploadDraft() {
-        guard let item = self.draftItem else {
-            return
-        }
-        let option = uploadOption.value
-        let uploader = chooseUploader(by: option)
-        let stream = uploader.upload(item, option: option)
-
-        Task { @MainActor in
-            do {
-                for try await value in stream {
-                    let didFinish = value.state == .uploaded
-                    self.draftItem = .init(
-                        fileName: item.fileName,
-                        provider: option.service.rawValue.lowercased(),
-                        fileType: item.fileType,
-                        state: value.state,
-                        content: item.content,
-                        uploadedBytes: value.progress * item.totalBytes,
-                        uploadDate: didFinish ? Date() : nil,
-                        tx: value
-                    )
-                }
-            } catch {
-                self.draftItem = .init(
-                    fileName: item.fileName,
-                    provider: option.service.rawValue.lowercased(),
-                    fileType: item.fileType,
-                    state: .failed,
-                    content: item.content,
-                    uploadedBytes: self.draftItem?.uploadedBytes ?? 0
-                )
-            }
-        }
-    }
-
-    private func chooseUploader(by option: FileServiceUploadOption) -> any FileServiceUploadHandler {
-        switch option.service {
-        case .arweave: return ArweaveUploadHandler()
-        case .ipfs: return IPFSUploadHandler()
-        }
-    }
-}
-
-extension FileServiceViewModel {
-    enum Item: Identifiable, Hashable {
-        case draft(FileServiceUploadingItem)
-        case archive(FileServiceUploadingItem)
-
-        var id: String {
-            switch self {
-            case let .archive(item): return item.fileName
-            case let .draft(item): return item.fileName
-            }
-        }
-
-        var fileName: String {
-            switch self {
-            case let .archive(item): return item.fileName
-            case let .draft(item): return item.fileName
-            }
-        }
-
-        var isArchive: Bool {
-            switch self {
-            case .archive: return true
-            default: return false
-            }
-        }
-
-        var rawValue: FileServiceUploadingItem {
-            switch self {
-            case let .draft(value): return value
-            case let .archive(value): return value
-            }
+        // TODO: Merge Code
+        if uploadManager.tryUploading(item) {
+            settings.checkOnBoardFeature(.fileService)
+            objectWillChange.send()
         }
     }
 }

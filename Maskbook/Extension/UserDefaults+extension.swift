@@ -87,7 +87,7 @@ final class UserDefaultSettings {
         case fileServicePolicyAccepted
 
         case backupFileDetectDate
-        case fileServiceUploadOption
+        case onBoardFeatures
     }
 
     func removeAll() {
@@ -111,7 +111,6 @@ final class UserDefaultSettings {
         indexedDBDataMigrated = false
 
         fileServicePolicyAccepted = false
-        fileServiceUploadOption = FileServiceUploadOption.defaultOption
     }
 
     @OptionalUserDefault(key: .defaultAccountAddress)
@@ -332,31 +331,27 @@ final class UserDefaultSettings {
     @OptionalUserDefault(key: .backupFileDetectDate)
     var backupFileDetectDate: Date?
 
-    @ReactiveUserDefault(
-        key: .fileServiceUploadOption,
-        defaultValue: FileServiceUploadOption.defaultOption
-    )
-    var fileServiceUploadOption: String
-
     @ReactiveUserDefault(key: .fileServicePolicyAccepted, defaultValue: false)
     var fileServicePolicyAccepted: Bool
+
+    @ReactiveUserDefault(key: .onBoardFeatures, defaultValue: "")
+    var onBoardFeatures: String
 }
 
 extension UserDefaultSettings {
-    var fileServiceUploadOptionPublisher: AnyPublisher<FileServiceUploadOption, Never> {
-        $fileServiceUploadOption
-            .removeDuplicates()
-            .compactMap(FileServiceUploadOption.init)
-            .share()
-            .eraseToAnyPublisher()
-    }
-    
     func changeNetwork(network: BlockChainNetwork, address: String?) {
         defaultAccountAddress = address
         self.network = network
         if self.walletDisplayBlockchain != .all {
             self.walletDisplayBlockchain = .blockchain(network)
         }
+    }
+
+    func checkOnBoardFeature(_ feature: OnBoardFeature) {
+        guard !onBoardFeatures.contains("\(feature.rawValue)") else {
+            return
+        }
+        onBoardFeatures.append("\(feature.rawValue),")
     }
 
     var networkPubisher: AnyPublisher<BlockChainNetwork, Never> {

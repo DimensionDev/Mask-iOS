@@ -77,6 +77,9 @@
 		1F036394277AB05F001E8A88 /* AnyDappResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F036393277AB05F001E8A88 /* AnyDappResolver.swift */; };
 		1F036397277ABB99001E8A88 /* LabsBrowserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F036396277ABB99001E8A88 /* LabsBrowserController.swift */; };
 		1F036399277B287A001E8A88 /* DappScriptAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F036398277B287A001E8A88 /* DappScriptAdaptor.swift */; };
+		1F173D4728728234007A5A24 /* OnBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F173D4628728234007A5A24 /* OnBoard.swift */; };
+		1F173D4928728552007A5A24 /* FileServiceUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F173D4828728552007A5A24 /* FileServiceUploadManager.swift */; };
+		1F173D4D2872E138007A5A24 /* FileServiceUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F173D4C2872E138007A5A24 /* FileServiceUploadViewModel.swift */; };
 		1F1762722859B3F8008BE93E /* ArweaveUploadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1762712859B3F8008BE93E /* ArweaveUploadHandler.swift */; };
 		1F1762742859B40D008BE93E /* IPFSUploadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1762732859B40D008BE93E /* IPFSUploadHandler.swift */; };
 		1F1762762859BB18008BE93E /* FileServiceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1762752859BB18008BE93E /* FileServiceDetailViewController.swift */; };
@@ -914,6 +917,9 @@
 		1F036393277AB05F001E8A88 /* AnyDappResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyDappResolver.swift; sourceTree = "<group>"; };
 		1F036396277ABB99001E8A88 /* LabsBrowserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabsBrowserController.swift; sourceTree = "<group>"; };
 		1F036398277B287A001E8A88 /* DappScriptAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappScriptAdaptor.swift; sourceTree = "<group>"; };
+		1F173D4628728234007A5A24 /* OnBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoard.swift; sourceTree = "<group>"; };
+		1F173D4828728552007A5A24 /* FileServiceUploadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceUploadManager.swift; sourceTree = "<group>"; };
+		1F173D4C2872E138007A5A24 /* FileServiceUploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceUploadViewModel.swift; sourceTree = "<group>"; };
 		1F1762712859B3F8008BE93E /* ArweaveUploadHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArweaveUploadHandler.swift; sourceTree = "<group>"; };
 		1F1762732859B40D008BE93E /* IPFSUploadHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPFSUploadHandler.swift; sourceTree = "<group>"; };
 		1F1762752859BB18008BE93E /* FileServiceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceDetailViewController.swift; sourceTree = "<group>"; };
@@ -2484,6 +2490,7 @@
 				2AD31E26282D367600CB3D49 /* View+Style.swift */,
 				2A470B06283E45F0009B49EA /* String+URL.swift */,
 				2A49E15128449F820084208E /* Substring+String.swift */,
+				1F173D4628728234007A5A24 /* OnBoard.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -3769,6 +3776,8 @@
 			children = (
 				5D474971285191EF00D3E7E6 /* FileServiceSelectFileSourceViewModel.swift */,
 				1F5B5EF428582F3400F6AD98 /* FileServiceViewModel.swift */,
+				1F173D4828728552007A5A24 /* FileServiceUploadManager.swift */,
+				1F173D4C2872E138007A5A24 /* FileServiceUploadViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -4680,6 +4689,7 @@
 				2D6E31DD279974FD00A70187 /* PersonaImportHandler.swift in Sources */,
 				1F036397277ABB99001E8A88 /* LabsBrowserController.swift in Sources */,
 				2AF8851F271EE9310004565A /* TokenCardView.swift in Sources */,
+				1F173D4928728552007A5A24 /* FileServiceUploadManager.swift in Sources */,
 				2A6ABBB82720053B00CC3AED /* RemoteBackupActionsViewController.swift in Sources */,
 				2AD856002812875A0064DDA5 /* MaskWrapper.swift in Sources */,
 				2DA3FAB4273CDFBA0013A784 /* ChainInfo.swift in Sources */,
@@ -4981,6 +4991,7 @@
 				2AF88570271EE9310004565A /* WordsVerifyProtocol.swift in Sources */,
 				2AF8858A271EE9310004565A /* SelectItemViewController.swift in Sources */,
 				2AFBEDE526E61D6400BD77B7 /* LoadingWithTextController.swift in Sources */,
+				1F173D4D2872E138007A5A24 /* FileServiceUploadViewModel.swift in Sources */,
 				2A49E15228449F820084208E /* Substring+String.swift in Sources */,
 				2AF88503271EE9310004565A /* PersonaActionViewController.swift in Sources */,
 				2A18E7FB266C9D210045BC88 /* AvatarView.swift in Sources */,
@@ -4997,6 +5008,7 @@
 				6F53A8E827FECD6B002465C8 /* PendingTransactionManager.swift in Sources */,
 				2AD8559D281285520064DDA5 /* PluginStorageRepository.swift in Sources */,
 				2A6ABB992720053B00CC3AED /* RemoteRestoreVerifyView.swift in Sources */,
+				1F173D4728728234007A5A24 /* OnBoard.swift in Sources */,
 				2AD85577281284940064DDA5 /* PostRecord.swift in Sources */,
 				6F782A9C283B648F0068E123 /* SelectContactViewModel.swift in Sources */,
 				2AF8851C271EE9310004565A /* TokenDetailTokenCell.swift in Sources */,
@@ -5800,6 +5812,7 @@
 					"\"WebExtension_Shim\"",
 					"-lmask_wallet_core_mobile",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = io.maskbook.maskbook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

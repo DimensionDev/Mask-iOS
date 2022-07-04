@@ -8,19 +8,20 @@ struct FileServiceUploadingItemView: View {
         case reTry(FileServiceUploadingItem)
     }
 
-    private let item: FileServiceUploadingItem
+    @StateObject
+    private var viewModel: FileServiceUploadViewModel
     private let onEvent: (Event) -> Void
     
     init(
-        _ item: FileServiceUploadingItem,
+        _ viewModel: FileServiceUploadViewModel,
         onEvent: @escaping (Event) -> Void
     ) {
-        self.item = item
+        _viewModel = .init(wrappedValue: viewModel)
         self.onEvent = onEvent
     }
     
     var body: some View {
-        content(of: item)
+        content(of: viewModel.item)
             .colorScheme(.light)
     }
 
@@ -117,7 +118,7 @@ struct FileServiceUploadingItemView: View {
                 .cornerRadius(3)
                 .overlay(
                     Asset.Colors.Public.success.asColor()
-                        .frame(width: proxy.size.width * item.progress)
+                        .frame(width: proxy.size.width * viewModel.item.progress)
                         .cornerRadius(3),
                     alignment: .leading
                 )
@@ -129,7 +130,7 @@ struct FileServiceUploadingItemView: View {
     }
     
     private func dropItem() {
-        self.onEvent(.remove(item))
+        self.onEvent(.remove(viewModel.item))
     }
 }
 
@@ -150,7 +151,8 @@ extension FileServiceUploadingItem {
             provider: "arweave",
             state: .encrypting,
             content: Data.init(count: 3072 * 1024),
-            uploadedBytes: 0
+            uploadedBytes: 0,
+            option: .init()
         )
     }
     
@@ -160,7 +162,8 @@ extension FileServiceUploadingItem {
             provider: "arweave",
             state: .failed,
             content: Data.init(count: 3072 * 1024),
-            uploadedBytes: 3072 * 1024 * 0.5
+            uploadedBytes: 3072 * 1024 * 0.5,
+            option: .init()
         )
     }
     
@@ -171,7 +174,8 @@ extension FileServiceUploadingItem {
             fileType: .file,
             state: .uploading,
             content: Data.init(count: 3072 * 1024),
-            uploadedBytes: 1024 * 1024
+            uploadedBytes: 1024 * 1024,
+            option: .init()
         )
     }
     
@@ -183,6 +187,7 @@ extension FileServiceUploadingItem {
             content: Data.init(count: 3072 * 1024),
             uploadedBytes: 3072 * 1024,
             uploadDate: Date(),
+            option: .init(),
             tx: .init(
                 id: "1133--1131",
                 key: "qeraqeqDDDdqe-_Dqeg",
@@ -213,7 +218,7 @@ struct UploadingItemView_preview: PreviewProvider {
         VStack {
             ForEach(items, id: \.state) {
                 FileServiceUploadingItemView(
-                    $0,
+                    .init(item: $0),
                     onEvent: { _ in }
                 )
             }

@@ -13,17 +13,20 @@ struct FileServiceView: View {
 
     var body: some View {
         GeometryReader { proxy in
-            if viewModel.showOnboard {
-                FileServiceOnBoardView { action in
-                    switch action {
-                    case .upload: viewModel.actionSignal(.choseFile)
-                    }
-                }
-            } else {
+//            if viewModel.showOnboard {
+//                FileServiceOnBoardView { action in
+//                    switch action {
+//                    case .upload: viewModel.actionSignal(.choseFile)
+//                    }
+//                }
+//            } else {
                 // file list view
                 fileList(with: proxy)
                     .ignoresSafeArea(.container, edges: .bottom)
-            }
+                    .onAppear {
+                        viewModel.isVisible = true
+                    }
+//            }
         }
         // keep it here to avoid container size change
         .ignoresSafeArea(.keyboard)
@@ -33,12 +36,6 @@ struct FileServiceView: View {
 
     @StateObject
     private var viewModel: FileServiceViewModel
-
-    @State
-    private var textFieldFocused: Bool = false
-
-    @State
-    private var items: [FileServiceUploadingItem] = [FileServiceUploadingItem.preparing, .uploading, .uploaded]
 
     private let buttonSize: CGFloat = 56
 
@@ -72,8 +69,10 @@ struct FileServiceView: View {
                 )
             }
         )
+        .opacity(viewModel.allowUploading ? 1 : 0.5)
+        .disabled(!viewModel.allowUploading)
         .shadow(color: Asset.Colors.Public.s1.asColor(), radius: 12, x: 0, y: 6)
-        .offset(x: -20, y: -buttonSize - 35)
+        .offset(x: -20, y: -buttonSize - 24)
     }
 
     private var cardGradient: some View {
@@ -100,9 +99,10 @@ struct FileServiceView: View {
                     L10n.Common.searchPlaceHolder,
                     text: $viewModel.searchText
                 )
-                .introspectTextField { view in
-                    view.publisher(for: \.isFirstResponder)
-                        .subscribe(Subscribers.Assign(object: self, keyPath: \.textFieldFocused))
+                .introspect(
+                    selector: TargetViewSelector.siblingContainingOrAncestorOrAncestorChild
+                ) { (textField: UITextField) in
+                    print("textField find", textField)
                 }
 
                 Image(systemName: "xmark.circle.fill")
@@ -113,22 +113,42 @@ struct FileServiceView: View {
             .whiteRadiusBackgroundView(height: 48)
             .layoutPriority(2)
 
-            ScrollView {
-                LazyVStack(
-                    alignment: .center,
-                    spacing: 16,
-                    pinnedViews: [.sectionHeaders],
-                    content: {
-                        Section {
-                            ForEach(viewModel.visibleItems, id: \.self) { item in
-                                view(of: item)
+            if viewModel.visibleItems.isEmpty {
+                if viewModel.searchText.isEmpty {
+                    VStack(spacing: 12) {
+                        Spacer()
+
+                        Image(Asset.Images.Scene.Empty.emptyBox)
+
+                        Text("You haven't uploaded any files yet.")
+
+                        Spacer()
+                    }
+                } else {
+                    VStack(spacing: 12) {
+                        Image(Asset.Images.Scene.Empty.emptyBox)
+
+                        Text("No files currently found")
+                    }
+                }
+            } else {
+                ScrollView {
+                    LazyVStack(
+                        alignment: .center,
+                        spacing: 16,
+                        pinnedViews: [.sectionHeaders],
+                        content: {
+                            Section {
+                                ForEach(viewModel.visibleItems, id: \.self) { item in
+                                    view(of: item)
+                                }
                             }
                         }
-                    }
-                )
-            }
+                    )
+                }
 
-            Spacer()
+                Spacer()
+            }
         }
         .padding(.top, 20)
         .padding(.horizontal, 20)
@@ -140,31 +160,29 @@ struct FileServiceView: View {
 
     private func uploadingItemList(with proxy: GeometryProxy) -> some View {
         VStack(spacing: 10) {
-            if items.isEmpty {
+            if viewModel.uploadingItems.isEmpty {
                 Color.clear
                     .frame(height: 0)
             } else {
-                ForEach(items, id: \.self) { item in
-                    FileServiceUploadingItemView(item) { _ in
+                ForEach(viewModel.uploadingItems, id: \.item) { vm in
+                    FileServiceUploadingItemView(vm) { event in
+                        switch event {
+                        case let .share(item): self.viewModel.share(item)
+                        case let .reTry(item): self.viewModel.retryUploading(item)
+                        case let .remove(item): self.viewModel.remove(item)
+                        }
                     }
                 }
             }
         }
-        .padding(.all, items.isEmpty ? 0 : 20)
+        .padding(.all, viewModel.uploadingItems.isEmpty ? 0 : 20)
         .padding(.bottom, proxy.safeAreaInsets.bottom)
-        .background(
-            cardGradient
-        )
+        .background(cardGradient)
         .overlay(
-            Group {
-                if viewModel.showOnboard || viewModel.isUploading {
-                    Color.clear
-                } else {
-                    uploadButton
-                }
-            },
+            uploadButton,
             alignment: .topTrailing
         )
+        .border(Color.red, width: 1)
     }
 
     private func view(of item: FileServiceUploadingItem) -> some View {
@@ -198,9 +216,7 @@ struct FileServiceView: View {
             }
 
             Image(Asset.Plugins.pluginArrow)
-                .foregroundColor(
-                    Asset.Colors.Text.normal.asColor()
-                )
+                .foregroundColor(Asset.Colors.Text.normal.asColor())
         }
         .padding(.all, 12)
         .background(Asset.Colors.Background.dark.asColor())
@@ -220,5 +236,57 @@ struct FileServiceView_Preview: PreviewProvider {
             .background(
                 Asset.Colors.Background.normal.asColor().ignoresSafeArea()
             )
+    }
+}
+
+extension TargetViewSelector {
+    static func siblingContainingOrAncestorOrAncestorChild<TargetView: PlatformView>(from entry: PlatformView) -> TargetView? {
+        if let sibling: TargetView = siblingContaining(from: entry) {
+            return sibling
+        }
+        return Introspect.findAncestorOrAncestorChild(ofType: TargetView.self, from: entry)
+    }
+}
+
+extension Introspect {
+    static func findAncestorOrAncestorChild<AnyViewType: PlatformView>(ofType type: AnyViewType.Type, from entry: PlatformView) -> AnyViewType? {
+        var superview = entry.superview
+        while let s = superview {
+            if let typed = s as? AnyViewType ?? findChildUsingFrame(ofType: type, in: s, from: entry) {
+                return typed
+            }
+            superview = s.superview
+        }
+        return nil
+    }
+
+    static func findChildUsingFrame<AnyViewType: PlatformView>(
+        ofType type: AnyViewType.Type,
+        in root: PlatformView,
+        from originalEntry: PlatformView
+    ) -> AnyViewType? {
+        var children: [AnyViewType] = []
+        for subview in root.subviews {
+            if let typed = subview as? AnyViewType {
+                children.append(typed)
+            } else if let typed = findChild(ofType: type, in: subview) {
+                children.append(typed)
+            }
+        }
+
+        if children.count > 1 {
+            for child in children {
+                let converted = child.convert(
+                    CGPoint(x: originalEntry.frame.size.width / 2, y: originalEntry.frame.size.height / 2),
+                    from: originalEntry
+                )
+                if CGRect(origin: .zero, size: child.frame.size).contains(converted) {
+                    return child
+                }
+            }
+            return nil
+        }
+
+        return children.first
     }
 }

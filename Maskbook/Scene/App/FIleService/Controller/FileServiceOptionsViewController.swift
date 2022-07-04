@@ -14,7 +14,6 @@ final class FileServiceOptionViewController: BaseViewController {
         title = L10n.Plugins.FileService.settingTitle
 
         FileServiceOptionView { [weak self] option in
-            self?.settings.fileServiceUploadOption = option.asString()
             self?.navigationController?.popViewController(animated: true)
         }
         .asContent(in: self)

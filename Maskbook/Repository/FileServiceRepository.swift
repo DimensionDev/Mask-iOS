@@ -94,7 +94,8 @@ extension UploadFile {
             content: content ?? Data(count: Int(fileSize)),
             uploadedBytes: 0,
             uploadDate: createdAt,
-            mime: nil, // use nil as all UploadFile is uploaded
+            mime: mime, // use nil as all UploadFile is uploaded
+            option: .init(uploadOption ?? "") ?? .init(),
             tx: FileServiceTranscation(
                 id: id ?? "",
                 key: key ?? "",
@@ -117,5 +118,7 @@ extension UploadFile {
         self.payloadTxID = item.tx?.payloadTxID
         self.fileSize = Double(item.content.count)
         self.content = item.content
+        self.uploadOption = item.option.asString()
+        self.mime = item.mime
     }
 }

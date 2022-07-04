@@ -1,6 +1,6 @@
 import Foundation
 
-struct FileServiceUploadOption {
+struct FileServiceUploadOption: Hashable {
     enum Service: String, Hashable, CaseIterable, Identifiable {
         case arweave
         case ipfs
