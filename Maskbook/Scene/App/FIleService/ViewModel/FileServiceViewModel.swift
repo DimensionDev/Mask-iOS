@@ -130,11 +130,13 @@ extension FileServiceViewModel {
     }
 
     func tryUploading(_ fileItem: FileServiceSelectedFileItem) {
+        // TODO: if fileItem.option is encrypted
+        // use  state: .encrypting, otherwise  state: .preparing,
         let item: FileServiceUploadingItem = .init(
             fileName: fileItem.fileName,
             provider: uploadOption.value.service.rawValue.lowercased(),
             fileType: fileItem.fileType,
-            state: .failed,
+            state: .encrypting,
             content: fileItem.data,
             uploadedBytes: Double(fileItem.data.bytes.count) * 0.5,
             mime: fileItem.mime,

@@ -13,7 +13,7 @@ struct ArweaveUploadHandler: FileServiceUploadHandler {
                 var totalBytes: Double = 0
 
                 tx.id = self.encodeArrayBuffer(item.content.hashData())
-                tx.state = .encrypting
+                tx.state = option.encrypted ? .encrypting : .preparing
                 continuation.yield(tx)
 
                 let attachment = AttachmentOptions(

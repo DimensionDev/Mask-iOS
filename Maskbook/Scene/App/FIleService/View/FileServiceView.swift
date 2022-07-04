@@ -114,22 +114,22 @@ struct FileServiceView: View {
             .layoutPriority(2)
 
             if viewModel.visibleItems.isEmpty {
-                if viewModel.searchText.isEmpty {
-                    VStack(spacing: 12) {
-                        Spacer()
-
+                VStack(spacing: 12) {
+                    Spacer()
+                    if viewModel.searchText.isEmpty {
                         Image(Asset.Images.Scene.Empty.emptyBox)
-
+                        // TODO: L10n
                         Text("You haven't uploaded any files yet.")
-
-                        Spacer()
-                    }
-                } else {
-                    VStack(spacing: 12) {
-                        Image(Asset.Images.Scene.Empty.emptyBox)
+                            .font(.mh6)
+                            .foregroundColor(Asset.Colors.Text.light)
+                    } else {
+                        Image(Asset.Images.Scene.Personas.search)
 
                         Text("No files currently found")
+                            .font(.mh6)
+                            .foregroundColor(Asset.Colors.Text.light)
                     }
+                    Spacer()
                 }
             } else {
                 ScrollView {
@@ -182,7 +182,6 @@ struct FileServiceView: View {
             uploadButton,
             alignment: .topTrailing
         )
-        .border(Color.red, width: 1)
     }
 
     private func view(of item: FileServiceUploadingItem) -> some View {

@@ -22,6 +22,7 @@ extension IPFSUploadHandler: FileServiceUploadHandler {
                 // get transcation id
                 var tx = FileServiceTranscation.progress(0)
                 tx.id = self.encodeArrayBuffer(item.content.hashData())
+                tx.state = option.encrypted ? .encrypting : .preparing
                 continuation.yield(tx)
 
                 // make attachment and get file key
@@ -35,6 +36,7 @@ extension IPFSUploadHandler: FileServiceUploadHandler {
                 let payloadID = try await self.makePayload(data: data)
                 tx.payloadTxID = payloadID
                 tx.progress = 0.5
+                tx.state = .uploading
                 continuation.yield(tx)
 
                 // get landing page and upload the html
@@ -42,6 +44,7 @@ extension IPFSUploadHandler: FileServiceUploadHandler {
                 let landingTxID = try await self.landingPage(item: item, option: option, tx: tx)
                 tx.landingTxID = landingTxID
                 tx.progress = 1.0
+                tx.state = .uploaded
                 continuation.yield(tx)
                 continuation.finish()
             }

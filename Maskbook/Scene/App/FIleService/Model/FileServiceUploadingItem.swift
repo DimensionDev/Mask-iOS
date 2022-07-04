@@ -28,6 +28,7 @@ struct FileServiceUploadingItem: Hashable {
 
     enum State: Int64, Hashable {
         case encrypting = 0
+        case preparing
         case uploading
         case uploaded
         case failed
@@ -37,6 +38,7 @@ struct FileServiceUploadingItem: Hashable {
             case .uploading: return L10n.Plugins.FileService.uploading
             case .uploaded: return L10n.Plugins.FileService.uploaded
             case .encrypting: return L10n.Plugins.FileService.encrypting
+            case .preparing: return L10n.Plugins.FileService.preparing
             case .failed: return L10n.Plugins.FileService.failed
             }
         }
