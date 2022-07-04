@@ -1,22 +1,27 @@
 import SwiftUI
 
-struct FileServiceOptionView: View {
+struct FileServiceConfirmView: View {
     typealias Service = FileServiceUploadOption.Service
     typealias Option = FileServiceUploadOption.Option
 
+    enum Action {
+        case faq
+        case confirm(option: FileServiceUploadOption)
+    }
+    
+    let actionSignal: (Action) -> Void
+    
+    let fileServiceItem: FileServiceSelectedFileItem
+    
     @State
     private var fileServiceOption: FileServiceUploadOption
 
-    private let optionHandler: (FileServiceUploadOption) -> Void
+    init(_ fileServiceItem: FileServiceSelectedFileItem,
+         action: @escaping (Action) -> Void) {
+        self.fileServiceItem = fileServiceItem
+        self.actionSignal = action
 
-    init(_ optionHandler: @escaping (FileServiceUploadOption) -> Void) {
-        self.optionHandler = optionHandler
-
-        @InjectedProvider(\.userDefaultSettings)
-        var setting;
-
-        let option = FileServiceUploadOption(setting.fileServiceUploadOption) ?? .default
-        _fileServiceOption = .init(initialValue: option)
+        _fileServiceOption = .init(initialValue: FileServiceUploadOption.default)
     }
 
     var body: some View {
@@ -24,19 +29,26 @@ struct FileServiceOptionView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 LazyVStack(
                     alignment: .leading,
-                    spacing: 16,
-                    pinnedViews: [.sectionHeaders]
+                    spacing: 16
                 ) {
+                    FileServiceGeneralPreview(item: fileServiceItem)
                     Section {
                         ForEach(Service.allCases) { item in
                             Row<Service>(title: item.title, item: item, style: .service, selection: $fileServiceOption.service)
                         }
                     } header: {
-                        Text(L10n.Plugins.FileService.serviceTitle)
-                            .font(.bh3)
-                            .foregroundColor(Asset.Colors.Text.dark)
-                            .horizontallyFilled()
-                            .background(Asset.Colors.Background.normal.asColor())
+                        HStack {
+                            Text(L10n.Plugins.FileService.serviceTitle)
+                                .font(.bh3)
+                                .foregroundColor(Asset.Colors.Text.dark)
+                                .horizontallyFilled()
+                                .background(Asset.Colors.Background.normal.asColor())
+                            Spacer()
+                            Image(Asset.Icon.faq)
+                                .onTapGesture {
+                                    actionSignal(.faq)
+                                }
+                        }
                     }
 
                     Section {
@@ -63,7 +75,7 @@ struct FileServiceOptionView: View {
             }
 
             Button(
-                action: { optionHandler(fileServiceOption) },
+                action: { actionSignal(.confirm(option: fileServiceOption)) },
                 label: {
                     Asset.Colors.Public.blue.asColor()
                         .overlay(
@@ -165,9 +177,21 @@ fileprivate struct SelectionRow: View {
     }
 }
 
+#if debug
+extension FileServiceSelectedFileItem {
+    static var previewItem: Self {
+        .init(
+            data: Data.init(count: 3072 * 1024),
+            fileName: "Rosecoke.png",
+            fileType: .image,
+            mime: ""
+        )
+    }
+}
 struct FileServiceOptionView_Preview: PreviewProvider {
     static var previews: some SwiftUI.View {
-        FileServiceOptionView { _ in }
+        FileServiceConfirmView(.previewItem) { _ in }
             .colorScheme(.dark)
     }
 }
+#endif

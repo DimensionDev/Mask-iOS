@@ -9,9 +9,9 @@
 import SwiftUI
 
 struct FileServiceGeneralPreview: View {
-    let item: FileServiceDownloadItem
+    let item: FileServiceSelectedFileItem
     
-    init(item: FileServiceDownloadItem) {
+    init(item: FileServiceSelectedFileItem) {
         self.item = item
     }
     

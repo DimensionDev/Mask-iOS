@@ -82,7 +82,7 @@ struct FileServiceDetailView: View {
                 case .downloadFail:
                     FileServiceDownloadFailPreview(item: viewModel.item)
                 case .downloaded:
-                    FileServiceGeneralPreview(item: viewModel.item)
+                    FileServiceGeneralPreview(item: viewModel.item.toSelectedFileItem())
                 }
                 Spacer()
 

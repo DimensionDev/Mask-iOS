@@ -149,7 +149,8 @@ extension FileServiceUploadingItem {
             state: .preparing,
             content: Data.init(count: 3072 * 1024),
             totalBytes: 3072 * 1024,
-            uploadedBytes: 0
+            uploadedBytes: 0,
+            mime: ""
         )
     }
     
@@ -160,7 +161,8 @@ extension FileServiceUploadingItem {
             state: .failed,
             content: Data.init(count: 3072 * 1024),
             totalBytes: 3072 * 1024,
-            uploadedBytes: 0
+            uploadedBytes: 0,
+            mime: ""
         )
     }
     
@@ -172,7 +174,8 @@ extension FileServiceUploadingItem {
             state: .uploading,
             content: Data.init(count: 3072 * 1024),
             totalBytes: 3072 * 1024,
-            uploadedBytes: 1024 * 1024
+            uploadedBytes: 1024 * 1024,
+            mime: ""
         )
     }
     
@@ -184,7 +187,8 @@ extension FileServiceUploadingItem {
             content: Data.init(count: 3072 * 1024),
             totalBytes: Double(3072 * 1024),
             uploadedBytes: 3072 * 1024,
-            uploadDate: Date()
+            uploadDate: Date(),
+            mime: ""
         )
     }
     

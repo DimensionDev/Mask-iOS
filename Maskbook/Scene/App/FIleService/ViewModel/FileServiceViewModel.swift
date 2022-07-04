@@ -138,7 +138,7 @@ final class FileServiceViewModel: ObservableObject {
         self.actionSignal(.share(value))
     }
 
-    func tryUploading(_ fileItem: FileServiceSelectedFileItem) {
+    func tryUploading(_ fileItem: FileServiceSelectedFileItem, option: FileServiceUploadOption) {
         draftItem = .init(
             fileName: fileItem.fileName,
             provider: uploadOption.value.service.rawValue.lowercased(),
@@ -147,7 +147,8 @@ final class FileServiceViewModel: ObservableObject {
             content: fileItem.data,
             totalBytes: Double(fileItem.data.count),
             uploadedBytes: 0,
-            mime: fileItem.mime
+            mime: fileItem.mime,
+            option: option
         )
         uploadDraft()
     }
@@ -180,6 +181,7 @@ final class FileServiceViewModel: ObservableObject {
                         totalBytes: Double(item.content.count),
                         uploadedBytes: value.progress * item.totalBytes,
                         uploadDate: didFinish ? Date() : nil,
+                        mime: item.mime,
                         tx: value
                     )
                 }
@@ -191,7 +193,8 @@ final class FileServiceViewModel: ObservableObject {
                     state: .failed,
                     content: item.content,
                     totalBytes: Double(item.content.count),
-                    uploadedBytes: 0
+                    uploadedBytes: 0,
+                    mime: item.mime
                 )
             }
         }

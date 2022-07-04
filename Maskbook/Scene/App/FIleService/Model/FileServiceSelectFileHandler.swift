@@ -12,7 +12,8 @@ import UIKit
 import WebExtension_Shim
 
 protocol FileServiceSelectFileDelegate {
-    func didGetFile(fileItem: FileServiceSelectedFileItem)
+    func didGetFile(fileItem: FileServiceSelectedFileItem,
+                    option: FileServiceUploadOption)
 }
 
 struct FileServiceSelectedFileItem {
@@ -20,10 +21,6 @@ struct FileServiceSelectedFileItem {
     let fileName: String
     let fileType: FileServiceUploadingItem.ItemType
     let mime: String
-
-    var fileNameWithoutExt: String {
-        fileName.components(separatedBy: ".").first ?? fileName
-    }
 }
 
 class FileServiceSelectFileHandler: NSObject {
@@ -34,6 +31,7 @@ class FileServiceSelectFileHandler: NSObject {
     }
 
     let fileSizeLimit = 11_010_048
+    
     @InjectedProvider(\.mainCoordinator)
     private var coordinator
 
@@ -98,7 +96,7 @@ class FileServiceSelectFileHandler: NSObject {
                                                        fileName: fileName,
                                                        fileType: .image,
                                                        mime: "image/jpeg")
-            delegate.didGetFile(fileItem: fileItem)
+            pushFileServiceConfirmView(item: fileItem)
         } else {
             assertionFailure("can't get jpeg data from image")
         }
@@ -125,7 +123,17 @@ class FileServiceSelectFileHandler: NSObject {
                                                    fileName: url.lastPathComponent,
                                                    fileType: url.containsImage ? .image : .file,
                                                    mime: url.mimeType())
-        delegate.didGetFile(fileItem: fileItem)
+        pushFileServiceConfirmView(item: fileItem)
+    }
+    
+    func pushFileServiceConfirmView(item: FileServiceSelectedFileItem) {
+        coordinator.present(
+            scene: .fileServiceOptions(item: item, optionHandler: { [weak self] option in
+                guard let self = self else { return }
+                self.delegate.didGetFile(fileItem: item, option: option)
+            }),
+            transition: .detail()
+        )
     }
     
     func loadImage(result: PHPickerResult) async -> Result<UIImage, Error> {

@@ -1,6 +1,6 @@
 import Foundation
 
-struct FileServiceUploadOption {
+struct FileServiceUploadOption: Hashable {
     enum Service: String, Hashable, CaseIterable, Identifiable {
         case arweave
         case ipfs
@@ -52,7 +52,7 @@ struct FileServiceUploadOption {
         self.useMesonCDN = useMesonCDN
     }
 
-    init?(_ stringValue: String) {
+    init?(_ stringValue: FileServiceUploadOptionString) {
         let components = stringValue.components(separatedBy: ",")
 
         guard components.count == 3,
@@ -67,7 +67,7 @@ struct FileServiceUploadOption {
         self.useMesonCDN = useMesonCDN
     }
 
-    func asString() -> String {
+    func asString() -> FileServiceUploadOptionString {
         "\(self.service.rawValue),\(encrypted ? "1" : "0"),\(useMesonCDN ? "1" : "0")"
     }
 }
@@ -79,5 +79,13 @@ extension FileServiceUploadOption {
 
     static var defaultOption: String {
         "\(Service.arweave.rawValue),\("1"),\("0")"
+    }
+}
+
+typealias FileServiceUploadOptionString = String
+
+extension FileServiceUploadOptionString {
+    func toFileServiceUploadOption() -> FileServiceUploadOption? {
+        .init(self)
     }
 }

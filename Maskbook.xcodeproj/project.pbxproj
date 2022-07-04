@@ -89,7 +89,7 @@
 		1F57023A27A27E4900C96909 /* RedPacketShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F57023927A27E4900C96909 /* RedPacketShareSheet.swift */; };
 		1F58730F277C51A3005A7B11 /* DappScriptPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58730E277C51A3005A7B11 /* DappScriptPayload.swift */; };
 		1F5B5ED5284F224500F6AD98 /* FileServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5ED4284F224500F6AD98 /* FileServiceViewController.swift */; };
-		1F5B5ED7284F2F4600F6AD98 /* FileServiceOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5ED6284F2F4600F6AD98 /* FileServiceOptionsViewController.swift */; };
+		1F5B5ED7284F2F4600F6AD98 /* FileServiceConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5ED6284F2F4600F6AD98 /* FileServiceConfirmViewController.swift */; };
 		1F5B5EDA284F3B9500F6AD98 /* FileServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5ED9284F3B9500F6AD98 /* FileServiceView.swift */; };
 		1F5B5EDD285080B700F6AD98 /* FileServiceUploadOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EDC285080B700F6AD98 /* FileServiceUploadOption.swift */; };
 		1F5B5EDF28508FD400F6AD98 /* FileServiceUploadingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EDE28508FD400F6AD98 /* FileServiceUploadingItemView.swift */; };
@@ -142,7 +142,7 @@
 		1FD19599284E0E430047B431 /* FileServiceOnBoardItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD19598284E0E430047B431 /* FileServiceOnBoardItemView.swift */; };
 		1FD24E1226BD267800D03599 /* InjectedValueKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD24E1126BD267800D03599 /* InjectedValueKeys.swift */; };
 		1FD91A8A283CCBA4000766FB /* PluginMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD91A89283CCBA4000766FB /* PluginMeta.swift */; };
-		1FD91A8E2844A252000766FB /* FileServiceOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD91A8D2844A252000766FB /* FileServiceOptionView.swift */; };
+		1FD91A8E2844A252000766FB /* FileServiceConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD91A8D2844A252000766FB /* FileServiceConfirmView.swift */; };
 		1FD91A922845BD57000766FB /* SwiftUI+Focused.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD91A912845BD57000766FB /* SwiftUI+Focused.swift */; };
 		1FE54D49269947640041C742 /* NSManagedContext+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE54D48269947640041C742 /* NSManagedContext+extension.swift */; };
 		1FE54D56269BEFE90041C742 /* CoreDataStackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFB224A2654E972005CAFFA /* CoreDataStackTests.swift */; };
@@ -931,7 +931,7 @@
 		1F57023927A27E4900C96909 /* RedPacketShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketShareSheet.swift; sourceTree = "<group>"; };
 		1F58730E277C51A3005A7B11 /* DappScriptPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappScriptPayload.swift; sourceTree = "<group>"; };
 		1F5B5ED4284F224500F6AD98 /* FileServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceViewController.swift; sourceTree = "<group>"; };
-		1F5B5ED6284F2F4600F6AD98 /* FileServiceOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceOptionsViewController.swift; sourceTree = "<group>"; };
+		1F5B5ED6284F2F4600F6AD98 /* FileServiceConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceConfirmViewController.swift; sourceTree = "<group>"; };
 		1F5B5ED9284F3B9500F6AD98 /* FileServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceView.swift; sourceTree = "<group>"; };
 		1F5B5EDC285080B700F6AD98 /* FileServiceUploadOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceUploadOption.swift; sourceTree = "<group>"; };
 		1F5B5EDE28508FD400F6AD98 /* FileServiceUploadingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceUploadingItemView.swift; sourceTree = "<group>"; };
@@ -984,7 +984,7 @@
 		1FD19598284E0E430047B431 /* FileServiceOnBoardItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceOnBoardItemView.swift; sourceTree = "<group>"; };
 		1FD24E1126BD267800D03599 /* InjectedValueKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectedValueKeys.swift; sourceTree = "<group>"; };
 		1FD91A89283CCBA4000766FB /* PluginMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginMeta.swift; sourceTree = "<group>"; };
-		1FD91A8D2844A252000766FB /* FileServiceOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceOptionView.swift; sourceTree = "<group>"; };
+		1FD91A8D2844A252000766FB /* FileServiceConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceConfirmView.swift; sourceTree = "<group>"; };
 		1FD91A912845BD57000766FB /* SwiftUI+Focused.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Focused.swift"; sourceTree = "<group>"; };
 		1FE54D48269947640041C742 /* NSManagedContext+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedContext+extension.swift"; sourceTree = "<group>"; };
 		1FE54D57269BF0140041C742 /* NSDiffableSourceSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSDiffableSourceSnapshotTests.swift; sourceTree = "<group>"; };
@@ -1573,7 +1573,6 @@
 		5DF8CD05286EEE10006A4048 /* UploadFile+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadFile+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5DF8CD06286EEE10006A4048 /* UploadFile+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadFile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5DF8CD09287295FC006A4048 /* FileServiceDownloadItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceDownloadItem.swift; sourceTree = "<group>"; };
-		68890DD0D41F3FA5AB78B97A /* Pods-Maskbook.release touchpreview.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maskbook.release touchpreview.xcconfig"; path = "Target Support Files/Pods-Maskbook/Pods-Maskbook.release touchpreview.xcconfig"; sourceTree = "<group>"; };
 		6F07ABE0279022B80039D69D /* NFTCollectionStatusModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFTCollectionStatusModel.swift; sourceTree = "<group>"; };
 		6F07ABE2279027E70039D69D /* NFTAssetPriceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTAssetPriceModel.swift; sourceTree = "<group>"; };
 		6F07ABE4279697450039D69D /* NFTCollectionDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollectionDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -1993,7 +1992,7 @@
 			isa = PBXGroup;
 			children = (
 				1F5B5ED4284F224500F6AD98 /* FileServiceViewController.swift */,
-				1F5B5ED6284F2F4600F6AD98 /* FileServiceOptionsViewController.swift */,
+				1F5B5ED6284F2F4600F6AD98 /* FileServiceConfirmViewController.swift */,
 				5DBDA4D1285083B200FBC921 /* FileServiceSelectFileSourceViewController.swift */,
 				1F1762752859BB18008BE93E /* FileServiceDetailViewController.swift */,
 				1F176277285C36B4008BE93E /* FileServiceFAQViewController.swift */,
@@ -2064,7 +2063,7 @@
 		1FD91A8C2844A06E000766FB /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1FD91A8D2844A252000766FB /* FileServiceOptionView.swift */,
+				1FD91A8D2844A252000766FB /* FileServiceConfirmView.swift */,
 				5DF8CCFF286EDB5C006A4048 /* FileServiceDownloadingPreview.swift */,
 				5DF8CD01286EDCE5006A4048 /* FileServiceDownloadFailPreview.swift */,
 				5DF8CD03286EDD31006A4048 /* FileServiceGeneralPreview.swift */,
@@ -4862,7 +4861,7 @@
 				2AF884BF271EE9300004565A /* PluginFactory.swift in Sources */,
 				2A5FAEA227CF7AD200D01250 /* GuideView.swift in Sources */,
 				1FCBEDF62738FFEB001C3637 /* RestoreWalletPasswordVertifyView.swift in Sources */,
-				1FD91A8E2844A252000766FB /* FileServiceOptionView.swift in Sources */,
+				1FD91A8E2844A252000766FB /* FileServiceConfirmView.swift in Sources */,
 				2AF884BD271EE9300004565A /* WebPublicApiMessageResolver.swift in Sources */,
 				5DC0183D2859BE84004973CA /* Merkle.swift in Sources */,
 				5D3E365027BF706500FDCFDD /* Post.swift in Sources */,
@@ -4880,7 +4879,7 @@
 				2AD8561A2812875A0064DDA5 /* MoveFromBottomModifier.swift in Sources */,
 				5D06F59C28531B8B00640D00 /* AttachmentOptions.swift in Sources */,
 				1FE54D5A269C19C10041C742 /* WalletCoreRequest.swift in Sources */,
-				1F5B5ED7284F2F4600F6AD98 /* FileServiceOptionsViewController.swift in Sources */,
+				1F5B5ED7284F2F4600F6AD98 /* FileServiceConfirmViewController.swift in Sources */,
 				2AD31E6C282D367700CB3D49 /* UserDefaults.swift in Sources */,
 				2AD855282812841C0064DDA5 /* WalletBottomWidgetViewModel.swift in Sources */,
 				2AD589B82848C22900CF8C9B /* SwiftUI+Placeholder.swift in Sources */,
