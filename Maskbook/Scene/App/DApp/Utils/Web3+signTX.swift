@@ -9,7 +9,7 @@ extension Web3Signer {
         password: String,
         useExtraEntropy: Bool = false
     ) throws {
-        if transaction.intrinsicChainID != nil {
+        if transaction.chainID != nil {
             try EIP155Signer.sign(transaction: &transaction, privateKey: privateKey, useExtraEntropy: useExtraEntropy)
         } else {
             try FallbackSigner.sign(transaction: &transaction, privateKey: privateKey, useExtraEntropy: useExtraEntropy)

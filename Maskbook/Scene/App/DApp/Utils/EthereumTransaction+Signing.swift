@@ -39,7 +39,7 @@ extension EthereumTransaction {
         }
 
         if chainID != nil {
-            transaction.UNSAFE_setChainID(chainID)
+            transaction.chainID = chainID
         }
 
         return transaction
