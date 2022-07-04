@@ -9,9 +9,9 @@
 import SwiftUI
 
 struct FileServiceGeneralPreview: View {
-    let item: FileServiceUploadingItem
+    let item: FileServiceDownloadItem
     
-    init(item: FileServiceUploadingItem) {
+    init(item: FileServiceDownloadItem) {
         self.item = item
     }
     
@@ -20,8 +20,3 @@ struct FileServiceGeneralPreview: View {
     }
 }
 
-struct FileServiceGeneralPreview_Previews: PreviewProvider {
-    static var previews: some View {
-        FileServiceGeneralPreview(item: .uploaded)
-    }
-}

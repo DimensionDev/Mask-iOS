@@ -5,7 +5,7 @@ final class FileServiceSaveFileController: SheetViewController {
 
     private let viewModel: ViewModel
 
-    init(item: FileServiceUploadingItem) {
+    init(item: FileServiceDownloadItem) {
         self.viewModel = .init(item: item)
         super.init(presenter: SheetPresenter(
             presentStyle: .translucent,
@@ -25,7 +25,7 @@ final class FileServiceSaveFileController: SheetViewController {
             switch action {
             case .saveToAlbum:
                 guard self.viewModel.item.fileType == .image,
-                      let data = self.viewModel.item.contentDownloadFromTX,
+                      let data = self.viewModel.item.content,
                       let image = UIImage(data: data) else {
                     return
                 }
@@ -68,7 +68,7 @@ extension FileServiceSaveFileController: UIDocumentPickerDelegate {
         }
 
         let fileUrl = url.appendingPathComponent(viewModel.item.fileName)
-        guard let data = viewModel.item.contentDownloadFromTX else {
+        guard let data = viewModel.item.content else {
             return
         }
         try? data.write(to: fileUrl)
@@ -84,10 +84,10 @@ extension FileServiceSaveFileController {
         case saveToFolder
         }
 
-        let item: FileServiceUploadingItem
+        let item: FileServiceDownloadItem
         var action: (Action) -> Void = { _ in }
 
-        init(item: FileServiceUploadingItem) {
+        init(item: FileServiceDownloadItem) {
             self.item = item
         }
     }
@@ -156,7 +156,7 @@ import UStack
 struct FileServiceSaveFileController_Preview: PreviewProvider {
     static var previews: some SwiftUI.View {
         Preview {
-            FileServiceSaveFileController(item: .uploaded).view
+            FileServiceSaveFileController(item: FileServiceUploadingItem.uploaded.toFileServiceDownloadItem()).view
         }
     }
 }

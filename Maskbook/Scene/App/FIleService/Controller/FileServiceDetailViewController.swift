@@ -2,9 +2,14 @@ import SwiftUI
 import UIKit
 
 final class FileServiceDetailViewController: BaseViewController {
-    let fileServiceItem: FileServiceUploadingItem
+    let fileServiceItem: FileServiceDownloadItem
 
-    init(item: FileServiceUploadingItem) {
+    @InjectedProvider(\.mainCoordinator)
+    private var coordinator
+
+    private lazy var shareViewModel = PluginMetaShareViewModel()
+
+    init(item: FileServiceDownloadItem) {
         self.fileServiceItem = item
         super.init(nibName: nil, bundle: nil)
     }
@@ -20,23 +25,55 @@ final class FileServiceDetailViewController: BaseViewController {
 
         let viewModel = FileServiceDetailViewModel(item: fileServiceItem)
         FileServiceDetailView(
-            viewModel: viewModel
+            viewModel: viewModel,
+            action: { [weak self] action in
+                guard let self = self else { return }
+                switch action {
+                case .share: self.share()
+                case .save: self.save()
+                }
+            }
         )
         .asContent(in: self)
+    }
+
+    @MainActor
+    func share() {
+        guard let shareItem = FileServiceUploadResult.from(fileServiceItem) else {
+            log.info("FileServiceUploadResult get a nil value")
+            return
+        }
+        shareViewModel.postFileService(fileServiceResult: shareItem)
+    }
+
+    @MainActor
+    func save() {
+        guard let _ = fileServiceItem.content else {
+            return
+        }
+        let controller = FileServiceSaveFileController(item: fileServiceItem)
+        coordinator.topViewController?.present(controller, animated: true)
     }
 }
 
 struct FileServiceDetailView: View {
+    enum Action {
+        case save
+        case share
+    }
+
+    let actionSignal: (Action) -> Void
 
     @StateObject
     var viewModel: FileServiceDetailViewModel
 
-    init(viewModel: FileServiceDetailViewModel) {
+    init(viewModel: FileServiceDetailViewModel, action: @escaping (Action) -> Void) {
         _viewModel = .init(wrappedValue: viewModel)
+        self.actionSignal = action
     }
 
     var body: some View {
-        GeometryReader { proxy in
+        GeometryReader { _ in
             VStack(spacing: 16) {
                 Spacer()
                 switch viewModel.state {
@@ -50,9 +87,7 @@ struct FileServiceDetailView: View {
                 Spacer()
 
                 Button(
-                    action: {
-                        viewModel.share()
-                    },
+                    action: { actionSignal(.share) },
                     label: {
                         Asset.Colors.Public.blue.asColor()
                             .cornerRadius(8)
@@ -66,7 +101,7 @@ struct FileServiceDetailView: View {
                 )
 
                 Button(
-                    action: { viewModel.save() },
+                    action: { actionSignal(.save) },
                     label: {
                         Asset.Colors.Public.blue.asColor()
                             .cornerRadius(8)
@@ -89,7 +124,7 @@ struct FileServiceDetailView: View {
 struct FileServiceDetailView_Preview: PreviewProvider {
     static var previews: some View {
         FileServiceDetailView(
-            viewModel: FileServiceDetailViewModel(item: .uploaded)
+            viewModel: FileServiceDetailViewModel(item: FileServiceUploadingItem.uploaded.toFileServiceDownloadItem()), action: { _ in }
         )
     }
 }

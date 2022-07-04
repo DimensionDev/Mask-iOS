@@ -41,7 +41,7 @@ final class FileServiceViewController: BaseViewController {
 
     private func viewDetail(of item: FileServiceUploadingItem) {
         coordinator.present(
-            scene: .fileServiceDetail(item),
+            scene: .fileServiceDetail(item.toFileServiceDownloadItem()),
             transition: .detail()
         )
     }

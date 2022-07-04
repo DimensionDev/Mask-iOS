@@ -7,10 +7,12 @@
 //
 
 import Foundation
+import CoreDataStack
+
 class FileServiceDetailViewModel : ObservableObject {
-    var item: FileServiceUploadingItem
+    var item: FileServiceDownloadItem
     
-    init(item: FileServiceUploadingItem) {
+    init(item: FileServiceDownloadItem) {
         self.item = item
         startDownload()
     }
@@ -18,38 +20,24 @@ class FileServiceDetailViewModel : ObservableObject {
     @Published
     var state: DownloadState = .downloading
     
-    private lazy var shareViewModel = PluginMetaShareViewModel()
-    
-    @InjectedProvider(\.mainCoordinator)
-    private var coordinator
-    
-    @MainActor
-    func share() {
-        guard let shareItem = FileServiceUploadResult.from(item) else {
-            log.info("FileServiceUploadResult get a nil value")
-            return
-        }
-        shareViewModel.postFileService(fileServiceResult: shareItem)
-    }
-    
-    @MainActor
-    func save() {
-        guard let content = item.contentDownloadFromTX else {
-            return
-        }
-        let controller = FileServiceSaveFileController(item: item)
-        coordinator.topViewController?.present(controller, animated: true)
-    }
-    
     func startDownload() {
+        if item.content != nil {
+            state = .downloaded
+            return
+        }
         guard let tx = item.tx else {
             state = .downloadFail
             return
         }
-        Task {
+        Task { @MainActor in
             do {
                 let data = try await FileService.getAttachment(payloadID: tx.payloadTxID, provider: item.provider, key: tx.key)
-                item.contentDownloadFromTX = data
+                item.content = data
+                FileServiceRepository.updateOrInsertRecord(
+                    updateBy: { (uploadFile: UploadFile) in
+                        uploadFile.update(from: self.item)
+                    }
+                )
                 state = .downloaded
             } catch(let e) {
                 log.debug("\(e)")

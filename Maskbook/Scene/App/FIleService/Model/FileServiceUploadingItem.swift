@@ -62,8 +62,6 @@ struct FileServiceUploadingItem: Hashable {
 
     let mime: String?
     let tx: FileServiceTranscation?
-    
-    var contentDownloadFromTX: Data? = nil
 
     var progress: CGFloat {
         guard totalBytes > 0 else {
@@ -133,5 +131,18 @@ extension Double {
 
         let gb = mb / 1_024
         return String(format: "%.1f GB", gb)
+    }
+}
+
+extension FileServiceUploadingItem {
+    func toFileServiceDownloadItem() -> FileServiceDownloadItem {
+        .init(fileName: fileName,
+              provider: provider,
+              fileType: fileType,
+              content: content.isEmpty ? nil : content,
+              totalBytes: totalBytes,
+              uploadDate: uploadDate,
+              mime: mime,
+              tx: tx)
     }
 }

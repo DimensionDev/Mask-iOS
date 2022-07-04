@@ -10,9 +10,9 @@ import SwiftUI
 
 struct FileServiceDownloadingPreview: View {
     
-    let item: FileServiceUploadingItem
+    let item: FileServiceDownloadItem
     
-    init(item: FileServiceUploadingItem) {
+    init(item: FileServiceDownloadItem) {
         self.item = item
     }
     
@@ -28,11 +28,5 @@ struct FileServiceDownloadingPreview: View {
                 .font(.mh7)
                 .foregroundColor(Asset.Colors.Text.normal)
         }
-    }
-}
-
-struct FileServiceDownloadingPreview_Previews: PreviewProvider {
-    static var previews: some View {
-        FileServiceDownloadingPreview(item: .uploaded)
     }
 }
