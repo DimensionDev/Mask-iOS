@@ -23,7 +23,7 @@ struct FileServiceConfirmView: View {
         self.fileServiceItem = fileServiceItem
         self.actionSignal = action
 
-        _fileServiceOption = .init(initialValue: FileServiceUploadOption.default)
+        _fileServiceOption = .init(initialValue: .default)
     }
 
     var body: some View {

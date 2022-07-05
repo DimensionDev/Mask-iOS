@@ -12,6 +12,7 @@ struct FileServiceUploadingItem: Hashable {
         uploadedBytes: Double,
         uploadDate: Date? = nil,
         mime: String? = nil,
+        option: FileServiceUploadOption,
         tx: FileServiceTranscation? = nil
     ) {
         self.fileName = fileName
@@ -22,22 +23,25 @@ struct FileServiceUploadingItem: Hashable {
         self.uploadedBytes = uploadedBytes
         self.uploadDate = uploadDate
         self.fileType = fileType
+        self.option = option
         self.tx = tx
         self.mime = mime
     }
 
     enum State: Int64, Hashable {
-        case preparing = 0
+        case encrypting = 0
+        case preparing
         case uploading
         case uploaded
         case failed
 
         var detailText: String {
             switch self {
-            case .preparing: return L10n.Plugins.FileService.preparing
             case .uploading: return L10n.Plugins.FileService.uploading
             case .uploaded: return L10n.Plugins.FileService.uploaded
-            case .failed: return ""
+            case .encrypting: return L10n.Plugins.FileService.encrypting
+            case .preparing: return L10n.Plugins.FileService.preparing
+            case .failed: return L10n.Plugins.FileService.failed
             }
         }
 
@@ -61,6 +65,7 @@ struct FileServiceUploadingItem: Hashable {
     let fileType: ItemType
 
     let mime: String?
+    let option: FileServiceUploadOption
     let tx: FileServiceTranscation?
 
     var progress: CGFloat {
@@ -69,16 +74,6 @@ struct FileServiceUploadingItem: Hashable {
         }
 
         return CGFloat(uploadedBytes) / CGFloat(totalBytes)
-    }
-
-    var progressFileText: String {
-        switch self.state {
-        case .failed, .preparing: return ""
-        case .uploading, .uploaded:
-            let uploadingText = uploadedBytes.fileSizeText
-            let totalText = totalBytes.fileSizeText
-            return "\(uploadingText)/\(totalText)"
-        }
     }
 
     var uploadDateText: String {

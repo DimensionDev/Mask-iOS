@@ -107,7 +107,7 @@ PODS:
   - IPFSClientKit (1.0.1)
   - IQKeyboardManagerSwift (6.3.0)
   - KeychainAccess (4.2.2)
-  - Kingfisher (7.2.4)
+  - Kingfisher (7.2.0)
   - KMPageControl (0.0.3)
   - LookinServer (1.0.6)
   - MaskbookPlugin (0.1.0):
@@ -146,7 +146,7 @@ PODS:
   - Socket.IO-Client-Swift (16.0.1):
     - Starscream (~> 4.0)
   - Starscream (4.0.4)
-  - SwiftGen (6.4.0)
+  - SwiftGen (6.5.0)
   - SwiftLint (0.43.1)
   - SwiftMsgPack (1.2.0)
   - SwiftProtobuf (1.19.0)
@@ -179,19 +179,19 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.4)
-  - BigInt (~> 5.2)
+  - BigInt (= 5.2)
   - BMPlayer (~> 1.3.0)
-  - CombineEvent (~> 1.0.0)
-  - CombineExt
+  - CombineEvent (= 1.0.0)
+  - CombineExt (= 1.7.0)
   - EFQRCode (~> 6.1.0)
   - EUMTouchPointView
-  - Firebase/Analytics
+  - Firebase/Analytics (= 9.2.0)
   - FLEX
   - IPFSClientKit
   - IQKeyboardManagerSwift (= 6.3.0)
   - KeychainAccess (~> 4.2)
-  - Kingfisher (~> 7.0)
-  - KMPageControl (~> 0.0.2)
+  - Kingfisher (= 7.2.0)
+  - KMPageControl (= 0.0.3)
   - LookinServer
   - MaskbookPlugin (from `./DevelopmentPod/MaskbookPlugin`)
   - MaskbookPlugin/Tests (from `./DevelopmentPod/MaskbookPlugin`)
@@ -199,18 +199,18 @@ DEPENDENCIES:
   - MaskWalletCore (from `./DevelopmentPod/MaskWalletCore`)
   - PanModal (from `./DevelopmentPod/PanModal`)
   - Pika (= 0.1.8)
-  - ResponderChain (~> 1.1)
-  - RSKPlaceholderTextView (~> 6.0.0)
-  - SnapKit (~> 5.0.0)
-  - Socket.IO-Client-Swift (~> 16.0)
-  - SwiftGen (~> 6.4.0)
+  - ResponderChain (= 1.1.2)
+  - RSKPlaceholderTextView (= 6.0.4)
+  - SnapKit (= 5.0.1)
+  - Socket.IO-Client-Swift (= 16.0.1)
+  - SwiftGen (= 6.5.0)
   - SwiftLint (= 0.43.1)
   - SwiftMsgPack (from `https://github.com/malcommac/SwiftMsgPack.git`, branch `develop`)
-  - UStack (~> 2.2.1)
+  - UStack (= 2.2.1)
   - WalletConnectSwift (from `https://github.com/DimensionDev/WalletConnectSwift.git`)
   - web3swift (from `https://github.com/DimensionDev/web3swift.git`, branch `develop`)
   - WebExtension-Shim (from `https://github.com/DimensionDev/WebExtension-Shim-iOS.git`, tag `2.0`)
-  - ZIPFoundation (~> 0.9)
+  - ZIPFoundation (= 0.9.13)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -320,7 +320,7 @@ SPEC CHECKSUMS:
   IPFSClientKit: 8cae0a9a901280db5fdb30edebf1bf572dd1f792
   IQKeyboardManagerSwift: a8228c257614af98743b4cd8584637025f36358f
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
-  Kingfisher: 2457be2121734e69e54a2312ecc0150eb9ae70b3
+  Kingfisher: 3ac0b75b155cabc0e544877d1a4deea29feece92
   KMPageControl: a64de2397e18d277434f553ed2222f62aad3fa28
   LookinServer: 18155b1e4a08213c236a1dd6b7ca52328a70a1e3
   MaskbookPlugin: d81a6508a95a857feea14a47b653e77a9344de8f
@@ -338,7 +338,7 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Socket.IO-Client-Swift: c116d6dc9fd6be9c259bacfe143f8725bce7d79e
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
-  SwiftGen: 67860cc7c3cfc2ed25b9b74cfd55495fc89f9108
+  SwiftGen: c3f115ede549d4b7873c3946b7d5ca538eb8b621
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   SwiftMsgPack: 22fb26bb7c544075fdfba2badde0394898a8b775
   SwiftProtobuf: 6ef3f0e422ef90d6605ca20b21a94f6c1324d6b3
@@ -350,6 +350,6 @@ SPEC CHECKSUMS:
   WebExtension-Shim: 11b071466c53f42097291eb176cf9bcc5fb9b050
   ZIPFoundation: ae5b4b813d216d3bf0a148773267fff14bd51d37
 
-PODFILE CHECKSUM: 8e0c19d67edc192d21acafa1783dea1d5d11ca85
+PODFILE CHECKSUM: fe572789e6450e0996e46709ee53616187a0cdee
 
 COCOAPODS: 1.11.3
