@@ -107,6 +107,7 @@ struct FileServiceView: View {
                     .onTapGesture { viewModel.searchText = "" }
             }
             .whiteRadiusBackgroundView(height: 48)
+            .padding(.horizontal, 20)
             .layoutPriority(2)
 
             if viewModel.visibleItems.isEmpty {
@@ -127,6 +128,7 @@ struct FileServiceView: View {
                     }
                     Spacer()
                 }
+                .padding(.horizontal, 20)
             } else {
                 ScrollView {
                     LazyVStack(
@@ -141,13 +143,13 @@ struct FileServiceView: View {
                             }
                         }
                     )
+                    .padding(.horizontal, 20)
                 }
 
                 Spacer()
             }
         }
         .padding(.top, 20)
-        .padding(.horizontal, 20)
         .overlay(
             uploadingItemList(with: proxy),
             alignment: .bottom
@@ -171,7 +173,7 @@ struct FileServiceView: View {
                     .foregroundColor(Asset.Colors.Text.normal)
                     .lineLimit(1)
 
-                if let fileKey = item.tx?.key {
+                if let fileKey = item.tx?.key, !fileKey.isEmpty {
                     Text {
                         Text("\(L10n.Plugins.FileService.fileKey): ")
                             .foregroundColor(Asset.Colors.Text.light)
@@ -181,6 +183,8 @@ struct FileServiceView: View {
                     }
                     .font(.mh7)
                     .lineLimit(1)
+                } else {
+                    Spacer()
                 }
             }
 
