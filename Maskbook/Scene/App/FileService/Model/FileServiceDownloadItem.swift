@@ -14,7 +14,6 @@ struct FileServiceDownloadItem {
         fileName: String,
         provider: String,
         fileType: ItemType = .image,
-        content: Data?,
         totalBytes: Double,
         uploadDate: Date? = nil,
         mime: String,
@@ -22,12 +21,12 @@ struct FileServiceDownloadItem {
     ) {
         self.fileName = fileName
         self.provider = provider
-        self.content = content
         self.totalBytes = totalBytes
         self.uploadDate = uploadDate
         self.fileType = fileType
         self.tx = tx
         self.mime = mime
+        self.content = loadFileContent()
     }
 
     let fileName: String
@@ -46,14 +45,27 @@ struct FileServiceDownloadItem {
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         return formatter.string(from: uploadDate ?? Date())
     }
+
+    func loadFileContent() -> Data? {
+        guard let id = tx?.id else {
+            return nil
+        }
+        return FileServiceLargeFileStorage.data(of: id)
+    }
 }
 
 extension FileServiceDownloadItem {
     func toSelectedFileItem() -> FileServiceSelectedFileItem {
-        return .init(data: content ?? Data(),
-              fileName: fileName,
-              fileType: fileType,
-              mime: mime,
-              totalBytes:totalBytes)
+        let path: URL? = {
+            if let id = tx?.id {
+                return FileServiceLargeFileStorage.fileServicePath(id: id)
+            }
+            return nil
+        }()
+        return FileServiceSelectedFileItem(data: content ?? Data(),
+                                           fileName: fileName,
+                                           fileType: fileType,
+                                           mime: mime,
+                                           path: path)
     }
 }

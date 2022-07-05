@@ -41,6 +41,7 @@ final class FileServiceUploadViewModel: ObservableObject {
                         totalBytes: item.totalBytes,
                         uploadedBytes: uploadedBytes,
                         uploadDate: didFinish ? Date() : nil,
+                        mime: item.mime,
                         option: uploadOption,
                         tx: value
                     )
@@ -59,6 +60,7 @@ final class FileServiceUploadViewModel: ObservableObject {
                     content: item.content,
                     totalBytes: item.totalBytes,
                     uploadedBytes: uploadedBytes,
+                    mime: item.mime,
                     option: uploadOption
                 )
                 self.updateUploadingState(for: item)

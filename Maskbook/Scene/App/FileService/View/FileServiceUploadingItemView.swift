@@ -153,6 +153,7 @@ extension FileServiceUploadingItem {
             content: Data.init(count: 3072 * 1024),
             totalBytes: 3072 * 1024,
             uploadedBytes: 0,
+            mime: "",
             option: .init()
         )
     }
@@ -165,6 +166,7 @@ extension FileServiceUploadingItem {
             content: Data.init(count: 3072 * 1024),
             totalBytes: 3072 * 1024,
             uploadedBytes: 3072 * 1024 * 0.5,
+            mime: "",
             option: .init()
         )
     }
@@ -178,6 +180,7 @@ extension FileServiceUploadingItem {
             content: Data.init(count: 3072 * 1024),
             totalBytes: 3072 * 1024,
             uploadedBytes: 1024 * 1024,
+            mime: "",
             option: .init()
         )
     }
@@ -191,6 +194,7 @@ extension FileServiceUploadingItem {
             totalBytes: Double(3072 * 1024),
             uploadedBytes: 3072 * 1024,
             uploadDate: Date(),
+            mime: "",
             option: .init(),
             tx: .init(
                 id: "1133--1131",
