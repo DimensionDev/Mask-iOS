@@ -246,6 +246,7 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="payloadTxID" optional="YES" attributeType="String"/>
         <attribute name="provider" optional="YES" attributeType="String"/>
+        <attribute name="uploadOption" optional="YES" attributeType="String"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="id"/>
@@ -278,7 +279,7 @@
         <element name="RelationRecord" positionX="108" positionY="162" width="128" height="104"/>
         <element name="StoredKey" positionX="90" positionY="144" width="128" height="179"/>
         <element name="Token" positionX="-63" positionY="-18" width="128" height="254"/>
-        <element name="UploadFile" positionX="90" positionY="144" width="128" height="194"/>
+        <element name="UploadFile" positionX="90" positionY="144" width="128" height="209"/>
         <element name="WalletConnectSession" positionX="90" positionY="144" width="128" height="89"/>
     </elements>
 </model>

@@ -17,13 +17,17 @@ struct IndicatorOffsetKey: PreferenceKey {
 }
 
 struct ScrollOffset: Equatable {
-    let rect: CGRect
-    let index: Int
+    // MARK: Lifecycle
 
     init(_ rect: CGRect, _ index: Int) {
         self.rect = rect
         self.index = index
     }
+
+    // MARK: Internal
+
+    let rect: CGRect
+    let index: Int
 
     func calculatedOffset() -> CGFloat {
         let width = rect.width
@@ -32,9 +36,7 @@ struct ScrollOffset: Equatable {
 }
 
 struct LayouConfiguration {
-    let indicatorOffset: CGPoint
-    let indicatorColor: ColorAsset
-    let showIndicator: Bool
+    // MARK: Lifecycle
 
     init(
         showIndicator: Bool = true,
@@ -45,17 +47,16 @@ struct LayouConfiguration {
         self.indicatorColor = indicatorColor
         self.showIndicator = showIndicator
     }
+
+    // MARK: Internal
+
+    let indicatorOffset: CGPoint
+    let indicatorColor: ColorAsset
+    let showIndicator: Bool
 }
 
 struct WalkThroughBoard<V: OnBoardItemView & View>: View {
-    @State
-    private var pageItem: V.Item
-    private let totalCount: CGFloat
-
-    @State
-    private var bottomPadding: CGFloat = 0
-
-    @Binding var configuration: LayouConfiguration
+    // MARK: Lifecycle
 
     init(
         startItem: V.Item,
@@ -65,6 +66,10 @@ struct WalkThroughBoard<V: OnBoardItemView & View>: View {
         totalCount = CGFloat(V.Item.allCases.count)
         _configuration = configuration
     }
+
+    // MARK: Internal
+
+    @Binding var configuration: LayouConfiguration
 
     var body: some View {
         GeometryReader { totalLayoutProxy in
@@ -110,72 +115,31 @@ struct WalkThroughBoard<V: OnBoardItemView & View>: View {
             .overlay(
                 Group {
                     if configuration.showIndicator {
-                        capsuleIndicator
+                        CapsuleIndicator(
+                            configuration: configuration,
+                            totalCount: totalCount,
+                            count: V.Item.allCases.count,
+                            scrollOffset: $scrollOffset,
+                            contentWidth: $contentWidth
+                        )
                     }
                 }
                 // use to move indicator
-                .offset(y: -bottomPadding)
-                ,
+                .offset(y: -bottomPadding),
+
                 alignment: .bottom
             )
         }
     }
 
-    private var capsuleIndicator: some View {
-        // indicator control
-        HStack(spacing: indicatorSpacing) {
-            ForEach(V.Item.allCases.indices) { index in
-                Capsule()
-                    .fill(
-                        self.index == index
-                        ? configuration.indicatorColor.asColor()
-                        : Asset.Colors.Background.lightBlue.asColor()
-                    )
-                    .frame(
-                        width: self.index == index
-                        ? capsuleWidth
-                        : indicatorWidth,
-                        height: indicatorHeight
-                    )
-            }
-        }
-        .overlay(
-            Capsule()
-                .fill(configuration.indicatorColor.asColor())
-                .frame(width: capsuleWidth, height: indicatorHeight)
-                .offset(x: calculatedOffset)
-            ,
-            alignment: .leading
-        )
-    }
+    // MARK: Private
 
-    private let capsuleWidth: CGFloat = 20
-    private let indicatorWidth: CGFloat = 10
-    private let indicatorHeight: CGFloat = 6
-    private let indicatorSpacing: CGFloat = 7
+    @State
+    private var pageItem: V.Item
+    private let totalCount: CGFloat
 
-    var index: Int {
-        guard !totalCount.isZero else {
-            return 0
-        }
-        let progress = round(scrollOffset / contentWidth)
-        let index = max(0, min(progress, totalCount - 1))
-
-        let value = Int(index)
-
-        return value
-    }
-
-    var calculatedOffset: CGFloat {
-        guard !contentWidth.isZero else {
-            return 0
-        }
-        let progress = scrollOffset / contentWidth
-        let maxWidth = indicatorWidth + indicatorSpacing
-        let value = progress * maxWidth
-
-        return value
-    }
+    @State
+    private var bottomPadding: CGFloat = 0
 
     @State
     private var scrollOffset: CGFloat = 0
@@ -184,7 +148,7 @@ struct WalkThroughBoard<V: OnBoardItemView & View>: View {
     private var contentWidth: CGFloat = 0
 }
 
-infix operator <| : AdditionPrecedence
+infix operator <|: AdditionPrecedence
 extension Equatable {
     static func <| (lhs: inout Self, rhs: Self) {
         if lhs != rhs {

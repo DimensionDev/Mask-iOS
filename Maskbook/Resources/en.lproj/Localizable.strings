@@ -129,12 +129,14 @@ Please scan Persona QR Code.";
 "Common.Controls.WebviewGoBack" = "Back";
 "Common.Empty" = "No records";
 "Common.Loading" = "Loading...";
-"Common.SearchPlaceHolder" = "Search";
+"Common.SearchPlaceholder" = "Search";
 "Common.Toast.Copy" = "copied!";
 "Common.Toast.Failed" = "Failed";
 "Common.Toast.Saved" = "Saved!";
 "Plugins.FileService.Arweave" = "Arweave";
 "Plugins.FileService.Encrypt" = "Make it encrypted";
+"Plugins.FileService.Encrypting" = "Encrypting...";
+"Plugins.FileService.Failed" = "Failed";
 "Plugins.FileService.FailureTip" = "Failed to upload due to network conditions or other problems.";
 "Plugins.FileService.Faq.Arweave" = "Arweave Network is lightweight and sustainable file storage protocol. Paying for storage fee on Arweave once allows lifelong access to Arweave’s database and encryption schemes.";
 "Plugins.FileService.Faq.FileService" = "Web3 File Service is a decentralized storage service that allows users to store files on the blockchain in an immutable and permanent way. Mask Network provides this service by working with reputable file storage protocols, including IPFS, Arweave, Swarm and Meson Network and supports file types like .pdf, .doc, .mp3, .mp4 among other formats, with the maximum file format being 10.4 mb.
@@ -149,7 +151,9 @@ Integrated with Arweave Network as the storage layer, Meson Network operates as 
 "Plugins.FileService.Faq.WhatIsFileService" = "What is Web3 File Service?";
 "Plugins.FileService.Faq.WhatIsIpfs" = "What is IPFS?";
 "Plugins.FileService.Faq.WhatIsMesonCdn" = "What is Meson CDN?";
+"Plugins.FileService.FileKey" = "File Key";
 "Plugins.FileService.Ipfs" = "IPFS";
+"Plugins.FileService.ListEmpty" = "You haven't uploaded any files yet.";
 "Plugins.FileService.LocalFileSource.SaveToAlbum" = "Save into the album";
 "Plugins.FileService.LocalFileSource.SaveToFolder" = "Save to folder";
 "Plugins.FileService.LocalFileSource.TakePhotos" = "Take Photos";
@@ -158,13 +162,13 @@ Integrated with Arweave Network as the storage layer, Meson Network operates as 
 "Plugins.FileService.LocalFileSource.UploadTips" = "The size limit is 10.5MB.
 The upload can’t be cancelled.";
 "Plugins.FileService.Mesoncdn" = "Use Meson CDN";
-"Plugins.FileService.Onboard.StepFour" = "Free Web3 file service, brought to you by Mask Network.";
-"Plugins.FileService.Onboard.StepOne" = "Decentralized file storage with Arweave, IPFS and Swarm.";
-"Plugins.FileService.Onboard.StepThree" = "Upload your file for permanent storage, share with friends.";
-"Plugins.FileService.Onboard.StepTwo" = "Tap [Settings] to select a protocol and adjust encryption settings.";
+"Plugins.FileService.Onboard.StepOne" = "Free to use Web3 File service, upload and store files permanently.";
+"Plugins.FileService.Onboard.StepThree" = "No restrictions on traditional social platforms, easy to upload and share files with friends.";
+"Plugins.FileService.Onboard.StepTwo" = "Decentralized storage service, powered by IPFS, Arweave, Starm and Meson Network.";
 "Plugins.FileService.OtherOption" = "Other Options";
 "Plugins.FileService.Post" = "Share";
 "Plugins.FileService.Preparing" = "Preparing...";
+"Plugins.FileService.SearchEmpty" = "No files currently found.";
 "Plugins.FileService.ServiceTitle" = "Service Protocols";
 "Plugins.FileService.SettingTitle" = "Upload Settings";
 "Plugins.FileService.Swarm" = "Swarm";

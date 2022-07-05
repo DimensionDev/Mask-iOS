@@ -29,6 +29,7 @@ extension UploadFile {
     @NSManaged public var provider: String?
     @NSManaged public var mime: String?
 
+    @NSManaged public var uploadOption: String?
 }
 
 extension UploadFile : Identifiable {
