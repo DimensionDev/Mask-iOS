@@ -28,7 +28,6 @@ struct TappableText: UIViewRepresentable {
 
     func updateUIView(_ uiView: UITextView, context: Context) {
         Task(priority: .high) { @MainActor in
-            uiView.attributedText <| context.coordinator.attributedString
             self.preferredContentSize(uiView.contentSize)
         }
     }
@@ -38,15 +37,16 @@ struct TappableText: UIViewRepresentable {
         textView.textAlignment = .left
         textView.isEditable = false
         textView.showsVerticalScrollIndicator = false
-
-        textView.attributedText = context.coordinator.attributedString
-        textView.delegate = context.coordinator
         textView.backgroundColor = .clear
+
         // hide default blue link color
         textView.linkTextAttributes = [:]
 
         textView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         textView.setContentHuggingPriority(.defaultLow, for: .vertical)
+
+        textView.delegate = context.coordinator
+        textView.attributedText = context.coordinator.attributedString
 
         return textView
     }

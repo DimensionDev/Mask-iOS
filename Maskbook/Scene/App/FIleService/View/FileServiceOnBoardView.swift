@@ -37,7 +37,7 @@ struct FileServiceOnBoardView: View {
                 Image(Asset.Plugins.FileService.uploadBackground)
                     .resizable()
                     .frame(width: proxy.size.width, height: 138 + proxy.safeAreaInsets.bottom)
-                    .overlay(policyView, alignment: .top)
+                    .overlay(policyView(with: proxy), alignment: .top)
                     .offset(y: proxy.safeAreaInsets.bottom)
                 ,
                 alignment: .bottom
@@ -92,7 +92,7 @@ struct FileServiceOnBoardView: View {
                 return final
             }
         )
-        .offset(y: -3)
+        .offset(y: -4)
         .lineSpacing(3)
         .colorScheme(.dark)
         .frame(height: textHeight)
@@ -126,8 +126,8 @@ struct FileServiceOnBoardView: View {
         }
     }
 
-    private var policyView: some View {
-        VStack(spacing: 20) {
+    func policyView(with proxy: GeometryProxy) -> some View {
+        VStack(spacing: 10) {
             policyAgreeView
 
             Button(
@@ -154,6 +154,7 @@ struct FileServiceOnBoardView: View {
         }
         .padding(.top, 20)
         .padding(.horizontal, 20)
+        .padding(.bottom, proxy.safeAreaInsets.bottom)
     }
 
     private final class ViewModel: NSObject, ObservableObject, UIScrollViewDelegate {
