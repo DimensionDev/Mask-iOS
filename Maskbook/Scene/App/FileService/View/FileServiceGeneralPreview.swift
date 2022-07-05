@@ -10,12 +10,12 @@ import AVKit
 import SwiftUI
 
 struct FileServiceGeneralPreview: View {
-    let item: FileServiceSelectedFileItem
+    var item: FileServiceSelectedFileItem
     var player: AVPlayer?
 
     init(item: FileServiceSelectedFileItem) {
         self.item = item
-        let cacheUrl = getUrlFromData(item: item)
+        let cacheUrl = self.item.tempURL
         self.player = AVPlayer(url: cacheUrl)
     }
 
@@ -47,20 +47,5 @@ struct FileServiceGeneralPreview: View {
                 .font(.mh7)
                 .foregroundColor(Asset.Colors.Text.normal)
         }.horizontallyCenterred()
-    }
-}
-
-extension FileServiceGeneralPreview {
-    func getUrlFromData(item: FileServiceSelectedFileItem) -> URL {
-        if let url = item.path {
-            return url
-        }
-        let cacheURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent(item.fileName)
-        do {
-            try item.data.write(to: cacheURL, options: .atomicWrite)
-        } catch let err {
-            print("Failed with error:", err.localizedDescription)
-        }
-        return cacheURL
     }
 }

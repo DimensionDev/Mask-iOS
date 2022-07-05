@@ -13,7 +13,7 @@ struct FileServiceDownloadItem {
     init(
         fileName: String,
         provider: String,
-        fileType: ItemType = .image,
+        fileType: ItemType,
         totalBytes: Double,
         uploadDate: Date? = nil,
         mime: String,

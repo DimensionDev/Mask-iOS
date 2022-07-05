@@ -9,44 +9,10 @@
 import Foundation
 import PhotosUI
 import UIKit
-import WebExtension_Shim
 
 protocol FileServiceSelectFileDelegate: AnyObject {
     func didGetFile(fileItem: FileServiceSelectedFileItem,
                     option: FileServiceUploadOption)
-}
-
-struct FileServiceSelectedFileItem {
-    let data: Data
-    let fileName: String
-    let fileType: FileServiceUploadingItem.ItemType
-    let mime: String
-    let path: URL?
-    var totalBytes: Double {
-        Double(data.count)
-    }
-    
-}
-
-extension FileServiceSelectedFileItem {
-    enum FileType {
-        case video
-        case image
-        case text
-        case application
-    }
-    
-    var specificFileType: FileType {
-        if mime.containsIgnoreCase(string: "image") {
-            return .image
-        } else if mime.containsIgnoreCase(string: "video") || mime.containsIgnoreCase(string: "audio") {
-            return .video
-        } else if mime.containsIgnoreCase(string: "text") {
-            return .text
-        } else {
-            return .application
-        }
-    }
 }
 
 final class FileServiceSelectFileHandler: NSObject {
