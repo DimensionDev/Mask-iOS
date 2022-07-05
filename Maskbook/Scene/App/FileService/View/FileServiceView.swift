@@ -97,7 +97,7 @@ struct FileServiceView: View {
                     .foregroundColor(Asset.Colors.Text.light.asColor())
 
                 TextField(
-                    L10n.Common.searchPlaceHolder,
+                    L10n.Common.searchPlaceholder,
                     text: $viewModel.searchText
                 )
 
@@ -208,7 +208,7 @@ struct FileServiceView: View {
                     FileServiceUploadingItemView(vm) { event in
                         switch event {
                         case let .share(item): self.viewModel.share(item)
-                        case let .reTry(item): self.viewModel.retryUploading(item)
+                        case let .retry(item): self.viewModel.retryUploading(item)
                         case let .remove(item): self.viewModel.remove(item)
                         }
                     }

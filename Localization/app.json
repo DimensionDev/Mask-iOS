@@ -205,7 +205,7 @@
     },
     "loading": "Loading...",
     "empty": "No records",
-    "search_place_holder": "Search"
+    "search_placeholder": "Search"
   },
   "scene": {
     "guide": {

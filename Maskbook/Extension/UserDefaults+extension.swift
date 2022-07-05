@@ -347,7 +347,7 @@ extension UserDefaultSettings {
         }
     }
 
-    func checkOnBoardFeature(_ feature: OnBoardFeature) {
+    func checkOnboardFeature(_ feature: OnboardFeature) {
         guard !onBoardFeatures.contains("\(feature.rawValue)") else {
             return
         }

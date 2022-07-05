@@ -2063,7 +2063,7 @@
 			path = InjectedValues;
 			sourceTree = "<group>";
 		};
-		1FD91A8B28447146000766FB /* FIleService */ = {
+		1FD91A8B28447146000766FB /* FileService */ = {
 			isa = PBXGroup;
 			children = (
 				5D474970285191DC00D3E7E6 /* ViewModel */,
@@ -2071,7 +2071,7 @@
 				1F5B5ED8284F31E500F6AD98 /* Controller */,
 				1FD91A8C2844A06E000766FB /* View */,
 			);
-			path = FIleService;
+			path = FileService;
 			sourceTree = "<group>";
 		};
 		1FD91A8C2844A06E000766FB /* View */ = {
@@ -2849,7 +2849,7 @@
 		2AF88359271EE9300004565A /* App */ = {
 			isa = PBXGroup;
 			children = (
-				1FD91A8B28447146000766FB /* FIleService */,
+				1FD91A8B28447146000766FB /* FileService */,
 				1F721093279E901900B8BF76 /* RedPacket */,
 				1F03638F2779D20D001E8A88 /* DApp */,
 				1F03638E2779D200001E8A88 /* Labs */,

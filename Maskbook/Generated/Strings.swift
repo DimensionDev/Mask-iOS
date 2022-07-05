@@ -87,8 +87,8 @@ enum L10n {
       return L10n.tr("Localizable", "Common.Loading")
     }
     /// Search
-    static var searchPlaceHolder: String {
-      return L10n.tr("Localizable", "Common.SearchPlaceHolder")
+    static var searchPlaceholder: String {
+      return L10n.tr("Localizable", "Common.SearchPlaceholder")
     }
 
     enum Alert {
@@ -686,7 +686,7 @@ enum L10n {
       static var encrypt: String {
         return L10n.tr("Localizable", "Plugins.FileService.Encrypt")
       }
-      /// Encrypting
+      /// Encrypting...
       static var encrypting: String {
         return L10n.tr("Localizable", "Plugins.FileService.Encrypting")
       }

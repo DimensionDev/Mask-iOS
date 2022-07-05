@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum OnBoardFeature: Int, CaseIterable {
+enum OnboardFeature: Int, CaseIterable {
     case fileService
 
     static var allFeatures: String {

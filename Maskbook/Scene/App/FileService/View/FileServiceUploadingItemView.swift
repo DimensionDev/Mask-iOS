@@ -5,7 +5,7 @@ struct FileServiceUploadingItemView: View {
     enum Event {
         case share(FileServiceUploadingItem)
         case remove(FileServiceUploadingItem)
-        case reTry(FileServiceUploadingItem)
+        case retry(FileServiceUploadingItem)
     }
 
     @StateObject
@@ -57,7 +57,7 @@ struct FileServiceUploadingItemView: View {
                     action: {
                         switch item.state {
                         case .uploading, .encrypting, .preparing: break
-                        case .failed: onEvent(.reTry(item))
+                        case .failed: onEvent(.retry(item))
                         case .uploaded: onEvent(.share(item))
                         }
                     },
@@ -86,8 +86,8 @@ struct FileServiceUploadingItemView: View {
                     }
                 )
             }
-            .opacity(item.state.isInterActive ? 1 : 0)
-            .disabled(!item.state.isInterActive)
+            .opacity(item.state.isInteractive ? 1 : 0)
+            .disabled(!item.state.isInteractive)
         }
 
         .padding(.all, 12)
@@ -135,7 +135,7 @@ struct FileServiceUploadingItemView: View {
 }
 
 extension FileServiceUploadingItem.State {
-    fileprivate var isInterActive: Bool {
+    fileprivate var isInteractive: Bool {
         switch self {
         case .failed, .uploaded: return true
         case .encrypting, .preparing, .uploading: return false

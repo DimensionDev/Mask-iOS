@@ -25,7 +25,7 @@ final class FileServiceUploadManager: ObservableObject {
 
     var isVisible: Bool = false
 
-    static let shared = FileServiceUploadManager()
+    fileprivate static let shared = FileServiceUploadManager()
     fileprivate init() {
         Task { @MainActor in
             self.uploadingItems = FileServiceRepository.getRecords(transform: { (file: UploadFile) in

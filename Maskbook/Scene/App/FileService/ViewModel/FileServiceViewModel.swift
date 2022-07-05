@@ -16,7 +16,7 @@ final class FileServiceViewModel: ObservableObject {
             .CombineLatest(
                 settings.$fileServicePolicyAccepted,
                 settings.$onBoardFeatures
-                    .map { $0.contains("\(OnBoardFeature.fileService.rawValue)") }
+                    .map { $0.contains("\(OnboardFeature.fileService.rawValue)") }
             )
             .receive(on: DispatchQueue.main)
             .map {  !($0 && $1) }
@@ -36,7 +36,7 @@ final class FileServiceViewModel: ObservableObject {
 
     deinit {
         if settings.fileServicePolicyAccepted {
-            settings.checkOnBoardFeature(.fileService)
+            settings.checkOnboardFeature(.fileService)
         }
 
         uploadManager.isVisible = false
@@ -138,7 +138,7 @@ extension FileServiceViewModel {
         )
 
         if uploadManager.tryUploading(item) {
-            settings.checkOnBoardFeature(.fileService)
+            settings.checkOnboardFeature(.fileService)
             objectWillChange.send()
         }
     }
