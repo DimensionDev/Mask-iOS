@@ -262,7 +262,7 @@ Install %@ to decrypt it.";
 "Scene.App.Plugins.MarketTrend" = "Market Trend";
 "Scene.App.Plugins.Snapshot" = "Snapshot";
 "Scene.App.Plugins.Swap" = "Swap";
-"Scene.App.Plugins.Transaction" = "Transak";
+"Scene.App.Plugins.Transaction" = "Fiat On-Ramp";
 "Scene.App.Plugins.Valuables" = "Valuables";
 "Scene.App.RedPacketClaimed" = "%@ Claimed";
 "Scene.App.Riskwarning" = "Dear User,
