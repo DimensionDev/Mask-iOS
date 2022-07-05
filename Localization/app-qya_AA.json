@@ -205,7 +205,7 @@
     },
     "loading": "crwdns13506:0crwdne13506:0",
     "empty": "crwdns17316:0crwdne17316:0",
-    "search_place_holder": "crwdns17318:0crwdne17318:0"
+    "search_placeholder": "crwdns17674:0crwdne17674:0"
   },
   "scene": {
     "guide": {
@@ -925,10 +925,9 @@
       "encrypt": "crwdns17346:0crwdne17346:0",
       "mesoncdn": "crwdns17348:0crwdne17348:0",
       "onboard": {
-        "step_one": "crwdns17350:0crwdne17350:0",
-        "step_two": "crwdns17352:0[Settings]crwdne17352:0",
-        "step_three": "crwdns17354:0crwdne17354:0",
-        "step_four": "crwdns17356:0crwdne17356:0"
+        "step_one": "crwdns17676:0crwdne17676:0",
+        "step_two": "crwdns17678:0crwdne17678:0",
+        "step_three": "crwdns17680:0crwdne17680:0"
       },
       "local_file_source": {
         "take_photos": "crwdns17358:0crwdne17358:0",
@@ -943,6 +942,8 @@
       "preparing": "crwdns17370:0crwdne17370:0",
       "uploading": "crwdns17372:0crwdne17372:0",
       "uploaded": "crwdns17374:0crwdne17374:0",
+      "failed": "crwdns17682:0crwdne17682:0",
+      "encrypting": "crwdns17684:0crwdne17684:0",
       "faq": {
         "what_is_file_service": "crwdns17376:0crwdne17376:0",
         "file_service": "crwdns17378:0crwdne17378:0",
@@ -953,7 +954,10 @@
         "what_is_ipfs": "crwdns17388:0crwdne17388:0",
         "ipfs": "crwdns17390:0crwdne17390:0",
         "learn_more": "crwdns17392:0crwdne17392:0"
-      }
+      },
+      "file_key": "crwdns17686:0crwdne17686:0",
+      "search_empty": "crwdns17688:0crwdne17688:0",
+      "list_empty": "crwdns17690:0crwdne17690:0"
     },
     "policy": {
       "reviewed": "crwdns17394:0crwdne17394:0",
