@@ -784,7 +784,9 @@ extension Coordinator {
             )
 
         case .showTransakIntegration:
-            return TransakIntegratingController()
+            let controller = TransakIntegratingController()
+            controller.modalPresentationStyle = .fullScreen
+            return controller
 
         case .pluginConfiguration: return PluginSettingViewController()
             
