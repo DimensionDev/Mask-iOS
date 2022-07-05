@@ -37,6 +37,7 @@ struct FileServiceSelectedFileItem {
 extension FileServiceSelectedFileItem {
     enum FileType {
         case video
+        case audio
         case image
         case text
         case application
@@ -45,8 +46,10 @@ extension FileServiceSelectedFileItem {
     var specificFileType: FileType {
         if mime.containsIgnoreCase(string: "image") {
             return .image
-        } else if mime.containsIgnoreCase(string: "video") || mime.containsIgnoreCase(string: "audio") {
+        } else if mime.containsIgnoreCase(string: "video") {
             return .video
+        } else if mime.containsIgnoreCase(string: "audio") {
+            return .audio
         } else if mime.containsIgnoreCase(string: "text") {
             return .text
         } else {
@@ -65,9 +68,5 @@ extension FileServiceSelectedFileItem {
             print("Failed with error:", err.localizedDescription)
         }
         return cacheURL
-    }
-    
-    var canSaveToAlbum: Bool {
-        false
     }
 }

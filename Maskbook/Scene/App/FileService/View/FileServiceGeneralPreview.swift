@@ -23,7 +23,7 @@ struct FileServiceGeneralPreview: View {
     var body: some View {
         VStack {
             switch item.specificFileType {
-            case .video:
+            case .video, .audio:
                 VideoPlayer(player: self.player).cornerRadius(8)
             case .image:
                 Image(uiImage: UIImage(data: item.data)!)
