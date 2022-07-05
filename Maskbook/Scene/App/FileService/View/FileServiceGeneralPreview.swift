@@ -37,6 +37,10 @@ struct FileServiceGeneralPreview: View {
             case .application:
                 Image(Asset.Plugins.FileService.applicationPlaceholder)
                     .aspectRatio(contentMode: .fit)
+            case .audio:
+                VideoPlayer(player: self.player)
+                    .cornerRadius(8)
+                    .frame(height: 450)
             }
 
             Spacer().frame(height: 18)
