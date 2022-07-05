@@ -21,6 +21,8 @@ struct FileServiceSelectedFileItem {
     let fileName: String
     let fileType: FileServiceUploadingItem.ItemType
     let mime: String
+    let totalBytes: Double
+    
 }
 
 class FileServiceSelectFileHandler: NSObject {
@@ -95,7 +97,8 @@ class FileServiceSelectFileHandler: NSObject {
             let fileItem = FileServiceSelectedFileItem(data: pngData,
                                                        fileName: fileName,
                                                        fileType: .image,
-                                                       mime: "image/jpeg")
+                                                       mime: "image/jpeg",
+                                                       totalBytes: Double(pngData.count))
             pushFileServiceConfirmView(item: fileItem)
         } else {
             assertionFailure("can't get jpeg data from image")
@@ -122,7 +125,8 @@ class FileServiceSelectFileHandler: NSObject {
         let fileItem = FileServiceSelectedFileItem(data: data,
                                                    fileName: url.lastPathComponent,
                                                    fileType: url.containsImage ? .image : .file,
-                                                   mime: url.mimeType())
+                                                   mime: url.mimeType(),
+                                                   totalBytes: Double(data.count))
         pushFileServiceConfirmView(item: fileItem)
     }
     

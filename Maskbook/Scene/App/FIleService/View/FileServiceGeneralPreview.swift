@@ -13,13 +13,14 @@ struct FileServiceGeneralPreview: View {
     enum FileType {
         case video
         case image
-        case file
+        case text
+        case application
     }
 
-    let item: FileServiceUploadingItem
+    let item: FileServiceSelectedFileItem
     var player: AVPlayer?
 
-    init(item: FileServiceUploadingItem) {
+    init(item: FileServiceSelectedFileItem) {
         self.item = item
         let cacheUrl = getUrlFromData(item: item)
         self.player = AVPlayer(url: cacheUrl)
@@ -30,11 +31,14 @@ struct FileServiceGeneralPreview: View {
         case .video:
             VideoPlayer(player: self.player).cornerRadius(8)
         case .image:
-            Image(uiImage: UIImage(data: item.content)!)
+            Image(uiImage: UIImage(data: item.data)!)
                 .aspectRatio(contentMode: .fit)
                 .cornerRadius(8)
-        case .file:
-            Image(Asset.Plugins.FileService.filePlaceholder)
+        case .text:
+            Image(Asset.Plugins.FileService.textPlaceholder)
+                .aspectRatio(contentMode: .fit)
+        case .application:
+            Image(Asset.Plugins.FileService.applicationPlaceholder)
                 .aspectRatio(contentMode: .fit)
         }
 
@@ -48,34 +52,26 @@ struct FileServiceGeneralPreview: View {
     }
 }
 
-struct FileServiceGeneralPreview_Previews: PreviewProvider {
-    static var previews: some View {
-        FileServiceGeneralPreview(item: .uploaded)
-    }
-}
-
 extension FileServiceGeneralPreview {
-    func getUrlFromData(item: FileServiceUploadingItem) -> URL {
+    func getUrlFromData(item: FileServiceSelectedFileItem) -> URL {
         let cacheURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent(item.fileName)
-
         do {
-            try item.content.write(to: cacheURL, options: .atomicWrite)
+            try item.data.write(to: cacheURL, options: .atomicWrite)
         } catch let err {
             print("Failed with error:", err.localizedDescription)
         }
         return cacheURL
     }
 
-    func getFileTypeFromMime(item: FileServiceUploadingItem) -> FileType {
-        guard let mime = item.mime else { return .file }
-        if mime.containsIgnoreCase(string: "image") {
+    func getFileTypeFromMime(item: FileServiceSelectedFileItem) -> FileType {
+        if item.mime.containsIgnoreCase(string: "image") {
             return .image
-        } else if mime.containsIgnoreCase(string: "video") || mime.containsIgnoreCase(string: "audio") {
+        } else if item.mime.containsIgnoreCase(string: "video") || item.mime.containsIgnoreCase(string: "audio") {
             return .video
+        } else if item.mime.containsIgnoreCase(string: "text") {
+            return .text
         } else {
-            return .file
+            return .application
         }
     }
 }
-
-

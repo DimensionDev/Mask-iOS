@@ -488,10 +488,10 @@ internal enum Asset {
   }
   internal enum Plugins {
     internal enum FileService {
+      internal static let applicationPlaceholder = ImageAsset(name: "Plugins/FileService/application_placeholder")
       internal static let arrowDown = ImageAsset(name: "Plugins/FileService/arrowDown")
       internal static let checkSquare = ImageAsset(name: "Plugins/FileService/check_square")
       internal static let downloadFail = ImageAsset(name: "Plugins/FileService/downloadFail")
-      internal static let filePlaceholder = ImageAsset(name: "Plugins/FileService/file_placeholder")
       internal static let folder = ImageAsset(name: "Plugins/FileService/folder")
       internal static let imagePlaceholder = ImageAsset(name: "Plugins/FileService/image_placeholder")
       internal static let infoCircle = ImageAsset(name: "Plugins/FileService/infoCircle")
@@ -500,6 +500,7 @@ internal enum Asset {
       internal static let onboardThree = ImageAsset(name: "Plugins/FileService/onboardThree")
       internal static let onboardTwo = ImageAsset(name: "Plugins/FileService/onboardTwo")
       internal static let sendFile = ImageAsset(name: "Plugins/FileService/send_file")
+      internal static let textPlaceholder = ImageAsset(name: "Plugins/FileService/text_placeholder")
       internal static let uploadBackground = ImageAsset(name: "Plugins/FileService/uploadBackground")
       internal static let uploadFile = ImageAsset(name: "Plugins/FileService/upload_file")
       internal static let uplodaCamera = ImageAsset(name: "Plugins/FileService/uplodaCamera")

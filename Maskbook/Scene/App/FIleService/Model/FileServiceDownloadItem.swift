@@ -53,6 +53,7 @@ extension FileServiceDownloadItem {
         return .init(data: content ?? Data(),
               fileName: fileName,
               fileType: fileType,
-              mime: mime)
+              mime: mime,
+              totalBytes:totalBytes)
     }
 }
