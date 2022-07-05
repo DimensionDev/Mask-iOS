@@ -205,7 +205,7 @@
     },
     "loading": "",
     "empty": "",
-    "search_place_holder": ""
+    "search_placeholder": ""
   },
   "scene": {
     "guide": {
@@ -927,8 +927,7 @@
       "onboard": {
         "step_one": "",
         "step_two": "",
-        "step_three": "",
-        "step_four": ""
+        "step_three": ""
       },
       "local_file_source": {
         "take_photos": "",
@@ -943,6 +942,8 @@
       "preparing": "",
       "uploading": "",
       "uploaded": "",
+      "failed": "",
+      "encrypting": "",
       "faq": {
         "what_is_file_service": "",
         "file_service": "",
@@ -953,7 +954,10 @@
         "what_is_ipfs": "",
         "ipfs": "",
         "learn_more": ""
-      }
+      },
+      "file_key": "",
+      "search_empty": "",
+      "list_empty": ""
     },
     "policy": {
       "reviewed": "",
