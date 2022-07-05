@@ -6,20 +6,20 @@
 //  Copyright © 2022 dimension. All rights reserved.
 //
 
-import Foundation
 import CoreDataStack
+import Foundation
 
-class FileServiceDetailViewModel : ObservableObject {
+class FileServiceDetailViewModel: ObservableObject {
     var item: FileServiceDownloadItem
-    
+
     init(item: FileServiceDownloadItem) {
         self.item = item
         startDownload()
     }
-    
+
     @Published
     var state: DownloadState = .downloading
-    
+
     func startDownload() {
         if item.content != nil {
             state = .downloaded
@@ -39,7 +39,7 @@ class FileServiceDetailViewModel : ObservableObject {
                     }
                 )
                 state = .downloaded
-            } catch(let e) {
+            } catch let e {
                 log.debug("\(e)")
                 state = .downloadFail
             }

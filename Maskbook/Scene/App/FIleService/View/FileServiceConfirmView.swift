@@ -7,17 +7,19 @@ struct FileServiceConfirmView: View {
     enum Action {
         case faq
         case confirm(option: FileServiceUploadOption)
+        case selectService(service: Service, serviceHandler: (Service) -> Void)
     }
-    
+
     let actionSignal: (Action) -> Void
-    
+
     let fileServiceItem: FileServiceSelectedFileItem
-    
+
     @State
     private var fileServiceOption: FileServiceUploadOption
 
     init(_ fileServiceItem: FileServiceSelectedFileItem,
-         action: @escaping (Action) -> Void) {
+         action: @escaping (Action) -> Void)
+    {
         self.fileServiceItem = fileServiceItem
         self.actionSignal = action
 
@@ -33,9 +35,13 @@ struct FileServiceConfirmView: View {
                 ) {
                     FileServiceGeneralPreview(item: fileServiceItem)
                     Section {
-                        ForEach(Service.allCases) { item in
-                            Row<Service>(title: item.title, item: item, style: .service, selection: $fileServiceOption.service)
-                        }
+                        Row<Service>(title: fileServiceOption.service.title)
+                            .onTapGesture {
+                                actionSignal(.selectService(service: fileServiceOption.service,
+                                                            serviceHandler: { fileServiceOption.service = $0
+                                                            }))
+                            }
+
                     } header: {
                         HStack {
                             Text(L10n.Plugins.FileService.serviceTitle)
@@ -94,31 +100,11 @@ struct FileServiceConfirmView: View {
     }
 }
 
-fileprivate struct Row<Selection: Equatable>: View {
-    enum Style {
-        case service
-        case option
-    }
-
-    var selected: Bool {
-        item == selection
-    }
-
+private struct Row<Selection: Equatable>: View {
     let title: String
-    let item: Selection
-    let style: Style
-
-    @Binding var selection: Selection
 
     var body: some View {
         RoundedRectangle(cornerRadius: 12)
-            .onTapGesture {
-                guard !selected else {
-                    return
-                }
-
-                selection = item
-            }
             .foregroundColor(Asset.Colors.Background.dark.asColor())
             .frame(height: 56)
             .overlay(
@@ -127,25 +113,14 @@ fileprivate struct Row<Selection: Equatable>: View {
                         .font(.bh5)
                         .foregroundColor(Asset.Colors.Text.dark)
                         .horizontallyFilled()
-
-                    switch style {
-                    case .service:
-                        selected
-                        ? Asset.Icon.Cell.cellCheck.asImage()
-                        : Asset.Icon.Cell.cellUncheck.asImage()
-
-                    case .option:
-                        selected
-                        ? Asset.Images.Scene.WalletList.check.asImage()
-                        : Asset.Images.Scene.WalletList.unchecked.asImage()
-                    }
+                    Asset.Plugins.FileService.arrowDown.asImage()
                 }
                 .padding(.horizontal, 12)
             )
     }
 }
 
-fileprivate struct SelectionRow: View {
+private struct SelectionRow: View {
     let title: String
 
     @Binding var selected: Bool
@@ -172,8 +147,8 @@ fileprivate struct SelectionRow: View {
 
     private var checkBox: some View {
         selected
-        ? Asset.Plugins.FileService.checkSquare.asImage()
-        : Asset.Images.Scene.WalletList.unchecked.asImage()
+            ? Asset.Plugins.FileService.checkSquare.asImage()
+            : Asset.Images.Scene.WalletList.unchecked.asImage()
     }
 }
 
@@ -181,13 +156,14 @@ fileprivate struct SelectionRow: View {
 extension FileServiceSelectedFileItem {
     static var previewItem: Self {
         .init(
-            data: Data.init(count: 3072 * 1024),
+            data: Data(count: 3072 * 1024),
             fileName: "Rosecoke.png",
             fileType: .image,
             mime: ""
         )
     }
 }
+
 struct FileServiceOptionView_Preview: PreviewProvider {
     static var previews: some SwiftUI.View {
         FileServiceConfirmView(.previewItem) { _ in }

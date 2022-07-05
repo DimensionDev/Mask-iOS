@@ -735,6 +735,7 @@
 		5DF8CD07286EEE10006A4048 /* UploadFile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8CD05286EEE10006A4048 /* UploadFile+CoreDataClass.swift */; };
 		5DF8CD08286EEE10006A4048 /* UploadFile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8CD06286EEE10006A4048 /* UploadFile+CoreDataProperties.swift */; };
 		5DF8CD0A287295FC006A4048 /* FileServiceDownloadItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8CD09287295FC006A4048 /* FileServiceDownloadItem.swift */; };
+		5DF8CD102873BF8D006A4048 /* FileServiceSelectServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8CD0F2873BF8D006A4048 /* FileServiceSelectServiceViewModel.swift */; };
 		6F07ABE1279022B80039D69D /* NFTCollectionStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE0279022B80039D69D /* NFTCollectionStatusModel.swift */; };
 		6F07ABE3279027E70039D69D /* NFTAssetPriceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE2279027E70039D69D /* NFTAssetPriceModel.swift */; };
 		6F07ABE5279697450039D69D /* NFTCollectionDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE4279697450039D69D /* NFTCollectionDetailTableViewCell.swift */; };
@@ -1573,6 +1574,7 @@
 		5DF8CD05286EEE10006A4048 /* UploadFile+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadFile+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5DF8CD06286EEE10006A4048 /* UploadFile+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadFile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5DF8CD09287295FC006A4048 /* FileServiceDownloadItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceDownloadItem.swift; sourceTree = "<group>"; };
+		5DF8CD0F2873BF8D006A4048 /* FileServiceSelectServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceSelectServiceViewModel.swift; sourceTree = "<group>"; };
 		6F07ABE0279022B80039D69D /* NFTCollectionStatusModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFTCollectionStatusModel.swift; sourceTree = "<group>"; };
 		6F07ABE2279027E70039D69D /* NFTAssetPriceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTAssetPriceModel.swift; sourceTree = "<group>"; };
 		6F07ABE4279697450039D69D /* NFTCollectionDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollectionDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -3781,6 +3783,7 @@
 				5D474971285191EF00D3E7E6 /* FileServiceSelectFileSourceViewModel.swift */,
 				1F5B5EF428582F3400F6AD98 /* FileServiceViewModel.swift */,
 				5DF8CCFB286E9EB2006A4048 /* FileServiceDetailViewModel.swift */,
+				5DF8CD0F2873BF8D006A4048 /* FileServiceSelectServiceViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -4459,6 +4462,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DF8CD102873BF8D006A4048 /* FileServiceSelectServiceViewModel.swift in Sources */,
 				41E5004E27A11AFF00A73117 /* WebPublicApiMessageResolver+Plugins.swift in Sources */,
 				2AF884C5271EE9300004565A /* SocialProfileDetectCell.swift in Sources */,
 				2D6677F727688FBE00528F4D /* WalletConnectSendResponseDelegate.swift in Sources */,
