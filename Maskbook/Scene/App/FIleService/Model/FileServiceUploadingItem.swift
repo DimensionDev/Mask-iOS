@@ -8,6 +8,7 @@ struct FileServiceUploadingItem: Hashable {
         fileType: ItemType = .image,
         state: FileServiceUploadingItem.State,
         content: Data,
+        totalBytes: Double,
         uploadedBytes: Double,
         uploadDate: Date? = nil,
         mime: String? = nil,
@@ -18,6 +19,7 @@ struct FileServiceUploadingItem: Hashable {
         self.provider = provider
         self.state = state
         self.content = content
+        self.totalBytes = totalBytes
         self.uploadedBytes = uploadedBytes
         self.uploadDate = uploadDate
         self.fileType = fileType
@@ -57,6 +59,7 @@ struct FileServiceUploadingItem: Hashable {
     let provider: String
     let state: State
     let content: Data
+    let totalBytes: Double
     let uploadedBytes: Double
     let uploadDate: Date?
     let fileType: ItemType
@@ -64,10 +67,6 @@ struct FileServiceUploadingItem: Hashable {
     let mime: String?
     let option: FileServiceUploadOption
     let tx: FileServiceTranscation?
-
-    var totalBytes: Double {
-        Double(content.count)
-    }
 
     var progress: CGFloat {
         guard totalBytes > 0 else {
@@ -127,5 +126,18 @@ extension Double {
 
         let gb = mb / 1_024
         return String(format: "%.1f GB", gb)
+    }
+}
+
+extension FileServiceUploadingItem {
+    func toFileServiceDownloadItem() -> FileServiceDownloadItem {
+        .init(fileName: fileName,
+              provider: provider,
+              fileType: fileType,
+              content: content.isEmpty ? nil : content,
+              totalBytes: totalBytes,
+              uploadDate: uploadDate,
+              mime: mime ?? "",
+              tx: tx)
     }
 }

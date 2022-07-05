@@ -185,6 +185,7 @@ extension FileServiceUploadingItem {
             provider: "arweave",
             state: .uploaded,
             content: Data.init(count: 3072 * 1024),
+            totalBytes: Double(3072 * 1024),
             uploadedBytes: 3072 * 1024,
             uploadDate: Date(),
             option: .init(),

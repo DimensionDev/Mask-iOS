@@ -103,7 +103,7 @@ struct ArweaveUploadHandler: FileServiceUploadHandler {
 
     func buildLink(for payloadTxID: String, option: FileServiceUploadOption) -> String {
         if option.useMesonCDN {
-            return Arweave.baseUrl.absoluteString + "/" + payloadTxID
+            return Arweave.baseURL.absoluteString + "/" + payloadTxID
         } else {
             return Arweave.mesonCDNURL.absoluteString + "/" + payloadTxID
         }

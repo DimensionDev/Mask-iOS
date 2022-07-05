@@ -76,4 +76,23 @@ extension FileServiceUploadResult {
             type: "file"
         )
     }
+    
+    static func from(
+        _ item: FileServiceDownloadItem
+    ) -> FileServiceUploadResult? {
+        guard let tx = item.tx else {
+            return nil
+        }
+        return .init(
+            createdAt: item.uploadDate ?? Date(),
+            id: tx.id,
+            key: tx.key,
+            landingTxID: tx.landingTxID,
+            name: item.fileName,
+            payloadTxID: tx.payloadTxID,
+            provider: item.provider,
+            size: Int(item.totalBytes),
+            type: "file"
+        )
+    }
 }

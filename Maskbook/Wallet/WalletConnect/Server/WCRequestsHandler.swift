@@ -35,9 +35,8 @@ class WCRequestsHandler: RequestHandler {
         options.from = walletConnectTransaction.from
         options.to = walletConnectTransaction.to
         options.value = walletConnectTransaction.value?.value ?? 0
-        let transaction = EthereumTransaction(to: walletConnectTransaction.to,
-                                              data: walletConnectTransaction.data.data,
-                                              options: options)
+        var transaction = EthereumTransaction(to: walletConnectTransaction.to, data: walletConnectTransaction.data.data)
+        transaction.applyOptions(options)
         Coordinator.main.present(scene: .maskSendWalletConnectTransactionPopView(delegate: self,
                                                                                  transaction: transaction,
                                                                                  transactionOptions: options,

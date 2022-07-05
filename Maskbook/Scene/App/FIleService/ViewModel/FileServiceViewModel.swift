@@ -125,7 +125,7 @@ extension FileServiceViewModel {
         uploadManager.retryUploading(item)
     }
 
-    func tryUploading(_ fileItem: FileServiceSelectedFileItem) {
+    func tryUploading(_ fileItem: FileServiceSelectedFileItem, option: FileeServiceUploadOption) {
         // TODO: if fileItem.option is encrypted
         // use  state: .encrypting, otherwise  state: .preparing,
         let item: FileServiceUploadingItem = .init(

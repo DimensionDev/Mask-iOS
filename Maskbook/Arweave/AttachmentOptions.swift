@@ -6,7 +6,6 @@
 //  Copyright © 2022 dimension. All rights reserved.
 //
 
-import CryptoKit
 import CryptoSwift
 import Foundation
 import SwiftMsgPack
@@ -54,7 +53,6 @@ extension AttachmentOptions {
         let aes = try AES(key: generatedKey, blockMode: gcm, padding: .noPadding)
         let encrypted = try aes.encrypt(self.block.bytes)
         let encryptedData = Data(encrypted)
-
         return encryptedData
     }
 

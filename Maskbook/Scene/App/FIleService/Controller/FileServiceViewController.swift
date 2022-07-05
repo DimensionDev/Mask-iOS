@@ -41,36 +41,22 @@ final class FileServiceViewController: BaseViewController {
 
     private func viewDetail(of item: FileServiceUploadingItem) {
         coordinator.present(
-            scene: .fileServiceDetail(item),
-            transition: .detail()
-        )
-    }
-
-    private func configUploadOption() {
-        coordinator.present(
-            scene: .fileServiceOptions,
+            scene: .fileServiceDetail(item.toFileServiceDownloadItem()),
             transition: .detail()
         )
     }
 }
 
 extension FileServiceViewController: FileServiceSelectFileDelegate {
-    func didGetFile(fileItem: FileServiceSelectedFileItem) {
-        viewModel.tryUploading(fileItem)
+    func didGetFile(fileItem: FileServiceSelectedFileItem,
+                    option: FileServiceUploadOption) {
+        viewModel.tryUploading(fileItem, option: option)
     }
 }
 
 extension FileServiceViewController {
     @objc
     override func prepareRightNavigationItems() {
-        let settings = NavigationBarItemView(imageAsset: Asset.Plugins.LuckyDrop.setting) { [weak self] in
-            self?.configUploadOption()
-        }
-
-        self.navigationItem.leftBarButtonItems = [
-            .fixedSpace(14),
-            UIBarButtonItem(customView: settings.asUIView())
-        ]
 
         let button = NavigationBarItemView(imageAsset: Asset.Plugins.closeSquare) { [weak self] in
             self?.navigationController?.dismiss(animated: true)

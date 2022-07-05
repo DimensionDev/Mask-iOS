@@ -83,7 +83,8 @@ struct FileServiceSelectFileSourceView: View {
 
 struct FileSource_preview: PreviewProvider {
     final class Delegate: FileServiceSelectFileDelegate {
-        func didGetFile(fileItem: FileServiceSelectedFileItem) {}
+        func didGetFile(fileItem: FileServiceSelectedFileItem,
+                        option: FileServiceUploadOption) {}
     }
 
     static var previews: some View {
