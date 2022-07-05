@@ -62,7 +62,7 @@ struct FileServiceDetailView: View {
         case share
     }
 
-    let actionSignal: (Action) -> Void
+    private let actionSignal: (Action) -> Void
 
     @StateObject
     var viewModel: FileServiceDetailViewModel

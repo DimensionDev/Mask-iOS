@@ -10,9 +10,9 @@ struct FileServiceConfirmView: View {
         case selectService(service: Service, serviceHandler: (Service) -> Void)
     }
 
-    let actionSignal: (Action) -> Void
+    private let actionSignal: (Action) -> Void
 
-    let fileServiceItem: FileServiceSelectedFileItem
+    private let fileServiceItem: FileServiceSelectedFileItem
 
     @State
     private var fileServiceOption: FileServiceUploadOption

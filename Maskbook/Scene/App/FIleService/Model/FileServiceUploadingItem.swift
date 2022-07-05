@@ -11,8 +11,7 @@ struct FileServiceUploadingItem: Hashable {
         totalBytes: Double,
         uploadedBytes: Double,
         uploadDate: Date? = nil,
-        mime: String,
-        option: FileServiceUploadOption = .default,
+        mime: String? = nil,
         tx: FileServiceTranscation? = nil
     ) {
         self.fileName = fileName
@@ -25,7 +24,6 @@ struct FileServiceUploadingItem: Hashable {
         self.fileType = fileType
         self.tx = tx
         self.mime = mime
-        self.option = option
     }
 
     enum State: Int64, Hashable {
@@ -62,8 +60,7 @@ struct FileServiceUploadingItem: Hashable {
     let uploadDate: Date?
     let fileType: ItemType
 
-    let mime: String
-    let option: FileServiceUploadOption
+    let mime: String?
     let tx: FileServiceTranscation?
 
     var progress: CGFloat {
@@ -145,7 +142,7 @@ extension FileServiceUploadingItem {
               content: content.isEmpty ? nil : content,
               totalBytes: totalBytes,
               uploadDate: uploadDate,
-              mime: mime,
+              mime: mime ?? "",
               tx: tx)
     }
 }
