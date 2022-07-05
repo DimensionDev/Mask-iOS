@@ -11,7 +11,7 @@ import PhotosUI
 import UIKit
 import WebExtension_Shim
 
-protocol FileServiceSelectFileDelegate {
+protocol FileServiceSelectFileDelegate: AnyObject {
     func didGetFile(fileItem: FileServiceSelectedFileItem,
                     option: FileServiceUploadOption)
 }
@@ -23,7 +23,7 @@ struct FileServiceSelectedFileItem {
     let mime: String
 }
 
-class FileServiceSelectFileHandler: NSObject {
+final class FileServiceSelectFileHandler: NSObject {
     typealias Item = FileServiceSelectFileSourceViewModel.LocalFileSourceItem
 
     init(delegate: FileServiceSelectFileDelegate) {
@@ -35,7 +35,8 @@ class FileServiceSelectFileHandler: NSObject {
     @InjectedProvider(\.mainCoordinator)
     private var coordinator
 
-    var delegate: FileServiceSelectFileDelegate
+    weak var delegate: FileServiceSelectFileDelegate?
+
     private(set) lazy var imagePicker: PHPickerViewController = {
         var configuration = PHPickerConfiguration()
         configuration.filter = .images
@@ -130,7 +131,7 @@ class FileServiceSelectFileHandler: NSObject {
         coordinator.present(
             scene: .fileServiceOptions(item: item, optionHandler: { [weak self] option in
                 guard let self = self else { return }
-                self.delegate.didGetFile(fileItem: item, option: option)
+                self.delegate?.didGetFile(fileItem: item, option: option)
             }),
             transition: .detail()
         )
