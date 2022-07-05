@@ -27,7 +27,8 @@ struct TappableText: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: UITextView, context: Context) {
-        Task(priority: .high) { @MainActor in 
+        Task(priority: .high) { @MainActor in
+            uiView.attributedText <| context.coordinator.attributedString
             self.preferredContentSize(uiView.contentSize)
         }
     }

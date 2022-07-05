@@ -698,9 +698,17 @@ enum L10n {
       static var failureTip: String {
         return L10n.tr("Localizable", "Plugins.FileService.FailureTip")
       }
+      /// File Key
+      static var fileKey: String {
+        return L10n.tr("Localizable", "Plugins.FileService.FileKey")
+      }
       /// IPFS
       static var ipfs: String {
         return L10n.tr("Localizable", "Plugins.FileService.Ipfs")
+      }
+      /// You haven't uploaded any files yet.
+      static var listEmpty: String {
+        return L10n.tr("Localizable", "Plugins.FileService.ListEmpty")
       }
       /// Use Meson CDN
       static var mesoncdn: String {
@@ -717,6 +725,10 @@ enum L10n {
       /// Preparing...
       static var preparing: String {
         return L10n.tr("Localizable", "Plugins.FileService.Preparing")
+      }
+      /// No files currently found.
+      static var searchEmpty: String {
+        return L10n.tr("Localizable", "Plugins.FileService.SearchEmpty")
       }
       /// Service Protocols
       static var serviceTitle: String {

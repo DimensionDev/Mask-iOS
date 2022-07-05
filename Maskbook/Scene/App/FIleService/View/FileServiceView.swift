@@ -115,13 +115,13 @@ struct FileServiceView: View {
                     if viewModel.searchText.isEmpty {
                         Image(Asset.Images.Scene.Empty.emptyBox)
                         // TODO: L10n
-                        Text("You haven't uploaded any files yet.")
+                        Text(L10n.Plugins.FileService.listEmpty)
                             .font(.mh6)
                             .foregroundColor(Asset.Colors.Text.light)
                     } else {
                         Image(Asset.Images.Scene.Personas.search)
 
-                        Text("No files currently found")
+                        Text(L10n.Plugins.FileService.searchEmpty)
                             .font(.mh6)
                             .foregroundColor(Asset.Colors.Text.light)
                     }
@@ -173,7 +173,7 @@ struct FileServiceView: View {
 
                 if let fileKey = item.tx?.key {
                     Text {
-                        Text("File Key: ")
+                        Text("\(L10n.Plugins.FileService.fileKey): ")
                             .foregroundColor(Asset.Colors.Text.light)
 
                         Text(fileKey)

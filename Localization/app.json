@@ -943,7 +943,7 @@
       "uploading": "Uploading...",
       "uploaded": "Uploaded",
       "failed": "Failed",
-      "encrypting": "Encrypting",
+      "encrypting": "Encrypting...",
       "faq": {
         "what_is_file_service": "What is Web3 File Service?",
         "file_service": "Web3 File Service is a decentralized storage service that allows users to store files on the blockchain in an immutable and permanent way. Mask Network provides this service by working with reputable file storage protocols, including IPFS, Arweave, Swarm and Meson Network and supports file types like .pdf, .doc, .mp3, .mp4 among other formats, with the maximum file format being 10.4 mb.\n\nUpon uploading a file, an exclusive link will be generated, embedded with metadata, including the on-chain file storage location. Please note that anyone with the link can download it. Users are given the option to change the privacy settings of their file, if they want it to be public or encrypted on social platforms. This ensures that users have autonomy over their files and how they are stored, serving the decentralized file management function.",
@@ -954,7 +954,10 @@
         "what_is_ipfs": "What is IPFS?",
         "ipfs":"IPFS is a decentralized transmision protocol, based on smart contracts for storage and monetized with a pay-as-you-go model. IPFS assigns a unique hash value to each file, such that even if the content of 2 files is only different by 1 bit, the hash value will be different.",
         "learn_more":"Learn more"
-      }
+      },
+      "file_key": "File Key",
+      "search_empty": "No files currently found.",
+      "list_empty": "You haven't uploaded any files yet."
     },
     "policy": {
       "reviewed": "I have reviewed",
