@@ -109,6 +109,7 @@ extension UploadFile {
     }
 
     func update(from item: FileServiceUploadingItem) {
+        // skip item.content syncing， don't save to core data
         self.name = item.fileName
         self.provider = item.provider
         self.createdAt = item.uploadDate
@@ -131,7 +132,7 @@ extension UploadFile {
         self.payloadTxID = item.tx?.payloadTxID
         self.fileSize = item.totalBytes
         self.content = item.content
-        self.uploadOption = item.option.asString()
+//        self.uploadOption = item.option.asString()
         self.mime = item.mime
     }
 }

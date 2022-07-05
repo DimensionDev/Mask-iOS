@@ -151,6 +151,7 @@ extension FileServiceUploadingItem {
             provider: "arweave",
             state: .encrypting,
             content: Data.init(count: 3072 * 1024),
+            totalBytes: 3072 * 1024,
             uploadedBytes: 0,
             option: .init()
         )
@@ -162,6 +163,7 @@ extension FileServiceUploadingItem {
             provider: "arweave",
             state: .failed,
             content: Data.init(count: 3072 * 1024),
+            totalBytes: 3072 * 1024,
             uploadedBytes: 3072 * 1024 * 0.5,
             option: .init()
         )
@@ -174,6 +176,7 @@ extension FileServiceUploadingItem {
             fileType: .file,
             state: .uploading,
             content: Data.init(count: 3072 * 1024),
+            totalBytes: 3072 * 1024,
             uploadedBytes: 1024 * 1024,
             option: .init()
         )

@@ -27,16 +27,19 @@ final class FileServiceUploadViewModel: ObservableObject {
         let stream = uploader.upload(item, option: uploadOption)
 
         Task { @MainActor in
+            var uploadedBytes: Double = 0
             do {
                 for try await value in stream {
                     let didFinish = value.state == .uploaded
+                    uploadedBytes = value.progress * item.totalBytes
                     let item = FileServiceUploadingItem(
                         fileName: item.fileName,
-                        provider: uploadOption.service.rawValue.lowercased(),
+                        provider: item.provider,
                         fileType: item.fileType,
                         state: value.state,
                         content: item.content,
-                        uploadedBytes: value.progress * item.totalBytes,
+                        totalBytes: item.totalBytes,
+                        uploadedBytes: uploadedBytes,
                         uploadDate: didFinish ? Date() : nil,
                         option: uploadOption,
                         tx: value
@@ -50,11 +53,12 @@ final class FileServiceUploadViewModel: ObservableObject {
             } catch {
                 let item = FileServiceUploadingItem(
                     fileName: item.fileName,
-                    provider: uploadOption.service.rawValue.lowercased(),
+                    provider: item.provider,
                     fileType: item.fileType,
                     state: .failed,
                     content: item.content,
-                    uploadedBytes: self.item.uploadedBytes,
+                    totalBytes: item.totalBytes,
+                    uploadedBytes: uploadedBytes,
                     option: uploadOption
                 )
                 self.updateUploadingState(for: item)

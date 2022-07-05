@@ -85,8 +85,6 @@ final class FileServiceViewModel: ObservableObject {
 
     // MARK: Private
 
-    private var uploadOption = CurrentValueSubject<FileServiceUploadOption, Never>(.default)
-
     private var cancelableStorage: Set<AnyCancellable> = []
 
     @InjectedProvider(\.userDefaultSettings)
@@ -125,20 +123,20 @@ extension FileServiceViewModel {
         uploadManager.retryUploading(item)
     }
 
-    func tryUploading(_ fileItem: FileServiceSelectedFileItem, option: FileeServiceUploadOption) {
-        // TODO: if fileItem.option is encrypted
+    func tryUploading(_ fileItem: FileServiceSelectedFileItem, option: FileServiceUploadOption) {
         // use  state: .encrypting, otherwise  state: .preparing,
         let item: FileServiceUploadingItem = .init(
             fileName: fileItem.fileName,
-            provider: uploadOption.value.service.rawValue.lowercased(),
+            provider: option.service.rawValue.lowercased(),
             fileType: fileItem.fileType,
-            state: .encrypting,
+            state: option.encrypted ? .encrypting : .preparing,
             content: fileItem.data,
-            uploadedBytes: Double(fileItem.data.bytes.count) * 0.5,
+            totalBytes: Double(fileItem.data.count),
+            uploadedBytes: 0,
             mime: fileItem.mime,
-            option: .init()
+            option: option
         )
-        // TODO: Merge Code
+
         if uploadManager.tryUploading(item) {
             settings.checkOnBoardFeature(.fileService)
             objectWillChange.send()
