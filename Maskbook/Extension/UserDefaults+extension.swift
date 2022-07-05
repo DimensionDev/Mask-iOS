@@ -43,6 +43,9 @@ extension InjectValues {
 }
 
 final class UserDefaultSettings {
+    @InjectedProvider(\.vault)
+    private var vault
+    
     static let shared = UserDefaultSettings()
 
     private var userDefaults: UserDefaults
@@ -252,6 +255,10 @@ final class UserDefaultSettings {
     }
     
     func isPasswordExpried(_ expiredDate: Date? = nil) -> Bool {
+        guard vault.hasSetWalletPassword() else {
+            return false
+        }
+        
         // fixed: Simultaneous accesses to 0x1068319f0, but modification requires exclusive access.
         guard let expiredDate = expiredDate ?? passwordExpiredDate else {
             // No payment password means it will not expire.
