@@ -89,13 +89,11 @@
 		1F57023A27A27E4900C96909 /* RedPacketShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F57023927A27E4900C96909 /* RedPacketShareSheet.swift */; };
 		1F58730F277C51A3005A7B11 /* DappScriptPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58730E277C51A3005A7B11 /* DappScriptPayload.swift */; };
 		1F5B5ED5284F224500F6AD98 /* FileServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5ED4284F224500F6AD98 /* FileServiceViewController.swift */; };
-		1F5B5ED7284F2F4600F6AD98 /* FileServiceOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5ED6284F2F4600F6AD98 /* FileServiceOptionsViewController.swift */; };
+		1F5B5ED7284F2F4600F6AD98 /* FileServiceConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5ED6284F2F4600F6AD98 /* FileServiceConfirmViewController.swift */; };
 		1F5B5EDA284F3B9500F6AD98 /* FileServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5ED9284F3B9500F6AD98 /* FileServiceView.swift */; };
 		1F5B5EDD285080B700F6AD98 /* FileServiceUploadOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EDC285080B700F6AD98 /* FileServiceUploadOption.swift */; };
 		1F5B5EDF28508FD400F6AD98 /* FileServiceUploadingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EDE28508FD400F6AD98 /* FileServiceUploadingItemView.swift */; };
 		1F5B5EE12851C6F700F6AD98 /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EE02851C6F700F6AD98 /* Predicate.swift */; };
-		1F5B5EEE2851D0E400F6AD98 /* UploadFile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EEC2851D0E400F6AD98 /* UploadFile+CoreDataClass.swift */; };
-		1F5B5EEF2851D0E400F6AD98 /* UploadFile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EED2851D0E400F6AD98 /* UploadFile+CoreDataProperties.swift */; };
 		1F5B5EF12851D13A00F6AD98 /* FileServiceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EF02851D13A00F6AD98 /* FileServiceRepository.swift */; };
 		1F5B5EF32858299800F6AD98 /* FileServiceUploadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EF22858299800F6AD98 /* FileServiceUploadHandler.swift */; };
 		1F5B5EF528582F3400F6AD98 /* FileServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EF428582F3400F6AD98 /* FileServiceViewModel.swift */; };
@@ -144,7 +142,7 @@
 		1FD19599284E0E430047B431 /* FileServiceOnBoardItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD19598284E0E430047B431 /* FileServiceOnBoardItemView.swift */; };
 		1FD24E1226BD267800D03599 /* InjectedValueKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD24E1126BD267800D03599 /* InjectedValueKeys.swift */; };
 		1FD91A8A283CCBA4000766FB /* PluginMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD91A89283CCBA4000766FB /* PluginMeta.swift */; };
-		1FD91A8E2844A252000766FB /* FileServiceOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD91A8D2844A252000766FB /* FileServiceOptionView.swift */; };
+		1FD91A8E2844A252000766FB /* FileServiceConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD91A8D2844A252000766FB /* FileServiceConfirmView.swift */; };
 		1FD91A922845BD57000766FB /* SwiftUI+Focused.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD91A912845BD57000766FB /* SwiftUI+Focused.swift */; };
 		1FE54D49269947640041C742 /* NSManagedContext+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE54D48269947640041C742 /* NSManagedContext+extension.swift */; };
 		1FE54D56269BEFE90041C742 /* CoreDataStackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFB224A2654E972005CAFFA /* CoreDataStackTests.swift */; };
@@ -730,6 +728,14 @@
 		5DE5E53C27E468B400F2B62A /* PersonaAvatarActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5E53B27E468B400F2B62A /* PersonaAvatarActionViewModel.swift */; };
 		5DF07E0C27FD9CA400BECF15 /* ContactEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF07E0B27FD9CA400BECF15 /* ContactEmptyView.swift */; };
 		5DF1C30B27DA33EB003F26C1 /* FixUITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF1C30A27DA33EB003F26C1 /* FixUITableView.swift */; };
+		5DF8CCFC286E9EB2006A4048 /* FileServiceDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8CCFB286E9EB2006A4048 /* FileServiceDetailViewModel.swift */; };
+		5DF8CD00286EDB5C006A4048 /* FileServiceDownloadingPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8CCFF286EDB5C006A4048 /* FileServiceDownloadingPreview.swift */; };
+		5DF8CD02286EDCE5006A4048 /* FileServiceDownloadFailPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8CD01286EDCE5006A4048 /* FileServiceDownloadFailPreview.swift */; };
+		5DF8CD04286EDD31006A4048 /* FileServiceGeneralPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8CD03286EDD31006A4048 /* FileServiceGeneralPreview.swift */; };
+		5DF8CD07286EEE10006A4048 /* UploadFile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8CD05286EEE10006A4048 /* UploadFile+CoreDataClass.swift */; };
+		5DF8CD08286EEE10006A4048 /* UploadFile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8CD06286EEE10006A4048 /* UploadFile+CoreDataProperties.swift */; };
+		5DF8CD0A287295FC006A4048 /* FileServiceDownloadItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8CD09287295FC006A4048 /* FileServiceDownloadItem.swift */; };
+		5DF8CD102873BF8D006A4048 /* FileServiceSelectServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8CD0F2873BF8D006A4048 /* FileServiceSelectServiceViewModel.swift */; };
 		6F07ABE1279022B80039D69D /* NFTCollectionStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE0279022B80039D69D /* NFTCollectionStatusModel.swift */; };
 		6F07ABE3279027E70039D69D /* NFTAssetPriceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE2279027E70039D69D /* NFTAssetPriceModel.swift */; };
 		6F07ABE5279697450039D69D /* NFTCollectionDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE4279697450039D69D /* NFTCollectionDetailTableViewCell.swift */; };
@@ -926,13 +932,11 @@
 		1F57023927A27E4900C96909 /* RedPacketShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketShareSheet.swift; sourceTree = "<group>"; };
 		1F58730E277C51A3005A7B11 /* DappScriptPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappScriptPayload.swift; sourceTree = "<group>"; };
 		1F5B5ED4284F224500F6AD98 /* FileServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceViewController.swift; sourceTree = "<group>"; };
-		1F5B5ED6284F2F4600F6AD98 /* FileServiceOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceOptionsViewController.swift; sourceTree = "<group>"; };
+		1F5B5ED6284F2F4600F6AD98 /* FileServiceConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceConfirmViewController.swift; sourceTree = "<group>"; };
 		1F5B5ED9284F3B9500F6AD98 /* FileServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceView.swift; sourceTree = "<group>"; };
 		1F5B5EDC285080B700F6AD98 /* FileServiceUploadOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceUploadOption.swift; sourceTree = "<group>"; };
 		1F5B5EDE28508FD400F6AD98 /* FileServiceUploadingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceUploadingItemView.swift; sourceTree = "<group>"; };
 		1F5B5EE02851C6F700F6AD98 /* Predicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Predicate.swift; sourceTree = "<group>"; };
-		1F5B5EEC2851D0E400F6AD98 /* UploadFile+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadFile+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		1F5B5EED2851D0E400F6AD98 /* UploadFile+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadFile+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		1F5B5EF02851D13A00F6AD98 /* FileServiceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceRepository.swift; sourceTree = "<group>"; };
 		1F5B5EF22858299800F6AD98 /* FileServiceUploadHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceUploadHandler.swift; sourceTree = "<group>"; };
 		1F5B5EF428582F3400F6AD98 /* FileServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceViewModel.swift; sourceTree = "<group>"; };
@@ -981,7 +985,7 @@
 		1FD19598284E0E430047B431 /* FileServiceOnBoardItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceOnBoardItemView.swift; sourceTree = "<group>"; };
 		1FD24E1126BD267800D03599 /* InjectedValueKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectedValueKeys.swift; sourceTree = "<group>"; };
 		1FD91A89283CCBA4000766FB /* PluginMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginMeta.swift; sourceTree = "<group>"; };
-		1FD91A8D2844A252000766FB /* FileServiceOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceOptionView.swift; sourceTree = "<group>"; };
+		1FD91A8D2844A252000766FB /* FileServiceConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceConfirmView.swift; sourceTree = "<group>"; };
 		1FD91A912845BD57000766FB /* SwiftUI+Focused.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Focused.swift"; sourceTree = "<group>"; };
 		1FE54D48269947640041C742 /* NSManagedContext+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedContext+extension.swift"; sourceTree = "<group>"; };
 		1FE54D57269BF0140041C742 /* NSDiffableSourceSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSDiffableSourceSnapshotTests.swift; sourceTree = "<group>"; };
@@ -1563,6 +1567,14 @@
 		5DE5E53B27E468B400F2B62A /* PersonaAvatarActionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaAvatarActionViewModel.swift; sourceTree = "<group>"; };
 		5DF07E0B27FD9CA400BECF15 /* ContactEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEmptyView.swift; sourceTree = "<group>"; };
 		5DF1C30A27DA33EB003F26C1 /* FixUITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixUITableView.swift; sourceTree = "<group>"; };
+		5DF8CCFB286E9EB2006A4048 /* FileServiceDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceDetailViewModel.swift; sourceTree = "<group>"; };
+		5DF8CCFF286EDB5C006A4048 /* FileServiceDownloadingPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceDownloadingPreview.swift; sourceTree = "<group>"; };
+		5DF8CD01286EDCE5006A4048 /* FileServiceDownloadFailPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceDownloadFailPreview.swift; sourceTree = "<group>"; };
+		5DF8CD03286EDD31006A4048 /* FileServiceGeneralPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceGeneralPreview.swift; sourceTree = "<group>"; };
+		5DF8CD05286EEE10006A4048 /* UploadFile+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadFile+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5DF8CD06286EEE10006A4048 /* UploadFile+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadFile+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5DF8CD09287295FC006A4048 /* FileServiceDownloadItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceDownloadItem.swift; sourceTree = "<group>"; };
+		5DF8CD0F2873BF8D006A4048 /* FileServiceSelectServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceSelectServiceViewModel.swift; sourceTree = "<group>"; };
 		6F07ABE0279022B80039D69D /* NFTCollectionStatusModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFTCollectionStatusModel.swift; sourceTree = "<group>"; };
 		6F07ABE2279027E70039D69D /* NFTAssetPriceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTAssetPriceModel.swift; sourceTree = "<group>"; };
 		6F07ABE4279697450039D69D /* NFTCollectionDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollectionDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -1796,8 +1808,8 @@
 		0FBC5AB1266759BC00328693 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				1F5B5EEC2851D0E400F6AD98 /* UploadFile+CoreDataClass.swift */,
-				1F5B5EED2851D0E400F6AD98 /* UploadFile+CoreDataProperties.swift */,
+				5DF8CD05286EEE10006A4048 /* UploadFile+CoreDataClass.swift */,
+				5DF8CD06286EEE10006A4048 /* UploadFile+CoreDataProperties.swift */,
 				5D3E364527BE2D0200FDCFDD /* PostRecord+CoreDataClass.swift */,
 				5D3E364627BE2D0200FDCFDD /* PostRecord+CoreDataProperties.swift */,
 				41E50037279946E400A73117 /* PersonaRecord+CoreDataClass.swift */,
@@ -1982,7 +1994,7 @@
 			isa = PBXGroup;
 			children = (
 				1F5B5ED4284F224500F6AD98 /* FileServiceViewController.swift */,
-				1F5B5ED6284F2F4600F6AD98 /* FileServiceOptionsViewController.swift */,
+				1F5B5ED6284F2F4600F6AD98 /* FileServiceConfirmViewController.swift */,
 				5DBDA4D1285083B200FBC921 /* FileServiceSelectFileSourceViewController.swift */,
 				1F1762752859BB18008BE93E /* FileServiceDetailViewController.swift */,
 				1F176277285C36B4008BE93E /* FileServiceFAQViewController.swift */,
@@ -1999,6 +2011,7 @@
 				1F5B5EF22858299800F6AD98 /* FileServiceUploadHandler.swift */,
 				1FC2B7932858A34C00570348 /* FileServiceUploadResult.swift */,
 				1FC2B7952858C5BF00570348 /* FileServiceUploadingItem.swift */,
+				5DF8CD09287295FC006A4048 /* FileServiceDownloadItem.swift */,
 				1F1762712859B3F8008BE93E /* ArweaveUploadHandler.swift */,
 				1F1762732859B40D008BE93E /* IPFSUploadHandler.swift */,
 			);
@@ -2052,7 +2065,10 @@
 		1FD91A8C2844A06E000766FB /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1FD91A8D2844A252000766FB /* FileServiceOptionView.swift */,
+				1FD91A8D2844A252000766FB /* FileServiceConfirmView.swift */,
+				5DF8CCFF286EDB5C006A4048 /* FileServiceDownloadingPreview.swift */,
+				5DF8CD01286EDCE5006A4048 /* FileServiceDownloadFailPreview.swift */,
+				5DF8CD03286EDD31006A4048 /* FileServiceGeneralPreview.swift */,
 				1FD19592284E03530047B431 /* FileServiceOnBoardView.swift */,
 				1FD19598284E0E430047B431 /* FileServiceOnBoardItemView.swift */,
 				1F5B5ED9284F3B9500F6AD98 /* FileServiceView.swift */,
@@ -3766,6 +3782,8 @@
 			children = (
 				5D474971285191EF00D3E7E6 /* FileServiceSelectFileSourceViewModel.swift */,
 				1F5B5EF428582F3400F6AD98 /* FileServiceViewModel.swift */,
+				5DF8CCFB286E9EB2006A4048 /* FileServiceDetailViewModel.swift */,
+				5DF8CD0F2873BF8D006A4048 /* FileServiceSelectServiceViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -4384,16 +4402,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F5B5EEF2851D0E400F6AD98 /* UploadFile+CoreDataProperties.swift in Sources */,
 				2DEDDEA92761ED7000D37A76 /* WalletConnectSession+CoreDataProperties.swift in Sources */,
 				0F93937626A7AE9400F7F608 /* Collectible+CoreDataProperties.swift in Sources */,
 				2DC651F8271E6CAB00BABA9C /* LocalStorage+CoreDataClass.swift in Sources */,
 				41E5003E279946E400A73117 /* PersonaRecord+CoreDataProperties.swift in Sources */,
 				0F93937526A7AE9400F7F608 /* Collectible+CoreDataClass.swift in Sources */,
 				0FAF2F4C26678AC300C1B577 /* Mask.xcdatamodeld in Sources */,
-				1F5B5EEE2851D0E400F6AD98 /* UploadFile+CoreDataClass.swift in Sources */,
 				41E5003D279946E400A73117 /* PersonaRecord+CoreDataClass.swift in Sources */,
 				0F93936D26A7AE9400F7F608 /* Token+CoreDataClass.swift in Sources */,
+				5DF8CD07286EEE10006A4048 /* UploadFile+CoreDataClass.swift in Sources */,
 				0F93937726A7AE9400F7F608 /* Contact+CoreDataClass.swift in Sources */,
 				2DC651F6271E6CAB00BABA9C /* BlobStorage+CoreDataClass.swift in Sources */,
 				0F93937826A7AE9400F7F608 /* Contact+CoreDataProperties.swift in Sources */,
@@ -4414,6 +4431,7 @@
 				5D3E364E27BF503000FDCFDD /* PostRecord+Managed.swift in Sources */,
 				0FBC5ADC26675B0F00328693 /* URL.swift in Sources */,
 				2DC651F9271E6CAB00BABA9C /* LocalStorage+CoreDataProperties.swift in Sources */,
+				5DF8CD08286EEE10006A4048 /* UploadFile+CoreDataProperties.swift in Sources */,
 				0F07028826AFE77C00C04F77 /* DeletedDerivationPath+CoreDataClass.swift in Sources */,
 				41E500092791361E00A73117 /* PersonaRecord+Managed.swift in Sources */,
 				0F93937326A7AE9400F7F608 /* Account+CoreDataClass.swift in Sources */,
@@ -4444,6 +4462,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DF8CD102873BF8D006A4048 /* FileServiceSelectServiceViewModel.swift in Sources */,
 				41E5004E27A11AFF00A73117 /* WebPublicApiMessageResolver+Plugins.swift in Sources */,
 				2AF884C5271EE9300004565A /* SocialProfileDetectCell.swift in Sources */,
 				2D6677F727688FBE00528F4D /* WalletConnectSendResponseDelegate.swift in Sources */,
@@ -4503,6 +4522,7 @@
 				2AF884C4271EE9300004565A /* SocialProfileDetectViewModel.swift in Sources */,
 				1FD91A922845BD57000766FB /* SwiftUI+Focused.swift in Sources */,
 				1F9C60E926B793DE001C26D2 /* Assets.swift in Sources */,
+				5DF8CD04286EDD31006A4048 /* FileServiceGeneralPreview.swift in Sources */,
 				2AD85512281283170064DDA5 /* LuckyDropTokens.swift in Sources */,
 				1F705FE327CF6AB9002A4A7E /* SpinWheelAnimator.swift in Sources */,
 				2AF8855D271EE9310004565A /* NetworkError.swift in Sources */,
@@ -4626,6 +4646,7 @@
 				2A6ABB9A2720053B00CC3AED /* CustomTextField.swift in Sources */,
 				1FEE1EA627844FF500697F81 /* URLSession+Async.swift in Sources */,
 				2A6ABB812720053B00CC3AED /* SetBackupPasswordViewController.swift in Sources */,
+				5DF8CCFC286E9EB2006A4048 /* FileServiceDetailViewModel.swift in Sources */,
 				2AD8552C2812841C0064DDA5 /* LuckyDropHistoryHelper.swift in Sources */,
 				2AD855FC2812875A0064DDA5 /* Transition.swift in Sources */,
 				2AD8561C2812875A0064DDA5 /* SheetHostingController.swift in Sources */,
@@ -4844,7 +4865,7 @@
 				2AF884BF271EE9300004565A /* PluginFactory.swift in Sources */,
 				2A5FAEA227CF7AD200D01250 /* GuideView.swift in Sources */,
 				1FCBEDF62738FFEB001C3637 /* RestoreWalletPasswordVertifyView.swift in Sources */,
-				1FD91A8E2844A252000766FB /* FileServiceOptionView.swift in Sources */,
+				1FD91A8E2844A252000766FB /* FileServiceConfirmView.swift in Sources */,
 				2AF884BD271EE9300004565A /* WebPublicApiMessageResolver.swift in Sources */,
 				5DC0183D2859BE84004973CA /* Merkle.swift in Sources */,
 				5D3E365027BF706500FDCFDD /* Post.swift in Sources */,
@@ -4862,7 +4883,7 @@
 				2AD8561A2812875A0064DDA5 /* MoveFromBottomModifier.swift in Sources */,
 				5D06F59C28531B8B00640D00 /* AttachmentOptions.swift in Sources */,
 				1FE54D5A269C19C10041C742 /* WalletCoreRequest.swift in Sources */,
-				1F5B5ED7284F2F4600F6AD98 /* FileServiceOptionsViewController.swift in Sources */,
+				1F5B5ED7284F2F4600F6AD98 /* FileServiceConfirmViewController.swift in Sources */,
 				2AD31E6C282D367700CB3D49 /* UserDefaults.swift in Sources */,
 				2AD855282812841C0064DDA5 /* WalletBottomWidgetViewModel.swift in Sources */,
 				2AD589B82848C22900CF8C9B /* SwiftUI+Placeholder.swift in Sources */,
@@ -4873,6 +4894,7 @@
 				2AD856092812875A0064DDA5 /* EmptyItem.swift in Sources */,
 				2AF884D1271EE9310004565A /* MaskWebMessage+SNSAdaptor.swift in Sources */,
 				5DE1D5A227A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift in Sources */,
+				5DF8CD00286EDB5C006A4048 /* FileServiceDownloadingPreview.swift in Sources */,
 				2AD8560A2812875A0064DDA5 /* WithTipItem.swift in Sources */,
 				2A6ABB842720053B00CC3AED /* BackupPasswordVerifyViewController.swift in Sources */,
 				5DB39E302786A4E40025337C /* JSResourceSelectView.swift in Sources */,
@@ -5049,6 +5071,7 @@
 				2AF88582271EE9310004565A /* TermsOfServiceViewController.swift in Sources */,
 				2AF884F2271EE9310004565A /* IdentityMnemonicImportViewController.swift in Sources */,
 				5D93DFA2267B3F2E00A175BF /* Persona.swift in Sources */,
+				5DF8CD0A287295FC006A4048 /* FileServiceDownloadItem.swift in Sources */,
 				2AD856182812875A0064DDA5 /* SheetContainerModifier.swift in Sources */,
 				5D598E3928600D00006D1E4B /* FileServiceUploadProgress.swift in Sources */,
 				0F641F10268B0237002A4D33 /* MaskError.swift in Sources */,
@@ -5076,6 +5099,7 @@
 				5DBDA4D4285083F000FBC921 /* FileServiceSelectFileSourceView.swift in Sources */,
 				2AF8855A271EE9310004565A /* GasFeeChooseViewController.swift in Sources */,
 				2AD8550D281283170064DDA5 /* ShareLuckyDropConnectPersonaView.swift in Sources */,
+				5DF8CD02286EDCE5006A4048 /* FileServiceDownloadFailPreview.swift in Sources */,
 				2AD31E53282D367700CB3D49 /* PanModalPresentable+color.swift in Sources */,
 				2AD85576281284940064DDA5 /* Account+WalletConnect.swift in Sources */,
 				2AF884E1271EE9310004565A /* LabsViewController.swift in Sources */,

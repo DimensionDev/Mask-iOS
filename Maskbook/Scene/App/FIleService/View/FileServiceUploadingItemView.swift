@@ -148,7 +148,9 @@ extension FileServiceUploadingItem {
             provider: "arweave",
             state: .preparing,
             content: Data.init(count: 3072 * 1024),
-            uploadedBytes: 0
+            totalBytes: 3072 * 1024,
+            uploadedBytes: 0,
+            mime: ""
         )
     }
     
@@ -158,7 +160,9 @@ extension FileServiceUploadingItem {
             provider: "arweave",
             state: .failed,
             content: Data.init(count: 3072 * 1024),
-            uploadedBytes: 0
+            totalBytes: 3072 * 1024,
+            uploadedBytes: 0,
+            mime: ""
         )
     }
     
@@ -169,7 +173,9 @@ extension FileServiceUploadingItem {
             fileType: .file,
             state: .uploading,
             content: Data.init(count: 3072 * 1024),
-            uploadedBytes: 1024 * 1024
+            totalBytes: 3072 * 1024,
+            uploadedBytes: 1024 * 1024,
+            mime: ""
         )
     }
     
@@ -179,8 +185,10 @@ extension FileServiceUploadingItem {
             provider: "arweave",
             state: .uploaded,
             content: Data.init(count: 3072 * 1024),
+            totalBytes: Double(3072 * 1024),
             uploadedBytes: 3072 * 1024,
-            uploadDate: Date()
+            uploadDate: Date(),
+            mime: ""
         )
     }
     

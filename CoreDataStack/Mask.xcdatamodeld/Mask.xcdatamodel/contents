@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E258" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Account" representedClassName=".Account" syncable="YES">
         <attribute name="address" attributeType="String"/>
         <attribute name="chainId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -242,12 +242,13 @@
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="key" optional="YES" attributeType="String"/>
         <attribute name="landingTxID" optional="YES" attributeType="String"/>
+        <attribute name="mime" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="payloadTxID" optional="YES" attributeType="String"/>
         <attribute name="provider" optional="YES" attributeType="String"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
-                <constraint value="name"/>
+                <constraint value="id"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
@@ -277,7 +278,7 @@
         <element name="RelationRecord" positionX="108" positionY="162" width="128" height="104"/>
         <element name="StoredKey" positionX="90" positionY="144" width="128" height="179"/>
         <element name="Token" positionX="-63" positionY="-18" width="128" height="254"/>
-        <element name="UploadFile" positionX="90" positionY="144" width="128" height="179"/>
+        <element name="UploadFile" positionX="90" positionY="144" width="128" height="194"/>
         <element name="WalletConnectSession" positionX="90" positionY="144" width="128" height="89"/>
     </elements>
 </model>

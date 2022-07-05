@@ -91,10 +91,11 @@ extension UploadFile {
             provider: provider ?? "",
             fileType: FileServiceUploadingItem.ItemType(rawValue: fileType) ?? .image,
             state: .uploaded,
-            content: content ?? Data(count: Int(fileSize)),
+            content: content ?? Data(),
+            totalBytes: fileSize,
             uploadedBytes: 0,
             uploadDate: createdAt,
-            mime: nil, // use nil as all UploadFile is uploaded
+            mime: mime ?? "",
             tx: FileServiceTranscation(
                 id: id ?? "",
                 key: key ?? "",
@@ -115,6 +116,18 @@ extension UploadFile {
         self.landingTxID = item.tx?.landingTxID
         self.payloadTxID = item.tx?.payloadTxID
         self.fileSize = Double(item.content.count)
+    }
+    
+    func update(from item: FileServiceDownloadItem) {
+        self.name = item.fileName
+        self.provider = item.provider
+        self.createdAt = item.uploadDate
+        self.fileType = item.fileType.rawValue
+        self.id = item.tx?.id
+        self.key = item.tx?.key
+        self.landingTxID = item.tx?.landingTxID
+        self.payloadTxID = item.tx?.payloadTxID
+        self.fileSize = item.totalBytes
         self.content = item.content
     }
 }

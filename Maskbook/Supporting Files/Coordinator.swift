@@ -214,9 +214,9 @@ class Coordinator {
         case luckyDropCreateProfile
         case luckDropSelectProfile(callback: (@MainActor () -> Void)?)
         case fileService
-        case fileServiceOptions
+        case fileServiceOptions(item: FileServiceSelectedFileItem, optionHandler: (FileServiceUploadOption) -> Void)
         case fileServiceLocalFileSource(selectFileHandler: FileServiceSelectFileHandler)
-        case fileServiceDetail(FileServiceUploadingItem)
+        case fileServiceDetail(FileServiceDownloadItem)
         case fileServiceFAQ
         case messageCompose(PluginMeta? = nil)
         case composeSelectContact(viewModel: SelectContactViewModel)
@@ -861,8 +861,8 @@ extension Coordinator {
             nav.modalPresentationStyle = .overFullScreen
             return nav
             
-        case .fileServiceOptions:
-            return FileServiceOptionViewController()
+        case let .fileServiceOptions(item, optionHandler):
+            return FileServiceConfirmViewController(item: item, optionHandler: optionHandler)
             
         case let .fileServiceLocalFileSource(selectFileHandler):
             return FileServiceSelectFileSourceViewController(selectFileHandler: selectFileHandler)
