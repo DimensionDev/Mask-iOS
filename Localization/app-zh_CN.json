@@ -205,7 +205,7 @@
     },
     "loading": "加载中...",
     "empty": "没有记录",
-    "search_place_holder": "搜索"
+    "search_placeholder": ""
   },
   "scene": {
     "guide": {
@@ -925,10 +925,9 @@
       "encrypt": "进行加密",
       "mesoncdn": "使用Meson CDN",
       "onboard": {
-        "step_one": "Arweave, IPFS 和 Swarm 去中心化文件存储。",
-        "step_two": "点击 [Settings] 选择协议并调整加密设置。",
-        "step_three": "上传您的文件进行永久存储，与好友分享。",
-        "step_four": "由 Mask Network 带给您的免费 Web3 文件服务。"
+        "step_one": "",
+        "step_two": "",
+        "step_three": ""
       },
       "local_file_source": {
         "take_photos": "拍照",
@@ -943,6 +942,8 @@
       "preparing": "准备中...",
       "uploading": "正在上传...",
       "uploaded": "已上传",
+      "failed": "",
+      "encrypting": "",
       "faq": {
         "what_is_file_service": "什么是 Web3 文件服务？",
         "file_service": "Web3文件服务是一个去中心化的存储服务，用户可以以不可变和永久的方式将文件存储在区块链上。 Mask Network提供此服务的方式是使用信誉好的文件存储协议，包括IPFS、Arweeve、Swart 和 Meson 网络，支持类似的文件类型为 .pdf, .doc, .mp3, .mp4，最大文件格式为10.4MB。\n\n上传文件后，将生成一个嵌入了元数据的链接，包括在链上的文件存储位置。 请注意，任何有此链接的人都可以下载。 如果用户希望文件公开或在社交平台上加密，用户可以选择更改其文件的隐私设置。 这确保了用户对自己的文件和他们的存储方式拥有自主权，为去中心化的文件管理功能服务。",
@@ -953,7 +954,10 @@
         "what_is_ipfs": "什么是 IPFS？",
         "ipfs": "IPFS 是一种去中心化的转售协议，其基础是智能的存储合同和现收现付模式。 IPFS 为每个文件分配一个唯一的哈希值， 这样，即使2个文件的内容只存在1位的差异，散列值也会不同。",
         "learn_more": "了解更多"
-      }
+      },
+      "file_key": "",
+      "search_empty": "",
+      "list_empty": ""
     },
     "policy": {
       "reviewed": "我已审核",
