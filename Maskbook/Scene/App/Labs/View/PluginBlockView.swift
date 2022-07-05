@@ -80,10 +80,10 @@ struct PluginBlockView_Previews: PreviewProvider {
         VStack {
             VStack {
                 PluginBlockView(viewModel: PluginViewModel(plugin: .transaction, enabled: false))
-                PluginBlockView(viewModel: PluginViewModel(plugin: .marketTrend, enabled: true))
+                PluginBlockView(viewModel: PluginViewModel(plugin: .fileService, enabled: true))
             }
             VStack {
-                PluginBlockView(viewModel: PluginViewModel(plugin: .marketTrend, enabled: false))
+                PluginBlockView(viewModel: PluginViewModel(plugin: .ito, enabled: false))
                 PluginBlockView(viewModel: PluginViewModel(plugin: .transaction, enabled: true))
             }
             .colorScheme(.dark)
