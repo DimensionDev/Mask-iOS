@@ -111,7 +111,7 @@ final class FileServiceViewModel: ObservableObject {
             .store(in: &cancelableStorage)
     }
 
-    private func refreshList() {
+    func refreshList() {
         items = FileServiceRepository
             .getRecords(
                 transform: { (file: UploadFile) in

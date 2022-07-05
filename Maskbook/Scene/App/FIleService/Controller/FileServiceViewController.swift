@@ -16,6 +16,11 @@ final class FileServiceViewController: BaseViewController {
         title = L10n.Scene.App.Plugins.fileService
         FileServiceView(viewModel: viewModel).asContent(in: self)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.refreshList()
+    }
 
     override func buildEvent() {
         super.buildEvent()
