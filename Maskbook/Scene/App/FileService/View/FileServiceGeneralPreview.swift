@@ -10,7 +10,6 @@ import AVKit
 import SwiftUI
 
 struct FileServiceGeneralPreview: View {
-
     let item: FileServiceSelectedFileItem
     var player: AVPlayer?
 
@@ -24,9 +23,13 @@ struct FileServiceGeneralPreview: View {
         VStack {
             switch item.specificFileType {
             case .video:
-                VideoPlayer(player: self.player).cornerRadius(8)
+                VideoPlayer(player: self.player)
+                    .cornerRadius(8)
+                    .frame(height: 450)
             case .image:
                 Image(uiImage: UIImage(data: item.data)!)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
                     .cornerRadius(8)
             case .text:
                 Image(Asset.Plugins.FileService.textPlaceholder)
