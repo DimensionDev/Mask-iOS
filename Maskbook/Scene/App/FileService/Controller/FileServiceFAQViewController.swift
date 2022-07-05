@@ -77,7 +77,7 @@ struct FileServiceFAQView: View {
                 LazyVStack(spacing: 32) {
                     ForEach(items, id: \.content) { item in
                         DisclosureGroup(isExpanded: item.binding) {
-                            groupContent(of: item.content, url: item.url)
+                            groupContent(of: item.content, url: item.url, binding: item.binding)
                         } label: {
                             groupLabel(of: item.label)
                         }
@@ -92,7 +92,7 @@ struct FileServiceFAQView: View {
         .background(Asset.Colors.Background.normal.asColor().ignoresSafeArea())
     }
 
-    private func groupContent(of text: String, url: String) -> some View {
+    private func groupContent(of text: String, url: String, binding: Binding<Bool>) -> some View {
         VStack(alignment: .leading, spacing: 32) {
             Text(text)
                 .font(.mh7)
@@ -106,6 +106,9 @@ struct FileServiceFAQView: View {
                         openURLCallback(url)
                     }
             }
+        }
+        .onTapGesture {
+            binding.wrappedValue.toggle()
         }
     }
 
