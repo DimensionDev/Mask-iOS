@@ -1216,7 +1216,7 @@ enum L10n {
         static var swap: String {
           return L10n.tr("Localizable", "Scene.App.Plugins.Swap")
         }
-        /// Transak
+        /// Fiat On-Ramp
         static var transaction: String {
           return L10n.tr("Localizable", "Scene.App.Plugins.Transaction")
         }
