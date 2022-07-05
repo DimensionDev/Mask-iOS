@@ -709,6 +709,7 @@
 		5D9988EC2653E2610070ED17 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9988EB2653E2610070ED17 /* Strings.swift */; };
 		5D99DEC926788A7A006E345D /* MaskSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D99DEC826788A7A006E345D /* MaskSegmentControl.swift */; };
 		5D9A88DC27BB4AE200879068 /* PersonaDownloadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A88DB27BB4AE200879068 /* PersonaDownloadHandler.swift */; };
+		5DA927B7287408F400EA665F /* FileServiceLargeFileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA927B6287408F400EA665F /* FileServiceLargeFileStorage.swift */; };
 		5DAD9C1E2823CF7200F6E230 /* Cookie+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD9C1D2823CF7200F6E230 /* Cookie+extension.swift */; };
 		5DAD9C202823D0F000F6E230 /* Cookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD9C1F2823D0F000F6E230 /* Cookie.swift */; };
 		5DAF3FB92814E80600CADB80 /* MaskSchemeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAF3FB82814E80600CADB80 /* MaskSchemeTest.swift */; };
@@ -1554,6 +1555,7 @@
 		5D9988EB2653E2610070ED17 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		5D99DEC826788A7A006E345D /* MaskSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskSegmentControl.swift; sourceTree = "<group>"; };
 		5D9A88DB27BB4AE200879068 /* PersonaDownloadHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaDownloadHandler.swift; sourceTree = "<group>"; };
+		5DA927B6287408F400EA665F /* FileServiceLargeFileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceLargeFileStorage.swift; sourceTree = "<group>"; };
 		5DAD9C1D2823CF7200F6E230 /* Cookie+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cookie+extension.swift"; sourceTree = "<group>"; };
 		5DAD9C1F2823D0F000F6E230 /* Cookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cookie.swift; sourceTree = "<group>"; };
 		5DAF3FB82814E80600CADB80 /* MaskSchemeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskSchemeTest.swift; sourceTree = "<group>"; };
@@ -3745,6 +3747,7 @@
 				2AD8559C281285520064DDA5 /* PluginStorageRepository.swift */,
 				5D3E364B27BF41DE00FDCFDD /* PostRepository.swift */,
 				1F5B5EF02851D13A00F6AD98 /* FileServiceRepository.swift */,
+				5DA927B6287408F400EA665F /* FileServiceLargeFileStorage.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -5095,6 +5098,7 @@
 				2AF88582271EE9310004565A /* TermsOfServiceViewController.swift in Sources */,
 				2AF884F2271EE9310004565A /* IdentityMnemonicImportViewController.swift in Sources */,
 				5D93DFA2267B3F2E00A175BF /* Persona.swift in Sources */,
+				5DA927B7287408F400EA665F /* FileServiceLargeFileStorage.swift in Sources */,
 				5DF8CD0A287295FC006A4048 /* FileServiceDownloadItem.swift in Sources */,
 				2AD856182812875A0064DDA5 /* SheetContainerModifier.swift in Sources */,
 				5D598E3928600D00006D1E4B /* FileServiceUploadProgress.swift in Sources */,
