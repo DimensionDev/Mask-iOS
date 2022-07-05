@@ -173,14 +173,15 @@ extension FileServiceSelectFileHandler: PHPickerViewControllerDelegate {
                 picker.dismiss(animated: true, completion: nil)
                 return
             }
-            let imageResult = await Task.detached {
+            let imageResult = await Task.detached(priority: .high) {
                 await self.loadImage(result: pickerResult)
             }.value
 
             switch imageResult {
             case let .success(image):
-                self.didGetImage(image: image)
-                picker.dismiss(animated: true, completion: nil)
+                picker.dismiss(animated: true, completion: {
+                    self.didGetImage(image: image)
+                })
             case let .failure(error):
                 picker.dismiss(animated: true, completion: {
                     let alertController = AlertController(
