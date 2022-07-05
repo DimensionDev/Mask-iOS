@@ -23,7 +23,13 @@ final class FileServiceUploadManager: ObservableObject {
         uploadingItems.count < 3
     }
 
-    var isVisible: Bool = false
+    var isVisible: Bool = false {
+        didSet {
+            if !isVisible {
+                checkAndRemoveUploadedItem()
+            }
+        }
+    }
 
     fileprivate static let shared = FileServiceUploadManager()
     fileprivate init() {
@@ -79,5 +85,16 @@ final class FileServiceUploadManager: ObservableObject {
         uploadingItems.removeAll {
             $0.item == item
         }
+    }
+
+    private func checkAndRemoveUploadedItem() {
+        var removeItem: [FileServiceUploadingItem] = []
+        for vm in uploadingItems {
+            if vm.item.state == .uploaded {
+                removeItem.append(vm.item)
+            }
+        }
+
+        removeItem.forEach { remove($0) }
     }
 }
