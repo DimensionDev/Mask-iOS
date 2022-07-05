@@ -54,7 +54,7 @@ final class FileServiceUploadViewModel: ObservableObject {
                     fileType: item.fileType,
                     state: .failed,
                     content: item.content,
-                    uploadedBytes: self.item.progress * item.totalBytes,
+                    uploadedBytes: self.item.uploadedBytes,
                     option: uploadOption
                 )
                 self.updateUploadingState(for: item)

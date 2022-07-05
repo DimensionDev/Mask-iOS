@@ -76,8 +76,8 @@ final class FileServiceUploadManager: ObservableObject {
     }
 
     func remove(_ item: FileServiceUploadingItem) {
-        uploadingItems.removeAll(where: {
+        uploadingItems.removeAll {
             $0.item == item
-        })
+        }
     }
 }

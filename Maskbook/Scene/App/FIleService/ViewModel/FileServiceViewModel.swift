@@ -8,15 +8,9 @@ final class FileServiceViewModel: ObservableObject {
     // MARK: Lifecycle
 
     init() {
-        FileServiceRepository.deleteAll(object: UploadFile.self)
-
         @InjectedProvider(\.fileServiceUploadManager)
         var manager;
         _uploadManager = .init(initialValue: manager)
-
-        settings.fileServicePolicyAccepted = false
-        settings.onBoardFeatures = ""
-        refreshList()
 
         Publishers
             .CombineLatest(
@@ -36,6 +30,8 @@ final class FileServiceViewModel: ObservableObject {
                 self?.items.insert(item, at: 0)
             }
             .store(in: &cancelableStorage)
+
+        refreshList()
     }
 
     deinit {

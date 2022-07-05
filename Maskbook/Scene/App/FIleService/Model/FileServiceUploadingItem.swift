@@ -77,16 +77,6 @@ struct FileServiceUploadingItem: Hashable {
         return CGFloat(uploadedBytes) / CGFloat(totalBytes)
     }
 
-    var progressFileText: String {
-        switch self.state {
-        case .failed, .encrypting: return ""
-        case .uploading, .uploaded:
-            let uploadingText = uploadedBytes.fileSizeText
-            let totalText = totalBytes.fileSizeText
-            return "\(uploadingText)/\(totalText)"
-        }
-    }
-
     var uploadDateText: String {
         let formatter = DateFormatter()
         formatter.locale = Locale.current

@@ -56,7 +56,7 @@ struct FileServiceUploadingItemView: View {
                 Button(
                     action: {
                         switch item.state {
-                        case .uploading, .encrypting: break
+                        case .uploading, .encrypting, .preparing: break
                         case .failed: onEvent(.reTry(item))
                         case .uploaded: onEvent(.share(item))
                         }
@@ -138,7 +138,7 @@ extension FileServiceUploadingItem.State {
     fileprivate var isInterActive: Bool {
         switch self {
         case .failed, .uploaded: return true
-        case .encrypting, .uploading: return false
+        case .encrypting, .preparing, .uploading: return false
         }
     }
 }

@@ -80,6 +80,7 @@
 		1F173D4728728234007A5A24 /* OnBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F173D4628728234007A5A24 /* OnBoard.swift */; };
 		1F173D4928728552007A5A24 /* FileServiceUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F173D4828728552007A5A24 /* FileServiceUploadManager.swift */; };
 		1F173D4D2872E138007A5A24 /* FileServiceUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F173D4C2872E138007A5A24 /* FileServiceUploadViewModel.swift */; };
+		1F173D4F2873D777007A5A24 /* Introspect+UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F173D4E2873D777007A5A24 /* Introspect+UITextField.swift */; };
 		1F1762722859B3F8008BE93E /* ArweaveUploadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1762712859B3F8008BE93E /* ArweaveUploadHandler.swift */; };
 		1F1762742859B40D008BE93E /* IPFSUploadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1762732859B40D008BE93E /* IPFSUploadHandler.swift */; };
 		1F1762762859BB18008BE93E /* FileServiceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1762752859BB18008BE93E /* FileServiceDetailViewController.swift */; };
@@ -920,6 +921,7 @@
 		1F173D4628728234007A5A24 /* OnBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoard.swift; sourceTree = "<group>"; };
 		1F173D4828728552007A5A24 /* FileServiceUploadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceUploadManager.swift; sourceTree = "<group>"; };
 		1F173D4C2872E138007A5A24 /* FileServiceUploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceUploadViewModel.swift; sourceTree = "<group>"; };
+		1F173D4E2873D777007A5A24 /* Introspect+UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Introspect+UITextField.swift"; sourceTree = "<group>"; };
 		1F1762712859B3F8008BE93E /* ArweaveUploadHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArweaveUploadHandler.swift; sourceTree = "<group>"; };
 		1F1762732859B40D008BE93E /* IPFSUploadHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPFSUploadHandler.swift; sourceTree = "<group>"; };
 		1F1762752859BB18008BE93E /* FileServiceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceDetailViewController.swift; sourceTree = "<group>"; };
@@ -2491,6 +2493,7 @@
 				2A470B06283E45F0009B49EA /* String+URL.swift */,
 				2A49E15128449F820084208E /* Substring+String.swift */,
 				1F173D4628728234007A5A24 /* OnBoard.swift */,
+				1F173D4E2873D777007A5A24 /* Introspect+UITextField.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -4493,6 +4496,7 @@
 				2AD85573281284940064DDA5 /* PersonaRecord+Identifier.swift in Sources */,
 				2D6677F827688FBE00528F4D /* WalletConnectSession+Extension.swift in Sources */,
 				5D069E0B27A16E2800054B4A /* TertiaryButton.swift in Sources */,
+				1F173D4F2873D777007A5A24 /* Introspect+UITextField.swift in Sources */,
 				5D61527927D06B7A001CB038 /* BackupFolderCheckService.swift in Sources */,
 				2AF88518271EE9310004565A /* SelectNetworkTableViewCell.swift in Sources */,
 				0FEA5D0B26944923009ED058 /* TransactionHistory.swift in Sources */,
