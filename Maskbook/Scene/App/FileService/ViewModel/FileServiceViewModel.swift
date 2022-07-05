@@ -72,7 +72,7 @@ final class FileServiceViewModel: ObservableObject {
 
     var visibleItems: [FileServiceUploadingItem] {
         items
-            .filter { searchText.isEmpty || $0.fileName.contains(searchText) }
+            .filter { searchText.isEmpty || $0.fileName.lowercased().contains(searchText.lowercased()) }
     }
 
     var uploadingItems: [FileServiceUploadViewModel] {
