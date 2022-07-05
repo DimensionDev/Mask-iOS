@@ -52,7 +52,9 @@ final class RemoteRestoreInfoController: BaseViewController {
         title = L10n.Scene.Restore.Titles.restoreRemoteBackup
         navigationController?.navigationBar.prefersLargeTitles = true
 
-        RemoteRestoreInfoView(viewModel: viewModel).asContent(in: self)
+        RemoteRestoreInfoView(viewModel: viewModel)
+            .ignoresSafeArea(.keyboard)
+            .asContent(in: self)
 
         addChild(loadingController)
         view.addSubview(loadingController.view)
