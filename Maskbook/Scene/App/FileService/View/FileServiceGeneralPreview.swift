@@ -10,12 +10,6 @@ import AVKit
 import SwiftUI
 
 struct FileServiceGeneralPreview: View {
-    enum FileType {
-        case video
-        case image
-        case text
-        case application
-    }
 
     let item: FileServiceSelectedFileItem
     var player: AVPlayer?
@@ -28,7 +22,7 @@ struct FileServiceGeneralPreview: View {
 
     var body: some View {
         VStack {
-            switch getFileTypeFromMime(item: item) {
+            switch item.specificFileType {
             case .video:
                 VideoPlayer(player: self.player).cornerRadius(8)
             case .image:
@@ -55,6 +49,9 @@ struct FileServiceGeneralPreview: View {
 
 extension FileServiceGeneralPreview {
     func getUrlFromData(item: FileServiceSelectedFileItem) -> URL {
+        if let url = item.path {
+            return url
+        }
         let cacheURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent(item.fileName)
         do {
             try item.data.write(to: cacheURL, options: .atomicWrite)
@@ -62,17 +59,5 @@ extension FileServiceGeneralPreview {
             print("Failed with error:", err.localizedDescription)
         }
         return cacheURL
-    }
-
-    func getFileTypeFromMime(item: FileServiceSelectedFileItem) -> FileType {
-        if item.mime.containsIgnoreCase(string: "image") {
-            return .image
-        } else if item.mime.containsIgnoreCase(string: "video") || item.mime.containsIgnoreCase(string: "audio") {
-            return .video
-        } else if item.mime.containsIgnoreCase(string: "text") {
-            return .text
-        } else {
-            return .application
-        }
     }
 }

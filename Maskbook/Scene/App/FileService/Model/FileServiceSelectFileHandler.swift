@@ -28,6 +28,27 @@ struct FileServiceSelectedFileItem {
     
 }
 
+extension FileServiceSelectedFileItem {
+    enum FileType {
+        case video
+        case image
+        case text
+        case application
+    }
+    
+    var specificFileType: FileType {
+        if mime.containsIgnoreCase(string: "image") {
+            return .image
+        } else if mime.containsIgnoreCase(string: "video") || mime.containsIgnoreCase(string: "audio") {
+            return .video
+        } else if mime.containsIgnoreCase(string: "text") {
+            return .text
+        } else {
+            return .application
+        }
+    }
+}
+
 final class FileServiceSelectFileHandler: NSObject {
     typealias Item = FileServiceSelectFileSourceViewModel.LocalFileSourceItem
 
