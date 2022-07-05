@@ -25,6 +25,8 @@ final class TransakIntegratingController: UIViewController {
         view.addSubview(webView)
         webView.snp.makeConstraints { $0.edges.equalToSuperview() }
 
+        prepareCloseButton()
+
         addChild(loadingController)
         view.addSubview(loadingController.view)
         loadingController.view.snp.makeConstraints {
@@ -57,6 +59,21 @@ final class TransakIntegratingController: UIViewController {
                 }
             }
             .store(in: &cancelableStorage)
+    }
+
+    private func prepareCloseButton() {
+        let button = NavigationBarItemView(imageAsset: Asset.Plugins.closeSquare) { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
+        }
+        .asUIView()
+
+        view.addSubview(button)
+        button.snp.makeConstraints { make in
+            make.width.height.equalTo(36)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing)
+                .offset(-20)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+        }
     }
 }
 
