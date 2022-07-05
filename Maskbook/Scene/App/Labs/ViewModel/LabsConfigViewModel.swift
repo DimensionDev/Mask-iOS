@@ -74,10 +74,10 @@ final class LabsConfigViewModel: ObservableObject {
                       !self.pluginAlreadEnabled else { return }
                 // record plugin user is attempting to enable
                 self.cachedEnablePlugin = enabledPlugin
-                self.mainCoordinator.present(
-                    scene: .pluginRiskWarning(pluginId: enabledPlugin.plugin.id),
-                    transition: .popup
-                )
+//                self.mainCoordinator.present(
+//                    scene: .pluginRiskWarning(pluginId: enabledPlugin.plugin.id),
+//                    transition: .popup
+//                )
             }
             .store(in: &subscriptionSet)
     }

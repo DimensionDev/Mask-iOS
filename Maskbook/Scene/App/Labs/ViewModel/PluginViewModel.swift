@@ -83,7 +83,7 @@ final class PluginViewModel: ObservableObject {
         // now enabled is true, need to display risk warning alert
         let info = PluginStatus(plugin: plugin, isEnabled: enabled)
         enabledSignal.send(info)
-        enabled = false
+//        enabled = false
         rollBacked = false
         updatePluginStatus()
     }
