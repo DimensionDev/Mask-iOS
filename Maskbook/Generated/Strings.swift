@@ -1165,7 +1165,7 @@ enum L10n {
         static var ito: String {
           return L10n.tr("Localizable", "Scene.App.PluginIntroduction.Ito")
         }
-        /// Surprise your encrypted friends with Token/NFT Lucky Drops.
+        /// Send a surprise crypto giveaway. Tokens and NFTs are supported.
         static var luckydrop: String {
           return L10n.tr("Localizable", "Scene.App.PluginIntroduction.Luckydrop")
         }
