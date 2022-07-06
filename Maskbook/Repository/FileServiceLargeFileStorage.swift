@@ -12,7 +12,7 @@ import SwiftUI
 struct FileServiceLargeFileStorage {
     static let fileManager = FileManager.default
     
-    static let fileServiceDownloadDirectory = URL.documents.appendingPathComponent("fileServiceDownload", isDirectory: true)
+    static let fileServiceDownloadDirectory = URL.documents.appendingPathComponent("FileServiceDownload")
     
     static func createFileServiceDownloadDirectory() {
         let exist = fileManager.fileExists(atPath: fileServiceDownloadDirectory.path)
@@ -22,7 +22,8 @@ struct FileServiceLargeFileStorage {
     }
     
     static func fileServicePath(id: String) -> URL {
-        fileServiceDownloadDirectory.appendingPathExtension(id)
+        createFileServiceDownloadDirectory()
+        return fileServiceDownloadDirectory.appendingPathComponent(id.base64URLEscaped(), isDirectory: false)
     }
     
     static func data(of id: String) -> Data? {
