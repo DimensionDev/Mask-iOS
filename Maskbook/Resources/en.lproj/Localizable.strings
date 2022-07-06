@@ -249,7 +249,7 @@ Install %@ to decrypt it.";
 "Scene.App.MarketTrendSource" = "Market trend source";
 "Scene.App.PluginIntroduction.FileService" = "Decentralized file storage for users.";
 "Scene.App.PluginIntroduction.Ito" = "Enable users to buy tokens directly on Twitter.";
-"Scene.App.PluginIntroduction.Luckydrop" = "Surprise your encrypted friends with Token/NFT Lucky Drops.";
+"Scene.App.PluginIntroduction.Luckydrop" = "Send a surprise crypto giveaway. Tokens and NFTs are supported.";
 "Scene.App.PluginIntroduction.Swap" = "Purchase tokens through dex without additional fees.";
 "Scene.App.PluginIntroduction.Transak" = "Buy crypto with Transak, support 60+ currencies.";
 "Scene.App.PluginTip" = "If you turn off a plugin, the plugin function can no longer be rendered on timeline when browsing social media.";
