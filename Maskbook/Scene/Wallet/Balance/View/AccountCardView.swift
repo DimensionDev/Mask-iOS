@@ -490,7 +490,7 @@ class AccountCardView: UIView {
                     self?.updateBackground(isWalletConnect: account.fromWalletConnect,
                                            displayBlockchain: displayBlockChain)
                     self?.nameLabel.text = name
-                    self?.networkLabel.text = self?.userSetting.network.shortName.lowercased().capitalized
+                    self?.networkLabel.text = self?.userSetting.network.shortName.uppercased()
                     self?.networkIcon.image = self?.userSetting.network.smallIcon?.withTintColor(Asset.Colors.AccountCard.nameText.color)
                 }
                 .store(in: &disposeBag)
