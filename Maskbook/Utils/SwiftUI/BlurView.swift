@@ -1,26 +1,39 @@
 import SwiftUI
 
 struct BlurView: UIViewRepresentable {
-    let style: UIBlurEffect.Style
+    // MARK: Lifecycle
 
     init(style: UIBlurEffect.Style) {
         self.style = style
     }
 
+    // MARK: Internal
+
+    let style: UIBlurEffect.Style
+
     func makeUIView(context: Context) -> UIVisualEffectView {
         UIVisualEffectView(effect: UIBlurEffect(style: context.coordinator.style))
     }
 
-    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {}
+    func updateUIView(_: UIVisualEffectView, context _: Context) {}
 
     func makeCoordinator() -> Coordinator {
-        Coordinator.init(style: style)
+        Coordinator(style: style)
     }
+}
+
+extension BlurView {
+    // MARK: Internal
 
     final class Coordinator {
-        let style: UIBlurEffect.Style
+        // MARK: Lifecycle
+
         init(style: UIBlurEffect.Style) {
             self.style = style
         }
+
+        // MARK: Internal
+
+        let style: UIBlurEffect.Style
     }
 }
