@@ -9,18 +9,10 @@
 import Foundation
 import PhotosUI
 import UIKit
-import WebExtension_Shim
 
 protocol FileServiceSelectFileDelegate: AnyObject {
     func didGetFile(fileItem: FileServiceSelectedFileItem,
                     option: FileServiceUploadOption)
-}
-
-struct FileServiceSelectedFileItem {
-    let data: Data
-    let fileName: String
-    let fileType: FileServiceUploadingItem.ItemType
-    let mime: String
 }
 
 final class FileServiceSelectFileHandler: NSObject {
@@ -96,7 +88,8 @@ final class FileServiceSelectFileHandler: NSObject {
             let fileItem = FileServiceSelectedFileItem(data: pngData,
                                                        fileName: fileName,
                                                        fileType: .image,
-                                                       mime: "image/jpeg")
+                                                       mime: "image/jpeg",
+                                                       path: nil)
             pushFileServiceConfirmView(item: fileItem)
         } else {
             assertionFailure("can't get jpeg data from image")
@@ -123,7 +116,8 @@ final class FileServiceSelectFileHandler: NSObject {
         let fileItem = FileServiceSelectedFileItem(data: data,
                                                    fileName: url.lastPathComponent,
                                                    fileType: url.containsImage ? .image : .file,
-                                                   mime: url.mimeType())
+                                                   mime: url.mimeType(),
+                                                   path: nil)
         pushFileServiceConfirmView(item: fileItem)
     }
     
