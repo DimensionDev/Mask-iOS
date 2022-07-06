@@ -89,7 +89,7 @@ private extension BackupPasswordVerifyViewController {
         
         if case .verifyPassedCompletion = self.destination {
             passwordFormItem.viewModel.passwordError
-                .map(\.isVerifyed)
+                .map(\.isValid)
                 .assign(to: \.isEnabled, on: nextButton)
                 .store(in: &disposeBag)
         }
