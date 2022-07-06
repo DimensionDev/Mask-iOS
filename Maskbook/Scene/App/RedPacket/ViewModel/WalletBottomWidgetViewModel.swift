@@ -113,7 +113,16 @@ class WalletBottomWidgetViewModel: ObservableObject {
         .store(in: &disposeBag)
         
         settings.$passwordExpiredDate.asDriver().map { [weak self] date in
-            self?.settings.isPasswordExpried(date) != false
+            guard let self = self else {
+                return false
+            }
+            
+            guard let fromAddress = self.settings.defaultAccountAddress,
+                  let fromAccount = WalletCoreService.shared.getAccount(address: fromAddress),
+                  !fromAccount.fromWalletConnect else {
+                return false
+            }
+            return self.settings.isPasswordExpried(date)
         }
         .assign(to: \.isLocked, on: self)
         .store(in: &disposeBag)
