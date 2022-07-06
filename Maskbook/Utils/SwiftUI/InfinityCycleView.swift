@@ -90,8 +90,6 @@ struct InfinityCycleView<V: OnBoardItemView & View>: View {
     private final class TimerViewModel<V: OnBoardItem>: NSObject, ObservableObject, UIScrollViewDelegate {
         // MARK: Lifecycle
 
-        let itemBuilder: (Int) -> V
-
         init(itemBuilder: @escaping (Int) -> V) {
             let groupItemCount = V.allCases.count
             let maxIndex = dupilcateGroups * groupItemCount
@@ -118,6 +116,8 @@ struct InfinityCycleView<V: OnBoardItemView & View>: View {
         }
 
         // MARK: Internal
+
+        let itemBuilder: (Int) -> V
 
         @Published var item: Item<V>
 
