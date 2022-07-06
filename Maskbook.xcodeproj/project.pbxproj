@@ -121,6 +121,7 @@
 		1FB862C62787F33900CF345F /* PluginSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB862C52787F33900CF345F /* PluginSettingViewController.swift */; };
 		1FB862C82787F3C900CF345F /* LabsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB862C72787F3C900CF345F /* LabsListView.swift */; };
 		1FB862CA278BDFCE00CF345F /* LabsConfigViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB862C9278BDFCE00CF345F /* LabsConfigViewModel.swift */; };
+		1FBE646028759222001484E4 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE645F28759222001484E4 /* BlurView.swift */; };
 		1FC1A0EE28698DED00984A2E /* FileServiceSaveFileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC1A0ED28698DED00984A2E /* FileServiceSaveFileController.swift */; };
 		1FC2B7942858A34C00570348 /* FileServiceUploadResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC2B7932858A34C00570348 /* FileServiceUploadResult.swift */; };
 		1FC2B7962858C5BF00570348 /* FileServiceUploadingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC2B7952858C5BF00570348 /* FileServiceUploadingItem.swift */; };
@@ -972,6 +973,7 @@
 		1FB862C52787F33900CF345F /* PluginSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginSettingViewController.swift; sourceTree = "<group>"; };
 		1FB862C72787F3C900CF345F /* LabsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabsListView.swift; sourceTree = "<group>"; };
 		1FB862C9278BDFCE00CF345F /* LabsConfigViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabsConfigViewModel.swift; sourceTree = "<group>"; };
+		1FBE645F28759222001484E4 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		1FC1A0ED28698DED00984A2E /* FileServiceSaveFileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceSaveFileController.swift; sourceTree = "<group>"; };
 		1FC2B7932858A34C00570348 /* FileServiceUploadResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceUploadResult.swift; sourceTree = "<group>"; };
 		1FC2B7952858C5BF00570348 /* FileServiceUploadingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceUploadingItem.swift; sourceTree = "<group>"; };
@@ -2688,6 +2690,7 @@
 				1FD19596284E059C0047B431 /* WalkThroughBoard.swift */,
 				1F5278CB286D570F00B6D443 /* CapsuleIndicator.swift */,
 				1F5278CD286D83B700B6D443 /* InfinityCycleView.swift */,
+				1FBE645F28759222001484E4 /* BlurView.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -4935,6 +4938,7 @@
 				5D7F5A5327B66C5600A007C5 /* PersonaKeyInfoPreview.swift in Sources */,
 				2AF884EC271EE9310004565A /* SizeMeasureModifier.swift in Sources */,
 				2AD85575281284940064DDA5 /* ProfileRecord.swift in Sources */,
+				1FBE646028759222001484E4 /* BlurView.swift in Sources */,
 				2AD31E4F282D367700CB3D49 /* UIView+Shake.swift in Sources */,
 				2AD856012812875A0064DDA5 /* FetchedResultsPublisher.swift in Sources */,
 				4168635327F434AE00F12DB2 /* BackupPreviewGenerator.swift in Sources */,

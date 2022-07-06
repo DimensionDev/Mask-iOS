@@ -41,15 +41,19 @@ struct FileServiceView: View {
     private let buttonSize: CGFloat = 56
 
     private var cardGradient: some View {
-        LinearGradient(
-            colors: [
-                Asset.Colors.Gradient.f2F8Ff.asColor(),
-                Asset.Colors.Gradient._050919.asColor()
-            ],
-            startPoint: .init(x: 0, y: 0),
-            endPoint: .init(x: 0, y: 1)
-        )
-        .blur(radius: 20)
+        BlurView(style: .prominent)
+            .ignoresSafeArea()
+            .overlay(
+                LinearGradient(
+                    colors: [
+                        Asset.Colors.Gradient.f2F8Ff.asColor(),
+                        Asset.Colors.Gradient._050919.asColor()
+                    ],
+                    startPoint: .init(x: 0, y: 0),
+                    endPoint: .init(x: 0, y: 1)
+                )
+                .blur(radius: 40)
+            )
     }
 
     private var uploadButton: some View {
@@ -235,5 +239,6 @@ struct FileServiceView_Preview: PreviewProvider {
             .background(
                 Asset.Colors.Background.normal.asColor().ignoresSafeArea()
             )
+            .preferredColorScheme(.dark)
     }
 }
