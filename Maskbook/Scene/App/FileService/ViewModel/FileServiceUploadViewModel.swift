@@ -82,3 +82,9 @@ final class FileServiceUploadViewModel: ObservableObject {
         }
     }
 }
+
+extension FileServiceUploadViewModel: Equatable {
+    static func == (lhs: FileServiceUploadViewModel, rhs: FileServiceUploadViewModel) -> Bool {
+        lhs.item == rhs.item
+    }
+}

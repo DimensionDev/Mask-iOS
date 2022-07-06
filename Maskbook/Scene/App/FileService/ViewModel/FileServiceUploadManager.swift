@@ -20,7 +20,7 @@ final class FileServiceUploadManager: ObservableObject {
     private var cancelableStorage: Set<AnyCancellable> = []
 
     var allowUploading: Bool {
-        uploadingItems.count < 3
+        uploadingItems.filter { $0.item.state != .uploaded }.count < 3
     }
 
     var isVisible: Bool = false {
@@ -47,32 +47,34 @@ final class FileServiceUploadManager: ObservableObject {
     func tryUploading(
         _ item: FileServiceUploadingItem
     ) -> Bool {
-        guard uploadingItems.count < 3 else {
+        guard allowUploading else {
             return false
         }
 
-        if !uploadingItems.contains(where: { $0.item.content == item.content }) {
-            let model = FileServiceUploadViewModel(item: item)
-            uploadingItems.insert(model, at: 0)
-            if item.state != .failed {
-                model.tryUploading(item)
-                model.newUploadedItem
-                    .sink { [weak self] item in
-                        guard let self = self else { return }
-
-                        if self.isVisible {
-                            self.newUploadedItem.send(item)
-                        } else {
-                            self.remove(item)
-                        }
-                    }
-                    .store(in: &cancelableStorage)
-            }
-
-            return true
+        // duplicate item will not be inset by this function
+        if uploadingItems.count == 3,
+           let uploadedItemIndex = uploadingItems.lastIndex(where: { $0.item.state == .uploaded }) {
+            uploadingItems.remove(at: uploadedItemIndex)
         }
 
-        return false
+        let model = FileServiceUploadViewModel(item: item)
+        uploadingItems.insert(model, at: 0)
+        if item.state != .failed {
+            model.tryUploading(item)
+            model.newUploadedItem
+                .sink { [weak self] item in
+                    guard let self = self else { return }
+
+                    if self.isVisible {
+                        self.newUploadedItem.send(item)
+                    } else {
+                        self.remove(item)
+                    }
+                }
+                .store(in: &cancelableStorage)
+        }
+
+        return true
     }
 
     func retryUploading(_ item: FileServiceUploadingItem) {

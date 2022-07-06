@@ -105,6 +105,8 @@
 		1F5B5EF528582F3400F6AD98 /* FileServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B5EF428582F3400F6AD98 /* FileServiceViewModel.swift */; };
 		1F705FE327CF6AB9002A4A7E /* SpinWheelAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */; };
 		1F7C5E742869DD3200D00AF4 /* TappableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7C5E732869DD3200D00AF4 /* TappableText.swift */; };
+		1F82AF1B2875C5F200B3CF79 /* UploadFile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F82AF192875C5F200B3CF79 /* UploadFile+CoreDataClass.swift */; };
+		1F82AF1C2875C5F200B3CF79 /* UploadFile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F82AF1A2875C5F200B3CF79 /* UploadFile+CoreDataProperties.swift */; };
 		1F8AD0CB26CA3AA000C9694F /* MaskLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AD0CA26CA3AA000C9694F /* MaskLoadingIndicator.swift */; };
 		1F8AD0CE26CA3AFB00C9694F /* LoadingAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AD0CD26CA3AFB00C9694F /* LoadingAnimator.swift */; };
 		1F8AD0D026CA3BAE00C9694F /* SpinBallAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AD0CF26CA3BAE00C9694F /* SpinBallAnimator.swift */; };
@@ -740,8 +742,6 @@
 		5DF8CD00286EDB5C006A4048 /* FileServiceDownloadingPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8CCFF286EDB5C006A4048 /* FileServiceDownloadingPreview.swift */; };
 		5DF8CD02286EDCE5006A4048 /* FileServiceDownloadFailPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8CD01286EDCE5006A4048 /* FileServiceDownloadFailPreview.swift */; };
 		5DF8CD04286EDD31006A4048 /* FileServiceGeneralPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8CD03286EDD31006A4048 /* FileServiceGeneralPreview.swift */; };
-		5DF8CD07286EEE10006A4048 /* UploadFile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8CD05286EEE10006A4048 /* UploadFile+CoreDataClass.swift */; };
-		5DF8CD08286EEE10006A4048 /* UploadFile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8CD06286EEE10006A4048 /* UploadFile+CoreDataProperties.swift */; };
 		5DF8CD0A287295FC006A4048 /* FileServiceDownloadItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8CD09287295FC006A4048 /* FileServiceDownloadItem.swift */; };
 		5DF8CD102873BF8D006A4048 /* FileServiceSelectServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8CD0F2873BF8D006A4048 /* FileServiceSelectServiceViewModel.swift */; };
 		6F07ABE1279022B80039D69D /* NFTCollectionStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F07ABE0279022B80039D69D /* NFTCollectionStatusModel.swift */; };
@@ -956,6 +956,8 @@
 		1F5B5EF428582F3400F6AD98 /* FileServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceViewModel.swift; sourceTree = "<group>"; };
 		1F705FE227CF6AB8002A4A7E /* SpinWheelAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinWheelAnimator.swift; sourceTree = "<group>"; };
 		1F7C5E732869DD3200D00AF4 /* TappableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableText.swift; sourceTree = "<group>"; };
+		1F82AF192875C5F200B3CF79 /* UploadFile+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadFile+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1F82AF1A2875C5F200B3CF79 /* UploadFile+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadFile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1F8AD0CA26CA3AA000C9694F /* MaskLoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskLoadingIndicator.swift; sourceTree = "<group>"; };
 		1F8AD0CD26CA3AFB00C9694F /* LoadingAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimator.swift; sourceTree = "<group>"; };
 		1F8AD0CF26CA3BAE00C9694F /* SpinBallAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinBallAnimator.swift; sourceTree = "<group>"; };
@@ -1587,8 +1589,6 @@
 		5DF8CCFF286EDB5C006A4048 /* FileServiceDownloadingPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceDownloadingPreview.swift; sourceTree = "<group>"; };
 		5DF8CD01286EDCE5006A4048 /* FileServiceDownloadFailPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceDownloadFailPreview.swift; sourceTree = "<group>"; };
 		5DF8CD03286EDD31006A4048 /* FileServiceGeneralPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceGeneralPreview.swift; sourceTree = "<group>"; };
-		5DF8CD05286EEE10006A4048 /* UploadFile+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadFile+CoreDataClass.swift"; sourceTree = "<group>"; };
-		5DF8CD06286EEE10006A4048 /* UploadFile+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadFile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5DF8CD09287295FC006A4048 /* FileServiceDownloadItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceDownloadItem.swift; sourceTree = "<group>"; };
 		5DF8CD0F2873BF8D006A4048 /* FileServiceSelectServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceSelectServiceViewModel.swift; sourceTree = "<group>"; };
 		6F07ABE0279022B80039D69D /* NFTCollectionStatusModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFTCollectionStatusModel.swift; sourceTree = "<group>"; };
@@ -1824,8 +1824,8 @@
 		0FBC5AB1266759BC00328693 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				5DF8CD05286EEE10006A4048 /* UploadFile+CoreDataClass.swift */,
-				5DF8CD06286EEE10006A4048 /* UploadFile+CoreDataProperties.swift */,
+				1F82AF192875C5F200B3CF79 /* UploadFile+CoreDataClass.swift */,
+				1F82AF1A2875C5F200B3CF79 /* UploadFile+CoreDataProperties.swift */,
 				5D3E364527BE2D0200FDCFDD /* PostRecord+CoreDataClass.swift */,
 				5D3E364627BE2D0200FDCFDD /* PostRecord+CoreDataProperties.swift */,
 				41E50037279946E400A73117 /* PersonaRecord+CoreDataClass.swift */,
@@ -4426,15 +4426,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F82AF1C2875C5F200B3CF79 /* UploadFile+CoreDataProperties.swift in Sources */,
 				2DEDDEA92761ED7000D37A76 /* WalletConnectSession+CoreDataProperties.swift in Sources */,
 				0F93937626A7AE9400F7F608 /* Collectible+CoreDataProperties.swift in Sources */,
 				2DC651F8271E6CAB00BABA9C /* LocalStorage+CoreDataClass.swift in Sources */,
 				41E5003E279946E400A73117 /* PersonaRecord+CoreDataProperties.swift in Sources */,
 				0F93937526A7AE9400F7F608 /* Collectible+CoreDataClass.swift in Sources */,
 				0FAF2F4C26678AC300C1B577 /* Mask.xcdatamodeld in Sources */,
+				1F82AF1B2875C5F200B3CF79 /* UploadFile+CoreDataClass.swift in Sources */,
 				41E5003D279946E400A73117 /* PersonaRecord+CoreDataClass.swift in Sources */,
 				0F93936D26A7AE9400F7F608 /* Token+CoreDataClass.swift in Sources */,
-				5DF8CD07286EEE10006A4048 /* UploadFile+CoreDataClass.swift in Sources */,
 				0F93937726A7AE9400F7F608 /* Contact+CoreDataClass.swift in Sources */,
 				2DC651F6271E6CAB00BABA9C /* BlobStorage+CoreDataClass.swift in Sources */,
 				0F93937826A7AE9400F7F608 /* Contact+CoreDataProperties.swift in Sources */,
@@ -4455,7 +4456,6 @@
 				5D3E364E27BF503000FDCFDD /* PostRecord+Managed.swift in Sources */,
 				0FBC5ADC26675B0F00328693 /* URL.swift in Sources */,
 				2DC651F9271E6CAB00BABA9C /* LocalStorage+CoreDataProperties.swift in Sources */,
-				5DF8CD08286EEE10006A4048 /* UploadFile+CoreDataProperties.swift in Sources */,
 				0F07028826AFE77C00C04F77 /* DeletedDerivationPath+CoreDataClass.swift in Sources */,
 				41E500092791361E00A73117 /* PersonaRecord+Managed.swift in Sources */,
 				0F93937326A7AE9400F7F608 /* Account+CoreDataClass.swift in Sources */,
