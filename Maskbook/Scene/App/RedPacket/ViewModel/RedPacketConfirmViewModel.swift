@@ -174,6 +174,7 @@ class RedPacketConfirmViewModel: ObservableObject {
         requestEstimateGasLimit()
     }
     
+    @MainActor
     func onConfirm() {
         buttonState = .sending
         sendTransaction() { [weak self] result in
@@ -193,6 +194,7 @@ class RedPacketConfirmViewModel: ObservableObject {
         }
     }
     
+    @MainActor
     private func sendTransaction(_ completion: @escaping (Swift.Result<String, Error>) -> Void)
     {
         guard let transaction = transaction else {
@@ -271,7 +273,10 @@ class RedPacketConfirmViewModel: ObservableObject {
                         title: "",
                         message: error.errorDescription,
                         confirmButtonText: L10n.Common.Controls.done,
-                        imageType: .error)
+                        imageType: .error,
+                        confirmButtonClicked: { _ in
+                            completion(.failure(error))
+                        })
                     Coordinator.main.present(
                         scene: .alertController(alertController: alertController),
                         transition: .alertController(completion: nil)

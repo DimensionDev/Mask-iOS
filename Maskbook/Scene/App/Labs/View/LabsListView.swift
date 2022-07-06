@@ -27,9 +27,9 @@ struct LabsListView: View {
     private var plugins: [PluginType] {
         [
             .luckyDrop,
-            .transaction,
             .fileService,
-            .ito,
+            .transaction,
+//            .ito,
             .swap
         ]
     }

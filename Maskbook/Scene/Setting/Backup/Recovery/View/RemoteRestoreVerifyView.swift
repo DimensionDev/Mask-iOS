@@ -10,11 +10,7 @@ import SwiftUI
 
 struct RemoteRestoreVerifyView: View {
     @State
-    private var zoneNumberSize = CGSize.zero {
-        didSet {
-            print(zoneNumberSize)
-        }
-    }
+    private var zoneNumberSize = CGSize.zero
 
     @ObservedObject
     var viewModel: RemoteRestoreVerifyViewModel
