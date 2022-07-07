@@ -44,9 +44,9 @@ extension FileServiceSelectedFileItem {
     }
     
     var specificFileType: FileType {
-        if mime.containsIgnoreCase(string: "image") {
+        if mime.mimeIsImage {
             return .image
-        } else if mime.containsIgnoreCase(string: "video") {
+        } else if mime.mimeIsVideo {
             return .video
         } else if mime.containsIgnoreCase(string: "audio") {
             return .audio
@@ -61,7 +61,10 @@ extension FileServiceSelectedFileItem {
         if let url = item.path {
             return url
         }
-        let cacheURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent(item.fileName)
+        let cacheURL = FileManager.default.urls(for: .cachesDirectory,
+                                                in: .userDomainMask)
+            .first!
+            .appendingPathComponent(item.fileName)
         do {
             try item.data.write(to: cacheURL, options: .atomicWrite)
         } catch let err {
