@@ -118,5 +118,7 @@ extension UploadFile {
         self.landingTxID = item.tx?.landingTxID
         self.payloadTxID = item.tx?.payloadTxID
         self.fileSize = item.totalBytes
+        self.uploadOption = item.option.asString()
+        self.mime = item.mime
     }
 }
