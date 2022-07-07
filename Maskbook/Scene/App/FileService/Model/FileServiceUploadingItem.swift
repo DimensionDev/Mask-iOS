@@ -2,6 +2,8 @@ import Foundation
 import SwiftUI
 
 struct FileServiceUploadingItem: Hashable {
+    // MARK: Lifecycle
+
     init(
         fileName: String,
         provider: String,
@@ -28,12 +30,16 @@ struct FileServiceUploadingItem: Hashable {
         self.mime = mime
     }
 
+    // MARK: Internal
+
     enum State: Int64, Hashable {
         case encrypting = 0
         case preparing
         case uploading
         case uploaded
         case failed
+
+        // MARK: Internal
 
         var detailText: String {
             switch self {
@@ -89,11 +95,16 @@ struct FileServiceUploadingItem: Hashable {
     }
 
     var fileNameWithoutExt: String {
-        return fileName.components(separatedBy:".").first ?? fileName
+        fileName.components(separatedBy: ".").first ?? fileName
     }
 
     var fileExt: String? {
-        return fileName.components(separatedBy:".").last
+        fileName.components(separatedBy: ".").last
+    }
+
+    func fileNameAndOptionEquals(to another: FileServiceUploadingItem) -> Bool {
+        fileName == another.fileName &&
+        option == another.option
     }
 }
 
@@ -112,7 +123,7 @@ extension FileServiceUploadingItem: CustomStringConvertible {
 
 extension Double {
     var fileSizeText: String {
-        if self.isZero { return "0.0 kb" }
+        if isZero { return "0.0 kb" }
 
         let kb = self / 1_024
         guard kb >= 1_024 else {

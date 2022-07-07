@@ -51,20 +51,33 @@ final class FileServiceUploadManager: ObservableObject {
             return false
         }
 
-        // duplicate item will not be inserted by this function
+        // if item is duplicated in task queue，move it to the first and done
+        if let duplicateItemIndex = uploadingItems.firstIndex(where: { $0.uploadContentEquals(to: item) }) {
+            let duplicateViewModel = uploadingItems[duplicateItemIndex]
+            if duplicateItemIndex != 0 {
+                uploadingItems.remove(at: duplicateItemIndex)
+                uploadingItems.insert(duplicateViewModel, at: 0)
+            }
+            return true
+        }
+
         if uploadingItems.count == 3,
            let uploadedItemIndex = uploadingItems.lastIndex(where: { $0.item.state == .uploaded }) {
             uploadingItems.remove(at: uploadedItemIndex)
         }
 
-        let model = FileServiceUploadViewModel(item: item)
-        uploadingItems.insert(model, at: 0)
-        if item.state != .failed {
+        switch item.state {
+        case .uploaded:
+            let model = FileServiceUploadViewModel(item: item)
+            uploadingItems.insert(model, at: 0)
+
+        case .failed, .preparing, .encrypting, .uploading:
+            let model = FileServiceUploadViewModel(item: item)
+            uploadingItems.insert(model, at: 0)
             model.tryUploading(item)
             model.newUploadedItem
                 .sink { [weak self] item in
                     guard let self = self else { return }
-
                     if self.isVisible {
                         self.newUploadedItem.send(item)
                     } else {
