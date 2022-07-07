@@ -737,7 +737,8 @@
       }
     },
     "share": {
-      "shareLink": "分享 Mask Network 连接："
+      "shareLink": "分享 Mask Network 连接：",
+      "invite": ""
     },
     "restore": {
       "titles": {
