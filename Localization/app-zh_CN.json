@@ -217,7 +217,7 @@
       "description4": "及时进行云端/本地备份"
     },
     "welcome_identity_empty": {
-      "create_a_persona": "创建角色",
+      "create_a_persona": "",
       "recover_your_persona": "恢复角色",
       "description": "崭新，开放的Web 3.0 之门。"
     },
