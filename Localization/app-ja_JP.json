@@ -737,7 +737,8 @@
       }
     },
     "share": {
-      "shareLink": ""
+      "shareLink": "",
+      "invite": ""
     },
     "restore": {
       "titles": {
