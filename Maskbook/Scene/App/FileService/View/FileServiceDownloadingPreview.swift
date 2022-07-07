@@ -18,7 +18,7 @@ struct FileServiceDownloadingPreview: View {
     
     var body: some View {
         VStack {
-            MaskLoadingIndicatorView(isAnimating: true)
+            LoadingIndicator(loading: true, preferredSize: CGSize(width: 32, height: 32))
                 .frame(width: 32, height: 32, alignment: .center)
             Spacer().frame(height: 84)
             Text(item.fileName)
