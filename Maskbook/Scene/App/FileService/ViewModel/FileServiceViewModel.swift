@@ -136,10 +136,10 @@ extension FileServiceViewModel {
     }
 
     func tryUploading(_ fileItem: FileServiceSelectedFileItem, option: FileServiceUploadOption) {
-        if isDuplicateItem(fileItem) {
-            // show warnning
-            return
-        }
+//        if isDuplicateItem(fileItem) {
+//            // show warnning
+//            return
+//        }
 
         // use  state: .encrypting, otherwise  state: .preparing,
         let item: FileServiceUploadingItem = .init(
