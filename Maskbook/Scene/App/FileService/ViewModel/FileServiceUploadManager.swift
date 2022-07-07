@@ -51,7 +51,7 @@ final class FileServiceUploadManager: ObservableObject {
             return false
         }
 
-        // duplicate item will not be inset by this function
+        // duplicate item will not be inserted by this function
         if uploadingItems.count == 3,
            let uploadedItemIndex = uploadingItems.lastIndex(where: { $0.item.state == .uploaded }) {
             uploadingItems.remove(at: uploadedItemIndex)

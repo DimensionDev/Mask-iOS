@@ -124,11 +124,11 @@ extension FileServiceViewModel {
     }
 
     private func isDuplicateItem(_ fileItem: FileServiceSelectedFileItem) -> Bool {
-        if items.contains(where: { $0.content == fileItem.data }) {
+        if uploadManager.uploadingItems.contains(where: { $0.item.content == fileItem.data }) {
             return true
         }
 
-        if uploadManager.uploadingItems.contains(where: { $0.item.content == fileItem.data }) {
+        if items.contains(where: { $0.content == fileItem.data }) {
             return true
         }
 
