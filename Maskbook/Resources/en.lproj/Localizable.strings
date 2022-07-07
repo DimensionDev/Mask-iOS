@@ -634,7 +634,7 @@ be captured on timeline.";
 "Scene.Setting.ValidationCodeMismatch" = "Incorrect Verification Code";
 "Scene.Setting.ValidationCodeViaEmail" = "Verification code has been sent by Email to";
 "Scene.Setting.ValidationCodeViaMobilePhone" = "Verification code has been sent by SMS to";
-"Scene.Share.Invite" = "Hi %@, install Mask.io to explore Web3 features in social media. Free to use NFT PFP, Crypto lucky drop, Web3 FIle service and other plug-ins. Showcase your Web3 explore footprints.";
+"Scene.Share.Invite" = "Hi %@, install Mask.io to explore Web3 features in social media. Free to use NFT PFP, Crypto lucky drop, Web3 FIle service and other plugins. Showcase your Web3 explore footprints.";
 "Scene.Share.Sharelink" = "Share Mask Network Link:";
 "Scene.Social.AccountAlreadyConnected" = "Account already connected";
 "Scene.Social.ConnectButtonTitle" = "Connect";
