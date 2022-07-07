@@ -5,7 +5,7 @@ final class FileServiceSaveFileController: SheetViewController {
 
     private let viewModel: ViewModel
 
-    init(item: FileServiceDownloadItem) {
+    init(item: FileServiceSelectedFileItem) {
         self.viewModel = .init(item: item)
         super.init(presenter: SheetPresenter(
             presentStyle: .translucent,
@@ -24,13 +24,17 @@ final class FileServiceSaveFileController: SheetViewController {
             guard let self = self else { return }
             switch action {
             case .saveToAlbum:
-                guard self.viewModel.item.fileType == .image,
-                      let data = self.viewModel.item.content,
-                      let image = UIImage(data: data) else {
+                guard self.viewModel.item.mime.mimeIsCanSaveToAlbum else {
                     return
                 }
-                UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.albumSave), nil)
-
+                if self.viewModel.item.mime.mimeIsImage {
+                    if let image = UIImage(data: self.viewModel.item.data) {
+                        UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.albumSave), nil)
+                    }
+                }
+                if self.viewModel.item.mime.mimeIsVideo {
+                    UISaveVideoAtPathToSavedPhotosAlbum(self.viewModel.item.tempURL.path,self, #selector(self.videoSave),nil)
+                }
             case .saveToFolder: self.selectDestinationFolder()
             }
         }
@@ -58,6 +62,17 @@ final class FileServiceSaveFileController: SheetViewController {
             self.hide()
         }
     }
+    
+    @objc
+    private func videoSave(
+        _ videoPath: String,
+        didFinishSavingWithError error: Error?,
+        contextInfo: UnsafeMutableRawPointer
+    ) {
+        if error.isNone {
+            self.hide()
+        }
+    }
 }
 
 extension FileServiceSaveFileController: UIDocumentPickerDelegate {
@@ -68,10 +83,10 @@ extension FileServiceSaveFileController: UIDocumentPickerDelegate {
         }
 
         let fileUrl = url.appendingPathComponent(viewModel.item.fileName)
-        guard let data = viewModel.item.content else {
+        guard !viewModel.item.data.isEmpty else {
             return
         }
-        try? data.write(to: fileUrl)
+        try? viewModel.item.data.write(to: fileUrl)
 
         self.hide()
     }
@@ -84,11 +99,21 @@ extension FileServiceSaveFileController {
         case saveToFolder
         }
 
-        let item: FileServiceDownloadItem
+        var item: FileServiceSelectedFileItem
         var action: (Action) -> Void = { _ in }
 
-        init(item: FileServiceDownloadItem) {
+        init(item: FileServiceSelectedFileItem) {
             self.item = item
+        }
+        
+        func itemCanSaveToAlbum() -> Bool {
+            if item.mime.mimeIsImage {
+                return true
+            }
+            if item.mime.mimeIsVideo {
+                return UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(item.tempURL.path)
+            }
+            return false
         }
     }
 
@@ -114,7 +139,7 @@ extension FileServiceSaveFileController {
                                     .font(.bh5)
                                     .foregroundColor(
                                         Asset.Colors.Text.dark.asColor().opacity(
-                                            viewModel.item.fileType == .image
+                                            viewModel.itemCanSaveToAlbum()
                                             ? 1
                                             : 0.5
                                         )
@@ -125,7 +150,7 @@ extension FileServiceSaveFileController {
                             )
                     }
                 )
-                .disabled(viewModel.item.fileType == .file)
+                .disabled(!viewModel.itemCanSaveToAlbum())
 
                 Button(
                     action: { self.viewModel.action(.saveToFolder) },
@@ -156,7 +181,7 @@ import UStack
 struct FileServiceSaveFileController_Preview: PreviewProvider {
     static var previews: some SwiftUI.View {
         Preview {
-            FileServiceSaveFileController(item: FileServiceUploadingItem.uploaded.toFileServiceDownloadItem()).view
+            FileServiceSaveFileController(item: FileServiceUploadingItem.uploaded.toFileServiceDownloadItem().toSelectedFileItem()).view
         }
     }
 }

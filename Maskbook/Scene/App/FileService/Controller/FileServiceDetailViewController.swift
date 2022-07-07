@@ -51,7 +51,7 @@ final class FileServiceDetailViewController: BaseViewController {
         guard let _ = fileServiceItem.content else {
             return
         }
-        let controller = FileServiceSaveFileController(item: fileServiceItem)
+        let controller = FileServiceSaveFileController(item: fileServiceItem.toSelectedFileItem())
         coordinator.topViewController?.present(controller, animated: true)
     }
 }
