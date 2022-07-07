@@ -2821,6 +2821,10 @@ enum L10n {
     }
 
     enum Share {
+      /// Hi %@, install Mask.io to explore Web3 features in social media. Free to use NFT PFP, Crypto lucky drop, Web3 FIle service and other plug-ins. Showcase your Web3 explore footprints.
+      static func invite(_ p1: String) -> String {
+        return L10n.tr("Localizable", "Scene.Share.Invite", p1)
+      }
       /// Share Mask Network Link:
       static var sharelink: String {
         return L10n.tr("Localizable", "Scene.Share.Sharelink")

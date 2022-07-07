@@ -737,7 +737,8 @@
       }
     },
     "share": {
-      "shareLink": "Share Mask Network Link:"
+      "shareLink": "Share Mask Network Link:",
+      "invite": "Hi %@, install Mask.io to explore Web3 features in social media. Free to use NFT PFP, Crypto lucky drop, Web3 FIle service and other plug-ins. Showcase your Web3 explore footprints."
     },
     "restore": {
       "titles": {
