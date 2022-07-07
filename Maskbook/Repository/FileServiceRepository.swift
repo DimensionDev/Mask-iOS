@@ -122,5 +122,8 @@ extension UploadFile {
         self.content = item.state == .uploaded
             ? nil
             : item.content
+
+        self.uploadOption = item.option.asString()
+        self.mime = item.mime
     }
 }
