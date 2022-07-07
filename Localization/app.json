@@ -217,7 +217,7 @@
       "description4": "Back up in Time,\nwith Cloud / Local Backup"
     },
     "welcome_identity_empty": {
-      "create_a_persona": "Create a Persona",
+      "create_a_persona": "Create Persona",
       "recover_your_persona": "Recover your Persona",
       "description": "The portal to a new and open Internet"
     },
@@ -738,7 +738,7 @@
     },
     "share": {
       "shareLink": "Share Mask Network Link:",
-      "invite": "Hi %@, install Mask.io to explore Web3 features in social media. Free to use NFT PFP, Crypto lucky drop, Web3 FIle service and other plug-ins. Showcase your Web3 explore footprints."
+      "invite": "Hi %@, install Mask.io to explore Web3 features in social media. Free to use NFT PFP, Crypto lucky drop, Web3 FIle service and other plugins. Showcase your Web3 explore footprints."
     },
     "restore": {
       "titles": {
