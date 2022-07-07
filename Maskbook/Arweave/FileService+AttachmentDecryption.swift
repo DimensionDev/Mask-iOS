@@ -72,7 +72,7 @@ extension FileService {
             throw "no data in block key"
         }
 
-        guard let passphrase = key else {
+        guard let passphrase = key, !passphrase.isEmpty else {
             return block
         }
 

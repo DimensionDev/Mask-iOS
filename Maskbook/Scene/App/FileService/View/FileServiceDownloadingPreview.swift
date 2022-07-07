@@ -18,8 +18,8 @@ struct FileServiceDownloadingPreview: View {
     
     var body: some View {
         VStack {
-            ProgressView()
-                .scaleEffect(x: 2, y: 2, anchor: .center)
+            MaskLoadingIndicatorView(isAnimating: true)
+                .frame(width: 32, height: 32, alignment: .center)
             Spacer().frame(height: 84)
             Text(item.fileName)
                 .font(.bh4)

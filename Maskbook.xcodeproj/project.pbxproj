@@ -697,6 +697,7 @@
 		5D61527327CF35FC001CB038 /* MoveBackupDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D61527227CF35FC001CB038 /* MoveBackupDataViewController.swift */; };
 		5D61527927D06B7A001CB038 /* BackupFolderCheckService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D61527827D06B7A001CB038 /* BackupFolderCheckService.swift */; };
 		5D72F3C7265E3FE50073F6B9 /* KeyboardResponderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D72F3C6265E3FE50073F6B9 /* KeyboardResponderService.swift */; };
+		5D74A5D8287689E000147EB5 /* MaskLoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D74A5D7287689E000147EB5 /* MaskLoadingIndicatorView.swift */; };
 		5D770B1127DED6F900539254 /* PersonaAvatarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D770B1027DED6F900539254 /* PersonaAvatarViewController.swift */; };
 		5D770B1327DED70400539254 /* PersonaAvatarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D770B1227DED70400539254 /* PersonaAvatarViewModel.swift */; };
 		5D7BF7CE27D0997C00C58EF2 /* BackupFileDetectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7BF7CD27D0997C00C58EF2 /* BackupFileDetectService.swift */; };
@@ -1545,6 +1546,7 @@
 		5D61527227CF35FC001CB038 /* MoveBackupDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveBackupDataViewController.swift; sourceTree = "<group>"; };
 		5D61527827D06B7A001CB038 /* BackupFolderCheckService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupFolderCheckService.swift; sourceTree = "<group>"; };
 		5D72F3C6265E3FE50073F6B9 /* KeyboardResponderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponderService.swift; sourceTree = "<group>"; };
+		5D74A5D7287689E000147EB5 /* MaskLoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskLoadingIndicatorView.swift; sourceTree = "<group>"; };
 		5D770B1027DED6F900539254 /* PersonaAvatarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaAvatarViewController.swift; sourceTree = "<group>"; };
 		5D770B1227DED70400539254 /* PersonaAvatarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaAvatarViewModel.swift; sourceTree = "<group>"; };
 		5D7BF7CD27D0997C00C58EF2 /* BackupFileDetectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupFileDetectService.swift; sourceTree = "<group>"; };
@@ -2052,6 +2054,7 @@
 			isa = PBXGroup;
 			children = (
 				1F8AD0CA26CA3AA000C9694F /* MaskLoadingIndicator.swift */,
+				5D74A5D7287689E000147EB5 /* MaskLoadingIndicatorView.swift */,
 				1F8AD0CD26CA3AFB00C9694F /* LoadingAnimator.swift */,
 				1F8AD0CF26CA3BAE00C9694F /* SpinBallAnimator.swift */,
 				1FCCE39A26D7F09700909A5B /* SpinActivityAnimator.swift */,
@@ -4930,6 +4933,7 @@
 				2A6ABB842720053B00CC3AED /* BackupPasswordVerifyViewController.swift in Sources */,
 				5DB39E302786A4E40025337C /* JSResourceSelectView.swift in Sources */,
 				2AF8850F271EE9310004565A /* NavigationController.swift in Sources */,
+				5D74A5D8287689E000147EB5 /* MaskLoadingIndicatorView.swift in Sources */,
 				2A470B09283E5B53009B49EA /* ShareLuckyDropViewModel.swift in Sources */,
 				2D00A5FE27953F2D0082E693 /* DebugEntryView.swift in Sources */,
 				5D95FA59283FB4CB0008C100 /* PluginMetaShareViewModel.swift in Sources */,
