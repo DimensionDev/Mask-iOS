@@ -217,7 +217,7 @@
       "description4": "及时进行云端/本地备份"
     },
     "welcome_identity_empty": {
-      "create_a_persona": "创建身份",
+      "create_a_persona": "创建角色",
       "recover_your_persona": "恢复角色",
       "description": "崭新，开放的Web 3.0 之门。"
     },
@@ -738,7 +738,7 @@
     },
     "share": {
       "shareLink": "分享 Mask Network 连接：",
-      "invite": "你好好 %@，安装Mask.io以在社交媒体中探索Web3功能。 免费使用 NFT PFP 、 Crypto 红包、 Web3 File 服务和其他插件。展示您的 Web3 探索足迹。"
+      "invite": "Hi %@，安装Mask.io以在社交媒体中探索Web3功能。 免费使用 NFT PFP 、 Crypto 红包、 Web3 File 服务和其他插件。展示您的 Web3 探索足迹。"
     },
     "restore": {
       "titles": {
