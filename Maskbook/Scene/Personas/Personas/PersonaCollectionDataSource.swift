@@ -90,13 +90,7 @@ extension PersonaCollectionDataSource: PersonaCollectionCellDelegate {
     }
 
     func avatarClicked() {
-        if let _ = personaManager.currentPersona.value?.avatarData {
-            let viewModel = PersonaAvatarActionViewModel()
-            mainCoordinator.present(scene: .selectActionViewController(viewModel: viewModel),
-                                    transition: .panModel(animated: true))
-        } else {
-            mainCoordinator.present(scene: .personaAvatar,
-                                    transition: .detail(animated: true))
-        }
+        mainCoordinator.present(scene: .personaAvatar,
+                                transition: .detail(animated: true))
     }
 }
