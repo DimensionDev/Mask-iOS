@@ -144,6 +144,9 @@ struct FileServiceView: View {
                                 ForEach(viewModel.visibleItems, id: \.self) { item in
                                     view(of: item)
                                 }
+
+                                Spacer()
+                                    .frame(height: 4)
                             }
                         }
                     )
@@ -224,7 +227,7 @@ struct FileServiceView: View {
             }
         }
         .padding(.all, viewModel.uploadingItems.isEmpty ? 0 : 20)
-        .padding(.bottom, proxy.safeAreaInsets.bottom)
+        .padding(.bottom, viewModel.uploadingItems.isEmpty ? 0 : proxy.safeAreaInsets.bottom)
         .background(cardGradient)
         .overlay(
             uploadButton,

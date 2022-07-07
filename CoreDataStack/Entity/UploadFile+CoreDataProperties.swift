@@ -28,6 +28,7 @@ extension UploadFile {
     @NSManaged public var payloadTxID: String?
     @NSManaged public var provider: String?
     @NSManaged public var uploadOption: String?
+    @NSManaged public var content: Data?
 
 }
 

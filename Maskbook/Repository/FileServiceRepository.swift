@@ -1,17 +1,17 @@
-import Foundation
 import CoreData
 import CoreDataStack
+import Foundation
 
 enum FileServiceRepository {
     static let viewContext = AppContext.shared.coreDataStack.persistentContainer.viewContext
 
     static func getRecords<T: NSManagedObject & Managed>(
         pageOption: PageOption? = nil,
-        filterBy builder: @escaping @autoclosure () -> NSPredicate? = nil ,
+        filterBy builder: @escaping @autoclosure () -> NSPredicate? = nil,
         context: NSManagedObjectContext? = viewContext
     ) -> [T] {
         do {
-            let queryContext = context ?? viewContext
+            let queryContext = context ?? self.viewContext
             let fetchRequest = T.sortedFetchRequest
 
             if let predicate = builder() {
@@ -36,7 +36,7 @@ enum FileServiceRepository {
         filterBy builder: @escaping @autoclosure () -> NSPredicate? = nil,
         context: NSManagedObjectContext? = viewContext
     ) -> [V] {
-        let results: [T] = getRecords(pageOption: pageOption, filterBy: builder(), context: context)
+        let results: [T] = self.getRecords(pageOption: pageOption, filterBy: builder(), context: context)
         return results.map(transform)
     }
 
@@ -91,7 +91,7 @@ extension UploadFile {
             provider: provider ?? "",
             fileType: FileServiceUploadingItem.ItemType(rawValue: fileType) ?? .image,
             state: .uploaded,
-            content: Data(),
+            content: content ?? Data(),
             totalBytes: fileSize,
             uploadedBytes: 0,
             uploadDate: createdAt,
@@ -118,6 +118,11 @@ extension UploadFile {
         self.landingTxID = item.tx?.landingTxID
         self.payloadTxID = item.tx?.payloadTxID
         self.fileSize = item.totalBytes
+
+        self.content = item.state == .uploaded
+            ? nil
+            : item.content
+
         self.uploadOption = item.option.asString()
         self.mime = item.mime
     }

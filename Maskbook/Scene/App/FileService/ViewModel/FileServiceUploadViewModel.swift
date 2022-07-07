@@ -7,16 +7,24 @@
 //
 
 import Combine
-import Foundation
 import CoreDataStack
+import Foundation
 
 final class FileServiceUploadViewModel: ObservableObject {
+    // MARK: Lifecycle
+
+    init(item: FileServiceUploadingItem) {
+        self.item = item
+    }
+
+    // MARK: Internal
+
     @Published
     private(set) var item: FileServiceUploadingItem
     private(set) var newUploadedItem = PassthroughSubject<FileServiceUploadingItem, Never>()
 
-    init(item: FileServiceUploadingItem) {
-        self.item = item
+    func uploadContentEquals(to item: FileServiceUploadingItem) -> Bool {
+        self.item.fileNameAndOptionEquals(to: item)
     }
 
     func tryUploading(
@@ -26,7 +34,7 @@ final class FileServiceUploadViewModel: ObservableObject {
         let uploader = chooseUploader(by: uploadOption)
         let stream = uploader.upload(item, option: uploadOption)
 
-        Task { @MainActor in
+        Task(priority: .high) { @MainActor in
             var uploadedBytes: Double = 0
             do {
                 for try await value in stream {
@@ -80,5 +88,11 @@ final class FileServiceUploadViewModel: ObservableObject {
         case .arweave: return ArweaveUploadHandler()
         case .ipfs: return IPFSUploadHandler()
         }
+    }
+}
+
+extension FileServiceUploadViewModel: Equatable {
+    static func == (lhs: FileServiceUploadViewModel, rhs: FileServiceUploadViewModel) -> Bool {
+        lhs.item == rhs.item
     }
 }
