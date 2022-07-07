@@ -736,7 +736,6 @@
 		5DD5A69827F53168005952A0 /* PersonaImportItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD5A69727F53168005952A0 /* PersonaImportItem.swift */; };
 		5DD91242286B068B00E2000F /* FileService+AttachmentDecryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD91241286B068B00E2000F /* FileService+AttachmentDecryption.swift */; };
 		5DE1D5A227A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE1D5A127A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift */; };
-		5DE5E53C27E468B400F2B62A /* PersonaAvatarActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5E53B27E468B400F2B62A /* PersonaAvatarActionViewModel.swift */; };
 		5DF07E0C27FD9CA400BECF15 /* ContactEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF07E0B27FD9CA400BECF15 /* ContactEmptyView.swift */; };
 		5DF1C30B27DA33EB003F26C1 /* FixUITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF1C30A27DA33EB003F26C1 /* FixUITableView.swift */; };
 		5DF8CCFC286E9EB2006A4048 /* FileServiceDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8CCFB286E9EB2006A4048 /* FileServiceDetailViewModel.swift */; };
@@ -1584,7 +1583,6 @@
 		5DD5A69727F53168005952A0 /* PersonaImportItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaImportItem.swift; sourceTree = "<group>"; };
 		5DD91241286B068B00E2000F /* FileService+AttachmentDecryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileService+AttachmentDecryption.swift"; sourceTree = "<group>"; };
 		5DE1D5A127A25B90009BA3D4 /* RedPacketInteractivePayload+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RedPacketInteractivePayload+Description.swift"; sourceTree = "<group>"; };
-		5DE5E53B27E468B400F2B62A /* PersonaAvatarActionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaAvatarActionViewModel.swift; sourceTree = "<group>"; };
 		5DF07E0B27FD9CA400BECF15 /* ContactEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEmptyView.swift; sourceTree = "<group>"; };
 		5DF1C30A27DA33EB003F26C1 /* FixUITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixUITableView.swift; sourceTree = "<group>"; };
 		5DF8CCFB286E9EB2006A4048 /* FileServiceDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServiceDetailViewModel.swift; sourceTree = "<group>"; };
@@ -3876,7 +3874,6 @@
 			children = (
 				5D770B1027DED6F900539254 /* PersonaAvatarViewController.swift */,
 				5D770B1227DED70400539254 /* PersonaAvatarViewModel.swift */,
-				5DE5E53B27E468B400F2B62A /* PersonaAvatarActionViewModel.swift */,
 			);
 			path = Avatar;
 			sourceTree = "<group>";
@@ -4965,7 +4962,6 @@
 				2A6ABBB62720053B00CC3AED /* RemoteBackupActionsView.swift in Sources */,
 				4156689327A53BA70051E0E7 /* ShareLinkGenerator.swift in Sources */,
 				2AF88533271EE9310004565A /* DerivationPathHeaderView.swift in Sources */,
-				5DE5E53C27E468B400F2B62A /* PersonaAvatarActionViewModel.swift in Sources */,
 				2AD856152812875A0064DDA5 /* Shape+Fill.swift in Sources */,
 				1F0363922779D223001E8A88 /* DecentralisedApplicationResolver.swift in Sources */,
 				5D598E3B28601873006D1E4B /* Data+Hash.swift in Sources */,

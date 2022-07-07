@@ -742,7 +742,10 @@ extension Coordinator {
             return WalletConnectFailedViewController()
         
         case let .maskScan(type):
-            return MaskScanViewController(restrictedScanType: type)
+            let vc = MaskScanViewController(restrictedScanType: type)
+            vc.modalPresentationStyle = .overFullScreen
+            vc.modalPresentationCapturesStatusBarAppearance = true
+            return vc
         
         case let .walletConnectServerConfirm(viewModel):
             return WalletConnectServerConfirmViewController(viewModel: viewModel)

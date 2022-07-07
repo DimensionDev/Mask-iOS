@@ -3378,7 +3378,7 @@ enum L10n {
     }
 
     enum WelcomeIdentityEmpty {
-      /// Create a Persona
+      /// Create Persona
       static var createAPersona: String {
         return L10n.tr("Localizable", "Scene.WelcomeIdentityEmpty.CreateAPersona")
       }
