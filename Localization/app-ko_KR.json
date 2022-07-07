@@ -737,7 +737,8 @@
       }
     },
     "share": {
-      "shareLink": "Mask Network 링크 공유하기:"
+      "shareLink": "Mask Network 링크 공유하기:",
+      "invite": ""
     },
     "restore": {
       "titles": {
