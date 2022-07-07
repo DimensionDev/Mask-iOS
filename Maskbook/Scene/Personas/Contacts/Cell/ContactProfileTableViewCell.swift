@@ -6,11 +6,83 @@
 //  Copyright © 2021 dimension. All rights reserved.
 //
 
+import Combine
+import CoreDataStack
 import UIKit
 import UStack
-import CoreDataStack
 
 class ContactProfileTableViewCell: UITableViewCell {
+    // MARK: Lifecycle
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        setupUI()
+        bindEvent()
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: Internal
+
+    let inviteButton: PrimeryButton = {
+        let button = PrimeryButton(title: L10n.Common.Controls.invite)
+        NSLayoutConstraint.activate([
+            button.heightAnchor.constraint(equalToConstant: 32),
+            button.widthAnchor.constraint(equalToConstant: 72)
+        ])
+        return button
+    }()
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        socialIDLabel.text = nil
+        onInviteEvent = nil
+    }
+
+    var onInviteEvent: ((String?) -> Void)?
+    private var socialID: String?
+    private(set) var cancelableStorage: Set<AnyCancellable> = []
+    private func bindEvent() {
+        inviteButton.cv.tap()
+            .receive(on: DispatchQueue.main)
+            .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                self.onInviteEvent?(self.socialIDLabel.text)
+            }
+            .store(in: &cancelableStorage)
+    }
+
+    func config(profile: ProfileRecord) {
+        socialIDLabel.text = profile.socialID
+        avatarView.title = profile.nickname ?? profile.nonOptionalIdentifier.components(separatedBy: "/").last
+        avatarView.setNetworkURL(url: profile.avatar)
+        platformIcon.image = profile.socialPlatform.icon
+        if profile.linkedPersona != nil {
+            inviteButton.isHidden = true
+            nicknameLabel.text = profile.nickname
+                ?? profile.socialID
+            maskIcon.isHidden = false
+        } else {
+            // hide inviteButton if socialPlatform is not twitter
+            inviteButton.isHidden = profile.socialPlatform != .twitter
+            nicknameLabel.text = profile.nickname
+                ?? profile.socialID
+            maskIcon.isHidden = true
+        }
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        platformIcon.layer.borderColor = Asset.Colors.Background.dark.color.cgColor
+    }
+
+    // MARK: Private
+
     private var avatarView: AvatarView = {
         let view = AvatarView(title: "")
         view.applyCornerRadius(radius: 19, cornerCurve: .circular)
@@ -23,7 +95,7 @@ class ContactProfileTableViewCell: UITableViewCell {
 
         return view
     }()
-    
+
     private let headerImageView: UIImageView = {
         let imageView = UIImageView()
         NSLayoutConstraint.activate([
@@ -32,7 +104,7 @@ class ContactProfileTableViewCell: UITableViewCell {
         ])
         return imageView
     }()
-    
+
     private let platformIcon: UIImageView = {
         let imageView = UIImageView()
         NSLayoutConstraint.activate([
@@ -44,7 +116,7 @@ class ContactProfileTableViewCell: UITableViewCell {
         imageView.layer.borderWidth = 1.5
         return imageView
     }()
-    
+
     private let maskIcon: UIImageView = {
         let imageView = UIImageView()
         NSLayoutConstraint.activate([
@@ -55,7 +127,7 @@ class ContactProfileTableViewCell: UITableViewCell {
         imageView.applyRadius(radius: 8)
         return imageView
     }()
-    
+
     private lazy var headerView: UIView = {
         let view = UIView()
         view.withSubViews {
@@ -74,62 +146,20 @@ class ContactProfileTableViewCell: UITableViewCell {
         ])
         return view
     }()
-    
+
     private var nicknameLabel: UILabel = {
         let label = UILabel()
         label.font = FontStyles.BH5
         label.textColor = Asset.Colors.Text.dark.color
         return label
     }()
-    
+
     private var socialIDLabel: UILabel = {
         let label = UILabel()
         label.font = FontStyles.RH6
         label.textColor = Asset.Colors.Text.normal.color
         return label
     }()
-    
-    let inviteButton: PrimeryButton = {
-        let button = PrimeryButton(title: L10n.Common.Controls.invite)
-        NSLayoutConstraint.activate([
-            button.heightAnchor.constraint(equalToConstant: 32),
-            button.widthAnchor.constraint(equalToConstant: 72)
-        ])
-        return button
-    }()
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        setupUI()
-    }
-    
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-    }
-    
-    func config(profile: ProfileRecord) {
-        socialIDLabel.text = profile.socialID
-        avatarView.title = profile.nickname ?? profile.nonOptionalIdentifier.components(separatedBy: "/").last
-        avatarView.setNetworkURL(url: profile.avatar)
-        platformIcon.image = profile.socialPlatform.icon
-        if profile.linkedPersona != nil {
-            inviteButton.isHidden = true
-            nicknameLabel.text = profile.nickname
-                ?? profile.socialID
-            maskIcon.isHidden = false
-        } else {
-            inviteButton.isHidden = false
-            nicknameLabel.text = profile.nickname
-                ?? profile.socialID
-            maskIcon.isHidden = true
-        }
-    }
 
     private func setupUI() {
         backgroundColor = .clear
@@ -142,14 +172,13 @@ class ContactProfileTableViewCell: UITableViewCell {
             }
             socialIDLabel
         }
-        
-        let hStack = HStackView(spacing: 12,
-                                alignment: .center) {
+
+        let hStack = HStackView(
+            spacing: 12,
+            alignment: .center
+        ) {
             headerView
-            vStack
-                .cv.apply {
-                    $0.setContentHuggingPriority(.defaultLow, for: .horizontal)
-                }
+            vStack.cv.apply { $0.setContentHuggingPriority(.defaultLow, for: .horizontal) }
             inviteButton
         }
         hStack.backgroundColor = Asset.Colors.Background.dark.color
@@ -167,10 +196,5 @@ class ContactProfileTableViewCell: UITableViewCell {
             hStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutConstraints.trailing),
             hStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
         ])
-    }
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-            platformIcon.layer.borderColor = Asset.Colors.Background.dark.color.cgColor
     }
 }
