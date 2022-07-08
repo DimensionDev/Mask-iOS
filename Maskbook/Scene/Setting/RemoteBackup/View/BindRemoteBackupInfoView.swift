@@ -148,7 +148,7 @@ struct BindRemoteBackupInfoView: View {
 
                 HStack(spacing: 8) {
                     CustomTextField(
-                        text: $viewModel.strategyModel.verificationCode,
+                        text: viewModel.verificationCode,
                         keyboardType: .numberPad,
                         textLimit: 6,
                         isFirstResponder: true
