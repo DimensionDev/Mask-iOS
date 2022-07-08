@@ -39,10 +39,10 @@ class ChangeBackupPasswordStep2ViewModel {
 
         let valid = password.isValidBackupPasswordFormat
         
-        if !isConfirmPasswordsinConsistent() {
+        if !valid {
             changePasswordError.value = L10n.Scene.SetBackupPassword.errorInconsistentPassword
             return false
-        } else if !valid {
+        } else if !isConfirmPasswordsinConsistent() {
             changePasswordError.value = L10n.Scene.SetBackupPassword.tips
         } else {
             changePasswordError.value = nil
