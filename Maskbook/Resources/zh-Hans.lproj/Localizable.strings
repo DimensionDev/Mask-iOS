@@ -624,6 +624,7 @@ Clicking the confirm button means that you agree to bear the above possible risk
 "Scene.Setting.ValidationCodeMismatch" = "验证码错误";
 "Scene.Setting.ValidationCodeViaEmail" = "验证码已通过电子邮件发送至";
 "Scene.Setting.ValidationCodeViaMobilePhone" = "验证码已通过短信发送至";
+"Scene.Share.Invite" = "Hi %@，安装Mask.io以在社交媒体中探索Web3功能。 免费使用 NFT PFP 、 Crypto 红包、 Web3 File 服务和其他插件。展示您的 Web3 探索足迹。";
 "Scene.Share.Sharelink" = "分享 Mask Network 连接：";
 "Scene.Social.AccountAlreadyConnected" = "账户已连接";
 "Scene.Social.ConnectButtonTitle" = "连接";

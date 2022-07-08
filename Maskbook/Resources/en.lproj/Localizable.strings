@@ -498,7 +498,7 @@ be captured on timeline.";
 "Scene.Restore.Tip.FailedToDownloadFile" = "failed to download remote file";
 "Scene.Restore.Tip.IncorrectBackupPassword" = "Incorrect cloud backup password";
 "Scene.Restore.Tip.IncorrectValidationcode" = "The verification code is incorrect";
-"Scene.Restore.Tip.InvalidEmailAddress" = "Incorrect Email Address";
+"Scene.Restore.Tip.InvalidEmailAddress" = "Please enter the correct email address";
 "Scene.Restore.Tip.InvalidMobileNumber" = "Incorrect Phone number";
 "Scene.Restore.Tip.InvalidValidationcode" = "The verification code is invalid";
 "Scene.Restore.Tip.MobileValidationcode" = "Verification code has been sent to by SMS to";
