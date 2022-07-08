@@ -123,19 +123,38 @@ extension FileServiceViewModel {
         uploadManager.retryUploading(item)
     }
 
+    private func isDuplicateItem(_ fileItem: FileServiceSelectedFileItem) -> Bool {
+        if uploadManager.uploadingItems.contains(where: { $0.item.content == fileItem.data }) {
+            return true
+        }
+
+        if items.contains(where: { $0.content == fileItem.data }) {
+            return true
+        }
+
+        return false
+    }
+
     func tryUploading(_ fileItem: FileServiceSelectedFileItem, option: FileServiceUploadOption) {
-        // use  state: .encrypting, otherwise  state: .preparing,
-        let item: FileServiceUploadingItem = .init(
-            fileName: fileItem.fileName,
-            provider: option.service.rawValue.lowercased(),
-            fileType: fileItem.fileType,
-            state: option.encrypted ? .encrypting : .preparing,
-            content: fileItem.data,
-            totalBytes: Double(fileItem.data.count),
-            uploadedBytes: 0,
-            mime: fileItem.mime,
-            option: option
-        )
+        let item: FileServiceUploadingItem = {
+            // if duplicated use the uploaded one
+            if let item = items.first(where: { $0.fileName == fileItem.fileName && $0.option == option }) {
+                return item
+            } else {
+                // use  state: .encrypting, otherwise  state: .preparing,
+                return FileServiceUploadingItem(
+                    fileName: fileItem.fileName,
+                    provider: option.service.rawValue.lowercased(),
+                    fileType: fileItem.fileType,
+                    state: option.encrypted ? .encrypting : .preparing,
+                    content: fileItem.data,
+                    totalBytes: Double(fileItem.data.count),
+                    uploadedBytes: 0,
+                    mime: fileItem.mime,
+                    option: option
+                )
+            }
+        }()
 
         if uploadManager.tryUploading(item) {
             settings.checkOnboardFeature(.fileService)

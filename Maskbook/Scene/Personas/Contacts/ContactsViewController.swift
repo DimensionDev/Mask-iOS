@@ -13,70 +13,13 @@ import UIKit
 import UStack
 
 class ContactsViewController: BaseViewController {
+    // MARK: Internal
+
     static var searchBarHeight: CGFloat = 52
 
     static var tableHeaderHeight: CGFloat = 52 + 22
 
-    private var disposeBag = Set<AnyCancellable>()
-
     let viewModel = ContactsViewModel()
-
-    @InjectedProvider(\.userDefaultSettings)
-    private var settings
-
-    @InjectedProvider(\.personaManager)
-    private var personaManager
-
-    @InjectedProvider(\.mainCoordinator)
-    private var mainCoordinator
-
-    private lazy var searchBar: UISearchBar = {
-        let searchBar = UISearchBar()
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.placeholder = "  " + L10n.Scene.Personas.Search.placeholder
-        searchBar.delegate = self
-        searchBar.searchBarStyle = .minimal
-        searchBar.update(height: Self.searchBarHeight, color: Asset.Colors.Background.dark.color, radius: 10)
-        let attributes = [NSAttributedString.Key.font: FontStyles.BH5,
-                          NSAttributedString.Key.foregroundColor: Asset.Colors.Text.dark.color]
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes,
-                                                                                                          for: .normal)
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = L10n.Common.Controls.cancel
-        
-        UILabel.appearance(whenContainedInInstancesOf: [UISearchBar.self]).font = FontStyles.MH7
-        UILabel.appearance(whenContainedInInstancesOf: [UISearchBar.self]).textColor = Asset.Colors.Text.light.color
-        
-        searchBar.setLeftImage(Asset.Images.Scene.Personas.searchBar.image, with: 10)
-        return searchBar
-    }()
-
-    private lazy var tableHeader: UIView = {
-        let view = UIView()
-        view.backgroundColor = Asset.Colors.Background.normal.color
-        view.addSubview(searchBar)
-        NSLayoutConstraint.activate([
-            searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
-            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
-            searchBar.heightAnchor.constraint(equalToConstant: Self.searchBarHeight)
-        ])
-        return view
-    }()
-
-    private lazy var tableView: FixUITableView = {
-        let view = FixUITableView()
-        view.backgroundColor = Asset.Colors.Background.normal.color
-        view.estimatedRowHeight = 80
-        view.rowHeight = 80
-        view.tableFooterView = UIView()
-        view.separatorStyle = .none
-        view.dataSource = self
-        view.delegate = self
-        view.register(ContactProfileTableViewCell.self)
-        return view
-    }()
-
-    private lazy var emptyView = ContactEmptyView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,8 +34,7 @@ class ContactsViewController: BaseViewController {
         let insets = UIEdgeInsets(top: Self.tableHeaderHeight, left: 0, bottom: 0, right: 0)
         tableView.scrollIndicatorInsets = insets
         tableView.contentInset = insets
-        tableView.contentOffset = CGPoint(x: 0, y: -Self.tableHeaderHeight - self.tableView.adjustedContentInset.top)
-        
+        tableView.contentOffset = CGPoint(x: 0, y: -Self.tableHeaderHeight - tableView.adjustedContentInset.top)
     }
 
     func showEmptyView() {
@@ -101,7 +43,7 @@ class ContactsViewController: BaseViewController {
         }
         NSLayoutConstraint.activate([
             emptyView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            emptyView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -10)
+            emptyView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -10),
         ])
     }
 
@@ -142,10 +84,16 @@ class ContactsViewController: BaseViewController {
     }
 
     func addSearchBar() {
-        tableHeader.frame = CGRect(origin: CGPoint(x: 0,
-                                                   y: -Self.tableHeaderHeight),
-                                   size: CGSize(width: UIScreen.main.bounds.width,
-                                                height: Self.tableHeaderHeight))
+        tableHeader.frame = CGRect(
+            origin: CGPoint(
+                x: 0,
+                y: -Self.tableHeaderHeight
+            ),
+            size: CGSize(
+                width: UIScreen.main.bounds.width,
+                height: Self.tableHeaderHeight
+            )
+        )
         tableView.addSubview(tableHeader)
     }
 
@@ -158,10 +106,74 @@ class ContactsViewController: BaseViewController {
         super.traitCollectionDidChange(previousTraitCollection)
         searchBar.update(height: Self.searchBarHeight, color: Asset.Colors.Background.dark.color, radius: 10)
     }
+
+    // MARK: Private
+
+    private var disposeBag = Set<AnyCancellable>()
+
+    @InjectedProvider(\.userDefaultSettings)
+    private var settings
+
+    @InjectedProvider(\.personaManager)
+    private var personaManager
+
+    @InjectedProvider(\.mainCoordinator)
+    private var mainCoordinator
+
+    private lazy var searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.placeholder = "  " + L10n.Scene.Personas.Search.placeholder
+        searchBar.delegate = self
+        searchBar.searchBarStyle = .minimal
+        searchBar.update(height: Self.searchBarHeight, color: Asset.Colors.Background.dark.color, radius: 10)
+        let attributes = [
+            NSAttributedString.Key.font: FontStyles.BH5,
+            NSAttributedString.Key.foregroundColor: Asset.Colors.Text.dark.color,
+        ]
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(
+            attributes,
+            for: .normal)
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = L10n.Common.Controls.cancel
+
+        UILabel.appearance(whenContainedInInstancesOf: [UISearchBar.self]).font = FontStyles.MH7
+        UILabel.appearance(whenContainedInInstancesOf: [UISearchBar.self]).textColor = Asset.Colors.Text.light.color
+
+        searchBar.setLeftImage(Asset.Images.Scene.Personas.searchBar.image, with: 10)
+        return searchBar
+    }()
+
+    private lazy var tableHeader: UIView = {
+        let view = UIView()
+        view.backgroundColor = Asset.Colors.Background.normal.color
+        view.addSubview(searchBar)
+        NSLayoutConstraint.activate([
+            searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
+            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
+            searchBar.heightAnchor.constraint(equalToConstant: Self.searchBarHeight),
+        ])
+        return view
+    }()
+
+    private lazy var tableView: FixUITableView = {
+        let view = FixUITableView()
+        view.backgroundColor = Asset.Colors.Background.normal.color
+        view.estimatedRowHeight = 80
+        view.rowHeight = 80
+        view.tableFooterView = UIView()
+        view.separatorStyle = .none
+        view.dataSource = self
+        view.delegate = self
+        view.register(ContactProfileTableViewCell.self)
+        return view
+    }()
+
+    private lazy var emptyView = ContactEmptyView()
 }
 
 extension ContactsViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         viewModel.dataSource.value.count
     }
 
@@ -171,17 +183,19 @@ extension ContactsViewController: UITableViewDataSource {
 
         if let profileRecord = profileRecord {
             cell.config(profile: profileRecord)
-            cell.inviteButton.removeTarget(self, action: #selector(shareAction(sender:)), for: .touchUpInside)
-            cell.inviteButton.addTarget(self, action: #selector(shareAction(sender:)), for: .touchUpInside)
-        } else {
-            return UITableViewCell()
+            cell.onInviteEvent = { [weak self, cell] socialID in
+                // as only twitter support invite
+                // here we skip checking
+                self?.shareAction(sender: cell.inviteButton, socialID: socialID)
+            }
         }
+
         return cell
     }
 }
 
 extension ContactsViewController: UITableViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    func scrollViewDidScroll(_: UIScrollView) {
         if !viewModel.isSearching.value {
             tableHeader.frame.origin = CGPoint(x: 0, y: -Self.tableHeaderHeight)
         } else {
@@ -192,29 +206,22 @@ extension ContactsViewController: UITableViewDelegate {
 }
 
 extension ContactsViewController {
-    @objc
-    func shareAction(sender: UIView) {
-        guard let url = URL(string: "https://mask.io/download-links/") else { return }
+    private func shareAction(sender: UIView, socialID: String?) {
+        guard let socialID = socialID else { return }
 
-        let activityViewController = UIActivityViewController(
-            activityItems: [url],
-            applicationActivities: [DownloadMaskActivity(url: url)]
-        )
-        mainCoordinator.present(scene: .activityViewController(
-            activityViewController: activityViewController,
-            sourceView: nil,
-            barButtonItem: nil
-        ),
-        transition: .presentActivity(animated: true, from: sender, completion: nil))
+        let text = L10n.Scene.Share.invite(socialID)
+        let maskSocialViewController = mainCoordinator.getMaskSocialViewController()
+        maskSocialViewController?.openComposer(message: text.URLEncoded() ?? "")
+        maskSocialViewController?.dismiss(animated: true)
     }
 }
 
 extension ContactsViewController: UISearchBarDelegate {
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+    func searchBarShouldBeginEditing(_: UISearchBar) -> Bool {
         true
     }
 
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange _: String) {
         viewModel.searchString.value = searchBar.text ?? ""
     }
 
@@ -241,12 +248,12 @@ extension ContactsViewController: UISearchBarDelegate {
 }
 
 #if canImport(SwiftUI) && DEBUG
-import SwiftUI
-struct ContactsPreview: PreviewProvider {
-    static var previews: some SwiftUI.View {
-        Preview {
-            ContactsViewController().view
+    import SwiftUI
+    struct ContactsPreview: PreviewProvider {
+        static var previews: some SwiftUI.View {
+            Preview {
+                ContactsViewController().view
+            }
         }
     }
-}
 #endif

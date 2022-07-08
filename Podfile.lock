@@ -107,7 +107,7 @@ PODS:
   - IPFSClientKit (1.0.1)
   - IQKeyboardManagerSwift (6.3.0)
   - KeychainAccess (4.2.2)
-  - Kingfisher (7.2.4)
+  - Kingfisher (7.2.0)
   - KMPageControl (0.0.3)
   - LookinServer (1.0.6)
   - MaskbookPlugin (0.1.0):
@@ -127,14 +127,14 @@ PODS:
   - NVActivityIndicatorView/Presenter (4.7.0)
   - PanModal (1.2.7)
   - Pika (0.1.8)
-  - PromiseKit (6.8.5):
-    - PromiseKit/CorePromise (= 6.8.5)
-    - PromiseKit/Foundation (= 6.8.5)
-    - PromiseKit/UIKit (= 6.8.5)
-  - PromiseKit/CorePromise (6.8.5)
-  - PromiseKit/Foundation (6.8.5):
+  - PromiseKit (6.15.3):
+    - PromiseKit/CorePromise (= 6.15.3)
+    - PromiseKit/Foundation (= 6.15.3)
+    - PromiseKit/UIKit (= 6.15.3)
+  - PromiseKit/CorePromise (6.15.3)
+  - PromiseKit/Foundation (6.15.3):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (6.8.5):
+  - PromiseKit/UIKit (6.15.3):
     - PromiseKit/CorePromise
   - PromisesObjC (2.1.1)
   - ResponderChain (1.1.2):
@@ -143,25 +143,25 @@ PODS:
   - RSKPlaceholderTextView (6.0.4)
   - secp256k1.c (0.1.2)
   - SnapKit (5.0.1)
-  - Socket.IO-Client-Swift (15.2.0):
-    - Starscream (~> 3.1)
-  - Starscream (3.1.1)
-  - SwiftGen (6.4.0)
+  - Socket.IO-Client-Swift (16.0.1):
+    - Starscream (~> 4.0)
+  - Starscream (4.0.4)
+  - SwiftGen (6.5.0)
   - SwiftLint (0.43.1)
   - SwiftMsgPack (1.2.0)
   - SwiftProtobuf (1.19.0)
   - SwiftyJSON (5.0.1)
   - SwizzleSwift (1.0)
   - UStack (2.2.1)
-  - WalletConnectSwift (1.6.0):
+  - WalletConnectSwift (1.6.2):
     - CryptoSwift (~> 1.4)
-    - Starscream (~> 3.1)
-  - web3swift (2.3.0):
-    - BigInt (~> 5.0)
-    - CryptoSwift (~> 1.4.0)
-    - PromiseKit (~> 6.8.4)
+    - Starscream (~> 4.0.4)
+  - web3swift (2.6.5):
+    - BigInt (= 5.2.0)
+    - CryptoSwift (= 1.4.3)
+    - PromiseKit (= 6.15.3)
     - secp256k1.c (~> 0.1)
-    - Starscream (~> 3.1.0)
+    - Starscream (= 4.0.4)
   - WebExtension-Shim (0.5.9):
     - ConsolePrint
     - SwiftyJSON (~> 5.0.0)
@@ -179,19 +179,19 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.4)
-  - BigInt (~> 5.2)
+  - BigInt (= 5.2)
   - BMPlayer (~> 1.3.0)
-  - CombineEvent (~> 1.0.0)
-  - CombineExt
+  - CombineEvent (= 1.0.0)
+  - CombineExt (= 1.7.0)
   - EFQRCode (~> 6.1.0)
   - EUMTouchPointView
-  - Firebase/Analytics
+  - Firebase/Analytics (= 9.2.0)
   - FLEX
   - IPFSClientKit
   - IQKeyboardManagerSwift (= 6.3.0)
   - KeychainAccess (~> 4.2)
-  - Kingfisher (~> 7.0)
-  - KMPageControl (~> 0.0.2)
+  - Kingfisher (= 7.2.0)
+  - KMPageControl (= 0.0.3)
   - LookinServer
   - MaskbookPlugin (from `./DevelopmentPod/MaskbookPlugin`)
   - MaskbookPlugin/Tests (from `./DevelopmentPod/MaskbookPlugin`)
@@ -199,18 +199,18 @@ DEPENDENCIES:
   - MaskWalletCore (from `./DevelopmentPod/MaskWalletCore`)
   - PanModal (from `./DevelopmentPod/PanModal`)
   - Pika (= 0.1.8)
-  - ResponderChain (~> 1.1)
-  - RSKPlaceholderTextView (~> 6.0.0)
-  - SnapKit (~> 5.0.0)
-  - Socket.IO-Client-Swift (~> 15.2.0)
-  - SwiftGen (~> 6.4.0)
+  - ResponderChain (= 1.1.2)
+  - RSKPlaceholderTextView (= 6.0.4)
+  - SnapKit (= 5.0.1)
+  - Socket.IO-Client-Swift (= 16.0.1)
+  - SwiftGen (= 6.5.0)
   - SwiftLint (= 0.43.1)
   - SwiftMsgPack (from `https://github.com/malcommac/SwiftMsgPack.git`, branch `develop`)
-  - UStack (~> 2.2.1)
-  - WalletConnectSwift (from `https://github.com/DimensionDev/WalletConnectSwift.git`, tag `1.6.0`)
-  - web3swift (from `https://github.com/DimensionDev/web3swift.git`)
+  - UStack (= 2.2.1)
+  - WalletConnectSwift (from `https://github.com/DimensionDev/WalletConnectSwift.git`)
+  - web3swift (from `https://github.com/DimensionDev/web3swift.git`, branch `develop`)
   - WebExtension-Shim (from `https://github.com/DimensionDev/WebExtension-Shim-iOS.git`, tag `2.0.1`)
-  - ZIPFoundation (~> 0.9)
+  - ZIPFoundation (= 0.9.13)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -274,8 +274,8 @@ EXTERNAL SOURCES:
     :git: https://github.com/malcommac/SwiftMsgPack.git
   WalletConnectSwift:
     :git: https://github.com/DimensionDev/WalletConnectSwift.git
-    :tag: 1.6.0
   web3swift:
+    :branch: develop
     :git: https://github.com/DimensionDev/web3swift.git
   WebExtension-Shim:
     :git: https://github.com/DimensionDev/WebExtension-Shim-iOS.git
@@ -286,10 +286,10 @@ CHECKOUT OPTIONS:
     :commit: c8e24b27a2d7b023a1e9a892d75aa751d0b0026e
     :git: https://github.com/malcommac/SwiftMsgPack.git
   WalletConnectSwift:
+    :commit: 4997d0f919015f76a466fa80d8eeba70216fffef
     :git: https://github.com/DimensionDev/WalletConnectSwift.git
-    :tag: 1.6.0
   web3swift:
-    :commit: 229489fe14ef57c48a51c6205d39f8820f5e3f6a
+    :commit: 79841f50bb2a199bfd9c11220da9b074ab5d0f63
     :git: https://github.com/DimensionDev/web3swift.git
   WebExtension-Shim:
     :git: https://github.com/DimensionDev/WebExtension-Shim-iOS.git
@@ -320,7 +320,7 @@ SPEC CHECKSUMS:
   IPFSClientKit: 8cae0a9a901280db5fdb30edebf1bf572dd1f792
   IQKeyboardManagerSwift: a8228c257614af98743b4cd8584637025f36358f
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
-  Kingfisher: 2457be2121734e69e54a2312ecc0150eb9ae70b3
+  Kingfisher: 3ac0b75b155cabc0e544877d1a4deea29feece92
   KMPageControl: a64de2397e18d277434f553ed2222f62aad3fa28
   LookinServer: 18155b1e4a08213c236a1dd6b7ca52328a70a1e3
   MaskbookPlugin: d81a6508a95a857feea14a47b653e77a9344de8f
@@ -330,26 +330,26 @@ SPEC CHECKSUMS:
   NVActivityIndicatorView: b19ddab2576f805cbe0fb2306cba3476e09a1dea
   PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
   Pika: 735ac44f240b2154f174f4558e04cabe8a71f2c5
-  PromiseKit: 9616b0afef31eae56ab9ce044c8ec2b8612a15cd
+  PromiseKit: 3b2b6995e51a954c46dbc550ce3da44fbfb563c5
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   ResponderChain: 12e08eeb286e8ffe99112628aa701d8d6e72c638
   RSKPlaceholderTextView: 245c20e06d14df883809b7d9ca71bd7784c92531
   secp256k1.c: db47b726585d80f027423682eb369729e61b3b20
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
-  Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
-  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
-  SwiftGen: 67860cc7c3cfc2ed25b9b74cfd55495fc89f9108
+  Socket.IO-Client-Swift: c116d6dc9fd6be9c259bacfe143f8725bce7d79e
+  Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
+  SwiftGen: c3f115ede549d4b7873c3946b7d5ca538eb8b621
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   SwiftMsgPack: 22fb26bb7c544075fdfba2badde0394898a8b775
   SwiftProtobuf: 6ef3f0e422ef90d6605ca20b21a94f6c1324d6b3
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   SwizzleSwift: 875aa0d66cd42caa361ab1ecbca663250d725907
   UStack: b406daaf569d798bd11fee94d06dadcdbcf2d295
-  WalletConnectSwift: 1fbff8f5315bd8d41596773ca1b384aa873b6824
-  web3swift: 22ac889fe28306c5d79704711f20b5ed4b21ba5e
+  WalletConnectSwift: 046ae74e8cb69445be9c94c66ef66f9cb019b68f
+  web3swift: f712c5eef8801fb2dca4e4fdafc0af4471195f03
   WebExtension-Shim: 11b071466c53f42097291eb176cf9bcc5fb9b050
   ZIPFoundation: ae5b4b813d216d3bf0a148773267fff14bd51d37
 
-PODFILE CHECKSUM: 273cdfc0a0511c3cf060593408595ce8fc25faf4
+PODFILE CHECKSUM: bae47580e957e58678dc3bf5bbce5f5468767527
 
 COCOAPODS: 1.11.3

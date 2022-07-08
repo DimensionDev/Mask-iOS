@@ -9,13 +9,13 @@
 import Foundation
 
 extension String {
-    func urlEncode() -> String? {
+    func URLEncoded() -> String? {
         let characterset = NSCharacterSet(charactersIn: " !*'();:@&=+$,/?%#[]\n").inverted
         let encodeUrlString = self.addingPercentEncoding(withAllowedCharacters: characterset)
         return encodeUrlString
     }
      
-    func urlDecod() -> String? {
+    func URLDecoded() -> String? {
         return self.removingPercentEncoding 
     }
 }

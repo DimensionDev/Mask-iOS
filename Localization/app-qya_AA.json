@@ -217,7 +217,7 @@
       "description4": "crwdns14796:0crwdne14796:0"
     },
     "welcome_identity_empty": {
-      "create_a_persona": "crwdns14962:0crwdne14962:0",
+      "create_a_persona": "crwdns17996:0crwdne17996:0",
       "recover_your_persona": "crwdns14964:0crwdne14964:0",
       "description": "crwdns14966:0crwdne14966:0"
     },
@@ -737,7 +737,8 @@
       }
     },
     "share": {
-      "shareLink": "crwdns14210:0crwdne14210:0"
+      "shareLink": "crwdns14210:0crwdne14210:0",
+      "invite": "crwdns17998:0%@crwdne17998:0"
     },
     "restore": {
       "titles": {

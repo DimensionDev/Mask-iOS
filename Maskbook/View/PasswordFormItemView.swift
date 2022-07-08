@@ -86,15 +86,16 @@ class PasswordFormItemView: UIView {
                     self.verify()
                 }
                 .store(in: &disposeBag)
-            
-            NotificationCenter.default
-                .publisher(for: UITextField.textDidChangeNotification, object: passwordTextField)
-                .sink { [weak self] _ in
-                    guard let self = self else { return }
-                    self.verify()
-                }
-                .store(in: &disposeBag)
         }
+        
+        NotificationCenter.default
+            .publisher(for: UITextField.textDidChangeNotification, object: passwordTextField)
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                self.viewModel.passwordError.value = .initial
+                self.viewModel.validatePassword(password: self.passwordTextField.text)
+            }
+            .store(in: &disposeBag)
     }
     
     @available(*, unavailable)
@@ -135,16 +136,17 @@ extension PasswordFormItemView {
                         self?.passwordTextField.shake()
                     }
                     self?.passwordErrorLabel.text = L10n.Scene.CreateWallet.enterPassword
-
-                case let .verifyed(hasError):
-                    guard hasError else {
-                        self?.passwordErrorLabel.text = nil
-                        return
-                    }
+                    
+                case .hasVerified:
+                    self?.passwordErrorLabel.text = nil
+                    
+                case .wrongPassword:
                     if self?.errorShaking ?? false {
                         self?.passwordTextField.shake()
                     }
                     self?.passwordErrorLabel.text = L10n.Scene.CreateWallet.passwordError
+                    
+                default: break
                 }
             }
             .store(in: &disposeBag)
@@ -154,19 +156,27 @@ extension PasswordFormItemView {
 enum PasswordState {
     case initial
     case empty
-    case verifyed(hasError: Bool)
+    case valid
+    case invalid
+    case hasVerified
+    case wrongPassword
 
     var isVerifyed: Bool {
-        switch self {
-        case .initial, .empty: return false
-        case let .verifyed(hasError): return !hasError
-        }
+        self == .hasVerified
+    }
+    
+    var isValid: Bool {
+        self == .valid
     }
 }
 
 protocol PasswordFormItemViewModel {
+    /// Send event to subscriber which need to perform next action when state of password changes.
     var passwordError: CurrentValueSubject<PasswordState, Never> { get }
+    /// Check if password is correct
     func verifyPassword(password: String?, success: @escaping () -> Void)
+    /// Check if format of password is valid.
+    func validatePassword(password: String?)
 }
 
 class PaymentFormItemViewModel: PasswordFormItemViewModel {
@@ -177,19 +187,29 @@ class PaymentFormItemViewModel: PasswordFormItemViewModel {
     var vault
     var disposeBag = Set<AnyCancellable>()
     
+    func validatePassword(password: String?) {
+        guard let pwd = password, pwd.isValidPasswordFormat else {
+            passwordError.value = .invalid
+            return
+        }
+        
+        passwordError.value = .valid
+    }
+
     func verifyPassword(password: String?, success: @escaping () -> Void) {
         vault.verifyWalletPassword(password)
             .subscribe(on: DispatchQueue.main)
-            .sink { result in
-                if result {
-                    success()
-                }
-                guard let pwd = password, !pwd.isEmpty else {
-                    self.passwordError.accept(.empty)
+            .sink { [weak self] result in
+                guard let self = self else {
                     return
                 }
-
-                self.passwordError.value = .verifyed(hasError: !result)
+                
+                guard result else {
+                    self.passwordError.value = .wrongPassword
+                    return
+                }
+                success()
+                self.passwordError.value = .hasVerified
             }
             .store(in: &disposeBag)
     }
@@ -205,6 +225,15 @@ class BackupFormItemViewModel: PasswordFormItemViewModel {
     @InjectedProvider(\.vault)
     private var vault
     
+    func validatePassword(password: String?) {
+        guard let pwd = password, pwd.isValidBackupPasswordFormat else {
+            passwordError.value = .invalid
+            return
+        }
+        
+        passwordError.value = .valid
+    }
+    
     func verifyPassword(password: String?, success: @escaping () -> Void) {
         vault.getValue(for: .backupPassword)
             .receive(on: DispatchQueue.main)
@@ -212,20 +241,13 @@ class BackupFormItemViewModel: PasswordFormItemViewModel {
                 guard let self = self else {
                     return
                 }
-                guard let psword = password, !psword.isEmpty else {
-                    self.passwordError.accept(.empty)
-                    return
-                }
-
-                guard let pwd = pwd else {
-                    self.passwordError.value = .verifyed(hasError: true)
-                    return
-                }
                 
-                if password == pwd {
-                    success()
+                guard password == pwd else {
+                    self.passwordError.value = .wrongPassword
+                    return
                 }
-                self.passwordError.value = .verifyed(hasError: password != pwd)
+                success()
+                self.passwordError.value = .hasVerified
             }
             .store(in: &disposeBag)
     }

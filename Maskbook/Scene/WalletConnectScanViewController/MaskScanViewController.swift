@@ -56,12 +56,19 @@ final class MaskScanViewController: UIViewController {
         label.textAlignment = .center
         return label
     }()
+    
+    private lazy var backButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(Asset.Icon.Arrows.backArrowSmall.image, for: .normal)
+        button.setInsets(forContentPadding: UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6), imageTitlePadding: 0)
+        button.addTarget(self, action: #selector(backAction), for: .touchUpInside)
+        return button
+    }()
 }
 
 extension MaskScanViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = UIColor.gray
         scannerViewController.delegate = self
 
@@ -119,6 +126,8 @@ extension MaskScanViewController {
         case .onlyPersona:
             hintTextLabel.text = L10n.Scene.MaskScan.scanPersona
         }
+        
+        addBackButton()
     }
 
     override func viewDidLayoutSubviews() {
@@ -130,6 +139,25 @@ extension MaskScanViewController {
         anim.duration = 1.5
         anim.repeatCount = .infinity
         scannerView.layer.add(anim, forKey: "transform.translation.y")
+    }
+    
+    func addHintTextLabel() {
+        
+    }
+    
+    func addBackButton() {
+        view.withSubViews {
+            backButton
+        }
+        NSLayoutConstraint.activate([
+            backButton.topAnchor.constraint(equalTo: view.readableContentGuide.topAnchor, constant: 6),
+            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstraints.leading),
+        ])
+    }
+    
+    @objc
+    func backAction() {
+        dismiss(animated: true)
     }
 }
 

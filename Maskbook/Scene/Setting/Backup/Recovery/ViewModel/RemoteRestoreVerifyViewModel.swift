@@ -141,7 +141,7 @@ extension RemoteRestoreVerifyViewModel {
         }
     }
 
-    private func checkEmailOrMobileNumber() {
+    private func checkEmailOrMobileNumber(shouldShowTips: Bool = false) {
         let (showTips, canProcceed): (Bool, Bool) = {
             switch verifyState {
             case .email:
@@ -165,6 +165,17 @@ extension RemoteRestoreVerifyViewModel {
             }
         }()
 
+        if self.validationState != validationState {
+            self.validationState = validationState
+        }
+        
+        // clear tips when user is inputing
+        self.tips = .empty
+        
+        guard shouldShowTips else {
+            return
+        }
+        
         let tips: Tips = {
             switch verifyState {
             case .email: return showTips ? .invalidEmailAddress : .empty
@@ -172,10 +183,6 @@ extension RemoteRestoreVerifyViewModel {
             default: return .empty
             }
         }()
-
-        if self.validationState != validationState {
-            self.validationState = validationState
-        }
 
         if self.tips != tips {
             self.tips = tips

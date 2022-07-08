@@ -108,7 +108,7 @@ extension MessageComposeViewModel {
         // past final text to twitter compose
         if socialPlatform == .twitter {
             let maskSocialViewController = mainCoordinator.getMaskSocialViewController()
-            maskSocialViewController?.openComposer(message: finalPostText.urlEncode() ?? "")
+            maskSocialViewController?.openComposer(message: finalPostText.URLEncoded() ?? "")
             maskSocialViewController?.dismiss(animated: true)
         }
     }

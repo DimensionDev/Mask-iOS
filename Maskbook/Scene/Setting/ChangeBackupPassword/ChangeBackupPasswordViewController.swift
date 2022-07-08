@@ -108,7 +108,7 @@ extension ChangeBackupPasswordViewController {
     
     func subscribeSignal() {
         passwordItemView.viewModel.passwordError.map { state in
-            state.isVerifyed
+            state.isValid
         }
         .assign(to: \.isEnabled, on: confirmButton)
         .store(in: &disposeBag)
@@ -121,12 +121,15 @@ extension ChangeBackupPasswordViewController {
     
     private func bindActions() {
         confirmButton.cv.publisher(on: .touchUpInside).sink { [weak self] _ in
-            self?.dismiss(animated: false) {
-                self?.coordinator.present(
-                    scene: .changeBackupPasswordStep2,
-                    transition: .panModel()
-                )
-            }
+            let password = self?.passwordItemView.passwordTextField.text
+            self?.passwordItemView.viewModel.verifyPassword(password: password, success: { [weak self] in
+                self?.dismiss(animated: false) {
+                    self?.coordinator.present(
+                        scene: .changeBackupPasswordStep2,
+                        transition: .panModel()
+                    )
+                }
+            })
         }.store(in: &disposeBag)
     }
     

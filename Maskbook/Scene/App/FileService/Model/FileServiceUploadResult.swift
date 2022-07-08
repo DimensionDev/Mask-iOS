@@ -15,7 +15,7 @@ struct FileServiceUploadResult: Codable {
 struct FileServiceTranscation: Hashable {
     init(
         id: String,
-        key: String,
+        key: String?,
         landingTxID: String,
         payloadTxID: String,
         progress: Double,

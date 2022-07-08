@@ -16,17 +16,17 @@ protocol FileServiceSelectFileDelegate: AnyObject {
 }
 
 final class FileServiceSelectFileHandler: NSObject {
-    typealias Item = FileServiceSelectFileSourceViewModel.LocalFileSourceItem
+    // MARK: Lifecycle
 
     init(delegate: FileServiceSelectFileDelegate) {
         self.delegate = delegate
     }
 
-    let fileSizeLimit = 11_010_048
-    
-    @InjectedProvider(\.mainCoordinator)
-    private var coordinator
+    // MARK: Internal
 
+    typealias Item = FileServiceSelectFileSourceViewModel.LocalFileSourceItem
+
+    let fileSizeLimit = 11_010_048
     weak var delegate: FileServiceSelectFileDelegate?
 
     private(set) lazy var imagePicker: PHPickerViewController = {
@@ -78,15 +78,14 @@ final class FileServiceSelectFileHandler: NSObject {
         return "IMG" + String(randomString.prefix(5)) + ".jpg"
     }
 
-    func didGetImage(image: UIImage) {
+    func didGetImage(image: UIImage, fileName: String?) {
         if let pngData = image.jpeg(UIImage.JPEGQuality.high), !pngData.isEmpty {
             if Int64(pngData.count) > fileSizeLimit {
                 showFileTooLargeAlert()
                 return
             }
-            let fileName = randomNameForImage()
             let fileItem = FileServiceSelectedFileItem(data: pngData,
-                                                       fileName: fileName,
+                                                       fileName: fileName ?? randomNameForImage(),
                                                        fileType: .image,
                                                        mime: "image/jpeg",
                                                        path: nil)
@@ -120,18 +119,17 @@ final class FileServiceSelectFileHandler: NSObject {
                                                    path: nil)
         pushFileServiceConfirmView(item: fileItem)
     }
-    
+
     func pushFileServiceConfirmView(item: FileServiceSelectedFileItem) {
         coordinator.present(
             scene: .fileServiceOptions(item: item, optionHandler: { [weak self] option in
                 guard let self = self else { return }
                 self.delegate?.didGetFile(fileItem: item, option: option)
             }),
-            transition: .detail()
-        )
+            transition: .detail())
     }
-    
-    func loadImage(result: PHPickerResult) async -> Result<UIImage, Error> {
+
+    func loadImage(result: PHPickerResult) async -> Result<(name: String?, image: UIImage), Error> {
         let itemProvider = result.itemProvider
         guard itemProvider.canLoadObject(ofClass: UIImage.self) else {
             return Result.failure(ImageLoadError.cannotLoad)
@@ -139,13 +137,20 @@ final class FileServiceSelectFileHandler: NSObject {
         return await withCheckedContinuation { continuation in
             itemProvider.loadObject(ofClass: UIImage.self) { image, error in
                 if let image = image as? UIImage {
-                    continuation.resume(returning: Result.success(image))
+                    let fileName = itemProvider.suggestedName.flatMap { "\($0).jpg" }
+                    let result: (String?, UIImage) = (fileName, image)
+                    continuation.resume(returning: .success(result))
                 } else {
-                    continuation.resume(returning: Result.failure(error ?? ImageLoadError.cannotLoad))
+                    continuation.resume(returning: .failure(error ?? ImageLoadError.cannotLoad))
                 }
             }
         }
     }
+
+    // MARK: Private
+
+    @InjectedProvider(\.mainCoordinator)
+    private var coordinator
 }
 
 enum ImageLoadError: Error {
@@ -173,9 +178,9 @@ extension FileServiceSelectFileHandler: PHPickerViewControllerDelegate {
             }.value
 
             switch imageResult {
-            case let .success(image):
+            case let .success((fileName, image)):
                 picker.dismiss(animated: true, completion: {
-                    self.didGetImage(image: image)
+                    self.didGetImage(image: image, fileName: fileName)
                 })
             case let .failure(error):
                 picker.dismiss(animated: true, completion: {
@@ -197,7 +202,7 @@ extension FileServiceSelectFileHandler: UIImagePickerControllerDelegate & UINavi
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         picker.dismiss(animated: true) {
             guard let image = info[.originalImage] as? UIImage else { return }
-            self.didGetImage(image: image)
+            self.didGetImage(image: image, fileName: nil)
         }
     }
 
@@ -244,9 +249,9 @@ extension FileServiceSelectFileHandler {
 
 extension FileServiceSelectFileHandler {
     func allDocumentTypes() -> [String] {
-        ["public.data","public.content","public.audiovisual-content","public.movie","public.audiovisual-content","public.video","public.audio","public.text","public.data","public.zip-archive","com.pkware.zip-archive","public.composite-content","public.text"]
+        ["public.data", "public.content", "public.audiovisual-content", "public.movie", "public.audiovisual-content", "public.video", "public.audio", "public.text", "public.data", "public.zip-archive", "com.pkware.zip-archive", "public.composite-content", "public.text"]
     }
-    
+
     func allOpeningContentTypes() -> [UTType] {
         [.text, .data, .content, .item, .zip, .jpeg, .pdf, .png, .image, .movie, .video, .mp3, .audio, .quickTimeMovie, .mpeg, .mpeg2Video, .mpeg2TransportStream, .mpeg4Movie, .mpeg4Audio, .appleProtectedMPEG4Audio, .appleProtectedMPEG4Video, .avi, .aiff, .wav, .midi, .livePhoto, .heic, .heif, .tiff, .gif, .icns]
     }

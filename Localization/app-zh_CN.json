@@ -713,7 +713,7 @@
       "plugin_introduction": {
         "transak": "Transak 支持通过60多种货币购买代币。",
         "ito": "允许用户在Twitter上直接购买代币。",
-        "luckyDrop": "发送惊喜加密赠送。支持Token和NFT。",
+        "luckyDrop": "发送红包(Token/NFT)，给加密好友带来惊喜。",
         "swap": "通过Dex购买代币，无需额外费用和限制。",
         "file_service": "为用户提供去中心化文档存储功能。"
       },
@@ -737,7 +737,8 @@
       }
     },
     "share": {
-      "shareLink": "分享 Mask Network 连接："
+      "shareLink": "分享 Mask Network 连接：",
+      "invite": "Hi %@，安装Mask.io以在社交媒体中探索Web3功能。 免费使用 NFT PFP 、 Crypto 红包、 Web3 File 服务和其他插件。展示您的 Web3 探索足迹。"
     },
     "restore": {
       "titles": {
