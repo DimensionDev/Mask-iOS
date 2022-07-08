@@ -107,7 +107,7 @@ extension Token: Managed {
     }
     
     public static func predicate(address: String) -> NSPredicate {
-        return NSPredicate(format: "%K == %@", #keyPath(Token.account.address), address)
+        return NSPredicate(format: "%K =[c] %@", #keyPath(Token.account.address), address)
     }
     
     public static func predicate(ofTypes types: [String]) -> NSPredicate {
@@ -277,12 +277,12 @@ extension Collectible: Managed {
     }
     
     public class func predicate(address: String) -> NSPredicate {
-        return NSPredicate(format: "%K == %@", #keyPath(Collectible.account.address), address)
+        return NSPredicate(format: "%K =[c] %@", #keyPath(Collectible.account.address), address)
     }
     
     public class func predicate(address: String, enabled: Bool) -> NSPredicate {
         return NSPredicate(
-            format: "%K == %@ AND %K == %@",
+            format: "%K =[c] %@ AND %K == %@",
             #keyPath(Collectible.account.address),
             address,
             #keyPath(Collectible.enabled),
@@ -292,7 +292,7 @@ extension Collectible: Managed {
     
     public class func predicate(address: String, networkId: UInt64, enabled: Bool) -> NSPredicate {
         return NSPredicate(
-            format: "%K == %@ AND %K == %@ AND %K == %@",
+            format: "%K =[c] %@ AND %K == %@ AND %K == %@",
             #keyPath(Collectible.account.address),
             address,
             #keyPath(Collectible.enabled),
