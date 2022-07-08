@@ -34,7 +34,7 @@ struct FileServiceLargeFileStorage {
         try? fileManager.removeItem(at: fileServicePath(id: id, fileName: fileName))
     }
     
-    static func save(id: String, fileName: String, content: Data) {
+    static func save(_ content: Data, id: String, fileName: String) {
         let path = fileServicePath(id: id, fileName: fileName)
         if fileManager.fileExists(atPath: path.path) {
             try? fileManager.removeItem(at: path)
