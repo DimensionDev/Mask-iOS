@@ -50,7 +50,7 @@ struct FileServiceDownloadItem {
         guard let id = tx?.id else {
             return nil
         }
-        return FileServiceLargeFileStorage.data(of: id)
+        return FileServiceLargeFileStorage.data(of: id, fileName: fileName)
     }
 }
 
@@ -58,7 +58,7 @@ extension FileServiceDownloadItem {
     func toSelectedFileItem() -> FileServiceSelectedFileItem {
         let path: URL? = {
             if let id = tx?.id {
-                return FileServiceLargeFileStorage.fileServicePath(id: id)
+                return FileServiceLargeFileStorage.fileServicePath(id: id, fileName: fileName)
             }
             return nil
         }()

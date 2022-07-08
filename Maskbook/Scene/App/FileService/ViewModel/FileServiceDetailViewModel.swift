@@ -33,7 +33,7 @@ class FileServiceDetailViewModel: ObservableObject {
             do {
                 let data = try await FileService.getAttachment(payloadID: tx.payloadTxID, provider: item.provider, key: tx.key)
                 item.content = data
-                FileServiceLargeFileStorage.save(id: tx.id, content: data)
+                FileServiceLargeFileStorage.save(data, id: tx.id, fileName: item.fileName)
                 state = .downloaded
             } catch let e {
                 log.debug("\(e)")

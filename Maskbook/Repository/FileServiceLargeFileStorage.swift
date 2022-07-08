@@ -21,21 +21,21 @@ struct FileServiceLargeFileStorage {
         }
     }
     
-    static func fileServicePath(id: String) -> URL {
+    static func fileServicePath(id: String, fileName: String) -> URL {
         createFileServiceDownloadDirectory()
-        return fileServiceDownloadDirectory.appendingPathComponent(id.base64URLEscaped(), isDirectory: false)
+        return fileServiceDownloadDirectory.appendingPathComponent(id.base64URLEscaped() + "_" + fileName, isDirectory: false)
     }
     
-    static func data(of id: String) -> Data? {
-        try? Data(contentsOf: fileServicePath(id: id))
+    static func data(of id: String, fileName: String) -> Data? {
+        try? Data(contentsOf: fileServicePath(id: id, fileName: fileName))
     }
     
-    static func deleteFile(id: String) {
-        try? fileManager.removeItem(at: fileServicePath(id: id))
+    static func deleteFile(id: String, fileName: String) {
+        try? fileManager.removeItem(at: fileServicePath(id: id, fileName: fileName))
     }
     
-    static func save(id: String, content: Data) {
-        let path = fileServicePath(id: id)
+    static func save(_ content: Data, id: String, fileName: String) {
+        let path = fileServicePath(id: id, fileName: fileName)
         if fileManager.fileExists(atPath: path.path) {
             try? fileManager.removeItem(at: path)
         }
