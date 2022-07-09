@@ -358,9 +358,11 @@ extension DebankProvider {
                         }
                     }
                 }
-                do {
-                    try tempContext.saveOrRollback()
-                } catch {}
+                try? tempContext.saveOrRollback()
+            }
+            //FIXED: There are duplicated tokens which query in method `didReceived`.
+            tempContext.parent?.performAndWait {
+                try? tempContext.parent?.saveOrRollback()
             }
             
             self.delegate?.didReceived(type: self.type,

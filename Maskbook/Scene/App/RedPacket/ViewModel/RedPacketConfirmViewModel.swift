@@ -232,6 +232,19 @@ class RedPacketConfirmViewModel: ObservableObject {
             transactionOptions.gasPrice = .automatic
         }
         
+        transactionOptions.type = self.settings.network.isSupport1559GasFee ? .eip1559 : nil
+        if let priorityFee = Web3.Utils.parseToBigUInt(gasFeeItem.suggestedMaxPriorityFeePerGas, units: .Gwei) {
+            transactionOptions.maxPriorityFeePerGas = .manual(priorityFee)
+        } else {
+            transactionOptions.maxPriorityFeePerGas = .automatic
+        }
+        
+        if let maxFee = Web3.Utils.parseToBigUInt(gasFeeItem.suggestedMaxFeePerGas, units: .Gwei) {
+            transactionOptions.maxFeePerGas = .manual(maxFee)
+        } else {
+            transactionOptions.maxFeePerGas = .automatic
+        }
+        
         let completionWrapper: (Swift.Result<(String, BigUInt), Error>) -> Void = { [weak self] result in
             switch result {
             case .success((let txhash, let nonce)):

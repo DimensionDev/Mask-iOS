@@ -279,6 +279,13 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
 
         return .UNRECOGNIZED(-1)
     }
+    
+    var isSupport1559GasFee: Bool {
+        switch self {
+        case .eth, .polygon: return true
+        default: return false
+        }
+    }
 
     func getScanUrl(hash: String) -> URL? {
         switch self {
