@@ -93,6 +93,27 @@ struct FileServiceView: View {
         .offset(x: -20, y: -buttonSize - 24)
     }
 
+    private var emptyPlaceholder: some View {
+        VStack(spacing: 12) {
+            if viewModel.searchText.isEmpty {
+                Image(Asset.Images.Scene.Empty.emptyBox)
+
+                Text(L10n.Plugins.FileService.listEmpty)
+                    .font(.mh6)
+                    .foregroundColor(Asset.Colors.Text.light)
+            } else {
+                Image(Asset.Images.Scene.Personas.search)
+
+                Text(L10n.Plugins.FileService.searchEmpty)
+                    .font(.mh6)
+                    .foregroundColor(Asset.Colors.Text.light)
+            }
+
+            Spacer()
+        }
+        .padding(.top, 110)
+    }
+
     private func fileList(with proxy: GeometryProxy) -> some View {
         VStack(spacing: 16) {
             // Textfield can't become first responder when being layouted in
@@ -105,7 +126,12 @@ struct FileServiceView: View {
                     L10n.Common.searchPlaceholder,
                     text: $viewModel.searchText
                 )
-                .modifier(KeyBoardObservingModifier(isFirstResponder: $viewModel.isEditing))
+                .modifier(
+                    KeyBoardObservingModifier(
+                        \.isEditing,
+                         on: viewModel
+                    )
+                )
 
                 Image(systemName: "xmark.circle.fill")
                     .opacity(viewModel.searchText.isEmpty ? 0 : 1)
@@ -137,8 +163,8 @@ struct FileServiceView: View {
                             }
                         }
                     )
+                    .padding(.horizontal, 20)
                 }
-                .padding(.horizontal, 20)
 
                 Spacer()
             }
@@ -154,27 +180,6 @@ struct FileServiceView: View {
             uploadingItemList(with: proxy),
             alignment: .bottom
         )
-    }
-
-    private var emptyPlaceholder: some View {
-        VStack(spacing: 12) {
-            if viewModel.searchText.isEmpty {
-                Image(Asset.Images.Scene.Empty.emptyBox)
-
-                Text(L10n.Plugins.FileService.listEmpty)
-                    .font(.mh6)
-                    .foregroundColor(Asset.Colors.Text.light)
-            } else {
-                Image(Asset.Images.Scene.Personas.search)
-
-                Text(L10n.Plugins.FileService.searchEmpty)
-                    .font(.mh6)
-                    .foregroundColor(Asset.Colors.Text.light)
-            }
-
-            Spacer()
-        }
-        .padding(.top, 110)
     }
 
     private func view(of item: FileServiceUploadingItem) -> some View {
