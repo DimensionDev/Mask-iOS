@@ -788,7 +788,7 @@
         "data_failed_to_fetch": "Please try to load data again.",
         "failed_to_download_file": "failed to download remote file",
         "incorrect_backup_password": "Incorrect cloud backup password",
-        "invalid_email_address": "Incorrect Email Address",
+        "invalid_email_address": "Please enter the correct email address",
         "invalid_mobile_number": "Incorrect Phone number",
         "email_validationcode": "Verification code has been sent by Email to",
         "mobile_validationcode": "Verification code has been sent to by SMS to",

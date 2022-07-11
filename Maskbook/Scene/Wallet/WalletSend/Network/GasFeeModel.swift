@@ -19,10 +19,25 @@ struct GasFeeModel: Codable, Hashable {
     }
     
     init(maticModel: GasFeeMaticModel) {
-        low = GasFeeDetail(suggestedMaxPriorityFeePerGas: String(maticModel.safeLow), suggestedMaxFeePerGas: "0", minWaitTimeEstimate: 0, maxWaitTimeEstimate: 0)
-        medium = GasFeeDetail(suggestedMaxPriorityFeePerGas: String(maticModel.standard), suggestedMaxFeePerGas: "0", minWaitTimeEstimate: 0, maxWaitTimeEstimate: 0)
-        high = GasFeeDetail(suggestedMaxPriorityFeePerGas: String(maticModel.fast), suggestedMaxFeePerGas: "0", minWaitTimeEstimate: 0, maxWaitTimeEstimate: 0)
-        estimatedBaseFee = "0"
+        low = GasFeeDetail(
+            suggestedMaxPriorityFeePerGas: String(maticModel.safeLow),
+            suggestedMaxFeePerGas: String(maticModel.safeLow),
+            minWaitTimeEstimate: 0,
+            maxWaitTimeEstimate: 0
+        )
+        medium = GasFeeDetail(
+            suggestedMaxPriorityFeePerGas: String(maticModel.standard),
+            suggestedMaxFeePerGas: String(maticModel.standard),
+            minWaitTimeEstimate: 0,
+            maxWaitTimeEstimate: 0
+        )
+        high = GasFeeDetail(
+            suggestedMaxPriorityFeePerGas: String(maticModel.fast),
+            suggestedMaxFeePerGas: String(maticModel.fast),
+            minWaitTimeEstimate: 0,
+            maxWaitTimeEstimate: 0
+        )
+        estimatedBaseFee = String(maticModel.standard)
     }
     
     init(baseGasFee: String) {

@@ -64,13 +64,6 @@ struct BindRemoteBackupInfoView: View {
             .foregroundColor(Asset.Colors.Text.normal.asColor())
             .whiteRadiusBackgroundView()
 
-            if !viewModel.email.isValidEmailAddress && viewModel.email.isNotEmpty {
-                Text(L10n.Scene.Restore.Tip.invalidEmailAddress)
-                    .font(FontStyles.mh6.font)
-                    .horizontallyFilled()
-                    .foregroundColor(Asset.Colors.Public.error.asColor())
-            }
-
         case .phoneNumber:
             HStack(spacing: 8) {
                 CustomTextField(
@@ -102,15 +95,6 @@ struct BindRemoteBackupInfoView: View {
                     Spacer()
                 }
                 .whiteRadiusBackgroundView()
-            }
-
-            if viewModel.mobileRegionCode.isNotEmpty &&
-               viewModel.mobileNumber.isNotEmpty &&
-               !viewModel.strategyModel.verificationIdentifier.isValidContent {
-                Text(L10n.Scene.Restore.Tip.invalidMobileNumber)
-                    .font(FontStyles.mh6.font)
-                    .horizontallyFilled()
-                    .foregroundColor(Asset.Colors.Public.error.asColor())
             }
         }
     }
@@ -148,7 +132,7 @@ struct BindRemoteBackupInfoView: View {
 
                 HStack(spacing: 8) {
                     CustomTextField(
-                        text: $viewModel.strategyModel.verificationCode,
+                        text: viewModel.verificationCode,
                         keyboardType: .numberPad,
                         textLimit: 6,
                         isFirstResponder: true

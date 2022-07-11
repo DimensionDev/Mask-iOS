@@ -570,9 +570,9 @@ class GasFeeChooseViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] blockChainNetwork  in
                 guard let self = self else { return }
-                    self.maxPriorityFeeStackView.isHidden = !(blockChainNetwork == .eth)
-                    self.maxFeeStackView.isHidden = !(blockChainNetwork == .eth)
-                    self.gWeiStackView.isHidden = (blockChainNetwork == .eth)
+                self.maxPriorityFeeStackView.isHidden = !(blockChainNetwork.isSupport1559GasFee)
+                self.maxFeeStackView.isHidden = !(blockChainNetwork.isSupport1559GasFee)
+                self.gWeiStackView.isHidden = (blockChainNetwork.isSupport1559GasFee)
             }
             .store(in: &disposeBag)
         

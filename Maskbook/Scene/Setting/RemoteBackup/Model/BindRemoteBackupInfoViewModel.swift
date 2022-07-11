@@ -1,5 +1,6 @@
 import Combine
 import Foundation
+import SwiftUI
 
 final class BindRemoteBackupInfoViewModel: ObservableObject {
     @Published
@@ -62,6 +63,16 @@ final class BindRemoteBackupInfoViewModel: ObservableObject {
             ? L10n.Scene.Restore.Buttontitles.resend
             : countingText
     }
+    
+    lazy var verificationCode = Binding(
+        get: { [weak self] in
+            self?.strategyModel.verificationCode ?? ""
+        },
+        set: { [weak self] in
+            self?.validateCodeMismatch = false
+            self?.strategyModel.verificationCode = $0
+        }
+    )
 
     private(set) var cancelableStorage: Set<AnyCancellable> = []
     private(set) var coutingStorage: Set<AnyCancellable> = []
