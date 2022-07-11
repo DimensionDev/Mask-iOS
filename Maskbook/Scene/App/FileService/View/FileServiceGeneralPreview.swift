@@ -16,6 +16,7 @@ struct FileServiceGeneralPreview: View {
     init(item: FileServiceSelectedFileItem) {
         self.item = item
         let cacheUrl = self.item.tempURL
+        setAudioSession()
         self.player = AVPlayer(url: cacheUrl)
     }
 
@@ -51,5 +52,14 @@ struct FileServiceGeneralPreview: View {
                 .font(.mh7)
                 .foregroundColor(Asset.Colors.Text.normal)
         }.horizontallyCenterred()
+    }
+    
+    func setAudioSession(){
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(.playback, mode: .moviePlayback, options: [])
+        } catch {
+            print("Failed to set audio session category.")
+        }
     }
 }
