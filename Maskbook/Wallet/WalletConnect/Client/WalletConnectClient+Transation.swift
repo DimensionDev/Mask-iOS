@@ -42,23 +42,40 @@ extension WalletConnectClient {
                 } else {
                     nonceTemp = try provider.eth.getTransactionCount(address: fromAddressEthFormat)
                 }
-                let nonceHex = nonceTemp.serialize().toHexString().addHexPrefix()
-                var gasLimitStr: String
+                let nonceHex = nonceTemp.serialize().toHexStringWithPrefix()
+                var gasLimitStr: String?
                 switch transactionOptions.gasLimit {
                 case .manual(let limit):
-                    gasLimitStr = limit.serialize().toHexString().addHexPrefix()
+                    gasLimitStr = limit.serialize().toHexStringWithPrefix()
                         
                 default:
-                    gasLimitStr = transaction.gasLimit.serialize().toHexString().addHexPrefix()
+                    gasLimitStr = transaction.parameters.gasLimit?.serialize().toHexStringWithPrefix()
                 }
                 
-                var gasPriceStr: String
+                var gasPriceStr: String?
                 switch transactionOptions.gasPrice {
                 case .manual(let gasPrice):
-                    gasPriceStr = gasPrice.serialize().toHexString().addHexPrefix()
+                    gasPriceStr = gasPrice.serialize().toHexStringWithPrefix()
                 default:
-                    gasPriceStr = transaction.gasPrice.serialize().toHexString().addHexPrefix()
+                    gasPriceStr = transaction.parameters.gasPrice?.serialize().toHexStringWithPrefix()
                 }
+                
+                var maxPriorityFeePerGas: String?
+                switch transactionOptions.maxPriorityFeePerGas {
+                case .manual(let maxPriorityFee):
+                    maxPriorityFeePerGas = maxPriorityFee.serialize().toHexStringWithPrefix()
+                default:
+                    maxPriorityFeePerGas = transaction.parameters.maxPriorityFeePerGas?.serialize().toHexStringWithPrefix()
+                }
+                
+                var maxFeePerGas: String?
+                switch transactionOptions.maxFeePerGas {
+                case .manual(let fee):
+                    maxFeePerGas = fee.serialize().toHexStringWithPrefix()
+                default:
+                    maxFeePerGas = transaction.parameters.maxFeePerGas?.serialize().toHexStringWithPrefix()
+                }
+                
                 var chainId: String?
                 if let networkId = self?.userSetting.network.networkId {
                     chainId = "\(networkId)"
@@ -69,13 +86,13 @@ extension WalletConnectClient {
                                        data: transaction.data.toHexString().addHexPrefix(),
                                        gas: gasLimitStr,
                                        gasPrice: gasPriceStr,
-                                       value: transaction.value.serialize().toHexString().addHexPrefix(),
+                                       value: transaction.value.serialize().toHexStringWithPrefix(),
                                        nonce: nonceHex,
-                                       type: nil,
+                                       type: transactionOptions.type?.description,
                                        accessList: nil,
                                        chainId: chainId,
-                                       maxPriorityFeePerGas: nil,
-                                       maxFeePerGas: nil)
+                                       maxPriorityFeePerGas: maxPriorityFeePerGas,
+                                       maxFeePerGas: maxFeePerGas)
                 guard let client = self?.client else {
                     DispatchQueue.main.async {
                         completion(.failure(WalletSendError.walletConnectError()))
@@ -138,10 +155,10 @@ extension WalletConnectClient {
                         Client.Transaction(from: fromAddress,
                                            to: toAddress,
                                            data: Data().toHexString().addHexPrefix(),
-                                           gas: gasLimit.serialize().toHexString().addHexPrefix(),
-                                           gasPrice: gasPrice.serialize().toHexString().addHexPrefix(),
-                                           value: Web3.Utils.parseToBigUInt(amount, units: .eth)?.serialize().toHexString().addHexPrefix() ?? "0x0",
-                                           nonce: nonce.serialize().toHexString().addHexPrefix(),
+                                           gas: gasLimit.serialize().toHexStringWithPrefix(),
+                                           gasPrice: gasPrice.serialize().toHexStringWithPrefix(),
+                                           value: Web3.Utils.parseToBigUInt(amount, units: .eth)?.serialize().toHexStringWithPrefix() ?? "0x0",
+                                           nonce: nonce.serialize().toHexStringWithPrefix(),
                                            type: nil,
                                            accessList: nil,
                                            chainId: "\(network.networkId)",
@@ -202,10 +219,10 @@ extension WalletConnectClient {
                             Client.Transaction(from: fromAddress,
                                                to: tokenAddress,
                                                data: transacationResult.data.toHexString().addHexPrefix(),
-                                               gas: gasLimit.serialize().toHexString().addHexPrefix(),
-                                               gasPrice: gasPrice.serialize().toHexString().addHexPrefix(),
+                                               gas: gasLimit.serialize().toHexStringWithPrefix(),
+                                               gasPrice: gasPrice.serialize().toHexStringWithPrefix(),
                                                value: "0x0",
-                                               nonce: nonce.serialize().toHexString().addHexPrefix(),
+                                               nonce: nonce.serialize().toHexStringWithPrefix(),
                                                type: nil,
                                                accessList: nil,
                                                chainId: nil,
@@ -297,10 +314,10 @@ extension WalletConnectClient {
                         Client.Transaction(from: fromAddress,
                                            to: contractAddress,
                                            data: transacationResult.data.toHexString().addHexPrefix(),
-                                           gas: gasLimit.serialize().toHexString().addHexPrefix(),
-                                           gasPrice: gasPrice.serialize().toHexString().addHexPrefix(),
+                                           gas: gasLimit.serialize().toHexStringWithPrefix(),
+                                           gasPrice: gasPrice.serialize().toHexStringWithPrefix(),
                                            value: "0x0",
-                                           nonce: nonce.serialize().toHexString().addHexPrefix(),
+                                           nonce: nonce.serialize().toHexStringWithPrefix(),
                                            type: nil,
                                            accessList: nil,
                                            chainId: "\(network.networkId)",

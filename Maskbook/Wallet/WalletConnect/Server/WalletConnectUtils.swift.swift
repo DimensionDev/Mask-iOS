@@ -34,7 +34,7 @@ extension Data {
     }
 
     func toHexStringWithPrefix() -> String {
-        "0x" + toHexString()
+        toHexString().addHexPrefix()
     }
 }
 

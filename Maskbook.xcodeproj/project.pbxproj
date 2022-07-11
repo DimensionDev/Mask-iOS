@@ -697,6 +697,7 @@
 		5D61527327CF35FC001CB038 /* MoveBackupDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D61527227CF35FC001CB038 /* MoveBackupDataViewController.swift */; };
 		5D61527927D06B7A001CB038 /* BackupFolderCheckService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D61527827D06B7A001CB038 /* BackupFolderCheckService.swift */; };
 		5D72F3C7265E3FE50073F6B9 /* KeyboardResponderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D72F3C6265E3FE50073F6B9 /* KeyboardResponderService.swift */; };
+		5D74A5DA2876EED500147EB5 /* String+mime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D74A5D92876EED500147EB5 /* String+mime.swift */; };
 		5D770B1127DED6F900539254 /* PersonaAvatarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D770B1027DED6F900539254 /* PersonaAvatarViewController.swift */; };
 		5D770B1327DED70400539254 /* PersonaAvatarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D770B1227DED70400539254 /* PersonaAvatarViewModel.swift */; };
 		5D7BF7CE27D0997C00C58EF2 /* BackupFileDetectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7BF7CD27D0997C00C58EF2 /* BackupFileDetectService.swift */; };
@@ -1544,6 +1545,7 @@
 		5D61527227CF35FC001CB038 /* MoveBackupDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveBackupDataViewController.swift; sourceTree = "<group>"; };
 		5D61527827D06B7A001CB038 /* BackupFolderCheckService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupFolderCheckService.swift; sourceTree = "<group>"; };
 		5D72F3C6265E3FE50073F6B9 /* KeyboardResponderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponderService.swift; sourceTree = "<group>"; };
+		5D74A5D92876EED500147EB5 /* String+mime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+mime.swift"; sourceTree = "<group>"; };
 		5D770B1027DED6F900539254 /* PersonaAvatarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaAvatarViewController.swift; sourceTree = "<group>"; };
 		5D770B1227DED70400539254 /* PersonaAvatarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaAvatarViewModel.swift; sourceTree = "<group>"; };
 		5D7BF7CD27D0997C00C58EF2 /* BackupFileDetectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupFileDetectService.swift; sourceTree = "<group>"; };
@@ -2514,6 +2516,7 @@
 				2AD31E32282D367600CB3D49 /* View+Snapshot.swift */,
 				2AD31E26282D367600CB3D49 /* View+Style.swift */,
 				2A470B06283E45F0009B49EA /* String+URL.swift */,
+				5D74A5D92876EED500147EB5 /* String+mime.swift */,
 				2A49E15128449F820084208E /* Substring+String.swift */,
 				1F173D4628728234007A5A24 /* OnBoard.swift */,
 				1F173D4E2873D777007A5A24 /* Introspect+UITextField.swift */,
@@ -4185,7 +4188,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DBAAF4B122C35A7100017594 /* Build configuration list for PBXNativeTarget "MaskbookTests" */;
 			buildPhases = (
-				33896CF9E1794241EC6C3F39 /* [CP] Check Pods Manifest.lock */,
+				A7B3D29D81FBF8A046F5AA10 /* [CP] Check Pods Manifest.lock */,
 				DBAAF4A122C35A7100017594 /* Sources */,
 				DBAAF4A222C35A7100017594 /* Frameworks */,
 				DBAAF4A322C35A7100017594 /* Resources */,
@@ -4328,28 +4331,6 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n$PODS_ROOT/SwiftGen/bin/swiftgen\n";
 		};
-		33896CF9E1794241EC6C3F39 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MaskbookTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		5E239F16739AF8686DFA4BE5 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4383,6 +4364,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Maskbook-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A7B3D29D81FBF8A046F5AA10 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MaskbookTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -5164,6 +5167,7 @@
 				5D95FA5D28408F150008C100 /* ShareLuckyDropSelectProfileViewModel.swift in Sources */,
 				2AD855A8281285D10064DDA5 /* RedPacketAvailability.swift in Sources */,
 				2DC5D895272574D600E351D3 /* WalletConnectClient+Extensions.swift in Sources */,
+				5D74A5DA2876EED500147EB5 /* String+mime.swift in Sources */,
 				2AF8852E271EE9310004565A /* WalletBackupViewController.swift in Sources */,
 				2A72F40227BE8323004A3F95 /* ColletibleIconContentControllerHandler.swift in Sources */,
 				1F5B5EDA284F3B9500F6AD98 /* FileServiceView.swift in Sources */,

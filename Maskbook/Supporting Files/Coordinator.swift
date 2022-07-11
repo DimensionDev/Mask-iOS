@@ -15,8 +15,6 @@ import UIKit
 import WalletConnectSwift
 import web3swift
 
-import ResponderChain
-
 // swiftlint:disable file_length
 class Coordinator {
     static let main = Coordinator()

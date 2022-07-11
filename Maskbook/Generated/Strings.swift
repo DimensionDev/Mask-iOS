@@ -2208,7 +2208,7 @@ enum L10n {
         static var incorrectValidationcode: String {
           return L10n.tr("Localizable", "Scene.Restore.Tip.IncorrectValidationcode")
         }
-        /// Incorrect Email Address
+        /// Please enter the correct email address
         static var invalidEmailAddress: String {
           return L10n.tr("Localizable", "Scene.Restore.Tip.InvalidEmailAddress")
         }

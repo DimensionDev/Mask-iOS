@@ -51,7 +51,12 @@ final class FileServiceDetailViewController: BaseViewController {
         guard let _ = fileServiceItem.content else {
             return
         }
-        let controller = FileServiceSaveFileController(item: fileServiceItem)
+        let controller = FileServiceSaveFileController(item: fileServiceItem.toSelectedFileItem())
+        controller.dismissAction = {
+            UIApplication.getTopViewController()?
+                .makeToast(message: L10n.Common.Toast.saved,
+                           image: Asset.Images.Toast.check.image)
+        }
         coordinator.topViewController?.present(controller, animated: true)
     }
 }
