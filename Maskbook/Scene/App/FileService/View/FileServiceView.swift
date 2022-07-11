@@ -7,6 +7,7 @@ struct FileServiceView: View {
 
     init(viewModel: FileServiceViewModel) {
         _viewModel = .init(wrappedValue: viewModel)
+        UIScrollView.appearance().keyboardDismissMode = .onDrag
     }
 
     // MARK: Internal
@@ -104,6 +105,7 @@ struct FileServiceView: View {
                     L10n.Common.searchPlaceholder,
                     text: $viewModel.searchText
                 )
+                .modifier(KeyBoardObservingModifier(isFirstResponder: $viewModel.isEditing))
 
                 Image(systemName: "xmark.circle.fill")
                     .opacity(viewModel.searchText.isEmpty ? 0 : 1)
@@ -114,26 +116,7 @@ struct FileServiceView: View {
             .padding(.horizontal, 20)
             .layoutPriority(2)
 
-            if viewModel.visibleItems.isEmpty {
-                VStack(spacing: 12) {
-                    Spacer()
-                    if viewModel.searchText.isEmpty {
-                        Image(Asset.Images.Scene.Empty.emptyBox)
-                        // TODO: L10n
-                        Text(L10n.Plugins.FileService.listEmpty)
-                            .font(.mh6)
-                            .foregroundColor(Asset.Colors.Text.light)
-                    } else {
-                        Image(Asset.Images.Scene.Personas.search)
-
-                        Text(L10n.Plugins.FileService.searchEmpty)
-                            .font(.mh6)
-                            .foregroundColor(Asset.Colors.Text.light)
-                    }
-                    Spacer()
-                }
-                .padding(.horizontal, 20)
-            } else {
+            VStack {
                 ScrollView {
                     LazyVStack(
                         alignment: .center,
@@ -141,26 +124,57 @@ struct FileServiceView: View {
                         pinnedViews: [.sectionHeaders],
                         content: {
                             Section {
-                                ForEach(viewModel.visibleItems, id: \.self) { item in
-                                    view(of: item)
-                                }
+                                if viewModel.visibleItems.isEmpty {
+                                    emptyPlaceholder
+                                } else {
+                                    ForEach(viewModel.visibleItems, id: \.self) { item in
+                                        view(of: item)
+                                    }
 
-                                Spacer()
-                                    .frame(height: 4)
+                                    Spacer()
+                                        .frame(height: 4)
+                                }
                             }
                         }
                     )
-                    .padding(.horizontal, 20)
                 }
+                .padding(.horizontal, 20)
 
                 Spacer()
             }
+//            .onTapGesture {
+//                guard viewModel.isEditing else {
+//                    return
+//                }
+//                self.forceResignKeyboard()
+//            }
         }
         .padding(.top, 20)
         .overlay(
             uploadingItemList(with: proxy),
             alignment: .bottom
         )
+    }
+
+    private var emptyPlaceholder: some View {
+        VStack(spacing: 12) {
+            if viewModel.searchText.isEmpty {
+                Image(Asset.Images.Scene.Empty.emptyBox)
+
+                Text(L10n.Plugins.FileService.listEmpty)
+                    .font(.mh6)
+                    .foregroundColor(Asset.Colors.Text.light)
+            } else {
+                Image(Asset.Images.Scene.Personas.search)
+
+                Text(L10n.Plugins.FileService.searchEmpty)
+                    .font(.mh6)
+                    .foregroundColor(Asset.Colors.Text.light)
+            }
+
+            Spacer()
+        }
+        .padding(.top, 110)
     }
 
     private func view(of item: FileServiceUploadingItem) -> some View {
