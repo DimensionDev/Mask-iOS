@@ -788,7 +788,7 @@
         "data_failed_to_fetch": "请尝试重新加载数据。",
         "failed_to_download_file": "下载远端文件失败。",
         "incorrect_backup_password": "云端备份密码错误",
-        "invalid_email_address": "电子邮件地址错误",
+        "invalid_email_address": "",
         "invalid_mobile_number": "手机号码错误",
         "email_validationcode": "验证码已经通过电子邮件发送至",
         "mobile_validationcode": "验证码已通过短信发送至",
