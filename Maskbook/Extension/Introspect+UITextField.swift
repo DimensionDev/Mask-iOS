@@ -1,3 +1,4 @@
+import SwiftUI
 import Introspect
 
 extension TargetViewSelector {
@@ -49,5 +50,11 @@ extension Introspect {
         }
 
         return children.first
+    }
+}
+
+extension View {
+    func reintrospectTextField(_ textField: @escaping (UITextField) -> Void) -> some View {
+        introspect(selector: TargetViewSelector.siblingContainingOrAncestorOrAncestorChild, customize: textField)
     }
 }

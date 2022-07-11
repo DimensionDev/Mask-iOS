@@ -10,6 +10,7 @@ final class FileServiceViewModel: ObservableObject {
     init() {
         @InjectedProvider(\.fileServiceUploadManager)
         var manager;
+
         _uploadManager = .init(initialValue: manager)
 
         Publishers
@@ -19,7 +20,7 @@ final class FileServiceViewModel: ObservableObject {
                     .map { $0.contains("\(OnboardFeature.fileService.rawValue)") }
             )
             .receive(on: DispatchQueue.main)
-            .map {  !($0 && $1) }
+            .map { !($0 && $1) }
             .assign(to: \.showOnboard, on: self)
             .store(in: &cancelableStorage)
 
@@ -42,11 +43,6 @@ final class FileServiceViewModel: ObservableObject {
         uploadManager.isVisible = false
     }
 
-    var isVisible: Bool {
-        get { uploadManager.isVisible }
-        set { uploadManager.isVisible = newValue }
-    }
-
     // MARK: Internal
 
     enum Action {
@@ -64,7 +60,15 @@ final class FileServiceViewModel: ObservableObject {
     @Published
     var showOnboard: Bool = false
 
+    @Published
+    var isEditing = false
+
     private(set) var actionSignal: (Action) -> Void = { _ in }
+
+    var isVisible: Bool {
+        get { uploadManager.isVisible }
+        set { uploadManager.isVisible = newValue }
+    }
 
     var allowUploading: Bool {
         uploadManager.allowUploading && settings.fileServicePolicyAccepted
@@ -100,7 +104,7 @@ final class FileServiceViewModel: ObservableObject {
                     file.asStructItem()
                 }
             )
-            .filter { $0.uploadDate.isSome }
+            .filter(\.uploadDate.isSome)
     }
 }
 
