@@ -40,17 +40,19 @@ extension View {
     }
 }
 
-#if canImport(UIKit)
 extension View {
     func forceResignKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
-#endif
-
-extension View {}
 
 struct KeyBoardObservingModifier: ViewModifier {
+    // MARK: Lifecycle
+
+    init(isFirstResponder: Binding<Bool>) {
+        _viewModel = .init(wrappedValue: ViewModel(isFirstResponder: isFirstResponder))
+    }
+
     // MARK: Internal
 
     final class ViewModel: ObservableObject {
@@ -58,10 +60,6 @@ struct KeyBoardObservingModifier: ViewModifier {
 
         init(isFirstResponder: Binding<Bool>) {
             _isFirstResponder = .init(projectedValue: isFirstResponder)
-        }
-
-        deinit {
-            print("ddadad---\(self) deinit")
         }
 
         // MARK: Internal
@@ -116,8 +114,4 @@ struct KeyBoardObservingModifier: ViewModifier {
 
     @StateObject
     private var viewModel: ViewModel
-
-    init(isFirstResponder: Binding<Bool>) {
-        _viewModel = .init(wrappedValue: ViewModel(isFirstResponder: isFirstResponder))
-    }
 }

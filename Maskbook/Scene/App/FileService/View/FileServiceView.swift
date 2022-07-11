@@ -142,12 +142,12 @@ struct FileServiceView: View {
 
                 Spacer()
             }
-//            .onTapGesture {
-//                guard viewModel.isEditing else {
-//                    return
-//                }
-//                self.forceResignKeyboard()
-//            }
+            .onTapGesture {
+                guard viewModel.isEditing else {
+                    return
+                }
+                self.forceResignKeyboard()
+            }
         }
         .padding(.top, 20)
         .overlay(
