@@ -60,10 +60,6 @@ struct KeyBoardObservingModifier: ViewModifier {
             _isFirstResponder = .init(projectedValue: isFirstResponder)
         }
 
-        deinit {
-            print("ddadad---\(self) deinit")
-        }
-
         // MARK: Internal
 
         var cancelableStorage: Set<AnyCancellable> = []
