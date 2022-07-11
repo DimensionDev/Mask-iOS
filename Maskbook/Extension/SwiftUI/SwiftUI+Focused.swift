@@ -49,8 +49,19 @@ extension View {
 struct KeyBoardObservingModifier: ViewModifier {
     // MARK: Lifecycle
 
-    init(isFirstResponder: Binding<Bool>) {
-        _viewModel = .init(wrappedValue: ViewModel(isFirstResponder: isFirstResponder))
+    init<V: AnyObject>(_ keyPath: ReferenceWritableKeyPath<V, Bool>, on object: V) {
+        _viewModel = .init(
+            wrappedValue: .init(
+                isFirstResponder: .init(
+                    get: { [weak object] in
+                        object?[keyPath: keyPath] ?? false
+                    },
+                    set: { [weak object] newValue, _ in
+                        object?[keyPath: keyPath] = newValue
+                    }
+                )
+            )
+        )
     }
 
     // MARK: Internal
@@ -63,12 +74,6 @@ struct KeyBoardObservingModifier: ViewModifier {
         }
 
         // MARK: Internal
-
-        var cancelableStorage: Set<AnyCancellable> = []
-
-        private(set) var registerred = false
-
-        @Binding var isFirstResponder: Bool
 
         func registerKeyboardNotification() {
             guard !registerred else {
@@ -101,6 +106,15 @@ struct KeyBoardObservingModifier: ViewModifier {
                 }
                 .store(in: &cancelableStorage)
         }
+
+        // MARK: Private
+
+        private var registerred = false
+
+        private var cancelableStorage: Set<AnyCancellable> = []
+
+        @Binding
+        private var isFirstResponder: Bool
     }
 
     func body(content: Content) -> some View {

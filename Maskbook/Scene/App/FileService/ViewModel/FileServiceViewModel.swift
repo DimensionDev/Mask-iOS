@@ -60,7 +60,6 @@ final class FileServiceViewModel: ObservableObject {
     @Published
     var showOnboard: Bool = false
 
-    @Published
     var isEditing = false
 
     private(set) var actionSignal: (Action) -> Void = { _ in }
