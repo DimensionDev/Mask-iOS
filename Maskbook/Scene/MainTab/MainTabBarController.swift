@@ -66,11 +66,18 @@ class MainTabBarController: UITabBarController {
         }
     }
     
+    var selectedTab: Tab {
+        didSet {
+            selectedIndex = selectedTab.rawValue
+        }
+    }
+    
     var disposeBag = Set<AnyCancellable>()
 
     private var tabControllerMap: [Tab: UINavigationController] = [:]
 
     init() {
+        selectedTab = .personas
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -207,12 +214,27 @@ extension MainTabBarController {
 }
 
 extension MainTabBarController {
-    static func currentTabBarController() -> MainTabBarController? {
-        let keyWindow = UIApplication.shared.windows.first(where: \.isKeyWindow)
-        if let rootController = keyWindow?.rootViewController?.presentedViewController as? MainTabBarController {
-            return rootController
+    static func findViewControllerHelper<T>(base: UIViewController?) -> T? {
+        guard let vc = base?.presentedViewController else {
+            return nil
+        }
+        if let find = vc as? T {
+            return find
+        }
+        
+        if let nav = base as? UINavigationController {
+            return findViewControllerHelper(base: nav.topViewController)
+        } else if let tab = base as? UITabBarController, let selected = tab.selectedViewController {
+            return findViewControllerHelper(base: selected)
+        } else if let presented = base?.presentedViewController {
+            return findViewControllerHelper(base: presented)
         }
         return nil
+    }
+    
+    static func currentTabBarController() -> MainTabBarController? {
+        let keyWindow = UIApplication.shared.windows.first(where: \.isKeyWindow)
+        return findViewControllerHelper(base: keyWindow?.rootViewController)
     }
     
     static func tabbarHeight() -> CGFloat? {

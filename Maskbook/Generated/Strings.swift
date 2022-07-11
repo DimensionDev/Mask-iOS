@@ -352,6 +352,17 @@ enum L10n {
         }
       }
 
+      enum RedPacketNoWallet {
+        /// You can’t use Lucky Drop as there is no wallet. Please create, import or connect a wallet.
+        static var description: String {
+          return L10n.tr("Localizable", "Common.Alert.RedPacketNoWallet.Description")
+        }
+        /// There is no wallet
+        static var title: String {
+          return L10n.tr("Localizable", "Common.Alert.RedPacketNoWallet.Title")
+        }
+      }
+
       enum ScanFailed {
         /// Unable to recognize the QR code.
         static var description: String {
@@ -528,6 +539,10 @@ enum L10n {
       /// Confirm
       static var confirm: String {
         return L10n.tr("Localizable", "Common.Controls.Confirm")
+      }
+      /// Connect Wallet
+      static var connectWallet: String {
+        return L10n.tr("Localizable", "Common.Controls.ConnectWallet")
       }
       /// Create Wallet
       static var createWallet: String {

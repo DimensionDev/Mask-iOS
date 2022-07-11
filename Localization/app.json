@@ -153,11 +153,16 @@
       "file_service_file_too_large": {
         "title": "File size is too large",
         "description": "The file exceeds the size limit of 10.5 MB. "
+      },
+      "red_packet_no_wallet": {
+        "title": "There is no wallet",
+        "description": "You can’t use Lucky Drop as there is no wallet. Please create, import or connect a wallet."
       }
     },
     "controls": {
       "create_wallet": "Create Wallet",
       "import_wallet": "Import Wallet",
+      "connect_wallet": "Connect Wallet",
       "accept": "Accept",
       "enable": "Enable",
       "no_thanks": "No thanks",
