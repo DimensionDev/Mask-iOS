@@ -788,7 +788,7 @@
         "data_failed_to_fetch": "데이터 로드 다시 시도하세요.",
         "failed_to_download_file": "라모트 파일 다운로드 실패",
         "incorrect_backup_password": "잘못된 클라우드 백업 비밀번호",
-        "invalid_email_address": "잘못된 이메일 주소",
+        "invalid_email_address": "",
         "invalid_mobile_number": "잘못된 전화번호",
         "email_validationcode": "인증코드가 이메일로 발송되었습니다",
         "mobile_validationcode": "인증코드가 SMS로 발송되었습니다.",
