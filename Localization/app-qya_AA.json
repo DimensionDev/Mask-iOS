@@ -153,11 +153,16 @@
       "file_service_file_too_large": {
         "title": "crwdns17304:0crwdne17304:0",
         "description": "crwdns17306:0crwdne17306:0"
+      },
+      "red_packet_no_wallet": {
+        "title": "crwdns18168:0crwdne18168:0",
+        "description": "crwdns18170:0crwdne18170:0"
       }
     },
     "controls": {
       "create_wallet": "crwdns13444:0crwdne13444:0",
       "import_wallet": "crwdns13446:0crwdne13446:0",
+      "connect_wallet": "crwdns18172:0crwdne18172:0",
       "accept": "crwdns13448:0crwdne13448:0",
       "enable": "crwdns13450:0crwdne13450:0",
       "no_thanks": "crwdns13452:0crwdne13452:0",
