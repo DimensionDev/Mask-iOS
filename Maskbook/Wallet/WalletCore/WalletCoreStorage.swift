@@ -9,6 +9,7 @@
 import CoreData
 import CoreDataStack
 import WalletConnectSwift
+import web3swift
 
 class WalletCoreStorage {}
 
@@ -166,7 +167,9 @@ extension WalletCoreStorage {
                 try viewContext.saveOrRollback()
                 return false
             }
-            let account = Account(session: session, address: address)
+            // It coverts some abnomal address to standard. The address from metamask is all lowered case.
+            let checksumAddress = EthereumAddress.toChecksumAddress(address) ?? address
+            let account = Account(session: session, address: checksumAddress)
             viewContext.insert(account)
             try viewContext.saveOrRollback()
             return true

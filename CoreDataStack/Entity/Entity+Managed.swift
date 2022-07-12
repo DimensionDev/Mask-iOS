@@ -244,8 +244,8 @@ extension Token: Managed {
         networkId: Int64,
         symbol: String,
         account: String?) -> String {
-        return "\(chainId)-\(networkId)-\(symbol)-\(account ?? "")"
-    }
+            "\(chainId)-\(networkId)-\(symbol)-\(account ?? "")"
+        }
 }
 
 extension Collectible: Managed {
