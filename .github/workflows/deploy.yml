@@ -43,32 +43,32 @@ jobs:
       - name: Install Dependencies
         run: pod install --repo-update
 
-      - name: Restore Secrets
-        env: 
-          GOOGLE_SERVICE_PLIST: ${{ secrets.GOOGLE_SERVICE_PLIST }}
-          SECRECT_SWIFT: ${{ secrets.SECRECT_SWIFT }}
-          API_KEY_SWIFT: ${{ secrets.API_KEY_SWIFT }}
-        run: |
-          echo $GOOGLE_SERVICE_PLIST | base64 --decode > GoogleService-Info.plist
-          cd Maskbook/Resources
-          echo $SECRECT_SWIFT | base64 --decode > Secrets.swift
-          echo $API_KEY_SWIFT | base64 --decode > APIKey.swift
+      # - name: Restore Secrets
+      #   env: 
+      #     GOOGLE_SERVICE_PLIST: ${{ secrets.GOOGLE_SERVICE_PLIST }}
+      #     SECRECT_SWIFT: ${{ secrets.SECRECT_SWIFT }}
+      #     API_KEY_SWIFT: ${{ secrets.API_KEY_SWIFT }}
+      #   run: |
+      #     echo $GOOGLE_SERVICE_PLIST | base64 --decode > GoogleService-Info.plist
+      #     cd Maskbook/Resources
+      #     echo $SECRECT_SWIFT | base64 --decode > Secrets.swift
+      #     echo $API_KEY_SWIFT | base64 --decode > APIKey.swift
 
-      - name: Update Localization
-        run: ./update_localization.sh
+      # - name: Update Localization
+      #   run: ./update_localization.sh
     
-      - name: Build & upload iOS binary
-        run: bundle exec fastlane build_upload_testflight
-        env:
-          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
-          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
-          ASC_KEY: ${{ secrets.ASC_PRIVATE_KEY }}
-          KEYCHAIN_PATH: ~/Library/Keychains/signing_temp.keychain-db
+      # - name: Build & upload iOS binary
+      #   run: bundle exec fastlane build_upload_testflight
+      #   env:
+      #     ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+      #     ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+      #     ASC_KEY: ${{ secrets.ASC_PRIVATE_KEY }}
+      #     KEYCHAIN_PATH: ~/Library/Keychains/signing_temp.keychain-db
  
-      - name: Upload app-store ipa and dsyms to artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: app-store ipa & dsyms
-          path: |
-            ${{ github.workspace }}/mask-iOS.ipa
-            ${{ github.workspace }}/*.app.dSYM.zip
+      # - name: Upload app-store ipa and dsyms to artifacts
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: app-store ipa & dsyms
+      #     path: |
+      #       ${{ github.workspace }}/mask-iOS.ipa
+      #       ${{ github.workspace }}/*.app.dSYM.zip
