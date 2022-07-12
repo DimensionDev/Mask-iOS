@@ -178,7 +178,7 @@ PODS:
   - ZIPFoundation (0.9.13)
 
 DEPENDENCIES:
-  - Alamofire (~> 5.4)
+  - Alamofire (= 5.4.4)
   - BigInt (= 5.2)
   - BMPlayer (~> 1.3.0)
   - CombineEvent (= 1.0.0)
@@ -350,6 +350,6 @@ SPEC CHECKSUMS:
   WebExtension-Shim: 11b071466c53f42097291eb176cf9bcc5fb9b050
   ZIPFoundation: ae5b4b813d216d3bf0a148773267fff14bd51d37
 
-PODFILE CHECKSUM: bae47580e957e58678dc3bf5bbce5f5468767527
+PODFILE CHECKSUM: c4446a5e4ca36ae3241cf286f1cc33312f752c68
 
 COCOAPODS: 1.11.3

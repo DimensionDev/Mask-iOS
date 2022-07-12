@@ -25,7 +25,7 @@ target 'Maskbook' do
   pod 'KeychainAccess', '~> 4.2'
   
   pod 'EFQRCode', '~> 6.1.0'
-  pod 'Alamofire', '~> 5.4'
+  pod 'Alamofire', '5.4.4'
 
   # Press
   pod "EUMTouchPointView"
