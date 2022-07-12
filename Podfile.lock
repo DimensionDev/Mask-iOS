@@ -180,16 +180,16 @@ PODS:
 DEPENDENCIES:
   - Alamofire (= 5.4.4)
   - BigInt (= 5.2)
-  - BMPlayer (~> 1.3.0)
+  - BMPlayer (= 1.3.2)
   - CombineEvent (= 1.0.0)
   - CombineExt (= 1.7.0)
-  - EFQRCode (~> 6.1.0)
+  - EFQRCode (= 6.1.0)
   - EUMTouchPointView
   - Firebase/Analytics (= 9.2.0)
   - FLEX
   - IPFSClientKit
   - IQKeyboardManagerSwift (= 6.3.0)
-  - KeychainAccess (~> 4.2)
+  - KeychainAccess (= 4.2.2)
   - Kingfisher (= 7.2.0)
   - KMPageControl (= 0.0.3)
   - LookinServer
@@ -350,6 +350,6 @@ SPEC CHECKSUMS:
   WebExtension-Shim: 11b071466c53f42097291eb176cf9bcc5fb9b050
   ZIPFoundation: ae5b4b813d216d3bf0a148773267fff14bd51d37
 
-PODFILE CHECKSUM: c4446a5e4ca36ae3241cf286f1cc33312f752c68
+PODFILE CHECKSUM: e04530616649d29413a5f68f4bc11ad0da454482
 
 COCOAPODS: 1.11.3
