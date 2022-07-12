@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class PluginMetaShareViewModel: NSObject {
+final class PluginMetaShareViewModel: NSObject {
     @InjectedProvider(\.mainCoordinator)
     private var coordinator
 
