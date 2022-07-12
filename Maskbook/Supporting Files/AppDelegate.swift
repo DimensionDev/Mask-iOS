@@ -14,6 +14,7 @@ import IQKeyboardManagerSwift
 import os
 import UIKit
 import WebExtension_Shim
+import CoreDataStack
 
 #if TouchPreview
 import EUMTouchPointView
@@ -21,6 +22,7 @@ import EUMTouchPointView
 
 #if DEBUG
 import MaskWalletCore
+import CoreData
 #endif
 
 @UIApplicationMain
@@ -139,6 +141,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         FirebaseApp.configure()
+        cleanTokens()
         return true
     }
     
@@ -208,6 +211,41 @@ extension AppDelegate {
                 self?.userDefaultSettings.hasBackupPassword = hasBackupPassword
             }
             .store(in: &disposeBag)
+    }
+    
+    // If you connect to the wallet from imToken, metaMask separately, it may result in duplicate tokens, so let's clean up all the tokens first.
+    private func cleanTokens() {
+        guard !userDefaultSettings.hasCleanTokensForBugfix else {
+            return
+        }
+        
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Token")
+        let deleteRequest = NSBatchDeleteRequest(
+            fetchRequest: fetchRequest
+        )
+        deleteRequest.resultType = .resultTypeObjectIDs
+        
+        let context = AppContext.shared.coreDataStack.persistentContainer.viewContext
+        let batchDelete = try? context.execute(deleteRequest)
+            as? NSBatchDeleteResult
+
+        guard let deleteResult = batchDelete?.result
+            as? [NSManagedObjectID]
+            else { return }
+        
+        userDefaultSettings.hasCleanTokensForBugfix = true
+
+        let deletedObjects: [AnyHashable: Any] = [
+            NSDeletedObjectsKey: deleteResult
+        ]
+
+        // Merge the delete changes into the managed
+        // object context
+        NSManagedObjectContext.mergeChanges(
+            fromRemoteContextSave: deletedObjects,
+            into: [context]
+        )
+        log.debug("delete \(deleteResult.count) tokens", source: "clean tokens")
     }
 }
 
