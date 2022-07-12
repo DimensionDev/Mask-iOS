@@ -890,6 +890,28 @@ extension Coordinator {
     func dismissTopViewController(animated: Bool = true, completion: (() -> Void)? = nil) {
         UIApplication.getTopViewController()?.dismiss(animated: animated, completion: completion)
     }
+    
+    enum GoToBalanceFrom {
+        case labs
+        case composer
+    }
+    // goto view balance from two places: 1.labs 2.MessageComposeView
+    func goToBalance(from: GoToBalanceFrom) {
+        switch from {
+        case .labs:
+            MainTabBarController.currentTabBarController()?.selectedTab = .wallet
+            
+        case .composer:
+            guard let maskSocialVC = getMaskSocialViewController() else {
+                return
+            }
+            // trigger from `SocialViewControler`
+            self.present(
+                scene: .mainTab(selectedTab: .wallet),
+                transition: .modal(animated: true, adaptiveDelegate: maskSocialVC)
+            )
+        }
+    }
 }
 
 enum CoordinatorInjectKey: InjectValueKey {
