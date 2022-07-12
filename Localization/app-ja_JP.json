@@ -153,11 +153,16 @@
       "file_service_file_too_large": {
         "title": "",
         "description": ""
+      },
+      "red_packet_no_wallet": {
+        "title": "",
+        "description": ""
       }
     },
     "controls": {
       "create_wallet": "",
       "import_wallet": "",
+      "connect_wallet": "",
       "accept": "",
       "enable": "",
       "no_thanks": "",
