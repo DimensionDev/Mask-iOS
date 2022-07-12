@@ -50,16 +50,7 @@ final class FileServiceDetailViewController: BaseViewController {
         guard let _ = viewModel.item.content else {
             return
         }
-<<<<<<< Updated upstream
-        let controller = FileServiceSaveFileController(item: fileServiceItem.toSelectedFileItem())
-=======
         let controller = FileServiceSaveFileController(item: viewModel.item.toSelectedFileItem())
-        controller.dismissAction = {
-            UIApplication.getTopViewController()?
-                .makeToast(message: L10n.Common.Toast.saved,
-                           image: Asset.Images.Toast.check.image)
-        }
->>>>>>> Stashed changes
         coordinator.topViewController?.present(controller, animated: true)
     }
 }
