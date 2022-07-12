@@ -153,11 +153,16 @@
       "file_service_file_too_large": {
         "title": "文件尺寸过大",
         "description": "文件的大小超出10.5MB的限制 "
+      },
+      "red_packet_no_wallet": {
+        "title": "",
+        "description": ""
       }
     },
     "controls": {
       "create_wallet": "创建钱包",
       "import_wallet": "导入钱包",
+      "connect_wallet": "",
       "accept": "同意",
       "enable": "开启",
       "no_thanks": "不用了",
