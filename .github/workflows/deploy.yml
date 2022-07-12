@@ -33,7 +33,9 @@ jobs:
         with:
           version: latest
 
-      - uses: actions/cache@v3
+      - name: Cache Pods
+        id: cache-pods
+        uses: actions/cache@v3
         with: 
           path: Pods 
           key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
@@ -41,6 +43,7 @@ jobs:
             ${{ runner.os }}-pods-
 
       - name: Install Dependencies
+        if: steps.cache-pods.outputs.cache-hit != 'true'
         run: pod install --repo-update
 
       - name: Restore Secrets
