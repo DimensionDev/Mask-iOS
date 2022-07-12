@@ -2,7 +2,7 @@ import SwiftUI
 import UIKit
 
 final class FileServiceDetailViewController: BaseViewController {
-    let fileServiceItem: FileServiceDownloadItem
+    let viewModel: FileServiceDetailViewModel
 
     @InjectedProvider(\.mainCoordinator)
     private var coordinator
@@ -10,7 +10,7 @@ final class FileServiceDetailViewController: BaseViewController {
     private lazy var shareViewModel = PluginMetaShareViewModel()
 
     init(item: FileServiceDownloadItem) {
-        self.fileServiceItem = item
+        self.viewModel = FileServiceDetailViewModel(item: item)
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -21,9 +21,8 @@ final class FileServiceDetailViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = fileServiceItem.fileName
+        title = viewModel.item.fileName
 
-        let viewModel = FileServiceDetailViewModel(item: fileServiceItem)
         FileServiceDetailView(
             viewModel: viewModel,
             action: { [weak self] action in
@@ -39,7 +38,7 @@ final class FileServiceDetailViewController: BaseViewController {
 
     @MainActor
     func share() {
-        guard let shareItem = FileServiceUploadResult.from(fileServiceItem) else {
+        guard let shareItem = FileServiceUploadResult.from(viewModel.item) else {
             log.info("FileServiceUploadResult get a nil value")
             return
         }
@@ -48,10 +47,19 @@ final class FileServiceDetailViewController: BaseViewController {
 
     @MainActor
     func save() {
-        guard let _ = fileServiceItem.content else {
+        guard let _ = viewModel.item.content else {
             return
         }
+<<<<<<< Updated upstream
         let controller = FileServiceSaveFileController(item: fileServiceItem.toSelectedFileItem())
+=======
+        let controller = FileServiceSaveFileController(item: viewModel.item.toSelectedFileItem())
+        controller.dismissAction = {
+            UIApplication.getTopViewController()?
+                .makeToast(message: L10n.Common.Toast.saved,
+                           image: Asset.Images.Toast.check.image)
+        }
+>>>>>>> Stashed changes
         coordinator.topViewController?.present(controller, animated: true)
     }
 }
