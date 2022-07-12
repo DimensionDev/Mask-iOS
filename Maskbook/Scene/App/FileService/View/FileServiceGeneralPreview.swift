@@ -23,10 +23,13 @@ struct FileServiceGeneralPreview: View {
     var body: some View {
         VStack {
             switch item.specificFileType {
-            case .video:
+            case .video, .audio:
                 VideoPlayer(player: self.player)
                     .cornerRadius(8)
                     .frame(height: 450)
+                    .onDisappear {
+                        self.player?.pause()
+                    }
             case .image:
                 Image(uiImage: UIImage(data: item.data)!)
                     .resizable()
@@ -38,10 +41,6 @@ struct FileServiceGeneralPreview: View {
             case .application:
                 Image(Asset.Plugins.FileService.applicationPlaceholder)
                     .aspectRatio(contentMode: .fit)
-            case .audio:
-                VideoPlayer(player: self.player)
-                    .cornerRadius(8)
-                    .frame(height: 450)
             }
 
             Spacer().frame(height: 18)

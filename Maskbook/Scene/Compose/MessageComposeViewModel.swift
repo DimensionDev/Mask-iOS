@@ -63,6 +63,10 @@ final class MessageComposeViewModel: ObservableObject {
     func pluginAddClicked(plugin: PluginType) {
         switch plugin {
         case .luckyDrop:
+            guard userSetting.defaultAccountAddress?.isNotEmpty == true else {
+                self.alertNoWallet()
+                return
+            }
             mainCoordinator.present(scene: .luckyDrop(source: .composer, callback: { @MainActor [weak self] payload in
                 let meta = PluginMeta.redPacket(payload)
                 self?.pluginContents.append(meta)
@@ -72,6 +76,21 @@ final class MessageComposeViewModel: ObservableObject {
         default:
             print("message compose \(plugin) add did clicked")
         }
+    }
+    
+    private func alertNoWallet() {
+        let alertController = AlertController(
+            title: L10n.Common.Alert.RedPacketNoWallet.title,
+            message: L10n.Common.Alert.RedPacketNoWallet.description,
+            confirmButtonText: L10n.Common.Controls.connectWallet,
+            cancelButtonText: L10n.Common.Controls.cancel,
+            imageType: .error,
+            confirmButtonClicked:  { [weak self] _ in
+                self?.mainCoordinator.goToBalance(from: .composer)
+            })
+        mainCoordinator.present(
+            scene: .alertController(alertController: alertController),
+            transition: .alertController(completion: nil))
     }
 }
 

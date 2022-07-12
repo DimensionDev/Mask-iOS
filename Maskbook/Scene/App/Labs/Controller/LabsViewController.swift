@@ -42,6 +42,10 @@ final class LabsViewController: BaseViewController {
                 switch plugin {
                 case .transaction: self.handleTransak()
                 case .luckyDrop:
+                    guard self.viewModel.userSetting.defaultAccountAddress?.isNotEmpty == true else {
+                        self.alertNoWallet()
+                        return
+                    }
                     self.coordinator.present(
                         scene: .luckyDrop(source: .lab, callback: nil),
                         transition: .modal(animated: true)
@@ -64,6 +68,21 @@ final class LabsViewController: BaseViewController {
 
     fileprivate func configPluginSettings() {
         self.coordinator.present(scene: .pluginConfiguration, transition: .detail())
+    }
+    
+    private func alertNoWallet() {
+        let alertController = AlertController(
+            title: L10n.Common.Alert.RedPacketNoWallet.title,
+            message: L10n.Common.Alert.RedPacketNoWallet.description,
+            confirmButtonText: L10n.Common.Controls.connectWallet,
+            cancelButtonText: L10n.Common.Controls.cancel,
+            imageType: .error,
+            confirmButtonClicked:  { [weak self] _ in
+                self?.coordinator.goToBalance(from: .labs)
+            })
+        coordinator.present(
+            scene: .alertController(alertController: alertController),
+            transition: .alertController(completion: nil))
     }
 }
 

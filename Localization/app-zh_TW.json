@@ -153,11 +153,16 @@
       "file_service_file_too_large": {
         "title": "",
         "description": ""
+      },
+      "red_packet_no_wallet": {
+        "title": "",
+        "description": ""
       }
     },
     "controls": {
       "create_wallet": "建立錢包",
       "import_wallet": "匯入錢包",
+      "connect_wallet": "",
       "accept": "",
       "enable": "",
       "no_thanks": "不了，謝謝",
