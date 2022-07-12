@@ -249,7 +249,9 @@ struct FileServiceView: View {
         .padding(.bottom, viewModel.uploadingItems.isEmpty ? 0 : proxy.safeAreaInsets.bottom)
         .background(cardGradient)
         .overlay(
-            uploadButton,
+            uploadButton
+                .offset(y: viewModel.uploadingItems.isEmpty ? -20 : 0)
+            ,
             alignment: .topTrailing
         )
     }
