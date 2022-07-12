@@ -1,7 +1,7 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[8145],{
 
-/***/ 86610:
+/***/ 27466:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -10,15 +10,15 @@
 /* harmony export */   "wT": () => (/* binding */ SnackbarProvider)
 /* harmony export */ });
 /* unused harmony export withSnackbar */
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(86248);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(93463);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(58757);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(26736);
 /* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(25789);
-/* harmony import */ var _mui_material_Slide__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(99974);
-/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(32831);
-/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(58459);
-/* harmony import */ var _mui_material_Collapse__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(92760);
-/* harmony import */ var _mui_material_SvgIcon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(73160);
-/* harmony import */ var _mui_material_ClickAwayListener__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(22381);
+/* harmony import */ var _mui_material_Slide__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(19460);
+/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(35878);
+/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(92756);
+/* harmony import */ var _mui_material_Collapse__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(43857);
+/* harmony import */ var _mui_material_SvgIcon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(8461);
+/* harmony import */ var _mui_material_ClickAwayListener__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(74388);
 /* harmony import */ var hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(10063);
 /* harmony import */ var hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_2__);
 

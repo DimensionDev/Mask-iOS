@@ -7,7 +7,7 @@
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AuctionProgram = void 0;
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const mpl_core_1 = __webpack_require__(78654);
 class AuctionProgram extends mpl_core_1.Program {
 }
@@ -38,7 +38,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Auction = exports.AuctionData = exports.PriceFloor = exports.BidState = exports.Bid = exports.PriceFloorType = exports.BidStateType = exports.AuctionState = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const bn_js_1 = __importDefault(__webpack_require__(28891));
 const buffer_1 = __webpack_require__(15313);
 const AuctionProgram_1 = __webpack_require__(70731);
@@ -232,7 +232,7 @@ exports.AuctionExtended = exports.AuctionDataExtended = void 0;
 const mpl_core_1 = __webpack_require__(78654);
 const AuctionProgram_1 = __webpack_require__(70731);
 const buffer_1 = __webpack_require__(15313);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 class AuctionDataExtended extends mpl_core_1.Borsh.Data {
 }
 exports.AuctionDataExtended = AuctionDataExtended;
@@ -279,7 +279,7 @@ AuctionExtended.DATA_SIZE = 8 + 9 + 2 + 200;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.BidderMetadata = exports.BidderMetadataData = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const AuctionProgram_1 = __webpack_require__(70731);
 const buffer_1 = __webpack_require__(15313);
 class BidderMetadataData extends mpl_core_1.Borsh.Data {
@@ -330,7 +330,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.BidderPot = exports.BidderPotData = void 0;
 const mpl_core_1 = __webpack_require__(78654);
 const AuctionProgram_1 = __webpack_require__(70731);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const buffer_1 = __webpack_require__(15313);
 class BidderPotData extends mpl_core_1.Borsh.Data {
 }
@@ -403,7 +403,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CancelBid = exports.CancelBidArgs = void 0;
 const mpl_core_1 = __webpack_require__(78654);
 const spl_token_1 = __webpack_require__(23434);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const AuctionProgram_1 = __webpack_require__(70731);
 class CancelBidArgs extends mpl_core_1.Borsh.Data {
     constructor() {
@@ -501,7 +501,7 @@ exports.CancelBid = CancelBid;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CreateAuction = exports.CreateAuctionArgs = exports.WinnerLimit = exports.WinnerLimitType = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const AuctionProgram_1 = __webpack_require__(70731);
 const Auction_1 = __webpack_require__(11164);
 var WinnerLimitType;
@@ -590,7 +590,7 @@ var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CreateAuctionV2 = exports.CreateAuctionV2Args = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const AuctionProgram_1 = __webpack_require__(70731);
 const Auction_1 = __webpack_require__(11164);
 const CreateAuction_1 = __webpack_require__(88754);
@@ -670,7 +670,7 @@ exports.CreateAuctionV2 = CreateAuctionV2;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PlaceBid = exports.PlaceBidArgs = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const AuctionProgram_1 = __webpack_require__(70731);
 const spl_token_1 = __webpack_require__(23434);
 class PlaceBidArgs extends mpl_core_1.Borsh.Data {
@@ -781,7 +781,7 @@ exports.PlaceBid = PlaceBid;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SetAuctionAuthority = exports.SetAuctionAuthorityArgs = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const AuctionProgram_1 = __webpack_require__(70731);
 class SetAuctionAuthorityArgs extends mpl_core_1.Borsh.Data {
     constructor() {

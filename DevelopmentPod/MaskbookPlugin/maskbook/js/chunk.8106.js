@@ -413,7 +413,7 @@ function hexDouble(num) {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 const colorString = __webpack_require__(85999);
-const convert = __webpack_require__(99232);
+const convert = __webpack_require__(60398);
 
 const skippedModels = [
 	// To be honest, I don't really feel like keyword belongs in color convert, but eh.

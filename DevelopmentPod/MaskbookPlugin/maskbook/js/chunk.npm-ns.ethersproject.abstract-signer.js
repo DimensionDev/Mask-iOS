@@ -14,8 +14,8 @@ __webpack_require__.d(__webpack_exports__, {
 
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+properties@5.4.0/node_modules/@ethersproject/properties/lib.esm/index.js + 1 modules
 var lib_esm = __webpack_require__(27930);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+logger@5.4.0/node_modules/@ethersproject/logger/lib.esm/index.js + 1 modules
-var logger_lib_esm = __webpack_require__(281);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+logger@5.6.0/node_modules/@ethersproject/logger/lib.esm/index.js + 1 modules
+var logger_lib_esm = __webpack_require__(58450);
 ;// CONCATENATED MODULE: ../../node_modules/.pnpm/@ethersproject+abstract-signer@5.4.0/node_modules/@ethersproject/abstract-signer/lib.esm/_version.js
 const version = "abstract-signer/5.4.0";
 //# sourceMappingURL=_version.js.map
@@ -337,8 +337,8 @@ __webpack_require__.d(__webpack_exports__, {
 
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+properties@5.4.0/node_modules/@ethersproject/properties/lib.esm/index.js + 1 modules
 var lib_esm = __webpack_require__(27930);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+logger@5.5.0/node_modules/@ethersproject/logger/lib.esm/index.js + 1 modules
-var logger_lib_esm = __webpack_require__(89930);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+logger@5.6.0/node_modules/@ethersproject/logger/lib.esm/index.js + 1 modules
+var logger_lib_esm = __webpack_require__(58450);
 ;// CONCATENATED MODULE: ../../node_modules/.pnpm/@ethersproject+abstract-signer@5.4.1/node_modules/@ethersproject/abstract-signer/lib.esm/_version.js
 const version = "abstract-signer/5.4.1";
 //# sourceMappingURL=_version.js.map

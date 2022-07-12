@@ -1,18 +1,18 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[2752],{
 
-/***/ 39080:
+/***/ 44738:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "t7": () => (/* binding */ FixedSizeList)
 /* harmony export */ });
-/* unused harmony exports VariableSizeGrid, VariableSizeList, FixedSizeGrid, areEqual, shouldComponentUpdate */
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(45788);
-/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(68944);
-/* harmony import */ var _babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(32248);
+/* unused harmony exports FixedSizeGrid, VariableSizeGrid, VariableSizeList, areEqual, shouldComponentUpdate */
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(51911);
+/* harmony import */ var _babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1546);
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(68131);
 /* harmony import */ var memoize_one__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(36117);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(86248);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(58757);
 
 
 
@@ -131,7 +131,7 @@ var devWarningsTagName = null;
 if (false) {}
 
 function createGridComponent(_ref2) {
-  var _class, _temp;
+  var _class;
 
   var getColumnOffset = _ref2.getColumnOffset,
       getColumnStartIndexForOffset = _ref2.getColumnStartIndexForOffset,
@@ -148,9 +148,7 @@ function createGridComponent(_ref2) {
       initInstanceProps = _ref2.initInstanceProps,
       shouldResetStyleCacheOnItemSizeChange = _ref2.shouldResetStyleCacheOnItemSizeChange,
       validateProps = _ref2.validateProps;
-  return _temp = _class =
-  /*#__PURE__*/
-  function (_PureComponent) {
+  return _class = /*#__PURE__*/function (_PureComponent) {
     (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)(Grid, _PureComponent);
 
     // Always use explicit constructor for React components.
@@ -160,11 +158,11 @@ function createGridComponent(_ref2) {
       var _this;
 
       _this = _PureComponent.call(this, props) || this;
-      _this._instanceProps = initInstanceProps(_this.props, (0,_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)((0,_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(_this)));
+      _this._instanceProps = initInstanceProps(_this.props, (0,_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(_this));
       _this._resetIsScrollingTimeoutId = null;
       _this._outerRef = void 0;
       _this.state = {
-        instance: (0,_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)((0,_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(_this)),
+        instance: (0,_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(_this),
         isScrolling: false,
         horizontalScrollDirection: 'forward',
         scrollLeft: typeof _this.props.initialScrollLeft === 'number' ? _this.props.initialScrollLeft : 0,
@@ -573,11 +571,11 @@ function createGridComponent(_ref2) {
 
         this._callOnScroll(_scrollLeft, _scrollTop, _horizontalScrollDirection, _verticalScrollDirection, _scrollUpdateWasRequested);
       }
-    }; // Lazily create and cache item styles while scrolling,
+    } // Lazily create and cache item styles while scrolling,
     // So that pure component sCU will prevent re-renders.
     // We maintain this cache, and pass a style prop rather than index,
     // So that List can clear cached styles and force item re-render if necessary.
-
+    ;
 
     _proto._getHorizontalRangeToRender = function _getHorizontalRangeToRender() {
       var _this$props6 = this.props,
@@ -636,7 +634,7 @@ function createGridComponent(_ref2) {
     direction: 'ltr',
     itemData: undefined,
     useIsScrolling: false
-  }, _temp;
+  }, _class;
 }
 
 var validateSharedProps = function validateSharedProps(_ref5, _ref6) {
@@ -841,9 +839,7 @@ var getOffsetForIndexAndAlignment = function getOffsetForIndexAndAlignment(itemT
   }
 };
 
-var VariableSizeGrid =
-/*#__PURE__*/
-createGridComponent({
+var VariableSizeGrid = /*#__PURE__*/createGridComponent({
   getColumnOffset: function getColumnOffset(props, index, instanceProps) {
     return getItemMetadata('column', props, index, instanceProps).offset;
   },
@@ -985,7 +981,7 @@ var devWarningsTagName$1 = null;
 if (false) {}
 
 function createListComponent(_ref) {
-  var _class, _temp;
+  var _class;
 
   var getItemOffset = _ref.getItemOffset,
       getEstimatedTotalSize = _ref.getEstimatedTotalSize,
@@ -996,9 +992,7 @@ function createListComponent(_ref) {
       initInstanceProps = _ref.initInstanceProps,
       shouldResetStyleCacheOnItemSizeChange = _ref.shouldResetStyleCacheOnItemSizeChange,
       validateProps = _ref.validateProps;
-  return _temp = _class =
-  /*#__PURE__*/
-  function (_PureComponent) {
+  return _class = /*#__PURE__*/function (_PureComponent) {
     (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)(List, _PureComponent);
 
     // Always use explicit constructor for React components.
@@ -1008,11 +1002,11 @@ function createListComponent(_ref) {
       var _this;
 
       _this = _PureComponent.call(this, props) || this;
-      _this._instanceProps = initInstanceProps(_this.props, (0,_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)((0,_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(_this)));
+      _this._instanceProps = initInstanceProps(_this.props, (0,_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(_this));
       _this._outerRef = void 0;
       _this._resetIsScrollingTimeoutId = null;
       _this.state = {
-        instance: (0,_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)((0,_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(_this)),
+        instance: (0,_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(_this),
         isScrolling: false,
         scrollDirection: 'forward',
         scrollOffset: typeof _this.props.initialScrollOffset === 'number' ? _this.props.initialScrollOffset : 0,
@@ -1371,11 +1365,11 @@ function createListComponent(_ref) {
 
         this._callOnScroll(_scrollDirection, _scrollOffset, _scrollUpdateWasRequested);
       }
-    }; // Lazily create and cache item styles while scrolling,
+    } // Lazily create and cache item styles while scrolling,
     // So that pure component sCU will prevent re-renders.
     // We maintain this cache, and pass a style prop rather than index,
     // So that List can clear cached styles and force item re-render if necessary.
-
+    ;
 
     _proto._getRangeToRender = function _getRangeToRender() {
       var _this$props5 = this.props,
@@ -1406,7 +1400,7 @@ function createListComponent(_ref) {
     layout: 'vertical',
     overscanCount: 2,
     useIsScrolling: false
-  }, _temp;
+  }, _class;
 } // NOTE: I considered further wrapping individual items with a pure ListItem component.
 // This would avoid ever calling the render function for the same index more than once,
 // But it would also add the overhead of a lot of components/fibers.
@@ -1528,9 +1522,7 @@ var getEstimatedTotalSize = function getEstimatedTotalSize(_ref2, _ref3) {
   return totalSizeOfMeasuredItems + totalSizeOfUnmeasuredItems;
 };
 
-var VariableSizeList =
-/*#__PURE__*/
-createListComponent({
+var VariableSizeList = /*#__PURE__*/createListComponent({
   getItemOffset: function getItemOffset(props, index, instanceProps) {
     return getItemMetadata$1(props, index, instanceProps).offset;
   },
@@ -1643,9 +1635,7 @@ createListComponent({
   }
 });
 
-var FixedSizeGrid =
-/*#__PURE__*/
-createGridComponent({
+var FixedSizeGrid = /*#__PURE__*/createGridComponent({
   getColumnOffset: function getColumnOffset(_ref, index) {
     var columnWidth = _ref.columnWidth;
     return index * columnWidth;
@@ -1815,9 +1805,7 @@ createGridComponent({
   }
 });
 
-var FixedSizeList =
-/*#__PURE__*/
-createListComponent({
+var FixedSizeList = /*#__PURE__*/createListComponent({
   getItemOffset: function getItemOffset(_ref, index) {
     var itemSize = _ref.itemSize;
     return index * itemSize;
@@ -1935,15 +1923,17 @@ function shallowDiffers(prev, next) {
   return false;
 }
 
+var _excluded = (/* unused pure expression or super */ null && (["style"])),
+    _excluded2 = (/* unused pure expression or super */ null && (["style"]));
 // It knows to compare individual style props and ignore the wrapper object.
 // See https://reactjs.org/docs/react-api.html#reactmemo
 
 function areEqual(prevProps, nextProps) {
   var prevStyle = prevProps.style,
-      prevRest = _objectWithoutPropertiesLoose(prevProps, ["style"]);
+      prevRest = _objectWithoutPropertiesLoose(prevProps, _excluded);
 
   var nextStyle = nextProps.style,
-      nextRest = _objectWithoutPropertiesLoose(nextProps, ["style"]);
+      nextRest = _objectWithoutPropertiesLoose(nextProps, _excluded2);
 
   return !shallowDiffers(prevStyle, nextStyle) && !shallowDiffers(prevRest, nextRest);
 }

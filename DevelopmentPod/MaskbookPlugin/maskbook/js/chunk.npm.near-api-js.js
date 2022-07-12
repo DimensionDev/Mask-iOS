@@ -2806,7 +2806,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getErrorTypeFromErrorMessage = exports.formatError = exports.parseResultError = exports.parseRpcError = exports.ServerError = void 0;
-const mustache_1 = __importDefault(__webpack_require__(58379));
+const mustache_1 = __importDefault(__webpack_require__(28881));
 const rpc_error_schema_json_1 = __importDefault(__webpack_require__(32522));
 const error_messages_json_1 = __importDefault(__webpack_require__(91562));
 const common_index_1 = __webpack_require__(58972);

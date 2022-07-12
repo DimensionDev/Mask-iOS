@@ -620,15 +620,15 @@ module.exports = ABI
 
 /***/ }),
 
-/***/ 60843:
+/***/ 10734:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__(21212)
+module.exports = __webpack_require__(67032)
 
 
 /***/ }),
 
-/***/ 21212:
+/***/ 67032:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];

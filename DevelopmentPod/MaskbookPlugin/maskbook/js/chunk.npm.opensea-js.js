@@ -1,7 +1,7 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[8331],{
 
-/***/ 49743:
+/***/ 95664:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -12,7 +12,7 @@ exports.CanonicalWETH = [{ 'constant': true, 'inputs': [], 'name': 'name', 'outp
 
 /***/ }),
 
-/***/ 18947:
+/***/ 40322:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -23,7 +23,7 @@ exports.CheezeWizardsBasicTournament = [{ "constant": true, "inputs": [], "name"
 
 /***/ }),
 
-/***/ 92697:
+/***/ 10856:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -34,7 +34,7 @@ exports.DecentralandEstates = [{ "constant": true, "inputs": [{ "name": "_interf
 
 /***/ }),
 
-/***/ 12851:
+/***/ 89230:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -2390,7 +2390,7 @@ exports.ERC1155 = [
 
 /***/ }),
 
-/***/ 70990:
+/***/ 29200:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -2401,7 +2401,7 @@ exports.ERC20 = [{ 'constant': true, 'inputs': [], 'name': 'name', 'outputs': [{
 
 /***/ }),
 
-/***/ 67400:
+/***/ 6398:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -2881,7 +2881,7 @@ exports.ERC721 = [
 
 /***/ }),
 
-/***/ 62959:
+/***/ 91130:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -2893,7 +2893,7 @@ exports.proxyAssertABI = { 'constant': false, 'inputs': [{ 'name': 'dest', 'type
 
 /***/ }),
 
-/***/ 64794:
+/***/ 66776:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -2904,7 +2904,7 @@ exports.StaticCheckCheezeWizards = [{ "constant": true, "inputs": [{ "name": "_w
 
 /***/ }),
 
-/***/ 13005:
+/***/ 31784:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -2915,7 +2915,7 @@ exports.StaticCheckDecentralandEstates = [{ "constant": false, "inputs": [{ "nam
 
 /***/ }),
 
-/***/ 37332:
+/***/ 59906:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -2926,7 +2926,7 @@ exports.StaticCheckTxOrigin = [{ "constant": true, "inputs": [], "name": "succee
 
 /***/ }),
 
-/***/ 72013:
+/***/ 83604:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -2937,7 +2937,7 @@ exports.UniswapExchange = [{ "name": "TokenPurchase", "inputs": [{ "type": "addr
 
 /***/ }),
 
-/***/ 76213:
+/***/ 11341:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -2948,7 +2948,7 @@ exports.UniswapFactory = [{ "name": "NewExchange", "inputs": [{ "type": "address
 
 /***/ }),
 
-/***/ 24522:
+/***/ 31156:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -2959,7 +2959,7 @@ exports.WrappedNFT = [{ "constant": false, "inputs": [{ "internalType": "uint256
 
 /***/ }),
 
-/***/ 38576:
+/***/ 9231:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -2970,7 +2970,7 @@ exports.WrappedNFTFactory = [{ "constant": true, "inputs": [], "name": "wyvernTo
 
 /***/ }),
 
-/***/ 58318:
+/***/ 79451:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -2981,7 +2981,7 @@ exports.WrappedNFTLiquidationProxy = [{ "constant": false, "inputs": [{ "name": 
 
 /***/ }),
 
-/***/ 73647:
+/***/ 60208:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -3036,9 +3036,9 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.OpenSeaAPI = void 0;
 __webpack_require__(15737);
 var QueryString = __webpack_require__(83336);
-var types_1 = __webpack_require__(95356);
-var utils_1 = __webpack_require__(66545);
-var constants_1 = __webpack_require__(56947);
+var types_1 = __webpack_require__(24860);
+var utils_1 = __webpack_require__(72742);
+var constants_1 = __webpack_require__(62550);
 var OpenSeaAPI = /** @class */ (function () {
     /**
      * Create an instance of the OpenSea API
@@ -3468,13 +3468,13 @@ function _throwOrContinue(error, retries) {
 
 /***/ }),
 
-/***/ 56947:
+/***/ 62550:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.API_PATH = exports.ORDERBOOK_PATH = exports.RINKEBY_PROVIDER_URL = exports.MAINNET_PROVIDER_URL = exports.RPC_URL_PATH = exports.SITE_HOST_RINKEBY = exports.SITE_HOST_MAINNET = exports.API_BASE_RINKEBY = exports.API_BASE_MAINNET = exports.API_VERSION = exports.ORDERBOOK_VERSION = exports.SELL_ORDER_BATCH_SIZE = exports.ORDER_MATCHING_LATENCY_SECONDS = exports.MIN_EXPIRATION_SECONDS = exports.DEFAULT_MAX_BOUNTY = exports.OPENSEA_SELLER_BOUNTY_BASIS_POINTS = exports.DEFAULT_SELLER_FEE_BASIS_POINTS = exports.DEFAULT_BUYER_FEE_BASIS_POINTS = exports.STATIC_CALL_DECENTRALAND_ESTATES_ADDRESS = exports.STATIC_CALL_CHEEZE_WIZARDS_RINKEBY_ADDRESS = exports.STATIC_CALL_CHEEZE_WIZARDS_ADDRESS = exports.STATIC_CALL_TX_ORIGIN_RINKEBY_ADDRESS = exports.STATIC_CALL_TX_ORIGIN_ADDRESS = exports.DECENTRALAND_ESTATE_ADDRESS = exports.CHEEZE_WIZARDS_BASIC_TOURNAMENT_RINKEBY_ADDRESS = exports.CHEEZE_WIZARDS_BASIC_TOURNAMENT_ADDRESS = exports.CHEEZE_WIZARDS_GUILD_RINKEBY_ADDRESS = exports.CHEEZE_WIZARDS_GUILD_ADDRESS = exports.DEFAULT_WRAPPED_NFT_LIQUIDATION_UNISWAP_SLIPPAGE_IN_BASIS_POINTS = exports.UNISWAP_FACTORY_ADDRESS_RINKEBY = exports.UNISWAP_FACTORY_ADDRESS_MAINNET = exports.WRAPPED_NFT_LIQUIDATION_PROXY_ADDRESS_RINKEBY = exports.WRAPPED_NFT_LIQUIDATION_PROXY_ADDRESS_MAINNET = exports.WRAPPED_NFT_FACTORY_ADDRESS_RINKEBY = exports.WRAPPED_NFT_FACTORY_ADDRESS_MAINNET = exports.CK_RINKEBY_ADDRESS = exports.CK_ADDRESS = exports.ENJIN_LEGACY_ADDRESS = exports.ENJIN_ADDRESS = exports.MANA_ADDRESS = exports.ENJIN_COIN_ADDRESS = exports.WYVERN_EXCHANGE_ADDRESS_RINKEBY = exports.WYVERN_EXCHANGE_ADDRESS_MAINNET = exports.MAX_UINT_256 = exports.INVERSE_BASIS_POINT = exports.DEP_INFURA_KEY = exports.OPENSEA_FEE_RECIPIENT = exports.NULL_BLOCK_HASH = exports.NULL_ADDRESS = exports.DEFAULT_GAS_INCREASE_FACTOR = void 0;
-var wyvern_js_1 = __webpack_require__(20544);
+var wyvern_js_1 = __webpack_require__(98306);
 exports.DEFAULT_GAS_INCREASE_FACTOR = 1.01;
 exports.NULL_ADDRESS = wyvern_js_1.WyvernProtocol.NULL_ADDRESS;
 exports.NULL_BLOCK_HASH = '0x0000000000000000000000000000000000000000000000000000000000000000';
@@ -3529,7 +3529,7 @@ exports.API_PATH = "/api/v" + exports.ORDERBOOK_VERSION;
 
 /***/ }),
 
-/***/ 98572:
+/***/ 46604:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -3558,39 +3558,39 @@ exports.event = event;
 exports.DECENTRALAND_AUCTION_CONFIG = {
     '1': '0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d',
 };
-var ERC20_1 = __webpack_require__(70990);
+var ERC20_1 = __webpack_require__(29200);
 Object.defineProperty(exports, "ERC20", ({ enumerable: true, get: function () { return ERC20_1.ERC20; } }));
-var ERC721v3_1 = __webpack_require__(67400);
+var ERC721v3_1 = __webpack_require__(6398);
 Object.defineProperty(exports, "ERC721", ({ enumerable: true, get: function () { return ERC721v3_1.ERC721; } }));
-var ERC1155_1 = __webpack_require__(12851);
+var ERC1155_1 = __webpack_require__(89230);
 Object.defineProperty(exports, "ERC1155", ({ enumerable: true, get: function () { return ERC1155_1.ERC1155; } }));
-var StaticCheckTxOrigin_1 = __webpack_require__(37332);
+var StaticCheckTxOrigin_1 = __webpack_require__(59906);
 Object.defineProperty(exports, "StaticCheckTxOrigin", ({ enumerable: true, get: function () { return StaticCheckTxOrigin_1.StaticCheckTxOrigin; } }));
-var StaticCheckCheezeWizards_1 = __webpack_require__(64794);
+var StaticCheckCheezeWizards_1 = __webpack_require__(66776);
 Object.defineProperty(exports, "StaticCheckCheezeWizards", ({ enumerable: true, get: function () { return StaticCheckCheezeWizards_1.StaticCheckCheezeWizards; } }));
-var StaticCheckDecentralandEstates_1 = __webpack_require__(13005);
+var StaticCheckDecentralandEstates_1 = __webpack_require__(31784);
 Object.defineProperty(exports, "StaticCheckDecentralandEstates", ({ enumerable: true, get: function () { return StaticCheckDecentralandEstates_1.StaticCheckDecentralandEstates; } }));
-var CheezeWizardsBasicTournament_1 = __webpack_require__(18947);
+var CheezeWizardsBasicTournament_1 = __webpack_require__(40322);
 Object.defineProperty(exports, "CheezeWizardsBasicTournament", ({ enumerable: true, get: function () { return CheezeWizardsBasicTournament_1.CheezeWizardsBasicTournament; } }));
-var DecentralandEstates_1 = __webpack_require__(92697);
+var DecentralandEstates_1 = __webpack_require__(10856);
 Object.defineProperty(exports, "DecentralandEstates", ({ enumerable: true, get: function () { return DecentralandEstates_1.DecentralandEstates; } }));
-var CanonicalWETH_1 = __webpack_require__(49743);
+var CanonicalWETH_1 = __webpack_require__(95664);
 Object.defineProperty(exports, "CanonicalWETH", ({ enumerable: true, get: function () { return CanonicalWETH_1.CanonicalWETH; } }));
-var WrappedNFT_1 = __webpack_require__(24522);
+var WrappedNFT_1 = __webpack_require__(31156);
 Object.defineProperty(exports, "WrappedNFT", ({ enumerable: true, get: function () { return WrappedNFT_1.WrappedNFT; } }));
-var WrappedNFTFactory_1 = __webpack_require__(38576);
+var WrappedNFTFactory_1 = __webpack_require__(9231);
 Object.defineProperty(exports, "WrappedNFTFactory", ({ enumerable: true, get: function () { return WrappedNFTFactory_1.WrappedNFTFactory; } }));
-var WrappedNFTLiquidationProxy_1 = __webpack_require__(58318);
+var WrappedNFTLiquidationProxy_1 = __webpack_require__(79451);
 Object.defineProperty(exports, "WrappedNFTLiquidationProxy", ({ enumerable: true, get: function () { return WrappedNFTLiquidationProxy_1.WrappedNFTLiquidationProxy; } }));
-var UniswapFactory_1 = __webpack_require__(76213);
+var UniswapFactory_1 = __webpack_require__(11341);
 Object.defineProperty(exports, "UniswapFactory", ({ enumerable: true, get: function () { return UniswapFactory_1.UniswapFactory; } }));
-var UniswapExchange_1 = __webpack_require__(72013);
+var UniswapExchange_1 = __webpack_require__(83604);
 Object.defineProperty(exports, "UniswapExchange", ({ enumerable: true, get: function () { return UniswapExchange_1.UniswapExchange; } }));
 //# sourceMappingURL=contracts.js.map
 
 /***/ }),
 
-/***/ 99129:
+/***/ 83526:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -3632,7 +3632,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.requireOrderCalldataCanMatch = exports.requireOrdersCanMatch = exports.MAX_ERROR_LENGTH = void 0;
-var constants_1 = __webpack_require__(56947);
+var constants_1 = __webpack_require__(62550);
 exports.MAX_ERROR_LENGTH = 120;
 /**
  * This file reproduces Solidity methods to make debugging easier
@@ -3739,25 +3739,25 @@ exports.requireOrderCalldataCanMatch = requireOrderCalldataCanMatch;
 
 /***/ }),
 
-/***/ 47906:
+/***/ 13979:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 var __webpack_unused_export__;
 
 __webpack_unused_export__ = ({ value: true });
 exports.Zc = __webpack_unused_export__ = __webpack_unused_export__ = exports.I2 = __webpack_unused_export__ = __webpack_unused_export__ = __webpack_unused_export__ = __webpack_unused_export__ = __webpack_unused_export__ = __webpack_unused_export__ = __webpack_unused_export__ = __webpack_unused_export__ = __webpack_unused_export__ = __webpack_unused_export__ = void 0;
-var seaport_1 = __webpack_require__(54502);
+var seaport_1 = __webpack_require__(35871);
 Object.defineProperty(exports, "I2", ({ enumerable: true, get: function () { return seaport_1.OpenSeaPort; } }));
-var api_1 = __webpack_require__(73647);
+var api_1 = __webpack_require__(60208);
 __webpack_unused_export__ = ({ enumerable: true, get: function () { return api_1.OpenSeaAPI; } });
-var types_1 = __webpack_require__(95356);
+var types_1 = __webpack_require__(24860);
 Object.defineProperty(exports, "Zc", ({ enumerable: true, get: function () { return types_1.Network; } }));
 __webpack_unused_export__ = ({ enumerable: true, get: function () { return types_1.EventType; } });
-var utils_1 = __webpack_require__(66545);
+var utils_1 = __webpack_require__(72742);
 __webpack_unused_export__ = ({ enumerable: true, get: function () { return utils_1.orderToJSON; } });
 __webpack_unused_export__ = ({ enumerable: true, get: function () { return utils_1.orderFromJSON; } });
 __webpack_unused_export__ = ({ enumerable: true, get: function () { return utils_1.WyvernProtocol; } });
-var schema_1 = __webpack_require__(21097);
+var schema_1 = __webpack_require__(87888);
 __webpack_unused_export__ = ({ enumerable: true, get: function () { return schema_1.encodeCall; } });
 __webpack_unused_export__ = ({ enumerable: true, get: function () { return schema_1.encodeSell; } });
 __webpack_unused_export__ = ({ enumerable: true, get: function () { return schema_1.encodeAtomicizedBuy; } });
@@ -3769,7 +3769,7 @@ __webpack_unused_export__ = ({ enumerable: true, get: function () { return schem
 
 /***/ }),
 
-/***/ 54502:
+/***/ 35871:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -3832,15 +3832,15 @@ var ethereumjs_util_1 = __webpack_require__(95906);
 var fbemitter_1 = __webpack_require__(68192);
 var _ = __webpack_require__(39378);
 var Web3 = __webpack_require__(69906);
-var wyvern_js_1 = __webpack_require__(20544);
-var WyvernSchemas = __webpack_require__(97042);
-var api_1 = __webpack_require__(73647);
-var constants_1 = __webpack_require__(56947);
-var contracts_1 = __webpack_require__(98572);
-var debugging_1 = __webpack_require__(99129);
-var types_1 = __webpack_require__(95356);
-var schema_1 = __webpack_require__(21097);
-var utils_1 = __webpack_require__(66545);
+var wyvern_js_1 = __webpack_require__(98306);
+var WyvernSchemas = __webpack_require__(58630);
+var api_1 = __webpack_require__(60208);
+var constants_1 = __webpack_require__(62550);
+var contracts_1 = __webpack_require__(46604);
+var debugging_1 = __webpack_require__(83526);
+var types_1 = __webpack_require__(24860);
+var schema_1 = __webpack_require__(87888);
+var utils_1 = __webpack_require__(72742);
 var OpenSeaPort = /** @class */ (function () {
     /**
      * Your very own seaport.
@@ -6964,13 +6964,13 @@ exports.OpenSeaPort = OpenSeaPort;
 
 /***/ }),
 
-/***/ 95356:
+/***/ 24860:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AssetEventType = exports.AuctionType = exports.WyvernAssetLocation = exports.TokenStandardVersion = exports.WyvernSchemaName = exports.AssetContractType = exports.SaleKind = exports.FeeMethod = exports.OrderSide = exports.EventType = exports.HowToCall = exports.Network = void 0;
-var types_1 = __webpack_require__(26126);
+var types_1 = __webpack_require__(94786);
 Object.defineProperty(exports, "Network", ({ enumerable: true, get: function () { return types_1.Network; } }));
 Object.defineProperty(exports, "HowToCall", ({ enumerable: true, get: function () { return types_1.HowToCall; } }));
 /**
@@ -7126,7 +7126,7 @@ var AssetEventType;
 
 /***/ }),
 
-/***/ 21097:
+/***/ 87888:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
@@ -7134,13 +7134,13 @@ var AssetEventType;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.encodeProxyCall = exports.encodeTransferCall = exports.encodeAtomicizedTransfer = exports.encodeDefaultCall = exports.encodeBuy = exports.encodeAtomicizedBuy = exports.encodeAtomicizedSell = exports.encodeSell = exports.encodeCall = exports.encodeReplacementPattern = exports.AbiType = void 0;
 var bignumber_js_1 = __webpack_require__(73350);
-var ethABI = __webpack_require__(60843);
-var wyvern_js_1 = __webpack_require__(20544);
-var types_1 = __webpack_require__(66395);
-var wyvern_schemas_1 = __webpack_require__(97042);
+var ethABI = __webpack_require__(10734);
+var wyvern_js_1 = __webpack_require__(98306);
+var types_1 = __webpack_require__(5685);
+var wyvern_schemas_1 = __webpack_require__(58630);
 Object.defineProperty(exports, "AbiType", ({ enumerable: true, get: function () { return wyvern_schemas_1.AbiType; } }));
-var types_2 = __webpack_require__(95356);
-var Proxy_1 = __webpack_require__(62959);
+var types_2 = __webpack_require__(24860);
+var Proxy_1 = __webpack_require__(91130);
 exports.encodeReplacementPattern = wyvern_js_1.WyvernProtocol.encodeReplacementPattern;
 var encodeCall = function (abi, parameters) {
     var inputTypes = abi.inputs.map(function (i) { return i.type; });
@@ -7333,7 +7333,7 @@ function encodeAtomicizedCalldata(atomicizer, schemas, assets, address, side) {
 
 /***/ }),
 
-/***/ 66545:
+/***/ 72742:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -7388,16 +7388,16 @@ var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getNonCompliantApprovalAddress = exports.onDeprecated = exports.validateAndFormatWalletAddress = exports.delay = exports.assignOrdersToSides = exports.getOrderHash = exports.getWyvernBundle = exports.getWyvernAsset = exports.estimateCurrentPrice = exports.getTransferFeeSettings = exports.getCurrentGasPrice = exports.estimateGas = exports.rawCall = exports.sendRawTransaction = exports.makeBigNumber = exports.isContractAddress = exports.personalSignAsync = exports.orderToJSON = exports.orderFromJSON = exports.tokenFromJSON = exports.collectionFromJSON = exports.assetContractFromJSON = exports.assetBundleFromJSON = exports.userFromJSON = exports.accountFromJSON = exports.transactionFromJSON = exports.assetEventFromJSON = exports.assetFromJSON = exports.confirmTransaction = exports.promisifyCall = exports.annotateERC20TransferABI = exports.annotateERC721TransferABI = exports.WyvernProtocol = void 0;
 var bignumber_js_1 = __webpack_require__(73350);
-var wyvern_js_1 = __webpack_require__(20544);
+var wyvern_js_1 = __webpack_require__(98306);
 Object.defineProperty(exports, "WyvernProtocol", ({ enumerable: true, get: function () { return wyvern_js_1.WyvernProtocol; } }));
 var ethUtil = __webpack_require__(95906);
 var _ = __webpack_require__(39378);
 var Web3 = __webpack_require__(69906);
-var types_1 = __webpack_require__(66395);
-var contracts_1 = __webpack_require__(98572);
-var types_2 = __webpack_require__(95356);
-var constants_1 = __webpack_require__(56947);
-var Proxy_1 = __webpack_require__(62959);
+var types_1 = __webpack_require__(5685);
+var contracts_1 = __webpack_require__(46604);
+var types_2 = __webpack_require__(24860);
+var constants_1 = __webpack_require__(62550);
+var Proxy_1 = __webpack_require__(91130);
 var annotateERC721TransferABI = function (asset) { return ({
     "constant": false,
     "inputs": [
