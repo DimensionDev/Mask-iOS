@@ -1,6 +1,6 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, '13.0'
+platform :ios, '14.0'
 
 target 'Maskbook' do
   use_frameworks!
@@ -22,9 +22,9 @@ target 'Maskbook' do
   pod 'SwiftGen',  '6.5.0'
   pod 'KMPageControl', '0.0.3'
   
-  pod 'KeychainAccess', '~> 4.2'
+  pod 'KeychainAccess', '4.2.2'
   
-  pod 'EFQRCode', '~> 6.1.0'
+  pod 'EFQRCode', '6.1.0'
   pod 'Alamofire', '5.4.4'
 
   # Press
@@ -40,7 +40,7 @@ target 'Maskbook' do
   
   pod 'RSKPlaceholderTextView', '6.0.4'
   
-  pod 'BMPlayer', '~> 1.3.0'
+  pod 'BMPlayer', '1.3.2'
   
   # Web3
   pod 'BigInt', '5.2'
