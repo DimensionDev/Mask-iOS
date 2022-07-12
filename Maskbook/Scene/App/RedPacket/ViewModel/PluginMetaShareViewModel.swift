@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import UIKit
 
-class PluginMetaShareViewModel {
+class PluginMetaShareViewModel: NSObject {
     @InjectedProvider(\.mainCoordinator)
     private var coordinator
 
@@ -76,7 +77,7 @@ class PluginMetaShareViewModel {
                 scene: .maskConnectingSocial(
                     socialPlatform: .twitter, personaIdentifier: persona.nonOptionalIdentifier
                 ),
-                transition: .modal(wapperNav: true, animated: true)
+                transition: .modal(wapperNav: true, animated: true, adaptiveDelegate: self)
             )
             return false
         } else if currentTwitterProfiles.count == 1 {
@@ -89,5 +90,16 @@ class PluginMetaShareViewModel {
             }), transition: .modal())
             return false
         }
+    }
+}
+
+extension PluginMetaShareViewModel: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {}
+
+    func adaptivePresentationStyle(for controller: UIPresentationController,
+                                   traitCollection: UITraitCollection)
+        -> UIModalPresentationStyle
+    {
+        .overFullScreen
     }
 }
