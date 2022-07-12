@@ -153,11 +153,16 @@
       "file_service_file_too_large": {
         "title": "",
         "description": ""
+      },
+      "red_packet_no_wallet": {
+        "title": "",
+        "description": ""
       }
     },
     "controls": {
       "create_wallet": "월렛 만들기",
       "import_wallet": "월렛 불러오기",
+      "connect_wallet": "",
       "accept": "동의",
       "enable": "활성화",
       "no_thanks": "아니요",
