@@ -58,6 +58,14 @@ final class FileServiceSaveFileController: SheetViewController {
         present(documentPicker, animated: true, completion: nil)
     }
 
+    private func saveSuccessAction() {
+        dismiss(animated: true) {
+            UIApplication.getTopViewController()?
+                .makeToast(message: L10n.Common.Toast.saved,
+                           image: Asset.Images.Toast.check.image)
+        }
+    }
+
     @objc
     private func albumSave(
         _ image: UIImage,
@@ -65,7 +73,7 @@ final class FileServiceSaveFileController: SheetViewController {
         contextInfo: UnsafeMutableRawPointer
     ) {
         if error.isNone {
-            self.hide()
+            saveSuccessAction()
         }
     }
 
@@ -76,7 +84,7 @@ final class FileServiceSaveFileController: SheetViewController {
         contextInfo: UnsafeMutableRawPointer
     ) {
         if error.isNone {
-            self.hide()
+            saveSuccessAction()
         }
     }
 }
@@ -94,7 +102,7 @@ extension FileServiceSaveFileController: UIDocumentPickerDelegate {
         }
         try? viewModel.item.data.write(to: fileUrl)
 
-        self.hide()
+        saveSuccessAction()
     }
 }
 
