@@ -47,7 +47,7 @@ final class LabsViewController: BaseViewController {
                         return
                     }
                     self.coordinator.present(
-                        scene: .luckyDrop(source: .lab, callback: nil),
+                        scene: .luckyDrop(source: .lab),
                         transition: .modal(animated: true)
                     )
 

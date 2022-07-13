@@ -2,7 +2,7 @@ import SwiftUI
 
 struct MessageComposeView: View {
     @ObservedObject
-    private var viewModel: MessageComposeViewModel
+    var viewModel: MessageComposeViewModel
     
     init(viewModel: MessageComposeViewModel) {
         self.viewModel = viewModel
@@ -117,7 +117,7 @@ struct MessageComposeView: View {
     private func pluginsToolBar() -> some View {
         HStack {
             pluginToolItem(plugin: .luckyDrop)
-//            pluginToolItem(plugin: .fileService)
+            pluginToolItem(plugin: .fileService)
         }
     }
 

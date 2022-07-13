@@ -19,8 +19,8 @@ class LuckyDropViewController: BaseViewController {
     
     let luckyView: LuckyDropView
     
-    init(source: LuckyDropViewModel.Source, callback: (@MainActor (RedPacketPayload) -> Void)?) {
-        viewModel = LuckyDropViewModel(source: source, callback: callback)
+    init(source: LuckyDropViewModel.Source) {
+        viewModel = LuckyDropViewModel(source: source)
         luckyView = LuckyDropView(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
     }

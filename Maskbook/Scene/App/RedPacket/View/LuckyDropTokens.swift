@@ -274,6 +274,6 @@ extension LuckyDropTokens {
 
 struct LuckyDropTokens_Previews: PreviewProvider {
     static var previews: some View {
-        LuckyDropView(viewModel: LuckyDropViewModel(source: .lab, callback: nil))
+        LuckyDropView(viewModel: LuckyDropViewModel(source: .lab))
     }
 }
