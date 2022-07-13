@@ -24,6 +24,8 @@ struct BackupPreviewGenerator {
                     .map(\.rawValue)
                     .contains($0.0)
             }
+
+        // handle file service info merge 
         let nativeItems: [(BackupPreviewFormatter.Item, String)] = await
         [
             (.personas, "\(personasCount)"),

@@ -2,12 +2,7 @@ import Foundation
 import SwiftMsgPack
 
 struct RestoreFile: Codable {
-    let meta: Meta?
-    let grantedHostPermissions: [String]?
-    let personas: [Persona]?
-    let posts: [Post]?
-    let profiles: [Profile]?
-    let wallets: [WalletBackupInfo]?
+    // MARK: Lifecycle
 
     init(from json: [String: Any]) {
         meta = json[CodingKeys.meta.stringValue]
@@ -30,6 +25,26 @@ struct RestoreFile: Codable {
         wallets = json[CodingKeys.wallets.stringValue]
             .flatMap { $0 as? [[String: Any]] }
             .flatMap { $0.map { WalletBackupInfo(from: $0) } }
+
+        plugin = json[CodingKeys.plugin.stringValue]
+            .flatMap { Plugin(from: $0 as? [String: Any] ?? [:]) }
+    }
+
+    // MARK: Internal
+
+    let meta: Meta?
+    let grantedHostPermissions: [String]?
+    let personas: [Persona]?
+    let posts: [Post]?
+    let profiles: [Profile]?
+    let wallets: [WalletBackupInfo]?
+    let plugin: Plugin?
+
+    var isCompletelyDecoded: Bool {
+        meta != nil &&
+            grantedHostPermissions != nil &&
+            personas != nil &&
+            profiles != nil
     }
 
     static func from(data: Data) -> Self? {
@@ -46,6 +61,8 @@ struct RestoreFile: Codable {
         }
     }
 
+    // MARK: Private
+
     private enum CodingKeys: String, CodingKey {
         case meta = "_meta_"
         case grantedHostPermissions
@@ -53,13 +70,7 @@ struct RestoreFile: Codable {
         case posts
         case profiles
         case wallets
-    }
-
-    var isCompletelyDecoded: Bool {
-        meta != nil &&
-        grantedHostPermissions != nil &&
-        personas != nil &&
-        profiles != nil
+        case plugin
     }
 }
 
@@ -82,11 +93,7 @@ extension RestoreFile {
 
 extension RestoreFile {
     struct Meta: Codable {
-        @BackupValueCompatiableFrom<UInt64, Date>
-        private(set) var createdAt: Date?
-        let maskbookVersion: String
-        let version: Int
-        let type: String
+        // MARK: Lifecycle
 
         init(from json: [String: Any]) {
             _createdAt = BackupValueCompatiableFrom(
@@ -99,43 +106,20 @@ extension RestoreFile {
             version = json[CodingKeys.version.stringValue] as? Int ?? 0
             type = json[CodingKeys.type.stringValue] as? String ?? ""
         }
+
+        // MARK: Internal
+
+        @BackupValueCompatiableFrom<UInt64, Date>
+        private(set) var createdAt: Date?
+        let maskbookVersion: String
+        let version: Int
+        let type: String
     }
 }
 
 extension RestoreFile {
     struct Persona: Codable {
-        @BackupValueCompatiableFrom<UInt64, TimeInterval>
-        private(set) var  createdAt: TimeInterval?
-        @BackupValueCompatiableFrom<UInt64, TimeInterval>
-        private(set) var updatedAt: TimeInterval?
-        let identifier: String?
-        let nickname: String?
-        let mnemonic: Mnemonic?
-        let linkedProfiles: [[StringKey: LinkedProfile]]?
-        let publicKey: JWK?
-        let localKey: LocalKey?
-        let privateKey: JWK?
-
-        struct JWK: Codable {
-            let d: String?
-            let x: String?
-            let y: String?
-            @BackupValueCompatiableFrom<Never, Bool>
-            private(set) var ext: Bool?
-            let key_ops: [String]?
-            let kty: String?
-            let crv: String?
-
-            init(from json:[String: Any]) {
-                d = json[CodingKeys.d.stringValue] as? String
-                x = json[CodingKeys.x.stringValue] as? String
-                y = json[CodingKeys.y.stringValue] as? String
-                kty = json[CodingKeys.kty.stringValue] as? String
-                crv = json[CodingKeys.crv.stringValue] as? String
-                key_ops = json[CodingKeys.key_ops.stringValue] as? [String]
-                _ext = BackupValueCompatiableFrom<Never, Bool>(json[CodingKeys.ext.stringValue] as? Bool ?? true)
-            }
-        }
+        // MARK: Lifecycle
 
         init(from json: [String: Any]) {
             _createdAt = BackupValueCompatiableFrom(
@@ -171,9 +155,64 @@ extension RestoreFile {
                 .flatMap { $0 as? [String: Any] }
                 .flatMap { LocalKey(from: $0) }
         }
+
+        // MARK: Internal
+
+        struct JWK: Codable {
+            // MARK: Lifecycle
+
+            init(from json: [String: Any]) {
+                d = json[CodingKeys.d.stringValue] as? String
+                x = json[CodingKeys.x.stringValue] as? String
+                y = json[CodingKeys.y.stringValue] as? String
+                kty = json[CodingKeys.kty.stringValue] as? String
+                crv = json[CodingKeys.crv.stringValue] as? String
+                key_ops = json[CodingKeys.key_ops.stringValue] as? [String]
+                _ext = BackupValueCompatiableFrom<Never, Bool>(json[CodingKeys.ext.stringValue] as? Bool ?? true)
+            }
+
+            // MARK: Internal
+
+            let d: String?
+            let x: String?
+            let y: String?
+
+            @BackupValueCompatiableFrom<Never, Bool>
+            private(set) var ext: Bool?
+
+            let key_ops: [String]?
+            let kty: String?
+            let crv: String?
+        }
+
+        @BackupValueCompatiableFrom<UInt64, TimeInterval>
+        private(set) var createdAt: TimeInterval?
+
+        @BackupValueCompatiableFrom<UInt64, TimeInterval>
+        private(set) var updatedAt: TimeInterval?
+
+        let identifier: String?
+        let nickname: String?
+        let mnemonic: Mnemonic?
+        let linkedProfiles: [[StringKey: LinkedProfile]]?
+        let publicKey: JWK?
+        let localKey: LocalKey?
+        let privateKey: JWK?
     }
 
     struct LocalKey: Codable {
+        // MARK: Lifecycle
+
+        init(from json: [String: Any]) {
+            k = json[CodingKeys.k.stringValue] as? String
+            alg = json[CodingKeys.alg.stringValue] as? String
+            kty = json[CodingKeys.kty.stringValue] as? String
+            key_ops = json[CodingKeys.key_ops.stringValue] as? [String]
+            _ext = BackupValueCompatiableFrom<Never, Bool>(json[CodingKeys.ext.stringValue] as? Bool ?? true)
+        }
+
+        // MARK: Internal
+
         let alg: String?
 
         let k: String?
@@ -182,50 +221,44 @@ extension RestoreFile {
 
         @BackupValueCompatiableFrom<Never, Bool>
         private(set) var ext: Bool?
-
-        init(from json:[String: Any]) {
-            k = json[CodingKeys.k.stringValue] as? String
-            alg = json[CodingKeys.alg.stringValue] as? String
-            kty = json[CodingKeys.kty.stringValue] as? String
-            key_ops = json[CodingKeys.key_ops.stringValue] as? [String]
-            _ext = BackupValueCompatiableFrom<Never, Bool>(json[CodingKeys.ext.stringValue] as? Bool ?? true)
-        }
     }
 
     struct Mnemonic: Codable {
-        struct Parameter: Codable {
-            let path: String
-            @BackupValueCompatiableFrom<Never, Bool>
-            private(set) var withPassword: Bool?
-
-            init(from json: [String: Any]) {
-                path =  json[CodingKeys.path.stringValue] as? String ?? ""
-                _withPassword = BackupValueCompatiableFrom<Never, Bool>(json[CodingKeys.withPassword.stringValue] as? Bool ?? false)
-            }
-        }
-
-        let parameter: Parameter
-        let words: String
+        // MARK: Lifecycle
 
         init(from json: [String: Any]) {
             words = json[CodingKeys.words.stringValue] as? String ?? ""
             let param = json[CodingKeys.parameter.stringValue] as? [String: Any] ?? [:]
             parameter = Parameter(from: param)
         }
+
+        // MARK: Internal
+
+        struct Parameter: Codable {
+            // MARK: Lifecycle
+
+            init(from json: [String: Any]) {
+                path = json[CodingKeys.path.stringValue] as? String ?? ""
+                _withPassword = BackupValueCompatiableFrom<Never, Bool>(json[CodingKeys.withPassword.stringValue] as? Bool ?? false)
+            }
+
+            // MARK: Internal
+
+            let path: String
+            @BackupValueCompatiableFrom<Never, Bool>
+            private(set) var withPassword: Bool?
+        }
+
+        let parameter: Parameter
+        let words: String
     }
 }
 
 extension RestoreFile {
     struct Post: Codable {
-        @BackupValueCompatiableFrom<UInt64, TimeInterval>
-        private(set) var foundAt: TimeInterval?
-        let identifier: String
-        let postBy: String
-        let recipients: [[StringKey: Recipient]]?
-        let recipientGroups: [String]?
-        let postCryptoKey: LocalKey?
+        // MARK: Lifecycle
 
-        init(from json:[String: Any]) {
+        init(from json: [String: Any]) {
             _foundAt = BackupValueCompatiableFrom<UInt64, TimeInterval>(
                 json[CodingKeys.foundAt.stringValue]
                     .flatMap(RestoreFile.converTimeInterval) ?? 0
@@ -242,52 +275,72 @@ extension RestoreFile {
                 .flatMap { $0 as? [String: Any] }
                 .flatMap { LocalKey(from: $0) }
         }
+
+        // MARK: Internal
+
+        @BackupValueCompatiableFrom<UInt64, TimeInterval>
+        private(set) var foundAt: TimeInterval?
+        let identifier: String
+        let postBy: String
+        let recipients: [[StringKey: Recipient]]?
+        let recipientGroups: [String]?
+        let postCryptoKey: LocalKey?
     }
 
     struct Recipient: Codable {
-        let reason: [RecipientReason]
+        // MARK: Lifecycle
 
         init(from json: [String: Any]) {
             reason = json[CodingKeys.reason.stringValue]
                 .flatMap { $0 as? [[String: Any]] }
                 .flatMap { $0.map { RecipientReason(from: $0) } } ?? []
         }
+
+        // MARK: Internal
+
+        let reason: [RecipientReason]
     }
 
     struct RecipientReason: Codable {
-        @BackupValueCompatiableFrom<UInt64, TimeInterval>
-        private(set)var time: TimeInterval?
-        let recipientType: RecipientType
-        let group: String?
+        // MARK: Lifecycle
+
+        init(from json: [String: Any]) {
+            _time = BackupValueCompatiableFrom<UInt64, TimeInterval>(
+                json[CodingKeys.time.stringValue]
+                    .flatMap(RestoreFile.converTimeInterval) ?? 0
+            )
+
+            recipientType = json[CodingKeys.recipientType.stringValue]
+                .flatMap { $0 as? String }
+                .flatMap { RecipientType(rawValue: $0) } ?? .direct
+
+            group = json[CodingKeys.group.stringValue] as? String
+        }
+
+        // MARK: Internal
 
         enum RecipientType: String, Codable {
             case direct
             case group
         }
 
+        @BackupValueCompatiableFrom<UInt64, TimeInterval>
+        private(set) var time: TimeInterval?
+        let recipientType: RecipientType
+        let group: String?
+
+        // MARK: Private
+
         private enum CodingKeys: String, CodingKey {
             case time = "at"
             case group
             case recipientType = "type"
         }
-
-        init(from json: [String: Any]) {
-            _time = BackupValueCompatiableFrom<UInt64, TimeInterval>(
-                json[CodingKeys.time.stringValue]
-                .flatMap(RestoreFile.converTimeInterval) ?? 0
-            )
-
-            recipientType = json[CodingKeys.recipientType.stringValue]
-                .flatMap { $0 as? String }
-                .flatMap { RecipientType.init(rawValue: $0) } ?? .direct
-
-            group = json[CodingKeys.group.stringValue] as? String
-        }
     }
 }
 
-extension Array where Element == [Any] {
-    fileprivate func flattenWrappers<T: Codable>(
+private extension Array where Element == [Any] {
+    func flattenWrappers<T: Codable>(
         _ transform: @escaping (([String: Any]) -> T)
     ) -> [[RestoreFile.StringKey: T]] {
         var tempResult: [[RestoreFile.StringKey: T]] = []
@@ -300,7 +353,8 @@ extension Array where Element == [Any] {
                 let rawKey = subItem[index]
                 let rawValue = subItem[index + 1]
                 if let key = rawKey as? String,
-                   let value = rawValue as? [String: Any] {
+                   let value = rawValue as? [String: Any]
+                {
                     let keyValue = RestoreFile.StringKey(key)
                     let transformedValue = transform(value)
                     results[keyValue] = transformedValue
@@ -319,21 +373,7 @@ extension Array where Element == [Any] {
 
 extension RestoreFile {
     struct Profile: Codable {
-        @BackupValueCompatiableFrom<UInt64, TimeInterval>
-        private(set) var createdAt: TimeInterval?
-        @BackupValueCompatiableFrom<UInt64, TimeInterval>
-        private(set) var updatedAt: TimeInterval?
-        let nickName: String
-        let identifier: String
-        let linkedPersona: String
-
-        private enum CodingKeys: String, CodingKey {
-            case createdAt
-            case updatedAt
-            case nickName = "nickname"
-            case identifier
-            case linkedPersona
-        }
+        // MARK: Lifecycle
 
         init(from json: [String: Any]) {
             _createdAt = BackupValueCompatiableFrom<UInt64, TimeInterval>(
@@ -342,41 +382,129 @@ extension RestoreFile {
             )
             _updatedAt = BackupValueCompatiableFrom<UInt64, TimeInterval>(
                 json[CodingKeys.updatedAt.stringValue]
-                .flatMap(RestoreFile.converTimeInterval) ?? 0
+                    .flatMap(RestoreFile.converTimeInterval) ?? 0
             )
             nickName = json[CodingKeys.nickName.stringValue] as? String ?? ""
             identifier = json[CodingKeys.identifier.stringValue] as? String ?? ""
             linkedPersona = json[CodingKeys.linkedPersona.stringValue] as? String ?? ""
+        }
+
+        // MARK: Internal
+
+        @BackupValueCompatiableFrom<UInt64, TimeInterval>
+        private(set) var createdAt: TimeInterval?
+        @BackupValueCompatiableFrom<UInt64, TimeInterval>
+        private(set) var updatedAt: TimeInterval?
+        let nickName: String
+        let identifier: String
+        let linkedPersona: String
+
+        // MARK: Private
+
+        private enum CodingKeys: String, CodingKey {
+            case createdAt
+            case updatedAt
+            case nickName = "nickname"
+            case identifier
+            case linkedPersona
         }
     }
 }
 
 extension RestoreFile {
     struct LinkedProfile: Codable {
-        let connectionConfirmState: State?
+        // MARK: Lifecycle
+
+        init(from json: [String: Any]) {
+            connectionConfirmState = (json[CodingKeys.connectionConfirmState.stringValue] as? String)
+                .flatMap { State(rawValue: $0) }
+        }
+
+        // MARK: Internal
 
         enum State: String, Codable {
             case confirmed
         }
 
-        init(from json:[String: Any]) {
-            connectionConfirmState = (json[CodingKeys.connectionConfirmState.stringValue] as? String)
-                .flatMap { State.init(rawValue: $0) }
-        }
+        let connectionConfirmState: State?
     }
 
     struct StringKey: RawRepresentable, Codable, Hashable {
-        let key: String
-
-        var rawValue: String { key }
+        // MARK: Lifecycle
 
         init?(rawValue: String) {
-            self.key = rawValue
+            key = rawValue
         }
 
         init(_ rawValue: String) {
-            self.key = rawValue
+            key = rawValue
         }
+
+        // MARK: Internal
+
+        let key: String
+
+        var rawValue: String { key }
+    }
+}
+
+extension RestoreFile {
+    struct Plugin: Codable {
+        // MARK: Lifecycle
+
+        init(from json: [String: Any]) {
+            let fileservices = json[CodingKeys.fileService.stringValue] as? [[String: Any]] ?? []
+            fileService = fileservices.compactMap(FileService.init)
+        }
+
+        // MARK: Internal
+
+        enum CodingKeys: String, CodingKey {
+            case fileService = "com.maskbook.fileservice"
+        }
+
+        let fileService: [FileService]?
+    }
+
+    struct FileService: Codable {
+        // MARK: Lifecycle
+
+        init?(from json: [String: Any]) {
+            guard let payloadTxID = json[CodingKeys.payloadTxID.stringValue] as? String,
+                  let createdAt = json[CodingKeys.createdAt.stringValue] as? String,
+                  let size = json[CodingKeys.size.stringValue] as? UInt64,
+                  let name = json[CodingKeys.name.stringValue] as? String,
+                  let provider = json[CodingKeys.provider.stringValue] as? String,
+                  let id = json[CodingKeys.id.stringValue] as? String,
+                  let type = json[CodingKeys.type.stringValue] as? String,
+                  let landingTxID = json[CodingKeys.landingTxID.stringValue] as? String
+            else {
+                return nil
+            }
+            self.payloadTxID = payloadTxID
+            self.createdAt = createdAt
+            self.size = size
+            self.name = name
+            self.provider = provider
+            self.id = id
+            self.type = type
+            self.landingTxID = landingTxID
+            self.key = json[CodingKeys.key.stringValue] as? String
+        }
+
+        // MARK: Internal
+
+        let payloadTxID: String
+        // 2022-07-07T03:16:06.123Z
+        let createdAt: String
+        let size: UInt64
+
+        let name: String
+        let provider: String
+        let id: String
+        let type: String
+        let landingTxID: String
+        let key: String?
     }
 }
 
@@ -425,15 +553,18 @@ extension RestoreFile: RestoreItemProvider {
     }
 }
 
-
 @propertyWrapper
 /// A wrapper for making converting js backup file value to native more compatiable
 struct BackupValueCompatiableFrom<From: Codable, Value: Codable>: Codable {
-    var wrappedValue: Value?
+    // MARK: Lifecycle
 
     init(_ value: Value) {
         wrappedValue = value
     }
+
+    // MARK: Internal
+
+    var wrappedValue: Value?
 }
 
 extension BackupValueCompatiableFrom where From == UInt64, Value == TimeInterval {
@@ -459,6 +590,7 @@ extension Swift.Never: Codable {
     public func encode(to encoder: Encoder) throws {
         fatalError()
     }
+
     public init(from decoder: Decoder) throws {
         fatalError()
     }
@@ -507,7 +639,7 @@ extension BackupValueCompatiableFrom where From == Never, Value == Bool {
     }
 
     func encode(to encoder: Encoder) throws {
-        let rawValue = self.wrappedValue ?? false
+        let rawValue = wrappedValue ?? false
         var container = encoder.singleValueContainer()
         try container.encode(rawValue ? Int(1) : 0)
     }
