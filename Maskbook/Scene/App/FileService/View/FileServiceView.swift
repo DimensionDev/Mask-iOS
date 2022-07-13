@@ -14,20 +14,20 @@ struct FileServiceView: View {
 
     var body: some View {
         GeometryReader { proxy in
-            if viewModel.showOnboard {
-                FileServiceOnBoardView { action in
-                    switch action {
-                    case .upload: viewModel.actionSignal(.choseFile)
-                    }
-                }
-            } else {
+//            if viewModel.showOnboard {
+//                FileServiceOnBoardView { action in
+//                    switch action {
+//                    case .upload: viewModel.actionSignal(.choseFile)
+//                    }
+//                }
+//            } else {
                 // file list view
                 fileList(with: proxy)
                     .ignoresSafeArea(.container, edges: .bottom)
                     .onAppear {
                         viewModel.isVisible = true
                     }
-            }
+//            }
         }
         // keep it here to avoid container size change
         // and keep uploadingItemList's position
@@ -90,7 +90,7 @@ struct FileServiceView: View {
         .opacity(viewModel.allowUploading ? 1 : 0.5)
         .disabled(!viewModel.allowUploading)
         .shadow(color: Asset.Colors.Public.s1.asColor(), radius: 12, x: 0, y: 6)
-        .offset(x: -20, y: -buttonSize - 24)
+        .offset(x: -20, y: -buttonSize)
     }
 
     private var emptyPlaceholder: some View {
@@ -250,7 +250,7 @@ struct FileServiceView: View {
         .background(cardGradient)
         .overlay(
             uploadButton
-                .offset(y: viewModel.uploadingItems.isEmpty ? -20 : 0)
+                .offset(y: viewModel.uploadingItems.isEmpty ? -20 - proxy.safeAreaInsets.bottom : -20)
             ,
             alignment: .topTrailing
         )
