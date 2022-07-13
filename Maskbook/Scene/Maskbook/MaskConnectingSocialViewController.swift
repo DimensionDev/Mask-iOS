@@ -298,6 +298,9 @@ extension MaskConnectingSocialViewController: SocialProfileDetectViewControllerD
             guard let tabId = self.tabId else { return }
             self.tabService.tabs[tabId]?.reload()
             self.connectViewModel.updateHintLabelConnected(profiles: profiles)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.dashboardBarButtonItem()
+            }
         }
     }
 }
