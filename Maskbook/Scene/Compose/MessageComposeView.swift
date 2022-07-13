@@ -185,6 +185,7 @@ struct MessageComposeView: View {
             RoundedRectangle(cornerRadius: 20)
                 .stroke(Asset.Colors.Twitter.line2.asColor(), lineWidth: 0.5)
         )
+        .opacity(viewModel.pluginContents.isEmpty ? 1 : 0.5)
     }
 }
 
