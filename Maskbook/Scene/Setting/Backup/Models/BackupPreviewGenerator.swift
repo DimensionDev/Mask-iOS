@@ -17,6 +17,7 @@ struct BackupPreviewGenerator {
         async let profilesCount = ProfileRepository.getProfilesCount()
         async let relationshipCount = RelationRepository.getRelationshipCount()
         async let postCount = PostRepository.getPostCount()
+        async let fileCount = FileServiceRepository.getFilesCount()
         
         let jsPreviewInfo = previewJson
             .filter {
@@ -34,9 +35,14 @@ struct BackupPreviewGenerator {
             (.posts, "\(postCount)"),
             (.relations, "\(relationshipCount)"),
         ]
+
+        let nativeFileCount = await fileCount
         
-        let jsItems = BackupPreviewFormatter.previewItems(of: jsPreviewInfo)
-        
+        let jsItems = BackupPreviewFormatter.previewItems(
+            of: jsPreviewInfo,
+            nativeInfo: [.files: nativeFileCount]
+        )
+
         items.append(contentsOf: nativeItems.map { ($0.0.title, $0.1) })
         items.append(contentsOf: jsItems)
         
