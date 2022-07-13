@@ -102,7 +102,7 @@ struct WalletBottomWidgetView: View {
 struct WalletBottomWidgetView_Previews: PreviewProvider {
     static var previews: some View {
         WalletBottomWidgetView(viewModel: WalletBottomWidgetViewModel(
-            source: .lab, callback: nil
+            source: .lab
         ))
     }
 }

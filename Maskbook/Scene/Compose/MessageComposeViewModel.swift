@@ -67,12 +67,11 @@ final class MessageComposeViewModel: ObservableObject {
                 self.alertNoWallet()
                 return
             }
-            mainCoordinator.present(scene: .luckyDrop(source: .composer, callback: { @MainActor [weak self] payload in
-                let meta = PluginMeta.redPacket(payload)
-                self?.pluginContents.append(meta)
-                
-                self?.mainCoordinator.dismissTopViewController()
-            }), transition: .modal(animated: true))
+            mainCoordinator.present(scene: .luckyDrop(source: .composer), transition: .modal())
+            
+        case .fileService:
+            mainCoordinator.present(scene: .fileService, transition: .modal())
+            
         default:
             print("message compose \(plugin) add did clicked")
         }

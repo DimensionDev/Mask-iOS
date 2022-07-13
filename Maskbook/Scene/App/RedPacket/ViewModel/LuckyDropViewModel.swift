@@ -187,13 +187,11 @@ final class LuckyDropViewModel: ObservableObject {
     private var personaManager
     
     let source: Source
-    let callback: (@MainActor (RedPacketPayload) -> Void)?
     
     // MARK: - Public method
-    init(source: Source, callback: (@MainActor (RedPacketPayload) -> Void)?) {
+    init(source: Source) {
         self.source = source
-        self.callback = callback
-        walletBottomViewModel = WalletBottomWidgetViewModel(source: source, callback: callback)
+        walletBottomViewModel = WalletBottomWidgetViewModel(source: source)
         
         Publishers.CombineLatest3(
             settings.defaultAccountAddressPublisher.removeDuplicates(),
