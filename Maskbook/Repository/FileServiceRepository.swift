@@ -87,9 +87,25 @@ extension FileServiceRepository {
             try? context.saveOrRollback()
         }
     }
+
+    static func getTotalCount<T: NSManagedObject & Managed>(object: T.Type) async -> Int {
+        await withCheckedContinuation { continuation in
+            let fetchRequest = T.sortedFetchRequest
+
+            var count = 0
+            backgroundContext.performAndWait {
+                count = (try? backgroundContext.count(for: fetchRequest)) ?? 0
+            }
+            continuation.resume(returning: count)
+        }
+    }
 }
 
 extension FileServiceRepository {
+    static func getFilesCount() async -> Int {
+        await getTotalCount(object: UploadFile.self)
+    }
+    
     static func restoreFromJson(_ json: JSON) throws {
         let plugin = try json.asDictionary()
         let fileServices = plugin[RestoreFile.Plugin.CodingKeys.fileService.stringValue]
