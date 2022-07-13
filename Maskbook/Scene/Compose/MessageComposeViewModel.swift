@@ -61,6 +61,9 @@ final class MessageComposeViewModel: ObservableObject {
         mainCoordinator.topViewController?.dismiss(animated: true)
     }
     func pluginAddClicked(plugin: PluginType) {
+        if !pluginContents.isEmpty {
+            return
+        }
         switch plugin {
         case .luckyDrop:
             guard userSetting.defaultAccountAddress?.isNotEmpty == true else {
