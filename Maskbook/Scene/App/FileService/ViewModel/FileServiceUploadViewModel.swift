@@ -30,7 +30,9 @@ final class FileServiceUploadViewModel: ObservableObject {
     func tryUploading(
         _ item: FileServiceUploadingItem
     ) {
-        let uploadOption = item.option
+        guard let uploadOption = item.option else {
+            return
+        }
         let uploader = chooseUploader(by: uploadOption)
         let stream = uploader.upload(item, option: uploadOption)
 

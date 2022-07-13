@@ -1,21 +1,26 @@
 import CoreData
 import CoreDataStack
 import Foundation
+import SwiftyJSON
 
 enum FileServiceRepository {
     static let viewContext = AppContext.shared.coreDataStack.persistentContainer.viewContext
+    static let backgroundContext = AppContext.shared.backgroundContext
+}
 
+// MARK: query, save and delete
+extension FileServiceRepository {
     static func getRecords<T: NSManagedObject & Managed>(
         pageOption: PageOption? = nil,
-        filterBy builder: @escaping @autoclosure () -> NSPredicate? = nil,
+        filterBy builder: @escaping @autoclosure () -> [NSPredicate] = [],
         context: NSManagedObjectContext? = viewContext
     ) -> [T] {
         do {
             let queryContext = context ?? self.viewContext
             let fetchRequest = T.sortedFetchRequest
-
-            if let predicate = builder() {
-                fetchRequest.predicate = predicate
+            let predicates = builder()
+            if !predicates.isEmpty {
+                fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
             }
 
             if let pageOption = pageOption {
@@ -33,7 +38,7 @@ enum FileServiceRepository {
     static func getRecords<T: NSManagedObject & Managed, V>(
         pageOption: PageOption? = nil,
         transform: @escaping (T) -> V,
-        filterBy builder: @escaping @autoclosure () -> NSPredicate? = nil,
+        filterBy builder: @escaping @autoclosure () -> [NSPredicate] = [],
         context: NSManagedObjectContext? = viewContext
     ) -> [V] {
         let results: [T] = self.getRecords(pageOption: pageOption, filterBy: builder(), context: context)
@@ -52,7 +57,7 @@ enum FileServiceRepository {
 
     static func delete<T: NSManagedObject & Managed>(
         object type: T.Type = T.self,
-        filterBy builder: @escaping @autoclosure () -> NSPredicate,
+        filterBy builder: @escaping @autoclosure () -> [NSPredicate],
         context: NSManagedObjectContext = viewContext
     ) {
         context.performAndWait {
@@ -84,6 +89,53 @@ enum FileServiceRepository {
     }
 }
 
+extension FileServiceRepository {
+    static func restoreFromJson(_ json: JSON) throws {
+        let plugin = try json.asDictionary()
+        let fileServices = plugin[RestoreFile.Plugin.CodingKeys.fileService.stringValue]
+            .flatMap { $0 as? [[String: Any]] }?
+            .compactMap {
+                RestoreFile.FileService(from: $0)
+            } ?? []
+        var restoreError: Error?
+
+        // 2022-07-07T03:16:06.123Z
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        dateFormatter.timeZone = TimeZone.current
+
+        self.backgroundContext.performAndWait {
+            for file in fileServices {
+                let uploadFile = UploadFile(context: backgroundContext)
+                uploadFile.name = file.name
+                uploadFile.provider = file.provider
+                uploadFile.createdAt = dateFormatter.date(from: file.createdAt)
+                uploadFile.fileType = FileServiceUploadingItem.ItemType.file.rawValue
+                uploadFile.id = file.id
+                uploadFile.key = file.key.isSome ? file.key : nil
+                uploadFile.landingTxID = file.landingTxID
+                uploadFile.payloadTxID = file.payloadTxID
+                uploadFile.fileSize = Double(file.size)
+                uploadFile.content = nil
+
+                // we don't have mime and upload option from back file
+                // self.uploadOption = item.option?.asString()
+                // self.mime = item.mime
+
+                do {
+                    try backgroundContext.saveOrRollback()
+                } catch {
+                    restoreError = error
+                }
+            }
+        }
+
+        if let restoreError = restoreError {
+            throw restoreError
+        }
+    }
+}
+
 extension UploadFile {
     func asStructItem() -> FileServiceUploadingItem {
         .init(
@@ -96,7 +148,7 @@ extension UploadFile {
             uploadedBytes: createdAt.isSome ? fileSize : 0,
             uploadDate: createdAt,
             mime: mime ?? "", // use nil as all UploadFile is uploaded
-            option: .init(uploadOption ?? "") ?? .init(),
+            option: .init(uploadOption ?? ""),
             tx: FileServiceTranscation(
                 id: id ?? "",
                 key: key ?? "",
@@ -123,7 +175,7 @@ extension UploadFile {
             ? nil
             : item.content
 
-        self.uploadOption = item.option.asString()
+        self.uploadOption = item.option?.asString()
         self.mime = item.mime
     }
 }
