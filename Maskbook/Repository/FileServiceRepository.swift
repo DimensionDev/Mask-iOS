@@ -9,8 +9,10 @@ enum FileServiceRepository {
 }
 
 // MARK: query, save and delete
+
 extension FileServiceRepository {
     static func getRecords<T: NSManagedObject & Managed>(
+        of object: T.Type = T.self,
         pageOption: PageOption? = nil,
         filterBy builder: @escaping @autoclosure () -> [NSPredicate] = [],
         context: NSManagedObjectContext? = viewContext
@@ -28,20 +30,20 @@ extension FileServiceRepository {
                 fetchRequest.fetchOffset = pageOption.pageOffset
             }
 
-            let records = try queryContext.fetch(fetchRequest)
-            return records
+            return try queryContext.fetch(fetchRequest)
         } catch {
             return []
         }
     }
 
     static func getRecords<T: NSManagedObject & Managed, V>(
+        of object: T.Type = T.self,
         pageOption: PageOption? = nil,
         transform: @escaping (T) -> V,
         filterBy builder: @escaping @autoclosure () -> [NSPredicate] = [],
         context: NSManagedObjectContext? = viewContext
     ) -> [V] {
-        let results: [T] = self.getRecords(pageOption: pageOption, filterBy: builder(), context: context)
+        let results: [T] = self.getRecords(of: T.self, pageOption: pageOption, filterBy: builder(), context: context)
         return results.map(transform)
     }
 
@@ -88,9 +90,17 @@ extension FileServiceRepository {
         }
     }
 
-    static func getTotalCount<T: NSManagedObject & Managed>(object: T.Type) async -> Int {
+    static func getTotalCount<T: NSManagedObject & Managed>(
+        of object: T.Type,
+        filterBy builder: @escaping @autoclosure () -> [NSPredicate] = []
+    ) async -> Int {
         await withCheckedContinuation { continuation in
             let fetchRequest = T.sortedFetchRequest
+
+            let filter = builder()
+            if !filter.isEmpty {
+                fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: filter)
+            }
 
             var count = 0
             backgroundContext.performAndWait {
@@ -103,9 +113,36 @@ extension FileServiceRepository {
 
 extension FileServiceRepository {
     static func getFilesCount() async -> Int {
-        await getTotalCount(object: UploadFile.self)
+        await self.getTotalCount(
+            of: UploadFile.self,
+            filterBy: [
+                \UploadFile.createdAt != .none
+            ]
+        )
     }
-    
+
+    static func getFileserviceBackup() async -> JSON {
+        await withCheckedContinuation { continuation in
+            var files: [JSON] = []
+            let fetchRequest = UploadFile.sortedFetchRequest
+            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
+                \UploadFile.createdAt != .none
+            ])
+
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+            dateFormatter.timeZone = TimeZone.current
+
+            backgroundContext.performAndWait {
+                if let fileRecords = try? backgroundContext.fetch(fetchRequest) {
+                    files = fileRecords.compactMap { $0.asBackJSON(dateFormatter) }
+                }
+            }
+
+            continuation.resume(returning: JSON([RestoreFile.Plugin.CodingKeys.fileService.stringValue: files]))
+        }
+    }
+
     static func restoreFromJson(_ json: JSON) throws {
         let plugin = try json.asDictionary()
         let fileServices = plugin[RestoreFile.Plugin.CodingKeys.fileService.stringValue]
@@ -134,7 +171,7 @@ extension FileServiceRepository {
                 uploadFile.fileSize = Double(file.size)
                 uploadFile.content = nil
 
-                // we don't have mime and upload option from back file
+                // we don't have mime and upload option from backup file
                 // self.uploadOption = item.option?.asString()
                 // self.mime = item.mime
 
@@ -193,5 +230,36 @@ extension UploadFile {
 
         self.uploadOption = item.option?.asString()
         self.mime = item.mime
+    }
+
+    func asBackJSON(_ dateFormatter: DateFormatter) -> JSON? {
+        typealias Keys = RestoreFile.FileService.CodingKeys
+
+        guard let date = createdAt,
+              let payloadTxID = payloadTxID,
+              let name = name,
+              let provider = provider,
+              let id = id,
+              let landingTxID = landingTxID
+        else {
+            return nil
+        }
+
+        var json: [String: Any] = [
+            Keys.payloadTxID.stringValue: payloadTxID,
+            Keys.createdAt.stringValue: dateFormatter.string(from: date),
+            Keys.size.stringValue: UInt64(fileSize),
+            Keys.name.stringValue: name,
+            Keys.provider.stringValue: provider,
+            Keys.id.stringValue: id,
+            Keys.type.stringValue: "file",
+            Keys.landingTxID.stringValue: landingTxID
+        ]
+
+        if let key = self.key, !key.isEmpty {
+            json[Keys.key.stringValue] = key
+        }
+
+        return JSON(json)
     }
 }

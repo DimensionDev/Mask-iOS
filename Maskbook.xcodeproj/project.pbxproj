@@ -89,6 +89,7 @@
 		1F37DF2027BDF715008F8ABE /* RestoreLocalFileValidationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37DF1F27BDF715008F8ABE /* RestoreLocalFileValidationController.swift */; };
 		1F37DF2227BDF94F008F8ABE /* RestoreLocalFileValidationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37DF2127BDF94F008F8ABE /* RestoreLocalFileValidationView.swift */; };
 		1F37DF2427BDFA3D008F8ABE /* RestoreLocalFileValidationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37DF2327BDFA3D008F8ABE /* RestoreLocalFileValidationViewModel.swift */; };
+		1F3B5D1F287FBC00005903F9 /* BackupAndResotreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3B5D1E287FBC00005903F9 /* BackupAndResotreTests.swift */; };
 		1F5278CC286D570F00B6D443 /* CapsuleIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5278CB286D570F00B6D443 /* CapsuleIndicator.swift */; };
 		1F5278CE286D83B700B6D443 /* InfinityCycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5278CD286D83B700B6D443 /* InfinityCycleView.swift */; };
 		1F57023A27A27E4900C96909 /* RedPacketShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F57023927A27E4900C96909 /* RedPacketShareSheet.swift */; };
@@ -941,6 +942,7 @@
 		1F37DF1F27BDF715008F8ABE /* RestoreLocalFileValidationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreLocalFileValidationController.swift; sourceTree = "<group>"; };
 		1F37DF2127BDF94F008F8ABE /* RestoreLocalFileValidationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreLocalFileValidationView.swift; sourceTree = "<group>"; };
 		1F37DF2327BDFA3D008F8ABE /* RestoreLocalFileValidationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreLocalFileValidationViewModel.swift; sourceTree = "<group>"; };
+		1F3B5D1E287FBC00005903F9 /* BackupAndResotreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupAndResotreTests.swift; sourceTree = "<group>"; };
 		1F5278CB286D570F00B6D443 /* CapsuleIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleIndicator.swift; sourceTree = "<group>"; };
 		1F5278CD286D83B700B6D443 /* InfinityCycleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfinityCycleView.swift; sourceTree = "<group>"; };
 		1F57023927A27E4900C96909 /* RedPacketShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketShareSheet.swift; sourceTree = "<group>"; };
@@ -4053,6 +4055,7 @@
 				2ACA1E1127182F01000C0ECC /* PasswordTests.swift */,
 				5DAF3FB82814E80600CADB80 /* MaskSchemeTest.swift */,
 				2A46B3BE282AA05600F2A262 /* DispalyBalancePrecisionTests.swift */,
+				1F3B5D1E287FBC00005903F9 /* BackupAndResotreTests.swift */,
 			);
 			path = MaskbookTests;
 			sourceTree = "<group>";
@@ -5200,6 +5203,7 @@
 				2ACA1E1227182F01000C0ECC /* PasswordTests.swift in Sources */,
 				2A4145F826D7880800708337 /* CryptoTests.swift in Sources */,
 				2A46B3BF282AA05600F2A262 /* DispalyBalancePrecisionTests.swift in Sources */,
+				1F3B5D1F287FBC00005903F9 /* BackupAndResotreTests.swift in Sources */,
 				1FE54D58269BF0140041C742 /* NSDiffableSourceSnapshotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
