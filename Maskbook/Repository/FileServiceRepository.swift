@@ -171,9 +171,10 @@ extension FileServiceRepository {
                 uploadFile.fileSize = Double(file.size)
                 uploadFile.content = nil
 
-                // we don't have mime and upload option from backup file
-                // self.uploadOption = item.option?.asString()
-                // self.mime = item.mime
+                // uploadFile.uploadOption = item.option?.asString()
+
+                let url = URL(string: file.name)
+                uploadFile.mime = url?.mimeType()
 
                 do {
                     try backgroundContext.saveOrRollback()
