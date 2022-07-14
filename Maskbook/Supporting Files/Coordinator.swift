@@ -924,7 +924,7 @@ extension InjectValues {
     }
 }
 
-class FullScreenAdaptive: NSObject, UIAdaptivePresentationControllerDelegate {
+class FullScreenPresantationAdaptive: NSObject, UIAdaptivePresentationControllerDelegate {
     func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {}
     
     func adaptivePresentationStyle(
