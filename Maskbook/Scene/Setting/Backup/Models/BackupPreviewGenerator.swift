@@ -26,7 +26,6 @@ struct BackupPreviewGenerator {
                     .contains($0.0)
             }
 
-        // handle file service info merge 
         let nativeItems: [(BackupPreviewFormatter.Item, String)] = await
         [
             (.personas, "\(personasCount)"),
@@ -37,7 +36,7 @@ struct BackupPreviewGenerator {
         ]
 
         let nativeFileCount = await fileCount
-        
+        // handle file service info merge
         let jsItems = BackupPreviewFormatter.previewItems(
             of: jsPreviewInfo,
             nativeInfo: [.files: nativeFileCount]

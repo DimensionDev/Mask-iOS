@@ -489,7 +489,7 @@ extension RestoreFile {
             self.id = id
             self.type = type
             self.landingTxID = landingTxID
-            self.key = json[CodingKeys.key.stringValue] as? String
+            key = json[CodingKeys.key.stringValue] as? String
         }
 
         // MARK: Internal
@@ -505,6 +505,18 @@ extension RestoreFile {
         let type: String
         let landingTxID: String
         let key: String?
+
+        enum CodingKeys: String, CodingKey {
+            case payloadTxID
+            case createdAt
+            case size
+            case name
+            case provider
+            case id
+            case type
+            case landingTxID
+            case key
+        }
     }
 }
 
@@ -539,9 +551,10 @@ extension RestoreFile: RestoreItemProvider {
         ]
     }
 
-    var personaCount: Int { personas.flatMap { $0.count } ?? 0 }
-    var profilesCount: Int { profiles.flatMap { $0.count } ?? 0 }
-    var postCount: Int { posts.flatMap { $0.count } ?? 0 }
+    var personaCount: Int { personas?.count ?? 0 }
+    var profilesCount: Int { profiles?.count ?? 0 }
+    var postCount: Int { posts?.count  ?? 0 }
+    var fileCount: Int { plugin?.fileService?.count ?? 0 }
 
     var createdTime: String {
         guard let date = meta?.createdAt else { return "" }
