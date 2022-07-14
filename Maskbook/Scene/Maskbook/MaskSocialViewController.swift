@@ -143,7 +143,7 @@ extension MaskSocialViewController {
     private func setupNavigationBar() {
         let button = UIButton(type: .custom)
         button.setImage(Asset.Images.Scene.Social.iconMaskDashboard.image, for: .normal)
-        button.addTarget(self, action: #selector(dashboardBarButtonItem), for: .touchUpInside)
+        button.addTarget(self, action: #selector(dashboardBarButtonAction), for: .touchUpInside)
         navigationItem.rightBarButtonItems = [.fixedSpace(14),
                                               UIBarButtonItem(customView: button)]
     }
@@ -163,7 +163,7 @@ extension MaskSocialViewController {
     }
 
     @objc
-    private func dashboardBarButtonItem() {
+    private func dashboardBarButtonAction() {
         coordinator.present(scene: .mainTab(selectedTab: .personas),
                             transition: .modal(animated: true,
                                                adaptiveDelegate: self))

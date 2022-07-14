@@ -197,7 +197,7 @@ extension MaskConnectingSocialViewController {
         navigationItem.title = socialPlatform.shortName
         let button = UIButton(type: .custom)
         button.setImage(Asset.Images.Scene.Social.iconMaskDashboard.image, for: .normal)
-        button.addTarget(self, action: #selector(dashboardBarButtonItem), for: .touchUpInside)
+        button.addTarget(self, action: #selector(dashboardBarButtonAction), for: .touchUpInside)
         navigationItem.rightBarButtonItems = [.fixedSpace(14),
                                               UIBarButtonItem(customView: button)]
     }
@@ -299,7 +299,7 @@ extension MaskConnectingSocialViewController: SocialProfileDetectViewControllerD
             self.tabService.tabs[tabId]?.reload()
             self.connectViewModel.updateHintLabelConnected(profiles: profiles)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.dashboardBarButtonItem()
+                self.dashboardBarButtonAction()
             }
         }
     }
@@ -447,7 +447,7 @@ extension MaskConnectingSocialViewController {
     }
     
     @objc
-    private func dashboardBarButtonItem() {
+    private func dashboardBarButtonAction() {
         guard let navi = navigationController else { return }
         if navi.viewControllers[0] == self {
             // presented
