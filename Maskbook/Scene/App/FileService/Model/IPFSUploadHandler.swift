@@ -5,11 +5,15 @@ import IPFSClientKit
 import web3swift
 
 struct IPFSUploadHandler {
-    let client: IPFSClient?
+    // MARK: Lifecycle
 
     init() {
         client = try? IPFSClient(host: "ipfs.infura.io", port: 5001, ssl: true)
     }
+
+    // MARK: Internal
+
+    let client: IPFSClient?
 }
 
 extension IPFSUploadHandler: FileServiceUploadHandler {
@@ -27,10 +31,12 @@ extension IPFSUploadHandler: FileServiceUploadHandler {
 
                 // make attachment and get file key
                 // and get payloadTxID
-                let attachment = AttachmentOptions(encrypted: option.encrypted,
-                                                   type: item.mime,
-                                                   block: item.content,
-                                                   name: item.fileName)
+                let attachment = AttachmentOptions(
+                    encrypted: option.encrypted,
+                    type: item.mime,
+                    block: item.content,
+                    name: item.fileName
+                )
                 tx.key = attachment.key
                 let data = try attachment.encryptedData()
                 let payloadID = try await self.makePayload(data: data)
@@ -71,7 +77,7 @@ extension IPFSUploadHandler: FileServiceUploadHandler {
         type: String = "",
         delegate: URLSessionTaskDelegate? = nil
     ) async throws -> String {
-        return try await withCheckedThrowingContinuation { continuation in
+        try await withCheckedThrowingContinuation { continuation in
             do {
                 guard let client = client else { return continuation.resume(throwing: FileServiceError.ipfsUploadError) }
                 try client.add(data) { nodes in
