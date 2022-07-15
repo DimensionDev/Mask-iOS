@@ -43,7 +43,7 @@ extension FileServiceRepository {
         filterBy builder: @escaping @autoclosure () -> [NSPredicate] = [],
         context: NSManagedObjectContext? = viewContext
     ) -> [V] {
-        let results: [T] = self.getRecords(of: T.self, pageOption: pageOption, filterBy: builder(), context: context)
+        let results = self.getRecords(of: T.self, pageOption: pageOption, filterBy: builder(), context: context)
         return results.map(transform)
     }
 
@@ -63,7 +63,8 @@ extension FileServiceRepository {
         context: NSManagedObjectContext = viewContext
     ) {
         context.performAndWait {
-            guard let record: T = getRecords(
+            guard let record = getRecords(
+                of: type,
                 pageOption: .init(pageSize: 1, pageOffset: 0),
                 filterBy: builder(),
                 context: context
@@ -81,7 +82,7 @@ extension FileServiceRepository {
         context: NSManagedObjectContext = viewContext
     ) {
         context.performAndWait {
-            let records: [T] = getRecords()
+            let records = getRecords(of: type)
 
             for record in records {
                 context.delete(record)
