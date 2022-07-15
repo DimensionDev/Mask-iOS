@@ -21,6 +21,7 @@ import EUMTouchPointView
 
 #if DEBUG
 import MaskWalletCore
+import CoreData
 #endif
 
 @UIApplicationMain
@@ -55,6 +56,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     @InjectedProvider(\.backupFileDetectService)
     private var backupFileDetectService
+    
+    @InjectedProvider(\.tokenRepository)
+    private var tokenRepository
     
     var disposeBag = Set<AnyCancellable>()
     
@@ -139,6 +143,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         FirebaseApp.configure()
+        tokenRepository.cleanTokens()
         return true
     }
     

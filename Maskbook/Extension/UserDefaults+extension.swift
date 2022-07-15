@@ -91,6 +91,8 @@ final class UserDefaultSettings {
 
         case backupFileDetectDate
         case onBoardFeatures
+        
+        case hasCleanTokensForBugfix
     }
 
     func removeAll() {
@@ -343,6 +345,9 @@ final class UserDefaultSettings {
 
     @ReactiveUserDefault(key: .onBoardFeatures, defaultValue: "")
     var onBoardFeatures: String
+    
+    @ReactiveUserDefault(key: .hasCleanTokensForBugfix, defaultValue: false)
+    var hasCleanTokensForBugfix: Bool
 }
 
 extension UserDefaultSettings {

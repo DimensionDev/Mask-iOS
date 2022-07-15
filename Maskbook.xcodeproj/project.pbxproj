@@ -590,6 +590,7 @@
 		2AF885D3271EE9320004565A /* ScannerLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF884B2271EE9300004565A /* ScannerLineViewController.swift */; };
 		2AF885D4271EE9320004565A /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF884B3271EE9300004565A /* ScannerViewController.swift */; };
 		2AF885D5271EE9320004565A /* DownloadMaskActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF884B5271EE9300004565A /* DownloadMaskActivity.swift */; };
+		2AF94B73287E69C800E1AEAC /* TokenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF94B72287E69C800E1AEAC /* TokenRepository.swift */; };
 		2AFBEDE526E61D6400BD77B7 /* LoadingWithTextController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFBEDE426E61D6400BD77B7 /* LoadingWithTextController.swift */; };
 		2D00A5FE27953F2D0082E693 /* DebugEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D00A5FD27953F2D0082E693 /* DebugEntryView.swift */; };
 		2D00A600279546C80082E693 /* DebugControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D00A5FF279546C80082E693 /* DebugControl.swift */; };
@@ -1441,6 +1442,7 @@
 		2AF884B2271EE9300004565A /* ScannerLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerLineViewController.swift; sourceTree = "<group>"; };
 		2AF884B3271EE9300004565A /* ScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		2AF884B5271EE9300004565A /* DownloadMaskActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadMaskActivity.swift; sourceTree = "<group>"; };
+		2AF94B72287E69C800E1AEAC /* TokenRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRepository.swift; sourceTree = "<group>"; };
 		2AFBEDE426E61D6400BD77B7 /* LoadingWithTextController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingWithTextController.swift; sourceTree = "<group>"; };
 		2CF721AF01B43CFAD24263D5 /* Pods-MaskbookTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskbookTests.release.xcconfig"; path = "Target Support Files/Pods-MaskbookTests/Pods-MaskbookTests.release.xcconfig"; sourceTree = "<group>"; };
 		2D00A5FD27953F2D0082E693 /* DebugEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugEntryView.swift; sourceTree = "<group>"; };
@@ -3625,6 +3627,22 @@
 			path = Share;
 			sourceTree = "<group>";
 		};
+		2AF94B70287E699700E1AEAC /* Provider */ = {
+			isa = PBXGroup;
+			children = (
+				2AF94B71287E69A700E1AEAC /* Repository */,
+			);
+			path = Provider;
+			sourceTree = "<group>";
+		};
+		2AF94B71287E69A700E1AEAC /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				2AF94B72287E69C800E1AEAC /* TokenRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
 		2D11F03F27895315002CE232 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -4016,6 +4034,7 @@
 		DBAAF49322C35A7100017594 /* Maskbook */ = {
 			isa = PBXGroup;
 			children = (
+				2AF94B70287E699700E1AEAC /* Provider */,
 				5D06F587285313F600640D00 /* Arweave */,
 				2A6788CE27EB6C6800CC2350 /* UIComponents */,
 				2A96348C27A26A5B0019C4CA /* ABI */,
@@ -4771,6 +4790,7 @@
 				2AF88538271EE9310004565A /* DerivationPathTableViewCell.swift in Sources */,
 				5D84DC4D27B12B810009025E /* WebViewScrollViewDelegate.swift in Sources */,
 				1FEE1E99277D8FC500697F81 /* DappRPCResponse.swift in Sources */,
+				2AF94B73287E69C800E1AEAC /* TokenRepository.swift in Sources */,
 				2AF8852C271EE9310004565A /* WalletBackupKeystoreViewController.swift in Sources */,
 				2AD31E55282D367700CB3D49 /* UIColor.swift in Sources */,
 				4168635527F4622600F12DB2 /* BackupDataGenerator.swift in Sources */,
