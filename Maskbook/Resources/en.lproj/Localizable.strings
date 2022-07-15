@@ -356,7 +356,7 @@ with Cloud / Local Backup";
 "Scene.IdentifyVerify.Title" = "Verify identity code";
 "Scene.IdentityCreate.Description" = "Download your identity code.";
 "Scene.IdentityCreate.IdentityTips" = "Identity code is used to generate your persona.";
-"Scene.IdentityCreate.Title" = "Create a Persona";
+"Scene.IdentityCreate.Title" = "Create Persona";
 "Scene.IdentityEmpty.CreateAnIdentity" = "Create Persona";
 "Scene.IdentityEmpty.RecoverySignIn" = "Recover Persona";
 "Scene.IdentityEmpty.Title" = "Persona";

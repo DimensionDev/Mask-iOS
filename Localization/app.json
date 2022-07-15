@@ -651,7 +651,7 @@
       "recovery_sign_in": "Recover Persona"
     },
     "identity_create": {
-      "title": "Create a Persona",
+      "title": "Create Persona",
       "description": "Download your identity code.",
       "identity_tips": "Identity code is used to generate your persona."
     },
