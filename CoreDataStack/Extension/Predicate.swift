@@ -16,7 +16,7 @@ public final class Predicate<S>: NSCompoundPredicate {
     }
 }
 
-/// Only use for nsmanaged class as we use NSExpression to make it work
+/// Only use for NSManagedObject as we use NSExpression to make it work
 /// stable Types: Date, String, Int
 /// optional work types: Date, String
 
