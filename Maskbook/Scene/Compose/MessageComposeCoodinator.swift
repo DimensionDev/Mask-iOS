@@ -10,14 +10,14 @@ import Foundation
 import UIKit
 
 final class MessageComposeCoodinator {
-    static func isExistingComposeVC() -> Bool {
+    static func composeExists() -> Bool {
         if UIApplication.findMessageComposeViewController() is MaskHostViewController<MessageComposeView> {
             return true
         }
         return false
     }
     
-    static func showExistingComposeVC(shareMeta: PluginMeta?) {
+    static func showExistingCompose(shareMeta: PluginMeta?) {
         if let composeVC = UIApplication.findMessageComposeViewController() as? MaskHostViewController<MessageComposeView> {
             let viewModel = composeVC.rootView.viewModel
             if let shareMeta = shareMeta {
@@ -27,9 +27,9 @@ final class MessageComposeCoodinator {
         }
     }
 
-    static func showMessageComposeVC(shareMeta: PluginMeta) {
-        if isExistingComposeVC() {
-            showExistingComposeVC(shareMeta: shareMeta)
+    static func showMessageCompose(shareMeta: PluginMeta) {
+        if composeExists() {
+            showExistingCompose(shareMeta: shareMeta)
         } else {
             @InjectedProvider(\.mainCoordinator)
             var coordinator: Coordinator
@@ -38,7 +38,7 @@ final class MessageComposeCoodinator {
     }
 }
 
-extension UIApplication {
+private extension UIApplication {
     class func findMessageComposeViewController(
         base: UIViewController? = nil
     ) -> UIViewController? {

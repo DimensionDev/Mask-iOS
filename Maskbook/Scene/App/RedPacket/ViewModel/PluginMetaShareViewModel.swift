@@ -38,7 +38,7 @@ final class PluginMetaShareViewModel: NSObject {
         guard showGuideWhenNoPersonaOrProfile() else { return }
         guard let rpid = payload.basic?.rpid, rpid.isNotEmpty else { return }
 
-        MessageComposeCoodinator.showMessageComposeVC(shareMeta: meta)
+        MessageComposeCoodinator.showMessageCompose(shareMeta: meta)
     }
     
     @MainActor
@@ -46,7 +46,7 @@ final class PluginMetaShareViewModel: NSObject {
         let meta = PluginMeta.redPacket(payload)
         self.shareMeta = meta
         guard showGuideWhenNoPersonaOrProfile() else { return }
-        MessageComposeCoodinator.showMessageComposeVC(shareMeta: meta)
+        MessageComposeCoodinator.showMessageCompose(shareMeta: meta)
     }
     
     @MainActor
@@ -54,13 +54,13 @@ final class PluginMetaShareViewModel: NSObject {
         let meta = PluginMeta.fileService(fileServiceResult)
         self.shareMeta = meta
         guard showGuideWhenNoPersonaOrProfile() else { return }
-        MessageComposeCoodinator.showMessageComposeVC(shareMeta: meta)
+        MessageComposeCoodinator.showMessageCompose(shareMeta: meta)
     }
     
     private func reShare() {
         if let shareMeta = shareMeta {
             coordinator.topViewController?.dismiss(animated: true, completion: {
-                MessageComposeCoodinator.showMessageComposeVC(shareMeta: shareMeta)
+                MessageComposeCoodinator.showMessageCompose(shareMeta: shareMeta)
             })
         }
     }

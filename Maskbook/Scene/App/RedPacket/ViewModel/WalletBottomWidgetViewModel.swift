@@ -173,7 +173,7 @@ class WalletBottomWidgetViewModel: ObservableObject {
                             tx: transcation.txHash) else {
                         return
                     }
-                    await MessageComposeCoodinator.showMessageComposeVC(shareMeta: .redPacket(payload))
+                    await MessageComposeCoodinator.showMessageCompose(shareMeta: .redPacket(payload))
                 }
             }
         }
