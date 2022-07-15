@@ -651,7 +651,7 @@
       "recovery_sign_in": "恢复角色"
     },
     "identity_create": {
-      "title": "",
+      "title": "创建角色",
       "description": "下载您的身份代码。",
       "identity_tips": "身份代码用于生成您的身份。"
     },
