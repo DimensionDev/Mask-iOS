@@ -155,14 +155,14 @@
         "description": "文件的大小超出10.5MB的限制 "
       },
       "red_packet_no_wallet": {
-        "title": "",
-        "description": ""
+        "title": "没有钱包",
+        "description": "你不能使用 Lucky Drop，因为没有钱包。请创建、导入或连接一个钱包。"
       }
     },
     "controls": {
       "create_wallet": "创建钱包",
       "import_wallet": "导入钱包",
-      "connect_wallet": "",
+      "connect_wallet": "连接钱包",
       "accept": "同意",
       "enable": "开启",
       "no_thanks": "不用了",
@@ -651,7 +651,7 @@
       "recovery_sign_in": "恢复角色"
     },
     "identity_create": {
-      "title": "创建身份",
+      "title": "创建角色",
       "description": "下载您的身份代码。",
       "identity_tips": "身份代码用于生成您的身份。"
     },
@@ -793,7 +793,7 @@
         "data_failed_to_fetch": "请尝试重新加载数据。",
         "failed_to_download_file": "下载远端文件失败。",
         "incorrect_backup_password": "云端备份密码错误",
-        "invalid_email_address": "",
+        "invalid_email_address": "请输入正确的邮箱地址",
         "invalid_mobile_number": "手机号码错误",
         "email_validationcode": "验证码已经通过电子邮件发送至",
         "mobile_validationcode": "验证码已通过短信发送至",
