@@ -18,7 +18,7 @@ final class PluginMetaShareViewModel: NSObject {
     
     var shareMeta: PluginMeta?
     
-    let delegate = FullScreenPresantationAdaptive()
+    let delegate = FullScreenPresantationAdaptor()
 
     @MainActor
     func shareRedPacket(transcation: PendingTransaction) {
