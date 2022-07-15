@@ -90,11 +90,9 @@ class WalletBottomWidgetViewModel: ObservableObject {
     private var address: String = ""
     
     let source: LuckyDropViewModel.Source
-    let callback: (@MainActor (RedPacketPayload) -> Void)?
     
-    init(source: LuckyDropViewModel.Source, callback: (@MainActor (RedPacketPayload) -> Void)?) {
+    init(source: LuckyDropViewModel.Source) {
         self.source = source
-        self.callback = callback
         
         Publishers.CombineLatest3(
             settings.defaultAccountAddressPublisher.removeDuplicates(),
@@ -175,7 +173,7 @@ class WalletBottomWidgetViewModel: ObservableObject {
                             tx: transcation.txHash) else {
                         return
                     }
-                    await callback?(payload)
+                    await MessageComposeCoodinator.showMessageCompose(shareMeta: .redPacket(payload))
                 }
             }
         }

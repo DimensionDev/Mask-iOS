@@ -731,6 +731,7 @@
 		5DC018402859BE84004973CA /* ArweaveTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC018362859BE84004973CA /* ArweaveTransaction.swift */; };
 		5DC018412859BE84004973CA /* Arweave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC018382859BE84004973CA /* Arweave.swift */; };
 		5DC018422859BE84004973CA /* ArweaveHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC018392859BE84004973CA /* ArweaveHttpClient.swift */; };
+		5DC95947287EA6F4008DAB6D /* MessageComposeCoodinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC95946287EA6F4008DAB6D /* MessageComposeCoodinator.swift */; };
 		5DCA069B27C75A8B007697C8 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCA069A27C75A8B007697C8 /* Toast.swift */; };
 		5DD1BBC227CF0843001DB330 /* Toast+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BBC127CF0843001DB330 /* Toast+Extension.swift */; };
 		5DD5A69827F53168005952A0 /* PersonaImportItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD5A69727F53168005952A0 /* PersonaImportItem.swift */; };
@@ -1580,6 +1581,7 @@
 		5DC018362859BE84004973CA /* ArweaveTransaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArweaveTransaction.swift; sourceTree = "<group>"; };
 		5DC018382859BE84004973CA /* Arweave.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arweave.swift; sourceTree = "<group>"; };
 		5DC018392859BE84004973CA /* ArweaveHttpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArweaveHttpClient.swift; sourceTree = "<group>"; };
+		5DC95946287EA6F4008DAB6D /* MessageComposeCoodinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageComposeCoodinator.swift; sourceTree = "<group>"; };
 		5DCA069A27C75A8B007697C8 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		5DD1BBC127CF0843001DB330 /* Toast+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Toast+Extension.swift"; sourceTree = "<group>"; };
 		5DD5A69727F53168005952A0 /* PersonaImportItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaImportItem.swift; sourceTree = "<group>"; };
@@ -3799,6 +3801,7 @@
 			children = (
 				5D0ADACC28363E2D0022D5BD /* MessageComposeView.swift */,
 				5D0ADACD28363E2D0022D5BD /* MessageComposeViewModel.swift */,
+				5DC95946287EA6F4008DAB6D /* MessageComposeCoodinator.swift */,
 			);
 			path = Compose;
 			sourceTree = "<group>";
@@ -4699,6 +4702,7 @@
 				2AD855FC2812875A0064DDA5 /* Transition.swift in Sources */,
 				2AD8561C2812875A0064DDA5 /* SheetHostingController.swift in Sources */,
 				2A6ABB972720053B00CC3AED /* CloudRestoreVerifyView+extension.swift in Sources */,
+				5DC95947287EA6F4008DAB6D /* MessageComposeCoodinator.swift in Sources */,
 				2A6ABB7D2720053B00CC3AED /* SelectDataSourceViewModel.swift in Sources */,
 				2AF88532271EE9310004565A /* WalletImportViewModel.swift in Sources */,
 				2A6ABB882720053B00CC3AED /* RestoreDataPickerController.swift in Sources */,

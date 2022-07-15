@@ -198,7 +198,7 @@ class Coordinator {
             shareActionDelegate: RedPacketShareDelegate?
         )
         case moveBackupData
-        case luckyDrop(source: LuckyDropViewModel.Source, callback: (@MainActor (RedPacketPayload) -> Void)? = nil)
+        case luckyDrop(source: LuckyDropViewModel.Source)
         case luckyDropConfirm(
             token: Token,
             gasFeeViewModel: GasFeeViewModel,
@@ -808,8 +808,8 @@ extension Coordinator {
         case .moveBackupData:
             return MoveBackupDataViewController()
             
-        case let .luckyDrop(source, callback):
-            let vc = LuckyDropViewController(source: source, callback: callback)
+        case let .luckyDrop(source):
+            let vc = LuckyDropViewController(source: source)
             let nav = NavigationController(rootViewController: vc)
             nav.modalPresentationStyle = .overFullScreen
             return nav
@@ -924,7 +924,7 @@ extension InjectValues {
     }
 }
 
-class FullScreenAdaptive: NSObject, UIAdaptivePresentationControllerDelegate {
+class FullScreenPresantationAdaptor: NSObject, UIAdaptivePresentationControllerDelegate {
     func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {}
     
     func adaptivePresentationStyle(

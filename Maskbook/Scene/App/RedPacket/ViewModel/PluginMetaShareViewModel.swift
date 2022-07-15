@@ -17,6 +17,8 @@ final class PluginMetaShareViewModel: NSObject {
     private var personaManager
     
     var shareMeta: PluginMeta?
+    
+    let delegate = FullScreenPresantationAdaptor()
 
     @MainActor
     func shareRedPacket(transcation: PendingTransaction) {
@@ -36,7 +38,7 @@ final class PluginMetaShareViewModel: NSObject {
         guard showGuideWhenNoPersonaOrProfile() else { return }
         guard let rpid = payload.basic?.rpid, rpid.isNotEmpty else { return }
 
-        coordinator.present(scene: .messageCompose(meta), transition: .modal(animated: true))
+        MessageComposeCoodinator.showMessageCompose(shareMeta: meta)
     }
     
     @MainActor
@@ -44,7 +46,7 @@ final class PluginMetaShareViewModel: NSObject {
         let meta = PluginMeta.redPacket(payload)
         self.shareMeta = meta
         guard showGuideWhenNoPersonaOrProfile() else { return }
-        coordinator.present(scene: .messageCompose(meta), transition: .modal(animated: true))
+        MessageComposeCoodinator.showMessageCompose(shareMeta: meta)
     }
     
     @MainActor
@@ -52,13 +54,13 @@ final class PluginMetaShareViewModel: NSObject {
         let meta = PluginMeta.fileService(fileServiceResult)
         self.shareMeta = meta
         guard showGuideWhenNoPersonaOrProfile() else { return }
-        coordinator.present(scene: .messageCompose(meta), transition: .modal(animated: true))
+        MessageComposeCoodinator.showMessageCompose(shareMeta: meta)
     }
     
     private func reShare() {
         if let shareMeta = shareMeta {
             coordinator.topViewController?.dismiss(animated: true, completion: {
-                self.coordinator.present(scene: .messageCompose(shareMeta), transition: .modal(animated: true))
+                MessageComposeCoodinator.showMessageCompose(shareMeta: shareMeta)
             })
         }
     }
@@ -75,9 +77,12 @@ final class PluginMetaShareViewModel: NSObject {
             // create a profile, then share manually
             coordinator.present(
                 scene: .maskConnectingSocial(
-                    socialPlatform: .twitter, personaIdentifier: persona.nonOptionalIdentifier
+                    socialPlatform: .twitter,
+                    personaIdentifier: persona.nonOptionalIdentifier
                 ),
-                transition: .modal(wapperNav: true, animated: true, adaptiveDelegate: self)
+                transition: .modal(wapperNav: true,
+                                   animated: true,
+                                   adaptiveDelegate: delegate)
             )
             return false
         } else if currentTwitterProfiles.count == 1 {
@@ -90,16 +95,5 @@ final class PluginMetaShareViewModel: NSObject {
             }), transition: .modal())
             return false
         }
-    }
-}
-
-extension PluginMetaShareViewModel: UIAdaptivePresentationControllerDelegate {
-    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {}
-
-    func adaptivePresentationStyle(for controller: UIPresentationController,
-                                   traitCollection: UITraitCollection)
-        -> UIModalPresentationStyle
-    {
-        .overFullScreen
     }
 }
