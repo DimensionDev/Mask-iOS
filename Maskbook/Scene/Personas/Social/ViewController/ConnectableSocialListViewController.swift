@@ -68,27 +68,12 @@ class ConnectableSocialListViewController: BaseViewController {
                         .addSelfConstraints()
                     self.tapToConnect(view: $0, socialPlatform: .facebook)
                 }
-            ConnectableSocialListViewController.SocialView()
-                .cv.apply {
-                    $0.configWith(socialPlatform: .instagram)
-                        .withViewEnabled(enabled: false)
-                        .addSelfConstraints()
-                }
-        }
-        let hStack2 = HStackView {
-            ConnectableSocialListViewController.SocialView()
-                .cv.apply {
-                    $0.configWith(socialPlatform: .minds)
-                        .withViewEnabled(enabled: false)
-                        .addSelfConstraints()
-                }
-            UStack.Spacer()
+            Spacer()
         }
         let vStack = VStackView {
             titleLabel
             connectTipsLabel
             hStack1
-            hStack2
             UStack.Spacer()
         }
         vStack.setCustomSpacing(25, after: hStack1)
