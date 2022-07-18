@@ -28,7 +28,7 @@ target 'Maskbook' do
   pod 'Alamofire', '5.4.4'
 
   # Press
-  pod "EUMTouchPointView"
+  pod "EUMTouchPointView", '0.1.0'
   
   pod 'Kingfisher', '7.2.0'
   
@@ -36,7 +36,7 @@ target 'Maskbook' do
   
   pod 'IQKeyboardManagerSwift', '6.3.0'
   
-  pod 'FLEX', :configurations => ['Debug']
+  pod 'FLEX', '4.7.0', :configurations => ['Debug']
   
   pod 'RSKPlaceholderTextView', '6.0.4'
   
@@ -50,7 +50,7 @@ target 'Maskbook' do
   #UI
   pod 'SnapKit', '5.0.1'
   #debug
-  pod 'LookinServer', :configurations => ['Debug']
+  pod 'LookinServer', '1.0.6', :configurations => ['Debug']
 
   pod 'SwiftLint', '0.43.1', :configurations => ['Debug']
   

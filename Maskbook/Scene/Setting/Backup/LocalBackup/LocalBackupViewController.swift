@@ -325,20 +325,21 @@ extension LocalBackupViewController {
     
     private func bindViewModel() {
         viewModel.prepareBackup()
-        viewModel.previewPublisher.sink { [weak self] result in
-            guard let previewJSON = result?.result?.dictionary else { return }
-            Task { [weak self] in
-                let items = await BackupPreviewGenerator.generate(with: previewJSON)
-                await MainActor.run(body: { [weak self] in
+        viewModel
+            .previewPublisher
+            .dropFirst()
+            .sink { [weak self] result in
+                let previewJSON = result?.result?.dictionary ?? [:]
+                Task(priority: .high) { @MainActor [weak self] in
+                    let items = await BackupPreviewGenerator.generate(with: previewJSON)
                     for item in items {
                         if let item = self?.buildInfoRow(title: item.0, value: item.1) {
                             self?.infoStackView.addArrangedSubview(item)
                         }
                     }
-                })
+                }
             }
-        }
-        .store(in: &disposeBag)
+            .store(in: &disposeBag)
         
         viewModel.$loading
             .receive(on: DispatchQueue.main)

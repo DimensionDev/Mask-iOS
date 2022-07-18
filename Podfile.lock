@@ -184,15 +184,15 @@ DEPENDENCIES:
   - CombineEvent (= 1.0.0)
   - CombineExt (= 1.7.0)
   - EFQRCode (= 6.1.0)
-  - EUMTouchPointView
+  - EUMTouchPointView (= 0.1.0)
   - Firebase/Analytics (= 9.2.0)
-  - FLEX
+  - FLEX (= 4.7.0)
   - IPFSClientKit
   - IQKeyboardManagerSwift (= 6.3.0)
   - KeychainAccess (= 4.2.2)
   - Kingfisher (= 7.2.0)
   - KMPageControl (= 0.0.3)
-  - LookinServer
+  - LookinServer (= 1.0.6)
   - MaskbookPlugin (from `./DevelopmentPod/MaskbookPlugin`)
   - MaskbookPlugin/Tests (from `./DevelopmentPod/MaskbookPlugin`)
   - MaskLog (from `./DevelopmentPod/MaskLog`)
@@ -350,6 +350,6 @@ SPEC CHECKSUMS:
   WebExtension-Shim: 11b071466c53f42097291eb176cf9bcc5fb9b050
   ZIPFoundation: ae5b4b813d216d3bf0a148773267fff14bd51d37
 
-PODFILE CHECKSUM: e04530616649d29413a5f68f4bc11ad0da454482
+PODFILE CHECKSUM: 4fef305f01e36b53808efd582da9f3d064efa5f5
 
 COCOAPODS: 1.11.3
