@@ -61,6 +61,8 @@
 "Common.Alert.RecoveryKeyTips.Title" = "请妥善存储您的恢复密钥";
 "Common.Alert.RecoveryKeyWarning.Description" = "仅仅依靠截图保存助记词是不安全的。";
 "Common.Alert.RecoveryKeyWarning.Title" = "提示";
+"Common.Alert.RedPacketNoWallet.Description" = "你不能使用 Lucky Drop，因为没有钱包。请创建、导入或连接一个钱包。";
+"Common.Alert.RedPacketNoWallet.Title" = "没有钱包";
 "Common.Alert.ScanFailed.Description" = "无法识别二维码。";
 "Common.Alert.ScanFailed.Title" = "扫描失败";
 "Common.Alert.ScanPersonaExist.Description" = "该二维码对应的身份已存在。";
@@ -95,6 +97,7 @@
 "Common.Controls.Clear" = "清空";
 "Common.Controls.Compose" = "发送加密帖子";
 "Common.Controls.Confirm" = "确定";
+"Common.Controls.ConnectWallet" = "连接钱包";
 "Common.Controls.CreateWallet" = "创建钱包";
 "Common.Controls.Done" = "完成";
 "Common.Controls.DontAllow" = "不允许";
@@ -349,7 +352,7 @@ Clicking the confirm button means that you agree to bear the above possible risk
 "Scene.IdentifyVerify.Title" = "验证身份助记词";
 "Scene.IdentityCreate.Description" = "下载您的身份代码。";
 "Scene.IdentityCreate.IdentityTips" = "身份代码用于生成您的身份。";
-"Scene.IdentityCreate.Title" = "创建身份";
+"Scene.IdentityCreate.Title" = "创建角色";
 "Scene.IdentityEmpty.CreateAnIdentity" = "创建角色";
 "Scene.IdentityEmpty.RecoverySignIn" = "恢复角色";
 "Scene.IdentityEmpty.Title" = "角色";
@@ -488,7 +491,7 @@ Clicking the confirm button means that you agree to bear the above possible risk
 "Scene.Restore.Tip.FailedToDownloadFile" = "下载远端文件失败。";
 "Scene.Restore.Tip.IncorrectBackupPassword" = "云端备份密码错误";
 "Scene.Restore.Tip.IncorrectValidationcode" = "验证码错误";
-"Scene.Restore.Tip.InvalidEmailAddress" = "电子邮件地址错误";
+"Scene.Restore.Tip.InvalidEmailAddress" = "请输入正确的邮箱地址";
 "Scene.Restore.Tip.InvalidMobileNumber" = "手机号码错误";
 "Scene.Restore.Tip.InvalidValidationcode" = "验证码无效";
 "Scene.Restore.Tip.MobileValidationcode" = "验证码已通过短信发送至";

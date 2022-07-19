@@ -1584,7 +1584,7 @@ enum L10n {
       static var identityTips: String {
         return L10n.tr("Localizable", "Scene.IdentityCreate.IdentityTips")
       }
-      /// Create a Persona
+      /// Create Persona
       static var title: String {
         return L10n.tr("Localizable", "Scene.IdentityCreate.Title")
       }

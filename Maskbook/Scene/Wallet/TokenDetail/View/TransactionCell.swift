@@ -284,7 +284,7 @@ class TransactionCell: UITableViewCell {
             statusLabel.text = nil
             
         case .pending:
-            resendStackView.isHidden = true
+            resendStackView.isHidden = false
             statusLabel.text = L10n.Scene.TransactionHistory.statusPendind
             statusLabel.textColor = Asset.Colors.Public.warnings.color
             
