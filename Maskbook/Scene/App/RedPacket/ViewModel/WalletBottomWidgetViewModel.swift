@@ -138,7 +138,7 @@ class WalletBottomWidgetViewModel: ObservableObject {
                 }
                 return
             }
-            
+
             withAnimation {
                 state.status = status
                 self.txList[self.address] = state
@@ -147,11 +147,11 @@ class WalletBottomWidgetViewModel: ObservableObject {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                         self.txList.removeValue(forKey: transcation.address)
                     }
-                    
+
                 default: break
                 }
             }
-            
+
             if case .confirmed = status {
                 if case .lab = source {
                     self.coordinator.present(
@@ -161,10 +161,10 @@ class WalletBottomWidgetViewModel: ObservableObject {
                         transition: .modal()
                     )
                 }
-                
-                Task {
+
+                Task { @MainActor in
                     await self.updateRedPacketRecord(transcation: transcation)
-                    
+
                     guard let chainId = transcation.transactionInfo?.token.chainId,
                           let networkId = transcation.transactionInfo?.token.networkId,
                           let network = BlockChainNetwork(chainId: Int(chainId), networkId: UInt64(networkId)),
@@ -173,7 +173,8 @@ class WalletBottomWidgetViewModel: ObservableObject {
                             tx: transcation.txHash) else {
                         return
                     }
-                    await MessageComposeCoodinator.showMessageCompose(shareMeta: .redPacket(payload))
+
+                    MessageComposeCoodinator.showMessageCompose(shareMeta: .redPacket(payload))
                 }
             }
         }
@@ -184,14 +185,14 @@ class WalletBottomWidgetViewModel: ObservableObject {
     func updateRedPacketRecord(transcation: PendingTransaction) async {
         // update record
         guard let transactionResult = transcation.transactionReceipt,
-            let log = transactionResult.logs.first(where: { $0.address == ABI.happyRedPacketV4.contractAddress }) else {
+              let log = transactionResult.logs.first(where: { $0.address == ABI.happyRedPacketV4.contractAddress }) else {
             return
         }
         let json = ABI.happyRedPacketV4.parse(eventlog: log)
         guard let eventParam = HappyRedPacketV4.SuccessEvent(json: json),
-            let chainId = transcation.transactionInfo?.token.chainId,
-            let networkId = transcation.transactionInfo?.token.networkId,
-            let network = BlockChainNetwork(chainId: Int(chainId), networkId: UInt64(networkId)) else {
+              let chainId = transcation.transactionInfo?.token.chainId,
+              let networkId = transcation.transactionInfo?.token.networkId,
+              let network = BlockChainNetwork(chainId: Int(chainId), networkId: UInt64(networkId)) else {
             return
         }
         

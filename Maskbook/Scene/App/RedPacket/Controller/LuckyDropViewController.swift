@@ -10,6 +10,8 @@ import Combine
 import Foundation
 import SwiftUI
 
+import ResponderChain
+
 class LuckyDropViewController: BaseViewController {
     private let viewModel: LuckyDropViewModel
     private(set) var cancelableStorage: Set<AnyCancellable> = []
