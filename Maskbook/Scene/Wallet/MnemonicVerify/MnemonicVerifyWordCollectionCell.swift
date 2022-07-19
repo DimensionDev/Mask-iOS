@@ -60,6 +60,9 @@ class MnemonicVerifyWordCollectionCell: UICollectionViewCell {
     
     func configWith(word: String, state: MnemonicVerifyWordCellState) {
         wordLabel.text = word
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+
         switch state {
         case .normal:
             contentView.alpha = 0.5
@@ -75,6 +78,7 @@ class MnemonicVerifyWordCollectionCell: UICollectionViewCell {
             contentView.backgroundColor = .clear
             rectangle.opacity = 1
         }
+        CATransaction.commit()
     }
     
     override func layoutSubviews() {
