@@ -562,14 +562,11 @@
 		2AF8856C271EE9310004565A /* UnlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF88429271EE9300004565A /* UnlockViewController.swift */; };
 		2AF8856D271EE9310004565A /* WalletEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8842B271EE9300004565A /* WalletEditViewController.swift */; };
 		2AF8856E271EE9310004565A /* WalletEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8842C271EE9300004565A /* WalletEditViewModel.swift */; };
-		2AF8856F271EE9310004565A /* MnemonicVerifyFlowCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8842E271EE9300004565A /* MnemonicVerifyFlowCollectionCell.swift */; };
-		2AF88570271EE9310004565A /* WordsVerifyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8842F271EE9300004565A /* WordsVerifyProtocol.swift */; };
 		2AF88571271EE9310004565A /* MnemonicVerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF88430271EE9300004565A /* MnemonicVerifyViewController.swift */; };
-		2AF88572271EE9310004565A /* MnemonicVerifyWordCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF88431271EE9300004565A /* MnemonicVerifyWordCollectionDataSource.swift */; };
+		2AF88572271EE9310004565A /* MnemonicVerifyCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF88431271EE9300004565A /* MnemonicVerifyCollectionDataSource.swift */; };
 		2AF88573271EE9310004565A /* MnemonicVerifyWordCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF88432271EE9300004565A /* MnemonicVerifyWordCollectionCell.swift */; };
-		2AF88574271EE9310004565A /* MnemonicVerifyFlowCollectionFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF88433271EE9300004565A /* MnemonicVerifyFlowCollectionFlowLayout.swift */; };
+		2AF88574271EE9310004565A /* FlowCollectionFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF88433271EE9300004565A /* FlowCollectionFlowLayout.swift */; };
 		2AF88575271EE9310004565A /* MnemonicVerifyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF88434271EE9300004565A /* MnemonicVerifyViewModel.swift */; };
-		2AF88576271EE9310004565A /* MnemonicVerifyFlowCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF88435271EE9300004565A /* MnemonicVerifyFlowCollectionDataSource.swift */; };
 		2AF88581271EE9310004565A /* WalletListAddWalletConnectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF88444271EE9300004565A /* WalletListAddWalletConnectCell.swift */; };
 		2AF88582271EE9310004565A /* TermsOfServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF88446271EE9300004565A /* TermsOfServiceViewController.swift */; };
 		2AF88583271EE9310004565A /* WalletHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF88448271EE9300004565A /* WalletHistoryViewController.swift */; };
@@ -1416,14 +1413,11 @@
 		2AF88429271EE9300004565A /* UnlockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnlockViewController.swift; sourceTree = "<group>"; };
 		2AF8842B271EE9300004565A /* WalletEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletEditViewController.swift; sourceTree = "<group>"; };
 		2AF8842C271EE9300004565A /* WalletEditViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletEditViewModel.swift; sourceTree = "<group>"; };
-		2AF8842E271EE9300004565A /* MnemonicVerifyFlowCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MnemonicVerifyFlowCollectionCell.swift; sourceTree = "<group>"; };
-		2AF8842F271EE9300004565A /* WordsVerifyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsVerifyProtocol.swift; sourceTree = "<group>"; };
 		2AF88430271EE9300004565A /* MnemonicVerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MnemonicVerifyViewController.swift; sourceTree = "<group>"; };
-		2AF88431271EE9300004565A /* MnemonicVerifyWordCollectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MnemonicVerifyWordCollectionDataSource.swift; sourceTree = "<group>"; };
+		2AF88431271EE9300004565A /* MnemonicVerifyCollectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MnemonicVerifyCollectionDataSource.swift; sourceTree = "<group>"; };
 		2AF88432271EE9300004565A /* MnemonicVerifyWordCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MnemonicVerifyWordCollectionCell.swift; sourceTree = "<group>"; };
-		2AF88433271EE9300004565A /* MnemonicVerifyFlowCollectionFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MnemonicVerifyFlowCollectionFlowLayout.swift; sourceTree = "<group>"; };
+		2AF88433271EE9300004565A /* FlowCollectionFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowCollectionFlowLayout.swift; sourceTree = "<group>"; };
 		2AF88434271EE9300004565A /* MnemonicVerifyViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MnemonicVerifyViewModel.swift; sourceTree = "<group>"; };
-		2AF88435271EE9300004565A /* MnemonicVerifyFlowCollectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MnemonicVerifyFlowCollectionDataSource.swift; sourceTree = "<group>"; };
 		2AF88444271EE9300004565A /* WalletListAddWalletConnectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletListAddWalletConnectCell.swift; sourceTree = "<group>"; };
 		2AF88446271EE9300004565A /* TermsOfServiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsOfServiceViewController.swift; sourceTree = "<group>"; };
 		2AF88448271EE9300004565A /* WalletHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletHistoryViewController.swift; sourceTree = "<group>"; };
@@ -3532,14 +3526,11 @@
 		2AF8842D271EE9300004565A /* MnemonicVerify */ = {
 			isa = PBXGroup;
 			children = (
-				2AF8842E271EE9300004565A /* MnemonicVerifyFlowCollectionCell.swift */,
-				2AF8842F271EE9300004565A /* WordsVerifyProtocol.swift */,
 				2AF88430271EE9300004565A /* MnemonicVerifyViewController.swift */,
-				2AF88431271EE9300004565A /* MnemonicVerifyWordCollectionDataSource.swift */,
+				2AF88431271EE9300004565A /* MnemonicVerifyCollectionDataSource.swift */,
 				2AF88432271EE9300004565A /* MnemonicVerifyWordCollectionCell.swift */,
-				2AF88433271EE9300004565A /* MnemonicVerifyFlowCollectionFlowLayout.swift */,
+				2AF88433271EE9300004565A /* FlowCollectionFlowLayout.swift */,
 				2AF88434271EE9300004565A /* MnemonicVerifyViewModel.swift */,
-				2AF88435271EE9300004565A /* MnemonicVerifyFlowCollectionDataSource.swift */,
 			);
 			path = MnemonicVerify;
 			sourceTree = "<group>";
@@ -4595,7 +4586,7 @@
 				2AD31E47282D367700CB3D49 /* BigInt+Conversion.swift in Sources */,
 				5DC0181728597908004973CA /* Extensions.swift in Sources */,
 				DB0B3A5D240F60AE00B1657D /* Coordinator.swift in Sources */,
-				2AF88572271EE9310004565A /* MnemonicVerifyWordCollectionDataSource.swift in Sources */,
+				2AF88572271EE9310004565A /* MnemonicVerifyCollectionDataSource.swift in Sources */,
 				2AD31E6B282D367700CB3D49 /* String+Regex.swift in Sources */,
 				2AD31E65282D367700CB3D49 /* Optional+Extension.swift in Sources */,
 				5DC018412859BE84004973CA /* Arweave.swift in Sources */,
@@ -4810,7 +4801,7 @@
 				2A6788D127EB6C8800CC2350 /* PrimaryButton.swift in Sources */,
 				2AF8856D271EE9310004565A /* WalletEditViewController.swift in Sources */,
 				2AF8855F271EE9310004565A /* SearchTokenListViewController.swift in Sources */,
-				2AF88574271EE9310004565A /* MnemonicVerifyFlowCollectionFlowLayout.swift in Sources */,
+				2AF88574271EE9310004565A /* FlowCollectionFlowLayout.swift in Sources */,
 				2AD31E49282D367700CB3D49 /* UICollectionView+extension.swift in Sources */,
 				2AF884D5271EE9310004565A /* PersonaManager.swift in Sources */,
 				1F5B5EF528582F3400F6AD98 /* FileServiceViewModel.swift in Sources */,
@@ -5049,10 +5040,8 @@
 				0F4961092728FD5F00F16313 /* CollectibleIconImageView.swift in Sources */,
 				2AF884B6271EE9300004565A /* WalletConnectConnectingViewController.swift in Sources */,
 				2AF88528271EE9310004565A /* MnemonicWordCollectionCell.swift in Sources */,
-				2AF8856F271EE9310004565A /* MnemonicVerifyFlowCollectionCell.swift in Sources */,
 				6F785E2F269305E20019079F /* RecentlyAddress.swift in Sources */,
 				2A6ABB832720053B00CC3AED /* SetPasswordViewModel.swift in Sources */,
-				2AF88570271EE9310004565A /* WordsVerifyProtocol.swift in Sources */,
 				2AF8858A271EE9310004565A /* SelectItemViewController.swift in Sources */,
 				2AFBEDE526E61D6400BD77B7 /* LoadingWithTextController.swift in Sources */,
 				1F173D4D2872E138007A5A24 /* FileServiceUploadViewModel.swift in Sources */,
@@ -5136,7 +5125,6 @@
 				0F641F10268B0237002A4D33 /* MaskError.swift in Sources */,
 				2AF884FF271EE9310004565A /* ContactProfileTableViewCell.swift in Sources */,
 				1F9C60D726B101C6001C26D2 /* BlockChainNetworkRepresentable.swift in Sources */,
-				2AF88576271EE9310004565A /* MnemonicVerifyFlowCollectionDataSource.swift in Sources */,
 				5DB39E322786A8970025337C /* JSResourceSelectViewModel.swift in Sources */,
 				2AD31E67282D367700CB3D49 /* CGAffineTransform+extensiion.swift in Sources */,
 				0FFD85922660CF1400D391A9 /* Vault.swift in Sources */,

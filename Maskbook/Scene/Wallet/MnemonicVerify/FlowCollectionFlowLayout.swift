@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class MnemonicVerifyCollectionFlowLayout: UICollectionViewFlowLayout {
+class FlowCollectionFlowLayout: UICollectionViewFlowLayout {
     enum SpacingMode {
         case fixed(spacing: CGFloat)
         case overlap(visibleOffset: CGFloat)

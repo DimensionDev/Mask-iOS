@@ -69,7 +69,7 @@ class PersonasViewController: BaseViewController {
     }()
 
     private lazy var personaCollectionView: UICollectionView = {
-        let flowLayout = MnemonicVerifyCollectionFlowLayout()
+        let flowLayout = FlowCollectionFlowLayout()
         flowLayout.itemSize = PersonaCollectionDataSource.itemSize
         flowLayout.scrollDirection = .horizontal
         flowLayout.sideItemXScale = 0.94
