@@ -40,6 +40,14 @@ class MnemonicVerifyWordCollectionCell: UICollectionViewCell {
     }
     
     func configure() {
+        rectangle.lineCap         = .round
+        rectangle.cornerRadius    = 8
+        rectangle.strokeColor     = Asset.Colors.Text.link.color.cgColor
+        rectangle.lineDashPattern = [4, 4]
+        rectangle.fillColor = nil
+        rectangle.lineWidth = 2
+        contentView.layer.addSublayer(rectangle)
+        
         applyCornerRadius(radius: 8)
         
         wordLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -48,14 +56,6 @@ class MnemonicVerifyWordCollectionCell: UICollectionViewCell {
             wordLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             wordLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
-        
-        rectangle.lineCap         = .round
-        rectangle.cornerRadius    = 8
-        rectangle.strokeColor     = Asset.Colors.Text.link.color.cgColor
-        rectangle.lineDashPattern = [4, 4]
-        rectangle.fillColor = nil
-        rectangle.lineWidth = 2
-        contentView.layer.addSublayer(rectangle)
     }
     
     func configWith(word: String, state: MnemonicVerifyWordCellState) {

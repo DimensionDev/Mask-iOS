@@ -1724,13 +1724,9 @@ enum L10n {
       static var description: String {
         return L10n.tr("Localizable", "Scene.MnemonicVerify.Description")
       }
-      /// The mnemonic is incorrect
+      /// Verify Failed. Please try again.
       static var mnemonicError: String {
         return L10n.tr("Localizable", "Scene.MnemonicVerify.MnemonicError")
-      }
-      /// Tap the middle to replace the word.
-      static var mnemonicPrompt: String {
-        return L10n.tr("Localizable", "Scene.MnemonicVerify.MnemonicPrompt")
       }
       /// Verify Your Phrase
       static var title: String {

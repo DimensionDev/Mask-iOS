@@ -26,7 +26,7 @@ class MnemonicVerifyViewController: BaseViewController {
         label.font = FontStyles.MH6
         label.textColor = Asset.Colors.Public.error.color
         label.text = L10n.Scene.MnemonicVerify.mnemonicError
-        label.textAlignment = .center
+        label.textAlignment = .left
         return label
     }()
     
@@ -41,6 +41,7 @@ class MnemonicVerifyViewController: BaseViewController {
     
     private lazy var wordsCollectionContainer: UIView = {
         let view = UIView()
+        view.layer.addSublayer(backgroundLayer)
         view.withSubViews {
             wordsCollectionView
         }
@@ -51,7 +52,6 @@ class MnemonicVerifyViewController: BaseViewController {
             wordsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             wordsCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
         ])
-        view.layer.addSublayer(backgroundLayer)
         return view
     }()
     
@@ -122,21 +122,17 @@ extension MnemonicVerifyViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] mnemonicError in
                 guard let self = self else { return }
-                if mnemonicError == true {
-                    self.confirmButton.isEnabled = false
-                    self.mnemonicPromptLabel.text = L10n.Scene.MnemonicVerify.mnemonicError
-                    self.mnemonicPromptLabel.textColor = Asset.Colors.Public.error.color
-                } else {
-                    self.confirmButton.isEnabled = true
-                    self.mnemonicPromptLabel.text = L10n.Scene.MnemonicVerify.mnemonicPrompt
-                    self.mnemonicPromptLabel.textColor = Asset.Colors.Public.warnings.color
+                if mnemonicError {
+                    self.viewModel.selectedWords.value = []
                 }
+                self.mnemonicPromptLabel.alpha = mnemonicError ? 1 : 0
             }
             .store(in: &disposeBag)
         
         viewModel.selectedWords
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
+            .sink { [weak self] words in
+                self?.confirmButton.isEnabled = words.count == 3
                 self?.wordsCollectionView.reloadData()
                 self?.verifyCollectionView.reloadData()
             }
@@ -160,7 +156,7 @@ extension MnemonicVerifyViewController {
             wordTitleLabel
             UStack.Spacer(height: 80, width: nil)
             wordsCollectionContainer
-            UStack.Spacer(height: 40, width: nil)
+            mnemonicPromptLabel
             verifyCollectionView
             UStack.Spacer()
             confirmButton

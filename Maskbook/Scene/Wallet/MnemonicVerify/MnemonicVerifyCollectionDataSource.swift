@@ -25,13 +25,14 @@ extension MnemonicVerifyWordCollectionDataSource: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MnemonicVerifyWordCollectionCell.self), for: indexPath) as! MnemonicVerifyWordCollectionCell
         var word = viewModel.words[indexPath.row]
-        let state = viewModel.stateForCurrentWord(word: word)
-        if viewModel.wordsIndexesNeedVerify.contains(indexPath.row) {
-            guard let index = viewModel.wordsIndexesNeedVerify.firstIndex(of: indexPath.row) else {
-                return MnemonicVerifyWordCollectionCell()
-            }
-            if let newWord = viewModel.selectedWords.value[safeIndex: index] {
+        var state = MnemonicVerifyWordCellState.normal
+        if viewModel.wordsNeedVerifyShuffle.contains(word) {
+            if let newWord = self.viewModel.selectedWordsPendingDisplay.first {
+                self.viewModel.selectedWordsPendingDisplay.removeFirst()
                 word = newWord
+                state = .verified
+            } else {
+                state = .blank
             }
         }
         cell.configWith(word: word, state: state)
