@@ -167,9 +167,7 @@ extension WalletCoreStorage {
                 try viewContext.saveOrRollback()
                 return false
             }
-            // Here is the conversion of some abnormal addresses returned from metamask to normal addresses.
-            let checksumAddress = EthereumAddress.toChecksumAddress(address) ?? address
-            let account = Account(session: session, address: checksumAddress)
+            let account = Account(session: session, address: address)
             viewContext.insert(account)
             try viewContext.saveOrRollback()
             return true

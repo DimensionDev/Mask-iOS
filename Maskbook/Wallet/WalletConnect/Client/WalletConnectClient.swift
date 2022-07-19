@@ -10,6 +10,7 @@ import Combine
 import CoreDataStack
 import Foundation
 import WalletConnectSwift
+import web3swift
 
 // swiftlint:disable force_unwrapping function_parameter_count line_length
 class WalletConnectClient {
@@ -154,7 +155,12 @@ extension WalletConnectClient: ClientDelegate {
             disconnect(session: session)
             return
         }
-        guard let address = session.walletInfo?.accounts[safeIndex: 0] else {
+        guard let accounts: [String] = session.walletInfo?.accounts.compactMap({
+            EthereumAddress.toChecksumAddress($0) ?? $0
+        }) else {
+            return
+        }
+        guard let address = accounts.first else {
             disconnect(session: session)
             return
         }
@@ -218,19 +224,23 @@ extension WalletConnectClient: ClientDelegate {
     
     func saveAccount(session: Session, address: String, network: BlockChainNetwork) {
         AppContext.shared.coreDataStack.persistentContainer.viewContext.perform {
-            if let accounts = session.walletInfo?.accounts {
-                for account in accounts {
-                    let isNewAccount = WalletCoreStorage.addWalletConnectAccount(session: session, address: account)
-                    if isNewAccount, network.networkId != self.userSetting.network.networkId {
-                        self.delegate.showChangeNetworkAlert(networkFromSession: network, address: address)
-                    }
+            guard let accounts: [String] = session.walletInfo?.accounts.compactMap({
+                EthereumAddress.toChecksumAddress($0) ?? $0
+            }) else {
+                return
+            }
+            for account in accounts {
+                let isNewAccount = WalletCoreStorage.addWalletConnectAccount(session: session, address: account)
+                if isNewAccount, network.networkId != self.userSetting.network.networkId {
+                    self.delegate.showChangeNetworkAlert(networkFromSession: network, address: address)
                 }
             }
         }
     }
     
     func removeAccountFromSession(session: Session) {
-        guard let address = session.walletInfo?.accounts[0] else { return }
+        guard let rawAddress = session.walletInfo?.accounts[0] else { return }
+        let address = EthereumAddress.toChecksumAddress(rawAddress) ?? rawAddress
         AppContext.shared.coreDataStack.persistentContainer.viewContext.perform {
             if let account = WalletCoreStorage.getAccount(address: address) {
                 guard account.fromWalletConnect else { return }
