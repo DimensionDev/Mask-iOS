@@ -64,6 +64,21 @@ struct KeyBoardObservingModifier: ViewModifier {
         )
     }
 
+    init(_ binding: Binding<Bool>) {
+        _viewModel = .init(
+            wrappedValue: .init(
+                isFirstResponder: .init(
+                    get: {
+                        binding.wrappedValue
+                    },
+                    set: { newValue, _ in
+                        binding.wrappedValue = newValue
+                    }
+                )
+            )
+        )
+    }
+
     // MARK: Internal
 
     final class ViewModel: ObservableObject {

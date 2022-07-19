@@ -1000,7 +1000,9 @@
         "no-total-amount": "Enter Total Amount",
         "no-message": "Enter Attached Messege",
         "minimum-amount": "The minimum amount for each share is %@ %@",
-        "send": "Send %@"
+        "send": "Send %@",
+        "select-NFTs": "Select NFTs",
+        "select-NFT-collection": "Select NFT collection"
       },
       "state": {
         "pending": "Pending...",
@@ -1042,7 +1044,9 @@
       "account": "Account",
       "refund_tip": "Refund the unclaimed after %@",
       "history_title": "History Records",
-      "created": "Created"
+      "created": "Created",
+      "nft-message-placeholder": "Enter attached message",
+      "nft-selected": "NFTs selected"
     }
   }
 }

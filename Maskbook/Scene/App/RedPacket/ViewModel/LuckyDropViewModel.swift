@@ -38,7 +38,7 @@ final class LuckyDropViewModel: ObservableObject {
     @Published var gasFeeItem: GasFeeCellItem?
     @Published var buttonType: ConfirmButtonType = .send
     @Published var allowances = [String: BigUInt]()
-    @Published var selection = LuckDropKind.token
+    @Published var selection = LuckDropKind.nft
     
     let walletBottomViewModel: WalletBottomWidgetViewModel
     

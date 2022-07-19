@@ -23,7 +23,7 @@ enum DAppService {
         }
     }
     
-    static func sendRiskWarningConfirm(address: String, pluginId: String? = nil) {
+    static func sendRiskWarningConfirm(address: String, pluginID: String? = nil) {
 #if DEBUG
         let host = CloudHost.development.url
 #else
@@ -32,7 +32,7 @@ enum DAppService {
         let encoder = JSONEncoder()
         let params = [
             "address": address,
-            "plugin_id": pluginId ?? ""
+            "plugin_id": pluginID ?? ""
         ]
         guard let requestData = try? encoder.encode(params) else {
             return

@@ -897,6 +897,14 @@ enum L10n {
       static var nft: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Nft")
       }
+      /// Enter attached message
+      static var nftMessagePlaceholder: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Nft-Message-Placeholder")
+      }
+      /// NFTs selected
+      static var nftSelected: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Nft-Selected")
+      }
       /// Best Wishes!
       static var pluginRedPacketBestWishes: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.PluginRedPacketBestWishes")
@@ -1041,6 +1049,14 @@ enum L10n {
         /// Confirm Risk Warning
         static var riskWarning: String {
           return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Risk-Warning")
+        }
+        /// Select NFT collection
+        static var selectNftCollection: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Select-Nft-Collection")
+        }
+        /// Select NFTs
+        static var selectNfts: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Select-Nfts")
         }
         /// Send %@
         static func send(_ p1: String) -> String {
