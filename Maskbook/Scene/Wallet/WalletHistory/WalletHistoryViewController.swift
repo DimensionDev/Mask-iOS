@@ -97,7 +97,6 @@ class WalletHistoryViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { _ in }
         receiveValue: { [weak self] allTransactions, allPendingTransactions in
-            let allPendingTransactions = allPendingTransactions.compactMap { $0 as? PendingTransaction }
             let pendingTransactions = allPendingTransactions.filter {
                 $0.address == maskUserDefaults.defaultAccountAddress &&
                 $0.networkId == maskUserDefaults.network.networkId
