@@ -13,7 +13,11 @@ import web3swift
 import SwiftUI
 
 class WalletBottomWidgetViewModel: ObservableObject {
-    @Published var token: Token? = nil
+    weak var token: Token? = nil {
+        didSet {
+            objectWillChange.send()
+        }
+    }
     @Published var isLocked: Bool = true
     @Published var txList = [String: TransactionStatus]()
     

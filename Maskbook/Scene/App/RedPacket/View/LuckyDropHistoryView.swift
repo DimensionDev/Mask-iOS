@@ -139,7 +139,7 @@ struct LuckyDropHistoryRow: View {
                     Button {
                         switch viewModel.luckyDropState {
                         case .sharable: viewModel.share()
-                        case .refunable: viewModel.refund()
+                        case .refundable: viewModel.refund()
                         default: break
                         }
                         

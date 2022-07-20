@@ -8,6 +8,7 @@
 
 import BigInt
 import Combine
+import CoreData.NSManagedObjectContext
 import CoreDataStack
 import Foundation
 import SwiftUI
@@ -30,8 +31,9 @@ final class LuckyDropViewModel: ObservableObject {
             amountStr = ""
         }
     }
-    @Published var token: Token? {
+    weak var token: Token? {
         didSet {
+            // if remove this, should add objectWillChange.send()
             amountStr = ""
         }
     }
@@ -47,6 +49,10 @@ final class LuckyDropViewModel: ObservableObject {
     
     var tokenStr: String {
         token?.symbol ?? ""
+    }
+
+    var viewContext: NSManagedObjectContext {
+        AppContext.shared.coreDataStack.persistentContainer.viewContext
     }
     
     var maxButtonEnable: Bool {
@@ -197,14 +203,16 @@ final class LuckyDropViewModel: ObservableObject {
             settings.defaultAccountAddressPublisher.removeDuplicates(),
             settings.networkPubisher.removeDuplicates(),
             walletAssetManager.activateProvider.nativeTokenSubject.prepend(())
-        ).asDriver().sink { [weak self] _, network, _ in
+        )
+        .asDriver()
+        .sink { [weak self] _, network, _ in
             guard let self = self else { return }
-            let token = self.walletAssetManager.getMainToken(
+            self.token = self.walletAssetManager.getMainToken(
                 network: network,
                 chainId: network.chain.rawValue,
                 networkId: Int(network.networkId),
-                context: AppContext.shared.coreDataStack.persistentContainer.viewContext)
-            self.token = token
+                context: self.viewContext
+            )
         }
         .store(in: &disposeBag)
         
@@ -587,7 +595,7 @@ final class LuckyDropViewModel: ObservableObject {
             $message.eraseToAnyPublisher(),
             $gasFeeItem.map({ _ in "" }).eraseToAnyPublisher(),
             $allowances.map({ _ in "" }).eraseToAnyPublisher(),
-            $token.map({ _ in "" }).eraseToAnyPublisher(),
+//            $token.map({ _ in "" }).eraseToAnyPublisher(),
         ]
         
         publishers.combineLatest()

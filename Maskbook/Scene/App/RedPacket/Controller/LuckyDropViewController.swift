@@ -31,6 +31,7 @@ class LuckyDropViewController: BaseViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,11 +73,11 @@ class LuckyDropViewController: BaseViewController {
 extension LuckyDropViewController {
     @objc
     override func prepareRightNavigationItems() {
-        let closeButton = NavigationBarItemView(imageAsset: Asset.Plugins.LuckyDrop.Icon.close) {
-            self.onClose()
+        let closeButton = NavigationBarItemView(imageAsset: Asset.Plugins.LuckyDrop.Icon.close) { [weak self] in
+            self?.onClose()
         }
-        let historyButton = NavigationBarItemView(imageAsset: Asset.Plugins.LuckyDrop.Icon.history) {
-            self.onShowHistory()
+        let historyButton = NavigationBarItemView(imageAsset: Asset.Plugins.LuckyDrop.Icon.history) { [weak self] in
+            self?.onShowHistory()
         }
         self.navigationItem.rightBarButtonItems = [
             .fixedSpace(14),
