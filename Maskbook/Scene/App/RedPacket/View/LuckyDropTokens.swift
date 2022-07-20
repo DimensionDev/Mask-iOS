@@ -7,10 +7,12 @@
 //
 
 import BigInt
-import ResponderChain
-import SwiftUI
 import Combine
+import CombineEvent
 import Kingfisher
+import SwiftUI
+
+import Introspect
 
 typealias RedPacketType = RedPacket.RedPacketType
 
@@ -19,16 +21,22 @@ struct LuckyDropTokens: View {
     private var mainCoordinator
     @InjectedProvider(\.userDefaultSettings)
     private var settings
-    
-    @EnvironmentObject var chain: ResponderChain
+
     @ObservedObject var viewModel: LuckyDropViewModel
-    
+
+    @State
+    private var quantityRegistered: UITextField?
+    @State
+    private var amountRegistered: UITextField?
+    @State
+    private var messageRegistered: UITextField?
+
     var maxColor: Color {
         viewModel.maxButtonEnable ?
-         Asset.Colors.Public.blue.asColor() :
-         Asset.Colors.Text.normal.asColor()
+            Asset.Colors.Public.blue.asColor() :
+            Asset.Colors.Text.normal.asColor()
     }
-    
+
     var body: some View {
         VStack(spacing: 0) {
             typeRow
@@ -44,7 +52,7 @@ struct LuckyDropTokens: View {
         .padding(.top, 24)
         .background(Asset.Colors.Background.normal.asColor())
     }
-    
+
     @ViewBuilder
     var typeRow: some View {
         HStack {
@@ -53,7 +61,7 @@ struct LuckyDropTokens: View {
         }
         .frame(height: 32)
     }
-    
+
     @ViewBuilder
     var tokenRow: some View {
         HStack(spacing: 0) {
@@ -74,7 +82,7 @@ struct LuckyDropTokens: View {
                 Spacer().frame(width: 4)
                 Asset.Icon.Arrows.down1.asImage()
             }
-            
+
             Button {
                 viewModel.maxAmount()
             } label: {
@@ -97,13 +105,22 @@ struct LuckyDropTokens: View {
                 .keyboardType(.decimalPad)
                 .multilineTextAlignment(.trailing)
                 .frame(maxHeight: .infinity)
-                .responderTag(TextFieldTag.amount)
+                .introspectTextField { textField in
+                    guard amountRegistered != textField else {
+                        return
+                    }
+                    textField.cv.publisher(for: \.isFirstResponder, on: [.allEditingEvents])
+                        .map { $0 ? TextFieldTag.amount : nil }
+                        .removeDuplicates()
+                        .assign(to: &viewModel.$editingResponder)
+                    amountRegistered = textField
+                }
         }
         .frame(height: 52)
         .padding(.horizontal, 16)
         .background(Asset.Colors.Background.dark.asColor().cornerRadius(8))
     }
-    
+
     @ViewBuilder
     var quantityRow: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -128,12 +145,21 @@ struct LuckyDropTokens: View {
                     .keyboardType(.numberPad)
                     .multilineTextAlignment(.trailing)
                     .frame(maxHeight: .infinity)
-                    .responderTag(TextFieldTag.quantity)
+                    .introspectTextField { textField in
+                        guard quantityRegistered != textField else {
+                            return
+                        }
+                        textField.cv.publisher(for: \.isFirstResponder, on: [.allEditingEvents])
+                            .map { $0 ? TextFieldTag.quantity : nil }
+                            .removeDuplicates()
+                            .assign(to: &viewModel.$editingResponder)
+                        quantityRegistered = textField
+                    }
             }
             .frame(height: 52)
             .padding(.horizontal, 16)
             .background(Asset.Colors.Background.dark.asColor().cornerRadius(8))
-            
+
             if viewModel.showQuantityError {
                 Text(L10n.Plugins.Luckydrop.maxQuantityError)
                     .font(FontStyles.rh6.font)
@@ -141,7 +167,7 @@ struct LuckyDropTokens: View {
             }
         }
     }
-    
+
     @ViewBuilder
     var messageRow: some View {
         HStack(spacing: 0) {
@@ -155,13 +181,22 @@ struct LuckyDropTokens: View {
                 .foregroundColor(Asset.Colors.Text.dark.asColor())
                 .limitText($viewModel.message, maxLength: 30)
                 .frame(maxHeight: .infinity)
-                .responderTag(TextFieldTag.message)
+                .introspectTextField { textField in
+                    guard messageRegistered != textField else {
+                        return
+                    }
+                    textField.cv.publisher(for: \.isFirstResponder, on: [.allEditingEvents])
+                        .map { $0 ? TextFieldTag.message : nil }
+                        .removeDuplicates()
+                        .assign(to: &viewModel.$editingResponder)
+                    messageRegistered = textField
+                }
         }
         .frame(height: 52)
         .padding(.horizontal, 16)
         .background(Asset.Colors.Background.dark.asColor().cornerRadius(8))
     }
-    
+
     @ViewBuilder
     var transactionView: some View {
         VStack(spacing: 0) {
@@ -170,9 +205,9 @@ struct LuckyDropTokens: View {
                     .font(FontStyles.mh5.font)
                     .foregroundColor(Asset.Colors.Text.normal.asColor())
                 Spacer()
-                
+
                 Button {
-                    chain.firstResponder = nil
+                    forceResignKeyboard()
                     mainCoordinator.present(
                         scene: .gasFee(
                             delegate: nil,
@@ -190,11 +225,12 @@ struct LuckyDropTokens: View {
                 }
             }
             HStack(spacing: 4) {
-                Text(viewModel.totalQuantityStr).font(FontStyles.bh1.font)
+                Text(viewModel.totalQuantityStr)
+                    .font(FontStyles.bh1.font)
                     .foregroundColor(viewModel.totalQuantityColor)
+
                 KFImage(viewModel.tokenURL)
                     .cancelOnDisappear(true)
-                    .loadImmediately()
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 32)
@@ -203,7 +239,7 @@ struct LuckyDropTokens: View {
             .padding(.vertical, 32)
         }
     }
-    
+
     @ViewBuilder
     func buildGroupButton(_ mode: RedPacketType) -> some View {
         Button {
@@ -225,14 +261,14 @@ struct LuckyDropTokens: View {
                     .font(FontStyles.bh5.font)
                     .foregroundColor(
                         viewModel.mode == mode
-                        ? Asset.Colors.Text.dark.asColor()
-                        : Asset.Colors.Text.normal.asColor()
+                            ? Asset.Colors.Text.dark.asColor()
+                            : Asset.Colors.Text.normal.asColor()
                     )
                 Spacer()
             }
         }
     }
-    
+
     func selectToken() {
         guard settings.defaultAccountAddress != nil else {
             Alert {
