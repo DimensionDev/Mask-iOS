@@ -24,7 +24,10 @@ final class LuckyDropViewModel: ObservableObject {
     // MARK: Lifecycle
 
     // MARK: - Public method
-
+    deinit {
+        print("\(self) deinit")
+    }
+    
     init(source: Source) {
         self.source = source
         walletBottomViewModel = WalletBottomWidgetViewModel(source: source)
