@@ -28,22 +28,22 @@ class FlowCollectionFlowLayout: UICollectionViewFlowLayout {
 
     fileprivate var state = LayoutState(size: .zero, direction: .horizontal)
 
-    override  func prepare() {
+    override func prepare() {
         super.prepare()
         let currentState = LayoutState(
             size: collectionView?.bounds.size ?? .zero,
             direction: scrollDirection
         )
 
-        if self.state != currentState {
-            self.setupCollectionView()
-            self.updateLayout()
-            self.state = currentState
+        if state != currentState {
+            setupCollectionView()
+            updateLayout()
+            state = currentState
         }
     }
 
     fileprivate func setupCollectionView() {
-        guard let collectionView = self.collectionView else { return }
+        guard let collectionView = collectionView else { return }
         if collectionView.decelerationRate != .fast {
             collectionView.decelerationRate = .fast
         }
@@ -51,42 +51,43 @@ class FlowCollectionFlowLayout: UICollectionViewFlowLayout {
     }
 
     fileprivate func updateLayout() {
-        guard let collectionView = self.collectionView else { return }
+        guard let collectionView = collectionView else { return }
 
         let collectionSize = collectionView.bounds.size
         let isHorizontal = scrollDirection == .horizontal
 
         let yInset = (collectionSize.height - itemSize.height) / 2
         let xInset = (collectionSize.width - itemSize.width) / 2
-        self.sectionInset = UIEdgeInsets(top: yInset, left: xInset, bottom: yInset, right: xInset)
+        sectionInset = UIEdgeInsets(top: yInset, left: xInset, bottom: yInset, right: xInset)
 
         let side = isHorizontal ? itemSize.width : itemSize.height
         let scaledItemOffset = (side - side * sideItemXScale) / 2
-        switch self.spacingMode {
+        switch spacingMode {
         case .fixed(let spacing):
-            self.minimumLineSpacing = spacing - scaledItemOffset
+            minimumLineSpacing = spacing - scaledItemOffset
 
         case .overlap(let visibleOffset):
             let fullSizeSideItemOverlap = visibleOffset + scaledItemOffset
             let inset = isHorizontal ? xInset : yInset
-            self.minimumLineSpacing = inset - fullSizeSideItemOverlap
+            minimumLineSpacing = inset - fullSizeSideItemOverlap
         }
     }
 
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-        return true
+        true
     }
 
-    override  func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         guard let superAttributes = super.layoutAttributesForElements(in: rect),
-              let attributes = NSArray(array: superAttributes, copyItems: true) as? [UICollectionViewLayoutAttributes] else {
+              let attributes = NSArray(array: superAttributes, copyItems: true) as? [UICollectionViewLayoutAttributes]
+        else {
             return nil
         }
-        return attributes.map({ self.transformLayoutAttributes($0) })
+        return attributes.map { self.transformLayoutAttributes($0) }
     }
 
     fileprivate func transformLayoutAttributes(_ attributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        guard let collectionView = self.collectionView else { return attributes }
+        guard let collectionView = collectionView else { return attributes }
         let isHorizontal = scrollDirection == .horizontal
 
         let collectionCenter = isHorizontal
@@ -119,7 +120,8 @@ class FlowCollectionFlowLayout: UICollectionViewFlowLayout {
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         guard let collectionView = collectionView,
               !collectionView.isPagingEnabled,
-              let layoutAttributes = self.layoutAttributesForElements(in: collectionView.bounds) else {
+              let layoutAttributes = layoutAttributesForElements(in: collectionView.bounds)
+        else {
             return super.targetContentOffset(forProposedContentOffset: proposedContentOffset)
         }
 

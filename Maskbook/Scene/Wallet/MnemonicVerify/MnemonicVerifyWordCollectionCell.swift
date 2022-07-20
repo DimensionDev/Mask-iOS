@@ -14,8 +14,8 @@ enum MnemonicVerifyWordCellState {
     case verified
     case blank
 }
+
 class MnemonicVerifyWordCollectionCell: UICollectionViewCell {
-    
     let wordLabel: UILabel = {
         let label = UILabel()
         label.font = FontStyles.BH6
@@ -40,9 +40,9 @@ class MnemonicVerifyWordCollectionCell: UICollectionViewCell {
     }
     
     func configure() {
-        rectangle.lineCap         = .round
-        rectangle.cornerRadius    = 8
-        rectangle.strokeColor     = Asset.Colors.Text.link.color.cgColor
+        rectangle.lineCap = .round
+        rectangle.cornerRadius = 8
+        rectangle.strokeColor = Asset.Colors.Text.link.color.cgColor
         rectangle.lineDashPattern = [4, 4]
         rectangle.fillColor = nil
         rectangle.lineWidth = 2
@@ -83,7 +83,7 @@ class MnemonicVerifyWordCollectionCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        rectangle.frame = self.bounds
-        rectangle.path = UIBezierPath(roundedRect: self.bounds, cornerRadius: 8).cgPath
+        rectangle.frame = bounds
+        rectangle.path = UIBezierPath(roundedRect: bounds, cornerRadius: 8).cgPath
     }
 }

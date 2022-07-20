@@ -27,8 +27,8 @@ extension MnemonicVerifyWordCollectionDataSource: UICollectionViewDataSource {
         var word = viewModel.words[indexPath.row]
         var state = MnemonicVerifyWordCellState.normal
         if viewModel.wordsNeedVerifyShuffle.contains(word) {
-            if let newWord = self.viewModel.selectedWordsPendingDisplay.first {
-                self.viewModel.selectedWordsPendingDisplay.removeFirst()
+            if let newWord = viewModel.selectedWordsPendingDisplay.first {
+                viewModel.selectedWordsPendingDisplay.removeFirst()
                 word = newWord
                 state = .verified
             } else {
@@ -88,19 +88,17 @@ extension MnemonicNeedVerifyDataSource: UICollectionViewDelegateFlowLayout {
 
 extension MnemonicNeedVerifyDataSource: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         let word = viewModel.wordsNeedVerifyShuffle[indexPath.row]
-        if self.viewModel.selectedWords.value.contains(word) {
-            var oldWords = self.viewModel.selectedWords.value
+        if viewModel.selectedWords.value.contains(word) {
+            var oldWords = viewModel.selectedWords.value
             oldWords.removeAll {
                 $0 == word
             }
-            self.viewModel.selectedWords.value = oldWords
+            viewModel.selectedWords.value = oldWords
         } else {
-            var oldWords = self.viewModel.selectedWords.value
+            var oldWords = viewModel.selectedWords.value
             oldWords.append(word)
-            self.viewModel.selectedWords.value = oldWords
+            viewModel.selectedWords.value = oldWords
         }
-        
     }
 }

@@ -12,7 +12,6 @@ import UIKit
 import UStack
 
 class MnemonicVerifyViewController: BaseViewController {
-
     @InjectedProvider(\.vault)
     private var vault
     private var vaultSubsription = Set<AnyCancellable>()
@@ -85,7 +84,6 @@ class MnemonicVerifyViewController: BaseViewController {
     
     private lazy var confirmButton: UIButton = PrimeryButton(title: L10n.Common.Controls.confirm)
     
-    
     private lazy var backgroundLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
         layer.colors = [
@@ -117,7 +115,6 @@ extension MnemonicVerifyViewController {
     }
     
     func subscribeViewModel() {
-
         viewModel.mnemonicError
             .receive(on: DispatchQueue.main)
             .sink { [weak self] mnemonicError in
@@ -173,11 +170,11 @@ extension MnemonicVerifyViewController {
             stackView.topAnchor.constraint(equalTo: view.readableContentGuide.topAnchor),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: view.readableContentGuide.bottomAnchor)
+            stackView.bottomAnchor.constraint(equalTo: view.readableContentGuide.bottomAnchor),
         ])
         NSLayoutConstraint.activate([
             wordsCollectionContainer.heightAnchor.constraint(equalToConstant: 190),
-            confirmButton.heightAnchor.constraint(equalToConstant: 54)
+            confirmButton.heightAnchor.constraint(equalToConstant: 54),
         ])
     }
 }
@@ -206,8 +203,8 @@ extension MnemonicVerifyViewController {
 
     private func createAccount(with password: String) {
         let result = WalletCoreService.shared.createAccount(
-            param: .mnemonic(mnemonic: self.viewModel.words.joined(separator: " ").lowercased(), pathIndex: 0),
-            name: self.viewModel.name ?? "",
+            param: .mnemonic(mnemonic: viewModel.words.joined(separator: " ").lowercased(), pathIndex: 0),
+            name: viewModel.name ?? "",
             password: password,
             chainType: maskUserDefaults.network.chain,
             isImported: false

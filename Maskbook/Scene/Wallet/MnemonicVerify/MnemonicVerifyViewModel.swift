@@ -54,7 +54,7 @@ final class MnemonicVerifyViewModel {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] words in
                 guard let self = self else { return }
-                if self.mnemonicError.value && !words.isEmpty {
+                if self.mnemonicError.value, !words.isEmpty {
                     self.mnemonicError.value = false
                 }
                 self.selectedWordsPendingDisplay = words
