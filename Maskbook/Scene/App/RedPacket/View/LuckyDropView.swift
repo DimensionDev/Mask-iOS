@@ -37,7 +37,7 @@ struct LuckyDropView: View {
             .ignoresSafeArea(.all, edges: .bottom)
             .background(Asset.Colors.Background.normal.asColor())
             .onTapGesture {
-                forceResignKeyboard()
+                endEditing()
             }
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
@@ -69,14 +69,13 @@ struct LuckyDropView: View {
                 NotificationCenter.Publisher(
                     center: NotificationCenter.default, name: UIResponder.keyboardWillShowNotification
                 )
-                .merge(with: NotificationCenter.Publisher(
-                    center: NotificationCenter.default, name: UIResponder.keyboardWillChangeFrameNotification
-                )
+                .merge(
+                    with: NotificationCenter.Publisher(
+                        center: NotificationCenter.default, name: UIResponder.keyboardWillChangeFrameNotification
+                    )
                 )
                 .compactMap { notification in
-                    withAnimation(.easeOut(duration: 0.16)) {
-                        notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
-                    }
+                    notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
                 }
                 .map { rect in
                     rect.height
@@ -104,13 +103,19 @@ struct LuckyDropView: View {
         }
     }
 
+    private func endEditing() {
+        if viewModel.editingResponder.isSome {
+            forceResignKeyboard()
+        }
+    }
+
     private var confirmButton: some View  {
         PrimaryButton(
             title: viewModel.confirmTitle,
             animating: viewModel.buttonAnimating,
             isEnable: viewModel.confirmEnable
         ) {
-            forceResignKeyboard()
+            endEditing()
             switch viewModel.buttonType {
             case .unlock:
                 Coordinator.main.present(

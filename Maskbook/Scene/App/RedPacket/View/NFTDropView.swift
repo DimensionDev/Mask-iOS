@@ -1,17 +1,14 @@
-import SwiftUI
 import Kingfisher
+import SwiftUI
 
 struct NFTDropView: View {
-
-    @StateObject
-    private var viewModel: LuckyDropViewModel
-
-    @InjectedProvider(\.mainCoordinator)
-    private var mainCoordinator
+    // MARK: Lifecycle
 
     init(_ viewModel: LuckyDropViewModel) {
         _viewModel = .init(wrappedValue: viewModel)
     }
+
+    // MARK: Internal
 
     var body: some View {
         ScrollView {
@@ -37,6 +34,7 @@ struct NFTDropView: View {
 
                 Spacer()
             }
+            .padding(.horizontal, 20)
         }
         .onTapGesture {
             guard viewModel.isNFTDropEditing else {
@@ -44,39 +42,45 @@ struct NFTDropView: View {
             }
             forceResignKeyboard()
         }
-        .padding(.horizontal, 20)
         .overlay(
-            nftConfirmActionView
-                .offset(y: -18),
+            nftConfirmActionView,
             alignment: .bottom
         )
     }
+
+    // MARK: Private
+
+    @StateObject
+    private var viewModel: LuckyDropViewModel
+
+    private let bottomOffsetY: CGFloat = 18
+
+    @InjectedProvider(\.mainCoordinator)
+    private var mainCoordinator
 
     private var nftEnabled: Bool { true }
     private var nftSelected: Bool { true }
 
     private var showCollectible: Bool {
-//        viewModel.nftViewModel.showCollectible
-        true
+        viewModel.nftViewModel.showCollectible
     }
-
 
     private var nftConfirmTitle: String {
         nftEnabled
-        ? L10n.Scene.WalletUnlock.title
-        : L10n.Plugins.Luckydrop.Buttons.selectNfts
+            ? L10n.Scene.WalletUnlock.title
+            : L10n.Plugins.Luckydrop.Buttons.selectNfts
     }
 
     private var nftConfirmButtonColor: Color {
         nftEnabled
-        ? Asset.Colors.Background.blue.asColor()
-        : Asset.Colors.Background.disable.asColor()
+            ? Asset.Colors.Background.blue.asColor()
+            : Asset.Colors.Background.disable.asColor()
     }
 
     private var nftConfirmTitleColor: Color {
         nftEnabled
-        ? Asset.Colors.Public.white.asColor()
-        : Asset.Colors.Text.normal.asColor()
+            ? Asset.Colors.Public.white.asColor()
+            : Asset.Colors.Text.normal.asColor()
     }
 
     @ViewBuilder
@@ -121,7 +125,7 @@ struct NFTDropView: View {
                                 .resizable()
                                 .frame(width: 20, height: 20)
                         }
-                            .padding(.horizontal, 16)
+                        .padding(.horizontal, 16)
                     )
             }
         )
@@ -153,8 +157,8 @@ struct NFTDropView: View {
                                 .frame(width: 20, height: 20)
                                 .foregroundColor(Asset.Colors.Text.lighter.asColor())
                         }
-                            .padding(.all, 12)
-                            .padding(.horizontal, 8)
+                        .padding(.all, 12)
+                        .padding(.horizontal, 8)
                     )
                     .preferredColorScheme(.light)
             }
@@ -163,32 +167,30 @@ struct NFTDropView: View {
 
     private var nftConfirmActionView: some View {
         VStack(spacing: 20) {
-            if showCollectible {
-                HStack(spacing: 8) {
-                    Text(L10n.Plugins.Luckydrop.transactionFee)
-                        .font(.mh5)
-                        .foregroundColor(Asset.Colors.Text.normal)
+            HStack(spacing: 8) {
+                Text(L10n.Plugins.Luckydrop.transactionFee)
+                    .font(.mh5)
+                    .foregroundColor(Asset.Colors.Text.normal)
 
-                    Spacer()
+                Spacer()
 
-                    Text(viewModel.gasFeeInfo)
-                        .font(.bh6)
-                        .foregroundColor(Asset.Colors.Text.dark)
+                Text(viewModel.gasFeeInfo)
+                    .font(.bh6)
+                    .foregroundColor(Asset.Colors.Text.dark)
 
-                    Image(Asset.Plugins.LuckyDrop.setting)
-                        .onTapGesture {
-                            mainCoordinator.present(
-                                scene: .gasFee(
-                                    delegate: nil,
-                                    gasLimit: viewModel.gasLimit,
-                                    viewModel: viewModel.gasFeeViewModel
-                                ),
-                                transition: .panModel()
-                            )
-                        }
-                }
-                .frame(height: 24)
+                Image(Asset.Plugins.LuckyDrop.setting)
+                    .onTapGesture {
+                        mainCoordinator.present(
+                            scene: .gasFee(
+                                delegate: nil,
+                                gasLimit: viewModel.gasLimit,
+                                viewModel: viewModel.gasFeeViewModel
+                            ),
+                            transition: .panModel()
+                        )
+                    }
             }
+            .frame(height: 24)
 
             Button(
                 action: {
@@ -211,6 +213,7 @@ struct NFTDropView: View {
         }
         .padding(.horizontal, 20)
         .padding(.top, 16)
+        .padding(.bottom, bottomOffsetY)
         .background(Asset.Colors.Background.normal.asColor())
     }
 
@@ -244,7 +247,7 @@ struct NFTDropView: View {
                 spacing: 12
             ) {
                 Section {
-                    ForEach(0 ..< 9) { _ in
+                    ForEach(0 ..< 6) { _ in
                         Asset.Colors.Background.normal.asColor()
                             .overlay(
                                 Image(Asset.Images.Scene.WalletAdd.add)

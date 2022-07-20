@@ -91,6 +91,10 @@ class WalletBottomWidgetViewModel: ObservableObject {
 
     let source: LuckyDropViewModel.Source
 
+    deinit {
+        print("\(self) deinit")
+    }
+
     init(source: LuckyDropViewModel.Source) {
         self.source = source
 

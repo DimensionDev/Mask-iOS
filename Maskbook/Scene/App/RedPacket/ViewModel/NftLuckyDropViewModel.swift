@@ -5,6 +5,10 @@ final class NftLuckyDropViewModel: ObservableObject {
     private(set) var groupName: String?
     private(set) var groupIconURL: URL?
 
+    deinit {
+        print("\(self) deinit")
+    }
+
     func selectCollectible(groupName: String, groupIconURL: URL?) {
         self.groupName = groupName
         self.groupIconURL = groupIconURL
