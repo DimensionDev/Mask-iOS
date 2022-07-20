@@ -89,6 +89,7 @@
 		1F37DF2027BDF715008F8ABE /* RestoreLocalFileValidationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37DF1F27BDF715008F8ABE /* RestoreLocalFileValidationController.swift */; };
 		1F37DF2227BDF94F008F8ABE /* RestoreLocalFileValidationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37DF2127BDF94F008F8ABE /* RestoreLocalFileValidationView.swift */; };
 		1F37DF2427BDFA3D008F8ABE /* RestoreLocalFileValidationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37DF2327BDFA3D008F8ABE /* RestoreLocalFileValidationViewModel.swift */; };
+		1F44794A288848180098BAE9 /* NFTDropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F447949288848180098BAE9 /* NFTDropView.swift */; };
 		1F5278CC286D570F00B6D443 /* CapsuleIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5278CB286D570F00B6D443 /* CapsuleIndicator.swift */; };
 		1F5278CE286D83B700B6D443 /* InfinityCycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5278CD286D83B700B6D443 /* InfinityCycleView.swift */; };
 		1F57023A27A27E4900C96909 /* RedPacketShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F57023927A27E4900C96909 /* RedPacketShareSheet.swift */; };
@@ -943,6 +944,7 @@
 		1F37DF1F27BDF715008F8ABE /* RestoreLocalFileValidationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreLocalFileValidationController.swift; sourceTree = "<group>"; };
 		1F37DF2127BDF94F008F8ABE /* RestoreLocalFileValidationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreLocalFileValidationView.swift; sourceTree = "<group>"; };
 		1F37DF2327BDFA3D008F8ABE /* RestoreLocalFileValidationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreLocalFileValidationViewModel.swift; sourceTree = "<group>"; };
+		1F447949288848180098BAE9 /* NFTDropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFTDropView.swift; sourceTree = "<group>"; };
 		1F5278CB286D570F00B6D443 /* CapsuleIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleIndicator.swift; sourceTree = "<group>"; };
 		1F5278CD286D83B700B6D443 /* InfinityCycleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfinityCycleView.swift; sourceTree = "<group>"; };
 		1F57023927A27E4900C96909 /* RedPacketShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketShareSheet.swift; sourceTree = "<group>"; };
@@ -1996,6 +1998,7 @@
 		1F57023B27A2AF7300C96909 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1F447949288848180098BAE9 /* NFTDropView.swift */,
 				2AD85505281283160064DDA5 /* LuckyDropHistoryView.swift */,
 				2AD85506281283160064DDA5 /* LuckyDropSuccessfullyView.swift */,
 				2AD85507281283160064DDA5 /* LuckyDropTokens.swift */,
@@ -5208,6 +5211,7 @@
 				2A470B07283E45F0009B49EA /* String+URL.swift in Sources */,
 				2A6ABBAC2720053B00CC3AED /* RemoteBackupEmailVerifyStrategy.swift in Sources */,
 				2DBD0B9E2787FF9C0065A2B1 /* GroupStyleTableViewCell.swift in Sources */,
+				1F44794A288848180098BAE9 /* NFTDropView.swift in Sources */,
 				2AF884D3271EE9310004565A /* MaskWebMessage+Persona.swift in Sources */,
 				2A36E2762757243C0075E95B /* ChangeBackupPasswordStep2ViewController.swift in Sources */,
 				2AF884C0271EE9300004565A /* MaskSocialViewController.swift in Sources */,

@@ -8,197 +8,34 @@
 
 import BigInt
 import Combine
+import CombineExt
 import CoreData.NSManagedObjectContext
 import CoreDataStack
 import Foundation
+import PromiseKit
 import SwiftUI
 import SwiftyJSON
 import web3swift
-import PromiseKit
-import CombineExt
 
 typealias FungibleToken = RedPacket.FungibleToken
 
 @MainActor
 final class LuckyDropViewModel: ObservableObject {
-    // MARK: - Public property
-    @Published var quantityStr = ""
-    @Published var amountStr = ""
-    @Published var message = L10n.Plugins.Luckydrop.Buttons.bestWishes
-    @Published var mode = RedPacket.RedPacketType.average {
-        didSet {
-            quantityStr = ""
-            amountStr = ""
-        }
-    }
-    weak var token: Token? {
-        didSet {
-            // if remove this, should add objectWillChange.send()
-            amountStr = ""
-        }
-    }
-    @Published var gasFeeItem: GasFeeCellItem?
-    @Published var buttonType: ConfirmButtonType = .send
-    @Published var allowances = [String: BigUInt]()
-    @Published var selection = LuckDropKind.nft
-    
-    let walletBottomViewModel: WalletBottomWidgetViewModel
-    
-    private var timer: Timer?
-    var gasFeeViewModel = GasFeeViewModel()
-    
-    var tokenStr: String {
-        token?.symbol ?? ""
-    }
+    // MARK: Lifecycle
 
-    var viewContext: NSManagedObjectContext {
-        AppContext.shared.coreDataStack.persistentContainer.viewContext
-    }
-    
-    var maxButtonEnable: Bool {
-        guard mode == .average else {
-            return true
-        }
-        
-        guard let quantity = Int(quantityStr), let amount = token?.quantity?.doubleValue else {
-            return false
-        }
-        return quantity > 0 && amount > 0
-    }
-    
-    var gasFeeInfo: String {
-        guard let gasFeeItem = gasFeeItem else {
-            return ""
-        }
-        
-        guard let gasLimt = gasFeeViewModel.localGasFeeModel?.gasLimit else {
-            return ""
-        }
-        
-        guard let tokenPrice = token?.price as? Double else {
-            return ""
-        }
-        
-        let symbol = settings.currency.symbol
-        let gwei = gasFeeItem.gWei
-        let gasPriceDoubleValue = Double(EthUtil.getGasFeeFiat(gwei: gwei, gasLimit: gasLimt, price: tokenPrice)) ?? 0
-        var gasPrice: String
-        if gasPriceDoubleValue < 0.01 {
-            gasPrice = "< \(symbol)0.01"
-        } else {
-            gasPrice = "~\(symbol)\(EthUtil.getGasFeeFiat(gwei: gwei, gasLimit: gasLimt, price: tokenPrice))"
-        }
-        let time = gasFeeItem.shortCostTime
-        
-        return "\(gasPrice) (\(time))"
-    }
-    
-    var gasLimit: BigUInt {
-        gasFeeViewModel.gasLimitPublisher.value
-    }
-    
-    var gasPrice: BigUInt? {
-        guard let gasFeeModel = gasFeeViewModel.gasFeePublisher.value else {
-            return nil
-        }
-        guard let gwei = BigUInt(gasFeeModel.gWei) else {
-            return nil
-        }
-        return gwei * (BigUInt(10).power(9))
-    }
-    
-    var totalQuantity: NSDecimalNumber {
-        var result: NSDecimalNumber
-        if mode == .average {
-            let quantity = NSDecimalNumber(string: quantityStr)
-            let amountPerShare = NSDecimalNumber(string: amountStr)
-            guard quantity != .notANumber && amountPerShare != .notANumber else {
-                return .zero
-            }
-            guard let decimal = token?.decimal else {
-                return .zero
-            }
-            result = quantity.multiplying(by: amountPerShare)
-            let roundBehavior = NSDecimalNumberHandler(
-                roundingMode: .down,
-                scale: decimal,
-                raiseOnExactness: false,
-                raiseOnOverflow: false,
-                raiseOnUnderflow: false,
-                raiseOnDivideByZero: false)
-            result = result.rounding(accordingToBehavior: roundBehavior)
-        } else {
-            result = NSDecimalNumber(string: amountStr)
-        }
-        return result != .notANumber ? result : .zero
-    }
-    
-    var totalQuantityStr: String {
-        totalQuantity.displayBalance
-    }
-    
-    var totalQuantityColor: Color {
-        totalQuantity == .zero
-        ? Asset.Colors.Text.normal.asColor()
-        : Asset.Colors.Text.dark.asColor()
-    }
-    
-    var luckyDropAddressStr: String? {
-        return settings.network.redPacketAddressV4
-    }
-    
-    var confirmTitle: String {
-        buttonType.title(token: token, mode: mode, amount: "\(totalQuantityStr) \(token?.symbol ?? "")")
-    }
-    
-    var confirmEnable: Bool {
-        buttonType.isEnable
-    }
-    
-    var tokenURL: URL? {
-        URL(string: token?.logoUrl ?? "")
-    }
-    
-    var buttonAnimating: Bool {
-        buttonType.animating
-    }
-    
-    var showQuantityError: Bool {
-        let quantity = NSDecimalNumber(string: quantityStr)
-        guard quantity != .notANumber else {
-            return false
-        }
-        return quantity.doubleValue > 255
-    }
-    
-    var amountPlaceholder: String {
-        if mode == .average {
-            return L10n.Plugins.Luckydrop.amountPerShare
-        } else {
-            return L10n.Plugins.Luckydrop.totalAmount
-        }
-    }
-    
-    // MARK: - Private property
-    private var disposeBag = Set<AnyCancellable>()
-    @InjectedProvider(\.walletAssetManager)
-    private var walletAssetManager: WalletAssetManager
-    @InjectedProvider(\.userDefaultSettings)
-    private var settings
-    @InjectedProvider(\.vault)
-    private var vault
-    @InjectedProvider(\.mainCoordinator)
-    private var mainCoordinator
-    @InjectedProvider(\.personaManager)
-    private var personaManager
-    
-    let source: Source
-    
     // MARK: - Public method
+
     init(source: Source) {
         self.source = source
         walletBottomViewModel = WalletBottomWidgetViewModel(source: source)
-        
+
+        nftViewModel
+            .objectWillChange
+            .sink { [weak self] in
+                self?.objectWillChange.send()
+            }
+            .store(in: &disposeBag)
+
         Publishers.CombineLatest3(
             settings.defaultAccountAddressPublisher.removeDuplicates(),
             settings.networkPubisher.removeDuplicates(),
@@ -215,23 +52,194 @@ final class LuckyDropViewModel: ObservableObject {
             )
         }
         .store(in: &disposeBag)
-        
+
         gasFeeViewModel.refresh()
-        
+
         // It will only change after the user selects gasfee and is only used here to initialize the data.
         gasFeeViewModel.confirmedGasFeePublisher
             .removeDuplicates()
-            .filter({ $0 != nil })
+            .filter { $0 != nil }
             .assign(to: \.gasFeeItem, on: self)
             .store(in: &disposeBag)
-        
+
         setupObserversForConfirmButton()
     }
-    
+
+    var viewContext: NSManagedObjectContext {
+        AppContext.shared.coreDataStack.persistentContainer.viewContext
+    }
+
+    // MARK: Internal
+
+    typealias Tag = LuckyDropTokens.TextFieldTag
+
+    // MARK: - Public property
+
+    @Published var quantityStr = ""
+    @Published var amountStr = ""
+    @Published var message = L10n.Plugins.Luckydrop.Buttons.bestWishes
+    @Published var gasFeeItem: GasFeeCellItem?
+    @Published var buttonType: ConfirmButtonType = .send
+    @Published var allowances = [String: BigUInt]()
+    @Published var selection = LuckDropKind.token
+
+    @Published var editingResponder: Tag? = nil
+    @Published var keyboardHeight: CGFloat = 0
+    @Published var isNFTDropEditing = false
+
+    let walletBottomViewModel: WalletBottomWidgetViewModel
+    let nftViewModel = NftLuckyDropViewModel()
+
+    var gasFeeViewModel = GasFeeViewModel()
+
+    let source: Source
+
+    @Published var mode = RedPacket.RedPacketType.average {
+        didSet {
+            quantityStr = ""
+            amountStr = ""
+        }
+    }
+
+    @Published var token: Token? {
+        didSet {
+            amountStr = ""
+        }
+    }
+
+    var tokenStr: String {
+        token?.symbol ?? ""
+    }
+
+    var maxButtonEnable: Bool {
+        guard mode == .average else {
+            return true
+        }
+
+        guard let quantity = Int(quantityStr), let amount = token?.quantity?.doubleValue else {
+            return false
+        }
+        return quantity > 0 && amount > 0
+    }
+
+    var gasFeeInfo: String {
+        guard let gasFeeItem = gasFeeItem else {
+            return ""
+        }
+
+        guard let gasLimt = gasFeeViewModel.localGasFeeModel?.gasLimit else {
+            return ""
+        }
+
+        guard let tokenPrice = token?.price as? Double else {
+            return ""
+        }
+
+        let symbol = settings.currency.symbol
+        let gwei = gasFeeItem.gWei
+        let gasPriceDoubleValue = Double(EthUtil.getGasFeeFiat(gwei: gwei, gasLimit: gasLimt, price: tokenPrice)) ?? 0
+        var gasPrice: String
+        if gasPriceDoubleValue < 0.01 {
+            gasPrice = "< \(symbol)0.01"
+        } else {
+            gasPrice = "~\(symbol)\(EthUtil.getGasFeeFiat(gwei: gwei, gasLimit: gasLimt, price: tokenPrice))"
+        }
+        let time = gasFeeItem.shortCostTime
+
+        return "\(gasPrice) (\(time))"
+    }
+
+    var gasLimit: BigUInt {
+        gasFeeViewModel.gasLimitPublisher.value
+    }
+
+    var gasPrice: BigUInt? {
+        guard let gasFeeModel = gasFeeViewModel.gasFeePublisher.value else {
+            return nil
+        }
+        guard let gwei = BigUInt(gasFeeModel.gWei) else {
+            return nil
+        }
+        return gwei * (BigUInt(10).power(9))
+    }
+
+    var totalQuantity: NSDecimalNumber {
+        var result: NSDecimalNumber
+        if mode == .average {
+            let quantity = NSDecimalNumber(string: quantityStr)
+            let amountPerShare = NSDecimalNumber(string: amountStr)
+            guard quantity != .notANumber, amountPerShare != .notANumber else {
+                return .zero
+            }
+            guard let decimal = token?.decimal else {
+                return .zero
+            }
+            result = quantity.multiplying(by: amountPerShare)
+            let roundBehavior = NSDecimalNumberHandler(
+                roundingMode: .down,
+                scale: decimal,
+                raiseOnExactness: false,
+                raiseOnOverflow: false,
+                raiseOnUnderflow: false,
+                raiseOnDivideByZero: false
+            )
+            result = result.rounding(accordingToBehavior: roundBehavior)
+        } else {
+            result = NSDecimalNumber(string: amountStr)
+        }
+        return result != .notANumber ? result : .zero
+    }
+
+    var totalQuantityStr: String {
+        totalQuantity.displayBalance
+    }
+
+    var totalQuantityColor: Color {
+        totalQuantity == .zero
+            ? Asset.Colors.Text.normal.asColor()
+            : Asset.Colors.Text.dark.asColor()
+    }
+
+    var luckyDropAddressStr: String? {
+        settings.network.redPacketAddressV4
+    }
+
+    var confirmTitle: String {
+        buttonType.title(token: token, mode: mode, amount: "\(totalQuantityStr) \(token?.symbol ?? "")")
+    }
+
+    var confirmEnable: Bool {
+        buttonType.isEnable
+    }
+
+    var tokenURL: URL? {
+        URL(string: token?.logoUrl ?? "")
+    }
+
+    var buttonAnimating: Bool {
+        buttonType.animating
+    }
+
+    var showQuantityError: Bool {
+        let quantity = NSDecimalNumber(string: quantityStr)
+        guard quantity != .notANumber else {
+            return false
+        }
+        return quantity.doubleValue > 255
+    }
+
+    var amountPlaceholder: String {
+        if mode == .average {
+            return L10n.Plugins.Luckydrop.amountPerShare
+        } else {
+            return L10n.Plugins.Luckydrop.totalAmount
+        }
+    }
+
     func maxAmount() {
         guard let token = token else { return }
         var amount = token.quantityNumber
-        if token.isMainToken == true, let gasFee = self.gasFeeItem?.gasFee {
+        if token.isMainToken == true, let gasFee = gasFeeItem?.gasFee {
             let gasFeeNumber = NSDecimalNumber(string: gasFee)
             if gasFeeNumber != .notANumber {
                 amount = amount.subtracting(gasFeeNumber)
@@ -241,7 +249,7 @@ final class LuckyDropViewModel: ObservableObject {
         if amount.doubleValue < 0 {
             amount = .zero
         }
-        
+
         switch mode {
         case .average:
             let quantity = NSDecimalNumber(string: quantityStr)
@@ -261,9 +269,10 @@ final class LuckyDropViewModel: ObservableObject {
                 raiseOnExactness: false,
                 raiseOnOverflow: false,
                 raiseOnUnderflow: false,
-                raiseOnDivideByZero: false)
+                raiseOnDivideByZero: false
+            )
             amountStr = result.rounding(accordingToBehavior: roundBehavior).stringValue
-            
+
         case .random:
             guard amount != .notANumber else {
                 amountStr = ""
@@ -272,7 +281,7 @@ final class LuckyDropViewModel: ObservableObject {
             amountStr = amount.stringValue
         }
     }
-    
+
     func approveToken() {
         vault.getWalletPassword()
             .sink(receiveCompletion: { _ in }) { [weak self] password in
@@ -280,63 +289,208 @@ final class LuckyDropViewModel: ObservableObject {
                 self.approveToken(password: password, network: self.settings.network)
             }
             .store(in: &disposeBag)
-        
+
         buttonType = .unlockingToken
     }
-    
+
     func send() {
         buttonType = .sending
-        
+
         createRedPacket()
     }
-    
+
+    func checkParam() {
+        guard buttonType != .sending, buttonType != .unlockingToken else {
+            return
+        }
+
+        guard let fromAddress = settings.defaultAccountAddress,
+              let fromAccount = WalletCoreService.shared.getAccount(address: fromAddress)
+        else {
+            updateButton(state: .noAccount)
+            return
+        }
+
+        guard let token = token else {
+            updateButton(state: .noToken)
+            return
+        }
+
+        // Only check payment password for wallet which created by Maskbook.
+        if !fromAccount.fromWalletConnect {
+            guard let date = settings.passwordExpiredDate, !self.settings.isPasswordExpried(date) else {
+                updateButton(state: .unlock)
+                return
+            }
+        }
+
+        guard settings.hasRiskConfirmed else {
+            updateButton(state: .riskWarning)
+            return
+        }
+
+        guard let gasFee = gasFeeItem?.gasFee else {
+            return
+        }
+        let gasFeeNumber = NSDecimalNumber(string: gasFee)
+        guard gasFeeNumber != .notANumber else {
+            return
+        }
+        guard let nativeToken = walletAssetManager.getMainToken(
+            network: settings.network,
+            chainId: settings.network.chain.rawValue,
+            networkId: Int(settings.network.networkId),
+            context: viewContext
+        ) else {
+            updateButton(state: .insufficientGas)
+            return
+        }
+        let balanceOfNativeToken = nativeToken.quantityNumber
+        if gasFeeNumber.doubleValue > balanceOfNativeToken.doubleValue {
+            updateButton(state: .insufficientGas)
+            return
+        }
+
+        let quantity = NSDecimalNumber(string: quantityStr)
+        guard quantity != .notANumber else {
+            updateButton(state: .noQuantity)
+            return
+        }
+        guard quantity.doubleValue > 0 else {
+            updateButton(state: .noQuantity)
+            return
+        }
+        guard quantity.doubleValue < 255 else {
+            updateButton(state: .exceedMaxQuantity)
+            return
+        }
+        let amount = NSDecimalNumber(string: amountStr)
+        guard amount != .notANumber else {
+            updateButton(state: .noAmount)
+            return
+        }
+        guard amount.doubleValue > 0 else {
+            updateButton(state: .noAmount)
+            return
+        }
+
+        // insufficientBalance
+        let tokenAmount = token.quantityNumber
+        let totalAmount = totalQuantity
+        guard tokenAmount != .notANumber, totalAmount != .notANumber else {
+            return
+        }
+
+        if !token.isMainToken, let identifier = token.identifier {
+            if allowances[identifier] == nil {
+                updateButton(state: .requestAllowance)
+                getAndUpdateAllowances()
+                return
+            }
+            if let sendAmount = Web3.Utils.parseToBigUInt("\(totalQuantity)", decimals: Int(token.decimal)),
+               let allowance = allowances[identifier],
+               allowance < sendAmount
+            {
+                updateButton(state: .unlockToken)
+                return
+            }
+        }
+
+        if token.isMainToken {
+            if case .orderedDescending = gasFeeNumber.adding(totalAmount).compare(tokenAmount) {
+                self.updateButton(state: .insufficientBalance)
+                return
+            }
+        } else {
+            if case .orderedDescending = totalAmount.compare(tokenAmount) {
+                self.updateButton(state: .insufficientBalance)
+                return
+            }
+        }
+
+        // no message
+        guard !message.isEmpty else {
+            updateButton(state: .noMessage)
+            return
+        }
+
+        guard let division = token.quantity?.dividing(by: quantity), division.doubleValue > 1 else {
+            updateButton(state: .indivisible)
+            return
+        }
+
+        updateButton(state: .send)
+    }
+
+    func updateButton(state: ConfirmButtonType) {
+        buttonType = state
+    }
+
+    // MARK: Private
+
+    private var timer: Timer?
+
+    // MARK: - Private property
+
+    private var disposeBag = Set<AnyCancellable>()
+    @InjectedProvider(\.walletAssetManager)
+    private var walletAssetManager: WalletAssetManager
+    @InjectedProvider(\.userDefaultSettings)
+    private var settings
+    @InjectedProvider(\.vault)
+    private var vault
+    @InjectedProvider(\.mainCoordinator)
+    private var mainCoordinator
+    @InjectedProvider(\.personaManager)
+    private var personaManager
+
     private func createRedPacket() {
         guard let token = token else { return }
         // key pair
         guard let privateKey = SECP256K1.generatePrivateKey() else { return }
         guard let publicKey = Web3.Utils.privateToPublic(privateKey) else { return }
         guard let publicKeyETH = Web3.Utils.publicToAddress(publicKey) else { return }
-        
+
         // number
         guard let number = BigUInt(quantityStr) else { return }
-        
+
         // ifrandom
         let isRandom = mode == .random
-        
+
         // duration
         let duration = BigUInt(60 * 60 * 24)
-        
+
         // seed
-        let randomStr = "\(Float.random(in: 0..<1))"
+        let randomStr = "\(Float.random(in: 0 ..< 1))"
         guard let seed = randomStr.data(using: .utf8)?.sha3(.keccak256) else { return }
-        
+
         // message
         let defaultMessage = ""
-        let message = self.message.isEmpty ? defaultMessage : self.message
-        
+        let message = message.isEmpty ? defaultMessage : message
+
         // tokenType
         let tokenType = token.isMainToken == true ? BigUInt(0) : BigUInt(1)
         // tokenAddr
-        var tokenAddr: String = ""
+        var tokenAddr = ""
         if token.isMainToken == true {
             tokenAddr = settings.network.nativeTokenAddress
         } else if let address = token.contractAddress {
             tokenAddr = address
         }
         guard let tokenAddressETH = EthereumAddress(tokenAddr) else { return }
-        
+
         // totalTokens
         guard let total = Web3.Utils.parseToBigUInt(
-            self.totalQuantity.stringValue,
+            totalQuantity.stringValue,
             decimals: Int(token.decimal)
         ) else {
             return
         }
-        
+
         let senderName = personaManager.currentProfile.value?.userName
             ?? personaManager.currentPersona.value?.nickname
             ?? "Unknown User"
-        
+
         let param = HappyRedPacketV4.CreateRedPacketInput(
             publicKey: publicKeyETH,
             number: number,
@@ -347,8 +501,9 @@ final class LuckyDropViewModel: ObservableObject {
             name: senderName,
             tokenType: tokenType,
             tokenAddr: tokenAddressETH,
-            totalTokens: total)
-        
+            totalTokens: total
+        )
+
         let fungibleTokenBuilder = FungibleTokenBuilder()
         let fungibleToken = fungibleTokenBuilder.buildToken(with: token)
         Task {
@@ -369,8 +524,9 @@ final class LuckyDropViewModel: ObservableObject {
             }
         }
     }
-    
+
     // MARK: - Private method
+
     private func saveSafely(txHash: String, password: String) {
         let basic = RedPacket.Basic(
             contractAddress: "",
@@ -385,7 +541,7 @@ final class LuckyDropViewModel: ObservableObject {
             blockNumber: 0
         )
 
-        let packetPayload = RedPacket.RedPacketPayload.Payload.init(
+        let packetPayload = RedPacket.RedPacketPayload.Payload(
             sender: .init(address: "", name: "", message: ""),
             contractVersion: 4,
             network: "",
@@ -395,30 +551,32 @@ final class LuckyDropViewModel: ObservableObject {
             claimers: [],
             totalRemaining: nil
         )
-        let payload = RedPacketPayload.init(basic: basic, payload: packetPayload)
+        let payload = RedPacketPayload(basic: basic, payload: packetPayload)
         PluginStorageRepository.save(
             chain: settings.network,
             txHash: txHash,
             payload: payload
         )
     }
+
     private func saveRedPacket(txHash: String, password: String, token: FungibleToken?) {
         do {
             // Make sure you don't lose password.
             saveSafely(txHash: txHash, password: password)
-            
+
             guard let w3Provider = settings.network.w3Provider,
-                    let address = settings.defaultAccountAddress,
-                    let token = token,
-                    let contractAddress = settings.network.redPacketAddressV4,
-                    let networkName = settings.network.fullEvmName else {
+                  let address = settings.defaultAccountAddress,
+                  let token = token,
+                  let contractAddress = settings.network.redPacketAddressV4,
+                  let networkName = settings.network.fullEvmName
+            else {
                 return
             }
             let transaction = try w3Provider.eth.getTransactionDetails(txHash)
             let data = transaction.transaction.data.toHexString()
             let kvpair = ABI.happyRedPacketV4.parse(input: data, for: .createRedPacket)
             let redpacketInfo = RedPacketHistoryInfo.CreateRedpacketParam(json: kvpair)
-            
+
             guard let info = redpacketInfo else { return }
 
             let basic = RedPacket.Basic(
@@ -434,7 +592,7 @@ final class LuckyDropViewModel: ObservableObject {
                 blockNumber: Int(transaction.blockNumber ?? 0)
             )
 
-            let packetPayload = RedPacket.RedPacketPayload.Payload.init(
+            let packetPayload = RedPacket.RedPacketPayload.Payload(
                 sender: .init(address: address, name: info.name, message: info.message),
                 contractVersion: 4,
                 network: networkName,
@@ -444,7 +602,7 @@ final class LuckyDropViewModel: ObservableObject {
                 claimers: [],
                 totalRemaining: nil
             )
-            let payload = RedPacketPayload.init(basic: basic, payload: packetPayload)
+            let payload = RedPacketPayload(basic: basic, payload: packetPayload)
             PluginStorageRepository.save(
                 chain: settings.network,
                 txHash: txHash,
@@ -454,23 +612,26 @@ final class LuckyDropViewModel: ObservableObject {
             log.error("\(error)")
         }
     }
-    
+
     private func getAllowance() async -> BigUInt? {
         guard let fromAddress = settings.defaultAccountAddress,
-              let originalOwner = EthereumAddress(fromAddress) else {
-                  return nil
-              }
+              let originalOwner = EthereumAddress(fromAddress)
+        else {
+            return nil
+        }
         guard let web3 = Web3ProviderFactory.provider else { return nil }
         guard let contractAddressStr = token?.contractAddress,
-              let contractAddress = EthereumAddress(contractAddressStr) else {
-                  return nil
-              }
+              let contractAddress = EthereumAddress(contractAddressStr)
+        else {
+            return nil
+        }
         guard let luckyDropAddressStr = luckyDropAddressStr,
-              let luckyDropAddress = EthereumAddress(luckyDropAddressStr) else {
-                  return nil
-              }
+              let luckyDropAddress = EthereumAddress(luckyDropAddressStr)
+        else {
+            return nil
+        }
         let erc20 = ERC20(web3: web3, provider: web3.provider, address: contractAddress)
-        
+
         return await Task.detached {
             guard let allowance = try? erc20.getAllowance(originalOwner: originalOwner, delegate: luckyDropAddress) else {
                 return nil
@@ -478,12 +639,12 @@ final class LuckyDropViewModel: ObservableObject {
             return allowance
         }.value
     }
-    
+
     private func getAndUpdateAllowances() {
-        guard let identifier = self.token?.identifier else {
+        guard let identifier = token?.identifier else {
             return
         }
-        guard (self.allowances[identifier] ?? 0) == 0 else {
+        guard (allowances[identifier] ?? 0) == 0 else {
             return
         }
         Task {
@@ -500,21 +661,24 @@ final class LuckyDropViewModel: ObservableObject {
             }
         }
     }
-    
+
     private func approveToken(password: String, network: BlockChainNetwork) {
         guard let fromAddress = settings.defaultAccountAddress,
-              let fromAddressEthFormat = EthereumAddress(fromAddress) else {
+              let fromAddressEthFormat = EthereumAddress(fromAddress)
+        else {
             return
         }
         guard let web3 = Web3ProviderFactory.provider else { return }
         guard let tokenAddress = token?.contractAddress,
-              let tokenAddressETHFormat = EthereumAddress(tokenAddress) else {
+              let tokenAddressETHFormat = EthereumAddress(tokenAddress)
+        else {
             return
         }
         guard let toAddress = luckyDropAddressStr,
-              let toAddressEthFormat = EthereumAddress(toAddress) else {
-                  return
-              }
+              let toAddressEthFormat = EthereumAddress(toAddress)
+        else {
+            return
+        }
         Task.detached {
             let erc20 = ERC20(web3: web3, provider: web3.provider, address: tokenAddressETHFormat)
             do {
@@ -543,7 +707,7 @@ final class LuckyDropViewModel: ObservableObject {
             }
         }
     }
-    
+
     private func presentTransactionPopView(
         transacationResult: EthereumTransaction,
         transactionOptions: TransactionOptions
@@ -555,7 +719,7 @@ final class LuckyDropViewModel: ObservableObject {
                 case .failure(let error): continuation.resume(throwing: error)
                 }
             }
-            
+
             self?.mainCoordinator.present(
                 scene: .maskSendResolverTransactionPopView(
                     completion: comletion,
@@ -566,14 +730,14 @@ final class LuckyDropViewModel: ObservableObject {
             )
         }
     }
-    
+
     private func checkApproveStatus(txHash: String) {
         guard let web3Provier = Web3ProviderFactory.provider?.eth else {
             return
         }
         log.debug("checkApproveStatus hash \(txHash)", source: "lucky drop")
         timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] _ in
-            _ = web3Provier.getTransactionReceiptPromise(txHash).done {[weak self] transactionReceipt in
+            _ = web3Provier.getTransactionReceiptPromise(txHash).done { [weak self] transactionReceipt in
                 log.debug("checkApproveStatus1 hash \(txHash) status: \(transactionReceipt.status)", source: "lucky drop")
                 guard transactionReceipt.status != .notYetProcessed else {
                     return
@@ -584,20 +748,20 @@ final class LuckyDropViewModel: ObservableObject {
             }
         }
     }
-    
+
     private func setupObserversForConfirmButton() {
         let publishers: [AnyPublisher<String, Never>] = [
-            settings.$passwordExpiredDate.map({ "\(String(describing: $0))" }).eraseToAnyPublisher(),
-            settings.$defaultAccountAddress.map({ $0 ?? "" }).eraseToAnyPublisher(),
-            settings.$confirmedPluginRiskWarnings.map({ _ in "" }).eraseToAnyPublisher(),
+            settings.$passwordExpiredDate.map { "\(String(describing: $0))" }.eraseToAnyPublisher(),
+            settings.$defaultAccountAddress.map { $0 ?? "" }.eraseToAnyPublisher(),
+            settings.$confirmedPluginRiskWarnings.map { _ in "" }.eraseToAnyPublisher(),
             $quantityStr.eraseToAnyPublisher(),
             $amountStr.eraseToAnyPublisher(),
             $message.eraseToAnyPublisher(),
-            $gasFeeItem.map({ _ in "" }).eraseToAnyPublisher(),
-            $allowances.map({ _ in "" }).eraseToAnyPublisher(),
-//            $token.map({ _ in "" }).eraseToAnyPublisher(),
+            $gasFeeItem.map { _ in "" }.eraseToAnyPublisher(),
+            $allowances.map { _ in "" }.eraseToAnyPublisher(),
+            $token.map { _ in "" }.eraseToAnyPublisher(),
         ]
-        
+
         publishers.combineLatest()
             .debounce(for: .seconds(0.1), scheduler: RunLoop.main)
             .sink { [weak self] _ in
@@ -607,142 +771,22 @@ final class LuckyDropViewModel: ObservableObject {
                 self.checkParam()
             }
             .store(in: &disposeBag)
-        
-        settings.$defaultAccountAddress.removeDuplicates().asDriver().sink { [weak self] fromAddress in
-            guard let self = self else { return }
-            guard self.token?.account?.address != fromAddress else { return }
-            let token = self.walletAssetManager.getMainToken(
-                network: self.settings.network,
-                chainId: self.settings.network.chain.rawValue,
-                networkId: Int(self.settings.network.networkId),
-                context: AppContext.shared.coreDataStack.persistentContainer.viewContext)
-            self.token = token
-        }
-        .store(in: &disposeBag)
-    }
-    
-    func checkParam() {
-        guard self.buttonType != .sending, self.buttonType != .unlockingToken else {
-            return
-        }
-        
-        guard let fromAddress = self.settings.defaultAccountAddress,
-              let fromAccount = WalletCoreService.shared.getAccount(address: fromAddress) else {
-            self.updateButton(state: .noAccount)
-            return
-        }
-        
-        guard let token = self.token else {
-            self.updateButton(state: .noToken)
-            return
-        }
-        
-        // Only check payment password for wallet which created by Maskbook.
-        if !fromAccount.fromWalletConnect {
-            guard let date = self.settings.passwordExpiredDate, !self.settings.isPasswordExpried(date) else {
-                self.updateButton(state: .unlock)
-                return
+
+        settings.$defaultAccountAddress
+            .removeDuplicates()
+            .asDriver()
+            .sink { [weak self] fromAddress in
+                guard let self = self else { return }
+                guard self.token?.account?.address != fromAddress else { return }
+                let token = self.walletAssetManager.getMainToken(
+                    network: self.settings.network,
+                    chainId: self.settings.network.chain.rawValue,
+                    networkId: Int(self.settings.network.networkId),
+                    context: self.viewContext
+                )
+                self.token = token
             }
-        }
-             
-        guard self.settings.hasRiskConfirmed else {
-            self.updateButton(state: .riskWarning)
-            return
-        }
-        
-        guard let gasFee = self.gasFeeItem?.gasFee else {
-            return
-        }
-        let gasFeeNumber = NSDecimalNumber(string: gasFee)
-        guard gasFeeNumber != .notANumber else {
-            return
-        }
-        guard let nativeToken = self.walletAssetManager.getMainToken(
-            network: self.settings.network,
-            chainId: self.settings.network.chain.rawValue,
-            networkId: Int(self.settings.network.networkId),
-            context: AppContext.shared.coreDataStack.persistentContainer.viewContext) else {
-            self.updateButton(state: .insufficientGas)
-            return
-        }
-        let balanceOfNativeToken = nativeToken.quantityNumber
-        if gasFeeNumber.doubleValue > balanceOfNativeToken.doubleValue {
-            self.updateButton(state: .insufficientGas)
-            return
-        }
-        
-        let quantity = NSDecimalNumber(string: self.quantityStr)
-        guard quantity != .notANumber else {
-            self.updateButton(state: .noQuantity)
-            return
-        }
-        guard quantity.doubleValue > 0 else {
-            self.updateButton(state: .noQuantity)
-            return
-        }
-        guard quantity.doubleValue < 255 else {
-            self.updateButton(state: .exceedMaxQuantity)
-            return
-        }
-        let amount = NSDecimalNumber(string: self.amountStr)
-        guard amount != .notANumber else {
-            self.updateButton(state: .noAmount)
-            return
-        }
-        guard amount.doubleValue > 0 else {
-            self.updateButton(state: .noAmount)
-            return
-        }
-        
-        // insufficientBalance
-        let tokenAmount = token.quantityNumber
-        let totalAmount = self.totalQuantity
-        guard tokenAmount != .notANumber, totalAmount != .notANumber else {
-            return
-        }
-        
-        if !token.isMainToken, let identifier = token.identifier {
-            if self.allowances[identifier] == nil {
-                self.updateButton(state: .requestAllowance)
-                self.getAndUpdateAllowances()
-                return
-            }
-            if let sendAmount = Web3.Utils.parseToBigUInt("\(self.totalQuantity)", decimals: Int(token.decimal)),
-               let allowance = self.allowances[identifier],
-               allowance < sendAmount {
-                self.updateButton(state: .unlockToken)
-                return
-            }
-        }
-        
-        if token.isMainToken {
-            if case .orderedDescending = gasFeeNumber.adding(totalAmount).compare(tokenAmount) {
-                self.updateButton(state: .insufficientBalance)
-                return
-            }
-        } else {
-            if case .orderedDescending = totalAmount.compare(tokenAmount) {
-                self.updateButton(state: .insufficientBalance)
-                return
-            }
-        }
-        
-        // no message
-        guard !self.message.isEmpty else {
-            self.updateButton(state: .noMessage)
-            return
-        }
-        
-        guard let division = token.quantity?.dividing(by: quantity), division.doubleValue > 1 else {
-            self.updateButton(state: .indivisible)
-            return
-        }
-        
-        self.updateButton(state: .send)
-    }
-    
-    func updateButton(state: ConfirmButtonType) {
-        buttonType = state
+            .store(in: &disposeBag)
     }
 }
 
@@ -750,10 +794,8 @@ extension LuckyDropViewModel: ChooseTokenBackDelegate {
     func chooseTokenAction(token: Token) {
         self.token = token
     }
-    
-    func chooseNFTTokenAction(token: Collectible) {
-        
-    }
+
+    func chooseNFTTokenAction(token: Collectible) {}
 }
 
 extension LuckyDropViewModel {
@@ -763,7 +805,7 @@ extension LuckyDropViewModel {
         case lab
         case composer
     }
-    
+
     enum ConfirmButtonType: CaseIterable, Codable {
         case noAccount
         case noToken
@@ -773,18 +815,40 @@ extension LuckyDropViewModel {
         case noQuantity
         case exceedMaxQuantity
         case noAmount
-        
+
         case requestAllowance
         case unlockToken
         case unlockingToken
-        
+
         case insufficientBalance
         case noMessage
         case indivisible
-        
+
         case send
         case sending
-        
+
+        // MARK: Internal
+
+        var isEnable: Bool {
+            switch self {
+            case .unlock, .riskWarning, .unlockToken, .unlockingToken, .send, .sending:
+                return true
+
+            default:
+                return false
+            }
+        }
+
+        var animating: Bool {
+            switch self {
+            case .unlockingToken, .sending, .requestAllowance:
+                return true
+
+            default:
+                return false
+            }
+        }
+
         func title(token: Token?, mode: RedPacket.RedPacketType, amount: String?) -> String {
             switch self {
             case .unlock: return L10n.Scene.WalletUnlock.title
@@ -812,32 +876,12 @@ extension LuckyDropViewModel {
             case .sending: return L10n.Scene.WalletBalance.btnSend
             }
         }
-        
-        var isEnable: Bool {
-            switch self {
-            case .unlock, .riskWarning, .unlockToken, .unlockingToken, .send, .sending:
-                return true
-                
-            default:
-                return false
-            }
-        }
-        
-        var animating: Bool {
-            switch self {
-            case .unlockingToken, .sending, .requestAllowance:
-                return true
-                
-            default:
-                return false
-            }
-        }
     }
 }
 
 extension FungibleTokenBuilder {
     func buildToken(with token: Token) -> FungibleToken? {
-        var tokenType: RedPacket.EthereumToken? = nil
+        var tokenType: RedPacket.EthereumToken?
         switch token.tokenType {
         case .native: tokenType = .native
         case .erc20: tokenType = .erc20
@@ -845,17 +889,18 @@ extension FungibleTokenBuilder {
         guard let type = tokenType else {
             return nil
         }
-        guard let redPacketChainId = RedPacket.ChainId(rawValue: Int(token.networkId)) else {
+        guard let redPacketChainID = RedPacket.ChainId(rawValue: Int(token.networkId)) else {
             return nil
         }
         let redPacketToken = RedPacket.Token(
             type: type,
             address: token.contractAddress ?? "",
-            chainId: redPacketChainId,
+            chainId: redPacketChainID,
             name: token.name ?? "",
             symbol: token.symbol ?? "",
             decimals: Int(token.decimal),
-            logoURI: .either(token.logoUrl ?? ""))
+            logoURI: .either(token.logoUrl ?? "")
+        )
         switch redPacketToken.type {
         case .erc20: return .erc20Token(redPacketToken)
         case .native: return .nativeToken(redPacketToken)

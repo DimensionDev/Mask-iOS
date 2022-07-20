@@ -10,8 +10,6 @@ import Combine
 import Foundation
 import SwiftUI
 
-import ResponderChain
-
 class LuckyDropViewController: BaseViewController {
     private let viewModel: LuckyDropViewModel
     private(set) var cancelableStorage: Set<AnyCancellable> = []
@@ -32,7 +30,6 @@ class LuckyDropViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = L10n.Plugins.Luckydrop.title
@@ -46,7 +43,7 @@ class LuckyDropViewController: BaseViewController {
 
     override func buildContent() {
         super.buildContent()
-        let controller = UIHostingController(rootView: luckyView.withResponderChainForCurrentWindow())
+        let controller = UIHostingController(rootView: luckyView)
         self.addChild(controller)
         self.view.addSubview(controller.view)
         controller.view.snp.makeConstraints { $0.edges.equalToSuperview() }
