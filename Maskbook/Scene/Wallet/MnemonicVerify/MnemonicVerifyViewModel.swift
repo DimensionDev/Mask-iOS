@@ -19,30 +19,9 @@ final class MnemonicVerifyViewModel {
     /// The name of created account user specified at `CreateWalletWithNameViewController`
     var name: String?
     
-    private lazy var wordsNeedVerify: [String] = wordsNeedVerifyIndexes.map { index in
-        words[index]
-    }
+    private lazy var wordsNeedVerify: [String] = generateWordsNeedVerify()
     
-    private lazy var wordsNeedVerifyIndexes: [Int] = {
-        var indexes = [Int]()
-        while indexes.count < 3 {
-            let random = Int.random(in: 0 ..< words.count)
-            if !indexes.contains(random) {
-                indexes.append(random)
-            }
-        }
-        return indexes.sorted {
-            $0 < $1
-        }
-    }()
-    
-    lazy var wordsNeedVerifyShuffle: [String] = {
-        var shuffle = wordsNeedVerify.shuffled()
-        while shuffle.elementsEqual(wordsNeedVerify) {
-            shuffle = wordsNeedVerify.shuffled()
-        }
-        return shuffle
-    }()
+    lazy var wordsNeedVerifyShuffle: [String] = generateWordsNeedVerifyShuffle()
     
     let selectedWords = CurrentValueSubject<[String], Never>([String]())
     var selectedWordsPendingDisplay = [String]()
@@ -62,12 +41,38 @@ final class MnemonicVerifyViewModel {
             .store(in: &disposeBag)
     }
     
+    private func generateWordsNeedVerify() -> [String] {
+        let wordsNeedVerifyIndexes: [Int] = {
+            var indexes = [Int]()
+            while indexes.count < 3 {
+                let random = Int.random(in: 0 ..< words.count)
+                if !indexes.contains(random) {
+                    indexes.append(random)
+                }
+            }
+            return indexes.sorted {
+                $0 < $1
+            }
+        }()
+        return wordsNeedVerifyIndexes.map { index in
+            words[index]
+        }
+    }
+    
+    private func generateWordsNeedVerifyShuffle() -> [String] {
+        var shuffle = wordsNeedVerify.shuffled()
+        while shuffle.elementsEqual(wordsNeedVerify) {
+            shuffle = wordsNeedVerify.shuffled()
+        }
+        return shuffle
+    }
+    
     func validateSelectedWords() {
         let isRight = selectedWords.value.elementsEqual(wordsNeedVerify)
         mnemonicError.value = !isRight
     }
     
-    func verifyStateForCurrentWord(word: String) -> MnemonicVerifyWordCellState {
+    func cellTypeForCurrentWord(word: String) -> MnemonicVerifyCellType {
         if !selectedWords.value.contains(word) {
             return .normal
         } else {

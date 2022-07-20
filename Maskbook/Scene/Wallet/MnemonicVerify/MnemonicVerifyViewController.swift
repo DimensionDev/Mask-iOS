@@ -88,9 +88,7 @@ class MnemonicVerifyViewController: BaseViewController {
         let layer = CAGradientLayer()
         layer.colors = [
             Asset.Colors.Gradient.mnemonicVerify1.color.cgColor,
-//            Asset.Colors.Gradient.mnemonicVerify2.color.cgColor,
-//            Asset.Colors.Gradient.mnemonicVerify3.color.cgColor,
-            Asset.Colors.Gradient.mnemonicVerify4.color.cgColor,
+            Asset.Colors.Gradient.mnemonicVerify2.color.cgColor,
         ]
         layer.locations = [0, 1]
         layer.startPoint = CGPoint(x: 0, y: 0)

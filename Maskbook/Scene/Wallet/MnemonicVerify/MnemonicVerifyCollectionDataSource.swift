@@ -25,17 +25,17 @@ extension MnemonicVerifyWordCollectionDataSource: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MnemonicVerifyWordCollectionCell.self), for: indexPath) as! MnemonicVerifyWordCollectionCell
         var word = viewModel.words[indexPath.row]
-        var state = MnemonicVerifyWordCellState.normal
+        var cellType = MnemonicVerifyCellType.normal
         if viewModel.wordsNeedVerifyShuffle.contains(word) {
             if let newWord = viewModel.selectedWordsPendingDisplay.first {
                 viewModel.selectedWordsPendingDisplay.removeFirst()
                 word = newWord
-                state = .verified
+                cellType = .verified
             } else {
-                state = .blank
+                cellType = .blank
             }
         }
-        cell.configWith(word: word, state: state)
+        cell.configWith(word: word, cellType: cellType)
         return cell
     }
     // swiftlint:enable force_cast
@@ -69,8 +69,8 @@ extension MnemonicNeedVerifyDataSource: UICollectionViewDataSource {
         guard let word = viewModel.wordsNeedVerifyShuffle[safeIndex: indexPath.row] else {
             return MnemonicVerifyWordCollectionCell()
         }
-        let state = viewModel.verifyStateForCurrentWord(word: word)
-        cell.configWith(word: word, state: state)
+        let cellType = viewModel.cellTypeForCurrentWord(word: word)
+        cell.configWith(word: word, cellType: cellType)
         return cell
     }
     // swiftlint:enable force_cast

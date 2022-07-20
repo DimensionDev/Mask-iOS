@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-enum MnemonicVerifyWordCellState {
+enum MnemonicVerifyCellType {
     case normal
     case verified
     case blank
@@ -58,12 +58,12 @@ class MnemonicVerifyWordCollectionCell: UICollectionViewCell {
         ])
     }
     
-    func configWith(word: String, state: MnemonicVerifyWordCellState) {
+    func configWith(word: String, cellType: MnemonicVerifyCellType) {
         wordLabel.text = word
         CATransaction.begin()
         CATransaction.setDisableActions(true)
 
-        switch state {
+        switch cellType {
         case .normal:
             contentView.alpha = 0.5
             contentView.backgroundColor = Asset.Colors.Background.dark.color
