@@ -164,13 +164,17 @@ final class SendConfirmPopViewController: UIViewController {
         return btn
     }()
     
-    lazy var confirmButton: PrimeryButton = {
-        let btn = PrimeryButton(title: L10n.Common.Controls.confirm)
+    lazy var confirmButton: TertiaryButton = {
+        let btn = TertiaryButton(title: L10n.Common.Controls.confirm)
+        btn.setTitleColor(Asset.Colors.Text.lighter.color, for: .normal)
+        btn.setTitleColor(Asset.Colors.Text.normal.color, for: .disabled)
+        btn.setBackgroundImage(UIImage.placeholder(color: Asset.Colors.Public.blue.color), for: .normal)
+        btn.setBackgroundImage(UIImage.placeholder(color: Asset.Colors.Background.disable.color), for: .disabled)
+        btn.layer.cornerRadius = 8
         btn.addTarget(self, action: #selector(confirmClicked(_:)), for: .touchUpInside)
         NSLayoutConstraint.activate([
             btn.heightAnchor.constraint(equalToConstant: 54)
         ])
-        btn.isEnabled = false
         return btn
     }()
     
@@ -313,6 +317,7 @@ final class SendConfirmPopViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] newGasPrice in
                 if let validGasPrice = newGasPrice {
+                    self?.sendStatus = .fetchGas
                     self?.viewModel.transactionPublisher.value?.gasPrice = validGasPrice
                     guard let self = self,
                           let transaction = self.viewModel.transactionPublisher.value,
@@ -427,12 +432,19 @@ extension SendConfirmPopViewController {
         switch sendStatus {
         case .ready:
             confirmButton.isEnabled = true
+            confirmButton.indicator.stopAnimating()
             
         case .sending:
             confirmButton.isEnabled = false
-            
+            confirmButton.indicator.startAnimating()
+
         case .sent:
             confirmButton.isEnabled = true
+            confirmButton.indicator.stopAnimating()
+            
+        case .fetchGas:
+            confirmButton.isEnabled = false
+            confirmButton.indicator.startAnimating()
         }
     }
 }
