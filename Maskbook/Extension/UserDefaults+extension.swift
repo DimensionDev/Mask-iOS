@@ -114,8 +114,6 @@ final class UserDefaultSettings {
         backupDate = nil
         backupAlertDate = nil
         indexedDBDataMigrated = false
-
-        fileServicePolicyAccepted = false
     }
 
     @OptionalUserDefault(key: .defaultAccountAddress)

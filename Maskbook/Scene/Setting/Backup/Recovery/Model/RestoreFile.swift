@@ -490,6 +490,7 @@ extension RestoreFile {
             self.type = type
             self.landingTxID = landingTxID
             key = json[CodingKeys.key.stringValue] as? String
+            uploadOption = json[CodingKeys.uploadOption.stringValue] as? String
         }
 
         // MARK: Internal
@@ -505,6 +506,7 @@ extension RestoreFile {
         let type: String
         let landingTxID: String
         let key: String?
+        let uploadOption: String?
 
         enum CodingKeys: String, CodingKey {
             case payloadTxID
@@ -516,6 +518,7 @@ extension RestoreFile {
             case type
             case landingTxID
             case key
+            case uploadOption = "upload_option"
         }
     }
 }

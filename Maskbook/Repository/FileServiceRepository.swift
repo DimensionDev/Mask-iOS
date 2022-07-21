@@ -171,6 +171,7 @@ extension FileServiceRepository {
                 uploadFile.payloadTxID = file.payloadTxID
                 uploadFile.fileSize = Double(file.size)
                 uploadFile.content = nil
+                uploadFile.uploadOption = file.uploadOption
 
                 // uploadFile.uploadOption = item.option?.asString()
 
@@ -257,6 +258,10 @@ extension UploadFile {
             Keys.type.stringValue: "file",
             Keys.landingTxID.stringValue: landingTxID
         ]
+
+        if let option = self.uploadOption, !option.isEmpty {
+            json[Keys.uploadOption.stringValue] = uploadOption
+        }
 
         if let key = self.key, !key.isEmpty {
             json[Keys.key.stringValue] = key

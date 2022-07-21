@@ -106,6 +106,18 @@ struct FileServiceUploadingItem: Hashable {
         fileName == another.fileName &&
         option == another.option
     }
+
+    var id: String {
+        switch state {
+        case .uploaded: return tx?.id ?? ""
+
+        case .uploading, .encrypting, .preparing, .failed:
+            let txid = tx?.id ?? ""
+            let fileName = fileName
+            let option = option?.asString() ?? ""
+            return "\(txid)\(fileName)\(option)"
+        }
+    }
 }
 
 extension FileServiceUploadingItem: CustomStringConvertible {
