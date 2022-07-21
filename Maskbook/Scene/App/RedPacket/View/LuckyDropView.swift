@@ -29,7 +29,6 @@ struct LuckyDropView: View {
                 case .nft: NFTDropView(viewModel)
                 }
 
-
                 WalletBottomWidgetView(viewModel: viewModel.walletBottomViewModel)
                     .padding(.bottom, geometry.safeAreaInsets.bottom)
                     .background(Asset.Colors.Background.blur.asColor())

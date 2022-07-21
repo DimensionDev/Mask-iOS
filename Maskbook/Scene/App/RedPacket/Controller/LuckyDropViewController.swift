@@ -54,6 +54,47 @@ class LuckyDropViewController: BaseViewController {
 
     override func  buildEvent() {
         super.buildEvent()
+        viewModel.nftViewModel.action = { [weak self] action in
+            guard let self = self else { return }
+            switch action {
+            case .selectCollectibleGroup:
+                // TODO: chose Collectible Group
+                break
+
+            case let .addCollectibles(groupName, selectedIdentifiers):
+                // TODO: Select Collectibles
+                break
+
+            case .confirmRisk:
+                let pluginID = PluginStorageRepository.PluginID.redPackage.rawValue
+                self.coordinator.present(scene: .pluginRiskWarning(pluginID: pluginID), transition: .popup)
+
+            case let .createBNFTLuckyDrop(message, collectibles, gasFeeItem):
+                // TODO: create nft lucky drop
+                break
+
+            case .unlockWallet: self.unlockWallet()
+
+            case .unlockDGC:
+                // TODO: unlock nft permission
+                break
+            }
+        }
+    }
+
+    private func unlockWallet() {
+        coordinator.present(
+            scene: .walletUnlock(cancellable: true) { [weak self] error in
+                guard let self = self else {
+                    return
+                }
+                guard error == nil else {
+                    return
+                }
+                self.viewModel.nftViewModel.updateState()
+            },
+            transition: .modal()
+        )
     }
 
     @objc
@@ -63,7 +104,7 @@ class LuckyDropViewController: BaseViewController {
     
     @objc
     fileprivate func onShowHistory() {
-        self.navigationController?.pushViewController(LuckDropHistoryController(), animated: true)
+        show(LuckDropHistoryController(), sender: self)
     }
 }
 
