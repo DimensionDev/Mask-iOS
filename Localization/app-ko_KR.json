@@ -283,8 +283,7 @@
       "title": "문구 검증",
       "description": "각 단어를 정확한 순서로 탭해주세요.",
       "words_title": "각 단어를 정확한 순서로 탭해주세요.",
-      "mnemonic_error": "잘못된 니모닉",
-      "mnemonic_prompt": "가운데를 눌러 단어를 바꾸세요."
+      "mnemonic_error": ""
     },
     "select_network": {},
     "wallets_list_add": {
