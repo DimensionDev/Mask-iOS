@@ -283,8 +283,7 @@
       "title": "驗證助記詞",
       "description": "按正確順序點擊助記詞",
       "words_title": "按正確順序點擊助記詞",
-      "mnemonic_error": "",
-      "mnemonic_prompt": ""
+      "mnemonic_error": ""
     },
     "select_network": {},
     "wallets_list_add": {
