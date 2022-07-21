@@ -296,3 +296,13 @@ extension Vault {
         }
     }
 }
+
+enum VaultInjectValueKey: InjectValueKey {
+    static var defaultInjectValue = Vault.shared
+}
+
+extension InjectValues {
+    var vault: Vault {
+        Self[VaultInjectValueKey.self]
+    }
+}

@@ -9,77 +9,52 @@
 import Combine
 import Foundation
 import UIKit
+import UStack
 
 class MnemonicVerifyViewController: BaseViewController {
-    static let flowItemSize = CGSize(width: 180, height: 120)
-
     @InjectedProvider(\.vault)
     private var vault
     private var vaultSubsription = Set<AnyCancellable>()
     
-    var disposeBag = Set<AnyCancellable>()
+    private var disposeBag = Set<AnyCancellable>()
     
     let viewModel = MnemonicVerifyViewModel()
     
-    let descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = Asset.Colors.Text.normal.color
-        label.font = FontStyles.RH4
-        label.text = L10n.Scene.MnemonicVerify.description
-        label.numberOfLines = 0
-        return label
-    }()
-
-    let horizontalCollectionView: UICollectionView = {
-        let flowLayout = MnemonicVerifyCollectionFlowLayout()
-        flowLayout.scrollDirection = .horizontal
-        let view = ControlContainableCollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        view.backgroundColor = .clear
-        view.showsHorizontalScrollIndicator = false
-        view.showsVerticalScrollIndicator = false
-        view.layer.masksToBounds = false
-        view.clipsToBounds = true
-        return view
-    }()
-    
-    lazy var horizontalDataSource: MnemonicVerifyFlowCollectionDataSource = {
-        let dataSource = MnemonicVerifyFlowCollectionDataSource(viewModel: viewModel)
-        return dataSource
-    }()
-    
-    let progressLabel: UILabel = {
-        let label = UILabel()
-        label.font = FontStyles.BH4
-        label.textColor = Asset.Colors.Public.blue.color
-        label.textAlignment = .right
-        return label
-    }()
-    
-    let totalCountLabel: UILabel = {
-        let label = UILabel()
-        label.font = FontStyles.BH4
-        label.textColor = Asset.Colors.Text.dark.color
-        return label
-    }()
-
-    let mnemonicPromptLabel: UILabel = {
+    private lazy var mnemonicPromptLabel: UILabel = {
         let label = UILabel()
         label.font = FontStyles.MH6
         label.textColor = Asset.Colors.Public.error.color
         label.text = L10n.Scene.MnemonicVerify.mnemonicError
-        label.textAlignment = .center
+        label.textAlignment = .left
         return label
     }()
     
-    let wordTitleLabel: UILabel = {
+    private lazy var wordTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = FontStyles.MH6
-        label.textColor = Asset.Colors.Text.dark.color
+        label.font = FontStyles.RH4
+        label.textColor = Asset.Colors.Text.normal.color
         label.text = L10n.Scene.MnemonicVerify.wordsTitle
+        label.textAlignment = .left
         return label
     }()
     
-    let wordsCollectionView: UICollectionView = {
+    private lazy var wordsCollectionContainer: UIView = {
+        let view = UIView()
+        view.layer.addSublayer(backgroundLayer)
+        view.withSubViews {
+            wordsCollectionView
+        }
+        view.applyCornerRadius(radius: 8)
+        NSLayoutConstraint.activate([
+            wordsCollectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 16),
+            wordsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            wordsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            wordsCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
+        ])
+        return view
+    }()
+    
+    private lazy var wordsCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
         let view = ControlContainableCollectionView(frame: .zero, collectionViewLayout: flowLayout)
@@ -91,151 +66,113 @@ class MnemonicVerifyViewController: BaseViewController {
         return view
     }()
     
-    lazy var wordsCollectionViewDataSource: MnemonicVerifyWordCollectionDataSource = {
-        let dataSource = MnemonicVerifyWordCollectionDataSource(viewModel: viewModel)
-        return dataSource
+    lazy var wordsCollectionViewDataSource = MnemonicVerifyWordCollectionDataSource(viewModel: viewModel)
+    
+    private lazy var verifyCollectionView: UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .vertical
+        let view = ControlContainableCollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        view.backgroundColor = .clear
+        view.showsHorizontalScrollIndicator = false
+        view.showsVerticalScrollIndicator = false
+        view.layer.masksToBounds = false
+
+        return view
     }()
     
-    let confirmButton: UIButton = PrimeryButton(title: L10n.Common.Controls.confirm)
+    lazy var verifyCollectionViewDataSource = MnemonicNeedVerifyDataSource(viewModel: viewModel)
     
-    let clearButton: UIButton = SecondaryButton(title: L10n.Common.Controls.clear)
+    private lazy var confirmButton: UIButton = PrimeryButton(title: L10n.Common.Controls.confirm)
+    
+    private lazy var backgroundLayer: CAGradientLayer = {
+        let layer = CAGradientLayer()
+        layer.colors = [
+            Asset.Colors.Gradient.mnemonicVerify1.color.cgColor,
+            Asset.Colors.Gradient.mnemonicVerify2.color.cgColor,
+        ]
+        layer.locations = [0, 1]
+        layer.startPoint = CGPoint(x: 0, y: 0)
+        layer.endPoint = CGPoint(x: 1, y: 1)
+        return layer
+    }()
 }
 
 extension MnemonicVerifyViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = L10n.Scene.MnemonicVerify.title
-        setupWordCollectionView()
-        setupHorizontalCollectionView()
+        setupCollectionView()
         setupSubviews()
         subscribeViewModel()
         confirmButton.addTarget(self, action: #selector(confirmAction(_:)), for: .touchUpInside)
-        clearButton.addTarget(self, action: #selector(clearAction(_:)), for: .touchUpInside)
-        totalCountLabel.text = "/\(viewModel.words.count)"
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        backgroundLayer.frame = wordsCollectionContainer.bounds
     }
     
     func subscribeViewModel() {
-        viewModel.selectedWords
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] words in
-                guard let self = self else { return }
-                self.wordsCollectionView.reloadData()
-                self.horizontalCollectionView.reloadData()
-                let index = max(words.count - 1, 0)
-                self.progressLabel.text = "\(words.count)"
-                let indexPath = IndexPath(row: index, section: 0)
-                self.horizontalCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-                if words.count == self.viewModel.words.count {
-                    self.wordsCollectionView.isHidden = true
-                    self.confirmButton.isHidden = false
-                    self.clearButton.isHidden = false
-                } else {
-                    self.wordsCollectionView.isHidden = false
-                    self.confirmButton.isHidden = true
-                    self.clearButton.isHidden = true
-                }
-            }
-            .store(in: &disposeBag)
-        
         viewModel.mnemonicError
             .receive(on: DispatchQueue.main)
             .sink { [weak self] mnemonicError in
                 guard let self = self else { return }
-                if mnemonicError == true {
-                    self.confirmButton.isEnabled = false
-                    self.mnemonicPromptLabel.text = L10n.Scene.MnemonicVerify.mnemonicError
-                    self.mnemonicPromptLabel.textColor = Asset.Colors.Public.error.color
-                } else {
-                    self.confirmButton.isEnabled = true
-                    self.mnemonicPromptLabel.text = L10n.Scene.MnemonicVerify.mnemonicPrompt
-                    self.mnemonicPromptLabel.textColor = Asset.Colors.Public.warnings.color
+                if mnemonicError {
+                    self.viewModel.selectedWords.value = []
                 }
+                self.mnemonicPromptLabel.alpha = mnemonicError ? 1 : 0
+            }
+            .store(in: &disposeBag)
+        
+        viewModel.selectedWords
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] words in
+                self?.confirmButton.isEnabled = words.count == 3
+                self?.wordsCollectionView.reloadData()
+                self?.verifyCollectionView.reloadData()
             }
             .store(in: &disposeBag)
     }
-
-    func setupHorizontalCollectionView() {
-        horizontalCollectionView.delegate = horizontalDataSource
-        horizontalCollectionView.dataSource = horizontalDataSource
-        horizontalCollectionView.register(MnemonicVerifyFlowCollectionCell.self)
-        
-        let progressStackView = UIStackView()
-        progressStackView.axis = .horizontal
-        progressStackView.distribution = .fillEqually
-        progressStackView.translatesAutoresizingMaskIntoConstraints = false
-        horizontalCollectionView.addSubview(progressStackView)
-        NSLayoutConstraint.activate([
-            progressStackView.centerXAnchor.constraint(equalTo: horizontalCollectionView.frameLayoutGuide.centerXAnchor),
-            progressStackView.centerYAnchor.constraint(equalTo: horizontalCollectionView.frameLayoutGuide.centerYAnchor, constant: MnemonicVerifyViewController.flowItemSize.height / 2 + 24)
-        ])
-        
-        progressLabel.translatesAutoresizingMaskIntoConstraints = false
-        progressStackView.addArrangedSubview(progressLabel)
-        
-        totalCountLabel.translatesAutoresizingMaskIntoConstraints = false
-        progressStackView.addArrangedSubview(totalCountLabel)
-        
-        mnemonicPromptLabel.translatesAutoresizingMaskIntoConstraints = false
-        horizontalCollectionView.addSubview(mnemonicPromptLabel)
-        NSLayoutConstraint.activate([
-            mnemonicPromptLabel.centerXAnchor.constraint(equalTo: horizontalCollectionView.frameLayoutGuide.centerXAnchor),
-            mnemonicPromptLabel.centerYAnchor.constraint(equalTo: horizontalCollectionView.frameLayoutGuide.centerYAnchor, constant: MnemonicVerifyViewController.flowItemSize.height / 2 + 58)
-        ])
-    }
     
-    func setupWordCollectionView() {
+    func setupCollectionView() {
         wordsCollectionView.delegate = wordsCollectionViewDataSource
         wordsCollectionView.dataSource = wordsCollectionViewDataSource
-        wordsCollectionView.register(MnemonicVerifyWordCollectionCell.self, forCellWithReuseIdentifier: String(describing: MnemonicVerifyWordCollectionCell.self))
+        wordsCollectionView.register(MnemonicVerifyWordCollectionCell.self)
+        
+        verifyCollectionView.delegate = verifyCollectionViewDataSource
+        verifyCollectionView.dataSource = verifyCollectionViewDataSource
+        verifyCollectionView.register(MnemonicVerifyWordCollectionCell.self)
     }
     
     func setupSubviews() {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
+        let stackView = VStackView(spacing: 12,
+                                   distribution: .fill,
+                                   alignment: .fill) {
+            wordTitleLabel
+            UStack.Spacer(height: 80, width: nil)
+            wordsCollectionContainer
+            mnemonicPromptLabel
+            verifyCollectionView
+            UStack.Spacer()
+            confirmButton
+        }
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 0, left: LayoutConstraints.leading, bottom: 32, right: LayoutConstraints.trailing)
-        stackView.spacing = 24
-        stackView.distribution = .fill
-        view.addSubview(stackView)
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(stackView)
+        stackView.layoutMargins = UIEdgeInsets(top: 0,
+                                               left: LayoutConstraints.leading,
+                                               bottom: 32,
+                                               right: LayoutConstraints.trailing)
+        view.withSubViews {
+            stackView
+        }
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            stackView.topAnchor.constraint(equalTo: view.readableContentGuide.topAnchor),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: view.readableContentGuide.bottomAnchor)
+            stackView.bottomAnchor.constraint(equalTo: view.readableContentGuide.bottomAnchor),
         ])
-        
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(descriptionLabel)
-        descriptionLabel.setContentHuggingPriority(.required - 1, for: .vertical)
-
-        horizontalCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(horizontalCollectionView)
-
-        wordTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(wordTitleLabel)
-        
-        wordsCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(wordsCollectionView)
         NSLayoutConstraint.activate([
-            wordsCollectionView.heightAnchor.constraint(equalToConstant: 124).priority(.defaultLow)
-        ])
-        
-        confirmButton.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(confirmButton)
-        confirmButton.isHidden = true
-        
-        stackView.setCustomSpacing(16, after: confirmButton)
-        
-        clearButton.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(clearButton)
-        clearButton.isHidden = true
-        
-        NSLayoutConstraint.activate([
+            wordsCollectionContainer.heightAnchor.constraint(equalToConstant: 190),
             confirmButton.heightAnchor.constraint(equalToConstant: 54),
-            clearButton.heightAnchor.constraint(equalToConstant: 54)
         ])
     }
 }
@@ -264,8 +201,8 @@ extension MnemonicVerifyViewController {
 
     private func createAccount(with password: String) {
         let result = WalletCoreService.shared.createAccount(
-            param: .mnemonic(mnemonic: self.viewModel.words.joined(separator: " ").lowercased(), pathIndex: 0),
-            name: self.viewModel.name ?? "",
+            param: .mnemonic(mnemonic: viewModel.words.joined(separator: " ").lowercased(), pathIndex: 0),
+            name: viewModel.name ?? "",
             password: password,
             chainType: maskUserDefaults.network.chain,
             isImported: false
@@ -287,15 +224,5 @@ extension MnemonicVerifyViewController {
             let alertController = AlertController(title: error.localizedDescription, message: "", confirmButtonText: L10n.Common.Controls.done, imageType: .error)
             Coordinator.main.present(scene: .alertController(alertController: alertController), transition: .alertController(completion: nil))
         }
-    }
-}
-
-enum VaultInjectValueKey: InjectValueKey {
-    static var defaultInjectValue = Vault.shared
-}
-
-extension InjectValues {
-    var vault: Vault {
-        Self[VaultInjectValueKey.self]
     }
 }

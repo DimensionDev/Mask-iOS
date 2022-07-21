@@ -108,6 +108,8 @@ internal enum Asset {
       internal static let blur1 = ColorAsset(name: "Colors/Gradient/blur1")
       internal static let guide1 = ColorAsset(name: "Colors/Gradient/guide1")
       internal static let guide2 = ColorAsset(name: "Colors/Gradient/guide2")
+      internal static let mnemonicVerify1 = ColorAsset(name: "Colors/Gradient/mnemonicVerify1")
+      internal static let mnemonicVerify2 = ColorAsset(name: "Colors/Gradient/mnemonicVerify2")
       internal static let persona1 = ColorAsset(name: "Colors/Gradient/persona1")
       internal static let persona2 = ColorAsset(name: "Colors/Gradient/persona2")
       internal static let persona3 = ColorAsset(name: "Colors/Gradient/persona3")

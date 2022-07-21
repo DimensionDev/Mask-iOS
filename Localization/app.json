@@ -283,8 +283,7 @@
       "title": "Verify Your Phrase",
       "description": "Tap each word in the correct order.",
       "words_title": "Tap each word in the correct order.",
-      "mnemonic_error": "The mnemonic is incorrect",
-      "mnemonic_prompt": "Tap the middle to replace the word."
+      "mnemonic_error": "Verify Failed. Please try again."
     },
     "select_network": {},
     "wallets_list_add": {
