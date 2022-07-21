@@ -27,17 +27,17 @@ class NFTRedPacketABI: ABIContract {
         guard let addressStr = userSetting.network.nftRedPacketAddress,
               let address = EthereumAddress(addressStr)
         else {
-            assertionFailure("It needs an address for HappyRedPacketV4 Contract.")
+            assertionFailure("It needs an address for NFTRedPacket Contract.")
             return EthereumAddress("")!
         }
         return address
     }
     
     var abiString: String {
-        guard let contractFilePath = Bundle.main.path(forResource: "HappyRedPacketV4", ofType: "json"),
+        guard let contractFilePath = Bundle.main.path(forResource: "NFTRedPacket", ofType: "json"),
               let content = try? String(contentsOfFile: contractFilePath)
         else {
-            assertionFailure("It needs an ABI file of HappyRedPacketV4 Contract.")
+            assertionFailure("It needs an ABI file of NFTRedPacket Contract.")
             return ""
         }
         return content
