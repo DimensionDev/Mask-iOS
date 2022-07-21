@@ -283,8 +283,7 @@
       "title": "验证您的助记词",
       "description": "请按照正确的顺序依次点击每个单词。",
       "words_title": "请按照正确的顺序依次点击每个单词。",
-      "mnemonic_error": "助记词错误",
-      "mnemonic_prompt": "点击已选择单词以替换另一个单词。"
+      "mnemonic_error": ""
     },
     "select_network": {},
     "wallets_list_add": {
