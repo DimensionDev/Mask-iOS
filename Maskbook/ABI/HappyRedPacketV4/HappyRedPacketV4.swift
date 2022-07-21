@@ -178,30 +178,6 @@ struct HappyRedPacketV4: ABIContract {
             param: parameters
         )
     }
-    
-    private func signRedPackage(
-        message: String,
-        password: String) -> Swift.Result<String, Error> {
-        do {
-            guard let messageData = Data.fromHex(message) else {
-                throw Web3Error.dataError
-            }
-            guard let hash = Web3.Utils.hashPersonalMessage(messageData) else {
-                throw Web3Error.dataError
-            }
-            
-            guard let privateKeyData = Web3.Utils.hexToData(password) else {
-                throw MaskWalletCoreError.invalidPrivateKey
-            }
-            let (compressedSignature, _) = SECP256K1.signForRecovery(hash: hash, privateKey: privateKeyData)
-            guard let signature = compressedSignature?.toHexString().addHexPrefix() else {
-                throw MaskWalletCoreError.invalidPrivateKey
-            }
-            return .success(signature)
-        } catch {
-            return .failure(error)
-        }
-    }
 }
 
 extension HappyRedPacketV4 {
