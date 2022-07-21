@@ -75,9 +75,9 @@ class NFTRedPacketABI: ABIContract {
         return ""
     }
     
-    func checkAvailability(redPackageId: String) async -> CheckAvailabilityResult? {
+    func checkAvailability(redPacketId: String) async -> CheckAvailabilityResult? {
         let contractMethod = Functions.checkAvailability.rawValue
-        let parameters: [AnyObject] = [Data(hex: redPackageId)] as [AnyObject]
+        let parameters: [AnyObject] = [Data(hex: redPacketId)] as [AnyObject]
         guard let tx = read(
             contractMethod,
             param: parameters
@@ -90,6 +90,46 @@ class NFTRedPacketABI: ABIContract {
             }
             
             let result = CheckAvailabilityResult(txResult)
+            return result
+        }.value
+    }
+    
+    func checkOwnership(erc721TokenIDs: [String], tokenAddr: EthereumAddress) async -> Bool? {
+        let contractMethod = Functions.checkOwnership.rawValue
+        let parameters: [AnyObject] = [erc721TokenIDs, tokenAddr] as [AnyObject]
+        guard let tx = read(
+            contractMethod,
+            param: parameters
+        ) else {
+            return nil
+        }
+        return await Task.detached {
+            guard let txResult = try? tx.call() else {
+                return nil
+            }
+            
+            if let isYourToken = txResult["is_your_token"] as? Bool {
+                return isYourToken
+            }
+            return nil
+        }.value
+    }
+    
+    func checkERC721RemainIDs(redPacketId: String) async -> CheckERC721RemainIDsResult? {
+        let contractMethod = Functions.checkERC721RemainIDs.rawValue
+        let parameters: [AnyObject] = [Data(hex: redPacketId)] as [AnyObject]
+        guard let tx = read(
+            contractMethod,
+            param: parameters
+        ) else {
+            return nil
+        }
+        return await Task.detached {
+            guard let txResult = try? tx.call() else {
+                return nil
+            }
+            
+            let result = CheckERC721RemainIDsResult(txResult)
             return result
         }.value
     }
@@ -191,6 +231,21 @@ extension NFTRedPacketABI {
             claimedID = data[CodingKeys.claimedID.rawValue] as? BigUInt
             expired = data[CodingKeys.expired.rawValue] as? Bool
             bitStatus = data[CodingKeys.bitStatus.rawValue] as? BigUInt
+        }
+    }
+    
+    struct CheckERC721RemainIDsResult: Codable {
+        let bitStatus: BigUInt?
+        let erc721TokenIDs: [BigUInt]?
+        
+        enum CodingKeys: String, CodingKey {
+            case bitStatus = "bit_status"
+            case erc721TokenIDs = "erc721_token_ids"
+        }
+        
+        init(_ data: [String: Any]) {
+            bitStatus = data[CodingKeys.bitStatus.rawValue] as? BigUInt
+            erc721TokenIDs = data[CodingKeys.erc721TokenIDs.rawValue] as? [BigUInt]
         }
     }
     
