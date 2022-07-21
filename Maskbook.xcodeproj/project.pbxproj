@@ -770,6 +770,8 @@
 		6FA1112D27D0D19A0041B16A /* RecentlyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA1112C27D0D19A0041B16A /* RecentlyHeaderView.swift */; };
 		6FA623AD26D4C4630091FDFF /* NFTAssetEventsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA623AC26D4C4630091FDFF /* NFTAssetEventsModel.swift */; };
 		6FA623AF26D4D0540091FDFF /* NFTTransactionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA623AE26D4D0540091FDFF /* NFTTransactionHistory.swift */; };
+		6FD525542889311D0053B90E /* NFTRedPacket.json in Resources */ = {isa = PBXBuildFile; fileRef = 6FD525532889311D0053B90E /* NFTRedPacket.json */; };
+		6FD52556288931530053B90E /* NFTRedPacketABI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD52555288931530053B90E /* NFTRedPacketABI.swift */; };
 		6FE12922283FB4A50034A8EB /* NativeComposeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE12921283FB4A50034A8EB /* NativeComposeButton.swift */; };
 		DB0B3A5D240F60AE00B1657D /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B3A5C240F60AE00B1657D /* Coordinator.swift */; };
 		DB9FF4932416477F0048E676 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9FF4922416477F0048E676 /* Fonts.swift */; };
@@ -1622,6 +1624,8 @@
 		6FA1112C27D0D19A0041B16A /* RecentlyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyHeaderView.swift; sourceTree = "<group>"; };
 		6FA623AC26D4C4630091FDFF /* NFTAssetEventsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTAssetEventsModel.swift; sourceTree = "<group>"; };
 		6FA623AE26D4D0540091FDFF /* NFTTransactionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTTransactionHistory.swift; sourceTree = "<group>"; };
+		6FD525532889311D0053B90E /* NFTRedPacket.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NFTRedPacket.json; sourceTree = "<group>"; };
+		6FD52555288931530053B90E /* NFTRedPacketABI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTRedPacketABI.swift; sourceTree = "<group>"; };
 		6FE12921283FB4A50034A8EB /* NativeComposeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeComposeButton.swift; sourceTree = "<group>"; };
 		703F6E38EA92D32008C8D28B /* Pods-MaskWalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskWalletTests.release.xcconfig"; path = "Target Support Files/Pods-MaskWalletTests/Pods-MaskWalletTests.release.xcconfig"; sourceTree = "<group>"; };
 		8C13CE761E6F65438DC8FE75 /* Pods_MaskWalletTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaskWalletTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2434,6 +2438,7 @@
 			isa = PBXGroup;
 			children = (
 				2A2B4EE527E8D1850097D50D /* ABIContract.swift */,
+				6FD52552288930FC0053B90E /* NFTRedPacket */,
 				2A2B4EE627E8D1850097D50D /* HappyRedPacketV4 */,
 			);
 			path = ABI;
@@ -3981,6 +3986,15 @@
 			path = Contact;
 			sourceTree = "<group>";
 		};
+		6FD52552288930FC0053B90E /* NFTRedPacket */ = {
+			isa = PBXGroup;
+			children = (
+				6FD525532889311D0053B90E /* NFTRedPacket.json */,
+				6FD52555288931530053B90E /* NFTRedPacketABI.swift */,
+			);
+			path = NFTRedPacket;
+			sourceTree = "<group>";
+		};
 		80D0614097C87523152248FA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -4315,6 +4329,7 @@
 			files = (
 				0F641EFC26870ABC002A4D33 /* InfoPlist.strings in Resources */,
 				DBE99E362367DEA6000473BD /* Settings.bundle in Resources */,
+				6FD525542889311D0053B90E /* NFTRedPacket.json in Resources */,
 				0F641EF726870AA8002A4D33 /* Localizable.strings in Resources */,
 				1F8D692F2721549E001084D6 /* wallets.json in Resources */,
 				2A2B4EED27E8D1850097D50D /* HappyRedPacketV4.json in Resources */,
@@ -4799,6 +4814,7 @@
 				2AD31E55282D367700CB3D49 /* UIColor.swift in Sources */,
 				4168635527F4622600F12DB2 /* BackupDataGenerator.swift in Sources */,
 				5D7F5A5127B6531E00A007C5 /* PersonaCreateHandler.swift in Sources */,
+				6FD52556288931530053B90E /* NFTRedPacketABI.swift in Sources */,
 				1F1762722859B3F8008BE93E /* ArweaveUploadHandler.swift in Sources */,
 				6F25327C27C63168000C0D27 /* NFTActionTableViewCell.swift in Sources */,
 				2AF884DB271EE9310004565A /* DataProviderViewModel.swift in Sources */,
