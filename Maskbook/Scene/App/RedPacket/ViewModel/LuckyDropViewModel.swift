@@ -59,10 +59,17 @@ final class LuckyDropViewModel: ObservableObject {
         gasFeeViewModel.refresh()
 
         // It will only change after the user selects gasfee and is only used here to initialize the data.
-        gasFeeViewModel.confirmedGasFeePublisher
+        let gasItem = gasFeeViewModel.confirmedGasFeePublisher
             .removeDuplicates()
             .filter { $0 != nil }
+            .share()
+
+        gasItem
             .assign(to: \.gasFeeItem, on: self)
+            .store(in: &disposeBag)
+
+        gasItem
+            .assign(to: \.gasFeeItem, on: nftViewModel)
             .store(in: &disposeBag)
 
         setupObserversForConfirmButton()
@@ -88,7 +95,6 @@ final class LuckyDropViewModel: ObservableObject {
 
     @Published var editingResponder: Tag? = nil
     @Published var keyboardHeight: CGFloat = 0
-    @Published var isNFTDropEditing = false
 
     let walletBottomViewModel: WalletBottomWidgetViewModel
     let nftViewModel = NftLuckyDropViewModel()

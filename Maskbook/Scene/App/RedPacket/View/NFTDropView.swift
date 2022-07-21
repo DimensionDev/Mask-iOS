@@ -16,14 +16,14 @@ struct NFTDropView: View {
                 .frame(height: 20)
 
             VStack(spacing: 16) {
-                TextField(L10n.Plugins.Luckydrop.nftMessagePlaceholder, text: .constant(""))
+                TextField(L10n.Plugins.Luckydrop.nftMessagePlaceholder, text: $viewModel.message)
                     .font(FontStyles.mh5.font)
                     .frame(height: 52)
                     .padding(.horizontal, 12)
                     .background(Asset.Colors.Background.dark.asColor())
                     .cornerRadius(8)
                     .modifier(
-                        KeyBoardObservingModifier(\.isNFTDropEditing, on: viewModel)
+                        KeyBoardObservingModifier(\.isNFTDropEditing, on: viewModel.nftViewModel)
                     )
 
                 collectibleGroupView
@@ -37,7 +37,7 @@ struct NFTDropView: View {
             .padding(.horizontal, 20)
         }
         .onTapGesture {
-            guard viewModel.isNFTDropEditing else {
+            guard viewModel.nftViewModel.isNFTDropEditing else {
                 return
             }
             forceResignKeyboard()
@@ -58,7 +58,8 @@ struct NFTDropView: View {
     @InjectedProvider(\.mainCoordinator)
     private var mainCoordinator
 
-    private var nftEnabled: Bool { true }
+    private var nftEnabled: Bool { viewModel.nftViewModel.actionState.isActionEnabled }
+
     private var nftSelected: Bool { true }
 
     private var showCollectible: Bool {
@@ -94,7 +95,7 @@ struct NFTDropView: View {
 
     private var collectibleGroupInfoView: some View {
         Button(
-            action: {},
+            action: { viewModel.nftViewModel.switchCollectibleGroup() },
             label: {
                 Asset.Colors.Background.dark.asColor()
                     .cornerRadius(8)
@@ -133,12 +134,7 @@ struct NFTDropView: View {
 
     private var collectibleSelectView: some View {
         Button(
-            action: {
-                viewModel.nftViewModel.selectCollectible(
-                    groupName: "Daqqqd",
-                    groupIconURL: nil
-                )
-            },
+            action: { viewModel.nftViewModel.switchCollectibleGroup() },
             label: {
                 Asset.Colors.Background.blue.asColor()
                     .frame(height: 56)
@@ -219,8 +215,7 @@ struct NFTDropView: View {
 
     private var colloctiableListView: some View {
         VStack {
-            // TODO: selected/total number
-            Text("\(L10n.Plugins.Luckydrop.nftSelected) (99/120）")
+            Text("\(L10n.Plugins.Luckydrop.nftSelected) (\(viewModel.nftViewModel.collectibleCountInfo)）")
                 .font(.bh5)
                 .foregroundColor(Asset.Colors.Text.dark)
                 .horizontallyFilled()
@@ -247,22 +242,15 @@ struct NFTDropView: View {
                 spacing: 12
             ) {
                 Section {
-                    ForEach(0 ..< 6) { _ in
-                        Asset.Colors.Background.normal.asColor()
-                            .overlay(
-                                Image(Asset.Images.Scene.WalletAdd.add)
-                                    .renderingMode(.template)
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-                                    .foregroundColor(Asset.Colors.Text.normal.asColor())
-                            )
-                            .cornerRadius(8)
+                    ForEach(viewModel.nftViewModel.items) { item in
+                        collectibleView(of: item)
                             .frame(
                                 minWidth: 80,
                                 maxWidth: .infinity,
                                 minHeight: 96,
                                 maxHeight: .infinity
                             )
+
                     }
                 }
             }
@@ -273,4 +261,135 @@ struct NFTDropView: View {
         .background(Asset.Colors.Background.dark.asColor())
         .cornerRadius(8)
     }
+
+    @ViewBuilder
+    private func collectibleView(of item: NftLuckyDropViewModel.CollectibleItem) -> some View {
+        switch item {
+        case .add:
+            Asset.Colors.Background.normal.asColor()
+                .overlay(
+                    Image(Asset.Images.Scene.WalletAdd.add)
+                        .renderingMode(.template)
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                        .foregroundColor(Asset.Colors.Text.normal.asColor())
+                )
+                .cornerRadius(8)
+                .onTapGesture {
+                    viewModel.nftViewModel.addMoreCollectibles()
+                }
+
+        case let .normal(value):
+            NFTItemView(url: value.previewUrl)
+
+        case let .all(value):
+            NFTAllItemView(url: value.previewUrl)
+        }
+    }
 }
+
+struct NFTItemView: View {
+    let url: URL?
+
+    var body: some View {
+        KFImage(url)
+            .placeholder {
+                Asset.Colors.Background.normal.asColor()
+                    .overlay(
+                        placeHolderIcon
+                    )
+            }
+            .cornerRadius(8)
+            .overlay(
+                Asset.Icon.Cell.checkSquare
+                    .asImage()
+                    .preferredColorScheme(.light)
+                    .offset(x: -8, y: 8)
+                ,
+                alignment: .topTrailing
+            )
+    }
+
+    private var placeHolderIcon: some View {
+        Image(Asset.Icon.Logo.largeMask)
+            .resizable()
+            .frame(width: 38, height: 38)
+            .overlay(
+                Asset.Colors.Background.normal.asColor()
+                    .opacity(0.5)
+            )
+            .clipShape(Circle())
+    }
+}
+
+struct AddNFTItemView: View {
+    var body: some View {
+        Asset.Colors.Background.normal.asColor()
+            .overlay(
+                Image(Asset.Images.Scene.WalletAdd.add)
+                    .renderingMode(.template)
+                    .resizable()
+                    .frame(width: 30, height: 30)
+                    .foregroundColor(Asset.Colors.Text.normal.asColor())
+            )
+            .cornerRadius(8)
+    }
+}
+
+struct NFTAllItemView: View {
+    let url: URL?
+
+    var body: some View {
+        KFImage(url)
+            .placeholder {
+                Asset.Colors.Background.normal.asColor()
+                    .overlay(
+                        placeHolderIcon
+                    )
+            }
+            .overlay(
+                maskView
+            )
+            .cornerRadius(8)
+    }
+
+    private var placeHolderIcon: some View {
+        Image(Asset.Icon.Logo.largeMask)
+            .resizable()
+            .frame(width: 38, height: 38)
+            .overlay(
+                Asset.Colors.Background.normal.asColor()
+                    .opacity(0.5)
+            )
+            .clipShape(Circle())
+    }
+
+    private var maskView: some View {
+        Asset.Colors.Background.mask.asColor()
+            .overlay(
+                Text("ALL")
+                    .font(.bh6)
+                    .foregroundColor(Asset.Colors.Public.white)
+            )
+    }
+}
+
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+struct NFTItemViewPreview: PreviewProvider {
+    static var previews: some SwiftUI.View {
+        VStack(spacing: 20) {
+            AddNFTItemView()
+                .frame(width: 96, height: 96)
+
+            NFTItemView(url: nil)
+                .frame(width: 96, height: 96)
+
+
+            NFTAllItemView(url: nil)
+                .frame(width: 96, height: 96)
+        }
+        .colorScheme(.dark)
+    }
+}
+#endif

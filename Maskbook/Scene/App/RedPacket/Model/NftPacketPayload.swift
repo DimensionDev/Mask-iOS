@@ -85,7 +85,7 @@ extension RedPacket {
             let sender: Sender
             let contractVersion: Double
             let network: String?
-            let tokenType: EthereumToken
+            let tokenType: EthereumToken?
             let token: ERC20TokenRecord?
 
             enum CodingKeys: String, CodingKey {
@@ -101,7 +101,7 @@ extension RedPacket {
             /** contract address */
             let address: String
             /** eth chain id */
-            let chainId: ChainId
+//            let chainId: ChainId
             /** token name */
             let name: String
             /** token decimal */

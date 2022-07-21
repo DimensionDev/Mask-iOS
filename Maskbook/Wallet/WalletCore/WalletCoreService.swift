@@ -501,3 +501,13 @@ extension WalletCoreService {
         }
     }
 }
+
+enum WalletCoreServiceKey: InjectValueKey {
+    static var defaultInjectValue = WalletCoreService.shared
+}
+
+extension InjectValues {
+    var walletCoreService: WalletCoreService {
+        Self[WalletCoreServiceKey.self]
+    }
+}
