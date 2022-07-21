@@ -259,7 +259,8 @@ final class SendConfirmPopViewController: UIViewController {
     
     init(transaction: EthereumTransaction,
          transactionOptions: TransactionOptions,
-         completion: ((Swift.Result<String, Error>) -> Void)?) {
+         completion: ((Swift.Result<String, Error>) -> Void)?)
+    {
         self.completion = completion
         self.viewModel = SendConfirmPopViewModel(
             transaction: transaction,
@@ -363,7 +364,8 @@ final class SendConfirmPopViewController: UIViewController {
                         }
                         if let request = self.walletConnectRequest,
                            let id = request.id,
-                           let response = try? Response(url: request.url, value: txHash, id: id) {
+                           let response = try? Response(url: request.url, value: txHash, id: id)
+                        {
                             self.walletConnectDelegate?.walletConnectTransactionResponse(response: response)
                         }
                         if let completion = self.completion {
@@ -377,7 +379,8 @@ final class SendConfirmPopViewController: UIViewController {
                             self.web3delegate?.web3TransactionResponse(response: .fail(errorMessage: error.localizedDescription, code: 0, request: request))
                         }
                         if let request = self.walletConnectRequest,
-                           let response = try? Response(request: request, error: .errorResponse) {
+                           let response = try? Response(request: request, error: .errorResponse)
+                        {
                             self.walletConnectDelegate?.walletConnectTransactionResponse(response: response)
                         }
                         if let completion = self.completion {
