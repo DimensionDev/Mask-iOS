@@ -490,7 +490,8 @@ extension RestoreFile {
             self.type = type
             self.landingTxID = landingTxID
             key = json[CodingKeys.key.stringValue] as? String
-            uploadOption = json[CodingKeys.uploadOption.stringValue] as? String
+            _encrypted = BackupValueCompatiableFrom<Never, Bool>(json[CodingKeys.encrypted.stringValue] as? Bool ?? false)
+            _meson = BackupValueCompatiableFrom<Never, Bool>(json[CodingKeys.meson.stringValue] as? Bool ?? false)
         }
 
         // MARK: Internal
@@ -506,7 +507,10 @@ extension RestoreFile {
         let type: String
         let landingTxID: String
         let key: String?
-        let uploadOption: String?
+        @BackupValueCompatiableFrom<Never, Bool>
+        var encrypted: Bool?
+        @BackupValueCompatiableFrom<Never, Bool>
+        var meson: Bool?
 
         enum CodingKeys: String, CodingKey {
             case payloadTxID
@@ -518,7 +522,8 @@ extension RestoreFile {
             case type
             case landingTxID
             case key
-            case uploadOption = "upload_option"
+            case encrypted
+            case meson
         }
     }
 }
