@@ -230,6 +230,10 @@ The upload can’t be cancelled.";
 "Plugins.Luckydrop.Select-Social-Title" = "Select Social Account";
 "Plugins.Luckydrop.Share-Connect-Persona" = "Connect your Persona to social media before you share your lucky Drop.";
 "Plugins.Luckydrop.Share-Create-Persona" = "To send lucky drop, please create a persona to connect to your social account.";
+"Plugins.Luckydrop.Share-Sheet.Detail" = "You can now see your Lucky Drop in History Tab. To let people claim it, share to your social media.";
+"Plugins.Luckydrop.Share-Sheet.Title" = "Luck Drop Successfully Created!";
+"Plugins.Luckydrop.Share-Sheet.To-Social-Media" = "Share to social media";
+"Plugins.Luckydrop.Share-Sheet.To-Twitter" = "Share to Twitter";
 "Plugins.Luckydrop.Share-Title" = "Share Lucky Drop";
 "Plugins.Luckydrop.Social-Media-Redpacket-Template" = "Hi, claim this lucky drop with #mask_io %@";
 "Plugins.Luckydrop.Social-Media-Template" = "This tweet is encrypted with #mask_io (@realMaskNetwork). 📪🔑

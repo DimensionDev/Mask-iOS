@@ -1111,6 +1111,25 @@ enum L10n {
         }
       }
 
+      enum ShareSheet {
+        /// You can now see your Lucky Drop in History Tab. To let people claim it, share to your social media.
+        static var detail: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Share-Sheet.Detail")
+        }
+        /// Luck Drop Successfully Created!
+        static var title: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Share-Sheet.Title")
+        }
+        /// Share to social media
+        static var toSocialMedia: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Share-Sheet.To-Social-Media")
+        }
+        /// Share to Twitter
+        static var toTwitter: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Share-Sheet.To-Twitter")
+        }
+      }
+
       enum State {
         /// Tx failed
         static var failed: String {
