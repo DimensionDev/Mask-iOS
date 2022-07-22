@@ -171,9 +171,16 @@ extension FileServiceRepository {
                 uploadFile.payloadTxID = file.payloadTxID
                 uploadFile.fileSize = Double(file.size)
                 uploadFile.content = nil
-                uploadFile.uploadOption = file.uploadOption
+                // since meson is new added value
+                // meson and encrypted will be missing in the older backup file
+                // so we only set the value when it is not nil
+                if let value = file.meson {
+                    uploadFile.meson = value ? "1" : "0"
+                }
 
-                // uploadFile.uploadOption = item.option?.asString()
+                if let value = file.encrypted {
+                    uploadFile.encrypted = value ? "1" : "0"
+                }
 
                 let url = URL(string: file.name)
                 uploadFile.mime = url?.mimeType()
@@ -194,7 +201,15 @@ extension FileServiceRepository {
 
 extension UploadFile {
     func asStructItem() -> FileServiceUploadingItem {
-        .init(
+        let optionString: String = {
+            let provider = provider ?? ""
+            let encrypted = encrypted ?? ""
+            let meson = meson ?? ""
+
+            return "\(provider),\(encrypted),\(meson)"
+        }()
+
+      return .init(
             fileName: name ?? "",
             provider: provider ?? "",
             fileType: FileServiceUploadingItem.ItemType(rawValue: fileType) ?? .image,
@@ -204,7 +219,7 @@ extension UploadFile {
             uploadedBytes: createdAt.isSome ? fileSize : 0,
             uploadDate: createdAt,
             mime: mime ?? "", // use nil as all UploadFile is uploaded
-            option: .init(uploadOption ?? ""),
+            option: .init(optionString),
             tx: FileServiceTranscation(
                 id: id ?? "",
                 key: key ?? "",
@@ -217,22 +232,29 @@ extension UploadFile {
     }
 
     func update(from item: FileServiceUploadingItem) {
-        self.name = item.fileName
-        self.provider = item.provider
-        self.createdAt = item.uploadDate
-        self.fileType = item.fileType.rawValue
-        self.id = item.tx?.id
-        self.key = item.tx?.key
-        self.landingTxID = item.tx?.landingTxID
-        self.payloadTxID = item.tx?.payloadTxID
-        self.fileSize = item.totalBytes
+        name = item.fileName
+        provider = item.provider
+        createdAt = item.uploadDate
+        fileType = item.fileType.rawValue
+        id = item.tx?.id
+        key = item.tx?.key
+        landingTxID = item.tx?.landingTxID
+        payloadTxID = item.tx?.payloadTxID
+        fileSize = item.totalBytes
 
-        self.content = item.state == .uploaded
+        content = item.state == .uploaded
             ? nil
             : item.content
 
-        self.uploadOption = item.option?.asString()
-        self.mime = item.mime
+        if let value = item.option?.encrypted {
+            encrypted = value ? "1" : "0"
+        }
+
+        if let value = item.option?.useMesonCDN {
+            meson = value ? "1" : "0"
+        }
+
+        mime = item.mime
     }
 
     func asBackJSON(_ dateFormatter: DateFormatter) -> JSON? {
@@ -259,8 +281,12 @@ extension UploadFile {
             Keys.landingTxID.stringValue: landingTxID
         ]
 
-        if let option = self.uploadOption, !option.isEmpty {
-            json[Keys.uploadOption.stringValue] = uploadOption
+        if let value = encrypted {
+            json[Keys.encrypted.stringValue] = value == "1" ? 1 : 0
+        }
+
+        if let value = meson {
+            json[Keys.meson.stringValue] = value == "1" ? 1 : 0
         }
 
         if let key = self.key, !key.isEmpty {

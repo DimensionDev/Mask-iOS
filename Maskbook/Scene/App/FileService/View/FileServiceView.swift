@@ -2,6 +2,14 @@ import Combine
 import Introspect
 import SwiftUI
 
+private struct ScrollOffsetKey: PreferenceKey {
+    static var defaultValue: CGFloat?
+
+    static func reduce(value: inout CGFloat?, nextValue: () -> CGFloat?) {
+        value = nextValue()
+    }
+}
+
 struct FileServiceView: View {
     // MARK: Lifecycle
 
@@ -11,6 +19,20 @@ struct FileServiceView: View {
     }
 
     // MARK: Internal
+
+    enum FoldState {
+        case fold
+        case unfold
+
+        // MARK: Internal
+
+        mutating func toggle() {
+            switch self {
+            case .fold: self = .unfold
+            case .unfold: self = .fold
+            }
+        }
+    }
 
     var body: some View {
         GeometryReader { proxy in
@@ -41,20 +63,34 @@ struct FileServiceView: View {
 
     private let buttonSize: CGFloat = 56
 
+    @State
+    private var listFoldState = FoldState.fold
+
+    @State
+    private var scrollOffset: CGFloat?
+
+    @Environment(\.colorScheme)
+    private var theme
+
+    @State
+    private var uploadingSize = CGSize.zero
+
+    @Namespace
+    private var uploadingAnimation
+    private let floatingViewID = "floatingItem"
+
     private var cardGradient: some View {
-        BlurView(style: .prominent)
-            .ignoresSafeArea()
-            .overlay(
-                LinearGradient(
-                    colors: [
-                        Asset.Colors.Gradient.f2F8Ff.asColor(),
-                        Asset.Colors.Gradient._050919.asColor()
-                    ],
-                    startPoint: .init(x: 0, y: 0),
-                    endPoint: .init(x: 0, y: 1)
-                )
-                .blur(radius: 40)
-            )
+        BlurView(
+            style: theme == .dark
+                ? .systemUltraThinMaterialDark
+                : .systemUltraThinMaterialLight
+        )
+        .ignoresSafeArea()
+        .opacity(
+            listFoldState == .unfold
+                ? 1
+                : 0
+        )
     }
 
     private var uploadButton: some View {
@@ -87,10 +123,100 @@ struct FileServiceView: View {
                 )
             }
         )
-        .opacity(viewModel.allowUploading ? 1 : 0.5)
+        .opacity(
+            viewModel.allowUploading ? 1 : 0.5
+        )
         .disabled(!viewModel.allowUploading)
-        .shadow(color: Asset.Colors.Public.s1.asColor(), radius: 12, x: 0, y: 6)
-        .offset(x: -20, y: -buttonSize)
+        .shadow(
+            color: Asset.Colors.Public.s1.asColor(),
+            radius: 12,
+            x: 0,
+            y: 6
+        )
+    }
+
+    private var foldingText: String {
+        let uploadingCount = viewModel.uploadingItems.filter {
+            $0.item.state != .uploaded
+        }
+        .count
+
+        return "uploading ・ \(uploadingCount)"
+    }
+
+    private var foldingView: some View {
+        HStack(spacing: 23) {
+            Spacer()
+
+            uploadButton
+        }
+        .overlay(
+            foldUploadItemView,
+            alignment: .center
+        )
+        .padding(.horizontal, 20)
+        .offset(y: -buttonSize)
+    }
+
+    @ViewBuilder
+    private var foldUploadItemView: some View {
+        if listFoldState == .fold {
+            HStack(spacing: 4) {
+                Asset.Plugins.FileService.folder.asImage()
+                    .frame(width: 32, height: 32)
+
+                Text(foldingText)
+                    .font(.bh5)
+                    .foregroundColor(Asset.Colors.Public.white)
+            }
+            .padding(.vertical, 8)
+            .padding(.horizontal, 16)
+            .background(
+                LinearGradient(
+                    stops: [
+                        .init(
+                            color: Asset.Colors.Gradient.blue2.asColor(),
+                            location: 0.093
+                        ),
+                        .init(
+                            color: Asset.Colors.Gradient.blur.asColor(),
+                            location: 0.9214
+                        )
+                    ],
+                    startPoint: .init(x: 0, y: 0),
+                    endPoint: .init(x: 0, y: 1)
+                )
+                .rotationEffect(.init(degrees: 337.55))
+                .frame(
+                    width: uploadingSize.width,
+                    height: uploadingSize.width
+                )
+            )
+            .cornerRadius(40)
+            .onTapGesture {
+                unfold()
+            }
+            .disabled(listFoldState == .unfold)
+            .opacity(
+                listFoldState == .fold
+                    ? 1
+                    : 0
+            )
+            .measureSize(to: $uploadingSize)
+            .shadow(
+                color: Asset.Colors.Gradient.blur.asColor().opacity(0.15),
+                radius: 12,
+                x: 0,
+                y: 6
+            )
+            .preferredColorScheme(.light)
+            .matchedGeometryEffect(
+                id: floatingViewID,
+                in: uploadingAnimation,
+                properties: .size,
+                isSource: false
+            )
+        }
     }
 
     private var emptyPlaceholder: some View {
@@ -114,6 +240,14 @@ struct FileServiceView: View {
         .padding(.top, 110)
     }
 
+    private var foldUploadingList: Bool {
+        if listFoldState == .fold {
+            return true
+        }
+
+        return viewModel.uploadingItems.isEmpty
+    }
+
     private func fileList(with proxy: GeometryProxy) -> some View {
         VStack(spacing: 16) {
             // Textfield can't become first responder when being layouted in
@@ -129,7 +263,7 @@ struct FileServiceView: View {
                 .modifier(
                     KeyBoardObservingModifier(
                         \.isEditing,
-                         on: viewModel
+                        on: viewModel
                     )
                 )
 
@@ -161,12 +295,51 @@ struct FileServiceView: View {
                                         .frame(height: 4)
                                 }
                             }
+                            .background(
+                                GeometryReader { innerProxy in
+                                    Color.clear
+                                        .frame(height: 0)
+                                        .preference(
+                                            key: ScrollOffsetKey.self,
+                                            value: innerProxy.frame(in: .global).minY
+                                        )
+                                }
+                            )
                         }
                     )
                     .padding(.horizontal, 20)
                 }
 
                 Spacer()
+            }
+            .onChange(of: viewModel.uploadingItems, perform: { _ in
+                // item only be removed on unfold state
+                // this modifier will be triggerd by adding new uploading item
+                unfold()
+            })
+            .onPreferenceChange(ScrollOffsetKey.self) { value in
+                // if there is no uploading item we skip this
+                if viewModel.uploadingItems.isEmpty {
+                    unfold()
+                    return
+                }
+
+                switch (value, scrollOffset) {
+                // initial state, maybe will not happen
+                case (nil, nil): break
+
+                case (let .some(offset), nil):
+                    scrollOffset = offset
+                    fold()
+
+                case let (.some(newValue), .some(_)):
+                    scrollOffset = newValue
+                    fold()
+
+                case (nil, .some):
+                    scrollOffset = nil
+                    fold()
+                }
             }
             .onTapGesture {
                 guard viewModel.isEditing else {
@@ -180,6 +353,28 @@ struct FileServiceView: View {
             uploadingItemList(with: proxy),
             alignment: .bottom
         )
+    }
+
+    private func unfold() {
+        if listFoldState != .unfold {
+            withAnimation {
+                listFoldState = .unfold
+            }
+        }
+    }
+
+    private func fold() {
+        guard listFoldState != .fold else {
+            return
+        }
+
+        guard !viewModel.uploadingItems.isEmpty else {
+            return
+        }
+
+        withAnimation {
+            listFoldState = .fold
+        }
     }
 
     private func view(of item: FileServiceUploadingItem) -> some View {
@@ -230,7 +425,7 @@ struct FileServiceView: View {
 
     private func uploadingItemList(with proxy: GeometryProxy) -> some View {
         VStack(spacing: 10) {
-            if viewModel.uploadingItems.isEmpty {
+            if foldUploadingList {
                 Color.clear
                     .frame(height: 0)
             } else {
@@ -245,14 +440,21 @@ struct FileServiceView: View {
                 }
             }
         }
-        .padding(.all, viewModel.uploadingItems.isEmpty ? 0 : 20)
-        .padding(.bottom, viewModel.uploadingItems.isEmpty ? 0 : proxy.safeAreaInsets.bottom)
+        .padding(.all, foldUploadingList ? 0 : 20)
+        .padding(.bottom, foldUploadingList ? 0 : proxy.safeAreaInsets.bottom)
         .background(cardGradient)
         .overlay(
-            uploadButton
-                .offset(y: viewModel.uploadingItems.isEmpty ? -20 - proxy.safeAreaInsets.bottom : -20)
-            ,
+            foldingView
+                .offset(
+                    y: foldUploadingList ? -20 - proxy.safeAreaInsets.bottom : -20
+                ),
             alignment: .topTrailing
+        )
+        .matchedGeometryEffect(
+            id: floatingViewID,
+            in: uploadingAnimation,
+            properties: .size,
+            isSource: true
         )
     }
 }
