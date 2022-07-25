@@ -175,7 +175,6 @@ class BackupAndResotreTests: XCTestCase {
             }
 
             let json1 = #"{"name":192813313000}"#.data(using: .utf8)!
-
             let result = Result {
                 try JSONDecoder().decode(Meta.self, from: json1)
             }
