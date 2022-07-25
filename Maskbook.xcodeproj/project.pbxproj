@@ -736,6 +736,9 @@
 		5DC018422859BE84004973CA /* ArweaveHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC018392859BE84004973CA /* ArweaveHttpClient.swift */; };
 		5DC95947287EA6F4008DAB6D /* MessageComposeCoodinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC95946287EA6F4008DAB6D /* MessageComposeCoodinator.swift */; };
 		5DCA069B27C75A8B007697C8 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCA069A27C75A8B007697C8 /* Toast.swift */; };
+		5DCFA01D288E367E0069351C /* NFTLuckDropConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCFA01C288E367E0069351C /* NFTLuckDropConfirmViewController.swift */; };
+		5DCFA01F288E36E50069351C /* NFTRedPacketConfirmViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCFA01E288E36E50069351C /* NFTRedPacketConfirmViewModel.swift */; };
+		5DCFA021288E39940069351C /* NFTRedPackedConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCFA020288E39940069351C /* NFTRedPackedConfirmView.swift */; };
 		5DD1BBC227CF0843001DB330 /* Toast+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BBC127CF0843001DB330 /* Toast+Extension.swift */; };
 		5DD5A69827F53168005952A0 /* PersonaImportItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD5A69727F53168005952A0 /* PersonaImportItem.swift */; };
 		5DD91242286B068B00E2000F /* FileService+AttachmentDecryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD91241286B068B00E2000F /* FileService+AttachmentDecryption.swift */; };
@@ -1590,6 +1593,9 @@
 		5DC018392859BE84004973CA /* ArweaveHttpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArweaveHttpClient.swift; sourceTree = "<group>"; };
 		5DC95946287EA6F4008DAB6D /* MessageComposeCoodinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageComposeCoodinator.swift; sourceTree = "<group>"; };
 		5DCA069A27C75A8B007697C8 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		5DCFA01C288E367E0069351C /* NFTLuckDropConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTLuckDropConfirmViewController.swift; sourceTree = "<group>"; };
+		5DCFA01E288E36E50069351C /* NFTRedPacketConfirmViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTRedPacketConfirmViewModel.swift; sourceTree = "<group>"; };
+		5DCFA020288E39940069351C /* NFTRedPackedConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTRedPackedConfirmView.swift; sourceTree = "<group>"; };
 		5DD1BBC127CF0843001DB330 /* Toast+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Toast+Extension.swift"; sourceTree = "<group>"; };
 		5DD5A69727F53168005952A0 /* PersonaImportItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaImportItem.swift; sourceTree = "<group>"; };
 		5DD91241286B068B00E2000F /* FileService+AttachmentDecryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileService+AttachmentDecryption.swift"; sourceTree = "<group>"; };
@@ -1992,6 +1998,7 @@
 			children = (
 				2AD854FC281282A20064DDA5 /* LuckDropHistoryController.swift */,
 				2AD854FD281282A20064DDA5 /* LuckyDropConfirmViewController.swift */,
+				5DCFA01C288E367E0069351C /* NFTLuckDropConfirmViewController.swift */,
 				2AD854FB281282A20064DDA5 /* LuckyDropViewController.swift */,
 				1F57023927A27E4900C96909 /* RedPacketShareSheet.swift */,
 			);
@@ -2006,6 +2013,7 @@
 				2AD85507281283160064DDA5 /* LuckyDropTokens.swift */,
 				2AD8550B281283160064DDA5 /* LuckyDropView.swift */,
 				2AD85509281283160064DDA5 /* RedPacketConfirmView.swift */,
+				5DCFA020288E39940069351C /* NFTRedPackedConfirmView.swift */,
 				2AD8550C281283170064DDA5 /* RedPacketShareView.swift */,
 				2AD85503281283160064DDA5 /* SelectSocialAccountView.swift */,
 				2AD85502281283150064DDA5 /* ShareLuckyDropConnectPersonaView.swift */,
@@ -2457,6 +2465,7 @@
 			children = (
 				2AD8551B2812841C0064DDA5 /* RedPacketShareViewModel.swift */,
 				2AD8551C2812841C0064DDA5 /* RedPacketConfirmViewModel.swift */,
+				5DCFA01E288E36E50069351C /* NFTRedPacketConfirmViewModel.swift */,
 				2AD8551D2812841C0064DDA5 /* LuckyDropSuccessfullyViewModel.swift */,
 				2AD8551E2812841C0064DDA5 /* WalletBottomWidgetViewModel.swift */,
 				5D95FA58283FB4CB0008C100 /* PluginMetaShareViewModel.swift */,
@@ -4762,6 +4771,7 @@
 				5D770B1327DED70400539254 /* PersonaAvatarViewModel.swift in Sources */,
 				2AF88563271EE9310004565A /* SendContactListTableViewCell.swift in Sources */,
 				2D6E31DD279974FD00A70187 /* PersonaImportHandler.swift in Sources */,
+				5DCFA021288E39940069351C /* NFTRedPackedConfirmView.swift in Sources */,
 				1F036397277ABB99001E8A88 /* LabsBrowserController.swift in Sources */,
 				2AF8851F271EE9310004565A /* TokenCardView.swift in Sources */,
 				1F173D4928728552007A5A24 /* FileServiceUploadManager.swift in Sources */,
@@ -4793,6 +4803,7 @@
 				41E50046279AAD4000A73117 /* IndexedDBAllRecord.swift in Sources */,
 				2AD31E6A282D367700CB3D49 /* UIView+Shadow.swift in Sources */,
 				1F5B5EF32858299800F6AD98 /* FileServiceUploadHandler.swift in Sources */,
+				5DCFA01F288E36E50069351C /* NFTRedPacketConfirmViewModel.swift in Sources */,
 				2AD855FF2812875A0064DDA5 /* Logging.swift in Sources */,
 				2D2F5901278997E800F3002D /* ConnectableSocialListPanModelController.swift in Sources */,
 				2AF8852F271EE9310004565A /* WalletBackupViewModel.swift in Sources */,
@@ -5156,6 +5167,7 @@
 				5DB39E322786A8970025337C /* JSResourceSelectViewModel.swift in Sources */,
 				2AD31E67282D367700CB3D49 /* CGAffineTransform+extensiion.swift in Sources */,
 				0FFD85922660CF1400D391A9 /* Vault.swift in Sources */,
+				5DCFA01D288E367E0069351C /* NFTLuckDropConfirmViewController.swift in Sources */,
 				41E5002C2797C1F700A73117 /* MaskMessageResolverProtocol.swift in Sources */,
 				6FA623AD26D4C4630091FDFF /* NFTAssetEventsModel.swift in Sources */,
 				2AF8852D271EE9310004565A /* WalletBackupPrivateKeyViewController.swift in Sources */,

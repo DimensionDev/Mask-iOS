@@ -71,8 +71,35 @@ class NFTRedPacketABI: ABIContract {
             transactionOptions: defaultOptions.merge(options)) else {
                 return nil
             }
-        // todo hashid
-        return ""
+        
+        return try await withCheckedThrowingContinuation { continuation in
+            Task.detached {
+                do {
+                    let transaction = try tx.assemble(transactionOptions: tx.transactionOptions)
+                    await MainActor.run {
+                        let scene: Coordinator.Scene = .nftLuckyDropConfirm(
+                            gasFeeViewModel: gasFeeViewModel,
+                            redPacketInput: redPacketInput,
+                            transaction: transaction,
+                            options: tx.transactionOptions
+                        ) { tx, error in
+                            if let error = error {
+                                continuation.resume(with: .failure(error))
+                            } else {
+                                continuation.resume(with: .success(tx))
+                            }
+                            self.mainCoordinator.dismissTopViewController()
+                        }
+                        self.mainCoordinator.present(
+                            scene: scene,
+                            transition: .modal()
+                        )
+                    }
+                } catch {
+                    continuation.resume(with: .failure(error))
+                }
+            }
+        }
     }
     
     func checkAvailability(redPacketId: String) async -> CheckAvailabilityResult? {
