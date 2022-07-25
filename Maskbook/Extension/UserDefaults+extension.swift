@@ -440,6 +440,7 @@ extension UserDefaultSettings {
     var hasRiskConfirmed: Bool {
         get {
             guard let address = defaultAccountAddress else { return false }
+            log.debug("\(confirmedPluginRiskWarnings) address: \(address)", source: "warning-confirm")
             return confirmedPluginRiskWarnings.contains(address)
         }
     }
