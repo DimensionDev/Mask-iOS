@@ -50,49 +50,9 @@ struct FileServiceOnBoardView: View {
             preferredContentSize: { size in
                 textHeight = size.height
             },
-            attributedString: {
-                let final = NSMutableAttributedString(
-                    string: "\(L10n.Plugins.Policy.reviewed) ",
-                    attributes: [
-                        .font: FontStyles.mh7.uifont,
-                        .foregroundColor:  Asset.Colors.Text.dark.color.withAlphaComponent(0.5)
-                    ]
-                )
-
-                let policy = NSMutableAttributedString(
-                    string: "\(L10n.Plugins.Policy.privacy) ",
-                    attributes: [
-                        .font: FontStyles.bh7.uifont,
-                        .foregroundColor:  Asset.Colors.Text.dark.color,
-                        .link: URL(string: "https://legal.mask.io/arweave/file-service/privacy-policy-uploader.html")!
-                    ]
-                )
-
-                let and = NSAttributedString(
-                    string: "\(L10n.Plugins.Policy.and) ",
-                    attributes: [
-                        .font: FontStyles.mh7.uifont,
-                        .foregroundColor:  Asset.Colors.Text.dark.color.withAlphaComponent(0.5)
-                    ]
-                )
-
-                let service = NSMutableAttributedString(
-                    string: L10n.Plugins.Policy.uploadTerms,
-                    attributes: [
-                        .font: FontStyles.bh7.uifont,
-                        .foregroundColor:  Asset.Colors.Text.dark.color,
-                        .link: URL(string: "https://legal.mask.io/arweave/file-service/plugin-terms.html")!
-                    ]
-                )
-
-                final.append(policy)
-                final.append(and)
-                final.append(service)
-
-                return final
-            }
+            attributedString: { viewModel.string }
         )
-        .offset(y: -4)
+        .offset(y: -3)
         .lineSpacing(3)
         .colorScheme(.dark)
         .frame(height: textHeight)
@@ -157,7 +117,7 @@ struct FileServiceOnBoardView: View {
         .padding(.bottom, proxy.safeAreaInsets.bottom)
     }
 
-    private final class ViewModel: NSObject, ObservableObject, UIScrollViewDelegate {
+    private final class ViewModel: ObservableObject {
         private var combineStorage: Set<AnyCancellable> = []
 
         //  AppStorage is a little delay for check box action
@@ -170,8 +130,50 @@ struct FileServiceOnBoardView: View {
         @InjectedProvider(\.userDefaultSettings)
         private var setting
 
-        override init() {
-            super.init()
+        @Published var string: NSAttributedString
+
+        init() {
+            self.string = {
+                let final = NSMutableAttributedString(
+                    string: "\(L10n.Plugins.Policy.reviewed) ",
+                    attributes: [
+                        .font: FontStyles.mh7.uifont,
+                        .foregroundColor:  Asset.Colors.Text.dark.color.withAlphaComponent(0.5)
+                    ]
+                )
+
+                let policy = NSMutableAttributedString(
+                    string: "\(L10n.Plugins.Policy.privacy) ",
+                    attributes: [
+                        .font: FontStyles.bh7.uifont,
+                        .foregroundColor:  Asset.Colors.Text.dark.color,
+                        .link: URL(string: "https://legal.mask.io/arweave/file-service/privacy-policy-uploader.html")!
+                    ]
+                )
+
+                let and = NSAttributedString(
+                    string: "\(L10n.Plugins.Policy.and) ",
+                    attributes: [
+                        .font: FontStyles.mh7.uifont,
+                        .foregroundColor:  Asset.Colors.Text.dark.color.withAlphaComponent(0.5)
+                    ]
+                )
+
+                let service = NSMutableAttributedString(
+                    string: L10n.Plugins.Policy.uploadTerms,
+                    attributes: [
+                        .font: FontStyles.bh7.uifont,
+                        .foregroundColor:  Asset.Colors.Text.dark.color,
+                        .link: URL(string: "https://legal.mask.io/arweave/file-service/plugin-terms.html")!
+                    ]
+                )
+
+                final.append(policy)
+                final.append(and)
+                final.append(service)
+
+                return final
+            }()
             setting.$fileServicePolicyAccepted
                 .receive(on: DispatchQueue.main)
                 .sink { [weak self] _ in

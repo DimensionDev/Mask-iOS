@@ -161,61 +161,62 @@ struct FileServiceView: View {
     @ViewBuilder
     private var foldUploadItemView: some View {
         if listFoldState == .fold {
-            HStack(spacing: 4) {
-                Asset.Plugins.FileService.folder.asImage()
-                    .frame(width: 32, height: 32)
-
-                Text(foldingText)
-                    .font(.bh5)
-                    .foregroundColor(Asset.Colors.Public.white)
-            }
-            .padding(.vertical, 8)
-            .padding(.horizontal, 16)
-            .background(
-                LinearGradient(
-                    stops: [
-                        .init(
-                            color: Asset.Colors.Gradient.blue2.asColor(),
-                            location: 0.093
-                        ),
-                        .init(
-                            color: Asset.Colors.Gradient.blur.asColor(),
-                            location: 0.9214
-                        )
-                    ],
-                    startPoint: .init(x: 0, y: 0),
-                    endPoint: .init(x: 0, y: 1)
-                )
-                .rotationEffect(.init(degrees: 337.55))
-                .frame(
-                    width: uploadingSize.width,
-                    height: uploadingSize.width
-                )
-            )
-            .cornerRadius(40)
-            .onTapGesture {
+            Button {
                 unfold()
+            } label: {
+                HStack(spacing: 4) {
+                    Asset.Plugins.FileService.folder.asImage()
+                        .frame(width: 32, height: 32)
+
+                    Text(foldingText)
+                        .font(.bh5)
+                        .foregroundColor(Asset.Colors.Public.white)
+                }
+                .padding(.vertical, 8)
+                .padding(.horizontal, 16)
+                .background(
+                    LinearGradient(
+                        stops: [
+                            .init(
+                                color: Asset.Colors.Gradient.blue2.asColor(),
+                                location: 0.093
+                            ),
+                            .init(
+                                color: Asset.Colors.Gradient.blur.asColor(),
+                                location: 0.9214
+                            )
+                        ],
+                        startPoint: .init(x: 0, y: 0),
+                        endPoint: .init(x: 0, y: 1)
+                    )
+                    .rotationEffect(.init(degrees: 337.55))
+                    .frame(
+                        width: uploadingSize.width,
+                        height: uploadingSize.width
+                    )
+                )
+                .cornerRadius(40)
+                .disabled(listFoldState == .unfold)
+                .opacity(
+                    listFoldState == .fold
+                        ? 1
+                        : 0
+                )
+                .measureSize(to: $uploadingSize)
+                .shadow(
+                    color: Asset.Colors.Gradient.blur.asColor().opacity(0.15),
+                    radius: 12,
+                    x: 0,
+                    y: 6
+                )
+                .preferredColorScheme(.light)
+                .matchedGeometryEffect(
+                    id: floatingViewID,
+                    in: uploadingAnimation,
+                    properties: .size,
+                    isSource: false
+                )
             }
-            .disabled(listFoldState == .unfold)
-            .opacity(
-                listFoldState == .fold
-                    ? 1
-                    : 0
-            )
-            .measureSize(to: $uploadingSize)
-            .shadow(
-                color: Asset.Colors.Gradient.blur.asColor().opacity(0.15),
-                radius: 12,
-                x: 0,
-                y: 6
-            )
-            .preferredColorScheme(.light)
-            .matchedGeometryEffect(
-                id: floatingViewID,
-                in: uploadingAnimation,
-                properties: .size,
-                isSource: false
-            )
         }
     }
 
