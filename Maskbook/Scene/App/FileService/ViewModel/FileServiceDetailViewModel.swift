@@ -16,7 +16,7 @@ class FileServiceDetailViewModel: ObservableObject {
         self.item = item
         startDownload()
     }
-    
+
     var useCDN = true
 
     @Published
@@ -37,8 +37,7 @@ class FileServiceDetailViewModel: ObservableObject {
                 let data = try await FileService.getAttachment(payloadID: tx.payloadTxID,
                                                                provider: item.provider,
                                                                key: tx.key,
-                                                               useCDN: useCDN
-                )
+                                                               useCDN: useCDN)
                 item.content = data
                 FileServiceLargeFileStorage.save(data,
                                                  id: tx.id,
@@ -46,7 +45,10 @@ class FileServiceDetailViewModel: ObservableObject {
                 state = .downloaded
             } catch let e {
                 log.debug("\(e)")
-                if let service = Service(rawValue: item.provider), service == .arweave {
+                if let service = Service(rawValue: item.provider),
+                   service == .arweave,
+                   useCDN == true
+                {
                     // arweave can try without cdn
                     useCDN = false
                     startDownload()
