@@ -24,7 +24,6 @@ extension UploadFile {
     @NSManaged public var id: String?
     @NSManaged public var key: String?
     @NSManaged public var landingTxID: String?
-    @NSManaged public var mime: String?
     @NSManaged public var name: String?
     @NSManaged public var payloadTxID: String?
     @NSManaged public var provider: String?

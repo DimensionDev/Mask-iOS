@@ -13,7 +13,6 @@ struct FileServiceUploadingItem: Hashable {
         totalBytes: Double,
         uploadedBytes: Double,
         uploadDate: Date? = nil,
-        mime: String,
         option: FileServiceUploadOption?,
         tx: FileServiceTranscation? = nil
     ) {
@@ -27,7 +26,6 @@ struct FileServiceUploadingItem: Hashable {
         self.fileType = fileType
         self.option = option
         self.tx = tx
-        self.mime = mime
     }
 
     // MARK: Internal
@@ -70,7 +68,6 @@ struct FileServiceUploadingItem: Hashable {
     let uploadDate: Date?
     let fileType: ItemType
 
-    let mime: String
     let option: FileServiceUploadOption?
     let tx: FileServiceTranscation?
 
@@ -159,7 +156,6 @@ extension FileServiceUploadingItem {
               fileType: fileType,
               totalBytes: totalBytes,
               uploadDate: uploadDate,
-              mime: mime,
               tx: tx)
     }
 }

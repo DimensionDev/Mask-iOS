@@ -183,7 +183,6 @@ extension FileServiceRepository {
                 }
 
                 let url = URL(string: file.name)
-                uploadFile.mime = url?.mimeType()
 
                 do {
                     try backgroundContext.saveOrRollback()
@@ -218,7 +217,6 @@ extension UploadFile {
             totalBytes: fileSize,
             uploadedBytes: createdAt.isSome ? fileSize : 0,
             uploadDate: createdAt,
-            mime: mime ?? "", // use nil as all UploadFile is uploaded
             option: .init(optionString),
             tx: FileServiceTranscation(
                 id: id ?? "",
@@ -253,8 +251,6 @@ extension UploadFile {
         if let value = item.option?.useMesonCDN {
             meson = value ? "1" : "0"
         }
-
-        mime = item.mime
     }
 
     func asBackJSON(_ dateFormatter: DateFormatter) -> JSON? {

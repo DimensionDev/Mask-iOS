@@ -18,7 +18,6 @@ struct ArweaveUploadHandler: FileServiceUploadHandler {
 
                 let attachment = AttachmentOptions(
                     encrypted: option.encrypted,
-                    type: item.mime,
                     block: item.content,
                     name: item.fileName
                 )

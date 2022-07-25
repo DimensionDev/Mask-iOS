@@ -87,7 +87,6 @@ final class FileServiceSelectFileHandler: NSObject {
             let fileItem = FileServiceSelectedFileItem(data: pngData,
                                                        fileName: fileName ?? randomNameForImage(),
                                                        fileType: .image,
-                                                       mime: "image/jpeg",
                                                        path: nil)
             pushFileServiceConfirmView(item: fileItem)
         } else {
@@ -115,7 +114,6 @@ final class FileServiceSelectFileHandler: NSObject {
         let fileItem = FileServiceSelectedFileItem(data: data,
                                                    fileName: url.lastPathComponent,
                                                    fileType: url.containsImage ? .image : .file,
-                                                   mime: url.mimeType(),
                                                    path: nil)
         pushFileServiceConfirmView(item: fileItem)
     }
