@@ -626,9 +626,11 @@ struct MaybeUInt64ToTimeInterval: Codable {
     }
 
     func encode(to encoder: Encoder) throws {
+        guard let value = wrappedValue else {
+            return
+        }
         var container = encoder.singleValueContainer()
-        let value = (wrappedValue ?? 0) * 1000
-        try container.encode(UInt64(value))
+        try container.encode(UInt64(value * 1000))
     }
 }
 
@@ -658,6 +660,45 @@ struct MaybeUInt64ToDate: Codable {
         if let time = value {
             var container = encoder.singleValueContainer()
             try container.encode(time)
+        }
+    }
+}
+
+// will replace JSONDecoder().decode(_:) and JSONEncoder().encode(_:)
+
+extension KeyedDecodingContainer {
+    func decode(
+        _ type: MaybeUInt64ToDate.Type,
+        forKey key: Key
+    ) throws -> MaybeUInt64ToDate {
+        try decodeIfPresent(type, forKey: key) ?? .init(nil)
+    }
+
+    func decode(
+        _ type: MaybeUInt64ToTimeInterval.Type,
+        forKey key: Key
+    ) throws -> MaybeUInt64ToTimeInterval {
+        try decodeIfPresent(type, forKey: key) ?? .init(nil)
+    }
+}
+
+extension KeyedEncodingContainer {
+    mutating func encode(
+        _ value: MaybeUInt64ToDate,
+        forKey key: Key
+    ) throws {
+        let wrappedValue = value.wrappedValue
+            .flatMap { $0.timeIntervalSince1970 }
+            .flatMap { UInt64($0 * 1000) }
+        try encodeIfPresent(wrappedValue, forKey: key)
+    }
+
+    mutating func encode(
+        _ value: MaybeUInt64ToTimeInterval,
+        forKey key: Key
+    ) throws {
+        if let wrappedValue = value.wrappedValue {
+            try encodeIfPresent(UInt64(wrappedValue * 1000), forKey: key)
         }
     }
 }
