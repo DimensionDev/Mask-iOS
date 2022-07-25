@@ -720,6 +720,7 @@
 		5DAD9C1E2823CF7200F6E230 /* Cookie+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD9C1D2823CF7200F6E230 /* Cookie+extension.swift */; };
 		5DAD9C202823D0F000F6E230 /* Cookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD9C1F2823D0F000F6E230 /* Cookie.swift */; };
 		5DAF3FB92814E80600CADB80 /* MaskSchemeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAF3FB82814E80600CADB80 /* MaskSchemeTest.swift */; };
+		5DB2F622288E8B7F0030F3A4 /* GroupMaskSegmentControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2F621288E8B7F0030F3A4 /* GroupMaskSegmentControlView.swift */; };
 		5DB39E2B278694460025337C /* JSDocumentResourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2A278694460025337C /* JSDocumentResourceManager.swift */; };
 		5DB39E2E27869F6C0025337C /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2D27869F6C0025337C /* DebugView.swift */; };
 		5DB39E302786A4E40025337C /* JSResourceSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2F2786A4E40025337C /* JSResourceSelectView.swift */; };
@@ -1577,6 +1578,7 @@
 		5DAD9C1D2823CF7200F6E230 /* Cookie+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cookie+extension.swift"; sourceTree = "<group>"; };
 		5DAD9C1F2823D0F000F6E230 /* Cookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cookie.swift; sourceTree = "<group>"; };
 		5DAF3FB82814E80600CADB80 /* MaskSchemeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskSchemeTest.swift; sourceTree = "<group>"; };
+		5DB2F621288E8B7F0030F3A4 /* GroupMaskSegmentControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMaskSegmentControlView.swift; sourceTree = "<group>"; };
 		5DB39E2A278694460025337C /* JSDocumentResourceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSDocumentResourceManager.swift; sourceTree = "<group>"; };
 		5DB39E2D27869F6C0025337C /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		5DB39E2F2786A4E40025337C /* JSResourceSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSResourceSelectView.swift; sourceTree = "<group>"; };
@@ -3858,6 +3860,7 @@
 				5D4AD18826560B02002D5380 /* HitTestExpandedButton.swift */,
 				2A18E7FA266C9D210045BC88 /* AvatarView.swift */,
 				5D99DEC826788A7A006E345D /* MaskSegmentControl.swift */,
+				5DB2F621288E8B7F0030F3A4 /* GroupMaskSegmentControlView.swift */,
 				5D2C6F7327D88E190076096C /* GroupMaskSegmentControl.swift */,
 				5D2C6F7527D899EB0076096C /* PlainMaskSegmentComtrol.swift */,
 				5D93DF9D267B2B5000A175BF /* MaskTextField.swift */,
@@ -4766,6 +4769,7 @@
 				2AF8853A271EE9310004565A /* BalanceViewController.swift in Sources */,
 				2DC5D896272574D600E351D3 /* InstalledWallet.swift in Sources */,
 				2AD8552E2812841C0064DDA5 /* FungibleTokenBuilder.swift in Sources */,
+				5DB2F622288E8B7F0030F3A4 /* GroupMaskSegmentControlView.swift in Sources */,
 				2D11F03E27894A58002CE232 /* ConnectSocialView.swift in Sources */,
 				2D40E6CE276AD32300C8C5FF /* SelectAccountViewModel.swift in Sources */,
 				5D770B1327DED70400539254 /* PersonaAvatarViewModel.swift in Sources */,

@@ -124,9 +124,3 @@ extension NFTRedPacketConfirmView {
         case gas(String)
     }
 }
-
-struct NFTRedPacketConfirmView_Previews: PreviewProvider {
-    static var previews: some View {
-        return RedPacketConfirmView(viewModel: RedPacketConfirmViewModelMock())
-    }
-}
