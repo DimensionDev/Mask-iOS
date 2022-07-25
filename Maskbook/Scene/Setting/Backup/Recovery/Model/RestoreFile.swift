@@ -96,7 +96,7 @@ extension RestoreFile {
         // MARK: Lifecycle
 
         init(from json: [String: Any]) {
-            _createdAt = BackupValueCompatiableFrom(
+            _createdAt = MaybeUInt64ToDate(
                 json[CodingKeys.createdAt.stringValue]
                     .flatMap { RestoreFile.converTimeInterval($0) }
                     .flatMap { Date(timeIntervalSince1970: $0) } ?? Date()
@@ -109,7 +109,7 @@ extension RestoreFile {
 
         // MARK: Internal
 
-        @BackupValueCompatiableFrom<UInt64, Date>
+        @MaybeUInt64ToDate
         private(set) var createdAt: Date?
         let maskbookVersion: String
         let version: Int
@@ -122,12 +122,12 @@ extension RestoreFile {
         // MARK: Lifecycle
 
         init(from json: [String: Any]) {
-            _createdAt = BackupValueCompatiableFrom(
+            _createdAt = MaybeUInt64ToTimeInterval(
                 json[CodingKeys.createdAt.stringValue]
                     .flatMap(RestoreFile.converTimeInterval) ?? 0
             )
 
-            _updatedAt = BackupValueCompatiableFrom<UInt64, TimeInterval>(
+            _updatedAt = MaybeUInt64ToTimeInterval(
                 json[CodingKeys.updatedAt.stringValue]
                     .flatMap(RestoreFile.converTimeInterval) ?? 0
             )
@@ -168,7 +168,7 @@ extension RestoreFile {
                 kty = json[CodingKeys.kty.stringValue] as? String
                 crv = json[CodingKeys.crv.stringValue] as? String
                 key_ops = json[CodingKeys.key_ops.stringValue] as? [String]
-                _ext = BackupValueCompatiableFrom<Never, Bool>(json[CodingKeys.ext.stringValue] as? Bool ?? true)
+                _ext = BooleanConverted(json[CodingKeys.ext.stringValue] as? Bool ?? true)
             }
 
             // MARK: Internal
@@ -177,7 +177,7 @@ extension RestoreFile {
             let x: String?
             let y: String?
 
-            @BackupValueCompatiableFrom<Never, Bool>
+            @BooleanConverted
             private(set) var ext: Bool?
 
             let key_ops: [String]?
@@ -185,10 +185,10 @@ extension RestoreFile {
             let crv: String?
         }
 
-        @BackupValueCompatiableFrom<UInt64, TimeInterval>
+        @MaybeUInt64ToTimeInterval
         private(set) var createdAt: TimeInterval?
 
-        @BackupValueCompatiableFrom<UInt64, TimeInterval>
+        @MaybeUInt64ToTimeInterval
         private(set) var updatedAt: TimeInterval?
 
         let identifier: String?
@@ -208,7 +208,7 @@ extension RestoreFile {
             alg = json[CodingKeys.alg.stringValue] as? String
             kty = json[CodingKeys.kty.stringValue] as? String
             key_ops = json[CodingKeys.key_ops.stringValue] as? [String]
-            _ext = BackupValueCompatiableFrom<Never, Bool>(json[CodingKeys.ext.stringValue] as? Bool ?? true)
+            _ext = BooleanConverted(json[CodingKeys.ext.stringValue] as? Bool ?? true)
         }
 
         // MARK: Internal
@@ -219,7 +219,7 @@ extension RestoreFile {
         let key_ops: [String]?
         let kty: String?
 
-        @BackupValueCompatiableFrom<Never, Bool>
+        @BooleanConverted
         private(set) var ext: Bool?
     }
 
@@ -239,13 +239,13 @@ extension RestoreFile {
 
             init(from json: [String: Any]) {
                 path = json[CodingKeys.path.stringValue] as? String ?? ""
-                _withPassword = BackupValueCompatiableFrom<Never, Bool>(json[CodingKeys.withPassword.stringValue] as? Bool ?? false)
+                _withPassword = BooleanConverted(json[CodingKeys.withPassword.stringValue] as? Bool ?? false)
             }
 
             // MARK: Internal
 
             let path: String
-            @BackupValueCompatiableFrom<Never, Bool>
+            @BooleanConverted
             private(set) var withPassword: Bool?
         }
 
@@ -259,7 +259,7 @@ extension RestoreFile {
         // MARK: Lifecycle
 
         init(from json: [String: Any]) {
-            _foundAt = BackupValueCompatiableFrom<UInt64, TimeInterval>(
+            _foundAt = MaybeUInt64ToTimeInterval(
                 json[CodingKeys.foundAt.stringValue]
                     .flatMap(RestoreFile.converTimeInterval) ?? 0
             )
@@ -278,7 +278,7 @@ extension RestoreFile {
 
         // MARK: Internal
 
-        @BackupValueCompatiableFrom<UInt64, TimeInterval>
+        @MaybeUInt64ToTimeInterval
         private(set) var foundAt: TimeInterval?
         let identifier: String
         let postBy: String
@@ -305,7 +305,7 @@ extension RestoreFile {
         // MARK: Lifecycle
 
         init(from json: [String: Any]) {
-            _time = BackupValueCompatiableFrom<UInt64, TimeInterval>(
+            _time = MaybeUInt64ToTimeInterval(
                 json[CodingKeys.time.stringValue]
                     .flatMap(RestoreFile.converTimeInterval) ?? 0
             )
@@ -324,7 +324,7 @@ extension RestoreFile {
             case group
         }
 
-        @BackupValueCompatiableFrom<UInt64, TimeInterval>
+        @MaybeUInt64ToTimeInterval
         private(set) var time: TimeInterval?
         let recipientType: RecipientType
         let group: String?
@@ -376,11 +376,11 @@ extension RestoreFile {
         // MARK: Lifecycle
 
         init(from json: [String: Any]) {
-            _createdAt = BackupValueCompatiableFrom<UInt64, TimeInterval>(
+            _createdAt = MaybeUInt64ToTimeInterval(
                 json[CodingKeys.createdAt.stringValue]
                     .flatMap(RestoreFile.converTimeInterval) ?? 0
             )
-            _updatedAt = BackupValueCompatiableFrom<UInt64, TimeInterval>(
+            _updatedAt = MaybeUInt64ToTimeInterval(
                 json[CodingKeys.updatedAt.stringValue]
                     .flatMap(RestoreFile.converTimeInterval) ?? 0
             )
@@ -391,9 +391,9 @@ extension RestoreFile {
 
         // MARK: Internal
 
-        @BackupValueCompatiableFrom<UInt64, TimeInterval>
+        @MaybeUInt64ToTimeInterval
         private(set) var createdAt: TimeInterval?
-        @BackupValueCompatiableFrom<UInt64, TimeInterval>
+        @MaybeUInt64ToTimeInterval
         private(set) var updatedAt: TimeInterval?
         let nickName: String
         let identifier: String
@@ -490,8 +490,8 @@ extension RestoreFile {
             self.type = type
             self.landingTxID = landingTxID
             key = json[CodingKeys.key.stringValue] as? String
-            _encrypted = BackupValueCompatiableFrom<Never, Bool>(json[CodingKeys.encrypted.stringValue] as? Bool ?? false)
-            _meson = BackupValueCompatiableFrom<Never, Bool>(json[CodingKeys.meson.stringValue] as? Bool ?? false)
+            _encrypted = BooleanConverted(json[CodingKeys.encrypted.stringValue] as? Bool)
+            _meson = BooleanConverted(json[CodingKeys.meson.stringValue] as? Bool)
         }
 
         // MARK: Internal
@@ -507,9 +507,9 @@ extension RestoreFile {
         let type: String
         let landingTxID: String
         let key: String?
-        @BackupValueCompatiableFrom<Never, Bool>
+        @BooleanConverted
         var encrypted: Bool?
-        @BackupValueCompatiableFrom<Never, Bool>
+        @BooleanConverted
         var meson: Bool?
 
         enum CodingKeys: String, CodingKey {
@@ -579,7 +579,7 @@ extension RestoreFile: RestoreItemProvider {
 struct BackupValueCompatiableFrom<From: Codable, Value: Codable>: Codable {
     // MARK: Lifecycle
 
-    init(_ value: Value) {
+    init(_ value: Value?) {
         wrappedValue = value
     }
 
@@ -607,66 +607,39 @@ extension BackupValueCompatiableFrom where From == UInt64, Value == TimeInterval
     }
 }
 
-extension Swift.Never: Codable {
-    public func encode(to encoder: Encoder) throws {
-        fatalError()
+@propertyWrapper
+struct MaybeUInt64ToTimeInterval: Codable {
+    var wrappedValue: TimeInterval?
+    init(_ wrappedValue: TimeInterval?) {
+        self.wrappedValue = wrappedValue
     }
 
-    public init(from decoder: Decoder) throws {
-        fatalError()
-    }
-}
-
-extension BackupValueCompatiableFrom where From == Never, Value == Bool {
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-
-        if let stringValue = try? container.decode(String.self) {
-            switch stringValue.lowercased() {
-            case "false", "no", "0": wrappedValue = false
-            case "true", "yes", "1": wrappedValue = true
-
-            default:
-                throw DecodingError.dataCorruptedError(
-                    in: container,
-                    debugDescription: "Expect true/false, yes/no or 0/1 but`\(stringValue)` instead"
-                )
-            }
-        } else if let intValue = try? container.decode(Int.self) {
-            switch intValue {
-            case 0: wrappedValue = false
-            case 1: wrappedValue = true
-
-            default:
-                throw DecodingError.dataCorruptedError(
-                    in: container,
-                    debugDescription: "Expect `0` or `1` but found `\(intValue)` instead"
-                )
-            }
-        } else if let doubleValue = try? container.decode(Double.self) {
-            switch doubleValue {
-            case 0: wrappedValue = false
-            case 1: wrappedValue = true
-
-            default:
-                throw DecodingError.dataCorruptedError(
-                    in: container,
-                    debugDescription: "Expect `0` or `1` but found `\(doubleValue)` instead"
-                )
-            }
+        if let value = try? container.decode(UInt64.self) {
+            wrappedValue = TimeInterval(value) / 1000
+        } else if let value = try? container.decode(TimeInterval.self) {
+            wrappedValue = value
         } else {
-            wrappedValue = try container.decode(Bool.self)
+            wrappedValue = nil
         }
     }
 
     func encode(to encoder: Encoder) throws {
-        let rawValue = wrappedValue ?? false
         var container = encoder.singleValueContainer()
-        try container.encode(rawValue ? Int(1) : 0)
+        let value = (wrappedValue ?? 0) * 1000
+        try container.encode(UInt64(value))
     }
 }
 
-extension BackupValueCompatiableFrom where From == UInt64, Value == Date {
+@propertyWrapper
+struct MaybeUInt64ToDate: Codable {
+    var wrappedValue: Date?
+
+    init(_ wrappedValue: Date?) {
+        self.wrappedValue = wrappedValue
+    }
+
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let value = try? container.decode(UInt64.self) {

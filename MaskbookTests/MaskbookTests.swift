@@ -156,19 +156,23 @@ class MaskbookTests: XCTestCase {
         { "title": "Six", "age": 1.8446744073709553e+19 }
         """.data(using: .utf8)!
 
-        guard let result = try? JSONDecoder().decode(TestModel.self, from: json) else {
-            XCTAssert(false)
-            return
+        let decoding = Result {
+            try JSONDecoder().decode(TestModel.self, from: json)
         }
 
-        XCTAssert(result.name.decimalNumber.decimalValue == Decimal.zero)
+        switch decoding {
+        case let .success(result):
 
-        if #available(iOS 15, *) {
-            XCTAssert(result.age.decimalNumber.doubleValue == 1.8446744073709553e+19)
-        }
+            if #available(iOS 15, *) {
+                XCTAssert(result.age.decimalNumber.doubleValue == 1.8446744073709553e+19)
+            }
 
-        if #available(iOS 14, *) {
-            XCTAssert(result.age.decimalNumber.doubleValue == 1.8446744073709552e+19)
+            if #available(iOS 14, *) {
+                XCTAssert(result.age.decimalNumber.doubleValue == 1.8446744073709552e+19)
+            }
+
+        case let .failure(error):
+            XCTFail("decoding DecomalConverted failed \(error.localizedDescription)")
         }
     }
 
