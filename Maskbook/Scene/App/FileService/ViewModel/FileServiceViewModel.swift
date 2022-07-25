@@ -153,7 +153,6 @@ extension FileServiceViewModel {
                     content: fileItem.data,
                     totalBytes: Double(fileItem.data.count),
                     uploadedBytes: 0,
-                    mime: fileItem.mime,
                     option: option
                 )
             }

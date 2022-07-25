@@ -12,19 +12,16 @@ struct FileServiceSelectedFileItem {
     init(data: Data,
          fileName: String,
          fileType: FileServiceUploadingItem.ItemType,
-         mime: String,
          path: URL?
     ) {
         self.data = data
         self.fileName = fileName
         self.fileType = fileType
-        self.mime = mime
         self.path = path
     }
     let data: Data
     let fileName: String
     let fileType: FileServiceUploadingItem.ItemType
-    let mime: String
     let path: URL?
     lazy var tempURL: URL = Self.generateTempUrl(item: self)
     
@@ -43,7 +40,12 @@ extension FileServiceSelectedFileItem {
         case application
     }
     
+    var mime: String {
+        fileName.mimeType()
+    }
+    
     var specificFileType: FileType {
+        let mime = mime
         if mime.mimeIsImage {
             return .image
         } else if mime.mimeIsVideo {

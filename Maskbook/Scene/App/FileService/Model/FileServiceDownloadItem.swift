@@ -16,7 +16,6 @@ struct FileServiceDownloadItem {
         fileType: ItemType,
         totalBytes: Double,
         uploadDate: Date? = nil,
-        mime: String,
         tx: FileServiceTranscation? = nil
     ) {
         self.fileName = fileName
@@ -25,7 +24,6 @@ struct FileServiceDownloadItem {
         self.uploadDate = uploadDate
         self.fileType = fileType
         self.tx = tx
-        self.mime = mime
         self.content = loadFileContent()
     }
 
@@ -37,7 +35,6 @@ struct FileServiceDownloadItem {
     let fileType: ItemType
 
     let tx: FileServiceTranscation?
-    let mime: String
 
     var uploadDateText: String {
         let formatter = DateFormatter()
@@ -65,7 +62,6 @@ extension FileServiceDownloadItem {
         return FileServiceSelectedFileItem(data: content ?? Data(),
                                            fileName: fileName,
                                            fileType: fileType,
-                                           mime: mime,
                                            path: path)
     }
 }
