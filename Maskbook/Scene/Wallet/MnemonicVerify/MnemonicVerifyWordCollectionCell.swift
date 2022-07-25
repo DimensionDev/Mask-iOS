@@ -9,12 +9,21 @@
 import Foundation
 import UIKit
 
+enum MnemonicVerifyCellType {
+    case normal
+    case verified
+    case blank
+}
+
 class MnemonicVerifyWordCollectionCell: UICollectionViewCell {
     let wordLabel: UILabel = {
         let label = UILabel()
         label.font = FontStyles.BH6
+        label.textColor = Asset.Colors.Text.main.color
         return label
     }()
+    
+    let rectangle = CAShapeLayer()
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -31,9 +40,15 @@ class MnemonicVerifyWordCollectionCell: UICollectionViewCell {
     }
     
     func configure() {
-        layer.cornerRadius = 8
-        layer.cornerCurve = .continuous
-        clipsToBounds = true
+        rectangle.lineCap = .round
+        rectangle.cornerRadius = 8
+        rectangle.strokeColor = Asset.Colors.Text.link.color.cgColor
+        rectangle.lineDashPattern = [4, 4]
+        rectangle.fillColor = nil
+        rectangle.lineWidth = 2
+        contentView.layer.addSublayer(rectangle)
+        
+        applyCornerRadius(radius: 8)
         
         wordLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(wordLabel)
@@ -43,14 +58,32 @@ class MnemonicVerifyWordCollectionCell: UICollectionViewCell {
         ])
     }
     
-    func configWith(word: String, isSelected: Bool) {
+    func configWith(word: String, cellType: MnemonicVerifyCellType) {
         wordLabel.text = word
-        if isSelected {
-            wordLabel.textColor = Asset.Colors.Text.lighter.color
-            contentView.backgroundColor = Asset.Colors.Background.blue.color
-        } else {
-            wordLabel.textColor = Asset.Colors.Text.normal.color
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+
+        switch cellType {
+        case .normal:
+            contentView.alpha = 0.5
             contentView.backgroundColor = Asset.Colors.Background.dark.color
+            rectangle.opacity = 0
+        case .verified:
+            contentView.alpha = 1
+            contentView.backgroundColor = Asset.Colors.Background.dark.color
+            rectangle.opacity = 0
+        case .blank:
+            wordLabel.text = ""
+            contentView.alpha = 1
+            contentView.backgroundColor = .clear
+            rectangle.opacity = 1
         }
+        CATransaction.commit()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        rectangle.frame = bounds
+        rectangle.path = UIBezierPath(roundedRect: bounds, cornerRadius: 8).cgPath
     }
 }
