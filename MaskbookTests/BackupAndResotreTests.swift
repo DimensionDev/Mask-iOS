@@ -121,4 +121,80 @@ class BackupAndResotreTests: XCTestCase {
             XCTFail("json merge failed")
         }
     }
+
+    func testCodableDecoding() {
+        func boolDecoding() {
+            struct Meta: Codable {
+                @BooleanConverted
+                var share: Bool?
+                var neme: String?
+            }
+
+            let json1 = #"{"share":1}"#.data(using: .utf8)!
+
+            let result = Result {
+                try JSONDecoder().decode(Meta.self, from: json1)
+            }
+
+            switch result {
+            case let .success(value):
+                XCTAssert(value.share == true)
+            case let .failure(error):
+                XCTFail("\(error)")
+            }
+        }
+
+        func dateDecoding() {
+            struct Meta: Codable {
+                @MaybeUInt64ToDate
+                var date: Date?
+            }
+
+            let json1 = #"{"date":192813313000}"#.data(using: .utf8)!
+
+            let result = Result {
+                try JSONDecoder().decode(Meta.self, from: json1)
+            }
+
+            switch result {
+            case let .success(value):
+                XCTAssert(value.date?.timeIntervalSince1970 == 192813313)
+                let encoding = try! JSONEncoder().encode(value)
+                let string = String(data: encoding, encoding: .utf8)
+                XCTAssert(string == #"{"date":192813313000}"#)
+
+            case let .failure(error):
+                XCTFail("\(error)")
+            }
+        }
+
+        func timeIntervalDecoding() {
+            struct Meta: Codable {
+                @MaybeUInt64ToTimeInterval
+                var time: TimeInterval?
+            }
+
+            let json1 = #"{"time":192813313000}"#.data(using: .utf8)!
+
+            let result = Result {
+                try JSONDecoder().decode(Meta.self, from: json1)
+            }
+
+            switch result {
+            case let .success(value):
+                XCTAssert(value.time == 192813313)
+
+                let encoding = try! JSONEncoder().encode(value)
+                let string = String(data: encoding, encoding: .utf8)
+                XCTAssert(string == #"{"time":192813313000}"#)
+
+            case let .failure(error):
+                XCTFail("\(error)")
+            }
+        }
+
+        boolDecoding()
+        dateDecoding()
+        timeIntervalDecoding()
+    }
 }

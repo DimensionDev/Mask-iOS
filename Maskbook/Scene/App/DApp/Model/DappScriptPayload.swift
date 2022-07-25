@@ -38,6 +38,20 @@ struct EmptyWrapper: Codable {}
 struct BooleanConverted: Codable {
     var wrappedValue: Bool?
 
+    init(_ wrappedValue: Bool?) {
+        self.wrappedValue = wrappedValue
+    }
+
+    init(wrapper: BooleanWrapper = .int) {
+        self.init(nil)
+        self.boolWrapper = wrapper
+    }
+
+    init(_ wrappedValue: Bool?, wrapper: BooleanWrapper = .int) {
+        self.wrappedValue = wrappedValue
+        self.boolWrapper = wrapper
+    }
+
     enum BooleanWrapper {
         case int
         case double
