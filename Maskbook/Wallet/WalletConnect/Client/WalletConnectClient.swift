@@ -239,7 +239,7 @@ extension WalletConnectClient: ClientDelegate {
     }
     
     func removeAccountFromSession(session: Session) {
-        guard let rawAddress = session.walletInfo?.accounts[0] else { return }
+        guard let rawAddress = session.walletInfo?.accounts.first else { return }
         let address = EthereumAddress.toChecksumAddress(rawAddress) ?? rawAddress
         AppContext.shared.coreDataStack.persistentContainer.viewContext.perform {
             if let account = WalletCoreStorage.getAccount(address: address) {
