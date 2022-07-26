@@ -986,6 +986,10 @@ enum L10n {
       }
 
       enum Buttons {
+        /// Approve Collection
+        static var approveCollection: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Approve-Collection")
+        }
         /// Average
         static var average: String {
           return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Average")
@@ -993,6 +997,10 @@ enum L10n {
         /// Best Wishes!
         static var bestWishes: String {
           return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Best-Wishes")
+        }
+        /// Create NFT Lucky Drop
+        static var createNfgLuckyDrop: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Create-Nfg-Lucky-Drop")
         }
         /// Create Persona
         static var createPersona: String {

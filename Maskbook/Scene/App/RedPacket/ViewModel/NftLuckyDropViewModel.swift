@@ -1,15 +1,23 @@
 import Combine
+import CombineExt
 import CoreData
 import CoreDataStack
 import Foundation
-import CombineExt
 
-struct CollectiableGroup {
+struct CollectiableGroup: Hashable {
     let name: String
     let groupIconURL: URL?
     let totalCount: Int
 }
 
+struct NftRecpacketDraft {
+    let message: String
+    let collectibles: [Collectible]
+    let gasFeeItem: GasFeeCellItem
+    let token: Token
+}
+
+@MainActor
 final class NftLuckyDropViewModel: ObservableObject {
     // MARK: Lifecycle
 
@@ -27,29 +35,31 @@ final class NftLuckyDropViewModel: ObservableObject {
         .sink { [weak self] _, network, _ in
             guard let self = self else { return }
             // don't replace this with self.nativeToken()
-            self.token = self.walletAssetManager.getMainToken(
-                network: network,
-                chainId: network.chain.rawValue,
-                networkId: Int(network.networkId),
-                context: self.viewContext
-            )
+            self.token = self.nativeToken()
         }
         .store(in: &cancelableStorage)
 
+        // check action state
         Publishers.MergeMany(
             settings.$passwordExpiredDate
-                .removeDuplicates()
                 .map { _ in () }
                 .eraseToAnyPublisher(),
             settings.$confirmedPluginRiskWarnings
                 .removeDuplicates()
                 .map { _ in () }
                 .eraseToAnyPublisher(),
-            settings.$defaultAccountAddress
-                .removeDuplicates()
+            $token
                 .map { _ in () }
+                .eraseToAnyPublisher(),
+            $gasFeeItem
+                .map { _ in () }
+                .eraseToAnyPublisher(),
+            $collectibleGroup
+                .removeDuplicates()
+                .map { _ in }
                 .eraseToAnyPublisher()
         )
+        .collect(1)
         .throttle(for: 2, scheduler: DispatchQueue.main, latest: true)
         .sink { [weak self] _ in
             guard let self = self else { return }
@@ -63,7 +73,7 @@ final class NftLuckyDropViewModel: ObservableObject {
     enum Event {
         case addCollectibles(groupName: String, selectedIdentifiers: Set<String>)
         case confirmRisk
-        case createBNFTLuckyDrop(message: String, collectibles: [Collectible], gasFeeItem: GasFeeCellItem)
+        case createBNFTLuckyDrop(NftRecpacketDraft)
         case selectCollectibleGroup
         case unlockWallet
         case unlockDGC
@@ -102,9 +112,6 @@ final class NftLuckyDropViewModel: ObservableObject {
     private(set) var actionState: TransactionState = .unlockWallet
 
     @Published
-    private(set) var dgcUnlocked = false
-
-    @Published
     private(set) var items: [CollectibleItem] = []
 
     private(set) var collectibles: [Collectible] = []
@@ -139,11 +146,12 @@ extension NftLuckyDropViewModel {
         actionState = checkState()
     }
 
-    private func checkState() -> TransactionState {
-        if [.createNFTDrop, .unlockDGC].contains(actionState) {
-            return actionState
-        }
+    private func checkCollectionApproving(with token: Token) -> Bool {
+        // TODO: update dgcUnlock
+        return false
+    }
 
+    private func checkState() -> TransactionState {
         guard let fromAddress = settings.defaultAccountAddress,
               let fromAccount = walletCoreService.getAccount(address: fromAddress) else {
             return .needWallet
@@ -164,67 +172,25 @@ extension NftLuckyDropViewModel {
             return .confirmRisk
         }
 
+        // check collectibles
+        guard !collectibles.isEmpty else {
+            return .addCollectibles
+        }
+
         // gas amount
         guard let gasFeeNumber = gasFeeNumber() else {
             return .insufficientGas
         }
 
-        guard let nativeToken = nativeToken() else {
+        if gasFeeNumber.doubleValue > token.quantityNumber.doubleValue {
             return .insufficientGas
         }
 
-        if gasFeeNumber.doubleValue > nativeToken.quantityNumber.doubleValue {
-            return .insufficientGas
-        }
-
-        // DGC
-        if !dgcUnlocked {
-            return .unlockDGC
-        }
-
-        // TODO: allowrance and dgc
-        // check balance
-//        let tokenAmount = token.quantityNumber
-//        let totalAmount = totalQuantity
-//        guard tokenAmount != .notANumber, totalAmount != .notANumber else {
-//            return
-//        }
-//
-//        if !token.isMainToken, let identifier = token.identifier {
-//            if allowances[identifier] == nil {
-//                updateButton(state: .requestAllowance)
-//                getAndUpdateAllowances()
-//                return
-//            }
-//            if let sendAmount = Web3.Utils.parseToBigUInt("\(totalQuantity)", decimals: Int(token.decimal)),
-//               let allowance = allowances[identifier],
-//               allowance < sendAmount
-//            {
-//                updateButton(state: .unlockToken)
-//                return
-//            }
-//        }
-//
-//        if token.isMainToken {
-//            if case .orderedDescending = gasFeeNumber.adding(totalAmount).compare(tokenAmount) {
-//                self.updateButton(state: .insufficientBalance)
-//                return
-//            }
-//        } else {
-//            if case .orderedDescending = totalAmount.compare(tokenAmount) {
-//                self.updateButton(state: .insufficientBalance)
-//                return
-//            }
-//        }
+        // TODO: check dgc with token
 
         // no message
         guard !message.isEmpty else {
             return .needMessage
-        }
-
-        // check collectibles
-        guard !collectibles.isEmpty else {
-            return .addCollectibles
         }
 
         return .createNFTDrop
@@ -313,16 +279,16 @@ extension NftLuckyDropViewModel {
         case .unlockDGC: action(.unlockDGC)
 
         case .createNFTDrop:
-            guard let item = gasFeeItem else {
+            guard let item = gasFeeItem, let token = token else {
                 return
             }
-            action(
-                .createBNFTLuckyDrop(
-                    message: message,
-                    collectibles: collectibles,
-                    gasFeeItem: item
-                )
+            let draft = NftRecpacketDraft(
+                message: message,
+                collectibles: collectibles,
+                gasFeeItem: item,
+                token: token
             )
+            action(.createBNFTLuckyDrop(draft))
 
         default: break
         }
@@ -343,7 +309,6 @@ extension NftLuckyDropViewModel {
         case needWallet
         case needMessage
         case insufficientGas
-        case insufficientBalance
 
         case unlockWallet
         case confirmRisk
@@ -357,7 +322,21 @@ extension NftLuckyDropViewModel {
             switch self {
             case .unlockWallet, .unlockDGC, .confirmRisk, .createNFTDrop: return true
             case .needMessage, .needToken, .needWallet,
-                 .addCollectibles, .insufficientGas, .insufficientBalance: return false
+                    .addCollectibles, .insufficientGas: return false
+            }
+        }
+
+        var detailText: String {
+            switch self {
+            case .needToken: return L10n.Plugins.Luckydrop.Buttons.noToken
+            case .needWallet: return L10n.Plugins.Luckydrop.Buttons.noAccount
+            case .unlockWallet: return L10n.Scene.WalletUnlock.title
+            case .confirmRisk: return L10n.Plugins.Luckydrop.Buttons.riskWarning
+            case .insufficientGas: return L10n.Plugins.Luckydrop.Buttons.insufficientGas
+            case .addCollectibles: return L10n.Plugins.Luckydrop.Buttons.selectNfts
+            case .unlockDGC: return L10n.Plugins.Luckydrop.Buttons.approveCollection
+            case .needMessage: return L10n.Plugins.Luckydrop.Buttons.noMessage
+            case .createNFTDrop: return L10n.Plugins.Luckydrop.Buttons.createNfgLuckyDrop
             }
         }
     }
