@@ -1,8 +1,8 @@
 //
-//  RedPacketConfirmView.swift
+//  NFTRedPackedConfirmView.swift
 //  Maskbook
 //
-//  Created by Hugo L on 2022/4/13.
+//  Created by xiaojian sun on 2022/7/25.
 //  Copyright © 2022 dimension. All rights reserved.
 //
 
@@ -10,8 +10,8 @@ import SwiftUI
 import Kingfisher
 import CoreDataStack
 
-struct RedPacketConfirmView: View {
-    @ObservedObject var viewModel: RedPacketConfirmViewModel
+struct NFTRedPacketConfirmView: View {
+    @ObservedObject var viewModel: NFTRedPacketConfirmViewModel
     @InjectedProvider(\.mainCoordinator) private var mainCoordinator
    
     var tipsView: some View {
@@ -20,6 +20,7 @@ struct RedPacketConfirmView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 24)
+            
             Text(L10n.Plugins.Luckydrop.Confirm.tips)
                 .font(FontStyles.rh6.font)
                 .foregroundColor(Asset.Colors.Public.info.asColor())
@@ -46,25 +47,8 @@ struct RedPacketConfirmView: View {
                     value: .plain(viewModel.message)
                 )
                 buildRow(
-                    title: L10n.Plugins.Luckydrop.Confirm.splitMode,
-                    value: .plain(viewModel.mode.title)
-                )
-                buildRow(
-                    title: L10n.Plugins.Luckydrop.Confirm.share,
-                    value: .plain(viewModel.share)
-                )
-                if viewModel.amountPerShare.isNotEmpty {
-                    buildRow(
-                        title: L10n.Plugins.Luckydrop.Confirm.amountPerShare,
-                        value: .plain(viewModel.amountPerShare)
-                    )
-                }
-                buildRow(
                     title: L10n.Plugins.Luckydrop.Confirm.totalAmount,
-                    value: .token(
-                        tokenURL: viewModel.tokenIconURL,
-                        value: viewModel.totalAmountDisplay
-                    )
+                    value: .plain("\(viewModel.totalAmount)")
                 )
                 buildRow(title: L10n.Plugins.Luckydrop.Confirm.transactionFee, value: .gas(viewModel.gasFeeInfo))
                 tipsView
@@ -101,7 +85,8 @@ struct RedPacketConfirmView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 24)
-                        .cornerRadius(12)                 
+                        .cornerRadius(12)
+                    
                     Text(value)
                         .truncationMode(.middle)
                         .font(FontStyles.bh6.font)
@@ -133,16 +118,10 @@ struct RedPacketConfirmView: View {
     }
 }
 
-extension RedPacketConfirmView {
+extension NFTRedPacketConfirmView {
     enum ValueType {
         case plain(String)
         case token(tokenURL: URL?, value: String)
         case gas(String)
-    }
-}
-
-struct RedPacketConfirmView_Previews: PreviewProvider {
-    static var previews: some View {
-        return RedPacketConfirmView(viewModel: RedPacketConfirmViewModelMock())
     }
 }

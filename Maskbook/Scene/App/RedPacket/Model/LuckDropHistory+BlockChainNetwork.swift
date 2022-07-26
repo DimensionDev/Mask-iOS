@@ -36,6 +36,19 @@ extension BlockChainNetwork {
         }
     }
     
+    var nftRedPacketAddress: String? {
+        switch self {
+        case .eth: return "0x8d285739523FC2Ac8eC9c9C229ee863C8C9bF8C8"
+        case .bsc: return "0xf8968e1Fcf1440Be5Cec7Bb495bcee79753d5E06"
+        case .polygon: return "0xf6Dc042717EF4C097348bE00f4BaE688dcaDD4eA"
+        case .arbitrum: return "0x96c7D011cdFD467f551605f0f5Fce279F86F4186"
+        case .xdai: return ""
+        default: return nil
+        }
+    }
+    
+    
+    
     var nativeTokenAddress: String {
         "0x0000000000000000000000000000000000000000"
     }
