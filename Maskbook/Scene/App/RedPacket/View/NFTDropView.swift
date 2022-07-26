@@ -16,15 +16,25 @@ struct NFTDropView: View {
                 .frame(height: 20)
 
             VStack(spacing: 16) {
-                TextField(L10n.Plugins.Luckydrop.nftMessagePlaceholder, text: $viewModel.message)
-                    .font(FontStyles.mh5.font)
-                    .frame(height: 52)
-                    .padding(.horizontal, 12)
-                    .background(Asset.Colors.Background.dark.asColor())
-                    .cornerRadius(8)
-                    .modifier(
-                        KeyBoardObservingModifier(\.isNFTDropEditing, on: viewModel.nftViewModel)
+                TextField(
+                    L10n.Plugins.Luckydrop.nftMessagePlaceholder,
+                    text: Binding(
+                        get: { [vm = viewModel.nftViewModel] in
+                            vm.message
+                        },
+                        set: { [vm = viewModel.nftViewModel] newValue, _ in
+                            vm.message = newValue
+                        }
                     )
+                )
+                .font(FontStyles.mh5.font)
+                .frame(height: 52)
+                .padding(.horizontal, 12)
+                .background(Asset.Colors.Background.dark.asColor())
+                .cornerRadius(8)
+                .modifier(
+                    KeyBoardObservingModifier(\.isNFTDropEditing, on: viewModel.nftViewModel)
+                )
 
                 collectibleGroupView
 
@@ -67,9 +77,7 @@ struct NFTDropView: View {
     }
 
     private var nftConfirmTitle: String {
-        nftEnabled
-            ? L10n.Scene.WalletUnlock.title
-            : L10n.Plugins.Luckydrop.Buttons.selectNfts
+        viewModel.nftViewModel.actionState.detailText
     }
 
     private var nftConfirmButtonColor: Color {

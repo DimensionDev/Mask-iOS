@@ -69,7 +69,7 @@ class LuckyDropViewController: BaseViewController {
                 let pluginID = PluginStorageRepository.PluginID.redPackage.rawValue
                 self.coordinator.present(scene: .pluginRiskWarning(pluginID: pluginID), transition: .popup)
 
-            case let .createBNFTLuckyDrop(message, collectibles, gasFeeItem):
+            case let .createBNFTLuckyDrop(draft):
                 // TODO: create nft lucky drop
                 break
 

@@ -1001,7 +1001,9 @@
         "minimum-amount": "The minimum amount for each share is %@ %@",
         "send": "Send %@",
         "select-NFTs": "Select NFTs",
-        "select-NFT-collection": "Select NFT collection"
+        "select-NFT-collection": "Select NFT collection",
+        "approve-collection": "Approve Collection",
+        "create-nfg-lucky-drop": "Create NFT Lucky Drop"
       },
       "state": {
         "pending": "Pending...",
