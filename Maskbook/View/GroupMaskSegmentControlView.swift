@@ -26,12 +26,8 @@ public struct MaskSegmentedControlView<SelectionValue, Content>: View
     }
 
     public var body: some View {
-        ZStack {
-            Spacer()
-            HStack {
-                content
-            }
-            Spacer()
+        HStack {
+            content
         }
         .frame(width: .infinity, height: 48, alignment: .center)
         .padding(.horizontal, 20)

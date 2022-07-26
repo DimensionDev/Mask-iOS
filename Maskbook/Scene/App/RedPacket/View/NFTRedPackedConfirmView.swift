@@ -20,6 +20,7 @@ struct NFTRedPacketConfirmView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 24)
+            
             Text(L10n.Plugins.Luckydrop.Confirm.tips)
                 .font(FontStyles.rh6.font)
                 .foregroundColor(Asset.Colors.Public.info.asColor())
@@ -81,11 +82,11 @@ struct NFTRedPacketConfirmView: View {
                 HStack(spacing: 4) {
                     KFImage(tokenURL)
                         .cancelOnDisappear(true)
-                        .loadImmediately()
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 24)
                         .cornerRadius(12)
+                    
                     Text(value)
                         .truncationMode(.middle)
                         .font(FontStyles.bh6.font)

@@ -98,11 +98,10 @@ struct RedPacketConfirmView: View {
                 HStack(spacing: 4) {
                     KFImage(tokenURL)
                         .cancelOnDisappear(true)
-                        .loadImmediately()
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 24)
-                        .cornerRadius(12)
+                        .cornerRadius(12)                 
                     Text(value)
                         .truncationMode(.middle)
                         .font(FontStyles.bh6.font)

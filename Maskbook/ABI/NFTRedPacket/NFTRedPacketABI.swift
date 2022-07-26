@@ -10,7 +10,7 @@ import UIKit
 import web3swift
 import BigInt
 
-class NFTRedPacketABI: ABIContract {
+struct NFTRedPacketABI: ABIContract {
     @InjectedProvider(\.userDefaultSettings)
     var userSetting
     
