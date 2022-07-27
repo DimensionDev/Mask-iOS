@@ -61,7 +61,7 @@ class LuckyDropViewController: BaseViewController {
                 // TODO: chose Collectible Group
                 break
 
-            case let .addCollectibles(groupName, selectedIdentifiers):
+            case let .addCollectibles(groupName, contractAddress, selectedIdentifiers):
                 // TODO: Select Collectibles
                 break
 
@@ -75,7 +75,7 @@ class LuckyDropViewController: BaseViewController {
 
             case .unlockWallet: self.unlockWallet()
 
-            case .unlockDGC:
+            case let .unlockDGC(contractAddress, gasItem):
                 // TODO: unlock nft permission
                 break
             }

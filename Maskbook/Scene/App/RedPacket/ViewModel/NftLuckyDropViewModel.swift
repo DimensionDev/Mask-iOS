@@ -6,6 +6,7 @@ import Foundation
 
 struct CollectiableGroup: Hashable {
     let name: String
+    let address: String
     let groupIconURL: URL?
     let totalCount: Int
 }
@@ -71,12 +72,12 @@ final class NftLuckyDropViewModel: ObservableObject {
     // MARK: Internal
 
     enum Event {
-        case addCollectibles(groupName: String, selectedIdentifiers: Set<String>)
+        case addCollectibles(groupName: String, contractAddress: String, selectedIdentifiers: Set<String>)
         case confirmRisk
         case createBNFTLuckyDrop(NftRecpacketDraft)
         case selectCollectibleGroup
         case unlockWallet
-        case unlockDGC
+        case unlockDGC(contractAddress: String, gasItem: GasFeeCellItem)
     }
 
     enum CollectibleItem: Identifiable {
@@ -224,11 +225,15 @@ extension NftLuckyDropViewModel {
     }
 
     func addMoreCollectibles() {
+        guard let groupInfo = collectibleGroup else {
+            return
+        }
         let name = groupName ?? ""
         let identifiers = collectibles.map { $0.id ?? "" }
         action(
             .addCollectibles(
                 groupName: name,
+                contractAddress: groupInfo.address,
                 selectedIdentifiers: Set(identifiers)
             )
         )
@@ -255,11 +260,17 @@ extension NftLuckyDropViewModel {
         items = collectibleItems
     }
 
-    func selectCollectible(groupName: String, groupIconURL: URL?, totalCount: Int) {
+    func selectCollectible(
+        groupName: String,
+        contractAddress: String,
+        groupIconURL: URL?,
+        totalCount: Int
+    ) {
         let keepValues = collectibleGroup?.name == groupName
 
         collectibleGroup = .init(
             name: groupName,
+            address: contractAddress,
             groupIconURL: groupIconURL,
             totalCount: totalCount
         )
@@ -276,7 +287,17 @@ extension NftLuckyDropViewModel {
         switch actionState {
         case .unlockWallet: action(.unlockWallet)
         case .confirmRisk: action(.confirmRisk)
-        case .unlockDGC: action(.unlockDGC)
+        case .unlockDGC:
+            guard let contractAddress = collectibleGroup?.address, let item = gasFeeItem else {
+                return
+            }
+
+            action(
+                .unlockDGC(
+                    contractAddress: contractAddress,
+                    gasItem: item
+                )
+            )
 
         case .createNFTDrop:
             guard let item = gasFeeItem, let token = token else {
