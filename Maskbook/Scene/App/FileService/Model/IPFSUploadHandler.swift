@@ -25,7 +25,7 @@ extension IPFSUploadHandler: FileServiceUploadHandler {
             Task.detached {
                 // get transcation id
                 var tx = FileServiceTranscation.progress(0)
-                tx.id = self.encodeArrayBuffer(item.content.hashData())
+                tx.id = self.identifier(for: item)
                 tx.state = option.encrypted ? .encrypting : .preparing
                 continuation.yield(tx)
 
@@ -78,7 +78,9 @@ extension IPFSUploadHandler: FileServiceUploadHandler {
     ) async throws -> String {
         try await withCheckedThrowingContinuation { continuation in
             do {
-                guard let client = client else { return continuation.resume(throwing: FileServiceError.ipfsUploadError) }
+                guard let client = client else {
+                    return continuation.resume(throwing: FileServiceError.ipfsUploadError)
+                }
                 try client.add(data) { nodes in
                     guard let cid = nodes.first?.hash?.value.base58EncodedString else {
                         return continuation.resume(throwing: FileServiceError.ipfsUploadError)

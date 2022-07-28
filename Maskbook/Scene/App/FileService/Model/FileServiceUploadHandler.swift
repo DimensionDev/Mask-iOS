@@ -10,7 +10,7 @@ protocol FileServiceUploadHandler {
 
     func makePayload(data: Data, type: String, delegate: URLSessionTaskDelegate?) async throws -> String
     func buildLink(for payloadTxID: String, option: FileServiceUploadOption) -> String
-    func replace(_ html: String,  with text: String) throws -> Data
+    func replace(_ html: String, with text: String) throws -> Data
     func landingPage(
         item: FileServiceUploadingItem,
         option: FileServiceUploadOption,
@@ -18,10 +18,15 @@ protocol FileServiceUploadHandler {
     ) async throws -> String
 }
 
-// MARK: common function
 extension FileServiceUploadHandler {
     func encodeArrayBuffer(_ data: Data) -> String {
         data.base64EncodedString()
+    }
+
+    func identifier(for item: FileServiceUploadingItem) -> String {
+        let fileContentID = encodeArrayBuffer(item.content.hashData())
+        let fileIdentifier = item.fileIdentifier
+        return "\(fileContentID)-\(fileIdentifier)"
     }
 
     func makeFileKeySigned(fileKey: String?) throws -> [String] {
@@ -71,7 +76,6 @@ extension FileServiceUploadHandler {
     }
 }
 
-// MARK: default impl
 extension FileServiceUploadHandler {
     func makePayload(
         data: Data,
@@ -81,7 +85,7 @@ extension FileServiceUploadHandler {
 
     func buildLink(for payloadTxID: String, option: FileServiceUploadOption) -> String { "" }
 
-    func replace(_ html: String,  with text: String) throws -> Data  {
+    func replace(_ html: String, with text: String) throws -> Data {
         guard let replacedData = html
             .replacingOccurrences(of: "__METADATA__", with: text)
             .data(using: .utf8)
