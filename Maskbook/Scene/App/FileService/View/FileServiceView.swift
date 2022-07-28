@@ -405,8 +405,6 @@ struct FileServiceView: View {
                     }
                     .font(.mh7)
                     .lineLimit(1)
-                } else {
-                    Spacer()
                 }
             }
 

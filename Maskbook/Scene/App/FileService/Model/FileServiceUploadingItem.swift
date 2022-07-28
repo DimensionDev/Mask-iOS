@@ -2,8 +2,6 @@ import Foundation
 import SwiftUI
 
 struct FileServiceUploadingItem: Hashable {
-    // MARK: Lifecycle
-
     init(
         fileName: String,
         provider: String,
@@ -14,8 +12,7 @@ struct FileServiceUploadingItem: Hashable {
         uploadedBytes: Double,
         uploadDate: Date? = nil,
         option: FileServiceUploadOption?,
-        tx: FileServiceTranscation? = nil
-    ) {
+        tx: FileServiceTranscation? = nil) {
         self.fileName = fileName
         self.provider = provider
         self.state = state
@@ -28,16 +25,12 @@ struct FileServiceUploadingItem: Hashable {
         self.tx = tx
     }
 
-    // MARK: Internal
-
     enum State: Int64, Hashable {
         case encrypting = 0
         case preparing
         case uploading
         case uploaded
         case failed
-
-        // MARK: Internal
 
         var detailText: String {
             switch self {
@@ -99,11 +92,6 @@ struct FileServiceUploadingItem: Hashable {
         fileName.components(separatedBy: ".").last
     }
 
-    func fileNameAndOptionEquals(to another: FileServiceUploadingItem) -> Bool {
-        fileName == another.fileName &&
-        option == another.option
-    }
-
     var id: String {
         switch state {
         case .uploaded: return tx?.id ?? ""
@@ -115,11 +103,23 @@ struct FileServiceUploadingItem: Hashable {
             return "\(txid)\(fileName)\(option)"
         }
     }
+
+    var fileIdentifier: String {
+        let fileName = fileName
+        let option = option?.asString() ?? ""
+        return "\(fileName),\(option)"
+    }
+
+    func fileNameAndOptionEquals(to another: FileServiceUploadingItem) -> Bool {
+        fileName == another.fileName &&
+            option == another.option
+    }
 }
 
 extension FileServiceUploadingItem: CustomStringConvertible {
     var description: String {
         var final = ""
+        final.write("\n")
         final.write("name: \(fileName) \n")
         final.write("id: \(tx?.id ?? "--") \n")
         final.write("key: \(tx?.key ?? "--") \n")
@@ -132,30 +132,34 @@ extension FileServiceUploadingItem: CustomStringConvertible {
 
 extension Double {
     var fileSizeText: String {
-        if isZero { return "0.0 kb" }
+        if isZero {
+            return "0.0 kb"
+        }
 
-        let kb = self / 1_024
-        guard kb >= 1_024 else {
+        let kb = self / 1024
+        guard kb >= 1024 else {
             return String(format: "%.1f KB", kb)
         }
 
-        let mb = kb / 1_024
-        guard mb >= 1_024 else {
+        let mb = kb / 1024
+        guard mb >= 1024 else {
             return String(format: "%.1f MB", mb)
         }
 
-        let gb = mb / 1_024
+        let gb = mb / 1024
         return String(format: "%.1f GB", gb)
     }
 }
 
 extension FileServiceUploadingItem {
     func toFileServiceDownloadItem() -> FileServiceDownloadItem {
-        .init(fileName: fileName,
-              provider: provider,
-              fileType: fileType,
-              totalBytes: totalBytes,
-              uploadDate: uploadDate,
-              tx: tx)
+        .init(
+            fileName: fileName,
+            provider: provider,
+            fileType: fileType,
+            totalBytes: totalBytes,
+            uploadDate: uploadDate,
+            tx: tx
+        )
     }
 }

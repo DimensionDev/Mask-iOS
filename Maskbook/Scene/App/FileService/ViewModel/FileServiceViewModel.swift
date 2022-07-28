@@ -5,8 +5,6 @@ import SwiftUI
 import CoreDataStack
 
 final class FileServiceViewModel: ObservableObject {
-    // MARK: Lifecycle
-
     init() {
         @InjectedProvider(\.fileServiceUploadManager)
         var manager;
@@ -17,8 +15,7 @@ final class FileServiceViewModel: ObservableObject {
             .CombineLatest(
                 settings.$fileServicePolicyAccepted,
                 settings.$onBoardFeatures
-                    .map { $0.contains("\(OnboardFeature.fileService.rawValue)") }
-            )
+                    .map { $0.contains("\(OnboardFeature.fileService.rawValue)") })
             .receive(on: DispatchQueue.main)
             .map { !($0 && $1) }
             .assign(to: \.showOnboard, on: self)
@@ -42,8 +39,6 @@ final class FileServiceViewModel: ObservableObject {
 
         uploadManager.isVisible = false
     }
-
-    // MARK: Internal
 
     enum Action {
         case choseFile
@@ -86,8 +81,6 @@ final class FileServiceViewModel: ObservableObject {
         self.actionSignal = actionSignal
     }
 
-    // MARK: Private
-
     private var cancelableStorage: Set<AnyCancellable> = []
 
     @InjectedProvider(\.userDefaultSettings)
@@ -106,8 +99,6 @@ final class FileServiceViewModel: ObservableObject {
             .filter(\.uploadDate.isSome)
     }
 }
-
-// MARK: Uploading
 
 extension FileServiceViewModel {
     func remove(_ item: FileServiceUploadingItem) {
