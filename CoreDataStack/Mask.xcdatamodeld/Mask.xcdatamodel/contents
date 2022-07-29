@@ -252,8 +252,8 @@
                 <constraint value="id"/>
                 <constraint value="landingTxID"/>
                 <constraint value="payloadTxID"/>
+                <constraint value="encrypted"/>
                 <constraint value="meson"/>
-                <constraint value="encryted"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
