@@ -23,12 +23,6 @@ extension FileServiceUploadHandler {
         data.base64EncodedString()
     }
 
-    func identifier(for item: FileServiceUploadingItem) -> String {
-        let fileContentID = encodeArrayBuffer(item.content.hashData())
-        let fileIdentifier = item.fileIdentifier
-        return "\(fileContentID)-\(fileIdentifier)"
-    }
-
     func makeFileKeySigned(fileKey: String?) throws -> [String] {
         guard let encodedKey = fileKey?.data(using: .utf8) else {
             throw "key not exist"
