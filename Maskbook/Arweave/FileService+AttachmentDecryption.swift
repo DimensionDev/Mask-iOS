@@ -13,15 +13,24 @@ import SwiftMsgPack
 enum FileService {}
 
 extension FileService {
-    static func getAttachment(payloadID: String, provider: String, key: String?) async throws -> Data {
-        let attachment = try await requestAttachment(payloadID: payloadID, provider: provider)
+    static func getAttachment(payloadID: String,
+                              provider: String,
+                              key: String?,
+                              useCDN: Bool) async throws -> Data
+    {
+        let attachment = try await requestAttachment(payloadID: payloadID,
+                                                     provider: provider,
+                                                     useCDN: useCDN)
         return try await decryptAttachment(attachment, key: key)
     }
 
-    static func requestAttachment(payloadID: String, provider: String) async throws -> Data {
+    static func requestAttachment(payloadID: String,
+                                  provider: String,
+                                  useCDN: Bool) async throws -> Data
+    {
         typealias Service = FileServiceUploadOption.Service
         let urlPrefixs: [Service: String] = [
-            .arweave: Arweave.baseURL.absoluteString,
+            .arweave: useCDN ? Arweave.mesonCDNURL.absoluteString : Arweave.baseURL.absoluteString,
             .ipfs: "https://infura-ipfs.io/ipfs"
         ]
 

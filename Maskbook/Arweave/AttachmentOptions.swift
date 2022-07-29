@@ -11,15 +11,13 @@ import Foundation
 import SwiftMsgPack
 
 struct AttachmentOptions {
-    init(encrypted: Bool, type: String?, block: Data, name: String) {
+    init(encrypted: Bool, block: Data, name: String) {
         self.key = encrypted ? AttachmentOptions.generateRandomKey() : nil
-        self.type = type
         self.block = block
         self.name = name
     }
 
     let key: String?
-    let type: String?
     let block: Data
     let name: String
 
@@ -30,7 +28,7 @@ struct AttachmentOptions {
 
 extension AttachmentOptions {
     var mime: String {
-        self.type ?? Self.defaultType
+        name.mimeType()
     }
 }
 

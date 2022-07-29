@@ -16,6 +16,7 @@ struct BackupDataGenerator {
         await backupJSON["profiles"] = JSON(ProfileRepository.getProfilesForBackup())
         await backupJSON["posts"] = JSON(PostRepository.getPostsForBackup())
         await backupJSON["relations"] = JSON(RelationRepository.getRelationBackup())
+        await backupJSON["plugin"] = JSON(FileServiceRepository.getFileserviceBackup())
         
         return backupJSON
     }

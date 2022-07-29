@@ -1,14 +1,59 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[3758],{
 
-/***/ 39813:
+/***/ 3845:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "F": () => (/* binding */ parseBytes32String),
+/* harmony export */   "s": () => (/* binding */ formatBytes32String)
+/* harmony export */ });
+/* harmony import */ var _ethersproject_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9114);
+/* harmony import */ var _ethersproject_bytes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(99376);
+/* harmony import */ var _utf8__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(75276);
+
+
+
+
+function formatBytes32String(text) {
+    // Get the bytes
+    const bytes = (0,_utf8__WEBPACK_IMPORTED_MODULE_0__/* .toUtf8Bytes */ .Y0)(text);
+    // Check we have room for null-termination
+    if (bytes.length > 31) {
+        throw new Error("bytes32 string must be less than 32 bytes");
+    }
+    // Zero-pad (implicitly null-terminates)
+    return (0,_ethersproject_bytes__WEBPACK_IMPORTED_MODULE_1__/* .hexlify */ .Dv)((0,_ethersproject_bytes__WEBPACK_IMPORTED_MODULE_1__/* .concat */ .zo)([bytes, _ethersproject_constants__WEBPACK_IMPORTED_MODULE_2__/* .HashZero */ .R]).slice(0, 32));
+}
+function parseBytes32String(bytes) {
+    const data = (0,_ethersproject_bytes__WEBPACK_IMPORTED_MODULE_1__/* .arrayify */ .lE)(bytes);
+    // Must be 32 bytes with a null-termination
+    if (data.length !== 32) {
+        throw new Error("invalid bytes32 - not 32 bytes long");
+    }
+    if (data[31] !== 0) {
+        throw new Error("invalid bytes32 string - no null terminator");
+    }
+    // Find the null termination
+    let length = 31;
+    while (data[length - 1] === 0) {
+        length--;
+    }
+    // Determine the string value
+    return (0,_utf8__WEBPACK_IMPORTED_MODULE_0__/* .toUtf8String */ .ZN)(data.slice(0, length));
+}
+//# sourceMappingURL=bytes32.js.map
+
+/***/ }),
+
+/***/ 37604:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Ll": () => (/* binding */ nameprep)
 /* harmony export */ });
 /* unused harmony exports _nameprepTableA1, _nameprepTableB2, _nameprepTableC */
-/* harmony import */ var _utf8__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(42716);
+/* harmony import */ var _utf8__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(75276);
 
 
 function bytes2(data) {
@@ -200,68 +245,25 @@ function nameprep(value) {
 
 /***/ }),
 
-/***/ 9006:
+/***/ 52166:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  "UnicodeNormalizationForm": () => (/* reexport */ utf8/* UnicodeNormalizationForm */.Uj),
-  "Utf8ErrorFuncs": () => (/* reexport */ utf8/* Utf8ErrorFuncs */.te),
-  "Utf8ErrorReason": () => (/* reexport */ utf8/* Utf8ErrorReason */.Uw),
-  "_toEscapedUtf8String": () => (/* reexport */ utf8/* _toEscapedUtf8String */.U$),
-  "formatBytes32String": () => (/* reexport */ formatBytes32String),
-  "nameprep": () => (/* reexport */ idna/* nameprep */.Ll),
-  "parseBytes32String": () => (/* reexport */ parseBytes32String),
-  "toUtf8Bytes": () => (/* reexport */ utf8/* toUtf8Bytes */.Y0),
-  "toUtf8CodePoints": () => (/* reexport */ utf8/* toUtf8CodePoints */.XL),
-  "toUtf8String": () => (/* reexport */ utf8/* toUtf8String */.ZN)
-});
-
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+constants@5.4.0/node_modules/@ethersproject/constants/lib.esm/hashes.js
-var hashes = __webpack_require__(76360);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+bytes@5.5.0/node_modules/@ethersproject/bytes/lib.esm/index.js + 1 modules
-var lib_esm = __webpack_require__(61115);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+strings@5.4.0/node_modules/@ethersproject/strings/lib.esm/utf8.js + 1 modules
-var utf8 = __webpack_require__(42716);
-;// CONCATENATED MODULE: ../../node_modules/.pnpm/@ethersproject+strings@5.4.0/node_modules/@ethersproject/strings/lib.esm/bytes32.js
-
-
-
-
-function formatBytes32String(text) {
-    // Get the bytes
-    const bytes = (0,utf8/* toUtf8Bytes */.Y0)(text);
-    // Check we have room for null-termination
-    if (bytes.length > 31) {
-        throw new Error("bytes32 string must be less than 32 bytes");
-    }
-    // Zero-pad (implicitly null-terminates)
-    return (0,lib_esm/* hexlify */.Dv)((0,lib_esm/* concat */.zo)([bytes, hashes/* HashZero */.R]).slice(0, 32));
-}
-function parseBytes32String(bytes) {
-    const data = (0,lib_esm/* arrayify */.lE)(bytes);
-    // Must be 32 bytes with a null-termination
-    if (data.length !== 32) {
-        throw new Error("invalid bytes32 - not 32 bytes long");
-    }
-    if (data[31] !== 0) {
-        throw new Error("invalid bytes32 string - no null terminator");
-    }
-    // Find the null termination
-    let length = 31;
-    while (data[length - 1] === 0) {
-        length--;
-    }
-    // Determine the string value
-    return (0,utf8/* toUtf8String */.ZN)(data.slice(0, length));
-}
-//# sourceMappingURL=bytes32.js.map
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+strings@5.4.0/node_modules/@ethersproject/strings/lib.esm/idna.js
-var idna = __webpack_require__(39813);
-;// CONCATENATED MODULE: ../../node_modules/.pnpm/@ethersproject+strings@5.4.0/node_modules/@ethersproject/strings/lib.esm/index.js
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "UnicodeNormalizationForm": () => (/* reexport safe */ _utf8__WEBPACK_IMPORTED_MODULE_0__.Uj),
+/* harmony export */   "Utf8ErrorFuncs": () => (/* reexport safe */ _utf8__WEBPACK_IMPORTED_MODULE_0__.te),
+/* harmony export */   "Utf8ErrorReason": () => (/* reexport safe */ _utf8__WEBPACK_IMPORTED_MODULE_0__.Uw),
+/* harmony export */   "_toEscapedUtf8String": () => (/* reexport safe */ _utf8__WEBPACK_IMPORTED_MODULE_0__.U$),
+/* harmony export */   "formatBytes32String": () => (/* reexport safe */ _bytes32__WEBPACK_IMPORTED_MODULE_1__.s),
+/* harmony export */   "nameprep": () => (/* reexport safe */ _idna__WEBPACK_IMPORTED_MODULE_2__.Ll),
+/* harmony export */   "parseBytes32String": () => (/* reexport safe */ _bytes32__WEBPACK_IMPORTED_MODULE_1__.F),
+/* harmony export */   "toUtf8Bytes": () => (/* reexport safe */ _utf8__WEBPACK_IMPORTED_MODULE_0__.Y0),
+/* harmony export */   "toUtf8CodePoints": () => (/* reexport safe */ _utf8__WEBPACK_IMPORTED_MODULE_0__.XL),
+/* harmony export */   "toUtf8String": () => (/* reexport safe */ _utf8__WEBPACK_IMPORTED_MODULE_0__.ZN)
+/* harmony export */ });
+/* harmony import */ var _bytes32__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3845);
+/* harmony import */ var _idna__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(37604);
+/* harmony import */ var _utf8__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(75276);
 
 
 
@@ -271,7 +273,7 @@ var idna = __webpack_require__(39813);
 
 /***/ }),
 
-/***/ 42716:
+/***/ 75276:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 
@@ -286,277 +288,6 @@ __webpack_require__.d(__webpack_exports__, {
   "XL": () => (/* binding */ toUtf8CodePoints),
   "ZN": () => (/* binding */ toUtf8String)
 });
-
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+bytes@5.5.0/node_modules/@ethersproject/bytes/lib.esm/index.js + 1 modules
-var lib_esm = __webpack_require__(61115);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+logger@5.5.0/node_modules/@ethersproject/logger/lib.esm/index.js + 1 modules
-var logger_lib_esm = __webpack_require__(89930);
-;// CONCATENATED MODULE: ../../node_modules/.pnpm/@ethersproject+strings@5.4.0/node_modules/@ethersproject/strings/lib.esm/_version.js
-const version = "strings/5.4.0";
-//# sourceMappingURL=_version.js.map
-;// CONCATENATED MODULE: ../../node_modules/.pnpm/@ethersproject+strings@5.4.0/node_modules/@ethersproject/strings/lib.esm/utf8.js
-
-
-
-
-const logger = new logger_lib_esm/* Logger */.Yd(version);
-///////////////////////////////
-var UnicodeNormalizationForm;
-(function (UnicodeNormalizationForm) {
-    UnicodeNormalizationForm["current"] = "";
-    UnicodeNormalizationForm["NFC"] = "NFC";
-    UnicodeNormalizationForm["NFD"] = "NFD";
-    UnicodeNormalizationForm["NFKC"] = "NFKC";
-    UnicodeNormalizationForm["NFKD"] = "NFKD";
-})(UnicodeNormalizationForm || (UnicodeNormalizationForm = {}));
-;
-var Utf8ErrorReason;
-(function (Utf8ErrorReason) {
-    // A continuation byte was present where there was nothing to continue
-    // - offset = the index the codepoint began in
-    Utf8ErrorReason["UNEXPECTED_CONTINUE"] = "unexpected continuation byte";
-    // An invalid (non-continuation) byte to start a UTF-8 codepoint was found
-    // - offset = the index the codepoint began in
-    Utf8ErrorReason["BAD_PREFIX"] = "bad codepoint prefix";
-    // The string is too short to process the expected codepoint
-    // - offset = the index the codepoint began in
-    Utf8ErrorReason["OVERRUN"] = "string overrun";
-    // A missing continuation byte was expected but not found
-    // - offset = the index the continuation byte was expected at
-    Utf8ErrorReason["MISSING_CONTINUE"] = "missing continuation byte";
-    // The computed code point is outside the range for UTF-8
-    // - offset       = start of this codepoint
-    // - badCodepoint = the computed codepoint; outside the UTF-8 range
-    Utf8ErrorReason["OUT_OF_RANGE"] = "out of UTF-8 range";
-    // UTF-8 strings may not contain UTF-16 surrogate pairs
-    // - offset       = start of this codepoint
-    // - badCodepoint = the computed codepoint; inside the UTF-16 surrogate range
-    Utf8ErrorReason["UTF16_SURROGATE"] = "UTF-16 surrogate";
-    // The string is an overlong reperesentation
-    // - offset       = start of this codepoint
-    // - badCodepoint = the computed codepoint; already bounds checked
-    Utf8ErrorReason["OVERLONG"] = "overlong representation";
-})(Utf8ErrorReason || (Utf8ErrorReason = {}));
-;
-function errorFunc(reason, offset, bytes, output, badCodepoint) {
-    return logger.throwArgumentError(`invalid codepoint at offset ${offset}; ${reason}`, "bytes", bytes);
-}
-function ignoreFunc(reason, offset, bytes, output, badCodepoint) {
-    // If there is an invalid prefix (including stray continuation), skip any additional continuation bytes
-    if (reason === Utf8ErrorReason.BAD_PREFIX || reason === Utf8ErrorReason.UNEXPECTED_CONTINUE) {
-        let i = 0;
-        for (let o = offset + 1; o < bytes.length; o++) {
-            if (bytes[o] >> 6 !== 0x02) {
-                break;
-            }
-            i++;
-        }
-        return i;
-    }
-    // This byte runs us past the end of the string, so just jump to the end
-    // (but the first byte was read already read and therefore skipped)
-    if (reason === Utf8ErrorReason.OVERRUN) {
-        return bytes.length - offset - 1;
-    }
-    // Nothing to skip
-    return 0;
-}
-function replaceFunc(reason, offset, bytes, output, badCodepoint) {
-    // Overlong representations are otherwise "valid" code points; just non-deistingtished
-    if (reason === Utf8ErrorReason.OVERLONG) {
-        output.push(badCodepoint);
-        return 0;
-    }
-    // Put the replacement character into the output
-    output.push(0xfffd);
-    // Otherwise, process as if ignoring errors
-    return ignoreFunc(reason, offset, bytes, output, badCodepoint);
-}
-// Common error handing strategies
-const Utf8ErrorFuncs = Object.freeze({
-    error: errorFunc,
-    ignore: ignoreFunc,
-    replace: replaceFunc
-});
-// http://stackoverflow.com/questions/13356493/decode-utf-8-with-javascript#13691499
-function getUtf8CodePoints(bytes, onError) {
-    if (onError == null) {
-        onError = Utf8ErrorFuncs.error;
-    }
-    bytes = (0,lib_esm/* arrayify */.lE)(bytes);
-    const result = [];
-    let i = 0;
-    // Invalid bytes are ignored
-    while (i < bytes.length) {
-        const c = bytes[i++];
-        // 0xxx xxxx
-        if (c >> 7 === 0) {
-            result.push(c);
-            continue;
-        }
-        // Multibyte; how many bytes left for this character?
-        let extraLength = null;
-        let overlongMask = null;
-        // 110x xxxx 10xx xxxx
-        if ((c & 0xe0) === 0xc0) {
-            extraLength = 1;
-            overlongMask = 0x7f;
-            // 1110 xxxx 10xx xxxx 10xx xxxx
-        }
-        else if ((c & 0xf0) === 0xe0) {
-            extraLength = 2;
-            overlongMask = 0x7ff;
-            // 1111 0xxx 10xx xxxx 10xx xxxx 10xx xxxx
-        }
-        else if ((c & 0xf8) === 0xf0) {
-            extraLength = 3;
-            overlongMask = 0xffff;
-        }
-        else {
-            if ((c & 0xc0) === 0x80) {
-                i += onError(Utf8ErrorReason.UNEXPECTED_CONTINUE, i - 1, bytes, result);
-            }
-            else {
-                i += onError(Utf8ErrorReason.BAD_PREFIX, i - 1, bytes, result);
-            }
-            continue;
-        }
-        // Do we have enough bytes in our data?
-        if (i - 1 + extraLength >= bytes.length) {
-            i += onError(Utf8ErrorReason.OVERRUN, i - 1, bytes, result);
-            continue;
-        }
-        // Remove the length prefix from the char
-        let res = c & ((1 << (8 - extraLength - 1)) - 1);
-        for (let j = 0; j < extraLength; j++) {
-            let nextChar = bytes[i];
-            // Invalid continuation byte
-            if ((nextChar & 0xc0) != 0x80) {
-                i += onError(Utf8ErrorReason.MISSING_CONTINUE, i, bytes, result);
-                res = null;
-                break;
-            }
-            ;
-            res = (res << 6) | (nextChar & 0x3f);
-            i++;
-        }
-        // See above loop for invalid contimuation byte
-        if (res === null) {
-            continue;
-        }
-        // Maximum code point
-        if (res > 0x10ffff) {
-            i += onError(Utf8ErrorReason.OUT_OF_RANGE, i - 1 - extraLength, bytes, result, res);
-            continue;
-        }
-        // Reserved for UTF-16 surrogate halves
-        if (res >= 0xd800 && res <= 0xdfff) {
-            i += onError(Utf8ErrorReason.UTF16_SURROGATE, i - 1 - extraLength, bytes, result, res);
-            continue;
-        }
-        // Check for overlong sequences (more bytes than needed)
-        if (res <= overlongMask) {
-            i += onError(Utf8ErrorReason.OVERLONG, i - 1 - extraLength, bytes, result, res);
-            continue;
-        }
-        result.push(res);
-    }
-    return result;
-}
-// http://stackoverflow.com/questions/18729405/how-to-convert-utf8-string-to-byte-array
-function toUtf8Bytes(str, form = UnicodeNormalizationForm.current) {
-    if (form != UnicodeNormalizationForm.current) {
-        logger.checkNormalize();
-        str = str.normalize(form);
-    }
-    let result = [];
-    for (let i = 0; i < str.length; i++) {
-        const c = str.charCodeAt(i);
-        if (c < 0x80) {
-            result.push(c);
-        }
-        else if (c < 0x800) {
-            result.push((c >> 6) | 0xc0);
-            result.push((c & 0x3f) | 0x80);
-        }
-        else if ((c & 0xfc00) == 0xd800) {
-            i++;
-            const c2 = str.charCodeAt(i);
-            if (i >= str.length || (c2 & 0xfc00) !== 0xdc00) {
-                throw new Error("invalid utf-8 string");
-            }
-            // Surrogate Pair
-            const pair = 0x10000 + ((c & 0x03ff) << 10) + (c2 & 0x03ff);
-            result.push((pair >> 18) | 0xf0);
-            result.push(((pair >> 12) & 0x3f) | 0x80);
-            result.push(((pair >> 6) & 0x3f) | 0x80);
-            result.push((pair & 0x3f) | 0x80);
-        }
-        else {
-            result.push((c >> 12) | 0xe0);
-            result.push(((c >> 6) & 0x3f) | 0x80);
-            result.push((c & 0x3f) | 0x80);
-        }
-    }
-    return (0,lib_esm/* arrayify */.lE)(result);
-}
-;
-function escapeChar(value) {
-    const hex = ("0000" + value.toString(16));
-    return "\\u" + hex.substring(hex.length - 4);
-}
-function _toEscapedUtf8String(bytes, onError) {
-    return '"' + getUtf8CodePoints(bytes, onError).map((codePoint) => {
-        if (codePoint < 256) {
-            switch (codePoint) {
-                case 8: return "\\b";
-                case 9: return "\\t";
-                case 10: return "\\n";
-                case 13: return "\\r";
-                case 34: return "\\\"";
-                case 92: return "\\\\";
-            }
-            if (codePoint >= 32 && codePoint < 127) {
-                return String.fromCharCode(codePoint);
-            }
-        }
-        if (codePoint <= 0xffff) {
-            return escapeChar(codePoint);
-        }
-        codePoint -= 0x10000;
-        return escapeChar(((codePoint >> 10) & 0x3ff) + 0xd800) + escapeChar((codePoint & 0x3ff) + 0xdc00);
-    }).join("") + '"';
-}
-function _toUtf8String(codePoints) {
-    return codePoints.map((codePoint) => {
-        if (codePoint <= 0xffff) {
-            return String.fromCharCode(codePoint);
-        }
-        codePoint -= 0x10000;
-        return String.fromCharCode((((codePoint >> 10) & 0x3ff) + 0xd800), ((codePoint & 0x3ff) + 0xdc00));
-    }).join("");
-}
-function toUtf8String(bytes, onError) {
-    return _toUtf8String(getUtf8CodePoints(bytes, onError));
-}
-function toUtf8CodePoints(str, form = UnicodeNormalizationForm.current) {
-    return getUtf8CodePoints(toUtf8Bytes(str, form));
-}
-//# sourceMappingURL=utf8.js.map
-
-/***/ }),
-
-/***/ 75276:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  "Y0": () => (/* binding */ toUtf8Bytes),
-  "ZN": () => (/* binding */ toUtf8String)
-});
-
-// UNUSED EXPORTS: UnicodeNormalizationForm, Utf8ErrorFuncs, Utf8ErrorReason, _toEscapedUtf8String, _toUtf8String, toUtf8CodePoints
 
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+bytes@5.6.1/node_modules/@ethersproject/bytes/lib.esm/index.js + 1 modules
 var lib_esm = __webpack_require__(99376);

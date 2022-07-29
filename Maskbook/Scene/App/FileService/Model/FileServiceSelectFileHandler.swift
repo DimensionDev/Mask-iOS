@@ -11,18 +11,13 @@ import PhotosUI
 import UIKit
 
 protocol FileServiceSelectFileDelegate: AnyObject {
-    func didGetFile(fileItem: FileServiceSelectedFileItem,
-                    option: FileServiceUploadOption)
+    func didGetFile(fileItem: FileServiceSelectedFileItem, option: FileServiceUploadOption)
 }
 
 final class FileServiceSelectFileHandler: NSObject {
-    // MARK: Lifecycle
-
     init(delegate: FileServiceSelectFileDelegate) {
         self.delegate = delegate
     }
-
-    // MARK: Internal
 
     typealias Item = FileServiceSelectFileSourceViewModel.LocalFileSourceItem
 
@@ -84,11 +79,12 @@ final class FileServiceSelectFileHandler: NSObject {
                 showFileTooLargeAlert()
                 return
             }
-            let fileItem = FileServiceSelectedFileItem(data: pngData,
-                                                       fileName: fileName ?? randomNameForImage(),
-                                                       fileType: .image,
-                                                       mime: "image/jpeg",
-                                                       path: nil)
+            let fileItem = FileServiceSelectedFileItem(
+                data: pngData,
+                fileName: fileName ?? randomNameForImage(),
+                fileType: .image,
+                path: nil
+            )
             pushFileServiceConfirmView(item: fileItem)
         } else {
             assertionFailure("can't get jpeg data from image")
@@ -96,37 +92,47 @@ final class FileServiceSelectFileHandler: NSObject {
     }
 
     func showFileTooLargeAlert() {
-        let alertController = AlertController(title: L10n.Common.Alert.FileServiceFileTooLarge.title,
-                                              message: L10n.Common.Alert.FileServiceFileTooLarge.description,
-                                              confirmButtonText: L10n.Common.Controls.ok,
-                                              imageType: .error)
-        coordinator.present(scene: .alertController(alertController: alertController),
-                            transition: .alertController(completion: nil))
+        let alertController = AlertController(
+            title: L10n.Common.Alert.FileServiceFileTooLarge.title,
+            message: L10n.Common.Alert.FileServiceFileTooLarge.description,
+            confirmButtonText: L10n.Common.Controls.ok,
+            imageType: .error
+        )
+        coordinator.present(
+            scene: .alertController(alertController: alertController),
+            transition: .alertController(completion: nil)
+        )
     }
 
     func didGetFile(url: URL) {
         let data = try? Data(contentsOf: url)
-        guard let data = data else { return }
+        guard let data = data else {
+            return
+        }
         if Int64(data.count) > fileSizeLimit {
             showFileTooLargeAlert()
             return
         }
 
-        let fileItem = FileServiceSelectedFileItem(data: data,
-                                                   fileName: url.lastPathComponent,
-                                                   fileType: url.containsImage ? .image : .file,
-                                                   mime: url.mimeType(),
-                                                   path: nil)
+        let fileItem = FileServiceSelectedFileItem(
+            data: data,
+            fileName: url.lastPathComponent,
+            fileType: url.containsImage ? .image : .file,
+            path: nil
+        )
         pushFileServiceConfirmView(item: fileItem)
     }
 
     func pushFileServiceConfirmView(item: FileServiceSelectedFileItem) {
         coordinator.present(
             scene: .fileServiceOptions(item: item, optionHandler: { [weak self] option in
-                guard let self = self else { return }
+                guard let self = self else {
+                    return
+                }
                 self.delegate?.didGetFile(fileItem: item, option: option)
             }),
-            transition: .detail())
+            transition: .detail()
+        )
     }
 
     func loadImage(result: PHPickerResult) async -> Result<(name: String?, image: UIImage), Error> {
@@ -146,8 +152,6 @@ final class FileServiceSelectFileHandler: NSObject {
             }
         }
     }
-
-    // MARK: Private
 
     @InjectedProvider(\.mainCoordinator)
     private var coordinator
@@ -188,10 +192,12 @@ extension FileServiceSelectFileHandler: PHPickerViewControllerDelegate {
                         title: error.localizedDescription,
                         message: "",
                         confirmButtonText: L10n.Common.Controls.done,
-                        imageType: .error)
+                        imageType: .error
+                    )
                     self.coordinator.present(
                         scene: .alertController(alertController: alertController),
-                        transition: .alertController(completion: nil))
+                        transition: .alertController(completion: nil)
+                    )
                 })
             }
         }
@@ -201,7 +207,9 @@ extension FileServiceSelectFileHandler: PHPickerViewControllerDelegate {
 extension FileServiceSelectFileHandler: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         picker.dismiss(animated: true) {
-            guard let image = info[.originalImage] as? UIImage else { return }
+            guard let image = info[.originalImage] as? UIImage else {
+                return
+            }
             self.didGetImage(image: image, fileName: nil)
         }
     }
@@ -212,7 +220,7 @@ extension FileServiceSelectFileHandler: UIImagePickerControllerDelegate & UINavi
 }
 
 extension FileServiceSelectFileHandler: UIDocumentPickerDelegate {
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+    func documentPicker(_: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
         // Start accessing a security-scoped resource.
         guard url.startAccessingSecurityScopedResource() else {
             // Handle the failure here.
@@ -232,7 +240,9 @@ extension FileServiceSelectFileHandler {
 
     func takePhotoAction() {
         ScannerPermission.authorizeCameraWith { [weak self] isAuthorize in
-            guard let self = self else { return }
+            guard let self = self else {
+                return
+            }
             if isAuthorize {
                 self.coordinator.topViewController?.present(self.cameraController, animated: true)
             } else {
@@ -249,10 +259,56 @@ extension FileServiceSelectFileHandler {
 
 extension FileServiceSelectFileHandler {
     func allDocumentTypes() -> [String] {
-        ["public.data", "public.content", "public.audiovisual-content", "public.movie", "public.audiovisual-content", "public.video", "public.audio", "public.text", "public.data", "public.zip-archive", "com.pkware.zip-archive", "public.composite-content", "public.text"]
+        [
+            "public.data",
+            "public.content",
+            "public.audiovisual-content",
+            "public.movie",
+            "public.audiovisual-content",
+            "public.video",
+            "public.audio",
+            "public.text",
+            "public.data",
+            "public.zip-archive",
+            "com.pkware.zip-archive",
+            "public.composite-content",
+            "public.text",
+        ]
     }
 
     func allOpeningContentTypes() -> [UTType] {
-        [.text, .data, .content, .item, .zip, .jpeg, .pdf, .png, .image, .movie, .video, .mp3, .audio, .quickTimeMovie, .mpeg, .mpeg2Video, .mpeg2TransportStream, .mpeg4Movie, .mpeg4Audio, .appleProtectedMPEG4Audio, .appleProtectedMPEG4Video, .avi, .aiff, .wav, .midi, .livePhoto, .heic, .heif, .tiff, .gif, .icns]
+        [
+            .text,
+            .data,
+            .content,
+            .item,
+            .zip,
+            .jpeg,
+            .pdf,
+            .png,
+            .image,
+            .movie,
+            .video,
+            .mp3,
+            .audio,
+            .quickTimeMovie,
+            .mpeg,
+            .mpeg2Video,
+            .mpeg2TransportStream,
+            .mpeg4Movie,
+            .mpeg4Audio,
+            .appleProtectedMPEG4Audio,
+            .appleProtectedMPEG4Video,
+            .avi,
+            .aiff,
+            .wav,
+            .midi,
+            .livePhoto,
+            .heic,
+            .heif,
+            .tiff,
+            .gif,
+            .icns,
+        ]
     }
 }

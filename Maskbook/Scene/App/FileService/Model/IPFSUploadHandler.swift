@@ -33,7 +33,6 @@ extension IPFSUploadHandler: FileServiceUploadHandler {
                 // and get payloadTxID
                 let attachment = AttachmentOptions(
                     encrypted: option.encrypted,
-                    type: item.mime,
                     block: item.content,
                     name: item.fileName
                 )
@@ -79,7 +78,9 @@ extension IPFSUploadHandler: FileServiceUploadHandler {
     ) async throws -> String {
         try await withCheckedThrowingContinuation { continuation in
             do {
-                guard let client = client else { return continuation.resume(throwing: FileServiceError.ipfsUploadError) }
+                guard let client = client else {
+                    return continuation.resume(throwing: FileServiceError.ipfsUploadError)
+                }
                 try client.add(data) { nodes in
                     guard let cid = nodes.first?.hash?.value.base58EncodedString else {
                         return continuation.resume(throwing: FileServiceError.ipfsUploadError)

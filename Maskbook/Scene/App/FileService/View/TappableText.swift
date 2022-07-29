@@ -27,7 +27,10 @@ struct TappableText: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: UITextView, context: Context) {
-        Task(priority: .high) { @MainActor in
+        // trying to fix an issue on iOS Mini 14.2
+        // that will not dispaly attributedString properly
+        DispatchQueue.main.async {
+            uiView.attributedText = context.coordinator.attributedString
             self.preferredContentSize(uiView.contentSize)
         }
     }
@@ -46,7 +49,6 @@ struct TappableText: UIViewRepresentable {
         textView.setContentHuggingPriority(.defaultLow, for: .vertical)
 
         textView.delegate = context.coordinator
-        textView.attributedText = context.coordinator.attributedString
 
         return textView
     }

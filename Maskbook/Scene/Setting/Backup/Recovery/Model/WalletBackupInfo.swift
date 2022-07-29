@@ -84,17 +84,17 @@ extension WalletBackupInfo {
     struct Parameter: Codable {
         let path: String
         // must have value, to make the situation that mnenomic exist and private key is nil reasonable
-        @BackupValueCompatiableFrom<Never, Bool>
+        @BooleanConverted
         var withPassword: Bool?
 
         init(path: String, withPassword: Bool = false) {
             self.path = path
-            _withPassword = BackupValueCompatiableFrom<Never, Bool>(withPassword)
+            _withPassword = BooleanConverted(withPassword)
         }
 
         init(from json: [String: Any]) {
             path =  json[CodingKeys.path.stringValue] as? String ?? ""
-            _withPassword = BackupValueCompatiableFrom<Never, Bool>(json[CodingKeys.withPassword.stringValue] as? Bool ?? false)
+            _withPassword = BooleanConverted(json[CodingKeys.withPassword.stringValue] as? Bool ?? false)
         }
     }
 
@@ -107,7 +107,7 @@ extension WalletBackupInfo {
             self.keyOps = keyOps
             self.kty = kty
             self.d = d
-            _ext = BackupValueCompatiableFrom<Never, Bool>(true)
+            _ext = BooleanConverted(true)
         }
 
         let crv: String
@@ -116,7 +116,7 @@ extension WalletBackupInfo {
         let kty: String
         let d: String?
 
-        @BackupValueCompatiableFrom<Never, Bool>
+        @BooleanConverted(wrapper: .int)
         private(set) var ext: Bool?
 
         enum CodingKeys: String, CodingKey {
@@ -133,7 +133,7 @@ extension WalletBackupInfo {
             kty = json[CodingKeys.kty.stringValue] as? String ?? ""
             crv = json[CodingKeys.crv.stringValue] as? String ?? ""
             keyOps = json[CodingKeys.keyOps.stringValue] as? [String] ?? []
-            _ext = BackupValueCompatiableFrom<Never, Bool>(json[CodingKeys.ext.stringValue] as? Bool ?? true)
+            _ext = BooleanConverted(json[CodingKeys.ext.stringValue] as? Bool ?? true)
         }
     }
 

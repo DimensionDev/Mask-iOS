@@ -1,7 +1,7 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[2222],{
 
-/***/ 83321:
+/***/ 32980:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 
@@ -20,8 +20,8 @@ __webpack_require__.d(__webpack_exports__, {
   "w": () => (/* binding */ withEmotionCache)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.0.0/node_modules/react/index.js
-var react = __webpack_require__(86248);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.1.0/node_modules/react/index.js
+var react = __webpack_require__(58757);
 var react_namespaceObject = /*#__PURE__*/__webpack_require__.t(react, 2);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@emotion+cache@11.7.1/node_modules/@emotion/cache/dist/emotion-cache.browser.esm.js + 1 modules
 var emotion_cache_browser_esm = __webpack_require__(20227);
@@ -32,7 +32,7 @@ var weak_memoize_browser_esm = __webpack_require__(19655);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/hoist-non-react-statics@3.3.2/node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js
 var hoist_non_react_statics_cjs = __webpack_require__(10063);
 var hoist_non_react_statics_cjs_default = /*#__PURE__*/__webpack_require__.n(hoist_non_react_statics_cjs);
-;// CONCATENATED MODULE: ../../node_modules/.pnpm/@emotion+react@11.9.0_@types+react@18.0.2+react@18.0.0/node_modules/@emotion/react/_isolated-hnrs/dist/emotion-react-_isolated-hnrs.browser.esm.js
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@emotion+react@11.9.0_7cpxmzzodpxnolj5zcc5cr63ji/node_modules/@emotion/react/_isolated-hnrs/dist/emotion-react-_isolated-hnrs.browser.esm.js
 
 
 // this file isolates this package that is not tree-shakeable
@@ -49,7 +49,7 @@ var hoistNonReactStatics = (function (targetComponent, sourceComponent) {
 var emotion_utils_browser_esm = __webpack_require__(45477);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@emotion+serialize@1.0.3/node_modules/@emotion/serialize/dist/emotion-serialize.browser.esm.js + 2 modules
 var emotion_serialize_browser_esm = __webpack_require__(37961);
-;// CONCATENATED MODULE: ../../node_modules/.pnpm/@emotion+react@11.9.0_@types+react@18.0.2+react@18.0.0/node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js
+;// CONCATENATED MODULE: ../../node_modules/.pnpm/@emotion+react@11.9.0_7cpxmzzodpxnolj5zcc5cr63ji/node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js
 
 
 
@@ -274,7 +274,7 @@ if (false) {}
 
 /***/ }),
 
-/***/ 8465:
+/***/ 2078:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 var react__WEBPACK_IMPORTED_MODULE_0___namespace_cache;
@@ -294,9 +294,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "withEmotionCache": () => (/* reexport safe */ _emotion_element_cbed451f_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.w),
 /* harmony export */   "withTheme": () => (/* reexport safe */ _emotion_element_cbed451f_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.d)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(86248);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(58757);
 /* harmony import */ var _emotion_cache__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(20227);
-/* harmony import */ var _emotion_element_cbed451f_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(83321);
+/* harmony import */ var _emotion_element_cbed451f_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(32980);
 /* harmony import */ var hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(10063);
 /* harmony import */ var hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _emotion_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(45477);

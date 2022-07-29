@@ -1,2 +1,2 @@
-;(() => {
+;(() => {try{const abort=new AbortController,signal=abort.signal,event=new EventTarget;event.addEventListener("patch",(()=>{const old=EventTarget.prototype.addEventListener;EventTarget.prototype.addEventListener=function(type,listener,options){old.call(this,type,listener),"object"==typeof options&&options&&options.signal&&options.signal.addEventListener("abort",(()=>this.removeEventListener(type,listener)),{once:!0})}}),{once:!0,signal:signal}),abort.abort(),event.dispatchEvent(new Event("patch"))}catch(e){}
 })(); null;

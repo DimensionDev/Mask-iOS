@@ -7,7 +7,7 @@
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.deleteNameRegistry = exports.transferNameOwnership = exports.updateNameRegistryData = exports.createNameRegistry = exports.HASH_PREFIX = exports.NAME_PROGRAM_ID = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const instructions_1 = __webpack_require__(91716);
 const state_1 = __webpack_require__(87500);
 const utils_1 = __webpack_require__(46590);
@@ -154,7 +154,7 @@ __exportStar(__webpack_require__(21802), exports);
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.deleteInstruction = exports.transferInstruction = exports.updateInstruction = exports.createInstruction = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const utils_1 = __webpack_require__(46590);
 function createInstruction(nameProgramId, systemProgramId, nameKey, nameOwnerKey, payerKey, hashed_name, lamports, space, nameClassKey, nameParent, nameParentOwner) {
     const buffers = [
@@ -322,7 +322,7 @@ exports.deleteInstruction = deleteInstruction;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.NameRegistryState = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const borsh_1 = __webpack_require__(12050);
 class NameRegistryState {
     constructor(obj) {
@@ -367,7 +367,7 @@ NameRegistryState.schema = new Map([
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.createReverseTwitterRegistry = exports.ReverseTwitterRegistryState = exports.getTwitterRegistryData = exports.getTwitterHandleandRegistryKeyViaFilters = exports.getHandleAndRegistryKey = exports.getTwitterRegistry = exports.getTwitterRegistryKey = exports.deleteTwitterRegistry = exports.changeVerifiedPubkey = exports.changeTwitterRegistryData = exports.createVerifiedTwitterRegistry = exports.TWITTER_ROOT_PARENT_REGISTRY_KEY = exports.TWITTER_VERIFICATION_AUTHORITY = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const bindings_1 = __webpack_require__(80899);
 const instructions_1 = __webpack_require__(91716);
 const state_1 = __webpack_require__(87500);
@@ -590,7 +590,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getFilteredProgramAccounts = exports.getNameOwner = exports.getNameAccountKey = exports.getHashedName = exports.signAndSendTransactionInstructions = exports.Numberu64 = exports.Numberu32 = void 0;
 const assert_1 = __importDefault(__webpack_require__(57579));
 const crypto_1 = __webpack_require__(69678);
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const bn_js_1 = __importDefault(__webpack_require__(35579));
 const bindings_1 = __webpack_require__(80899);
 const state_1 = __webpack_require__(87500);

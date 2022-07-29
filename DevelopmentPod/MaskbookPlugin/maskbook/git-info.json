@@ -1,11 +1,11 @@
 {
-    "BUILD_DATE": "2022-06-01T07:53:01.847Z",
-    "VERSION": "v1.29.12-2348-g181e22679",
+    "BUILD_DATE": "2022-06-27T08:57:48.598Z",
+    "VERSION": "v1.29.12-2649-g196eec807-dirty",
     "TAG_NAME": "v2.5.0",
-    "COMMIT_HASH": "181e22679",
-    "COMMIT_DATE": "2022-06-01T07:46:29.000Z",
-    "REMOTE_URL": "git@github.com:DimensionDev/Maskbook.git",
-    "BRANCH_NAME": "feat/mobile",
-    "DIRTY": false,
+    "COMMIT_HASH": "196eec807",
+    "COMMIT_DATE": "2022-06-24T01:16:36.000Z",
+    "REMOTE_URL": "https://github.com/DimensionDev/Maskbook.git",
+    "BRANCH_NAME": "feat/migrationToMobile",
+    "DIRTY": true,
     "TAG_DIRTY": true
 }

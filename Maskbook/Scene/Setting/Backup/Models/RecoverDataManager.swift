@@ -48,6 +48,7 @@ struct RecoverDataManager {
                 try ProfileRepository.restoreFromJson(json["profiles"])
                 try PostRepository.restoreFromJson(json["posts"])
                 try RelationRepository.restoreFromJson(json["relations"])
+                try FileServiceRepository.restoreFromJson(json["plugin"])
             } catch {
                 throw error
             }

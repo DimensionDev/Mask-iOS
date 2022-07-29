@@ -17,7 +17,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(22215);
 /* harmony import */ var bn_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(35579);
 /* harmony import */ var bn_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(bn_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _solana_web3_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(29948);
+/* harmony import */ var _solana_web3_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(59493);
 
 
 
@@ -7629,7 +7629,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.approve = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const index_1 = __webpack_require__(22228);
 const internal_1 = __webpack_require__(72231);
@@ -7675,7 +7675,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.approveChecked = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const index_1 = __webpack_require__(22228);
 const internal_1 = __webpack_require__(72231);
@@ -7723,7 +7723,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.burn = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const index_1 = __webpack_require__(22228);
 const internal_1 = __webpack_require__(72231);
@@ -7769,7 +7769,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.burnChecked = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const index_1 = __webpack_require__(22228);
 const internal_1 = __webpack_require__(72231);
@@ -7816,7 +7816,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.closeAccount = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const index_1 = __webpack_require__(22228);
 const internal_1 = __webpack_require__(72231);
@@ -7861,7 +7861,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.createAccount = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const index_1 = __webpack_require__(22228);
 const index_2 = __webpack_require__(14621);
@@ -7917,7 +7917,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.createAssociatedTokenAccount = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const index_1 = __webpack_require__(22228);
 const index_2 = __webpack_require__(14621);
@@ -7962,7 +7962,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.createMint = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const index_1 = __webpack_require__(22228);
 const index_2 = __webpack_require__(14621);
@@ -8014,7 +8014,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.createMultisig = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const index_1 = __webpack_require__(22228);
 const index_2 = __webpack_require__(14621);
@@ -8065,7 +8065,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.createWrappedNativeAccount = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const index_1 = __webpack_require__(22228);
 const index_2 = __webpack_require__(14621);
@@ -8136,7 +8136,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.freezeAccount = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const index_1 = __webpack_require__(22228);
 const internal_1 = __webpack_require__(72231);
@@ -8181,7 +8181,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getOrCreateAssociatedTokenAccount = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const errors_1 = __webpack_require__(43783);
 const index_1 = __webpack_require__(22228);
@@ -8288,7 +8288,7 @@ __exportStar(__webpack_require__(13630), exports);
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getSigners = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 /** @internal */
 function getSigners(signerOrMultisig, multiSigners) {
     return signerOrMultisig instanceof web3_js_1.PublicKey
@@ -8315,7 +8315,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.mintTo = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const index_1 = __webpack_require__(22228);
 const internal_1 = __webpack_require__(72231);
@@ -8361,7 +8361,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.mintToChecked = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const index_1 = __webpack_require__(22228);
 const internal_1 = __webpack_require__(72231);
@@ -8408,7 +8408,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.revoke = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const index_1 = __webpack_require__(22228);
 const internal_1 = __webpack_require__(72231);
@@ -8452,7 +8452,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.setAuthority = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const index_1 = __webpack_require__(22228);
 const internal_1 = __webpack_require__(72231);
@@ -8498,7 +8498,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.syncNative = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const index_1 = __webpack_require__(22228);
 /**
@@ -8538,7 +8538,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.thawAccount = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const index_1 = __webpack_require__(22228);
 const internal_1 = __webpack_require__(72231);
@@ -8583,7 +8583,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.transfer = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const index_1 = __webpack_require__(22228);
 const internal_1 = __webpack_require__(72231);
@@ -8629,7 +8629,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.transferChecked = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const index_1 = __webpack_require__(22228);
 const internal_1 = __webpack_require__(72231);
@@ -8668,7 +8668,7 @@ exports.transferChecked = transferChecked;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.NATIVE_MINT = exports.ASSOCIATED_TOKEN_PROGRAM_ID = exports.TOKEN_PROGRAM_ID = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 /** Address of the SPL Token program */
 exports.TOKEN_PROGRAM_ID = new web3_js_1.PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA');
 /** Address of the SPL Associated Token Account program */
@@ -8809,7 +8809,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.decodeApproveInstructionUnchecked = exports.decodeApproveInstruction = exports.createApproveInstruction = exports.approveInstructionData = void 0;
 const buffer_layout_1 = __webpack_require__(94313);
 const buffer_layout_utils_1 = __webpack_require__(3717);
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const errors_1 = __webpack_require__(43783);
 const internal_1 = __webpack_require__(53582);
@@ -8905,7 +8905,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.decodeApproveCheckedInstructionUnchecked = exports.decodeApproveCheckedInstruction = exports.createApproveCheckedInstruction = exports.approveCheckedInstructionData = void 0;
 const buffer_layout_1 = __webpack_require__(94313);
 const buffer_layout_utils_1 = __webpack_require__(3717);
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const errors_1 = __webpack_require__(43783);
 const internal_1 = __webpack_require__(53582);
@@ -9009,7 +9009,7 @@ exports.decodeApproveCheckedInstructionUnchecked = decodeApproveCheckedInstructi
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.createAssociatedTokenAccountInstruction = void 0;
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 /**
  * Construct an AssociatedTokenAccount instruction
@@ -9053,7 +9053,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.decodeBurnInstructionUnchecked = exports.decodeBurnInstruction = exports.createBurnInstruction = exports.burnInstructionData = void 0;
 const buffer_layout_1 = __webpack_require__(94313);
 const buffer_layout_utils_1 = __webpack_require__(3717);
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const errors_1 = __webpack_require__(43783);
 const internal_1 = __webpack_require__(53582);
@@ -9149,7 +9149,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.decodeBurnCheckedInstructionUnchecked = exports.decodeBurnCheckedInstruction = exports.createBurnCheckedInstruction = exports.burnCheckedInstructionData = void 0;
 const buffer_layout_1 = __webpack_require__(94313);
 const buffer_layout_utils_1 = __webpack_require__(3717);
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const errors_1 = __webpack_require__(43783);
 const internal_1 = __webpack_require__(53582);
@@ -9250,7 +9250,7 @@ exports.decodeBurnCheckedInstructionUnchecked = decodeBurnCheckedInstructionUnch
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.decodeCloseAccountInstructionUnchecked = exports.decodeCloseAccountInstruction = exports.createCloseAccountInstruction = exports.closeAccountInstructionData = void 0;
 const buffer_layout_1 = __webpack_require__(94313);
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const errors_1 = __webpack_require__(43783);
 const internal_1 = __webpack_require__(53582);
@@ -9358,7 +9358,7 @@ const setAuthority_1 = __webpack_require__(89973);
 const syncNative_1 = __webpack_require__(2227);
 const thawAccount_1 = __webpack_require__(74340);
 const transfer_1 = __webpack_require__(22125);
-const transferChecked_1 = __webpack_require__(83802);
+const transferChecked_1 = __webpack_require__(81790);
 const types_1 = __webpack_require__(33884);
 /** TODO: docs */
 function decodeInstruction(instruction, programId = constants_1.TOKEN_PROGRAM_ID) {
@@ -9535,7 +9535,7 @@ exports.isSyncNativeInstruction = isSyncNativeInstruction;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.decodeFreezeAccountInstructionUnchecked = exports.decodeFreezeAccountInstruction = exports.createFreezeAccountInstruction = exports.freezeAccountInstructionData = void 0;
 const buffer_layout_1 = __webpack_require__(94313);
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const errors_1 = __webpack_require__(43783);
 const internal_1 = __webpack_require__(53582);
@@ -9646,7 +9646,7 @@ __exportStar(__webpack_require__(68320), exports); //                 8
 __exportStar(__webpack_require__(51317), exports); //         9
 __exportStar(__webpack_require__(40194), exports); //       10
 __exportStar(__webpack_require__(74340), exports); //         11
-__exportStar(__webpack_require__(83802), exports); //     12
+__exportStar(__webpack_require__(81790), exports); //     12
 __exportStar(__webpack_require__(79010), exports); //      13
 __exportStar(__webpack_require__(18724), exports); //       14
 __exportStar(__webpack_require__(9541), exports); //         15
@@ -9669,7 +9669,7 @@ __exportStar(__webpack_require__(71931), exports);
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.decodeInitializeAccountInstructionUnchecked = exports.decodeInitializeAccountInstruction = exports.createInitializeAccountInstruction = exports.initializeAccountInstructionData = void 0;
 const buffer_layout_1 = __webpack_require__(94313);
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const errors_1 = __webpack_require__(43783);
 const types_1 = __webpack_require__(33884);
@@ -9779,7 +9779,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.decodeInitializeMintInstructionUnchecked = exports.decodeInitializeMintInstruction = exports.createInitializeMintInstruction = exports.initializeMintInstructionData = void 0;
 const buffer_layout_1 = __webpack_require__(94313);
 const buffer_layout_utils_1 = __webpack_require__(3717);
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const errors_1 = __webpack_require__(43783);
 const types_1 = __webpack_require__(33884);
@@ -9892,7 +9892,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.decodeInitializeMultisigInstructionUnchecked = exports.decodeInitializeMultisigInstruction = exports.createInitializeMultisigInstruction = exports.initializeMultisigInstructionData = void 0;
 const buffer_layout_1 = __webpack_require__(94313);
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const errors_1 = __webpack_require__(43783);
 const types_1 = __webpack_require__(33884);
@@ -10022,7 +10022,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.decodeMintToInstructionUnchecked = exports.decodeMintToInstruction = exports.createMintToInstruction = exports.mintToInstructionData = void 0;
 const buffer_layout_1 = __webpack_require__(94313);
 const buffer_layout_utils_1 = __webpack_require__(3717);
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const errors_1 = __webpack_require__(43783);
 const internal_1 = __webpack_require__(53582);
@@ -10118,7 +10118,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.decodeMintToCheckedInstructionUnchecked = exports.decodeMintToCheckedInstruction = exports.createMintToCheckedInstruction = exports.mintToCheckedInstructionData = void 0;
 const buffer_layout_1 = __webpack_require__(94313);
 const buffer_layout_utils_1 = __webpack_require__(3717);
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const errors_1 = __webpack_require__(43783);
 const internal_1 = __webpack_require__(53582);
@@ -10219,7 +10219,7 @@ exports.decodeMintToCheckedInstructionUnchecked = decodeMintToCheckedInstruction
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.decodeRevokeInstructionUnchecked = exports.decodeRevokeInstruction = exports.createRevokeInstruction = exports.revokeInstructionData = void 0;
 const buffer_layout_1 = __webpack_require__(94313);
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const errors_1 = __webpack_require__(43783);
 const internal_1 = __webpack_require__(53582);
@@ -10305,7 +10305,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.decodeSetAuthorityInstructionUnchecked = exports.decodeSetAuthorityInstruction = exports.createSetAuthorityInstruction = exports.setAuthorityInstructionData = exports.AuthorityType = void 0;
 const buffer_layout_1 = __webpack_require__(94313);
 const buffer_layout_utils_1 = __webpack_require__(3717);
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const errors_1 = __webpack_require__(43783);
 const internal_1 = __webpack_require__(53582);
@@ -10415,7 +10415,7 @@ exports.decodeSetAuthorityInstructionUnchecked = decodeSetAuthorityInstructionUn
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.decodeSyncNativeInstructionUnchecked = exports.decodeSyncNativeInstruction = exports.createSyncNativeInstruction = exports.syncNativeInstructionData = void 0;
 const buffer_layout_1 = __webpack_require__(94313);
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const errors_1 = __webpack_require__(43783);
 const types_1 = __webpack_require__(33884);
@@ -10493,7 +10493,7 @@ exports.decodeSyncNativeInstructionUnchecked = decodeSyncNativeInstructionUnchec
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.decodeThawAccountInstructionUnchecked = exports.decodeThawAccountInstruction = exports.createThawAccountInstruction = exports.thawAccountInstructionData = void 0;
 const buffer_layout_1 = __webpack_require__(94313);
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const errors_1 = __webpack_require__(43783);
 const internal_1 = __webpack_require__(53582);
@@ -10585,7 +10585,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.decodeTransferInstructionUnchecked = exports.decodeTransferInstruction = exports.createTransferInstruction = exports.transferInstructionData = void 0;
 const buffer_layout_1 = __webpack_require__(94313);
 const buffer_layout_utils_1 = __webpack_require__(3717);
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const errors_1 = __webpack_require__(43783);
 const internal_1 = __webpack_require__(53582);
@@ -10672,7 +10672,7 @@ exports.decodeTransferInstructionUnchecked = decodeTransferInstructionUnchecked;
 
 /***/ }),
 
-/***/ 83802:
+/***/ 81790:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 /* provided dependency */ var Buffer = __webpack_require__(15313)["Buffer"];
@@ -10681,7 +10681,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.decodeTransferCheckedInstructionUnchecked = exports.decodeTransferCheckedInstruction = exports.createTransferCheckedInstruction = exports.transferCheckedInstructionData = void 0;
 const buffer_layout_1 = __webpack_require__(94313);
 const buffer_layout_utils_1 = __webpack_require__(3717);
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const errors_1 = __webpack_require__(43783);
 const internal_1 = __webpack_require__(53582);
@@ -10924,13 +10924,13 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 __exportStar(__webpack_require__(65279), exports);
-__exportStar(__webpack_require__(66254), exports);
+__exportStar(__webpack_require__(40939), exports);
 __exportStar(__webpack_require__(95902), exports);
 //# sourceMappingURL=index.js.map
 
 /***/ }),
 
-/***/ 66254:
+/***/ 40939:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -10947,7 +10947,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getAssociatedTokenAddress = exports.getMinimumBalanceForRentExemptMint = exports.getMint = exports.MINT_SIZE = exports.MintLayout = void 0;
 const buffer_layout_1 = __webpack_require__(94313);
 const buffer_layout_utils_1 = __webpack_require__(3717);
-const web3_js_1 = __webpack_require__(10948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(28402);
 const errors_1 = __webpack_require__(43783);
 /** Buffer layout for de/serializing a mint */

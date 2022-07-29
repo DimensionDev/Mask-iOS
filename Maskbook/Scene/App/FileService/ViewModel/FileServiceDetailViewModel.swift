@@ -17,10 +17,13 @@ class FileServiceDetailViewModel: ObservableObject {
         startDownload()
     }
 
+    var useCDN = true
+
     @Published
     var state: DownloadState = .downloading
 
     func startDownload() {
+        typealias Service = FileServiceUploadOption.Service
         if item.content != nil {
             state = .downloaded
             return
@@ -31,13 +34,27 @@ class FileServiceDetailViewModel: ObservableObject {
         }
         Task { @MainActor in
             do {
-                let data = try await FileService.getAttachment(payloadID: tx.payloadTxID, provider: item.provider, key: tx.key)
+                let data = try await FileService.getAttachment(payloadID: tx.payloadTxID,
+                                                               provider: item.provider,
+                                                               key: tx.key,
+                                                               useCDN: useCDN)
                 item.content = data
-                FileServiceLargeFileStorage.save(data, id: tx.id, fileName: item.fileName)
+                FileServiceLargeFileStorage.save(data,
+                                                 id: tx.id,
+                                                 fileName: item.fileName)
                 state = .downloaded
             } catch let e {
                 log.debug("\(e)")
-                state = .downloadFail
+                if let service = Service(rawValue: item.provider),
+                   service == .arweave,
+                   useCDN == true
+                {
+                    // arweave can try without cdn
+                    useCDN = false
+                    startDownload()
+                } else {
+                    state = .downloadFail
+                }
             }
         }
     }

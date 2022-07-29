@@ -12,7 +12,7 @@ var selection = __webpack_require__(23752);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/d3-dispatch@1.0.6/node_modules/d3-dispatch/src/dispatch.js
 var dispatch = __webpack_require__(9319);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/d3-timer@1.0.10/node_modules/d3-timer/src/timer.js
-var timer = __webpack_require__(84765);
+var timer = __webpack_require__(77533);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/d3-timer@1.0.10/node_modules/d3-timer/src/timeout.js
 var timeout = __webpack_require__(57181);
 ;// CONCATENATED MODULE: ../../node_modules/.pnpm/d3-transition@1.3.2/node_modules/d3-transition/src/transition/schedule.js

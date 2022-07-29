@@ -1,12 +1,12 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[6912],{
 
-/***/ 63124:
+/***/ 57625:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
@@ -19,23 +19,23 @@ Object.defineProperty(exports, "DraggableCore", ({
 }));
 exports["default"] = void 0;
 
-var React = _interopRequireWildcard(__webpack_require__(86248));
+var React = _interopRequireWildcard(__webpack_require__(58757));
 
-var _propTypes = _interopRequireDefault(__webpack_require__(69480));
+var _propTypes = _interopRequireDefault(__webpack_require__(7862));
 
-var _reactDom = _interopRequireDefault(__webpack_require__(93463));
+var _reactDom = _interopRequireDefault(__webpack_require__(26736));
 
 var _clsx2 = _interopRequireDefault(__webpack_require__(25789));
 
-var _domFns = __webpack_require__(8629);
+var _domFns = __webpack_require__(47862);
 
-var _positionFns = __webpack_require__(7082);
+var _positionFns = __webpack_require__(92010);
 
-var _shims = __webpack_require__(86450);
+var _shims = __webpack_require__(96669);
 
-var _DraggableCore = _interopRequireDefault(__webpack_require__(83641));
+var _DraggableCore = _interopRequireDefault(__webpack_require__(10583));
 
-var _log = _interopRequireDefault(__webpack_require__(45251));
+var _log = _interopRequireDefault(__webpack_require__(25638));
 
 var _excluded = ["axis", "bounds", "children", "defaultPosition", "defaultClassName", "defaultClassNameDragging", "defaultClassNameDragged", "position", "positionOffset", "scale"];
 
@@ -51,9 +51,9 @@ function _objectWithoutProperties(source, excluded) { if (source == null) return
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -71,9 +71,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
@@ -464,31 +464,31 @@ _defineProperty(Draggable, "defaultProps", _objectSpread(_objectSpread({}, _Drag
 
 /***/ }),
 
-/***/ 83641:
+/***/ 10583:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports["default"] = void 0;
 
-var React = _interopRequireWildcard(__webpack_require__(86248));
+var React = _interopRequireWildcard(__webpack_require__(58757));
 
-var _propTypes = _interopRequireDefault(__webpack_require__(69480));
+var _propTypes = _interopRequireDefault(__webpack_require__(7862));
 
-var _reactDom = _interopRequireDefault(__webpack_require__(93463));
+var _reactDom = _interopRequireDefault(__webpack_require__(26736));
 
-var _domFns = __webpack_require__(8629);
+var _domFns = __webpack_require__(47862);
 
-var _positionFns = __webpack_require__(7082);
+var _positionFns = __webpack_require__(92010);
 
-var _shims = __webpack_require__(86450);
+var _shims = __webpack_require__(96669);
 
-var _log = _interopRequireDefault(__webpack_require__(45251));
+var _log = _interopRequireDefault(__webpack_require__(25638));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -512,9 +512,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
@@ -742,7 +742,21 @@ var DraggableCore = /*#__PURE__*/function (_React$Component) {
       var position = (0, _positionFns.getControlPosition)(e, _this.state.touchIdentifier, _assertThisInitialized(_this));
       if (position == null) return;
       var x = position.x,
-          y = position.y;
+          y = position.y; // Snap to grid if prop has been provided
+
+      if (Array.isArray(_this.props.grid)) {
+        var deltaX = x - _this.state.lastX || 0;
+        var deltaY = y - _this.state.lastY || 0;
+
+        var _snapToGrid3 = (0, _positionFns.snapToGrid)(_this.props.grid, deltaX, deltaY);
+
+        var _snapToGrid4 = _slicedToArray(_snapToGrid3, 2);
+
+        deltaX = _snapToGrid4[0];
+        deltaY = _snapToGrid4[1];
+        x = _this.state.lastX + deltaX, y = _this.state.lastY + deltaY;
+      }
+
       var coreEvent = (0, _positionFns.createCoreData)(_assertThisInitialized(_this), x, y); // Call event handler
 
       var shouldContinue = _this.props.onStop(e, coreEvent);
@@ -839,9 +853,9 @@ var DraggableCore = /*#__PURE__*/function (_React$Component) {
     value: function findDOMNode()
     /*: ?HTMLElement*/
     {
-      var _this$props$nodeRef$c, _this$props, _this$props$nodeRef;
+      var _this$props, _this$props2, _this$props2$nodeRef;
 
-      return (_this$props$nodeRef$c = (_this$props = this.props) === null || _this$props === void 0 ? void 0 : (_this$props$nodeRef = _this$props.nodeRef) === null || _this$props$nodeRef === void 0 ? void 0 : _this$props$nodeRef.current) !== null && _this$props$nodeRef$c !== void 0 ? _this$props$nodeRef$c : _reactDom.default.findDOMNode(this);
+      return (_this$props = this.props) !== null && _this$props !== void 0 && _this$props.nodeRef ? (_this$props2 = this.props) === null || _this$props2 === void 0 ? void 0 : (_this$props2$nodeRef = _this$props2.nodeRef) === null || _this$props2$nodeRef === void 0 ? void 0 : _this$props2$nodeRef.current : _reactDom.default.findDOMNode(this);
     }
   }, {
     key: "render",
@@ -1025,12 +1039,12 @@ _defineProperty(DraggableCore, "defaultProps", {
 
 /***/ }),
 
-/***/ 52002:
+/***/ 63849:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 
 
-var _require = __webpack_require__(63124),
+var _require = __webpack_require__(57625),
     Draggable = _require.default,
     DraggableCore = _require.DraggableCore; // Previous versions of this lib exported <Draggable> as the root export. As to no-// them, or TypeScript, we export *both* as the root and as 'default'.
 // See https://github.com/mzabriskie/react-draggable/pull/254
@@ -1043,46 +1057,46 @@ module.exports.DraggableCore = DraggableCore;
 
 /***/ }),
 
-/***/ 8629:
+/***/ 47862:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.matchesSelector = matchesSelector;
-exports.matchesSelectorAndParentsTo = matchesSelectorAndParentsTo;
+exports.addClassName = addClassName;
 exports.addEvent = addEvent;
-exports.removeEvent = removeEvent;
-exports.outerHeight = outerHeight;
-exports.outerWidth = outerWidth;
-exports.innerHeight = innerHeight;
-exports.innerWidth = innerWidth;
-exports.offsetXYFromParent = offsetXYFromParent;
+exports.addUserSelectStyles = addUserSelectStyles;
 exports.createCSSTransform = createCSSTransform;
 exports.createSVGTransform = createSVGTransform;
-exports.getTranslation = getTranslation;
 exports.getTouch = getTouch;
 exports.getTouchIdentifier = getTouchIdentifier;
-exports.addUserSelectStyles = addUserSelectStyles;
-exports.removeUserSelectStyles = removeUserSelectStyles;
-exports.addClassName = addClassName;
+exports.getTranslation = getTranslation;
+exports.innerHeight = innerHeight;
+exports.innerWidth = innerWidth;
+exports.matchesSelector = matchesSelector;
+exports.matchesSelectorAndParentsTo = matchesSelectorAndParentsTo;
+exports.offsetXYFromParent = offsetXYFromParent;
+exports.outerHeight = outerHeight;
+exports.outerWidth = outerWidth;
 exports.removeClassName = removeClassName;
+exports.removeEvent = removeEvent;
+exports.removeUserSelectStyles = removeUserSelectStyles;
 
-var _shims = __webpack_require__(86450);
+var _shims = __webpack_require__(96669);
 
-var _getPrefix = _interopRequireWildcard(__webpack_require__(14883));
+var _getPrefix = _interopRequireWildcard(__webpack_require__(22975));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -1404,7 +1418,7 @@ function removeClassName(el
 
 /***/ }),
 
-/***/ 14883:
+/***/ 22975:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -1412,10 +1426,10 @@ function removeClassName(el
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.getPrefix = getPrefix;
 exports.browserPrefixToKey = browserPrefixToKey;
 exports.browserPrefixToStyle = browserPrefixToStyle;
 exports["default"] = void 0;
+exports.getPrefix = getPrefix;
 var prefixes = ['Moz', 'Webkit', 'O', 'ms'];
 
 function getPrefix()
@@ -1495,7 +1509,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 45251:
+/***/ 25638:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -1514,7 +1528,7 @@ function log() {
 
 /***/ }),
 
-/***/ 7082:
+/***/ 92010:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -1522,17 +1536,17 @@ function log() {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.getBoundPosition = getBoundPosition;
-exports.snapToGrid = snapToGrid;
 exports.canDragX = canDragX;
 exports.canDragY = canDragY;
-exports.getControlPosition = getControlPosition;
 exports.createCoreData = createCoreData;
 exports.createDraggableData = createDraggableData;
+exports.getBoundPosition = getBoundPosition;
+exports.getControlPosition = getControlPosition;
+exports.snapToGrid = snapToGrid;
 
-var _shims = __webpack_require__(86450);
+var _shims = __webpack_require__(96669);
 
-var _domFns = __webpack_require__(8629);
+var _domFns = __webpack_require__(47862);
 
 function getBoundPosition(draggable
 /*: Draggable*/
@@ -1728,7 +1742,7 @@ function findDOMNode(draggable
 
 /***/ }),
 
-/***/ 86450:
+/***/ 96669:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -1736,11 +1750,11 @@ function findDOMNode(draggable
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
+exports.dontSetMe = dontSetMe;
 exports.findInArray = findInArray;
+exports.int = int;
 exports.isFunction = isFunction;
 exports.isNum = isNum;
-exports.int = int;
-exports.dontSetMe = dontSetMe;
 
 // @credits https://gist.github.com/rogozhnikoff/a43cfed27c41e4e68cdc
 function findInArray(array

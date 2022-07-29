@@ -1,7 +1,7 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[2598],{
 
-/***/ 7631:
+/***/ 72261:
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -14,7 +14,7 @@
 /* harmony export */   "t8": () => (/* binding */ set)
 /* harmony export */ });
 /* unused harmony exports useController, useFieldArray, useFormState, useWatch */
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(86248);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(58757);
 
 
 var isCheckBoxInput = (element) => element.type === 'checkbox';
@@ -35,9 +35,9 @@ var getEventValue = (event) => isObject(event) && event.target
         : event.target.value
     : event;
 
-var getNodeParentName = (name) => name.substring(0, name.search(/.\d/)) || name;
+var getNodeParentName = (name) => name.substring(0, name.search(/\.\d+(\.|$)/)) || name;
 
-var isNameInFieldArray = (names, name) => [...names].some((current) => getNodeParentName(name) === current);
+var isNameInFieldArray = (names, name) => names.has(getNodeParentName(name));
 
 var compact = (value) => Array.isArray(value) ? value.filter(Boolean) : [];
 
@@ -433,7 +433,20 @@ function useController(props) {
             }, [name, control._fields]),
         },
         formState,
-        fieldState: control.getFieldState(name, formState),
+        fieldState: Object.defineProperties({}, {
+            invalid: {
+                get: () => !!get(formState.errors, name),
+            },
+            isDirty: {
+                get: () => !!get(formState.dirtyFields, name),
+            },
+            isTouched: {
+                get: () => !!get(formState.touchedFields, name),
+            },
+            error: {
+                get: () => get(formState.errors, name),
+            },
+        }),
     };
 }
 
@@ -571,14 +584,16 @@ function cloneObject(data) {
     else if (data instanceof Set) {
         copy = new Set(data);
     }
+    else if (globalThis.Blob && data instanceof Blob) {
+        copy = data;
+    }
+    else if (globalThis.FileList && data instanceof FileList) {
+        copy = data;
+    }
     else if (isArray || isObject(data)) {
         copy = isArray ? [] : {};
         for (const key in data) {
-            if (isFunction(data[key])) {
-                copy = data;
-                break;
-            }
-            copy[key] = cloneObject(data[key]);
+            copy[key] = isFunction(data[key]) ? data[key] : cloneObject(data[key]);
         }
     }
     else {
@@ -628,6 +643,45 @@ var removeArrayAt = (data, index) => isUndefined(index)
 var swapArrayAt = (data, indexA, indexB) => {
     data[indexA] = [data[indexB], (data[indexB] = data[indexA])][0];
 };
+
+function baseGet(object, updatePath) {
+    const length = updatePath.slice(0, -1).length;
+    let index = 0;
+    while (index < length) {
+        object = isUndefined(object) ? index++ : object[updatePath[index++]];
+    }
+    return object;
+}
+function unset(object, path) {
+    const updatePath = isKey(path) ? [path] : stringToPath(path);
+    const childObject = updatePath.length == 1 ? object : baseGet(object, updatePath);
+    const key = updatePath[updatePath.length - 1];
+    let previousObjRef;
+    if (childObject) {
+        delete childObject[key];
+    }
+    for (let k = 0; k < updatePath.slice(0, -1).length; k++) {
+        let index = -1;
+        let objectRef;
+        const currentPaths = updatePath.slice(0, -(k + 1));
+        const currentPathsLength = currentPaths.length - 1;
+        if (k > 0) {
+            previousObjRef = object;
+        }
+        while (++index < currentPaths.length) {
+            const item = currentPaths[index];
+            objectRef = objectRef ? objectRef[item] : object[item];
+            if (currentPathsLength === index &&
+                ((isObject(objectRef) && isEmptyObject(objectRef)) ||
+                    (Array.isArray(objectRef) &&
+                        !objectRef.filter((data) => !isUndefined(data)).length))) {
+                previousObjRef ? delete previousObjRef[item] : delete object[item];
+            }
+            previousObjRef = objectRef;
+        }
+    }
+    return object;
+}
 
 var updateAt = (fieldValues, index, value) => {
     fieldValues[index] = value;
@@ -786,8 +840,11 @@ function useFieldArray(props) {
         if (_actioned.current) {
             control._executeSchema([name]).then((result) => {
                 const error = get(result.errors, name);
-                if (error && error.type && !get(control._formState.errors, name)) {
-                    set(control._formState.errors, name, error);
+                const existingError = get(control._formState.errors, name);
+                if (existingError ? !error && existingError.type : error && error.type) {
+                    error
+                        ? set(control._formState.errors, name, error)
+                        : unset(control._formState.errors, name);
                     control._subjects.state.next({
                         errors: control._formState.errors,
                     });
@@ -912,45 +969,6 @@ var isWeb = typeof window !== 'undefined' &&
     typeof document !== 'undefined';
 
 var live = (ref) => isHTMLElement(ref) && ref.isConnected;
-
-function baseGet(object, updatePath) {
-    const length = updatePath.slice(0, -1).length;
-    let index = 0;
-    while (index < length) {
-        object = isUndefined(object) ? index++ : object[updatePath[index++]];
-    }
-    return object;
-}
-function unset(object, path) {
-    const updatePath = isKey(path) ? [path] : stringToPath(path);
-    const childObject = updatePath.length == 1 ? object : baseGet(object, updatePath);
-    const key = updatePath[updatePath.length - 1];
-    let previousObjRef;
-    if (childObject) {
-        delete childObject[key];
-    }
-    for (let k = 0; k < updatePath.slice(0, -1).length; k++) {
-        let index = -1;
-        let objectRef;
-        const currentPaths = updatePath.slice(0, -(k + 1));
-        const currentPathsLength = currentPaths.length - 1;
-        if (k > 0) {
-            previousObjRef = object;
-        }
-        while (++index < currentPaths.length) {
-            const item = currentPaths[index];
-            objectRef = objectRef ? objectRef[item] : object[item];
-            if (currentPathsLength === index &&
-                ((isObject(objectRef) && isEmptyObject(objectRef)) ||
-                    (Array.isArray(objectRef) &&
-                        !objectRef.filter((data) => !isUndefined(data)).length))) {
-                previousObjRef ? delete previousObjRef[item] : delete object[item];
-            }
-            previousObjRef = objectRef;
-        }
-    }
-    return object;
-}
 
 function markFieldsDirty(data, fields = {}) {
     const isParentNodeArray = Array.isArray(data);
@@ -1899,7 +1917,13 @@ function createFormControl(props = {}) {
                             ...field._f,
                             ...(radioOrCheckbox
                                 ? {
-                                    refs: [...refs.filter(live), fieldRef],
+                                    refs: [
+                                        ...refs.filter(live),
+                                        fieldRef,
+                                        ...(!!Array.isArray(get(_defaultValues, name))
+                                            ? [{}]
+                                            : []),
+                                    ],
                                     ref: { type: fieldRef.type, name },
                                 }
                                 : { ref: fieldRef }),
@@ -1938,8 +1962,7 @@ function createFormControl(props = {}) {
             else {
                 await executeBuildInValidation(_fields);
             }
-            if (isEmptyObject(_formState.errors) &&
-                Object.keys(_formState.errors).every((name) => get(fieldValues, name))) {
+            if (isEmptyObject(_formState.errors)) {
                 _subjects.state.next({
                     errors: {},
                     isSubmitting: true,
@@ -2004,28 +2027,37 @@ function createFormControl(props = {}) {
             _defaultValues = updatedValues;
         }
         if (!keepStateOptions.keepValues) {
-            if (isWeb && isUndefined(formValues)) {
-                for (const name of _names.mount) {
-                    const field = get(_fields, name);
-                    if (field && field._f) {
-                        const fieldReference = Array.isArray(field._f.refs)
-                            ? field._f.refs[0]
-                            : field._f.ref;
-                        try {
-                            isHTMLElement(fieldReference) &&
-                                fieldReference.closest('form').reset();
-                            break;
+            if (keepStateOptions.keepDirtyValues) {
+                for (const fieldName of _names.mount) {
+                    get(_formState.dirtyFields, fieldName)
+                        ? set(values, fieldName, get(_formValues, fieldName))
+                        : setValue(fieldName, get(values, fieldName));
+                }
+            }
+            else {
+                if (isWeb && isUndefined(formValues)) {
+                    for (const name of _names.mount) {
+                        const field = get(_fields, name);
+                        if (field && field._f) {
+                            const fieldReference = Array.isArray(field._f.refs)
+                                ? field._f.refs[0]
+                                : field._f.ref;
+                            try {
+                                isHTMLElement(fieldReference) &&
+                                    fieldReference.closest('form').reset();
+                                break;
+                            }
+                            catch (_a) { }
                         }
-                        catch (_a) { }
                     }
                 }
+                _fields = {};
             }
             _formValues = props.shouldUnregister
                 ? keepStateOptions.keepDefaultValues
                     ? cloneObject(_defaultValues)
                     : {}
                 : cloneUpdatedValues;
-            _fields = {};
             _subjects.array.next({
                 values,
             });
@@ -2048,22 +2080,16 @@ function createFormControl(props = {}) {
             submitCount: keepStateOptions.keepSubmitCount
                 ? _formState.submitCount
                 : 0,
-            isDirty: keepStateOptions.keepDirty
+            isDirty: keepStateOptions.keepDirty || keepStateOptions.keepDirtyValues
                 ? _formState.isDirty
-                : keepStateOptions.keepDefaultValues
-                    ? !deepEqual(formValues, _defaultValues)
-                    : false,
-            isSubmitted: keepStateOptions.keepIsSubmitted
-                ? _formState.isSubmitted
-                : false,
-            dirtyFields: keepStateOptions.keepDirty
+                : !!(keepStateOptions.keepDefaultValues &&
+                    !deepEqual(formValues, _defaultValues)),
+            isSubmitted: !!keepStateOptions.keepIsSubmitted,
+            dirtyFields: keepStateOptions.keepDirty || keepStateOptions.keepDirtyValues
                 ? _formState.dirtyFields
-                : (keepStateOptions.keepDefaultValues && formValues
-                    ? Object.entries(formValues).reduce((previous, [key, value]) => ({
-                        ...previous,
-                        [key]: value !== get(_defaultValues, key),
-                    }), {})
-                    : {}),
+                : keepStateOptions.keepDefaultValues && formValues
+                    ? getDirtyFields(_defaultValues, formValues)
+                    : {},
             touchedFields: keepStateOptions.keepTouched
                 ? _formState.touchedFields
                 : {},

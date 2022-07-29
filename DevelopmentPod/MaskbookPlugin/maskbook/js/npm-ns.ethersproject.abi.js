@@ -808,8 +808,8 @@ function splitNesting(value) {
 //# sourceMappingURL=fragments.js.map
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+bytes@5.6.1/node_modules/@ethersproject/bytes/lib.esm/index.js + 1 modules
 var bytes_lib_esm = __webpack_require__(99376);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+bignumber@5.6.0/node_modules/@ethersproject/bignumber/lib.esm/bignumber.js + 1 modules
-var bignumber = __webpack_require__(39554);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+bignumber@5.6.0/node_modules/@ethersproject/bignumber/lib.esm/bignumber.js
+var bignumber = __webpack_require__(6619);
 ;// CONCATENATED MODULE: ../../node_modules/.pnpm/@ethersproject+abi@5.0.7/node_modules/@ethersproject/abi/lib.esm/coders/abstract-coder.js
 
 
@@ -2340,8 +2340,8 @@ class NullCoder extends abstract_coder/* Coder */.XI {
     }
 }
 //# sourceMappingURL=null.js.map
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+bignumber@5.4.1/node_modules/@ethersproject/bignumber/lib.esm/bignumber.js + 1 modules
-var bignumber = __webpack_require__(84757);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+bignumber@5.6.0/node_modules/@ethersproject/bignumber/lib.esm/bignumber.js
+var bignumber = __webpack_require__(6619);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+constants@5.4.0/node_modules/@ethersproject/constants/lib.esm/bignumbers.js
 var bignumbers = __webpack_require__(98648);
 ;// CONCATENATED MODULE: ../../node_modules/.pnpm/@ethersproject+abi@5.4.0/node_modules/@ethersproject/abi/lib.esm/coders/number.js
@@ -2387,8 +2387,8 @@ class NumberCoder extends abstract_coder/* Coder */.XI {
     }
 }
 //# sourceMappingURL=number.js.map
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+strings@5.4.0/node_modules/@ethersproject/strings/lib.esm/utf8.js + 1 modules
-var utf8 = __webpack_require__(42716);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+strings@5.6.0/node_modules/@ethersproject/strings/lib.esm/utf8.js + 1 modules
+var utf8 = __webpack_require__(75276);
 ;// CONCATENATED MODULE: ../../node_modules/.pnpm/@ethersproject+abi@5.4.0/node_modules/@ethersproject/abi/lib.esm/coders/string.js
 
 
@@ -2579,7 +2579,7 @@ const defaultAbiCoder = new AbiCoder();
 /* harmony export */   "XI": () => (/* binding */ Coder)
 /* harmony export */ });
 /* harmony import */ var _ethersproject_bytes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5241);
-/* harmony import */ var _ethersproject_bignumber__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(84757);
+/* harmony import */ var _ethersproject_bignumber__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(6619);
 /* harmony import */ var _ethersproject_properties__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(27930);
 /* harmony import */ var _ethersproject_logger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(281);
 /* harmony import */ var _version__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(73037);
@@ -2745,7 +2745,7 @@ class Reader {
 /* harmony export */   "_R": () => (/* binding */ ParamType),
 /* harmony export */   "pc": () => (/* binding */ FormatTypes)
 /* harmony export */ });
-/* harmony import */ var _ethersproject_bignumber__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(84757);
+/* harmony import */ var _ethersproject_bignumber__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6619);
 /* harmony import */ var _ethersproject_properties__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(27930);
 /* harmony import */ var _ethersproject_logger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(281);
 /* harmony import */ var _version__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(73037);
@@ -3651,7 +3651,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* unused harmony export ErrorDescription */
 /* harmony import */ var _ethersproject_address__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(99747);
-/* harmony import */ var _ethersproject_bignumber__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(84757);
+/* harmony import */ var _ethersproject_bignumber__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(6619);
 /* harmony import */ var _ethersproject_bytes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(5241);
 /* harmony import */ var _ethersproject_hash__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(39125);
 /* harmony import */ var _ethersproject_keccak256__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(69614);

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UniformTypeIdentifiers
 
 extension String {
     var mimeIsCanSaveToAlbum: Bool {
@@ -20,5 +21,11 @@ extension String {
     
     var mimeIsImage: Bool {
         containsIgnoreCase(string: "image")
+    }
+    
+    func mimeType() -> String {
+        let pathExtension = String(split(separator: ".").last ?? "")
+        let mimeType = UTType(filenameExtension: pathExtension)?.preferredMIMEType 
+        return mimeType ?? "application/octet-stream"
     }
 }
