@@ -9,7 +9,6 @@
 import Foundation
 
 struct FileServiceDownloadItem {
-    typealias ItemType = FileServiceUploadingItem.ItemType
     init(
         fileName: String,
         provider: String,
@@ -24,8 +23,10 @@ struct FileServiceDownloadItem {
         self.uploadDate = uploadDate
         self.fileType = fileType
         self.tx = tx
-        self.content = loadFileContent()
+        content = loadFileContent()
     }
+
+    typealias ItemType = FileServiceUploadingItem.ItemType
 
     let fileName: String
     let provider: String
@@ -44,24 +45,22 @@ struct FileServiceDownloadItem {
     }
 
     func loadFileContent() -> Data? {
-        guard let id = tx?.id else {
-            return nil
+        tx.flatMap {
+            FileServiceLargeFileStorage.data(
+                of: $0.id,
+                fileName: fileName
+            )
         }
-        return FileServiceLargeFileStorage.data(of: id, fileName: fileName)
     }
 }
 
 extension FileServiceDownloadItem {
     func toSelectedFileItem() -> FileServiceSelectedFileItem {
-        let path: URL? = {
-            if let id = tx?.id {
-                return FileServiceLargeFileStorage.fileServicePath(id: id, fileName: fileName)
-            }
-            return nil
-        }()
-        return FileServiceSelectedFileItem(data: content ?? Data(),
-                                           fileName: fileName,
-                                           fileType: fileType,
-                                           path: path)
+        FileServiceSelectedFileItem(
+            data: content ?? Data(),
+            fileName: fileName,
+            fileType: fileType,
+            path: tx.flatMap { FileServiceLargeFileStorage.fileServicePath(id: $0.id, fileName: fileName) }
+        )
     }
 }

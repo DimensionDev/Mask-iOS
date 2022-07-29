@@ -12,7 +12,8 @@ struct FileServiceUploadingItem: Hashable {
         uploadedBytes: Double,
         uploadDate: Date? = nil,
         option: FileServiceUploadOption?,
-        tx: FileServiceTranscation? = nil) {
+        tx: FileServiceTranscation? = nil
+    ) {
         self.fileName = fileName
         self.provider = provider
         self.state = state

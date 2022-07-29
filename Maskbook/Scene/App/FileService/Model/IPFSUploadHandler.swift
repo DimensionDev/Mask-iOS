@@ -25,7 +25,7 @@ extension IPFSUploadHandler: FileServiceUploadHandler {
             Task.detached {
                 // get transcation id
                 var tx = FileServiceTranscation.progress(0)
-                tx.id = self.identifier(for: item)
+                tx.id = self.encodeArrayBuffer(item.content.hashData())
                 tx.state = option.encrypted ? .encrypting : .preparing
                 continuation.yield(tx)
 
