@@ -249,6 +249,11 @@ internal enum Asset {
         internal static let accountBgMask2 = ImageAsset(name: "Images/Scene/Balance/accountBgMask2")
         internal static let accountBgMask3 = ImageAsset(name: "Images/Scene/Balance/accountBgMask3")
         internal static let accountBgWc = ImageAsset(name: "Images/Scene/Balance/accountBgWc")
+        internal enum Button {
+          internal static let history = ImageAsset(name: "Images/Scene/Balance/button/history")
+          internal static let receive = ImageAsset(name: "Images/Scene/Balance/button/receive")
+          internal static let send = ImageAsset(name: "Images/Scene/Balance/button/send")
+        }
         internal enum Chain {
           internal static let all = ImageAsset(name: "Images/Scene/Balance/chain/all")
           internal static let arbitrium = ImageAsset(name: "Images/Scene/Balance/chain/arbitrium")
