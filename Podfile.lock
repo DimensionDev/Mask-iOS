@@ -114,7 +114,8 @@ PODS:
     - SwiftyJSON
   - MaskbookPlugin/Tests (0.1.0):
     - SwiftyJSON
-  - MaskLog (0.1.0)
+  - MaskLog (0.1.0):
+    - ZIPFoundation (= 0.9.13)
   - MaskWalletCore (0.1.0):
     - SwiftProtobuf (~> 1.0)
   - nanopb (2.30909.0):
@@ -324,7 +325,7 @@ SPEC CHECKSUMS:
   KMPageControl: a64de2397e18d277434f553ed2222f62aad3fa28
   LookinServer: 18155b1e4a08213c236a1dd6b7ca52328a70a1e3
   MaskbookPlugin: d81a6508a95a857feea14a47b653e77a9344de8f
-  MaskLog: 9497fdf85dc1128e2660e4a7fee3066bf0419b38
+  MaskLog: f4158f561ca54a874a32a6df7843ba17b8a66644
   MaskWalletCore: 8529f885a364c6b6ce8345c5fcbe2cf4f0707783
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   NVActivityIndicatorView: b19ddab2576f805cbe0fb2306cba3476e09a1dea
