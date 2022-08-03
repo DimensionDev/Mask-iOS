@@ -29,7 +29,7 @@ class LuckyDropViewController: BaseViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = L10n.Plugins.Luckydrop.title
@@ -43,7 +43,7 @@ class LuckyDropViewController: BaseViewController {
 
     override func buildContent() {
         super.buildContent()
-        let controller = UIHostingController(rootView: luckyView.withResponderChainForCurrentWindow())
+        let controller = UIHostingController(rootView: luckyView)
         self.addChild(controller)
         self.view.addSubview(controller.view)
         controller.view.snp.makeConstraints { $0.edges.equalToSuperview() }
@@ -54,6 +54,47 @@ class LuckyDropViewController: BaseViewController {
 
     override func  buildEvent() {
         super.buildEvent()
+        viewModel.nftViewModel.action = { [weak self] action in
+            guard let self = self else { return }
+            switch action {
+            case .selectCollectibleGroup:
+                // TODO: chose Collectible Group
+                break
+
+            case let .addCollectibles(groupName, selectedIdentifiers):
+                // TODO: Select Collectibles
+                break
+
+            case .confirmRisk:
+                let pluginID = PluginStorageRepository.PluginID.redPackage.rawValue
+                self.coordinator.present(scene: .pluginRiskWarning(pluginID: pluginID), transition: .popup)
+
+            case let .createBNFTLuckyDrop(draft):
+                // TODO: create nft lucky drop
+                break
+
+            case .unlockWallet: self.unlockWallet()
+
+            case .unlockDGC:
+                // TODO: unlock nft permission
+                break
+            }
+        }
+    }
+
+    private func unlockWallet() {
+        coordinator.present(
+            scene: .walletUnlock(cancellable: true) { [weak self] error in
+                guard let self = self else {
+                    return
+                }
+                guard error == nil else {
+                    return
+                }
+                self.viewModel.nftViewModel.updateState()
+            },
+            transition: .modal()
+        )
     }
 
     @objc
@@ -63,18 +104,18 @@ class LuckyDropViewController: BaseViewController {
     
     @objc
     fileprivate func onShowHistory() {
-        self.navigationController?.pushViewController(LuckDropHistoryController(), animated: true)
+        show(LuckDropHistoryController(), sender: self)
     }
 }
 
 extension LuckyDropViewController {
     @objc
     override func prepareRightNavigationItems() {
-        let closeButton = NavigationBarItemView(imageAsset: Asset.Plugins.LuckyDrop.Icon.close) {
-            self.onClose()
+        let closeButton = NavigationBarItemView(imageAsset: Asset.Plugins.LuckyDrop.Icon.close) { [weak self] in
+            self?.onClose()
         }
-        let historyButton = NavigationBarItemView(imageAsset: Asset.Plugins.LuckyDrop.Icon.history) {
-            self.onShowHistory()
+        let historyButton = NavigationBarItemView(imageAsset: Asset.Plugins.LuckyDrop.Icon.history) { [weak self] in
+            self?.onShowHistory()
         }
         self.navigationItem.rightBarButtonItems = [
             .fixedSpace(14),

@@ -125,7 +125,7 @@ extension LuckyDropHistoryTokenItemViewModel {
             if status.isExpired {
                 if status.canRefund {
                     // refundable
-                    return .refunable
+                    return .refundable
                 }
                 
                 return nil
@@ -136,7 +136,7 @@ extension LuckyDropHistoryTokenItemViewModel {
         
         self.luckyDropState = state
     }
-    
+
     func refund() {
         guard let rid = luckyDrop.basic?.rpid else {
             return
@@ -147,7 +147,7 @@ extension LuckyDropHistoryTokenItemViewModel {
         Task {
             let value = await ABI.happyRedPacketV4.refund(rid: rid)
             if value?.isEmpty ?? true {
-                luckyDropState = .refunable
+                luckyDropState = .refundable
             } else {
                 luckyDropState = .refunded
             }
@@ -164,7 +164,7 @@ extension LuckyDropHistoryTokenItemViewModel {
 extension LuckyDropHistoryTokenItemViewModel {
     enum RedPacketStatus: Equatable {
         case refunded
-        case refunable
+        case refundable
         case empty
         case sharable(hasPassword: Bool)
     }
@@ -194,7 +194,7 @@ extension Optional where Wrapped == LuckyDropHistoryTokenItemViewModel.RedPacket
     var title: String {
         switch self {
         case .refunded: return L10n.Scene.OpenRedPackage.refunded
-        case .refunable: return L10n.Scene.OpenRedPackage.refund
+        case .refundable: return L10n.Scene.OpenRedPackage.refund
         case .empty: return L10n.Scene.OpenRedPackage.empty
         case .sharable: return L10n.Plugins.Luckydrop.Confirm.share
         default: return ""

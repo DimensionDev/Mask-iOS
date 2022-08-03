@@ -90,6 +90,11 @@
 		1F37DF2027BDF715008F8ABE /* RestoreLocalFileValidationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37DF1F27BDF715008F8ABE /* RestoreLocalFileValidationController.swift */; };
 		1F37DF2227BDF94F008F8ABE /* RestoreLocalFileValidationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37DF2127BDF94F008F8ABE /* RestoreLocalFileValidationView.swift */; };
 		1F37DF2427BDFA3D008F8ABE /* RestoreLocalFileValidationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37DF2327BDFA3D008F8ABE /* RestoreLocalFileValidationViewModel.swift */; };
+		1F44794A288848180098BAE9 /* NFTDropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F447949288848180098BAE9 /* NFTDropView.swift */; };
+		1F44794C288A5D8F0098BAE9 /* NftRedPacketShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F44794B288A5D8F0098BAE9 /* NftRedPacketShareViewController.swift */; };
+		1F447950288A74C40098BAE9 /* SwiftUI+PrimitiveButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F44794F288A74C40098BAE9 /* SwiftUI+PrimitiveButtonStyle.swift */; };
+		1F447952288A7EA30098BAE9 /* SwiftUI+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F447951288A7EA30098BAE9 /* SwiftUI+View.swift */; };
+		1F447954288A86060098BAE9 /* NftRedpacketShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F447953288A86060098BAE9 /* NftRedpacketShareView.swift */; };
 		1F5278CC286D570F00B6D443 /* CapsuleIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5278CB286D570F00B6D443 /* CapsuleIndicator.swift */; };
 		1F5278CE286D83B700B6D443 /* InfinityCycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5278CD286D83B700B6D443 /* InfinityCycleView.swift */; };
 		1F57023A27A27E4900C96909 /* RedPacketShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F57023927A27E4900C96909 /* RedPacketShareSheet.swift */; };
@@ -134,6 +139,7 @@
 		1FCAD13027585FFF00F90A3E /* TransakIntegratingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCAD12F27585FFF00F90A3E /* TransakIntegratingController.swift */; };
 		1FCAD89127951026006D6B40 /* WKScriptMessage+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCAD89027951026006D6B40 /* WKScriptMessage+JSON.swift */; };
 		1FCAD8932796F509006D6B40 /* BackArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCAD8922796F509006D6B40 /* BackArrow.swift */; };
+		1FCB3907288564A10057966D /* NftLuckyDropViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCB3906288564A10057966D /* NftLuckyDropViewModel.swift */; };
 		1FCBEDEE2738BFA1001C3637 /* WalletRestorePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBEDED2738BFA1001C3637 /* WalletRestorePreview.swift */; };
 		1FCBEDF02738DA2E001C3637 /* RestoreWalletInfoController.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBEDEF2738DA2E001C3637 /* RestoreWalletInfoController.swift.swift */; };
 		1FCBEDF22738EC26001C3637 /* WalletRestoreInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCBEDF12738EC26001C3637 /* WalletRestoreInfoViewModel.swift */; };
@@ -342,11 +348,8 @@
 		2AD855AC281285D10064DDA5 /* RedPacketInteractivePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD855A5281285D00064DDA5 /* RedPacketInteractivePayload.swift */; };
 		2AD855EB2812875A0064DDA5 /* KeyboardSheetTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD855B02812875A0064DDA5 /* KeyboardSheetTransition.swift */; };
 		2AD855EC2812875A0064DDA5 /* SheetTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD855B12812875A0064DDA5 /* SheetTransition.swift */; };
-		2AD855ED2812875A0064DDA5 /* WarningPopController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD855B32812875A0064DDA5 /* WarningPopController.swift */; };
-		2AD855EE2812875A0064DDA5 /* ExamplePopControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD855B42812875A0064DDA5 /* ExamplePopControler.swift */; };
 		2AD855EF2812875A0064DDA5 /* LoadingIndicatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD855B52812875A0064DDA5 /* LoadingIndicatorController.swift */; };
 		2AD855F02812875A0064DDA5 /* AlertPopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD855B62812875A0064DDA5 /* AlertPopupController.swift */; };
-		2AD855F12812875A0064DDA5 /* RecoverySheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD855B72812875A0064DDA5 /* RecoverySheetController.swift */; };
 		2AD855F22812875A0064DDA5 /* SheetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD855B92812875A0064DDA5 /* SheetPresenter.swift */; };
 		2AD855F32812875A0064DDA5 /* SheetViewAdapterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD855BB2812875A0064DDA5 /* SheetViewAdapterController.swift */; };
 		2AD855F42812875A0064DDA5 /* SheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD855BC2812875A0064DDA5 /* SheetViewController.swift */; };
@@ -951,6 +954,11 @@
 		1F37DF1F27BDF715008F8ABE /* RestoreLocalFileValidationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreLocalFileValidationController.swift; sourceTree = "<group>"; };
 		1F37DF2127BDF94F008F8ABE /* RestoreLocalFileValidationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreLocalFileValidationView.swift; sourceTree = "<group>"; };
 		1F37DF2327BDFA3D008F8ABE /* RestoreLocalFileValidationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreLocalFileValidationViewModel.swift; sourceTree = "<group>"; };
+		1F447949288848180098BAE9 /* NFTDropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFTDropView.swift; sourceTree = "<group>"; };
+		1F44794B288A5D8F0098BAE9 /* NftRedPacketShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftRedPacketShareViewController.swift; sourceTree = "<group>"; };
+		1F44794F288A74C40098BAE9 /* SwiftUI+PrimitiveButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+PrimitiveButtonStyle.swift"; sourceTree = "<group>"; };
+		1F447951288A7EA30098BAE9 /* SwiftUI+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+View.swift"; sourceTree = "<group>"; };
+		1F447953288A86060098BAE9 /* NftRedpacketShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftRedpacketShareView.swift; sourceTree = "<group>"; };
 		1F5278CB286D570F00B6D443 /* CapsuleIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleIndicator.swift; sourceTree = "<group>"; };
 		1F5278CD286D83B700B6D443 /* InfinityCycleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfinityCycleView.swift; sourceTree = "<group>"; };
 		1F57023927A27E4900C96909 /* RedPacketShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketShareSheet.swift; sourceTree = "<group>"; };
@@ -995,6 +1003,7 @@
 		1FCAD12F27585FFF00F90A3E /* TransakIntegratingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransakIntegratingController.swift; sourceTree = "<group>"; };
 		1FCAD89027951026006D6B40 /* WKScriptMessage+JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKScriptMessage+JSON.swift"; sourceTree = "<group>"; };
 		1FCAD8922796F509006D6B40 /* BackArrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackArrow.swift; sourceTree = "<group>"; };
+		1FCB3906288564A10057966D /* NftLuckyDropViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftLuckyDropViewModel.swift; sourceTree = "<group>"; };
 		1FCBEDED2738BFA1001C3637 /* WalletRestorePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletRestorePreview.swift; sourceTree = "<group>"; };
 		1FCBEDEF2738DA2E001C3637 /* RestoreWalletInfoController.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreWalletInfoController.swift.swift; sourceTree = "<group>"; };
 		1FCBEDF12738EC26001C3637 /* WalletRestoreInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletRestoreInfoViewModel.swift; sourceTree = "<group>"; };
@@ -1202,11 +1211,8 @@
 		2AD855A5281285D00064DDA5 /* RedPacketInteractivePayload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedPacketInteractivePayload.swift; sourceTree = "<group>"; };
 		2AD855B02812875A0064DDA5 /* KeyboardSheetTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardSheetTransition.swift; sourceTree = "<group>"; };
 		2AD855B12812875A0064DDA5 /* SheetTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetTransition.swift; sourceTree = "<group>"; };
-		2AD855B32812875A0064DDA5 /* WarningPopController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarningPopController.swift; sourceTree = "<group>"; };
-		2AD855B42812875A0064DDA5 /* ExamplePopControler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamplePopControler.swift; sourceTree = "<group>"; };
 		2AD855B52812875A0064DDA5 /* LoadingIndicatorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorController.swift; sourceTree = "<group>"; };
 		2AD855B62812875A0064DDA5 /* AlertPopupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertPopupController.swift; sourceTree = "<group>"; };
-		2AD855B72812875A0064DDA5 /* RecoverySheetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecoverySheetController.swift; sourceTree = "<group>"; };
 		2AD855B92812875A0064DDA5 /* SheetPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetPresenter.swift; sourceTree = "<group>"; };
 		2AD855BB2812875A0064DDA5 /* SheetViewAdapterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetViewAdapterController.swift; sourceTree = "<group>"; };
 		2AD855BC2812875A0064DDA5 /* SheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetViewController.swift; sourceTree = "<group>"; };
@@ -2003,6 +2009,7 @@
 				5DCFA01C288E367E0069351C /* NFTLuckDropConfirmViewController.swift */,
 				2AD854FB281282A20064DDA5 /* LuckyDropViewController.swift */,
 				1F57023927A27E4900C96909 /* RedPacketShareSheet.swift */,
+				1F44794B288A5D8F0098BAE9 /* NftRedPacketShareViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2010,6 +2017,7 @@
 		1F57023B27A2AF7300C96909 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1F447949288848180098BAE9 /* NFTDropView.swift */,
 				2AD85505281283160064DDA5 /* LuckyDropHistoryView.swift */,
 				2AD85506281283160064DDA5 /* LuckyDropSuccessfullyView.swift */,
 				2AD85507281283160064DDA5 /* LuckyDropTokens.swift */,
@@ -2022,6 +2030,7 @@
 				2AD85504281283160064DDA5 /* ShareLuckyDropView.swift */,
 				2AD85508281283160064DDA5 /* TextLengthModifier.swift */,
 				2AD8550A281283160064DDA5 /* WalletBottomWidgetView.swift */,
+				1F447953288A86060098BAE9 /* NftRedpacketShareView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2480,6 +2489,7 @@
 				2A46B3BA282A9D1600F2A262 /* NSDecimalNumber+BalancePrecision.swift */,
 				2A470B08283E5B53009B49EA /* ShareLuckyDropViewModel.swift */,
 				5D95FA5C28408F150008C100 /* ShareLuckyDropSelectProfileViewModel.swift */,
+				1FCB3906288564A10057966D /* NftLuckyDropViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2565,6 +2575,8 @@
 				2AD85563281284940064DDA5 /* SwiftUI+Color.swift */,
 				2AD589B72848C22900CF8C9B /* SwiftUI+Placeholder.swift */,
 				1FD91A912845BD57000766FB /* SwiftUI+Focused.swift */,
+				1F44794F288A74C40098BAE9 /* SwiftUI+PrimitiveButtonStyle.swift */,
+				1F447951288A7EA30098BAE9 /* SwiftUI+View.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -2627,11 +2639,8 @@
 		2AD855B22812875A0064DDA5 /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				2AD855B32812875A0064DDA5 /* WarningPopController.swift */,
-				2AD855B42812875A0064DDA5 /* ExamplePopControler.swift */,
 				2AD855B52812875A0064DDA5 /* LoadingIndicatorController.swift */,
 				2AD855B62812875A0064DDA5 /* AlertPopupController.swift */,
-				2AD855B72812875A0064DDA5 /* RecoverySheetController.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -4558,6 +4567,7 @@
 				2AF884E3271EE9310004565A /* WebExtension.Setting+extension.swift in Sources */,
 				2AF8858C271EE9310004565A /* SelectActionTableViewCell.swift in Sources */,
 				0F31A1642742B3A1009D2E05 /* WalletMultiChainCell.swift in Sources */,
+				1F447950288A74C40098BAE9 /* SwiftUI+PrimitiveButtonStyle.swift in Sources */,
 				2AF884EA271EE9310004565A /* PluginBlockView.swift in Sources */,
 				6FA1112B27D0BB3E0041B16A /* RecentlyPasteTableViewCell.swift in Sources */,
 				2A6ABBA22720053B00CC3AED /* RemoteBackupUploadFileRequest.swift in Sources */,
@@ -4571,7 +4581,6 @@
 				2AF884BB271EE9300004565A /* MaskbookUIDelegateShim.swift in Sources */,
 				2AF884C9271EE9300004565A /* PersonaManager+Backup.swift in Sources */,
 				2A6ABBA42720053B00CC3AED /* LocalBackupViewController.swift in Sources */,
-				2AD855ED2812875A0064DDA5 /* WarningPopController.swift in Sources */,
 				2AF8854E271EE9310004565A /* AddressCheckViewModel.swift in Sources */,
 				2AD85573281284940064DDA5 /* PersonaRecord+Identifier.swift in Sources */,
 				2D6677F827688FBE00528F4D /* WalletConnectSession+Extension.swift in Sources */,
@@ -4655,6 +4664,7 @@
 				2AD855FA2812875A0064DDA5 /* ShadowShapeView.swift in Sources */,
 				5D4AD18926560B02002D5380 /* HitTestExpandedButton.swift in Sources */,
 				2AD8560F2812875A0064DDA5 /* DBImageDecoder+UIKit.swift in Sources */,
+				1FCB3907288564A10057966D /* NftLuckyDropViewModel.swift in Sources */,
 				2AD31E51282D367700CB3D49 /* View+Style.swift in Sources */,
 				5D4749742851D28E00D3E7E6 /* FileServiceSelectFileHandler.swift in Sources */,
 				1F1CCF5E2736162F004E8835 /* WalletRestorePipeline.swift in Sources */,
@@ -4912,7 +4922,6 @@
 				1FEE1EAA27845CEF00697F81 /* TransactionOptions+Address.swift in Sources */,
 				2AD855F82812875A0064DDA5 /* PopupViewController.swift in Sources */,
 				2AD85596281284940064DDA5 /* SwiftUI+Asset.swift in Sources */,
-				2AD855EE2812875A0064DDA5 /* ExamplePopControler.swift in Sources */,
 				2AF8850E271EE9310004565A /* BaseViewController.swift in Sources */,
 				0F31A1662742C054009D2E05 /* CreateWalletMultichainView.swift in Sources */,
 				2AF88512271EE9310004565A /* MaskScanViewController.swift in Sources */,
@@ -5034,6 +5043,7 @@
 				2AF884F3271EE9310004565A /* IdentityCreateViewModel.swift in Sources */,
 				2AD85514281283170064DDA5 /* RedPacketConfirmView.swift in Sources */,
 				2AF88546271EE9310004565A /* ImportKeystoreViewController.swift in Sources */,
+				1F447954288A86060098BAE9 /* NftRedpacketShareView.swift in Sources */,
 				2AF884E7271EE9310004565A /* SwitchButton.swift in Sources */,
 				5D7BF7CE27D0997C00C58EF2 /* BackupFileDetectService.swift in Sources */,
 				1FCBEDF02738DA2E001C3637 /* RestoreWalletInfoController.swift.swift in Sources */,
@@ -5121,7 +5131,6 @@
 				2A6ABB962720053B00CC3AED /* RestoreCompletionStrategy.swift in Sources */,
 				2A6ABBA32720053B00CC3AED /* RemoteBackupUploadRequest.swift in Sources */,
 				2AF884D7271EE9310004565A /* MaskbookTabService.swift in Sources */,
-				2AD855F12812875A0064DDA5 /* RecoverySheetController.swift in Sources */,
 				41E5002A2797AEB500A73117 /* WebPublicAPIMessageResolver+DB.swift in Sources */,
 				4168635927F6F0A000F12DB2 /* RecoverDataManager.swift in Sources */,
 				5D13008A2824E2A300F5B6CA /* CookieSwitcher.swift in Sources */,
@@ -5157,6 +5166,7 @@
 				2AF8851B271EE9310004565A /* TokenDetailViewModel.swift in Sources */,
 				2AD31E4E282D367700CB3D49 /* UISearchBar+Height.swift in Sources */,
 				2A0C16AF2666713D0085524E /* StoredKeyImportType.swift in Sources */,
+				1F447952288A7EA30098BAE9 /* SwiftUI+View.swift in Sources */,
 				2AF88582271EE9310004565A /* TermsOfServiceViewController.swift in Sources */,
 				2AF884F2271EE9310004565A /* IdentityMnemonicImportViewController.swift in Sources */,
 				5D93DFA2267B3F2E00A175BF /* Persona.swift in Sources */,
@@ -5169,6 +5179,7 @@
 				1F9C60D726B101C6001C26D2 /* BlockChainNetworkRepresentable.swift in Sources */,
 				2AF88576271EE9310004565A /* MnemonicVerifyFlowCollectionDataSource.swift in Sources */,
 				5DB39E322786A8970025337C /* JSResourceSelectViewModel.swift in Sources */,
+				1F44794C288A5D8F0098BAE9 /* NftRedPacketShareViewController.swift in Sources */,
 				2AD31E67282D367700CB3D49 /* CGAffineTransform+extensiion.swift in Sources */,
 				0FFD85922660CF1400D391A9 /* Vault.swift in Sources */,
 				5DCFA01D288E367E0069351C /* NFTLuckDropConfirmViewController.swift in Sources */,
@@ -5236,6 +5247,7 @@
 				2A470B07283E45F0009B49EA /* String+URL.swift in Sources */,
 				2A6ABBAC2720053B00CC3AED /* RemoteBackupEmailVerifyStrategy.swift in Sources */,
 				2DBD0B9E2787FF9C0065A2B1 /* GroupStyleTableViewCell.swift in Sources */,
+				1F44794A288848180098BAE9 /* NFTDropView.swift in Sources */,
 				2AF884D3271EE9310004565A /* MaskWebMessage+Persona.swift in Sources */,
 				2A36E2762757243C0075E95B /* ChangeBackupPasswordStep2ViewController.swift in Sources */,
 				2AF884C0271EE9300004565A /* MaskSocialViewController.swift in Sources */,

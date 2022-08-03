@@ -144,7 +144,7 @@ class Coordinator {
         case identityMnemonicImport
         case identityPrivateKeyImport
         case derivationPath(name: String?, mnemonic: String)
-        case pluginRiskWarning(pluginId: String?)
+        case pluginRiskWarning(pluginID: String?)
         case backupPasswordVerify(verifyPassedCompletion: () -> Void)
         case localBackup(type: LocalBackupViewModel.BackupType, cloudVerifyResult: CloudVerifyResult? = nil)
         case chooseBackupStrategy
@@ -580,8 +580,8 @@ extension Coordinator {
         case let .rename(viewModel):
             return RenameViewController(viewModel: viewModel)
 
-        case .pluginRiskWarning(let pluginId):
-            return PluginAlertViewController(pluginId: pluginId)
+        case .pluginRiskWarning(let pluginID):
+            return PluginAlertViewController(pluginID: pluginID)
 
         case let .personaAction(viewModel):
             return PersonaActionViewController(viewModel: viewModel)

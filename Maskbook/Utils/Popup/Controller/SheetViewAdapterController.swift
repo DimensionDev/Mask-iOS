@@ -12,7 +12,7 @@ import UIKit
 import CoreDataStack
 import web3swift
 
-final class SheetViewAdapterController<Content: View>: SheetViewController {
+class SheetViewAdapterController<Content: View>: SheetViewController {
     let rootView: Content
     
     init(rootView: Content) {

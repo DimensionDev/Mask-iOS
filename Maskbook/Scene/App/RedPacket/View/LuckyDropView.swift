@@ -7,123 +7,133 @@
 //
 
 import Combine
-import ResponderChain
 import SwiftUI
 
 struct LuckyDropView: View {
-    @EnvironmentObject var chain: ResponderChain
+    // MARK: Internal
+
     @ObservedObject var viewModel: LuckyDropViewModel
-    @State var currentHeight: CGFloat = 0
-    @State var safeArea: EdgeInsets = EdgeInsets()
-    @InjectedProvider(\.mainCoordinator)
-    private var mainCoordinator
-    private let idOfBottomViewToScroll = "idOfBottomViewToScroll"
-    
+
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
-                contentView()
-                
+                Spacer()
+                     .frame(height: 24)
+
+                 SegmentControl(selection: $viewModel.selection)
+                     .frame(height: 48)
+                     .padding(.horizontal, 20)
+
+                switch viewModel.selection {
+                case .token: contentView(geometry)
+                case .nft: NFTDropView(viewModel)
+                }
+
                 WalletBottomWidgetView(viewModel: viewModel.walletBottomViewModel)
-                    .padding(.bottom, safeArea.bottom)
+                    .padding(.bottom, geometry.safeAreaInsets.bottom)
                     .background(Asset.Colors.Background.blur.asColor())
             }
             .ignoresSafeArea(.all, edges: .bottom)
             .background(Asset.Colors.Background.normal.asColor())
-            .onAppear {
-                safeArea = geometry.safeAreaInsets
-            }
             .onTapGesture {
-                chain.firstResponder = nil
+                endEditing()
             }
         }
+        .ignoresSafeArea(.keyboard, edges: .bottom)
     }
-    
-    @ViewBuilder
-    var tokensRow: some View {
+
+    // MARK: Private
+
+    @InjectedProvider(\.mainCoordinator)
+    private var mainCoordinator
+    private let tokenConfirmButtonID = "idOfBottomViewToScroll"
+
+    private var tokensRow: some View {
         LuckyDropTokens(viewModel: viewModel)
     }
-    
-    private func contentView() -> some View {
+
+    private func contentView(_ proxy: GeometryProxy) -> some View {
         ScrollViewReader { scrollView in
             ScrollView {
                 LazyVStack(spacing: 0) {
-//                    Spacer().frame(height: LayoutConstraints.top)
-                    
-//                    SegmentControl(selection: $viewModel.selection) {
-//                    }
-//                    .frame(height: 48)
-                    
                     tokensRow
-                    
-                    confirmButton().id(idOfBottomViewToScroll)
+
+                    confirmButton
+                        .id(tokenConfirmButtonID)
                 }
                 .padding(.horizontal, LayoutConstraints.horizontal)
             }
-            .padding(.bottom, self.currentHeight)
+            .padding(.bottom, viewModel.keyboardHeight)
             .onAppear(perform: {
                 NotificationCenter.Publisher(
                     center: NotificationCenter.default, name: UIResponder.keyboardWillShowNotification
                 )
-                .merge(with: NotificationCenter.Publisher(
-                    center: NotificationCenter.default, name: UIResponder.keyboardWillChangeFrameNotification)
+                .merge(
+                    with: NotificationCenter.Publisher(
+                        center: NotificationCenter.default, name: UIResponder.keyboardWillChangeFrameNotification
+                    )
                 )
                 .compactMap { notification in
-                    withAnimation(.easeOut(duration: 0.16)) {
-                        notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
-                    }
+                    notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
                 }
                 .map { rect in
-                    // To make sure that the animation play normally.
-                    DispatchQueue.main.async {
-                        if chain.firstResponder == LuckyDropTokens.TextFieldTag.message {
-                            withAnimation(.easeOut(duration: 0.16)) {
-                                scrollView.scrollTo(idOfBottomViewToScroll)
-                            }
-                        }
-                    }
-                    
-                    return rect.height
-                    - safeArea.bottom
+                    rect.height
+                    - proxy.safeAreaInsets.bottom
                     - 60.5 // wallet bottom view
                     + 20 // padding from bottom of confirm button to top of the keyboar
                 }
-                .subscribe(Subscribers.Assign(object: self, keyPath: \.currentHeight))
-                
+                .assign(to: &viewModel.$keyboardHeight)
+
                 NotificationCenter.Publisher(center: NotificationCenter.default, name: UIResponder.keyboardWillHideNotification)
-                    .compactMap { notification in
+                    .compactMap { _ in
                         CGFloat.zero
-                }
-                .subscribe(Subscribers.Assign(object: self, keyPath: \.currentHeight))
+                    }
+                    .assign(to: &viewModel.$keyboardHeight)
             })
+            .onChange(of: viewModel.keyboardHeight) { newValue in
+                if viewModel.editingResponder == LuckyDropTokens.TextFieldTag.message {
+                    DispatchQueue.main.async {
+                        withAnimation(.easeOut(duration: 0.16)) {
+                            scrollView.scrollTo(tokenConfirmButtonID)
+                        }
+                    }
+                }
+            }
         }
     }
-    
-    private func confirmButton() -> PrimaryButton {
+
+    private func endEditing() {
+        if viewModel.editingResponder.isSome {
+            forceResignKeyboard()
+        }
+    }
+
+    private var confirmButton: some View  {
         PrimaryButton(
             title: viewModel.confirmTitle,
             animating: viewModel.buttonAnimating,
-            isEnable: viewModel.confirmEnable) {
-                chain.firstResponder = nil
-                switch viewModel.buttonType {
-                case .unlock:
-                    Coordinator.main.present(
-                        scene: .walletUnlock(cancellable: true) { error in
-                            guard error == nil else { return }
-                            viewModel.checkParam()
-                        },
-                        transition: .modal(animated: true, adaptiveDelegate: nil)
-                    )
-                    
-                case .riskWarning:
-                    let pluginId = PluginStorageRepository.PluginID.redPackage.rawValue
-                    mainCoordinator.present(scene: .pluginRiskWarning(pluginId: pluginId), transition: .popup)
-                    
-                case .unlockToken: viewModel.approveToken()
-                case .send: viewModel.send()
-                default: break
-                }
+            isEnable: viewModel.confirmEnable
+        ) {
+            endEditing()
+            switch viewModel.buttonType {
+            case .unlock:
+                Coordinator.main.present(
+                    scene: .walletUnlock(cancellable: true) { error in
+                        guard error == nil else { return }
+                        viewModel.checkParam()
+                    },
+                    transition: .modal(animated: true, adaptiveDelegate: nil)
+                )
+
+            case .riskWarning:
+                let pluginID = PluginStorageRepository.PluginID.redPackage.rawValue
+                mainCoordinator.present(scene: .pluginRiskWarning(pluginID: pluginID), transition: .popup)
+
+            case .unlockToken: viewModel.approveToken()
+            case .send: viewModel.send()
+            default: break
             }
+        }
     }
 }
 

@@ -1000,7 +1000,11 @@
         "no-total-amount": "Enter Total Amount",
         "no-message": "Enter Attached Messege",
         "minimum-amount": "The minimum amount for each share is %@ %@",
-        "send": "Send %@"
+        "send": "Send %@",
+        "select-NFTs": "Select NFTs",
+        "select-NFT-collection": "Select NFT collection",
+        "approve-collection": "Approve Collection",
+        "create-nfg-lucky-drop": "Create NFT Lucky Drop"
       },
       "state": {
         "pending": "Pending...",
@@ -1042,7 +1046,15 @@
       "account": "Account",
       "refund_tip": "Refund the unclaimed after %@",
       "history_title": "History Records",
-      "created": "Created"
+      "created": "Created",
+      "nft-message-placeholder": "Enter attached message",
+      "nft-selected": "NFTs selected",
+      "share-sheet": {
+        "title": "Luck Drop Successfully Created!",
+        "detail": "You can now see your Lucky Drop in History Tab. To let people claim it, share to your social media.",
+        "to-twitter": "Share to Twitter",
+        "to-social-media": "Share to social media"
+      }
     }
   }
 }
