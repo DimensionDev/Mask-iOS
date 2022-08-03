@@ -22,7 +22,7 @@ final class PluginAlertViewController: AlertPopupController {
     private let textEdge = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
     private let maxTextContentHeight: CGFloat = 318
     private let iconSize: CGFloat = 60
-    private let pluginId: String?
+    private let pluginID: String?
 
     @InjectedProvider(\.userDefaultSettings)
     private var userSettings
@@ -31,8 +31,8 @@ final class PluginAlertViewController: AlertPopupController {
         userSettings.defaultAccountAddress ?? ""
     }
 
-    init(pluginId: String?) {
-        self.pluginId = pluginId
+    init(pluginID: String?) {
+        self.pluginID = pluginID
         super.init(presenter: .alert)
     }
 
@@ -164,7 +164,7 @@ final class PluginAlertViewController: AlertPopupController {
                 guard let address = self?.userSettings.defaultAccountAddress else {
                     return
                 }
-                self?.userSettings.confirmRiskWarning(address: address, pluginId: self?.pluginId)
+                self?.userSettings.confirmRiskWarning(address: address, pluginID: self?.pluginID)
             }
             .store(in: &subscriptionSet)
 
@@ -202,7 +202,7 @@ import SwiftUI
 struct PluginAlertViewControllerPreview: PreviewProvider {
     static var previews: some SwiftUI.View {
         Preview {
-            PluginAlertViewController(pluginId: nil).view
+            PluginAlertViewController(pluginID: nil).view
         }
     }
 }

@@ -147,8 +147,8 @@ private struct SelectionRow: View {
 
     private var checkBox: some View {
         selected
-            ? Asset.Plugins.FileService.checkSquare.asImage()
-            : Asset.Images.Scene.WalletList.unchecked.asImage()
+        ? Asset.Icon.Cell.checkSquare.asImage()
+        : Asset.Images.Scene.WalletList.unchecked.asImage()
     }
 }
 

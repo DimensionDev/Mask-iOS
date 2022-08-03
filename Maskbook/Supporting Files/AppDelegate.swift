@@ -226,7 +226,6 @@ extension UIWindow {
             guard let topController = UIApplication.getTopViewController() else {
                 return
             }
-            ExamplePopController(presenter: SheetPresenter(presentStyle: .translucent)).show(by: topController)
 
         default:
             break

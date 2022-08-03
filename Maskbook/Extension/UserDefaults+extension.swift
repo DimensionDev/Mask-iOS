@@ -444,9 +444,9 @@ extension UserDefaultSettings {
         }
     }
     
-    func confirmRiskWarning(address: String, pluginId: String?) {
+    func confirmRiskWarning(address: String, pluginID: String?) {
         defer {
-            DAppService.sendRiskWarningConfirm(address: address, pluginId: pluginId)
+            DAppService.sendRiskWarningConfirm(address: address, pluginID: pluginID)
         }
         
         guard !confirmedPluginRiskWarnings.contains(address) else { return }

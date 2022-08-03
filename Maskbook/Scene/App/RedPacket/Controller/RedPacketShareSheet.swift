@@ -1,5 +1,7 @@
 import BigInt
 import Combine
+import SwiftUI
+import SnapKit
 import UIKit
 import UStack
 
@@ -99,11 +101,11 @@ extension RedPacketShareSheet {
                 animations: {
                     presentView.transform = CGAffineTransform(scaleX: finalScale, y: finalScale)
                 }) { _ in
-                if !self.isPresenting {
-                    fromView.removeFromSuperview()
+                    if !self.isPresenting {
+                        fromView.removeFromSuperview()
+                    }
+                    transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
                 }
-                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-            }
         }
     }
 }

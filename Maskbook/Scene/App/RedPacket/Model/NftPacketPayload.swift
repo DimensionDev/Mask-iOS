@@ -2,6 +2,34 @@ import Foundation
 
 extension RedPacket {
     struct NftRedPacketPayload: Codable {
+        init(
+            id: String,
+            txid: String,
+            duration: Double,
+            message: String,
+            senderName: String,
+            contractName: String,
+            contractAddress: String,
+            contractVersion: Double,
+            contractTokenURI: String,
+            privateKey: String,
+            chainId: RedPacket.ChainId,
+            createTime: Double? = nil
+        ) {
+            self.id = id
+            self.txid = txid
+            self.duration = duration
+            self.message = message
+            self.senderName = senderName
+            self.contractName = contractName
+            self.contractAddress = contractAddress
+            self.contractVersion = contractVersion
+            self.contractTokenURI = contractTokenURI
+            self.privateKey = privateKey
+            self.chainId = chainId
+            self.createTime = createTime
+        }
+
         let id: String
         let txid: String
         let duration: Double
@@ -20,14 +48,14 @@ extension RedPacket {
             case txid
             case duration
             case message
-            case senderName = "sender_name"
-            case contractName = "contract_name"
-            case contractAddress = "contract_address"
-            case contractVersion = "contract_version"
-            case contractTokenURI = "contract_tokenURI"
+            case senderName
+            case contractName
+            case contractAddress
+            case contractVersion
+            case contractTokenURI
             case privateKey
             case chainId
-            case createTime = "create_time"
+            case createTime
         }
     }
 
@@ -85,7 +113,7 @@ extension RedPacket {
             let sender: Sender
             let contractVersion: Double
             let network: String?
-            let tokenType: EthereumToken
+            let tokenType: EthereumToken?
             let token: ERC20TokenRecord?
 
             enum CodingKeys: String, CodingKey {
@@ -101,7 +129,7 @@ extension RedPacket {
             /** contract address */
             let address: String
             /** eth chain id */
-            let chainId: ChainId
+//            let chainId: ChainId
             /** token name */
             let name: String
             /** token decimal */

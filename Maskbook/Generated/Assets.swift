@@ -225,6 +225,7 @@ internal enum Asset {
       internal static let cellCheck = ImageAsset(name: "Icon/Cell/cellCheck")
       internal static let cellTwitterCheck = ImageAsset(name: "Icon/Cell/cellTwitterCheck")
       internal static let cellUncheck = ImageAsset(name: "Icon/Cell/cellUncheck")
+      internal static let checkSquare = ImageAsset(name: "Icon/Cell/check_square")
     }
     internal enum Logo {
       internal static let largeMask = ImageAsset(name: "Icon/Logo/largeMask")
@@ -501,7 +502,6 @@ internal enum Asset {
     internal enum FileService {
       internal static let applicationPlaceholder = ImageAsset(name: "Plugins/FileService/application_placeholder")
       internal static let arrowDown = ImageAsset(name: "Plugins/FileService/arrowDown")
-      internal static let checkSquare = ImageAsset(name: "Plugins/FileService/check_square")
       internal static let downloadFail = ImageAsset(name: "Plugins/FileService/downloadFail")
       internal static let folder = ImageAsset(name: "Plugins/FileService/folder")
       internal static let imagePlaceholder = ImageAsset(name: "Plugins/FileService/image_placeholder")

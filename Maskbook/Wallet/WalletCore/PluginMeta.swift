@@ -16,6 +16,7 @@ enum EncryptionVersion {
 
 enum PluginMeta: Codable {
     case redPacket(RedPacketPayload)
+    case nftRedPacket(NftRedPacketPayload)
     case fileService(FileServiceUploadResult)
 
     func encode(to encoder: Encoder) throws {
@@ -26,21 +27,37 @@ enum PluginMeta: Codable {
 
         case let .fileService(value):
             try container.encode(value)
+
+        case let .nftRedPacket(value):
+            try container.encode(value)
         }
     }
 
     var plugin: PluginType {
         switch self {
-        case .redPacket: return .luckyDrop
+        case .redPacket, .nftRedPacket: return .luckyDrop
         case .fileService: return .fileService
         }
     }
 
     var key: String {
-        switch self {
-        case .redPacket: return PluginType.luckyDrop.postEncryptionKey
-        case .fileService: return PluginType.fileService.postEncryptionKey
-        }
+        let index: Int =  {
+            switch self {
+            case .redPacket: return 1
+            case .nftRedPacket: return 1
+            case .fileService: return 2
+            }
+        }()
+
+        let prefix: String = {
+            switch self {
+            case .redPacket: return "red_packet"
+            case .nftRedPacket: return "red_packet_nft"
+            case .fileService: return "fileservice"
+            }
+        }()
+
+        return "com.maskbook.\(prefix):\(index)"
     }
 
     var title: String {
@@ -63,6 +80,10 @@ enum PluginMeta: Codable {
 
         case let .fileService(value):
             return "Attached File: \(value.name) (\(Double(value.size).fileSizeText))"
+
+        case let .nftRedPacket(value):
+            let name = value.contractName
+            return "NFT Collectible: \(name)"
         }
     }
 }
@@ -70,8 +91,9 @@ enum PluginMeta: Codable {
 extension PluginMeta: Identifiable {
     var id: String {
         switch self {
-        case let .redPacket(value): return "\(value.basic?.txid ?? "")"
+        case let .redPacket(value): return value.basic?.txid ?? ""
         case let .fileService(value): return value.id
+        case let .nftRedPacket(value): return value.id
         }
     }
 }

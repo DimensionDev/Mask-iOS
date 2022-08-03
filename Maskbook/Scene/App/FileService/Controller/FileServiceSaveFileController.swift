@@ -6,10 +6,11 @@ final class FileServiceSaveFileController: SheetViewController {
 
     init(item: FileServiceSelectedFileItem) {
         self.viewModel = .init(item: item)
-        super.init(presenter: SheetPresenter(
-            presentStyle: .translucent,
-            transition: KeyboardSheetTransition()
-        )
+        super.init(
+            presenter: SheetPresenter(
+                presentStyle: .translucent,
+                transition: KeyboardSheetTransition()
+            )
         )
     }
 

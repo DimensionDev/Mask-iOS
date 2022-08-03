@@ -301,8 +301,7 @@ extension BalanceViewModel: UITableViewDelegate {
         case .account:
             return nil
             
-        case .tokens,
-                .collectibles:
+        case .tokens, .collectibles:
             let header = tableView.dequeueReusableHeaderFooterView(
                 withIdentifier: String(describing: BalanceHeaderView.self)) as! BalanceHeaderView
             header.setupType(currentTab.value)
