@@ -244,7 +244,7 @@ extension BalanceAccountCell {
             fatalError("init(coder:) has not been implemented")
         }
     
-        func addSelfConstraints() {
+        func addLayoutConstraints() {
             let width = (UIScreen.main.bounds.width - LayoutConstraints.leading * 2) / 3
             NSLayoutConstraint.activate([
                 heightAnchor.constraint(equalToConstant: 61),
