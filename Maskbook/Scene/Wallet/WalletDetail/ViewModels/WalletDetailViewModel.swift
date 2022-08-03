@@ -43,10 +43,10 @@ class WalletDetailViewModel {
             let network = WalletCoreStorage.getCurrentNetwork()
             let chainItem = WalletsItem.chain(type: network,
                                               subtitle: L10n.Scene.WalletDetail.walletTitleChange)
-            items.append(chainItem)
+//            items.append(chainItem)
             items.append(renameItem)
         }
-        items.append(historyItem)
+//        items.append(historyItem)
         
         if !account.fromWalletConnect {
             items.append(backupItem)
