@@ -252,7 +252,7 @@ extension BalanceAccountCell {
             ])
         }
     
-        func configWith(image: UIImage, title: String) {
+        func config(image: UIImage, title: String) {
             imageView.image = image
             titleLabel.text = title
         }
