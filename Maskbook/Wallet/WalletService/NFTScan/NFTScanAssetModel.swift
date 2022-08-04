@@ -66,7 +66,7 @@ extension Collectible {
         self.tokenId = assetModel.tokenID
         self.address = assetModel.contractAddress
         self.imageUrl = URL(string: assetModel.imageUri ?? "")
-        self.animationUrl = URL(string: assetModel.imageUri ?? "")
+        self.animationUrl = URL(string: assetModel.contentUri ?? "")
         self.previewUrl = URL(string: assetModel.imageUri ?? "")
         self.thumbnailUrl = URL(string: assetModel.imageUri ?? "")
         self.externalLink = URL(string: assetModel.externalLink ?? "")

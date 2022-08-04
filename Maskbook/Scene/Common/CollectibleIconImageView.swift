@@ -149,7 +149,10 @@ class CollectibleIconImageView: UIView {
         guard let animationUrl = animationUrl else {
             if validUrl.hasSuffix(".svg") {
                 tokenImageType = .svgUrl(validUrl)
-            } else {
+            } else if validUrl.hasPrefix("Qm") ||  validUrl.hasPrefix("ba"){
+                tokenImageType = .other(url: "https://ipfs.infura.io/ipfs/\(validUrl)")
+            }
+            else {
                 let size = CGSize(
                     width: (downsamplingSize?.width ?? 80) * UIScreen.main.scale,
                     height: (downsamplingSize?.height ?? 80) * UIScreen.main.scale)
@@ -165,6 +168,11 @@ class CollectibleIconImageView: UIView {
         if animationUrl.hasSuffix(".mp3") || animationUrl.hasSuffix(".wav") || animationUrl.hasSuffix(".mp4") {
             tokenImageType = .supportsVideo(imageUrl: validUrl, animationUrl: animationUrl)
         }
+        
+        if animationUrl.hasPrefix("QM") ||  animationUrl.hasPrefix("QM"){
+            tokenImageType = .other(url: "https://ipfs.infura.io/ipfs/\(animationUrl)")
+        }
+        
         tokenImageType = .other(url: animationUrl)
     }
     
