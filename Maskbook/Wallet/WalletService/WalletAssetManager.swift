@@ -26,6 +26,7 @@ public class WalletAssetManager {
     }
     
     let openSeaProvider = OpenSeaProvider()
+    let nftscanProvider = NFTScanProvider()
     
     @InjectedProvider(\.userDefaultSettings)
     private var settings
@@ -56,14 +57,20 @@ public class WalletAssetManager {
         if !activateProvider.isConnected {
             activateProvider.connect()
         }
-        if !openSeaProvider.isConnected {
-            openSeaProvider.connect()
+//        if !openSeaProvider.isConnected {
+//            openSeaProvider.connect()
+//        }
+        
+        if !nftscanProvider.isConnected{
+            nftscanProvider.connect()
         }
+        
     }
     
     func disconnect() {
         activateProvider.disconnect()
-        openSeaProvider.disconnect()
+//        openSeaProvider.disconnect()
+        nftscanProvider.disconnect()
     }
     
     func refresh(_ completion: ((Error?) -> Void)?) {
