@@ -17,6 +17,9 @@ final class LuckyDropHistoryViewModel: ObservableObject {
 
     @InjectedProvider(\.userDefaultSettings)
     var usersettings
+    
+    private var disposeBag = Set<AnyCancellable>()
+    
     private(set) var exploreAddress: String?
     private(set) var startBlock: BigUInt?
     private(set) var apiKey: String?
@@ -25,7 +28,7 @@ final class LuckyDropHistoryViewModel: ObservableObject {
 
     @Published var selection = LuckDropKind.token
     @Published var tokenPayloads: [TokenPayload] = []
-    @Published var nftPayloads: [NftRedPacketPayload] = []
+    @Published var nftPayloads: [NftRedPacketSubgraph] = []
     @Published var state = LoadingState.empty
     
     var pullState = InterActionState(state: .idle, progress: 0) {
@@ -36,12 +39,21 @@ final class LuckyDropHistoryViewModel: ObservableObject {
 
     private var dataFetchedSet = Set<LuckDropKind>()
     private var tokenHistoryTask: Task<[TokenPayload], Error>?
-    private var nftHistoryTask: Task<[NftRedPacketPayload], Error>?
+    private var nftHistoryTask: Task<[NftRedPacketSubgraph], Error>?
 
     init() {
         self.startBlock = usersettings.network.startBlock
         self.exploreAddress = usersettings.network.explorAddress
         self.apiKey = usersettings.network.apiKey
+        
+        $selection
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.displayData()
+            }
+
+            .store(in: &disposeBag)
+
     }
     
     deinit {
@@ -149,8 +161,7 @@ extension LuckyDropHistoryViewModel {
         dataFetchedSet.insert(.nft)
         nftHistoryTask?.cancel()
         nftHistoryTask = Task {
-            try? await Task.sleep(nanoseconds: 2 * 1_000_000_000)
-            return []
+            try await fetchNFTRedPacketHistory()
         }
 
         await displayData(on: .nft) {

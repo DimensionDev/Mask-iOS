@@ -47,6 +47,15 @@ extension BlockChainNetwork {
         }
     }
     
+    var subgraphURL: String? {
+        switch self {
+        case .eth: return "https://api.thegraph.com/subgraphs/name/dimensiondev/mask-nft-red-packet-mainnet"
+        case .bsc: return "https://api.thegraph.com/subgraphs/name/dimensiondev/mask-nft-red-packet-bsc-mainnet"
+        case .polygon: return "https://api.thegraph.com/subgraphs/name/dimensiondev/mask-nft-red-packet-polygon"
+        default: return nil
+        }
+    }
+    
     
     
     var nativeTokenAddress: String {
