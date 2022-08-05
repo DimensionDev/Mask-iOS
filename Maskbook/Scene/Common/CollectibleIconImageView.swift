@@ -150,9 +150,11 @@ class CollectibleIconImageView: UIView {
             if validUrl.hasSuffix(".svg") {
                 tokenImageType = .svgUrl(validUrl)
             } else if validUrl.hasPrefix("Qm") ||  validUrl.hasPrefix("ba"){
-                tokenImageType = .other(url: "https://ipfs.infura.io/ipfs/\(validUrl)")
-            }
-            else {
+                let size = CGSize(
+                    width: (downsamplingSize?.width ?? 80) * UIScreen.main.scale,
+                    height: (downsamplingSize?.height ?? 80) * UIScreen.main.scale)
+                tokenImageType = .normalUrl("https://ipfs.infura.io/ipfs/\(validUrl)", size)
+            } else {
                 let size = CGSize(
                     width: (downsamplingSize?.width ?? 80) * UIScreen.main.scale,
                     height: (downsamplingSize?.height ?? 80) * UIScreen.main.scale)
@@ -160,20 +162,21 @@ class CollectibleIconImageView: UIView {
             }
             return
         }
-
-        if animationUrl.hasSuffix(".glb") || animationUrl.hasSuffix(".gltf") {
-            tokenImageType = .supports3d(imageUrl: validUrl, animationUrl: animationUrl)
-        }
         
-        if animationUrl.hasSuffix(".mp3") || animationUrl.hasSuffix(".wav") || animationUrl.hasSuffix(".mp4") {
-            tokenImageType = .supportsVideo(imageUrl: validUrl, animationUrl: animationUrl)
-        }
-        
-        if animationUrl.hasPrefix("QM") ||  animationUrl.hasPrefix("QM"){
+        if animationUrl.hasPrefix("Qm") ||  animationUrl.hasPrefix("ba"){
             tokenImageType = .other(url: "https://ipfs.infura.io/ipfs/\(animationUrl)")
+        } else {
+            tokenImageType = .other(url: animationUrl)
         }
-        
-        tokenImageType = .other(url: animationUrl)
+
+//        if animationUrl.hasSuffix(".glb") || animationUrl.hasSuffix(".gltf") {
+//            tokenImageType = .supports3d(imageUrl: validUrl, animationUrl: animationUrl)
+//        }
+//
+//        if animationUrl.hasSuffix(".mp3") || animationUrl.hasSuffix(".wav") || animationUrl.hasSuffix(".mp4") {
+//            tokenImageType = .supportsVideo(imageUrl: validUrl, animationUrl: animationUrl)
+//        }
+
     }
     
     private func updateImage() {
