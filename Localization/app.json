@@ -1033,6 +1033,7 @@
       "transaction-fee": "Transaction fee",
       "end-time": "End Time",
       "claimed": "Claimed",
+      "nft_claimed": "NFTs claimed (%s) ",
       "refund": "Refund",
       "token": "Token",
       "nft": "NFT",

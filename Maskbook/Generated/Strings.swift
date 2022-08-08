@@ -909,6 +909,10 @@ enum L10n {
       static var nftSelected: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Nft-Selected")
       }
+      /// NFTs claimed (%@) 
+      static func nftClaimed(_ p1: String) -> String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.NftClaimed", p1)
+      }
       /// Best Wishes!
       static var pluginRedPacketBestWishes: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.PluginRedPacketBestWishes")

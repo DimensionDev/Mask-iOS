@@ -25,6 +25,12 @@ struct NFTLuckyDropClaimDetailView: View {
 
     var body: some View {
         ScrollView {
+            Spacer()
+                .frame(width: nil, height: 24, alignment: .center)
+            Text(L10n.Plugins.Luckydrop.nftClaimed("\(viewModel.remainResult?.claimedErc721TokenIDs?.count ?? 0)"))
+                .horizontallyFilled(alignment: .center)
+                .font(FontStyles.bh6.font)
+                .foregroundColor(Asset.Colors.Text.dark.asColor())
             LazyVGrid(columns: columns,
                       spacing: 12) {
                 ForEach(viewModel.claimState.keys.sorted(),
@@ -42,7 +48,7 @@ struct NFTLuckyDropClaimDetailView: View {
     func nftView(id: Int64,
                  claimed: Bool) -> some View
     {
-        //TODO: replace nft collection url
+        // TODO: replace nft collection url
         VStack {
             KFImage.url(
                 URL(string: "https://raw.githubusercontent.com/andy-at-mask/MysteryBoxAsset/master/png/0.png"),
