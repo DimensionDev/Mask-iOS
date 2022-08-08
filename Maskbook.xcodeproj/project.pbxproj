@@ -711,6 +711,7 @@
 		5D7F5A5127B6531E00A007C5 /* PersonaCreateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7F5A5027B6531E00A007C5 /* PersonaCreateHandler.swift */; };
 		5D7F5A5327B66C5600A007C5 /* PersonaKeyInfoPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7F5A5227B66C5600A007C5 /* PersonaKeyInfoPreview.swift */; };
 		5D84DC4D27B12B810009025E /* WebViewScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D84DC4C27B12B810009025E /* WebViewScrollViewDelegate.swift */; };
+		5D91378A28A0E983000A4256 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D91378928A0E983000A4256 /* RoundedCorner.swift */; };
 		5D93DF9E267B2B5000A175BF /* MaskTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D93DF9D267B2B5000A175BF /* MaskTextField.swift */; };
 		5D93DFA2267B3F2E00A175BF /* Persona.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D93DFA1267B3F2E00A175BF /* Persona.swift */; };
 		5D95FA59283FB4CB0008C100 /* PluginMetaShareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D95FA58283FB4CB0008C100 /* PluginMetaShareViewModel.swift */; };
@@ -728,6 +729,9 @@
 		5DB2F626289BA30C0030F3A4 /* NFTLuckyDropHistoryTokenItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2F625289BA30C0030F3A4 /* NFTLuckyDropHistoryTokenItemViewModel.swift */; };
 		5DB2F62A289BBA410030F3A4 /* NFTSubgraphQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2F629289BBA410030F3A4 /* NFTSubgraphQuery.swift */; };
 		5DB2F62C289BC77C0030F3A4 /* NftRedPacketSubgraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2F62B289BC77C0030F3A4 /* NftRedPacketSubgraph.swift */; };
+		5DB2F62E289D16C10030F3A4 /* NFTLuckyDropClaimDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2F62D289D16C10030F3A4 /* NFTLuckyDropClaimDetailViewController.swift */; };
+		5DB2F630289D19910030F3A4 /* NFTLuckyDropClaimDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2F62F289D19910030F3A4 /* NFTLuckyDropClaimDetailViewModel.swift */; };
+		5DB2F632289D1B940030F3A4 /* NFTLuckyDropClaimDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2F631289D1B940030F3A4 /* NFTLuckyDropClaimDetailView.swift */; };
 		5DB39E2B278694460025337C /* JSDocumentResourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2A278694460025337C /* JSDocumentResourceManager.swift */; };
 		5DB39E2E27869F6C0025337C /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2D27869F6C0025337C /* DebugView.swift */; };
 		5DB39E302786A4E40025337C /* JSResourceSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB39E2F2786A4E40025337C /* JSResourceSelectView.swift */; };
@@ -1576,6 +1580,7 @@
 		5D7F5A5027B6531E00A007C5 /* PersonaCreateHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaCreateHandler.swift; sourceTree = "<group>"; };
 		5D7F5A5227B66C5600A007C5 /* PersonaKeyInfoPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaKeyInfoPreview.swift; sourceTree = "<group>"; };
 		5D84DC4C27B12B810009025E /* WebViewScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewScrollViewDelegate.swift; sourceTree = "<group>"; };
+		5D91378928A0E983000A4256 /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
 		5D93DF9D267B2B5000A175BF /* MaskTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskTextField.swift; sourceTree = "<group>"; };
 		5D93DFA1267B3F2E00A175BF /* Persona.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persona.swift; sourceTree = "<group>"; };
 		5D95FA58283FB4CB0008C100 /* PluginMetaShareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginMetaShareViewModel.swift; sourceTree = "<group>"; };
@@ -1593,6 +1598,9 @@
 		5DB2F625289BA30C0030F3A4 /* NFTLuckyDropHistoryTokenItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTLuckyDropHistoryTokenItemViewModel.swift; sourceTree = "<group>"; };
 		5DB2F629289BBA410030F3A4 /* NFTSubgraphQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTSubgraphQuery.swift; sourceTree = "<group>"; };
 		5DB2F62B289BC77C0030F3A4 /* NftRedPacketSubgraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftRedPacketSubgraph.swift; sourceTree = "<group>"; };
+		5DB2F62D289D16C10030F3A4 /* NFTLuckyDropClaimDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTLuckyDropClaimDetailViewController.swift; sourceTree = "<group>"; };
+		5DB2F62F289D19910030F3A4 /* NFTLuckyDropClaimDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTLuckyDropClaimDetailViewModel.swift; sourceTree = "<group>"; };
+		5DB2F631289D1B940030F3A4 /* NFTLuckyDropClaimDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTLuckyDropClaimDetailView.swift; sourceTree = "<group>"; };
 		5DB39E2A278694460025337C /* JSDocumentResourceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSDocumentResourceManager.swift; sourceTree = "<group>"; };
 		5DB39E2D27869F6C0025337C /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		5DB39E2F2786A4E40025337C /* JSResourceSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSResourceSelectView.swift; sourceTree = "<group>"; };
@@ -2013,6 +2021,7 @@
 			isa = PBXGroup;
 			children = (
 				2AD854FC281282A20064DDA5 /* LuckDropHistoryController.swift */,
+				5DB2F62D289D16C10030F3A4 /* NFTLuckyDropClaimDetailViewController.swift */,
 				2AD854FD281282A20064DDA5 /* LuckyDropConfirmViewController.swift */,
 				5DCFA01C288E367E0069351C /* NFTLuckDropConfirmViewController.swift */,
 				2AD854FB281282A20064DDA5 /* LuckyDropViewController.swift */,
@@ -2027,6 +2036,7 @@
 			children = (
 				1F447949288848180098BAE9 /* NFTDropView.swift */,
 				2AD85505281283160064DDA5 /* LuckyDropHistoryView.swift */,
+				5DB2F631289D1B940030F3A4 /* NFTLuckyDropClaimDetailView.swift */,
 				5DB2F623289BA2DE0030F3A4 /* NFTLuckyDropHistoryRow.swift */,
 				2AD85506281283160064DDA5 /* LuckyDropSuccessfullyView.swift */,
 				2AD85507281283160064DDA5 /* LuckyDropTokens.swift */,
@@ -2200,6 +2210,7 @@
 			isa = PBXGroup;
 			children = (
 				2A6788D027EB6C8800CC2350 /* PrimaryButton.swift */,
+				5D91378928A0E983000A4256 /* RoundedCorner.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -2484,6 +2495,7 @@
 			isa = PBXGroup;
 			children = (
 				2AD8551B2812841C0064DDA5 /* RedPacketShareViewModel.swift */,
+				5DB2F62F289D19910030F3A4 /* NFTLuckyDropClaimDetailViewModel.swift */,
 				2AD8551C2812841C0064DDA5 /* RedPacketConfirmViewModel.swift */,
 				5DCFA01E288E36E50069351C /* NFTRedPacketConfirmViewModel.swift */,
 				2AD8551D2812841C0064DDA5 /* LuckyDropSuccessfullyViewModel.swift */,
@@ -4635,6 +4647,7 @@
 				1FCAD89127951026006D6B40 /* WKScriptMessage+JSON.swift in Sources */,
 				2DC651FD271EA1A500BABA9C /* WebExtensionCoreDataStackBridge.swift in Sources */,
 				2AD856022812875A0064DDA5 /* CryptoHelper.swift in Sources */,
+				5D91378A28A0E983000A4256 /* RoundedCorner.swift in Sources */,
 				2AF88535271EE9310004565A /* ImportItem.swift in Sources */,
 				2AD8550F281283170064DDA5 /* ShareLuckyDropView.swift in Sources */,
 				2AF884FE271EE9310004565A /* ContactsViewController.swift in Sources */,
@@ -4914,6 +4927,7 @@
 				5D11473727E2CDB200D4448C /* CropImageViewController.swift in Sources */,
 				2AF88511271EE9310004565A /* SegmentViewController.swift in Sources */,
 				0F41A19A260C7B75000037B2 /* ZerionMessageFactory.swift in Sources */,
+				5DB2F62E289D16C10030F3A4 /* NFTLuckyDropClaimDetailViewController.swift in Sources */,
 				2AD855F92812875A0064DDA5 /* PathBuilder.swift in Sources */,
 				2AD31E54282D367700CB3D49 /* UIImageView+Kingfisher.swift in Sources */,
 				2AD856062812875A0064DDA5 /* AlertBuilder.swift in Sources */,
@@ -4950,6 +4964,7 @@
 				2AD855A7281285D10064DDA5 /* FungibleToken.swift in Sources */,
 				2AD31E52282D367700CB3D49 /* UIApplication+extension.swift in Sources */,
 				2AF88526271EE9310004565A /* WalletRenameViewController.swift in Sources */,
+				5DB2F632289D1B940030F3A4 /* NFTLuckyDropClaimDetailView.swift in Sources */,
 				2AF88527271EE9310004565A /* KeyboardHandler.swift in Sources */,
 				2AF8855C271EE9310004565A /* GasFeeModel.swift in Sources */,
 				2AF884CB271EE9300004565A /* MaskWebMessage+Persona+Restore.swift in Sources */,
@@ -5115,6 +5130,7 @@
 				2A49E15228449F820084208E /* Substring+String.swift in Sources */,
 				2AF88503271EE9310004565A /* PersonaActionViewController.swift in Sources */,
 				2A18E7FB266C9D210045BC88 /* AvatarView.swift in Sources */,
+				5DB2F630289D19910030F3A4 /* NFTLuckyDropClaimDetailViewModel.swift in Sources */,
 				2AF885D3271EE9320004565A /* ScannerLineViewController.swift in Sources */,
 				1FB862C82787F3C900CF345F /* LabsListView.swift in Sources */,
 				2AF884F6271EE9310004565A /* WelcomeViewController.swift in Sources */,

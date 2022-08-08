@@ -218,6 +218,7 @@ class Coordinator {
         case luckyDropCreatePersona(callback: (@MainActor () -> Void)?)
         case luckyDropCreateProfile
         case luckDropSelectProfile(callback: (@MainActor () -> Void)?)
+        case nftLuckyDropClaimDetail(nftRedPacketSubgraph: NftRedPacketSubgraph)
         case fileService
         case fileServiceOptions(item: FileServiceSelectedFileItem, optionHandler: (FileServiceUploadOption) -> Void)
         case fileServiceLocalFileSource(selectFileHandler: FileServiceSelectFileHandler)
@@ -867,6 +868,9 @@ extension Coordinator {
         case let .luckDropSelectProfile(callback):
             let viewModel = ShareLuckyDropSelectProfileViewModel(callback: callback)
             return SheetViewAdapterController(rootView: SelectSocialAccountView(viewModel: viewModel))
+            
+        case let .nftLuckyDropClaimDetail(nftLuckyDropClaimDetail):
+            return NFTLuckyDropClaimDetailViewController(nftRedPacketSubgraph: nftLuckyDropClaimDetail)
             
         case let .messageCompose(meta):
             let viewModel = MessageComposeViewModel()

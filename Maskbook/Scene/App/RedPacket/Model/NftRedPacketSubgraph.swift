@@ -6,9 +6,9 @@
 //  Copyright © 2022 dimension. All rights reserved.
 //
 
+import BigInt
 import Foundation
 import web3swift
-import BigInt
 
 struct NftRedPacketSubgraph: Codable {
     struct NFTUser: Codable {
@@ -22,7 +22,7 @@ struct NftRedPacketSubgraph: Codable {
         let symbol: String
         let chain_id: Int64
     }
-    
+
     let rpid: String
     let txid: String
     let contractAddress: String
@@ -40,7 +40,7 @@ struct NftRedPacketSubgraph: Codable {
     let tokenIds: [String]
     let creator: NFTUser
     let claimers: [NFTUser]
-    
+
     enum CodingKeys: String, CodingKey {
         case rpid
         case txid
@@ -59,6 +59,12 @@ struct NftRedPacketSubgraph: Codable {
         case tokenIds = "token_ids"
         case creator
         case claimers
+    }
+}
+
+extension NftRedPacketSubgraph {
+    var tokenIdsInt: [Int64] {
+        tokenIds.map { Int64($0)! }
     }
 }
 

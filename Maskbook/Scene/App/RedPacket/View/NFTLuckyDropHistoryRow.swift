@@ -14,6 +14,9 @@ import Pika
 struct NFTLuckyDropHistoryRow: View {
     private let indicatorSize = CGSize(width: 16, height: 16)
 
+    @InjectedProvider(\.mainCoordinator)
+    private var mainCoordinator
+    
     @ObservedObject private var viewModel: NFTLuckyDropHistoryTokenItemViewModel
 
     init(item: NftRedPacketSubgraph) {
@@ -96,6 +99,21 @@ struct NFTLuckyDropHistoryRow: View {
 //                    .resizable()
 //                    .cornerRadius(10)
 //                    .frame(width: 20, height: 20)
+                    
+                    Spacer()
+                    
+                    HStack(alignment: .center, spacing: 8) {
+                        Text(L10n.Plugins.Luckydrop.all)
+                            .font(FontStyles.rh7.font)
+                            .foregroundColor(Asset.Colors.Text.dark.asColor())
+                            .layoutPriority(1)
+                        
+                        Image(Asset.Plugins.pluginArrow)
+                            .foregroundColor(Asset.Colors.Text.normal.asColor())
+                    }
+                    .onTapGesture {
+                        mainCoordinator.present(scene: .nftLuckyDropClaimDetail(nftRedPacketSubgraph: viewModel.luckyDrop), transition: .modal())
+                    }
                 }
             }
         }

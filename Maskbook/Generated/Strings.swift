@@ -853,6 +853,10 @@ enum L10n {
       static var account: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Account")
       }
+      /// All
+      static var all: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.All")
+      }
       /// Amount per share
       static var amountPerShare: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Amount-Per-Share")

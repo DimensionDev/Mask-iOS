@@ -6,9 +6,9 @@
 //  Copyright © 2022 dimension. All rights reserved.
 //
 
+import BigInt
 import UIKit
 import web3swift
-import BigInt
 
 struct NFTRedPacketABI: ABIContract {
     @InjectedProvider(\.userDefaultSettings)
@@ -20,7 +20,7 @@ struct NFTRedPacketABI: ABIContract {
     private(set) var ethcontract: EthereumContract?
     
     init() {
-        self.ethcontract = EthereumContract(abiString, at: contractAddress)
+        ethcontract = EthereumContract(abiString, at: contractAddress)
     }
     
     var contractAddress: EthereumAddress {
@@ -68,9 +68,10 @@ struct NFTRedPacketABI: ABIContract {
             methodName,
             parameters: param ?? [],
             extraData: extraData ?? Data(),
-            transactionOptions: defaultOptions.merge(options)) else {
-                return nil
-            }
+            transactionOptions: defaultOptions.merge(options)
+        ) else {
+            return nil
+        }
         
         return try await withCheckedThrowingContinuation { continuation in
             Task.detached {
@@ -226,11 +227,12 @@ extension NFTRedPacketABI {
 
         init?(json: [String: Any]) {
             guard let data = json["id"] as? Data,
-                  let time = json["creation_time"] as? BigUInt else {
+                  let time = json["creation_time"] as? BigUInt
+            else {
                 return nil
             }
-            self.id = data.toHexString().addHexPrefix()
-            self.creation_time = time
+            id = data.toHexString().addHexPrefix()
+            creation_time = time
         }
     }
     
@@ -263,16 +265,34 @@ extension NFTRedPacketABI {
     
     struct CheckERC721RemainIDsResult: Codable {
         let bitStatus: BigUInt?
-        let erc721TokenIDs: [BigUInt]?
+        let claimedErc721TokenIDs: [Int64]?
         
         enum CodingKeys: String, CodingKey {
             case bitStatus = "bit_status"
-            case erc721TokenIDs = "erc721_token_ids"
+            case claimedErc721TokenIDs = "erc721_token_ids"
         }
         
         init(_ data: [String: Any]) {
             bitStatus = data[CodingKeys.bitStatus.rawValue] as? BigUInt
-            erc721TokenIDs = data[CodingKeys.erc721TokenIDs.rawValue] as? [BigUInt]
+            let ids = data[CodingKeys.claimedErc721TokenIDs.rawValue] as? [BigUInt]
+            let bits = bitStatus?.asInt()
+            guard let ids = ids,
+                  let bits = bits
+            else {
+                claimedErc721TokenIDs = nil
+                return
+            }
+            var claimedIds: [Int64] = []
+            
+            for (index, element) in ids.enumerated() {
+                let bit = (bits >> index) & 0x01
+                if bit == 1 {
+                    if let value = element.asInt() {
+                        claimedIds.append(Int64(value))
+                    }
+                }
+            }
+            claimedErc721TokenIDs = claimedIds
         }
     }
     

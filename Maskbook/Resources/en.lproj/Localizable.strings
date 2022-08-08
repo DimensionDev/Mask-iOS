@@ -179,6 +179,7 @@ The upload can’t be cancelled.";
 "Plugins.FileService.Uploading" = "Uploading...";
 "Plugins.Luckydrop.Account" = "Account";
 "Plugins.Luckydrop.Alert.MessageNoAccount" = "You can’t select tokens as there is no wallet.";
+"Plugins.Luckydrop.All" = "All";
 "Plugins.Luckydrop.Amount-Per-Share" = "Amount per share";
 "Plugins.Luckydrop.Buttons.Approve-Collection" = "Approve Collection";
 "Plugins.Luckydrop.Buttons.Average" = "Average";
