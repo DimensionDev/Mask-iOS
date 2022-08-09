@@ -63,7 +63,7 @@ enum CollectibleNetworkChecker {
             .filter(isSupported)
             .eraseToAnyPublisher()
         Publishers.CombineLatest(cursor, network)
-            .filter { [weak self] _, network in
+            .filter(CollectibleNetworkChecker.isSupported)
                 self?.isSupported(network: network) == true
             }
             .receive(on: callbackProcessQueue)
