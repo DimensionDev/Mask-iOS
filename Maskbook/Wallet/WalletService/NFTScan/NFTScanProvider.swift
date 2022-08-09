@@ -31,7 +31,7 @@ class NFTScanProvider {
 
     let subject = CurrentValueSubject<[NFTScanAssetModel], Error>([])
     private var cursor = CurrentValueSubject<String?, Never>(nil)
-    private var assets = [NFTScanAssetModel]()
+    private var assets: [NFTScanAssetModel] = []
     private var assetsCancellable: AnyCancellable?
     var supportNetworkIDs: [BlockChainNetwork] {
         [.eth]
