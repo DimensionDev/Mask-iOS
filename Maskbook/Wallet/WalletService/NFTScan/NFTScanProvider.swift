@@ -105,7 +105,7 @@ class NFTScanProvider {
             .sink { [weak self] network in
                 self?.assetsCancellable = nil
                 self?.cursor.accept(nil)
-                print("[opensea] network updated: \(network.networkID)")
+                print("[opensea] network updated: \(network.networkId)")
             }
             .store(in: &disposeBag)
     }
