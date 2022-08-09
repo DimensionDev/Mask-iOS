@@ -59,8 +59,8 @@ class NFTActionViewController: UIViewController {
     let viewModel: ViewModel
     var subscriptions = Set<AnyCancellable>()
     
-    init(nftTokenModel: Collectible) {
-        self.viewModel = ViewModel(token: nftTokenModel)
+    init(nftTokenModel: Collectible, collection: NFTScanCollectionModel) {
+        self.viewModel = ViewModel(token: nftTokenModel, collection: collection)
         super.init(nibName: nil, bundle: nil)
     }
     

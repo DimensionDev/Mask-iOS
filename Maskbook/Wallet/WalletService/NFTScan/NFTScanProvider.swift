@@ -206,9 +206,9 @@ class NFTScanProvider {
         return tokenPublisher
     }
 
-    private func retrieveCollectionByAddress(
+    func retrieveCollectionByAddress(
         contractAddress: String
-    ) -> AnyPublisher<NFTScanCollectionDataModel, Error>? {
+    ) -> AnyPublisher<NFTScanCollectionModel, Error>? {
         let decoder = JSONDecoder()
         var fetchTokenURLComponents = URLComponents(
             url: baseURL.appendingPathComponent("collections/\(contractAddress)"),
@@ -237,7 +237,7 @@ class NFTScanProvider {
                     }
                     return element.data
                 }
-                .decode(type: NFTScanCollectionDataModel.self, decoder: decoder)
+                .decode(type: NFTScanCollectionModel.self, decoder: decoder)
                 .map {
                     $0
                 }

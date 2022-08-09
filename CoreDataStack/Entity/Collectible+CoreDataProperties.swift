@@ -43,6 +43,7 @@ extension Collectible {
     @NSManaged public var collectionSlug: String?
     @NSManaged public var collectionWebsite: URL?
     @NSManaged public var enabled: Bool
+    @NSManaged public var latestTradePrice: String?
 }
 
 extension Collectible: Identifiable {
