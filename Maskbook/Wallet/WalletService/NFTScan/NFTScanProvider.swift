@@ -44,7 +44,15 @@ class NFTScanProvider {
         subscribeNetwork()
     }
 
-    private func isSupported(network: BlockChainNetwork) -> Bool {
+enum CollectibleNetworkChecker {
+     private static var supportNetworkIDs: [BlockChainNetwork] {
+         [.eth]
+     }
+     
+    static func  isSupported(network: BlockChainNetwork) -> Bool {
+        supportNetworkIDs.contains(network)
+    }
+}
         supportNetworkIDs.contains(network)
     }
 
