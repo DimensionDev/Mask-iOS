@@ -314,7 +314,10 @@ extension NFTScanProvider: WalletAssetProvider {
     func connect() {
         connecting = true
         cancellable =
-            timer.autoconnect().share().prepend([Date()])
+            Timer.publish(every: 60, on: .main, in: .default)
+            .autoconnect()
+            .share()
+            .prepend([Date()])
                 .setFailureType(to: Error.self)
                 .flatMap { _ -> AnyPublisher<[NFTScanAssetModel], Error> in
                     self.retrieveNFTAssets().eraseToAnyPublisher()
