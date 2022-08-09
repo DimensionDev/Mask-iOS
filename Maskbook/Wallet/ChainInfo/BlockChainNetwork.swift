@@ -299,6 +299,19 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
         default: return nil
         }
     }
+    
+    func getAddressUrl(address: String) -> URL? {
+        switch self {
+        case .eth, .rinkeby: return URL(string: "https://etherscan.io/address/\(address)")
+        case .bsc: return URL(string: "https://bscscan.com/address/\(address)")
+        case .polygon: return URL(string: "https://polygonscan.com/address/\(address)")
+        case .arbitrum: return URL(string: "https://arbiscan.io/address/\(address)")
+        case .xdai: return URL(string: "https://blockscout.com/xdai/mainnet/address/\(address)")
+        case .optimism: return URL(string: "https://optimistic.etherscan.io/address/\(address)")
+        case .polka: return nil
+        default: return nil
+        }
+    }
 
     func getDerivationPath(index: UInt32) -> DerivationPath? {
         switch self.chain {

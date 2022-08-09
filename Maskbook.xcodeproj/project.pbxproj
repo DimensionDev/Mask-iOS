@@ -787,6 +787,8 @@
 		6FA623AF26D4D0540091FDFF /* NFTTransactionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA623AE26D4D0540091FDFF /* NFTTransactionHistory.swift */; };
 		6FD525542889311D0053B90E /* NFTRedPacket.json in Resources */ = {isa = PBXBuildFile; fileRef = 6FD525532889311D0053B90E /* NFTRedPacket.json */; };
 		6FD52556288931530053B90E /* NFTRedPacketABI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD52555288931530053B90E /* NFTRedPacketABI.swift */; };
+		6FD5B351288FCA9500F6311C /* UnlockNFTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD5B350288FCA9500F6311C /* UnlockNFTView.swift */; };
+		6FD5B353288FCF9200F6311C /* UnlockNFTViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD5B352288FCF9200F6311C /* UnlockNFTViewModel.swift */; };
 		6FE12922283FB4A50034A8EB /* NativeComposeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE12921283FB4A50034A8EB /* NativeComposeButton.swift */; };
 		DB0B3A5D240F60AE00B1657D /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B3A5C240F60AE00B1657D /* Coordinator.swift */; };
 		DB9FF4932416477F0048E676 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9FF4922416477F0048E676 /* Fonts.swift */; };
@@ -1656,6 +1658,8 @@
 		6FA623AE26D4D0540091FDFF /* NFTTransactionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTTransactionHistory.swift; sourceTree = "<group>"; };
 		6FD525532889311D0053B90E /* NFTRedPacket.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NFTRedPacket.json; sourceTree = "<group>"; };
 		6FD52555288931530053B90E /* NFTRedPacketABI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTRedPacketABI.swift; sourceTree = "<group>"; };
+		6FD5B350288FCA9500F6311C /* UnlockNFTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockNFTView.swift; sourceTree = "<group>"; };
+		6FD5B352288FCF9200F6311C /* UnlockNFTViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockNFTViewModel.swift; sourceTree = "<group>"; };
 		6FE12921283FB4A50034A8EB /* NativeComposeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeComposeButton.swift; sourceTree = "<group>"; };
 		703F6E38EA92D32008C8D28B /* Pods-MaskWalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskWalletTests.release.xcconfig"; path = "Target Support Files/Pods-MaskWalletTests/Pods-MaskWalletTests.release.xcconfig"; sourceTree = "<group>"; };
 		8C13CE761E6F65438DC8FE75 /* Pods_MaskWalletTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaskWalletTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2050,6 +2054,7 @@
 				2AD85508281283160064DDA5 /* TextLengthModifier.swift */,
 				2AD8550A281283160064DDA5 /* WalletBottomWidgetView.swift */,
 				1F447953288A86060098BAE9 /* NftRedpacketShareView.swift */,
+				6FD5B350288FCA9500F6311C /* UnlockNFTView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2512,6 +2517,7 @@
 				2A470B08283E5B53009B49EA /* ShareLuckyDropViewModel.swift */,
 				5D95FA5C28408F150008C100 /* ShareLuckyDropSelectProfileViewModel.swift */,
 				1FCB3906288564A10057966D /* NftLuckyDropViewModel.swift */,
+				6FD5B352288FCF9200F6311C /* UnlockNFTViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -4715,6 +4721,7 @@
 				2AF884E2271EE9310004565A /* MarketDataproviderSheet.swift in Sources */,
 				2A6ABB902720053B00CC3AED /* MaskServiceRequest.swift in Sources */,
 				2AF884EB271EE9310004565A /* SwapProviderListView.swift in Sources */,
+				6FD5B351288FCA9500F6311C /* UnlockNFTView.swift in Sources */,
 				5DD5A69827F53168005952A0 /* PersonaImportItem.swift in Sources */,
 				2AD31E6E282D367700CB3D49 /* Date+Compare.swift in Sources */,
 				1F5B5EF12851D13A00F6AD98 /* FileServiceRepository.swift in Sources */,
@@ -4745,6 +4752,7 @@
 				0F1A15A2265CE93B00B5E83E /* WalletCoreHelper.swift in Sources */,
 				2AF88520271EE9310004565A /* TokenDetailViewController.swift in Sources */,
 				5DB2F62A289BBA410030F3A4 /* NFTSubgraphQuery.swift in Sources */,
+				6FD5B353288FCF9200F6311C /* UnlockNFTViewModel.swift in Sources */,
 				0FE54FE62759E88700B32BD6 /* EmptyTokenCell.swift in Sources */,
 				2AF8851D271EE9310004565A /* TransactionCell.swift in Sources */,
 				1F5278CE286D83B700B6D443 /* InfinityCycleView.swift in Sources */,
