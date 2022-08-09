@@ -22,7 +22,7 @@ class NFTScanProvider {
     private var disposeBag = Set<AnyCancellable>()
     private var connecting = false
     private var timer = Timer.publish(every: 60, on: .main, in: .default)
-    private var cancellable: AnyCancellable?
+    private var timerCancellable: AnyCancellable?
 
     private let session: URLSession = {
         let session = URLSession(configuration: .default)
