@@ -57,7 +57,7 @@ enum CollectibleNetworkChecker {
     }
 
     private func subscribeAssetCursor() {
-        let network = UserDefaultSettings.shared
+        let network = userDefaultSettings
             .networkPubisher
             .removeDuplicates()
             .filter(isSupported)
