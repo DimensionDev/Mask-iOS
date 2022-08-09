@@ -60,7 +60,7 @@ class NFTDetailViewModel: NSObject {
             .store(in: &disposeBag)
         
         if let contractAddress = token.address{
-            walletAssetManager.nftscanProvider.retrieveCollectionByAddress(contractAddress: contractAddress)?
+            walletAssetManager.nftscanProvider.retrieveCollection(contractAddress: contractAddress)?
                 .receive(on: DispatchQueue.main)
                 .sink {  completion in
                     switch completion {
