@@ -265,7 +265,7 @@ extension NFTRedPacketABI {
     
     struct CheckERC721RemainIDsResult: Codable {
         let bitStatus: BigUInt?
-        let claimedErc721TokenIDs: [Int64]?
+        let claimedErc721TokenIDs: [BigUInt]?
         
         enum CodingKeys: String, CodingKey {
             case bitStatus = "bit_status"
@@ -282,14 +282,12 @@ extension NFTRedPacketABI {
                 claimedErc721TokenIDs = nil
                 return
             }
-            var claimedIds: [Int64] = []
+            var claimedIds: [BigUInt] = []
             
             for (index, element) in ids.enumerated() {
                 let bit = (bits >> index) & 0x01
                 if bit == 1 {
-                    if let value = element.asInt() {
-                        claimedIds.append(Int64(value))
-                    }
+                    claimedIds.append(element)
                 }
             }
             claimedErc721TokenIDs = claimedIds

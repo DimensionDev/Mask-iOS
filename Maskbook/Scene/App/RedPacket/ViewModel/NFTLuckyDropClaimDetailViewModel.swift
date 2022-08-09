@@ -7,12 +7,14 @@
 //
 
 import Foundation
+import BigInt
+
 final class NFTLuckyDropClaimDetailViewModel: ObservableObject {
     let nftRedPacketABI = NFTRedPacketABI()
     let nftRedPacketSubgraph: NftRedPacketSubgraph
 
     @Published
-    var claimState: [Int64: Bool] = [:]
+    var claimState: [BigUInt: Bool] = [:]
 
     @Published
     var remainResult: NFTRedPacketABI.CheckERC721RemainIDsResult?
@@ -20,7 +22,7 @@ final class NFTLuckyDropClaimDetailViewModel: ObservableObject {
         nftRedPacketSubgraph: NftRedPacketSubgraph)
     {
         self.nftRedPacketSubgraph = nftRedPacketSubgraph
-        nftRedPacketSubgraph.tokenIdsInt.forEach {
+        nftRedPacketSubgraph.tokenIdstoBigUInt.forEach {
             claimState[$0] = false
         }
         checkRemainIds()

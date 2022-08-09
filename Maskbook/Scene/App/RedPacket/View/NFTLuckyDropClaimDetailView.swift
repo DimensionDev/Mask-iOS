@@ -6,6 +6,7 @@
 //  Copyright © 2022 dimension. All rights reserved.
 //
 
+import BigInt
 import Kingfisher
 import SwiftUI
 
@@ -45,7 +46,7 @@ struct NFTLuckyDropClaimDetailView: View {
     }
 
     @ViewBuilder
-    func nftView(id: Int64,
+    func nftView(id: BigUInt,
                  claimed: Bool) -> some View
     {
         // TODO: replace nft collection url
@@ -62,21 +63,18 @@ struct NFTLuckyDropClaimDetailView: View {
             .overlay(
                 VStack {
                     Spacer()
-                    HStack {
-                        Spacer()
-                        Text(L10n.Scene.OpenRedPackage.claimed)
-                        Spacer()
-                    }
-                    .frame(width: .infinity, height: 32, alignment: .center)
-                    .background(
-                        Asset.Colors.Background.mask.asColor().opacity(0.8)
-                            .clipShape(RoundedCorner(radius: 8,
-                                                     corners: [.bottomLeft, .bottomRight]))
-                    )
+                    Text(L10n.Scene.OpenRedPackage.claimed)
+                        .horizontallyFilled(alignment: .center)
+                        .frame(width: .infinity, height: 32, alignment: .center)
+                        .background(
+                            Asset.Colors.Background.mask.asColor().opacity(0.8)
+                                .clipShape(RoundedCorner(radius: 8,
+                                                         corners: [.bottomLeft, .bottomRight]))
+                        )
                 }
                 .opacity(claimed ? 1 : 0)
             )
-            Text("# \(id)")
+            Text("# \(id.description)")
                 .horizontallyFilled(alignment: .leading)
                 .font(FontStyles.rh6.font)
                 .foregroundColor(Asset.Colors.Text.dark.asColor())

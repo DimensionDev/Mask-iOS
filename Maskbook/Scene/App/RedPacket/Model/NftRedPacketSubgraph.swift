@@ -63,8 +63,8 @@ struct NftRedPacketSubgraph: Codable {
 }
 
 extension NftRedPacketSubgraph {
-    var tokenIdsInt: [Int64] {
-        tokenIds.map { Int64($0)! }
+    var tokenIdstoBigUInt: [BigUInt] {
+        tokenIds.map { BigUInt($0)! }
     }
 }
 
