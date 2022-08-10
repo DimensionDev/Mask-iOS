@@ -77,7 +77,7 @@ final class NftLuckyDropViewModel: ObservableObject {
         case createBNFTLuckyDrop(NftRecpacketDraft)
         case selectCollectibleGroup
         case unlockWallet
-        case unlockDGC(contractAddress: String, gasItem: GasFeeCellItem)
+        case unlockNFT(contractAddress: String, gasItem: GasFeeCellItem)
     }
 
     enum CollectibleItem: Identifiable {
@@ -293,7 +293,7 @@ extension NftLuckyDropViewModel {
             }
 
             action(
-                .unlockDGC(
+                .unlockNFT(
                     contractAddress: contractAddress,
                     gasItem: item
                 )
