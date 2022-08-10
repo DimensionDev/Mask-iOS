@@ -13,17 +13,16 @@ import Foundation
 import SwiftUI
 
 enum CollectibleNetworkChecker {
-     private static var supportNetworkIDs: [BlockChainNetwork] {
-         [.eth,.bsc,.arbitrum,.optimism,.polygon]
-     }
-     
+    private static var supportNetworkIDs: [BlockChainNetwork] {
+        [.eth, .bsc, .arbitrum, .optimism, .polygon]
+    }
+
     static func isSupported(network: BlockChainNetwork) -> Bool {
         supportNetworkIDs.contains(network)
     }
 }
 
 class NFTScanProvider {
-
     @InjectedProvider(\.userDefaultSettings)
     private var userSettings
 
@@ -38,9 +37,9 @@ class NFTScanProvider {
     private var cursor = CurrentValueSubject<String?, Never>(nil)
     private var assets: [NFTScanAssetModel] = []
     private var assetsCancellable: AnyCancellable?
-        
+
     private var baseURL: URL {
-        return userSettings.network.getNFTScanUrl()!
+        userSettings.network.getNFTScanUrl()!
     }
 
     weak var delegate: WalletAssetProviderDelegate?
@@ -51,17 +50,12 @@ class NFTScanProvider {
     }
 
     private func subscribeAssetCursor() {
-        let network = userSettings
-            .networkPubisher
-            .removeDuplicates()
-            .eraseToAnyPublisher()
-        
-        Publishers.CombineLatest(cursor, network)
+        cursor
             .receive(on: callbackProcessQueue)
-            .filter({ _, network in
-                CollectibleNetworkChecker.isSupported(network: network)
-            })
-            .sink { [weak self] cursor, network in
+            .filter { _ in
+                CollectibleNetworkChecker.isSupported(network: self.userSettings.network)
+            }
+            .sink { [weak self] cursor in
                 guard let self = self else {
                     return
                 }
@@ -87,7 +81,7 @@ class NFTScanProvider {
 
                         if dataModel.next == nil {
                             let allNFTAssets = self.assets
-                            self.resolveResponse(assets: allNFTAssets, network: network)
+                            self.resolveResponse(assets: allNFTAssets, network: self.userSettings.network)
                             self.subject.send(allNFTAssets)
                         } else {
                             self.callbackProcessQueue.asyncAfter(deadline: .now() + 0.1) {
@@ -100,20 +94,18 @@ class NFTScanProvider {
     }
 
     private func subscribeNetwork() {
-             userSettings
+        userSettings
             .networkPubisher
             .removeDuplicates()
-            .filter({ network in
+            .filter { network in
                 CollectibleNetworkChecker.isSupported(network: network)
-            })
-            .sink { [weak self] network in
+            }
+            .sink { [weak self] _ in
                 self?.assetsCancellable = nil
                 self?.cursor.accept(nil)
             }
             .store(in: &disposeBag)
     }
-    
-
 
     private func retrieveAssetsByAddress(
         cursor: String,
@@ -141,11 +133,11 @@ class NFTScanProvider {
         var fetchTokenRequest = URLRequest(url: requestURL)
         fetchTokenRequest.setValue(APIKey.NFTSCAN, forHTTPHeaderField: "x-api-key")
         return JSONDataMapper.fetch(for: fetchTokenRequest)
-              .decode(type: NFTScanAssetDataModel.self, decoder: decoder)
-              .map {
-                  $0
-              }
-              .eraseToAnyPublisher()
+            .decode(type: NFTScanAssetDataModel.self, decoder: decoder)
+            .map {
+                $0
+            }
+            .eraseToAnyPublisher()
     }
 
     private func retrieveTransactionsByAddress(
@@ -169,11 +161,11 @@ class NFTScanProvider {
         var fetchTokenRequest = URLRequest(url: requestURL)
         fetchTokenRequest.setValue(APIKey.NFTSCAN, forHTTPHeaderField: "x-api-key")
         return JSONDataMapper.fetch(for: fetchTokenRequest)
-              .decode(type: NFTScanTransactionDataModel.self, decoder: decoder)
-              .map {
-                  $0
-              }
-              .eraseToAnyPublisher()
+            .decode(type: NFTScanTransactionDataModel.self, decoder: decoder)
+            .map {
+                $0
+            }
+            .eraseToAnyPublisher()
     }
 
     func retrieveCollectionByAddress(
@@ -191,13 +183,13 @@ class NFTScanProvider {
 
         var fetchTokenRequest = URLRequest(url: requestURL)
         fetchTokenRequest.setValue(APIKey.NFTSCAN, forHTTPHeaderField: "x-api-key")
-        
+
         return JSONDataMapper.fetch(for: fetchTokenRequest)
-              .decode(type: NFTScanCollectionModel.self, decoder: decoder)
-              .map {
-                  $0
-              }
-              .eraseToAnyPublisher()
+            .decode(type: NFTScanCollectionModel.self, decoder: decoder)
+            .map {
+                $0
+            }
+            .eraseToAnyPublisher()
     }
 
     private func resolveResponse(assets: [NFTScanAssetModel], network: BlockChainNetwork) {
@@ -250,12 +242,12 @@ class NFTScanProvider {
 
 enum JSONDataMapper {
     private static var acceptedStatusCode = 200
-    
+
     static func fetch(for request: URLRequest) -> AnyPublisher<Data, Error> {
-        return URLSession(configuration: .default)
-               .dataTaskPublisher(for: request)
-               .tryMap(JSONDataMapper.mapper)
-               .eraseToAnyPublisher()
+        URLSession(configuration: .default)
+            .dataTaskPublisher(for: request)
+            .tryMap(JSONDataMapper.mapper)
+            .eraseToAnyPublisher()
     }
 
     static func mapper(from element: (data: Data, response: URLResponse)) throws -> Data {
@@ -288,11 +280,11 @@ extension NFTScanProvider: WalletAssetProvider {
 
     func connect() {
         connecting = true
-         timerCancellable =
+        timerCancellable =
             Timer.publish(every: 60, on: .main, in: .default)
-            .autoconnect()
-            .share()
-            .prepend([Date()])
+                .autoconnect()
+                .share()
+                .prepend([Date()])
                 .setFailureType(to: Error.self)
                 .flatMap { _ -> AnyPublisher<[NFTScanAssetModel], Error> in
                     self.retrieveNFTAssets().eraseToAnyPublisher()
@@ -322,5 +314,3 @@ extension NFTScanProvider: WalletAssetProvider {
         nil
     }
 }
-
-
