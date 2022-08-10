@@ -75,7 +75,7 @@ class LuckyDropViewController: BaseViewController {
 
             case .unlockWallet: self.unlockWallet()
 
-            case let .unlockDGC(contractAddress, gasItem):
+            case let .unlockNFT(contractAddress, gasItem):
                 // TODO: unlock nft permission
                 break
             }
