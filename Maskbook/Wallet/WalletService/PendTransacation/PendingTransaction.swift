@@ -27,8 +27,7 @@ struct PendingTransaction {
         var toAddress: String
         var gasNetModel: GasFeeCellItem?
         var token: Token
-    }
-    
+    }    
 }
 
 

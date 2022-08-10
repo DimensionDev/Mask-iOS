@@ -34,7 +34,7 @@ struct NFTScanAssetModel: Codable, Hashable {
     let contentType: String?
     let nftscanID: String?
     let externalLink: String?
-    let latestTradePrice: String?
+    let latestTradePrice: Double?
 
     enum CodingKeys: String, CodingKey {
         case contractAddress = "contract_address"
@@ -94,6 +94,6 @@ extension Collectible {
         self.collectionImage = assetModel.imageUri
         self.collectionSlug = assetModel.contractName
         self.collectionWebsite = URL(string: assetModel.imageUri ?? "")
-        self.latestTradePrice = assetModel.latestTradePrice
+        self.latestTradePrice = assetModel.latestTradePrice.stringValue
     }
 }

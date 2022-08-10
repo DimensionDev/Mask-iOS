@@ -10,31 +10,37 @@ import Combine
 import CoreData
 import CoreDataStack
 import Foundation
+import SwiftUI
+
+enum CollectibleNetworkChecker {
+     private static var supportNetworkIDs: [BlockChainNetwork] {
+         [.eth,.bsc,.arbitrum,.optimism,.polygon]
+     }
+     
+    static func isSupported(network: BlockChainNetwork) -> Bool {
+        supportNetworkIDs.contains(network)
+    }
+}
 
 class NFTScanProvider {
+
     @InjectedProvider(\.userDefaultSettings)
     private var userSettings
 
     var refreshCompletionBlock: ((Error?) -> Void)?
 
     private let callbackProcessQueue = DispatchQueue(label: "io.mask.nftscan")
-    private let baseURL: URL = .init(string: "https://restapi.nftscan.com/api/v2/")!
     private var disposeBag = Set<AnyCancellable>()
     private var connecting = false
-    private var timer = Timer.publish(every: 60, on: .main, in: .default)
     private var timerCancellable: AnyCancellable?
-
-    private let session: URLSession = {
-        let session = URLSession(configuration: .default)
-        return session
-    }()
 
     let subject = CurrentValueSubject<[NFTScanAssetModel], Error>([])
     private var cursor = CurrentValueSubject<String?, Never>(nil)
     private var assets: [NFTScanAssetModel] = []
     private var assetsCancellable: AnyCancellable?
-    var supportNetworkIDs: [BlockChainNetwork] {
-        [.eth]
+        
+    private var baseURL: URL {
+        return userSettings.network.getNFTScanUrl()!
     }
 
     weak var delegate: WalletAssetProviderDelegate?
@@ -44,29 +50,17 @@ class NFTScanProvider {
         subscribeNetwork()
     }
 
-enum CollectibleNetworkChecker {
-     private static var supportNetworkIDs: [BlockChainNetwork] {
-         [.eth]
-     }
-     
-    static func  isSupported(network: BlockChainNetwork) -> Bool {
-        supportNetworkIDs.contains(network)
-    }
-}
-        supportNetworkIDs.contains(network)
-    }
-
     private func subscribeAssetCursor() {
-        let network = userDefaultSettings
+        let network = userSettings
             .networkPubisher
             .removeDuplicates()
-            .filter(isSupported)
             .eraseToAnyPublisher()
+        
         Publishers.CombineLatest(cursor, network)
-            .filter(CollectibleNetworkChecker.isSupported)
-                self?.isSupported(network: network) == true
-            }
             .receive(on: callbackProcessQueue)
+            .filter({ _, network in
+                CollectibleNetworkChecker.isSupported(network: network)
+            })
             .sink { [weak self] cursor, network in
                 guard let self = self else {
                     return
@@ -106,17 +100,20 @@ enum CollectibleNetworkChecker {
     }
 
     private func subscribeNetwork() {
-        UserDefaultSettings.shared
+             userSettings
             .networkPubisher
             .removeDuplicates()
-            .filter(isSupported)
+            .filter({ network in
+                CollectibleNetworkChecker.isSupported(network: network)
+            })
             .sink { [weak self] network in
                 self?.assetsCancellable = nil
                 self?.cursor.accept(nil)
-                print("[opensea] network updated: \(network.networkId)")
             }
             .store(in: &disposeBag)
     }
+    
+
 
     private func retrieveAssetsByAddress(
         cursor: String,
@@ -125,7 +122,6 @@ enum CollectibleNetworkChecker {
         guard let address = maskUserDefaults.defaultAccountAddress else {
             return nil
         }
-
         let decoder = JSONDecoder()
         var fetchTokenURLComponents = URLComponents(
             url: baseURL.appendingPathComponent("account/own/\(address)"),
@@ -144,29 +140,12 @@ enum CollectibleNetworkChecker {
 
         var fetchTokenRequest = URLRequest(url: requestURL)
         fetchTokenRequest.setValue(APIKey.NFTSCAN, forHTTPHeaderField: "x-api-key")
-        let tokenPublisher =
-            session.dataTaskPublisher(for: fetchTokenRequest)
-                .tryMap { element -> Data in
-                    guard let httpResponse = element.response as? HTTPURLResponse,
-                          httpResponse.statusCode == 200 else {
-                        throw URLError(.badServerResponse)
-                    }
-                    let json = try JSONSerialization.jsonObject(
-                        with: element.data,
-                        options: []
-                    ) as? [String: Any]
-                    if let assets = json?["data"] {
-                        return try JSONSerialization.data(withJSONObject: assets, options: [])
-                    }
-                    return element.data
-                }
-                .decode(type: NFTScanAssetDataModel.self, decoder: decoder)
-                .map {
-                    $0
-                }
-                .eraseToAnyPublisher()
-
-        return tokenPublisher
+        return JSONDataMapper.fetch(for: fetchTokenRequest)
+              .decode(type: NFTScanAssetDataModel.self, decoder: decoder)
+              .map {
+                  $0
+              }
+              .eraseToAnyPublisher()
     }
 
     private func retrieveTransactionsByAddress(
@@ -189,29 +168,12 @@ enum CollectibleNetworkChecker {
 
         var fetchTokenRequest = URLRequest(url: requestURL)
         fetchTokenRequest.setValue(APIKey.NFTSCAN, forHTTPHeaderField: "x-api-key")
-        let tokenPublisher =
-            session.dataTaskPublisher(for: fetchTokenRequest)
-                .tryMap { element -> Data in
-                    guard let httpResponse = element.response as? HTTPURLResponse,
-                          httpResponse.statusCode == 200 else {
-                        throw URLError(.badServerResponse)
-                    }
-                    let json = try JSONSerialization.jsonObject(
-                        with: element.data,
-                        options: []
-                    ) as? [String: Any]
-                    if let assets = json?["data"] {
-                        return try JSONSerialization.data(withJSONObject: assets, options: [])
-                    }
-                    return element.data
-                }
-                .decode(type: NFTScanTransactionDataModel.self, decoder: decoder)
-                .map {
-                    $0
-                }
-                .eraseToAnyPublisher()
-
-        return tokenPublisher
+        return JSONDataMapper.fetch(for: fetchTokenRequest)
+              .decode(type: NFTScanTransactionDataModel.self, decoder: decoder)
+              .map {
+                  $0
+              }
+              .eraseToAnyPublisher()
     }
 
     func retrieveCollectionByAddress(
@@ -229,29 +191,13 @@ enum CollectibleNetworkChecker {
 
         var fetchTokenRequest = URLRequest(url: requestURL)
         fetchTokenRequest.setValue(APIKey.NFTSCAN, forHTTPHeaderField: "x-api-key")
-        let tokenPublisher =
-            session.dataTaskPublisher(for: fetchTokenRequest)
-                .tryMap { element -> Data in
-                    guard let httpResponse = element.response as? HTTPURLResponse,
-                          httpResponse.statusCode == 200 else {
-                        throw URLError(.badServerResponse)
-                    }
-                    let json = try JSONSerialization.jsonObject(
-                        with: element.data,
-                        options: []
-                    ) as? [String: Any]
-                    if let assets = json?["data"] {
-                        return try JSONSerialization.data(withJSONObject: assets, options: [])
-                    }
-                    return element.data
-                }
-                .decode(type: NFTScanCollectionModel.self, decoder: decoder)
-                .map {
-                    $0
-                }
-                .eraseToAnyPublisher()
-
-        return tokenPublisher
+        
+        return JSONDataMapper.fetch(for: fetchTokenRequest)
+              .decode(type: NFTScanCollectionModel.self, decoder: decoder)
+              .map {
+                  $0
+              }
+              .eraseToAnyPublisher()
     }
 
     private func resolveResponse(assets: [NFTScanAssetModel], network: BlockChainNetwork) {
@@ -302,6 +248,35 @@ enum CollectibleNetworkChecker {
     }
 }
 
+enum JSONDataMapper {
+    private static var acceptedStatusCode = 200
+    
+    static func fetch(for request: URLRequest) -> AnyPublisher<Data, Error> {
+        return URLSession(configuration: .default)
+               .dataTaskPublisher(for: request)
+               .tryMap(JSONDataMapper.mapper)
+               .eraseToAnyPublisher()
+    }
+
+    static func mapper(from element: (data: Data, response: URLResponse)) throws -> Data {
+        guard let httpResponse = element.response as? HTTPURLResponse,
+              httpResponse.statusCode == acceptedStatusCode else {
+            throw URLError(.badServerResponse)
+        }
+
+        let json = try JSONSerialization.jsonObject(
+            with: element.data,
+            options: []
+        ) as? [String: Any]
+
+        let data = try json?["data"].flatMap { rawData -> Data in
+            try JSONSerialization.data(withJSONObject: rawData, options: [])
+        }
+
+        return data ?? element.data
+    }
+}
+
 extension NFTScanProvider: WalletAssetProvider {
     var type: WalletAssetProviderType {
         .nftscan
@@ -313,7 +288,7 @@ extension NFTScanProvider: WalletAssetProvider {
 
     func connect() {
         connecting = true
-        cancellable =
+         timerCancellable =
             Timer.publish(every: 60, on: .main, in: .default)
             .autoconnect()
             .share()
@@ -329,7 +304,7 @@ extension NFTScanProvider: WalletAssetProvider {
 
     func disconnect() {
         connecting = false
-        cancellable?.cancel()
+        timerCancellable?.cancel()
     }
 
     func refresh(_ completion: ((Error?) -> Void)?) {
@@ -347,3 +322,5 @@ extension NFTScanProvider: WalletAssetProvider {
         nil
     }
 }
+
+
