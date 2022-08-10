@@ -1,7 +1,7 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[6230],{
 
-/***/ 74368:
+/***/ 7055:
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -55,6 +55,12 @@ var util;
     util.isInteger = typeof Number.isInteger === "function"
         ? (val) => Number.isInteger(val) // eslint-disable-line ban/ban
         : (val) => typeof val === "number" && isFinite(val) && Math.floor(val) === val;
+    function joinValues(array, separator = " | ") {
+        return array
+            .map((val) => (typeof val === "string" ? `'${val}'` : val))
+            .join(separator);
+    }
+    util.joinValues = joinValues;
 })(util || (util = {}));
 
 const ZodIssueCode = util.arrayToEnum([
@@ -82,51 +88,6 @@ class ZodError extends Error {
     constructor(issues) {
         super();
         this.issues = [];
-        this.format = () => {
-            const fieldErrors = { _errors: [] };
-            const processError = (error) => {
-                for (const issue of error.issues) {
-                    if (issue.code === "invalid_union") {
-                        issue.unionErrors.map(processError);
-                    }
-                    else if (issue.code === "invalid_return_type") {
-                        processError(issue.returnTypeError);
-                    }
-                    else if (issue.code === "invalid_arguments") {
-                        processError(issue.argumentsError);
-                    }
-                    else if (issue.path.length === 0) {
-                        fieldErrors._errors.push(issue.message);
-                    }
-                    else {
-                        let curr = fieldErrors;
-                        let i = 0;
-                        while (i < issue.path.length) {
-                            const el = issue.path[i];
-                            const terminal = i === issue.path.length - 1;
-                            if (!terminal) {
-                                if (typeof el === "string") {
-                                    curr[el] = curr[el] || { _errors: [] };
-                                }
-                                else if (typeof el === "number") {
-                                    const errorArray = [];
-                                    errorArray._errors = [];
-                                    curr[el] = curr[el] || errorArray;
-                                }
-                            }
-                            else {
-                                curr[el] = curr[el] || { _errors: [] };
-                                curr[el]._errors.push(issue.message);
-                            }
-                            curr = curr[el];
-                            i++;
-                        }
-                    }
-                }
-            };
-            processError(this);
-            return fieldErrors;
-        };
         this.addIssue = (sub) => {
             this.issues = [...this.issues, sub];
         };
@@ -146,6 +107,55 @@ class ZodError extends Error {
     }
     get errors() {
         return this.issues;
+    }
+    format(_mapper) {
+        const mapper = _mapper ||
+            function (issue) {
+                return issue.message;
+            };
+        const fieldErrors = { _errors: [] };
+        const processError = (error) => {
+            for (const issue of error.issues) {
+                if (issue.code === "invalid_union") {
+                    issue.unionErrors.map(processError);
+                }
+                else if (issue.code === "invalid_return_type") {
+                    processError(issue.returnTypeError);
+                }
+                else if (issue.code === "invalid_arguments") {
+                    processError(issue.argumentsError);
+                }
+                else if (issue.path.length === 0) {
+                    fieldErrors._errors.push(mapper(issue));
+                }
+                else {
+                    let curr = fieldErrors;
+                    let i = 0;
+                    while (i < issue.path.length) {
+                        const el = issue.path[i];
+                        const terminal = i === issue.path.length - 1;
+                        if (!terminal) {
+                            curr[el] = curr[el] || { _errors: [] };
+                            // if (typeof el === "string") {
+                            //   curr[el] = curr[el] || { _errors: [] };
+                            // } else if (typeof el === "number") {
+                            //   const errorArray: any = [];
+                            //   errorArray._errors = [];
+                            //   curr[el] = curr[el] || errorArray;
+                            // }
+                        }
+                        else {
+                            curr[el] = curr[el] || { _errors: [] };
+                            curr[el]._errors.push(mapper(issue));
+                        }
+                        curr = curr[el];
+                        i++;
+                    }
+                }
+            }
+        };
+        processError(this);
+        return fieldErrors;
     }
     toString() {
         return this.message;
@@ -182,7 +192,7 @@ const defaultErrorMap = (issue, _ctx) => {
     let message;
     switch (issue.code) {
         case ZodIssueCode.invalid_type:
-            if (issue.received === "undefined") {
+            if (issue.received === ZodParsedType.undefined) {
                 message = "Required";
             }
             else {
@@ -193,22 +203,16 @@ const defaultErrorMap = (issue, _ctx) => {
             message = `Invalid literal value, expected ${JSON.stringify(issue.expected)}`;
             break;
         case ZodIssueCode.unrecognized_keys:
-            message = `Unrecognized key(s) in object: ${issue.keys
-                .map((k) => `'${k}'`)
-                .join(", ")}`;
+            message = `Unrecognized key(s) in object: ${util.joinValues(issue.keys, ", ")}`;
             break;
         case ZodIssueCode.invalid_union:
             message = `Invalid input`;
             break;
         case ZodIssueCode.invalid_union_discriminator:
-            message = `Invalid discriminator value. Expected ${issue.options
-                .map((val) => (typeof val === "string" ? `'${val}'` : val))
-                .join(" | ")}`;
+            message = `Invalid discriminator value. Expected ${util.joinValues(issue.options)}`;
             break;
         case ZodIssueCode.invalid_enum_value:
-            message = `Invalid enum value. Expected ${issue.options
-                .map((val) => (typeof val === "string" ? `'${val}'` : val))
-                .join(" | ")}`;
+            message = `Invalid enum value. Expected ${util.joinValues(issue.options)}, received '${issue.received}'`;
             break;
         case ZodIssueCode.invalid_arguments:
             message = `Invalid function arguments`;
@@ -2396,11 +2400,23 @@ function createZodEnum(values) {
 }
 class ZodEnum extends ZodType {
     _parse(input) {
+        if (typeof input.data !== "string") {
+            const ctx = this._getOrReturnCtx(input);
+            const expectedValues = this._def.values;
+            addIssueToContext(ctx, {
+                expected: util.joinValues(expectedValues),
+                received: ctx.parsedType,
+                code: ZodIssueCode.invalid_type,
+            });
+            return INVALID;
+        }
         if (this._def.values.indexOf(input.data) === -1) {
             const ctx = this._getOrReturnCtx(input);
+            const expectedValues = this._def.values;
             addIssueToContext(ctx, {
+                received: ctx.data,
                 code: ZodIssueCode.invalid_enum_value,
-                options: this._def.values,
+                options: expectedValues,
             });
             return INVALID;
         }
@@ -2435,11 +2451,23 @@ ZodEnum.create = createZodEnum;
 class ZodNativeEnum extends ZodType {
     _parse(input) {
         const nativeEnumValues = util.getValidEnumValues(this._def.values);
-        if (nativeEnumValues.indexOf(input.data) === -1) {
-            const ctx = this._getOrReturnCtx(input);
+        const ctx = this._getOrReturnCtx(input);
+        if (ctx.parsedType !== ZodParsedType.string &&
+            ctx.parsedType !== ZodParsedType.number) {
+            const expectedValues = util.objectValues(nativeEnumValues);
             addIssueToContext(ctx, {
+                expected: util.joinValues(expectedValues),
+                received: ctx.parsedType,
+                code: ZodIssueCode.invalid_type,
+            });
+            return INVALID;
+        }
+        if (nativeEnumValues.indexOf(input.data) === -1) {
+            const expectedValues = util.objectValues(nativeEnumValues);
+            addIssueToContext(ctx, {
+                received: ctx.data,
                 code: ZodIssueCode.invalid_enum_value,
-                options: util.objectValues(nativeEnumValues),
+                options: expectedValues,
             });
             return INVALID;
         }
@@ -2512,22 +2540,22 @@ class ZodEffects extends ZodType {
                 });
             }
         }
+        const checkCtx = {
+            addIssue: (arg) => {
+                addIssueToContext(ctx, arg);
+                if (arg.fatal) {
+                    status.abort();
+                }
+                else {
+                    status.dirty();
+                }
+            },
+            get path() {
+                return ctx.path;
+            },
+        };
+        checkCtx.addIssue = checkCtx.addIssue.bind(checkCtx);
         if (effect.type === "refinement") {
-            const checkCtx = {
-                addIssue: (arg) => {
-                    addIssueToContext(ctx, arg);
-                    if (arg.fatal) {
-                        status.abort();
-                    }
-                    else {
-                        status.dirty();
-                    }
-                },
-                get path() {
-                    return ctx.path;
-                },
-            };
-            checkCtx.addIssue = checkCtx.addIssue.bind(checkCtx);
             const executeRefinement = (acc
             // effect: RefinementEffect<any>
             ) => {
@@ -2581,11 +2609,11 @@ class ZodEffects extends ZodType {
                 // }
                 if (!isValid(base))
                     return base;
-                const result = effect.transform(base.value);
+                const result = effect.transform(base.value, checkCtx);
                 if (result instanceof Promise) {
                     throw new Error(`Asynchronous transform encountered during synchronous parse operation. Use .parseAsync instead.`);
                 }
-                return OK(result);
+                return { status: status.value, value: result };
             }
             else {
                 return this._def.schema
@@ -2597,7 +2625,7 @@ class ZodEffects extends ZodType {
                     // if (base.status === "dirty") {
                     //   return { status: "dirty", value: base.value };
                     // }
-                    return Promise.resolve(effect.transform(base.value)).then(OK);
+                    return Promise.resolve(effect.transform(base.value, checkCtx)).then((result) => ({ status: status.value, value: result }));
                 });
             }
         }

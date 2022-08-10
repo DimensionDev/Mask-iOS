@@ -239,7 +239,7 @@ axios.create = function create(instanceConfig) {
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(17729);
 axios.CancelToken = __webpack_require__(84046);
-axios.isCancel = __webpack_require__(59614);
+axios.isCancel = __webpack_require__(81064);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -347,7 +347,7 @@ module.exports = CancelToken;
 
 /***/ }),
 
-/***/ 59614:
+/***/ 81064:
 /***/ ((module) => {
 
 "use strict";
@@ -541,7 +541,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 var utils = __webpack_require__(85312);
 var transformData = __webpack_require__(64922);
-var isCancel = __webpack_require__(59614);
+var isCancel = __webpack_require__(81064);
 var defaults = __webpack_require__(54051);
 var isAbsoluteURL = __webpack_require__(18498);
 var combineURLs = __webpack_require__(64120);
@@ -1803,7 +1803,7 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(16126);
-axios.CancelToken = __webpack_require__(65095);
+axios.CancelToken = __webpack_require__(78813);
 axios.isCancel = __webpack_require__(26525);
 
 // Expose all/spread
@@ -1850,7 +1850,7 @@ module.exports = Cancel;
 
 /***/ }),
 
-/***/ 65095:
+/***/ 78813:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -2097,7 +2097,7 @@ module.exports = InterceptorManager;
 "use strict";
 
 
-var isAbsoluteURL = __webpack_require__(52946);
+var isAbsoluteURL = __webpack_require__(70890);
 var combineURLs = __webpack_require__(55635);
 
 /**
@@ -2724,7 +2724,7 @@ module.exports = (
 
 /***/ }),
 
-/***/ 52946:
+/***/ 70890:
 /***/ ((module) => {
 
 "use strict";

@@ -16,7 +16,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Program = void 0;
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const accounts_1 = __webpack_require__(57020);
 const buffer_1 = __webpack_require__(15313);
 class Program {
@@ -70,7 +70,7 @@ exports.Program = Program;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Transaction = void 0;
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 class Transaction extends web3_js_1.Transaction {
     constructor(options) {
         super(options);
@@ -103,7 +103,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Account = void 0;
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const buffer_1 = __webpack_require__(15313);
 const errors_1 = __webpack_require__(47790);
 class Account {
@@ -206,7 +206,7 @@ exports.deserialize = exports.TokenAccount = void 0;
 const errors_1 = __webpack_require__(47790);
 const Account_1 = __webpack_require__(61660);
 const spl_token_1 = __webpack_require__(23434);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 class TokenAccount extends Account_1.Account {
     constructor(pubkey, info) {
         super(pubkey, info);
@@ -395,7 +395,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.serialize = exports.deserializeUnchecked = exports.deserialize = exports.struct = exports.Data = exports.extendBorsh = void 0;
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const borsh_1 = __webpack_require__(42590);
 Object.defineProperty(exports, "deserializeUnchecked", ({ enumerable: true, get: function () { return borsh_1.deserializeUnchecked; } }));
 Object.defineProperty(exports, "serialize", ({ enumerable: true, get: function () { return borsh_1.serialize; } }));

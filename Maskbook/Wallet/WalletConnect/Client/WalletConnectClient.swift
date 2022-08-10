@@ -10,6 +10,7 @@ import Combine
 import CoreDataStack
 import Foundation
 import WalletConnectSwift
+import web3swift
 
 // swiftlint:disable force_unwrapping function_parameter_count line_length
 class WalletConnectClient {
@@ -122,6 +123,13 @@ class WalletConnectClient {
 }
 
 extension WalletConnectClient: ClientDelegate {
+    func _client(_ client: Client, didFailToConnect url: WCURL) {
+        if isStartingNewConnection {
+            didFailToConnectSubject.send((client: client, url: url))
+            isStartingNewConnection = false
+        }
+    }
+    
     func client(_ client: Client, didFailToConnect url: WCURL) {
         DispatchQueue.main.async {
             self._client(client, didFailToConnect: url)
@@ -130,34 +138,6 @@ extension WalletConnectClient: ClientDelegate {
     
     func client(_ client: Client, didConnect url: WCURL) {
         // do nothing
-    }
-    
-    func client(_ client: Client, didConnect session: Session) {
-        DispatchQueue.main.async {
-            self._client(client, didConnect: session)
-        }
-    }
-    
-    func client(_ client: Client, didDisconnect session: Session) {
-        DispatchQueue.main.async {
-            self.didDisconnectSubject.send((client: client, session: session))
-            self.session = nil
-            self.removeAccountFromSession(session: session)
-        }
-    }
-    
-    func client(_ client: Client, didUpdate session: Session) {
-        // This doc says `wc_sessionUpdate` will be called when the session is killed by the Wallet, when it provides new accounts or when it changes the active chain id.
-        // https://docs.walletconnect.com/tech-spec#session-update
-        // Method `didDisconnect` will be called if wallet disconnect.
-        log.debug("didUpdate \(session)", source: "WC:wallet-connect")
-    }
-    
-    func _client(_ client: Client, didFailToConnect url: WCURL) {
-        if isStartingNewConnection {
-            didFailToConnectSubject.send((client: client, url: url))
-            isStartingNewConnection = false
-        }
     }
     
     func _client(_ client: Client, didConnect session: Session) {
@@ -175,7 +155,12 @@ extension WalletConnectClient: ClientDelegate {
             disconnect(session: session)
             return
         }
-        guard let address = session.walletInfo?.accounts[safeIndex: 0] else {
+        guard let accounts: [String] = session.walletInfo?.accounts.compactMap({
+            EthereumAddress.toChecksumAddress($0) ?? $0
+        }) else {
+            return
+        }
+        guard let address = accounts.first else {
             disconnect(session: session)
             return
         }
@@ -212,6 +197,12 @@ extension WalletConnectClient: ClientDelegate {
         }
     }
     
+    func client(_ client: Client, didConnect session: Session) {
+        DispatchQueue.main.async {
+            self._client(client, didConnect: session)
+        }
+    }
+    
     func showNotSupportNetworkAlert(networkFromSession: BlockChainNetwork) {
         WalletConnectClient.chainListPublisher()
             .receive(on: DispatchQueue.main)
@@ -233,19 +224,23 @@ extension WalletConnectClient: ClientDelegate {
     
     func saveAccount(session: Session, address: String, network: BlockChainNetwork) {
         AppContext.shared.coreDataStack.persistentContainer.viewContext.perform {
-            if let accounts = session.walletInfo?.accounts {
-                for account in accounts {
-                    let isNewAccount = WalletCoreStorage.addWalletConnectAccount(session: session, address: account)
-                    if isNewAccount, network.networkId != self.userSetting.network.networkId {
-                        self.delegate.showChangeNetworkAlert(networkFromSession: network, address: address)
-                    }
+            guard let accounts: [String] = session.walletInfo?.accounts.compactMap({
+                EthereumAddress.toChecksumAddress($0) ?? $0
+            }) else {
+                return
+            }
+            for account in accounts {
+                let isNewAccount = WalletCoreStorage.addWalletConnectAccount(session: session, address: account)
+                if isNewAccount, network.networkId != self.userSetting.network.networkId {
+                    self.delegate.showChangeNetworkAlert(networkFromSession: network, address: address)
                 }
             }
         }
     }
     
     func removeAccountFromSession(session: Session) {
-        guard let address = session.walletInfo?.accounts[0] else { return }
+        guard let rawAddress = session.walletInfo?.accounts.first else { return }
+        let address = EthereumAddress.toChecksumAddress(rawAddress) ?? rawAddress
         AppContext.shared.coreDataStack.persistentContainer.viewContext.perform {
             if let account = WalletCoreStorage.getAccount(address: address) {
                 guard account.fromWalletConnect else { return }
@@ -277,6 +272,16 @@ extension WalletConnectClient: ClientDelegate {
                 self.delegate.showReplaceWalletConnectWalletAlert()
             }
         }
+    }
+    
+    func client(_ client: Client, didDisconnect session: Session) {
+        didDisconnectSubject.send((client: client, session: session))
+        self.session = nil
+        removeAccountFromSession(session: session)
+    }
+    
+    func client(_ client: Client, didUpdate session: Session) {
+        // do nothing
     }
 }
 

@@ -1,6 +1,6 @@
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[3693],{
 
-/***/ 30274:
+/***/ 91147:
 /***/ (function(__unused_webpack_module, exports) {
 
 /// <reference types="./full.d.ts" />
@@ -805,6 +805,12 @@
 
 
 
+
+
+
+
+
+
     /**
      * The async generator version of the AsyncCall
      * @param thisSideImplementation - The implementation when this AsyncCall acts as a JSON RPC server.
@@ -886,8 +892,7 @@
         }; 
         const remote = AsyncCall(server, options);
         const proxyTrap = (cache, key) => {
-            if (!isString(key))
-                throw makeHostedMessage(Err_Only_string_can_be_the_RPC_method_name, new TypeError(''))
+            if (!isString(key)) throw makeHostedMessage(Err_Only_string_can_be_the_RPC_method_name, new TypeError(''))
             if (cache[key]) return cache[key]
             const f = (...args) => {
                 const id = remote[AsyncIteratorStart](key, args);
@@ -960,7 +965,7 @@
 
 /***/ }),
 
-/***/ 79329:
+/***/ 42801:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -992,7 +997,7 @@ class WorkerChannel {
 
 /***/ }),
 
-/***/ 45824:
+/***/ 11991:
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -1007,7 +1012,7 @@ class r extends Error{constructor(r,e,t,n){super(e),this.name=r,this.code=t,this
 
 /***/ }),
 
-/***/ 19245:
+/***/ 17889:
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -1814,6 +1819,12 @@ const AsyncIteratorThrow = Symbol.for(i + 'throw');
 
 
 
+
+
+
+
+
+
 /**
  * The async generator version of the AsyncCall
  * @param thisSideImplementation - The implementation when this AsyncCall acts as a JSON RPC server.
@@ -1895,8 +1906,7 @@ function AsyncGeneratorCall(
     }; 
     const remote = AsyncCall(server, options);
     const proxyTrap = (cache, key) => {
-        if (!isString(key))
-            throw makeHostedMessage(Err_Only_string_can_be_the_RPC_method_name, new TypeError(''))
+        if (!isString(key)) throw makeHostedMessage(Err_Only_string_can_be_the_RPC_method_name, new TypeError(''))
         if (cache[key]) return cache[key]
         const f = (...args) => {
             const id = remote[AsyncIteratorStart](key, args);

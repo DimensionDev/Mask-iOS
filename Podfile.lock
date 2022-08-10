@@ -179,21 +179,21 @@ PODS:
   - ZIPFoundation (0.9.13)
 
 DEPENDENCIES:
-  - Alamofire (~> 5.4)
+  - Alamofire (= 5.4.4)
   - BigInt (= 5.2)
-  - BMPlayer (~> 1.3.0)
+  - BMPlayer (= 1.3.2)
   - CombineEvent (= 1.0.0)
   - CombineExt (= 1.7.0)
-  - EFQRCode (~> 6.1.0)
-  - EUMTouchPointView
+  - EFQRCode (= 6.1.0)
+  - EUMTouchPointView (= 0.1.0)
   - Firebase/Analytics (= 9.2.0)
-  - FLEX
+  - FLEX (= 4.7.0)
   - IPFSClientKit
   - IQKeyboardManagerSwift (= 6.3.0)
-  - KeychainAccess (~> 4.2)
+  - KeychainAccess (= 4.2.2)
   - Kingfisher (= 7.2.0)
   - KMPageControl (= 0.0.3)
-  - LookinServer
+  - LookinServer (= 1.0.6)
   - MaskbookPlugin (from `./DevelopmentPod/MaskbookPlugin`)
   - MaskbookPlugin/Tests (from `./DevelopmentPod/MaskbookPlugin`)
   - MaskLog (from `./DevelopmentPod/MaskLog`)
@@ -210,7 +210,7 @@ DEPENDENCIES:
   - UStack (= 2.2.1)
   - WalletConnectSwift (from `https://github.com/DimensionDev/WalletConnectSwift.git`)
   - web3swift (from `https://github.com/DimensionDev/web3swift.git`, branch `develop`)
-  - WebExtension-Shim (from `https://github.com/DimensionDev/WebExtension-Shim-iOS.git`, tag `2.0`)
+  - WebExtension-Shim (from `https://github.com/DimensionDev/WebExtension-Shim-iOS.git`, tag `2.0.1`)
   - ZIPFoundation (= 0.9.13)
 
 SPEC REPOS:
@@ -280,7 +280,7 @@ EXTERNAL SOURCES:
     :git: https://github.com/DimensionDev/web3swift.git
   WebExtension-Shim:
     :git: https://github.com/DimensionDev/WebExtension-Shim-iOS.git
-    :tag: '2.0'
+    :tag: 2.0.1
 
 CHECKOUT OPTIONS:
   SwiftMsgPack:
@@ -294,7 +294,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/DimensionDev/web3swift.git
   WebExtension-Shim:
     :git: https://github.com/DimensionDev/WebExtension-Shim-iOS.git
-    :tag: '2.0'
+    :tag: 2.0.1
 
 SPEC CHECKSUMS:
   Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
@@ -351,6 +351,6 @@ SPEC CHECKSUMS:
   WebExtension-Shim: 11b071466c53f42097291eb176cf9bcc5fb9b050
   ZIPFoundation: ae5b4b813d216d3bf0a148773267fff14bd51d37
 
-PODFILE CHECKSUM: fe572789e6450e0996e46709ee53616187a0cdee
+PODFILE CHECKSUM: 4fef305f01e36b53808efd582da9f3d064efa5f5
 
 COCOAPODS: 1.11.3

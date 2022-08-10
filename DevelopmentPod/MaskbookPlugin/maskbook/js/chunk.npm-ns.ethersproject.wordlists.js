@@ -14,8 +14,8 @@ __webpack_require__.d(__webpack_exports__, {
 var id = __webpack_require__(39125);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+properties@5.4.0/node_modules/@ethersproject/properties/lib.esm/index.js + 1 modules
 var lib_esm = __webpack_require__(27930);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+logger@5.5.0/node_modules/@ethersproject/logger/lib.esm/index.js + 1 modules
-var logger_lib_esm = __webpack_require__(89930);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+logger@5.6.0/node_modules/@ethersproject/logger/lib.esm/index.js + 1 modules
+var logger_lib_esm = __webpack_require__(58450);
 ;// CONCATENATED MODULE: ../../node_modules/.pnpm/@ethersproject+wordlists@5.4.0/node_modules/@ethersproject/wordlists/lib.esm/_version.js
 const version = "wordlists/5.4.0";
 //# sourceMappingURL=_version.js.map
@@ -140,8 +140,8 @@ const langEn = new LangEn();
 Wordlist.register(langEn);
 
 //# sourceMappingURL=lang-en.js.map
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+strings@5.4.0/node_modules/@ethersproject/strings/lib.esm/utf8.js + 1 modules
-var utf8 = __webpack_require__(42716);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+strings@5.6.0/node_modules/@ethersproject/strings/lib.esm/utf8.js + 1 modules
+var utf8 = __webpack_require__(75276);
 ;// CONCATENATED MODULE: ../../node_modules/.pnpm/@ethersproject+wordlists@5.4.0/node_modules/@ethersproject/wordlists/lib.esm/lang-es.js
 
 
@@ -271,8 +271,8 @@ const langFr = new LangFr();
 Wordlist.register(langFr);
 
 //# sourceMappingURL=lang-fr.js.map
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+bytes@5.5.0/node_modules/@ethersproject/bytes/lib.esm/index.js + 1 modules
-var bytes_lib_esm = __webpack_require__(61115);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@ethersproject+bytes@5.6.1/node_modules/@ethersproject/bytes/lib.esm/index.js + 1 modules
+var bytes_lib_esm = __webpack_require__(99376);
 ;// CONCATENATED MODULE: ../../node_modules/.pnpm/@ethersproject+wordlists@5.4.0/node_modules/@ethersproject/wordlists/lib.esm/lang-ja.js
 
 

@@ -33,7 +33,7 @@ class CryptoTests: XCTestCase {
             XCTAssert(false, "Encrypt failed \(error)")
         }
     }
-    
+
     func testEncryptAndDecryptBackupCaseInsensitive() throws {
         do {
             let returnResult = try Crypto.encryptBackup(password: "1", account: "aaaa", content: ["3": "4"])
@@ -45,7 +45,7 @@ class CryptoTests: XCTestCase {
             XCTAssert(false, "Encrypt failed \(error)")
         }
     }
-    
+
     func testDecryptBackup() throws {
         do {
             let rawBase64 = "TUFTSy1CQUNLVVAtVjAwMJPEEPaYWp0YQ+Y/Fi/pr9b4oRfEEEVuCJbM8x/DZ7QjPmBpdjXEFQBu0S3F0jj2RCN1exy/KMGaojA68WfqWBf8G9IVATmadiX3ZJwOSoSLVoOTOAXQxB8GhnZT"

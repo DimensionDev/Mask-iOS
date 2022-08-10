@@ -5,7 +5,7 @@ final class FileServiceSaveFileController: SheetViewController {
     private let viewModel: ViewModel
 
     init(item: FileServiceSelectedFileItem) {
-        self.viewModel = .init(item: item)
+        viewModel = .init(item: item)
         super.init(presenter: SheetPresenter(
             presentStyle: .translucent,
             transition: KeyboardSheetTransition()
@@ -21,7 +21,9 @@ final class FileServiceSaveFileController: SheetViewController {
     override func buildEvent() {
         super.buildEvent()
         viewModel.action = { [weak self] action in
-            guard let self = self else { return }
+            guard let self = self else {
+                return
+            }
             switch action {
             case .saveToAlbum:
                 guard self.viewModel.item.mime.mimeIsCanSaveToAlbum else {
@@ -29,17 +31,21 @@ final class FileServiceSaveFileController: SheetViewController {
                 }
                 if self.viewModel.item.mime.mimeIsImage {
                     if let image = UIImage(data: self.viewModel.item.data) {
-                        UIImageWriteToSavedPhotosAlbum(image,
-                                                       self,
-                                                       #selector(self.albumSave),
-                                                       nil)
+                        UIImageWriteToSavedPhotosAlbum(
+                            image,
+                            self,
+                            #selector(self.albumSave),
+                            nil
+                        )
                     }
                 }
                 if self.viewModel.item.mime.mimeIsVideo {
-                    UISaveVideoAtPathToSavedPhotosAlbum(self.viewModel.item.tempURL.path,
-                                                        self,
-                                                        #selector(self.videoSave),
-                                                        nil)
+                    UISaveVideoAtPathToSavedPhotosAlbum(
+                        self.viewModel.item.tempURL.path,
+                        self,
+                        #selector(self.videoSave),
+                        nil
+                    )
                 }
             case .saveToFolder: self.selectDestinationFolder()
             }
@@ -61,8 +67,10 @@ final class FileServiceSaveFileController: SheetViewController {
     private func saveSuccessAction() {
         dismiss(animated: true) {
             UIApplication.getTopViewController()?
-                .makeToast(message: L10n.Common.Toast.saved,
-                           image: Asset.Images.Toast.check.image)
+                .makeToast(
+                    message: L10n.Common.Toast.saved,
+                    image: Asset.Images.Toast.check.image
+                )
         }
     }
 
@@ -96,11 +104,11 @@ extension FileServiceSaveFileController: UIDocumentPickerDelegate {
             url.stopAccessingSecurityScopedResource()
         }
 
-        let fileUrl = url.appendingPathComponent(viewModel.item.fileName)
+        let fileURL = url.appendingPathComponent(viewModel.item.fileName)
         guard !viewModel.item.data.isEmpty else {
             return
         }
-        try? viewModel.item.data.write(to: fileUrl)
+        try? viewModel.item.data.write(to: fileURL)
 
         saveSuccessAction()
     }
@@ -140,7 +148,7 @@ extension FileServiceSaveFileController {
         }
 
         var body: some SwiftUI.View {
-            VStack(alignment: .leading, spacing: 16) {
+            VStack(spacing: 16) {
                 Button(
                     action: { self.viewModel.action(.saveToAlbum) },
                     label: {
@@ -159,7 +167,7 @@ extension FileServiceSaveFileController {
                                     )
                                     .padding(.horizontal, 12),
 
-                                alignment: .leading
+                                alignment: .center
                             )
                     }
                 )
@@ -177,7 +185,7 @@ extension FileServiceSaveFileController {
                                     .foregroundColor(Asset.Colors.Text.dark)
                                     .padding(.horizontal, 12),
 
-                                alignment: .leading
+                                alignment: .center
                             )
                     }
                 )

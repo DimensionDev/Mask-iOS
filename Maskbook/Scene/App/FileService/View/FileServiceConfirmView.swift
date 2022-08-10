@@ -158,8 +158,7 @@ extension FileServiceSelectedFileItem {
         .init(
             data: Data(count: 3072 * 1024),
             fileName: "Rosecoke.png",
-            fileType: .image,
-            mime: ""
+            fileType: .image
         )
     }
 }

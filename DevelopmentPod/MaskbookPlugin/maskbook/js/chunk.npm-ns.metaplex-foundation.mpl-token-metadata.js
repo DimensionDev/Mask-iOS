@@ -7,7 +7,7 @@
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.MetadataProgram = exports.MetadataKey = void 0;
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const mpl_core_1 = __webpack_require__(78654);
 var MetadataKey;
 (function (MetadataKey) {
@@ -44,7 +44,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Edition = exports.EditionData = void 0;
 const mpl_core_1 = __webpack_require__(78654);
 const MetadataProgram_1 = __webpack_require__(95964);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const buffer_1 = __webpack_require__(15313);
 class EditionData extends mpl_core_1.Borsh.Data {
     constructor(args) {
@@ -105,7 +105,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.EditionMarker = exports.EditionMarkerData = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const Edition_1 = __webpack_require__(61177);
 const MetadataProgram_1 = __webpack_require__(95964);
 const buffer_1 = __webpack_require__(15313);
@@ -187,7 +187,7 @@ const bs58_1 = __importDefault(__webpack_require__(91945));
 const Edition_1 = __webpack_require__(61177);
 const MetadataProgram_1 = __webpack_require__(95964);
 const buffer_1 = __webpack_require__(15313);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 class MasterEditionV1Data extends mpl_core_1.Borsh.Data {
     constructor(args) {
         super(args);
@@ -295,7 +295,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.computeCreatorOffset = exports.MAX_CREATOR_LEN = exports.MAX_URI_LENGTH = exports.MAX_SYMBOL_LENGTH = exports.MAX_NAME_LENGTH = exports.Metadata = exports.MetadataData = exports.MetadataDataData = exports.Creator = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const bn_js_1 = __importDefault(__webpack_require__(28891));
 const bs58_1 = __importDefault(__webpack_require__(91945));
 const buffer_1 = __webpack_require__(15313);
@@ -524,7 +524,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CreateMasterEdition = exports.CreateMasterEditionArgs = void 0;
 const mpl_core_1 = __webpack_require__(78654);
 const spl_token_1 = __webpack_require__(23434);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const MetadataProgram_1 = __webpack_require__(95964);
 class CreateMasterEditionArgs extends mpl_core_1.Borsh.Data {
     constructor() {
@@ -610,7 +610,7 @@ exports.CreateMasterEdition = CreateMasterEdition;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CreateMetadata = exports.CreateMetadataArgs = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const Metadata_1 = __webpack_require__(9085);
 const MetadataProgram_1 = __webpack_require__(95964);
 class CreateMetadataArgs extends mpl_core_1.Borsh.Data {
@@ -693,7 +693,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.MintNewEditionFromMasterEditionViaToken = exports.MintNewEditionFromMasterEditionViaTokenArgs = void 0;
 const mpl_core_1 = __webpack_require__(78654);
 const spl_token_1 = __webpack_require__(23434);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const MetadataProgram_1 = __webpack_require__(95964);
 class MintNewEditionFromMasterEditionViaTokenArgs extends mpl_core_1.Borsh.Data {
     constructor() {
@@ -804,7 +804,7 @@ exports.MintNewEditionFromMasterEditionViaToken = MintNewEditionFromMasterEditio
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SignMetadata = exports.SignMetadataArgs = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const MetadataProgram_1 = __webpack_require__(95964);
 class SignMetadataArgs extends mpl_core_1.Borsh.Data {
     constructor() {
@@ -849,7 +849,7 @@ exports.SignMetadata = SignMetadata;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.UpdateMetadata = exports.UpdateMetadataArgs = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const Metadata_1 = __webpack_require__(9085);
 const MetadataProgram_1 = __webpack_require__(95964);
 class UpdateMetadataArgs extends mpl_core_1.Borsh.Data {
@@ -907,7 +907,7 @@ exports.UpdateMetadata = UpdateMetadata;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.UpdatePrimarySaleHappenedViaToken = exports.UpdatePrimarySaleHappenedViaTokenArgs = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const MetadataProgram_1 = __webpack_require__(95964);
 class UpdatePrimarySaleHappenedViaTokenArgs extends mpl_core_1.Borsh.Data {
     constructor() {
@@ -981,7 +981,7 @@ __exportStar(__webpack_require__(17644), exports);
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.MetadataProgram = void 0;
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const mpl_core_1 = __webpack_require__(78654);
 class MetadataProgram extends mpl_core_1.Program {
 }
@@ -1032,7 +1032,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Edition = exports.EditionData = void 0;
 const mpl_core_1 = __webpack_require__(78654);
 const MetadataProgram_1 = __webpack_require__(50683);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const buffer_1 = __webpack_require__(15313);
 const constants_1 = __webpack_require__(12754);
 class EditionData extends mpl_core_1.Borsh.Data {
@@ -1078,7 +1078,7 @@ Edition.EDITION_PREFIX = 'edition';
 
 /***/ }),
 
-/***/ 77826:
+/***/ 68641:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -1094,7 +1094,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.EditionMarker = exports.EditionMarkerData = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const Edition_1 = __webpack_require__(9083);
 const MetadataProgram_1 = __webpack_require__(50683);
 const buffer_1 = __webpack_require__(15313);
@@ -1177,7 +1177,7 @@ const bs58_1 = __importDefault(__webpack_require__(91945));
 const Edition_1 = __webpack_require__(9083);
 const MetadataProgram_1 = __webpack_require__(50683);
 const buffer_1 = __webpack_require__(15313);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const constants_1 = __webpack_require__(12754);
 class MasterEditionV1Data extends mpl_core_1.Borsh.Data {
     constructor(args) {
@@ -1286,7 +1286,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.computeCreatorOffset = exports.MAX_CREATOR_LEN = exports.MAX_URI_LENGTH = exports.MAX_SYMBOL_LENGTH = exports.MAX_NAME_LENGTH = exports.Metadata = exports.MetadataData = exports.MetadataDataData = exports.DataV2 = exports.Creator = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const bn_js_1 = __importDefault(__webpack_require__(28891));
 const bs58_1 = __importDefault(__webpack_require__(91945));
 const buffer_1 = __webpack_require__(15313);
@@ -1584,7 +1584,7 @@ __exportStar(__webpack_require__(12754), exports);
 __exportStar(__webpack_require__(39897), exports);
 __exportStar(__webpack_require__(69988), exports);
 __exportStar(__webpack_require__(9083), exports);
-__exportStar(__webpack_require__(77826), exports);
+__exportStar(__webpack_require__(68641), exports);
 __exportStar(__webpack_require__(80426), exports);
 __exportStar(__webpack_require__(3316), exports);
 //# sourceMappingURL=index.js.map
@@ -1621,7 +1621,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CreateMasterEdition = exports.CreateMasterEditionArgs = void 0;
 const mpl_core_1 = __webpack_require__(78654);
 const spl_token_1 = __webpack_require__(23434);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const MetadataProgram_1 = __webpack_require__(50683);
 class CreateMasterEditionArgs extends mpl_core_1.Borsh.Data {
     constructor() {
@@ -1708,7 +1708,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CreateMasterEditionV3 = exports.CreateMasterEditionV3Args = void 0;
 const mpl_core_1 = __webpack_require__(78654);
 const spl_token_1 = __webpack_require__(23434);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const MetadataProgram_1 = __webpack_require__(50683);
 class CreateMasterEditionV3Args extends mpl_core_1.Borsh.Data {
     constructor() {
@@ -1794,7 +1794,7 @@ exports.CreateMasterEditionV3 = CreateMasterEditionV3;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CreateMetadata = exports.CreateMetadataArgs = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const Metadata_1 = __webpack_require__(39897);
 const MetadataProgram_1 = __webpack_require__(50683);
 class CreateMetadataArgs extends mpl_core_1.Borsh.Data {
@@ -1876,7 +1876,7 @@ exports.CreateMetadata = CreateMetadata;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CreateMetadataV2 = exports.CreateMetadataV2Args = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const Metadata_1 = __webpack_require__(39897);
 const MetadataProgram_1 = __webpack_require__(50683);
 class CreateMetadataV2Args extends mpl_core_1.Borsh.Data {
@@ -1959,7 +1959,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.MintNewEditionFromMasterEditionViaToken = exports.MintNewEditionFromMasterEditionViaTokenArgs = void 0;
 const mpl_core_1 = __webpack_require__(78654);
 const spl_token_1 = __webpack_require__(23434);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const MetadataProgram_1 = __webpack_require__(50683);
 class MintNewEditionFromMasterEditionViaTokenArgs extends mpl_core_1.Borsh.Data {
     constructor() {
@@ -2070,7 +2070,7 @@ exports.MintNewEditionFromMasterEditionViaToken = MintNewEditionFromMasterEditio
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SignMetadata = exports.SignMetadataArgs = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const MetadataProgram_1 = __webpack_require__(50683);
 class SignMetadataArgs extends mpl_core_1.Borsh.Data {
     constructor() {
@@ -2115,7 +2115,7 @@ exports.SignMetadata = SignMetadata;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.UpdateMetadata = exports.UpdateMetadataArgs = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const Metadata_1 = __webpack_require__(39897);
 const MetadataProgram_1 = __webpack_require__(50683);
 class UpdateMetadataArgs extends mpl_core_1.Borsh.Data {
@@ -2173,7 +2173,7 @@ exports.UpdateMetadata = UpdateMetadata;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.UpdateMetadataV2 = exports.UpdateMetadataV2Args = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const Metadata_1 = __webpack_require__(39897);
 const MetadataProgram_1 = __webpack_require__(50683);
 class UpdateMetadataV2Args extends mpl_core_1.Borsh.Data {
@@ -2233,7 +2233,7 @@ exports.UpdateMetadataV2 = UpdateMetadataV2;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.UpdatePrimarySaleHappenedViaToken = exports.UpdatePrimarySaleHappenedViaTokenArgs = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const MetadataProgram_1 = __webpack_require__(50683);
 class UpdatePrimarySaleHappenedViaTokenArgs extends mpl_core_1.Borsh.Data {
     constructor() {
@@ -2283,7 +2283,7 @@ exports.UpdatePrimarySaleHappenedViaToken = UpdatePrimarySaleHappenedViaToken;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.VerifyCollection = exports.VerifyCollectionArgs = void 0;
 const mpl_core_1 = __webpack_require__(78654);
-const web3_js_1 = __webpack_require__(29948);
+const web3_js_1 = __webpack_require__(59493);
 const MetadataProgram_1 = __webpack_require__(50683);
 class VerifyCollectionArgs extends mpl_core_1.Borsh.Data {
     constructor() {

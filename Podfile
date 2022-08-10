@@ -1,6 +1,6 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, '13.0'
+platform :ios, '14.0'
 
 target 'Maskbook' do
   use_frameworks!
@@ -17,18 +17,18 @@ target 'Maskbook' do
   
   # private pod
 #  pod 'WebExtension-Shim', '~> 0.5.6'
-  pod 'WebExtension-Shim', :git => 'https://github.com/DimensionDev/WebExtension-Shim-iOS.git',  :tag => '2.0'
+  pod 'WebExtension-Shim', :git => 'https://github.com/DimensionDev/WebExtension-Shim-iOS.git',  :tag => '2.0.1'
 
   pod 'SwiftGen',  '6.5.0'
   pod 'KMPageControl', '0.0.3'
   
-  pod 'KeychainAccess', '~> 4.2'
+  pod 'KeychainAccess', '4.2.2'
   
-  pod 'EFQRCode', '~> 6.1.0'
-  pod 'Alamofire', '~> 5.4'
+  pod 'EFQRCode', '6.1.0'
+  pod 'Alamofire', '5.4.4'
 
   # Press
-  pod "EUMTouchPointView"
+  pod "EUMTouchPointView", '0.1.0'
   
   pod 'Kingfisher', '7.2.0'
   
@@ -36,11 +36,11 @@ target 'Maskbook' do
   
   pod 'IQKeyboardManagerSwift', '6.3.0'
   
-  pod 'FLEX', :configurations => ['Debug']
+  pod 'FLEX', '4.7.0', :configurations => ['Debug']
   
   pod 'RSKPlaceholderTextView', '6.0.4'
   
-  pod 'BMPlayer', '~> 1.3.0'
+  pod 'BMPlayer', '1.3.2'
   
   # Web3
   pod 'BigInt', '5.2'
@@ -50,7 +50,7 @@ target 'Maskbook' do
   #UI
   pod 'SnapKit', '5.0.1'
   #debug
-  pod 'LookinServer', :configurations => ['Debug']
+  pod 'LookinServer', '1.0.6', :configurations => ['Debug']
 
   pod 'SwiftLint', '0.43.1', :configurations => ['Debug']
   

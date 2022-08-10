@@ -30,7 +30,9 @@ final class FileServiceUploadViewModel: ObservableObject {
     func tryUploading(
         _ item: FileServiceUploadingItem
     ) {
-        let uploadOption = item.option
+        guard let uploadOption = item.option else {
+            return
+        }
         let uploader = chooseUploader(by: uploadOption)
         let stream = uploader.upload(item, option: uploadOption)
 
@@ -49,7 +51,6 @@ final class FileServiceUploadViewModel: ObservableObject {
                         totalBytes: item.totalBytes,
                         uploadedBytes: uploadedBytes,
                         uploadDate: didFinish ? Date() : nil,
-                        mime: item.mime,
                         option: uploadOption,
                         tx: value
                     )
@@ -68,7 +69,6 @@ final class FileServiceUploadViewModel: ObservableObject {
                     content: item.content,
                     totalBytes: item.totalBytes,
                     uploadedBytes: uploadedBytes,
-                    mime: item.mime,
                     option: uploadOption
                 )
                 self.updateUploadingState(for: item)

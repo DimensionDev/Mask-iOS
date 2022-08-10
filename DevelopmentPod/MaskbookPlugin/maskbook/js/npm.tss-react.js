@@ -1,7 +1,7 @@
 "use strict";
 (globalThis["webpackChunk_masknet_extension"] = globalThis["webpackChunk_masknet_extension"] || []).push([[9141],{
 
-/***/ 31388:
+/***/ 16978:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -30,8 +30,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GlobalStyles = void 0;
-const jsx_runtime_1 = __webpack_require__(71999);
-const reactEmotion = __importStar(__webpack_require__(8465));
+const jsx_runtime_1 = __webpack_require__(35667);
+const reactEmotion = __importStar(__webpack_require__(2078));
 function GlobalStyles(props) {
     const { styles } = props;
     return (0, jsx_runtime_1.jsx)(reactEmotion.Global, { styles: reactEmotion.css(styles) });
@@ -41,7 +41,7 @@ exports.GlobalStyles = GlobalStyles;
 
 /***/ }),
 
-/***/ 93263:
+/***/ 5447:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -50,8 +50,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TssCacheProvider = exports.useTssEmotionCache = exports.getTssDefaultEmotionCache = exports.getDoExistsTssDefaultEmotionCacheMemoizedValue = void 0;
-const jsx_runtime_1 = __webpack_require__(71999);
-const react_1 = __webpack_require__(86248);
+const jsx_runtime_1 = __webpack_require__(35667);
+const react_1 = __webpack_require__(58757);
 const cache_1 = __importDefault(__webpack_require__(20227));
 const { getDoExistsTssDefaultEmotionCacheMemoizedValue, getTssDefaultEmotionCache, reactContext, } = (() => {
     const propertyKey = "__tss-react_context";
@@ -112,18 +112,18 @@ exports.TssCacheProvider = TssCacheProvider;
 
 /***/ }),
 
-/***/ 76446:
+/***/ 36353:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.useCssAndCx = exports.createCssAndCx = void 0;
-const classnames_1 = __webpack_require__(18227);
+const classnames_1 = __webpack_require__(88559);
 const serialize_1 = __webpack_require__(37961);
 const utils_1 = __webpack_require__(45477);
-const useGuaranteedMemo_1 = __webpack_require__(94911);
-const cache_1 = __webpack_require__(93263);
-const types_1 = __webpack_require__(21400);
+const useGuaranteedMemo_1 = __webpack_require__(74944);
+const cache_1 = __webpack_require__(5447);
+const types_1 = __webpack_require__(47363);
 exports.createCssAndCx = (() => {
     function merge(registered, css, className) {
         const registeredStyles = [];
@@ -220,7 +220,7 @@ const increaseSpecificityToTakePrecedenceOverMediaQuerries = (() => {
 
 /***/ }),
 
-/***/ 13442:
+/***/ 82737:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 var __webpack_unused_export__;
@@ -228,22 +228,22 @@ var __webpack_unused_export__;
 __webpack_unused_export__ = ({ value: true });
 __webpack_unused_export__ = exports.LW = __webpack_unused_export__ = __webpack_unused_export__ = exports.F4 = __webpack_unused_export__ = exports.a0 = __webpack_unused_export__ = __webpack_unused_export__ = void 0;
 /** @see <https://docs.tss-react.dev/api-references> */
-var cssAndCx_1 = __webpack_require__(76446);
+var cssAndCx_1 = __webpack_require__(36353);
 __webpack_unused_export__ = ({ enumerable: true, get: function () { return cssAndCx_1.useCssAndCx; } });
-var mergeClasses_1 = __webpack_require__(16846);
+var mergeClasses_1 = __webpack_require__(78743);
 __webpack_unused_export__ = ({ enumerable: true, get: function () { return mergeClasses_1.useMergedClasses; } });
-const makeStyles_1 = __webpack_require__(9124);
+const makeStyles_1 = __webpack_require__(44768);
 Object.defineProperty(exports, "a0", ({ enumerable: true, get: function () { return makeStyles_1.createMakeStyles; } }));
-const withStyles_1 = __webpack_require__(72003);
+const withStyles_1 = __webpack_require__(27855);
 __webpack_unused_export__ = ({ enumerable: true, get: function () { return withStyles_1.createWithStyles; } });
 /** @see <https://docs.tss-react.dev/api-references/keyframes> */
-var react_1 = __webpack_require__(8465);
+var react_1 = __webpack_require__(2078);
 Object.defineProperty(exports, "F4", ({ enumerable: true, get: function () { return react_1.keyframes; } }));
 /** @see <https://docs.tss-react.dev/api-references/globalstyles> */
-var GlobalStyles_1 = __webpack_require__(31388);
+var GlobalStyles_1 = __webpack_require__(16978);
 __webpack_unused_export__ = ({ enumerable: true, get: function () { return GlobalStyles_1.GlobalStyles; } });
 /** @see <https://docs.tss-react.dev/cache> */
-var cache_1 = __webpack_require__(93263);
+var cache_1 = __webpack_require__(5447);
 __webpack_unused_export__ = ({ enumerable: true, get: function () { return cache_1.getTssDefaultEmotionCache; } });
 Object.defineProperty(exports, "LW", ({ enumerable: true, get: function () { return cache_1.TssCacheProvider; } }));
 /** @see <https://docs.tss-react.dev/api-references/makestyles-usestyles> */
@@ -255,22 +255,22 @@ __webpack_unused_export__ = createMakeAndWithStyles;
 
 /***/ }),
 
-/***/ 9124:
+/***/ 44768:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.createMakeStyles = void 0;
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const react_1 = __webpack_require__(86248);
-const Object_fromEntries_1 = __webpack_require__(35329);
-const objectKeys_1 = __webpack_require__(96894);
-const cssAndCx_1 = __webpack_require__(76446);
-const getDependencyArrayRef_1 = __webpack_require__(95243);
-const typeGuard_1 = __webpack_require__(81805);
-const cache_1 = __webpack_require__(93263);
-const assert_1 = __webpack_require__(17820);
-const mergeClasses_1 = __webpack_require__(16846);
+const react_1 = __webpack_require__(58757);
+const Object_fromEntries_1 = __webpack_require__(11815);
+const objectKeys_1 = __webpack_require__(11970);
+const cssAndCx_1 = __webpack_require__(36353);
+const getDependencyArrayRef_1 = __webpack_require__(45725);
+const typeGuard_1 = __webpack_require__(33824);
+const cache_1 = __webpack_require__(5447);
+const assert_1 = __webpack_require__(61852);
+const mergeClasses_1 = __webpack_require__(78743);
 const getCounter = (() => {
     let counter = 0;
     return () => counter++;
@@ -388,7 +388,7 @@ exports.createMakeStyles = createMakeStyles;
 
 /***/ }),
 
-/***/ 16846:
+/***/ 78743:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -396,10 +396,10 @@ exports.createMakeStyles = createMakeStyles;
 /* eslint-disable @typescript-eslint/no-explicit-any */
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.useMergedClasses = exports.mergeClasses = void 0;
-const objectKeys_1 = __webpack_require__(96894);
-const getDependencyArrayRef_1 = __webpack_require__(95243);
-const cssAndCx_1 = __webpack_require__(76446);
-const react_1 = __webpack_require__(86248);
+const objectKeys_1 = __webpack_require__(11970);
+const getDependencyArrayRef_1 = __webpack_require__(45725);
+const cssAndCx_1 = __webpack_require__(36353);
+const react_1 = __webpack_require__(58757);
 function mergeClasses(classesFromUseStyles, classesFromProps, cx) {
     //NOTE: We use this test to be resilient in case classesFromProps is not of the expected type.
     if (!(classesFromProps instanceof Object)) {
@@ -430,7 +430,7 @@ exports.useMergedClasses = useMergedClasses;
 
 /***/ }),
 
-/***/ 17820:
+/***/ 61852:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -448,7 +448,7 @@ exports.assert = assert;
 
 /***/ }),
 
-/***/ 34021:
+/***/ 50998:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -464,14 +464,14 @@ exports.capitalize = capitalize;
 
 /***/ }),
 
-/***/ 18227:
+/***/ 88559:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.classnames = void 0;
-const assert_1 = __webpack_require__(17820);
-const typeGuard_1 = __webpack_require__(81805);
+const assert_1 = __webpack_require__(61852);
+const typeGuard_1 = __webpack_require__(33824);
 /** Copy pasted from
  * https://github.com/emotion-js/emotion/blob/23f43ab9f24d44219b0b007a00f4ac681fe8712e/packages/react/src/class-names.js#L17-L63
  **/
@@ -520,7 +520,7 @@ exports.classnames = classnames;
 
 /***/ }),
 
-/***/ 95243:
+/***/ 45725:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -569,7 +569,7 @@ exports.getDependencyArrayRef = getDependencyArrayRef;
 
 /***/ }),
 
-/***/ 96894:
+/***/ 11970:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -585,7 +585,7 @@ exports.objectKeys = objectKeys;
 
 /***/ }),
 
-/***/ 35329:
+/***/ 11815:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -610,7 +610,7 @@ exports.objectFromEntries = !Object
 
 /***/ }),
 
-/***/ 81805:
+/***/ 33824:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -626,13 +626,13 @@ exports.typeGuard = typeGuard;
 
 /***/ }),
 
-/***/ 94911:
+/***/ 74944:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.useGuaranteedMemo = void 0;
-const react_1 = __webpack_require__(86248);
+const react_1 = __webpack_require__(58757);
 /** Like react's useMemo but with guarantee that the fn
  * won't be invoked again if deps hasn't change */
 function useGuaranteedMemo(fn, deps) {
@@ -652,7 +652,7 @@ exports.useGuaranteedMemo = useGuaranteedMemo;
 
 /***/ }),
 
-/***/ 21400:
+/***/ 47363:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -669,7 +669,7 @@ exports.matchCSSObject = matchCSSObject;
 
 /***/ }),
 
-/***/ 72003:
+/***/ 27855:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -686,11 +686,11 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.createWithStyles = void 0;
-const jsx_runtime_1 = __webpack_require__(71999);
+const jsx_runtime_1 = __webpack_require__(35667);
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const react_1 = __webpack_require__(86248);
-const makeStyles_1 = __webpack_require__(9124);
-const capitalize_1 = __webpack_require__(34021);
+const react_1 = __webpack_require__(58757);
+const makeStyles_1 = __webpack_require__(44768);
+const capitalize_1 = __webpack_require__(50998);
 function createWithStyles(params) {
     const { useTheme } = params;
     const { makeStyles } = (0, makeStyles_1.createMakeStyles)({ useTheme });

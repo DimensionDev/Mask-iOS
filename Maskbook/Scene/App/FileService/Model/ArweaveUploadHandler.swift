@@ -18,7 +18,6 @@ struct ArweaveUploadHandler: FileServiceUploadHandler {
 
                 let attachment = AttachmentOptions(
                     encrypted: option.encrypted,
-                    type: item.mime,
                     block: item.content,
                     name: item.fileName
                 )
@@ -139,9 +138,7 @@ extension ArweaveUploadHandler {
 
 extension FileServiceUploadProgress.Stage {
     func progress(with totalBytes: Double) -> Double {
-        let allStageBytes: Double = {
-            totalBytes + 95_973 * 2
-        }()
+        let allStageBytes = totalBytes + 95_973 * 2
         switch self {
         case let .filePayloadUploading(totalBytesSent, _): return totalBytesSent / allStageBytes
         case .htmlUploading: return (totalBytes + 95_973) / allStageBytes

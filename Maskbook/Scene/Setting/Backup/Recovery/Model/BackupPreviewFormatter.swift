@@ -41,11 +41,14 @@ struct BackupPreviewFormatter {
         }
     }
 
-    static func previewItems(of json: [String: JSON]) -> [(String, String)] {
+    static func previewItems(of json: [String: JSON], nativeInfo: [Item: Int] ) -> [(String, String)] {
         var previewItems: [(String, String)] = []
 
         let numberFormatter = NumberFormatter()
         numberFormatter.positiveFormat = "###,##0"
+
+        var fileInfoMerged = false
+        let nativaFiles = nativeInfo[.files] ?? 0
         
         for key in json.keys.sorted() {
             guard let item = Item(rawValue: key),
@@ -56,11 +59,28 @@ struct BackupPreviewFormatter {
             switch item {
             case .email, .wallets: continue
 
+            case .files:
+                let count: Int = {
+                    let count = value.number?.intValue ?? 0
+                    return count + nativaFiles
+                }()
+
+
+                fileInfoMerged = true
+                let valueString = "\(numberFormatter.string(from: count))"
+                previewItems.append((item.title, valueString))
+
             default:
                 guard let count = value.number?.intValue else { continue }
                 let valueString = "\(numberFormatter.string(from: count))"
                 previewItems.append((item.title, valueString))
             }
+        }
+
+        // this is the case in which js has no file but native has some files
+        if !fileInfoMerged, nativaFiles != 0 {
+            let valueString = "\(numberFormatter.string(from: nativaFiles))"
+            previewItems.append((Item.files.title, valueString))
         }
 
         return previewItems

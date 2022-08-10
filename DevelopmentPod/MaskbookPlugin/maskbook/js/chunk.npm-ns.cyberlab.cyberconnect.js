@@ -1344,7 +1344,7 @@ exports.getSigningKeySignature = exports.getAddressByProvider = exports.safeSend
 var types_1 = __webpack_require__(96414);
 var bs58_1 = __importDefault(__webpack_require__(91945));
 var bytes_1 = __webpack_require__(5241);
-var strings_1 = __webpack_require__(9006);
+var strings_1 = __webpack_require__(52166);
 var encodeRpcMessage = function (method, params) {
     return {
         jsonrpc: '2.0',
