@@ -27,48 +27,49 @@ class WalletSendHelper {
         fromAddress: String,
         toAddress: String,
         network: BlockChainNetwork,
-        _ completion: @escaping (Result<EthereumTransaction?, Error>) -> Void)
+        _ completion: @escaping (Result<EthereumTransaction?, Error>) -> Void
+    )
     {
-        guard let provider = Web3ProviderFactory.provider else { completion(.failure(WalletSendError.unsupportedChainType))
+        guard let provider = Web3ProviderFactory.provider else {
+            completion(.failure(WalletSendError.unsupportedChainType))
             return
         }
-            
+
         guard let contractAddressEthFormat = EthereumAddress(contractAddress) else {
             completion(.failure(WalletSendError.addressError))
             return
         }
-            
+
         guard let toAddressEthFormat = EthereumAddress(toAddress) else {
             completion(.failure(WalletSendError.addressError))
             return
         }
-            
+
         guard let fromAddressEthFormat = EthereumAddress(fromAddress) else {
             completion(.failure(WalletSendError.addressError))
             return
         }
-            
+
         guard let tokenId = BigInt(token.tokenId ?? "") else {
             completion(.failure(WalletSendError.addressError))
             return
         }
-            
+
         guard let storedKeyData = WalletCoreStorage.getAccount(address: fromAddress)?.ownedByStoredKey?.data,
-              let derivationPath = WalletCoreStorage.getAccount(address: fromAddress)?.derivationPath
-        else {
+              let derivationPath = WalletCoreStorage.getAccount(address: fromAddress)?.derivationPath else {
             completion(.failure(WalletSendError.addressError))
             return
         }
-            
+
         let erc721 = ERC721(web3: provider, provider: provider.provider, address: contractAddressEthFormat)
-            
+
         let preTransacation = try? erc721.safeTransferFrom(from: fromAddressEthFormat, to: toAddressEthFormat, originalOwner: fromAddressEthFormat, tokenId: BigUInt(tokenId), data: [])
-            
+
         guard let transacation = preTransacation else {
             completion(.failure(WalletSendError.passwordError))
             return
         }
-            
+
         do {
             let transacationResult = try transacation.assemble()
             do {
@@ -92,13 +93,14 @@ class WalletSendHelper {
                         gasLimit: gasLimit.serialize().toHexString().addHexPrefix(),
                         amount: "0x0",
                         toAddress: contractAddress,
-                        payload: transacationResult.data)
+                        payload: transacationResult.data
+                    )
                 let result =
                     WalletCoreHelper.signTransaction(password: password, storedKeyData: storedKeyData, derivationPath: derivationPath, input: signInput, chainType: network.chain)
                 switch result {
-                case .success(let signOutput):
+                case let .success(signOutput):
                     switch signOutput {
-                    case .eth(let transacationEncodeData, _, _, _, _):
+                    case let .eth(transacationEncodeData, _, _, _, _):
                         do {
                             let sendResult = try provider.eth.sendRawTransaction(transacationEncodeData)
                             completion(.success(sendResult.transaction))
@@ -108,8 +110,8 @@ class WalletSendHelper {
                             return
                         }
                     }
-                        
-                case .failure(let error):
+
+                case let .failure(error):
                     completion(.failure(WalletSendError.ethereumError(error)))
                     return
                 }
@@ -122,7 +124,7 @@ class WalletSendHelper {
             return
         }
     }
-    
+
     class func sendTransaction(
         password: String,
         token: Token,
@@ -134,30 +136,31 @@ class WalletSendHelper {
         toAddress: String,
         fromAddress: String,
         nonce: BigUInt,
-        network: BlockChainNetwork,
-        _ completion: @escaping (Result<String?, Error>) -> Void)
+        network _: BlockChainNetwork,
+        _ completion: @escaping (Result<String?, Error>) -> Void
+    )
     {
-        guard let provider = Web3ProviderFactory.provider else { completion(.failure(WalletSendError.unsupportedChainType))
+        guard let provider = Web3ProviderFactory.provider else {
+            completion(.failure(WalletSendError.unsupportedChainType))
             return
         }
-            
+
         guard let toAddressEthFormat = EthereumAddress(toAddress) else {
             completion(.failure(WalletSendError.addressError))
             return
         }
-            
+
         guard let fromAddressEthFormat = EthereumAddress(fromAddress) else {
             completion(.failure(WalletSendError.addressError))
             return
         }
-            
+
         guard let storedKeyData = WalletCoreStorage.getAccount(address: fromAddress)?.ownedByStoredKey?.data,
-              let derivationPath = WalletCoreStorage.getAccount(address: fromAddress)?.derivationPath
-        else {
+              let derivationPath = WalletCoreStorage.getAccount(address: fromAddress)?.derivationPath else {
             completion(.failure(WalletSendError.addressError))
             return
         }
-            
+
         if token.isMainToken {
             DispatchQueue.global().async {
                 var gasPriceHex: String = "0x0"
@@ -179,12 +182,13 @@ class WalletSendHelper {
                         gasLimit: gasLimit.serialize().toHexString().addHexPrefix(),
                         amount: Web3.Utils.parseToBigUInt(amount, units: .eth)?.serialize().toHexString().addHexPrefix() ?? "",
                         toAddress: toAddress,
-                        payload: Data())
+                        payload: Data()
+                    )
                 let result = WalletCoreHelper.signTransaction(password: password, storedKeyData: storedKeyData, derivationPath: derivationPath, input: signInput, chainType: maskUserDefaults.network.chain)
                 switch result {
-                case .success(let signOutput):
+                case let .success(signOutput):
                     switch signOutput {
-                    case .eth(let transacationEncodeData, _, _, _, _):
+                    case let .eth(transacationEncodeData, _, _, _, _):
                         do {
                             let sendResult = try provider.eth.sendRawTransaction(transacationEncodeData)
                             completion(.success(sendResult.hash))
@@ -194,8 +198,8 @@ class WalletSendHelper {
                             return
                         }
                     }
-                            
-                case .failure(let error):
+
+                case let .failure(error):
                     completion(.failure(WalletSendError.ethereumError(error)))
                     return
                 }
@@ -205,17 +209,17 @@ class WalletSendHelper {
                 completion(.failure(WalletSendError.contractError))
                 return
             }
-                
+
             guard let tokenAddress = token.contractAddress else {
                 completion(.failure(WalletSendError.contractError))
                 return
             }
-                
+
             guard let contractAddressEthFormat = EthereumAddress(tokenAddress) else {
                 completion(.failure(WalletSendError.contractError))
                 return
             }
-                
+
             guard let value = Web3.Utils.parseToBigUInt(amount, decimals: Int(token.decimal)) else {
                 completion(.failure(WalletSendError.amountError))
                 return
@@ -226,7 +230,7 @@ class WalletSendHelper {
                     completion(.failure(WalletSendError.contractError))
                     return
                 }
-                    
+
                 do {
                     let transacationResult = try transacation.assemble()
                     var gasPriceHex = "0x0"
@@ -248,13 +252,14 @@ class WalletSendHelper {
                             gasLimit: gasLimit.serialize().toHexString().addHexPrefix(),
                             amount: "0x0",
                             toAddress: tokenAddress,
-                            payload: transacationResult.data)
+                            payload: transacationResult.data
+                        )
                     let result =
                         WalletCoreHelper.signTransaction(password: password, storedKeyData: storedKeyData, derivationPath: derivationPath, input: signInput, chainType: maskUserDefaults.network.chain)
                     switch result {
-                    case .success(let signOutput):
+                    case let .success(signOutput):
                         switch signOutput {
-                        case .eth(let transacationEncodeData, _, _, _, _):
+                        case let .eth(transacationEncodeData, _, _, _, _):
                             do {
                                 let sendResult = try provider.eth.sendRawTransaction(transacationEncodeData)
                                 completion(.success(sendResult.hash))
@@ -264,8 +269,8 @@ class WalletSendHelper {
                                 return
                             }
                         }
-                                
-                    case .failure(let error):
+
+                    case let .failure(error):
                         completion(.failure(WalletSendError.ethereumError(error)))
                         return
                     }
@@ -276,18 +281,20 @@ class WalletSendHelper {
             }
         }
     }
-    
+
     class func sendTransactionWithWeb3(
         password: String,
         transaction: EthereumTransaction,
         transactionOptions: TransactionOptions,
         maxFeePerGas: BigUInt?,
         maxInclusionFeePerGas: BigUInt?,
-        network: BlockChainNetwork,
+        network _: BlockChainNetwork,
         nonce: BigUInt? = nil,
-        _ completion: @escaping (Result<(String, BigUInt), Error>) -> Void)
+        _ completion: @escaping (Result<(String, BigUInt), Error>) -> Void
+    )
     {
-        guard let provider = Web3ProviderFactory.provider else { completion(.failure(WalletSendError.unsupportedChainType))
+        guard let provider = Web3ProviderFactory.provider else {
+            completion(.failure(WalletSendError.unsupportedChainType))
             return
         }
 
@@ -302,8 +309,7 @@ class WalletSendHelper {
         }
 
         guard let storedKeyData = WalletCoreStorage.getAccount(address: fromAddress)?.ownedByStoredKey?.data,
-              let derivationPath = WalletCoreStorage.getAccount(address: fromAddress)?.derivationPath
-        else {
+              let derivationPath = WalletCoreStorage.getAccount(address: fromAddress)?.derivationPath else {
             completion(.failure(WalletSendError.addressError))
             return
         }
@@ -316,22 +322,22 @@ class WalletSendHelper {
                 } else {
                     nonceTemp = try provider.eth.getTransactionCount(address: fromAddressEthFormat, onBlock: "pending")
                 }
-                    
+
                 var gasLimit: BigUInt
                 switch transactionOptions.gasLimit {
-                case .limited(let gas):
+                case let .limited(gas):
                     gasLimit = gas
 
                 default:
                     gasLimit = transaction.gasLimit
                 }
-                    
+
                 var gasPrice: BigUInt = transaction.gasPrice
                 var maxInclusionFeePerGasHex: String = "0x0"
                 var maxFeePerGasHex: String = "0x0"
                 if maxFeePerGas == nil || maxInclusionFeePerGas == nil {
                     switch transactionOptions.gasPrice {
-                    case .manual(let value): gasPrice = value
+                    case let .manual(value): gasPrice = value
                     default: break
                     }
                 } else {
@@ -348,13 +354,14 @@ class WalletSendHelper {
                         gasLimit: gasLimit.serialize().toHexStringWithPrefix(),
                         amount: transaction.value.serialize().toHexString().addHexPrefix(),
                         toAddress: transaction.to.address,
-                        payload: transaction.data)
+                        payload: transaction.data
+                    )
                 let result =
                     WalletCoreHelper.signTransaction(password: password, storedKeyData: storedKeyData, derivationPath: derivationPath, input: signInput, chainType: maskUserDefaults.network.chain)
                 switch result {
-                case .success(let signOutput):
+                case let .success(signOutput):
                     switch signOutput {
-                    case .eth(let transacationEncodeData, _, _, _, _):
+                    case let .eth(transacationEncodeData, _, _, _, _):
                         do {
                             let sendResult = try provider.eth.sendRawTransaction(transacationEncodeData)
                             DispatchQueue.main.async {
@@ -368,7 +375,7 @@ class WalletSendHelper {
                             return
                         }
                     }
-                case .failure(let error):
+                case let .failure(error):
                     completion(.failure(WalletSendError.ethereumError(error)))
                     return
                 }
@@ -376,6 +383,130 @@ class WalletSendHelper {
                 completion(.failure(WalletSendError.ethereumError(error)))
                 return
             }
+        }
+    }
+
+    class func isApprovedForAll(
+        contractAddress: String,
+        fromAddress: String
+    ) -> Bool
+    {
+        guard let provider = Web3ProviderFactory.provider else {
+            return false
+        }
+
+        guard let contractAddressEthFormat = EthereumAddress(contractAddress) else {
+            return false
+        }
+
+        guard let fromAddressEthFormat = EthereumAddress(fromAddress) else {
+            return false
+        }
+
+        let erc721 = ERC721(web3: provider, provider: provider.provider, address: contractAddressEthFormat)
+
+        let isApproved = try? erc721.isApprovedForAll(owner: fromAddressEthFormat, operator: contractAddressEthFormat)
+
+        guard let isApproved = isApproved else {
+            return false
+        }
+        return isApproved
+    }
+    
+    class func setApproveAll(
+        password: String,
+        gasLimit: BigUInt,
+        gasPrice: BigUInt?,
+        maxFeePerGas: BigUInt?,
+        maxInclusionFeePerGas: BigUInt?,
+        contractAddress: String,
+        fromAddress: String,
+        network: BlockChainNetwork,
+        _ completion: @escaping (Result<EthereumTransaction?, Error>) -> Void
+    )
+    {
+        guard let provider = Web3ProviderFactory.provider else {
+            completion(.failure(WalletSendError.unsupportedChainType))
+            return
+        }
+
+        guard let contractAddressEthFormat = EthereumAddress(contractAddress) else {
+            completion(.failure(WalletSendError.addressError))
+            return
+        }
+
+        guard let fromAddressEthFormat = EthereumAddress(fromAddress) else {
+            completion(.failure(WalletSendError.addressError))
+            return
+        }
+
+        guard let storedKeyData = WalletCoreStorage.getAccount(address: fromAddress)?.ownedByStoredKey?.data,
+              let derivationPath = WalletCoreStorage.getAccount(address: fromAddress)?.derivationPath else {
+            completion(.failure(WalletSendError.addressError))
+            return
+        }
+
+        let erc721 = ERC721(web3: provider, provider: provider.provider, address: contractAddressEthFormat)
+
+        let preTransacation = try? erc721.setApprovalForAll(from: fromAddressEthFormat, operator: contractAddressEthFormat, approved: true)
+
+        guard let transacation = preTransacation else {
+            completion(.failure(WalletSendError.passwordError))
+            return
+        }
+
+        do {
+            let transacationResult = try transacation.assemble()
+            do {
+                let nonce = try provider.eth.getTransactionCount(address: fromAddressEthFormat)
+                var gasPriceHex = "0x0"
+                var maxInclusionFeePerGasHex = "0x0"
+                var maxFeePerGasHex = "0x0"
+                if maxFeePerGas == nil || maxInclusionFeePerGas == nil {
+                    gasPriceHex = gasPrice!.serialize().toHexString().addHexPrefix()
+                } else {
+                    maxInclusionFeePerGasHex = maxInclusionFeePerGas!.serialize().toHexString().addHexPrefix()
+                    maxFeePerGasHex = maxFeePerGas!.serialize().toHexString().addHexPrefix()
+                }
+                let signInput =
+                    WalletCoreHelper.SignInput.eth(
+                        chainId: Int64(network.networkId),
+                        nonce: nonce.serialize().toHexString().addHexPrefix(),
+                        gasPrice: gasPriceHex,
+                        maxInclusionFeePerGas: maxInclusionFeePerGasHex,
+                        maxFeePerGas: maxFeePerGasHex,
+                        gasLimit: gasLimit.serialize().toHexString().addHexPrefix(),
+                        amount: "0x0",
+                        toAddress: contractAddress,
+                        payload: transacationResult.data
+                    )
+                let result =
+                    WalletCoreHelper.signTransaction(password: password, storedKeyData: storedKeyData, derivationPath: derivationPath, input: signInput, chainType: network.chain)
+                switch result {
+                case let .success(signOutput):
+                    switch signOutput {
+                    case let .eth(transacationEncodeData, _, _, _, _):
+                        do {
+                            let sendResult = try provider.eth.sendRawTransaction(transacationEncodeData)
+                            completion(.success(sendResult.transaction))
+                            return
+                        } catch {
+                            completion(.failure(WalletSendError.ethereumError(error)))
+                            return
+                        }
+                    }
+
+                case let .failure(error):
+                    completion(.failure(WalletSendError.ethereumError(error)))
+                    return
+                }
+            } catch {
+                completion(.failure(WalletSendError.ethereumError(error)))
+                return
+            }
+        } catch {
+            completion(.failure(WalletSendError.ethereumError(error)))
+            return
         }
     }
 }

@@ -23,27 +23,48 @@ final class PluginMetaShareViewModel: NSObject {
     @MainActor
     func shareRedPacket(transcation: PendingTransaction) {
         // open composer directly
-        guard let chainId = transcation.transactionInfo?.token.chainId,
-              let networkId = transcation.transactionInfo?.token.networkId,
-              let network = BlockChainNetwork(chainId: Int(chainId), networkId: UInt64(networkId)),
-              let payload = PluginStorageRepository.queryRecord(
-                  chain: network,
-                  tx: transcation.txHash)
-        else {
-            return
+        let network = transcation.network
+        if transcation.isNFTRedPacket {
+            guard let payload = PluginStorageRepository.queryNFTRedPacketRecord(
+                      chain: network,
+                      tx: transcation.txHash)
+            else {
+                return
+            }
+            guard let rpid = payload.id, rpid.isNotEmpty else { return }
+            
+            let meta = PluginMeta.nftRedPacket(payload)
+            self.shareMeta = meta
+        } else {
+            guard let payload = PluginStorageRepository.queryRecord(
+                      chain: network,
+                      tx: transcation.txHash)
+            else {
+                return
+            }
+            guard let rpid = payload.basic?.rpid, rpid.isNotEmpty else { return }
+            
+            let meta = PluginMeta.redPacket(payload)
+            self.shareMeta = meta
         }
-        
-        let meta = PluginMeta.redPacket(payload)
-        self.shareMeta = meta
         guard showGuideWhenNoPersonaOrProfile() else { return }
-        guard let rpid = payload.basic?.rpid, rpid.isNotEmpty else { return }
 
-        MessageComposeCoodinator.showMessageCompose(shareMeta: meta)
+        if let shareMeta = shareMeta {
+            MessageComposeCoodinator.showMessageCompose(shareMeta: shareMeta)
+        }
     }
     
     @MainActor
     func shareRedPacket(payload: RedPacketPayload) {
         let meta = PluginMeta.redPacket(payload)
+        self.shareMeta = meta
+        guard showGuideWhenNoPersonaOrProfile() else { return }
+        MessageComposeCoodinator.showMessageCompose(shareMeta: meta)
+    }
+    
+    @MainActor
+    func shareNFTRedPacket(payload: NftRedPacketPayload) {
+        let meta = PluginMeta.nftRedPacket(payload)
         self.shareMeta = meta
         guard showGuideWhenNoPersonaOrProfile() else { return }
         MessageComposeCoodinator.showMessageCompose(shareMeta: meta)

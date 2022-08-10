@@ -13,10 +13,10 @@ import CoreDataStack
 
 struct PendingTransaction {
     var address: String
-    var networkId: Int64
+    var network: BlockChainNetwork
     var transactionReceipt: TransactionReceipt?
     var txHash: String
-    var history: TransactionHistory
+    var history: TransactionHistory?
     var transactionInfo: TranscationInfo?
     var nonce: BigUInt
     
@@ -26,8 +26,15 @@ struct PendingTransaction {
         var amount: String
         var toAddress: String
         var gasNetModel: GasFeeCellItem?
-        var token: Token
-    }    
+        var token: Token?
+        var nftTokenAddr: EthereumAddress?
+        var erc721TokenIDs: [BigUInt]?
+    }
 }
 
+extension PendingTransaction {
+    var isNFTRedPacket: Bool {
+        transactionInfo?.nftTokenAddr != nil
+    }
+}
 

@@ -207,10 +207,18 @@ class Coordinator {
             options: TransactionOptions,
             completion: (String?, Error?) -> Void
         )
+        case nftLuckyDropConfirm(
+            gasFeeViewModel: GasFeeViewModel,
+            redPacketInput: NFTRedPacketABI.CreateNFTRedPacketInput,
+            transaction: EthereumTransaction,
+            options: TransactionOptions,
+            completion: (String?, Error?) -> Void
+        )
         case luckyDropSuccessfully(callback: (@MainActor () -> Void)?)
         case luckyDropCreatePersona(callback: (@MainActor () -> Void)?)
         case luckyDropCreateProfile
         case luckDropSelectProfile(callback: (@MainActor () -> Void)?)
+        case nftLuckyDropClaimDetail(nftRedPacketSubgraph: NftRedPacketSubgraph)
         case fileService
         case fileServiceOptions(item: FileServiceSelectedFileItem, optionHandler: (FileServiceUploadOption) -> Void)
         case fileServiceLocalFileSource(selectFileHandler: FileServiceSelectFileHandler)
@@ -830,6 +838,21 @@ extension Coordinator {
                 options: options,
                 completion: completion
             )
+            
+        case .nftLuckyDropConfirm(
+            let gasFeeViewModel,
+            let redPacketInput,
+            let transaction,
+            let options,
+            let completion
+        ):
+            return NFTLuckDropConfirmViewController(
+                gasFeeViewModel: gasFeeViewModel,
+                redPacketInput: redPacketInput,
+                transaction: transaction,
+                options: options,
+                completion: completion
+            )
         
         case let .luckyDropSuccessfully(callback):
             let viewModel = LuckyDropSuccessfullyViewModel(callback: callback)
@@ -845,6 +868,9 @@ extension Coordinator {
         case let .luckDropSelectProfile(callback):
             let viewModel = ShareLuckyDropSelectProfileViewModel(callback: callback)
             return SheetViewAdapterController(rootView: SelectSocialAccountView(viewModel: viewModel))
+            
+        case let .nftLuckyDropClaimDetail(nftLuckyDropClaimDetail):
+            return NFTLuckyDropClaimDetailViewController(nftRedPacketSubgraph: nftLuckyDropClaimDetail)
             
         case let .messageCompose(meta):
             let viewModel = MessageComposeViewModel()

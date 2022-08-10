@@ -50,15 +50,15 @@ extension String {
     static var polygon: String {
         "60_137"
     }
-    
+
     static var arbitrum: String {
         "60_42161"
     }
-    
+
     static var xdai: String {
         "60_100"
     }
-    
+
     static var optimism: String {
         "60_10"
     }
@@ -100,7 +100,7 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
             return ""
         }
     }
-    
+
     var selectedIcon: UIImage? {
         switch self {
         case .eth: return Asset.Images.Scene.WalletList.Coins.ethSelected.image
@@ -116,7 +116,7 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
             return nil
         }
     }
-    
+
     var selectedIconAsImage: SwiftUI.Image? {
         switch self {
         case .eth: return Asset.Images.Scene.WalletList.Coins.ethSelected.asImage()
@@ -132,7 +132,7 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
             return nil
         }
     }
-    
+
     var unselectedIcon: UIImage? {
         switch self {
         case .eth: return Asset.Images.Scene.WalletList.Coins.ethUnselected.image
@@ -148,7 +148,7 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
             return nil
         }
     }
-    
+
     var smallIcon: UIImage? {
         switch self {
         case .eth: return Asset.Images.Scene.Balance.SmallChain.eth.image
@@ -163,30 +163,30 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
             return nil
         }
     }
-    
+
     var tokenCardBgColor: UIColor? {
         switch self {
         case .eth:
             return Asset.Colors.TokenDetail.Chains.eth.color
-            
+
         case .bsc:
             return Asset.Colors.TokenDetail.Chains.bsc.color
-            
+
         case .polygon:
             return Asset.Colors.TokenDetail.Chains.matic.color
-            
+
         case .arbitrum:
             return Asset.Colors.TokenDetail.Chains.arbitrum.color
-            
+
         case .xdai:
             return Asset.Colors.TokenDetail.Chains.xdai.color
-            
+
         case .optimism:
             return Asset.Colors.TokenDetail.Chains.optimism.color
-            
+
         case .polka:
             return nil
-            
+
         default:
             return nil
         }
@@ -195,7 +195,7 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
     var mainToken: MaskToken? {
         let coinId = Int64(chain.rawValue)
         let id = networkId
-        
+
         switch self {
         case .eth, .rinkeby:
             return MaskToken(coinId: coinId,
@@ -223,7 +223,7 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
                              symbol: "MATIC",
                              logoURI: nil,
                              address: "")
-            
+
         case .arbitrum:
             return MaskToken(coinId: coinId,
                              chainId: Int64(id),
@@ -232,7 +232,7 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
                              symbol: "ETH",
                              logoURI: nil,
                              address: "")
-            
+
         case .xdai:
             return MaskToken(coinId: coinId,
                              chainId: Int64(id),
@@ -258,7 +258,7 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
         default: return nil
         }
     }
-    
+
     var fullEvmName: String? {
         switch rawValue {
         case .eth: return "Ethereum Mainnet"
@@ -279,7 +279,7 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
 
         return .UNRECOGNIZED(-1)
     }
-    
+
     var isSupport1559GasFee: Bool {
         switch self {
         case .eth, .polygon: return true
@@ -299,7 +299,7 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
         default: return nil
         }
     }
-    
+
     func getNFTScanUrl() -> URL? {
         switch self {
         case .eth, .rinkeby: return URL(string: "https://restapi.nftscan.com/api/v2/")
@@ -313,8 +313,21 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
         }
     }
 
+    func getAddressUrl(address: String) -> URL? {
+        switch self {
+        case .eth, .rinkeby: return URL(string: "https://etherscan.io/address/\(address)")
+        case .bsc: return URL(string: "https://bscscan.com/address/\(address)")
+        case .polygon: return URL(string: "https://polygonscan.com/address/\(address)")
+        case .arbitrum: return URL(string: "https://arbiscan.io/address/\(address)")
+        case .xdai: return URL(string: "https://blockscout.com/xdai/mainnet/address/\(address)")
+        case .optimism: return URL(string: "https://optimistic.etherscan.io/address/\(address)")
+        case .polka: return nil
+        default: return nil
+        }
+    }
+
     func getDerivationPath(index: UInt32) -> DerivationPath? {
-        switch self.chain {
+        switch chain {
         case .ethereum: return DerivationPath(purpose: 44, coin: 60, account: 0, change: 0, address: index)
         case .polkadot: return nil
         }
@@ -325,11 +338,11 @@ extension BlockChainNetwork: CaseIterable {
     static var allCases: [BlockChainNetwork] {
         [.eth, .rinkeby, .bsc, .polygon, .arbitrum, .xdai, .polka]
     }
-    
+
     static var supportedNetwork: [BlockChainNetwork] {
         [.eth, .bsc, .polygon, .arbitrum, .xdai]
     }
-    
+
     static var eth: BlockChainNetwork {
         BlockChainNetwork(chain: .ethereum, networkId: 1)
     }
@@ -345,15 +358,15 @@ extension BlockChainNetwork: CaseIterable {
     static var polygon: BlockChainNetwork {
         BlockChainNetwork(chain: .ethereum, networkId: 137)
     }
-    
+
     static var arbitrum: BlockChainNetwork {
         BlockChainNetwork(chain: .ethereum, networkId: 42_161)
     }
-    
+
     static var xdai: BlockChainNetwork {
         BlockChainNetwork(chain: .ethereum, networkId: 100)
     }
-    
+
     static var optimism: BlockChainNetwork {
         BlockChainNetwork(chain: .ethereum, networkId: 10)
     }

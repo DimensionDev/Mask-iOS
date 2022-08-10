@@ -168,17 +168,24 @@ class WalletBottomWidgetViewModel: ObservableObject {
 
                 Task { @MainActor in 
                     await self.updateRedPacketRecord(transcation: transcation)
+                    let network = transcation.network
+                    if transcation.isNFTRedPacket {
+                        guard let payload = PluginStorageRepository.queryNFTRedPacketRecord(
+                                chain: network,
+                                tx: transcation.txHash) else {
+                            return
+                        }
 
-                    guard let chainId = transcation.transactionInfo?.token.chainId,
-                          let networkId = transcation.transactionInfo?.token.networkId,
-                          let network = BlockChainNetwork(chainId: Int(chainId), networkId: UInt64(networkId)),
-                          let payload = PluginStorageRepository.queryRecord(
-                            chain: network,
-                            tx: transcation.txHash) else {
-                        return
+                        MessageComposeCoodinator.showMessageCompose(shareMeta: .nftRedPacket(payload))
+                    } else {
+                        guard let payload = PluginStorageRepository.queryRecord(
+                                chain: network,
+                                tx: transcation.txHash) else {
+                            return
+                        }
+
+                        MessageComposeCoodinator.showMessageCompose(shareMeta: .redPacket(payload))
                     }
-
-                    MessageComposeCoodinator.showMessageCompose(shareMeta: .redPacket(payload))
                 }
             }
         }
@@ -187,16 +194,49 @@ class WalletBottomWidgetViewModel: ObservableObject {
 
     @MainActor
     func updateRedPacketRecord(transcation: PendingTransaction) async {
-        // update record
+        if transcation.isNFTRedPacket {
+            await saveNFTRedPacked(transcation: transcation)
+        } else {
+            await saveTokenRedPacked(transcation: transcation)
+        }
+    }
+    
+    @MainActor
+    func saveNFTRedPacked(transcation: PendingTransaction) async {
+        guard let transactionResult = transcation.transactionReceipt,
+            let log = transactionResult.logs.first(where: { $0.address == ABI.nftRedPacketABI.contractAddress }) else {
+            return
+        }
+        let json = ABI.nftRedPacketABI.parse(eventlog: log)
+        let network = transcation.network
+        guard let eventParam = NFTRedPacketABI.SuccessEvent(json: json) else {
+            return
+        }
+
+        guard var payload = PluginStorageRepository.queryNFTRedPacketRecord(
+            chain: network,
+            tx: transcation.txHash) else {
+            return
+        }
+        payload.id = eventParam.id
+        payload.createTime = eventParam.creation_time.asDouble() ?? 0
+
+        PluginStorageRepository.save(
+            chain: network,
+            txHash: transcation.txHash,
+            payload: payload
+        )
+    }
+    
+    @MainActor
+    func saveTokenRedPacked(transcation: PendingTransaction) async {
         guard let transactionResult = transcation.transactionReceipt,
             let log = transactionResult.logs.first(where: { $0.address == ABI.happyRedPacketV4.contractAddress }) else {
             return
         }
         let json = ABI.happyRedPacketV4.parse(eventlog: log)
-        guard let eventParam = HappyRedPacketV4.SuccessEvent(json: json),
-            let chainId = transcation.transactionInfo?.token.chainId,
-            let networkId = transcation.transactionInfo?.token.networkId,
-            let network = BlockChainNetwork(chainId: Int(chainId), networkId: UInt64(networkId)) else {
+        let network = transcation.network
+        guard let eventParam = HappyRedPacketV4.SuccessEvent(json: json) else {
             return
         }
 

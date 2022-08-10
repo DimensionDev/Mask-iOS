@@ -49,9 +49,9 @@ class TokenDetailViewModel: NSObject {
             }
             
             let pendingTransactions = allPendingTransactions.filter {
-                $0.history.change?.asset.symbol.caseInsensitiveCompare(self.token.symbol) == .orderedSame &&
+                $0.history?.change?.asset.symbol.caseInsensitiveCompare(self.token.symbol) == .orderedSame &&
                 $0.address == maskUserDefaults.defaultAccountAddress &&
-                $0.networkId == maskUserDefaults.network.networkId
+                $0.network == maskUserDefaults.network
             }.compactMap {
                 return $0.history
             }

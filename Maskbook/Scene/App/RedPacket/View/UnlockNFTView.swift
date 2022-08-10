@@ -1,17 +1,15 @@
 //
-//  RedPacketConfirmView.swift
+//  UnlockNFTView.swift
 //  Maskbook
 //
-//  Created by Hugo L on 2022/4/13.
+//  Created by caiyu on 2022/7/22.
 //  Copyright © 2022 dimension. All rights reserved.
 //
 
 import SwiftUI
-import Kingfisher
-import CoreDataStack
 
-struct RedPacketConfirmView: View {
-    @ObservedObject var viewModel: RedPacketConfirmViewModel
+struct UnlockNFTView: View {
+    @ObservedObject var viewModel: UnlockNFTViewModel
     @InjectedProvider(\.mainCoordinator) private var mainCoordinator
    
     var tipsView: some View {
@@ -20,6 +18,7 @@ struct RedPacketConfirmView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 24)
+            
             Text(L10n.Plugins.Luckydrop.Confirm.tips)
                 .font(FontStyles.rh6.font)
                 .foregroundColor(Asset.Colors.Public.info.asColor())
@@ -33,38 +32,48 @@ struct RedPacketConfirmView: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            Text(L10n.Plugins.Luckydrop.Confirm.title)
+            Text(L10n.Scene.WalletUnlock.button + viewModel.tokenName)
                 .font(FontStyles.bh4.font)
                 .foregroundColor(Asset.Colors.Text.dark.asColor())
+            
+            VStack(spacing: 8){
+               
+                if let ensName = viewModel.ensName {
+                    Text(ensName)
+                        .font(FontStyles.bh5.font)
+                        .foregroundColor(Asset.Colors.Text.dark.asColor())
+                    HStack(spacing: 4) {
+                        Text(viewModel.address)
+                            .font(FontStyles.rh7.font)
+                            .foregroundColor(Asset.Colors.Text.dark.asColor())
+                        Asset.Plugins.LuckyDrop.share.asImage()
+                            .frame(width: 20, height: 20)
+                    }
+                } else {
+                    HStack(spacing: 4) {
+                        Text(viewModel.address)
+                            .font(FontStyles.bh5.font)
+                            .foregroundColor(Asset.Colors.Text.dark.asColor())
+                        Asset.Plugins.LuckyDrop.share.asImage()
+                            .frame(width: 20, height: 20)
+                    }
+                }
+            }
+            
             VStack(spacing: 16) {
                 buildRow(
                     title: L10n.Plugins.Luckydrop.Confirm.walletAccount,
-                    value: .plain(viewModel.address)
+                    value: .address(viewModel.address)
                 )
+                buildRow(title: L10n.Plugins.Luckydrop.Confirm.walletAccount,
+                         value: .address(viewModel.contractAddress))
                 buildRow(
-                    title: L10n.Plugins.Luckydrop.Confirm.attachedMessage,
-                    value: .plain(viewModel.message)
+                    title: L10n.Plugins.Luckydrop.transactionFee,
+                    value: .gas(viewModel.gasFeeInfo)
                 )
-                buildRow(
-                    title: L10n.Plugins.Luckydrop.Confirm.splitMode,
-                    value: .plain(viewModel.mode.title)
-                )
-                buildRow(
-                    title: L10n.Plugins.Luckydrop.Confirm.share,
-                    value: .plain(viewModel.share)
-                )
-                if viewModel.amountPerShare.isNotEmpty {
-                    buildRow(
-                        title: L10n.Plugins.Luckydrop.Confirm.amountPerShare,
-                        value: .plain(viewModel.amountPerShare)
-                    )
-                }
                 buildRow(
                     title: L10n.Plugins.Luckydrop.Confirm.totalAmount,
-                    value: .token(
-                        tokenURL: viewModel.tokenIconURL,
-                        value: viewModel.totalAmountDisplay
-                    )
+                    value: .plain("\(viewModel.totalAmount)")
                 )
                 buildRow(title: L10n.Plugins.Luckydrop.Confirm.transactionFee, value: .gas(viewModel.gasFeeInfo))
                 tipsView
@@ -94,20 +103,20 @@ struct RedPacketConfirmView: View {
                     .foregroundColor(Asset.Colors.Text.dark.asColor())
                     .frame(maxWidth: 118)
                     .fixedSize()
-            } else if case .token(let tokenURL, let value) = value {
-                HStack(spacing: 4) {
-                    KFImage(tokenURL)
-                        .cancelOnDisappear(true)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 24)
-                        .cornerRadius(12)                 
-                    Text(value)
-                        .truncationMode(.middle)
-                        .font(FontStyles.bh6.font)
-                        .foregroundColor(Asset.Colors.Text.dark.asColor())
-                        .frame(maxWidth: 118)
-                        .fixedSize()
+            } else if case .address(let value) = value {
+                Button {
+                    mainCoordinator.present(scene: .safariView(url: viewModel.operatorUrl), transition: .modal(animated: true))
+                } label: {
+                    HStack(spacing: 4) {
+                        Text(value)
+                            .truncationMode(.middle)
+                            .font(FontStyles.bh6.font)
+                            .foregroundColor(Asset.Colors.Text.dark.asColor())
+                            .frame(maxWidth: 118)
+                            .fixedSize()
+                        Asset.Plugins.LuckyDrop.share.asImage()
+                            .frame(width: 20, height: 20)
+                    }
                 }
             } else if case .gas(let value) = value {
                 Button {
@@ -133,16 +142,17 @@ struct RedPacketConfirmView: View {
     }
 }
 
-extension RedPacketConfirmView {
+extension UnlockNFTView {
     enum ValueType {
         case plain(String)
-        case token(tokenURL: URL?, value: String)
+        case address(String)
         case gas(String)
     }
 }
 
-struct RedPacketConfirmView_Previews: PreviewProvider {
-    static var previews: some View {
-        return RedPacketConfirmView(viewModel: RedPacketConfirmViewModelMock())
-    }
-}
+
+//struct UnlockNFTView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        UnlockNFTView()
+//    }
+//}
