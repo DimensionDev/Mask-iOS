@@ -36,11 +36,11 @@ class ChangePasswordViewModel {
         }
 
         let valid = password.isValidPasswordFormat
-        if !isConfirmPasswordCorrect() {
+        if !valid {
+            changePasswordError.value = L10n.Scene.ChangePassword.passwordDemand
+        } else if !isConfirmPasswordCorrect() {
             changePasswordError.value = L10n.Scene.ChangePassword.passwordNotMatch
             return false
-        } else if !valid {
-            changePasswordError.value = L10n.Scene.ChangePassword.passwordDemand
         } else {
             changePasswordError.value = nil
         }
