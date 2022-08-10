@@ -56,4 +56,5 @@ public enum WalletAssetProviderType: String {
     case zerion
     case debank
     case opensea
+    case nftscan
 }

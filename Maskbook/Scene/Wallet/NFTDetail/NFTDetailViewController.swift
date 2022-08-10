@@ -91,10 +91,10 @@ class NFTDetailViewController: BaseViewController {
                 }
                 return cell
             
-            case .nftDetail(let statusModel, let floorPrice):
+            case .nftDetail(let collectionModel):
                 let cell :NFTCollectionDetailTableViewCell = tableView.dequeCell(at: indexPath)
                 if let token = self?.viewModel.token {
-                    cell.setCollectionStauts(floor: statusModel, collection: floorPrice, token: token)
+                    cell.setCollectionStauts(collection: collectionModel, token: token)
                 }
                 return cell
 

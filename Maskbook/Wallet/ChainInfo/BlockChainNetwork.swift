@@ -299,6 +299,19 @@ extension BlockChainNetwork: BlockChainNetworkRepresentable {
         default: return nil
         }
     }
+    
+    func getNFTScanUrl() -> URL? {
+        switch self {
+        case .eth, .rinkeby: return URL(string: "https://restapi.nftscan.com/api/v2/")
+        case .bsc: return URL(string: "https://bnbapi.nftscan.com/api/v2/")
+        case .polygon: return URL(string: "https://polygonapi.nftscan.com/api/v2/")
+        case .arbitrum: return URL(string: "https://arbitrumapi.nftscan.com/api/v2/")
+        case .xdai: return URL(string: "https://restapi.nftscan.com/api/v2/")
+        case .optimism: return URL(string: "https://optimismapi.nftscan.com/api/v2/")
+        case .polka: return URL(string: "https://restapi.nftscan.com/api/v2/")
+        default: return URL(string: "https://restapi.nftscan.com/api/v2/")
+        }
+    }
 
     func getDerivationPath(index: UInt32) -> DerivationPath? {
         switch self.chain {
