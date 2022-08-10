@@ -30,7 +30,7 @@ extension RedPacket {
             self.createTime = createTime
         }
 
-        let id: String
+        var id: String?
         let txid: String
         let duration: Double
         let message: String
@@ -41,7 +41,7 @@ extension RedPacket {
         let contractTokenURI: String
         let privateKey: String
         let chainId: ChainId
-        let createTime: Double?
+        var createTime: Double?
 
         enum CodingKeys: String, CodingKey {
             case id

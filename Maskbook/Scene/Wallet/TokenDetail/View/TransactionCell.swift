@@ -304,7 +304,7 @@ extension TransactionCell {
         let result = PendingTransactionManager.shared.pendingTransactions.value.filter {
             $0.txHash == self.txHash &&
             $0.address == maskUserDefaults.defaultAccountAddress &&
-            $0.networkId == maskUserDefaults.network.networkId
+            $0.network == maskUserDefaults.network
         }
         
         if let txToSpeedUp = result.first {
@@ -327,7 +327,7 @@ extension TransactionCell {
         let result = PendingTransactionManager.shared.pendingTransactions.value.filter {
             $0.txHash == self.txHash &&
             $0.address == maskUserDefaults.defaultAccountAddress &&
-            $0.networkId == maskUserDefaults.network.networkId
+            $0.network == maskUserDefaults.network
         }
         
         if let txToSpeedUp = result.first {

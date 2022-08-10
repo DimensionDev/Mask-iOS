@@ -24,7 +24,7 @@ final class LuckyDropHistoryViewModel: ObservableObject {
     private(set) var startBlock: BigUInt?
     private(set) var apiKey: String?
 
-    let contract = HappyRedPacketV4()
+    let contract = ABI.happyRedPacketV4
 
     @Published var selection = LuckDropKind.token
     @Published var tokenPayloads: [TokenPayload] = []

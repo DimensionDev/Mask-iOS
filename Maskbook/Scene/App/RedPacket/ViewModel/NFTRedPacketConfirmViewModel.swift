@@ -15,7 +15,6 @@ import web3swift
 class NFTRedPacketConfirmViewModel: ObservableObject {
     @Published var gasFeeItem: GasFeeCellItem?
     @Published var inputParam: NFTRedPacketABI.CreateNFTRedPacketInput?
-    @Published var token: Token?
     @Published var buttonState: ConfirmButtonState = .normal
     
     var gasFeeViewModel: GasFeeViewModel?
@@ -24,8 +23,8 @@ class NFTRedPacketConfirmViewModel: ObservableObject {
     var completion: ((String?, Error?) -> Void)?
     
     var tokenIconURL: URL? {
-        guard let url = token?.logoUrl else { return nil }
-        return URL(string: url)
+        //TODO collection url
+        nil
     }
     
     var message: String {
@@ -45,6 +44,7 @@ class NFTRedPacketConfirmViewModel: ObservableObject {
             return ""
         }
         
+        let token = WalletAssetManager.shared.getDefaultMainToken()
         guard let tokenPrice = token?.price as? Double else {
             return ""
         }
@@ -177,8 +177,7 @@ class NFTRedPacketConfirmViewModel: ObservableObject {
                 guard let self = self else { return }
                 guard let gasFeeItem = self.gasFeeItem,
                       let gwei = BigUInt(gasFeeItem.gWei),
-                      let gasLimit = BigUInt(gasFeeItem.gasLimit),
-                      let token = self.token
+                      let gasLimit = BigUInt(gasFeeItem.gasLimit)
                 else {
                     return
                 }
@@ -191,16 +190,12 @@ class NFTRedPacketConfirmViewModel: ObservableObject {
                     amount: amount,
                     toAddress: to,
                     gasNetModel: nil,
-                    token: token
+                    nftTokenAddr: self.inputParam?.tokenAddr,
+                    erc721TokenIDs: self.inputParam?.erc721TokenIDs
                 )
-                let history = TransactionHistory(
-                    txHash: txhash,
-                    asset: token,
-                    toAddress: to,
-                    amount: amount)
                 PendingTransactionManager.shared.addPendingTrancation(
                     txHash: txhash,
-                    history: history,
+                    history: nil,
                     transcationInfo:transactionInfo,
                     nonce: nonce)
                 completion(.success(txhash))

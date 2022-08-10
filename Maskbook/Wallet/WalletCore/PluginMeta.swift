@@ -93,7 +93,7 @@ extension PluginMeta: Identifiable {
         switch self {
         case let .redPacket(value): return value.basic?.txid ?? ""
         case let .fileService(value): return value.id
-        case let .nftRedPacket(value): return value.id
+        case let .nftRedPacket(value): return value.id ?? ""
         }
     }
 }

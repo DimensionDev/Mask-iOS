@@ -157,6 +157,7 @@ extension ABIContract {
 
 enum ABI {
     static let happyRedPacketV4 = HappyRedPacketV4()
+    static let nftRedPacketABI = NFTRedPacketABI()
 }
 
 enum HappyRedPacketKey: InjectValueKey {

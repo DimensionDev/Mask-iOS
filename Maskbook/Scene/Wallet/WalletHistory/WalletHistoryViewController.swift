@@ -99,7 +99,7 @@ class WalletHistoryViewController: BaseViewController {
         receiveValue: { [weak self] allTransactions, allPendingTransactions in
             let pendingTransactions = allPendingTransactions.filter {
                 $0.address == maskUserDefaults.defaultAccountAddress &&
-                $0.networkId == maskUserDefaults.network.networkId
+                $0.network == maskUserDefaults.network
             }.compactMap {
                 return $0.history
             }
