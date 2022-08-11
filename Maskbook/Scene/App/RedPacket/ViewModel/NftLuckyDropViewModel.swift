@@ -370,7 +370,7 @@ extension NftLuckyDropViewModel: ChooseCollectionBackDelegate {
 }
 
 extension NftLuckyDropViewModel: SearchSingleNFTDelegate {
-    func returnSelectedNFT(collectible: [Collectible]?){
+    func returnSelectedNFT(collectible: [Collectible]?) {
         
     }
 }
