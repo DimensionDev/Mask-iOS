@@ -7,29 +7,45 @@ import CombineExt
 import CoreDataStack
 import web3swift
 
-struct CollectiableGroup: Hashable {
-    let name: String
-    let address: String
-    let groupIconURL: URL?
-    let totalCount: Int
-}
-
-struct NftRecpacketDraft {
-    let message: String
-    let collectibles: [Collectible]
-    let token: Token
-    let collectibleGroup: CollectiableGroup
-}
-
 @MainActor
 final class NftLuckyDropViewModel: ObservableObject {
-    // MARK: Lifecycle
+    var action: (Event) -> Void = { _ in }
 
-    deinit {
-        print("\(self) deinit")
-    }
+    // binded in `LuckyDropViewModel`
+    @Published var gasFeeItem: GasFeeCellItem?
+    @Published var message = ""
+    @Published var isNFTDropEditing = false
+
+    @Published
+    private(set) var token: Token?
+
+    @Published
+    private(set) var collectibleGroup: CollectiableGroup?
+
+    @Published
+    private(set) var actionState: TransactionState = .unlockWallet
+
+    @Published
+    private(set) var items: [CollectibleItem] = []
+
+    private(set) var collectibles: [Collectible] = []
 
     private let gasFeeViewModel: GasFeeViewModel
+
+    private var viewContext: NSManagedObjectContext {
+        AppContext.shared.coreDataStack.persistentContainer.viewContext
+    }
+
+    private var cancelableStorage: Set<AnyCancellable> = []
+
+    @InjectedProvider(\.userDefaultSettings)
+    private var settings
+
+    @InjectedProvider(\.walletCoreService)
+    private var walletCoreService
+
+    @InjectedProvider(\.walletAssetManager)
+    private var walletAssetManager: WalletAssetManager
 
     init(gasFeeViewModel: GasFeeViewModel) {
         self.gasFeeViewModel = gasFeeViewModel
@@ -52,7 +68,7 @@ final class NftLuckyDropViewModel: ObservableObject {
             guard let self = self else {
                 return
             }
-            // don't replace this with self.nativeToken()
+
             self.token = self.nativeToken()
         }
         .store(in: &cancelableStorage)
@@ -88,58 +104,14 @@ final class NftLuckyDropViewModel: ObservableObject {
         .store(in: &cancelableStorage)
     }
 
-    // MARK: Internal
-
-    enum Event {
-        case addCollectibles(groupName: String, contractAddress: String, selectedIdentifiers: Set<String>)
-        case confirmRisk
-        case createNFTLuckyDrop(draft: NftRecpacketDraft, gasFeeViewModel: GasFeeViewModel)
-        case selectCollectibleGroup
-        case unlockWallet
-        case unlockNFT(contractAddress: String, gasItem: GasFeeCellItem)
+    deinit {
+        print("\(self) deinit")
     }
+}
 
-    enum CollectibleItem: Identifiable {
-        case add
-        case normal(Collectible)
-        case all(Collectible)
+// MARK: presentation
 
-        // MARK: Internal
-
-        var id: String {
-            switch self {
-            case .add: return "add"
-            case let .normal(item): return item.id ?? ""
-            case let .all(item): return item.id ?? ""
-            }
-        }
-    }
-
-    var action: (Event) -> Void = { _ in }
-
-    // binded in `LuckyDropViewModel`
-    @Published var gasFeeItem: GasFeeCellItem?
-    @Published var message = ""
-    @Published var isNFTDropEditing = false
-
-    @Published
-    private(set) var token: Token?
-
-    @Published
-    private(set) var collectibleGroup: CollectiableGroup?
-
-    @Published
-    private(set) var actionState: TransactionState = .unlockWallet
-
-    @Published
-    private(set) var items: [CollectibleItem] = []
-
-    private(set) var collectibles: [Collectible] = []
-
-    var viewContext: NSManagedObjectContext {
-        AppContext.shared.coreDataStack.persistentContainer.viewContext
-    }
-
+extension NftLuckyDropViewModel {
     var groupName: String? { collectibleGroup?.name }
     var groupIconURL: URL? { collectibleGroup?.groupIconURL }
 
@@ -147,18 +119,13 @@ final class NftLuckyDropViewModel: ObservableObject {
         "\(collectibles.count)\(collectibleGroup?.totalCount ?? 0)"
     }
 
-    // MARK: Private
+    var showCollectible: Bool {
+        guard let groupName = groupName else {
+            return false
+        }
 
-    private var cancelableStorage: Set<AnyCancellable> = []
-
-    @InjectedProvider(\.userDefaultSettings)
-    private var settings
-
-    @InjectedProvider(\.walletCoreService)
-    private var walletCoreService
-
-    @InjectedProvider(\.walletAssetManager)
-    private var walletAssetManager: WalletAssetManager
+        return groupName.isNotEmpty
+    }
 }
 
 extension NftLuckyDropViewModel {
@@ -166,9 +133,13 @@ extension NftLuckyDropViewModel {
         actionState = checkState()
     }
 
-    private func checkCollectionApproving(with _: Token) -> Bool {
-        // TODO: update dgcUnlock
-        false
+    private func checkCollectionApproving() -> Bool {
+        guard let contractAddress = collectibleGroup?.address,
+              let walletAddress = settings.defaultAccountAddress else {
+            return false
+        }
+
+        return WalletSendHelper.isApprovedForAll(contractAddress: contractAddress, fromAddress: walletAddress)
     }
 
     private func checkState() -> TransactionState {
@@ -183,7 +154,8 @@ extension NftLuckyDropViewModel {
 
         // Only check payment password for wallet which created by Maskbook.
         if !fromAccount.fromWalletConnect {
-            guard let date = settings.passwordExpiredDate, !self.settings.isPasswordExpried(date) else {
+            guard let date = settings.passwordExpiredDate,
+                  !self.settings.isPasswordExpried(date) else {
                 return .unlockWallet
             }
         }
@@ -206,7 +178,9 @@ extension NftLuckyDropViewModel {
             return .insufficientGas
         }
 
-        // TODO: check dgc with token
+        guard checkCollectionApproving() else {
+            return .unlockNFT
+        }
 
         // no message
         guard !message.isEmpty else {
@@ -287,7 +261,7 @@ extension NftLuckyDropViewModel {
     ) {
         let keepValues = collectibleGroup?.name == groupName
 
-        collectibleGroup = .init(
+        collectibleGroup = CollectiableGroup(
             name: groupName,
             address: contractAddress,
             groupIconURL: groupIconURL,
@@ -306,7 +280,7 @@ extension NftLuckyDropViewModel {
         switch actionState {
         case .unlockWallet: action(.unlockWallet)
         case .confirmRisk: action(.confirmRisk)
-        case .unlockDGC:
+        case .unlockNFT:
             guard let contractAddress = collectibleGroup?.address, let item = gasFeeItem else {
                 return
             }
@@ -319,29 +293,43 @@ extension NftLuckyDropViewModel {
             )
 
         case .createNFTDrop:
-            guard let token = token, let groupInfo = collectibleGroup else {
+            guard let groupInfo = collectibleGroup else {
                 return
             }
             let draft = NftRecpacketDraft(
                 message: message,
                 collectibles: collectibles,
-                token: token,
                 collectibleGroup: groupInfo
             )
             action(.createNFTLuckyDrop(draft: draft, gasFeeViewModel: gasFeeViewModel))
 
-        default: break
+        case .addCollectibles, .insufficientGas, .needToken, .needWallet, .needMessage: break
         }
     }
 }
 
 extension NftLuckyDropViewModel {
-    var showCollectible: Bool {
-        guard let groupName = groupName else {
-            return false
-        }
+    enum Event {
+        case addCollectibles(groupName: String, contractAddress: String, selectedIdentifiers: Set<String>)
+        case confirmRisk
+        case createNFTLuckyDrop(draft: NftRecpacketDraft, gasFeeViewModel: GasFeeViewModel)
+        case selectCollectibleGroup
+        case unlockWallet
+        case unlockNFT(contractAddress: String, gasItem: GasFeeCellItem)
+    }
 
-        return groupName.isNotEmpty
+    enum CollectibleItem: Identifiable {
+        case add
+        case normal(Collectible)
+        case all(Collectible)
+
+        var id: String {
+            switch self {
+            case .add: return "add"
+            case let .normal(item): return item.id ?? ""
+            case let .all(item): return item.id ?? ""
+            }
+        }
     }
 
     enum TransactionState {
@@ -352,15 +340,13 @@ extension NftLuckyDropViewModel {
 
         case unlockWallet
         case confirmRisk
-        case unlockDGC
+        case unlockNFT
         case createNFTDrop
         case addCollectibles
 
-        // MARK: Internal
-
         var isActionEnabled: Bool {
             switch self {
-            case .unlockWallet, .unlockDGC, .confirmRisk, .createNFTDrop: return true
+            case .unlockWallet, .unlockNFT, .confirmRisk, .createNFTDrop: return true
             case .needMessage, .needToken, .needWallet,
                  .addCollectibles, .insufficientGas: return false
             }
@@ -374,7 +360,7 @@ extension NftLuckyDropViewModel {
             case .confirmRisk: return L10n.Plugins.Luckydrop.Buttons.riskWarning
             case .insufficientGas: return L10n.Plugins.Luckydrop.Buttons.insufficientGas
             case .addCollectibles: return L10n.Plugins.Luckydrop.Buttons.selectNfts
-            case .unlockDGC: return L10n.Plugins.Luckydrop.Buttons.approveCollection
+            case .unlockNFT: return L10n.Plugins.Luckydrop.Buttons.approveCollection
             case .needMessage: return L10n.Plugins.Luckydrop.Buttons.noMessage
             case .createNFTDrop: return L10n.Plugins.Luckydrop.Buttons.createNfgLuckyDrop
             }
