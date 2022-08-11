@@ -61,7 +61,7 @@ class SearchSingleNFTViewController: BaseViewController {
         nftAmountLabel
     }
 
-    lazy var searchTextField: MaskTextField = {
+    private lazy var searchTextField: MaskTextField = {
         let textField = MaskTextField()
         textField.backgroundColor = Asset.Colors.Twitter.inputBg.color
         textField.layer.cornerRadius = 8
