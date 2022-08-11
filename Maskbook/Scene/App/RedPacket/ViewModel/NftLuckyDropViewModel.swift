@@ -364,7 +364,7 @@ extension NftLuckyDropViewModel {
 }
 
 extension NftLuckyDropViewModel: ChooseCollectionBackDelegate {
-    func chooseNFTCollectionAction(token: Collectible){
+    func chooseNFTCollectionAction(token: Collectible) {
         
     }
 }
