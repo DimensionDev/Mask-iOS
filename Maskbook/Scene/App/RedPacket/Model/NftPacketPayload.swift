@@ -3,7 +3,7 @@ import Foundation
 extension RedPacket {
     struct NftRedPacketPayload: Codable {
         init(
-            id: String,
+            id: String?,
             txid: String,
             duration: Double,
             message: String,

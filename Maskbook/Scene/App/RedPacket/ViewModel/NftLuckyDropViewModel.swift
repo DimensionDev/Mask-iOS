@@ -3,6 +3,8 @@ import CombineExt
 import CoreData
 import CoreDataStack
 import Foundation
+import web3swift
+import BigInt
 
 struct CollectiableGroup: Hashable {
     let name: String
@@ -26,7 +28,23 @@ final class NftLuckyDropViewModel: ObservableObject {
         print("\(self) deinit")
     }
 
-    init() {
+    let gasFeeViewModel: GasFeeViewModel
+    let walletBottomViewModel: WalletBottomWidgetViewModel
+    
+    init(gasFeeViewModel: GasFeeViewModel,
+         walletBottomViewModel: WalletBottomWidgetViewModel) {
+        self.gasFeeViewModel = gasFeeViewModel
+        self.walletBottomViewModel = walletBottomViewModel
+        
+        let gasItem = gasFeeViewModel.confirmedGasFeePublisher
+            .removeDuplicates()
+            .filter { $0 != nil }
+            .share()
+
+        gasItem
+            .assign(to: \.gasFeeItem, on: self)
+            .store(in: &cancelableStorage)
+        
         Publishers.CombineLatest3(
             settings.defaultAccountAddressPublisher.removeDuplicates(),
             settings.networkPubisher.removeDuplicates(),
@@ -97,7 +115,8 @@ final class NftLuckyDropViewModel: ObservableObject {
     }
 
     var action: (Event) -> Void = { _ in }
-
+    
+    
     // binded in `LuckyDropViewModel`
     @Published var gasFeeItem: GasFeeCellItem?
     @Published var message = ""
@@ -140,6 +159,9 @@ final class NftLuckyDropViewModel: ObservableObject {
 
     @InjectedProvider(\.walletAssetManager)
     private var walletAssetManager: WalletAssetManager
+    
+    @InjectedProvider(\.personaManager)
+    private var personaManager
 }
 
 extension NftLuckyDropViewModel {
@@ -300,18 +322,75 @@ extension NftLuckyDropViewModel {
             )
 
         case .createNFTDrop:
-            guard let item = gasFeeItem, let token = token else {
-                return
-            }
-            let draft = NftRecpacketDraft(
-                message: message,
-                collectibles: collectibles,
-                gasFeeItem: item,
-                token: token
-            )
-            action(.createBNFTLuckyDrop(draft))
+            createNFTLuckyDrop()
 
         default: break
+        }
+    }
+}
+extension NftLuckyDropViewModel {
+    func createNFTLuckyDrop() {
+        guard let privateKey = SECP256K1.generatePrivateKey() else { return }
+        guard let publicKey = Web3.Utils.privateToPublic(privateKey) else { return }
+        guard let publicKeyETH = Web3.Utils.publicToAddress(publicKey) else { return }
+        let password = privateKey.toHexString().addHexPrefix()
+        let duration = BigUInt(60 * 60 * 24)
+        let randomStr = "\(Float.random(in: 0 ..< 1))"
+        guard let seed = randomStr.data(using: .utf8)?.sha3(.keccak256) else { return }
+        let senderName = personaManager.currentProfile.value?.userName
+            ?? personaManager.currentPersona.value?.nickname
+            ?? "Unknown User"
+        guard let nftAddress = collectibles.first?.address,
+              let collectionName = collectibles.first?.collectionName,
+              let logoUrl = collectibles.first?.logoUrl,
+              let tokenAddr = EthereumAddress(nftAddress)
+        else {
+            return
+        }
+        
+        guard let redPacketChainID = RedPacket.ChainId(rawValue: Int(settings.network.networkId)) else {
+            return
+        }
+        
+        let erc721TokenIDs = collectibles.compactMap {
+            $0.tokenId.flatMap({BigUInt($0)})
+        }
+        let param = NFTRedPacketABI.CreateNFTRedPacketInput(
+            publicKey: publicKeyETH,
+            duration: duration,
+            seed: seed.bytes,
+            message: message,
+            name: senderName,
+            tokenAddr: tokenAddr,
+            erc721TokenIDs: erc721TokenIDs
+        )
+        Task {
+            let tx = await ABI.nftRedPacketABI.createRedPacket(
+                gasFeeViewModel: gasFeeViewModel,
+                param: param,
+                password: password
+            )
+            if let tx = tx {
+                walletBottomViewModel.observeTransaction(txHash: tx)
+                let payload = NftRedPacketPayload(
+                    id: nil,
+                    txid: tx,
+                    duration: duration.asDouble() ?? 0,
+                    message: message,
+                    senderName: senderName,
+                    contractName: collectionName,
+                    contractAddress: nftAddress,
+                    contractVersion: 1,
+                    contractTokenURI: logoUrl,
+                    privateKey: password,
+                    chainId: redPacketChainID
+                )
+                PluginStorageRepository.save(
+                    chain: settings.network,
+                    txHash: tx,
+                    nftPayload: payload
+                )
+            }
         }
     }
 }

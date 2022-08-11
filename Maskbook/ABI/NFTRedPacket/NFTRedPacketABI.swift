@@ -301,6 +301,23 @@ extension NFTRedPacketABI {
     }
     
     struct CreateNFTRedPacketInput: Codable {
+        init(publicKey: EthereumAddress,
+             duration: BigUInt,
+             seed: [UInt8],
+             message: String,
+             name: String,
+             tokenAddr: EthereumAddress,
+             erc721TokenIDs: [BigUInt]
+        ) {
+            self.publicKey = publicKey
+            self.duration = duration
+            self.seed = seed
+            self.message = message
+            self.name = name
+            self.tokenAddr = tokenAddr
+            self.erc721TokenIDs = erc721TokenIDs
+        }
+        
         let publicKey: EthereumAddress
         let duration: BigUInt
         let seed: [UInt8]

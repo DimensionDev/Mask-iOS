@@ -68,9 +68,6 @@ final class LuckyDropViewModel: ObservableObject {
             .assign(to: \.gasFeeItem, on: self)
             .store(in: &disposeBag)
 
-        gasItem
-            .assign(to: \.gasFeeItem, on: nftViewModel)
-            .store(in: &disposeBag)
 
         setupObserversForConfirmButton()
     }
@@ -97,9 +94,9 @@ final class LuckyDropViewModel: ObservableObject {
     @Published var keyboardHeight: CGFloat = 0
 
     let walletBottomViewModel: WalletBottomWidgetViewModel
-    let nftViewModel = NftLuckyDropViewModel()
-
     var gasFeeViewModel = GasFeeViewModel()
+    
+    lazy var nftViewModel = NftLuckyDropViewModel(gasFeeViewModel: gasFeeViewModel, walletBottomViewModel: walletBottomViewModel)
 
     let source: Source
 

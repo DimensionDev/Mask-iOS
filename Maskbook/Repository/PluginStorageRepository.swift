@@ -96,16 +96,13 @@ extension PluginStorageRepository {
     static func save(
         chain: BlockChainNetwork,
         txHash: String,
-        payload: NftRedPacketPayload?
+        nftPayload: NftRedPacketPayload
     ) {
-        guard let payload = payload else {
-            return
-        }
 
         let key = generateKey(chain: chain, txHash: txHash)
         let context = viewContext
         context.performAndWait {
-            let data = try? JSONEncoder().encode(payload)
+            let data = try? JSONEncoder().encode(nftPayload)
             var json: String?
             if let data = data {
                 json = String(data: data, encoding: .utf8)
