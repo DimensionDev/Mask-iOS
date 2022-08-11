@@ -21,9 +21,6 @@ typealias FungibleToken = RedPacket.FungibleToken
 
 @MainActor
 final class LuckyDropViewModel: ObservableObject {
-    // MARK: Lifecycle
-
-    // MARK: - Public method
     deinit {
         print("\(self) deinit")
     }
@@ -76,11 +73,7 @@ final class LuckyDropViewModel: ObservableObject {
         AppContext.shared.coreDataStack.persistentContainer.viewContext
     }
 
-    // MARK: Internal
-
     typealias Tag = LuckyDropTokens.TextFieldTag
-
-    // MARK: - Public property
 
     @Published var quantityStr = ""
     @Published var amountStr = ""
@@ -94,9 +87,9 @@ final class LuckyDropViewModel: ObservableObject {
     @Published var keyboardHeight: CGFloat = 0
 
     let walletBottomViewModel: WalletBottomWidgetViewModel
-    var gasFeeViewModel = GasFeeViewModel()
+    private(set) var gasFeeViewModel = GasFeeViewModel()
     
-    lazy var nftViewModel = NftLuckyDropViewModel(gasFeeViewModel: gasFeeViewModel, walletBottomViewModel: walletBottomViewModel)
+    lazy var nftViewModel = NftLuckyDropViewModel(gasFeeViewModel: gasFeeViewModel)
 
     let source: Source
 
@@ -432,11 +425,7 @@ final class LuckyDropViewModel: ObservableObject {
         buttonType = state
     }
 
-    // MARK: Private
-
     private var timer: Timer?
-
-    // MARK: - Private property
 
     private var disposeBag = Set<AnyCancellable>()
     @InjectedProvider(\.walletAssetManager)
@@ -530,8 +519,6 @@ final class LuckyDropViewModel: ObservableObject {
             }
         }
     }
-
-    // MARK: - Private method
 
     private func saveSafely(txHash: String, password: String) {
         let basic = RedPacket.Basic(
