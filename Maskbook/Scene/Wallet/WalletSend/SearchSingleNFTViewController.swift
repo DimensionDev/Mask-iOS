@@ -43,6 +43,7 @@ class SearchSingleNFTViewController: BaseViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(Asset.Icon.Cell.cellUncheck.image, for: .normal)
         button.setInsets(forContentPadding: .zero, imageTitlePadding: 10)
+        button.sizeToFit()
         return button
     }()
 
