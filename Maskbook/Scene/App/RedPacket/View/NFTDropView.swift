@@ -2,13 +2,9 @@ import Kingfisher
 import SwiftUI
 
 struct NFTDropView: View {
-    // MARK: Lifecycle
-
     init(_ viewModel: LuckyDropViewModel) {
         _viewModel = .init(wrappedValue: viewModel)
     }
-
-    // MARK: Internal
 
     var body: some View {
         ScrollView {
@@ -58,8 +54,6 @@ struct NFTDropView: View {
         )
     }
 
-    // MARK: Private
-
     @StateObject
     private var viewModel: LuckyDropViewModel
 
@@ -91,7 +85,9 @@ struct NFTDropView: View {
             ? Asset.Colors.Public.white.asColor()
             : Asset.Colors.Text.normal.asColor()
     }
+}
 
+extension NFTDropView {
     @ViewBuilder
     private var collectibleGroupView: some View {
         if showCollectible {
