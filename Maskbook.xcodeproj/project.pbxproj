@@ -673,6 +673,7 @@
 		5D06F59C28531B8B00640D00 /* AttachmentOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D06F59B28531B8B00640D00 /* AttachmentOptions.swift */; };
 		5D0A015A28A3B3B2003696B5 /* NFTRedPacket.json in Resources */ = {isa = PBXBuildFile; fileRef = 5D0A015828A3B3B2003696B5 /* NFTRedPacket.json */; };
 		5D0A015B28A3B3B2003696B5 /* NFTRedPacketABI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0A015928A3B3B2003696B5 /* NFTRedPacketABI.swift */; };
+		5D0A015D28A4EECD003696B5 /* CollectibleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0A015C28A4EECD003696B5 /* CollectibleRepository.swift */; };
 		5D0ADACF28363E2D0022D5BD /* MessageComposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0ADACC28363E2D0022D5BD /* MessageComposeView.swift */; };
 		5D0ADAD028363E2D0022D5BD /* MessageComposeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0ADACD28363E2D0022D5BD /* MessageComposeViewModel.swift */; };
 		5D11473727E2CDB200D4448C /* CropImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D11473627E2CDB200D4448C /* CropImageViewController.swift */; };
@@ -1543,6 +1544,7 @@
 		5D06F59B28531B8B00640D00 /* AttachmentOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentOptions.swift; sourceTree = "<group>"; };
 		5D0A015828A3B3B2003696B5 /* NFTRedPacket.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NFTRedPacket.json; sourceTree = "<group>"; };
 		5D0A015928A3B3B2003696B5 /* NFTRedPacketABI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFTRedPacketABI.swift; sourceTree = "<group>"; };
+		5D0A015C28A4EECD003696B5 /* CollectibleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectibleRepository.swift; sourceTree = "<group>"; };
 		5D0ADACC28363E2D0022D5BD /* MessageComposeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageComposeView.swift; sourceTree = "<group>"; };
 		5D0ADACD28363E2D0022D5BD /* MessageComposeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageComposeViewModel.swift; sourceTree = "<group>"; };
 		5D11473627E2CDB200D4448C /* CropImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropImageViewController.swift; sourceTree = "<group>"; };
@@ -3698,6 +3700,7 @@
 			isa = PBXGroup;
 			children = (
 				2AF94B72287E69C800E1AEAC /* TokenRepository.swift */,
+				5D0A015C28A4EECD003696B5 /* CollectibleRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -5232,6 +5235,7 @@
 				2AD31E4E282D367700CB3D49 /* UISearchBar+Height.swift in Sources */,
 				2A0C16AF2666713D0085524E /* StoredKeyImportType.swift in Sources */,
 				1F447952288A7EA30098BAE9 /* SwiftUI+View.swift in Sources */,
+				5D0A015D28A4EECD003696B5 /* CollectibleRepository.swift in Sources */,
 				2AF88582271EE9310004565A /* TermsOfServiceViewController.swift in Sources */,
 				2AF884F2271EE9310004565A /* IdentityMnemonicImportViewController.swift in Sources */,
 				5D93DFA2267B3F2E00A175BF /* Persona.swift in Sources */,
