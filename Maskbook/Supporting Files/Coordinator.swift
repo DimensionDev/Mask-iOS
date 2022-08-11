@@ -889,12 +889,12 @@ extension Coordinator {
             
         case let .luckydropSearchCollection(selectionDelegate):
             let searchCollectionVc = SearchNFTCollectionViewController()
-            searchCollectionVc.delegate = viewController
+            searchCollectionVc.delegate = selectionDelegate
             return searchCollectionVc
             
         case let .luckydropSearchNFT(selectionDelegate, contractAddress):
-            let searchNFTVc = SearchSingleNFTViewController(contractAddress: address)
-            searchNFTVc.delegate = viewController
+            let searchNFTVc = SearchSingleNFTViewController(contractAddress: contractAddress)
+            searchNFTVc.delegate = selectionDelegate
             return searchNFTVc
             
         case .fileService:

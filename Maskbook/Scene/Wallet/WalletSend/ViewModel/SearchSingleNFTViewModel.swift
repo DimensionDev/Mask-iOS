@@ -53,11 +53,12 @@ class SearchSingleNFTViewModel {
                 self?.collectiblesSubject.value = collectibles
             })
             .store(in: &disposeBag)
+        
+    
 
         Publishers.CombineLatest(searchString, collectiblesSubject)
             .map { text, collectibles -> [Collectible] in
-                guard let text = text,
-                      !text.isEmpty else {
+                guard !text.isEmpty else {
                     return collectibles
                 }
                 
@@ -74,29 +75,8 @@ class SearchSingleNFTViewModel {
                     }
                 }
             }
+            .throttle(for: .seconds(0.5), scheduler: DispatchQueue.main, latest: true)
             .bind(to: \.dataSource, on: self)
-            .store(in: &disposeBag)
-            .sink { [weak self] _ in
-                guard let self = self else {
-                    return
-                }
-                self.dataSource.value = self.collectiblesSubject.value
-                    .filter { [weak self] collectible in
-                        guard let text = self?.searchString.value else {
-                            return true
-                        }
-                        if text.isEmpty {
-                            return true
-                        }
-
-                        guard let name = collectible.name, let tokenID = collectible.tokenId else {
-                            return false
-                        }
-                        let isNameContains = name.containsIgnoreCase(string: text)
-                        let isTokenIDContains = tokenID.containsIgnoreCase(string: text)
-                        return isNameContains || isTokenIDContains
-                    }
-            }
             .store(in: &disposeBag)
         searchString.value = ""
     }
