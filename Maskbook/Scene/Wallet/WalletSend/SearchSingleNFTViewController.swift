@@ -42,8 +42,8 @@ class SearchSingleNFTViewController: BaseViewController {
         button.setTitle("Select All", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(Asset.Icon.Cell.cellUncheck.image, for: .normal)
-        button.setInsets(forContentPadding: .zero, imageTitlePadding: 10)
-        button.sizeToFit()
+        button.setInsets(forContentPadding: .zero, imageTitlePadding: 7)
+        button.contentHorizontalAlignment = .left
         return button
     }()
 
