@@ -24,7 +24,7 @@ class SearchNFTCollectionViewController: BaseViewController {
     var subscriptions: Set<AnyCancellable> = []
     weak var delegate: ChooseCollectionBackDelegate?
 
-    let searchTextField: MaskTextField = {
+    private let searchTextField: MaskTextField = {
         let textField = MaskTextField()
         textField.attributedPlaceholder = NSAttributedString(
             string: L10n.Scene.Sendtransaction.Tokenlist.placeholder,
