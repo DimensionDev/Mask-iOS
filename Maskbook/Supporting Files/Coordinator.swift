@@ -887,7 +887,7 @@ extension Coordinator {
         case let .composeSelectContact(selectContactViewModel):
             return SelectContactViewController(viewModel: selectContactViewModel)
             
-        case let .luckydropSearchCollection(delegate: viewController):
+        case let .luckydropSearchCollection(selectionDelegate):
             let searchCollectionVc = SearchNFTCollectionViewController()
             searchCollectionVc.delegate = viewController
             return searchCollectionVc
