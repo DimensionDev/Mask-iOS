@@ -10,13 +10,14 @@ import CoreData
 import CoreDataStack
 import Foundation
 
-final class CollectibleRepository {
+enum CollectibleRepository {
     static let viewContext = AppContext.shared.coreDataStack.persistentContainer.viewContext
 
-    static func queryCollection(address: String,
-                                network: BlockChainNetwork,
-                                tokenId: String) -> Collectible?
-    {
+    static func queryCollection(
+        address: String,
+        network: BlockChainNetwork,
+        tokenId: String
+    ) -> Collectible? {
         do {
             let queryContext = viewContext
             let fetchRequest = Collectible.sortedFetchRequest

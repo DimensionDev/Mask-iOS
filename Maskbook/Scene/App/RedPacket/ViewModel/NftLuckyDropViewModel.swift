@@ -116,7 +116,7 @@ extension NftLuckyDropViewModel {
     var groupIconURL: URL? { collectibleGroup?.groupIconURL }
 
     var collectibleCountInfo: String {
-        "\(collectibles.count)\(collectibleGroup?.totalCount ?? 0)"
+        "\(collectibles.count)/\(collectibleGroup?.totalCount ?? 0)"
     }
 
     var showCollectible: Bool {
@@ -370,12 +370,17 @@ extension NftLuckyDropViewModel {
 
 extension NftLuckyDropViewModel: ChooseCollectionBackDelegate {
     func chooseNFTCollectionAction(token: Collectible) {
-        
+        selectCollectible(
+            groupName: token.name ?? "",
+            contractAddress: token.address ?? "",
+            groupIconURL: URL(string: token.collectionImage ?? ""),
+            totalCount: 0
+        )
     }
 }
 
 extension NftLuckyDropViewModel: SearchSingleNFTDelegate {
     func returnSelectedNFT(collectible: [Collectible]?) {
-        
+        addCollectibles(collectible ?? [])
     }
 }
