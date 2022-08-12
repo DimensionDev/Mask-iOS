@@ -24,7 +24,7 @@ class SearchSingleNFTViewModel {
         let fetchResultController: NSFetchedResultsController<Collectible> = {
             let fetchRequest = Collectible.sortedFetchRequest
             if let address = maskUserDefaults.defaultAccountAddress {
-                let predicate = Collectible.predicate(address: address, networkId: maskUserDefaults.network.networkId, contractAddress: contractAdress, enabled: true)
+                let predicate = Collectible.predicate(accountAddress: address, networkId: maskUserDefaults.network.networkId, contractAddress: contractAdress, enabled: true)
                 fetchRequest.predicate = predicate
             }
             fetchRequest.returnsObjectsAsFaults = false
@@ -53,15 +53,15 @@ class SearchSingleNFTViewModel {
                 self?.collectiblesSubject.value = collectibles
             })
             .store(in: &disposeBag)
-        
-    
 
-        Publishers.CombineLatest(searchString, collectiblesSubject)
+        searchString
+            .throttle(for: .seconds(0.5), scheduler: DispatchQueue.main, latest: true)
+            .combineLatest(collectiblesSubject)
             .map { text, collectibles -> [Collectible] in
                 guard !text.isEmpty else {
                     return collectibles
                 }
-                
+
                 return collectibles.filter { collectible in
                     guard let name = collectible.name,
                           let tokenID = collectible.tokenId else {
@@ -75,9 +75,9 @@ class SearchSingleNFTViewModel {
                     }
                 }
             }
-            .throttle(for: .seconds(0.5), scheduler: DispatchQueue.main, latest: true)
             .bind(to: \.dataSource, on: self)
             .store(in: &disposeBag)
+
         searchString.value = ""
     }
 }

@@ -306,7 +306,7 @@ extension Collectible: Managed {
         return NSPredicate(
             format: "%K =[c] %@ AND %K == %@ AND %K == %@ AND %K == %@",
             #keyPath(Collectible.account.address),
-            address,
+            accountAddress,
             #keyPath(Collectible.enabled),
             NSNumber(value: enabled),
             #keyPath(Collectible.networkId),
