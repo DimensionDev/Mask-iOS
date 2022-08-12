@@ -316,6 +316,18 @@ extension Collectible: Managed {
         )
     }
     
+    public class func predicate(address: String, networkId: UInt64, tokenId: String) -> NSPredicate {
+        return NSPredicate(
+            format: "%K =[c] %@ AND %K == %@ AND %K == %@",
+            #keyPath(Collectible.account.address),
+            address,
+            #keyPath(Collectible.networkId),
+            NSNumber(value: networkId),
+            #keyPath(Collectible.tokenId),
+            tokenId
+        )
+    }
+    
     public static func predicate(address: String, notInIdentifiers identifiers: [String]) -> NSPredicate {
         let predicates = [
             predicate(address: address),
