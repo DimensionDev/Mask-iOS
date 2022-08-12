@@ -91,7 +91,11 @@ extension Collectible {
         self.tokenName = assetModel.name
         self.tokenSymbol = assetModel.contractToken
         self.collectionName = assetModel.contractName
-        self.collectionImage = assetModel.imageUri
+        if let collectionImage = assetModel.contractAddress{
+            self.collectionImage = "https://logo.nftscan.com/logo/\(collectionImage).png"
+        } else {
+            self.collectionImage = assetModel.imageUri
+        }
         self.collectionSlug = assetModel.contractName
         self.collectionWebsite = URL(string: assetModel.imageUri ?? "")
         self.latestTradePrice = assetModel.latestTradePrice.stringValue
