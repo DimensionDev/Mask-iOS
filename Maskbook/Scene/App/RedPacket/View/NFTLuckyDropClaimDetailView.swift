@@ -50,9 +50,15 @@ struct NFTLuckyDropClaimDetailView: View {
         // TODO: replace nft collection url
         VStack {
             KFImage.url(
-                state.collectible?.imageUrl,
-                cacheKey: state.collectible?.imageUrl?.absoluteString
+                state.collectible?.previewLink,
+                cacheKey: state.collectible?.previewLink?.absoluteString
             )
+            .placeholder {
+                Asset.Colors.Background.normal.asColor()
+                    .overlay(
+                        placeHolderIcon
+                    )
+            }
             .cancelOnDisappear(true)
             .resizable()
             .clipShape(RoundedRectangle(cornerRadius: 8.0, style: .continuous))
@@ -63,7 +69,7 @@ struct NFTLuckyDropClaimDetailView: View {
                     Spacer()
                     Text(L10n.Scene.OpenRedPackage.claimed)
                         .horizontallyFilled(alignment: .center)
-                        .frame(width: .infinity, height: 32, alignment: .center)
+                        .frame(width: nil, height: 32, alignment: .center)
                         .background(
                             Asset.Colors.Background.mask.asColor().opacity(0.8)
                                 .clipShape(RoundedCorner(radius: 8,
@@ -77,6 +83,17 @@ struct NFTLuckyDropClaimDetailView: View {
                 .font(FontStyles.rh6.font)
                 .foregroundColor(Asset.Colors.Text.dark.asColor())
         }
+    }
+    
+    private var placeHolderIcon: some View {
+        Image(Asset.Icon.Logo.largeMask)
+            .resizable()
+            .frame(width: nil, height: 104)
+            .overlay(
+                Asset.Colors.Background.normal.asColor()
+                    .opacity(0.5)
+            )
+            .clipShape(Circle())
     }
 }
 

@@ -17,7 +17,7 @@ struct NFTLuckyDropHistoryRow: View {
     @InjectedProvider(\.mainCoordinator)
     private var mainCoordinator
     
-    @ObservedObject private var viewModel: NFTLuckyDropHistoryTokenItemViewModel
+    @ObservedObject private var viewModel: NFTLuckyDropHistoryItemViewModel
 
     init(item: NftRedPacketSubgraph) {
         _viewModel = ObservedObject(
@@ -91,14 +91,14 @@ struct NFTLuckyDropHistoryRow: View {
                         .foregroundColor(Asset.Colors.Text.dark.asColor())
                         .layoutPriority(1)
 
-//                    KFImage.url(
-//                        URL(string: viewModel.luckyDrop.payload?.token?.logoURL ?? ""),
-//                        cacheKey: viewModel.luckyDrop.payload?.token?.logoURL ?? ""
-//                    )
-//                    .cancelOnDisappear(true)
-//                    .resizable()
-//                    .cornerRadius(10)
-//                    .frame(width: 20, height: 20)
+                    KFImage.url(
+                        viewModel.collectionURL,
+                        cacheKey: viewModel.collectionURL?.absoluteString
+                    )
+                    .cancelOnDisappear(true)
+                    .resizable()
+                    .cornerRadius(10)
+                    .frame(width: 20, height: 20)
                     
                     Spacer()
                     

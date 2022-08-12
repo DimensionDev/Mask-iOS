@@ -172,7 +172,7 @@ class NFTScanProvider {
         contractAddress: String
     ) -> AnyPublisher<NFTScanCollectionModel, Error>? {
         let decoder = JSONDecoder()
-        var fetchTokenURLComponents = URLComponents(
+        let fetchTokenURLComponents = URLComponents(
             url: baseURL.appendingPathComponent("collections/\(contractAddress)"),
             resolvingAgainstBaseURL: false
         )

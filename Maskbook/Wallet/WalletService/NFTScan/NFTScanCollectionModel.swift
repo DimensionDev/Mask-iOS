@@ -14,7 +14,7 @@ struct NFTScanCollectionModel: Codable, Hashable {
     let symbol: String?
     let description: String?
     let website: String?
-    let logoURL: String
+    let logoURL: String?
     let floorPrice: Double?
     let priceSymbol: String
 

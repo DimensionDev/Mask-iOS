@@ -21,19 +21,10 @@ final class NFTLuckDropConfirmViewController: SheetViewController {
     private var viewModel: NFTRedPacketConfirmViewModel
     
     init(
-        gasFeeViewModel: GasFeeViewModel,
-        redPacketInput: NFTRedPacketABI.CreateNFTRedPacketInput,
-        transaction: EthereumTransaction,
-        options: TransactionOptions,
+        viewModelInput: NFTRedPacketConfirmViewModel.InitInput,
         completion: ((String?, Error?) -> Void)?
     ) {
-        let param = NFTRedPacketConfirmViewModel.InitInput(
-            gasFeeViewModel: gasFeeViewModel,
-            inputParam: redPacketInput,
-            transaction: transaction,
-            options: options
-        )
-        viewModel = NFTRedPacketConfirmViewModel(param: param, completion: completion)
+        viewModel = NFTRedPacketConfirmViewModel(param: viewModelInput, completion: completion)
         super.init(presenter: SheetPresenter(
             presentStyle: .translucent,
             transition: KeyboardSheetTransition())

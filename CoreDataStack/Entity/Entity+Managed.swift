@@ -312,7 +312,20 @@ extension Collectible: Managed {
             #keyPath(Collectible.networkId),
             NSNumber(value: networkId),
             #keyPath(Collectible.address),
-            contractAddress
+            contractAddress)
+    }
+            
+    public class func predicate(contractAddress: String, networkId: UInt64, tokenId: String, enabled: Bool) -> NSPredicate {
+        return NSPredicate(
+            format: "%K == %@ AND %K == %@ AND %K == %@ AND %K == %@",
+            #keyPath(Collectible.address),
+            contractAddress,
+            #keyPath(Collectible.networkId),
+            NSNumber(value: networkId),
+            #keyPath(Collectible.tokenId),
+            tokenId,
+            #keyPath(Collectible.enabled),
+            NSNumber(value: enabled)
         )
     }
     

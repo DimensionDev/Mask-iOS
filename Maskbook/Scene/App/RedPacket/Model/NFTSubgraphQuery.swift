@@ -100,7 +100,7 @@ final class NFTSubgraphQuery {
               where: { creator: "\(address.lowercased())" },
               orderBy: creation_time,
               orderDirection: desc,
-              first: 5,
+              first: 100,
               skip: 0
             ) {
                 \(Self.RED_PACKET_FIELDS)

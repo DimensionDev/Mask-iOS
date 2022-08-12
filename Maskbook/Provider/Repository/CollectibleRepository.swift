@@ -13,15 +13,21 @@ import Foundation
 enum CollectibleRepository {
     static let viewContext = AppContext.shared.coreDataStack.persistentContainer.viewContext
 
-    static func queryCollection(
-        address: String,
+
+    static func queryCollectible(
+        contractAddress: String,
         network: BlockChainNetwork,
         tokenId: String
     ) -> Collectible? {
         do {
             let queryContext = viewContext
             let fetchRequest = Collectible.sortedFetchRequest
-            fetchRequest.predicate = Collectible.predicate(address: address, networkId: network.networkId, tokenId: tokenId)
+            fetchRequest.predicate = Collectible.predicate(
+                contractAddress: contractAddress,
+                networkId: network.networkId,
+                tokenId: tokenId,
+                enabled: true
+            )
             fetchRequest.fetchLimit = 1
             return try queryContext.fetch(fetchRequest).first
         } catch {

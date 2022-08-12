@@ -61,8 +61,8 @@ final class NFTLuckyDropClaimDetailViewModel: ObservableObject {
     
     func queryCollectible() {
         let newStates = claimStates.map { state -> CollectibleClaimState in
-            let collectible = CollectibleRepository.queryCollection(
-                address: nftRedPacketSubgraph.contractAddress,
+            let collectible = CollectibleRepository.queryCollectible(
+                contractAddress: nftRedPacketSubgraph.contractAddress,
                 network: userSettings.network,
                 tokenId: state.tokenId
             )

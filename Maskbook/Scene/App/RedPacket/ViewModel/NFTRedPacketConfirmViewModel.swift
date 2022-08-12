@@ -86,7 +86,7 @@ class NFTRedPacketConfirmViewModel: ObservableObject {
     
     init(param: InitInput?, completion: ((String?, Error?) -> Void)?) {
         self.gasFeeViewModel = param?.gasFeeViewModel
-        self.inputParam = param?.inputParam
+        self.inputParam = param?.createRedPacketInput
         self.options = param?.options
         self.transaction = param?.transaction
         self.completion = completion
@@ -268,7 +268,7 @@ extension NFTRedPacketConfirmViewModel {
     
     struct InitInput {
         let gasFeeViewModel: GasFeeViewModel
-        let inputParam: NFTRedPacketABI.CreateNFTRedPacketInput
+        let createRedPacketInput: NFTRedPacketABI.CreateNFTRedPacketInput
         let transaction: EthereumTransaction
         let options: TransactionOptions
     }

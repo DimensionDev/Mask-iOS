@@ -78,11 +78,14 @@ struct NFTRedPacketABI: ABIContract {
                 do {
                     let transaction = try tx.assemble(transactionOptions: tx.transactionOptions)
                     await MainActor.run {
-                        let scene: Coordinator.Scene = .nftLuckyDropConfirm(
+                        let viewModelInput = NFTRedPacketConfirmViewModel.InitInput(
                             gasFeeViewModel: gasFeeViewModel,
-                            redPacketInput: redPacketInput,
+                            createRedPacketInput: redPacketInput,
                             transaction: transaction,
-                            options: tx.transactionOptions
+                            options: tx.transactionOptions)
+                        
+                        let scene: Coordinator.Scene = .nftLuckyDropConfirm(
+                            viewModelInput: viewModelInput
                         ) { tx, error in
                             if let error = error {
                                 continuation.resume(with: .failure(error))

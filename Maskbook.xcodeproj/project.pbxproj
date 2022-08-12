@@ -729,7 +729,7 @@
 		5DAF3FB92814E80600CADB80 /* MaskSchemeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAF3FB82814E80600CADB80 /* MaskSchemeTest.swift */; };
 		5DB2F622288E8B7F0030F3A4 /* GroupMaskSegmentControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2F621288E8B7F0030F3A4 /* GroupMaskSegmentControlView.swift */; };
 		5DB2F624289BA2DF0030F3A4 /* NFTLuckyDropHistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2F623289BA2DE0030F3A4 /* NFTLuckyDropHistoryRow.swift */; };
-		5DB2F626289BA30C0030F3A4 /* NFTLuckyDropHistoryTokenItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2F625289BA30C0030F3A4 /* NFTLuckyDropHistoryTokenItemViewModel.swift */; };
+		5DB2F626289BA30C0030F3A4 /* NFTLuckyDropHistoryItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2F625289BA30C0030F3A4 /* NFTLuckyDropHistoryItemViewModel.swift */; };
 		5DB2F62A289BBA410030F3A4 /* NFTSubgraphQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2F629289BBA410030F3A4 /* NFTSubgraphQuery.swift */; };
 		5DB2F62C289BC77C0030F3A4 /* NftRedPacketSubgraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2F62B289BC77C0030F3A4 /* NftRedPacketSubgraph.swift */; };
 		5DB2F62E289D16C10030F3A4 /* NFTLuckyDropClaimDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2F62D289D16C10030F3A4 /* NFTLuckyDropClaimDetailViewController.swift */; };
@@ -1611,7 +1611,7 @@
 		5DAF3FB82814E80600CADB80 /* MaskSchemeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskSchemeTest.swift; sourceTree = "<group>"; };
 		5DB2F621288E8B7F0030F3A4 /* GroupMaskSegmentControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMaskSegmentControlView.swift; sourceTree = "<group>"; };
 		5DB2F623289BA2DE0030F3A4 /* NFTLuckyDropHistoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTLuckyDropHistoryRow.swift; sourceTree = "<group>"; };
-		5DB2F625289BA30C0030F3A4 /* NFTLuckyDropHistoryTokenItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTLuckyDropHistoryTokenItemViewModel.swift; sourceTree = "<group>"; };
+		5DB2F625289BA30C0030F3A4 /* NFTLuckyDropHistoryItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTLuckyDropHistoryItemViewModel.swift; sourceTree = "<group>"; };
 		5DB2F629289BBA410030F3A4 /* NFTSubgraphQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTSubgraphQuery.swift; sourceTree = "<group>"; };
 		5DB2F62B289BC77C0030F3A4 /* NftRedPacketSubgraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftRedPacketSubgraph.swift; sourceTree = "<group>"; };
 		5DB2F62D289D16C10030F3A4 /* NFTLuckyDropClaimDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTLuckyDropClaimDetailViewController.swift; sourceTree = "<group>"; };
@@ -2539,7 +2539,7 @@
 				2AD8551F2812841C0064DDA5 /* LuckyDropViewModel.swift */,
 				2AD855202812841C0064DDA5 /* LuckDropHistoryViewModel.swift */,
 				2AD855212812841C0064DDA5 /* LuckyDropHistoryItemViewModel.swift */,
-				5DB2F625289BA30C0030F3A4 /* NFTLuckyDropHistoryTokenItemViewModel.swift */,
+				5DB2F625289BA30C0030F3A4 /* NFTLuckyDropHistoryItemViewModel.swift */,
 				2AD855222812841C0064DDA5 /* LuckyDropHistoryHelper.swift */,
 				2AD855232812841C0064DDA5 /* LuckyDropHistoryViewModel+RedPacketHistory.swift */,
 				2AD855242812841C0064DDA5 /* FungibleTokenBuilder.swift */,
@@ -4840,7 +4840,7 @@
 				5DC95947287EA6F4008DAB6D /* MessageComposeCoodinator.swift in Sources */,
 				2A6ABB7D2720053B00CC3AED /* SelectDataSourceViewModel.swift in Sources */,
 				2AF88532271EE9310004565A /* WalletImportViewModel.swift in Sources */,
-				5DB2F626289BA30C0030F3A4 /* NFTLuckyDropHistoryTokenItemViewModel.swift in Sources */,
+				5DB2F626289BA30C0030F3A4 /* NFTLuckyDropHistoryItemViewModel.swift in Sources */,
 				2A6ABB882720053B00CC3AED /* RestoreDataPickerController.swift in Sources */,
 				2AF88581271EE9310004565A /* WalletListAddWalletConnectCell.swift in Sources */,
 				2A741F34281BCC870023A116 /* Api_JWKResp.swift in Sources */,

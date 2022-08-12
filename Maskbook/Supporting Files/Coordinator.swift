@@ -208,10 +208,7 @@ class Coordinator {
             completion: (String?, Error?) -> Void
         )
         case nftLuckyDropConfirm(
-            gasFeeViewModel: GasFeeViewModel,
-            redPacketInput: NFTRedPacketABI.CreateNFTRedPacketInput,
-            transaction: EthereumTransaction,
-            options: TransactionOptions,
+            viewModelInput: NFTRedPacketConfirmViewModel.InitInput,
             completion: (String?, Error?) -> Void
         )
         case luckyDropSuccessfully(callback: (@MainActor () -> Void)?)
@@ -842,17 +839,11 @@ extension Coordinator {
             )
             
         case .nftLuckyDropConfirm(
-            let gasFeeViewModel,
-            let redPacketInput,
-            let transaction,
-            let options,
+            let viewModelInput,
             let completion
         ):
             return NFTLuckDropConfirmViewController(
-                gasFeeViewModel: gasFeeViewModel,
-                redPacketInput: redPacketInput,
-                transaction: transaction,
-                options: options,
+                viewModelInput: viewModelInput,
                 completion: completion
             )
         
