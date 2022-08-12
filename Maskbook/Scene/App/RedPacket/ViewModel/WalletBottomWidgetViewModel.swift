@@ -224,7 +224,7 @@ class WalletBottomWidgetViewModel: ObservableObject {
         PluginStorageRepository.save(
             chain: network,
             txHash: transcation.txHash,
-            payload: payload
+            nftPayload: payload
         )
     }
     

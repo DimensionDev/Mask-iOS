@@ -62,12 +62,6 @@ struct NftRedPacketSubgraph: Codable {
     }
 }
 
-extension NftRedPacketSubgraph {
-    var tokenIdstoBigUInt: [BigUInt] {
-        tokenIds.map { BigUInt($0)! }
-    }
-}
-
 extension NftRedPacketSubgraph: Identifiable {
     var id: String {
         rpid

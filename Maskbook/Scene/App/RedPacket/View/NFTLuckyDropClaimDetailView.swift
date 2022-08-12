@@ -34,10 +34,9 @@ struct NFTLuckyDropClaimDetailView: View {
                 .foregroundColor(Asset.Colors.Text.dark.asColor())
             LazyVGrid(columns: columns,
                       spacing: 12) {
-                ForEach(viewModel.claimState.keys.sorted(),
-                        id: \.self) { key in
-                    nftView(id: key,
-                            claimed: viewModel.claimState[key] ?? false)
+                ForEach(viewModel.claimStates,
+                        id: \.id) { state in
+                    nftView(state: state)
                         .frame(height: 137)
                 }
             }
@@ -46,20 +45,19 @@ struct NFTLuckyDropClaimDetailView: View {
     }
 
     @ViewBuilder
-    func nftView(id: BigUInt,
-                 claimed: Bool) -> some View
+    func nftView(state: CollectibleClaimState) -> some View
     {
         // TODO: replace nft collection url
         VStack {
             KFImage.url(
-                URL(string: "https://raw.githubusercontent.com/andy-at-mask/MysteryBoxAsset/master/png/0.png"),
-                cacheKey: "https://raw.githubusercontent.com/andy-at-mask/MysteryBoxAsset/master/png/0.png"
+                state.collectible?.imageUrl,
+                cacheKey: state.collectible?.imageUrl?.absoluteString
             )
             .cancelOnDisappear(true)
             .resizable()
             .clipShape(RoundedRectangle(cornerRadius: 8.0, style: .continuous))
             .frame(width: nil, height: 104)
-            .opacity(claimed ? 0.5 : 1)
+            .opacity(state.isClaimed ? 0.5 : 1)
             .overlay(
                 VStack {
                     Spacer()
@@ -72,9 +70,9 @@ struct NFTLuckyDropClaimDetailView: View {
                                                          corners: [.bottomLeft, .bottomRight]))
                         )
                 }
-                .opacity(claimed ? 1 : 0)
+                .opacity(state.isClaimed ? 1 : 0)
             )
-            Text("# \(id.description)")
+            Text("# \(state.tokenId)")
                 .horizontallyFilled(alignment: .leading)
                 .font(FontStyles.rh6.font)
                 .foregroundColor(Asset.Colors.Text.dark.asColor())

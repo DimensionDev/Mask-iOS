@@ -28,8 +28,7 @@ class WalletSendHelper {
         toAddress: String,
         network: BlockChainNetwork,
         _ completion: @escaping (Result<EthereumTransaction?, Error>) -> Void
-    )
-    {
+    ) {
         guard let provider = Web3ProviderFactory.provider else {
             completion(.failure(WalletSendError.unsupportedChainType))
             return
@@ -389,8 +388,7 @@ class WalletSendHelper {
     class func isApprovedForAll(
         contractAddress: String,
         fromAddress: String
-    ) -> Bool
-    {
+    ) -> Bool {
         guard let provider = Web3ProviderFactory.provider else {
             return false
         }
@@ -423,8 +421,7 @@ class WalletSendHelper {
         fromAddress: String,
         network: BlockChainNetwork,
         _ completion: @escaping (Result<EthereumTransaction?, Error>) -> Void
-    )
-    {
+    ) {
         guard let provider = Web3ProviderFactory.provider else {
             completion(.failure(WalletSendError.unsupportedChainType))
             return
