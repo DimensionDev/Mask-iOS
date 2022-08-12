@@ -1097,6 +1097,10 @@ enum L10n {
         static var attachedMessage: String {
           return L10n.tr("Localizable", "Plugins.Luckydrop.Confirm.AttachedMessage")
         }
+        /// Collection
+        static var collection: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Confirm.Collection")
+        }
         /// Share
         static var share: String {
           return L10n.tr("Localizable", "Plugins.Luckydrop.Confirm.Share")

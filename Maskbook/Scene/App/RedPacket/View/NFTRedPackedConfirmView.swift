@@ -46,6 +46,9 @@ struct NFTRedPacketConfirmView: View {
                     title: L10n.Plugins.Luckydrop.Confirm.attachedMessage,
                     value: .plain(viewModel.message)
                 )
+                buildRow(title: L10n.Plugins.Luckydrop.Confirm.collection,
+                         value: .token(tokenURL: viewModel.collectionImageURL,
+                                       value: viewModel.collectionName ?? ""))
                 buildRow(
                     title: L10n.Plugins.Luckydrop.Confirm.totalAmount,
                     value: .plain("\(viewModel.totalAmount)")

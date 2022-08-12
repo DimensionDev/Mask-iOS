@@ -957,8 +957,8 @@
         "what_is_arweave": "What is Arweave Network?",
         "arweave": "Arweave Network is lightweight and sustainable file storage protocol. Paying for storage fee on Arweave once allows lifelong access to Arweave’s database and encryption schemes.",
         "what_is_ipfs": "What is IPFS?",
-        "ipfs":"IPFS is a decentralized transmision protocol, based on smart contracts for storage and monetized with a pay-as-you-go model. IPFS assigns a unique hash value to each file, such that even if the content of 2 files is only different by 1 bit, the hash value will be different.",
-        "learn_more":"Learn more"
+        "ipfs": "IPFS is a decentralized transmision protocol, based on smart contracts for storage and monetized with a pay-as-you-go model. IPFS assigns a unique hash value to each file, such that even if the content of 2 files is only different by 1 bit, the hash value will be different.",
+        "learn_more": "Learn more"
       },
       "file_key": "File Key",
       "search_empty": "No files currently found.",
@@ -1019,7 +1019,8 @@
         "total_amount": "Total amount",
         "transaction_fee": "Transaction fee",
         "tips": "You can withdraw the remaining balance 24 hours after the Lucky Drop is sent.",
-        "title": "Confirm Your Lucky Drop"
+        "title": "Confirm Your Lucky Drop",
+        "collection": "Collection"
       },
       "alert": {
         "message_no_account": "You can’t select tokens as there is no wallet."

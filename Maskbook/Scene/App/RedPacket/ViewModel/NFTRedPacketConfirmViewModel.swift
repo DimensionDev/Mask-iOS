@@ -17,15 +17,13 @@ class NFTRedPacketConfirmViewModel: ObservableObject {
     @Published var inputParam: NFTRedPacketABI.CreateNFTRedPacketInput?
     @Published var buttonState: ConfirmButtonState = .normal
     
+    @Published var collectionImageURL: URL?
+    @Published var collectionName: String?
+    
     var gasFeeViewModel: GasFeeViewModel?
     var transaction: EthereumTransaction?
     var options: TransactionOptions?
     var completion: ((String?, Error?) -> Void)?
-    
-    var tokenIconURL: URL? {
-        //TODO collection url
-        nil
-    }
     
     var message: String {
         inputParam?.message ?? ""
@@ -91,6 +89,7 @@ class NFTRedPacketConfirmViewModel: ObservableObject {
         self.transaction = param?.transaction
         self.completion = completion
         
+        getCollectible()
         gasFeeViewModel?.confirmedGasFeePublisher
             .removeDuplicates()
             .filter({ $0 != nil })
@@ -98,6 +97,23 @@ class NFTRedPacketConfirmViewModel: ObservableObject {
             .store(in: &disposeBag)
         
         requestEstimateGasLimit()
+    }
+    
+    private func getCollectible() {
+        if let address = self.inputParam?.tokenAddr,
+           let tokenId = self.inputParam?.erc721TokenIDs.first
+        {
+            let collectible = CollectibleRepository.queryCollectible(
+                contractAddress: address.address,
+                network: settings.network,
+                tokenId: tokenId.description
+            )
+            collectionName = collectible?.collectionName
+            if let urlString = collectible?.collectionImage,
+               let url = URL(string: urlString) {
+                collectionImageURL = url
+            }
+        }
     }
     
     @MainActor

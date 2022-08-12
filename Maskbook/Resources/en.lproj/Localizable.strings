@@ -207,6 +207,7 @@ The upload can’t be cancelled.";
 "Plugins.Luckydrop.Claimed" = "Claimed";
 "Plugins.Luckydrop.Confirm.AmountPerShare" = "Amount per share";
 "Plugins.Luckydrop.Confirm.AttachedMessage" = "Attached message";
+"Plugins.Luckydrop.Confirm.Collection" = "Collection";
 "Plugins.Luckydrop.Confirm.Share" = "Share";
 "Plugins.Luckydrop.Confirm.SplitMode" = "Split mode";
 "Plugins.Luckydrop.Confirm.Tips" = "You can withdraw the remaining balance 24 hours after the Lucky Drop is sent.";
