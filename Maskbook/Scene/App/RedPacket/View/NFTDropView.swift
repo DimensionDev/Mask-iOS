@@ -76,14 +76,14 @@ struct NFTDropView: View {
 
     private var nftConfirmButtonColor: Color {
         nftEnabled
-        ? Asset.Colors.Background.blue.asColor()
-        : Asset.Colors.Background.disable.asColor()
+            ? Asset.Colors.Background.blue.asColor()
+            : Asset.Colors.Background.disable.asColor()
     }
 
     private var nftConfirmTitleColor: Color {
         nftEnabled
-        ? Asset.Colors.Public.white.asColor()
-        : Asset.Colors.Text.normal.asColor()
+            ? Asset.Colors.Public.white.asColor()
+            : Asset.Colors.Text.normal.asColor()
     }
 }
 
@@ -159,8 +159,8 @@ extension NFTDropView {
                                 .frame(width: 20, height: 20)
                                 .foregroundColor(Asset.Colors.Text.lighter.asColor())
                         }
-                            .padding(.all, 12)
-                            .padding(.horizontal, 8)
+                        .padding(.all, 12)
+                        .padding(.horizontal, 8)
                     )
                     .preferredColorScheme(.light)
             }
@@ -230,7 +230,7 @@ extension NFTDropView {
                 columns: [
                     GridItem(spacing: 11.5, alignment: .leading),
                     GridItem(spacing: 11.5, alignment: .leading),
-                    GridItem(spacing: 11.5, alignment: .leading)
+                    GridItem(spacing: 11.5, alignment: .leading),
                 ],
                 alignment: .leading,
                 spacing: 12
@@ -279,28 +279,25 @@ struct NFTItemView: View {
     @State private var size = CGSize.zero
 
     var body: some View {
-        Color.clear
-            .background(
-                KFImage(url)
-                    .resizable()
-                    .placeholder {
-                        Asset.Colors.Background.normal.asColor()
-                            .overlay(
-                                placeHolderIcon
-                            )
-                    }
-                    .cornerRadius(8)
+        KFImage(url)
+            .resizable()
+            .placeholder {
+                Asset.Colors.Background.normal.asColor()
                     .overlay(
-                        Asset.Icon.Cell.checkSquare
-                            .asImage()
-                            .preferredColorScheme(.light)
-                            .offset(x: -8, y: 8)
-                        ,
-                        alignment: .topTrailing
+                        placeHolderIcon
                     )
+            }
+            .overlay(
+                Asset.Icon.Cell.checkSquare
+                    .asImage()
+                    .preferredColorScheme(.light)
+                    .offset(x: -8, y: 8),
+
+                alignment: .topTrailing
             )
-            .aspectRatio(contentMode: .fill)
-            .clipShape(RoundedRectangle(cornerRadius: 8))
+            .sizeFitContainer(
+                shape: RoundedRectangle(cornerRadius: 8)
+            )
     }
 
     private var placeHolderIcon: some View {
@@ -334,24 +331,20 @@ struct NFTAllItemView: View {
     let url: URL?
 
     var body: some View {
-        Color.clear
-            .background(
-                KFImage(url)
-                    .resizable()
-                    .placeholder {
-                        Asset.Colors.Background.normal.asColor()
-                            .overlay(
-                                placeHolderIcon
-                            )
-                    }
+        KFImage(url)
+            .resizable()
+            .placeholder {
+                Asset.Colors.Background.normal.asColor()
                     .overlay(
-                        maskView
+                        placeHolderIcon
                     )
-                    .cornerRadius(8)
+            }
+            .overlay(
+                maskView
             )
-            .aspectRatio(contentMode: .fill)
-            .clipShape(RoundedRectangle(cornerRadius: 8))
-
+            .sizeFitContainer(
+                shape: RoundedRectangle(cornerRadius: 8)
+            )
     }
 
     private var placeHolderIcon: some View {
