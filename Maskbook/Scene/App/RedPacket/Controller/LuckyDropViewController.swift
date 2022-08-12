@@ -59,7 +59,17 @@ class LuckyDropViewController: BaseViewController {
             }
             switch action {
             case .selectCollectibleGroup:
-                // TODO: chose Collectible Group
+                // collection
+//                self.coordinator.present(
+//                    scene: .luckydropSearchCollection(delegate: self.viewModel.nftViewModel),
+//                    transition: .detail(animated: true)
+//                )
+                //nft
+                self.coordinator.present(
+                    scene: .luckydropSearchNFT(delegate: self.viewModel.nftViewModel, contractAddress: "0xe7ce9069063e738d3bca9990bf09894ab907c48e"),
+                    transition: .detail(animated: true)
+                )
+  
                 break
 
             case let .addCollectibles(groupName, contractAddress, selectedIdentifiers):

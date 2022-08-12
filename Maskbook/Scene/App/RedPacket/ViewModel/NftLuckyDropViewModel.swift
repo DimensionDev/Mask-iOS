@@ -367,3 +367,15 @@ extension NftLuckyDropViewModel {
         }
     }
 }
+
+extension NftLuckyDropViewModel: ChooseCollectionBackDelegate {
+    func chooseNFTCollectionAction(token: Collectible) {
+        
+    }
+}
+
+extension NftLuckyDropViewModel: SearchSingleNFTDelegate {
+    func returnSelectedNFT(collectible: [Collectible]?) {
+        
+    }
+}

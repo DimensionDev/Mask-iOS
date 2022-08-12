@@ -302,15 +302,17 @@ extension Collectible: Managed {
         )
     }
     
-    public class func predicate(address: String, networkId: UInt64, tokenId: String) -> NSPredicate {
+    public class func predicate(accountAddress: String, networkId: UInt64, contractAddress: String, enabled: Bool) -> NSPredicate {
         return NSPredicate(
-            format: "%K =[c] %@ AND %K == %@ AND %K == %@",
+            format: "%K =[c] %@ AND %K == %@ AND %K == %@ AND %K == %@",
             #keyPath(Collectible.account.address),
-            address,
+            accountAddress,
+            #keyPath(Collectible.enabled),
+            NSNumber(value: enabled),
             #keyPath(Collectible.networkId),
             NSNumber(value: networkId),
-            #keyPath(Collectible.tokenId),
-            tokenId
+            #keyPath(Collectible.address),
+            contractAddress
         )
     }
     

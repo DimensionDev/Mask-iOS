@@ -224,6 +224,8 @@ class Coordinator {
         case fileServiceLocalFileSource(selectFileHandler: FileServiceSelectFileHandler)
         case fileServiceDetail(FileServiceDownloadItem)
         case fileServiceFAQ
+        case luckydropSearchCollection(delegate: ChooseCollectionBackDelegate?)
+        case luckydropSearchNFT(delegate: SearchSingleNFTDelegate?, contractAddress: String)
         case messageCompose(PluginMeta? = nil)
         case composeSelectContact(viewModel: SelectContactViewModel)
         case debug
@@ -884,6 +886,16 @@ extension Coordinator {
             
         case let .composeSelectContact(selectContactViewModel):
             return SelectContactViewController(viewModel: selectContactViewModel)
+            
+        case let .luckydropSearchCollection(selectionDelegate):
+            let searchCollectionVc = SearchNFTCollectionViewController()
+            searchCollectionVc.delegate = selectionDelegate
+            return searchCollectionVc
+            
+        case let .luckydropSearchNFT(selectionDelegate, contractAddress):
+            let searchNFTVc = SearchSingleNFTViewController(contractAddress: contractAddress)
+            searchNFTVc.delegate = selectionDelegate
+            return searchNFTVc
             
         case .fileService:
             let nav = NavigationController(rootViewController: FileServiceViewController())
