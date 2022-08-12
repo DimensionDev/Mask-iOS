@@ -76,14 +76,14 @@ struct NFTDropView: View {
 
     private var nftConfirmButtonColor: Color {
         nftEnabled
-            ? Asset.Colors.Background.blue.asColor()
-            : Asset.Colors.Background.disable.asColor()
+        ? Asset.Colors.Background.blue.asColor()
+        : Asset.Colors.Background.disable.asColor()
     }
 
     private var nftConfirmTitleColor: Color {
         nftEnabled
-            ? Asset.Colors.Public.white.asColor()
-            : Asset.Colors.Text.normal.asColor()
+        ? Asset.Colors.Public.white.asColor()
+        : Asset.Colors.Text.normal.asColor()
     }
 }
 
@@ -107,6 +107,7 @@ extension NFTDropView {
                     .overlay(
                         HStack(spacing: 8) {
                             KFImage(viewModel.nftViewModel.groupIconURL)
+                                .resizable()
                                 .placeholder {
                                     Image(Asset.Icon.Logo.largeMask)
                                         .resizable()
@@ -123,6 +124,7 @@ extension NFTDropView {
                             Text(viewModel.nftViewModel.groupName ?? "")
                                 .font(.bh5)
                                 .foregroundColor(Asset.Colors.Text.dark)
+                                .lineLimit(1)
 
                             Spacer()
 
@@ -157,8 +159,8 @@ extension NFTDropView {
                                 .frame(width: 20, height: 20)
                                 .foregroundColor(Asset.Colors.Text.lighter.asColor())
                         }
-                        .padding(.all, 12)
-                        .padding(.horizontal, 8)
+                            .padding(.all, 12)
+                            .padding(.horizontal, 8)
                     )
                     .preferredColorScheme(.light)
             }
@@ -226,21 +228,9 @@ extension NFTDropView {
 
             LazyVGrid(
                 columns: [
-                    .init(
-                        .adaptive(minimum: 80),
-                        spacing: 11.5,
-                        alignment: .leading
-                    ),
-                    .init(
-                        .adaptive(minimum: 80),
-                        spacing: 11.5,
-                        alignment: .leading
-                    ),
-                    .init(
-                        .adaptive(minimum: 80),
-                        spacing: 11.5,
-                        alignment: .leading
-                    )
+                    GridItem(spacing: 11.5, alignment: .leading),
+                    GridItem(spacing: 11.5, alignment: .leading),
+                    GridItem(spacing: 11.5, alignment: .leading)
                 ],
                 alignment: .leading,
                 spacing: 12
@@ -254,7 +244,6 @@ extension NFTDropView {
                                 minHeight: 96,
                                 maxHeight: .infinity
                             )
-
                     }
                 }
             }
@@ -270,24 +259,16 @@ extension NFTDropView {
     private func collectibleView(of item: NftLuckyDropViewModel.CollectibleItem) -> some View {
         switch item {
         case .add:
-            Asset.Colors.Background.normal.asColor()
-                .overlay(
-                    Image(Asset.Images.Scene.WalletAdd.add)
-                        .renderingMode(.template)
-                        .resizable()
-                        .frame(width: 30, height: 30)
-                        .foregroundColor(Asset.Colors.Text.normal.asColor())
-                )
-                .cornerRadius(8)
+            AddNFTItemView()
                 .onTapGesture {
                     viewModel.nftViewModel.addMoreCollectibles()
                 }
 
         case let .normal(value):
-            NFTItemView(url: value.previewUrl)
+            NFTItemView(url: value.previewLink)
 
         case let .all(value):
-            NFTAllItemView(url: value.previewUrl)
+            NFTAllItemView(url: value.previewLink)
         }
     }
 }
@@ -295,23 +276,31 @@ extension NFTDropView {
 struct NFTItemView: View {
     let url: URL?
 
+    @State private var size = CGSize.zero
+
     var body: some View {
-        KFImage(url)
-            .placeholder {
-                Asset.Colors.Background.normal.asColor()
+        Color.clear
+            .background(
+                KFImage(url)
+                    .resizable()
+                    .placeholder {
+                        Asset.Colors.Background.normal.asColor()
+                            .overlay(
+                                placeHolderIcon
+                            )
+                    }
+                    .cornerRadius(8)
                     .overlay(
-                        placeHolderIcon
+                        Asset.Icon.Cell.checkSquare
+                            .asImage()
+                            .preferredColorScheme(.light)
+                            .offset(x: -8, y: 8)
+                        ,
+                        alignment: .topTrailing
                     )
-            }
-            .cornerRadius(8)
-            .overlay(
-                Asset.Icon.Cell.checkSquare
-                    .asImage()
-                    .preferredColorScheme(.light)
-                    .offset(x: -8, y: 8)
-                ,
-                alignment: .topTrailing
             )
+            .aspectRatio(contentMode: .fill)
+            .clipShape(RoundedRectangle(cornerRadius: 8))
     }
 
     private var placeHolderIcon: some View {
@@ -336,7 +325,8 @@ struct AddNFTItemView: View {
                     .frame(width: 30, height: 30)
                     .foregroundColor(Asset.Colors.Text.normal.asColor())
             )
-            .cornerRadius(8)
+            .scaledToFill()
+            .clipShape(RoundedRectangle(cornerRadius: 8))
     }
 }
 
@@ -344,17 +334,24 @@ struct NFTAllItemView: View {
     let url: URL?
 
     var body: some View {
-        KFImage(url)
-            .placeholder {
-                Asset.Colors.Background.normal.asColor()
+        Color.clear
+            .background(
+                KFImage(url)
+                    .resizable()
+                    .placeholder {
+                        Asset.Colors.Background.normal.asColor()
+                            .overlay(
+                                placeHolderIcon
+                            )
+                    }
                     .overlay(
-                        placeHolderIcon
+                        maskView
                     )
-            }
-            .overlay(
-                maskView
+                    .cornerRadius(8)
             )
-            .cornerRadius(8)
+            .aspectRatio(contentMode: .fill)
+            .clipShape(RoundedRectangle(cornerRadius: 8))
+
     }
 
     private var placeHolderIcon: some View {
