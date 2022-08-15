@@ -129,7 +129,7 @@ class Coordinator {
         case personaExportPrivateKey(personaIdentifier: String)
         case tokenDetail(token: MaskToken)
         case nftDetail(nftToken: Collectible)
-        case nftAction(nftToken: Collectible)
+        case nftAction(nftToken: Collectible, collection: NFTScanCollectionModel)
         case walletHistory
         case safariView(url: URL)
         case setPassword
@@ -144,7 +144,7 @@ class Coordinator {
         case identityMnemonicImport
         case identityPrivateKeyImport
         case derivationPath(name: String?, mnemonic: String)
-        case pluginRiskWarning(pluginId: String?)
+        case pluginRiskWarning(pluginID: String?)
         case backupPasswordVerify(verifyPassedCompletion: () -> Void)
         case localBackup(type: LocalBackupViewModel.BackupType, cloudVerifyResult: CloudVerifyResult? = nil)
         case chooseBackupStrategy
@@ -207,15 +207,22 @@ class Coordinator {
             options: TransactionOptions,
             completion: (String?, Error?) -> Void
         )
+        case nftLuckyDropConfirm(
+            viewModelInput: NFTRedPacketConfirmViewModel.InitInput,
+            completion: (String?, Error?) -> Void
+        )
         case luckyDropSuccessfully(callback: (@MainActor () -> Void)?)
         case luckyDropCreatePersona(callback: (@MainActor () -> Void)?)
         case luckyDropCreateProfile
         case luckDropSelectProfile(callback: (@MainActor () -> Void)?)
+        case nftLuckyDropClaimDetail(nftRedPacketSubgraph: NftRedPacketSubgraph)
         case fileService
         case fileServiceOptions(item: FileServiceSelectedFileItem, optionHandler: (FileServiceUploadOption) -> Void)
         case fileServiceLocalFileSource(selectFileHandler: FileServiceSelectFileHandler)
         case fileServiceDetail(FileServiceDownloadItem)
         case fileServiceFAQ
+        case luckydropSearchCollection(delegate: ChooseCollectionBackDelegate?)
+        case luckydropSearchNFT(delegate: SearchSingleNFTDelegate?, contractAddress: String)
         case messageCompose(PluginMeta? = nil)
         case composeSelectContact(viewModel: SelectContactViewModel)
         case debug
@@ -573,8 +580,8 @@ extension Coordinator {
         case let .rename(viewModel):
             return RenameViewController(viewModel: viewModel)
 
-        case .pluginRiskWarning(let pluginId):
-            return PluginAlertViewController(pluginId: pluginId)
+        case .pluginRiskWarning(let pluginID):
+            return PluginAlertViewController(pluginID: pluginID)
 
         case let .personaAction(viewModel):
             return PersonaActionViewController(viewModel: viewModel)
@@ -597,8 +604,8 @@ extension Coordinator {
             let viewController = NFTDetailViewController(nftTokenModel: token)
             return viewController
 
-        case let .nftAction(token):
-            let viewController = NFTActionViewController(nftTokenModel: token)
+        case let .nftAction(token, collection):
+            let viewController = NFTActionViewController(nftTokenModel: token, collection: collection)
             return viewController
             
         case .walletHistory:
@@ -830,6 +837,15 @@ extension Coordinator {
                 options: options,
                 completion: completion
             )
+            
+        case .nftLuckyDropConfirm(
+            let viewModelInput,
+            let completion
+        ):
+            return NFTLuckDropConfirmViewController(
+                viewModelInput: viewModelInput,
+                completion: completion
+            )
         
         case let .luckyDropSuccessfully(callback):
             let viewModel = LuckyDropSuccessfullyViewModel(callback: callback)
@@ -846,6 +862,9 @@ extension Coordinator {
             let viewModel = ShareLuckyDropSelectProfileViewModel(callback: callback)
             return SheetViewAdapterController(rootView: SelectSocialAccountView(viewModel: viewModel))
             
+        case let .nftLuckyDropClaimDetail(nftLuckyDropClaimDetail):
+            return NFTLuckyDropClaimDetailViewController(nftRedPacketSubgraph: nftLuckyDropClaimDetail)
+            
         case let .messageCompose(meta):
             let viewModel = MessageComposeViewModel()
             if let pluginMeta = meta {
@@ -858,6 +877,16 @@ extension Coordinator {
             
         case let .composeSelectContact(selectContactViewModel):
             return SelectContactViewController(viewModel: selectContactViewModel)
+            
+        case let .luckydropSearchCollection(selectionDelegate):
+            let searchCollectionVc = SearchNFTCollectionViewController()
+            searchCollectionVc.delegate = selectionDelegate
+            return searchCollectionVc
+            
+        case let .luckydropSearchNFT(selectionDelegate, contractAddress):
+            let searchNFTVc = SearchSingleNFTViewController(contractAddress: contractAddress)
+            searchNFTVc.delegate = selectionDelegate
+            return searchNFTVc
             
         case .fileService:
             let nav = NavigationController(rootViewController: FileServiceViewController())

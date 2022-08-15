@@ -59,10 +59,10 @@ struct LuckyDropHistoryView: View {
                     case .idle: listContent
                     }
                 } header: {
-//                    SegmentControl(selection: $viewModel.selection) {
-//                        viewModel.displayData()
-//                    }
-//                    .frame(height: 48)
+                    SegmentControl(selection: $viewModel.selection) {
+                        viewModel.displayData()
+                    }
+                    .frame(height: 48)
                 }
             }
             .padding(.horizontal, LayoutConstraints.horizontal)
@@ -95,9 +95,8 @@ struct LuckyDropHistoryView: View {
                 LuckyDropHistoryRow(item: item)
             }
         case .nft:
-            VStack {
-                Color.clear
-                Spacer()
+            ForEach(viewModel.nftPayloads, id: \.id) { item in
+                NFTLuckyDropHistoryRow(item: item)
             }
         }
     }
@@ -139,7 +138,7 @@ struct LuckyDropHistoryRow: View {
                     Button {
                         switch viewModel.luckyDropState {
                         case .sharable: viewModel.share()
-                        case .refunable: viewModel.refund()
+                        case .refundable: viewModel.refund()
                         default: break
                         }
                         

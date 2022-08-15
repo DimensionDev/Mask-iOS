@@ -39,10 +39,9 @@ class SheetViewController: PopupViewController {
         cornerView.backgroundColor = Asset.Colors.Background.normal.color
         cornerView.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         self.cornerView = cornerView
-        let shadowView = ShadowShapeView(shadowStyle: .translucent) {
+        self.shadowView = ShadowShapeView(shadowStyle: .translucent) {
             cornerView
         }
-        self.shadowView = shadowView
         super.init(presenter: presenter)
     }
 
@@ -58,24 +57,24 @@ class SheetViewController: PopupViewController {
     }
 
     override func buildLayout() {
-        grayIndicatorView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-                .offset(18)
-            $0.centerX.equalToSuperview()
-        }
-        grayIndicatorView.setContentCompressionResistancePriority(.required, for: .vertical)
-
-        cornerView.snp.makeConstraints { $0.edges.equalToSuperview() }
         shadowView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview().offset(0)
+        }
+
+        cornerView.snp.makeConstraints { $0.edges.equalToSuperview() }
+
+        grayIndicatorView.setContentCompressionResistancePriority(.required, for: .vertical)
+        grayIndicatorView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+                .offset(20)
+            $0.centerX.equalToSuperview()
         }
 
         contentView.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         contentView.snp.makeConstraints {
             $0.bottom.leading.trailing.equalToSuperview()
             $0.top.equalTo(grayIndicatorView.snp.bottom)
-                .offset(2)
         }
     }
 

@@ -14,6 +14,15 @@ extension LuckyDropHistoryViewModel {
             payload.basic?.txid ?? ""
         }
     }
+    
+    func fetchNFTRedPacketHistory() async throws -> [NftRedPacketSubgraph] {
+        let network = usersettings.network
+        guard let address = self.usersettings.defaultAccountAddress else {
+            return []
+        }
+        
+        return try await NFTSubgraphQuery.getNftRedPacketHistory(network: network, address: address)
+    }
 
     func fetchTokenRedPacketHistory() async throws -> [TokenPayload] {
         // first get explore url, if return nil

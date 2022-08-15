@@ -21,8 +21,10 @@ class NFTActionViewModel {
     }()
     
     let token: Collectible
-    init(token: Collectible) {
+    let collectionInfo: NFTScanCollectionModel
+    init(token: Collectible, collection: NFTScanCollectionModel) {
         self.token = token
+        self.collectionInfo = collection
     }
     
     private func generateMenuItems() -> [SectionItem] {
@@ -30,7 +32,7 @@ class NFTActionViewModel {
                 
         let saveItem = SectionItem.savephoto(title: L10n.Scene.NftDetail.savePhoto, imageUrl: token.imageUrl)
         items.append(saveItem)
-        if let websiteUrl = token.collectionWebsite {
+        if let websiteUrl =  URL(string: collectionInfo.website ?? "") {
             let websiteItem = SectionItem.website(title: L10n.Scene.NftDetail.collectionWeb, websiteUrl: websiteUrl)
             items.append(websiteItem)
         }

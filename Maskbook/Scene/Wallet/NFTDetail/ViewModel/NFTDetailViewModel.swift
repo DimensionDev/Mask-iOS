@@ -20,7 +20,7 @@ extension NFTDetailViewModel {
     
     enum SectionItem: Hashable {
         case token
-        case nftDetail(collection: NFTCollectionStatusModel, floor: NFTAssetPriceModel)
+        case nftDetail(collection: NFTScanCollectionModel)
         case transaction(transaction: NFTTransactionHistory)
     }
 }
@@ -58,18 +58,26 @@ class NFTDetailViewModel: NSObject {
                 self?.refreshTableView(transactions: transactionHistory)
             }
             .store(in: &disposeBag)
+        
+        if let contractAddress = token.address{
+            walletAssetManager.nftscanProvider.retrieveCollectionByAddress(contractAddress: contractAddress)?
+                .receive(on: DispatchQueue.main)
+                .sink {  completion in
+                    switch completion {
+                    case .finished: break
 
-        Publishers.CombineLatest(
-            walletAssetManager.openSeaProvider.retrieveAssetsPrice(assetModel: token),
-            walletAssetManager.openSeaProvider.retrieveCollectionStatus(assetModel: token))
-            .receive(on: DispatchQueue.main)
-             .sink { _ in }
-             receiveValue: {[weak self] priceModel, statusModel in
-                guard var snp = self?.dataSource?.snapshot() else { return }
-                snp.appendItems([.nftDetail(collection: statusModel, floor: priceModel)], toSection: .nftDetail)
-                self?.dataSource?.apply(snp, animatingDifferences: false, completion: nil)
-            }
-            .store(in: &disposeBag)
+                    case .failure(let error):
+                        print("Error: \(error)")
+                    }
+                }receiveValue: {[weak self] collectionModel in
+                    guard var snp = self?.dataSource?.snapshot() else { return }
+                     snp.appendItems([.nftDetail(collection: collectionModel)], toSection: .nftDetail)
+                    self?.dataSource?.apply(snp, animatingDifferences: false, completion: nil)
+                }
+                .store(in: &disposeBag)
+        }
+        
+
     }
     
     func setDataSourceSection() {

@@ -853,6 +853,10 @@ enum L10n {
       static var account: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Account")
       }
+      /// All
+      static var all: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.All")
+      }
       /// Amount per share
       static var amountPerShare: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Amount-Per-Share")
@@ -896,6 +900,18 @@ enum L10n {
       /// NFT
       static var nft: String {
         return L10n.tr("Localizable", "Plugins.Luckydrop.Nft")
+      }
+      /// Enter attached message
+      static var nftMessagePlaceholder: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Nft-Message-Placeholder")
+      }
+      /// NFTs selected
+      static var nftSelected: String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.Nft-Selected")
+      }
+      /// NFTs claimed (%@) 
+      static func nftClaimed(_ p1: String) -> String {
+        return L10n.tr("Localizable", "Plugins.Luckydrop.NftClaimed", p1)
       }
       /// Best Wishes!
       static var pluginRedPacketBestWishes: String {
@@ -978,6 +994,10 @@ enum L10n {
       }
 
       enum Buttons {
+        /// Approve Collection
+        static var approveCollection: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Approve-Collection")
+        }
         /// Average
         static var average: String {
           return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Average")
@@ -985,6 +1005,10 @@ enum L10n {
         /// Best Wishes!
         static var bestWishes: String {
           return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Best-Wishes")
+        }
+        /// Create NFT Lucky Drop
+        static var createNfgLuckyDrop: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Create-Nfg-Lucky-Drop")
         }
         /// Create Persona
         static var createPersona: String {
@@ -1042,6 +1066,14 @@ enum L10n {
         static var riskWarning: String {
           return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Risk-Warning")
         }
+        /// Select NFT collection
+        static var selectNftCollection: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Select-Nft-Collection")
+        }
+        /// Select NFTs
+        static var selectNfts: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Select-Nfts")
+        }
         /// Send %@
         static func send(_ p1: String) -> String {
           return L10n.tr("Localizable", "Plugins.Luckydrop.Buttons.Send", p1)
@@ -1064,6 +1096,10 @@ enum L10n {
         /// Attached message
         static var attachedMessage: String {
           return L10n.tr("Localizable", "Plugins.Luckydrop.Confirm.AttachedMessage")
+        }
+        /// Collection
+        static var collection: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Confirm.Collection")
         }
         /// Share
         static var share: String {
@@ -1092,6 +1128,25 @@ enum L10n {
         /// Wallet account
         static var walletAccount: String {
           return L10n.tr("Localizable", "Plugins.Luckydrop.Confirm.WalletAccount")
+        }
+      }
+
+      enum ShareSheet {
+        /// You can now see your Lucky Drop in History Tab. To let people claim it, share to your social media.
+        static var detail: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Share-Sheet.Detail")
+        }
+        /// Luck Drop Successfully Created!
+        static var title: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Share-Sheet.Title")
+        }
+        /// Share to social media
+        static var toSocialMedia: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Share-Sheet.To-Social-Media")
+        }
+        /// Share to Twitter
+        static var toTwitter: String {
+          return L10n.tr("Localizable", "Plugins.Luckydrop.Share-Sheet.To-Twitter")
         }
       }
 

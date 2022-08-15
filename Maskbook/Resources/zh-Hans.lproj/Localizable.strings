@@ -381,8 +381,7 @@ Clicking the confirm button means that you agree to bear the above possible risk
 "Scene.MessageCompose.SpecialContacts" = "指定联系人可见";
 "Scene.MessageCompose.Title" = "发帖";
 "Scene.MnemonicVerify.Description" = "请按照正确的顺序依次点击每个单词。";
-"Scene.MnemonicVerify.MnemonicError" = "助记词错误";
-"Scene.MnemonicVerify.MnemonicPrompt" = "点击已选择单词以替换另一个单词。";
+"Scene.MnemonicVerify.MnemonicError" = "验证失败。请再试一次。";
 "Scene.MnemonicVerify.Title" = "验证您的助记词";
 "Scene.MnemonicVerify.WordsTitle" = "请按照正确的顺序依次点击每个单词。";
 "Scene.MnemonicWord.Description" = "请写下每一个单词。";

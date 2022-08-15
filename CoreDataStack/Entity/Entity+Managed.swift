@@ -302,6 +302,45 @@ extension Collectible: Managed {
         )
     }
     
+    public class func predicate(accountAddress: String, networkId: UInt64, contractAddress: String, enabled: Bool) -> NSPredicate {
+        return NSPredicate(
+            format: "%K =[c] %@ AND %K == %@ AND %K == %@ AND %K == %@",
+            #keyPath(Collectible.account.address),
+            accountAddress,
+            #keyPath(Collectible.enabled),
+            NSNumber(value: enabled),
+            #keyPath(Collectible.networkId),
+            NSNumber(value: networkId),
+            #keyPath(Collectible.address),
+            contractAddress)
+    }
+            
+    public class func predicate(contractAddress: String, networkId: UInt64, tokenId: String, enabled: Bool) -> NSPredicate {
+        return NSPredicate(
+            format: "%K == %@ AND %K == %@ AND %K == %@ AND %K == %@",
+            #keyPath(Collectible.address),
+            contractAddress.lowercased(),
+            #keyPath(Collectible.networkId),
+            NSNumber(value: networkId),
+            #keyPath(Collectible.tokenId),
+            tokenId,
+            #keyPath(Collectible.enabled),
+            NSNumber(value: enabled)
+        )
+    }
+    
+    public class func predicate(address: String, networkId: UInt64, tokenId: String) -> NSPredicate {
+        return NSPredicate(
+            format: "%K =[c] %@ AND %K == %@ AND %K == %@",
+            #keyPath(Collectible.account.address),
+            address,
+            #keyPath(Collectible.networkId),
+            NSNumber(value: networkId),
+            #keyPath(Collectible.tokenId),
+            tokenId
+        )
+    }
+    
     public static func predicate(address: String, notInIdentifiers identifiers: [String]) -> NSPredicate {
         let predicates = [
             predicate(address: address),

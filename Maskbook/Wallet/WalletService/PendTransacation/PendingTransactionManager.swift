@@ -95,9 +95,16 @@ final class PendingTransactionManager {
     }
 
     // Note: normally this function will be called on main queue
+    
+    /// addPendingTrancation
+    /// - Parameters:
+    ///   - txHash: txHash
+    ///   - history: history ,NFT don't need history
+    ///   - transcationInfo: transcationInfo
+    ///   - nonce: nonce
     public final func addPendingTrancation(
         txHash: String,
-        history: TransactionHistory,
+        history: TransactionHistory?,
         transcationInfo: PendingTransaction.TranscationInfo,
         nonce: BigUInt
     ) {
@@ -109,7 +116,7 @@ final class PendingTransactionManager {
         pendList.append(
             .init(
                 address: address,
-                networkId: Int64(maskUserDefaults.network.networkId),
+                network: maskUserDefaults.network,
                 txHash: txHash,
                 history: history,
                 transactionInfo: transcationInfo,

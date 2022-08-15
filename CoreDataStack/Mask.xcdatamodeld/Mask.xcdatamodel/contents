@@ -52,6 +52,7 @@
         <attribute name="identifier" optional="YES" attributeType="String"/>
         <attribute name="imageUrl" optional="YES" attributeType="URI"/>
         <attribute name="lastModifiedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="latestTradePrice" optional="YES" attributeType="String"/>
         <attribute name="logoUrl" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="networkId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -267,7 +268,7 @@
     <elements>
         <element name="Account" positionX="99" positionY="153" width="128" height="239"/>
         <element name="BlobStorage" positionX="99" positionY="153" width="128" height="119"/>
-        <element name="Collectible" positionX="99" positionY="153" width="128" height="449"/>
+        <element name="Collectible" positionX="99" positionY="153" width="128" height="464"/>
         <element name="Contact" positionX="250.05859375" positionY="93.7265625" width="128" height="149"/>
         <element name="DeletedDerivationPath" positionX="90" positionY="144" width="128" height="59"/>
         <element name="LocalStorage" positionX="90" positionY="144" width="128" height="104"/>
