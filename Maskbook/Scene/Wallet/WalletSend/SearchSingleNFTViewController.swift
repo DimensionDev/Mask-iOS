@@ -24,8 +24,8 @@ class SearchSingleNFTViewController: BaseViewController {
 
     var isSelectedAll: Bool = false
 
-    init(contractAddress: String) {
-        viewModel = SearchSingleNFTViewModel(contractAddress: contractAddress)
+    init(contractAddress: String, selectedIdentifiers: Set<String>) {
+        viewModel = SearchSingleNFTViewModel(contractAddress: contractAddress, selectedIdentifiers:selectedIdentifiers)
         super.init(nibName: nil, bundle: nil)
     }
 

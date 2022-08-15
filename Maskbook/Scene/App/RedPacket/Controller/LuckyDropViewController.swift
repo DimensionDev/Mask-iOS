@@ -66,7 +66,7 @@ class LuckyDropViewController: BaseViewController {
 
             case let .addCollectibles(groupName, contractAddress, selectedIdentifiers):
                 self.coordinator.present(
-                    scene: .luckydropSearchNFT(delegate: self.viewModel.nftViewModel, contractAddress: contractAddress),
+                    scene: .luckydropSearchNFT(delegate: self.viewModel.nftViewModel, contractAddress: contractAddress, selectedIdentifiers: selectedIdentifiers),
                     transition: .detail()
                 )
 
@@ -83,8 +83,11 @@ class LuckyDropViewController: BaseViewController {
 
             case .unlockWallet: self.unlockWallet()
 
-            case let .unlockNFT(contractAddress, gasItem):
-                // TODO: unlock nft permission
+            case let .unlockNFT(groupInfo, gasItem, gasFeeViewModel):
+                self.coordinator.present(scene: .unlockNFT(gasFeeViewModel: gasFeeViewModel, gasFeeItem: gasItem, groupInfo: groupInfo, completion: { hash, error in
+                    
+                }), transition: .popup)
+                  
                 break
             }
         }
