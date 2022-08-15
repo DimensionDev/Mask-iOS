@@ -11,14 +11,14 @@ import SwiftUI
 struct UnlockNFTView: View {
     @ObservedObject var viewModel: UnlockNFTViewModel
     @InjectedProvider(\.mainCoordinator) private var mainCoordinator
-   
+
     var tipsView: some View {
         HStack(spacing: 10) {
             Asset.Images.Scene.Social.connectHintBannerIcon.asImage()
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 24)
-            
+
             Text(L10n.Plugins.Luckydrop.Confirm.tips)
                 .font(FontStyles.rh6.font)
                 .foregroundColor(Asset.Colors.Public.info.asColor())
@@ -29,23 +29,25 @@ struct UnlockNFTView: View {
         .background(Asset.Colors.Public.infoBg.asColor())
         .cornerRadius(12)
     }
-    
+
     var body: some View {
         VStack(spacing: 20) {
             Text(L10n.Scene.WalletUnlock.button + viewModel.tokenName)
                 .font(FontStyles.bh4.font)
                 .foregroundColor(Asset.Colors.Text.dark.asColor())
-            
-            VStack(spacing: 8){
-               
+
+            VStack(spacing: 8) {
                 if let ensName = viewModel.ensName {
                     Text(ensName)
                         .font(FontStyles.bh5.font)
                         .foregroundColor(Asset.Colors.Text.dark.asColor())
                     HStack(spacing: 4) {
                         Text(viewModel.address)
+                            .truncationMode(.middle)
                             .font(FontStyles.rh7.font)
                             .foregroundColor(Asset.Colors.Text.dark.asColor())
+                            .frame(maxWidth: 118)
+                            .fixedSize()
                         Asset.Plugins.LuckyDrop.share.asImage()
                             .frame(width: 20, height: 20)
                     }
@@ -59,14 +61,16 @@ struct UnlockNFTView: View {
                     }
                 }
             }
-            
+
             VStack(spacing: 16) {
                 buildRow(
                     title: L10n.Plugins.Luckydrop.Confirm.walletAccount,
                     value: .address(viewModel.address)
                 )
-                buildRow(title: L10n.Plugins.Luckydrop.Confirm.walletAccount,
-                         value: .address(viewModel.contractAddress))
+                buildRow(
+                    title: L10n.Plugins.Luckydrop.Confirm.walletAccount,
+                    value: .address(viewModel.contractAddress)
+                )
                 buildRow(
                     title: L10n.Plugins.Luckydrop.transactionFee,
                     value: .gas(viewModel.gasFeeInfo)
@@ -75,7 +79,6 @@ struct UnlockNFTView: View {
                     title: L10n.Plugins.Luckydrop.Confirm.totalAmount,
                     value: .plain("\(viewModel.totalAmount)")
                 )
-                buildRow(title: L10n.Plugins.Luckydrop.Confirm.transactionFee, value: .gas(viewModel.gasFeeInfo))
                 tipsView
             }
             PrimaryButton(
@@ -88,7 +91,7 @@ struct UnlockNFTView: View {
         }
         .padding(.horizontal)
     }
-    
+
     @ViewBuilder
     func buildRow(title: String, value: ValueType) -> some View {
         HStack {
@@ -96,14 +99,14 @@ struct UnlockNFTView: View {
                 .font(FontStyles.rh6.font)
                 .foregroundColor(Asset.Colors.Text.dark.asColor())
             Spacer()
-            if case .plain(let title) = value {
+            if case let .plain(title) = value {
                 Text(title)
                     .truncationMode(.middle)
                     .font(FontStyles.bh6.font)
                     .foregroundColor(Asset.Colors.Text.dark.asColor())
                     .frame(maxWidth: 118)
                     .fixedSize()
-            } else if case .address(let value) = value {
+            } else if case let .address(value) = value {
                 Button {
                     mainCoordinator.present(scene: .safariView(url: viewModel.operatorUrl), transition: .modal(animated: true))
                 } label: {
@@ -118,7 +121,7 @@ struct UnlockNFTView: View {
                             .frame(width: 20, height: 20)
                     }
                 }
-            } else if case .gas(let value) = value {
+            } else if case let .gas(value) = value {
                 Button {
                     mainCoordinator.present(
                         scene: .gasFee(
@@ -150,9 +153,8 @@ extension UnlockNFTView {
     }
 }
 
-
-//struct UnlockNFTView_Previews: PreviewProvider {
+// struct UnlockNFTView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        UnlockNFTView()
 //    }
-//}
+// }

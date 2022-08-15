@@ -44,13 +44,19 @@ class SearchSingleNFTViewModel {
     var selectedCollectibles = CurrentValueSubject<[Collectible], Never>([])
     var searchString = CurrentValueSubject<String, Never>("")
 
-    init(contractAddress: String) {
+    init(contractAddress: String, selectedIdentifiers: Set<String>) {
         collectiblesPublisher = SearchSingleNFTViewModel.collectiblesPublisher(contractAdress: contractAddress)
 
         collectiblesPublisher?
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] collectibles in
                 self?.collectiblesSubject.value = collectibles
+                self?.selectedCollectibles.value = collectibles.filter({ collectibles in
+                    guard let identifier = collectibles.identifier else {
+                        return false
+                    }
+                    return selectedIdentifiers.contains(identifier)
+                })
             })
             .store(in: &disposeBag)
 

@@ -387,28 +387,37 @@ class WalletSendHelper {
 
     class func isApprovedForAll(
         contractAddress: String,
-        fromAddress: String
-    ) -> Bool {
+        fromAddress: String,
+        _ completion: @escaping (Bool) -> Void
+    )
+    {
         guard let provider = Web3ProviderFactory.provider else {
-            return false
+            completion(false)
+            return
         }
 
         guard let contractAddressEthFormat = EthereumAddress(contractAddress) else {
-            return false
+            completion(false)
+            return
         }
 
         guard let fromAddressEthFormat = EthereumAddress(fromAddress) else {
-            return false
+            completion(false)
+            return
         }
+        DispatchQueue.global().async {
+            let erc721 = ERC721(web3: provider, provider: provider.provider, address: contractAddressEthFormat)
 
-        let erc721 = ERC721(web3: provider, provider: provider.provider, address: contractAddressEthFormat)
+            let isApproved = try? erc721.isApprovedForAll(owner: fromAddressEthFormat, operator: contractAddressEthFormat)
 
-        let isApproved = try? erc721.isApprovedForAll(owner: fromAddressEthFormat, operator: contractAddressEthFormat)
-
-        guard let isApproved = isApproved else {
-            return false
+            guard let isApproved = isApproved else {
+                completion(false)
+                return
+            }
+            DispatchQueue.main.async {
+                completion(isApproved)
+            }
         }
-        return isApproved
     }
     
     class func setApproveAll(
@@ -420,7 +429,7 @@ class WalletSendHelper {
         contractAddress: String,
         fromAddress: String,
         network: BlockChainNetwork,
-        _ completion: @escaping (Result<EthereumTransaction?, Error>) -> Void
+        _ completion: @escaping (Result<String, Error>) -> Void
     ) {
         guard let provider = Web3ProviderFactory.provider else {
             completion(.failure(WalletSendError.unsupportedChainType))
@@ -442,58 +451,67 @@ class WalletSendHelper {
             completion(.failure(WalletSendError.addressError))
             return
         }
+        
+        DispatchQueue.global().async {
+            let erc721 = ERC721(web3: provider, provider: provider.provider, address: contractAddressEthFormat)
 
-        let erc721 = ERC721(web3: provider, provider: provider.provider, address: contractAddressEthFormat)
+            let preTransacation = try? erc721.setApprovalForAll(from: fromAddressEthFormat, operator: contractAddressEthFormat, approved: true)
 
-        let preTransacation = try? erc721.setApprovalForAll(from: fromAddressEthFormat, operator: contractAddressEthFormat, approved: true)
+            guard let transacation = preTransacation else {
+                completion(.failure(WalletSendError.passwordError))
+                return
+            }
 
-        guard let transacation = preTransacation else {
-            completion(.failure(WalletSendError.passwordError))
-            return
-        }
-
-        do {
-            let transacationResult = try transacation.assemble()
             do {
-                let nonce = try provider.eth.getTransactionCount(address: fromAddressEthFormat)
-                var gasPriceHex = "0x0"
-                var maxInclusionFeePerGasHex = "0x0"
-                var maxFeePerGasHex = "0x0"
-                if maxFeePerGas == nil || maxInclusionFeePerGas == nil {
-                    gasPriceHex = gasPrice!.serialize().toHexString().addHexPrefix()
-                } else {
-                    maxInclusionFeePerGasHex = maxInclusionFeePerGas!.serialize().toHexString().addHexPrefix()
-                    maxFeePerGasHex = maxFeePerGas!.serialize().toHexString().addHexPrefix()
-                }
-                let signInput =
-                    WalletCoreHelper.SignInput.eth(
-                        chainId: Int64(network.networkId),
-                        nonce: nonce.serialize().toHexString().addHexPrefix(),
-                        gasPrice: gasPriceHex,
-                        maxInclusionFeePerGas: maxInclusionFeePerGasHex,
-                        maxFeePerGas: maxFeePerGasHex,
-                        gasLimit: gasLimit.serialize().toHexString().addHexPrefix(),
-                        amount: "0x0",
-                        toAddress: contractAddress,
-                        payload: transacationResult.data
-                    )
-                let result =
-                    WalletCoreHelper.signTransaction(password: password, storedKeyData: storedKeyData, derivationPath: derivationPath, input: signInput, chainType: network.chain)
-                switch result {
-                case let .success(signOutput):
-                    switch signOutput {
-                    case let .eth(transacationEncodeData, _, _, _, _):
-                        do {
-                            let sendResult = try provider.eth.sendRawTransaction(transacationEncodeData)
-                            completion(.success(sendResult.transaction))
-                            return
-                        } catch {
-                            completion(.failure(WalletSendError.ethereumError(error)))
-                            return
-                        }
+                let transacationResult = try transacation.assemble()
+                do {
+                    let nonce = try provider.eth.getTransactionCount(address: fromAddressEthFormat)
+                    var gasPriceHex = "0x0"
+                    var maxInclusionFeePerGasHex = "0x0"
+                    var maxFeePerGasHex = "0x0"
+                    if maxFeePerGas == nil || maxInclusionFeePerGas == nil {
+                        gasPriceHex = gasPrice!.serialize().toHexString().addHexPrefix()
+                    } else {
+                        maxInclusionFeePerGasHex = maxInclusionFeePerGas!.serialize().toHexString().addHexPrefix()
+                        maxFeePerGasHex = maxFeePerGas!.serialize().toHexString().addHexPrefix()
                     }
+                    let signInput =
+                        WalletCoreHelper.SignInput.eth(
+                            chainId: Int64(network.networkId),
+                            nonce: nonce.serialize().toHexString().addHexPrefix(),
+                            gasPrice: gasPriceHex,
+                            maxInclusionFeePerGas: maxInclusionFeePerGasHex,
+                            maxFeePerGas: maxFeePerGasHex,
+                            gasLimit: gasLimit.serialize().toHexString().addHexPrefix(),
+                            amount: "0x0",
+                            toAddress: contractAddress,
+                            payload: transacationResult.data
+                        )
+                    let result =
+                        WalletCoreHelper.signTransaction(password: password, storedKeyData: storedKeyData, derivationPath: derivationPath, input: signInput, chainType: network.chain)
+                    switch result {
+                    case let .success(signOutput):
+                        switch signOutput {
+                        case let .eth(transacationEncodeData, _, _, _, _):
+                            do {
+                                let sendResult = try provider.eth.sendRawTransaction(transacationEncodeData)
+                                DispatchQueue.main.async {
+                                    completion(.success(sendResult.hash))
+                                }
+                                return
+                            } catch {
+                                DispatchQueue.main.async {
+                                    completion(.failure(WalletSendError.ethereumError(error)))
+                                }
+                                return
+                            }
+                        }
 
-                case let .failure(error):
+                    case let .failure(error):
+                        completion(.failure(WalletSendError.ethereumError(error)))
+                        return
+                    }
+                } catch {
                     completion(.failure(WalletSendError.ethereumError(error)))
                     return
                 }
@@ -501,9 +519,6 @@ class WalletSendHelper {
                 completion(.failure(WalletSendError.ethereumError(error)))
                 return
             }
-        } catch {
-            completion(.failure(WalletSendError.ethereumError(error)))
-            return
         }
     }
 }

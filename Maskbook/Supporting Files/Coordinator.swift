@@ -211,6 +211,12 @@ class Coordinator {
             viewModelInput: NFTRedPacketConfirmViewModel.InitInput,
             completion: (String?, Error?) -> Void
         )
+        case unlockNFT(
+            gasFeeViewModel: GasFeeViewModel,
+            gasFeeItem: GasFeeCellItem,
+            groupInfo: CollectiableGroup,
+            completion: (String?, Error?) -> Void
+        )
         case luckyDropSuccessfully(callback: (@MainActor () -> Void)?)
         case luckyDropCreatePersona(callback: (@MainActor () -> Void)?)
         case luckyDropCreateProfile
@@ -222,7 +228,7 @@ class Coordinator {
         case fileServiceDetail(FileServiceDownloadItem)
         case fileServiceFAQ
         case luckydropSearchCollection(delegate: ChooseCollectionBackDelegate?)
-        case luckydropSearchNFT(delegate: SearchSingleNFTDelegate?, contractAddress: String)
+        case luckydropSearchNFT(delegate: SearchSingleNFTDelegate?, contractAddress: String, selectedIdentifiers: Set<String>)
         case messageCompose(PluginMeta? = nil)
         case composeSelectContact(viewModel: SelectContactViewModel)
         case debug
@@ -846,6 +852,18 @@ extension Coordinator {
                 viewModelInput: viewModelInput,
                 completion: completion
             )
+        case .unlockNFT(
+            let gasFeeViewModel,
+            let gasFeeItem,
+            let groupInfo,
+            let completion
+        ):
+            return UnlockNFTViewController(
+            gasFeeViewModel: gasFeeViewModel,
+            gasFeeItem: gasFeeItem,
+            groupInfo: groupInfo,
+            completion: completion
+        )
         
         case let .luckyDropSuccessfully(callback):
             let viewModel = LuckyDropSuccessfullyViewModel(callback: callback)
@@ -883,8 +901,8 @@ extension Coordinator {
             searchCollectionVc.delegate = selectionDelegate
             return searchCollectionVc
             
-        case let .luckydropSearchNFT(selectionDelegate, contractAddress):
-            let searchNFTVc = SearchSingleNFTViewController(contractAddress: contractAddress)
+        case let .luckydropSearchNFT(selectionDelegate, contractAddress, selectedIdentifiers):
+            let searchNFTVc = SearchSingleNFTViewController(contractAddress: contractAddress, selectedIdentifiers:selectedIdentifiers)
             searchNFTVc.delegate = selectionDelegate
             return searchNFTVc
             

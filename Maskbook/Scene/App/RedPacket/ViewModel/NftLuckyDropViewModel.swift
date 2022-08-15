@@ -139,7 +139,7 @@ extension NftLuckyDropViewModel {
             return false
         }
 
-        return WalletSendHelper.isApprovedForAll(contractAddress: contractAddress, fromAddress: walletAddress)
+        return false
     }
 
     private func checkState() -> TransactionState {
@@ -222,7 +222,7 @@ extension NftLuckyDropViewModel {
             return
         }
         let name = groupName ?? ""
-        let identifiers = collectibles.map { $0.id ?? "" }
+        let identifiers = collectibles.map { $0.identifier ?? "" }
         action(
             .addCollectibles(
                 groupName: name,
@@ -281,14 +281,15 @@ extension NftLuckyDropViewModel {
         case .unlockWallet: action(.unlockWallet)
         case .confirmRisk: action(.confirmRisk)
         case .unlockNFT:
-            guard let contractAddress = collectibleGroup?.address, let item = gasFeeItem else {
+            guard let groupInfo = collectibleGroup, let item = gasFeeItem else {
                 return
             }
 
             action(
                 .unlockNFT(
-                    contractAddress: contractAddress,
-                    gasItem: item
+                    collectibleGroup: groupInfo,
+                    gasItem: item,
+                    gasFeeViewModel: gasFeeViewModel
                 )
             )
 
@@ -315,7 +316,7 @@ extension NftLuckyDropViewModel {
         case createNFTLuckyDrop(draft: NftRecpacketDraft, gasFeeViewModel: GasFeeViewModel)
         case selectCollectibleGroup
         case unlockWallet
-        case unlockNFT(contractAddress: String, gasItem: GasFeeCellItem)
+        case unlockNFT(collectibleGroup: CollectiableGroup, gasItem: GasFeeCellItem, gasFeeViewModel: GasFeeViewModel)
     }
 
     enum CollectibleItem: Identifiable {
@@ -326,8 +327,8 @@ extension NftLuckyDropViewModel {
         var id: String {
             switch self {
             case .add: return "add"
-            case let .normal(item): return item.id ?? ""
-            case let .all(item): return item.id ?? ""
+            case let .normal(item): return item.identifier ?? ""
+            case let .all(item): return item.identifier ?? ""
             }
         }
     }
@@ -369,18 +370,26 @@ extension NftLuckyDropViewModel {
 }
 
 extension NftLuckyDropViewModel: ChooseCollectionBackDelegate {
-    func chooseNFTCollectionAction(token: Collectible) {
+    func chooseNFTCollectionAction(token: [Collectible]) {
+        
+        guard let asset = token.first else {
+            return
+        }
+        
         selectCollectible(
-            groupName: token.name ?? "",
-            contractAddress: token.address ?? "",
-            groupIconURL: URL(string: token.collectionImage ?? ""),
-            totalCount: 0
+            groupName: asset.collectionName ?? "",
+            contractAddress: asset.address ?? "",
+            groupIconURL: URL(string: asset.collectionImage ?? ""),
+            totalCount: token.count
         )
+        actionState = self.checkState()
     }
 }
 
 extension NftLuckyDropViewModel: SearchSingleNFTDelegate {
     func returnSelectedNFT(collectible: [Collectible]?) {
         addCollectibles(collectible ?? [])
+        actionState = self.checkState()
+
     }
 }

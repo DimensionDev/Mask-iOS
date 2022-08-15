@@ -13,7 +13,7 @@ import PanModal
 import UIKit
 
 protocol ChooseCollectionBackDelegate: AnyObject {
-    func chooseNFTCollectionAction(token: Collectible)
+    func chooseNFTCollectionAction(token: [Collectible])
 }
 
 class SearchNFTCollectionViewController: BaseViewController {
@@ -131,10 +131,7 @@ extension SearchNFTCollectionViewController: UITableViewDelegate {
             guard let delegate = delegate else {
                 return
             }
-            guard let collection = assets.first else {
-                return
-            }
-            delegate.chooseNFTCollectionAction(token: collection)
+            delegate.chooseNFTCollectionAction(token: assets)
             navigationController?.popViewController(animated: true)
         }
     }
