@@ -158,12 +158,16 @@ class WalletBottomWidgetViewModel: ObservableObject {
 
             if case .confirmed = status {
                 if case .lab = source {
-                    self.coordinator.present(
-                        scene: .luckyDropSuccessfully(callback: { [weak self] in
-                            self?.pluginMetaShareViewModel.shareRedPacket(transcation: transcation)
-                        }),
-                        transition: .modal()
-                    )
+                    Task { @MainActor in
+                        await self.updateRedPacketRecord(transcation: transcation)
+                        self.coordinator.present(
+                            scene: .luckyDropSuccessfully(callback: { [weak self] in
+                                self?.pluginMetaShareViewModel.shareRedPacket(transcation: transcation)
+                            }),
+                            transition: .modal()
+                        )
+                    }
+                    return
                 }
 
                 Task { @MainActor in 
