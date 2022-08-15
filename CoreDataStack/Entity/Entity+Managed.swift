@@ -319,7 +319,7 @@ extension Collectible: Managed {
         return NSPredicate(
             format: "%K == %@ AND %K == %@ AND %K == %@ AND %K == %@",
             #keyPath(Collectible.address),
-            contractAddress,
+            contractAddress.lowercased(),
             #keyPath(Collectible.networkId),
             NSNumber(value: networkId),
             #keyPath(Collectible.tokenId),

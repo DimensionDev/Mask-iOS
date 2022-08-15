@@ -43,7 +43,9 @@ final class NFTLuckyDropHistoryItemViewModel: ObservableObject {
 
     init(luckyDrop: NftRedPacketSubgraph) {
         self.luckyDrop = luckyDrop
-        self.payload = PluginStorageRepository.queryNFTRedPacketRecord(chain: settings.network, tx: luckyDrop.rpid)
+        self.payload = PluginStorageRepository.queryNFTRedPacketRecord(
+            chain: settings.network,
+            tx: luckyDrop.txid)
         checkRedPacketStatus()
         getCollectionURL()
     }
