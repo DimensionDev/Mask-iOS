@@ -36,10 +36,10 @@ class SetPasswordViewModel {
         let valid = password.isValidPasswordFormat
         
         if !valid {
-            changePasswordError.value = L10n.Scene.ChangePassword.passwordNotMatch
+            changePasswordError.value = L10n.Scene.SetPassword.passwordInvalid
             return false
         } else if !isConfirmPasswordsinConsistent() {
-            changePasswordError.value = L10n.Scene.SetPassword.passwordInvalid
+            changePasswordError.value = L10n.Scene.ChangePassword.passwordNotMatch
         } else {
             changePasswordError.value = nil
         }
